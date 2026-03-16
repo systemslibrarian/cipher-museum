@@ -17,7 +17,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="css/museum.css">
   <style>
-    .lab-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.25rem; margin-bottom:3rem; }
+    .lab-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.25rem; margin-bottom:2rem; }
     .technique-card {
       background:var(--s2); border:1px solid var(--s4); border-radius:var(--rl); padding:1.5rem;
       transition:all var(--trs); cursor:default;
@@ -60,6 +60,8 @@
       #timeline{grid-template-columns:1fr !important}
       #timeline .timeline:first-child{padding-right:0}
       #timeline .timeline:last-child{padding-left:0}
+      .lab-grid.reveal{opacity:1 !important;transform:none !important}
+      .lab-grid{grid-template-columns:1fr !important}
     }
 
     /* Tab icons */
@@ -215,7 +217,7 @@
 
   </div>
 
-  <div class="callout callout-warn" style="margin-bottom:4rem;">
+  <div class="callout callout-warn" style="margin-bottom:2rem;">
     <span class="callout-icon">⚡</span>
     <div class="callout-body">
       <p><strong>Speed comparison:</strong> A Vigenère cipher with a 5-letter key that took professional cryptanalysts <em>weeks</em> in the 1800s is now cracked by modern programs in <strong>under one second</strong>. A monoalphabetic substitution cipher that kept Renaissance diplomats safe for decades falls in <strong>milliseconds</strong>. This is why modern cryptography uses mathematical problems believed to require billions of years, not minutes.</p>
