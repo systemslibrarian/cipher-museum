@@ -1,0 +1,16 @@
+{
+  "id": "mathematics",
+  "title": "The Mathematics of Secrecy",
+  "description": "Trace the mathematical foundations of cryptography — from modular arithmetic in ancient ciphers to linear algebra and information theory.",
+  "icon": "∑",
+  "stops": [
+    {"href": "../ciphers/caesar.html", "label": "Caesar Cipher", "note": "Modular arithmetic (shift by n mod 26) — the simplest mathematical cipher."},
+    {"href": "../ciphers/polybius.html", "label": "Polybius Square", "note": "Coordinate encoding — converting letters to number pairs using a 5×5 grid."},
+    {"href": "../ciphers/vigenere.html", "label": "Vigenère Cipher", "note": "Polyalphabetic substitution — repeating key addition over modular arithmetic."},
+    {"href": "../ciphers/hill.html", "label": "Hill Cipher", "note": "Matrix multiplication mod 26 — the first cipher based on linear algebra."},
+    {"href": "../ciphers/bifid.html", "label": "Bifid Cipher", "note": "Fractionation — splitting coordinates and recombining for diffusion."},
+    {"href": "../ciphers/trifid.html", "label": "Trifid Cipher", "note": "Three-dimensional coordinate fractionation, extending Bifid's mathematical principle."},
+    {"href": "../ciphers/one-time-pad.html", "label": "One-Time Pad", "note": "Shannon's proof of perfect secrecy — information-theoretic security."},
+    {"href": "../modern.html", "label": "Modern Cryptography", "note": "Number theory, elliptic curves, and computational hardness assumptions."}
+  ]
+}

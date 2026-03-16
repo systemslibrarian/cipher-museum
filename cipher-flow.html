@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Flow Explorer — The Cipher Museum</title>
+  <meta name="description" content="Interactive decision tree to find the right historical cipher for your needs. Navigate trade-offs from Caesar to One-Time Pad.">
+  <meta property="og:title" content="Cipher Flow Explorer — The Cipher Museum">
+  <meta property="og:description" content="Interactive decision tree to find the right historical cipher for your needs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/cipher-flow.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/cipher-flow.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .flow-container{max-width:1100px;margin:0 auto;padding:2.5rem 2rem 4rem}
+    .flow-question{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:2rem 2.5rem;text-align:center;margin-bottom:2rem;box-shadow:inset 0 0 20px rgba(201,168,76,.06)}
+    .flow-question-text{font-family:var(--fd);font-size:clamp(1.1rem,3vw,1.5rem);color:var(--gold);letter-spacing:.04em;margin-bottom:1.5rem}
+    .flow-options{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+    .flow-opt{font-family:var(--fd);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 1.6rem;border:1px solid var(--s5);border-radius:var(--r);background:var(--s3);color:var(--tx2);cursor:pointer;transition:all var(--trs)}
+    .flow-opt:hover,.flow-opt:focus-visible{border-color:var(--gold-b);color:var(--gold);background:var(--gold-glow);transform:translateY(-2px);box-shadow:0 4px 16px rgba(201,168,76,.15)}
+    .flow-opt.selected{border-color:var(--gold);color:var(--gold-lt);background:rgba(201,168,76,.12)}
+    .flow-path{position:relative;padding:1rem 0}
+    .flow-path-line{position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold-b),var(--gold-dim),transparent);z-index:0}
+    .flow-node{position:relative;display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:1.75rem;z-index:1;animation:fadeUp 400ms ease forwards;opacity:0}
+    .flow-node:nth-child(1){animation-delay:0ms}.flow-node:nth-child(2){animation-delay:120ms}.flow-node:nth-child(3){animation-delay:240ms}.flow-node:nth-child(4){animation-delay:360ms}.flow-node:nth-child(5){animation-delay:480ms}
+    .flow-dot{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold-b);background:var(--s2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem}
+    .flow-dot--final{border-color:var(--gold);background:var(--gold-glow);box-shadow:0 0 16px rgba(201,168,76,.2)}
+    .flow-card{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:1.25rem 1.5rem;flex:1;transition:all var(--trs)}
+    .flow-card:hover{border-color:var(--gold-b);background:var(--s3)}
+    .flow-card-name{font-family:var(--fd);font-size:1.1rem;color:var(--tx);letter-spacing:.04em;margin-bottom:.35rem}
+    .flow-card-trade{font-size:.9rem;color:var(--tx2);line-height:1.7;margin-bottom:.6rem}
+    .flow-card-link{font-family:var(--fm);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);transition:color var(--tr)}
+    .flow-card-link:hover{color:var(--gold)}
+    .flow-connector{text-align:center;color:var(--gold-dim);font-size:1rem;margin:.5rem 0;opacity:.5}
+    .flow-info{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:1.5rem 2rem;margin-top:2rem}
+    .flow-info-title{font-family:var(--fd);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tx2);margin-bottom:.75rem}
+    .flow-info p{font-size:.95rem;color:var(--tx2);line-height:1.8}
+    .flow-reset{font-family:var(--fd);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:.7rem 1.5rem;border:1px solid var(--s5);border-radius:var(--r);background:var(--s3);color:var(--tx2);cursor:pointer;transition:all var(--tr);margin-top:1.5rem}
+    .flow-reset:hover{border-color:var(--gold-dim);color:var(--tx)}
+    .flow-svg-wrap{margin:2rem auto;text-align:center;overflow-x:auto}
+    @media(max-width:600px){.flow-options{flex-direction:column}.flow-node{gap:1rem}.flow-dot{width:44px;height:44px;font-size:1.1rem}}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <span class="page-eyebrow">Interactive Explorer</span>
+  <h1 class="page-title">Cipher Flow</h1>
+  <p class="page-tagline">Find the right cipher by answering a few questions</p>
+  <p class="page-desc">Navigate the decision tree that cryptographers have faced for 2,500 years. Each branch reveals the trade-offs that led to the next generation of ciphers.</p>
+</div>
+
+<div class="flow-container" id="flowApp">
+  <!-- Question area -->
+  <div class="flow-question" id="flowQuestion">
+    <p class="flow-question-text" id="flowQText"></p>
+    <div class="flow-options" id="flowOptions" role="radiogroup"></div>
+  </div>
+
+  <!-- Visual path -->
+  <div class="flow-path" id="flowPath" aria-live="polite">
+    <div class="flow-path-line" aria-hidden="true"></div>
+  </div>
+
+  <button class="flow-reset" id="flowReset" style="display:none">↺ Start Over</button>
+</div>
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">An open-source educational project exploring the complete history of cryptography.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Resources</div>
+      <ul class="footer-links">
+        <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="modern.html">Modern Crypto</a></li>
+        <li><a href="https://github.com/systemslibrarian/cipher-museum" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License · Open Source</span>
+  </div>
+</footer>
+
+<script src="js/nav.js" defer></script>
+<script>
+'use strict';
+(function(){
+  /* ── Decision Tree Data ─────────────────────────────────── */
+  var TREE = {
+    root: {
+      q: 'What describes your message?',
+      opts: [
+        {label:'Short text (a few words)',next:'short'},
+        {label:'Medium document',next:'medium'},
+        {label:'Must be unbreakable',next:'unbreakable'},
+        {label:'Needs a physical device',next:'device'}
+      ]
+    },
+    short: {
+      q: 'How secret does it need to be?',
+      opts: [
+        {label:'Just for fun / puzzles',next:'fun'},
+        {label:'Moderate — casual adversary',next:'casual_short'},
+        {label:'High — trained codebreaker',next:'serious_short'}
+      ]
+    },
+    medium: {
+      q: 'What era of technique interests you?',
+      opts: [
+        {label:'Classical (pen & paper)',next:'classical_med'},
+        {label:'Mathematical',next:'math_med'},
+        {label:'Military-grade',next:'military_med'}
+      ]
+    },
+    unbreakable: {
+      q: 'Can you securely share a key as long as the message?',
+      opts: [
+        {label:'Yes — I can exchange a full-length key',next:'otp_path'},
+        {label:'No — I need a shorter key',next:'modern_path'}
+      ]
+    },
+    device: {
+      q: 'What kind of device?',
+      opts: [
+        {label:'Rotating disk',next:'disk_path'},
+        {label:'Electromechanical machine',next:'machine_path'},
+        {label:'Improvised (prisoner / field)',next:'field_path'}
+      ]
+    },
+    /* Leaf paths */
+    fun: { path:[
+      {name:'Caesar Cipher',icon:'🏛',trade:'Simplest substitution — just shift the alphabet. Trivially breakable but great for learning.', href:'ciphers/caesar.html'},
+      {name:'Pigpen Cipher',icon:'✡',trade:'Visual symbol substitution — looks mysterious but still monoalphabetic.', href:'ciphers/pigpen.html'},
+      {name:'Bacon\'s Cipher',icon:'🥓',trade:'Steganographic — hides messages in plain text using two typefaces. Fun but very low security.', href:'ciphers/bacon.html'}
+    ]},
+    casual_short: { path:[
+      {name:'Caesar Cipher',icon:'🏛',trade:'Start here: shift cipher with only 25 keys. Too small a keyspace.', href:'ciphers/caesar.html'},
+      {name:'Atbash / Monoalphabetic',icon:'🔤',trade:'More key choices (26! ≈ 4×10²⁶), but frequency analysis breaks it easily.', href:'ciphers/monoalphabetic.html'},
+      {name:'Vigenère Cipher',icon:'🔑',trade:'Multiple alphabets defeat simple frequency analysis — the "chiffre indéchiffrable" for 300 years.', href:'ciphers/vigenere.html'}
+    ]},
+    serious_short: { path:[
+      {name:'Vigenère Cipher',icon:'🔑',trade:'Polyalphabetic: masks letter frequencies. Broken by Kasiski (1863) via repeating key detection.', href:'ciphers/vigenere.html'},
+      {name:'Playfair Cipher',icon:'⬡',trade:'Encrypts digrams — disrupts single-letter frequencies. Still breakable with enough text.', href:'ciphers/playfair.html'},
+      {name:'Bifid Cipher',icon:'📐',trade:'Fractionation mixes coordinates across positions — stronger diffusion than Playfair.', href:'ciphers/bifid.html'},
+      {name:'VIC Cipher',icon:'🕵',trade:'Cold War hand cipher combining checkerboard + chain addition + double transposition. Never broken by cryptanalysis.', href:'ciphers/vic.html', final:true}
+    ]},
+    classical_med: { path:[
+      {name:'Monoalphabetic',icon:'🔤',trade:'One-to-one letter mapping. Huge keyspace but frequencies leak through.', href:'ciphers/monoalphabetic.html'},
+      {name:'Homophonic Substitution',icon:'🎲',trade:'Multiple symbols per letter flatten frequencies — harder to crack but not impossible.', href:'ciphers/homophonic.html'},
+      {name:'Vigenère Cipher',icon:'🔑',trade:'Polyalphabetic with repeating key. The standard for centuries until Kasiski.', href:'ciphers/vigenere.html'},
+      {name:'Running Key Cipher',icon:'📖',trade:'Key = book text. No repetition, but English key statistics still leak.', href:'ciphers/running-key.html'}
+    ]},
+    math_med: { path:[
+      {name:'Polybius Square',icon:'📐',trade:'Converts letters to coordinate pairs — foundation for fractionation ciphers.', href:'ciphers/polybius.html'},
+      {name:'Hill Cipher',icon:'🧮',trade:'Matrix multiplication mod 26. Elegant algebra, but weak to known-plaintext attacks.', href:'ciphers/hill.html'},
+      {name:'Bifid Cipher',icon:'📐',trade:'Polybius + fractionation creates cross-position diffusion.', href:'ciphers/bifid.html'},
+      {name:'Trifid Cipher',icon:'📐',trade:'3D Polybius extends Bifid with even stronger diffusion.', href:'ciphers/trifid.html', final:true}
+    ]},
+    military_med: { path:[
+      {name:'Columnar Transposition',icon:'📊',trade:'Rearranges letter positions. Preserves frequencies but disrupts patterns.', href:'ciphers/columnar.html'},
+      {name:'Double Transposition',icon:'📊',trade:'Two passes of transposition — used extensively in WWII field operations.', href:'ciphers/double-transposition.html'},
+      {name:'ADFGX Cipher',icon:'⚔',trade:'WWI German cipher: Polybius + columnar transposition. Broken by Painvin under extreme pressure.', href:'ciphers/adfgx.html'},
+      {name:'ADFGVX Cipher',icon:'⚔',trade:'Extended ADFGX with 36-character grid (adds digits). More secure but same structural weakness.', href:'ciphers/adfgvx.html', final:true}
+    ]},
+    otp_path: { path:[
+      {name:'Vigenère Cipher',icon:'🔑',trade:'With a repeating key, periodicity is detectable. What if the key never repeats?', href:'ciphers/vigenere.html'},
+      {name:'Running Key Cipher',icon:'📖',trade:'Book text as key eliminates repetition, but English statistics still compromise security.', href:'ciphers/running-key.html'},
+      {name:'One-Time Pad',icon:'🔒',trade:'Truly random key, used once, as long as the message = mathematically proven unbreakable (Shannon, 1949).', href:'ciphers/one-time-pad.html', final:true}
+    ]},
+    modern_path: { path:[
+      {name:'Vigenère Cipher',icon:'🔑',trade:'Short key + polyalphabetic = centuries of false confidence. Broken by Kasiski + Friedman.', href:'ciphers/vigenere.html'},
+      {name:'Enigma Machine',icon:'⚙',trade:'Electromechanical rotor system with 10²³ settings. Broken by Rejewski and Turing.', href:'ciphers/enigma.html'},
+      {name:'One-Time Pad',icon:'🔒',trade:'Perfect secrecy requires perfect key management — the fundamental tension of modern crypto.', href:'ciphers/one-time-pad.html', final:true}
+    ]},
+    disk_path: { path:[
+      {name:'Alberti Disk',icon:'⚙',trade:'First polyalphabetic device (1467). Two concentric disks rotate to change alphabet.', href:'ciphers/alberti-disk.html'},
+      {name:'Jefferson Disk',icon:'⚙',trade:'26 disk cylinder (1795). Used by the US Army as M-94 into WWII.', href:'ciphers/jefferson-disk.html'},
+      {name:'Bazeries Cylinder',icon:'⚙',trade:'French improvement on Jefferson — numbered transposition adds a second layer.', href:'ciphers/bazeries.html', final:true}
+    ]},
+    machine_path: { path:[
+      {name:'Enigma Machine',icon:'⚡',trade:'3-rotor + plugboard = ~10²³ settings per day. Broken through mathematical brilliance and operator errors.', href:'ciphers/enigma.html'},
+      {name:'Lorenz SZ42',icon:'⚡',trade:'12 wheels for teleprinter cipher. Required Colossus — the first electronic computer — to break.', href:'ciphers/lorenz.html', final:true}
+    ]},
+    field_path: { path:[
+      {name:'Tap Code',icon:'✊',trade:'5×5 Polybius grid tapped on walls. Used by Vietnam POWs — security through necessity, not math.', href:'ciphers/tap-code.html'},
+      {name:'Rail Fence',icon:'🔀',trade:'Zigzag transposition with minimal equipment. Low security but fast.', href:'ciphers/rail-fence.html'},
+      {name:'Stager Cipher',icon:'📡',trade:'Union telegraph cipher: route transposition + code words. Never broken during the Civil War.', href:'ciphers/stager.html', final:true}
+    ]}
+  };
+
+  var qText = document.getElementById('flowQText');
+  var qOpts = document.getElementById('flowOptions');
+  var qBox = document.getElementById('flowQuestion');
+  var pathEl = document.getElementById('flowPath');
+  var resetBtn = document.getElementById('flowReset');
+  var history = [];
+
+  function render(nodeId){
+    var node = TREE[nodeId];
+    if(!node) return;
+
+    /* If this is a leaf (has .path), render the cipher path */
+    if(node.path){
+      qBox.style.display='none';
+      resetBtn.style.display='';
+      renderPath(node.path);
+      return;
+    }
+
+    /* Render question */
+    qBox.style.display='';
+    resetBtn.style.display = history.length ? '' : 'none';
+    qText.textContent = node.q;
+    qOpts.innerHTML = '';
+    node.opts.forEach(function(opt){
+      var btn = document.createElement('button');
+      btn.className = 'flow-opt';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function(){
+        history.push(nodeId);
+        render(opt.next);
+      });
+      qOpts.appendChild(btn);
+    });
+  }
+
+  function renderPath(path){
+    /* Clear existing path nodes but keep the line */
+    var nodes = pathEl.querySelectorAll('.flow-node');
+    nodes.forEach(function(n){ n.remove(); });
+
+    path.forEach(function(p, i){
+      var div = document.createElement('div');
+      div.className = 'flow-node';
+      var isFinal = p.final || i === path.length - 1;
+      div.innerHTML =
+        '<div class="flow-dot' + (isFinal ? ' flow-dot--final' : '') + '">' + p.icon + '</div>' +
+        '<div class="flow-card">' +
+          '<div class="flow-card-name">' + escapeHTML(p.name) + '</div>' +
+          '<div class="flow-card-trade">' + escapeHTML(p.trade) + '</div>' +
+          '<a class="flow-card-link" href="' + encodeURI(p.href) + '">Visit Exhibit →</a>' +
+        '</div>';
+      pathEl.appendChild(div);
+    });
+  }
+
+  function escapeHTML(s){
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+
+  resetBtn.addEventListener('click', function(){
+    history = [];
+    var nodes = pathEl.querySelectorAll('.flow-node');
+    nodes.forEach(function(n){ n.remove(); });
+    render('root');
+  });
+
+  render('root');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "id": "hacker",
+  "title": "The Hacker's Toolkit",
+  "description": "A practical tour through ciphers that teach core cryptanalysis techniques — frequency analysis, pattern recognition, and algorithmic thinking.",
+  "icon": "⌨",
+  "stops": [
+    {"href": "../ciphers/caesar.html", "label": "Caesar Cipher", "note": "Start simple: brute-force 25 keys, then learn frequency analysis."},
+    {"href": "../ciphers/monoalphabetic.html", "label": "Monoalphabetic Sub.", "note": "26! possible keys — but frequency analysis makes it solvable."},
+    {"href": "../ciphers/homophonic.html", "label": "Homophonic Sub.", "note": "Multiple symbols per letter flatten frequencies — defeating simple analysis."},
+    {"href": "../ciphers/vigenere.html", "label": "Vigenère Cipher", "note": "Kasiski examination and IC analysis — finding the key length is the breakthrough."},
+    {"href": "../ciphers/playfair.html", "label": "Playfair", "note": "Digraph substitution — frequency analysis on letter pairs instead of singles."},
+    {"href": "../ciphers/columnar.html", "label": "Columnar Transposition", "note": "Anagramming columns — using frequency and contact analysis."},
+    {"href": "../ciphers/double-transposition.html", "label": "Double Transposition", "note": "Two passes multiply complexity — a favorite of SOE in WWII."},
+    {"href": "../ciphers/enigma.html", "label": "Enigma", "note": "Cribs, known-plaintext, and the Bombe — industrial-scale cryptanalysis."},
+    {"href": "../lab/workbench.html", "label": "Codebreaker's Workbench", "note": "Put your skills to work — analyze real ciphertext with live tools."}
+  ]
+}

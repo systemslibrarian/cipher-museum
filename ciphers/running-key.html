@@ -86,7 +86,7 @@ Cipher: each letter shifted by key letter
 
 A+F=F, T+R=K, T+O=H, A+M=M,
 C+T=V, K+H=R, A+I=I, T+S=L...</pre><p style='margin-top:1rem;'>Security depends entirely on the key text never being identified. If an attacker guesses the source (any printed book), they can test it against the ciphertext trivially.</p>
-<div class="diagram-wrap" style="margin-top:1.5rem;">
+<figure class="figure">
 <svg viewBox="0 0 380 150" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Running key cipher using book text as key">
   <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:4}</style>
   <!-- Book -->
@@ -113,8 +113,8 @@ C+T=V, K+H=R, A+I=I, T+S=L...</pre><p style='margin-top:1rem;'>Security depends 
   <text x="250" y="50" font-size="8" fill="#C85A5A">But NOT random →</text>
   <text x="250" y="62" font-size="8" fill="#C85A5A">NOT a one-time pad</text>
 </svg>
-<p class="diagram-caption">Book text used as a key matches message length — but English letter patterns make it weaker than a true one-time pad</p>
-</div></div>
+<figcaption class="figure-caption">Book text used as a key matches message length — but English letter patterns make it weaker than a true one-time pad</figcaption>
+</figure></div>
     </div>
 
     <div class="panel">
@@ -157,6 +157,28 @@ C+T=V, K+H=R, A+I=I, T+S=L...</pre><p style='margin-top:1rem;'>Security depends 
     </div>
   </div>
 </div>
+
+<!-- Related Exhibits -->
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Exhibit 07</span>
+      <span class="related-card__name">Vigenère Cipher</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/one-time-pad.html" class="related-card">
+      <span class="related-card__number">Exhibit 26</span>
+      <span class="related-card__name">One-Time Pad</span>
+      <span class="related-card__tag">Long Key</span>
+    </a>
+    <a href="../ciphers/vernam.html" class="related-card">
+      <span class="related-card__number">Exhibit 35</span>
+      <span class="related-card__name">Vernam Cipher</span>
+      <span class="related-card__tag">Stream Cipher</span>
+    </a>
+  </div>
+</section>
 
 <div class="hall-nav">
   <a href="../ciphers/gronsfeld.html" class="hall-nav-link">

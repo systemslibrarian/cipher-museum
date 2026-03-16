@@ -21,15 +21,19 @@
     ['timeline.html',     'Timeline'],
     ['challenges.html',   'Challenges'],
     ['cryptanalysis.html','Cryptanalysis Lab'],
+    ['cipher-flow.html',  'Cipher Flow'],
+    ['tours/index.html',  'Tours'],
+    ['community/index.html','Community'],
     ['modern.html',       'Modern Crypto'],
     ['glossary.html',     'Glossary']
   ];
   var path = location.pathname;
-  var inSub = /\/(ciphers|halls)\//.test(path);
+  var inSub = /\/(ciphers|halls|tours|lab|community)\//.test(path);
   var pre = inSub ? '../' : '';
   var basename = path.split('/').pop() || 'index.html';
   var parentDir = path.split('/').slice(-2, -1)[0] || '';
-  var activeLabel = parentDir === 'halls' ? 'Halls' : null;
+  var DIR_ACTIVE = {halls:'Halls',tours:'Tours',community:'Community',lab:'Cryptanalysis Lab'};
+  var activeLabel = DIR_ACTIVE[parentDir] || null;
   if (!activeLabel) {
     NAV.forEach(function (n) { if (n[0] === basename) activeLabel = n[1]; });
   }
@@ -88,6 +92,14 @@
       btn.setAttribute('aria-expanded', 'false');
       btn.focus();
     }
+  });
+
+  /* ── Auto-load companion scripts ─────────────────────── */
+  ['breadcrumbs.js','learning-path.js'].forEach(function(f){
+    var s = document.createElement('script');
+    s.src = pre + 'js/' + f;
+    s.defer = true;
+    document.body.appendChild(s);
   });
 })();
 

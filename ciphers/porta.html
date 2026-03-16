@@ -81,7 +81,7 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>The Porta cipher uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class='steps' style='margin:1rem 0;'><li class='step'><div class='step-text'>Find the row whose label contains the current key letter</div></li><li class='step'><div class='step-text'>Look up the plaintext letter in that row</div></li><li class='step'><div class='step-text'>The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p>
-<div class="diagram-wrap" style="margin-top:1.5rem;">
+<figure class="figure">
 <svg viewBox="0 0 380 190" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Porta cipher 13-row reciprocal tableau">
   <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:2}</style>
   <!-- Header -->
@@ -107,8 +107,8 @@
   <text x="20" y="164" font-size="9" fill="#5AC8A0">★ Each row maps A↔N, B↔O, etc. — swap is symmetric</text>
   <text x="20" y="176" font-size="8" fill="#706878">Encrypt(A)=N → Encrypt(N)=A → same operation decrypts!</text>
 </svg>
-<p class="diagram-caption">13 rows for 13 key-letter pairs — symmetric swaps make encryption and decryption identical</p>
-</div></div>
+<figcaption class="figure-caption">13 rows for 13 key-letter pairs — symmetric swaps make encryption and decryption identical</figcaption>
+</figure></div>
     </div>
 
     <div class="panel">
@@ -151,6 +151,28 @@
     </div>
   </div>
 </div>
+
+<!-- Related Exhibits -->
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/beaufort.html" class="related-card">
+      <span class="related-card__number">Exhibit 08</span>
+      <span class="related-card__name">Beaufort Cipher</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Exhibit 07</span>
+      <span class="related-card__name">Vigenère Cipher</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/alberti-disk.html" class="related-card">
+      <span class="related-card__number">Exhibit 30</span>
+      <span class="related-card__name">Alberti Cipher Disk</span>
+      <span class="related-card__tag">Polyalphabetic</span>
+    </a>
+  </div>
+</section>
 
 <div class="hall-nav">
   <a href="../ciphers/beaufort.html" class="hall-nav-link">

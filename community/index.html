@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Community Codebreaks — The Cipher Museum</title>
+<meta name="description" content="Community cipher challenges, write-ups, and historical fact submissions for the Cipher Museum.">
+<link rel="stylesheet" href="../css/museum.css">
+<style>
+.comm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
+.comm-card{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:2rem;transition:all var(--trs)}
+.comm-card:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
+.comm-tag{display:inline-block;font-family:var(--fm);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .6rem;border-radius:99px;margin-bottom:.75rem}
+.comm-tag.challenge{background:rgba(201,168,76,.15);color:var(--gold)}
+.comm-tag.writeup{background:rgba(100,200,120,.12);color:#7dcea0}
+.comm-tag.history{background:rgba(120,150,220,.12);color:#85a9e0}
+.comm-title{font-family:var(--fd);font-size:1.1rem;color:var(--tx);margin-bottom:.5rem;letter-spacing:.04em}
+.comm-excerpt{font-family:var(--fb);font-size:.9rem;color:var(--tx2);line-height:1.55;margin-bottom:1rem}
+.comm-meta{font-family:var(--fm);font-size:.55rem;letter-spacing:.12em;color:var(--tx3);text-transform:uppercase}
+.comm-section{margin-top:4rem}
+.comm-section h2{font-family:var(--fd);font-size:1.4rem;color:var(--tx);letter-spacing:.06em;margin-bottom:.75rem}
+.comm-section>p{font-family:var(--fb);font-size:.95rem;color:var(--tx2);line-height:1.5;margin-bottom:1.5rem}
+.form-panel{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:2.5rem;max-width:640px}
+.form-row{margin-bottom:1.2rem}
+.form-label{display:block;font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:.5rem}
+.form-input,.form-textarea,.form-select{width:100%;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.8rem;padding:.6rem .85rem}
+.form-input:focus,.form-textarea:focus,.form-select:focus{outline:none;border-color:var(--gold-dim)}
+.form-textarea{min-height:120px;resize:vertical;font-family:var(--fb);font-size:.9rem;line-height:1.55}
+.form-btn{font-family:var(--fd);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--black);border:none;padding:.7rem 1.6rem;border-radius:var(--r);cursor:pointer;transition:all var(--trs)}
+.form-btn:hover{background:var(--gold-lt)}
+.form-note{font-family:var(--fm);font-size:.55rem;color:var(--tx3);margin-top:.75rem;letter-spacing:.05em}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden}
+@media(max-width:600px){.comm-grid{grid-template-columns:1fr}.form-panel{padding:1.5rem}}
+</style>
+</head>
+<body>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="hero-sub">Community</p>
+  <h1>Community Codebreaks</h1>
+  <p class="hero-intro">Solved a cipher? Discovered a historical footnote? This is the place to share break-throughs, challenge write-ups, and little-known cryptographic history.</p>
+</section>
+
+<main style="max-width:1000px;margin:0 auto;padding:0 2rem 4rem">
+
+<!-- ─── Featured Write-ups ─── -->
+<div class="comm-grid">
+
+  <article class="comm-card">
+    <span class="comm-tag challenge">Challenge</span>
+    <h3 class="comm-title">The Lighthouse Cipher</h3>
+    <p class="comm-excerpt">A three-stage challenge combining a Polybius square with columnar transposition, wrapped in a nautical theme. Can you decode the keeper's final log entry?</p>
+    <div class="comm-meta">Difficulty: Intermediate · Est. 30 min</div>
+  </article>
+
+  <article class="comm-card">
+    <span class="comm-tag writeup">Write-up</span>
+    <h3 class="comm-title">Breaking the Confederate Vigenère — Step by Step</h3>
+    <p class="comm-excerpt">A detailed walkthrough of Kasiski examination applied to a real Confederate cipher message intercepted near Vicksburg in 1863.</p>
+    <div class="comm-meta">By a Museum Visitor · Techniques: Kasiski, IC Analysis</div>
+  </article>
+
+  <article class="comm-card">
+    <span class="comm-tag history">Historical Fact</span>
+    <h3 class="comm-title">The Forgotten Women of Room 40</h3>
+    <p class="comm-excerpt">While Bletchley Park's women codebreakers gained recognition, the women who worked in the Admiralty's Room 40 during WWI remain largely unknown.</p>
+    <div class="comm-meta">Verified · Sources: National Archives</div>
+  </article>
+
+  <article class="comm-card">
+    <span class="comm-tag challenge">Challenge</span>
+    <h3 class="comm-title">Enigma Daily Challenge</h3>
+    <p class="comm-excerpt">Every day, a new Enigma-encrypted message with authentic rotor and plugboard settings. Your mission: find the day key and decrypt the dispatch.</p>
+    <div class="comm-meta">Difficulty: Advanced · Daily Reset</div>
+  </article>
+
+  <article class="comm-card">
+    <span class="comm-tag writeup">Write-up</span>
+    <h3 class="comm-title">Hill Cipher: When Linear Algebra Attacks</h3>
+    <p class="comm-excerpt">Matrix inversion mod 26, known-plaintext recovery of the key matrix, and why the Hill cipher's linearity is its fatal flaw.</p>
+    <div class="comm-meta">By a Museum Visitor · Techniques: Matrix Algebra</div>
+  </article>
+
+  <article class="comm-card">
+    <span class="comm-tag history">Historical Fact</span>
+    <h3 class="comm-title">The Uncracked Dorabella Cipher</h3>
+    <p class="comm-excerpt">Edward Elgar's 1897 cipher letter to Dora Penny remains unsolved after 125 years — an 87-character mystery in 24 unique symbols.</p>
+    <div class="comm-meta">Verified · Status: Unsolved</div>
+  </article>
+
+</div>
+
+<!-- ─── Submission Form ─── -->
+<section class="comm-section">
+  <h2>Submit a Fact or Write-up</h2>
+  <p>Have a verified historical fact, a challenge solution write-up, or a cipher puzzle to share? Send it to the museum curators for review.</p>
+
+  <div class="form-panel">
+    <form id="commForm" action="#" method="POST" novalidate>
+      <div class="form-row">
+        <label class="form-label" for="commName">Your Name or Alias</label>
+        <input class="form-input" type="text" id="commName" name="name" required autocomplete="name" maxlength="100">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="commEmail">Email (not displayed)</label>
+        <input class="form-input" type="email" id="commEmail" name="email" required autocomplete="email" maxlength="200">
+      </div>
+
+      <!-- Honeypot -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="commWebsite">Website</label>
+        <input type="text" id="commWebsite" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="commType">Submission Type</label>
+        <select class="form-select" id="commType" name="type">
+          <option value="fact">Historical Fact</option>
+          <option value="writeup">Challenge Write-up</option>
+          <option value="challenge">New Cipher Challenge</option>
+          <option value="correction">Correction or Update</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="commTitle">Title</label>
+        <input class="form-input" type="text" id="commTitle" name="title" required maxlength="200">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="commBody">Content</label>
+        <textarea class="form-textarea" id="commBody" name="body" required maxlength="5000" placeholder="Share your write-up, fact, or challenge details…"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="commSources">Sources (optional)</label>
+        <input class="form-input" type="text" id="commSources" name="sources" placeholder="Book title, archive reference, URL…" maxlength="500">
+      </div>
+
+      <button class="form-btn" type="submit">Submit for Review</button>
+      <p class="form-note">Submissions are reviewed by museum curators before publication. We'll notify you by email if accepted.</p>
+    </form>
+
+    <div id="commSuccess" style="display:none;text-align:center;padding:2rem 0">
+      <div style="font-size:2.5rem;margin-bottom:1rem">📜</div>
+      <p style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);margin-bottom:.5rem">Thank You!</p>
+      <p style="font-family:var(--fb);font-size:.9rem;color:var(--tx2)">Your submission has been recorded for review.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>The Cipher Museum</h4>
+      <p>A scholarly journey through cryptographic history.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../tours/index.html">Guided Tours</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 The Cipher Museum — An Interactive Digital Exhibit</p>
+  </div>
+</footer>
+
+<script src="../js/nav.js" defer></script>
+<script>
+'use strict';
+(function(){
+  var form = document.getElementById('commForm');
+  var success = document.getElementById('commSuccess');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    /* Honeypot check */
+    if(document.getElementById('commWebsite').value){ return; }
+    /* Basic validation */
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+
+    /* Store locally since this is a static site */
+    var entry = {
+      name: document.getElementById('commName').value.trim(),
+      email: document.getElementById('commEmail').value.trim(),
+      type: document.getElementById('commType').value,
+      title: document.getElementById('commTitle').value.trim(),
+      body: document.getElementById('commBody').value.trim(),
+      sources: document.getElementById('commSources').value.trim(),
+      date: new Date().toISOString()
+    };
+
+    try {
+      var submissions = JSON.parse(localStorage.getItem('ciphermuseum.community.submissions')) || [];
+      submissions.push(entry);
+      localStorage.setItem('ciphermuseum.community.submissions', JSON.stringify(submissions));
+    } catch(err) {}
+
+    form.style.display = 'none';
+    success.style.display = 'block';
+  });
+})();
+</script>
+</body>
+</html>
