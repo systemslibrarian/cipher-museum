@@ -121,6 +121,106 @@
   </div>
 </div>
 
+<!-- Visual Floor Plan -->
+<div class="section reveal">
+  <div class="section-head">
+    <span class="section-eyebrow">Visual Floor Plan</span>
+    <h2 class="section-title">Browse by Hall</h2>
+    <p class="section-sub">Click any exhibit to open its page.</p>
+  </div>
+
+  <div class="floor-plan" style="max-width:900px;margin:0 auto;">
+    <!-- Entrance Banner -->
+    <div class="fp-entrance" style="background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:1.5rem;text-align:center;margin-bottom:0;box-shadow:inset 0 0 12px rgba(201,168,76,.06);">
+      <div style="font-family:var(--fd);font-size:1.4rem;color:var(--gold);letter-spacing:.12em;">The Cipher Museum</div>
+      <div style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);letter-spacing:.2em;margin-top:.4rem;">INTERACTIVE HISTORY OF ENCRYPTION · EST. 150 BC</div>
+    </div>
+
+    <div class="fp-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gold-b);border-top:none;border-radius:0 0 var(--rl) var(--rl);overflow:hidden;">
+
+      <!-- Hall I -->
+      <div class="fp-hall" style="padding:1.5rem;border-right:1px solid var(--s4);border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+        <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall I</h2>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">ANCIENT CIPHERS</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <a href="ciphers/scytale.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Scytale</a>
+          <a href="ciphers/caesar.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Caesar Cipher</a>
+          <a href="ciphers/polybius.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Polybius Square</a>
+        </div>
+      </div>
+
+      <!-- Hall II -->
+      <div class="fp-hall" style="padding:1.5rem;border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+        <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall II</h2>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">CLASSICAL CRYPTOGRAPHY</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <a href="ciphers/monoalphabetic.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Monoalphabetic</a>
+          <a href="ciphers/homophonic.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Homophonic</a>
+          <a href="ciphers/playfair.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Playfair Cipher</a>
+          <a href="ciphers/hill.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Hill Cipher</a>
+        </div>
+      </div>
+
+      <!-- Hall III -->
+      <div class="fp-hall" style="padding:1.5rem;border-right:1px solid var(--s4);border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+        <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall III</h2>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">RENAISSANCE SYSTEMS</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <a href="ciphers/vigenere.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Vigenère Cipher</a>
+          <a href="ciphers/beaufort.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Beaufort Cipher</a>
+          <a href="ciphers/porta.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Porta Cipher</a>
+          <a href="ciphers/jefferson-disk.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Jefferson Disk</a>
+        </div>
+      </div>
+
+      <!-- Hall IV -->
+      <div class="fp-hall" style="padding:1.5rem;border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+        <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall IV</h2>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">MECHANICAL ENCRYPTION</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <a href="ciphers/enigma.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Enigma Machine</a>
+          <a href="ciphers/lorenz.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Lorenz Cipher</a>
+          <a href="ciphers/alberti-disk.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Alberti Cipher Disk</a>
+        </div>
+      </div>
+
+      <!-- Hall V -->
+      <div class="fp-hall" style="padding:1.5rem;border-right:1px solid var(--s4);border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+        <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall V</h2>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">WARTIME CRYPTOGRAPHY</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <a href="ciphers/vic.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> VIC Cipher</a>
+          <a href="ciphers/navajo-code-talkers.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Navajo Code Talkers</a>
+          <a href="ciphers/adfgvx.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> ADFGVX Cipher</a>
+        </div>
+      </div>
+
+      <!-- Hall VI -->
+      <div class="fp-hall" style="padding:1.5rem;border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+        <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall VI</h2>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">THEORETICAL / PERFECT SECRECY</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <a href="ciphers/one-time-pad.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> One-Time Pad</a>
+          <a href="ciphers/hill.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Hill Cipher</a>
+          <a href="ciphers/vernam.html" class="fp-marker" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px;"><span style="color:var(--gold);font-size:.7rem;">●</span> Vernam Cipher</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Compass Rose -->
+    <div style="text-align:right;margin-top:.75rem;opacity:.3;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="14" cy="14" r="13" stroke="var(--gold-dim)" stroke-width=".5"/>
+        <line x1="14" y1="1" x2="14" y2="27" stroke="var(--gold-dim)" stroke-width=".5"/>
+        <line x1="1" y1="14" x2="27" y2="14" stroke="var(--gold-dim)" stroke-width=".5"/>
+        <polygon points="14,2 12.5,8 15.5,8" fill="var(--gold-dim)"/>
+        <text x="14" y="7" text-anchor="middle" fill="var(--gold-dim)" font-size="4" font-family="var(--fm)">N</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <footer class="museum-footer">

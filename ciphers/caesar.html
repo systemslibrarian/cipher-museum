@@ -213,11 +213,11 @@ Example (shift = 3):
           <button class="mode-btn" id="btnDec" onclick="setMode('dec')">Decrypt</button>
         </div>
         <div class="input-group">
-          <span class="input-label">Message</span>
+          <label class="input-label" for="msgInput">Message</label>
           <textarea class="museum-input" id="msgInput" rows="3" placeholder="Type a message…">THE QUICK BROWN FOX</textarea>
         </div>
         <div class="input-group">
-          <span class="input-label">Shift — <span id="shiftLabel">3</span></span>
+          <label class="input-label" for="shiftSlider">Shift — <span id="shiftLabel">3</span></label>
           <div class="range-row">
             <input type="range" class="museum-range" id="shiftSlider" min="1" max="25" value="3" oninput="onShiftChange(this.value)">
             <span class="range-val" id="shiftVal">3</span>
@@ -228,7 +228,7 @@ Example (shift = 3):
           <button class="btn btn-secondary" onclick="clearDemo()">Clear</button>
         </div>
         <div class="input-group">
-          <span class="input-label">Output</span>
+          <label class="input-label" for="outputBox">Output</label>
           <div class="output-box" id="outputBox"><span class="output-empty">Result appears here…</span></div>
         </div>
       </div>

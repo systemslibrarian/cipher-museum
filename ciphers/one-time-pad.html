@@ -172,6 +172,44 @@ Violate any condition → security collapses</pre>
       </div>
     </div>
 
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📝</span><span class="panel-title">Worked Example</span></div>
+      <div class="panel-body"><pre>Message: A T T A C K   (6 letters)
+As numbers (A=0): 0  19  19  0  2  10
+
+Random key:       7  14   3  8  25  16
+(from true random source — dice, radiation, etc.)
+
+Encrypt — add mod 26:
+  A(0)  + key(7)  = 7  mod 26 = 7  → H
+  T(19) + key(14) = 33 mod 26 = 7  → H
+  T(19) + key(3)  = 22 mod 26 = 22 → W
+  A(0)  + key(8)  = 8  mod 26 = 8  → I
+  C(2)  + key(25) = 27 mod 26 = 1  → B
+  K(10) + key(16) = 26 mod 26 = 0  → A
+
+Ciphertext: H H W I B A
+
+Decrypt — subtract mod 26:
+  H(7)  − key(7)  = 0  mod 26 = 0  → A  ✓
+  H(7)  − key(14) = −7 mod 26 = 19 → T  ✓
+
+Why unbreakable: HHWIBA could decrypt to
+any 6-letter message with some key.
+Without the key, all plaintexts are equally likely.</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Related Exhibits</span></div>
+      <div class="panel-body">
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;">
+          <li><a href="enigma.html" style="color:var(--gold);text-decoration:underline;">Enigma Machine</a> — Rotor cipher that traded perfect secrecy for practicality</li>
+          <li><a href="lorenz.html" style="color:var(--gold);text-decoration:underline;">Lorenz Cipher</a> — XOR-based teleprinter cipher inspired by OTP principles</li>
+          <li><a href="vigenere.html" style="color:var(--gold);text-decoration:underline;">Vigen&egrave;re Cipher</a> — Repeating-key polyalphabetic: what happens when the key is shorter than the message</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
   <div class="exhibit-side">
     

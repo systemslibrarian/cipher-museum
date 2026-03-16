@@ -104,7 +104,7 @@
     <p class="section-sub">Modern solvers combine all seven. A Vigenère cipher that took weeks in 1800 now falls in under one second.</p>
   </div>
 
-  <div class="lab-grid">
+  <div class="lab-grid reveal">
 
     <div class="technique-card">
       <div class="technique-num">Technique 01</div>
@@ -199,6 +199,8 @@
     </div>
   </div>
 
+  <svg class="section-divider" viewBox="0 0 180 6"><line x1="0" y1="3" x2="180" y2="3"/></svg>
+
   <!-- Interactive Lab -->
   <div class="section-head">
     <span class="section-eyebrow">Hands-On</span>
@@ -214,9 +216,10 @@
     <button class="lab-tab" id="tab-btn-detect" role="tab" aria-selected="false" aria-controls="tab-detect" tabindex="-1" onclick="showTab('detect', this)">Cipher Detector</button>
     <button class="lab-tab" id="tab-btn-bigram" role="tab" aria-selected="false" aria-controls="tab-bigram" tabindex="-1" onclick="showTab('bigram', this)">Bigram Heat Map</button>
     <button class="lab-tab" id="tab-btn-animate" role="tab" aria-selected="false" aria-controls="tab-animate" tabindex="-1" onclick="showTab('animate', this)">Caesar Animator</button>
+    <button class="lab-tab" id="tab-btn-sub" role="tab" aria-selected="false" aria-controls="tab-sub" tabindex="-1" onclick="showTab('sub', this)">Substitution Solver</button>
   </div>
 
-  <!-- Tab: Frequency Analysis -->
+  <!-- Tab: Frequency Analysis (SVG bar chart with English reference) -->
   <div class="lab-panel active" id="tab-freq" role="tabpanel" aria-labelledby="tab-btn-freq">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
       <div>
@@ -224,12 +227,12 @@
           <span class="input-label">Paste Ciphertext</span>
           <textarea class="museum-input" id="labFreqInput" rows="5" placeholder="Paste any ciphertext here…&#10;&#10;Try: KHOOR ZRUOG (Caesar shift 3)" oninput="labFreqUpdate()"></textarea>
         </div>
-          <div id="labFreqResult" aria-live="polite" style="font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;"></div>
+        <div id="labFreqResult" aria-live="polite" style="font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;"></div>
+        <p style="margin-top:1rem;font-family:var(--fm);font-size:.72rem;color:var(--tx3);line-height:1.6;">IC = Σ n<sub>i</sub>(n<sub>i</sub>−1) / N(N−1) &nbsp;·&nbsp; <span id="labFreqIC" style="color:var(--gold);">—</span></p>
       </div>
       <div>
-        <p class="input-label" style="margin-bottom:.75rem;">Letter Frequencies</p>
-        <div style="display:flex;align-items:flex-end;gap:3px;height:120px;" id="labFreqChart"></div>
-        <div style="display:flex;gap:3px;margin-top:3px;" id="labFreqLetters"></div>
+        <p class="input-label" style="margin-bottom:.5rem;">Letter Frequencies <span style="font-size:.7rem;color:var(--tx3);">(gold = input, outline = English)</span></p>
+        <svg id="labFreqSVG" viewBox="0 0 572 170" style="width:100%;height:auto;" role="img" aria-label="Letter frequency bar chart"></svg>
         <div id="labFreqHint" aria-live="polite" style="font-family:var(--fm);font-size:.72rem;color:var(--gold);margin-top:.75rem;"></div>
       </div>
     </div>
@@ -281,7 +284,7 @@
           <div style="font-family:var(--fm);font-size:.9rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.12em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">
             XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEWC HSK
           </div>
-          <button class="btn btn-secondary" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 1" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
           <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Shift = 4 · "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"</p>
         </div>
       </div>
@@ -296,7 +299,7 @@
             LXFOPVEFRNHRLXFOPVEFRNHRLXFOPVEF
           </div>
           <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">Hint: Look for repeating 3-letter sequences. Their spacing reveals the key length. Key length × N = spacing between repeats.</p>
-          <button class="btn btn-secondary" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 2" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
           <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: LEMON · Plaintext: "ATTACKATDAWNATTACKATDAWNATTACKAT"</p>
         </div>
       </div>
@@ -311,7 +314,7 @@
             VVQECILMYMPM
           </div>
           <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">This is a fragment from an actual Confederate dispatch. Key = "COMPLETE VICTORY" — used by Jefferson Davis, Robert E. Lee, and Kirby Smith.</p>
-          <button class="btn btn-secondary" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 3" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
           <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: COMPLETEVICT · Plaintext: "THEPRESIDEN[T]"</p>
         </div>
       </div>
@@ -352,8 +355,26 @@
     </div>
   </div>
 
+  <!-- Tab: Substitution Solver -->
+  <div class="lab-panel" id="tab-sub" role="tabpanel" aria-labelledby="tab-btn-sub" hidden>
+    <div style="max-width:820px;">
+      <p style="margin-bottom:1rem;color:var(--tx2);">Map each ciphertext letter to a plaintext letter. The decoded preview updates in real time. Use frequency analysis to guide your guesses.</p>
+      <div class="input-group" style="margin-bottom:1.25rem;">
+        <span class="input-label">Ciphertext</span>
+        <textarea class="museum-input" id="subCipherInput" rows="3" style="font-family:var(--fm);letter-spacing:.15em;font-size:.85rem;" placeholder="Paste monoalphabetic ciphertext…&#10;&#10;Try: KHOOR ZRUOG" oninput="subSolverUpdate()"></textarea>
+      </div>
+      <div style="margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center;">
+        <span class="input-label">Substitution Map (A–Z)</span>
+        <button class="btn btn-secondary" onclick="subSolverReset()" style="font-size:.65rem;padding:.35rem .8rem;">Reset All</button>
+      </div>
+      <div id="subMapGrid" style="display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin-bottom:1.5rem;"></div>
+      <div style="margin-bottom:.5rem;"><span class="input-label">Decoded Preview</span></div>
+      <div id="subPreview" style="font-family:var(--fm);font-size:.9rem;letter-spacing:.12em;line-height:2;padding:1rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);word-break:break-all;min-height:3rem;white-space:pre-wrap;" aria-live="polite"></div>
+    </div>
+  </div>
+
   <!-- 12 Famous Codebreaks -->
-  <div style="margin-top:5rem;">
+  <div class="reveal" style="margin-top:5rem;">
     <div class="section-head">
       <span class="section-eyebrow">Historical Record</span>
       <h2 class="section-title">12 Famous Codebreaks in History</h2>
@@ -577,43 +598,53 @@ document.querySelectorAll('.lab-tab').forEach((tab, index, tabs) => {
 
 // ── Frequency Analysis ──────────────────────────────
 const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-function buildLabFreqChart() {
-  const chart = document.getElementById('labFreqChart');
-  const lbls = document.getElementById('labFreqLetters');
-  if (!chart) return;
-  chart.innerHTML = ''; lbls.innerHTML = '';
+const ENG_FREQ = [8.2,1.5,2.8,4.3,12.7,2.2,2.0,6.1,7.0,0.15,0.77,4.0,2.4,6.7,7.5,1.9,0.095,6.0,6.3,9.1,2.8,0.98,2.4,0.15,2.0,0.074];
+
+function buildLabFreqSVG() {
+  const svg = document.getElementById('labFreqSVG');
+  if (!svg) return;
+  const bw = 16, gap = 6, h = 140, base = 155, maxEng = 12.7;
+  let html = '';
   for (let i = 0; i < 26; i++) {
-    const bar = document.createElement('div');
-    bar.id = 'lb_'+ALPHA[i];
-    bar.style.cssText = 'flex:1;min-width:0;background:var(--gold-dim);border-radius:1px 1px 0 0;transition:height .4s ease;height:2px;';
-    chart.appendChild(bar);
-    const lbl = document.createElement('div');
-    lbl.style.cssText = 'flex:1;text-align:center;font-family:var(--fm);font-size:.48rem;color:var(--tx3);';
-    lbl.textContent = ALPHA[i];
-    lbls.appendChild(lbl);
+    const x = i * (bw + gap);
+    const eh = (ENG_FREQ[i] / maxEng) * h;
+    // English reference bar (outline)
+    html += '<rect x="' + x + '" y="' + (base - eh) + '" width="' + bw + '" height="' + eh + '" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1" rx="1"/>';
+    // Input frequency bar (filled, initially zero height)
+    html += '<rect id="svgbar_' + ALPHA[i] + '" x="' + x + '" y="' + base + '" width="' + bw + '" height="0" fill="#C9A84C" rx="1" style="transition:y .3s,height .3s;"/>';
+    // Letter label
+    html += '<text x="' + (x + bw / 2) + '" y="' + (base + 12) + '" text-anchor="middle" fill="#706878" font-family="monospace" font-size="8">' + ALPHA[i] + '</text>';
   }
+  svg.innerHTML = html;
 }
-buildLabFreqChart();
+buildLabFreqSVG();
 
 function labFreqUpdate() {
   const txt = document.getElementById('labFreqInput').value.toUpperCase().replace(/[^A-Z]/g,'');
   const result = document.getElementById('labFreqResult');
   const hint = document.getElementById('labFreqHint');
-  if (!txt.length) { hint.textContent=''; result.textContent=''; return; }
-  const counts={}, len=txt.length;
+  const icEl = document.getElementById('labFreqIC');
+  if (!txt.length) { hint.textContent=''; result.textContent=''; icEl.textContent='—'; resetSVGBars(); return; }
+  const counts={}, len=txt.length, maxEng=12.7, h=140, base=155;
   for (const ch of txt) counts[ch]=(counts[ch]||0)+1;
   let maxCh='E',maxPct=0;
   for (let i=0;i<26;i++){
     const ch=ALPHA[i], pct=((counts[ch]||0)/len)*100;
-    const h=Math.round((pct/15)*100);
-    const el=document.getElementById('lb_'+ch);
-    if(el){el.style.height=Math.max(h,2)+'px';el.style.background=pct>8?'var(--gold)':pct>4?'#9A7A40':'var(--gold-dim)';}
+    const barH=(pct/maxEng)*h;
+    const el=document.getElementById('svgbar_'+ch);
+    if(el){el.setAttribute('y',base-barH);el.setAttribute('height',barH);el.setAttribute('fill',pct>8?'#C9A84C':pct>4?'#9A7A40':'#7a6530');}
     if(pct>maxPct){maxPct=pct;maxCh=ch;}
   }
+  // Compute IC inline
+  let icSum=0;
+  for (const k in counts) icSum+=counts[k]*(counts[k]-1);
+  const ic=len>1?icSum/(len*(len-1)):0;
+  icEl.textContent=ic.toFixed(4);
   const guessShift=(maxCh.charCodeAt(0)-69+26)%26;
   hint.textContent=`Most frequent: ${maxCh} (${maxPct.toFixed(1)}%) → If this is E, shift = ${guessShift}`;
   result.innerHTML=`<strong>Total letters:</strong> ${len}<br><strong>Most common:</strong> ${maxCh} = ${maxPct.toFixed(1)}%<br><strong>Likely Caesar shift:</strong> ${guessShift}`;
 }
+function resetSVGBars(){for(let i=0;i<26;i++){const el=document.getElementById('svgbar_'+ALPHA[i]);if(el){el.setAttribute('y',155);el.setAttribute('height',0);}}}
 
 // ── Index of Coincidence ────────────────────────────
 function calcIC() {
@@ -800,6 +831,79 @@ async function animateCaesar() {
     lines[bestShift].innerHTML += ' <span style="color:var(--green);font-size:.7rem;margin-left:.5rem;">← Best match</span>';
   }
   btn.disabled = false;
+}
+
+// ── Substitution Solver ─────────────────────────────
+function buildSubMap() {
+  const grid = document.getElementById('subMapGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 0; i < 26; i++) {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:2px;';
+    const lbl = document.createElement('span');
+    lbl.style.cssText = 'font-family:var(--fm);font-size:.7rem;font-weight:700;color:var(--gold);';
+    lbl.textContent = ALPHA[i];
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.maxLength = 1;
+    inp.id = 'submap_' + ALPHA[i];
+    inp.autocomplete = 'off';
+    inp.spellcheck = false;
+    inp.setAttribute('aria-label', 'Substitution for ' + ALPHA[i]);
+    inp.style.cssText = 'width:28px;height:28px;text-align:center;background:var(--s3);border:1px solid var(--s4);border-radius:3px;color:var(--tx);font-family:var(--fm);font-size:.8rem;text-transform:uppercase;padding:0;';
+    inp.addEventListener('input', function() {
+      this.value = this.value.toUpperCase().replace(/[^A-Z]/g, '');
+      subSolverUpdate();
+    });
+    inp.addEventListener('keydown', function(e) {
+      if (e.key.length === 1 && /[a-zA-Z]/.test(e.key)) {
+        // Auto-advance to next empty field
+        setTimeout(function() {
+          const idx = ALPHA.indexOf(inp.id.split('_')[1]);
+          for (let j = 1; j <= 26; j++) {
+            const next = document.getElementById('submap_' + ALPHA[(idx + j) % 26]);
+            if (next && !next.value) { next.focus(); break; }
+          }
+        }, 50);
+      }
+    });
+    wrap.appendChild(lbl);
+    wrap.appendChild(inp);
+    grid.appendChild(wrap);
+  }
+}
+buildSubMap();
+
+function subSolverUpdate() {
+  const txt = document.getElementById('subCipherInput').value.toUpperCase();
+  const preview = document.getElementById('subPreview');
+  const map = {};
+  for (let i = 0; i < 26; i++) {
+    const v = document.getElementById('submap_' + ALPHA[i]);
+    if (v && v.value) map[ALPHA[i]] = v.value.toUpperCase();
+  }
+  let out = '';
+  for (const ch of txt) {
+    if (ch >= 'A' && ch <= 'Z') {
+      if (map[ch]) {
+        out += '<span style="color:var(--gold);font-weight:700;">' + map[ch] + '</span>';
+      } else {
+        out += '<span style="color:var(--tx3);">·</span>';
+      }
+    } else {
+      out += ch;
+    }
+  }
+  preview.innerHTML = out || '<span style="color:var(--tx3);">Decoded text will appear here…</span>';
+}
+
+function subSolverReset() {
+  for (let i = 0; i < 26; i++) {
+    const el = document.getElementById('submap_' + ALPHA[i]);
+    if (el) el.value = '';
+  }
+  subSolverUpdate();
 }
 </script>
 </body>
