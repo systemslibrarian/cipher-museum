@@ -16,6 +16,9 @@
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/">
   <link rel="stylesheet" href="css/museum.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"The Cipher Museum","url":"https://ciphermuseum.com/","description":"Interactive history of encryption — 37 ciphers, 10 exhibit halls, 2,500 years of cryptographic history.","publisher":{"@type":"Organization","name":"The Cipher Museum","url":"https://ciphermuseum.com/"},"potentialAction":{"@type":"SearchAction","target":"https://ciphermuseum.com/glossary.html","query-input":"required"}}
+  </script>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -98,11 +101,23 @@
       <div class="hero-stat"><span class="hero-stat-n">1</span><span class="hero-stat-l">Unbreakable Cipher</span></div>
     </div>
     <a href="halls/ancient.html" class="hero-cta">Enter the Museum →</a>
-    <a href="timeline.html" class="hero-cta" style="background:transparent;border:1px solid var(--gold-b);color:var(--gold);margin-left:1rem;">Begin the Tour →</a>
-    <a href="museum-map.html" class="hero-cta" style="background:transparent;border:1px solid var(--gold-b);color:var(--gold);margin-left:1rem;">View Museum Map</a>
+    <a href="timeline.html" class="hero-cta hero-cta--ghost" style="margin-left:1rem;">Begin the Tour →</a>
+    <a href="museum-map.html" class="hero-cta hero-cta--ghost" style="margin-left:1rem;">View Museum Map</a>
   </div>
   <div class="hero-scroll" aria-hidden="true"><span>Scroll</span>↓</div>
 </section>
+
+<!-- ═══ LIVE DECRYPT WOW MOMENT ═══ -->
+<div class="section--dark" style="padding:3rem 2rem;text-align:center;overflow:hidden;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="font-family:var(--fm);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--tx3);margin-bottom:1rem;">Live Decryption · Caesar Shift</div>
+    <div id="liveDecrypt" style="font-family:var(--fm);font-size:clamp(1rem,3vw,1.6rem);letter-spacing:.2em;color:var(--gold);line-height:1.8;min-height:3rem;transition:color .2s;" aria-live="polite" aria-label="Animated cipher decryption demo">GUVF ZHFRHZ UNF GUVEGL FRIRA PVCUREF</div>
+    <div style="margin-top:.75rem;display:flex;justify-content:center;align-items:center;gap:1rem;">
+      <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);">SHIFT: <span id="liveShift" style="color:var(--gold);font-weight:700;">13</span></div>
+      <div style="width:120px;height:3px;background:var(--s4);border-radius:2px;overflow:hidden;"><div id="liveBar" style="width:0%;height:100%;background:var(--gold);border-radius:2px;transition:width .08s;"></div></div>
+    </div>
+  </div>
+</div>
 
 <section class="section">
   <div class="section-head">
@@ -266,8 +281,8 @@
 <svg class="section-divider" viewBox="0 0 180 6"><line x1="0" y1="3" x2="180" y2="3"/></svg>
 
 <!-- Museum Map Teaser -->
-<section id="museum-map" class="section reveal" style="background:var(--s1);border-top:1px solid var(--s4);border-bottom:1px solid var(--s4);padding:4rem 2rem;">
-  <div style="max-width:900px;margin:0 auto;">
+<section id="museum-map" class="section section--dark reveal">
+  <div class="content-narrow">
     <div class="section-head" style="margin-bottom:2rem;">
       <span class="section-eyebrow">Museum Directory</span>
       <h2 class="section-title">Find Your Exhibit</h2>
@@ -287,8 +302,8 @@
   </div>
 </section>
 
-<section style="background:var(--s1);border-top:1px solid var(--s4);border-bottom:1px solid var(--s4);padding:4rem 2rem;">
-  <div style="max-width:1100px;margin:0 auto;">
+<section class="section section--dark">
+  <div class="content-mid">
     <div class="section-head" style="margin-bottom:2.5rem;">
       <span class="section-eyebrow">Why History Matters</span>
       <h2 class="section-title">Every Classical Cipher Teaches Modern Cryptography</h2>
@@ -304,8 +319,8 @@
   </div>
 </section>
 
-<section style="padding:4rem 2rem;text-align:center;">
-  <div style="max-width:700px;margin:0 auto;">
+<section class="section" style="text-align:center;">
+  <div class="content-narrow">
     <span class="section-eyebrow">Interactive Challenge</span>
     <h2 class="section-title" style="margin-bottom:1rem;">The Cryptanalysis Lab</h2>
     <p style="margin-bottom:1.5rem;">Seven techniques. Twelve famous codebreaks. Interactive frequency analysis, Kasiski examination, and index of coincidence tools.</p>
@@ -367,5 +382,43 @@ const io = new IntersectionObserver(entries => {
 }, {threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el => { el.style.animationPlayState='paused'; io.observe(el); });
 </script>
+<script>
+// Live Decrypt animation — Caesar shifts from 13→0 revealing plaintext
+(function(){
+  var target = 'THIS MUSEUM HAS THIRTY SEVEN CIPHERS';
+  var el = document.getElementById('liveDecrypt');
+  var bar = document.getElementById('liveBar');
+  var shiftEl = document.getElementById('liveShift');
+  if (!el) return;
+  var shift = 13, step = 0, totalSteps = 13;
+  function caesarShift(text, s) {
+    return text.split('').map(function(c) {
+      if (c >= 'A' && c <= 'Z') return String.fromCharCode(((c.charCodeAt(0) - 65 + s) % 26) + 65);
+      return c;
+    }).join('');
+  }
+  function tick() {
+    if (step > totalSteps) {
+      el.style.color = 'var(--gold-lt)';
+      el.style.textShadow = '0 0 20px rgba(201,168,76,.3)';
+      return;
+    }
+    var s = totalSteps - step;
+    el.textContent = caesarShift(target, s);
+    if (shiftEl) shiftEl.textContent = s;
+    if (bar) bar.style.width = ((step / totalSteps) * 100) + '%';
+    step++;
+    setTimeout(tick, step <= 1 ? 1800 : 120);
+  }
+  // Start after a brief delay so the hero is visible first
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { setTimeout(tick, 400); observer.unobserve(e.target); }
+    });
+  }, {threshold: 0.5});
+  observer.observe(el);
+})();
+</script>
+<script src="js/nav.js" defer></script>
 </body>
 </html>

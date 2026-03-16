@@ -54,6 +54,29 @@
 
     .kasiski-hits { margin-top:1rem; display:flex; flex-direction:column; gap:.4rem; max-height:200px; overflow-y:auto; }
     .kasiski-hit { font-family:var(--fm); font-size:.75rem; background:var(--s3); border:1px solid var(--gold-b); border-radius:var(--r); padding:.5rem .75rem; color:var(--gold-lt); }
+
+    /* Responsive timeline */
+    @media(max-width:768px){
+      #timeline{grid-template-columns:1fr !important}
+      #timeline .timeline:first-child{padding-right:0}
+      #timeline .timeline:last-child{padding-left:0}
+    }
+
+    /* Tab icons */
+    .lab-tab::before{margin-right:.4rem;font-size:.7rem}
+    #tab-btn-freq::before{content:'📊'}
+    #tab-btn-ioc::before{content:'📐'}
+    #tab-btn-kasiski::before{content:'🔍'}
+    #tab-btn-challenge::before{content:'⚔️'}
+    #tab-btn-detect::before{content:'🔬'}
+    #tab-btn-bigram::before{content:'🗺️'}
+    #tab-btn-animate::before{content:'▶️'}
+    #tab-btn-sub::before{content:'🧩'}
+
+    /* Lab textarea for older inline-styled inputs */
+    .lab-textarea{width:100%;padding:.8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);font-family:var(--fm);font-size:.82rem;resize:vertical}
+    .lab-textarea:focus{border-color:var(--gold-dim);outline:none}
+    .lab-result{margin-top:1.25rem;padding:1rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--r-sm);font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;min-height:3rem}
   </style>
 </head>
 <body>
@@ -89,7 +112,7 @@
   <span class="page-eyebrow">Special Exhibit · The Science of Breaking Codes</span>
   <h1 class="page-title">Cryptanalysis Lab</h1>
   <p class="page-tagline">"To know how to defend, you must first know how to attack."</p>
-  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+  <p class="page-desc">
     Every cipher in this museum was eventually broken. This lab explains the techniques used — from Al-Kindi's frequency tables in 850 AD to the electromechanical Bombe machines at Bletchley Park. Twelve of the most famous codebreaks in history. Seven techniques that break almost every classical cipher ever invented.
   </p>
 </div>
@@ -112,9 +135,9 @@
       <div class="technique-by">Al-Kindi · Baghdad · ~850 AD</div>
       <p class="technique-desc">Languages have predictable letter frequencies. In English, E=12.7%, T=9.1%, A=8.2%. Any cipher that maps one letter to one symbol preserves these frequencies. Count the symbols, compare to known frequencies, recover the key.</p>
       <div class="technique-breaks">
-        <span class="badge sec-broken">Caesar</span>
-        <span class="badge sec-broken">Monoalphabetic</span>
-        <span class="badge sec-broken">Homophonic</span>
+        <a href="ciphers/caesar.html" class="badge sec-broken" style="text-decoration:none;">Caesar</a>
+        <a href="ciphers/monoalphabetic.html" class="badge sec-broken" style="text-decoration:none;">Monoalphabetic</a>
+        <a href="ciphers/homophonic.html" class="badge sec-broken" style="text-decoration:none;">Homophonic</a>
       </div>
     </div>
 
@@ -124,9 +147,9 @@
       <div class="technique-by">Friedrich Kasiski · 1863</div>
       <p class="technique-desc">In a Vigenère cipher, the same plaintext + same key position = same ciphertext. Identical repeated strings in the ciphertext reveal probable key length. Their spacing is likely a multiple of the key length.</p>
       <div class="technique-breaks">
-        <span class="badge sec-broken">Vigenère</span>
-        <span class="badge sec-broken">Beaufort</span>
-        <span class="badge sec-broken">Gronsfeld</span>
+        <a href="ciphers/vigenere.html" class="badge sec-broken" style="text-decoration:none;">Vigenère</a>
+        <a href="ciphers/beaufort.html" class="badge sec-broken" style="text-decoration:none;">Beaufort</a>
+        <a href="ciphers/gronsfeld.html" class="badge sec-broken" style="text-decoration:none;">Gronsfeld</a>
       </div>
     </div>
 
@@ -136,8 +159,8 @@
       <div class="technique-by">William Friedman · 1920</div>
       <p class="technique-desc">Measures statistical similarity to natural language. English text has an IC of ~0.066. Random text has ~0.038. A polyalphabetic cipher produces values between these — and the IC can reveal the key length without finding repeated strings.</p>
       <div class="technique-breaks">
-        <span class="badge sec-broken">Vigenère</span>
-        <span class="badge sec-broken">Running Key</span>
+        <a href="ciphers/vigenere.html" class="badge sec-broken" style="text-decoration:none;">Vigenère</a>
+        <a href="ciphers/running-key.html" class="badge sec-broken" style="text-decoration:none;">Running Key</a>
         <span class="badge sec-broken">Polyalphabetic</span>
       </div>
     </div>
@@ -148,9 +171,9 @@
       <div class="technique-by">Polish Mathematicians · WWII Bletchley</div>
       <p class="technique-desc">Guess probable plaintext words called "cribs" — military messages often start with standard phrases. The Enigma was broken partly because operators always began with WETTER (weather), HEIL HITLER, or ANX (a header). Known structure is a fatal weakness.</p>
       <div class="technique-breaks">
-        <span class="badge sec-broken">Enigma</span>
-        <span class="badge sec-broken">Lorenz</span>
-        <span class="badge sec-broken">Vigenère</span>
+        <a href="ciphers/enigma.html" class="badge sec-broken" style="text-decoration:none;">Enigma</a>
+        <a href="ciphers/lorenz.html" class="badge sec-broken" style="text-decoration:none;">Lorenz</a>
+        <a href="ciphers/vigenere.html" class="badge sec-broken" style="text-decoration:none;">Vigenère</a>
       </div>
     </div>
 
@@ -160,9 +183,9 @@
       <div class="technique-by">Universal · Classical through Modern</div>
       <p class="technique-desc">When some plaintext is known, the key can often be derived directly. The Hill cipher's matrix key is recoverable with just two known plaintext-ciphertext pairs by solving a system of linear equations. Enigma used weather forecasts as cribs.</p>
       <div class="technique-breaks">
-        <span class="badge sec-broken">Hill Cipher</span>
-        <span class="badge sec-broken">Enigma</span>
-        <span class="badge sec-broken">Lorenz</span>
+        <a href="ciphers/hill.html" class="badge sec-broken" style="text-decoration:none;">Hill Cipher</a>
+        <a href="ciphers/enigma.html" class="badge sec-broken" style="text-decoration:none;">Enigma</a>
+        <a href="ciphers/lorenz.html" class="badge sec-broken" style="text-decoration:none;">Lorenz</a>
       </div>
     </div>
 
@@ -172,8 +195,8 @@
       <div class="technique-by">Modern · Computer Era</div>
       <p class="technique-desc">Start with a random key. Decrypt. Score the result using English language statistics — common digrams like TH, HE, IN. Make random changes to the key. Keep improvements, discard downgrades. Repeat millions of times. Works against substitution, Playfair, transposition.</p>
       <div class="technique-breaks">
-        <span class="badge sec-broken">Substitution</span>
-        <span class="badge sec-broken">Playfair</span>
+        <a href="ciphers/monoalphabetic.html" class="badge sec-broken" style="text-decoration:none;">Substitution</a>
+        <a href="ciphers/playfair.html" class="badge sec-broken" style="text-decoration:none;">Playfair</a>
         <span class="badge sec-broken">Transposition</span>
       </div>
     </div>
@@ -184,9 +207,9 @@
       <div class="technique-by">Modern · AI-Assisted</div>
       <p class="technique-desc">Advanced optimization heuristics that explore key space more broadly than pure hill climbing. Genetic algorithms evolve populations of candidate keys. Simulated annealing occasionally accepts worse solutions to escape local optima. Breaks double transposition, Playfair, Hill cipher in seconds.</p>
       <div class="technique-breaks">
-        <span class="badge sec-broken">Double Transposition</span>
-        <span class="badge sec-broken">Playfair</span>
-        <span class="badge sec-broken">Hill Cipher</span>
+        <a href="ciphers/double-transposition.html" class="badge sec-broken" style="text-decoration:none;">Double Transposition</a>
+        <a href="ciphers/playfair.html" class="badge sec-broken" style="text-decoration:none;">Playfair</a>
+        <a href="ciphers/hill.html" class="badge sec-broken" style="text-decoration:none;">Hill Cipher</a>
       </div>
     </div>
 
@@ -224,7 +247,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
       <div>
         <div class="input-group" style="margin-bottom:1rem;">
-          <span class="input-label">Paste Ciphertext</span>
+          <label class="input-label" for="labFreqInput">Paste Ciphertext</label>
           <textarea class="museum-input" id="labFreqInput" rows="5" placeholder="Paste any ciphertext here…&#10;&#10;Try: KHOOR ZRUOG (Caesar shift 3)" oninput="labFreqUpdate()"></textarea>
         </div>
         <div id="labFreqResult" aria-live="polite" style="font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;"></div>
@@ -263,7 +286,7 @@
   <div class="lab-panel" id="tab-kasiski" role="tabpanel" aria-labelledby="tab-btn-kasiski" hidden>
     <div style="max-width:700px;">
       <div class="input-group" style="margin-bottom:1.25rem;">
-        <span class="input-label">Paste Vigenère Ciphertext (strip spaces)</span>
+        <label class="input-label" for="kasiskiInput">Paste Vigenère Ciphertext (strip spaces)</label>
         <textarea class="museum-input" id="kasiskiInput" rows="4" placeholder="LXFOPVEFRNHRLXFOPVEFRNHR…&#10;&#10;Repeated sequences reveal key length." oninput="runKasiski()"></textarea>
       </div>
       <div id="kasiskiResult" aria-live="polite" style="font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;"></div>
@@ -284,7 +307,7 @@
           <div style="font-family:var(--fm);font-size:.9rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.12em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">
             XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEWC HSK
           </div>
-          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 1" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 1" onclick="var a=this.nextElementSibling;if(a.style.display==='block'){a.style.display='none';this.textContent='Reveal Answer'}else{a.style.display='block';this.textContent='Hide Answer'}" style="font-size:.7rem;">Reveal Answer</button>
           <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Shift = 4 · "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"</p>
         </div>
       </div>
@@ -299,7 +322,7 @@
             LXFOPVEFRNHRLXFOPVEFRNHRLXFOPVEF
           </div>
           <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">Hint: Look for repeating 3-letter sequences. Their spacing reveals the key length. Key length × N = spacing between repeats.</p>
-          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 2" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 2" onclick="var a=this.nextElementSibling;if(a.style.display==='block'){a.style.display='none';this.textContent='Reveal Answer'}else{a.style.display='block';this.textContent='Hide Answer'}" style="font-size:.7rem;">Reveal Answer</button>
           <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: LEMON · Plaintext: "ATTACKATDAWNATTACKATDAWNATTACKAT"</p>
         </div>
       </div>
@@ -314,7 +337,7 @@
             VVQECILMYMPM
           </div>
           <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">This is a fragment from an actual Confederate dispatch. Key = "COMPLETE VICTORY" — used by Jefferson Davis, Robert E. Lee, and Kirby Smith.</p>
-          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 3" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 3" onclick="var a=this.nextElementSibling;if(a.style.display==='block'){a.style.display='none';this.textContent='Reveal Answer'}else{a.style.display='block';this.textContent='Hide Answer'}" style="font-size:.7rem;">Reveal Answer</button>
           <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: COMPLETEVICT · Plaintext: "THEPRESIDEN[T]"</p>
         </div>
       </div>
@@ -327,9 +350,9 @@
     <div style="max-width:700px;">
       <p style="margin-bottom:1rem;color:var(--tx2);">Paste ciphertext and the detector will calculate its Index of Coincidence and other statistical signatures to estimate the cipher type.</p>
       <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="detectInput">Ciphertext</label>
-      <textarea id="detectInput" rows="5" class="lab-textarea" style="width:100%;padding:.8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);font-family:var(--fm);font-size:.82rem;resize:vertical;margin-top:.4rem;" placeholder="Paste ciphertext here…"></textarea>
-      <button class="btn btn-primary" onclick="detectCipher()" style="margin-top:.75rem;font-size:.7rem;">Analyze</button>
-      <div id="detectResult" style="margin-top:1.25rem;padding:1rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--r-sm);font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;min-height:3rem;"></div>
+      <textarea id="detectInput" rows="5" class="lab-textarea" placeholder="Paste ciphertext here…"></textarea>
+      <button class="btn btn-primary" onclick="detectCipher()" aria-label="Analyze ciphertext type" style="margin-top:.75rem;font-size:.7rem;">Analyze</button>
+      <div id="detectResult" class="lab-result"></div>
     </div>
   </div>
 
@@ -338,8 +361,8 @@
     <div style="max-width:750px;">
       <p style="margin-bottom:1rem;color:var(--tx2);">Enter text to visualize bigram (letter-pair) frequencies as a 26×26 heat map. Brighter cells indicate more frequent pairs.</p>
       <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="bigramInput">Text</label>
-      <textarea id="bigramInput" rows="4" class="lab-textarea" style="width:100%;padding:.8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);font-family:var(--fm);font-size:.82rem;resize:vertical;margin-top:.4rem;" placeholder="Paste text here…"></textarea>
-      <button class="btn btn-primary" onclick="buildBigramMap()" style="margin-top:.75rem;font-size:.7rem;">Build Heat Map</button>
+      <textarea id="bigramInput" rows="4" class="lab-textarea" placeholder="Paste text here…"></textarea>
+      <button class="btn btn-primary" onclick="buildBigramMap()" aria-label="Build bigram frequency heat map" style="margin-top:.75rem;font-size:.7rem;">Build Heat Map</button>
       <div id="bigramGrid" style="margin-top:1.25rem;overflow-x:auto;"></div>
     </div>
   </div>
@@ -349,8 +372,8 @@
     <div style="max-width:700px;">
       <p style="margin-bottom:1rem;color:var(--tx2);">Watch a Caesar cipher break in real-time. The animator tries all 26 shifts and highlights the one that produces the most English-like output.</p>
       <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="animInput">Ciphertext</label>
-      <input type="text" id="animInput" value="KHOOR ZRUOG" style="width:100%;padding:.6rem .8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--gold-lt);font-family:var(--fm);font-size:.85rem;letter-spacing:.1em;margin-top:.4rem;" autocomplete="off" spellcheck="false">
-      <button class="btn btn-primary" id="animBtn" onclick="animateCaesar()" style="margin-top:.75rem;font-size:.7rem;">Animate</button>
+      <input type="text" id="animInput" value="KHOOR ZRUOG" class="lab-textarea" style="padding:.6rem .8rem;color:var(--gold-lt);font-size:.85rem;letter-spacing:.1em;margin-top:.4rem;" autocomplete="off" spellcheck="false">
+      <button class="btn btn-primary" id="animBtn" onclick="animateCaesar()" aria-label="Animate Caesar cipher brute force" style="margin-top:.75rem;font-size:.7rem;">Animate</button>
       <div id="animOutput" style="margin-top:1.25rem;font-family:var(--fm);font-size:.82rem;line-height:2.2;color:var(--tx2);"></div>
     </div>
   </div>
@@ -360,14 +383,19 @@
     <div style="max-width:820px;">
       <p style="margin-bottom:1rem;color:var(--tx2);">Map each ciphertext letter to a plaintext letter. The decoded preview updates in real time. Use frequency analysis to guide your guesses.</p>
       <div class="input-group" style="margin-bottom:1.25rem;">
-        <span class="input-label">Ciphertext</span>
+        <label class="input-label" for="subCipherInput">Ciphertext</label>
         <textarea class="museum-input" id="subCipherInput" rows="3" style="font-family:var(--fm);letter-spacing:.15em;font-size:.85rem;" placeholder="Paste monoalphabetic ciphertext…&#10;&#10;Try: KHOOR ZRUOG" oninput="subSolverUpdate()"></textarea>
       </div>
       <div style="margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center;">
         <span class="input-label">Substitution Map (A–Z)</span>
-        <button class="btn btn-secondary" onclick="subSolverReset()" style="font-size:.65rem;padding:.35rem .8rem;">Reset All</button>
+        <button class="btn btn-secondary" onclick="subSolverReset()" aria-label="Reset substitution map" style="font-size:.65rem;padding:.35rem .8rem;">Reset All</button>
       </div>
       <div id="subMapGrid" style="display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin-bottom:1.5rem;"></div>
+      <div style="margin-bottom:1rem;">
+        <span class="input-label">Ciphertext Letter Frequency</span>
+        <div id="subFreqHelper" style="display:flex;align-items:flex-end;gap:1px;height:50px;margin-top:.4rem;"></div>
+        <div style="font-family:var(--fm);font-size:.5rem;color:var(--tx3);margin-top:.3rem;">English: E T A O I N S H R…</div>
+      </div>
       <div style="margin-bottom:.5rem;"><span class="input-label">Decoded Preview</span></div>
       <div id="subPreview" style="font-family:var(--fm);font-size:.9rem;letter-spacing:.12em;line-height:2;padding:1rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);word-break:break-all;min-height:3rem;white-space:pre-wrap;" aria-live="polite"></div>
     </div>
@@ -536,10 +564,10 @@
     <div>
       <div class="footer-col-title">Techniques</div>
       <ul class="footer-links">
-        <li><a href="#freq">Frequency Analysis</a></li>
-        <li><a href="#ioc">Index of Coincidence</a></li>
-        <li><a href="#kasiski">Kasiski Examination</a></li>
-        <li><a href="#crib">Crib Attacks</a></li>
+        <li><a href="#" onclick="showTab('freq',document.getElementById('tab-btn-freq'));return false;">Frequency Analysis</a></li>
+        <li><a href="#" onclick="showTab('ioc',document.getElementById('tab-btn-ioc'));return false;">Index of Coincidence</a></li>
+        <li><a href="#" onclick="showTab('kasiski',document.getElementById('tab-btn-kasiski'));return false;">Kasiski Examination</a></li>
+        <li><a href="#" onclick="showTab('challenge',document.getElementById('tab-btn-challenge'));return false;">Break a Cipher</a></li>
       </ul>
     </div>
     <div>
@@ -734,7 +762,11 @@ function detectCipher() {
   const hasOnly5 = /^[ADFGVX\s]+$/i.test(raw.replace(/[^A-Za-z]/g, ''));
 
   let verdict = '';
-  if (ic >= 0.063) {
+  if (hasOnly5 && unique <= 6) {
+    verdict = '<strong style="color:var(--blue)">ADFGVX / ADFGX Cipher</strong>';
+    verdict += '<br>Text uses only ' + unique + ' unique letters from the ADFGVX set.';
+    verdict += '<br>→ This is a <a href="ciphers/adfgvx.html">fractionating cipher</a> from WWI.';
+  } else if (ic >= 0.063) {
     verdict = '<strong style="color:var(--green)">Monoalphabetic / Caesar</strong>';
     verdict += '<br>IC ' + ic.toFixed(4) + ' is near English (0.066). Single-alphabet substitution likely.';
     verdict += '<br>→ Try <em>Frequency Analysis</em> tab.';
@@ -896,6 +928,24 @@ function subSolverUpdate() {
     }
   }
   preview.innerHTML = out || '<span style="color:var(--tx3);">Decoded text will appear here…</span>';
+
+  // Update frequency helper
+  var helper = document.getElementById('subFreqHelper');
+  if (helper) {
+    var letters = txt.replace(/[^A-Z]/g, '');
+    var fc = {};
+    for (var ci = 0; ci < letters.length; ci++) fc[letters[ci]] = (fc[letters[ci]] || 0) + 1;
+    var maxF = 1;
+    for (var k in fc) if (fc[k] > maxF) maxF = fc[k];
+    var sorted = ALPHA.slice().sort(function(a,b){ return (fc[b]||0) - (fc[a]||0); });
+    helper.innerHTML = sorted.map(function(c){
+      var pct = letters.length ? ((fc[c]||0)/maxF*100) : 0;
+      var mapped = map[c] ? 'var(--gold)' : 'var(--gold-dim)';
+      return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;" title="'+c+': '+(fc[c]||0)+'">' +
+        '<div style="width:100%;min-height:1px;background:'+mapped+';border-radius:1px 1px 0 0;height:'+pct+'%;transition:height .3s;"></div>' +
+        '<span style="font-family:var(--fm);font-size:.42rem;color:'+(map[c]?'var(--gold)':'var(--tx3)')+';">'+c+'</span></div>';
+    }).join('');
+  }
 }
 
 function subSolverReset() {
@@ -906,5 +956,6 @@ function subSolverReset() {
   subSolverUpdate();
 }
 </script>
+<script src="js/nav.js" defer></script>
 </body>
 </html>
