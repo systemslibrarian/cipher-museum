@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -79,7 +80,34 @@
 Plaintext:  A   T   T   A   C   K
 Polybius:  22  21  21  22  24  35
 Key(=NEMO): 11  31  44  21  11  31
-Cipher:    33  52  65  43  35  66</pre></div>
+Cipher:    33  52  65  43  35  66</pre>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 380 200" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nihilist cipher Polybius addition diagram">
+  <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:3}</style>
+  <!-- 5x5 Polybius -->
+  <text x="10" y="16" font-size="9" fill="#C9A84C" letter-spacing=".1em">POLYBIUS SQUARE</text>
+  <g transform="translate(10,24)">
+    <text x="16" y="12" font-size="8" fill="#C9A84C">1</text><text x="36" y="12" font-size="8" fill="#C9A84C">2</text><text x="56" y="12" font-size="8" fill="#C9A84C">3</text><text x="76" y="12" font-size="8" fill="#C9A84C">4</text><text x="96" y="12" font-size="8" fill="#C9A84C">5</text>
+    <text x="0" y="28" font-size="8" fill="#C9A84C">1</text><rect x="10" y="16" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="16" y="28" font-size="8">N</text><rect x="30" y="16" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="36" y="28" font-size="8">I</text><rect x="50" y="16" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="56" y="28" font-size="8">H</text><rect x="70" y="16" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="76" y="28" font-size="8">L</text><rect x="90" y="16" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="96" y="28" font-size="8">S</text>
+    <text x="0" y="46" font-size="8" fill="#C9A84C">2</text><rect x="10" y="34" width="20" height="16" fill="rgba(90,200,160,.08)" stroke="rgba(90,200,160,.15)" stroke-width=".5"/><text x="16" y="46" font-size="8" fill="#5AC8A0">T</text><rect x="30" y="34" width="20" height="16" fill="rgba(90,200,160,.08)" stroke="rgba(90,200,160,.15)" stroke-width=".5"/><text x="36" y="46" font-size="8" fill="#5AC8A0">A</text><rect x="50" y="34" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="56" y="46" font-size="8">B</text><rect x="70" y="34" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="76" y="46" font-size="8">C</text><rect x="90" y="34" width="20" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="96" y="46" font-size="8">D</text>
+  </g>
+  <!-- Addition -->
+  <g transform="translate(140,20)">
+    <text x="0" y="14" font-size="9" fill="#C9A84C" letter-spacing=".1em">ADDITION</text>
+    <text x="0" y="34" font-size="9" fill="#B8B0A0">Plain:    A=22</text>
+    <text x="0" y="50" font-size="9" fill="#B8B0A0">Key(N):   N=11</text>
+    <line x1="0" y1="54" x2="110" y2="54" stroke="rgba(201,168,76,.3)" stroke-width=".5"/>
+    <text x="0" y="68" font-size="9" fill="#5AC8A0">Cipher:   33</text>
+  </g>
+  <!-- Full example -->
+  <rect x="10" y="110" width="360" height="75" fill="rgba(90,200,160,.04)" stroke="rgba(90,200,160,.1)" stroke-width=".5" rx="5"/>
+  <text x="20" y="128" font-size="9" fill="#706878">Plain:   A   T   T   A   C   K</text>
+  <text x="20" y="144" font-size="9" fill="#706878">Polyb:  22  21  21  22  24  35</text>
+  <text x="20" y="160" font-size="9" fill="#C9A84C">Key:    11  31  44  21  11  31</text>
+  <text x="20" y="176" font-size="9" fill="#5AC8A0">Sum:    33  52  65  43  35  66</text>
+</svg>
+<p class="diagram-caption">Letters become two-digit Polybius coordinates, then added to key coordinates — producing numeric ciphertext</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -148,6 +176,7 @@ Cipher:    33  52  65  43  35  66</pre></div>
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

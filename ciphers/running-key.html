@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -73,7 +74,36 @@ Key:   FROMTHISBOOK
 Cipher: each letter shifted by key letter
 
 A+F=F, T+R=K, T+O=H, A+M=M,
-C+T=V, K+H=R, A+I=I, T+S=L...</pre><p style='margin-top:1rem;'>Security depends entirely on the key text never being identified. If an attacker guesses the source (any printed book), they can test it against the ciphertext trivially.</p></div>
+C+T=V, K+H=R, A+I=I, T+S=L...</pre><p style='margin-top:1rem;'>Security depends entirely on the key text never being identified. If an attacker guesses the source (any printed book), they can test it against the ciphertext trivially.</p>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 380 150" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Running key cipher using book text as key">
+  <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:4}</style>
+  <!-- Book -->
+  <rect x="10" y="5" width="80" height="55" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.2)" stroke-width="1" rx="3"/>
+  <text x="25" y="22" font-size="7" fill="#706878">From this</text>
+  <text x="25" y="32" font-size="7" fill="#706878">book we</text>
+  <text x="25" y="42" font-size="7" fill="#706878">take our</text>
+  <text x="25" y="52" font-size="7" fill="#706878">key text</text>
+  <text x="50" y="72" font-size="7" fill="#C9A84C">⇓ key source</text>
+  <!-- Alignment -->
+  <g transform="translate(10,82)">
+    <text x="0" y="14" font-size="9" fill="#5A90C8">Plain:</text>
+    <text x="50" y="14" font-size="10">A  T  T  A  C  K  A  T</text>
+    <text x="0" y="32" font-size="9" fill="#C9A84C">Key:</text>
+    <text x="50" y="32" font-size="10" fill="#C9A84C">F  R  O  M  T  H  I  S</text>
+    <line x1="50" y1="36" x2="220" y2="36" stroke="rgba(201,168,76,.3)" stroke-width=".5"/>
+    <text x="0" y="52" font-size="9" fill="#5AC8A0">Cipher:</text>
+    <text x="50" y="52" font-size="10" fill="#5AC8A0">F  K  H  M  V  R  I  L</text>
+  </g>
+  <!-- Comparison -->
+  <rect x="240" y="5" width="130" height="65" fill="rgba(201,168,76,.04)" stroke="rgba(201,168,76,.12)" stroke-width=".5" rx="5"/>
+  <text x="250" y="22" font-size="8" fill="#C9A84C">Key = book text</text>
+  <text x="250" y="36" font-size="8" fill="#706878">Key length = msg length</text>
+  <text x="250" y="50" font-size="8" fill="#C85A5A">But NOT random →</text>
+  <text x="250" y="62" font-size="8" fill="#C85A5A">NOT a one-time pad</text>
+</svg>
+<p class="diagram-caption">Book text used as a key matches message length — but English letter patterns make it weaker than a true one-time pad</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -142,6 +172,7 @@ C+T=V, K+H=R, A+I=I, T+S=L...</pre><p style='margin-top:1rem;'>Security depends 
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

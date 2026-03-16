@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -71,7 +72,81 @@
       <div class="panel-body"><p>Replace each plaintext letter with a fixed ciphertext letter according to a secret permutation table. The same letter always maps to the same symbol.</p><pre>Plain:  ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Cipher: QWERTYUIOPASDFGHJKLZXCVBNM
 
-HELLO → ITSSG</pre><p style='margin-top:1rem;'>With 26! ≈ 4×10²⁶ possible keys, brute force is impossible. But the key is irrelevant — the statistical structure of English leaks through every substitution.</p></div>
+HELLO → ITSSG</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 480 170" style="max-width:480px;width:100%;height:auto;" aria-label="Monoalphabetic substitution mapping diagram">
+          <style>
+            .ma-letter{font-family:'JetBrains Mono',var(--fc,monospace);font-size:12px;text-anchor:middle;dominant-baseline:central}
+            .ma-plain{fill:#e8d5a3}
+            .ma-cipher{fill:#d4af37}
+            .ma-arrow{stroke:#c8b273;stroke-width:.8;opacity:.4;marker-end:url(#ma-tri)}
+            .ma-hi{stroke:#d4af37;stroke-width:1.5;opacity:1}
+            .ma-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:start}
+          </style>
+          <defs><marker id="ma-tri" viewBox="0 0 6 4" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M0,0 L6,2 L0,4Z" fill="#c8b273"/></marker></defs>
+          <text class="ma-lbl" x="5" y="35">Plain:</text>
+          <text class="ma-lbl" x="5" y="140">Cipher:</text>
+          <!-- Plaintext row -->
+          <text class="ma-letter ma-plain" x="60" y="35">A</text>
+          <text class="ma-letter ma-plain" x="78" y="35">B</text>
+          <text class="ma-letter ma-plain" x="96" y="35">C</text>
+          <text class="ma-letter ma-plain" x="114" y="35">D</text>
+          <text class="ma-letter ma-plain" x="132" y="35">E</text>
+          <text class="ma-letter ma-plain" x="150" y="35">F</text>
+          <text class="ma-letter ma-plain" x="168" y="35">G</text>
+          <text class="ma-letter ma-plain" x="186" y="35">H</text>
+          <text class="ma-letter ma-plain" x="204" y="35">I</text>
+          <text class="ma-letter ma-plain" x="222" y="35">J</text>
+          <text class="ma-letter ma-plain" x="240" y="35">K</text>
+          <text class="ma-letter ma-plain" x="258" y="35">L</text>
+          <text class="ma-letter ma-plain" x="276" y="35">M</text>
+          <text class="ma-letter ma-plain" x="294" y="35">N</text>
+          <text class="ma-letter ma-plain" x="312" y="35">O</text>
+          <text class="ma-letter ma-plain" x="330" y="35">P</text>
+          <text class="ma-letter ma-plain" x="348" y="35">Q</text>
+          <text class="ma-letter ma-plain" x="366" y="35">R</text>
+          <text class="ma-letter ma-plain" x="384" y="35">S</text>
+          <text class="ma-letter ma-plain" x="402" y="35">T</text>
+          <text class="ma-letter ma-plain" x="420" y="35">U</text>
+          <text class="ma-letter ma-plain" x="438" y="35">V</text>
+          <text class="ma-letter ma-plain" x="456" y="35">W</text>
+          <!-- Cipher row -->
+          <text class="ma-letter ma-cipher" x="60" y="140">Q</text>
+          <text class="ma-letter ma-cipher" x="78" y="140">W</text>
+          <text class="ma-letter ma-cipher" x="96" y="140">E</text>
+          <text class="ma-letter ma-cipher" x="114" y="140">R</text>
+          <text class="ma-letter ma-cipher" x="132" y="140">T</text>
+          <text class="ma-letter ma-cipher" x="150" y="140">Y</text>
+          <text class="ma-letter ma-cipher" x="168" y="140">U</text>
+          <text class="ma-letter ma-cipher" x="186" y="140">I</text>
+          <text class="ma-letter ma-cipher" x="204" y="140">O</text>
+          <text class="ma-letter ma-cipher" x="222" y="140">P</text>
+          <text class="ma-letter ma-cipher" x="240" y="140">A</text>
+          <text class="ma-letter ma-cipher" x="258" y="140">S</text>
+          <text class="ma-letter ma-cipher" x="276" y="140">D</text>
+          <text class="ma-letter ma-cipher" x="294" y="140">F</text>
+          <text class="ma-letter ma-cipher" x="312" y="140">G</text>
+          <text class="ma-letter ma-cipher" x="330" y="140">H</text>
+          <text class="ma-letter ma-cipher" x="348" y="140">J</text>
+          <text class="ma-letter ma-cipher" x="366" y="140">K</text>
+          <text class="ma-letter ma-cipher" x="384" y="140">L</text>
+          <text class="ma-letter ma-cipher" x="402" y="140">Z</text>
+          <text class="ma-letter ma-cipher" x="420" y="140">X</text>
+          <text class="ma-letter ma-cipher" x="438" y="140">C</text>
+          <text class="ma-letter ma-cipher" x="456" y="140">V</text>
+          <!-- Scrambled mapping arrows (selected) -->
+          <line class="ma-arrow" x1="60" y1="45" x2="60" y2="125"/>
+          <line class="ma-arrow ma-hi" x1="132" y1="45" x2="132" y2="125"/>
+          <line class="ma-arrow ma-hi" x1="186" y1="45" x2="186" y2="125"/>
+          <line class="ma-arrow ma-hi" x1="258" y1="45" x2="258" y2="125"/>
+          <line class="ma-arrow ma-hi" x1="312" y1="45" x2="312" y2="125"/>
+          <line class="ma-arrow" x1="294" y1="45" x2="294" y2="125"/>
+          <line class="ma-arrow" x1="402" y1="45" x2="402" y2="125"/>
+          <!-- HELLO example -->
+          <text style="font-family:var(--fm);font-size:10px;fill:#d4af37;text-anchor:middle" x="240" y="165">H→I  E→T  L→S  L→S  O→G  ❘  HELLO → ITSSG</text>
+        </svg>
+        <p class="diagram-caption">Each plaintext letter maps to exactly one cipher letter — frequencies are perfectly preserved</p>
+      </div><p style='margin-top:1rem;'>With 26! ≈ 4×10²⁶ possible keys, brute force is impossible. But the key is irrelevant — the statistical structure of English leaks through every substitution.</p></div>
     </div>
 
     <div class="panel">
@@ -140,6 +215,7 @@ HELLO → ITSSG</pre><p style='margin-top:1rem;'>With 26! ≈ 4×10²⁶ possibl
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

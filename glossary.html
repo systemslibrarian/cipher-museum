@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary — The Cipher Museum</title>
+  <meta name="description" content="Cryptography glossary: definitions of ciphers, cryptanalysis, key exchange, and encryption concepts from ancient to modern.">
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .glossary-grid{max-width:1100px;margin:0 auto}
+    .gl-section{margin-bottom:3rem}
+    .gl-letter{font-family:var(--fd);font-size:2.5rem;color:var(--gold);letter-spacing:.1em;padding-bottom:.75rem;border-bottom:1px solid var(--gold-b);margin-bottom:1.5rem}
+    .gl-term{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:1.5rem;margin-bottom:1rem;transition:all var(--trs)}
+    .gl-term:hover{border-color:var(--gold-b);background:var(--s3)}
+    .gl-word{font-family:var(--fd);font-size:1.15rem;color:var(--tx);letter-spacing:.04em;margin-bottom:.1rem}
+    .gl-origin{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.6rem;display:block}
+    .gl-def{font-size:1rem;color:var(--tx2);line-height:1.85}
+    .gl-def em{color:var(--gold-lt)}
+    .gl-see{font-family:var(--fm);font-size:.65rem;letter-spacing:.08em;color:var(--tx3);margin-top:.5rem;display:block}
+    .gl-see a{color:var(--gold-dim)}
+    .gl-toc{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1.5rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);margin-bottom:3rem}
+    .gl-toc a{font-family:var(--fd);font-size:1.1rem;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--r);color:var(--tx2);transition:all var(--tr)}
+    .gl-toc a:hover,.gl-toc a.has-entries{color:var(--gold);background:var(--gold-glow)}
+    .gl-toc a.empty{opacity:.3;pointer-events:none}
+    .gl-count{font-family:var(--fm);font-size:.62rem;letter-spacing:.15em;color:var(--tx3);text-align:center;margin-bottom:2rem}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Museum Map</a></li>
+      <li><a href="halls/ancient.html">Halls</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="glossary.html" class="active">Glossary</a></li>
+      <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Museum</a><span>›</span>Glossary</div>
+  <span class="page-eyebrow">Reference Guide</span>
+  <h1 class="page-title">Cryptography Glossary</h1>
+  <p class="page-tagline">Every term a codebreaker needs to know</p>
+</div>
+
+<div class="section">
+  <div class="glossary-grid">
+
+    <div class="gl-toc" aria-label="Jump to letter">
+      <a href="#gl-A" class="has-entries">A</a><a href="#gl-B" class="has-entries">B</a>
+      <a href="#gl-C" class="has-entries">C</a><a href="#gl-D" class="has-entries">D</a>
+      <a href="#gl-E" class="has-entries">E</a><a href="#gl-F" class="has-entries">F</a>
+      <a href="#gl-G" class="empty">G</a><a href="#gl-H" class="has-entries">H</a>
+      <a href="#gl-I" class="has-entries">I</a><a href="#gl-J" class="empty">J</a>
+      <a href="#gl-K" class="has-entries">K</a><a href="#gl-L" class="empty">L</a>
+      <a href="#gl-M" class="has-entries">M</a><a href="#gl-N" class="has-entries">N</a>
+      <a href="#gl-O" class="has-entries">O</a><a href="#gl-P" class="has-entries">P</a>
+      <a href="#gl-Q" class="empty">Q</a><a href="#gl-R" class="has-entries">R</a>
+      <a href="#gl-S" class="has-entries">S</a><a href="#gl-T" class="has-entries">T</a>
+      <a href="#gl-U" class="empty">U</a><a href="#gl-V" class="has-entries">V</a>
+      <a href="#gl-W" class="empty">W</a><a href="#gl-X" class="has-entries">X</a>
+      <a href="#gl-Y" class="empty">Y</a><a href="#gl-Z" class="empty">Z</a>
+    </div>
+    <p class="gl-count">72 terms</p>
+
+    <!-- ═══ A ═══ -->
+    <div class="gl-section" id="gl-A">
+      <h2 class="gl-letter">A</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Algorithm</h3>
+        <span class="gl-origin">Mathematics</span>
+        <p class="gl-def">A precise, step-by-step procedure for performing an operation. In cryptography, the algorithm defines how plaintext is transformed into ciphertext and back. Unlike a key, the algorithm itself is usually public — security depends on the key, not the secrecy of the method (<em>Kerckhoffs's Principle</em>).</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Asymmetric Encryption</h3>
+        <span class="gl-origin">Modern Cryptography · 1976</span>
+        <p class="gl-def">A system using two mathematically linked keys: a <em>public key</em> for encryption and a <em>private key</em> for decryption. Anyone can encrypt a message to you, but only you can decrypt it. RSA (1977) and Diffie-Hellman (1976) are the foundational asymmetric systems.</p>
+        <span class="gl-see">See also: <a href="#gl-P">Public Key</a>, <a href="#gl-K">Key Pair</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Avalanche Effect</h3>
+        <span class="gl-origin">Claude Shannon · 1949</span>
+        <p class="gl-def">The property where a small change in the input (flipping one bit of plaintext or key) causes a large, unpredictable change in the output. Good ciphers exhibit strong avalanche: changing one bit should flip roughly half the output bits. AES achieves full avalanche within 2 rounds.</p>
+      </div>
+    </div>
+
+    <!-- ═══ B ═══ -->
+    <div class="gl-section" id="gl-B">
+      <h2 class="gl-letter">B</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Block Cipher</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">A cipher that operates on fixed-size groups (blocks) of bits. AES uses 128-bit blocks. The same plaintext block always produces the same ciphertext block under the same key — unless a <em>mode of operation</em> like CBC or GCM is used to introduce variation.</p>
+        <span class="gl-see">See also: <a href="#gl-S">Stream Cipher</a>, <a href="#gl-M">Mode of Operation</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Brute Force Attack</h3>
+        <span class="gl-origin">Cryptanalysis</span>
+        <p class="gl-def">Trying every possible key until the correct one is found. The time required grows exponentially with key length: a 56-bit key (DES) requires at most 2⁵⁶ attempts (~72 quadrillion); a 256-bit key (AES-256) requires 2²⁵⁶ — more than the atoms in the observable universe.</p>
+      </div>
+    </div>
+
+    <!-- ═══ C ═══ -->
+    <div class="gl-section" id="gl-C">
+      <h2 class="gl-letter">C</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Cipher</h3>
+        <span class="gl-origin">Arabic: sifr (zero) · Latin: cifra</span>
+        <p class="gl-def">An algorithm for performing encryption or decryption — a system of rules for transforming readable text (plaintext) into an unreadable form (ciphertext) and back. Differs from a <em>code</em>, which replaces entire words or phrases rather than individual letters.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Ciphertext</h3>
+        <span class="gl-origin">Core Concept</span>
+        <p class="gl-def">The encrypted output produced by a cipher. Without the correct key, ciphertext should be indistinguishable from random noise. The goal of cryptanalysis is to recover the plaintext from the ciphertext without knowledge of the key.</p>
+        <span class="gl-see">See also: <a href="#gl-P">Plaintext</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Confusion</h3>
+        <span class="gl-origin">Claude Shannon · 1949</span>
+        <p class="gl-def">The property that makes the relationship between the key and ciphertext as complex as possible. Each bit of ciphertext should depend on many bits of the key. Substitution operations (S-boxes in AES) provide confusion. Paired with <em>diffusion</em>, it forms the foundation of modern cipher design.</p>
+        <span class="gl-see">See also: <a href="#gl-D">Diffusion</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Crib</h3>
+        <span class="gl-origin">Bletchley Park · WWII</span>
+        <p class="gl-def">A known or guessed piece of plaintext used to help break a cipher. At Bletchley Park, weather report formats ("WETTER") and standard military phrases ("HEIL HITLER") served as cribs against Enigma. Modern equivalent: <em>known-plaintext attack</em>.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Cryptanalysis</h3>
+        <span class="gl-origin">Greek: kryptós (hidden) + analysis</span>
+        <p class="gl-def">The study of breaking ciphers — recovering plaintext or keys without authorized access. Techniques range from frequency analysis (850 AD) to differential cryptanalysis (1990) to side-channel attacks. The discipline that keeps cryptography honest.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Cryptography</h3>
+        <span class="gl-origin">Greek: kryptós (hidden) + graphein (to write)</span>
+        <p class="gl-def">The practice and study of techniques for securing communication in the presence of adversaries. Encompasses encryption, authentication, integrity verification, and non-repudiation. <em>Cryptology</em> is the umbrella field covering both cryptography and cryptanalysis.</p>
+      </div>
+    </div>
+
+    <!-- ═══ D ═══ -->
+    <div class="gl-section" id="gl-D">
+      <h2 class="gl-letter">D</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Decryption</h3>
+        <span class="gl-origin">Core Concept</span>
+        <p class="gl-def">The reverse of encryption: transforming ciphertext back into readable plaintext using the correct key. In symmetric ciphers, the same key encrypts and decrypts. In asymmetric ciphers, the private key decrypts what the public key encrypted.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Diffusion</h3>
+        <span class="gl-origin">Claude Shannon · 1949</span>
+        <p class="gl-def">The property that spreads the influence of each plaintext bit across many ciphertext bits. Changing one letter of input should change many letters of output. Transposition and mixing operations (MixColumns in AES) provide diffusion. Paired with <em>confusion</em>, the two concepts underpin all modern encryption.</p>
+        <span class="gl-see">See also: <a href="#gl-C">Confusion</a>, <a href="#gl-A">Avalanche Effect</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Digraph</h3>
+        <span class="gl-origin">Linguistics / Cryptography</span>
+        <p class="gl-def">A pair of letters treated as a single unit. The Playfair cipher encrypts digraphs rather than individual letters, which disrupts single-letter frequency analysis. Common English digraphs: TH, HE, IN, ER, AN.</p>
+      </div>
+    </div>
+
+    <!-- ═══ E ═══ -->
+    <div class="gl-section" id="gl-E">
+      <h2 class="gl-letter">E</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Encryption</h3>
+        <span class="gl-origin">Core Concept</span>
+        <p class="gl-def">The process of converting plaintext into ciphertext using a cipher and a key. The result is unintelligible without the corresponding decryption key. Encryption protects <em>confidentiality</em> — one of the three pillars of information security (CIA triad).</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Entropy</h3>
+        <span class="gl-origin">Information Theory · Claude Shannon · 1948</span>
+        <p class="gl-def">A measure of randomness or uncertainty in a system. In cryptography, higher entropy means more unpredictability. A key with n bits of entropy has 2ⁿ equally likely values. A strong 256-bit key has 256 bits of entropy; a password like "password123" has far fewer, regardless of length.</p>
+      </div>
+    </div>
+
+    <!-- ═══ F ═══ -->
+    <div class="gl-section" id="gl-F">
+      <h2 class="gl-letter">F</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Fractionation</h3>
+        <span class="gl-origin">19th Century · Delastelle</span>
+        <p class="gl-def">A technique that breaks each plaintext letter into multiple components (e.g., coordinates on a grid), manipulates the components separately, then recombines them. Used in Bifid, Trifid, and ADFGVX ciphers. The ancestor of modern bit-level diffusion.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Frequency Analysis</h3>
+        <span class="gl-origin">Al-Kindi · Baghdad · ~850 AD</span>
+        <p class="gl-def">The study of letter (or symbol) frequency in ciphertext. In English, E appears ~12.7% of the time, T ~9.1%, A ~8.2%. If a cipher preserves these frequencies — as all monoalphabetic substitutions do — counting letter occurrences reveals the key. The first systematic cryptanalysis technique ever described.</p>
+      </div>
+    </div>
+
+    <!-- ═══ H ═══ -->
+    <div class="gl-section" id="gl-H">
+      <h2 class="gl-letter">H</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Hash Function</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">A one-way function that maps input of any size to a fixed-size output (digest). Cryptographic hash functions must be: (1) preimage-resistant (can't reverse), (2) collision-resistant (can't find two inputs with the same hash), (3) avalanche-exhibiting (small input change → completely different hash). SHA-256 produces a 256-bit digest.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Homophonic Substitution</h3>
+        <span class="gl-origin">15th–16th Century</span>
+        <p class="gl-def">A substitution cipher where each plaintext letter can map to multiple different ciphertext symbols, roughly proportional to the letter's frequency. E might map to 13 different symbols, Z to 1. This flattens frequency distributions, making frequency analysis much harder — but not impossible.</p>
+      </div>
+    </div>
+
+    <!-- ═══ I ═══ -->
+    <div class="gl-section" id="gl-I">
+      <h2 class="gl-letter">I</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Index of Coincidence (IC)</h3>
+        <span class="gl-origin">William Friedman · 1922</span>
+        <p class="gl-def">The probability that two randomly chosen letters from a text are the same. English text has IC ≈ 0.0667; random text ≈ 0.0385. Used to estimate whether a cipher is monoalphabetic or polyalphabetic, and to determine the key length in Vigenère-type ciphers.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Initialization Vector (IV)</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">A random or pseudo-random value used to ensure that encrypting the same plaintext with the same key produces different ciphertext each time. Required by block cipher modes like CBC and GCM. The IV is not secret but must not be reused with the same key.</p>
+      </div>
+    </div>
+
+    <!-- ═══ K ═══ -->
+    <div class="gl-section" id="gl-K">
+      <h2 class="gl-letter">K</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Kasiski Examination</h3>
+        <span class="gl-origin">Friedrich Kasiski · 1863</span>
+        <p class="gl-def">A technique for determining the key length of a Vigenère cipher. Find repeated sequences in the ciphertext, measure the distances between them, and compute the GCD of those distances. The GCD is likely the key length (or a multiple). Once you know the key length, each column becomes a simple Caesar cipher.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Kerckhoffs's Principle</h3>
+        <span class="gl-origin">Auguste Kerckhoffs · 1883</span>
+        <p class="gl-def">"A cryptosystem should be secure even if everything about the system, except the key, is public knowledge." The opposite of <em>security through obscurity</em>. Modern corollary: AES, RSA, and SHA are all published algorithms — their security relies entirely on the secrecy and strength of the keys.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Key</h3>
+        <span class="gl-origin">Core Concept</span>
+        <p class="gl-def">The secret value that parameterizes a cipher. The same algorithm with different keys produces different ciphertexts from the same plaintext. Key length determines the brute-force difficulty: doubling the key length squares the search space. A 128-bit key has 2¹²⁸ possible values.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Key Pair</h3>
+        <span class="gl-origin">Asymmetric Cryptography · 1976</span>
+        <p class="gl-def">A matched set of public key and private key in an asymmetric cryptosystem. The public key is shared openly; the private key is kept secret. Data encrypted with one can only be decrypted with the other. Used for encryption (RSA), digital signatures (ECDSA), and key exchange (DH).</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Keyspace</h3>
+        <span class="gl-origin">Cryptanalysis</span>
+        <p class="gl-def">The set of all possible keys for a given cipher. Caesar cipher: 25 keys. Monoalphabetic substitution: 26! ≈ 4×10²⁶ keys. AES-256: 2²⁵⁶ keys. A large keyspace is necessary but not sufficient for security — frequency analysis breaks monoalphabetic despite its enormous keyspace.</p>
+      </div>
+    </div>
+
+    <!-- ═══ M ═══ -->
+    <div class="gl-section" id="gl-M">
+      <h2 class="gl-letter">M</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Mode of Operation</h3>
+        <span class="gl-origin">Modern Block Ciphers</span>
+        <p class="gl-def">A method for applying a block cipher to messages longer than one block. ECB (Electronic Codebook) encrypts each block independently — insecure because identical blocks produce identical ciphertext. CBC (Cipher Block Chaining) XORs each block with the previous ciphertext block. GCM provides both encryption and authentication.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Monoalphabetic Cipher</h3>
+        <span class="gl-origin">Ancient</span>
+        <p class="gl-def">A substitution cipher using a single fixed alphabet mapping. Each plaintext letter always maps to the same ciphertext letter. Caesar, Atbash, and keyword substitution are all monoalphabetic. Vulnerable to frequency analysis because letter frequencies are preserved exactly.</p>
+        <span class="gl-see">See also: <a href="#gl-P">Polyalphabetic Cipher</a></span>
+      </div>
+    </div>
+
+    <!-- ═══ N ═══ -->
+    <div class="gl-section" id="gl-N">
+      <h2 class="gl-letter">N</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Nonce</h3>
+        <span class="gl-origin">Number used once</span>
+        <p class="gl-def">A value that must never repeat in a given context. Similar to an IV but with a stricter uniqueness requirement. In AES-GCM, reusing a nonce with the same key completely breaks authentication and can leak plaintext via XOR of ciphertext streams.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Nomenclator</h3>
+        <span class="gl-origin">Renaissance · 15th–18th Century</span>
+        <p class="gl-def">A hybrid system combining a simple substitution alphabet with a codebook of common words and names. Used extensively in diplomatic correspondence for centuries. More secure than pure substitution but still vulnerable to frequency analysis of the substitution portion.</p>
+      </div>
+    </div>
+
+    <!-- ═══ O ═══ -->
+    <div class="gl-section" id="gl-O">
+      <h2 class="gl-letter">O</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">One-Time Pad (OTP)</h3>
+        <span class="gl-origin">Gilbert Vernam · 1917 / Claude Shannon · 1949</span>
+        <p class="gl-def">The only cipher proven to be unbreakable — if the key is truly random, at least as long as the message, used only once, and kept secret. Shannon proved this mathematically in 1949. Impractical for most uses because the key distribution problem is equivalent to the message distribution problem.</p>
+      </div>
+    </div>
+
+    <!-- ═══ P ═══ -->
+    <div class="gl-section" id="gl-P">
+      <h2 class="gl-letter">P</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Plaintext</h3>
+        <span class="gl-origin">Core Concept</span>
+        <p class="gl-def">The original, readable message before encryption. Denoted P or M in formulas. The goal of encryption is to protect plaintext from unauthorized readers. The goal of cryptanalysis is to recover it.</p>
+        <span class="gl-see">See also: <a href="#gl-C">Ciphertext</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Polyalphabetic Cipher</h3>
+        <span class="gl-origin">Leon Battista Alberti · 1467</span>
+        <p class="gl-def">A cipher that uses multiple substitution alphabets, switching between them according to a key. The Vigenère cipher is the classic example: each key letter selects a different Caesar shift. This disrupts single-letter frequency analysis, but patterns at the key-length interval can still be detected (Kasiski/Friedman).</p>
+        <span class="gl-see">See also: <a href="#gl-M">Monoalphabetic Cipher</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Polybius Square</h3>
+        <span class="gl-origin">Polybius · ~200 BC</span>
+        <p class="gl-def">A 5×5 grid containing 25 letters (I and J share a cell) used to convert letters into two-digit coordinates. The foundation of many fractionation ciphers (Bifid, Trifid, ADFGX, Nihilist) where coordinates are manipulated separately before recombination.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Public Key</h3>
+        <span class="gl-origin">Diffie-Hellman · 1976</span>
+        <p class="gl-def">The freely shared half of an asymmetric key pair. Anyone can use your public key to encrypt a message to you or to verify your digital signature. The mathematical relationship between public and private keys must be computationally infeasible to reverse (factoring for RSA, discrete log for DH/ECDH).</p>
+      </div>
+    </div>
+
+    <!-- ═══ R ═══ -->
+    <div class="gl-section" id="gl-R">
+      <h2 class="gl-letter">R</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Rotor</h3>
+        <span class="gl-origin">Enigma Machine · 1920s</span>
+        <p class="gl-def">A wired disk that performs a substitution cipher by routing electrical signals through scrambled connections. Multiple rotors in series create a polyalphabetic cipher. The rotors step after each keypress, changing the substitution — giving Enigma ~17,576 initial rotor positions per rotor order.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Round</h3>
+        <span class="gl-origin">Modern Block Ciphers</span>
+        <p class="gl-def">One complete iteration of a cipher's internal transformation. AES uses 10, 12, or 14 rounds depending on key size. Each round applies the same sequence of operations (SubBytes, ShiftRows, MixColumns, AddRoundKey). More rounds = more security, more computation.</p>
+      </div>
+    </div>
+
+    <!-- ═══ S ═══ -->
+    <div class="gl-section" id="gl-S">
+      <h2 class="gl-letter">S</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">S-box (Substitution Box)</h3>
+        <span class="gl-origin">Modern Block Ciphers</span>
+        <p class="gl-def">A lookup table that performs nonlinear substitution in block ciphers. In AES, each byte of state is replaced via a 256-entry S-box derived from finite field inversion. The S-box provides <em>confusion</em> — the nonlinearity that makes the cipher resistant to linear and differential cryptanalysis.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Steganography</h3>
+        <span class="gl-origin">Greek: steganos (covered) + graphein (to write)</span>
+        <p class="gl-def">Hiding the existence of a message, rather than hiding its meaning. Invisible ink, microdots, messages hidden in image pixels. Complementary to cryptography: steganography conceals the fact that communication is happening; cryptography protects the content if it's discovered.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Stream Cipher</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">A cipher that encrypts one bit (or byte) at a time by XORing plaintext with a pseudorandom keystream generated from a key and nonce. Faster than block ciphers for streaming data. ChaCha20 is the most widely deployed modern stream cipher (used in TLS, WireGuard).</p>
+        <span class="gl-see">See also: <a href="#gl-B">Block Cipher</a></span>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Substitution Cipher</h3>
+        <span class="gl-origin">Ancient</span>
+        <p class="gl-def">Any cipher that replaces each element of the plaintext with another element. Monoalphabetic substitution uses one mapping; polyalphabetic uses multiple. Homophonic maps each letter to several possible symbols. The oldest and most intuitive class of ciphers.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Symmetric Encryption</h3>
+        <span class="gl-origin">All classical ciphers · Modern: AES</span>
+        <p class="gl-def">A system where the same key is used for both encryption and decryption. All classical ciphers are symmetric. Modern examples: AES, ChaCha20. The key must be shared securely between parties — the fundamental <em>key distribution problem</em> that asymmetric cryptography was invented to solve.</p>
+      </div>
+    </div>
+
+    <!-- ═══ T ═══ -->
+    <div class="gl-section" id="gl-T">
+      <h2 class="gl-letter">T</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Tabula Recta</h3>
+        <span class="gl-origin">Johannes Trithemius · 1508</span>
+        <p class="gl-def">A 26×26 grid where each row is the alphabet shifted by one position. The foundational tool for Vigenère-type ciphers: find the plaintext letter's column, the key letter's row, and the intersection is the ciphertext letter. Also called a <em>Vigenère square</em>.</p>
+      </div>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Transposition Cipher</h3>
+        <span class="gl-origin">Ancient / Military</span>
+        <p class="gl-def">A cipher that rearranges the positions of plaintext characters without changing them. Rail Fence, Columnar, and Route ciphers are all transposition methods. Letter frequencies are completely preserved (unlike substitution), so frequency analysis is useless — but anagramming and pattern analysis can break them.</p>
+      </div>
+    </div>
+
+    <!-- ═══ V ═══ -->
+    <div class="gl-section" id="gl-V">
+      <h2 class="gl-letter">V</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">Vigenère Cipher</h3>
+        <span class="gl-origin">Giovan Battista Bellaso · 1553 (misattributed to Vigenère)</span>
+        <p class="gl-def">A polyalphabetic substitution cipher using a repeating keyword. Each key letter selects a different Caesar shift. Called <em>"le chiffre indéchiffrable"</em> for 300 years until Babbage (~1854) and Kasiski (1863) independently broke it by exploiting the repeating key pattern.</p>
+      </div>
+    </div>
+
+    <!-- ═══ X ═══ -->
+    <div class="gl-section" id="gl-X">
+      <h2 class="gl-letter">X</h2>
+
+      <div class="gl-term">
+        <h3 class="gl-word">XOR (Exclusive OR)</h3>
+        <span class="gl-origin">Boolean Logic / Cryptography</span>
+        <p class="gl-def">A binary operation: 0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0. The workhorse of modern cryptography because it's perfectly balanced (output is equally likely 0 or 1), self-inverse (A⊕B⊕B=A), and extremely fast in hardware. The One-Time Pad and all stream ciphers use XOR as their core operation.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License.</p></div>
+    <div><div class="footer-col-title">Explore</div><ul class="footer-links">
+      <li><a href="halls/ancient.html">Hall I: Ancient</a></li>
+      <li><a href="halls/substitution.html">Hall II: Substitution</a></li>
+      <li><a href="halls/polyalphabetic.html">Hall III: Polyalphabetic</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+    </ul></div>
+    <div><div class="footer-col-title">Resources</div><ul class="footer-links">
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="museum-map.html">Museum Map</a></li>
+      <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="modern.html">Modern Crypto</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">72 Terms Defined</span></div>
+</footer>
+
+</body>
+</html>

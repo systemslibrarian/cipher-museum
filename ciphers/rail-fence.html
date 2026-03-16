@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -73,7 +74,44 @@ H . . . O . . . L
 . E . L . W . R . D
 . . L . . . O . .
 
-Read rows: HOL + ELWRD + LO = HOLELWRDLO</pre><p>The key is simply the number of rails. With only a handful of possible values, any interceptor can try all possibilities in seconds.</p></div>
+Read rows: HOL + ELWRD + LO = HOLELWRDLO</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 460 160" style="max-width:460px;width:100%;height:auto;" aria-label="Rail fence zigzag pattern with 3 rails">
+          <style>
+            .rf-rail{stroke:#3a3a4a;stroke-width:1;stroke-dasharray:3,4}
+            .rf-dot{fill:#d4af37;r:12}
+            .rf-line{stroke:#c8b273;stroke-width:1.5;fill:none;opacity:.5}
+            .rf-char{font-family:var(--fd,'Cinzel',serif);font-size:13px;fill:#1a1a2e;text-anchor:middle;dominant-baseline:central;font-weight:700}
+            .rf-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:end}
+          </style>
+          <!-- Rail lines -->
+          <line class="rf-rail" x1="30" y1="30" x2="440" y2="30"/>
+          <line class="rf-rail" x1="30" y1="75" x2="440" y2="75"/>
+          <line class="rf-rail" x1="30" y1="120" x2="440" y2="120"/>
+          <!-- Rail labels -->
+          <text class="rf-lbl" x="25" y="34">Rail 1</text>
+          <text class="rf-lbl" x="25" y="79">Rail 2</text>
+          <text class="rf-lbl" x="25" y="124">Rail 3</text>
+          <!-- Zigzag connections -->
+          <polyline class="rf-line" points="50,30 90,75 130,120 170,75 210,30 250,75 290,120 330,75 370,30 410,75"/>
+          <!-- Letter circles - Rail 1: H O L -->
+          <circle class="rf-dot" cx="50" cy="30"/><text class="rf-char" x="50" y="30">H</text>
+          <circle class="rf-dot" cx="210" cy="30"/><text class="rf-char" x="210" y="30">O</text>
+          <circle class="rf-dot" cx="370" cy="30"/><text class="rf-char" x="370" y="30">L</text>
+          <!-- Rail 2: E L W R D -->
+          <circle class="rf-dot" cx="90" cy="75"/><text class="rf-char" x="90" y="75">E</text>
+          <circle class="rf-dot" cx="170" cy="75"/><text class="rf-char" x="170" y="75">L</text>
+          <circle class="rf-dot" cx="250" cy="75"/><text class="rf-char" x="250" y="75">W</text>
+          <circle class="rf-dot" cx="330" cy="75"/><text class="rf-char" x="330" y="75">R</text>
+          <circle class="rf-dot" cx="410" cy="75"/><text class="rf-char" x="410" y="75">D</text>
+          <!-- Rail 3: L O -->
+          <circle class="rf-dot" cx="130" cy="120"/><text class="rf-char" x="130" y="120">L</text>
+          <circle class="rf-dot" cx="290" cy="120"/><text class="rf-char" x="290" y="120">O</text>
+          <!-- Reading order indicators -->
+          <text style="font-family:var(--fm,'Cormorant Garamond',serif);font-size:9px;fill:#d4af37;text-anchor:start" x="50" y="150">Read: H-O-L · E-L-W-R-D · L-O → HOLELWRDLO</text>
+        </svg>
+        <p class="diagram-caption">Rail Fence with 3 rails: letters zigzag diagonally, then each rail is read left-to-right</p>
+      </div><p>The key is simply the number of rails. With only a handful of possible values, any interceptor can try all possibilities in seconds.</p></div>
     </div>
 
     <div class="panel">
@@ -142,6 +180,7 @@ Read rows: HOL + ELWRD + LO = HOLELWRDLO</pre><p>The key is simply the number of
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

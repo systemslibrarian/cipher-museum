@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -75,7 +76,76 @@
 4   Q  R  S  T  U
 5   V  W  X  Y  Z
 
-HELLO = 23 15 31 31 34</pre><p>The original grid had no fixed key — the alphabet was simply written in order. Later variants used keyword-scrambled grids for security.</p></div>
+HELLO = 23 15 31 31 34</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 320 320" style="max-width:320px;width:100%;height:auto;" aria-label="Polybius square 5 by 5 grid">
+          <style>
+            .py-hdr{font-family:var(--fd,'Cinzel',serif);font-size:14px;fill:#d4af37;text-anchor:middle;dominant-baseline:central;font-weight:700}
+            .py-cell{font-family:var(--fd,'Cinzel',serif);font-size:14px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
+            .py-grid{stroke:#3a3a4a;stroke-width:1}
+            .py-hi{fill:#d4af37;fill-opacity:.15}
+          </style>
+          <!-- Grid lines -->
+          <rect x="50" y="50" width="250" height="250" fill="none" class="py-grid"/>
+          <line class="py-grid" x1="100" y1="50" x2="100" y2="300"/>
+          <line class="py-grid" x1="150" y1="50" x2="150" y2="300"/>
+          <line class="py-grid" x1="200" y1="50" x2="200" y2="300"/>
+          <line class="py-grid" x1="250" y1="50" x2="250" y2="300"/>
+          <line class="py-grid" x1="50" y1="100" x2="300" y2="100"/>
+          <line class="py-grid" x1="50" y1="150" x2="300" y2="150"/>
+          <line class="py-grid" x1="50" y1="200" x2="300" y2="200"/>
+          <line class="py-grid" x1="50" y1="250" x2="300" y2="250"/>
+          <!-- Column headers -->
+          <text class="py-hdr" x="75" y="35">1</text>
+          <text class="py-hdr" x="125" y="35">2</text>
+          <text class="py-hdr" x="175" y="35">3</text>
+          <text class="py-hdr" x="225" y="35">4</text>
+          <text class="py-hdr" x="275" y="35">5</text>
+          <!-- Row headers -->
+          <text class="py-hdr" x="35" y="75">1</text>
+          <text class="py-hdr" x="35" y="125">2</text>
+          <text class="py-hdr" x="35" y="175">3</text>
+          <text class="py-hdr" x="35" y="225">4</text>
+          <text class="py-hdr" x="35" y="275">5</text>
+          <!-- Highlight H(2,3) E(1,5) L(3,1) O(3,4) -->
+          <rect class="py-hi" x="100" y="50" width="50" height="50"/><!-- E at row1,col5 -->
+          <rect class="py-hi" x="250" y="50" width="50" height="50"/>
+          <rect class="py-hi" x="100" y="100" width="50" height="50"/><!-- H at row2,col3 -->
+          <rect class="py-hi" x="50" y="150" width="50" height="50"/><!-- L at row3,col1 -->
+          <rect class="py-hi" x="150" y="150" width="50" height="50"/><!-- O at row3,col4 -->
+          <!-- Row 1 -->
+          <text class="py-cell" x="75" y="75">A</text>
+          <text class="py-cell" x="125" y="75">B</text>
+          <text class="py-cell" x="175" y="75">C</text>
+          <text class="py-cell" x="225" y="75">D</text>
+          <text class="py-cell" x="275" y="75" style="fill:#d4af37">E</text>
+          <!-- Row 2 -->
+          <text class="py-cell" x="75" y="125">F</text>
+          <text class="py-cell" x="125" y="125">G</text>
+          <text class="py-cell" x="175" y="125" style="fill:#d4af37">H</text>
+          <text class="py-cell" x="225" y="125">I/J</text>
+          <text class="py-cell" x="275" y="125">K</text>
+          <!-- Row 3 -->
+          <text class="py-cell" x="75" y="175" style="fill:#d4af37">L</text>
+          <text class="py-cell" x="125" y="175">M</text>
+          <text class="py-cell" x="175" y="175">N</text>
+          <text class="py-cell" x="225" y="175" style="fill:#d4af37">O</text>
+          <text class="py-cell" x="275" y="175">P</text>
+          <!-- Row 4 -->
+          <text class="py-cell" x="75" y="225">Q</text>
+          <text class="py-cell" x="125" y="225">R</text>
+          <text class="py-cell" x="175" y="225">S</text>
+          <text class="py-cell" x="225" y="225">T</text>
+          <text class="py-cell" x="275" y="225">U</text>
+          <!-- Row 5 -->
+          <text class="py-cell" x="75" y="275">V</text>
+          <text class="py-cell" x="125" y="275">W</text>
+          <text class="py-cell" x="175" y="275">X</text>
+          <text class="py-cell" x="225" y="275">Y</text>
+          <text class="py-cell" x="275" y="275">Z</text>
+        </svg>
+        <p class="diagram-caption">Polybius square: each letter becomes a (row, column) coordinate pair — H = (2,3), E = (1,5)</p>
+      </div><p>The original grid had no fixed key — the alphabet was simply written in order. Later variants used keyword-scrambled grids for security.</p></div>
     </div>
 
     <div class="panel">
@@ -144,6 +214,7 @@ HELLO = 23 15 31 31 34</pre><p>The original grid had no fixed key — the alphab
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -73,7 +74,67 @@ Rows:    1  0  2  2  3
 Cols:    3  4  1  1  4
 Combined: 1 0 2 2 3 | 3 4 1 1 4
 Pairs: (1,0)(2,2)(3,3)(4,1)(1,4)
-Cipher: FNSZO</pre></div>
+Cipher: FNSZO</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 460 210" style="max-width:460px;width:100%;height:auto;" aria-label="Bifid cipher fractionation diagram">
+          <style>
+            .bf-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:start}
+            .bf-val{font-family:'JetBrains Mono',var(--fc,monospace);font-size:13px;text-anchor:middle;dominant-baseline:central}
+            .bf-plain{fill:#e8d5a3}
+            .bf-row{fill:#6fa3ef}
+            .bf-col{fill:#ef6f6f}
+            .bf-res{fill:#d4af37;font-weight:700}
+            .bf-box{fill:none;stroke:#3a3a4a;stroke-width:1;rx:3}
+            .bf-step{font-family:var(--fd,'Cinzel',serif);font-size:11px;fill:#d4af37;text-anchor:start}
+            .bf-arr{stroke:#c8b273;stroke-width:1;marker-end:url(#bf-tri)}
+          </style>
+          <defs><marker id="bf-tri" viewBox="0 0 6 4" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M0,0 L6,2 L0,4Z" fill="#c8b273"/></marker></defs>
+          <!-- Step 1: Letters -->
+          <text class="bf-step" x="10" y="20">① Letters:</text>
+          <text class="bf-val bf-plain" x="120" y="20">H</text>
+          <text class="bf-val bf-plain" x="160" y="20">E</text>
+          <text class="bf-val bf-plain" x="200" y="20">L</text>
+          <text class="bf-val bf-plain" x="240" y="20">L</text>
+          <text class="bf-val bf-plain" x="280" y="20">O</text>
+          <!-- Step 2: Coordinates -->
+          <text class="bf-step" x="10" y="55">② Coords:</text>
+          <text class="bf-val" x="120" y="48" style="fill:#888;font-size:10px">(1,3)</text>
+          <text class="bf-val" x="160" y="48" style="fill:#888;font-size:10px">(0,4)</text>
+          <text class="bf-val" x="200" y="48" style="fill:#888;font-size:10px">(2,1)</text>
+          <text class="bf-val" x="240" y="48" style="fill:#888;font-size:10px">(2,1)</text>
+          <text class="bf-val" x="280" y="48" style="fill:#888;font-size:10px">(3,4)</text>
+          <!-- Step 3: Separate rows and cols -->
+          <text class="bf-step" x="10" y="85">③ Rows:</text>
+          <rect class="bf-box" x="100" y="72" width="30" height="22" style="stroke:#6fa3ef;stroke-opacity:.5"/><text class="bf-val bf-row" x="115" y="84">1</text>
+          <rect class="bf-box" x="135" y="72" width="30" height="22" style="stroke:#6fa3ef;stroke-opacity:.5"/><text class="bf-val bf-row" x="150" y="84">0</text>
+          <rect class="bf-box" x="170" y="72" width="30" height="22" style="stroke:#6fa3ef;stroke-opacity:.5"/><text class="bf-val bf-row" x="185" y="84">2</text>
+          <rect class="bf-box" x="205" y="72" width="30" height="22" style="stroke:#6fa3ef;stroke-opacity:.5"/><text class="bf-val bf-row" x="220" y="84">2</text>
+          <rect class="bf-box" x="240" y="72" width="30" height="22" style="stroke:#6fa3ef;stroke-opacity:.5"/><text class="bf-val bf-row" x="255" y="84">3</text>
+          <text class="bf-step" x="10" y="115">   Cols:</text>
+          <rect class="bf-box" x="100" y="102" width="30" height="22" style="stroke:#ef6f6f;stroke-opacity:.5"/><text class="bf-val bf-col" x="115" y="114">3</text>
+          <rect class="bf-box" x="135" y="102" width="30" height="22" style="stroke:#ef6f6f;stroke-opacity:.5"/><text class="bf-val bf-col" x="150" y="114">4</text>
+          <rect class="bf-box" x="170" y="102" width="30" height="22" style="stroke:#ef6f6f;stroke-opacity:.5"/><text class="bf-val bf-col" x="185" y="114">1</text>
+          <rect class="bf-box" x="205" y="102" width="30" height="22" style="stroke:#ef6f6f;stroke-opacity:.5"/><text class="bf-val bf-col" x="220" y="114">1</text>
+          <rect class="bf-box" x="240" y="102" width="30" height="22" style="stroke:#ef6f6f;stroke-opacity:.5"/><text class="bf-val bf-col" x="255" y="114">4</text>
+          <!-- Step 4: Concatenate & re-pair -->
+          <text class="bf-step" x="10" y="148">④ Join &amp; re-pair:</text>
+          <text class="bf-val bf-row" x="160" y="148">1 0 2 2 3</text>
+          <text class="bf-val" x="220" y="148" style="fill:#888">│</text>
+          <text class="bf-val bf-col" x="280" y="148">3 4 1 1 4</text>
+          <!-- Arrow -->
+          <line class="bf-arr" x1="220" y1="155" x2="220" y2="170"/>
+          <!-- Step 5: New pairs -->
+          <text class="bf-step" x="10" y="185">⑤ Read pairs:</text>
+          <text class="bf-val" x="130" y="185" style="fill:#888;font-size:11px">(1,0)</text>
+          <text class="bf-val" x="180" y="185" style="fill:#888;font-size:11px">(2,2)</text>
+          <text class="bf-val" x="230" y="185" style="fill:#888;font-size:11px">(3,3)</text>
+          <text class="bf-val" x="280" y="185" style="fill:#888;font-size:11px">(4,1)</text>
+          <text class="bf-val" x="330" y="185" style="fill:#888;font-size:11px">(1,4)</text>
+          <text class="bf-val bf-res" x="395" y="185">→</text>
+          <text class="bf-val bf-res" x="430" y="185" style="font-size:16px">FNSZO</text>
+        </svg>
+        <p class="diagram-caption">Bifid fractionation: coordinates are split, concatenated, and re-paired — mixing row and column information across positions</p>
+      </div></div>
     </div>
 
     <div class="panel">
@@ -142,6 +203,7 @@ Cipher: FNSZO</pre></div>
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

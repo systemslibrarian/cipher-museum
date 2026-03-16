@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -82,7 +83,64 @@ Three requirements for perfect secrecy:
 3. Key must never be reused
 4. Key must be kept secret
 
-Violate any condition → security collapses</pre></div>
+Violate any condition → security collapses</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 400 200" style="max-width:400px;width:100%;height:auto;" aria-label="One-Time Pad modular addition diagram">
+          <style>
+            .otp-hdr{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:middle}
+            .otp-val{font-family:'JetBrains Mono',var(--fc,monospace);font-size:15px;text-anchor:middle;dominant-baseline:central}
+            .otp-plain{fill:#e8d5a3}
+            .otp-key{fill:#6fa3ef}
+            .otp-cipher{fill:#d4af37;font-weight:700}
+            .otp-op{font-family:var(--fd,'Cinzel',serif);font-size:14px;fill:#c8b273;text-anchor:middle;dominant-baseline:central}
+            .otp-box{fill:none;stroke:#3a3a4a;stroke-width:1;rx:4}
+            .otp-plus{fill:#1a1a2e;stroke:#d4af37;stroke-width:1.2;rx:14}
+          </style>
+          <!-- Column headers -->
+          <text class="otp-hdr" x="90" y="17">H</text>
+          <text class="otp-hdr" x="140" y="17">E</text>
+          <text class="otp-hdr" x="190" y="17">L</text>
+          <text class="otp-hdr" x="240" y="17">L</text>
+          <text class="otp-hdr" x="290" y="17">O</text>
+          <!-- Plaintext row -->
+          <text class="otp-hdr" x="30" y="45">Plain</text>
+          <rect class="otp-box" x="65" y="27" width="50" height="30"/><text class="otp-val otp-plain" x="90" y="43">07</text>
+          <rect class="otp-box" x="115" y="27" width="50" height="30"/><text class="otp-val otp-plain" x="140" y="43">04</text>
+          <rect class="otp-box" x="165" y="27" width="50" height="30"/><text class="otp-val otp-plain" x="190" y="43">11</text>
+          <rect class="otp-box" x="215" y="27" width="50" height="30"/><text class="otp-val otp-plain" x="240" y="43">11</text>
+          <rect class="otp-box" x="265" y="27" width="50" height="30"/><text class="otp-val otp-plain" x="290" y="43">14</text>
+          <!-- Plus symbols -->
+          <rect class="otp-plus" x="76" y="62" width="28" height="28"/><text class="otp-op" x="90" y="77">+</text>
+          <rect class="otp-plus" x="126" y="62" width="28" height="28"/><text class="otp-op" x="140" y="77">+</text>
+          <rect class="otp-plus" x="176" y="62" width="28" height="28"/><text class="otp-op" x="190" y="77">+</text>
+          <rect class="otp-plus" x="226" y="62" width="28" height="28"/><text class="otp-op" x="240" y="77">+</text>
+          <rect class="otp-plus" x="276" y="62" width="28" height="28"/><text class="otp-op" x="290" y="77">+</text>
+          <!-- Key row -->
+          <text class="otp-hdr" x="30" y="108">Key</text>
+          <rect class="otp-box" x="65" y="93" width="50" height="30" style="stroke:#6fa3ef;stroke-opacity:.4"/><text class="otp-val otp-key" x="90" y="109">23</text>
+          <rect class="otp-box" x="115" y="93" width="50" height="30" style="stroke:#6fa3ef;stroke-opacity:.4"/><text class="otp-val otp-key" x="140" y="109">12</text>
+          <rect class="otp-box" x="165" y="93" width="50" height="30" style="stroke:#6fa3ef;stroke-opacity:.4"/><text class="otp-val otp-key" x="190" y="109">02</text>
+          <rect class="otp-box" x="215" y="93" width="50" height="30" style="stroke:#6fa3ef;stroke-opacity:.4"/><text class="otp-val otp-key" x="240" y="109">10</text>
+          <rect class="otp-box" x="265" y="93" width="50" height="30" style="stroke:#6fa3ef;stroke-opacity:.4"/><text class="otp-val otp-key" x="290" y="109">11</text>
+          <!-- mod 26 line -->
+          <line x1="65" y1="132" x2="315" y2="132" stroke="#3a3a4a" stroke-width="1" stroke-dasharray="4,3"/>
+          <text class="otp-hdr" x="340" y="136">mod 26</text>
+          <!-- Cipher row -->
+          <text class="otp-hdr" x="30" y="158">Cipher</text>
+          <rect class="otp-box" x="65" y="143" width="50" height="30" style="stroke:#d4af37;stroke-opacity:.4"/><text class="otp-val otp-cipher" x="90" y="159">04</text>
+          <rect class="otp-box" x="115" y="143" width="50" height="30" style="stroke:#d4af37;stroke-opacity:.4"/><text class="otp-val otp-cipher" x="140" y="159">16</text>
+          <rect class="otp-box" x="165" y="143" width="50" height="30" style="stroke:#d4af37;stroke-opacity:.4"/><text class="otp-val otp-cipher" x="190" y="159">13</text>
+          <rect class="otp-box" x="215" y="143" width="50" height="30" style="stroke:#d4af37;stroke-opacity:.4"/><text class="otp-val otp-cipher" x="240" y="159">21</text>
+          <rect class="otp-box" x="265" y="143" width="50" height="30" style="stroke:#d4af37;stroke-opacity:.4"/><text class="otp-val otp-cipher" x="290" y="159">25</text>
+          <!-- Letter labels -->
+          <text class="otp-hdr" x="90" y="188" style="fill:#d4af37">E</text>
+          <text class="otp-hdr" x="140" y="188" style="fill:#d4af37">Q</text>
+          <text class="otp-hdr" x="190" y="188" style="fill:#d4af37">N</text>
+          <text class="otp-hdr" x="240" y="188" style="fill:#d4af37">V</text>
+          <text class="otp-hdr" x="290" y="188" style="fill:#d4af37">Z</text>
+        </svg>
+        <p class="diagram-caption">One-Time Pad: each letter is added to a random key letter mod 26 — perfectly secret if the key is truly random and never reused</p>
+      </div></div>
     </div>
 
     <div class="panel">
@@ -152,6 +210,7 @@ Violate any condition → security collapses</pre></div>
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

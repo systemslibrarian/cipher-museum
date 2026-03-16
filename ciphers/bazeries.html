@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -77,7 +78,30 @@ Step 2: Build Polybius square, columns in
 Step 3: Encrypt using the square
 
 Step 4: Apply transposition using the same
-        numeric keyword as column order</pre></div>
+        numeric keyword as column order</pre>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 380 180" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bazeries cipher two-layer encryption diagram">
+  <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:3}</style>
+  <!-- Step labels -->
+  <text x="10" y="18" font-size="10" fill="#C9A84C" letter-spacing=".1em">KEYWORD → NUMBER → TWO LAYERS</text>
+  <text x="10" y="40" font-size="10" fill="#706878">ATTAQUE → 1,20,20,1,17,21,5</text>
+  <!-- Layer 1: Polybius -->
+  <rect x="10" y="55" width="170" height="50" fill="rgba(90,200,160,.06)" stroke="rgba(90,200,160,.15)" stroke-width="1" rx="5"/>
+  <text x="20" y="72" font-size="9" fill="#5AC8A0">LAYER 1: SUBSTITUTION</text>
+  <text x="20" y="90" font-size="9" fill="#B8B0A0">Polybius square keyed by word</text>
+  <!-- Layer 2: Transposition -->
+  <rect x="200" y="55" width="170" height="50" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.15)" stroke-width="1" rx="5"/>
+  <text x="210" y="72" font-size="9" fill="#C9A84C">LAYER 2: TRANSPOSITION</text>
+  <text x="210" y="90" font-size="9" fill="#B8B0A0">Column order from number key</text>
+  <!-- Arrow -->
+  <text x="185" y="85" font-size="16" fill="#7a6530">→</text>
+  <!-- Shared key -->
+  <rect x="10" y="120" width="360" height="45" fill="rgba(201,168,76,.04)" stroke="rgba(201,168,76,.1)" stroke-width=".5" rx="5"/>
+  <text x="20" y="140" font-size="9" fill="#C9A84C">★ Same keyword controls BOTH layers</text>
+  <text x="20" y="155" font-size="9" fill="#706878">This creates interdependence — breaking one helps break the other</text>
+</svg>
+<p class="diagram-caption">One keyword drives both substitution and transposition — a strength in theory, but the shared key creates exploitable correlations</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -146,6 +170,7 @@ Step 4: Apply transposition using the same
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

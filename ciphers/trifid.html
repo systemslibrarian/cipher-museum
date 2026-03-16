@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -77,7 +78,50 @@ D=(1,2,1)  E=(1,2,2)  F=(1,2,3)
 HELLO encrypted:
 1. Get L,R,C coordinates for each letter
 2. Write all L values, then R values, then C values
-3. Group into triples, look up in cube</pre></div>
+3. Group into triples, look up in cube</pre>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 380 200" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trifid cipher 3D cube coordinate system">
+  <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:3}</style>
+  <text x="10" y="16" font-size="9" fill="#C9A84C" letter-spacing=".1em">3x3x3 CUBE (3 LAYERS)</text>
+  <g transform="translate(10,24)">
+    <text x="0" y="12" font-size="8" fill="#5AC8A0">Layer 1</text>
+    <rect x="0" y="18" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="4" y="30" font-size="8" fill="#5AC8A0">A</text>
+    <rect x="24" y="18" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="28" y="30" font-size="8" fill="#5AC8A0">B</text>
+    <rect x="48" y="18" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="52" y="30" font-size="8" fill="#5AC8A0">C</text>
+    <rect x="0" y="36" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="4" y="48" font-size="8">D</text>
+    <rect x="24" y="36" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="28" y="48" font-size="8">E</text>
+    <rect x="48" y="36" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="52" y="48" font-size="8">F</text>
+    <rect x="0" y="54" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="4" y="66" font-size="8">G</text>
+    <rect x="24" y="54" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="28" y="66" font-size="8">H</text>
+    <rect x="48" y="54" width="22" height="16" fill="rgba(90,200,160,.1)" stroke="rgba(90,200,160,.2)" stroke-width=".5"/><text x="52" y="66" font-size="8">I</text>
+  </g>
+  <g transform="translate(100,24)">
+    <text x="0" y="12" font-size="8" fill="#5A90C8">Layer 2</text>
+    <rect x="0" y="18" width="22" height="16" fill="rgba(90,144,200,.1)" stroke="rgba(90,144,200,.2)" stroke-width=".5"/><text x="4" y="30" font-size="8">J</text>
+    <rect x="24" y="18" width="22" height="16" fill="rgba(90,144,200,.1)" stroke="rgba(90,144,200,.2)" stroke-width=".5"/><text x="28" y="30" font-size="8">K</text>
+    <rect x="48" y="18" width="22" height="16" fill="rgba(90,144,200,.1)" stroke="rgba(90,144,200,.2)" stroke-width=".5"/><text x="52" y="30" font-size="8">L</text>
+    <text x="0" y="56" font-size="7" fill="#706878">M..R</text>
+  </g>
+  <g transform="translate(190,24)">
+    <text x="0" y="12" font-size="8" fill="#C9A84C">Layer 3</text>
+    <rect x="0" y="18" width="22" height="16" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.2)" stroke-width=".5"/><text x="4" y="30" font-size="8">S</text>
+    <rect x="24" y="18" width="22" height="16" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.2)" stroke-width=".5"/><text x="28" y="30" font-size="8">T</text>
+    <rect x="48" y="18" width="22" height="16" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.2)" stroke-width=".5"/><text x="52" y="30" font-size="8">U</text>
+    <text x="0" y="56" font-size="7" fill="#706878">V..Z+</text>
+  </g>
+  <g transform="translate(10,110)">
+    <text x="0" y="14" font-size="9" fill="#C9A84C">ENCRYPTION PROCESS:</text>
+    <text x="0" y="32" font-size="8" fill="#B8B0A0">H = (1,3,2)  E = (1,2,2)  L = (2,1,3)</text>
+    <text x="0" y="48" font-size="8" fill="#5AC8A0">Layers:  1  1  2  → concatenate</text>
+    <text x="0" y="62" font-size="8" fill="#5A90C8">Rows:    3  2  1  → all three</text>
+    <text x="0" y="76" font-size="8" fill="#C9A84C">Cols:    2  2  3  → streams</text>
+    <text x="200" y="48" font-size="8" fill="#706878">Regroup into triples:</text>
+    <text x="200" y="62" font-size="8" fill="#5AC8A0">(1,1,2)(3,2,1)(2,2,3)</text>
+    <text x="200" y="76" font-size="8" fill="#5AC8A0">→ look up each in cube</text>
+  </g>
+</svg>
+<p class="diagram-caption">Three coordinate streams (layer, row, column) are interleaved — 3D diffusion is stronger than Bifid's 2D</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -146,6 +190,7 @@ HELLO encrypted:
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

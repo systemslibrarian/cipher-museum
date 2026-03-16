@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -68,7 +69,35 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>The Porta cipher uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class='steps' style='margin:1rem 0;'><li class='step'><div class='step-text'>Find the row whose label contains the current key letter</div></li><li class='step'><div class='step-text'>Look up the plaintext letter in that row</div></li><li class='step'><div class='step-text'>The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p></div>
+      <div class="panel-body"><p>The Porta cipher uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class='steps' style='margin:1rem 0;'><li class='step'><div class='step-text'>Find the row whose label contains the current key letter</div></li><li class='step'><div class='step-text'>Look up the plaintext letter in that row</div></li><li class='step'><div class='step-text'>The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 380 190" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Porta cipher 13-row reciprocal tableau">
+  <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:2}</style>
+  <!-- Header -->
+  <text x="10" y="16" font-size="9" fill="#C9A84C" letter-spacing=".1em">13-ROW RECIPROCAL TABLEAU</text>
+  <!-- Column headers -->
+  <text x="52" y="32" font-size="7" fill="#706878">A B C D E F G H I J K L M</text>
+  <text x="52" y="42" font-size="7" fill="#706878">N O P Q R S T U V W X Y Z</text>
+  <!-- Key row labels -->
+  <g font-size="8" fill="#C9A84C">
+    <text x="10" y="60">AB</text><text x="10" y="76">CD</text><text x="10" y="92">EF</text>
+    <text x="10" y="108">GH</text><text x="10" y="124">IJ</text><text x="10" y="140">KL</text>
+  </g>
+  <!-- Sample rows -->
+  <rect x="38" y="50" width="330" height="14" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.12)" stroke-width=".3"/>
+  <text x="42" y="60" font-size="7" fill="#5AC8A0">N O P Q R S T U V W X Y Z</text>
+  <rect x="38" y="66" width="330" height="14" fill="rgba(90,144,200,.06)" stroke="rgba(90,144,200,.12)" stroke-width=".3"/>
+  <text x="42" y="76" font-size="7" fill="#5A90C8">O P Q R S T U V W X Y Z N</text>
+  <rect x="38" y="82" width="330" height="14" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.12)" stroke-width=".3"/>
+  <text x="42" y="92" font-size="7" fill="#5AC8A0">P Q R S T U V W X Y Z N O</text>
+  <text x="42" y="108" font-size="7" fill="#706878">... (13 rows total, paired letters)</text>
+  <!-- Reciprocal note -->
+  <rect x="10" y="150" width="360" height="30" fill="rgba(90,200,160,.06)" stroke="rgba(90,200,160,.15)" stroke-width=".5" rx="5"/>
+  <text x="20" y="164" font-size="9" fill="#5AC8A0">★ Each row maps A↔N, B↔O, etc. — swap is symmetric</text>
+  <text x="20" y="176" font-size="8" fill="#706878">Encrypt(A)=N → Encrypt(N)=A → same operation decrypts!</text>
+</svg>
+<p class="diagram-caption">13 rows for 13 key-letter pairs — symmetric swaps make encryption and decryption identical</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -137,6 +166,7 @@
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>
