@@ -8,8 +8,9 @@
 <link rel="stylesheet" href="../css/museum.css">
 <style>
 .comm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
-.comm-card{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:2rem;transition:all var(--trs)}
+.comm-card{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:2rem;transition:all var(--trs);display:flex;flex-direction:column}
 .comm-card:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
+.comm-card-link{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);text-decoration:none;margin-top:auto;padding-top:.5rem;transition:color var(--tr)}.comm-card-link:hover{color:var(--gold)}
 .comm-tag{display:inline-block;font-family:var(--fm);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .6rem;border-radius:99px;margin-bottom:.75rem}
 .comm-tag.challenge{background:rgba(201,168,76,.15);color:var(--gold)}
 .comm-tag.writeup{background:rgba(100,200,120,.12);color:#7dcea0}
@@ -60,6 +61,7 @@
     <h3 class="comm-title">The Lighthouse Cipher</h3>
     <p class="comm-excerpt">A three-stage challenge combining a Polybius square with columnar transposition, wrapped in a nautical theme. Can you decode the keeper's final log entry?</p>
     <div class="comm-meta">Difficulty: Intermediate · Est. 30 min</div>
+    <a href="../ciphers/polybius.html" class="comm-card-link">Visit Polybius exhibit →</a>
   </article>
 
   <article class="comm-card">
@@ -67,6 +69,7 @@
     <h3 class="comm-title">Breaking the Confederate Vigenère — Step by Step</h3>
     <p class="comm-excerpt">A detailed walkthrough of Kasiski examination applied to a real Confederate cipher message intercepted near Vicksburg in 1863.</p>
     <div class="comm-meta">By a Museum Visitor · Techniques: Kasiski, IC Analysis</div>
+    <a href="../ciphers/confederate-vigenere.html" class="comm-card-link">Visit Confederate Vigenère exhibit →</a>
   </article>
 
   <article class="comm-card">
@@ -74,6 +77,7 @@
     <h3 class="comm-title">The Forgotten Women of Room 40</h3>
     <p class="comm-excerpt">While Bletchley Park's women codebreakers gained recognition, the women who worked in the Admiralty's Room 40 during WWI remain largely unknown.</p>
     <div class="comm-meta">Verified · Sources: National Archives</div>
+    <a href="../halls/machines.html" class="comm-card-link">Visit Machines Hall →</a>
   </article>
 
   <article class="comm-card">
@@ -81,6 +85,7 @@
     <h3 class="comm-title">Enigma Daily Challenge</h3>
     <p class="comm-excerpt">Every day, a new Enigma-encrypted message with authentic rotor and plugboard settings. Your mission: find the day key and decrypt the dispatch.</p>
     <div class="comm-meta">Difficulty: Advanced · Daily Reset</div>
+    <a href="../ciphers/enigma.html" class="comm-card-link">Visit Enigma exhibit →</a>
   </article>
 
   <article class="comm-card">
@@ -88,6 +93,7 @@
     <h3 class="comm-title">Hill Cipher: When Linear Algebra Attacks</h3>
     <p class="comm-excerpt">Matrix inversion mod 26, known-plaintext recovery of the key matrix, and why the Hill cipher's linearity is its fatal flaw.</p>
     <div class="comm-meta">By a Museum Visitor · Techniques: Matrix Algebra</div>
+    <a href="../ciphers/hill.html" class="comm-card-link">Visit Hill cipher exhibit →</a>
   </article>
 
   <article class="comm-card">
@@ -95,6 +101,7 @@
     <h3 class="comm-title">The Uncracked Dorabella Cipher</h3>
     <p class="comm-excerpt">Edward Elgar's 1897 cipher letter to Dora Penny remains unsolved after 125 years — an 87-character mystery in 24 unique symbols.</p>
     <div class="comm-meta">Verified · Status: Unsolved</div>
+    <a href="../ciphers/monoalphabetic.html" class="comm-card-link">Visit Substitution exhibit →</a>
   </article>
 
 </div>

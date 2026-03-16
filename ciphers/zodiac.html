@@ -25,6 +25,18 @@
     .difficulty-rating { color:var(--gold); letter-spacing:.1em; text-transform:uppercase; }
     .difficulty-pct { color:var(--tx3); }
     .difficulty-note { font-size:.88rem; color:var(--tx2); line-height:1.6; }
+    .z-demo-grid{display:grid;grid-template-columns:repeat(17,1fr);gap:2px;margin:1rem 0;font-family:var(--fm)}
+    .z-sym{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);font-size:.7rem;color:var(--tx);cursor:pointer;transition:all .15s;user-select:none;position:relative}
+    .z-sym:hover{border-color:var(--gold);background:var(--gold-glow)}
+    .z-sym.z-selected{background:var(--gold);color:var(--black);border-color:var(--gold);font-weight:700}
+    .z-sym.z-mapped{border-color:var(--green);color:var(--green)}
+    .z-assign{display:flex;gap:.5rem;align-items:center;margin:1rem 0;flex-wrap:wrap}
+    .z-assign-input{width:2.5rem;padding:.4rem;background:var(--s3);border:1px solid var(--gold-b);border-radius:var(--r-sm);color:var(--gold-lt);font-family:var(--fm);font-size:1rem;text-align:center;text-transform:uppercase}
+    .z-assign-input:focus{outline:none;border-color:var(--gold)}
+    .z-plaintext{font-family:var(--fm);font-size:.8rem;line-height:2;color:var(--green);background:var(--s3);border-radius:var(--r);padding:1rem;min-height:3rem;letter-spacing:.12em;word-break:break-all;margin-top:1rem}
+    .z-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;font-family:var(--fm);font-size:.65rem;color:var(--tx3)}
+    .z-freq-bar{display:inline-block;height:6px;background:var(--gold);border-radius:3px;vertical-align:middle;margin-left:.3rem}
+    @media(max-width:600px){.z-demo-grid{grid-template-columns:repeat(10,1fr)}.z-sym{font-size:.6rem}}
   </style>
 </head>
 <body>

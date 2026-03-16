@@ -169,10 +169,15 @@
     var passed = getPassedHalls();
     nextBar.innerHTML = '';
     if(idx === -1){
-      /* Not on a hall page — show dashboard link */
+      /* Not on a hall page — show dashboard link + dismiss button */
       nextBar.innerHTML =
         '<span style="font-family:var(--fm);font-size:.65rem;letter-spacing:.1em;color:var(--tx3)">LEARNING PATH ACTIVE</span>' +
-        '<a href="'+pre+'my-path.html" style="font-family:var(--fd);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none">My Dashboard →</a>';
+        '<div style="display:flex;align-items:center;gap:1rem">' +
+          '<a href="'+pre+'my-path.html" style="font-family:var(--fd);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none">My Dashboard →</a>' +
+          '<button id="lpDismiss" style="background:none;border:1px solid var(--s5);color:var(--tx3);font-family:var(--fm);font-size:.6rem;padding:.3rem .6rem;border-radius:var(--r);cursor:pointer;letter-spacing:.08em" title="Turn off Learning Path">✕ OFF</button>' +
+        '</div>';
+      var dismissBtn = document.getElementById('lpDismiss');
+      if(dismissBtn) dismissBtn.addEventListener('click', function(){ deactivate(); });
       return;
     }
     /* On a hall page */
