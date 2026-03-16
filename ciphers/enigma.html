@@ -176,6 +176,44 @@ But: same letter never encrypts to itself → cribs work</pre>
       </div>
     </div>
 
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📝</span><span class="panel-title">Worked Example</span></div>
+      <div class="panel-body"><pre>Plaintext:  A T T A C K
+Settings:   Rotors I-II-III, Reflector B
+            Ring setting: 01-01-01 (AAA)
+            Plugboard: (A↔M) (T↔G)
+            Start position: A-A-Z
+
+Encrypting the first letter "A":
+1. Plugboard: A → M  (A is swapped with M)
+2. Rotor III:  M → position 12 → maps to J
+3. Rotor II:   J → position 9  → maps to D
+4. Rotor I:    D → position 3  → maps to F
+5. Reflector B: F → maps to S
+6. Rotor I  ←  S → maps to S
+7. Rotor II ←  S → maps to E
+8. Rotor III←  E → maps to P
+9. Plugboard:  P → P  (no swap for P)
+Lamp "P" lights up.
+
+Key behaviour: after each keypress,
+Rotor III advances one position.
+After 26 steps, Rotor II advances.
+The wiring path changes every single keypress
+— the same letter never encrypts the same way twice.</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Related Exhibits</span></div>
+      <div class="panel-body">
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;">
+          <li><a href="lorenz.html" style="color:var(--gold);text-decoration:underline;">Lorenz Cipher</a> — Hitler&rsquo;s strategic teleprinter cipher, broken by Colossus</li>
+          <li><a href="one-time-pad.html" style="color:var(--gold);text-decoration:underline;">One-Time Pad</a> — The only provably unbreakable cipher</li>
+          <li><a href="vigenere.html" style="color:var(--gold);text-decoration:underline;">Vigen&egrave;re Cipher</a> — The polyalphabetic ancestor of rotor machines</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
   <div class="exhibit-side">
     

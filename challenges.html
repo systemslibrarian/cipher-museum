@@ -90,12 +90,12 @@
   </div>
   <span class="page-eyebrow">Test Your Skills</span>
   <h1 class="page-title">Cipher Challenges</h1>
-  <p class="page-tagline">Six encrypted messages. Break them all to prove you're a codebreaker.</p>
+  <p class="page-tagline">Ten encrypted messages across four tiers. Break them all to prove you're a master codebreaker.</p>
 </div>
 
 <section class="section">
   <div class="ch-progress">
-    <span class="ch-progress-label" id="progress-text">0 of 6 solved</span>
+    <span class="ch-progress-label" id="progress-text">0 of 10 solved</span>
     <div class="ch-progress-bar"><div class="ch-progress-fill" id="progress-fill"></div></div>
   </div>
 
@@ -105,9 +105,9 @@
     <h2>🏆 Master Codebreaker</h2>
     <p>You've broken every cipher in the museum. The full message reads:</p>
     <div class="ch-ciphertext" style="margin-top:1.5rem;color:var(--gold);letter-spacing:.12em;font-size:1rem;">
-      THE DIE IS CAST &middot; KNOW THYSELF &middot; SECRETS HIDE IN PLAIN SIGHT &middot; THE KEY IS PATIENCE &middot; TRUST NO SINGLE LOCK &middot; THE BOMBE TURNS
+      THE DIE IS CAST &middot; KNOWLEDGE IS POWER &middot; KNOW THYSELF &middot; SECRETS HIDE IN PLAIN SIGHT &middot; THE KEY IS PATIENCE &middot; TRUST NO SINGLE LOCK &middot; BREAK THE CODE NOW &middot; THE BOMBE TURNS &middot; PATIENCE CONQUERS ALL &middot; FIRST CIPHER THEN KEY
     </div>
-    <p style="margin-top:1rem;">From Caesar to Enigma, every cipher tells the same story: security through obscurity never lasts. Only mathematics endures.</p>
+    <p style="margin-top:1rem;">From Caesar to multi-layered systems, every cipher tells the same story: security through obscurity never lasts. Only mathematics endures.</p>
   </div>
 </section>
 </main>
@@ -148,7 +148,7 @@
 (function() {
   const CHALLENGES = [
     {
-      level: 1, cipher: 'Caesar', difficulty: 'Easy',
+      level: 1, cipher: 'Caesar', difficulty: 'Beginner',
       prompt: 'This message was shifted by a fixed number of positions. Determine the shift and decrypt it.',
       ciphertext: 'WKH GLH LV FDVW',
       answer: 'THE DIE IS CAST',
@@ -159,7 +159,7 @@
       walkthrough: 'Each letter is shifted forward by 3 positions: T→W, H→K, E→H. Shifting back by 3 gives the original Latin quote attributed to Julius Caesar: "THE DIE IS CAST" (Alea iacta est).'
     },
     {
-      level: 2, cipher: 'Atbash', difficulty: 'Easy',
+      level: 2, cipher: 'Atbash', difficulty: 'Beginner',
       prompt: 'This cipher reverses the alphabet: A↔Z, B↔Y, C↔X… Decrypt it.',
       ciphertext: 'PMLD GSBHVOU',
       answer: 'KNOW THYSELF',
@@ -170,7 +170,7 @@
       walkthrough: 'Atbash maps A↔Z, B↔Y, C↔X, etc. P(16th)→K(11th), M(13th)→N(14th), L(12th)→O(15th), D(4th)→W(23rd). The answer is the ancient Greek aphorism "KNOW THYSELF" inscribed at the Temple of Apollo at Delphi.'
     },
     {
-      level: 3, cipher: 'Substitution', difficulty: 'Medium',
+      level: 3, cipher: 'Substitution', difficulty: 'Intermediate',
       prompt: 'A monoalphabetic substitution with keyword CIPHER. Use frequency analysis or the keyword to crack it.',
       ciphertext: 'SHFRHS JPGH PL MDCPL SPIJT',
       answer: 'SECRETS HIDE IN PLAIN SIGHT',
@@ -181,7 +181,7 @@
       walkthrough: 'Keyword CIPHER generates the substitution alphabet: C-I-P-H-E-R-A-B-D-F-G-J-K-L-M-N-O-Q-S-T-U-V-W-X-Y-Z. To decrypt, find each ciphertext letter\'s position in the cipher alphabet and map it to the standard alphabet position.'
     },
     {
-      level: 4, cipher: 'Vigenère', difficulty: 'Medium',
+      level: 4, cipher: 'Vigenère', difficulty: 'Intermediate',
       prompt: 'This message was encrypted with a Vigenère cipher. The key is a common English word related to waiting.',
       ciphertext: 'IAS DGC XH JTIGGTQW',
       answer: 'THE KEY IS PATIENCE',
@@ -192,7 +192,7 @@
       walkthrough: 'The keyword is PATIENCE. Align it with the ciphertext letters (skipping spaces): I-P=T, A-A=H, S-T=E, D-I=K… Vigenère decryption: (ciphertext - key) mod 26 for each letter position.'
     },
     {
-      level: 5, cipher: 'Playfair', difficulty: 'Hard',
+      level: 5, cipher: 'Playfair', difficulty: 'Expert',
       prompt: 'This Playfair-encrypted message uses the keyword MONARCHY. Decrypt the digraph pairs.',
       ciphertext: 'SQBRLG MK RDHAFM FKEE',
       answer: 'TRUST NO SINGLE LOCK',
@@ -203,7 +203,7 @@
       walkthrough: 'Grid: M-O-N-A-R / C-H-Y-B-D / E-F-G-I-K / L-P-Q-S-T / U-V-W-X-Z. To decrypt, reverse the Playfair rules: same row → shift left, same column → shift up, rectangle → swap corners. Process pairs: SQ, BR, LG, MK, RD, HA, FM, FK, EE.'
     },
     {
-      level: 6, cipher: 'Enigma', difficulty: 'Hard',
+      level: 6, cipher: 'Enigma', difficulty: 'Expert',
       prompt: 'Enigma-encrypted with rotors I-II-III at starting position MCK. Type each letter to trace the signal.',
       ciphertext: 'YPR CTYWK DSJWH',
       answer: 'THE BOMBE TURNS',
@@ -214,6 +214,54 @@
       walkthrough: 'Enigma is its own inverse — typing the ciphertext with the same rotor settings (I-II-III at MCK) produces the plaintext. The answer refers to the Bombe, the electromechanical machine Alan Turing designed to crack Enigma at Bletchley Park.'
     }
   ];
+
+  /* ── New challenges (levels 7-10) ── */
+  CHALLENGES.push(
+    {
+      level: 7, cipher: 'ROT13', difficulty: 'Beginner',
+      prompt: 'ROT13 is a special case of Caesar where every letter shifts by exactly 13 positions. Since 13 is half of 26, applying it twice returns the original text.',
+      ciphertext: 'XABJYRQTR VF CBJRE',
+      answer: 'KNOWLEDGE IS POWER',
+      hints: [
+        'Shift every letter back (or forward) by 13 — both directions give the same result.',
+        'X→K, A→N, B→O, J→W, Y→L, R→E…'
+      ],
+      walkthrough: 'ROT13 shifts each letter by 13: X(23)→K(10), A(0)→N(13), B(1)→O(14), J(9)→W(22)… Since 13+13=26, encrypting and decrypting are identical. The answer is Francis Bacon\'s aphorism "KNOWLEDGE IS POWER."'
+    },
+    {
+      level: 8, cipher: 'Columnar Transposition', difficulty: 'Expert',
+      prompt: 'The plaintext was written into rows under the key KEYS, then columns were read out in alphabetical key order. Reverse the process.',
+      ciphertext: 'RTOOBKCNAEEEHDW',
+      answer: 'BREAK THE CODE NOW',
+      hints: [
+        'Key KEYS → 4 columns. Sorted alphabetically: E(col 2), K(col 1), S(col 4), Y(col 3). 15 letters ÷ 4 columns = 4 rows, last column short.',
+        'Distribute ciphertext into columns in key order — E gets 4 letters (RTOO), K gets 4 (BKCN), S gets 3 (AEE), Y gets 4 (EHDW). Write them back into grid positions and read rows.'
+      ],
+      walkthrough: 'Key KEYS sorted = E(2nd), K(1st), S(4th), Y(3rd). Column E: RTOO → col 2. Column K: BKCN → col 1. Column S: AEE → col 4 (3 rows). Column Y: EHDW → col 3. Reading rows: B-R-E-A / K-T-H-E / C-O-D-E / N-O-W → "BREAK THE CODE NOW".'
+    },
+    {
+      level: 9, cipher: 'Multi-Layer', difficulty: 'Master',
+      prompt: 'This message was encrypted with two classical ciphers layered together. One reverses the alphabet, the other shifts it by a single-digit number. Determine both operations and their order.',
+      ciphertext: 'RGNYCTEC ESTQMCPO GVV',
+      answer: 'PATIENCE CONQUERS ALL',
+      hints: [
+        'Two layers: one is Atbash (A↔Z reverse), the other is a Caesar shift (1–9). Try undoing the outer layer first for different shift values.',
+        'Outer layer: Caesar +7. Undo it first (shift back 7): R→K, G→Z, N→G, Y→R… → KZGRVMXV XLMJFVIH ZOO. Then undo Atbash on that result.'
+      ],
+      walkthrough: 'Layer 1 (inner): Atbash reversal. Layer 2 (outer): Caesar shift +7. To decrypt: (1) Shift each letter back by 7 → KZGRVMXV XLMJFVIH ZOO. (2) Apply Atbash: K→P, Z→A, G→T, R→I, V→E, M→N, X→C, V→E → PATIENCE CONQUERS ALL.'
+    },
+    {
+      level: 10, cipher: 'Multi-Layer', difficulty: 'Master',
+      prompt: 'Two operations were applied: a letter shift and then the entire result was written backwards. Determine the shift value and undo both layers in the correct order.',
+      ciphertext: 'DJPSJMYWJMUNHYXWNK',
+      answer: 'FIRST CIPHER THEN KEY',
+      hints: [
+        'The outer operation is reversal. Try reading the ciphertext backwards first, then apply Caesar shifts.',
+        'Reversed: KNWXYHNUMJWYMJSPJD. Now try small Caesar shifts backwards. Shift −5: K→F, N→I, W→R, X→S, Y→T…'
+      ],
+      walkthrough: 'Step 1 — Reverse the ciphertext: DJPSJMYWJMUNHYXWNK → KNWXYHNUMJWYMJSPJD. Step 2 — Undo Caesar shift of 5: K(10)→F(5), N(13)→I(8), W(22)→R(17), X(23)→S(18), Y(24)→T(19)… → FIRSTCIPHERTHENKEY → "FIRST CIPHER THEN KEY".'
+    }
+  );
 
   const STORAGE_KEY = 'cipher-museum-challenges';
 
@@ -231,9 +279,10 @@
   function updateProgress() {
     const state = getState();
     const solved = CHALLENGES.filter(c => state['ch' + c.level]).length;
-    document.getElementById('progress-text').textContent = solved + ' of 6 solved';
-    document.getElementById('progress-fill').style.width = ((solved / 6) * 100) + '%';
-    if (solved === 6) document.getElementById('congrats').classList.add('visible');
+    const total = CHALLENGES.length;
+    document.getElementById('progress-text').textContent = solved + ' of ' + total + ' solved';
+    document.getElementById('progress-fill').style.width = ((solved / total) * 100) + '%';
+    if (solved === total) document.getElementById('congrats').classList.add('visible');
   }
 
   function renderChallenges() {
@@ -245,13 +294,15 @@
       const locked = ch.level > 1 && !state['ch' + (ch.level - 1)];
       const attempts = state['attempts' + ch.level] || 0;
 
+      const diffColor = {Beginner:'var(--green)',Intermediate:'var(--orange)',Expert:'var(--red)',Master:'var(--purple)'}[ch.difficulty] || 'var(--tx3)';
+
       return `
         <div class="ch-card ${solved ? 'solved' : ''} ${locked ? 'locked' : ''}" data-level="${ch.level}">
           <div class="ch-header">
             <div class="ch-level">${solved ? '✓' : ch.level}</div>
             <div class="ch-meta">
-              <h3>${ch.cipher} Cipher</h3>
-              <span>${ch.difficulty}</span>
+              <h3>${ch.cipher}</h3>
+              <span style="color:${diffColor}">${ch.difficulty}</span>
             </div>
           </div>
           <div class="ch-body">

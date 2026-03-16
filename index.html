@@ -98,6 +98,8 @@
       <div class="hero-stat"><span class="hero-stat-n">1</span><span class="hero-stat-l">Unbreakable Cipher</span></div>
     </div>
     <a href="halls/ancient.html" class="hero-cta">Enter the Museum →</a>
+    <a href="timeline.html" class="hero-cta" style="background:transparent;border:1px solid var(--gold-b);color:var(--gold);margin-left:1rem;">Begin the Tour →</a>
+    <a href="museum-map.html" class="hero-cta" style="background:transparent;border:1px solid var(--gold-b);color:var(--gold);margin-left:1rem;">View Museum Map</a>
   </div>
   <div class="hero-scroll" aria-hidden="true"><span>Scroll</span>↓</div>
 </section>
@@ -201,6 +203,87 @@
       <div class="hall-card-arrow">Enter Exhibition →</div>
     </a>
 
+  </div>
+</section>
+
+<svg class="section-divider" viewBox="0 0 180 6"><line x1="0" y1="3" x2="180" y2="3"/></svg>
+
+<!-- Featured Exhibits -->
+<section class="section reveal">
+  <div class="section-head">
+    <span class="section-eyebrow">Featured Exhibits</span>
+    <h2 class="section-title">Six Landmark Ciphers</h2>
+    <p class="section-sub">The exhibits every visitor should see — from the simplest shift cipher to the machine that changed history.</p>
+  </div>
+
+  <div class="featured-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;">
+
+    <a href="ciphers/caesar.html" class="cipher-card fade-up d1">
+      <div class="card-head"><span class="card-num">Exhibit 01</span></div>
+      <h3 class="card-name">Caesar Cipher</h3>
+      <p class="card-desc">The simplest substitution cipher — Julius Caesar shifted each letter by three to encode military dispatches in 58 BC.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-ancient">Ancient</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="ciphers/vigenere.html" class="cipher-card fade-up d2">
+      <div class="card-head"><span class="card-num">Exhibit 07</span></div>
+      <h3 class="card-name">Vigenère Cipher</h3>
+      <p class="card-desc">The "indecipherable cipher" that resisted cryptanalysis for 300 years using a repeating polyalphabetic key.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-renaissance">Renaissance</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="ciphers/playfair.html" class="cipher-card fade-up d3">
+      <div class="card-head"><span class="card-num">Exhibit 05</span></div>
+      <h3 class="card-name">Playfair Cipher</h3>
+      <p class="card-desc">The first practical digraph cipher — used in the Boer War who encrypted letter pairs through a 5×5 key square.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-19c">19th Century</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="ciphers/enigma.html" class="cipher-card fade-up d1">
+      <div class="card-head"><span class="card-num">Exhibit 27</span></div>
+      <h3 class="card-name">Enigma Machine</h3>
+      <p class="card-desc">The electromechanical rotor machine that secured Nazi communications — and whose breaking shortened WWII by years.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-wwii">WWII</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="ciphers/lorenz.html" class="cipher-card fade-up d2">
+      <div class="card-head"><span class="card-num">Exhibit 28</span></div>
+      <h3 class="card-name">Lorenz Cipher</h3>
+      <p class="card-desc">Hitler's teleprinter cipher — breaking it required Colossus, the world's first programmable electronic computer.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-wwii">WWII</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="ciphers/one-time-pad.html" class="cipher-card fade-up d3">
+      <div class="card-head"><span class="card-num">Exhibit 26</span></div>
+      <h3 class="card-name">One-Time Pad</h3>
+      <p class="card-desc">The only cipher mathematically proved unbreakable — Shannon's 1949 proof of perfect secrecy remains ironclad.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-theoretical">Theoretical</span><span class="badge sec-secure">Unbreakable</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+  </div>
+</section>
+
+<svg class="section-divider" viewBox="0 0 180 6"><line x1="0" y1="3" x2="180" y2="3"/></svg>
+
+<!-- Museum Map Teaser -->
+<section id="museum-map" class="section reveal" style="background:var(--s1);border-top:1px solid var(--s4);border-bottom:1px solid var(--s4);padding:4rem 2rem;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="section-head" style="margin-bottom:2rem;">
+      <span class="section-eyebrow">Museum Directory</span>
+      <h2 class="section-title">Find Your Exhibit</h2>
+      <p class="section-sub">Six halls spanning 2,500 years of cryptographic history.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Hall I · Ancient</span></div><div class="panel-body"><p style="font-size:.9rem;">Scytale · Caesar · Polybius</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔤</span><span class="panel-title">Hall II · Classical</span></div><div class="panel-body"><p style="font-size:.9rem;">Monoalphabetic · Homophonic · Playfair · Hill</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">Hall III · Polyalphabetic</span></div><div class="panel-body"><p style="font-size:.9rem;">Vigenère · Beaufort · Porta · Running Key</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔀</span><span class="panel-title">Hall IV · Transposition</span></div><div class="panel-body"><p style="font-size:.9rem;">Rail Fence · Columnar · Bifid · Trifid</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">⚔️</span><span class="panel-title">Hall V · Military</span></div><div class="panel-body"><p style="font-size:.9rem;">ADFGVX · Nihilist · VIC · Bazeries</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Hall VI · Machines</span></div><div class="panel-body"><p style="font-size:.9rem;">Enigma · Lorenz · Jefferson Disk</p></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="museum-map.html" class="hero-cta" style="display:inline-flex;">View Full Map →</a>
+    </div>
   </div>
 </section>
 

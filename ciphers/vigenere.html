@@ -200,11 +200,11 @@ Formula: C = (P + K) mod 26</pre>
           <button class="mode-btn" id="btnDec" onclick="setMode('dec')">Decrypt</button>
         </div>
         <div class="input-group">
-          <span class="input-label">Message</span>
+          <label class="input-label" for="msgInput">Message</label>
           <textarea class="museum-input" id="msgInput" rows="3" placeholder="Type a message…">ATTACKATDAWN</textarea>
         </div>
         <div class="input-group">
-          <span class="input-label">Keyword</span>
+          <label class="input-label" for="keyInput">Keyword</label>
           <input type="text" class="museum-input" id="keyInput" value="LEMON" placeholder="Enter keyword…" style="text-transform:uppercase;">
         </div>
         <div class="btn-group">
@@ -212,7 +212,7 @@ Formula: C = (P + K) mod 26</pre>
           <button class="btn btn-secondary" onclick="clearDemo()">Clear</button>
         </div>
         <div class="input-group">
-          <span class="input-label">Output</span>
+          <label class="input-label" for="outputBox">Output</label>
           <div class="output-box" id="outputBox"><span class="output-empty">Result appears here…</span></div>
         </div>
         <!-- Step trace -->

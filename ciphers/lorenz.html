@@ -162,6 +162,45 @@ Total period: LCM of all wheels
       </div>
     </div>
 
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📝</span><span class="panel-title">Worked Example</span></div>
+      <div class="panel-body"><pre>Plaintext character: H
+Baudot (ITA2) code:  10100  (5-bit)
+
+Wheel outputs at current position:
+  χ wheels (5 bits): 0 1 1 0 1
+  ψ wheels (5 bits): 1 1 0 1 0
+
+Step 1 — XOR with χ stream:
+  Plaintext:  1 0 1 0 0
+  χ stream:   0 1 1 0 1
+  Result:     1 1 0 0 1
+
+Step 2 — XOR with ψ stream:
+  Intermediate: 1 1 0 0 1
+  ψ stream:     1 1 0 1 0
+  Ciphertext:   0 0 0 1 1  = Baudot "D"
+
+After each character:
+  • All 5 χ wheels advance one position
+  • Motor wheels decide whether ψ wheels step
+    (irregular motion = extra security)
+
+With all 12 wheels: period before repetition
+≈ 1.6 × 10¹⁹ characters — effectively infinite</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Related Exhibits</span></div>
+      <div class="panel-body">
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;">
+          <li><a href="enigma.html" style="color:var(--gold);text-decoration:underline;">Enigma Machine</a> — The field-level rotor cipher Lorenz outranked</li>
+          <li><a href="one-time-pad.html" style="color:var(--gold);text-decoration:underline;">One-Time Pad</a> — Lorenz used XOR like a OTP but with a periodic key</li>
+          <li><a href="vic.html" style="color:var(--gold);text-decoration:underline;">VIC Cipher</a> — Cold War hand cipher that resisted machine analysis</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
   <div class="exhibit-side">
     
