@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeline — The Cipher Museum</title>
+  <meta name="description" content="Visual history of encryption from 400 BC to the quantum age. Walk through 2,400 years of codes, ciphers, and codebreakers.">
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .timeline{position:relative;max-width:900px;margin:0 auto;padding:2rem 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold-dim),var(--gold),var(--gold-dim));transform:translateX(-50%)}
+    .tl-event{position:relative;display:flex;margin-bottom:3rem;align-items:flex-start}
+    .tl-event:nth-child(odd){flex-direction:row-reverse;text-align:right}
+    .tl-event:nth-child(odd) .tl-card{margin-left:0;margin-right:3rem}
+    .tl-event:nth-child(even) .tl-card{margin-left:3rem}
+    .tl-dot{position:absolute;left:50%;top:1.5rem;width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:var(--s1);transform:translateX(-50%);z-index:2;flex-shrink:0}
+    .tl-event:hover .tl-dot{background:var(--gold);box-shadow:0 0 12px rgba(201,168,76,.5)}
+    .tl-card{width:calc(50% - 3rem);background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:1.5rem;transition:all var(--trs)}
+    .tl-card:hover{border-color:var(--gold-b);transform:translateY(-2px);box-shadow:var(--sh)}
+    .tl-date{font-family:var(--fm);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:block}
+    .tl-title{font-family:var(--fd);font-size:1.15rem;color:var(--tx);margin-bottom:.4rem;letter-spacing:.04em}
+    .tl-loc{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;color:var(--tx3);margin-bottom:.75rem;display:block}
+    .tl-desc{font-size:.95rem;color:var(--tx2);line-height:1.75}
+    .tl-link{display:inline-block;margin-top:.75rem;font-family:var(--fm);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);transition:color var(--tr)}
+    .tl-link:hover{color:var(--gold)}
+    .era-dot-ancient{border-color:#C8845A}.era-dot-medieval{border-color:#7AA8D8}
+    .era-dot-renaissance{border-color:#9FC87A}.era-dot-19c{border-color:#C8A85A}
+    .era-dot-wwi{border-color:#D4962A}.era-dot-wwii{border-color:#C85A5A}
+    .era-dot-modern{border-color:#5AC8A0}.era-dot-quantum{border-color:#A07FCC}
+    .tl-event:hover .era-dot-ancient{background:#C8845A}.tl-event:hover .era-dot-medieval{background:#7AA8D8}
+    .tl-event:hover .era-dot-renaissance{background:#9FC87A}.tl-event:hover .era-dot-19c{background:#C8A85A}
+    .tl-event:hover .era-dot-wwi{background:#D4962A}.tl-event:hover .era-dot-wwii{background:#C85A5A}
+    .tl-event:hover .era-dot-modern{background:#5AC8A0}.tl-event:hover .era-dot-quantum{background:#A07FCC}
+    .tl-legend{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin:2rem 0 3rem;padding:1.5rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl)}
+    .tl-legend-item{display:flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3)}
+    .tl-legend-dot{width:10px;height:10px;border-radius:50%}
+    @media(max-width:768px){
+      .timeline::before{left:1.5rem}
+      .tl-event,.tl-event:nth-child(odd){flex-direction:row;text-align:left}
+      .tl-card,.tl-event:nth-child(odd) .tl-card{width:calc(100% - 4rem);margin-left:3.5rem;margin-right:0}
+      .tl-dot{left:1.5rem}
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Museum Map</a></li>
+      <li><a href="timeline.html" class="active">Timeline</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Entrance</a><span>&rsaquo;</span>
+    Timeline
+  </div>
+  <span class="page-eyebrow">2,400 Years of Secrets</span>
+  <h1 class="page-title">History of Encryption</h1>
+  <p class="page-tagline">From wax tablets to quantum computers — the unending war between codemakers and codebreakers</p>
+</div>
+
+<section class="section">
+  <div class="tl-legend" aria-label="Era color legend">
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8845A"></span> Ancient</div>
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#7AA8D8"></span> Medieval</div>
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#9FC87A"></span> Renaissance</div>
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8A85A"></span> 19th Century</div>
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#D4962A"></span> World War I</div>
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#C85A5A"></span> World War II</div>
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#5AC8A0"></span> Modern</div>
+    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#A07FCC"></span> Quantum Era</div>
+  </div>
+
+  <div class="timeline" role="list" aria-label="Cryptography timeline">
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-ancient"></span>
+      <div class="tl-card">
+        <span class="tl-date">~400 BC</span>
+        <h3 class="tl-title">Polybius Square</h3>
+        <span class="tl-loc">🇬🇷 Greece</span>
+        <p class="tl-desc">Greek historian Polybius devises a grid encoding that converts letters to numeric pairs — one of the earliest systems to fractionalize the alphabet. Its principle survives in ADFGVX and tap code.</p>
+        <a href="ciphers/polybius.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-ancient"></span>
+      <div class="tl-card">
+        <span class="tl-date">~58 BC</span>
+        <h3 class="tl-title">Caesar Cipher</h3>
+        <span class="tl-loc">🇮🇹 Rome</span>
+        <p class="tl-desc">Julius Caesar shifts letters by three positions to communicate with his generals during the Gallic Wars. Suetonius confirms it in <em>The Twelve Caesars</em>. It works because most interceptors are illiterate.</p>
+        <a href="ciphers/caesar.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-medieval"></span>
+      <div class="tl-card">
+        <span class="tl-date">~850 AD</span>
+        <h3 class="tl-title">Al-Kindi's Frequency Analysis</h3>
+        <span class="tl-loc">🇮🇶 Baghdad</span>
+        <p class="tl-desc">Al-Kindi publishes <em>A Manuscript on Deciphering Cryptographic Messages</em> — the first known description of frequency analysis. Every simple substitution cipher is now breakable. The codebreakers lead for 600 years.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-renaissance"></span>
+      <div class="tl-card">
+        <span class="tl-date">1467</span>
+        <h3 class="tl-title">Alberti Cipher Disk</h3>
+        <span class="tl-loc">🇮🇹 Italy</span>
+        <p class="tl-desc">Leon Battista Alberti invents the cipher disk and proposes changing the cipher alphabet mid-message — the birth of polyalphabetic encryption. For the first time, frequency analysis alone is not enough.</p>
+        <a href="ciphers/alberti-disk.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-renaissance"></span>
+      <div class="tl-card">
+        <span class="tl-date">1553</span>
+        <h3 class="tl-title">Vigenère Cipher</h3>
+        <span class="tl-loc">🇫🇷 France</span>
+        <p class="tl-desc">Blaise de Vigenère publishes his tabula recta. The cipher resists casual cryptanalysis for three centuries and earns the title <em>"le chiffre indéchiffrable"</em> — the unbreakable cipher. It isn't.</p>
+        <a href="ciphers/vigenere.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-renaissance"></span>
+      <div class="tl-card">
+        <span class="tl-date">1605</span>
+        <h3 class="tl-title">Bacon's Binary Encoding</h3>
+        <span class="tl-loc">🇬🇧 England</span>
+        <p class="tl-desc">Francis Bacon devises a 5-bit binary code to hide messages in the typeface — steganography meets binary encoding, 300 years before Shannon.</p>
+        <a href="ciphers/bacon.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-19c"></span>
+      <div class="tl-card">
+        <span class="tl-date">1795</span>
+        <h3 class="tl-title">Jefferson Disk</h3>
+        <span class="tl-loc">🇺🇸 United States</span>
+        <p class="tl-desc">Thomas Jefferson designs a cylinder cipher with 26 scrambled-alphabet disks on an axle. The concept is so sound it's reinvented by Bazeries and officially adopted as the US Army's M-94 in 1922.</p>
+        <a href="ciphers/jefferson-disk.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-19c"></span>
+      <div class="tl-card">
+        <span class="tl-date">1854</span>
+        <h3 class="tl-title">Playfair Cipher</h3>
+        <span class="tl-loc">🇬🇧 England</span>
+        <p class="tl-desc">Charles Wheatstone invents the Playfair cipher, championed by Lord Playfair. By encrypting letter pairs instead of individual letters, it defeats simple frequency analysis. Used by the British Army through both world wars.</p>
+        <a href="ciphers/playfair.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-19c"></span>
+      <div class="tl-card">
+        <span class="tl-date">1863</span>
+        <h3 class="tl-title">Kasiski Examination</h3>
+        <span class="tl-loc">🇩🇪 Prussia</span>
+        <p class="tl-desc">Friedrich Kasiski publishes a method to determine the key length of polyalphabetic ciphers by analyzing repeated patterns. The "unbreakable" Vigenère falls. Babbage had done it earlier but never published.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-wwi"></span>
+      <div class="tl-card">
+        <span class="tl-date">1917</span>
+        <h3 class="tl-title">One-Time Pad</h3>
+        <span class="tl-loc">🇺🇸 United States</span>
+        <p class="tl-desc">Gilbert Vernam patents the one-time pad — proven by Shannon in 1949 to be the only theoretically unbreakable cipher. The catch: the key must be truly random, as long as the message, and never reused.</p>
+        <a href="ciphers/one-time-pad.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-wwi"></span>
+      <div class="tl-card">
+        <span class="tl-date">1918</span>
+        <h3 class="tl-title">ADFGVX Cipher</h3>
+        <span class="tl-loc">🇩🇪 Germany · WWI</span>
+        <p class="tl-desc">Colonel Fritz Nebel deploys the ADFGVX cipher for German spring offensives. It combines Polybius substitution with columnar transposition. Lieutenant Georges Painvin breaks it in a legendary feat of manual cryptanalysis.</p>
+        <a href="ciphers/adfgvx.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-wwii"></span>
+      <div class="tl-card">
+        <span class="tl-date">1920s–1945</span>
+        <h3 class="tl-title">Enigma Machine</h3>
+        <span class="tl-loc">🇩🇪 Germany</span>
+        <p class="tl-desc">Arthur Scherbius patents the Enigma in 1918. The German military adopts it with 158 quintillion possible settings. Polish mathematicians crack it in 1932. Turing and Bletchley Park industrialize the break with the Bombe machine, shortening WWII by an estimated two years.</p>
+        <a href="ciphers/enigma.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-wwii"></span>
+      <div class="tl-card">
+        <span class="tl-date">1940s</span>
+        <h3 class="tl-title">Lorenz Cipher &amp; Colossus</h3>
+        <span class="tl-loc">🇩🇪🇬🇧 Germany / UK</span>
+        <p class="tl-desc">The Lorenz SZ40/42 encrypts German teleprinter traffic. Bill Tutte reverse-engineers the machine without ever seeing it. Tommy Flowers builds Colossus — the first programmable electronic digital computer — to break it.</p>
+        <a href="ciphers/lorenz.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-wwii"></span>
+      <div class="tl-card">
+        <span class="tl-date">1945</span>
+        <h3 class="tl-title">Shannon's Secrecy Theory</h3>
+        <span class="tl-loc">🇺🇸 United States</span>
+        <p class="tl-desc">Claude Shannon publishes <em>"Communication Theory of Secrecy Systems"</em> — the mathematical foundation of modern cryptography. He proves the one-time pad is unbreakable and defines confusion and diffusion as the two pillars of cipher design.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-modern"></span>
+      <div class="tl-card">
+        <span class="tl-date">1976</span>
+        <h3 class="tl-title">Diffie-Hellman Key Exchange</h3>
+        <span class="tl-loc">🇺🇸 United States</span>
+        <p class="tl-desc">Whitfield Diffie and Martin Hellman publish <em>"New Directions in Cryptography"</em> — inventing public-key cryptography. For the first time, two parties can agree on a secret key over an insecure channel without ever meeting. GCHQ had classified equivalent work by James Ellis years earlier.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-modern"></span>
+      <div class="tl-card">
+        <span class="tl-date">1977</span>
+        <h3 class="tl-title">RSA &amp; DES</h3>
+        <span class="tl-loc">🇺🇸 United States</span>
+        <p class="tl-desc">Rivest, Shamir, and Adleman publish RSA — the first practical public-key cryptosystem. The same year, NIST standardizes DES as the federal encryption standard. The era of algorithmic, standardized cryptography begins.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-modern"></span>
+      <div class="tl-card">
+        <span class="tl-date">2001</span>
+        <h3 class="tl-title">AES Standardized</h3>
+        <span class="tl-loc">🇧🇪 Belgium / 🇺🇸 NIST</span>
+        <p class="tl-desc">After a 5-year international competition, NIST selects Rijndael (by Joan Daemen and Vincent Rijmen) as the Advanced Encryption Standard. AES remains the backbone of symmetric encryption worldwide.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-modern"></span>
+      <div class="tl-card">
+        <span class="tl-date">2005</span>
+        <h3 class="tl-title">SHA-1 Collision Attack</h3>
+        <span class="tl-loc">🇨🇳 China</span>
+        <p class="tl-desc">Xiaoyun Wang and team demonstrate theoretical collision attacks against SHA-1, beginning the transition to SHA-256 and SHA-3. A practical collision is demonstrated by Google in 2017.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-modern"></span>
+      <div class="tl-card">
+        <span class="tl-date">2013</span>
+        <h3 class="tl-title">Snowden Revelations</h3>
+        <span class="tl-loc">🌍 Global</span>
+        <p class="tl-desc">Edward Snowden's disclosures reveal the scale of government surveillance. The revelations accelerate global adoption of end-to-end encryption — HTTPS becomes the default, messaging apps adopt Signal Protocol, and encryption moves from specialist tool to human right.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-quantum"></span>
+      <div class="tl-card">
+        <span class="tl-date">2017–2024</span>
+        <h3 class="tl-title">Post-Quantum Cryptography</h3>
+        <span class="tl-loc">🌍 Global · NIST</span>
+        <p class="tl-desc">NIST launches the Post-Quantum Cryptography competition in 2017. In 2024, ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205) are standardized — designed to resist quantum computers running Shor's algorithm. The ancient arms race continues.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="challenges.html">Cipher Challenges</a></li>
+        <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="halls/ancient.html">Hall I: Ancient</a></li>
+        <li><a href="halls/machines.html">Hall VI: Machines</a></li>
+        <li><a href="halls/unbreakable.html">Final Hall</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">2,400 Years of Encryption</span>
+  </div>
+</footer>
+</body>
+</html>

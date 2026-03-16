@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Challenges — The Cipher Museum</title>
+  <meta name="description" content="Break real ciphers. Six progressively harder challenges — from Caesar to Enigma.">
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .challenges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
+    .ch-card{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);overflow:hidden;transition:all var(--trs)}
+    .ch-card:hover{border-color:var(--gold-b);transform:translateY(-2px);box-shadow:var(--sh)}
+    .ch-card.locked{opacity:.55;pointer-events:none}.ch-card.solved{border-color:var(--green)}
+    .ch-header{padding:1.5rem;border-bottom:1px solid var(--s4);display:flex;align-items:center;gap:1rem}
+    .ch-level{width:42px;height:42px;border-radius:50%;border:2px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--gold);flex-shrink:0}
+    .ch-card.solved .ch-level{border-color:var(--green);color:var(--green);background:rgba(90,200,160,.1)}
+    .ch-meta h3{font-family:var(--fd);font-size:1.1rem;color:var(--tx);letter-spacing:.04em;margin-bottom:.2rem}
+    .ch-meta span{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3)}
+    .ch-body{padding:1.5rem}
+    .ch-prompt{font-size:.95rem;color:var(--tx2);line-height:1.75;margin-bottom:1.25rem}
+    .ch-ciphertext{font-family:var(--fm);font-size:.88rem;letter-spacing:.15em;color:var(--tx);background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);padding:1rem;margin-bottom:1.25rem;word-break:break-all;line-height:1.8}
+    .ch-input-row{display:flex;gap:.75rem;margin-bottom:1rem}
+    .ch-input{flex:1;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.88rem;padding:.65rem 1rem;outline:none;transition:border-color var(--tr)}
+    .ch-input:focus{border-color:var(--gold-dim)}
+    .ch-submit{font-family:var(--fd);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.65rem 1.25rem;border:none;border-radius:var(--r);background:var(--gold);color:var(--black);font-weight:700;cursor:pointer;transition:all var(--tr);white-space:nowrap}
+    .ch-submit:hover{background:var(--gold-lt)}
+    .ch-feedback{font-family:var(--fm);font-size:.7rem;letter-spacing:.08em;padding:.5rem .75rem;border-radius:var(--r);display:none;margin-bottom:1rem}
+    .ch-feedback.wrong{display:block;background:var(--red-d);border:1px solid var(--red-b);color:var(--red)}
+    .ch-feedback.correct{display:block;background:rgba(90,200,160,.1);border:1px solid rgba(90,200,160,.3);color:var(--green)}
+    .ch-hint-btn{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);background:none;border:1px solid var(--s5);border-radius:var(--r);padding:.4rem .8rem;cursor:pointer;transition:all var(--tr)}
+    .ch-hint-btn:hover{border-color:var(--gold-dim);color:var(--tx2)}
+    .ch-hint{font-size:.88rem;color:var(--tx2);line-height:1.7;padding:.75rem 1rem;background:var(--s3);border-radius:var(--r);margin-top:.75rem;display:none;border-left:3px solid var(--gold-dim)}
+    .ch-hint.visible{display:block}
+    .ch-walkthrough{display:none;margin-top:1rem;padding:1rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r)}
+    .ch-walkthrough.visible{display:block}
+    .ch-walkthrough h4{font-family:var(--fd);font-size:.85rem;color:var(--gold);margin-bottom:.5rem;letter-spacing:.06em}
+    .ch-walkthrough p{font-size:.88rem;color:var(--tx2);line-height:1.75}
+    .ch-progress{max-width:1200px;margin:0 auto 2rem;display:flex;align-items:center;gap:.75rem;padding:1.25rem 1.5rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl)}
+    .ch-progress-bar{flex:1;height:6px;background:var(--s4);border-radius:3px;overflow:hidden}
+    .ch-progress-fill{height:100%;background:var(--gold);border-radius:3px;transition:width 500ms ease;width:0%}
+    .ch-progress-label{font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);white-space:nowrap}
+    .ch-congrats{display:none;max-width:800px;margin:2rem auto;text-align:center;padding:3rem;background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border:1px solid var(--gold-b);border-radius:var(--rx)}
+    .ch-congrats.visible{display:block}
+    .ch-congrats h2{font-family:var(--fd);font-size:2rem;color:var(--gold);margin-bottom:1rem}
+    .ch-congrats p{font-size:1.05rem;color:var(--tx2);line-height:1.85;max-width:600px;margin:0 auto}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Museum Map</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="challenges.html" class="active">Challenges</a></li>
+      <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Entrance</a><span>&rsaquo;</span>
+    Cipher Challenges
+  </div>
+  <span class="page-eyebrow">Test Your Skills</span>
+  <h1 class="page-title">Cipher Challenges</h1>
+  <p class="page-tagline">Six encrypted messages. Break them all to prove you're a codebreaker.</p>
+</div>
+
+<section class="section">
+  <div class="ch-progress">
+    <span class="ch-progress-label" id="progress-text">0 of 6 solved</span>
+    <div class="ch-progress-bar"><div class="ch-progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <div class="challenges-grid" id="challenges-container"></div>
+
+  <div class="ch-congrats" id="congrats">
+    <h2>🏆 Master Codebreaker</h2>
+    <p>You've broken every cipher in the museum. The full message reads:</p>
+    <div class="ch-ciphertext" style="margin-top:1.5rem;color:var(--gold);letter-spacing:.12em;font-size:1rem;">
+      THE DIE IS CAST &middot; KNOW THYSELF &middot; SECRETS HIDE IN PLAIN SIGHT &middot; THE KEY IS PATIENCE &middot; TRUST NO SINGLE LOCK &middot; THE BOMBE TURNS
+    </div>
+    <p style="margin-top:1rem;">From Caesar to Enigma, every cipher tells the same story: security through obscurity never lasts. Only mathematics endures.</p>
+  </div>
+</section>
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="halls/ancient.html">Hall I: Ancient</a></li>
+        <li><a href="halls/machines.html">Hall VI: Machines</a></li>
+        <li><a href="halls/unbreakable.html">Final Hall</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Cipher Challenges</span>
+  </div>
+</footer>
+
+<script src="js/ciphers/all-engines.js"></script>
+<script>
+'use strict';
+(function() {
+  const CHALLENGES = [
+    {
+      level: 1, cipher: 'Caesar', difficulty: 'Easy',
+      prompt: 'This message was shifted by a fixed number of positions. Determine the shift and decrypt it.',
+      ciphertext: 'WKH GLH LV FDVW',
+      answer: 'THE DIE IS CAST',
+      hints: [
+        'Caesar used a shift of 3. Try shifting each letter back by small numbers.',
+        'W→T, K→H, H→E… the shift is 3.'
+      ],
+      walkthrough: 'Each letter is shifted forward by 3 positions: T→W, H→K, E→H. Shifting back by 3 gives the original Latin quote attributed to Julius Caesar: "THE DIE IS CAST" (Alea iacta est).'
+    },
+    {
+      level: 2, cipher: 'Atbash', difficulty: 'Easy',
+      prompt: 'This cipher reverses the alphabet: A↔Z, B↔Y, C↔X… Decrypt it.',
+      ciphertext: 'PMLD GSBHVOU',
+      answer: 'KNOW THYSELF',
+      hints: [
+        'A=Z, B=Y, C=X, D=W… Map each letter to its reverse.',
+        'P→K, M→N, L→O, D→W…'
+      ],
+      walkthrough: 'Atbash maps A↔Z, B↔Y, C↔X, etc. P(16th)→K(11th), M(13th)→N(14th), L(12th)→O(15th), D(4th)→W(23rd). The answer is the ancient Greek aphorism "KNOW THYSELF" inscribed at the Temple of Apollo at Delphi.'
+    },
+    {
+      level: 3, cipher: 'Substitution', difficulty: 'Medium',
+      prompt: 'A monoalphabetic substitution with keyword CIPHER. Use frequency analysis or the keyword to crack it.',
+      ciphertext: 'SHFRHS JPGH PL MDCPL SPIJT',
+      answer: 'SECRETS HIDE IN PLAIN SIGHT',
+      hints: [
+        'The keyword CIPHER produces the alphabet: C I P H E R A B D F G J K L M N O Q S T U V W X Y Z. Map ciphertext back.',
+        'S→S? No — S is the 19th letter. In the cipher alphabet, position 19 = S maps to original S. Check: position for P in cipher = 3rd letter, which maps to original C… work through the mapping.'
+      ],
+      walkthrough: 'Keyword CIPHER generates the substitution alphabet: C-I-P-H-E-R-A-B-D-F-G-J-K-L-M-N-O-Q-S-T-U-V-W-X-Y-Z. To decrypt, find each ciphertext letter\'s position in the cipher alphabet and map it to the standard alphabet position.'
+    },
+    {
+      level: 4, cipher: 'Vigenère', difficulty: 'Medium',
+      prompt: 'This message was encrypted with a Vigenère cipher. The key is a common English word related to waiting.',
+      ciphertext: 'IAS DGC XH JTIGGTQW',
+      answer: 'THE KEY IS PATIENCE',
+      hints: [
+        'The key relates to "waiting." Try PATIENCE as the key word.',
+        'Vigenère: subtract key letters from ciphertext letters mod 26. I-P=T, A-A=A..? Try aligning the key PATIENCE with letters only.'
+      ],
+      walkthrough: 'The keyword is PATIENCE. Align it with the ciphertext letters (skipping spaces): I-P=T, A-A=H, S-T=E, D-I=K… Vigenère decryption: (ciphertext - key) mod 26 for each letter position.'
+    },
+    {
+      level: 5, cipher: 'Playfair', difficulty: 'Hard',
+      prompt: 'This Playfair-encrypted message uses the keyword MONARCHY. Decrypt the digraph pairs.',
+      ciphertext: 'SQBRLG MK RDHAFM FKEE',
+      answer: 'TRUST NO SINGLE LOCK',
+      hints: [
+        'Build the 5×5 Playfair grid with MONARCHY: M-O-N-A-R / C-H-Y-B-D / E-F-G-I-K / L-P-Q-S-T / U-V-W-X-Z',
+        'Apply the rectangle/row/column rules in reverse for each pair: SQ→TR, BR→US, etc.'
+      ],
+      walkthrough: 'Grid: M-O-N-A-R / C-H-Y-B-D / E-F-G-I-K / L-P-Q-S-T / U-V-W-X-Z. To decrypt, reverse the Playfair rules: same row → shift left, same column → shift up, rectangle → swap corners. Process pairs: SQ, BR, LG, MK, RD, HA, FM, FK, EE.'
+    },
+    {
+      level: 6, cipher: 'Enigma', difficulty: 'Hard',
+      prompt: 'Enigma-encrypted with rotors I-II-III at starting position MCK. Type each letter to trace the signal.',
+      ciphertext: 'YPR CTYWK DSJWH',
+      answer: 'THE BOMBE TURNS',
+      hints: [
+        'Use the Enigma demo on the Enigma exhibit page with start position MCK.',
+        'Enigma is reciprocal: encrypting the ciphertext with the same settings produces the plaintext.'
+      ],
+      walkthrough: 'Enigma is its own inverse — typing the ciphertext with the same rotor settings (I-II-III at MCK) produces the plaintext. The answer refers to the Bombe, the electromechanical machine Alan Turing designed to crack Enigma at Bletchley Park.'
+    }
+  ];
+
+  const STORAGE_KEY = 'cipher-museum-challenges';
+
+  function getState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+  }
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+  }
+
+  function normalize(s) {
+    return s.toUpperCase().replace(/[^A-Z]/g, '');
+  }
+
+  function updateProgress() {
+    const state = getState();
+    const solved = CHALLENGES.filter(c => state['ch' + c.level]).length;
+    document.getElementById('progress-text').textContent = solved + ' of 6 solved';
+    document.getElementById('progress-fill').style.width = ((solved / 6) * 100) + '%';
+    if (solved === 6) document.getElementById('congrats').classList.add('visible');
+  }
+
+  function renderChallenges() {
+    const container = document.getElementById('challenges-container');
+    const state = getState();
+
+    container.innerHTML = CHALLENGES.map(ch => {
+      const solved = state['ch' + ch.level];
+      const locked = ch.level > 1 && !state['ch' + (ch.level - 1)];
+      const attempts = state['attempts' + ch.level] || 0;
+
+      return `
+        <div class="ch-card ${solved ? 'solved' : ''} ${locked ? 'locked' : ''}" data-level="${ch.level}">
+          <div class="ch-header">
+            <div class="ch-level">${solved ? '✓' : ch.level}</div>
+            <div class="ch-meta">
+              <h3>${ch.cipher} Cipher</h3>
+              <span>${ch.difficulty}</span>
+            </div>
+          </div>
+          <div class="ch-body">
+            <p class="ch-prompt">${ch.prompt}</p>
+            <div class="ch-ciphertext">${ch.ciphertext}</div>
+            ${solved ? `<div class="ch-feedback correct" style="display:block">✓ Solved! Answer: ${ch.answer}</div>` : `
+              <div class="ch-feedback" id="feedback-${ch.level}"></div>
+              <div class="ch-input-row">
+                <input class="ch-input" id="input-${ch.level}" type="text"
+                  placeholder="Your answer…" aria-label="Decrypted answer for challenge ${ch.level}"
+                  autocomplete="off">
+                <button class="ch-submit" onclick="checkAnswer(${ch.level})">Submit</button>
+              </div>
+              <button class="ch-hint-btn" onclick="showHint(${ch.level})">💡 Hint ${attempts >= 3 ? '' : '(-1 pt)'}</button>
+              <div class="ch-hint" id="hint-${ch.level}"></div>
+              ${attempts >= 3 ? `<div class="ch-walkthrough visible"><h4>Walkthrough</h4><p>${ch.walkthrough}</p></div>` : ''}
+            `}
+          </div>
+        </div>`;
+    }).join('');
+
+    updateProgress();
+  }
+
+  window.checkAnswer = function(level) {
+    const ch = CHALLENGES[level - 1];
+    const input = document.getElementById('input-' + level);
+    const feedback = document.getElementById('feedback-' + level);
+    const guess = normalize(input.value);
+    const answer = normalize(ch.answer);
+    const state = getState();
+
+    state['attempts' + level] = (state['attempts' + level] || 0) + 1;
+
+    if (guess === answer) {
+      state['ch' + level] = true;
+      feedback.className = 'ch-feedback correct';
+      feedback.textContent = '✓ Correct! ' + ch.answer;
+      saveState(state);
+      setTimeout(renderChallenges, 800);
+    } else {
+      feedback.className = 'ch-feedback wrong';
+      feedback.textContent = '✗ Not quite. Try again.' + (state['attempts' + level] >= 3 ? ' Walkthrough unlocked below.' : '');
+      saveState(state);
+      if (state['attempts' + level] >= 3) renderChallenges();
+    }
+  };
+
+  window.showHint = function(level) {
+    const ch = CHALLENGES[level - 1];
+    const hintDiv = document.getElementById('hint-' + level);
+    const state = getState();
+    const hintIdx = state['hintIdx' + level] || 0;
+    if (hintIdx < ch.hints.length) {
+      hintDiv.textContent = ch.hints[hintIdx];
+      hintDiv.classList.add('visible');
+      state['hintIdx' + level] = hintIdx + 1;
+      saveState(state);
+    }
+  };
+
+  // Enter key submits
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && e.target.classList.contains('ch-input')) {
+      const level = parseInt(e.target.id.replace('input-', ''));
+      if (level) window.checkAnswer(level);
+    }
+  });
+
+  renderChallenges();
+})();
+</script>
+</body>
+</html>
