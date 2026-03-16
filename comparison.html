@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Comparison — The Cipher Museum</title>
+  <meta name="description" content="Compare all 37 ciphers side by side. Sort by era, type, security level, key method, and more.">
+  <meta property="og:title" content="Cipher Comparison — The Cipher Museum">
+  <meta property="og:description" content="Compare all 37 ciphers side by side. Sort by era, type, security level, key method, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/comparison.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cipher Comparison — The Cipher Museum">
+  <meta name="twitter:description" content="Compare all 37 ciphers side by side. Sort by era, type, security level, key method, and more.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/comparison.html">
+  <link rel="stylesheet" href="css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    .comp-controls{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;align-items:center}
+    .comp-search{font-family:var(--fm);font-size:.85rem;padding:.6rem 1rem;background:var(--s2);border:1px solid var(--s4);color:var(--tx);border-radius:var(--r);width:260px;transition:border-color var(--tr)}
+    .comp-search:focus{border-color:var(--gold);outline:none}
+    .comp-filter{font-family:var(--fm);font-size:.72rem;padding:.5rem .8rem;background:var(--s2);border:1px solid var(--s4);color:var(--tx2);border-radius:var(--r);cursor:pointer;transition:all var(--tr);appearance:none;-webkit-appearance:none}
+    .comp-filter:focus{border-color:var(--gold);outline:none}
+    .comp-count{font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);margin-left:auto}
+    .comp-table-wrap{overflow-x:auto;border:1px solid var(--s4);border-radius:var(--rl);background:var(--s2)}
+    .comp-table{width:100%;border-collapse:collapse;font-size:.92rem}
+    .comp-table thead{position:sticky;top:0;z-index:5}
+    .comp-table th{font-family:var(--fm);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:var(--s3);padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--s4);cursor:pointer;user-select:none;white-space:nowrap;transition:background var(--tr)}
+    .comp-table th:hover{background:var(--s4)}
+    .comp-table th.sorted-asc::after{content:' ▲';font-size:.5rem}
+    .comp-table th.sorted-desc::after{content:' ▼';font-size:.5rem}
+    .comp-table td{padding:.7rem 1rem;border-bottom:1px solid var(--s4);color:var(--tx2);vertical-align:middle}
+    .comp-table tr:hover td{background:var(--s3)}
+    .comp-table tr.hidden{display:none}
+    .comp-table td:first-child{font-family:var(--fd);font-weight:600;color:var(--tx)}
+    .comp-table td:first-child a{color:var(--tx);text-decoration:none;transition:color var(--tr)}
+    .comp-table td:first-child a:hover{color:var(--gold)}
+    .comp-era{font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;padding:.2rem .5rem;border-radius:3px;white-space:nowrap}
+    .era-ancient{background:rgba(200,132,90,.15);color:#C8845A}
+    .era-medieval{background:rgba(122,168,216,.15);color:#7AA8D8}
+    .era-renaissance{background:rgba(159,200,122,.15);color:#9FC87A}
+    .era-19c{background:rgba(200,168,90,.15);color:#C8A85A}
+    .era-wwi{background:rgba(212,150,42,.15);color:#D4962A}
+    .era-wwii{background:rgba(200,90,90,.15);color:#C85A5A}
+    .era-modern{background:rgba(90,200,160,.15);color:#5AC8A0}
+    .comp-level{font-family:var(--fm);font-size:.62rem;letter-spacing:.08em}
+    .level-trivial{color:#C85A5A}.level-weak{color:#C8905A}.level-moderate{color:#C8A85A}.level-strong{color:#5AC8A0}.level-unbreakable{color:#A07FCC}
+    @media(max-width:768px){
+      .comp-search{width:100%}
+      .comp-controls{flex-direction:column;align-items:stretch}
+      .comp-count{margin-left:0;text-align:center}
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Museum Map</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="comparison.html" class="active">Comparison</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Entrance</a><span>&rsaquo;</span>
+    Cipher Comparison
+  </div>
+  <span class="page-eyebrow">37 Ciphers at a Glance</span>
+  <h1 class="page-title">Cipher Comparison Table</h1>
+  <p class="page-tagline">Sort, filter, and compare every cipher in the museum by type, era, security, and method</p>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <div class="comp-controls">
+      <input type="search" class="comp-search" id="cipher-search" placeholder="Search ciphers…" aria-label="Search ciphers">
+      <select class="comp-filter" id="type-filter" aria-label="Filter by type">
+        <option value="">All Types</option>
+        <option value="Substitution">Substitution</option>
+        <option value="Transposition">Transposition</option>
+        <option value="Polyalphabetic">Polyalphabetic</option>
+        <option value="Fractionation">Fractionation</option>
+        <option value="Machine">Machine</option>
+        <option value="Steganography">Steganography</option>
+        <option value="Code">Code</option>
+        <option value="Stream">Stream</option>
+      </select>
+      <select class="comp-filter" id="era-filter" aria-label="Filter by era">
+        <option value="">All Eras</option>
+        <option value="Ancient">Ancient</option>
+        <option value="Medieval">Medieval</option>
+        <option value="Renaissance">Renaissance</option>
+        <option value="19th Century">19th Century</option>
+        <option value="World War I">World War I</option>
+        <option value="World War II">World War II</option>
+        <option value="Modern">Modern</option>
+      </select>
+      <select class="comp-filter" id="security-filter" aria-label="Filter by security level">
+        <option value="">All Security Levels</option>
+        <option value="Trivial">Trivial</option>
+        <option value="Weak">Weak</option>
+        <option value="Moderate">Moderate</option>
+        <option value="Strong">Strong</option>
+        <option value="Unbreakable">Unbreakable</option>
+      </select>
+      <span class="comp-count" id="cipher-count">Showing 37 of 37</span>
+    </div>
+
+    <div class="comp-table-wrap">
+      <table class="comp-table" id="cipher-table">
+        <thead>
+          <tr>
+            <th data-col="name">Cipher</th>
+            <th data-col="era">Era</th>
+            <th data-col="year">Year</th>
+            <th data-col="type">Type</th>
+            <th data-col="key">Key Method</th>
+            <th data-col="security">Security</th>
+            <th data-col="hall">Hall</th>
+          </tr>
+        </thead>
+        <tbody id="cipher-tbody">
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="challenges.html">Cipher Challenges</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+        <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="halls/ancient.html">Hall I: Ancient</a></li>
+        <li><a href="halls/machines.html">Hall VI: Machines</a></li>
+        <li><a href="halls/unbreakable.html">Final Hall</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">2,400 Years of Encryption</span>
+  </div>
+</footer>
+<script src="js/nav.js" defer></script>
+<script>
+(function() {
+  var CIPHERS = [
+    { name:'Scytale',              href:'ciphers/scytale.html',              era:'Ancient',       year:-500,  type:'Transposition',   key:'Rod diameter',              security:'Trivial',     hall:'I' },
+    { name:'Caesar',               href:'ciphers/caesar.html',               era:'Ancient',       year:-58,   type:'Substitution',    key:'Shift number (0–25)',       security:'Trivial',     hall:'I' },
+    { name:'Polybius Square',      href:'ciphers/polybius.html',             era:'Ancient',       year:-150,  type:'Fractionation',   key:'Grid arrangement',          security:'Trivial',     hall:'I' },
+    { name:'Monoalphabetic',       href:'ciphers/monoalphabetic.html',       era:'Medieval',      year:850,   type:'Substitution',    key:'Permuted alphabet',         security:'Weak',        hall:'II' },
+    { name:'Homophonic',           href:'ciphers/homophonic.html',           era:'Renaissance',   year:1401,  type:'Substitution',    key:'Substitution table',        security:'Moderate',    hall:'II' },
+    { name:'Playfair',             href:'ciphers/playfair.html',             era:'19th Century',  year:1854,  type:'Substitution',    key:'5×5 key square',            security:'Moderate',    hall:'II' },
+    { name:'Hill',                 href:'ciphers/hill.html',                 era:'Modern',        year:1929,  type:'Substitution',    key:'Matrix key',                security:'Moderate',    hall:'II' },
+    { name:'Vigenère',             href:'ciphers/vigenere.html',             era:'Renaissance',   year:1553,  type:'Polyalphabetic',  key:'Keyword',                   security:'Moderate',    hall:'III' },
+    { name:'Beaufort',             href:'ciphers/beaufort.html',             era:'19th Century',  year:1857,  type:'Polyalphabetic',  key:'Keyword',                   security:'Moderate',    hall:'III' },
+    { name:'Porta',                href:'ciphers/porta.html',                era:'Renaissance',   year:1563,  type:'Polyalphabetic',  key:'Keyword',                   security:'Moderate',    hall:'III' },
+    { name:'Gronsfeld',            href:'ciphers/gronsfeld.html',            era:'Renaissance',   year:1700,  type:'Polyalphabetic',  key:'Numeric key',               security:'Weak',        hall:'III' },
+    { name:'Running Key',          href:'ciphers/running-key.html',          era:'19th Century',  year:1800,  type:'Polyalphabetic',  key:'Book/text key',             security:'Moderate',    hall:'III' },
+    { name:'Rail Fence',           href:'ciphers/rail-fence.html',           era:'Ancient',       year:-500,  type:'Transposition',   key:'Number of rails',           security:'Trivial',     hall:'IV' },
+    { name:'Columnar',             href:'ciphers/columnar.html',             era:'19th Century',  year:1850,  type:'Transposition',   key:'Keyword',                   security:'Weak',        hall:'IV' },
+    { name:'Double Transposition', href:'ciphers/double-transposition.html', era:'World War I',   year:1914,  type:'Transposition',   key:'Two keywords',              security:'Strong',      hall:'IV' },
+    { name:'Bifid',                href:'ciphers/bifid.html',                era:'19th Century',  year:1901,  type:'Fractionation',   key:'5×5 key square',            security:'Moderate',    hall:'IV' },
+    { name:'Trifid',               href:'ciphers/trifid.html',              era:'19th Century',  year:1901,  type:'Fractionation',   key:'3×3×3 key cube',            security:'Moderate',    hall:'IV' },
+    { name:'Fractionated Morse',   href:'ciphers/fractionated-morse.html',  era:'19th Century',  year:1890,  type:'Fractionation',   key:'Keyword alphabet',          security:'Moderate',    hall:'IV' },
+    { name:'Nihilist',             href:'ciphers/nihilist.html',             era:'19th Century',  year:1880,  type:'Polyalphabetic',  key:'Polybius + keyword',        security:'Moderate',    hall:'V' },
+    { name:'ADFGX',                href:'ciphers/adfgx.html',               era:'World War I',   year:1918,  type:'Fractionation',   key:'Polybius + transposition',  security:'Strong',      hall:'V' },
+    { name:'ADFGVX',               href:'ciphers/adfgvx.html',              era:'World War I',   year:1918,  type:'Fractionation',   key:'Polybius + transposition',  security:'Strong',      hall:'V' },
+    { name:'Bazeries',             href:'ciphers/bazeries.html',             era:'19th Century',  year:1898,  type:'Substitution',    key:'Number + reversed segment', security:'Moderate',    hall:'V' },
+    { name:'VIC',                  href:'ciphers/vic.html',                  era:'World War II',  year:1950,  type:'Substitution',    key:'Complex key derivation',    security:'Strong',      hall:'V' },
+    { name:'Stager',               href:'ciphers/stager.html',              era:'19th Century',  year:1861,  type:'Transposition',   key:'Route pattern',             security:'Weak',        hall:'⚔' },
+    { name:'Confederate Vigenère', href:'ciphers/confederate-vigenere.html', era:'19th Century',  year:1862,  type:'Polyalphabetic',  key:'Keyword + brass disk',      security:'Moderate',    hall:'⚔' },
+    { name:'Dictionary Code',      href:'ciphers/dictionary-code.html',     era:'19th Century',  year:1860,  type:'Code',            key:'Shared dictionary',         security:'Moderate',    hall:'⚔' },
+    { name:'Alberti Disk',         href:'ciphers/alberti-disk.html',         era:'Renaissance',   year:1467,  type:'Polyalphabetic',  key:'Disk setting + indicator',  security:'Moderate',    hall:'VI' },
+    { name:'Jefferson Disk',       href:'ciphers/jefferson-disk.html',      era:'19th Century',  year:1795,  type:'Polyalphabetic',  key:'26-disk arrangement',       security:'Strong',      hall:'VI' },
+    { name:'Enigma',               href:'ciphers/enigma.html',               era:'World War II',  year:1918,  type:'Machine',         key:'Rotor order + plugboard',   security:'Strong',      hall:'VI' },
+    { name:'Lorenz',               href:'ciphers/lorenz.html',               era:'World War II',  year:1940,  type:'Machine',         key:'12-wheel settings',         security:'Strong',      hall:'VI' },
+    { name:'Vernam (OTP)',         href:'ciphers/vernam.html',               era:'World War I',   year:1917,  type:'Stream',          key:'Random tape',               security:'Unbreakable', hall:'VI' },
+    { name:'Pigpen',               href:'ciphers/pigpen.html',               era:'Medieval',      year:1200,  type:'Substitution',    key:'Grid positions',            security:'Trivial',     hall:'VII' },
+    { name:'Bacon\'s Cipher',      href:'ciphers/bacon.html',                era:'Renaissance',   year:1605,  type:'Steganography',   key:'Binary font encoding',      security:'Weak',        hall:'VII' },
+    { name:'Tap Code',             href:'ciphers/tap-code.html',             era:'19th Century',  year:1880,  type:'Fractionation',   key:'Polybius variant',          security:'Trivial',     hall:'VII' },
+    { name:'Zodiac Cipher',        href:'ciphers/zodiac.html',               era:'Modern',        year:1969,  type:'Substitution',    key:'Homophonic + transposition',security:'Strong',      hall:'VII' },
+    { name:'One-Time Pad',         href:'ciphers/one-time-pad.html',         era:'World War I',   year:1917,  type:'Stream',          key:'Random key = message length',security:'Unbreakable',hall:'★' },
+    { name:'Navajo Code Talkers',  href:'ciphers/navajo-code-talkers.html',  era:'World War II',  year:1942,  type:'Code',            key:'Navajo language',           security:'Unbreakable', hall:'★' }
+  ];
+
+  var tbody = document.getElementById('cipher-tbody');
+  var searchInput = document.getElementById('cipher-search');
+  var typeFilter = document.getElementById('type-filter');
+  var eraFilter = document.getElementById('era-filter');
+  var securityFilter = document.getElementById('security-filter');
+  var countEl = document.getElementById('cipher-count');
+
+  var eraClasses = { 'Ancient':'ancient','Medieval':'medieval','Renaissance':'renaissance','19th Century':'19c','World War I':'wwi','World War II':'wwii','Modern':'modern' };
+  var secClasses = { 'Trivial':'trivial','Weak':'weak','Moderate':'moderate','Strong':'strong','Unbreakable':'unbreakable' };
+
+  // Build rows
+  CIPHERS.forEach(function(c, i) {
+    var tr = document.createElement('tr');
+    tr.dataset.index = i;
+    var yearDisplay = c.year < 0 ? Math.abs(c.year) + ' BC' : c.year;
+    tr.innerHTML =
+      '<td><a href="' + c.href + '">' + c.name + '</a></td>' +
+      '<td><span class="comp-era era-' + (eraClasses[c.era]||'') + '">' + c.era + '</span></td>' +
+      '<td>' + yearDisplay + '</td>' +
+      '<td>' + c.type + '</td>' +
+      '<td>' + c.key + '</td>' +
+      '<td><span class="comp-level level-' + (secClasses[c.security]||'').toLowerCase() + '">' + c.security + '</span></td>' +
+      '<td>' + c.hall + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  // Sort
+  var sortCol = 'year';
+  var sortDir = 1;
+  var ths = document.querySelectorAll('.comp-table th[data-col]');
+  ths.forEach(function(th) {
+    th.addEventListener('click', function() {
+      var col = th.dataset.col;
+      if (col === sortCol) { sortDir *= -1; }
+      else { sortCol = col; sortDir = 1; }
+      ths.forEach(function(t) { t.classList.remove('sorted-asc','sorted-desc'); });
+      th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+      sortTable();
+    });
+  });
+
+  function sortTable() {
+    var rows = Array.from(tbody.querySelectorAll('tr'));
+    rows.sort(function(a, b) {
+      var ai = +a.dataset.index, bi = +b.dataset.index;
+      var ca = CIPHERS[ai], cb = CIPHERS[bi];
+      var va, vb;
+      if (sortCol === 'year') { va = ca.year; vb = cb.year; }
+      else if (sortCol === 'name') { va = ca.name.toLowerCase(); vb = cb.name.toLowerCase(); }
+      else if (sortCol === 'era') { va = ca.year; vb = cb.year; }
+      else if (sortCol === 'security') {
+        var order = { Trivial:0, Weak:1, Moderate:2, Strong:3, Unbreakable:4 };
+        va = order[ca.security]; vb = order[cb.security];
+      }
+      else { va = ca[sortCol] ? ca[sortCol].toLowerCase() : ''; vb = cb[sortCol] ? cb[sortCol].toLowerCase() : ''; }
+      if (va < vb) return -1 * sortDir;
+      if (va > vb) return 1 * sortDir;
+      return 0;
+    });
+    rows.forEach(function(r) { tbody.appendChild(r); });
+  }
+
+  // Filter
+  function applyFilters() {
+    var search = searchInput.value.toLowerCase();
+    var type = typeFilter.value;
+    var era = eraFilter.value;
+    var security = securityFilter.value;
+    var visible = 0;
+    var rows = tbody.querySelectorAll('tr');
+    rows.forEach(function(row) {
+      var c = CIPHERS[+row.dataset.index];
+      var show = true;
+      if (search && c.name.toLowerCase().indexOf(search) === -1 && c.type.toLowerCase().indexOf(search) === -1 && c.key.toLowerCase().indexOf(search) === -1) show = false;
+      if (type && c.type !== type) show = false;
+      if (era && c.era !== era) show = false;
+      if (security && c.security !== security) show = false;
+      row.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    countEl.textContent = 'Showing ' + visible + ' of ' + CIPHERS.length;
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+  typeFilter.addEventListener('change', applyFilters);
+  eraFilter.addEventListener('change', applyFilters);
+  securityFilter.addEventListener('change', applyFilters);
+
+  // Initial sort by year
+  document.querySelector('th[data-col="year"]').classList.add('sorted-asc');
+  sortTable();
+})();
+</script>
+</body>
+</html>

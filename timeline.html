@@ -43,15 +43,25 @@
     .tl-event:hover .era-dot-wwi{background:#D4962A}.tl-event:hover .era-dot-wwii{background:#C85A5A}
     .tl-event:hover .era-dot-modern{background:#5AC8A0}.tl-event:hover .era-dot-quantum{background:#A07FCC}
     .tl-event[id]{scroll-margin-top:80px}
-    .tl-legend{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:2rem 0 3rem;padding:1.5rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl)}
-    .tl-legend-item{display:flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);text-decoration:none;cursor:pointer;padding:.35rem .6rem;border-radius:var(--r);transition:all var(--tr)}
+    .tl-legend{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:2rem 0 3rem;padding:1.25rem 1.5rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);position:sticky;top:62px;z-index:50;transition:box-shadow var(--trs)}
+    .tl-legend.stuck{box-shadow:0 4px 20px rgba(0,0,0,.5)}
+    .tl-legend-item{display:flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);text-decoration:none;cursor:pointer;padding:.4rem .7rem;border-radius:var(--r);transition:all var(--tr);user-select:none;position:relative}
     .tl-legend-item:hover{color:var(--tx);background:var(--s4)}
-    .tl-legend-dot{width:10px;height:10px;border-radius:50%}
+    .tl-legend-item.active{color:var(--tx);background:var(--s4);box-shadow:inset 0 -2px 0 currentColor}
+    .tl-legend-item.dimmed{opacity:.35}
+    .tl-legend-item.dimmed:hover{opacity:.7}
+    .tl-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .tl-legend-count{font-size:.55rem;opacity:.6;margin-left:.15rem}
+    .tl-era-header{text-align:center;margin:3rem 0 1rem;position:relative}
+    .tl-era-header span{font-family:var(--fm);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--tx3);background:var(--black);padding:0 1.5rem;position:relative;z-index:1}
+    .tl-era-header::before{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--s5) 20%,var(--s5) 80%,transparent)}
+    .tl-event[data-era].hidden{display:none}
     @media(max-width:768px){
       .timeline::before{left:1.5rem}
       .tl-event,.tl-event:nth-child(odd){flex-direction:row;text-align:left}
       .tl-card,.tl-event:nth-child(odd) .tl-card{width:calc(100% - 4rem);margin-left:3.5rem;margin-right:0}
       .tl-dot{left:1.5rem}
+      .tl-legend{position:static}
     }
   </style>
 </head>
@@ -95,19 +105,21 @@
 
 <section class="section">
   <div class="tl-legend" aria-label="Era color legend">
-    <a href="#era-ancient" class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8845A"></span> Ancient</a>
-    <a href="#era-medieval" class="tl-legend-item"><span class="tl-legend-dot" style="background:#7AA8D8"></span> Medieval</a>
-    <a href="#era-renaissance" class="tl-legend-item"><span class="tl-legend-dot" style="background:#9FC87A"></span> Renaissance</a>
-    <a href="#era-19c" class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8A85A"></span> 19th Century</a>
-    <a href="#era-wwi" class="tl-legend-item"><span class="tl-legend-dot" style="background:#D4962A"></span> World War I</a>
-    <a href="#era-wwii" class="tl-legend-item"><span class="tl-legend-dot" style="background:#C85A5A"></span> World War II</a>
-    <a href="#era-modern" class="tl-legend-item"><span class="tl-legend-dot" style="background:#5AC8A0"></span> Modern</a>
-    <a href="#era-quantum" class="tl-legend-item"><span class="tl-legend-dot" style="background:#A07FCC"></span> Quantum Era</a>
+    <a href="#era-ancient" class="tl-legend-item" data-filter="ancient"><span class="tl-legend-dot" style="background:#C8845A"></span> Ancient <span class="tl-legend-count">(3)</span></a>
+    <a href="#era-medieval" class="tl-legend-item" data-filter="medieval"><span class="tl-legend-dot" style="background:#7AA8D8"></span> Medieval <span class="tl-legend-count">(1)</span></a>
+    <a href="#era-renaissance" class="tl-legend-item" data-filter="renaissance"><span class="tl-legend-dot" style="background:#9FC87A"></span> Renaissance <span class="tl-legend-count">(3)</span></a>
+    <a href="#era-19c" class="tl-legend-item" data-filter="19c"><span class="tl-legend-dot" style="background:#C8A85A"></span> 19th Century <span class="tl-legend-count">(3)</span></a>
+    <a href="#era-wwi" class="tl-legend-item" data-filter="wwi"><span class="tl-legend-dot" style="background:#D4962A"></span> World War I <span class="tl-legend-count">(2)</span></a>
+    <a href="#era-wwii" class="tl-legend-item" data-filter="wwii"><span class="tl-legend-dot" style="background:#C85A5A"></span> World War II <span class="tl-legend-count">(4)</span></a>
+    <a href="#era-modern" class="tl-legend-item" data-filter="modern"><span class="tl-legend-dot" style="background:#5AC8A0"></span> Modern <span class="tl-legend-count">(6)</span></a>
+    <a href="#era-quantum" class="tl-legend-item" data-filter="quantum"><span class="tl-legend-dot" style="background:#A07FCC"></span> Quantum Era <span class="tl-legend-count">(1)</span></a>
   </div>
 
   <div class="timeline" role="list" aria-label="Cryptography timeline">
 
-    <div class="tl-event" role="listitem" id="era-ancient">
+    <div class="tl-era-header" id="era-ancient"><span>Ancient World</span></div>
+
+    <div class="tl-event" data-era="ancient" role="listitem">
       <span class="tl-dot era-dot-ancient"></span>
       <div class="tl-card" data-href="ciphers/scytale.html">
         <span class="tl-date">~500 BC</span>
@@ -118,7 +130,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="ancient" role="listitem">
       <span class="tl-dot era-dot-ancient"></span>
       <div class="tl-card" data-href="ciphers/polybius.html">
         <span class="tl-date">~150 BC</span>
@@ -129,7 +141,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="ancient" role="listitem">
       <span class="tl-dot era-dot-ancient"></span>
       <div class="tl-card" data-href="ciphers/caesar.html">
         <span class="tl-date">~58 BC</span>
@@ -140,7 +152,9 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem" id="era-medieval">
+    <div class="tl-era-header" id="era-medieval"><span>Medieval Period</span></div>
+
+    <div class="tl-event" data-era="medieval" role="listitem">
       <span class="tl-dot era-dot-medieval"></span>
       <div class="tl-card">
         <span class="tl-date">~850 AD</span>
@@ -150,7 +164,9 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem" id="era-renaissance">
+    <div class="tl-era-header" id="era-renaissance"><span>Renaissance</span></div>
+
+    <div class="tl-event" data-era="renaissance" role="listitem">
       <span class="tl-dot era-dot-renaissance"></span>
       <div class="tl-card" data-href="ciphers/alberti-disk.html">
         <span class="tl-date">1467</span>
@@ -161,7 +177,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="renaissance" role="listitem">
       <span class="tl-dot era-dot-renaissance"></span>
       <div class="tl-card" data-href="ciphers/vigenere.html">
         <span class="tl-date">1553</span>
@@ -172,7 +188,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="renaissance" role="listitem">
       <span class="tl-dot era-dot-renaissance"></span>
       <div class="tl-card" data-href="ciphers/bacon.html">
         <span class="tl-date">1605</span>
@@ -183,7 +199,9 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem" id="era-19c">
+    <div class="tl-era-header" id="era-19c"><span>19th Century</span></div>
+
+    <div class="tl-event" data-era="19c" role="listitem">
       <span class="tl-dot era-dot-19c"></span>
       <div class="tl-card" data-href="ciphers/jefferson-disk.html">
         <span class="tl-date">1795</span>
@@ -194,7 +212,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="19c" role="listitem">
       <span class="tl-dot era-dot-19c"></span>
       <div class="tl-card" data-href="ciphers/playfair.html">
         <span class="tl-date">1854</span>
@@ -205,7 +223,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="19c" role="listitem">
       <span class="tl-dot era-dot-19c"></span>
       <div class="tl-card">
         <span class="tl-date">1863</span>
@@ -215,7 +233,9 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem" id="era-wwi">
+    <div class="tl-era-header" id="era-wwi"><span>World War I</span></div>
+
+    <div class="tl-event" data-era="wwi" role="listitem">
       <span class="tl-dot era-dot-wwi"></span>
       <div class="tl-card" data-href="ciphers/one-time-pad.html">
         <span class="tl-date">1917</span>
@@ -226,7 +246,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="wwi" role="listitem">
       <span class="tl-dot era-dot-wwi"></span>
       <div class="tl-card" data-href="ciphers/adfgvx.html">
         <span class="tl-date">1918</span>
@@ -237,7 +257,9 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem" id="era-wwii">
+    <div class="tl-era-header" id="era-wwii"><span>World War II</span></div>
+
+    <div class="tl-event" data-era="wwii" role="listitem">
       <span class="tl-dot era-dot-wwii"></span>
       <div class="tl-card" data-href="ciphers/enigma.html">
         <span class="tl-date">1920s–1945</span>
@@ -248,7 +270,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="wwii" role="listitem">
       <span class="tl-dot era-dot-wwii"></span>
       <div class="tl-card" data-href="ciphers/lorenz.html">
         <span class="tl-date">1940s</span>
@@ -259,7 +281,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="wwii" role="listitem">
       <span class="tl-dot era-dot-wwii"></span>
       <div class="tl-card" data-href="ciphers/navajo-code-talkers.html">
         <span class="tl-date">1942–1945</span>
@@ -270,7 +292,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="wwii" role="listitem">
       <span class="tl-dot era-dot-wwii"></span>
       <div class="tl-card">
         <span class="tl-date">1949</span>
@@ -280,7 +302,9 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem" id="era-modern">
+    <div class="tl-era-header" id="era-modern"><span>Modern Era</span></div>
+
+    <div class="tl-event" data-era="modern" role="listitem">
       <span class="tl-dot era-dot-modern"></span>
       <div class="tl-card">
         <span class="tl-date">1976</span>
@@ -290,7 +314,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="modern" role="listitem">
       <span class="tl-dot era-dot-modern"></span>
       <div class="tl-card">
         <span class="tl-date">1977</span>
@@ -300,7 +324,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="modern" role="listitem">
       <span class="tl-dot era-dot-modern"></span>
       <div class="tl-card">
         <span class="tl-date">2001</span>
@@ -310,7 +334,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="modern" role="listitem">
       <span class="tl-dot era-dot-modern"></span>
       <div class="tl-card">
         <span class="tl-date">2005</span>
@@ -320,7 +344,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="modern" role="listitem">
       <span class="tl-dot era-dot-modern"></span>
       <div class="tl-card">
         <span class="tl-date">2013</span>
@@ -330,7 +354,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" data-era="modern" role="listitem">
       <span class="tl-dot era-dot-modern"></span>
       <div class="tl-card" data-href="ciphers/zodiac.html">
         <span class="tl-date">1969 / Solved 2020</span>
@@ -341,7 +365,9 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem" id="era-quantum">
+    <div class="tl-era-header" id="era-quantum"><span>Quantum Era</span></div>
+
+    <div class="tl-event" data-era="quantum" role="listitem">
       <span class="tl-dot era-dot-quantum"></span>
       <div class="tl-card">
         <span class="tl-date">2017–2024</span>
@@ -387,12 +413,85 @@
 </footer>
 <script src="js/nav.js" defer></script>
 <script>
-document.querySelectorAll('.tl-card[data-href]').forEach(function(card) {
-  card.addEventListener('click', function(e) {
-    if (e.target.closest('a')) return;
-    window.location.href = card.dataset.href;
+(function() {
+  // Card click navigation
+  document.querySelectorAll('.tl-card[data-href]').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      window.location.href = card.dataset.href;
+    });
   });
-});
+
+  var legend = document.querySelector('.tl-legend');
+  var items = document.querySelectorAll('.tl-legend-item[data-filter]');
+  var events = document.querySelectorAll('.tl-event[data-era]');
+  var headers = document.querySelectorAll('.tl-era-header');
+  var hiddenEras = new Set();
+
+  // Era filtering — click toggles visibility; double-click isolates
+  items.forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      var era = item.dataset.filter;
+
+      if (hiddenEras.has(era)) {
+        hiddenEras.delete(era);
+      } else {
+        hiddenEras.add(era);
+      }
+      applyFilter();
+    });
+  });
+
+  function applyFilter() {
+    events.forEach(function(ev) {
+      ev.classList.toggle('hidden', hiddenEras.has(ev.dataset.era));
+    });
+    headers.forEach(function(h) {
+      var eraId = h.id.replace('era-', '');
+      h.style.display = hiddenEras.has(eraId) ? 'none' : '';
+    });
+    items.forEach(function(item) {
+      item.classList.toggle('dimmed', hiddenEras.has(item.dataset.filter));
+    });
+  }
+
+  // Scroll-spy — highlight current era in legend
+  var eraHeaders = Array.from(headers);
+  function updateScrollSpy() {
+    var scrollY = window.scrollY + 180;
+    var currentEra = null;
+    for (var i = eraHeaders.length - 1; i >= 0; i--) {
+      if (eraHeaders[i].offsetTop <= scrollY) {
+        currentEra = eraHeaders[i].id.replace('era-', '');
+        break;
+      }
+    }
+    items.forEach(function(item) {
+      item.classList.toggle('active', item.dataset.filter === currentEra && !hiddenEras.has(currentEra));
+    });
+  }
+
+  // Sticky shadow on legend
+  var legendTop = legend.offsetTop;
+  function updateSticky() {
+    legend.classList.toggle('stuck', window.scrollY > legendTop - 62);
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        updateScrollSpy();
+        updateSticky();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateScrollSpy();
+})();
 </script>
 </body>
 </html>

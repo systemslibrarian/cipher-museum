@@ -19,6 +19,7 @@
     ['museum-map.html',   'Museum Map'],
     ['halls/ancient.html','Halls'],
     ['timeline.html',     'Timeline'],
+    ['comparison.html',   'Comparison'],
     ['challenges.html',   'Challenges'],
     ['cryptanalysis.html','Cryptanalysis Lab'],
     ['cipher-flow.html',  'Cipher Flow'],
