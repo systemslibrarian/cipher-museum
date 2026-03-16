@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -85,7 +86,48 @@ B = the full middle-section shape
 Famous users:
 - Freemasons (lodge records)
 - George Washington
-- Civil War soldiers (personal letters)</pre></div>
+- Civil War soldiers (personal letters)</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 400 200" style="max-width:400px;width:100%;height:auto;" aria-label="Pigpen cipher grid shapes">
+          <style>
+            .pp-grid{stroke:#c8b273;stroke-width:1.5;fill:none}
+            .pp-dot{fill:#d4af37;r:3}
+            .pp-ltr{font-family:var(--fd,'Cinzel',serif);font-size:11px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
+            .pp-sym{stroke:#d4af37;stroke-width:2;fill:none}
+            .pp-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:middle}
+          </style>
+          <!-- Grid 1: tic-tac-toe -->
+          <text class="pp-lbl" x="65" y="15">Grid 1</text>
+          <line class="pp-grid" x1="45" y1="25" x2="45" y2="115"/><line class="pp-grid" x1="85" y1="25" x2="85" y2="115"/>
+          <line class="pp-grid" x1="5" y1="55" x2="125" y2="55"/><line class="pp-grid" x1="5" y1="85" x2="125" y2="85"/>
+          <text class="pp-ltr" x="25" y="42">A</text><text class="pp-ltr" x="65" y="42">B</text><text class="pp-ltr" x="105" y="42">C</text>
+          <text class="pp-ltr" x="25" y="72">D</text><text class="pp-ltr" x="65" y="72">E</text><text class="pp-ltr" x="105" y="72">F</text>
+          <text class="pp-ltr" x="25" y="102">G</text><text class="pp-ltr" x="65" y="102">H</text><text class="pp-ltr" x="105" y="102">I</text>
+          <!-- Grid 2: X -->
+          <text class="pp-lbl" x="190" y="15">Grid 2</text>
+          <line class="pp-grid" x1="155" y1="25" x2="225" y2="115"/><line class="pp-grid" x1="225" y1="25" x2="155" y2="115"/>
+          <text class="pp-ltr" x="190" y="42">J</text><text class="pp-ltr" x="215" y="72">K</text>
+          <text class="pp-ltr" x="190" y="102">L</text><text class="pp-ltr" x="165" y="72">M</text>
+          <!-- Example symbols -->
+          <text class="pp-lbl" x="320" y="15">Example symbols:</text>
+          <!-- A = open bottom-right -->
+          <text class="pp-lbl" x="280" y="48">A =</text>
+          <polyline class="pp-sym" points="300,55 300,35 320,35"/>
+          <!-- E = box (closed) -->
+          <text class="pp-lbl" x="345" y="48">E =</text>
+          <rect class="pp-sym" x="360" y="33" width="22" height="22"/>
+          <!-- H = U shape -->
+          <text class="pp-lbl" x="280" y="88">H =</text>
+          <polyline class="pp-sym" points="300,70 300,90 320,90 320,70"/>
+          <!-- J = < shape -->
+          <text class="pp-lbl" x="345" y="88">J =</text>
+          <polyline class="pp-sym" points="380,70 365,82 380,95"/>
+          <!-- info -->
+          <text class="pp-lbl" x="200" y="140">Each letter's symbol is the shape of the cell it occupies</text>
+          <text class="pp-lbl" x="200" y="158">Dots distinguish grids 3 &amp; 4 (dotted versions of 1 &amp; 2)</text>
+        </svg>
+        <p class="diagram-caption">Pigpen cipher: letter shapes come from tic-tac-toe and X grids — dots distinguish the second set</p>
+      </div></div>
     </div>
 
     <div class="panel">
@@ -154,6 +196,7 @@ Famous users:
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

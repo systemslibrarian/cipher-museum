@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -79,7 +80,51 @@ Encryption:
 4. Continue encrypting with new alignment
 
 Alberti changed alignment every few words
-→ first real polyalphabetic cipher in practice</pre></div>
+→ first real polyalphabetic cipher in practice</pre>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 300 300" width="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Alberti cipher disk with two concentric alphabet rings">
+  <style>text{font-family:'JetBrains Mono',monospace}</style>
+  <!-- Outer ring -->
+  <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(201,168,76,.3)" stroke-width="1.5"/>
+  <circle cx="150" cy="150" r="115" fill="none" stroke="rgba(201,168,76,.15)" stroke-width="1"/>
+  <!-- Inner ring -->
+  <circle cx="150" cy="150" r="90" fill="none" stroke="rgba(90,200,160,.3)" stroke-width="1.5"/>
+  <circle cx="150" cy="150" r="65" fill="none" stroke="rgba(90,200,160,.15)" stroke-width="1"/>
+  <!-- Center -->
+  <circle cx="150" cy="150" r="8" fill="#C9A84C" opacity=".6"/>
+  <!-- Outer letters (plain) -->
+  <g fill="#C9A84C" font-size="12">
+    <text x="150" y="22" text-anchor="middle">A</text><text x="183" y="25" text-anchor="middle">B</text>
+    <text x="213" y="36" text-anchor="middle">C</text><text x="238" y="55" text-anchor="middle">D</text>
+    <text x="257" y="80" text-anchor="middle">E</text><text x="268" y="110" text-anchor="middle">F</text>
+    <text x="272" y="142" text-anchor="middle">G</text><text x="268" y="174" text-anchor="middle">H</text>
+    <text x="257" y="203" text-anchor="middle">I</text><text x="238" y="228" text-anchor="middle">K</text>
+    <text x="213" y="247" text-anchor="middle">L</text><text x="183" y="258" text-anchor="middle">M</text>
+    <text x="150" y="262" text-anchor="middle">N</text><text x="117" y="258" text-anchor="middle">O</text>
+    <text x="87" y="247" text-anchor="middle">P</text><text x="62" y="228" text-anchor="middle">Q</text>
+    <text x="43" y="203" text-anchor="middle">R</text><text x="32" y="174" text-anchor="middle">S</text>
+    <text x="28" y="142" text-anchor="middle">T</text><text x="32" y="110" text-anchor="middle">V</text>
+    <text x="43" y="80" text-anchor="middle">X</text><text x="62" y="55" text-anchor="middle">Y</text>
+    <text x="87" y="36" text-anchor="middle">Z</text><text x="117" y="25" text-anchor="middle">&amp;</text>
+  </g>
+  <!-- Inner letters (cipher) -->
+  <g fill="#5AC8A0" font-size="10">
+    <text x="150" y="68" text-anchor="middle">g</text><text x="178" y="72" text-anchor="middle">k</text>
+    <text x="202" y="82" text-anchor="middle">z</text><text x="220" y="98" text-anchor="middle">t</text>
+    <text x="232" y="118" text-anchor="middle">r</text><text x="236" y="142" text-anchor="middle">n</text>
+    <text x="232" y="166" text-anchor="middle">h</text><text x="220" y="186" text-anchor="middle">l</text>
+    <text x="202" y="202" text-anchor="middle">a</text><text x="178" y="212" text-anchor="middle">q</text>
+    <text x="150" y="216" text-anchor="middle">b</text><text x="122" y="212" text-anchor="middle">m</text>
+    <text x="98" y="202" text-anchor="middle">o</text><text x="80" y="186" text-anchor="middle">f</text>
+    <text x="68" y="166" text-anchor="middle">d</text><text x="64" y="142" text-anchor="middle">c</text>
+    <text x="68" y="118" text-anchor="middle">e</text><text x="80" y="98" text-anchor="middle">p</text>
+    <text x="98" y="82" text-anchor="middle">s</text><text x="122" y="72" text-anchor="middle">w</text>
+  </g>
+  <!-- Labels -->
+  <text x="150" y="295" text-anchor="middle" font-size="9" fill="#706878">Outer = plaintext · Inner = ciphertext (rotates)</text>
+</svg>
+<p class="diagram-caption">Two concentric disks — the inner ring rotates to change the substitution alphabet mid-message</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -148,6 +193,7 @@ Alberti changed alignment every few words
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -83,7 +84,53 @@ Wheel pin counts: 41,31,29,26,23,
                   61,37
 
 Total period: LCM of all wheels
-= astronomically large — never repeats in practice</pre></div>
+= astronomically large — never repeats in practice</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 440 170" style="max-width:440px;width:100%;height:auto;" aria-label="Lorenz cipher wheel structure diagram">
+          <style>
+            .lz-wheel{fill:none;stroke-width:1.5}
+            .lz-chi{stroke:#d4af37}
+            .lz-psi{stroke:#6fa3ef}
+            .lz-motor{stroke:#ef6f6f}
+            .lz-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;text-anchor:middle;dominant-baseline:central}
+            .lz-op{font-family:var(--fd,'Cinzel',serif);font-size:14px;fill:#c8b273;text-anchor:middle;dominant-baseline:central}
+            .lz-box{fill:#1a1a2e;stroke:#3a3a4a;stroke-width:1;rx:4}
+          </style>
+          <!-- Chi wheels -->
+          <text class="lz-lbl" style="fill:#d4af37" x="90" y="15">χ Chi wheels (5)</text>
+          <circle class="lz-chi" cx="30" cy="55" r="18"/><text class="lz-lbl" style="fill:#d4af37" x="30" y="55">41</text>
+          <circle class="lz-chi" cx="70" cy="55" r="18"/><text class="lz-lbl" style="fill:#d4af37" x="70" y="55">31</text>
+          <circle class="lz-chi" cx="110" cy="55" r="18"/><text class="lz-lbl" style="fill:#d4af37" x="110" y="55">29</text>
+          <circle class="lz-chi" cx="150" cy="55" r="18"/><text class="lz-lbl" style="fill:#d4af37" x="150" y="55">26</text>
+          <circle class="lz-chi" cx="190" cy="55" r="18"/><text class="lz-lbl" style="fill:#d4af37" x="190" y="55">23</text>
+          <!-- Motor wheels -->
+          <text class="lz-lbl" style="fill:#ef6f6f" x="260" y="15">Motor (2)</text>
+          <circle class="lz-motor" cx="245" cy="55" r="16"/><text class="lz-lbl" style="fill:#ef6f6f" x="245" y="55">61</text>
+          <circle class="lz-motor" cx="280" cy="55" r="16"/><text class="lz-lbl" style="fill:#ef6f6f" x="280" y="55">37</text>
+          <!-- Psi wheels -->
+          <text class="lz-lbl" style="fill:#6fa3ef" x="380" y="15">ψ Psi wheels (5)</text>
+          <circle class="lz-psi" cx="320" cy="55" r="18"/><text class="lz-lbl" style="fill:#6fa3ef" x="320" y="55">43</text>
+          <circle class="lz-psi" cx="360" cy="55" r="18"/><text class="lz-lbl" style="fill:#6fa3ef" x="360" y="55">47</text>
+          <circle class="lz-psi" cx="400" cy="55" r="18"/><text class="lz-lbl" style="fill:#6fa3ef" x="400" y="55">51</text>
+          <!-- Connection line -->
+          <line x1="265" y1="72" x2="265" y2="85" stroke="#ef6f6f" stroke-width="1" stroke-dasharray="3,2"/>
+          <text class="lz-lbl" style="fill:#ef6f6f;font-size:8px" x="265" y="95">controls</text>
+          <line x1="265" y1="100" x2="360" y2="100" stroke="#ef6f6f" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#lz-tri)"/>
+          <defs><marker id="lz-tri" viewBox="0 0 6 4" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M0,0 L6,2 L0,4Z" fill="#ef6f6f"/></marker></defs>
+          <!-- XOR operation -->
+          <rect class="lz-box" x="60" y="115" width="320" height="40"/>
+          <text class="lz-lbl" style="fill:#e8d5a3" x="220" y="130">Plaintext</text>
+          <text class="lz-op" x="170" y="138">⊕</text>
+          <text class="lz-lbl" style="fill:#d4af37" x="220" y="145">χ-stream</text>
+          <text class="lz-op" x="280" y="138">⊕</text>
+          <text class="lz-lbl" style="fill:#6fa3ef" x="320" y="145">ψ-stream</text>
+          <text class="lz-op" x="360" y="138">=</text>
+          <text class="lz-lbl" style="fill:#d4af37;font-size:11px" x="395" y="138">Cipher</text>
+          <!-- note -->
+          <text class="lz-lbl" style="fill:#555" x="220" y="165">Numbers = pin counts per wheel · Motor wheels control ψ stepping</text>
+        </svg>
+        <p class="diagram-caption">Lorenz SZ42: 12 wheels generating two keystreams XORed with 5-bit Baudot character codes</p>
+      </div></div>
     </div>
 
     <div class="panel">
@@ -153,6 +200,7 @@ Total period: LCM of all wheels
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

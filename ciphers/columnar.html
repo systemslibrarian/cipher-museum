@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -79,7 +80,62 @@ Read col 1(B): AFSX
 Read col 2(E): ERAG
 Read col 3(A): HRIX
 Read col 4(R): OTXX
-Read col 5(Z): WECN</pre></div>
+Read col 5(Z): WECN</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 440 260" style="max-width:440px;width:100%;height:auto;" aria-label="Columnar transposition grid diagram">
+          <style>
+            .ct-cell{font-family:'JetBrains Mono',var(--fc,monospace);font-size:14px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
+            .ct-key{font-family:var(--fd,'Cinzel',serif);font-size:14px;fill:#d4af37;text-anchor:middle;dominant-baseline:central;font-weight:700}
+            .ct-num{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:middle}
+            .ct-box{fill:none;stroke:#3a3a4a;stroke-width:1}
+            .ct-hi{fill:#d4af37;fill-opacity:.1}
+            .ct-arr{stroke:#c8b273;stroke-width:1;marker-end:url(#ct-tri);opacity:.6}
+            .ct-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:11px;fill:#888;text-anchor:middle}
+          </style>
+          <defs><marker id="ct-tri" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="8" markerHeight="6" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#c8b273"/></marker></defs>
+          <!-- Labels -->
+          <text class="ct-lbl" x="110" y="15">Write in rows →</text>
+          <text class="ct-lbl" x="350" y="15">Read by column order ↓</text>
+          <!-- Key row -->
+          <text class="ct-key" x="40" y="40">Z</text>
+          <text class="ct-key" x="80" y="40">E</text>
+          <text class="ct-key" x="120" y="40">B</text>
+          <text class="ct-key" x="160" y="40">R</text>
+          <text class="ct-key" x="200" y="40">A</text>
+          <!-- Column numbers -->
+          <text class="ct-num" x="40" y="55">5</text>
+          <text class="ct-num" x="80" y="55">2</text>
+          <text class="ct-num" x="120" y="55">1</text>
+          <text class="ct-num" x="160" y="55">4</text>
+          <text class="ct-num" x="200" y="55">3</text>
+          <!-- Grid -->
+          <rect class="ct-box" x="20" y="62" width="200" height="130"/>
+          <line class="ct-box" x1="60" y1="62" x2="60" y2="192"/>
+          <line class="ct-box" x1="100" y1="62" x2="100" y2="192"/>
+          <line class="ct-box" x1="140" y1="62" x2="140" y2="192"/>
+          <line class="ct-box" x1="180" y1="62" x2="180" y2="192"/>
+          <line class="ct-box" x1="20" y1="94" x2="220" y2="94"/>
+          <line class="ct-box" x1="20" y1="126" x2="220" y2="126"/>
+          <line class="ct-box" x1="20" y1="158" x2="220" y2="158"/>
+          <!-- Highlight column 1 (B) -->
+          <rect class="ct-hi" x="100" y="62" width="40" height="130"/>
+          <!-- Grid content -->
+          <text class="ct-cell" x="40" y="80">W</text><text class="ct-cell" x="80" y="80">E</text><text class="ct-cell" x="120" y="80">A</text><text class="ct-cell" x="160" y="80">T</text><text class="ct-cell" x="200" y="80">H</text>
+          <text class="ct-cell" x="40" y="112">E</text><text class="ct-cell" x="80" y="112">R</text><text class="ct-cell" x="120" y="112">F</text><text class="ct-cell" x="160" y="112">O</text><text class="ct-cell" x="200" y="112">R</text>
+          <text class="ct-cell" x="40" y="144">C</text><text class="ct-cell" x="80" y="144">A</text><text class="ct-cell" x="120" y="144">S</text><text class="ct-cell" x="160" y="144">T</text><text class="ct-cell" x="200" y="144">I</text>
+          <text class="ct-cell" x="40" y="176">N</text><text class="ct-cell" x="80" y="176">G</text><text class="ct-cell" x="120" y="176">X</text><text class="ct-cell" x="160" y="176">X</text><text class="ct-cell" x="200" y="176">X</text>
+          <!-- Output -->
+          <text class="ct-lbl" x="110" y="210">Output: </text>
+          <text style="font-family:'JetBrains Mono',monospace;font-size:12px;fill:#d4af37;text-anchor:middle" x="110" y="228">AFSX · ERAG · HRIX · OTXX · WECN</text>
+          <!-- Read arrows on right side -->
+          <text class="ct-num" x="350" y="80" style="fill:#d4af37">Col 1 (B): A F S X</text>
+          <text class="ct-num" x="350" y="100">Col 2 (E): E R A G</text>
+          <text class="ct-num" x="350" y="120">Col 3 (A): H R I X</text>
+          <text class="ct-num" x="350" y="140">Col 4 (R): O T X X</text>
+          <text class="ct-num" x="350" y="160">Col 5 (Z): W E C N</text>
+        </svg>
+        <p class="diagram-caption">Columnar transposition: plaintext fills a grid by rows, then columns are read in keyword-alphabetical order</p>
+      </div></div>
     </div>
 
     <div class="panel">
@@ -148,6 +204,7 @@ Read col 5(Z): WECN</pre></div>
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

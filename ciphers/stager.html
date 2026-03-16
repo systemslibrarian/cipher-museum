@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -80,7 +81,34 @@ Step 3: Read columns by prearranged route
         'up 1, down 6, up 2, down 3, up 5, down 4'
 
 Step 4: Insert null words at column ends
-        to disguise column boundaries</pre><p style='margin-top:1rem;'>Example from actual Civil War dispatch (Buell to Halleck, Sept 29 1862): The route and column count were specified by the first 'commencement word' of the message.</p></div>
+        to disguise column boundaries</pre><p style='margin-top:1rem;'>Example from actual Civil War dispatch (Buell to Halleck, Sept 29 1862): The route and column count were specified by the first 'commencement word' of the message.</p>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 380 200" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stager cipher route transposition grid">
+  <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:2}</style>
+  <text x="10" y="16" font-size="9" fill="#C9A84C" letter-spacing=".1em">ROUTE TRANSPOSITION GRID</text>
+  <g transform="translate(10,24)">
+    <text x="6" y="12" font-size="7" fill="#C9A84C">Col1</text><text x="46" y="12" font-size="7" fill="#C9A84C">Col2</text><text x="86" y="12" font-size="7" fill="#C9A84C">Col3</text><text x="126" y="12" font-size="7" fill="#C9A84C">Col4</text><text x="166" y="12" font-size="7" fill="#C9A84C">Col5</text><text x="206" y="12" font-size="7" fill="#C9A84C">Col6</text>
+    <rect x="0" y="18" width="36" height="18" fill="rgba(90,200,160,.08)" stroke="rgba(90,200,160,.15)" stroke-width=".5"/><text x="6" y="32" font-size="8" fill="#5AC8A0">SEND</text>
+    <rect x="40" y="18" width="36" height="18" fill="rgba(90,144,200,.08)" stroke="rgba(90,144,200,.15)" stroke-width=".5"/><text x="46" y="32" font-size="8" fill="#5A90C8">MORE</text>
+    <rect x="80" y="18" width="36" height="18" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="86" y="32" font-size="8" fill="#C9A84C">AMMO</text>
+    <rect x="120" y="18" width="36" height="18" fill="rgba(200,90,90,.08)" stroke="rgba(200,90,90,.15)" stroke-width=".5"/><text x="126" y="32" font-size="8" fill="#C85A5A">FROM</text>
+    <rect x="160" y="18" width="36" height="18" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="166" y="32" font-size="8" fill="#C9A84C">NASH</text>
+    <rect x="200" y="18" width="36" height="18" fill="rgba(90,200,160,.08)" stroke="rgba(90,200,160,.15)" stroke-width=".5"/><text x="206" y="32" font-size="8" fill="#5AC8A0">VILL</text>
+    <rect x="0" y="40" width="36" height="18" fill="rgba(90,200,160,.08)" stroke="rgba(90,200,160,.15)" stroke-width=".5"/><text x="6" y="54" font-size="8" fill="#5AC8A0">TO</text>
+    <rect x="40" y="40" width="36" height="18" fill="rgba(90,144,200,.08)" stroke="rgba(90,144,200,.15)" stroke-width=".5"/><text x="46" y="54" font-size="8" fill="#5A90C8">GENL</text>
+    <rect x="80" y="40" width="36" height="18" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.15)" stroke-width=".5"/><text x="86" y="54" font-size="8" fill="#C9A84C">BUELL</text>
+  </g>
+  <g transform="translate(10,90)">
+    <text x="0" y="14" font-size="9" fill="#C9A84C">Route: &#8593;col1 &#8595;col6 &#8593;col2 &#8595;col3 &#8593;col5 &#8595;col4</text>
+    <text x="0" y="34" font-size="9" fill="#5AC8A0">Read: TO SEND | VILL MORE | GENL AMMO | BUELL FROM | NASH</text>
+    <text x="0" y="54" font-size="8" fill="#706878">+ Code words substituted: RAPTURE=Louisville, CAMDEN=Thomas</text>
+    <text x="0" y="70" font-size="8" fill="#706878">+ Null words inserted at column boundaries</text>
+  </g>
+  <rect x="10" y="168" width="360" height="22" fill="rgba(90,200,160,.06)" stroke="rgba(90,200,160,.15)" stroke-width=".5" rx="4"/>
+  <text x="20" y="183" font-size="9" fill="#5AC8A0">&#9733; Unbreakable during the Civil War &#8212; codebook + route kept Union comms secure</text>
+</svg>
+<p class="diagram-caption">Words written in columns, read by secret route, with code-word substitutions — never broken during wartime</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -149,6 +177,7 @@ Step 4: Insert null words at column ends
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

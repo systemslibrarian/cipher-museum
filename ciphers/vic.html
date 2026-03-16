@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -84,7 +85,27 @@ Step 4: Second transposition
         Apply columnar transposition again
         with different key
 
-Result: Compact numeric ciphertext</pre></div>
+Result: Compact numeric ciphertext</pre>
+<div class="diagram-wrap" style="margin-top:1.5rem;">
+<svg viewBox="0 0 380 200" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VIC cipher four-layer encryption process">
+  <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:5}</style>
+  <rect x="5" y="5" width="370" height="35" fill="rgba(90,200,160,.06)" stroke="rgba(90,200,160,.2)" stroke-width="1"/>
+  <text x="15" y="18" font-size="9" fill="#5AC8A0">1. STRADDLING CHECKERBOARD</text>
+  <text x="15" y="32" font-size="8" fill="#B8B0A0">E=3 T=6 A=0 → freq letters: 1 digit | rare: 2 digits = compression</text>
+  <rect x="5" y="48" width="370" height="35" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.2)" stroke-width="1"/>
+  <text x="15" y="62" font-size="9" fill="#C9A84C">2. CHAIN ADDITION KEY</text>
+  <text x="15" y="76" font-size="8" fill="#B8B0A0">Song lyric + date → pseudo-random numeric keystream via chain addition</text>
+  <rect x="5" y="92" width="370" height="35" fill="rgba(90,144,200,.06)" stroke="rgba(90,144,200,.2)" stroke-width="1"/>
+  <text x="15" y="106" font-size="9" fill="#5A90C8">3. FIRST COLUMNAR TRANSPOSITION</text>
+  <text x="15" y="120" font-size="8" fill="#B8B0A0">Reorder columns by derived key → scramble digit positions</text>
+  <rect x="5" y="136" width="370" height="35" fill="rgba(200,90,90,.06)" stroke="rgba(200,90,90,.2)" stroke-width="1"/>
+  <text x="15" y="150" font-size="9" fill="#C85A5A">4. SECOND COLUMNAR TRANSPOSITION</text>
+  <text x="15" y="164" font-size="8" fill="#B8B0A0">Different key → double transposition of already-scrambled digits</text>
+  <rect x="5" y="180" width="370" height="16" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.2)" stroke-width=".5" rx="3"/>
+  <text x="15" y="192" font-size="8" fill="#C9A84C">Never broken by cryptanalysis — exposed only by defector Reino Hayhanen (1957)</text>
+</svg>
+<p class="diagram-caption">Four-layer process: encoding → keyed addition → transposition → transposition — resisted all NSA attacks</p>
+</div></div>
     </div>
 
     <div class="panel">
@@ -154,6 +175,7 @@ Result: Compact numeric ciphertext</pre></div>
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

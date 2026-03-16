@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -83,7 +84,52 @@ M-94 specifications:
 - 25 aluminum disks
 - Each disk: alphabet in unique order
 - Disk order = key (25! possible orders)
-- Message length = 25 characters max</pre></div>
+- Message length = 25 characters max</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 380 180" style="max-width:380px;width:100%;height:auto;" aria-label="Jefferson disk cylinder with rotating alphabet disks">
+          <style>
+            .jd-disk{fill:none;stroke:#c8b273;stroke-width:1}
+            .jd-ltr{font-family:'JetBrains Mono',monospace;font-size:9px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
+            .jd-hi{fill:#d4af37;fill-opacity:.15;stroke:#d4af37;stroke-width:.8}
+            .jd-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:middle}
+            .jd-spindle{stroke:#8b7355;stroke-width:3}
+          </style>
+          <!-- Spindle -->
+          <line class="jd-spindle" x1="30" y1="40" x2="30" y2="160"/>
+          <!-- Disk (rows with scrambled alphabets) -->
+          <rect class="jd-hi" x="40" y="35" width="18" height="130" rx="2"/>
+          <text class="jd-lbl" x="50" y="25">↓ read this column</text>
+          <!-- Disk 1 -->
+          <rect class="jd-disk" x="15" y="35" width="350" height="18" rx="3"/>
+          <text class="jd-ltr" x="50" y="46" style="fill:#d4af37">H</text>
+          <text class="jd-ltr" x="68" y="46">Q</text><text class="jd-ltr" x="86" y="46">Z</text><text class="jd-ltr" x="104" y="46">M</text><text class="jd-ltr" x="122" y="46">B</text>
+          <text class="jd-ltr" x="140" y="46">Y</text><text class="jd-ltr" x="158" y="46">R</text><text class="jd-ltr" x="176" y="46">E</text><text class="jd-ltr" x="194" y="46">K</text>
+          <!-- Disk 2 -->
+          <rect class="jd-disk" x="15" y="57" width="350" height="18" rx="3"/>
+          <text class="jd-ltr" x="50" y="68" style="fill:#d4af37">E</text>
+          <text class="jd-ltr" x="68" y="68">T</text><text class="jd-ltr" x="86" y="68">A</text><text class="jd-ltr" x="104" y="68">O</text><text class="jd-ltr" x="122" y="68">N</text>
+          <text class="jd-ltr" x="140" y="68">S</text><text class="jd-ltr" x="158" y="68">D</text><text class="jd-ltr" x="176" y="68">L</text><text class="jd-ltr" x="194" y="68">W</text>
+          <!-- Disk 3 -->
+          <rect class="jd-disk" x="15" y="79" width="350" height="18" rx="3"/>
+          <text class="jd-ltr" x="50" y="90" style="fill:#d4af37">L</text>
+          <text class="jd-ltr" x="68" y="90">P</text><text class="jd-ltr" x="86" y="90">W</text><text class="jd-ltr" x="104" y="90">G</text><text class="jd-ltr" x="122" y="90">X</text>
+          <text class="jd-ltr" x="140" y="90">F</text><text class="jd-ltr" x="158" y="90">U</text><text class="jd-ltr" x="176" y="90">C</text><text class="jd-ltr" x="194" y="90">I</text>
+          <!-- Disk 4 -->
+          <rect class="jd-disk" x="15" y="101" width="350" height="18" rx="3"/>
+          <text class="jd-ltr" x="50" y="112" style="fill:#d4af37">P</text>
+          <text class="jd-ltr" x="68" y="112">C</text><text class="jd-ltr" x="86" y="112">V</text><text class="jd-ltr" x="104" y="112">B</text><text class="jd-ltr" x="122" y="112">K</text>
+          <text class="jd-ltr" x="140" y="112">A</text><text class="jd-ltr" x="158" y="112">J</text><text class="jd-ltr" x="176" y="112">F</text><text class="jd-ltr" x="194" y="112">H</text>
+          <!-- Disk 5 -->
+          <rect class="jd-disk" x="15" y="123" width="350" height="18" rx="3"/>
+          <text class="jd-ltr" x="50" y="134" style="fill:#d4af37">!</text>
+          <text class="jd-ltr" x="68" y="134">N</text><text class="jd-ltr" x="86" y="134">D</text><text class="jd-ltr" x="104" y="134">R</text><text class="jd-ltr" x="122" y="134">F</text>
+          <text class="jd-ltr" x="140" y="134">S</text><text class="jd-ltr" x="158" y="134">I</text><text class="jd-ltr" x="176" y="134">A</text><text class="jd-ltr" x="194" y="134">O</text>
+          <!-- Labels -->
+          <text class="jd-lbl" x="190" y="165">Rotate disks to spell HELP → read any other row as ciphertext</text>
+          <text class="jd-lbl" x="190" y="178" style="fill:#d4af37">Disk order is the key · 25! ≈ 1.55 × 10²⁵ possible orders</text>
+        </svg>
+        <p class="diagram-caption">Jefferson Disk: disks rotated to spell the message; any other row becomes the ciphertext</p>
+      </div></div>
     </div>
 
     <div class="panel">
@@ -152,6 +198,7 @@ M-94 specifications:
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

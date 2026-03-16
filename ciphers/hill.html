@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -74,7 +75,52 @@
                         = [6×7+24×8, 1×7+13×8] mod 26
                         = [234, 111] mod 26
                         = [0, 7]
-                        = AG</pre><p style='margin-top:1rem;'>Decryption uses the matrix inverse: P = K⁻¹ × C mod 26. Not all matrices have inverses mod 26 — the key matrix must be chosen carefully.</p></div>
+                        = AG</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 440 140" style="max-width:440px;width:100%;height:auto;" aria-label="Hill cipher matrix multiplication diagram">
+          <style>
+            .hi-mat{font-family:var(--fd,'Cinzel',serif);font-size:16px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
+            .hi-bkt{stroke:#c8b273;stroke-width:1.5;fill:none}
+            .hi-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:11px;fill:#888;text-anchor:middle}
+            .hi-op{font-family:var(--fd,'Cinzel',serif);font-size:18px;fill:#d4af37;text-anchor:middle;dominant-baseline:central}
+            .hi-res{fill:#d4af37}
+          </style>
+          <!-- Key matrix K -->
+          <text class="hi-lbl" x="50" y="15">Key Matrix</text>
+          <path class="hi-bkt" d="M20,25 Q15,25 15,35 L15,95 Q15,105 20,105"/>
+          <path class="hi-bkt" d="M80,25 Q85,25 85,35 L85,95 Q85,105 80,105"/>
+          <text class="hi-mat" x="40" y="55">6</text>
+          <text class="hi-mat" x="65" y="55">24</text>
+          <text class="hi-mat" x="40" y="85">1</text>
+          <text class="hi-mat" x="65" y="85">13</text>
+          <!-- × -->
+          <text class="hi-op" x="110" y="65">×</text>
+          <!-- Plaintext vector -->
+          <text class="hi-lbl" x="150" y="15">Plain</text>
+          <path class="hi-bkt" d="M130,25 Q125,25 125,35 L125,95 Q125,105 130,105"/>
+          <path class="hi-bkt" d="M170,25 Q175,25 175,35 L175,95 Q175,105 170,105"/>
+          <text class="hi-mat" x="150" y="55">7</text>
+          <text class="hi-mat" x="150" y="85">8</text>
+          <text class="hi-lbl" x="150" y="120" style="font-size:10px">(H,I)</text>
+          <!-- = -->
+          <text class="hi-op" x="205" y="65">=</text>
+          <!-- Result vector -->
+          <text class="hi-lbl" x="255" y="15">mod 26</text>
+          <path class="hi-bkt" d="M225,25 Q220,25 220,35 L220,95 Q220,105 225,105"/>
+          <path class="hi-bkt" d="M285,25 Q290,25 290,35 L290,95 Q290,105 285,105"/>
+          <text class="hi-mat" x="255" y="55">234→<tspan class="hi-res">0</tspan></text>
+          <text class="hi-mat" x="255" y="85">111→<tspan class="hi-res">7</tspan></text>
+          <!-- = -->
+          <text class="hi-op" x="320" y="65">→</text>
+          <!-- Final letters -->
+          <rect x="345" y="35" width="40" height="30" rx="5" fill="#d4af37" fill-opacity=".15" stroke="#d4af37" stroke-width="1"/>
+          <text class="hi-mat hi-res" x="365" y="55" style="font-size:20px">A</text>
+          <rect x="345" y="70" width="40" height="30" rx="5" fill="#d4af37" fill-opacity=".15" stroke="#d4af37" stroke-width="1"/>
+          <text class="hi-mat hi-res" x="365" y="88" style="font-size:20px">G</text>
+          <text class="hi-lbl" x="365" y="120" style="font-size:10px">Cipher</text>
+        </svg>
+        <p class="diagram-caption">Hill cipher: plaintext vector multiplied by key matrix mod 26 — HI becomes AG</p>
+      </div><p style='margin-top:1rem;'>Decryption uses the matrix inverse: P = K⁻¹ × C mod 26. Not all matrices have inverses mod 26 — the key matrix must be chosen carefully.</p></div>
     </div>
 
     <div class="panel">
@@ -143,6 +189,7 @@
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

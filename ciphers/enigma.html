@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -86,7 +87,64 @@
    (60 rotor order combinations)
 
 Total: ~158 quintillion settings
-But: same letter never encrypts to itself → cribs work</pre></div>
+But: same letter never encrypts to itself → cribs work</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 520 200" style="max-width:520px;width:100%;height:auto;" aria-label="Enigma signal path diagram">
+          <!-- Signal path: Keyboard → Plugboard → Rotors → Reflector → back -->
+          <style>
+            .eg-label{font-family:var(--fm,'Cormorant Garamond',serif);font-size:11px;fill:#c8b273;text-anchor:middle}
+            .eg-box{fill:#1a1a2e;stroke:#c8b273;stroke-width:1.2;rx:6}
+            .eg-arrow{stroke:#d4af37;stroke-width:1.5;marker-end:url(#eg-tri)}
+            .eg-back{stroke:#8b7355;stroke-width:1.2;stroke-dasharray:4,3;marker-end:url(#eg-tri2)}
+            .eg-letter{font-family:var(--fd,'Cinzel',serif);font-size:14px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
+          </style>
+          <defs>
+            <marker id="eg-tri" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="8" markerHeight="6" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#d4af37"/></marker>
+            <marker id="eg-tri2" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="8" markerHeight="6" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#8b7355"/></marker>
+          </defs>
+          <!-- Keyboard -->
+          <rect class="eg-box" x="5" y="60" width="60" height="50"/>
+          <text class="eg-label" x="35" y="55">Keyboard</text>
+          <text class="eg-letter" x="35" y="85">A</text>
+          <!-- Plugboard -->
+          <rect class="eg-box" x="95" y="60" width="70" height="50"/>
+          <text class="eg-label" x="130" y="55">Plugboard</text>
+          <text class="eg-letter" x="130" y="85">Q</text>
+          <!-- Rotor III -->
+          <rect class="eg-box" x="195" y="60" width="55" height="50" style="fill:#1e1e38"/>
+          <text class="eg-label" x="222" y="55">Rotor III</text>
+          <text class="eg-letter" x="222" y="85">M</text>
+          <!-- Rotor II -->
+          <rect class="eg-box" x="270" y="60" width="55" height="50" style="fill:#1e1e38"/>
+          <text class="eg-label" x="297" y="55">Rotor II</text>
+          <text class="eg-letter" x="297" y="85">K</text>
+          <!-- Rotor I -->
+          <rect class="eg-box" x="345" y="60" width="55" height="50" style="fill:#1e1e38"/>
+          <text class="eg-label" x="372" y="55">Rotor I</text>
+          <text class="eg-letter" x="372" y="85">T</text>
+          <!-- Reflector -->
+          <rect class="eg-box" x="430" y="60" width="70" height="50" style="fill:#2a1a1a;stroke:#b8860b"/>
+          <text class="eg-label" x="465" y="55">Reflector</text>
+          <text class="eg-letter" x="465" y="85">↺</text>
+          <!-- Forward arrows -->
+          <line class="eg-arrow" x1="65" y1="78" x2="93" y2="78"/>
+          <line class="eg-arrow" x1="165" y1="78" x2="193" y2="78"/>
+          <line class="eg-arrow" x1="250" y1="78" x2="268" y2="78"/>
+          <line class="eg-arrow" x1="325" y1="78" x2="343" y2="78"/>
+          <line class="eg-arrow" x1="400" y1="78" x2="428" y2="78"/>
+          <!-- Return path -->
+          <path class="eg-back" d="M430,110 L400,130 L250,130 L165,130 L95,130 L65,130" fill="none"/>
+          <!-- Lampboard -->
+          <rect class="eg-box" x="5" y="140" width="60" height="40"/>
+          <text class="eg-label" x="35" y="138">Lampboard</text>
+          <text class="eg-letter" x="35" y="162" style="fill:#d4af37;font-size:16px">G</text>
+          <line class="eg-back" x1="65" y1="135" x2="35" y2="140"/>
+          <!-- Labels -->
+          <text class="eg-label" x="260" y="148" style="font-size:9px;fill:#8b7355">← return path (different route through rotors)</text>
+          <text class="eg-label" x="260" y="192" style="font-size:10px;fill:#555">A never encrypts to itself — the reflector guarantees it</text>
+        </svg>
+        <p class="diagram-caption">Signal path through an Enigma machine: each keypress sends current through the plugboard, three rotors, and reflector, then back through the rotors by a different route</p>
+      </div></div>
     </div>
 
     <div class="panel">
@@ -156,6 +214,7 @@ But: same letter never encrypts to itself → cribs work</pre></div>
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

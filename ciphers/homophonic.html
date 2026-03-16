@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -71,7 +72,46 @@
       <div class="panel-body"><p>Assign multiple ciphertext symbols to each plaintext letter, weighted by letter frequency. Common letters get more symbols; rare letters get fewer.</p><pre>E → 12, 37, 44, 71, 83  (5 symbols, ~12.7% freq)
 T → 21, 90             (2 symbols, ~9.1% freq)
 A → 05, 63             (2 symbols, ~8.2% freq)
-Z → 99                 (1 symbol,  ~0.07% freq)</pre><p style='margin-top:1rem;'>To encrypt: for each plaintext letter, randomly pick one of its assigned symbols. The resulting ciphertext should have roughly uniform symbol frequencies.</p></div>
+Z → 99                 (1 symbol,  ~0.07% freq)</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 400 150" style="max-width:400px;width:100%;height:auto;" aria-label="Homophonic substitution mapping diagram">
+          <style>
+            .ho-ltr{font-family:var(--fd,'Cinzel',serif);font-size:16px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central;font-weight:700}
+            .ho-num{font-family:'JetBrains Mono',monospace;font-size:11px;fill:#d4af37;text-anchor:middle;dominant-baseline:central}
+            .ho-line{stroke:#c8b273;stroke-width:.8;opacity:.5}
+            .ho-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:9px;fill:#888;text-anchor:middle}
+            .ho-box{fill:#d4af37;fill-opacity:.1;stroke:#d4af37;stroke-width:.8;rx:3}
+          </style>
+          <!-- E with many symbols -->
+          <text class="ho-ltr" x="50" y="30">E</text>
+          <text class="ho-lbl" x="50" y="45">12.7%</text>
+          <line class="ho-line" x1="50" y1="52" x2="15" y2="70"/><line class="ho-line" x1="50" y1="52" x2="35" y2="70"/>
+          <line class="ho-line" x1="50" y1="52" x2="50" y2="70"/><line class="ho-line" x1="50" y1="52" x2="65" y2="70"/>
+          <line class="ho-line" x1="50" y1="52" x2="85" y2="70"/>
+          <rect class="ho-box" x="5" y="72" width="24" height="20"/><text class="ho-num" x="17" y="83">12</text>
+          <rect class="ho-box" x="33" y="72" width="24" height="20"/><text class="ho-num" x="45" y="83">37</text>
+          <rect class="ho-box" x="33" y="96" width="24" height="20"/><text class="ho-num" x="45" y="107">71</text>
+          <rect class="ho-box" x="61" y="72" width="24" height="20"/><text class="ho-num" x="73" y="83">44</text>
+          <rect class="ho-box" x="61" y="96" width="24" height="20"/><text class="ho-num" x="73" y="107">83</text>
+          <!-- T with 2 symbols -->
+          <text class="ho-ltr" x="160" y="30">T</text>
+          <text class="ho-lbl" x="160" y="45">9.1%</text>
+          <line class="ho-line" x1="160" y1="52" x2="145" y2="70"/><line class="ho-line" x1="160" y1="52" x2="175" y2="70"/>
+          <rect class="ho-box" x="133" y="72" width="24" height="20"/><text class="ho-num" x="145" y="83">21</text>
+          <rect class="ho-box" x="163" y="72" width="24" height="20"/><text class="ho-num" x="175" y="83">90</text>
+          <!-- Z with 1 symbol -->
+          <text class="ho-ltr" x="260" y="30">Z</text>
+          <text class="ho-lbl" x="260" y="45">0.07%</text>
+          <line class="ho-line" x1="260" y1="52" x2="260" y2="70"/>
+          <rect class="ho-box" x="248" y="72" width="24" height="20"/><text class="ho-num" x="260" y="83">99</text>
+          <!-- Legend -->
+          <text class="ho-lbl" x="350" y="50">More symbols</text>
+          <text class="ho-lbl" x="350" y="62">= flatter frequency</text>
+          <text class="ho-lbl" x="350" y="74">= harder to crack</text>
+          <text class="ho-lbl" x="200" y="140" style="fill:#d4af37">Common letters get more symbols — this flattens the frequency distribution</text>
+        </svg>
+        <p class="diagram-caption">Homophonic substitution: E gets 5 symbols, Z gets 1 — more symbols for common letters masks frequency patterns</p>
+      </div><p style='margin-top:1rem;'>To encrypt: for each plaintext letter, randomly pick one of its assigned symbols. The resulting ciphertext should have roughly uniform symbol frequencies.</p></div>
     </div>
 
     <div class="panel">
@@ -140,6 +180,7 @@ Z → 99                 (1 symbol,  ~0.07% freq)</pre><p style='margin-top:1rem
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>

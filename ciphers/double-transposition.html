@@ -28,6 +28,7 @@
       <li><a href="../museum-map.html">Museum Map</a></li>
       <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
     </ul>
   </div>
@@ -73,7 +74,56 @@ Step 2: Apply columnar transposition with key LION
 
 The resulting permutation of n characters has
 approximately (k1! × k2!) possible arrangements
-where k1, k2 are the key lengths.</pre><p>A 7-letter key gives 5,040 possible column orders. Two such keys give ~25 million combinations — far beyond manual brute force.</p></div>
+where k1, k2 are the key lengths.</pre>
+      <div class="diagram-wrap" style="margin-top:1.5rem;">
+        <svg viewBox="0 0 460 190" style="max-width:460px;width:100%;height:auto;" aria-label="Double transposition two-pass diagram">
+          <style>
+            .dt-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:middle}
+            .dt-cell{font-family:'JetBrains Mono',var(--fc,monospace);font-size:12px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
+            .dt-key{font-family:var(--fd,'Cinzel',serif);font-size:11px;fill:#d4af37;text-anchor:middle;font-weight:700}
+            .dt-box{fill:none;stroke:#3a3a4a;stroke-width:.8}
+            .dt-arr{font-size:22px;fill:#c8b273;text-anchor:middle;dominant-baseline:central}
+          </style>
+          <!-- Pass 1 label -->
+          <text class="dt-lbl" x="90" y="12">Pass 1: Key MARK</text>
+          <!-- Pass 1 key -->
+          <text class="dt-key" x="35" y="30">M</text><text class="dt-key" x="65" y="30">A</text><text class="dt-key" x="95" y="30">R</text><text class="dt-key" x="125" y="30">K</text>
+          <text class="dt-lbl" x="35" y="42">2</text><text class="dt-lbl" x="65" y="42">1</text><text class="dt-lbl" x="95" y="42">4</text><text class="dt-lbl" x="125" y="42">3</text>
+          <!-- Pass 1 grid -->
+          <rect class="dt-box" x="20" y="48" width="120" height="90"/>
+          <line class="dt-box" x1="50" y1="48" x2="50" y2="138"/><line class="dt-box" x1="80" y1="48" x2="80" y2="138"/><line class="dt-box" x1="110" y1="48" x2="110" y2="138"/>
+          <line class="dt-box" x1="20" y1="78" x2="140" y2="78"/><line class="dt-box" x1="20" y1="108" x2="140" y2="108"/>
+          <text class="dt-cell" x="35" y="65">S</text><text class="dt-cell" x="65" y="65">E</text><text class="dt-cell" x="95" y="65">N</text><text class="dt-cell" x="125" y="65">D</text>
+          <text class="dt-cell" x="35" y="95">H</text><text class="dt-cell" x="65" y="95">E</text><text class="dt-cell" x="95" y="95">L</text><text class="dt-cell" x="125" y="95">P</text>
+          <text class="dt-cell" x="35" y="125">N</text><text class="dt-cell" x="65" y="125">O</text><text class="dt-cell" x="95" y="125">W</text><text class="dt-cell" x="125" y="125">X</text>
+          <!-- Arrow -->
+          <text class="dt-arr" x="175" y="95">→</text>
+          <text class="dt-lbl" x="175" y="115">reorder</text>
+          <text class="dt-lbl" x="175" y="127">columns</text>
+          <!-- Intermediate -->
+          <text class="dt-lbl" x="250" y="12">Intermediate</text>
+          <text class="dt-cell" x="250" y="55" style="fill:#c8b273;font-size:11px">EEOPX SHNDP NLWX</text>
+          <!-- Arrow 2 -->
+          <text class="dt-arr" x="310" y="95">→</text>
+          <text class="dt-lbl" x="310" y="115">Pass 2</text>
+          <!-- Pass 2 label -->
+          <text class="dt-lbl" x="390" y="12">Pass 2: Key LION</text>
+          <!-- Pass 2 key -->
+          <text class="dt-key" x="345" y="30">L</text><text class="dt-key" x="375" y="30">I</text><text class="dt-key" x="405" y="30">O</text><text class="dt-key" x="435" y="30">N</text>
+          <text class="dt-lbl" x="345" y="42">3</text><text class="dt-lbl" x="375" y="42">1</text><text class="dt-lbl" x="405" y="42">4</text><text class="dt-lbl" x="435" y="42">2</text>
+          <!-- Pass 2 grid -->
+          <rect class="dt-box" x="330" y="48" width="120" height="90"/>
+          <line class="dt-box" x1="360" y1="48" x2="360" y2="138"/><line class="dt-box" x1="390" y1="48" x2="390" y2="138"/><line class="dt-box" x1="420" y1="48" x2="420" y2="138"/>
+          <line class="dt-box" x1="330" y1="78" x2="450" y2="78"/><line class="dt-box" x1="330" y1="108" x2="450" y2="108"/>
+          <text class="dt-cell" x="345" y="65">E</text><text class="dt-cell" x="375" y="65">E</text><text class="dt-cell" x="405" y="65">O</text><text class="dt-cell" x="435" y="65">P</text>
+          <text class="dt-cell" x="345" y="95">X</text><text class="dt-cell" x="375" y="95">S</text><text class="dt-cell" x="405" y="95">H</text><text class="dt-cell" x="435" y="95">N</text>
+          <text class="dt-cell" x="345" y="125">D</text><text class="dt-cell" x="375" y="125">P</text><text class="dt-cell" x="405" y="125">N</text><text class="dt-cell" x="435" y="125">L</text>
+          <!-- Final output -->
+          <text class="dt-lbl" x="230" y="160">Final ciphertext:</text>
+          <text style="font-family:'JetBrains Mono',monospace;font-size:14px;fill:#d4af37;text-anchor:middle" x="230" y="180">ESPN PNLE EXDO HNL</text>
+        </svg>
+        <p class="diagram-caption">Double transposition: two successive column reorderings with different keys — dramatically stronger than either alone</p>
+      </div><p>A 7-letter key gives 5,040 possible column orders. Two such keys give ~25 million combinations — far beyond manual brute force.</p></div>
     </div>
 
     <div class="panel">
@@ -142,6 +192,7 @@ where k1, k2 are the key lengths.</pre><p>A 7-letter key gives 5,040 possible co
         <li><a href="../museum-map.html">Museum Map</a></li>
         <li><a href="../timeline.html">Timeline</a></li>
       <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
       <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
         <li><a href="../modern.html">Modern Crypto</a></li>
       </ul>
