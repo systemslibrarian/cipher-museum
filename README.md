@@ -4,7 +4,7 @@
 
 An open-source, interactive educational website exploring **37 historically important ciphers** across **10 exhibit halls** — from the Spartan scytale in 500 BC to post-quantum cryptography.
 
-**[Live Site](https://systemslibrarian.github.io/cipher-museum)**
+**[Live Site](https://ciphermuseum.com)**
 
 ---
 
@@ -62,6 +62,7 @@ cipher-museum/
 ├── cryptanalysis.html      ← Cryptanalysis Lab (7 techniques + demos)
 ├── modern.html             ← Modern Cryptography overview
 ├── favicon.svg             ← Gold cipher wheel icon
+├── CNAME                   ← Custom domain (ciphermuseum.com)
 ├── css/
 │   └── museum.css          ← Complete design system (~330 rules)
 ├── js/
@@ -96,6 +97,9 @@ cipher-museum/
     ├── zodiac.html
     ├── vernam.html
     └── [28 more exhibits]
+├── tests/
+│   ├── test-all-engines.js  ← Engine existence, roundtrip, known-answer tests
+│   └── test-deep-ciphers.js ← Edge cases, boundaries, stress tests
 ```
 
 ---
