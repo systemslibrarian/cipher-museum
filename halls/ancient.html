@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall I: Birth of Cryptography — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="ancient.html" class="active">Halls</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="../modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Hall I
+  </div>
+  <span class="page-eyebrow">Hall I · Ancient World · 150 BC – 100 AD</span>
+  <h1 class="page-title">Birth of Cryptography</h1>
+  <p class="page-tagline">Where secrecy began — in battlefields, markets, and counting boards</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    Before mathematics, before computers, before even consistent alphabets — humanity already needed to hide messages.
+    The two ciphers in this hall represent the oldest surviving cryptographic systems in history. One was used by a Roman general to protect military orders.
+    The other was scratched onto parchment by a Greek historian as a tool for signalling across mountains at night.
+  </p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-ancient">Ancient Rome</span>
+    <span class="badge era-ancient">Ancient Greece</span>
+    <span class="badge sec-broken">Both Broken</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <!-- Narrative -->
+  <div class="callout callout-info" style="margin-bottom:3rem;">
+    <span class="callout-icon">📜</span>
+    <div class="callout-body">
+      <p><strong>What this hall teaches:</strong> The foundational idea of substitution — replacing one symbol with another — and fractionation — converting letters into coordinates. Both concepts survived 2,000 years and are still visible in modern AES today.</p>
+    </div>
+  </div>
+
+  <!-- Cipher Cards -->
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/caesar.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 01</span>
+        <span class="badge era-ancient">Ancient Rome · ~58 BC</span>
+      </div>
+      <div class="card-name">Caesar Cipher</div>
+      <p class="card-desc">Julius Caesar shifted every letter of his messages by 3 positions. Simple. Fast. Unreadable to an illiterate enemy. The alphabet had to be known just to read — and only a handful of Romans were literate.</p>
+      <div style="font-family:var(--fm);font-size:.8rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.1em;">
+        <span style="color:var(--tx3);">PLAIN: </span><span style="color:var(--tx);">HELLO</span><br>
+        <span style="color:var(--tx3);">SHIFT: </span><span style="color:var(--gold);">+3</span><br>
+        <span style="color:var(--tx3);">CIPH:  </span><span style="color:var(--gold-lt);">KHOOR</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken</span>
+          <span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Live Demo</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/polybius.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 02</span>
+        <span class="badge era-ancient">Ancient Greece · ~150 BC</span>
+      </div>
+      <div class="card-name">Polybius Square</div>
+      <p class="card-desc">Polybius of Megalopolis invented a grid system where each letter becomes a pair of coordinates. Originally designed for torch signalling across mountains — each number represented by torch count. The first fractionation cipher.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.1em;">
+        <span style="color:var(--tx3);">A→11  B→12  C→13</span><br>
+        <span style="color:var(--tx3);">HELLO = </span><span style="color:var(--gold-lt);">23 15 31 31 34</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken</span>
+          <span class="badge" style="background:rgba(90,200,160,.1);color:var(--green);border:1px solid rgba(90,200,160,.3);">Foundation Cipher</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Concepts Taught -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">What This Hall Teaches</span>
+    <h2 class="section-title">Foundational Concepts</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:4rem;">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔄</span><span class="panel-title">Modular Arithmetic</span></div>
+      <div class="panel-body">
+        <p>The Caesar cipher wraps around the alphabet using modulo 26. <code>(position + shift) mod 26</code>. This operation is fundamental to modern symmetric encryption including AES.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📍</span><span class="panel-title">Coordinate Encoding</span></div>
+      <div class="panel-body">
+        <p>Polybius's grid converts letters to (row, col) pairs — splitting each letter into two symbols. This "fractionation" concept underlies the Bifid, ADFGVX, and modern bit-slicing techniques.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📊</span><span class="panel-title">Frequency Analysis (the weakness)</span></div>
+      <div class="panel-body">
+        <p>Both ciphers preserve letter frequencies. In English, E appears ~12.7% of the time. Any cipher that maps E to one symbol can be attacked by finding the most common symbol in the ciphertext.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Hall Nav -->
+<div class="hall-nav">
+  <div></div>
+  <a href="substitution.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next Hall →</span>
+    <span class="hall-nav-name">Hall II: Classical Substitution</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">An open-source educational project. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/caesar.html">Caesar Cipher</a></li>
+        <li><a href="../ciphers/polybius.html">Polybius Square</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="substitution.html">Hall II →</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Hall I of VII</span>
+  </div>
+</footer>
+</body>
+</html>

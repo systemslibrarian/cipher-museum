@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIC Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall V: Military & Spy Ciphers</a><span>&rsaquo;</span>
+    VIC Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 22 of 33</span>
+    <span class="badge era-coldwar">Cold War · 1950s</span>
+    <span class="badge sec-weak">Weak</span>
+  </div>
+  <h1 class="page-title">VIC Cipher</h1>
+  <p class="page-tagline">The most sophisticated hand cipher ever deployed in real espionage</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Soviet KGB</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1950s</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Straddling checkerboard + double transposition</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Never broken by cryptanalysis — exposed by defector (1957)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Peak hand-cipher design principles</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The VIC cipher was used by Soviet spy Rudolf Abel (real name Willie Fisher) and his assistant Reino Häyhänen in the United States during the 1950s. When Häyhänen defected to the CIA in 1957, he revealed the cipher system. The NSA confirmed that no VIC-encrypted messages had been broken during the time Abel was active.</p><p style='margin-top:1rem;'>The cipher's name comes from 'Victor' — Abel's radio call sign. It represents the absolute peak of what hand cipher design achieved before electronic encryption took over.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Step 1: Straddling checkerboard
+        High-frequency letters get 1-digit codes
+        All others get 2-digit codes
+        E=3, T=6, A=0, etc.
+
+Step 2: Chain addition key derivation
+        From a song lyric/date, derive
+        extended numeric keystream
+
+Step 3: First transposition
+        Apply columnar transposition
+
+Step 4: Second transposition
+        Apply columnar transposition again
+        with different key
+
+Result: Compact numeric ciphertext</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">The Cipher Was Never Broken</div><div class="attack-diff">Not applicable — broken by defector, not cryptanalysis</div><p class="attack-desc">The VIC cipher's combination of variable-length encoding (checkerboard), chain addition key derivation, and double transposition created a system that resisted all NSA cryptanalytic attacks during its operational period. The cipher was exposed only when Häyhänen defected in 1957. This is the spy's ultimate lesson: the strongest cipher fails to human betrayal, not mathematics.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from VIC Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Straddling checkerboard (variable length encoding)</td><td>Huffman coding in data compression; variable-length codes in modern protocols</td></tr>
+<tr><td>Chain addition key derivation</td><td>HKDF, PBKDF2: derive cryptographic keys from seed material</td></tr>
+<tr><td>Double transposition as final layer</td><td>Multiple cipher rounds in AES: each round adds security</td></tr>
+<tr><td>Exposed by defector, not cryptanalysis</td><td>Side-channel and operational security: math is not the weakest link</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>22 of 33</td></tr>
+            <tr><td>Era</td><td>Cold War · 1950s</td></tr>
+            <tr><td>Security</td><td>Weak</td></tr>
+            <tr><td>Inventor</td><td>Soviet KGB</td></tr>
+            <tr><td>Year</td><td>~1950s</td></tr>
+            <tr><td>Key Type</td><td>Straddling checkerboard + double transposition</td></tr>
+            <tr><td>Broken By</td><td>Never broken by cryptanalysis — exposed by defector (1957)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/bazeries.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Bazeries Cipher</span>
+  </a>
+  <a href="../ciphers/stager.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Stager Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="bazeries.html">&larr; Bazeries Cipher</a></li>
+        <li><a href="stager.html">Stager Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 22 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

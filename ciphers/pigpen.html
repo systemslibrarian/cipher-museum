@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pigpen Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/puzzle.html">Hall VII: Puzzle & Novelty Ciphers</a><span>&rsaquo;</span>
+    Pigpen Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 31 of 33</span>
+    <span class="badge era-medieval">18th Century</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Pigpen Cipher</h1>
+  <p class="page-tagline">The Freemason cipher — symbols instead of letters, used for centuries in secret societies</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Freemasons (popularized) · Earlier origins unknown</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1700s</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Fixed symbol-to-letter grid</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Symbol frequency analysis · Pattern recognition</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Visual encoding as cryptography</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The Pigpen (or Masonic) cipher uses geometric symbols derived from two grids and two X patterns to represent the 26 letters of the alphabet. It was used by Freemasons from at least the 18th century for lodge records and correspondence. George Washington's Freemason brothers used it; examples appear in gravestone inscriptions and historical documents across the English-speaking world.</p><p style='margin-top:1rem;'>The cipher is a simple monoalphabetic substitution using symbols instead of letters — cryptographically equivalent to Caesar or any other fixed letter-to-symbol mapping, and breakable by the same frequency analysis.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>The grid layouts:
+
+┌───┬───┐   ┌───┬───┐
+│ A │ B │   │ J │ K │
+├───┼───┤   ├───┼───┤  (dotted versions)
+│ C │ D │   │ L │ M │
+└───┴───┘   └───┴───┘
+
+The shape of the cell containing the letter
+becomes the symbol for that letter:
+A = └┘  (bottom-right corner shape)
+B = the full middle-section shape
+...etc
+
+Famous users:
+- Freemasons (lodge records)
+- George Washington
+- Civil War soldiers (personal letters)</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Symbol Frequency Analysis</div><div class="attack-diff">Complexity: Trivial</div><p class="attack-desc">The Pigpen cipher is a monoalphabetic substitution cipher using symbols instead of letters. Al-Kindi's 850 AD frequency analysis applies directly: count how often each symbol appears, match the most common symbol to E, work through the frequency table, and the alphabet mapping is recovered in minutes. Modern word pattern analysis makes it even faster.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Pigpen Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Symbol substitution</td><td>Visual encoding: QR codes, barcodes use symbol-to-data mapping</td></tr>
+<tr><td>Fixed symbol grid</td><td>Character encoding standards: ASCII, Unicode map characters to numbers</td></tr>
+<tr><td>Secret society use</td><td>Need-to-know access control: modern cryptography enforces this mathematically</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>31 of 33</td></tr>
+            <tr><td>Era</td><td>18th Century</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Freemasons (popularized) · Earlier origins unknown</td></tr>
+            <tr><td>Year</td><td>~1700s</td></tr>
+            <tr><td>Key Type</td><td>Fixed symbol-to-letter grid</td></tr>
+            <tr><td>Broken By</td><td>Symbol frequency analysis · Pattern recognition</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/alberti-disk.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Alberti Cipher Disk</span>
+  </a>
+  <a href="../ciphers/bacon.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Bacon's Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="alberti-disk.html">&larr; Alberti Cipher Disk</a></li>
+        <li><a href="bacon.html">Bacon's Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 31 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

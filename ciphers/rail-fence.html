@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rail Fence Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/transposition.html">Hall IV: Transposition & Fractionation</a><span>&rsaquo;</span>
+    Rail Fence Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 12 of 33</span>
+    <span class="badge era-19c">19th Century</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Rail Fence Cipher</h1>
+  <p class="page-tagline">The simplest transposition — a zigzag that fools no one twice</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Unknown (folk cipher)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1800s</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Number of rails (2-10)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Brute force · Trivial keyspace</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Permutation layers in block ciphers</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The Rail Fence cipher is one of the simplest transposition techniques, used informally for centuries before cryptographers took it seriously. The name comes from the appearance of the zigzag pattern resembling a split-rail fence. It was reportedly used during the American Civil War for simple field messages, though the Union Stager cipher was far superior.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Write the message diagonally across a set of 'rails', then read off each rail in sequence:</p><pre>3 rails, HELLOWORLD:
+H . . . O . . . L
+. E . L . W . R . D
+. . L . . . O . .
+
+Read rows: HOL + ELWRD + LO = HOLELWRDLO</pre><p>The key is simply the number of rails. With only a handful of possible values, any interceptor can try all possibilities in seconds.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Brute Force</div><div class="attack-diff">Complexity: Trivial</div><p class="attack-desc">The Rail Fence cipher has at most a dozen practical key values (number of rails). An attacker simply tries each rail count, decrypts, and checks if the result is English. The correct decryption is immediately obvious. Even a human can crack it in under a minute.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Rail Fence Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Positional rearrangement</td><td>AES ShiftRows: cyclic shift of row positions for diffusion</td></tr>
+<tr><td>Read-by-row output</td><td>Bit permutation layers in DES and many stream ciphers</td></tr>
+<tr><td>Tiny key space (few rails)</td><td>AES: 2¹²⁸ key possibilities — exhaustive search is computationally infeasible</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>12 of 33</td></tr>
+            <tr><td>Era</td><td>19th Century</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Unknown (folk cipher)</td></tr>
+            <tr><td>Year</td><td>~1800s</td></tr>
+            <tr><td>Key Type</td><td>Number of rails (2-10)</td></tr>
+            <tr><td>Broken By</td><td>Brute force · Trivial keyspace</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/running-key.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Running Key Cipher</span>
+  </a>
+  <a href="../ciphers/columnar.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Columnar Transposition</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="running-key.html">&larr; Running Key Cipher</a></li>
+        <li><a href="columnar.html">Columnar Transposition &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 12 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

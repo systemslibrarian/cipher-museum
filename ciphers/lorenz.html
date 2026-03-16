@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorenz Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/unbreakable.html">Final Hall: The Unbreakable</a><span>&rsaquo;</span>
+    Lorenz Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 28 of 33</span>
+    <span class="badge era-wwii">WWII · Germany · 1940</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Lorenz Cipher</h1>
+  <p class="page-tagline">Hitler's strategic cipher — broken by a mistake, and it built the world's first computer</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Lorenz AG · German High Command</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1940</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">12-wheel teleprinter cipher (Vernam-based)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Bill Tutte · Known plaintext · Colossus computer (1943)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Computational cryptanalysis → birth of modern computing</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>While Enigma protected German field communications, the Lorenz SZ40/42 protected Hitler's strategic communications to his senior commanders. Where Enigma was a hand-operated cipher machine, Lorenz was a fully automatic teleprinter attachment — messages fed in on paper tape, encrypted output punched automatically.</p><p style='margin-top:1rem;'>On August 30, 1941, a German operator sent a 4,000-character message, received a request to resend, and sent it again — with the same settings but slightly different plaintext (abbreviating some words). This catastrophic procedural error gave Bletchley Park cryptanalyst Bill Tutte enough to reconstruct the entire Lorenz cipher structure without ever seeing the machine. Tommy Flowers then built Colossus to automate the attack.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Lorenz SZ42 used 12 cipher wheels:
+5 Chi (χ) wheels: key stream
+5 Psi (ψ) wheels: irregular key
+2 Motor wheels: control Psi movement
+
+Encryption: XOR operations on 5-bit
+teletype characters (Baudot code)
+
+C = P XOR χ-stream XOR ψ-stream
+
+Wheel pin counts: 41,31,29,26,23,
+                  43,47,51,53,59,
+                  61,37
+
+Total period: LCM of all wheels
+= astronomically large — never repeats in practice</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Known Plaintext + Depth Attack (1941)</div><div class="attack-diff">Complexity: Extreme · Required Colossus</div><p class="attack-desc">The operator's mistake (same settings, similar plaintext) created a "depth" — two messages XORed together give P1 XOR P2 (the keys cancel). From this, Tutte deduced the complete wheel structure without seeing the machine — a cryptanalytic feat considered one of the greatest intellectual achievements of WWII. Colossus (1943) automated the wheel-setting problem, running at 5,000 characters per second.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Lorenz Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Wheel-based keystream generator</td><td>Linear Feedback Shift Registers (LFSRs): the direct descendant of rotor-based keystreams</td></tr>
+<tr><td>XOR teleprinter encryption</td><td>Vernam cipher: XOR is the foundation of all stream cipher design</td></tr>
+<tr><td>Breaking it built Colossus</td><td>The needs of cryptanalysis drove the invention of programmable computing</td></tr>
+<tr><td>Depth attack on reused settings</td><td>Nonce reuse attacks: identical to the Lorenz depth attack, still relevant today</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>28 of 33</td></tr>
+            <tr><td>Era</td><td>WWII · Germany · 1940</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Lorenz AG · German High Command</td></tr>
+            <tr><td>Year</td><td>1940</td></tr>
+            <tr><td>Key Type</td><td>12-wheel teleprinter cipher (Vernam-based)</td></tr>
+            <tr><td>Broken By</td><td>Bill Tutte · Known plaintext · Colossus computer (1943)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/enigma.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Enigma Machine</span>
+  </a>
+  <a href="../ciphers/jefferson-disk.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Jefferson Disk</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="enigma.html">&larr; Enigma Machine</a></li>
+        <li><a href="jefferson-disk.html">Jefferson Disk &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 28 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

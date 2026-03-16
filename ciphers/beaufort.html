@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beaufort Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/polyalphabetic.html">Hall III: Polyalphabetic Revolution</a><span>&rsaquo;</span>
+    Beaufort Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 08 of 33</span>
+    <span class="badge era-19c">Victorian · 1857</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Beaufort Cipher</h1>
+  <p class="page-tagline">The cipher that encrypts and decrypts with the same operation</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Admiral Sir Francis Beaufort</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1857</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Repeating keyword</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Kasiski Examination · Index of Coincidence</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Symmetric operations in stream ciphers</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Sir Francis Beaufort — famous for the Beaufort wind scale — devised a variant of the Vigenère cipher with an elegant property: the same operation encrypts and decrypts. Where Vigenère adds key to plaintext modulo 26, Beaufort subtracts plaintext from key. Because of this reciprocal property, you never need to switch between an encryption and decryption mode.</p><p style='margin-top:1rem;'>Beaufort's cipher was used by the British Royal Navy and represents one of the cleaner historical cipher designs. Its weakness is identical to Vigenère's: the repeating key creates detectable periodicity.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>The Beaufort cipher uses a tabula recta like Vigenère but with a different lookup direction:</p><pre>Vigenère: C = (P + K) mod 26
+Beaufort: C = (K - P + 26) mod 26
+
+Key:    S  E  C  R  E  T
+Plain:  H  E  L  L  O  W
+Cipher: K  A  R  G  A  N</pre><p style='margin-top:1rem;'>Because subtraction is its own inverse: Decrypt(C, K) = Encrypt(C, K). This makes key management simpler — operators only need one table.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Kasiski Examination</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">The Beaufort cipher shares Vigenère's fatal flaw: the repeating key. Identical plaintext segments that align with identical key segments produce identical ciphertext. Kasiski's method finds the key length; Index of Coincidence confirms it; frequency analysis recovers each key letter.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Beaufort Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Reciprocal operation (encrypt = decrypt)</td><td>XOR: the foundation of all modern stream ciphers (A XOR B XOR B = A)</td></tr>
+<tr><td>Key-driven alphabet selection</td><td>PRNG keystream: cryptographically random key material per position</td></tr>
+<tr><td>Repeating key weakness</td><td>Modern ciphers use nonce + counter to ensure keystream never repeats</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>08 of 33</td></tr>
+            <tr><td>Era</td><td>Victorian · 1857</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Admiral Sir Francis Beaufort</td></tr>
+            <tr><td>Year</td><td>1857</td></tr>
+            <tr><td>Key Type</td><td>Repeating keyword</td></tr>
+            <tr><td>Broken By</td><td>Kasiski Examination · Index of Coincidence</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/vigenere.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Vigenère Cipher</span>
+  </a>
+  <a href="../ciphers/porta.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Porta Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="vigenere.html">&larr; Vigenère Cipher</a></li>
+        <li><a href="porta.html">Porta Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 08 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

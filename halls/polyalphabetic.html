@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall III: The Polyalphabetic Revolution — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="substitution.html">Hall II</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Hall III
+  </div>
+  <span class="page-eyebrow">Hall III · Renaissance — 19th Century · 1553 – 1880</span>
+  <h1 class="page-title">The Polyalphabetic Revolution</h1>
+  <p class="page-tagline">"Le chiffre indéchiffrable" — The unbreakable cipher. Until it wasn't.</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    The solution to frequency analysis seemed elegant: use multiple substitution alphabets, switching between them according to a keyword. The same plaintext letter encrypts differently each time. Frequency peaks vanish. For 300 years — from 1553 to 1863 — cryptographers believed this made the Vigenère cipher unbreakable. Charles Babbage proved them wrong. This hall tells the story of the longest-standing myth in cryptographic history.
+  </p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-renaissance">Renaissance</span>
+    <span class="badge era-19c">19th Century</span>
+    <span class="badge badge-hard">Running Key: Hard to Break</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <div class="callout callout-info" style="margin-bottom:3rem;">
+    <span class="callout-icon">🔑</span>
+    <div class="callout-body">
+      <p><strong>The key insight of polyalphabetic ciphers:</strong> Instead of one fixed substitution alphabet, use a different alphabet for each letter position — determined by a keyword. The same plaintext letter E might encrypt as L in position 1, X in position 2, F in position 3. This defeats simple frequency analysis. But if the keyword <em>repeats</em>, the cipher repeats — and repetition is always the enemy of secrecy.</p>
+    </div>
+  </div>
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/vigenere.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 07</span>
+        <span class="badge era-renaissance">1553</span>
+      </div>
+      <div class="card-name">Vigenère Cipher</div>
+      <p class="card-desc">Giovan Battista Bellaso invented it; Blaise de Vigenère got the credit. A 26×26 "tabula recta" and a repeating keyword. Called "le chiffre indéchiffrable" for 300 years. Broken by Babbage in the 1850s, published by Kasiski in 1863.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;line-height:1.9;">
+        <span style="color:var(--tx3);">Plain:  </span><span style="color:var(--tx);">ATTACKATDAWN</span><br>
+        <span style="color:var(--tx3);">Key:    </span><span style="color:var(--gold);">LEMONLEMONLE</span><br>
+        <span style="color:var(--tx3);">Cipher: </span><span style="color:var(--gold-lt);">LXFOPVEFRNHR</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken 1863</span><span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Live Demo</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/beaufort.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 08</span>
+        <span class="badge era-19c">1857</span>
+      </div>
+      <div class="card-name">Beaufort Cipher</div>
+      <p class="card-desc">Admiral Sir Francis Beaufort's reciprocal variant of Vigenère: the same operation encrypts and decrypts. Used by the British Royal Navy. Elegant, but it shares Vigenère's fatal flaw — a repeating key creates detectable patterns.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;line-height:1.7;">
+        <span style="color:var(--tx3);">Reciprocal: Encrypt(Encrypt(P)) = P</span><br>
+        <span style="color:var(--tx3);">C = (Key − Plain) mod 26</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-19c">Royal Navy</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/porta.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 09</span>
+        <span class="badge era-renaissance">1563</span>
+      </div>
+      <div class="card-name">Porta Cipher</div>
+      <p class="card-desc">Giambattista della Porta's 13-row reciprocal tableau, where each row is selected by pairs of key letters. More complex than Vigenère in structure, equally vulnerable to key-length detection through the index of coincidence.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;line-height:1.7;">
+        <span style="color:var(--tx3);">13 tableau rows · Key letter pair selects row</span><br>
+        <span style="color:var(--tx3);">Reciprocal: same operation decrypts</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-renaissance">Renaissance</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/gronsfeld.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 10</span>
+        <span class="badge era-renaissance">17th Century</span>
+      </div>
+      <div class="card-name">Gronsfeld Cipher</div>
+      <p class="card-desc">Count Josef von Gronsfeld restricted Vigenère to digit keys (0–9). Easier to memorize — "my key is 31415" — but the reduced alphabet means only 10 possible shift values per position instead of 26. Weaker than its parent.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;line-height:1.9;">
+        <span style="color:var(--tx3);">Key:    </span><span style="color:var(--gold);">3 1 4 1 5</span><br>
+        <span style="color:var(--tx3);">Shift by digit value — only 10 options per position</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-renaissance">Trivial Keyspace</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/running-key.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 11</span>
+        <span class="badge era-19c">19th Century</span>
+      </div>
+      <div class="card-name">Running Key Cipher</div>
+      <p class="card-desc">The logical endpoint of the polyalphabetic idea: make the key as long as the message itself, drawn from a book or speech. No repeating patterns to detect. No Kasiski test possible. Nearly as secure as a one-time pad — if the source text is never identified.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;line-height:1.9;">
+        <span style="color:var(--tx3);">Plain: </span><span style="color:var(--tx);">ATTACKATDAWN</span><br>
+        <span style="color:var(--tx3);">Key:   </span><span style="color:var(--gold);">FROMTHISBOOK</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-weak">Weak</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Kasiski Visual -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">The Fatal Flaw</span>
+    <h2 class="section-title">How the Repeating Key Betrays Itself</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔍</span><span class="panel-title">The Kasiski Examination</span></div>
+      <div class="panel-body">
+        <p>When the same plaintext aligns with the same key letter, it produces the same ciphertext. Search the ciphertext for repeated 3+ letter sequences. The distances between them are multiples of the key length.</p>
+        <pre style="margin-top:1rem;font-size:.78rem;">Ciphertext:
+LXFOP<strong style="color:var(--gold);">VEF</strong>RNHRLXFOP<strong style="color:var(--gold);">VEF</strong>RNHR
+      ↑               ↑
+   pos 5           pos 18
+   Distance = 13 → key length divides 13</pre>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📐</span><span class="panel-title">Index of Coincidence</span></div>
+      <div class="panel-body">
+        <p>William Friedman's 1920 method works even without visible repetitions. Random text: IC ≈ 0.038. Natural English: IC ≈ 0.066. A Vigenère cipher falls between. The IC value narrows down the key length — split the ciphertext into columns matching the guessed key length, then apply frequency analysis to each column.</p>
+        <table class="cipher-table" style="margin-top:.75rem;">
+          <thead><tr><th>Text Type</th><th>IC Value</th></tr></thead>
+          <tbody>
+            <tr><td>Random</td><td>~0.038</td></tr>
+            <tr><td>Vigenère (key=5)</td><td>~0.052</td></tr>
+            <tr><td>English</td><td>~0.066</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modern Connection -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">Vigenère → Stream Ciphers</span></div>
+      <div class="panel-body"><p>Vigenère uses a repeating key stream. Modern stream ciphers like ChaCha20 generate a non-repeating, cryptographically random keystream of the same length as the message — the same XOR operation, with an unguessable key.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">Running Key → One-Time Pad</span></div>
+      <div class="panel-body"><p>The running key cipher is one step from the one-time pad. The difference: a book passage is not random. If the source text has linguistic structure, that structure leaks into the ciphertext and enables statistical attacks.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">Key Length = Security</span></div>
+      <div class="panel-body"><p>The Vigenère lesson: short repeating keys are fatal. Modern cryptography uses 128–256 bit keys that never repeat within a session, and key derivation functions ensure no two sessions share key material.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="substitution.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous Hall</span>
+    <span class="hall-nav-name">Hall II: Classical Substitution</span>
+  </a>
+  <a href="transposition.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next Hall →</span>
+    <span class="hall-nav-name">Hall IV: Transposition &amp; Fractionation</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/vigenere.html">Vigenère Cipher</a></li>
+        <li><a href="../ciphers/beaufort.html">Beaufort Cipher</a></li>
+        <li><a href="../ciphers/porta.html">Porta Cipher</a></li>
+        <li><a href="../ciphers/gronsfeld.html">Gronsfeld Cipher</a></li>
+        <li><a href="../ciphers/running-key.html">Running Key</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="substitution.html">← Hall II</a></li>
+        <li><a href="transposition.html">Hall IV →</a></li>
+        <li><a href="../museum-map.html">Museum Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Hall III of VII</span>
+  </div>
+</footer>
+</body>
+</html>

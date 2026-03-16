@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall IV: Transposition &amp; Fractionation — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+    .rail-demo { font-family:var(--fm); font-size:.85rem; line-height:2.2; letter-spacing:.12em; }
+    .rail-row { display:flex; gap:2px; margin:.2rem 0; }
+    .rail-cell { width:22px; height:22px; display:flex; align-items:center; justify-content:center; border-radius:2px; font-size:.72rem; }
+    .r0 { color:var(--gold-lt); }
+    .r1 { color:var(--tx2); }
+    .r2 { color:var(--tx3); }
+    .empty { opacity:0; }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="polyalphabetic.html">Hall III</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Hall IV
+  </div>
+  <span class="page-eyebrow">Hall IV · 19th – Early 20th Century</span>
+  <h1 class="page-title">Transposition &amp; Fractionation</h1>
+  <p class="page-tagline">Rearranging the message instead of replacing its letters</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    Substitution ciphers replace letters — but their frequencies always leak. What if instead you kept the letters but scrambled their positions? Transposition ciphers do exactly this. Combined with fractionation — splitting each letter into coordinate pieces before rearranging — these systems produced some of the most sophisticated manual ciphers ever designed, and directly inspired the diffusion layers in modern block ciphers.
+  </p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-19c">19th Century</span>
+    <span class="badge era-wwi">WWI</span>
+    <span class="badge badge-hard">3 Hard-to-Break Exhibits</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <!-- Rail Fence Visual -->
+  <div class="callout callout-info" style="margin-bottom:3rem;">
+    <span class="callout-icon">🚂</span>
+    <div class="callout-body">
+      <p><strong>Transposition vs Substitution:</strong> Substitution replaces letters (A→Q), preserving positions. Transposition keeps letters but moves them (position 1→7). Both methods preserve statistical information — substitution preserves frequency, transposition preserves frequency too. The letters are all still there. Only their arrangement changes.</p>
+    </div>
+  </div>
+
+  <!-- Rail Fence diagram -->
+  <div class="diagram-wrap" style="margin-bottom:3rem;">
+    <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:1rem;">Rail Fence Cipher — "HELLOWORLD" on 3 rails</p>
+    <div class="rail-demo">
+      <div style="display:grid;grid-template-columns:repeat(10,28px);gap:2px;margin-bottom:.5rem;">
+        <div class="rail-cell r0">H</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell r0">O</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell r0">L</div><div class="rail-cell empty">·</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(10,28px);gap:2px;margin-bottom:.5rem;">
+        <div class="rail-cell empty">·</div><div class="rail-cell r1">E</div><div class="rail-cell empty">·</div><div class="rail-cell r1">L</div><div class="rail-cell empty">·</div><div class="rail-cell r1">W</div><div class="rail-cell empty">·</div><div class="rail-cell r1">R</div><div class="rail-cell empty">·</div><div class="rail-cell r1">D</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(10,28px);gap:2px;">
+        <div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell r2">L</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell r2">O</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div><div class="rail-cell empty">·</div>
+      </div>
+    </div>
+    <p class="diagram-caption">Read row by row: HOL · ELWRD · LO → Ciphertext: HOLELWRDLO</p>
+  </div>
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/rail-fence.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 12</span>
+        <span class="badge era-19c">19th Century</span>
+      </div>
+      <div class="card-name">Rail Fence Cipher</div>
+      <p class="card-desc">Write the message in a zigzag across imaginary rails; read it row by row. The key is simply the number of rails. The entire keyspace is the number of possible rail counts — brute-forced in seconds even by hand.</p>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Teaches Permutation</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/columnar.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 13</span>
+        <span class="badge era-19c">19th Century</span>
+      </div>
+      <div class="card-name">Columnar Transposition</div>
+      <p class="card-desc">Write the message in rows across a grid; read columns in keyword-specified order. The column ordering is the key. Frequency analysis still works because all original letters are present — just rearranged.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.8;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">Key: </span><span style="color:var(--gold);">ZEBRA</span><span style="color:var(--tx3);"> → col order: </span><span style="color:var(--gold-lt);">5-2-1-3-4</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/double-transposition.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 14</span>
+        <span class="badge era-wwi">WWI · Germany</span>
+      </div>
+      <div class="card-name">Double Transposition</div>
+      <p class="card-desc">Apply columnar transposition twice with two different keys. The resulting permutation space is enormous. German military intelligence used this in WWI. Still difficult for computers if ciphertext is short and key length is unknown.</p>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-weak">Weak</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/bifid.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 15</span>
+        <span class="badge era-19c">1901</span>
+      </div>
+      <div class="card-name">Bifid Cipher</div>
+      <p class="card-desc">Felix Delastelle's masterwork: Polybius square converts letters to row/column coordinates, which are written in two separate rows, then recombined into new pairs. The fractionation mixes coordinate information across the entire message.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">H→23, E→15 → rows: 2 1 | cols: 3 5 → new pairs: 21,35 → BZ</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/trifid.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 16</span>
+        <span class="badge era-19c">1902</span>
+      </div>
+      <div class="card-name">Trifid Cipher</div>
+      <p class="card-desc">Delastelle's extension of Bifid into three dimensions. A 3×3×3 cube replaces the 5×5 square; each letter becomes three coordinates (layer, row, col) which are woven together across the message. Higher entropy fractionation.</p>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-19c">3D Fractionation</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/fractionated-morse.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 17</span>
+        <span class="badge era-19c">19th Century</span>
+      </div>
+      <div class="card-name">Fractionated Morse</div>
+      <p class="card-desc">Convert plaintext to Morse code (dots, dashes, spaces); group the resulting stream into triples; substitute each triple with a letter using a keyed alphabet. Morse's irregular letter lengths introduce structural noise that resists standard frequency analysis.</p>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Modern connection -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">Modern Connection</span>
+    <h2 class="section-title">Transposition Lives in Every Modern Block Cipher</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔀</span><span class="panel-title">ShiftRows in AES</span></div>
+      <div class="panel-body"><p>AES's ShiftRows step cyclically shifts the rows of its 4×4 state matrix — a direct descendant of columnar transposition. Every byte's position changes, ensuring that input patterns don't propagate directly to output patterns.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🧮</span><span class="panel-title">MixColumns = Fractionation</span></div>
+      <div class="panel-body"><p>AES's MixColumns operation mixes the four bytes of each column using matrix multiplication over GF(2⁸) — exactly the fractionation principle from Bifid, made mathematically rigorous and non-linear.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔁</span><span class="panel-title">Diffusion</span></div>
+      <div class="panel-body"><p>Shannon defined "diffusion" as spreading the influence of each plaintext bit across many ciphertext bits. Double transposition approximates this. AES achieves it completely: after 2 rounds, every output bit depends on every input bit.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="polyalphabetic.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous Hall</span>
+    <span class="hall-nav-name">Hall III: Polyalphabetic Revolution</span>
+  </a>
+  <a href="military.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next Hall →</span>
+    <span class="hall-nav-name">Hall V: Military &amp; Spy Ciphers</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/rail-fence.html">Rail Fence</a></li>
+        <li><a href="../ciphers/columnar.html">Columnar Transposition</a></li>
+        <li><a href="../ciphers/double-transposition.html">Double Transposition</a></li>
+        <li><a href="../ciphers/bifid.html">Bifid Cipher</a></li>
+        <li><a href="../ciphers/trifid.html">Trifid Cipher</a></li>
+        <li><a href="../ciphers/fractionated-morse.html">Fractionated Morse</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="polyalphabetic.html">← Hall III</a></li>
+        <li><a href="military.html">Hall V →</a></li>
+        <li><a href="../museum-map.html">Museum Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Hall IV of VII</span>
+  </div>
+</footer>
+</body>
+</html>

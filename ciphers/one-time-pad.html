@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One-Time Pad — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/unbreakable.html">Final Hall: The Unbreakable</a><span>&rsaquo;</span>
+    One-Time Pad
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 26 of 33</span>
+    <span class="badge era-theoretical">1882 · Theoretical</span>
+    <span class="badge sec-secure">Provably Secure*</span>
+  </div>
+  <h1 class="page-title">One-Time Pad</h1>
+  <p class="page-tagline">The only cipher proved mathematically unbreakable — and nearly impossible to use correctly</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Frank Miller (1882) · Vernam (1917) · Shannon (1949)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1882 / 1917</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Random key same length as message (used once)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Never — if rules followed. VENONA: key reuse exploitation</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Information-theoretic security (Shannon, 1949)</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Frank Miller described a one-time pad system in 1882. Gilbert Vernam patented a teletype version in 1917. But it was Claude Shannon who proved in 1949 that the OTP achieves <em>perfect secrecy</em> — ciphertext reveals absolutely nothing about the plaintext to an attacker with unlimited computing power.</p><p style='margin-top:1rem;'>The VENONA project showed exactly what happens when the rules are broken: Soviet signals officers reused key pages under WWII supply pressure. The NSA decoded thousands of messages and identified Julius Rosenberg, Klaus Fuchs, and other Soviet agents.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Encryption: C = P XOR K
+Decryption: P = C XOR K
+
+Example:
+Plain:  H  E  L  L  O  = 07 04 11 11 14
+Key:    X  M  C  K  L  = 23 12 02 10 11 (random)
+Cipher: 30 16 13 21 25 mod 26 = E Q N V Z
+
+Three requirements for perfect secrecy:
+1. Key must be truly random (not pseudorandom)
+2. Key must be as long as the message
+3. Key must never be reused
+4. Key must be kept secret
+
+Violate any condition → security collapses</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="callout callout-success"><span class="callout-icon">🔒</span><div class="callout-body"><p><strong>Shannon's proof (1949):</strong> For any ciphertext C and any possible plaintext P, P(plaintext=P | ciphertext=C) = P(plaintext=P). The ciphertext provides zero information about the plaintext. An attacker with unlimited computing power cannot do better than random guessing.</p></div></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">VENONA: Key Reuse Attack</div><div class="attack-diff">Complexity: Moderate if pads reused</div><p class="attack-desc">C1 XOR C2 = P1 XOR P2. If two messages are encrypted with the same key, XORing the ciphertexts eliminates the key and produces the XOR of the plaintexts. With enough crib-based guessing, both plaintexts can be recovered. The Soviets reused pads in 1942-1943 under wartime supply pressure — giving the NSA its entry point.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from One-Time Pad</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Perfect secrecy (Shannon, 1949)</td><td>Information-theoretic vs computational security: the fundamental distinction</td></tr>
+<tr><td>XOR as cipher operation</td><td>Every modern stream cipher uses XOR with a keystream</td></tr>
+<tr><td>Key = message length</td><td>The impracticality drove development of public-key cryptography (RSA, DH)</td></tr>
+<tr><td>Key reuse is catastrophic</td><td>Nonces, IVs, session keys: modern protocols prevent key reuse by design</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>26 of 33</td></tr>
+            <tr><td>Era</td><td>1882 · Theoretical</td></tr>
+            <tr><td>Security</td><td>Provably Secure*</td></tr>
+            <tr><td>Inventor</td><td>Frank Miller (1882) · Vernam (1917) · Shannon (1949)</td></tr>
+            <tr><td>Year</td><td>1882 / 1917</td></tr>
+            <tr><td>Key Type</td><td>Random key same length as message (used once)</td></tr>
+            <tr><td>Broken By</td><td>Never — if rules followed. VENONA: key reuse exploitation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/dictionary-code.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Confederate Dictionary Code</span>
+  </a>
+  <a href="../ciphers/enigma.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Enigma Machine</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="dictionary-code.html">&larr; Confederate Dictionary Code</a></li>
+        <li><a href="enigma.html">Enigma Machine &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 26 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

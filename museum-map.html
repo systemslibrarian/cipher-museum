@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Museum Map — The Cipher Museum</title>
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .map-flow{display:flex;flex-direction:column;align-items:center;gap:0;padding:2rem 0}
+    .map-room{width:100%;max-width:680px;display:flex;flex-direction:column;align-items:center}
+    .map-connector{width:2px;height:36px;background:linear-gradient(to bottom,var(--gold-dim),transparent);margin:3px 0}
+    .map-room-card{width:100%;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:1.25rem 1.75rem;text-decoration:none;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:1.25rem;transition:all var(--trs)}
+    .map-room-card:hover{border-color:var(--gold-b);background:var(--s3);transform:scale(1.015)}
+    .map-num{width:44px;height:44px;border:1px solid var(--gold-b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.9rem;color:var(--gold);flex-shrink:0;background:var(--gold-glow)}
+    .map-title{font-family:var(--fd);font-size:1.05rem;color:var(--tx);margin-bottom:.15rem}
+    .map-sub{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--tx3)}
+    .map-count{font-family:var(--fm);font-size:.62rem;color:var(--gold-dim);text-align:right;white-space:nowrap}
+    .map-special{border-color:var(--purple-b) !important}
+    .map-special .map-num{border-color:var(--purple-b);color:var(--purple);background:var(--purple-d)}
+    .map-final .map-num{background:var(--gold-glow)}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg><span class="nav-logo-text">The Cipher Museum</span></a>
+  <ul class="nav-links"><li><a href="index.html">Entrance</a></li><li><a href="museum-map.html" class="active">Museum Map</a></li><li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li><li><a href="modern.html">Modern Crypto</a></li></ul>
+</div></nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Museum Map</div>
+  <span class="page-eyebrow">Navigate the Museum</span>
+  <h1 class="page-title">Museum Map</h1>
+  <p class="page-tagline">33 ciphers · 9 halls · 2,500 years of cryptographic history</p>
+</div>
+
+<div class="section">
+  <div style="display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start;">
+
+    <div>
+      <div class="map-flow">
+        <div class="map-room"><a href="index.html" class="map-room-card"><div class="map-num">⌂</div><div><div class="map-title">Entrance Hall</div><div class="map-sub">Welcome · Museum overview · Live cipher challenge</div></div><div class="map-count">Start here</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/ancient.html" class="map-room-card"><div class="map-num">I</div><div><div class="map-title">Birth of Cryptography</div><div class="map-sub">Ancient World · 150 BC – 100 AD</div></div><div class="map-count">2 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/substitution.html" class="map-room-card"><div class="map-num">II</div><div><div class="map-title">Classical Substitution</div><div class="map-sub">Medieval – Victorian · 800 – 1929</div></div><div class="map-count">4 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/polyalphabetic.html" class="map-room-card"><div class="map-num">III</div><div><div class="map-title">The Polyalphabetic Revolution</div><div class="map-sub">Renaissance – 19th Century · 1553 – 1880</div></div><div class="map-count">5 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/transposition.html" class="map-room-card"><div class="map-num">IV</div><div><div class="map-title">Transposition &amp; Fractionation</div><div class="map-sub">19th – Early 20th Century</div></div><div class="map-count">6 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/military.html" class="map-room-card"><div class="map-num">V</div><div><div class="map-title">Military &amp; Spy Ciphers</div><div class="map-sub">WWI – Cold War · 1880 – 1970</div></div><div class="map-count">5 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/civil-war.html" class="map-room-card map-special"><div class="map-num">⚔</div><div><div class="map-title">Civil War Gallery</div><div class="map-sub">Special Exhibition · 1861 – 1865</div></div><div class="map-count">3 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/machines.html" class="map-room-card"><div class="map-num">VI</div><div><div class="map-title">Mechanical Cipher Machines</div><div class="map-sub">1467 – 1945 · Bronze disks to Enigma</div></div><div class="map-count">4 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/puzzle.html" class="map-room-card"><div class="map-num">VII</div><div><div class="map-title">Puzzle &amp; Novelty Ciphers</div><div class="map-sub">1605 – Present · Freemasons · POWs · Binary</div></div><div class="map-count">3 exhibits</div></a><div class="map-connector"></div></div>
+        <div class="map-room"><a href="halls/unbreakable.html" class="map-room-card map-final" style="border-color:var(--gold-b)"><div class="map-num">★</div><div><div class="map-title">The Unbreakable &amp; the Modern</div><div class="map-sub">1882 – Present · Perfect secrecy · Modern crypto</div></div><div class="map-count">2 exhibits</div></a><div class="map-connector" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div></div>
+        <div class="map-room"><a href="cryptanalysis.html" class="map-room-card" style="border-color:rgba(90,200,160,.25)"><div class="map-num" style="border-color:rgba(90,200,160,.35);color:var(--green);background:rgba(90,200,160,.08)">⚗</div><div><div class="map-title">Cryptanalysis Lab</div><div class="map-sub">7 techniques · 12 famous codebreaks · Interactive demos</div></div><div class="map-count">Interactive</div></a></div>
+      </div>
+    </div>
+
+    <!-- Complete Cipher Index -->
+    <div style="position:sticky;top:78px;">
+      <div class="panel">
+        <div class="panel-head"><span class="panel-icon">📋</span><span class="panel-title">Complete Cipher Index · 33 Exhibits</span></div>
+        <div class="panel-body" style="padding:0;">
+          <table class="cipher-table" style="font-size:.75rem;">
+            <thead><tr><th>#</th><th>Cipher</th><th>Hall</th></tr></thead>
+            <tbody>
+              <tr><td>01</td><td><a href="ciphers/caesar.html">Caesar Cipher</a></td><td>I</td></tr>
+              <tr><td>02</td><td><a href="ciphers/polybius.html">Polybius Square</a></td><td>I</td></tr>
+              <tr><td>03</td><td><a href="ciphers/monoalphabetic.html">Monoalphabetic</a></td><td>II</td></tr>
+              <tr><td>04</td><td><a href="ciphers/homophonic.html">Homophonic</a></td><td>II</td></tr>
+              <tr><td>05</td><td><a href="ciphers/playfair.html">Playfair</a></td><td>II</td></tr>
+              <tr><td>06</td><td><a href="ciphers/hill.html">Hill Cipher</a></td><td>II</td></tr>
+              <tr><td>07</td><td><a href="ciphers/vigenere.html">Vigenère</a></td><td>III</td></tr>
+              <tr><td>08</td><td><a href="ciphers/beaufort.html">Beaufort</a></td><td>III</td></tr>
+              <tr><td>09</td><td><a href="ciphers/porta.html">Porta</a></td><td>III</td></tr>
+              <tr><td>10</td><td><a href="ciphers/gronsfeld.html">Gronsfeld</a></td><td>III</td></tr>
+              <tr><td>11</td><td><a href="ciphers/running-key.html">Running Key</a></td><td>III</td></tr>
+              <tr><td>12</td><td><a href="ciphers/rail-fence.html">Rail Fence</a></td><td>IV</td></tr>
+              <tr><td>13</td><td><a href="ciphers/columnar.html">Columnar Transposition</a></td><td>IV</td></tr>
+              <tr><td>14</td><td><a href="ciphers/double-transposition.html">Double Transposition</a></td><td>IV</td></tr>
+              <tr><td>15</td><td><a href="ciphers/bifid.html">Bifid Cipher</a></td><td>IV</td></tr>
+              <tr><td>16</td><td><a href="ciphers/trifid.html">Trifid Cipher</a></td><td>IV</td></tr>
+              <tr><td>17</td><td><a href="ciphers/fractionated-morse.html">Fractionated Morse</a></td><td>IV</td></tr>
+              <tr><td>18</td><td><a href="ciphers/nihilist.html">Nihilist Cipher</a></td><td>V</td></tr>
+              <tr><td>19</td><td><a href="ciphers/adfgx.html">ADFGX Cipher</a></td><td>V</td></tr>
+              <tr><td>20</td><td><a href="ciphers/adfgvx.html">ADFGVX Cipher</a></td><td>V</td></tr>
+              <tr><td>21</td><td><a href="ciphers/bazeries.html">Bazeries Cipher</a></td><td>V</td></tr>
+              <tr><td>22</td><td><a href="ciphers/vic.html">VIC Cipher</a></td><td>V</td></tr>
+              <tr><td>23</td><td><a href="ciphers/stager.html">Stager Cipher</a></td><td>CW</td></tr>
+              <tr><td>24</td><td><a href="ciphers/confederate-vigenere.html">Confederate Vigenère</a></td><td>CW</td></tr>
+              <tr><td>25</td><td><a href="ciphers/dictionary-code.html">Dictionary Code</a></td><td>CW</td></tr>
+              <tr><td>26</td><td><a href="ciphers/one-time-pad.html">One-Time Pad</a></td><td>★</td></tr>
+              <tr><td>27</td><td><a href="ciphers/enigma.html">Enigma Machine</a></td><td>VI</td></tr>
+              <tr><td>28</td><td><a href="ciphers/lorenz.html">Lorenz Cipher</a></td><td>VI</td></tr>
+              <tr><td>29</td><td><a href="ciphers/jefferson-disk.html">Jefferson Disk</a></td><td>VI</td></tr>
+              <tr><td>30</td><td><a href="ciphers/alberti-disk.html">Alberti Cipher Disk</a></td><td>VI</td></tr>
+              <tr><td>31</td><td><a href="ciphers/pigpen.html">Pigpen Cipher</a></td><td>VII</td></tr>
+              <tr><td>32</td><td><a href="ciphers/bacon.html">Bacon's Cipher</a></td><td>VII</td></tr>
+              <tr><td>33</td><td><a href="ciphers/tap-code.html">Tap Code</a></td><td>VII</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Quick Links</div><ul class="footer-links"><li><a href="index.html">Entrance Hall</a></li><li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li><li><a href="modern.html">Modern Cryptography</a></li></ul></div>
+    <div><div class="footer-col-title">GitHub</div><ul class="footer-links"><li><a href="https://github.com/systemslibrarian/cipher-museum">Repository</a></li><li><a href="https://github.com/systemslibrarian/cipher-museum/blob/main/README.md">README</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">33 exhibits · 9 halls</span></div>
+</footer>
+</body></html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall II: Classical Substitution — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="ancient.html">Hall I</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Hall II
+  </div>
+  <span class="page-eyebrow">Hall II · Medieval — Renaissance · 800 – 1700</span>
+  <h1 class="page-title">Classical Substitution</h1>
+  <p class="page-tagline">The arms race between letter-mappers and frequency counters</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    For a thousand years after Caesar, cryptographers mapped letters to other symbols and believed their ciphers were unbreakable. Then in 850 AD, Al-Kindi of Baghdad wrote a nine-page treatise that shattered every substitution cipher ever made — and every one that would be made for the next four centuries. This hall shows the battle that followed.
+  </p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-medieval">Medieval</span>
+    <span class="badge era-renaissance">Renaissance</span>
+    <span class="badge era-19c">Victorian</span>
+    <span class="badge badge-hard">2 Hard-to-Break Exhibits</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <div class="callout callout-danger" style="margin-bottom:3rem;">
+    <span class="callout-icon">💀</span>
+    <div class="callout-body">
+      <p><strong>Al-Kindi's insight (850 AD):</strong> Count how often each letter appears in ciphertext. The most frequent symbol probably represents E (12.7% of English). The second most frequent is probably T (9.1%). Map frequencies to expected values — the key reveals itself. This technique alone broke every cipher in this hall.</p>
+    </div>
+  </div>
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/monoalphabetic.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 03</span>
+        <span class="badge era-medieval">Medieval · ~800 AD</span>
+      </div>
+      <div class="card-name">Monoalphabetic Substitution</div>
+      <p class="card-desc">Each letter maps permanently to another. A→Q, B→M, C→L… The key is a full 26-letter permutation, giving 26! possible keys — more than 4×10²⁶. Vast keyspace, zero protection.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;">
+        <span style="color:var(--tx3);">Plain:  ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br>
+        <span style="color:var(--tx3);">Cipher: </span><span style="color:var(--gold-lt);">QWERTYUIOPASDFGHJKLZXCVBNM</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-medieval">Frequency Analysis</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/homophonic.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 04</span>
+        <span class="badge era-renaissance">Renaissance · ~1400</span>
+      </div>
+      <div class="card-name">Homophonic Substitution</div>
+      <p class="card-desc">The Renaissance answer to frequency analysis: give common letters multiple symbols. E encrypts as 12, 37, or 44. T as 21 or 90. Frequency peaks flatten. Used in European diplomatic ciphers for 400 years.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;">
+        <span style="color:var(--tx3);">E → </span><span style="color:var(--gold-lt);">12, 37, 44</span><span style="color:var(--tx3);">   T → </span><span style="color:var(--gold-lt);">21, 90</span><br>
+        <span style="color:var(--tx3);">A → </span><span style="color:var(--gold-lt);">05, 63</span><span style="color:var(--tx3);">   Z → </span><span style="color:var(--gold-lt);">99</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-weak">Weak</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/playfair.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 05</span>
+        <span class="badge era-19c">Victorian · 1854</span>
+      </div>
+      <div class="card-name">Playfair Cipher</div>
+      <p class="card-desc">Charles Wheatstone's breakthrough: encrypt letter pairs, not single letters. A 5×5 key square defines rules for each pair. Defeats single-letter frequency analysis completely. Used by Britain in WWI and WWII.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.08em;line-height:1.6;">
+        <span style="color:var(--tx3);">HE → </span><span style="color:var(--gold-lt);">BM</span><span style="color:var(--tx3);">  LL → </span><span style="color:var(--gold-lt);">NA</span><span style="color:var(--tx3);">  PL → </span><span style="color:var(--gold-lt);">ZO</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/hill.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 06</span>
+        <span class="badge era-19c">1929</span>
+      </div>
+      <div class="card-name">Hill Cipher</div>
+      <p class="card-desc">Lester Hill applied linear algebra to cryptography. Letters become vectors; the key is a matrix; encryption is matrix multiplication. Strong diffusion — every output letter depends on multiple input letters. Broken by known plaintext.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.05em;line-height:1.8;">
+        <span style="color:var(--tx3);">Cipher = </span><span style="color:var(--gold-lt);">Key Matrix × Plaintext Vector (mod 26)</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Concepts -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">What This Hall Teaches</span>
+    <h2 class="section-title">The Substitution Arms Race</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:3rem;">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📊</span><span class="panel-title">Frequency Analysis</span></div>
+      <div class="panel-body"><p>Al-Kindi's 850 AD technique. Every monoalphabetic cipher is broken by counting symbol frequencies and matching them to known language distributions. The Caesar cipher is a trivial special case.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎲</span><span class="panel-title">Homophonic Defense</span></div>
+      <div class="panel-body"><p>Assign multiple ciphertexts to common letters to flatten frequency peaks. A sophisticated attacker can still detect the homophonic system through structural patterns and solve it with enough ciphertext.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📦</span><span class="panel-title">Digraph Encryption → AES Blocks</span></div>
+      <div class="panel-body"><p>Playfair encrypts letter pairs; AES encrypts 128-bit blocks. The principle is the same: operate on multiple characters simultaneously to defeat single-character statistical attacks.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔢</span><span class="panel-title">Matrix Multiplication → Modern Mixing</span></div>
+      <div class="panel-body"><p>Hill's matrix multiplication concept — mixing multiple input letters to produce each output letter — became the MixColumns step in AES, one of the four core operations providing diffusion.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="ancient.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous Hall</span>
+    <span class="hall-nav-name">Hall I: Birth of Cryptography</span>
+  </a>
+  <a href="polyalphabetic.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next Hall →</span>
+    <span class="hall-nav-name">Hall III: The Polyalphabetic Revolution</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/monoalphabetic.html">Monoalphabetic</a></li>
+        <li><a href="../ciphers/homophonic.html">Homophonic</a></li>
+        <li><a href="../ciphers/playfair.html">Playfair</a></li>
+        <li><a href="../ciphers/hill.html">Hill Cipher</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="ancient.html">← Hall I</a></li>
+        <li><a href="polyalphabetic.html">Hall III →</a></li>
+        <li><a href="../museum-map.html">Museum Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Hall II of VII</span>
+  </div>
+</footer>
+</body>
+</html>

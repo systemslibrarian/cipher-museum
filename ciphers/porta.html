@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Porta Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/polyalphabetic.html">Hall III: Polyalphabetic Revolution</a><span>&rsaquo;</span>
+    Porta Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 09 of 33</span>
+    <span class="badge era-renaissance">Renaissance · 1563</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Porta Cipher</h1>
+  <p class="page-tagline">A 13-row polyalphabetic cipher from the Renaissance master of secrets</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Giambattista della Porta</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1563</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Repeating keyword (pair-based)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Index of Coincidence · Statistical analysis</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Lookup-table cipher design</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Giambattista della Porta was one of the most prolific natural philosophers of the Renaissance — he wrote on optics, agriculture, meteorology, and magic. His 1563 book <em>De Furtivis Literarum Notis</em> contained one of the most sophisticated cipher systems of his era: a 13-row reciprocal polyalphabetic cipher.</p><p style='margin-top:1rem;'>Unlike Vigenère's 26 rows, Porta used 13 rows — each shared by two key letters. This made the table smaller and easier to use in the field, while still providing polyalphabetic variation. The cipher remained in use by European courts for decades.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>The Porta cipher uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class='steps' style='margin:1rem 0;'><li class='step'><div class='step-text'>Find the row whose label contains the current key letter</div></li><li class='step'><div class='step-text'>Look up the plaintext letter in that row</div></li><li class='step'><div class='step-text'>The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Index of Coincidence</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">The Porta cipher's 13-row structure means the effective key length is halved — pairs of key letters use the same row. This actually makes it somewhat easier to attack than Vigenère. The IC test identifies the key length; once found, each column can be attacked with frequency analysis on 13-letter alphabets.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Porta Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>13-row reciprocal tableau</td><td>Symmetric cipher operations: same hardware encrypts and decrypts</td></tr>
+<tr><td>Paired key letter lookup</td><td>S-box lookup tables in AES SubBytes step</td></tr>
+<tr><td>Smaller table for field use</td><td>Hardware-optimized cipher implementations</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>09 of 33</td></tr>
+            <tr><td>Era</td><td>Renaissance · 1563</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Giambattista della Porta</td></tr>
+            <tr><td>Year</td><td>1563</td></tr>
+            <tr><td>Key Type</td><td>Repeating keyword (pair-based)</td></tr>
+            <tr><td>Broken By</td><td>Index of Coincidence · Statistical analysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/beaufort.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Beaufort Cipher</span>
+  </a>
+  <a href="../ciphers/gronsfeld.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Gronsfeld Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="beaufort.html">&larr; Beaufort Cipher</a></li>
+        <li><a href="gronsfeld.html">Gronsfeld Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 09 of 33</span>
+  </div>
+</footer>
+</body>
+</html>
