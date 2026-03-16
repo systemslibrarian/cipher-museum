@@ -104,7 +104,7 @@
   toggle.id = 'lpToggle';
   toggle.setAttribute('aria-label','Toggle Learning Path mode');
   toggle.setAttribute('aria-pressed', String(isActive()));
-  toggle.innerHTML = '🎓 <span style="font-family:var(--fm);font-size:.65rem;letter-spacing:.1em">Learning Path</span>';
+  toggle.innerHTML = '🎓 <span class="lp-label" style="font-family:var(--fm);font-size:.65rem;letter-spacing:.1em">Learning Path</span>';
   Object.assign(toggle.style, {
     position:'fixed', top:'78px', right:'1rem', zIndex:'190',
     background: 'var(--s2)', border:'1px solid var(--gold-b)', borderRadius:'var(--r)',
@@ -112,6 +112,16 @@
     display:'flex', alignItems:'center', gap:'.4rem',
     transition:'all var(--trs)', boxShadow:'0 4px 16px rgba(0,0,0,.3)'
   });
+  /* On narrow screens, collapse to icon-only and move below nav */
+  function adjustToggle(){
+    var narrow = window.innerWidth <= 600;
+    toggle.querySelector('.lp-label').style.display = narrow ? 'none' : '';
+    toggle.style.top = narrow ? 'auto' : '78px';
+    toggle.style.bottom = narrow ? '70px' : 'auto';
+    toggle.style.right = narrow ? '1rem' : '1rem';
+  }
+  adjustToggle();
+  window.addEventListener('resize', adjustToggle);
   toggle.addEventListener('mouseenter',function(){ toggle.style.background='var(--gold-glow)'; });
   toggle.addEventListener('mouseleave',function(){ toggle.style.background='var(--s2)'; });
   document.body.appendChild(toggle);
@@ -139,8 +149,9 @@
   Object.assign(nextBar.style, {
     position:'fixed', bottom:'0', left:'0', right:'0', zIndex:'195',
     background:'rgba(6,6,8,.95)', backdropFilter:'blur(12px)',
-    borderTop:'1px solid var(--gold-b)', padding:'.75rem 2rem',
-    display:'none', alignItems:'center', justifyContent:'space-between'
+    borderTop:'1px solid var(--gold-b)', padding:'.75rem 1rem',
+    display:'none', alignItems:'center', justifyContent:'space-between',
+    flexWrap:'wrap', gap:'.5rem', fontSize:'.85rem'
   });
   document.body.appendChild(nextBar);
 
