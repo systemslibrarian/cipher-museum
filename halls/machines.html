@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall VI: Mechanical Cipher Machines — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg><span class="nav-logo-text">The Cipher Museum</span></a>
+  <ul class="nav-links"><li><a href="../index.html">Entrance</a></li><li><a href="../museum-map.html">Museum Map</a></li><li><a href="military.html">Hall V</a></li><li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li></ul>
+</div></nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb"><a href="../index.html">Entrance</a><span>›</span><a href="../museum-map.html">Museum Map</a><span>›</span>Hall VI</div>
+  <span class="page-eyebrow">Hall VI · 1467 – 1945</span>
+  <h1 class="page-title">Mechanical Cipher Machines</h1>
+  <p class="page-tagline">When cryptography became hardware — and hardware changed history</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">From Leon Battista Alberti's bronze disk in 1467 to the Lorenz machine's 12 rotor wheels in 1940, this hall traces 500 years of mechanical cryptography. The machines in this hall weren't just ciphers — they were the devices that generated the intelligence that won (or lost) wars, and whose analysis built the first computers.</p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-renaissance">1467</span><span class="badge era-19c">1795</span><span class="badge era-wwii">1932–1945</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="callout callout-info" style="margin-bottom:3rem;">
+    <span class="callout-icon">⚙️</span>
+    <div class="callout-body"><p><strong>The mechanical advantage:</strong> Hand ciphers require operators to look up tables, count positions, and write carefully. Mechanical devices automate the cipher operation — dramatically increasing speed and reducing errors. The tradeoff: a captured machine reveals everything about the cipher structure. Security must then rely entirely on the key settings.</p></div>
+  </div>
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/alberti-disk.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Exhibit 30</span><span class="badge era-renaissance">Renaissance · 1467</span></div>
+      <div class="card-name">Alberti Cipher Disk</div>
+      <p class="card-desc">Leon Battista Alberti's two concentric bronze disks created the first mechanical polyalphabetic cipher. The outer disk holds the standard alphabet; the inner disk holds a scrambled alphabet. Rotating the inner disk changes the substitution alphabet — 100 years before Vigenère described the same idea on paper.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-renaissance">First Cipher Disk</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="../ciphers/jefferson-disk.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Exhibit 29</span><span class="badge era-19c">1795 · USA</span></div>
+      <div class="card-name">Jefferson Disk</div>
+      <p class="card-desc">Thomas Jefferson invented a wheel cipher as Secretary of State in 1795 — then forgot about it. The US Army independently reinvented it as the M-94 in 1922 and used it through WWII. 25 aluminum disks, each with a scrambled alphabet, mounted on a spindle. Set the message, read any other row as ciphertext.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-19c">M-94 Army Use</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="../ciphers/enigma.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Exhibit 27</span><span class="badge era-wwii">WWII · 1932</span></div>
+      <div class="card-name">Enigma Machine</div>
+      <p class="card-desc">158,962,555,217,826,360,000 possible settings. Three (later four) rotors, a plugboard, a reflector. Every keypress changed the substitution alphabet. Broken by Polish mathematicians, then Turing and Bletchley Park. Shortening the war by an estimated 2–4 years.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-wwii">Bletchley Park</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="../ciphers/lorenz.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Exhibit 28</span><span class="badge era-wwii">WWII · 1940</span></div>
+      <div class="card-name">Lorenz Cipher</div>
+      <p class="card-desc">Hitler's strategic cipher. 12 rotor wheels, fully automatic teleprinter encryption. An operator's mistake in 1941 gave Bill Tutte enough to reconstruct the entire machine structure without ever seeing it. Tommy Flowers built Colossus to crack it — the world's first programmable electronic computer.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge era-wwii">Built Colossus</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+  </div>
+
+  <div class="section-head" style="text-align:left;"><span class="section-eyebrow">The Arc of History</span><h2 class="section-title">From Bronze Disk to Electronic Computer</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔵</span><span class="panel-title">Alberti → Vigenère → Enigma</span></div><div class="panel-body"><p>Alberti's rotating disk (1467) embodied the polyalphabetic idea mechanically. Vigenère wrote it down as a table (1553). Enigma implemented it with electric rotors (1918). Each generation automated and extended the same concept.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">💻</span><span class="panel-title">Lorenz → Colossus → Computing</span></div><div class="panel-body"><p>Breaking the Lorenz cipher required searching through too many wheel combinations for human analysts. The need for automated search led directly to Colossus (1943) — the world's first programmable electronic computer. Cryptanalysis gave birth to computing.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">Physical Keys → Digital Keys</span></div><div class="panel-body"><p>Enigma's daily key settings were physical — rotor positions, plugboard connections, ring settings, distributed in printed codebooks. Today's keys are 256-bit numbers distributed cryptographically. The concept of a shared secret key remains unchanged.</p></div></div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="military.html" class="hall-nav-link"><span class="hall-nav-dir">← Previous Hall</span><span class="hall-nav-name">Hall V: Military &amp; Spy Ciphers</span></a>
+  <a href="puzzle.html" class="hall-nav-link next"><span class="hall-nav-dir">Next Hall →</span><span class="hall-nav-name">Hall VII: Puzzle &amp; Novelty Ciphers</span></a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License.</p></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../ciphers/alberti-disk.html">Alberti Cipher Disk</a></li><li><a href="../ciphers/jefferson-disk.html">Jefferson Disk</a></li><li><a href="../ciphers/enigma.html">Enigma Machine</a></li><li><a href="../ciphers/lorenz.html">Lorenz Cipher</a></li></ul></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="military.html">← Hall V</a></li><li><a href="puzzle.html">Hall VII →</a></li><li><a href="../museum-map.html">Museum Map</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">Hall VI of IX</span></div>
+</footer>
+</body></html>

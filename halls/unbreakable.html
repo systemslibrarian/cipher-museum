@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Hall: The Unbreakable &amp; the Modern — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="civil-war.html">Civil War</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="../modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero" style="border-bottom-color:var(--gold);">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Final Hall
+  </div>
+  <span class="page-eyebrow" style="color:var(--gold);">Final Hall · ★ · 1882 – Present</span>
+  <h1 class="page-title">The Unbreakable<br>&amp; the Modern</h1>
+  <p class="page-tagline">Where classical cryptography ends and mathematics begins</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    Every cipher you've seen in this museum has been broken. Some in days. Some after centuries. One cipher exists that Claude Shannon proved mathematically unbreakable — yet we almost never use it, because its requirements are practically impossible to meet. This final hall confronts that paradox, examines why classical cryptography collapsed entirely in WWII, and shows how modern cryptography rose from those ashes.
+  </p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-theoretical">Theoretical Security</span>
+    <span class="badge era-wwii">WWII</span>
+    <span class="badge sec-secure">One Cipher: Provably Secure</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/one-time-pad.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 26</span>
+        <span class="badge era-theoretical">1882 · Theoretical</span>
+      </div>
+      <div class="card-name">One-Time Pad</div>
+      <p class="card-desc">The only cipher proved mathematically unbreakable by Claude Shannon (1949). Three requirements: the key must be truly random, exactly as long as the message, and never reused. If any condition is violated, security collapses entirely — as the VENONA project proved when Soviet operators reused pads under wartime pressure.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">Plain:  </span><span style="color:var(--tx);">HELLO</span><br>
+        <span style="color:var(--tx3);">Key:    </span><span style="color:var(--gold);">XMCKL</span><span style="color:var(--tx3);"> (truly random)</span><br>
+        <span style="color:var(--tx3);">Cipher: </span><span style="color:var(--gold-lt);">EQNVZ</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Provably Secure</span>
+          <span class="badge era-theoretical">If Rules Followed</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/enigma.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 27</span>
+        <span class="badge era-wwii">WWII · 1932–1945</span>
+      </div>
+      <div class="card-name">Enigma Machine</div>
+      <p class="card-desc">Germany's electro-mechanical rotor cipher machine produced a different substitution alphabet for every single keystroke — 158 quintillion possible initial settings. Alan Turing, Gordon Welchman, and Bletchley Park broke it anyway. The lesson: a cipher can be theoretically enormous and still fail operationally.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">158,962,555,217,826,360,000 initial settings</span><br>
+        <span style="color:var(--tx3);">Broken by: cribs + Bombe machine</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken</span>
+          <span class="badge era-wwii">Bletchley Park</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Shannon's Proof -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">The Mathematics of Secrecy</span>
+    <h2 class="section-title">Claude Shannon and Perfect Secrecy</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📐</span><span class="panel-title">Shannon's 1949 Proof</span></div>
+      <div class="panel-body">
+        <p>In "Communication Theory of Secrecy Systems" (1949), Claude Shannon proved that a cipher achieves <strong>perfect secrecy</strong> if and only if: the key is chosen uniformly at random, the key space is at least as large as the message space, and each key is used at most once.</p>
+        <p style="margin-top:.75rem;">This means: for any ciphertext, every possible plaintext is equally likely. An attacker — even with unlimited computing power — gains zero information from the ciphertext alone.</p>
+        <p style="margin-top:.75rem;">The one-time pad is the only cipher that satisfies all three conditions.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚠️</span><span class="panel-title">Why We Don't Use It</span></div>
+      <div class="panel-body">
+        <p>The OTP's requirements make it nearly impossible to use at scale:</p>
+        <ul class="steps" style="margin-top:.75rem;">
+          <li class="step"><div class="step-text">The key must be as long as the message — a 1GB file needs a 1GB key</div></li>
+          <li class="step"><div class="step-text">The key must be truly random — not pseudorandom</div></li>
+          <li class="step"><div class="step-text">Key distribution must be perfectly secure — if the key channel isn't secure, neither is the cipher</div></li>
+          <li class="step"><div class="step-text">Every key used once means you can never reuse, recycle, or re-derive it</div></li>
+        </ul>
+        <div class="callout callout-danger" style="margin-top:1rem;">
+          <span class="callout-icon">⚡</span>
+          <div class="callout-body"><p><strong>VENONA:</strong> Soviet operators reused OTP key pages under WWII supply pressure. The NSA exploited this reuse to decode thousands of Soviet messages — exposing the Rosenbergs and Klaus Fuchs.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confusion and Diffusion -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">Why Classical Ciphers Failed</span>
+    <h2 class="section-title">Shannon's Two Principles — and How Modern Crypto Achieves Them</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">🌀</span>
+        <span class="panel-title" style="color:var(--gold);">Confusion</span>
+      </div>
+      <div class="panel-body">
+        <p>Making the relationship between the key and ciphertext as complex as possible. <em>Caesar has zero confusion</em> — the relationship is simply C = P + 3. An attacker who sees one plaintext-ciphertext pair knows the entire key.</p>
+        <p style="margin-top:.75rem;"><strong>Modern solution:</strong> AES S-boxes are carefully designed non-linear functions. Knowing one output tells you almost nothing about the key or other outputs.</p>
+      </div>
+    </div>
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">🌊</span>
+        <span class="panel-title" style="color:var(--gold);">Diffusion</span>
+      </div>
+      <div class="panel-body">
+        <p>Spreading the influence of each plaintext bit across many ciphertext bits. <em>Caesar has zero diffusion</em> — changing one letter changes exactly one ciphertext letter. Frequency analysis exploits this directly.</p>
+        <p style="margin-top:.75rem;"><strong>Modern solution:</strong> After 2 rounds of AES, every output bit depends on every input bit. After 10 rounds, changing one input bit changes ~half of all output bits (the Avalanche Effect).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Evolution table -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">The Complete Journey</span>
+    <h2 class="section-title">From Caesar to AES — What Each Generation Taught the Next</h2>
+  </div>
+
+  <div class="panel" style="margin-bottom:3rem;">
+    <div class="panel-body" style="padding:0;">
+      <table class="cipher-table">
+        <thead>
+          <tr>
+            <th>Classical Cipher Type</th>
+            <th>Fatal Weakness</th>
+            <th>Modern Solution</th>
+            <th>Modern Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Caesar / Substitution</td><td>Frequency analysis — letter mapping preserved</td><td>Non-linear S-boxes destroy frequency patterns</td><td>AES SubBytes</td></tr>
+          <tr><td>Monoalphabetic</td><td>26! keys but all have same statistical signature</td><td>Key-dependent substitution tables</td><td>AES with round keys</td></tr>
+          <tr><td>Polyalphabetic / Vigenère</td><td>Repeating key creates detectable periodicity</td><td>Non-repeating pseudorandom keystreams</td><td>ChaCha20, AES-CTR</td></tr>
+          <tr><td>Transposition</td><td>Letters preserved, just rearranged — anagram attacks work</td><td>Substitution combined with permutation every round</td><td>AES ShiftRows + MixColumns</td></tr>
+          <tr><td>Playfair / Hill (block)</td><td>Small blocks leak digraph statistics; linear algebra solvable</td><td>128-bit blocks, non-linear operations, key mixing</td><td>AES (128-bit block)</td></tr>
+          <tr><td>Military layered (ADFGVX)</td><td>Substitution + transposition — each layer still attackable</td><td>10–14 rounds of 4 operations — computationally infeasible to reverse</td><td>AES, Camellia</td></tr>
+          <tr><td>One-Time Pad</td><td>Impractical key management — reuse is catastrophic</td><td>Computationally secure with short key — key derivation functions</td><td>AES-256, X25519 key exchange</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout callout-success">
+    <span class="callout-icon">🎓</span>
+    <div class="callout-body">
+      <p><strong>The museum's final lesson:</strong> Modern cryptography didn't replace classical ciphers by being cleverer. It replaced them by being <em>mathematically honest</em> — defining precisely what security means (computational hardness), proving that breaking the cipher requires solving problems believed to take billions of years, and designing systems that fail loudly when used incorrectly rather than silently. Every exhibit in this museum is a lesson in what "mathematically honest" means.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="civil-war.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Civil War Gallery</span>
+    <span class="hall-nav-name">The American Civil War</span>
+  </a>
+  <a href="../modern.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Continue →</span>
+    <span class="hall-nav-name">Modern Cryptography</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/one-time-pad.html">One-Time Pad</a></li>
+        <li><a href="../ciphers/enigma.html">Enigma Machine</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Continue</div>
+      <ul class="footer-links">
+        <li><a href="../modern.html">Modern Cryptography →</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../museum-map.html">Museum Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Final Hall · ★</span>
+  </div>
+</footer>
+</body>
+</html>

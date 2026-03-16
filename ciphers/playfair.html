@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playfair Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+    .key-square {
+      display:grid;
+      grid-template-columns:repeat(5, minmax(44px, 1fr));
+      gap:.35rem;
+      margin-top:1rem;
+    }
+    .key-cell {
+      aspect-ratio:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--gold-b);
+      border-radius:var(--r-sm);
+      background:var(--gold-glow);
+      color:var(--gold-lt);
+      font-family:var(--fm);
+      font-size:.9rem;
+      letter-spacing:.12em;
+    }
+    .pair-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:.75rem;
+      margin-top:1rem;
+    }
+    .pair-card {
+      background:var(--s3);
+      border:1px solid var(--s4);
+      border-radius:var(--r);
+      padding:.85rem;
+      font-family:var(--fm);
+      font-size:.78rem;
+      line-height:1.8;
+      color:var(--tx2);
+    }
+    .pair-card strong {
+      color:var(--gold-lt);
+      font-weight:600;
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../halls/substitution.html">Hall II</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: Classical Substitution</a><span>&rsaquo;</span>
+    Playfair Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 05 of 33</span>
+    <span class="badge era-19c">Victorian · 1854</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Playfair Cipher</h1>
+  <p class="page-tagline">Digraph encryption: Wheatstone's elegant fix for single-letter frequency analysis</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Charles Wheatstone</span></div>
+    <div class="fact"><span class="fact-label">Promoted By</span><span class="fact-value">Lord Playfair</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1854</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">5×5 keyword square</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Digraph statistics · hill climbing</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Block encryption and diffusion</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Charles Wheatstone devised the Playfair cipher in 1854, and Lord Playfair championed it to British officials who were skeptical of more complicated cryptographic systems. Instead of encrypting one letter at a time, Playfair encrypts <em>pairs</em> of letters. That immediately defeats the single-letter frequency analysis that destroyed Caesar and monoalphabetic substitution.</p>
+        <p style="margin-top:1rem;">The British Army used Playfair operationally in the Second Boer War, and British and Commonwealth forces still used variants in both world wars for field traffic. It was fast enough for humans, stronger than earlier substitution ciphers, and compact enough for a pocket notebook.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>Build a 5×5 square from a keyword, merging I and J into one cell. Then split plaintext into digraphs. If a pair repeats a letter, insert a filler such as X. If the message length is odd, pad the final letter.</p>
+        <div class="diagram-wrap" style="margin-top:1rem;">
+          <p style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:.75rem;">Keyword Square: MONARCHY</p>
+          <div class="key-square">
+            <div class="key-cell">M</div><div class="key-cell">O</div><div class="key-cell">N</div><div class="key-cell">A</div><div class="key-cell">R</div>
+            <div class="key-cell">C</div><div class="key-cell">H</div><div class="key-cell">Y</div><div class="key-cell">B</div><div class="key-cell">D</div>
+            <div class="key-cell">E</div><div class="key-cell">F</div><div class="key-cell">G</div><div class="key-cell">I/J</div><div class="key-cell">K</div>
+            <div class="key-cell">L</div><div class="key-cell">P</div><div class="key-cell">Q</div><div class="key-cell">S</div><div class="key-cell">T</div>
+            <div class="key-cell">U</div><div class="key-cell">V</div><div class="key-cell">W</div><div class="key-cell">X</div><div class="key-cell">Z</div>
+          </div>
+          <p class="diagram-caption">Pairs in the same row move right, same column move down, otherwise use the corners of the rectangle.</p>
+        </div>
+        <div class="pair-grid">
+          <div class="pair-card"><strong>Same row</strong><br>AR → RM<br>Move each letter one square to the right, wrapping around.</div>
+          <div class="pair-card"><strong>Same column</strong><br>MC → CE<br>Move each letter one square down, wrapping around.</div>
+          <div class="pair-card"><strong>Rectangle rule</strong><br>HI → BF<br>Take the letters at the other corners of the rectangle, keeping each letter's row.</div>
+        </div>
+        <pre style="margin-top:1rem;">Plaintext: HIDE THE GOLD IN THE TREE STUMP
+Pairs:     HI DE TH EG OL DI NT HE TR EX ES TU MP
+Cipher:    BF CK PD FI MP BR NK FA RM IA ZB CL OP</pre>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Digraph Frequency Analysis</div>
+          <div class="attack-diff">Complexity: Moderate</div>
+          <p class="attack-desc">Playfair hides single-letter frequencies, but it does not hide language. Common English pairs like TH, HE, IN, ER, and AN still leave traces in ciphertext digraphs. Once enough traffic is collected, the key square can be reconstructed by testing candidate arrangements against those digraph statistics.</p>
+        </div>
+        <div class="attack-panel" style="margin-top:1rem;">
+          <div class="attack-name">Hill Climbing and Simulated Annealing</div>
+          <div class="attack-diff">Complexity: Fast on modern hardware</div>
+          <p class="attack-desc">Modern solvers score candidate key squares by how English-like the decrypted text becomes, then mutate the square repeatedly. That makes Playfair a textbook example of why “hard for humans” is not the same thing as “secure against machines.”</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Playfair Concept</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Encrypt two letters at once</td><td>Block ciphers transform many bits together instead of one symbol at a time</td></tr>
+            <tr><td>Position inside a key square matters</td><td>AES state matrices mix value and position each round</td></tr>
+            <tr><td>Language patterns survive in ciphertext</td><td>Modern ciphers aim for outputs indistinguishable from random noise</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>05 of 33</td></tr>
+            <tr><td>Era</td><td>Victorian · 1854</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Charles Wheatstone</td></tr>
+            <tr><td>Used By</td><td>British field forces</td></tr>
+            <tr><td>Key Type</td><td>5×5 keyword square</td></tr>
+            <tr><td>Broken By</td><td>Digraph statistics · heuristic search</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/homophonic.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Homophonic Substitution</span>
+  </a>
+  <a href="../ciphers/hill.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Hill Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="homophonic.html">&larr; Homophonic Substitution</a></li>
+        <li><a href="hill.html">Hill Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 05 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

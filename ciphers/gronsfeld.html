@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gronsfeld Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/polyalphabetic.html">Hall III: Polyalphabetic Revolution</a><span>&rsaquo;</span>
+    Gronsfeld Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 10 of 33</span>
+    <span class="badge era-renaissance">17th Century</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Gronsfeld Cipher</h1>
+  <p class="page-tagline">Vigenère with numeric keys — simpler to memorize, easier to break</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Count Josef von Gronsfeld</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1650</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Numeric keyword (digits 0-9)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Kasiski · Only 10 possible shifts per position</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Key alphabet size matters</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Count Josef von Gronsfeld modified the Vigenère cipher to use numeric keys instead of letter keys. A soldier could memorize '31415' far more easily than 'LEMON'. The tradeoff: digits only give 10 possible shift values (0-9) instead of 26, dramatically weakening the cipher.</p><p style='margin-top:1rem;'>The Gronsfeld cipher illustrates a persistent tension in cryptography: usability versus security. A cipher that field operators can't remember correctly is useless — but a cipher that trades security for memorability may be worse than none.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Key:    3  1  4  1  5  3  1  4
+Plain:  A  T  T  A  C  K  A  T
+Cipher: D  U  X  B  H  N  B  X
+
+Formula: C = (P + digit) mod 26
+Only 10 possible shifts per position (0-9)</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Kasiski + Reduced Keyspace</div><div class="attack-diff">Complexity: Easy</div><p class="attack-desc">Gronsfeld shares Vigenère's periodicity weakness, but with only 10 possible shift values per position, each column's key digit can be found by testing just 10 possibilities instead of 26. A cryptanalyst with the key length (from Kasiski) can break each column in seconds.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Gronsfeld Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Digit keys (0-9)</td><td>Key entropy matters: AES-256 uses 256-bit keys for 2²⁵⁶ possible values</td></tr>
+<tr><td>Usability-security tradeoff</td><td>Modern KDFs (PBKDF2, Argon2) derive strong keys from memorable passwords</td></tr>
+<tr><td>Small effective alphabet</td><td>Full 256-byte S-box in AES uses all possible values uniformly</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>10 of 33</td></tr>
+            <tr><td>Era</td><td>17th Century</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Count Josef von Gronsfeld</td></tr>
+            <tr><td>Year</td><td>~1650</td></tr>
+            <tr><td>Key Type</td><td>Numeric keyword (digits 0-9)</td></tr>
+            <tr><td>Broken By</td><td>Kasiski · Only 10 possible shifts per position</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/porta.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Porta Cipher</span>
+  </a>
+  <a href="../ciphers/running-key.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Running Key Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="porta.html">&larr; Porta Cipher</a></li>
+        <li><a href="running-key.html">Running Key Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 10 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

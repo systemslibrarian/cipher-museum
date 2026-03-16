@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cryptanalysis Lab — The Cipher Museum</title>
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .lab-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.25rem; margin-bottom:3rem; }
+    .technique-card {
+      background:var(--s2); border:1px solid var(--s4); border-radius:var(--rl); padding:1.5rem;
+      transition:all var(--trs); cursor:default;
+    }
+    .technique-card:hover { border-color:var(--red-b); background:var(--s3); }
+    .technique-num { font-family:var(--fm); font-size:.6rem; letter-spacing:.15em; color:var(--tx3); margin-bottom:.5rem; }
+    .technique-name { font-family:var(--fd); font-size:1.15rem; color:var(--tx); margin-bottom:.35rem; letter-spacing:.04em; }
+    .technique-by { font-family:var(--fm); font-size:.65rem; letter-spacing:.1em; color:var(--gold-dim); margin-bottom:.75rem; }
+    .technique-desc { font-size:.95rem; color:var(--tx2); line-height:1.75; margin-bottom:.75rem; }
+    .technique-breaks { display:flex; flex-wrap:wrap; gap:.35rem; }
+
+    .timeline { display:flex; flex-direction:column; gap:0; }
+    .tl-item { display:grid; grid-template-columns:80px 1fr; gap:1.5rem; }
+    .tl-year { font-family:var(--fm); font-size:.72rem; color:var(--gold-dim); text-align:right; padding-top:1.2rem; }
+    .tl-body { padding:1rem 0 1.5rem 1.5rem; border-left:1px solid var(--s4); position:relative; }
+    .tl-body::before { content:''; position:absolute; left:-4px; top:1.3rem; width:7px; height:7px; border-radius:50%; background:var(--gold-dim); }
+    .tl-title { font-family:var(--fd); font-size:1.05rem; color:var(--tx); margin-bottom:.25rem; }
+    .tl-person { font-family:var(--fm); font-size:.62rem; letter-spacing:.1em; color:var(--gold); margin-bottom:.4rem; }
+    .tl-technique { font-family:var(--fm); font-size:.62rem; letter-spacing:.08em; color:var(--tx3); margin-bottom:.5rem; }
+    .tl-impact { font-size:.92rem; color:var(--tx2); line-height:1.7; }
+    .tl-item.legendary .tl-body::before { background:var(--gold); width:9px; height:9px; left:-5px; }
+    .tl-item.legendary .tl-body { border-color:var(--gold-b); }
+
+    /* Interactive challenge tabs */
+    .lab-tabs { display:flex; gap:0; background:var(--s3); border-radius:var(--r); padding:3px; margin-bottom:2rem; flex-wrap:wrap; }
+    .lab-tab { flex:1; min-width:140px; padding:.55rem 1rem; border:none; background:none; font-family:var(--fd); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tx3); cursor:pointer; border-radius:3px; transition:all var(--tr); }
+    .lab-tab.active { background:var(--gold); color:var(--black); font-weight:700; }
+    .lab-panel { display:none; } .lab-panel.active { display:block; }
+
+    .ic-display { font-family:var(--fm); font-size:2rem; color:var(--gold); text-align:center; padding:1rem; }
+    .ic-label { font-family:var(--fm); font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--tx3); text-align:center; }
+    .ic-bar-wrap { height:8px; background:var(--s4); border-radius:4px; margin:1rem 0; overflow:hidden; }
+    .ic-bar { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--red),var(--gold),var(--green)); transition:width .4s ease; }
+
+    .kasiski-hits { margin-top:1rem; display:flex; flex-direction:column; gap:.4rem; max-height:200px; overflow-y:auto; }
+    .kasiski-hit { font-family:var(--fm); font-size:.75rem; background:var(--s3); border:1px solid var(--gold-b); border-radius:var(--r); padding:.5rem .75rem; color:var(--gold-lt); }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Museum Map</a></li>
+      <li><a href="halls/ancient.html">Halls</a></li>
+      <li><a href="cryptanalysis.html" class="active">Cryptanalysis Lab</a></li>
+      <li><a href="modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Cryptanalysis Lab</div>
+  <span class="page-eyebrow">Special Exhibit · The Science of Breaking Codes</span>
+  <h1 class="page-title">Cryptanalysis Lab</h1>
+  <p class="page-tagline">"To know how to defend, you must first know how to attack."</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    Every cipher in this museum was eventually broken. This lab explains the techniques used — from Al-Kindi's frequency tables in 850 AD to the electromechanical Bombe machines at Bletchley Park. Twelve of the most famous codebreaks in history. Seven techniques that break almost every classical cipher ever invented.
+  </p>
+</div>
+
+<!-- ═══ MAIN CONTENT ══════════════════════════════════ -->
+<div class="section">
+
+  <!-- 7 Techniques -->
+  <div class="section-head">
+    <span class="section-eyebrow">The Toolkit</span>
+    <h2 class="section-title">7 Techniques That Break Classical Ciphers</h2>
+    <p class="section-sub">Modern solvers combine all seven. A Vigenère cipher that took weeks in 1800 now falls in under one second.</p>
+  </div>
+
+  <div class="lab-grid">
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 01</div>
+      <div class="technique-name">Frequency Analysis</div>
+      <div class="technique-by">Al-Kindi · Baghdad · ~850 AD</div>
+      <p class="technique-desc">Languages have predictable letter frequencies. In English, E=12.7%, T=9.1%, A=8.2%. Any cipher that maps one letter to one symbol preserves these frequencies. Count the symbols, compare to known frequencies, recover the key.</p>
+      <div class="technique-breaks">
+        <span class="badge sec-broken">Caesar</span>
+        <span class="badge sec-broken">Monoalphabetic</span>
+        <span class="badge sec-broken">Homophonic</span>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 02</div>
+      <div class="technique-name">Kasiski Examination</div>
+      <div class="technique-by">Friedrich Kasiski · 1863</div>
+      <p class="technique-desc">In a Vigenère cipher, the same plaintext + same key position = same ciphertext. Identical repeated strings in the ciphertext reveal probable key length. Their spacing is likely a multiple of the key length.</p>
+      <div class="technique-breaks">
+        <span class="badge sec-broken">Vigenère</span>
+        <span class="badge sec-broken">Beaufort</span>
+        <span class="badge sec-broken">Gronsfeld</span>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 03</div>
+      <div class="technique-name">Index of Coincidence</div>
+      <div class="technique-by">William Friedman · 1920</div>
+      <p class="technique-desc">Measures statistical similarity to natural language. English text has an IC of ~0.066. Random text has ~0.038. A polyalphabetic cipher produces values between these — and the IC can reveal the key length without finding repeated strings.</p>
+      <div class="technique-breaks">
+        <span class="badge sec-broken">Vigenère</span>
+        <span class="badge sec-broken">Running Key</span>
+        <span class="badge sec-broken">Polyalphabetic</span>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 04</div>
+      <div class="technique-name">Crib-Based Cryptanalysis</div>
+      <div class="technique-by">Polish Mathematicians · WWII Bletchley</div>
+      <p class="technique-desc">Guess probable plaintext words called "cribs" — military messages often start with standard phrases. The Enigma was broken partly because operators always began with WETTER (weather), HEIL HITLER, or ANX (a header). Known structure is a fatal weakness.</p>
+      <div class="technique-breaks">
+        <span class="badge sec-broken">Enigma</span>
+        <span class="badge sec-broken">Lorenz</span>
+        <span class="badge sec-broken">Vigenère</span>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 05</div>
+      <div class="technique-name">Known Plaintext Attack</div>
+      <div class="technique-by">Universal · Classical through Modern</div>
+      <p class="technique-desc">When some plaintext is known, the key can often be derived directly. The Hill cipher's matrix key is recoverable with just two known plaintext-ciphertext pairs by solving a system of linear equations. Enigma used weather forecasts as cribs.</p>
+      <div class="technique-breaks">
+        <span class="badge sec-broken">Hill Cipher</span>
+        <span class="badge sec-broken">Enigma</span>
+        <span class="badge sec-broken">Lorenz</span>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 06</div>
+      <div class="technique-name">Hill Climbing Search</div>
+      <div class="technique-by">Modern · Computer Era</div>
+      <p class="technique-desc">Start with a random key. Decrypt. Score the result using English language statistics — common digrams like TH, HE, IN. Make random changes to the key. Keep improvements, discard downgrades. Repeat millions of times. Works against substitution, Playfair, transposition.</p>
+      <div class="technique-breaks">
+        <span class="badge sec-broken">Substitution</span>
+        <span class="badge sec-broken">Playfair</span>
+        <span class="badge sec-broken">Transposition</span>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 07</div>
+      <div class="technique-name">Simulated Annealing / Genetic Algorithms</div>
+      <div class="technique-by">Modern · AI-Assisted</div>
+      <p class="technique-desc">Advanced optimization heuristics that explore key space more broadly than pure hill climbing. Genetic algorithms evolve populations of candidate keys. Simulated annealing occasionally accepts worse solutions to escape local optima. Breaks double transposition, Playfair, Hill cipher in seconds.</p>
+      <div class="technique-breaks">
+        <span class="badge sec-broken">Double Transposition</span>
+        <span class="badge sec-broken">Playfair</span>
+        <span class="badge sec-broken">Hill Cipher</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout callout-warn" style="margin-bottom:4rem;">
+    <span class="callout-icon">⚡</span>
+    <div class="callout-body">
+      <p><strong>Speed comparison:</strong> A Vigenère cipher with a 5-letter key that took professional cryptanalysts <em>weeks</em> in the 1800s is now cracked by modern programs in <strong>under one second</strong>. A monoalphabetic substitution cipher that kept Renaissance diplomats safe for decades falls in <strong>milliseconds</strong>. This is why modern cryptography uses mathematical problems believed to require billions of years, not minutes.</p>
+    </div>
+  </div>
+
+  <!-- Interactive Lab -->
+  <div class="section-head">
+    <span class="section-eyebrow">Hands-On</span>
+    <h2 class="section-title">Try the Techniques</h2>
+    <p class="section-sub">Apply cryptanalysis tools to real ciphertext.</p>
+  </div>
+
+  <div class="lab-tabs" role="tablist" aria-label="Cryptanalysis tools">
+    <button class="lab-tab active" id="tab-btn-freq" role="tab" aria-selected="true" aria-controls="tab-freq" tabindex="0" onclick="showTab('freq', this)">Frequency Analysis</button>
+    <button class="lab-tab" id="tab-btn-ioc" role="tab" aria-selected="false" aria-controls="tab-ioc" tabindex="-1" onclick="showTab('ioc', this)">Index of Coincidence</button>
+    <button class="lab-tab" id="tab-btn-kasiski" role="tab" aria-selected="false" aria-controls="tab-kasiski" tabindex="-1" onclick="showTab('kasiski', this)">Kasiski Examination</button>
+    <button class="lab-tab" id="tab-btn-challenge" role="tab" aria-selected="false" aria-controls="tab-challenge" tabindex="-1" onclick="showTab('challenge', this)">Break a Cipher</button>
+  </div>
+
+  <!-- Tab: Frequency Analysis -->
+  <div class="lab-panel active" id="tab-freq" role="tabpanel" aria-labelledby="tab-btn-freq">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+      <div>
+        <div class="input-group" style="margin-bottom:1rem;">
+          <span class="input-label">Paste Ciphertext</span>
+          <textarea class="museum-input" id="labFreqInput" rows="5" placeholder="Paste any ciphertext here…&#10;&#10;Try: KHOOR ZRUOG (Caesar shift 3)" oninput="labFreqUpdate()"></textarea>
+        </div>
+          <div id="labFreqResult" aria-live="polite" style="font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;"></div>
+      </div>
+      <div>
+        <p class="input-label" style="margin-bottom:.75rem;">Letter Frequencies</p>
+        <div style="display:flex;align-items:flex-end;gap:3px;height:120px;" id="labFreqChart"></div>
+        <div style="display:flex;gap:3px;margin-top:3px;" id="labFreqLetters"></div>
+        <div id="labFreqHint" aria-live="polite" style="font-family:var(--fm);font-size:.72rem;color:var(--gold);margin-top:.75rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Index of Coincidence -->
+  <div class="lab-panel" id="tab-ioc" role="tabpanel" aria-labelledby="tab-btn-ioc" hidden>
+    <div style="max-width:600px;">
+      <div class="input-group" style="margin-bottom:1.25rem;">
+        <span class="input-label">Paste Ciphertext</span>
+        <textarea class="museum-input" id="iocInput" rows="4" placeholder="Paste ciphertext to calculate IC…" oninput="calcIC()"></textarea>
+      </div>
+      <div class="ic-display" id="icValue">—</div>
+      <div class="ic-label">Index of Coincidence</div>
+      <div class="ic-bar-wrap" style="margin-top:1rem;">
+        <div class="ic-bar" id="icBar" style="width:0%"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:.6rem;color:var(--tx3);">
+        <span>0.038 (Random)</span>
+        <span>0.052 (Vigenère)</span>
+        <span>0.066 (English)</span>
+      </div>
+      <div id="icInterpret" aria-live="polite" style="margin-top:1.5rem;font-family:var(--fm);font-size:.8rem;color:var(--tx2);line-height:1.7;"></div>
+    </div>
+  </div>
+
+  <!-- Tab: Kasiski -->
+  <div class="lab-panel" id="tab-kasiski" role="tabpanel" aria-labelledby="tab-btn-kasiski" hidden>
+    <div style="max-width:700px;">
+      <div class="input-group" style="margin-bottom:1.25rem;">
+        <span class="input-label">Paste Vigenère Ciphertext (strip spaces)</span>
+        <textarea class="museum-input" id="kasiskiInput" rows="4" placeholder="LXFOPVEFRNHRLXFOPVEFRNHR…&#10;&#10;Repeated sequences reveal key length." oninput="runKasiski()"></textarea>
+      </div>
+      <div id="kasiskiResult" aria-live="polite" style="font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;"></div>
+      <div class="kasiski-hits" id="kasiskiHits" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- Tab: Challenge -->
+  <div class="lab-panel" id="tab-challenge" role="tabpanel" aria-labelledby="tab-btn-challenge" hidden>
+    <div style="display:flex;flex-direction:column;gap:2rem;max-width:700px;">
+
+      <div class="panel" style="border-color:var(--gold-b);">
+        <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+          <span>⚔</span><span class="panel-title" style="color:var(--gold);">Challenge 1 — Caesar Cipher</span>
+        </div>
+        <div class="panel-body">
+          <p style="font-size:.9rem;margin-bottom:.75rem;">Difficulty: <strong style="color:var(--green);">Trivial</strong> — Use frequency analysis or brute force</p>
+          <div style="font-family:var(--fm);font-size:.9rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.12em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">
+            XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEWC HSK
+          </div>
+          <button class="btn btn-secondary" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Shift = 4 · "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"</p>
+        </div>
+      </div>
+
+      <div class="panel" style="border-color:var(--orange);">
+        <div class="panel-head" style="background:rgba(200,144,90,.08);border-color:rgba(200,144,90,.3);">
+          <span>⚔</span><span class="panel-title" style="color:var(--orange);">Challenge 2 — Vigenère Cipher</span>
+        </div>
+        <div class="panel-body">
+          <p style="font-size:.9rem;margin-bottom:.75rem;">Difficulty: <strong style="color:var(--orange);">Moderate</strong> — Use Kasiski + Index of Coincidence</p>
+          <div style="font-family:var(--fm);font-size:.85rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.1em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:.75rem;">
+            LXFOPVEFRNHRLXFOPVEFRNHRLXFOPVEF
+          </div>
+          <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">Hint: Look for repeating 3-letter sequences. Their spacing reveals the key length. Key length × N = spacing between repeats.</p>
+          <button class="btn btn-secondary" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: LEMON · Plaintext: "ATTACKATDAWNATTACKATDAWNATTACKAT"</p>
+        </div>
+      </div>
+
+      <div class="panel" style="border-color:var(--red-b);">
+        <div class="panel-head" style="background:var(--red-d);border-color:var(--red-b);">
+          <span>⚔</span><span class="panel-title" style="color:var(--red);">Challenge 3 — Confederate Vigenère</span>
+        </div>
+        <div class="panel-body">
+          <p style="font-size:.9rem;margin-bottom:.75rem;">Difficulty: <strong style="color:var(--red);">Hard</strong> — Real Civil War ciphertext. Key: MANCHESTER BLUFF</p>
+          <div style="font-family:var(--fm);font-size:.82rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.1em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:.75rem;">
+            VVQECILMYMPM
+          </div>
+          <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">This is a fragment from an actual Confederate dispatch. Key = "COMPLETE VICTORY" — used by Jefferson Davis, Robert E. Lee, and Kirby Smith.</p>
+          <button class="btn btn-secondary" onclick="this.nextElementSibling.style.display='block';this.style.display='none';" style="font-size:.7rem;">Reveal Answer</button>
+          <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: COMPLETEVICT · Plaintext: "THEPRESIDEN[T]"</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 12 Famous Codebreaks -->
+  <div style="margin-top:5rem;">
+    <div class="section-head">
+      <span class="section-eyebrow">Historical Record</span>
+      <h2 class="section-title">12 Famous Codebreaks in History</h2>
+      <p class="section-sub">The moments that changed wars, toppled spies, and birthed the computer.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;" id="timeline">
+
+      <div class="timeline" style="padding-right:2rem;">
+
+        <div class="tl-item legendary">
+          <div class="tl-year">850 AD</div>
+          <div class="tl-body">
+            <div class="tl-title">Al-Kindi Breaks Substitution</div>
+            <div class="tl-person">Al-Kindi · Baghdad</div>
+            <div class="tl-technique">Technique: Frequency Analysis</div>
+            <p class="tl-impact">First documented scientific cryptanalysis. Introduced statistical analysis to codebreaking. Every cipher for the next 400 years was vulnerable.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1850s</div>
+          <div class="tl-body">
+            <div class="tl-title">Babbage Breaks Vigenère</div>
+            <div class="tl-person">Charles Babbage</div>
+            <div class="tl-technique">Technique: Repeating Sequence Analysis</div>
+            <p class="tl-impact">Ended the myth of the "indecipherable cipher." Babbage kept his method secret; Kasiski published it in 1863 and received the credit.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1863</div>
+          <div class="tl-body">
+            <div class="tl-title">Kasiski Publishes the Method</div>
+            <div class="tl-person">Friedrich Kasiski</div>
+            <div class="tl-technique">Technique: Pattern Repetition Analysis</div>
+            <p class="tl-impact">First widely published method for breaking polyalphabetic ciphers. European diplomatic Vigenère systems collapsed.</p>
+          </div>
+        </div>
+
+        <div class="tl-item legendary">
+          <div class="tl-year">1932</div>
+          <div class="tl-body">
+            <div class="tl-title">Polish Mathematicians Break Enigma</div>
+            <div class="tl-person">Rejewski, Różycki, Zygalski · Warsaw</div>
+            <div class="tl-technique">Technique: Permutation Analysis · Known Plaintext</div>
+            <p class="tl-impact">Created the first Enigma-breaking machines. Passed their work to Britain and France just before WWII began — giving Bletchley Park a head start.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1940</div>
+          <div class="tl-body">
+            <div class="tl-title">Friedman Breaks Japanese Purple</div>
+            <div class="tl-person">William Friedman · Washington DC</div>
+            <div class="tl-technique">Technique: Statistical Analysis · Machine Reconstruction</div>
+            <p class="tl-impact">The US could read Japanese diplomatic traffic before Pearl Harbor. The diplomatic warning was there — the military intelligence chain failed to act on it.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1970s</div>
+          <div class="tl-body">
+            <div class="tl-title">DES Differential Weakness Found</div>
+            <div class="tl-person">Eli Biham · Adi Shamir</div>
+            <div class="tl-technique">Technique: Differential Cryptanalysis</div>
+            <p class="tl-impact">Showed theoretical weaknesses in DES block cipher design. Revolutionized how cryptographers design and evaluate cipher strength.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="timeline" style="padding-left:2rem;border-left:1px solid var(--s4);">
+
+        <div class="tl-item legendary">
+          <div class="tl-year">WWII</div>
+          <div class="tl-body">
+            <div class="tl-title">Bletchley Park Breaks Enigma</div>
+            <div class="tl-person">Alan Turing · Gordon Welchman</div>
+            <div class="tl-technique">Technique: Crib Attacks · Electromechanical Bombe</div>
+            <p class="tl-impact">Shortened WWII by an estimated 2–4 years. The Bombe machine tested thousands of possible Enigma settings per minute, exploiting known plaintext cribs.</p>
+          </div>
+        </div>
+
+        <div class="tl-item legendary">
+          <div class="tl-year">1943</div>
+          <div class="tl-body">
+            <div class="tl-title">Lorenz Cipher Broken with Colossus</div>
+            <div class="tl-person">Bill Tutte · Tommy Flowers</div>
+            <div class="tl-technique">Technique: Known Plaintext · Early Computer Search</div>
+            <p class="tl-impact">Led to the creation of Colossus — the world's first programmable electronic computer. The direct ancestor of modern computing was built to break a cipher.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1943–80</div>
+          <div class="tl-body">
+            <div class="tl-title">VENONA: Soviet OTP Cracked</div>
+            <div class="tl-person">US Army Signal Intelligence</div>
+            <div class="tl-technique">Technique: Key Reuse Exploitation</div>
+            <p class="tl-impact">Soviet operators reused one-time pad key material under wartime pressure. VENONA decoded thousands of messages and exposed Julius Rosenberg and other Soviet spies in the US.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1993</div>
+          <div class="tl-body">
+            <div class="tl-title">Linear Cryptanalysis vs DES</div>
+            <div class="tl-person">Mitsuru Matsui</div>
+            <div class="tl-technique">Technique: Linear Cryptanalysis</div>
+            <p class="tl-impact">Found linear approximations of DES S-box operations, reducing the work to break DES from 2⁵⁶ to 2⁴³. Accelerated the case for replacing DES with AES.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1996</div>
+          <div class="tl-body">
+            <div class="tl-title">RSA Timing Attack</div>
+            <div class="tl-person">Paul Kocher</div>
+            <div class="tl-technique">Technique: Side-Channel Timing Analysis</div>
+            <p class="tl-impact">Broke RSA implementations by measuring how long decryption took. The math was fine — the implementation leaked secrets through time. Side-channel security became a new discipline.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2017</div>
+          <div class="tl-body">
+            <div class="tl-title">SHA-1 Collision (SHAttered)</div>
+            <div class="tl-person">Google · CWI Institute</div>
+            <div class="tl-technique">Technique: Collision Attack</div>
+            <p class="tl-impact">Produced two different PDF files with the same SHA-1 hash. Forced the entire internet to migrate from SHA-1 to SHA-256 and SHA-3. Cryptographic hash functions are not forever.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Big Pattern -->
+  <div style="margin-top:4rem;">
+    <div class="callout callout-mystery">
+      <span class="callout-icon">🔍</span>
+      <div class="callout-body">
+        <p><strong>The Big Pattern:</strong> Most famous codebreaks succeeded not from pure mathematics, but from <strong>human mistakes</strong> (reused OTP keys, predictable message headers), <strong>protocol flaws</strong> (Enigma operators sending the same message twice), and <strong>implementation errors</strong> (RSA timing leaks). The math is often the last thing that fails. This is as true today as in Caesar's time.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /section -->
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Techniques</div>
+      <ul class="footer-links">
+        <li><a href="#freq">Frequency Analysis</a></li>
+        <li><a href="#ioc">Index of Coincidence</a></li>
+        <li><a href="#kasiski">Kasiski Examination</a></li>
+        <li><a href="#crib">Crib Attacks</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Continue</div>
+      <ul class="footer-links">
+        <li><a href="modern.html">Modern Cryptography →</a></li>
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="halls/ancient.html">Hall I</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+  </div>
+</footer>
+
+<script>
+function showTab(id, button) {
+  const targetPanel = document.getElementById('tab-' + id);
+  const targetButton = button || document.getElementById('tab-btn-' + id);
+  document.querySelectorAll('.lab-panel').forEach(panel => {
+    const isActive = panel === targetPanel;
+    panel.classList.toggle('active', isActive);
+    panel.hidden = !isActive;
+  });
+  document.querySelectorAll('.lab-tab').forEach(tab => {
+    const isActive = tab === targetButton;
+    tab.classList.toggle('active', isActive);
+    tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    tab.tabIndex = isActive ? 0 : -1;
+  });
+  if (targetButton) {
+    targetButton.focus();
+  }
+}
+
+document.querySelectorAll('.lab-tab').forEach((tab, index, tabs) => {
+  tab.addEventListener('keydown', event => {
+    const previous = (index - 1 + tabs.length) % tabs.length;
+    const next = (index + 1) % tabs.length;
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      tabs[previous].click();
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      tabs[next].click();
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      tabs[0].click();
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      tabs[tabs.length - 1].click();
+    }
+  });
+});
+
+// ── Frequency Analysis ──────────────────────────────
+const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+function buildLabFreqChart() {
+  const chart = document.getElementById('labFreqChart');
+  const lbls = document.getElementById('labFreqLetters');
+  if (!chart) return;
+  chart.innerHTML = ''; lbls.innerHTML = '';
+  for (let i = 0; i < 26; i++) {
+    const bar = document.createElement('div');
+    bar.id = 'lb_'+ALPHA[i];
+    bar.style.cssText = 'flex:1;min-width:0;background:var(--gold-dim);border-radius:1px 1px 0 0;transition:height .4s ease;height:2px;';
+    chart.appendChild(bar);
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'flex:1;text-align:center;font-family:var(--fm);font-size:.48rem;color:var(--tx3);';
+    lbl.textContent = ALPHA[i];
+    lbls.appendChild(lbl);
+  }
+}
+buildLabFreqChart();
+
+function labFreqUpdate() {
+  const txt = document.getElementById('labFreqInput').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const result = document.getElementById('labFreqResult');
+  const hint = document.getElementById('labFreqHint');
+  if (!txt.length) { hint.textContent=''; result.textContent=''; return; }
+  const counts={}, len=txt.length;
+  for (const ch of txt) counts[ch]=(counts[ch]||0)+1;
+  let maxCh='E',maxPct=0;
+  for (let i=0;i<26;i++){
+    const ch=ALPHA[i], pct=((counts[ch]||0)/len)*100;
+    const h=Math.round((pct/15)*100);
+    const el=document.getElementById('lb_'+ch);
+    if(el){el.style.height=Math.max(h,2)+'px';el.style.background=pct>8?'var(--gold)':pct>4?'#9A7A40':'var(--gold-dim)';}
+    if(pct>maxPct){maxPct=pct;maxCh=ch;}
+  }
+  const guessShift=(maxCh.charCodeAt(0)-69+26)%26;
+  hint.textContent=`Most frequent: ${maxCh} (${maxPct.toFixed(1)}%) → If this is E, shift = ${guessShift}`;
+  result.innerHTML=`<strong>Total letters:</strong> ${len}<br><strong>Most common:</strong> ${maxCh} = ${maxPct.toFixed(1)}%<br><strong>Likely Caesar shift:</strong> ${guessShift}`;
+}
+
+// ── Index of Coincidence ────────────────────────────
+function calcIC() {
+  const txt = document.getElementById('iocInput').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const display = document.getElementById('icValue');
+  const bar = document.getElementById('icBar');
+  const interp = document.getElementById('icInterpret');
+  if (txt.length < 2) { display.textContent='—'; bar.style.width='0%'; interp.textContent=''; return; }
+  const counts={};
+  for (const ch of txt) counts[ch]=(counts[ch]||0)+1;
+  const n=txt.length;
+  let sum=0;
+  for (const k in counts) sum+=counts[k]*(counts[k]-1);
+  const ic=(sum/(n*(n-1)));
+  display.textContent=ic.toFixed(4);
+  const pct=Math.min(100,Math.max(0,((ic-0.038)/(0.066-0.038))*100));
+  bar.style.width=pct+'%';
+  let msg='';
+  if(ic>=0.063) msg='<strong style="color:var(--green)">IC ≈ English (0.066)</strong> — Likely a monoalphabetic or Caesar cipher. Apply frequency analysis directly.';
+  else if(ic>=0.050) msg='<strong style="color:var(--orange)">IC between random and English</strong> — Likely a polyalphabetic cipher (Vigenère). Try Kasiski examination to find key length.';
+  else msg='<strong style="color:var(--red)">IC ≈ Random (0.038)</strong> — Highly polyalphabetic or well-mixed. Key length may be very long, or text may be too short.';
+  interp.innerHTML=msg;
+}
+
+// ── Kasiski Examination ─────────────────────────────
+function runKasiski() {
+  const txt = document.getElementById('kasiskiInput').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const result = document.getElementById('kasiskiResult');
+  const hits = document.getElementById('kasiskiHits');
+  if (txt.length < 20) { result.textContent='Enter at least 20 characters.'; hits.innerHTML=''; return; }
+
+  const repeats={};
+  for (let len=3;len<=6;len++) {
+    for (let i=0;i<txt.length-len;i++) {
+      const seq=txt.substr(i,len);
+      if (!repeats[seq]) repeats[seq]=[];
+      repeats[seq].push(i);
+    }
+  }
+
+  const found=[];
+  for (const seq in repeats) {
+    if (repeats[seq].length>1) {
+      const positions=repeats[seq];
+      const spacings=[];
+      for (let i=1;i<positions.length;i++) spacings.push(positions[i]-positions[i-1]);
+      found.push({seq,positions,spacings});
+    }
+  }
+
+  if (!found.length) { result.textContent='No repeated sequences found. Text may be too short, or cipher is not Vigenère with a short key.'; hits.innerHTML=''; return; }
+
+  // GCD analysis
+  const allSpacings=found.flatMap(f=>f.spacings);
+  const gcds={};
+  for (const s of allSpacings) {
+    for (let k=2;k<=Math.min(s,15);k++) {
+      if (s%k===0) gcds[k]=(gcds[k]||0)+1;
+    }
+  }
+  const sorted=Object.entries(gcds).sort((a,b)=>b[1]-a[1]);
+  const likelyKey=sorted[0]?sorted[0][0]:null;
+
+  result.innerHTML=`Found <strong>${found.length}</strong> repeated sequences. Most likely key length: <strong style="color:var(--gold)">${likelyKey}</strong>`;
+  hits.innerHTML=found.slice(0,8).map(f=>
+    `<div class="kasiski-hit">"${f.seq}" at positions ${f.positions.join(', ')} — spacings: ${f.spacings.join(', ')}</div>`
+  ).join('');
+}
+</script>
+</body>
+</html>

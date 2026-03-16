@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jefferson Disk — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VI: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Jefferson Disk
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 29 of 33</span>
+    <span class="badge era-19c">1795 (Jefferson) · 1922 (M-94)</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Jefferson Disk</h1>
+  <p class="page-tagline">Thomas Jefferson's mechanical cipher — reinvented by the US Army 120 years later</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Thomas Jefferson (1795) · Independently: Bazeries (1891)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1795</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Physical disk arrangement (25 disks)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Brute force · Probable word attack</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Mechanical cipher → rotor machines</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Thomas Jefferson invented the wheel cipher in 1795 as US Secretary of State. He never published it, and it sat in his papers until discovered in the 20th century. French cryptographer Étienne Bazeries independently invented essentially the same device in 1891. The US Army re-invented it again in 1922 as the M-94 and used it through WWII.</p><p style='margin-top:1rem;'>Jefferson's cylinder consisted of 36 wooden disks mounted on an iron spindle, each disk bearing the alphabet in scrambled order. A simplified version with 25 aluminum disks became the M-94, which served in all US military branches until replaced by the M-209 machine cipher in 1943.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Device: N disks on a spindle, each with
+scrambled alphabet around the edge
+
+Encryption:
+1. Set disks to spell out message
+2. Read off any other row as ciphertext
+
+Decryption:
+1. Set disks to ciphertext
+2. Look for a row that reads as English
+
+M-94 specifications:
+- 25 aluminum disks
+- Each disk: alphabet in unique order
+- Disk order = key (25! possible orders)
+- Message length = 25 characters max</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Probable Word Attack</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">For each disk, only 25 possible decryptions exist. If a probable word (crib) is known, the attacker can align the crib against each row and check whether the remaining disks produce consistent plaintext. The M-94's 25-character message blocks create redundancy that allows systematic elimination.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Jefferson Disk</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Physical disk arrangement as key</td><td>Key as configuration: RSA key = large number pair, AES key = 256-bit string</td></tr>
+<tr><td>Multiple cipher rows per setting</td><td>Multiple decryption candidates: birthday attacks on hash functions</td></tr>
+<tr><td>Mechanical implementation</td><td>Hardware Security Modules (HSMs): crypto operations in dedicated hardware</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>29 of 33</td></tr>
+            <tr><td>Era</td><td>1795 (Jefferson) · 1922 (M-94)</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Thomas Jefferson (1795) · Independently: Bazeries (1891)</td></tr>
+            <tr><td>Year</td><td>1795</td></tr>
+            <tr><td>Key Type</td><td>Physical disk arrangement (25 disks)</td></tr>
+            <tr><td>Broken By</td><td>Brute force · Probable word attack</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/lorenz.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Lorenz Cipher</span>
+  </a>
+  <a href="../ciphers/alberti-disk.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Alberti Cipher Disk</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="lorenz.html">&larr; Lorenz Cipher</a></li>
+        <li><a href="alberti-disk.html">Alberti Cipher Disk &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 29 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Cryptography — The Cipher Museum</title>
+  <link rel="stylesheet" href="css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg><span class="nav-logo-text">The Cipher Museum</span></a>
+  <ul class="nav-links"><li><a href="index.html">Entrance</a></li><li><a href="museum-map.html">Museum Map</a></li><li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li><li><a href="modern.html" class="active">Modern Crypto</a></li></ul>
+</div></nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Modern Cryptography</div>
+  <span class="page-eyebrow">Where Classical Cryptography Ends</span>
+  <h1 class="page-title">Modern Cryptography</h1>
+  <p class="page-tagline">The mathematical revolution that replaced everything in this museum</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">Every cipher in this museum was eventually broken. Modern cryptography didn't replace them by being cleverer — it replaced them by being mathematically honest. By defining precisely what security means, proving that breaking the cipher requires solving problems believed to take billions of years, and designing systems that fail loudly when misused.</p>
+</div>
+
+<div class="section">
+
+  <div class="section-head"><span class="section-eyebrow">The Complete Journey</span><h2 class="section-title">Classical → Modern: What Each Failure Taught</h2></div>
+
+  <div class="panel" style="margin-bottom:3rem;">
+    <div class="panel-body" style="padding:0;">
+      <table class="cipher-table">
+        <thead><tr><th>Classical Cipher Type</th><th>Fatal Weakness</th><th>Modern Solution</th><th>Modern Example</th></tr></thead>
+        <tbody>
+          <tr><td>Caesar / Monoalphabetic</td><td>Frequency analysis — letter mapping preserved</td><td>Non-linear S-boxes destroy all frequency patterns</td><td>AES SubBytes</td></tr>
+          <tr><td>Homophonic Substitution</td><td>Still monoalphabetic — poor distribution leaks info</td><td>Uniformly random output: every ciphertext byte equally likely</td><td>AES with proper IV</td></tr>
+          <tr><td>Polyalphabetic / Vigenère</td><td>Repeating key creates detectable periodicity</td><td>Non-repeating pseudorandom keystreams, nonce + counter</td><td>ChaCha20, AES-GCM</td></tr>
+          <tr><td>Transposition (Rail Fence, Columnar)</td><td>Letters preserved — anagram attacks work</td><td>Substitution combined with permutation every round</td><td>AES ShiftRows + MixColumns</td></tr>
+          <tr><td>Playfair / Hill (block)</td><td>Small blocks leak digraph statistics; linear algebra solvable</td><td>128-bit blocks, non-linear operations, round keys</td><td>AES (128-bit block)</td></tr>
+          <tr><td>Fractionation (Bifid, ADFGVX)</td><td>Coordinate mixing insufficient with static key square</td><td>Multiple rounds of mixing with key-derived round keys</td><td>AES 10–14 rounds</td></tr>
+          <tr><td>Military layered (ADFGVX, VIC)</td><td>Substitution + transposition — each layer still attackable</td><td>10–14 rounds of 4 operations — computationally infeasible to reverse</td><td>AES, Camellia, SM4</td></tr>
+          <tr><td>Rotor machines (Enigma, Lorenz)</td><td>Physical key distribution; operator errors; structural flaws</td><td>Public-key cryptography eliminates need for shared secret distribution</td><td>RSA, Diffie-Hellman, ECDH</td></tr>
+          <tr><td>One-Time Pad</td><td>Impractical key management — reuse is catastrophic</td><td>Computationally secure with short key; KDFs for key derivation</td><td>AES-256, X25519 key exchange</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-head"><span class="section-eyebrow">Shannon's Framework</span><h2 class="section-title">Confusion, Diffusion, and Why Classical Ciphers Lack Both</h2></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);"><span class="panel-icon">🌀</span><span class="panel-title" style="color:var(--gold);">Confusion</span></div>
+      <div class="panel-body">
+        <p>Making the relationship between key and ciphertext as complex as possible. Caesar has zero confusion: C = P + 3. One known pair reveals the entire key.</p>
+        <p style="margin-top:.75rem;"><strong>Modern solution:</strong> AES S-boxes are highly non-linear. Every output bit depends on every input bit in a way that can't be described by any simple mathematical relationship.</p>
+      </div>
+    </div>
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);"><span class="panel-icon">🌊</span><span class="panel-title" style="color:var(--gold);">Diffusion</span></div>
+      <div class="panel-body">
+        <p>Spreading each plaintext bit's influence across many ciphertext bits. Caesar has zero diffusion: change one letter, change exactly one ciphertext letter.</p>
+        <p style="margin-top:.75rem;"><strong>Modern solution:</strong> AES avalanche effect — after 2 rounds, every output bit depends on every input bit. After 10 rounds, changing 1 bit changes ~50% of all output bits.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head"><span class="section-eyebrow">The Modern Landscape</span><h2 class="section-title">What Replaced Classical Cryptography</h2></div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:3rem;">
+    <div class="panel"><div class="panel-head"><span class="panel-icon">📦</span><span class="panel-title">AES-256 (Symmetric)</span></div><div class="panel-body"><p>The Advanced Encryption Standard. 128-bit blocks. 256-bit key. 14 rounds of SubBytes + ShiftRows + MixColumns + AddRoundKey. 2²⁵⁶ possible keys. No known practical attack. Protects everything from HTTPS to full-disk encryption.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">RSA (Asymmetric)</span></div><div class="panel-body"><p>Rivest, Shamir, Adleman (1977). Security based on the difficulty of factoring the product of two large primes. Two keys: public (encrypt) and private (decrypt). Solved the key distribution problem that defeated Enigma. Used in TLS, email encryption, digital signatures.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🤝</span><span class="panel-title">Diffie-Hellman Key Exchange</span></div><div class="panel-body"><p>Two parties derive a shared secret over a public channel without ever sending the secret. Based on the discrete logarithm problem. This is the mathematical solution to the problem that required Enigma operators to physically distribute codebooks.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">ChaCha20 (Stream Cipher)</span></div><div class="panel-body"><p>Modern stream cipher designed by Daniel Bernstein. 256-bit key, 64-bit nonce, 64-bit counter. XOR keystream with plaintext — the same operation as Vigenère, but with a cryptographically random, never-repeating keystream.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">SHA-256 (Hash Function)</span></div><div class="panel-body"><p>Produces a fixed 256-bit fingerprint of any input. One-way: given the hash, you cannot recover the input. Collision-resistant: finding two inputs with the same hash requires 2¹²⁸ operations. Used in digital signatures, certificate verification, blockchain.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔮</span><span class="panel-title">Post-Quantum Cryptography</span></div><div class="panel-body"><p>Quantum computers will break RSA and Diffie-Hellman. NIST is standardizing quantum-resistant algorithms: CRYSTALS-Kyber (key exchange) and CRYSTALS-Dilithium (signatures), based on lattice problems believed to resist quantum attacks.</p></div></div>
+  </div>
+
+  <div class="callout callout-mystery">
+    <span class="callout-icon">🎓</span>
+    <div class="callout-body"><p><strong>The museum's final lesson:</strong> Every cipher in these halls failed because it relied on obscurity, manual complexity, or physical key distribution. Modern cryptography replaced all three with mathematical hardness — problems that we believe require exponential time to solve, proven under formal security models, with key distribution solved by public-key mathematics. The failures of history are the foundation of everything that protects your data today.</p></div>
+  </div>
+
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Final Halls</div><ul class="footer-links"><li><a href="halls/unbreakable.html">The Unbreakable &amp; the Modern</a></li><li><a href="ciphers/one-time-pad.html">One-Time Pad</a></li><li><a href="ciphers/enigma.html">Enigma Machine</a></li></ul></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="museum-map.html">Museum Map</a></li><li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li><li><a href="index.html">Museum Entrance</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span></div>
+</footer>
+</body></html>

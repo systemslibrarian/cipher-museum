@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caesar Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+    .wheel-wrap { display:flex; justify-content:center; margin:1.5rem 0; }
+    .wheel-svg { max-width:260px; width:100%; }
+    .shift-table { display:flex; flex-direction:column; gap:.5rem; }
+    .alpha-row { display:flex; gap:2px; overflow-x:auto; padding-bottom:4px; }
+    .a-cell {
+      min-width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+      font-family:var(--fm); font-size:.72rem; border-radius:3px; flex-shrink:0; transition:all .3s;
+    }
+    .a-plain  { background:var(--s4); color:var(--tx2); }
+    .a-cipher { background:var(--gold-glow); border:1px solid var(--gold-b); color:var(--gold-lt); }
+    .a-row-label { font-family:var(--fm); font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--tx3); margin-bottom:3px; }
+    .freq-grid { display:grid; grid-template-columns:repeat(13,1fr); gap:3px; }
+    .freq-cell {
+      background:var(--s4); border-radius:2px; padding:.3rem .1rem;
+      text-align:center; font-family:var(--fm); font-size:.55rem; color:var(--tx3); cursor:default;
+      transition:background .2s;
+    }
+    .freq-cell .f-bar { height:32px; display:flex; align-items:flex-end; justify-content:center; margin-bottom:2px; }
+    .freq-cell .f-fill { width:10px; background:var(--gold-dim); border-radius:1px 1px 0 0; transition:height .4s ease, background .2s; }
+    .freq-cell.hi .f-fill { background:var(--gold); }
+    .brute-table { display:flex; flex-direction:column; gap:.3rem; }
+    .brute-row { display:grid; grid-template-columns:2rem 1fr; gap:.5rem; align-items:center; }
+    .brute-shift { font-family:var(--fm); font-size:.65rem; color:var(--gold-dim); text-align:right; }
+    .brute-text { font-family:var(--fm); font-size:.75rem; color:var(--tx2); letter-spacing:.08em; }
+    .brute-row.match .brute-shift { color:var(--gold); }
+    .brute-row.match .brute-text { color:var(--gold-lt); font-weight:600; }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../halls/ancient.html">Hall I</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ EXHIBIT HERO ══════════════════════════════════════ -->
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    <a href="../halls/ancient.html">Hall I</a><span>›</span>
+    Caesar Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 01 of 33</span>
+    <span class="badge era-ancient">Ancient Rome</span>
+    <span class="badge sec-broken">Broken</span>
+    <span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Interactive Demo</span>
+  </div>
+  <h1 class="page-title">Caesar Cipher</h1>
+  <p class="page-tagline">"The simplest cipher — and the most famous failure in history."</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Invented</span><span class="fact-value">~58 BC</span></div>
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Julius Caesar</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Shift (1–25)</span></div>
+    <div class="fact"><span class="fact-label">Keyspace</span><span class="fact-value">25 possible keys</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Frequency Analysis · Al-Kindi · 850 AD</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">S-boxes in AES</span></div>
+  </div>
+</div>
+
+<!-- ═══ EXHIBIT BODY ══════════════════════════════════════ -->
+<div class="exhibit-layout">
+
+  <!-- ── MAIN COLUMN ───────────────────────────────────── -->
+  <div class="exhibit-main">
+
+    <!-- History -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Julius Caesar used this cipher to communicate with his generals during the Gallic Wars. Suetonius records it in <em>The Twelve Caesars</em> (c. 121 AD): <em>"If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out."</em></p>
+        <p style="margin-top:1rem;">Caesar typically used a shift of 3. His nephew Augustus preferred a shift of 1. The cipher offered minimal protection — most of Caesar's enemies were illiterate, so even an unencrypted Latin message was safe from most interceptors.</p>
+        <div class="callout callout-info" style="margin-top:1.5rem;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body"><p><strong>ROT13</strong> — the modern variant — applies a shift of 13. Because 13+13=26, ROT13 is its own inverse: applying it twice returns the original text. It's still used in online forums to hide spoilers.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>Each letter is replaced by the letter a fixed number of positions down the alphabet. The shift wraps around using modular arithmetic:</p>
+        <pre style="margin:1rem 0;">Encrypt: C = (P + shift) mod 26
+Decrypt: P = (C − shift + 26) mod 26
+
+Example (shift = 3):
+  A → D    N → Q
+  B → E    O → R
+  Z → C    (wrap-around)</pre>
+
+        <p style="margin-top:1rem;"><strong>Encryption steps:</strong></p>
+        <ol class="steps" style="margin-top:1rem;">
+          <li class="step"><div class="step-text">Convert each plaintext letter to a number (A=0, B=1 … Z=25)</div></li>
+          <li class="step"><div class="step-text">Add the shift value and take modulo 26</div></li>
+          <li class="step"><div class="step-text">Convert the result back to a letter</div></li>
+          <li class="step"><div class="step-text">Non-alphabetic characters (spaces, punctuation) pass through unchanged</div></li>
+        </ol>
+
+        <!-- Shift Diagram -->
+        <div class="diagram-wrap" style="margin-top:1.5rem;">
+          <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:.75rem;">Shift Diagram (shift = 3)</p>
+          <div class="shift-table" id="shiftDiagram">
+            <div class="a-row-label">Plain</div>
+            <div class="alpha-row" id="plainRow"></div>
+            <div class="a-row-label" style="margin-top:.5rem;">Cipher</div>
+            <div class="alpha-row" id="cipherRow"></div>
+          </div>
+          <p class="diagram-caption">Each plain letter maps to the cipher letter directly below it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cryptanalysis -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Frequency Analysis</div>
+          <div class="attack-diff">Complexity: Trivial · Invented: ~850 AD · By: Al-Kindi</div>
+          <p class="attack-desc">In any English text, E appears ~12.7%, T ~9.1%, A ~8.2%. Because the Caesar cipher maps each letter to exactly one other letter, these frequencies are preserved in the ciphertext — just shifted. Find the most common ciphertext letter, assume it encrypts E, and the shift is revealed.</p>
+        </div>
+        <div class="attack-panel">
+          <div class="attack-name">Brute Force</div>
+          <div class="attack-diff">Complexity: Trivial · Keyspace: 25</div>
+          <p class="attack-desc">The entire keyspace is just 25 shifts. A human can test all 25 by hand in minutes. A computer does it in microseconds. This is the simplest form of exhaustive key search — a technique that scales to modern ciphers but requires vastly more computation.</p>
+        </div>
+        <div class="callout callout-danger" style="margin-top:1rem;">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-body"><p><strong>Why it fails fundamentally:</strong> The Caesar cipher has only 25 possible keys. Modern encryption (AES-256) has 2²⁵⁶ ≈ 10⁷⁷ possible keys — more than atoms in the observable universe. Keyspace size is the first lesson of cryptographic security.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modern Lesson -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Caesar Concept</th><th>Evolved Into</th></tr></thead>
+          <tbody>
+            <tr><td>Letter substitution</td><td>Non-linear S-boxes in AES — designed to resist frequency analysis</td></tr>
+            <tr><td>Shift = key</td><td>Symmetric key concept — both parties share a secret parameter</td></tr>
+            <tr><td>25-key space</td><td>AES-256 requires 2²⁵⁶ key trials — computationally infeasible</td></tr>
+            <tr><td>Frequency leak</td><td>Diffusion principle — modern ciphers ensure every output bit depends on every input bit</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-success" style="margin-top:1.5rem;">
+          <span class="callout-icon">🎓</span>
+          <div class="callout-body"><p><strong>Shannon's confusion:</strong> Claude Shannon (1949) defined "confusion" as making the relationship between key and ciphertext as complex as possible. Caesar has zero confusion — the relationship is simply <code>C = P + 3</code>. AES's S-boxes are specifically designed to maximize confusion.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end exhibit-main -->
+
+  <!-- ── SIDEBAR ─────────────────────────────────────── -->
+  <div class="exhibit-side">
+
+    <!-- Live Demo -->
+    <div class="demo-panel">
+      <div class="demo-head">
+        <span>🔐</span>
+        <span class="demo-title">Try It Yourself</span>
+      </div>
+      <div class="demo-body">
+        <div class="mode-toggle" role="group">
+          <button class="mode-btn active" id="btnEnc" onclick="setMode('enc')">Encrypt</button>
+          <button class="mode-btn" id="btnDec" onclick="setMode('dec')">Decrypt</button>
+        </div>
+        <div class="input-group">
+          <span class="input-label">Message</span>
+          <textarea class="museum-input" id="msgInput" rows="3" placeholder="Type a message…">THE QUICK BROWN FOX</textarea>
+        </div>
+        <div class="input-group">
+          <span class="input-label">Shift — <span id="shiftLabel">3</span></span>
+          <div class="range-row">
+            <input type="range" class="museum-range" id="shiftSlider" min="1" max="25" value="3" oninput="onShiftChange(this.value)">
+            <span class="range-val" id="shiftVal">3</span>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="runCipher()">Run Cipher</button>
+          <button class="btn btn-secondary" onclick="clearDemo()">Clear</button>
+        </div>
+        <div class="input-group">
+          <span class="input-label">Output</span>
+          <div class="output-box" id="outputBox"><span class="output-empty">Result appears here…</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frequency Analyzer -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📊</span><span class="panel-title">Letter Frequency Analyzer</span></div>
+      <div class="panel-body">
+        <p style="font-size:.88rem;margin-bottom:1rem;">Paste any ciphertext to see letter frequencies. Gold bars reveal the pattern — find the tallest bar to guess the shift.</p>
+        <textarea class="museum-input" id="freqInput" rows="2" placeholder="Paste ciphertext…" oninput="updateFreq()" style="font-size:.82rem;"></textarea>
+        <div class="freq-grid" id="freqGrid" style="margin-top:1rem;"></div>
+        <p id="freqHint" style="font-family:var(--fm);font-size:.65rem;color:var(--gold);margin-top:.75rem;text-align:center;min-height:1.2em;"></p>
+      </div>
+    </div>
+
+    <!-- Brute Force -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚔️</span><span class="panel-title">Brute Force All 25 Shifts</span></div>
+      <div class="panel-body">
+        <p style="font-size:.88rem;margin-bottom:.75rem;">Paste a Caesar ciphertext — see all 25 decryptions at once. One of them is plaintext.</p>
+        <textarea class="museum-input" id="bruteInput" rows="2" placeholder="e.g. KHOOR ZRUOG" oninput="updateBrute()" style="font-size:.82rem;"></textarea>
+        <div class="brute-table" id="bruteTable" style="margin-top:.75rem;max-height:280px;overflow-y:auto;"></div>
+      </div>
+    </div>
+
+    <!-- Challenge -->
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span>
+        <span class="panel-title" style="color:var(--gold);">Break This Cipher</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size:.88rem;margin-bottom:.75rem;">Can you find the shift?</p>
+        <div style="font-family:var(--fm);font-size:.85rem;background:var(--s3);border-radius:var(--r);padding:.85rem;letter-spacing:.12em;color:var(--tx);word-break:break-all;line-height:1.8;">
+          QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
+        </div>
+        <button class="btn btn-secondary" onclick="revealAnswer()" style="width:100%;margin-top:.75rem;font-size:.7rem;">Reveal Answer</button>
+        <p id="answerReveal" style="display:none;font-family:var(--fm);font-size:.75rem;color:var(--gold-lt);margin-top:.5rem;text-align:center;">Shift = 23 · "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"</p>
+      </div>
+    </div>
+
+  </div><!-- end sidebar -->
+</div><!-- end exhibit-layout -->
+
+<!-- Hall Nav -->
+<div class="hall-nav">
+  <a href="../halls/ancient.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Back</span>
+    <span class="hall-nav-name">Hall I: Birth of Cryptography</span>
+  </a>
+  <a href="../ciphers/polybius.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next Exhibit →</span>
+    <span class="hall-nav-name">Polybius Square</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Hall I</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/caesar.html">Caesar Cipher</a></li>
+        <li><a href="../ciphers/polybius.html">Polybius Square</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Continue</div>
+      <ul class="footer-links">
+        <li><a href="../halls/substitution.html">Hall II: Substitution →</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../museum-map.html">Museum Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Exhibit 01 of 33</span>
+  </div>
+</footer>
+
+<script src="../js/ciphers/caesar.js"></script>
+<script>
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let mode = 'enc';
+
+// ── Build shift diagram ──────────────────────────────
+function buildDiagram(shift) {
+  const pr = document.getElementById('plainRow');
+  const cr = document.getElementById('cipherRow');
+  if (!pr) return;
+  pr.innerHTML = ''; cr.innerHTML = '';
+  for (let i = 0; i < 26; i++) {
+    const pc = document.createElement('div');
+    pc.className = 'a-cell a-plain';
+    pc.textContent = ALPHABET[i];
+    pr.appendChild(pc);
+    const cc = document.createElement('div');
+    cc.className = 'a-cell a-cipher';
+    cc.textContent = ALPHABET[(i + shift) % 26];
+    cr.appendChild(cc);
+  }
+}
+buildDiagram(3);
+
+// ── Mode ─────────────────────────────────────────────
+function setMode(m) {
+  mode = m;
+  document.getElementById('btnEnc').classList.toggle('active', m === 'enc');
+  document.getElementById('btnDec').classList.toggle('active', m === 'dec');
+}
+
+function onShiftChange(v) {
+  document.getElementById('shiftLabel').textContent = v;
+  document.getElementById('shiftVal').textContent = v;
+  buildDiagram(parseInt(v));
+}
+
+// ── Cipher ───────────────────────────────────────────
+function caesar(text, shift, enc) {
+  shift = ((shift % 26) + 26) % 26;
+  if (!enc) shift = (26 - shift) % 26;
+  return text.toUpperCase().split('').map(ch => {
+    const c = ch.charCodeAt(0);
+    if (c >= 65 && c <= 90) return String.fromCharCode(((c - 65 + shift) % 26) + 65);
+    return ch;
+  }).join('');
+}
+
+function runCipher() {
+  const msg   = document.getElementById('msgInput').value;
+  const shift = parseInt(document.getElementById('shiftSlider').value);
+  const result = caesar(msg, shift, mode === 'enc');
+  document.getElementById('outputBox').textContent = result;
+}
+
+function clearDemo() {
+  document.getElementById('msgInput').value = '';
+  document.getElementById('outputBox').innerHTML = '<span class="output-empty">Result appears here…</span>';
+}
+
+// ── Frequency analyzer ───────────────────────────────
+const EN_FREQ = {E:12.7,T:9.1,A:8.2,O:7.5,I:7.0,N:6.7,S:6.3,H:6.1,R:6.0,D:4.3,L:4.0,C:2.8,U:2.8,M:2.4,W:2.4,F:2.2,G:2.0,Y:2.0,P:1.9,B:1.5,V:0.98,K:0.77,J:0.15,X:0.15,Q:0.10,Z:0.07};
+const MAX_EN = Math.max(...Object.values(EN_FREQ));
+
+function buildFreqGrid() {
+  const g = document.getElementById('freqGrid');
+  if (!g) return;
+  g.innerHTML = '';
+  for (let i = 0; i < 26; i++) {
+    const ch = ALPHABET[i];
+    const cell = document.createElement('div');
+    cell.className = 'freq-cell';
+    cell.id = 'fc_' + ch;
+    cell.innerHTML = `<div class="f-bar"><div class="f-fill" id="fb_${ch}" style="height:0px"></div></div><div>${ch}</div>`;
+    g.appendChild(cell);
+  }
+}
+buildFreqGrid();
+
+function updateFreq() {
+  const txt = document.getElementById('freqInput').value.toUpperCase().replace(/[^A-Z]/g,'');
+  if (!txt.length) { buildFreqGrid(); document.getElementById('freqHint').textContent = ''; return; }
+  const counts = {};
+  for (const ch of txt) counts[ch] = (counts[ch]||0)+1;
+  let maxCh = 'E', maxCount = 0;
+  for (const ch in counts) if (counts[ch] > maxCount) { maxCount = counts[ch]; maxCh = ch; }
+  const guessedShift = (maxCh.charCodeAt(0) - 69 + 26) % 26;
+
+  for (let i = 0; i < 26; i++) {
+    const ch = ALPHABET[i];
+    const pct = ((counts[ch]||0)/txt.length)*100;
+    const h = Math.round((pct / 15) * 32);
+    const el = document.getElementById('fb_'+ch);
+    const cell = document.getElementById('fc_'+ch);
+    if (el) el.style.height = Math.max(h,2)+'px';
+    if (cell) cell.classList.toggle('hi', ch === maxCh);
+  }
+  document.getElementById('freqHint').textContent =
+    `Most common: ${maxCh} → Guessed shift: ${guessedShift}`;
+}
+
+// ── Brute force ──────────────────────────────────────
+function updateBrute() {
+  const txt = document.getElementById('bruteInput').value.trim();
+  const container = document.getElementById('bruteTable');
+  if (!txt) { container.innerHTML = ''; return; }
+  let html = '';
+  for (let s = 1; s <= 25; s++) {
+    const dec = caesar(txt, s, false);
+    const score = scoreEnglish(dec);
+    html += `<div class="brute-row ${score > 0.06 ? 'match' : ''}">
+      <span class="brute-shift">${s}</span>
+      <span class="brute-text">${dec.substring(0,40)}${dec.length>40?'…':''}</span>
+    </div>`;
+  }
+  container.innerHTML = html;
+}
+
+function scoreEnglish(txt) {
+  const common = 'ETAOINSHRDLU';
+  const upper = txt.toUpperCase().replace(/[^A-Z]/g,'');
+  if (!upper.length) return 0;
+  let score = 0;
+  for (const ch of upper) if (common.includes(ch)) score++;
+  return score / upper.length;
+}
+
+function revealAnswer() {
+  document.getElementById('answerReveal').style.display = 'block';
+}
+
+// Auto-run on load
+runCipher();
+</script>
+</body>
+</html>

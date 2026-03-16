@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bazeries Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall V: Military & Spy Ciphers</a><span>&rsaquo;</span>
+    Bazeries Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 21 of 33</span>
+    <span class="badge era-19c">1890s · France</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Bazeries Cipher</h1>
+  <p class="page-tagline">Invented by a codebreaker — who knew exactly how breakable it was</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Étienne Bazeries</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1890s</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Numeric keyword (Polybius + transposition)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Layered frequency analysis</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Key-controlled multi-layer operations</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Étienne Bazeries was one of the most famous cryptanalysts of his era — he broke the Great Cipher of Louis XIV, a code that had protected French royal secrets for 200 years. Ironically, he also designed his own cipher and spent years trying to convince the French military to adopt it, without success.</p><p style='margin-top:1rem;'>The Bazeries cylinder — a mechanical device with rotating disks — was independently invented by Thomas Jefferson and later became the basis for the US Army's M-94 cipher device used through WWII.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Step 1: Convert keyword to number (A=1, B=2...)
+        e.g., 'ATTAQUE' → 1,20,20,1,17,21,5
+
+Step 2: Build Polybius square, columns in
+        keyword-number order
+
+Step 3: Encrypt using the square
+
+Step 4: Apply transposition using the same
+        numeric keyword as column order</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Multi-Layer Frequency Analysis</div><div class="attack-diff">Complexity: Hard</div><p class="attack-desc">The Bazeries cipher's two layers are not independent — they share the same keyword. This correlation can be exploited: recovering the transposition key partially constrains the substitution square. Modern hill climbing attacks that search both layers simultaneously can crack it given several hundred characters of ciphertext.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Bazeries Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Single key controls multiple operations</td><td>AES key schedule: one master key generates all round keys</td></tr>
+<tr><td>Inventor = famous codebreaker</td><td>Security through obscurity fails: cipher design must be public and peer-reviewed</td></tr>
+<tr><td>Mechanical cylinder version</td><td>Rotor machines: Jefferson Disk → Hebern → Enigma</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>21 of 33</td></tr>
+            <tr><td>Era</td><td>1890s · France</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Étienne Bazeries</td></tr>
+            <tr><td>Year</td><td>~1890s</td></tr>
+            <tr><td>Key Type</td><td>Numeric keyword (Polybius + transposition)</td></tr>
+            <tr><td>Broken By</td><td>Layered frequency analysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/adfgvx.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">ADFGVX Cipher</span>
+  </a>
+  <a href="../ciphers/vic.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">VIC Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="adfgvx.html">&larr; ADFGVX Cipher</a></li>
+        <li><a href="vic.html">VIC Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 21 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

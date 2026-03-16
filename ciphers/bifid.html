@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bifid Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/transposition.html">Hall IV: Transposition & Fractionation</a><span>&rsaquo;</span>
+    Bifid Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 15 of 33</span>
+    <span class="badge era-19c">1901</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Bifid Cipher</h1>
+  <p class="page-tagline">Felix Delastelle's masterwork: fractionation meets transposition</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Felix Delastelle</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1901</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">5×5 keyword square</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Statistical analysis · Hill climbing</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Confusion + diffusion combined</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Felix Delastelle was a French amateur cryptographer who invented several remarkable ciphers in the late 19th century. The Bifid (from Latin <em>bis</em> = twice, <em>fidus</em> = split) is widely considered his masterpiece. It combines a Polybius square with a transposition technique in a way that creates genuine interdependence between letter positions — a property Shannon would later call diffusion.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Using a 5×5 Polybius square with a keyword:</p><ol class='steps' style='margin:1rem 0;'><li class='step'><div class='step-text'>Convert each plaintext letter to its (row, col) coordinates</div></li><li class='step'><div class='step-text'>Write all row numbers in a row, then all column numbers beneath</div></li><li class='step'><div class='step-text'>Read pairs from the combined sequence</div></li><li class='step'><div class='step-text'>Convert each pair back to a letter using the square</div></li></ol><pre>HELLO → H(1,3) E(0,4) L(2,1) L(2,1) O(3,4)
+Rows:    1  0  2  2  3
+Cols:    3  4  1  1  4
+Combined: 1 0 2 2 3 | 3 4 1 1 4
+Pairs: (1,0)(2,2)(3,3)(4,1)(1,4)
+Cipher: FNSZO</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Statistical Cryptanalysis + Hill Climbing</div><div class="attack-diff">Complexity: Moderate-Hard</div><p class="attack-desc">The Bifid's fractionation mixes coordinate information across positions, making simple frequency analysis ineffective. However, because the period is the message length, modern hill climbing with bigram/trigram scoring can recover the key square. The attack requires a few hundred characters of ciphertext to work reliably.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Bifid Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Fractionation (split letter into coordinates)</td><td>Bit diffusion: every bit of plaintext influences multiple ciphertext bits</td></tr>
+<tr><td>Row/column interleaving</td><td>AES MixColumns: mixes 4 bytes of each column together</td></tr>
+<tr><td>Polybius square lookup</td><td>S-box lookup: key-dependent non-linear substitution</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>15 of 33</td></tr>
+            <tr><td>Era</td><td>1901</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Felix Delastelle</td></tr>
+            <tr><td>Year</td><td>1901</td></tr>
+            <tr><td>Key Type</td><td>5×5 keyword square</td></tr>
+            <tr><td>Broken By</td><td>Statistical analysis · Hill climbing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/double-transposition.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Double Transposition</span>
+  </a>
+  <a href="../ciphers/trifid.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Trifid Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="double-transposition.html">&larr; Double Transposition</a></li>
+        <li><a href="trifid.html">Trifid Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 15 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

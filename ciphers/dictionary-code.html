@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confederate Dictionary Code — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/civil-war.html">Civil War Gallery</a><span>&rsaquo;</span>
+    Confederate Dictionary Code
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 25 of 33</span>
+    <span class="badge era-wwi">Confederate · 1862</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Confederate Dictionary Code</h1>
+  <p class="page-tagline">Jefferson Davis's cipher that failed because generals owned different dictionaries</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Jefferson Davis · Confederate War Department</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Spring 1862</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Page and word number from shared dictionary</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Known dictionary + position lookup</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Shared key material management</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>In spring 1862, Confederate President Jefferson Davis arranged a dictionary code with Generals A.S. Johnston and J.E. Johnston using a specific edition of Noah Webster's 1857 dictionary. Words were identified by page number and position: 'ship' on page 674 as the 26th word became '(674)26'.</p><p style='margin-top:1rem;'>The system immediately revealed a fundamental key distribution problem: when J.E. Johnston used the code with Robert E. Lee, Lee had a different dictionary and couldn't read the message. The Confederate Navy had the same problem — Secretary Mallory let commanders choose their own dictionaries, resulting in incompatible systems across the fleet.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Dictionary: Webster's Primary-School Pronouncing
+            Dictionary (1857 edition)
+
+Encoding:
+  Find the word in the dictionary
+  Record: (page number)(position on page)
+
+  'ship' = page 674, word 26 → (674)26
+  'attack' = page 51, word 8  → (51)8
+  'tomorrow' = page 312, word 3 → (312)3
+
+Security: depends entirely on attacker
+not having access to the same dictionary</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Dictionary Acquisition</div><div class="attack-diff">Complexity: Easy if dictionary identified</div><p class="attack-desc">Once the source dictionary is identified (which edition, which publisher), the code breaks completely — every page and position can be looked up directly. Union intelligence, with access to Confederate papers and prisoner interrogations, could identify the specific dictionaries in use. Some Confederate dictionary codes were broken this way.</p></div><div class="callout callout-danger" style="margin-top:1rem;"><span class="callout-icon">⚠️</span><div class="callout-body"><p><strong>The operational failure:</strong> The Confederate dictionary code's biggest weakness wasn't cryptanalytic — it was logistical. Incompatible dictionaries meant messages between allied generals were unreadable. Operational cryptography must ensure that all parties can actually communicate.</p></div></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Confederate Dictionary Code</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Shared reference = shared key</td><td>Public key infrastructure: key distribution solved mathematically</td></tr>
+<tr><td>Dictionary lookup = decryption</td><td>Hash tables: O(1) lookup structures in computer science</td></tr>
+<tr><td>Edition mismatch = communication failure</td><td>Protocol versioning: cryptographic standards must specify exact parameters</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>25 of 33</td></tr>
+            <tr><td>Era</td><td>Confederate · 1862</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Jefferson Davis · Confederate War Department</td></tr>
+            <tr><td>Year</td><td>Spring 1862</td></tr>
+            <tr><td>Key Type</td><td>Page and word number from shared dictionary</td></tr>
+            <tr><td>Broken By</td><td>Known dictionary + position lookup</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/confederate-vigenere.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Confederate Vigenère</span>
+  </a>
+  <a href="../ciphers/one-time-pad.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">One-Time Pad</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="confederate-vigenere.html">&larr; Confederate Vigenère</a></li>
+        <li><a href="one-time-pad.html">One-Time Pad &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 25 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

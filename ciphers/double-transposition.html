@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Double Transposition — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/transposition.html">Hall IV: Transposition & Fractionation</a><span>&rsaquo;</span>
+    Double Transposition
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 14 of 33</span>
+    <span class="badge era-wwi">WWI · Germany</span>
+    <span class="badge sec-weak">Weak</span>
+  </div>
+  <h1 class="page-title">Double Transposition</h1>
+  <p class="page-tagline">Two columnar transpositions — the permutation space becomes astronomical</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">German Military Intelligence</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1914</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Two columnar keywords</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Anagramming · Hill climbing (difficult)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Multiple cipher rounds</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The German military recognized that a single columnar transposition was breakable and responded with the obvious solution: do it twice with different keys. The combined permutation creates a dramatically larger effective keyspace. Messages encrypted with double transposition were used extensively in WWI and remained in limited military use through WWII.</p><p style='margin-top:1rem;'>Even modern computer attacks struggle with double transposition when the ciphertext is short and the key lengths are unknown. It remains one of the hardest classical ciphers to crack automatically.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Apply columnar transposition twice using two different keywords:</p><pre>Step 1: Apply columnar transposition with key MARK
+Step 2: Apply columnar transposition with key LION
+
+The resulting permutation of n characters has
+approximately (k1! × k2!) possible arrangements
+where k1, k2 are the key lengths.</pre><p>A 7-letter key gives 5,040 possible column orders. Two such keys give ~25 million combinations — far beyond manual brute force.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Hill Climbing / Simulated Annealing</div><div class="attack-diff">Complexity: Hard — especially on short ciphertext</div><p class="attack-desc">Modern solvers use hill climbing: start with random keys, score the decryption using English n-gram statistics, mutate the keys, and keep improvements. For double transposition with unknown key lengths, this requires millions of iterations and can fail on short messages where statistical signals are weak.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Double Transposition</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Two-pass permutation</td><td>AES applies 10–14 rounds of operations — multiple passes through cipher structure</td></tr>
+<tr><td>Large combined keyspace</td><td>AES 128-bit key: 2¹²⁸ possible keys — exponentially larger</td></tr>
+<tr><td>No substitution, only permutation</td><td>AES combines SubBytes (substitution) + ShiftRows/MixColumns (permutation) every round</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>14 of 33</td></tr>
+            <tr><td>Era</td><td>WWI · Germany</td></tr>
+            <tr><td>Security</td><td>Weak</td></tr>
+            <tr><td>Inventor</td><td>German Military Intelligence</td></tr>
+            <tr><td>Year</td><td>~1914</td></tr>
+            <tr><td>Key Type</td><td>Two columnar keywords</td></tr>
+            <tr><td>Broken By</td><td>Anagramming · Hill climbing (difficult)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/columnar.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Columnar Transposition</span>
+  </a>
+  <a href="../ciphers/bifid.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Bifid Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="columnar.html">&larr; Columnar Transposition</a></li>
+        <li><a href="bifid.html">Bifid Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 14 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

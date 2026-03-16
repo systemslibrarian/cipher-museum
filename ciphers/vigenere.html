@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vigenère Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+    .tabula-wrap { overflow-x:auto; }
+    .tabula { border-collapse:collapse; font-family:var(--fm); font-size:.6rem; }
+    .tabula th, .tabula td {
+      width:22px; height:22px; text-align:center; border:1px solid var(--s4);
+      transition:background .15s, color .15s;
+    }
+    .tabula th { background:var(--s3); color:var(--gold-dim); font-weight:500; }
+    .tabula td { color:var(--tx2); background:var(--s2); }
+    .tabula td.hl-col { background:rgba(201,168,76,.12); color:var(--gold-lt); }
+    .tabula td.hl-row { background:rgba(90,144,200,.1); color:#7AA8D8; }
+    .tabula td.hl-both { background:var(--gold); color:var(--black); font-weight:700; }
+
+    .step-trace {
+      font-family:var(--fm); font-size:.82rem; background:var(--s3);
+      border-radius:var(--r); padding:1rem; line-height:2; letter-spacing:.08em;
+    }
+    .trace-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+    .trace-label { color:var(--tx3); min-width:70px; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; }
+    .trace-chars { display:flex; gap:2px; }
+    .trace-char {
+      width:26px; height:26px; display:flex; align-items:center; justify-content:center;
+      border-radius:3px; font-size:.75rem;
+    }
+    .tc-plain  { background:var(--s4); color:var(--tx2); }
+    .tc-key    { background:rgba(201,168,76,.15); border:1px solid var(--gold-b); color:var(--gold); }
+    .tc-cipher { background:var(--gold-glow); border:1px solid var(--gold-b); color:var(--gold-lt); }
+
+    .kasiski-result { font-family:var(--fm); font-size:.78rem; color:var(--tx2); line-height:1.8; }
+    .repeat-hit {
+      background:var(--gold-glow); border:1px solid var(--gold-b); border-radius:var(--r);
+      padding:.4rem .75rem; margin:.3rem 0; font-size:.75rem; color:var(--gold-lt);
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../halls/polyalphabetic.html">Hall III</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../halls/polyalphabetic.html">Hall III</a><span>›</span>
+    Vigenère Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 07 of 33</span>
+    <span class="badge era-renaissance">Renaissance · 1553</span>
+    <span class="badge sec-broken">Broken 1863</span>
+    <span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Interactive Demo</span>
+  </div>
+  <h1 class="page-title">Vigenère Cipher</h1>
+  <p class="page-tagline">"Le chiffre indéchiffrable" — 300 years of misplaced confidence</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Described</span><span class="fact-value">1553 by Giovan Bellaso</span></div>
+    <div class="fact"><span class="fact-label">Popularized By</span><span class="fact-value">Blaise de Vigenère (1586)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Repeating keyword</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Babbage ~1854 · Kasiski 1863</span></div>
+    <div class="fact"><span class="fact-label">Used In</span><span class="fact-value">Confederate Army · European diplomacy</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Stream ciphers (ChaCha20)</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <!-- History -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Giovan Battista Bellaso described the cipher in 1553, but it was misattributed to Blaise de Vigenère — who described a different, stronger cipher — and the name stuck. By the 17th century it was the standard diplomatic cipher of European courts. French cryptographers called it <em>"le chiffre indéchiffrable"</em> — the unbreakable cipher.</p>
+        <p style="margin-top:1rem;">It remained unbroken for nearly 300 years. Charles Babbage cracked it in the 1850s but kept his method secret. Friedrich Kasiski published independently in 1863, ending the myth forever.</p>
+        <div class="callout callout-mystery" style="margin-top:1.5rem;">
+          <span class="callout-icon">⚔️</span>
+          <div class="callout-body"><p><strong>Civil War use:</strong> The Confederate Signal Corps adopted the Vigenère as "the government cipher" — apparently unaware that it had already been publicly broken. Union cryptanalysts read Confederate dispatches throughout the war. Real Confederate keywords: <em>Manchester Bluff, Complete Victory, Come Retribution.</em></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>The Vigenère uses a 26×26 "tabula recta" — a grid of all 26 Caesar shifts. The keyword determines which row to use for each letter:</p>
+        <ol class="steps" style="margin:1rem 0;">
+          <li class="step"><div class="step-text">Write the keyword repeatedly above the plaintext</div></li>
+          <li class="step"><div class="step-text">For each plaintext letter, find its column in the tabula recta</div></li>
+          <li class="step"><div class="step-text">Find the row corresponding to the key letter above it</div></li>
+          <li class="step"><div class="step-text">The intersection is the ciphertext letter</div></li>
+        </ol>
+        <pre style="margin:1rem 0;font-size:.82rem;">Key:    L  E  M  O  N  L  E  M  O  N  L  E
+Plain:  A  T  T  A  C  K  A  T  D  A  W  N
+Cipher: L  X  F  O  P  V  E  F  R  N  H  R
+
+Formula: C = (P + K) mod 26</pre>
+        <p style="margin-top:1rem;">The same plaintext letter encrypts differently each time — A becomes L, then M, then O depending on which key letter is above it. This completely defeats simple frequency analysis.</p>
+
+        <!-- Tabula Recta -->
+        <div class="diagram-wrap" style="margin-top:1.5rem;">
+          <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:.75rem;">Tabula Recta — Hover over cells to explore</p>
+          <div class="tabula-wrap">
+            <table class="tabula" id="tabulaRecta"></table>
+          </div>
+          <p class="diagram-caption">Row = key letter · Column = plaintext letter · Cell = ciphertext letter</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cryptanalysis -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Kasiski Examination (1863)</div>
+          <div class="attack-diff">Complexity: Moderate · Friedrich Kasiski</div>
+          <p class="attack-desc">When the same plaintext segment aligns with the same key segment, it produces identical ciphertext. Search for repeated 3+ letter sequences in the ciphertext. The distances between repetitions are likely multiples of the key length. Find the GCD of all distances — that's the key length.</p>
+        </div>
+        <div class="attack-panel" style="margin-top:1rem;">
+          <div class="attack-name">Index of Coincidence (1920)</div>
+          <div class="attack-diff">Complexity: Moderate · William Friedman</div>
+          <p class="attack-desc">Once the key length is known, split the ciphertext into N groups (N = key length). Each group was encrypted with the same Caesar shift. Apply frequency analysis to each group independently to recover the key letter for that position.</p>
+        </div>
+        <div class="callout callout-danger" style="margin-top:1rem;">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-body"><p><strong>The fatal flaw:</strong> The keyword <em>repeats</em>. Every 5 letters (for a 5-letter key), the same substitution alphabet is used again. This periodicity is invisible to the eye — but mathematically detectable with enough ciphertext.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modern lesson -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Vigenère Concept</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Multiple alphabets (key-dependent shift)</td><td>Stream ciphers: ChaCha20 generates a different keystream byte for every position</td></tr>
+            <tr><td>Repeating key → detectable periodicity</td><td>Modern keystreams never repeat within a session (nonce + counter prevents this)</td></tr>
+            <tr><td>Key length determines security</td><td>AES-256 uses a 256-bit key — guessing it requires 2²⁵⁶ operations</td></tr>
+            <tr><td>XOR-equivalent operation</td><td>All modern stream ciphers use XOR: C = P ⊕ keystream</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="exhibit-side">
+
+    <!-- Demo -->
+    <div class="demo-panel">
+      <div class="demo-head"><span>🔐</span><span class="demo-title">Try It Yourself</span></div>
+      <div class="demo-body">
+        <div class="mode-toggle" role="group">
+          <button class="mode-btn active" id="btnEnc" onclick="setMode('enc')">Encrypt</button>
+          <button class="mode-btn" id="btnDec" onclick="setMode('dec')">Decrypt</button>
+        </div>
+        <div class="input-group">
+          <span class="input-label">Message</span>
+          <textarea class="museum-input" id="msgInput" rows="3" placeholder="Type a message…">ATTACKATDAWN</textarea>
+        </div>
+        <div class="input-group">
+          <span class="input-label">Keyword</span>
+          <input type="text" class="museum-input" id="keyInput" value="LEMON" placeholder="Enter keyword…" style="text-transform:uppercase;">
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="runVigenere()">Run Cipher</button>
+          <button class="btn btn-secondary" onclick="clearDemo()">Clear</button>
+        </div>
+        <div class="input-group">
+          <span class="input-label">Output</span>
+          <div class="output-box" id="outputBox"><span class="output-empty">Result appears here…</span></div>
+        </div>
+        <!-- Step trace -->
+        <div id="traceWrap" style="display:none;">
+          <span class="input-label" style="margin-bottom:.5rem;display:block;">Step-by-Step Trace</span>
+          <div class="step-trace">
+            <div class="trace-row" style="margin-bottom:.3rem;"><span class="trace-label">Key</span><div class="trace-chars" id="traceKey"></div></div>
+            <div class="trace-row" style="margin-bottom:.3rem;"><span class="trace-label">Plain</span><div class="trace-chars" id="tracePlain"></div></div>
+            <div class="trace-row"><span class="trace-label">Cipher</span><div class="trace-chars" id="traceCipher"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kasiski Tool -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔍</span><span class="panel-title">Kasiski Examiner</span></div>
+      <div class="panel-body">
+        <p style="font-size:.88rem;margin-bottom:.75rem;">Paste Vigenère ciphertext. The tool finds repeated sequences and estimates the key length.</p>
+        <textarea class="museum-input" id="kasiskiInput" rows="3"
+          placeholder="LXFOPVEFRNHRLXFOPVEFRNHR…"
+          oninput="runKasiski()" style="font-size:.8rem;"></textarea>
+        <div class="kasiski-result" id="kasiskiResult" style="margin-top:.75rem;"></div>
+        <div id="kasiskiHits" style="margin-top:.5rem;max-height:180px;overflow-y:auto;"></div>
+      </div>
+    </div>
+
+    <!-- Challenge -->
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Break This Cipher</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size:.85rem;margin-bottom:.75rem;">This is a real fragment from the Confederate Civil War cipher system. Key length: 15 letters.</p>
+        <div style="font-family:var(--fm);font-size:.8rem;background:var(--s3);border-radius:var(--r);padding:.85rem;letter-spacing:.1em;color:var(--tx);word-break:break-all;line-height:1.8;">
+          VVQECILMYMPM
+        </div>
+        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-top:.5rem;">Key: COMPLETEVICT… (15 letters)</p>
+        <button class="btn btn-secondary" style="width:100%;margin-top:.75rem;font-size:.7rem;" onclick="this.nextElementSibling.style.display='block';this.style.display='none';">Reveal Answer</button>
+        <p style="display:none;font-family:var(--fm);font-size:.75rem;color:var(--gold-lt);margin-top:.5rem;text-align:center;">Key: COMPLETEVICTORY · Plain: THEPRESIDEN[T]</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/running-key.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous</span><span class="hall-nav-name">Running Key Cipher</span>
+  </a>
+  <a href="../ciphers/beaufort.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next →</span><span class="hall-nav-name">Beaufort Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License.</p></div>
+    <div><div class="footer-col-title">Hall III</div><ul class="footer-links">
+      <li><a href="vigenere.html">Vigenère ←</a></li>
+      <li><a href="beaufort.html">Beaufort</a></li>
+      <li><a href="porta.html">Porta</a></li>
+      <li><a href="gronsfeld.html">Gronsfeld</a></li>
+      <li><a href="running-key.html">Running Key</a></li>
+    </ul></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links">
+      <li><a href="../halls/polyalphabetic.html">Hall III</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">Exhibit 07 of 33</span></div>
+</footer>
+
+<script>
+const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let mode = 'enc';
+
+// ── Tabula Recta ──────────────────────────────────────
+function buildTabula() {
+  const t = document.getElementById('tabulaRecta');
+  if (!t) return;
+  let html = '<tr><th></th>';
+  for (let i = 0; i < 26; i++) html += `<th>${ALPHA[i]}</th>`;
+  html += '</tr>';
+  for (let r = 0; r < 26; r++) {
+    html += `<tr><th>${ALPHA[r]}</th>`;
+    for (let c = 0; c < 26; c++) {
+      html += `<td id="tc_${r}_${c}" data-r="${r}" data-c="${c}">${ALPHA[(r+c)%26]}</td>`;
+    }
+    html += '</tr>';
+  }
+  t.innerHTML = html;
+  t.querySelectorAll('td').forEach(cell => {
+    cell.addEventListener('mouseenter', () => highlightTabula(+cell.dataset.r, +cell.dataset.c));
+    cell.addEventListener('mouseleave', clearTabula);
+  });
+}
+
+function highlightTabula(r, c) {
+  document.querySelectorAll('.tabula td').forEach(cell => {
+    const cr = +cell.dataset.r, cc = +cell.dataset.c;
+    if (cr === r && cc === c) cell.className = 'hl-both';
+    else if (cr === r) cell.className = 'hl-row';
+    else if (cc === c) cell.className = 'hl-col';
+    else cell.className = '';
+  });
+}
+
+function clearTabula() {
+  document.querySelectorAll('.tabula td').forEach(c => c.className = '');
+}
+
+buildTabula();
+
+// ── Vigenère ──────────────────────────────────────────
+function vigenere(text, key, enc) {
+  const t = text.toUpperCase().replace(/[^A-Z]/g, '');
+  const k = key.toUpperCase().replace(/[^A-Z]/g, '') || 'KEY';
+  let out = '', steps = [];
+  for (let i = 0; i < t.length; i++) {
+    const p = t.charCodeAt(i) - 65;
+    const ki = k.charCodeAt(i % k.length) - 65;
+    const c = enc ? (p + ki) % 26 : (p - ki + 26) % 26;
+    out += ALPHA[c];
+    steps.push({ plain: ALPHA[enc ? p : c], key: ALPHA[ki], cipher: ALPHA[enc ? c : p] });
+  }
+  return { out, steps };
+}
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('btnEnc').classList.toggle('active', m === 'enc');
+  document.getElementById('btnDec').classList.toggle('active', m === 'dec');
+}
+
+function runVigenere() {
+  const msg = document.getElementById('msgInput').value;
+  const key = document.getElementById('keyInput').value;
+  const { out, steps } = vigenere(msg, key, mode === 'enc');
+  document.getElementById('outputBox').textContent = out;
+  renderTrace(steps);
+}
+
+function renderTrace(steps) {
+  const wrap = document.getElementById('traceWrap');
+  wrap.style.display = 'block';
+  const show = steps.slice(0, 12);
+  ['traceKey', 'tracePlain', 'traceCipher'].forEach(id => document.getElementById(id).innerHTML = '');
+  show.forEach(s => {
+    document.getElementById('traceKey').innerHTML    += `<div class="trace-char tc-key">${s.key}</div>`;
+    document.getElementById('tracePlain').innerHTML  += `<div class="trace-char tc-plain">${s.plain}</div>`;
+    document.getElementById('traceCipher').innerHTML += `<div class="trace-char tc-cipher">${s.cipher}</div>`;
+  });
+  if (steps.length > 12) {
+    document.getElementById('traceCipher').innerHTML += `<div style="color:var(--tx3);font-size:.65rem;padding:0 .3rem;align-self:center;">+${steps.length-12}</div>`;
+  }
+}
+
+function clearDemo() {
+  document.getElementById('msgInput').value = '';
+  document.getElementById('outputBox').innerHTML = '<span class="output-empty">Result appears here…</span>';
+  document.getElementById('traceWrap').style.display = 'none';
+}
+
+runVigenere();
+
+// ── Kasiski ───────────────────────────────────────────
+function runKasiski() {
+  const txt = document.getElementById('kasiskiInput').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const res = document.getElementById('kasiskiResult');
+  const hits = document.getElementById('kasiskiHits');
+  if (txt.length < 15) { res.textContent = 'Enter at least 15 letters.'; hits.innerHTML=''; return; }
+
+  const found = {};
+  for (let len = 3; len <= 5; len++) {
+    for (let i = 0; i <= txt.length - len; i++) {
+      const seq = txt.substr(i, len);
+      if (!found[seq]) found[seq] = [];
+      found[seq].push(i);
+    }
+  }
+
+  const repeats = Object.entries(found).filter(([,v]) => v.length > 1);
+  if (!repeats.length) { res.textContent = 'No repeated sequences found. Try more ciphertext.'; hits.innerHTML=''; return; }
+
+  const gcds = {};
+  repeats.forEach(([,positions]) => {
+    for (let i = 1; i < positions.length; i++) {
+      const d = positions[i] - positions[i-1];
+      for (let k = 2; k <= Math.min(d, 20); k++) if (d % k === 0) gcds[k] = (gcds[k]||0)+1;
+    }
+  });
+
+  const sorted = Object.entries(gcds).sort((a,b) => b[1]-a[1]);
+  const best = sorted[0]?.[0] || '?';
+  res.innerHTML = `Found <strong>${repeats.length}</strong> repeats. Most likely key length: <strong style="color:var(--gold)">${best}</strong>`;
+  hits.innerHTML = repeats.slice(0,6).map(([seq,pos]) =>
+    `<div class="repeat-hit">"${seq}" @ positions ${pos.join(', ')} · spacing: ${pos.slice(1).map((p,i)=>p-pos[i]).join(', ')}</div>`
+  ).join('');
+}
+</script>
+</body>
+</html>

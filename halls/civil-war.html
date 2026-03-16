@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civil War Gallery — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+    .cw-hero-accent { border-top: 3px solid var(--purple); }
+    .keyword-grid { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
+    .keyword-badge {
+      font-family:var(--fm); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+      padding:.35em .8em; border-radius:2px;
+      background:var(--purple-d); border:1px solid var(--purple-b); color:var(--purple);
+    }
+    .keyword-badge.union { background:rgba(90,144,200,.12); border-color:rgba(90,144,200,.3); color:var(--blue); }
+    .telegraph-demo { font-family:var(--fm); font-size:.78rem; line-height:2; background:var(--s3); border-radius:var(--r); padding:1.25rem; }
+    .route-grid { display:grid; gap:2px; }
+    .route-cell { width:80px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:2px; font-family:var(--fm); font-size:.7rem; }
+    .route-plain { background:var(--s4); color:var(--tx2); }
+    .route-cipher { background:var(--gold-glow); border:1px solid var(--gold-b); color:var(--gold-lt); }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="military.html">Hall V</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero cw-hero-accent">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Special Exhibition
+  </div>
+  <span class="page-eyebrow" style="color:var(--purple);">Special Exhibition · 1861 – 1865</span>
+  <h1 class="page-title">The American Civil War Gallery</h1>
+  <p class="page-tagline">The telegraph transformed warfare — and cryptography with it</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    The American Civil War was the first major conflict fought using the electric telegraph. Hundreds of miles of wire crisscrossed both sides' territory, and both sides knew the other was listening — wiretapping was common, well-documented, and expected. For the first time in history, <em>all</em> sensitive communications required encryption. This gallery presents three systems that decided the outcome of Lincoln's war.
+  </p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge badge-civil">Union Cipher</span>
+    <span class="badge badge-civil">Confederate</span>
+    <span class="badge sec-broken">Confederate: Broken</span>
+    <span class="badge sec-weak">Union: Unbroken in War</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <!-- Context -->
+  <div class="callout callout-mystery" style="margin-bottom:3rem;">
+    <span class="callout-icon">⚡</span>
+    <div class="callout-body">
+      <p><strong>The telegraph changed everything.</strong> Before the Civil War, a commander's dispatches traveled only as fast as a horse. With the telegraph, Lincoln could communicate with generals hundreds of miles away in minutes. But every telegraph operator along the wire could read every message — and both sides actively wiretapped enemy lines. The OR (Official Records) documents many such interceptions. Every strategic telegram had to be encrypted before transmission.</p>
+    </div>
+  </div>
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/stager.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 23</span>
+        <span class="badge badge-civil">Union · 1861</span>
+      </div>
+      <div class="card-name">Stager Cipher</div>
+      <p class="card-desc">Anson Stager's route transposition cipher secured every Union telegraph from the first Battle of Bull Run to Appomattox. Words written in a matrix, columns read by a prearranged route — plus hundreds of code-word substitutions that made even correctly transposed messages meaningless without the code book. The Confederates never broke it.</p>
+
+      <!-- Stager route diagram -->
+      <div class="telegraph-demo" style="margin:.5rem 0;">
+        <div style="color:var(--tx3);font-size:.62rem;letter-spacing:.15em;margin-bottom:.5rem;">ROUTE: up 1, down 6, up 2, down 3, up 5, down 4</div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin-bottom:.3rem;">
+          <div style="color:var(--gold);text-align:center;font-size:.62rem;">↑1</div>
+          <div style="color:var(--tx3);text-align:center;font-size:.62rem;">↓4</div>
+          <div style="color:var(--gold);text-align:center;font-size:.62rem;">↑2</div>
+          <div style="color:var(--tx3);text-align:center;font-size:.62rem;">↓3</div>
+          <div style="color:var(--gold);text-align:center;font-size:.62rem;">↑5</div>
+          <div style="color:var(--tx3);text-align:center;font-size:.62rem;">↓6</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:2px;">
+          <div style="color:var(--tx);text-align:center;font-size:.68rem;">rapture</div>
+          <div style="color:var(--tx);text-align:center;font-size:.68rem;">Sept</div>
+          <div style="color:var(--tx);text-align:center;font-size:.68rem;">twenty</div>
+          <div style="color:var(--tx);text-align:center;font-size:.68rem;">nine</div>
+          <div style="color:var(--tx);text-align:center;font-size:.68rem;">1862</div>
+          <div style="color:var(--tx3);text-align:center;font-size:.68rem;">for</div>
+        </div>
+      </div>
+
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-weak">Unbroken in War</span>
+          <span class="badge badge-civil">Lincoln's Cipher</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/confederate-vigenere.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 24</span>
+        <span class="badge badge-civil">Confederate · 1862</span>
+      </div>
+      <div class="card-name">Confederate Vigenère</div>
+      <p class="card-desc">The Confederate Signal Corps issued the Vigenère cipher as "the government cipher" — the same cipher that had been "unbreakable" for 300 years, broken by Kasiski just one year before the war began. Union cryptanalysts read Confederate dispatches regularly. Real keywords used throughout the war by Jefferson Davis, Robert E. Lee, and Kirby Smith.</p>
+
+      <!-- Keywords -->
+      <div style="margin:.5rem 0;">
+        <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:.4rem;">Actual Keywords Used:</div>
+        <div class="keyword-grid">
+          <span class="keyword-badge">Manchester Bluff</span>
+          <span class="keyword-badge">Complete Victory</span>
+          <span class="keyword-badge">Come Retribution</span>
+          <span class="keyword-badge">My Old Kentucky Home</span>
+          <span class="keyword-badge">Our Destiny Is One</span>
+          <span class="keyword-badge">Fight and Conquer</span>
+        </div>
+      </div>
+
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken by Union</span>
+          <span class="badge badge-civil">Jefferson Davis</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/dictionary-code.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 25</span>
+        <span class="badge badge-civil">Confederate · 1862</span>
+      </div>
+      <div class="card-name">Confederate Dictionary Code</div>
+      <p class="card-desc">Jefferson Davis arranged a dictionary code with Generals A.S. Johnston and J.E. Johnston using Noah Webster's 1857 <em>Primary-School Pronouncing Dictionary</em>. Words identified by page and word position: "ship" = (674)26. A communication failure of historic proportions: when J.E. Johnston used it with Robert E. Lee, Lee had a different dictionary and could not read the dispatch.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">ship → page 674, word 26 → </span><span style="color:var(--gold-lt);">(674)26</span><br>
+        <span style="color:var(--tx3);">Webster 1857 edition required</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken</span>
+          <span class="badge badge-civil">Jefferson Davis</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Union vs Confederate comparison -->
+  <div class="section-head" style="text-align:left;">
+    <span class="section-eyebrow">The Cryptographic Balance of Power</span>
+    <h2 class="section-title">Why the Union Won the Cipher War</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+    <div class="panel" style="border-color:rgba(90,144,200,.3);">
+      <div class="panel-head" style="background:rgba(90,144,200,.08);border-color:rgba(90,144,200,.25);">
+        <span class="panel-icon">🔵</span>
+        <span class="panel-title" style="color:var(--blue);">Union Cryptography</span>
+      </div>
+      <div class="panel-body">
+        <ul class="steps">
+          <li class="step"><div class="step-text"><strong>Stager Cipher:</strong> Purpose-built for telegraph security. Route transposition + code-word substitution evolved continuously throughout the war — from Cipher No. 6 to Cipher No. 5 (1865).</div></li>
+          <li class="step"><div class="step-text"><strong>Professional management:</strong> The U.S. Military Telegraph Corps, under Stager and Eckert, controlled all cipher usage. Operators were trained and supervised.</div></li>
+          <li class="step"><div class="step-text"><strong>Never broken:</strong> Despite Confederate wiretapping, no Stager-enciphered message was ever successfully decrypted by the Confederacy during the war.</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--red-b);">
+      <div class="panel-head" style="background:var(--red-d);border-color:var(--red-b);">
+        <span class="panel-icon">🔴</span>
+        <span class="panel-title" style="color:var(--red);">Confederate Cryptography</span>
+      </div>
+      <div class="panel-body">
+        <ul class="steps">
+          <li class="step"><div class="step-text"><strong>Vigenère cipher:</strong> Already known to be breakable since Kasiski's 1863 publication. Confederate Signal Corps adopted it anyway — or were unaware of its defeat.</div></li>
+          <li class="step"><div class="step-text"><strong>Key management failures:</strong> The same keywords used for months. "Manchester Bluff" secured all Confederate military departments for an extended period — once cracked, all messages fell.</div></li>
+          <li class="step"><div class="step-text"><strong>Dictionary code disaster:</strong> No standardized code book issued. Different generals used different dictionaries. Messages were unreadable even to intended recipients.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gettysburg encoding note -->
+  <div class="callout callout-info">
+    <span class="callout-icon">🏛️</span>
+    <div class="callout-body">
+      <p><strong>A phonetic encoding curiosity:</strong> The Stager cipher's code books lacked entries for all proper nouns. Operators improvised phonetically. "Gettysburg" was encoded as "get ties large" — the ending "-burg" (meaning fortification) mapped to the code word "large." "Rapidity" became "rape ditty." These improvised encodings sometimes created riddles even for the intended recipient.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="military.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Hall V</span>
+    <span class="hall-nav-name">Military &amp; Spy Ciphers</span>
+  </a>
+  <a href="unbreakable.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Final Hall →</span>
+    <span class="hall-nav-name">The Unbreakable &amp; the Modern</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">This Gallery</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/stager.html">Stager Cipher</a></li>
+        <li><a href="../ciphers/confederate-vigenere.html">Confederate Vigenère</a></li>
+        <li><a href="../ciphers/dictionary-code.html">Dictionary Code</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="military.html">← Hall V</a></li>
+        <li><a href="unbreakable.html">Final Hall →</a></li>
+        <li><a href="../museum-map.html">Museum Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License · Sources: OR Records, Cryptiana.web.fc2.com</span>
+  </div>
+</footer>
+</body>
+</html>

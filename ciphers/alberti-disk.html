@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alberti Cipher Disk — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VI: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Alberti Cipher Disk
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 30 of 33</span>
+    <span class="badge era-renaissance">Renaissance · 1467</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Alberti Cipher Disk</h1>
+  <p class="page-tagline">The first polyalphabetic cipher device — invented 100 years before Vigenère</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Leon Battista Alberti</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1467</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Physical rotating disk (two alphabets)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Index of Coincidence · Frequency analysis</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Physical key material → rotor machines</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Leon Battista Alberti — architect, artist, humanist, and one of the great Renaissance polymaths — invented the cipher disk in 1467 and described it in his treatise <em>De Cifris</em>. It is the first known mechanical cipher device and the first polyalphabetic cipher design, predating Vigenère by nearly a century.</p><p style='margin-top:1rem;'>Alberti's device consisted of two concentric copper disks. The outer disk bore the standard alphabet; the inner disk bore a scrambled alphabet. By rotating the inner disk to different starting positions during encryption, Alberti created a cipher that used different substitution alphabets for different parts of the message — the core idea of all polyalphabetic ciphers.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Two concentric disks:
+Outer: A B C D E F G H I K L M N O P Q R S T V X Y Z
+Inner: g k z t r n h l a q b m o f d c e p s w i x y
+
+Encryption:
+1. Align disks to agreed starting position
+2. Encrypt several letters using current alignment
+3. Rotate inner disk and record new position (in cipher)
+4. Continue encrypting with new alignment
+
+Alberti changed alignment every few words
+→ first real polyalphabetic cipher in practice</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Index of Coincidence</div><div class="attack-diff">Complexity: Easy-Moderate</div><p class="attack-desc">Alberti's cipher changes alphabets irregularly (not on a fixed keyword period). However, the IC test can identify sections encrypted with the same disk alignment, and frequency analysis applied to each section recovers that alignment's substitution. With enough ciphertext, all alignments can be recovered.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Alberti Cipher Disk</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Rotating disk = changing alphabet</td><td>Rotor machines: Enigma's rotors are a direct mechanical descendant</td></tr>
+<tr><td>Multiple alphabets in sequence</td><td>Polyalphabetic encryption: the direct ancestor of Vigenère and stream ciphers</td></tr>
+<tr><td>Physical key = disk alignment</td><td>Key material: the specific configuration that defines the cipher's behavior</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>30 of 33</td></tr>
+            <tr><td>Era</td><td>Renaissance · 1467</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Leon Battista Alberti</td></tr>
+            <tr><td>Year</td><td>1467</td></tr>
+            <tr><td>Key Type</td><td>Physical rotating disk (two alphabets)</td></tr>
+            <tr><td>Broken By</td><td>Index of Coincidence · Frequency analysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/jefferson-disk.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Jefferson Disk</span>
+  </a>
+  <a href="../ciphers/pigpen.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Pigpen Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="jefferson-disk.html">&larr; Jefferson Disk</a></li>
+        <li><a href="pigpen.html">Pigpen Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 30 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

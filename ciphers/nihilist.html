@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nihilist Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall V: Military & Spy Ciphers</a><span>&rsaquo;</span>
+    Nihilist Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 18 of 33</span>
+    <span class="badge era-19c">1880s · Russia</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Nihilist Cipher</h1>
+  <p class="page-tagline">Russian revolutionaries vs the Tsar's secret police — arithmetic as armor</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Russian Nihilist movement</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1880s</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Polybius square + numeric keyword</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Frequency analysis of digit pairs · Kasiski-equivalent</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Layered cipher operations</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The Nihilist cipher took its name from the Russian revolutionary movement of the 1880s that used it. Facing the Okhrana — the Tsar's secret police and one of the world's first modern intelligence agencies — the revolutionaries needed a cipher that could be memorized, performed without equipment, and changed quickly when compromised.</p><p style='margin-top:1rem;'>The cipher combined Polybius square substitution with Vigenère-style numeric addition, producing numerical ciphertext that looked like arbitrary number sequences to an interceptor.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Polybius square (keyword: NIHILIST):
+   1  2  3  4  5
+1  N  I  H  L  S
+2  T  A  B  C  D
+3  E  F  G  J  K
+4  M  O  P  Q  R
+5  U  V  W  X  Y  (Z=55)
+
+Plaintext:  A   T   T   A   C   K
+Polybius:  22  21  21  22  24  35
+Key(=NEMO): 11  31  44  21  11  31
+Cipher:    33  52  65  43  35  66</pre></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Frequency Analysis on Digit Sums</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">The numeric ciphertext has non-uniform digit-sum distribution. Common letters produce common Polybius values; added to a repeating key, the sums cluster around predictable ranges. With enough ciphertext, the key length can be found (Kasiski-equivalent for numbers), and each key digit can be recovered through frequency analysis of the numeric residuals.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Nihilist Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Polybius + addition (two operations)</td><td>AES: four operations per round create layered security</td></tr>
+<tr><td>Numeric output hides letter frequencies</td><td>AES output: statistically indistinguishable from random bytes</td></tr>
+<tr><td>Repeating numeric key</td><td>Modern ciphers use key schedules to generate unique subkeys for each round</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>18 of 33</td></tr>
+            <tr><td>Era</td><td>1880s · Russia</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Inventor</td><td>Russian Nihilist movement</td></tr>
+            <tr><td>Year</td><td>~1880s</td></tr>
+            <tr><td>Key Type</td><td>Polybius square + numeric keyword</td></tr>
+            <tr><td>Broken By</td><td>Frequency analysis of digit pairs · Kasiski-equivalent</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/fractionated-morse.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Fractionated Morse Cipher</span>
+  </a>
+  <a href="../ciphers/adfgx.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">ADFGX Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="fractionated-morse.html">&larr; Fractionated Morse Cipher</a></li>
+        <li><a href="adfgx.html">ADFGX Cipher &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 18 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

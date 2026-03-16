@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stager Cipher — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/civil-war.html">Civil War Gallery</a><span>&rsaquo;</span>
+    Stager Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 23 of 33</span>
+    <span class="badge era-wwi">Union · 1861</span>
+    <span class="badge sec-weak">Weak</span>
+  </div>
+  <h1 class="page-title">Stager Cipher</h1>
+  <p class="page-tagline">Lincoln's telegraph cipher — never broken during the Civil War</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Anson Stager · US Military Telegraph Corps</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1861</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Route transposition + code words</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Never broken in wartime — superseded after the war</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Route transposition as message obfuscation</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Anson Stager designed the cipher that protected every sensitive Union telegraph from the first Battle of Bull Run to Appomattox. Stager was the superintendent of the Western Union Telegraph Company and understood both the technology and its vulnerabilities. Both sides knew that telegraph lines were routinely wiretapped — the Official Records document many such interceptions.</p><p style='margin-top:1rem;'>The cipher evolved throughout the war from a simple route system to a complex 40-page code book with hundreds of arbitrary words (code substitutions) plus route transposition. Confederate wiretappers never successfully read a Stager-encrypted message.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><pre>Step 1: Code word substitution
+        RAPTURE = Louisville, KY
+        CAMDEN = Maj-Gen Thomas
+        ALVORD = General Buell
+
+Step 2: Write message in N columns
+        (N determined by commencement word)
+
+Step 3: Read columns by prearranged route
+        'up 1, down 6, up 2, down 3, up 5, down 4'
+
+Step 4: Insert null words at column ends
+        to disguise column boundaries</pre><p style='margin-top:1rem;'>Example from actual Civil War dispatch (Buell to Halleck, Sept 29 1862): The route and column count were specified by the first 'commencement word' of the message.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="callout callout-success"><span class="callout-icon">✅</span><div class="callout-body"><p><strong>This cipher was never broken during the war.</strong> Confederate cryptanalysts intercepted Union telegrams but could not decrypt them. The Stager cipher's combination of code-word substitution (making even correctly transposed messages meaningless without the code book) and route transposition provided genuine operational security throughout the conflict.</p></div></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Post-War Cryptanalysis</div><div class="attack-diff">Broken after the war — not operational</div><p class="attack-desc">After the war, several operators published memoirs describing the cipher system. Modern cryptanalysts examining Civil War intercepts have been able to reconstruct some messages using knowledge of the route system. But during active use, the constantly evolving code book and route variations kept Union communications secure.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Stager Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody><tr><td>Route transposition by word</td><td>Transposition layers in modern block ciphers</td></tr>
+<tr><td>Code book substitution</td><td>Nomenclators: precursors to modern public-key infrastructure</td></tr>
+<tr><td>Commencement word as key indicator</td><td>Initialization vectors (IVs) in modern cipher modes</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>23 of 33</td></tr>
+            <tr><td>Era</td><td>Union · 1861</td></tr>
+            <tr><td>Security</td><td>Weak</td></tr>
+            <tr><td>Inventor</td><td>Anson Stager · US Military Telegraph Corps</td></tr>
+            <tr><td>Year</td><td>1861</td></tr>
+            <tr><td>Key Type</td><td>Route transposition + code words</td></tr>
+            <tr><td>Broken By</td><td>Never broken in wartime — superseded after the war</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/vic.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">VIC Cipher</span>
+  </a>
+  <a href="../ciphers/confederate-vigenere.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Confederate Vigenère</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="vic.html">&larr; VIC Cipher</a></li>
+        <li><a href="confederate-vigenere.html">Confederate Vigenère &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 23 of 33</span>
+  </div>
+</footer>
+</body>
+</html>

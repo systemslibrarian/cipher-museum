@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall V: Military &amp; Spy Ciphers — The Cipher Museum</title>
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="transposition.html">Hall IV</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Hall V
+  </div>
+  <span class="page-eyebrow">Hall V · WWI — Cold War · 1914 – 1970</span>
+  <h1 class="page-title">Military &amp; Spy Ciphers</h1>
+  <p class="page-tagline">When lives depend on secrecy — the peak of hand-cipher design</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
+    The ciphers in this hall were designed not for scholars but for soldiers and spies — people who needed to encrypt messages quickly in the field, under fire, without a computer. They represent the absolute peak of what human ingenuity could achieve in manual cryptography. Some fell within weeks. One — the VIC cipher — may never have been broken by cryptanalysis alone.
+  </p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-wwi">WWI</span>
+    <span class="badge era-wwii">WWII</span>
+    <span class="badge era-coldwar">Cold War</span>
+    <span class="badge badge-hard">5 Hard-to-Break Exhibits</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <div class="callout callout-warn" style="margin-bottom:3rem;">
+    <span class="callout-icon">⚔️</span>
+    <div class="callout-body">
+      <p><strong>The military cryptographer's dilemma:</strong> A cipher must be strong enough that the enemy cannot read it — but simple enough that a soldier can encrypt and decrypt in the field without a computer, under stress, with minimal training. Every cipher in this hall represents a different solution to that impossible trade-off.</p>
+    </div>
+  </div>
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/nihilist.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 18</span>
+        <span class="badge era-19c">1880s · Russia</span>
+      </div>
+      <div class="card-name">Nihilist Cipher</div>
+      <p class="card-desc">Used by Russian revolutionary cells to communicate past Tsarist secret police. Polybius square coordinates added to a repeating numeric key. Produces numbers rather than letters — obscuring standard letter-frequency patterns in arithmetic noise.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">H=23, key=31 → </span><span style="color:var(--gold-lt);">54</span>
+        <span style="color:var(--tx3);">  E=15, key=14 → </span><span style="color:var(--gold-lt);">29</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/adfgx.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 19</span>
+        <span class="badge era-wwi">WWI · Germany · March 1918</span>
+      </div>
+      <div class="card-name">ADFGX Cipher</div>
+      <p class="card-desc">Germany's front-line cipher for the Spring Offensive. A Polybius square using only the letters A, D, F, G, X (chosen because they sound distinct in Morse), followed by columnar transposition. Broken by French cryptanalyst Georges Painvin within weeks.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">Plain → Polybius(ADFGX) → Columnar transpose</span><br>
+        <span style="color:var(--tx3);">H → </span><span style="color:var(--gold-lt);">AF</span><span style="color:var(--tx3);">  E → </span><span style="color:var(--gold-lt);">DA</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/adfgvx.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 20</span>
+        <span class="badge era-wwi">WWI · Germany · June 1918</span>
+      </div>
+      <div class="card-name">ADFGVX Cipher</div>
+      <p class="card-desc">ADFGX extended with V to include digits — a 6×6 grid encoding 36 characters. Introduced specifically for the Paris Gun bombardment and the Ludendorff Offensive. Painvin broke it in 48 hours of continuous work, potentially altering the outcome of WWI.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">6×6 grid · Letters AND digits · Same two-step process</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/bazeries.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 21</span>
+        <span class="badge era-19c">1890s · France</span>
+      </div>
+      <div class="card-name">Bazeries Cipher</div>
+      <p class="card-desc">Étienne Bazeries — himself a famous codebreaker — designed a layered cipher combining a keyword-numbered Polybius square with transposition keyed by the same number word. He spent years trying to convince the French military to adopt it, never succeeding.</p>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-broken">Broken</span><span class="badge badge-hard">Hard to Break</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/vic.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 22</span>
+        <span class="badge era-coldwar">Cold War · 1950s</span>
+      </div>
+      <div class="card-name">VIC Cipher</div>
+      <p class="card-desc">The most sophisticated hand cipher ever deployed in real espionage. Soviet spy Reino Häyhänen carried it to America. Combines a straddling checkerboard, double transposition, and a key derived from a song lyric. Most intercepted VIC messages were never broken by cryptanalysis — the cipher was exposed only by a defector in 1957.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.8;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">Checkerboard → chain addition → double transposition</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges"><span class="badge sec-weak">Weak</span><span class="badge badge-hard">Hardest Ever Used</span></div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Painvin Story -->
+  <div class="callout callout-mystery" style="margin-bottom:3rem;">
+    <span class="callout-icon">🇫🇷</span>
+    <div class="callout-body">
+      <p><strong>Georges Painvin and the cipher that changed WWI:</strong> In June 1918, Germany launched its final offensive toward Paris. Their communications used the ADFGVX cipher. French cryptanalyst Georges Painvin worked for 48 consecutive hours, lost 15 pounds, and broke the cipher — revealing German supply routes. Allied forces repositioned. The offensive failed. Many historians credit Painvin's break as a turning point of the war. He never claimed the title himself.</p>
+    </div>
+  </div>
+
+  <!-- Modern lesson -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔄</span><span class="panel-title">Layering → Multiple Rounds</span></div>
+      <div class="panel-body"><p>ADFGVX combined substitution and transposition — two different operations. Modern block ciphers like AES apply 10–14 rounds of four different operations (SubBytes, ShiftRows, MixColumns, AddRoundKey) for the same reason: layering makes each step harder to undo.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📋</span><span class="panel-title">Checkerboard → Variable-Length Encoding</span></div>
+      <div class="panel-body"><p>The VIC cipher's straddling checkerboard assigns shorter codes to common letters (like Huffman coding) while also obscuring the alphabet mapping. This dual purpose — compression and encryption — is a sophisticated design insight that modern protocols use separately.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🕵️</span><span class="panel-title">Human Factors Always Win</span></div>
+      <div class="panel-body"><p>The VIC cipher was never broken cryptanalytically. It was broken by a defector. The ADFGVX was broken partly because operators reused keys. The lesson of this hall: the strongest cipher fails when humans make procedural mistakes.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="transposition.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous Hall</span>
+    <span class="hall-nav-name">Hall IV: Transposition &amp; Fractionation</span>
+  </a>
+  <a href="civil-war.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Special Exhibition →</span>
+    <span class="hall-nav-name">The Civil War Gallery</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/nihilist.html">Nihilist Cipher</a></li>
+        <li><a href="../ciphers/adfgx.html">ADFGX Cipher</a></li>
+        <li><a href="../ciphers/adfgvx.html">ADFGVX Cipher</a></li>
+        <li><a href="../ciphers/bazeries.html">Bazeries Cipher</a></li>
+        <li><a href="../ciphers/vic.html">VIC Cipher</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="transposition.html">← Hall IV</a></li>
+        <li><a href="civil-war.html">Civil War Gallery →</a></li>
+        <li><a href="unbreakable.html">Final Hall →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Hall V of VII</span>
+  </div>
+</footer>
+</body>
+</html>
