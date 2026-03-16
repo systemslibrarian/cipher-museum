@@ -124,28 +124,61 @@
       <svg viewBox="0 0 360 220" style="max-width:360px;width:100%;height:auto" aria-label="Playfair key square construction diagram showing how the keyword MONARCHY fills a 5 by 5 grid">
         <style>.pf-cell{fill:var(--s3,#1c1c22);stroke:#3a3a4a;stroke-width:1}.pf-key{fill:#C9A84C;font-family:'JetBrains Mono',monospace;font-size:14px;text-anchor:middle;dominant-baseline:central}.pf-rest{fill:#EDE5D4;font-family:'JetBrains Mono',monospace;font-size:14px;text-anchor:middle;dominant-baseline:central}.pf-lbl{font-family:var(--fm);font-size:8px;fill:#888}</style>
         <text class="pf-lbl" x="10" y="12">Key: MONARCHY → fill unique letters, then remaining alphabet (I/J share)</text>
-        <script type="text/javascript">
-        (function(){
-          var svg=document.currentScript.closest('svg');
-          var grid='MONARCHYBDEFGIKLPQSTUVWXZ';
-          var keyLen=8;
-          for(var r=0;r<5;r++)for(var c=0;c<5;c++){
-            var i=r*5+c;
-            var x=30+c*62, y=24+r*38;
-            var rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
-            rect.setAttribute('class','pf-cell');
-            rect.setAttribute('x',x);rect.setAttribute('y',y);
-            rect.setAttribute('width','58');rect.setAttribute('height','34');rect.setAttribute('rx','3');
-            if(i<keyLen) rect.setAttribute('style','stroke:#C9A84C;stroke-width:1.5');
-            svg.appendChild(rect);
-            var t=document.createElementNS('http://www.w3.org/2000/svg','text');
-            t.setAttribute('x',x+29);t.setAttribute('y',y+17);
-            t.setAttribute('class',i<keyLen?'pf-key':'pf-rest');
-            t.textContent=grid[i]+(grid[i]==='I'?'/J':'');
-            svg.appendChild(t);
-          }
-        })();
-        </script>
+        <!-- Row 0: M O N A R (keyword letters — gold) -->
+        <rect class="pf-cell" x="30" y="24" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="59" y="41">M</text>
+        <rect class="pf-cell" x="92" y="24" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="121" y="41">O</text>
+        <rect class="pf-cell" x="154" y="24" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="183" y="41">N</text>
+        <rect class="pf-cell" x="216" y="24" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="245" y="41">A</text>
+        <rect class="pf-cell" x="278" y="24" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="307" y="41">R</text>
+        <!-- Row 1: C H Y (keyword) B D (remaining) -->
+        <rect class="pf-cell" x="30" y="62" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="59" y="79">C</text>
+        <rect class="pf-cell" x="92" y="62" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="121" y="79">H</text>
+        <rect class="pf-cell" x="154" y="62" width="58" height="34" rx="3" style="stroke:#C9A84C;stroke-width:1.5"/>
+        <text class="pf-key" x="183" y="79">Y</text>
+        <rect class="pf-cell" x="216" y="62" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="245" y="79">B</text>
+        <rect class="pf-cell" x="278" y="62" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="307" y="79">D</text>
+        <!-- Row 2: E F G I/J K -->
+        <rect class="pf-cell" x="30" y="100" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="59" y="117">E</text>
+        <rect class="pf-cell" x="92" y="100" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="121" y="117">F</text>
+        <rect class="pf-cell" x="154" y="100" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="183" y="117">G</text>
+        <rect class="pf-cell" x="216" y="100" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="245" y="117">I/J</text>
+        <rect class="pf-cell" x="278" y="100" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="307" y="117">K</text>
+        <!-- Row 3: L P Q S T -->
+        <rect class="pf-cell" x="30" y="138" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="59" y="155">L</text>
+        <rect class="pf-cell" x="92" y="138" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="121" y="155">P</text>
+        <rect class="pf-cell" x="154" y="138" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="183" y="155">Q</text>
+        <rect class="pf-cell" x="216" y="138" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="245" y="155">S</text>
+        <rect class="pf-cell" x="278" y="138" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="307" y="155">T</text>
+        <!-- Row 4: U V W X Z -->
+        <rect class="pf-cell" x="30" y="176" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="59" y="193">U</text>
+        <rect class="pf-cell" x="92" y="176" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="121" y="193">V</text>
+        <rect class="pf-cell" x="154" y="176" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="183" y="193">W</text>
+        <rect class="pf-cell" x="216" y="176" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="245" y="193">X</text>
+        <rect class="pf-cell" x="278" y="176" width="58" height="34" rx="3"/>
+        <text class="pf-rest" x="307" y="193">Z</text>
         <text class="pf-lbl" x="180" y="218" text-anchor="middle">Gold = keyword letters · White = remaining alphabet</text>
       </svg>
       <figcaption class="figure-caption">Playfair 5×5 key square built from the keyword "MONARCHY" — keyword letters fill first, then the remaining alphabet</figcaption>

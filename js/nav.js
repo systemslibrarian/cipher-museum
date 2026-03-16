@@ -19,12 +19,8 @@
     ['museum-map.html',   'Museum Map'],
     ['halls/ancient.html','Halls'],
     ['timeline.html',     'Timeline'],
-    ['comparison.html',   'Comparison'],
     ['challenges.html',   'Challenges'],
     ['cryptanalysis.html','Cryptanalysis Lab'],
-    ['cipher-flow.html',  'Cipher Flow'],
-    ['tours/index.html',  'Tours'],
-    ['community/index.html','Community'],
     ['modern.html',       'Modern Crypto'],
     ['glossary.html',     'Glossary']
   ];
@@ -148,9 +144,11 @@
   var count = Object.keys(visited).length;
   if (count === 0 && !match) return; /* Don't show badge until first visit */
 
-  var badge = document.createElement('div');
+  var badge = document.createElement('a');
   badge.className = 'progress-badge';
-  badge.setAttribute('aria-label', 'Exhibits visited: ' + count + ' of ' + TOTAL);
+  badge.href = ((/\/(ciphers|halls|tours|lab|community)\//.test(location.pathname)) ? '../' : '') + 'museum-map.html';
+  badge.setAttribute('aria-label', 'Exhibits visited: ' + count + ' of ' + TOTAL + '. View museum map.');
   badge.textContent = '\uD83C\uDFDB\uFE0F ' + count + ' / ' + TOTAL;
+  badge.title = 'Exhibits visited – click to view map';
   document.body.appendChild(badge);
 })();
