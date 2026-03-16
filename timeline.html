@@ -6,6 +6,7 @@
   <title>Timeline — The Cipher Museum</title>
   <meta name="description" content="Visual history of encryption from 400 BC to the quantum age. Walk through 2,400 years of codes, ciphers, and codebreakers.">
   <link rel="stylesheet" href="css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <style>
     .timeline{position:relative;max-width:900px;margin:0 auto;padding:2rem 0}
     .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold-dim),var(--gold),var(--gold-dim));transform:translateX(-50%)}
@@ -93,6 +94,17 @@
   </div>
 
   <div class="timeline" role="list" aria-label="Cryptography timeline">
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-ancient"></span>
+      <div class="tl-card">
+        <span class="tl-date">~500 BC</span>
+        <h3 class="tl-title">Scytale</h3>
+        <span class="tl-loc">🇬🇷 Sparta</span>
+        <p class="tl-desc">Spartan generals wrap a strip of leather around a wooden rod of a specific diameter to reveal or conceal a message. It is history's first known transposition cipher — the letters are unchanged, only their order is rearranged.</p>
+        <a href="ciphers/scytale.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
 
     <div class="tl-event" role="listitem">
       <span class="tl-dot era-dot-ancient"></span>
@@ -238,6 +250,17 @@
     <div class="tl-event" role="listitem">
       <span class="tl-dot era-dot-wwii"></span>
       <div class="tl-card">
+        <span class="tl-date">1942–1945</span>
+        <h3 class="tl-title">Navajo Code Talkers</h3>
+        <span class="tl-loc">🇺🇸 Pacific Theater</span>
+        <p class="tl-desc">420 Navajo Marines transmit battlefield orders in a language no adversary can decode. Their code, based on the Navajo language with military-specific vocabulary layered on top, is the only widely-used military cipher that was never broken.</p>
+        <a href="ciphers/navajo-code-talkers.html" class="tl-link">View exhibit →</a>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-wwii"></span>
+      <div class="tl-card">
         <span class="tl-date">1945</span>
         <h3 class="tl-title">Shannon's Secrecy Theory</h3>
         <span class="tl-loc">🇺🇸 United States</span>
@@ -292,6 +315,17 @@
         <h3 class="tl-title">Snowden Revelations</h3>
         <span class="tl-loc">🌍 Global</span>
         <p class="tl-desc">Edward Snowden's disclosures reveal the scale of government surveillance. The revelations accelerate global adoption of end-to-end encryption — HTTPS becomes the default, messaging apps adopt Signal Protocol, and encryption moves from specialist tool to human right.</p>
+      </div>
+    </div>
+
+    <div class="tl-event" role="listitem">
+      <span class="tl-dot era-dot-modern"></span>
+      <div class="tl-card">
+        <span class="tl-date">1969 / Solved 2020</span>
+        <h3 class="tl-title">Zodiac Z-340 Cipher</h3>
+        <span class="tl-loc">🇺🇸 San Francisco</span>
+        <p class="tl-desc">The Zodiac Killer mails a 340-character cipher to the San Francisco Chronicle. It resists all attacks for 51 years until David Oranchak, Sam Blake, and Jarl Van Eycke crack it during COVID lockdown — revealing a homophonic substitution hidden behind a diagonal transposition.</p>
+        <a href="ciphers/zodiac.html" class="tl-link">View exhibit →</a>
       </div>
     </div>
 

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Final Hall: The Unbreakable &amp; the Modern — The Cipher Museum</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../css/museum.css">
 </head>
 <body>
@@ -95,6 +96,27 @@
         <div class="card-badges">
           <span class="badge sec-broken">Broken</span>
           <span class="badge era-wwii">Bletchley Park</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/vernam.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 34</span>
+        <span class="badge era-19c">1917 · AT&amp;T</span>
+      </div>
+      <div class="card-name">Vernam Cipher</div>
+      <p class="card-desc">Gilbert Vernam's teleprinter cipher XORed each plaintext character with a key character from a paper tape. When the key tape is truly random and never reused, the Vernam cipher becomes the one-time pad — the only cipher with mathematically proven perfect secrecy.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">Plain:  </span><span style="color:var(--tx);">H (01000)</span><br>
+        <span style="color:var(--tx3);">Key:    </span><span style="color:var(--gold);">Q (10111)</span><br>
+        <span style="color:var(--tx3);">XOR:    </span><span style="color:var(--gold-lt);">Y (11111)</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-weak">Key-Dependent</span>
+          <span class="badge era-19c">XOR Foundation</span>
         </div>
         <span class="card-arrow">→</span>
       </div>
@@ -227,6 +249,7 @@
       <ul class="footer-links">
         <li><a href="../ciphers/one-time-pad.html">One-Time Pad</a></li>
         <li><a href="../ciphers/enigma.html">Enigma Machine</a></li>
+        <li><a href="../ciphers/vernam.html">Vernam Cipher</a></li>
       </ul>
     </div>
     <div>

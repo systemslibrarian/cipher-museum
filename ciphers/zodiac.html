@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zodiac Cipher — The Cipher Museum</title>
+  <meta name="description" content="Explore the Zodiac Cipher — 340 characters, 51 years unsolved, broken in 2020 by a three-person team using computational cryptanalysis. Part of The Cipher Museum.">
+  <meta name="keywords" content="zodiac cipher, Z-340, cryptography, classical cipher, cipher museum, encryption history, homophonic substitution">
+  <link rel="stylesheet" href="../css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <style>
+    .difficulty-wrap { display:flex; flex-direction:column; gap:.6rem; }
+    .difficulty-bar { height:8px; background:var(--s4); border-radius:4px; overflow:hidden; }
+    .difficulty-fill { height:100%; border-radius:4px; background:linear-gradient(90deg, var(--gold), var(--orange)); transition:width .6s ease; }
+    .difficulty-label-row { display:flex; justify-content:space-between; font-family:var(--fm); font-size:.65rem; }
+    .difficulty-rating { color:var(--gold); letter-spacing:.1em; text-transform:uppercase; }
+    .difficulty-pct { color:var(--tx3); }
+    .difficulty-note { font-size:.88rem; color:var(--tx2); line-height:1.6; }
+  </style>
+</head>
+<body>
+
+<nav class="museum-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8"  stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2"  fill="currentColor"/>
+        <line x1="16" y1="2"  x2="16" y2="6"  stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2"  y1="16" x2="6"  y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="../modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero" data-exhibit="36" data-cipher="zodiac" data-hall="puzzle">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../halls/puzzle.html">Hall VII: Puzzle &amp; Novelty Ciphers</a><span>›</span>
+    Zodiac Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 36 of 37</span>
+    <span class="badge era-coldwar">1969 · Solved 2020</span>
+    <span class="badge sec-broken">Solved 2020</span>
+  </div>
+  <h1 class="page-title">Zodiac Cipher</h1>
+  <p class="page-tagline">340 characters. 51 years unsolved. Cracked during a pandemic lockdown.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Author</span><span class="fact-value">The Zodiac Killer (unidentified)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1969 (solved 2020)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Homophonic substitution + diagonal transposition</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Oranchak, Blake &amp; Van Eycke (2020)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Layered ciphers · n-gram scoring</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>
+        <span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Between 1968 and 1969, an unidentified serial killer called the Zodiac sent four encrypted messages to San Francisco Bay Area newspapers, taunting police and demanding publication. The killer claimed the ciphers contained his identity.</p>
+        <p style="margin-top:1rem;">The first cipher, Z-408 (408 characters), was solved in 1969 by schoolteachers Donald and Bettye Harden. It contained no name. The second cipher, Z-340 (340 characters), defied cryptanalysts, amateur solvers, and FBI investigators for 51 years.</p>
+        <p style="margin-top:1rem;">On December 5, 2020, David Oranchak, mathematician Sam Blake, and software developer Jarl Van Eycke announced the solution. They had worked remotely during the COVID-19 pandemic lockdown.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>
+        <span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>The Z-340 uses a layered cipher combining homophonic substitution with diagonal transposition — the key insight that eluded solvers for half a century.</p>
+        <pre style="background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:1.25rem;font-family:var(--fm);font-size:.8rem;color:var(--tx2);line-height:1.8;overflow-x:auto;margin-top:1rem;">
+Cipher type: Homophonic substitution + diagonal transposition
+
+Step 1: The Z-340 uses a homophonic alphabet —
+        common letters map to multiple symbols
+        to flatten frequency patterns
+
+Step 2: A diagonal transposition is applied
+        BEFORE encryption — the text reads
+        diagonally rather than left-to-right
+
+Z-340 fragment (actual ciphertext):
+HER>pl^VPk|1LTG2d
+Kp-IlO+Pq4k5RZN<
+
+The diagonal transposition is why the cipher
+resisted 51 years of analysis — solvers were
+looking for patterns in the wrong reading order</pre>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span>
+        <span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Computational Search + N-gram Scoring (2020)</div>
+          <div class="attack-diff">Complexity: Very Hard · Oranchak, Blake &amp; Van Eycke</div>
+          <p class="attack-desc">Oranchak had suspected a transposition component since 2012. Working with Blake (who wrote the statistical scoring software) and Van Eycke (who built the AZdecrypt cipher-solving tool), the team identified the specific diagonal reading pattern through computational search. Once the transposition was identified, the homophonic substitution fell to standard techniques.</p>
+        </div>
+        <div class="callout callout-info" style="margin-top:1rem;">
+          <span class="callout-icon">📝</span>
+          <div class="callout-body">
+            <p>The decoded message begins: <em>"I hope you are having lots of fun in trying to catch me. I am not afraid of the gas chamber because it will send me to paradise all the sooner because I now have enough slaves to work for me..."</em></p>
+            <p style="margin-top:.5rem;">The Zodiac's identity was not revealed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span>
+        <span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Zodiac Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Homophonic substitution (multiple symbols per letter)</td><td>Padding schemes: modern encryption adds randomness to prevent identical plaintexts producing identical ciphertexts</td></tr>
+            <tr><td>Layered cipher (transposition + substitution)</td><td>AES rounds: multiple operations per round make individual layers meaningless to attack</td></tr>
+            <tr><td>51 years + short ciphertext = hard</td><td>Ciphertext length matters: more data = more statistical signal for an attacker</td></tr>
+            <tr><td>Solved by n-gram scoring + computation</td><td>Modern cryptanalysis: hill climbing with n-gram fitness functions breaks most classical ciphers</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span>
+        <span class="panel-title" style="color:var(--gold);">Can You Break This?</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;margin-bottom:1rem;">A short cipher message. Use what you just learned.</p>
+        <div style="font-family:var(--fm);font-size:.95rem;background:var(--s3);border-radius:var(--r);padding:1.25rem;letter-spacing:.15em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">XLI UYMGO FVSAR JSB</div>
+        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Hint: Not the Zodiac's cipher — this one is simpler. What shift makes the most common letter = E?</p>
+        <button class="btn btn-secondary" style="width:100%;font-size:.72rem;" onclick="this.nextElementSibling.style.display='block';this.style.display='none';">Reveal Answer</button>
+        <div style="display:none;font-family:var(--fm);font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;background:var(--s3);border-radius:var(--r);padding:1rem;line-height:1.8;">Shift = 4 · Plaintext: THE QUICK BROWN FOX</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-icon">⚡</span>
+        <span class="panel-title">Difficulty to Break</span>
+      </div>
+      <div class="panel-body">
+        <div class="difficulty-wrap">
+          <div class="difficulty-bar">
+            <div class="difficulty-fill" style="width:85%"></div>
+          </div>
+          <div class="difficulty-label-row">
+            <span class="difficulty-rating">Very Hard</span>
+            <span class="difficulty-pct">85%</span>
+          </div>
+          <p class="difficulty-note">51 years, short ciphertext, unusual transposition.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">📋</span>
+        <span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>36 of 37</td></tr>
+            <tr><td>Era</td><td>1969 · Solved 2020</td></tr>
+            <tr><td>Security</td><td>Solved 2020</td></tr>
+            <tr><td>Author</td><td>Zodiac Killer (unidentified)</td></tr>
+            <tr><td>Year</td><td>1969</td></tr>
+            <tr><td>Broken By</td><td>Oranchak, Blake &amp; Van Eycke</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/tap-code.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous</span>
+    <span class="hall-nav-name">Tap Code</span>
+  </a>
+  <a href="../index.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next →</span>
+    <span class="hall-nav-name">Museum Entrance</span>
+  </a>
+</div>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Hall VII: Puzzle &amp; Novelty Ciphers</div>
+      <ul class="footer-links">
+        <li><a href="../halls/puzzle.html">← Back to Hall</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Exhibit 36 of 37</span>
+  </div>
+</footer>
+
+</body>
+</html>

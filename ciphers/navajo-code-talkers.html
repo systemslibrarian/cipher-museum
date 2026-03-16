@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navajo Code Talkers — The Cipher Museum</title>
+  <meta name="description" content="The Navajo Code — a natural language used as an unbreakable battlefield code by 420 Marine Code Talkers in WWII. Never compromised in wartime. Declassified 1968.">
+  <meta name="keywords" content="navajo code talkers, cryptography, WWII, cipher museum, encryption history, unbreakable code">
+  <link rel="stylesheet" href="../css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <style>
+    .difficulty-wrap { display:flex; flex-direction:column; gap:.6rem; }
+    .difficulty-bar { height:8px; background:var(--s4); border-radius:4px; overflow:hidden; }
+    .difficulty-fill { height:100%; border-radius:4px; background:linear-gradient(90deg, var(--gold), var(--orange)); transition:width .6s ease; }
+    .difficulty-label-row { display:flex; justify-content:space-between; font-family:var(--fm); font-size:.65rem; }
+    .difficulty-rating { color:var(--gold); letter-spacing:.1em; text-transform:uppercase; }
+    .difficulty-pct { color:var(--tx3); }
+    .difficulty-note { font-size:.88rem; color:var(--tx2); line-height:1.6; }
+  </style>
+</head>
+<body>
+
+<nav class="museum-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8"  stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2"  fill="currentColor"/>
+        <line x1="16" y1="2"  x2="16" y2="6"  stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2"  y1="16" x2="6"  y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="../modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero" data-exhibit="35" data-cipher="navajo-code-talkers" data-hall="machines">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../halls/machines.html">Hall VI: Mechanical Cipher Machines</a><span>›</span>
+    Navajo Code Talkers
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 35 of 37</span>
+    <span class="badge era-wwii">WWII · 1942–1945</span>
+    <span class="badge sec-secure">Never Broken</span>
+  </div>
+  <h1 class="page-title">Navajo Code Talkers</h1>
+  <p class="page-tagline">Not a cipher — a language. 420 Navajo Marines. Never compromised in wartime.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">People</span><span class="fact-value">420 Navajo Marines, USMC</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1942–1945</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Natural language (Navajo)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Never broken</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Security through complexity · pre-shared keys</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>
+        <span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>This exhibit honors the 420 Navajo Marines who served as Code Talkers during World War II. Their service, classified for 23 years after the war ended, saved countless lives across the Pacific Theater. This is not just a cryptography story — it is a story about people and sacrifice.</p>
+        <p style="margin-top:1rem;">Philip Johnston, a civil engineer and son of a missionary who had grown up on the Navajo reservation, proposed using the Navajo language as a battlefield code to the US Marine Corps in 1942. The Marines were skeptical but tested it: messages that took hours to encode and decode mechanically were transmitted in 20 seconds.</p>
+        <p style="margin-top:1rem;">The 1st Marine Division deployed the first 29 Navajo Code Talkers at Guadalcanal. By the end of WWII, 420 Navajo Marines had served as Code Talkers across the Pacific. Major Howard Connor, 5th Marine Division signal officer at Iwo Jima, said: <em>"Were it not for the Navajos, the Marines would never have taken Iwo Jima."</em></p>
+        <p style="margin-top:1rem;">The program was classified until 1968. The Code Talkers received the Congressional Gold Medal in 2001.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>
+        <span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>Military terms were assigned Navajo words by meaning — creating a codebook that existed only in the memories of the Code Talkers themselves:</p>
+        <pre style="background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:1.25rem;font-family:var(--fm);font-size:.8rem;color:var(--tx2);line-height:1.8;overflow-x:auto;margin-top:1rem;">
+Military terms → Navajo words by meaning:
+
+Fighter plane   = da-he-tih-hi    "hummingbird"
+Bomber          = jay-sho         "buzzard"
+Submarine       = besh-lo         "iron fish"
+Destroyer       = ca-lo           "shark"
+Battleship      = lo-tso          "whale"
+General         = bih-keh-he      "war chief"
+Colonel         = atsah-besh-le-gai "silver eagle"
+America         = ne-he-mah       "our mother"</pre>
+        <p style="margin-top:1rem;">For words without Navajo equivalents, a phonetic alphabet was used:</p>
+        <pre style="background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:1.25rem;font-family:var(--fm);font-size:.8rem;color:var(--tx2);line-height:1.8;overflow-x:auto;margin-top:1rem;">
+Phonetic alphabet:
+A = wol-la-chee (ant)
+B = shush (bear)
+C = moasi (cat)
+K = klizzie (goat)
+T = tha-ah (turkey)
+
+"ATTACK" = wol-la-chee, tha-ah, tha-ah,
+           wol-la-chee, moasi, klizzie</pre>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🛡️</span>
+        <span class="panel-title">Why It Was Never Broken</span></div>
+      <div class="panel-body">
+        <div class="callout callout-success">
+          <span class="callout-icon">🛡️</span>
+          <div class="callout-body">
+            <p><strong>It wasn't.</strong> No Navajo Code transmission was ever decrypted by Japanese forces during WWII. The code was rendered obsolete not by cryptanalysis but by the end of the war. It was declassified in 1968 — 23 years after the last transmission.</p>
+          </div>
+        </div>
+        <p style="margin-top:1rem;">The code's security rested on multiple layers of impenetrability:</p>
+        <ul class="steps" style="margin-top:.75rem;">
+          <li class="step"><div class="step-text">Navajo was an unwritten language in 1942 — no published grammar, no dictionary, no Rosetta Stone</div></li>
+          <li class="step"><div class="step-text">Fewer than 30 non-Navajo people in the world spoke it</div></li>
+          <li class="step"><div class="step-text">Tone and syntax have no relationship to European or Asian languages</div></li>
+          <li class="step"><div class="step-text">Japanese linguists who intercepted transmissions described it as "a strange language that is neither Japanese nor English"</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span>
+        <span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Navajo Code</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Security through linguistic complexity</td><td>Security through mathematical complexity — AES relies on unsolved mathematical problems</td></tr>
+            <tr><td>Shared knowledge as the key</td><td>Pre-shared keys (PSK): both parties must possess the same secret before communication</td></tr>
+            <tr><td>Unwritable key (living language)</td><td>Out-of-band key exchange: some secrets must be established through a channel the attacker cannot observe</td></tr>
+            <tr><td>Never broken — exposed by declassification</td><td>Cryptographic systems are eventually declassified, not broken — forward secrecy ensures past traffic stays safe</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span>
+        <span class="panel-title" style="color:var(--gold);">Can You Break This?</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;margin-bottom:1rem;">A short Navajo Code message. Use what you just learned.</p>
+        <div style="font-family:var(--fm);font-size:.95rem;background:var(--s3);border-radius:var(--r);padding:1.25rem;letter-spacing:.15em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">wol-la-chee  tha-ah  tha-ah  wol-la-chee  moasi  klizzie</div>
+        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Hint: Each Navajo word = one letter. A=ant, T=turkey, C=cat, K=goat</p>
+        <button class="btn btn-secondary" style="width:100%;font-size:.72rem;" onclick="this.nextElementSibling.style.display='block';this.style.display='none';">Reveal Answer</button>
+        <div style="display:none;font-family:var(--fm);font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;background:var(--s3);border-radius:var(--r);padding:1rem;line-height:1.8;">A T T A C K</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-icon">⚡</span>
+        <span class="panel-title">Difficulty to Break</span>
+      </div>
+      <div class="panel-body">
+        <div class="difficulty-wrap">
+          <div class="difficulty-bar">
+            <div class="difficulty-fill" style="width:95%"></div>
+          </div>
+          <div class="difficulty-label-row">
+            <span class="difficulty-rating">Near-Impossible</span>
+            <span class="difficulty-pct">95%</span>
+          </div>
+          <p class="difficulty-note">Never broken — no Rosetta Stone, no attack surface.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">📋</span>
+        <span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>35 of 37</td></tr>
+            <tr><td>Era</td><td>WWII · 1942–1945</td></tr>
+            <tr><td>Security</td><td>Never Broken</td></tr>
+            <tr><td>People</td><td>420 Navajo Marines</td></tr>
+            <tr><td>Year</td><td>1942–1945</td></tr>
+            <tr><td>Broken By</td><td>Never</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/lorenz.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous</span>
+    <span class="hall-nav-name">Lorenz Cipher</span>
+  </a>
+  <a href="../ciphers/jefferson-disk.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next →</span>
+    <span class="hall-nav-name">Jefferson Disk</span>
+  </a>
+</div>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Hall VI: Mechanical Cipher Machines</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">← Back to Hall</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Exhibit 35 of 37</span>
+  </div>
+</footer>
+
+</body>
+</html>

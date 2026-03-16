@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scytale — The Cipher Museum</title>
+  <meta name="description" content="Explore the Scytale — the oldest known military cipher device, used by Spartan generals around 500 BC. Leather strip, wooden rod, and the birth of transposition encryption.">
+  <meta name="keywords" content="scytale, cryptography, classical cipher, cipher museum, encryption history, Sparta, transposition">
+  <link rel="stylesheet" href="../css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <style>
+    .difficulty-wrap { display:flex; flex-direction:column; gap:.6rem; }
+    .difficulty-bar { height:8px; background:var(--s4); border-radius:4px; overflow:hidden; }
+    .difficulty-fill { height:100%; border-radius:4px; background:linear-gradient(90deg, var(--gold), var(--orange)); transition:width .6s ease; }
+    .difficulty-label-row { display:flex; justify-content:space-between; font-family:var(--fm); font-size:.65rem; }
+    .difficulty-rating { color:var(--gold); letter-spacing:.1em; text-transform:uppercase; }
+    .difficulty-pct { color:var(--tx3); }
+    .difficulty-note { font-size:.88rem; color:var(--tx2); line-height:1.6; }
+  </style>
+</head>
+<body>
+
+<nav class="museum-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8"  stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2"  fill="currentColor"/>
+        <line x1="16" y1="2"  x2="16" y2="6"  stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2"  y1="16" x2="6"  y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="../modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero" data-exhibit="00" data-cipher="scytale" data-hall="ancient">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../halls/ancient.html">Hall I: Birth of Cryptography</a><span>›</span>
+    Scytale
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 00 of 37</span>
+    <span class="badge era-ancient">Sparta · ~500 BC</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Scytale</h1>
+  <p class="page-tagline">A leather strip, a wooden rod, and the birth of military cryptography</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Sparta, Ancient Greece</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~500 BC</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Rod diameter (physical key)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Brute force — try different rod diameters</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Transposition &amp; key space</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>
+        <span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>The Scytale is the oldest documented military cipher device, used by Spartan generals and ephors to send secret orders to field commanders. Thucydides and Plutarch both describe it. The recipient needed an identical rod — the first example of a shared physical key.</p>
+        <p style="margin-top:1rem;">Spartan ephors (civilian magistrates) used the scytale to communicate secretly with generals in the field. The system ensured that if a messenger was captured — or defected — the message would appear as nothing more than a meaningless strip of leather with scrambled letters.</p>
+        <p style="margin-top:1rem;">The scytale represents the birth of transposition cryptography — the idea that you can hide a message not by changing its letters, but by rearranging their order. This concept survived 2,500 years and is visible today in AES ShiftRows.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>
+        <span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>A leather strip (skytale) is wound tightly around a wooden rod. The message is written along the length of the rod. When the strip is unwound, the letters are scrambled. Only a rod of the same diameter decrypts it.</p>
+        <p style="margin-top:1rem;"><strong>Key = rod diameter</strong></p>
+        <pre style="background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:1.25rem;font-family:var(--fm);font-size:.8rem;color:var(--tx2);line-height:1.8;overflow-x:auto;margin-top:1rem;">
+Example (3-row rod, message ATTACKATDAWN):
+
+Wound on rod:
+Row 1: A . . T . . A . . W .
+Row 2: . T . . A . . A . . N
+Row 3: . . T . . C . . K . .
+
+Read across rows: A T A W T A A N T C K
+(transposition rearranges letter positions)
+
+Unwound strip reads: ATATWAANTCK...
+Only wrapping on a rod of the same diameter
+restores the original reading order.</pre>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span>
+        <span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Brute Force — Try Different Rod Diameters</div>
+          <div class="attack-diff">Complexity: Trivial · By any interceptor with a set of rods</div>
+          <p class="attack-desc">The key space is the number of practical rod diameters, which is very small. An interceptor with a set of rods of varying widths could try each one and quickly identify the readable output. This is arguably the first documented example of a brute force attack — and a lesson that a small key space provides no real security.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span>
+        <span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Scytale</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Physical key (rod diameter)</td><td>Cryptographic key: a specific parameter shared by sender and receiver</td></tr>
+            <tr><td>Transposition (rearrange, not replace)</td><td>AES ShiftRows: cyclic row shifts for diffusion</td></tr>
+            <tr><td>Brute force possible (small key space)</td><td>AES-256: 2²⁵⁶ possible keys — exhaustive search infeasible</td></tr>
+            <tr><td>Physical device = key distribution problem</td><td>Public-key cryptography: Diffie-Hellman solves key distribution mathematically</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span>
+        <span class="panel-title" style="color:var(--gold);">Can You Break This?</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;margin-bottom:1rem;">A short Scytale message. Use what you just learned.</p>
+        <div style="font-family:var(--fm);font-size:.95rem;background:var(--s3);border-radius:var(--r);padding:1.25rem;letter-spacing:.15em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">ATACWHADKTNA</div>
+        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Hint: 3-row rod. Read diagonally.</p>
+        <button class="btn btn-secondary" style="width:100%;font-size:.72rem;" onclick="this.nextElementSibling.style.display='block';this.style.display='none';">Reveal Answer</button>
+        <div style="display:none;font-family:var(--fm);font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;background:var(--s3);border-radius:var(--r);padding:1rem;line-height:1.8;">Rod width = 3 · Plaintext: ATTACKATDAWN</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-icon">⚡</span>
+        <span class="panel-title">Difficulty to Break</span>
+      </div>
+      <div class="panel-body">
+        <div class="difficulty-wrap">
+          <div class="difficulty-bar">
+            <div class="difficulty-fill" style="width:5%"></div>
+          </div>
+          <div class="difficulty-label-row">
+            <span class="difficulty-rating">Trivial</span>
+            <span class="difficulty-pct">5%</span>
+          </div>
+          <p class="difficulty-note">Try different rod diameters — seconds by hand.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">📋</span>
+        <span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>00 of 37</td></tr>
+            <tr><td>Era</td><td>Sparta · ~500 BC</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Origin</td><td>Spartan military</td></tr>
+            <tr><td>Year</td><td>~500 BC</td></tr>
+            <tr><td>Broken By</td><td>Brute force</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="../halls/ancient.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous</span>
+    <span class="hall-nav-name">Hall I: Birth of Cryptography</span>
+  </a>
+  <a href="../ciphers/caesar.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next →</span>
+    <span class="hall-nav-name">Caesar Cipher</span>
+  </a>
+</div>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Hall I: Birth of Cryptography</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">← Back to Hall</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Exhibit 00 of 37</span>
+  </div>
+</footer>
+
+</body>
+</html>
