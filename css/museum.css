@@ -261,7 +261,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .d1{animation-delay:80ms;opacity:0}.d2{animation-delay:160ms;opacity:0}.d3{animation-delay:240ms;opacity:0}.d4{animation-delay:320ms;opacity:0}
 /* FLOOR PLAN */
 .fp-marker:hover{background:var(--gold-glow);color:var(--gold-lt);box-shadow:0 0 6px rgba(201,168,76,.25)}
-@media(max-width:768px){.fp-grid{grid-template-columns:1fr !important}.fp-hall{border-right:none !important}}
+@media(max-width:768px){.fp-grid{grid-template-columns:1fr}.fp-hall{border-right:none}.fp-hall--left{border-right:none}}
 /* HERO CTA GROUP */
 .hero-content .hero-cta+.hero-cta{margin-top:0}
 @media(max-width:600px){.hero-content{display:flex;flex-direction:column;align-items:center}.hero-content .hero-cta{margin-left:0 !important;margin-top:.75rem;width:100%;justify-content:center}.featured-grid{grid-template-columns:1fr !important}#museum-map .panel{min-width:0}#museum-map div[style*="grid-template-columns"]{grid-template-columns:1fr !important}}
@@ -301,3 +301,71 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 /* Progress badge */
 .progress-badge{position:fixed;bottom:1.25rem;right:1.25rem;background:var(--s2);color:var(--gold-dim);font-family:var(--fm);font-size:.7rem;letter-spacing:.08em;padding:.45rem .9rem;border:1px solid var(--gold-b);border-radius:var(--r-sm);z-index:900;opacity:.85;transition:opacity .2s;cursor:default}
 .progress-badge:hover{opacity:1}
+
+/* ─── Museum Map Grid (Gap 1) ─── */
+.map-layout{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
+.map-sidebar{position:sticky;top:78px}
+.map-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:900px;margin:0 auto}
+.map-grid-card{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:.6rem;transition:all var(--trs);position:relative;overflow:hidden}
+.map-grid-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);opacity:0;transition:opacity var(--trs)}
+.map-grid-card:hover{border-color:var(--gold-b);background:var(--s3);transform:translateY(-3px);box-shadow:var(--sh)}
+.map-grid-card:hover::before{opacity:1}
+.map-grid-card--entrance{grid-column:1/-1;text-align:center;background:var(--s2);border-color:var(--gold-b);box-shadow:inset 0 0 20px rgba(201,168,76,.06)}
+.map-grid-card--special{border-color:var(--purple-b)}
+.map-grid-card--special .map-grid-num{border-color:var(--purple-b);color:var(--purple);background:var(--purple-d)}
+.map-grid-card--final{border-color:var(--gold-b)}
+.map-grid-card--lab{border-color:rgba(90,200,160,.25)}
+.map-grid-card--lab .map-grid-num{border-color:rgba(90,200,160,.35);color:var(--green);background:rgba(90,200,160,.08)}
+.map-grid-num{width:40px;height:40px;border:1px solid var(--gold-b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.85rem;color:var(--gold);flex-shrink:0;background:var(--gold-glow)}
+.map-grid-name{font-family:var(--fd);font-size:1.05rem;color:var(--tx);letter-spacing:.04em}
+.map-grid-era{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--tx3)}
+.map-grid-count{font-family:var(--fm);font-size:.62rem;color:var(--gold-dim);margin-top:auto}
+.map-flow-arrow{grid-column:1/-1;text-align:center;color:var(--gold-dim);font-size:1.2rem;line-height:1;opacity:.5}
+@media(max-width:900px){.map-layout{grid-template-columns:1fr;gap:2rem}.map-sidebar{position:static}}
+@media(max-width:768px){.map-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.map-grid{grid-template-columns:1fr}}
+
+/* ─── Museum Map Floor Plan (extracted inline styles — Gap 4) ─── */
+.fp-entrance{background:var(--s2);border:2px solid var(--gold-b);border-radius:var(--rl) var(--rl) 0 0;padding:1.5rem;text-align:center;margin-bottom:0;box-shadow:inset 0 0 20px rgba(201,168,76,.08);position:relative}
+.fp-entrance-badge{position:absolute;top:.6rem;left:1rem;font-family:var(--fm);font-size:.55rem;letter-spacing:.15em;color:var(--gold);background:var(--s1);padding:.2rem .6rem;border:1px solid var(--gold-b);border-radius:var(--r-sm)}
+.fp-entrance-title{font-family:var(--fd);font-size:1.4rem;color:var(--gold);letter-spacing:.12em;margin-top:.5rem}
+.fp-entrance-sub{font-family:var(--fm);font-size:.65rem;color:var(--tx3);letter-spacing:.2em;margin-top:.4rem}
+.fp-entrance-arrow{display:block;margin:.75rem auto 0;opacity:.4}
+.fp-entrance-enter{font-family:var(--fm);font-size:.5rem;letter-spacing:.2em;color:var(--tx3);margin-top:.15rem}
+.fp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--gold-b);border-top:none;border-radius:0 0 var(--rl) var(--rl);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 0 30px rgba(26,18,8,.12)}
+.fp-hall{padding:1.5rem;background:var(--s1);position:relative;border-bottom:2px solid var(--s4)}
+.fp-hall--left{border-right:2px solid var(--s4)}
+.fp-hall-label{font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem}
+.fp-hall-sub{font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem}
+.fp-hall-list{display:flex;flex-direction:column;gap:.5rem}
+.fp-marker{display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;border-radius:var(--r);text-decoration:none;color:var(--tx2);transition:all .2s;min-height:44px}
+.fp-marker-dot{color:var(--gold);font-size:.7rem}
+.fp-compass{display:flex;justify-content:space-between;align-items:center;margin-top:.75rem}
+.fp-compass-svg{opacity:.3}
+.fp-floor-plan{max-width:900px;margin:0 auto}
+.fp-corner{position:absolute;width:18px;height:18px;opacity:.25}
+.fp-corner--tr{top:0;right:0;border-bottom:1px solid var(--gold-b);border-left:1px solid var(--gold-b)}
+.fp-corner--tl{top:0;left:0;border-bottom:1px solid var(--gold-b);border-right:1px solid var(--gold-b)}
+.fp-corner--br{bottom:0;right:0;border-top:1px solid var(--gold-b);border-left:1px solid var(--gold-b)}
+.fp-corner--bl{bottom:0;left:0;border-top:1px solid var(--gold-b);border-right:1px solid var(--gold-b)}
+.fp-door{position:absolute;top:50%;left:0;width:8px;height:24px;margin-top:-12px;background:var(--s1);border-right:1px solid var(--gold-b);border-top:1px solid var(--gold-b);border-bottom:1px solid var(--gold-b);border-radius:0 var(--r-sm) var(--r-sm) 0}
+.fp-door--bottom{position:absolute;top:auto;bottom:0;left:50%;margin-top:0;margin-left:-12px;width:24px;height:8px;border:1px solid var(--gold-b);border-bottom:none;border-radius:var(--r-sm) var(--r-sm) 0 0}
+.fp-legend{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;opacity:.45;font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--tx3)}
+.fp-legend span{display:flex;align-items:center;gap:.4rem}
+.fp-hall{transition:background .3s}
+.fp-hall:hover{background:var(--s2)}
+
+/* ─── Related Exhibits (Gap 2) ─── */
+.related-exhibits{max-width:1200px;margin:0 auto;padding:2rem 2rem 3rem;border-top:1px solid var(--s4)}
+.related-exhibits__heading{font-family:var(--fd);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:1.25rem;text-align:center}
+.related-exhibits__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.related-card{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:1.25rem;text-decoration:none;display:flex;flex-direction:column;gap:.4rem;transition:all var(--trs)}
+.related-card:hover{border-color:var(--gold-b);background:var(--s3);transform:translateY(-2px);box-shadow:var(--sh)}
+.related-card__number{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;color:var(--tx3)}
+.related-card__name{font-family:var(--fd);font-size:1.05rem;color:var(--gold);letter-spacing:.04em}
+.related-card__tag{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;margin-top:.25rem}
+
+/* ─── Figure / Diagram Captions (Gap 3) ─── */
+.figure{background:var(--s3);border-radius:var(--r);padding:1.5rem;overflow-x:auto;text-align:center;margin-top:1.5rem}
+.figure svg,.figure canvas,.figure img{max-width:100%}
+.figure-caption{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;color:var(--tx3);text-align:center;margin-top:1rem;font-style:italic}

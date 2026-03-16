@@ -87,7 +87,7 @@
                         = [234, 111] mod 26
                         = [0, 7]
                         = AG</pre>
-      <div class="diagram-wrap" style="margin-top:1.5rem;">
+      <figure class="figure">
         <svg viewBox="0 0 440 140" style="max-width:440px;width:100%;height:auto;" aria-label="Hill cipher matrix multiplication diagram">
           <style>
             .hi-mat{font-family:var(--fd,'Cinzel',serif);font-size:16px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central}
@@ -130,8 +130,8 @@
           <text class="hi-mat hi-res" x="365" y="88" style="font-size:20px">G</text>
           <text class="hi-lbl" x="365" y="120" style="font-size:10px">Cipher</text>
         </svg>
-        <p class="diagram-caption">Hill cipher: plaintext vector multiplied by key matrix mod 26 — HI becomes AG</p>
-      </div><p style='margin-top:1rem;'>Decryption uses the matrix inverse: P = K⁻¹ × C mod 26. Not all matrices have inverses mod 26 — the key matrix must be chosen carefully.</p></div>
+        <figcaption class="figure-caption">Hill cipher: plaintext vector multiplied by key matrix mod 26 — HI becomes AG</figcaption>
+      </figure><p style='margin-top:1rem;'>Decryption uses the matrix inverse: P = K⁻¹ × C mod 26. Not all matrices have inverses mod 26 — the key matrix must be chosen carefully.</p></div>
     </div>
 
     <div class="panel">
@@ -174,6 +174,28 @@
     </div>
   </div>
 </div>
+
+<!-- Related Exhibits -->
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/playfair.html" class="related-card">
+      <span class="related-card__number">Exhibit 05</span>
+      <span class="related-card__name">Playfair Cipher</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/bifid.html" class="related-card">
+      <span class="related-card__number">Exhibit 15</span>
+      <span class="related-card__name">Bifid Cipher</span>
+      <span class="related-card__tag">Matrix Method</span>
+    </a>
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Exhibit 27</span>
+      <span class="related-card__name">Enigma Machine</span>
+      <span class="related-card__tag">Mathematical</span>
+    </a>
+  </div>
+</section>
 
 <div class="hall-nav">
   <a href="../ciphers/playfair.html" class="hall-nav-link">

@@ -84,7 +84,7 @@
 Cipher: QWERTYUIOPASDFGHJKLZXCVBNM
 
 HELLO → ITSSG</pre>
-      <div class="diagram-wrap" style="margin-top:1.5rem;">
+      <figure class="figure">
         <svg viewBox="0 0 480 170" style="max-width:480px;width:100%;height:auto;" aria-label="Monoalphabetic substitution mapping diagram">
           <style>
             .ma-letter{font-family:'JetBrains Mono',var(--fc,monospace);font-size:12px;text-anchor:middle;dominant-baseline:central}
@@ -156,8 +156,8 @@ HELLO → ITSSG</pre>
           <!-- HELLO example -->
           <text style="font-family:var(--fm);font-size:10px;fill:#d4af37;text-anchor:middle" x="240" y="165">H→I  E→T  L→S  L→S  O→G  ❘  HELLO → ITSSG</text>
         </svg>
-        <p class="diagram-caption">Each plaintext letter maps to exactly one cipher letter — frequencies are perfectly preserved</p>
-      </div><p style='margin-top:1rem;'>With 26! ≈ 4×10²⁶ possible keys, brute force is impossible. But the key is irrelevant — the statistical structure of English leaks through every substitution.</p></div>
+        <figcaption class="figure-caption">Each plaintext letter maps to exactly one cipher letter — frequencies are perfectly preserved</figcaption>
+      </figure><p style='margin-top:1rem;'>With 26! ≈ 4×10²⁶ possible keys, brute force is impossible. But the key is irrelevant — the statistical structure of English leaks through every substitution.</p></div>
     </div>
 
     <div class="panel">
@@ -200,6 +200,28 @@ HELLO → ITSSG</pre>
     </div>
   </div>
 </div>
+
+<!-- Related Exhibits -->
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/caesar.html" class="related-card">
+      <span class="related-card__number">Exhibit 01</span>
+      <span class="related-card__name">Caesar Cipher</span>
+      <span class="related-card__tag">Simplest Form</span>
+    </a>
+    <a href="../ciphers/homophonic.html" class="related-card">
+      <span class="related-card__number">Exhibit 04</span>
+      <span class="related-card__name">Homophonic</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Exhibit 07</span>
+      <span class="related-card__name">Vigenère Cipher</span>
+      <span class="related-card__tag">Polyalphabetic</span>
+    </a>
+  </div>
+</section>
 
 <div class="hall-nav">
   <a href="../ciphers/polybius.html" class="hall-nav-link">

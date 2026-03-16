@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Guided Tour — The Cipher Museum</title>
+<meta name="description" content="Follow a curated guided tour through the Cipher Museum exhibits.">
+<link rel="stylesheet" href="../css/museum.css">
+<style>
+.tour-layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;margin-top:2rem;min-height:60vh}
+.tour-sidebar{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:1.5rem;align-self:start;position:sticky;top:80px}
+.tour-sidebar h3{font-family:var(--fd);font-size:1rem;color:var(--gold);margin:0 0 .5rem;letter-spacing:.06em}
+.tour-desc{font-family:var(--fb);font-size:.85rem;color:var(--tx3);line-height:1.5;margin-bottom:1.5rem}
+.tour-stop-list{list-style:none;padding:0;margin:0}
+.tour-stop-list li{position:relative;padding:.6rem .6rem .6rem 1.8rem;font-family:var(--fm);font-size:.68rem;color:var(--tx3);cursor:pointer;border-radius:var(--r);transition:all var(--trs);letter-spacing:.04em}
+.tour-stop-list li:hover{background:var(--gold-glow);color:var(--tx)}
+.tour-stop-list li.active{color:var(--gold);background:rgba(201,168,76,.08)}
+.tour-stop-list li.visited{color:var(--tx2)}
+.tour-stop-list li::before{content:'○';position:absolute;left:.4rem;top:.6rem;font-size:.7rem}
+.tour-stop-list li.visited::before{content:'●';color:var(--gold-dim)}
+.tour-stop-list li.active::before{content:'▶';color:var(--gold);font-size:.55rem;top:.72rem}
+.tour-main{display:flex;flex-direction:column;gap:1.5rem}
+.tour-card{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:2.5rem;transition:border-color var(--trs)}
+.tour-card:hover{border-color:var(--gold-dim)}
+.tour-stop-num{font-family:var(--fm);font-size:.55rem;letter-spacing:.2em;color:var(--tx3);text-transform:uppercase;margin-bottom:.5rem}
+.tour-stop-title{font-family:var(--fd);font-size:1.5rem;color:var(--tx);margin-bottom:1rem;letter-spacing:.04em}
+.tour-stop-note{font-family:var(--fb);font-size:1.05rem;color:var(--tx2);line-height:1.7;margin-bottom:1.5rem}
+.tour-visit-link{display:inline-block;font-family:var(--fd);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;padding:.6rem 1.4rem;border:1px solid var(--gold-b);border-radius:var(--r);transition:all var(--trs)}
+.tour-visit-link:hover{background:var(--gold);color:var(--black)}
+.tour-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+.tour-nav-btn{font-family:var(--fd);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:none;border:1px solid var(--gold-b);padding:.55rem 1.2rem;border-radius:var(--r);cursor:pointer;transition:all var(--trs)}
+.tour-nav-btn:hover{background:var(--gold-glow)}
+.tour-nav-btn:disabled{opacity:.3;cursor:default}
+.tour-progress{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--tx3)}
+@media(max-width:768px){.tour-layout{grid-template-columns:1fr}.tour-sidebar{position:static;order:-1}}
+</style>
+</head>
+<body>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="hero-sub" id="tourSub">Guided Tour</p>
+  <h1 id="tourTitle">Loading Tour…</h1>
+  <p class="hero-intro" id="tourIntro"></p>
+</section>
+
+<main style="max-width:1100px;margin:0 auto;padding:0 2rem 4rem">
+
+<div class="tour-layout">
+  <aside class="tour-sidebar">
+    <h3 id="sideTitle">Tour Stops</h3>
+    <p class="tour-desc" id="sideDesc"></p>
+    <ol class="tour-stop-list" id="stopList"></ol>
+  </aside>
+  <div class="tour-main">
+    <div class="tour-card" id="tourCard"></div>
+    <div class="tour-nav">
+      <button class="tour-nav-btn" id="prevBtn" disabled>← Previous</button>
+      <span class="tour-progress" id="tourProg"></span>
+      <button class="tour-nav-btn" id="nextBtn">Next →</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>The Cipher Museum</h4>
+      <p>A scholarly journey through cryptographic history.</p>
+    </div>
+    <div>
+      <h4>More Tours</h4>
+      <ul>
+        <li><a href="index.html">All Tours</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 The Cipher Museum — An Interactive Digital Exhibit</p>
+  </div>
+</footer>
+
+<script src="../js/nav.js" defer></script>
+<script>
+'use strict';
+(function(){
+  var LS_PREFIX = 'ciphermuseum.tours.';
+
+  /* Parse ?tour=mathematics from URL */
+  var params = new URLSearchParams(location.search);
+  var tourId = params.get('tour') || 'mathematics';
+  /* Whitelist valid tour IDs */
+  var VALID_TOURS = ['mathematics','wartime','hacker'];
+  if(VALID_TOURS.indexOf(tourId) === -1) tourId = 'mathematics';
+
+  var currentStop = 0;
+  var tourData = null;
+
+  function getVisited(){
+    try{ return JSON.parse(localStorage.getItem(LS_PREFIX + tourId + '.visited')) || []; }
+    catch(e){ return []; }
+  }
+  function markVisited(idx){
+    var arr = getVisited();
+    if(arr.indexOf(idx)===-1){ arr.push(idx); localStorage.setItem(LS_PREFIX+tourId+'.visited', JSON.stringify(arr)); }
+  }
+
+  function render(){
+    if(!tourData) return;
+    var stops = tourData.stops;
+    var visited = getVisited();
+
+    /* Header */
+    document.getElementById('tourSub').textContent = 'Guided Tour · ' + tourData.icon;
+    document.getElementById('tourTitle').textContent = tourData.title;
+    document.getElementById('tourIntro').textContent = tourData.description;
+    document.title = tourData.title + ' — The Cipher Museum';
+
+    /* Sidebar list */
+    var list = document.getElementById('stopList');
+    list.innerHTML = '';
+    stops.forEach(function(s, i){
+      var li = document.createElement('li');
+      li.textContent = s.label;
+      if(i === currentStop) li.className = 'active';
+      else if(visited.indexOf(i) !== -1) li.className = 'visited';
+      li.addEventListener('click', function(){ currentStop = i; render(); });
+      list.appendChild(li);
+    });
+
+    /* Main card */
+    var stop = stops[currentStop];
+    markVisited(currentStop);
+    document.getElementById('tourCard').innerHTML =
+      '<div class="tour-stop-num">Stop ' + (currentStop+1) + ' of ' + stops.length + '</div>' +
+      '<h2 class="tour-stop-title">' + escapeHTML(stop.label) + '</h2>' +
+      '<p class="tour-stop-note">' + escapeHTML(stop.note) + '</p>' +
+      '<a class="tour-visit-link" href="' + escapeAttr(stop.href) + '">Visit Exhibit →</a>';
+
+    /* Nav */
+    document.getElementById('prevBtn').disabled = (currentStop === 0);
+    document.getElementById('nextBtn').disabled = (currentStop === stops.length - 1);
+    document.getElementById('tourProg').textContent = (currentStop+1) + ' / ' + stops.length;
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', function(){
+    if(currentStop > 0){ currentStop--; render(); }
+  });
+  document.getElementById('nextBtn').addEventListener('click', function(){
+    if(tourData && currentStop < tourData.stops.length - 1){ currentStop++; render(); }
+  });
+
+  function escapeHTML(s){
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function escapeAttr(s){
+    return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  /* Load tour JSON */
+  fetch(tourId + '.json')
+    .then(function(r){ if(!r.ok) throw new Error('Tour not found'); return r.json(); })
+    .then(function(data){ tourData = data; render(); })
+    .catch(function(err){
+      document.getElementById('tourTitle').textContent = 'Tour Not Found';
+      document.getElementById('tourCard').innerHTML = '<p style="color:var(--tx3)">Could not load tour data. <a href="index.html" style="color:var(--gold)">View all tours →</a></p>';
+    });
+})();
+</script>
+</body>
+</html>

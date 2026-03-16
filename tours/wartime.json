@@ -1,0 +1,17 @@
+{
+  "id": "wartime",
+  "title": "Ciphers at War",
+  "description": "Follow cryptography through the battlefields — from ancient military codes through the World Wars to Cold War espionage.",
+  "icon": "⚔",
+  "stops": [
+    {"href": "../ciphers/polybius.html", "label": "Polybius Square", "note": "Ancient Greek military signaling — fire-torch telegraphy across distances."},
+    {"href": "../ciphers/stager.html", "label": "Stager Cipher", "note": "Union Army route transposition — the cipher that won the telegraph war."},
+    {"href": "../ciphers/confederate-vigenere.html", "label": "Confederate Vigenère", "note": "The South's brass cipher disk — broken repeatedly by Union codebreakers."},
+    {"href": "../ciphers/adfgx.html", "label": "ADFGX", "note": "WWI German field cipher — designed for Morse telegraph, broken by Painvin."},
+    {"href": "../ciphers/adfgvx.html", "label": "ADFGVX", "note": "Extended version with digits — used in the 1918 Spring Offensive."},
+    {"href": "../ciphers/enigma.html", "label": "Enigma", "note": "The machine that shaped WWII — and the codebreakers who defeated it."},
+    {"href": "../ciphers/lorenz.html", "label": "Lorenz SZ40/42", "note": "Hitler's strategic cipher — broken without ever seeing the machine."},
+    {"href": "../ciphers/nihilist.html", "label": "Nihilist Cipher", "note": "Russian revolutionary and Cold War spy cipher — Polybius-based encryption."},
+    {"href": "../ciphers/vic.html", "label": "VIC Cipher", "note": "Cold War masterpiece — the most complex hand cipher ever deployed by a spy."}
+  ]
+}

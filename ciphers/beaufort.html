@@ -86,7 +86,7 @@ Beaufort: C = (K - P + 26) mod 26
 Key:    S  E  C  R  E  T
 Plain:  H  E  L  L  O  W
 Cipher: K  A  R  G  A  N</pre><p style='margin-top:1rem;'>Because subtraction is its own inverse: Decrypt(C, K) = Encrypt(C, K). This makes key management simpler — operators only need one table.</p>
-<div class="diagram-wrap" style="margin-top:1.5rem;">
+<figure class="figure">
 <svg viewBox="0 0 380 130" width="380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beaufort vs Vigenere formula comparison">
   <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}</style>
   <!-- Vigenere -->
@@ -102,8 +102,8 @@ Cipher: K  A  R  G  A  N</pre><p style='margin-top:1rem;'>Because subtraction is
   <rect x="5" y="92" width="370" height="30" fill="rgba(90,200,160,.06)" stroke="rgba(90,200,160,.15)" stroke-width=".5" rx="4"/>
   <text x="15" y="112" font-size="9" fill="#706878">Key=S Plain=H → C = (S−H) = (18−7) = 11 = L   |   C=L → P = (S−L) = (18−11) = 7 = H ✓</text>
 </svg>
-<p class="diagram-caption">Subtraction instead of addition makes Beaufort self-inverse — encryption and decryption are the same operation</p>
-</div></div>
+<figcaption class="figure-caption">Subtraction instead of addition makes Beaufort self-inverse — encryption and decryption are the same operation</figcaption>
+</figure></div>
     </div>
 
     <div class="panel">
@@ -146,6 +146,28 @@ Cipher: K  A  R  G  A  N</pre><p style='margin-top:1rem;'>Because subtraction is
     </div>
   </div>
 </div>
+
+<!-- Related Exhibits -->
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Exhibit 07</span>
+      <span class="related-card__name">Vigenère Cipher</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/porta.html" class="related-card">
+      <span class="related-card__number">Exhibit 09</span>
+      <span class="related-card__name">Porta Cipher</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/gronsfeld.html" class="related-card">
+      <span class="related-card__number">Exhibit 10</span>
+      <span class="related-card__name">Gronsfeld Cipher</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+  </div>
+</section>
 
 <div class="hall-nav">
   <a href="../ciphers/vigenere.html" class="hall-nav-link">

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Codebreaker's Workbench — The Cipher Museum</title>
+<meta name="description" content="A unified cryptanalysis interface: encrypt, decrypt, and analyze ciphertext with live frequency analysis and multiple cipher engines.">
+<link rel="stylesheet" href="../css/museum.css">
+<style>
+.wb-layout{display:grid;grid-template-columns:1fr 320px;gap:1.5rem;margin-top:2rem}
+.wb-main{display:flex;flex-direction:column;gap:1.5rem}
+.wb-sidebar{display:flex;flex-direction:column;gap:1.5rem}
+.wb-panel{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:1.5rem}
+.wb-panel h3{font-family:var(--fd);font-size:1rem;color:var(--gold);margin:0 0 1rem;letter-spacing:.06em}
+.wb-label{font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);display:block;margin-bottom:.5rem}
+.wb-textarea{width:100%;min-height:120px;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.82rem;padding:.85rem;resize:vertical;line-height:1.6}
+.wb-textarea:focus{outline:none;border-color:var(--gold-dim)}
+.wb-select,.wb-input{background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.78rem;padding:.55rem .75rem;width:100%}
+.wb-select:focus,.wb-input:focus{outline:none;border-color:var(--gold-dim)}
+.wb-row{display:flex;gap:.75rem;align-items:end;flex-wrap:wrap}
+.wb-row>div{flex:1;min-width:120px}
+.wb-btn{font-family:var(--fd);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.4rem;border:none;border-radius:var(--r);cursor:pointer;transition:all var(--trs)}
+.wb-btn-primary{background:var(--gold);color:var(--black)}
+.wb-btn-primary:hover{background:var(--gold-lt)}
+.wb-btn-secondary{background:var(--s3);color:var(--gold);border:1px solid var(--gold-b)}
+.wb-btn-secondary:hover{border-color:var(--gold)}
+.wb-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.freq-bar-wrap{display:flex;align-items:end;gap:2px;height:100px;margin-top:.5rem}
+.freq-bar{flex:1;background:var(--gold-dim);border-radius:2px 2px 0 0;transition:height .3s ease;min-width:0;position:relative}
+.freq-bar:hover{background:var(--gold)}
+.freq-labels{display:flex;gap:2px;margin-top:.25rem}
+.freq-labels span{flex:1;text-align:center;font-family:var(--fm);font-size:.5rem;color:var(--tx3)}
+.freq-bar[data-pct]:hover::after{content:attr(data-pct) '%';position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.5rem;color:var(--gold);white-space:nowrap}
+.ic-val{font-family:var(--fm);font-size:.85rem;color:var(--gold);margin-top:.5rem}
+.ic-hint{font-family:var(--fb);font-size:.78rem;color:var(--tx3);margin-top:.25rem;font-style:italic}
+.wb-output-area{background:var(--s1);border:1px solid var(--s5);border-radius:var(--r);padding:.85rem;font-family:var(--fm);font-size:.82rem;color:var(--tx);min-height:80px;white-space:pre-wrap;word-break:break-all;line-height:1.6}
+.wb-copy{position:absolute;top:.5rem;right:.5rem;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx3);font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;padding:.3rem .6rem;cursor:pointer}
+.wb-copy:hover{color:var(--gold);border-color:var(--gold-b)}
+@media(max-width:768px){.wb-layout{grid-template-columns:1fr}.wb-sidebar{order:-1}}
+</style>
+</head>
+<body>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="hero-sub">Cryptanalysis Lab</p>
+  <h1>Codebreaker's Workbench</h1>
+  <p class="hero-intro">Encrypt, decrypt, and analyze text with 33 cipher engines. Watch frequency distributions shift in real time.</p>
+</section>
+
+<main style="max-width:1200px;margin:0 auto;padding:0 2rem 4rem">
+
+<div class="wb-layout">
+  <!-- ─── Main Panel ─── -->
+  <div class="wb-main">
+
+    <div class="wb-panel">
+      <h3>Input</h3>
+      <label class="wb-label" for="wbInput">Plaintext or Ciphertext</label>
+      <textarea class="wb-textarea" id="wbInput" placeholder="Paste or type text here…" spellcheck="false"></textarea>
+
+      <div class="wb-row" style="margin-top:1rem">
+        <div>
+          <label class="wb-label" for="wbCipher">Cipher</label>
+          <select class="wb-select" id="wbCipher"></select>
+        </div>
+        <div>
+          <label class="wb-label" for="wbKey">Key</label>
+          <input class="wb-input" id="wbKey" placeholder="KEY" spellcheck="false">
+        </div>
+      </div>
+
+      <div id="wbExtra" style="margin-top:.75rem"></div>
+
+      <div class="wb-actions" style="margin-top:1rem">
+        <button class="wb-btn wb-btn-primary" id="wbEncode">Encrypt</button>
+        <button class="wb-btn wb-btn-primary" id="wbDecode">Decrypt</button>
+        <button class="wb-btn wb-btn-secondary" id="wbSwap">↕ Swap</button>
+        <button class="wb-btn wb-btn-secondary" id="wbClear">Clear</button>
+      </div>
+    </div>
+
+    <div class="wb-panel" style="position:relative">
+      <h3>Output</h3>
+      <button class="wb-copy" id="wbCopy">COPY</button>
+      <div class="wb-output-area" id="wbOutput"></div>
+    </div>
+
+  </div>
+
+  <!-- ─── Sidebar ─── -->
+  <div class="wb-sidebar">
+
+    <div class="wb-panel">
+      <h3>Frequency Analysis</h3>
+      <div class="wb-label">Input Text Distribution</div>
+      <div class="freq-bar-wrap" id="freqBars"></div>
+      <div class="freq-labels" id="freqLabels"></div>
+
+      <div style="margin-top:1.2rem">
+        <div class="wb-label">Index of Coincidence</div>
+        <div class="ic-val" id="icVal">—</div>
+        <div class="ic-hint" id="icHint"></div>
+      </div>
+    </div>
+
+    <div class="wb-panel">
+      <h3>English Reference</h3>
+      <div class="wb-label">Expected Letter Frequencies</div>
+      <div class="freq-bar-wrap" id="refBars"></div>
+      <div class="freq-labels" id="refLabels"></div>
+      <div style="margin-top:.5rem;font-family:var(--fm);font-size:.55rem;color:var(--tx3)">IC ≈ 0.0667 (English)</div>
+    </div>
+
+    <div class="wb-panel">
+      <h3>Quick Tools</h3>
+      <button class="wb-btn wb-btn-secondary" id="wbReverse" style="width:100%;margin-bottom:.5rem">Reverse Text</button>
+      <button class="wb-btn wb-btn-secondary" id="wbUpper" style="width:100%;margin-bottom:.5rem">UPPERCASE</button>
+      <button class="wb-btn wb-btn-secondary" id="wbStrip" style="width:100%">Strip Non-Alpha</button>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>The Cipher Museum</h4>
+      <p>A scholarly journey through cryptographic history.</p>
+    </div>
+    <div>
+      <h4>Related</h4>
+      <ul>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 The Cipher Museum — An Interactive Digital Exhibit</p>
+  </div>
+</footer>
+
+<script src="../js/nav.js" defer></script>
+<script src="../js/ciphers/all-engines.js"></script>
+<script>
+'use strict';
+(function(){
+  var CE = window.CipherEngines;
+  var CIPHERS = [
+    {id:'caesar',name:'Caesar',hasKey:true,keyLabel:'Shift (0-25)',keyDefault:'3'},
+    {id:'monoalphabetic',name:'Monoalphabetic',hasKey:true,keyLabel:'Keyword',keyDefault:'KEYWORD'},
+    {id:'vigenere',name:'Vigenère',hasKey:true,keyLabel:'Key',keyDefault:'KEY'},
+    {id:'beaufort',name:'Beaufort',hasKey:true,keyLabel:'Key',keyDefault:'KEY'},
+    {id:'gronsfeld',name:'Gronsfeld',hasKey:true,keyLabel:'Numeric Key',keyDefault:'31415'},
+    {id:'porta',name:'Porta',hasKey:true,keyLabel:'Key',keyDefault:'SECRET'},
+    {id:'runningKey',name:'Running Key',hasKey:true,keyLabel:'Key Text',keyDefault:'THE QUICK BROWN FOX'},
+    {id:'railFence',name:'Rail Fence',hasKey:true,keyLabel:'Rails',keyDefault:'3'},
+    {id:'columnar',name:'Columnar',hasKey:true,keyLabel:'Key',keyDefault:'ZEBRA'},
+    {id:'doubleTransposition',name:'Double Transposition',hasKey:true,keyLabel:'Key',keyDefault:'SECRET'},
+    {id:'playfair',name:'Playfair',hasKey:true,keyLabel:'Key',keyDefault:'MONARCHY'},
+    {id:'hill',name:'Hill (2×2)',hasKey:true,keyLabel:'Key (4 nums)',keyDefault:'3,5,2,7'},
+    {id:'polybius',name:'Polybius Square',hasKey:false},
+    {id:'bifid',name:'Bifid',hasKey:true,keyLabel:'Key',keyDefault:'KEYWORD'},
+    {id:'trifid',name:'Trifid',hasKey:true,keyLabel:'Key',keyDefault:'KEYWORD'},
+    {id:'adfgx',name:'ADFGX',hasKey:true,keyLabel:'Column Key',keyDefault:'CARGO'},
+    {id:'adfgvx',name:'ADFGVX',hasKey:true,keyLabel:'Column Key',keyDefault:'GERMAN'},
+    {id:'nihilist',name:'Nihilist',hasKey:true,keyLabel:'Key',keyDefault:'RUSSIAN'},
+    {id:'bacon',name:'Bacon',hasKey:false},
+    {id:'tapCode',name:'Tap Code',hasKey:false},
+    {id:'pigpen',name:'Pigpen',hasKey:false},
+    {id:'otp',name:'One-Time Pad',hasKey:true,keyLabel:'Key (same length)',keyDefault:''},
+    {id:'fractionatedMorse',name:'Fractionated Morse',hasKey:true,keyLabel:'Key',keyDefault:'ROUNDTABLE'},
+    {id:'confederateVigenere',name:'Confederate Vigenère',hasKey:true,keyLabel:'Key',keyDefault:'RICHMOND'},
+    {id:'bazeries',name:'Bazeries',hasKey:true,keyLabel:'Number',keyDefault:'1234'},
+    {id:'alberti',name:'Alberti',hasKey:true,keyLabel:'Key',keyDefault:'K'},
+    {id:'stager',name:'Stager',hasKey:true,keyLabel:'Route Key',keyDefault:'3'},
+    {id:'dictionaryCode',name:'Dictionary Code',hasKey:true,keyLabel:'Key',keyDefault:'KEY'},
+    {id:'vic',name:'VIC',hasKey:true,keyLabel:'Key',keyDefault:'SECRET'}
+  ];
+
+  var ENGLISH_FREQ = [8.167,1.492,2.782,4.253,12.702,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074];
+  var A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  /* ─── Populate cipher dropdown ─── */
+  var sel = document.getElementById('wbCipher');
+  CIPHERS.forEach(function(c){
+    var o = document.createElement('option');
+    o.value = c.id; o.textContent = c.name;
+    sel.appendChild(o);
+  });
+
+  /* ─── Cipher config ─── */
+  function curCipher(){ return CIPHERS.find(function(c){ return c.id === sel.value; }); }
+
+  sel.addEventListener('change', function(){
+    var c = curCipher();
+    var keyEl = document.getElementById('wbKey');
+    var extraEl = document.getElementById('wbExtra');
+    if(c.hasKey){
+      keyEl.parentElement.style.display='';
+      keyEl.placeholder = c.keyDefault || '';
+      document.querySelector('label[for="wbKey"]').textContent = c.keyLabel || 'Key';
+    } else {
+      keyEl.parentElement.style.display='none';
+    }
+    extraEl.innerHTML = '';
+  });
+  sel.dispatchEvent(new Event('change'));
+
+  /* ─── Encode / Decode ─── */
+  function getEngine(id){
+    return CE[id];
+  }
+
+  function doRun(enc){
+    var c = curCipher();
+    var e = getEngine(c.id);
+    if(!e) { showOutput('Engine not available for: ' + c.name); return; }
+    var text = document.getElementById('wbInput').value;
+    var key = document.getElementById('wbKey').value || (c.keyDefault || '');
+    try {
+      var result = enc ? e.encode(text, key) : e.decode(text, key);
+      if(typeof result === 'object' && result.out) result = result.out;
+      showOutput(result);
+    } catch(err) {
+      showOutput('Error: ' + err.message);
+    }
+  }
+
+  function showOutput(text){
+    document.getElementById('wbOutput').textContent = text;
+  }
+
+  document.getElementById('wbEncode').addEventListener('click', function(){ doRun(true); });
+  document.getElementById('wbDecode').addEventListener('click', function(){ doRun(false); });
+
+  document.getElementById('wbSwap').addEventListener('click', function(){
+    var inp = document.getElementById('wbInput');
+    var out = document.getElementById('wbOutput');
+    inp.value = out.textContent;
+    out.textContent = '';
+    updateFreq();
+  });
+
+  document.getElementById('wbClear').addEventListener('click', function(){
+    document.getElementById('wbInput').value = '';
+    document.getElementById('wbOutput').textContent = '';
+    updateFreq();
+  });
+
+  document.getElementById('wbCopy').addEventListener('click', function(){
+    var text = document.getElementById('wbOutput').textContent;
+    if(navigator.clipboard){ navigator.clipboard.writeText(text); }
+    this.textContent = 'COPIED';
+    var btn = this;
+    setTimeout(function(){ btn.textContent = 'COPY'; }, 1500);
+  });
+
+  /* ─── Quick Tools ─── */
+  document.getElementById('wbReverse').addEventListener('click', function(){
+    var inp = document.getElementById('wbInput');
+    inp.value = inp.value.split('').reverse().join('');
+    updateFreq();
+  });
+  document.getElementById('wbUpper').addEventListener('click', function(){
+    var inp = document.getElementById('wbInput');
+    inp.value = inp.value.toUpperCase();
+  });
+  document.getElementById('wbStrip').addEventListener('click', function(){
+    var inp = document.getElementById('wbInput');
+    inp.value = inp.value.toUpperCase().replace(/[^A-Z]/g,'');
+    updateFreq();
+  });
+
+  /* ─── Frequency Analysis ─── */
+  function countFreqs(text){
+    var counts = new Array(26).fill(0);
+    var total = 0;
+    for(var i=0;i<text.length;i++){
+      var c = text.charCodeAt(i);
+      if(c>=65&&c<=90){ counts[c-65]++; total++; }
+      else if(c>=97&&c<=122){ counts[c-97]++; total++; }
+    }
+    return {counts:counts, total:total};
+  }
+
+  function calcIC(counts, total){
+    if(total<2) return 0;
+    var sum=0;
+    for(var i=0;i<26;i++) sum += counts[i]*(counts[i]-1);
+    return sum / (total*(total-1));
+  }
+
+  function renderBars(containerId, labelId, freqs){
+    var container = document.getElementById(containerId);
+    var labels = document.getElementById(labelId);
+    var maxF = Math.max.apply(null, freqs) || 1;
+    container.innerHTML = '';
+    labels.innerHTML = '';
+    for(var i=0;i<26;i++){
+      var pct = (freqs[i]/maxF*100)||0;
+      var bar = document.createElement('div');
+      bar.className = 'freq-bar';
+      bar.style.height = Math.max(pct,1) + '%';
+      bar.setAttribute('data-pct', freqs[i].toFixed(1));
+      bar.setAttribute('title', A[i]+': '+freqs[i].toFixed(2)+'%');
+      container.appendChild(bar);
+      var lbl = document.createElement('span');
+      lbl.textContent = A[i];
+      labels.appendChild(lbl);
+    }
+  }
+
+  function updateFreq(){
+    var text = document.getElementById('wbInput').value;
+    var r = countFreqs(text);
+    var freqs = r.counts.map(function(c){ return r.total ? (c/r.total*100) : 0; });
+    renderBars('freqBars','freqLabels', freqs);
+    var ic = calcIC(r.counts, r.total);
+    document.getElementById('icVal').textContent = r.total > 0 ? ic.toFixed(4) : '—';
+    var hint = '';
+    if(r.total >= 20){
+      if(ic > 0.06) hint = 'Consistent with monoalphabetic / natural language';
+      else if(ic > 0.04) hint = 'Suggests polyalphabetic with short key';
+      else hint = 'Flat distribution — polyalphabetic or random';
+    }
+    document.getElementById('icHint').textContent = hint;
+  }
+
+  /* English reference bars */
+  renderBars('refBars','refLabels', ENGLISH_FREQ);
+
+  /* Live update */
+  document.getElementById('wbInput').addEventListener('input', updateFreq);
+  updateFreq();
+})();
+</script>
+</body>
+</html>
