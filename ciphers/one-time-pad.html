@@ -73,6 +73,11 @@
 <div class="exhibit-layout">
   <div class="exhibit-main">
 
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The only cipher mathematically proven to be unbreakable. Claude Shannon’s 1949 proof of its perfect secrecy is a cornerstone of information theory — and the VENONA project showed exactly what happens when its rules are violated.</p>
+    </div>
+
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Frank Miller described a one-time pad system in 1882. Gilbert Vernam patented a teletype version in 1917. But it was Claude Shannon who proved in 1949 that the OTP achieves <em>perfect secrecy</em> — ciphertext reveals absolutely nothing about the plaintext to an attacker with unlimited computing power.</p><p style='margin-top:1rem;'>The VENONA project showed exactly what happens when the rules are broken: Soviet signals officers reused key pages under WWII supply pressure. The NSA decoded thousands of messages and identified Julius Rosenberg, Klaus Fuchs, and other Soviet agents.</p></div>
@@ -88,7 +93,7 @@ Plain:  H  E  L  L  O  = 07 04 11 11 14
 Key:    X  M  C  K  L  = 23 12 02 10 11 (random)
 Cipher: 30 16 13 21 25 mod 26 = E Q N V Z
 
-Three requirements for perfect secrecy:
+Four requirements for perfect secrecy:
 1. Key must be truly random (not pseudorandom)
 2. Key must be as long as the message
 3. Key must never be reused

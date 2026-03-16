@@ -73,6 +73,11 @@
 <div class="exhibit-layout">
   <div class="exhibit-main">
 
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Despite having 26! (≈ 4×10²⁶) possible keys, monoalphabetic substitution was permanently broken in 850 AD when Al-Kindi of Baghdad invented frequency analysis — the first general-purpose cryptanalytic technique and one of the most important breakthroughs in the history of cryptography.</p>
+    </div>
+
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Monoalphabetic substitution ciphers — where each letter maps permanently to another letter or symbol — are among the oldest cryptographic techniques. They appear in ancient Hebrew texts (the Atbash cipher), Roman inscriptions, and medieval manuscripts. The sheer number of possible keys (26! ≈ 4×10²⁶) made cryptographers believe they were unbreakable.</p><p style='margin-top:1rem;'>That belief shattered in 850 AD when Al-Kindi of Baghdad wrote <em>A Manuscript on Deciphering Cryptographic Messages</em> — a nine-page treatise that introduced frequency analysis and rendered every monoalphabetic cipher permanently insecure.</p></div>
@@ -170,7 +175,7 @@ HELLO → ITSSG</pre>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Monoalphabetic Substitution</th><th>Modern Evolution</th></tr></thead>
-          <tbody><tr><td>Letter permutation</td><td>AES S-boxes: non-linear key-dependent permutation tables</td></tr>
+          <tbody><tr><td>Letter permutation</td><td>AES S-boxes: fixed non-linear substitution tables that resist frequency analysis</td></tr>
 <tr><td>Fixed substitution leaks frequency</td><td>Shannon's confusion: AES S-boxes designed to resist frequency analysis</td></tr>
 <tr><td>26 possible frequency peaks</td><td>AES avalanche effect: 1 bit change flips ~half all output bits</td></tr></tbody>
         </table>

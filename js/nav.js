@@ -94,6 +94,13 @@
     }
   });
 
+  /* ── Accessibility patches ──────────────────────────── */
+  var logoSvg = nav.querySelector('.nav-logo-icon');
+  if (logoSvg) logoSvg.setAttribute('aria-hidden', 'true');
+  document.querySelectorAll('.section-divider').forEach(function(el){
+    el.setAttribute('aria-hidden', 'true');
+  });
+
   /* ── Auto-load companion scripts ─────────────────────── */
   ['breadcrumbs.js','learning-path.js'].forEach(function(f){
     var s = document.createElement('script');
