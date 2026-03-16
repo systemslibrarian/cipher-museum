@@ -15,7 +15,7 @@
   --purple-d:rgba(160,127,204,.12);--purple-b:rgba(160,127,204,.28);
   --blue:#5A90C8;--blue-d:rgba(90,144,200,.12);
   --fd:'Cinzel',serif;--fb:'Cormorant Garamond',serif;--fm:'JetBrains Mono',monospace;
-  --r:4px;--rl:10px;--rx:16px;
+  --r:4px;--rl:10px;--rx:16px;--r-sm:3px;
   --sh:0 8px 32px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.03);
   --tr:180ms ease;--trs:350ms ease;
   /* Visual identity aliases (Phase 2C) */
@@ -45,7 +45,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .nav-logo-icon{width:30px;height:30px;color:var(--gold)}
 .nav-logo-text{font-family:var(--fd);font-size:1.15rem;font-weight:600;letter-spacing:.1em;color:var(--tx);text-transform:uppercase}
 .nav-links{display:flex;gap:.25rem;list-style:none}
-.nav-links a{font-family:var(--fd);font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2);padding:.55rem 1.1rem;border-radius:var(--r);transition:all var(--tr)}
+.nav-links a{font-family:var(--fd);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2);padding:.55rem 1rem;border-radius:var(--r);transition:all var(--tr)}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);background:var(--gold-glow)}
 /* TICKER */
 .ticker-strip{background:var(--s1);border-bottom:1px solid var(--s4);padding:.85rem 0;overflow:hidden}
@@ -128,7 +128,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .demo-title{font-family:var(--fd);font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
 .demo-body{padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem}
 .input-group{display:flex;flex-direction:column;gap:.45rem}
-.input-label{font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3)}
+.input-label{font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);display:block}
 .museum-input{width:100%;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.92rem;padding:.7rem 1rem;outline:none;resize:vertical;transition:border-color var(--tr)}
 .museum-input:focus{border-color:var(--gold-dim)}
 .mode-toggle{display:flex;background:var(--s3);border-radius:var(--r);padding:3px;gap:3px}
@@ -246,6 +246,14 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{max-width:1360px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--s4);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-copy{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;color:var(--tx3)}
+/* UTILITIES */
+.page-desc{max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1}
+.badge-group{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1}
+.hero-cta--ghost{background:transparent;border:1px solid var(--gold-b);color:var(--gold)}
+.hero-cta--ghost:hover{background:var(--gold-glow);border-color:var(--gold);color:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.12)}
+.section--dark{background:var(--s1);border-top:1px solid var(--s4);border-bottom:1px solid var(--s4)}
+.content-narrow{max-width:900px;margin:0 auto}
+.content-mid{max-width:1100px;margin:0 auto}
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 .fade-up{animation:fadeUp 600ms ease forwards}

@@ -28,6 +28,18 @@
     .map-special{border-color:var(--purple-b) !important}
     .map-special .map-num{border-color:var(--purple-b);color:var(--purple);background:var(--purple-d)}
     .map-final .map-num{background:var(--gold-glow)}
+    .fp-marker:hover{background:rgba(201,168,76,.06);transform:translateX(4px)}
+    .fp-hall{transition:background .3s}
+    .fp-hall:hover{background:var(--s2) !important}
+    .fp-corner{position:absolute;width:18px;height:18px;opacity:.25}
+    .fp-corner--tr{top:0;right:0;border-bottom:1px solid var(--gold-b);border-left:1px solid var(--gold-b)}
+    .fp-corner--tl{top:0;left:0;border-bottom:1px solid var(--gold-b);border-right:1px solid var(--gold-b)}
+    .fp-corner--br{bottom:0;right:0;border-top:1px solid var(--gold-b);border-left:1px solid var(--gold-b)}
+    .fp-corner--bl{bottom:0;left:0;border-top:1px solid var(--gold-b);border-right:1px solid var(--gold-b)}
+    .fp-door{position:absolute;top:50%;left:0;width:8px;height:24px;margin-top:-12px;background:var(--s1);border-right:1px solid var(--gold-b);border-top:1px solid var(--gold-b);border-bottom:1px solid var(--gold-b);border-radius:0 var(--r-sm) var(--r-sm) 0}
+    .fp-door--bottom{top:auto;bottom:0;left:50%;margin-top:0;margin-left:-12px;width:24px;height:8px;border:1px solid var(--gold-b);border-bottom:none;border-radius:var(--r-sm) var(--r-sm) 0 0}
+    .fp-legend{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;opacity:.45;font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--tx3)}
+    .fp-legend span{display:flex;align-items:center;gap:.4rem}
   </style>
 </head>
 <body>
@@ -131,15 +143,21 @@
 
   <div class="floor-plan" style="max-width:900px;margin:0 auto;">
     <!-- Entrance Banner -->
-    <div class="fp-entrance" style="background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);padding:1.5rem;text-align:center;margin-bottom:0;box-shadow:inset 0 0 12px rgba(201,168,76,.06);">
-      <div style="font-family:var(--fd);font-size:1.4rem;color:var(--gold);letter-spacing:.12em;">The Cipher Museum</div>
+    <div class="fp-entrance" style="background:var(--s2);border:2px solid var(--gold-b);border-radius:var(--rl) var(--rl) 0 0;padding:1.5rem;text-align:center;margin-bottom:0;box-shadow:inset 0 0 20px rgba(201,168,76,.08);position:relative;">
+      <div style="position:absolute;top:.6rem;left:1rem;font-family:var(--fm);font-size:.55rem;letter-spacing:.15em;color:var(--gold);background:var(--s1);padding:.2rem .6rem;border:1px solid var(--gold-b);border-radius:var(--r-sm);">📍 YOU ARE HERE</div>
+      <div style="font-family:var(--fd);font-size:1.4rem;color:var(--gold);letter-spacing:.12em;margin-top:.5rem;">The Cipher Museum</div>
       <div style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);letter-spacing:.2em;margin-top:.4rem;">INTERACTIVE HISTORY OF ENCRYPTION · EST. 150 BC</div>
+      <svg style="display:block;margin:.75rem auto 0;opacity:.4;" width="60" height="16" viewBox="0 0 60 16" fill="none" aria-hidden="true"><path d="M30 14 L20 2 L40 2 Z" stroke="var(--gold-dim)" stroke-width="1" fill="none"/><line x1="30" y1="14" x2="30" y2="2" stroke="var(--gold-dim)" stroke-width=".5"/></svg>
+      <div style="font-family:var(--fm);font-size:.5rem;letter-spacing:.2em;color:var(--tx3);margin-top:.15rem;">ENTER ↓</div>
     </div>
 
-    <div class="fp-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gold-b);border-top:none;border-radius:0 0 var(--rl) var(--rl);overflow:hidden;">
+    <div class="fp-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--gold-b);border-top:none;border-radius:0 0 var(--rl) var(--rl);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 0 30px rgba(26,18,8,.12);">
 
       <!-- Hall I -->
-      <div class="fp-hall" style="padding:1.5rem;border-right:1px solid var(--s4);border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+      <div class="fp-hall" style="padding:1.5rem;border-right:2px solid var(--s4);border-bottom:2px solid var(--s4);background:var(--s1);position:relative;">
+        <div class="fp-corner fp-corner--tr"></div>
+        <div class="fp-corner fp-corner--bl"></div>
+        <div class="fp-door--bottom" style="position:absolute;bottom:0;left:50%;margin-left:-12px;width:24px;height:8px;background:var(--s1);border:1px solid var(--gold-b);border-bottom:none;border-radius:var(--r-sm) var(--r-sm) 0 0;" title="Doorway to Hall III"></div>
         <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall I</h2>
         <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">ANCIENT CIPHERS</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -150,7 +168,10 @@
       </div>
 
       <!-- Hall II -->
-      <div class="fp-hall" style="padding:1.5rem;border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+      <div class="fp-hall" style="padding:1.5rem;border-bottom:2px solid var(--s4);background:var(--s1);position:relative;">
+        <div class="fp-corner fp-corner--tl"></div>
+        <div class="fp-corner fp-corner--br"></div>
+        <div class="fp-door" title="Doorway from Hall I"></div>
         <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall II</h2>
         <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">CLASSICAL CRYPTOGRAPHY</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -162,7 +183,9 @@
       </div>
 
       <!-- Hall III -->
-      <div class="fp-hall" style="padding:1.5rem;border-right:1px solid var(--s4);border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+      <div class="fp-hall" style="padding:1.5rem;border-right:2px solid var(--s4);border-bottom:2px solid var(--s4);background:var(--s1);position:relative;">
+        <div class="fp-corner fp-corner--tr"></div>
+        <div class="fp-corner fp-corner--bl"></div>
         <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall III</h2>
         <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">RENAISSANCE SYSTEMS</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -174,7 +197,10 @@
       </div>
 
       <!-- Hall IV -->
-      <div class="fp-hall" style="padding:1.5rem;border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+      <div class="fp-hall" style="padding:1.5rem;border-bottom:2px solid var(--s4);background:var(--s1);position:relative;">
+        <div class="fp-corner fp-corner--tl"></div>
+        <div class="fp-corner fp-corner--br"></div>
+        <div class="fp-door" title="Doorway from Hall III"></div>
         <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall IV</h2>
         <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">MECHANICAL ENCRYPTION</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -185,7 +211,9 @@
       </div>
 
       <!-- Hall V -->
-      <div class="fp-hall" style="padding:1.5rem;border-right:1px solid var(--s4);border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+      <div class="fp-hall" style="padding:1.5rem;border-right:2px solid var(--s4);border-bottom:2px solid var(--s4);background:var(--s1);position:relative;">
+        <div class="fp-corner fp-corner--tr"></div>
+        <div class="fp-corner fp-corner--bl"></div>
         <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall V</h2>
         <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">WARTIME CRYPTOGRAPHY</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -196,7 +224,10 @@
       </div>
 
       <!-- Hall VI -->
-      <div class="fp-hall" style="padding:1.5rem;border-bottom:1px solid var(--s4);box-shadow:inset 0 0 12px rgba(26,18,8,.06);background:var(--s2);">
+      <div class="fp-hall" style="padding:1.5rem;border-bottom:2px solid var(--s4);background:var(--s1);position:relative;">
+        <div class="fp-corner fp-corner--tl"></div>
+        <div class="fp-corner fp-corner--br"></div>
+        <div class="fp-door" title="Doorway from Hall V"></div>
         <h2 class="hall-label" style="font-family:var(--fd);font-size:1rem;color:var(--gold-dim);letter-spacing:.08em;margin-bottom:.25rem;">Hall VI</h2>
         <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);letter-spacing:.15em;margin-bottom:1rem;">THEORETICAL / PERFECT SECRECY</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -209,8 +240,13 @@
     </div>
 
     <!-- Compass Rose -->
-    <div style="text-align:right;margin-top:.75rem;opacity:.3;">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.75rem;">
+      <div class="fp-legend">
+        <span><span style="color:var(--gold);font-size:.7rem;">●</span> Exhibit</span>
+        <span><span style="display:inline-block;width:10px;height:6px;border:1px solid var(--gold-b);border-bottom:none;border-radius:2px 2px 0 0;"></span> Doorway</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-bottom:1px solid var(--gold-b);border-left:1px solid var(--gold-b);"></span> Wall</span>
+      </div>
+      <svg style="opacity:.3;" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="14" cy="14" r="13" stroke="var(--gold-dim)" stroke-width=".5"/>
         <line x1="14" y1="1" x2="14" y2="27" stroke="var(--gold-dim)" stroke-width=".5"/>
         <line x1="1" y1="14" x2="27" y2="14" stroke="var(--gold-dim)" stroke-width=".5"/>
@@ -234,4 +270,5 @@
   </div>
   <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">37 exhibits · 10 halls</span></div>
 </footer>
+<script src="js/nav.js" defer></script>
 </body></html>

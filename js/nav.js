@@ -1,7 +1,8 @@
 /**
- * THE CIPHER MUSEUM — Responsive Navigation
- * Injects a hamburger toggle at <768px. Pure CSS transition for the drawer.
- * Drop this script into any page: <script src="js/nav.js" defer></script>
+ * THE CIPHER MUSEUM — Navigation System
+ * 1. Standardizes nav links to one canonical set (handles subdirectory paths)
+ * 2. Injects a hamburger toggle at <768px with CSS transition drawer
+ * Load on every page: <script src="js/nav.js" defer></script>
  */
 'use strict';
 (function () {
@@ -11,6 +12,45 @@
   if (!inner) return;
   var links = nav.querySelector('.nav-links');
   if (!links) return;
+
+  /* ── Standardize nav links ───────────────────────────── */
+  var NAV = [
+    ['index.html',        'Entrance'],
+    ['museum-map.html',   'Museum Map'],
+    ['halls/ancient.html','Halls'],
+    ['timeline.html',     'Timeline'],
+    ['challenges.html',   'Challenges'],
+    ['cryptanalysis.html','Cryptanalysis Lab'],
+    ['modern.html',       'Modern Crypto'],
+    ['glossary.html',     'Glossary']
+  ];
+  var path = location.pathname;
+  var inSub = /\/(ciphers|halls)\//.test(path);
+  var pre = inSub ? '../' : '';
+  var basename = path.split('/').pop() || 'index.html';
+  var parentDir = path.split('/').slice(-2, -1)[0] || '';
+  var activeLabel = parentDir === 'halls' ? 'Halls' : null;
+  if (!activeLabel) {
+    NAV.forEach(function (n) { if (n[0] === basename) activeLabel = n[1]; });
+  }
+  links.innerHTML = '';
+  NAV.forEach(function (n) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = pre + n[0];
+    a.textContent = n[1];
+    if (n[1] === activeLabel) a.className = 'active';
+    li.appendChild(a);
+    links.appendChild(li);
+  });
+  var ghLi = document.createElement('li');
+  var ghA = document.createElement('a');
+  ghA.href = 'https://github.com/systemslibrarian/cipher-museum';
+  ghA.target = '_blank';
+  ghA.rel = 'noopener noreferrer';
+  ghA.textContent = 'GitHub \u2197';
+  ghLi.appendChild(ghA);
+  links.appendChild(ghLi);
 
   /* ── Inject hamburger button ──────────────────────────── */
   var btn = document.createElement('button');
