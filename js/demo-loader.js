@@ -101,8 +101,7 @@
     },
     fractionatedMorse: {
       label: 'Fractionated Morse', engine: 'fractionatedMorse', defaultMsg: 'HELLO WORLD',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'ROUNDTABLE', placeholder: 'Keyword…' }],
-      encryptOnly: true
+      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'ROUNDTABLE', placeholder: 'Keyword…' }]
     },
     confederateVigenere: {
       label: 'Confederate Vigenère', engine: 'confederateVigenere', defaultMsg: 'SEND REINFORCEMENTS',
@@ -222,8 +221,8 @@
               <button class="btn btn-secondary" id="demo-clear-${cipherName}">Clear</button>
             </div>
             <div class="input-group">
-              <span class="input-label">Output</span>
-              <div class="output-box" id="demo-output-${cipherName}" aria-live="polite">
+              <span class="input-label" id="demo-output-label-${cipherName}">Output</span>
+              <div class="output-box" id="demo-output-${cipherName}" aria-live="polite" aria-labelledby="demo-output-label-${cipherName}" role="status">
                 <span class="output-empty">Result appears here…</span>
               </div>
             </div>
@@ -472,8 +471,12 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.demo-section[data-cipher]').forEach(buildDemo);
-    // Build sources from data-cipher attribute on demo-section or page-hero
+    document.querySelectorAll('.demo-section[data-cipher]').forEach(function(el) {
+      if (!el.children.length) {
+        el.innerHTML = '<p style="color:var(--tx3);font-family:var(--fm);font-size:.85rem;padding:1.5rem;text-align:center;border:1px dashed var(--s5);border-radius:var(--rl);">Loading interactive demo\u2026</p>';
+      }
+      buildDemo(el);
+    });
     const cipherEl = document.querySelector('.demo-section[data-cipher]') ||
                      document.querySelector('[data-cipher]');
     if (cipherEl) buildSources(cipherEl.dataset.cipher);

@@ -89,7 +89,7 @@
   var path = location.pathname;
   var pageName = path.split('/').pop() || 'index.html';
   var parentDir = path.split('/').slice(-2,-1)[0] || '';
-  var inSub = parentDir === 'halls' || parentDir === 'ciphers';
+  var inSub = ['halls','ciphers','tours','lab','community'].indexOf(parentDir) !== -1;
   var pre = inSub ? '../' : '';
 
   function currentHallIndex(){

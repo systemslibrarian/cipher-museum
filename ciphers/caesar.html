@@ -107,6 +107,47 @@
   <!-- ── MAIN COLUMN ───────────────────────────────────── -->
   <div class="exhibit-main">
 
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The earliest documented substitution cipher and the conceptual ancestor of every shift-based encryption scheme that followed. It introduced the fundamental idea that a message can be systematically transformed by a secret rule.</p>
+    </div>
+
+    <!-- Cipher Wheel Diagram -->
+    <figure class="figure">
+      <svg viewBox="0 0 300 300" width="300" height="300" style="max-width:300px;width:100%;height:auto;display:block;margin:0 auto" aria-label="Caesar cipher wheel showing outer plaintext ring and inner shifted ciphertext ring">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="var(--gold-dim)" stroke-width="1"/>
+        <circle cx="150" cy="150" r="105" fill="none" stroke="var(--gold-dim)" stroke-width="1"/>
+        <circle cx="150" cy="150" r="100" fill="none" stroke="var(--gold-b)" stroke-width=".5"/>
+        <circle cx="150" cy="150" r="65" fill="none" stroke="var(--gold-b)" stroke-width=".5"/>
+        <circle cx="150" cy="150" r="4" fill="var(--gold-dim)"/>
+        <script type="text/javascript">
+        (function(){
+          var svg=document.currentScript.closest('svg');
+          var A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          for(var i=0;i<26;i++){
+            var angle=(i*360/26-90)*Math.PI/180;
+            var ox=150+122*Math.cos(angle), oy=150+122*Math.sin(angle);
+            var t=document.createElementNS('http://www.w3.org/2000/svg','text');
+            t.setAttribute('x',ox);t.setAttribute('y',oy);
+            t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','central');
+            t.setAttribute('fill','#EDE5D4');t.setAttribute('font-family','var(--fm,monospace)');
+            t.setAttribute('font-size','11');t.textContent=A[i];svg.appendChild(t);
+            var ci=(i+3)%26;
+            var ix=150+82*Math.cos(angle), iy=150+82*Math.sin(angle);
+            var t2=document.createElementNS('http://www.w3.org/2000/svg','text');
+            t2.setAttribute('x',ix);t2.setAttribute('y',iy);
+            t2.setAttribute('text-anchor','middle');t2.setAttribute('dominant-baseline','central');
+            t2.setAttribute('fill','#C9A84C');t2.setAttribute('font-family','var(--fm,monospace)');
+            t2.setAttribute('font-size','11');t2.setAttribute('font-weight','700');
+            t2.textContent=A[ci];svg.appendChild(t2);
+          }
+        })();
+        </script>
+        <text x="150" y="150" text-anchor="middle" dominant-baseline="central" fill="var(--gold-dim)" font-family="var(--fm)" font-size="7" letter-spacing=".1em">SHIFT 3</text>
+      </svg>
+      <figcaption class="figure-caption">Caesar cipher wheel — outer ring: plaintext, inner ring: ciphertext (shift = 3). A→D, B→E, C→F…</figcaption>
+    </figure>
+
     <!-- History -->
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>

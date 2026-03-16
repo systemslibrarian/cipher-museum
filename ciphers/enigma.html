@@ -54,14 +54,14 @@
   </div>
   <div class="page-meta">
     <span class="page-num">Exhibit 27 of 37</span>
-    <span class="badge era-wwii">WWII · 1932–1945</span>
+    <span class="badge era-wwii">WWII · 1918–1945</span>
     <span class="badge sec-broken">Broken</span>
   </div>
   <h1 class="page-title">Enigma Machine</h1>
   <p class="page-tagline">158 quintillion settings. Broken by a crossword puzzle and a weather forecast.</p>
   <div class="exhibit-facts">
     <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Arthur Scherbius (inventor) · German Armed Forces (operator)</span></div>
-    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1918 (patent) · 1932 (military)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1918 (patent) · 1926 (military adoption)</span></div>
     <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Rotor wiring + plugboard settings</span></div>
     <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Bombe machine · Crib attacks · Alan Turing · Bletchley Park</span></div>
     <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Complexity ≠ security without proper operational discipline</span></div>
@@ -72,6 +72,57 @@
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Breaking Enigma is considered one of the decisive intelligence victories of WWII, shortening the war by an estimated two years and saving millions of lives. It also laid the foundations for modern computing.</p>
+    </div>
+
+    <!-- Rotor Wiring Diagram -->
+    <figure class="figure">
+      <svg viewBox="0 0 440 180" style="max-width:440px;width:100%;height:auto" aria-label="Enigma rotor wiring diagram showing three rotors with cross-connected paths">
+        <style>
+          .rt-box{fill:var(--s3,#1c1c22);stroke:#c8b273;stroke-width:1;rx:4}
+          .rt-lbl{font-family:var(--fd,'Cinzel',serif);font-size:10px;fill:#c8b273;text-anchor:middle}
+          .rt-wire{stroke:#d4af37;stroke-width:1.2;fill:none}
+          .rt-wire2{stroke:#8b7355;stroke-width:1;fill:none;stroke-dasharray:3 2}
+          .rt-pin{fill:#e8d5a3;r:3}
+        </style>
+        <rect class="rt-box" x="20" y="20" width="80" height="140"/>
+        <text class="rt-lbl" x="60" y="14">Rotor I</text>
+        <rect class="rt-box" x="140" y="20" width="80" height="140"/>
+        <text class="rt-lbl" x="180" y="14">Rotor II</text>
+        <rect class="rt-box" x="260" y="20" width="80" height="140"/>
+        <text class="rt-lbl" x="300" y="14">Rotor III</text>
+        <rect class="rt-box" x="380" y="40" width="40" height="100" rx="20"/>
+        <text class="rt-lbl" x="400" y="34">Reflector</text>
+        <!-- Pins -->
+        <circle class="rt-pin" cx="20" cy="50"/><circle class="rt-pin" cx="100" cy="70"/>
+        <circle class="rt-pin" cx="140" cy="70"/><circle class="rt-pin" cx="220" cy="90"/>
+        <circle class="rt-pin" cx="260" cy="90"/><circle class="rt-pin" cx="340" cy="60"/>
+        <circle class="rt-pin" cx="380" cy="70"/><circle class="rt-pin" cx="380" cy="110"/>
+        <!-- Forward path -->
+        <path class="rt-wire" d="M23,50 C60,50 60,70 97,70"/>
+        <path class="rt-wire" d="M143,70 C170,70 190,90 217,90"/>
+        <path class="rt-wire" d="M263,90 C290,90 310,60 337,60"/>
+        <path class="rt-wire" d="M343,60 L377,70"/>
+        <!-- Return path -->
+        <path class="rt-wire2" d="M377,110 L340,120"/>
+        <circle class="rt-pin" cx="340" cy="120"/><circle class="rt-pin" cx="260" cy="130"/>
+        <circle class="rt-pin" cx="220" cy="110"/><circle class="rt-pin" cx="140" cy="130"/>
+        <circle class="rt-pin" cx="100" cy="110"/><circle class="rt-pin" cx="20" cy="130"/>
+        <path class="rt-wire2" d="M337,120 C310,120 290,130 263,130"/>
+        <path class="rt-wire2" d="M257,130 C230,130 230,110 223,110"/>
+        <path class="rt-wire2" d="M217,110 C190,110 170,130 143,130"/>
+        <path class="rt-wire2" d="M137,130 C110,130 100,110 97,110"/>
+        <path class="rt-wire2" d="M97,110 C70,110 40,130 23,130"/>
+        <!-- Labels -->
+        <text x="8" y="53" font-family="var(--fd)" font-size="9" fill="#e8d5a3" text-anchor="end">A</text>
+        <text x="8" y="133" font-family="var(--fd)" font-size="9" fill="#8b7355" text-anchor="end">G</text>
+        <text x="220" y="170" text-anchor="middle" font-family="var(--fm)" font-size="8" fill="#555">A encrypts to G — never to itself</text>
+      </svg>
+      <figcaption class="figure-caption">Rotor wiring: each letter follows a unique path through three rotors, reflects, and returns by a different route</figcaption>
+    </figure>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
@@ -168,7 +219,7 @@ But: same letter never encrypts to itself → cribs work</pre>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Enigma Machine</th><th>Modern Evolution</th></tr></thead>
-          <tbody><tr><td>Rotor substitution per keypress</td><td>AES: key-scheduled S-boxes change per round</td></tr>
+          <tbody><tr><td>Rotor substitution per keypress</td><td>AES: round keys change each round, creating a different transformation per step</td></tr>
 <tr><td>Reflector = reciprocal (fatal flaw)</td><td>Modern ciphers are not reciprocal: encrypt ≠ decrypt in one direction</td></tr>
 <tr><td>Physical key distribution (codebooks)</td><td>Public key cryptography: Diffie-Hellman solved key distribution mathematically</td></tr>
 <tr><td>Operational errors broke it</td><td>Side-channel and operational security remain the weakest links today</td></tr></tbody>
@@ -225,10 +276,10 @@ The wiring path changes every single keypress
         <table class="cipher-table">
           <tbody>
             <tr><td>Exhibit</td><td>27 of 37</td></tr>
-            <tr><td>Era</td><td>WWII · 1932–1945</td></tr>
+            <tr><td>Era</td><td>WWII · 1918–1945</td></tr>
             <tr><td>Security</td><td>Broken</td></tr>
             <tr><td>Inventor</td><td>Arthur Scherbius (inventor) · German Armed Forces (operator)</td></tr>
-            <tr><td>Year</td><td>1918 (patent) · 1932 (military)</td></tr>
+            <tr><td>Year</td><td>1918 (patent) · 1926 (military adoption)</td></tr>
             <tr><td>Key Type</td><td>Rotor wiring + plugboard settings</td></tr>
             <tr><td>Broken By</td><td>Bombe machine · Crib attacks · Alan Turing · Bletchley Park</td></tr>
           </tbody>

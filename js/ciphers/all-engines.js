@@ -619,7 +619,28 @@ window.CipherEngines = (() => {
         }
         return result;
       },
-      decode: () => '(Fractionated Morse decode is complex — see How It Works)'
+      decode: (text, key) => {
+        const t = clean(text), subst = makeSubst(key);
+        const revSubst = {};
+        for (let i = 0; i < 26; i++) revSubst[subst[i]] = i;
+        const trigraphKeys = ['...', '..-', '..x', '.-.', '.--', '.-x',
+          '.x.', '.x-', '.xx', '-..', '-.-', '-.x', '--.', '---', '--x',
+          '-x.', '-x-', '-xx', 'x..', 'x.-', 'x.x', 'x-.', 'x--', 'x-x',
+          'xx.', 'xx-', 'xxx'];
+        let morse = '';
+        for (const ch of t) {
+          const idx = revSubst[ch];
+          if (idx !== undefined && idx < 27) morse += trigraphKeys[idx];
+        }
+        const revMorse = {};
+        for (const [letter, code] of Object.entries(morseMap)) revMorse[code] = letter;
+        const parts = morse.split('x');
+        let result = '';
+        for (const p of parts) {
+          if (p && revMorse[p]) result += revMorse[p];
+        }
+        return result;
+      }
     };
   })();
 

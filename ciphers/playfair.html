@@ -114,6 +114,43 @@
 <div class="exhibit-layout">
   <div class="exhibit-main">
 
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The first practical digraph substitution cipher, Playfair broke the paradigm of single-letter substitution. Used by the British military from the Boer War through WWII, it demonstrated that encrypting letter pairs instead of singles could defeat simple frequency analysis.</p>
+    </div>
+
+    <!-- Key Square Construction Diagram -->
+    <figure class="figure">
+      <svg viewBox="0 0 360 220" style="max-width:360px;width:100%;height:auto" aria-label="Playfair key square construction diagram showing how the keyword MONARCHY fills a 5 by 5 grid">
+        <style>.pf-cell{fill:var(--s3,#1c1c22);stroke:#3a3a4a;stroke-width:1}.pf-key{fill:#C9A84C;font-family:'JetBrains Mono',monospace;font-size:14px;text-anchor:middle;dominant-baseline:central}.pf-rest{fill:#EDE5D4;font-family:'JetBrains Mono',monospace;font-size:14px;text-anchor:middle;dominant-baseline:central}.pf-lbl{font-family:var(--fm);font-size:8px;fill:#888}</style>
+        <text class="pf-lbl" x="10" y="12">Key: MONARCHY → fill unique letters, then remaining alphabet (I/J share)</text>
+        <script type="text/javascript">
+        (function(){
+          var svg=document.currentScript.closest('svg');
+          var grid='MONARCHYBDEFGIKLPQSTUVWXZ';
+          var keyLen=8;
+          for(var r=0;r<5;r++)for(var c=0;c<5;c++){
+            var i=r*5+c;
+            var x=30+c*62, y=24+r*38;
+            var rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+            rect.setAttribute('class','pf-cell');
+            rect.setAttribute('x',x);rect.setAttribute('y',y);
+            rect.setAttribute('width','58');rect.setAttribute('height','34');rect.setAttribute('rx','3');
+            if(i<keyLen) rect.setAttribute('style','stroke:#C9A84C;stroke-width:1.5');
+            svg.appendChild(rect);
+            var t=document.createElementNS('http://www.w3.org/2000/svg','text');
+            t.setAttribute('x',x+29);t.setAttribute('y',y+17);
+            t.setAttribute('class',i<keyLen?'pf-key':'pf-rest');
+            t.textContent=grid[i]+(grid[i]==='I'?'/J':'');
+            svg.appendChild(t);
+          }
+        })();
+        </script>
+        <text class="pf-lbl" x="180" y="218" text-anchor="middle">Gold = keyword letters · White = remaining alphabet</text>
+      </svg>
+      <figcaption class="figure-caption">Playfair 5×5 key square built from the keyword "MONARCHY" — keyword letters fill first, then the remaining alphabet</figcaption>
+    </figure>
+
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body">

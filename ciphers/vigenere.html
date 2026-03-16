@@ -107,6 +107,40 @@
 <div class="exhibit-layout">
   <div class="exhibit-main">
 
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Called "le chiffre indéchiffrable" for nearly 300 years, the Vigenère cipher introduced polyalphabetic substitution — the idea that a single plaintext letter could encrypt to many different ciphertext letters. Its eventual defeat spawned the entire field of modern cryptanalysis.</p>
+    </div>
+
+    <!-- Vigenère Encryption Step SVG -->
+    <figure class="figure">
+      <svg viewBox="0 0 420 130" style="max-width:420px;width:100%;height:auto" aria-label="Vigenère encryption step diagram showing how plaintext H with key letter K produces ciphertext R">
+        <style>.vg-cell{fill:var(--s3,#1c1c22);stroke:#3a3a4a;stroke-width:1;rx:3}.vg-letter{font-family:'JetBrains Mono',monospace;font-size:16px;text-anchor:middle;dominant-baseline:central}.vg-lbl{font-family:var(--fm,'JetBrains Mono',monospace);font-size:9px;fill:#888;text-anchor:middle}</style>
+        <!-- Plaintext -->
+        <text class="vg-lbl" x="38" y="12">Plaintext</text>
+        <g><rect class="vg-cell" x="10" y="18" width="56" height="32"/><text class="vg-letter" x="38" y="34" fill="#EDE5D4">H</text></g>
+        <g><rect class="vg-cell" x="70" y="18" width="56" height="32"/><text class="vg-letter" x="98" y="34" fill="#EDE5D4">E</text></g>
+        <g><rect class="vg-cell" x="130" y="18" width="56" height="32"/><text class="vg-letter" x="158" y="34" fill="#EDE5D4">L</text></g>
+        <g><rect class="vg-cell" x="190" y="18" width="56" height="32"/><text class="vg-letter" x="218" y="34" fill="#EDE5D4">L</text></g>
+        <g><rect class="vg-cell" x="250" y="18" width="56" height="32"/><text class="vg-letter" x="278" y="34" fill="#EDE5D4">O</text></g>
+        <!-- Key -->
+        <text class="vg-lbl" x="38" y="68">Key</text>
+        <g><rect class="vg-cell" x="10" y="74" width="56" height="32" style="stroke:#C9A84C"/><text class="vg-letter" x="38" y="90" fill="#C9A84C">K</text></g>
+        <g><rect class="vg-cell" x="70" y="74" width="56" height="32" style="stroke:#C9A84C"/><text class="vg-letter" x="98" y="90" fill="#C9A84C">E</text></g>
+        <g><rect class="vg-cell" x="130" y="74" width="56" height="32" style="stroke:#C9A84C"/><text class="vg-letter" x="158" y="90" fill="#C9A84C">Y</text></g>
+        <g><rect class="vg-cell" x="190" y="74" width="56" height="32" style="stroke:#C9A84C"/><text class="vg-letter" x="218" y="90" fill="#C9A84C">K</text></g>
+        <g><rect class="vg-cell" x="250" y="74" width="56" height="32" style="stroke:#C9A84C"/><text class="vg-letter" x="278" y="90" fill="#C9A84C">E</text></g>
+        <!-- Arrow + = -->
+        <text x="330" y="55" font-family="var(--fd)" font-size="18" fill="var(--gold-dim)" text-anchor="middle">=</text>
+        <!-- Ciphertext -->
+        <text class="vg-lbl" x="383" y="12">Cipher</text>
+        <g><rect class="vg-cell" x="355" y="18" width="56" height="32" style="fill:rgba(201,168,76,.1);stroke:#C9A84C"/><text class="vg-letter" x="383" y="34" fill="#C9A84C" font-weight="700">R</text></g>
+        <g><rect class="vg-cell" x="355" y="54" width="56" height="16" style="fill:rgba(201,168,76,.05);stroke:none"/><text x="383" y="64" font-family="var(--fm)" font-size="7" fill="#888" text-anchor="middle">I J V S</text></g>
+        <text x="383" y="120" font-family="var(--fm)" font-size="8" fill="#666" text-anchor="middle">(H+K) mod 26 = R</text>
+      </svg>
+      <figcaption class="figure-caption">Vigenère encryption: each plaintext letter is shifted by the corresponding key letter. H(7) + K(10) = R(17)</figcaption>
+    </figure>
+
     <!-- History -->
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
