@@ -32,8 +32,10 @@
     .tl-event:hover .era-dot-renaissance{background:#9FC87A}.tl-event:hover .era-dot-19c{background:#C8A85A}
     .tl-event:hover .era-dot-wwi{background:#D4962A}.tl-event:hover .era-dot-wwii{background:#C85A5A}
     .tl-event:hover .era-dot-modern{background:#5AC8A0}.tl-event:hover .era-dot-quantum{background:#A07FCC}
-    .tl-legend{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin:2rem 0 3rem;padding:1.5rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl)}
-    .tl-legend-item{display:flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3)}
+    .tl-event[id]{scroll-margin-top:80px}
+    .tl-legend{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:2rem 0 3rem;padding:1.5rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl)}
+    .tl-legend-item{display:flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);text-decoration:none;cursor:pointer;padding:.35rem .6rem;border-radius:var(--r);transition:all var(--tr)}
+    .tl-legend-item:hover{color:var(--tx);background:var(--s4)}
     .tl-legend-dot{width:10px;height:10px;border-radius:50%}
     @media(max-width:768px){
       .timeline::before{left:1.5rem}
@@ -83,19 +85,19 @@
 
 <section class="section">
   <div class="tl-legend" aria-label="Era color legend">
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8845A"></span> Ancient</div>
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#7AA8D8"></span> Medieval</div>
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#9FC87A"></span> Renaissance</div>
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8A85A"></span> 19th Century</div>
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#D4962A"></span> World War I</div>
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#C85A5A"></span> World War II</div>
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#5AC8A0"></span> Modern</div>
-    <div class="tl-legend-item"><span class="tl-legend-dot" style="background:#A07FCC"></span> Quantum Era</div>
+    <a href="#era-ancient" class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8845A"></span> Ancient</a>
+    <a href="#era-medieval" class="tl-legend-item"><span class="tl-legend-dot" style="background:#7AA8D8"></span> Medieval</a>
+    <a href="#era-renaissance" class="tl-legend-item"><span class="tl-legend-dot" style="background:#9FC87A"></span> Renaissance</a>
+    <a href="#era-19c" class="tl-legend-item"><span class="tl-legend-dot" style="background:#C8A85A"></span> 19th Century</a>
+    <a href="#era-wwi" class="tl-legend-item"><span class="tl-legend-dot" style="background:#D4962A"></span> World War I</a>
+    <a href="#era-wwii" class="tl-legend-item"><span class="tl-legend-dot" style="background:#C85A5A"></span> World War II</a>
+    <a href="#era-modern" class="tl-legend-item"><span class="tl-legend-dot" style="background:#5AC8A0"></span> Modern</a>
+    <a href="#era-quantum" class="tl-legend-item"><span class="tl-legend-dot" style="background:#A07FCC"></span> Quantum Era</a>
   </div>
 
   <div class="timeline" role="list" aria-label="Cryptography timeline">
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-ancient">
       <span class="tl-dot era-dot-ancient"></span>
       <div class="tl-card">
         <span class="tl-date">~500 BC</span>
@@ -128,7 +130,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-medieval">
       <span class="tl-dot era-dot-medieval"></span>
       <div class="tl-card">
         <span class="tl-date">~850 AD</span>
@@ -138,7 +140,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-renaissance">
       <span class="tl-dot era-dot-renaissance"></span>
       <div class="tl-card">
         <span class="tl-date">1467</span>
@@ -171,7 +173,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-19c">
       <span class="tl-dot era-dot-19c"></span>
       <div class="tl-card">
         <span class="tl-date">1795</span>
@@ -203,7 +205,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-wwi">
       <span class="tl-dot era-dot-wwi"></span>
       <div class="tl-card">
         <span class="tl-date">1917</span>
@@ -225,7 +227,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-wwii">
       <span class="tl-dot era-dot-wwii"></span>
       <div class="tl-card">
         <span class="tl-date">1920s–1945</span>
@@ -268,7 +270,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-modern">
       <span class="tl-dot era-dot-modern"></span>
       <div class="tl-card">
         <span class="tl-date">1976</span>
@@ -329,7 +331,7 @@
       </div>
     </div>
 
-    <div class="tl-event" role="listitem">
+    <div class="tl-event" role="listitem" id="era-quantum">
       <span class="tl-dot era-dot-quantum"></span>
       <div class="tl-card">
         <span class="tl-date">2017–2024</span>

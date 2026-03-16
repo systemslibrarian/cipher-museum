@@ -7,9 +7,9 @@
 
 :root {
   --black:#060608;--s1:#0d0d0f;--s2:#141418;--s3:#1c1c22;--s4:#242430;--s5:#2e2e3a;
-  --gold:#C9A84C;--gold-lt:#E8C97A;--gold-pale:#F5E4B0;--gold-dim:#7a6530;--gold-deep:#4a3d1c;
+  --gold:#C9A84C;--gold-lt:#E8C97A;--gold-pale:#F5E4B0;--gold-dim:#9A8044;--gold-deep:#4a3d1c;
   --gold-glow:rgba(201,168,76,.10);--gold-glg:rgba(201,168,76,.18);--gold-b:rgba(201,168,76,.22);
-  --tx:#EDE5D4;--tx2:#B8B0A0;--tx3:#706878;
+  --tx:#EDE5D4;--tx2:#B8B0A0;--tx3:#9990A3;
   --red:#C85A5A;--red-d:rgba(200,90,90,.12);--red-b:rgba(200,90,90,.25);
   --orange:#C8905A;--green:#5AC8A0;--purple:#A07FCC;
   --purple-d:rgba(160,127,204,.12);--purple-b:rgba(160,127,204,.28);
@@ -46,10 +46,10 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .nav-links a{font-family:var(--fd);font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2);padding:.55rem 1.1rem;border-radius:var(--r);transition:all var(--tr)}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);background:var(--gold-glow)}
 /* TICKER */
-.ticker-strip{background:var(--s1);border-bottom:1px solid var(--s4);padding:.7rem 0;overflow:hidden}
-.ticker-track{display:flex;gap:5rem;animation:ticker 55s linear infinite;width:max-content}
-.ticker-item{font-family:var(--fm);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tx3);white-space:nowrap;display:flex;align-items:center;gap:.6rem}
-.ticker-dot{color:var(--gold-dim);font-size:.5rem}
+.ticker-strip{background:var(--s1);border-bottom:1px solid var(--s4);padding:.85rem 0;overflow:hidden}
+.ticker-track{display:flex;gap:4rem;animation:ticker 55s linear infinite;width:max-content}
+.ticker-item{font-family:var(--fm);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx2);white-space:nowrap;display:flex;align-items:center;gap:.6rem}
+.ticker-dot{color:var(--gold);font-size:.55rem}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* HERO */
 .entrance-hero{position:relative;min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:4rem 2rem 5rem}
@@ -193,8 +193,8 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .callout-body p{font-size:1rem;line-height:1.75}
 /* CIPHER TABLE */
 .cipher-table{width:100%;border-collapse:collapse;font-family:var(--fm);font-size:.85rem}
-.cipher-table th{padding:.5rem .75rem;text-align:left;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#8f8899;border-bottom:1px solid var(--s4);font-weight:400}
-.cipher-table td{padding:.55rem .75rem;color:#c1baa9;border-bottom:1px solid rgba(255,255,255,.025)}
+.cipher-table th{padding:.5rem .75rem;text-align:left;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#ADA6B6;border-bottom:1px solid var(--s4);font-weight:400}
+.cipher-table td{padding:.55rem .75rem;color:#CFC8B8;border-bottom:1px solid rgba(255,255,255,.025)}
 .cipher-table td:first-child{color:var(--gold-lt);font-weight:500}
 .cipher-table tr:last-child td{border-bottom:none}
 /* GALLERY */

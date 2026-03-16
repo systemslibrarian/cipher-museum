@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d0d0f"/>
+      <stop offset="100%" stop-color="#1c1c22"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <rect width="1200" height="400" fill="url(#glow)"/>
+  <!-- Gear / cipher wheel motif -->
+  <circle cx="600" cy="200" r="120" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.15"/>
+  <circle cx="600" cy="200" r="80" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.12"/>
+  <circle cx="600" cy="200" r="40" fill="none" stroke="#C9A84C" stroke-width="0.6" opacity="0.1"/>
+  <!-- Radial lines -->
+  <g stroke="#C9A84C" stroke-width="0.5" opacity="0.08">
+    <line x1="600" y1="80" x2="600" y2="320"/>
+    <line x1="480" y1="200" x2="720" y2="200"/>
+    <line x1="515" y1="115" x2="685" y2="285"/>
+    <line x1="685" y1="115" x2="515" y2="285"/>
+  </g>
+  <!-- Subtle letter scatter -->
+  <g font-family="monospace" font-size="14" fill="#C9A84C" opacity="0.06" letter-spacing="8">
+    <text x="100" y="80">ULTRA ENIGMA BOMBE COLOSSUS BLETCHLEY</text>
+    <text x="200" y="140">FREQUENCY ANALYSIS KASISKI EXAMINATION</text>
+    <text x="150" y="260">TURING REJEWSKI KNOX FRIEDMAN SHANNON</text>
+    <text x="250" y="320">PURPLE MAGIC VENONA ZIMMERMANN BABBAGE</text>
+  </g>
+  <!-- Decorative dots -->
+  <circle cx="300" cy="200" r="3" fill="#C9A84C" opacity="0.15"/>
+  <circle cx="900" cy="200" r="3" fill="#C9A84C" opacity="0.15"/>
+  <circle cx="600" cy="60" r="2" fill="#C9A84C" opacity="0.1"/>
+  <circle cx="600" cy="340" r="2" fill="#C9A84C" opacity="0.1"/>
+</svg>

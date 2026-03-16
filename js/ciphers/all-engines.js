@@ -901,6 +901,50 @@ window.CipherEngines = (() => {
     };
   })();
 
+  /* ─── 34. Scytale ─── */
+  const scytale = (() => ({
+    encode: (text, key) => {
+      const t = clean(text), rows = Math.max(2, parseInt(key) || 3);
+      const cols = Math.ceil(t.length / rows);
+      const padded = t.padEnd(rows * cols, 'X');
+      let r = '';
+      for (let c = 0; c < cols; c++)
+        for (let row = 0; row < rows; row++) r += padded[row * cols + c];
+      return r;
+    },
+    decode: (text, key) => {
+      const t = clean(text), rows = Math.max(2, parseInt(key) || 3);
+      const cols = Math.ceil(t.length / rows);
+      const padded = t.padEnd(rows * cols, 'X');
+      let r = '';
+      for (let row = 0; row < rows; row++)
+        for (let c = 0; c < cols; c++) r += padded[c * rows + row];
+      return r;
+    }
+  }))();
+
+  /* ─── 35. Vernam (XOR) ─── */
+  const vernam = (() => ({
+    encode: (text, key) => {
+      const t = clean(text);
+      let k = clean(key || '');
+      if (k.length < t.length) {
+        const rng = (s => () => { s = (s * 1664525 + 1013904223) & 0x7fffffff; return s % 26; })(Date.now());
+        while (k.length < t.length) k += A[rng()];
+      }
+      let r = '';
+      for (let i = 0; i < t.length; i++) r += A[mod(t.charCodeAt(i) - 65 + k.charCodeAt(i) - 65, 26)];
+      return r + '\n[Key: ' + k.substr(0, t.length) + ']';
+    },
+    decode: (text, key) => {
+      const t = clean(text), k = clean(key || '');
+      if (k.length < t.length) return 'Key must be at least as long as message';
+      let r = '';
+      for (let i = 0; i < t.length; i++) r += A[mod(t.charCodeAt(i) - 65 - (k.charCodeAt(i) - 65), 26)];
+      return r;
+    }
+  }))();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -909,6 +953,7 @@ window.CipherEngines = (() => {
     bifid, trifid, adfgx, adfgvx, nihilist,
     otp, fractionatedMorse, confederateVigenere,
     bazeries, alberti, jefferson, enigma, lorenz,
-    dictionaryCode, stager, vic
+    dictionaryCode, stager, vic,
+    scytale, vernam
   };
 })();
