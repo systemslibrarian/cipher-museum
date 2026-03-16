@@ -63,6 +63,9 @@ cipher-museum/
 ├── modern.html             ← Modern Cryptography overview
 ├── favicon.svg             ← Gold cipher wheel icon
 ├── CNAME                   ← Custom domain (ciphermuseum.com)
+├── sitemap.xml             ← SEO sitemap (54 pages)
+├── robots.txt              ← Crawler directives
+├── 404.html                ← Custom "Exhibit Not Found" page
 ├── css/
 │   └── museum.css          ← Complete design system (~330 rules)
 ├── js/
@@ -100,6 +103,8 @@ cipher-museum/
 ├── tests/
 │   ├── test-all-engines.js  ← Engine existence, roundtrip, known-answer tests
 │   └── test-deep-ciphers.js ← Edge cases, boundaries, stress tests
+├── scripts/
+│   └── seo-upgrade.py       ← Bulk SEO: meta descriptions, OG, canonical, etc.
 ```
 
 ---
@@ -110,6 +115,7 @@ cipher-museum/
 - **Fonts:** Cinzel (display) · Cormorant Garamond (body) · JetBrains Mono (code)
 - **Theme:** Dark backgrounds (#060608) with gold accents (#C9A84C)
 - **Accessibility:** WCAG AA contrast ratios, skip links, ARIA labels, keyboard navigation, `prefers-reduced-motion` support
+- **SEO:** Unique meta descriptions, Open Graph + Twitter cards, canonical URLs, XML sitemap, custom 404
 - **No external dependencies** beyond Google Fonts
 
 ---
