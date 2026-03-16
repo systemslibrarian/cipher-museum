@@ -63,6 +63,10 @@
       .lab-grid.reveal{opacity:1 !important;transform:none !important}
       .lab-grid{grid-template-columns:1fr !important}
     }
+    @media(max-width:600px){
+      .lab-tab{min-width:90px;font-size:.62rem;padding:.45rem .5rem}
+      #subMapGrid{grid-template-columns:repeat(9,1fr) !important}
+    }
 
     /* Tab icons */
     .lab-tab::before{margin-right:.4rem;font-size:.7rem}
@@ -247,7 +251,7 @@
 
   <!-- Tab: Frequency Analysis (SVG bar chart with English reference) -->
   <div class="lab-panel active" id="tab-freq" role="tabpanel" aria-labelledby="tab-btn-freq">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;">
       <div>
         <div class="input-group" style="margin-bottom:1rem;">
           <label class="input-label" for="labFreqInput">Paste Ciphertext</label>

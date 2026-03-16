@@ -131,6 +131,45 @@ looking for patterns in the wrong reading order</pre>
       </div>
     </div>
 
+    <!-- Interactive Demo -->
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span>
+        <span class="panel-title">Decode It Yourself — Z-408 Fragment</span></div>
+      <div class="panel-body">
+        <p style="margin-bottom:1rem;color:var(--tx2);font-size:.92rem;">The Z-408 cipher was solved in 1969. Below are the first 17 symbols of the real ciphertext. Click a symbol, then type its letter in the box to build the plaintext — or press <strong style="color:var(--gold)">Reveal Answer</strong> to see the known solution.</p>
+
+        <span class="input-label" style="display:block;margin-bottom:.4rem;">Ciphertext symbols (first 17 of Z-408)</span>
+        <div class="z-demo-grid" id="zGrid" role="group" aria-label="Z-408 ciphertext symbols"></div>
+
+        <div class="z-assign" id="zAssign" style="display:none">
+          <span style="font-family:var(--fm);font-size:.75rem;color:var(--tx3);">Assign letter for <strong id="zSelLabel" style="color:var(--gold-lt);font-style:normal;"></strong>:</span>
+          <input class="z-assign-input" id="zLetterInput" type="text" maxlength="1" autocomplete="off" aria-label="Assign a letter to the selected symbol" oninput="zAssignLetter(this.value)">
+          <button class="btn btn-secondary" style="padding:.3rem .75rem;font-size:.65rem;" onclick="zClearSelected()">Clear</button>
+        </div>
+
+        <span class="input-label" style="display:block;margin:.75rem 0 .4rem;">Plaintext (your decryption)</span>
+        <div class="z-plaintext" id="zPlaintext" aria-live="polite">· · · · · · · · · · · · · · · · ·</div>
+
+        <div class="z-stats" id="zStats"></div>
+
+        <div style="display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="zReveal()">Reveal Answer</button>
+          <button class="btn btn-secondary" onclick="zReset()">Reset</button>
+        </div>
+
+        <div id="zSolution" style="display:none;margin-top:1.5rem;">
+          <div class="callout callout-success" style="margin-bottom:1rem;">
+            <span class="callout-icon">✅</span>
+            <div class="callout-body">
+              <strong>Known Solution (Z-408, first 17 symbols):</strong>
+              <div style="font-family:var(--fm);font-size:1rem;letter-spacing:.18em;color:var(--green);margin-top:.4rem;">I LIKE KILLING PE</div>
+              <p style="margin-top:.5rem;font-size:.85rem;color:var(--tx2);">The full Z-408 begins: <em>"I LIKE KILLING PEOPLE BECAUSE IT IS SO MUCH FUN…"</em> — solved by Donald and Bettye Harden within a week of publication in 1969.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">💀</span>
         <span class="panel-title">How It Was Broken</span></div>
@@ -284,6 +323,84 @@ looking for patterns in the wrong reading order</pre>
     <span class="footer-copy">Exhibit 36 of 37</span>
   </div>
 </footer>
+
+<script>
+// Z-408 demo — first 17 symbols and their known solutions
+(function(){
+  const SYMS = ['H','E','R','>','p','l','^','V','P','k','|','1','L','T','G','2','d'];
+  const ANSWER = 'I LIKE KILLING PE';
+  const map = {}; // sym → assigned letter
+  let selectedSym = null;
+
+  function render(){
+    const grid = document.getElementById('zGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+    SYMS.forEach((s,i)=>{
+      const cell = document.createElement('div');
+      cell.className = 'z-sym' + (map[s] ? ' z-mapped' : '') + (s === selectedSym ? ' z-selected' : '');
+      cell.textContent = s;
+      cell.setAttribute('title', map[s] ? 'Assigned: ' + map[s] : 'Click to assign a letter');
+      cell.setAttribute('tabindex','0');
+      cell.setAttribute('role','button');
+      cell.setAttribute('aria-label', 'Symbol ' + s + (map[s] ? ', assigned ' + map[s] : ', unassigned'));
+      cell.addEventListener('click', ()=>{ selectSym(s); });
+      cell.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectSym(s); } });
+      grid.appendChild(cell);
+    });
+    // plaintext
+    const plain = SYMS.map(s=> map[s] ? '<span style="color:var(--green)">' + map[s] + '</span>' : '<span style="color:var(--tx3)">·</span>').join(' ');
+    document.getElementById('zPlaintext').innerHTML = plain;
+    // stats
+    const filled = Object.keys(map).length;
+    const uniqueSyms = [...new Set(SYMS)].length;
+    document.getElementById('zStats').textContent = filled + ' of ' + uniqueSyms + ' unique symbols assigned · ' + SYMS.filter(s=>map[s]).length + ' of 17 positions decoded';
+  }
+
+  function selectSym(s){
+    selectedSym = s;
+    const assign = document.getElementById('zAssign');
+    const label = document.getElementById('zSelLabel');
+    const input = document.getElementById('zLetterInput');
+    assign.style.display = 'flex';
+    label.textContent = '"' + s + '"';
+    input.value = map[s] || '';
+    input.focus();
+    render();
+  }
+
+  window.zAssignLetter = function(v){
+    if(!selectedSym) return;
+    const letter = v.toUpperCase().replace(/[^A-Z ]/g,'');
+    if(letter) map[selectedSym] = letter; else delete map[selectedSym];
+    render();
+  };
+
+  window.zClearSelected = function(){
+    if(selectedSym) delete map[selectedSym];
+    document.getElementById('zLetterInput').value='';
+    render();
+  };
+
+  window.zReveal = function(){
+    SYMS.forEach((s,i)=>{ map[s] = ANSWER[i]; });
+    selectedSym = null;
+    document.getElementById('zAssign').style.display='none';
+    document.getElementById('zSolution').style.display='block';
+    render();
+  };
+
+  window.zReset = function(){
+    for(const k in map) delete map[k];
+    selectedSym = null;
+    document.getElementById('zAssign').style.display='none';
+    document.getElementById('zSolution').style.display='none';
+    render();
+  };
+
+  document.addEventListener('DOMContentLoaded', render);
+})();
+</script>
 
 <script src="../js/ciphers/all-engines.js"></script>
 <script src="../js/demo-loader.js"></script>
