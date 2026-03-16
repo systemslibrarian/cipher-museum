@@ -200,6 +200,9 @@
     <button class="lab-tab" id="tab-btn-ioc" role="tab" aria-selected="false" aria-controls="tab-ioc" tabindex="-1" onclick="showTab('ioc', this)">Index of Coincidence</button>
     <button class="lab-tab" id="tab-btn-kasiski" role="tab" aria-selected="false" aria-controls="tab-kasiski" tabindex="-1" onclick="showTab('kasiski', this)">Kasiski Examination</button>
     <button class="lab-tab" id="tab-btn-challenge" role="tab" aria-selected="false" aria-controls="tab-challenge" tabindex="-1" onclick="showTab('challenge', this)">Break a Cipher</button>
+    <button class="lab-tab" id="tab-btn-detect" role="tab" aria-selected="false" aria-controls="tab-detect" tabindex="-1" onclick="showTab('detect', this)">Cipher Detector</button>
+    <button class="lab-tab" id="tab-btn-bigram" role="tab" aria-selected="false" aria-controls="tab-bigram" tabindex="-1" onclick="showTab('bigram', this)">Bigram Heat Map</button>
+    <button class="lab-tab" id="tab-btn-animate" role="tab" aria-selected="false" aria-controls="tab-animate" tabindex="-1" onclick="showTab('animate', this)">Caesar Animator</button>
   </div>
 
   <!-- Tab: Frequency Analysis -->
@@ -302,6 +305,39 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Tab: Cipher Detector -->
+  <div class="lab-panel" id="tab-detect" role="tabpanel" aria-labelledby="tab-btn-detect" hidden>
+    <div style="max-width:700px;">
+      <p style="margin-bottom:1rem;color:var(--tx2);">Paste ciphertext and the detector will calculate its Index of Coincidence and other statistical signatures to estimate the cipher type.</p>
+      <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="detectInput">Ciphertext</label>
+      <textarea id="detectInput" rows="5" class="lab-textarea" style="width:100%;padding:.8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);font-family:var(--fm);font-size:.82rem;resize:vertical;margin-top:.4rem;" placeholder="Paste ciphertext here…"></textarea>
+      <button class="btn btn-primary" onclick="detectCipher()" style="margin-top:.75rem;font-size:.7rem;">Analyze</button>
+      <div id="detectResult" style="margin-top:1.25rem;padding:1rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--r-sm);font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;min-height:3rem;"></div>
+    </div>
+  </div>
+
+  <!-- Tab: Bigram Heat Map -->
+  <div class="lab-panel" id="tab-bigram" role="tabpanel" aria-labelledby="tab-btn-bigram" hidden>
+    <div style="max-width:750px;">
+      <p style="margin-bottom:1rem;color:var(--tx2);">Enter text to visualize bigram (letter-pair) frequencies as a 26×26 heat map. Brighter cells indicate more frequent pairs.</p>
+      <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="bigramInput">Text</label>
+      <textarea id="bigramInput" rows="4" class="lab-textarea" style="width:100%;padding:.8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);font-family:var(--fm);font-size:.82rem;resize:vertical;margin-top:.4rem;" placeholder="Paste text here…"></textarea>
+      <button class="btn btn-primary" onclick="buildBigramMap()" style="margin-top:.75rem;font-size:.7rem;">Build Heat Map</button>
+      <div id="bigramGrid" style="margin-top:1.25rem;overflow-x:auto;"></div>
+    </div>
+  </div>
+
+  <!-- Tab: Caesar Animator -->
+  <div class="lab-panel" id="tab-animate" role="tabpanel" aria-labelledby="tab-btn-animate" hidden>
+    <div style="max-width:700px;">
+      <p style="margin-bottom:1rem;color:var(--tx2);">Watch a Caesar cipher break in real-time. The animator tries all 26 shifts and highlights the one that produces the most English-like output.</p>
+      <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="animInput">Ciphertext</label>
+      <input type="text" id="animInput" value="KHOOR ZRUOG" style="width:100%;padding:.6rem .8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--gold-lt);font-family:var(--fm);font-size:.85rem;letter-spacing:.1em;margin-top:.4rem;" autocomplete="off" spellcheck="false">
+      <button class="btn btn-primary" id="animBtn" onclick="animateCaesar()" style="margin-top:.75rem;font-size:.7rem;">Animate</button>
+      <div id="animOutput" style="margin-top:1.25rem;font-family:var(--fm);font-size:.82rem;line-height:2.2;color:var(--tx2);"></div>
     </div>
   </div>
 
@@ -634,6 +670,125 @@ function runKasiski() {
   hits.innerHTML=found.slice(0,8).map(f=>
     `<div class="kasiski-hit">"${f.seq}" at positions ${f.positions.join(', ')} — spacings: ${f.spacings.join(', ')}</div>`
   ).join('');
+}
+
+// ── Cipher Detector ─────────────────────────────────
+function detectCipher() {
+  const raw = document.getElementById('detectInput').value;
+  const txt = raw.toUpperCase().replace(/[^A-Z]/g, '');
+  const out = document.getElementById('detectResult');
+  if (txt.length < 10) { out.textContent = 'Enter at least 10 letters.'; return; }
+
+  // IC calculation
+  const n = txt.length;
+  const counts = {};
+  for (const ch of txt) counts[ch] = (counts[ch] || 0) + 1;
+  let sum = 0;
+  for (const k in counts) sum += counts[k] * (counts[k] - 1);
+  const ic = sum / (n * (n - 1));
+
+  // Check for digits/symbols in raw
+  const hasDigits = /\d/.test(raw);
+  const hasOnly5 = /^[ADFGVX\s]+$/i.test(raw.replace(/[^A-Za-z]/g, ''));
+
+  let verdict = '';
+  if (ic >= 0.063) {
+    verdict = '<strong style="color:var(--green)">Monoalphabetic / Caesar</strong>';
+    verdict += '<br>IC ' + ic.toFixed(4) + ' is near English (0.066). Single-alphabet substitution likely.';
+    verdict += '<br>→ Try <em>Frequency Analysis</em> tab.';
+  } else if (ic >= 0.050) {
+    verdict = '<strong style="color:var(--orange)">Polyalphabetic (Vigenère-family)</strong>';
+    verdict += '<br>IC ' + ic.toFixed(4) + ' is between English and random. Multiple alphabets detected.';
+    verdict += '<br>→ Try <em>Kasiski Examination</em> tab to find key length.';
+  } else if (ic >= 0.042) {
+    verdict = '<strong style="color:var(--purple)">Highly polyalphabetic or transposition</strong>';
+    verdict += '<br>IC ' + ic.toFixed(4) + ' is near random. Could be a long-key Vigenère, or a transposition cipher.';
+  } else {
+    verdict = '<strong style="color:var(--red)">Random / OTP / Unknown</strong>';
+    verdict += '<br>IC ' + ic.toFixed(4) + ' is at or below random (0.038). Text may be encrypted with a one-time pad or very long key.';
+  }
+  verdict += '<br><br><strong>Length:</strong> ' + n + ' letters';
+  const unique = Object.keys(counts).length;
+  verdict += ' &middot; <strong>Unique letters:</strong> ' + unique + '/26';
+  out.innerHTML = verdict;
+}
+
+// ── Bigram Heat Map ─────────────────────────────────
+function buildBigramMap() {
+  const txt = document.getElementById('bigramInput').value.toUpperCase().replace(/[^A-Z]/g, '');
+  const grid = document.getElementById('bigramGrid');
+  if (txt.length < 2) { grid.innerHTML = '<p style="color:var(--tx3)">Enter at least 2 letters.</p>'; return; }
+
+  const bg = new Array(26).fill(null).map(() => new Array(26).fill(0));
+  let maxCount = 0;
+  for (let i = 0; i < txt.length - 1; i++) {
+    const a = txt.charCodeAt(i) - 65, b = txt.charCodeAt(i + 1) - 65;
+    bg[a][b]++;
+    if (bg[a][b] > maxCount) maxCount = bg[a][b];
+  }
+
+  let html = '<table style="border-collapse:collapse;font-family:var(--fm);font-size:.45rem;line-height:1;">';
+  html += '<tr><td style="width:16px;"></td>';
+  for (let c = 0; c < 26; c++) html += '<td style="text-align:center;padding:1px 2px;color:var(--tx3);font-weight:600;">' + ALPHA[c] + '</td>';
+  html += '</tr>';
+  for (let r = 0; r < 26; r++) {
+    html += '<tr><td style="padding:1px 3px;color:var(--tx3);font-weight:600;text-align:right;">' + ALPHA[r] + '</td>';
+    for (let c = 0; c < 26; c++) {
+      const v = bg[r][c];
+      const intensity = maxCount > 0 ? v / maxCount : 0;
+      const alpha = Math.round(intensity * 255);
+      const bg_color = v > 0 ? 'rgba(201,168,76,' + intensity.toFixed(2) + ')' : 'transparent';
+      html += '<td style="width:16px;height:16px;text-align:center;background:' + bg_color + ';color:' + (intensity > 0.5 ? 'var(--black)' : 'var(--tx3)') + ';border:1px solid var(--s4);">' + (v > 0 ? v : '') + '</td>';
+    }
+    html += '</tr>';
+  }
+  html += '</table>';
+  grid.innerHTML = html;
+}
+
+// ── Caesar Animator ─────────────────────────────────
+async function animateCaesar() {
+  const input = document.getElementById('animInput').value.toUpperCase();
+  const out = document.getElementById('animOutput');
+  const btn = document.getElementById('animBtn');
+  btn.disabled = true;
+  out.innerHTML = '';
+
+  const common = new Set(['THE','AND','FOR','ARE','BUT','NOT','YOU','ALL','HER','WAS','ONE','OUR','HIS','HAS','HER','HAD','HOW','WHO','ITS','LET','MAY','OLD','NEW','NOW','WAY','DAY','TOO','USE']);
+
+  let bestShift = 0, bestScore = -1;
+  for (let shift = 0; shift < 26; shift++) {
+    let decoded = '';
+    for (let i = 0; i < input.length; i++) {
+      const code = input.charCodeAt(i);
+      if (code >= 65 && code <= 90) {
+        decoded += String.fromCharCode(((code - 65 - shift + 26) % 26) + 65);
+      } else {
+        decoded += input[i];
+      }
+    }
+
+    const words = decoded.replace(/[^A-Z ]/g, '').split(/\s+/);
+    let score = 0;
+    for (const w of words) { if (common.has(w)) score++; }
+
+    const line = document.createElement('div');
+    line.style.cssText = 'padding:.3rem .6rem;border-radius:3px;transition:background .3s;';
+    line.innerHTML = '<span style="color:var(--gold-dim);min-width:70px;display:inline-block;">Shift ' + shift.toString().padStart(2, '0') + ':</span> ' + decoded;
+    out.appendChild(line);
+
+    if (score > bestScore) { bestScore = score; bestShift = shift; }
+
+    await new Promise(r => setTimeout(r, 80));
+  }
+
+  const lines = out.children;
+  if (lines[bestShift]) {
+    lines[bestShift].style.background = 'var(--gold-glow)';
+    lines[bestShift].style.color = 'var(--gold-lt)';
+    lines[bestShift].innerHTML += ' <span style="color:var(--green);font-size:.7rem;margin-left:.5rem;">← Best match</span>';
+  }
+  btn.disabled = false;
 }
 </script>
 </body>

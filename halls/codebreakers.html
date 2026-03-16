@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall of Codebreakers — The Cipher Museum</title>
+  <meta name="description" content="Ten moments when human ingenuity broke what mathematics could not. From Al-Kindi in 850 AD to the Zodiac cipher solved in 2020. The human stories behind cryptanalysis.">
+  <meta name="keywords" content="codebreakers, cryptanalysis, cipher museum, Turing, Enigma, Bletchley Park, Navajo, Zodiac">
+  <link rel="stylesheet" href="../css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <style>
+    .hall-hero-banner {
+      position:relative; height:300px; overflow:hidden;
+      border-bottom:1px solid var(--gold-b);
+      background:var(--s1);
+    }
+    .hall-hero-banner img {
+      width:100%; height:100%;
+      object-fit:cover; display:block;
+      filter:brightness(.45) sepia(.2);
+    }
+    .hall-hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to bottom, rgba(6,6,8,.1) 0%, rgba(6,6,8,.7) 100%);
+    }
+    .hall-hero-caption {
+      position:absolute; left:2rem; bottom:1.25rem;
+      font-family:var(--fd); font-size:.9rem;
+      color:var(--gold-lt); letter-spacing:.1em;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="museum-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8"  stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2"  fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2"  y1="16" x2="6"  y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="../modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hall-hero-banner">
+  <img src="../images/halls/codebreakers-hero.jpg"
+       alt="Bletchley Park codebreakers at work during World War II"
+       onerror="this.parentElement.style.display='none'">
+  <div class="hall-hero-overlay"></div>
+  <div class="hall-hero-caption">Special Exhibition · Hall of Codebreakers</div>
+</section>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../museum-map.html">Museum Map</a><span>›</span>
+    Hall of Codebreakers
+  </div>
+  <span class="page-eyebrow">Special Exhibition · The Human Stories</span>
+  <h1 class="page-title">Hall of Codebreakers</h1>
+  <p class="page-tagline">Ten moments when human ingenuity broke what mathematics could not</p>
+  <blockquote style="max-width:600px;margin:1.5rem 0 0;padding-left:1.5rem;border-left:3px solid var(--gold);font-family:var(--fb);font-size:1.25rem;font-style:italic;color:var(--gold-lt);line-height:1.7;position:relative;z-index:1;">
+    "A cipher is only as strong as the mind trying to break it."
+  </blockquote>
+</div>
+
+<div class="section">
+
+  <!-- Story 1: Al-Kindi -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">📜</span>
+      <span class="panel-title" style="color:var(--gold);">Al-Kindi</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-ancient">~850 AD</span>
+        <span class="badge sec-broken">Broke: All Monoalphabetic Substitution</span>
+      </div>
+      <p><strong>Person:</strong> Abu Yusuf Yaqub ibn Ishaq al-Kindi, Baghdad</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Frequency analysis</p>
+      <p style="margin-top:1rem;">His nine-page manuscript is the founding document of cryptanalysis. Every substitution cipher made before 850 AD and for centuries after was rendered permanently insecure. He did this with nothing but a count of letters and an understanding that language has statistical structure.</p>
+      <div class="callout callout-info" style="margin-top:1rem;">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <p>Al-Kindi's insight was simple but devastating: in any natural language, some letters appear far more often than others. In Arabic, the most common letter is alif. In English, it's E. Map the most frequent ciphertext symbol to the most frequent plaintext letter, and the cipher begins to unravel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story 2: Phelippes -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">⚔</span>
+      <span class="panel-title" style="color:var(--gold);">Thomas Phelippes and Mary Queen of Scots</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-renaissance">1586</span>
+        <span class="badge sec-broken">Broke: Nomenclator Substitution</span>
+      </div>
+      <p><strong>Person:</strong> Thomas Phelippes, agent of Sir Francis Walsingham</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Frequency analysis + contextual knowledge</p>
+      <p style="margin-top:1rem;">Mary's encrypted correspondence with Babington Plot conspirators was intercepted and decoded. She was executed February 8, 1587. The break is one of history's clearest examples of cryptanalysis determining a human life.</p>
+    </div>
+  </div>
+
+  <!-- Story 3: Room 40 -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">📡</span>
+      <span class="panel-title" style="color:var(--gold);">Room 40 and the Zimmermann Telegram</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-19c">1917</span>
+        <span class="badge sec-broken">Broke: German Diplomatic Code 0075</span>
+      </div>
+      <p><strong>People:</strong> Room 40, British Naval Intelligence</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Code book reconstruction from partial recoveries</p>
+      <p style="margin-top:1rem;">Germany secretly offered Mexico an alliance against the United States. Britain decoded it, waited strategically, then shared it with Washington. The telegram helped bring America into WWI. The war ended 20 months later.</p>
+    </div>
+  </div>
+
+  <!-- Story 4: Polish Enigma -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">🔢</span>
+      <span class="panel-title" style="color:var(--gold);">The Polish Breaking of Enigma</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1932</span>
+        <span class="badge sec-broken">Broke: German Military Enigma</span>
+      </div>
+      <p><strong>People:</strong> Marian Rejewski, Jerzy Różycki, Henryk Zygalski</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Permutation group mathematics + known message indicators</p>
+      <p style="margin-top:1rem;">Polish mathematicians used pure mathematics — specifically permutation group theory — to reconstruct Enigma's rotor wiring without ever seeing the machine. They built the first Enigma-breaking machines. In July 1939, six weeks before Germany invaded Poland, they handed everything to Britain and France. Without Warsaw, there is no Bletchley Park.</p>
+      <div class="callout callout-info" style="margin-top:1rem;">
+        <span class="callout-icon">🇵🇱</span>
+        <div class="callout-body">
+          <p>Rejewski's breakthrough came from analyzing the message indicator system — the first six characters of each Enigma message. By collecting enough indicators, he found patterns that revealed the mathematical structure of the rotors. Pure mathematics, applied to an engineering problem, by a 27-year-old mathematician.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story 5: Turing and the Bombe -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">⚙️</span>
+      <span class="panel-title" style="color:var(--gold);">Turing, Welchman, and the Bombe</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1940</span>
+        <span class="badge sec-broken">Broke: German Military Enigma (all branches)</span>
+      </div>
+      <p><strong>People:</strong> Alan Turing, Gordon Welchman, and 10,000 Bletchley Park staff</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Crib-based electromechanical search</p>
+      <p style="margin-top:1rem;">The Bombe tested thousands of Enigma configurations per minute by exploiting known plaintext cribs — stereotyped phrases like WETTER, KEINE BESONDEREN EREIGNISSE, HEIL HITLER. The intelligence product, codenamed Ultra, remained classified until 1974. Historians estimate it shortened WWII by 2–4 years.</p>
+    </div>
+  </div>
+
+  <!-- Story 6: Tutte, Flowers, and Colossus -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">💻</span>
+      <span class="panel-title" style="color:var(--gold);">Bill Tutte, Tommy Flowers, and Colossus</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1943</span>
+        <span class="badge sec-broken">Broke: Lorenz SZ42 — Hitler's Strategic Cipher</span>
+      </div>
+      <p><strong>People:</strong> Bill Tutte (analysis), Tommy Flowers (engineer)</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Statistical wheel-pattern analysis</p>
+      <p style="margin-top:1rem;">Tutte deduced the entire Lorenz machine structure without ever seeing it — working only from intercepted traffic. Tommy Flowers built Colossus, the world's first programmable electronic computer, to automate the attack. The need to break a cipher built computing.</p>
+    </div>
+  </div>
+
+  <!-- Story 7: Friedman and Purple -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">🇺🇸</span>
+      <span class="panel-title" style="color:var(--gold);">William Friedman and Purple</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1940</span>
+        <span class="badge sec-broken">Broke: Japanese Purple Diplomatic Cipher</span>
+      </div>
+      <p><strong>Person:</strong> William F. Friedman, US Army Signal Intelligence</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Statistical analysis + machine reconstruction</p>
+      <p style="margin-top:1rem;">Friedman's team reconstructed the Purple machine without ever possessing one. The US could read Japanese diplomatic traffic for years before Pearl Harbor. The intelligence existed. The failure was in how it was shared — not cryptanalytic but bureaucratic.</p>
+      <div class="callout callout-warn" style="margin-top:1rem;">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <p><strong>The lesson:</strong> Breaking the cipher was not enough. The intelligence from Purple (codenamed MAGIC) warned of Japanese intentions, but inter-service rivalry, poor distribution, and bureaucratic inertia prevented the warnings from reaching Pearl Harbor's commanders in time. The cryptanalysis succeeded. The intelligence system failed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story 8: Navajo Code Talkers -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">🛡️</span>
+      <span class="panel-title" style="color:var(--gold);">The Navajo Code Talkers</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1942–1945</span>
+        <span class="badge sec-secure">Never Broken</span>
+      </div>
+      <p><strong>People:</strong> 420 Navajo Marines, US Marine Corps</p>
+      <p style="margin-top:.5rem;"><strong>Cipher:</strong> Navajo language as operational field code</p>
+      <p style="margin-top:1rem;">This is the only story in this hall about a code that was NOT broken. It belongs here because the story of wartime cryptography is incomplete without it. 420 Navajo Marines transmitted battlefield orders in a language that Japanese linguists could not touch. The code was declassified in 1968 and the Code Talkers received the Congressional Gold Medal in 2001.</p>
+      <p style="margin-top:1rem;"><a href="../ciphers/navajo-code-talkers.html" style="color:var(--gold);font-family:var(--fm);font-size:.85rem;">View the Navajo Code Talkers exhibit →</a></p>
+    </div>
+  </div>
+
+  <!-- Story 9: VENONA -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">🕵️</span>
+      <span class="panel-title" style="color:var(--gold);">VENONA and the Soviet OTP</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-coldwar">1943–1980</span>
+        <span class="badge sec-broken">Broke: Soviet One-Time Pad (via key reuse)</span>
+      </div>
+      <p><strong>People:</strong> Meredith Gardner and the US Army Signal Intelligence Service</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Depth attack on reused pad pages</p>
+      <p style="margin-top:1rem;">The OTP is mathematically unbreakable. Soviet signals officers reused pad pages under WWII supply pressure. XOR-ing two messages with the same key eliminates the key: C1 ⊕ C2 = P1 ⊕ P2. VENONA decoded thousands of messages and exposed Julius Rosenberg, Klaus Fuchs, Donald Maclean, and others. The project remained classified until 1995.</p>
+      <div class="callout callout-danger" style="margin-top:1rem;">
+        <span class="callout-icon">⚡</span>
+        <div class="callout-body">
+          <p><strong>The math never failed — the people did.</strong> The one-time pad's mathematical proof of perfect secrecy remains unbroken. What broke was operational discipline. Under the pressure of wartime logistics, Soviet cipher clerks reused key pages. That single human decision exposed an entire intelligence network and changed the course of the Cold War.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story 10: Zodiac Z-340 -->
+  <div class="panel" style="margin-bottom:2rem;">
+    <div class="panel-head">
+      <span class="panel-icon">🔍</span>
+      <span class="panel-title" style="color:var(--gold);">Oranchak, Blake, Van Eycke and the Zodiac Z-340</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-coldwar">2020</span>
+        <span class="badge sec-broken">Broke: Zodiac Z-340</span>
+      </div>
+      <p><strong>People:</strong> David Oranchak, Sam Blake, Jarl Van Eycke</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Computational search + n-gram statistical scoring</p>
+      <p style="margin-top:1rem;">51 years unsolved. Cracked during COVID lockdown by a three-person remote team using modern computing and classical cryptanalytic intuition. The key insight: the Z-340 used a diagonal transposition before homophonic substitution — a reading order nobody had tried. Once the transposition was identified, the substitution fell to standard techniques. The killer was not identified.</p>
+      <p style="margin-top:1rem;"><a href="../ciphers/zodiac.html" style="color:var(--gold);font-family:var(--fm);font-size:.85rem;">View the Zodiac Cipher exhibit →</a></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="../cryptanalysis.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous</span>
+    <span class="hall-nav-name">Cryptanalysis Lab</span>
+  </a>
+  <a href="../museum-map.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next →</span>
+    <span class="hall-nav-name">Museum Map</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Related Exhibits</div>
+      <ul class="footer-links">
+        <li><a href="../ciphers/navajo-code-talkers.html">Navajo Code Talkers</a></li>
+        <li><a href="../ciphers/zodiac.html">Zodiac Cipher</a></li>
+        <li><a href="../ciphers/enigma.html">Enigma Machine</a></li>
+        <li><a href="../ciphers/lorenz.html">Lorenz Cipher</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Special Exhibition · 10 stories</span>
+  </div>
+</footer>
+
+</body>
+</html>

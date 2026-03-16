@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hall I: Birth of Cryptography — The Cipher Museum</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../css/museum.css">
 </head>
 <body>
@@ -69,6 +70,26 @@
 
   <!-- Cipher Cards -->
   <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/scytale.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 00</span>
+        <span class="badge era-ancient">Sparta · ~500 BC</span>
+      </div>
+      <div class="card-name">Scytale</div>
+      <p class="card-desc">Spartan generals wrapped leather strips around wooden rods of a specific diameter. Only a rod of the same size could reassemble the message — the earliest known transposition cipher.</p>
+      <div style="font-family:var(--fm);font-size:.8rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.1em;">
+        <span style="color:var(--tx3);">WRAP: </span><span style="color:var(--tx);">HELPMEIAMUNDERATTACK</span><br>
+        <span style="color:var(--tx3);">READ: </span><span style="color:var(--gold-lt);">HDUEANPTTDMAECREITAK</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken</span>
+          <span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Transposition</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
 
     <a href="../ciphers/caesar.html" class="cipher-card">
       <div class="card-head">
@@ -162,6 +183,7 @@
     <div>
       <div class="footer-col-title">This Hall</div>
       <ul class="footer-links">
+        <li><a href="../ciphers/scytale.html">Scytale</a></li>
         <li><a href="../ciphers/caesar.html">Caesar Cipher</a></li>
         <li><a href="../ciphers/polybius.html">Polybius Square</a></li>
       </ul>

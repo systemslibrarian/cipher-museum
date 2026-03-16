@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vernam Cipher — The Cipher Museum</title>
+  <meta name="description" content="Explore the Vernam Cipher — Gilbert Vernam's 1917 XOR teleprinter patent, the direct ancestor of the One-Time Pad and every modern stream cipher including ChaCha20 and AES-GCM.">
+  <meta name="keywords" content="vernam cipher, XOR, cryptography, classical cipher, cipher museum, encryption history, stream cipher">
+  <link rel="stylesheet" href="../css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <style>
+    .difficulty-wrap { display:flex; flex-direction:column; gap:.6rem; }
+    .difficulty-bar { height:8px; background:var(--s4); border-radius:4px; overflow:hidden; }
+    .difficulty-fill { height:100%; border-radius:4px; background:linear-gradient(90deg, var(--gold), var(--orange)); transition:width .6s ease; }
+    .difficulty-label-row { display:flex; justify-content:space-between; font-family:var(--fm); font-size:.65rem; }
+    .difficulty-rating { color:var(--gold); letter-spacing:.1em; text-transform:uppercase; }
+    .difficulty-pct { color:var(--tx3); }
+    .difficulty-note { font-size:.88rem; color:var(--tx2); line-height:1.6; }
+  </style>
+</head>
+<body>
+
+<nav class="museum-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8"  stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2"  fill="currentColor"/>
+        <line x1="16" y1="2"  x2="16" y2="6"  stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2"  y1="16" x2="6"  y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      <li><a href="../modern.html">Modern Crypto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero" data-exhibit="34" data-cipher="vernam" data-hall="unbreakable">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>›</span>
+    <a href="../halls/unbreakable.html">Final Hall: The Unbreakable &amp; the Modern</a><span>›</span>
+    Vernam Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 34 of 37</span>
+    <span class="badge era-19c">1917</span>
+    <span class="badge sec-weak">Weak (if key reused)</span>
+  </div>
+  <h1 class="page-title">Vernam Cipher</h1>
+  <p class="page-tagline">The XOR operation that underpins every modern stream cipher — patented in 1917</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Gilbert Vernam (AT&amp;T Bell Labs)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1917</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Key tape (bitwise XOR)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Key reuse → depth attack</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">XOR as cipher operation · nonce uniqueness</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>
+        <span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Gilbert Vernam was an AT&amp;T Bell Labs engineer who in 1917 patented an automatic cipher for teleprinter communications. Messages on punched paper tape were XOR'd with a key tape character by character. When Joseph Mauborgne suggested using a completely random, non-repeating key tape, they had invented the One-Time Pad — though Shannon would not prove its perfection for another 32 years.</p>
+        <p style="margin-top:1rem;">The Vernam cipher is the direct ancestor of every modern stream cipher. ChaCha20, AES-CTR, and AES-GCM all use the XOR operation Vernam patented. The difference is that modern ciphers generate their keystream from a short key and a nonce, rather than requiring a physical tape as long as the message.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>
+        <span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>The Vernam cipher operates at the bit level using the XOR (exclusive or) operation. Each bit of the plaintext is combined with the corresponding bit of the key.</p>
+        <pre style="background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:1.25rem;font-family:var(--fm);font-size:.8rem;color:var(--tx2);line-height:1.8;overflow-x:auto;margin-top:1rem;">
+Ciphertext = Plaintext XOR Key  (bitwise)
+
+H = 01001000
+K = 10110100  (key byte)
+C = 11111100  (ciphertext)
+
+Decryption is identical:
+C XOR K = P  (XOR is its own inverse)
+
+When key tape is:
+  Random + same length + used once → One-Time Pad (unbreakable)
+  Repeating or non-random          → Vigenère-equivalent (breakable)</pre>
+        <p style="margin-top:1rem;">The elegance of XOR is that encryption and decryption are the same operation. There is no separate decryption algorithm — just XOR the ciphertext with the same key, and the plaintext reappears.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span>
+        <span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Depth Attack (Key Reuse)</div>
+          <div class="attack-diff">Complexity: Moderate · When key tapes were reused</div>
+          <p class="attack-desc">When key tapes were reused (common under operational pressure), XOR-ing two ciphertexts cancels the key: C1 ⊕ C2 = P1 ⊕ P2. This reduces to a running-key cipher attack. If the key was non-random (e.g. a text passage), statistical properties of the key language leak through.</p>
+        </div>
+        <div class="callout callout-danger" style="margin-top:1rem;">
+          <span class="callout-icon">⚡</span>
+          <div class="callout-body">
+            <p><strong>VENONA:</strong> Soviet operators reused one-time pad key pages under WWII supply pressure. The same depth attack that breaks a reused Vernam tape broke thousands of Soviet intelligence messages — exposing the Rosenbergs and Klaus Fuchs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span>
+        <span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Vernam</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>XOR as cipher operation</td><td>All modern stream ciphers: C = P ⊕ keystream</td></tr>
+            <tr><td>Key tape = keystream</td><td>ChaCha20 generates 512-bit blocks of keystream per counter value</td></tr>
+            <tr><td>Reused key = catastrophic failure</td><td>Nonce uniqueness: AES-GCM fails catastrophically on nonce reuse</td></tr>
+            <tr><td>Automatic teleprinter encryption</td><td>Hardware crypto acceleration: AES-NI CPU instructions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span>
+        <span class="panel-title" style="color:var(--gold);">Can You Break This?</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;margin-bottom:1rem;">A short Vernam cipher message. Use what you just learned.</p>
+        <div style="font-family:var(--fm);font-size:.95rem;background:var(--s3);border-radius:var(--r);padding:1.25rem;letter-spacing:.15em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">11001010  10110111  01011101</div>
+        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Key: 10101010  10101010  10101010 · Hint: XOR each bit. What do you get?</p>
+        <button class="btn btn-secondary" style="width:100%;font-size:.72rem;" onclick="this.nextElementSibling.style.display='block';this.style.display='none';">Reveal Answer</button>
+        <div style="display:none;font-family:var(--fm);font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;background:var(--s3);border-radius:var(--r);padding:1rem;line-height:1.8;">01100000  00011101  11110111 → plaintext bytes</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-icon">⚡</span>
+        <span class="panel-title">Difficulty to Break</span>
+      </div>
+      <div class="panel-body">
+        <div class="difficulty-wrap">
+          <div class="difficulty-bar">
+            <div class="difficulty-fill" style="width:40%"></div>
+          </div>
+          <div class="difficulty-label-row">
+            <span class="difficulty-rating">Moderate</span>
+            <span class="difficulty-pct">40%</span>
+          </div>
+          <p class="difficulty-note">Depth attack works if any key material reused. If OTP rules followed: mathematically proven unbreakable (100%).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">📋</span>
+        <span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>34 of 37</td></tr>
+            <tr><td>Era</td><td>1917</td></tr>
+            <tr><td>Security</td><td>Weak if key reused</td></tr>
+            <tr><td>Inventor</td><td>Gilbert Vernam</td></tr>
+            <tr><td>Year</td><td>1917</td></tr>
+            <tr><td>Broken By</td><td>Key reuse / depth attack</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="hall-nav">
+  <a href="../ciphers/one-time-pad.html" class="hall-nav-link">
+    <span class="hall-nav-dir">← Previous</span>
+    <span class="hall-nav-name">One-Time Pad</span>
+  </a>
+  <a href="../ciphers/enigma.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next →</span>
+    <span class="hall-nav-name">Enigma Machine</span>
+  </a>
+</div>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Final Hall: The Unbreakable &amp; the Modern</div>
+      <ul class="footer-links">
+        <li><a href="../halls/unbreakable.html">← Back to Hall</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Lab</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License</span>
+    <span class="footer-copy">Exhibit 34 of 37</span>
+  </div>
+</footer>
+
+</body>
+</html>
