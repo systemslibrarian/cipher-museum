@@ -40,14 +40,10 @@
     </a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Entrance</a></li>
-      <li><a href="museum-map.html">Museum Map</a></li>
-      <li><a href="halls/ancient.html">Halls</a></li>
-      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="museum-map.html">Explore</a></li>
+      <li><a href="learn.html">Learn</a></li>
       <li><a href="challenges.html">Challenges</a></li>
-      <li><a href="glossary.html">Glossary</a></li>
-      <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
-      <li><a href="modern.html">Modern Crypto</a></li>
-      <li><a href="https://github.com/systemslibrarian/cipher-museum" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+      <li><a href="lab/workbench.html">Lab</a></li>
     </ul>
   </div>
 </nav>
@@ -101,141 +97,55 @@
       <div class="hero-stat"><span class="hero-stat-n">2,500+</span><span class="hero-stat-l">Years of History</span></div>
       <div class="hero-stat"><span class="hero-stat-n">1</span><span class="hero-stat-l">Unbreakable Cipher</span></div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;align-items:center;">
-      <a href="halls/ancient.html" class="hero-cta">Enter the Museum →</a>
+    <div class="hero-cta-group">
+      <a href="ciphers/caesar.html" class="hero-cta hero-cta--start">Start with Caesar Cipher →</a>
       <a href="museum-map.html" class="hero-cta hero-cta--ghost">View Museum Map</a>
     </div>
-    <p style="margin-top:1rem;font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;color:var(--tx3);">Or explore the <a href="timeline.html">Timeline</a> · <a href="cryptanalysis.html">Cryptanalysis Lab</a> · <a href="challenges.html">Challenges</a></p>
   </div>
   <div class="hero-scroll" aria-hidden="true"><span>Scroll</span>↓</div>
 </section>
 
-<!-- ═══ LIVE DECRYPT WOW MOMENT ═══ -->
-<div class="section--dark" style="padding:3rem 2rem;text-align:center;overflow:hidden;">
-  <div style="max-width:800px;margin:0 auto;">
-    <div style="font-family:var(--fm);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--tx3);margin-bottom:1rem;">Live Decryption · Caesar Shift</div>
-    <div id="liveDecrypt" style="font-family:var(--fm);font-size:clamp(1rem,3vw,1.6rem);letter-spacing:.2em;color:var(--gold);line-height:1.8;min-height:3rem;transition:color .2s;" aria-live="polite" aria-label="Animated cipher decryption demo">GUVF ZHFRHZ UNF GUVEGL FRIRA PVCUREF</div>
-    <div style="margin-top:.75rem;display:flex;justify-content:center;align-items:center;gap:1rem;">
-      <div style="font-family:var(--fm);font-size:.6rem;color:var(--tx3);">SHIFT: <span id="liveShift" style="color:var(--gold);font-weight:700;">13</span></div>
-      <div style="width:120px;height:3px;background:var(--s4);border-radius:2px;overflow:hidden;"><div id="liveBar" style="width:0%;height:100%;background:var(--gold);border-radius:2px;transition:width .08s;"></div></div>
-    </div>
-  </div>
-</div>
-
-<section class="section">
+<!-- ═══ §2 — CHOOSE YOUR PATH ═══ -->
+<section class="section path-section">
   <div class="section-head">
-    <span class="section-eyebrow">Ten Exhibit Halls</span>
-    <h2 class="section-title">Choose Your Path Through History</h2>
-    <p class="section-sub">Each hall tells a chapter of cryptography's story — from ancient Greece to the Cold War.</p>
+    <span class="section-eyebrow">Where Would You Like to Go?</span>
+    <h2 class="section-title">Choose Your Path</h2>
+    <p class="section-sub">Three ways to explore the museum — pick the one that fits you best.</p>
   </div>
 
-  <div class="hall-previews">
-
-    <a href="halls/ancient.html" class="hall-card fade-up d1" data-hall="1">
-      <div class="hall-card-num">Hall I</div>
-      <h3 class="hall-card-title">Birth of Cryptography</h3>
-      <span class="hall-card-era">Ancient World · 150 BC – 100 AD</span>
-      <p class="hall-card-desc">Caesar's alphabet shift and Polybius's coordinate grid — the two foundational ideas that seeded 2,500 years of cryptographic history.</p>
-      <div class="hall-card-pills"><span class="pill">Caesar Cipher</span><span class="pill">Polybius Square</span></div>
-      <div class="hall-card-arrow">Enter Hall I →</div>
+  <div class="path-cards">
+    <a href="timeline.html" class="path-card path-card--explore">
+      <div class="path-card-icon">🏛️</div>
+      <h3 class="path-card-title">Explore History</h3>
+      <p class="path-card-desc">Browse ciphers by era and civilization — from ancient Greece to the Cold War.</p>
+      <span class="path-card-cta">Enter the Timeline →</span>
     </a>
 
-    <a href="halls/substitution.html" class="hall-card fade-up d2" data-hall="2">
-      <div class="hall-card-num">Hall II</div>
-      <h3 class="hall-card-title">Classical Substitution</h3>
-      <span class="hall-card-era">Medieval — Victorian · 800 – 1929</span>
-      <p class="hall-card-desc">Al-Kindi's frequency analysis shattered monoalphabetic ciphers in 850 AD. Renaissance cryptographers fought back with homophonic systems. Wheatstone invented digraph encryption. Hill applied matrix algebra.</p>
-      <div class="hall-card-pills"><span class="pill">Monoalphabetic</span><span class="pill">Homophonic</span><span class="pill">Playfair</span><span class="pill">Hill Cipher</span></div>
-      <div class="hall-card-arrow">Enter Hall II →</div>
+    <a href="learn.html" class="path-card path-card--learn">
+      <div class="path-card-icon">📖</div>
+      <h3 class="path-card-title">Learn How Ciphers Work</h3>
+      <p class="path-card-desc">Understand the principles behind encryption and how classical ideas became modern security.</p>
+      <span class="path-card-cta">Start Learning →</span>
     </a>
 
-    <a href="halls/polyalphabetic.html" class="hall-card fade-up d3" data-hall="3">
-      <div class="hall-card-num">Hall III</div>
-      <h3 class="hall-card-title">The Polyalphabetic Revolution</h3>
-      <span class="hall-card-era">Renaissance — 19th Century · 1553 – 1880</span>
-      <p class="hall-card-desc">"Le chiffre indéchiffrable" — the unbreakable cipher. Vigenère's repeating key defeated frequency analysis for 300 years, until Babbage found the fatal pattern.</p>
-      <div class="hall-card-pills"><span class="pill">Vigenère</span><span class="pill">Beaufort</span><span class="pill">Porta</span><span class="pill">Running Key</span></div>
-      <div class="hall-card-arrow">Enter Hall III →</div>
+    <a href="challenges.html" class="path-card path-card--challenge">
+      <div class="path-card-icon">⚔️</div>
+      <h3 class="path-card-title">Try a Challenge</h3>
+      <p class="path-card-desc">Test your codebreaking skills with progressively harder encrypted puzzles.</p>
+      <span class="path-card-cta">Take a Challenge →</span>
     </a>
-
-    <a href="halls/transposition.html" class="hall-card fade-up d1" data-hall="4">
-      <div class="hall-card-num">Hall IV</div>
-      <h3 class="hall-card-title">Transposition &amp; Fractionation</h3>
-      <span class="hall-card-era">19th – Early 20th Century</span>
-      <p class="hall-card-desc">Rearranging letters instead of replacing them. Bifid, Rail Fence, and Double Transposition show how position scrambling creates the diffusion that AES uses today.</p>
-      <div class="hall-card-pills"><span class="pill">Rail Fence</span><span class="pill">Double Transposition</span><span class="pill">Bifid</span><span class="pill">Trifid</span></div>
-      <div class="hall-card-arrow">Enter Hall IV →</div>
-    </a>
-
-    <a href="halls/military.html" class="hall-card fade-up d2" data-hall="5">
-      <div class="hall-card-num">Hall V</div>
-      <h3 class="hall-card-title">Military &amp; Spy Ciphers</h3>
-      <span class="hall-card-era">WWI — Cold War · 1880 – 1970</span>
-      <p class="hall-card-desc">ADFGVX broken in 48 hours by one exhausted Frenchman. The VIC cipher — never broken by cryptanalysis, exposed only by a defector. The peak of hand-cipher design.</p>
-      <div class="hall-card-pills"><span class="pill">ADFGVX</span><span class="pill">Nihilist</span><span class="pill">Bazeries</span><span class="pill">VIC Cipher</span></div>
-      <div class="hall-card-arrow">Enter Hall V →</div>
-    </a>
-
-    <a href="halls/civil-war.html" class="hall-card fade-up d3" data-hall="cw">
-      <div class="hall-card-num">Special Exhibition</div>
-      <h3 class="hall-card-title">The Civil War Gallery</h3>
-      <span class="hall-card-era">1861 – 1865</span>
-      <p class="hall-card-desc">The telegraph transformed warfare. Lincoln's Stager cipher secured the Union's communications. The Confederate Vigenère — already publicly broken before the war — fell to Union codebreakers routinely.</p>
-      <div class="hall-card-pills"><span class="pill">Stager Cipher</span><span class="pill">Confederate Vigenère</span><span class="pill">Dictionary Code</span></div>
-      <div class="hall-card-arrow">Enter Gallery →</div>
-    </a>
-
-    <a href="halls/machines.html" class="hall-card fade-up d1" data-hall="6">
-      <div class="hall-card-num">Hall VI</div>
-      <h3 class="hall-card-title">Mechanical Cipher Machines</h3>
-      <span class="hall-card-era">1467 – 1945</span>
-      <p class="hall-card-desc">From Alberti's bronze disk to Hitler's Enigma — 500 years of mechanical cryptography. Breaking the Lorenz cipher built the world's first computer. One machine changed the course of WWII.</p>
-      <div class="hall-card-pills"><span class="pill">Alberti Disk</span><span class="pill">Jefferson Disk</span><span class="pill">Enigma</span><span class="pill">Lorenz</span></div>
-      <div class="hall-card-arrow">Enter Hall VI →</div>
-    </a>
-
-    <a href="halls/puzzle.html" class="hall-card fade-up d2" data-hall="7">
-      <div class="hall-card-num">Hall VII</div>
-      <h3 class="hall-card-title">Puzzle &amp; Novelty Ciphers</h3>
-      <span class="hall-card-era">1605 – Present</span>
-      <p class="hall-card-desc">Freemason symbols. Bacon's binary encoding from 1605. POWs tapping through prison walls. Cryptographically weak but historically fascinating — and Bacon's cipher predicted binary computing by 300 years.</p>
-      <div class="hall-card-pills"><span class="pill">Pigpen</span><span class="pill">Bacon's Cipher</span><span class="pill">Tap Code</span></div>
-      <div class="hall-card-arrow">Enter Hall VII →</div>
-    </a>
-
-    <a href="halls/unbreakable.html" class="hall-card fade-up d3" data-hall="final">
-      <div class="hall-card-num">Final Hall</div>
-      <h3 class="hall-card-title">The Unbreakable</h3>
-      <span class="hall-card-era">1882 — 1949</span>
-      <p class="hall-card-desc">One cipher is mathematically proved unbreakable. The VENONA project showed what happens when you break the rules. Shannon's proof of perfect secrecy drew the line between classical and modern cryptography.</p>
-      <div class="hall-card-pills"><span class="pill">One-Time Pad</span><span class="pill">Vernam</span><span class="pill">Shannon's Proof</span></div>
-      <div class="hall-card-arrow">Enter Final Hall →</div>
-    </a>
-
-    <a href="halls/codebreakers.html" class="hall-card fade-up d1" data-hall="special">
-      <div class="hall-card-num">Special Exhibition</div>
-      <h3 class="hall-card-title">Hall of Codebreakers</h3>
-      <span class="hall-card-era">850 AD — 2020</span>
-      <p class="hall-card-desc">The people who broke the "unbreakable." From Al-Kindi's frequency analysis to Turing's Bombe to the amateur team that cracked the Zodiac Z-340 — ten stories of codebreaking brilliance.</p>
-      <div class="hall-card-pills"><span class="pill">Al-Kindi</span><span class="pill">Turing</span><span class="pill">Friedman</span><span class="pill">Navajo</span></div>
-      <div class="hall-card-arrow">Enter Exhibition →</div>
-    </a>
-
   </div>
 </section>
 
-<svg class="section-divider" viewBox="0 0 180 6"><line x1="0" y1="3" x2="180" y2="3"/></svg>
-
-<!-- Featured Exhibits -->
-<section class="section reveal">
+<!-- ═══ §3 — FEATURED CIPHERS (3 only) ═══ -->
+<section class="section section--dark reveal">
   <div class="section-head">
     <span class="section-eyebrow">Featured Exhibits</span>
-    <h2 class="section-title">Six Landmark Ciphers</h2>
-    <p class="section-sub">The exhibits every visitor should see — from the simplest shift cipher to the machine that changed history.</p>
+    <h2 class="section-title">Three Landmark Ciphers</h2>
+    <p class="section-sub">The exhibits every visitor should see — from the simplest shift to the mathematically unbreakable.</p>
   </div>
 
-  <div class="featured-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;">
-
+  <div class="featured-grid">
     <a href="ciphers/caesar.html" class="cipher-card fade-up d1">
       <div class="card-head"><span class="card-num">Exhibit 01</span></div>
       <h3 class="card-name">Caesar Cipher</h3>
@@ -243,31 +153,10 @@
       <div class="card-foot"><div class="card-badges"><span class="badge era-ancient">Ancient</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
     </a>
 
-    <a href="ciphers/vigenere.html" class="cipher-card fade-up d2">
-      <div class="card-head"><span class="card-num">Exhibit 07</span></div>
-      <h3 class="card-name">Vigenère Cipher</h3>
-      <p class="card-desc">The "indecipherable cipher" that resisted cryptanalysis for 300 years using a repeating polyalphabetic key.</p>
-      <div class="card-foot"><div class="card-badges"><span class="badge era-renaissance">Renaissance</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
-    </a>
-
-    <a href="ciphers/playfair.html" class="cipher-card fade-up d3">
-      <div class="card-head"><span class="card-num">Exhibit 05</span></div>
-      <h3 class="card-name">Playfair Cipher</h3>
-      <p class="card-desc">The first practical digraph cipher — used in the Boer War who encrypted letter pairs through a 5×5 key square.</p>
-      <div class="card-foot"><div class="card-badges"><span class="badge era-19c">19th Century</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
-    </a>
-
-    <a href="ciphers/enigma.html" class="cipher-card fade-up d1">
+    <a href="ciphers/enigma.html" class="cipher-card fade-up d2">
       <div class="card-head"><span class="card-num">Exhibit 27</span></div>
       <h3 class="card-name">Enigma Machine</h3>
       <p class="card-desc">The electromechanical rotor machine that secured Nazi communications — and whose breaking shortened WWII by years.</p>
-      <div class="card-foot"><div class="card-badges"><span class="badge era-wwii">WWII</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
-    </a>
-
-    <a href="ciphers/lorenz.html" class="cipher-card fade-up d2">
-      <div class="card-head"><span class="card-num">Exhibit 28</span></div>
-      <h3 class="card-name">Lorenz Cipher</h3>
-      <p class="card-desc">Hitler's teleprinter cipher — breaking it required Colossus, the world's first programmable electronic computer.</p>
       <div class="card-foot"><div class="card-badges"><span class="badge era-wwii">WWII</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
     </a>
 
@@ -277,41 +166,67 @@
       <p class="card-desc">The only cipher mathematically proved unbreakable — Shannon's 1949 proof of perfect secrecy remains ironclad.</p>
       <div class="card-foot"><div class="card-badges"><span class="badge era-theoretical">Theoretical</span><span class="badge sec-secure">Unbreakable</span></div><span class="card-arrow">→</span></div>
     </a>
+  </div>
 
+  <div class="section-more">
+    <a href="museum-map.html" class="view-all-link">View All 37 Ciphers →</a>
   </div>
 </section>
 
-<svg class="section-divider" viewBox="0 0 180 6"><line x1="0" y1="3" x2="180" y2="3"/></svg>
+<!-- ═══ §4 — TIMELINE PREVIEW ═══ -->
+<section class="section reveal">
+  <div class="section-head">
+    <span class="section-eyebrow">2,500 Years of Secrets</span>
+    <h2 class="section-title">A Journey Through Time</h2>
+    <p class="section-sub">From Spartan war codes to Cold War espionage — every era has a story.</p>
+  </div>
 
-<section class="section section--dark">
-  <div class="content-mid">
-    <div class="section-head" style="margin-bottom:2.5rem;">
-      <span class="section-eyebrow">Why History Matters</span>
-      <h2 class="section-title">Every Classical Cipher Teaches Modern Cryptography</h2>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;">
-      <div class="panel"><div class="panel-head"><span class="panel-icon">🔄</span><span class="panel-title">Substitution → S-Boxes</span></div><div class="panel-body"><p style="font-size:.95rem;">Caesar and monoalphabetic ciphers evolved into AES S-boxes — non-linear substitution tables designed specifically to defeat frequency analysis.</p></div></div>
-      <div class="panel"><div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">Polyalphabetic → Stream Ciphers</span></div><div class="panel-body"><p style="font-size:.95rem;">Vigenère's repeating keyword became ChaCha20's continuous random keystream — the same XOR operation, with a key that never repeats.</p></div></div>
-      <div class="panel"><div class="panel-head"><span class="panel-icon">🔀</span><span class="panel-title">Transposition → Permutation</span></div><div class="panel-body"><p style="font-size:.95rem;">Rail Fence and columnar transposition became AES ShiftRows — ensuring every output bit depends on every input bit.</p></div></div>
-      <div class="panel"><div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Rotor Machines → Block Ciphers</span></div><div class="panel-body"><p style="font-size:.95rem;">Enigma's rotating alphabets became AES rounds — multiple iterations of substitution and permutation to achieve confusion and diffusion.</p></div></div>
-      <div class="panel"><div class="panel-head"><span class="panel-icon">💻</span><span class="panel-title">Lorenz → Computing</span></div><div class="panel-body"><p style="font-size:.95rem;">Breaking the Lorenz cipher required Colossus — the world's first programmable electronic computer. Cryptanalysis built computing.</p></div></div>
-      <div class="panel"><div class="panel-head"><span class="panel-icon">🎲</span><span class="panel-title">One-Time Pad → Perfect Secrecy</span></div><div class="panel-body"><p style="font-size:.95rem;">Shannon proved the OTP is information-theoretically secure. Every modern cipher aims for computational security — as close to perfect as practical key management allows.</p></div></div>
-    </div>
+  <div class="timeline-preview">
+    <a href="halls/ancient.html" class="era-card">
+      <span class="era-card-dot" style="background:#C8845A;"></span>
+      <div class="era-card-body">
+        <h3 class="era-card-title">Ancient World</h3>
+        <span class="era-card-date">150 BC – 100 AD</span>
+        <p class="era-card-desc">Caesar's shift and Polybius's grid — the two ideas that seeded everything.</p>
+      </div>
+      <span class="era-card-arrow">→</span>
+    </a>
+
+    <a href="halls/machines.html" class="era-card">
+      <span class="era-card-dot" style="background:#C85A5A;"></span>
+      <div class="era-card-body">
+        <h3 class="era-card-title">The Machine Age</h3>
+        <span class="era-card-date">1920 – 1945</span>
+        <p class="era-card-desc">Enigma, Lorenz, and the codebreakers who built the first computers to defeat them.</p>
+      </div>
+      <span class="era-card-arrow">→</span>
+    </a>
+
+    <a href="halls/unbreakable.html" class="era-card">
+      <span class="era-card-dot" style="background:#5AC8A0;"></span>
+      <div class="era-card-body">
+        <h3 class="era-card-title">The Unbreakable</h3>
+        <span class="era-card-date">1882 – 1949</span>
+        <p class="era-card-desc">One cipher is mathematically perfect. Shannon's proof drew the line between old and new.</p>
+      </div>
+      <span class="era-card-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="section-more">
+    <a href="timeline.html" class="view-all-link">View Full Timeline →</a>
   </div>
 </section>
 
-<section class="section" style="text-align:center;">
-  <div class="content-narrow">
-    <span class="section-eyebrow">Interactive Challenge</span>
-    <h2 class="section-title" style="margin-bottom:1rem;">The Cryptanalysis Lab</h2>
-    <p style="margin-bottom:1.5rem;">Seven techniques. Twelve famous codebreaks. Interactive frequency analysis, Kasiski examination, and index of coincidence tools.</p>
-    <div class="challenge-box" style="margin:2rem 0;text-align:left;">
-      <div style="font-family:var(--fd);font-size:1.3rem;color:var(--gold);text-align:center;margin-bottom:.5rem;">⚔ Break This Cipher</div>
-      <p style="text-align:center;font-size:.9rem;color:var(--tx3);margin-bottom:.75rem;">Caesar cipher · Shift unknown · Difficulty: Trivial</p>
-      <div class="challenge-cipher">XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEWC HSK</div>
-      <p style="text-align:center;font-size:.85rem;color:var(--tx3);">Hint: E is the most common letter in English. What's the most common letter here?</p>
+<!-- ═══ §5 — FINAL CTA ═══ -->
+<section class="section section--dark final-cta-section">
+  <div class="final-cta-inner">
+    <h2 class="final-cta-title">Ready to Enter the Museum?</h2>
+    <p class="final-cta-desc">37 ciphers. 10 exhibit halls. 2,500 years of history. Begin your journey.</p>
+    <div class="final-cta-buttons">
+      <a href="halls/ancient.html" class="hero-cta">Enter Hall I: Ancient World →</a>
+      <a href="museum-map.html" class="hero-cta hero-cta--ghost">Browse the Museum Map</a>
     </div>
-    <a href="cryptanalysis.html" class="hero-cta" style="display:inline-flex;">Enter the Cryptanalysis Lab →</a>
   </div>
 </section>
 
@@ -324,85 +239,41 @@
       <p class="footer-brand-desc">An open-source educational project exploring the complete history of cryptography — from Polybius to post-quantum encryption. Built for GitHub Pages. No tracking. No backend. Just history.</p>
     </div>
     <div>
-      <div class="footer-col-title">Exhibit Halls</div>
+      <div class="footer-col-title">Explore</div>
       <ul class="footer-links">
-        <li><a href="halls/ancient.html">I · Birth of Cryptography</a></li>
-        <li><a href="halls/substitution.html">II · Classical Substitution</a></li>
-        <li><a href="halls/polyalphabetic.html">III · Polyalphabetic</a></li>
-        <li><a href="halls/transposition.html">IV · Transposition</a></li>
-        <li><a href="halls/military.html">V · Military &amp; Spy</a></li>
-        <li><a href="halls/civil-war.html">Civil War Gallery</a></li>
-        <li><a href="halls/machines.html">VI · Mechanical Machines</a></li>
-        <li><a href="halls/puzzle.html">VII · Puzzle Ciphers</a></li>
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="halls/ancient.html">Hall I · Ancient</a></li>
+        <li><a href="halls/machines.html">Hall VI · Machines</a></li>
         <li><a href="halls/unbreakable.html">Final Hall</a></li>
         <li><a href="halls/codebreakers.html">Hall of Codebreakers</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">Resources</div>
+      <div class="footer-col-title">Learn &amp; Build</div>
       <ul class="footer-links">
-        <li><a href="museum-map.html">Museum Map</a></li>
-        <li><a href="timeline.html">Timeline</a></li>
-        <li><a href="challenges.html">Challenges</a></li>
-        <li><a href="glossary.html">Glossary</a></li>
-        <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="learn.html">How Ciphers Work</a></li>
         <li><a href="modern.html">Modern Cryptography</a></li>
-        <li><a href="cipher-flow.html">Cipher Flow Explorer</a></li>
-        <li><a href="tours/index.html">Guided Tours</a></li>
-        <li><a href="community/index.html">Community</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
         <li><a href="lab/workbench.html">Codebreaker's Workbench</a></li>
+        <li><a href="cryptanalysis.html">Cryptanalysis Lab</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
         <li><a href="https://github.com/systemslibrarian/cipher-museum">GitHub Repository</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">© The Cipher Museum · MIT License · Open Source</span>
-    <span class="footer-copy">v1.1.0 "The Grand Opening" · 37 ciphers · 10 halls</span>
+    <span class="footer-copy">v2.0.0 "The Redesign" · 37 ciphers · 10 halls</span>
   </div>
 </footer>
 
 <script>
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState='running'; io.unobserve(e.target); }});
+// Intersection observer for fade-up animations
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.style.animationPlayState='running'; io.unobserve(e.target); }});
 }, {threshold:.1});
-document.querySelectorAll('.fade-up').forEach(el => { el.style.animationPlayState='paused'; io.observe(el); });
-</script>
-<script>
-// Live Decrypt animation — Caesar shifts from 13→0 revealing plaintext
-(function(){
-  var target = 'THIS MUSEUM HAS THIRTY SEVEN CIPHERS';
-  var el = document.getElementById('liveDecrypt');
-  var bar = document.getElementById('liveBar');
-  var shiftEl = document.getElementById('liveShift');
-  if (!el) return;
-  var shift = 13, step = 0, totalSteps = 13;
-  function caesarShift(text, s) {
-    return text.split('').map(function(c) {
-      if (c >= 'A' && c <= 'Z') return String.fromCharCode(((c.charCodeAt(0) - 65 + s) % 26) + 65);
-      return c;
-    }).join('');
-  }
-  function tick() {
-    if (step > totalSteps) {
-      el.style.color = 'var(--gold-lt)';
-      el.style.textShadow = '0 0 20px rgba(201,168,76,.3)';
-      return;
-    }
-    var s = totalSteps - step;
-    el.textContent = caesarShift(target, s);
-    if (shiftEl) shiftEl.textContent = s;
-    if (bar) bar.style.width = ((step / totalSteps) * 100) + '%';
-    step++;
-    setTimeout(tick, step <= 1 ? 1800 : 120);
-  }
-  // Start after a brief delay so the hero is visible first
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { setTimeout(tick, 400); observer.unobserve(e.target); }
-    });
-  }, {threshold: 0.5});
-  observer.observe(el);
-})();
+document.querySelectorAll('.fade-up').forEach(function(el) { el.style.animationPlayState='paused'; io.observe(el); });
 </script>
 <script src="js/nav.js" defer></script>
 </body>

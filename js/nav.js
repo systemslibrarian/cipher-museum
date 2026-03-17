@@ -15,25 +15,30 @@
 
   /* ── Standardize nav links ───────────────────────────── */
   var NAV = [
-    ['index.html',        'Entrance'],
-    ['museum-map.html',   'Museum Map'],
-    ['halls/ancient.html','Halls'],
-    ['timeline.html',     'Timeline'],
+    ['museum-map.html',   'Explore'],
+    ['learn.html',        'Learn'],
     ['challenges.html',   'Challenges'],
-    ['cryptanalysis.html','Cryptanalysis Lab'],
-    ['modern.html',       'Modern Crypto'],
-    ['glossary.html',     'Glossary']
+    ['lab/workbench.html','Lab']
   ];
   var path = location.pathname;
   var inSub = /\/(ciphers|halls|tours|lab|community)\//.test(path);
   var pre = inSub ? '../' : '';
   var basename = path.split('/').pop() || 'index.html';
   var parentDir = path.split('/').slice(-2, -1)[0] || '';
-  var DIR_ACTIVE = {halls:'Halls',tours:'Tours',community:'Community',lab:'Cryptanalysis Lab'};
-  var activeLabel = DIR_ACTIVE[parentDir] || null;
-  if (!activeLabel) {
-    NAV.forEach(function (n) { if (n[0] === basename) activeLabel = n[1]; });
-  }
+  var DIR_ACTIVE = {halls:'Explore',tours:'Explore',community:'Explore',lab:'Lab'};
+  var ALIASES = {
+    'index.html': null,
+    'museum-map.html': 'Explore',
+    'timeline.html': 'Explore',
+    'glossary.html': 'Learn',
+    'modern.html': 'Learn',
+    'learn.html': 'Learn',
+    'cryptanalysis.html': 'Lab',
+    'challenges.html': 'Challenges',
+    'comparison.html': 'Learn',
+    'cipher-flow.html': 'Explore'
+  };
+  var activeLabel = DIR_ACTIVE[parentDir] || ALIASES[basename] || null;
   links.innerHTML = '';
   NAV.forEach(function (n) {
     var li = document.createElement('li');
@@ -44,14 +49,6 @@
     li.appendChild(a);
     links.appendChild(li);
   });
-  var ghLi = document.createElement('li');
-  var ghA = document.createElement('a');
-  ghA.href = 'https://github.com/systemslibrarian/cipher-museum';
-  ghA.target = '_blank';
-  ghA.rel = 'noopener noreferrer';
-  ghA.textContent = 'GitHub \u2197';
-  ghLi.appendChild(ghA);
-  links.appendChild(ghLi);
 
   /* ── Inject hamburger button ──────────────────────────── */
   var btn = document.createElement('button');

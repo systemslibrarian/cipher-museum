@@ -426,35 +426,18 @@
   var items = document.querySelectorAll('.tl-legend-item[data-filter]');
   var events = document.querySelectorAll('.tl-event[data-era]');
   var headers = document.querySelectorAll('.tl-era-header');
-  var hiddenEras = new Set();
 
-  // Era filtering — click toggles visibility; double-click isolates
+  // Era legend — click scrolls to era section (navigation, not toggle)
   items.forEach(function(item) {
     item.addEventListener('click', function(e) {
       e.preventDefault();
       var era = item.dataset.filter;
-
-      if (hiddenEras.has(era)) {
-        hiddenEras.delete(era);
-      } else {
-        hiddenEras.add(era);
+      var target = document.getElementById('era-' + era);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-      applyFilter();
     });
   });
-
-  function applyFilter() {
-    events.forEach(function(ev) {
-      ev.classList.toggle('hidden', hiddenEras.has(ev.dataset.era));
-    });
-    headers.forEach(function(h) {
-      var eraId = h.id.replace('era-', '');
-      h.style.display = hiddenEras.has(eraId) ? 'none' : '';
-    });
-    items.forEach(function(item) {
-      item.classList.toggle('dimmed', hiddenEras.has(item.dataset.filter));
-    });
-  }
 
   // Scroll-spy — highlight current era in legend
   var eraHeaders = Array.from(headers);
@@ -468,7 +451,7 @@
       }
     }
     items.forEach(function(item) {
-      item.classList.toggle('active', item.dataset.filter === currentEra && !hiddenEras.has(currentEra));
+      item.classList.toggle('active', item.dataset.filter === currentEra);
     });
   }
 

@@ -18,10 +18,16 @@
   <link rel="stylesheet" href="css/museum.css">
   <style>
     .challenges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
-    @media(max-width:600px){
+    @media(max-width:768px){
       .challenges-grid{grid-template-columns:1fr}
+      .ch-card{max-width:100%;overflow:hidden}
       .ch-input-row{flex-direction:column}
-      .ch-submit{width:100%}
+      .ch-submit{width:100%;min-height:44px}
+      .ch-input{min-height:44px;font-size:1rem}
+      .ch-hint-btn{min-height:44px;padding:.6rem 1rem}
+      .ch-ciphertext{font-size:.78rem;letter-spacing:.1em;padding:.75rem;word-break:break-all;overflow-wrap:break-word}
+      .ch-header{flex-wrap:wrap}
+      .ch-body{padding:1rem}
     }
     .ch-card{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);overflow:hidden;transition:all var(--trs)}
     .ch-card:hover{border-color:var(--gold-b);transform:translateY(-2px);box-shadow:var(--sh)}
@@ -341,7 +347,6 @@
     const feedback = document.getElementById('feedback-' + level);
     const guess = normalize(input.value);
     const answer = normalize(ch.answer);
-    const state = getState();
 
     state['attempts' + level] = (state['attempts' + level] || 0) + 1;
 
@@ -365,7 +370,6 @@
     // Enforce progression
     if (level > 1 && !state['ch' + (level - 1)]) return;
     const hintDiv = document.getElementById('hint-' + level);
-    const state = getState();
     const hintIdx = state['hintIdx' + level] || 0;
     if (hintIdx < ch.hints.length) {
       hintDiv.textContent = ch.hints[hintIdx];
