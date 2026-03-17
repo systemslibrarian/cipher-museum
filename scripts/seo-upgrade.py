@@ -31,7 +31,7 @@ DESCRIPTIONS = {
     'halls/civil-war.html': 'Civil War cryptography: the Stager cipher, Confederate Vigen\u00e8re, and dictionary codes from the American Civil War.',
     'halls/machines.html': 'Mechanical cipher machines: Enigma, Lorenz, Jefferson Disk, and Alberti\u2019s original cipher disk.',
     'halls/puzzle.html': 'Puzzle and novelty ciphers: Pigpen, Bacon\u2019s bilateral, tap code, and other creative encoding systems.',
-    'halls/unbreakable.html': 'One-Time Pad, Vernam cipher, and the boundary between theoretically unbreakable and practically secure encryption.',
+    'halls/unbreakable.html': 'One-Time Pad, Vernam cipher, and Claude Shannon\u2019s proof of perfect secrecy \u2014 where classical cryptography reached its limits.',
     'halls/codebreakers.html': 'Ten moments when human ingenuity broke what mathematics could not. From Al-Kindi in 850 AD to the Zodiac cipher solved in 2020.',
     # ── Cipher pages ──
     'ciphers/caesar.html': 'Caesar cipher \u2014 the simplest substitution cipher, used by Julius Caesar with a shift of 3. Interactive demo with all 25 shifts.',
