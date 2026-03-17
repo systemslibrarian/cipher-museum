@@ -2,7 +2,9 @@
 
 > *"The heart of the discerning acquires knowledge, for the ears of the wise seek it out."* — Proverbs 18:15
 
-An open-source, interactive educational website exploring **37 historically important ciphers** across **10 exhibit halls** — from the Spartan scytale in 500 BC to post-quantum cryptography.
+Exploring the history and evolution of cryptography — from classical ciphers to modern secure systems.
+
+An open-source, interactive educational website spanning **37 historically important ciphers** across **10 exhibit halls** — from the Spartan scytale in 500 BC to post-quantum cryptography. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
 
 **[Live Site →](https://ciphermuseum.com)**
 
