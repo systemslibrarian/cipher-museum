@@ -24,7 +24,7 @@ An open-source, interactive educational website spanning **37 historically impor
 | ⚔ | Civil War Gallery | Stager, Confederate Vigenère, Dictionary Code |
 | VI | Mechanical Cipher Machines | Alberti Disk, Jefferson Disk, Enigma, Lorenz, Vernam |
 | VII | Puzzle & Novelty Ciphers | Pigpen, Bacon's Cipher, Tap Code, Zodiac |
-| ★ | The Unbreakable & the Modern | One-Time Pad, Navajo Code Talkers, Modern Crypto |
+| ★ | The Unbreakable | One-Time Pad, Vernam, Shannon's Proof |
 | ⚜ | Hall of Codebreakers | 10 stories — from Al-Kindi to the Zodiac solvers |
 
 ### 🔐 Every Exhibit Follows Four-Part Structure
@@ -95,7 +95,7 @@ cipher-museum/
 │   ├── civil-war.html        ← Special Exhibition: Civil War
 │   ├── machines.html         ← Hall VI: Mechanical Machines
 │   ├── puzzle.html           ← Hall VII: Puzzle & Novelty
-│   ├── unbreakable.html      ← Final Hall: Unbreakable & Modern
+│   ├── unbreakable.html      ← Final Hall: The Unbreakable
 │   └── codebreakers.html     ← Special Exhibition: Hall of Codebreakers
 ├── ciphers/                  ← 37 cipher exhibit pages
 │   ├── caesar.html            ← with interactive demo + SVG wheel diagram
