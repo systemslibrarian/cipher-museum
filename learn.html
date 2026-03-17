@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn — The Cipher Museum</title>
+  <meta name="description" content="Understand how classical ciphers work and how they became the foundation for modern encryption — from Caesar's shift to AES.">
+  <meta property="og:title" content="Learn — The Cipher Museum">
+  <meta property="og:description" content="Understand how classical ciphers work and how they became the foundation for modern encryption.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/learn.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Learn — The Cipher Museum">
+  <meta name="twitter:description" content="Understand how classical ciphers work and how they became the foundation for modern encryption.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/learn.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="museum-map.html">Explore</a></li>
+      <li><a href="learn.html" class="active">Learn</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="lab/workbench.html">Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Entrance</a><span>&rsaquo;</span>
+    Learn
+  </div>
+  <span class="page-eyebrow">Understanding Encryption</span>
+  <h1 class="page-title">How Ciphers Work</h1>
+  <p class="page-tagline">From pen-and-paper codes to the mathematics behind modern security</p>
+</div>
+
+<!-- Why History Matters — relocated from homepage -->
+<section class="section">
+  <div class="content-mid">
+    <div class="section-head" style="margin-bottom:2.5rem;">
+      <span class="section-eyebrow">Why History Matters</span>
+      <h2 class="section-title">Every Classical Cipher Teaches Modern Cryptography</h2>
+      <p class="section-sub">The same ideas that protected Caesar's dispatches now protect your bank account — just with stronger mathematics.</p>
+    </div>
+    <div class="learn-panels-grid">
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔄</span><span class="panel-title">Substitution → S-Boxes</span></div><div class="panel-body"><p style="font-size:.95rem;">Caesar and monoalphabetic ciphers evolved into AES S-boxes — non-linear substitution tables designed specifically to defeat frequency analysis.</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">Polyalphabetic → Stream Ciphers</span></div><div class="panel-body"><p style="font-size:.95rem;">Vigenère's repeating keyword became ChaCha20's continuous random keystream — the same XOR operation, with a key that never repeats.</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔀</span><span class="panel-title">Transposition → Permutation</span></div><div class="panel-body"><p style="font-size:.95rem;">Rail Fence and columnar transposition became AES ShiftRows — ensuring every output bit depends on every input bit.</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Rotor Machines → Block Ciphers</span></div><div class="panel-body"><p style="font-size:.95rem;">Enigma's rotating alphabets became AES rounds — multiple iterations of substitution and permutation to achieve confusion and diffusion.</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">💻</span><span class="panel-title">Lorenz → Computing</span></div><div class="panel-body"><p style="font-size:.95rem;">Breaking the Lorenz cipher required Colossus — the world's first programmable electronic computer. Cryptanalysis built computing.</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🎲</span><span class="panel-title">One-Time Pad → Perfect Secrecy</span></div><div class="panel-body"><p style="font-size:.95rem;">Shannon proved the OTP is information-theoretically secure. Every modern cipher aims for computational security — as close to perfect as practical key management allows.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<svg class="section-divider" viewBox="0 0 180 6"><line x1="0" y1="3" x2="180" y2="3"/></svg>
+
+<!-- Learning paths -->
+<section class="section">
+  <div class="section-head">
+    <span class="section-eyebrow">Continue Learning</span>
+    <h2 class="section-title">Explore by Topic</h2>
+  </div>
+
+  <div class="learn-topics-grid">
+
+    <a href="modern.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Deep Dive</span></div>
+      <h3 class="card-name">Modern Cryptography</h3>
+      <p class="card-desc">How classical failures became AES, RSA, and post-quantum security. The full evolution from pen-and-paper to computational security.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-theoretical">Advanced</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="cryptanalysis.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Techniques</span></div>
+      <h3 class="card-name">Cryptanalysis Lab</h3>
+      <p class="card-desc">Frequency analysis, Kasiski examination, and index of coincidence — the tools that broke every classical cipher.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge sec-broken">Codebreaking</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="glossary.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Reference</span></div>
+      <h3 class="card-name">Glossary</h3>
+      <p class="card-desc">Definitions of every cryptographic term used in the museum — from plaintext to key derivation function.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-19c">Reference</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="comparison.html" class="cipher-card">
+      <div class="card-head"><span class="card-num">Compare</span></div>
+      <h3 class="card-name">Cipher Comparison</h3>
+      <p class="card-desc">Side-by-side analysis of every cipher in the museum — type, era, security status, and key properties.</p>
+      <div class="card-foot"><div class="card-badges"><span class="badge era-medieval">Analysis</span></div><span class="card-arrow">→</span></div>
+    </a>
+
+  </div>
+</section>
+
+<!-- Beginner entry point -->
+<section class="section section--dark" style="text-align:center;">
+  <div class="content-narrow">
+    <span class="section-eyebrow">New to Cryptography?</span>
+    <h2 class="section-title">Start with the Caesar Cipher</h2>
+    <p style="margin-bottom:2rem;">The simplest cipher in history is the best place to begin. Learn how Julius Caesar encoded messages — then see how the same idea powers modern encryption.</p>
+    <a href="ciphers/caesar.html" class="hero-cta" style="display:inline-flex;">Start with Caesar →</a>
+  </div>
+</section>
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="halls/ancient.html">Exhibit Halls</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Learn &amp; Build</div>
+      <ul class="footer-links">
+        <li><a href="modern.html">Modern Cryptography</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="lab/workbench.html">Codebreaker's Workbench</a></li>
+        <li><a href="https://github.com/systemslibrarian/cipher-museum">GitHub Repository</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Learn</span>
+  </div>
+</footer>
+
+<script src="js/nav.js" defer></script>
+</body>
+</html>
