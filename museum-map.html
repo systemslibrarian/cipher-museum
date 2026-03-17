@@ -78,7 +78,7 @@
   <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Museum Map</div>
   <span class="page-eyebrow">Navigate the Museum</span>
   <h1 class="page-title">Museum Map</h1>
-  <p class="page-tagline">37 ciphers · 10 halls · 2,500 years of cryptographic history</p>
+  <p class="page-tagline">37 ciphers · 10 halls · Modern Cryptography wing · 2,500 years of cryptographic history</p>
 </div>
 
 <!-- ───────── VISUAL FLOOR PLAN ───────── -->
@@ -89,7 +89,7 @@
     <p class="section-sub">Click any hall or exhibit to navigate. Your last-visited hall is highlighted.</p>
   </div>
 
-  <div class="bldg" role="region" aria-label="Interactive museum floor plan showing 10 halls arranged in a building layout">
+  <div class="bldg" role="region" aria-label="Interactive museum floor plan showing 10 halls, special exhibitions, and modern cryptography wing">
 
     <!-- ── Entrance Portico ── -->
     <a href="index.html" class="bldg-entrance" data-hall-id="entrance">
@@ -256,6 +256,38 @@
       </div>
     </div>
 
+    <!-- Corridor -->
+    <div class="bldg-corridor" aria-hidden="true">
+      <svg width="100%" height="16" viewBox="0 0 400 16" preserveAspectRatio="none"><line x1="0" y1="8" x2="400" y2="8" stroke="var(--gold-dim)" stroke-width=".5" stroke-dasharray="6 4" opacity=".4"/><polygon points="200,2 196,8 200,14 204,8" fill="var(--gold-dim)" opacity=".3"/></svg>
+    </div>
+
+    <!-- ── Wing E: Special Exhibitions ── -->
+    <div class="bldg-wing">
+      <div class="bldg-wing-label">SPECIAL EXHIBITIONS</div>
+      <div class="bldg-wing-rooms bldg-wing-rooms--duo">
+        <a href="halls/codebreakers.html" class="bldg-room bldg-room--special" data-hall-id="codebreakers" data-color="#A07FCC" style="border-top:2px solid #A07FCC">
+          <div class="bldg-room-num">⚜</div>
+          <div class="bldg-room-name">Hall of Codebreakers</div>
+          <div class="bldg-room-era">850 AD – 2020</div>
+          <div class="bldg-room-exhibits">
+            <span>10 stories of codebreaking brilliance</span>
+            <span>Al-Kindi · Turing · Friedman · Rejewski</span>
+          </div>
+        </a>
+        <div class="bldg-door" aria-hidden="true"><span></span></div>
+        <a href="modern.html" class="bldg-room bldg-room--final" data-hall-id="modern" data-color="#5A90C8" style="border-top:2px solid #5A90C8">
+          <div class="bldg-room-num">→</div>
+          <div class="bldg-room-name">Modern Cryptography</div>
+          <div class="bldg-room-era">Beyond the Museum</div>
+          <div class="bldg-room-exhibits">
+            <span>🔐 AES · ChaCha20</span>
+            <span>🔑 Diffie-Hellman · 🔓 RSA</span>
+            <span>#️⃣ SHA-256 · 🔮 Post-Quantum</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
     <!-- Compass + Legend -->
     <div class="bldg-footer">
       <div class="bldg-legend">
@@ -372,7 +404,7 @@
   if(ref){
     var MAP = {ancient:'ancient',substitution:'substitution',polyalphabetic:'polyalphabetic',
       transposition:'transposition',military:'military','civil-war':'civil-war',
-      machines:'machines',puzzle:'puzzle',unbreakable:'unbreakable'};
+      machines:'machines',puzzle:'puzzle',unbreakable:'unbreakable',codebreakers:'codebreakers'};
     Object.keys(MAP).forEach(function(k){
       if(ref.indexOf('/halls/'+k+'.html')!==-1){
         try{ localStorage.setItem(KEY, MAP[k]); }catch(e){}
@@ -380,6 +412,9 @@
     });
     if(ref.indexOf('/cryptanalysis.html')!==-1){
       try{ localStorage.setItem(KEY, 'lab'); }catch(e){}
+    }
+    if(ref.indexOf('/modern.html')!==-1){
+      try{ localStorage.setItem(KEY, 'modern'); }catch(e){}
     }
   }
 })();
