@@ -33,6 +33,7 @@
   <h1 class="page-title">Modern Cryptography</h1>
   <p class="page-tagline">The mathematical revolution that replaced everything in this museum</p>
   <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">Every cipher in this museum was eventually broken. Modern cryptography didn't replace them by being cleverer — it replaced them by being mathematically honest. By defining precisely what security means, proving that breaking the cipher requires solving problems believed to take billions of years, and designing systems that fail loudly when misused.</p>
+  <p style="max-width:680px;font-size:.95rem;color:var(--tx3);line-height:1.8;margin-top:1rem;position:relative;z-index:1;">Modern secure systems go beyond ciphers alone. Key exchange protocols create shared secrets without ever transmitting them. Hash functions produce irreversible fingerprints. Public-key cryptography enables digital signatures. Together, these building blocks form the architecture of trust that protects the digital world.</p>
 </div>
 
 <div class="section">
@@ -79,13 +80,47 @@
 
   <div class="section-head"><span class="section-eyebrow">The Modern Landscape</span><h2 class="section-title">What Replaced Classical Cryptography</h2></div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:3rem;">
-    <div class="panel"><div class="panel-head"><span class="panel-icon">📦</span><span class="panel-title">AES-256 (Symmetric)</span></div><div class="panel-body"><p>The Advanced Encryption Standard. 128-bit blocks. 256-bit key. 14 rounds of SubBytes + ShiftRows + MixColumns + AddRoundKey. 2²⁵⁶ possible keys. No known practical attack. Protects everything from HTTPS to full-disk encryption.</p></div></div>
-    <div class="panel"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">RSA (Asymmetric)</span></div><div class="panel-body"><p>Rivest, Shamir, Adleman (1977). Security based on the difficulty of factoring the product of two large primes. Two keys: public (encrypt) and private (decrypt). Solved the key distribution problem that defeated Enigma. Used in TLS, email encryption, digital signatures.</p></div></div>
-    <div class="panel"><div class="panel-head"><span class="panel-icon">🤝</span><span class="panel-title">Diffie-Hellman Key Exchange</span></div><div class="panel-body"><p>Two parties derive a shared secret over a public channel without ever sending the secret. Based on the discrete logarithm problem. This is the mathematical solution to the problem that required Enigma operators to physically distribute codebooks.</p></div></div>
-    <div class="panel"><div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">ChaCha20 (Stream Cipher)</span></div><div class="panel-body"><p>Modern stream cipher designed by Daniel Bernstein. 256-bit key, 64-bit nonce, 64-bit counter. XOR keystream with plaintext — the same operation as Vigenère, but with a cryptographically random, never-repeating keystream.</p></div></div>
-    <div class="panel"><div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">SHA-256 (Hash Function)</span></div><div class="panel-body"><p>Produces a fixed 256-bit fingerprint of any input. One-way: given the hash, you cannot recover the input. Collision-resistant: finding two inputs with the same hash requires 2¹²⁸ operations. Used in digital signatures, certificate verification, blockchain.</p></div></div>
-    <div class="panel"><div class="panel-head"><span class="panel-icon">🔮</span><span class="panel-title">Post-Quantum Cryptography</span></div><div class="panel-body"><p>Quantum computers will break RSA and Diffie-Hellman. NIST is standardizing quantum-resistant algorithms: CRYSTALS-Kyber (key exchange) and CRYSTALS-Dilithium (signatures), based on lattice problems believed to resist quantum attacks.</p></div></div>
+  <p style="max-width:680px;font-size:1.05rem;color:var(--tx2);line-height:1.8;margin-bottom:2.5rem;">Modern cryptography uses more than ciphers — secure systems combine encryption, key exchange, and hashing. Each solves a different problem.</p>
+
+  <!-- ── 🔐 Ciphers ── -->
+  <div style="margin-bottom:2.5rem;">
+    <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">🔐 Ciphers — Plaintext → Ciphertext → Plaintext</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      <div class="panel"><div class="panel-head"><span class="panel-icon">📦</span><span class="panel-title">AES-256 (Symmetric)</span></div><div class="panel-body"><p>The Advanced Encryption Standard. 128-bit blocks. 256-bit key. 14 rounds of SubBytes + ShiftRows + MixColumns + AddRoundKey. 2²⁵⁶ possible keys. No known practical attack. Protects everything from HTTPS to full-disk encryption.</p></div></div>
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">ChaCha20 (Stream Cipher)</span></div><div class="panel-body"><p>Modern stream cipher designed by Daniel Bernstein. 256-bit key, 64-bit nonce, 64-bit counter. XOR keystream with plaintext — the same operation as Vigenère, but with a cryptographically random, never-repeating keystream.</p></div></div>
+    </div>
+  </div>
+
+  <!-- ── 🔑 Key Exchange ── -->
+  <div style="margin-bottom:2.5rem;">
+    <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">🔑 Key Exchange — Creating a Shared Secret</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🤝</span><span class="panel-title">Diffie-Hellman Key Exchange</span></div><div class="panel-body"><p>Two parties derive a shared secret over a public channel without ever sending the secret. Based on the discrete logarithm problem. This is the mathematical solution to the problem that required Enigma operators to physically distribute codebooks. <em>Not a cipher — it does not encrypt data.</em></p></div></div>
+    </div>
+  </div>
+
+  <!-- ── 🔓 Public-Key Cryptography ── -->
+  <div style="margin-bottom:2.5rem;">
+    <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">🔓 Public-Key Cryptography — Asymmetric Encryption &amp; Signatures</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">RSA (Asymmetric)</span></div><div class="panel-body"><p>Rivest, Shamir, Adleman (1977). Security based on the difficulty of factoring the product of two large primes. Two keys: public (encrypt) and private (decrypt). Solved the key distribution problem that defeated Enigma. Used in TLS, email encryption, digital signatures.</p></div></div>
+    </div>
+  </div>
+
+  <!-- ── #️⃣ Hash Functions ── -->
+  <div style="margin-bottom:2.5rem;">
+    <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">#️⃣ Hash Functions — One-Way Fingerprints</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">SHA-256 (Hash Function)</span></div><div class="panel-body"><p>Produces a fixed 256-bit fingerprint of any input. One-way: given the hash, you cannot recover the input. Collision-resistant: finding two inputs with the same hash requires 2¹²⁸ operations. Used in digital signatures, certificate verification, blockchain. <em>Not a cipher — it cannot be reversed.</em></p></div></div>
+    </div>
+  </div>
+
+  <!-- ── 🔮 Future ── -->
+  <div style="margin-bottom:3rem;">
+    <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">🔮 The Future — Post-Quantum Cryptography</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      <div class="panel"><div class="panel-head"><span class="panel-icon">🔮</span><span class="panel-title">Post-Quantum Cryptography</span></div><div class="panel-body"><p>Quantum computers will break RSA and Diffie-Hellman. NIST is standardizing quantum-resistant algorithms: CRYSTALS-Kyber (key exchange) and CRYSTALS-Dilithium (signatures), based on lattice problems believed to resist quantum attacks.</p></div></div>
+    </div>
   </div>
 
   <div class="callout callout-mystery">
