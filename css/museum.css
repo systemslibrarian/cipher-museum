@@ -62,6 +62,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .hero-ring:nth-child(3){width:1200px;height:1200px;opacity:.04;animation-delay:3s}
 @keyframes pulseRing{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.04)}}
 .hero-ciphertext{position:absolute;inset:0;font-family:var(--fm);font-size:.7rem;line-height:2;color:var(--gold);opacity:.025;overflow:hidden;padding:2rem;word-break:break-all;letter-spacing:.15em;pointer-events:none;user-select:none}
+.hero-ciphertext-label{position:absolute;top:1.5rem;right:2rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dim);opacity:.5;z-index:1;pointer-events:none}
 .hero-content{position:relative;z-index:2;max-width:860px}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:.75rem;font-family:var(--fm);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
 .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold-dim)}
