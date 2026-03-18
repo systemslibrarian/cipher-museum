@@ -228,6 +228,10 @@
       <div class="technique-name">Simulated Annealing / Genetic Algorithms</div>
       <div class="technique-by">Modern · AI-Assisted</div>
       <p class="technique-desc">Advanced optimization heuristics that explore key space more broadly than pure hill climbing. Genetic algorithms evolve populations of candidate keys. Simulated annealing occasionally accepts worse solutions to escape local optima. Breaks double transposition, Playfair, Hill cipher in seconds.</p>
+      <figure class="figure" style="margin-top:1rem;">
+        <img src="images/artifacts/cryptanalysis-simulated-annealing.png" alt="Diagram illustrating simulated annealing and genetic algorithm optimization techniques used in modern cryptanalysis" loading="lazy">
+        <figcaption class="figure-caption">Simulated annealing — escaping local optima to find the global best key through controlled randomness. Illustration: Google Gemini AI</figcaption>
+      </figure>
       <div class="technique-breaks">
         <a href="ciphers/double-transposition.html" class="badge sec-broken" style="text-decoration:none;">Double Transposition</a>
         <a href="ciphers/playfair.html" class="badge sec-broken" style="text-decoration:none;">Playfair</a>
@@ -782,6 +786,7 @@ function detectCipher() {
   // Check for digits/symbols in raw
   const hasDigits = /\d/.test(raw);
   const hasOnly5 = /^[ADFGVX\s]+$/i.test(raw.replace(/[^A-Za-z]/g, ''));
+  const unique = Object.keys(counts).length;
 
   let verdict = '';
   if (hasOnly5 && unique <= 6) {
@@ -804,7 +809,6 @@ function detectCipher() {
     verdict += '<br>IC ' + ic.toFixed(4) + ' is at or below random (0.038). Text may be encrypted with a one-time pad or very long key.';
   }
   verdict += '<br><br><strong>Length:</strong> ' + n + ' letters';
-  const unique = Object.keys(counts).length;
   verdict += ' &middot; <strong>Unique letters:</strong> ' + unique + '/26';
   out.innerHTML = verdict;
 }
