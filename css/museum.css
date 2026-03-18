@@ -377,8 +377,17 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 
 /* ─── Figure / Diagram Captions (Gap 3) ─── */
 .figure{background:var(--s3);border-radius:var(--r);padding:1.5rem;overflow-x:auto;-webkit-overflow-scrolling:touch;text-align:center;margin-top:1.5rem}
-.figure svg,.figure canvas,.figure img{max-width:100%}
+.figure svg,.figure canvas,.figure img{max-width:100%;cursor:zoom-in;transition:opacity var(--tr)}
+.figure img:hover{opacity:.85}
 .figure-caption{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;color:var(--tx3);text-align:center;margin-top:1rem;font-style:italic}
+
+/* ─── Image Lightbox ─── */
+.lightbox-overlay{position:fixed;inset:0;z-index:9999;background:rgba(6,6,8,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease;cursor:zoom-out;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.lightbox-overlay.active{opacity:1;pointer-events:auto}
+.lightbox-overlay img{max-width:92vw;max-height:90vh;border-radius:var(--r);box-shadow:0 12px 48px rgba(0,0,0,.7);object-fit:contain}
+.lightbox-close{position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;color:var(--gold);font-size:2rem;cursor:pointer;font-family:var(--fm);line-height:1;padding:.5rem;opacity:.7;transition:opacity var(--tr)}
+.lightbox-close:hover{opacity:1}
+.lightbox-caption{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.7rem;color:var(--tx3);letter-spacing:.08em;text-align:center;max-width:80vw;font-style:italic}
 
 /* ═══════════════════════════════════════════════
    HOMEPAGE REDESIGN — Path Cards, Featured, Timeline Preview, Final CTA
