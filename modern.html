@@ -15,6 +15,19 @@
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/modern.html">
   <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .modern-cards{display:none}
+    @media(max-width:768px){
+      .modern-table-wrap{display:none}
+      .modern-cards{display:flex;flex-direction:column;gap:1rem}
+      .mc{background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:1rem}
+      .mc-name{font-family:var(--fd);font-size:.95rem;color:var(--gold-lt);margin-bottom:.6rem}
+      .mc-row{display:flex;gap:.4rem;margin-bottom:.4rem;font-size:.85rem;line-height:1.6}
+      .mc-row:last-child{margin-bottom:0}
+      .mc-label{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);min-width:5.5rem;flex-shrink:0;padding-top:.15rem}
+      .mc-val{color:var(--tx2)}
+    }
+  </style>
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -39,7 +52,7 @@
 
   <div class="section-head"><span class="section-eyebrow">The Complete Journey</span><h2 class="section-title">Classical → Modern: What Each Failure Taught</h2></div>
 
-  <div class="panel" style="margin-bottom:3rem;">
+  <div class="panel modern-table-wrap" style="margin-bottom:3rem;">
     <div class="panel-body" style="padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch">
       <table class="cipher-table">
         <thead><tr><th>Classical Cipher Type</th><th>Fatal Weakness</th><th>Modern Solution</th><th>Modern Example</th></tr></thead>
@@ -55,6 +68,64 @@
           <tr><td>One-Time Pad</td><td>Impractical key management — reuse is catastrophic</td><td>Computationally secure with short key; KDFs for key derivation</td><td>AES-256, X25519 key exchange</td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Mobile card layout (replaces table at ≤768px) -->
+  <div class="modern-cards" style="margin-bottom:3rem;">
+    <div class="mc">
+      <div class="mc-name">Caesar / Monoalphabetic</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Frequency analysis — letter mapping preserved</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">Non-linear S-boxes destroy all frequency patterns</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">AES SubBytes</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">Homophonic Substitution</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Still monoalphabetic — poor distribution leaks info</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">Uniformly random output: every ciphertext byte equally likely</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">AES with proper IV</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">Polyalphabetic / Vigenère</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Repeating key creates detectable periodicity</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">Non-repeating pseudorandom keystreams, nonce + counter</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">ChaCha20, AES-GCM</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">Transposition (Rail Fence, Columnar)</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Letters preserved — anagram attacks work</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">Substitution combined with permutation every round</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">AES ShiftRows + MixColumns</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">Playfair / Hill (block)</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Small blocks leak digraph statistics; linear algebra solvable</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">128-bit blocks, non-linear operations, round keys</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">AES (128-bit block)</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">Fractionation (Bifid, ADFGVX)</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Coordinate mixing insufficient with static key square</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">Multiple rounds of mixing with key-derived round keys</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">AES 10–14 rounds</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">Military layered (ADFGVX, VIC)</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Substitution + transposition — each layer still attackable</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">10–14 rounds of 4 operations — computationally infeasible to reverse</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">AES, Camellia, SM4</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">Rotor machines (Enigma, Lorenz)</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Physical key distribution; operator errors; structural flaws</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">Public-key cryptography eliminates need for shared secret distribution</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">RSA, Diffie-Hellman, ECDH</span></div>
+    </div>
+    <div class="mc">
+      <div class="mc-name">One-Time Pad</div>
+      <div class="mc-row"><span class="mc-label">Weakness</span><span class="mc-val">Impractical key management — reuse is catastrophic</span></div>
+      <div class="mc-row"><span class="mc-label">Solution</span><span class="mc-val">Computationally secure with short key; KDFs for key derivation</span></div>
+      <div class="mc-row"><span class="mc-label">Example</span><span class="mc-val">AES-256, X25519 key exchange</span></div>
     </div>
   </div>
 
