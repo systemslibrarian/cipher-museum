@@ -302,18 +302,17 @@
 
     container.innerHTML = CHALLENGES.map(ch => {
       const solved = state['ch' + ch.level];
-      const locked = ch.level > 1 && !state['ch' + (ch.level - 1)];
       const attempts = state['attempts' + ch.level] || 0;
 
       const diffColor = {Beginner:'var(--green)',Intermediate:'var(--orange)',Expert:'var(--red)',Master:'var(--purple)'}[ch.difficulty] || 'var(--tx3)';
 
       return `
-        <div class="ch-card ${solved ? 'solved' : ''} ${locked ? 'locked' : ''}" data-level="${ch.level}">
+        <div class="ch-card ${solved ? 'solved' : ''}" data-level="${ch.level}">
           <div class="ch-header">
-            <div class="ch-level">${solved ? '✓' : locked ? '🔒' : ch.level}</div>
+            <div class="ch-level">${solved ? '✓' : ch.level}</div>
             <div class="ch-meta">
               <h3>${ch.cipher}</h3>
-              <span style="color:${diffColor}">${ch.difficulty}${locked ? ' · Solve Challenge ' + (ch.level - 1) + ' first' : ''}</span>
+              <span style="color:${diffColor}">${ch.difficulty}</span>
             </div>
           </div>
           <div class="ch-body">
@@ -324,10 +323,10 @@
               <div class="ch-input-row">
                 <input class="ch-input" id="input-${ch.level}" type="text"
                   placeholder="Your answer…" aria-label="Decrypted answer for challenge ${ch.level}"
-                  autocomplete="off" ${locked ? 'disabled' : ''}>
-                <button class="ch-submit" onclick="checkAnswer(${ch.level})" ${locked ? 'disabled' : ''}>Submit</button>
+                  autocomplete="off">
+                <button class="ch-submit" onclick="checkAnswer(${ch.level})">Submit</button>
               </div>
-              <button class="ch-hint-btn" onclick="showHint(${ch.level})" ${locked ? 'disabled' : ''}>💡 Hint ${attempts >= 3 ? '' : '(-1 pt)'}</button>
+              <button class="ch-hint-btn" onclick="showHint(${ch.level})">💡 Hint ${attempts >= 3 ? '' : '(-1 pt)'}</button>
               <div class="ch-hint" id="hint-${ch.level}"></div>
               ${attempts >= 3 ? `<div class="ch-walkthrough visible"><h4>Walkthrough</h4><p>${ch.walkthrough}</p></div>` : ''}
             `}
@@ -341,8 +340,6 @@
   window.checkAnswer = function(level) {
     const ch = CHALLENGES[level - 1];
     const state = getState();
-    // Enforce progression: can't solve a challenge unless prior is solved
-    if (level > 1 && !state['ch' + (level - 1)]) return;
     const input = document.getElementById('input-' + level);
     const feedback = document.getElementById('feedback-' + level);
     const guess = normalize(input.value);
@@ -367,8 +364,6 @@
   window.showHint = function(level) {
     const ch = CHALLENGES[level - 1];
     const state = getState();
-    // Enforce progression
-    if (level > 1 && !state['ch' + (level - 1)]) return;
     const hintDiv = document.getElementById('hint-' + level);
     const hintIdx = state['hintIdx' + level] || 0;
     if (hintIdx < ch.hints.length) {

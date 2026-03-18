@@ -64,12 +64,11 @@
 
   /* ── Mobile-only extra links (visible in drawer only) ── */
   var MOBILE_NAV = [
+    ['tours/index.html',    'Guided Tours'],
     ['timeline.html',       'Timeline'],
     ['glossary.html',       'Glossary'],
     ['modern.html',         'Modern Cryptography'],
     ['comparison.html',     'Cipher Comparison'],
-    ['cryptanalysis.html',  'Cryptanalysis Lab'],
-    ['tours/index.html',    'Guided Tours'],
     ['community/index.html','Community']
   ];
   var divider = document.createElement('li');
