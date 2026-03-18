@@ -21,7 +21,10 @@
     .technique-card {
       background:var(--s2); border:1px solid var(--s4); border-radius:var(--rl); padding:1.5rem;
       transition:all var(--trs); cursor:default;
+      display:flex; flex-direction:column;
     }
+    .technique-card .figure { margin-top:auto; }
+    .technique-card .technique-breaks { margin-top:.75rem; }
     .technique-card:hover { border-color:var(--red-b); background:var(--s3); }
     .technique-num { font-family:var(--fm); font-size:.6rem; letter-spacing:.15em; color:var(--tx3); margin-bottom:.5rem; }
     .technique-name { font-family:var(--fd); font-size:1.15rem; color:var(--tx); margin-bottom:.35rem; letter-spacing:.04em; }
