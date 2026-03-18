@@ -10,6 +10,19 @@ An open-source, interactive educational website spanning **37 historically impor
 
 ---
 
+## 📰 Latest Update
+
+- Added a premium six-stage cryptography evolution strip to [timeline.html](timeline.html), positioned above the historical event timeline.
+- Sequence is explicit and ordered: Ancient → Classical → Mechanical → Modern → Symmetric (AES) → Asymmetric (Public-Key).
+- Implemented mathematically even horizontal spacing, straight directional connectors, and clear arrowheads.
+- Enforced strict two-line node labels, including exact wording for:
+    - AES / Modern Symmetric Encryption
+    - Public-Key Cryptography / Asymmetric Encryption
+- Standardized icon style using consistent inline SVG sizing and stroke weight.
+- Added subtle exhibit-style glow, responsive mobile behavior, and reduced-motion support.
+
+---
+
 ## ✨ Features
 
 ### 🗺️ Ten Exhibit Halls · 37 Ciphers
