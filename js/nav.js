@@ -62,6 +62,30 @@
     '<span class="hamburger-bar"></span>';
   inner.appendChild(btn);
 
+  /* ── Mobile-only extra links (visible in drawer only) ── */
+  var MOBILE_NAV = [
+    ['timeline.html',       'Timeline'],
+    ['glossary.html',       'Glossary'],
+    ['modern.html',         'Modern Cryptography'],
+    ['comparison.html',     'Cipher Comparison'],
+    ['cryptanalysis.html',  'Cryptanalysis Lab'],
+    ['tours/index.html',    'Guided Tours'],
+    ['community/index.html','Community']
+  ];
+  var divider = document.createElement('li');
+  divider.className = 'nav-drawer-divider';
+  divider.setAttribute('aria-hidden','true');
+  links.appendChild(divider);
+  MOBILE_NAV.forEach(function (n) {
+    var li = document.createElement('li');
+    li.className = 'nav-drawer-only';
+    var a = document.createElement('a');
+    a.href = pre + n[0];
+    a.textContent = n[1];
+    li.appendChild(a);
+    links.appendChild(li);
+  });
+
   /* Give the links list an id for aria-controls */
   links.id = 'nav-drawer';
 
