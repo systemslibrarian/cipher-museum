@@ -96,7 +96,7 @@
   });
 
   /* ── Auto-load companion scripts ─────────────────────── */
-  ['breadcrumbs.js','learning-path.js'].forEach(function(f){
+  ['breadcrumbs.js'].forEach(function(f){
     var s = document.createElement('script');
     s.src = pre + 'js/' + f;
     s.defer = true;
@@ -120,32 +120,3 @@
   targets.forEach(function (el) { observer.observe(el); });
 })();
 
-/* ── Exhibit Progress Tracker (Phase 3A) ────────────────── */
-(function () {
-  var TOTAL = 37;
-  var KEY = 'cipher_museum_visited';
-
-  /* Resolve which exhibit page we're on (if any) */
-  var path = location.pathname;
-  var match = path.match(/ciphers\/([a-z0-9-]+)\.html/);
-  if (match) {
-    var visited;
-    try { visited = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { visited = {}; }
-    visited[match[1]] = 1;
-    try { localStorage.setItem(KEY, JSON.stringify(visited)); } catch (e) { /* quota */ }
-  }
-
-  /* Build badge */
-  var visited;
-  try { visited = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { visited = {}; }
-  var count = Object.keys(visited).length;
-  if (count === 0 && !match) return; /* Don't show badge until first visit */
-
-  var badge = document.createElement('a');
-  badge.className = 'progress-badge';
-  badge.href = ((/\/(ciphers|halls|tours|lab|community)\//.test(location.pathname)) ? '../' : '') + 'museum-map.html';
-  badge.setAttribute('aria-label', 'Exhibits visited: ' + count + ' of ' + TOTAL + '. View museum map.');
-  badge.textContent = '\uD83C\uDFDB\uFE0F ' + count + ' / ' + TOTAL;
-  badge.title = 'Exhibits visited – click to view map';
-  document.body.appendChild(badge);
-})();

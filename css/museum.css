@@ -55,7 +55,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .ticker-dot{color:var(--gold);font-size:.55rem}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* HERO */
-.entrance-hero{position:relative;min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:4rem 2rem 5rem}
+.entrance-hero{position:relative;min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:3.25rem 2rem 2.5rem}
 .hero-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid var(--gold-b);border-radius:50%;animation:pulseRing 6s ease-in-out infinite}
 .hero-ring:nth-child(1){width:600px;height:600px;opacity:.15}
 .hero-ring:nth-child(2){width:900px;height:900px;opacity:.08;animation-delay:1.5s}
@@ -76,7 +76,6 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .hero-stat-l{font-family:var(--fm);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3)}
 .hero-cta{display:inline-flex;align-items:center;gap:.75rem;font-family:var(--fd);font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:1rem 2.5rem;border-radius:var(--r);transition:all var(--trs);font-weight:600}
 .hero-cta:hover{background:var(--gold-lt);color:var(--black);transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.3)}
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bounce 2.5s ease-in-out infinite}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 /* HALL CARDS */
 .hall-previews{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
@@ -294,7 +293,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
   .hall-nav{grid-template-columns:1fr}.hero-stats{flex-direction:column}.hero-stat{border-right:none;border-bottom:1px solid var(--gold-b)}.footer-grid{grid-template-columns:1fr;gap:2rem}
 }
 @media(max-width:600px){.section{padding:2.5rem 1rem}.page-hero{padding:3.5rem 1rem 2.5rem}.exhibit-layout{padding:2rem 1rem}.cipher-gallery{grid-template-columns:1fr}.hall-previews{grid-template-columns:1fr}.exhibit-side{grid-template-columns:1fr}.nav-logo-text{font-size:.9rem;letter-spacing:.05em}.container{padding:0 1rem}.hall-nav{padding:2rem 1rem}.museum-footer{padding:3rem 1rem 2rem}.hero-stat{padding:1rem 1.5rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track,.hero-ring,.hero-scroll,.fade-up,.reveal{animation:none !important;opacity:1 !important;transform:none !important}.hero-cta,.hall-card,.cipher-card,.hall-nav-link,.btn,.map-room-card{transition:none !important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track,.hero-ring,.fade-up,.reveal{animation:none !important;opacity:1 !important;transform:none !important}.hero-cta,.hall-card,.cipher-card,.hall-nav-link,.btn,.map-room-card{transition:none !important}}
 /* ─── Entrance animations (Phase 2C) ─── */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
@@ -303,11 +302,6 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 /* Section SVG divider */
 .section-divider{display:block;margin:2.5rem auto;width:180px;height:6px;opacity:.35}
 .section-divider line{stroke:var(--gold-dim);stroke-width:1.5;stroke-dasharray:8 6}
-
-/* Progress badge */
-.progress-badge{position:fixed;bottom:1.25rem;right:1.25rem;background:var(--s2);color:var(--gold-dim);font-family:var(--fm);font-size:.7rem;letter-spacing:.08em;padding:.45rem .9rem;border:1px solid var(--gold-b);border-radius:var(--r-sm);z-index:900;opacity:.85;transition:all .2s;cursor:pointer;text-decoration:none}
-.progress-badge:hover{opacity:1;color:var(--gold);border-color:var(--gold)}
-.learning-path-active .progress-badge{bottom:3.75rem}
 
 /* ─── Museum Map Grid (Gap 1) ─── */
 .map-layout{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
@@ -513,7 +507,7 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 
 /* ── Hero: constrain at mobile ── */
 @media(max-width:600px){
-  .entrance-hero{min-height:auto;padding:3rem 1rem 3.5rem}
+  .entrance-hero{min-height:auto;padding:3rem 1rem 2.5rem}
   .hero-wordmark{font-size:clamp(2.5rem,12vw,4rem);letter-spacing:.06em}
   .hero-sub{font-size:clamp(.85rem,3vw,1.2rem);letter-spacing:.1em;margin-bottom:1.25rem}
   .hero-desc{font-size:1rem;margin-bottom:2rem}
@@ -524,7 +518,6 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
   .hero-stat{padding:.75rem 1rem}
   .hero-cta{font-size:.75rem;padding:.85rem 1.5rem}
   .hero-cta--start{font-size:.85rem;padding:1rem 2rem}
-  .hero-scroll{bottom:1rem}
   .hero-ring:nth-child(1){width:300px;height:300px}
   .hero-ring:nth-child(2){width:450px;height:450px}
   .hero-ring:nth-child(3){width:600px;height:600px}
