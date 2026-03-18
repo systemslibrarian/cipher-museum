@@ -319,15 +319,16 @@
             <p class="ch-prompt">${ch.prompt}</p>
             <div class="ch-ciphertext">${ch.ciphertext}</div>
             ${solved ? `<div class="ch-feedback correct" style="display:block">✓ Solved! Answer: ${ch.answer}</div>` : `
-              <div class="ch-feedback" id="feedback-${ch.level}"></div>
+              <div class="ch-feedback" id="feedback-${ch.level}" role="alert" aria-live="assertive"></div>
               <div class="ch-input-row">
                 <input class="ch-input" id="input-${ch.level}" type="text"
                   placeholder="Your answer…" aria-label="Decrypted answer for challenge ${ch.level}"
+                  aria-describedby="feedback-${ch.level}"
                   autocomplete="off">
                 <button class="ch-submit" onclick="checkAnswer(${ch.level})">Submit</button>
               </div>
               <button class="ch-hint-btn" onclick="showHint(${ch.level})">💡 Hint ${attempts >= 3 ? '' : '(-1 pt)'}</button>
-              <div class="ch-hint" id="hint-${ch.level}"></div>
+              <div class="ch-hint" id="hint-${ch.level}" role="status" aria-live="polite"></div>
               ${attempts >= 3 ? `<div class="ch-walkthrough visible"><h4>Walkthrough</h4><p>${ch.walkthrough}</p></div>` : ''}
             `}
           </div>

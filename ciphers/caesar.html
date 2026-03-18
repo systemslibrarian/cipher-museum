@@ -257,6 +257,7 @@ Example (shift = 3):
       <div class="panel-head"><span class="panel-icon">📊</span><span class="panel-title">Letter Frequency Analyzer</span></div>
       <div class="panel-body">
         <p style="font-size:.88rem;margin-bottom:1rem;">Paste any ciphertext to see letter frequencies. Gold bars reveal the pattern — find the tallest bar to guess the shift.</p>
+        <label class="input-label" for="freqInput">Ciphertext to analyze</label>
         <textarea class="museum-input" id="freqInput" rows="2" placeholder="Paste ciphertext…" oninput="updateFreq()" style="font-size:.82rem;"></textarea>
         <div class="freq-grid" id="freqGrid" style="margin-top:1rem;"></div>
         <p id="freqHint" style="font-family:var(--fm);font-size:.65rem;color:var(--gold);margin-top:.75rem;text-align:center;min-height:1.2em;"></p>
@@ -268,6 +269,7 @@ Example (shift = 3):
       <div class="panel-head"><span class="panel-icon">⚔️</span><span class="panel-title">Brute Force All 25 Shifts</span></div>
       <div class="panel-body">
         <p style="font-size:.88rem;margin-bottom:.75rem;">Paste a Caesar ciphertext — see all 25 decryptions at once. One of them is plaintext.</p>
+        <label class="input-label" for="bruteInput">Ciphertext to brute force</label>
         <textarea class="museum-input" id="bruteInput" rows="2" placeholder="e.g. KHOOR ZRUOG" oninput="updateBrute()" style="font-size:.82rem;"></textarea>
         <div class="brute-table" id="bruteTable" style="margin-top:.75rem;max-height:280px;overflow-y:auto;"></div>
       </div>

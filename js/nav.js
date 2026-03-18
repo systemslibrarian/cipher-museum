@@ -87,6 +87,8 @@
 
   /* Give the links list an id for aria-controls */
   links.id = 'nav-drawer';
+  links.setAttribute('role', 'navigation');
+  links.setAttribute('aria-label', 'Site navigation');
 
   /* ── Toggle drawer ────────────────────────────────────── */
   btn.addEventListener('click', function () {
