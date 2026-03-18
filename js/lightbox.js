@@ -1,55 +1,72 @@
 /* ─── Cipher Museum — Image Lightbox ─── */
-(function(){
-  var overlay=document.createElement('div');
-  overlay.className='lightbox-overlay';
-  overlay.setAttribute('role','dialog');
-  overlay.setAttribute('aria-label','Enlarged image');
-  overlay.innerHTML='<button class="lightbox-close" aria-label="Close">&times;</button><img src="" alt=""><div class="lightbox-caption"></div>';
+document.addEventListener('DOMContentLoaded', function () {
+  // Build overlay
+  var overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-label', 'Enlarged image');
+
+  var closeBtn = document.createElement('button');
+  closeBtn.className = 'lightbox-close';
+  closeBtn.setAttribute('aria-label', 'Close');
+  closeBtn.textContent = '\u00D7';
+
+  var lbImg = document.createElement('img');
+  lbImg.src = '';
+  lbImg.alt = '';
+
+  var caption = document.createElement('div');
+  caption.className = 'lightbox-caption';
+
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(lbImg);
+  overlay.appendChild(caption);
   document.body.appendChild(overlay);
 
-  var lbImg=overlay.querySelector('img');
-  var caption=overlay.querySelector('.lightbox-caption');
-  var closeBtn=overlay.querySelector('.lightbox-close');
-  var isOpen=false;
-
-  function open(src,alt,cap){
-    lbImg.src=src;
-    lbImg.alt=alt||'';
-    caption.textContent=cap||'';
+  function openLightbox(src, alt, cap) {
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    caption.textContent = cap || '';
     overlay.classList.add('active');
-    document.body.style.overflow='hidden';
-    isOpen=true;
-    setTimeout(function(){ closeBtn.focus(); },50);
+    document.body.style.overflow = 'hidden';
   }
 
-  function close(){
-    if(!isOpen) return;
+  function closeLightbox() {
     overlay.classList.remove('active');
-    document.body.style.overflow='';
-    lbImg.src='';
-    isOpen=false;
+    document.body.style.overflow = '';
+    lbImg.src = '';
   }
 
-  /* Close when clicking overlay background (not the enlarged image itself) */
-  overlay.addEventListener('click',function(e){
-    if(e.target===lbImg) return;
-    close();
-  });
-  closeBtn.addEventListener('click',function(e){
+  // Close handlers
+  closeBtn.addEventListener('click', function (e) {
     e.stopPropagation();
-    close();
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape') close();
+    closeLightbox();
   });
 
-  /* Open when clicking any image inside a .figure container */
-  document.querySelectorAll('.figure img').forEach(function(img){
-    img.addEventListener('click',function(e){
-      e.stopPropagation();
-      var fig=img.closest('figure')||img.closest('.figure');
-      var cap=fig?fig.querySelector('.figure-caption'):null;
-      open(img.src,img.alt,cap?cap.textContent:'');
-    });
+  overlay.addEventListener('click', function (e) {
+    if (e.target !== lbImg) {
+      closeLightbox();
+    }
   });
-})();
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+
+  // Attach click handler to every .figure img on the page
+  var imgs = document.querySelectorAll('.figure img');
+  for (var i = 0; i < imgs.length; i++) {
+    (function (img) {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var fig = img.closest('figure') || img.closest('.figure');
+        var capEl = fig ? fig.querySelector('.figure-caption') : null;
+        openLightbox(img.src, img.alt, capEl ? capEl.textContent : '');
+      });
+    })(imgs[i]);
+  }
+});
