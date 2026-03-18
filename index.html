@@ -89,7 +89,7 @@
   <div class="hero-content fade-up">
     <div class="hero-eyebrow">Est. 150 BC — Present Day</div>
     <h1 class="hero-wordmark">The Cipher<br>Museum</h1>
-    <p class="hero-sub">Explore historical ciphers, codebreaking, and the machines that changed history.</p>
+    <p class="hero-sub">2,500 years of ciphers, codebreaking, and the machines that changed the world.</p>
     <div class="hero-stats">
       <div class="hero-stat"><span class="hero-stat-n">37</span><span class="hero-stat-l">Historic Ciphers</span></div>
       <div class="hero-stat"><span class="hero-stat-n">10</span><span class="hero-stat-l">Exhibit Halls</span></div>
@@ -98,6 +98,7 @@
     </div>
     <div class="hero-cta-group">
       <a href="ciphers/caesar.html" class="hero-cta hero-cta--start">Start with Caesar Cipher →</a>
+      <a href="#playground" class="hero-cta hero-cta--ghost">Try the Playground</a>
       <a href="museum-map.html" class="hero-cta hero-cta--ghost">View Museum Map</a>
     </div>
   </div>
@@ -121,7 +122,7 @@
     <a href="learn.html" class="path-card path-card--learn">
       <div class="path-card-icon">📖</div>
       <h3 class="path-card-title">Learn How Ciphers Work</h3>
-      <p class="path-card-desc">How ciphers work and why they break.</p>
+      <p class="path-card-desc">Substitution, transposition, and the ideas that became modern encryption.</p>
       <span class="path-card-cta">Start Learning →</span>
     </a>
 
@@ -134,55 +135,70 @@
   </div>
 </section>
 
-<!-- ═══ §3 — FEATURED CIPHERS (3 only) ═══ -->
-<section class="section section--dark reveal">
+<!-- ═══ §3 — LIVE CIPHER PLAYGROUND ═══ -->
+<section class="section section--dark" id="playground">
   <div class="section-head">
-    <span class="section-eyebrow">Start Here</span>
-    <h2 class="section-title">Featured Exhibits</h2>
+    <span class="section-eyebrow">Try It Now</span>
+    <h2 class="section-title">Live Cipher Playground</h2>
   </div>
 
-  <div class="featured-grid">
-    <a href="ciphers/caesar.html" class="cipher-card fade-up d1">
-      <div class="card-head"><span class="card-num">Exhibit 01</span></div>
-      <h3 class="card-name">Caesar Cipher</h3>
-      <p class="card-desc">The simplest substitution cipher — Julius Caesar shifted each letter by three to encode military dispatches in 58 BC.</p>
-      <div class="card-foot"><div class="card-badges"><span class="badge era-ancient">Ancient</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
-    </a>
+  <div class="playground-wrap" style="max-width:720px;margin:0 auto;">
+    <div class="panel" style="border-color:var(--gold-b);background:var(--s2);">
+      <div class="panel-body" style="padding:1.5rem;">
 
-    <a href="ciphers/enigma.html" class="cipher-card fade-up d2">
-      <div class="card-head"><span class="card-num">Exhibit 27</span></div>
-      <h3 class="card-name">Enigma Machine</h3>
-      <p class="card-desc">The electromechanical rotor machine that secured Nazi communications — and whose breaking shortened WWII by years.</p>
-      <div class="card-foot"><div class="card-badges"><span class="badge era-wwii">WWII</span><span class="badge sec-broken">Broken</span></div><span class="card-arrow">→</span></div>
-    </a>
+        <div style="display:flex;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+          <div style="flex:1;min-width:140px;">
+            <label for="pg-cipher" style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);display:block;margin-bottom:.4rem;">Cipher</label>
+            <select id="pg-cipher" style="width:100%;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.82rem;padding:.55rem .75rem;" aria-label="Choose cipher">
+              <option value="caesar">Caesar (Shift 3)</option>
+              <option value="rot13">ROT-13</option>
+              <option value="atbash">Atbash</option>
+              <option value="vigenere">Vigenère</option>
+            </select>
+          </div>
+          <div id="pg-key-wrap" style="flex:1;min-width:120px;display:none;">
+            <label for="pg-key" style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);display:block;margin-bottom:.4rem;">Key</label>
+            <input id="pg-key" type="text" value="MUSEUM" maxlength="20" spellcheck="false" autocomplete="off" style="width:100%;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--gold);font-family:var(--fm);font-size:.82rem;padding:.55rem .75rem;" aria-label="Cipher key">
+          </div>
+          <div style="display:flex;align-items:end;">
+            <button id="pg-swap" style="font-family:var(--fd);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1rem;border:1px solid var(--gold-b);border-radius:var(--r);background:var(--s3);color:var(--gold);cursor:pointer;" aria-label="Switch between encrypt and decrypt">↕ Decrypt</button>
+          </div>
+        </div>
 
-    <a href="ciphers/one-time-pad.html" class="cipher-card fade-up d3">
-      <div class="card-head"><span class="card-num">Exhibit 26</span></div>
-      <h3 class="card-name">One-Time Pad</h3>
-      <p class="card-desc">The only cipher mathematically proved unbreakable — Shannon's 1949 proof of perfect secrecy remains ironclad.</p>
-      <div class="card-foot"><div class="card-badges"><span class="badge era-theoretical">Theoretical</span><span class="badge sec-secure">Unbreakable</span></div><span class="card-arrow">→</span></div>
-    </a>
-  </div>
+        <div style="margin-bottom:1rem;">
+          <label for="pg-input" style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);display:block;margin-bottom:.4rem;">Plaintext</label>
+          <textarea id="pg-input" rows="2" spellcheck="false" autocomplete="off" placeholder="Type anything…" style="width:100%;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.88rem;padding:.75rem;resize:vertical;line-height:1.6;" aria-label="Text to encrypt or decrypt"></textarea>
+        </div>
 
-  <div class="section-more">
-    <a href="museum-map.html" class="view-all-link">View All 37 Ciphers →</a>
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;">
+            <span style="font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);">Output</span>
+            <button id="pg-copy" style="font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;padding:.25rem .6rem;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx3);cursor:pointer;">COPY</button>
+          </div>
+          <div id="pg-output" style="background:var(--s1);border:1px solid var(--gold-b);border-radius:var(--r);padding:.75rem;font-family:var(--fm);font-size:.88rem;color:var(--gold-lt);min-height:2.5rem;line-height:1.6;letter-spacing:.06em;word-break:break-all;white-space:pre-wrap;"></div>
+        </div>
+
+        <p style="font-size:.82rem;color:var(--tx3);margin-top:1rem;text-align:center;">Want more ciphers and frequency analysis? <a href="lab/workbench.html">Open the full Workbench →</a></p>
+
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ═══ §4 — TIMELINE PREVIEW ═══ -->
+<!-- ═══ §4 — ERA HIGHLIGHTS ═══ -->
 <section class="section reveal">
   <div class="section-head">
-    <span class="section-eyebrow">Explore by Era</span>
-    <h2 class="section-title">A Journey Through Time</h2>
+    <span class="section-eyebrow">2,500 Years in Three Acts</span>
+    <h2 class="section-title">The Story of Encryption</h2>
   </div>
 
   <div class="timeline-preview">
     <a href="halls/ancient.html" class="era-card">
       <span class="era-card-dot" style="background:#C8845A;"></span>
       <div class="era-card-body">
-        <h3 class="era-card-title">Ancient World</h3>
-        <span class="era-card-date">150 BC – 100 AD</span>
-        <p class="era-card-desc">Caesar's shift and Polybius's grid — the two ideas that seeded everything.</p>
+        <h3 class="era-card-title">Act I · Pen &amp; Paper</h3>
+        <span class="era-card-date">150 BC – 1900</span>
+        <p class="era-card-desc">From Caesar's shift to Vigenère's "indecipherable cipher" — every method broken by frequency analysis.</p>
       </div>
       <span class="era-card-arrow">→</span>
     </a>
@@ -190,7 +206,7 @@
     <a href="halls/machines.html" class="era-card">
       <span class="era-card-dot" style="background:#C85A5A;"></span>
       <div class="era-card-body">
-        <h3 class="era-card-title">The Machine Age</h3>
+        <h3 class="era-card-title">Act II · Machines &amp; War</h3>
         <span class="era-card-date">1920 – 1945</span>
         <p class="era-card-desc">Enigma, Lorenz, and the codebreakers who built the first computers to defeat them.</p>
       </div>
@@ -200,9 +216,9 @@
     <a href="halls/unbreakable.html" class="era-card">
       <span class="era-card-dot" style="background:#5AC8A0;"></span>
       <div class="era-card-body">
-        <h3 class="era-card-title">The Unbreakable</h3>
-        <span class="era-card-date">1882 – 1949</span>
-        <p class="era-card-desc">One cipher is mathematically perfect. Shannon's proof drew the line between old and new.</p>
+        <h3 class="era-card-title">Act III · Mathematics Wins</h3>
+        <span class="era-card-date">1949 – Present</span>
+        <p class="era-card-desc">Shannon's proof of perfect secrecy. The one-time pad. The line between classical and modern cryptography.</p>
       </div>
       <span class="era-card-arrow">→</span>
     </a>
@@ -264,6 +280,110 @@ var io = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) { if (e.isIntersecting) { e.target.style.animationPlayState='running'; io.unobserve(e.target); }});
 }, {threshold:.1});
 document.querySelectorAll('.fade-up').forEach(function(el) { el.style.animationPlayState='paused'; io.observe(el); });
+</script>
+
+<!-- Playground engine (self-contained, no external deps) -->
+<script>
+'use strict';
+(function(){
+  var A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var mod = function(a,m){ return((a%m)+m)%m; };
+
+  var engines = {
+    caesar: {
+      enc: function(t){ return t.split('').map(function(ch){
+        var c=ch.toUpperCase(); var i=A.indexOf(c);
+        if(i<0) return ch; var o=A[mod(i+3,26)];
+        return ch===c?o:o.toLowerCase();
+      }).join(''); },
+      dec: function(t){ return t.split('').map(function(ch){
+        var c=ch.toUpperCase(); var i=A.indexOf(c);
+        if(i<0) return ch; var o=A[mod(i-3,26)];
+        return ch===c?o:o.toLowerCase();
+      }).join(''); }
+    },
+    rot13: {
+      enc: function(t){ return t.split('').map(function(ch){
+        var c=ch.toUpperCase(); var i=A.indexOf(c);
+        if(i<0) return ch; var o=A[mod(i+13,26)];
+        return ch===c?o:o.toLowerCase();
+      }).join(''); },
+      dec: function(t){ return this.enc(t); }
+    },
+    atbash: {
+      enc: function(t){ return t.split('').map(function(ch){
+        var c=ch.toUpperCase(); var i=A.indexOf(c);
+        if(i<0) return ch; var o=A[25-i];
+        return ch===c?o:o.toLowerCase();
+      }).join(''); },
+      dec: function(t){ return this.enc(t); }
+    },
+    vigenere: {
+      enc: function(t,k){
+        k=(k||'MUSEUM').toUpperCase().replace(/[^A-Z]/g,'');
+        if(!k) k='MUSEUM'; var ki=0;
+        return t.split('').map(function(ch){
+          var c=ch.toUpperCase(); var i=A.indexOf(c);
+          if(i<0) return ch;
+          var o=A[mod(i+A.indexOf(k[ki%k.length]),26)]; ki++;
+          return ch===c?o:o.toLowerCase();
+        }).join('');
+      },
+      dec: function(t,k){
+        k=(k||'MUSEUM').toUpperCase().replace(/[^A-Z]/g,'');
+        if(!k) k='MUSEUM'; var ki=0;
+        return t.split('').map(function(ch){
+          var c=ch.toUpperCase(); var i=A.indexOf(c);
+          if(i<0) return ch;
+          var o=A[mod(i-A.indexOf(k[ki%k.length]),26)]; ki++;
+          return ch===c?o:o.toLowerCase();
+        }).join('');
+      }
+    }
+  };
+
+  var selCipher = document.getElementById('pg-cipher');
+  var elInput   = document.getElementById('pg-input');
+  var elOutput  = document.getElementById('pg-output');
+  var elKey     = document.getElementById('pg-key');
+  var elKeyWrap = document.getElementById('pg-key-wrap');
+  var btnSwap   = document.getElementById('pg-swap');
+  var btnCopy   = document.getElementById('pg-copy');
+  var encrypting = true;
+
+  function update(){
+    var name = selCipher.value;
+    var eng  = engines[name];
+    var text = elInput.value;
+    var key  = elKey.value;
+    elKeyWrap.style.display = (name==='vigenere')?'':'none';
+    if(!text){ elOutput.textContent=''; return; }
+    elOutput.textContent = encrypting ? eng.enc(text,key) : eng.dec(text,key);
+  }
+
+  selCipher.addEventListener('change', update);
+  elInput.addEventListener('input', update);
+  elKey.addEventListener('input', update);
+  btnSwap.addEventListener('click', function(){
+    encrypting = !encrypting;
+    btnSwap.textContent = encrypting ? '↕ Decrypt' : '↕ Encrypt';
+    var lbl = elInput.previousElementSibling;
+    lbl.textContent = encrypting ? 'Plaintext' : 'Ciphertext';
+    update();
+  });
+  btnCopy.addEventListener('click', function(){
+    var text = elOutput.textContent;
+    if(text && navigator.clipboard){
+      navigator.clipboard.writeText(text);
+      btnCopy.textContent = 'COPIED';
+      setTimeout(function(){ btnCopy.textContent='COPY'; }, 1200);
+    }
+  });
+
+  // Seed with a demo message
+  elInput.value = 'The die is cast';
+  update();
+})();
 </script>
 <script src="js/nav.js" defer></script>
 </body>

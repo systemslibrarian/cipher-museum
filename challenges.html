@@ -101,7 +101,7 @@
   </div>
   <span class="page-eyebrow">Test Your Skills</span>
   <h1 class="page-title">Cipher Challenges</h1>
-  <p class="page-tagline">Ten encrypted messages across four tiers. Break them all to prove you're a master codebreaker.</p>
+  <p class="page-tagline">Ten encrypted messages across four difficulty tiers. Each solved challenge reveals a lesson about why classical ciphers fail.</p>
 </div>
 
 <section class="section">
@@ -163,6 +163,7 @@
       prompt: 'This message was shifted by a fixed number of positions. Determine the shift and decrypt it.',
       ciphertext: 'WKH GLH LV FDVW',
       answer: 'THE DIE IS CAST',
+      lesson: 'Caesar ciphers have only 25 possible keys — you can try them all in seconds. This is why keyspace size matters.',
       hints: [
         'Caesar used a shift of 3. Try shifting each letter back by small numbers.',
         'W→T, K→H, H→E… the shift is 3.'
@@ -174,6 +175,7 @@
       prompt: 'This cipher reverses the alphabet: A↔Z, B↔Y, C↔X… Decrypt it.',
       ciphertext: 'PMLD GSBHVOU',
       answer: 'KNOW THYSELF',
+      lesson: 'Atbash uses a fixed substitution with zero secret information — the "key" is the algorithm itself. Security through obscurity never works.',
       hints: [
         'A=Z, B=Y, C=X, D=W… Map each letter to its reverse.',
         'P→K, M→N, L→O, D→W…'
@@ -185,6 +187,7 @@
       prompt: 'A monoalphabetic substitution with keyword CIPHER. Use frequency analysis or the keyword to crack it.',
       ciphertext: 'SHFRHS JPGH PL MDCPL SPIJT',
       answer: 'SECRETS HIDE IN PLAIN SIGHT',
+      lesson: 'Monoalphabetic ciphers preserve letter frequency. The letter E still appears most often — just under a different name. This is why AES uses non-linear S-boxes.',
       hints: [
         'The keyword CIPHER produces the alphabet: C I P H E R A B D F G J K L M N O Q S T U V W X Y Z. Map ciphertext back.',
         'S→S? No — S is the 19th letter. In the cipher alphabet, position 19 = S maps to original S. Check: position for P in cipher = 3rd letter, which maps to original C… work through the mapping.'
@@ -196,6 +199,7 @@
       prompt: 'This message was encrypted with a Vigenère cipher. The key is a common English word related to waiting.',
       ciphertext: 'IAS DGC XH JTIGGTQW',
       answer: 'THE KEY IS PATIENCE',
+      lesson: 'Vigenère defeated frequency analysis for 300 years by using multiple alphabets. But the repeating key creates patterns — Kasiski examination finds the key length, then each position reduces to Caesar.',
       hints: [
         'The key relates to "waiting." Try PATIENCE as the key word.',
         'Vigenère: subtract key letters from ciphertext letters mod 26. I-P=T, A-A=A..? Try aligning the key PATIENCE with letters only.'
@@ -207,6 +211,7 @@
       prompt: 'This Playfair-encrypted message uses the keyword MONARCHY. Decrypt the digraph pairs.',
       ciphertext: 'SQBRLG MK RDHAFM FKEE',
       answer: 'TRUST NO SINGLE LOCK',
+      lesson: 'Playfair encrypts letter pairs (digraphs), making frequency analysis harder. But digraph frequencies still leak information — modern block ciphers use 128-bit blocks to eliminate this.',
       hints: [
         'Build the 5×5 Playfair grid with MONARCHY: M-O-N-A-R / C-H-Y-B-D / E-F-G-I-K / L-P-Q-S-T / U-V-W-X-Z',
         'Apply the rectangle/row/column rules in reverse for each pair: SQ→TR, BR→US, etc.'
@@ -218,6 +223,7 @@
       prompt: 'Enigma-encrypted with rotors I-II-III at starting position MCK. Type each letter to trace the signal.',
       ciphertext: 'YPR CTYWK DSJWH',
       answer: 'THE BOMBE TURNS',
+      lesson: 'Enigma had 158 quintillion settings but structural flaws (no letter encrypts to itself) gave codebreakers a foothold. Even huge keyspaces fail if the algorithm has exploitable properties.',
       hints: [
         'Use the Enigma demo on the Enigma exhibit page with start position MCK.',
         'Enigma is reciprocal: encrypting the ciphertext with the same settings produces the plaintext.'
@@ -233,6 +239,7 @@
       prompt: 'ROT13 is a special case of Caesar where every letter shifts by exactly 13 positions. Since 13 is half of 26, applying it twice returns the original text.',
       ciphertext: 'XABJYRQTR VF CBJRE',
       answer: 'KNOWLEDGE IS POWER',
+      lesson: 'ROT13 is its own inverse — encrypting twice returns the original. This "involution" property also exists in Enigma and modern Feistel networks.',
       hints: [
         'Shift every letter back (or forward) by 13 — both directions give the same result.',
         'X→K, A→N, B→O, J→W, Y→L, R→E…'
@@ -244,6 +251,7 @@
       prompt: 'The plaintext was written into rows under the key KEYS, then columns were read out in alphabetical key order. Reverse the process.',
       ciphertext: 'RTOOBKCNAEEEHDW',
       answer: 'BREAK THE CODE NOW',
+      lesson: 'Transposition ciphers rearrange letters without changing them — providing diffusion but no confusion. AES ShiftRows and MixColumns are the modern descendants.',
       hints: [
         'Key KEYS → 4 columns. Sorted alphabetically: E(col 2), K(col 1), S(col 4), Y(col 3). 15 letters ÷ 4 columns = 4 rows, last column short.',
         'Distribute ciphertext into columns in key order — E gets 4 letters (RTOO), K gets 4 (BKCN), S gets 3 (AEE), Y gets 4 (EHDW). Write them back into grid positions and read rows.'
@@ -255,6 +263,7 @@
       prompt: 'This message was encrypted with two classical ciphers layered together. One reverses the alphabet, the other shifts it by a single-digit number. Determine both operations and their order.',
       ciphertext: 'RGNYCTEC ESTQMCPO GVV',
       answer: 'PATIENCE CONQUERS ALL',
+      lesson: 'Layering two weak ciphers doesn\'t necessarily create a strong one — if each layer is independently attackable, the stack falls. Modern ciphers use 10-14 rounds where each round depends on the previous one.',
       hints: [
         'Two layers: one is Atbash (A↔Z reverse), the other is a Caesar shift (1–9). Try undoing the outer layer first for different shift values.',
         'Outer layer: Caesar +7. Undo it first (shift back 7): R→K, G→Z, N→G, Y→R… → KZGRVMXV XLMJFVIH ZOO. Then undo Atbash on that result.'
@@ -266,6 +275,7 @@
       prompt: 'Two operations were applied: a letter shift and then the entire result was written backwards. Determine the shift value and undo both layers in the correct order.',
       ciphertext: 'DJPSJMYWJMUNHYXWNK',
       answer: 'FIRST CIPHER THEN KEY',
+      lesson: 'Order of operations matters. In modern cryptography, the precise sequence of substitution, permutation, and key mixing in each round is what creates security. Scramble the order and the cipher breaks.',
       hints: [
         'The outer operation is reversal. Try reading the ciphertext backwards first, then apply Caesar shifts.',
         'Reversed: KNWXYHNUMJWYMJSPJD. Now try small Caesar shifts backwards. Shift −5: K→F, N→I, W→R, X→S, Y→T…'
@@ -318,7 +328,7 @@
           <div class="ch-body">
             <p class="ch-prompt">${ch.prompt}</p>
             <div class="ch-ciphertext">${ch.ciphertext}</div>
-            ${solved ? `<div class="ch-feedback correct" style="display:block">✓ Solved! Answer: ${ch.answer}</div>` : `
+            ${solved ? `<div class="ch-feedback correct" style="display:block">✓ Solved! Answer: ${ch.answer}</div>${ch.lesson ? `<div style="margin-top:.75rem;padding:.75rem;background:var(--gold-glow);border:1px solid var(--gold-b);border-radius:var(--r);font-size:.82rem;color:var(--tx2);line-height:1.7;"><strong style="color:var(--gold);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.3rem;">What this teaches</strong>${ch.lesson}</div>` : ''}` : `
               <div class="ch-feedback" id="feedback-${ch.level}" role="alert" aria-live="assertive"></div>
               <div class="ch-input-row">
                 <input class="ch-input" id="input-${ch.level}" type="text"
@@ -356,7 +366,7 @@
       setTimeout(renderChallenges, 800);
     } else {
       feedback.className = 'ch-feedback wrong';
-      feedback.textContent = '✗ Not quite. Try again.' + (state['attempts' + level] >= 3 ? ' Walkthrough unlocked below.' : '');
+      feedback.textContent = '✗ Not quite — check your work and try again.' + (state['attempts' + level] >= 3 ? ' Walkthrough unlocked below.' : ' Use a hint if you\'re stuck.');
       saveState(state);
       if (state['attempts' + level] >= 3) renderChallenges();
     }
