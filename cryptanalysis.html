@@ -172,6 +172,10 @@
       <div class="technique-name">Index of Coincidence</div>
       <div class="technique-by">William Friedman · 1920</div>
       <p class="technique-desc">Measures statistical similarity to natural language. English text has an IC of ~0.066. Random text has ~0.038. A polyalphabetic cipher produces values between these — and the IC can reveal the key length without finding repeated strings.</p>
+      <figure class="figure" style="margin-top:1rem;">
+        <img src="images/artifacts/cryptanalysis-index-of-coincidence.png" alt="Diagram explaining the Index of Coincidence technique used to distinguish encrypted text from natural language" loading="lazy">
+        <figcaption class="figure-caption">Index of Coincidence — measuring statistical deviation from random to determine cipher type and key length. Illustration: Google Gemini AI</figcaption>
+      </figure>
       <div class="technique-breaks">
         <a href="ciphers/vigenere.html" class="badge sec-broken" style="text-decoration:none;">Vigenère</a>
         <a href="ciphers/running-key.html" class="badge sec-broken" style="text-decoration:none;">Running Key</a>
@@ -196,6 +200,10 @@
       <div class="technique-name">Known Plaintext Attack</div>
       <div class="technique-by">Universal · Classical through Modern</div>
       <p class="technique-desc">When some plaintext is known, the key can often be derived directly. The Hill cipher's matrix key is recoverable with just two known plaintext-ciphertext pairs by solving a system of linear equations. Enigma used weather forecasts as cribs.</p>
+      <figure class="figure" style="margin-top:1rem;">
+        <img src="images/artifacts/cryptanalysis-known-plaintext-attack.png" alt="Diagram showing how a known plaintext attack derives cipher keys from matched plaintext-ciphertext pairs" loading="lazy">
+        <figcaption class="figure-caption">Known plaintext attack — using matched plaintext-ciphertext pairs to recover the encryption key. Illustration: Google Gemini AI</figcaption>
+      </figure>
       <div class="technique-breaks">
         <a href="ciphers/hill.html" class="badge sec-broken" style="text-decoration:none;">Hill Cipher</a>
         <a href="ciphers/enigma.html" class="badge sec-broken" style="text-decoration:none;">Enigma</a>
