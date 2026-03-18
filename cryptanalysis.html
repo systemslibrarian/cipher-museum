@@ -140,6 +140,10 @@
       <div class="technique-name">Frequency Analysis</div>
       <div class="technique-by">Al-Kindi · Baghdad · ~850 AD</div>
       <p class="technique-desc">Languages have predictable letter frequencies. In English, E=12.7%, T=9.1%, A=8.2%. Any cipher that maps one letter to one symbol preserves these frequencies. Count the symbols, compare to known frequencies, recover the key.</p>
+      <figure class="figure" style="margin-top:1rem;">
+        <img src="images/artifacts/cryptanalysis-letter-frequency-chart.png" alt="Chart showing English letter frequency distribution used in cryptanalysis" loading="lazy">
+        <figcaption class="figure-caption">English letter frequency distribution — the foundation of frequency analysis attacks. Illustration: Google Gemini AI</figcaption>
+      </figure>
       <div class="technique-breaks">
         <a href="ciphers/caesar.html" class="badge sec-broken" style="text-decoration:none;">Caesar</a>
         <a href="ciphers/monoalphabetic.html" class="badge sec-broken" style="text-decoration:none;">Monoalphabetic</a>
@@ -152,6 +156,10 @@
       <div class="technique-name">Kasiski Examination</div>
       <div class="technique-by">Friedrich Kasiski · 1863</div>
       <p class="technique-desc">In a Vigenère cipher, the same plaintext + same key position = same ciphertext. Identical repeated strings in the ciphertext reveal probable key length. Their spacing is likely a multiple of the key length.</p>
+      <figure class="figure" style="margin-top:1rem;">
+        <img src="images/artifacts/cryptanalysis-kasiski-examination-vigenere-attack.png" alt="Diagram illustrating the Kasiski examination technique for breaking Vigenère ciphers" loading="lazy">
+        <figcaption class="figure-caption">Kasiski examination — finding repeated ciphertext sequences to determine Vigenère key length. Illustration: Google Gemini AI</figcaption>
+      </figure>
       <div class="technique-breaks">
         <a href="ciphers/vigenere.html" class="badge sec-broken" style="text-decoration:none;">Vigenère</a>
         <a href="ciphers/beaufort.html" class="badge sec-broken" style="text-decoration:none;">Beaufort</a>

@@ -789,3 +789,15 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 /* ── Live region styling for screen reader feedback ── */
 [role="alert"]{font-family:var(--fm);font-size:.7rem;letter-spacing:.08em}
 [role="status"]{font-family:var(--fm);font-size:.7rem;letter-spacing:.08em}
+
+/* ── Playground mobile ── */
+@media(max-width:600px){
+  #playground .panel-body{padding:1rem !important}
+  #playground select,#playground input[type="text"],#playground textarea{font-size:1rem;min-height:44px}
+  #playground button{min-height:44px}
+}
+
+/* ── Confusion/Diffusion grid: stack on mobile ── */
+@media(max-width:600px){
+  .cd-grid{grid-template-columns:1fr !important}
+}
