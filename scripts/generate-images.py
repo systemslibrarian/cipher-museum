@@ -49,13 +49,13 @@ def draw_rounded_rect(draw, xy, fill, radius=10):
 
 # 1. Letter Frequency Chart
 def make_frequency_chart():
-    img = Image.new('RGB', (W, H), BG)
+    img = Image.new('RGB', (W, 560), BG)
     draw = ImageDraw.Draw(img)
     title_font = get_bold_font(22)
     label_font = get_font(12)
     val_font = get_font(10)
 
-    text_center(draw, "English Letter Frequency Distribution", 15, title_font, GOLD)
+    text_center(draw, "English Letter Frequency Distribution", 20, title_font, GOLD)
 
     freqs = {'E':12.7,'T':9.1,'A':8.2,'O':7.5,'I':7.0,'N':6.7,'S':6.3,'H':6.1,
              'R':6.0,'D':4.3,'L':4.0,'C':2.8,'U':2.8,'M':2.4,'W':2.4,'F':2.2,
@@ -63,15 +63,15 @@ def make_frequency_chart():
              'Q':0.10,'Z':0.07}
 
     margin_left = 50
-    margin_bottom = 60
-    chart_w = W - margin_left - 30
-    chart_h = H - 100
-    bar_w = chart_w // 26 - 2
+    margin_bottom = 80
+    top_y = 65
+    chart_h = 560 - top_y - margin_bottom
+    bar_w = (W - margin_left - 30) // 26 - 2
     max_freq = 13.0
-    base_y = H - margin_bottom
+    base_y = 560 - margin_bottom
 
     # Y axis
-    draw.line([(margin_left, 50), (margin_left, base_y)], fill=(100,100,120), width=1)
+    draw.line([(margin_left, top_y), (margin_left, base_y)], fill=(100,100,120), width=1)
     for tick in range(0, 14, 2):
         y = base_y - int((tick / max_freq) * chart_h)
         draw.line([(margin_left - 5, y), (margin_left, y)], fill=(100,100,120))
@@ -92,7 +92,7 @@ def make_frequency_chart():
 
     # X axis
     draw.line([(margin_left, base_y), (W - 20, base_y)], fill=(100,100,120), width=1)
-    text_center(draw, "Foundation of frequency analysis attacks", H - 22, get_font(13), (150,150,170))
+    text_center(draw, "Foundation of frequency analysis attacks", 560 - 40, get_font(13), (150,150,170))
 
     img.save(os.path.join(OUT, 'cryptanalysis-letter-frequency-chart.png'))
     print("  Created: cryptanalysis-letter-frequency-chart.png")
