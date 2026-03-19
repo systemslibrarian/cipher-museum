@@ -16,6 +16,7 @@
   /* ── Standardize nav links ───────────────────────────── */
   var NAV = [
     ['museum-map.html',   'Explore'],
+    ['timeline.html',     'Timeline'],
     ['learn.html',        'Learn'],
     ['challenges.html',   'Challenges'],
     ['lab/workbench.html','Lab']
@@ -29,7 +30,7 @@
   var ALIASES = {
     'index.html': null,
     'museum-map.html': 'Explore',
-    'timeline.html': 'Explore',
+    'timeline.html': 'Timeline',
     'glossary.html': 'Learn',
     'modern.html': 'Learn',
     'learn.html': 'Learn',
