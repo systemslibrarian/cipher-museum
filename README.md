@@ -53,7 +53,7 @@ An open-source, interactive educational website spanning **37 historically impor
 
 ### 📊 Additional Tools
 
-- **Cryptanalysis Lab** — 8 interactive tools: frequency analysis, Kasiski examination, index of coincidence, chi-squared test, and more
+- **Cryptanalysis Techniques** — 7 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, and simulated annealing
 - **Cipher Challenges** — 10 progressive puzzles from Caesar to Enigma with hints and solutions
 - **Timeline** — Interactive 2,400-year history with era filtering, scroll-spy, and 23 clickable events
 - **Comparison Table** — Sortable, filterable table comparing all 37 ciphers by type, era, security level, and key method
@@ -88,7 +88,7 @@ cipher-museum/
 ├── comparison.html          ← Sortable 37-cipher comparison table
 ├── challenges.html          ← 10 progressive cipher challenges
 ├── glossary.html            ← Cryptography glossary
-├── cryptanalysis.html       ← Cryptanalysis Lab (8 interactive tools)
+├── cryptanalysis.html       ← Cryptanalysis Techniques (7 interactive techniques)
 ├── cipher-flow.html         ← Visual cipher family relationships
 ├── modern.html              ← Modern Cryptography overview
 ├── favicon.svg              ← Gold cipher wheel icon

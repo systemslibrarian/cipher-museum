@@ -14,7 +14,7 @@ LINKS = [
     ("halls/ancient.html","Halls"),
     ("timeline.html",    "Timeline"),
     ("challenges.html",  "Challenges"),
-    ("cryptanalysis.html","Cryptanalysis Lab"),
+    ("cryptanalysis.html","Cryptanalysis Techniques"),
     ("modern.html",      "Modern Crypto"),
     ("glossary.html",    "Glossary"),
     ("https://github.com/systemslibrarian/cipher-museum", "GitHub ↗"),
@@ -26,7 +26,7 @@ ACTIVE_MAP = {
     "museum-map.html":   "Museum Map",
     "timeline.html":     "Timeline",
     "challenges.html":   "Challenges",
-    "cryptanalysis.html":"Cryptanalysis Lab",
+    "cryptanalysis.html":"Cryptanalysis Techniques",
     "modern.html":       "Modern Crypto",
     "glossary.html":     "Glossary",
 }
