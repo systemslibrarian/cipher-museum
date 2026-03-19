@@ -381,5 +381,23 @@ document.querySelectorAll('.fade-up').forEach(function(el) { el.style.animationP
 </script>
 <script src="js/nav.js" defer></script>
 <script src="js/lightbox.js"></script>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:600px)');
+  function initTicker(e){
+    var track=document.querySelector('.ticker-track');
+    if(!track)return;
+    var duped=track.querySelector('[data-ticker-clone]');
+    if(e.matches&&!duped){
+      var items=track.querySelectorAll('.ticker-item');
+      items.forEach(function(el){var c=el.cloneNode(true);c.setAttribute('data-ticker-clone','');c.setAttribute('aria-hidden','true');track.appendChild(c);});
+    }else if(!e.matches&&duped){
+      track.querySelectorAll('[data-ticker-clone]').forEach(function(el){el.remove();});
+    }
+  }
+  mq.addEventListener('change',initTicker);
+  initTicker(mq);
+})();
+</script>
 </body>
 </html>

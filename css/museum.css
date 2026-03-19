@@ -545,9 +545,9 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 
 /* ── Ticker fix ── */
 @media(max-width:600px){
-  .ticker-strip{padding:.6rem 0}
+  .ticker-strip{padding:.6rem 0;overflow:hidden}
   .ticker-item{font-size:.7rem;letter-spacing:.1em;gap:.4rem;min-height:40px}
-  .ticker-track{gap:2rem}
+  .ticker-track{flex-wrap:nowrap;justify-content:flex-start;gap:2rem;max-width:none;width:max-content;animation:ticker 30s linear infinite;padding:0 1rem}
 }
 
 /* ── Page hero: tighter on mobile ── */
@@ -623,8 +623,9 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 
 /* ── Workbench layout: stack ── */
 @media(max-width:768px){
-  .wb-layout{grid-template-columns:1fr !important}
-  .wb-sidebar{order:-1}
+  .wb-main-wrap{padding:0 1rem 3rem}
+  .wb-layout{grid-template-columns:1fr !important;gap:1rem}
+  .wb-panel{padding:1rem}
   .wb-textarea{min-height:100px;font-size:.78rem}
   .wb-row{flex-direction:column}
   .wb-row>div{min-width:0}
@@ -632,6 +633,7 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
   .wb-btn{min-height:44px;flex:1;min-width:0;font-size:.72rem;padding:.6rem .8rem}
   .wb-label{font-size:.62rem}
   .wb-select,.wb-input{font-size:.82rem;padding:.6rem .75rem;min-height:44px}
+  .wb-copy{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
   .freq-bar-wrap{height:70px}
   .freq-labels span{font-size:.45rem}
 }
