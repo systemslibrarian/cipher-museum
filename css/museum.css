@@ -69,8 +69,8 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .hero-content{position:relative;z-index:2;max-width:860px}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:.75rem;font-family:var(--fm);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
 .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold-dim)}
-.hero-wordmark{font-family:var(--fd);font-size:clamp(2.5rem,7vw,5rem);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tx);line-height:.9;margin-bottom:.4rem}
-.hero-sub{font-family:var(--fd);font-size:clamp(.9rem,2.4vw,1.35rem);font-weight:300;font-style:italic;color:var(--gold);letter-spacing:.2em;margin-bottom:2rem}
+.hero-wordmark{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tx);line-height:.9;margin-bottom:.4rem}
+.hero-sub{font-family:var(--fd);font-size:clamp(.75rem,1.6vw,1rem);font-weight:300;font-style:italic;color:var(--gold);letter-spacing:.2em;margin-bottom:1.5rem}
 .hero-desc{font-size:1.15rem;color:var(--tx2);max-width:580px;margin:0 auto 3rem;line-height:1.9}
 .hero-stats{display:flex;border:1px solid var(--gold-b);border-radius:var(--rl);overflow:hidden;background:rgba(0,0,0,.3);margin-bottom:3rem;flex-wrap:wrap}
 .hero-stat{padding:1.25rem 2.5rem;border-right:1px solid var(--gold-b);text-align:center;flex:1;min-width:120px}
@@ -526,8 +526,8 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 /* ── Hero: constrain at mobile ── */
 @media(max-width:600px){
   .entrance-hero{min-height:auto;padding:3rem 1rem 2.5rem}
-  .hero-wordmark{font-size:clamp(2rem,10vw,3rem);letter-spacing:.06em}
-  .hero-sub{font-size:clamp(.75rem,2.5vw,1rem);letter-spacing:.1em;margin-bottom:1.25rem}
+  .hero-wordmark{font-size:clamp(1.6rem,8vw,2.2rem);letter-spacing:.06em}
+  .hero-sub{font-size:clamp(.7rem,2vw,.85rem);letter-spacing:.1em;margin-bottom:1rem}
   .hero-desc{font-size:1rem;margin-bottom:2rem}
   .hero-eyebrow{font-size:.6rem;letter-spacing:.15em;margin-bottom:1.25rem}
   .hero-eyebrow::before,.hero-eyebrow::after{width:20px}
