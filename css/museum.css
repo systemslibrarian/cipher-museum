@@ -51,8 +51,8 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .nav-links a{font-family:var(--fd);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2);padding:.55rem 1rem;border-radius:var(--r);transition:all var(--tr)}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);background:var(--gold-glow)}
 /* TICKER */
-.ticker-strip{background:var(--s1);border-bottom:1px solid var(--s4);padding:.85rem 0}
-.ticker-track{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 2.25rem;max-width:1360px;margin:0 auto;padding:0 2rem}
+.ticker-strip{background:var(--s1);border-bottom:1px solid var(--s4);padding:.85rem 0;overflow:hidden}
+.ticker-track{display:flex;gap:4rem;width:max-content;animation:ticker 55s linear infinite}
 .ticker-item{font-family:var(--fm);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx2);white-space:nowrap;display:flex;align-items:center;gap:.6rem;text-decoration:none;transition:color var(--tr);min-height:44px}
 .ticker-item:hover{color:var(--gold)}
 .ticker-dot{color:var(--gold);font-size:.55rem}
@@ -545,9 +545,9 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 
 /* ── Ticker fix ── */
 @media(max-width:600px){
-  .ticker-strip{padding:.6rem 0;overflow:hidden}
+  .ticker-strip{padding:.6rem 0}
   .ticker-item{font-size:.7rem;letter-spacing:.1em;gap:.4rem;min-height:40px}
-  .ticker-track{flex-wrap:nowrap;justify-content:flex-start;gap:2rem;max-width:none;width:max-content;animation:ticker 30s linear infinite;padding:0 1rem}
+  .ticker-track{gap:2rem;animation-duration:30s}
 }
 
 /* ── Page hero: tighter on mobile ── */
