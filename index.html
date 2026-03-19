@@ -150,6 +150,11 @@
               <option value="rot13">ROT-13</option>
               <option value="atbash">Atbash</option>
               <option value="vigenere">Vigenère</option>
+              <option value="beaufort">Beaufort</option>
+              <option value="affine">Affine (a=5, b=8)</option>
+              <option value="railfence">Rail Fence</option>
+              <option value="polybius">Polybius Square</option>
+              <option value="bacon">Bacon's Cipher</option>
             </select>
           </div>
           <div id="pg-key-wrap" style="flex:1;min-width:120px;display:none;">
@@ -335,6 +340,94 @@ document.querySelectorAll('.fade-up').forEach(function(el) { el.style.animationP
           return ch===c?o:o.toLowerCase();
         }).join('');
       }
+    },
+    beaufort: {
+      enc: function(t,k){
+        k=(k||'MUSEUM').toUpperCase().replace(/[^A-Z]/g,'');
+        if(!k) k='MUSEUM'; var ki=0;
+        return t.split('').map(function(ch){
+          var c=ch.toUpperCase(); var i=A.indexOf(c);
+          if(i<0) return ch;
+          var o=A[mod(A.indexOf(k[ki%k.length])-i,26)]; ki++;
+          return ch===c?o:o.toLowerCase();
+        }).join('');
+      },
+      dec: function(t,k){ return this.enc(t,k); }
+    },
+    affine: {
+      enc: function(t){
+        return t.split('').map(function(ch){
+          var c=ch.toUpperCase(); var i=A.indexOf(c);
+          if(i<0) return ch; var o=A[mod(5*i+8,26)];
+          return ch===c?o:o.toLowerCase();
+        }).join('');
+      },
+      dec: function(t){
+        return t.split('').map(function(ch){
+          var c=ch.toUpperCase(); var i=A.indexOf(c);
+          if(i<0) return ch; var o=A[mod(21*(i-8),26)];
+          return ch===c?o:o.toLowerCase();
+        }).join('');
+      }
+    },
+    railfence: {
+      enc: function(t){
+        var rails=['','',''];
+        var r=0,dir=1;
+        for(var i=0;i<t.length;i++){
+          rails[r]+=t[i];
+          if(r===0) dir=1; if(r===2) dir=-1;
+          r+=dir;
+        }
+        return rails.join('');
+      },
+      dec: function(t){
+        var n=t.length,lens=[0,0,0],r=0,dir=1;
+        for(var i=0;i<n;i++){ lens[r]++; if(r===0)dir=1;if(r===2)dir=-1;r+=dir; }
+        var rows=['','',''],pos=0;
+        for(var j=0;j<3;j++){ rows[j]=t.substr(pos,lens[j]); pos+=lens[j]; }
+        var idx=[0,0,0]; r=0;dir=1; var out='';
+        for(var i=0;i<n;i++){ out+=rows[r][idx[r]++]; if(r===0)dir=1;if(r===2)dir=-1;r+=dir; }
+        return out;
+      }
+    },
+    polybius: {
+      enc: function(t){
+        var grid='ABCDEFGHIKLMNOPQRSTUVWXYZ';
+        return t.split('').map(function(ch){
+          var c=ch.toUpperCase(); if(c==='J') c='I';
+          var idx=grid.indexOf(c);
+          if(idx<0) return ch;
+          return ''+(Math.floor(idx/5)+1)+(idx%5+1);
+        }).join(' ');
+      },
+      dec: function(t){
+        var grid='ABCDEFGHIKLMNOPQRSTUVWXYZ';
+        return t.replace(/(\d)(\d)/g,function(_,r,c){
+          var idx=(parseInt(r)-1)*5+(parseInt(c)-1);
+          return (idx>=0&&idx<25)?grid[idx]:'';
+        });
+      }
+    },
+    bacon: {
+      enc: function(t){
+        var codes='AABAAABABAABABAAABBAAABABABABBAAABABBBABABAABBABABBABBAAABBABABBBBAABBABBABABBBABABBB';
+        return t.split('').map(function(ch){
+          var c=ch.toUpperCase(); if(c==='J') c='I'; var i=A.indexOf(c);
+          if(i<0) return ch; if(i>9) i--;
+          return codes.substr(i*5,5);
+        }).join(' ');
+      },
+      dec: function(t){
+        var codes='AABAAABABAABABAAABBAAABABABABBAAABABBBABABAABBABABBABBAAABBABABBBBAABBABBABABBBABABBB';
+        var clean=t.replace(/[^AaBb]/g,'').toUpperCase();
+        var out='';
+        for(var i=0;i+5<=clean.length;i+=5){
+          var chunk=clean.substr(i,5);
+          for(var j=0;j<24;j++){ if(codes.substr(j*5,5)===chunk){ var c=j; if(c>=9) c++; out+=A[c]; break; }}
+        }
+        return out;
+      }
     }
   };
 
@@ -352,7 +445,7 @@ document.querySelectorAll('.fade-up').forEach(function(el) { el.style.animationP
     var eng  = engines[name];
     var text = elInput.value;
     var key  = elKey.value;
-    elKeyWrap.style.display = (name==='vigenere')?'':'none';
+    elKeyWrap.style.display = (name==='vigenere'||name==='beaufort')?'':'none';
     if(!text){ elOutput.textContent=''; return; }
     elOutput.textContent = encrypting ? eng.enc(text,key) : eng.dec(text,key);
   }
