@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cryptanalysis Lab — The Cipher Museum</title>
+  <title>Cryptanalysis Techniques — The Cipher Museum</title>
     <meta name="description" content="Learn how codebreakers crack ciphers. Frequency analysis, Kasiski examination, index of coincidence, and modern computational methods.">
-  <meta property="og:title" content="Cryptanalysis Lab — The Cipher Museum">
+  <meta property="og:title" content="Cryptanalysis Techniques — The Cipher Museum">
   <meta property="og:description" content="Learn how codebreakers crack ciphers. Frequency analysis, Kasiski examination, index of coincidence, and modern computational methods.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/cryptanalysis.html">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Cryptanalysis Lab — The Cipher Museum">
+  <meta name="twitter:title" content="Cryptanalysis Techniques — The Cipher Museum">
   <meta name="twitter:description" content="Learn how codebreakers crack ciphers. Frequency analysis, Kasiski examination, index of coincidence, and modern computational methods.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/cryptanalysis.html">
@@ -68,7 +68,6 @@
     }
     @media(max-width:600px){
       .lab-tab{min-width:90px;font-size:.62rem;padding:.45rem .5rem}
-      #subMapGrid{grid-template-columns:repeat(9,1fr) !important}
     }
 
     /* Tab icons */
@@ -76,11 +75,10 @@
     #tab-btn-freq::before{content:'📊'}
     #tab-btn-kasiski::before{content:'🔍'}
     #tab-btn-ioc::before{content:'📐'}
-    #tab-btn-challenge::before{content:'⚔️'}
-    #tab-btn-detect::before{content:'🔬'}
-    #tab-btn-bigram::before{content:'🗺️'}
-    #tab-btn-animate::before{content:'▶️'}
-    #tab-btn-sub::before{content:'🧩'}
+    #tab-btn-crib::before{content:'🔑'}
+    #tab-btn-kpa::before{content:'📄'}
+    #tab-btn-hillclimb::before{content:'⛰️'}
+    #tab-btn-anneal::before{content:'🧬'}
 
     /* Lab textarea for older inline-styled inputs */
     .lab-textarea{width:100%;padding:.8rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);font-family:var(--fm);font-size:.82rem;resize:vertical}
@@ -109,7 +107,7 @@
       <li><a href="index.html">Entrance</a></li>
       <li><a href="museum-map.html">Museum Map</a></li>
       <li><a href="halls/ancient.html">Halls</a></li>
-      <li><a href="cryptanalysis.html" class="active">Cryptanalysis Lab</a></li>
+      <li><a href="cryptanalysis.html" class="active">Cryptanalysis</a></li>
       <li><a href="modern.html">Modern Crypto</a></li>
     </ul>
   </div>
@@ -117,9 +115,9 @@
 
 <main id="main-content" tabindex="-1">
 <div class="page-hero">
-  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Cryptanalysis Lab</div>
+  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Cryptanalysis Techniques</div>
   <span class="page-eyebrow">Special Exhibit · The Science of Breaking Codes</span>
-  <h1 class="page-title">Cryptanalysis Lab</h1>
+  <h1 class="page-title">Cryptanalysis Techniques</h1>
   <p class="page-tagline">"To know how to defend, you must first know how to attack."</p>
   <p class="page-desc">
     Seven techniques that break almost every classical cipher in this museum — from Al-Kindi's frequency tables (850 AD) to modern hill-climbing algorithms.
@@ -268,15 +266,14 @@
     <p class="section-sub">Apply cryptanalysis tools to real ciphertext.</p>
   </div>
 
-  <div class="lab-tabs" role="tablist" aria-label="Cryptanalysis tools">
+  <div class="lab-tabs" role="tablist" aria-label="Cryptanalysis techniques">
     <button class="lab-tab active" id="tab-btn-freq" role="tab" aria-selected="true" aria-controls="tab-freq" tabindex="0" onclick="showTab('freq', this)">Frequency Analysis</button>
     <button class="lab-tab" id="tab-btn-kasiski" role="tab" aria-selected="false" aria-controls="tab-kasiski" tabindex="-1" onclick="showTab('kasiski', this)">Kasiski Examination</button>
     <button class="lab-tab" id="tab-btn-ioc" role="tab" aria-selected="false" aria-controls="tab-ioc" tabindex="-1" onclick="showTab('ioc', this)">Index of Coincidence</button>
-    <button class="lab-tab" id="tab-btn-challenge" role="tab" aria-selected="false" aria-controls="tab-challenge" tabindex="-1" onclick="showTab('challenge', this)">Break a Cipher</button>
-    <button class="lab-tab" id="tab-btn-detect" role="tab" aria-selected="false" aria-controls="tab-detect" tabindex="-1" onclick="showTab('detect', this)">Cipher Detector</button>
-    <button class="lab-tab" id="tab-btn-bigram" role="tab" aria-selected="false" aria-controls="tab-bigram" tabindex="-1" onclick="showTab('bigram', this)">Bigram Heat Map</button>
-    <button class="lab-tab" id="tab-btn-animate" role="tab" aria-selected="false" aria-controls="tab-animate" tabindex="-1" onclick="showTab('animate', this)">Caesar Animator</button>
-    <button class="lab-tab" id="tab-btn-sub" role="tab" aria-selected="false" aria-controls="tab-sub" tabindex="-1" onclick="showTab('sub', this)">Substitution Solver</button>
+    <button class="lab-tab" id="tab-btn-crib" role="tab" aria-selected="false" aria-controls="tab-crib" tabindex="-1" onclick="showTab('crib', this)">Crib Dragging</button>
+    <button class="lab-tab" id="tab-btn-kpa" role="tab" aria-selected="false" aria-controls="tab-kpa" tabindex="-1" onclick="showTab('kpa', this)">Known Plaintext</button>
+    <button class="lab-tab" id="tab-btn-hillclimb" role="tab" aria-selected="false" aria-controls="tab-hillclimb" tabindex="-1" onclick="showTab('hillclimb', this)">Hill Climbing</button>
+    <button class="lab-tab" id="tab-btn-anneal" role="tab" aria-selected="false" aria-controls="tab-anneal" tabindex="-1" onclick="showTab('anneal', this)">Simulated Annealing</button>
   </div>
 
   <!-- Tab: Frequency Analysis (SVG bar chart with English reference) -->
@@ -331,110 +328,63 @@
     </div>
   </div>
 
-  <!-- Tab: Challenge -->
-  <div class="lab-panel" id="tab-challenge" role="tabpanel" aria-labelledby="tab-btn-challenge" hidden>
-    <div style="display:flex;flex-direction:column;gap:2rem;max-width:700px;">
-
-      <div class="panel" style="border-color:var(--gold-b);">
-        <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-          <span>⚔</span><span class="panel-title" style="color:var(--gold);">Challenge 1 — Caesar Cipher</span>
-        </div>
-        <div class="panel-body">
-          <p style="font-size:.9rem;margin-bottom:.75rem;">Difficulty: <strong style="color:var(--green);">Trivial</strong> — Use frequency analysis or brute force</p>
-          <div style="font-family:var(--fm);font-size:.9rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.12em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">
-            XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEWC HSK
-          </div>
-          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 1" onclick="var a=this.nextElementSibling;if(a.style.display==='block'){a.style.display='none';this.textContent='Reveal Answer'}else{a.style.display='block';this.textContent='Hide Answer'}" style="font-size:.7rem;">Reveal Answer</button>
-          <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Shift = 4 · "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"</p>
-        </div>
-      </div>
-
-      <div class="panel" style="border-color:var(--orange);">
-        <div class="panel-head" style="background:rgba(200,144,90,.08);border-color:rgba(200,144,90,.3);">
-          <span>⚔</span><span class="panel-title" style="color:var(--orange);">Challenge 2 — Vigenère Cipher</span>
-        </div>
-        <div class="panel-body">
-          <p style="font-size:.9rem;margin-bottom:.75rem;">Difficulty: <strong style="color:var(--orange);">Moderate</strong> — Use Kasiski + Index of Coincidence</p>
-          <div style="font-family:var(--fm);font-size:.85rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.1em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:.75rem;">
-            LXFOPVEFRNHRLXFOPVEFRNHRLXFOPVEF
-          </div>
-          <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">Hint: Look for repeating 3-letter sequences. Their spacing reveals the key length. Key length × N = spacing between repeats.</p>
-          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 2" onclick="var a=this.nextElementSibling;if(a.style.display==='block'){a.style.display='none';this.textContent='Reveal Answer'}else{a.style.display='block';this.textContent='Hide Answer'}" style="font-size:.7rem;">Reveal Answer</button>
-          <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: LEMON · Plaintext: "ATTACKATDAWNATTACKATDAWNATTACKAT"</p>
-        </div>
-      </div>
-
-      <div class="panel" style="border-color:var(--red-b);">
-        <div class="panel-head" style="background:var(--red-d);border-color:var(--red-b);">
-          <span>⚔</span><span class="panel-title" style="color:var(--red);">Challenge 3 — Confederate Vigenère</span>
-        </div>
-        <div class="panel-body">
-          <p style="font-size:.9rem;margin-bottom:.75rem;">Difficulty: <strong style="color:var(--red);">Hard</strong> — Real Civil War ciphertext. Key: MANCHESTER BLUFF</p>
-          <div style="font-family:var(--fm);font-size:.82rem;background:var(--s3);border-radius:var(--r);padding:1rem;letter-spacing:.1em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:.75rem;">
-            VVQECILMYMPM
-          </div>
-          <p style="font-size:.82rem;color:var(--tx3);margin-bottom:.75rem;">This is a fragment from an actual Confederate dispatch. Key = "COMPLETE VICTORY" — used by Jefferson Davis, Robert E. Lee, and Kirby Smith.</p>
-          <button class="btn btn-secondary" aria-label="Reveal answer for Challenge 3" onclick="var a=this.nextElementSibling;if(a.style.display==='block'){a.style.display='none';this.textContent='Reveal Answer'}else{a.style.display='block';this.textContent='Hide Answer'}" style="font-size:.7rem;">Reveal Answer</button>
-          <p style="display:none;font-family:var(--fm);font-size:.78rem;color:var(--gold-lt);margin-top:.5rem;">Key: COMPLETEVICT · Plaintext: "THEPRESIDEN[T]"</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Tab: Cipher Detector -->
-  <div class="lab-panel" id="tab-detect" role="tabpanel" aria-labelledby="tab-btn-detect" hidden>
+  <!-- Tab: Crib Dragging -->
+  <div class="lab-panel" id="tab-crib" role="tabpanel" aria-labelledby="tab-btn-crib" hidden>
     <div style="max-width:700px;">
-      <p style="margin-bottom:1rem;color:var(--tx2);">Paste ciphertext and the detector will calculate its Index of Coincidence and other statistical signatures to estimate the cipher type.</p>
-      <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="detectInput">Ciphertext</label>
-      <textarea id="detectInput" rows="5" class="lab-textarea" placeholder="Paste ciphertext here…"></textarea>
-      <button class="btn btn-primary" onclick="detectCipher()" aria-label="Analyze ciphertext type" style="margin-top:.75rem;font-size:.7rem;">Analyze</button>
-      <div id="detectResult" class="lab-result"></div>
+      <p style="margin-bottom:1rem;color:var(--tx2);">Drag a probable plaintext word ("crib") across the ciphertext. Where the XOR or subtraction produces readable text, you've found the key position. This is how Bletchley Park broke Enigma — they guessed words like WETTER and HEILHITLER.</p>
+      <div class="input-group" style="margin-bottom:1rem;">
+        <label class="input-label" for="cribCipher">Ciphertext (letters only)</label>
+        <textarea class="museum-input" id="cribCipher" rows="3" placeholder="LXFOPVEFRNHRLXFOPVEFRNHR…&#10;&#10;Try a Vigenère ciphertext."></textarea>
+      </div>
+      <div class="input-group" style="margin-bottom:1rem;">
+        <label class="input-label" for="cribWord">Crib (guessed plaintext word)</label>
+        <input type="text" class="museum-input" id="cribWord" placeholder="e.g. ATTACK or WEATHER" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
+      </div>
+      <button class="btn btn-primary" onclick="runCribDrag()" style="font-size:.7rem;">Drag Crib</button>
+      <div id="cribResult" class="lab-result" aria-live="polite"></div>
     </div>
   </div>
 
-  <!-- Tab: Bigram Heat Map -->
-  <div class="lab-panel" id="tab-bigram" role="tabpanel" aria-labelledby="tab-btn-bigram" hidden>
-    <div style="max-width:750px;">
-      <p style="margin-bottom:1rem;color:var(--tx2);">Enter text to visualize bigram (letter-pair) frequencies as a 26×26 heat map. Brighter cells indicate more frequent pairs.</p>
-      <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="bigramInput">Text</label>
-      <textarea id="bigramInput" rows="4" class="lab-textarea" placeholder="Paste text here…"></textarea>
-      <button class="btn btn-primary" onclick="buildBigramMap()" aria-label="Build bigram frequency heat map" style="margin-top:.75rem;font-size:.7rem;">Build Heat Map</button>
-      <div id="bigramGrid" style="margin-top:1.25rem;overflow-x:auto;"></div>
-    </div>
-  </div>
-
-  <!-- Tab: Caesar Animator -->
-  <div class="lab-panel" id="tab-animate" role="tabpanel" aria-labelledby="tab-btn-animate" hidden>
+  <!-- Tab: Known Plaintext Attack -->
+  <div class="lab-panel" id="tab-kpa" role="tabpanel" aria-labelledby="tab-btn-kpa" hidden>
     <div style="max-width:700px;">
-      <p style="margin-bottom:1rem;color:var(--tx2);">Watch a Caesar cipher break in real-time. The animator tries all 26 shifts and highlights the one that produces the most English-like output.</p>
-      <label style="font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);" for="animInput">Ciphertext</label>
-      <input type="text" id="animInput" value="KHOOR ZRUOG" class="lab-textarea" style="padding:.6rem .8rem;color:var(--gold-lt);font-size:.85rem;letter-spacing:.1em;margin-top:.4rem;" autocomplete="off" spellcheck="false">
-      <button class="btn btn-primary" id="animBtn" onclick="animateCaesar()" aria-label="Animate Caesar cipher brute force" style="margin-top:.75rem;font-size:.7rem;">Animate</button>
-      <div id="animOutput" style="margin-top:1.25rem;font-family:var(--fm);font-size:.82rem;line-height:2.2;color:var(--tx2);"></div>
+      <p style="margin-bottom:1rem;color:var(--tx2);">If you know some plaintext and its corresponding ciphertext, you can derive the key directly. For a Vigenère cipher: Key[i] = (Cipher[i] − Plain[i]) mod 26. Enter a matched pair to recover the key.</p>
+      <div class="input-group" style="margin-bottom:1rem;">
+        <label class="input-label" for="kpaPlain">Known Plaintext</label>
+        <input type="text" class="museum-input" id="kpaPlain" placeholder="e.g. ATTACKATDAWN" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
+      </div>
+      <div class="input-group" style="margin-bottom:1rem;">
+        <label class="input-label" for="kpaCipher">Corresponding Ciphertext</label>
+        <input type="text" class="museum-input" id="kpaCipher" placeholder="e.g. LXFOPVEFRNHR" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
+      </div>
+      <button class="btn btn-primary" onclick="runKPA()" style="font-size:.7rem;">Derive Key</button>
+      <div id="kpaResult" class="lab-result" aria-live="polite"></div>
     </div>
   </div>
 
-  <!-- Tab: Substitution Solver -->
-  <div class="lab-panel" id="tab-sub" role="tabpanel" aria-labelledby="tab-btn-sub" hidden>
-    <div style="max-width:820px;">
-      <p style="margin-bottom:1rem;color:var(--tx2);">Map each ciphertext letter to a plaintext letter. The decoded preview updates in real time. Use frequency analysis to guide your guesses.</p>
-      <div class="input-group" style="margin-bottom:1.25rem;">
-        <label class="input-label" for="subCipherInput">Ciphertext</label>
-        <textarea class="museum-input" id="subCipherInput" rows="3" style="font-family:var(--fm);letter-spacing:.15em;font-size:.85rem;" placeholder="Paste monoalphabetic ciphertext…&#10;&#10;Try: KHOOR ZRUOG" oninput="subSolverUpdate()"></textarea>
+  <!-- Tab: Hill Climbing -->
+  <div class="lab-panel" id="tab-hillclimb" role="tabpanel" aria-labelledby="tab-btn-hillclimb" hidden>
+    <div style="max-width:700px;">
+      <p style="margin-bottom:1rem;color:var(--tx2);">Watch a hill-climbing algorithm break a Caesar cipher by scoring each shift against English letter frequencies. The algorithm starts at shift 0, tests neighbors, and keeps the best score — climbing toward the correct key.</p>
+      <div class="input-group" style="margin-bottom:1rem;">
+        <label class="input-label" for="hillInput">Ciphertext</label>
+        <input type="text" class="museum-input" id="hillInput" value="KHOOR ZRUOG" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
       </div>
-      <div style="margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center;">
-        <span class="input-label">Substitution Map (A–Z)</span>
-        <button class="btn btn-secondary" onclick="subSolverReset()" aria-label="Reset substitution map" style="font-size:.65rem;padding:.35rem .8rem;">Reset All</button>
+      <button class="btn btn-primary" id="hillBtn" onclick="runHillClimb()" style="font-size:.7rem;">Run Hill Climb</button>
+      <div id="hillOutput" style="margin-top:1.25rem;font-family:var(--fm);font-size:.82rem;line-height:2.2;color:var(--tx2);"></div>
+    </div>
+  </div>
+
+  <!-- Tab: Simulated Annealing -->
+  <div class="lab-panel" id="tab-anneal" role="tabpanel" aria-labelledby="tab-btn-anneal" hidden>
+    <div style="max-width:700px;">
+      <p style="margin-bottom:1rem;color:var(--tx2);">Simulated annealing improves on hill climbing by occasionally accepting worse solutions to escape local optima. Watch the temperature cool as the algorithm converges on the answer. Higher temperature = more exploration; lower = more exploitation.</p>
+      <div class="input-group" style="margin-bottom:1rem;">
+        <label class="input-label" for="annealInput">Ciphertext (Caesar)</label>
+        <input type="text" class="museum-input" id="annealInput" value="WKLV LV D WHVW PHVVDJH" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
       </div>
-      <div id="subMapGrid" style="display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin-bottom:1.5rem;"></div>
-      <div style="margin-bottom:1rem;">
-        <span class="input-label">Ciphertext Letter Frequency</span>
-        <div id="subFreqHelper" style="display:flex;align-items:flex-end;gap:1px;height:50px;margin-top:.4rem;"></div>
-        <div style="font-family:var(--fm);font-size:.5rem;color:var(--tx3);margin-top:.3rem;">English: E T A O I N S H R…</div>
-      </div>
-      <div style="margin-bottom:.5rem;"><span class="input-label">Decoded Preview</span></div>
-      <div id="subPreview" style="font-family:var(--fm);font-size:.9rem;letter-spacing:.12em;line-height:2;padding:1rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r-sm);color:var(--tx);word-break:break-all;min-height:3rem;white-space:pre-wrap;" aria-live="polite"></div>
+      <button class="btn btn-primary" id="annealBtn" onclick="runAnneal()" style="font-size:.7rem;">Run Annealing</button>
+      <div id="annealOutput" style="margin-top:1.25rem;font-family:var(--fm);font-size:.82rem;line-height:2;color:var(--tx2);"></div>
     </div>
   </div>
 
@@ -604,7 +554,10 @@
         <li><a href="#" onclick="showTab('freq',document.getElementById('tab-btn-freq'));return false;">Frequency Analysis</a></li>
         <li><a href="#" onclick="showTab('kasiski',document.getElementById('tab-btn-kasiski'));return false;">Kasiski Examination</a></li>
         <li><a href="#" onclick="showTab('ioc',document.getElementById('tab-btn-ioc'));return false;">Index of Coincidence</a></li>
-        <li><a href="#" onclick="showTab('challenge',document.getElementById('tab-btn-challenge'));return false;">Break a Cipher</a></li>
+        <li><a href="#" onclick="showTab('crib',document.getElementById('tab-btn-crib'));return false;">Crib Dragging</a></li>
+        <li><a href="#" onclick="showTab('kpa',document.getElementById('tab-btn-kpa'));return false;">Known-Plaintext Attack</a></li>
+        <li><a href="#" onclick="showTab('hillclimb',document.getElementById('tab-btn-hillclimb'));return false;">Hill Climbing</a></li>
+        <li><a href="#" onclick="showTab('anneal',document.getElementById('tab-btn-anneal'));return false;">Simulated Annealing</a></li>
       </ul>
     </div>
     <div>
@@ -630,7 +583,7 @@ function showTab(id, button) {
     panel.classList.toggle('active', isActive);
     panel.hidden = !isActive;
   });
-  document.querySelectorAll('.lab-tab').forEach(tab => {
+  document.querySelectorAll('[id^="tab-btn-"]').forEach(tab => {
     const isActive = tab === targetButton;
     tab.classList.toggle('active', isActive);
     tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
@@ -779,218 +732,191 @@ function runKasiski() {
   ).join('');
 }
 
-// ── Cipher Detector ─────────────────────────────────
-function detectCipher() {
-  const raw = document.getElementById('detectInput').value;
-  const txt = raw.toUpperCase().replace(/[^A-Z]/g, '');
-  const out = document.getElementById('detectResult');
-  if (txt.length < 10) { out.textContent = 'Enter at least 10 letters.'; return; }
-
-  // IC calculation
-  const n = txt.length;
-  const counts = {};
-  for (const ch of txt) counts[ch] = (counts[ch] || 0) + 1;
-  let sum = 0;
-  for (const k in counts) sum += counts[k] * (counts[k] - 1);
-  const ic = sum / (n * (n - 1));
-
-  // Check for digits/symbols in raw
-  const hasDigits = /\d/.test(raw);
-  const hasOnly5 = /^[ADFGVX\s]+$/i.test(raw.replace(/[^A-Za-z]/g, ''));
-  const unique = Object.keys(counts).length;
-
-  let verdict = '';
-  if (hasOnly5 && unique <= 6) {
-    verdict = '<strong style="color:var(--blue)">ADFGVX / ADFGX Cipher</strong>';
-    verdict += '<br>Text uses only ' + unique + ' unique letters from the ADFGVX set.';
-    verdict += '<br>→ This is a <a href="ciphers/adfgvx.html">fractionating cipher</a> from WWI.';
-  } else if (ic >= 0.063) {
-    verdict = '<strong style="color:var(--green)">Monoalphabetic / Caesar</strong>';
-    verdict += '<br>IC ' + ic.toFixed(4) + ' is near English (0.066). Single-alphabet substitution likely.';
-    verdict += '<br>→ Try <em>Frequency Analysis</em> tab.';
-  } else if (ic >= 0.050) {
-    verdict = '<strong style="color:var(--orange)">Polyalphabetic (Vigenère-family)</strong>';
-    verdict += '<br>IC ' + ic.toFixed(4) + ' is between English and random. Multiple alphabets detected.';
-    verdict += '<br>→ Try <em>Kasiski Examination</em> tab to find key length.';
-  } else if (ic >= 0.042) {
-    verdict = '<strong style="color:var(--purple)">Highly polyalphabetic or transposition</strong>';
-    verdict += '<br>IC ' + ic.toFixed(4) + ' is near random. Could be a long-key Vigenère, or a transposition cipher.';
-  } else {
-    verdict = '<strong style="color:var(--red)">Random / OTP / Unknown</strong>';
-    verdict += '<br>IC ' + ic.toFixed(4) + ' is at or below random (0.038). Text may be encrypted with a one-time pad or very long key.';
-  }
-  verdict += '<br><br><strong>Length:</strong> ' + n + ' letters';
-  verdict += ' &middot; <strong>Unique letters:</strong> ' + unique + '/26';
-  out.innerHTML = verdict;
-}
-
-// ── Bigram Heat Map ─────────────────────────────────
-function buildBigramMap() {
-  const txt = document.getElementById('bigramInput').value.toUpperCase().replace(/[^A-Z]/g, '');
-  const grid = document.getElementById('bigramGrid');
-  if (txt.length < 2) { grid.innerHTML = '<p style="color:var(--tx3)">Enter at least 2 letters.</p>'; return; }
-
-  const bg = new Array(26).fill(null).map(() => new Array(26).fill(0));
-  let maxCount = 0;
-  for (let i = 0; i < txt.length - 1; i++) {
-    const a = txt.charCodeAt(i) - 65, b = txt.charCodeAt(i + 1) - 65;
-    bg[a][b]++;
-    if (bg[a][b] > maxCount) maxCount = bg[a][b];
-  }
-
-  let html = '<table style="border-collapse:collapse;font-family:var(--fm);font-size:.45rem;line-height:1;">';
-  html += '<tr><td style="width:16px;"></td>';
-  for (let c = 0; c < 26; c++) html += '<td style="text-align:center;padding:1px 2px;color:var(--tx3);font-weight:600;">' + ALPHA[c] + '</td>';
-  html += '</tr>';
-  for (let r = 0; r < 26; r++) {
-    html += '<tr><td style="padding:1px 3px;color:var(--tx3);font-weight:600;text-align:right;">' + ALPHA[r] + '</td>';
-    for (let c = 0; c < 26; c++) {
-      const v = bg[r][c];
-      const intensity = maxCount > 0 ? v / maxCount : 0;
-      const alpha = Math.round(intensity * 255);
-      const bg_color = v > 0 ? 'rgba(201,168,76,' + intensity.toFixed(2) + ')' : 'transparent';
-      html += '<td style="width:16px;height:16px;text-align:center;background:' + bg_color + ';color:' + (intensity > 0.5 ? 'var(--black)' : 'var(--tx3)') + ';border:1px solid var(--s4);">' + (v > 0 ? v : '') + '</td>';
+// ── Crib Dragging ───────────────────────────────────
+function runCribDrag() {
+  const ct = document.getElementById('cribCipher').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const crib = document.getElementById('cribWord').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const out = document.getElementById('cribResult');
+  if (ct.length < 2 || crib.length < 1) { out.textContent='Enter ciphertext and a crib word.'; return; }
+  if (crib.length > ct.length) { out.textContent='Crib is longer than ciphertext.'; return; }
+  let html = '<div style="display:flex;flex-direction:column;gap:.4rem;max-height:300px;overflow-y:auto;">';
+  for (let pos = 0; pos <= ct.length - crib.length; pos++) {
+    let key = '';
+    for (let j = 0; j < crib.length; j++) {
+      key += ALPHA[(ct.charCodeAt(pos + j) - crib.charCodeAt(j) + 26) % 26];
     }
-    html += '</tr>';
+    const isRepeating = crib.length >= 3 && new Set(key.match(/.{1}/g)).size <= Math.ceil(key.length / 2);
+    const style = isRepeating ? 'border-color:var(--gold);background:var(--gold-glow);' : '';
+    html += '<div style="font-family:var(--fm);font-size:.75rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:.5rem .75rem;color:var(--tx2);' + style + '">';
+    html += '<span style="color:var(--tx3);min-width:60px;display:inline-block;">Pos ' + pos + ':</span> ';
+    html += 'Key fragment = <span style="color:var(--gold-lt);font-weight:700;">' + key + '</span>';
+    if (isRepeating) html += ' <span style="color:var(--gold);margin-left:.5rem;">★ possible match</span>';
+    html += '</div>';
   }
-  html += '</table>';
-  grid.innerHTML = html;
+  html += '</div>';
+  out.innerHTML = html;
 }
 
-// ── Caesar Animator ─────────────────────────────────
-async function animateCaesar() {
-  const input = document.getElementById('animInput').value.toUpperCase();
-  const out = document.getElementById('animOutput');
-  const btn = document.getElementById('animBtn');
+// ── Known Plaintext Attack ──────────────────────────
+function runKPA() {
+  const plain = document.getElementById('kpaPlain').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const cipher = document.getElementById('kpaCipher').value.toUpperCase().replace(/[^A-Z]/g,'');
+  const out = document.getElementById('kpaResult');
+  if (!plain.length || !cipher.length) { out.textContent='Enter both plaintext and ciphertext.'; return; }
+  const len = Math.min(plain.length, cipher.length);
+  let key = '';
+  for (let i = 0; i < len; i++) {
+    key += ALPHA[(cipher.charCodeAt(i) - plain.charCodeAt(i) + 26) % 26];
+  }
+  // Detect repeating key
+  let repeatingKey = key;
+  for (let kl = 1; kl <= Math.floor(len / 2); kl++) {
+    const candidate = key.substring(0, kl);
+    let match = true;
+    for (let i = 0; i < len; i++) {
+      if (key[i] !== candidate[i % kl]) { match = false; break; }
+    }
+    if (match) { repeatingKey = candidate; break; }
+  }
+  let html = '<strong>Derived key stream:</strong> <span style="color:var(--gold-lt);font-family:var(--fm);letter-spacing:.1em;">' + key + '</span>';
+  if (repeatingKey.length < key.length) {
+    html += '<br><strong style="color:var(--green);">Repeating key detected:</strong> <span style="color:var(--gold);font-family:var(--fm);letter-spacing:.15em;font-size:1.1rem;font-weight:700;">' + repeatingKey + '</span>';
+    html += '<br><span style="color:var(--tx3);">Key length: ' + repeatingKey.length + '</span>';
+  }
+  // Verify: decrypt the cipher with this key
+  let decrypted = '';
+  for (let i = 0; i < cipher.length; i++) {
+    decrypted += ALPHA[(cipher.charCodeAt(i) - repeatingKey.charCodeAt(i % repeatingKey.length) + 26) % 26];
+  }
+  html += '<br><br><strong>Verification (decrypt full ciphertext):</strong><br><span style="font-family:var(--fm);letter-spacing:.1em;color:var(--tx);">' + decrypted + '</span>';
+  out.innerHTML = html;
+}
+
+// ── Hill Climbing ───────────────────────────────────
+async function runHillClimb() {
+  const input = document.getElementById('hillInput').value.toUpperCase();
+  const out = document.getElementById('hillOutput');
+  const btn = document.getElementById('hillBtn');
   btn.disabled = true;
   out.innerHTML = '';
 
-  const common = new Set(['THE','AND','FOR','ARE','BUT','NOT','YOU','ALL','HER','WAS','ONE','OUR','HIS','HAS','HER','HAD','HOW','WHO','ITS','LET','MAY','OLD','NEW','NOW','WAY','DAY','TOO','USE']);
-
-  let bestShift = 0, bestScore = -1;
-  for (let shift = 0; shift < 26; shift++) {
-    let decoded = '';
-    for (let i = 0; i < input.length; i++) {
-      const code = input.charCodeAt(i);
-      if (code >= 65 && code <= 90) {
-        decoded += String.fromCharCode(((code - 65 - shift + 26) % 26) + 65);
-      } else {
-        decoded += input[i];
-      }
+  function score(text) {
+    const clean = text.replace(/[^A-Z]/g,'');
+    if (!clean.length) return 0;
+    let s = 0;
+    for (let i = 0; i < clean.length; i++) {
+      s += ENG_FREQ[clean.charCodeAt(i) - 65];
     }
-
-    const words = decoded.replace(/[^A-Z ]/g, '').split(/\s+/);
-    let score = 0;
-    for (const w of words) { if (common.has(w)) score++; }
-
-    const line = document.createElement('div');
-    line.style.cssText = 'padding:.3rem .6rem;border-radius:3px;transition:background .3s;';
-    line.innerHTML = '<span style="color:var(--gold-dim);min-width:70px;display:inline-block;">Shift ' + shift.toString().padStart(2, '0') + ':</span> ' + decoded;
-    out.appendChild(line);
-
-    if (score > bestScore) { bestScore = score; bestShift = shift; }
-
-    await new Promise(r => setTimeout(r, 80));
+    return s / clean.length;
   }
 
-  const lines = out.children;
-  if (lines[bestShift]) {
-    lines[bestShift].style.background = 'var(--gold-glow)';
-    lines[bestShift].style.color = 'var(--gold-lt)';
-    lines[bestShift].innerHTML += ' <span style="color:var(--green);font-size:.7rem;margin-left:.5rem;">← Best match</span>';
+  function decrypt(text, shift) {
+    let r = '';
+    for (let i = 0; i < text.length; i++) {
+      const c = text.charCodeAt(i);
+      if (c >= 65 && c <= 90) r += String.fromCharCode(((c - 65 - shift + 26) % 26) + 65);
+      else r += text[i];
+    }
+    return r;
+  }
+
+  let current = 0;
+  let bestScore = score(decrypt(input, 0));
+  let steps = [{shift: 0, score: bestScore, text: decrypt(input, 0), action: 'Start'}];
+
+  for (let iter = 0; iter < 30; iter++) {
+    const neighbors = [(current + 1) % 26, (current + 25) % 26];
+    let improved = false;
+    for (const n of neighbors) {
+      const ns = score(decrypt(input, n));
+      steps.push({shift: n, score: ns, text: decrypt(input, n), action: ns > bestScore ? 'Climb ↑' : 'Reject ↓'});
+      if (ns > bestScore) {
+        bestScore = ns;
+        current = n;
+        improved = true;
+        break;
+      }
+    }
+    if (!improved) break;
+  }
+
+  for (let i = 0; i < steps.length; i++) {
+    const s = steps[i];
+    const line = document.createElement('div');
+    const color = s.action === 'Climb ↑' ? 'var(--green)' : s.action === 'Reject ↓' ? 'var(--red)' : 'var(--gold)';
+    line.style.cssText = 'padding:.3rem .6rem;border-radius:3px;';
+    line.innerHTML = '<span style="color:' + color + ';min-width:70px;display:inline-block;">' + s.action + '</span> Shift ' + s.shift.toString().padStart(2,'0') + ' (score ' + s.score.toFixed(1) + '): <span style="color:var(--tx);">' + s.text + '</span>';
+    if (i === steps.length - 1 && s.action !== 'Reject ↓') {
+      line.style.background = 'var(--gold-glow)';
+      line.innerHTML += ' <span style="color:var(--green);font-size:.7rem;margin-left:.5rem;">← Converged</span>';
+    }
+    out.appendChild(line);
+    await new Promise(r => setTimeout(r, 120));
   }
   btn.disabled = false;
 }
 
-// ── Substitution Solver ─────────────────────────────
-function buildSubMap() {
-  const grid = document.getElementById('subMapGrid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  for (let i = 0; i < 26; i++) {
-    const wrap = document.createElement('div');
-    wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:2px;';
-    const lbl = document.createElement('span');
-    lbl.style.cssText = 'font-family:var(--fm);font-size:.7rem;font-weight:700;color:var(--gold);';
-    lbl.textContent = ALPHA[i];
-    const inp = document.createElement('input');
-    inp.type = 'text';
-    inp.maxLength = 1;
-    inp.id = 'submap_' + ALPHA[i];
-    inp.autocomplete = 'off';
-    inp.spellcheck = false;
-    inp.setAttribute('aria-label', 'Substitution for ' + ALPHA[i]);
-    inp.style.cssText = 'width:28px;height:28px;text-align:center;background:var(--s3);border:1px solid var(--s4);border-radius:3px;color:var(--tx);font-family:var(--fm);font-size:.8rem;text-transform:uppercase;padding:0;';
-    inp.addEventListener('input', function() {
-      this.value = this.value.toUpperCase().replace(/[^A-Z]/g, '');
-      subSolverUpdate();
-    });
-    inp.addEventListener('keydown', function(e) {
-      if (e.key.length === 1 && /[a-zA-Z]/.test(e.key)) {
-        // Auto-advance to next empty field
-        setTimeout(function() {
-          const idx = ALPHA.indexOf(inp.id.split('_')[1]);
-          for (let j = 1; j <= 26; j++) {
-            const next = document.getElementById('submap_' + ALPHA[(idx + j) % 26]);
-            if (next && !next.value) { next.focus(); break; }
-          }
-        }, 50);
-      }
-    });
-    wrap.appendChild(lbl);
-    wrap.appendChild(inp);
-    grid.appendChild(wrap);
-  }
-}
-buildSubMap();
+// ── Simulated Annealing ─────────────────────────────
+async function runAnneal() {
+  const input = document.getElementById('annealInput').value.toUpperCase();
+  const out = document.getElementById('annealOutput');
+  const btn = document.getElementById('annealBtn');
+  btn.disabled = true;
+  out.innerHTML = '';
 
-function subSolverUpdate() {
-  const txt = document.getElementById('subCipherInput').value.toUpperCase();
-  const preview = document.getElementById('subPreview');
-  const map = {};
-  for (let i = 0; i < 26; i++) {
-    const v = document.getElementById('submap_' + ALPHA[i]);
-    if (v && v.value) map[ALPHA[i]] = v.value.toUpperCase();
+  function score(text) {
+    const clean = text.replace(/[^A-Z]/g,'');
+    if (!clean.length) return 0;
+    let s = 0;
+    for (let i = 0; i < clean.length; i++) s += ENG_FREQ[clean.charCodeAt(i) - 65];
+    return s / clean.length;
   }
-  let out = '';
-  for (const ch of txt) {
-    if (ch >= 'A' && ch <= 'Z') {
-      if (map[ch]) {
-        out += '<span style="color:var(--gold);font-weight:700;">' + map[ch] + '</span>';
-      } else {
-        out += '<span style="color:var(--tx3);">·</span>';
-      }
-    } else {
-      out += ch;
+
+  function decrypt(text, shift) {
+    let r = '';
+    for (let i = 0; i < text.length; i++) {
+      const c = text.charCodeAt(i);
+      if (c >= 65 && c <= 90) r += String.fromCharCode(((c - 65 - shift + 26) % 26) + 65);
+      else r += text[i];
     }
+    return r;
   }
-  preview.innerHTML = out || '<span style="color:var(--tx3);">Decoded text will appear here…</span>';
 
-  // Update frequency helper
-  var helper = document.getElementById('subFreqHelper');
-  if (helper) {
-    var letters = txt.replace(/[^A-Z]/g, '');
-    var fc = {};
-    for (var ci = 0; ci < letters.length; ci++) fc[letters[ci]] = (fc[letters[ci]] || 0) + 1;
-    var maxF = 1;
-    for (var k in fc) if (fc[k] > maxF) maxF = fc[k];
-    var sorted = ALPHA.slice().sort(function(a,b){ return (fc[b]||0) - (fc[a]||0); });
-    helper.innerHTML = sorted.map(function(c){
-      var pct = letters.length ? ((fc[c]||0)/maxF*100) : 0;
-      var mapped = map[c] ? 'var(--gold)' : 'var(--gold-dim)';
-      return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;" title="'+c+': '+(fc[c]||0)+'">' +
-        '<div style="width:100%;min-height:1px;background:'+mapped+';border-radius:1px 1px 0 0;height:'+pct+'%;transition:height .3s;"></div>' +
-        '<span style="font-family:var(--fm);font-size:.42rem;color:'+(map[c]?'var(--gold)':'var(--tx3)')+';">'+c+'</span></div>';
-    }).join('');
-  }
-}
+  let current = Math.floor(Math.random() * 26);
+  let bestShift = current, bestScore = score(decrypt(input, current));
+  let temp = 10.0;
+  const cooling = 0.85;
+  let steps = [];
 
-function subSolverReset() {
-  for (let i = 0; i < 26; i++) {
-    const el = document.getElementById('submap_' + ALPHA[i]);
-    if (el) el.value = '';
+  for (let iter = 0; iter < 30 && temp > 0.1; iter++) {
+    const neighbor = (current + (Math.random() < 0.5 ? 1 : 25)) % 26;
+    const ns = score(decrypt(input, neighbor));
+    const delta = ns - bestScore;
+    const accept = delta > 0 || Math.random() < Math.exp(delta / temp);
+    const action = delta > 0 ? 'Better ↑' : (accept ? 'Accept ↔' : 'Reject ↓');
+    steps.push({shift: neighbor, score: ns, text: decrypt(input, neighbor), action, temp: temp.toFixed(2)});
+    if (accept) {
+      current = neighbor;
+      if (ns > bestScore) { bestScore = ns; bestShift = neighbor; }
+    }
+    temp *= cooling;
   }
-  subSolverUpdate();
+
+  for (let i = 0; i < steps.length; i++) {
+    const s = steps[i];
+    const line = document.createElement('div');
+    const color = s.action === 'Better ↑' ? 'var(--green)' : s.action === 'Accept ↔' ? 'var(--orange)' : 'var(--red)';
+    line.style.cssText = 'padding:.3rem .6rem;border-radius:3px;';
+    line.innerHTML = '<span style="color:var(--tx3);min-width:55px;display:inline-block;">T=' + s.temp + '</span> <span style="color:' + color + ';min-width:65px;display:inline-block;">' + s.action + '</span> Shift ' + s.shift.toString().padStart(2,'0') + ': <span style="color:var(--tx);">' + s.text + '</span>';
+    out.appendChild(line);
+    await new Promise(r => setTimeout(r, 120));
+  }
+
+  const final = document.createElement('div');
+  final.style.cssText = 'margin-top:.75rem;padding:.6rem;background:var(--gold-glow);border-radius:3px;';
+  final.innerHTML = '<strong style="color:var(--gold);">Best result:</strong> Shift ' + bestShift + ' → <span style="color:var(--tx);font-family:var(--fm);letter-spacing:.1em;">' + decrypt(input, bestShift) + '</span> <span style="color:var(--green);font-size:.7rem;">(score ' + bestScore.toFixed(1) + ')</span>';
+  out.appendChild(final);
+  btn.disabled = false;
 }
 </script>
 <script src="js/nav.js" defer></script>

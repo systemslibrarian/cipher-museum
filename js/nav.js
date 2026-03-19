@@ -33,7 +33,7 @@
     'glossary.html': 'Learn',
     'modern.html': 'Learn',
     'learn.html': 'Learn',
-    'cryptanalysis.html': 'Lab',
+    'cryptanalysis.html': 'Learn',
     'challenges.html': 'Challenges',
     'comparison.html': 'Learn',
     'cipher-flow.html': 'Explore'
