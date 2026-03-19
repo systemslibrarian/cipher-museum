@@ -7,6 +7,7 @@
 <meta name="description" content="A unified cryptanalysis interface: encrypt, decrypt, and analyze ciphertext with live frequency analysis and multiple cipher engines.">
 <link rel="stylesheet" href="../css/museum.css">
 <style>
+.wb-main-wrap{max-width:1200px;margin:0 auto;padding:0 2rem 4rem}
 .wb-layout{display:grid;grid-template-columns:1fr 320px;gap:1.5rem;margin-top:2rem}
 .wb-main{display:flex;flex-direction:column;gap:1.5rem}
 .wb-sidebar{display:flex;flex-direction:column;gap:1.5rem}
@@ -36,7 +37,6 @@
 .wb-output-area{background:var(--s1);border:1px solid var(--s5);border-radius:var(--r);padding:.85rem;font-family:var(--fm);font-size:.82rem;color:var(--tx);min-height:80px;white-space:pre-wrap;word-break:break-all;line-height:1.6}
 .wb-copy{position:absolute;top:.5rem;right:.5rem;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx3);font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;padding:.3rem .6rem;cursor:pointer}
 .wb-copy:hover{color:var(--gold);border-color:var(--gold-b)}
-@media(max-width:768px){.wb-layout{grid-template-columns:1fr}.wb-sidebar{order:-1}}
 </style>
 </head>
 <body>
@@ -56,7 +56,7 @@
   <p class="hero-intro">Encrypt, decrypt, and analyze text with 33 cipher engines. Watch frequency distributions shift in real time.</p>
 </section>
 
-<main style="max-width:1200px;margin:0 auto;padding:0 2rem 4rem">
+<main class="wb-main-wrap">
 
 <div class="wb-layout">
   <!-- ─── Main Panel ─── -->
