@@ -6,13 +6,13 @@ Cross-referenced with live site at https://ciphermuseum.com.
 ## Status
 - Act I (audit): in progress
 - Act II (fix): not started
-- Total findings: 0
-  - Critical: 0
-  - High: 0
+- Total findings: 9
+  - Critical: 3
+  - High: 6
   - Medium: 0
   - Low: 0
   - Informational: 0
-- Fixed: 0 / 0
+- Fixed: 0 / 9
 
 ## Ground truth
 
@@ -63,7 +63,127 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 
 ## Findings
 
-(none yet — Phase 0 is inventory only)
+### F-001 — Museum-map Complete Cipher Index uses an obsolete numbering that disagrees with the floor plan and every hall page
+**Severity:** Critical
+**Area:** Hall-pages, Counters
+**Files:** `museum-map.html` (lines 334–404 — Index table), `museum-map.html` (lines 102–293 — floor plan)
+**Status:** Open
+
+**Observed:** The Complete Cipher Index uses the labels `I, II, III, IV, V, CW, VI, VII, VIII, ★` and contains no Hall IX or Hall X. Mechanical machines are split between label "VI" (alberti, jefferson, enigma, lorenz, navajo) and label "VII" (chaocipher, m209, purple). Label "VII" mixes machines with puzzle/novelty (pigpen, bacon, tap-code, zodiac).
+
+**Expected:** The floor plan in the same file and every `halls/*.html` page use a sequential I–X scheme: ancient=I, substitution=II, polyalphabetic=III, transposition=IV, military=V, civil-war=VI, machines=VII, puzzle=VIII, unbreakable=IX, codebreakers=X. Mechanical exhibits should all live under "VII", puzzle/novelty under "VIII".
+
+**Evidence:** `museum-map.html` line 384 (`alberti-disk → VI`) vs. `halls/machines.html` title `Hall VI: Mechanical Cipher Machines` *and* footer `Hall VII of X`. The page reads as Hall VI in two places and Hall VII in another.
+
+**Proposed fix:** Rewrite the Index table's "Hall" column so labels match the floor plan + hall files: machines→VII, puzzle→VIII, unbreakable→IX, codebreakers gets new rows for biographies (or stays out, but documented). Cross-reference fix F-002, F-003.
+
+**Decisions needed:** Confirm canonical scheme is I–X (as per OQ-1).
+
+### F-002 — `halls/machines.html` self-contradicts: title says VI, footer says VII
+**Severity:** Critical
+**Area:** Hall-pages
+**Files:** `halls/machines.html`
+**Status:** Open
+
+**Observed:** `<title>Hall VI: Mechanical Cipher Machines — The Cipher Museum</title>`, breadcrumb `Hall VI`, but footer `Hall VII of X · 10 Exhibit Halls`.
+
+**Expected:** All four self-identity slots (title, h1, breadcrumb, footer) say `Hall VII`. Floor plan, hall-nav prev/next, and `museum-map.html` floor plan all place machines as Hall VII.
+
+**Evidence:** `halls/machines.html` title element vs. footer `<span class="footer-copy">Hall VII of X · 10 Exhibit Halls</span>`.
+
+**Proposed fix:** Change title and breadcrumb to `Hall VII`.
+
+### F-003 — `halls/puzzle.html` self-contradicts: title says VII, footer says VIII
+**Severity:** Critical
+**Area:** Hall-pages
+**Files:** `halls/puzzle.html`
+**Status:** Open
+
+**Observed:** `<title>Hall VII: Puzzle & Novelty Ciphers — The Cipher Museum</title>`, breadcrumb `Hall VII`, but footer `Hall VIII of X`.
+
+**Expected:** All four self-identity slots say `Hall VIII`.
+
+**Evidence:** `halls/puzzle.html` head + breadcrumb vs. footer span.
+
+**Proposed fix:** Change title and breadcrumb to `Hall VIII`.
+
+### F-004 — `halls/civil-war.html` lacks "Hall VI" anywhere except the footer
+**Severity:** High
+**Area:** Hall-pages
+**Files:** `halls/civil-war.html`
+**Status:** Open
+
+**Observed:** Title is `Civil War Gallery — The Cipher Museum`, h1 `The American Civil War Gallery`, breadcrumb terminal segment `Special Exhibition`. Footer is the only place that says `Hall VI of X · 10 Exhibit Halls`.
+
+**Expected:** A user landing on this page should be able to tell it is Hall VI without scrolling to the footer. Title prefix `Hall VI:` and breadcrumb terminal `Hall VI` would match the rest of the museum.
+
+**Evidence:** `halls/civil-war.html` lines for `<title>`, breadcrumb, and footer.
+
+**Proposed fix:** Title → `Hall VI: Civil War Gallery — The Cipher Museum`. Breadcrumb terminal → `Hall VI`.
+
+### F-005 — `halls/unbreakable.html` lacks "Hall IX" anywhere except the footer
+**Severity:** High
+**Area:** Hall-pages
+**Files:** `halls/unbreakable.html`
+**Status:** Open
+
+**Observed:** Title `Final Hall: The Unbreakable — The Cipher Museum`, breadcrumb terminal `Final Hall`. Footer says `Hall IX of X`.
+
+**Expected:** Either the rest of the page admits to being Hall IX, or all four slots use the "Final Hall" label consistently. Inconsistent reading creates confusion.
+
+**Evidence:** `halls/unbreakable.html` `<title>` + breadcrumb vs. footer.
+
+**Proposed fix:** Title → `Hall IX: The Unbreakable — The Cipher Museum`. Breadcrumb terminal → `Hall IX`. Keep "Final Hall" wording in any decorative eyebrow if desired.
+
+### F-006 — `halls/codebreakers.html` lacks "Hall X" anywhere except the footer
+**Severity:** High
+**Area:** Hall-pages
+**Files:** `halls/codebreakers.html`
+**Status:** Open
+
+**Observed:** Title `Hall of Codebreakers — The Cipher Museum`, breadcrumb terminal `Hall of Codebreakers`. Footer says `Hall X of X`.
+
+**Expected:** Title prefix `Hall X:` + breadcrumb terminal `Hall X` (the prefix can be retained inside the title for SEO).
+
+**Proposed fix:** Title → `Hall X: Hall of Codebreakers — The Cipher Museum`. Breadcrumb terminal → `Hall X`.
+
+### F-007 — `halls/civil-war.html` next link skips machines and puzzle, jumps to unbreakable
+**Severity:** High
+**Area:** Hall-pages
+**Files:** `halls/civil-war.html`
+**Status:** Open
+
+**Observed:** `civil-war.html` hall-nav next link is `unbreakable.html` ("Final Hall →"). The chain therefore is V → VI → IX, missing VII and VIII.
+
+**Expected:** Next link should be `machines.html` ("Next Hall → Hall VII: Mechanical Cipher Machines").
+
+**Evidence:** `halls/civil-war.html` `class="hall-nav-link next"` block.
+
+**Proposed fix:** Replace `href="unbreakable.html"` with `href="machines.html"` and update the label text.
+
+### F-008 — `halls/machines.html` previous link skips civil-war, jumps back to military
+**Severity:** High
+**Area:** Hall-pages
+**Files:** `halls/machines.html`
+**Status:** Open
+
+**Observed:** Hall-nav previous link is `military.html` ("← Previous Hall · Hall V: Military & Spy Ciphers"). Should be civil-war (Hall VI).
+
+**Expected:** `civil-war.html` ("← Hall VI · Civil War Gallery").
+
+**Proposed fix:** Replace previous-link href and label.
+
+### F-009 — `halls/unbreakable.html` previous link skips puzzle and machines, jumps back to civil-war
+**Severity:** High
+**Area:** Hall-pages
+**Files:** `halls/unbreakable.html`
+**Status:** Open
+
+**Observed:** Previous link is `civil-war.html` ("← Civil War Gallery"). Chain reads VIII → VII → VI on the way back instead of VIII alone.
+
+**Expected:** `puzzle.html` ("← Hall VIII · Puzzle & Novelty Ciphers").
+
+**Proposed fix:** Replace previous-link href and label.
 
 ## Blockers and open questions
 
