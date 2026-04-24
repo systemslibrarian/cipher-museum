@@ -74,29 +74,12 @@
   <label for="input" style="display:block;margin-top:1rem;opacity:.7;font-size:.85rem;">Cartouche shown (fixed sample): "PTOLEMY"</label>
   <input type="hidden" id="input" value="PTOLEMY">
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-size:1.5rem;line-height:1.6;min-height:6rem;"></div>
-  <h3 style="margin-top:1.5rem;">Decipherment Timeline</h3>
-  <p style="opacity:.85;">Step through the long silence and rapid breakthrough: the stone matters because its readable Greek text let scholars align an unknown script against a known one.</p>
-  <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap;">
-    <button type="button" id="tl-196" onclick="showMilestone('m196')" style="padding:.5rem .9rem;background:var(--gold-glow);border:1px solid var(--gold-b);color:var(--gold);border-radius:6px;cursor:pointer;font-weight:600;">196 BCE</button>
-    <button type="button" id="tl-394" onclick="showMilestone('m394')" style="padding:.5rem .9rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">394 CE</button>
-    <button type="button" id="tl-1799" onclick="showMilestone('m1799')" style="padding:.5rem .9rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">1799</button>
-    <button type="button" id="tl-1814" onclick="showMilestone('m1814')" style="padding:.5rem .9rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">1814</button>
-    <button type="button" id="tl-1822" onclick="showMilestone('m1822')" style="padding:.5rem .9rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">1822</button>
-  </div>
-  <div id="timeline-output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;line-height:1.7;min-height:7rem;"></div>
   <script>
     (function () {
       var SAMPLES = {
         hiero:   '𓊪 𓏏 𓍯 𓃭 𓐝 𓇋 𓋴   "PTOLMYS" — read by Champollion 1822',
         demotic: 'ⲡⲧⲟⲗⲙⲏⲥ — Egyptian cursive, the everyday script of Ptolemaic Egypt',
         greek:   'ΠΤΟΛΕΜΑΙΟΣ — Greek, the language of the Ptolemaic court'
-      };
-      var MILESTONES = {
-        m196: '<strong>196 BCE:</strong> Priests at Memphis issue a decree honoring Ptolemy V. It is carved in hieroglyphic, demotic, and Greek so temple, administrative, and court audiences can all read it.',
-        m394: '<strong>394 CE:</strong> The last datable hieroglyphic inscription is carved at Philae. Within a few generations, the script falls out of use and its reading tradition disappears.',
-        m1799: '<strong>1799:</strong> French soldiers repairing Fort Julien near Rashid discover the stone. European scholars now have the same decree in one readable script and two unreadable ones.',
-        m1814: '<strong>1814:</strong> Thomas Young identifies that cartouches contain royal names and matches one to Ptolemy. The script is no longer treated as pure symbolism.',
-        m1822: '<strong>1822:</strong> Champollion announces that hieroglyphs are a mixed system combining phonetic and logographic values. The silence of fourteen centuries ends.'
       };
       window.encode = function (which) {
         document.getElementById('output').textContent = SAMPLES[which] || '';
@@ -110,22 +93,7 @@
         var btn = document.getElementById('btn-' + key);
         if (btn) { btn.style.background = 'var(--gold-glow)'; btn.style.color = 'var(--gold)'; }
       };
-      window.showMilestone = function (which) {
-        document.getElementById('timeline-output').innerHTML = MILESTONES[which] || '';
-        ['196', '394', '1799', '1814', '1822'].forEach(function (year) {
-          var button = document.getElementById('tl-' + year);
-          if (!button) return;
-          button.style.background = 'rgba(0,0,0,.3)';
-          button.style.color = 'var(--ink)';
-        });
-        var activeId = which === 'm196' ? 'tl-196' : which === 'm394' ? 'tl-394' : which === 'm1799' ? 'tl-1799' : which === 'm1814' ? 'tl-1814' : 'tl-1822';
-        var active = document.getElementById(activeId);
-        if (active) { active.style.background = 'var(--gold-glow)'; active.style.color = 'var(--gold)'; }
-      };
-      document.addEventListener('DOMContentLoaded', function () {
-        window.encode('hiero');
-        window.showMilestone('m196');
-      });
+      document.addEventListener('DOMContentLoaded', function () { window.encode('hiero'); });
     })();
   </script>
 </div>
@@ -172,17 +140,6 @@
             <tr><td>Track</td><td>B (visualization)</td></tr>
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">References</span></div>
-      <div class="panel-body">
-        <ul style="padding-left:1.1rem;line-height:1.55;">
-          <li>Richard Parkinson, <em>The Rosetta Stone</em> (British Museum Press, 2005).</li>
-          <li>Andrew Robinson, <em>Cracking the Egyptian Code: The Revolutionary Life of Jean-Francois Champollion</em> (Oxford University Press, 2012).</li>
-          <li>Simon Singh, <em>The Code Book</em> (Anchor, 1999), known-plaintext framing and historical cryptanalytic parallels.</li>
-        </ul>
       </div>
     </div>
   </div>

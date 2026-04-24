@@ -188,7 +188,8 @@ const ENGINE_PROFILES = {
   kamaSutra:              { key: 'KAMASUTRA',                        mode: 'self-reciprocal' },
   aeneasTacticus:         { key: '',                                 mode: 'roundtrip' },
   jn25:                   { key: '31415',                            mode: 'roundtrip' },
-  redTypeA:               { key: 'TOKYORED',                         mode: 'roundtrip' }
+  redTypeA:               { key: 'TOKYORED',                         mode: 'roundtrip' },
+  affine:                 { key: '5,8',                               mode: 'roundtrip' }
 };
 
 const SAMPLE_TEXTS = [
