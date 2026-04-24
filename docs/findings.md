@@ -6,13 +6,13 @@ Cross-referenced with live site at https://ciphermuseum.com.
 ## Status
 - Act I (audit): in progress
 - Act II (fix): not started
-- Total findings: 9
+- Total findings: 14
   - Critical: 3
-  - High: 6
+  - High: 11
   - Medium: 0
   - Low: 0
   - Informational: 0
-- Fixed: 0 / 9
+- Fixed: 0 / 14
 
 ## Ground truth
 
@@ -184,6 +184,76 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Expected:** `puzzle.html` ("← Hall VIII · Puzzle & Novelty Ciphers").
 
 **Proposed fix:** Replace previous-link href and label.
+
+### F-010 — `halls/ancient.html` is missing 2 of 5 exhibits per the Index
+**Severity:** High
+**Area:** Hall-pages, Content-gap
+**Files:** `halls/ancient.html`
+**Status:** Open
+
+**Observed:** Page renders 3 exhibit cards: caesar, polybius, scytale. The "This Hall" sidebar list and main grid both stop at 3.
+
+**Expected:** Per Index rows 01, 02, 03, 41, 42 → atbash and rot13 also belong on this page. Both have full exhibit pages and registered engines.
+
+**Evidence:** `halls/ancient.html` `href="../ciphers/"` link set vs. `museum-map.html` floor plan Hall I exhibit list (lines 116–124) which already lists 5.
+
+**Proposed fix:** Add atbash and rot13 cards in chronological order (atbash ~600 BC first, then scytale ~700 BC — actually atbash and scytale orderings disagree across sources; place atbash second after a fresh chronological re-sort of the 5).
+
+### F-011 — `halls/substitution.html` is missing four-square and two-square
+**Severity:** High
+**Area:** Hall-pages, Content-gap
+**Files:** `halls/substitution.html`
+**Status:** Open
+
+**Observed:** Page renders 6 cards: babington, great-cipher, hill, homophonic, monoalphabetic, playfair.
+
+**Expected:** Index rows 04, 05, 06, 07, 38, 39, 43, 44 → 8 cards. Missing four-square (1854 Pliny Earle Chase variant) and two-square.
+
+**Evidence:** `halls/substitution.html` link set vs. Index rows 43, 44.
+
+**Proposed fix:** Add four-square (place adjacent to playfair as a Playfair variant) and two-square (next to four-square).
+
+### F-012 — `halls/military.html` is missing straddling-checkerboard
+**Severity:** High
+**Area:** Hall-pages, Content-gap
+**Files:** `halls/military.html`
+**Status:** Open
+
+**Observed:** 5 cards: adfgvx, adfgx, bazeries, nihilist, vic.
+
+**Expected:** 6 cards (Index row 45 → straddling-checkerboard).
+
+**Evidence:** `halls/military.html` link set.
+
+**Proposed fix:** Add straddling-checkerboard card before vic (it predates VIC and is the substitution layer VIC builds on).
+
+### F-013 — `halls/puzzle.html` is missing copiale, beale, kryptos (3 of 8)
+**Severity:** High
+**Area:** Hall-pages, Content-gap
+**Files:** `halls/puzzle.html`
+**Status:** Open
+
+**Observed:** 5 cards: bacon, pigpen, tap-code, voynich, zodiac.
+
+**Expected:** 8 cards (Index rows 32, 33, 34, 35, 40, 48, 49, 50 → adds copiale, beale, kryptos).
+
+**Evidence:** `halls/puzzle.html` link set vs. floor plan Hall VIII exhibit list (lines 263–272) which already lists all 8.
+
+**Proposed fix:** Add copiale, beale, kryptos cards in chronological order (copiale ~1730, beale ~1820/1885, kryptos 1990).
+
+### F-014 — `halls/unbreakable.html` is missing solitaire and contains an erroneous enigma cross-link
+**Severity:** High
+**Area:** Hall-pages, Content-gap
+**Files:** `halls/unbreakable.html`
+**Status:** Open
+
+**Observed:** Cards/links: one-time-pad, vernam, plus a cross-link to `../ciphers/enigma.html`. Solitaire / Pontifex (Index row 51) is not listed.
+
+**Expected:** 3 exhibit cards: one-time-pad, vernam, solitaire. Enigma belongs to Hall VII (machines) and should not appear as a card here.
+
+**Evidence:** `halls/unbreakable.html` link set vs. Index row 51.
+
+**Proposed fix:** Add solitaire/pontifex card. Remove or downgrade the enigma reference (acceptable as inline body prose linking to enigma.html for "machines whose ciphers were broken" context, but not as an exhibit card).
 
 ## Blockers and open questions
 
