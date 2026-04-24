@@ -48,6 +48,8 @@
   <url><loc>https://ciphermuseum.com/ciphers/one-time-pad.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/enigma.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/lorenz.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/babington.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/voynich.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/jefferson-disk.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/alberti-disk.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/pigpen.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -57,4 +59,15 @@
   <url><loc>https://ciphermuseum.com/ciphers/navajo-code-talkers.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/zodiac.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/great-cipher.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/atbash.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/rot13.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/four-square.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/two-square.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/straddling-checkerboard.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/chaocipher.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/m209.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/solitaire.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/copiale.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/beale.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/kryptos.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

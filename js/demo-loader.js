@@ -152,6 +152,21 @@
       defaultMsg: 'THE KING ORDERS RETREAT TO PARIS AT DAWN',
       inputs: [{ type: 'text', id: 'keyword', label: 'Codebook Seed', value: 'LOUIS', placeholder: 'Seed word…' }]
     },
+    babington: {
+      label: 'Babington Plot Cipher', engine: 'babington',
+      defaultMsg: 'THE QUEEN MUST DIE FOR LIBERTY',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook Seed', value: 'BABINGTON', placeholder: 'Seed word…' }]
+    },
+    'navajo-code-talkers': {
+      label: 'Navajo Code Talkers', engine: 'navajo',
+      defaultMsg: 'ENEMY TANK BATTLESHIP IWO JIMA',
+      inputs: []
+    },
+    voynich: {
+      label: 'Voynich Manuscript (Voynichese render)', engine: 'voynich',
+      defaultMsg: 'HE WHO DECIPHERS THIS WILL BE FAMOUS',
+      inputs: []
+    },
     atbash: {
       label: 'Atbash', engine: 'atbash', defaultMsg: 'HELLO WORLD',
       inputs: []
@@ -361,6 +376,18 @@
     homophonic: [
       { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 3', url: 'https://en.wikipedia.org/wiki/Substitution_cipher#Homophonic_substitution' },
       { text: 'Practical Cryptography — Homophonic Substitution', url: 'https://practicalcryptography.com/ciphers/homophonic-substitution-cipher/' }
+    ],
+    babington: [
+      { text: 'Pollen, John Hungerford. <em>Mary Queen of Scots and the Babington Plot</em> (Scottish History Society, 1922)', url: 'https://archive.org/details/maryqueenofscots00poll' },
+      { text: 'Singh, Simon. <em>The Code Book</em>, ch. 1 — "The Cipher of Mary Queen of Scots"', url: 'https://en.wikipedia.org/wiki/The_Code_Book' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 4', url: 'https://en.wikipedia.org/wiki/Babington_Plot' },
+      { text: 'British Library — Cotton MS Caligula C IX (Babington letter facsimile)', url: 'https://www.bl.uk/manuscripts/' }
+    ],
+    voynich: [
+      { text: 'Beinecke MS 408 — Voynich Manuscript full digitization (Yale)', url: 'https://collections.library.yale.edu/catalog/2002046' },
+      { text: 'Reddy &amp; Knight, "What we know about the Voynich Manuscript" (ACL 2011)', url: 'https://aclanthology.org/W11-1511/' },
+      { text: 'Pelling, Nick. <em>The Curse of the Voynich</em> (2006)', url: 'https://ciphermysteries.com/the-voynich-manuscript' },
+      { text: 'Kennedy &amp; Churchill. <em>The Voynich Manuscript</em> (Orion, 2004)', url: 'https://en.wikipedia.org/wiki/Voynich_manuscript' }
     ],
     playfair: [
       { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 6', url: 'https://en.wikipedia.org/wiki/Playfair_cipher' },

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Babington Plot Cipher (1586) — The Cipher Museum</title>
+  <meta name="description" content="The nomenclator that doomed Mary, Queen of Scots — solved by Thomas Phelippes within days and weaponized by Walsingham. The first state-sponsored cryptanalysis with lethal consequences.">
+  <meta property="og:title" content="The Babington Plot Cipher — The Cipher Museum">
+  <meta property="og:description" content="The 1586 nomenclator that cost Mary, Queen of Scots her head. Broken by Thomas Phelippes; weaponized by Sir Francis Walsingham.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/babington.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Babington Plot Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="The 1586 nomenclator that cost Mary, Queen of Scots her head.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/babington.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: Classical Substitution</a><span>&rsaquo;</span>
+    Babington Plot Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 39 of 40</span>
+    <span class="badge era-renaissance">Elizabethan · 1586</span>
+    <span class="badge sec-broken">Broken in days · Mary executed 1587</span>
+  </div>
+  <h1 class="page-title">The Babington Plot Cipher</h1>
+  <p class="page-tagline"><em>The first cipher in history known to have decided a queen's life.</em></p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Used By</span><span class="fact-value">Mary, Queen of Scots &amp; Anthony Babington</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1586 (correspondence May–August)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Nomenclator: 23 letter symbols + 36 codewords + 4 nulls + 1 "doubleth"</span></div>
+    <div class="fact"><span class="fact-label">Keyspace</span><span class="fact-value">~64! permutations of glyph-to-token (effectively brute-force-immune for the era)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Thomas Phelippes, working for Sir Francis Walsingham · within days of interception</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Cryptography is an operational system, not just an algorithm — channel security and forgery resistance matter</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="babington"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>This is the cipher whose breaking <em>directly killed someone</em>. Mary Stuart, deposed Queen of Scots, had been Elizabeth I's prisoner-cousin for 19 years when a young English Catholic named Anthony Babington proposed a coup: assassinate Elizabeth, free Mary, restore Catholicism. Their plot was carried in nomenclator-encrypted letters smuggled out of Chartley Manor inside a beer-barrel bung. Sir Francis Walsingham — Elizabeth's spymaster — was reading every line before the recipients did, decoded by a young codebreaker named Thomas Phelippes. When Mary, in a July 17, 1586 letter, finally <em>endorsed</em> the assassination of Elizabeth in writing, Walsingham had what he needed. Mary was beheaded on February 8, 1587. The Babington Plot is the first historical case where cryptanalysis is the documented cause of an execution.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>By 1586, Mary Stuart had been imprisoned in England for 19 years. Catholic plots to free her and depose Elizabeth I had come and gone (Ridolfi, Throckmorton). Walsingham — who ran what historians now consider Europe's first modern intelligence service — believed Mary was guilty of conspiracy but had no evidence Elizabeth would accept. He needed Mary's own words, written by her own hand, endorsing regicide. So he <em>built a trap</em>.</p>
+        <p style="margin-top:1rem;">Walsingham's agent Gilbert Gifford, a double agent posing as a Catholic courier, established a covert channel: letters to and from Mary at Chartley Manor would be hidden in the bung-hole of beer kegs delivered by the local brewer. Mary believed it was secure. In reality, every letter passed through Phelippes's workshop in London, where it was opened, copied, decoded, resealed, and forwarded — usually within a day. The cipher she trusted was a 64-symbol nomenclator: 23 disguised letters, 36 codewords for common terms (THE, MARY, QUEEN, POISON, DEATH), 4 nulls, and one trap symbol called the <em>"doubleth"</em> meaning "double the next letter."</p>
+        <p style="margin-top:1rem;">On July 6, 1586, Anthony Babington wrote to Mary describing the plot: six gentlemen would assassinate Elizabeth; Mary would be freed by an invasion force. On July 17, Mary replied — endorsing the plot in writing, asking only for details on the gentlemen and the timing. Phelippes decoded it the same week. Famously, before forwarding the letter to Babington, Phelippes added a forged postscript in Mary's cipher asking for the names of the six conspirators. Babington wrote back with the names. Walsingham now had evidence enough to arrest the conspirators (they were hanged, drawn, and quartered in September) and to put Mary on trial. She was beheaded at Fotheringhay Castle on February 8, 1587.</p>
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body"><p><em>"She trusted in her cipher, and her cipher betrayed her."</em> — Simon Singh, <em>The Code Book</em>, summarizing the moment Mary realized at her trial that her own letters had been read all along. The trial transcripts record her shock when the deciphered correspondence was produced.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>The cipher is a <strong>nomenclator</strong> — a hybrid of substitution cipher and codebook. Mary's actual key (preserved in the British Library and reproduced in Pollen's 1922 edition) had four classes of symbol:</p>
+        <pre>23 letter symbols   (no J, V, W — folded onto I, U, II)
+36 codewords        (THE, AND, OF, MARY, QUEEN, ELIZABETH, POISON, …)
+ 4 null symbols     (decoys — drop on decode)
+ 1 "doubleth"       (means: double the previous/next letter)
+─────────
+64 total glyphs</pre>
+
+        <figure class="figure">
+          <svg viewBox="0 0 480 220" style="max-width:480px;width:100%;height:auto;" aria-label="Babington nomenclator structure">
+            <style>
+              .bb-pt{font-family:var(--fd,'Cinzel',serif);font-size:13px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central;font-weight:700;letter-spacing:.05em}
+              .bb-sym{font-family:'JetBrains Mono',monospace;font-size:12px;fill:#d4af37;text-anchor:middle;dominant-baseline:central}
+              .bb-line{stroke:#c8b273;stroke-width:.8;opacity:.55}
+              .bb-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:middle}
+              .bb-let{fill:rgba(120,200,180,.08);stroke:#5ac8a0;stroke-width:.8;rx:4}
+              .bb-nom{fill:rgba(201,168,76,.10);stroke:#c9a84c;stroke-width:.8;rx:4}
+              .bb-trap{fill:rgba(200,90,90,.10);stroke:#c85a5a;stroke-width:.9;rx:4}
+              .bb-null{fill:rgba(140,140,140,.10);stroke:#888;stroke-width:.8;stroke-dasharray:3 2;rx:4}
+            </style>
+            <text x="240" y="14" class="bb-lbl" style="font-size:11px;fill:#c9a84c;letter-spacing:.15em">PLAIN: "THE QUEEN MUST DIE"</text>
+            <text class="bb-pt" x="60" y="46">THE</text>
+            <text class="bb-pt" x="160" y="46">QUEEN</text>
+            <text class="bb-pt" x="250" y="46">M</text>
+            <text class="bb-pt" x="290" y="46">U</text>
+            <text class="bb-pt" x="330" y="46">S</text>
+            <text class="bb-pt" x="370" y="46">T</text>
+            <text class="bb-pt" x="430" y="46">DIE</text>
+            <line class="bb-line" x1="60" y1="56" x2="60" y2="86"/>
+            <line class="bb-line" x1="160" y1="56" x2="160" y2="86"/>
+            <line class="bb-line" x1="250" y1="56" x2="250" y2="86"/>
+            <line class="bb-line" x1="290" y1="56" x2="290" y2="86"/>
+            <line class="bb-line" x1="330" y1="56" x2="330" y2="86"/>
+            <line class="bb-line" x1="370" y1="56" x2="370" y2="86"/>
+            <line class="bb-line" x1="430" y1="56" x2="430" y2="86"/>
+            <rect class="bb-nom"  x="32"  y="88" width="56" height="26"/><text class="bb-sym" x="60"  y="101">⟨w33⟩</text>
+            <rect class="bb-nom"  x="132" y="88" width="56" height="26"/><text class="bb-sym" x="160" y="101">⟨w28⟩</text>
+            <rect class="bb-let"  x="225" y="88" width="50" height="26"/><text class="bb-sym" x="250" y="101">⟨a05⟩</text>
+            <rect class="bb-let"  x="265" y="88" width="50" height="26"/><text class="bb-sym" x="290" y="101">⟨a14⟩</text>
+            <rect class="bb-let"  x="305" y="88" width="50" height="26"/><text class="bb-sym" x="330" y="101">⟨a20⟩</text>
+            <rect class="bb-let"  x="345" y="88" width="50" height="26"/><text class="bb-sym" x="370" y="101">⟨a17⟩</text>
+            <rect class="bb-nom"  x="402" y="88" width="56" height="26"/><text class="bb-sym" x="430" y="101">⟨w15⟩</text>
+            <text x="240" y="142" class="bb-lbl" style="font-size:11px;fill:#c85a5a;letter-spacing:.15em">…AND ONE GLYPH ("DOUBLETH") MEANS "DOUBLE THE NEXT LETTER"</text>
+            <text class="bb-pt" x="80" y="170">L</text>
+            <rect class="bb-let"  x="55"  y="180" width="50" height="24"/><text class="bb-sym" x="80"  y="192">⟨a11⟩</text>
+            <rect class="bb-trap" x="125" y="180" width="50" height="24"/><text class="bb-sym" x="150" y="192">⟨x2⟩</text>
+            <text class="bb-lbl" x="150" y="170" style="fill:#c85a5a;">DOUBLETH</text>
+            <text class="bb-sym" x="200" y="192" style="font-size:18px;fill:#e8d5a3">⇒</text>
+            <text x="280" y="195" class="bb-lbl" style="font-size:14px;fill:#e8d5a3">decodes as "LL"</text>
+          </svg>
+          <figcaption class="figure-caption">Common words like THE and QUEEN got their own glyphs; rare letters used letter symbols; one trap glyph doubled the previous letter — exactly as the original 1586 key did.</figcaption>
+        </figure>
+        <p style="margin-top:1rem;">Encryption is a greedy-longest-match scan: clerks looked for the longest codeword that started at the current position. Where no codeword matched, they dropped to a single letter glyph. Nulls were sprinkled in as decoys. Decryption requires the codebook in front of you.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Frequency Analysis on the Letter Glyphs</div>
+          <div class="attack-diff">Complexity: Moderate · Took Phelippes days, not weeks</div>
+          <p class="attack-desc">Phelippes — fluent in five languages and trained in Al-Kindi-style frequency analysis — separated the 23 letter glyphs from the 36 codeword glyphs by counting frequencies. The letter glyphs followed an English-alphabet distribution; the codeword glyphs were rare and clustered (you only need MARY a few times per letter). Mapping the most-frequent letter glyph to E, the next to T, and so on, broke the alphabet quickly. The codewords were then trivially inferred from context.</p>
+        </div>
+        <div class="attack-panel">
+          <div class="attack-name">Ciphertext Forgery (Active Attack)</div>
+          <div class="attack-diff">Complexity: The first known forged-ciphertext attack in history</div>
+          <p class="attack-desc">Once Phelippes held the codebook, he could write <em>new</em> ciphertext that looked authentic. Walsingham ordered him to add a forged postscript to Mary's July 17 letter — in her own cipher — asking Babington to name the six conspirators. Babington complied. This is the earliest documented case of cryptographic forgery being used to gather evidence — a chosen-ciphertext attack against a system with no integrity protection.</p>
+        </div>
+        <div class="attack-panel">
+          <div class="attack-name">Operational Compromise (Channel Capture)</div>
+          <div class="attack-diff">Complexity: Trivial once the courier turned</div>
+          <p class="attack-desc">The cipher's strength was irrelevant: the entire delivery channel — Gilbert Gifford, the brewer, the beer keg — belonged to Walsingham. Mary's correspondents believed they had a private channel. Modern analogue: end-to-end encryption is meaningless if the endpoint or transport layer is owned by the adversary.</p>
+        </div>
+        <div class="callout callout-warning">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-body"><p><strong>Why it failed fundamentally:</strong> A nomenclator with only ~23 letter glyphs has the same frequency profile as a monoalphabetic cipher — Al-Kindi's 850 AD attack still works. Adding 36 codewords slows analysis but does not change the underlying weakness. And the cipher had no message authentication, so a captured codebook let the attacker forge messages indistinguishable from the real ones.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎓</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Babington-Era Concept</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Nomenclator: codewords for whole tokens</td><td>Compression dictionaries (Huffman, LZ77) and tokenizers — same idea, modern math</td></tr>
+            <tr><td>"Doubleth" trap glyph</td><td>Format-aware deception in steganography; honey encryption; CBC malleability traps</td></tr>
+            <tr><td>Forged ciphertext to extract information</td><td>Chosen-ciphertext attacks (CCA) — the reason modern encryption schemes use authenticated encryption (AES-GCM, ChaCha20-Poly1305)</td></tr>
+            <tr><td>Trusted channel that is actually compromised</td><td>End-to-end encryption with verified identity (Signal Protocol's safety numbers, key transparency logs)</td></tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <span class="callout-icon">🎓</span>
+          <div class="callout-body"><p><strong>Direct lineage:</strong> The Babington case is why modern protocols separate <em>confidentiality</em> from <em>integrity</em>. AES-GCM and ChaCha20-Poly1305 are <em>authenticated</em> ciphers: any tampering by Phelippes-the-modern-attacker would be detected before the recipient ever read the plaintext. There would have been no forged postscript, no list of six gentlemen, possibly no execution.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>39 of 40</td></tr>
+            <tr><td>Era</td><td>Elizabethan · 1586</td></tr>
+            <tr><td>Used by</td><td>Mary, Queen of Scots</td></tr>
+            <tr><td>Broken by</td><td>Thomas Phelippes</td></tr>
+            <tr><td>Time to break</td><td>Days (cipher was already known to Phelippes from earlier intercepts)</td></tr>
+            <tr><td>Active attack</td><td>Forged postscript by Phelippes</td></tr>
+            <tr><td>Trial date</td><td>14–15 October 1586 (Fotheringhay)</td></tr>
+            <tr><td>Execution</td><td>8 February 1587</td></tr>
+            <tr><td>Conspirators</td><td>14 hanged, drawn &amp; quartered (Sept 1586)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎴</span><span class="panel-title">About this Demo</span></div>
+      <div class="panel-body">
+        <p>The original 64-glyph key is in the British Library (Cotton MS Caligula C IX). This demo uses ASCII tokens — <code>⟨a01⟩…⟨a23⟩</code> for letters, <code>⟨w01⟩…⟨w36⟩</code> for codewords, <code>⟨n01⟩…⟨n04⟩</code> for nulls, and <code>⟨x2⟩</code> for the doubleth — deterministically assigned from the seed.</p>
+        <p style="margin-top:.75rem;">Try encoding "<em>POISON THE QUEEN AT THE TOWER</em>" and notice how POISON, THE, QUEEN, and TOWER each get their own codeword (one glyph for the whole word). Then encode "ATTACK" and watch the doubleth trap fire on the doubled T.</p>
+        <p style="margin-top:.75rem;">J folds to I and V folds to U, matching the historical 23-letter Elizabethan alphabet.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🗡️</span><span class="panel-title">Break This Cipher</span></div>
+      <div class="panel-body">
+        <p>Decode this intercepted dispatch (seed: <code>BABINGTON</code>):</p>
+        <pre style="white-space:pre-wrap;word-break:break-all;">⟨w25⟩ ⟨a14⟩ ⟨w32⟩ ⟨a20⟩ ⟨w33⟩ ⟨a17⟩ ⟨x2⟩</pre>
+        <details style="margin-top:.5rem;"><summary style="cursor:pointer;color:var(--gold);">Reveal solution</summary>
+          <p style="margin-top:.5rem;font-family:var(--fm);">The dispatch reads <strong>DAGGER ELIZABETH AT THE TOWER DEATH</strong> — paste the ciphertext into the demo and switch to <em>Decrypt</em> to verify. The seed shuffles the symbol-to-token assignment, so each glyph stands for whichever word the shuffle deals it.</p>
+        </details>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Related Exhibits -->
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/homophonic.html" class="related-card">
+      <span class="related-card__number">Exhibit 04</span>
+      <span class="related-card__name">Homophonic Substitution</span>
+      <span class="related-card__tag">Same family</span>
+    </a>
+    <a href="../ciphers/great-cipher.html" class="related-card">
+      <span class="related-card__number">Exhibit 38</span>
+      <span class="related-card__name">The Great Cipher</span>
+      <span class="related-card__tag">The trick that worked: it had a "delete" trap to Babington's "double" trap</span>
+    </a>
+    <a href="../halls/codebreakers.html" class="related-card">
+      <span class="related-card__number">Hall X</span>
+      <span class="related-card__name">Hall of Codebreakers</span>
+      <span class="related-card__tag">Phelippes &amp; Walsingham</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/great-cipher.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">The Great Cipher</span>
+  </a>
+  <a href="../halls/substitution.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Back to Hall &rarr;</span>
+    <span class="hall-nav-name">Hall II: Classical Substitution</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="great-cipher.html">&larr; The Great Cipher</a></li>
+        <li><a href="homophonic.html">Homophonic Substitution &rarr;</a></li>
+        <li><a href="../halls/codebreakers.html">Hall of Codebreakers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 39 of 40</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

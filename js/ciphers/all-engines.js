@@ -1063,6 +1063,283 @@ window.CipherEngines = (() => {
     };
   })();
 
+  /* ─── 38b. Babington Plot Cipher (1586) — Mary, Queen of Scots ───
+     The actual cipher Anthony Babington used to correspond with Mary
+     used 23 cipher symbols for letters (no J, V, W), 36 nomenclator
+     symbols for common words/names, 4 nulls, and one "doubleth" symbol
+     meaning "double the next letter." Thomas Phelippes solved it within
+     days and added a forged postscript that exposed the conspirators.
+     Modeled here with bracketed tokens (since we lack a glyph font):
+       letters → ⟨α01⟩…⟨α23⟩
+       nomens  → ⟨ω01⟩…⟨ω36⟩  (THE, AND, OF, FOR, MARY, ELIZABETH, …)
+       nulls   → ⟨∅01⟩…⟨∅04⟩  (decoys, dropped on decode)
+       trap    → ⟨×2⟩         (doubles the following letter)               */
+  const babington = (() => {
+    const LETTERS = 'ABCDEFGHIKLMNOPQRSTUXYZ'.split(''); // 23 symbols, period letters
+    const NOMENS = [
+      'THE','AND','OF','FOR','WITH','THAT','THIS','SHALL','WILL','MUST',
+      'YOUR','MAJESTY','MARY','ELIZABETH','QUEEN','KING','PRINCE','PLOT',
+      'POISON','DAGGER','SHIP','SPAIN','FRANCE','SCOTLAND','ENGLAND','TOWER',
+      'PRISON','LETTER','SECRET','FRIEND','ENEMY','GENTLEMEN','NOBLE','SIX',
+      'DEATH','LIBERTY'
+    ]; // 36 nomenclator codewords
+    const NULL = '__BNULL__';
+    const DOUB = '__BDOUB__'; // "doubleth" — double next letter
+    function buildTable(seed) {
+      const k = (clean(seed || 'BABINGTON') + 'PHELIPPES');
+      let s = 0;
+      for (let i = 0; i < k.length; i++) s = (s * 131 + k.charCodeAt(i)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // Build symbol pool
+      const symbols = [];
+      LETTERS.forEach((_, i) => symbols.push({ kind: 'L', tok: LETTERS[i], sym: 'a' + String(i + 1).padStart(2, '0') }));
+      NOMENS.forEach((w, i) => symbols.push({ kind: 'N', tok: w, sym: 'w' + String(i + 1).padStart(2, '0') }));
+      for (let i = 0; i < 4; i++) symbols.push({ kind: '0', tok: NULL, sym: 'n' + String(i + 1).padStart(2, '0') });
+      symbols.push({ kind: 'D', tok: DOUB, sym: 'x2' });
+      // Shuffle so the seed determines which symbol goes to which token
+      for (let i = symbols.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [symbols[i].sym, symbols[j].sym] = [symbols[j].sym, symbols[i].sym];
+      }
+      const enc = {}, dec = {}, nulls = [];
+      for (const s2 of symbols) {
+        dec[s2.sym] = s2.tok;
+        if (s2.tok === NULL) { nulls.push(s2.sym); continue; }
+        (enc[s2.tok] = enc[s2.tok] || []).push(s2.sym);
+      }
+      return { enc, dec, nulls };
+    }
+    function letterFold(ch) {
+      // Map J→I, V→U, W→VV (handled at caller) for the 23-letter alphabet
+      if (ch === 'J') return 'I';
+      if (ch === 'V') return 'U';
+      return ch;
+    }
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        if (!t) return '';
+        const { enc, nulls } = buildTable(key);
+        const sortedWords = NOMENS.slice().sort((a, b) => b.length - a.length);
+        let s = 0;
+        const k2 = (clean(key || 'BABINGTON') + 'WALSINGHAM');
+        for (let i = 0; i < k2.length; i++) s = (s * 17 + k2.charCodeAt(i)) & 0x7fffffff;
+        if (s === 0) s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        const out = [];
+        let i = 0;
+        while (i < t.length) {
+          // ~8% chance to insert a null between tokens
+          if (out.length > 0 && rng() < 0.08 && nulls.length) {
+            out.push('\u27e8' + nulls[Math.floor(rng() * nulls.length)] + '\u27e9');
+          }
+          // Try longest nomenclator word match first
+          let matched = null;
+          for (const w of sortedWords) {
+            if (t.startsWith(w, i) && enc[w]) { matched = w; break; }
+          }
+          if (matched) {
+            const opts = enc[matched];
+            out.push('\u27e8' + opts[Math.floor(rng() * opts.length)] + '\u27e9');
+            i += matched.length;
+            continue;
+          }
+          // Otherwise emit a letter symbol (folding J→I, V→U)
+          let ch = letterFold(t[i]);
+          // Doubled letter? Use the doubleth trap once in a while
+          if (i + 1 < t.length && letterFold(t[i + 1]) === ch && enc[DOUB] && rng() < 0.6) {
+            out.push('\u27e8' + enc[ch][0] + '\u27e9');
+            out.push('\u27e8' + enc[DOUB][0] + '\u27e9');
+            i += 2;
+            continue;
+          }
+          if (enc[ch]) {
+            const opts = enc[ch];
+            out.push('\u27e8' + opts[Math.floor(rng() * opts.length)] + '\u27e9');
+          } else {
+            out.push('?');
+          }
+          i++;
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { dec } = buildTable(key);
+        const matches = (text.match(/\u27e8[a-zA-Z0-9]+\u27e9|\u27e8x2\u27e9/g) || []);
+        let out = '';
+        for (const m of matches) {
+          const sym = m.slice(1, -1).toLowerCase();
+          const tok = dec[sym];
+          if (tok === undefined) { out += '?'; continue; }
+          if (tok === NULL) continue;
+          if (tok === DOUB) {
+            if (out.length) out += out[out.length - 1];
+            continue;
+          }
+          out += tok;
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 38c. Navajo Code Talkers (WWII USMC code) ───
+     The actual Navajo code combined two systems:
+       • A vocabulary of ~800 Navajo words for military terms
+         (e.g. "tortoise" = TANK, "iron-fish" = SUBMARINE)
+       • A spelling alphabet for words not in the codebook:
+         each English letter mapped to a Navajo word whose first
+         letter (in English) was that letter (e.g. A = WOL-LA-CHEE "ant").
+     Multiple Navajo words existed per letter to defeat frequency
+     analysis. Authoritative source: USMC FM 30-30 / Navajo Code
+     Talkers' Dictionary (declassified 1968).                            */
+  const navajo = (() => {
+    // Two Navajo equivalents per letter where the historical record provides them
+    const ALPHA = {
+      A: ['WOL-LA-CHEE','BE-LA-SANA'],         // ant, apple
+      B: ['SHUSH','TOISH-JEH'],                 // bear, barrel
+      C: ['MOASI','TLA-GIN'],                   // cat, coal
+      D: ['BE','LHA-CHA-EH'],                   // deer, dog
+      E: ['DZEH','AH-JAH'],                     // elk, ear
+      F: ['MA-E','CHUO'],                       // fox, fir
+      G: ['KLIZZIE','AH-TAD'],                  // goat, girl
+      H: ['LIN','CHA'],                         // horse, hat
+      I: ['TKIN','YEH-HES'],                    // ice, itch
+      J: ['TKELE-CHO-G','AH-YA-TSINNE'],        // jackass, jaw
+      K: ['JAD-HO-LONI','BA-AH-NE-DI-TININ'],   // kettle, key
+      L: ['DIBEH-YAZZIE','AH-JAD'],             // lamb, leg
+      M: ['TSIN-TLITI','BE-TAS-TNI'],           // match, mirror
+      N: ['TSAH','A-CHIN'],                     // needle, nose
+      O: ['A-KHA','TLO-CHIN'],                  // oil, onion
+      P: ['CLA-GI-AIH','BI-SO-DIH'],            // pant, pig
+      Q: ['CA-YEILTH'],                         // quiver
+      R: ['GAH','DAH-NES-TSA'],                 // rabbit, ram
+      S: ['DIBEH','KLESH'],                     // sheep, snake
+      T: ['THAN-ZIE','A-WOH'],                  // turkey, tooth
+      U: ['SHI-DA','NO-DA-IH'],                 // uncle, ute
+      V: ['A-KEH-DI-GLINI'],                    // victor
+      W: ['GLOE-IH','DAH-NES-TSA-EE'],          // weasel, weapon
+      X: ['AL-NA-AS-DZOH'],                     // crossed (X)
+      Y: ['TSAH-AS-ZIH'],                       // yucca
+      Z: ['BESH-DO-TLIZ']                       // zinc
+    };
+    // Common military code-vocabulary entries (subset of ~411 documented terms)
+    const VOCAB = {
+      AMERICA: 'NE-HE-MAH',          // "our mother"
+      AIRPLANE: 'WO-TAH-DE-NE-IH',
+      BOMB: 'A-YE-SHI',
+      SUBMARINE: 'BESH-LO',          // "iron fish"
+      TANK: 'CHAY-DA-GAHI',          // "tortoise"
+      BATTLESHIP: 'LO-TSO',          // "whale"
+      DESTROYER: 'CA-LO',            // "shark"
+      FIGHTER: 'DA-HE-TIH-HI',       // "hummingbird"
+      BOMBER: 'JAY-SHO',             // "buzzard"
+      MARINE: 'TOH-YIL-KAL',         // "sea soldier"
+      ENEMY: 'ANA-IH',
+      ATTACK: 'AL-TAH-JE-JAY',
+      RETREAT: 'JI-DI-JAH',
+      MACHINE: 'CHIDI',
+      GUN: 'BE-AL-DOH',
+      MORTAR: 'BE-AL-DOH-CID-DA-HI',
+      GRENADE: 'NI-MA-SI',           // "potato"
+      MINE: 'HA-GAH',
+      CAPTAIN: 'BESH-LEGAI-NAH-KIH', // "two silver bars"
+      MAJOR: 'CHE-CHIL-BE-TAH-OLA',  // "gold oak leaf"
+      GENERAL: 'BIH-KEH-HE',
+      ISLAND: 'SEI-TAH',
+      NIGHT: 'TLO-EE',
+      DAY: 'JI',
+      MORNING: 'A-YOR-ANH',
+      MESSAGE: 'HANE-AL-NEH'
+    };
+    function pick(arr, rng) { return arr[Math.floor(rng() * arr.length)]; }
+    return {
+      encode: (text, _key) => {
+        const t = text.toUpperCase();
+        // Deterministic per-message RNG so the same message reproduces
+        let s = 0;
+        for (let i = 0; i < t.length; i++) s = (s * 131 + t.charCodeAt(i)) & 0x7fffffff;
+        if (s === 0) s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        // Tokenize on whitespace, keeping word chunks
+        const words = t.split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const w of words) {
+          const stripped = w.replace(/[^A-Z]/g, '');
+          if (VOCAB[stripped]) {
+            out.push('[' + VOCAB[stripped] + ']');     // codeword path
+          } else {
+            const letters = [];
+            for (const ch of stripped) {
+              if (ALPHA[ch]) letters.push(pick(ALPHA[ch], rng));
+              else letters.push('?');
+            }
+            out.push(letters.join(' '));               // spelling-alphabet path
+          }
+        }
+        return out.join('   /   ');                    // " / " separates words
+      },
+      decode: (text) => {
+        const wordChunks = text.split(/\s*\/\s*/).map(s => s.trim()).filter(Boolean);
+        // Build reverse lookups
+        const codeWord2Eng = {};
+        for (const k in VOCAB) codeWord2Eng[VOCAB[k]] = k;
+        const navajo2Letter = {};
+        for (const k in ALPHA) for (const w of ALPHA[k]) navajo2Letter[w] = k;
+        const out = [];
+        for (const wc of wordChunks) {
+          const trimmed = wc.trim();
+          // Codeword form: [TOKEN]
+          const m = trimmed.match(/^\[([^\]]+)\]$/);
+          if (m && codeWord2Eng[m[1]]) { out.push(codeWord2Eng[m[1]]); continue; }
+          // Spelling alphabet form
+          const tokens = trimmed.split(/\s+/);
+          let s = '';
+          for (const tk of tokens) s += (navajo2Letter[tk] || '?');
+          out.push(s);
+        }
+        return out.join(' ');
+      }
+    };
+  })();
+
+  /* ─── 38d. Voynich Manuscript (Voynichese glyph substitution simulator) ───
+     The Voynich Manuscript (Beinecke MS 408, c. 1404–1438) remains
+     undeciphered. The "Voynichese" script has ~25–30 base glyphs
+     transcribed in EVA (European Voynich Alphabet). This engine is
+     NOT a claim that Voynichese is a substitution cipher — it is a
+     visualization aid: it lets visitors see what their own English
+     would look like if rendered in EVA glyphs, and round-trips
+     deterministically so the demo is reversible.                        */
+  const voynich = (() => {
+    // Common EVA glyph shapes (using the EVA letters that have unicode-safe
+    // visual analogues so the page renders without a custom font)
+    // Source: Reddy & Knight 2011, "What we know about the Voynich Manuscript"
+    const EVA = ['o','a','y','e','d','s','h','c','k','t','p','f','l','r','i','n','m','q','x','g','z','v','j','b','u','w'];
+    // Map A→EVA[0] … Z→EVA[25]; render in italic small caps via the page CSS
+    function fold(ch) {
+      const c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return EVA[c - 65];
+      if (c >= 97 && c <= 122) return EVA[c - 97];
+      return ch;
+    }
+    function unfold(ch) {
+      const i = EVA.indexOf(ch.toLowerCase());
+      if (i >= 0) return String.fromCharCode(65 + i);
+      return ch;
+    }
+    return {
+      encode: (text) => {
+        // Voynichese tokens are space-separated "words"; preserve word breaks
+        return text.split('').map(fold).join('');
+      },
+      decode: (text) => {
+        return text.split('').map(unfold).join('');
+      }
+    };
+  })();
+
   /* ─── 39. Atbash (ancient Hebrew reflection cipher) ─── */
   const atbash = (() => {
     const run = t => t.split('').map(ch => {
@@ -1530,7 +1807,7 @@ window.CipherEngines = (() => {
     otp, fractionatedMorse, confederateVigenere,
     bazeries, alberti, jefferson, enigma, lorenz,
     dictionaryCode, stager, vic,
-    scytale, vernam, greatCipher,
+    scytale, vernam, greatCipher, babington, navajo, voynich,
     atbash, rot13, foursquare, twosquare, straddlingCheckerboard,
     chaocipher, m209, solitaire, beale, copiale, kryptos, purple
   };
