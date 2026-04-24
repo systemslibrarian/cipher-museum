@@ -13,10 +13,10 @@ Cross-referenced with live site at https://ciphermuseum.com.
   - Low: 4
   - Informational: 2
 - Resolution summary:
-  - **Fixed in code: 32** (F-001, F-002, F-003, F-004, F-005, F-006, F-007, F-008, F-009, F-010, F-011, F-012, F-013, F-014, F-015, F-016, F-017, F-018, F-020, F-021, F-022, F-023, F-024, F-025, F-026, F-029, F-030, F-031, F-032, F-033, F-034, F-035)
+  - **Fixed in code: 33** (F-001…F-035 except F-019/F-027/F-036; F-028 closed in three tranches a48d80a / 8b16320 / a2eb977 / 3ec111f)
   - **Verified OK on re-inspection (no code change needed): 2** (F-019, F-027)
   - **Resolved as informational positive baseline: 1** (F-036)
-  - **Deferred with rationale: 2** (F-028 future-round content gaps, F-037 illustration attribution [needs Paul to flag AI-generated images])
+  - **Deferred with rationale: 1** (F-037 illustration attribution — needs Paul to flag AI-generated images)
   - Net: every finding has an explicit disposition.
 
 ## Ground truth
@@ -457,11 +457,14 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Informational
 **Area:** Content-gap
 **Files:** —
-**Status:** Deferred — informational only; out of scope for this audit pass.
+**Status:** Fixed — closed in three tranches.
+  - Tranche 1 (`8b16320`): five new Hall X biographies — Joan Clarke, Bill Tutte (solo), Elizebeth Smith Friedman, Agnes Meyer Driscoll, Leo Marks. Hall X tagline now reads “twenty-one moments.”
+  - Tranche 2 (`a2eb977`): six new cipher exhibits — Autokey, Nomenclator, Book Cipher, Dorabella, SIGABA, Typex — with five new working engines (autokey, nomenclator, bookCipher, sigaba, typex), CONFIGS + SOURCES entries, search-index rows, and hall-page cards. Engine harness 309→340.
+  - Tranche 3 (`3ec111f`): new Hall XI · Modern Cryptography (`halls/modern-crypto.html`) plus five exhibit pages — DES, Diffie-Hellman, RSA, AES, SHA-256. Floor plan converted modern-wing pointer to Hall XI; Cipher Index extended to 63 rows; sitewide counter ripple 58→63 exhibits and 10→11 halls.
 
 **Observed:** Items previously flagged for later rounds and out of scope for the current consistency pass: Dorabella (1897), SIGABA, Typex, Autokey (distinct from Running Key), generic Nomenclator exhibit, generic Book Cipher exhibit, additional Hall X biographies (Bill Tutte solo, Elizebeth Friedman, Joan Clarke, Leo Marks, Agnes Meyer Driscoll), and the Hall XI · Modern Cryptography promotion of DES/DH/RSA/AES/SHA-256 from `modern.html` to four-part exhibits.
 
-**Proposed fix:** None this round. Recorded for roadmap visibility.
+**Resolution:** All items above are now live in the museum. Total exhibit count 52→63; engines registry 51→55; halls I–XI; test harness 309→345 passing.
 
 ### F-029 — `ciphers/solitaire.html` does not mention Crowley's 1999 distinguishing attack on the keystream
 **Severity:** High
