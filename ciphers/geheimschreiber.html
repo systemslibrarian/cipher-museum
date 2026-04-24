@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geheimschreiber T52 (Sturgeon) (Siemens & Halske teleprinter cipher) — The Cipher Museum</title>
+  <meta name="description" content="The Siemens T52 “Sturgeon” — a German WWII teleprinter cipher with ten irregularly-clocked wheels feeding an additive keystream and a per-character permutation. Broken by Arne Beurling and the Swedish FRA in summer 1940.">
+  <meta property="og:title" content="Geheimschreiber T52 (Sturgeon) (Siemens & Halske teleprinter cipher) — The Cipher Museum">
+  <meta property="og:description" content="The Siemens T52 “Sturgeon” — a German WWII teleprinter cipher with ten irregularly-clocked wheels feeding an additive keystream and a per-character permutation. Broken by Arne Beurling and the Swedish FRA in summer 1940.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/geheimschreiber.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Geheimschreiber T52 (Sturgeon) (Siemens & Halske teleprinter cipher) — The Cipher Museum">
+  <meta name="twitter:description" content="The Siemens T52 “Sturgeon” — a German WWII teleprinter cipher with ten irregularly-clocked wheels feeding an additive keystream and a per-character permutation. Broken by Arne Beurling and the Swedish FRA in summer 1940.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/geheimschreiber.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Geheimschreiber T52 (Sturgeon)
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VII · Machines</span>
+    <span class="badge era-wwii">WWII · 1932–1945</span>
+    <span class="badge sec-broken">Broken (Beurling, 1940)</span>
+  </div>
+  <h1 class="page-title">Geheimschreiber T52 (Sturgeon) <span style="opacity:.6;font-weight:400;">Siemens & Halske teleprinter cipher</span></h1>
+  <p class="page-tagline">A teleprinter cipher with ten wheels and ten thousand operators — broken in two weeks by one Swedish mathematician with pencil and paper.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Siemens & Halske, Germany</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Deployed ~1932; in heavy WWII use 1940–1945</span></div>
+    <div class="fact"><span class="fact-label">Wheels</span><span class="fact-value">10 (5 generate keystream, 5 select permutation)</span></div>
+    <div class="fact"><span class="fact-label">Plaintext</span><span class="fact-value">5-bit Baudot teleprinter code</span></div>
+    <div class="fact"><span class="fact-label">Broken by</span><span class="fact-value">Arne Beurling, FRA Sweden, May–June 1940</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="geheimschreiber"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>While Lorenz SZ40/42 (“Tunny”) carried Hitler’s strategic traffic, the Siemens & Halske T52 — codenamed “Sturgeon” at Bletchley Park — carried Luftwaffe and Wehrmacht command traffic over leased Swedish telephone lines from 1940. That choice of physical medium turned out to be a catastrophic mistake.</p><p style="margin-top:1rem;">In summer 1940 the Swedish military intelligence service (FRA) handed Arne Beurling, a 35-year-old mathematician at Uppsala University, a stack of intercepted telegrams. He was given no machine, no diagram, no captured material. Two weeks later he handed back a complete reconstruction of the T52 algorithm, derived from the ciphertext alone. By 1942 the FRA was reading 200 messages per day. It is among the most extraordinary cryptanalytic feats of the twentieth century.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>The T52 is a teleprinter cipher. Plaintext is encoded in 5-bit Baudot characters and combined with a keystream generated by ten wheels with coprime lengths (47, 53, 59, 61, 67, 71, 73, 79, 83, 89). The wheels are split into two roles:</p><ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li><strong>Five wheels generate an additive keystream</strong> that shifts each character.</li><li><strong>Five wheels select, per character, one of several keyed substitution permutations</strong> applied after the additive shift.</li></ul><p style="margin-top:1rem;">In the original T52 the substitution is a bit-permutation on the 5-bit Baudot code. The educational demo above operates on the 26-letter alphabet using mod-26 addition and six keyed permutations of A–Z, which preserves the architectural lesson — additive keystream plus per-character permutation, ten coprime-length wheels — while keeping the round-trip clean for arbitrary text.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Beurling’s reconstruction (1940)</div><div class="attack-diff">Complexity: One mathematician, two weeks, ciphertext only</div><p class="attack-desc">Beurling exploited two German operating errors. First, the ten wheel lengths are coprime, so the keystream period is enormous — but operators frequently sent two messages with the <em>same wheel start position</em>, producing a depth. Second, German operators padded with the figure-shift character, which had a distinctive bit pattern that survived the additive masking. With several deep messages and the bias from padding, Beurling derived the wheel motion algebraically.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">App, the electromechanical breaker</div><div class="attack-diff">Complexity: Industrialised the daily settings hunt</div><p class="attack-desc">The FRA built an electromechanical machine called “Appen” that recovered the daily wheel positions automatically once the wiring was known. By 1942 the Swedes were reading T52 traffic at production scale and quietly informing the Allies.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Sturgeon lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Re-using a keystream produces a depth</td><td>Why nonces are mandatory and never reused (AES-GCM, ChaCha20)</td></tr><tr><td>Predictable padding leaks the keystream</td><td>Padding oracle attacks (Vaudenay, POODLE)</td></tr><tr><td>Coprime wheel lengths ≠ cryptographic security</td><td>Period ≠ unpredictability — modern PRGs require statistical tests</td></tr><tr><td>Ciphertext-only break of a complex machine</td><td>The defender must assume the attacker has only ciphertext, not vice versa</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Siemens & Halske, Germany</td></tr>
+            <tr><td>Year</td><td>Deployed ~1932; in heavy WWII use 1940–1945</td></tr>
+            <tr><td>Wheels</td><td>10 (5 generate keystream, 5 select permutation)</td></tr>
+            <tr><td>Plaintext</td><td>5-bit Baudot teleprinter code</td></tr>
+            <tr><td>Broken by</td><td>Arne Beurling, FRA Sweden, May–June 1940</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/lorenz.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Lorenz SZ40/42</span>
+      <span class="related-card__tag">The other German teleprinter cipher — broken at Bletchley with Colossus</span>
+    </a>
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma</span>
+      <span class="related-card__tag">The German tactical companion to Sturgeon’s strategic role</span>
+    </a>
+    <a href="../ciphers/vernam.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Vernam Cipher</span>
+      <span class="related-card__tag">The teleprinter additive on which the entire family is built</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/kl-7.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">KL-7 ADONIS</span>
+  </a>
+  <a href="../ciphers/kryha.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Kryha</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VII · Machines</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

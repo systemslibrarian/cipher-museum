@@ -4,13 +4,13 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 67 done / 171 total (39.2%)
+- Overall: 72 done / 171 total (42.1%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
 - Phase 2 (Hall XII creation): 16/26
 - Phase 3 (Pacific theater): 2/3
-- Phase 4 (WWII/interwar machines): 1/9
+- Phase 4 (WWII/interwar machines): 6/9
 - Phase 5 (European gaps): 5/10
 - Phase 6 (East Asia/global): 0/4
 - Phase 7 (Americana/cultural): 1/4
@@ -31,6 +31,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24: Created Hall I exhibits: kama-sutra.html, aeneas-tacticus.html, arabic-nomenclators.html.
 - 2026-04-24: Reconciliation pass: confirmed many Round 3 exhibits already shipped on disk. Checklist updated to match disk reality. Test fixes: ENGINE_PROFILES filled for affine/jn25/redTypeA; cipher pages count target raised from 82 to 84. All 6 test suites green.
 - 2026-04-24: Phase 5/7/10 batch — added 7 engines (affine, trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher) with full ENGINE_PROFILES + SOURCES wiring; built 7 exhibit pages (affine.html, trithemius.html, cardano-autokey.html, wheatstone.html, morse.html, cardano-grille.html, null-cipher.html) via scripts/build-phase5-pages.py. All 6 test suites green (564 + 387 + 238 + 1210 + 366 + 406 = 3,171 assertions). Cipher-pages count target 84 → 91.
+- 2026-04-24: Phase 4 WWII/Cold-War machines batch — added 5 engines (fialka, kl7, geheimschreiber, kryha, m94) with full ENGINE_PROFILES + SOURCES wiring; built 5 exhibit pages (fialka.html, kl-7.html, geheimschreiber.html, kryha.html, m-94.html) via scripts/build-phase4-pages.py. Geheimschreiber engine rewritten from Baudot 5-bit XOR to mod-26 letter-index arithmetic (5 additive wheels + 5 perm-selector wheels picking among 6 keyed permutations) to guarantee round-trip while preserving the T52 educational story. All 6 test suites green (604 + 392 + 238 + 1260 + 381 + 436 = 3,311 assertions). Cipher-pages count target 91 → 96.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -95,14 +96,14 @@ Updated after every commit. Source of truth for completion status.
 - [ ] Code Talkers expansion (Choctaw/Comanche/Hopi panel on Navajo page)
 
 ## Phase 4 - WWII / Interwar machines
-- [ ] Exhibit: Fialka M-125 - spec, engine, page, tests, registered
-- [ ] Exhibit: KL-7 - spec, engine, page, tests, registered
+- [x] Exhibit: Fialka M-125 - spec, engine, page, tests, registered
+- [x] Exhibit: KL-7 - spec, engine, page, tests, registered
 - [SKIP - already shipped] SIGABA new-build request
 - [SKIP - already shipped] Typex new-build request
-- [ ] Exhibit: Geheimschreiber (T52) - spec, engine, page, tests, registered
-- [ ] Exhibit: Kryha - spec, engine, page, tests, registered
+- [x] Exhibit: Geheimschreiber (T52) - spec, engine, page, tests, registered
+- [x] Exhibit: Kryha - spec, engine, page, tests, registered
 - [x] Exhibit: Bazeries Cylinder - spec, engine, page, tests, registered
-- [ ] Exhibit: M-94 / M-138-A - spec, engine, page, tests, registered
+- [x] Exhibit: M-94 / M-138-A - spec, engine, page, tests, registered
 - [ ] Fish-family side panel on Geheimschreiber page
 
 ## Phase 5 - Missing European classical and polyalphabetic gaps

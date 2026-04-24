@@ -299,6 +299,31 @@
       label: 'Null Cipher (Hidden-Letter Concealment)', engine: 'nullCipher',
       defaultMsg: 'HELP',
       inputs: [{ type: 'text', id: 'keyword', label: 'Position (first | last | N)', value: 'first', placeholder: 'first' }]
+    },
+    'fialka': {
+      label: 'Fialka M-125 (Soviet 10-rotor model)', engine: 'fialka',
+      defaultMsg: 'WARSAW PACT TRAFFIC',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Seed', value: 'M125', placeholder: 'Seed word…' }]
+    },
+    'kl-7': {
+      label: 'KL-7 (US 1952 8-rotor model)', engine: 'kl7',
+      defaultMsg: 'NATO READY MESSAGE',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Seed', value: 'TSEC', placeholder: 'Seed word…' }]
+    },
+    'geheimschreiber': {
+      label: 'Geheimschreiber T52 (Sturgeon family)', engine: 'geheimschreiber',
+      defaultMsg: 'OBERKOMMANDO WEHRMACHT',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Seed', value: 'STURGEON', placeholder: 'Seed word…' }]
+    },
+    'kryha': {
+      label: 'Kryha Pocket Cipher (1924)', engine: 'kryha',
+      defaultMsg: 'UNBREAKABLE CIPHER',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Seed', value: 'POCKET', placeholder: 'Seed word…' }]
+    },
+    'm-94': {
+      label: 'M-94 / M-138-A Strip Cipher (1922)', engine: 'm94',
+      defaultMsg: 'ARMY SIGNAL READY',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Offset Row[, disk-order]', value: '5', placeholder: '5 or 5,1,2,3,…' }]
     }
   };
 
@@ -654,6 +679,31 @@
       { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 14 (concealment ciphers in WWII)', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' },
       { text: 'Wikipedia — Null cipher', url: 'https://en.wikipedia.org/wiki/Null_cipher' },
       { text: 'Stamatatos, Efstathios. "A Survey of Modern Authorship Attribution Methods" (2009) — statistical detection of constrained text', url: 'https://en.wikipedia.org/wiki/Stylometry' }
+    ],
+    fialka: [
+      { text: 'Crypto Museum — Fialka M-125 deep dive', url: 'https://www.cryptomuseum.com/crypto/fialka/' },
+      { text: 'Wikipedia — Fialka', url: 'https://en.wikipedia.org/wiki/Fialka' },
+      { text: 'Reuvers &amp; Simons, "Fialka History &amp; Operation" (Crypto Museum, 2009)', url: 'https://www.cryptomuseum.com/crypto/fialka/files/' }
+    ],
+    kl7: [
+      { text: 'Crypto Museum — KL-7 (TSEC/KL-7 ADONIS)', url: 'https://www.cryptomuseum.com/crypto/usa/kl7/' },
+      { text: 'NSA Cryptologic Heritage — KL-7 retirement (1968)', url: 'https://www.nsa.gov/History/Cryptologic-History/' },
+      { text: 'Wikipedia — KL-7', url: 'https://en.wikipedia.org/wiki/KL-7' }
+    ],
+    geheimschreiber: [
+      { text: 'Crypto Museum — Siemens &amp; Halske T52 Geheimschreiber', url: 'https://www.cryptomuseum.com/crypto/siemens/t52/' },
+      { text: 'Beckman, Bengt. <em>Codebreakers: Arne Beurling and the Swedish Crypto Program</em>', url: 'https://en.wikipedia.org/wiki/Arne_Beurling' },
+      { text: 'Wikipedia — Siemens and Halske T52 / "Sturgeon" / Fish (cryptography)', url: 'https://en.wikipedia.org/wiki/Siemens_and_Halske_T52' }
+    ],
+    kryha: [
+      { text: 'Friedman, Kullback, Sinkov, Rosen — broke Kryha in a few hours; declassified analysis', url: 'https://www.nsa.gov/Portals/70/documents/news-features/declassified-documents/friedman-documents/' },
+      { text: 'Crypto Museum — Kryha Standard Cipher Machine', url: 'https://www.cryptomuseum.com/crypto/kryha/' },
+      { text: 'Wikipedia — Kryha', url: 'https://en.wikipedia.org/wiki/Kryha' }
+    ],
+    m94: [
+      { text: 'Crypto Museum — M-94 / CSP-488', url: 'https://www.cryptomuseum.com/crypto/usa/m94/' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 12 (US Army cylinder devices)', url: 'https://en.wikipedia.org/wiki/M-94' },
+      { text: 'Wikipedia — M-94 and M-138-A', url: 'https://en.wikipedia.org/wiki/M-94' }
     ]
   };
 

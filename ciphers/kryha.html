@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kryha (Pocket cipher machine · 1924) — The Cipher Museum</title>
+  <meta name="description" content="Alexander von Kryha’s 1924 pocket cipher — a clockwork-driven mixed alphabet wheel sold to banks and diplomats as unbreakable, then broken in two hours by William Friedman.">
+  <meta property="og:title" content="Kryha (Pocket cipher machine · 1924) — The Cipher Museum">
+  <meta property="og:description" content="Alexander von Kryha’s 1924 pocket cipher — a clockwork-driven mixed alphabet wheel sold to banks and diplomats as unbreakable, then broken in two hours by William Friedman.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/kryha.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kryha (Pocket cipher machine · 1924) — The Cipher Museum">
+  <meta name="twitter:description" content="Alexander von Kryha’s 1924 pocket cipher — a clockwork-driven mixed alphabet wheel sold to banks and diplomats as unbreakable, then broken in two hours by William Friedman.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/kryha.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Kryha
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VII · Machines</span>
+    <span class="badge era-modern">Inter-war commercial · 1924</span>
+    <span class="badge sec-broken">Broken (Friedman, 1933)</span>
+  </div>
+  <h1 class="page-title">Kryha <span style="opacity:.6;font-weight:400;">Pocket cipher machine · 1924</span></h1>
+  <p class="page-tagline">Sold as the unbreakable cipher of the future. Friedman broke a 1135-letter test message in 2 hours 41 minutes.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Alexander von Kryha, Berlin</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Patented 1924; sold widely 1924–1930s</span></div>
+    <div class="fact"><span class="fact-label">Mechanism</span><span class="fact-value">Single mixed alphabet wheel, clockwork-driven</span></div>
+    <div class="fact"><span class="fact-label">Marketed as</span><span class="fact-value">Unbreakable; recommended by German banks and diplomats</span></div>
+    <div class="fact"><span class="fact-label">Broken by</span><span class="fact-value">William Friedman & Solomon Kullback, US Army SIS, 1933</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="kryha"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Alexander von Kryha was a Ukrainian-born engineer who emigrated to Berlin after the Russian Revolution and patented his “Kryha Chiffriermaschine” in 1924. It was the first widely-marketed civilian cipher machine: a brass case the size of a pocket watch, sold to German banks, embassies, and businesses with extravagant claims of unbreakability.</p><p style="margin-top:1rem;">Sales pitches included challenge messages with cash prizes. Kryha’s machine was used commercially through the late 1920s and was even adopted by the German Foreign Office for some diplomatic traffic — a decision that intelligence historians regard as one of the more avoidable cryptographic mistakes of the inter-war period.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Two concentric wheels: a fixed outer ring of plaintext letters and an inner wheel carrying a <em>mixed</em> alphabet. The operator types a letter on the outer ring, reads off the cipher letter from the inner wheel, then triggers a spring-driven escapement that advances the inner wheel by an irregular number of positions — between 1 and roughly 26 — according to a stepping pattern fixed by the wheel design.</p><p style="margin-top:1rem;">The advertising claimed astronomical key spaces by counting wheel orientations and stepping pawls. The reality is that the inner wheel is a single mixed alphabet rotated by a finite, repeating sequence of step sizes — a polyalphabetic cipher with a long but eventually periodic key.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Friedman & Kullback, 1933</div><div class="attack-diff">Complexity: Two analysts, 2 hours 41 minutes, ciphertext only</div><p class="attack-desc">William Friedman and Solomon Kullback at the US Army Signal Intelligence Service were given a 1135-letter test message generated by a Kryha. Recognising the periodic structure of the stepping, they reduced the cipher to a small number of correlated substitutions, applied frequency analysis to each, and recovered the plaintext in 2 hours 41 minutes. Their internal report became a standard demonstration of how marketing claims fail under analysis.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Kasiski / index of coincidence</div><div class="attack-diff">Complexity: Routine for any polyalphabetic with finite period</div><p class="attack-desc">Because the stepping repeats, the Kryha is asymptotically a Vigenère-like cipher with a long, mixed-alphabet key. The same techniques that work on Vigenère — Kasiski examination to find the period, then frequency analysis on each column — work on Kryha as soon as you have a few hundred characters of ciphertext.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Kryha lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Counting wheel orientations ≠ key strength</td><td>Key length ≠ entropy in modern key analysis</td></tr><tr><td>Vendor unbreakability claims with no public review</td><td>“Trust us” crypto vs. open peer-reviewed standards</td></tr><tr><td>Fixed stepping pattern = finite period</td><td>Why modern stream ciphers need state at least as large as the security level</td></tr><tr><td>2 hours 41 minutes is a long time to admire a cipher</td><td>Time-to-first-break is the only honest security claim</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Alexander von Kryha, Berlin</td></tr>
+            <tr><td>Year</td><td>Patented 1924; sold widely 1924–1930s</td></tr>
+            <tr><td>Mechanism</td><td>Single mixed alphabet wheel, clockwork-driven</td></tr>
+            <tr><td>Marketed as</td><td>Unbreakable; recommended by German banks and diplomats</td></tr>
+            <tr><td>Broken by</td><td>William Friedman & Solomon Kullback, US Army SIS, 1933</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/jefferson-disk.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Jefferson Disk</span>
+      <span class="related-card__tag">The 18th-century pocket cipher Kryha was meant to modernise</span>
+    </a>
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma</span>
+      <span class="related-card__tag">The contemporary commercial machine that did achieve real complexity</span>
+    </a>
+    <a href="../ciphers/hagelin.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Hagelin C-38 / M-209</span>
+      <span class="related-card__tag">The other commercial pocket machine that actually saw secure use</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/geheimschreiber.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Geheimschreiber T52</span>
+  </a>
+  <a href="../ciphers/m-94.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">M-94 / CSP-488</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VII · Machines</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

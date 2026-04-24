@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fialka M-125 (Soviet 10-rotor machine · 1956) — The Cipher Museum</title>
+  <meta name="description" content="The Soviet Cold-War rotor machine. Ten rotors, half stepping forward and half backward, plus a punch-card key sheet — the answer to every weakness Soviet analysts saw in Enigma.">
+  <meta property="og:title" content="Fialka M-125 (Soviet 10-rotor machine · 1956) — The Cipher Museum">
+  <meta property="og:description" content="The Soviet Cold-War rotor machine. Ten rotors, half stepping forward and half backward, plus a punch-card key sheet — the answer to every weakness Soviet analysts saw in Enigma.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/fialka.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Fialka M-125 (Soviet 10-rotor machine · 1956) — The Cipher Museum">
+  <meta name="twitter:description" content="The Soviet Cold-War rotor machine. Ten rotors, half stepping forward and half backward, plus a punch-card key sheet — the answer to every weakness Soviet analysts saw in Enigma.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/fialka.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Fialka M-125
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VII · Machines</span>
+    <span class="badge era-coldwar">Cold War · 1956</span>
+    <span class="badge sec-secure">Never broken (in service)</span>
+  </div>
+  <h1 class="page-title">Fialka M-125 <span style="opacity:.6;font-weight:400;">Soviet 10-rotor machine · 1956</span></h1>
+  <p class="page-tagline">Ten rotors, alternating direction, plus a punched-card key sheet — the Soviet answer to every Enigma weakness.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Soviet Union (Warsaw Pact issue)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">In service 1956 – ~1990</span></div>
+    <div class="fact"><span class="fact-label">Rotors</span><span class="fact-value">10 (alternating forward/reverse stepping)</span></div>
+    <div class="fact"><span class="fact-label">Reflector</span><span class="fact-value">Yes, but unlike Enigma the rotor wiring is not symmetric</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">No public break of operational traffic; declassified after 1991</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="fialka"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Fialka (“Violet”) M-125 was the standard cipher machine of the Soviet Union and the Warsaw Pact from the late 1950s into the 1990s. Each Warsaw Pact country received variants with national keyboards (Cyrillic, Latin, Polish, Czech, etc.), but the cryptographic core was identical — every signal between Moscow, Warsaw, Prague, and East Berlin passed through some flavour of Fialka.</p><p style="margin-top:1rem;">It was designed by engineers who had read everything the Soviets recovered about Enigma, and who set out to fix every weakness they found. The result is a machine that looks superficially like Enigma but is, internally, far more careful.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Ten rotors sit on a single spindle. Five of them step <strong>forward</strong> on each keypress, and the other five step <strong>backward</strong>. Each rotor advances at its own rate; the stepping pattern is irregular and depends on punched-card key sheets that change daily.</p><p style="margin-top:1rem;">Three further design choices matter:</p><ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li><strong>Asymmetric reflector.</strong> Enigma’s reflector forced the property that no letter could ever encipher to itself (a fatal crib-fitter’s gift). Fialka’s reflector and rotor wiring are arranged so this never holds for the operator.</li><li><strong>Per-message key card.</strong> Operators punched the daily key on a card that physically reconfigured rotor order, ring settings, and stepping. There was no plug-board to mis-set.</li><li><strong>Numeric alphabet.</strong> The rotor alphabet has 30 contacts, not 26 — enough to cover Cyrillic plus digits without a separate “figures” shift.</li></ul></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was (Not) Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">No public cryptanalytic break</div><div class="attack-diff">Complexity: Believed infeasible without key material</div><p class="attack-desc">No Western agency has admitted to reading Fialka traffic by cryptanalysis. The combination of ten irregularly-stepping rotors and daily key cards puts the workload well beyond contemporary Enigma-style hand methods.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Compromise via key material and HUMINT</div><div class="attack-diff">Complexity: N/A — traffic decrypted using stolen settings, not cryptanalysis</div><p class="attack-desc">What Western intelligence did read it read by stealing key cards or capturing operators — the same way the Soviets read American traffic via Walker. Fialka’s mathematics held; its <em>operational</em> security was the leak.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Fialka design choice</th><th>Modern echo</th></tr></thead><tbody><tr><td>Bidirectional rotor stepping</td><td>Modern stream ciphers mix several clocks at coprime rates (A5/1, Trivium)</td></tr><tr><td>Removing “no letter encrypts to itself”</td><td>Bias removal in modern S-box design</td></tr><tr><td>Daily punched-card key</td><td>Per-session symmetric keys derived from a master key</td></tr><tr><td>Compromise was operational, not mathematical</td><td>Most real-world breaks today are still implementation, not algorithmic</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Soviet Union (Warsaw Pact issue)</td></tr>
+            <tr><td>Year</td><td>In service 1956 – ~1990</td></tr>
+            <tr><td>Rotors</td><td>10 (alternating forward/reverse stepping)</td></tr>
+            <tr><td>Reflector</td><td>Yes, but unlike Enigma the rotor wiring is not symmetric</td></tr>
+            <tr><td>Status</td><td>No public break of operational traffic; declassified after 1991</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma</span>
+      <span class="related-card__tag">The machine Fialka was explicitly designed to outdo</span>
+    </a>
+    <a href="../ciphers/sigaba.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">SIGABA</span>
+      <span class="related-card__tag">The American contemporary that also resisted attack</span>
+    </a>
+    <a href="../ciphers/kl-7.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">KL-7</span>
+      <span class="related-card__tag">NATO’s answer to Fialka in the same period</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/sigaba.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">SIGABA</span>
+  </a>
+  <a href="../ciphers/kl-7.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">KL-7</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VII · Machines</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -3,11 +3,11 @@
 **Project:** Expand Cipher Museum from 63 exhibits across 11 halls → ~113 exhibits across 13 halls.
 **Repo:** systemslibrarian/cipher-museum · **Live:** https://ciphermuseum.com
 **Source of truth:** [docs/worldupdates.md](docs/worldupdates.md) — update after every commit.
-**Last sync with worldupdates.md:** 2026-04-24
+**Last sync with worldupdates.md:** 2026-04-24 (Phase 4 WWII machines batch shipped)
 
 ---
 
-## Status Snapshot — 67 / 171 (39.2%)
+## Status Snapshot — 72 / 171 (42.1%)
 
 | Phase | Title | Done / Total | Status |
 |------:|-------|------------:|--------|
@@ -16,7 +16,7 @@
 | 1     | Hall I: World Origins | 10/10 | ✅ Complete |
 | 2     | Hall XII: Unsolved Ciphers | 10/26 | 🟡 In progress |
 | 3     | Pacific Theater | 3/3 | ✅ Complete |
-| 4     | WWII / Interwar Machines | 0/9 | ⬜ Not started |
+| 4     | WWII / Interwar Machines | 6/9 | 🟡 In progress |
 | 5     | European Classical Gaps | 5/10 | 🟡 In progress |
 | 6     | East Asia & Telegraphy | 0/4 | ⬜ Not started |
 | 7     | Americana & Cultural | 1/4 | 🟡 In progress |
@@ -35,9 +35,9 @@
 
 ## Active Work
 
-**Currently building:** Phase 5 (European classical gaps) and Phase 7/10 stego — 7 exhibit pages just shipped: Affine, Trithemius, Cardano Autokey, Wheatstone, Morse, Cardano Grille, Null Cipher.
+**Currently building:** Phase 4 WWII / Cold-War machines just shipped — 5 exhibits: Fialka M-125, KL-7 ADONIS, Geheimschreiber T52 (Sturgeon), Kryha, M-94/CSP-488. Phase 5/7/10 stego batch (7 exhibits) shipped previously.
 
-Next on deck: Argenti Family, Wallis, Mary Stuart Castelnau Letters (Track B), Patterson’s Cipher for Jefferson (Track B), then Phase 4 WWII machines (Fialka, KL-7, Geheimschreiber, Kryha, M-94/M-138-A).
+Next on deck: Phase 6 (Chinese Telegraph Code, Zimmermann Telegram, Slidex, Commercial Codebooks) or Phase 9 (Hall XIII culture: Da Vinci Code, National Treasure, Gravity Falls, Popular Culture Survey).
 
 Build order within Phase 5 (remaining):
 1. ⬜ Argenti Family
@@ -115,14 +115,14 @@ Build order within Phase 5 (remaining):
 - [x] Red (Type A) (Track A: stepping-switch model)
 - [x] Navajo expanded with Choctaw/Comanche/Hopi panel + postwar admission framing
 
-### Phase 4 — WWII Machines ⬜
-- ⬜ Fialka M-125 (Track A)
-- ⬜ KL-7 (Track A)
+### Phase 4 — WWII Machines 🟡
+- [x] Fialka M-125 (Track A)
+- [x] KL-7 (Track A)
 - [SKIP — already shipped] SIGABA, Typex
-- ⬜ Geheimschreiber (T52) (Track A) + Fish Family side panel
-- ⬜ Kryha (Track A)
-- ⬜ Bazeries Cylinder (Track A — 20-disk)
-- ⬜ M-94 / M-138-A (Track A — dual-mode)
+- [x] Geheimschreiber (T52) (Track A) — Fish Family side panel still pending
+- [x] Kryha (Track A)
+- [x] Bazeries Cylinder (Track A — 20-disk)
+- [x] M-94 / M-138-A (Track A — dual-mode)
 
 ### Phase 5 — European Classical ⬜  ← Active phase
 - ⬜ **Affine (Track A)** ← in progress

@@ -65,7 +65,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 91', allPages.length === 91, `actual=${allPages.length}`);
+ok('Cipher pages count is 96', allPages.length === 96, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
@@ -195,7 +195,12 @@ const ENGINE_PROFILES = {
   wheatstone:             { key: 'WHEATSTONE',                        mode: 'roundtrip' },
   morse:                  { key: '',                                  mode: 'roundtrip' },
   cardanoGrille:          { key: '5:0,3,7,12,19,21,24',              mode: 'random-key' },
-  nullCipher:             { key: 'first',                             mode: 'roundtrip' }
+  nullCipher:             { key: 'first',                             mode: 'roundtrip' },
+  fialka:                 { key: 'M125',                               mode: 'self-reciprocal' },
+  kl7:                    { key: 'TSEC',                               mode: 'self-reciprocal' },
+  geheimschreiber:        { key: 'STURGEON',                           mode: 'roundtrip' },
+  kryha:                  { key: 'POCKET',                             mode: 'roundtrip' },
+  m94:                    { key: '5',                                  mode: 'roundtrip' }
 };
 
 const SAMPLE_TEXTS = [

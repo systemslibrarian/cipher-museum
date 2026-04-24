@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M-94 / CSP-488 (US Army strip / disk cipher · 1922) — The Cipher Museum</title>
+  <meta name="description" content="The M-94 (Army) and CSP-488 (Navy) — 25 brass disks on a spindle, each carrying a mixed alphabet. Jefferson’s 1795 idea, mass-produced for WWI tactical traffic and used into 1942.">
+  <meta property="og:title" content="M-94 / CSP-488 (US Army strip / disk cipher · 1922) — The Cipher Museum">
+  <meta property="og:description" content="The M-94 (Army) and CSP-488 (Navy) — 25 brass disks on a spindle, each carrying a mixed alphabet. Jefferson’s 1795 idea, mass-produced for WWI tactical traffic and used into 1942.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/m-94.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="M-94 / CSP-488 (US Army strip / disk cipher · 1922) — The Cipher Museum">
+  <meta name="twitter:description" content="The M-94 (Army) and CSP-488 (Navy) — 25 brass disks on a spindle, each carrying a mixed alphabet. Jefferson’s 1795 idea, mass-produced for WWI tactical traffic and used into 1942.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/m-94.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    M-94 / CSP-488
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VII · Machines</span>
+    <span class="badge era-modern">WWI → WWII tactical · 1922–1942</span>
+    <span class="badge sec-broken">Tactical only</span>
+  </div>
+  <h1 class="page-title">M-94 / CSP-488 <span style="opacity:.6;font-weight:400;">US Army strip / disk cipher · 1922</span></h1>
+  <p class="page-tagline">Twenty-five disks on a spindle. Jefferson’s 1795 idea, finally mass-produced — and tactical-only by then.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">United States Army (Mauborgne, Hitt)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">In service 1922 – 1943</span></div>
+    <div class="fact"><span class="fact-label">Mechanism</span><span class="fact-value">25 brass disks on a spindle, each a mixed alphabet</span></div>
+    <div class="fact"><span class="fact-label">Lineage</span><span class="fact-value">Direct descendant of the Jefferson cipher wheel (1795)</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">Tactical only; never trusted for strategic traffic</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="m-94"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Thomas Jefferson sketched a cipher wheel of 36 lettered disks on a spindle around 1795, used it briefly, and tucked the design away — it was rediscovered in his papers in 1922. Within months the US Army adopted essentially the same idea as the M-94 (the Navy version was the CSP-488). It is the only major US cipher system whose direct ancestor is a Founding Father.</p><p style="margin-top:1rem;">The M-94 served as the standard tactical cipher of the US Army through the 1920s and 1930s and was still in field use in early WWII alongside the M-209 and SIGABA. It was retired in 1943, by which point its tactical-level security was acknowledged as marginal.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Twenty-five aluminum or brass disks slide onto a single spindle. Each disk has the 26 letters of the alphabet engraved around its rim in a different mixed order, and each carries a number (1 through 25) for ordering on the spindle. To encrypt:</p><ol style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li>Both sender and recipient agree on the order of the 25 disks for the day.</li><li>The sender turns each disk so that the plaintext message reads horizontally across one row.</li><li>The sender then chooses any <em>other</em> row and reads the ciphertext off horizontally.</li></ol><p style="margin-top:1rem;">The recipient stacks the disks in the same agreed order, dials in the ciphertext on the corresponding row, and looks for the row that reads as English. Because there are 25 rows, only one will be sensible plaintext — the rest are gibberish.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Multiple-anagram attack on the disk order</div><div class="attack-diff">Complexity: Tractable for short tactical traffic</div><p class="attack-desc">The cipher’s key is the daily disk-order permutation (25!) and the chosen offset row. With several intercepts of similar length the analyst can superimpose them at the same offset; columns then come from the same disk, and a multiple-anagram attack on the columns recovers the disk order. The Friedman / Kullback team at the SIS demonstrated practical breaks well before WWII.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Captured disk sets</div><div class="attack-diff">Complexity: Trivial once disks are in hand</div><p class="attack-desc">A disk set captured intact reduces the daily key from 25! to 25! / (25 ⋅ 24!) — you only need the order, not the wirings. The US Army accepted this risk for tactical traffic and reserved SIGABA for anything strategic.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>M-94 lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>The hardware key (disk wiring) is the standing key</td><td>Modern HSMs hold a master key with a long lifetime</td></tr><tr><td>The session key is just the disk order</td><td>Modern session keys are derived per-message from a master</td></tr><tr><td>Tactical vs strategic security tiers</td><td>Modern crypto-agility — different protections for different threat models</td></tr><tr><td>Jefferson’s 127-year lag to deployment</td><td>Good cryptographic ideas often arrive decades before the engineering catches up</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>United States Army (Mauborgne, Hitt)</td></tr>
+            <tr><td>Year</td><td>In service 1922 – 1943</td></tr>
+            <tr><td>Mechanism</td><td>25 brass disks on a spindle, each a mixed alphabet</td></tr>
+            <tr><td>Lineage</td><td>Direct descendant of the Jefferson cipher wheel (1795)</td></tr>
+            <tr><td>Status</td><td>Tactical only; never trusted for strategic traffic</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/jefferson-disk.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Jefferson Disk</span>
+      <span class="related-card__tag">The 1795 prototype that became the M-94</span>
+    </a>
+    <a href="../ciphers/m209.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">M-209</span>
+      <span class="related-card__tag">The pin-and-lug tactical cipher that succeeded the M-94</span>
+    </a>
+    <a href="../ciphers/sigaba.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">SIGABA</span>
+      <span class="related-card__tag">The strategic machine that backstopped M-94 tactical traffic</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/kryha.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Kryha</span>
+  </a>
+  <a href="../ciphers/jefferson-disk.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Jefferson Disk</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VII · Machines</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

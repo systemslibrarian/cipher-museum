@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KL-7 ADONIS (NATO eight-rotor machine · 1952) — The Cipher Museum</title>
+  <meta name="description" content="The KL-7 (ADONIS) was NATO’s standard cipher machine from 1952 to 1968. Eight rotors, seven of which stepped, on a re-entrant alphabet. Compromised by John Walker, not by cryptanalysis.">
+  <meta property="og:title" content="KL-7 ADONIS (NATO eight-rotor machine · 1952) — The Cipher Museum">
+  <meta property="og:description" content="The KL-7 (ADONIS) was NATO’s standard cipher machine from 1952 to 1968. Eight rotors, seven of which stepped, on a re-entrant alphabet. Compromised by John Walker, not by cryptanalysis.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/kl-7.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="KL-7 ADONIS (NATO eight-rotor machine · 1952) — The Cipher Museum">
+  <meta name="twitter:description" content="The KL-7 (ADONIS) was NATO’s standard cipher machine from 1952 to 1968. Eight rotors, seven of which stepped, on a re-entrant alphabet. Compromised by John Walker, not by cryptanalysis.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/kl-7.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    KL-7 ADONIS
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VII · Machines</span>
+    <span class="badge era-coldwar">Cold War · 1952</span>
+    <span class="badge sec-secure">Never broken cryptanalytically</span>
+  </div>
+  <h1 class="page-title">KL-7 ADONIS <span style="opacity:.6;font-weight:400;">NATO eight-rotor machine · 1952</span></h1>
+  <p class="page-tagline">Eight rotors, irregular stepping, re-entrant alphabet — the rotor machine NATO trusted with everything until John Walker handed the keys to the Soviets.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">United States (NSA), then NATO-wide</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">In service 1952 – 1968 (replaced by KW-26 / KL-43)</span></div>
+    <div class="fact"><span class="fact-label">Rotors</span><span class="fact-value">8 (one stationary; the other 7 step irregularly)</span></div>
+    <div class="fact"><span class="fact-label">Alphabet</span><span class="fact-value">Re-entrant 36 contacts (26 letters + control codes)</span></div>
+    <div class="fact"><span class="fact-label">Compromise</span><span class="fact-value">Walker spy ring delivered key lists 1968–1985</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="kl-7"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The KL-7, code-named ADONIS, was the rotor machine that carried NATO’s most sensitive traffic for almost two decades. It encrypted everything from US Navy submarine orders to NATO command messages. By 1965 the United States alone had over 25,000 KL-7 units in service.</p><p style="margin-top:1rem;">Cryptanalytically, the KL-7 was never broken. Operationally, it suffered the most damaging spy compromise in modern American history: Navy Chief Warrant Officer John Walker sold its key lists to the Soviets from 1968 to 1985, allowing the KGB to read US Navy traffic in near real time.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Eight rotors sit on a spindle, but only <strong>seven step</strong>; the eighth is stationary and acts as a permutation between the rotor stack and the keyboard mapping. The seven moving rotors advance under the control of a notch table that changes daily, producing an irregular stepping pattern reminiscent of SIGABA but mechanically lighter.</p><p style="margin-top:1rem;">Two further details matter for security:</p><ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li><strong>Re-entrant alphabet.</strong> The rotor alphabet is wider than 26 (it carries numerals, space, and control codes), so the keyboard mapping is not a fixed bijection on A–Z. This breaks the symmetry that crib-fitters exploited in Enigma.</li><li><strong>No reflector.</strong> Signal flow is one-way through the rotor stack — there is no Enigma-style reflection that forces “no letter encrypts to itself”.</li></ul></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was (Not) Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">No public cryptanalytic break</div><div class="attack-diff">Complexity: Believed infeasible without key material</div><p class="attack-desc">Through 17 years of operational use and another 30 of declassified study, no published attack on the KL-7 cipher itself has appeared. The eight-rotor stack with irregular stepping puts it well beyond Enigma-class workloads.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">The Walker spy ring (1968–1985)</div><div class="attack-diff">Complexity: N/A — keys were stolen, not derived</div><p class="attack-desc">John Walker, a US Navy communications watch officer, photographed KL-7 key lists and sold them to the KGB through a network that included his brother, son, and a friend. The Soviets read US Navy traffic for the entire period — the most damaging American cipher compromise of the Cold War. Walker was arrested in 1985.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>KL-7 lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Rotor stepping that breaks Enigma’s regularity</td><td>Modern stream ciphers irregularly clock multiple LFSRs (A5/1)</td></tr><tr><td>Re-entrant alphabet defeats fixed-bijection cribs</td><td>Authenticated encryption breaks the “known header” crib path</td></tr><tr><td>Walker compromise: stolen keys are total breaks</td><td>Why HSMs, key wrapping, and split-knowledge protocols exist</td></tr><tr><td>The whole machine was secure; the people leaked</td><td>Modern threat models put insider risk near the top</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>United States (NSA), then NATO-wide</td></tr>
+            <tr><td>Year</td><td>In service 1952 – 1968 (replaced by KW-26 / KL-43)</td></tr>
+            <tr><td>Rotors</td><td>8 (one stationary; the other 7 step irregularly)</td></tr>
+            <tr><td>Alphabet</td><td>Re-entrant 36 contacts (26 letters + control codes)</td></tr>
+            <tr><td>Compromise</td><td>Walker spy ring delivered key lists 1968–1985</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/sigaba.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">SIGABA</span>
+      <span class="related-card__tag">The American WWII rotor machine the KL-7 succeeded</span>
+    </a>
+    <a href="../ciphers/fialka.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Fialka</span>
+      <span class="related-card__tag">The Soviet contemporary on the other side of the line</span>
+    </a>
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma</span>
+      <span class="related-card__tag">The machine whose weaknesses both KL-7 and Fialka avoided</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/fialka.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Fialka M-125</span>
+  </a>
+  <a href="../ciphers/geheimschreiber.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Geheimschreiber T52</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VII · Machines</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

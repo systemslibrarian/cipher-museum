@@ -2190,6 +2190,298 @@ window.CipherEngines = (() => {
     };
   })();
 
+  /* ─── Shared helper for Phase 4 rotor / disk-cylinder models ─── */
+  function _seededRng(seed) {
+    let s = 0;
+    for (const ch of (seed || 'SEED')) s = (s * 131 + ch.charCodeAt(0)) & 0x7fffffff;
+    if (s === 0) s = 1;
+    return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  }
+  function _shuffledAlphabet(rng) {
+    const arr = A.split('');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join('');
+  }
+
+  /* ─── Round 3 Phase 4: Fialka M-125 (Soviet 10-rotor) ─── */
+  // Pedagogical model. Real Fialka used a 30-character Cyrillic / Latin alphabet
+  // and 10 rotors with mixed-direction stepping. This engine models the essential
+  // idea: ten reciprocal substitution rotors with non-uniform stepping derived
+  // from a keyword. Reflector makes it self-reciprocal like Enigma/Typex.
+  const fialka = (() => {
+    function build(key) {
+      const rng = _seededRng('FIALKA' + clean(key || 'M125'));
+      const rotors = []; for (let r = 0; r < 10; r++) rotors.push(_shuffledAlphabet(rng));
+      const refArr = _shuffledAlphabet(rng).split('');
+      const reflector = {};
+      for (let i = 0; i < 26; i += 2) {
+        reflector[refArr[i]] = refArr[i + 1];
+        reflector[refArr[i + 1]] = refArr[i];
+      }
+      // Per-rotor step direction: +1 (typewriter style) or -1 (reverse).
+      const dirs = []; for (let r = 0; r < 10; r++) dirs.push(rng() > 0.5 ? 1 : -1);
+      return { rotors, reflector, dirs };
+    }
+    function step(positions, dirs, i) {
+      // Fast rotor every char; medium every 7th; slow every 31st (coprime with 26).
+      positions[0] = mod(positions[0] + dirs[0], 26);
+      if (i % 7 === 0)  positions[1] = mod(positions[1] + dirs[1], 26);
+      if (i % 31 === 0) positions[2] = mod(positions[2] + dirs[2], 26);
+      // rotors 3..9 act as stators that drift slightly with the medium ring
+      if (i % 91 === 0) positions[3] = mod(positions[3] + dirs[3], 26);
+    }
+    function encChar(ch, rotors, reflector, positions) {
+      let i = A.indexOf(ch);
+      for (let r = 0; r < 10; r++) {
+        const off = r < 4 ? positions[r] : 0;
+        i = A.indexOf(rotors[r][mod(i + off, 26)]);
+        i = mod(i - off, 26);
+      }
+      let c = reflector[A[i]];
+      i = A.indexOf(c);
+      for (let r = 9; r >= 0; r--) {
+        const off = r < 4 ? positions[r] : 0;
+        i = mod(i + off, 26);
+        i = rotors[r].indexOf(A[i]);
+        i = mod(i - off, 26);
+      }
+      return A[mod(i, 26)];
+    }
+    function run(text, key) {
+      const { rotors, reflector, dirs } = build(key);
+      const positions = [0, 0, 0, 0];
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        step(positions, dirs, i);
+        out += encChar(t[i], rotors, reflector, positions);
+      }
+      return out;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── Round 3 Phase 4: KL-7 (USA, 1952) ─── */
+  // Pedagogical model. Real KL-7 had 8 rotors with a re-entry path and a
+  // notched-ring stepping mechanism roughly four times more complex than
+  // SIGABA. This engine models the essential idea: eight rotor substitutions
+  // with irregular stepping driven by notch tables; reciprocal via reflector
+  // so the same operation encrypts and decrypts (matching the real KL-7).
+  const kl7 = (() => {
+    function build(key) {
+      const rng = _seededRng('KL7' + clean(key || 'TSEC'));
+      const rotors = []; for (let r = 0; r < 8; r++) rotors.push(_shuffledAlphabet(rng));
+      const notches = []; for (let r = 0; r < 8; r++) notches.push(Math.floor(rng() * 26));
+      const refArr = _shuffledAlphabet(rng).split('');
+      const reflector = {};
+      for (let i = 0; i < 26; i += 2) {
+        reflector[refArr[i]] = refArr[i + 1];
+        reflector[refArr[i + 1]] = refArr[i];
+      }
+      return { rotors, notches, reflector };
+    }
+    function step(positions, notches) {
+      // Always step rotor 0; rotors 1..6 step when previous rotor hits notch.
+      positions[0] = mod(positions[0] + 1, 26);
+      for (let r = 1; r < 7; r++) {
+        if (positions[r - 1] === notches[r - 1]) {
+          positions[r] = mod(positions[r] + 1, 26);
+        }
+      }
+    }
+    function encChar(ch, rotors, reflector, positions) {
+      let i = A.indexOf(ch);
+      for (let r = 0; r < 8; r++) {
+        const off = r < 7 ? positions[r] : 0;
+        i = A.indexOf(rotors[r][mod(i + off, 26)]);
+        i = mod(i - off, 26);
+      }
+      let c = reflector[A[i]];
+      i = A.indexOf(c);
+      for (let r = 7; r >= 0; r--) {
+        const off = r < 7 ? positions[r] : 0;
+        i = mod(i + off, 26);
+        i = rotors[r].indexOf(A[i]);
+        i = mod(i - off, 26);
+      }
+      return A[mod(i, 26)];
+    }
+    function run(text, key) {
+      const { rotors, notches, reflector } = build(key);
+      const positions = [0, 0, 0, 0, 0, 0, 0, 0];
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        step(positions, notches);
+        out += encChar(t[i], rotors, reflector, positions);
+      }
+      return out;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── Round 3 Phase 4: Geheimschreiber T52 (Sturgeon) ─── */
+  // Pedagogical model. The real Siemens & Halske T52 was a teleprinter cipher
+  // attachment combining XOR addition with a five-bit permutation derived from
+  // 10 keystream wheels. Bletchley called the family "Fish", with Lorenz/SZ40
+  // labelled "Tunny" and the T52 family "Sturgeon".
+  //
+  // This engine keeps the structural T52 idea — "additive keystream + per-
+  // character permutation, both driven by ten wheels of coprime length" —
+  // but works over the 26-letter alphabet rather than the 5-bit Baudot code,
+  // so encrypt/decrypt round-trip cleanly without falling onto non-letter
+  // Baudot symbols (LTRS shift, FIGS shift, NUL, etc.).
+  const geheimschreiber = (() => {
+    function build(key) {
+      const rng = _seededRng('T52' + clean(key || 'STURGEON'));
+      // 10 wheels with coprime lengths near the historical T52 wheel sizes.
+      const wheelLens = [47, 53, 59, 61, 67, 71, 73, 79, 83, 89];
+      const wheels = wheelLens.map(L => {
+        const bits = [];
+        for (let i = 0; i < L; i++) bits.push(Math.floor(rng() * 26));
+        return bits;
+      });
+      // Six per-character substitution permutations of 0..25; the wheels
+      // pick which one to apply at each position (the "Q-rangler" effect).
+      const perms = [];
+      for (let p = 0; p < 6; p++) perms.push(_shuffledAlphabet(rng));
+      const invPerms = perms.map(p => {
+        const inv = new Array(26);
+        for (let i = 0; i < 26; i++) inv[A.indexOf(p[i])] = A[i];
+        return inv.join('');
+      });
+      return { wheels, wheelLens, perms, invPerms };
+    }
+    function additiveAt(i, wheels, wheelLens) {
+      let s = 0;
+      for (let b = 0; b < 5; b++) s += wheels[b][i % wheelLens[b]];
+      return mod(s, 26);
+    }
+    function permIndexAt(i, wheels, wheelLens) {
+      let s = 0;
+      for (let b = 5; b < 10; b++) s += wheels[b][(i * 7) % wheelLens[b]];
+      return mod(s, 6);
+    }
+    function run(text, key, decrypt) {
+      const { wheels, wheelLens, perms, invPerms } = build(key);
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const x = A.indexOf(t[i]);
+        const k = additiveAt(i, wheels, wheelLens);
+        const p = permIndexAt(i, wheels, wheelLens);
+        if (!decrypt) {
+          out += perms[p][mod(x + k, 26)];
+        } else {
+          const y = invPerms[p].charCodeAt(x) - 65;
+          out += A[mod(y - k, 26)];
+        }
+      }
+      return out;
+    }
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
+  /* ─── Round 3 Phase 4: Kryha cipher machine (1924) ─── */
+  // Alexander von Kryha's pocket cipher device, marketed in the 1920s as
+  // "absolutely unbreakable" and demolished by Friedman, Kullback, Sinkov,
+  // and Rosen in just a few hours of paper analysis. The mechanism is a
+  // single mixed alphabet wheel that advances by an irregular amount on each
+  // keystroke, controlled by a 26-position spring-driven gear ring. With one
+  // rotor and a small number of distinct step values, period and depth-of-
+  // alignment attacks recover the wheel quickly. This is essentially a
+  // keyword-driven Vigenère-on-a-mixed-alphabet with non-uniform step sizes.
+  const kryha = (() => {
+    function build(key) {
+      const rng = _seededRng('KRYHA' + clean(key || 'POCKET'));
+      const wheel = _shuffledAlphabet(rng);
+      // Step pattern: a 26-position table of advance values 1..6.
+      const steps = []; for (let i = 0; i < 26; i++) steps.push(1 + Math.floor(rng() * 6));
+      return { wheel, steps };
+    }
+    function run(text, key, decrypt) {
+      const { wheel, steps } = build(key);
+      const t = clean(text); let out = '';
+      let pos = 0; let stepIdx = 0;
+      for (let i = 0; i < t.length; i++) {
+        const ch = t[i];
+        if (!decrypt) {
+          const x = A.indexOf(ch);
+          out += wheel[mod(x + pos, 26)];
+        } else {
+          const idx = wheel.indexOf(ch);
+          out += A[mod(idx - pos, 26)];
+        }
+        pos = mod(pos + steps[stepIdx], 26);
+        stepIdx = (stepIdx + 1) % 26;
+      }
+      return out;
+    }
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
+  /* ─── Round 3 Phase 4: M-94 / M-138-A strip cipher ─── */
+  // The M-94 (US Army, 1922) and M-138-A (US State Dept., 1934-1959) were
+  // direct mechanical descendants of Jefferson's wheel cipher. The M-94 had
+  // 25 lettered aluminium disks on a spindle; the M-138-A used 30 paper
+  // strips in a frame. Both worked the same way: align the disks/strips so
+  // the plaintext appears in a row, then read off any other row as the
+  // ciphertext. Recipient does the reverse. Engine is the Jefferson wheel
+  // with a configurable disk count and offset row.
+  const m94 = (() => {
+    function build(key, count) {
+      // Key format: optional first integer = offset row (1..25), then a
+      // permutation of 1..N or a keyword used to derive disk order.
+      const parsed = String(key || '').split(/[, ]+/).filter(Boolean);
+      let offset = 5;
+      let order = null;
+      if (parsed.length && /^\d+$/.test(parsed[0])) {
+        offset = parseInt(parsed[0], 10) || 5;
+        if (offset < 1) offset = 1; if (offset > count - 1) offset = count - 1;
+        parsed.shift();
+      }
+      if (parsed.length === count && parsed.every(p => /^\d+$/.test(p))) {
+        order = parsed.map(p => parseInt(p, 10) - 1);
+      }
+      // Build N pseudo-random mixed alphabets seeded by the key (or default).
+      const rng = _seededRng('M94' + (parsed.join('') || 'STANDARD'));
+      const disks = []; for (let r = 0; r < count; r++) disks.push(_shuffledAlphabet(rng));
+      if (order) {
+        const reordered = order.map(i => disks[i % count]);
+        return { disks: reordered, offset };
+      }
+      return { disks, offset };
+    }
+    function run(text, key, decrypt, count) {
+      const { disks, offset } = build(key, count);
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const disk = disks[i % count];
+        const ch = t[i];
+        if (!decrypt) {
+          const idx = disk.indexOf(ch);
+          if (idx < 0) { out += ch; continue; }
+          out += disk[mod(idx + offset, 26)];
+        } else {
+          const idx = disk.indexOf(ch);
+          if (idx < 0) { out += ch; continue; }
+          out += disk[mod(idx - offset, 26)];
+        }
+      }
+      return out;
+    }
+    return {
+      encode: (text, key) => run(text, key, false, 25),
+      decode: (text, key) => run(text, key, true, 25)
+    };
+  })();
+
   /* ─── Round 3 Phase 5: Affine cipher ─── */
   const affine = (() => {
     // Affine cipher: E(x) = (a*x + b) mod 26, D(y) = a^-1 * (y - b) mod 26.
@@ -2513,6 +2805,7 @@ window.CipherEngines = (() => {
     autokey, nomenclator, bookCipher, sigaba, typex,
     kamaSutra, aeneasTacticus, jn25, redTypeA,
     affine,
-    trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher
+    trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher,
+    fialka, kl7, geheimschreiber, kryha, m94
   };
 })();
