@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slidex (British WWII tactical bigram cipher card) — The Cipher Museum</title>
+  <meta name="description" content="Slidex was the British / Allied tactical paper-and-card cipher of WWII. A printed grid plus a sliding strip turned 2-letter bigrams into other bigrams. Quick at the platoon level, weak at scale — traffic analysis exploited it routinely.">
+  <meta property="og:title" content="Slidex (British WWII tactical bigram cipher card) — The Cipher Museum">
+  <meta property="og:description" content="Slidex was the British / Allied tactical paper-and-card cipher of WWII. A printed grid plus a sliding strip turned 2-letter bigrams into other bigrams. Quick at the platoon level, weak at scale — traffic analysis exploited it routinely.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/slidex.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Slidex (British WWII tactical bigram cipher card) — The Cipher Museum">
+  <meta name="twitter:description" content="Slidex was the British / Allied tactical paper-and-card cipher of WWII. A printed grid plus a sliding strip turned 2-letter bigrams into other bigrams. Quick at the platoon level, weak at scale — traffic analysis exploited it routinely.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/slidex.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall VI: Military &amp; Field Cryptography</a><span>&rsaquo;</span>
+    Slidex
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VI · Military</span>
+    <span class="badge era-wwii">WWII · 1943–1945</span>
+    <span class="badge sec-broken">Tactical (intentionally weak)</span>
+  </div>
+  <h1 class="page-title">Slidex <span style="opacity:.6;font-weight:400;">British WWII tactical bigram cipher card</span></h1>
+  <p class="page-tagline">A piece of paper, a sliding strip, and a daily key card — the cipher that secured British platoon traffic from Normandy to Burma.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Royal Signals, United Kingdom</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">In service 1943 – late 1950s</span></div>
+    <div class="fact"><span class="fact-label">Mechanism</span><span class="fact-value">Bigram substitution from a printed grid + sliding strip</span></div>
+    <div class="fact"><span class="fact-label">Use</span><span class="fact-value">Tactical voice and morse traffic; never strategic</span></div>
+    <div class="fact"><span class="fact-label">Successor</span><span class="fact-value">BATCO (Battle Code) from late 1950s</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="slidex"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Slidex was the British answer to a problem every WWII army faced: how do you encrypt platoon-level radio traffic without giving every signaller a fragile machine? The answer was a small printed card with a movable strip. The cipher was deliberately weak — it would not stop a serious cryptanalyst given a few days of traffic — but it was robust against an opponent who needed the message <em>now</em>, in the next 30 minutes, before the gunfire moved.</p><p style="margin-top:1rem;">It was issued from 1943 onwards across the British and Commonwealth armies and saw heavy use in Normandy, Italy, and the Far East. The Germans broke it routinely; the Japanese had less success, but tactical traffic is by its nature obsolete within hours.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Each Slidex card carries a 17×17 grid (or 12×12 in some issues). The rows and columns are headed by mixed alphabets that change daily. Inside each cell is a printed bigram (e.g. “BT”, “QM”) drawn from a pool of 289 distinct two-letter combinations. To encrypt:</p><ol style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li>Find your plaintext bigram by locating its two letters as the row label and column label.</li><li>Read off the cipher bigram printed in that cell.</li></ol><p style="margin-top:1rem;">A sliding paper strip lets the operator change the row alphabet rapidly, giving a polyalphabetic flavour to long messages. Decryption reverses the lookup.</p><p style="margin-top:1rem;">The demo above builds a deterministic 26×26 Slidex card from your seed and substitutes plaintext bigrams accordingly. Odd-length messages are padded with X (the standard Slidex convention).</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Bigram frequency analysis</div><div class="attack-diff">Complexity: Routine — days of traffic suffice</div><p class="attack-desc">A bigram cipher with a fixed daily card is essentially a monoalphabetic substitution on the 676-symbol bigram alphabet. The bigrams TH, HE, IN, ER are extremely common in English; identifying just the top few collapses the cipher quickly. German Y-Service units routinely read tactical Slidex within hours of intercept.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Stereotyped tactical traffic</div><div class="attack-diff">Complexity: Trivial when message templates are predictable</div><p class="attack-desc">“Wilco out”, “roger over”, position reports with grid references, fixed call-signs — tactical traffic is full of cribs. Slidex relied on the message being obsolete by the time the cipher was broken, not on resisting analysis.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Slidex lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Cryptographic strength is a function of how long the secret matters</td><td>Modern “forward secrecy” — yesterday’s key shouldn’t decrypt tomorrow’s traffic</td></tr><tr><td>Tactical cipher ≠ strategic cipher</td><td>Different threat models for ephemeral vs long-lived data</td></tr><tr><td>Paper crypto for non-specialist users</td><td>Modern “one-glance” safety: emoji codes, SAS pairing, QR-key exchange</td></tr><tr><td>Stereotyped templates leak structure</td><td>Why protocol designers obsess over removing predictable headers (HTTP/2 HPACK)</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Royal Signals, United Kingdom</td></tr>
+            <tr><td>Year</td><td>In service 1943 – late 1950s</td></tr>
+            <tr><td>Mechanism</td><td>Bigram substitution from a printed grid + sliding strip</td></tr>
+            <tr><td>Use</td><td>Tactical voice and morse traffic; never strategic</td></tr>
+            <tr><td>Successor</td><td>BATCO (Battle Code) from late 1950s</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/m-94.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">M-94 / CSP-488</span>
+      <span class="related-card__tag">American tactical cipher of the same era</span>
+    </a>
+    <a href="../ciphers/m209.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">M-209</span>
+      <span class="related-card__tag">Pin-and-lug tactical cipher (US, mid-WWII)</span>
+    </a>
+    <a href="../ciphers/playfair.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Playfair</span>
+      <span class="related-card__tag">The original 19th-c. bigram cipher Slidex descends from</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/zimmermann.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Zimmermann Telegram</span>
+  </a>
+  <a href="../ciphers/commercial-codebooks.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Commercial Codebooks</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/military.html">Hall VI: Military &amp; Field Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VI · Military</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

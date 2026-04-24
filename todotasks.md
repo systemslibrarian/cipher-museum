@@ -3,11 +3,11 @@
 **Project:** Expand Cipher Museum from 63 exhibits across 11 halls → ~113 exhibits across 13 halls.
 **Repo:** systemslibrarian/cipher-museum · **Live:** https://ciphermuseum.com
 **Source of truth:** [docs/worldupdates.md](docs/worldupdates.md) — update after every commit.
-**Last sync with worldupdates.md:** 2026-04-24 (Phase 4 WWII machines batch shipped)
+**Last sync with worldupdates.md:** 2026-04-24 (Phase 6 East Asia & Telegraphy batch shipped)
 
 ---
 
-## Status Snapshot — 72 / 171 (42.1%)
+## Status Snapshot — 76 / 171 (44.4%)
 
 | Phase | Title | Done / Total | Status |
 |------:|-------|------------:|--------|
@@ -18,7 +18,7 @@
 | 3     | Pacific Theater | 3/3 | ✅ Complete |
 | 4     | WWII / Interwar Machines | 6/9 | 🟡 In progress |
 | 5     | European Classical Gaps | 5/10 | 🟡 In progress |
-| 6     | East Asia & Telegraphy | 0/4 | ⬜ Not started |
+| 6     | East Asia & Telegraphy | 4/4 | ✅ Complete |
 | 7     | Americana & Cultural | 1/4 | 🟡 In progress |
 | 8     | Global Underground Traditions | 0/10 | ⬜ Not started |
 | 9     | Hall XIII: Ciphers in Culture | 3/14 | 🟡 In progress |
@@ -35,9 +35,9 @@
 
 ## Active Work
 
-**Currently building:** Phase 4 WWII / Cold-War machines just shipped — 5 exhibits: Fialka M-125, KL-7 ADONIS, Geheimschreiber T52 (Sturgeon), Kryha, M-94/CSP-488. Phase 5/7/10 stego batch (7 exhibits) shipped previously.
+**Currently building:** Phase 6 East Asia & Telegraphy just shipped — 4 exhibits: Chinese Telegraph Code, Zimmermann Telegram, Slidex, Commercial Codebooks. Phase 4 WWII machines (5 exhibits) shipped previously.
 
-Next on deck: Phase 6 (Chinese Telegraph Code, Zimmermann Telegram, Slidex, Commercial Codebooks) or Phase 9 (Hall XIII culture: Da Vinci Code, National Treasure, Gravity Falls, Popular Culture Survey).
+Next on deck: Phase 9 (Hall XIII culture: Da Vinci Code, National Treasure, Gravity Falls, Popular Culture Survey) or finish Phase 5 stragglers (Argenti, Wallis, Mary Stuart, Patterson).
 
 Build order within Phase 5 (remaining):
 1. ⬜ Argenti Family
@@ -135,11 +135,11 @@ Build order within Phase 5 (remaining):
 - ⬜ Mary Stuart Castelnau Letters (Track B annotated viewer + decipherment timeline)
 - ⬜ Patterson's Cipher for Jefferson (Track B four-layer animation + Smithline search viz)
 
-### Phase 6 — East Asia & Telegraphy ⬜
-- ⬜ Chinese Telegraph Code (Track A)
-- ⬜ Zimmermann Telegram (Track B + simplified nomenclator decoder)
-- ⬜ Slidex (Track A) + "Slidex to BATCO" side panel
-- ⬜ Commercial Telegraph Codebooks (Track A — codebook lookup)
+### Phase 6 — East Asia & Telegraphy ✅
+- [x] Chinese Telegraph Code (Track A)
+- [x] Zimmermann Telegram (Track A — codebook + super-encipherment)
+- [x] Slidex (Track A) — "Slidex to BATCO" side panel still pending
+- [x] Commercial Telegraph Codebooks (Track A — codebook lookup)
 
 ### Phase 7 — Americana ⬜
 - ⬜ Culper Ring / Tallmadge (Track A)

@@ -65,7 +65,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 96', allPages.length === 96, `actual=${allPages.length}`);
+ok('Cipher pages count is 100', allPages.length === 100, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
@@ -200,7 +200,11 @@ const ENGINE_PROFILES = {
   kl7:                    { key: 'TSEC',                               mode: 'self-reciprocal' },
   geheimschreiber:        { key: 'STURGEON',                           mode: 'roundtrip' },
   kryha:                  { key: 'POCKET',                             mode: 'roundtrip' },
-  m94:                    { key: '5',                                  mode: 'roundtrip' }
+  m94:                    { key: '5',                                  mode: 'roundtrip' },
+  chineseTelegraph:       { key: '0',                                  mode: 'roundtrip' },
+  zimmermann:             { key: '0',                                  mode: 'roundtrip' },
+  slidex:                 { key: 'SLIDEX',                             mode: 'roundtrip-padded' },
+  commercialCode:         { key: 'ABC',                                mode: 'roundtrip' }
 };
 
 const SAMPLE_TEXTS = [

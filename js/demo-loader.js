@@ -324,6 +324,26 @@
       label: 'M-94 / M-138-A Strip Cipher (1922)', engine: 'm94',
       defaultMsg: 'ARMY SIGNAL READY',
       inputs: [{ type: 'text', id: 'keyword', label: 'Offset Row[, disk-order]', value: '5', placeholder: '5 or 5,1,2,3,…' }]
+    },
+    'chinese-telegraph': {
+      label: 'Chinese Telegraph Code (1881, 4-digit codebook)', engine: 'chineseTelegraph',
+      defaultMsg: 'SHANGHAI',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Additive Key (numeric, 0–9999)', value: '0', placeholder: 'e.g. 1234' }]
+    },
+    'zimmermann': {
+      label: 'Zimmermann Telegram (Code 0075 / 13040 simulation)', engine: 'zimmermann',
+      defaultMsg: 'WAR WITH MEXICO STOP',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Additive Key (numeric)', value: '0', placeholder: 'e.g. 13040' }]
+    },
+    'slidex': {
+      label: 'Slidex (British WWII tactical bigram card)', engine: 'slidex',
+      defaultMsg: 'TANK MOVE NORTH',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Card Seed', value: 'SLIDEX', placeholder: 'Seed word…' }]
+    },
+    'commercial-codebooks': {
+      label: 'Commercial Telegraph Codebooks (ABC / Bentley\'s style)', engine: 'commercialCode',
+      defaultMsg: 'CONFIRMED SHIPMENT URGENT',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook (informational only)', value: 'ABC', placeholder: 'ABC, Bentley, Lieber…' }]
     }
   };
 
@@ -704,6 +724,28 @@
       { text: 'Crypto Museum — M-94 / CSP-488', url: 'https://www.cryptomuseum.com/crypto/usa/m94/' },
       { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 12 (US Army cylinder devices)', url: 'https://en.wikipedia.org/wiki/M-94' },
       { text: 'Wikipedia — M-94 and M-138-A', url: 'https://en.wikipedia.org/wiki/M-94' }
+    ],
+    chineseTelegraph: [
+      { text: 'Wikipedia — Chinese telegraph code', url: 'https://en.wikipedia.org/wiki/Chinese_telegraph_code' },
+      { text: 'Mullaney, Thomas S. <em>The Chinese Typewriter: A History</em> — covers the 1881 codebook', url: 'https://mitpress.mit.edu/9780262536103/the-chinese-typewriter/' },
+      { text: 'Standard Telegraph Codebook scans (Internet Archive)', url: 'https://archive.org/details/chinesetelegrap00gordgoog' }
+    ],
+    zimmermann: [
+      { text: 'NSA Center for Cryptologic History — The Zimmermann Telegram', url: 'https://www.nsa.gov/Helpful-Links/NSA-FOIA/Declassification-Transparency-Initiatives/Historical-Releases/' },
+      { text: 'Tuchman, Barbara W. <em>The Zimmermann Telegram</em> (1958)', url: 'https://en.wikipedia.org/wiki/The_Zimmermann_Telegram_(book)' },
+      { text: 'National Archives — Zimmermann Telegram (decoded text)', url: 'https://www.archives.gov/education/lessons/zimmermann' },
+      { text: 'Boghardt, Thomas. <em>The Zimmermann Telegram: Intelligence, Diplomacy, and America\'s Entry into WWI</em>', url: 'https://www.usni.org/press/books/zimmermann-telegram' }
+    ],
+    slidex: [
+      { text: 'Crypto Museum — Slidex', url: 'https://www.cryptomuseum.com/crypto/uk/slidex/' },
+      { text: 'Wikipedia — Slidex', url: 'https://en.wikipedia.org/wiki/Slidex' },
+      { text: 'GCHQ historical pamphlet on tactical cipher cards (declassified)', url: 'https://www.gchq.gov.uk/history' }
+    ],
+    commercialCode: [
+      { text: 'McKenna, Edward L. <em>Code-Books and the Telegraph</em>', url: 'https://en.wikipedia.org/wiki/Commercial_code_(communications)' },
+      { text: 'Bentley\'s Complete Phrase Code (1906) — Internet Archive', url: 'https://archive.org/details/bentleyscomplete00bent' },
+      { text: 'ABC Telegraphic Code, 5th edition (1901) — Internet Archive', url: 'https://archive.org/details/abctelegraphicco00clauuoft' },
+      { text: 'Standage, Tom. <em>The Victorian Internet</em> (cultural context)', url: 'https://www.bloomsbury.com/uk/victorian-internet-9781620405925/' }
     ]
   };
 

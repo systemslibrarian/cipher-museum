@@ -2790,6 +2790,269 @@ window.CipherEngines = (() => {
     };
   })();
 
+  // ============================================================
+  // Phase 6: East Asia & Telegraphy
+  // ============================================================
+
+  // Chinese Telegraph Code (Standard Telegraph Codebook, 1881).
+  // Demo: each Latin letter receives a deterministic 4-digit code group,
+  // optionally super-enciphered by adding a numeric additive key (the way
+  // CTC was actually overlaid in WWII Chinese diplomatic traffic).
+  const chineseTelegraph = (() => {
+    function buildTable() {
+      // 26 fixed 4-digit code groups, drawn from real CTC ranges (0001..9999)
+      // but assigned deterministically to A..Z so the demo round-trips cleanly.
+      const base = [
+         12,  74, 156, 219, 285, 347, 408, 472, 538, 601,
+        667, 729, 792, 856, 918,1024,1187,1255,1346,1421,
+       1503,1599,1672,1748,1821,1905
+      ];
+      const map = {}, inv = {};
+      for (let i = 0; i < 26; i++) {
+        const code = String(base[i]).padStart(4, '0');
+        map[A[i]] = code;
+        inv[code] = A[i];
+      }
+      return { map, inv };
+    }
+    function additive(key) {
+      const k = parseInt(String(key || '0').replace(/[^0-9]/g, '') || '0', 10);
+      return (k % 10000 + 10000) % 10000;
+    }
+    return {
+      encode: (text, key) => {
+        const { map } = buildTable();
+        const k = additive(key);
+        const msg = clean(text);
+        const out = [];
+        for (const ch of msg) {
+          const code = parseInt(map[ch], 10);
+          out.push(String((code + k) % 10000).padStart(4, '0'));
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { inv } = buildTable();
+        const k = additive(key);
+        const groups = String(text || '').match(/\d{4}/g) || [];
+        let r = '';
+        for (const g of groups) {
+          const original = String((parseInt(g, 10) - k + 10000) % 10000).padStart(4, '0');
+          r += inv[original] || '?';
+        }
+        return r;
+      }
+    };
+  })();
+
+  // Zimmermann Telegram (German diplomatic code 0075 / 13040).
+  // Demo: each input word is encoded as a 5-digit code group from a fixed
+  // codebook of ~140 common English words. Words not in the codebook fall
+  // through to a per-character literal encoding (codes 90000..90025 for A..Z).
+  // Optional numeric `key` is added mod 100000 (super-encipherment).
+  const zimmermann = (() => {
+    const WORDLIST = (
+      'THE OF AND TO IN A IS THAT FOR IT WITH AS BE ON BY ARE AT THIS NOT BUT FROM OR HAVE AN THEY WHICH ONE YOU WERE HER ALL SHE WHEN HIS THERE WOULD THEIR WHAT SO UP OUT IF ABOUT WHO GET WHICH GO ME WHEN MAKE CAN LIKE TIME NO JUST HIM KNOW TAKE PEOPLE INTO YEAR YOUR GOOD SOME COULD THEM SEE OTHER THAN THEN NOW LOOK ONLY COME ITS OVER THINK ALSO BACK AFTER USE TWO HOW OUR WORK FIRST WELL WAY EVEN NEW WANT ANY THESE GIVE DAY MOST US MEXICO WAR PEACE ALLIANCE SUBMARINE STOP UNRESTRICTED RESTRICTED AMERICA UNITED STATES JAPAN TEXAS ARIZONA NEW BERLIN MOSCOW NEUTRAL OFFER FINANCIAL SUPPORT HOSTILE RELATION RECONQUER LOST TERRITORY SUPREME COMMAND CABLE'
+    ).split(/\s+/);
+    function additive(key) {
+      const k = parseInt(String(key || '0').replace(/[^0-9]/g, '') || '0', 10);
+      return (k % 100000 + 100000) % 100000;
+    }
+    function fmt5(n) { return String(((n % 100000) + 100000) % 100000).padStart(5, '0'); }
+    return {
+      encode: (text, key) => {
+        const k = additive(key);
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          // strip punctuation for lookup but keep within token
+          const word = tok.replace(/[^A-Z]/g, '');
+          if (!word) continue;
+          const idx = WORDLIST.indexOf(word);
+          if (idx >= 0) {
+            out.push(fmt5(idx + k));
+          } else {
+            // literal fallback: 99999 sentinel + per-letter codes 90000..90025
+            out.push(fmt5(99999 + k));
+            for (const ch of word) {
+              out.push(fmt5(90000 + (ch.charCodeAt(0) - 65) + k));
+            }
+            out.push(fmt5(99998 + k));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const k = additive(key);
+        const groups = String(text || '').match(/\d{5}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const v = (parseInt(groups[i], 10) - k + 100000) % 100000;
+          if (v === 99999) {
+            // literal mode until 99998
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              const lv = (parseInt(groups[i], 10) - k + 100000) % 100000;
+              if (lv === 99998) { i++; break; }
+              if (lv >= 90000 && lv <= 90025) w += A[lv - 90000];
+              else w += '?';
+              i++;
+            }
+            words.push(w);
+          } else if (v < WORDLIST.length) {
+            words.push(WORDLIST[v]);
+            i++;
+          } else {
+            words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
+  // Slidex (British / Allied tactical bigram cipher card, WWII).
+  // Demo: a 26\u00d726 bigram card built from a keyed mixed alphabet; each
+  // plaintext bigram is replaced by the bigram at its (row, col) cell, and
+  // decoded by reverse lookup. Final odd letter is padded with X.
+  const slidex = (() => {
+    function buildCard(key) {
+      const seed = (String(key || 'SLIDEX').toUpperCase().replace(/[^A-Z]/g, '') || 'SLIDEX');
+      const rng = _seededRng(seed);
+      const rowAlpha = _shuffledAlphabet(rng);
+      const colAlpha = _shuffledAlphabet(rng);
+      // For each cell (r,c) the card prints a bigram; build a deterministic
+      // assignment so the 676 cells use all 676 bigrams exactly once.
+      const cells = [];
+      for (let i = 0; i < 26; i++) for (let j = 0; j < 26; j++) cells.push(A[i] + A[j]);
+      // shuffle cells with the keyed RNG
+      for (let i = cells.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [cells[i], cells[j]] = [cells[j], cells[i]];
+      }
+      const enc = {}, dec = {};
+      for (let r = 0; r < 26; r++) {
+        for (let c = 0; c < 26; c++) {
+          const plainBigram = rowAlpha[r] + colAlpha[c];
+          const cipherBigram = cells[r * 26 + c];
+          enc[plainBigram] = cipherBigram;
+          dec[cipherBigram] = plainBigram;
+        }
+      }
+      return { enc, dec };
+    }
+    return {
+      encode: (text, key) => {
+        const { enc } = buildCard(key);
+        let msg = clean(text);
+        if (msg.length % 2 === 1) msg += 'X';
+        let r = '';
+        for (let i = 0; i < msg.length; i += 2) {
+          const bg = msg.substr(i, 2);
+          r += enc[bg] || bg;
+        }
+        return r;
+      },
+      decode: (text, key) => {
+        const { dec } = buildCard(key);
+        const msg = clean(text);
+        let r = '';
+        for (let i = 0; i + 1 < msg.length; i += 2) {
+          const bg = msg.substr(i, 2);
+          r += dec[bg] || bg;
+        }
+        return r;
+      }
+    };
+  })();
+
+  // Commercial Telegraph Codebooks (ABC Code, Bentley's, etc., late 19th\u2013early 20th c.)
+  // Demo: each input word is encoded as a 5-letter pronounceable codeword in
+  // CVCVC pattern. Listed words use a fixed codebook; fallback per-letter encoding
+  // for unlisted words mirrors how operators handled proper nouns and numbers.
+  const commercialCode = (() => {
+    const C = 'BCDFGHJKLMNPQRSTVWXZ';
+    const V = 'AEIOU';
+    const CN = C.length, VN = V.length;
+    function encode5(idx) {
+      // 5-letter CVCVC -> 20*5*20*5*20 = 200000 possible codewords
+      idx = ((idx % 200000) + 200000) % 200000;
+      const c1 = idx % CN; idx = Math.floor(idx / CN);
+      const v1 = idx % VN; idx = Math.floor(idx / VN);
+      const c2 = idx % CN; idx = Math.floor(idx / CN);
+      const v2 = idx % VN; idx = Math.floor(idx / VN);
+      const c3 = idx % CN;
+      return C[c1] + V[v1] + C[c2] + V[v2] + C[c3];
+    }
+    function decode5(word) {
+      const w = word.toUpperCase();
+      if (w.length !== 5) return -1;
+      const c1 = C.indexOf(w[0]); if (c1 < 0) return -1;
+      const v1 = V.indexOf(w[1]); if (v1 < 0) return -1;
+      const c2 = C.indexOf(w[2]); if (c2 < 0) return -1;
+      const v2 = V.indexOf(w[3]); if (v2 < 0) return -1;
+      const c3 = C.indexOf(w[4]); if (c3 < 0) return -1;
+      return c1 + CN * (v1 + VN * (c2 + CN * (v2 + VN * c3)));
+    }
+    const WORDLIST = (
+      'THE OF AND TO IN IS THAT FOR IT WITH AS BE ON BY ARE AT THIS NOT BUT FROM OR HAVE AN THEY WHICH WERE HER ALL SHE WHEN HIS THERE WOULD THEIR WHAT SO UP OUT IF ABOUT WHO GET GO ME MAKE CAN LIKE TIME NO JUST HIM KNOW TAKE PEOPLE INTO YEAR YOUR GOOD SOME COULD THEM SEE OTHER THAN THEN NOW LOOK ONLY COME OVER THINK BACK AFTER USE TWO HOW OUR WORK FIRST WELL WAY EVEN NEW WANT ANY THESE GIVE DAY MOST US ARRIVED DEPARTING SHIPMENT URGENT CONFIRMED CANCEL DELIVERY PAYMENT PRICE QUANTITY OFFER ACCEPT REJECT REPLY CABLE WIRE STOP CONTRACT INVOICE BANK CREDIT DEBIT'
+    ).split(/\s+/);
+    const SENTINEL_LITERAL_OPEN = 199999;
+    const SENTINEL_LITERAL_CLOSE = 199998;
+    const LETTER_BASE = 199900;
+    return {
+      encode: (text, key) => {
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          const word = tok.replace(/[^A-Z]/g, '');
+          if (!word) continue;
+          const idx = WORDLIST.indexOf(word);
+          if (idx >= 0) {
+            out.push(encode5(idx));
+          } else {
+            out.push(encode5(SENTINEL_LITERAL_OPEN));
+            for (const ch of word) {
+              out.push(encode5(LETTER_BASE + (ch.charCodeAt(0) - 65)));
+            }
+            out.push(encode5(SENTINEL_LITERAL_CLOSE));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const groups = String(text || '').toUpperCase().match(/[A-Z]{5}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const v = decode5(groups[i]);
+          if (v === SENTINEL_LITERAL_OPEN) {
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              const lv = decode5(groups[i]);
+              if (lv === SENTINEL_LITERAL_CLOSE) { i++; break; }
+              if (lv >= LETTER_BASE && lv <= LETTER_BASE + 25) w += A[lv - LETTER_BASE];
+              else w += '?';
+              i++;
+            }
+            words.push(w);
+          } else if (v >= 0 && v < WORDLIST.length) {
+            words.push(WORDLIST[v]);
+            i++;
+          } else {
+            words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -2806,6 +3069,7 @@ window.CipherEngines = (() => {
     kamaSutra, aeneasTacticus, jn25, redTypeA,
     affine,
     trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher,
-    fialka, kl7, geheimschreiber, kryha, m94
+    fialka, kl7, geheimschreiber, kryha, m94,
+    chineseTelegraph, zimmermann, slidex, commercialCode
   };
 })();

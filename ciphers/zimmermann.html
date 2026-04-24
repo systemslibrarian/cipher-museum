@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zimmermann Telegram (German codes 0075 / 13040 · 1917) — The Cipher Museum</title>
+  <meta name="description" content="The decoded German telegram of January 1917 that brought the United States into WWI. A two-stage codebook cipher (0075 then 13040), broken by Britain’s Room 40 and surfaced through one of history’s most consequential intelligence operations.">
+  <meta property="og:title" content="Zimmermann Telegram (German codes 0075 / 13040 · 1917) — The Cipher Museum">
+  <meta property="og:description" content="The decoded German telegram of January 1917 that brought the United States into WWI. A two-stage codebook cipher (0075 then 13040), broken by Britain’s Room 40 and surfaced through one of history’s most consequential intelligence operations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/zimmermann.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zimmermann Telegram (German codes 0075 / 13040 · 1917) — The Cipher Museum">
+  <meta name="twitter:description" content="The decoded German telegram of January 1917 that brought the United States into WWI. A two-stage codebook cipher (0075 then 13040), broken by Britain’s Room 40 and surfaced through one of history’s most consequential intelligence operations.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/zimmermann.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall VI: Military &amp; Field Cryptography</a><span>&rsaquo;</span>
+    Zimmermann Telegram
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VI · Military</span>
+    <span class="badge era-wwi">WWI · January 1917</span>
+    <span class="badge sec-broken">Broken (Room 40)</span>
+  </div>
+  <h1 class="page-title">Zimmermann Telegram <span style="opacity:.6;font-weight:400;">German codes 0075 / 13040 · 1917</span></h1>
+  <p class="page-tagline">A diplomatic codebook cipher, cracked in Room 40, that pulled the United States into the First World War.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">German Foreign Office (Arthur Zimmermann, State Secretary)</span></div>
+    <div class="fact"><span class="fact-label">Sent</span><span class="fact-value">16 January 1917</span></div>
+    <div class="fact"><span class="fact-label">Codes</span><span class="fact-value">Outer: 0075 (super-enciphered diplomatic code); inner: 13040 (transmission code)</span></div>
+    <div class="fact"><span class="fact-label">Broken by</span><span class="fact-value">Nigel de Grey &amp; Reverend William Montgomery, Room 40, January 1917</span></div>
+    <div class="fact"><span class="fact-label">Outcome</span><span class="fact-value">US declares war on Germany, 6 April 1917</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="zimmermann"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>On 16 January 1917 Foreign Secretary Arthur Zimmermann sent the German ambassador in Washington a telegram instructing him, in the event of US entry into the war, to propose to Mexico an alliance against the United States with the promise of help recovering Texas, New Mexico, and Arizona. The cable was relayed via Stockholm and Buenos Aires using cables the British had cut and re-routed through London — every word passed through Room 40 of the Admiralty before reaching its destination.</p><p style="margin-top:1rem;">Two cryptanalysts, Nigel de Grey and the Reverend William Montgomery, partially decoded the telegram within hours. Britain then faced a delicate problem: revealing the contents would also reveal that they were reading German diplomatic traffic, and the Americans might suspect a forgery. The solution was a months-long deception that ended with a copy of the cable being “stolen” from a Mexican post office. The telegram’s publication on 1 March 1917 swung American opinion decisively toward war.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>The Zimmermann Telegram was protected by the German diplomatic code <strong>0075</strong>: a two-part codebook in which common words and phrases mapped to 4- and 5-digit code groups, and the resulting digit string was super-enciphered by an additive key. By January 1917 the British had recovered enough of 0075 from intercepts and a captured codebook (Magdeburg, 1914) to read most of it.</p><p style="margin-top:1rem;">Because Washington could not receive 0075, the cable was forwarded by the German Embassy from Washington to Mexico City re-encoded in the older diplomatic code <strong>13040</strong>, which the British had also broken. The retransmission was a critical operational error: it gave Room 40 a parallel text in two ciphers and let them attribute the leak to Mexican rather than British sources.</p><p style="margin-top:1rem;">The demo above is a faithful but simplified codebook engine: each input word is encoded as a 5-digit group via a fixed 140-word codebook, with super-enciphered additive applied to every group. Words not in the codebook fall through to a per-letter mode marked by sentinel groups — mirroring how operators handled proper nouns and place names.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Codebook recovery from depth (1914–1917)</div><div class="attack-diff">Complexity: Years of patient analysis</div><p class="attack-desc">Room 40 had been collecting German diplomatic traffic since 1914. Repeated codegroup contexts, captured codebooks (notably the SKM and HVB books from sunk warships), and stylised diplomatic boilerplate let analysts gradually map most of the 0075 and 13040 codebooks before the Zimmermann cable arrived.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Hall’s deception operation</div><div class="attack-diff">Complexity: Statecraft, not cryptanalysis</div><p class="attack-desc">Admiral Sir William “Blinker” Hall, head of Room 40, used a British agent in Mexico to obtain a copy of the cable from a commercial telegraph office in Mexico City — an entirely real document that allowed the British to share the plaintext with the Americans without revealing they had been reading German cable traffic since 1914.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Zimmermann lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Re-encoding the same plaintext in two systems leaks both</td><td>Same key, two protocols → cross-protocol attacks (DROWN, ALPACA)</td></tr><tr><td>Operationally, intercepts depend on owning the wires</td><td>BGP hijack, undersea cable taps, lawful intercept architectures</td></tr><tr><td>The hardest problem is using the intelligence without burning the source</td><td>The Bletchley “ULTRA” disclosure problem; modern source protection in SIGINT</td></tr><tr><td>Diplomatic codebooks are huge symmetric secrets distributed by hand</td><td>Why public-key cryptography was a generational leap forward</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>German Foreign Office (Arthur Zimmermann, State Secretary)</td></tr>
+            <tr><td>Sent</td><td>16 January 1917</td></tr>
+            <tr><td>Codes</td><td>Outer: 0075 (super-enciphered diplomatic code); inner: 13040 (transmission code)</td></tr>
+            <tr><td>Broken by</td><td>Nigel de Grey &amp; Reverend William Montgomery, Room 40, January 1917</td></tr>
+            <tr><td>Outcome</td><td>US declares war on Germany, 6 April 1917</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/chinese-telegraph.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Chinese Telegraph Code</span>
+      <span class="related-card__tag">Same codebook+additive family, civilian roots</span>
+    </a>
+    <a href="../ciphers/great-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Great Cipher</span>
+      <span class="related-card__tag">Earlier diplomatic codebook (Louis XIV)</span>
+    </a>
+    <a href="../ciphers/jn-25.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">JN-25</span>
+      <span class="related-card__tag">WWII descendant of the same architecture</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/chinese-telegraph.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Chinese Telegraph Code</span>
+  </a>
+  <a href="../ciphers/slidex.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Slidex</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/military.html">Hall VI: Military &amp; Field Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VI · Military</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 72 done / 171 total (42.1%)
+- Overall: 76 done / 171 total (44.4%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -32,6 +32,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24: Reconciliation pass: confirmed many Round 3 exhibits already shipped on disk. Checklist updated to match disk reality. Test fixes: ENGINE_PROFILES filled for affine/jn25/redTypeA; cipher pages count target raised from 82 to 84. All 6 test suites green.
 - 2026-04-24: Phase 5/7/10 batch — added 7 engines (affine, trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher) with full ENGINE_PROFILES + SOURCES wiring; built 7 exhibit pages (affine.html, trithemius.html, cardano-autokey.html, wheatstone.html, morse.html, cardano-grille.html, null-cipher.html) via scripts/build-phase5-pages.py. All 6 test suites green (564 + 387 + 238 + 1210 + 366 + 406 = 3,171 assertions). Cipher-pages count target 84 → 91.
 - 2026-04-24: Phase 4 WWII/Cold-War machines batch — added 5 engines (fialka, kl7, geheimschreiber, kryha, m94) with full ENGINE_PROFILES + SOURCES wiring; built 5 exhibit pages (fialka.html, kl-7.html, geheimschreiber.html, kryha.html, m-94.html) via scripts/build-phase4-pages.py. Geheimschreiber engine rewritten from Baudot 5-bit XOR to mod-26 letter-index arithmetic (5 additive wheels + 5 perm-selector wheels picking among 6 keyed permutations) to guarantee round-trip while preserving the T52 educational story. All 6 test suites green (604 + 392 + 238 + 1260 + 381 + 436 = 3,311 assertions). Cipher-pages count target 91 → 96.
+- 2026-04-24: Phase 6 East Asia & Telegraphy batch — added 4 engines (chineseTelegraph, zimmermann, slidex, commercialCode) with full ENGINE_PROFILES + SOURCES wiring; built 4 exhibit pages (chinese-telegraph.html, zimmermann.html, slidex.html, commercial-codebooks.html) via scripts/build-phase6-pages.py. Slidex uses roundtrip-padded mode (X-padding for odd-length plaintext, standard convention). Zimmermann + commercial-codebooks share a deterministic codebook architecture: fixed wordlist with 5-digit / 5-letter codewords plus literal-fallback sentinel for out-of-list words. All 6 test suites green (636 + 396 + 238 + 1300 + 393 + 460 = 3,423 assertions across 130 cipher pages). Cipher-pages count target 96 → 100.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -119,10 +120,10 @@ Updated after every commit. Source of truth for completion status.
 - [ ] Exhibit: Patterson Cipher for Jefferson - spec, page, Track B viewer
 
 ## Phase 6 - East Asia, South America, and global telegraphy
-- [ ] Exhibit: Chinese Telegraph Code - spec, engine, page, tests, registered
-- [ ] Exhibit: Zimmermann Telegram - spec, page, Track B visualization
-- [ ] Exhibit: Slidex - spec, engine, page, tests, registered
-- [ ] Exhibit: Commercial Telegraph Codebooks - spec, engine, page, tests, registered
+- [x] Exhibit: Chinese Telegraph Code - spec, engine, page, tests, registered
+- [x] Exhibit: Zimmermann Telegram - spec, engine, page, tests, registered
+- [x] Exhibit: Slidex - spec, engine, page, tests, registered
+- [x] Exhibit: Commercial Telegraph Codebooks - spec, engine, page, tests, registered
 
 ## Phase 7 - Americana and cultural additions
 - [ ] Exhibit: Culper Ring / Tallmadge - spec, engine, page, tests, registered
