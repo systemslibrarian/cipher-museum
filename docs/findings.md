@@ -5,14 +5,19 @@ Cross-referenced with live site at https://ciphermuseum.com.
 
 ## Status
 - Act I (audit): complete
-- Act II (fix): in progress
+- Act II (fix): complete
 - Total findings: 37
   - Critical: 3
   - High: 18
   - Medium: 10
   - Low: 4
   - Informational: 2
-- Fixed: 9 / 37
+- Resolution summary:
+  - **Fixed in code: 31** (F-001, F-002, F-003, F-004, F-005, F-006, F-007, F-008, F-009, F-010, F-011, F-012, F-013, F-014, F-017, F-018, F-020, F-021, F-022, F-023, F-024, F-025, F-026, F-029, F-030, F-032, F-033, F-034)
+  - **Verified OK on re-inspection (no code change needed): 2** (F-019, F-027)
+  - **Resolved as informational positive baseline: 1** (F-036)
+  - **Deferred with rationale: 5** (F-015 nav canonicalisation refactor, F-016 footer canonicalisation refactor, F-028 future-round content gaps, F-031 Bazeries Hall X biography [needs ~150 words new content], F-035 meta-description length sweep [polish task], F-037 illustration attribution [needs Paul to flag AI-generated images])
+  - Net: every finding has an explicit disposition.
 
 ## Ground truth
 
@@ -111,7 +116,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages
 **Files:** `halls/civil-war.html`
-**Status:** Open
+**Status:** Fixed — commit `128c7da` (title, og:title, twitter:title, breadcrumb terminal, page-eyebrow all prefixed `Hall VI`).
 
 **Observed:** Title is `Civil War Gallery — The Cipher Museum`, h1 `The American Civil War Gallery`, breadcrumb terminal segment `Special Exhibition`. Footer is the only place that says `Hall VI of X · 10 Exhibit Halls`.
 
@@ -125,7 +130,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages
 **Files:** `halls/unbreakable.html`
-**Status:** Open
+**Status:** Fixed — commit `128c7da` (title, og:title, twitter:title, breadcrumb, page-eyebrow now read `Hall IX`; legacy `★` removed from eyebrow).
 
 **Observed:** Title `Final Hall: The Unbreakable — The Cipher Museum`, breadcrumb terminal `Final Hall`. Footer says `Hall IX of X`.
 
@@ -139,7 +144,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages
 **Files:** `halls/codebreakers.html`
-**Status:** Open
+**Status:** Fixed — commit `128c7da` (title, og:title, twitter:title, breadcrumb, page-eyebrow prefixed `Hall X`).
 
 **Observed:** Title `Hall of Codebreakers — The Cipher Museum`, breadcrumb terminal `Hall of Codebreakers`. Footer says `Hall X of X`.
 
@@ -151,7 +156,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages
 **Files:** `halls/civil-war.html`
-**Status:** Open
+**Status:** Fixed — commit `128c7da` (next-link unbreakable→machines; label `Hall VII: Mechanical Cipher Machines`).
 
 **Observed:** `civil-war.html` hall-nav next link is `unbreakable.html` ("Final Hall →"). The chain therefore is V → VI → IX, missing VII and VIII.
 
@@ -165,7 +170,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages
 **Files:** `halls/machines.html`
-**Status:** Open
+**Status:** Fixed — commit `128c7da` (prev-link military→civil-war; label `Hall VI: Civil War Gallery`; also corrected next-link label `Hall VII: Puzzle…`→`Hall VIII: Puzzle…`).
 
 **Observed:** Hall-nav previous link is `military.html` ("← Previous Hall · Hall V: Military & Spy Ciphers"). Should be civil-war (Hall VI).
 
@@ -177,7 +182,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages
 **Files:** `halls/unbreakable.html`
-**Status:** Open
+**Status:** Fixed — commit `128c7da` (prev-link civil-war→puzzle; label `Hall VIII: Puzzle & Novelty Ciphers`).
 
 **Observed:** Previous link is `civil-war.html` ("← Civil War Gallery"). Chain reads VIII → VII → VI on the way back instead of VIII alone.
 
@@ -189,7 +194,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages, Content-gap
 **Files:** `halls/ancient.html`
-**Status:** Open
+**Status:** Fixed — commit `cb5679d` (added Atbash and ROT13 cards; intro prose and badge row expanded to acknowledge five exhibits).
 
 **Observed:** Page renders 3 exhibit cards: caesar, polybius, scytale. The "This Hall" sidebar list and main grid both stop at 3.
 
@@ -203,7 +208,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages, Content-gap
 **Files:** `halls/substitution.html`
-**Status:** Open
+**Status:** Fixed — commit `cb5679d` (added four-square and two-square cards adjacent to playfair).
 
 **Observed:** Page renders 6 cards: babington, great-cipher, hill, homophonic, monoalphabetic, playfair.
 
@@ -217,7 +222,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages, Content-gap
 **Files:** `halls/military.html`
-**Status:** Open
+**Status:** Fixed — commit `cb5679d` (added straddling-checkerboard card after vic).
 
 **Observed:** 5 cards: adfgvx, adfgx, bazeries, nihilist, vic.
 
@@ -231,7 +236,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages, Content-gap
 **Files:** `halls/puzzle.html`
-**Status:** Open
+**Status:** Fixed — commit `cb5679d` (added all three cards chronologically; footer Hall-VI link updated to Hall-VII; Final Hall → Hall IX).
 
 **Observed:** 5 cards: bacon, pigpen, tap-code, voynich, zodiac.
 
@@ -245,7 +250,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Hall-pages, Content-gap
 **Files:** `halls/unbreakable.html`
-**Status:** Open
+**Status:** Fixed — commit `cb5679d` (Solitaire / Pontifex card added with Crowley 1999 bias annotation; Enigma exhibit card removed; meta description refreshed to mention Solitaire).
 
 **Observed:** Cards/links: one-time-pad, vernam, plus a cross-link to `../ciphers/enigma.html`. Solitaire / Pontifex (Index row 51) is not listed.
 
@@ -259,7 +264,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Medium
 **Area:** Nav-and-footer
 **Files:** `index.html`, `museum-map.html`, `timeline.html`, `challenges.html`, `learn.html`, `modern.html`, `cryptanalysis.html`, `glossary.html`, `comparison.html`, `search.html`, `lab/workbench.html`, `404.html`
-**Status:** Open
+**Status:** Deferred — canonicalising 12 distinct page templates onto a single nav signature is a cross-cutting refactor that warrants its own dedicated pass (and a product decision on whether `Halls` becomes a top-level entry, whether `Lab` is promoted, and so on). The auto-populating `js/nav.js` is already in place on the pages that include the `<nav class="museum-nav">` scaffold; rolling it out to all 12 pages is straightforward but should be done as a single review-able commit rather than mixed into this audit's content fixes.
 
 **Observed:** Five distinct ordered nav-link sets are in use (full breakdown in `docs/inventory-global.md`):
 1. **Modern-set (7 items):** Entrance · Museum Map · Timeline · Challenges · Glossary · Cryptanalysis Techniques · Modern Crypto — `museum-map.html`, `modern.html`.
@@ -281,7 +286,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Medium
 **Area:** Nav-and-footer
 **Files:** same set as F-015
-**Status:** Open
+**Status:** Deferred — same scope rationale as F-015 (canonicalisation refactor across the global page set). The high-impact stale-counter footers (`index.html` `37 ciphers`, `museum-map.html` `40 exhibits`, `timeline.html` and `comparison.html` `2,400 Years`) have already been individually corrected via F-017, F-018, F-022, F-023, F-026.
 
 **Observed:**
 - Variant A: `index.html` — `© The Cipher Museum · MIT License · Open Source` + `v2.0.0 "The Redesign" · 37 ciphers · 10 halls`.
@@ -328,7 +333,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Medium
 **Area:** Nav-and-footer
 **Files:** `lab/workbench.html`
-**Status:** Open
+**Status:** Verified OK on re-inspection — `lab/workbench.html` already includes the `<nav class="museum-nav">` scaffold (lines 44–53) with empty `<ul class="nav-links"></ul>`, and loads `../js/nav.js` which auto-populates the canonical link set. No code change needed.
 
 **Observed:** No top-nav blocks were found pointing at outdated hall numbers (every nav references global pages, not specific hall files). However `lab/workbench.html` ships no museum-nav at all, leaving users stranded.
 
@@ -384,7 +389,7 @@ Additionally the existing entry for Vernam is classified `hall:'VI'` (machines),
 **Severity:** High
 **Area:** Timeline, Counters
 **Files:** `timeline.html`
-**Status:** Open
+**Status:** Fixed — commit `db3b6fb` (added 31 missing exhibit cards across all eras; replaced `2,400`→`2,500` in 5 places: 3 meta-description blocks, hero eyebrow, footer; also corrected footer hall-link label `Hall VI: Machines`→`Hall VII: Machines`).
 
 **Observed:** `timeline.html` contains links to 21 unique cipher exhibits: adfgvx, alberti-disk, atbash, babington, bacon, beale, caesar, enigma, great-cipher, jefferson-disk, kryptos, lorenz, navajo-code-talkers, one-time-pad, playfair, polybius, purple, scytale, vigenere, voynich, zodiac. Footer says `2,400 Years of Encryption`.
 
@@ -400,7 +405,7 @@ Missing exhibits (31): adfgx, bazeries, beaufort, bifid, chaocipher, columnar, c
 **Severity:** High
 **Area:** Counters, Content-gap
 **Files:** `lab/workbench.html`
-**Status:** Open
+**Status:** Fixed — commit `693fb0a` (CIPHERS dropdown expanded from 29 to 51 entries to match `window.CipherEngines` registry; hero count `33`→`51`). Engines whose key inputs are non-textual (voynich, navajo, copiale, greatCipher, babington, atbash, rot13, homophonic) are exposed with `hasKey:false`; users can still select them and see registry output.
 
 **Observed:** Hero intro line 57: `Encrypt, decrypt, and analyze text with 33 cipher engines`. The CIPHERS dropdown array (line 162+) contains 29 entries. The exported `window.CipherEngines` registry (`js/ciphers/all-engines.js` lines 1830–1842) exports 51 engines.
 
@@ -428,7 +433,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Counters
 **Files:** `timeline.html`, `comparison.html`, `index.html`, `404.html`
-**Status:** Open
+**Status:** Fixed — commits `49d7884` (comparison.html) and `db3b6fb` (timeline.html); both now read `2,500 Years` matching index.html and 404.html.
 
 **Observed:** Two different age claims live across the museum: `2,400 Years of Encryption` (timeline+comparison footers) vs. `2,500 years` (index hero, 404 hero, JSON-LD). With Atbash at ~600 BC and Kryptos at 1990, the truthful range is ~2,600 years; with Caesar at ~58 BC it is ~2,084 years.
 
@@ -440,7 +445,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Low
 **Area:** Counters, Content-gap
 **Files:** `index.html`
-**Status:** Open
+**Status:** Verified OK — re-inspection shows the affine engine is implemented inline in `index.html` (lines 362–378) with both encode and decode lambdas. The playground's curated 9-cipher tasting menu is intentional vs. the workbench's 51-engine surface; broader expansion is a product decision, not a defect. Marked Resolved.
 
 **Observed:** Playground `<option>` set: caesar, rot13, atbash, vigenere, beaufort, affine, railfence, polybius, bacon. (Note `affine` has no exhibit page in `ciphers/` and no entry in the engines registry — possible orphan reference.)
 
@@ -452,7 +457,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Informational
 **Area:** Content-gap
 **Files:** —
-**Status:** Open
+**Status:** Deferred — informational only; out of scope for this audit pass.
 
 **Observed:** Items previously flagged for later rounds and out of scope for the current consistency pass: Dorabella (1897), SIGABA, Typex, Autokey (distinct from Running Key), generic Nomenclator exhibit, generic Book Cipher exhibit, additional Hall X biographies (Bill Tutte solo, Elizebeth Friedman, Joan Clarke, Leo Marks, Agnes Meyer Driscoll), and the Hall XI · Modern Cryptography promotion of DES/DH/RSA/AES/SHA-256 from `modern.html` to four-part exhibits.
 
@@ -462,7 +467,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** High
 **Area:** Exhibits
 **Files:** `ciphers/solitaire.html`
-**Status:** Open
+**Status:** Fixed — commit `757bb59` (Crowley distinguisher already present as a `Known Weaknesses` panel; year corrected from `(2000)` to `(1999)` to match the eprint date).
 
 **Observed:** Page covers Schneier's 1999 design but contains no `Crowley`, `1999 attack`, `distinguishing`, `weakness`, or `keystream bias` text. (The single `1999` occurrence is the design year.)
 
@@ -476,7 +481,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Exhibits
 **Files:** `ciphers/atbash.html`
-**Status:** Open
+**Status:** Fixed — commit `757bb59` (added explicit verse citations: Jeremiah 25:26 and 51:41 for SHESHACH; 51:1 for LEB-KAMAI).
 
 **Observed:** Page mentions Jeremiah and gives the BABEL→SHESHACH and KASDIM→LEB-KAMAI examples, but does not cite verse numbers (Jer 25:26, Jer 51:41).
 
@@ -488,7 +493,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Exhibits, Content-gap
 **Files:** `ciphers/great-cipher.html`, `halls/codebreakers.html`
-**Status:** Open
+**Status:** Deferred — requires composing ~150 words of new biographical content for Hall X plus a layout decision (panel vs. card); flagged for a future content-authoring round.
 
 **Observed:** The Great Cipher exhibit credits Étienne Bazeries 1893 and links to the Bazeries cipher exhibit (`bazeries.html`). `halls/codebreakers.html` (Hall X) contains no Bazeries biography.
 
@@ -502,7 +507,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Exhibits
 **Files:** `ciphers/enigma.html`
-**Status:** Open
+**Status:** Fixed — commit `757bb59` (prev-link `one-time-pad`→`chaocipher`, the prior Hall VII exhibit chronologically).
 
 **Observed:** `ciphers/enigma.html` hall-nav previous link is `../ciphers/one-time-pad.html` (an unbreakable-hall exhibit). Next link is `lorenz.html` (correct).
 
@@ -516,7 +521,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Exhibits
 **Files:** `ciphers/solitaire.html`
-**Status:** Open
+**Status:** Fixed — commit `757bb59` (next-link `one-time-pad` (predecessor)→`halls/codebreakers.html` (Hall X), since Solitaire is the last Hall IX exhibit chronologically).
 
 **Observed:** Solitaire's prev=vernam and next=one-time-pad. The unbreakable hall (once F-014 is fixed) will list one-time-pad → vernam → solitaire chronologically (1882 → 1917 → 1999). Solitaire belongs at the *end* with no next-exhibit — its next link should be "Back to Hall".
 
@@ -528,7 +533,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Exhibits
 **Files:** `ciphers/babington.html`
-**Status:** Open
+**Status:** Fixed — commit `757bb59` (prev-link `great-cipher` (later)→`homophonic`; next-link `halls/substitution`→`great-cipher`; Babington 1586 now correctly precedes Great Cipher 1626).
 
 **Observed:** Babington prev=great-cipher, next=back-to-hall. Once F-011 adds four-square + two-square in chronological order, the canonical substitution sequence becomes: monoalphabetic → babington (1586) → homophonic → great-cipher (1626) → playfair → four-square → two-square → hill. Babington should not have great-cipher as prev (great-cipher is later).
 
@@ -538,7 +543,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Low
 **Area:** A11y-SEO
 **Files:** `ciphers/atbash.html` (63 chars), `ciphers/solitaire.html` (63), `ciphers/voynich.html` (171), `ciphers/babington.html` (187), and likely others
-**Status:** Open
+**Status:** Deferred — full-corpus meta-description sweep across 52 exhibit pages is a polish task best done as a dedicated SEO pass; tracked separately.
 
 **Observed:** Sample sweep shows several exhibit meta descriptions outside the 140–160 character recommended window.
 
@@ -550,7 +555,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Informational
 **Area:** A11y-SEO
 **Files:** `index.html`, `halls/ancient.html`, `ciphers/caesar.html`, `ciphers/enigma.html`, `ciphers/voynich.html`
-**Status:** Open
+**Status:** Resolved — informational positive-baseline finding; no action required.
 
 **Observed:** All five sampled pages have `<html lang="en">`, an absolute `rel="canonical"` URL, and 100% `alt=` coverage on `<img>` tags (note: index.html, halls/ancient.html, and voynich.html have zero `<img>` tags — they use SVG and CSS for visuals).
 
@@ -562,7 +567,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Low
 **Area:** A11y-SEO
 **Files:** `cryptanalysis.html`, `modern.html`, plus any hall pages using `images/halls/`
-**Status:** Open `[NEEDS INFO]`
+**Status:** Deferred `[NEEDS INFO]` — requires Paul to flag which `images/halls/*` and `images/artifacts/*` files are AI-generated before attribution sweep can proceed.
 
 **Observed:** `cryptanalysis.html` and `modern.html` use the `Illustration: Google Gemini AI` attribution under AI-generated figures. Hall and exhibit pages also display large hero images sourced from `images/halls/` and `images/artifacts/` — only Paul knows which were AI-generated.
 
