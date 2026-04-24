@@ -4,15 +4,15 @@ Audit against commit `c04f1c420ab4cef2df135f0163c422453ab73414` of `systemslibra
 Cross-referenced with live site at https://ciphermuseum.com.
 
 ## Status
-- Act I (audit): in progress
+- Act I (audit): complete
 - Act II (fix): not started
-- Total findings: 28
+- Total findings: 37
   - Critical: 3
-  - High: 17
-  - Medium: 5
-  - Low: 2
-  - Informational: 1
-- Fixed: 0 / 28
+  - High: 18
+  - Medium: 10
+  - Low: 4
+  - Informational: 2
+- Fixed: 0 / 37
 
 ## Ground truth
 
@@ -457,6 +457,120 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Observed:** Items previously flagged for later rounds and out of scope for the current consistency pass: Dorabella (1897), SIGABA, Typex, Autokey (distinct from Running Key), generic Nomenclator exhibit, generic Book Cipher exhibit, additional Hall X biographies (Bill Tutte solo, Elizebeth Friedman, Joan Clarke, Leo Marks, Agnes Meyer Driscoll), and the Hall XI · Modern Cryptography promotion of DES/DH/RSA/AES/SHA-256 from `modern.html` to four-part exhibits.
 
 **Proposed fix:** None this round. Recorded for roadmap visibility.
+
+### F-029 — `ciphers/solitaire.html` does not mention Crowley's 1999 distinguishing attack on the keystream
+**Severity:** High
+**Area:** Exhibits
+**Files:** `ciphers/solitaire.html`
+**Status:** Open
+
+**Observed:** Page covers Schneier's 1999 design but contains no `Crowley`, `1999 attack`, `distinguishing`, `weakness`, or `keystream bias` text. (The single `1999` occurrence is the design year.)
+
+**Expected:** A "Known Weaknesses" or "Cryptanalysis" section acknowledging Paul Crowley's 1999 paper showing a non-uniform distinguishing bias in the Solitaire keystream (~5 of 26 distinguishability) — i.e. that Solitaire is not as ideal as advertised.
+
+**Evidence:** `grep -ni "crowley\|1999\|distinguish\|weakness" ciphers/solitaire.html` returns only design-year matches.
+
+**Proposed fix:** Add a `Known Weaknesses` panel citing Crowley 1999 and noting that subsequent analysis (Daemen-Govaerts 2001 and others) confirmed bias.
+
+### F-030 — `ciphers/atbash.html` cites Jeremiah but not the specific verses (Jer 25:26 / 51:41)
+**Severity:** Medium
+**Area:** Exhibits
+**Files:** `ciphers/atbash.html`
+**Status:** Open
+
+**Observed:** Page mentions Jeremiah and gives the BABEL→SHESHACH and KASDIM→LEB-KAMAI examples, but does not cite verse numbers (Jer 25:26, Jer 51:41).
+
+**Expected:** Verse citations alongside the examples to anchor the historical claim.
+
+**Proposed fix:** Add `(Jer 25:26)` and `(Jer 51:41)` parenthetically next to the corresponding examples.
+
+### F-031 — `ciphers/great-cipher.html` does not cross-link to a Hall X biography for Bazeries
+**Severity:** Medium
+**Area:** Exhibits, Content-gap
+**Files:** `ciphers/great-cipher.html`, `halls/codebreakers.html`
+**Status:** Open
+
+**Observed:** The Great Cipher exhibit credits Étienne Bazeries 1893 and links to the Bazeries cipher exhibit (`bazeries.html`). `halls/codebreakers.html` (Hall X) contains no Bazeries biography.
+
+**Expected:** Either a Bazeries biography panel exists in Hall X and the Great Cipher exhibit cross-links to it, or this is filed as a content gap for a later round.
+
+**Evidence:** `grep -ni "bazeries" halls/codebreakers.html` returns no matches.
+
+**Proposed fix:** Add a short Bazeries biography to Hall X (~150 words covering 1898 cylinder cipher, 1893 Great Cipher break, 1901 *Les Chiffres Secrets Dévoilés*), then update the Great Cipher cross-link target. Acceptable to defer to a future round and tag F-031 `Deferred` at review.
+
+### F-032 — `ciphers/enigma.html` previous-link points to one-time-pad, breaking the machines-hall chain
+**Severity:** Medium
+**Area:** Exhibits
+**Files:** `ciphers/enigma.html`
+**Status:** Open
+
+**Observed:** `ciphers/enigma.html` hall-nav previous link is `../ciphers/one-time-pad.html` (an unbreakable-hall exhibit). Next link is `lorenz.html` (correct).
+
+**Expected:** Previous link should be the machine that precedes Enigma in `halls/machines.html` order — likely chaocipher or jefferson-disk depending on chronological order chosen.
+
+**Evidence:** `ciphers/enigma.html` `hall-nav` block.
+
+**Proposed fix:** Repoint previous-link to the correct adjacent machines exhibit after Phase 8 rebuilds the canonical hall ordering.
+
+### F-033 — `ciphers/solitaire.html` chain places it before one-time-pad, contradicting unbreakable-hall order
+**Severity:** Medium
+**Area:** Exhibits
+**Files:** `ciphers/solitaire.html`
+**Status:** Open
+
+**Observed:** Solitaire's prev=vernam and next=one-time-pad. The unbreakable hall (once F-014 is fixed) will list one-time-pad → vernam → solitaire chronologically (1882 → 1917 → 1999). Solitaire belongs at the *end* with no next-exhibit — its next link should be "Back to Hall".
+
+**Expected:** prev=vernam, next="Back to Hall IX".
+
+**Proposed fix:** Replace next-link with hall-back link.
+
+### F-034 — `ciphers/babington.html` chain order disagrees with substitution-hall sequence
+**Severity:** Medium
+**Area:** Exhibits
+**Files:** `ciphers/babington.html`
+**Status:** Open
+
+**Observed:** Babington prev=great-cipher, next=back-to-hall. Once F-011 adds four-square + two-square in chronological order, the canonical substitution sequence becomes: monoalphabetic → babington (1586) → homophonic → great-cipher (1626) → playfair → four-square → two-square → hill. Babington should not have great-cipher as prev (great-cipher is later).
+
+**Proposed fix:** Realign chain after Phase 8 rebuilds the substitution hall.
+
+### F-035 — Exhibit pages have inconsistent meta description lengths (under 80 / over 170)
+**Severity:** Low
+**Area:** A11y-SEO
+**Files:** `ciphers/atbash.html` (63 chars), `ciphers/solitaire.html` (63), `ciphers/voynich.html` (171), `ciphers/babington.html` (187), and likely others
+**Status:** Open
+
+**Observed:** Sample sweep shows several exhibit meta descriptions outside the 140–160 character recommended window.
+
+**Expected:** Each exhibit meta description is 140–160 characters and ends with a period.
+
+**Proposed fix:** Spot-edit during Phase 9. Pattern fix template: `<one-sentence what-it-is>. <one-sentence year/who-broke-it/why-it-matters>.`
+
+### F-036 — A11y/SEO spot-check: home, halls, and key exhibits all pass for `lang`/`canonical`/`alt`
+**Severity:** Informational
+**Area:** A11y-SEO
+**Files:** `index.html`, `halls/ancient.html`, `ciphers/caesar.html`, `ciphers/enigma.html`, `ciphers/voynich.html`
+**Status:** Open
+
+**Observed:** All five sampled pages have `<html lang="en">`, an absolute `rel="canonical"` URL, and 100% `alt=` coverage on `<img>` tags (note: index.html, halls/ancient.html, and voynich.html have zero `<img>` tags — they use SVG and CSS for visuals).
+
+**Expected:** No action required — this finding is recorded as a positive baseline.
+
+**Proposed fix:** None.
+
+### F-037 — Illustration attribution audit: Gemini AI label not present in main `images/halls/` figures
+**Severity:** Low
+**Area:** A11y-SEO
+**Files:** `cryptanalysis.html`, `modern.html`, plus any hall pages using `images/halls/`
+**Status:** Open `[NEEDS INFO]`
+
+**Observed:** `cryptanalysis.html` and `modern.html` use the `Illustration: Google Gemini AI` attribution under AI-generated figures. Hall and exhibit pages also display large hero images sourced from `images/halls/` and `images/artifacts/` — only Paul knows which were AI-generated.
+
+**Expected:** Every AI-generated illustration carries the same `Illustration: Google Gemini AI` (or similar) attribution.
+
+**Proposed fix:** Paul to flag which `images/halls/*` and `images/artifacts/*` files are AI-generated so attribution can be added uniformly.
+
+**Decisions needed:** Provenance list for `images/halls/` and `images/artifacts/`.
 
 ## Blockers and open questions
 
