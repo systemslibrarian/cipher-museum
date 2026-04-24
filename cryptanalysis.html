@@ -131,7 +131,7 @@
   <!-- 7 Techniques -->
   <div class="section-head">
     <span class="section-eyebrow">The Toolkit</span>
-    <h2 class="section-title">7 Techniques That Break Classical Ciphers</h2>
+    <h2 class="section-title">10 Techniques That Break Classical Ciphers</h2>
   </div>
 
   <div class="lab-grid reveal">
@@ -246,6 +246,38 @@
         <a href="ciphers/double-transposition.html" class="badge sec-broken" style="text-decoration:none;">Double Transposition</a>
         <a href="ciphers/playfair.html" class="badge sec-broken" style="text-decoration:none;">Playfair</a>
         <a href="ciphers/hill.html" class="badge sec-broken" style="text-decoration:none;">Hill Cipher</a>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 08</div>
+      <div class="technique-name">Stepping-Switch Cryptanalysis</div>
+      <div class="technique-by">Frank Rowlett &amp; Genevieve Grotjan · SIS · 1939–1940</div>
+      <p class="technique-desc">Japan's Purple machine routed plaintext through banks of telephone-style stepping switches rather than rotors. The US Signals Intelligence Service had no machine to study, so they hunted statistical regularities in intercept traffic — looking for cycles in how the switches advanced. On September 20, 1940, Genevieve Grotjan spotted the alignment that revealed the wiring of the consonant bank, letting Rowlett's team build an analog replica from inference alone. The result was MAGIC, the intelligence stream that read Japanese diplomatic traffic before Pearl Harbor.</p>
+      <div class="technique-breaks">
+        <a href="ciphers/enigma.html" class="badge sec-broken" style="text-decoration:none;">Stepping-switch machines</a>
+        <span class="badge sec-broken">Purple</span>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 09</div>
+      <div class="technique-name">HMM &amp; Statistical MT Decoding</div>
+      <div class="technique-by">Knight, Megyesi &amp; Schaefer · USC ISI / Uppsala · 2011</div>
+      <p class="technique-desc">When a 250-year-old homophonic cipher resists every manual attack, treat it as a translation problem. Kevin Knight and his collaborators modeled the Copiale manuscript's symbol stream with a hidden Markov model trained on German n-grams, then applied expectation-maximization to align symbols to phonemes. After several false starts (including the wrong source language), the EM algorithm converged on German — and the Copiale Order's initiation ritual emerged. The first major historical cipher broken by computational linguistics.</p>
+      <div class="technique-breaks">
+        <a href="ciphers/copiale.html" class="badge sec-broken" style="text-decoration:none;">Copiale</a>
+        <a href="ciphers/homophonic.html" class="badge sec-broken" style="text-decoration:none;">Homophonic</a>
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <div class="technique-num">Technique 10</div>
+      <div class="technique-name">Chaocipher Reconstruction</div>
+      <div class="technique-by">Moshe Rubin &amp; George Lasry · 2010–2014</div>
+      <p class="technique-desc">John F. Byrne's Chaocipher (1918) survived 92 years because its dynamic-permutation rule was kept secret. When the family donated his papers to the National Cryptologic Museum in 2010, Moshe Rubin reconstructed the algorithm from the worked examples. George Lasry later confirmed that with sufficient ciphertext (a few hundred characters of crib), simulated annealing on the two starting alphabets recovers the key — proving the cipher is not unbreakable, only secret.</p>
+      <div class="technique-breaks">
+        <a href="ciphers/chaocipher.html" class="badge sec-broken" style="text-decoration:none;">Chaocipher</a>
       </div>
     </div>
 

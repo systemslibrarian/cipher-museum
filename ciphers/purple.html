@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purple (Type 97) — The Cipher Museum</title>
+  <meta name="description" content="Japan's WWII diplomatic cipher built on stepping switches — broken without a captured machine by Frank Rowlett's SIS team in September 1940.">
+  <meta property="og:title" content="Purple (Type 97) — The Cipher Museum">
+  <meta property="og:description" content="Japan's WWII diplomatic cipher built on stepping switches — broken without a captured machine by Frank Rowlett's SIS team in September 1940.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/purple.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Purple (Type 97) — The Cipher Museum">
+  <meta name="twitter:description" content="Japan's WWII diplomatic cipher built on stepping switches — broken without a captured machine by Frank Rowlett's SIS team in September 1940.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/purple.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Purple (Type 97)
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 52 of 52</span>
+    <span class="badge era-wwii">World War II · 1939–1945</span>
+    <span class="badge sec-broken">Broken (1940)</span>
+    <span class="badge era-modern">Interactive Demo</span>
+  </div>
+  <h1 class="page-title">Purple (Type 97 jiki-O-bun-In-ji-ki)</h1>
+  <p class="page-tagline"><em>Stepping switches instead of rotors — and an analog replica built from inference alone.</em></p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Invented</span><span class="fact-value">1937 (Japanese Foreign Ministry)</span></div>
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Imperial Japanese Navy Technical Research Institute</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Stepping-switch banks (6-vowel + 20-consonant split) plus daily key sheet</span></div>
+    <div class="fact"><span class="fact-label">Keyspace</span><span class="fact-value">~7×10²⁹ effective settings (per day)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Frank Rowlett, Genevieve Grotjan &amp; the US SIS · 20 September 1940</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Distinct sub-ciphers per character class create exploitable structure</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="purple"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Purple was Japan's highest-grade diplomatic cipher from 1939 through the end of World War II. The US Signals Intelligence Service broke it without ever seeing the machine, building an analog replica from intercept traffic alone — one of the most impressive feats in the history of cryptanalysis. The intelligence stream that resulted, codenamed MAGIC, shaped American strategy in the Pacific and exposed the diplomatic moves of Tokyo, Berlin, and Rome to Washington in near real time.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Purple replaced the older "Red" machine in 1939 for high-grade Japanese diplomatic traffic. Where Enigma used rotating wheels, the Japanese designers chose <strong>stepping switches</strong> — telephone-exchange relays that step to a new contact each cycle. Purple split each plaintext character into two streams: the six vowels (A, E, I, O, U, Y) went through one stepping-switch bank, and the twenty consonants went through three more. That asymmetric design was its defining feature and ultimately the structural seam that exposed it.</p>
+        <p>William Friedman recruited Frank Rowlett to lead the cryptanalytic attack. The team had no machine, no diagram, and no defector — only ciphertext. For 18 months they hunted patterns in stepping cycles. On the afternoon of September 20, 1940, junior cryptanalyst Genevieve Grotjan brought Rowlett a worksheet with a recurring alignment in the consonant alphabet. Within weeks, the SIS had constructed a working analog of Purple from inference alone.</p>
+        <div class="callout callout-info">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body">
+            <p><em>The MAGIC intercepts read Tokyo's instructions to its Washington embassy in the days before Pearl Harbor. The intelligence existed; the failure to act on it was bureaucratic, not cryptanalytic.</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works (Simplified)</span></div>
+      <div class="panel-body">
+        <p>The pedagogical demo on this page faithfully reproduces Purple's <strong>structural design</strong>, not its full electrical wiring. The interactive engine implements:</p>
+        <ol>
+          <li>Split the input alphabet into a 6-letter vowel set and a 20-letter consonant set.</li>
+          <li>Apply a stepping permutation to each set, advanced by an internal counter.</li>
+          <li>Re-merge the encrypted vowels and consonants into the output stream in the original positions.</li>
+          <li>Step the switch positions according to a daily key.</li>
+        </ol>
+        <p>The actual 1940 machine used three stepping switches for the consonant bank wired in series, with carry-over advancement triggered by completed cycles — closer in spirit to a digital odometer than a rotor. The SIS analog used the same partition but standard rotary switches, since stepping relays were scarce in the US.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Stepping-Switch Cycle Analysis</div>
+          <div class="attack-diff">Complexity: Hard · Frank Rowlett, SIS · 1939–1940</div>
+          <p class="attack-desc">Rowlett's team treated the consonant bank's stepping cycle as the leverage point. By tabulating which ciphertext letters appeared in which positions across many intercepts, they reconstructed the stepping behavior without ever observing the hardware. The vowel bank, with only six letters, fell first — providing partial cribs that constrained the larger consonant problem.</p>
+        </div>
+        <div class="attack-panel">
+          <div class="attack-name">Pattern Recognition (Grotjan's Insight)</div>
+          <div class="attack-diff">Complexity: The single break · Genevieve Grotjan · 20 September 1940</div>
+          <p class="attack-desc">On a worksheet aligning intercept plaintext-ciphertext pairs across repeated daily keys, Grotjan identified a recurring relationship in the consonant alphabet — the alignment that revealed how the consonant bank's stepping switches were wired. Rowlett later called it "one of the great breaks of the war."</p>
+        </div>
+        <div class="callout callout-warn">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-body">
+            <p><strong>Why it failed fundamentally:</strong> Treating vowels and consonants as separate sub-ciphers halved the effective keyspace and produced statistically distinguishable streams. Any modern design would feed the entire alphabet through a single, uniform permutation precisely to avoid this kind of structural seam.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Purple</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Stepping-switch keystream</td><td>Linear feedback shift register (LFSR) stream ciphers</td></tr>
+            <tr><td>Per-character-class subcipher</td><td>Cautionary anti-pattern — modern ciphers treat all bits uniformly</td></tr>
+            <tr><td>Daily key-sheet rotation</td><td>Modern key rotation policies (TLS session keys, signal protocol ratchets)</td></tr>
+            <tr><td>Reconstruction from traffic alone</td><td>Modern side-channel and known-ciphertext attack research</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-info" style="margin-top:1rem;">
+          <span class="callout-icon">🎓</span>
+          <div class="callout-body">
+            <p>The principle Purple violated — uniform treatment of all input symbols — is enforced explicitly in modern designs like the AES S-box, which applies the same nonlinear transformation to every byte regardless of value or position.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>52 of 52</td></tr>
+            <tr><td>Era</td><td>World War II · 1939–1945</td></tr>
+            <tr><td>Status</td><td>Broken (1940)</td></tr>
+            <tr><td>Inventor</td><td>Japanese Foreign Ministry (Type 97)</td></tr>
+            <tr><td>Year</td><td>1937 (deployed) · 1939 (replaced Red)</td></tr>
+            <tr><td>Key Type</td><td>Stepping-switch banks + daily key sheet</td></tr>
+            <tr><td>Broken By</td><td>Rowlett, Grotjan &amp; the US SIS</td></tr>
+            <tr><td>Modern Lesson</td><td>Avoid per-class sub-ciphers</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">References</span></div>
+      <div class="panel-body">
+        <ul style="padding-left:1.1rem;line-height:1.55;">
+          <li>Frank B. Rowlett, <em>The Story of Magic: Memoirs of an American Cryptologic Pioneer</em> (Aegean Park Press, 1998).</li>
+          <li>National Security Agency Center for Cryptologic History, <em>The Friedman Legacy: A Tribute to William and Elizebeth Friedman</em> (NSA, 2006).</li>
+          <li>Stephen Budiansky, <em>Battle of Wits: The Complete Story of Codebreaking in World War II</em> (Free Press, 2000), ch. 5–6 on Purple and MAGIC.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma Machine</span>
+      <span class="related-card__tag">German rotor counterpart</span>
+    </a>
+    <a href="../ciphers/m209.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">M-209 (Hagelin C-38)</span>
+      <span class="related-card__tag">US tactical contemporary</span>
+    </a>
+    <a href="../halls/codebreakers.html" class="related-card">
+      <span class="related-card__number">Hall X</span>
+      <span class="related-card__name">Codebreakers — Rowlett &amp; Grotjan</span>
+      <span class="related-card__tag">The MAGIC story</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/lorenz.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Lorenz Cipher</span>
+  </a>
+  <a href="../halls/machines.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Hall VII: Mechanical Cipher Machines</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 52 of 52</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
