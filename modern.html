@@ -154,16 +154,20 @@
     <span class="callout-icon">⚠️</span>
     <div class="callout-body"><p><strong>Taxonomy note:</strong> Only the first category below — symmetric ciphers — contains actual <em>ciphers</em> (reversible plaintext↔ciphertext transformations). Key exchange, public-key cryptography, and hash functions are <strong>cryptographic primitives</strong>, not ciphers. They solve different problems: establishing shared secrets, proving identity, and verifying integrity.</p></div>
   </div>
+  <div class="callout" style="margin-bottom:2.5rem;border-color:var(--gold-b);background:var(--gold-glow);">
+    <span class="callout-icon">🏛️</span>
+    <div class="callout-body"><p><strong>Looking for the exhibits?</strong> The five core modern primitives — <a href="ciphers/des.html" style="color:var(--gold);">DES</a>, <a href="ciphers/diffie-hellman.html" style="color:var(--gold);">Diffie-Hellman</a>, <a href="ciphers/rsa.html" style="color:var(--gold);">RSA</a>, <a href="ciphers/aes.html" style="color:var(--gold);">AES</a>, and <a href="ciphers/sha256.html" style="color:var(--gold);">SHA-256</a> — each have a full four-part exhibit page in <a href="halls/modern-crypto.html" style="color:var(--gold);">Hall XI · Modern Cryptography</a>. This page provides the wider context: the journey from classical failure to modern practice, and the primitives (ChaCha20, ECDH, post-quantum) that sit alongside the canonical five.</p></div>
+  </div>
   <!-- ── 🔐 Ciphers ── -->
   <div style="margin-bottom:2.5rem;">
     <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">🔐 Ciphers — Plaintext → Ciphertext → Plaintext</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
-      <div class="panel"><div class="panel-head"><span class="panel-icon">📦</span><span class="panel-title">AES-256 (Symmetric)</span></div><div class="panel-body"><p>128-bit blocks, 256-bit key, 14 rounds. 2²⁵⁶ possible keys with no known practical attack. Protects everything from HTTPS to full-disk encryption.</p>
+      <a href="ciphers/aes.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">📦</span><span class="panel-title">AES-256 (Symmetric) <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>128-bit blocks, 256-bit key, 14 rounds. 2²⁵⁶ possible keys with no known practical attack. Protects everything from HTTPS to full-disk encryption.</p>
         <figure class="figure" style="margin-top:1rem;">
           <img src="images/artifacts/aes-encryption-simplified.png" alt="Simplified diagram of AES encryption showing the substitution-permutation round structure" loading="lazy">
           <figcaption class="figure-caption">AES encryption — simplified view of the substitution-permutation rounds that protect modern data. Illustration: Google Gemini AI</figcaption>
         </figure>
-      </div></div>
+      </div></a>
       <div class="panel"><div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">ChaCha20 (Stream Cipher)</span></div><div class="panel-body"><p>Designed by Daniel Bernstein. 256-bit key, 64-bit nonce. XORs plaintext with a cryptographically random, never-repeating keystream.</p></div></div>
     </div>
   </div>
@@ -172,12 +176,12 @@
   <div style="margin-bottom:2.5rem;">
     <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">🔑 Key Exchange — Creating a Shared Secret</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
-      <div class="panel"><div class="panel-head"><span class="panel-icon">🤝</span><span class="panel-title">Diffie-Hellman Key Exchange</span></div><div class="panel-body"><p>Derives a shared secret over a public channel. Based on the discrete logarithm problem. <em>Not a cipher — it does not encrypt data.</em></p>
+      <a href="ciphers/diffie-hellman.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">🤝</span><span class="panel-title">Diffie-Hellman Key Exchange <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>Derives a shared secret over a public channel. Based on the discrete logarithm problem. <em>Not a cipher — it does not encrypt data.</em></p>
         <figure class="figure" style="margin-top:1rem;">
           <img src="images/artifacts/public-key-diffie-hellman-diagram.png" alt="Diagram illustrating the Diffie-Hellman key exchange protocol" loading="lazy">
           <figcaption class="figure-caption">Diffie-Hellman key exchange — how two parties establish a shared secret over an insecure channel. Illustration: Google Gemini AI</figcaption>
         </figure>
-      </div></div>
+      </div></a>
     </div>
   </div>
 
@@ -185,12 +189,12 @@
   <div style="margin-bottom:2.5rem;">
     <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">🔓 Public-Key Cryptography — Asymmetric Encryption &amp; Signatures</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
-      <div class="panel"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">RSA (Asymmetric)</span></div><div class="panel-body"><p>Rivest, Shamir, Adleman (1977). Two keys — public (encrypt) and private (decrypt) — secured by the difficulty of factoring large primes. Used in TLS, email, and digital signatures.</p>
+      <a href="ciphers/rsa.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">RSA (Asymmetric) <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>Rivest, Shamir, Adleman (1977). Two keys — public (encrypt) and private (decrypt) — secured by the difficulty of factoring large primes. Used in TLS, email, and digital signatures.</p>
         <figure class="figure" style="margin-top:1rem;">
           <img src="images/artifacts/public-key-cryptography-diagram.png" alt="Diagram illustrating the principles of public key cryptography" loading="lazy">
           <figcaption class="figure-caption">Public key cryptography — asymmetric encryption using public and private key pairs. Illustration: Google Gemini AI</figcaption>
         </figure>
-      </div></div>
+      </div></a>
     </div>
   </div>
 
@@ -198,12 +202,12 @@
   <div style="margin-bottom:2.5rem;">
     <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--s4);">#️⃣ Hash Functions — One-Way Fingerprints</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
-      <div class="panel"><div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">SHA-256 (Hash Function)</span></div><div class="panel-body"><p>Produces a fixed 256-bit fingerprint of any input. One-way: given the hash, you cannot recover the input. Collision-resistant: finding two inputs with the same hash requires 2¹²⁸ operations. Used in digital signatures, certificate verification, blockchain. <em>Not a cipher — it cannot be reversed.</em></p>
+      <a href="ciphers/sha256.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">SHA-256 (Hash Function) <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>Produces a fixed 256-bit fingerprint of any input. One-way: given the hash, you cannot recover the input. Collision-resistant: finding two inputs with the same hash requires 2¹²⁸ operations. Used in digital signatures, certificate verification, blockchain. <em>Not a cipher — it cannot be reversed.</em></p>
         <figure class="figure" style="margin-top:1rem;">
           <img src="images/artifacts/hashing-avalanche-effect-diagram.png" alt="Diagram showing the avalanche effect in hash functions where small input changes produce completely different outputs" loading="lazy">
           <figcaption class="figure-caption">The avalanche effect — changing a single input bit transforms the entire hash output. Illustration: Google Gemini AI</figcaption>
         </figure>
-      </div></div>
+      </div></a>
     </div>
   </div>
 
