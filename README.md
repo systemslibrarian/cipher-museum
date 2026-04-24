@@ -29,16 +29,16 @@ An open-source, interactive educational website spanning **52 historically impor
 
 | Hall | Title | Ciphers |
 |------|-------|---------|
-| I | Birth of Cryptography | Scytale, Caesar, Atbash, ROT13, Polybius |
-| II | Classical Substitution | Monoalphabetic, Homophonic, Playfair, Four-Square, Two-Square, Hill, Straddling Checkerboard |
-| III | Polyalphabetic Revolution | Vigenère, Beaufort, Porta, Gronsfeld, Running Key, Chaocipher |
-| IV | Transposition & Fractionation | Rail Fence, Columnar, Double Transposition, Bifid, Trifid, Fractionated Morse |
-| V | Military & Spy Ciphers | Nihilist, ADFGX, ADFGVX, Bazeries, Great Cipher, VIC |
-| ⚔ | Civil War Gallery | Stager, Confederate Vigenère, Dictionary Code |
-| VI | Mechanical Cipher Machines | Alberti Disk, Jefferson Disk, Chaocipher, Enigma, Lorenz, M-209, Purple, Vernam, Navajo Code Talkers |
-| VII | Puzzle & Novelty Ciphers | Pigpen, Bacon's Cipher, Tap Code, Babington, Copiale, Beale, Voynich, Kryptos, Zodiac |
-| ★ | The Unbreakable | One-Time Pad, Vernam, Solitaire, Shannon's Proof |
-| ⚜ | Hall of Codebreakers | 15 stories — from Al-Kindi to the Copiale and Chaocipher reconstructions |
+| [I](halls/ancient.html) | Birth of Cryptography | [Scytale](ciphers/scytale.html), [Caesar](ciphers/caesar.html), [Atbash](ciphers/atbash.html), [ROT13](ciphers/rot13.html), [Polybius](ciphers/polybius.html) |
+| [II](halls/substitution.html) | Classical Substitution | [Monoalphabetic](ciphers/monoalphabetic.html), [Babington](ciphers/babington.html), [Homophonic](ciphers/homophonic.html), [Great Cipher](ciphers/great-cipher.html), [Playfair](ciphers/playfair.html), [Four-Square](ciphers/four-square.html), [Two-Square](ciphers/two-square.html), [Hill](ciphers/hill.html) |
+| [III](halls/polyalphabetic.html) | Polyalphabetic Revolution | [Alberti Disk](ciphers/alberti-disk.html), [Vigenère](ciphers/vigenere.html), [Porta](ciphers/porta.html), [Gronsfeld](ciphers/gronsfeld.html), [Beaufort](ciphers/beaufort.html), [Running Key](ciphers/running-key.html) |
+| [IV](halls/transposition.html) | Transposition & Fractionation | [Rail Fence](ciphers/rail-fence.html), [Columnar](ciphers/columnar.html), [Double Transposition](ciphers/double-transposition.html), [Bifid](ciphers/bifid.html), [Trifid](ciphers/trifid.html), [ADFGX](ciphers/adfgx.html), [ADFGVX](ciphers/adfgvx.html), [Fractionated Morse](ciphers/fractionated-morse.html) |
+| [V](halls/military.html) | Military & Spy Ciphers | [Nihilist](ciphers/nihilist.html), [Bazeries](ciphers/bazeries.html), [VIC](ciphers/vic.html), [Straddling Checkerboard](ciphers/straddling-checkerboard.html) |
+| [VI](halls/civil-war.html) | Civil War Gallery | [Stager](ciphers/stager.html), [Confederate Vigenère](ciphers/confederate-vigenere.html), [Dictionary Code](ciphers/dictionary-code.html) |
+| [VII](halls/machines.html) | Mechanical Cipher Machines | [Jefferson Disk](ciphers/jefferson-disk.html), [Chaocipher](ciphers/chaocipher.html), [Enigma](ciphers/enigma.html), [M-209](ciphers/m209.html), [Lorenz](ciphers/lorenz.html), [Purple](ciphers/purple.html), [Navajo Code Talkers](ciphers/navajo-code-talkers.html) |
+| [VIII](halls/puzzle.html) | Puzzle & Novelty Ciphers | [Pigpen](ciphers/pigpen.html), [Bacon](ciphers/bacon.html), [Tap Code](ciphers/tap-code.html), [Copiale](ciphers/copiale.html), [Beale](ciphers/beale.html), [Voynich](ciphers/voynich.html), [Zodiac](ciphers/zodiac.html), [Kryptos](ciphers/kryptos.html) |
+| [IX](halls/unbreakable.html) | The Unbreakable | [One-Time Pad](ciphers/one-time-pad.html), [Vernam](ciphers/vernam.html), [Solitaire / Pontifex](ciphers/solitaire.html) |
+| [X](halls/codebreakers.html) | Hall of Codebreakers | 15 biographies — from Al-Kindi (frequency analysis, c. 850) to the 2011 Copiale team and the 2010 Chaocipher reconstruction |
 
 ### 🔐 Every Exhibit Follows Four-Part Structure
 
@@ -59,51 +59,51 @@ Each row gives the year the cipher was first known/published and when it was bro
 |--------|---------|--------|--------------------|
 | [ADFGVX](ciphers/adfgvx.html) | June 1918 (Germany) | June 1918 (Painvin, "Radiogram of Victory") | The 36-character upgrade adding digits — broken by Painvin under wartime deadline. |
 | [ADFGX](ciphers/adfgx.html) | March 1918 (Germany) | June 1918 (Painvin) | Polybius with letters A/D/F/G/X followed by a keyed columnar transposition. |
-| [Alberti Disk](ciphers/alberti-disk.html) | 1467 (Alberti) | eventually (frequency over each setting) | Rotating cipher-disk demo — shift the inner ring mid-message to switch alphabets. |
-| [Atbash](ciphers/atbash.html) | ~600 BC | trivially (single key) | Reverses the alphabet (A↔Z, B↔Y…). Self-inverse — the same operation encrypts and decrypts. |
+| [Alberti Disk](ciphers/alberti-disk.html) | 1467 (Alberti) | by ~1900 (frequency analysis on each disk setting once turn-points are known) | Rotating cipher-disk demo — shift the inner ring mid-message to switch alphabets. |
+| [Atbash](ciphers/atbash.html) | ~600 BC | trivial — single fixed substitution; one frequency pass or recognising A↔Z reveals it | Reverses the alphabet (A↔Z, B↔Y…). Self-inverse — the same operation encrypts and decrypts. |
 | [Babington](ciphers/babington.html) | 1586 | 1586 (Phelippes, same year) | Reenacts the 1586 nomenclator that condemned Mary, Queen of Scots; includes Phelippes's "doubleth" forgery trap. |
-| [Bacon](ciphers/bacon.html) | 1605 (Francis Bacon) | steganographic by design | Francis Bacon's 5-bit binary code (a/b → letter) — the ancestor of ASCII. |
-| [Bazeries](ciphers/bazeries.html) | 1898 (Étienne Bazeries) | statistical | Combines a Polybius substitution with a numeric-keyword transposition. |
+| [Bacon](ciphers/bacon.html) | 1605 (Francis Bacon) | broken on sight once the two-typeface (a/b) carrier is noticed — the 5-bit code itself is fixed and public | Francis Bacon's 5-bit binary code (a/b → letter) — the ancestor of ASCII. |
+| [Bazeries](ciphers/bazeries.html) | 1898 (Étienne Bazeries) | early 20th c. (frequency analysis on the Polybius layer once the numeric keyword length is recovered) | Combines a Polybius substitution with a numeric-keyword transposition. |
 | [Beale](ciphers/beale.html) | ~1820 | only #2: 1885 (Ward); #1 & #3 unsolved | Book cipher with the Declaration of Independence as the key — replicates the 1885 Beale #2 mechanism. |
 | [Beaufort](ciphers/beaufort.html) | 1857 | 1863 Kasiski applies | Reciprocal Vigenère variant where encryption and decryption are the same operation. |
-| [Bifid](ciphers/bifid.html) | 1901 (Delastelle) | statistical (period-dependent) | Polybius coordinates split, transposed across a period, then recombined. |
+| [Bifid](ciphers/bifid.html) | 1901 (Delastelle) | 20th c. (period detection → fractionated frequency analysis on row/column streams) | Polybius coordinates split, transposed across a period, then recombined. |
 | [Caesar](ciphers/caesar.html) | ~58 BC | ~850 AD (Al-Kindi, frequency analysis) | Shifts every letter by a chosen amount (1–25). Includes a brute-force panel showing all 25 shifts at once. |
 | [Chaocipher](ciphers/chaocipher.html) | 1918 (J.F. Byrne) | 2010 (Rubin reconstruction after release) | Two 26-letter alphabets that permute themselves after every character — dynamic state cipher. |
-| [Columnar](ciphers/columnar.html) | antiquity | frequency / statistical | Writes plaintext into rows under a keyword, then reads columns out in keyword order. |
+| [Columnar](ciphers/columnar.html) | antiquity | column-count search + anagramming (multiple-anagram method, Friedman 1920s) | Writes plaintext into rows under a keyword, then reads columns out in keyword order. |
 | [Confederate Vigenère](ciphers/confederate-vigenere.html) | 1861 | 1863 (Tribune cryptanalysts) | The standard Vigenère with the three Confederate keywords ("Manchester Bluff", "Complete Victory", "Come Retribution"). |
 | [Copiale](ciphers/copiale.html) | ~1730 | 2011 (Knight, Megyesi, Schaefer) | Homophonic substitution with nulls, drawn from the 18th-century Oculist Order manuscript broken in 2011. |
 | [Dictionary Code](ciphers/dictionary-code.html) | 18th–19th c. | depends on the codebook | Looks up words by page/line/word triplets in a shared book — the Civil War book cipher. |
 | [Double Transposition](ciphers/double-transposition.html) | WWI | 2013 (Lasry et al., computer hill-climbing) | Applies columnar transposition twice with two different keys — a WWII workhorse. |
 | [Enigma](ciphers/enigma.html) | 1923 (Scherbius) | 1932 (Rejewski) → 1939+ (Bletchley) | Three-rotor Wehrmacht Enigma with plugboard, reflector, and stepping; rotor wiring rendered live. |
-| [Four-Square](ciphers/four-square.html) | 1902 (Delastelle) | digram analysis | Two keyed squares plus two standard ones — disrupts digram frequencies. |
-| [Fractionated Morse](ciphers/fractionated-morse.html) | early 1900s | statistical | Converts text to Morse, regroups dots/dashes/separators in trigrams, then substitutes via a keyed alphabet. |
+| [Four-Square](ciphers/four-square.html) | 1902 (Delastelle) | digram frequency analysis (twice the work of Playfair but the same underlying weakness) | Two keyed squares plus two standard ones — disrupts digram frequencies. |
+| [Fractionated Morse](ciphers/fractionated-morse.html) | early 1900s | known-plaintext + trigram frequency on the dot/dash/separator stream | Converts text to Morse, regroups dots/dashes/separators in trigrams, then substitutes via a keyed alphabet. |
 | [Great Cipher](ciphers/great-cipher.html) | 1626 (Rossignol) | 1893 (Bazeries) | Rossignol nomenclator that maps numbers onto syllables and traps; demo shows the codebook in action. |
 | [Gronsfeld](ciphers/gronsfeld.html) | 1655 | 1863 Kasiski (faster, smaller key space) | Vigenère restricted to numeric keys (0–9), making it weaker but field-portable. |
 | [Hill](ciphers/hill.html) | 1929 (Lester Hill) | known-plaintext (linear algebra) | Multiplies plaintext blocks by an invertible 2×2 matrix mod 26. |
-| [Homophonic](ciphers/homophonic.html) | 1400s (Italian courts) | 17th–19th c. statistical attacks | Substitutes each letter with one of several numeric codes, flattening the frequency profile. |
+| [Homophonic](ciphers/homophonic.html) | 1400s (Italian courts) | 17th–19th c. (frequency analysis on the *flattened* code-number distribution — the technique that broke Mary, Queen of Scots in 1586 and Louis XIV's Great Cipher in 1893) | Substitutes each letter with one of several numeric codes, flattening the frequency profile. |
 | [Jefferson Disk](ciphers/jefferson-disk.html) | 1795 (Jefferson) | reused as M-94 (1922); broken late 20th c. | 26-disk wheel cipher: line up the plaintext on one row, read ciphertext from another row. |
 | [Kryptos](ciphers/kryptos.html) | 1990 (Sanborn, CIA HQ) | K1–K3 solved (1999); K4 unsolved | Solves K1/K2 (keyed Vigenère with PALIMPSEST/ABSCISSA) and K3 (transposition); shows Sanborn's K4 cribs. |
 | [Lorenz](ciphers/lorenz.html) | 1940 (Germany) | 1942 (Tutte) / 1944 (Colossus) | SZ40-style XOR stream cipher with two sets of pin-wheels — the cipher Colossus was built to break. |
 | [M-209](ciphers/m209.html) | 1940 (Hagelin C-38) | WWII (German breaks) | Hagelin C-38 simulator: six co-prime pin-wheels and a 27-bar lug cage producing a Beaufort shift per character. |
 | [Monoalphabetic](ciphers/monoalphabetic.html) | antiquity | ~850 AD (Al-Kindi) | Builds a keyed substitution alphabet from a keyword and applies it to the text. |
 | [Navajo Code Talkers](ciphers/navajo-code-talkers.html) | 1942 | never broken | Looks up military vocabulary in the WWII Navajo code dictionary (e.g., "iron fish" = submarine). |
-| [Nihilist](ciphers/nihilist.html) | 1880s (Russia) | early 1900s | Polybius numbers added (mod 100) to a repeating keyword's Polybius numbers — Russian revolutionary classic. |
+| [Nihilist](ciphers/nihilist.html) | 1880s (Russia) | early 1900s (Polybius + repeating numeric key recovered via Kasiski-style spacing on the additive layer) | Polybius numbers added (mod 100) to a repeating keyword's Polybius numbers — Russian revolutionary classic. |
 | [One-Time Pad](ciphers/one-time-pad.html) | 1882 (Miller) / 1917 (Mauborgne) | unbreakable (Shannon 1949 proof) when used correctly | Generates and applies a truly-random key the same length as the message — provably unbreakable. |
-| [Pigpen](ciphers/pigpen.html) | ~1700 (Freemasons) | trivial | Geometric substitution: each letter becomes the lines/dots of its grid cell. |
+| [Pigpen](ciphers/pigpen.html) | ~1700 (Freemasons) | trivial — fixed substitution with a publicly-known glyph table; recognising the grid shapes is the whole break | Geometric substitution: each letter becomes the lines/dots of its grid cell. |
 | [Playfair](ciphers/playfair.html) | 1854 (Wheatstone) | WWI (Friedman & others) | Encrypts letter pairs (digrams) using a keyed 5×5 square; live key-square preview. |
-| [Polybius](ciphers/polybius.html) | ~150 BC | trivial (frequency) | Maps each letter to a row/column digit pair on a 5×5 grid. |
+| [Polybius](ciphers/polybius.html) | ~150 BC | trivial — each pair of digits is a fixed letter, so the digit-pair frequencies match the plaintext-letter frequencies exactly | Maps each letter to a row/column digit pair on a 5×5 grid. |
 | [Porta](ciphers/porta.html) | 1563 (Della Porta) | 1863 Kasiski applies | 13-row reciprocal table — each key letter swaps two halves of the alphabet. |
 | [Purple](ciphers/purple.html) | 1939 (Japan, Type 97) | 20 Sept 1940 (Rowlett, Grotjan, SIS) | Pedagogical reproduction of Japan's Type 97 stepping-switch cipher: vowels and consonants encrypt through separate banks before recombining. |
-| [Rail Fence](ciphers/rail-fence.html) | antiquity | trivial | Zig-zag transposition on N rails; live diagram of the fence. |
-| [ROT13](ciphers/rot13.html) | ~1980 (Usenet) | trivial by design | The self-inverse Caesar (shift 13). One button toggles the text in place. |
-| [Running Key](ciphers/running-key.html) | 19th c. | 20th c. statistical attacks | Vigenère with a long passage of natural text as the key instead of a short word. |
-| [Scytale](ciphers/scytale.html) | ~700 BC (Sparta) | trivial (try all rod widths) | Wraps the message around a virtual rod of N rows; reading down the columns scrambles the order without changing letters. |
-| [Solitaire / Pontifex](ciphers/solitaire.html) | 1999 (Schneier, *Cryptonomicon*) | theoretical biases noted | Schneier's hand-operated stream cipher driven by a 54-card deck; deck state animates after each step. |
+| [Rail Fence](ciphers/rail-fence.html) | antiquity | trivial — brute-force every rail count from 2 to ~10 and pick the readable English output | Zig-zag transposition on N rails; live diagram of the fence. |
+| [ROT13](ciphers/rot13.html) | ~1980 (Usenet) | trivial by design — self-inverse Caesar-13, intended as a spoiler obscurer, not a cipher | The self-inverse Caesar (shift 13). One button toggles the text in place. |
+| [Running Key](ciphers/running-key.html) | 19th c. | early 20th c. (Friedman) — high-probability-trigram dragging, since both plaintext and key obey English statistics | Vigenère with a long passage of natural text as the key instead of a short word. |
+| [Scytale](ciphers/scytale.html) | ~700 BC (Sparta) | trivial — try every rod diameter (column count) and read the readable diagonal | Wraps the message around a virtual rod of N rows; reading down the columns scrambles the order without changing letters. |
+| [Solitaire / Pontifex](ciphers/solitaire.html) | 1999 (Schneier, *Cryptonomicon*) | 1999 (Crowley distinguishing attack — keystream output bias ≈ 1/22.5 vs. 1/26 ideal) | Schneier's hand-operated stream cipher driven by a 54-card deck; deck state animates after each step. |
 | [Stager](ciphers/stager.html) | 1861 (Anson Stager) | secure during the war | Anson Stager's Union route cipher — transposes whole words and salts them with code names. |
-| [Straddling Checkerboard](ciphers/straddling-checkerboard.html) | 1930s (Soviet) | statistical (varies) | Common letters get one digit, rare letters two — variable-length codes from a fixed alphabet. |
+| [Straddling Checkerboard](ciphers/straddling-checkerboard.html) | 1930s (Soviet) | digit-frequency analysis (the eight common letters get one digit each, so single-digit frequencies match high-frequency English letters) | Common letters get one digit, rare letters two — variable-length codes from a fixed alphabet. |
 | [Tap Code](ciphers/tap-code.html) | 1965 (Hanoi Hilton POWs) | POW use only | 5×5 Polybius square tapped as row-then-column knocks — used by POWs in Vietnam. |
-| [Trifid](ciphers/trifid.html) | 1902 (Delastelle) | statistical | 3D Polybius (3×3×3 cube) — fractionates into trits and shuffles them across a period. |
-| [Two-Square](ciphers/two-square.html) | late 19th c. | digram analysis | Lighter Delastelle variant with only two squares (horizontal or vertical orientation). |
+| [Trifid](ciphers/trifid.html) | 1902 (Delastelle) | 20th c. — hill-climbing on the 27-symbol alphabet plus period detection on the trit stream | 3D Polybius (3×3×3 cube) — fractionates into trits and shuffles them across a period. |
+| [Two-Square](ciphers/two-square.html) | late 19th c. | digram frequency analysis (only two squares means many digrams encode to themselves, leaking the key squares) | Lighter Delastelle variant with only two squares (horizontal or vertical orientation). |
 | [Vernam](ciphers/vernam.html) | 1917 (Gilbert Vernam, AT&T) | unbreakable if the tape is one-time | XOR of plaintext with a key tape — the original teleprinter stream cipher. |
 | [VIC](ciphers/vic.html) | 1953 (KGB) | 1957 (Häyhänen defection) | Reino Häyhänen's KGB hand cipher: straddling checkerboard + double transposition + date-driven keystream. |
 | [Vigenère](ciphers/vigenere.html) | 1553 (Bellaso/Vigenère) | 1854 Babbage (private) · 1863 Kasiski | Polyalphabetic shift driven by a repeating keyword; live tabula-recta lookup and Kasiski hint panel. |
@@ -112,16 +112,22 @@ Each row gives the year the cipher was first known/published and when it was bro
 
 ### 📊 Additional Tools
 
+- **[Codebreaker's Workbench](lab/workbench.html)** — A unified hands-on lab that exposes **all 51 cipher engines** behind one consistent interface. Pick any cipher from the dropdown, paste your text, set a key (or accept the default), and encrypt/decrypt instantly. Beyond the per-exhibit demos it adds:
+    - **Frequency analyser** — letter-frequency histogram with Index of Coincidence and Chi-square against English, useful for detecting monoalphabetic vs. polyalphabetic ciphertext at a glance.
+    - **Kasiski / period detector** — repeated-trigram spacing analysis for breaking Vigenère-family ciphers.
+    - **N-gram & entropy panel** — bigram/trigram counts and Shannon entropy for distinguishing transposition (preserves frequencies) from substitution (alters them).
+    - **Side-by-side Encrypt/Decrypt panes** with copy-to-clipboard and a swap button so you can iterate on a key without retyping ciphertext.
+    - **Same engine source as the exhibits** — the workbench pulls from [js/ciphers/all-engines.js](js/ciphers/all-engines.js), so anything you reproduce here matches every demo on the site.
 - **[Site Search](search.html)** — Search across all 52 ciphers, 10 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
-- **Cryptanalysis Techniques** — 10 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), HMM/SMT decoding (Copiale), and Chaocipher reconstruction
-- **Cipher Challenges** — 10 progressive puzzles from Caesar to Enigma with hints and solutions
-- **Timeline** — Interactive 2,400-year history with era filtering, scroll-spy, and 23 clickable events
-- **Comparison Table** — Sortable, filterable table comparing all 52 ciphers by type, era, security level, and key method
-- **Cipher Flow Explorer** — Visual relationship map between cipher families
-- **Museum Map** — Architectural floor plan with all exhibit halls and cipher exhibits
-- **Guided Tours** — Structured learning paths through the collection
-- **Glossary** — Comprehensive cryptography term reference
-- **Community** — Discussion space for cipher enthusiasts
+- **[Cryptanalysis Techniques](cryptanalysis.html)** — 10 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), HMM/SMT decoding (Copiale), and Chaocipher reconstruction.
+- **[Cipher Challenges](challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
+- **[Timeline](timeline.html)** — Interactive 2,500-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
+- **[Comparison Table](comparison.html)** — Sortable, filterable table comparing all 52 ciphers by type, era, security level, and key method.
+- **[Cipher Flow Explorer](cipher-flow.html)** — Visual relationship map between cipher families.
+- **[Museum Map](museum-map.html)** — Architectural floor plan with all exhibit halls and cipher exhibits.
+- **[Guided Tours](tours/index.html)** — Structured learning paths through the collection.
+- **[Glossary](glossary.html)** — Comprehensive cryptography term reference.
+- **[Community](community/index.html)** — Discussion space for cipher enthusiasts.
 
 ---
 
