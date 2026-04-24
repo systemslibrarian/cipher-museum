@@ -3245,6 +3245,153 @@ window.CipherEngines = (() => {
     };
   })();
 
+  // Argenti Family Cipher (1500s\u20131600s, Vatican).
+  // Matteo and Marcello Argenti served as papal cryptanalysts; their
+  // <em>Trattato in Cifra</em> codified the homophonic-nomenclator pattern
+  // that dominated European diplomacy for two centuries. Demo: each letter
+  // gets two keyed 2-digit homophones (codes 10\u201389) and the encoder
+  // alternates between them on each repeat use, so common letters spread
+  // across multiple cipher numbers \u2014 the central Argenti innovation.
+  const argenti = (() => {
+    function build(seed) {
+      const rng = _seededRng(seed || 'ARGENTI');
+      // Pool of 52 two-digit codes (10..89, skip multiples of 10 reserved for nulls)
+      const pool = [];
+      for (let n = 10; n <= 89; n++) pool.push(n);
+      // Fisher-Yates shuffle
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const homo = {}; // letter -> [code1, code2]
+      for (let i = 0; i < 26; i++) homo[A[i]] = [pool[i * 2], pool[i * 2 + 1]];
+      const reverse = {};
+      for (const [ltr, codes] of Object.entries(homo)) {
+        for (const c of codes) reverse[c] = ltr;
+      }
+      return { homo, reverse };
+    }
+    function fmt2(n) { return String(n).padStart(2, '0'); }
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        const { homo } = build(key);
+        const counters = {};
+        const out = [];
+        for (const ch of t) {
+          const codes = homo[ch];
+          if (!codes) continue;
+          const pick = (counters[ch] = (counters[ch] || 0) + 1) % 2;
+          out.push(fmt2(codes[pick]));
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { reverse } = build(key);
+        const groups = String(text || '').match(/\d{2}/g) || [];
+        return groups.map(g => reverse[parseInt(g, 10)] || '?').join('');
+      }
+    };
+  })();
+
+  // Wallis Ciphers (1640s, English Civil War).
+  // John Wallis of Oxford broke Royalist nomenclators for Parliament and
+  // founded the English state cryptanalysis tradition. The Royalist systems
+  // he attacked were heavily codebook-dominant: long lists of named persons,
+  // places, and political terms with per-letter spelling as a fallback.
+  // Demo: keyed nomenclator with a ~60-word Civil-War-era codebook (3-digit
+  // codes 100\u2013159) plus per-letter 2-digit homophones (10\u201389) for the
+  // residual alphabet \u2014 the dominant design Wallis attacked.
+  const wallisCiphers = (() => {
+    const WORDLIST = (
+      'KING QUEEN PRINCE PARLIAMENT COMMONS LORDS COMMITTEE COUNCIL ARMY ' +
+      'NAVY GENERAL COLONEL CAPTAIN MAJOR LIEUTENANT REGIMENT TROOP HORSE ' +
+      'FOOT MUSKET PIKE POWDER MATCH CANNON FIELD BATTLE SIEGE FORT GARRISON ' +
+      'OXFORD LONDON YORK NEWCASTLE NASEBY EDGEHILL MARSTON BRISTOL ' +
+      'CHARLES STUART CROMWELL FAIRFAX RUPERT ESSEX MANCHESTER WALLER ' +
+      'GORING DIGBY HYDE ROYALIST PARLIAMENTARIAN ROUNDHEAD CAVALIER ' +
+      'CIPHER LETTER MESSAGE SECRET INTELLIGENCE INTERCEPT KEY DECIPHER ' +
+      'ATTACK DEFEND MARCH RETREAT'
+    ).split(/\s+/);
+    const SENT_OPEN = 90, SENT_CLOSE = 91; // reserved 2-digit sentinels
+    function fmt2(n) { return String(n).padStart(2, '0'); }
+    function fmt3(n) { return String(n).padStart(3, '0'); }
+    function build(seed) {
+      const rng = _seededRng(seed || 'WALLIS');
+      const pool = [];
+      for (let n = 10; n <= 89; n++) pool.push(n);
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const homo = {}, reverse = {};
+      for (let i = 0; i < 26; i++) {
+        homo[A[i]] = [pool[i * 2], pool[i * 2 + 1]];
+        reverse[pool[i * 2]] = A[i];
+        reverse[pool[i * 2 + 1]] = A[i];
+      }
+      return { homo, reverse };
+    }
+    return {
+      encode: (text, key) => {
+        const { homo } = build(key);
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const counters = {};
+        const out = [];
+        for (const tok of tokens) {
+          const w = tok.replace(/[^A-Z]/g, '');
+          if (!w) continue;
+          const idx = WORDLIST.indexOf(w);
+          if (idx >= 0) {
+            out.push(fmt3(idx + 100));
+          } else {
+            out.push(fmt2(SENT_OPEN));
+            for (const ch of w) {
+              const codes = homo[ch];
+              const pick = (counters[ch] = (counters[ch] || 0) + 1) % 2;
+              out.push(fmt2(codes[pick]));
+            }
+            out.push(fmt2(SENT_CLOSE));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { reverse } = build(key);
+        const groups = String(text || '').match(/\d{2,3}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const g = groups[i];
+          if (g.length === 3) {
+            const v = parseInt(g, 10);
+            if (v >= 100 && v - 100 < WORDLIST.length) words.push(WORDLIST[v - 100]);
+            else words.push('???');
+            i++;
+          } else {
+            const v = parseInt(g, 10);
+            if (v === SENT_OPEN) {
+              i++;
+              let w = '';
+              while (i < groups.length) {
+                const lv = parseInt(groups[i], 10);
+                if (groups[i].length === 2 && lv === SENT_CLOSE) { i++; break; }
+                w += reverse[lv] || '?';
+                i++;
+              }
+              words.push(w);
+            } else {
+              // Stray 2-digit code without sentinel \u2014 treat as a single letter
+              words.push(reverse[v] || '?');
+              i++;
+            }
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -3263,6 +3410,7 @@ window.CipherEngines = (() => {
     trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher,
     fialka, kl7, geheimschreiber, kryha, m94,
     chineseTelegraph, zimmermann, slidex, commercialCode,
-    culperRing, arnoldAndre
+    culperRing, arnoldAndre,
+    argenti, wallisCiphers
   };
 })();

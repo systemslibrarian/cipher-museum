@@ -65,7 +65,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 102', allPages.length === 102, `actual=${allPages.length}`);
+ok('Cipher pages count is 104', allPages.length === 104, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
@@ -206,7 +206,9 @@ const ENGINE_PROFILES = {
   slidex:                 { key: 'SLIDEX',                             mode: 'roundtrip-padded' },
   commercialCode:         { key: 'ABC',                                mode: 'roundtrip' },
   culperRing:             { key: 'TALLMADGE',                          mode: 'roundtrip' },
-  arnoldAndre:            { key: 'BLACKSTONE',                         mode: 'roundtrip' }
+  arnoldAndre:            { key: 'BLACKSTONE',                         mode: 'roundtrip' },
+  argenti:                { key: 'ARGENTI',                            mode: 'roundtrip' },
+  wallisCiphers:          { key: 'WALLIS',                             mode: 'roundtrip' }
 };
 
 const SAMPLE_TEXTS = [

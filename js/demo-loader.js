@@ -354,6 +354,16 @@
       label: 'Arnold–André Book Cipher (Blackstone\'s Commentaries)', engine: 'arnoldAndre',
       defaultMsg: 'GENERAL ARNOLD MEET ANDRE TONIGHT',
       inputs: [{ type: 'text', id: 'keyword', label: 'Book seed (informational)', value: 'BLACKSTONE', placeholder: 'BLACKSTONE' }]
+    },
+    'argenti': {
+      label: 'Argenti Family Cipher (Vatican, 1500s–1600s)', engine: 'argenti',
+      defaultMsg: 'ATTACK AT DAWN',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Homophone Key', value: 'ARGENTI', placeholder: 'ARGENTI' }]
+    },
+    'wallis-ciphers': {
+      label: 'Wallis Ciphers (English Civil War, 1640s)', engine: 'wallisCiphers',
+      defaultMsg: 'KING CHARLES MARCH OXFORD',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Nomenclator Key', value: 'WALLIS', placeholder: 'WALLIS' }]
     }
   };
 
@@ -768,6 +778,18 @@
       { text: 'Bakeless, John. <em>Turncoats, Traitors and Heroes</em> (1959) — chapter on the Arnold cipher', url: 'https://en.wikipedia.org/wiki/Turncoats,_Traitors_and_Heroes' },
       { text: 'Mount Vernon — André\'s captured ciphered letter', url: 'https://www.mountvernon.org/library/digitalhistory/digital-encyclopedia/article/john-andre/' },
       { text: 'Cipher History — Arnold-André book cipher analysis', url: 'https://www.tandfonline.com/journals/ucry20' }
+    ],
+    argenti: [
+      { text: 'Meister, Aloys. <em>Die Geheimschrift im Dienste der päpstlichen Kurie</em> (1906)', url: 'https://archive.org/details/diegeheimschrift00meis' },
+      { text: 'Kahn, David. <em>The Codebreakers</em> (1967) — chapter 4 on Renaissance Italian cryptanalysis', url: 'https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9780684831305' },
+      { text: 'Vatican Apostolic Archive — Argenti family papers (Trattato in Cifra)', url: 'https://www.archivioapostolicovaticano.va/content/aav/en.html' },
+      { text: 'Wikipedia — Matteo Argenti', url: 'https://en.wikipedia.org/wiki/Matteo_Argenti' }
+    ],
+    wallisCiphers: [
+      { text: 'Wallis, John. Cipher notes — Bodleian Library MSS', url: 'https://www.bodleian.ox.ac.uk/' },
+      { text: 'Kahn, David. <em>The Codebreakers</em> (1967) — chapter 4 on John Wallis and English state cryptanalysis', url: 'https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9780684831305' },
+      { text: 'Smith, David Eugene. <em>John Wallis as a Cryptographer</em> (Bulletin AMS, 1917)', url: 'https://www.ams.org/journals/bull/1917-24-02/S0002-9904-1917-02954-X/' },
+      { text: 'Wikipedia — John Wallis', url: 'https://en.wikipedia.org/wiki/John_Wallis' }
     ]
   };
 

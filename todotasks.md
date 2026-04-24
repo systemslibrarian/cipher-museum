@@ -3,11 +3,11 @@
 **Project:** Expand Cipher Museum from 63 exhibits across 11 halls → ~113 exhibits across 13 halls.
 **Repo:** systemslibrarian/cipher-museum · **Live:** https://ciphermuseum.com
 **Source of truth:** [docs/worldupdates.md](docs/worldupdates.md) — update after every commit.
-**Last sync with worldupdates.md:** 2026-04-24 (Phase 7 Americana batch shipped)
+**Last sync with worldupdates.md:** 2026-04-24 (Phase 5 stragglers batch shipped — Argenti + Wallis)
 
 ---
 
-## Status Snapshot — 78 / 171 (45.6%)
+## Status Snapshot — 80 / 171 (46.8%)
 
 | Phase | Title | Done / Total | Status |
 |------:|-------|------------:|--------|
@@ -17,7 +17,7 @@
 | 2     | Hall XII: Unsolved Ciphers | 10/26 | 🟡 In progress |
 | 3     | Pacific Theater | 3/3 | ✅ Complete |
 | 4     | WWII / Interwar Machines | 6/9 | 🟡 In progress |
-| 5     | European Classical Gaps | 5/10 | 🟡 In progress |
+| 5     | European Classical Gaps | 7/10 | 🟡 In progress |
 | 6     | East Asia & Telegraphy | 4/4 | ✅ Complete |
 | 7     | Americana & Cultural | 3/4 | 🟡 In progress |
 | 8     | Global Underground Traditions | 0/10 | ⬜ Not started |
@@ -35,9 +35,9 @@
 
 ## Active Work
 
-**Currently building:** Phase 7 Americana just shipped — 2 Revolutionary War exhibits: Culper Ring / Tallmadge Code, Arnold–André Book Cipher. Phase 6 East Asia & Telegraphy (4 exhibits) shipped previously.
+**Currently building:** Phase 5 stragglers batch just shipped — 2 European classical engines: Argenti Family Cipher (Vatican papal nomenclators, 1500s–1600s), Wallis Ciphers (English Civil War, 1640s). Phase 7 Americana (2 Revolutionary War exhibits) shipped previously.
 
-Next on deck: Phase 9 (Hall XIII culture: Da Vinci Code, National Treasure, Gravity Falls, Popular Culture Survey) or finish Phase 5 stragglers (Argenti, Wallis, Mary Stuart, Patterson).
+Next on deck: Phase 9 (Hall XIII culture: Da Vinci Code, National Treasure, Gravity Falls, Popular Culture Survey — mostly Track B), Phase 5 Track B remainders (Mary Stuart Castelnau, Patterson’s Cipher), or Phase 8 (Global Underground Traditions, 0/10).
 
 Build order within Phase 5 (remaining):
 1. ⬜ Argenti Family
@@ -124,14 +124,14 @@ Build order within Phase 5 (remaining):
 - [x] Bazeries Cylinder (Track A — 20-disk)
 - [x] M-94 / M-138-A (Track A — dual-mode)
 
-### Phase 5 — European Classical ⬜  ← Active phase
-- ⬜ **Affine (Track A)** ← in progress
-- ⬜ Trithemius (Track A)
-- ⬜ Cardano Autokey (Track A)
-- ⬜ Wheatstone Cryptograph (Track A)
-- ⬜ Argenti Family (Track A)
-- ⬜ Wallis Ciphers (Track A)
-- ⬜ Morse Code (Track A + audio + Voyager Golden Record + Morse+Cipher side panels)
+### Phase 5 — European Classical 🟡
+- [x] **Affine (Track A)**
+- [x] Trithemius (Track A)
+- [x] Cardano Autokey (Track A)
+- [x] Wheatstone Cryptograph (Track A)
+- [x] Argenti Family (Track A)
+- [x] Wallis Ciphers (Track A)
+- [x] Morse Code (Track A + audio + Voyager Golden Record + Morse+Cipher side panels)
 - ⬜ Mary Stuart Castelnau Letters (Track B annotated viewer + decipherment timeline)
 - ⬜ Patterson's Cipher for Jefferson (Track B four-layer animation + Smithline search viz)
 

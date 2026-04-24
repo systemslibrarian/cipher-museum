@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Argenti Family Cipher (Vatican papal nomenclators · 1500s–1600s) — The Cipher Museum</title>
+  <meta name="description" content="Matteo and Marcello Argenti served as papal cryptanalysts to seven popes. Their <em>Trattato in Cifra</em> codified the homophonic-nomenclator pattern that dominated European diplomacy for two centuries.">
+  <meta property="og:title" content="Argenti Family Cipher (Vatican papal nomenclators · 1500s–1600s) — The Cipher Museum">
+  <meta property="og:description" content="Matteo and Marcello Argenti served as papal cryptanalysts to seven popes. Their <em>Trattato in Cifra</em> codified the homophonic-nomenclator pattern that dominated European diplomacy for two centuries.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/argenti.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Argenti Family Cipher (Vatican papal nomenclators · 1500s–1600s) — The Cipher Museum">
+  <meta name="twitter:description" content="Matteo and Marcello Argenti served as papal cryptanalysts to seven popes. Their <em>Trattato in Cifra</em> codified the homophonic-nomenclator pattern that dominated European diplomacy for two centuries.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/argenti.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: Classical Substitution</a><span>&rsaquo;</span>
+    Argenti Family Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall II · Substitution</span>
+    <span class="badge era-classical">Renaissance Italy · 1500s–1600s</span>
+    <span class="badge sec-broken">Secure for its time · obsoleted by frequency analysis</span>
+  </div>
+  <h1 class="page-title">Argenti Family Cipher <span style="opacity:.6;font-weight:400;">Vatican papal nomenclators · 1500s–1600s</span></h1>
+  <p class="page-tagline">The Vatican’s house cryptographers wrote the textbook — literally — on homophonic substitution. For 200 years, every European chancery copied it.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Designers</span><span class="fact-value">Matteo Argenti (1561–1638) &amp; his nephew Marcello Argenti</span></div>
+    <div class="fact"><span class="fact-label">Employer</span><span class="fact-value">Holy See (Vatican Secretary of State, 1591–1630s)</span></div>
+    <div class="fact"><span class="fact-label">Treatise</span><span class="fact-value"><em>Trattato in Cifra</em> (manuscript, c.1591–1605)</span></div>
+    <div class="fact"><span class="fact-label">Mechanism</span><span class="fact-value">Homophonic substitution + nomenclator + nulls</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">Standard Vatican system into the 17th century</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="argenti"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>From 1555 the Argenti family held a hereditary post in the papal Cifra office — the Vatican’s cryptographic bureau. Giovanni Battista Argenti (d. 1591), then his nephew Matteo (1561–1638), then Matteo’s nephew Marcello served seven popes between them, designing nomenclators for papal nuncios across Europe and breaking the ciphers of foreign powers.</p><p style="margin-top:1rem;">Around 1591 Matteo wrote the <em>Trattato in Cifra</em>, an internal handbook for Vatican cryptographers. It set out, for the first time as a coherent design discipline, every defensive trick later European cryptography would rely on: multiple homophones for high-frequency letters, nulls inserted to scramble counts, a parallel nomenclator of named persons and places, and explicit guidance on how to <em>break</em> sloppy enemy ciphers using frequency analysis. Aloys Meister published Matteo’s manuscripts in 1906 (<em>Die Geheimschrift im Dienste der päpstlichen Kurie</em>); Kahn devotes much of <em>The Codebreakers</em> chapter 4 to the Argenti tradition.</p><p style="margin-top:1rem;">For roughly 200 years — from the late 16th century until the rise of polyalphabetic ciphers in routine use — every major European chancery used Argenti-pattern nomenclators. They are why the Babington Plot, the Great Cipher of Louis XIV, and most of the secrets of the Thirty Years’ War were transmitted in the format they were.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>An Argenti cipher has three layers stacked on top of one another:</p><ol style="margin-top:.75rem;line-height:1.7;"><li><strong>Homophonic alphabet.</strong> Each plaintext letter is assigned several cipher symbols (typically 2–4 for common letters, 1–2 for rare). The encoder rotates between them so common letters never produce the same code twice in a row.</li><li><strong>Nomenclator.</strong> A short list of named persons, places, offices, and frequent words gets dedicated codes that bypass the alphabet entirely — “the Pope”, “the Emperor”, “Paris”, etc.</li><li><strong>Nulls.</strong> Meaningless symbols sprinkled at agreed positions to confuse a cryptanalyst counting frequencies.</li></ol><p style="margin-top:1rem;">The demo above implements the homophonic core: each letter receives two keyed 2-digit codes (in the range 10–89), and the encoder alternates between them on every repeat use. Try encoding <code>AAAAAA</code> — you will see two distinct codes interleaved, exactly the Argenti defence against frequency attack.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Single-letter frequency attack (limited)</div><div class="attack-diff">Complexity: Very high against a properly-designed nomenclator</div><p class="attack-desc">A homophonic cipher with two homophones per letter still leaks information — the <em>combined</em> frequency of a letter’s codes equals the letter’s natural frequency. Skilled cryptanalysts (including the Argentis themselves, when reading enemy traffic) used this to anchor common letters, then bootstrapped the rest from suspected plaintext words. Long ciphertexts fall to this. Short diplomatic notes do not.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Compromise of the codebook itself</div><div class="attack-diff">Complexity: Espionage problem, not cryptanalytic</div><p class="attack-desc">Like every nomenclator system in history, Argenti ciphers fell most often when a courier was bribed or a chancery clerk defected with the keylist. The Vatican changed nomenclators on a roughly annual cycle to limit this exposure — a discipline most contemporaneous chanceries did not match.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Eventually obsolete</div><div class="attack-diff">Complexity: 18th-century mathematics</div><p class="attack-desc">By the time of John Wallis (next exhibit) and his contemporaries, professional state cryptanalysts could routinely break Argenti-class systems given enough traffic. The era of pure nomenclators ended around 1700; the polyalphabetic Vigenère-family ciphers — themselves long ignored by chanceries who trusted their nomenclators — finally came into operational use.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Argenti lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Homophones spread frequency — but never erase it</td><td>Why ECB-mode block ciphers leak; why authenticated encryption is mandatory</td></tr><tr><td>Layered defences (alphabet + nomenclator + nulls)</td><td>Defence in depth: cipher + MAC + nonces + key rotation</td></tr><tr><td>Annual key rollover policy</td><td>Modern key rotation discipline (90-day TLS certs, crypto-period limits)</td></tr><tr><td>Best-in-class systems still need cryptanalysts to validate them</td><td>Independent academic review; NIST competitions; open-source scrutiny</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Designers</td><td>Matteo Argenti (1561–1638) &amp; his nephew Marcello Argenti</td></tr>
+            <tr><td>Employer</td><td>Holy See (Vatican Secretary of State, 1591–1630s)</td></tr>
+            <tr><td>Treatise</td><td><em>Trattato in Cifra</em> (manuscript, c.1591–1605)</td></tr>
+            <tr><td>Mechanism</td><td>Homophonic substitution + nomenclator + nulls</td></tr>
+            <tr><td>Status</td><td>Standard Vatican system into the 17th century</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/great-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Great Cipher of Louis XIV</span>
+      <span class="related-card__tag">The Argenti tradition’s French descendant</span>
+    </a>
+    <a href="../ciphers/babington.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Babington Plot Cipher</span>
+      <span class="related-card__tag">A nomenclator-pattern cipher broken in real time</span>
+    </a>
+    <a href="../ciphers/homophonic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Homophonic Substitution</span>
+      <span class="related-card__tag">The general pattern Argenti formalised</span>
+    </a>
+    <a href="../ciphers/wallis-ciphers.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Wallis Ciphers</span>
+      <span class="related-card__tag">The English cryptanalyst who broke nomenclators a generation later</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/homophonic.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Homophonic Substitution</span>
+  </a>
+  <a href="../ciphers/wallis-ciphers.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Wallis Ciphers</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/substitution.html">Hall II: Classical Substitution</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall II · Substitution</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
