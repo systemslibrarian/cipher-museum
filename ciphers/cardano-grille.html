@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardano Grille (1550 · steganography by template) — The Cipher Museum</title>
+  <meta name="description" content="Girolamo Cardano's 1550 grille — a card with cut-out windows. Write the secret through the windows; fill the rest with innocuous text; the recipient overlays an identical grille to read.">
+  <meta property="og:title" content="Cardano Grille (1550 · steganography by template) — The Cipher Museum">
+  <meta property="og:description" content="Girolamo Cardano's 1550 grille — a card with cut-out windows. Write the secret through the windows; fill the rest with innocuous text; the recipient overlays an identical grille to read.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/cardano-grille.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cardano Grille (1550 · steganography by template) — The Cipher Museum">
+  <meta name="twitter:description" content="Girolamo Cardano's 1550 grille — a card with cut-out windows. Write the secret through the windows; fill the rest with innocuous text; the recipient overlays an identical grille to read.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/cardano-grille.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/transposition.html">Hall IV: The Transposition Hall</a><span>&rsaquo;</span>
+    Cardano Grille
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall IV · Transposition / Steganography</span>
+    <span class="badge era-renaissance">Italian Renaissance · 1550</span>
+    <span class="badge sec-weak">Weak (steganography, not encryption)</span>
+  </div>
+  <h1 class="page-title">Cardano Grille <span style="opacity:.6;font-weight:400;">1550 · steganography by template</span></h1>
+  <p class="page-tagline">A pierced card and an innocuous-looking letter: the recipient overlays an identical grille and reads the secret through the holes.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Girolamo Cardano, Italy</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1550 (<em>De Subtilitate</em>)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">The grille pattern (positions of the holes)</span></div>
+    <div class="fact"><span class="fact-label">Family</span><span class="fact-value">Steganography / hidden-text transposition</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Hiding a message ≠ encrypting a message</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="cardano-grille"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Cardano's grille is the second of his great cryptographic ideas — the first being the autokey. He proposed it in <em>De Subtilitate</em> (1550) as a method any literate person could use without algebra: cut a piece of stiff card with windows in irregular positions, write your secret one letter at a time through the windows onto the page beneath, then lift the grille away and fill the surrounding space with plausible-sounding prose.</p><p style="margin-top:1rem;">Variants and descendants of the grille remained in active espionage use into the twentieth century. The <strong>turning grille</strong> — a square card rotated through four positions to fill an N×N grid completely — was used by the German Army in the early years of WWI for tactical traffic, and broken by French and British analysts within months.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>The grille is a square card of side <em>N</em> with holes punched at agreed-upon positions. Sender and receiver each have an identical card. To encrypt:</p><ol><li>Place the grille over a blank N×N grid.</li><li>Write the secret letter-by-letter through the holes.</li><li>Lift the grille; fill the remaining cells with plausible filler (a poem, a shopping list, a love letter).</li></ol><p style="margin-top:1rem;">To decrypt, the recipient places their grille over the received grid in the same orientation and reads the letters visible through the holes.</p><p style="margin-top:1rem;">The demo on this page uses a key of the form <code>size:idx,idx,idx,…</code> — the grid side length followed by the zero-based positions of the holes. The default <code>5:0,3,7,12,19,21,24</code> places six holes in a 5×5 grid.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Capture the grille</div><div class="attack-diff">Complexity: A search of the office</div><p class="attack-desc">There is essentially no algorithm — the security rests entirely on the secrecy of the physical card. Once the card is photographed, copied, or stolen, every past and future message becomes readable.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Style mismatch</div><div class="attack-diff">Complexity: Easy with practice</div><p class="attack-desc">Convincing filler text is hard. A trained censor reading thousands of letters notices stilted phrasing, awkward grammar, and the distinctive cadence of grille-fill — and flags suspicious correspondence for closer inspection.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Brute-force the holes</div><div class="attack-diff">Complexity: Tractable for small grids</div><p class="attack-desc">For a 5×5 grid with 6 holes there are only C(25,6) ≈ 177,000 possible grille patterns. Try each, accept the one whose extracted letters spell English. The turning-grille variant raises the count enough to need cleverer tooling, but not enough to resist a determined cryptanalytic bureau.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><p>The Cardano grille is the cleanest historical example of <strong>steganography</strong> as distinct from cryptography: the goal is not to make the message unreadable, but to make the message <em>invisible</em>. Modern steganography (LSB embedding in images, DNS-tunnel exfiltration, Cicada 3301's OutGuess puzzles) is methodologically a direct descendant.</p><p style="margin-top:1rem;">The strategic lesson is also unchanged: stego buys you traffic-analysis resistance, not confidentiality. Anyone who suspects the channel and acquires the carrier method reads everything. Best practice today is to encrypt first and steganographically hide the ciphertext — belt and braces.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Girolamo Cardano, Italy</td></tr>
+            <tr><td>Year</td><td>1550 (<em>De Subtilitate</em>)</td></tr>
+            <tr><td>Key Type</td><td>The grille pattern (positions of the holes)</td></tr>
+            <tr><td>Family</td><td>Steganography / hidden-text transposition</td></tr>
+            <tr><td>Modern Lesson</td><td>Hiding a message ≠ encrypting a message</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/cardano-autokey.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cardano Autokey</span>
+      <span class="related-card__tag">Cardano's other 1550 invention</span>
+    </a>
+    <a href="../ciphers/cicada-3301.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cicada 3301</span>
+      <span class="related-card__tag">Modern steganography in PNG, PDF, MP3, and runic</span>
+    </a>
+    <a href="../ciphers/histiaeus-tattoo.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Histiaeus’s Tattooed Messenger</span>
+      <span class="related-card__tag">Steganography’s ancient ancestor</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/columnar.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Columnar Transposition</span>
+  </a>
+  <a href="../ciphers/double-transposition.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Double Transposition</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/transposition.html">Hall IV: The Transposition Hall</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall IV · Transposition</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -280,7 +280,7 @@
       defaultMsg: 'MEET ME AT MIDNIGHT',
       inputs: [{ type: 'text', id: 'keyword', label: 'Single Seed Letter', value: 'Q', placeholder: 'Q' }]
     },
-    'wheatstone-cryptograph': {
+    'wheatstone': {
       label: 'Wheatstone Cryptograph (1867)', engine: 'wheatstone',
       defaultMsg: 'TELEGRAPH SIGNAL',
       inputs: [{ type: 'text', id: 'keyword', label: 'Inner-Dial Keyword', value: 'WHEATSTONE', placeholder: 'Keyword…' }]
@@ -619,6 +619,41 @@
       { text: 'Rowlett, Frank. <em>The Story of Magic</em> (Purple predecessor context)', url: 'https://en.wikipedia.org/wiki/Japanese_diplomatic_cipher_machine' },
       { text: 'Kahn, David. <em>The Codebreakers</em>, Red/Purple transition chapters', url: 'https://en.wikipedia.org/wiki/Purple_(cipher_machine)' },
       { text: 'NSA CCH materials on SIS Japanese machine exploitation', url: 'https://www.nsa.gov/History/Cryptologic-History/' }
+    ],
+    affine: [
+      { text: 'Lyons, James. "Affine Cipher" — Practical Cryptography', url: 'https://practicalcryptography.com/ciphers/classical-era/affine/' },
+      { text: 'Stinson, Douglas. <em>Cryptography: Theory and Practice</em>, ch. 1 (modular arithmetic primer)', url: 'https://en.wikipedia.org/wiki/Affine_cipher' },
+      { text: 'Wikipedia — Affine cipher (key-space derivation)', url: 'https://en.wikipedia.org/wiki/Affine_cipher' }
+    ],
+    trithemius: [
+      { text: 'Trithemius, Johannes. <em>Polygraphia</em> (1518) — first printed cryptography book', url: 'https://en.wikipedia.org/wiki/Polygraphia_(book)' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 5 (Renaissance polyalphabetics)', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' },
+      { text: 'Practical Cryptography — Trithemius cipher', url: 'https://practicalcryptography.com/ciphers/classical-era/trithemius/' }
+    ],
+    cardanoAutokey: [
+      { text: 'Cardano, Girolamo. <em>De Subtilitate</em> (1550)', url: 'https://en.wikipedia.org/wiki/Gerolamo_Cardano' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 4 (Cardano and Vigenère)', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' },
+      { text: 'Wikipedia — Autokey cipher (history section)', url: 'https://en.wikipedia.org/wiki/Autokey_cipher' }
+    ],
+    wheatstone: [
+      { text: 'Wheatstone, Charles. <em>Cryptograph</em> — 1867 Paris Universal Exposition (described in Kahn)', url: 'https://en.wikipedia.org/wiki/Charles_Wheatstone#Cryptography' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 7 (Wheatstone &amp; Playfair)', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' },
+      { text: 'Crypto Museum — Cipher disks and dial machines', url: 'https://www.cryptomuseum.com/crypto/' }
+    ],
+    morse: [
+      { text: 'ITU-R Recommendation M.1677 — International Morse Code', url: 'https://www.itu.int/rec/R-REC-M.1677/' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 9 (telegraph &amp; code)', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' },
+      { text: 'Wikipedia — Morse code', url: 'https://en.wikipedia.org/wiki/Morse_code' }
+    ],
+    cardanoGrille: [
+      { text: 'Cardano, Girolamo. <em>De Subtilitate</em> (1550) — original grille proposal', url: 'https://en.wikipedia.org/wiki/Cardan_grille' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 4 (grilles &amp; turning grilles)', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' },
+      { text: 'Wikipedia — Grille (cryptography)', url: 'https://en.wikipedia.org/wiki/Grille_(cryptography)' }
+    ],
+    nullCipher: [
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 14 (concealment ciphers in WWII)', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' },
+      { text: 'Wikipedia — Null cipher', url: 'https://en.wikipedia.org/wiki/Null_cipher' },
+      { text: 'Stamatatos, Efstathios. "A Survey of Modern Authorship Attribution Methods" (2009) — statistical detection of constrained text', url: 'https://en.wikipedia.org/wiki/Stylometry' }
     ]
   };
 

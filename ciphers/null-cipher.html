@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Null Cipher (Concealment by selective reading · ancient → modern) — The Cipher Museum</title>
+  <meta name="description" content="The null cipher — hide the secret in plain sight by spelling it out with the first letters of an innocuous message. Used by spies, prisoners, and Bacon, since at least the Roman empire.">
+  <meta property="og:title" content="Null Cipher (Concealment by selective reading · ancient → modern) — The Cipher Museum">
+  <meta property="og:description" content="The null cipher — hide the secret in plain sight by spelling it out with the first letters of an innocuous message. Used by spies, prisoners, and Bacon, since at least the Roman empire.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/null-cipher.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Null Cipher (Concealment by selective reading · ancient → modern) — The Cipher Museum">
+  <meta name="twitter:description" content="The null cipher — hide the secret in plain sight by spelling it out with the first letters of an innocuous message. Used by spies, prisoners, and Bacon, since at least the Roman empire.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/null-cipher.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/transposition.html">Hall IV: The Transposition Hall</a><span>&rsaquo;</span>
+    Null Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall IV · Steganography</span>
+    <span class="badge era-ancient">Antiquity → present</span>
+    <span class="badge sec-weak">Weak (concealment, not encryption)</span>
+  </div>
+  <h1 class="page-title">Null Cipher <span style="opacity:.6;font-weight:400;">Concealment by selective reading · ancient → modern</span></h1>
+  <p class="page-tagline">Spell the secret with every Nth letter of every Mth word. Trivial when noticed; surprisingly hard to notice.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Roman & medieval correspondents</span></div>
+    <div class="fact"><span class="fact-label">Notable uses</span><span class="fact-value">Bacon's <em>Advancement of Learning</em>; WWII POW letters; spy classifieds</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Position rule — first/last letter, Nth letter, Nth word, …</span></div>
+    <div class="fact"><span class="fact-label">Family</span><span class="fact-value">Steganography (concealment cipher)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">A hidden message that nobody looks for is, briefly, secure</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="null-cipher"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The null cipher is older than any cipher recognised by name. Roman correspondents are documented hiding instructions in the first letters of innocuous-looking poems; medieval monks did the same in marginalia and acrostics; Renaissance humanists turned the technique into a literary game.</p><p style="margin-top:1rem;">Operationally it returned to prominence in the world wars. Allied and Axis prisoners both used null ciphers in censored letters home; the most-cited example is the German U-boat commander's letter that read, taking every fifth word, <em>FATHER IS DEAD</em> — a status report, not a bereavement notice. American POWs in Vietnam hid blink patterns and word-position nulls in propaganda interviews. Cold-war espionage frequently used newspaper classifieds as null carriers.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Pick a position rule. The simplest is <em>first letter of every word</em>:</p><pre>Carrier: <strong>H</strong>elp <strong>E</strong>very <strong>L</strong>ittle <strong>P</strong>up
+Hidden : H E L P</pre><p>The demo on this page builds carrier sentences from a dictionary of common English words and selects ones whose chosen letter matches the next character of your secret. Position keys it accepts:</p><ul><li><code>first</code> — first letter of each word (default)</li><li><code>last</code> — last letter of each word</li><li><code>2</code>, <code>3</code>, … — Nth letter of each word</li></ul><p style="margin-top:1rem;">When no real word fits a needed letter, the demo fabricates a plausible-looking filler so the round-trip always closes. In real use a writer would simply rewrite the carrier sentence around the constraint.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Suspicion plus the right reading rule</div><div class="attack-diff">Complexity: Trivial once you check</div><p class="attack-desc">Once a censor suspects a letter, they read the first letters, then the last letters, then every second letter, and so on. Within a few minutes any single-rule null cipher is exposed.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Statistical anomaly</div><div class="attack-diff">Complexity: Detectable on long carriers</div><p class="attack-desc">Because the carrier is constrained to spell something, its letter and word-length distributions drift away from natural English. Bletchley-era censors maintained statistical baselines for ordinary correspondence and flagged outliers.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><p>The null cipher is the ancestor of every <em>covert channel</em> in computer security: timing channels, DNS-tunnel exfiltration, image-LSB steganography, even the way malware hides in CDN traffic. The mechanism is unchanged from the Roman version — pick a carrier nobody will look at, encode the secret in a property of the carrier nobody will measure.</p><p style="margin-top:1rem;">The defensive lesson is also unchanged. Defenders cannot watch every field of every packet, so attackers have rich choices for where to hide. Best modern practice is to assume covert channels exist and to design protocols that minimise the bandwidth available for them — not to chase every clever new carrier.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Roman & medieval correspondents</td></tr>
+            <tr><td>Notable uses</td><td>Bacon's <em>Advancement of Learning</em>; WWII POW letters; spy classifieds</td></tr>
+            <tr><td>Key Type</td><td>Position rule — first/last letter, Nth letter, Nth word, …</td></tr>
+            <tr><td>Family</td><td>Steganography (concealment cipher)</td></tr>
+            <tr><td>Modern Lesson</td><td>A hidden message that nobody looks for is, briefly, secure</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/bacon.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Bacon's Cipher</span>
+      <span class="related-card__tag">Encodes a binary stream into typeface choice — a structured null cipher</span>
+    </a>
+    <a href="../ciphers/cardano-grille.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cardano Grille</span>
+      <span class="related-card__tag">The other classical concealment cipher</span>
+    </a>
+    <a href="../ciphers/cicada-3301.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cicada 3301</span>
+      <span class="related-card__tag">Modern null/stego puzzles in plain sight</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/cardano-grille.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Cardano Grille</span>
+  </a>
+  <a href="../ciphers/bacon.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Bacon's Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/transposition.html">Hall IV: The Transposition Hall</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall IV · Transposition</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

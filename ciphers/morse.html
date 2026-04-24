@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morse Code (Telegraphy's universal alphabet · 1840s) — The Cipher Museum</title>
+  <meta name="description" content="International Morse code — the dot-dash telegraph alphabet that made the wired world possible and provided the carrier signal for a century of military and amateur ciphers.">
+  <meta property="og:title" content="Morse Code (Telegraphy's universal alphabet · 1840s) — The Cipher Museum">
+  <meta property="og:description" content="International Morse code — the dot-dash telegraph alphabet that made the wired world possible and provided the carrier signal for a century of military and amateur ciphers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/morse.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Morse Code (Telegraphy's universal alphabet · 1840s) — The Cipher Museum">
+  <meta name="twitter:description" content="International Morse code — the dot-dash telegraph alphabet that made the wired world possible and provided the carrier signal for a century of military and amateur ciphers.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/morse.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a><span>&rsaquo;</span>
+    Morse Code
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall I · Telegraphy</span>
+    <span class="badge era-victorian">Telegraph age · 1840s →</span>
+    <span class="badge sec-broken">Encoding, not encryption</span>
+  </div>
+  <h1 class="page-title">Morse Code <span style="opacity:.6;font-weight:400;">Telegraphy's universal alphabet · 1840s</span></h1>
+  <p class="page-tagline">Strictly speaking, Morse is not a cipher — it is the encoding that nineteenth and twentieth-century ciphers were carried on top of.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Samuel F. B. Morse & Alfred Vail, USA</span></div>
+    <div class="fact"><span class="fact-label">First message</span><span class="fact-value">1844 — "What hath God wrought"</span></div>
+    <div class="fact"><span class="fact-label">International standard</span><span class="fact-value">1865 (Vienna)</span></div>
+    <div class="fact"><span class="fact-label">Carrier for</span><span class="fact-value">Vigenère, fractionated Morse, OTP, JN-25, …</span></div>
+    <div class="fact"><span class="fact-label">Modern role</span><span class="fact-value">Aviation idents, amateur radio, accessibility</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="morse"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Samuel Morse and Alfred Vail's 1840s telegraph code was the first widely deployed digital communication system in human history. It made instantaneous trans-continental signalling possible, redrew the map of finance and journalism, and — for cryptography — created the first universal medium that ciphered messages could ride on. International Morse, slightly different from Morse's original American code, was standardised in Vienna in 1865 and is the form taught and used today.</p><p style="margin-top:1rem;">From 1865 to roughly 2000, almost every cipher of military or diplomatic consequence was transmitted over a Morse-coded radio link: Vigenère traffic in the American Civil War, Zimmermann's telegram in 1917, Enigma over short-wave in the 1940s, JN-25 across the Pacific, OTP traffic for clandestine agents into the 1980s. The cipher and the encoding were always two distinct layers — and several twentieth-century cryptosystems (fractionated Morse, the Slidex code) deliberately exploited the encoding's structure.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Each letter, digit, and punctuation mark is assigned a unique sequence of dots and dashes. Within a character, elements are separated by one short gap; between characters by a longer gap; between words by a still longer gap (this demo uses <code>/</code> for the word break).</p><pre>SOS   = ... --- ...
+HELLO = .... . .-.. .-.. ---
+73    = --... ...--   (amateur-radio sign-off, "best regards")</pre><p style="margin-top:1rem;">The code is roughly optimised for English letter frequencies — E is a single dot, T is a single dash, common letters are short, rare letters long. This makes Morse one of the earliest examples of variable-length coding, predating Huffman by a century.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">It was never "broken" — it is a public encoding</div><div class="attack-diff">Complexity: Trivial (look up the table)</div><p class="attack-desc">Morse is not, and was never intended to be, a cipher. It is a public encoding designed for transmission efficiency and readability. The cryptographic question is always about the cipher running on top of Morse, not Morse itself.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Operator-fingerprinting</div><div class="attack-diff">Used for traffic analysis throughout WWII</div><p class="attack-desc">Skilled operators have a recognisable rhythm — their <em>fist</em>. Allied direction-finding stations could identify individual German operators by ear, track them as they moved between units, and reconstruct order-of-battle even when the underlying Enigma traffic remained unread. The encoding was public, but the human at the key was unique.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Morse-era idea</th><th>Modern echo</th></tr></thead><tbody><tr><td>Encoding ≠ encryption</td><td>Base64, hex, ASCII vs. ChaCha20 — same distinction</td></tr><tr><td>Variable-length symbols</td><td>Huffman coding, gzip, JPEG entropy stages</td></tr><tr><td>Layered transport</td><td>TLS-over-TCP-over-IP — separate concerns at each layer</td></tr><tr><td>Side-channel: operator fist</td><td>Modern timing attacks, keystroke fingerprinting</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Samuel F. B. Morse & Alfred Vail, USA</td></tr>
+            <tr><td>First message</td><td>1844 — "What hath God wrought"</td></tr>
+            <tr><td>International standard</td><td>1865 (Vienna)</td></tr>
+            <tr><td>Carrier for</td><td>Vigenère, fractionated Morse, OTP, JN-25, …</td></tr>
+            <tr><td>Modern role</td><td>Aviation idents, amateur radio, accessibility</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/fractionated-morse.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Fractionated Morse</span>
+      <span class="related-card__tag">Splits each Morse symbol across columns — actual cipher, not just encoding</span>
+    </a>
+    <a href="../ciphers/vernam.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Vernam (1917)</span>
+      <span class="related-card__tag">Combined a Morse-driven punched-tape keystream with the Baudot teleprinter</span>
+    </a>
+    <a href="../ciphers/navajo-code-talkers.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Navajo Code Talkers</span>
+      <span class="related-card__tag">Replaced the public Morse alphabet with a private spoken one</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/rosetta-stone.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Rosetta Stone</span>
+  </a>
+  <a href="../ciphers/histiaeus-tattoo.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Histiaeus’s Tattooed Messenger</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall I · World Origins</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

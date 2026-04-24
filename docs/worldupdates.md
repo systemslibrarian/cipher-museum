@@ -4,19 +4,19 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 60 done / 171 total (35.1%)
+- Overall: 67 done / 171 total (39.2%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
 - Phase 2 (Hall XII creation): 16/26
 - Phase 3 (Pacific theater): 2/3
 - Phase 4 (WWII/interwar machines): 1/9
-- Phase 5 (European gaps): 1/10
+- Phase 5 (European gaps): 5/10
 - Phase 6 (East Asia/global): 0/4
-- Phase 7 (Americana/cultural): 0/4
+- Phase 7 (Americana/cultural): 1/4
 - Phase 8 (global underground traditions): 0/10
 - Phase 9 (Hall XIII creation + cultural): 5/14
-- Phase 10 (generic techniques - 2 new + 3 upgrades): 0/5
+- Phase 10 (generic techniques - 2 new + 3 upgrades): 1/5
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 0/10
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 0/15
 - Phase 13 (global integration): 7/40
@@ -29,7 +29,8 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24: Phase 0 + 0.5 complete; Hall I renamed.
 - 2026-04-24: Engines kamaSutra + aeneasTacticus added; demo CONFIGS for kama-sutra/aeneas-tacticus/arabic-nomenclators registered.
 - 2026-04-24: Created Hall I exhibits: kama-sutra.html, aeneas-tacticus.html, arabic-nomenclators.html.
-- 2026-04-24: Reconciliation pass: confirmed many Round 3 exhibits already shipped on disk. Checklist updated to match disk reality. Test fixes: ENGINE_PROFILES filled for affine/jn25/redTypeA; cipher pages count target raised from 82 to 84. All 6 test suites green (380+238+513+364+1140+345 = 2,980 assertions).
+- 2026-04-24: Reconciliation pass: confirmed many Round 3 exhibits already shipped on disk. Checklist updated to match disk reality. Test fixes: ENGINE_PROFILES filled for affine/jn25/redTypeA; cipher pages count target raised from 82 to 84. All 6 test suites green.
+- 2026-04-24: Phase 5/7/10 batch — added 7 engines (affine, trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher) with full ENGINE_PROFILES + SOURCES wiring; built 7 exhibit pages (affine.html, trithemius.html, cardano-autokey.html, wheatstone.html, morse.html, cardano-grille.html, null-cipher.html) via scripts/build-phase5-pages.py. All 6 test suites green (564 + 387 + 238 + 1210 + 366 + 406 = 3,171 assertions). Cipher-pages count target 84 → 91.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -105,13 +106,13 @@ Updated after every commit. Source of truth for completion status.
 - [ ] Fish-family side panel on Geheimschreiber page
 
 ## Phase 5 - Missing European classical and polyalphabetic gaps
-- [ ] Exhibit: Trithemius - spec, engine, page, tests, registered
-- [ ] Exhibit: Cardano Autokey - spec, engine, page, tests, registered
-- [x] Exhibit: Affine - spec, engine, page, tests, registered (engine + ENGINE_PROFILES)
-- [ ] Exhibit: Wheatstone Cryptograph - spec, engine, page, tests, registered
+- [x] Exhibit: Trithemius - engine, page, tests, registered
+- [x] Exhibit: Cardano Autokey - engine, page, tests, registered
+- [x] Exhibit: Affine - engine, page, tests, registered
+- [x] Exhibit: Wheatstone Cryptograph - engine, page, tests, registered
 - [ ] Exhibit: Argenti Family - spec, engine, page, tests, registered
 - [ ] Exhibit: Wallis Ciphers - spec, engine, page, tests, registered
-- [ ] Exhibit: Morse Code - spec, engine/audio, page, tests, registered
+- [x] Exhibit: Morse Code - engine, page, tests, registered (audio Track B deferred)
 - [ ] Morse side panels: Voyager Golden Record + Morse+Cipher Combination
 - [ ] Exhibit: Mary Stuart Castelnau Letters - spec, page, Track B viewer
 - [ ] Exhibit: Patterson Cipher for Jefferson - spec, page, Track B viewer
@@ -125,7 +126,7 @@ Updated after every commit. Source of truth for completion status.
 ## Phase 7 - Americana and cultural additions
 - [ ] Exhibit: Culper Ring / Tallmadge - spec, engine, page, tests, registered
 - [ ] Exhibit: Arnold-Andre - spec, engine, page, tests, registered
-- [ ] Exhibit: Cardano Grille - spec, engine, page, tests, registered
+- [x] Exhibit: Cardano Grille - engine, page, tests, registered
 - [ ] Hall VI rename decision (if warranted) confirmed
 
 ## Phase 8 - Additional global and underground traditions
@@ -160,7 +161,7 @@ Updated after every commit. Source of truth for completion status.
 - [SKIP - already shipped] Nomenclator-generic
 - [SKIP - already shipped] Book-cipher-generic
 - [SKIP - already shipped] Autokey-generic
-- [ ] Exhibit: Null Cipher-generic - spec, engine, page, tests, registered
+- [x] Exhibit: Null Cipher-generic - engine, page, tests, registered
 - [ ] Exhibit: Microdot Steganography - spec, engine, page, tests, registered
 
 ## Phase 11 - Context / situation + modern cryptography foundations

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trithemius Progressive Cipher (Steganographia · 1518) — The Cipher Museum</title>
+  <meta name="description" content="Johannes Trithemius's progressive shift cipher (Polygraphia, 1518) — the first published polyalphabetic, where every successive letter is shifted one further than the last.">
+  <meta property="og:title" content="Trithemius Progressive Cipher (Steganographia · 1518) — The Cipher Museum">
+  <meta property="og:description" content="Johannes Trithemius's progressive shift cipher (Polygraphia, 1518) — the first published polyalphabetic, where every successive letter is shifted one further than the last.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/trithemius.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Trithemius Progressive Cipher (Steganographia · 1518) — The Cipher Museum">
+  <meta name="twitter:description" content="Johannes Trithemius's progressive shift cipher (Polygraphia, 1518) — the first published polyalphabetic, where every successive letter is shifted one further than the last.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/trithemius.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/polyalphabetic.html">Hall III: The Polyalphabetic Era</a><span>&rsaquo;</span>
+    Trithemius Progressive Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall III · Polyalphabetic</span>
+    <span class="badge era-renaissance">German Renaissance · 1518</span>
+    <span class="badge sec-broken">Easy</span>
+  </div>
+  <h1 class="page-title">Trithemius Progressive Cipher <span style="opacity:.6;font-weight:400;">Steganographia · 1518</span></h1>
+  <p class="page-tagline">The first published polyalphabetic cipher: a tabula recta with every letter advanced by one more shift than the last.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Johannes Trithemius, abbot of Sponheim</span></div>
+    <div class="fact"><span class="fact-label">Published</span><span class="fact-value"><em>Polygraphia</em>, 1518 (posthumous)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Optional starting offset only</span></div>
+    <div class="fact"><span class="fact-label">Significance</span><span class="fact-value">Introduced the tabula recta to Europe</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">A predictable keystream is barely a keystream</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="trithemius"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Johannes Trithemius (1462–1516) was a Benedictine abbot, occult scholar, and one of the most consequential cryptographers of the German Renaissance. His <em>Steganographia</em> (written ~1499, published 1606) disguised a cipher manual as a book of angel-summoning magic; his <em>Polygraphia</em> (1518) was the first printed book on cryptography in the West. The progressive cipher described here appears in <em>Polygraphia</em>'s opening tables.</p><p style="margin-top:1rem;">Trithemius's contribution was structural, not numerical. By writing 26 successively-shifted alphabets in a square — the <strong>tabula recta</strong> — he made the polyalphabetic principle visible: each letter could be enciphered by a different alphabet. Belaso (1553) and Vigenère (1586) added the keyword on top of Trithemius's table.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Encrypt the first letter with shift 0, the second with shift 1, the third with shift 2, and so on. The keystream is just the position counter:</p><pre>Plain:  S T E G A N O G R A P H I A
+Shift:  0 1 2 3 4 5 6 7 8 9 10 11 12 13
+Cipher: S U G J E S U N Z J Z S U N</pre><p style="margin-top:1rem;">The optional starting offset simply moves the counter's origin. There is no keyword. The system is <em>polyalphabetic</em> in form — every letter uses a different alphabet — but the alphabet sequence is public knowledge, so it offers no real secrecy.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Try 26 starting offsets</div><div class="attack-diff">Complexity: Trivial</div><p class="attack-desc">Because the keystream is fixed and public, the only secret is the starting position. Twenty-six guesses recover the plaintext — Caesar-grade work.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Frequency drift</div><div class="attack-diff">Complexity: Easy on long messages</div><p class="attack-desc">After 26 letters the shifts wrap around and a 26-period structure emerges. Splitting the ciphertext into 26 columns and frequency-analysing each one yields the offset.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><p>Trithemius is the proof-of-concept that a single ciphertext letter need not always come from the same alphabet. That single idea unlocks Vigenère, Beaufort, Porta, the Jefferson disk, the Bazeries cylinder, the M-94, the Hagelin lug-and-pin family, and ultimately the rotor machines (Enigma, SIGABA, Typex). Every twentieth-century mechanical cipher is a descendant of Trithemius's table.</p><p style="margin-top:1rem;">The flaw — a public, predictable keystream — is also the lesson. Modern stream ciphers (RC4, ChaCha20) are <em>polyalphabetic</em> in exactly Trithemius's sense, but their keystreams are pseudorandom outputs of a keyed PRF. Same architecture, immensely larger key.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Johannes Trithemius, abbot of Sponheim</td></tr>
+            <tr><td>Published</td><td><em>Polygraphia</em>, 1518 (posthumous)</td></tr>
+            <tr><td>Key Type</td><td>Optional starting offset only</td></tr>
+            <tr><td>Significance</td><td>Introduced the tabula recta to Europe</td></tr>
+            <tr><td>Modern Lesson</td><td>A predictable keystream is barely a keystream</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Vigenère Cipher</span>
+      <span class="related-card__tag">Adds a keyword on top of Trithemius's table</span>
+    </a>
+    <a href="../ciphers/alberti-disk.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Alberti Disk</span>
+      <span class="related-card__tag">The earlier mechanical polyalphabetic ancestor</span>
+    </a>
+    <a href="../ciphers/beaufort.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Beaufort</span>
+      <span class="related-card__tag">A self-reciprocal variant of the same family</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/alberti-disk.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Alberti Disk</span>
+  </a>
+  <a href="../ciphers/vigenere.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Vigenère Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/polyalphabetic.html">Hall III: The Polyalphabetic Era</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall III · Polyalphabetic</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affine Cipher (E(x) = a·x + b mod 26) — The Cipher Museum</title>
+  <meta name="description" content="The affine cipher — a single linear formula E(x)=a·x+b mod 26 that generalises Caesar (a=1) and Atbash (a=25, b=25). Just 312 keys; trivially broken.">
+  <meta property="og:title" content="Affine Cipher (E(x) = a·x + b mod 26) — The Cipher Museum">
+  <meta property="og:description" content="The affine cipher — a single linear formula E(x)=a·x+b mod 26 that generalises Caesar (a=1) and Atbash (a=25, b=25). Just 312 keys; trivially broken.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/affine.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Affine Cipher (E(x) = a·x + b mod 26) — The Cipher Museum">
+  <meta name="twitter:description" content="The affine cipher — a single linear formula E(x)=a·x+b mod 26 that generalises Caesar (a=1) and Atbash (a=25, b=25). Just 312 keys; trivially broken.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/affine.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: The Substitution Hall</a><span>&rsaquo;</span>
+    Affine Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall II · Substitution</span>
+    <span class="badge era-ancient">Antiquity → 1800s · math-age</span>
+    <span class="badge sec-broken">Trivial</span>
+  </div>
+  <h1 class="page-title">Affine Cipher <span style="opacity:.6;font-weight:400;">E(x) = a·x + b mod 26</span></h1>
+  <p class="page-tagline">A single linear formula generalises Caesar, Atbash, and ROT13 — and is broken by counting how often E appears.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Generalisation of Roman shift ciphers</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Formalised 19th c. (used informally far earlier)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Pair (a,b) — a coprime to 26 → 12·26 = 312 keys</span></div>
+    <div class="fact"><span class="fact-label">Property</span><span class="fact-value">Caesar = a·1+b; Atbash = a·25+b·25</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Linearity is fatal to security</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="affine"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The affine cipher does not have a single named inventor. It is the natural mathematical generalisation of every shift-style cipher humans have improvised since antiquity: pick a multiplier <em>a</em>, pick an offset <em>b</em>, and replace each letter x with a·x+b mod 26. Caesar is the special case a=1; Atbash is a=25, b=25; ROT13 is a=1, b=13. Once nineteenth-century mathematicians wrote cryptography in algebraic notation, all of these collapsed into one formula.</p><p style="margin-top:1rem;">The affine cipher is mostly a teaching cipher today. It is the smallest cipher whose key has more than one component, which makes it the cleanest place to introduce the ideas of <em>key space</em>, <em>modular inverses</em>, and the requirement that <em>a</em> and 26 be coprime.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Number the alphabet A=0, B=1, …, Z=25. Pick two integers <em>a</em> and <em>b</em>. Encryption is</p><pre>E(x) = (a·x + b) mod 26</pre><p>Decryption uses the modular inverse of <em>a</em>:</p><pre>D(y) = a⁻¹·(y - b) mod 26</pre><p style="margin-top:1rem;"><strong>Critical constraint:</strong> <em>a</em> must be coprime to 26 (no shared factor with 26 = 2·13). Only twelve values of <em>a</em> qualify: <code>1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25</code>. Pair each with one of 26 offsets and you get 12·26 = 312 keys — small enough to brute-force by hand.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Brute force</div><div class="attack-diff">Complexity: Trivial (312 keys)</div><p class="attack-desc">Try all 312 (a, b) pairs and pick the decryption that looks like English. A modern laptop does this in microseconds; an attentive teenager does it in an afternoon.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Frequency analysis</div><div class="attack-diff">Complexity: Trivial (any monoalphabetic substitution)</div><p class="attack-desc">Affine is a monoalphabetic substitution: each plaintext letter always maps to the same ciphertext letter. Letter frequencies survive intact, so the methods al-Kindi described in the ninth century apply unchanged.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Affine concept</th><th>Modern echo</th></tr></thead><tbody><tr><td>Coprime requirement on <em>a</em></td><td>RSA's coprime requirement on the public exponent <em>e</em></td></tr><tr><td>Linear transformation in mod 26</td><td>The Hill cipher generalises this to matrix multiplication</td></tr><tr><td>Tiny key space</td><td>The reason modern keys are 128–256 bits, not 9 bits</td></tr><tr><td>Linearity = trivially invertible</td><td>Modern primitives deliberately add non-linear S-boxes</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Origin</td><td>Generalisation of Roman shift ciphers</td></tr>
+            <tr><td>Year</td><td>Formalised 19th c. (used informally far earlier)</td></tr>
+            <tr><td>Key Type</td><td>Pair (a,b) — a coprime to 26 → 12·26 = 312 keys</td></tr>
+            <tr><td>Property</td><td>Caesar = a·1+b; Atbash = a·25+b·25</td></tr>
+            <tr><td>Modern Lesson</td><td>Linearity is fatal to security</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/caesar.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Caesar Cipher</span>
+      <span class="related-card__tag">The affine cipher with a=1</span>
+    </a>
+    <a href="../ciphers/atbash.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Atbash</span>
+      <span class="related-card__tag">The affine cipher with a=25, b=25</span>
+    </a>
+    <a href="../ciphers/hill.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Hill Cipher</span>
+      <span class="related-card__tag">Generalises affine to matrices</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/monoalphabetic.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Monoalphabetic</span>
+  </a>
+  <a href="../ciphers/homophonic.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Homophonic</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/substitution.html">Hall II: The Substitution Hall</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall II · Substitution</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

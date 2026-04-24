@@ -7,7 +7,7 @@
 
 ---
 
-## Status Snapshot — 45 / 171 (26.3%)
+## Status Snapshot — 67 / 171 (39.2%)
 
 | Phase | Title | Done / Total | Status |
 |------:|-------|------------:|--------|
@@ -17,12 +17,12 @@
 | 2     | Hall XII: Unsolved Ciphers | 10/26 | 🟡 In progress |
 | 3     | Pacific Theater | 3/3 | ✅ Complete |
 | 4     | WWII / Interwar Machines | 0/9 | ⬜ Not started |
-| 5     | European Classical Gaps | 0/10 | ⬜ Not started |
+| 5     | European Classical Gaps | 5/10 | 🟡 In progress |
 | 6     | East Asia & Telegraphy | 0/4 | ⬜ Not started |
-| 7     | Americana & Cultural | 0/4 | ⬜ Not started |
+| 7     | Americana & Cultural | 1/4 | 🟡 In progress |
 | 8     | Global Underground Traditions | 0/10 | ⬜ Not started |
 | 9     | Hall XIII: Ciphers in Culture | 3/14 | 🟡 In progress |
-| 10    | Generic Techniques | 0/5 (3 SKIPPED — already shipped) | ⬜ 0/2 active |
+| 10    | Generic Techniques | 1/5 (3 SKIPPED — already shipped) | 🟡 1/2 active |
 | 11    | Context + Modern Foundations | 0/10 | ⬜ Not started |
 | 12    | Hall X Biographies | 0/15 (5 SKIPPED — already shipped) | ⬜ 0/10 active |
 | 13    | Global Integration | 7/40 | 🟡 In progress |
@@ -35,20 +35,16 @@
 
 ## Active Work
 
-**Currently building:** Phase 5 (European classical gaps) — starting with Affine cipher (smallest, cleanest Track A).
+**Currently building:** Phase 5 (European classical gaps) and Phase 7/10 stego — 7 exhibit pages just shipped: Affine, Trithemius, Cardano Autokey, Wheatstone, Morse, Cardano Grille, Null Cipher.
 
-Phase 4 (WWII machines) and Phase 5 (European classical) are both 0% started. Phase 5 is tackled first because it has more small, well-bounded Track A exhibits with high pedagogical density.
+Next on deck: Argenti Family, Wallis, Mary Stuart Castelnau Letters (Track B), Patterson’s Cipher for Jefferson (Track B), then Phase 4 WWII machines (Fialka, KL-7, Geheimschreiber, Kryha, M-94/M-138-A).
 
-Build order within Phase 5:
-1. ⬜ **Affine** ← in progress
-2. ⬜ Trithemius
-3. ⬜ Cardano Autokey
-4. ⬜ Wheatstone Cryptograph
-5. ⬜ Argenti Family
-6. ⬜ Wallis Ciphers
-7. ⬜ Morse Code (with audio + Voyager / Morse-Cipher side panels)
-8. ⬜ Mary Stuart Castelnau Letters (Track B)
-9. ⬜ Patterson's Cipher for Jefferson (Track B)
+Build order within Phase 5 (remaining):
+1. ⬜ Argenti Family
+2. ⬜ Wallis Ciphers
+3. ⬜ Mary Stuart Castelnau Letters (Track B)
+4. ⬜ Patterson's Cipher for Jefferson (Track B)
+5. ⬜ Morse audio + Voyager / Morse-Cipher side panels
 
 ---
 

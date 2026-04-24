@@ -65,7 +65,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 84', allPages.length === 84, `actual=${allPages.length}`);
+ok('Cipher pages count is 91', allPages.length === 91, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
