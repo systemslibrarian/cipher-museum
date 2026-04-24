@@ -4,22 +4,22 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 16 done / 171 total (9.4%)
+- Overall: 24 done / 171 total (14.0%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 4/10
-- Phase 2 (Hall XII creation): 0/26
+- Phase 2 (Hall XII creation): 1/26
 - Phase 3 (Pacific theater): 0/3
 - Phase 4 (WWII/interwar machines): 0/9
 - Phase 5 (European gaps): 0/10
 - Phase 6 (East Asia/global): 0/4
 - Phase 7 (Americana/cultural): 0/4
 - Phase 8 (global underground traditions): 0/10
-- Phase 9 (Hall XIII creation + cultural): 0/14
+- Phase 9 (Hall XIII creation + cultural): 1/14
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 0/5
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 0/10
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 0/15
-- Phase 13 (global integration): 1/40
+- Phase 13 (global integration): 7/40
 - Phase 15 (artifact cards): 0/8
 - Phase 16 (research/catalog mode - audit-gated): 0/6
 - Phase 17 (cipher detective): 0/9
@@ -57,7 +57,7 @@ Updated after every commit. Source of truth for completion status.
 - [UPGRADE] Shipped ciphers/scytale.html with revisionist sidebar
 
 ## Phase 2 - Hall XII creation: Unsolved Ciphers
-- [ ] halls/unsolved.html created
+- [x] halls/unsolved.html created
 - [UPGRADE] Voynich moved to Hall XII (breadcrumb updated)
 - [UPGRADE] Kryptos moved to Hall XII (breadcrumb updated)
 - [UPGRADE] Beale Ciphers moved to Hall XII (breadcrumb updated)
@@ -125,7 +125,7 @@ Updated after every commit. Source of truth for completion status.
 - [ ] Cambridge Five side panel added to VENONA biography context
 
 ## Phase 9 - Hall XIII creation: Ciphers in Culture
-- [ ] halls/culture.html created with cultural framing
+- [x] halls/culture.html created with cultural framing
 - [UPGRADE] Gold-Bug moved to Hall XIII
 - [ ] Dancing Men moved to Hall XIII (new page expected)
 - [ ] Exhibit: Da Vinci Code - spec, engine, page, tests, registered
@@ -180,8 +180,8 @@ Updated after every commit. Source of truth for completion status.
 
 ## Phase 13 - Global integration
 - [ ] museum-map.html complete cipher index updated with all new exhibits
-- [ ] museum-map.html Hall XII and Hall XIII added to floor-plan graphic
-- [ ] museum-map.html subtitle and footer count updated
+- [x] museum-map.html Hall XII and Hall XIII added to floor-plan graphic
+- [x] museum-map.html subtitle and footer count updated
 - [ ] timeline.html year markers added for every new exhibit
 - [ ] timeline.html new era anchors added (Egyptian, India, Phaistos, Histiaeus)
 - [ ] timeline.html six-stage evolution strip preserved
@@ -190,14 +190,14 @@ Updated after every commit. Source of truth for completion status.
 - [ ] cipher-flow.html family map updated with new families
 - [ ] search.html search index rebuilt for all new items
 - [ ] tours/ optional new Hall XII/Hall XIII themed tour
-- [ ] index.html hero counts updated (about 113 ciphers, 13 halls)
+- [x] index.html hero counts updated (about 113 ciphers, 13 halls)
 - [ ] index.html featured ciphers refreshed (include Hall XII and Hall XIII)
 - [ ] index.html playground dropdown updated for new simple ciphers
 - [ ] index.html footer version bumped to v3.0.0 Global Expansion
-- [ ] README.md hall table regenerated with Hall XII and Hall XIII
-- [ ] README.md count references updated (63->about 113, 11->13)
+- [x] README.md hall table regenerated with Hall XII and Hall XIII
+- [x] README.md count references updated (63->about 113, 11->13)
 - [ ] README.md demo roster expanded with new Track A exhibits
-- [ ] sitemap.xml all new URLs added
+- [x] sitemap.xml all new URLs added
 - [ ] learn.html cross-links to new exhibits added (if page remains in scope)
 - [ ] cryptanalysis.html techniques extended if introduced
 - [ ] All hall pages updated from Hall X of Y to of 13

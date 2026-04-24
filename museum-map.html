@@ -4,14 +4,14 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Museum Map — The Cipher Museum</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <meta name="description" content="Navigate all 10 exhibit halls and 52 cipher exhibits in The Cipher Museum. Find your next cryptographic adventure.">
+    <meta name="description" content="Navigate all 13 exhibit halls and 69 cipher exhibits in The Cipher Museum. Find your next cryptographic adventure.">
   <meta property="og:title" content="Museum Map — The Cipher Museum">
-  <meta property="og:description" content="Navigate all 10 exhibit halls and 52 cipher exhibits in The Cipher Museum. Find your next cryptographic adventure.">
+  <meta property="og:description" content="Navigate all 13 exhibit halls and 69 cipher exhibits in The Cipher Museum. Find your next cryptographic adventure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/museum-map.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Museum Map — The Cipher Museum">
-  <meta name="twitter:description" content="Navigate all 10 exhibit halls and 52 cipher exhibits in The Cipher Museum. Find your next cryptographic adventure.">
+  <meta name="twitter:description" content="Navigate all 13 exhibit halls and 69 cipher exhibits in The Cipher Museum. Find your next cryptographic adventure.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/museum-map.html">
   <link rel="stylesheet" href="css/museum.css">
@@ -78,7 +78,7 @@
   <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Museum Map</div>
   <span class="page-eyebrow">Your Guide to the Collection</span>
   <h1 class="page-title">Museum Map</h1>
-  <p class="page-tagline">11 halls, 63 exhibits, one continuous story: how humanity learned to keep secrets</p>
+  <p class="page-tagline">13 halls, 69 exhibits, one continuous story: how humanity learned to keep secrets</p>
 </div>
 
 <!-- ───────── SUGGESTED ROUTE ───────── -->
@@ -99,7 +99,7 @@
     <p class="section-sub">Click any hall or exhibit to enter. Your last-visited hall is highlighted.</p>
   </div>
 
-  <div class="bldg" role="region" aria-label="Interactive museum floor plan showing 11 halls, special exhibitions, and modern cryptography wing">
+  <div class="bldg" role="region" aria-label="Interactive museum floor plan showing 13 halls, special exhibitions, and modern cryptography wing">
 
     <!-- ── Entrance Portico ── -->
     <a href="index.html" class="bldg-entrance" data-hall-id="entrance">
@@ -314,6 +314,31 @@
           </div>
         </a>
       </div>
+      <div class="bldg-wing-rooms bldg-wing-rooms--duo" style="margin-top:1rem;">
+        <a href="halls/unsolved.html" class="bldg-room bldg-room--special" data-hall-id="unsolved" data-color="#C8945A" style="border-top:2px solid #C8945A">
+          <div class="bldg-room-num">XII</div>
+          <div class="bldg-room-name">Unsolved Ciphers</div>
+          <div class="bldg-room-era">~1700 BCE – Present</div>
+          <div class="bldg-room-exhibits">
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/voynich.html">Voynich</a></span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/kryptos.html">Kryptos K4</a></span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/beale.html">Beale</a></span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/dorabella.html">Dorabella</a></span>
+            <span>+ Phaistos · Shugborough · D'Agapeyeff · Somerton · McCormick · Z-13/Z-32</span>
+          </div>
+        </a>
+        <div class="bldg-door" aria-hidden="true"><span></span></div>
+        <a href="halls/culture.html" class="bldg-room bldg-room--special" data-hall-id="culture" data-color="#7FA8C8" style="border-top:2px solid #7FA8C8">
+          <div class="bldg-room-num">XIII</div>
+          <div class="bldg-room-name">Cipher Culture</div>
+          <div class="bldg-room-era">pre-79 CE – Present</div>
+          <div class="bldg-room-exhibits">
+            <span><span class="fp-marker-dot">●</span> Bach motif · Dancing Men · Gold-Bug</span>
+            <span><span class="fp-marker-dot">●</span> Cicada 3301 · ARG ciphers · MIT Mystery Hunt</span>
+            <span><span class="fp-marker-dot">●</span> Sator Square · Freemason pigpen tradition</span>
+          </div>
+        </a>
+      </div>
     </div>
 
     <!-- Compass + Legend -->
@@ -429,7 +454,7 @@
       <li><a href="cryptanalysis.html">Cryptanalysis Techniques</a></li><li><a href="modern.html">Modern Cryptography</a></li></ul></div>
     <div><div class="footer-col-title">GitHub</div><ul class="footer-links"><li><a href="https://github.com/systemslibrarian/cipher-museum">Repository</a></li><li><a href="https://github.com/systemslibrarian/cipher-museum/blob/main/README.md">README</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">63 exhibits · 11 halls</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">69 exhibits · 13 halls</span></div>
 </footer>
 <script src="js/nav.js" defer></script>
 <script>
@@ -458,7 +483,8 @@
   if(ref){
     var MAP = {ancient:'ancient',substitution:'substitution',polyalphabetic:'polyalphabetic',
       transposition:'transposition',military:'military','civil-war':'civil-war',
-      machines:'machines',puzzle:'puzzle',unbreakable:'unbreakable',codebreakers:'codebreakers'};
+      machines:'machines',puzzle:'puzzle',unbreakable:'unbreakable',codebreakers:'codebreakers',
+      'modern-crypto':'modern-crypto',unsolved:'unsolved',culture:'culture'};
     Object.keys(MAP).forEach(function(k){
       if(ref.indexOf('/halls/'+k+'.html')!==-1){
         try{ localStorage.setItem(KEY, MAP[k]); }catch(e){}

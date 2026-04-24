@@ -19,7 +19,16 @@
   <url><loc>https://ciphermuseum.com/halls/puzzle.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/halls/unbreakable.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/halls/codebreakers.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ciphermuseum.com/halls/modern-crypto.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ciphermuseum.com/halls/unsolved.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ciphermuseum.com/halls/culture.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <!-- Cipher Exhibits -->
+  <url><loc>https://ciphermuseum.com/ciphers/egyptian-substitution.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/rosetta-stone.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/histiaeus-tattoo.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/aeneas-tacticus.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/kama-sutra.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/arabic-nomenclators.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/scytale.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/caesar.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/polybius.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>

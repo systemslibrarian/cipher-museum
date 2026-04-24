@@ -4,7 +4,7 @@
 
 Exploring the history and evolution of cryptography — from classical ciphers to modern secure systems.
 
-An open-source, interactive educational website spanning **63 historically important ciphers** across **11 exhibit halls** — from the Spartan scytale in 500 BC to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
+An open-source, interactive educational website spanning **69 historically important ciphers** across **13 exhibit halls** — from the Khnumhotep tomb at Beni Hasan (~1900 BCE) to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo (or, for unsolved and visualization-only exhibits, a hand-built widget). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
 
 **[Live Site →](https://ciphermuseum.com)**
 
@@ -25,11 +25,11 @@ An open-source, interactive educational website spanning **63 historically impor
 
 ## ✨ Features
 
-### 🗺️ Eleven Exhibit Halls · 63 Ciphers
+### 🗺️ Thirteen Exhibit Halls · 69 Ciphers
 
 | Hall | Title | Ciphers |
 |------|-------|---------|
-| [I](halls/ancient.html) | Birth of Cryptography | [Scytale](ciphers/scytale.html), [Caesar](ciphers/caesar.html), [Atbash](ciphers/atbash.html), [ROT13](ciphers/rot13.html), [Polybius](ciphers/polybius.html) |
+| [I](halls/ancient.html) | World Origins of Cryptography | [Egyptian Substitution](ciphers/egyptian-substitution.html), [Rosetta Stone](ciphers/rosetta-stone.html), [Histiaeus's Tattoo](ciphers/histiaeus-tattoo.html), [Scytale](ciphers/scytale.html), [Aeneas Tacticus](ciphers/aeneas-tacticus.html), [Caesar](ciphers/caesar.html), [Atbash](ciphers/atbash.html), [Kama Sutra](ciphers/kama-sutra.html), [Polybius](ciphers/polybius.html), [Arabic Nomenclators](ciphers/arabic-nomenclators.html), [ROT13](ciphers/rot13.html) |
 | [II](halls/substitution.html) | Classical Substitution | [Monoalphabetic](ciphers/monoalphabetic.html), [Nomenclator](ciphers/nomenclator.html), [Babington](ciphers/babington.html), [Homophonic](ciphers/homophonic.html), [Great Cipher](ciphers/great-cipher.html), [Playfair](ciphers/playfair.html), [Four-Square](ciphers/four-square.html), [Two-Square](ciphers/two-square.html), [Hill](ciphers/hill.html) |
 | [III](halls/polyalphabetic.html) | Polyalphabetic Revolution | [Alberti Disk](ciphers/alberti-disk.html), [Vigenère](ciphers/vigenere.html), [Porta](ciphers/porta.html), [Gronsfeld](ciphers/gronsfeld.html), [Beaufort](ciphers/beaufort.html), [Running Key](ciphers/running-key.html), [Autokey](ciphers/autokey.html) |
 | [IV](halls/transposition.html) | Transposition & Fractionation | [Rail Fence](ciphers/rail-fence.html), [Columnar](ciphers/columnar.html), [Double Transposition](ciphers/double-transposition.html), [Bifid](ciphers/bifid.html), [Trifid](ciphers/trifid.html), [ADFGX](ciphers/adfgx.html), [ADFGVX](ciphers/adfgvx.html), [Fractionated Morse](ciphers/fractionated-morse.html) |
@@ -40,6 +40,8 @@ An open-source, interactive educational website spanning **63 historically impor
 | [IX](halls/unbreakable.html) | The Unbreakable | [One-Time Pad](ciphers/one-time-pad.html), [Vernam](ciphers/vernam.html), [Solitaire / Pontifex](ciphers/solitaire.html) |
 | [X](halls/codebreakers.html) | Hall of Codebreakers | 21 biographies — from Al-Kindi (c. 850) through Turing, Rejewski, Tutte, Friedman, Clarke, Driscoll, Marks to the 2011 Copiale team |
 | [XI](halls/modern-crypto.html) | Modern Cryptography | [DES](ciphers/des.html), [Diffie-Hellman](ciphers/diffie-hellman.html), [RSA](ciphers/rsa.html), [AES](ciphers/aes.html), [SHA-256](ciphers/sha256.html) |
+| [XII](halls/unsolved.html) | Unsolved Ciphers | [Voynich](ciphers/voynich.html), [Kryptos](ciphers/kryptos.html), [Beale](ciphers/beale.html), [Dorabella](ciphers/dorabella.html), [Zodiac Z-13/Z-32](ciphers/zodiac.html), Phaistos Disc, Shugborough, D'Agapeyeff, Somerton Man, McCormick |
+| [XIII](halls/culture.html) | Cipher Culture | Bach's BACH motif, Conan Doyle's Dancing Men, Poe's Gold-Bug, Cicada 3301, ARG ciphers, MIT Mystery Hunt, Sator Square, Freemason pigpen tradition |
 
 ### 🔐 Every Exhibit Follows Four-Part Structure
 
@@ -152,7 +154,7 @@ cipher-museum/
 ├── index.html               ← Entrance Hall (hero + 10 hall cards)
 ├── museum-map.html          ← Interactive floor plan with all exhibits
 ├── timeline.html            ← 2,400-year timeline with era filtering & scroll-spy
-├── comparison.html          ← Sortable 63-cipher comparison table
+├── comparison.html          ← Sortable 69-cipher comparison table
 ├── challenges.html          ← 10 progressive cipher challenges
 ├── glossary.html            ← Cryptography glossary
 ├── cryptanalysis.html       ← Cryptanalysis Techniques (7 interactive techniques)
@@ -165,7 +167,7 @@ cipher-museum/
 │   ├── nav.js               ← Navigation system (sticky nav, hamburger, ARIA)
 │   ├── demo-loader.js       ← Dynamic demo UI generator for all cipher pages
 │   └── ciphers/
-│       └── all-engines.js   ← 55 cipher engine implementations
+│       └── all-engines.js   ← 57 cipher engine implementations
 ├── halls/                   ← 11 exhibit halls
 │   ├── ancient.html          ← Hall I: Birth of Cryptography
 │   ├── substitution.html     ← Hall II: Classical Substitution
