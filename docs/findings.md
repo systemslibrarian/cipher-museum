@@ -13,10 +13,10 @@ Cross-referenced with live site at https://ciphermuseum.com.
   - Low: 4
   - Informational: 2
 - Resolution summary:
-  - **Fixed in code: 31** (F-001, F-002, F-003, F-004, F-005, F-006, F-007, F-008, F-009, F-010, F-011, F-012, F-013, F-014, F-017, F-018, F-020, F-021, F-022, F-023, F-024, F-025, F-026, F-029, F-030, F-032, F-033, F-034)
+  - **Fixed in code: 33** (F-001, F-002, F-003, F-004, F-005, F-006, F-007, F-008, F-009, F-010, F-011, F-012, F-013, F-014, F-017, F-018, F-020, F-021, F-022, F-023, F-024, F-025, F-026, F-029, F-030, F-031, F-032, F-033, F-034, F-035)
   - **Verified OK on re-inspection (no code change needed): 2** (F-019, F-027)
   - **Resolved as informational positive baseline: 1** (F-036)
-  - **Deferred with rationale: 5** (F-015 nav canonicalisation refactor, F-016 footer canonicalisation refactor, F-028 future-round content gaps, F-031 Bazeries Hall X biography [needs ~150 words new content], F-035 meta-description length sweep [polish task], F-037 illustration attribution [needs Paul to flag AI-generated images])
+  - **Deferred with rationale: 4** (F-015 nav canonicalisation refactor, F-016 footer canonicalisation refactor, F-028 future-round content gaps, F-037 illustration attribution [needs Paul to flag AI-generated images])
   - Net: every finding has an explicit disposition.
 
 ## Ground truth
@@ -493,7 +493,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Exhibits, Content-gap
 **Files:** `ciphers/great-cipher.html`, `halls/codebreakers.html`
-**Status:** Deferred — requires composing ~150 words of new biographical content for Hall X plus a layout decision (panel vs. card); flagged for a future content-authoring round.
+**Status:** Fixed — added Étienne Bazeries biography panel to `halls/codebreakers.html` (Story 2.5, anchor `#bazeries`, between Phelippes 1586 and Room 40 1917 — chronologically correct for 1893). The new panel covers his syllabic-substitution attack on the Great Cipher, the 1898 Bazeries Cylinder, and *Les Chiffres Secrets Dévoilés* (1901). `ciphers/great-cipher.html` cross-links to it twice: from the existing Bazeries reference in the historical narrative, and as a new Related-resources list item.
 
 **Observed:** The Great Cipher exhibit credits Étienne Bazeries 1893 and links to the Bazeries cipher exhibit (`bazeries.html`). `halls/codebreakers.html` (Hall X) contains no Bazeries biography.
 
@@ -542,8 +542,8 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 ### F-035 — Exhibit pages have inconsistent meta description lengths (under 80 / over 170)
 **Severity:** Low
 **Area:** A11y-SEO
-**Files:** `ciphers/atbash.html` (63 chars), `ciphers/solitaire.html` (63), `ciphers/voynich.html` (171), `ciphers/babington.html` (187), and likely others
-**Status:** Deferred — full-corpus meta-description sweep across 52 exhibit pages is a polish task best done as a dedicated SEO pass; tracked separately.
+**Files:** all 52 exhibit pages under `ciphers/`
+**Status:** Fixed — every one of the 52 exhibit pages now has a meta description, og:description, and twitter:description in the 140–160 character window, all three values matching. Format: `<one-line what-it-is>. <one-line year/who-broke-it/why-it-matters>.` Verified with an automated audit (0 out-of-range, 0 mismatches).
 
 **Observed:** Sample sweep shows several exhibit meta descriptions outside the 140–160 character recommended window.
 
