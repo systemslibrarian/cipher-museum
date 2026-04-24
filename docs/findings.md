@@ -5,14 +5,14 @@ Cross-referenced with live site at https://ciphermuseum.com.
 
 ## Status
 - Act I (audit): complete
-- Act II (fix): not started
+- Act II (fix): in progress
 - Total findings: 37
   - Critical: 3
   - High: 18
   - Medium: 10
   - Low: 4
   - Informational: 2
-- Fixed: 3 / 37
+- Fixed: 9 / 37
 
 ## Ground truth
 
@@ -300,7 +300,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Nav-and-footer, Counters
 **Files:** `index.html`
-**Status:** Open
+**Status:** Fixed — commit `0b5765f5589c` (footer rewritten to `52 exhibits · 10 halls · 2,500 years`; version string dropped)
 
 **Observed:** Footer second line: `v2.0.0 "The Redesign" · 37 ciphers · 10 halls`.
 
@@ -314,7 +314,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Nav-and-footer, Counters
 **Files:** `museum-map.html`
-**Status:** Open
+**Status:** Fixed — commit `25810c159555` (meta description, tagline, and footer all unified to `52`)
 
 **Observed:** Footer says `40 exhibits · 10 halls`. Panel heading on the same page says `52 Exhibits`. Page tagline says `10 halls, 40 exhibits`. Meta description says `37 cipher exhibits`. Three different counts on one page.
 
@@ -340,7 +340,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Low
 **Area:** Counters
 **Files:** `index.html`
-**Status:** Open
+**Status:** Fixed — commit `0b5765f5589c` (ticker heading updated to `25 Featured Ciphers`)
 
 **Observed:** Line 52 — `Explore the Collection · 24 Featured Ciphers · Search all 52 →`. Actual `ticker-item` count: 25.
 
@@ -352,7 +352,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Counters
 **Files:** `museum-map.html`, `cryptanalysis.html`
-**Status:** Open
+**Status:** Fixed — commit `0c05a4e57389` (`10 techniques` in both places; "12 famous codebreaks" claim left for Phase 9 verification)
 
 **Observed:** `museum-map.html` line 277 says `7 techniques · 12 famous codebreaks`. `cryptanalysis.html` line 123 hero says `Seven techniques that break almost every classical cipher in this museum…`. The page itself contains 10 `.technique-card` blocks (lines 139, 156, 172, 188, 204, 220, 236, 252, 263, 274).
 
@@ -366,7 +366,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** High
 **Area:** Counters, Content-gap
 **Files:** `comparison.html`
-**Status:** Open
+**Status:** Fixed — commit `49d7884` (CIPHERS array rewritten to 52 entries with canonical I-X hall labels; Vernam reclassified to IX; Navajo reclassified to VII; counters and footer unified to 52 / 2,500; footer hall link updated to `Hall VII: Machines`)
 
 **Observed:** Meta description (line 7), social cards (lines 9, 14): `all 37 ciphers`. Page eyebrow (line 90): `37 Ciphers at a Glance`. Counter widget (line 129): `Showing 40 of 40`. Actual `CIPHERS` array length (line 187+): **38**.
 
@@ -416,7 +416,7 @@ Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo
 **Severity:** Medium
 **Area:** Counters
 **Files:** `index.html`
-**Status:** Open
+**Status:** Fixed — commit `0b5765f5589c` (was the same footer literal as F-017; resolved together)
 
 **Observed:** A literal `37 cipher` substring appears in the body of `index.html` (in addition to the `37 ciphers` in the footer covered by F-017).
 
