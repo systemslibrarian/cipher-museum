@@ -124,7 +124,7 @@
   });
 
   /* ── Auto-load companion scripts ─────────────────────── */
-  ['breadcrumbs.js'].forEach(function(f){
+  ['breadcrumbs.js', 'footer.js'].forEach(function(f){
     var s = document.createElement('script');
     s.src = pre + 'js/' + f;
     s.defer = true;

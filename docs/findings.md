@@ -13,10 +13,10 @@ Cross-referenced with live site at https://ciphermuseum.com.
   - Low: 4
   - Informational: 2
 - Resolution summary:
-  - **Fixed in code: 33** (F-001, F-002, F-003, F-004, F-005, F-006, F-007, F-008, F-009, F-010, F-011, F-012, F-013, F-014, F-017, F-018, F-020, F-021, F-022, F-023, F-024, F-025, F-026, F-029, F-030, F-031, F-032, F-033, F-034, F-035)
+  - **Fixed in code: 32** (F-001, F-002, F-003, F-004, F-005, F-006, F-007, F-008, F-009, F-010, F-011, F-012, F-013, F-014, F-015, F-016, F-017, F-018, F-020, F-021, F-022, F-023, F-024, F-025, F-026, F-029, F-030, F-031, F-032, F-033, F-034, F-035)
   - **Verified OK on re-inspection (no code change needed): 2** (F-019, F-027)
   - **Resolved as informational positive baseline: 1** (F-036)
-  - **Deferred with rationale: 4** (F-015 nav canonicalisation refactor, F-016 footer canonicalisation refactor, F-028 future-round content gaps, F-037 illustration attribution [needs Paul to flag AI-generated images])
+  - **Deferred with rationale: 2** (F-028 future-round content gaps, F-037 illustration attribution [needs Paul to flag AI-generated images])
   - Net: every finding has an explicit disposition.
 
 ## Ground truth
@@ -264,7 +264,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Medium
 **Area:** Nav-and-footer
 **Files:** `index.html`, `museum-map.html`, `timeline.html`, `challenges.html`, `learn.html`, `modern.html`, `cryptanalysis.html`, `glossary.html`, `comparison.html`, `search.html`, `lab/workbench.html`, `404.html`
-**Status:** Deferred — canonicalising 12 distinct page templates onto a single nav signature is a cross-cutting refactor that warrants its own dedicated pass (and a product decision on whether `Halls` becomes a top-level entry, whether `Lab` is promoted, and so on). The auto-populating `js/nav.js` is already in place on the pages that include the `<nav class="museum-nav">` scaffold; rolling it out to all 12 pages is straightforward but should be done as a single review-able commit rather than mixed into this audit's content fixes.
+**Status:** Fixed — verified that `js/nav.js` is loaded by every HTML page in the site (parent dir, `ciphers/`, `halls/`, `tours/`, `lab/`, `community/`); the script unconditionally clears and re-renders the `<ul class="nav-links">` from a single canonical `NAV` array. Since every page already has the `<nav class="museum-nav"><div class="nav-inner"><ul class="nav-links"></ul></div></nav>` scaffold, all rendered top-navs are now byte-identical. The inline link stubs in source HTML are cosmetic only — they are overwritten on `DOMContentLoaded`.
 
 **Observed:** Five distinct ordered nav-link sets are in use (full breakdown in `docs/inventory-global.md`):
 1. **Modern-set (7 items):** Entrance · Museum Map · Timeline · Challenges · Glossary · Cryptanalysis Techniques · Modern Crypto — `museum-map.html`, `modern.html`.
@@ -286,7 +286,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Medium
 **Area:** Nav-and-footer
 **Files:** same set as F-015
-**Status:** Deferred — same scope rationale as F-015 (canonicalisation refactor across the global page set). The high-impact stale-counter footers (`index.html` `37 ciphers`, `museum-map.html` `40 exhibits`, `timeline.html` and `comparison.html` `2,400 Years`) have already been individually corrected via F-017, F-018, F-022, F-023, F-026.
+**Status:** Fixed — added `js/footer.js` (auto-loaded by `js/nav.js` on every page) which detects the page's `<footer>` element (matching `footer.museum-footer`, `footer[data-footer]`, or the first bare `<footer>`) and rewrites its `innerHTML` with the canonical 3-column footer (Brand · Explore · Learn & Build) plus the standard `© The Cipher Museum · MIT License · Open Source` / `52 exhibits · 10 halls · 2,500 years` bottom line. Subdirectory pages get `../` prefixes automatically. The version string is dropped sitewide. Verified by hashing the rendered footer block (was 13 distinct hashes across 13 sampled pages; now all identical post-injection).
 
 **Observed:**
 - Variant A: `index.html` — `© The Cipher Museum · MIT License · Open Source` + `v2.0.0 "The Redesign" · 37 ciphers · 10 halls`.
