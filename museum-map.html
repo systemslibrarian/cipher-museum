@@ -78,7 +78,7 @@
   <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Museum Map</div>
   <span class="page-eyebrow">Your Guide to the Collection</span>
   <h1 class="page-title">Museum Map</h1>
-  <p class="page-tagline">10 halls, 58 exhibits, one continuous story: how humanity learned to keep secrets</p>
+  <p class="page-tagline">11 halls, 63 exhibits, one continuous story: how humanity learned to keep secrets</p>
 </div>
 
 <!-- ───────── SUGGESTED ROUTE ───────── -->
@@ -99,7 +99,7 @@
     <p class="section-sub">Click any hall or exhibit to enter. Your last-visited hall is highlighted.</p>
   </div>
 
-  <div class="bldg" role="region" aria-label="Interactive museum floor plan showing 10 halls, special exhibitions, and modern cryptography wing">
+  <div class="bldg" role="region" aria-label="Interactive museum floor plan showing 11 halls, special exhibitions, and modern cryptography wing">
 
     <!-- ── Entrance Portico ── -->
     <a href="index.html" class="bldg-entrance" data-hall-id="entrance">
@@ -295,19 +295,22 @@
           <div class="bldg-room-name">Hall of Codebreakers</div>
           <div class="bldg-room-era">850 AD – 2020</div>
           <div class="bldg-room-exhibits">
-            <span>15 stories of codebreaking brilliance</span>
-            <span>Al-Kindi · Turing · Friedman · Rejewski</span>
+            <span>21 stories of codebreaking brilliance</span>
+            <span>Al-Kindi · Turing · Friedman · Rejewski · Tutte · Clarke</span>
           </div>
         </a>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="modern.html" class="bldg-room bldg-room--final" data-hall-id="modern" data-color="#5A90C8" style="border-top:2px solid #5A90C8">
-          <div class="bldg-room-num">→</div>
+        <a href="halls/modern-crypto.html" class="bldg-room bldg-room--final" data-hall-id="modern-crypto" data-color="#5A90C8" style="border-top:2px solid #5A90C8">
+          <div class="bldg-room-num">XI</div>
           <div class="bldg-room-name">Modern Cryptography</div>
-          <div class="bldg-room-era">Beyond the Museum</div>
+          <div class="bldg-room-era">1976 – Present</div>
           <div class="bldg-room-exhibits">
-            <span>🔐 Ciphers: AES · ChaCha20</span>
-            <span>🔑 Key Exchange: Diffie-Hellman</span>
-            <span>🔓 Public Key: RSA · #️⃣ Hashing: SHA-256</span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/des.html">DES</a></span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/diffie-hellman.html">Diffie-Hellman</a></span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/rsa.html">RSA</a></span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/aes.html">AES</a></span>
+            <span><span class="fp-marker-dot">●</span> <a href="ciphers/sha256.html">SHA-256</a></span>
+            <span><a href="modern.html" style="color:var(--gold)">→ Wider landscape</a></span>
           </div>
         </a>
       </div>
@@ -336,11 +339,11 @@
   <div class="section-head">
     <span class="section-eyebrow">Reference</span>
     <h2 class="section-title">Complete Cipher Index</h2>
-    <p class="section-sub">All 58 exhibits, organized by hall.</p>
+    <p class="section-sub">All 63 exhibits, organized by hall.</p>
   </div>
   <div style="max-width:700px;margin:0 auto;">
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📋</span><span class="panel-title">58 Exhibits</span></div>
+      <div class="panel-head"><span class="panel-icon">📋</span><span class="panel-title">63 Exhibits</span></div>
       <div class="panel-body" style="padding:0;">
         <table class="cipher-table" style="font-size:.75rem;">
           <thead><tr><th>#</th><th>Cipher</th><th>Hall</th></tr></thead>
@@ -403,6 +406,11 @@
             <tr><td>56</td><td><a href="ciphers/dorabella.html">Dorabella Cipher</a></td><td>VIII</td></tr>
             <tr><td>57</td><td><a href="ciphers/sigaba.html">SIGABA (ECM Mark II)</a></td><td>VII</td></tr>
             <tr><td>58</td><td><a href="ciphers/typex.html">Typex</a></td><td>VII</td></tr>
+            <tr><td>59</td><td><a href="ciphers/des.html">DES (Data Encryption Standard)</a></td><td>XI</td></tr>
+            <tr><td>60</td><td><a href="ciphers/diffie-hellman.html">Diffie-Hellman Key Exchange</a></td><td>XI</td></tr>
+            <tr><td>61</td><td><a href="ciphers/rsa.html">RSA</a></td><td>XI</td></tr>
+            <tr><td>62</td><td><a href="ciphers/aes.html">AES (Advanced Encryption Standard)</a></td><td>XI</td></tr>
+            <tr><td>63</td><td><a href="ciphers/sha256.html">SHA-256</a></td><td>XI</td></tr>
           </tbody>
         </table>
       </div>
@@ -421,7 +429,7 @@
       <li><a href="cryptanalysis.html">Cryptanalysis Techniques</a></li><li><a href="modern.html">Modern Cryptography</a></li></ul></div>
     <div><div class="footer-col-title">GitHub</div><ul class="footer-links"><li><a href="https://github.com/systemslibrarian/cipher-museum">Repository</a></li><li><a href="https://github.com/systemslibrarian/cipher-museum/blob/main/README.md">README</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">58 exhibits · 10 halls</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span><span class="footer-copy">63 exhibits · 11 halls</span></div>
 </footer>
 <script src="js/nav.js" defer></script>
 <script>

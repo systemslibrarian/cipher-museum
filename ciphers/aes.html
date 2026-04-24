@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AES (Advanced Encryption Standard) &mdash; The Cipher Museum</title>
+  <meta name="description" content="AES (2001) — the cipher that encrypts the modern world; chosen by open competition, scrutinised for two decades, still without a practical attack.">
+  <meta property="og:title" content="AES (Advanced Encryption Standard) &mdash; The Cipher Museum">
+  <meta property="og:description" content="AES (2001) — the cipher that encrypts the modern world; chosen by open competition, scrutinised for two decades, still without a practical attack.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/aes.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AES (Advanced Encryption Standard) &mdash; The Cipher Museum">
+  <meta name="twitter:description" content="AES (2001) — the cipher that encrypts the modern world; chosen by open competition, scrutinised for two decades, still without a practical attack.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/aes.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/modern-crypto.html">Hall XI: Modern Cryptography</a><span>&rsaquo;</span>
+    AES (Advanced Encryption Standard)
+  </div>
+  <div class="page-meta">
+    <span class="badge era-modern">Modern &middot; 2001</span>
+    <span class="badge sec-secure">Secure (no practical attack)</span>
+  </div>
+  <h1 class="page-title">AES (Advanced Encryption Standard)</h1>
+  <p class="page-tagline">The cipher that encrypts the modern world &mdash; chosen by open competition, scrutinised for two decades, still unbroken.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Joan Daemen &amp; Vincent Rijmen (Belgium, 1998); standardised as FIPS 197 in 2001</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">2001</span></div>
+    <div class="fact"><span class="fact-label">Type</span><span class="fact-value">Symmetric block cipher (substitution-permutation network, 128-bit block, 128/192/256-bit key)</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">Universal standard; NSA-approved for TOP SECRET data with 192/256-bit keys (CNSA Suite)</span></div>
+    <div class="fact"><span class="fact-label">Modern Role</span><span class="fact-value">HTTPS, full-disk encryption (BitLocker, FileVault, LUKS), Wi-Fi WPA2/3, VPNs, messaging apps, cloud storage</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>AES is the cipher that runs the internet. When you load a webpage over HTTPS, when your phone wakes from sleep and unlocks, when WhatsApp delivers a message, when Wi-Fi authenticates your laptop &mdash; it is almost certainly AES doing the bulk encryption. After two decades of intense academic and intelligence-agency scrutiny, no attack faster than ~2<sup>126</sup> operations is known against AES-128 in its standard configuration. It is, in practice, the cipher.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>By 1997 NIST knew DES was finished and ran an open international competition to replace it. Fifteen submissions from twelve countries; five finalists (MARS, RC6, Rijndael, Serpent, Twofish) survived to round two. After three years of public cryptanalysis NIST chose <em>Rijndael</em> by Joan Daemen and Vincent Rijmen of Belgium &mdash; the first non-American cipher ever to become a US government standard. The choice was driven by speed, hardware-friendliness, and design clarity. FIPS 197 was published 26 November 2001.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>AES is a substitution-permutation network operating on a 4&times;4 byte state. Each round applies four operations:</p><ul><li><strong>SubBytes</strong> &mdash; replace each byte via a non-linear S-box (algebraic inverse in GF(2<sup>8</sup>))</li><li><strong>ShiftRows</strong> &mdash; cyclically shift each row by 0/1/2/3 positions</li><li><strong>MixColumns</strong> &mdash; multiply each column by a fixed polynomial (skipped in the final round)</li><li><strong>AddRoundKey</strong> &mdash; XOR with the round-specific subkey</li></ul><p>AES-128 runs 10 rounds, AES-192 runs 12, AES-256 runs 14. The key schedule expands the master key into all round keys. The four-operation round delivers Shannon's confusion (S-box) and diffusion (ShiftRows + MixColumns); after 2 rounds every output bit depends on every input bit, after the full round count the dependency is mathematically saturated.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🛡️</span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-body"><p>The best known attack on full AES-128 is biclique cryptanalysis at 2<sup>126.1</sup> operations &mdash; faster than brute force by a factor of four, but still completely impractical. Practical AES failures are always implementation flaws: cache-timing side channels (BEAST, CRIME, Lucky 13), weak modes (ECB), nonce reuse in GCM, or padding oracles in CBC. Modern Intel and ARM CPUs include AES-NI / AES instructions that make AES essentially free in software, removing the last reason to roll alternative ciphers.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌐</span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Where</th><th>How AES is Used</th></tr></thead>
+          <tbody>
+            <tr><td>HTTPS (TLS 1.2/1.3)</td><td>AES-128-GCM and AES-256-GCM are the default authenticated-encryption ciphers</td></tr>
+            <tr><td>Full-disk encryption</td><td>BitLocker (XTS-AES-128/256), FileVault 2, LUKS, dm-crypt all default to AES</td></tr>
+            <tr><td>Wi-Fi WPA2 / WPA3</td><td>AES-CCMP replaced TKIP/RC4 in 2004; WPA3 adds AES-GCMP-256</td></tr>
+            <tr><td>Messaging apps</td><td>Signal, WhatsApp, iMessage all wrap AES-GCM under their key-ratchet protocols</td></tr>
+            <tr><td>US government</td><td>NSA CNSA Suite mandates AES-256 for TOP SECRET data</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Era</td><td>Modern &middot; 2001</td></tr>
+            <tr><td>Status</td><td>Universal standard; NSA-approved for TOP SECRET data with 192/256-bit keys (CNSA Suite)</td></tr>
+            <tr><td>Origin</td><td>Joan Daemen &amp; Vincent Rijmen (Belgium, 1998); standardised as FIPS 197 in 2001</td></tr>
+            <tr><td>Year</td><td>2001</td></tr>
+            <tr><td>Type</td><td>Symmetric block cipher (substitution-permutation network, 128-bit block, 128/192/256-bit key)</td></tr>
+            <tr><td>Modern Role</td><td>HTTPS, full-disk encryption (BitLocker, FileVault, LUKS), Wi-Fi WPA2/3, VPNs, messaging apps, cloud storage</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/des.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">DES</span>
+      <span class="related-card__tag">AES's predecessor, defeated by brute force</span>
+    </a>
+    <a href="../ciphers/rsa.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">RSA</span>
+      <span class="related-card__tag">Asymmetric companion that establishes AES session keys</span>
+    </a>
+    <a href="../ciphers/sha256.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">SHA-256</span>
+      <span class="related-card__tag">Hash function paired with AES for authenticated encryption</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/rsa.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">RSA</span>
+  </a>
+  <a href="../ciphers/sha256.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">SHA-256</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer"></footer>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

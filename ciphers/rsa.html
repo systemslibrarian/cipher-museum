@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSA &mdash; The Cipher Museum</title>
+  <meta name="description" content="The first practical public-key cryptosystem — one key encrypts, a different key decrypts, and you can publish the encrypting key in the phone book.">
+  <meta property="og:title" content="RSA &mdash; The Cipher Museum">
+  <meta property="og:description" content="The first practical public-key cryptosystem — one key encrypts, a different key decrypts, and you can publish the encrypting key in the phone book.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/rsa.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RSA &mdash; The Cipher Museum">
+  <meta name="twitter:description" content="The first practical public-key cryptosystem — one key encrypts, a different key decrypts, and you can publish the encrypting key in the phone book.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/rsa.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/modern-crypto.html">Hall XI: Modern Cryptography</a><span>&rsaquo;</span>
+    RSA
+  </div>
+  <div class="page-meta">
+    <span class="badge era-modern">Modern &middot; 1977</span>
+    <span class="badge sec-secure">Secure (with 2048+ bit keys)</span>
+  </div>
+  <h1 class="page-title">RSA</h1>
+  <p class="page-tagline">The first practical public-key cryptosystem &mdash; one key encrypts, a different key decrypts, and you can publish the encrypting key in the phone book.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Ron Rivest, Adi Shamir, Leonard Adleman (MIT, 1977); Clifford Cocks (GCHQ, 1973, classified)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1977</span></div>
+    <div class="fact"><span class="fact-label">Type</span><span class="fact-value">Public-key encryption &amp; digital signature (asymmetric)</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">In daily use; NIST is preparing a post-quantum migration (RSA breaks under Shor's algorithm on a sufficiently large quantum computer)</span></div>
+    <div class="fact"><span class="fact-label">Modern Role</span><span class="fact-value">TLS certificates, code signing, PGP/GPG, SSH host keys, JWT signatures, document signing</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Diffie and Hellman had described public-key cryptography as a <em>goal</em> in 1976; RSA was the first concrete construction that achieved it. The same key pair can be used both ways &mdash; encrypt with the public key and only the holder of the private key can decrypt; sign with the private key and anyone with the public key can verify. That single mathematical object simultaneously solved key distribution, authentication, and non-repudiation. Every TLS certificate, every code-signing chain, every signed software update is descended from this 1977 paper.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Rivest, Shamir, and Adleman were MIT researchers reading Diffie-Hellman's paper in 1976 and trying to find a working public-key construction. After dozens of failed attempts, Rivest had the key insight one Passover night in April 1977 after a glass of wine: use the multiplicative inverse <em>d</em> of the encrypting exponent <em>e</em> modulo &phi;(<em>n</em>). The MIT memo went out August 1977; Martin Gardner's <em>Scientific American</em> column in 1977 popularised it with a $100 challenge cipher (factored in 1994 by 600 volunteers). RSA Data Security was founded in 1982; the patent expired in 2000.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Pick two large primes <em>p</em> and <em>q</em> (each ~1024 bits for RSA-2048). Compute <em>n = p&middot;q</em> and <em>&phi;(n) = (p&minus;1)(q&minus;1)</em>. Choose a public exponent <em>e</em> coprime to <em>&phi;(n)</em> &mdash; almost always 65537. Compute the private exponent <em>d &equiv; e<sup>&minus;1</sup> mod &phi;(n)</em>.</p><p>Public key is <em>(n, e)</em>; private key is <em>(n, d)</em>. To encrypt message <em>m</em>: <em>c = m<sup>e</sup> mod n</em>. To decrypt: <em>m = c<sup>d</sup> mod n</em>. The math works because of Euler's theorem: <em>m<sup>ed</sup> &equiv; m mod n</em> for any <em>m</em> coprime to <em>n</em>. Recovering <em>d</em> from the public key requires factoring <em>n</em>, which is believed to be classically infeasible for 2048-bit moduli.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🛡️</span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-body"><p>Security rests on the integer factorisation problem. The largest RSA modulus publicly factored is RSA-250 (829 bits, 2020), using ~2700 core-years on a CADO-NFS cluster. RSA-2048 is estimated at ~10<sup>9</sup> times harder. <strong>However</strong>: Shor's quantum algorithm factors <em>n</em> in polynomial time, so a sufficiently large quantum computer breaks RSA entirely. NIST's post-quantum standardisation (CRYSTALS-Kyber, ML-KEM) is the planned replacement. RSA also has dangerous implementation pitfalls: textbook RSA leaks small messages and is malleable; production systems must use OAEP padding for encryption and PSS for signatures.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌐</span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Where</th><th>How RSA is Used</th></tr></thead>
+          <tbody>
+            <tr><td>TLS / HTTPS certificates</td><td>Most certificate authorities still issue RSA-2048 leaf certificates; ECDSA is gaining share</td></tr>
+            <tr><td>Code signing</td><td>Microsoft Authenticode, Apple notarisation, Debian package signing all use RSA</td></tr>
+            <tr><td>PGP / GPG</td><td>Default keypair for encrypted email and signed Git commits</td></tr>
+            <tr><td>SSH host keys</td><td><code>ssh-rsa</code> remains the most common key type, though <code>ed25519</code> is now preferred</td></tr>
+            <tr><td>JWT signatures</td><td><code>RS256</code> is the default for many OAuth / OIDC implementations</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Era</td><td>Modern &middot; 1977</td></tr>
+            <tr><td>Status</td><td>In daily use; NIST is preparing a post-quantum migration (RSA breaks under Shor's algorithm on a sufficiently large quantum computer)</td></tr>
+            <tr><td>Origin</td><td>Ron Rivest, Adi Shamir, Leonard Adleman (MIT, 1977); Clifford Cocks (GCHQ, 1973, classified)</td></tr>
+            <tr><td>Year</td><td>1977</td></tr>
+            <tr><td>Type</td><td>Public-key encryption &amp; digital signature (asymmetric)</td></tr>
+            <tr><td>Modern Role</td><td>TLS certificates, code signing, PGP/GPG, SSH host keys, JWT signatures, document signing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/diffie-hellman.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Diffie-Hellman</span>
+      <span class="related-card__tag">The earlier public-key paper that inspired RSA</span>
+    </a>
+    <a href="../ciphers/aes.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">AES</span>
+      <span class="related-card__tag">RSA usually wraps an AES session key rather than encrypting data directly</span>
+    </a>
+    <a href="../ciphers/sha256.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">SHA-256</span>
+      <span class="related-card__tag">RSA signatures sign the hash of the message, not the message itself</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/diffie-hellman.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Diffie-Hellman</span>
+  </a>
+  <a href="../ciphers/aes.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">AES</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer"></footer>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

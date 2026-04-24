@@ -1,7 +1,7 @@
 /**
  * THE CIPHER MUSEUM — Site Search
  * Loads /js/search-index.json and provides ranked substring + token matching
- * across 58 ciphers, 10 halls, and 12+ key pages.
+ * across 63 ciphers, 11 halls, and 12+ key pages.
  *
  * Public API on window.CipherSearch:
  *   load()            → Promise<entries>

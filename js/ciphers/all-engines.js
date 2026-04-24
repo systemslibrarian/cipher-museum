@@ -1,6 +1,6 @@
 /**
  * THE CIPHER MUSEUM — All Cipher Engines
- * Complete implementations for every exhibit (55 engines / 58 exhibits)
+ * Complete implementations for every exhibit (55 engines / 63 exhibits)
  */
 'use strict';
 

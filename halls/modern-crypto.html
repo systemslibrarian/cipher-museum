@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall XI: Modern Cryptography &mdash; The Cipher Museum</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta name="description" content="DES, Diffie-Hellman, RSA, AES, SHA-256 &mdash; the five primitives that replaced classical cryptography and now secure the entire digital world.">
+  <meta property="og:title" content="Hall XI: Modern Cryptography &mdash; The Cipher Museum">
+  <meta property="og:description" content="DES, Diffie-Hellman, RSA, AES, SHA-256 &mdash; the five primitives that replaced classical cryptography and now secure the entire digital world.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/halls/modern-crypto.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hall XI: Modern Cryptography &mdash; The Cipher Museum">
+  <meta name="twitter:description" content="DES, Diffie-Hellman, RSA, AES, SHA-256 &mdash; the five primitives that replaced classical cryptography and now secure the entire digital world.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/halls/modern-crypto.html">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero" style="border-bottom-color:var(--gold);">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../museum-map.html">Museum Map</a><span>&rsaquo;</span>
+    Hall XI
+  </div>
+  <span class="page-eyebrow" style="color:var(--gold);">Hall XI &middot; 1976 &ndash; Present</span>
+  <h1 class="page-title">Modern Cryptography</h1>
+  <p class="page-tagline">Five primitives that replaced three thousand years of classical cryptography</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">Every cipher in the previous ten halls eventually fell. The five primitives in this hall &mdash; DES, Diffie-Hellman, RSA, AES, SHA-256 &mdash; were designed in the public eye, scrutinised for decades, and now run essentially every secure system on Earth. Only one of them, AES, is technically a cipher in the classical sense. The other four solve problems that classical cryptography could not: distributing keys without meeting in person, signing documents at a distance, and verifying integrity without a shared secret.</p>
+  <p style="max-width:680px;font-size:.95rem;color:var(--tx3);line-height:1.8;margin-top:1rem;position:relative;z-index:1;">For the broader landscape &mdash; ChaCha20, ECDH, post-quantum &mdash; see the <a href="../modern.html" style="color:var(--gold);">Modern Cryptography wing</a>.</p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-modern">Modern Era</span>
+    <span class="badge sec-secure">Production Standards</span>
+    <span class="badge era-theoretical">Mathematically Founded</span>
+  </div>
+</div>
+
+<div class="section">
+
+  <div class="cipher-gallery" style="margin-bottom:4rem;">
+
+    <a href="../ciphers/des.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 59</span>
+        <span class="badge era-modern">1977 &middot; NBS / NSA</span>
+      </div>
+      <div class="card-name">DES (Data Encryption Standard)</div>
+      <p class="card-desc">The first public, government-standardised cipher. A 16-round Feistel network with a 56-bit key &mdash; broken by EFF's Deep Crack in 1998 (56 hours). Triple-DES extended its life until 2023. The cipher that birthed academic cryptanalysis: differential and linear cryptanalysis were both invented to attack it.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken (brute force)</span>
+          <span class="badge era-modern">Withdrawn 2005</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/diffie-hellman.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 60</span>
+        <span class="badge era-modern">1976 &middot; Stanford</span>
+      </div>
+      <div class="card-name">Diffie-Hellman Key Exchange</div>
+      <p class="card-desc">Two strangers create a shared secret over an open wire. Not a cipher &mdash; a key-agreement protocol. The 1976 paper that overturned cryptography's three-thousand-year-old &lsquo;you must meet first' assumption. Every TLS 1.3, SSH, Signal, and WireGuard handshake descends from it.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Secure (2048+ bit)</span>
+          <span class="badge era-theoretical">Discrete log hardness</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/rsa.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 61</span>
+        <span class="badge era-modern">1977 &middot; MIT</span>
+      </div>
+      <div class="card-name">RSA</div>
+      <p class="card-desc">The first practical public-key cryptosystem. One key encrypts, a different key decrypts &mdash; and you can publish the encrypting key. Solved key distribution, authentication, and digital signatures in one stroke. Every TLS certificate, code-signing chain, and PGP keypair is descended from this 1977 paper.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Secure (2048+ bit)</span>
+          <span class="badge era-theoretical">Factoring hardness</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/aes.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 62</span>
+        <span class="badge era-modern">2001 &middot; FIPS 197</span>
+      </div>
+      <div class="card-name">AES (Advanced Encryption Standard)</div>
+      <p class="card-desc">The cipher that encrypts the modern world. Chosen by open international competition in 2001; designed by Joan Daemen and Vincent Rijmen of Belgium. Substitution-permutation network, 128-bit blocks, 128/192/256-bit keys, 10&ndash;14 rounds. After two decades of intense scrutiny, no practical attack exists.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Secure (no practical attack)</span>
+          <span class="badge era-modern">FIPS 197</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/sha256.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 63</span>
+        <span class="badge era-modern">2001 &middot; NSA / NIST</span>
+      </div>
+      <div class="card-name">SHA-256</div>
+      <p class="card-desc">A 256-bit fingerprint for any input. One-way, collision-resistant, and the verification engine of Git, Bitcoin, TLS certificates, and software integrity. Not a cipher &mdash; there is no key and no decryption. Irreversibility is the entire point.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Secure (no collision)</span>
+          <span class="badge era-modern">FIPS 180-2</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="callout callout-mystery" style="margin-top:3rem;">
+    <span class="callout-icon">🎓</span>
+    <div class="callout-body"><p><strong>The museum's closing lesson:</strong> Classical cryptography failed because it relied on obscurity, physical key distribution, and small key spaces. Modern cryptography replaces all three with mathematical hardness, public-key mathematics, and key sizes large enough that brute force is physically impossible &mdash; and expanded the field beyond ciphers into protocols, signatures, and proofs.</p></div>
+  </div>
+
+</div>
+
+</main>
+
+<footer class="museum-footer"></footer>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

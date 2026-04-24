@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diffie-Hellman Key Exchange &mdash; The Cipher Museum</title>
+  <meta name="description" content="Diffie-Hellman (1976) — two strangers create a shared secret over an open wire, ending three thousand years of must-meet-first cryptography.">
+  <meta property="og:title" content="Diffie-Hellman Key Exchange &mdash; The Cipher Museum">
+  <meta property="og:description" content="Diffie-Hellman (1976) — two strangers create a shared secret over an open wire, ending three thousand years of must-meet-first cryptography.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/diffie-hellman.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Diffie-Hellman Key Exchange &mdash; The Cipher Museum">
+  <meta name="twitter:description" content="Diffie-Hellman (1976) — two strangers create a shared secret over an open wire, ending three thousand years of must-meet-first cryptography.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/diffie-hellman.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/modern-crypto.html">Hall XI: Modern Cryptography</a><span>&rsaquo;</span>
+    Diffie-Hellman Key Exchange
+  </div>
+  <div class="page-meta">
+    <span class="badge era-modern">Modern &middot; 1976</span>
+    <span class="badge sec-secure">Secure (with 2048+ bit groups)</span>
+  </div>
+  <h1 class="page-title">Diffie-Hellman Key Exchange</h1>
+  <p class="page-tagline">Two strangers create a shared secret over an open wire &mdash; the discovery that broke the millennia-old &lsquo;you must meet first' assumption.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Whitfield Diffie &amp; Martin Hellman, &lsquo;New Directions in Cryptography' (1976); Ralph Merkle independently</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1976</span></div>
+    <div class="fact"><span class="fact-label">Type</span><span class="fact-value">Public-key key-agreement protocol &mdash; <strong>not a cipher</strong> (does not encrypt data)</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">In active use everywhere; modern variant ECDH (X25519) preferred over classical DH</span></div>
+    <div class="fact"><span class="fact-label">Modern Role</span><span class="fact-value">Establishes the symmetric key for nearly every TLS 1.3, SSH, Signal, and WireGuard session in existence</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>For three thousand years cryptography assumed the two parties had already met to exchange a secret key. Diffie and Hellman proved that assumption wrong: two people who have never communicated can derive a shared secret while every byte they exchange is read by an eavesdropper. Without this single 1976 paper there would be no HTTPS, no Signal, no encrypted email, no online banking &mdash; the entire idea of secure communication between strangers depends on it.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Diffie and Hellman published &lsquo;New Directions in Cryptography' in <em>IEEE Transactions on Information Theory</em>, November 1976. The paper proposed both public-key encryption (as a goal) and the key-exchange protocol (as a working example). Three British researchers at GCHQ &mdash; James Ellis, Clifford Cocks, and Malcolm Williamson &mdash; had discovered the same ideas between 1969 and 1974 but classification kept their work secret until 1997. The 1976 paper directly inspired Rivest, Shamir, and Adleman to find RSA the following year.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Both parties agree on a large prime <em>p</em> and a generator <em>g</em>. Alice picks a secret integer <em>a</em> and sends <em>g<sup>a</sup> mod p</em>. Bob picks a secret integer <em>b</em> and sends <em>g<sup>b</sup> mod p</em>. Each computes the shared key <em>K = g<sup>ab</sup> mod p</em> &mdash; Alice raises Bob's value to her secret, Bob raises Alice's value to his. An eavesdropper sees <em>p</em>, <em>g</em>, <em>g<sup>a</sup></em>, <em>g<sup>b</sup></em> but cannot recover <em>a</em>, <em>b</em>, or <em>K</em> without solving the <strong>discrete logarithm problem</strong>, which has no known efficient classical algorithm.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🛡️</span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-body"><p>Security rests on the discrete logarithm problem in a finite cyclic group. With a 2048-bit prime, no classical attack is known to be feasible. The 2015 <em>Logjam</em> attack exploited servers using common 512-bit primes &mdash; the lesson was to use larger groups and to switch to elliptic curves where 256-bit keys suffice (X25519). DH is vulnerable to <em>active</em> man-in-the-middle attacks because the exchanged values are unauthenticated &mdash; in practice DH is always combined with authentication (signatures, certificates, or a pre-shared password).</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌐</span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Where</th><th>How Diffie-Hellman is Used</th></tr></thead>
+          <tbody>
+            <tr><td>TLS 1.3 (HTTPS)</td><td>Every modern HTTPS handshake uses ECDHE (ephemeral elliptic-curve DH) for forward secrecy</td></tr>
+            <tr><td>Signal / WhatsApp / iMessage</td><td>X3DH and the Double Ratchet are layered Diffie-Hellman exchanges</td></tr>
+            <tr><td>SSH</td><td>Default key-exchange method since SSH-2</td></tr>
+            <tr><td>WireGuard / Tor</td><td>Both built on Curve25519 ECDH</td></tr>
+            <tr><td>IPsec / IKEv2</td><td>DH groups 14&ndash;21 in every VPN handshake</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Era</td><td>Modern &middot; 1976</td></tr>
+            <tr><td>Status</td><td>In active use everywhere; modern variant ECDH (X25519) preferred over classical DH</td></tr>
+            <tr><td>Origin</td><td>Whitfield Diffie &amp; Martin Hellman, &lsquo;New Directions in Cryptography' (1976); Ralph Merkle independently</td></tr>
+            <tr><td>Year</td><td>1976</td></tr>
+            <tr><td>Type</td><td>Public-key key-agreement protocol &mdash; <strong>not a cipher</strong> (does not encrypt data)</td></tr>
+            <tr><td>Modern Role</td><td>Establishes the symmetric key for nearly every TLS 1.3, SSH, Signal, and WireGuard session in existence</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/rsa.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">RSA</span>
+      <span class="related-card__tag">The other 1977 public-key foundation; can be used for key transport</span>
+    </a>
+    <a href="../ciphers/aes.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">AES</span>
+      <span class="related-card__tag">The symmetric cipher DH typically establishes a key for</span>
+    </a>
+    <a href="../ciphers/one-time-pad.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">One-Time Pad</span>
+      <span class="related-card__tag">The earlier &lsquo;perfect' system DH made practical to bootstrap</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/des.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">DES</span>
+  </a>
+  <a href="../ciphers/rsa.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">RSA</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer"></footer>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
