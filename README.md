@@ -4,7 +4,7 @@
 
 Exploring the history and evolution of cryptography — from classical ciphers to modern secure systems.
 
-An open-source, interactive educational website spanning **52 historically important ciphers** across **10 exhibit halls** — from the Spartan scytale in 500 BC to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
+An open-source, interactive educational website spanning **63 historically important ciphers** across **11 exhibit halls** — from the Spartan scytale in 500 BC to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
 
 **[Live Site →](https://ciphermuseum.com)**
 
@@ -25,20 +25,21 @@ An open-source, interactive educational website spanning **52 historically impor
 
 ## ✨ Features
 
-### 🗺️ Ten Exhibit Halls · 58 Ciphers
+### 🗺️ Eleven Exhibit Halls · 63 Ciphers
 
 | Hall | Title | Ciphers |
 |------|-------|---------|
 | [I](halls/ancient.html) | Birth of Cryptography | [Scytale](ciphers/scytale.html), [Caesar](ciphers/caesar.html), [Atbash](ciphers/atbash.html), [ROT13](ciphers/rot13.html), [Polybius](ciphers/polybius.html) |
-| [II](halls/substitution.html) | Classical Substitution | [Monoalphabetic](ciphers/monoalphabetic.html), [Babington](ciphers/babington.html), [Homophonic](ciphers/homophonic.html), [Great Cipher](ciphers/great-cipher.html), [Playfair](ciphers/playfair.html), [Four-Square](ciphers/four-square.html), [Two-Square](ciphers/two-square.html), [Hill](ciphers/hill.html) |
-| [III](halls/polyalphabetic.html) | Polyalphabetic Revolution | [Alberti Disk](ciphers/alberti-disk.html), [Vigenère](ciphers/vigenere.html), [Porta](ciphers/porta.html), [Gronsfeld](ciphers/gronsfeld.html), [Beaufort](ciphers/beaufort.html), [Running Key](ciphers/running-key.html) |
+| [II](halls/substitution.html) | Classical Substitution | [Monoalphabetic](ciphers/monoalphabetic.html), [Nomenclator](ciphers/nomenclator.html), [Babington](ciphers/babington.html), [Homophonic](ciphers/homophonic.html), [Great Cipher](ciphers/great-cipher.html), [Playfair](ciphers/playfair.html), [Four-Square](ciphers/four-square.html), [Two-Square](ciphers/two-square.html), [Hill](ciphers/hill.html) |
+| [III](halls/polyalphabetic.html) | Polyalphabetic Revolution | [Alberti Disk](ciphers/alberti-disk.html), [Vigenère](ciphers/vigenere.html), [Porta](ciphers/porta.html), [Gronsfeld](ciphers/gronsfeld.html), [Beaufort](ciphers/beaufort.html), [Running Key](ciphers/running-key.html), [Autokey](ciphers/autokey.html) |
 | [IV](halls/transposition.html) | Transposition & Fractionation | [Rail Fence](ciphers/rail-fence.html), [Columnar](ciphers/columnar.html), [Double Transposition](ciphers/double-transposition.html), [Bifid](ciphers/bifid.html), [Trifid](ciphers/trifid.html), [ADFGX](ciphers/adfgx.html), [ADFGVX](ciphers/adfgvx.html), [Fractionated Morse](ciphers/fractionated-morse.html) |
-| [V](halls/military.html) | Military & Spy Ciphers | [Nihilist](ciphers/nihilist.html), [Bazeries](ciphers/bazeries.html), [VIC](ciphers/vic.html), [Straddling Checkerboard](ciphers/straddling-checkerboard.html) |
+| [V](halls/military.html) | Military & Spy Ciphers | [Nihilist](ciphers/nihilist.html), [Bazeries](ciphers/bazeries.html), [VIC](ciphers/vic.html), [Straddling Checkerboard](ciphers/straddling-checkerboard.html), [Book Cipher](ciphers/book-cipher.html) |
 | [VI](halls/civil-war.html) | Civil War Gallery | [Stager](ciphers/stager.html), [Confederate Vigenère](ciphers/confederate-vigenere.html), [Dictionary Code](ciphers/dictionary-code.html) |
-| [VII](halls/machines.html) | Mechanical Cipher Machines | [Jefferson Disk](ciphers/jefferson-disk.html), [Chaocipher](ciphers/chaocipher.html), [Enigma](ciphers/enigma.html), [M-209](ciphers/m209.html), [Lorenz](ciphers/lorenz.html), [Purple](ciphers/purple.html), [Navajo Code Talkers](ciphers/navajo-code-talkers.html) |
-| [VIII](halls/puzzle.html) | Puzzle & Novelty Ciphers | [Pigpen](ciphers/pigpen.html), [Bacon](ciphers/bacon.html), [Tap Code](ciphers/tap-code.html), [Copiale](ciphers/copiale.html), [Beale](ciphers/beale.html), [Voynich](ciphers/voynich.html), [Zodiac](ciphers/zodiac.html), [Kryptos](ciphers/kryptos.html) |
+| [VII](halls/machines.html) | Mechanical Cipher Machines | [Jefferson Disk](ciphers/jefferson-disk.html), [Chaocipher](ciphers/chaocipher.html), [Enigma](ciphers/enigma.html), [M-209](ciphers/m209.html), [Lorenz](ciphers/lorenz.html), [Purple](ciphers/purple.html), [SIGABA](ciphers/sigaba.html), [Typex](ciphers/typex.html), [Navajo Code Talkers](ciphers/navajo-code-talkers.html) |
+| [VIII](halls/puzzle.html) | Puzzle & Novelty Ciphers | [Pigpen](ciphers/pigpen.html), [Bacon](ciphers/bacon.html), [Tap Code](ciphers/tap-code.html), [Copiale](ciphers/copiale.html), [Beale](ciphers/beale.html), [Voynich](ciphers/voynich.html), [Dorabella](ciphers/dorabella.html), [Zodiac](ciphers/zodiac.html), [Kryptos](ciphers/kryptos.html) |
 | [IX](halls/unbreakable.html) | The Unbreakable | [One-Time Pad](ciphers/one-time-pad.html), [Vernam](ciphers/vernam.html), [Solitaire / Pontifex](ciphers/solitaire.html) |
-| [X](halls/codebreakers.html) | Hall of Codebreakers | 15 biographies — from Al-Kindi (frequency analysis, c. 850) to the 2011 Copiale team and the 2010 Chaocipher reconstruction |
+| [X](halls/codebreakers.html) | Hall of Codebreakers | 21 biographies — from Al-Kindi (c. 850) through Turing, Rejewski, Tutte, Friedman, Clarke, Driscoll, Marks to the 2011 Copiale team |
+| [XI](halls/modern-crypto.html) | Modern Cryptography | [DES](ciphers/des.html), [Diffie-Hellman](ciphers/diffie-hellman.html), [RSA](ciphers/rsa.html), [AES](ciphers/aes.html), [SHA-256](ciphers/sha256.html) |
 
 ### 🔐 Every Exhibit Follows Four-Part Structure
 
@@ -47,9 +48,9 @@ An open-source, interactive educational website spanning **52 historically impor
 3. **How It Was Broken** — The specific technique, with context
 4. **What It Teaches Modern Crypto** — The direct line from this cipher to AES/RSA
 
-### 🎯 52 Interactive Demos
+### 🎯 62 Interactive Demos
 
-All 52 cipher pages have fully interactive encrypt/decrypt demos built with vanilla JavaScript — no frameworks, no build tools. Type a message, set a key, and watch the cipher work in real time. Demos are dynamically generated by [js/demo-loader.js](js/demo-loader.js) from cipher engine implementations in [js/ciphers/all-engines.js](js/ciphers/all-engines.js).
+All 62 cipher pages with engines have fully interactive encrypt/decrypt demos built with vanilla JavaScript — no frameworks, no build tools. (The Dorabella exhibit is included as the 63rd cipher but has no demo — it remains unsolved.) Type a message, set a key, and watch the cipher work in real time. Demos are dynamically generated by [js/demo-loader.js](js/demo-loader.js) from cipher engine implementations in [js/ciphers/all-engines.js](js/ciphers/all-engines.js).
 
 **Complete demo roster:**
 
@@ -118,7 +119,7 @@ Each row gives the year the cipher was first known/published and when it was bro
     - **N-gram & entropy panel** — bigram/trigram counts and Shannon entropy for distinguishing transposition (preserves frequencies) from substitution (alters them).
     - **Side-by-side Encrypt/Decrypt panes** with copy-to-clipboard and a swap button so you can iterate on a key without retyping ciphertext.
     - **Same engine source as the exhibits** — the workbench pulls from [js/ciphers/all-engines.js](js/ciphers/all-engines.js), so anything you reproduce here matches every demo on the site.
-- **[Site Search](search.html)** — Search across all 63 ciphers, 10 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
+- **[Site Search](search.html)** — Search across all 63 ciphers, 11 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
 - **[Cryptanalysis Techniques](cryptanalysis.html)** — 10 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), HMM/SMT decoding (Copiale), and Chaocipher reconstruction.
 - **[Cipher Challenges](challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
 - **[Timeline](timeline.html)** — Interactive 2,500-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
@@ -151,7 +152,7 @@ cipher-museum/
 ├── index.html               ← Entrance Hall (hero + 10 hall cards)
 ├── museum-map.html          ← Interactive floor plan with all exhibits
 ├── timeline.html            ← 2,400-year timeline with era filtering & scroll-spy
-├── comparison.html          ← Sortable 52-cipher comparison table
+├── comparison.html          ← Sortable 63-cipher comparison table
 ├── challenges.html          ← 10 progressive cipher challenges
 ├── glossary.html            ← Cryptography glossary
 ├── cryptanalysis.html       ← Cryptanalysis Techniques (7 interactive techniques)
@@ -164,8 +165,8 @@ cipher-museum/
 │   ├── nav.js               ← Navigation system (sticky nav, hamburger, ARIA)
 │   ├── demo-loader.js       ← Dynamic demo UI generator for all cipher pages
 │   └── ciphers/
-│       └── all-engines.js   ← 52 cipher engine implementations
-├── halls/                   ← 10 exhibit halls
+│       └── all-engines.js   ← 55 cipher engine implementations
+├── halls/                   ← 11 exhibit halls
 │   ├── ancient.html          ← Hall I: Birth of Cryptography
 │   ├── substitution.html     ← Hall II: Classical Substitution
 │   ├── polyalphabetic.html   ← Hall III: Polyalphabetic Revolution
@@ -176,7 +177,7 @@ cipher-museum/
 │   ├── puzzle.html           ← Hall VII: Puzzle & Novelty
 │   ├── unbreakable.html      ← Final Hall: The Unbreakable
 │   └── codebreakers.html     ← Special Exhibition: Hall of Codebreakers
-├── ciphers/                  ← 52 cipher exhibit pages (all with interactive demos)
+├── ciphers/                  ← 63 cipher exhibit pages (62 with interactive demos)
 │   ├── caesar.html            ← with interactive demo + SVG wheel diagram
 │   ├── enigma.html            ← with rotor wiring SVG diagram
 │   ├── vigenere.html          ← with tabula recta SVG + Kasiski analysis
