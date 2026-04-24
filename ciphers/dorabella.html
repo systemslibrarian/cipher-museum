@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dorabella Cipher — The Cipher Museum</title>
-  <meta name="description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall VIII of The Cipher Museum.">
+  <meta name="description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall XII of The Cipher Museum.">
   <meta property="og:title" content="Dorabella Cipher — The Cipher Museum">
-  <meta property="og:description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall VIII of The Cipher Museum.">
+  <meta property="og:description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall XII of The Cipher Museum.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/ciphers/dorabella.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Dorabella Cipher — The Cipher Museum">
-  <meta name="twitter:description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall VIII of The Cipher Museum.">
+  <meta name="twitter:description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall XII of The Cipher Museum.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/ciphers/dorabella.html">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
@@ -29,7 +29,14 @@
       </svg>
       <span class="nav-logo-text">The Cipher Museum</span>
     </a>
-    <ul class="nav-links"></ul>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
   </div>
 </nav>
 
@@ -37,7 +44,7 @@
 <div class="page-hero">
   <div class="breadcrumb">
     <a href="../index.html">Entrance</a><span>&rsaquo;</span>
-    <a href="../halls/puzzle.html">Hall VIII: Puzzle & Unsolved</a><span>&rsaquo;</span>
+    <a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a><span>&rsaquo;</span>
     Dorabella Cipher
   </div>
   <div class="page-meta">
@@ -53,6 +60,65 @@
     <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Nobody — over 125 years of attempts, no consensus solution</span></div>
     <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Tiny ciphertexts (87 chars) don't give cryptanalysis enough statistical signal</span></div>
   </div>
+</div>
+
+<div class="demo-section" data-cipher="dorabella">
+  <h2>Symbol Inspector</h2>
+  <p style="opacity:.85;">Explore Dorabella's 24-symbol system by selecting an orientation and arc count. This does not claim a solution; it visualizes the design space that makes short-text cryptanalysis hard.</p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:end;margin-top:1rem;">
+    <label style="display:flex;flex-direction:column;gap:.35rem;min-width:12rem;">
+      <span style="font-weight:600;">Arc count</span>
+      <select id="dora-arcs" style="padding:.55rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;">
+        <option value="1">1 arc</option>
+        <option value="2">2 arcs</option>
+        <option value="3" selected>3 arcs</option>
+      </select>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:.35rem;min-width:12rem;">
+      <span style="font-weight:600;">Orientation</span>
+      <select id="dora-angle" style="padding:.55rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;">
+        <option value="0">0°</option>
+        <option value="45">45°</option>
+        <option value="90">90°</option>
+        <option value="135">135°</option>
+        <option value="180">180°</option>
+        <option value="225">225°</option>
+        <option value="270">270°</option>
+        <option value="315" selected>315°</option>
+      </select>
+    </label>
+    <button type="button" id="dora-render" style="padding:.6rem 1rem;background:var(--gold-glow);border:1px solid var(--gold-b);color:var(--gold);border-radius:6px;cursor:pointer;">Render symbol</button>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(12rem,16rem) minmax(0,1fr);gap:1rem;margin-top:1rem;align-items:start;">
+    <svg id="dora-symbol" viewBox="0 0 140 140" role="img" aria-label="Dorabella symbol viewer" style="width:100%;background:rgba(0,0,0,.22);border:1px solid var(--gold-b);border-radius:8px;padding:.5rem;"></svg>
+    <div id="dora-output" style="padding:1rem;background:rgba(0,0,0,.22);border:1px solid var(--gold-b);border-radius:8px;font-family:var(--fm);line-height:1.7;min-height:7rem;"></div>
+  </div>
+  <script>
+    (function () {
+      var SAMPLES = ['\u25dc', '\u25dd', '\u25de', '\u25df'];
+      function draw() {
+        var arcs = parseInt(document.getElementById('dora-arcs').value, 10);
+        var angle = parseInt(document.getElementById('dora-angle').value, 10);
+        var svg = document.getElementById('dora-symbol');
+        var rings = '';
+        for (var i = 0; i < arcs; i++) {
+          var r = 18 + (i * 10);
+          rings += '<path d="M 70 ' + (70 - r) + ' A ' + r + ' ' + r + ' 0 0 1 70 ' + (70 + r) + '" stroke="currentColor" stroke-width="3" fill="none" />';
+        }
+        svg.innerHTML = '<g transform="rotate(' + angle + ' 70 70)">' + rings + '</g>';
+        document.getElementById('dora-output').textContent =
+          'Selected symbol class\n' +
+          '- Arc count: ' + arcs + '\n' +
+          '- Orientation: ' + angle + '°\n\n' +
+          'There are 3 arc classes × 8 orientations = 24 possible symbols.\n' +
+          'With only 87 characters of ciphertext, many substitution mappings can score as plausible language by chance.';
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('dora-render').addEventListener('click', draw);
+        draw();
+      });
+    })();
+  </script>
 </div>
 
 
@@ -149,9 +215,9 @@
 </section>
 
 <div class="hall-nav">
-  <a href="../ciphers/voynich.html" class="hall-nav-link">
+  <a href="../ciphers/beale.html" class="hall-nav-link">
     <span class="hall-nav-dir">&larr; Previous</span>
-    <span class="hall-nav-name">Voynich Manuscript</span>
+    <span class="hall-nav-name">Beale Ciphers</span>
   </a>
   <a href="../ciphers/zodiac.html" class="hall-nav-link next">
     <span class="hall-nav-dir">Next &rarr;</span>
@@ -161,7 +227,33 @@
 
 </main>
 
-<footer class="museum-footer"></footer>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XII · Unsolved</span>
+  </div>
+</footer>
 <script src="../js/ciphers/all-engines.js"></script>
 <script src="../js/demo-loader.js"></script>
 <script src="../js/nav.js" defer></script>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIT Mystery Hunt — The Cipher Museum</title>
+  <meta name="description" content="An annual three-day puzzle marathon at MIT (since 1981) where teams solve dozens of layered cryptographic, linguistic, and lateral-thinking puzzles to find a hidden coin somewhere on campus.">
+  <meta property="og:title" content="MIT Mystery Hunt — The Cipher Museum">
+  <meta property="og:description" content="An annual three-day puzzle marathon at MIT (since 1981) where teams solve dozens of layered cryptographic, linguistic, and lateral-thinking puzzles to find a hidden coin somewhere on campus.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/mit-mystery-hunt.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MIT Mystery Hunt — The Cipher Museum">
+  <meta name="twitter:description" content="An annual three-day puzzle marathon at MIT (since 1981) where teams solve dozens of layered cryptographic, linguistic, and lateral-thinking puzzles to find a hidden coin somewhere on campus.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/mit-mystery-hunt.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    MIT Mystery Hunt
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Culture</span>
+    <span class="badge era-modern">MIT · 1981–present</span>
+    <span class="badge sec-broken">Annual collaborative puzzle hunt</span>
+  </div>
+  <h1 class="page-title">MIT Mystery Hunt</h1>
+  <p class="page-tagline">An annual three-day puzzle marathon at MIT (since 1981) where teams solve dozens of layered cryptographic, linguistic, and lateral-thinking puzzles to find a hidden coin somewhere on campus.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Cambridge, Massachusetts, USA</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">First held January 1981</span></div>
+    <div class="fact"><span class="fact-label">Founder</span><span class="fact-value">Brad Schaefer, MIT graduate student</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (sample puzzle illustrator)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="mit-mystery-hunt">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Try a tiny meta-style puzzle: the widget gives you four short answers, and you must spot which classical cipher links them. Track B — illustrative.</p>
+  <p style="opacity:.85;">Four puzzle answers were:<br><strong>FENCE &nbsp; ENCODE &nbsp; ENIGMA &nbsp; CAESAR</strong></p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">What links them? (one word)</label>
+  <input type="text" id="input" value="ciphers" maxlength="40" style="width:14rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Submit guess</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      window.encode = function () {
+        var raw = (document.getElementById('input').value || '').trim().toLowerCase();
+        var out = document.getElementById('output');
+        var hint = 'Each answer names a cipher (or a cipher tool):\n  FENCE  \u2192 Rail-fence transposition\n  ENCODE \u2192 Generic verb \u2014 trap answer\n  ENIGMA \u2192 Enigma machine\n  CAESAR \u2192 Caesar cipher\n\nMeta-link: \u201cthings in the Cipher Museum\u201d \u2014 the meta-answer is one of\nCIPHERS, CRYPTOGRAPHY, EXHIBITS, or HALL.';
+        if (raw === 'ciphers' || raw === 'cipher') {
+          out.textContent = '\u2705  Solved! Meta-answer accepted.\n\n' + hint;
+        } else if (raw === 'cryptography' || raw === 'exhibits' || raw === 'hall') {
+          out.textContent = '\ud83d\udd35  Close \u2014 acceptable variant.\n\n' + hint;
+        } else {
+          out.textContent = '\u274c  Not the meta-answer. Hint:\n\n' + hint;
+        }
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The MIT Mystery Hunt, held over MLK weekend each January, is the longest-running large puzzle hunt in the world. Teams of 50–100 solvers work for 60+ hours straight to crack dozens of puzzles whose solutions feed into meta-puzzles, eventually pointing to the location of a physical coin hidden on MIT's campus. The hunt produces some of the most ingenious cryptographic puzzles ever set publicly, regularly using Vigenère, Bacon, Polybius, Morse, semaphore, braille, IPA, base-N encodings, and bespoke ciphers invented by the year's writing team.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Brad Schaefer ran the first hunt in 1981 with a single sheet of paper given to a few friends. The hunt has grown every year since. Each year's winning team writes the next year's puzzles — a tradition that creates an unbroken lineage of escalating puzzle craftsmanship. Notable cryptographic moments include 'PennyPark' (2017, Caesar + Bacon stack), 'Mind Wars' (2014, Vigenère across multiple media), and the famous 'Random Hall' meta of 2003 which required reconstructing a cipher key from physical room numbers. Many professional cryptographers (including several at the NSA, Google, and academic departments) trained on Mystery Hunt puzzles.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Mystery Hunt puzzles often <em>compose</em> ciphers in surprising ways: the answers to a dozen Vigenère puzzles, sorted by length, might themselves be a Caesar shift sequence; a Polybius square decoded from one puzzle becomes the keyboard layout for entering another. The pedagogy is implicit: solvers learn to recognise classical ciphers on sight, master tools like CyberChef and dCode, and develop intuition for when a 'random' string is in fact a Bacon-encoded acrostic.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>The Mystery Hunt template — collaborative weekend hunts with multi-stage cipher puzzles — has been replicated worldwide: the Galactic Puzzle Hunt, Puzzle Boat, BAPHL, Puzzled Pint, and corporate hunt clones at Microsoft, Google, and Stripe. Together these hunts form the largest informal training pipeline for amateur cryptanalysis in the world.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XIII · Culture</td></tr>
+            <tr><td>Region</td><td>Cambridge, Massachusetts, USA</td></tr>
+            <tr><td>Era</td><td>MIT · 1981–present</td></tr>
+            <tr><td>Discipline</td><td>Composite puzzle / cipher hunt</td></tr>
+            <tr><td>Track</td><td>B (sample puzzle illustrator)</td></tr>
+            <tr><td>Modern echo</td><td>Puzzle-hunt genre · Galactic Puzzle Hunt · Puzzled Pint</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/cicada-3301.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cicada 3301</span>
+      <span class="related-card__tag">Same puzzle-stack lineage</span>
+    </a>
+    <a href="../ciphers/kryptos.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Kryptos</span>
+      <span class="related-card__tag">Famous public puzzle</span>
+    </a>
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Vigenère</span>
+      <span class="related-card__tag">Common Mystery-Hunt primitive</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/krypto-arg.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">ARG Ciphers</span>
+  </a>
+  <a href="../ciphers/sator-square.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Sator Square</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Somerton Man Code — The Cipher Museum</title>
+  <meta name="description" content="An unidentified man found dead on an Adelaide beach in 1948 with the word 'Tamám Shud' in his pocket — and a page of letters that may or may not be a cipher.">
+  <meta property="og:title" content="Somerton Man Code — The Cipher Museum">
+  <meta property="og:description" content="An unidentified man found dead on an Adelaide beach in 1948 with the word 'Tamám Shud' in his pocket — and a page of letters that may or may not be a cipher.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/somerton-man.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Somerton Man Code — The Cipher Museum">
+  <meta name="twitter:description" content="An unidentified man found dead on an Adelaide beach in 1948 with the word 'Tamám Shud' in his pocket — and a page of letters that may or may not be a cipher.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/somerton-man.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a><span>&rsaquo;</span>
+    Somerton Man Code
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XII · Unsolved</span>
+    <span class="badge era-modern">Post-WWII Australia · 1948</span>
+    <span class="badge sec-broken">Unsolved Cold-War-era inscription</span>
+  </div>
+  <h1 class="page-title">Somerton Man Code</h1>
+  <p class="page-tagline">An unidentified man found dead on an Adelaide beach in 1948 with the word 'Tamám Shud' in his pocket — and a page of letters that may or may not be a cipher.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Adelaide, South Australia</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1 December 1948 (body found); code revealed 1949</span></div>
+    <div class="fact"><span class="fact-label">Discovered in</span><span class="fact-value">Copy of Omar Khayyám's <em>Rubáiyát</em> linked to the body</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (substitution playground)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="somerton-man">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Try a substitution: type a single letter A–Z and a candidate plaintext letter to substitute throughout the inscription. The widget redraws the four letter-groups with your guess in place. Track B — exploration only.</p>
+  <p style="opacity:.85;font-family:monospace;background:rgba(0,0,0,.2);padding:.6rem;border-radius:4px;">MRGOABABD<br>MTBIMPANETP<br>MLIABOAIAQC<br>ITTMTSAMSTGAB</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Substitute (cipher letter \u2192 plaintext guess)</label>
+  <input type="text" id="input" value="M=W" maxlength="3" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Apply substitution</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      var TEXT = 'MRGOABABD\nMTBIMPANETP\nMLIABOAIAQC\nITTMTSAMSTGAB';
+      window.encode = function () {
+        var raw = (document.getElementById('input').value || '').toUpperCase();
+        var m = raw.match(/^([A-Z])=([A-Z])$/);
+        var out = document.getElementById('output');
+        if (!m) { out.textContent = 'Format: single letter = single letter, e.g. M=W'; return; }
+        var from = m[1], to = m[2];
+        var swapped = TEXT.split('').map(function (c) {
+          if (c === from) return to.toLowerCase();
+          return c;
+        }).join('');
+        var freq = {};
+        TEXT.replace(/\n/g, '').split('').forEach(function (c) { freq[c] = (freq[c] || 0) + 1; });
+        var freqLines = Object.keys(freq).sort(function (a, b) { return freq[b] - freq[a]; })
+          .slice(0, 8).map(function (k) { return '  ' + k + ' \u00d7 ' + freq[k]; });
+        out.textContent =
+          'After ' + from + ' \u2192 ' + to + ':\n\n' + swapped +
+          '\n\nLetter frequency (top 8):\n' + freqLines.join('\n');
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>On 1 December 1948 an unidentified man was found dead on Somerton beach near Adelaide. In a fob pocket was the printed scrap 'Tamám Shud' ('it is ended'), torn from the last page of a copy of Edward FitzGerald's translation of Omar Khayyám's <em>Rubáiyát</em>. The book itself was later found, and inside its back cover, faintly pencilled, was a sequence of letters: <strong>MRGOABABD · MTBIMPANETP · MLIABOAIAQC · ITTMTSAMSTGAB</strong>. The letters have never been deciphered.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The case is one of the most famous unsolved deaths in Australian history. The man wore tailored clothing with all labels removed; an autopsy could not determine cause of death; he carried no identification. Code-breakers at Australian Naval Intelligence in 1949 examined the pencilled letters and concluded they were probably a one-time pad or a book code keyed to the <em>Rubáiyát</em>, but no key text has produced a confirmed plaintext. In 2022 forensic genealogist Colleen Fitzpatrick and Professor Derek Abbott (University of Adelaide) used DNA from a hair preserved in the death mask to identify the man as Carl 'Charles' Webb, a Melbourne electrical engineer — but the pencilled letters remain unsolved.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>There are 44 or 45 letters depending on transcription. Letter-frequency analysis shows the letters do not match natural English — too many M's and T's, no Q, X, or Z. This is consistent with either: (a) a one-time pad XOR-style output, where any plaintext is possible; (b) the first letters of words from a <em>Rubáiyát</em> stanza or other indexed text — i.e. an acrostic book code. The Adelaide police, Naval Intelligence, and decades of amateur cryptanalysts have all failed to find a stanza that produces sensible English under either reading.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>The Somerton Man case is a touchstone for combining modern forensic genetics with classical cryptanalysis — the body's identity has now been recovered through DNA, but the cipher remains as opaque as it was in 1949. It is a regular case study in courses on Cold War espionage and book ciphers, and a persistent reminder that not every cipher is meant to be solved by outsiders.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XII · Unsolved</td></tr>
+            <tr><td>Region</td><td>Adelaide, South Australia</td></tr>
+            <tr><td>Era</td><td>Post-WWII Australia · 1948</td></tr>
+            <tr><td>Discipline</td><td>Suspected one-time pad / book code</td></tr>
+            <tr><td>Track</td><td>B (substitution playground)</td></tr>
+            <tr><td>Modern echo</td><td>DNA forensics + cryptanalysis · unsolved cold cases</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/one-time-pad.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">One-Time Pad</span>
+      <span class="related-card__tag">If used, undecipherable in principle</span>
+    </a>
+    <a href="../ciphers/book-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Book Cipher</span>
+      <span class="related-card__tag">Indexed-text plaintext recovery</span>
+    </a>
+    <a href="../ciphers/beale.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Beale Ciphers</span>
+      <span class="related-card__tag">Suspected book-cipher key</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/dagapeyeff.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">D'Agapeyeff Cipher</span>
+  </a>
+  <a href="../ciphers/mccormick.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">McCormick Notes</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XII · Unsolved</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sator Square — The Cipher Museum</title>
+  <meta name="description" content="A 2nd-century Roman five-letter palindromic word square — SATOR · AREPO · TENET · OPERA · ROTAS — readable forwards, backwards, up, and down. Every element of the square also rearranges into PATER NOSTER + A and O.">
+  <meta property="og:title" content="Sator Square — The Cipher Museum">
+  <meta property="og:description" content="A 2nd-century Roman five-letter palindromic word square — SATOR · AREPO · TENET · OPERA · ROTAS — readable forwards, backwards, up, and down. Every element of the square also rearranges into PATER NOSTER + A and O.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/sator-square.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sator Square — The Cipher Museum">
+  <meta name="twitter:description" content="A 2nd-century Roman five-letter palindromic word square — SATOR · AREPO · TENET · OPERA · ROTAS — readable forwards, backwards, up, and down. Every element of the square also rearranges into PATER NOSTER + A and O.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/sator-square.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    Sator Square
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Culture</span>
+    <span class="badge era-ancient">Roman Empire · 1st–4th c. CE</span>
+    <span class="badge sec-broken">Palindromic word square / hidden acrostic</span>
+  </div>
+  <h1 class="page-title">Sator Square</h1>
+  <p class="page-tagline">A 2nd-century Roman five-letter palindromic word square — SATOR · AREPO · TENET · OPERA · ROTAS — readable forwards, backwards, up, and down. Every element of the square also rearranges into PATER NOSTER + A and O.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Rome / Pompeii / Roman Britain</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Earliest extant example: Pompeii, before 79 CE</span></div>
+    <div class="fact"><span class="fact-label">Earliest find</span><span class="fact-value">Wall graffito, Pompeii, before 79 CE</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (palindrome verifier)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="sator-square">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">The widget verifies the four-direction palindrome and runs the famous PATER NOSTER anagram check. Type your own 5-letter palindrome candidate to test it. Track B — verification tool.</p>
+        <pre style="font-family:monospace;background:rgba(0,0,0,.2);padding:.6rem;border-radius:4px;line-height:1.4;">S A T O R
+  A R E P O
+  T E N E T
+  O P E R A
+  R O T A S</pre>
+        <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Test a 5\u00d75 word square (5 words \u00d7 5 letters)</label>
+        <input type="text" id="input" value="SATOR AREPO TENET OPERA ROTAS" style="width:100%;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;text-transform:uppercase;">
+        <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Verify symmetry</button>
+        <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+        <script>
+          (function () {
+            window.encode = function () {
+              var raw = (document.getElementById('input').value || '').toUpperCase().trim().split(/\s+/);
+              var out = document.getElementById('output');
+              if (raw.length !== 5 || raw.some(function (w) { return w.length !== 5; })) {
+                out.textContent = 'Need exactly 5 words of 5 letters each.'; return;
+              }
+              var rows = raw;
+              var cols = [0,1,2,3,4].map(function (c) { return rows.map(function (r) { return r[c]; }).join(''); });
+              var rowsBack = rows.map(function (r) { return r.split('').reverse().join(''); }).reverse();
+              var colsBack = cols.map(function (c) { return c.split('').reverse().join(''); }).reverse();
+              var rowEqCol = rows.join('|') === cols.join('|');
+              var rowsPalin = rows.join('|') === rowsBack.join('|');
+              var allLetters = rows.join('').split('').sort().join('');
+              var pater = 'PATERNOSTER'.split('').sort().join('');
+              var pnCheck = pater.split('').every(function (c) { return allLetters.indexOf(c) >= 0; });
+              out.textContent =
+                'Rows = Columns?       ' + (rowEqCol ? '\u2705' : '\u274c') + '\n' +
+                'Rows = reversed rows? ' + (rowsPalin ? '\u2705' : '\u274c') + '\n' +
+                'Contains PATERNOSTER? ' + (pnCheck ? '\u2705 (anagram possible)' : '\u274c') + '\n\n' +
+                (rowEqCol && rowsPalin ? 'Square is fully bi-axial \u2014 a true Sator-class word square.' :
+                                          'Not a Sator-class square.');
+            };
+            document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+          })();
+        </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Sator Square is a 5×5 grid of Latin letters whose five rows spell five Latin words: SATOR (sower), AREPO (a name, perhaps Greek), TENET (holds), OPERA (works), ROTAS (wheels). Read top-to-bottom or right-to-left it gives the same words. In the early 20th century scholars showed that the 25 letters can be rearranged into the cross-pattern <strong>PATER NOSTER</strong> ('Our Father') intersecting twice, with two A's and two O's left over — interpreted as alpha and omega. The square is plausibly the earliest known cryptographic Christian symbol, hiding the Lord's Prayer inside a Roman word puzzle during periods of persecution.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The earliest dated examples come from Pompeii (before 79 CE — at least one example was carved into a column in the Palaestra). Other examples have been found at Dura-Europos (Syria, 165 CE), Manchester (Roman Britain, 2nd-3rd c.), Cirencester (4th c.), and dozens of medieval European churches. The PATER NOSTER cross-anagram was independently discovered by the German pastor Felix Grosser (1926) and the British scholar C. W. Ceram. The interpretation of the square as a covert Christian symbol is widely accepted but not universally; some scholars argue the Pompeii examples predate plausible Christian presence in southern Italy.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Cryptographically the Sator Square exhibits two distinct classical techniques: it is a <em>palindrome</em> (reads the same in multiple directions, providing self-verification) and it is an <em>acrostic anagram</em> (its letters rearrange into a hidden plaintext). The combination — symmetric outer text concealing an asymmetric inner text — anticipates 20th-century steganographic ideals where a benign-looking carrier hides a meaningful payload. The 25-letter constraint is severe: there is only one known Latin word square of this form.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>The Sator Square remains the most studied cryptographic word square in history. It appears in works on early Christian semiotics, in Umberto Eco's <em>Foucault's Pendulum</em>, in <em>Tenet</em> (Christopher Nolan, 2020 — the film borrows the entire square as a structural framing device), and in countless puzzle collections.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XIII · Culture</td></tr>
+            <tr><td>Region</td><td>Rome / Pompeii / Roman Britain</td></tr>
+            <tr><td>Era</td><td>Roman Empire · 1st–4th c. CE</td></tr>
+            <tr><td>Discipline</td><td>Bidirectional acrostic / word square</td></tr>
+            <tr><td>Track</td><td>B (palindrome verifier)</td></tr>
+            <tr><td>Modern echo</td><td>Bidirectional ciphers · acrostic prayer codes · Christian symbolism</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/pigpen.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Pigpen Cipher</span>
+      <span class="related-card__tag">Symbol-substitution Christian-era cipher</span>
+    </a>
+    <a href="../ciphers/bacon.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Bacon's Cipher</span>
+      <span class="related-card__tag">Hidden-acrostic encoding</span>
+    </a>
+    <a href="../ciphers/atbash.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Atbash</span>
+      <span class="related-card__tag">Religious-context substitution</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/mit-mystery-hunt.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">MIT Mystery Hunt</span>
+  </a>
+  <a href="../ciphers/freemason-pigpen.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Freemason Pigpen</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

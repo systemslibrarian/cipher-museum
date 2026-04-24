@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poe's Gold-Bug Cipher — The Cipher Museum</title>
+  <meta name="description" content="Edgar Allan Poe's 1843 short story The Gold-Bug — the first widely read piece of fiction to teach cryptanalysis, complete with a worked decipherment of a buried-treasure cryptogram.">
+  <meta property="og:title" content="Poe's Gold-Bug Cipher — The Cipher Museum">
+  <meta property="og:description" content="Edgar Allan Poe's 1843 short story The Gold-Bug — the first widely read piece of fiction to teach cryptanalysis, complete with a worked decipherment of a buried-treasure cryptogram.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/gold-bug.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Poe's Gold-Bug Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="Edgar Allan Poe's 1843 short story The Gold-Bug — the first widely read piece of fiction to teach cryptanalysis, complete with a worked decipherment of a buried-treasure cryptogram.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/gold-bug.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    Poe's Gold-Bug Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Culture</span>
+    <span class="badge era-modern">Antebellum America · 1843</span>
+    <span class="badge sec-broken">Fictional substitution cipher</span>
+  </div>
+  <h1 class="page-title">Poe's Gold-Bug Cipher</h1>
+  <p class="page-tagline">Edgar Allan Poe's 1843 short story <em>The Gold-Bug</em> — the first widely read piece of fiction to teach cryptanalysis, complete with a worked decipherment of a buried-treasure cryptogram.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Sullivan's Island, South Carolina (in-fiction); Philadelphia (publication)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Published <em>Dollar Newspaper</em>, June 1843</span></div>
+    <div class="fact"><span class="fact-label">Author</span><span class="fact-value">Edgar Allan Poe (1809–1849)</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (Poe-style frequency tool)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="gold-bug">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Enter a short English plaintext and the widget will encode it using Poe's exact symbol set from <em>The Gold-Bug</em> (digits and punctuation). Click 'analyse' to see the frequency table Poe walked his readers through. Track B — illustrative.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">English plaintext</label>
+  <input type="text" id="input" value="A GOOD GLASS IN THE BISHOPS HOSTEL" maxlength="80" style="width:100%;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Encode + analyse</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      // Poe\u2019s actual symbol substitutions from the story (selection).
+      var MAP = { A:')', B:'2', C:'-', D:'\u2020', E:'8', F:'1', G:'3', H:'4',
+                   I:'6', J:'?', K:'\u00b6', L:'0', M:'9', N:'*', O:'\u2021',
+                   P:'.', Q:'/', R:'(', S:';', T:'5', U:':', V:'"', W:'!',
+                   X:'@', Y:'7', Z:'#' };
+      window.encode = function () {
+        var raw = (document.getElementById('input').value || '').toUpperCase();
+        var out = document.getElementById('output');
+        var enc = raw.split('').map(function (c) { return MAP[c] || c; }).join('');
+        var freq = {};
+        enc.split('').forEach(function (c) { if (c !== ' ') freq[c] = (freq[c] || 0) + 1; });
+        var entries = Object.keys(freq).sort(function (a, b) { return freq[b] - freq[a]; });
+        var lines = entries.slice(0, 8).map(function (k) {
+          var plain = Object.keys(MAP).find(function (p) { return MAP[p] === k; }) || '?';
+          return '  ' + k + '  \u00d7 ' + freq[k] + '   (= ' + plain + ')';
+        });
+        out.textContent = 'Encoded:\n\n' + enc +
+          '\n\nFrequency (Poe\u2019s attack route):\n' + lines.join('\n') +
+          '\n\nIn the story Poe identifies \u20188\u2019 as E first, exactly this way.';
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Poe's <em>The Gold-Bug</em> contains one of the most famous worked cryptanalyses in American literature. The narrator's friend William Legrand discovers a parchment bearing 203 numerals and symbols and breaks it through frequency analysis to recover Captain Kidd's treasure map. Poe presents the entire decipherment step-by-step, in plain English, in the story itself — turning a popular short story into a cryptanalysis tutorial. <em>The Gold-Bug</em> won a $100 prize, sold over 300,000 copies in Poe's lifetime, and made him America's most famous author.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Poe was a passionate amateur cryptographer. As editor of <em>Graham's Magazine</em> in 1841 he ran a column challenging readers to send him substitution ciphers, claiming he could solve any one. He published the solutions to almost every submission (including, in some cases, fabricated 'submissions' he had constructed himself). <em>The Gold-Bug</em> grew directly from that column. The cipher in the story uses digits, punctuation, and typographic dingbats as substitution symbols, and the worked example walks the reader through identifying '8' as E (most frequent), then 'the', then progressively rarer letters until a Captain Kidd map emerges.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Like the Dancing Men cipher (which Conan Doyle published 60 years later, almost certainly inspired by Poe), the Gold-Bug cryptogram is a pure monoalphabetic substitution and falls to standard frequency analysis. Poe's narrative is essentially a textbook in disguise. He is correct that English-language E dominates at ~12%, that T, A, O, I, N follow, that 'the' is the most common trigram, and that digrammatic and word-pattern matching close the gap once a few letters are known. Modern cryptanalysis still teaches exactly this attack against monoalphabetic substitutions.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p><em>The Gold-Bug</em> is the founding document of <em>cryptography as popular culture</em>. Every later 'breakable cipher in fiction' — Conan Doyle, Verne, Sayers, Sebald, Brown — owes Poe a debt. It is also indirectly responsible for the early 20th-century recruitment of amateur cryptanalysts into government work: Bletchley Park's famous <em>Daily Telegraph</em> crossword test (1942) was a direct descendant of Poe's reader-cipher columns.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XIII · Culture</td></tr>
+            <tr><td>Region</td><td>Sullivan's Island, South Carolina (in-fiction); Philadelphia (publication)</td></tr>
+            <tr><td>Era</td><td>Antebellum America · 1843</td></tr>
+            <tr><td>Discipline</td><td>Monoalphabetic substitution (digit/symbol)</td></tr>
+            <tr><td>Track</td><td>B (Poe-style frequency tool)</td></tr>
+            <tr><td>Modern echo</td><td>Public cryptanalysis · Bletchley recruitment puzzles</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/monoalphabetic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Monoalphabetic Substitution</span>
+      <span class="related-card__tag">Same cipher class</span>
+    </a>
+    <a href="../ciphers/dancing-men.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Dancing Men</span>
+      <span class="related-card__tag">Conan Doyle's later homage</span>
+    </a>
+    <a href="../ciphers/babington.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Babington Plot</span>
+      <span class="related-card__tag">Real-world frequency analysis</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/dancing-men.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Dancing Men</span>
+  </a>
+  <a href="../ciphers/cicada-3301.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Cicada 3301</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

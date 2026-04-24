@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D'Agapeyeff Cipher — The Cipher Museum</title>
+  <meta name="description" content="A 1939 textbook 'cryptogram for the student' that the author himself later admitted he had forgotten how to solve.">
+  <meta property="og:title" content="D'Agapeyeff Cipher — The Cipher Museum">
+  <meta property="og:description" content="A 1939 textbook 'cryptogram for the student' that the author himself later admitted he had forgotten how to solve.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/dagapeyeff.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="D'Agapeyeff Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="A 1939 textbook 'cryptogram for the student' that the author himself later admitted he had forgotten how to solve.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/dagapeyeff.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a><span>&rsaquo;</span>
+    D'Agapeyeff Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XII · Unsolved</span>
+    <span class="badge era-modern">Pre-WWII Britain · 1939</span>
+    <span class="badge sec-broken">Unsolved challenge cipher</span>
+  </div>
+  <h1 class="page-title">D'Agapeyeff Cipher</h1>
+  <p class="page-tagline">A 1939 textbook 'cryptogram for the student' that the author himself later admitted he had forgotten how to solve.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">London, England</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1939, in <em>Codes and Ciphers</em>, OUP</span></div>
+    <div class="fact"><span class="fact-label">Author</span><span class="fact-value">Alexander d'Agapeyeff</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (frequency analyzer)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="dagapeyeff">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Paste the 395-digit ciphertext (or use the loaded sample) and the widget will tally adjacent digit pairs. A real Polybius-style fractionation will show a non-uniform distribution. Track B — analytic helper, not a solver.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Numeric ciphertext</label>
+  <textarea id="input" rows="5" style="width:100%;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">75628 28591 62916 48164 91748 58464 74748 28483 81638 18174 74826 26475 83828 49175 74658 37575 75936 36565 81638 17585 75756 46282 92857 46382 75748 38165</textarea>
+  <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Tally digit pairs</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      window.encode = function () {
+        var raw = (document.getElementById('input').value || '').replace(/[^0-9]/g, '');
+        var out = document.getElementById('output');
+        if (raw.length < 4) { out.textContent = 'Need at least 4 digits.'; return; }
+        var counts = {};
+        for (var i = 0; i < raw.length - 1; i++) {
+          var pair = raw[i] + raw[i+1];
+          counts[pair] = (counts[pair] || 0) + 1;
+        }
+        var entries = Object.keys(counts).map(function (k) { return [k, counts[k]]; });
+        entries.sort(function (a, b) { return b[1] - a[1]; });
+        var lines = ['Digits analysed: ' + raw.length, 'Distinct adjacent pairs: ' + entries.length, '', 'Top 12 pairs by frequency:'];
+        for (var j = 0; j < Math.min(12, entries.length); j++) {
+          lines.push('  ' + entries[j][0] + '  \u00d7 ' + entries[j][1]);
+        }
+        lines.push('');
+        lines.push('A uniform random source over 100 pairs would expect ~' + (raw.length/100).toFixed(1) + ' hits per pair.');
+        out.textContent = lines.join('\n');
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>On the last page of the first edition of <em>Codes and Ciphers</em> (Oxford University Press, 1939), Alexander d'Agapeyeff appended a 395-digit numeric cryptogram as 'a cryptogram upon which the reader is invited to test his skill.' It has never been publicly cracked. By the second edition, d'Agapeyeff had quietly removed it, reportedly admitting he had forgotten the encryption method. It is one of the few unsolved ciphers whose <em>author lost the key</em>.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The cipher consists of 395 digits arranged in five-digit groups. The expected attack route assumes a fractionating system (Polybius square or similar) followed by a transposition — both common in the British cryptographic education tradition d'Agapeyeff was writing for. Bletchley Park veterans, amateur cryptanalysts, and at least three doctoral theses have attacked it. None of the proposed solutions has been independently confirmed, and several solutions are mutually contradictory.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Statistical work shows the digit distribution is not uniform — pairs and triples deviate from random — strongly implying a real cipher rather than gibberish. The most plausible theory, advanced by Vincent Lynch and others, is a Polybius substitution of plaintext letters into row-column digit pairs (10–55), followed by an irregular columnar transposition with a numerically keyed column order. The puzzle is that the corpus (~395 digits ≈ 200 plaintext characters) is just at the edge where multiple keys can fit equally well.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>The cipher is a teaching favourite for explaining <em>unicity distance</em> — the corpus is short enough that more than one key produces grammatical English. Modern brute-force searches over candidate Polybius squares and transposition keys have produced several 'almost' solutions, but none with the unambiguous English readability that would settle the case. It remains an open problem and a regular target of cryptanalysis competitions.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XII · Unsolved</td></tr>
+            <tr><td>Region</td><td>London, England</td></tr>
+            <tr><td>Era</td><td>Pre-WWII Britain · 1939</td></tr>
+            <tr><td>Discipline</td><td>Numeric fractionation (suspected)</td></tr>
+            <tr><td>Track</td><td>B (frequency analyzer)</td></tr>
+            <tr><td>Modern echo</td><td>Unicity distance · cryptanalysis competitions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/voynich.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Voynich Manuscript</span>
+      <span class="related-card__tag">Statistical attacks on small corpora</span>
+    </a>
+    <a href="../ciphers/beale.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Beale Ciphers</span>
+      <span class="related-card__tag">Author-claimed unsolved cipher</span>
+    </a>
+    <a href="../ciphers/polybius.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Polybius Square</span>
+      <span class="related-card__tag">Fractionation primitive</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/shugborough.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Shugborough Inscription</span>
+  </a>
+  <a href="../ciphers/somerton-man.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Somerton Man Code</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XII · Unsolved</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

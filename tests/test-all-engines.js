@@ -163,6 +163,12 @@ const tests = [
   // 35. Vernam (uses random key when not provided)
   { engine: 'vernam', label: 'Vernam (XOR)', msg: 'SECRET', key: 'KEYKEE', roundtrip: false,
     customTest: true },
+
+  // 36. JN-25 (illustrative superenciphered codebook)
+  { engine: 'jn25', label: 'JN-25', msg: 'AF SHORT OF WATER', key: '31415', roundtrip: true },
+
+  // 37. Red (Type A) stepping-switch model
+  { engine: 'redTypeA', label: 'Red (Type A)', msg: 'DIPLOMATIC TRAFFIC TOKYO', key: 'TOKYORED', roundtrip: true },
 ];
 
 /* ══════════════════════════════════════════════════════════════
@@ -170,7 +176,7 @@ const tests = [
    ══════════════════════════════════════════════════════════════ */
 console.log('╔══════════════════════════════════════════════════════╗');
 console.log('║   THE CIPHER MUSEUM — Engine Test Suite             ║');
-console.log('║   Testing all 40 cipher engines                     ║');
+console.log('║   Testing all 42 cipher engines                     ║');
 console.log('╚══════════════════════════════════════════════════════╝');
 
 /* ── 1. Check that all 40 engines exist ── */
@@ -185,7 +191,7 @@ const expectedEngines = [
   'bazeries', 'alberti', 'jefferson', 'enigma', 'lorenz',
   'dictionaryCode', 'stager', 'vic',
   'scytale', 'vernam',
-  'autokey', 'nomenclator', 'bookCipher', 'sigaba', 'typex'
+  'autokey', 'nomenclator', 'bookCipher', 'sigaba', 'typex', 'jn25', 'redTypeA'
 ];
 
 for (const name of expectedEngines) {

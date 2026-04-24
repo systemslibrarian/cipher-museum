@@ -1,6 +1,6 @@
 /**
  * THE CIPHER MUSEUM — All Cipher Engines
- * Complete implementations for every exhibit (55 engines / 63 exhibits)
+ * Complete implementations for every exhibit (57 engines / 63 exhibits)
  */
 'use strict';
 
@@ -2094,6 +2094,102 @@ window.CipherEngines = (() => {
     };
   })();
 
+  /* ─── Round 3: JN-25 (illustrative superenciphered codebook model) ─── */
+  const jn25 = (() => {
+    // Pedagogical model: letters -> 5-digit code groups, then digit-wise additive superencipherment.
+    const LETTER_GROUPS = Object.fromEntries(A.split('').map((ch, i) => [ch, String(10000 + i)]));
+    const REV_GROUPS = Object.fromEntries(Object.entries(LETTER_GROUPS).map(([k, v]) => [v, k]));
+
+    function normalizeKeyDigits(key) {
+      const digits = String(key || '31415').replace(/\D/g, '');
+      return digits || '31415';
+    }
+
+    function addGroup(group, keyDigits, decrypt) {
+      let out = '';
+      for (let i = 0; i < 5; i++) {
+        const g = group.charCodeAt(i) - 48;
+        const k = keyDigits.charCodeAt(i % keyDigits.length) - 48;
+        const d = decrypt ? mod(g - k, 10) : mod(g + k, 10);
+        out += String(d);
+      }
+      return out;
+    }
+
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        const keyDigits = normalizeKeyDigits(key);
+        const groups = t.split('').map(ch => LETTER_GROUPS[ch]);
+        return groups.map(g => addGroup(g, keyDigits, false)).join(' ');
+      },
+      decode: (text, key) => {
+        const keyDigits = normalizeKeyDigits(key);
+        const groups = (String(text || '').match(/\d{5}/g) || []);
+        return groups.map(g => REV_GROUPS[addGroup(g, keyDigits, true)] || '?').join('');
+      }
+    };
+  })();
+
+  /* ─── Round 3: Red (Type A) stepping-switch model ─── */
+  const redTypeA = (() => {
+    const vowels = 'AEIOUY';
+    const consonants = 'BCDFGHJKLMNPQRSTVWXZ';
+
+    function seededRng(seedText) {
+      let s = 0;
+      for (const ch of (seedText || 'REDTYPEA')) s = (s * 131 + ch.charCodeAt(0)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      return () => {
+        s = (s * 1103515245 + 12345) & 0x7fffffff;
+        return s / 0x7fffffff;
+      };
+    }
+
+    function shuffle(alpha, rng) {
+      const arr = alpha.split('');
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr.join('');
+    }
+
+    function buildTables(key) {
+      const rng = seededRng(clean(key || 'TOKYORED'));
+      return {
+        vTables: Array.from({ length: 6 }, () => shuffle(vowels, rng)),
+        cTables: Array.from({ length: 20 }, () => shuffle(consonants, rng))
+      };
+    }
+
+    function run(text, key, decrypt) {
+      const t = clean(text);
+      const { vTables, cTables } = buildTables(key);
+      let vPos = 0;
+      let cPos = 0;
+      let out = '';
+
+      for (const ch of t) {
+        if (vowels.includes(ch)) {
+          const table = vTables[vPos % vTables.length];
+          out += decrypt ? vowels[table.indexOf(ch)] : table[vowels.indexOf(ch)];
+          vPos = (vPos + 1) % vTables.length;
+        } else if (consonants.includes(ch)) {
+          const table = cTables[cPos % cTables.length];
+          out += decrypt ? consonants[table.indexOf(ch)] : table[consonants.indexOf(ch)];
+          cPos = (cPos + 1) % cTables.length;
+        }
+      }
+      return out;
+    }
+
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -2107,6 +2203,6 @@ window.CipherEngines = (() => {
     atbash, rot13, foursquare, twosquare, straddlingCheckerboard,
     chaocipher, m209, solitaire, beale, copiale, kryptos, purple,
     autokey, nomenclator, bookCipher, sigaba, typex,
-    kamaSutra, aeneasTacticus
+    kamaSutra, aeneasTacticus, jn25, redTypeA
   };
 })();

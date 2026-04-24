@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red (Type A) - The Cipher Museum</title>
+  <meta name="description" content="Red (Type A) (1931-1938) - the Japanese diplomatic stepping-switch predecessor to Purple and the cryptanalytic bridge to MAGIC.">
+  <meta property="og:title" content="Red (Type A) - The Cipher Museum">
+  <meta property="og:description" content="The predecessor to Purple: a stepping-switch diplomatic system broken by SIS before the 1940 Purple breakthrough.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/red-type-a.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Red (Type A) - The Cipher Museum">
+  <meta name="twitter:description" content="How Red taught SIS the structural assumptions that later cracked Purple.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/red-type-a.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Red (Type A)
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VII - Diplomatic Machines</span>
+    <span class="badge era-wwii">Interwar to WWII - 1931-1938</span>
+    <span class="badge sec-broken">Broken by SIS</span>
+  </div>
+  <h1 class="page-title">Red (Type A)</h1>
+  <p class="page-tagline">The Japanese diplomatic machine that taught US analysts how to think before Purple appeared.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Japanese Foreign Ministry</span></div>
+    <div class="fact"><span class="fact-label">Service</span><span class="fact-value">1931-1938</span></div>
+    <div class="fact"><span class="fact-label">Type</span><span class="fact-value">Stepping-switch substitution machine</span></div>
+    <div class="fact"><span class="fact-label">Core Pattern</span><span class="fact-value">Vowel and consonant streams handled separately</span></div>
+    <div class="fact"><span class="fact-label">Successor</span><span class="fact-value">Purple (Type B), 1939</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="red-type-a"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Red is historically important less for a single battle and more for methodology. It gave US cryptanalysts practical experience with Japanese machine traffic, stepping behavior, and class-partitioned substitution. When Purple replaced Red, those lessons dramatically shortened the time to conceptual breakthrough.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Before Purple, Japanese diplomatic traffic relied on a machine system now called Red (Type A). Like later Japanese designs, Red partitioned text into distinct character classes and processed them with different stepping behavior. Signals Intelligence Service teams in the United States attacked this traffic in the mid-1930s and produced substantial recovery.</p>
+        <p style="margin-top:1rem;">That achievement was not final victory. It was reconnaissance in method space: analysts learned which statistical clues survive stepping substitution and how repeated diplomatic formats can anchor machine-state recovery even when hardware is unknown.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works (Pedagogical Model)</span></div>
+      <div class="panel-body">
+        <ol>
+          <li>Clean the message to alphabetic text.</li>
+          <li>Route vowels and consonants into separate substitution streams.</li>
+          <li>Apply a stepping substitution table to each stream independently.</li>
+          <li>Recombine characters in original order to form ciphertext.</li>
+        </ol>
+        <p style="margin-top:1rem;">This page models the structural idea, not classified wiring details. The crucial historical point is the split-stream architecture, inherited and expanded by Purple.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">Why It Was Breakable</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Character-Class Leakage</div>
+          <div class="attack-diff">Complexity: Moderate to hard</div>
+          <p class="attack-desc">Separating vowels and consonants narrows local uncertainty and leaves uneven statistical traces in each stream. Over large diplomatic traffic volumes, these traces provide footholds for state reconstruction and crib exploitation.</p>
+        </div>
+        <div class="attack-panel">
+          <div class="attack-name">Operational Regularity</div>
+          <div class="attack-diff">Complexity: Depends on discipline</div>
+          <p class="attack-desc">Diplomatic templates, date headers, and repeated formal language generate recurring plaintext structure. Even partial cribs can bootstrap deeper machine analysis when combined with message metadata and traffic correlation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Security Lesson</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Red Design Choice</th><th>Modern Implication</th></tr></thead>
+          <tbody>
+            <tr><td>Split substitution by character class</td><td>Avoid structural side channels across symbol classes</td></tr>
+            <tr><td>Deterministic stepping families</td><td>Key schedules must be high-entropy and hard to correlate</td></tr>
+            <tr><td>Heavy dependence on operator discipline</td><td>Human process errors remain first-order security failures</td></tr>
+            <tr><td>Opaque hardware as security layer</td><td>Kerckhoffs still applies: assume adversary learns design</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>VII - Mechanical Machines</td></tr>
+            <tr><td>Nation</td><td>Japan</td></tr>
+            <tr><td>Era</td><td>1931-1938</td></tr>
+            <tr><td>Role</td><td>Diplomatic traffic</td></tr>
+            <tr><td>Analytic Legacy</td><td>Direct bridge to Purple success</td></tr>
+            <tr><td>Status</td><td>Broken by pre-war SIS effort</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/purple.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Purple (Type 97)</span>
+      <span class="related-card__tag">Successor machine built on similar conceptual split</span>
+    </a>
+    <a href="../ciphers/jn-25.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">JN-25</span>
+      <span class="related-card__tag">Parallel Pacific cryptanalytic campaign</span>
+    </a>
+    <a href="../halls/codebreakers.html" class="related-card">
+      <span class="related-card__number">Hall X</span>
+      <span class="related-card__name">Codebreakers</span>
+      <span class="related-card__tag">Rowlett and the SIS lineage</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/jn-25.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">JN-25</span>
+  </a>
+  <a href="../ciphers/purple.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Purple (Type 97)</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall VII - Diplomatic Machines</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

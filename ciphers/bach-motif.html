@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bach's B-A-C-H Motif — The Cipher Museum</title>
+  <meta name="description" content="The four notes B♭ – A – C – B♮ spell 'BACH' in German musical notation — a self-signature Bach embedded in his final unfinished fugue.">
+  <meta property="og:title" content="Bach's B-A-C-H Motif — The Cipher Museum">
+  <meta property="og:description" content="The four notes B♭ – A – C – B♮ spell 'BACH' in German musical notation — a self-signature Bach embedded in his final unfinished fugue.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/bach-motif.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bach's B-A-C-H Motif — The Cipher Museum">
+  <meta name="twitter:description" content="The four notes B♭ – A – C – B♮ spell 'BACH' in German musical notation — a self-signature Bach embedded in his final unfinished fugue.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/bach-motif.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    Bach's B-A-C-H Motif
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Culture</span>
+    <span class="badge era-modern">Baroque Germany · 1750</span>
+    <span class="badge sec-broken">Musical cryptogram</span>
+  </div>
+  <h1 class="page-title">Bach's B-A-C-H Motif</h1>
+  <p class="page-tagline">The four notes B♭ – A – C – B♮ spell 'BACH' in German musical notation — a self-signature Bach embedded in his final unfinished fugue.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Leipzig, Saxony</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Composed ~1742–1750</span></div>
+    <div class="fact"><span class="fact-label">Composer</span><span class="fact-value">Johann Sebastian Bach (1685–1750)</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (note-spelling demo)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="bach-motif">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Type any word using only the letters A, B, C, D, E, F, G, H. The widget will spell it out as German note names and an English-equivalent pitch sequence. Track B — illustrative encoder, not security.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Word (letters A\u2013H only)</label>
+  <input type="text" id="input" value="BACH" maxlength="20" style="width:14rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;text-transform:uppercase;">
+  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Spell as notes</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.8;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      var GERMAN = { A:'A natural', B:'B-flat', C:'C natural', D:'D natural',
+                      E:'E natural', F:'F natural', G:'G natural', H:'B natural' };
+      var ENGLISH = { A:'A', B:'B\u266d', C:'C', D:'D', E:'E', F:'F', G:'G', H:'B\u266e' };
+      window.encode = function () {
+        var raw = (document.getElementById('input').value || '').toUpperCase();
+        var out = document.getElementById('output');
+        var lines = [];
+        var notes = [];
+        for (var i = 0; i < raw.length; i++) {
+          var c = raw[i];
+          if (!GERMAN[c]) {
+            lines.push('  ' + c + ' \u2192 (not a German note name)');
+          } else {
+            lines.push('  ' + c + ' \u2192 ' + GERMAN[c]);
+            notes.push(ENGLISH[c]);
+          }
+        }
+        if (notes.length === 0) { out.textContent = 'Use letters A B C D E F G H only.'; return; }
+        out.textContent = lines.join('\n') + '\n\nPlayed as: ' + notes.join('  \u2013  ');
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>In German musical notation, B♭ is written 'B' and B♮ is written 'H'. The four-note sequence B♭–A–C–B♮ therefore literally <em>spells</em> the surname BACH. Johann Sebastian Bach used this motif as an embedded signature in several works, most famously as the third subject of the unfinished final fugue (Contrapunctus XIV) of <em>The Art of Fugue</em>, BWV 1080. He died with the manuscript open mid-bar — the page on which the BACH motif first sounds.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The German naming convention treats H as the 'natural' B and B as the 'flat' B, a leftover of medieval mode notation. This idiosyncrasy gave German composers a unique alphabet of pitches: every musical note name from A through H is also a letter. Bach was the first major composer to exploit it as a personal sigil, but Schumann, Liszt, Brahms, Reger, Schoenberg, Webern, and Shostakovich all wrote works on the BACH motif. Shostakovich extended the idea to spell his own initials: D-S-C-H = D – E♭ – C – B♮ (since 'Es' = E♭ and 'H' = B♮ in German), the four notes that open his Tenth Symphony and his Eighth String Quartet.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>As a cipher this is a one-to-one substitution from the seven (in German, eight) note names to letters. Its 'plaintext space' is therefore tiny — only words spelled with A, B, C, D, E, F, G, H can be encoded. It is closer to a <em>signature</em> than to encryption. But it demonstrates a principle that recurs across cipher culture: any sufficiently structured medium (music, dance, knitting, paint colour) can carry a cipher if a public mapping to the alphabet exists.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>Modern composers continue the tradition: Alban Berg's <em>Lyric Suite</em> embeds the initials of his secret love Hanna Fuchs-Robettin; Olivier Messiaen developed a 'communicable language' that spelled prayers in French phonetic note-equivalents; computer-music practitioners encode entire ASCII strings into MIDI. The BACH motif is the founding act of musical cryptography and the canonical demonstration that ciphers do not need to be in <em>writing</em>.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XIII · Culture</td></tr>
+            <tr><td>Region</td><td>Leipzig, Saxony</td></tr>
+            <tr><td>Era</td><td>Baroque Germany · 1750</td></tr>
+            <tr><td>Discipline</td><td>Musical letter-cipher</td></tr>
+            <tr><td>Track</td><td>B (note-spelling demo)</td></tr>
+            <tr><td>Modern echo</td><td>Composer signatures · Shostakovich's DSCH motif · Dmitri Tiomkin DT motif</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/solitaire.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Solitaire Cipher</span>
+      <span class="related-card__tag">Cipher embedded in another medium</span>
+    </a>
+    <a href="../ciphers/bacon.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Bacon's Cipher</span>
+      <span class="related-card__tag">Hidden alphabetic encoding</span>
+    </a>
+    <a href="../ciphers/pigpen.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Pigpen Cipher</span>
+      <span class="related-card__tag">Symbol-substitution alphabet</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../halls/culture.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Hall XIII Index</span>
+  </a>
+  <a href="../ciphers/dancing-men.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Dancing Men</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

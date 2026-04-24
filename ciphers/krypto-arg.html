@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARG Ciphers — The Cipher Museum</title>
+  <meta name="description" content="Alternate-reality games — from The Beast (2001) to Year Zero (2007) and beyond — built on the assumption that players will recognise, transcribe, and crack classical ciphers across forums, phone calls, and physical artifacts.">
+  <meta property="og:title" content="ARG Ciphers — The Cipher Museum">
+  <meta property="og:description" content="Alternate-reality games — from The Beast (2001) to Year Zero (2007) and beyond — built on the assumption that players will recognise, transcribe, and crack classical ciphers across forums, phone calls, and physical artifacts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/krypto-arg.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ARG Ciphers — The Cipher Museum">
+  <meta name="twitter:description" content="Alternate-reality games — from The Beast (2001) to Year Zero (2007) and beyond — built on the assumption that players will recognise, transcribe, and crack classical ciphers across forums, phone calls, and physical artifacts.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/krypto-arg.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    ARG Ciphers
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Culture</span>
+    <span class="badge era-modern">Web 2.0 · 2001–present</span>
+    <span class="badge sec-broken">Promotional / collaborative cipher hunts</span>
+  </div>
+  <h1 class="page-title">ARG Ciphers</h1>
+  <p class="page-tagline">Alternate-reality games — from <em>The Beast</em> (2001) to <em>Year Zero</em> (2007) and beyond — built on the assumption that players will recognise, transcribe, and crack classical ciphers across forums, phone calls, and physical artifacts.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Global online communities</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Genre established 2001 (<em>The Beast</em>, A.I. promotion)</span></div>
+    <div class="fact"><span class="fact-label">Genre origin</span><span class="fact-value">Microsoft / DreamWorks promotion of Spielberg's <em>A.I.</em></span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (cipher-toolkit demo)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="krypto-arg">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Pick one of the classical ciphers most commonly used in ARGs and the widget will show a short worked example. Track B — overview tool.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Pick a classical cipher (1=Caesar 2=Vigen\u00e8re 3=Bacon 4=Pigpen)</label>
+  <input type="number" id="input" min="1" max="4" value="1" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Show ARG example</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      var EXAMPLES = {
+        1: 'CAESAR  (used in The Beast 2001, NIN Year Zero 2007)\n\n  Plain : MEET AT DAWN\n  Key   : shift +3 (Caesar)\n  Cipher: PHHW DW GDZQ\n\n  Trick: ARG often spells out only the URL slug, not full English.',
+        2: 'VIGEN\u00c8RE  (used in NIN Year Zero, MIT Hunt 2014)\n\n  Plain : THE TRUTH IS COMING\n  Key   : EXTERMINAL (repeats)\n  Cipher: XEX MICCT MF GVQAVE\n\n  Trick: keys are usually fan-discovered words from the franchise.',
+        3: 'BACON  (used in I Love Bees 2004, Lost Experience 2006)\n\n  Plain : HI\n  Bacon : aabbb abaaa  (5 bits per letter)\n  Carrier: tHe quIcK BroWN fOX juMpEd  (mixed case = bits)\n\n  Trick: hides bits inside otherwise normal-looking text.',
+        4: 'PIGPEN  (printed on physical props in escape rooms, ARGs)\n\n  Geometric grid \u2192 each letter shown as a fragment shape.\n  See the Cipher Museum\u2019s Pigpen exhibit for the full alphabet.\n\n  Trick: visually striking, instantly recognisable on a poster.'
+      };
+      window.encode = function () {
+        var n = parseInt(document.getElementById('input').value, 10);
+        var out = document.getElementById('output');
+        if (!n || n < 1 || n > 4) { out.textContent = 'Pick 1, 2, 3, or 4.'; return; }
+        out.textContent = EXAMPLES[n];
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Alternate-reality games (ARGs) are story-puzzle hybrids that play out across multiple real-world media — websites, phone numbers, physical letters, audio recordings, video — and treat the audience as collective detective. Almost every major ARG since <em>The Beast</em> (2001, marketing for <em>A.I. Artificial Intelligence</em>) has used ciphers as gating puzzles: Caesar, Vigenère, Bacon, Pigpen, Polybius, and bespoke symbol systems all appear regularly. Together, ARGs have probably trained more amateur cryptanalysts than any university course.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p><em>The Beast</em> (2001) is generally credited as the first ARG; players collaborated on the Cloudmakers Yahoo group, eventually involving 7,500+ contributors. Subsequent landmark ARGs include <em>I Love Bees</em> (2004, <em>Halo 2</em> promotion, used GPS-coordinate ciphers and timed phone calls); Nine Inch Nails's <em>Year Zero</em> (2007, Vigenère and steganography across USB sticks left in concert venue bathrooms); <em>Lost Experience</em> (2006, ABC, classical substitutions); and the gaming community's <em>Trials Evolution</em> ARG (2012, Caesar + Vigenère + binary). Each canonised a particular cipher technique in popular gaming culture.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>ARGs almost never use modern strong cryptography (RSA, AES) — the puzzles must be solvable by collective amateur effort within hours or days. Instead they recycle classical ciphers in layered combinations: Caesar to gate a URL, Bacon to hide a phone number in mixed-case text, Vigenère to encrypt a plaintext clue, Pigpen for visual flair on a printed prop. The cryptographic interest is exactly the inverse of professional crypto: the goal is to be <em>solvable</em>, but only by clever organisation and crowd effort.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>ARGs continue to introduce classical cryptanalysis to new audiences and have become a recognised recruitment pipeline for security firms, intelligence agencies, and red-team companies. The NSA Codebreaker Challenge for university students explicitly draws from the ARG playbook, as does GCHQ's annual public puzzle.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XIII · Culture</td></tr>
+            <tr><td>Region</td><td>Global online communities</td></tr>
+            <tr><td>Era</td><td>Web 2.0 · 2001–present</td></tr>
+            <tr><td>Discipline</td><td>Composite cipher hunts</td></tr>
+            <tr><td>Track</td><td>B (cipher-toolkit demo)</td></tr>
+            <tr><td>Modern echo</td><td>Cicada 3301 · Ingress / Pokémon GO geocaching · NSA Codebreaker</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/cicada-3301.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cicada 3301</span>
+      <span class="related-card__tag">Most famous ARG-style puzzle</span>
+    </a>
+    <a href="../ciphers/caesar.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Caesar Cipher</span>
+      <span class="related-card__tag">ARG gateway cipher</span>
+    </a>
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Vigenère</span>
+      <span class="related-card__tag">ARG mid-game cipher</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/cicada-3301.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Cicada 3301</span>
+  </a>
+  <a href="../ciphers/mit-mystery-hunt.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">MIT Mystery Hunt</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -29,6 +29,21 @@
   <url><loc>https://ciphermuseum.com/ciphers/aeneas-tacticus.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/kama-sutra.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/arabic-nomenclators.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- Round 3 Stage 3 — Hall XII Unsolved -->
+  <url><loc>https://ciphermuseum.com/ciphers/phaistos-disc.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/shugborough.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/dagapeyeff.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/somerton-man.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/mccormick.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- Round 3 Stage 3 — Hall XIII Culture -->
+  <url><loc>https://ciphermuseum.com/ciphers/bach-motif.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/dancing-men.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/gold-bug.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/cicada-3301.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/krypto-arg.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/mit-mystery-hunt.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/sator-square.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/freemason-pigpen.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/scytale.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/caesar.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/polybius.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -80,5 +95,7 @@
   <url><loc>https://ciphermuseum.com/ciphers/copiale.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/beale.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/kryptos.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/jn-25.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/red-type-a.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/purple.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

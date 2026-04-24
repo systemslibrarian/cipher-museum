@@ -44,11 +44,11 @@
 <div class="page-hero">
   <div class="breadcrumb">
     <a href="../index.html">Entrance</a><span>&rsaquo;</span>
-    <a href="../halls/puzzle.html">Hall VIII: Puzzle &amp; Novelty</a><span>&rsaquo;</span>
+    <a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a><span>&rsaquo;</span>
     Kryptos
   </div>
   <div class="page-meta">
-    <span class="page-num">Exhibit 49 of 49</span>
+    <span class="page-num">Hall XII · Unsolved · CIA Courtyard</span>
     <span class="badge era-19c">Modern · 1990</span>
     <span class="badge sec-unbroken">K1–K3 Broken · K4 Unsolved</span>
   </div>
@@ -58,7 +58,8 @@
     <div class="fact"><span class="fact-label">Artist</span><span class="fact-value">Jim Sanborn</span></div>
     <div class="fact"><span class="fact-label">Cryptographic consultant</span><span class="fact-value">Edward Scheidt (former CIA)</span></div>
     <div class="fact"><span class="fact-label">Installed</span><span class="fact-value">November 3, 1990 · CIA HQ, Langley</span></div>
-    <div class="fact"><span class="fact-label">Total characters</span><span class="fact-value">865 letters across 4 sections</span></div>
+    <div class="fact"><span class="fact-label">Copper screen</span><span class="fact-value">1,735 letters cut into the main screen</span></div>
+    <div class="fact"><span class="fact-label">Full artwork</span><span class="fact-value">Courtyard screen + entrance Morse / compass installation</span></div>
     <div class="fact"><span class="fact-label">K1</span><span class="fact-value">Vigenère, key PALIMPSEST · solved 1999</span></div>
     <div class="fact"><span class="fact-label">K2</span><span class="fact-value">Vigenère, key ABSCISSA · solved 1999</span></div>
     <div class="fact"><span class="fact-label">K3</span><span class="fact-value">Transposition · solved 1999</span></div>
@@ -67,6 +68,174 @@
 </div>
 
 <div class="demo-section" data-cipher="kryptos"></div>
+
+<section class="demo-section">
+  <h2>Kryptos Expansion Lab</h2>
+  <p style="opacity:.85;">The sculpture is larger than K1-K4 alone. Explore the entrance Morse panels, the K4 clue windows, and the full installation layout.</p>
+
+  <h3 style="margin-top:1.5rem;">K0 Morse Decoder</h3>
+  <p style="opacity:.85;">Load a phrase from the entrance granite slabs, hear the Morse at a selectable speed, and inspect its decoded text. These fragments are part of the larger Kryptos environment, not a separate puzzle by accident.</p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:end;margin-top:1rem;">
+    <label style="display:flex;flex-direction:column;gap:.35rem;min-width:17rem;">
+      <span style="font-weight:600;">Preset phrase</span>
+      <select id="kryptos-k0-preset" style="padding:.55rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;">
+        <option value="...- .. .-. - ..- .- .-.. .-.. -.-- / .. -. ...- .. ... .. -... .-.. .">VIRTUALLY INVISIBLE</option>
+        <option value="... .... .- -.. --- .-- / ..-. --- .-. -.-. . ...">SHADOW FORCES</option>
+        <option value=".-.. ..- -.-. .. -.. / -- . -- --- .-. -.--">LUCID MEMORY</option>
+        <option value="-.. .. --. . - .- .-.. / .. -. - . .-. .--. .-. . - .- - .. -">DIGETAL INTERPRETATIT</option>
+      </select>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:.35rem;min-width:6rem;">
+      <span style="font-weight:600;">WPM</span>
+      <input id="kryptos-k0-wpm" type="number" min="5" max="30" value="12" style="padding:.55rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;">
+    </label>
+    <button type="button" id="kryptos-k0-load" style="padding:.6rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Decode preset</button>
+    <button type="button" id="kryptos-k0-play" style="padding:.6rem 1rem;background:var(--gold-glow);border:1px solid var(--gold-b);color:var(--gold);border-radius:6px;cursor:pointer;">Play Morse</button>
+  </div>
+  <div id="kryptos-k0-output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:var(--fm);line-height:1.7;min-height:5rem;white-space:pre-wrap;"></div>
+
+  <h3 style="margin-top:1.75rem;">K4 Clue Visualizer</h3>
+  <p style="opacity:.85;">Sanborn's released cribs occupy only small windows of the 97-character K4 text. Hover any character to see whether that position is known or still open.</p>
+  <div id="kryptos-k4-grid" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:var(--fm);font-size:.95rem;line-height:2.1;letter-spacing:.06em;"></div>
+  <div id="kryptos-k4-info" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.22);border:1px solid var(--gold-b);border-radius:6px;min-height:4rem;"></div>
+
+  <h3 style="margin-top:1.75rem;">Installation Map</h3>
+  <p style="opacity:.85;">Kryptos is a two-part installation: the famous copper screen in the courtyard and the entrance granite / Morse / compass elements visitors pass on the way in.</p>
+  <div style="margin-top:1rem;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(16rem,.9fr);gap:1rem;align-items:start;">
+    <svg viewBox="0 0 480 240" role="img" aria-label="Simplified diagram of the Kryptos installation showing entrance, courtyard plaza, and courtyard lawn" style="width:100%;background:rgba(0,0,0,.22);border:1px solid var(--gold-b);border-radius:8px;padding:.5rem;">
+      <rect x="18" y="36" width="118" height="160" rx="8" fill="rgba(160,120,70,.18)" stroke="currentColor" />
+      <text x="77" y="62" text-anchor="middle" fill="currentColor" font-size="14">Entrance Walk</text>
+      <circle cx="77" cy="104" r="16" fill="rgba(218,188,115,.35)" stroke="currentColor" />
+      <text x="77" y="109" text-anchor="middle" fill="currentColor" font-size="11">K0</text>
+      <text x="77" y="142" text-anchor="middle" fill="currentColor" font-size="12">Granite slabs</text>
+      <text x="77" y="158" text-anchor="middle" fill="currentColor" font-size="12">Morse + compass</text>
+
+      <rect x="176" y="24" width="126" height="188" rx="8" fill="rgba(90,144,200,.12)" stroke="currentColor" />
+      <text x="239" y="52" text-anchor="middle" fill="currentColor" font-size="14">Courtyard Plaza</text>
+      <rect x="212" y="86" width="54" height="92" rx="4" fill="rgba(218,188,115,.35)" stroke="currentColor" />
+      <text x="239" y="133" text-anchor="middle" fill="currentColor" font-size="12">Copper</text>
+      <text x="239" y="149" text-anchor="middle" fill="currentColor" font-size="12">screen</text>
+
+      <rect x="336" y="52" width="126" height="132" rx="8" fill="rgba(90,200,160,.1)" stroke="currentColor" />
+      <text x="399" y="78" text-anchor="middle" fill="currentColor" font-size="14">Courtyard Lawn</text>
+      <text x="399" y="110" text-anchor="middle" fill="currentColor" font-size="12">Sight lines toward</text>
+      <text x="399" y="126" text-anchor="middle" fill="currentColor" font-size="12">the S-screen</text>
+
+      <line x1="136" y1="116" x2="176" y2="116" stroke="currentColor" stroke-dasharray="5 4" />
+      <line x1="302" y1="116" x2="336" y2="116" stroke="currentColor" stroke-dasharray="5 4" />
+    </svg>
+    <div id="kryptos-map-info" style="padding:1rem;background:rgba(0,0,0,.22);border:1px solid var(--gold-b);border-radius:8px;line-height:1.7;">
+      <strong>Reading the layout</strong>
+      <p style="margin-top:.6rem;">The entrance components establish the work's atmosphere before the visitor reaches the famous courtyard screen. That is why Round 3 treats Kryptos as an installation, not just a single panel of ciphertext.</p>
+      <p style="margin-top:.6rem;">The map distinguishes three zones: the entrance Morse / compass elements, the plaza where the 1,735-letter screen stands, and the surrounding courtyard space from which the sculpture is meant to be approached and read.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var MORSE_MAP = {
+        '.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z'
+      };
+      var K4_TEXT = 'OBKRUOXOGHULBSOLIFBBWFLRVQQPRNGKSSOTWTQSJQSSEKZZWATJKLUDIAWINFBNYPVTTMZFPKWGDKZXTJCDIGKUHUAUEKCAR';
+      var K4_WINDOWS = [
+        { start: 22, end: 25, plain: 'EAST', note: 'Sanborn released this clue in 2020.' },
+        { start: 26, end: 34, plain: 'NORTHEAST', note: 'Released in 2020; later tied to the Berlin world clock context.' },
+        { start: 64, end: 69, plain: 'BERLIN', note: 'The first public K4 crib, released in 2010.' },
+        { start: 70, end: 74, plain: 'CLOCK', note: 'Released in 2014; Sanborn later clarified it meant the Alexanderplatz world clock.' }
+      ];
+
+      function decodeMorse(source) {
+        return source.split(' / ').map(function (word) {
+          return word.split(' ').map(function (symbol) {
+            return MORSE_MAP[symbol] || '?';
+          }).join('');
+        }).join(' ');
+      }
+
+      function renderK0() {
+        var raw = document.getElementById('kryptos-k0-preset').value;
+        document.getElementById('kryptos-k0-output').textContent = 'Morse:\n' + raw + '\n\nDecoded:\n' + decodeMorse(raw);
+      }
+
+      function playMorse() {
+        var raw = document.getElementById('kryptos-k0-preset').value;
+        var wpm = Math.max(5, Math.min(30, parseInt(document.getElementById('kryptos-k0-wpm').value || '12', 10)));
+        var unit = 1200 / wpm;
+        var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) {
+          document.getElementById('kryptos-k0-output').textContent += '\n\nWeb Audio is unavailable in this browser.';
+          return;
+        }
+        var ctx = new AudioContextClass();
+        var now = ctx.currentTime;
+        var cursor = now;
+        raw.split('').forEach(function (ch) {
+          if (ch === '.') {
+            tone(ctx, cursor, unit * 0.001);
+            cursor += unit * 0.002;
+          } else if (ch === '-') {
+            tone(ctx, cursor, unit * 0.003);
+            cursor += unit * 0.004;
+          } else if (ch === ' ') {
+            cursor += unit * 0.003;
+          } else if (ch === '/') {
+            cursor += unit * 0.007;
+          }
+        });
+      }
+
+      function tone(ctx, start, duration) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = 650;
+        gain.gain.value = 0.08;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + duration);
+      }
+
+      function k4WindowFor(position) {
+        for (var i = 0; i < K4_WINDOWS.length; i++) {
+          var windowInfo = K4_WINDOWS[i];
+          if (position >= windowInfo.start && position <= windowInfo.end) return windowInfo;
+        }
+        return null;
+      }
+
+      function renderK4() {
+        var grid = document.getElementById('kryptos-k4-grid');
+        var html = '';
+        for (var index = 0; index < K4_TEXT.length; index++) {
+          var position = index + 1;
+          var known = k4WindowFor(position);
+          var style = 'display:inline-block;min-width:1.4rem;text-align:center;margin:.1rem;border-radius:4px;border:1px solid ' + (known ? 'var(--gold-b)' : 'rgba(255,255,255,.08)') + ';background:' + (known ? 'rgba(218,188,115,.18)' : 'rgba(255,255,255,.03)') + ';cursor:default;';
+          html += '<span data-pos="' + position + '" style="' + style + '" title="Position ' + position + '">' + K4_TEXT.charAt(index) + '</span>';
+          if (position % 12 === 0) html += '<br>';
+        }
+        grid.innerHTML = html;
+        grid.querySelectorAll('span').forEach(function (node) {
+          node.addEventListener('mouseenter', function () {
+            var position = parseInt(node.getAttribute('data-pos'), 10);
+            var known = k4WindowFor(position);
+            document.getElementById('kryptos-k4-info').innerHTML = known
+              ? '<strong>Position ' + position + ':</strong> inside known window <strong>' + known.plain + '</strong>. ' + known.note
+              : '<strong>Position ' + position + ':</strong> still publicly unknown. Outside Sanborn\'s released clue windows.';
+          });
+        });
+        document.getElementById('kryptos-k4-info').innerHTML = '<strong>Known coverage:</strong> only 24 of 97 K4 letters sit inside released clue windows. The rest remain unconstrained by public plaintext.';
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('kryptos-k0-load').addEventListener('click', renderK0);
+        document.getElementById('kryptos-k0-play').addEventListener('click', playMorse);
+        renderK0();
+        renderK4();
+      });
+    })();
+  </script>
+</section>
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
@@ -79,6 +248,71 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>The CIA commissioned the sculpture from artist Jim Sanborn, who worked with retired CIA cryptographer Ed Scheidt to design four progressively harder ciphers. K1 used a modified Vigenère with the keyword PALIMPSEST and a custom KRYPTOS-keyed alphabet; K2 used the same system with key ABSCISSA. K3 was a transposition cipher quoting Howard Carter's description of opening Tutankhamun's tomb. K4 remains a mystery — Sanborn has revealed four "cribs" (BERLIN at letters 64–69, CLOCK at 70–74, NORTHEAST at 26–34, EAST at 22–25), but the system that generates the rest is still unknown. Many have tried; none have succeeded.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🗺️</span><span class="panel-title">The Full Installation</span></div>
+      <div class="panel-body"><p>The familiar copper S-screen is only half of Kryptos. The complete artwork spans two installation zones: the courtyard screen with K1-K4, and the entrance approach with red granite slabs, copper elements, International Morse code, a compass rose, and a lodestone. The CIA's own description treats these as one integrated work. That matters pedagogically: the puzzle is environmental. The visitor is meant to enter through a field of clues before reaching the famous ciphertext.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔢</span><span class="panel-title">1,735 Letters, Not 1,800</span></div>
+      <div class="panel-body"><p>The authoritative count from the CIA is 1,735 alphabetic letters cut into the copper screen. The often-repeated 1,800 figure comes from workshop recollections about the approximate labor involved, not the final installed total. The discrepancy is worth noting because Kryptos lore has accumulated many rounded numbers and repeated anecdotes; this museum uses the CIA count when discussing the main screen itself.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📡</span><span class="panel-title">K0 — The Morse Code Panels</span></div>
+      <div class="panel-body"><p>The entrance granite slabs carry Morse fragments sometimes nicknamed K0 by solvers. Phrases such as <em>VIRTUALLY INVISIBLE</em>, <em>SHADOW FORCES</em>, <em>LUCID MEMORY</em>, and the famously garbled <em>DIGETAL INTERPRETATIT</em> are part of the installation's texture of partial legibility. Round 3 treats these panels as first-class Kryptos material because they expand the work from a four-passage challenge into a layered meditation on concealment, navigation, and interpretation.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🤝</span><span class="panel-title">The Scheidt Partnership</span></div>
+      <div class="panel-body"><p>Sanborn did not build Kryptos alone. He spent roughly four months working with retiring CIA cryptographer Edward Scheidt, who helped design the cipher systems and later described the challenge as 9 out of 10 in difficulty. Scheidt also emphasized that K4 changes methodology rather than merely increasing difficulty. That is one reason many solvers think K4 cannot be attacked by extending the techniques that break K1-K3.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🧮</span><span class="panel-title">The Hill Cipher Conjecture</span></div>
+      <div class="panel-body"><p>One of the more interesting published K4 theories comes from Bauer, Link, and Molle, who argued in <em>Cryptologia</em> that an anomalous extra <strong>L</strong> in the right-side tableau may be deliberate. With that extra letter in place, the letters HILL appear in sequence down the column, suggesting that K4 could involve Hill-cipher-style matrix encryption rather than another Vigenère-like method. This is only a conjecture, but it is stronger than casual internet speculation because it begins from a physical irregularity on the sculpture itself.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🧩</span><span class="panel-title">K4 Clues Released Over Time</span></div>
+      <div class="panel-body"><p>Sanborn has disclosed K4 in narrow slices rather than broad explanations: BERLIN (2010), CLOCK (2014), EAST (2020), and NORTHEAST (2020). In 2025 he clarified that the clock reference points specifically to the World Clock at Alexanderplatz in Berlin. These clues are enough to constrain local hypotheses, but not enough to expose the underlying system. That asymmetry is why K4 remains so compelling: the puzzle is neither untouched nor genuinely open-ended. It is deliberately half-lit.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">✏️</span><span class="panel-title">Passage 2 Correction</span></div>
+      <div class="panel-body"><p>For years the accepted K2 ending looked like <em>WESTIDBYROWS</em>. In 2005-2006 Nicole Friedrich proposed the intended reading was <em>WESTXLAYERTWO</em>, and Sanborn confirmed that the sculpture omitted a needed S during transcription. The correction matters because it links K2 more clearly to Howard Carter's excavation language and strengthens the tomb / location thread running through K2, K3, and the speculation around K4.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📝</span><span class="panel-title">Intentional Misspellings — or Workshop Drift?</span></div>
+      <div class="panel-body"><p>Kryptos contains several famous oddities in its solved passages: <em>IQLUSION</em> in K1, <em>UNDERGRUUND</em> in K2, and <em>DESPARATLY</em> in K3. Sanborn has often described these as intentional artistic decisions. But later release of the working charts complicated that story: some irregularities appear to trace back to drafting or transcription mistakes made during the sculpture's fabrication. The right conclusion is not that one side is lying, but that Kryptos's "errors" are part design, part workshop history, and part legend.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">ʸ</span><span class="panel-title">The YAR Superscript</span></div>
+      <div class="panel-body"><p>Three letters, <strong>YAR</strong>, appear in superscript near the beginning of the lower left section of the sculpture. They are the only superscript characters on Kryptos. No public explanation has ever been confirmed. Because the marker is so isolated, many solvers treat it as a deliberate pointer rather than decorative noise. The lesson is a good one for visitors: real cryptanalysis often begins with noticing exactly this kind of anomaly.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">❓</span><span class="panel-title">Who Is WW?</span></div>
+      <div class="panel-body"><p>K2 asks, "WHO KNOWS THE EXACT LOCATION? ONLY WW." The leading conjecture is William Webster, Director of Central Intelligence at the sculpture's 1990 dedication. Sanborn has said he gave Webster a sealed envelope, but he has remained deliberately vague about whether that envelope held the full answer, only part of one, or simply ceremonial theater. The WW problem turns Kryptos into a question about institutional memory as much as cryptanalysis.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⏳</span><span class="panel-title">The Death Contingency</span></div>
+      <div class="panel-body"><p>For years Sanborn said that, if he died before Kryptos was solved, he had arranged a way for correct solutions to be verified. The 2025 auction and Smithsonian sealing effectively replaced that older contingency with a different structure: partial archival closure, partial private ownership, and an unresolved question about who now has the authority to authenticate a solve. Kryptos therefore doubles as a case study in cryptographic governance.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🕰️</span><span class="panel-title">2025: Sale and Seal</span></div>
+      <div class="panel-body"><p>In 2025 the Kryptos story changed from an open public-art mystery into a partly archived, partly privatized saga. Sanborn announced his intention to auction material tied to the sculpture, confirmed the existence of a still-unrevealed K5, and requested that the Smithsonian seal some related files for 50 years, until 2075. The associated auction closed at $962,500. The cryptographic story is therefore no longer just about whether K4 can be solved. It is also about stewardship: who controls the answer to a puzzle embedded in public art once the artist can no longer manage that responsibility alone?</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎬</span><span class="panel-title">Kryptos in Popular Culture</span></div>
+      <div class="panel-body"><p>Kryptos escaped the CIA courtyard almost immediately and became one of the few real unsolved ciphers with mainstream cultural reach. Dan Brown hid Kryptos references in <em>The Da Vinci Code</em> jacket design and used it more directly in <em>The Lost Symbol</em>. Television series from <em>Alias</em> to <em>The Recruit</em> treat it as shorthand for elite cryptographic mystique. That afterlife matters: Kryptos is not just a cipher problem but a public mythology, which is why Round 3 also routes visitors toward <a href="../halls/culture.html">Hall XIII: Cipher Culture</a>.</p></div>
     </div>
 
     <div class="panel">
@@ -115,13 +349,14 @@ Tableau K R Y P T O S A B C D E F G H I J L M N Q U V W X Z</pre>Each plaintext 
       <div class="panel-body">
         <table class="cipher-table">
           <tbody>
-            <tr><td>Exhibit</td><td>49 of 49</td></tr>
+            <tr><td>Hall</td><td>XII · Unsolved</td></tr>
             <tr><td>Era</td><td>Modern · 1990</td></tr>
             <tr><td>Security</td><td>K1–K3 Broken · K4 Unsolved</td></tr>
             <tr><td>Artist</td><td>Jim Sanborn</td></tr>
             <tr><td>Cryptographic consultant</td><td>Edward Scheidt (former CIA)</td></tr>
             <tr><td>Installed</td><td>November 3, 1990 · CIA HQ, Langley</td></tr>
-            <tr><td>Total characters</td><td>865 letters across 4 sections</td></tr>
+            <tr><td>Main screen</td><td>1,735 letters</td></tr>
+            <tr><td>Full artwork</td><td>Screen + entrance installation</td></tr>
             <tr><td>K1</td><td>Vigenère, key PALIMPSEST · solved 1999</td></tr>
             <tr><td>K2</td><td>Vigenère, key ABSCISSA · solved 1999</td></tr>
             <tr><td>K3</td><td>Transposition · solved 1999</td></tr>
@@ -130,38 +365,75 @@ Tableau K R Y P T O S A B C D E F G H I J L M N Q U V W X Z</pre>Each plaintext 
         </table>
       </div>
     </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🗿</span><span class="panel-title">Sanborn's Other Cryptographic Sculptures</span></div>
+      <div class="panel-body"><p><strong>Cyrillic Projector</strong> extends Sanborn's cipher work into Russian text and was solved in 2003 by an international team that included Elonka Dunin. <strong>Antipodes</strong> places fragments of the Kryptos and Cyrillic Projector texts in conversation across two faces of one sculpture. Together they show that Kryptos is not an isolated stunt; it sits inside a broader body of cryptographic public art.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🏁</span><span class="panel-title">Prior Public Solvers</span></div>
+      <div class="panel-body"><p>K1-K3 were solved independently by multiple groups before the public realized it: NSA analysts in 1992-1993, CIA analyst David Stein in 1998, and Jim Gillogly publicly in 1999. The public story long centered on Gillogly because the classified teams could not discuss their work. Later FOIA efforts, especially by Elonka Dunin, widened that history.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🍽️</span><span class="panel-title">The 2019 Kryptos Dinner</span></div>
+      <div class="panel-body"><p>By 2019 Kryptos had developed its own solver culture. At invitation-only Kryptos dinners, attendees could reportedly submit K4 candidates directly to Sanborn. Those reports matter because they blur the line between public puzzle and curated community. They also frame the later 2025 discovery controversy: whether a found plaintext in Sanborn's papers counts as "solving" Kryptos depends partly on how much the artist cared about method versus result.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔨</span><span class="panel-title">Sanborn's Workshop</span></div>
+      <div class="panel-body"><p>Kryptos was fabricated under real workshop constraints, with assistants cutting and assembling hundreds of copper letters by hand. That production history matters because it explains why some anomalies may be artistic and others may simply be frozen-in-place fabrication drift. Public-art cryptography is not the same as a clean typeset cipher sheet; the medium itself becomes part of the evidence.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">References</span></div>
+      <div class="panel-body">
+        <ul style="padding-left:1.1rem;line-height:1.55;">
+          <li>CIA, <em>Kryptos Sculpture</em> legacy page, on the full installation and the 1,735-letter count.</li>
+          <li>David Stein, <em>The Puzzle at CIA Headquarters: Cracking the Courtyard Crypto</em>, <em>Studies in Intelligence</em> 43(1), 1999.</li>
+          <li>Elonka Dunin, essays and FOIA-related Kryptos documentation; also coverage of <em>Cyrillic Projector</em> and the wider Kryptos-solving community.</li>
+          <li>Friedrich L. Bauer, Hans Link, and Elonka Dunin / community discussions on the Hill-cipher conjecture as summarized in <em>Cryptologia</em> scholarship.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
 <section class="related-exhibits">
   <h2 class="related-exhibits__heading">Related Exhibits</h2>
   <div class="related-exhibits__grid">
+    <a href="../ciphers/hill.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Hill Cipher</span>
+      <span class="related-card__tag">A published conjecture ties K4 to Hill-style matrix encryption</span>
+    </a>
     <a href="../ciphers/vigenere.html" class="related-card">
       <span class="related-card__number">Related</span>
       <span class="related-card__name">Vigenère</span>
       <span class="related-card__tag">K1 and K2 use a custom tableau version</span>
     </a>
-    <a href="../ciphers/zodiac.html" class="related-card">
+    <a href="../cryptanalysis.html" class="related-card">
       <span class="related-card__number">Related</span>
-      <span class="related-card__name">Zodiac Cipher</span>
-      <span class="related-card__tag">Other famous unsolved</span>
+      <span class="related-card__name">Cryptanalysis Techniques</span>
+      <span class="related-card__tag">Context for short ciphertexts, cribs, and public challenge solving</span>
     </a>
-    <a href="../ciphers/beale.html" class="related-card">
+    <a href="../ciphers/rosetta-stone.html" class="related-card">
       <span class="related-card__number">Related</span>
-      <span class="related-card__name">Beale Ciphers</span>
-      <span class="related-card__tag">Public-challenge tradition</span>
+      <span class="related-card__name">Rosetta Stone</span>
+      <span class="related-card__tag">Ancient decipherment as Kryptos's favored historical echo</span>
     </a>
   </div>
 </section>
 
 <div class="hall-nav">
-  <a href="../ciphers/copiale.html" class="hall-nav-link">
+  <a href="../ciphers/voynich.html" class="hall-nav-link">
     <span class="hall-nav-dir">&larr; Previous</span>
-    <span class="hall-nav-name">Copiale Cipher</span>
+    <span class="hall-nav-name">Voynich Manuscript</span>
   </a>
-  <a href="../ciphers/great-cipher.html" class="hall-nav-link next">
+  <a href="../ciphers/beale.html" class="hall-nav-link next">
     <span class="hall-nav-dir">Next &rarr;</span>
-    <span class="hall-nav-name">The Great Cipher</span>
+    <span class="hall-nav-name">Beale Ciphers</span>
   </a>
 </div>
 
@@ -185,13 +457,13 @@ Tableau K R Y P T O S A B C D E F G H I J L M N Q U V W X Z</pre>Each plaintext 
     <div>
       <div class="footer-col-title">This Hall</div>
       <ul class="footer-links">
-        <li><a href="../halls/puzzle.html">Hall VIII: Puzzle &amp; Novelty</a></li>
+        <li><a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
-    <span class="footer-copy">Exhibit 49 of 49</span>
+    <span class="footer-copy">Hall XII · Unsolved</span>
   </div>
 </footer>
 <script src="../js/ciphers/all-engines.js"></script>

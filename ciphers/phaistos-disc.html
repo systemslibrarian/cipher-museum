@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phaistos Disc — The Cipher Museum</title>
+  <meta name="description" content="A 1700 BCE Cretan terracotta disc stamped with 45 distinct pictograms — the world's oldest 'movable type' and one of its most enduring undeciphered scripts.">
+  <meta property="og:title" content="Phaistos Disc — The Cipher Museum">
+  <meta property="og:description" content="A 1700 BCE Cretan terracotta disc stamped with 45 distinct pictograms — the world's oldest 'movable type' and one of its most enduring undeciphered scripts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/phaistos-disc.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Phaistos Disc — The Cipher Museum">
+  <meta name="twitter:description" content="A 1700 BCE Cretan terracotta disc stamped with 45 distinct pictograms — the world's oldest 'movable type' and one of its most enduring undeciphered scripts.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/phaistos-disc.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a><span>&rsaquo;</span>
+    Phaistos Disc
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XII · Unsolved</span>
+    <span class="badge era-ancient">Bronze Age Crete · ~1700 BCE</span>
+    <span class="badge sec-broken">Undeciphered script</span>
+  </div>
+  <h1 class="page-title">Phaistos Disc</h1>
+  <p class="page-tagline">A 1700 BCE Cretan terracotta disc stamped with 45 distinct pictograms — the world's oldest 'movable type' and one of its most enduring undeciphered scripts.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Minoan Crete (Phaistos palace)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1700 BCE (discovered 1908)</span></div>
+    <div class="fact"><span class="fact-label">Discovered by</span><span class="fact-value">Luigi Pernier, 3 July 1908</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (visualization)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="phaistos-disc">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">The disc uses 45 distinct pictograms across 241 stamped tokens. Type a sign number (1–45) to see how often Pernier counted it on each face. Track B exhibit — corpus is too small for true decipherment, but you can audit the standard sign counts.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Sign number (1–45)</label>
+  <input type="number" id="input" min="1" max="45" value="2" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Look up</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      var COUNTS = {
+        1: ['Pedestrian', 11, 8],   2: ['Plumed head', 13, 6],
+        3: ['Tattooed head', 2, 0], 4: ['Captive', 1, 0],
+        5: ['Child', 1, 0],         6: ['Woman', 4, 0],
+        7: ['Helmet', 5, 4],        8: ['Gauntlet', 5, 1],
+        9: ['Tiara', 4, 1],         10: ['Arrow', 4, 0],
+        11: ['Bow', 1, 5],          12: ['Shield', 9, 8],
+        13: ['Club', 5, 1],         17: ['Adze', 3, 3],
+        21: ['Boomerang', 6, 6],    24: ['Ship', 5, 2],
+        27: ['Hide', 15, 0],        29: ['Cat head', 6, 5],
+        31: ['Eagle', 3, 2],        34: ['Bird', 1, 1],
+        35: ['Fish', 1, 5],         39: ['Flower', 2, 2],
+        40: ['Olive branch', 1, 1], 45: ['Wave', 4, 2]
+      };
+      window.encode = function () {
+        var n = parseInt(document.getElementById('input').value, 10);
+        var out = document.getElementById('output');
+        if (!n || n < 1 || n > 45) { out.textContent = 'Enter a sign number between 1 and 45.'; return; }
+        var entry = COUNTS[n];
+        if (!entry) { out.textContent = 'Sign #' + n + ': in the corpus but no count summarised here. See Olivier 1975.'; return; }
+        var label = entry[0], a = entry[1], b = entry[2];
+        out.textContent =
+          'Sign #' + n + ' \u00b7 ' + label + '\n' +
+          '  Side A: ' + a + ' occurrence' + (a===1?'':'s') + '\n' +
+          '  Side B: ' + b + ' occurrence' + (b===1?'':'s') + '\n' +
+          '  Total : ' + (a + b) + ' / 241 stamped tokens';
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Phaistos Disc is a fired clay disc roughly 16 cm across, found in the basement of the Minoan palace of Phaistos on Crete. Both faces are spirally inscribed with 241 tokens stamped — not incised — using 45 distinct pictographic seals. This makes it the earliest known artefact produced by movable type, predating Gutenberg by more than three thousand years. Despite a century of attempts, no decipherment has been accepted by mainstream scholarship.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Pernier excavated the disc on the night of 3 July 1908 in a small storeroom of the palace, alongside a Linear A tablet and clearly Minoan pottery. The 45 unique signs include human figures, fish, birds, plants, ships, tools, and abstract shapes. Sign sequences are grouped into 61 short 'words' separated by vertical strokes. Both spirals run from the rim toward the centre. Whether the language is Minoan, an early form of Greek, Anatolian, or something else entirely is unknown. The seals required to stamp the disc have never been found.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Cryptanalytically the disc is a tiny corpus — only 241 tokens, 61 words. By comparison, Champollion had thousands of glyphs and a bilingual key (the Rosetta Stone) to crack Egyptian hieroglyphs. The Phaistos Disc has neither. Statistical attacks treat the 45 signs as a syllabary (the size matches Linear B's syllabic inventory closely) but without bilingual material, even a perfect syllabary mapping cannot pin individual signs to sounds. Decipherment is currently considered <em>information-theoretically impossible</em> from the disc alone.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>The disc is the standard textbook example of an undecipherable short corpus and is regularly invoked in arguments against confidently 'cracking' Voynich-class manuscripts. It is also the founding artefact of cryptographic-archaeology — the application of statistical and linguistic methods to ancient inscriptions whose language is unknown. The Heraklion Museum (current home of the disc), CERN, and the British Museum maintain digital high-resolution scans for ongoing study.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XII · Unsolved</td></tr>
+            <tr><td>Region</td><td>Minoan Crete (Phaistos palace)</td></tr>
+            <tr><td>Era</td><td>Bronze Age Crete · ~1700 BCE</td></tr>
+            <tr><td>Discipline</td><td>Undeciphered script</td></tr>
+            <tr><td>Track</td><td>B (visualization)</td></tr>
+            <tr><td>Modern echo</td><td>Bilingual-key cryptanalysis · Linear B parallels</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/voynich.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Voynich Manuscript</span>
+      <span class="related-card__tag">Famous undeciphered codex</span>
+    </a>
+    <a href="../ciphers/dorabella.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Dorabella Cipher</span>
+      <span class="related-card__tag">Short corpus, no key</span>
+    </a>
+    <a href="../ciphers/rosetta-stone.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Rosetta Stone</span>
+      <span class="related-card__tag">What decipherment requires</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../halls/unsolved.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Hall XII Index</span>
+  </a>
+  <a href="../ciphers/shugborough.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Shugborough Inscription</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XII · Unsolved</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

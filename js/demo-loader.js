@@ -254,6 +254,16 @@
       label: 'Arabic Nomenclator (al-Kindi era)', engine: 'nomenclator',
       defaultMsg: 'THE CALIPH RIDES AT DAWN',
       inputs: []
+    },
+    'jn-25': {
+      label: 'JN-25 (illustrative superenciphered codebook)', engine: 'jn25',
+      defaultMsg: 'AF SHORT OF WATER',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Additive Key Digits', value: '31415', placeholder: 'Digits only…' }]
+    },
+    'red-type-a': {
+      label: 'Red (Type A) stepping-switch model', engine: 'redTypeA',
+      defaultMsg: 'DIPLOMATIC TRAFFIC TOKYO',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Switch Seed', value: 'TOKYORED', placeholder: 'Seed word…' }]
     }
   };
 
@@ -564,6 +574,16 @@
     typex: [
       { text: 'Erskine, Ralph. "The Development of Typex" (Cryptologia, 1997)', url: 'https://en.wikipedia.org/wiki/Typex' },
       { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 11', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' }
+    ],
+    jn25: [
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 17 (Pacific cryptanalysis)', url: 'https://en.wikipedia.org/wiki/JN-25' },
+      { text: 'Carlson, Elliot. <em>Joe Rochefort\'s War</em> (2011)', url: 'https://www.usni.org/press/books/joe-rocheforts-war' },
+      { text: 'Parshall & Tully, <em>Shattered Sword</em> (Midway and the AF deception)', url: 'https://en.wikipedia.org/wiki/Battle_of_Midway' }
+    ],
+    redTypeA: [
+      { text: 'Rowlett, Frank. <em>The Story of Magic</em> (Purple predecessor context)', url: 'https://en.wikipedia.org/wiki/Japanese_diplomatic_cipher_machine' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, Red/Purple transition chapters', url: 'https://en.wikipedia.org/wiki/Purple_(cipher_machine)' },
+      { text: 'NSA CCH materials on SIS Japanese machine exploitation', url: 'https://www.nsa.gov/History/Cryptologic-History/' }
     ]
   };
 

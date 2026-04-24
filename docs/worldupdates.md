@@ -4,18 +4,18 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 24 done / 171 total (14.0%)
+- Overall: 45 done / 171 total (26.3%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
-- Phase 1 (Hall I expansion): 4/10
-- Phase 2 (Hall XII creation): 1/26
-- Phase 3 (Pacific theater): 0/3
+- Phase 1 (Hall I expansion): 10/10
+- Phase 2 (Hall XII creation): 10/26
+- Phase 3 (Pacific theater): 3/3
 - Phase 4 (WWII/interwar machines): 0/9
 - Phase 5 (European gaps): 0/10
 - Phase 6 (East Asia/global): 0/4
 - Phase 7 (Americana/cultural): 0/4
 - Phase 8 (global underground traditions): 0/10
-- Phase 9 (Hall XIII creation + cultural): 1/14
+- Phase 9 (Hall XIII creation + cultural): 3/14
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 0/5
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 0/10
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 0/15
@@ -29,6 +29,15 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24: Phase 0 + 0.5 complete; Hall I renamed.
 - 2026-04-24: Engines kamaSutra + aeneasTacticus added; demo CONFIGS for kama-sutra/aeneas-tacticus/arabic-nomenclators registered. Test page-count target raised to 69; HAND_BUILT extended with 3 Track B slugs. ENGINE_PROFILES filled in for previously-unregistered autokey/nomenclator/bookCipher/sigaba/typex/kamaSutra/aeneasTacticus.
 - 2026-04-24: Created Hall I exhibits: kama-sutra.html, aeneas-tacticus.html, arabic-nomenclators.html.
+- 2026-04-24: Continued Phase 1: Hall I gallery/footer now reflects 11 exhibits; added references panels for egyptian-substitution/rosetta-stone/histiaeus-tattoo; updated Hall I prev/next chain across atbash -> kama-sutra -> aeneas -> arabic -> egyptian -> rosetta -> histiaeus -> scytale -> caesar -> polybius -> atbash.
+- 2026-04-24: Completed Phase 1: added Rosetta decipherment timeline visualization and Scytale historiography sidebar on the traditional vs revisionist reading.
+- 2026-04-24: Continued Phase 2 cleanup: Hall VIII no longer presents Hall XII exhibits as novelty ciphers; verified Hall XII navigation now points back to Hall XI and forward to Hall XIII.
+- 2026-04-24: Began Kryptos 2025 expansion work: moved exhibit framing into Hall XII, added K0 Morse decoder, K4 clue visualizer, installation map, and new installation/history panels. Expansion pack not yet complete.
+- 2026-04-24: Completed Kryptos 2025 expansion pack with Hall XII framing, K0/K4/map interactives, expanded historiography, 2025 auction context, and long-tail solver lore panels.
+- 2026-04-24: Added the Zodiac Z-13/Z-32 side panel and corrected Hall VIII labeling drift on the Zodiac exhibit page.
+- 2026-04-24: Refined Dorabella as a complete Hall XII exhibit: restored global nav/footer, fixed hall sequencing, and added a dedicated Track B symbol-inspector visualization.
+- 2026-04-24: Started Phase 3 with JN-25: added engine (jn25), demo-loader config + sources, new exhibit page, and coverage in engine/comprehensive tests.
+- 2026-04-24: Completed remaining Phase 3 items: added Red Type A (engine + demo wiring + exhibit page + tests), linked Hall VII navigation around the new page, and expanded Navajo with Choctaw/Comanche/Hopi context plus postwar Japanese admission framing.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -47,35 +56,35 @@ Updated after every commit. Source of truth for completion status.
 ## Phase 1 - Hall I expansion to World Origins
 - [x] halls/ancient.html renamed/updated to World Origins of Cryptography
 - [x] Exhibit: Kama Sutra Cipher - spec, engine, page, tests, registered
-- [ ] Exhibit: Egyptian Substitution - spec, page, Track B visualization
+- [x] Exhibit: Egyptian Substitution - spec, page, Track B visualization
 - [x] Exhibit: Aeneas Tacticus - spec, engine, page, tests, registered
 - [x] Exhibit: Arabic Nomenclators - spec, engine, page, tests, registered
-- [ ] Exhibit: Rosetta Stone - spec, page, Track B trilingual viewer + timeline
-- [ ] Exhibit: Histiaeus's Tattooed Messenger - spec, page, Track B concealment-demonstration visualization
-- [ ] Hall I prev/next chains updated
-- [ ] Hall I sidebar reflects 11 exhibits
-- [UPGRADE] Shipped ciphers/scytale.html with revisionist sidebar
+- [x] Exhibit: Rosetta Stone - spec, page, Track B trilingual viewer + timeline
+- [x] Exhibit: Histiaeus's Tattooed Messenger - spec, page, Track B concealment-demonstration visualization
+- [x] Hall I prev/next chains updated
+- [x] Hall I sidebar reflects 11 exhibits
+- [x] Shipped ciphers/scytale.html upgraded with revisionist sidebar
 
 ## Phase 2 - Hall XII creation: Unsolved Ciphers
 - [x] halls/unsolved.html created
 - [UPGRADE] Voynich moved to Hall XII (breadcrumb updated)
 - [UPGRADE] Kryptos moved to Hall XII (breadcrumb updated)
 - [UPGRADE] Beale Ciphers moved to Hall XII (breadcrumb updated)
-- [ ] Kryptos 2025 expansion pack content + interactions complete
+- [x] Kryptos 2025 expansion pack content + interactions complete
 - [UPGRADE] Dorabella moved to Hall XII
-- [ ] Exhibit: Shugborough - page + Track B visualization
-- [ ] Exhibit: D'Agapeyeff - page + Track B visualization
-- [ ] Exhibit: Somerton Man - page + Track B visualization
-- [ ] Exhibit: McCormick - page + Track B visualization
-- [ ] Exhibit: Phaistos Disc - page + Track B spiral viewer + glyph catalog
-- [UPGRADE] Zodiac Z-13/Z-32 side panel added
-- [ ] Hall VIII framing updated (unsolved rhetoric removed)
-- [ ] Hall XII prev/next correctly set (prev XI, next XIII)
+- [x] Exhibit: Shugborough - page + Track B visualization
+- [x] Exhibit: D'Agapeyeff - page + Track B visualization
+- [x] Exhibit: Somerton Man - page + Track B visualization
+- [x] Exhibit: McCormick - page + Track B visualization
+- [x] Exhibit: Phaistos Disc - page + Track B spiral viewer + glyph catalog
+- [x] Zodiac Z-13/Z-32 side panel added to existing Zodiac exhibit
+- [x] Hall VIII framing updated (unsolved rhetoric removed)
+- [x] Hall XII prev/next correctly set (prev XI, next XIII)
 
 ## Phase 3 - Japanese & Pacific Theater
-- [ ] Exhibit: JN-25 - spec, engine, page, tests, registered
-- [ ] Exhibit: Red (Type A) - spec, engine, page, tests, registered
-- [UPGRADE] Navajo page expanded with Choctaw/Comanche/Hopi panel
+- [x] Exhibit: JN-25 - spec, engine, page, tests, registered
+- [x] Exhibit: Red (Type A) - spec, engine, page, tests, registered
+- [x] Navajo page expanded with Choctaw/Comanche/Hopi panel
 
 ## Phase 4 - WWII / Interwar machines
 - [ ] Exhibit: Fialka M-125 - spec, engine, page, tests, registered
@@ -127,11 +136,11 @@ Updated after every commit. Source of truth for completion status.
 ## Phase 9 - Hall XIII creation: Ciphers in Culture
 - [x] halls/culture.html created with cultural framing
 - [UPGRADE] Gold-Bug moved to Hall XIII
-- [ ] Dancing Men moved to Hall XIII (new page expected)
+- [x] Dancing Men moved to Hall XIII (new page expected)
 - [ ] Exhibit: Da Vinci Code - spec, engine, page, tests, registered
 - [ ] Exhibit: National Treasure - spec, engine, page, tests, registered
 - [ ] Exhibit: Gravity Falls Cipher System - spec, engine, page, tests, registered
-- [ ] Exhibit: Cicada 3301 - spec, engines, page, tests, registered
+- [x] Exhibit: Cicada 3301 - spec, engines, page, tests, registered
 - [ ] Exhibit: Popular Culture Survey - spec, filterable page
 - [ ] Cross-reference side panels (Atbash/Caesar/Affine) added
 - [ ] Gold-Bug side panel added

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freemason Pigpen Tradition — The Cipher Museum</title>
+  <meta name="description" content="The geometric pigpen alphabet — fragments of grids and X-shapes — used by Freemasons, Rosicrucians, and the Hellfire Club from the 17th century onwards as a fraternal cipher and ritual marker.">
+  <meta property="og:title" content="Freemason Pigpen Tradition — The Cipher Museum">
+  <meta property="og:description" content="The geometric pigpen alphabet — fragments of grids and X-shapes — used by Freemasons, Rosicrucians, and the Hellfire Club from the 17th century onwards as a fraternal cipher and ritual marker.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/freemason-pigpen.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Freemason Pigpen Tradition — The Cipher Museum">
+  <meta name="twitter:description" content="The geometric pigpen alphabet — fragments of grids and X-shapes — used by Freemasons, Rosicrucians, and the Hellfire Club from the 17th century onwards as a fraternal cipher and ritual marker.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/freemason-pigpen.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    Freemason Pigpen Tradition
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Culture</span>
+    <span class="badge era-modern">Early modern Europe · 17th–19th c.</span>
+    <span class="badge sec-broken">Fraternal symbol-substitution alphabet</span>
+  </div>
+  <h1 class="page-title">Freemason Pigpen Tradition</h1>
+  <p class="page-tagline">The geometric pigpen alphabet — fragments of grids and X-shapes — used by Freemasons, Rosicrucians, and the Hellfire Club from the 17th century onwards as a fraternal cipher and ritual marker.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">England, Scotland, France, Germany, USA</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Earliest masonic uses ~1730s</span></div>
+    <div class="fact"><span class="fact-label">Best-known users</span><span class="fact-value">Speculative Freemasonry, 1730–present</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (mason-style decoder)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="freemason-pigpen">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Type any letter A–Z and the widget will show its pigpen symbol description (which grid, which cell, with-dot or without). Try short messages too. Track B — illustrative; for hands-on encoding see the [Pigpen Cipher exhibit](pigpen.html).</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Letter or short word (A\u2013Z)</label>
+  <input type="text" id="input" value="MASON" maxlength="20" style="width:14rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;text-transform:uppercase;">
+  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Describe pigpen symbol</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      // Standard mason pigpen: grid1 = ABCDEFGHI, grid2 = JKLMNOPQR (with dot),
+      // X1 = STUV, X2 = WXYZ (with dot). Grid cells map to fragment shapes.
+      var GRID1 = 'ABCDEFGHI', GRID2 = 'JKLMNOPQR', X1 = 'STUV', X2 = 'WXYZ';
+      var SHAPE = ['top-left corner','top edge','top-right corner','left edge','centre square','right edge','bottom-left corner','bottom edge','bottom-right corner'];
+      function describe(c) {
+        var i;
+        if ((i = GRID1.indexOf(c)) >= 0) return 'Grid 1, ' + SHAPE[i] + ' (no dot)';
+        if ((i = GRID2.indexOf(c)) >= 0) return 'Grid 2, ' + SHAPE[i] + ' (with dot)';
+        if ((i = X1.indexOf(c)) >= 0) return 'X-shape 1, ' + ['upper','left','right','lower'][i] + ' wedge (no dot)';
+        if ((i = X2.indexOf(c)) >= 0) return 'X-shape 2, ' + ['upper','left','right','lower'][i] + ' wedge (with dot)';
+        return null;
+      }
+      window.encode = function () {
+        var raw = (document.getElementById('input').value || '').toUpperCase();
+        var out = document.getElementById('output');
+        var lines = [];
+        for (var i = 0; i < raw.length; i++) {
+          var c = raw[i];
+          if (c === ' ') { lines.push(''); continue; }
+          var d = describe(c);
+          if (!d) { lines.push('  ' + c + ' \u2192 (not in pigpen alphabet)'); }
+          else    { lines.push('  ' + c + ' \u2192 ' + d); }
+        }
+        out.textContent = lines.join('\n') + '\n\n(For drawn symbols, see the full Pigpen Cipher exhibit.)';
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Pigpen — also called the Masonic, Rosicrucian, or Tic-Tac-Toe cipher — encodes each letter of the alphabet as a fragment of one of two grids and two X-shapes. The position of the letter in the grid determines the shape of its symbol; a dot inside the symbol distinguishes the second letter assigned to that cell. From the early 18th century the cipher became a recognised fraternal-society marker: Freemasons used it in ritual papers, on gravestones, and in correspondence between lodges. Its survival to the present day owes more to Boy Scout handbooks and puzzle books than to actual secrecy — the cipher is a pure monoalphabetic substitution and breaks instantly to frequency analysis.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The earliest documented use of grid-based symbol substitution is by the Knights Templar in the 13th century, but the recognisable modern pigpen layout dates from the 1730s, when speculative Freemasonry in London standardised it for in-lodge correspondence. The Rosicrucian Order adopted variants. The Hellfire Club used a grid-and-dot variant in the 1760s. By the 19th century pigpen had appeared in <em>Scientific American</em>, the <em>Boy's Own Paper</em>, and dozens of children's books — completing its journey from secret society to schoolyard pastime. Confederate generals reportedly used variants in the American Civil War, and pigpen-style epitaphs survive on Masonic graves from Boston to Edinburgh.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Pigpen is cryptographically identical to any other monoalphabetic substitution: 26 plaintext letters mapped one-to-one to 26 distinct symbols. Its security is purely visual obscurity. Once the symbol-set is recognised, the cipher breaks to frequency analysis exactly as easily as a Caesar substitution. Its real cultural function was never secrecy — it was <em>recognition</em>: a pigpen-encoded inscription on a tombstone or document signalled membership in the order to other initiates while looking decorative to outsiders.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>Pigpen lives on as the canonical 'fun cipher' for children, scout troops, and recreational cryptographers. It is the most-recognised symbol cipher in popular culture — appearing in <em>Sherlock</em> (BBC, 2010), <em>National Treasure</em> (2004), countless escape rooms, and an endless stream of internet puzzles. The Cipher Museum maintains a fully interactive Pigpen exhibit ([Pigpen Cipher](pigpen.html)) for hands-on encoding.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XIII · Culture</td></tr>
+            <tr><td>Region</td><td>England, Scotland, France, Germany, USA</td></tr>
+            <tr><td>Era</td><td>Early modern Europe · 17th–19th c.</td></tr>
+            <tr><td>Discipline</td><td>Geometric monoalphabetic substitution</td></tr>
+            <tr><td>Track</td><td>B (mason-style decoder)</td></tr>
+            <tr><td>Modern echo</td><td>Recreational ciphers · cipher tattoos · Boy Scout activities</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/pigpen.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Pigpen Cipher</span>
+      <span class="related-card__tag">Full interactive exhibit</span>
+    </a>
+    <a href="../ciphers/monoalphabetic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Monoalphabetic Substitution</span>
+      <span class="related-card__tag">The underlying class</span>
+    </a>
+    <a href="../ciphers/bacon.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Bacon's Cipher</span>
+      <span class="related-card__tag">Contemporary fraternal cipher</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/sator-square.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Sator Square</span>
+  </a>
+  <a href="../halls/culture.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Hall XIII Index</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

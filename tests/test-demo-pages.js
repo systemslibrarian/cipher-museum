@@ -90,7 +90,11 @@ const IJ_MERGE = new Set([
 ]);
 const HAND_BUILT = new Set(['caesar.html', 'playfair.html', 'vigenere.html', 'zodiac.html',
   // Round 3 Track B (visualization-only widgets, no demo-loader CONFIG):
-  'egyptian-substitution.html', 'rosetta-stone.html', 'histiaeus-tattoo.html']);
+  'egyptian-substitution.html', 'rosetta-stone.html', 'histiaeus-tattoo.html',
+  // Round 3 Stage 3 — Hall XII Unsolved + Hall XIII Culture (all Track B):
+  'phaistos-disc.html', 'shugborough.html', 'dagapeyeff.html', 'somerton-man.html', 'mccormick.html',
+  'bach-motif.html', 'dancing-men.html', 'gold-bug.html', 'cicada-3301.html', 'krypto-arg.html',
+  'mit-mystery-hunt.html', 'sator-square.html', 'freemason-pigpen.html']);
 // Pure-content modern-crypto and unsolved pages with no interactive demo:
 const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
   'dorabella.html', 'rsa.html', 'sha256.html']);

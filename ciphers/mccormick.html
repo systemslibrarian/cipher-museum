@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>McCormick Notes — The Cipher Museum</title>
+  <meta name="description" content="Two handwritten notes found in the pockets of murder victim Ricky McCormick in 1999 — declared 'unbreakable' by the FBI's Cryptanalysis and Racketeering Records Unit in 2011.">
+  <meta property="og:title" content="McCormick Notes — The Cipher Museum">
+  <meta property="og:description" content="Two handwritten notes found in the pockets of murder victim Ricky McCormick in 1999 — declared 'unbreakable' by the FBI's Cryptanalysis and Racketeering Records Unit in 2011.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/mccormick.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="McCormick Notes — The Cipher Museum">
+  <meta name="twitter:description" content="Two handwritten notes found in the pockets of murder victim Ricky McCormick in 1999 — declared 'unbreakable' by the FBI's Cryptanalysis and Racketeering Records Unit in 2011.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/mccormick.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a><span>&rsaquo;</span>
+    McCormick Notes
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XII · Unsolved</span>
+    <span class="badge era-modern">Late 20th-c. United States · 1999</span>
+    <span class="badge sec-broken">Unsolved homicide-evidence cipher</span>
+  </div>
+  <h1 class="page-title">McCormick Notes</h1>
+  <p class="page-tagline">Two handwritten notes found in the pockets of murder victim Ricky McCormick in 1999 — declared 'unbreakable' by the FBI's Cryptanalysis and Racketeering Records Unit in 2011.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">St. Louis, Missouri, USA</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Notes recovered 30 June 1999</span></div>
+    <div class="fact"><span class="fact-label">Investigator</span><span class="fact-value">FBI Cryptanalysis & Racketeering Records Unit (CRRU)</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (cluster analyzer)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="mccormick">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Paste a fragment of one of the McCormick notes (or use the loaded sample) and the widget will list bigrams (two-letter clusters) by frequency. Track B — pattern explorer, not a decoder.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Note fragment (use uppercase letters)</label>
+  <textarea id="input" rows="5" style="width:100%;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">RNCBE LRRSE NSE EE NEAR NCBE WLDS NLSE WNSE NCBE NCBSE</textarea>
+  <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Tally bigrams</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      window.encode = function () {
+        var raw = (document.getElementById('input').value || '').toUpperCase().replace(/[^A-Z]/g, '');
+        var out = document.getElementById('output');
+        if (raw.length < 4) { out.textContent = 'Need at least 4 letters.'; return; }
+        var counts = {};
+        for (var i = 0; i < raw.length - 1; i++) {
+          var pair = raw[i] + raw[i+1];
+          counts[pair] = (counts[pair] || 0) + 1;
+        }
+        var entries = Object.keys(counts).map(function (k) { return [k, counts[k]]; });
+        entries.sort(function (a, b) { return b[1] - a[1]; });
+        var lines = ['Letters analysed: ' + raw.length, 'Distinct bigrams: ' + entries.length, '', 'Top 10 bigrams:'];
+        for (var j = 0; j < Math.min(10, entries.length); j++) {
+          lines.push('  ' + entries[j][0] + '  \u00d7 ' + entries[j][1]);
+        }
+        lines.push('');
+        lines.push('Compare: in natural English, TH is most frequent at ~3.9%, then HE ~3.7%.');
+        out.textContent = lines.join('\n');
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>On 30 June 1999, Ricky McCormick — a 41-year-old man with limited literacy — was found dead in a field in St. Charles County, Missouri. In his pockets were two handwritten notes filled with apparent letter-clusters, numbers, parenthesised abbreviations, and what look like coded place names. After 12 years of in-house analysis, the FBI's CRRU publicly released the notes in 2011 and asked for help. They remain unsolved. The FBI list McCormick's notes as one of the bureau's top unsolved cryptograms.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>McCormick's family stated he had used 'his own coded writing' since boyhood and that no one had ever read it back. The notes contain about 30 lines of mixed letters and numbers, organised into apparent paragraphs with parenthetical asides. The FBI CRRU — the same unit that worked the Unabomber and Zodiac materials — concluded that the notes are 'almost certainly genuine cipher' rather than random scribbling, but that the encryption may be entirely <em>private</em>: a system of personal abbreviations with no algorithmic structure that an outsider could reverse-engineer.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Statistically the notes show real linguistic structure: repeated bigrams, periodic capitalisation, paragraph breaks. They do <em>not</em> match any standard cipher (Vigenère, Playfair, Hill, columnar transposition, Polybius). The leading hypothesis is that they are an <em>idiolectic</em> cipher — a system invented and used by a single person, where the 'key' is not a string but a lifetime of personal associations. Such ciphers are functionally one-time pads from the cryptanalyst's point of view: even with all the ciphertext in the world, recovering the plaintext requires recovering the author's mental model.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>The McCormick notes are a leading example used in arguments for <em>crowdsourced</em> cryptanalysis: the FBI explicitly opened them to the public hoping that someone — perhaps a relative, perhaps a stranger with the right insight — would recognise a personal pattern. They are also a sobering counterpoint to fictional 'genius detective' decipherments: a real intelligence agency, with full access to context and a 12-year head start, could not crack a barely-literate man's personal notes.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XII · Unsolved</td></tr>
+            <tr><td>Region</td><td>St. Louis, Missouri, USA</td></tr>
+            <tr><td>Era</td><td>Late 20th-c. United States · 1999</td></tr>
+            <tr><td>Discipline</td><td>Personal/idiosyncratic cipher (suspected)</td></tr>
+            <tr><td>Track</td><td>B (cluster analyzer)</td></tr>
+            <tr><td>Modern echo</td><td>FBI public crowdsourcing of cryptanalysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/zodiac.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Zodiac Killer Ciphers</span>
+      <span class="related-card__tag">FBI CRRU's other famous case</span>
+    </a>
+    <a href="../ciphers/dorabella.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Dorabella Cipher</span>
+      <span class="related-card__tag">Personal cipher, no public key</span>
+    </a>
+    <a href="../ciphers/one-time-pad.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">One-Time Pad</span>
+      <span class="related-card__tag">Why personal ciphers resist attack</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/somerton-man.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Somerton Man Code</span>
+  </a>
+  <a href="../halls/unsolved.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Hall XII Index</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/unsolved.html">Hall XII: Unsolved Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XII · Unsolved</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -41,7 +41,11 @@ const REPO = path.resolve(__dirname, '..');
 const CIPHERS_DIR = path.join(REPO, 'ciphers');
 const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
   // Round 3 Track B (visualization-only exhibits with hand-built widgets):
-  'egyptian-substitution', 'rosetta-stone', 'histiaeus-tattoo']);
+  'egyptian-substitution', 'rosetta-stone', 'histiaeus-tattoo',
+  // Round 3 Stage 3 — Hall XII Unsolved + Hall XIII Culture (all Track B):
+  'phaistos-disc', 'shugborough', 'dagapeyeff', 'somerton-man', 'mccormick',
+  'bach-motif', 'dancing-men', 'gold-bug', 'cicada-3301', 'krypto-arg',
+  'mit-mystery-hunt', 'sator-square', 'freemason-pigpen']);
 
 // Pages that are intentionally static (no engine, no interactive widget) -
 // modern-crypto math walkthroughs and the unsolved Dorabella manuscript.
@@ -61,7 +65,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 69', allPages.length === 69, `actual=${allPages.length}`);
+ok('Cipher pages count is 84', allPages.length === 84, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
@@ -182,7 +186,9 @@ const ENGINE_PROFILES = {
   sigaba:                 { key: 'SIGABA',                           mode: 'random-key' },
   typex:                  { key: 'AAAAA',                            mode: 'self-reciprocal' },
   kamaSutra:              { key: 'KAMASUTRA',                        mode: 'self-reciprocal' },
-  aeneasTacticus:         { key: '',                                 mode: 'roundtrip' }
+  aeneasTacticus:         { key: '',                                 mode: 'roundtrip' },
+  jn25:                   { key: '31415',                            mode: 'roundtrip' },
+  redTypeA:               { key: 'TOKYORED',                         mode: 'roundtrip' }
 };
 
 const SAMPLE_TEXTS = [

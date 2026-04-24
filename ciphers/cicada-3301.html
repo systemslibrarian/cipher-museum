@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cicada 3301 — The Cipher Museum</title>
+  <meta name="description" content="An anonymous 2012–2014 internet recruitment puzzle that combined steganography, classical ciphers, GPS coordinates on physical posters, and a copy of the Liber Primus hand-illustrated in glyphic runes.">
+  <meta property="og:title" content="Cicada 3301 — The Cipher Museum">
+  <meta property="og:description" content="An anonymous 2012–2014 internet recruitment puzzle that combined steganography, classical ciphers, GPS coordinates on physical posters, and a copy of the Liber Primus hand-illustrated in glyphic runes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/cicada-3301.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cicada 3301 — The Cipher Museum">
+  <meta name="twitter:description" content="An anonymous 2012–2014 internet recruitment puzzle that combined steganography, classical ciphers, GPS coordinates on physical posters, and a copy of the Liber Primus hand-illustrated in glyphic runes.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/cicada-3301.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    Cicada 3301
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Culture</span>
+    <span class="badge era-modern">Internet era · 2012–2014</span>
+    <span class="badge sec-broken">Multi-stage ARG / recruitment puzzle</span>
+  </div>
+  <h1 class="page-title">Cicada 3301</h1>
+  <p class="page-tagline">An anonymous 2012–2014 internet recruitment puzzle that combined steganography, classical ciphers, GPS coordinates on physical posters, and a copy of the <em>Liber Primus</em> hand-illustrated in glyphic runes.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Global (online + physical posters in 14 cities)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">Three releases: Jan 2012, Jan 2013, Jan 2014</span></div>
+    <div class="fact"><span class="fact-label">Issued by</span><span class="fact-value">Anonymous group signing as '3301'</span></div>
+    <div class="fact"><span class="fact-label">Track</span><span class="fact-value">B (puzzle-stage walkthrough)</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="cicada-3301">
+  <h2>Interactive Exhibit</h2>
+  <p style="opacity:.85;">Step through the four major puzzle layers used in Cicada's 2012 release: Caesar decode, URL extraction, image steg hint, and book-cipher index. Each button reveals the kind of move solvers had to make. Track B — narrative walkthrough.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Pick a Cicada 2012 puzzle stage (1\u20134)</label>
+  <input type="number" id="input" min="1" max="4" value="1" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Walk this stage</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      var STAGES = {
+        1: 'STAGE 1 \u2014 Caesar shift\n\n  Image text reads: \u201cTIBERIVS CLAVDIVS CAESAR says \u201clxxat\u201d\u201d\n  \u201cCaesar\u201d hint \u2192 try ROT-3 of the bracketed string.\n  lxxat \u2192 ioxxq? No \u2014 a small Caesar shift on the wider hidden text\n  yields a Tor URL fragment.',
+        2: 'STAGE 2 \u2014 OutGuess steganography\n\n  Run `outguess -k <password> -r image.jpg out.txt`.\n  Hidden file decrypts to a book reference: Mariko \u014ahara\u2019s \n  \u201cMental Fitness Puzzles\u201d, page/line/word indices included.',
+        3: 'STAGE 3 \u2014 Phone + audio\n\n  Solve indices to a phone number in Oregon. Recorded message:\n  \u201cVery good. You have done well\u2026 the cicada will sing in the cool dawn.\u201d\n  Spectrogram of the recording reveals further GPS coordinates.',
+        4: 'STAGE 4 \u2014 Physical posters + onion service\n\n  GPS leads to QR-coded posters in 14 cities (Warsaw, Seoul, Sydney\u2026).\n  QR codes link to a Tor hidden service requiring PGP-signed reply.\n  Successful solvers received an email \u2014 then silence.'
+      };
+      window.encode = function () {
+        var n = parseInt(document.getElementById('input').value, 10);
+        var out = document.getElementById('output');
+        if (!n || n < 1 || n > 4) { out.textContent = 'Enter a stage 1\u20134.'; return; }
+        out.textContent = STAGES[n];
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>On 4 January 2012 a plain image appeared on 4chan reading 'Hello. We are looking for highly intelligent individuals.' Solving it required Caesar-shift decoding, OutGuess image steganography, identification of a William Gibson book reference, a phone call to an Oregon number, GPS coordinates that pointed to QR-coded posters in 14 cities on three continents, and ultimately a Tor hidden service. Two further puzzles ran in 2013 and 2014. The third culminated in a hand-bound book — <em>Liber Primus</em> — written in a runic alphabet, only the first 19 pages of which have ever been decrypted. The identity of '3301' has never been confirmed.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The 2012 puzzle alone employed: Caesar shift (ROT-N), digital steganography (the OutGuess tool, hiding a message in the image's least-significant bits), URL discovery, a recorded message about 'the cicada will sing in the cool dawn', book-cipher pages from Mariko Ohara's <em>Mental Fitness Puzzles</em> and from Gibson's <em>Agrippa</em>, prime-number clues, and finally an invitation to a private email confirming admission. Solvers who finished within the deadline reported being asked to write essays on cryptography and privacy; some never heard back. Theories about who '3301' was range from a private intelligence-recruitment outfit to a libertarian cryptography collective.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Technical Notes</span></div>
+      <div class="panel-body"><p>Cicada is the most cryptographically sophisticated public puzzle ever issued. It demanded competence in classical substitution, modern image steganography, prime-number theory, GPG/PGP key handling, Tor onion routing, and rare-language linguistics (the <em>Liber Primus</em> rune system appears to be a custom Anglo-Saxon-styled runic encoding of English with an as-yet-unknown additional cipher layer). The undecrypted pages remain an open public cryptanalysis target.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Modern Echo</span></div>
+      <div class="panel-body"><p>Cicada 3301 is the standard reference example of a modern puzzle ARG (alternate reality game) used as cipher pedagogy. It established a template followed by recruitment puzzles from GCHQ (the 'Can You Find It?' challenge) and the NSA (NSA-Codebreaker Challenge for university students). The <em>Liber Primus</em> remains a living unsolved document, regularly reattacked by new generations of cryptanalysts.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>Hall XIII · Culture</td></tr>
+            <tr><td>Region</td><td>Global (online + physical posters in 14 cities)</td></tr>
+            <tr><td>Era</td><td>Internet era · 2012–2014</td></tr>
+            <tr><td>Discipline</td><td>Multi-cipher composite</td></tr>
+            <tr><td>Track</td><td>B (puzzle-stage walkthrough)</td></tr>
+            <tr><td>Modern echo</td><td>Steganography · book ciphers · puzzle recruitment</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/caesar.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Caesar Cipher</span>
+      <span class="related-card__tag">Stage 1 of Cicada 2012</span>
+    </a>
+    <a href="../ciphers/book-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Book Cipher</span>
+      <span class="related-card__tag">Stage 4 of Cicada 2012</span>
+    </a>
+    <a href="../ciphers/kryptos.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Kryptos</span>
+      <span class="related-card__tag">Real-world puzzle still unsolved</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/gold-bug.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Poe's Gold-Bug</span>
+  </a>
+  <a href="../ciphers/krypto-arg.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">ARG Ciphers</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
