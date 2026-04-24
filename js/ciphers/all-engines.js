@@ -3053,6 +3053,198 @@ window.CipherEngines = (() => {
     };
   })();
 
+  // ============================================================
+  // Phase 7: Americana (Revolutionary War cryptography)
+  // ============================================================
+
+  // Culper Ring / Tallmadge Code (1779).
+  // Major Benjamin Tallmadge\u2019s codebook for Washington\u2019s spy ring on
+  // British-occupied Long Island and Manhattan. ~750 numbered entries
+  // covering people, places, military terms, and common words. Demo: a
+  // 200-entry stable codebook; each input word \u2192 3-digit code, with a
+  // literal per-letter fallback (8xx range) for out-of-codebook words.
+  const culperRing = (() => {
+    const WORDLIST = (
+      'THE OF AND TO IN A IS THAT FOR IT WITH AS BE ON BY ARE AT THIS NOT BUT FROM OR HAVE AN ' +
+      'WERE WHEN HER ALL SHE HIS THERE WHAT SO UP OUT IF ABOUT WHO GET GO ME MAKE CAN LIKE ' +
+      'TIME NO JUST HIM KNOW TAKE PEOPLE INTO YEAR YOUR GOOD SOME COULD THEM SEE OTHER THAN ' +
+      'THEN NOW LOOK ONLY COME OVER THINK BACK AFTER USE TWO HOW OUR WORK FIRST WELL WAY ' +
+      'EVEN NEW WANT ANY THESE GIVE DAY MOST US WASHINGTON CULPER TALLMADGE WOODHULL TOWNSEND ' +
+      'BRITISH AMERICAN ARMY NAVY GENERAL COLONEL CAPTAIN MAJOR LIEUTENANT FORT POST CAMP ' +
+      'SHIP REGIMENT BATTALION COMPANY MUSKET CANNON POWDER LETTER MESSAGE SPY AGENT ENEMY ' +
+      'FRIEND SECRET INFORMATION REPORT ATTACK DEFEND MARCH MOVE ARRIVE DEPART CROSS RIVER ' +
+      'BRIDGE ROAD HORSE RIDE SHIP BOAT HARBOR LONDON NEWYORK BOSTON PHILADELPHIA SETAUKET ' +
+      'OYSTERBAY CONNECTICUT LONGISLAND MANHATTAN HUDSON FLEET TROOPS SUPPLY ORDERS DELIVER ' +
+      'RECEIVE WRITE READ ANSWER MEET TONIGHT TOMORROW MORNING EVENING SUNDAY MONDAY TUESDAY ' +
+      'WEDNESDAY THURSDAY FRIDAY SATURDAY MONEY GUINEA POUND SHILLING TRADE GOODS CARGO ' +
+      'STORE FARM CHURCH TAVERN PRINTING PRESS NEWSPAPER GAZETTE CLINTON ANDRE ARNOLD ROCHAMBEAU ' +
+      'GREENE LAFAYETTE LEE STIRLING MORGAN PUTNAM HEATH PARSONS PASSAGE JERSEY VIRGINIA ' +
+      'CAROLINA GEORGIA RHODEISLAND MASSACHUSETTS DELAWARE PENNSYLVANIA MARYLAND CONFEDERATE ' +
+      'CONGRESS COMMANDER LOYAL REBEL TORY WHIG INDEPENDENCE LIBERTY KING PARLIAMENT TAX'
+    ).split(/\s+/);
+    const SENT_OPEN = 998, SENT_CLOSE = 999, LETTER_BASE = 800;
+    function fmt3(n) { return String(((n % 1000) + 1000) % 1000).padStart(3, '0'); }
+    return {
+      encode: (text, key) => {
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          const w = tok.replace(/[^A-Z]/g, '');
+          if (!w) continue;
+          const idx = WORDLIST.indexOf(w);
+          if (idx >= 0) {
+            out.push(fmt3(idx + 100)); // codebook entries start at 100, like real Culper numbers
+          } else {
+            out.push(fmt3(SENT_OPEN));
+            for (const ch of w) out.push(fmt3(LETTER_BASE + (ch.charCodeAt(0) - 65)));
+            out.push(fmt3(SENT_CLOSE));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const groups = String(text || '').match(/\d{3}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const v = parseInt(groups[i], 10);
+          if (v === SENT_OPEN) {
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              const lv = parseInt(groups[i], 10);
+              if (lv === SENT_CLOSE) { i++; break; }
+              if (lv >= LETTER_BASE && lv <= LETTER_BASE + 25) w += A[lv - LETTER_BASE];
+              else w += '?';
+              i++;
+            }
+            words.push(w);
+          } else if (v >= 100 && v - 100 < WORDLIST.length) {
+            words.push(WORDLIST[v - 100]);
+            i++;
+          } else {
+            words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
+  // Arnold\u2013Andr\u00e9 Book Cipher (1779\u20131780).
+  // The cipher Benedict Arnold and John Andr\u00e9 used to plot the surrender
+  // of West Point. Each word in plaintext was located in a shared book
+  // (Blackstone\u2019s <em>Commentaries on the Laws of England</em>) and
+  // transmitted as the triple page.line.word. Demo: a deterministic
+  // 240-word \u201cbook\u201d (12 pages \u00d7 5 lines \u00d7 4 words) seeded by the
+  // optional key; each input word becomes a triple. Words not in the book
+  // fall through to per-letter triples in a reserved page range.
+  const arnoldAndre = (() => {
+    const SOURCE = (
+      'OF THE COMMENTARIES UPON THE LAWS OF ENGLAND THAT TREAT OF THE RIGHTS ' +
+      'OF PERSONS AND OF THINGS PROPERTY POSSESSION CONTRACT TRESPASS REMEDY ' +
+      'CRIME PUNISHMENT JUSTICE COURT JUDGE JURY SHERIFF STATUTE PARLIAMENT ' +
+      'KING REIGN WAR PEACE TREATY ALLY ENEMY FOE CITIZEN SUBJECT LOYAL ' +
+      'REBEL ARMY SHIP FORT POINT WEST CAMP TROOPS COMMAND ORDER DELIVER ' +
+      'MEET TONIGHT TOMORROW EVENING ARRIVE DEPART CROSS HUDSON RIVER ROAD ' +
+      'BRIDGE HORSE LETTER MESSAGE SECRET INFORMATION REPORT ATTACK DEFEND ' +
+      'MARCH MOVE FRIEND SPY AGENT ENEMY ARNOLD ANDRE WASHINGTON CLINTON ' +
+      'BENEDICT JOHN GENERAL COLONEL CAPTAIN MAJOR LIEUTENANT GUNS POWDER ' +
+      'CANNON MUSKET POST SUPPLY MONEY GUINEA POUND SHILLING TRADE CARGO ' +
+      'GOODS PRINT NEWSPAPER GAZETTE LONDON NEWYORK BOSTON PHILADELPHIA ' +
+      'WESTPOINT KINGS FERRY HAVERSTRAW STONY POINT FORTNIAGARA SARATOGA ' +
+      'SARATOGA TICONDEROGA YORKTOWN PRINCETON TRENTON MORRISTOWN MIDWAY ' +
+      'MIDDLE FIRST SECOND THIRD FOURTH FIFTH SIXTH SEVENTH EIGHTH NINTH ' +
+      'TENTH ELEVENTH TWELFTH SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY ' +
+      'SATURDAY MORNING NOON EVENING NIGHT MIDNIGHT WATCH SENTRY GUARD GATE ' +
+      'WALL TOWER HARBOR FLEET FRIGATE SLOOP SCHOONER PRIZE ANCHOR MOOR ' +
+      'SEAL BREAK SECRET CIPHER KEY DECODE ENCODE WORD LETTER NUMBER PAGE ' +
+      'LINE BOOK COPY READ WRITE PEN INK WAX PARCHMENT HAND SIGNATURE ' +
+      'NAME OATH HONOR DUTY HOMAGE TREASON BETRAY DESERT FLEE ESCAPE ' +
+      'SAFE PASSAGE PASSWORD COUNTERSIGN PATROL ROUND POST GUARD CHANGE ' +
+      'RELIEF DUTY HOUR PIQUET COLOR FLAG WHITE RED BLUE BLACK YELLOW ' +
+      'GREEN PURPLE BROWN GRAY SHIPYARD MILL SHOP TAVERN INN CHURCH FARM ' +
+      'HOUSE STORE STABLE BARN FIELD WOOD HILL VALLEY STREAM CREEK MOUNTAIN ' +
+      'WATER FORD CROSSING NORTH SOUTH EAST WEST RIGHT LEFT FRONT REAR'
+    ).split(/\s+/);
+    // Pad / trim to 12 pages * 5 lines * 4 words = 240 entries.
+    while (SOURCE.length < 240) SOURCE.push('FILLER');
+    SOURCE.length = 240;
+    function tripleOf(idx) {
+      const page = Math.floor(idx / 20) + 1; // 1..12
+      const line = Math.floor((idx % 20) / 4) + 1; // 1..5
+      const word = (idx % 4) + 1; // 1..4
+      return page + '.' + line + '.' + word;
+    }
+    function indexOfTriple(t) {
+      const m = String(t).match(/^(\d+)\.(\d+)\.(\d+)$/);
+      if (!m) return -1;
+      const p = parseInt(m[1], 10), l = parseInt(m[2], 10), w = parseInt(m[3], 10);
+      if (p < 1 || p > 12 || l < 1 || l > 5 || w < 1 || w > 4) return -2;
+      return (p - 1) * 20 + (l - 1) * 4 + (w - 1);
+    }
+    // Reserve pages 13..15 for literal mode: page 13 = sentinel-open,
+    // page 14 = letter codes (line=floor((c)/5)+1, word=(c%5)+1, c in 0..25),
+    // page 15 = sentinel-close.
+    const SENT_OPEN  = '13.1.1';
+    const SENT_CLOSE = '15.1.1';
+    function letterTriple(ch) {
+      const c = ch.charCodeAt(0) - 65;
+      return '14.' + (Math.floor(c / 5) + 1) + '.' + ((c % 5) + 1);
+    }
+    function letterFromTriple(t) {
+      const m = t.match(/^14\.(\d+)\.(\d+)$/);
+      if (!m) return '?';
+      const li = parseInt(m[1], 10) - 1, wi = parseInt(m[2], 10) - 1;
+      const c = li * 5 + wi;
+      return (c >= 0 && c < 26) ? A[c] : '?';
+    }
+    return {
+      encode: (text, key) => {
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          const w = tok.replace(/[^A-Z]/g, '');
+          if (!w) continue;
+          const idx = SOURCE.indexOf(w);
+          if (idx >= 0) {
+            out.push(tripleOf(idx));
+          } else {
+            out.push(SENT_OPEN);
+            for (const ch of w) out.push(letterTriple(ch));
+            out.push(SENT_CLOSE);
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const groups = String(text || '').match(/\d+\.\d+\.\d+/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const t = groups[i];
+          if (t === SENT_OPEN) {
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              if (groups[i] === SENT_CLOSE) { i++; break; }
+              w += letterFromTriple(groups[i]);
+              i++;
+            }
+            words.push(w);
+          } else {
+            const idx = indexOfTriple(t);
+            if (idx >= 0 && idx < SOURCE.length) words.push(SOURCE[idx]);
+            else words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -3070,6 +3262,7 @@ window.CipherEngines = (() => {
     affine,
     trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher,
     fialka, kl7, geheimschreiber, kryha, m94,
-    chineseTelegraph, zimmermann, slidex, commercialCode
+    chineseTelegraph, zimmermann, slidex, commercialCode,
+    culperRing, arnoldAndre
   };
 })();

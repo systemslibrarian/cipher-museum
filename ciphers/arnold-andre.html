@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arnold–André Book Cipher (Blackstone’s Commentaries · 1779–1780) — The Cipher Museum</title>
+  <meta name="description" content="The book cipher Benedict Arnold and Major John André used to plot the surrender of West Point. Each plaintext word located in a shared book (Blackstone’s <em>Commentaries</em>) and transmitted as the triple page.line.word.">
+  <meta property="og:title" content="Arnold–André Book Cipher (Blackstone’s Commentaries · 1779–1780) — The Cipher Museum">
+  <meta property="og:description" content="The book cipher Benedict Arnold and Major John André used to plot the surrender of West Point. Each plaintext word located in a shared book (Blackstone’s <em>Commentaries</em>) and transmitted as the triple page.line.word.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/arnold-andre.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Arnold–André Book Cipher (Blackstone’s Commentaries · 1779–1780) — The Cipher Museum">
+  <meta name="twitter:description" content="The book cipher Benedict Arnold and Major John André used to plot the surrender of West Point. Each plaintext word located in a shared book (Blackstone’s <em>Commentaries</em>) and transmitted as the triple page.line.word.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/arnold-andre.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/civil-war.html">Hall V: American Field Cryptography</a><span>&rsaquo;</span>
+    Arnold–André Book Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall V · American Field</span>
+    <span class="badge era-modern">American Revolution · 1779–1780</span>
+    <span class="badge sec-broken">Compromised by capture (1780)</span>
+  </div>
+  <h1 class="page-title">Arnold–André Book Cipher <span style="opacity:.6;font-weight:400;">Blackstone’s Commentaries · 1779–1780</span></h1>
+  <p class="page-tagline">A book cipher with two volumes of Blackstone’s <em>Commentaries</em> as the key. The cipher held; the courier didn’t.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Operators</span><span class="fact-value">Major General Benedict Arnold &amp; Major John André (British Army)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">July 1779 – September 1780</span></div>
+    <div class="fact"><span class="fact-label">Book</span><span class="fact-value">Blackstone’s <em>Commentaries on the Laws of England</em> (also Bailey’s <em>Dictionary</em>)</span></div>
+    <div class="fact"><span class="fact-label">Format</span><span class="fact-value">Triple page.line.word, e.g. <code>27.4.6</code> = page 27, line 4, word 6</span></div>
+    <div class="fact"><span class="fact-label">Compromise</span><span class="fact-value">André captured 23 Sept 1780 with cipher key, plans, and pass</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="arnold-andre"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>In July 1779, Major General Benedict Arnold — hero of Saratoga, lately appointed military governor of Philadelphia — opened a secret correspondence with the British command in New York under the cover-name “Monk” (after General George Monck, who restored the English monarchy in 1660). His liaison was Major John André, the cultivated young Adjutant-General to General Sir Henry Clinton. Their negotiations centred on Arnold’s offer to deliver the Hudson River fortress at West Point to the British in exchange for cash and a brigadier’s commission in the British Army.</p><p style="margin-top:1rem;">Their cipher was a book code. Both men carried matching copies of Sir William Blackstone’s <em>Commentaries on the Laws of England</em> (André alternatively used Nathan Bailey’s <em>Universal Etymological English Dictionary</em>). Each plaintext word was located in the book and transmitted as a numeric triple: page, line, word. The sister of an American spy could carry the resulting strings of numbers without arousing suspicion.</p><p style="margin-top:1rem;">The plot collapsed not through cryptanalysis but through plain bad luck. On 23 September 1780, three New York militiamen stopped André near Tarrytown as he returned from a meeting with Arnold. They searched him, found the cipher key and the plans of West Point in his boot, and turned him in. André was hanged as a spy on 2 October. Arnold escaped to British lines, sailed for England, and lived out his life in disgrace. West Point did not fall.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Both correspondents own identical copies of an agreed reference book. To encrypt a word, the sender finds it in the book and writes down a triple <code>page.line.word</code>. To decrypt, the receiver looks up that triple in their own copy and recovers the plaintext.</p><p style="margin-top:1rem;">Unique to a book cipher: the “key” is a published book, easy to obtain innocuously and impossible to memorise. There is no codebook to capture, no machine to seize — unless the courier is searched, in which case everything is exposed at once.</p><p style="margin-top:1rem;">Words not in the book had to be spelled out letter by letter using a parallel scheme — either a simple letter-position code or, in Arnold’s correspondence, occasional substitutions and abbreviations agreed in advance. Modern cryptanalysis classifies this as a homophonic / nomenclator hybrid.</p><p style="margin-top:1rem;">The demo above uses a deterministic 240-word “book” organised as 12 pages × 5 lines × 4 words. Words not in the book fall through to per-letter triples on “page 14”, bracketed by sentinel triples <code>13.1.1</code> and <code>15.1.1</code> — mirroring how Arnold and André handled out-of-book words in practice.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Compromised</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Capture of the courier (23 September 1780)</div><div class="attack-diff">Complexity: Three militiamen, an unscheduled patrol</div><p class="attack-desc">André was returning from West Point in civilian clothes — a fatal mistake, since it made him a spy under the laws of war rather than a uniformed officer. John Paulding, David Williams, and Isaac Van Wart stopped him near Tarrytown, found the documents in his boot, and turned him over to the Continental Army. He was tried, convicted, and hanged within ten days.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Cryptanalysis was never required</div><div class="attack-diff">Complexity: Moot — the plaintext was recovered with the key</div><p class="attack-desc">A book cipher with a published reference is genuinely hard to break given only ciphertext: the analyst must guess which book is the key, and there are millions to try. But once the courier and the key are captured together, the entire correspondence becomes readable. The Arnold cipher was never broken cryptanalytically; it never needed to be.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body"><table class="cipher-table"><thead><tr><th>Arnold–André lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Public reference as the key</td><td>Trusted-third-party root certificates: well-known but high-value targets</td></tr><tr><td>Single point of failure (the courier)</td><td>The 2010s SolarWinds / supply-chain attacks against single trusted channels</td></tr><tr><td>Cryptography held; operations failed</td><td>The defining pattern of modern breaches: TLS is fine, the operator clicked the link</td></tr><tr><td>Carrying key + ciphertext together</td><td>Why modern protocols separate key storage from encrypted data (HSM ≠ disk)</td></tr></tbody></table></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Operators</td><td>Major General Benedict Arnold &amp; Major John André (British Army)</td></tr>
+            <tr><td>Year</td><td>July 1779 – September 1780</td></tr>
+            <tr><td>Book</td><td>Blackstone’s <em>Commentaries on the Laws of England</em> (also Bailey’s <em>Dictionary</em>)</td></tr>
+            <tr><td>Format</td><td>Triple page.line.word, e.g. <code>27.4.6</code> = page 27, line 4, word 6</td></tr>
+            <tr><td>Compromise</td><td>André captured 23 Sept 1780 with cipher key, plans, and pass</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/culper-ring.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Culper Ring / Tallmadge Code</span>
+      <span class="related-card__tag">The contemporary cipher used <em>by</em> Washington against the British</span>
+    </a>
+    <a href="../ciphers/book-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Book Ciphers</span>
+      <span class="related-card__tag">Earlier and later examples in the same family</span>
+    </a>
+    <a href="../ciphers/beale.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Beale Ciphers</span>
+      <span class="related-card__tag">A famous unsolved book cipher from the next generation</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/culper-ring.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Culper Ring / Tallmadge Code</span>
+  </a>
+  <a href="../ciphers/book-cipher.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Book Ciphers</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/civil-war.html">Hall V: American Field Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall V · American Field</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 76 done / 171 total (44.4%)
+- Overall: 78 done / 171 total (45.6%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -13,7 +13,7 @@ Updated after every commit. Source of truth for completion status.
 - Phase 4 (WWII/interwar machines): 6/9
 - Phase 5 (European gaps): 5/10
 - Phase 6 (East Asia/global): 0/4
-- Phase 7 (Americana/cultural): 1/4
+- Phase 7 (Americana/cultural): 3/4
 - Phase 8 (global underground traditions): 0/10
 - Phase 9 (Hall XIII creation + cultural): 5/14
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 1/5
@@ -33,6 +33,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24: Phase 5/7/10 batch — added 7 engines (affine, trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher) with full ENGINE_PROFILES + SOURCES wiring; built 7 exhibit pages (affine.html, trithemius.html, cardano-autokey.html, wheatstone.html, morse.html, cardano-grille.html, null-cipher.html) via scripts/build-phase5-pages.py. All 6 test suites green (564 + 387 + 238 + 1210 + 366 + 406 = 3,171 assertions). Cipher-pages count target 84 → 91.
 - 2026-04-24: Phase 4 WWII/Cold-War machines batch — added 5 engines (fialka, kl7, geheimschreiber, kryha, m94) with full ENGINE_PROFILES + SOURCES wiring; built 5 exhibit pages (fialka.html, kl-7.html, geheimschreiber.html, kryha.html, m-94.html) via scripts/build-phase4-pages.py. Geheimschreiber engine rewritten from Baudot 5-bit XOR to mod-26 letter-index arithmetic (5 additive wheels + 5 perm-selector wheels picking among 6 keyed permutations) to guarantee round-trip while preserving the T52 educational story. All 6 test suites green (604 + 392 + 238 + 1260 + 381 + 436 = 3,311 assertions). Cipher-pages count target 91 → 96.
 - 2026-04-24: Phase 6 East Asia & Telegraphy batch — added 4 engines (chineseTelegraph, zimmermann, slidex, commercialCode) with full ENGINE_PROFILES + SOURCES wiring; built 4 exhibit pages (chinese-telegraph.html, zimmermann.html, slidex.html, commercial-codebooks.html) via scripts/build-phase6-pages.py. Slidex uses roundtrip-padded mode (X-padding for odd-length plaintext, standard convention). Zimmermann + commercial-codebooks share a deterministic codebook architecture: fixed wordlist with 5-digit / 5-letter codewords plus literal-fallback sentinel for out-of-list words. All 6 test suites green (636 + 396 + 238 + 1300 + 393 + 460 = 3,423 assertions across 130 cipher pages). Cipher-pages count target 96 → 100.
+- 2026-04-24: Phase 7 Americana batch — added 2 Revolutionary War engines (culperRing, arnoldAndre) with full ENGINE_PROFILES + SOURCES wiring; built 2 exhibit pages (culper-ring.html, arnold-andre.html) via scripts/build-phase7-pages.py. Culper Ring uses a 200-entry stable codebook (indexed from 100) with 800-range per-letter literal fallback; Arnold-Andre uses a 240-word “book” as page.line.word triples (12 pages × 5 lines × 4 words) with reserved pages 13/14/15 for sentinel + per-letter literal mode. All 6 test suites green (652 + 398 + 238 + 1320 + 399 + 472 = 3,479 assertions across 132 cipher pages). Cipher-pages count target 100 → 102.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created

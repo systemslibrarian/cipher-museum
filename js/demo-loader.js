@@ -344,6 +344,16 @@
       label: 'Commercial Telegraph Codebooks (ABC / Bentley\'s style)', engine: 'commercialCode',
       defaultMsg: 'CONFIRMED SHIPMENT URGENT',
       inputs: [{ type: 'text', id: 'keyword', label: 'Codebook (informational only)', value: 'ABC', placeholder: 'ABC, Bentley, Lieber…' }]
+    },
+    'culper-ring': {
+      label: 'Culper Ring / Tallmadge Code (1779)', engine: 'culperRing',
+      defaultMsg: 'WASHINGTON ATTACK MIDNIGHT',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook key (informational)', value: 'TALLMADGE', placeholder: 'TALLMADGE' }]
+    },
+    'arnold-andre': {
+      label: 'Arnold–André Book Cipher (Blackstone\'s Commentaries)', engine: 'arnoldAndre',
+      defaultMsg: 'GENERAL ARNOLD MEET ANDRE TONIGHT',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Book seed (informational)', value: 'BLACKSTONE', placeholder: 'BLACKSTONE' }]
     }
   };
 
@@ -746,6 +756,18 @@
       { text: 'Bentley\'s Complete Phrase Code (1906) — Internet Archive', url: 'https://archive.org/details/bentleyscomplete00bent' },
       { text: 'ABC Telegraphic Code, 5th edition (1901) — Internet Archive', url: 'https://archive.org/details/abctelegraphicco00clauuoft' },
       { text: 'Standage, Tom. <em>The Victorian Internet</em> (cultural context)', url: 'https://www.bloomsbury.com/uk/victorian-internet-9781620405925/' }
+    ],
+    culperRing: [
+      { text: 'Rose, Alexander. <em>Washington\'s Spies: The Story of America\'s First Spy Ring</em> (2006)', url: 'https://www.simonandschuster.com/books/Washingtons-Spies/Alexander-Rose/9780553383294' },
+      { text: 'Library of Congress — Tallmadge\'s codebook (digitised pages)', url: 'https://www.loc.gov/collections/george-washington-papers/' },
+      { text: 'Mount Vernon — The Culper Spy Ring', url: 'https://www.mountvernon.org/library/digitalhistory/digital-encyclopedia/article/the-culper-code-book/' },
+      { text: 'Wikipedia — Culper Ring', url: 'https://en.wikipedia.org/wiki/Culper_Ring' }
+    ],
+    arnoldAndre: [
+      { text: 'Wikipedia — Benedict Arnold and John André correspondence', url: 'https://en.wikipedia.org/wiki/Benedict_Arnold' },
+      { text: 'Bakeless, John. <em>Turncoats, Traitors and Heroes</em> (1959) — chapter on the Arnold cipher', url: 'https://en.wikipedia.org/wiki/Turncoats,_Traitors_and_Heroes' },
+      { text: 'Mount Vernon — André\'s captured ciphered letter', url: 'https://www.mountvernon.org/library/digitalhistory/digital-encyclopedia/article/john-andre/' },
+      { text: 'Cipher History — Arnold-André book cipher analysis', url: 'https://www.tandfonline.com/journals/ucry20' }
     ]
   };
 

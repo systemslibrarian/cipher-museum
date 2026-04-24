@@ -3,11 +3,11 @@
 **Project:** Expand Cipher Museum from 63 exhibits across 11 halls → ~113 exhibits across 13 halls.
 **Repo:** systemslibrarian/cipher-museum · **Live:** https://ciphermuseum.com
 **Source of truth:** [docs/worldupdates.md](docs/worldupdates.md) — update after every commit.
-**Last sync with worldupdates.md:** 2026-04-24 (Phase 6 East Asia & Telegraphy batch shipped)
+**Last sync with worldupdates.md:** 2026-04-24 (Phase 7 Americana batch shipped)
 
 ---
 
-## Status Snapshot — 76 / 171 (44.4%)
+## Status Snapshot — 78 / 171 (45.6%)
 
 | Phase | Title | Done / Total | Status |
 |------:|-------|------------:|--------|
@@ -19,7 +19,7 @@
 | 4     | WWII / Interwar Machines | 6/9 | 🟡 In progress |
 | 5     | European Classical Gaps | 5/10 | 🟡 In progress |
 | 6     | East Asia & Telegraphy | 4/4 | ✅ Complete |
-| 7     | Americana & Cultural | 1/4 | 🟡 In progress |
+| 7     | Americana & Cultural | 3/4 | 🟡 In progress |
 | 8     | Global Underground Traditions | 0/10 | ⬜ Not started |
 | 9     | Hall XIII: Ciphers in Culture | 3/14 | 🟡 In progress |
 | 10    | Generic Techniques | 1/5 (3 SKIPPED — already shipped) | 🟡 1/2 active |
@@ -35,7 +35,7 @@
 
 ## Active Work
 
-**Currently building:** Phase 6 East Asia & Telegraphy just shipped — 4 exhibits: Chinese Telegraph Code, Zimmermann Telegram, Slidex, Commercial Codebooks. Phase 4 WWII machines (5 exhibits) shipped previously.
+**Currently building:** Phase 7 Americana just shipped — 2 Revolutionary War exhibits: Culper Ring / Tallmadge Code, Arnold–André Book Cipher. Phase 6 East Asia & Telegraphy (4 exhibits) shipped previously.
 
 Next on deck: Phase 9 (Hall XIII culture: Da Vinci Code, National Treasure, Gravity Falls, Popular Culture Survey) or finish Phase 5 stragglers (Argenti, Wallis, Mary Stuart, Patterson).
 
@@ -141,10 +141,10 @@ Build order within Phase 5 (remaining):
 - [x] Slidex (Track A) — "Slidex to BATCO" side panel still pending
 - [x] Commercial Telegraph Codebooks (Track A — codebook lookup)
 
-### Phase 7 — Americana ⬜
-- ⬜ Culper Ring / Tallmadge (Track A)
-- ⬜ Arnold-André (Track A)
-- ⬜ Cardano Grille (Track A)
+### Phase 7 — Americana 🟡
+- [x] Culper Ring / Tallmadge (Track A)
+- [x] Arnold-André (Track A)
+- [x] Cardano Grille (Track A)
 - ⬜ Hall VI rename decision
 
 ### Phase 8 — Global Underground ⬜
