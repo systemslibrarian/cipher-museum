@@ -121,7 +121,7 @@ const ENGINE_PROFILES = {
   monoalphabetic:         { key: 'ZEBRA',                            mode: 'roundtrip' },
   polybius:               { key: '',                                 mode: 'roundtrip-ij' },
   homophonic:             { key: 'CIPHER',                           mode: 'random-key' }, // random per-call
-  playfair:               { key: 'MONARCHY',                         mode: 'roundtrip-playfair' },
+  playfair:               { key: 'MONARCHY',                         mode: 'roundtrip-ij' },
   hill:                   { key: '3,3,2,5',                          mode: 'roundtrip-padded' },
   vigenere:               { key: 'LEMON',                            mode: 'roundtrip' },
   beaufort:               { key: 'FORTIFICATION',                    mode: 'self-reciprocal' },
@@ -129,8 +129,8 @@ const ENGINE_PROFILES = {
   porta:                  { key: 'FORTIFY',                          mode: 'self-reciprocal' },
   runningKey:             { key: 'WE HOLD THESE TRUTHS',             mode: 'roundtrip' },
   railFence:              { key: '4',                                mode: 'roundtrip' },
-  columnar:               { key: 'ZEBRA',                            mode: 'roundtrip-padded' },
-  doubleTransposition:    { key: 'FIRST,SECOND',                     mode: 'random-key' },
+  columnar:               { key: 'ZEBRA',                            mode: 'roundtrip' },
+  doubleTransposition:    { key: 'FIRST,SECOND',                     mode: 'roundtrip' },
   bacon:                  { key: '',                                 mode: 'roundtrip-bacon' },
   tapCode:                { key: '',                                 mode: 'tap-roundtrip' }, // K→C aliasing acceptable
   pigpen:                 { key: '',                                 mode: 'roundtrip' },

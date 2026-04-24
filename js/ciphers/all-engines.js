@@ -138,7 +138,20 @@ window.CipherEngines = (() => {
     }
     return {
       encode: (t, k) => process(pairs(t), makeGrid(k), true),
-      decode: (t, k) => process(pairs(t), makeGrid(k), false)
+      decode: (t, k) => {
+        const raw = process(pairs(t), makeGrid(k), false);
+        // Playfair encode inserts 'X' between doubled letters and pads odd-length
+        // plaintext with a trailing 'X'. Strip those helper X's on decode so the
+        // roundtrip recovers the original plaintext (J/I merging is intrinsic
+        // to the 5x5 grid and cannot be reversed).
+        let out = '';
+        for (let i = 0; i < raw.length; i++) {
+          if (raw[i] === 'X' && i > 0 && i < raw.length - 1 && raw[i - 1] === raw[i + 1]) continue;
+          out += raw[i];
+        }
+        if (out.endsWith('X')) out = out.slice(0, -1);
+        return out;
+      }
     };
   })();
 
@@ -285,25 +298,30 @@ window.CipherEngines = (() => {
     }
     return {
       encode: (text, key) => {
+        // Classical columnar transposition: ragged columns, NO pad characters.
+        // This is what makes round-trips lossless and lets double-transposition compose cleanly.
         const t = clean(text), k = clean(key || 'ZEBRA'), cols = k.length;
-        const rows = Math.ceil(t.length / cols);
-        const grid = Array.from({ length: rows }, () => Array(cols).fill('X'));
-        let idx = 0;
-        for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) if (idx < t.length) grid[r][c] = t[idx++];
+        if (!cols || !t.length) return t;
+        const cells = Array.from({ length: cols }, () => '');
+        for (let i = 0; i < t.length; i++) cells[i % cols] += t[i];
         const o = order(key);
-        return o.map(c => grid.map(r => r[c]).join('')).join('');
+        return o.map(c => cells[c]).join('');
       },
       decode: (text, key) => {
         const t = clean(text), k = clean(key || 'ZEBRA'), cols = k.length;
+        if (!cols || !t.length) return t;
         const rows = Math.ceil(t.length / cols), o = order(key);
-        const long = t.length % cols || cols;
-        const colLens = Array(cols).fill(rows);
-        if (t.length % cols) for (let i = 0; i < cols; i++) { const orig = o.indexOf(i); if (orig >= long) colLens[i]--; }
-        const columns = {}; let pos = 0;
-        for (const c of o) { columns[c] = t.substr(pos, colLens[c]).split(''); pos += colLens[c]; }
-        let r = [];
-        for (let row = 0; row < rows; row++) for (let c = 0; c < cols; c++) if (columns[c]?.[row]) r.push(columns[c][row]);
-        return r.join('');
+        // Columns whose ORIGINAL index < (t.length % cols) are full (rows chars);
+        // the rest are short by 1. When t.length divides cols, all are full.
+        const rem = t.length % cols;
+        const colLens = Array.from({ length: cols }, (_, c) => (rem === 0 || c < rem) ? rows : rows - 1);
+        const cells = {}; let pos = 0;
+        for (const c of o) { cells[c] = t.substr(pos, colLens[c]); pos += colLens[c]; }
+        let r = '';
+        for (let row = 0; row < rows; row++)
+          for (let c = 0; c < cols; c++)
+            if (row < cells[c].length) r += cells[c][row];
+        return r;
       }
     };
   })();
