@@ -58,13 +58,14 @@
   <p class="page-tagline">Where secrecy began — in battlefields, markets, and counting boards</p>
   <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">
     Before mathematics, before computers, before even consistent alphabets — humanity already needed to hide messages.
-    The two ciphers in this hall represent the oldest surviving cryptographic systems in history. One was used by a Roman general to protect military orders.
-    The other was scratched onto parchment by a Greek historian as a tool for signalling across mountains at night.
+    The ciphers in this hall represent the oldest surviving cryptographic systems in history. One was used by a Roman general to protect military orders.
+    Another was scratched onto parchment by a Greek historian as a tool for signalling across mountains at night. The Hebrew Atbash, older still, hides inside the Book of Jeremiah — and ROT13 is the same idea, two thousand years younger, born on Usenet.
   </p>
   <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
+    <span class="badge era-ancient">Ancient Israel</span>
     <span class="badge era-ancient">Ancient Rome</span>
     <span class="badge era-ancient">Ancient Greece</span>
-    <span class="badge sec-broken">Both Broken</span>
+    <span class="badge sec-broken">All Broken</span>
   </div>
 </div>
 
@@ -137,6 +138,46 @@
         <div class="card-badges">
           <span class="badge sec-broken">Broken</span>
           <span class="badge" style="background:rgba(90,200,160,.1);color:var(--green);border:1px solid rgba(90,200,160,.3);">Foundation Cipher</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/atbash.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 03</span>
+        <span class="badge era-ancient">Ancient Israel · ~600 BC</span>
+      </div>
+      <div class="card-name">Atbash</div>
+      <p class="card-desc">The oldest known substitution cipher. Hebrew scribes mapped the first letter of the alphabet to the last, the second to the second-to-last, and so on — a perfect mirror. Hidden inside the Book of Jeremiah, where Babel becomes Sheshach.</p>
+      <div style="font-family:var(--fm);font-size:.8rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.1em;">
+        <span style="color:var(--tx3);">A↔Z  B↔Y  C↔X …</span><br>
+        <span style="color:var(--tx3);">HELLO = </span><span style="color:var(--gold-lt);">SVOOL</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken</span>
+          <span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Self-Inverse</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/rot13.html" class="cipher-card">
+      <div class="card-head">
+        <span class="card-num">Exhibit 04</span>
+        <span class="badge era-ancient">Usenet · ~1980</span>
+      </div>
+      <div class="card-name">ROT13</div>
+      <p class="card-desc">Caesar's cipher with the shift fixed at 13 — exactly half the alphabet. Apply it twice and you're back where you started. Born on Usenet to hide spoilers and punchlines, it lives on as the internet's polite cipher: trivial to break, easy to apply, no key required.</p>
+      <div style="font-family:var(--fm);font-size:.8rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;letter-spacing:.1em;">
+        <span style="color:var(--tx3);">SHIFT: </span><span style="color:var(--gold);">+13 (fixed)</span><br>
+        <span style="color:var(--tx3);">HELLO = </span><span style="color:var(--gold-lt);">URYYB</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken</span>
+          <span class="badge" style="background:rgba(90,144,200,.12);color:var(--blue);border:1px solid rgba(90,144,200,.3);">Self-Inverse</span>
         </div>
         <span class="card-arrow">→</span>
       </div>
