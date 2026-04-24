@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nomenclator — The Cipher Museum</title>
+  <meta name="description" content="Nomenclator (1400s) — The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary. Hall II of The Cipher Museum.">
+  <meta property="og:title" content="Nomenclator — The Cipher Museum">
+  <meta property="og:description" content="Nomenclator (1400s) — The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary. Hall II of The Cipher Museum.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/nomenclator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Nomenclator — The Cipher Museum">
+  <meta name="twitter:description" content="Nomenclator (1400s) — The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary. Hall II of The Cipher Museum.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/nomenclator.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: Substitution Era</a><span>&rsaquo;</span>
+    Nomenclator
+  </div>
+  <div class="page-meta">
+    <span class="badge era-renaissance">Renaissance · 1400s–1800s</span>
+    <span class="badge sec-broken">Statistical + intercept-volume</span>
+  </div>
+  <h1 class="page-title">Nomenclator</h1>
+  <p class="page-tagline">The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Italian city-state diplomacy, 14th–15th c.</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1400s onward (Mantua, Venice, the Vatican)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Alphabet substitution + 1,000–2,000 entry codebook of words and names</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Black Chambers (Vienna, Paris, London) c. 1700–1850 by sheer intercept volume</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Hybrid systems with mixed-granularity tokens still need uniform statistical hardness</span></div>
+  </div>
+</div>
+
+
+<div class="demo-section" data-cipher="nomenclator"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>From roughly 1400 to 1850, every European court used some flavour of nomenclator. It is the longest-running cipher family in history. A nomenclator combines two things: (1) a substitution alphabet for ordinary letters, and (2) a printed codebook listing common words, names, places, and titles, each replaced by a numeric or symbol code. The Babington plot, the Great Cipher of Louis XIV, Marie Antoinette's correspondence, and the Spanish Armada's traffic are all nomenclators.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The earliest surviving nomenclator dates to the Mantua chancery in 1401. The Vatican's nomenclators from the 1500s ran to several thousand entries. By the time Antoine Rossignol designed the Great Cipher in 1626, nomenclators were standard issue across Europe. They remained in use into the early telegraphic era — the diplomatic codebook that appears in 1860s telegrams is essentially a printed industrial-era nomenclator. Black Chambers — government cryptanalytic offices in Vienna, Paris, and London — built their reputation on slowly reconstructing nomenclator codebooks from intercepted traffic.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>A typical 18th-century nomenclator has three parts: <strong>(1)</strong> a substitution alphabet mapping each letter to one or more cipher symbols (often digits 01–99), <strong>(2)</strong> a vocabulary list of perhaps 1,500 common words and names mapped to higher numbers, and <strong>(3)</strong> a list of <em>nulls</em> — symbols that mean &lsquo;ignore me&rsquo; — sprinkled in to break frequency. Encoding switches granularity mid-message: <em>The</em> ENVOY <em>arrived in</em> VIENNA might come out as <code>23 1402 41 17 1899</code>.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Black-Chamber Reconstruction</div>
+          <div class="attack-diff">Complexity: Years of work per codebook</div>
+          <p class="attack-desc">Letter-level frequencies leak the substitution alphabet quickly. The codebook entries are harder: they have to be reconstructed from context across many intercepts (a number that always appears near a date is probably a month; one that always appears near a port is a city). The Vienna Black Chamber under Lambach famously broke each new diplomatic nomenclator within months of its introduction in the early 1700s. The Great Cipher resisted attack for over 200 years (see Bazeries, Hall X).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Nomenclator</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Mixed-granularity tokens</td><td>Modern compression-then-encrypt schemes have the same problem: a long token leaks more than a short one</td></tr>
+            <tr><td>Codebooks are operational poison</td><td>Distributing and updating codebooks is what eventually killed nomenclators — a problem modern key management still inherits</td></tr>
+            <tr><td>Statistical hardness must be uniform</td><td>Any easy-to-break component (the letter alphabet) opens the rest</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Era</td><td>Renaissance · 1400s–1800s</td></tr>
+            <tr><td>Security</td><td>Statistical + intercept-volume</td></tr>
+            <tr><td>Origin</td><td>Italian city-state diplomacy, 14th–15th c.</td></tr>
+            <tr><td>Year</td><td>1400s onward (Mantua, Venice, the Vatican)</td></tr>
+            <tr><td>Key Type</td><td>Alphabet substitution + 1,000–2,000 entry codebook of words and names</td></tr>
+            <tr><td>Broken By</td><td>Black Chambers (Vienna, Paris, London) c. 1700–1850 by sheer intercept volume</td></tr>
+            <tr><td>Modern Lesson</td><td>Hybrid systems with mixed-granularity tokens still need uniform statistical hardness</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/babington.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Babington Plot Cipher</span>
+      <span class="related-card__tag">Tudor nomenclator broken by Phelippes</span>
+    </a>
+    <a href="../ciphers/great-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Great Cipher</span>
+      <span class="related-card__tag">The 200-year unbroken nomenclator</span>
+    </a>
+    <a href="../ciphers/dictionary-code.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Dictionary / Book Code</span>
+      <span class="related-card__tag">Industrial-era successor</span>
+    </a>
+    <a href="../ciphers/homophonic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Homophonic Substitution</span>
+      <span class="related-card__tag">The frequency-flattening half of a nomenclator alone</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/homophonic.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Homophonic Substitution</span>
+  </a>
+  <a href="../ciphers/playfair.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Playfair</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer"></footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

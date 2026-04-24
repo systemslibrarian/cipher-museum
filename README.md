@@ -25,7 +25,7 @@ An open-source, interactive educational website spanning **52 historically impor
 
 ## ✨ Features
 
-### 🗺️ Ten Exhibit Halls · 52 Ciphers
+### 🗺️ Ten Exhibit Halls · 58 Ciphers
 
 | Hall | Title | Ciphers |
 |------|-------|---------|
@@ -118,11 +118,11 @@ Each row gives the year the cipher was first known/published and when it was bro
     - **N-gram & entropy panel** — bigram/trigram counts and Shannon entropy for distinguishing transposition (preserves frequencies) from substitution (alters them).
     - **Side-by-side Encrypt/Decrypt panes** with copy-to-clipboard and a swap button so you can iterate on a key without retyping ciphertext.
     - **Same engine source as the exhibits** — the workbench pulls from [js/ciphers/all-engines.js](js/ciphers/all-engines.js), so anything you reproduce here matches every demo on the site.
-- **[Site Search](search.html)** — Search across all 52 ciphers, 10 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
+- **[Site Search](search.html)** — Search across all 58 ciphers, 10 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
 - **[Cryptanalysis Techniques](cryptanalysis.html)** — 10 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), HMM/SMT decoding (Copiale), and Chaocipher reconstruction.
 - **[Cipher Challenges](challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
 - **[Timeline](timeline.html)** — Interactive 2,500-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
-- **[Comparison Table](comparison.html)** — Sortable, filterable table comparing all 52 ciphers by type, era, security level, and key method.
+- **[Comparison Table](comparison.html)** — Sortable, filterable table comparing all 58 ciphers by type, era, security level, and key method.
 - **[Cipher Flow Explorer](cipher-flow.html)** — Visual relationship map between cipher families.
 - **[Museum Map](museum-map.html)** — Architectural floor plan with all exhibit halls and cipher exhibits.
 - **[Guided Tours](tours/index.html)** — Structured learning paths through the collection.

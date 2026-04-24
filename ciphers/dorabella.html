@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dorabella Cipher — The Cipher Museum</title>
+  <meta name="description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall VIII of The Cipher Museum.">
+  <meta property="og:title" content="Dorabella Cipher — The Cipher Museum">
+  <meta property="og:description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall VIII of The Cipher Museum.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/dorabella.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Dorabella Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="Dorabella Cipher (1897) — Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since. Hall VIII of The Cipher Museum.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/dorabella.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/puzzle.html">Hall VIII: Puzzle & Unsolved</a><span>&rsaquo;</span>
+    Dorabella Cipher
+  </div>
+  <div class="page-meta">
+    <span class="badge era-19c">19th c. · 1897</span>
+    <span class="badge sec-secure">Unsolved</span>
+  </div>
+  <h1 class="page-title">Dorabella Cipher</h1>
+  <p class="page-tagline">Edward Elgar's 1897 cryptogram — 87 squiggles that have resisted every attempt since.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Sir Edward Elgar, composer (1857–1934)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">14 July 1897</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Custom 24-symbol alphabet of arcs and orientations</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Nobody — over 125 years of attempts, no consensus solution</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Tiny ciphertexts (87 chars) don't give cryptanalysis enough statistical signal</span></div>
+  </div>
+</div>
+
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>On 14 July 1897 Edward Elgar enclosed a short cryptogram in a thank-you note to Dora Penny, the 21-year-old daughter of a family friend. It runs three lines, eighty-seven characters, drawn from an alphabet of 24 symbols (arcs of one, two, or three loops, rotated to one of eight angles). Dora could not read it; she said as much in her 1937 memoir. Elgar never gave the answer. Nobody since — professional cryptanalysts, computer hill-climbers, Elgar scholars — has produced a decryption that the cryptanalytic community accepts.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Elgar was a recreational cryptographer; his notebooks contain an alphabet of the same 24 symbols labelled with letters in a pattern resembling a Polybius-style 3×8 grid. Tony Gaffney, Eric Sams, and others have proposed plausible-but-disputed substitution solutions, often with claims that the plaintext is wordplay or an in-joke between Elgar and Penny. The 87-character length is the fundamental problem: against a homophonic or polyalphabetic substitution it is statistically insufficient, and there is no second cryptogram in the same system to provide depth. The Elgar Society holds an open standing prize for a verifiable solution; the prize remains unclaimed.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>The 24 symbols are built from one, two, or three concentric semicircular arcs, each rotatable to one of eight orientations spaced 45° apart (3 × 8 = 24). The natural assumption is a substitution into the 26-letter English alphabet — possibly with two letters merged (I/J or U/V, in 19th-c. fashion). The cryptogram's symbol distribution is roughly flat, which rules out a simple Caesar or unkeyed monoalphabetic. Hill-climbing solvers have produced near-English decryptions, but each differs from the others in ways that suggest the algorithm is finding local maxima rather than the truth.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">Why It Has Resisted</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Why It Resists</div>
+          <div class="attack-diff">Complexity: Bounded by 87 characters of ciphertext</div>
+          <p class="attack-desc">Friedman's index of coincidence on the symbol distribution is between English-flat and uniform. Modern simulated-annealing solvers (the same family that cracked Zodiac's Z340 in 2020) routinely produce English-looking output for the Dorabella, but those outputs differ markedly from one run to the next — a signal that the algorithm is fitting noise. Until either a second cryptogram in the same system surfaces or an external constraint pins down the alphabet, the Dorabella may be permanently underdetermined.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Dorabella Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Sample size matters</td><td>Modern security analysts care about <em>distinguishing distance</em> partly for this reason — small samples don't give an attacker enough leverage</td></tr>
+            <tr><td>Local maxima are seductive</td><td>When your scoring function is a language model, every local maximum looks like &lsquo;a solution'</td></tr>
+            <tr><td>Without depth, ambiguity wins</td><td>VENONA needed key reuse; Beale 2 needed the right book; Dorabella has neither</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Era</td><td>19th c. · 1897</td></tr>
+            <tr><td>Security</td><td>Unsolved</td></tr>
+            <tr><td>Origin</td><td>Sir Edward Elgar, composer (1857–1934)</td></tr>
+            <tr><td>Year</td><td>14 July 1897</td></tr>
+            <tr><td>Key Type</td><td>Custom 24-symbol alphabet of arcs and orientations</td></tr>
+            <tr><td>Broken By</td><td>Nobody — over 125 years of attempts, no consensus solution</td></tr>
+            <tr><td>Modern Lesson</td><td>Tiny ciphertexts (87 chars) don't give cryptanalysis enough statistical signal</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/voynich.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Voynich Manuscript</span>
+      <span class="related-card__tag">Larger unsolved system, same fundamental problem of underdetermined alphabet</span>
+    </a>
+    <a href="../ciphers/zodiac.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Zodiac Killer Ciphers</span>
+      <span class="related-card__tag">Z340 was solved in 2020 — Dorabella may yield to the same techniques</span>
+    </a>
+    <a href="../ciphers/kryptos.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Kryptos K4</span>
+      <span class="related-card__tag">97 characters by a known author — same statistical scarcity</span>
+    </a>
+    <a href="../ciphers/beale.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Beale Ciphers</span>
+      <span class="related-card__tag">Two of three remain unsolved for the same depth-shortage reason</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/voynich.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Voynich Manuscript</span>
+  </a>
+  <a href="../ciphers/zodiac.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Zodiac Killer Ciphers</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer"></footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

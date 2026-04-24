@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autokey — The Cipher Museum</title>
+  <meta name="description" content="Autokey (1586) — Vigenère's self-extending key, the message becomes its own key. Effectively unbreakable until Friedman's 1920s statistical attack.">
+  <meta property="og:title" content="Autokey — The Cipher Museum">
+  <meta property="og:description" content="Autokey (1586) — Vigenère's self-extending key, the message becomes its own key. Effectively unbreakable until Friedman's 1920s statistical attack.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/autokey.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Autokey — The Cipher Museum">
+  <meta name="twitter:description" content="Autokey (1586) — Vigenère's self-extending key, the message becomes its own key. Effectively unbreakable until Friedman's 1920s statistical attack.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/autokey.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/polyalphabetic.html">Hall III: Polyalphabetic Frontier</a><span>&rsaquo;</span>
+    Autokey
+  </div>
+  <div class="page-meta">
+    <span class="badge era-renaissance">Renaissance · 1586</span>
+    <span class="badge sec-broken">Statistical (Friedman, 1920s)</span>
+  </div>
+  <h1 class="page-title">Autokey</h1>
+  <p class="page-tagline">Vigenère's self-extending key — the message becomes its own key.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Blaise de Vigenère (1586), refining Belaso/Cardano</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1586</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Short keyword, then plaintext itself extends the key</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Friedman's index of coincidence + autokey-aware crib dragging (1920s)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Self-keyed schemes still leak: the key is no longer random once it carries plaintext statistics</span></div>
+  </div>
+</div>
+
+
+<div class="demo-section" data-cipher="autokey"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Vigenère's <em>autokey</em> is the under-appreciated half of his 1586 system. After the keyword is exhausted, the plaintext itself is appended to the key — so the key never repeats. That single change wiped out the Kasiski attack a century before Kasiski wrote it down. For nearly 350 years the autokey was effectively unbreakable in the field, until William F. Friedman's 1920s statistical machinery made it tractable.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Belaso (1553) and Cardano (1556) had both proposed self-extending keys; Vigenère's <em>Traicté des chiffres</em> (1586) gave the construction its definitive form and unfortunately also presented the much weaker repeating-key variant. History remembered the wrong one: the polyalphabetic that became known as &lsquo;the Vigenère cipher&rsquo; for the next four centuries is the breakable repeating-key version, and Vigenère's actually-strong autokey was largely forgotten until Friedman's interwar work.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Pick a short keyword K. Encrypt the first |K| plaintext letters with K under a Vigenère shift. Then take the plaintext itself, prepend K, and use that string as the running key for the rest of the message. Decryption recovers K-many letters first, then uses those recovered plaintext letters as the key for the next stretch — and so on. The key never repeats; its statistics are those of natural English (or French, etc.), not of a short cycled keyword.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Friedman's Autokey Attack</div>
+          <div class="attack-diff">Complexity: Polynomial (1920s SIS hand methods)</div>
+          <p class="attack-desc">The key isn't random — it is plaintext shifted by a few characters. Friedman observed that the ciphertext has detectable correlation with itself shifted by the keyword length, because shifted plaintext-vs-plaintext is just the original Vigenère table applied to English-vs-English. Crib dragging the most likely keyword length yields the keyword in dozens to a few hundred trial decryptions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Autokey</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Self-extending key</td><td>Modern stream ciphers feed plaintext-derived state back in too — but only via cryptographic mixing (e.g., AES-OFB key schedule)</td></tr>
+            <tr><td>Friedman's index of coincidence (κ)</td><td>Still the canonical periodicity test taught in cryptanalysis courses</td></tr>
+            <tr><td>&lsquo;Don't reuse keys&rsquo; isn't enough</td><td>If your &lsquo;key' has natural-language structure you've leaked it</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Era</td><td>Renaissance · 1586</td></tr>
+            <tr><td>Security</td><td>Statistical (Friedman, 1920s)</td></tr>
+            <tr><td>Origin</td><td>Blaise de Vigenère (1586), refining Belaso/Cardano</td></tr>
+            <tr><td>Year</td><td>1586</td></tr>
+            <tr><td>Key Type</td><td>Short keyword, then plaintext itself extends the key</td></tr>
+            <tr><td>Broken By</td><td>Friedman's index of coincidence + autokey-aware crib dragging (1920s)</td></tr>
+            <tr><td>Modern Lesson</td><td>Self-keyed schemes still leak: the key is no longer random once it carries plaintext statistics</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/vigenere.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Vigenère</span>
+      <span class="related-card__tag">Repeating-key sibling, much weaker</span>
+    </a>
+    <a href="../ciphers/running-key.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Running Key</span>
+      <span class="related-card__tag">Same idea but key = a long passage, not the message itself</span>
+    </a>
+    <a href="../ciphers/beaufort.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Beaufort</span>
+      <span class="related-card__tag">Reciprocal Vigenère variant</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/running-key.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Running Key</span>
+  </a>
+  <a href="../ciphers/bazeries.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Bazeries Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer"></footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

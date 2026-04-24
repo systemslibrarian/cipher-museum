@@ -170,10 +170,10 @@ const tests = [
    ══════════════════════════════════════════════════════════════ */
 console.log('╔══════════════════════════════════════════════════════╗');
 console.log('║   THE CIPHER MUSEUM — Engine Test Suite             ║');
-console.log('║   Testing all 35 cipher engines                     ║');
+console.log('║   Testing all 40 cipher engines                     ║');
 console.log('╚══════════════════════════════════════════════════════╝');
 
-/* ── 1. Check that all 35 engines exist ── */
+/* ── 1. Check that all 40 engines exist ── */
 section('Engine Existence');
 const expectedEngines = [
   'caesar', 'monoalphabetic', 'polybius', 'homophonic', 'playfair', 'hill',
@@ -184,7 +184,8 @@ const expectedEngines = [
   'otp', 'fractionatedMorse', 'confederateVigenere',
   'bazeries', 'alberti', 'jefferson', 'enigma', 'lorenz',
   'dictionaryCode', 'stager', 'vic',
-  'scytale', 'vernam'
+  'scytale', 'vernam',
+  'autokey', 'nomenclator', 'bookCipher', 'sigaba', 'typex'
 ];
 
 for (const name of expectedEngines) {

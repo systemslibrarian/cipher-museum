@@ -217,6 +217,28 @@
     purple: {
       label: 'Purple (simplified)', engine: 'purple', defaultMsg: 'CLIMB MOUNT NIITAKA',
       inputs: [{ type: 'text', id: 'keyword', label: 'Switch Seed', value: 'PURPLE', placeholder: 'Seed word…' }]
+    },
+    autokey: {
+      label: 'Autokey Cipher (Vigenère self-extending)', engine: 'autokey', defaultMsg: 'ATTACK AT DAWN',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Primer Key', value: 'QUEENLY', placeholder: 'Primer word…' }]
+    },
+    nomenclator: {
+      label: 'Nomenclator (codebook + cipher alphabet)', engine: 'nomenclator',
+      defaultMsg: 'THE KING WILL ATTACK PARIS AT DAWN',
+      inputs: []
+    },
+    bookCipher: {
+      label: 'Book Cipher (Declaration of Independence)', engine: 'bookCipher',
+      defaultMsg: 'GOLD',
+      inputs: []
+    },
+    sigaba: {
+      label: 'SIGABA (pseudorandom rotor stepping)', engine: 'sigaba', defaultMsg: 'CLIMB MOUNT NIITAKA',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Seed', value: 'SIGABA', placeholder: 'Seed word…' }]
+    },
+    typex: {
+      label: 'Typex (5-rotor Enigma-style)', engine: 'typex', defaultMsg: 'BRITISH SIGNAL READY',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Start (5 letters)', value: 'AAAAA', placeholder: 'AAAAA' }]
     }
   };
 
@@ -506,6 +528,27 @@
     zodiac: [
       { text: 'Oranchak, David et al. "Cracking the Zodiac 340-Character Cipher" (2020)', url: 'https://en.wikipedia.org/wiki/Zodiac_Killer#Communications' },
       { text: 'Singh, Simon. <em>The Code Book</em>, ch. 8', url: 'https://en.wikipedia.org/wiki/The_Code_Book' }
+    ],
+    autokey: [
+      { text: 'Vigenère, Blaise de. <em>Traicté des chiffres</em> (1586) — autokey variant', url: 'https://en.wikipedia.org/wiki/Autokey_cipher' },
+      { text: 'Practical Cryptography — Autokey Cipher', url: 'https://practicalcryptography.com/ciphers/autokey-cipher/' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 5', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' }
+    ],
+    nomenclator: [
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 4 — "The Era of the Black Chambers"', url: 'https://en.wikipedia.org/wiki/Nomenclator_cipher' },
+      { text: 'Singh, Simon. <em>The Code Book</em>, ch. 1', url: 'https://en.wikipedia.org/wiki/The_Code_Book' }
+    ],
+    bookCipher: [
+      { text: 'Ward, James B. <em>The Beale Papers</em> (1885)', url: 'https://en.wikipedia.org/wiki/Beale_ciphers' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 18', url: 'https://en.wikipedia.org/wiki/Book_cipher' }
+    ],
+    sigaba: [
+      { text: 'Stamp &amp; Chan, "SIGABA: Cryptanalysis of the Full Keyspace" (2007)', url: 'https://en.wikipedia.org/wiki/SIGABA' },
+      { text: 'NSA Center for Cryptologic History — SIGABA', url: 'https://www.nsa.gov/History/Cryptologic-History/' }
+    ],
+    typex: [
+      { text: 'Erskine, Ralph. "The Development of Typex" (Cryptologia, 1997)', url: 'https://en.wikipedia.org/wiki/Typex' },
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 11', url: 'https://en.wikipedia.org/wiki/The_Codebreakers' }
     ]
   };
 

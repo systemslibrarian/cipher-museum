@@ -1,6 +1,6 @@
 /**
  * THE CIPHER MUSEUM — All Cipher Engines
- * Complete implementations for every exhibit (33 ciphers)
+ * Complete implementations for every exhibit (55 engines / 58 exhibits)
  */
 'use strict';
 
@@ -1827,6 +1827,237 @@ window.CipherEngines = (() => {
     };
   })();
 
+  /* ─── 51. Autokey (Vigenère self-extending) ─── */
+  const autokey = (() => {
+    function enc(text, key) {
+      const k = clean(key || 'KEY');
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const ki = i < k.length ? A.indexOf(k[i]) : A.indexOf(t[i - k.length]);
+        const pi = A.indexOf(t[i]);
+        out += A[mod(pi + ki, 26)];
+      }
+      return out;
+    }
+    function dec(text, key) {
+      const k = clean(key || 'KEY');
+      const c = clean(text); let out = '';
+      for (let i = 0; i < c.length; i++) {
+        const ki = i < k.length ? A.indexOf(k[i]) : A.indexOf(out[i - k.length]);
+        const ci = A.indexOf(c[i]);
+        out += A[mod(ci - ki, 26)];
+      }
+      return out;
+    }
+    return { encode: enc, decode: dec };
+  })();
+
+  /* ─── 52. Nomenclator (illustrative — small fixed codebook) ─── */
+  const nomenclator = (() => {
+    // A demo nomenclator: digits 01-26 are the substitution alphabet (shifted +0),
+    // larger numbers are vocabulary entries, 99 is a null.
+    const VOCAB = {
+      'THE': '60', 'AND': '61', 'OF': '62', 'TO': '63', 'IN': '64',
+      'KING': '70', 'QUEEN': '71', 'ARMY': '72', 'FLEET': '73',
+      'LONDON': '80', 'PARIS': '81', 'MADRID': '82', 'VIENNA': '83',
+      'ATTACK': '90', 'RETREAT': '91', 'DAWN': '92', 'MIDNIGHT': '93'
+    };
+    const REV = Object.fromEntries(Object.entries(VOCAB).map(([k,v])=>[v,k]));
+    function enc(text, _key) {
+      const tokens = (text || '').toUpperCase().split(/\b/);
+      const out = [];
+      for (const tok of tokens) {
+        if (/^[A-Z]+$/.test(tok)) {
+          if (VOCAB[tok]) { out.push(VOCAB[tok]); continue; }
+          for (const ch of tok) {
+            const i = A.indexOf(ch);
+            if (i >= 0) out.push(String(i + 1).padStart(2, '0'));
+          }
+        }
+      }
+      return out.join(' ');
+    }
+    function dec(text, _key) {
+      const groups = (text || '').trim().split(/\s+/);
+      let out = '';
+      for (const g of groups) {
+        if (g === '99') continue;
+        if (REV[g]) { out += REV[g] + ' '; continue; }
+        const n = parseInt(g, 10);
+        if (n >= 1 && n <= 26) out += A[n - 1];
+      }
+      return out.trim();
+    }
+    return { encode: enc, decode: dec };
+  })();
+
+  /* ─── 53. Book Cipher (illustrative — Declaration of Independence opener) ─── */
+  const bookCipher = (() => {
+    const BOOK = (
+      'When in the course of human events it becomes necessary for one people ' +
+      'to dissolve the political bands which have connected them with another ' +
+      'and to assume among the powers of the earth the separate and equal station ' +
+      'to which the laws of nature and of natures God entitle them a decent respect ' +
+      'to the opinions of mankind requires that they should declare the causes ' +
+      'which impel them to the separation We hold these truths to be self evident ' +
+      'that all men are created equal that they are endowed by their creator with ' +
+      'certain unalienable rights that among these are life liberty and the pursuit of happiness'
+    ).toUpperCase().split(/\s+/);
+    function enc(text, _key) {
+      const words = (text || '').toUpperCase().split(/\s+/).filter(Boolean);
+      const out = [];
+      for (const w of words) {
+        const i = BOOK.indexOf(w);
+        if (i >= 0) { out.push(String(i + 1)); continue; }
+        // letter-level fallback: position of first matching first-letter
+        for (const ch of w) {
+          const j = BOOK.findIndex(b => b[0] === ch);
+          if (j >= 0) out.push(String(j + 1) + '.' + 1);
+        }
+      }
+      return out.join(' ');
+    }
+    function dec(text, _key) {
+      const groups = (text || '').trim().split(/\s+/);
+      const out = [];
+      for (const g of groups) {
+        if (g.includes('.')) {
+          const [w, l] = g.split('.').map(n => parseInt(n, 10));
+          if (BOOK[w - 1]) out.push(BOOK[w - 1][l - 1] || '?');
+        } else {
+          const w = parseInt(g, 10);
+          if (BOOK[w - 1]) out.push(BOOK[w - 1]);
+        }
+      }
+      return out.join(' ');
+    }
+    return { encode: enc, decode: dec };
+  })();
+
+  /* ─── 54. SIGABA (illustrative pseudo-random rotor stepping) ─── */
+  // Real SIGABA: 5 cipher rotors stepped by the output of 5 control rotors
+  // permuted through 5 index rotors. We model the essence: a substitution
+  // alphabet that advances 1-4 positions per character driven by a key-seeded PRNG.
+  const sigaba = (() => {
+    function build(key) {
+      const k = (clean(key || 'SIGABA') + 'ECMII').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // 32 rotor positions; at each step advance 1-4 of them
+      const alphas = [];
+      for (let i = 0; i < 64; i++) {
+        const arr = A.split('');
+        for (let j = arr.length - 1; j > 0; j--) {
+          const r = Math.floor(rng() * (j + 1));
+          [arr[j], arr[r]] = [arr[r], arr[j]];
+        }
+        alphas.push(arr.join(''));
+      }
+      // Stepping schedule: pseudo-random cumulative advance
+      const steps = [];
+      let pos = 0;
+      for (let i = 0; i < 4096; i++) {
+        const advance = 1 + Math.floor(rng() * 4); // 1..4
+        pos = (pos + advance) % 64;
+        steps.push(pos);
+      }
+      return { alphas, steps };
+    }
+    return {
+      encode: (text, key) => {
+        const { alphas, steps } = build(key);
+        const t = clean(text); let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const a = alphas[steps[i % steps.length]];
+          out += a[A.indexOf(t[i])];
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const { alphas, steps } = build(key);
+        const t = clean(text); let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const a = alphas[steps[i % steps.length]];
+          out += A[a.indexOf(t[i])];
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 55. Typex (illustrative — Enigma-style 5-rotor with multi-notch stepping) ─── */
+  const typex = (() => {
+    function build(key) {
+      const k = (clean(key || 'TYPEX') + 'BLETCHLEY').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // 5 rotor wirings (random permutations of A)
+      const rotors = [];
+      for (let r = 0; r < 5; r++) {
+        const arr = A.split('');
+        for (let j = arr.length - 1; j > 0; j--) {
+          const i = Math.floor(rng() * (j + 1));
+          [arr[j], arr[i]] = [arr[i], arr[j]];
+        }
+        rotors.push(arr.join(''));
+      }
+      // Reflector (pairs)
+      const refArr = A.split('');
+      for (let j = refArr.length - 1; j > 0; j--) {
+        const i = Math.floor(rng() * (j + 1));
+        [refArr[j], refArr[i]] = [refArr[i], refArr[j]];
+      }
+      const reflector = {};
+      for (let i = 0; i < 26; i += 2) {
+        reflector[refArr[i]] = refArr[i + 1];
+        reflector[refArr[i + 1]] = refArr[i];
+      }
+      return { rotors, reflector };
+    }
+    function step(positions, i) {
+      // 3 stepping rotors with multi-notch (notches at every 5, 7, 11 positions)
+      positions[0] = (positions[0] + 1) % 26;
+      if (i % 5 === 0) positions[1] = (positions[1] + 1) % 26;
+      if (i % 35 === 0) positions[2] = (positions[2] + 1) % 26;
+      // rotors 3 and 4 are stators (fixed)
+    }
+    function encChar(ch, rotors, reflector, positions) {
+      let i = A.indexOf(ch);
+      // Forward through 5 rotors
+      for (let r = 0; r < 5; r++) {
+        const offset = r < 3 ? positions[r] : 0;
+        i = A.indexOf(rotors[r][mod(i + offset, 26)]);
+        i = mod(i - offset, 26);
+      }
+      // Reflector
+      let c = A[i];
+      c = reflector[c];
+      i = A.indexOf(c);
+      // Backward through 5 rotors
+      for (let r = 4; r >= 0; r--) {
+        const offset = r < 3 ? positions[r] : 0;
+        i = mod(i + offset, 26);
+        i = rotors[r].indexOf(A[i]);
+        i = mod(i - offset, 26);
+      }
+      return A[mod(i, 26)];
+    }
+    function run(text, key) {
+      const { rotors, reflector } = build(key);
+      const positions = [0, 0, 0];
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        step(positions, i);
+        out += encChar(t[i], rotors, reflector, positions);
+      }
+      return out;
+    }
+    // Typex (with reflector) is reciprocal — same fn for enc/dec
+    return { encode: run, decode: run };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -1838,6 +2069,7 @@ window.CipherEngines = (() => {
     dictionaryCode, stager, vic,
     scytale, vernam, greatCipher, babington, navajo, voynich,
     atbash, rot13, foursquare, twosquare, straddlingCheckerboard,
-    chaocipher, m209, solitaire, beale, copiale, kryptos, purple
+    chaocipher, m209, solitaire, beale, copiale, kryptos, purple,
+    autokey, nomenclator, bookCipher, sigaba, typex
   };
 })();
