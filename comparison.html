@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cipher Comparison — The Cipher Museum</title>
-  <meta name="description" content="Compare all 37 ciphers side by side. Sort by era, type, security level, key method, and more.">
+  <meta name="description" content="Compare all 52 ciphers side by side. Sort by era, type, security level, key method, and more.">
   <meta property="og:title" content="Cipher Comparison — The Cipher Museum">
-  <meta property="og:description" content="Compare all 37 ciphers side by side. Sort by era, type, security level, key method, and more.">
+  <meta property="og:description" content="Compare all 52 ciphers side by side. Sort by era, type, security level, key method, and more.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/comparison.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Cipher Comparison — The Cipher Museum">
-  <meta name="twitter:description" content="Compare all 37 ciphers side by side. Sort by era, type, security level, key method, and more.">
+  <meta name="twitter:description" content="Compare all 52 ciphers side by side. Sort by era, type, security level, key method, and more.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/comparison.html">
   <link rel="stylesheet" href="css/museum.css">
@@ -87,7 +87,7 @@
     <a href="index.html">Entrance</a><span>&rsaquo;</span>
     Cipher Comparison
   </div>
-  <span class="page-eyebrow">37 Ciphers at a Glance</span>
+  <span class="page-eyebrow">52 Ciphers at a Glance</span>
   <h1 class="page-title">Cipher Comparison Table</h1>
   <p class="page-tagline">Sort, filter, and compare every cipher in the museum by type, era, security, and method</p>
 </div>
@@ -126,7 +126,7 @@
         <option value="Strong">Strong</option>
         <option value="Unbreakable">Unbreakable</option>
       </select>
-      <span class="comp-count" id="cipher-count">Showing 40 of 40</span>
+      <span class="comp-count" id="cipher-count">Showing 52 of 52</span>
     </div>
 
     <div class="comp-table-wrap">
@@ -171,27 +171,32 @@
       <div class="footer-col-title">Explore</div>
       <ul class="footer-links">
         <li><a href="halls/ancient.html">Hall I: Ancient</a></li>
-        <li><a href="halls/machines.html">Hall VI: Machines</a></li>
+        <li><a href="halls/machines.html">Hall VII: Machines</a></li>
         <li><a href="halls/unbreakable.html">Final Hall</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
-    <span class="footer-copy">2,400 Years of Encryption</span>
+    <span class="footer-copy">2,500 Years of Encryption</span>
   </div>
 </footer>
 <script src="js/nav.js" defer></script>
 <script>
 (function() {
   var CIPHERS = [
+    { name:'Atbash',               href:'ciphers/atbash.html',               era:'Ancient',       year:-600,  type:'Substitution',    key:'Reversed alphabet',         security:'Trivial',     hall:'I' },
     { name:'Scytale',              href:'ciphers/scytale.html',              era:'Ancient',       year:-500,  type:'Transposition',   key:'Rod diameter',              security:'Trivial',     hall:'I' },
     { name:'Caesar',               href:'ciphers/caesar.html',               era:'Ancient',       year:-58,   type:'Substitution',    key:'Shift number (0–25)',       security:'Trivial',     hall:'I' },
     { name:'Polybius Square',      href:'ciphers/polybius.html',             era:'Ancient',       year:-150,  type:'Fractionation',   key:'Grid arrangement',          security:'Trivial',     hall:'I' },
+    { name:'ROT13',                href:'ciphers/rot13.html',                era:'Modern',        year:1980,  type:'Substitution',    key:'Fixed shift of 13',         security:'Trivial',     hall:'I' },
     { name:'Monoalphabetic',       href:'ciphers/monoalphabetic.html',       era:'Medieval',      year:850,   type:'Substitution',    key:'Permuted alphabet',         security:'Weak',        hall:'II' },
     { name:'Homophonic',           href:'ciphers/homophonic.html',           era:'Renaissance',   year:1401,  type:'Substitution',    key:'Substitution table',        security:'Moderate',    hall:'II' },
-    { name:'Great Cipher (Rossignols)', href:'ciphers/great-cipher.html',     era:'Baroque',       year:1626,  type:'Nomenclator',     key:'Codebook (~587 codewords)', security:'Strong',      hall:'II' },
+    { name:'Babington Plot',       href:'ciphers/babington.html',            era:'Renaissance',   year:1586,  type:'Nomenclator',     key:'Symbol set + nomenclator',  security:'Weak',        hall:'II' },
+    { name:'Great Cipher (Rossignols)', href:'ciphers/great-cipher.html',    era:'Baroque',       year:1626,  type:'Nomenclator',     key:'Codebook (~587 codewords)', security:'Strong',      hall:'II' },
     { name:'Playfair',             href:'ciphers/playfair.html',             era:'19th Century',  year:1854,  type:'Substitution',    key:'5×5 key square',            security:'Moderate',    hall:'II' },
+    { name:'Four-Square',          href:'ciphers/four-square.html',          era:'19th Century',  year:1854,  type:'Substitution',    key:'Two 5×5 key squares',       security:'Moderate',    hall:'II' },
+    { name:'Two-Square',           href:'ciphers/two-square.html',           era:'19th Century',  year:1901,  type:'Substitution',    key:'Two 5×5 key squares',       security:'Moderate',    hall:'II' },
     { name:'Hill',                 href:'ciphers/hill.html',                 era:'Modern',        year:1929,  type:'Substitution',    key:'Matrix key',                security:'Moderate',    hall:'II' },
     { name:'Vigenère',             href:'ciphers/vigenere.html',             era:'Renaissance',   year:1553,  type:'Polyalphabetic',  key:'Keyword',                   security:'Moderate',    hall:'III' },
     { name:'Beaufort',             href:'ciphers/beaufort.html',             era:'19th Century',  year:1857,  type:'Polyalphabetic',  key:'Keyword',                   security:'Moderate',    hall:'III' },
@@ -202,27 +207,36 @@
     { name:'Columnar',             href:'ciphers/columnar.html',             era:'19th Century',  year:1850,  type:'Transposition',   key:'Keyword',                   security:'Weak',        hall:'IV' },
     { name:'Double Transposition', href:'ciphers/double-transposition.html', era:'World War I',   year:1914,  type:'Transposition',   key:'Two keywords',              security:'Strong',      hall:'IV' },
     { name:'Bifid',                href:'ciphers/bifid.html',                era:'19th Century',  year:1901,  type:'Fractionation',   key:'5×5 key square',            security:'Moderate',    hall:'IV' },
-    { name:'Trifid',               href:'ciphers/trifid.html',              era:'19th Century',  year:1901,  type:'Fractionation',   key:'3×3×3 key cube',            security:'Moderate',    hall:'IV' },
-    { name:'Fractionated Morse',   href:'ciphers/fractionated-morse.html',  era:'19th Century',  year:1890,  type:'Fractionation',   key:'Keyword alphabet',          security:'Moderate',    hall:'IV' },
+    { name:'Trifid',               href:'ciphers/trifid.html',               era:'19th Century',  year:1901,  type:'Fractionation',   key:'3×3×3 key cube',            security:'Moderate',    hall:'IV' },
+    { name:'Fractionated Morse',   href:'ciphers/fractionated-morse.html',   era:'19th Century',  year:1890,  type:'Fractionation',   key:'Keyword alphabet',          security:'Moderate',    hall:'IV' },
     { name:'Nihilist',             href:'ciphers/nihilist.html',             era:'19th Century',  year:1880,  type:'Polyalphabetic',  key:'Polybius + keyword',        security:'Moderate',    hall:'V' },
-    { name:'ADFGX',                href:'ciphers/adfgx.html',               era:'World War I',   year:1918,  type:'Fractionation',   key:'Polybius + transposition',  security:'Strong',      hall:'V' },
-    { name:'ADFGVX',               href:'ciphers/adfgvx.html',              era:'World War I',   year:1918,  type:'Fractionation',   key:'Polybius + transposition',  security:'Strong',      hall:'V' },
+    { name:'ADFGX',                href:'ciphers/adfgx.html',                era:'World War I',   year:1918,  type:'Fractionation',   key:'Polybius + transposition',  security:'Strong',      hall:'V' },
+    { name:'ADFGVX',               href:'ciphers/adfgvx.html',               era:'World War I',   year:1918,  type:'Fractionation',   key:'Polybius + transposition',  security:'Strong',      hall:'V' },
     { name:'Bazeries',             href:'ciphers/bazeries.html',             era:'19th Century',  year:1898,  type:'Substitution',    key:'Number + reversed segment', security:'Moderate',    hall:'V' },
+    { name:'Straddling Checkerboard', href:'ciphers/straddling-checkerboard.html', era:'19th Century', year:1880, type:'Fractionation', key:'Frequency-weighted grid', security:'Moderate',    hall:'V' },
     { name:'VIC',                  href:'ciphers/vic.html',                  era:'World War II',  year:1950,  type:'Substitution',    key:'Complex key derivation',    security:'Strong',      hall:'V' },
-    { name:'Stager',               href:'ciphers/stager.html',              era:'19th Century',  year:1861,  type:'Transposition',   key:'Route pattern',             security:'Weak',        hall:'⚔' },
-    { name:'Confederate Vigenère', href:'ciphers/confederate-vigenere.html', era:'19th Century',  year:1862,  type:'Polyalphabetic',  key:'Keyword + brass disk',      security:'Moderate',    hall:'⚔' },
-    { name:'Dictionary Code',      href:'ciphers/dictionary-code.html',     era:'19th Century',  year:1860,  type:'Code',            key:'Shared dictionary',         security:'Moderate',    hall:'⚔' },
-    { name:'Alberti Disk',         href:'ciphers/alberti-disk.html',         era:'Renaissance',   year:1467,  type:'Polyalphabetic',  key:'Disk setting + indicator',  security:'Moderate',    hall:'VI' },
-    { name:'Jefferson Disk',       href:'ciphers/jefferson-disk.html',      era:'19th Century',  year:1795,  type:'Polyalphabetic',  key:'26-disk arrangement',       security:'Strong',      hall:'VI' },
-    { name:'Enigma',               href:'ciphers/enigma.html',               era:'World War II',  year:1918,  type:'Machine',         key:'Rotor order + plugboard',   security:'Strong',      hall:'VI' },
-    { name:'Lorenz',               href:'ciphers/lorenz.html',               era:'World War II',  year:1940,  type:'Machine',         key:'12-wheel settings',         security:'Strong',      hall:'VI' },
-    { name:'Vernam (OTP)',         href:'ciphers/vernam.html',               era:'World War I',   year:1917,  type:'Stream',          key:'Random tape',               security:'Unbreakable', hall:'VI' },
-    { name:'Pigpen',               href:'ciphers/pigpen.html',               era:'Medieval',      year:1200,  type:'Substitution',    key:'Grid positions',            security:'Trivial',     hall:'VII' },
-    { name:'Bacon\'s Cipher',      href:'ciphers/bacon.html',                era:'Renaissance',   year:1605,  type:'Steganography',   key:'Binary font encoding',      security:'Weak',        hall:'VII' },
-    { name:'Tap Code',             href:'ciphers/tap-code.html',             era:'19th Century',  year:1880,  type:'Fractionation',   key:'Polybius variant',          security:'Trivial',     hall:'VII' },
-    { name:'Zodiac Cipher',        href:'ciphers/zodiac.html',               era:'Modern',        year:1969,  type:'Substitution',    key:'Homophonic + transposition',security:'Strong',      hall:'VII' },
-    { name:'One-Time Pad',         href:'ciphers/one-time-pad.html',         era:'World War I',   year:1917,  type:'Stream',          key:'Random key = message length',security:'Unbreakable',hall:'★' },
-    { name:'Navajo Code Talkers',  href:'ciphers/navajo-code-talkers.html',  era:'World War II',  year:1942,  type:'Code',            key:'Navajo language',           security:'Unbreakable', hall:'★' }
+    { name:'Stager',               href:'ciphers/stager.html',               era:'19th Century',  year:1861,  type:'Transposition',   key:'Route pattern',             security:'Weak',        hall:'VI' },
+    { name:'Confederate Vigenère', href:'ciphers/confederate-vigenere.html', era:'19th Century',  year:1862,  type:'Polyalphabetic',  key:'Keyword + brass disk',      security:'Moderate',    hall:'VI' },
+    { name:'Dictionary Code',      href:'ciphers/dictionary-code.html',      era:'19th Century',  year:1860,  type:'Code',            key:'Shared dictionary',         security:'Moderate',    hall:'VI' },
+    { name:'Alberti Disk',         href:'ciphers/alberti-disk.html',         era:'Renaissance',   year:1467,  type:'Polyalphabetic',  key:'Disk setting + indicator',  security:'Moderate',    hall:'VII' },
+    { name:'Jefferson Disk',       href:'ciphers/jefferson-disk.html',       era:'19th Century',  year:1795,  type:'Polyalphabetic',  key:'26-disk arrangement',       security:'Strong',      hall:'VII' },
+    { name:'Chaocipher',           href:'ciphers/chaocipher.html',           era:'World War I',   year:1918,  type:'Machine',         key:'Two permuting alphabets',   security:'Strong',      hall:'VII' },
+    { name:'Enigma',               href:'ciphers/enigma.html',               era:'World War II',  year:1923,  type:'Machine',         key:'Rotor order + plugboard',   security:'Strong',      hall:'VII' },
+    { name:'M-209 (Hagelin C-38)', href:'ciphers/m209.html',                 era:'World War II',  year:1940,  type:'Machine',         key:'Six-wheel pin/lug',         security:'Moderate',    hall:'VII' },
+    { name:'Lorenz',               href:'ciphers/lorenz.html',               era:'World War II',  year:1940,  type:'Machine',         key:'12-wheel settings',         security:'Strong',      hall:'VII' },
+    { name:'Purple (Type 97)',     href:'ciphers/purple.html',               era:'World War II',  year:1939,  type:'Machine',         key:'Stepping switch wiring',    security:'Strong',      hall:'VII' },
+    { name:'Navajo Code Talkers',  href:'ciphers/navajo-code-talkers.html',  era:'World War II',  year:1942,  type:'Code',            key:'Navajo language',           security:'Unbreakable', hall:'VII' },
+    { name:'Pigpen',               href:'ciphers/pigpen.html',               era:'Medieval',      year:1200,  type:'Substitution',    key:'Grid positions',            security:'Trivial',     hall:'VIII' },
+    { name:'Bacon\'s Cipher',      href:'ciphers/bacon.html',                era:'Renaissance',   year:1605,  type:'Steganography',   key:'Binary font encoding',      security:'Weak',        hall:'VIII' },
+    { name:'Tap Code',             href:'ciphers/tap-code.html',             era:'19th Century',  year:1880,  type:'Fractionation',   key:'Polybius variant',          security:'Trivial',     hall:'VIII' },
+    { name:'Voynich Manuscript',   href:'ciphers/voynich.html',              era:'Renaissance',   year:1420,  type:'Unsolved',        key:'Unknown',                   security:'Unbreakable', hall:'VIII' },
+    { name:'Copiale Cipher',       href:'ciphers/copiale.html',              era:'Baroque',       year:1730,  type:'Substitution',    key:'Homophonic + nulls',        security:'Moderate',    hall:'VIII' },
+    { name:'Beale Ciphers',        href:'ciphers/beale.html',                era:'19th Century',  year:1820,  type:'Code',            key:'Book cipher',               security:'Strong',      hall:'VIII' },
+    { name:'Zodiac Cipher',        href:'ciphers/zodiac.html',               era:'Modern',        year:1969,  type:'Substitution',    key:'Homophonic + transposition',security:'Strong',      hall:'VIII' },
+    { name:'Kryptos',              href:'ciphers/kryptos.html',              era:'Modern',        year:1990,  type:'Polyalphabetic',  key:'Vigenère + transposition',  security:'Unbreakable', hall:'VIII' },
+    { name:'One-Time Pad',         href:'ciphers/one-time-pad.html',         era:'World War I',   year:1882,  type:'Stream',          key:'Random key = message length',security:'Unbreakable',hall:'IX' },
+    { name:'Vernam',               href:'ciphers/vernam.html',               era:'World War I',   year:1917,  type:'Stream',          key:'Random tape',               security:'Unbreakable', hall:'IX' },
+    { name:'Solitaire / Pontifex', href:'ciphers/solitaire.html',            era:'Modern',        year:1999,  type:'Stream',          key:'Card deck + passphrase',    security:'Strong',      hall:'IX' }
   ];
 
   var tbody = document.getElementById('cipher-tbody');
