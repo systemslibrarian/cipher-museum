@@ -6,6 +6,7 @@
   <url><loc>https://ciphermuseum.com/challenges.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/cryptanalysis.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ciphermuseum.com/glossary.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/search.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/modern.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <!-- Exhibit Halls -->
   <url><loc>https://ciphermuseum.com/halls/ancient.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — The Cipher Museum</title>
+  <meta name="description" content="Search 52 ciphers, 10 exhibit halls, codebreaker biographies, and cryptanalysis techniques across The Cipher Museum.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://ciphermuseum.com/search.html">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="stylesheet" href="css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Explore</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="lab/workbench.html">Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+
+<section class="section" style="padding-top:3rem;padding-bottom:1.5rem;">
+  <div class="section-head">
+    <span class="section-eyebrow">Site Search</span>
+    <h1 class="section-title">Search the Museum</h1>
+    <p class="section-deck" style="margin:.5rem auto 0;max-width:640px;color:var(--tx2);">
+      Across 52 ciphers, 10 exhibit halls, 15 codebreaker biographies, 10 cryptanalysis techniques, and the timeline.
+    </p>
+  </div>
+
+  <div style="max-width:760px;margin:0 auto;padding:0 1rem;">
+    <div class="panel" style="border-color:var(--gold-b);background:var(--s2);">
+      <div class="panel-body" style="padding:1.25rem 1.25rem 1rem;">
+        <label for="q" style="font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);display:block;margin-bottom:.5rem;">Search</label>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+          <input id="q" type="search" autocomplete="off" autofocus spellcheck="false"
+                 placeholder="Try: enigma, vigenere, kasiski, japan 1940, polyalphabetic…"
+                 style="flex:1;min-width:200px;background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fb);font-size:1rem;padding:.7rem .9rem;"
+                 aria-label="Search the Cipher Museum">
+          <select id="kind-filter" aria-label="Filter by kind"
+                  style="background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx);font-family:var(--fm);font-size:.82rem;padding:.55rem .75rem;">
+            <option value="">All</option>
+            <option value="cipher">Ciphers</option>
+            <option value="hall">Exhibit Halls</option>
+            <option value="page">Pages &amp; Tools</option>
+          </select>
+        </div>
+        <p id="status" style="font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin:.75rem 0 0;">Loading index…</p>
+      </div>
+    </div>
+
+    <div id="results" style="margin-top:1.5rem;display:flex;flex-direction:column;gap:.85rem;" role="list" aria-live="polite"></div>
+
+    <div id="empty" style="display:none;text-align:center;color:var(--tx3);font-family:var(--fb);font-size:.95rem;padding:2rem 1rem;">
+      No matches. Try a single keyword like <em>enigma</em>, <em>polybius</em>, or <em>1918</em>.
+    </div>
+
+    <div id="suggestions" style="margin-top:2rem;">
+      <p style="font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);text-align:center;margin:0 0 .75rem;">Try a quick search</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;">
+        <button class="suggest" data-q="enigma">enigma</button>
+        <button class="suggest" data-q="vigenere">vigenère</button>
+        <button class="suggest" data-q="polyalphabetic">polyalphabetic</button>
+        <button class="suggest" data-q="kasiski">kasiski</button>
+        <button class="suggest" data-q="purple japan">purple · japan</button>
+        <button class="suggest" data-q="unsolved">unsolved</button>
+        <button class="suggest" data-q="wwii">WWII</button>
+        <button class="suggest" data-q="one-time pad">one-time pad</button>
+        <button class="suggest" data-q="civil war">civil war</button>
+        <button class="suggest" data-q="zodiac">zodiac</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Built for GitHub Pages. MIT License. Open source.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  #results .sr-card{display:block;background:var(--s2);border:1px solid var(--s5);border-radius:var(--r);padding:.9rem 1rem;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s;}
+  #results .sr-card:hover,#results .sr-card:focus{border-color:var(--gold-b);transform:translateY(-1px);}
+  #results .sr-head{display:flex;justify-content:space-between;align-items:baseline;gap:.75rem;flex-wrap:wrap;}
+  #results .sr-title{font-family:var(--fd);font-size:1.05rem;color:var(--gold-lt);margin:0;letter-spacing:.02em;}
+  #results .sr-kind{font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-b);padding:.15rem .5rem;border-radius:999px;}
+  #results .sr-meta{font-family:var(--fm);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);margin:.35rem 0 .4rem;}
+  #results .sr-summary{font-family:var(--fb);font-size:.92rem;color:var(--tx2);line-height:1.55;margin:0;}
+  #results .sr-tags{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.3rem;}
+  #results .sr-tag{font-family:var(--fm);font-size:.55rem;letter-spacing:.08em;color:var(--tx3);background:var(--s3);padding:.18rem .45rem;border-radius:4px;}
+  #results mark{background:rgba(201,168,76,.25);color:var(--gold-lt);padding:0 2px;border-radius:2px;}
+  .suggest{font-family:var(--fm);font-size:.7rem;letter-spacing:.08em;color:var(--gold);background:var(--s3);border:1px solid var(--gold-b);border-radius:999px;padding:.4rem .85rem;cursor:pointer;}
+  .suggest:hover{background:var(--s2);}
+</style>
+
+<script src="js/nav.js" defer></script>
+<script src="js/search.js" defer></script>
+<script defer>
+  document.addEventListener('DOMContentLoaded', function () {
+    var q = document.getElementById('q');
+    var kindFilter = document.getElementById('kind-filter');
+    var resultsEl = document.getElementById('results');
+    var emptyEl = document.getElementById('empty');
+    var statusEl = document.getElementById('status');
+    var suggestionsEl = document.getElementById('suggestions');
+
+    function escapeHTML(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+    function render() {
+      var raw = q.value.trim();
+      var kind = kindFilter.value;
+      if (!raw) {
+        resultsEl.innerHTML = '';
+        emptyEl.style.display = 'none';
+        suggestionsEl.style.display = '';
+        statusEl.textContent = 'Type to search · ' + (window.CipherSearch._count || '52') + ' ciphers · 10 halls · indexed pages';
+        return;
+      }
+      suggestionsEl.style.display = 'none';
+      var hits = window.CipherSearch.query(raw, 60);
+      if (kind) hits = hits.filter(function (h) { return h.entry.kind === kind; });
+      if (!hits.length) {
+        resultsEl.innerHTML = '';
+        emptyEl.style.display = '';
+        statusEl.textContent = '0 matches for "' + raw + '"';
+        return;
+      }
+      emptyEl.style.display = 'none';
+      statusEl.textContent = hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' for "' + raw + '"';
+      var hl = window.CipherSearch.highlight;
+      resultsEl.innerHTML = hits.map(function (h) {
+        var e = h.entry;
+        var meta = [];
+        if (e.kind === 'cipher') meta.push('Cipher');
+        else if (e.kind === 'hall') meta.push('Exhibit Hall');
+        else meta.push('Page');
+        if (e.hall && e.hall !== '—') meta.push('Hall: ' + escapeHTML(e.hall));
+        if (e.created && e.created !== '—') meta.push('Created: ' + escapeHTML(e.created));
+        if (e.broken && e.broken !== '—') meta.push('Broken: ' + escapeHTML(e.broken));
+        var tags = e.tags.slice(0, 6).map(function (t) {
+          return '<span class="sr-tag">' + escapeHTML(t) + '</span>';
+        }).join('');
+        return '' +
+          '<a class="sr-card" href="' + escapeHTML(e.url) + '" role="listitem">' +
+            '<div class="sr-head">' +
+              '<h3 class="sr-title">' + hl(e.title, raw) + '</h3>' +
+              '<span class="sr-kind">' + escapeHTML(e.kind) + '</span>' +
+            '</div>' +
+            '<div class="sr-meta">' + meta.join(' · ') + '</div>' +
+            '<p class="sr-summary">' + hl(e.summary, raw) + '</p>' +
+            (tags ? '<div class="sr-tags">' + tags + '</div>' : '') +
+          '</a>';
+      }).join('');
+    }
+
+    var t;
+    function debounce() { clearTimeout(t); t = setTimeout(render, 80); }
+    q.addEventListener('input', debounce);
+    kindFilter.addEventListener('change', render);
+
+    document.querySelectorAll('.suggest').forEach(function (b) {
+      b.addEventListener('click', function () { q.value = b.dataset.q; render(); q.focus(); });
+    });
+
+    // URL ?q= prefill
+    var params = new URLSearchParams(location.search);
+    var preset = params.get('q');
+
+    function init() {
+      window.CipherSearch._count = window.CipherSearch && window.CipherSearch.load
+        ? '52' : '?';
+      render();
+    }
+
+    if (window.CipherSearch) {
+      window.CipherSearch.load().then(function () {
+        if (preset) q.value = preset;
+        init();
+        if (preset) render();
+      });
+    } else {
+      statusEl.textContent = 'Search script failed to load.';
+    }
+  });
+</script>
+
+</body>
+</html>

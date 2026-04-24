@@ -19,7 +19,8 @@
     ['timeline.html',     'Timeline'],
     ['learn.html',        'Learn'],
     ['challenges.html',   'Challenges'],
-    ['lab/workbench.html','Lab']
+    ['lab/workbench.html','Lab'],
+    ['search.html',       'Search']
   ];
   var path = location.pathname;
   var inSub = /\/(ciphers|halls|tours|lab|community)\//.test(path);
@@ -37,7 +38,8 @@
     'cryptanalysis.html': 'Learn',
     'challenges.html': 'Challenges',
     'comparison.html': 'Learn',
-    'cipher-flow.html': 'Explore'
+    'cipher-flow.html': 'Explore',
+    'search.html': 'Search'
   };
   var activeLabel = DIR_ACTIVE[parentDir] || ALIASES[basename] || null;
   links.innerHTML = '';
