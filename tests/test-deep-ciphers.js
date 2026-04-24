@@ -473,9 +473,8 @@ section('Fractionated Morse — Encrypt Only');
   neq('output differs from input', clean(enc), 'HELLOWORLD');
   // Different keywords → different ciphertext
   neq('different keys → different output', fm.encode('TEST', 'ALPHA'), fm.encode('TEST', 'BRAVO'));
-  // Decode returns informational message
-  const dec = fm.decode('ABC', 'KEY');
-  ok('decode returns info message', dec.length > 0);
+  // Roundtrip should recover the plaintext
+  eq('roundtrip recovers plaintext', fm.decode(fm.encode('HELLOWORLD', 'ROUNDTABLE'), 'ROUNDTABLE'), 'HELLOWORLD');
 }
 
 /* ═══════════════════════════════════════════════════════════════
