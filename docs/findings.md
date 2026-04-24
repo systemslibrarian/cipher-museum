@@ -12,7 +12,7 @@ Cross-referenced with live site at https://ciphermuseum.com.
   - Medium: 10
   - Low: 4
   - Informational: 2
-- Fixed: 0 / 37
+- Fixed: 3 / 37
 
 ## Ground truth
 
@@ -67,7 +67,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Critical
 **Area:** Hall-pages, Counters
 **Files:** `museum-map.html` (lines 334–404 — Index table), `museum-map.html` (lines 102–293 — floor plan)
-**Status:** Open
+**Status:** Fixed — commit 749b82258897
 
 **Observed:** The Complete Cipher Index uses the labels `I, II, III, IV, V, CW, VI, VII, VIII, ★` and contains no Hall IX or Hall X. Mechanical machines are split between label "VI" (alberti, jefferson, enigma, lorenz, navajo) and label "VII" (chaocipher, m209, purple). Label "VII" mixes machines with puzzle/novelty (pigpen, bacon, tap-code, zodiac).
 
@@ -83,7 +83,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Critical
 **Area:** Hall-pages
 **Files:** `halls/machines.html`
-**Status:** Open
+**Status:** Fixed — commit 984a951f67bd
 
 **Observed:** `<title>Hall VI: Mechanical Cipher Machines — The Cipher Museum</title>`, breadcrumb `Hall VI`, but footer `Hall VII of X · 10 Exhibit Halls`.
 
@@ -97,7 +97,7 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Severity:** Critical
 **Area:** Hall-pages
 **Files:** `halls/puzzle.html`
-**Status:** Open
+**Status:** Fixed — commit ef85ebedec64
 
 **Observed:** `<title>Hall VII: Puzzle & Novelty Ciphers — The Cipher Museum</title>`, breadcrumb `Hall VII`, but footer `Hall VIII of X`.
 
