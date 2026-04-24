@@ -189,7 +189,13 @@ const ENGINE_PROFILES = {
   aeneasTacticus:         { key: '',                                 mode: 'roundtrip' },
   jn25:                   { key: '31415',                            mode: 'roundtrip' },
   redTypeA:               { key: 'TOKYORED',                         mode: 'roundtrip' },
-  affine:                 { key: '5,8',                               mode: 'roundtrip' }
+  affine:                 { key: '5,8',                               mode: 'roundtrip' },
+  trithemius:             { key: '0',                                 mode: 'roundtrip' },
+  cardanoAutokey:         { key: 'Q',                                 mode: 'roundtrip' },
+  wheatstone:             { key: 'WHEATSTONE',                        mode: 'roundtrip' },
+  morse:                  { key: '',                                  mode: 'roundtrip' },
+  cardanoGrille:          { key: '5:0,3,7,12,19,21,24',              mode: 'random-key' },
+  nullCipher:             { key: 'first',                             mode: 'roundtrip' }
 };
 
 const SAMPLE_TEXTS = [

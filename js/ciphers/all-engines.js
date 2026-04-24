@@ -2236,6 +2236,268 @@ window.CipherEngines = (() => {
     };
   })();
 
+  /* ─── Round 3 Phase 5: Trithemius progressive cipher ─── */
+  // Johannes Trithemius (1462–1516) — first published polyalphabetic.
+  // Each successive plaintext letter is shifted by an additional position
+  // (letter 0 by 0, letter 1 by 1, etc.). Optional starting offset.
+  const trithemius = (() => {
+    function run(text, key, enc) {
+      const t = String(text || ''); let r = '';
+      const start = parseInt(String(key || '0').replace(/\D/g, ''), 10) || 0;
+      let i = 0;
+      for (const ch of t) {
+        const u = ch.toUpperCase();
+        const code = u.charCodeAt(0);
+        if (code < 65 || code > 90) { r += ch; continue; }
+        const shift = mod((start + i), 26);
+        const x = code - 65;
+        const y = enc ? mod(x + shift, 26) : mod(x - shift, 26);
+        const out = String.fromCharCode(y + 65);
+        r += ch === u ? out : out.toLowerCase();
+        i++;
+      }
+      return r;
+    }
+    return {
+      encode: (text, key) => run(text, key, true),
+      decode: (text, key) => run(text, key, false)
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Cardano Autokey ─── */
+  // Girolamo Cardano (1501–1576) — original autokey: prime with a single
+  // letter (the key), then continue the keystream with the plaintext itself.
+  // Distinct from the later Vigenère-style autokey (already in `autokey`)
+  // which primes with a multi-letter keyword. Reference: Frary, De/Cipher.
+  const cardanoAutokey = (() => {
+    function run(text, key, enc) {
+      const t = clean(text);
+      const seed = clean(key || 'A').charAt(0) || 'A';
+      let r = '';
+      // Build keystream from seed + plaintext (Cardano's "self-keying" idea).
+      // Encryption: ki = seed for i=0; ki = plain[i-1] otherwise.
+      // Decryption: recover plain[i] from cipher[i] using ki, then ki+1=plain[i].
+      let prev = seed;
+      for (let i = 0; i < t.length; i++) {
+        const p = t.charCodeAt(i) - 65;
+        const k = prev.charCodeAt(0) - 65;
+        if (enc) {
+          const c = mod(p + k, 26);
+          r += String.fromCharCode(c + 65);
+          prev = t[i];
+        } else {
+          const c = p; // here p is actually ciphertext code
+          const plain = mod(c - k, 26);
+          const ch = String.fromCharCode(plain + 65);
+          r += ch;
+          prev = ch;
+        }
+      }
+      return r;
+    }
+    return {
+      encode: (text, key) => run(text, key, true),
+      decode: (text, key) => run(text, key, false)
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Wheatstone Cryptograph ─── */
+  // Charles Wheatstone's 1867 clock-face cryptograph: two concentric dials,
+  // outer plain alphabet and inner mixed cipher alphabet. The two hands
+  // are geared so that as the long hand sweeps the outer dial the inner
+  // hand walks the mixed alphabet beneath, producing a polyalphabetic
+  // stream. Pedagogical model: derive the inner alphabet from a keyword
+  // (Polybius-style dedupe + remainder), and step both dials per letter.
+  // The historical machine used a 27-mark outer dial (26 letters + space)
+  // to telegraph word breaks; this Track A model uses 26-mark outer dials
+  // on both sides so encrypt/decrypt is unambiguous and round-trips.
+  const wheatstone = (() => {
+    function makeInner(key) {
+      const k = clean(key || 'WHEATSTONE');
+      const seen = new Set();
+      let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of A) if (!seen.has(c)) { seen.add(c); s += c; }
+      return s;
+    }
+    function run(text, key, enc) {
+      const inner = makeInner(key);
+      const src = clean(text);
+      let r = '';
+      let outerPos = 0;
+      let innerPos = 0;
+      for (const ch of src) {
+        if (enc) {
+          const newOuter = ch.charCodeAt(0) - 65;
+          const advance = mod(newOuter - outerPos, 26);
+          outerPos = newOuter;
+          innerPos = mod(innerPos + advance, 26);
+          r += inner[innerPos];
+        } else {
+          const idx = inner.indexOf(ch);
+          const advance = mod(idx - innerPos, 26);
+          innerPos = idx;
+          outerPos = mod(outerPos + advance, 26);
+          r += String.fromCharCode(outerPos + 65);
+        }
+      }
+      return r;
+    }
+    return {
+      encode: (text, key) => run(text, key, true),
+      decode: (text, key) => run(text, key, false)
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Morse Code ─── */
+  // International Morse, the canonical telegraph encoding. Reference:
+  // Frary's "Morse + cipher combination" framing. Track A treats text→dots
+  // as the encode side and dots→text as the decode side. Audio playback
+  // belongs to the exhibit page, not the engine.
+  const morse = (() => {
+    const TABLE = {
+      A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',
+      I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',
+      Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',
+      Y:'-.--',Z:'--..',
+      '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-',
+      '5':'.....','6':'-....','7':'--...','8':'---..','9':'----.'
+    };
+    const REV = Object.fromEntries(Object.entries(TABLE).map(([k,v])=>[v,k]));
+    return {
+      encode: (text /* key ignored */) => {
+        const src = String(text || '').toUpperCase();
+        const out = [];
+        for (const ch of src) {
+          if (ch === ' ' || ch === '\n' || ch === '\t') {
+            if (out.length && out[out.length - 1] !== '/') out.push('/');
+            continue;
+          }
+          if (TABLE[ch]) out.push(TABLE[ch]);
+        }
+        return out.join(' ').replace(/\s*\/\s*/g, ' / ').trim();
+      },
+      decode: (text) => {
+        const tokens = String(text || '').trim().split(/\s+/);
+        let r = '';
+        for (const tok of tokens) {
+          if (tok === '/' || tok === '|') { r += ' '; continue; }
+          if (REV[tok]) r += REV[tok];
+        }
+        return r;
+      }
+    };
+  })();
+
+  /* ─── Round 3 Phase 7: Cardano Grille ─── */
+  // Girolamo Cardano's 1550 grille: a card with cut-out windows. The
+  // cleartext is written through the windows; the rest is filled with
+  // innocuous covertext. Pedagogical model: encode produces a grid of N×N
+  // characters where the message fills positions selected by the grille
+  // pattern (a comma-separated list of 0-based indices) and the remaining
+  // cells are filled with a deterministic filler. Decode pulls the
+  // characters at those indices back out.
+  const cardanoGrille = (() => {
+    const FILLERS = 'THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG';
+    function parsePattern(key) {
+      // Format: "size:idx,idx,idx,..." e.g. "5:0,3,7,12,19".
+      // If no size given, default to 5×5. If pattern empty, place message
+      // at consecutive indices 0..n-1.
+      const raw = String(key || '5:').trim();
+      const colonAt = raw.indexOf(':');
+      let size = 5;
+      let body = raw;
+      if (colonAt >= 0) {
+        const s = parseInt(raw.slice(0, colonAt), 10);
+        if (s >= 2 && s <= 12) size = s;
+        body = raw.slice(colonAt + 1);
+      }
+      const indices = body.split(/[ ,;]+/).map(s => parseInt(s, 10)).filter(n => !isNaN(n) && n >= 0 && n < size * size);
+      return { size, indices };
+    }
+    return {
+      encode: (text, key) => {
+        const { size, indices } = parsePattern(key);
+        const msg = clean(text);
+        const total = size * size;
+        const slots = indices.length ? indices : Array.from({ length: Math.min(msg.length, total) }, (_, i) => i);
+        // Pad message with X to fill all grille slots so encode/decode round-trip.
+        const padded = msg.length < slots.length ? msg + 'X'.repeat(slots.length - msg.length) : msg.slice(0, slots.length);
+        const grid = new Array(total).fill('');
+        for (let i = 0; i < slots.length; i++) grid[slots[i]] = padded[i];
+        for (let i = 0; i < total; i++) if (!grid[i]) grid[i] = FILLERS[i % FILLERS.length];
+        let out = '';
+        for (let r = 0; r < size; r++) {
+          out += grid.slice(r * size, (r + 1) * size).join('') + (r < size - 1 ? '\n' : '');
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const { size, indices } = parsePattern(key);
+        const flat = String(text || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, size * size);
+        const slots = indices.length ? indices : Array.from({ length: flat.length }, (_, i) => i);
+        let out = '';
+        for (const idx of slots) if (idx < flat.length) out += flat[idx];
+        return out;
+      }
+    };
+  })();
+
+  /* ─── Round 3 Phase 10: Null Cipher ─── */
+  // Conceal a hidden message inside an innocuous text by reading every
+  // Nth letter of every Mth word (or first/last of each word). Track A
+  // model: encode wraps the plaintext into a carrier text whose first
+  // letter of each word spells out the message; decode reads the chosen
+  // positions back out. Key format: "first" | "last" | integer N (Nth
+  // letter of each word).
+  const nullCipher = (() => {
+    const CARRIER_WORDS = ['the','and','of','to','in','that','it','for','on','with','at','by','this','from','they','one','have','this','word','your','said','each','which','their','time','will','about','out','many','then','them','these','some','her','would','make','like','him','into','has','look','more','write','number','other','than','first','water','been','call','who','its','now','find','long','down','day','did','get','come','made','may','part','over','new','sound','take','only','little','work','know','place','year','live','back','give','most','very','after','our','just','name','good','sentence','man','think','say','great','help','through','much','before','line','right','too','mean','old','any','same','tell','boy','follow','came','want','show'];
+    function pickPos(key) {
+      const k = String(key || 'first').toLowerCase().trim();
+      if (k === 'first' || k === '1') return 0;
+      if (k === 'last') return -1;
+      const n = parseInt(k, 10);
+      if (!isNaN(n) && n >= 1) return n - 1;
+      return 0;
+    }
+    function pickCarrier(letter, pos, salt) {
+      const candidates = CARRIER_WORDS.filter(w => {
+        if (pos === -1) return w[w.length - 1] && w[w.length - 1].toUpperCase() === letter;
+        return w.length > pos && w[pos].toUpperCase() === letter;
+      });
+      if (candidates.length) return candidates[salt % candidates.length];
+      // Fabricate a 4-letter filler word that places `letter` at the
+      // requested position. Use a sentinel different from any letter so
+      // the placeholder fill loop never collides with `letter` itself
+      // (e.g. letter === 'X' would have collided with an 'x' sentinel).
+      const fill = 'aeioutnsr';
+      const arr = ['_', '_', '_', '_'];
+      const target = pos === -1 ? 3 : Math.min(pos, 3);
+      arr[target] = letter.toLowerCase();
+      for (let i = 0; i < arr.length; i++) if (arr[i] === '_') arr[i] = fill[(salt + i) % fill.length];
+      return arr.join('');
+    }
+    return {
+      encode: (text, key) => {
+        const pos = pickPos(key);
+        const msg = String(text || '').toUpperCase().replace(/[^A-Z]/g, '');
+        const words = [];
+        for (let i = 0; i < msg.length; i++) words.push(pickCarrier(msg[i], pos, i));
+        return words.join(' ');
+      },
+      decode: (text, key) => {
+        const pos = pickPos(key);
+        const words = String(text || '').split(/\s+/).filter(Boolean);
+        let r = '';
+        for (const w of words) {
+          if (pos === -1) { if (w.length) r += w[w.length - 1].toUpperCase(); }
+          else if (w.length > pos) r += w[pos].toUpperCase();
+        }
+        return r;
+      }
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -2250,6 +2512,7 @@ window.CipherEngines = (() => {
     chaocipher, m209, solitaire, beale, copiale, kryptos, purple,
     autokey, nomenclator, bookCipher, sigaba, typex,
     kamaSutra, aeneasTacticus, jn25, redTypeA,
-    affine
+    affine,
+    trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher
   };
 })();

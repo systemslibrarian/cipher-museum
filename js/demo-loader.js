@@ -264,6 +264,41 @@
       label: 'Red (Type A) stepping-switch model', engine: 'redTypeA',
       defaultMsg: 'DIPLOMATIC TRAFFIC TOKYO',
       inputs: [{ type: 'text', id: 'keyword', label: 'Switch Seed', value: 'TOKYORED', placeholder: 'Seed word…' }]
+    },
+    'affine': {
+      label: 'Affine Cipher  (E(x) = a·x + b mod 26)', engine: 'affine',
+      defaultMsg: 'AFFINE CIPHER',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Key (a,b) — a coprime to 26', value: '5,8', placeholder: '5,8' }]
+    },
+    'trithemius': {
+      label: 'Trithemius Progressive Cipher (1518)', engine: 'trithemius',
+      defaultMsg: 'STEGANOGRAPHIA',
+      inputs: [{ type: 'number', id: 'shift', label: 'Starting Shift', value: '0', placeholder: '0' }]
+    },
+    'cardano-autokey': {
+      label: 'Cardano Autokey (1550)', engine: 'cardanoAutokey',
+      defaultMsg: 'MEET ME AT MIDNIGHT',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Single Seed Letter', value: 'Q', placeholder: 'Q' }]
+    },
+    'wheatstone-cryptograph': {
+      label: 'Wheatstone Cryptograph (1867)', engine: 'wheatstone',
+      defaultMsg: 'TELEGRAPH SIGNAL',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Inner-Dial Keyword', value: 'WHEATSTONE', placeholder: 'Keyword…' }]
+    },
+    'morse': {
+      label: 'International Morse Code', engine: 'morse',
+      defaultMsg: 'SOS',
+      inputs: []
+    },
+    'cardano-grille': {
+      label: 'Cardano Grille (1550)', engine: 'cardanoGrille',
+      defaultMsg: 'MEETME',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Pattern (size:idx,idx,…)', value: '5:0,3,7,12,19,21,24', placeholder: 'e.g. 5:0,3,7,12,19' }]
+    },
+    'null-cipher': {
+      label: 'Null Cipher (Hidden-Letter Concealment)', engine: 'nullCipher',
+      defaultMsg: 'HELP',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Position (first | last | N)', value: 'first', placeholder: 'first' }]
     }
   };
 
