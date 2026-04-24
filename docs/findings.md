@@ -6,13 +6,13 @@ Cross-referenced with live site at https://ciphermuseum.com.
 ## Status
 - Act I (audit): in progress
 - Act II (fix): not started
-- Total findings: 14
+- Total findings: 19
   - Critical: 3
-  - High: 11
-  - Medium: 0
+  - High: 13
+  - Medium: 3
   - Low: 0
   - Informational: 0
-- Fixed: 0 / 14
+- Fixed: 0 / 19
 
 ## Ground truth
 
@@ -254,6 +254,87 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Evidence:** `halls/unbreakable.html` link set vs. Index row 51.
 
 **Proposed fix:** Add solitaire/pontifex card. Remove or downgrade the enigma reference (acceptable as inline body prose linking to enigma.html for "machines whose ciphers were broken" context, but not as an exhibit card).
+
+### F-015 — Five distinct top-nav signatures across global pages
+**Severity:** Medium
+**Area:** Nav-and-footer
+**Files:** `index.html`, `museum-map.html`, `timeline.html`, `challenges.html`, `learn.html`, `modern.html`, `cryptanalysis.html`, `glossary.html`, `comparison.html`, `search.html`, `lab/workbench.html`, `404.html`
+**Status:** Open
+
+**Observed:** Five distinct ordered nav-link sets are in use (full breakdown in `docs/inventory-global.md`):
+1. **Modern-set (7 items):** Entrance · Museum Map · Timeline · Challenges · Glossary · Cryptanalysis Techniques · Modern Crypto — `museum-map.html`, `modern.html`.
+2. **Modern-set minus Modern Crypto (6 items):** `timeline.html`, `challenges.html`, `comparison.html`.
+3. **Halls-set:** Entrance · Museum Map · **Halls** · ... · Cryptanalysis ± Modern Crypto — `cryptanalysis.html`, `glossary.html`.
+4. **Explore-set (legacy compact, 5 items):** Entrance · Explore · Learn · Challenges · Lab — `index.html`, `search.html`. `learn.html` is a sub-variant missing Entrance.
+5. **404-set (4 items, no Entrance):** Museum Map · Timeline · Challenges · Glossary — `404.html`.
+6. **No nav block:** `lab/workbench.html` uses a page-local header.
+
+**Expected:** A single canonical nav set (likely the Modern-set 7-item version, optionally with a "Halls" entry as a dropdown) on every page including the Lab.
+
+**Evidence:** `docs/inventory-global.md` "Distinct nav-set signatures" section.
+
+**Proposed fix:** Adopt the 7-item Modern-set as canonical. Apply via either a single `js/nav.js` injection (already present and used by some pages) or a manual sweep. Convert the Lab and 404 to the same set. Decide whether to keep "Lab" (workbench) as a top-nav item — recommended yes.
+
+**Decisions needed:** Final nav order, whether "Lab" is a top-level item, whether "Halls" is added as a dropdown vs. linking directly to museum-map.
+
+### F-016 — Five distinct footer variants; only `index.html` carries a version string
+**Severity:** Medium
+**Area:** Nav-and-footer
+**Files:** same set as F-015
+**Status:** Open
+
+**Observed:**
+- Variant A: `index.html` — `© The Cipher Museum · MIT License · Open Source` + `v2.0.0 "The Redesign" · 37 ciphers · 10 halls`.
+- Variant B: `museum-map.html` — `© The Cipher Museum · MIT License` + `40 exhibits · 10 halls`.
+- Variant C (label-only): `timeline.html`, `challenges.html`, `learn.html`, `glossary.html`, `comparison.html` each carry a one-off label like `2,400 Years of Encryption` or `72 Terms Defined`.
+- Variant D (single-line): `modern.html`, `cryptanalysis.html`, `404.html`.
+- Variant E (no footer block): `search.html`, `lab/workbench.html`.
+
+**Expected:** A single canonical footer template across all pages with consistent right-side metadata (recommend: `52 exhibits · 10 halls · 2,500 years`).
+
+**Evidence:** `docs/inventory-global.md` "Distinct footer variants" section.
+
+**Proposed fix:** Standardize footer markup. Drop the version string entirely, or move it into a single source-of-truth comment in the footer.
+
+### F-017 — `index.html` footer is doubly stale: `v2.0.0` + `37 ciphers`
+**Severity:** High
+**Area:** Nav-and-footer, Counters
+**Files:** `index.html`
+**Status:** Open
+
+**Observed:** Footer second line: `v2.0.0 "The Redesign" · 37 ciphers · 10 halls`.
+
+**Expected:** 52 ciphers (per Index and on-disk count). The version string `v2.0.0` predates the addition of 15 exhibits.
+
+**Evidence:** `index.html` footer block.
+
+**Proposed fix:** Update count to 52. Either bump the version string or remove it; recommend removing since no other page uses one and there is no release process tying to it.
+
+### F-018 — `museum-map.html` footer reads `40 exhibits`, contradicting its own panel "52 Exhibits"
+**Severity:** High
+**Area:** Nav-and-footer, Counters
+**Files:** `museum-map.html`
+**Status:** Open
+
+**Observed:** Footer says `40 exhibits · 10 halls`. Panel heading on the same page says `52 Exhibits`. Page tagline says `10 halls, 40 exhibits`. Meta description says `37 cipher exhibits`. Three different counts on one page.
+
+**Expected:** All three locations agree on `52 exhibits`.
+
+**Evidence:** `museum-map.html` lines 7, 89, 313 (approx), 414.
+
+**Proposed fix:** Replace `37` and `40` with `52` everywhere on the page.
+
+### F-019 — Top-nav contains no obviously-broken hall links, but the Lab page lacks any museum nav
+**Severity:** Medium
+**Area:** Nav-and-footer
+**Files:** `lab/workbench.html`
+**Status:** Open
+
+**Observed:** No top-nav blocks were found pointing at outdated hall numbers (every nav references global pages, not specific hall files). However `lab/workbench.html` ships no museum-nav at all, leaving users stranded.
+
+**Expected:** Lab page has the same top-nav (with relative paths `../`) as every other page.
+
+**Proposed fix:** Add a museum-nav block to `lab/workbench.html` using `../` prefixes.
 
 ## Blockers and open questions
 
