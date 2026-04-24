@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hall X: Hall of Codebreakers — The Cipher Museum</title>
-  <meta name="description" content="Fifteen moments when human ingenuity broke what mathematics could not. From Al-Kindi in 850 AD to the Copiale and Chaocipher reconstructions of 2010-2014. The human stories behind cryptanalysis.">
+  <meta name="description" content="Twenty-one moments when human ingenuity broke what mathematics could not. From Al-Kindi (850 AD) to the Copiale and Chaocipher reconstructions of 2010-2014.">
   <meta name="keywords" content="codebreakers, cryptanalysis, cipher museum, Turing, Enigma, Bletchley Park, Navajo, Zodiac">
     <meta property="og:title" content="Hall X: Hall of Codebreakers — The Cipher Museum">
-  <meta property="og:description" content="Fifteen moments when human ingenuity broke what mathematics could not. From Al-Kindi in 850 AD to the Copiale and Chaocipher reconstructions of 2010-2014. The human stories behind cryptanalysis.">
+  <meta property="og:description" content="Twenty-one moments when human ingenuity broke what mathematics could not. From Al-Kindi (850 AD) to the Copiale and Chaocipher reconstructions of 2010-2014.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/halls/codebreakers.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Hall X: Hall of Codebreakers — The Cipher Museum">
-  <meta name="twitter:description" content="Fifteen moments when human ingenuity broke what mathematics could not. From Al-Kindi in 850 AD to the Copiale and Chaocipher reconstructions of 2010-2014. The human stories behind cryptanalysis.">
+  <meta name="twitter:description" content="Twenty-one moments when human ingenuity broke what mathematics could not. From Al-Kindi (850 AD) to the Copiale and Chaocipher reconstructions of 2010-2014.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/halls/codebreakers.html">
   <link rel="stylesheet" href="../css/museum.css">
@@ -83,7 +83,7 @@
   </div>
   <span class="page-eyebrow">Hall X · The Human Stories</span>
   <h1 class="page-title">Hall of Codebreakers</h1>
-  <p class="page-tagline">Fifteen moments when human ingenuity broke what mathematics could not</p>
+  <p class="page-tagline">Twenty-one moments when human ingenuity broke what mathematics could not</p>
   <blockquote style="max-width:600px;margin:1.5rem 0 0;padding-left:1.5rem;border-left:3px solid var(--gold);font-family:var(--fb);font-size:1.25rem;font-style:italic;color:var(--gold-lt);line-height:1.7;position:relative;z-index:1;">
     "A cipher is only as strong as the mind trying to break it."
   </blockquote>
@@ -267,6 +267,108 @@
       <p style="margin-top:.5rem;"><strong>Cipher:</strong> Navajo language as operational field code</p>
       <p style="margin-top:1rem;">This is the only story in this hall about a code that was NOT broken. It belongs here because the story of wartime cryptography is incomplete without it. 420 Navajo Marines transmitted battlefield orders in a language that Japanese linguists could not touch. The code was declassified in 1968 and the Code Talkers received the Congressional Gold Medal in 2001.</p>
       <p style="margin-top:1rem;"><a href="../ciphers/navajo-code-talkers.html" style="color:var(--gold);font-family:var(--fm);font-size:.85rem;">View the Navajo Code Talkers exhibit →</a></p>
+    </div>
+  </div>
+
+  <!-- Story 8.1: Joan Clarke -->
+  <div class="panel" style="margin-bottom:2rem;" id="clarke">
+    <div class="panel-head">
+      <span class="panel-icon">♕</span>
+      <span class="panel-title" style="color:var(--gold);">Joan Clarke and Naval Enigma</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1940–1945</span>
+        <span class="badge sec-broken">Broke: Kriegsmarine Enigma (Hut 8)</span>
+      </div>
+      <p><strong>Person:</strong> Joan Elisabeth Lowther Clarke (later Murray), 1917–1996</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Banburismus — Bayesian sequential analysis of Enigma indicators</p>
+      <p style="margin-top:1rem;">Recruited from Cambridge mathematics in 1940, Clarke became one of the most productive cryptanalysts in Hut 8 and rose to deputy head — extraordinary in a service that paid female staff at clerical rates and barred them from "officer" titles. She was a fluent practitioner of Banburismus, the Bayesian sequential procedure invented by Turing to slash the Bombe's workload by ranking which wheel orders to test first. On the most stubborn naval traffic she shared the load with Turing himself; on shorter runs she worked alone.</p>
+      <p style="margin-top:1rem;">Her work fed directly into the Battle of the Atlantic: Hut 8's reads of <em>Hydra</em>, <em>Triton</em> (the four-rotor U-boat key), and other naval keys let convoys be re-routed around U-boat wolf packs. Clarke remained at GCHQ until 1977. Her contribution was not declassified in any meaningful detail until the 1990s; she was appointed MBE in 1946 and otherwise spent the rest of her life in deliberate obscurity.</p>
+    </div>
+  </div>
+
+  <!-- Story 8.2: Bill Tutte (solo) -->
+  <div class="panel" style="margin-bottom:2rem;" id="tutte">
+    <div class="panel-head">
+      <span class="panel-icon">📐</span>
+      <span class="panel-title" style="color:var(--gold);">Bill Tutte: Reverse-Engineering Lorenz from Ciphertext</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1941–1942</span>
+        <span class="badge sec-broken">Broke: Lorenz SZ40/42 (machine reconstruction without a captured device)</span>
+      </div>
+      <p><strong>Person:</strong> William Thomas "Bill" Tutte, 1917–2002, Cambridge graph theorist</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Statistical period-finding on a 4,000-character depth produced by an operator's August 1941 mistake</p>
+      <p style="margin-top:1rem;">In August 1941 a German operator sent a 4,000-character message twice on the same Lorenz key after the receiving station asked for a repeat — the kind of depth that should never happen. John Tiltman recovered the plaintext by hand. Tutte then spent four months turning that single keystream into a complete schematic of a machine he had never seen. Working only with pencil and squared paper, he discovered the SZ40/42 used twelve wheels in two banks (the chi-stream and psi-stream wheels) plus two motor wheels, and he derived the period of every wheel from the statistical structure of the recovered key. The result, "Tutte's 1+2 break-in," became the foundation of the British attack on Hitler's strategic cipher.</p>
+      <p style="margin-top:1rem;">Tutte's analytical method was what Tommy Flowers needed to mechanise. Colossus exists because Tutte's break gave it something to compute. After the war Tutte returned to mathematics and became one of the founders of modern graph theory. The Bletchley Park work was classified for fifty years; Tutte's role was not publicly acknowledged until the late 1990s. Canada later named the Tutte Institute for Mathematics and Computing in his honour.</p>
+      <div class="callout callout-info" style="margin-top:1rem;">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <p>See also: <a href="../ciphers/lorenz.html">Hall VII · Lorenz exhibit</a> for the machine; Story 6 above for Tommy Flowers and Colossus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story 8.3: Elizebeth Friedman -->
+  <div class="panel" style="margin-bottom:2rem;" id="elizebeth-friedman">
+    <div class="panel-head">
+      <span class="panel-icon">🌹</span>
+      <span class="panel-title" style="color:var(--gold);">Elizebeth Smith Friedman: Rum-Runners and Nazi Spies</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-20c">1923–1946</span>
+        <span class="badge sec-broken">Broke: Prohibition smuggler ciphers; Abwehr South-American spy-ring traffic</span>
+      </div>
+      <p><strong>Person:</strong> Elizebeth Smith Friedman, 1892–1980</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Hand cryptanalysis of commercial codes, polyalphabetics, and one-part nomenclators across 12,000+ messages</p>
+      <p style="margin-top:1rem;">Hired by oilman George Fabyan's Riverbank Laboratories in 1916, Elizebeth and her husband William essentially invented modern American cryptanalysis as a married team. From 1923 she ran the cryptanalytic unit of the US Coast Guard and broke the encrypted radio traffic of the Prohibition rum-runners — testifying as the government's expert witness in 33 federal trials and reading aloud, in court, messages the defendants insisted no one could read. Her unit decoded cipher systems from the simplest substitution to multi-stage Hagelin-class machines.</p>
+      <p style="margin-top:1rem;">During WWII the Coast Guard unit was folded into a joint operation that broke the South-American Abwehr networks — the German clandestine radio circuit running from Hamburg through Brazil, Argentina, and Chile. Hoover's FBI publicly took credit for rolling up the spy ring; Elizebeth's unit had done the cryptanalysis. The full story stayed classified until her papers were opened at the Marshall Library in 2008 and Jason Fagone's <em>The Woman Who Smashed Codes</em> (2017) reconstructed it.</p>
+    </div>
+  </div>
+
+  <!-- Story 8.4: Agnes Meyer Driscoll -->
+  <div class="panel" style="margin-bottom:2rem;" id="driscoll">
+    <div class="panel-head">
+      <span class="panel-icon">⚓</span>
+      <span class="panel-title" style="color:var(--gold);">Agnes Meyer Driscoll: Madame X of US Naval Intelligence</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-20c">1920s–1940s</span>
+        <span class="badge sec-broken">Broke: Imperial Japanese Navy Red Book, Blue Book, and JN-25 (initial entry)</span>
+      </div>
+      <p><strong>Person:</strong> Agnes Meyer Driscoll, 1889–1971, US Navy civilian cryptanalyst</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Stripping superencipherment off four-digit code groups; manual book reconstruction</p>
+      <p style="margin-top:1rem;">Driscoll joined the Navy's code and signal section in 1918 and stayed for the rest of her career — through the Red Book of the 1920s, the Blue Book in 1930 (after a covert physical compromise of the Japanese codebook in New York), and the long entry into JN-25, the Imperial Japanese Navy's main fleet operational code. The same JN-25 line of work was the one Joe Rochefort's Hawaii team rode to the Midway intelligence break in 1942. Driscoll trained nearly every senior US Navy cryptanalyst of the WWII generation; her nickname inside the building was "Madame X."</p>
+      <p style="margin-top:1rem;">She also helped design the Navy's "CM" cipher machine in the 1930s and reviewed the work that became SIGABA. By the time the Navy fully mechanised cryptanalysis after 1945 Driscoll's hand methods were being phased out, but the JN-25 lineage she opened ran straight through the Pacific war.</p>
+    </div>
+  </div>
+
+  <!-- Story 8.5: Leo Marks -->
+  <div class="panel" style="margin-bottom:2rem;" id="marks">
+    <div class="panel-head">
+      <span class="panel-icon">📜</span>
+      <span class="panel-title" style="color:var(--gold);">Leo Marks and the SOE Agent Codes</span>
+    </div>
+    <div class="panel-body">
+      <div class="page-meta" style="margin-bottom:1rem;">
+        <span class="badge era-wwii">1942–1945</span>
+        <span class="badge sec-secure">Designed: silk one-time pads and worked-out keys for field agents</span>
+      </div>
+      <p><strong>Person:</strong> Leopold Samuel "Leo" Marks, 1920–2001, Head of Codes, Special Operations Executive</p>
+      <p style="margin-top:.5rem;"><strong>Technique:</strong> Replacing memorised "poem codes" with printed-silk one-time pads; introducing planned indicator schemes that survived agent error and torture</p>
+      <p style="margin-top:1rem;">Marks took over SOE's code section at 22 and inherited a system in which agents in occupied Europe encoded radio messages using lines from memorised poems. Memorised keys are short, agents under stress make transcription mistakes, and an "indecipherable" message that has to be re-transmitted gives direction-finding teams a second chance to fix the radio. Marks proved that a meaningful fraction of "indecipherables" were in fact breakable by his own staff in London with a few hours of work — and started doing it routinely so the agent did not have to repeat the message.</p>
+      <p style="margin-top:1rem;">He then replaced the poem codes with <strong>printed-silk one-time pads</strong>: small, silent, easily concealed, and disposable strip by strip after use. Combined with worked-out keys (WOKs) and letter-one-time-pads (LOPs), the silks gave SOE field circuits something approaching real cryptographic security for the first time. Marks also wrote, for an agent killed in 1944, the poem <em>The Life That I Have</em> — later one of the most-quoted English love poems of the century. His memoir <em>Between Silk and Cyanide</em> (1998) is the canonical inside account of agent cryptography.</p>
+      <div class="callout callout-info" style="margin-top:1rem;">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <p>See also: <a href="../ciphers/one-time-pad.html">Hall IX · One-Time Pad</a> for the underlying mathematics of what SOE's silks actually delivered to the field.</p>
+        </div>
+      </div>
     </div>
   </div>
 
