@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-Square Cipher — The Cipher Museum</title>
+  <meta name="description" content="Delastelle's simpler sibling of Four-square — two keyed 5×5 squares">
+  <meta property="og:title" content="Two-Square Cipher — The Cipher Museum">
+  <meta property="og:description" content="Delastelle's simpler sibling of Four-square — two keyed 5×5 squares">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/two-square.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Two-Square Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="Delastelle's simpler sibling of Four-square — two keyed 5×5 squares">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/two-square.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: Classical Substitution</a><span>&rsaquo;</span>
+    Two-Square Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 42 of 49</span>
+    <span class="badge era-19c">Late 19th Century · ~1902</span>
+    <span class="badge sec-broken">Weak</span>
+  </div>
+  <h1 class="page-title">Two-Square Cipher</h1>
+  <p class="page-tagline">Delastelle's simpler sibling of Four-square — two keyed 5×5 squares</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Félix Delastelle (France)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1902</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Two keywords (two keyed squares)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Digram frequency · same-row leak</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Beware of identity transformations as edge cases</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="twosquare"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>A pared-down version of the Four-square: only two keyed squares, side by side. Slightly easier to use by hand but with a glaring weakness — when a digram's two letters happen to lie in the same row of their respective squares, the cipher leaves them unchanged. Roughly 20% of digrams pass through unencrypted.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Published alongside the Four-square in Delastelle's 1902 treatise. The "horizontal" variant places the squares side by side; a "vertical" variant stacks them. Both share the same-row leak. Used recreationally rather than militarily.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Arrange two keyed 5×5 squares horizontally. For each digram, look up the first letter in the left square and the second in the right square. Read the ciphertext from the opposite corners of the rectangle they form.<br><br><pre>If the two letters share a row → leave them unchanged.
+Otherwise:
+  cipher[0] = left[ row(L), col(R) ]
+  cipher[1] = right[ row(R), col(L) ]</pre></p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Same-Row Leakage</div><div class="attack-diff">Complexity: Easy</div><p class="attack-desc">Roughly one in five digrams passes through the cipher unchanged. An attacker can identify these by noticing common English digrams (TH, HE, IN, ER) appearing as themselves in the ciphertext. From there, the rows are partially recovered.</p></div><div class="attack-panel"><div class="attack-name">Digram Frequency Analysis</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">As with Four-square, the cipher is a fixed digram-to-digram substitution. Digram frequency tables and simulated annealing recover both keys with a few hundred characters of ciphertext.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Two-Square Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Identity transformations as weakness</td><td>Modern designs eliminate fixed points (e.g., AES S-box has no fixed point)</td></tr>
+            <tr><td>Two-key fractionation</td><td>Twin-key constructions appear in HMAC and double-encryption</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>42 of 49</td></tr>
+            <tr><td>Era</td><td>Late 19th Century · ~1902</td></tr>
+            <tr><td>Security</td><td>Weak</td></tr>
+            <tr><td>Inventor</td><td>Félix Delastelle (France)</td></tr>
+            <tr><td>Year</td><td>~1902</td></tr>
+            <tr><td>Key Type</td><td>Two keywords (two keyed squares)</td></tr>
+            <tr><td>Broken By</td><td>Digram frequency · same-row leak</td></tr>
+            <tr><td>Modern Lesson</td><td>Beware of identity transformations as edge cases</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/foursquare.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Four-Square Cipher</span>
+      <span class="related-card__tag">Stronger sibling</span>
+    </a>
+    <a href="../ciphers/playfair.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Playfair Cipher</span>
+      <span class="related-card__tag">Single-square cousin</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/foursquare.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Four-Square Cipher</span>
+  </a>
+  <a href="../ciphers/hill.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Hill Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/substitution.html">Hall II: Classical Substitution</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 42 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

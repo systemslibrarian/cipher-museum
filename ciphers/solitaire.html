@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solitaire / Pontifex — The Cipher Museum</title>
+  <meta name="description" content="Bruce Schneier's 1999 hand cipher using a deck of playing cards">
+  <meta property="og:title" content="Solitaire / Pontifex — The Cipher Museum">
+  <meta property="og:description" content="Bruce Schneier's 1999 hand cipher using a deck of playing cards">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/solitaire.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Solitaire / Pontifex — The Cipher Museum">
+  <meta name="twitter:description" content="Bruce Schneier's 1999 hand cipher using a deck of playing cards">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/solitaire.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/unbreakable.html">Hall IX: The Unbreakable</a><span>&rsaquo;</span>
+    Solitaire / Pontifex
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 46 of 49</span>
+    <span class="badge era-19c">Modern · 1999</span>
+    <span class="badge sec-moderate">Moderate</span>
+  </div>
+  <h1 class="page-title">Solitaire / Pontifex</h1>
+  <p class="page-tagline">Bruce Schneier's 1999 hand cipher using a deck of playing cards</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Bruce Schneier</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1999</span></div>
+    <div class="fact"><span class="fact-label">Famous use</span><span class="fact-value">Neal Stephenson's novel Cryptonomicon (as "Pontifex")</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Initial ordering of a 54-card deck (52 + 2 jokers)</span></div>
+    <div class="fact"><span class="fact-label">Keyspace</span><span class="fact-value">54! ≈ 2.3 × 10⁷¹</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Hand-deniable crypto for high-risk environments</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="solitaire"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Bruce Schneier designed Solitaire in 1999 for Neal Stephenson's novel Cryptonomicon, where it appears under the name "Pontifex". The goal: a cipher that an agent could carry in a hostile country with nothing more incriminating than a deck of playing cards. Strong enough to resist amateur attack, simple enough to operate by hand. Subsequent analysis revealed minor statistical biases, so it is not recommended for production use today, but it remains an important demonstration that strong-ish encryption can be done with no electronics at all.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Schneier published Solitaire in an appendix to Cryptonomicon and later on his Counterpane website. Within months, cryptanalysts including Paul Crowley discovered small biases in the keystream — enough to make Solitaire weaker than ideal but not catastrophically broken. Schneier maintains the design as a teaching example and acknowledges the analysis. Real-world use by activists and journalists has been documented but is rare.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Treat the 54-card deck as state. Each "round" produces one keystream letter (1–26):<br><br><pre>1. Move the A-joker (53) one card down.
+2. Move the B-joker (54) two cards down.
+3. Triple-cut: swap the chunks above and below the two jokers.
+4. Count-cut: read the value of the bottom card; cut that many cards
+   from the top, place above the bottom card.
+5. Look at the top card's value N. Count N cards down. The next card
+   (mod 26) is the keystream output. If it is a joker, repeat from step 1.</pre>Encryption is then a simple Vigenère-style shift: <code>c = (p + k - 1) mod 26 + 1</code>.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Crowley Bias (2000)</div><div class="attack-diff">Complexity: Distinguisher only</div><p class="attack-desc">Paul Crowley showed that the Solitaire keystream has a measurable bias: the probability that two consecutive keystream values are equal is about 1/22.5 instead of the ideal 1/26. This is enough to <em>distinguish</em> Solitaire output from random, but not enough to recover plaintext or key in practice.</p></div><div class="attack-panel"><div class="attack-name">Operator Errors</div><div class="attack-diff">Complexity: The real risk</div><p class="attack-desc">A single mis-step in the count-cut or keystream extraction misaligns the recipient's deck and turns the rest of the message into gibberish. In practice, operator error is the main threat — not cryptanalysis.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Solitaire / Pontifex</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Hardware-free cryptography</td><td>Useful where electronics are dangerous to possess</td></tr>
+            <tr><td>Deniable artifacts</td><td>A deck of cards is innocuous; a thumb drive is not</td></tr>
+            <tr><td>Distinguishability vs. recovery</td><td>Modern crypto requires indistinguishability from random</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>46 of 49</td></tr>
+            <tr><td>Era</td><td>Modern · 1999</td></tr>
+            <tr><td>Security</td><td>Moderate</td></tr>
+            <tr><td>Inventor</td><td>Bruce Schneier</td></tr>
+            <tr><td>Year</td><td>1999</td></tr>
+            <tr><td>Famous use</td><td>Neal Stephenson's novel Cryptonomicon (as "Pontifex")</td></tr>
+            <tr><td>Key Type</td><td>Initial ordering of a 54-card deck (52 + 2 jokers)</td></tr>
+            <tr><td>Keyspace</td><td>54! ≈ 2.3 × 10⁷¹</td></tr>
+            <tr><td>Modern Lesson</td><td>Hand-deniable crypto for high-risk environments</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/vic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">VIC Cipher</span>
+      <span class="related-card__tag">Earlier hand cipher tradition</span>
+    </a>
+    <a href="../ciphers/one-time-pad.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">One-Time Pad</span>
+      <span class="related-card__tag">The provably secure ideal</span>
+    </a>
+    <a href="../ciphers/chaocipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Chaocipher</span>
+      <span class="related-card__tag">Another self-modifying hand cipher</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/vernam.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Vernam Cipher</span>
+  </a>
+  <a href="../ciphers/one-time-pad.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">One-Time Pad</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/unbreakable.html">Hall IX: The Unbreakable</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 46 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

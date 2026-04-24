@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chaocipher — The Cipher Museum</title>
+  <meta name="description" content="John Byrne's 1918 disk cipher — unsolved for 90 years">
+  <meta property="og:title" content="Chaocipher — The Cipher Museum">
+  <meta property="og:description" content="John Byrne's 1918 disk cipher — unsolved for 90 years">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/chaocipher.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Chaocipher — The Cipher Museum">
+  <meta name="twitter:description" content="John Byrne's 1918 disk cipher — unsolved for 90 years">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/chaocipher.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Chaocipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 44 of 49</span>
+    <span class="badge era-19c">Modern · 1918</span>
+    <span class="badge sec-strong">Strong (until disclosed)</span>
+  </div>
+  <h1 class="page-title">Chaocipher</h1>
+  <p class="page-tagline">John Byrne's 1918 disk cipher — unsolved for 90 years</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">John F. Byrne</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1918 (disclosed 2010)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Two scrambled 26-letter alphabets</span></div>
+    <div class="fact"><span class="fact-label">Famous fact</span><span class="fact-value">Held secret for 92 years; never broken until disclosure</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Self-modifying ciphers can be strong with simple parts</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="chaocipher"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>John Byrne — Irish-American writer and friend of James Joyce — invented the Chaocipher in 1918 and spent four decades trying to convince the US government and AT&T to adopt it. Nobody would license it without seeing how it worked, and Byrne refused to reveal it. His 1953 autobiography Silent Years included challenge ciphertexts that defeated codebreakers for nearly a century. In 2010, his family donated his papers to the National Cryptologic Museum and the algorithm was finally published. It turned out to be elegantly simple: two rotating disks that permute themselves after each letter.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Byrne carried his concept in a small box he called "The Chao" for over 50 years. William Friedman politely declined to evaluate it. The US Navy declined. AT&T declined. After Byrne's death in 1960, the device and notes passed to his son and then sat in a closet until 2010. When the Cipher Deavours / Louis Kruh team finally published the algorithm in Cryptologia, the cryptographic community confirmed: Byrne's system was genuinely strong for a hand cipher, with no obvious break given only ciphertext.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Two 26-letter alphabets, called the "left" (ciphertext) and "right" (plaintext) wheels, are independently scrambled. To encrypt one letter:<br><br><pre>1. Find the plaintext letter on the right wheel.
+2. The ciphertext letter is at the same position on the left wheel.
+3. Rotate both wheels so the touched letters are at the "zenith" (position 0).
+4. Permute the LEFT wheel: take the letter at position 1, slide it into position 13.
+5. Permute the RIGHT wheel: rotate it one position, then take the letter at
+   position 2 and slide it into position 13.
+6. Repeat for the next plaintext letter.</pre>The wheels evolve continuously, so the same plaintext letter rarely encrypts to the same ciphertext letter twice in a row.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Disclosure (2010)</div><div class="attack-diff">The only known "break"</div><p class="attack-desc">Despite four decades of public challenge ciphertexts and serious attention from professional cryptanalysts, no published cryptanalytic break of Chaocipher exists. The cipher was "broken" only when its algorithm was finally disclosed by the Byrne family in 2010 — vindicating Byrne's belief while also confirming Kerckhoffs' principle: any cipher can be defeated if the algorithm becomes known and the key is short.</p></div><div class="attack-panel"><div class="attack-name">Known-Plaintext Attack</div><div class="attack-diff">Complexity: Moderate (now that algorithm is public)</div><p class="attack-desc">Modern researchers have shown that with sufficient known plaintext (a few hundred characters), the initial wheel orderings can be recovered by tracing back the deterministic permutations. Pure ciphertext-only attacks remain difficult.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Chaocipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Self-modifying state</td><td>Modern stream ciphers (RC4, ChaCha20) update internal state per byte</td></tr>
+            <tr><td>Algorithm secrecy is not security</td><td>Kerckhoffs' principle, finally proven on Byrne's case</td></tr>
+            <tr><td>Simple components, complex evolution</td><td>Two wheels + two permutations = strong mixing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>44 of 49</td></tr>
+            <tr><td>Era</td><td>Modern · 1918</td></tr>
+            <tr><td>Security</td><td>Strong (until disclosed)</td></tr>
+            <tr><td>Inventor</td><td>John F. Byrne</td></tr>
+            <tr><td>Year</td><td>1918 (disclosed 2010)</td></tr>
+            <tr><td>Key Type</td><td>Two scrambled 26-letter alphabets</td></tr>
+            <tr><td>Famous fact</td><td>Held secret for 92 years; never broken until disclosure</td></tr>
+            <tr><td>Modern Lesson</td><td>Self-modifying ciphers can be strong with simple parts</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma Machine</span>
+      <span class="related-card__tag">Same era, different architecture</span>
+    </a>
+    <a href="../ciphers/jefferson-disk.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Jefferson Disk</span>
+      <span class="related-card__tag">Earlier disk-based system</span>
+    </a>
+    <a href="../ciphers/solitaire.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Solitaire / Pontifex</span>
+      <span class="related-card__tag">Later self-modifying hand cipher</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/jefferson-disk.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Jefferson Disk</span>
+  </a>
+  <a href="../ciphers/enigma.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Enigma Machine</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 44 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

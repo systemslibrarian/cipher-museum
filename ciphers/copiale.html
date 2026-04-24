@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copiale Cipher — The Cipher Museum</title>
+  <meta name="description" content="A 105-page 18th-century occult manuscript — broken by computer in 2011">
+  <meta property="og:title" content="Copiale Cipher — The Cipher Museum">
+  <meta property="og:description" content="A 105-page 18th-century occult manuscript — broken by computer in 2011">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/copiale.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Copiale Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="A 105-page 18th-century occult manuscript — broken by computer in 2011">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/copiale.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/puzzle.html">Hall VIII: Puzzle &amp; Novelty</a><span>&rsaquo;</span>
+    Copiale Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 48 of 49</span>
+    <span class="badge era-renaissance">18th Century · ~1760s</span>
+    <span class="badge sec-broken">Broken (2011)</span>
+  </div>
+  <h1 class="page-title">Copiale Cipher</h1>
+  <p class="page-tagline">A 105-page 18th-century occult manuscript — broken by computer in 2011</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">East Berlin Academy archive (recovered 1990s)</span></div>
+    <div class="fact"><span class="fact-label">Date of creation</span><span class="fact-value">~1760–1780</span></div>
+    <div class="fact"><span class="fact-label">Length</span><span class="fact-value">105 pages, ~75,000 characters</span></div>
+    <div class="fact"><span class="fact-label">Symbol set</span><span class="fact-value">~90 unique handwritten symbols</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Knight, Megyesi, Schaefer (USC/Uppsala, 2011)</span></div>
+    <div class="fact"><span class="fact-label">Plaintext language</span><span class="fact-value">German</span></div>
+    <div class="fact"><span class="fact-label">Content</span><span class="fact-value">Initiation rituals of the "Oculist Order"</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="copiale"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Copiale Cipher is a beautiful handwritten manuscript using ~90 symbols — a mix of Latin letters, Greek letters, and invented glyphs. It surfaced in the East Berlin academy archives after the fall of the Wall and resisted analysis for two decades. In 2011 a team led by Kevin Knight at USC used statistical machine-translation software (originally built for translating between languages) to crack it: a homophonic substitution cipher in German, describing the initiation rituals of an 18th-century secret society called the Oculist Order ("eye-doctors"), apparently obsessed with vision and ophthalmology.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Knight's team treated the unknown symbols as an unknown language and ran an expectation-maximization (EM) algorithm to find the most likely letter mappings, scoring hypotheses against German n-gram statistics. The breakthrough was recognizing that some symbols were nulls (decoys), some were homophones (multiple symbols → one letter), and that the language was German rather than Latin. The decoded text turned out to be a manual of initiation: candidates for membership had a single hair plucked from their eyebrow; new members took an oath in a darkened chamber; the ritual involved an "eye operation" symbolizing the gain of secret sight. The order has no documented connection to the Bavarian Illuminati but may have been a related fraternal experiment.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Each plaintext letter is enciphered as one of multiple symbols (a homophonic substitution). Common letters (E, N, R, S in German) get more symbols; rare letters get fewer. Some symbols stand for nothing — they are pure decoys inserted to flatten frequencies. A small set of symbols stands for whole words or syllables.<br><br>The Copiale uses ~90 symbols to encode a 26-letter alphabet, giving about 3–4 symbols per letter on average for the most common ones.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Statistical Machine Translation (2011)</div><div class="attack-diff">Complexity: Computational</div><p class="attack-desc">Kevin Knight, Beáta Megyesi, and Christiane Schaefer treated the cipher as an unknown language. Their EM algorithm iteratively refined a probability distribution over symbol-to-letter mappings, scoring against German letter and bigram frequencies. Wrong guesses about the language (Latin, English) produced gibberish; switching to German immediately produced fluent text.</p></div><div class="attack-panel"><div class="attack-name">Hypothesis-Driven Symbol Classification</div><div class="attack-diff">Complexity: Insight</div><p class="attack-desc">The team discovered that certain frequent-but-strange symbols had to be nulls (decoys), and that letter pairs like CH and SCH had dedicated symbols — exactly the German bigrams that needed compression. Recognizing the structural patterns of German shrank the search space dramatically.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Copiale Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>NLP for cryptanalysis</td><td>Modern statistical models attack historical ciphers</td></tr>
+            <tr><td>Homophonic substitution at scale</td><td>90 symbols offers diminishing returns vs. polyalphabetic</td></tr>
+            <tr><td>Documents survive their secrets</td><td>The cipher protected the rituals for ~250 years</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>48 of 49</td></tr>
+            <tr><td>Era</td><td>18th Century · ~1760s</td></tr>
+            <tr><td>Security</td><td>Broken (2011)</td></tr>
+            <tr><td>Origin</td><td>East Berlin Academy archive (recovered 1990s)</td></tr>
+            <tr><td>Date of creation</td><td>~1760–1780</td></tr>
+            <tr><td>Length</td><td>105 pages, ~75,000 characters</td></tr>
+            <tr><td>Symbol set</td><td>~90 unique handwritten symbols</td></tr>
+            <tr><td>Broken By</td><td>Knight, Megyesi, Schaefer (USC/Uppsala, 2011)</td></tr>
+            <tr><td>Plaintext language</td><td>German</td></tr>
+            <tr><td>Content</td><td>Initiation rituals of the "Oculist Order"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/homophonic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Homophonic Substitution</span>
+      <span class="related-card__tag">Same family of cipher</span>
+    </a>
+    <a href="../ciphers/great-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">The Great Cipher</span>
+      <span class="related-card__tag">Earlier nomenclator with similar structure</span>
+    </a>
+    <a href="../ciphers/zodiac.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Zodiac Cipher</span>
+      <span class="related-card__tag">Modern symbol-substitution mystery</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/beale.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Beale Ciphers</span>
+  </a>
+  <a href="../ciphers/kryptos.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Kryptos</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/puzzle.html">Hall VIII: Puzzle &amp; Novelty</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 48 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

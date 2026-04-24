@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beale Ciphers — The Cipher Museum</title>
+  <meta name="description" content="Three book ciphers from 1885 said to lead to a buried treasure — two unsolved">
+  <meta property="og:title" content="Beale Ciphers — The Cipher Museum">
+  <meta property="og:description" content="Three book ciphers from 1885 said to lead to a buried treasure — two unsolved">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/beale.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Beale Ciphers — The Cipher Museum">
+  <meta name="twitter:description" content="Three book ciphers from 1885 said to lead to a buried treasure — two unsolved">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/beale.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/puzzle.html">Hall VIII: Puzzle &amp; Novelty</a><span>&rsaquo;</span>
+    Beale Ciphers
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 47 of 49</span>
+    <span class="badge era-19c">19th Century · published 1885</span>
+    <span class="badge sec-unbroken">Unsolved (Beale 1 & 3)</span>
+  </div>
+  <h1 class="page-title">Beale Ciphers</h1>
+  <p class="page-tagline">Three book ciphers from 1885 said to lead to a buried treasure — two unsolved</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">James B. Ward pamphlet, Lynchburg, Virginia (1885)</span></div>
+    <div class="fact"><span class="fact-label">Author of plaintexts</span><span class="fact-value">Allegedly Thomas J. Beale (1820s)</span></div>
+    <div class="fact"><span class="fact-label">Cipher type</span><span class="fact-value">Book cipher (number = Nth word, take first letter)</span></div>
+    <div class="fact"><span class="fact-label">Solved</span><span class="fact-value">Beale 2 only (key: Declaration of Independence)</span></div>
+    <div class="fact"><span class="fact-label">Unsolved</span><span class="fact-value">Beale 1 (treasure location) and Beale 3 (heirs)</span></div>
+    <div class="fact"><span class="fact-label">Treasure value (claimed)</span><span class="fact-value">~$60M+ in modern dollars</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="beale"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>In 1885 a Virginia pamphlet appeared claiming that in the 1820s a man named Thomas Jefferson Beale had buried a fortune in gold, silver, and jewels somewhere in Bedford County, Virginia. Beale supposedly left three encrypted messages: cipher 1 names the location, cipher 2 itemizes the contents, cipher 3 names the heirs. In 1880 the unnamed pamphleteer cracked cipher 2 by trying the Declaration of Independence as the key — and read a precise inventory of buried treasure. Ciphers 1 and 3 have never been solved.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The pamphlet is widely suspected to be a hoax — the prose style of the "Beale" letters does not match the 1820s; statistical analysis of cipher 1 suggests it may not encode meaningful English; and no Thomas J. Beale appears in census records of the era. But cipher 2 really does decrypt to a sensible inventory using the Declaration of Independence, which is a remarkable coincidence to manufacture. Treasure hunters have searched Bedford County for over a century. Modern cryptanalysts have tried hundreds of candidate "key books" against ciphers 1 and 3 without success.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>A book cipher converts each plaintext letter to the position of a word in a reference text whose first letter matches.<br><br><pre>Plaintext: G O L D
+           ↓ ↓ ↓ ↓
+Declaration words: 48=Government, 12=One, 42=Liberty, 15=Decent
+Ciphertext: 48 12 42 15</pre>To decrypt, you need the exact same edition of the reference text the encoder used. A single misnumbered word breaks the entire message.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Beale 2: Right Book Found</div><div class="attack-diff">Complexity: Lucky guess</div><p class="attack-desc">In 1880 the pamphleteer tried the Declaration of Independence as the key text. Numbering the words and reading their first letters produced fluent English describing buried gold and silver. This single success guarantees the cipher system is real, but the matching key for ciphers 1 and 3 remains unknown.</p></div><div class="attack-panel"><div class="attack-name">Beale 1 & 3: Still Open</div><div class="attack-diff">Complexity: Unsolved after 140 years</div><p class="attack-desc">Cryptanalysts have tested thousands of candidate documents — Bibles, Shakespeare, the US Constitution, contemporary almanacs and newspapers — without success. Statistical analysis of cipher 1 by Carl Hammer (1968) and Jim Gillogly (1980) suggests the letter distribution is non-random in suspicious ways, hinting at either a different cipher type or a hoax.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Beale Ciphers</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Book cipher principle</td><td>Modern key derivation from shared secrets</td></tr>
+            <tr><td>Edition specificity</td><td>Cryptographic agility — same key, different formatting → fails</td></tr>
+            <tr><td>Hoax-resistance of evidence</td><td>Provenance and reproducibility matter as much as the math</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>47 of 49</td></tr>
+            <tr><td>Era</td><td>19th Century · published 1885</td></tr>
+            <tr><td>Security</td><td>Unsolved (Beale 1 & 3)</td></tr>
+            <tr><td>Origin</td><td>James B. Ward pamphlet, Lynchburg, Virginia (1885)</td></tr>
+            <tr><td>Author of plaintexts</td><td>Allegedly Thomas J. Beale (1820s)</td></tr>
+            <tr><td>Cipher type</td><td>Book cipher (number = Nth word, take first letter)</td></tr>
+            <tr><td>Solved</td><td>Beale 2 only (key: Declaration of Independence)</td></tr>
+            <tr><td>Unsolved</td><td>Beale 1 (treasure location) and Beale 3 (heirs)</td></tr>
+            <tr><td>Treasure value (claimed)</td><td>~$60M+ in modern dollars</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/dictionary-code.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Dictionary Code</span>
+      <span class="related-card__tag">Civil War book-cipher cousin</span>
+    </a>
+    <a href="../ciphers/running-key.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Running Key</span>
+      <span class="related-card__tag">Same idea, different output</span>
+    </a>
+    <a href="../ciphers/zodiac.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Zodiac Cipher</span>
+      <span class="related-card__tag">Other famous unsolved</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/zodiac.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Zodiac Cipher</span>
+  </a>
+  <a href="../ciphers/kryptos.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Kryptos</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/puzzle.html">Hall VIII: Puzzle &amp; Novelty</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 47 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

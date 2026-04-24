@@ -146,6 +146,62 @@
     vernam: {
       label: 'Vernam Cipher (XOR)', engine: 'vernam', defaultMsg: 'SECRET',
       inputs: [{ type: 'text', id: 'keyword', label: 'Key (leave blank for random)', value: '', placeholder: 'Random key if empty' }]
+    },
+    greatCipher: {
+      label: 'Great Cipher (Grand Chiffre)', engine: 'greatCipher',
+      defaultMsg: 'THE KING ORDERS RETREAT TO PARIS AT DAWN',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook Seed', value: 'LOUIS', placeholder: 'Seed word…' }]
+    },
+    atbash: {
+      label: 'Atbash', engine: 'atbash', defaultMsg: 'HELLO WORLD',
+      inputs: []
+    },
+    rot13: {
+      label: 'ROT13', engine: 'rot13', defaultMsg: 'TRY ROTATING THIRTEEN',
+      inputs: []
+    },
+    foursquare: {
+      label: 'Four-Square Cipher', engine: 'foursquare', defaultMsg: 'HELP ME OBI WAN',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Two Keywords (key1,key2)', value: 'EXAMPLE,KEYWORD', placeholder: 'KEY1,KEY2' }]
+    },
+    twosquare: {
+      label: 'Two-Square Cipher', engine: 'twosquare', defaultMsg: 'COME QUICKLY WE NEED HELP',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Two Keywords (key1,key2)', value: 'EXAMPLE,KEYWORD', placeholder: 'KEY1,KEY2' }]
+    },
+    straddlingCheckerboard: {
+      label: 'Straddling Checkerboard', engine: 'straddlingCheckerboard',
+      defaultMsg: 'ATTACK AT DAWN',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Top-Row Letters (8)', value: 'ATONESIRE', placeholder: '8 distinct letters' }]
+    },
+    chaocipher: {
+      label: 'Chaocipher', engine: 'chaocipher', defaultMsg: 'WELLDONE IS BETTER THAN WELLSAID',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Initial Alphabet Key', value: 'CHAOCIPHER', placeholder: 'Seed word…' }]
+    },
+    m209: {
+      label: 'M-209 (Hagelin C-38)', engine: 'm209', defaultMsg: 'ENEMY ADVANCING ON FLANK',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Pin Seed', value: 'HAGELIN', placeholder: 'Seed word…' }]
+    },
+    solitaire: {
+      label: 'Solitaire / Pontifex', engine: 'solitaire', defaultMsg: 'DO NOT USE PC',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Deck Key', value: 'CRYPTONOMICON', placeholder: 'Key word…' }]
+    },
+    beale: {
+      label: 'Beale Cipher (book cipher)', engine: 'beale', defaultMsg: 'GOLD',
+      inputs: [{ type: 'textarea', id: 'keyword', label: 'Reference Text (Declaration of Independence excerpt)',
+        value: 'When in the course of human events it becomes necessary for one people to dissolve the political bands which have connected them with another and to assume among the powers of the earth the separate and equal station to which the laws of nature and of natures god entitle them a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation',
+        placeholder: 'Long reference text…' }]
+    },
+    copiale: {
+      label: 'Copiale Cipher', engine: 'copiale', defaultMsg: 'OCULIST ORDER SECRETS',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Symbol Seed', value: 'COPIALE', placeholder: 'Seed word…' }]
+    },
+    kryptos: {
+      label: 'Kryptos K1/K2 Tableau', engine: 'kryptos', defaultMsg: 'BETWEEN SUBTLE SHADING AND THE ABSENCE OF LIGHT',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Vigenère Key', value: 'PALIMPSEST', placeholder: 'PALIMPSEST or ABSCISSA' }]
+    },
+    purple: {
+      label: 'Purple (simplified)', engine: 'purple', defaultMsg: 'CLIMB MOUNT NIITAKA',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Switch Seed', value: 'PURPLE', placeholder: 'Seed word…' }]
     }
   };
 

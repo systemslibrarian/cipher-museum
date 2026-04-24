@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Great Cipher (Grand Chiffre des Rossignols) — The Cipher Museum</title>
+  <meta name="description" content="The Great Cipher of Louis XIV, devised by Antoine and Bonaventure Rossignol — a syllable-based nomenclator with nulls and a famous 'delete the previous letter' trap. Unread for 200 years until Bazeries broke it in 1893.">
+  <meta property="og:title" content="The Great Cipher — The Cipher Museum">
+  <meta property="og:description" content="The Rossignols' nomenclator that protected Louis XIV's secrets for two centuries.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/great-cipher.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Great Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="The Rossignols' nomenclator that protected Louis XIV's secrets for two centuries.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/great-cipher.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: Classical Substitution</a><span>&rsaquo;</span>
+    The Great Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 38 of 38</span>
+    <span class="badge era-renaissance">Baroque · ~1626</span>
+    <span class="badge badge-hard">Unread for 200 years</span>
+  </div>
+  <h1 class="page-title">The Great Cipher</h1>
+  <p class="page-tagline">Le <em>Grand Chiffre</em> of the Rossignols — the nomenclator that kept Louis XIV's secrets for two centuries</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventors</span><span class="fact-value">Antoine &amp; Bonaventure Rossignol</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1626 (used into 1690s)</span></div>
+    <div class="fact"><span class="fact-label">Court</span><span class="fact-value">Louis XIII &amp; Louis XIV of France</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Codebook of ~587 numbered syllables</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Étienne Bazeries · 1893 (after ~3 years)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Decoy tokens &amp; variable-length codewords</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="greatCipher"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Great Cipher is one of history's most successful codes. For over two centuries, French diplomatic and military correspondence sealed by the Rossignols sat in archives — completely unreadable. When the codebook was lost after the Rossignols' deaths, even the French government could no longer decipher its own messages. It took until 1893 for the cryptanalyst Étienne Bazeries to crack it, finally letting historians read the secret correspondence of the Sun King.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Antoine Rossignol (1600–1682) was France's first true cryptanalyst. His talent was discovered at the 1626 siege of Réalmont, where he broke a Huguenot ciphered letter overnight — and the rebels surrendered the next day. Cardinal Richelieu brought him to court, and Antoine, joined by his son Bonaventure, designed a new cipher so strong it became the official cipher of the French crown.</p>
+        <p style="margin-top:1rem;">The Rossignols' code book contained roughly <strong>587 numbers</strong>, each standing for a syllable, a common word, a single letter, or — critically — nothing at all. Some numbers were pure decoys (nulls); at least one number meant <em>"ignore the previous letter"</em>. After Bonaventure's grandson Antoine-Bonaventure died in 1751, the codebook itself vanished, and the Rossignol papers in the French archives became unreadable artifacts.</p>
+        <p style="margin-top:1rem;">In 1890 the historian Victor Gendron passed a stack of these encrypted letters to Étienne Bazeries (see <a href="bazeries.html">Exhibit 21</a>), already famous for breaking diplomatic ciphers. Bazeries spent three years on it. His breakthrough: noticing that one common number was followed only by certain other numbers — and that interpreting it as <em>"delete the previous letter"</em> suddenly produced French words. Among the messages he read was finally an answer to one of history's great mysteries: a 1691 letter naming a prisoner who would later become legend as <strong>"the Man in the Iron Mask."</strong></p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>Unlike a substitution cipher (one symbol per letter), the Great Cipher is a <strong>nomenclator</strong> — a coded vocabulary. The codebook lists numbers paired with syllables:</p>
+        <pre>124 → "les"        301 → "roi"         412 → null (ignore)
+ 87 → "que"        055 → "Q"           333 → null (ignore)
+156 → "men"        702 → "MAJESTÉ"     891 → "DELETE PREVIOUS"
+209 → "ent"        044 → "X"           ...</pre>
+
+        <figure class="figure">
+          <svg viewBox="0 0 460 200" style="max-width:460px;width:100%;height:auto;" aria-label="Great Cipher syllable encoding diagram">
+            <style>
+              .gc-pt{font-family:var(--fd,'Cinzel',serif);font-size:13px;fill:#e8d5a3;text-anchor:middle;dominant-baseline:central;font-weight:700;letter-spacing:.05em}
+              .gc-num{font-family:'JetBrains Mono',monospace;font-size:12px;fill:#d4af37;text-anchor:middle;dominant-baseline:central}
+              .gc-line{stroke:#c8b273;stroke-width:.8;opacity:.55}
+              .gc-lbl{font-family:var(--fm,'Cormorant Garamond',serif);font-size:10px;fill:#888;text-anchor:middle}
+              .gc-syl{fill:rgba(201,168,76,.10);stroke:#c9a84c;stroke-width:.8;rx:4}
+              .gc-sgl{fill:rgba(120,200,180,.08);stroke:#5ac8a0;stroke-width:.8;rx:4}
+              .gc-trap{fill:rgba(200,90,90,.10);stroke:#c85a5a;stroke-width:.9;rx:4}
+              .gc-null{fill:rgba(140,140,140,.10);stroke:#888;stroke-width:.8;stroke-dasharray:3 2;rx:4}
+            </style>
+            <text x="230" y="14" class="gc-lbl" style="font-size:11px;fill:#c9a84c;letter-spacing:.15em">PLAIN: "LE ROI ENTRE"</text>
+            <!-- syllables on top -->
+            <text class="gc-pt" x="60" y="46">LE</text>
+            <text class="gc-pt" x="135" y="46">ROI</text>
+            <text class="gc-pt" x="225" y="46">EN</text>
+            <text class="gc-pt" x="285" y="46">TRE</text>
+            <text class="gc-pt" x="370" y="46">(decoy)</text>
+            <!-- arrows -->
+            <line class="gc-line" x1="60" y1="56" x2="60" y2="86"/>
+            <line class="gc-line" x1="135" y1="56" x2="135" y2="86"/>
+            <line class="gc-line" x1="225" y1="56" x2="225" y2="86"/>
+            <line class="gc-line" x1="285" y1="56" x2="285" y2="86"/>
+            <line class="gc-line" x1="370" y1="56" x2="370" y2="86"/>
+            <!-- code numbers -->
+            <rect class="gc-syl" x="32" y="88" width="56" height="26"/><text class="gc-num" x="60" y="101">124</text>
+            <rect class="gc-syl" x="107" y="88" width="56" height="26"/><text class="gc-num" x="135" y="101">301</text>
+            <rect class="gc-syl" x="197" y="88" width="56" height="26"/><text class="gc-num" x="225" y="101">209</text>
+            <rect class="gc-syl" x="257" y="88" width="56" height="26"/><text class="gc-num" x="285" y="101">476</text>
+            <rect class="gc-null" x="342" y="88" width="56" height="26"/><text class="gc-num" x="370" y="101">412</text>
+            <!-- trap demo -->
+            <text x="230" y="142" class="gc-lbl" style="font-size:11px;fill:#c85a5a;letter-spacing:.15em">…AND ONE NUMBER MEANS "DELETE THE PREVIOUS LETTER"</text>
+            <rect class="gc-sgl" x="40" y="155" width="44" height="24"/><text class="gc-num" x="62" y="167">055</text>
+            <text class="gc-lbl" x="62" y="190">Q</text>
+            <rect class="gc-trap" x="100" y="155" width="56" height="24"/><text class="gc-num" x="128" y="167">891</text>
+            <text class="gc-lbl" x="128" y="190">←DELETE</text>
+            <rect class="gc-sgl" x="172" y="155" width="44" height="24"/><text class="gc-num" x="194" y="167">063</text>
+            <text class="gc-lbl" x="194" y="190">U</text>
+            <text class="gc-num" x="265" y="167" style="font-size:18px;fill:#e8d5a3">⇒</text>
+            <text x="350" y="170" class="gc-lbl" style="font-size:14px;fill:#e8d5a3">decodes as "U" only</text>
+          </svg>
+          <figcaption class="figure-caption">Common syllables get their own codes; nulls are decoys; one trap code erases the previous letter. Bazeries spent three years missing this trick.</figcaption>
+        </figure>
+
+        <p style="margin-top:1rem;">To encrypt, the clerk worked through the message picking the longest matching codeword from the book — <code>RE</code>, <code>EN</code>, <code>TRE</code>, etc. — falling back to single letters only when no syllable matched. Occasionally the clerk would sprinkle in null codes as decoys. To decrypt, you needed the codebook in front of you. Without it, the message was just a long list of three-digit numbers.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Frequency Analysis on Syllables</div>
+          <div class="attack-diff">Complexity: Hard · Took Bazeries ~3 years</div>
+          <p class="attack-desc">Bazeries assumed the codebook used syllables, not just letters. He counted the most frequent codewords across hundreds of letters, hypothesizing that the most common one represented <code>les</code> — by far the most common French syllable. From there he tested combinations against known historical context (place names, royal titles, dates of known events).</p>
+        </div>
+        <div class="attack-panel">
+          <div class="attack-name">The "Delete" Trap</div>
+          <div class="attack-diff">Complexity: The breakthrough insight</div>
+          <p class="attack-desc">For two centuries every attacker assumed each codeword stood for <em>something</em>. Bazeries noticed that one common number, no matter how he interpreted it, produced gibberish — but if he treated it as a command to <em>erase the preceding letter</em>, French words emerged. This single trick — borrowed from the medieval Italian tradition of <em>cifre dolose</em> ("malicious figures") — was what kept the cipher unreadable for so long.</p>
+        </div>
+        <div class="attack-panel">
+          <div class="attack-name">Modern Cryptanalytic Tools</div>
+          <div class="attack-diff">Complexity: Moderate (with computers)</div>
+          <p class="attack-desc">A modern hill-climbing solver, given enough ciphertext and a French syllable-frequency model, can recover most of the codebook in minutes. The cipher's true defense was the labor and time required by 19th-century pen-and-paper analysis, not its mathematical strength.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎭</span><span class="panel-title">The Man in the Iron Mask</span></div>
+      <div class="panel-body">
+        <p>Among the letters Bazeries finally read in 1893 was a dispatch from war minister Louvois to General Catinat dated 1691, discussing the imprisonment of one <strong>"general Vivien de Bulonde"</strong> who had cowardly lifted the siege of Cuneo. The order: arrest him, take him to the fortress of Pignerol, and <em>"have him conducted to the prison at night with a mask on his face."</em></p>
+        <p style="margin-top:1rem;">Bazeries believed this was the famous Iron Mask. Most modern historians disagree — Bulonde was alive and free again by 1708 — but the discovery showed the world that the Great Cipher had finally fallen, and that its protected secrets had been historically significant ones.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from the Great Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Variable-length codewords (syllables, not letters)</td><td>Compression + encryption: encoding redundancy makes plaintext smaller and statistical attacks harder</td></tr>
+            <tr><td>Null tokens / decoys</td><td>Padding schemes (PKCS#7, OAEP) and chaff-and-winnow techniques</td></tr>
+            <tr><td>Hidden control codes ("delete previous")</td><td>Format-aware deception in steganography; honey encryption that produces plausible plaintext for wrong keys</td></tr>
+            <tr><td>Lost codebook = lost messages forever</td><td>Key management is the hard part: a strong cipher with lost keys is indistinguishable from no cipher at all</td></tr>
+            <tr><td>Security through operator skill, not algorithm</td><td>Modern principle (Kerckhoffs): the algorithm should be public; only the key must be secret</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>38 of 38</td></tr>
+            <tr><td>Era</td><td>Baroque · ~1626</td></tr>
+            <tr><td>Security (then)</td><td>Effectively unbreakable for 200 years</td></tr>
+            <tr><td>Security (today)</td><td>Broken by hill-climbing</td></tr>
+            <tr><td>Inventors</td><td>Antoine &amp; Bonaventure Rossignol</td></tr>
+            <tr><td>Codebook size</td><td>~587 numbered codewords</td></tr>
+            <tr><td>Broken By</td><td>Étienne Bazeries · 1893</td></tr>
+            <tr><td>Famous use</td><td>Louis XIV's diplomatic &amp; military mail</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎴</span><span class="panel-title">About this Demo</span></div>
+      <div class="panel-body">
+        <p>The historical Rossignol codebook (587 entries) is lost in detail. This demo uses a teaching-scale codebook — 50 common digrams + 26 letters + 6 nulls + 1 "delete previous" trap (83 codewords) — deterministically generated from the Codebook Seed.</p>
+        <p style="margin-top:.75rem;">Try encoding the same message twice: notice how the output changes because common syllables have multiple codes and nulls are sprinkled in randomly. Decoding always recovers the original (provided the seed matches).</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Related Exhibits -->
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/homophonic.html" class="related-card">
+      <span class="related-card__number">Exhibit 04</span>
+      <span class="related-card__name">Homophonic Substitution</span>
+      <span class="related-card__tag">Same family</span>
+    </a>
+    <a href="../ciphers/dictionary-code.html" class="related-card">
+      <span class="related-card__number">Exhibit 26</span>
+      <span class="related-card__name">Dictionary Code</span>
+      <span class="related-card__tag">Codebook cipher</span>
+    </a>
+    <a href="../ciphers/bazeries.html" class="related-card">
+      <span class="related-card__number">Exhibit 21</span>
+      <span class="related-card__name">Bazeries Cipher</span>
+      <span class="related-card__tag">Built by the breaker</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/zodiac.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Zodiac Cipher</span>
+  </a>
+  <a href="../halls/substitution.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Back to Hall &rarr;</span>
+    <span class="hall-nav-name">Hall II: Classical Substitution</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+        <li><a href="../modern.html">Modern Crypto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Exhibit</div>
+      <ul class="footer-links">
+        <li><a href="homophonic.html">&larr; Related: Homophonic</a></li>
+        <li><a href="bazeries.html">Bazeries — the codebreaker &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 38 of 38</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

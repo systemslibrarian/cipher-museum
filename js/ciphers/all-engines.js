@@ -966,6 +966,561 @@ window.CipherEngines = (() => {
     }
   }))();
 
+  /* ─── 38. Great Cipher (Grand Chiffre des Rossignols) ─── */
+  // Syllable-based nomenclator used by Antoine & Bonaventure Rossignol
+  // for Louis XIV (~1626). Unbroken for 200 years until Étienne Bazeries
+  // cracked it in 1893. Famous features modeled here:
+  //   • Most numbers stand for syllables (not single letters)
+  //   • Some numbers are NULLS (decoy — ignored on decode)
+  //   • One special number means "delete the previous letter" — a trap
+  //     that fooled codebreakers for two centuries
+  const greatCipher = (() => {
+    // 50 of the most common English/French digrams + syllables
+    const SYLL = [
+      'TH','HE','IN','ER','AN','RE','ON','AT','EN','ND',
+      'ES','OR','TE','OF','ED','IS','IT','AL','AR','ST',
+      'TO','NT','NG','SE','HA','AS','OU','IO','LE','VE',
+      'CO','ME','DE','HI','RI','RO','IC','NE','EA','RA',
+      'CE','LI','CH','LL','BE','MA','SI','OM','UR','CA'
+    ];
+    const SINGLES = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const NULL = '__NULL__';
+    const TRAP = '__DEL__'; // "delete the previous letter" — Bazeries' breakthrough
+    // 50 syllables + 26 singles + 6 nulls + 1 trap = 83 codewords (numbers 100–182)
+    const TOKENS = [...SYLL, ...SINGLES, NULL, NULL, NULL, NULL, NULL, NULL, TRAP];
+
+    function buildTable(seed) {
+      const k = (clean(seed || 'ROI') + 'LOUISXIV');
+      let s = 0;
+      for (let i = 0; i < k.length; i++) s = (s * 131 + k.charCodeAt(i)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      const nums = TOKENS.map((_, i) => 100 + i);
+      // Fisher–Yates shuffle, deterministic from seed
+      for (let i = nums.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+      }
+      const enc = {}, dec = {}, nulls = [];
+      TOKENS.forEach((tok, i) => {
+        const n = nums[i];
+        dec[n] = tok;
+        if (tok === NULL) { nulls.push(n); }
+        else { (enc[tok] = enc[tok] || []).push(n); }
+      });
+      return { enc, dec, nulls };
+    }
+
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        if (!t) return '';
+        const { enc, nulls } = buildTable(key);
+        // Sort syllables longest-first for greedy match
+        const sortedSyll = SYLL.slice().sort((a, b) => b.length - a.length);
+        let s = 0;
+        const k2 = (clean(key || 'ROI') + 'BOURBON');
+        for (let i = 0; i < k2.length; i++) s = (s * 17 + k2.charCodeAt(i)) & 0x7fffffff;
+        if (s === 0) s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+
+        const out = [];
+        let i = 0;
+        while (i < t.length) {
+          // Occasional null insertion (~10%) — historical decoy
+          if (out.length > 0 && rng() < 0.1 && nulls.length) {
+            out.push(String(nulls[Math.floor(rng() * nulls.length)]).padStart(3, '0'));
+          }
+          let matched = null;
+          for (const syl of sortedSyll) {
+            if (t.startsWith(syl, i) && enc[syl]) { matched = syl; break; }
+          }
+          let tok;
+          if (matched) { tok = matched; i += matched.length; }
+          else { tok = t[i]; i++; }
+          const opts = enc[tok];
+          if (opts && opts.length) {
+            out.push(String(opts[Math.floor(rng() * opts.length)]).padStart(3, '0'));
+          } else {
+            out.push('???');
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { dec } = buildTable(key);
+        const nums = (text.match(/\d{2,4}/g) || []).map(n => parseInt(n, 10));
+        let out = '';
+        for (const n of nums) {
+          const tok = dec[n];
+          if (tok === undefined) { out += '?'; continue; }
+          if (tok === NULL) continue;
+          if (tok === TRAP) { out = out.slice(0, -1); continue; }
+          out += tok;
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 39. Atbash (ancient Hebrew reflection cipher) ─── */
+  const atbash = (() => {
+    const run = t => t.split('').map(ch => {
+      const c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90)  return String.fromCharCode(90  - (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCharCode(122 - (c - 97));
+      return ch;
+    }).join('');
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 40. ROT13 (special-case Caesar) ─── */
+  const rot13 = (() => {
+    const run = t => caesar.encode(t, 13);
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 41. Four-Square Cipher (Delastelle) ─── */
+  const foursquare = (() => {
+    const G = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'; // 25 letters, J→I
+    function makeSquare(key) {
+      const k = clean(key || 'EXAMPLE').replace(/J/g, 'I');
+      const seen = new Set(); let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of G) if (!seen.has(c)) s += c;
+      return s;
+    }
+    function pos(sq, ch) { const i = sq.indexOf(ch); return [Math.floor(i / 5), i % 5]; }
+    function run(text, key, enc) {
+      const [k1, k2] = (key || 'EXAMPLE,KEYWORD').split(',');
+      const TL = G, TR = makeSquare(k1), BL = makeSquare(k2), BR = G;
+      let t = clean(text).replace(/J/g, 'I');
+      if (t.length % 2) t += 'X';
+      let out = '';
+      for (let i = 0; i < t.length; i += 2) {
+        const a = t[i], b = t[i + 1];
+        if (enc) {
+          const [r1, c1] = pos(TL, a); const [r2, c2] = pos(BR, b);
+          out += TR[r1 * 5 + c2] + BL[r2 * 5 + c1];
+        } else {
+          const [r1, c1] = pos(TR, a); const [r2, c2] = pos(BL, b);
+          out += TL[r1 * 5 + c2] + BR[r2 * 5 + c1];
+        }
+      }
+      return out;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 42. Two-Square Cipher (horizontal variant) ─── */
+  const twosquare = (() => {
+    const G = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
+    function makeSquare(key) {
+      const k = clean(key || 'EXAMPLE').replace(/J/g, 'I');
+      const seen = new Set(); let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of G) if (!seen.has(c)) s += c;
+      return s;
+    }
+    function pos(sq, ch) { const i = sq.indexOf(ch); return [Math.floor(i / 5), i % 5]; }
+    function run(text, key, enc) {
+      const [k1, k2] = (key || 'EXAMPLE,KEYWORD').split(',');
+      const L = makeSquare(k1), R = makeSquare(k2);
+      let t = clean(text).replace(/J/g, 'I');
+      if (t.length % 2) t += 'X';
+      let out = '';
+      for (let i = 0; i < t.length; i += 2) {
+        const a = t[i], b = t[i + 1];
+        const [r1, c1] = pos(enc ? L : L, a);
+        const [r2, c2] = pos(enc ? R : R, b);
+        if (r1 === r2) { out += L[r1 * 5 + c1] + R[r2 * 5 + c2]; } // same row → unchanged
+        else { out += L[r1 * 5 + c2] + R[r2 * 5 + c1]; }
+      }
+      return out;
+    }
+    // Two-square is reciprocal in the "no-flip" variant we use
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 43. Straddling Checkerboard (Soviet hand cipher core) ─── */
+  const straddlingCheckerboard = (() => {
+    function build(key) {
+      // Top row letters (8 most-frequent slots, 0–9 minus the two "escape" digits)
+      const k = clean(key || 'ATONESIRE');
+      const seen = new Set(); let topAlpha = '';
+      for (const c of k) if (!seen.has(c) && topAlpha.length < 8) { seen.add(c); topAlpha += c; }
+      // Pad if keyword too short (shouldn't happen with default)
+      for (const c of A) if (!seen.has(c) && topAlpha.length < 8) { seen.add(c); topAlpha += c; }
+      // Remaining 18 letters fill rows 2/6 (the two escape digits)
+      let rest = '';
+      for (const c of A) if (!seen.has(c)) rest += c;
+      // Top row digit slots: 0,1,3,4,5,6,8,9  (escape=2 and 7)
+      const topSlots = [0, 1, 3, 4, 5, 6, 8, 9];
+      const enc = {}, dec = {};
+      topAlpha.split('').forEach((ch, i) => {
+        const code = String(topSlots[i]);
+        enc[ch] = code; dec[code] = ch;
+      });
+      rest.split('').forEach((ch, i) => {
+        const prefix = i < 10 ? '2' : '7';
+        const digit  = String(i % 10);
+        const code = prefix + digit;
+        enc[ch] = code; dec[code] = ch;
+      });
+      return { enc, dec };
+    }
+    return {
+      encode: (text, key) => {
+        const { enc } = build(key);
+        return clean(text).split('').map(c => enc[c] || '').join('');
+      },
+      decode: (text, key) => {
+        const { dec } = build(key);
+        const digits = text.replace(/\D/g, '');
+        let out = '', i = 0;
+        while (i < digits.length) {
+          const d = digits[i];
+          if (d === '2' || d === '7') {
+            const pair = digits.substr(i, 2);
+            if (dec[pair]) { out += dec[pair]; i += 2; continue; }
+          }
+          if (dec[d]) { out += dec[d]; }
+          i++;
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 44. Chaocipher (Byrne, 1918) ─── */
+  const chaocipher = (() => {
+    function init(key) {
+      // Two 26-char alphabets seeded from key
+      const k = clean(key || 'CHAOCIPHER');
+      const seen = new Set(); let base = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); base += c; }
+      for (const c of A) if (!seen.has(c)) base += c;
+      // Right alphabet rotated by 13 from left for variety
+      const right = base.slice(13) + base.slice(0, 13);
+      return [base.split(''), right.split('')];
+    }
+    function permuteLeft(L) {
+      // Take char at position 1 (zenith+1), shift to end after zenith
+      // Standard Byrne permutation:
+      // 1. rotate so the just-enciphered letter (currently at idx 0) is at zenith → already there
+      // 2. extract char at position 1, insert at position 13 (after splitting)
+      const ch = L.splice(1, 1)[0];
+      L.splice(13, 0, ch);
+      return L;
+    }
+    function permuteRight(R) {
+      // Rotate so just-enciphered plaintext letter (at idx 0) → moves so that
+      // the next letter (idx 1) goes to zenith (idx 0); then take char at
+      // position 2 and insert at position 13.
+      // Per Byrne: shift entire alphabet one to the left (rotation), then
+      // extract char at position 2 and insert at position 13.
+      R.push(R.shift()); // rotate one position left
+      const ch = R.splice(2, 1)[0];
+      R.splice(13, 0, ch);
+      return R;
+    }
+    return {
+      encode: (text, key) => {
+        let [L, R] = init(key);
+        const t = clean(text); let out = '';
+        for (const ch of t) {
+          const idx = R.indexOf(ch);
+          if (idx < 0) continue;
+          out += L[idx];
+          // rotate both so the touched chars are at zenith (idx 0)
+          for (let i = 0; i < idx; i++) { L.push(L.shift()); R.push(R.shift()); }
+          L = permuteLeft(L);
+          R = permuteRight(R);
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        let [L, R] = init(key);
+        const t = clean(text); let out = '';
+        for (const ch of t) {
+          const idx = L.indexOf(ch);
+          if (idx < 0) continue;
+          out += R[idx];
+          for (let i = 0; i < idx; i++) { L.push(L.shift()); R.push(R.shift()); }
+          L = permuteLeft(L);
+          R = permuteRight(R);
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 45. M-209 (Hagelin C-38 — simplified pin-and-lug) ─── */
+  // Six pinwheels with co-prime lengths 26,25,23,21,19,17 = period 101,405,850
+  // Each wheel has active pins (1) or not (0); active pins sum to a "lug count"
+  // that gives a Beaufort-style key shift each character.
+  const m209 = (() => {
+    const lengths = [26, 25, 23, 21, 19, 17];
+    function buildPins(key) {
+      const k = (clean(key || 'HAGELIN') + 'M209').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // Each wheel: random pin pattern (~50% active)
+      return lengths.map(L => Array.from({ length: L }, () => rng() < 0.5 ? 1 : 0));
+    }
+    function shiftFor(pos, pins) {
+      // Sum of active pins across all 6 wheels at this position = key shift
+      let s = 0;
+      for (let w = 0; w < 6; w++) s += pins[w][pos % lengths[w]];
+      return s; // 0..6
+    }
+    function run(text, key) {
+      const pins = buildPins(key);
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const k = shiftFor(i, pins);
+        // Beaufort: c = (K - p) mod 26  → involutive (encode = decode)
+        out += A[mod(k - (t.charCodeAt(i) - 65), 26)];
+      }
+      return out;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 46. Solitaire / Pontifex (Schneier, 1999) ─── */
+  // Card-deck stream cipher. Deck of 54 (52 cards + 2 jokers).
+  const solitaire = (() => {
+    // Card values: 1..52 = clubs, diamonds, hearts, spades A..K
+    // Jokers: A=53, B=54
+    function initDeck(key) {
+      const deck = [];
+      for (let i = 1; i <= 54; i++) deck.push(i);
+      const k = clean(key || 'CRYPTONOMICON');
+      // Key the deck: for each key letter, do one "cycle" then count-cut by letter value
+      function step(deck) { return solitaireStep(deck); }
+      let d = deck.slice();
+      for (const ch of k) {
+        d = step(d);
+        const v = ch.charCodeAt(0) - 64; // A=1
+        d = countCut(d, v);
+      }
+      return d;
+    }
+    function moveDown(deck, card, n) {
+      const i = deck.indexOf(card);
+      const arr = deck.slice();
+      arr.splice(i, 1);
+      let j = i + n;
+      // wrap as if circular with last card sticky
+      if (j > arr.length) j = ((j - 1) % arr.length) + 1;
+      arr.splice(j, 0, card);
+      return arr;
+    }
+    function tripleCut(deck) {
+      const i1 = deck.indexOf(53);
+      const i2 = deck.indexOf(54);
+      const [a, b] = i1 < i2 ? [i1, i2] : [i2, i1];
+      const top = deck.slice(0, a);
+      const mid = deck.slice(a, b + 1);
+      const bot = deck.slice(b + 1);
+      return bot.concat(mid).concat(top);
+    }
+    function countCut(deck, n) {
+      const last = deck[deck.length - 1];
+      const cut = Math.min(n, 53);
+      const top = deck.slice(0, cut);
+      const rest = deck.slice(cut, deck.length - 1);
+      return rest.concat(top).concat([last]);
+    }
+    function solitaireStep(deck) {
+      // Move A joker (53) down 1
+      let d = moveDown(deck, 53, 1);
+      // Move B joker (54) down 2
+      d = moveDown(d, 54, 2);
+      // Triple cut around the jokers
+      d = tripleCut(d);
+      // Count cut by value of bottom card (jokers count as 53)
+      const bottom = d[d.length - 1];
+      d = countCut(d, bottom === 54 ? 53 : bottom);
+      return d;
+    }
+    function nextKeystream(deck) {
+      while (true) {
+        deck = solitaireStep(deck);
+        const top = deck[0];
+        const cnt = top === 54 ? 53 : top;
+        const out = deck[cnt]; // 0-indexed: count cards down
+        if (out === 53 || out === 54) continue; // skip jokers
+        return { value: ((out - 1) % 26) + 1, deck };
+      }
+    }
+    function run(text, key, enc) {
+      let deck = initDeck(key);
+      const t = clean(text); let out = '';
+      for (const ch of t) {
+        const r = nextKeystream(deck); deck = r.deck;
+        const p = ch.charCodeAt(0) - 64;
+        const c = enc ? ((p + r.value - 1) % 26) + 1 : ((p - r.value + 26 - 1) % 26) + 1;
+        out += String.fromCharCode(64 + (c === 0 ? 26 : c));
+      }
+      return out;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 47. Beale Cipher (book cipher — number = Nth word, take first letter) ─── */
+  const beale = (() => {
+    function tokens(book) {
+      return (book || '').split(/[^A-Za-z]+/).filter(Boolean).map(w => w.toUpperCase());
+    }
+    return {
+      encode: (text, book) => {
+        const ws = tokens(book);
+        if (!ws.length) return '';
+        // For each plaintext letter, find a word in the book starting with it
+        const indexByLetter = {};
+        ws.forEach((w, i) => {
+          const c = w[0];
+          (indexByLetter[c] = indexByLetter[c] || []).push(i + 1);
+        });
+        const t = clean(text); const out = [];
+        let s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        for (const ch of t) {
+          const choices = indexByLetter[ch];
+          if (!choices || !choices.length) { out.push('?'); continue; }
+          out.push(String(choices[Math.floor(rng() * choices.length)]));
+        }
+        return out.join(' ');
+      },
+      decode: (text, book) => {
+        const ws = tokens(book);
+        const nums = (text.match(/\d+/g) || []).map(n => parseInt(n, 10));
+        return nums.map(n => (ws[n - 1] ? ws[n - 1][0] : '?')).join('');
+      }
+    };
+  })();
+
+  /* ─── 48. Copiale Cipher (homophonic substitution; demo uses simplified alphabet) ─── */
+  const copiale = (() => {
+    // Real Copiale uses ~90 unique symbols. We simulate with letter+digit pairs.
+    const symbolPool = (() => {
+      const arr = [];
+      for (const a of A) for (const d of '0123456789') arr.push(a + d);
+      return arr; // 260 symbols
+    })();
+    const freq = { E: 13, T: 9, A: 8, O: 8, I: 7, N: 7, S: 6, H: 6, R: 6, D: 4, L: 4, C: 3, U: 3, M: 3, W: 2, F: 2, G: 2, Y: 2, P: 2, B: 1, V: 1, K: 1, J: 1, X: 1, Q: 1, Z: 1 };
+    function build(key) {
+      const k = clean(key || 'COPIALE') + 'OCULIST';
+      let s = 0; for (let i = 0; i < k.length; i++) s = (s * 131 + k.charCodeAt(i)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      const pool = symbolPool.slice().sort((a, b) => {
+        const ha = (a.charCodeAt(0) * 31 + a.charCodeAt(1)) ^ Math.floor(rng() * 1e6);
+        const hb = (b.charCodeAt(0) * 31 + b.charCodeAt(1)) ^ Math.floor(rng() * 1e6);
+        return ha - hb;
+      });
+      const enc = {}, dec = {}; let pi = 0;
+      for (const ch of A) {
+        const n = freq[ch] || 1; enc[ch] = [];
+        for (let i = 0; i < n; i++) {
+          const sym = pool[pi++]; enc[ch].push(sym); dec[sym] = ch;
+        }
+      }
+      return { enc, dec };
+    }
+    return {
+      encode: (text, key) => {
+        const { enc } = build(key);
+        let s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        return clean(text).split('').map(ch => {
+          const opts = enc[ch]; if (!opts) return '??';
+          return opts[Math.floor(rng() * opts.length)];
+        }).join(' ');
+      },
+      decode: (text, key) => {
+        const { dec } = build(key);
+        const toks = (text.match(/[A-Z]\d/g) || []);
+        return toks.map(t => dec[t] || '?').join('');
+      }
+    };
+  })();
+
+  /* ─── 49. Kryptos K1/K2-style (Vigenère with custom KRYPTOS-keyed tableau) ─── */
+  const kryptos = (() => {
+    // Custom alphabet: keyword KRYPTOS then remaining letters
+    function ktAlpha() {
+      const k = 'KRYPTOS';
+      const seen = new Set(); let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of A) if (!seen.has(c)) s += c;
+      return s;
+    }
+    const KT = ktAlpha();
+    function run(text, key, enc) {
+      const k = clean(key || 'PALIMPSEST');
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const pIdx = KT.indexOf(t[i]);
+        const kIdx = KT.indexOf(k[i % k.length]);
+        if (pIdx < 0 || kIdx < 0) { out += t[i]; continue; }
+        out += KT[mod(enc ? pIdx + kIdx : pIdx - kIdx, 26)];
+      }
+      return out;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 50. Purple (Japanese WWII — simplified stepping rotor model) ─── */
+  // The real Purple split letters into "sixes" (6 vowels) and "twenties" (20 consonants)
+  // routed through stepping switches. We model the essence: a substitution that
+  // changes per character based on three stepping wheels.
+  const purple = (() => {
+    function build(key) {
+      const k = (clean(key || 'PURPLE') + 'TOKYO').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // 25 substitution alphabets (simulating switch positions)
+      const alphas = [];
+      for (let i = 0; i < 25; i++) {
+        const arr = A.split('');
+        for (let j = arr.length - 1; j > 0; j--) {
+          const r = Math.floor(rng() * (j + 1));
+          [arr[j], arr[r]] = [arr[r], arr[j]];
+        }
+        alphas.push(arr.join(''));
+      }
+      return alphas;
+    }
+    function step(i) {
+      // Three wheels with periods 25, 24, 23 — pick alphabet by their sum
+      return ((i % 25) + Math.floor(i / 25) % 24 + Math.floor(i / 600) % 23) % 25;
+    }
+    return {
+      encode: (text, key) => {
+        const alphas = build(key);
+        const t = clean(text); let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const a = alphas[step(i)];
+          out += a[A.indexOf(t[i])];
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const alphas = build(key);
+        const t = clean(text); let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const a = alphas[step(i)];
+          out += A[a.indexOf(t[i])];
+        }
+        return out;
+      }
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -975,6 +1530,8 @@ window.CipherEngines = (() => {
     otp, fractionatedMorse, confederateVigenere,
     bazeries, alberti, jefferson, enigma, lorenz,
     dictionaryCode, stager, vic,
-    scytale, vernam
+    scytale, vernam, greatCipher,
+    atbash, rot13, foursquare, twosquare, straddlingCheckerboard,
+    chaocipher, m209, solitaire, beale, copiale, kryptos, purple
   };
 })();

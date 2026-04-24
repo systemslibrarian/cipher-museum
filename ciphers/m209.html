@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M-209 (Hagelin C-38) — The Cipher Museum</title>
+  <meta name="description" content="The US Army's portable WWII pin-and-lug cipher machine">
+  <meta property="og:title" content="M-209 (Hagelin C-38) — The Cipher Museum">
+  <meta property="og:description" content="The US Army's portable WWII pin-and-lug cipher machine">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/m209.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="M-209 (Hagelin C-38) — The Cipher Museum">
+  <meta name="twitter:description" content="The US Army's portable WWII pin-and-lug cipher machine">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/m209.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    M-209 (Hagelin C-38)
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 45 of 49</span>
+    <span class="badge era-19c">World War II · 1940</span>
+    <span class="badge sec-strong">Strong (tactical)</span>
+  </div>
+  <h1 class="page-title">M-209 (Hagelin C-38)</h1>
+  <p class="page-tagline">The US Army's portable WWII pin-and-lug cipher machine</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Boris Hagelin (Sweden)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1940 (US Army adoption)</span></div>
+    <div class="fact"><span class="fact-label">Production</span><span class="fact-value">~140,000 units (Smith Corona, US)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">6 pinwheels (lengths 26, 25, 23, 21, 19, 17) + 27 lug bars</span></div>
+    <div class="fact"><span class="fact-label">Period</span><span class="fact-value">101,405,850 letters (LCM of wheel lengths)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Mechanical key streams need long periods</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="m209"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Boris Hagelin's C-38 design, sold to the US Army as the M-209, became the standard tactical cipher of American forces in WWII. Compact (about the size of a hardcover book), it weighed 2.7 kg and ran without electricity — a clerk operated it by hand, advancing a wheel and reading off ciphertext one letter at a time. Hagelin became the first millionaire in cryptography from this single contract.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Hagelin's family company — Cryptoteknik in Stockholm — had been producing pin-and-lug machines since the 1920s. When Germany invaded Norway in 1940, Hagelin escaped to the United States with the C-38 design rolled up under his arm. The US Signal Corps bought it, mass-produced it as the M-209, and shipped 140,000 units to the front lines. The cipher was known to be vulnerable to skilled cryptanalysis (German B-Dienst broke many M-209 messages), so it was used only for tactical traffic — operational orders meant to be obsolete within hours of being intercepted.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Six pinwheels with co-prime lengths (26, 25, 23, 21, 19, 17) advance one position per letter. Each wheel has tiny pins around its edge, set to "active" or "inactive" by the operator. A bank of 27 lug bars reads which wheels are currently active and produces a number K from 0 to 27 — the key shift for the current letter. Encryption uses a Beaufort transformation:<br><br><pre>cipher = (K - plaintext) mod 26</pre>Because the wheel lengths are pairwise co-prime, the key sequence has period 26 × 25 × 23 × 21 × 19 × 17 = <strong>101,405,850</strong> letters before repeating.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Known-Plaintext Attack</div><div class="attack-diff">Complexity: Hard (in the field) · Moderate (with computers)</div><p class="attack-desc">If an attacker knows or guesses the plaintext of a message (a stereotyped opening, known place name, time stamp), the resulting key stream constrains the lug settings. German cryptanalysts in WWII broke many M-209 messages this way, though it took hours per message.</p></div><div class="attack-panel"><div class="attack-name">Statistical Lug Recovery</div><div class="attack-diff">Complexity: Moderate (with sufficient ciphertext)</div><p class="attack-desc">Because the key is a sum of binary signals modulo 26, certain shift values are over- or under-represented. With enough ciphertext, a statistical attack on the key distribution recovers the lug count for each wheel.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from M-209 (Hagelin C-38)</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Pin-and-lug as keystream generator</td><td>Modern LFSR (linear feedback shift register) stream ciphers</td></tr>
+            <tr><td>Co-prime period maximization</td><td>Same trick used in pseudo-random number generators today</td></tr>
+            <tr><td>Beaufort involution</td><td>Encryption and decryption use the same operation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>45 of 49</td></tr>
+            <tr><td>Era</td><td>World War II · 1940</td></tr>
+            <tr><td>Security</td><td>Strong (tactical)</td></tr>
+            <tr><td>Inventor</td><td>Boris Hagelin (Sweden)</td></tr>
+            <tr><td>Year</td><td>1940 (US Army adoption)</td></tr>
+            <tr><td>Production</td><td>~140,000 units (Smith Corona, US)</td></tr>
+            <tr><td>Key Type</td><td>6 pinwheels (lengths 26, 25, 23, 21, 19, 17) + 27 lug bars</td></tr>
+            <tr><td>Period</td><td>101,405,850 letters (LCM of wheel lengths)</td></tr>
+            <tr><td>Modern Lesson</td><td>Mechanical key streams need long periods</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma Machine</span>
+      <span class="related-card__tag">Contemporary German equivalent</span>
+    </a>
+    <a href="../ciphers/lorenz.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Lorenz Cipher</span>
+      <span class="related-card__tag">Strategic-level German equivalent</span>
+    </a>
+    <a href="../ciphers/vic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">VIC Cipher</span>
+      <span class="related-card__tag">Cold War successor philosophy</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/enigma.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Enigma Machine</span>
+  </a>
+  <a href="../ciphers/lorenz.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Lorenz Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 45 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

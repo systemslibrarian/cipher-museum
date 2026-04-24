@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROT13 — The Cipher Museum</title>
+  <meta name="description" content="The Caesar cipher with shift 13 — its own inverse, ubiquitous on the early internet">
+  <meta property="og:title" content="ROT13 — The Cipher Museum">
+  <meta property="og:description" content="The Caesar cipher with shift 13 — its own inverse, ubiquitous on the early internet">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/rot13.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ROT13 — The Cipher Museum">
+  <meta name="twitter:description" content="The Caesar cipher with shift 13 — its own inverse, ubiquitous on the early internet">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/rot13.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: Birth of Cryptography</a><span>&rsaquo;</span>
+    ROT13
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 40 of 49</span>
+    <span class="badge era-19c">Modern · 1980s</span>
+    <span class="badge sec-broken">Trivial</span>
+  </div>
+  <h1 class="page-title">ROT13</h1>
+  <p class="page-tagline">The Caesar cipher with shift 13 — its own inverse, ubiquitous on the early internet</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Usenet net.jokes culture (~1983)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1983 (popularized)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">None (fixed shift of 13)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Knowing the system</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Obfuscation ≠ encryption</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="rot13"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>ROT13 is a special case of the Caesar cipher with shift 13. Because the English alphabet has 26 letters, applying ROT13 twice returns the original — so the same operation encrypts and decrypts. It became the conventional way on early Usenet to hide spoilers, punchlines, and offensive jokes from readers who did not want to see them.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>ROT13 has no inventor — it emerged from Usenet convention in the early 1980s. It was never meant to be secure. Its role was social: a small mechanical step the reader had to take to opt in to seeing potentially objectionable content. Most Usenet readers had a single keystroke bound to ROT13. The cipher remains in active use today in puzzle games and in spoiler tags.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Shift each letter forward by 13:<br><br><pre>HELLO → URYYB
+URYYB → HELLO   (apply twice = original)</pre>Because 13 + 13 = 26 = 0 (mod 26), the operation is its own inverse.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Knowing It Is ROT13</div><div class="attack-diff">Complexity: None</div><p class="attack-desc">There is no key. The transformation is fixed and public. ROT13 provides zero confidentiality. Its only value is mild reader effort — enough to prevent accidental viewing, not enough to deter even a curious reader.</p></div><div class="attack-panel"><div class="attack-name">Variants Equally Weak</div><div class="attack-diff">Complexity: None</div><p class="attack-desc">ROT5 (digits) and ROT47 (printable ASCII) are similar conventions for hiding text. None offer security; all are decoded by inspection.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from ROT13</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Self-inverse over the alphabet</td><td>XOR with the same key in stream ciphers</td></tr>
+            <tr><td>Convention as opt-in viewing</td><td>Modern spoiler-tags and content-warning toggles</td></tr>
+            <tr><td>Obfuscation vs. encryption</td><td>Modern crypto distinguishes confidentiality from mere encoding</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>40 of 49</td></tr>
+            <tr><td>Era</td><td>Modern · 1980s</td></tr>
+            <tr><td>Security</td><td>Trivial</td></tr>
+            <tr><td>Origin</td><td>Usenet net.jokes culture (~1983)</td></tr>
+            <tr><td>Year</td><td>~1983 (popularized)</td></tr>
+            <tr><td>Key Type</td><td>None (fixed shift of 13)</td></tr>
+            <tr><td>Broken By</td><td>Knowing the system</td></tr>
+            <tr><td>Modern Lesson</td><td>Obfuscation ≠ encryption</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/caesar.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Caesar Cipher</span>
+      <span class="related-card__tag">Parent shift cipher</span>
+    </a>
+    <a href="../ciphers/atbash.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Atbash</span>
+      <span class="related-card__tag">Other reflection cipher</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/atbash.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Atbash</span>
+  </a>
+  <a href="../ciphers/polybius.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Polybius Square</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: Birth of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 40 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

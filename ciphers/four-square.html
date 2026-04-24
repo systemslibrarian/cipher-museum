@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Four-Square Cipher — The Cipher Museum</title>
+  <meta name="description" content="Delastelle's digram cipher: four 5×5 squares, two of them keyed">
+  <meta property="og:title" content="Four-Square Cipher — The Cipher Museum">
+  <meta property="og:description" content="Delastelle's digram cipher: four 5×5 squares, two of them keyed">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/four-square.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Four-Square Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="Delastelle's digram cipher: four 5×5 squares, two of them keyed">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/four-square.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/substitution.html">Hall II: Classical Substitution</a><span>&rsaquo;</span>
+    Four-Square Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 41 of 49</span>
+    <span class="badge era-19c">Late 19th Century · ~1902</span>
+    <span class="badge sec-broken">Moderate</span>
+  </div>
+  <h1 class="page-title">Four-Square Cipher</h1>
+  <p class="page-tagline">Delastelle's digram cipher: four 5×5 squares, two of them keyed</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Félix Delastelle (France)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1902</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Two keywords (two keyed squares)</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Digram frequency analysis · simulated annealing</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Fixed mappings preserve digram statistics</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="foursquare"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Félix Delastelle invented several fractionation ciphers (Bifid, Trifid, Four-square). The Four-square is his digraphic cousin to Playfair: encrypt letters two at a time, but use two keyed alphabets instead of one. It avoids Playfair's "same row / same column / same letter" edge cases and the needed insertion of X between doubled letters.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Published in his 1902 book Traité Élémentaire de Cryptographie, the Four-square joined the Bifid and Trifid in Delastelle's portfolio of methods built on the Polybius square. Though never adopted by a major military, it was used by amateur cipher clubs through the 20th century and remains a popular puzzle.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Arrange four 5×5 squares (J merged into I) in a 2×2 grid. The top-left and bottom-right are plain alphabets; the top-right and bottom-left are keyed.<br><br><pre>┌─────────────┬─────────────┐
+│  PLAIN A→Z  │  KEY 1      │
+├─────────────┼─────────────┤
+│  KEY 2      │  PLAIN A→Z  │
+└─────────────┴─────────────┘</pre>To encrypt a digram: locate the first letter in the top-left and the second in the bottom-right. Read the cipher digram from the top-right (row of letter 1, column of letter 2) and the bottom-left (row of letter 2, column of letter 1).</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Digram Frequency Analysis</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">Although single-letter frequencies are flattened, digram frequencies are merely substituted. TH, HE, IN, ER, AN — the most common English digrams — appear with roughly the same frequencies in the ciphertext, just under different letter pairs. With several hundred characters, automated solvers can recover the keys.</p></div><div class="attack-panel"><div class="attack-name">Simulated Annealing</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">Modern hill-climbers score candidate key-square pairs by English digram log-frequencies and converge to the correct keys in seconds.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Four-Square Cipher</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Digram-level encryption</td><td>AES operates on 128-bit blocks — same idea, more bits</td></tr>
+            <tr><td>Multiple keyed tables</td><td>Modern S-box design uses multiple tabulated nonlinear maps</td></tr>
+            <tr><td>Avoiding edge cases (same-row/col)</td><td>AES MixColumns provides clean, edge-case-free diffusion</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>41 of 49</td></tr>
+            <tr><td>Era</td><td>Late 19th Century · ~1902</td></tr>
+            <tr><td>Security</td><td>Moderate</td></tr>
+            <tr><td>Inventor</td><td>Félix Delastelle (France)</td></tr>
+            <tr><td>Year</td><td>~1902</td></tr>
+            <tr><td>Key Type</td><td>Two keywords (two keyed squares)</td></tr>
+            <tr><td>Broken By</td><td>Digram frequency analysis · simulated annealing</td></tr>
+            <tr><td>Modern Lesson</td><td>Fixed mappings preserve digram statistics</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/playfair.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Playfair Cipher</span>
+      <span class="related-card__tag">Single-square digram cousin</span>
+    </a>
+    <a href="../ciphers/twosquare.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Two-Square Cipher</span>
+      <span class="related-card__tag">Simpler sibling</span>
+    </a>
+    <a href="../ciphers/bifid.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Bifid</span>
+      <span class="related-card__tag">Same inventor (Delastelle)</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/playfair.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Playfair Cipher</span>
+  </a>
+  <a href="../ciphers/twosquare.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Two-Square Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/substitution.html">Hall II: Classical Substitution</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 41 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

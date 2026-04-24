@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Straddling Checkerboard — The Cipher Museum</title>
+  <meta name="description" content="Variable-length digit codes for letters — the heart of Soviet hand ciphers">
+  <meta property="og:title" content="Straddling Checkerboard — The Cipher Museum">
+  <meta property="og:description" content="Variable-length digit codes for letters — the heart of Soviet hand ciphers">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/straddling-checkerboard.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Straddling Checkerboard — The Cipher Museum">
+  <meta name="twitter:description" content="Variable-length digit codes for letters — the heart of Soviet hand ciphers">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/straddling-checkerboard.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a><span>&rsaquo;</span>
+    Straddling Checkerboard
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 43 of 49</span>
+    <span class="badge era-19c">Late 19th – 20th Century</span>
+    <span class="badge sec-weak">Weak (alone) · Strong (in VIC)</span>
+  </div>
+  <h1 class="page-title">Straddling Checkerboard</h1>
+  <p class="page-tagline">Variable-length digit codes for letters — the heart of Soviet hand ciphers</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Russian / Soviet hand ciphers</span></div>
+    <div class="fact"><span class="fact-label">First documented</span><span class="fact-value">Late 1800s nihilist groups</span></div>
+    <div class="fact"><span class="fact-label">Famous use</span><span class="fact-value">Inside the VIC cipher (Reino Häyhänen, 1950s)</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">8 high-frequency letters in row 0</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Variable-length codes resist character-aligned attacks</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="straddlingCheckerboard"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The straddling checkerboard converts letters to digits using variable-length codes — common letters (E, T, A, O, N, S, I, R) get a single digit; rarer letters get a two-digit code starting with one of two "escape" digits. Because the boundaries between codes are not aligned to fixed column widths, attackers cannot simply slice the ciphertext into uniform blocks. It became a building block in many Soviet hand ciphers, most famously VIC.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The technique appears in late-19th-century anarchist and nihilist correspondence in Russia, where pamphlets had to be encrypted by amateurs working from memory. Soviet intelligence later adopted it as the substitution layer of the VIC cipher carried by deep-cover agent Reino Häyhänen, exposed in 1957 when he defected and revealed the system to the FBI.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Place 8 high-frequency letters along row 0 (the digits 0–9 minus two escape digits, here 2 and 7):<br><br><pre>     0 1 2 3 4 5 6 7 8 9
+  →  A T   O N E S   I R
+  2: B C D F G H J K L M     (prefix 2)
+  7: P Q U V W X Y Z         (prefix 7)</pre>Single-digit codes for top-row letters; two-digit codes for the rest. Decode by reading left to right, treating 2 and 7 as escape digits.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Frequency Analysis on Digits</div><div class="attack-diff">Complexity: Easy (used alone)</div><p class="attack-desc">By itself, the checkerboard is just a substitution from letters to digits. Counting digit frequencies and pair frequencies recovers the alphabet in minutes. Its strength only emerges when combined with additional layers — additive keys, transposition, chain addition — as in VIC.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Straddling Checkerboard</th><th>Modern Evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Variable-length encoding</td><td>Huffman coding and modern entropy compression</td></tr>
+            <tr><td>Escape digits / prefix codes</td><td>UTF-8 multi-byte encoding uses identical principles</td></tr>
+            <tr><td>Layered hand ciphers</td><td>VIC stacked checkerboard + chain addition + double transposition</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>43 of 49</td></tr>
+            <tr><td>Era</td><td>Late 19th – 20th Century</td></tr>
+            <tr><td>Security</td><td>Weak (alone) · Strong (in VIC)</td></tr>
+            <tr><td>Origin</td><td>Russian / Soviet hand ciphers</td></tr>
+            <tr><td>First documented</td><td>Late 1800s nihilist groups</td></tr>
+            <tr><td>Famous use</td><td>Inside the VIC cipher (Reino Häyhänen, 1950s)</td></tr>
+            <tr><td>Key Type</td><td>8 high-frequency letters in row 0</td></tr>
+            <tr><td>Modern Lesson</td><td>Variable-length codes resist character-aligned attacks</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/vic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">VIC Cipher</span>
+      <span class="related-card__tag">Built on top of this</span>
+    </a>
+    <a href="../ciphers/nihilist.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Nihilist Cipher</span>
+      <span class="related-card__tag">Russian forerunner</span>
+    </a>
+    <a href="../ciphers/polybius.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Polybius Square</span>
+      <span class="related-card__tag">Letter-to-digit ancestor</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/vic.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">VIC Cipher</span>
+  </a>
+  <a href="../ciphers/stager.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Stager Cipher</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 43 of 49</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
