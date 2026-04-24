@@ -220,10 +220,31 @@ cipher-museum/
 
 ## 🧪 Testing
 
+The museum ships with **six test harnesses — 2,298 assertions, all green.** They cover everything from the cipher engines themselves to the rendered DOM a visitor actually clicks on.
+
 ```bash
-node tests/test-all-engines.js      # Engine roundtrip & known-answer tests
-node tests/test-deep-ciphers.js     # Edge cases & stress tests
+# One-time setup (only needed for the demo-page simulator)
+npm install
+
+# Run any suite individually …
+node tests/test-all-engines.js      # 309 — engine roundtrip & known-answer tests
+node tests/test-deep-ciphers.js     # 238 — edge cases & stress tests
+node tests/test-comprehensive.js    # 417 — cross-cipher invariants
+node tests/test-accessibility.js    # 790 — ADA / WCAG audit across 79 pages
+node tests/test-mobile.js           # 240 — responsive / mobile audit across 79 pages
+node tests/test-demo-pages.js       # 304 — end-to-end JSDOM simulation of every interactive demo
+
+# … or via npm scripts
+npm run test:engines
+npm run test:deep
+npm run test:comprehensive
+npm run test:a11y
+npm run test:mobile
+npm run test:demos
+npm test                            # runs the engine + deep + comprehensive trio
 ```
+
+`test-demo-pages.js` is the strongest correctness proof: it loads every `ciphers/*.html` page in JSDOM with the real scripts inlined, lets `js/demo-loader.js` build the demo UI, then **clicks the actual on-page Encrypt and Decrypt buttons** and verifies the ciphertext roundtrips back to the original plaintext through the rendered DOM — exactly what a visitor sees. Hand-built pages (Caesar, Playfair, Vigenère, Zodiac) get dedicated assertions against canonical KATs (Caesar shift-3 → `WKHTXLFNEURZQIRA`, Vigenère `LEMON` → `LXFOPVEFRNHR`, Playfair `MONARCHY` decode, Zodiac Z408 reveal).
 
 ---
 
