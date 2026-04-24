@@ -54,7 +54,7 @@
 <section class="page-hero">
   <p class="hero-sub">Cryptanalysis Techniques</p>
   <h1>Codebreaker's Workbench</h1>
-  <p class="hero-intro">Encrypt, decrypt, and analyze text with 33 cipher engines. Watch frequency distributions shift in real time.</p>
+  <p class="hero-intro">Encrypt, decrypt, and analyze text with 51 cipher engines. Watch frequency distributions shift in real time.</p>
 </section>
 
 <main id="main-content" tabindex="-1" class="wb-main-wrap">
@@ -188,7 +188,29 @@
     {id:'alberti',name:'Alberti',hasKey:true,keyLabel:'Key',keyDefault:'K'},
     {id:'stager',name:'Stager',hasKey:true,keyLabel:'Route Key',keyDefault:'3'},
     {id:'dictionaryCode',name:'Dictionary Code',hasKey:true,keyLabel:'Key',keyDefault:'KEY'},
-    {id:'vic',name:'VIC',hasKey:true,keyLabel:'Key',keyDefault:'SECRET'}
+    {id:'vic',name:'VIC',hasKey:true,keyLabel:'Key',keyDefault:'SECRET'},
+    {id:'scytale',name:'Scytale',hasKey:true,keyLabel:'Rod Diameter',keyDefault:'4'},
+    {id:'atbash',name:'Atbash',hasKey:false},
+    {id:'rot13',name:'ROT13',hasKey:false},
+    {id:'homophonic',name:'Homophonic',hasKey:false},
+    {id:'foursquare',name:'Four-Square',hasKey:true,keyLabel:'Two Keys (comma)',keyDefault:'EXAMPLE,KEYWORD'},
+    {id:'twosquare',name:'Two-Square',hasKey:true,keyLabel:'Two Keys (comma)',keyDefault:'EXAMPLE,KEYWORD'},
+    {id:'straddlingCheckerboard',name:'Straddling Checkerboard',hasKey:true,keyLabel:'Key Letters',keyDefault:'ESTONIAR'},
+    {id:'chaocipher',name:'Chaocipher',hasKey:true,keyLabel:'Key Alphabet',keyDefault:'HXUCZVAMDSLKPEFJRIGTWOBNYQ'},
+    {id:'jefferson',name:'Jefferson Disk',hasKey:true,keyLabel:'Disk Order',keyDefault:'1,2,3,4,5,6,7,8,9,10'},
+    {id:'enigma',name:'Enigma',hasKey:true,keyLabel:'Rotors / Plugboard',keyDefault:'I,II,III/AAA'},
+    {id:'lorenz',name:'Lorenz',hasKey:true,keyLabel:'Wheel Settings',keyDefault:'AAAAAAAAAAAA'},
+    {id:'m209',name:'M-209 (Hagelin C-38)',hasKey:true,keyLabel:'Wheel Settings',keyDefault:'AAAAAA'},
+    {id:'purple',name:'Purple (Type 97)',hasKey:true,keyLabel:'Initial Setting',keyDefault:'1-2-3'},
+    {id:'navajo',name:'Navajo Code Talkers',hasKey:false},
+    {id:'vernam',name:'Vernam',hasKey:true,keyLabel:'Key (same length)',keyDefault:''},
+    {id:'solitaire',name:'Solitaire / Pontifex',hasKey:true,keyLabel:'Passphrase',keyDefault:'CRYPTONOMICON'},
+    {id:'greatCipher',name:'Great Cipher',hasKey:false},
+    {id:'babington',name:'Babington Plot',hasKey:false},
+    {id:'voynich',name:'Voynich Manuscript',hasKey:false},
+    {id:'beale',name:'Beale Ciphers',hasKey:true,keyLabel:'Book Text',keyDefault:'WHEN IN THE COURSE OF HUMAN EVENTS'},
+    {id:'copiale',name:'Copiale Cipher',hasKey:false},
+    {id:'kryptos',name:'Kryptos',hasKey:true,keyLabel:'Key',keyDefault:'PALIMPSEST'}
   ];
 
   var ENGLISH_FREQ = [8.167,1.492,2.782,4.253,12.702,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074];
