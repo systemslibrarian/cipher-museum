@@ -6,13 +6,13 @@ Cross-referenced with live site at https://ciphermuseum.com.
 ## Status
 - Act I (audit): in progress
 - Act II (fix): not started
-- Total findings: 19
+- Total findings: 28
   - Critical: 3
-  - High: 13
-  - Medium: 3
-  - Low: 0
-  - Informational: 0
-- Fixed: 0 / 19
+  - High: 17
+  - Medium: 5
+  - Low: 2
+  - Informational: 1
+- Fixed: 0 / 28
 
 ## Ground truth
 
@@ -335,6 +335,128 @@ self-contradictory. F-001 is the place to escalate this if Paul disagrees.
 **Expected:** Lab page has the same top-nav (with relative paths `../`) as every other page.
 
 **Proposed fix:** Add a museum-nav block to `lab/workbench.html` using `../` prefixes.
+
+### F-020 — `index.html` ticker heading: "24 Featured Ciphers" while ticker contains 25 entries
+**Severity:** Low
+**Area:** Counters
+**Files:** `index.html`
+**Status:** Open
+
+**Observed:** Line 52 — `Explore the Collection · 24 Featured Ciphers · Search all 52 →`. Actual `ticker-item` count: 25.
+
+**Expected:** Either say `25 Featured Ciphers` or trim the ticker to 24. (Recommend simply matching the actual count.)
+
+**Proposed fix:** Change `24` → `25` in line 52.
+
+### F-021 — `museum-map.html` cryptanalysis room card: "7 techniques · 12 famous codebreaks" but cryptanalysis.html has 10 technique cards
+**Severity:** High
+**Area:** Counters
+**Files:** `museum-map.html`, `cryptanalysis.html`
+**Status:** Open
+
+**Observed:** `museum-map.html` line 277 says `7 techniques · 12 famous codebreaks`. `cryptanalysis.html` line 123 hero says `Seven techniques that break almost every classical cipher in this museum…`. The page itself contains 10 `.technique-card` blocks (lines 139, 156, 172, 188, 204, 220, 236, 252, 263, 274).
+
+**Expected:** Both call-outs say `10 techniques`.
+
+**Evidence:** `cryptanalysis.html` `<div class="technique-card">` count.
+
+**Proposed fix:** Update the floor-plan caption (`museum-map.html`) and the hero intro (`cryptanalysis.html`) to `10 techniques`. Recheck the "12 famous codebreaks" claim — verify against actual count in Phase 9 sweep.
+
+### F-022 — `comparison.html` claims 37 / 40 ciphers but has 38 rows; missing 14 exhibits
+**Severity:** High
+**Area:** Counters, Content-gap
+**Files:** `comparison.html`
+**Status:** Open
+
+**Observed:** Meta description (line 7), social cards (lines 9, 14): `all 37 ciphers`. Page eyebrow (line 90): `37 Ciphers at a Glance`. Counter widget (line 129): `Showing 40 of 40`. Actual `CIPHERS` array length (line 187+): **38**.
+
+Missing from comparison data array: atbash, rot13, four-square, two-square, straddling-checkerboard, chaocipher, m209, copiale, beale, kryptos, voynich, babington, purple, solitaire — i.e. 14 of the 52 Index exhibits.
+
+Additionally the existing entry for Vernam is classified `hall:'VI'` (machines), contradicting the Index which assigns it to ★ (unbreakable).
+
+**Expected:** All counter strings say `52`. The `CIPHERS` array contains all 52 exhibits with correct hall labels per Index. The "Showing N of M" widget matches the populated total at runtime.
+
+**Evidence:** `comparison.html` lines 7, 90, 129, 187–225.
+
+**Proposed fix:** Add the 14 missing rows with era/year/type/key/security/hall metadata. Reclassify Vernam → ★. Replace all literal counters (`37`, `40`) with `52`. The `Showing X of Y` widget should read its total from `CIPHERS.length` rather than a hardcoded literal.
+
+### F-023 — `timeline.html` covers only 21 of 52 exhibits and footer reads "2,400 Years"
+**Severity:** High
+**Area:** Timeline, Counters
+**Files:** `timeline.html`
+**Status:** Open
+
+**Observed:** `timeline.html` contains links to 21 unique cipher exhibits: adfgvx, alberti-disk, atbash, babington, bacon, beale, caesar, enigma, great-cipher, jefferson-disk, kryptos, lorenz, navajo-code-talkers, one-time-pad, playfair, polybius, purple, scytale, vigenere, voynich, zodiac. Footer says `2,400 Years of Encryption`.
+
+**Expected:** Every exhibit with a known historical date appears on the timeline. Footer aligns with the canonical age claim (recommend `2,500 Years` to match `index.html` and `404.html`).
+
+Missing exhibits (31): adfgx, bazeries, beaufort, bifid, chaocipher, columnar, confederate-vigenere, copiale, dictionary-code, double-transposition, four-square, fractionated-morse, gronsfeld, hill, homophonic, m209, monoalphabetic, nihilist, pigpen, porta, rail-fence, rot13, running-key, solitaire, stager, straddling-checkerboard, tap-code, trifid, two-square, vernam, vic.
+
+**Evidence:** Grep for `href="ciphers/` in `timeline.html`.
+
+**Proposed fix:** Add timeline entries for every missing exhibit at its first-known year (use the `year` field from `comparison.html`'s `CIPHERS` array as canonical once F-022 is fixed). Update footer count.
+
+### F-024 — `lab/workbench.html` advertises "33 cipher engines" while dropdown has 29 and registry has 51
+**Severity:** High
+**Area:** Counters, Content-gap
+**Files:** `lab/workbench.html`
+**Status:** Open
+
+**Observed:** Hero intro line 57: `Encrypt, decrypt, and analyze text with 33 cipher engines`. The CIPHERS dropdown array (line 162+) contains 29 entries. The exported `window.CipherEngines` registry (`js/ciphers/all-engines.js` lines 1830–1842) exports 51 engines.
+
+**Expected:** Either expand the dropdown to all 51 (preferred, since registry already supports them) and advertise `51 cipher engines`, or admit the actual dropdown count.
+
+Missing from workbench dropdown: scytale, vernam, greatCipher, babington, navajo, voynich, atbash, rot13, foursquare, twosquare, straddlingCheckerboard, chaocipher, m209, solitaire, beale, copiale, kryptos, purple, jefferson, enigma, lorenz, homophonic.
+
+**Evidence:** `lab/workbench.html` line 57 + line 162 vs. `js/ciphers/all-engines.js` line 1830.
+
+**Proposed fix:** Expand `CIPHERS` array in `lab/workbench.html` to cover all engines that have meaningful key+text behaviour (most of them). Update count string. Some engines (e.g. solitaire, kryptos, beale, voynich) may need explanatory tooltips for unusual key formats.
+
+### F-025 — `index.html` body still mentions "37 cipher" near the search-all link area
+**Severity:** Medium
+**Area:** Counters
+**Files:** `index.html`
+**Status:** Open
+
+**Observed:** A literal `37 cipher` substring appears in the body of `index.html` (in addition to the `37 ciphers` in the footer covered by F-017).
+
+**Evidence:** `grep -n "37 cipher" index.html`.
+
+**Proposed fix:** Replace with `52` after locating exactly during Phase 8.
+
+### F-026 — `comparison.html` and `timeline.html` footers say "2,400 Years"; `index.html` and `404.html` say "2,500 years"
+**Severity:** Medium
+**Area:** Counters
+**Files:** `timeline.html`, `comparison.html`, `index.html`, `404.html`
+**Status:** Open
+
+**Observed:** Two different age claims live across the museum: `2,400 Years of Encryption` (timeline+comparison footers) vs. `2,500 years` (index hero, 404 hero, JSON-LD). With Atbash at ~600 BC and Kryptos at 1990, the truthful range is ~2,600 years; with Caesar at ~58 BC it is ~2,084 years.
+
+**Expected:** A single canonical figure on every page. Recommend `2,500 years` since two pages already use it and it is honest within the Caesar–Kryptos span.
+
+**Proposed fix:** Replace `2,400 Years of Encryption` with `2,500 Years of Encryption` on `timeline.html` and `comparison.html`.
+
+### F-027 — Index playground dropdown lists 9 ciphers; recent additions absent
+**Severity:** Low
+**Area:** Counters, Content-gap
+**Files:** `index.html`
+**Status:** Open
+
+**Observed:** Playground `<option>` set: caesar, rot13, atbash, vigenere, beaufort, affine, railfence, polybius, bacon. (Note `affine` has no exhibit page in `ciphers/` and no entry in the engines registry — possible orphan reference.)
+
+**Expected:** Coverage of the most common interactive demos (the playground is intended as a "first look" — not all 52). The Affine cipher should either be added as an exhibit/engine or removed from the playground.
+
+**Proposed fix:** Either implement Affine (small effort) or remove the option. Optionally add 2–3 popular demos like Playfair or Pigpen.
+
+### F-028 — Future-round content gaps (Informational)
+**Severity:** Informational
+**Area:** Content-gap
+**Files:** —
+**Status:** Open
+
+**Observed:** Items previously flagged for later rounds and out of scope for the current consistency pass: Dorabella (1897), SIGABA, Typex, Autokey (distinct from Running Key), generic Nomenclator exhibit, generic Book Cipher exhibit, additional Hall X biographies (Bill Tutte solo, Elizebeth Friedman, Joan Clarke, Leo Marks, Agnes Meyer Driscoll), and the Hall XI · Modern Cryptography promotion of DES/DH/RSA/AES/SHA-256 from `modern.html` to four-part exhibits.
+
+**Proposed fix:** None this round. Recorded for roadmap visibility.
 
 ## Blockers and open questions
 
