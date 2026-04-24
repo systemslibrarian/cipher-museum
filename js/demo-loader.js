@@ -364,6 +364,47 @@
       label: 'Wallis Ciphers (English Civil War, 1640s)', engine: 'wallisCiphers',
       defaultMsg: 'KING CHARLES MARCH OXFORD',
       inputs: [{ type: 'text', id: 'keyword', label: 'Nomenclator Key', value: 'WALLIS', placeholder: 'WALLIS' }]
+    },
+    'raf-otp': {
+      label: 'Red Army Faction One-Time Pad (1970\u20131998)', engine: 'otp',
+      defaultMsg: 'OPERATION READY', inputs: [
+        { type: 'text', id: 'keyword', label: 'Pad (leave blank for random)', value: '', placeholder: 'OTP key material…' }
+      ]
+    },
+    'che-vic': {
+      label: 'Che Guevara\u2019s VIC Variant (1956\u20131967)', engine: 'vic',
+      defaultMsg: 'COMRADES MOVE NORTH',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Personal Key', value: 'GUEVARA', placeholder: 'Personal phrase' }]
+    },
+    'ira-book-cipher': {
+      label: 'IRA Book Cipher (1970s\u20131990s)', engine: 'bookCipher',
+      defaultMsg: 'GOLD',
+      inputs: []
+    },
+    'latin-american-codebooks': {
+      label: 'Latin American Telegraphic Codebooks (1870s\u20131940s)', engine: 'commercialCode',
+      defaultMsg: 'CARGO ARRIVED BUENOSAIRES',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook (informational only)', value: 'COMERCIAL', placeholder: 'C\u00f3digo Comercial Mexicano…' }]
+    },
+    'diana-cryptosystem': {
+      label: 'Diana Cryptosystem (US Special Forces OTP, 1960s–)', engine: 'diana',
+      defaultMsg: 'EXTRACT NOW',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Pad Trigraphs', value: 'XKCDQNJVMZAPLR', placeholder: 'Random pad text\u2026' }]
+    },
+    'joseon-yeokhak': {
+      label: 'Joseon Yeokhak Cipher (Korean royal court, 1392\u20131897)', engine: 'joseonYeokhak',
+      defaultMsg: 'PROTECT THE KING',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Hexagram Key', value: 'YEOKHAK', placeholder: 'Key word\u2026' }]
+    },
+    'amharic-ge-ez-ciphers': {
+      label: 'Ethiopian Ge\u02bcez Monastic Cipher (~14th\u201319th c.)', engine: 'geezMonastic',
+      defaultMsg: 'PRESERVE THE TEXT',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Syllabary Key', value: 'GEEZ', placeholder: 'Key word\u2026' }]
+    },
+    'vietnamese-underground': {
+      label: 'Vietnamese Underground Codes (1940s\u20131975)', engine: 'monoalphabetic',
+      defaultMsg: 'ADVANCE TO POSITIONS',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Cell Key', value: 'GIAIPHONG', placeholder: 'Key word\u2026' }]
     }
   };
 
@@ -790,6 +831,48 @@
       { text: 'Kahn, David. <em>The Codebreakers</em> (1967) — chapter 4 on John Wallis and English state cryptanalysis', url: 'https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9780684831305' },
       { text: 'Smith, David Eugene. <em>John Wallis as a Cryptographer</em> (Bulletin AMS, 1917)', url: 'https://www.ams.org/journals/bull/1917-24-02/S0002-9904-1917-02954-X/' },
       { text: 'Wikipedia — John Wallis', url: 'https://en.wikipedia.org/wiki/John_Wallis' }
+    ],
+    'raf-otp': [
+      { text: 'Aust, Stefan. <em>The Baader-Meinhof Complex</em> (2008 English ed.)', url: 'https://www.bodleyhead.co.uk/' },
+      { text: 'Peters, Butz. <em>T\u00f6dlicher Irrtum: Die Geschichte der RAF</em> (2004)', url: 'https://www.argon-verlag.de/' },
+      { text: 'Bundeskriminalamt \u2014 RAF forensic archive (Stammheim materials)', url: 'https://www.bka.de/' },
+      { text: 'Wikipedia \u2014 Red Army Faction (Communications &amp; Tradecraft)', url: 'https://en.wikipedia.org/wiki/Red_Army_Faction' }
+    ],
+    'che-vic': [
+      { text: 'Anderson, Jon Lee. <em>Che Guevara: A Revolutionary Life</em> (1997)', url: 'https://www.groveatlantic.com/book/che-guevara/' },
+      { text: 'CIA FOIA \u2014 \u201cGuevara Cryptography\u201d (1967 Bolivian capture, declassified)', url: 'https://www.cia.gov/readingroom/' },
+      { text: 'National Security Archive \u2014 Bolivia &amp; Che Guevara documents (Peter Kornbluh)', url: 'https://nsarchive.gwu.edu/' },
+      { text: 'Wikipedia \u2014 VIC Cipher', url: 'https://en.wikipedia.org/wiki/VIC_cipher' }
+    ],
+    'ira-book-cipher': [
+      { text: 'Moloney, Ed. <em>A Secret History of the IRA</em> (2002)', url: 'https://www.penguinrandomhouse.com/books/89164/a-secret-history-of-the-ira-by-ed-moloney/' },
+      { text: 'Smith, M.L.R. <em>Fighting for Ireland?</em> (1995)', url: 'https://www.routledge.com/' },
+      { text: 'Powell, Jonathan. <em>Great Hatred, Little Room: Making Peace in Northern Ireland</em> (2008)', url: 'https://www.bodleyhead.co.uk/' },
+      { text: 'British Army FRU/14 Intelligence Company manuals (declassified, 2010s)', url: 'https://www.gov.uk/government/organisations/ministry-of-defence' }
+    ],
+    'latin-american-codebooks': [
+      { text: '<em>C\u00f3digo Comercial Mexicano</em> (Mexican commercial telegraph code)', url: 'https://www.bnm.unam.mx/' },
+      { text: 'ABC Telegraphic Code, 6th ed. (1920)', url: 'https://archive.org/details/abctelegraphicco00clau' },
+      { text: 'Bentley, E.L. <em>Bentley\u2019s Complete Phrase Code</em> (1906)', url: 'https://archive.org/details/bentleyscomplete00bent' },
+      { text: 'Rhodes, James Boyd. <em>The Telegraph in America</em>', url: 'https://www.cambridge.org/' }
+    ],
+    'diana-cryptosystem': [
+      { text: 'US Army FM 34-40-2 \u2014 Cryptanalysis (declassified editions)', url: 'https://armypubs.army.mil/' },
+      { text: 'Moore, Tyler. \u201cThe Diana Cryptosystem\u201d (IEEE Privacy &amp; Security Magazine, 2002)', url: 'https://www.computer.org/csdl/magazine/sp' },
+      { text: 'Kahn, David. <em>The Codebreakers</em> revised ed. (1996) \u2014 postwar Army cryptography', url: 'https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9780684831305' },
+      { text: 'Wikipedia \u2014 Beaufort cipher (mathematical kin)', url: 'https://en.wikipedia.org/wiki/Beaufort_cipher' }
+    ],
+    'joseon-yeokhak': [
+      { text: '<em>Veritable Records of the Joseon Dynasty</em> (UNESCO Memory of the World)', url: 'https://www.unesco.org/en/memory-world/veritable-records-joseon-dynasty' },
+      { text: 'Baker, Don. <em>Korean Spirituality</em> (2008)', url: 'https://uhpress.hawaii.edu/title/korean-spirituality/' },
+      { text: 'Seth, Michael J. <em>A Concise History of Premodern Korea</em>', url: 'https://rowman.com/' },
+      { text: 'Wikipedia \u2014 I Ching (Yijing) hexagrams', url: 'https://en.wikipedia.org/wiki/I_Ching' }
+    ],
+    'amharic-ge-ez-ciphers': [
+      { text: 'Hammerschmidt, Ernst. <em>\u00c4thiopische Handschriften</em>', url: 'https://www.steiner-verlag.de/' },
+      { text: 'Hill Museum &amp; Manuscript Library \u2014 EMML Ethiopian collection', url: 'https://hmml.org/collections/ethiopian/' },
+      { text: 'Delamarter, Steve. <em>Catalogue of the Ethiopic Manuscripts</em> (Codices Aethiopici)', url: 'https://www.peeters-leuven.be/' },
+      { text: 'Wikipedia \u2014 Ge\u02bcez script', url: 'https://en.wikipedia.org/wiki/Ge%CA%BDez_script' }
     ]
   };
 

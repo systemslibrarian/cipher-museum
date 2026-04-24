@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Army Faction One-Time Pad — The Cipher Museum</title>
+  <meta name="description" content="The West German Red Army Faction (RAF/Baader-Meinhof) used KGB-supplied one-time pads for communications — materials discovered in 1993 after German reunification archive access.">
+  <meta property="og:title" content="Red Army Faction One-Time Pad — The Cipher Museum">
+  <meta property="og:description" content="The West German Red Army Faction (RAF/Baader-Meinhof) used KGB-supplied one-time pads for communications — materials discovered in 1993 after German reunification archive access.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/red-army-faction.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Red Army Faction One-Time Pad — The Cipher Museum">
+  <meta name="twitter:description" content="The West German Red Army Faction (RAF/Baader-Meinhof) used KGB-supplied one-time pads for communications — materials discovered in 1993 after German reunification archive access.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/red-army-faction.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a><span>&rsaquo;</span>
+    Red Army Faction One-Time Pad
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall V · Military Ciphers</span>
+    <span class="badge era-ancient">Cold War · 1970–1998</span>
+    <span class="badge sec-broken">Unbroken (pads not recovered)</span>
+  </div>
+  <h1 class="page-title">Red Army Faction One-Time Pad</h1>
+  <p class="page-tagline">KGB-supplied cryptographic material used by the West German urban guerrilla network — how the Stasi became the perfect clandestine infrastructure provider.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Organization</span><span class="fact-value">Red Army Faction (RAF), West Germany</span></div>
+    <div class="fact"><span class="fact-label">Era</span><span class="fact-value">1970–1998</span></div>
+    <div class="fact"><span class="fact-label">Supply Chain</span><span class="fact-value">East German Stasi / KGB</span></div>
+    <div class="fact"><span class="fact-label">Cipher</span><span class="fact-value">One-Time Pad (Soviet standard field format)</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">Communications evidence, no pads recovered</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">State sponsor infrastructure dramatically elevates non-state actor crypto capabilities</span></div>
+  </div>
+</div>
+<div class="demo-section" data-cipher="raf-otp"></div>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Red Army Faction (founded 1970 by Andreas Baader and Ulrike Meinhof) maintained encrypted communications with East Germany's Stasi intelligence service, which supplied one-time pad material, safe houses, forged documents, and weapons. After German reunification in 1990, investigators gained access to archived Stasi files confirming the communications channel. The OTP messages themselves could not be decoded — pads had been destroyed — but the metadata and paper trails were sufficient to reconstruct the operational relationships. The RAF formally disbanded in 1998.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>'
+      f'<span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Throughout the 1970s–1990s West German domestic counterterrorism effort, BKA (Federal Criminal Police) had intercepted hundreds of RAF transmissions but could not decrypt fully encrypted OTP messages. The Stasi's <em>Hauptverwaltung Aufklärung</em> (HVA) provided RAF cells with field-grade one-time pad kits produced by the KGB-affiliated <em>Aufklärungsamt</em> technical section — the same infrastructure supporting Soviet deep-cover agents inside NATO structures.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>'
+      f'<span class="panel-title">The KGB Field OTP Format</span></div>
+      <div class="panel-body"><p>Soviet field OTPs used 5-digit number groups on printed one-time sheets arranged in columns. Messages were encoded by converting each plaintext letter to a number (A=01 through Z=26) and adding the corresponding pad digit modulo 10 (Fibonacci addition — no carry). Sheets were destroyed by fire after use. The system is identical in security to Vernam's original 1917 cipher; correctness of implementation was the KGB's quality control problem, not the cipher itself.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span>'
+      f'<span class="panel-title">The Stasi Files Exposure</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Archive exposure post-reunification</div><div class="attack-diff">Complexity: Metadata attack — cipher itself not broken</div><p class="attack-desc">When the Berlin Wall fell on November 9, 1989, BStU (Federal Commissioner for Stasi Records) began the multi-decade effort to reconstruct shredded Stasi paper archives. By 1993, investigators had confirmed Stasi material support for RAF. No OTP key material was recovered — the pads had been destroyed per Soviet protocol — but the structural evidence was sufficient for criminal prosecution and historical reconstruction.</p></div></div>
+    </div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table"><tbody><tr><td>Organization</td><td>Red Army Faction (RAF), West Germany</td></tr><tr><td>Era</td><td>1970–1998</td></tr><tr><td>Supply Chain</td><td>East German Stasi / KGB</td></tr><tr><td>Cipher</td><td>One-Time Pad (Soviet standard field format)</td></tr><tr><td>Status</td><td>Communications evidence, no pads recovered</td></tr><tr><td>Modern Lesson</td><td>State sponsor infrastructure dramatically elevates non-state actor crypto capabilities</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/one-time-pad.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">One-Time Pad</span>
+      <span class="related-card__tag">How OTP works mathematically</span>
+    </a>
+    <a href="../ciphers/diana-cryptosystem.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Diana Cryptosystem</span>
+      <span class="related-card__tag">US equivalent field OTP</span>
+    </a>
+    <a href="../ciphers/vic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">VIC Cipher</span>
+      <span class="related-card__tag">Soviet straddling-checkerboard complement to OTP</span>
+    </a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/ira-book-cipher.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">IRA Book Cipher</span></a>
+  <a href="../ciphers/vietnamese-underground.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">Vietnamese Underground Codes</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall V · Military Ciphers</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

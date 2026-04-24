@@ -3392,6 +3392,93 @@ window.CipherEngines = (() => {
     };
   })();
 
+  // Joseon Yeokhak Cipher Diagrams (1392\u20131897, Korea).
+  // Korean royal cipher tradition based on the I Ching\u2019s 64 hexagrams.
+  // Each hexagram is a stack of six lines, each broken (yin) or solid
+  // (yang); together they index 64 distinct symbols. Demo: derives a
+  // 0\u201363 hexagram offset from the key, then applies that offset (mod 26)
+  // as a Caesar-style shift over the Latin alphabet \u2014 mirroring how the
+  // Joseon court used hexagram arithmetic for cipher transformations
+  // applied to a Hangul or Hanja syllabary.
+  const joseonYeokhak = (() => {
+    function hexagramShift(key) {
+      let h = 0;
+      for (const ch of String(key || 'YEOKHAK').toUpperCase()) {
+        if (ch >= 'A' && ch <= 'Z') h = (h + (ch.charCodeAt(0) - 64)) % 64;
+      }
+      return h;
+    }
+    return {
+      encode: (text, key) => {
+        const t = clean(text), s = hexagramShift(key) % 26;
+        let out = '';
+        for (const ch of t) out += A[mod(ch.charCodeAt(0) - 65 + s, 26)];
+        return out;
+      },
+      decode: (text, key) => {
+        const t = clean(text), s = hexagramShift(key) % 26;
+        let out = '';
+        for (const ch of t) out += A[mod(ch.charCodeAt(0) - 65 - s, 26)];
+        return out;
+      }
+    };
+  })();
+
+  // Ethiopian Ge\u02bcez Monastic Cipher (~14th\u201319th c.).
+  // Cipher tradition preserved in Ethiopian Orthodox monasteries to protect
+  // esoteric and liturgical texts. Demo: keyed monoalphabetic substitution
+  // over the Latin alphabet (the actual Ge\u02bcez systems substituted within
+  // the Ge\u02bcez syllabary, but the underlying mechanism is the same \u2014 a
+  // permutation of the script\u2019s ordered glyph table). The key seeds a
+  // shuffled cipher alphabet; the page\u2019s prose explains the syllabary
+  // layer.
+  const geezMonastic = (() => {
+    function buildMap(key) {
+      const seed = clean(key) || 'GEEZ';
+      const order = _shuffledAlphabet(_seededRng(seed));
+      const m = {}, im = {};
+      for (let i = 0; i < 26; i++) {
+        m[A[i]] = order[i];
+        im[order[i]] = A[i];
+      }
+      return { m, im };
+    }
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        const { m } = buildMap(key);
+        let out = '';
+        for (const ch of t) out += m[ch] || ch;
+        return out;
+      },
+      decode: (text, key) => {
+        const t = clean(text);
+        const { im } = buildMap(key);
+        let out = '';
+        for (const ch of t) out += im[ch] || ch;
+        return out;
+      }
+    };
+  })();
+
+  /* ─── Round 3: Diana Cryptosystem (reciprocal US SF field cipher) ─── */
+  const diana = (() => {
+    // Diana is a Beaufort-style reciprocal cipher: c = (key - plain) mod 26.
+    // encode == decode, making it a true involution.  The US Special Forces
+    // "Diana" card printed this same table; we re-derive it algorithmically.
+    function run(text, key) {
+      const t = clean(text);
+      const k = clean(key || 'DIANA');
+      if (!k.length) return t;
+      return t.split('').map((ch, i) => {
+        const p = A.indexOf(ch);
+        const kp = A.indexOf(k[i % k.length]);
+        return A[(26 + kp - p) % 26];
+      }).join('');
+    }
+    return { encode: run, decode: run };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -3411,6 +3498,8 @@ window.CipherEngines = (() => {
     fialka, kl7, geheimschreiber, kryha, m94,
     chineseTelegraph, zimmermann, slidex, commercialCode,
     culperRing, arnoldAndre,
-    argenti, wallisCiphers
+    argenti, wallisCiphers,
+    joseonYeokhak, geezMonastic,
+    diana
   };
 })();

@@ -45,7 +45,9 @@ const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
   // Round 3 Stage 3 — Hall XII Unsolved + Hall XIII Culture (all Track B):
   'phaistos-disc', 'shugborough', 'dagapeyeff', 'somerton-man', 'mccormick',
   'bach-motif', 'dancing-men', 'gold-bug', 'cicada-3301', 'krypto-arg',
-  'mit-mystery-hunt', 'sator-square', 'freemason-pigpen']);
+  'mit-mystery-hunt', 'sator-square', 'freemason-pigpen',
+  // Phase 8 — global underground traditions (Track B / audio visualization):
+  'field-hollers']);
 
 // Pages that are intentionally static (no engine, no interactive widget) -
 // modern-crypto math walkthroughs and the unsolved Dorabella manuscript.
@@ -65,7 +67,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 104', allPages.length === 104, `actual=${allPages.length}`);
+ok('Cipher pages count is 113', allPages.length === 113, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
@@ -208,7 +210,10 @@ const ENGINE_PROFILES = {
   culperRing:             { key: 'TALLMADGE',                          mode: 'roundtrip' },
   arnoldAndre:            { key: 'BLACKSTONE',                         mode: 'roundtrip' },
   argenti:                { key: 'ARGENTI',                            mode: 'roundtrip' },
-  wallisCiphers:          { key: 'WALLIS',                             mode: 'roundtrip' }
+  wallisCiphers:          { key: 'WALLIS',                             mode: 'roundtrip' },
+  joseonYeokhak:          { key: 'YEOKHAK',                            mode: 'roundtrip' },
+  geezMonastic:           { key: 'GEEZ',                               mode: 'roundtrip' },
+  diana:                  { key: 'DIANA',                              mode: 'self-reciprocal' }
 };
 
 const SAMPLE_TEXTS = [

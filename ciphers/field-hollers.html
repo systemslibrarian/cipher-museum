@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Hollers and Coding Songs — The Cipher Museum</title>
+  <meta name="description" content="American enslaved workers used field hollers, work songs, and coded idiom as covert communication — "Follow the Drinking Gourd" encoding an escape route along the Underground Railroad.">
+  <meta property="og:title" content="Field Hollers and Coding Songs — The Cipher Museum">
+  <meta property="og:description" content="American enslaved workers used field hollers, work songs, and coded idiom as covert communication — "Follow the Drinking Gourd" encoding an escape route along the Underground Railroad.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/field-hollers.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Field Hollers and Coding Songs — The Cipher Museum">
+  <meta name="twitter:description" content="American enslaved workers used field hollers, work songs, and coded idiom as covert communication — "Follow the Drinking Gourd" encoding an escape route along the Underground Railroad.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/field-hollers.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    Field Hollers and Coding Songs
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Cipher Culture</span>
+    <span class="badge era-ancient">Americas · 1619–1865</span>
+    <span class="badge sec-broken">Historical (social steganography)</span>
+  </div>
+  <h1 class="page-title">Field Hollers and Coding Songs</h1>
+  <p class="page-tagline">Songs weren't just music — they were maps, warnings, and meeting-time signals encoded in plain sight.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Context</span><span class="fact-value">Antebellum America, Underground Railroad</span></div>
+    <div class="fact"><span class="fact-label">Era</span><span class="fact-value">1619–1865 (and later)</span></div>
+    <div class="fact"><span class="fact-label">Method</span><span class="fact-value">Steganographic encoding in song lyrics and vocal pattern</span></div>
+    <div class="fact"><span class="fact-label">Key</span><span class="fact-value">Shared community knowledge (out-of-band)</span></div>
+    <div class="fact"><span class="fact-label">Notable Example</span><span class="fact-value">"Follow the Drinking Gourd" encoding North Star navigation</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Steganography hides existence of message; cryptography hides content</span></div>
+  </div>
+</div>
+<div class="demo-section-hand" style="border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;margin:2rem 0;background:var(--s1);">
+  <h3 style="color:var(--gold);margin-top:0;">&#127911; Rhythm-Code Translator</h3>
+  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Field hollers used rhythmic syllable patterns. Enter a message and see how it maps to a simple stress-beat code (long STRESS / short unstressed).</p>
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1rem;">
+    <div style="flex:1;min-width:200px;">
+      <label for="input" style="display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem;">Plain message</label>
+      <input id="input" type="text" value="MEET AT THE OLD OAK" style="width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);border-radius:4px;color:var(--fg);font-family:var(--fm);">
+    </div>
+    <button onclick="encode()" style="padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;border-radius:4px;cursor:pointer;font-weight:700;">Encode</button>
+  </div>
+  <div id="output" style="font-family:var(--fm);font-size:1.1rem;color:var(--gold-lt);letter-spacing:.15em;min-height:2rem;"></div>
+  <script>
+    function encode() {
+      const msg = document.getElementById('input').value.toUpperCase().replace(/[^A-Z ]/g,'');
+      const out = msg.split('').map(c => {
+        if (c === ' ') return ' | ';
+        const v = 'AEIOU'.includes(c);
+        return c + (v ? '●' : '◦');
+      }).join(' ');
+      document.getElementById('output').textContent = out;
+    }
+  </script>
+</div>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Field hollers were the working-day vocal tradition of enslaved African Americans in the antebellum South — unaccompanied songs improvised during field labor, combining African musical traditions with the urgent necessity of covert communication in a surveillance environment where written messages could mean death. The best-documented example is "Follow the Drinking Gourd," in which the Big Dipper (Drinking Gourd) points north to freedom — a navigational direction encoded in a song that slaveholders heard as innocuous music. Warning shouts disguised as work calls signaled approaching overseers. Meeting times were embedded in song structures. This is steganography at scale, operating continuously, in earshot of the adversary.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>'
+      f'<span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>In the antebellum American South, enslaved people were systematically denied literacy, assembly rights, and free movement. The penalty for planning escape was severe. Communication among enslaved people therefore evolved into a rich tradition of coded oral culture. The field holler — a call-and-response vocal form — allowed information to pass across distances of hundreds of meters during shared field labor, in front of overseers who heard only work music.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎵</span>'
+      f'<span class="panel-title">Communication Through Song Structure</span></div>
+      <div class="panel-body"><p>Information was encoded in multiple layers: literal lyric meaning, call-and-response timing (rapid responses meant danger; slow meant safety), melodic contour (rising phrases for warning, falling for all-clear), and seasonal context (certain songs were only sung during harvest, flagging specific operational windows). The "key" was shared community knowledge transmitted through social bonding — an out-of-band channel the surveillance state could not intercept because it was invisible as a channel.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🗺️</span>'
+      f'<span class="panel-title">The Drinking Gourd as Navigation</span></div>
+      <div class="panel-body"><p>"Follow the Drinking Gourd" directed escapees northward by identifying the Big Dipper (two outer bowl stars point to Polaris, the North Star). Verse imagery encoded the route from the Tombigbee River to the Tennessee River to the Ohio River — a walking-distance map from Mississippi and Alabama to the free states. Historians debate whether the song functioned as a literal map or as a general inspirational reference to northward escape; either way, it encodes directional information in a culturally deniable container.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span>'
+      f'<span class="panel-title">Relationship to Modern Steganography</span></div>
+      <div class="panel-body"><p>Steganography (hiding the existence of a message) is distinct from cryptography (hiding the content). Field hollers achieved steganographic security: overseers heard music, not encrypted communication. Modern digital steganography — hiding data in image LSBs, audio noise floors, or network timing — achieves the same goal: no detectable ciphertext surface that flags the presence of hidden communication. The adversary cannot attack what they cannot see.</p></div>
+    </div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table"><tbody><tr><td>Context</td><td>Antebellum America, Underground Railroad</td></tr><tr><td>Era</td><td>1619–1865 (and later)</td></tr><tr><td>Method</td><td>Steganographic encoding in song lyrics and vocal pattern</td></tr><tr><td>Key</td><td>Shared community knowledge (out-of-band)</td></tr><tr><td>Notable Example</td><td>"Follow the Drinking Gourd" encoding North Star navigation</td></tr><tr><td>Modern Lesson</td><td>Steganography hides existence of message; cryptography hides content</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/bacon.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Bacon Cipher</span>
+      <span class="related-card__tag">Another steganographic system — hiding text in text</span>
+    </a>
+    <a href="../ciphers/null-cipher.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Null Cipher</span>
+      <span class="related-card__tag">Words hidden in innocent-looking plain text</span>
+    </a>
+    <a href="../ciphers/navajo-code-talkers.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Navajo Code Talkers</span>
+      <span class="related-card__tag">Language as unbreakable cipher</span>
+    </a>
+  </div>
+</section>
+<div class="hall-nav">
+
+
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall XIII · Cipher Culture</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

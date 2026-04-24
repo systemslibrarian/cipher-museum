@@ -114,8 +114,8 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: Cardano Autokey - engine, page, tests, registered
 - [x] Exhibit: Affine - engine, page, tests, registered
 - [x] Exhibit: Wheatstone Cryptograph - engine, page, tests, registered
-- [ ] Exhibit: Argenti Family - spec, engine, page, tests, registered
-- [ ] Exhibit: Wallis Ciphers - spec, engine, page, tests, registered
+- [x] Exhibit: Argenti Family - spec, engine, page, tests, registered
+- [x] Exhibit: Wallis Ciphers - spec, engine, page, tests, registered
 - [x] Exhibit: Morse Code - engine, page, tests, registered (audio Track B deferred)
 - [ ] Morse side panels: Voyager Golden Record + Morse+Cipher Combination
 - [ ] Exhibit: Mary Stuart Castelnau Letters - spec, page, Track B viewer

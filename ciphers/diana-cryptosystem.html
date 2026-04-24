@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diana Cryptosystem — The Cipher Museum</title>
+  <meta name="description" content="The US Army Special Forces one-time pad field system (1960s–1990s) — trigraph-based OTP cards issued to Green Berets in Vietnam.">
+  <meta property="og:title" content="Diana Cryptosystem — The Cipher Museum">
+  <meta property="og:description" content="The US Army Special Forces one-time pad field system (1960s–1990s) — trigraph-based OTP cards issued to Green Berets in Vietnam.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/diana-cryptosystem.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Diana Cryptosystem — The Cipher Museum">
+  <meta name="twitter:description" content="The US Army Special Forces one-time pad field system (1960s–1990s) — trigraph-based OTP cards issued to Green Berets in Vietnam.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/diana-cryptosystem.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a><span>&rsaquo;</span>
+    Diana Cryptosystem
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall V · Military Ciphers</span>
+    <span class="badge era-ancient">Cold War · 1960s–1990s</span>
+    <span class="badge sec-broken">Unbroken (correct use)</span>
+  </div>
+  <h1 class="page-title">Diana Cryptosystem</h1>
+  <p class="page-tagline">The US Army Special Forces trigraph one-time pad system, used from the Vietnam War through the Gulf War.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">US Army Special Forces / NSA</span></div>
+    <div class="fact"><span class="fact-label">Era</span><span class="fact-value">~1960–1995</span></div>
+    <div class="fact"><span class="fact-label">Family</span><span class="fact-value">One-Time Pad (trigraphic variant)</span></div>
+    <div class="fact"><span class="fact-label">Key Material</span><span class="fact-value">Printed pad cards, 13 trigraph columns</span></div>
+    <div class="fact"><span class="fact-label">Security</span><span class="fact-value">Theoretically unbreakable if pad not reused</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Correct OTP use is unbreakable; logistics often fail before the math</span></div>
+  </div>
+</div>
+<div class="demo-section" data-cipher="diana-cryptosystem"></div>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Diana Cryptosystem is the US Army Special Forces implementation of the one-time pad, designed for field use under combat conditions. Issued to Green Berets operating in Vietnam, Laos, and Cambodia, the system used small printed cards with 13 columns of random trigraphs. Messages were encoded letter-by-letter by finding the plaintext letter in a columnar index and substituting the corresponding trigraph. The pad was physically destroyed after use. When used correctly, the system is mathematically unbreakable — and NSA declassified the training materials decades later, since no key material survived.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>'
+      f'<span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The Vietnam-era Diana system was a practical refinement of the XOR-based stream cipher concept that underpins all one-time pads. US Special Forces operating in denied territory needed a cipher light enough to destroy quickly under ambush conditions. Printed 4×3-inch card stock replaced bulky teletype key tape. The trigraph format (three-letter blocks) simplified field use and reduced single-character error propagation.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>'
+      f'<span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Each Diana card contains 13 columns of random uppercase trigraphs printed in a grid. To encode a letter, the sender locates the plaintext letter in the left-side alphabet index, reads across to the designated column for that message, and records the trigraph. Decoding reverses the lookup. Since each trigraph is used only once and is chosen from a truly random source, no statistical attack can recover the key.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span>'
+      f'<span class="panel-title">Why Pads Fail in Practice</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Pad reuse / loss / capture</div><div class="attack-diff">Complexity: Trivial once key material is compromised</div><p class="attack-desc">The fatal weakness of all OTP systems is logistical, not mathematical. If a pad card is captured, reused, or reproduced without secure randomness, the system collapses immediately. The Soviet VENONA failure stemmed from key reuse under wartime production pressure. Diana training manuals emphasize card destruction above all other security procedures.</p></div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span>'
+      f'<span class="panel-title">Relationship to Modern Crypto</span></div>
+      <div class="panel-body"><p>The Diana system demonstrates the same security proof as unconditional secrecy: Shannon's 1949 theorem shows that a truly random key used only once produces a ciphertext with no information-theoretic correlation to plaintext. AES, TLS, and every modern symmetric cipher sacrifice this absolute guarantee in exchange for the practicality of small, reusable keys.</p></div>
+    </div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table"><tbody><tr><td>Origin</td><td>US Army Special Forces / NSA</td></tr><tr><td>Era</td><td>~1960–1995</td></tr><tr><td>Family</td><td>One-Time Pad (trigraphic variant)</td></tr><tr><td>Key Material</td><td>Printed pad cards, 13 trigraph columns</td></tr><tr><td>Security</td><td>Theoretically unbreakable if pad not reused</td></tr><tr><td>Modern Lesson</td><td>Correct OTP use is unbreakable; logistics often fail before the math</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/one-time-pad.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">One-Time Pad</span>
+      <span class="related-card__tag">The mathematical foundation</span>
+    </a>
+    <a href="../ciphers/solitaire.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Solitaire / Pontifex</span>
+      <span class="related-card__tag">Literary descendant — designed for field use</span>
+    </a>
+    <a href="../ciphers/vic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">VIC Cipher</span>
+      <span class="related-card__tag">Soviet field-grade straddling-checkerboard system</span>
+    </a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/vic.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">VIC Cipher</span></a>
+  <a href="../ciphers/che-guevara.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">Che Guevara's VIC Variant</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall V · Military Ciphers</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

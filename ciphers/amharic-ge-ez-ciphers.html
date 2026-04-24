@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethiopian Geʼez Monastic Ciphers — The Cipher Museum</title>
+  <meta name="description" content="Ethiopian Orthodox monasteries used syllabary-based substitution ciphers in Ge'ez script to protect sacred texts and inter-monastery communications from the 14th century onward.">
+  <meta property="og:title" content="Ethiopian Geʼez Monastic Ciphers — The Cipher Museum">
+  <meta property="og:description" content="Ethiopian Orthodox monasteries used syllabary-based substitution ciphers in Ge'ez script to protect sacred texts and inter-monastery communications from the 14th century onward.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/amharic-ge-ez-ciphers.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ethiopian Geʼez Monastic Ciphers — The Cipher Museum">
+  <meta name="twitter:description" content="Ethiopian Orthodox monasteries used syllabary-based substitution ciphers in Ge'ez script to protect sacred texts and inter-monastery communications from the 14th century onward.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/amharic-ge-ez-ciphers.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a><span>&rsaquo;</span>
+    Ethiopian Geʼez Monastic Ciphers
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall I · World Origins · Ethiopia</span>
+    <span class="badge era-ancient">East Africa · 14th–19th c.</span>
+    <span class="badge sec-broken">Historical (low security)</span>
+  </div>
+  <h1 class="page-title">Ethiopian Geʼez Monastic Ciphers</h1>
+  <p class="page-tagline">An African cryptographic tradition — Ge'ez syllabary substitution protecting sacred manuscripts in Ethiopian Orthodox monasteries.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Ethiopian Orthodox monastic tradition</span></div>
+    <div class="fact"><span class="fact-label">Era</span><span class="fact-value">~14th–19th century CE</span></div>
+    <div class="fact"><span class="fact-label">Script</span><span class="fact-value">Geʼez (Ethiopic) syllabary (547 characters)</span></div>
+    <div class="fact"><span class="fact-label">Family</span><span class="fact-value">Syllabic substitution</span></div>
+    <div class="fact"><span class="fact-label">Surviving Examples</span><span class="fact-value">EMML archive (Ethiopian Manuscript Microfilm Library)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Large syllabic alphabets complicate frequency analysis</span></div>
+  </div>
+</div>
+<div class="demo-section" data-cipher="amharic-ge-ez-ciphers"></div>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Ethiopian Orthodox Church maintained one of Africa's oldest continuous literary traditions, with monasteries at Debre Damo, Lalibela, and Lake Tana holding manuscript collections dating to the 4th century CE. To protect liturgical secrets, theological commentary, and inter-monastery correspondence from unauthorized reading, monastic scribes developed substitution systems using the Ge'ez syllabary's natural complexity: 547 distinct characters across 7 vowel orders create a cipher space far larger than a 26-letter Latin alphabet. European frequencies tables are useless against a 547-character syllabary.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>'
+      f'<span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Geʼez (Ethiopic) is a Semitic script used liturgically by the Ethiopian and Eritrean Orthodox churches. By the 14th century, scriptoria at major monasteries were producing illuminated manuscripts in Geʼez at industrial scale. The same period saw the standardization of monastic cipher practices: scribes used key words to generate permuted syllabary tables, applied syllable-level substitution, and recorded the key only in the memory of the scriptorium master.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>'
+      f'<span class="panel-title">How the Syllabary Cipher Worked</span></div>
+      <div class="panel-body"><p>Geʼez syllables each represent a consonant-vowel pair. A conventional ordering places 33 base characters across 7 vowel forms. The monastic cipher assigned each of the 33 base consonants a substitute consonant from a keyed permutation, then maintained the vowel marker unchanged — a partial substitution attacking only the consonantal skeleton, which carries most semantic content in Semitic languages. A full syllabary permutation would require a 231-entry key table; the partial approach kept the key manageable.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span>'
+      f'<span class="panel-title">Security Analysis</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Consonant-frequency analysis</div><div class="attack-diff">Complexity: Moderate — requires Geʼez linguistic expertise</div><p class="attack-desc">A cryptanalyst with frequency tables for Geʼez liturgical text could apply standard monoalphabetic analysis to the consonant layer. The vowel markers constrain consonant co-occurrence in ways a knowledgeable analyst could exploit. Against readers who did not know Geʼez phonology, the system was effectively opaque — which describes the intended adversary, neighboring tribal leaders and foreign traders, almost perfectly.</p></div></div>
+    </div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table"><tbody><tr><td>Origin</td><td>Ethiopian Orthodox monastic tradition</td></tr><tr><td>Era</td><td>~14th–19th century CE</td></tr><tr><td>Script</td><td>Geʼez (Ethiopic) syllabary (547 characters)</td></tr><tr><td>Family</td><td>Syllabic substitution</td></tr><tr><td>Surviving Examples</td><td>EMML archive (Ethiopian Manuscript Microfilm Library)</td></tr><tr><td>Modern Lesson</td><td>Large syllabic alphabets complicate frequency analysis</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/kama-sutra.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Kama Sutra Cipher</span>
+      <span class="related-card__tag">Another non-European tradition</span>
+    </a>
+    <a href="../ciphers/joseon-yeokhak.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Joseon Yeokhak</span>
+      <span class="related-card__tag">Korean syllabic parallel</span>
+    </a>
+    <a href="../ciphers/arabic-nomenclators.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Arabic Nomenclators</span>
+      <span class="related-card__tag">Regional neighbor, different approach</span>
+    </a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/joseon-yeokhak.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">Joseon Yeokhak Cipher</span></a>
+  <a href="../ciphers/latin-american-codebooks.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">Latin American Codebooks</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall I · World Origins · Ethiopia</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vietnamese Underground Codes — The Cipher Museum</title>
+  <meta name="description" content="The Viet Minh and NLF used a system of keyed monoalphabetic substitution and prearranged signal codes during the Indochina and Vietnam Wars (1940s–1975).">
+  <meta property="og:title" content="Vietnamese Underground Codes — The Cipher Museum">
+  <meta property="og:description" content="The Viet Minh and NLF used a system of keyed monoalphabetic substitution and prearranged signal codes during the Indochina and Vietnam Wars (1940s–1975).">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/vietnamese-underground.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Vietnamese Underground Codes — The Cipher Museum">
+  <meta name="twitter:description" content="The Viet Minh and NLF used a system of keyed monoalphabetic substitution and prearranged signal codes during the Indochina and Vietnam Wars (1940s–1975).">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/vietnamese-underground.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a><span>&rsaquo;</span>
+    Vietnamese Underground Codes
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall V · Military Ciphers</span>
+    <span class="badge era-ancient">Modern · 1940s–1975</span>
+    <span class="badge sec-broken">Partially broken</span>
+  </div>
+  <h1 class="page-title">Vietnamese Underground Codes</h1>
+  <p class="page-tagline">Cell-level encryption used by Vietnamese resistance networks from the French colonial period through the fall of Saigon.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Users</span><span class="fact-value">Viet Minh, NLF/Viet Cong, NVA</span></div>
+    <div class="fact"><span class="fact-label">Era</span><span class="fact-value">1940s–1975</span></div>
+    <div class="fact"><span class="fact-label">Family</span><span class="fact-value">Keyed monoalphabetic + codebook overlay</span></div>
+    <div class="fact"><span class="fact-label">Key Distribution</span><span class="fact-value">Cell structure — each cell held local key</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">SIGINT (NSA/ARVN), captured materials</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Compartmentalization limits damage from key compromise</span></div>
+  </div>
+</div>
+<div class="demo-section" data-cipher="vietnamese-underground"></div>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Vietnamese resistance organizations from the Viet Minh (1941) through the National Liberation Front (1960) used a layered cipher system adapted from French colonial communication techniques supplemented by Soviet and Chinese intelligence training. At the cell level, keyed monoalphabetic substitution using Vietnamese keywords provided basic message protection. At the command level, rotating codebooks with numeric indicators gave operational security. The cell-based compartmentalization meant breaking one key exposed only a single cell — exactly the design principle behind modern compartmented information handling.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span>'
+      f'<span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Ho Chi Minh received intelligence training from the Comintern in Moscow in 1923–1924 and the Chinese Communist Party through the 1930s. The Viet Minh's intelligence bureau (<em>Công an</em>) developed multilayer communications security from the outset of the anti-French resistance. By the American war period, NSA's signals intelligence operation at Phu Bai and the ARVN's intercept service were capturing hundreds of encrypted transmissions daily.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span>'
+      f'<span class="panel-title">How Cell-Level Keys Worked</span></div>
+      <div class="panel-body"><p>Each underground cell (typically 3–5 members) received a unique key word generated from a Vietnamese phrase — song lyrics, a line of poetry, or a personal phrase — known only within the cell and to one courier. Messages used the key word to generate a mixed substitution alphabet. Code words for locations, unit designations, and commanders were assigned locally and changed on a 30-day cycle, limiting exploitation of broken traffic.</p></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span>'
+      f'<span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Material capture + frequency analysis</div><div class="attack-diff">Complexity: Moderate — each cell key is independent</div><p class="attack-desc">NSA analysts applied standard monoalphabetic frequency analysis against Vietnamese-language traffic, taking advantage of known Vietnamese digraph frequencies. More critical were captured material : notebooks, letters, and printed cipher pads recovered during combat operations. Each capture was compartmented — useful only for the specific cell whose key was found — a design constraint that slowed but did not stop exploitation.</p></div></div>
+    </div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table"><tbody><tr><td>Users</td><td>Viet Minh, NLF/Viet Cong, NVA</td></tr><tr><td>Era</td><td>1940s–1975</td></tr><tr><td>Family</td><td>Keyed monoalphabetic + codebook overlay</td></tr><tr><td>Key Distribution</td><td>Cell structure — each cell held local key</td></tr><tr><td>Broken By</td><td>SIGINT (NSA/ARVN), captured materials</td></tr><tr><td>Modern Lesson</td><td>Compartmentalization limits damage from key compromise</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/monoalphabetic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Monoalphabetic Substitution</span>
+      <span class="related-card__tag">Core mechanism</span>
+    </a>
+    <a href="../ciphers/diana-cryptosystem.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Diana Cryptosystem</span>
+      <span class="related-card__tag">US counterpart in the same war</span>
+    </a>
+    <a href="../ciphers/navajo-code-talkers.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Navajo Code Talkers</span>
+      <span class="related-card__tag">WWII language-based alternative</span>
+    </a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/red-army-faction.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">Red Army Faction OTP</span></a>
+  <a href="../ciphers/joseon-yeokhak.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">Joseon Yeokhak Cipher</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/military.html">Hall V: Military &amp; Spy Ciphers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall V · Military Ciphers</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
