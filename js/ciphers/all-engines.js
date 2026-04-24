@@ -2190,6 +2190,52 @@ window.CipherEngines = (() => {
     };
   })();
 
+  /* ─── Round 3 Phase 5: Affine cipher ─── */
+  const affine = (() => {
+    // Affine cipher: E(x) = (a*x + b) mod 26, D(y) = a^-1 * (y - b) mod 26.
+    // 'a' must be coprime with 26 (the 12 valid values are 1,3,5,7,9,11,15,17,19,21,23,25).
+    const VALID_A = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+    function modInverse(a) {
+      const m = mod(a, 26);
+      for (let i = 1; i < 26; i++) if ((m * i) % 26 === 1) return i;
+      return 1;
+    }
+    function parseKey(key) {
+      const parts = String(key == null ? '5,8' : key).split(',').map(s => parseInt(s.trim(), 10));
+      let a = isNaN(parts[0]) ? 5 : parts[0];
+      let b = isNaN(parts[1]) ? 8 : parts[1];
+      // Snap a to nearest valid coprime value if user supplied an even or 13 multiple.
+      if (!VALID_A.includes(mod(a, 26))) {
+        a = VALID_A.reduce((best, v) => Math.abs(v - mod(a, 26)) < Math.abs(best - mod(a, 26)) ? v : best, 5);
+      }
+      a = mod(a, 26);
+      b = mod(b, 26);
+      return { a, b };
+    }
+    function transform(text, fn) {
+      return (text || '').split('').map(ch => {
+        const u = ch.toUpperCase();
+        const code = u.charCodeAt(0);
+        if (code < 65 || code > 90) return ch;
+        const x = code - 65;
+        const y = fn(x);
+        const out = String.fromCharCode(y + 65);
+        return ch === u ? out : out.toLowerCase();
+      }).join('');
+    }
+    return {
+      encode: (text, key) => {
+        const { a, b } = parseKey(key);
+        return transform(text, x => mod(a * x + b, 26));
+      },
+      decode: (text, key) => {
+        const { a, b } = parseKey(key);
+        const aInv = modInverse(a);
+        return transform(text, y => mod(aInv * (y - b), 26));
+      }
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -2203,6 +2249,7 @@ window.CipherEngines = (() => {
     atbash, rot13, foursquare, twosquare, straddlingCheckerboard,
     chaocipher, m209, solitaire, beale, copiale, kryptos, purple,
     autokey, nomenclator, bookCipher, sigaba, typex,
-    kamaSutra, aeneasTacticus, jn25, redTypeA
+    kamaSutra, aeneasTacticus, jn25, redTypeA,
+    affine
   };
 })();
