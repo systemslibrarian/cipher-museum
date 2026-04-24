@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Rosetta Stone — The Cipher Museum</title>
+  <meta name="description" content="The Rosetta Stone (196 BCE) — the trilingual decree that unlocked Egyptian hieroglyphs after fourteen centuries of silence, deciphered by Champollion in 1822.">
+  <meta property="og:title" content="The Rosetta Stone — The Cipher Museum">
+  <meta property="og:description" content="The trilingual decree that unlocked Egyptian hieroglyphs after fourteen centuries of silence.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/rosetta-stone.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Rosetta Stone — The Cipher Museum">
+  <meta name="twitter:description" content="The trilingual decree that unlocked Egyptian hieroglyphs after fourteen centuries of silence.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/rosetta-stone.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a><span>&rsaquo;</span>
+    The Rosetta Stone
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall I · World Origins · Egypt → Europe</span>
+    <span class="badge era-ancient">Ptolemaic Egypt · 196 BCE</span>
+    <span class="badge sec-broken">Solved 1822 (Champollion)</span>
+  </div>
+  <h1 class="page-title">The Rosetta Stone</h1>
+  <p class="page-tagline">Three scripts, one decree — and the key to fourteen centuries of silenced writing.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Issued</span><span class="fact-value">196 BCE, Memphis, Egypt</span></div>
+    <div class="fact"><span class="fact-label">Discovered</span><span class="fact-value">1799, Rashid (Rosetta), by French soldiers</span></div>
+    <div class="fact"><span class="fact-label">Scripts</span><span class="fact-value">Hieroglyphic, Demotic, Ancient Greek</span></div>
+    <div class="fact"><span class="fact-label">Deciphered by</span><span class="fact-value">Jean-François Champollion (1822), building on Thomas Young</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">A known plaintext is the most powerful cryptanalytic asset there is</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="rosetta-stone">
+  <h2>Trilingual Viewer</h2>
+  <p style="opacity:.85;">Toggle between the three scripts to see how Champollion lined up the cartouche of "Ptolemy" across them. Track B exhibit — visualization rather than encryption.</p>
+  <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap;">
+    <button type="button" id="btn-h" onclick="encode('hiero')" style="padding:.5rem 1rem;background:var(--gold-glow);border:1px solid var(--gold-b);color:var(--gold);border-radius:6px;cursor:pointer;font-weight:600;">Hieroglyphic</button>
+    <button type="button" id="btn-d" onclick="encode('demotic')" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">Demotic</button>
+    <button type="button" id="btn-g" onclick="encode('greek')" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">Greek</button>
+  </div>
+  <label for="input" style="display:block;margin-top:1rem;opacity:.7;font-size:.85rem;">Cartouche shown (fixed sample): "PTOLEMY"</label>
+  <input type="hidden" id="input" value="PTOLEMY">
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-size:1.5rem;line-height:1.6;min-height:6rem;"></div>
+  <script>
+    (function () {
+      var SAMPLES = {
+        hiero:   '𓊪 𓏏 𓍯 𓃭 𓐝 𓇋 𓋴   "PTOLMYS" — read by Champollion 1822',
+        demotic: 'ⲡⲧⲟⲗⲙⲏⲥ — Egyptian cursive, the everyday script of Ptolemaic Egypt',
+        greek:   'ΠΤΟΛΕΜΑΙΟΣ — Greek, the language of the Ptolemaic court'
+      };
+      window.encode = function (which) {
+        document.getElementById('output').textContent = SAMPLES[which] || '';
+        ['h','d','g'].forEach(function (k) {
+          var b = document.getElementById('btn-' + k);
+          if (!b) return;
+          b.style.background = 'rgba(0,0,0,.3)';
+          b.style.color = 'var(--ink)';
+        });
+        var key = which === 'hiero' ? 'h' : which === 'demotic' ? 'd' : 'g';
+        var btn = document.getElementById('btn-' + key);
+        if (btn) { btn.style.background = 'var(--gold-glow)'; btn.style.color = 'var(--gold)'; }
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode('hiero'); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>By the 4th century CE the ability to read Egyptian hieroglyphs had vanished from the world. For roughly fourteen centuries, the inscriptions on every Egyptian temple, tomb, and stele stood as silent ornament. The Rosetta Stone restored that ability — not because it was a cipher, but because it was the same message written in three scripts. The Greek text was readable. The hieroglyphic and demotic texts could now be matched against it. This is the principle of <strong>known plaintext</strong>, and it is still the single most powerful cryptanalytic asset.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The stone is a priestly decree affirming the cult of Ptolemy V Epiphanes, issued in 196 BCE. Copies were placed in major temples; the surviving fragment was found in 1799 at Rashid (anglicized "Rosetta") by French soldiers building a fort during Napoleon's Egyptian campaign. After the British defeat of the French, the stone passed to the British Museum, where it has been on near-continuous display since 1802.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Champollion's Breakthrough</span></div>
+      <div class="panel-body"><p>Thomas Young (English) showed in 1814 that the cartouches — oval enclosures around hieroglyphic groups — contained royal names spelled phonetically, and identified "Ptolemy" inside one. Jean-François Champollion (French), reading Coptic since childhood, recognized in 1822 that hieroglyphs were a mixed system: phonetic for foreign names, partly logographic for native vocabulary. His <em>Lettre à M. Dacier</em> announcing the decipherment is dated 14 September 1822 — the founding moment of modern Egyptology.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Cryptography by Analogy</span></div>
+      <div class="panel-body"><p>The Rosetta Stone problem is, formally, a cipher problem with an unusual luxury: the analyst has the plaintext and three independent cipher renderings. Modern cryptanalysts call this a <em>crib</em>, and it is what made Bletchley Park's attack on Enigma feasible — German weather reports were written in known formats, and routine messages began with predictable greetings. From the Stone to ULTRA, the lesson is the same: anything you say in the open vastly weakens what you say in secret.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>I · World Origins</td></tr>
+            <tr><td>Issued</td><td>196 BCE</td></tr>
+            <tr><td>Found</td><td>1799 CE</td></tr>
+            <tr><td>Decoded</td><td>1822 CE</td></tr>
+            <tr><td>Decoder</td><td>J.-F. Champollion</td></tr>
+            <tr><td>Method</td><td>Trilingual crib (known plaintext)</td></tr>
+            <tr><td>Modern echo</td><td>Bletchley cribs vs Enigma</td></tr>
+            <tr><td>Track</td><td>B (visualization)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/egyptian-substitution.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Egyptian Substitution Hieroglyphs</span>
+      <span class="related-card__tag">The script the Stone helped read</span>
+    </a>
+    <a href="../ciphers/enigma.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Enigma</span>
+      <span class="related-card__tag">Cribs as the Bletchley breakthrough</span>
+    </a>
+    <a href="../cryptanalysis.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cryptanalysis Techniques</span>
+      <span class="related-card__tag">Known plaintext attacks</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/egyptian-substitution.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Egyptian Substitution Hieroglyphs</span>
+  </a>
+  <a href="../ciphers/histiaeus-tattoo.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Histiaeus's Tattoo</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall I · World Origins</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

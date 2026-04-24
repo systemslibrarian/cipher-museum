@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arabic Nomenclators (al-Kindi Era) — The Cipher Museum</title>
+  <meta name="description" content="9th-century Abbasid Baghdad — al-Kindi's Risalah and the codebooks of the Arab cryptographic golden age, where frequency analysis was born.">
+  <meta property="og:title" content="Arabic Nomenclators (al-Kindi Era) — The Cipher Museum">
+  <meta property="og:description" content="9th-century Abbasid Baghdad — al-Kindi's Risalah and the codebooks of the Arab cryptographic golden age, where frequency analysis was born.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/arabic-nomenclators.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Arabic Nomenclators (al-Kindi Era) — The Cipher Museum">
+  <meta name="twitter:description" content="9th-century Abbasid Baghdad — al-Kindi's Risalah and the codebooks of the Arab cryptographic golden age, where frequency analysis was born.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/arabic-nomenclators.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a><span>&rsaquo;</span>
+    Arabic Nomenclators
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall I · World Origins · Baghdad</span>
+    <span class="badge era-ancient">Abbasid Caliphate · ~850 CE</span>
+    <span class="badge sec-broken">Broken (by its own inventors)</span>
+  </div>
+  <h1 class="page-title">Arabic Nomenclators</h1>
+  <p class="page-tagline">9th-century Baghdad — where systematic cryptanalysis was invented.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Region</span><span class="fact-value">Abbasid Caliphate (Baghdad, House of Wisdom)</span></div>
+    <div class="fact"><span class="fact-label">Era</span><span class="fact-value">~750-1350 CE</span></div>
+    <div class="fact"><span class="fact-label">Key Figure</span><span class="fact-value">al-Kindi (~801-873 CE)</span></div>
+    <div class="fact"><span class="fact-label">Landmark Text</span><span class="fact-value"><em>Risalah fi Istikhraj al-Mu'amma</em> (Manuscript on Deciphering Cryptographic Messages)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Cryptanalysis is the indispensable counterweight to cryptography</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="arabic-nomenclators"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Arab world held a 500-year monopoly on the most important idea in cryptography: that <strong>messages can be broken without the key</strong>. While Europe was still encrypting royal correspondence with simple substitution alphabets it considered unbreakable, scholars at Baghdad's House of Wisdom were systematically dismantling such ciphers — using statistics, vocabulary structure, and grammar. Al-Kindi's 9th-century treatise on cryptanalysis predates anything comparable in Latin Europe by 700 years.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The Abbasid administration ran a vast multilingual bureaucracy. Tax records, military dispatches, theological commentary, and diplomatic correspondence all needed protection — and verification. Arab scholars compiled large nomenclators (codebooks combining a cipher alphabet with a list of code-words for common names and concepts) and, crucially, also published handbooks teaching their colleagues how to <em>break</em> them. The dual practice produced a culture in which a cipher was tested as soon as it was invented.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How a Nomenclator Worked</span></div>
+      <div class="panel-body"><p>A nomenclator is a hybrid: a substitution alphabet for ordinary letters, plus a side dictionary of <em>nulls</em> (meaningless symbols inserted to confuse the analyst), <em>nomens</em> (single symbols standing for whole names like "Caliph", "Damascus", "the army"), and <em>special variants</em> (multiple symbols for the same plaintext letter, to flatten frequencies). The hand-built versions used by Arab chanceries were sophisticated enough that simple alphabet-only substitution attacks failed.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">Al-Kindi's Frequency Analysis</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Statistical cryptanalysis</div><div class="attack-diff">Complexity: Polynomial · Practical for any human-language cipher</div><p class="attack-desc">Al-Kindi's <em>Risalah</em> sets out the recipe in plain language: take a long sample of plaintext in the same language as the message; count letter frequencies; rank them. Then count letter frequencies in the ciphertext, rank them, and align the two lists. The most frequent ciphertext symbol probably stands for the most frequent plaintext letter, and so on. He extends the method to digram statistics, common short words, and the recognition of nulls. This is the founding method of every cryptanalytic tradition that followed — Europe, the OSS, Bletchley Park, and the NSA all build on al-Kindi's idea.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌍</span><span class="panel-title">Why Baghdad?</span></div>
+      <div class="panel-body"><p>The House of Wisdom (<em>Bayt al-Hikma</em>) systematically translated Greek, Persian, and Indian scientific works into Arabic. Combined with native expertise in linguistics, theology (which required precise textual analysis of the Qur'an), and statistics, the Abbasid intellectual environment produced exactly the cross-disciplinary skill set cryptanalysis needs. The same period gave us algebra (al-Khwarizmi), optics (Ibn al-Haytham), and the experimental method itself.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>I · World Origins</td></tr>
+            <tr><td>Region</td><td>Abbasid Baghdad</td></tr>
+            <tr><td>Era</td><td>~750-1350 CE</td></tr>
+            <tr><td>Key Figure</td><td>al-Kindi</td></tr>
+            <tr><td>Innovation</td><td>Frequency analysis</td></tr>
+            <tr><td>Treatise</td><td><em>Risalah</em> (~850 CE)</td></tr>
+            <tr><td>Successor</td><td>European nomenclators</td></tr>
+            <tr><td>Lasting impact</td><td>All modern cryptanalysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/nomenclator.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">European Nomenclator</span>
+      <span class="related-card__tag">The technique re-imported through Spain</span>
+    </a>
+    <a href="../ciphers/monoalphabetic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Monoalphabetic Substitution</span>
+      <span class="related-card__tag">What al-Kindi broke</span>
+    </a>
+    <a href="../cryptanalysis.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Cryptanalysis Techniques</span>
+      <span class="related-card__tag">The discipline al-Kindi founded</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/aeneas-tacticus.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Aeneas Tacticus</span>
+  </a>
+  <a href="../ciphers/egyptian-substitution.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Egyptian Substitution Hieroglyphs</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall I · World Origins</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

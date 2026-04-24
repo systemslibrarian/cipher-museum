@@ -39,7 +39,13 @@ function section(name) { console.log('\n━━━ ' + name + ' ━━━'); }
 
 const REPO = path.resolve(__dirname, '..');
 const CIPHERS_DIR = path.join(REPO, 'ciphers');
-const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac']);
+const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
+  // Round 3 Track B (visualization-only exhibits with hand-built widgets):
+  'egyptian-substitution', 'rosetta-stone', 'histiaeus-tattoo']);
+
+// Pages that are intentionally static (no engine, no interactive widget) -
+// modern-crypto math walkthroughs and the unsolved Dorabella manuscript.
+const STATIC_PAGES = new Set(['aes', 'des', 'diffie-hellman', 'dorabella', 'rsa', 'sha256']);
 
 /* ════════════════════════════════════════════════════════════════
    1. PAGE → ENGINE WIRING
@@ -55,7 +61,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 52', allPages.length === 52, `actual=${allPages.length}`);
+ok('Cipher pages count is 69', allPages.length === 69, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
@@ -65,6 +71,7 @@ for (const file of allPages) {
   const slug = file.replace('.html', '');
   const html = fs.readFileSync(path.join(CIPHERS_DIR, file), 'utf8');
   const handBuilt = HAND_BUILT.has(slug);
+  if (STATIC_PAGES.has(slug)) continue;
   const m = html.match(/<div[^>]*class="demo-section"[^>]*data-cipher="([a-zA-Z0-9-]+)"[^>]*>/);
 
   if (handBuilt) {
@@ -168,7 +175,14 @@ const ENGINE_PROFILES = {
                             mode: 'beale' },
   copiale:                { key: 'COPIALE',                          mode: 'random-key' },
   kryptos:                { key: 'PALIMPSEST',                       mode: 'roundtrip' },
-  purple:                 { key: 'PURPLE',                           mode: 'roundtrip' }
+  purple:                 { key: 'PURPLE',                           mode: 'roundtrip' },
+  autokey:                { key: 'QUEENLY',                          mode: 'roundtrip' },
+  nomenclator:            { key: '',                                 mode: 'random-key' },
+  bookCipher:             { key: '',                                 mode: 'random-key' },
+  sigaba:                 { key: 'SIGABA',                           mode: 'random-key' },
+  typex:                  { key: 'AAAAA',                            mode: 'self-reciprocal' },
+  kamaSutra:              { key: 'KAMASUTRA',                        mode: 'self-reciprocal' },
+  aeneasTacticus:         { key: '',                                 mode: 'roundtrip' }
 };
 
 const SAMPLE_TEXTS = [

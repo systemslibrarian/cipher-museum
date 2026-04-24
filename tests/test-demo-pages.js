@@ -88,7 +88,12 @@ const IJ_MERGE = new Set([
   'playfair', 'bifid', 'foursquare', 'twosquare',
   'polybius', 'nihilist', 'adfgx', 'vic', 'bacon'
 ]);
-const HAND_BUILT = new Set(['caesar.html', 'playfair.html', 'vigenere.html', 'zodiac.html']);
+const HAND_BUILT = new Set(['caesar.html', 'playfair.html', 'vigenere.html', 'zodiac.html',
+  // Round 3 Track B (visualization-only widgets, no demo-loader CONFIG):
+  'egyptian-substitution.html', 'rosetta-stone.html', 'histiaeus-tattoo.html']);
+// Pure-content modern-crypto and unsolved pages with no interactive demo:
+const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
+  'dorabella.html', 'rsa.html', 'sha256.html']);
 
 (async () => {
   console.log('\n━━━ Part A: auto-loaded demos (demo-loader.js) ━━━\n');
@@ -97,6 +102,7 @@ const HAND_BUILT = new Set(['caesar.html', 'playfair.html', 'vigenere.html', 'zo
 
   for (const file of allPages) {
     if (HAND_BUILT.has(file)) continue;
+    if (STATIC_PAGES.has(file)) continue;
     const slug = file.replace('.html', '');
     const filePath = path.join(CIPHERS_DIR, file);
 

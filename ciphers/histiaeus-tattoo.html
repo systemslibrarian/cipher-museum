@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histiaeus's Tattooed Messenger — The Cipher Museum</title>
+  <meta name="description" content="Histiaeus of Miletus (~499 BCE) — the Greek tyrant who tattooed a secret revolt order on a slave's shaved scalp, then waited for the hair to regrow before sending him.">
+  <meta property="og:title" content="Histiaeus's Tattooed Messenger — The Cipher Museum">
+  <meta property="og:description" content="The Greek tyrant who tattooed a secret revolt order on a slave's shaved scalp.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/histiaeus-tattoo.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Histiaeus's Tattooed Messenger — The Cipher Museum">
+  <meta name="twitter:description" content="The Greek tyrant who tattooed a secret revolt order on a slave's shaved scalp.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/histiaeus-tattoo.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a><span>&rsaquo;</span>
+    Histiaeus's Tattoo
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall I · World Origins · Greece</span>
+    <span class="badge era-ancient">Classical Greece · ~499 BCE</span>
+    <span class="badge sec-broken">Steganography (concealment)</span>
+  </div>
+  <h1 class="page-title">Histiaeus's Tattooed Messenger</h1>
+  <p class="page-tagline">The earliest recorded act of pure steganography — message hidden under regrown hair.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Source</span><span class="fact-value">Herodotus, <em>Histories</em> Book V, ch. 35</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~499 BCE</span></div>
+    <div class="fact"><span class="fact-label">Sender</span><span class="fact-value">Histiaeus, tyrant of Miletus, then captive in Susa</span></div>
+    <div class="fact"><span class="fact-label">Method</span><span class="fact-value">Tattoo on shaved scalp; sent after hair regrew</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">If a channel cannot be searched, the message does not need to be encrypted</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="histiaeus-tattoo">
+  <h2>Concealment Visualization</h2>
+  <p style="opacity:.85;">Type a short message. Step through "shave → tattoo → wait for regrowth → send → re-shave" to see how the cover hides the cipher. Track B exhibit — visualization rather than encryption.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Secret message</label>
+  <input type="text" id="input" value="REVOLT NOW" maxlength="40" style="width:100%;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap;">
+    <button type="button" onclick="encode(0)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">1. Shave scalp</button>
+    <button type="button" onclick="encode(1)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">2. Tattoo</button>
+    <button type="button" onclick="encode(2)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">3. Wait for regrowth</button>
+    <button type="button" onclick="encode(3)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">4. Send messenger</button>
+    <button type="button" onclick="encode(4)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">5. Recipient re-shaves</button>
+  </div>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:6rem;white-space:pre-wrap;"></div>
+  <script>
+    (function () {
+      function frame(stage, msg) {
+        msg = msg || '';
+        if (stage === 0) {
+          return 'Stage 1: shaved scalp\n\n  ___\n / o o\\\n |  ^  |   (clean — ready for ink)\n \\___/';
+        }
+        if (stage === 1) {
+          return 'Stage 2: tattoo applied\n\n  ___\n / o o\\\n |[' + (msg || '?') + ']|\n \\___/';
+        }
+        if (stage === 2) {
+          return 'Stage 3: hair regrows over weeks\n\n  ~~~~\n /~o o~\\\n |~~~~~|   (message hidden, traveler appears unmarked)\n \\~~~~/';
+        }
+        if (stage === 3) {
+          return 'Stage 4: messenger walks to Aristagoras\n\n   ~~~~\n  /~o o~\\         ~~~ road to Miletus ~~~\n  |~~~~~|   →   →   →\n  \\~~~~/\n\n  Persian inspectors find nothing on his person.';
+        }
+        if (stage === 4) {
+          return 'Stage 5: recipient shaves the messenger\n\n  ___\n / o o\\\n |[' + (msg || '?') + ']|\n \\___/\n\n  → message read → revolt begins (Ionian Revolt, 499 BCE)';
+        }
+        return '';
+      }
+      window.encode = function (stage) {
+        var msg = (document.getElementById('input').value || '').toUpperCase().slice(0, 12);
+        document.getElementById('output').textContent = frame(stage, msg);
+      };
+      document.addEventListener('DOMContentLoaded', function () { window.encode(0); });
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Around 499 BCE, the Milesian tyrant Histiaeus was effectively hostage at the Persian court of Darius. He needed to send a revolt order to his kinsman Aristagoras back in Ionia, knowing every road and harbor was watched. According to Herodotus, he shaved the head of his most trusted slave, tattooed the order on the scalp, and waited for the hair to regrow. The slave then walked unhindered through Persian territory and was instructed simply to ask Aristagoras to shave his head. The Ionian Revolt followed. This is the earliest extant story of pure steganography — hiding the existence of a message rather than its meaning.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>The episode appears in Herodotus's <em>Histories</em>, Book V, chapter 35. Herodotus also records other Greek concealment techniques in the same period: messages scratched onto wooden tablets and then waxed over (Demaratus warning Sparta of Xerxes' invasion), notes hidden inside the bellies of dead hares, and Aeneas Tacticus's catalogue of arrow-shaft and dice-cube concealments. Greek warfare produced an extensive culture of covert messaging, and Histiaeus's tattoo is the most theatrical example.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">Cryptography vs Steganography</span></div>
+      <div class="panel-body"><p>Cryptography <em>scrambles</em> a message; steganography <em>hides</em> that any message exists. Histiaeus's plaintext was never encrypted — anyone who shaved the slave could read the order plainly. The security came from the channel: no Persian inspector would think to shave a messenger. The two disciplines combine well: a modern leaker who hides PGP-encrypted bytes inside the low bits of a JPEG is performing both, in sequence, for exactly Histiaeus's reason.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">The Modern Heir: Steganography Today</span></div>
+      <div class="panel-body"><p>Modern steganography hides bits inside images, audio, video, network packet timing, and even DNA. The premise is unchanged from 499 BCE: the adversary is searching only the channels they expect to carry messages, and any unsearched channel is, by definition, secure. The Cipher Museum's Hall XI on Modern Cryptography includes the partner discipline of <em>covert channels</em>; Histiaeus is its earliest documented practitioner.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>I · World Origins</td></tr>
+            <tr><td>Region</td><td>Ionia / Persia</td></tr>
+            <tr><td>Era</td><td>~499 BCE</td></tr>
+            <tr><td>Source</td><td>Herodotus V.35</td></tr>
+            <tr><td>Discipline</td><td>Steganography</td></tr>
+            <tr><td>Track</td><td>B (visualization)</td></tr>
+            <tr><td>Modern echo</td><td>Image / audio steganography</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/aeneas-tacticus.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Aeneas Tacticus</span>
+      <span class="related-card__tag">Catalogue of Greek concealment tricks</span>
+    </a>
+    <a href="../ciphers/scytale.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Scytale</span>
+      <span class="related-card__tag">Spartan covert dispatch device</span>
+    </a>
+    <a href="../ciphers/bacon.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Bacon's Cipher</span>
+      <span class="related-card__tag">Renaissance steganography</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/rosetta-stone.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Rosetta Stone</span>
+  </a>
+  <a href="../ciphers/scytale.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Scytale</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall I · World Origins</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

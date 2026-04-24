@@ -239,6 +239,21 @@
     typex: {
       label: 'Typex (5-rotor Enigma-style)', engine: 'typex', defaultMsg: 'BRITISH SIGNAL READY',
       inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Start (5 letters)', value: 'AAAAA', placeholder: 'AAAAA' }]
+    },
+    'kama-sutra': {
+      label: 'Kama Sutra Cipher (Mlecchita Vikalpa)', engine: 'kamaSutra',
+      defaultMsg: 'SECRET LOVERS LANGUAGE',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Pairing Seed', value: 'KAMASUTRA', placeholder: 'Seed word…' }]
+    },
+    'aeneas-tacticus': {
+      label: 'Aeneas Tacticus Water-Clock Code', engine: 'aeneasTacticus',
+      defaultMsg: 'SHIPS APPROACH AT NIGHT',
+      inputs: []
+    },
+    'arabic-nomenclators': {
+      label: 'Arabic Nomenclator (al-Kindi era)', engine: 'nomenclator',
+      defaultMsg: 'THE CALIPH RIDES AT DAWN',
+      inputs: []
     }
   };
 

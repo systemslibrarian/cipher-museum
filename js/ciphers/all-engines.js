@@ -2058,6 +2058,42 @@ window.CipherEngines = (() => {
     return { encode: run, decode: run };
   })();
 
+  /* ─── Round 3: Kama Sutra paired-substitution (Mlecchita Vikalpa) ─── */
+  const kamaSutra = (() => {
+    function buildPairs(key) {
+      const k = clean(key || 'KAMASUTRA');
+      const seen = new Set();
+      let alpha = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); alpha += c; }
+      for (let i = 0; i < 26; i++) { const c = A[i]; if (!seen.has(c)) alpha += c; }
+      const map = {};
+      for (let i = 0; i < 13; i++) {
+        const a = alpha[i], b = alpha[25 - i];
+        map[a] = b; map[b] = a;
+      }
+      return map;
+    }
+    function run(text, key) {
+      const m = buildPairs(key);
+      return (text || '').split('').map(ch => {
+        const u = ch.toUpperCase();
+        if (m[u]) return ch === u ? m[u] : m[u].toLowerCase();
+        return ch;
+      }).join('');
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── Round 3: Aeneas Tacticus water-clock signaling code ─── */
+  const aeneasTacticus = (() => {
+    // Each letter A-Z maps to its position 1-26 (water-clock release time).
+    return {
+      encode: t => clean(t).split('').map(c => A.indexOf(c) + 1).join(' '),
+      decode: t => (t || '').split(/[^0-9]+/).filter(Boolean)
+        .map(n => A[parseInt(n, 10) - 1] || '').join('')
+    };
+  })();
+
   return {
     caesar, monoalphabetic, polybius, homophonic, playfair, hill,
     vigenere, beaufort, gronsfeld, porta, runningKey,
@@ -2070,6 +2106,7 @@ window.CipherEngines = (() => {
     scytale, vernam, greatCipher, babington, navajo, voynich,
     atbash, rot13, foursquare, twosquare, straddlingCheckerboard,
     chaocipher, m209, solitaire, beale, copiale, kryptos, purple,
-    autokey, nomenclator, bookCipher, sigaba, typex
+    autokey, nomenclator, bookCipher, sigaba, typex,
+    kamaSutra, aeneasTacticus
   };
 })();

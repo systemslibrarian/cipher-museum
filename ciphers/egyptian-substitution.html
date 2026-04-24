@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Egyptian Substitution Hieroglyphs — The Cipher Museum</title>
+  <meta name="description" content="The Khnumhotep II tomb inscription (~1900 BCE) — the world's earliest surviving instance of a deliberate substitution cipher, using unusual hieroglyph variants.">
+  <meta property="og:title" content="Egyptian Substitution Hieroglyphs — The Cipher Museum">
+  <meta property="og:description" content="The Khnumhotep II tomb inscription (~1900 BCE) — the world's earliest surviving instance of a deliberate substitution cipher.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/egyptian-substitution.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Egyptian Substitution Hieroglyphs — The Cipher Museum">
+  <meta name="twitter:description" content="The Khnumhotep II tomb inscription (~1900 BCE) — the world's earliest surviving instance of a deliberate substitution cipher.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/egyptian-substitution.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a><span>&rsaquo;</span>
+    Egyptian Substitution Hieroglyphs
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall I · World Origins · Egypt</span>
+    <span class="badge era-ancient">Middle Kingdom Egypt · ~1900 BCE</span>
+    <span class="badge sec-broken">Decorative concealment</span>
+  </div>
+  <h1 class="page-title">Egyptian Substitution Hieroglyphs</h1>
+  <p class="page-tagline">The Khnumhotep II tomb inscription — the earliest surviving deliberate substitution.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Site</span><span class="fact-value">Tomb of Khnumhotep II, Beni Hasan, Egypt</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~1900 BCE (12th Dynasty)</span></div>
+    <div class="fact"><span class="fact-label">Method</span><span class="fact-value">Replacement of standard hieroglyphs with unusual variants</span></div>
+    <div class="fact"><span class="fact-label">Purpose</span><span class="fact-value">Disputed — likely scribal display or sacred concealment</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">The line between cipher, code, and ornament is older than writing itself</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="egyptian-substitution">
+  <h2>Hieroglyph Substitution Demo</h2>
+  <p style="opacity:.85;">Type a short ASCII phrase to see it rendered in the Khnumhotep-style "unusual variant" set used by Egyptian scribes for ornamental concealment. This is a visualization, not a cryptographic operation — Track B exhibit.</p>
+  <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Input</label>
+  <input type="text" id="input" placeholder="PHARAOH" value="KHNUMHOTEP" style="width:100%;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
+  <button type="button" onclick="encode()" style="margin-top:.75rem;padding:.6rem 1.25rem;background:var(--gold-glow);border:1px solid var(--gold-b);color:var(--gold);border-radius:6px;cursor:pointer;font-weight:600;">Render Hieroglyphs</button>
+  <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-size:2rem;line-height:1.4;letter-spacing:.15em;min-height:3rem;"></div>
+  <script>
+    (function () {
+      // Khnumhotep-style ornamental hieroglyph variants for the 26 Roman letters.
+      // This is illustrative only — the actual Beni Hasan glyphs were chosen for
+      // visual rarity within the Egyptian scribal tradition, not for any
+      // letter-by-letter Roman correspondence.
+      var GLYPHS = {
+        A: '𓄿', B: '𓃀', C: '𓎡', D: '𓂧', E: '𓇋', F: '𓆑', G: '𓎼',
+        H: '𓎛', I: '𓇋', J: '𓏠', K: '𓎡', L: '𓃭', M: '𓅓', N: '𓈖',
+        O: '𓅱', P: '𓊪', Q: '𓏘', R: '𓂋', S: '𓋴', T: '𓏏', U: '𓅱',
+        V: '𓆑', W: '𓅱', X: '𓐍', Y: '𓇌', Z: '𓊃'
+      };
+      window.encode = function () {
+        var src = (document.getElementById('input').value || '').toUpperCase();
+        var out = '';
+        for (var i = 0; i < src.length; i++) {
+          out += GLYPHS[src[i]] || (src[i] === ' ' ? ' ' : '');
+        }
+        document.getElementById('output').textContent = out;
+      };
+      document.addEventListener('DOMContentLoaded', window.encode);
+    })();
+  </script>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>In a tomb at Beni Hasan, Middle Egypt, the high official Khnumhotep II had his life story carved into the wall around 1900 BCE. The inscription is mostly written in standard hieroglyphs — but for several passages, the scribe substituted unusual variant glyphs in place of common ones. This is the earliest known instance of a deliberate substitution applied to writing for the purpose of concealment or ornament. Whether the scribe meant secrecy, religious mystique, or simple display, the technique itself — replace one symbol with another by rule — is the seed of every substitution cipher that followed.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Egyptian scribes had two parallel writing systems by 1900 BCE: monumental hieroglyphs for inscriptions and the cursive hieratic for everyday documents. The Khnumhotep tomb belongs to the monumental tradition, where elaboration was prized. Egyptologists debate whether the unusual variants were meant to obscure meaning from casual readers, to flatter the gods through visual richness, or to display the scribe's erudition. All three motives — secrecy, sanctity, and craft — recur throughout cipher history.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Worked</span></div>
+      <div class="panel-body"><p>The Egyptian writing system carried hundreds of glyphs; many sounds could be written with multiple alternative signs. The Beni Hasan scribe systematically chose <em>rare</em> alternates instead of the standard ones. A reader fluent in everyday hieratic would recognize the words but find them harder to scan. A reader unfamiliar with the variant set would be stopped cold. The technique is a one-to-one substitution at the symbol level — exactly the operation Atbash, Caesar, and Mlecchita Vikalpa would later perform on alphabetic scripts.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌍</span><span class="panel-title">Cipher, Code, or Ornament?</span></div>
+      <div class="panel-body"><p>Modern cryptographers distinguish ciphers (mechanical letter-by-letter rules), codes (whole words replaced from a book), and steganography (hidden in plain sight). The Khnumhotep inscription resists those categories — and that is exactly its lesson. The instinct to encode meaning behind a layer of unfamiliar symbols predates the conceptual machinery we use to describe it. Egypt did not invent cryptography; it documented that the impulse already existed.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>I · World Origins</td></tr>
+            <tr><td>Region</td><td>Middle Kingdom Egypt</td></tr>
+            <tr><td>Era</td><td>~1900 BCE</td></tr>
+            <tr><td>Site</td><td>Beni Hasan, tomb of Khnumhotep II</td></tr>
+            <tr><td>Method</td><td>Symbol substitution</td></tr>
+            <tr><td>Track</td><td>B (visualization)</td></tr>
+            <tr><td>Successor</td><td>Atbash, Caesar, all substitution</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/atbash.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Atbash</span>
+      <span class="related-card__tag">Same idea, alphabetic script</span>
+    </a>
+    <a href="../ciphers/rosetta-stone.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Rosetta Stone</span>
+      <span class="related-card__tag">How hieroglyphs were finally read</span>
+    </a>
+    <a href="../ciphers/voynich.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Voynich Manuscript</span>
+      <span class="related-card__tag">Another script that resists reading</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/arabic-nomenclators.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Arabic Nomenclators</span>
+  </a>
+  <a href="../ciphers/rosetta-stone.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Rosetta Stone</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall I · World Origins</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

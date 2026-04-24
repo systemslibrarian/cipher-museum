@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kama Sutra Cipher (Mlecchita Vikalpa) — The Cipher Museum</title>
+  <meta name="description" content="The Mlecchita Vikalpa cipher from Vatsyayana's Kama Sutra (~400 CE) — a paired-letter substitution taught to lovers as one of the 64 arts.">
+  <meta property="og:title" content="Kama Sutra Cipher (Mlecchita Vikalpa) — The Cipher Museum">
+  <meta property="og:description" content="The Mlecchita Vikalpa cipher from Vatsyayana's Kama Sutra (~400 CE) — a paired-letter substitution taught to lovers as one of the 64 arts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/kama-sutra.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kama Sutra Cipher (Mlecchita Vikalpa) — The Cipher Museum">
+  <meta name="twitter:description" content="The Mlecchita Vikalpa cipher from Vatsyayana's Kama Sutra (~400 CE) — a paired-letter substitution taught to lovers as one of the 64 arts.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/kama-sutra.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a><span>&rsaquo;</span>
+    Kama Sutra Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall I · World Origins · India</span>
+    <span class="badge era-ancient">Classical India · ~400 CE</span>
+    <span class="badge sec-broken">Trivial</span>
+  </div>
+  <h1 class="page-title">Kama Sutra Cipher <span style="opacity:.6;font-weight:400;">(Mlecchita Vikalpa)</span></h1>
+  <p class="page-tagline">A paired-letter substitution taught to lovers in Vatsyayana's <em>Kama Sutra</em> as one of the 64 arts.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Vatsyayana, Classical India</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">~400 CE</span></div>
+    <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Pairing seed (rearranges 13 letter pairs)</span></div>
+    <div class="fact"><span class="fact-label">Property</span><span class="fact-value">Self-inverse (encrypt = decrypt)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Cryptography arose independently across world cultures</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="kama-sutra"></div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>The Kama Sutra — written in India around 400 CE by Vatsyayana — lists 64 arts a cultivated person should master. Number 45 is <em>mlecchita-vikalpa</em>, the art of secret writing, recommended so women may "conceal the details of their liaisons." This is one of the earliest written references to cryptography anywhere in the world, and proof that cipher craft arose independently in multiple civilizations rather than spreading from a single origin.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Vatsyayana lists secret writing alongside dance, music, perfumery, and gambling. He does not invent cryptography — he records that it already exists as a recognized social skill. The instruction is brief: pair letters of the alphabet at random and substitute each for its partner. The system is symmetric, easy to teach orally, and offers exactly the level of privacy a Sanskrit-literate scribe would need to defeat a casual reader.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body"><p>Choose any pairing of the 26 letters into 13 disjoint pairs — for example A↔K, B↔M, C↔Q, … — and substitute each letter for its partner. Because every pair is mutual, encryption and decryption are the <strong>same operation</strong>. Atbash is one specific pairing (A↔Z, B↔Y, …); Mlecchita Vikalpa is the entire family.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Frequency analysis</div><div class="attack-diff">Complexity: Trivial (once invented)</div><p class="attack-desc">Mlecchita Vikalpa is mathematically a monoalphabetic substitution and falls to the same letter-frequency attack al-Kindi described in 9th-century Baghdad. Until that breakthrough, however, it offered useful privacy for lovers' notes — and the technique spread along trade routes that carried Sanskrit texts to Persia.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌏</span><span class="panel-title">A Global Origin Story</span></div>
+      <div class="panel-body"><p>Cryptography did not begin in any single place. Egyptian scribes carved unusual hieroglyphs around 1900 BCE; Hebrew scribes used Atbash; Greeks wound parchment around scytales; Indians paired letters for love notes; Arabs invented frequency analysis. Each tradition treated secrecy as a craft worth recording. The Kama Sutra is unique because it places cipher work alongside the everyday arts of civilized life.</p></div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Hall</td><td>I · World Origins</td></tr>
+            <tr><td>Region</td><td>Classical India</td></tr>
+            <tr><td>Era</td><td>~400 CE</td></tr>
+            <tr><td>Security</td><td>Trivial</td></tr>
+            <tr><td>Origin</td><td>Vatsyayana, <em>Kama Sutra</em></td></tr>
+            <tr><td>Property</td><td>Self-inverse</td></tr>
+            <tr><td>Family</td><td>Monoalphabetic substitution</td></tr>
+            <tr><td>Attack</td><td>Frequency analysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/atbash.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Atbash</span>
+      <span class="related-card__tag">A specific pairing of the same family</span>
+    </a>
+    <a href="../ciphers/monoalphabetic.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Monoalphabetic</span>
+      <span class="related-card__tag">Generalized substitution</span>
+    </a>
+    <a href="../ciphers/arabic-nomenclators.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Arabic Nomenclators</span>
+      <span class="related-card__tag">Where frequency analysis was born</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/atbash.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Atbash</span>
+  </a>
+  <a href="../ciphers/aeneas-tacticus.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Aeneas Tacticus</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../challenges.html">Challenges</a></li>
+        <li><a href="../glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">This Hall</div>
+      <ul class="footer-links">
+        <li><a href="../halls/ancient.html">Hall I: World Origins of Cryptography</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Hall I · World Origins</span>
+  </div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
