@@ -22,7 +22,9 @@ const path = require('path');
 
 global.window = global;
 require('../js/ciphers/all-engines.js');
+require('../js/cipher-detective.js');
 const E = window.CipherEngines;
+const D = window.CipherDetective;
 
 let pass = 0, fail = 0;
 const failures = [];
@@ -415,6 +417,35 @@ for (const kat of KATS) {
   let got;
   try { got = kat.fn(); } catch (e) { got = 'THREW: ' + e.message; }
   ok(kat.name, got === kat.expected, `expected="${kat.expected}" got="${got}"`);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   6. CIPHER DETECTIVE KNOWN-SAMPLE IDENTIFICATION
+   ════════════════════════════════════════════════════════════════ */
+section('6. Cipher Detective known-sample identification');
+
+ok('CipherDetective exported', !!D && typeof D.analyse === 'function');
+
+if (D && typeof D.analyse === 'function') {
+  const caesarCipher = E.caesar.encode('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG', '3');
+  const caesarAnalysis = D.analyse(caesarCipher);
+  ok('CipherDetective returns 3-5 candidates',
+    Array.isArray(caesarAnalysis.candidates) && caesarAnalysis.candidates.length >= 3 && caesarAnalysis.candidates.length <= 5,
+    `count=${caesarAnalysis.candidates ? caesarAnalysis.candidates.length : 'none'}`);
+  ok('CipherDetective identifies Caesar sample in top 3',
+    caesarAnalysis.candidates.slice(0, 3).some(c => c.id === 'caesar'),
+    `top=${caesarAnalysis.candidates.map(c => c.id).join(',')}`);
+
+  const vigenereCipher = E.vigenere.encode('ATTACKATDAWNATTACKATDAWNATTACKATDAWN', 'LEMON');
+  const vigenereAnalysis = D.analyse(vigenereCipher);
+  ok('CipherDetective identifies Vigenere sample in top 5',
+    vigenereAnalysis.candidates.slice(0, 5).some(c => c.id === 'vigenere'),
+    `top=${vigenereAnalysis.candidates.map(c => c.id).join(',')}`);
+
+  const morseAnalysis = D.analyse('.... . .-.. .-.. --- / .-- --- .-. .-.. -..');
+  ok('CipherDetective identifies Morse sample as top candidate',
+    morseAnalysis.candidates[0] && morseAnalysis.candidates[0].id === 'morse',
+    `top=${morseAnalysis.candidates[0] ? morseAnalysis.candidates[0].id : 'none'}`);
 }
 
 /* ════════════════════════════════════════════════════════════════

@@ -321,6 +321,32 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
     window.close();
   }
 
+  // ── Cipher Detective page ────────────────────────────────────────────
+  {
+    const dom = await loadPage(path.join(REPO, 'cipher-detective.html'));
+    const { window } = dom;
+    const { document } = window;
+    const input = document.getElementById('detective-input');
+    const resultsArea = document.getElementById('results-area');
+    const candidates = document.getElementById('candidates-container');
+
+    ok('cipher-detective.html: input textarea present', !!input);
+    ok('cipher-detective.html: results area present', !!resultsArea);
+    ok('cipher-detective.html: candidates container present', !!candidates);
+
+    if (input && resultsArea && candidates) {
+      input.value = 'WKHTXLFNEURZQIRAMXPSVRYHUWKHODCBGRJ';
+      input.dispatchEvent(new window.Event('input', { bubbles: true }));
+      await tick(20);
+
+      const cards = candidates.querySelectorAll('.candidate-card');
+      ok('cipher-detective.html: renders candidate cards after input', cards.length >= 1, `count=${cards.length}`);
+      ok('cipher-detective.html: results become visible after analysis',
+        resultsArea.style.display !== 'none', `display=${resultsArea.style.display || '(empty)'}`);
+    }
+    window.close();
+  }
+
   console.log('\n' + '═'.repeat(70));
   console.log(`  ✅ ${pass} passed   ❌ ${fail} failed`);
   console.log('═'.repeat(70));
