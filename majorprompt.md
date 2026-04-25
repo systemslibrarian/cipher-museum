@@ -603,17 +603,18 @@ Updated after every commit. Source of truth for completion status.
 
 ## Phase 13 — Global integration 🟡 ← ACTIVE
 - [x] museum-map.html: search index rebuilt (search-index.json updated)
-- [ ] museum-map.html: Complete Cipher Index updated with all new exhibits ← TODO
-- [ ] museum-map.html: Hall XII and Hall XIII added to floor-plan graphic ← TODO
-- [ ] museum-map.html: subtitle/footer count updated ← TODO
+- [x] museum-map.html: Complete Cipher Index updated with all new exhibits (132 rows)
+- [x] museum-map.html: Hall XII and Hall XIII already in floor-plan (were added previously)
+- [x] museum-map.html: subtitle/footer count updated to 132 exhibits
+- [x] comparison.html: data updated (52 → 132 rows); new type/era/security filters added
+- [x] index.html: hero counts updated (ciphers=132, halls=13)
+- [x] index.html: footer version updated to 132 exhibits
+- [x] README.md: hall table header + count references updated to 132 / 13 halls
+- [x] sitemap.xml: all 61 new cipher URLs added
 - [ ] timeline.html: year markers added for all new exhibits ← TODO
-- [ ] comparison.html: data updated (baseline 63 → 132) ← TODO
 - [ ] cipher-flow.html: visual family map updated ← TODO
-- [ ] index.html: hero counts updated (ciphers=132, halls=13) ← TODO
 - [ ] index.html: Featured Ciphers refreshed ← TODO
 - [ ] index.html: footer version bumped to v3.0.0 ← TODO
-- [ ] README.md: hall table regenerated; counts updated ← TODO
-- [ ] sitemap.xml: all new URLs added ← TODO
 - [ ] all hall pages: "Hall X of Y" updated to "of 13" ← TODO
 - [ ] 404.html and glossary.html: stale counts updated ← TODO
 - [ ] Cryptiana bibliographic enrichment on key exhibits ← TODO
