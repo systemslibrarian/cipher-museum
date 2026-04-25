@@ -4,10 +4,10 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 190 done / 202 total (94.1%)
+- Overall: 200 done / 202 total (99.0%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
-- Phase 1 (Hall I expansion): 9/10
+- Phase 1 (Hall I expansion): 10/10
 - Phase 2 (Hall XII creation): 28/28
 - Phase 3 (Pacific theater): 3/3
 - Phase 4 (WWII/interwar machines): 7/7
@@ -23,7 +23,7 @@ Updated after every commit. Source of truth for completion status.
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
-- Phase 18 (deploy): 13/24
+- Phase 18 (deploy): 23/24
 
 ### Log
 - 2026-04-24: Phase 0 + 0.5 complete; Hall I renamed.
@@ -45,6 +45,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: Multi-phase closure batch — completed remaining side-panel tasks (Navajo expansion context, Fish-family, Morse dual sidebars, Cambridge Five context, Atbash/Caesar/Gold-Bug/Enigma culture links), expanded museum-map Complete Cipher Index to full 139 rows, added Hall XII/XIII guided tour, added Hall XII/XIII learning cross-links, and extended cipher-flow with an unsolved/culture branch.
 - 2026-04-25: Culture/integration verification batch — added `popular-culture-survey.html` and linked it from Hall XIII; validated no stale 404/glossary counts; performed local spot-check across 5 Track A + 5 Track B + 5 bios; and completed several live URL checks (museum-map Hall XII/XIII presence, unsolved/culture/ancient page rendering, further-reading live load).
 - 2026-04-25: Hall XI consistency pass — reinforced `halls/modern-crypto.html` intro with an explicit Kerckhoffs principle link while preserving canonical DES / DH / RSA / AES / SHA-256 framing. Full local test suite remains green.
+- 2026-04-25: Final closure batch — polished Hall I with a guided route callout, standardized identity wording across README/home/package metadata, enriched key early-modern exhibits with explicit Cryptiana research trail references, expanded Workbench dropdown coverage from 51 to all 83 registered engines, fixed stale `comparison.html` counts/copy, added the last 5 missing Break This Cipher reveal panels, re-ran full local test suite green, and completed live verification for homepage counts, Hall XI, Workbench, Cipher Detective, and 5 random artifact-card exhibit pages.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -71,7 +72,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Hall I prev/next chains updated (no prev as first hall, next->Hall II)
 - [x] Hall I sidebar reflects 11 exhibits
 - [UPGRADE-DONE] Shipped ciphers/scytale.html with Tomokiyo revisionist sidebar
-- [ ] Additional polish pass on Hall I cards (deferred)
+- [x] Additional polish pass on Hall I cards
 
 ## Phase 2 - Hall XII creation: Unsolved Ciphers
 - [x] halls/unsolved.html created
@@ -236,7 +237,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] 404.html and glossary.html stale counts updated
 - [x] Workbench header engine count updated
 - [x] Hall XII hero copy includes living-research framing with named researchers
-- [ ] Cryptiana bibliographic enrichments applied to listed exhibits
+- [x] Cryptiana bibliographic enrichments applied to listed exhibits
 - [x] M-209 sidebar added (Hagelin family + Rubicon note)
 - [x] Playfair sidebar added (Wheatstone vs Playfair)
 - [x] Nihilist sidebar added (two nihilist ciphers)
@@ -283,29 +284,29 @@ Updated after every commit. Source of truth for completion status.
 - [x] test-demo-pages.js passes for every new exhibit page
 - [x] test-comprehensive.js validates artifact-card completeness
 - [x] test-comprehensive.js validates Cipher Detective sample identification
-- [ ] Every Track A engine works in Workbench
-- [ ] Every Track A Try It Yourself block produces output via demo-loader
-- [ ] Every Track A Break This Cipher reveal works
-- [ ] Every Track B visualization renders
+- [x] Every Track A engine works in Workbench
+- [x] Every Track A Try It Yourself block produces output via demo-loader
+- [x] Every Track A Break This Cipher reveal works
+- [x] Every Track B visualization renders
 - [x] Every exhibit page shows Artifact Card at top
-- [ ] Catalog/research mode page works with all filters
+- [x] Catalog/research mode page works with all filters
 - [x] Cipher Detective page loads and returns evidence-based candidates
 - [x] Local server spot-check: 5 Track A, 5 Track B, 5 bios
 - [x] Changes pushed to main
-- [ ] Live verification: homepage counts correct
+- [x] Live verification: homepage counts correct
 - [x] Live verification: museum-map shows Hall XII and Hall XIII
 - [x] Live verification: halls/unsolved.html renders
 - [x] Live verification: halls/culture.html renders
 - [x] Live verification: halls/ancient.html shows World Origins
-- [ ] Live verification: halls/modern-crypto.html still shows DES/DH/RSA/AES/SHA-256 + Kerckhoffs
-- [ ] Live verification: 5 random new exhibits work and show artifact cards
-- [ ] Live verification: Workbench shows new engines
-- [ ] Live verification: Cipher Detective works on live site
+- [x] Live verification: halls/modern-crypto.html still shows DES/DH/RSA/AES/SHA-256 + Kerckhoffs
+- [x] Live verification: 5 random new exhibits work and show artifact cards
+- [x] Live verification: Workbench shows new engines
+- [x] Live verification: Cipher Detective works on live site
 - [x] Live verification: further-reading.html loads and external links work
 - [ ] worldupdates.md final status reaches 100%
 
 ## Blockers and deferrals
-- None currently.
+- GitHub repository description update is blocked by API permissions in this environment (`gh repo edit` returned HTTP 403). README, homepage, package metadata, and live-site identity wording were updated; the external repo-description field remains the only blocker preventing the final identity-standardization checkbox from closing.
 
 ## Log of significant events
 - 2026-04-24 - Round 3 build started.

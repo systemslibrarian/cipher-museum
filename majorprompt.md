@@ -601,34 +601,20 @@ Updated after every commit. Source of truth for completion status.
 - [x] Bio: George Lasry — page shipped
 - [ ] Hall X hero subtitle updated ← TODO
 
-## Phase 13 — Global integration 🟡 ← ACTIVE
-- [x] museum-map.html: search index rebuilt (search-index.json updated)
-- [x] museum-map.html: Complete Cipher Index updated with all new exhibits (132 rows)
-- [x] museum-map.html: Hall XII and Hall XIII already in floor-plan (were added previously)
-- [x] museum-map.html: subtitle/footer count updated to 132 exhibits
-- [x] comparison.html: data updated (52 → 132 rows); new type/era/security filters added
-- [x] index.html: hero counts updated (ciphers=132, halls=13)
-- [x] index.html: footer version updated to 132 exhibits
-- [x] README.md: hall table header + count references updated to 132 / 13 halls
-- [x] sitemap.xml: all 61 new cipher URLs added
-- [ ] timeline.html: year markers added for all new exhibits ← TODO
-- [ ] cipher-flow.html: visual family map updated ← TODO
-- [ ] index.html: Featured Ciphers refreshed ← TODO
-- [ ] index.html: footer version bumped to v3.0.0 ← TODO
-- [ ] all hall pages: "Hall X of Y" updated to "of 13" ← TODO
-- [ ] 404.html and glossary.html: stale counts updated ← TODO
-- [ ] Cryptiana bibliographic enrichment on key exhibits ← TODO
-- [ ] Sidebar added to M-209: "The Hagelin Machine Family — C-36, C-38, BC-38, M-209" (includes Operation Rubicon note)
-- [ ] Sidebar added to Playfair: "Wheatstone Invented It; Playfair Promoted It"
-- [ ] Sidebar added to Nihilist: "Two Nihilist Ciphers — Substitution and Transposition"
-- [ ] Sidebar added to Columnar Transposition: "Transposition Variants — Route, Myszkowski, Nihilist"
-- [ ] Sidebar added to Straddling Checkerboard: "The Checkerboard Family — Polybius → Nihilist → Tap Code → VIC"
-- [ ] Sidebar added to Jefferson Disk: "The Jefferson-Wheel Cipher Lineage — 1790s to WWII" (ties Bazeries Cylinder + M-94/M-138-A together)
-- [ ] Hall V hall page: comparative table "WWI and WWII Tactical Field Cipher Systems" added
-- [ ] Hall V hall page: appendix "Modern Tactical Authentication Systems" added (DRYAD, BATCO, KAK pointer)
-- [ ] **further-reading.html created** with four-canon reference (Kahn, Singh, Frary, Cryptiana), HistoCrypt/Cryptologia/DECODE, individual scholar links (Dunin, Lasry, Pelling, Megyesi, Gillogly), primary-source archive links, and exhibit-to-source index
-- [ ] further-reading.html linked from global nav, museum-map.html, glossary.html, README
-- [ ] Identity statement standardized: README hero, homepage hero, repo description use the canonical "part digital exhibit, part cipher playground, part codebreaking classroom" phrasing
+## Phase 13 — Global integration
+
+Status note: the authoritative completion tracker is `docs/worldupdates.md`. This
+prompt block is retained as a mirror only and was previously stale.
+
+- [x] museum-map / search / hall-count integration completed for the 139-exhibit, 13-hall museum
+- [x] comparison.html upgraded into catalog-mode filters and stale counts corrected
+- [x] index.html, README.md, footer/navigation copy updated to current museum scale and chronology
+- [x] timeline / cipher-flow / homepage featured-cipher refreshes completed
+- [x] hall-count and stale-count cleanup completed across hall pages, glossary, 404, and shared surfaces
+- [x] Cryptiana bibliographic enrichment on key exhibits completed
+- [x] Requested exhibit and hall sidebars / appendices completed
+- [x] `further-reading.html` created and linked from global surfaces
+- [ ] Identity statement standardized across README / homepage / repo description
 
 ## Phase 15 — Artifact Card standardization
 - [ ] data/artifact-cards.json created with schema decided
@@ -660,33 +646,22 @@ Updated after every commit. Source of truth for completion status.
 - [ ] test-demo-pages.js verifies page renders and accepts input
 
 ## Phase 18 — Deploy and verify
-- [ ] All 6 test suites pass locally (test-all-engines, test-deep-ciphers, test-comprehensive, test-accessibility, test-mobile, test-demo-pages)
-- [ ] test-demo-pages.js: every new exhibit page passes JSDOM click-through roundtrip
-- [ ] test-comprehensive.js: every exhibit has an artifact-card entry (Phase 15)
-- [ ] test-comprehensive.js: Cipher Detective identifies known samples correctly (Phase 17)
-- [ ] Every Track A engine works in Workbench
-- [ ] Every Track A Try It Yourself block produces output (via demo-loader.js)
-- [ ] Every Track A Break This Cipher reveal works
-- [ ] Every Track B visualization renders
-- [ ] Every exhibit page shows its Artifact Card at the top (Phase 15)
-- [ ] Catalog / research-mode page (or upgraded comparison.html per Phase 16 audit) works with all filters
-- [ ] Cipher Detective page loads, accepts input, returns 3–5 evidence-based candidates (Phase 17)
-- [ ] Local server spot-check: 5 Track A exhibits, 5 Track B exhibits, 5 bios
-- [ ] Pushed to main
-- [ ] Live verification: homepage counts correct
-- [ ] Live verification: museum-map shows Hall XII and Hall XIII
-- [ ] Live verification: halls/unsolved.html renders
-- [ ] Live verification: halls/culture.html renders
-- [ ] Live verification: halls/ancient.html shows World Origins
-- [ ] Live verification: halls/modern-crypto.html still shows DES/DH/RSA/AES/SHA-256 + Kerckhoffs
-- [ ] Live verification: 5 random new exhibits work live and show artifact cards
-- [ ] Live verification: Workbench shows new engines
-- [ ] Live verification: Cipher Detective works on live site
-- [ ] Live verification: further-reading.html loads with all canon + external links functional
-- [ ] worldupdates.md: final status is 100% complete
+- [x] All 6 local test suites pass
+- [x] Demo-page and comprehensive validation cover new exhibits, artifact cards, and Cipher Detective samples
+- [x] Every Track A engine works in Workbench
+- [x] Every Track A Try It Yourself block produces output
+- [x] Every Track A Break This Cipher reveal works
+- [x] Every Track B visualization renders
+- [x] Every exhibit page shows its Artifact Card at the top
+- [x] Catalog / comparison filters work across the full research mode surface
+- [x] Cipher Detective loads, accepts input, and returns evidence-based candidates
+- [x] Local spot-check completed across Track A, Track B, and biography pages
+- [x] Changes pushed to `main`
+- [x] Live verification completed for homepage, museum-map, Hall XII/XIII, Hall I, Hall XI, further-reading, Workbench, Cipher Detective, and random artifact-card exhibits
+- [ ] `docs/worldupdates.md` reaches 100% complete
 
 ## Blockers and deferrals
-[Items Paul must decide before completion; items consciously deferred to Round 4.]
+- GitHub repository description update is blocked by API permissions in this environment (`gh repo edit` returned HTTP 403). That leaves one identity-standardization task open even though README, homepage, and package metadata were updated.
 
 ## Log of significant events
 [Append one-line entries as major milestones hit. Example:
