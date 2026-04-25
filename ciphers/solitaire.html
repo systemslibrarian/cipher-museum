@@ -88,8 +88,267 @@
 4. Count-cut: read the value of the bottom card; cut that many cards
    from the top, place above the bottom card.
 5. Look at the top card's value N. Count N cards down. The next card
-   (mod 26) is the keystream output. If it is a joker, repeat from step 1.</pre>Encryption is then a simple Vigenère-style shift: <code>c = (p + k - 1) mod 26 + 1</code>.</p></div>
+   (mod 26) is the keystream output. If it is a joker, repeat from step 1.</pre>Encryption is then a simple Vigenère-style shift: <code>c = (p + k - 1) mod 26 + 1</code>.</p>
+      <p style="font-size:.82rem;color:var(--tx3);margin-top:.5rem;">Procedure adapted from Schneier's specification; see the plain-language walkthrough at <a href="https://steemit.com/steemiteducation/@shai-hulud/solitaire-encryption-low-tech-high-security-a-how-to" target="_blank" rel="noopener">@shai-hulud · Solitaire Encryption: Low-Tech High-Security How-To</a>.</p>
+      </div>
     </div>
+
+    <!-- ── Visual Step-by-Step Solitaire Demonstrator ── -->
+    <div class="panel" id="solitaireViz">
+      <div class="panel-head"><span class="panel-icon">🎴</span><span class="panel-title">Watch It Work · Step-by-Step Deck Visualizer</span></div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;color:var(--tx2);margin-bottom:.75rem;">
+          Step through the actual deck operations one at a time. Watch the two jokers shuffle, the triple-cut swap segments, and the keystream letter emerge from the count-cut. Each click advances <strong>one phase</strong> of the algorithm; "Next Letter" runs all five phases until a usable keystream letter is produced.
+        </p>
+
+        <div class="input-group" style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end;">
+          <div style="flex:1;min-width:170px;">
+            <label class="input-label" for="sv-key">Deck Key (letters only)</label>
+            <input type="text" class="museum-input" id="sv-key" value="CRYPTONOMICON" style="text-transform:uppercase;">
+          </div>
+          <div style="flex:1;min-width:170px;">
+            <label class="input-label" for="sv-msg">Plaintext (optional)</label>
+            <input type="text" class="museum-input" id="sv-msg" value="DO NOT USE PC" style="text-transform:uppercase;">
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin:.75rem 0;flex-wrap:wrap;gap:.4rem;">
+          <button class="btn btn-primary" id="sv-init">① Key &amp; Initialize Deck</button>
+          <button class="btn btn-secondary" id="sv-step" disabled>▶ Next Phase</button>
+          <button class="btn btn-secondary" id="sv-letter" disabled>⏭ Next Keystream Letter</button>
+          <button class="btn btn-secondary" id="sv-encipher" disabled>🔒 Encipher Whole Message</button>
+          <button class="btn btn-secondary" id="sv-reset">⟲ Reset</button>
+        </div>
+
+        <div id="sv-status" style="font-family:var(--fm);font-size:.82rem;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:.65rem .8rem;color:var(--tx2);min-height:2.4em;line-height:1.5;">
+          Press <strong>① Key &amp; Initialize Deck</strong> to begin. The deck starts in bridge order (A♣ … K♠, then jokers A &amp; B), then is "keyed" by the letters above.
+        </div>
+
+        <div id="sv-deck" class="sv-deck" aria-label="Deck state" style="margin-top:.85rem;"></div>
+
+        <div id="sv-streamWrap" style="margin-top:.9rem;display:none;">
+          <div style="font-size:.78rem;color:var(--tx3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;">Keystream produced</div>
+          <div id="sv-stream" style="font-family:var(--fm);font-size:.95rem;color:var(--gold-lt);background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:.55rem .7rem;letter-spacing:.18em;word-break:break-all;min-height:1.7em;"></div>
+        </div>
+
+        <div id="sv-cipherWrap" style="margin-top:.7rem;display:none;">
+          <div style="font-size:.78rem;color:var(--tx3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;">Plaintext → Ciphertext</div>
+          <div id="sv-cipher" style="font-family:var(--fm);font-size:.95rem;color:var(--tx);background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:.55rem .7rem;letter-spacing:.1em;word-break:break-all;line-height:1.7;"></div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .sv-deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:4px;background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:.5rem;}
+      .sv-card{position:relative;aspect-ratio:5/7;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f7f1e0;color:#1a1a1a;border-radius:4px;font-family:var(--fm);font-size:.78rem;font-weight:600;line-height:1;border:1px solid #c9b98a;box-shadow:0 1px 0 rgba(0,0,0,.4);transition:transform .25s ease, box-shadow .25s ease, outline-color .25s ease;outline:2px solid transparent;}
+      .sv-card .sv-rank{font-size:.78rem;}
+      .sv-card .sv-suit{font-size:.95rem;line-height:1;margin-top:1px;}
+      .sv-card.sv-red{color:#b3261e;}
+      .sv-card.sv-black{color:#0d0d0d;}
+      .sv-card.sv-jokerA{background:linear-gradient(140deg,#ffd24a,#c98a18);color:#2a1a00;border-color:#8a5a00;}
+      .sv-card.sv-jokerB{background:linear-gradient(140deg,#9ad0ff,#3273c8);color:#06183a;border-color:#1f4d8a;}
+      .sv-card.sv-hi{outline-color:var(--gold);transform:translateY(-3px);box-shadow:0 4px 10px rgba(212,175,55,.45);z-index:2;}
+      .sv-card.sv-hi-cut{outline-color:#7fd1ff;box-shadow:0 4px 10px rgba(127,209,255,.4);}
+      .sv-card.sv-hi-out{outline-color:#a4f5a4;box-shadow:0 4px 12px rgba(120,230,120,.55);transform:translateY(-3px);z-index:2;}
+      .sv-card.sv-hi-top{outline-color:#ff9a9a;box-shadow:0 4px 10px rgba(255,120,120,.4);}
+      .sv-idx{position:absolute;top:1px;left:3px;font-size:.5rem;color:#7a6b3f;font-weight:400;}
+      @media (max-width:600px){.sv-deck{grid-template-columns:repeat(9,1fr);} .sv-card .sv-rank{font-size:.7rem;} .sv-card .sv-suit{font-size:.85rem;}}
+    </style>
+
+    <script>
+    (function(){
+      // ── Solitaire / Pontifex visual engine ──────────────────────────────
+      // Cards 1..52: clubs A..K (1-13), diamonds (14-26), hearts (27-39), spades (40-52)
+      // Jokers: 53 = A (red/gold), 54 = B (blue)
+      const SUITS = ['♣','♦','♥','♠'];
+      const RANKS = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+      function cardLabel(n){
+        if(n===53) return {rank:'★',suit:'A',cls:'sv-jokerA'};
+        if(n===54) return {rank:'★',suit:'B',cls:'sv-jokerB'};
+        const s=Math.floor((n-1)/13), r=(n-1)%13;
+        return {rank:RANKS[r], suit:SUITS[s], cls:(s===1||s===2)?'sv-red':'sv-black'};
+      }
+      function clean(s){return (s||'').toUpperCase().replace(/[^A-Z]/g,'');}
+
+      // pure helpers (mirroring all-engines.js)
+      function moveDown(deck, card, n){
+        const i=deck.indexOf(card); const arr=deck.slice();
+        arr.splice(i,1);
+        let j=i+n; if(j>arr.length) j=((j-1)%arr.length)+1;
+        arr.splice(j,0,card); return arr;
+      }
+      function tripleCut(deck){
+        const i1=deck.indexOf(53), i2=deck.indexOf(54);
+        const [a,b]=i1<i2?[i1,i2]:[i2,i1];
+        return deck.slice(b+1).concat(deck.slice(a,b+1)).concat(deck.slice(0,a));
+      }
+      function countCut(deck, n){
+        const last=deck[deck.length-1];
+        const cut=Math.min(n,53);
+        return deck.slice(cut,deck.length-1).concat(deck.slice(0,cut)).concat([last]);
+      }
+      function solitaireStep(deck){
+        let d=moveDown(deck,53,1);
+        d=moveDown(d,54,2);
+        d=tripleCut(d);
+        const bottom=d[d.length-1];
+        return countCut(d, bottom===54?53:bottom);
+      }
+      function keyDeck(key){
+        let d=[]; for(let i=1;i<=54;i++) d.push(i);
+        for(const ch of clean(key)){
+          d=solitaireStep(d);
+          d=countCut(d, ch.charCodeAt(0)-64);
+        }
+        return d;
+      }
+
+      // ── State machine for the visualizer ──────────────────────────────
+      // phases: 0=ready (after init), 1=move A done, 2=move B done,
+      //         3=triple cut done, 4=count cut done, 5=output (loops if joker)
+      const state = { deck:null, phase:0, hi:[], stream:'', plain:'', cipher:'', plainIdx:0 };
+
+      const $deck=document.getElementById('sv-deck');
+      const $status=document.getElementById('sv-status');
+      const $key=document.getElementById('sv-key');
+      const $msg=document.getElementById('sv-msg');
+      const $btnInit=document.getElementById('sv-init');
+      const $btnStep=document.getElementById('sv-step');
+      const $btnLetter=document.getElementById('sv-letter');
+      const $btnEnc=document.getElementById('sv-encipher');
+      const $btnReset=document.getElementById('sv-reset');
+      const $stream=document.getElementById('sv-stream');
+      const $streamWrap=document.getElementById('sv-streamWrap');
+      const $cipher=document.getElementById('sv-cipher');
+      const $cipherWrap=document.getElementById('sv-cipherWrap');
+
+      function render(){
+        if(!state.deck){ $deck.innerHTML='<div style="grid-column:1/-1;color:var(--tx3);font-size:.85rem;padding:.5rem;">Deck not initialized.</div>'; return; }
+        const html=state.deck.map((c,i)=>{
+          const L=cardLabel(c);
+          const hi=state.hi.find(h=>h.i===i);
+          const cls=['sv-card',L.cls];
+          if(hi) cls.push(hi.kind);
+          return `<div class="${cls.join(' ')}" title="pos ${i+1} · card ${c}"><span class="sv-idx">${i+1}</span><span class="sv-rank">${L.rank}</span><span class="sv-suit">${L.suit}</span></div>`;
+        }).join('');
+        $deck.innerHTML=html;
+      }
+      function setStatus(html){ $status.innerHTML=html; }
+      function refreshStream(){
+        if(state.stream){ $streamWrap.style.display=''; $stream.textContent=state.stream.split('').join(' '); }
+        else { $streamWrap.style.display='none'; }
+        if(state.cipher){ $cipherWrap.style.display=''; $cipher.innerHTML=`<div>${state.plain.split('').join(' ')||'<em style="color:var(--tx3);">(no plaintext)</em>'}</div><div style="color:var(--gold-lt);margin-top:.25rem;">${state.cipher.split('').join(' ')}</div>`; }
+        else { $cipherWrap.style.display='none'; }
+      }
+
+      // Initialize / key the deck
+      $btnInit.addEventListener('click', ()=>{
+        const key=clean($key.value)||'CRYPTONOMICON';
+        state.deck=keyDeck(key);
+        state.phase=0; state.hi=[]; state.stream=''; state.cipher=''; state.plain=''; state.plainIdx=0;
+        render(); refreshStream();
+        setStatus(`<strong>Deck keyed with "${key}".</strong> The 54 cards above are the secret state shared by sender and receiver. Now click <strong>Next Phase</strong> to watch one keystream letter emerge.`);
+        [$btnStep,$btnLetter,$btnEnc].forEach(b=>b.disabled=false);
+      });
+
+      // Advance one algorithm phase
+      function advancePhase(){
+        const d=state.deck;
+        if(state.phase===0){
+          // step 1: move A-joker (53) down 1
+          const before=d.indexOf(53);
+          state.deck=moveDown(d,53,1);
+          const after=state.deck.indexOf(53);
+          state.hi=[{i:after,kind:'sv-hi'}];
+          setStatus(`<strong>Phase 1 · Move A-joker down 1.</strong> The gold ★A joker moved from position ${before+1} to position ${after+1}. (If it would fall off the bottom, it wraps just below the top card.)`);
+          state.phase=1;
+        } else if(state.phase===1){
+          const before=d.indexOf(54);
+          state.deck=moveDown(d,54,2);
+          const after=state.deck.indexOf(54);
+          state.hi=[{i:after,kind:'sv-hi'}];
+          setStatus(`<strong>Phase 2 · Move B-joker down 2.</strong> The blue ★B joker moved from position ${before+1} to position ${after+1}. Same wrap-around rule, except it skips an extra card.`);
+          state.phase=2;
+        } else if(state.phase===2){
+          const i1=d.indexOf(53), i2=d.indexOf(54);
+          const [a,b]=i1<i2?[i1,i2]:[i2,i1];
+          state.deck=tripleCut(d);
+          // highlight the new positions of the two jokers (they keep their middle chunk)
+          const ni1=state.deck.indexOf(53), ni2=state.deck.indexOf(54);
+          const lo=Math.min(ni1,ni2), hi=Math.max(ni1,ni2);
+          state.hi=[]; for(let k=lo;k<=hi;k++) state.hi.push({i:k,kind:'sv-hi-cut'});
+          setStatus(`<strong>Phase 3 · Triple cut.</strong> Everything <em>above</em> the first joker (was positions 1–${a}) and everything <em>below</em> the second joker (was positions ${b+2}–54) swap places. The middle chunk between the jokers stays put (highlighted blue).`);
+          state.phase=3;
+        } else if(state.phase===3){
+          const bottom=d[d.length-1];
+          const cnt=bottom===54?53:bottom;
+          state.deck=countCut(d, cnt);
+          // highlight the bottom card (still bottom) and the cut boundary
+          const L=state.deck.length;
+          state.hi=[{i:L-1,kind:'sv-hi-cut'}];
+          for(let k=L-1-cnt;k<L-1;k++) state.hi.push({i:k,kind:'sv-hi-cut'});
+          const blab=cardLabel(bottom);
+          setStatus(`<strong>Phase 4 · Count cut.</strong> The bottom card was <strong>${blab.rank}${blab.suit}</strong> (value ${cnt}). Take the top ${cnt} cards and slide them in just above the untouched bottom card.`);
+          state.phase=4;
+        } else if(state.phase===4){
+          // output step
+          const top=state.deck[0];
+          const cnt=top===54?53:top;
+          const out=state.deck[cnt]; // 0-indexed: count cards down
+          const tlab=cardLabel(top), olab=cardLabel(out);
+          state.hi=[{i:0,kind:'sv-hi-top'},{i:cnt,kind:'sv-hi-out'}];
+          if(out===53||out===54){
+            setStatus(`<strong>Phase 5 · Output check.</strong> Top card <strong>${tlab.rank}${tlab.suit}</strong> (value ${cnt}) → look at position ${cnt+1}. That card is a joker (${olab.suit}) — discard and run the algorithm again from Phase 1.`);
+            state.phase=0; // loop
+          } else {
+            const v=((out-1)%26)+1;
+            const L=String.fromCharCode(64+v);
+            state.stream+=L;
+            setStatus(`<strong>Phase 5 · Keystream output!</strong> Top card <strong>${tlab.rank}${tlab.suit}</strong> (value ${cnt}) → the card at position ${cnt+1} is <strong>${olab.rank}${olab.suit}</strong> (value ${out}). ${out} mod 26 = ${v} → letter <strong style="color:var(--gold);">${L}</strong>.`);
+            // if there's plaintext, encipher one letter
+            if(state.plainIdx < clean($msg.value).length){
+              const p=clean($msg.value)[state.plainIdx];
+              const pv=p.charCodeAt(0)-64;
+              const cv=((pv+v-1)%26)+1;
+              const c=String.fromCharCode(64+cv);
+              state.plain+=p; state.cipher+=c; state.plainIdx++;
+            }
+            state.phase=0;
+          }
+        }
+        render(); refreshStream();
+      }
+
+      $btnStep.addEventListener('click', advancePhase);
+
+      $btnLetter.addEventListener('click', ()=>{
+        // run phases until we land back on phase 0 with a new stream letter
+        const startLen=state.stream.length;
+        let safety=0;
+        while(safety++<200){
+          advancePhase();
+          if(state.phase===0 && state.stream.length>startLen) break;
+        }
+      });
+
+      $btnEnc.addEventListener('click', ()=>{
+        const msg=clean($msg.value);
+        let safety=0;
+        while(state.plainIdx<msg.length && safety++<5000){
+          advancePhase();
+        }
+        setStatus(`<strong>Done.</strong> Enciphered ${msg.length} letter(s). Final keystream: <code>${state.stream}</code>. Plaintext + keystream = ciphertext (mod 26).`);
+      });
+
+      $btnReset.addEventListener('click', ()=>{
+        state.deck=null; state.phase=0; state.hi=[]; state.stream=''; state.cipher=''; state.plain=''; state.plainIdx=0;
+        [$btnStep,$btnLetter,$btnEnc].forEach(b=>b.disabled=true);
+        $deck.innerHTML='';
+        refreshStream();
+        setStatus('Reset. Press <strong>① Key &amp; Initialize Deck</strong> to begin again.');
+      });
+    })();
+    </script>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
