@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 147 done / 202 total (72.8%)
+- Overall: 153 done / 202 total (75.7%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -19,7 +19,7 @@ Updated after every commit. Source of truth for completion status.
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 10/11
-- Phase 13 (global integration): 12/38
+- Phase 13 (global integration): 18/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
@@ -40,6 +40,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: Checklist reconciliation pass — marked shipped phase items as complete based on on-disk verification (Phases 7–12), and recomputed progress summary directly from checkbox totals.
 - 2026-04-25: Phase 16 audit-gated catalog decision complete — selected UPGRADE path, recorded decision in `docs/round3-shipped-audit.md`, and extended `comparison.html` with Hall + Solved Status filters.
 - 2026-04-25: README integration pass — refreshed top-level exhibit/engine counts and explicitly linked `further-reading.html` in the tools section.
+- 2026-04-25: Phase 13 sidebar batch — added six lineage/context sidebars (M-209, Playfair, Nihilist, Columnar, Straddling Checkerboard, Jefferson Disk) and re-validated all six test suites.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -232,12 +233,12 @@ Updated after every commit. Source of truth for completion status.
 - [x] Workbench header engine count updated
 - [ ] Hall XII hero copy includes living-research framing with named researchers
 - [ ] Cryptiana bibliographic enrichments applied to listed exhibits
-- [ ] M-209 sidebar added (Hagelin family + Rubicon note)
-- [ ] Playfair sidebar added (Wheatstone vs Playfair)
-- [ ] Nihilist sidebar added (two nihilist ciphers)
-- [ ] Columnar sidebar added (route/myszkowski/nihilist variants)
-- [ ] Straddling checkerboard sidebar added (family lineage)
-- [ ] Jefferson disk sidebar added (wheel-cipher lineage)
+- [x] M-209 sidebar added (Hagelin family + Rubicon note)
+- [x] Playfair sidebar added (Wheatstone vs Playfair)
+- [x] Nihilist sidebar added (two nihilist ciphers)
+- [x] Columnar sidebar added (route/myszkowski/nihilist variants)
+- [x] Straddling checkerboard sidebar added (family lineage)
+- [x] Jefferson disk sidebar added (wheel-cipher lineage)
 - [ ] Hall V comparative tactical systems table added
 - [ ] Hall V appendix on modern tactical authentication added
 - [x] further-reading.html created with canon/scholar/source index
