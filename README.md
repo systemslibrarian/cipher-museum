@@ -4,7 +4,7 @@
 
 Exploring the history and evolution of cryptography — from classical ciphers to modern secure systems.
 
-An open-source, interactive educational website spanning **139 exhibits** across **13 exhibit halls** — from the Khnumhotep tomb at Beni Hasan (~1900 BCE) to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo (or, for unsolved and visualization-only exhibits, a hand-built widget). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
+Part digital exhibit, part cipher playground, and part codebreaking classroom: an open-source interactive museum spanning **139 exhibits** across **13 exhibit halls** — from the Khnumhotep tomb at Beni Hasan (~1900 BCE) to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo (or, for unsolved and visualization-only exhibits, a hand-built widget). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
 
 **[Live Site →](https://ciphermuseum.com)**
 
@@ -124,7 +124,7 @@ Each row gives the year the cipher was first known/published and when it was bro
 - **[Site Search](search.html)** — Search across all 139 exhibits, 13 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
 - **[Cryptanalysis Techniques](cryptanalysis.html)** — 10 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), HMM/SMT decoding (Copiale), and Chaocipher reconstruction.
 - **[Cipher Challenges](challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
-- **[Timeline](timeline.html)** — Interactive 2,500-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
+- **[Timeline](timeline.html)** — Interactive 3,900+-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
 - **[Comparison Table](comparison.html)** — Sortable, filterable table comparing the museum collection by type, era, hall, security level, solved status, and key method.
 - **[Cipher Flow Explorer](cipher-flow.html)** — Visual relationship map between cipher families.
 - **[Museum Map](museum-map.html)** — Architectural floor plan with all exhibit halls and cipher exhibits.

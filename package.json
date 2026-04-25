@@ -1,7 +1,7 @@
 {
   "name": "cipher-museum",
   "version": "1.0.0",
-  "description": "The Cipher Museum — interactive, educational cryptography exhibits.",
+  "description": "The Cipher Museum — part digital exhibit, part cipher playground, and part codebreaking classroom.",
   "private": true,
   "scripts": {
     "test": "node tests/run-all.js",
