@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 145 done / 202 total (71.8%)
+- Overall: 147 done / 202 total (72.8%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -19,7 +19,7 @@ Updated after every commit. Source of truth for completion status.
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 10/11
-- Phase 13 (global integration): 10/38
+- Phase 13 (global integration): 12/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
@@ -39,6 +39,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: Integration polish — made Workbench engine count dynamic from `window.CipherEngines`, removed stale hardcoded search count (now derives from loaded index), and updated global auto-footer count to 139 exhibits / 13 halls. Full suite remains green.
 - 2026-04-25: Checklist reconciliation pass — marked shipped phase items as complete based on on-disk verification (Phases 7–12), and recomputed progress summary directly from checkbox totals.
 - 2026-04-25: Phase 16 audit-gated catalog decision complete — selected UPGRADE path, recorded decision in `docs/round3-shipped-audit.md`, and extended `comparison.html` with Hall + Solved Status filters.
+- 2026-04-25: README integration pass — refreshed top-level exhibit/engine counts and explicitly linked `further-reading.html` in the tools section.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -239,8 +240,8 @@ Updated after every commit. Source of truth for completion status.
 - [ ] Jefferson disk sidebar added (wheel-cipher lineage)
 - [ ] Hall V comparative tactical systems table added
 - [ ] Hall V appendix on modern tactical authentication added
-- [ ] further-reading.html created with canon/scholar/source index
-- [ ] further-reading.html linked from nav, museum-map, glossary, README
+- [x] further-reading.html created with canon/scholar/source index
+- [x] further-reading.html linked from nav, museum-map, glossary, README
 - [ ] Identity statement standardized across README/home/repo description
 
 ## Phase 15 - Artifact Card standardization
