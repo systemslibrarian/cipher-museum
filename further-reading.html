@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Further Reading — The Cipher Museum</title>
+  <meta name="description" content="Curated bibliography for serious students of cryptography and cryptanalysis: canonical books, academic journals, scholar profiles, and primary-source archives.">
+  <meta property="og:title" content="Further Reading — The Cipher Museum">
+  <meta property="og:description" content="Curated bibliography for serious students of cryptography and cryptanalysis: canonical books, academic journals, scholar profiles, and primary-source archives.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/further-reading.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Further Reading — The Cipher Museum">
+  <meta name="twitter:description" content="Curated bibliography for serious students of cryptography and cryptanalysis: canonical books, academic journals, scholar profiles, and primary-source archives.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/further-reading.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .fr-section { max-width: 980px; margin: 0 auto 3rem; }
+    .fr-section-title {
+      font-family: var(--fd); font-size: 1.4rem; color: var(--gold);
+      letter-spacing: .06em; padding-bottom: .75rem;
+      border-bottom: 1px solid var(--gold-b); margin-bottom: 1.5rem;
+    }
+    .fr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+    .fr-card {
+      background: var(--s2); border: 1px solid var(--s4);
+      border-radius: var(--rl); padding: 1.5rem;
+      transition: all var(--trs);
+      display: flex; flex-direction: column; gap: .5rem;
+    }
+    .fr-card:hover { border-color: var(--gold-b); background: var(--s3); }
+    .fr-card-type {
+      font-family: var(--fm); font-size: .58rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold-dim);
+    }
+    .fr-card-title {
+      font-family: var(--fd); font-size: 1.1rem; color: var(--tx);
+      letter-spacing: .04em; line-height: 1.3;
+    }
+    .fr-card-author {
+      font-family: var(--fm); font-size: .75rem; color: var(--tx2);
+    }
+    .fr-card-year {
+      font-family: var(--fm); font-size: .65rem; color: var(--gold-dim);
+      letter-spacing: .1em;
+    }
+    .fr-card-desc { font-size: .92rem; color: var(--tx2); line-height: 1.7; flex: 1; }
+    .fr-card-link {
+      display: inline-block; margin-top: .5rem;
+      font-family: var(--fm); font-size: .65rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--gold-dim); transition: color var(--tr);
+    }
+    .fr-card-link:hover { color: var(--gold); }
+    .fr-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+    .fr-list li {
+      background: var(--s2); border: 1px solid var(--s4);
+      border-radius: var(--r); padding: 1rem 1.25rem;
+      transition: all var(--trs);
+    }
+    .fr-list li:hover { border-color: var(--gold-b); }
+    .fr-list-name { font-family: var(--fd); font-size: 1rem; color: var(--tx); }
+    .fr-list-meta { font-family: var(--fm); font-size: .7rem; color: var(--tx3); margin-top: .2rem; }
+    .fr-list-desc { font-size: .9rem; color: var(--tx2); line-height: 1.65; margin-top: .4rem; }
+    .fr-tag {
+      display: inline-block; padding: .2rem .55rem;
+      background: var(--gold-glow); border: 1px solid var(--gold-b);
+      border-radius: var(--r); font-family: var(--fm); font-size: .58rem;
+      letter-spacing: .1em; color: var(--gold); margin-right: .35rem; margin-bottom: .2rem;
+    }
+    .fr-alert {
+      background: rgba(201,168,76,.06); border: 1px solid var(--gold-b);
+      border-radius: var(--rl); padding: 1rem 1.25rem; margin-bottom: 2rem;
+      font-size: .9rem; color: var(--tx2); line-height: 1.6;
+    }
+    .fr-alert strong { color: var(--gold-lt); }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Museum Map</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+      <li><a href="cryptanalysis.html">Cryptanalysis</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Entrance</a><span>›</span>Further Reading
+  </div>
+  <span class="page-eyebrow">Curator's Library</span>
+  <h1 class="page-title">Further Reading</h1>
+  <p class="page-tagline">Curated bibliography for serious students of cryptography — books, journals, scholars, and archives</p>
+</div>
+
+<div class="section">
+
+  <div class="fr-alert">
+    <strong>Note:</strong> The Cipher Museum does not sell, endorse, or affiliate with any publisher or retailer. All links go to official author pages, publisher pages, or open-access repositories. No affiliate codes are used.
+  </div>
+
+  <!-- ── CANONICAL BOOKS ── -->
+  <div class="fr-section">
+    <h2 class="fr-section-title">The Canonical Four</h2>
+    <p class="page-meta" style="margin-bottom:1.5rem;">These four books are the standard references cited throughout this museum. If you read nothing else, read these.</p>
+    <div class="fr-grid">
+
+      <div class="fr-card">
+        <span class="fr-card-type">History · Essential</span>
+        <div class="fr-card-title"><em>The Codebreakers</em></div>
+        <div class="fr-card-author">David Kahn</div>
+        <div class="fr-card-year">1967 (revised 1996)</div>
+        <p class="fr-card-desc">The foundational history of cryptology from ancient Egypt to the NSA. 1,200 pages. Kahn coined the word "cryptanalysis," interviewed surviving WWII codebreakers while their work was still classified, and created the modern academic field of cryptological history. Every subsequent serious work in the field cites this one. The 1996 revised edition adds chapters on the computer age and is the edition to buy.</p>
+        <span class="fr-tag">Essential</span><span class="fr-tag">History</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Popular Science · Essential</span>
+        <div class="fr-card-title"><em>The Code Book</em></div>
+        <div class="fr-card-author">Simon Singh</div>
+        <div class="fr-card-year">1999</div>
+        <p class="fr-card-desc">The best single-volume introduction to cryptography for a general reader. Singh traces ciphers from Mary Queen of Scots through quantum cryptography with rigorous accuracy and excellent narrative pacing. His explanations of public-key cryptography and the history of Enigma are particularly clear. Includes a £10,000 cipher challenge (ten stages, all solved by 2000). The companion website's educational resources remain excellent.</p>
+        <span class="fr-tag">Essential</span><span class="fr-tag">Introductory</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Academic · Historical Cryptanalysis</span>
+        <div class="fr-card-title"><em>Secret History: The Story of Cryptology</em></div>
+        <div class="fr-card-author">Craig P. Bauer</div>
+        <div class="fr-card-year">2nd ed. 2021</div>
+        <p class="fr-card-desc">The college-level textbook that bridges history and mathematics most cleanly. Bauer includes worked cryptanalysis exercises, unsolved ciphers chapter, cipher puzzles with solutions, and coverage of non-Western cryptographic traditions. The second edition adds sections on modern historical discoveries (Copiale, Beale context updates, Voynich radiocarbon dating) and is notably better than the first.</p>
+        <span class="fr-tag">Textbook</span><span class="fr-tag">Mathematics</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Technical Reference</span>
+        <div class="fr-card-title"><em>Applied Cryptography</em></div>
+        <div class="fr-card-author">Bruce Schneier</div>
+        <div class="fr-card-year">2nd ed. 1996</div>
+        <p class="fr-card-desc">The definitive technical reference for practicing cryptographers, now partly dated by algorithmic advances but still essential for understanding why modern cipher design looks the way it does. Explains DES, early public-key infrastructure, protocol design, and the philosophy of defensive cryptographic engineering. Schneier's principle — "security is a process, not a product" — is the thesis of the book in one line.</p>
+        <span class="fr-tag">Technical</span><span class="fr-tag">Reference</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── BIOGRAPHY ── -->
+  <div class="fr-section">
+    <h2 class="fr-section-title">Biography &amp; Narrative History</h2>
+    <div class="fr-grid">
+
+      <div class="fr-card">
+        <span class="fr-card-type">Biography</span>
+        <div class="fr-card-title"><em>Alan Turing: The Enigma</em></div>
+        <div class="fr-card-author">Andrew Hodges</div>
+        <div class="fr-card-year">1983 (centenary ed. 2012)</div>
+        <p class="fr-card-desc">The standard biography of Turing, written by a mathematician who treats the technical material seriously. Covers Bletchley Park in depth, Turing's contributions to the Bombe design, his postwar computing and morphogenesis work, and his prosecution and death. The centenary edition includes a new preface and updated bibliographic notes.</p>
+        <span class="fr-tag">Biography</span><span class="fr-tag">WWII</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Biography</span>
+        <div class="fr-card-title"><em>The Woman Who Smashed Codes</em></div>
+        <div class="fr-card-author">Jason Fagone</div>
+        <div class="fr-card-year">2017</div>
+        <p class="fr-card-desc">Reconstruction of Elizebeth Smith Friedman's career from Riverbank Laboratories through the Coast Guard and WWII Abwehr work, drawing on her papers at the Marshall Library (opened 2008) and Coast Guard records. The definitive account of the FBI's deliberate erasure of her contribution and the restoration of the historical record. Essential companion to the <a href="ciphers/elizebeth-friedman.html">Elizebeth Friedman exhibit</a>.</p>
+        <span class="fr-tag">Biography</span><span class="fr-tag">Women in Crypto</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Memoir</span>
+        <div class="fr-card-title"><em>Between Silk and Cyanide</em></div>
+        <div class="fr-card-author">Leo Marks</div>
+        <div class="fr-card-year">1998</div>
+        <p class="fr-card-desc">Marks's memoir of running SOE's codes section from 1942 to 1945. Uniquely combines insider technical detail about agent cipher systems (poem codes, silk one-time pads, worked-out keys) with vivid character writing. The best first-person account of operational cryptography under wartime pressure. Sold as literary memoir; the technical accuracy is impeccable.</p>
+        <span class="fr-tag">Memoir</span><span class="fr-tag">SOE</span><span class="fr-tag">WWII</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Popular History</span>
+        <div class="fr-card-title"><em>Seizing the Enigma</em></div>
+        <div class="fr-card-author">David Kahn</div>
+        <div class="fr-card-year">1991 (revised 2012)</div>
+        <p class="fr-card-desc">Kahn's focused account of Allied capture operations against German naval Enigma material — pinches from weather ships, trawlers, and submarines. Explains why physical capture of key material was as important as mathematical cryptanalysis and how the two combined in the Battle of the Atlantic. A shorter, more readable Kahn than <em>The Codebreakers</em>.</p>
+        <span class="fr-tag">History</span><span class="fr-tag">Naval</span><span class="fr-tag">WWII</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">History of Intelligence</span>
+        <div class="fr-card-title"><em>Spycatcher</em></div>
+        <div class="fr-card-author">Peter Wright</div>
+        <div class="fr-card-year">1987</div>
+        <p class="fr-card-desc">MI5 officer Peter Wright's controversial memoir covers Cold War SIGINT, the VENONA investigation's British end, and the unmasking of Roger Hollis. Legally suppressed in the UK, published in Australia. Wright's technical descriptions of the VENONA process and the Cambridge Five investigation are primary-source material, though his conspiratorial conclusions about Hollis are disputed. Use for VENONA context; evaluate conclusions critically.</p>
+        <span class="fr-tag">Intelligence History</span><span class="fr-tag">Cold War</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ACADEMIC JOURNALS ── -->
+  <div class="fr-section">
+    <h2 class="fr-section-title">Academic Journals &amp; Proceedings</h2>
+    <div class="fr-grid">
+
+      <div class="fr-card">
+        <span class="fr-card-type">Peer-Reviewed Journal</span>
+        <div class="fr-card-title"><em>Cryptologia</em></div>
+        <div class="fr-card-author">Taylor &amp; Francis · Founded 1977</div>
+        <p class="fr-card-desc">The principal peer-reviewed journal covering the history and mathematics of cryptology. Publishes historical cipher analyses, biographies of cryptologists, NSA and GCHQ declassification reviews, and mathematical studies of classical cipher security. Many landmark cipher solutions (Copiale, Mary Queen of Scots nomenclators, Dorabella analyses) appeared here first. Articles from 1977–2015 are partially open-access via JSTOR.</p>
+        <span class="fr-tag">Peer-Reviewed</span><span class="fr-tag">History</span><span class="fr-tag">Mathematics</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Conference Proceedings</span>
+        <div class="fr-card-title"><em>HistoCrypt</em></div>
+        <div class="fr-card-author">Annual conference · First held 2018</div>
+        <p class="fr-card-desc">The annual conference on historical cryptology — the world's only dedicated academic venue for classical cipher research. Proceedings are open-access via the Linköping Electronic Conference Proceedings. Covers unsolved cipher attacks, historical document analysis, digital humanities approaches to manuscript decipherment, and new archival discoveries. The Lasry–Biermann–Tomokiyo Mary Stuart paper and the Voynich radiocarbon context papers both presented here.</p>
+        <span class="fr-tag">Open Access</span><span class="fr-tag">Conference</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Academic Project</span>
+        <div class="fr-card-title">DECODE — Decipherment of Coded Manuscripts</div>
+        <div class="fr-card-author">Uppsala University · EU-funded</div>
+        <p class="fr-card-desc">An EU-funded database of undeciphered or recently deciphered historical manuscripts, maintained at Uppsala University. Includes the most comprehensive catalogue of known historical cipher manuscripts currently available — over 75,000 documented items. Researchers can submit new discoveries. The primary scholarly database for anyone working on historical cipher manuscripts.</p>
+        <span class="fr-tag">Database</span><span class="fr-tag">Open Access</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Journal of Record</span>
+        <div class="fr-card-title"><em>Annals of the History of Computing</em></div>
+        <div class="fr-card-author">IEEE · Founded 1979</div>
+        <p class="fr-card-desc">The IEEE's history of computing journal regularly publishes material on code-breaking machines (Colossus, Bombe, ENIGMA reconstruction), early NSA computing, and Cold War SIGINT machinery. The Colossus reconstruction team's authoritative papers appeared here. Essential for the mechanical and electronic cipher machine histories.</p>
+        <span class="fr-tag">Computing History</span><span class="fr-tag">Machines</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SCHOLARS ── -->
+  <div class="fr-section">
+    <h2 class="fr-section-title">Scholar Profiles — Active Researchers</h2>
+    <ul class="fr-list">
+
+      <li>
+        <div class="fr-list-name">George Lasry</div>
+        <div class="fr-list-meta">Cryptanalyst · Co-author, Mary Queen of Scots nomenclator decipherment (2022)</div>
+        <p class="fr-list-desc">Lasry's papers combine automated hill-climbing search with historical cryptanalysis to attack unsolved historical ciphers at scale. His work on the Mary Stuart Castelnau letters (with Beáta Megyesi and Satoshi Tomokiyo, <em>Cryptologia</em> 2022) is the most significant historical cipher decipherment of the 2020s. His solver toolkit, <em>CryptoCracker</em>, is open source. See the <a href="ciphers/lasry.html">Lasry exhibit</a> for fuller context on his methods and results.</p>
+        <span class="fr-tag">Active</span><span class="fr-tag">Historical Cryptanalysis</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">Beáta Megyesi</div>
+        <div class="fr-list-meta">Professor, Uppsala University · Lead, DECODE project</div>
+        <p class="fr-list-desc">Computational linguist who leads the DECODE database project and co-directs HistoCrypt. Her primary research applies NLP and statistical methods to historical cipher manuscript analysis. Co-author on the Copiale cipher solution (2011) and the Mary Stuart Castelnau letters (2022). The DECODE database she maintains is the primary scholarly resource for manuscript cipher research globally.</p>
+        <span class="fr-tag">Active</span><span class="fr-tag">NLP · Computational</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">Satoshi Tomokiyo</div>
+        <div class="fr-list-meta">Independent researcher · Historical cipher manuscripts</div>
+        <p class="fr-list-desc">A Japanese independent researcher who has published extensively on Renaissance and early-modern cipher systems, primarily via a long-running personal research website and <em>Cryptologia</em>. Co-author on the Mary Stuart Castelnau paper. His analyses of Argenti family cipher manuscripts and papal diplomatic ciphers are unpublished in journal form but widely cited within the field.</p>
+        <span class="fr-tag">Active</span><span class="fr-tag">Renaissance Ciphers</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">Nick Pelling</div>
+        <div class="fr-list-meta">Researcher · Voynich manuscript; historical unsolved ciphers</div>
+        <p class="fr-list-desc">Author of <em>The Curse of the Voynich</em> (2006) and one of the field's most thorough Voynich analysts. Pelling's blog <em>Cipher Mysteries</em> is the most comprehensive tracking resource for active unsolved cipher research — covering Rongorongo, Dorabella, McCormick, Zodiac, and Voynich in systematic depth. He has a day job in software; his analytical standards are higher than most academics in this space.</p>
+        <span class="fr-tag">Active</span><span class="fr-tag">Unsolved Ciphers</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">James Gillogly</div>
+        <div class="fr-list-meta">Cryptanalyst · Beale Papers, Chaocipher mechanism, historical cipher solutions</div>
+        <p class="fr-list-desc">Retired computer scientist and cryptanalyst who has published landmark analyses of major unsolved ciphers: the earliest serious statistical analysis of the unbroken Beale Papers ciphers (B1 and B3), the reconstruction of Chaocipher's mechanism from the Byrne estate papers, and analysis of the McCormick cipher. His papers in <em>Cryptologia</em> are models of rigorous statistical approach to historical cipher problems.</p>
+        <span class="fr-tag">Active</span><span class="fr-tag">Statistical Analysis</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">Elonka Dunin</div>
+        <div class="fr-list-meta">Cryptanalyst · Kryptos, Cicada 3301 pioneer; co-author, <em>Cryptanalysis for Beginners</em></div>
+        <p class="fr-list-desc">Game industry veteran turned professional cipher researcher. Maintains the definitive list of famous unsolved ciphers, co-authored the CIA Kryptos FOIA disclosure campaign, and wrote <em>Cryptanalysis for Beginners</em> (with Klaus Schmeh, 2023). Dunin is the primary public interface between the cryptanalysis community and mainstream media on Kryptos and similar challenges. See the <a href="ciphers/dunin.html">Dunin exhibit</a>.</p>
+        <span class="fr-tag">Active</span><span class="fr-tag">Kryptos</span><span class="fr-tag">Advocacy</span>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- ── PRIMARY SOURCE ARCHIVES ── -->
+  <div class="fr-section">
+    <h2 class="fr-section-title">Primary Source Archives</h2>
+    <ul class="fr-list">
+
+      <li>
+        <div class="fr-list-name">NSA Center for Cryptologic History</div>
+        <div class="fr-list-meta">Fort Meade, Maryland · nsa.gov/history</div>
+        <p class="fr-list-desc">The NSA's public history arm publishes declassified monographs, oral history transcripts, and the quarterly <em>Cryptolog</em> journal (archived). The VENONA documents (2,900 decrypted messages), the Friedman Collection finding aids, and the technical histories of SIGABA, SIGSALY, and early NSA computing are free downloads. The single richest primary-source archive for 20th-century American cryptologic history.</p>
+        <span class="fr-tag">Primary Sources</span><span class="fr-tag">Free</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">GCHQ / Bletchley Park Trust</div>
+        <div class="fr-list-meta">UK · bletchleypark.org.uk</div>
+        <p class="fr-list-desc">The Bletchley Park Trust maintains an archive of personal papers, photographs, and technical documents from the WWII codebreaking operation. The UK National Archives (Kew) holds the declassified ULTRA material, the Enigma machine service manuals (released 2000), and Lorenz/Colossus technical documents. The Bombe reconstruction project's engineering reports are freely available from the Trust.</p>
+        <span class="fr-tag">Primary Sources</span><span class="fr-tag">WWII</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">US National Archives — Record Group 457</div>
+        <div class="fr-list-meta">College Park, Maryland · archives.gov</div>
+        <p class="fr-list-desc">RG 457 is the primary NSA/ASA/AFSA record group — the largest collection of US SIGINT materials available to researchers. Contains VENONA working papers, original MAGIC ("Purple") intercept files, raw WWII intercept traffic, and NSA's own historical studies of major programs. Many materials require FOIA requests; others are open access. The definitive first stop for primary-source American SIGINT research.</p>
+        <span class="fr-tag">Primary Sources</span><span class="fr-tag">SIGINT</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">Elizebeth Friedman Collection — Marshall Library</div>
+        <div class="fr-list-meta">Virginia Military Institute, Lexington, VA · marshallfoundation.org</div>
+        <p class="fr-list-desc">Elizebeth Friedman's personal papers, opened to researchers in 2008. Contains her correspondence with William Friedman, Coast Guard case files, court testimony transcripts from the Prohibition rum-runner trials, and WWII Abwehr South America materials formerly credited to the FBI. The basis of Fagone's <em>The Woman Who Smashed Codes</em>.</p>
+        <span class="fr-tag">Primary Sources</span><span class="fr-tag">Biography</span>
+      </li>
+
+      <li>
+        <div class="fr-list-name">Voynich Manuscript — Beinecke MS 408</div>
+        <div class="fr-list-meta">Yale University Library · beinecke.library.yale.edu</div>
+        <p class="fr-list-desc">Full high-resolution scans of all 240 pages of the Voynich Manuscript are freely available through the Beinecke Rare Book Library. The standard research corpus. Researchers should also consult the Voynich Information Browser (maintained by René Zandbergen), which provides a page-by-page transcript, hand identification, and historical provenance documentation in more detail than any single publication.</p>
+        <span class="fr-tag">Primary Sources</span><span class="fr-tag">Unsolved</span><span class="fr-tag">Free</span>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- ── WEB RESOURCES ── -->
+  <div class="fr-section">
+    <h2 class="fr-section-title">Web Resources &amp; Software</h2>
+    <div class="fr-grid">
+
+      <div class="fr-card">
+        <span class="fr-card-type">Analysis Software</span>
+        <div class="fr-card-title">CrypTool 2</div>
+        <div class="fr-card-author">CrypTool Project (Open Source)</div>
+        <p class="fr-card-desc">The most comprehensive open-source cryptanalysis workbench. Visual, plugin-based architecture. Implements every classical cipher in this museum plus modern algorithms, statistical analysis tools (IoC, Kasiski, chi-square, n-gram fitness), and historical cipher-specific plugins. Runs on Windows; all algorithms open source. The standard first tool for anyone working on historical cipher texts.</p>
+        <span class="fr-tag">Software</span><span class="fr-tag">Free</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Research Website</span>
+        <div class="fr-card-title">Cipher Mysteries (Nick Pelling)</div>
+        <div class="fr-card-author">nickcelling.org/ciphermysteries</div>
+        <p class="fr-card-desc">The most comprehensive independent tracking site for unsolved cipher research. Covers Voynich, Rongorongo, Dorabella, McCormick, Zodiac Z-340, and dozens of smaller cases with academic rigor. Pelling documents his methodology, cites primary sources, and regularly updates when new scholarship appears. The best single website for following active unsolved cipher research.</p>
+        <span class="fr-tag">Website</span><span class="fr-tag">Unsolved Ciphers</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Community</span>
+        <div class="fr-card-title">MysteryTwister C3</div>
+        <div class="fr-card-author">CrypTool Project · mysterytwister.org</div>
+        <p class="fr-card-desc">A structured cipher challenge platform with 500+ cryptanalysis puzzles graded by difficulty (1–4 stars, plus X-class open challenges). Each challenge has a scoring system, hint structure, and verified solution checking. The X-class challenges are genuine research-grade problems — some unsolved for years. The best learning platform that bridges educational puzzles and real cryptanalysis skill.</p>
+        <span class="fr-tag">Challenges</span><span class="fr-tag">Free</span>
+      </div>
+
+      <div class="fr-card">
+        <span class="fr-card-type">Academic Preprint</span>
+        <div class="fr-card-title">Cryptology ePrint Archive</div>
+        <div class="fr-card-author">IACR · eprint.iacr.org</div>
+        <p class="fr-card-desc">The International Association for Cryptological Research's preprint server — the first place new cryptographic results appear. Hosts 18,000+ papers on modern cryptography, post-quantum algorithms, zero-knowledge proofs, and formal security proofs. Not typically historical, but essential for anyone following the modern side of the field that leads from classical cipher principles.</p>
+        <span class="fr-tag">Preprints</span><span class="fr-tag">Modern Crypto</span><span class="fr-tag">Free</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="museum-map.html">Museum Map</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+        <li><a href="cryptanalysis.html">Cryptanalysis Techniques</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Also See</div>
+      <ul class="footer-links">
+        <li><a href="challenges.html">Cipher Challenges</a></li>
+        <li><a href="learn.html">Learning Paths</a></li>
+        <li><a href="cipher-flow.html">Cipher Families</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License · v3.0.0</span>
+  </div>
+</footer>
+
+<script src="js/nav.js" defer></script>
+</body>
+</html>

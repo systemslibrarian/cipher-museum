@@ -107,7 +107,9 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
   'sigsaly.html', 'yardley.html',
   // Phase 12 biographies:
   'agnes-driscoll.html', 'bill-tutte.html', 'elizebeth-friedman.html',
-  'joan-clarke.html', 'leo-marks.html']);
+  'joan-clarke.html', 'leo-marks.html',
+  // Track B visualization pages:
+  'mary-stuart-castelnau-letters.html']);
 
 (async () => {
   console.log('\n━━━ Part A: auto-loaded demos (demo-loader.js) ━━━\n');

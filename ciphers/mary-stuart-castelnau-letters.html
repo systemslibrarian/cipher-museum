@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mary Queen of Scots — Castelnau Letters — The Cipher Museum</title>
+  <meta name="description" content="The 1586 Castelnau letters by Mary Queen of Scots — a 50,000-character cipher solved by George Lasry, Beáta Megyesi, and Satoshi Tomokiyo in 2022, revealing undocumented French diplomatic intelligence.">
+  <meta property="og:title" content="Mary Queen of Scots — Castelnau Letters — The Cipher Museum">
+  <meta property="og:description" content="The 1586 Castelnau letters by Mary Queen of Scots solved by Lasry, Megyesi, and Tomokiyo in 2022 — a 50,000-character nomenclator cipher revealing 400-year-old diplomatic secrets.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mary Queen of Scots — Castelnau Letters — The Cipher Museum">
+  <meta name="twitter:description" content="The Castelnau letters cipher — solved 2022 after 436 years — revealing Mary Queen of Scots' undocumented French diplomatic correspondence.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+    .track-b-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(160,127,204,.12); border: 1px solid rgba(160,127,204,.3);
+      border-radius: var(--r); padding: .3rem .7rem;
+      font-family: var(--fm); font-size: .62rem; letter-spacing: .15em;
+      text-transform: uppercase; color: #c4a0e8;
+      margin-bottom: 1rem;
+    }
+    .decipherment-timeline {
+      position: relative; padding-left: 2rem; margin: 1.5rem 0;
+    }
+    .decipherment-timeline::before {
+      content: ''; position: absolute; left: .4rem; top: .5rem; bottom: .5rem;
+      width: 2px; background: linear-gradient(180deg, var(--gold-dim), rgba(201,168,76,.2));
+    }
+    .dt-step {
+      position: relative; margin-bottom: 1.5rem;
+    }
+    .dt-step::before {
+      content: ''; position: absolute; left: -1.6rem; top: .45rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--s1); border: 2px solid var(--gold);
+    }
+    .dt-year {
+      font-family: var(--fm); font-size: .65rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: .2rem;
+    }
+    .dt-event {
+      font-size: .93rem; color: var(--tx2); line-height: 1.65;
+    }
+    .cipher-sample {
+      font-family: var(--fm); font-size: .78rem; letter-spacing: .08em;
+      background: var(--s3); border: 1px solid var(--s5); border-radius: var(--r);
+      padding: 1rem; line-height: 1.9; color: var(--gold-lt); word-break: break-all;
+      margin: 1rem 0;
+    }
+    .symbol-table {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .75rem; margin: 1rem 0;
+    }
+    .symbol-row {
+      background: var(--s2); border: 1px solid var(--s4); border-radius: var(--r);
+      padding: .6rem .9rem; display: flex; align-items: baseline; gap: .75rem;
+    }
+    .sym-code { font-family: var(--fm); font-size: .75rem; color: var(--gold); min-width: 3.5rem; }
+    .sym-meaning { font-size: .85rem; color: var(--tx2); }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../further-reading.html">Further Reading</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a><span>&rsaquo;</span>
+    Mary Stuart — Castelnau Letters
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Track B · Deep Dive</span>
+    <span class="badge era-renaissance">1586</span>
+    <span class="badge sec-broken">Solved 2022 — after 436 years</span>
+  </div>
+  <span class="track-b-badge">⬡ Track B · Annotated Decipherment</span>
+  <h1 class="page-title">Mary Queen of Scots — The Castelnau Letters</h1>
+  <p class="page-tagline">Fifty thousand characters of Renaissance nomenclator cipher, solved in 2022 by three researchers and a hill-climber — revealing 400-year-old French diplomatic intelligence that no historian had read</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Cipher Type</span><span class="fact-value">Nomenclator with ~100 symbols + code groups + nulls</span></div>
+    <div class="fact"><span class="fact-label">Language</span><span class="fact-value">French</span></div>
+    <div class="fact"><span class="fact-label">Date</span><span class="fact-value">1586 (written by Mary at Chartley, Staffordshire)</span></div>
+    <div class="fact"><span class="fact-label">Archive Location</span><span class="fact-value">Bibliothèque nationale de France, Paris (MS français 2932)</span></div>
+    <div class="fact"><span class="fact-label">Solved By</span><span class="fact-value">George Lasry, Beáta Megyesi, Satoshi Tomokiyo</span></div>
+    <div class="fact"><span class="fact-label">Published</span><span class="fact-value"><em>Cryptologia</em>, 2022, vol. 47 no. 2</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h3>Why This Matters</h3>
+      <p>Mary's correspondence with the French ambassador Michel de Castelnau (1580–1586) has been known to historians for centuries — but the seventeen cipher letters among them were unreadable. The documents sat in the Bibliothèque nationale de France, correctly identified as Mary's hand, correctly attributed to the Castelnau correspondence, but opaque: a Renaissance nomenclator too complex for manual attack and not previously subjected to automated cryptanalysis. When Lasry, Megyesi, and Tomokiyo deciphered them in 2021 and published in <em>Cryptologia</em> in 2022, they revealed Mary's own account — in her words, to a sympathetic French diplomat — of her captivity conditions, her political strategy, her communications with the French and Spanish crowns, and her reading of the Elizabethan court. Four hundred and thirty-six years of diplomatic silence, lifted by a computational hill-climber.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">The Cipher System: What Mary Used</span></div>
+      <div class="panel-body">
+        <p>Mary's Castelnau cipher is a sophisticated Renaissance nomenclator — the same class of system used in the Babington Plot correspondence (1586), which was broken by Thomas Phelippes. The Castelnau cipher is substantially more complex:</p>
+        <ul style="margin:1rem 0;padding-left:1.5rem;line-height:2;">
+          <li><strong>Symbol alphabet:</strong> ~100 purpose-designed symbols representing letters and common syllables, not the Roman alphabet, making frequency-alphabet mapping non-trivial.</li>
+          <li><strong>Code groups:</strong> Named persons, places, and frequent political terms replaced by dedicated codewords (e.g., a specific symbol for "Monsieur de Castelnau," another for "Her Majesty the Queen of England").</li>
+          <li><strong>Nulls:</strong> Non-semantic symbols interspersed to inflate symbol frequency counts and frustrate statistical attacks.</li>
+          <li><strong>Superencipherment layer:</strong> Some passages appear double-encoded — encoding already-encoded text — as an additional security measure for the most sensitive passages.</li>
+        </ul>
+        <p style="margin-top:.5rem;">The plaintext language is French — an additional barrier for analysts who might expect English or Latin in Mary's correspondence.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🤖</span><span class="panel-title">How the Break Worked: Hill-Climbing at Scale</span></div>
+      <div class="panel-body">
+        <p>The attack method, developed by George Lasry, is a variant of the simulated annealing / hill-climbing approach used in modern historical cryptanalysis. The key components:</p>
+        <ol style="margin:1rem 0;padding-left:1.5rem;line-height:2.1;">
+          <li><strong>Transcription:</strong> Lasry manually transcribed all ~50,000 cipher characters into a machine-readable format, assigning each symbol a numeric ID. This step took weeks.</li>
+          <li><strong>Null identification:</strong> Statistical analysis of symbol frequency distributions identified probable null characters (symbols appearing with anomalous frequency patterns inconsistent with natural French).</li>
+          <li><strong>Codeword separation:</strong> Compound symbols and high-frequency sequences were tentatively identified as code groups (names and words), isolated, and set aside while the substitution alphabet was attacked first.</li>
+          <li><strong>Hill-climbing on n-gram fitness:</strong> The substitution key (mapping of cipher symbols to French letter/syllable hypotheses) was optimised using a hill-climbing search scored by French 4-gram and 5-gram text fitness — the probability that a trial decryption matches French natural-language statistics.</li>
+          <li><strong>Manual refinement:</strong> Once the hill-climber converged on a near-correct key, Lasry, Megyesi, and Tomokiyo examined readable passages, identified remaining errors, and resolved codeword assignments from context.</li>
+        </ol>
+        <p style="margin-top:.5rem;">The approach is a modern instance of a decades-old technique in historical cryptanalysis, but applied to a cipher of unprecedented size (for hand-written Renaissance matter) and complexity. The full computational work took several months.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📅</span><span class="panel-title">Decipherment Timeline — 436 Years</span></div>
+      <div class="panel-body">
+        <div class="decipherment-timeline">
+          <div class="dt-step">
+            <div class="dt-year">1580–1586</div>
+            <div class="dt-event">Mary writes letters to Michel de Castelnau from captivity. Letters use her personal nomenclator, known to be in use since at least 1574.</div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-year">1586 — Babington Plot exposed</div>
+            <div class="dt-event">Walsingham's agent Thomas Phelippes breaks Mary's Babington Plot cipher. The Crown uses the decrypts as evidence at her trial. Her Castelnau letters, however, use a different, more complex cipher system — not attacked at trial because they were not intercepted in time.</div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-year">1587 — Mary executed</div>
+            <div class="dt-event">Mary Queen of Scots is beheaded at Fotheringhay Castle on 8 February 1587. Her correspondence archive subsequently transferred; the Castelnau letters eventually reach what becomes the Bibliothèque nationale de France.</div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-year">1800s–1990s</div>
+            <div class="dt-event">Historians of the Tudor period record the existence of the cipher letters. They are catalogued but remain unread. Several 19th-century cryptanalysts note the documents but do not attempt a serious attack. No computational tools exist until the late 20th century.</div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-year">2021 — Lasry's attack</div>
+            <div class="dt-event">George Lasry, scanning the DECODE database of historical cipher manuscripts, identifies the Castelnau letters and begins a systematic computational attack. Transcription and hill-climbing work spans several months. Readable French text emerges.</div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-year">February 2022 — Published</div>
+            <div class="dt-event">Lasry, Megyesi, and Tomokiyo publish "A ciphertext-only cryptanalysis of a historical nomenclator" in <em>Cryptologia</em>, vol. 47, no. 2. First presentation at HistoCrypt 2021.</div>
+          </div>
+          <div class="dt-step">
+            <div class="dt-year">2022–2023 — Historical analysis</div>
+            <div class="dt-event">Historians begin examining the newly readable content. The letters reveal details of Mary's captivity, her political communications, and previously undocumented diplomatic positions — amplifying the primary-source record for the 1580–1586 period.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔍</span><span class="panel-title">Sample Cipher Segment &amp; Symbol Mapping</span></div>
+      <div class="panel-body">
+        <p>Below is a stylised representation of how the nomenclator cipher looks in the original manuscript — numeric cipher symbols where each number represents a letter, syllable, or codeword in the nomenclator:</p>
+        <div class="cipher-sample" aria-label="Stylised cipher representation">
+          ·47· ·83· ·12· ·95· ·31· ·67· ·8· ·42· ·19· ·55· ·88· ·24·<br>
+          ·7· ·91· ·36· ·14· ·72· ·3· ·59· ·28· ·44· ·66· ·11· ·99·<br>
+          ·52· ·17· ·38· ·81· ·6· ·73· ·29· ·48· ·92· ·15· ·41·
+        </div>
+        <p style="font-size:.85rem;color:var(--tx3);margin-top:.5rem;">Each number represents a single item in the nomenclator table. A null symbol (cryptographer's decoy) might appear as · ·98· · or · ·100· · — a high-frequency interspersed symbol that does not contribute to plaintext.</p>
+
+        <p style="margin-top:1rem;">Reconstructed sample entries from the Lasry–Megyesi–Tomokiyo solution (simplified illustration — exact character assignments are in the published paper):</p>
+        <div class="symbol-table">
+          <div class="symbol-row"><span class="sym-code">Symbol A</span><span class="sym-meaning">letter <em>e</em></span></div>
+          <div class="symbol-row"><span class="sym-code">Symbol B</span><span class="sym-meaning">letter <em>t</em></span></div>
+          <div class="symbol-row"><span class="sym-code">Symbol C</span><span class="sym-meaning">syllable <em>-tion</em></span></div>
+          <div class="symbol-row"><span class="sym-code">Symbol X</span><span class="sym-meaning">null (discard)</span></div>
+          <div class="symbol-row"><span class="sym-code">Codeword Φ</span><span class="sym-meaning">Castelnau (person)</span></div>
+          <div class="symbol-row"><span class="sym-code">Codeword Ψ</span><span class="sym-meaning">The Queen of England</span></div>
+          <div class="symbol-row"><span class="sym-code">Codeword Ω</span><span class="sym-meaning">King of France</span></div>
+          <div class="symbol-row"><span class="sym-code">Codeword Δ</span><span class="sym-meaning">Scotland</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📖</span><span class="panel-title">What the Letters Say</span></div>
+      <div class="panel-body">
+        <p>The full content of the deciphered letters is reported in the <em>Cryptologia</em> paper and its supplementary materials. Key categories of newly revealed content include:</p>
+        <ul style="margin:1rem 0;padding-left:1.5rem;line-height:2.1;">
+          <li><strong>Captivity conditions:</strong> Mary describes her treatment at Chartley, her access to correspondence and to her attendants, and her physical health — primary-source details not previously available from the cipher side of the archive.</li>
+          <li><strong>Political strategy:</strong> Mary outlines her diplomatic positioning — appealing to the French crown for intervention, requesting Castelnau relay messages to specific parties at the French court, and describing her view of her prospects in England.</li>
+          <li><strong>Undocumented intermediaries:</strong> The letters name individuals not previously known to have been involved in Mary's communications network, expanding the known cast of her diplomatic circle.</li>
+          <li><strong>Assessment of Walsingham:</strong> Mary's own characterisation of Sir Francis Walsingham and her awareness of surveillance — a rare first-person account of Tudor intelligence from the surveilled rather than the surveiller.</li>
+        </ul>
+        <div class="callout callout-info" style="margin-top:1rem;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body">
+            <p><strong>Historical significance:</strong> The Castelnau letters are significant not primarily as a cryptanalytic curiosity but as historical documents. They add approximately fifty thousand French characters to the primary-source record for Mary Queen of Scots — a figure studied in extraordinary depth for four centuries, for whom new primary sources are extremely rare. This is what historical cryptanalysis can accomplish: not puzzle-solving, but archive expansion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔗</span><span class="panel-title">Primary Source &amp; Reference</span></div>
+      <div class="panel-body">
+        <p><strong>Lasry, G., Megyesi, B., &amp; Tomokiyo, S.</strong> (2022). "A ciphertext-only cryptanalysis of a historical nomenclator." <em>Cryptologia</em>, 47(2), 165–195. DOI: 10.1080/01611194.2022.2030632</p>
+        <p style="margin-top:.5rem;"><strong>Original manuscript:</strong> Bibliothèque nationale de France, Paris. Département des manuscrits, French MS 2932.</p>
+        <p style="margin-top:1rem;">The paper includes the full transcription, the reconstructed symbol/code-group table, the complete plaintext in French, and a commentary on the historical significance. The preprint version was presented at HistoCrypt 2021.</p>
+        <p style="margin-top:1rem;">See also: <a href="../ciphers/lasry.html" style="color:var(--gold);">George Lasry exhibit</a> · <a href="../ciphers/babington.html" style="color:var(--gold);">Babington Plot Cipher</a> · <a href="../further-reading.html" style="color:var(--gold);">Further Reading: Cryptologia journal</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table"><tbody>
+          <tr><td>Cipher class</td><td>Nomenclator (substitution + codewords)</td></tr>
+          <tr><td>Language</td><td>French</td></tr>
+          <tr><td>Script</td><td>Custom symbol alphabet, ~100 symbols</td></tr>
+          <tr><td>Plaintext length</td><td>~50,000 cipher characters (multiple letters)</td></tr>
+          <tr><td>Archive</td><td>BnF, MS français 2932</td></tr>
+          <tr><td>Encrypted ca.</td><td>1580–1586</td></tr>
+          <tr><td>Solved</td><td>2021 (published 2022)</td></tr>
+          <tr><td>Method</td><td>Hill-climbing n-gram fitness search</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:1.5rem;border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--s2);border-color:var(--gold-b);">
+        <span class="panel-icon">👤</span><span class="panel-title" style="color:var(--gold);">The Solvers</span>
+      </div>
+      <div class="panel-body">
+        <p style="margin-bottom:.75rem;font-size:.9rem;"><strong style="color:var(--gold-lt);">George Lasry</strong> — Israeli cryptanalyst; built the hill-climbing toolkit used across multiple historical cipher solutions; <em>Cryptologia</em> contributor.</p>
+        <p style="margin-bottom:.75rem;font-size:.9rem;"><strong style="color:var(--gold-lt);">Beáta Megyesi</strong> — Uppsala University professor; leads the DECODE database; co-solver of the Copiale Cipher (2011); principal academic coordinator of HistoCrypt.</p>
+        <p style="font-size:.9rem;"><strong style="color:var(--gold-lt);">Satoshi Tomokiyo</strong> — Independent researcher; specialist in Renaissance and early-modern European diplomatic cipher manuscripts; extensive bibliography on Argenti-family systems.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:1.5rem;">
+      <div class="panel-head">
+        <span class="panel-icon">🔗</span><span class="panel-title">Related Exhibits</span>
+      </div>
+      <div class="panel-body">
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem;font-size:.9rem;">
+          <li><a href="babington.html" style="color:var(--gold-dim);">Babington Plot Cipher →</a><br><span style="font-size:.8rem;color:var(--tx3);">Mary's other cipher — broken in 1586</span></li>
+          <li><a href="nomenclator.html" style="color:var(--gold-dim);">Nomenclator System →</a><br><span style="font-size:.8rem;color:var(--tx3);">The cipher class</span></li>
+          <li><a href="lasry.html" style="color:var(--gold-dim);">George Lasry →</a><br><span style="font-size:.8rem;color:var(--tx3);">Codebreaker profile</span></li>
+          <li><a href="../further-reading.html" style="color:var(--gold-dim);">Further Reading →</a><br><span style="font-size:.8rem;color:var(--tx3);">Cryptologia journal access</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Hall X — Codebreakers</div>
+      <ul class="footer-links">
+        <li><a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a></li>
+        <li><a href="babington.html">Babington Plot</a></li>
+        <li><a href="lasry.html">George Lasry</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../further-reading.html">Further Reading</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© The Cipher Museum · MIT License · v3.0.0</span>
+    <span class="footer-copy">Track B · Deep Dive</span>
+  </div>
+</footer>
+
+<script src="../js/nav.js" defer></script>
+</body>
+</html>
