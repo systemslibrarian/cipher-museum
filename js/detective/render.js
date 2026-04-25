@@ -250,6 +250,60 @@
       '</div>');
   }
 
+  /* ─── Attack Tool Buttons (v2) ───────────────────────────────── */
+  var ATTACK_TOOLS = [
+    { id: 'caesar',       label: 'Caesar Brute-Force',     short: 'Caesar BF'     },
+    { id: 'rot13',        label: 'ROT13',                  short: 'ROT13'         },
+    { id: 'atbash',       label: 'Atbash',                 short: 'Atbash'        },
+    { id: 'morse',        label: 'Morse Decode',           short: 'Morse'         },
+    { id: 'encoding',     label: 'Encoding Detect',        short: 'Encoding'      },
+    { id: 'vigKeyLength', label: 'Vigen\u00e8re Key Length', short: 'Vigen\u00e8re KL' },
+    { id: 'substFreq',    label: 'Substitution Freq.',     short: 'Subst. Freq'   }
+  ];
+
+  function renderAttackButtons(stats) {
+    var toolsEl = el('det-attack-tools');
+    if (!toolsEl) return;
+
+    var hasAttacks = global.DetectiveAttacks;
+
+    var buttons = ATTACK_TOOLS.map(function (t) {
+      var applicable = hasAttacks
+        ? global.DetectiveAttacks.isApplicable(t.id, stats)
+        : { ok: true };
+      var disabled = (!applicable.ok) ? ' disabled aria-disabled="true"' : '';
+      var title    = (!applicable.ok && applicable.reason) ? ' title="' + esc(applicable.reason) + '"' : '';
+      return '<button class="attack-btn' + (applicable.ok ? '' : ' attack-btn--disabled') + '" ' +
+        'data-tool="' + esc(t.id) + '"' + disabled + title + '>' +
+        esc(t.label) +
+        '</button>';
+    }).join('');
+
+    toolsEl.innerHTML =
+      '<div class="attack-tools-header">Attack Tools</div>' +
+      '<div class="attack-tools-row">' + buttons + '</div>' +
+      '<div class="attack-result" id="det-attack-result" aria-live="polite"></div>';
+
+    toolsEl.hidden = false;
+  }
+
+  /* ─── Watch Button (v2) ──────────────────────────────────────── */
+  function renderWatchButton() {
+    var wrap = el('det-watch-wrap');
+    if (!wrap) return;
+    wrap.innerHTML =
+      '<button class="watch-btn" id="det-watch-btn">' +
+        '\u25b6 Watch Step-by-Step Investigation' +
+      '</button>';
+    wrap.hidden = false;
+  }
+
+  /* ─── Render an attack tool result (v2) ─────────────────────── */
+  function renderAttackResult(html) {
+    var out = el('det-attack-result');
+    if (out) out.innerHTML = html;
+  }
+
   /* ─── Public API ─────────────────────────────────────────────── */
 
   function draw(stats, ranked) {
@@ -264,6 +318,10 @@
     renderSuspects(ranked.suspects, stats.tooShort);
     renderCaseNotes(ranked.caseNotes);
     renderNextAttack(ranked.nextAttack);
+
+    /* v2 additions */
+    renderAttackButtons(stats);
+    renderWatchButton();
   }
 
   function clear() {
@@ -271,6 +329,8 @@
     hide('det-results');
     hide('det-short-warning');
     hide('det-reality');
+    hide('det-attack-tools');
+    hide('det-watch-wrap');
     ['stat-length','stat-charset','stat-ioc','stat-chi','stat-shift','stat-period']
       .forEach(function (id) { txt(id, '—'); });
   }
@@ -281,6 +341,10 @@
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  global.DetectiveRender = { draw: draw, clear: clear };
+  global.DetectiveRender = {
+    draw: draw,
+    clear: clear,
+    renderAttackResult: renderAttackResult
+  };
 
 })(typeof window !== 'undefined' ? window : global);

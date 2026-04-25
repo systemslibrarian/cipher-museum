@@ -87,6 +87,178 @@
                         border-radius: var(--r); color: var(--tx3); font-family: var(--fm);
                         font-size: .82rem; letter-spacing: .05em; margin-bottom: 1.5rem; }
     .det-muted        { color: var(--tx3); font-family: var(--fb); font-size: .9rem; }
+
+    /* ── v2: Attack Tools ─────────────────────────────────────── */
+    .attack-tools-header { font-family: var(--fm); font-size: .65rem; letter-spacing: .12em;
+                           text-transform: uppercase; color: var(--tx3); margin-bottom: .6rem; }
+    .attack-tools-row { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .9rem; }
+    .attack-btn       { font-family: var(--fm); font-size: .7rem; letter-spacing: .06em;
+                        padding: .35rem .75rem; background: var(--s3); border: 1px solid var(--s5);
+                        border-radius: 3px; color: var(--tx2); cursor: pointer; transition: border-color .15s, color .15s; }
+    .attack-btn:not([disabled]):hover { border-color: var(--gold); color: var(--gold); }
+    .attack-btn--disabled,
+    .attack-btn[disabled] { opacity: .38; cursor: not-allowed; }
+    .attack-result    { background: var(--s2); border: 1px solid var(--s4); border-radius: var(--r);
+                        padding: .85rem 1rem; min-height: 2.5rem; }
+    .attack-result:empty { display: none; }
+    .attack-result-line { margin: 0 0 .3rem; font-family: var(--fb); font-size: .88rem; color: var(--tx2); }
+    .attack-result-table { width: 100%; border-collapse: collapse; font-family: var(--fm); font-size: .78rem; margin: 0; }
+    .attack-result-table th,
+    .attack-result-table td { padding: .4rem .3rem; text-align: left; border-bottom: 1px solid var(--s4); }
+    .attack-result-table th { color: var(--tx3); font-weight: normal; font-size: .62rem;
+                               letter-spacing: .05em; text-transform: uppercase; }
+    .attack-result-table td { color: var(--tx2); }
+    .attack-best-row td     { color: var(--gold); }
+    .attack-plaintext { font-family: var(--fm); color: var(--gold-lt); word-break: break-all; }
+    .attack-warn      { color: var(--red); }
+    .attack-nil       { color: var(--tx3); font-family: var(--fb); font-size: .85rem; margin: 0; }
+    .attack-note      { font-family: var(--fb); font-size: .8rem; color: var(--tx3); margin: .4rem 0 0; line-height: 1.5; }
+    .sf-pair          { display: inline-block; background: var(--s3); border: 1px solid var(--s4);
+                        border-radius: 3px; padding: .1rem .35rem; font-family: var(--fm);
+                        font-size: .78rem; color: var(--gold-lt); margin: .1rem 0; }
+    .subst-freq-result { }
+
+    /* ── v2: Watch / Playback ─────────────────────────────────── */
+    .watch-btn        { margin-top: .9rem; font-family: var(--fm); font-size: .72rem;
+                        letter-spacing: .08em; padding: .45rem 1rem; background: var(--s2);
+                        border: 1px solid var(--gold-b); border-radius: 3px; color: var(--gold-lt);
+                        cursor: pointer; transition: background .15s, border-color .15s; }
+    .watch-btn:hover  { background: var(--gold-glow); border-color: var(--gold); }
+    .pb-overlay       { background: var(--s2); border: 1px solid var(--gold-b);
+                        border-radius: var(--rl); padding: 1.4rem; margin-bottom: 1.5rem; }
+    .pb-header        { display: flex; justify-content: space-between; align-items: baseline;
+                        margin-bottom: 1rem; }
+    .pb-step-title    { font-family: var(--fd); font-size: 1rem; color: var(--gold); }
+    .pb-close         { background: none; border: none; color: var(--tx3); cursor: pointer;
+                        font-size: 1rem; padding: .1rem .3rem; line-height: 1; }
+    .pb-close:hover   { color: var(--tx); }
+    .pb-body          { margin-bottom: 1.25rem; }
+    .pb-controls      { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+                        padding-top: .9rem; border-top: 1px solid var(--s4); }
+    .pb-progress      { font-family: var(--fm); font-size: .68rem; color: var(--tx3);
+                        letter-spacing: .06em; margin-left: auto; }
+    .pb-btn           { font-family: var(--fm); font-size: .72rem; letter-spacing: .07em;
+                        padding: .4rem .9rem; background: var(--gold); border: none;
+                        border-radius: 3px; color: #0a0a0f; cursor: pointer; }
+    .pb-btn:hover     { background: var(--gold-lt); }
+    .pb-btn[disabled] { opacity: .4; cursor: not-allowed; }
+    .pb-btn--secondary { background: var(--s3); border: 1px solid var(--s5); color: var(--tx2); }
+    .pb-btn--secondary:hover { border-color: var(--gold); color: var(--gold); background: var(--s3); }
+    .pb-btn--ghost    { background: none; border: 1px solid var(--s5); color: var(--tx3); }
+    .pb-btn--ghost:hover { border-color: var(--s5); color: var(--tx2); background: var(--s3); }
+    .pb-narration     { font-family: var(--fb); font-size: .92rem; color: var(--tx2);
+                        line-height: 1.75; margin: 0 0 .9rem; }
+    .pb-narration--final { color: var(--tx3); font-size: .85rem; }
+    .pb-card          { background: var(--s3); border: 1px solid var(--s4); border-radius: var(--r);
+                        padding: 1rem 1.1rem; margin-bottom: .9rem; }
+    .pb-metrics-row   { display: flex; flex-wrap: wrap; gap: 1rem .5rem; margin-bottom: .7rem; }
+    .pb-metric        { display: flex; flex-direction: column; gap: .2rem; }
+    .pb-metric-label  { font-family: var(--fm); font-size: .6rem; letter-spacing: .1em;
+                        text-transform: uppercase; color: var(--tx3); }
+    .pb-metric-value  { font-family: var(--fm); font-size: .9rem; color: var(--tx); }
+    .pb-high          { color: var(--green) !important; }
+    .pb-mid           { color: var(--gold) !important; }
+    .pb-low           { color: var(--red) !important; }
+    .pb-muted         { color: var(--tx3); }
+    .pb-finding       { font-family: var(--fb); font-size: .88rem; color: var(--tx2);
+                        line-height: 1.6; margin: .5rem 0 0; }
+    .pb-note          { font-family: var(--fb); font-size: .85rem; color: var(--tx3);
+                        line-height: 1.55; margin: .4rem 0 0; }
+    .pb-note--warn    { color: #d4956a; }
+    .pb-table         { width: 100%; border-collapse: collapse; font-family: var(--fm);
+                        font-size: .78rem; margin-top: .5rem; }
+    .pb-table caption { font-size: .65rem; color: var(--tx3); letter-spacing: .07em;
+                        text-align: left; padding-bottom: .3rem; }
+    .pb-table th,
+    .pb-table td      { padding: .38rem .25rem; text-align: left; border-bottom: 1px solid var(--s4); }
+    .pb-table th      { color: var(--tx3); font-weight: normal; font-size: .62rem;
+                        letter-spacing: .06em; text-transform: uppercase; }
+    .pb-table td      { color: var(--tx2); }
+    .pb-suspect         { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+                          padding: .45rem 0; border-bottom: 1px solid var(--s4); }
+    .pb-suspect:last-child { border-bottom: none; }
+    .pb-suspect-header  { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+    .pb-link          { color: var(--gold-dim); text-decoration: none; font-family: var(--fm);
+                        font-size: .72rem; }
+    .pb-link:hover    { color: var(--gold); }
+    .pb-bar           { display: inline-block; height: .6em; background: var(--gold-b);
+                        border-radius: 1px; vertical-align: middle; }
+
+    /* ── v2: Challenge Mode ────────────────────────────────────── */
+    .challenge-entry-wrap { margin: 1.25rem 0 0; }
+    .challenge-entry-btn  { font-family: var(--fm); font-size: .72rem; letter-spacing: .1em;
+                            text-transform: uppercase; padding: .5rem 1.1rem;
+                            background: var(--gold-glow); border: 1px solid var(--gold-b);
+                            border-radius: 3px; color: var(--gold-lt); cursor: pointer;
+                            transition: background .15s, border-color .15s; }
+    .challenge-entry-btn:hover { background: rgba(212,183,101,.18); border-color: var(--gold); }
+    .challenge-mode-inner { padding: 1.5rem 1.75rem; background: var(--s2);
+                            border: 1px solid var(--gold-b); border-radius: var(--rl);
+                            margin-bottom: 2rem; }
+    .challenge-mode-header { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+                             margin-bottom: 1.5rem; }
+    .challenge-mode-heading { font-family: var(--fd); font-size: 1.2rem; color: var(--gold);
+                              margin: 0; flex-grow: 1; }
+    .challenge-mode-progress { font-family: var(--fm); font-size: .75rem; color: var(--tx3);
+                               letter-spacing: .06em; }
+    .challenge-mode-actions { display: flex; gap: .5rem; }
+    .challenge-tier       { margin-bottom: 1.75rem; }
+    .challenge-tier-title { font-family: var(--fd); font-size: .95rem; margin: 0 0 .9rem; }
+    .challenge-tier-label--beginner     { color: var(--green); }
+    .challenge-tier-label--intermediate { color: var(--gold); }
+    .challenge-tier-label--advanced     { color: var(--red); }
+    .challenge-cards-row  { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .challenge-card       { font-family: var(--fb); font-size: .88rem; color: var(--tx2);
+                            background: var(--s3); border: 1px solid var(--s5);
+                            border-radius: var(--r); padding: .65rem 1rem;
+                            cursor: pointer; text-align: left; transition: border-color .15s; }
+    .challenge-card:hover { border-color: var(--gold); color: var(--tx); }
+    .challenge-card--done { border-color: rgba(90,200,160,.4); }
+    .challenge-card-title { display: block; }
+    .challenge-card-done  { font-size: .8rem; color: var(--green); margin-left: .35rem; }
+    .challenge-detail-header { display: flex; align-items: center; gap: .75rem;
+                               flex-wrap: wrap; margin-bottom: 1rem; }
+    .challenge-detail-title { font-family: var(--fd); font-size: 1.3rem; color: var(--tx);
+                              margin: 0 0 1rem; }
+    .challenge-setup      { background: var(--s3); border-left: 3px solid var(--gold-b);
+                            border-radius: 0 var(--r) var(--r) 0; padding: .9rem 1.1rem;
+                            margin-bottom: 1.25rem; }
+    .challenge-setup p    { font-family: var(--fb); font-size: .9rem; color: var(--tx2);
+                            line-height: 1.7; margin: 0; }
+    .challenge-codebook   { margin-bottom: 1.25rem; }
+    .challenge-codebook-title { font-family: var(--fb); font-size: .9rem; color: var(--tx);
+                                margin: 0 0 .5rem; }
+    .challenge-ciphertext-wrap { margin-bottom: 1.25rem; }
+    .challenge-ciphertext { font-family: var(--fm); font-size: .9rem; color: var(--gold-lt);
+                            background: var(--s3); border: 1px solid var(--s4);
+                            border-radius: var(--r); padding: .9rem 1rem;
+                            word-break: break-all; line-height: 1.8; margin-bottom: .65rem; }
+    .hint-strip           { margin-bottom: 1rem; }
+    .hint-item            { margin-bottom: .4rem; }
+    .hint-btn             { font-family: var(--fm); font-size: .68rem; letter-spacing: .07em;
+                            padding: .3rem .7rem; background: var(--s3); border: 1px solid var(--s5);
+                            border-radius: 3px; color: var(--tx3); cursor: pointer; }
+    .hint-btn:hover       { border-color: var(--gold); color: var(--gold-lt); }
+    .hint-text            { font-family: var(--fb); font-size: .85rem; color: var(--tx2);
+                            background: rgba(212,183,101,.06); border-left: 2px solid var(--gold-b);
+                            padding: .5rem .75rem; margin: .3rem 0 0; line-height: 1.6; }
+    .challenge-level-badge { font-family: var(--fm); font-size: .65rem; letter-spacing: .1em;
+                             text-transform: uppercase; padding: .2rem .5rem; border-radius: 3px; }
+    .challenge-level-badge--beginner     { background: rgba(90,200,160,.1); color: var(--green); border: 1px solid rgba(90,200,160,.3); }
+    .challenge-level-badge--intermediate { background: var(--gold-glow); color: var(--gold); border: 1px solid var(--gold-b); }
+    .challenge-level-badge--advanced     { background: rgba(200,90,90,.08); color: var(--red); border: 1px solid rgba(200,90,90,.25); }
+    .challenge-solved-badge { font-family: var(--fm); font-size: .7rem; color: var(--green);
+                              letter-spacing: .06em; }
+    .challenge-solve-btn  { margin: .75rem 0; }
+    .challenge-solution   { background: var(--s3); border: 1px solid rgba(90,200,160,.3);
+                            border-radius: var(--r); padding: 1rem 1.1rem; margin: .75rem 0; }
+    .challenge-solution h4 { font-family: var(--fb); font-size: .9rem; color: var(--green);
+                             margin: 0 0 .7rem; }
+    .challenge-solution p  { font-family: var(--fb); font-size: .85rem; color: var(--tx2);
+                             line-height: 1.65; margin: 0 0 .5rem; }
+    .challenge-learned    { margin-top: 1.25rem; font-family: var(--fb); font-size: .82rem;
+                            color: var(--tx3); line-height: 1.6;
+                            border-top: 1px solid var(--s4); padding-top: .9rem; }
   </style>
 </head>
 <body>
@@ -130,11 +302,18 @@
       placeholder="Paste ciphertext here to begin the investigation&#8230;&#10;&#10;e.g.  WKHTXLFNEURZQIRAMXSVRYHU WKHODCBGRJ&#8230;"></textarea>
   </div>
 
+    <div class="challenge-entry-wrap">
+      <button id="det-challenge-btn" class="challenge-entry-btn">&#127381; Practice Mode &#8212; Solve a Curated Challenge</button>
+    </div>
+    <div id="det-challenge-mode" hidden></div>
+
   <div id="det-empty" class="det-empty" aria-live="polite">
     Awaiting input. The Detective analyses text as you type or paste.
   </div>
 
   <div id="det-results" hidden>
+
+    <div id="det-playback-area" hidden aria-live="polite"></div>
 
     <div id="det-reality" class="det-labels-strip" aria-label="Analysis context" hidden></div>
 
@@ -167,6 +346,8 @@
         <section class="det-section" aria-labelledby="det-attack-heading">
           <h2 id="det-attack-heading" class="det-section-title">Recommended Next Attack</h2>
           <div id="det-next-attack"></div>
+          <div id="det-watch-wrap" hidden></div>
+          <div id="det-attack-tools" hidden></div>
         </section>
 
       </div>
@@ -233,6 +414,9 @@
 <script src="js/detective/analyses.js"></script>
 <script src="js/detective/scoring.js"></script>
 <script src="js/detective/render.js"></script>
+<script src="js/detective/attacks.js"></script>
+<script src="js/detective/playback.js"></script>
+<script src="js/detective/challenges.js"></script>
 <script src="js/detective/detective.js"></script>
 </body>
 </html>
