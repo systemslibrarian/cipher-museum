@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Tutte — The Cipher Museum</title>
+  <meta name="description" content="Bill Tutte was a Cambridge mathematician who reconstructed the complete logical structure of the Lorenz SZ40 cipher machine from ciphertext alone — without ever seeing the machine — enabling the creation of Colossus, the world's first programmable electronic computer.">
+  <meta property="og:title" content="Bill Tutte — The Cipher Museum">
+  <meta property="og:description" content="Bill Tutte reconstructed the Lorenz SZ40 cipher machine's wiring from ciphertext alone, enabling the creation of Colossus — the world's first programmable electronic computer.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/bill-tutte.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bill Tutte — The Cipher Museum">
+  <meta name="twitter:description" content="Bill Tutte reconstructed the Lorenz cipher machine from ciphertext alone, leading to the creation of Colossus, the world's first programmable electronic computer.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/bill-tutte.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+  .bio-hero {
+    display:flex;gap:2rem;align-items:flex-start;
+    background:var(--s1);border:1px solid var(--gold-b);
+    border-radius:8px;padding:1.75rem;margin:2rem 0;
+  }
+  .bio-portrait {
+    width:120px;height:120px;min-width:120px;border-radius:50%;
+    background:var(--s2);border:2px solid var(--gold-b);
+    display:flex;align-items:center;justify-content:center;
+    font-size:3rem;
+  }
+  .bio-intro h2 { color:var(--gold);margin:0 0 .5rem; font-size:1.35rem; }
+  .bio-intro p  { line-height:1.7;color:var(--fg-dim);margin:.5rem 0; }
+  .bio-dates    { font-size:.85rem;color:var(--gold-lt);font-family:var(--gold-lt);font-family:var(--fm); }
+  @media(max-width:600px) { .bio-hero { flex-direction:column; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a><span>&rsaquo;</span>
+    Bill Tutte
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall X · Codebreakers</span>
+    <span class="badge era-ancient">WWII · Britain</span>
+    <span class="badge sec-broken">Codebreaker Biography</span>
+  </div>
+  <h1 class="page-title">Bill Tutte</h1>
+  <p class="page-tagline">He deduced the complete wheel structure of the Lorenz SZ40 from two identical messages alone — the most remarkable feat of cryptanalysis in WWII.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Born</span><span class="fact-value">May 14, 1917, Newmarket, Suffolk</span></div>
+    <div class="fact"><span class="fact-label">Died</span><span class="fact-value">May 2, 2002, Waterloo, Ontario, Canada</span></div>
+    <div class="fact"><span class="fact-label">Education</span><span class="fact-value">Trinity College, Cambridge — BA Natural Sciences (Chemistry) 1938; PhD Mathematics 1948</span></div>
+    <div class="fact"><span class="fact-label">Recruited</span><span class="fact-value">Bletchley Park, 1941</span></div>
+    <div class="fact"><span class="fact-label">Key Achievement</span><span class="fact-value">Reconstructed Lorenz SZ40 wheel structure and wirings from ciphertext alone, 1941</span></div>
+    <div class="fact"><span class="fact-label">Impact</span><span class="fact-value">Enabled Heath Robinson and Colossus — the world's first programmable electronic computer</span></div>
+    <div class="fact"><span class="fact-label">Post-war</span><span class="fact-value">Founded modern graph theory; University of Waterloo; Fellow of the Royal Society</span></div>
+  </div>
+</div>
+<div class="bio-hero">
+  <div class="bio-portrait">🧮</div>
+  <div class="bio-intro">
+    <h2>Bill Tutte</h2>
+    <div class="bio-dates">1917 – 2002</div>
+    <p>William Thomas Tutte was a chemistry undergraduate at Cambridge when he was recruited to Bletchley Park in 1941. Assigned to the Research Section working on "Fish" — the German teleprinter cipher systems — he was given a 4,000-character depth: two messages that an operator had transmitted in the same Lorenz SZ40 settings, with a slightly altered start. By performing a depth subtraction (XOR of the two ciphertexts), Tutte obtained the XOR of the two plaintexts. Working from probable plaintext guesses for German army messages — standard Wehrmacht opening phrases — he deduced the logical structure of the Lorenz machine completely: twelve wheels, their sizes, their interactions, and the method of their pseudorandom combination. He did this entirely on paper, never having seen a Lorenz machine. His analysis was the foundation for the Tunny-breaking algorithms developed at Bletchley, which in turn drove the construction of the Robinson machines and ultimately Colossus. His work has been described by post-war analysts as "one of the greatest intellectual feats of World War II."</p>
+  </div>
+</div>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance"><h3>Why This Person Matters</h3><p>Bill Tutte's Lorenz analysis is the purest example of what cryptanalysis at its highest level actually is: the reconstruction of an unknown physical system from its outputs alone. Unlike Enigma, where the machine's general design was known, the Lorenz SZ40 was entirely unknown to British intelligence when Tutte was given the depth. He deduced it from mathematics. The practical consequence was Colossus — the machine designed by Tommy Flowers and programmed by team to automate Tutte's statistical attacks — which became the world's first operational programmable digital electronic computer. This means that Tutte's cryptanalytic insight is a direct ancestor of the modern computer, yet his work was classified until 2000, and he received no computer-science recognition during the decades when computer history was being written. His postwar mathematical career was equally distinguished: he essentially founded modern graph theory and made landmark contributions to matroid theory and combinatorics. He holds the rare distinction of being a world-historical figure in two separate fields.</p></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">The Lorenz SZ40</span></div><div class="panel-body"><p>The Lorenz SZ40 (Schlüsselzusatz — "cipher attachment") was a teleprinter cipher machine used for Hitler's highest-level communications — the "Führer's telegraph." Unlike Enigma (a letter substitution device), Lorenz worked on the 5-bit Baudot teleprinter code and combined the plaintext with a pseudorandom keystream generated by twelve rotating pin wheels. The keystream was the XOR of contributions from two groups of wheels (the Chi wheels and the Psi wheels), further modified by a set of motor wheels that controlled irregular stepping. The complexity was far greater than Enigma: the number of possible wheel positions exceeded 10 to the 19th power. The cipher was used by German High Command, Army Group commanders, and directly by Hitler for strategic communications throughout the war.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">The Depth and the Reconstruction</span></div><div class="panel-body"><p>On August 30, 1941, a German operator sent a 4,000-character message to another station. The receiving station asked for a repeat. The operator retransmitted — using the same Lorenz wheel settings, but with approximately 10 abbreviations introduced (changing the length by one character at the start). This near-identical pair of ciphertexts was intercepted by the British "Y stations." When Tutte was given the depth, he performed a statistical attack called "wheel breaking": by assuming probable plaintext values and XOR-differencing the two ciphertexts, he could identify statistical biases introduced by the Chi-wheel keystream. Over months of pencil-and-paper analysis, he deduced all wheel sizes (47, 43, 59, 37, 61 in the Chi set; 43, 47, 51, 53 for Psi; and 37, 61 for motor wheels) and their pin patterns. This was a tour de force of reverse engineering conducted entirely through mathematical inference.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">💻</span><span class="panel-title">From Lorenz to Colossus</span></div><div class="panel-body"><p>Tutte's reconstruction of the Lorenz structure enabled the development of breaking procedures by Max Newman and others in the "Newmanry" section at Bletchley Park. The initial automation used Heath Robinson machines — relay-based systems that counted statistical correlations between ciphertext and trial keystreams by running two paper tape loops simultaneously. The Heath Robinsons were unreliable and slow. Tommy Flowers, a Post Office engineer, argued that vacuum tube logic could do the same work orders of magnitude faster and with far greater reliability. His proposal was rejected by the Navy and the Air Force, but approved for the Lorenz work. Flowers and his team at Dollis Hill built Colossus in eleven months. Colossus Mark 1 was operational at Bletchley in February 1944; Mark 2 (five times faster) arrived in June 1944, just before D-Day. Ten Colossi were eventually built. Churchill ordered all but two destroyed after the war — a decision that set British computing back a decade.</p></div></div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body"><table class="cipher-table"><tbody>
+        <tr><td>Born</td><td>May 14, 1917, Newmarket, Suffolk</td></tr>
+        <tr><td>Died</td><td>May 2, 2002, Waterloo, Ontario</td></tr>
+        <tr><td>Education</td><td>Trinity College Cambridge — Chemistry BA; Maths PhD</td></tr>
+        <tr><td>Key break</td><td>Lorenz SZ40 reconstruction, 1941</td></tr>
+        <tr><td>Enabled</td><td>Colossus — world's first programmable electronic computer</td></tr>
+        <tr><td>Postwar</td><td>Founder of modern graph theory; FRS</td></tr>
+        <tr><td>Classification</td><td>Work secret until 2000</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/lorenz.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Lorenz SZ40</span><span class="related-card__tag">The machine he reverse-engineered</span></a>
+    <a href="../ciphers/bletchley-park.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Bletchley Park</span><span class="related-card__tag">His wartime home</span></a>
+    <a href="../ciphers/enigma.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Enigma</span><span class="related-card__tag">The simpler machine Lorenz superseded</span></a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/leo-marks.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">Leo Marks</span></a>
+  <a href="../ciphers/kahn.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">David Kahn</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall X · Codebreakers</span></div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

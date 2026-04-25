@@ -104,7 +104,10 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
   'beurling.html', 'cabinet-noir.html', 'da-vinci-code.html', 'dilly-knox.html', 'dunin.html',
   'gchq-trio.html', 'gravity-falls.html', 'kahn.html', 'kerckhoffs.html', 'lasry.html',
   'mavis-batey.html', 'microdot.html', 'national-treasure.html', 'rochefort.html',
-  'sigsaly.html', 'yardley.html']);
+  'sigsaly.html', 'yardley.html',
+  // Phase 12 biographies:
+  'agnes-driscoll.html', 'bill-tutte.html', 'elizebeth-friedman.html',
+  'joan-clarke.html', 'leo-marks.html']);
 
 (async () => {
   console.log('\n━━━ Part A: auto-loaded demos (demo-loader.js) ━━━\n');

@@ -56,7 +56,9 @@ const STATIC_PAGES = new Set([
   // Biography / historical narrative pages (no engine):
   'beurling', 'cabinet-noir', 'da-vinci-code', 'dilly-knox', 'dunin',
   'gchq-trio', 'gravity-falls', 'kahn', 'kerckhoffs', 'lasry',
-  'mavis-batey', 'microdot', 'national-treasure', 'rochefort', 'sigsaly', 'yardley'
+  'mavis-batey', 'microdot', 'national-treasure', 'rochefort', 'sigsaly', 'yardley',
+  // Phase 12 additional biographies:
+  'agnes-driscoll', 'bill-tutte', 'elizebeth-friedman', 'joan-clarke', 'leo-marks'
 ]);
 
 /* ════════════════════════════════════════════════════════════════
@@ -73,7 +75,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 132', allPages.length === 132, `actual=${allPages.length}`);
+ok('Cipher pages count is 137', allPages.length === 137, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher|runHollerCode)/i;
