@@ -18,6 +18,7 @@
     ['museum-map.html',   'Explore'],
     ['timeline.html',     'Timeline'],
     ['learn.html',        'Learn'],
+    ['cryptanalysis.html', 'Cryptanalysis'],
     ['challenges.html',   'Challenges'],
     ['lab/workbench.html','Lab'],
     ['search.html',       'Search']
@@ -71,6 +72,7 @@
     ['timeline.html',       'Timeline'],
     ['glossary.html',       'Glossary'],
     ['modern.html',         'Modern Cryptography'],
+    ['cipher-detective.html','Cipher Detective'],
     ['comparison.html',     'Cipher Comparison'],
     ['community/index.html','Community']
   ];

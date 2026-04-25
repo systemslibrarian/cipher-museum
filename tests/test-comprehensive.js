@@ -60,7 +60,9 @@ const STATIC_PAGES = new Set([
   // Phase 12 additional biographies:
   'agnes-driscoll', 'bill-tutte', 'elizebeth-friedman', 'joan-clarke', 'leo-marks',
   // Track B visualization pages:
-  'mary-stuart-castelnau-letters', 'patterson-jefferson-cipher'
+  'mary-stuart-castelnau-letters', 'patterson-jefferson-cipher',
+  // Utilities:
+  'cipher-detective'
 ]);
 
 /* ════════════════════════════════════════════════════════════════

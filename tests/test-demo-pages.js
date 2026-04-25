@@ -99,7 +99,7 @@ const HAND_BUILT = new Set(['caesar.html', 'playfair.html', 'vigenere.html', 'zo
   'field-hollers.html']);
 // Pure-content modern-crypto, unsolved pages, and biography pages with no interactive demo:
 const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
-  'dorabella.html', 'rsa.html', 'sha256.html',
+  'dorabella.html', 'rsa.html', 'sha256.html', 'cipher-detective.html',
   // Biography / historical narrative pages:
   'beurling.html', 'cabinet-noir.html', 'da-vinci-code.html', 'dilly-knox.html', 'dunin.html',
   'gchq-trio.html', 'gravity-falls.html', 'kahn.html', 'kerckhoffs.html', 'lasry.html',
@@ -109,7 +109,8 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
   'agnes-driscoll.html', 'bill-tutte.html', 'elizebeth-friedman.html',
   'joan-clarke.html', 'leo-marks.html',
   // Track B visualization pages:
-  'mary-stuart-castelnau-letters.html', 'patterson-jefferson-cipher.html']);
+'mary-stuart-castelnau-letters.html', 'patterson-jefferson-cipher.html'
+]);
 
 (async () => {
   console.log('\n━━━ Part A: auto-loaded demos (demo-loader.js) ━━━\n');

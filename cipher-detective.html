@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Detective — The Cipher Museum</title>
+  <meta name="description" content="Paste ciphertext to mathematically analyze its properties and identify likely cipher families using IoC, Kasiski examination, and chi-square analysis.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://ciphermuseum.com/cipher-detective.html">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    .detective-grid { display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: start; }
+    .analysis-panel { background: var(--s2); border: 1px solid var(--gold-b); border-radius: var(--rl); padding: 1.5rem; }
+    .candidate-card { background: var(--s3); border: 1px solid var(--s4); border-radius: var(--r); padding: 1rem; margin-bottom: 1rem; }
+    .candidate-card.high-confidence { border-color: var(--green); }
+    .candidate-card.med-confidence { border-color: var(--gold-dim); }
+    .candidate-title { font-family: var(--fd); font-size: 1.2rem; color: var(--tx); margin-bottom: .25rem; display: flex; justify-content: space-between; align-items: center; }
+    .confidence-badge { font-family: var(--fb); font-size: .8rem; padding: .15rem .5rem; border-radius: 3px; }
+    .conf-high { background: rgba(0,255,0,0.1); color: var(--green); }
+    .conf-med { background: rgba(255,200,0,0.1); color: var(--gold); }
+    .conf-low { background: rgba(255,255,255,0.05); color: var(--tx3); }
+    .evidence-list { list-style: none; padding: 0; margin: .75rem 0 0; font-size: .85rem; color: var(--tx2); line-height: 1.5; }
+    .evidence-list li { margin-bottom: .4rem; padding-left: 1.2rem; position: relative; }
+    .evidence-list li.pro::before { content: '+'; color: var(--green); position: absolute; left: 0; font-family: var(--fm); font-weight: bold; }
+    .evidence-list li.con::before { content: '-'; color: var(--red); position: absolute; left: 0; font-family: var(--fm); font-weight: bold; }
+    
+    .stats-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-family: var(--fm); font-size: .8rem; }
+    .stats-table th, .stats-table td { padding: .5rem; text-align: left; border-bottom: 1px solid var(--s4); }
+    .stats-table th { color: var(--tx3); font-weight: normal; letter-spacing: .05em; text-transform: uppercase; font-size: .65rem; }
+    .stats-table td { color: var(--gold-lt); }
+
+    .textarea-wrap { position: relative; margin-bottom: 1.5rem; }
+    .textarea-wrap textarea { width: 100%; height: 200px; padding: 1rem; background: var(--s3); border: 1px solid var(--s5); border-radius: var(--r); color: var(--tx); font-family: var(--fm); font-size: .9rem; resize: vertical; }
+    .textarea-wrap textarea:focus { outline: none; border-color: var(--gold); }
+    
+    @media(max-width: 768px) {
+      .detective-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Entrance</a></li>
+      <li><a href="museum-map.html">Explore</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="lab/workbench.html">Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span><a href="lab/workbench.html">Lab</a><span>›</span>Cipher Detective</div>
+  <span class="page-eyebrow">Interactive Identification</span>
+  <h1 class="page-title">Cipher Detective</h1>
+  <p class="page-desc">Paste unknown ciphertext below. The engine will run statistical tests to identify the most likely cryptographic family based on Index of Coincidence, chi-square, and structure.</p>
+</div>
+
+<div class="section">
+  <div class="detective-grid content-wide">
+    
+    <!-- Input Area -->
+    <div>
+      <div class="textarea-wrap">
+        <label for="detective-input" style="display:block;margin-bottom:.5rem;font-family:var(--fm);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);">Unknown Ciphertext</label>
+        <textarea id="detective-input" spellcheck="false" placeholder="Paste cipher text here to begin analysis...&#10;&#10;e.g. JXUSQ JYIIX UDOJH..."></textarea>
+      </div>
+      
+      <div id="results-area" style="display: none;">
+        <h2 style="font-family:var(--fd);font-size:1.4rem;color:var(--tx);margin-bottom:1rem;border-bottom:1px solid var(--s4);padding-bottom:.5rem;">Most Likely Candidates</h2>
+        <div id="candidates-container"></div>
+      </div>
+      
+      <div id="empty-state" style="padding: 3rem 1rem; text-align: center; border: 1px dashed var(--s4); border-radius: var(--r); color: var(--tx3);">
+        Awaiting input. Mathematical analysis will appear instantly as you type or paste text.
+      </div>
+      
+      <div id="limitations" style="margin-top: 3rem; background: var(--s2); padding: 1.5rem; border-radius: var(--r); font-size: .85rem; color: var(--tx2); line-height: 1.6;">
+        <h3 style="font-family:var(--fb);color:var(--tx);margin:0 0 .5rem;font-size:1rem;">Limitations</h3>
+        <p>The Detective relies on standard English text frequencies. It will be less accurate for:</p>
+        <ul style="margin: .5rem 0 0 1.2rem; padding: 0;">
+          <li>Very short messages (under 20 characters).</li>
+          <li>Plaintext in languages other than English.</li>
+          <li>Texts heavily skewed with names, acronyms, or non-standard vocabulary.</li>
+          <li>Ciphers utilizing nulls or non-standard alphabets.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Stats Panel -->
+    <div class="analysis-panel">
+      <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);margin-bottom:1rem;">Cryptanalytic Profile</h3>
+      <table class="stats-table">
+        <tbody>
+          <tr>
+            <th>Length</th>
+            <td id="stat-length">-</td>
+          </tr>
+          <tr>
+            <th>Characters</th>
+            <td id="stat-charset">-</td>
+          </tr>
+          <tr>
+            <th>IoC</th>
+            <td id="stat-ioc">-</td>
+          </tr>
+          <tr>
+            <th>Base Chi-Square</th>
+            <td id="stat-chi">-</td>
+          </tr>
+          <tr>
+            <th>Best Shift</th>
+            <td id="stat-shift">-</td>
+          </tr>
+          <tr>
+            <th>Probable Period</th>
+            <td id="stat-period">-</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div style="margin-top:2rem;">
+        <a href="cryptanalysis.html" style="font-family:var(--fm);font-size:.7rem;color:var(--gold-dim);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;">Learn these metrics →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>The Cipher Museum</h4>
+      <p>A scholarly journey through cryptographic history.</p>
+    </div>
+    <div>
+      <h4>Related</h4>
+      <ul>
+        <li><a href="cryptanalysis.html">Cryptanalysis Techniques</a></li>
+        <li><a href="lab/workbench.html">Codebreaker's Workbench</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 The Cipher Museum — An Interactive Digital Exhibit</p>
+  </div>
+</footer>
+
+<script src="js/nav.js" defer></script>
+<script src="js/cipher-detective.js"></script>
+<script>
+'use strict';
+(function() {
+  var input = document.getElementById('detective-input');
+  var resultsArea = document.getElementById('results-area');
+  var emptyState = document.getElementById('empty-state');
+  var candidatesCont = document.getElementById('candidates-container');
+  
+  var statLen = document.getElementById('stat-length');
+  var statCharset = document.getElementById('stat-charset');
+  var statIoC = document.getElementById('stat-ioc');
+  var statChi = document.getElementById('stat-chi');
+  var statShift = document.getElementById('stat-shift');
+  var statPeriod = document.getElementById('stat-period');
+  
+  function update() {
+    var text = input.value;
+    if (!text || text.trim().length === 0) {
+      resultsArea.style.display = 'none';
+      emptyState.style.display = 'block';
+      statLen.textContent = '-';
+      statCharset.textContent = '-';
+      statIoC.textContent = '-';
+      statChi.textContent = '-';
+      statShift.textContent = '-';
+      statPeriod.textContent = '-';
+      return;
+    }
+    
+    var result = window.CipherDetective.analyse(text);
+    if (!result || !result.stats) return;
+    
+    // Update Stats
+    statLen.textContent = result.stats.n + ' letters';
+    statCharset.textContent = result.stats.charset;
+    statIoC.textContent = result.stats.ioc.toFixed(4) + ' (Eng ~0.066)';
+    statChi.textContent = result.stats.chi0.toFixed(1);
+    
+    if (result.stats.bestShift > 0 && result.stats.bestShiftChi < 150) {
+      statShift.textContent = 'Shift ' + result.stats.bestShift + ' (χ² ' + result.stats.bestShiftChi.toFixed(1) + ')';
+    } else {
+      statShift.textContent = 'None match English';
+    }
+    
+    statPeriod.textContent = result.stats.periodHint ? result.stats.periodHint + ' (Kasiski/Sliced-IoC)' : 'None detected';
+    
+    // Update Candidates
+    candidatesCont.innerHTML = '';
+    
+    var visible = result.candidates.filter(function(c) { return c.score > 0; });
+    if (visible.length === 0) {
+      candidatesCont.innerHTML = '<p style="color:var(--tx2);">No strong signatures matching known classical ciphers.</p>';
+    } else {
+      visible.forEach(function(c) {
+        var card = document.createElement('div');
+        card.className = 'candidate-card';
+        
+        var confClass = c.confidence >= 80 ? 'conf-high' : (c.confidence >= 50 ? 'conf-med' : 'conf-low');
+        if (c.confidence >= 80) card.classList.add('high-confidence');
+        else if (c.confidence >= 50) card.classList.add('med-confidence');
+        
+        var html = '<div class="candidate-title">' + 
+                     '<span>' + c.name + '</span>' + 
+                     '<span class="confidence-badge ' + confClass + '">' + c.confidence + '% Match</span>' +
+                   '</div>';
+        
+        html += '<ul class="evidence-list">';
+        c.forEv.forEach(function(ev) { html += '<li class="pro">' + ev + '</li>'; });
+        c.againstEv.forEach(function(ev) { html += '<li class="con">' + ev + '</li>'; });
+        html += '</ul>';
+        
+        if (c.url) {
+          html += '<div style="margin-top:1rem;font-family:var(--fm);font-size:.7rem;text-transform:uppercase;"><a href="' + c.url + '" style="color:var(--gold);text-decoration:none;">Read about this cipher →</a></div>';
+        }
+        
+        card.innerHTML = html;
+        candidatesCont.appendChild(card);
+      });
+    }
+    
+    emptyState.style.display = 'none';
+    resultsArea.style.display = 'block';
+  }
+  
+  input.addEventListener('input', update);
+  
+  // Also check if we were passed a prepopulated hash
+  if (location.hash && location.hash.length > 1) {
+    try {
+      var decoded = decodeURIComponent(location.hash.substring(1));
+      input.value = decoded;
+      update();
+    } catch(e){}
+  }
+})();
+</script>
+</body>
+</html>
