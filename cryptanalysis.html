@@ -320,12 +320,19 @@
           <textarea class="museum-input" id="labFreqInput" rows="5" placeholder="Paste any ciphertext here…&#10;&#10;Try: KHOOR ZRUOG (Caesar shift 3)" oninput="labFreqUpdate()"></textarea>
         </div>
         <div id="labFreqResult" aria-live="polite" style="font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.8;"></div>
+        <p id="labFreqReading" aria-live="polite" style="margin-top:1rem;font-family:var(--fb);font-size:.95rem;color:var(--tx2);line-height:1.7;"></p>
         <p style="margin-top:1rem;font-family:var(--fm);font-size:.72rem;color:var(--tx3);line-height:1.6;">IC = Σ n<sub>i</sub>(n<sub>i</sub>−1) / N(N−1) &nbsp;·&nbsp; <span id="labFreqIC" style="color:var(--gold);">—</span></p>
       </div>
       <div>
         <p class="input-label" style="margin-bottom:.5rem;">Letter Frequencies <span style="font-size:.7rem;color:var(--tx3);">(gold = input, outline = English)</span></p>
         <svg id="labFreqSVG" viewBox="0 0 572 170" style="width:100%;height:auto;" role="img" aria-label="Letter frequency bar chart"></svg>
         <div id="labFreqHint" aria-live="polite" style="font-family:var(--fm);font-size:.72rem;color:var(--gold);margin-top:.75rem;"></div>
+      </div>
+    </div>
+    <div class="callout callout-info" style="margin-top:2rem;">
+      <span class="callout-icon">📜</span>
+      <div class="callout-body">
+        <p>Frequency analysis is the oldest known cryptanalytic technique, formally described by the 9th-century Arab polymath <a href="halls/codebreakers.html#al-kindi">Al-Kindi</a> in his <em>Manuscript on Deciphering Cryptographic Messages</em> (c. 850 AD). It exploits the fact that <a href="ciphers/monoalphabetic.html">monoalphabetic substitution ciphers</a> preserve letter frequency — the cipher just relabels each letter, but a frequent letter in the plaintext stays frequent in the ciphertext. This is why every cipher invented after <a href="ciphers/vigenere.html">Vigenère</a> had to break this property: a polyalphabetic key flattens the frequency distribution, denying the analyst the very pattern Al-Kindi discovered.</p>
       </div>
     </div>
   </div>
@@ -677,7 +684,8 @@ function labFreqUpdate() {
   const result = document.getElementById('labFreqResult');
   const hint = document.getElementById('labFreqHint');
   const icEl = document.getElementById('labFreqIC');
-  if (!txt.length) { hint.textContent=''; result.textContent=''; icEl.textContent='—'; resetSVGBars(); return; }
+  const reading = document.getElementById('labFreqReading');
+  if (!txt.length) { hint.textContent=''; result.textContent=''; icEl.textContent='—'; if(reading)reading.textContent=''; resetSVGBars(); return; }
   const counts={}, len=txt.length, maxEng=12.7, h=140, base=155;
   for (const ch of txt) counts[ch]=(counts[ch]||0)+1;
   let maxCh='E',maxPct=0;
@@ -696,6 +704,9 @@ function labFreqUpdate() {
   const guessShift=(maxCh.charCodeAt(0)-69+26)%26;
   hint.textContent=`Most frequent: ${maxCh} (${maxPct.toFixed(1)}%) → If this is E, shift = ${guessShift}`;
   result.innerHTML=`<strong>Total letters:</strong> ${len}<br><strong>Most common:</strong> ${maxCh} = ${maxPct.toFixed(1)}%<br><strong>Likely Caesar shift:</strong> ${guessShift}`;
+  if (reading) {
+    reading.innerHTML = `Your text's most common letter is <strong style="color:var(--gold-lt)">${maxCh}</strong> (${maxPct.toFixed(1)}%). In standard English, the most common letter is <strong style="color:var(--gold-lt)">E</strong> (12.7%). If this is a monoalphabetic substitution, <strong>${maxCh}</strong> probably represents <strong>E</strong> in the plaintext.`;
+  }
 }
 function resetSVGBars(){for(let i=0;i<26;i++){const el=document.getElementById('svgbar_'+ALPHA[i]);if(el){el.setAttribute('y',155);el.setAttribute('height',0);}}}
 
