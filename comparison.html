@@ -87,7 +87,7 @@
     <a href="index.html">Entrance</a><span>&rsaquo;</span>
     Cipher Comparison
   </div>
-  <span class="page-eyebrow">58 Ciphers at a Glance</span>
+  <span class="page-eyebrow">132 Ciphers at a Glance</span>
   <h1 class="page-title">Cipher Comparison Table</h1>
   <p class="page-tagline">Sort, filter, and compare every cipher in the museum by type, era, security, and method</p>
 </div>
@@ -107,14 +107,24 @@
         <option value="Steganography">Steganography</option>
         <option value="Code">Code</option>
         <option value="Stream">Stream</option>
+        <option value="Nomenclator">Nomenclator</option>
+        <option value="Asymmetric">Asymmetric</option>
+        <option value="Hash">Hash</option>
+        <option value="ARG">ARG / Puzzle</option>
+        <option value="Cultural">Cultural</option>
+        <option value="Unsolved">Unsolved</option>
+        <option value="Signal Encoding">Signal Encoding</option>
+        <option value="Wordplay">Wordplay</option>
+        <option value="Intelligence">Intelligence</option>
       </select>
       <select class="comp-filter" id="era-filter" aria-label="Filter by era">
         <option value="">All Eras</option>
         <option value="Ancient">Ancient</option>
         <option value="Medieval">Medieval</option>
         <option value="Renaissance">Renaissance</option>
+        <option value="Baroque">Baroque</option>
         <option value="19th Century">19th Century</option>
-        <option value="World War I">World War I</option>
+        <option value="World War I">World War I / Interwar</option>
         <option value="World War II">World War II</option>
         <option value="Modern">Modern</option>
       </select>
@@ -124,6 +134,7 @@
         <option value="Weak">Weak</option>
         <option value="Moderate">Moderate</option>
         <option value="Strong">Strong</option>
+        <option value="Broken">Broken</option>
         <option value="Unbreakable">Unbreakable</option>
       </select>
       <span class="comp-count" id="cipher-count">Showing 52 of 52</span>
@@ -236,7 +247,72 @@
     { name:'Kryptos',              href:'ciphers/kryptos.html',              era:'Modern',        year:1990,  type:'Polyalphabetic',  key:'Vigenère + transposition',  security:'Unbreakable', hall:'VIII' },
     { name:'One-Time Pad',         href:'ciphers/one-time-pad.html',         era:'World War I',   year:1882,  type:'Stream',          key:'Random key = message length',security:'Unbreakable',hall:'IX' },
     { name:'Vernam',               href:'ciphers/vernam.html',               era:'World War I',   year:1917,  type:'Stream',          key:'Random tape',               security:'Unbreakable', hall:'IX' },
-    { name:'Solitaire / Pontifex', href:'ciphers/solitaire.html',            era:'Modern',        year:1999,  type:'Stream',          key:'Card deck + passphrase',    security:'Strong',      hall:'IX' }
+    { name:'Solitaire / Pontifex', href:'ciphers/solitaire.html',            era:'Modern',        year:1999,  type:'Stream',          key:'Card deck + passphrase',    security:'Strong',      hall:'IX' },
+    { name:'Egyptian Substitution',href:'ciphers/egyptian-substitution.html',era:'Ancient',       year:-1900, type:'Substitution',    key:'Pictographic alphabet',     security:'Trivial',     hall:'I' },
+    { name:'Histiaeus Tattoo',     href:'ciphers/histiaeus-tattoo.html',     era:'Ancient',       year:-499,  type:'Steganography',   key:'Shaved scalp concealment',  security:'Trivial',     hall:'I' },
+    { name:'Aeneas Tacticus',      href:'ciphers/aeneas-tacticus.html',      era:'Ancient',       year:-360,  type:'Steganography',   key:'Hydraulic / hole pattern',  security:'Weak',        hall:'I' },
+    { name:'Kama Sutra Cipher',    href:'ciphers/kama-sutra.html',           era:'Ancient',       year:400,   type:'Substitution',    key:'Paired letter exchange',    security:'Trivial',     hall:'I' },
+    { name:'Arabic Nomenclators',  href:'ciphers/arabic-nomenclators.html',  era:'Medieval',      year:855,   type:'Nomenclator',     key:'Letter codes + keywords',   security:'Weak',        hall:'I' },
+    { name:'Joseon Yeokhak',       href:'ciphers/joseon-yeokhak.html',       era:'Medieval',      year:1400,  type:'Substitution',    key:'Hexagram shift (mod 26)',   security:'Trivial',     hall:'I' },
+    { name:'Amharic Ge\'ez Ciphers',href:'ciphers/amharic-ge-ez-ciphers.html',era:'Medieval',     year:1300,  type:'Substitution',    key:'Keyed monoalphabetic',      security:'Trivial',     hall:'I' },
+    { name:'Nomenclator (generic)',href:'ciphers/nomenclator.html',          era:'Renaissance',   year:1380,  type:'Nomenclator',     key:'Codebook + cipher alphabet',security:'Moderate',    hall:'II' },
+    { name:'Trithemius',           href:'ciphers/trithemius.html',           era:'Renaissance',   year:1518,  type:'Polyalphabetic',  key:'Progressive shift table',   security:'Weak',        hall:'III' },
+    { name:'Affine Cipher',        href:'ciphers/affine.html',               era:'Renaissance',   year:1500,  type:'Substitution',    key:'Two integers a, b mod 26',  security:'Weak',        hall:'III' },
+    { name:'Autokey (generic)',    href:'ciphers/autokey.html',              era:'Renaissance',   year:1553,  type:'Polyalphabetic',  key:'Plaintext-primed key',      security:'Moderate',    hall:'III' },
+    { name:'Wallis Ciphers',       href:'ciphers/wallis-ciphers.html',       era:'Baroque',       year:1653,  type:'Polyalphabetic',  key:'Polyalphabetic + codes',    security:'Moderate',    hall:'III' },
+    { name:'Wheatstone Cryptograph',href:'ciphers/wheatstone.html',          era:'19th Century',  year:1867,  type:'Machine',         key:'Two-disk mechanical device',security:'Moderate',    hall:'III' },
+    { name:'Cardano Autokey',      href:'ciphers/cardano-autokey.html',      era:'Renaissance',   year:1550,  type:'Polyalphabetic',  key:'Reciprocal key derivation', security:'Moderate',    hall:'V' },
+    { name:'Argenti Family',       href:'ciphers/argenti.html',              era:'Renaissance',   year:1580,  type:'Nomenclator',     key:'Codebook + polyalphabetic', security:'Strong',      hall:'V' },
+    { name:'Cardano Grille',       href:'ciphers/cardano-grille.html',       era:'Renaissance',   year:1550,  type:'Steganography',   key:'Physical grille template',  security:'Moderate',    hall:'V' },
+    { name:'Culper Ring Code',     href:'ciphers/culper-ring.html',          era:'19th Century',  year:1778,  type:'Code',            key:'Numbered codebook',         security:'Moderate',    hall:'V' },
+    { name:'Null Cipher',          href:'ciphers/null-cipher.html',          era:'Renaissance',   year:1550,  type:'Steganography',   key:'Word/position pattern',     security:'Weak',        hall:'V' },
+    { name:'Book Cipher (generic)',href:'ciphers/book-cipher.html',          era:'Baroque',       year:1680,  type:'Code',            key:'Shared book + page/line',   security:'Moderate',    hall:'V' },
+    { name:'Arnold-André Cipher',  href:'ciphers/arnold-andre.html',         era:'19th Century',  year:1780,  type:'Code',            key:'Book cipher (Blackstone)',  security:'Moderate',    hall:'V' },
+    { name:'IRA Book Cipher',      href:'ciphers/ira-book-cipher.html',      era:'Modern',        year:1970,  type:'Code',            key:'Book cipher',               security:'Moderate',    hall:'V' },
+    { name:'Che Guevara VIC',      href:'ciphers/che-guevara.html',          era:'Modern',        year:1960,  type:'Substitution',    key:'Checkerboard + date key',   security:'Strong',      hall:'V' },
+    { name:'Diana Cryptosystem',   href:'ciphers/diana-cryptosystem.html',   era:'Modern',        year:1950,  type:'Stream',          key:'Diana table + OTP pad',     security:'Moderate',    hall:'V' },
+    { name:'Vietnamese Underground',href:'ciphers/vietnamese-underground.html',era:'Modern',      year:1965,  type:'Code',            key:'Party phrase books',        security:'Moderate',    hall:'V' },
+    { name:'Red Army Faction OTP', href:'ciphers/red-army-faction.html',     era:'Modern',        year:1970,  type:'Stream',          key:'One-time pad',              security:'Unbreakable', hall:'V' },
+    { name:'Chinese Telegraph',    href:'ciphers/chinese-telegraph.html',    era:'19th Century',  year:1871,  type:'Code',            key:'Numeric codebook',          security:'Moderate',    hall:'VI' },
+    { name:'Morse Code',           href:'ciphers/morse.html',                era:'19th Century',  year:1844,  type:'Signal Encoding', key:'Dot-dash alphabet',         security:'Trivial',     hall:'VI' },
+    { name:'Zimmermann Telegram',  href:'ciphers/zimmermann.html',           era:'World War I',   year:1917,  type:'Code',            key:'Diplomatic codebook',       security:'Weak',        hall:'VI' },
+    { name:'Commercial Codebooks', href:'ciphers/commercial-codebooks.html', era:'19th Century',  year:1870,  type:'Code',            key:'Commercial codebook',       security:'Moderate',    hall:'VI' },
+    { name:'Latin American Codebooks',href:'ciphers/latin-american-codebooks.html',era:'19th Century',year:1880,type:'Code',          key:'Adapted ATP codebook',      security:'Moderate',    hall:'VI' },
+    { name:'Slidex',               href:'ciphers/slidex.html',               era:'World War II',  year:1943,  type:'Code',            key:'Panel + stencil',           security:'Moderate',    hall:'VI' },
+    { name:'Fialka M-125',         href:'ciphers/fialka.html',               era:'Modern',        year:1956,  type:'Machine',         key:'10-rotor + plugboard',      security:'Strong',      hall:'VII' },
+    { name:'KL-7',                 href:'ciphers/kl-7.html',                 era:'Modern',        year:1952,  type:'Machine',         key:'Rotor + stepping',          security:'Strong',      hall:'VII' },
+    { name:'SIGABA',               href:'ciphers/sigaba.html',               era:'World War II',  year:1935,  type:'Machine',         key:'15-rotor machine',          security:'Strong',      hall:'VII' },
+    { name:'Typex',                href:'ciphers/typex.html',                era:'World War II',  year:1937,  type:'Machine',         key:'5-rotor machine',           security:'Strong',      hall:'VII' },
+    { name:'Geheimschreiber T52',  href:'ciphers/geheimschreiber.html',      era:'World War II',  year:1930,  type:'Machine',         key:'10-wheel XOR stream',       security:'Strong',      hall:'VII' },
+    { name:'Kryha',                href:'ciphers/kryha.html',                era:'World War I',   year:1926,  type:'Machine',         key:'Rotating disk (irregular)', security:'Weak',        hall:'VII' },
+    { name:'M-94 / M-138-A',       href:'ciphers/m-94.html',                 era:'World War I',   year:1922,  type:'Machine',         key:'25-disk wheel cipher',      security:'Moderate',    hall:'VII' },
+    { name:'Red (Type A)',         href:'ciphers/red-type-a.html',           era:'World War II',  year:1937,  type:'Machine',         key:'Stepping switch (6-20)',     security:'Moderate',    hall:'VII' },
+    { name:'JN-25',                href:'ciphers/jn-25.html',                era:'World War II',  year:1939,  type:'Code',            key:'Additive codebook',         security:'Strong',      hall:'VII' },
+    { name:'Freemason Pigpen',     href:'ciphers/freemason-pigpen.html',     era:'Medieval',      year:1700,  type:'Substitution',    key:'Grid / tic-tac-toe positions',security:'Trivial',   hall:'VIII' },
+    { name:'Bach BACH Motif',      href:'ciphers/bach-motif.html',           era:'Baroque',       year:1685,  type:'Substitution',    key:'B♭-A-C-B musical cipher',   security:'Trivial',     hall:'VIII' },
+    { name:'Sator Square',         href:'ciphers/sator-square.html',         era:'Ancient',       year:79,    type:'Wordplay',        key:'Palindrome word square',    security:'Trivial',     hall:'VIII' },
+    { name:'Dorabella Cipher',     href:'ciphers/dorabella.html',            era:'19th Century',  year:1897,  type:'Unsolved',        key:'Unknown (87 symbols)',      security:'Unbreakable', hall:'XII' },
+    { name:'Shugborough Inscription',href:'ciphers/shugborough.html',        era:'Baroque',       year:1748,  type:'Unsolved',        key:'Unknown (OUOSVAVV)',        security:'Unbreakable', hall:'XII' },
+    { name:'D\'Agapeyeff',         href:'ciphers/dagapeyeff.html',           era:'Modern',        year:1939,  type:'Unsolved',        key:'Unknown',                   security:'Unbreakable', hall:'XII' },
+    { name:'Somerton Man',         href:'ciphers/somerton-man.html',         era:'Modern',        year:1948,  type:'Unsolved',        key:'Unknown',                   security:'Unbreakable', hall:'XII' },
+    { name:'McCormick',            href:'ciphers/mccormick.html',            era:'Modern',        year:1999,  type:'Unsolved',        key:'Unknown',                   security:'Unbreakable', hall:'XII' },
+    { name:'Phaistos Disc',        href:'ciphers/phaistos-disc.html',        era:'Ancient',       year:-1700, type:'Unsolved',        key:'Unknown (241 impressions)', security:'Unbreakable', hall:'XII' },
+    { name:'Field Hollers',        href:'ciphers/field-hollers.html',        era:'19th Century',  year:1860,  type:'Steganography',   key:'Musical / vocal coding',    security:'Moderate',    hall:'XIII' },
+    { name:'Gold-Bug',             href:'ciphers/gold-bug.html',             era:'19th Century',  year:1843,  type:'Cultural',        key:'Monoalphabetic (fiction)',  security:'Trivial',     hall:'XIII' },
+    { name:'Dancing Men',          href:'ciphers/dancing-men.html',          era:'19th Century',  year:1903,  type:'Cultural',        key:'Pictographic substitution', security:'Trivial',     hall:'XIII' },
+    { name:'Da Vinci Code',        href:'ciphers/da-vinci-code.html',        era:'Modern',        year:2003,  type:'Cultural',        key:'Atbash + Fibonacci',        security:'Trivial',     hall:'XIII' },
+    { name:'National Treasure',    href:'ciphers/national-treasure.html',    era:'Modern',        year:2004,  type:'Cultural',        key:'Book cipher (Declaration)', security:'Trivial',     hall:'XIII' },
+    { name:'Gravity Falls Ciphers',href:'ciphers/gravity-falls.html',        era:'Modern',        year:2012,  type:'Cultural',        key:'Caesar / Vigenère / Atbash',security:'Trivial',     hall:'XIII' },
+    { name:'Cicada 3301',          href:'ciphers/cicada-3301.html',          era:'Modern',        year:2012,  type:'ARG',             key:'Multi-layer (RSA + rune + steganography)',security:'Strong', hall:'XIII' },
+    { name:'MIT Mystery Hunt',     href:'ciphers/mit-mystery-hunt.html',     era:'Modern',        year:1981,  type:'ARG',             key:'Puzzle competition format', security:'Moderate',    hall:'XIII' },
+    { name:'DES',                  href:'ciphers/des.html',                  era:'Modern',        year:1975,  type:'Machine',         key:'56-bit key (Feistel)',       security:'Broken',      hall:'XI' },
+    { name:'AES',                  href:'ciphers/aes.html',                  era:'Modern',        year:2001,  type:'Machine',         key:'128/192/256-bit key',       security:'Unbreakable', hall:'XI' },
+    { name:'RSA',                  href:'ciphers/rsa.html',                  era:'Modern',        year:1978,  type:'Asymmetric',      key:'Prime factorization',       security:'Strong',      hall:'XI' },
+    { name:'Diffie-Hellman',       href:'ciphers/diffie-hellman.html',       era:'Modern',        year:1976,  type:'Asymmetric',      key:'Discrete logarithm',        security:'Strong',      hall:'XI' },
+    { name:'SHA-256',              href:'ciphers/sha256.html',               era:'Modern',        year:2001,  type:'Hash',            key:'Fixed 256-bit digest',      security:'Strong',      hall:'XI' },
+    { name:'VENONA',               href:'ciphers/venona.html',               era:'World War II',  year:1943,  type:'Intelligence',    key:'OTP pad reuse analysis',    security:'Strong',      hall:'XI' },
+    { name:'SIGSALY',              href:'ciphers/sigsaly.html',              era:'World War II',  year:1943,  type:'Machine',         key:'Thermal noise + OTP',       security:'Unbreakable', hall:'XI' },
+    { name:'Microdot',             href:'ciphers/microdot.html',             era:'World War II',  year:1925,  type:'Steganography',   key:'Physical size reduction',   security:'Moderate',    hall:'XI' }
   ];
 
   var tbody = document.getElementById('cipher-tbody');
@@ -246,7 +322,7 @@
   var securityFilter = document.getElementById('security-filter');
   var countEl = document.getElementById('cipher-count');
 
-  var eraClasses = { 'Ancient':'ancient','Medieval':'medieval','Renaissance':'renaissance','19th Century':'19c','World War I':'wwi','World War II':'wwii','Modern':'modern' };
+  var eraClasses = { 'Ancient':'ancient','Medieval':'medieval','Renaissance':'renaissance','Baroque':'renaissance','19th Century':'19c','World War I':'wwi','World War II':'wwii','Modern':'modern' };
   var secClasses = { 'Trivial':'trivial','Weak':'weak','Moderate':'moderate','Strong':'strong','Unbreakable':'unbreakable' };
 
   // Build rows
