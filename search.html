@@ -189,16 +189,17 @@
     var params = new URLSearchParams(location.search);
     var preset = params.get('q');
 
-    function init() {
-      window.CipherSearch._count = window.CipherSearch && window.CipherSearch.load
-        ? '52' : '?';
+    function init(entries) {
+      var list = Array.isArray(entries) ? entries : [];
+      var cipherCount = list.filter(function (e) { return e.kind === 'cipher'; }).length;
+      window.CipherSearch._count = cipherCount || list.length || '?';
       render();
     }
 
     if (window.CipherSearch) {
-      window.CipherSearch.load().then(function () {
+      window.CipherSearch.load().then(function (entries) {
         if (preset) q.value = preset;
-        init();
+        init(entries);
         if (preset) render();
       });
     } else {

@@ -54,7 +54,7 @@
 <section class="page-hero">
   <p class="hero-sub">Cryptanalysis Techniques</p>
   <h1>Codebreaker's Workbench</h1>
-  <p class="hero-intro">Encrypt, decrypt, and analyze text with 51 cipher engines. Watch frequency distributions shift in real time.</p>
+  <p class="hero-intro" id="engine-count-copy">Encrypt, decrypt, and analyze text with live cipher engines. Watch frequency distributions shift in real time.</p>
 </section>
 
 <main id="main-content" tabindex="-1" class="wb-main-wrap">
@@ -160,6 +160,7 @@
 'use strict';
 (function(){
   var CE = window.CipherEngines;
+  var engineCountCopy = document.getElementById('engine-count-copy');
   var CIPHERS = [
     {id:'caesar',name:'Caesar',hasKey:true,keyLabel:'Shift (0-25)',keyDefault:'3'},
     {id:'monoalphabetic',name:'Monoalphabetic',hasKey:true,keyLabel:'Keyword',keyDefault:'KEYWORD'},
@@ -213,6 +214,11 @@
     {id:'copiale',name:'Copiale Cipher',hasKey:false},
     {id:'kryptos',name:'Kryptos',hasKey:true,keyLabel:'Key',keyDefault:'PALIMPSEST'}
   ];
+
+  if (engineCountCopy && CE) {
+    var total = Object.keys(CE).length;
+    engineCountCopy.textContent = 'Encrypt, decrypt, and analyze text with ' + total + ' cipher engines. Watch frequency distributions shift in real time.';
+  }
 
   var ENGLISH_FREQ = [8.167,1.492,2.782,4.253,12.702,2.228,2.015,6.094,6.966,0.153,0.772,4.025,2.406,6.749,7.507,1.929,0.095,5.987,6.327,9.056,2.758,0.978,2.360,0.150,1.974,0.074];
   var A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
