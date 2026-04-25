@@ -166,3 +166,11 @@ Rationale:
 Applied upgrade (2026-04-25):
 - Added additional filter dimensions to `comparison.html`: **Hall** and **Solved Status**.
 - Ensured initial count label is computed from live dataset by running filters on load.
+
+## Hall VI naming decision
+
+Decision: **keep `Hall VI: Civil War Gallery` unchanged**.
+
+Rationale:
+- Current naming is historically precise and consistently used across `halls/civil-war.html`, `museum-map.html`, and related exhibit breadcrumbs.
+- A broader rename would reduce specificity and duplicate the framing already covered by Hall V (Military & Spy Ciphers).

@@ -108,6 +108,24 @@ HELLO = .... . .-.. .-.. ---
         </table>
       </div>
     </div>
+    <div class="panel" style="margin-top:1.25rem;">
+      <div class="panel-head"><span class="panel-icon">🚀</span><span class="panel-title">Voyager Golden Record Sidebar</span></div>
+      <div class="panel-body">
+        <p>The Voyager probes (1977) did not transmit Morse as an encryption system, but they inherited its core insight: <strong>make symbols decodable without language sharing</strong>. The Golden Record's playback and image instructions are encoded as universal mathematical diagrams, just as Morse normalised telegraph symbols for any trained operator.</p>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:1.25rem;">
+      <div class="panel-head"><span class="panel-icon">📡</span><span class="panel-title">Morse + Cipher Combination Pattern</span></div>
+      <div class="panel-body">
+        <p>Historically, operators rarely sent plain Morse in contested channels. The common stack was:</p>
+        <ol style="margin-top:.6rem;line-height:1.7;padding-left:1.25rem;">
+          <li>Encrypt plaintext with a cipher (Vigenere, transposition, OTP, etc.).</li>
+          <li>Convert resulting ciphertext to Morse/Baudot for transmission.</li>
+          <li>Defender receives symbols, then decrypts upstream.</li>
+        </ol>
+        <p style="margin-top:.6rem;">This layering principle still defines modern protocol stacks: transport encoding and cryptographic secrecy are separate layers.</p>
+      </div>
+    </div>
   </div>
 </div>
 

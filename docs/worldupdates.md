@@ -4,22 +4,22 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 163 done / 202 total (80.7%)
+- Overall: 181 done / 202 total (89.6%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
 - Phase 2 (Hall XII creation): 28/28
-- Phase 3 (Pacific theater): 2/3
-- Phase 4 (WWII/interwar machines): 6/7
-- Phase 5 (European gaps): 9/10
+- Phase 3 (Pacific theater): 3/3
+- Phase 4 (WWII/interwar machines): 7/7
+- Phase 5 (European gaps): 10/10
 - Phase 6 (East Asia/global): 4/4
-- Phase 7 (Americana/cultural): 3/4
-- Phase 8 (global underground traditions): 9/10
-- Phase 9 (Hall XIII creation + cultural): 9/14
+- Phase 7 (Americana/cultural): 4/4
+- Phase 8 (global underground traditions): 10/10
+- Phase 9 (Hall XIII creation + cultural): 13/14
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
-- Phase 12 (bios - ~7 new + Hall X audit upgrades): 10/11
-- Phase 13 (global integration): 28/38
+- Phase 12 (bios - ~7 new + Hall X audit upgrades): 11/11
+- Phase 13 (global integration): 35/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
@@ -42,6 +42,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: README integration pass — refreshed top-level exhibit/engine counts and explicitly linked `further-reading.html` in the tools section.
 - 2026-04-25: Phase 13 sidebar batch — added six lineage/context sidebars (M-209, Playfair, Nihilist, Columnar, Straddling Checkerboard, Jefferson Disk) and re-validated all six test suites.
 - 2026-04-25: Phase 13 integration closure batch — updated stale global exhibit counts on museum-map metadata/hero copy, bumped home footer version label to "v3.0.0 Global Expansion", added Hall V comparative tactical systems table + modern tactical-auth appendix, and updated Hall XII hero framing to living-research language with named researchers.
+- 2026-04-25: Multi-phase closure batch — completed remaining side-panel tasks (Navajo expansion context, Fish-family, Morse dual sidebars, Cambridge Five context, Atbash/Caesar/Gold-Bug/Enigma culture links), expanded museum-map Complete Cipher Index to full 139 rows, added Hall XII/XIII guided tour, added Hall XII/XIII learning cross-links, and extended cipher-flow with an unsolved/culture branch.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -103,7 +104,7 @@ Updated after every commit. Source of truth for completion status.
 ## Phase 3 - Japanese & Pacific Theater
 - [x] Exhibit: JN-25 - spec, engine, page, tests, registered
 - [x] Exhibit: Red (Type A) - spec, engine, page, tests, registered
-- [ ] Code Talkers expansion (Choctaw/Comanche/Hopi panel on Navajo page)
+- [x] Code Talkers expansion (Choctaw/Comanche/Hopi panel on Navajo page)
 
 ## Phase 4 - WWII / Interwar machines
 - [x] Exhibit: Fialka M-125 - spec, engine, page, tests, registered
@@ -114,7 +115,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: Kryha - spec, engine, page, tests, registered
 - [x] Exhibit: Bazeries Cylinder - spec, engine, page, tests, registered
 - [x] Exhibit: M-94 / M-138-A - spec, engine, page, tests, registered
-- [ ] Fish-family side panel on Geheimschreiber page
+- [x] Fish-family side panel on Geheimschreiber page
 
 ## Phase 5 - Missing European classical and polyalphabetic gaps
 - [x] Exhibit: Trithemius - engine, page, tests, registered
@@ -124,7 +125,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: Argenti Family - spec, engine, page, tests, registered
 - [x] Exhibit: Wallis Ciphers - spec, engine, page, tests, registered
 - [x] Exhibit: Morse Code - engine, page, tests, registered (audio Track B deferred)
-- [ ] Morse side panels: Voyager Golden Record + Morse+Cipher Combination
+- [x] Morse side panels: Voyager Golden Record + Morse+Cipher Combination
 - [x] Exhibit: Mary Stuart Castelnau Letters - spec, page, Track B viewer
 - [x] Exhibit: Patterson Cipher for Jefferson - spec, page, Track B viewer
 
@@ -138,7 +139,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: Culper Ring / Tallmadge - spec, engine, page, tests, registered
 - [x] Exhibit: Arnold-Andre - spec, engine, page, tests, registered
 - [x] Exhibit: Cardano Grille - engine, page, tests, registered
-- [ ] Hall VI rename decision (if warranted) confirmed
+- [x] Hall VI rename decision (if warranted) confirmed
 
 ## Phase 8 - Additional global and underground traditions
 - [x] Exhibit: Field Hollers / Spirituals - spec, page, Track B audio visualization
@@ -150,7 +151,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: Ethiopian Ge'ez Monastic Ciphers - spec, engine, page, tests, registered
 - [x] Exhibit: Latin American Telegraphic Codebooks - spec, engine, page, tests, registered
 - [x] Exhibit: Diana Cryptosystem - spec, engine, page, tests, registered
-- [ ] Cambridge Five side panel added to VENONA biography context
+- [x] Cambridge Five side panel added to VENONA biography context
 
 ## Phase 9 - Hall XIII creation: Ciphers in Culture
 - [x] halls/culture.html created with cultural framing
@@ -161,10 +162,10 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: Gravity Falls Cipher System - spec, engine, page, tests, registered
 - [x] Exhibit: Cicada 3301 - spec, engines, page, tests, registered
 - [ ] Exhibit: Popular Culture Survey - spec, filterable page
-- [ ] Cross-reference side panels (Atbash/Caesar/Affine) added
-- [ ] Gold-Bug side panel added
-- [ ] Enigma side panel: Three Unbroken Messages
-- [ ] Enigma side panel: Operation Boniface
+- [x] Cross-reference side panels (Atbash/Caesar/Affine) added
+- [x] Gold-Bug side panel added
+- [x] Enigma side panel: Three Unbroken Messages
+- [x] Enigma side panel: Operation Boniface
 - [x] Hall VIII sidebar/card count updated after moves
 - [x] Hall XIII prev link set (XII), no next link
 
@@ -204,29 +205,29 @@ Updated after every commit. Source of truth for completion status.
 - [x] Bio: David Kahn
 - [x] Bio: Elonka Dunin
 - [x] Bio: George Lasry
-- [ ] Hall X hero subtitle updated
+- [x] Hall X hero subtitle updated
 
 ## Phase 13 - Global integration
-- [ ] museum-map.html complete cipher index updated with all new exhibits
+- [x] museum-map.html complete cipher index updated with all new exhibits
 - [x] museum-map.html Hall XII and Hall XIII added to floor-plan graphic
 - [x] museum-map.html subtitle and footer count updated
-- [ ] timeline.html year markers added for every new exhibit
-- [ ] timeline.html new era anchors added (Egyptian, India, Phaistos, Histiaeus)
+- [x] timeline.html year markers added for every new exhibit
+- [x] timeline.html new era anchors added (Egyptian, India, Phaistos, Histiaeus)
 - [x] timeline.html six-stage evolution strip preserved
 - [x] comparison.html data updated with all new rows
 - [x] comparison.html total count in header updated
-- [ ] cipher-flow.html family map updated with new families
+- [x] cipher-flow.html family map updated with new families
 - [x] search.html search index rebuilt for all new items
-- [ ] tours/ optional new Hall XII/Hall XIII themed tour
+- [x] tours/ optional new Hall XII/Hall XIII themed tour
 - [x] index.html hero counts updated (about 113 ciphers, 13 halls)
 - [x] index.html featured ciphers refreshed (include Hall XII and Hall XIII)
 - [x] index.html playground dropdown updated for new simple ciphers
 - [x] index.html footer version bumped to v3.0.0 Global Expansion
 - [x] README.md hall table regenerated with Hall XII and Hall XIII
 - [x] README.md count references updated (63->about 113, 11->13)
-- [ ] README.md demo roster expanded with new Track A exhibits
+- [x] README.md demo roster expanded with new Track A exhibits
 - [x] sitemap.xml all new URLs added
-- [ ] learn.html cross-links to new exhibits added (if page remains in scope)
+- [x] learn.html cross-links to new exhibits added (if page remains in scope)
 - [ ] cryptanalysis.html techniques extended if introduced
 - [x] All hall pages updated from Hall X of Y to of 13
 - [x] Hall prev/next chains fixed for XII and XIII insertion
