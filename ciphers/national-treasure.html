@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Treasure — The Cipher Museum</title>
+  <meta name="description" content="The 2004 Disney film National Treasure sent audiences hunting for cipher clues on the US dollar bill, the Liberty Bell, and Independence Hall — all real historical sites.">
+  <meta property="og:title" content="National Treasure — The Cipher Museum">
+  <meta property="og:description" content="The 2004 Disney film National Treasure sent audiences hunting for cipher clues on the US dollar bill, the Liberty Bell, and Independence Hall — all real historical sites.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/national-treasure.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="National Treasure — The Cipher Museum">
+  <meta name="twitter:description" content="The 2004 Disney film National Treasure sent audiences hunting for cipher clues on the US dollar bill, the Liberty Bell, and Independence Hall — all real historical sites.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/national-treasure.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+  .track-b-widget {
+    border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;
+    margin:2rem 0;background:var(--s1);
+  }
+  .track-b-widget h3 { color:var(--gold);margin-top:0; }
+  .track-b-widget label { display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem; }
+  .track-b-widget input, .track-b-widget textarea {
+    width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);
+    border-radius:4px;color:var(--fg);font-family:var(--fm);box-sizing:border-box;
+  }
+  .track-b-widget button {
+    padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;
+    border-radius:4px;cursor:pointer;font-weight:700;margin-top:.5rem;
+  }
+  .track-b-output {
+    font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
+    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    National Treasure
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Cipher Culture</span>
+    <span class="badge era-ancient">Fiction · 2004</span>
+    <span class="badge sec-broken">Pop Culture</span>
+  </div>
+  <h1 class="page-title">National Treasure</h1>
+  <p class="page-tagline">Benjamin Franklin, a hidden Freemason cipher, and the Declaration of Independence — the film that made cipher tourism American.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Director</span><span class="fact-value">Jon Turteltaub</span></div>
+    <div class="fact"><span class="fact-label">Studio</span><span class="fact-value">Walt Disney / Jerry Bruckheimer Films</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">2004</span></div>
+    <div class="fact"><span class="fact-label">Ciphers featured</span><span class="fact-value">Ottendorf / book cipher, spectral lens, Freemason imagery</span></div>
+    <div class="fact"><span class="fact-label">Real history used</span><span class="fact-value">Independence Hall, the Liberty Bell, Freemason architecture, Franklin</span></div>
+    <div class="fact"><span class="fact-label">Sequel</span><span class="fact-value">National Treasure: Book of Secrets (2007)</span></div>
+  </div>
+</div>
+<div class="track-b-widget">
+  <h3>&#128275; Interactive Explorer</h3>
+  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
+  <label for="input">Message (Freemason Pigpen encodes it)</label>
+  <input id="input" type="text" value="FREEMASON" placeholder="Enter message…">
+  <button onclick="encode()">Encode</button>
+  <div id="output" class="track-b-output"></div>
+  <script>
+    function encode() {
+      const t = document.getElementById('input').value;
+      const o = ntEncode(t);
+      document.getElementById('output').textContent = o;
+    }
+  </script>
+</div>
+  <script>
+    // Pigpen substitution demo
+    function ntEncode(t) {
+      // Map A-Z to 26 symbolic names for display
+      const names = ['#+','#-','#=','|-','||','|-',']|',']]','[|',
+                     '.+','.-','.=','L+','L-','L=','r+','r-','r=',
+                     'v+','v-','v=','x+','x-','x=','<>','<|'];
+      return t.toUpperCase().replace(/[^A-Z]/g,'').split('').map(c=>{
+        const i=c.charCodeAt(0)-65; return names[i]||c;
+      }).join(' ') + ' (Pigpen grid)';
+    }
+  </script>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance"><h3>Why This Matters</h3><p>National Treasure (2004) wove real American history — Freemason architecture, the layout of Washington D.C., the symbolism on the dollar bill — into a cipher-hunt adventure narrative. While no treasure actually exists behind Independence Hall, the film sent millions of viewers to examine the actual historical record of Founding-era cryptography: Benjamin Franklin genuinely used codes in his diplomatic correspondence; George Washington ran the Culper spy ring with invisible ink; and Freemason imagery in early American civic architecture is a documented historical fact, even if not a cipher.</p></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">📖</span><span class="panel-title">Ciphers in the Film</span></div><div class="panel-body"><p>The film's plot devices include: (1) an Ottendorf cipher (book cipher on the back of the Declaration of Independence — fictional but grounded in the real 18th-century Beale tradition); (2) a spectral lens revealing hidden text when specific light is applied — a fictional variant of thermally activated invisible ink; (3) Freemason symbols in the Great Seal and the street layout of Washington D.C.; (4) the phrase "endure, persevere" as an anagram key — a variant of letter-substitution ciphers.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What Is Actually True</span></div><div class="panel-body"><p>Benjamin Franklin was a Freemason — he joined St. John's Lodge in Philadelphia in 1731. Washington D.C.'s original plan by Pierre Charles L'Enfant does include diagonal avenues cutting through a grid, and some Freemason researchers claim pentagram and compass shapes in the layout, though this is contested. George Washington did operate a sophisticated intelligence network using the Culper Ring (see the exhibit). The Founders corresponded in codes and ciphers, particularly in sensitive diplomatic channels via invisible ink.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🌍</span><span class="panel-title">Cultural Impact</span></div><div class="panel-body"><p>The film generated measurable increases in tourism to Independence Hall, the National Archives, and the Smithsonian. Online communities devoted to "real national treasure" hunts proliferated. The franchise directly influenced the design of the real-world hunt <em>The Secret</em> (Byron Preiss, 1982 — three casques found as of 2024), and inspired the puzzle-hunt design community that produced later ARGs such as Cicada 3301.</p></div></div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body"><table class="cipher-table"><tbody><tr><td>Director</td><td>Jon Turteltaub</td></tr><tr><td>Studio</td><td>Walt Disney / Jerry Bruckheimer Films</td></tr><tr><td>Year</td><td>2004</td></tr><tr><td>Ciphers featured</td><td>Ottendorf / book cipher, spectral lens, Freemason imagery</td></tr><tr><td>Real history used</td><td>Independence Hall, the Liberty Bell, Freemason architecture, Franklin</td></tr><tr><td>Sequel</td><td>National Treasure: Book of Secrets (2007)</td></tr></tbody></table></div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/freemason-pigpen.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Freemason Pigpen</span><span class="related-card__tag">The cipher featured in the film</span></a>
+    <a href="../ciphers/culper-ring.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Culper Ring</span><span class="related-card__tag">Real Revolutionary War spy cryptography</span></a>
+    <a href="../ciphers/beale.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Beale Ciphers</span><span class="related-card__tag">Real American cryptographic treasure hunt</span></a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/da-vinci-code.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">The Da Vinci Code</span></a>
+  <a href="../ciphers/gravity-falls.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">Gravity Falls</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall XIII · Cipher Culture</span></div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

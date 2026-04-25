@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VENONA Project — The Cipher Museum</title>
+  <meta name="description" content="VENONA (1943–1980) was the US Army codebreaking effort that decrypted thousands of Soviet intelligence cables by exploiting key reuse in one-time pads — revealing Julius Rosenberg, Kim Philby, and the Cambridge Five.">
+  <meta property="og:title" content="VENONA Project — The Cipher Museum">
+  <meta property="og:description" content="VENONA (1943–1980) was the US Army codebreaking effort that decrypted thousands of Soviet intelligence cables by exploiting key reuse in one-time pads — revealing Julius Rosenberg, Kim Philby, and the Cambridge Five.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/venona.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="VENONA Project — The Cipher Museum">
+  <meta name="twitter:description" content="VENONA (1943–1980) was the US Army codebreaking effort that decrypted thousands of Soviet intelligence cables by exploiting key reuse in one-time pads — revealing Julius Rosenberg, Kim Philby, and the Cambridge Five.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/venona.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+  .track-b-widget {
+    border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;
+    margin:2rem 0;background:var(--s1);
+  }
+  .track-b-widget h3 { color:var(--gold);margin-top:0; }
+  .track-b-widget label { display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem; }
+  .track-b-widget input, .track-b-widget textarea {
+    width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);
+    border-radius:4px;color:var(--fg);font-family:var(--fm);box-sizing:border-box;
+  }
+  .track-b-widget button {
+    padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;
+    border-radius:4px;cursor:pointer;font-weight:700;margin-top:.5rem;
+  }
+  .track-b-output {
+    font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
+    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a><span>&rsaquo;</span>
+    VENONA Project
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall X · Codebreakers</span>
+    <span class="badge era-ancient">Cold War · 1943–1980</span>
+    <span class="badge sec-broken">Partial break (key reuse exploit)</span>
+  </div>
+  <h1 class="page-title">VENONA Project</h1>
+  <p class="page-tagline">Soviet intelligence used one-time pads — theoretically unbreakable. Then they reused them. The NSA read the mail for forty years.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">US Agency</span><span class="fact-value">US Army Signals Security Agency (later NSA)</span></div>
+    <div class="fact"><span class="fact-label">Soviet Target</span><span class="fact-value">NKVD / KGB / GRU diplomatic and intelligence cables</span></div>
+    <div class="fact"><span class="fact-label">Period</span><span class="fact-value">1943–1980 (declassified 1995)</span></div>
+    <div class="fact"><span class="fact-label">Key flaw</span><span class="fact-value">Soviet one-time pad key pages reprinted and reissued under WWII pressure</span></div>
+    <div class="fact"><span class="fact-label">Revelations</span><span class="fact-value">Julius and Ethel Rosenberg; Kim Philby; Cambridge Five; Donald Maclean</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Even perfect ciphers fail when key generation is flawed</span></div>
+  </div>
+</div>
+<div class="demo-section" data-cipher="otp"></div>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance"><h3>Why This Matters</h3><p>VENONA is the definitive proof that no cipher is more secure than its key generation and management. The Soviets used one-time pads — which are mathematically unbreakable when used correctly — for intelligence traffic between Moscow and their foreign stations. But in 1942–1943, under acute wartime production pressure, Soviet cipher authorities reprinted and reissued key pages that had already been used. American cryptanalysts at the Army's Arlington Hall station discovered the key reuse, enabling partial decryption of thousands of messages. The VENONA decrypts identified Julius Rosenberg (atomic espionage), Kim Philby (British SIS mole), Donald Maclean and Guy Burgess (Cambridge Five), and dozens of other Soviet sources inside the US and British governments — intelligence revelations that shaped the Cold War for forty years.</p></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">The Key Reuse Disaster</span></div><div class="panel-body"><p>A genuine one-time pad requires that each key page be used exactly once and then destroyed. In late 1942, Soviet cipher production facilities, overwhelmed by wartime demand, reprinted key material that had already been distributed. The result: some portions of the 1942–1944 NKVD traffic used the same additive key material twice. When Arlington Hall analyst Richard Hallock noticed statistical anomalies suggesting two messages had been enciphered with the same "depth," the VENONA project began reconstructing the additive books and stripping them from messages.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">How the Break Worked</span></div><div class="panel-body"><p>The cryptanalytic attack exploited "depth" — two messages enciphered with the same OTP key. If plaintext P₁ and P₂ are enciphered with the same key K as C₁ = P₁ ⊕ K and C₂ = P₂ ⊕ K, then C₁ ⊕ C₂ = P₁ ⊕ P₂ — a "running key" cipher with both messages as mutually known-plaintext constraints. By exploiting linguistic regularities in Soviet diplomatic Russian and known codeword patterns, analysts gradually reconstructed the plaintext and then the actual additive key pages themselves.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🕵️</span><span class="panel-title">The Revelations</span></div><div class="panel-body"><p>VENONA decrypts identified: Julius Rosenberg (codeword LIBERAL) and Ethel Rosenberg (codeword ETHEL) passing atomic weapons data to Moscow; Klaus Fuchs (also in atomic network); Kim Philby (British head of anti-Soviet SIS operations — simultaneously Moscow Center's most senior British agent); Donald Maclean (head of American desk at British Foreign Office); Guy Burgess, Anthony Blunt, and John Cairncross (completing the Cambridge Five). The Rosenbergs were executed in 1953; VENONA remained classified, so the strongest evidence against them could not be used in their trial.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">The 37-Year Secret</span></div><div class="panel-body"><p>VENONA was not declassified until 1995. For forty years, American officials who knew Soviet agents had been identified through VENONA could not publicly explain their certainty without exposing the program. Senator Joseph McCarthy's vague accusations of mass Communist infiltration were partly fueled by officials who knew Soviet penetration was real — but could not say how they knew. The deception of hiding VENONA distorted American political discourse for a generation.</p></div></div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body"><table class="cipher-table"><tbody><tr><td>US Agency</td><td>US Army Signals Security Agency (later NSA)</td></tr><tr><td>Soviet Target</td><td>NKVD / KGB / GRU diplomatic and intelligence cables</td></tr><tr><td>Period</td><td>1943–1980 (declassified 1995)</td></tr><tr><td>Key flaw</td><td>Soviet one-time pad key pages reprinted and reissued under WWII pressure</td></tr><tr><td>Revelations</td><td>Julius and Ethel Rosenberg; Kim Philby; Cambridge Five; Donald Maclean</td></tr><tr><td>Modern Lesson</td><td>Even perfect ciphers fail when key generation is flawed</td></tr></tbody></table></div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/one-time-pad.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">One-Time Pad</span><span class="related-card__tag">The cipher VENONA exploited</span></a>
+    <a href="../ciphers/diana-cryptosystem.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Diana Cryptosystem</span><span class="related-card__tag">US Army field OTP designed to avoid VENONA-type failure</span></a>
+    <a href="../ciphers/station-hypo.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Station HYPO</span><span class="related-card__tag">US SIGINT Pacific parallel</span></a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/kerckhoffs.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">Kerckhoffs's Principle</span></a>
+  <a href="../ciphers/sigsaly.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">SIGSALY</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall X · Codebreakers</span></div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

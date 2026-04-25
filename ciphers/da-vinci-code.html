@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Da Vinci Code — The Cipher Museum</title>
+  <meta name="description" content="Dan Brown's 2003 thriller made cryptography mainstream — Atbash, the Fibonacci sequence, and anagrams as plot devices that introduced millions to cipher thinking.">
+  <meta property="og:title" content="The Da Vinci Code — The Cipher Museum">
+  <meta property="og:description" content="Dan Brown's 2003 thriller made cryptography mainstream — Atbash, the Fibonacci sequence, and anagrams as plot devices that introduced millions to cipher thinking.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/da-vinci-code.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Da Vinci Code — The Cipher Museum">
+  <meta name="twitter:description" content="Dan Brown's 2003 thriller made cryptography mainstream — Atbash, the Fibonacci sequence, and anagrams as plot devices that introduced millions to cipher thinking.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/da-vinci-code.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+  .track-b-widget {
+    border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;
+    margin:2rem 0;background:var(--s1);
+  }
+  .track-b-widget h3 { color:var(--gold);margin-top:0; }
+  .track-b-widget label { display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem; }
+  .track-b-widget input, .track-b-widget textarea {
+    width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);
+    border-radius:4px;color:var(--fg);font-family:var(--fm);box-sizing:border-box;
+  }
+  .track-b-widget button {
+    padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;
+    border-radius:4px;cursor:pointer;font-weight:700;margin-top:.5rem;
+  }
+  .track-b-output {
+    font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
+    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/culture.html">Hall XIII: Cipher Culture</a><span>&rsaquo;</span>
+    The Da Vinci Code
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XIII · Cipher Culture</span>
+    <span class="badge era-ancient">Fiction · 2003</span>
+    <span class="badge sec-broken">Pop Culture</span>
+  </div>
+  <h1 class="page-title">The Da Vinci Code</h1>
+  <p class="page-tagline">Dan Brown's 2003 bestseller introduced one hundred million readers to Atbash, anagram ciphers, and the thrill of secret codes hidden in plain sight.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Author</span><span class="fact-value">Dan Brown</span></div>
+    <div class="fact"><span class="fact-label">Published</span><span class="fact-value">2003 (Doubleday)</span></div>
+    <div class="fact"><span class="fact-label">Copies sold</span><span class="fact-value">~80 million+ worldwide</span></div>
+    <div class="fact"><span class="fact-label">Ciphers featured</span><span class="fact-value">Atbash, anagram, Fibonacci sequence, mirror writing</span></div>
+    <div class="fact"><span class="fact-label">Impact</span><span class="fact-value">Global surge in cryptography interest; Da Vinci tourism boom</span></div>
+    <div class="fact"><span class="fact-label">Historical accuracy</span><span class="fact-value">Contested — numerous anachronisms, see panels below</span></div>
+  </div>
+</div>
+<div class="track-b-widget">
+  <h3>&#128275; Interactive Explorer</h3>
+  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
+  <label for="input">Message (Atbash encodes it)</label>
+  <input id="input" type="text" value="SOPHIA" placeholder="Enter message…">
+  <button onclick="encode()">Encode</button>
+  <div id="output" class="track-b-output"></div>
+  <script>
+    function encode() {
+      const t = document.getElementById('input').value;
+      const o = daVinciEncode(t);
+      document.getElementById('output').textContent = o;
+    }
+  </script>
+</div>
+  <script>
+    // Atbash demo inlined for Da Vinci Code page
+    function daVinciEncode(t) {
+      const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      return t.toUpperCase().replace(/[^A-Z]/g,'').split('').map(c=>{
+        const i=A.indexOf(c); return i>=0?A[25-i]:c;
+      }).join('') + ' (Atbash)';
+    }
+  </script>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance"><h3>Why This Matters</h3><p>The Da Vinci Code is the single most influential work of popular fiction for the field of cryptographic public awareness. By embedding Atbash, anagrams, and the Fibonacci sequence into a gripping thriller, Brown gave readers a felt experience of solving cipher puzzles — and drove them to libraries, cryptography courses, and websites seeking the real history behind his plot devices. Whatever its historical inaccuracies, the novel demonstrably increased engagement with actual ciphers, with visits to the National Cryptologic Museum doubling in the year following publication.</p></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">📖</span><span class="panel-title">Ciphers in the Book</span></div><div class="panel-body"><p>The novel features: (1) an Atbash-encoded message (used famously in the Book of Jeremiah 25:26 — SHESHACH = BABEL via Atbash), reinforcing Hebrew scripture connections; (2) anagram-based clue-solving, an analogy to transposition ciphers; (3) the Fibonacci sequence as an ordering key, anticipating modern numeric cipher ideas; (4) mirror writing attributed to Leonardo da Vinci, who genuinely used right-to-left script in his notebooks — though not as a serious cipher.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What the Book Gets Right</span></div><div class="panel-body"><p>Atbash is a real Hebrew cipher used in the Old Testament. Leonardo da Vinci genuinely wrote in mirror script, though scholars believe this reflected left-handedness and personal habit rather than cryptographic intent. The Priory of Sion was a real (minor) French organization, though not of medieval origin. The novel's depiction of cipher puzzles as solvable through knowledge of history and pattern recognition reflects exactly how historical cryptanalysis works.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">⚠️</span><span class="panel-title">What the Book Gets Wrong</span></div><div class="panel-body"><p>The Priory of Sion conspiracy is largely a 20th-century hoax; the &#8220;historical&#8221; documents Brown cites were forged in the 1960s by Pierre Plantard. The Fibonacci key usage described in the novel conflates several distinct cipher systems. Numerous art-historical details (Mona Lisa dimensions, Last Supper iconography) are anachronistic or fabricated. Brown&#39;s bibliography mixes serious scholarship with debunked conspiracy literature without distinguishing between them.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🌍</span><span class="panel-title">Cultural Impact</span></div><div class="panel-body"><p>The Da Vinci Code sparked: a verified spike in enrollment in cryptography and medieval history courses; record tourism to the Louvre, Rosslyn Chapel, and Rennes-le-Château; a 2006 film adaptation; a bestseller in 44 languages; and widespread popular interest in "hidden messages" in Renaissance art that persists across social media to this day. For cryptography educators, the book is both a gateway and a source of misconceptions to correct.</p></div></div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body"><table class="cipher-table"><tbody><tr><td>Author</td><td>Dan Brown</td></tr><tr><td>Published</td><td>2003 (Doubleday)</td></tr><tr><td>Copies sold</td><td>~80 million+ worldwide</td></tr><tr><td>Ciphers featured</td><td>Atbash, anagram, Fibonacci sequence, mirror writing</td></tr><tr><td>Impact</td><td>Global surge in cryptography interest; Da Vinci tourism boom</td></tr><tr><td>Historical accuracy</td><td>Contested — numerous anachronisms, see panels below</td></tr></tbody></table></div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/atbash.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Atbash</span><span class="related-card__tag">The Hebrew cipher Brown features</span></a>
+    <a href="../ciphers/bacon.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Bacon Cipher</span><span class="related-card__tag">Another hidden-message system in art/text</span></a>
+    <a href="../ciphers/sator-square.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Sator Square</span><span class="related-card__tag">Real ancient cryptographic puzzle</span></a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/gold-bug.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">The Gold-Bug</span></a>
+  <a href="../ciphers/national-treasure.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">National Treasure</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/culture.html">Hall XIII: Cipher Culture</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall XIII · Cipher Culture</span></div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

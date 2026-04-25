@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabinet Noir — Black Chambers of Europe — The Cipher Museum</title>
+  <meta name="description" content="The European Black Chambers (cabinets noirs) were government departments that intercepted, deciphered, and resealed diplomatic mail from the 16th through 19th centuries — proto-signals-intelligence agencies.">
+  <meta property="og:title" content="Cabinet Noir — Black Chambers of Europe — The Cipher Museum">
+  <meta property="og:description" content="The European Black Chambers (cabinets noirs) were government departments that intercepted, deciphered, and resealed diplomatic mail from the 16th through 19th centuries — proto-signals-intelligence agencies.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/cabinet-noir.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cabinet Noir — Black Chambers of Europe — The Cipher Museum">
+  <meta name="twitter:description" content="The European Black Chambers (cabinets noirs) were government departments that intercepted, deciphered, and resealed diplomatic mail from the 16th through 19th centuries — proto-signals-intelligence agencies.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/cabinet-noir.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+  .track-b-widget {
+    border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;
+    margin:2rem 0;background:var(--s1);
+  }
+  .track-b-widget h3 { color:var(--gold);margin-top:0; }
+  .track-b-widget label { display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem; }
+  .track-b-widget input, .track-b-widget textarea {
+    width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);
+    border-radius:4px;color:var(--fg);font-family:var(--fm);box-sizing:border-box;
+  }
+  .track-b-widget button {
+    padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;
+    border-radius:4px;cursor:pointer;font-weight:700;margin-top:.5rem;
+  }
+  .track-b-output {
+    font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
+    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a><span>&rsaquo;</span>
+    Cabinet Noir — Black Chambers of Europe
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall X · Codebreakers</span>
+    <span class="badge era-ancient">Europe · 1550–1850</span>
+    <span class="badge sec-broken">Historical</span>
+  </div>
+  <h1 class="page-title">Cabinet Noir — Black Chambers of Europe</h1>
+  <p class="page-tagline">Before satellites, Western powers ran state intercept bureaux — opening every diplomatic letter, deciphering it, and resealing the wax without a trace.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Period</span><span class="fact-value">~1550–1844 CE</span></div>
+    <div class="fact"><span class="fact-label">Geography</span><span class="fact-value">France, Austria, Britain, Papal States, Prussia, Venice</span></div>
+    <div class="fact"><span class="fact-label">French Cabinet Noir</span><span class="fact-value">Est. by Henri IV (~1600); peak under Rossignol père et fils</span></div>
+    <div class="fact"><span class="fact-label">Austrian Geheime Kabinettskanzlei</span><span class="fact-value">Peak 1750–1848; intercepted letters across Europe</span></div>
+    <div class="fact"><span class="fact-label">British Secret Office</span><span class="fact-value">GPO interception unit, operating 1660s–1844</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Signals intelligence is as old as the written word</span></div>
+  </div>
+</div>
+<div class="track-b-widget">
+  <h3>&#128275; Interactive Explorer</h3>
+  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
+  <label for="input">Simulate a Cabinet Noir intercept</label>
+  <input id="input" type="text" value="THE AMBASSADOR REQUESTS SAFE PASSAGE" placeholder="Diplomatic message…">
+  <button onclick="encode()">Encode</button>
+  <div id="output" class="track-b-output"></div>
+  <script>
+    function encode() {
+      const t = document.getElementById('input').value;
+      const o = cnEncode(t);
+      document.getElementById('output').textContent = o;
+    }
+  </script>
+</div>
+  <script>
+    // Simulate wax-seal removal and resealing (humorous demo — just shows the "intercepted" message)
+    function cnEncode(t) {
+      const ts = new Date().toISOString().replace('T',' ').slice(0,16);
+      return '[INTERCEPTED ' + ts + ' | Cabinet Noir Vienna] ' +
+             t.toUpperCase().replace(/[^A-Z ]/g,'') +
+             ' | [RESEALED — ORIGINAL WAX IMPRESSION PRESERVED]';
+    }
+  </script>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance"><h3>Why This Matters</h3><p>The Cabinet Noir is the institutional ancestor of the NSA, GCHQ, and every modern signals intelligence agency. From the 16th century onward, European powers systematically intercepted diplomatic correspondence, employed teams of cryptanalysts to break whatever cipher was in use, copied the contents, and resealed letters — often reassembling broken seals so expertly that recipients never knew. The French Rossignol family served three successive monarchs as chief cryptanalysts; the Austrian Geheime Kabinettskanzlei in Vienna processed mail from across Europe at the peak of the Vienna Congress period; Britain's Secret Office within the General Post Office operated continuously from the 1660s until parliamentary pressure abolished it in 1844.</p></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">The French Cabinet Noir</span></div><div class="panel-body"><p>Antoine Rossignol (1600–1682) and his son Bonaventure Rossignol became the first professional state cryptanalysts in European history. Antoine broke the Huguenot cipher at the siege of Réalmont (1626) in a single afternoon, demonstrating that ciphertext could be solved under operational time pressure. Under Louis XIV, the Rossignols ran a permanent intercept bureau attached to the royal court, developing new nomenclators for French diplomatic use while simultaneously maintaining a catalog of foreign cipher alphabets. The system they built was not fundamentally changed for 150 years.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">The Austrian Geheime Kabinettskanzlei</span></div><div class="panel-body"><p>The Austrian "secret cabinet chancellery" in Vienna reached its operational peak during the 1750–1848 period, intercepting mail from the entire European diplomatic circuit. The Habsburgs controlled several key postal routes, giving their interceptors first access to letters transiting through their territory. During the Congress of Vienna (1814–1815), the Kabinettskanzlei provided Metternich with advance intelligence on the negotiating positions of every other great power — a strategic intelligence advantage with no modern parallel except satellite intercepts of allied heads of state.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Britain's Secret Office</span></div><div class="panel-body"><p>The British General Post Office maintained a "Secret Office" for mail interception from the 1660s through 1844, when parliamentary scandals — particularly the revelation that the government had opened letters from the Italian nationalist leader Mazzini — generated sufficient public outrage to force abolition. The office's cryptanalysts worked on diplomatic ciphers from every European power. When the 1844 select committee investigation revealed the full scope of operations, it produced the first major public debate about government surveillance powers.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">From Cabinet Noir to NSA</span></div><div class="panel-body"><p>The institutional lineage is direct: Cabinet Noir → British Secret Office → Room 40 (WWI naval intelligence) → Bletchley Park (WWII) → GCHQ / NSA (Cold War through present). Each generation inherited the accumulated tradecraft of the previous, adding technical capability but preserving the fundamental mission: read communications your adversaries believe are private. The Church Committee (1975) and the 2013 Snowden revelations are the modern equivalents of the 1844 Mazzini scandal — recurring moments when democratic societies must decide how much state interception is legitimate.</p></div></div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body"><table class="cipher-table"><tbody><tr><td>Period</td><td>~1550–1844 CE</td></tr><tr><td>Geography</td><td>France, Austria, Britain, Papal States, Prussia, Venice</td></tr><tr><td>French Cabinet Noir</td><td>Est. by Henri IV (~1600); peak under Rossignol père et fils</td></tr><tr><td>Austrian Geheime Kabinettskanzlei</td><td>Peak 1750–1848; intercepted letters across Europe</td></tr><tr><td>British Secret Office</td><td>GPO interception unit, operating 1660s–1844</td></tr><tr><td>Modern Lesson</td><td>Signals intelligence is as old as the written word</td></tr></tbody></table></div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/great-cipher.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Great Cipher</span><span class="related-card__tag">The Rossignol family's masterwork</span></a>
+    <a href="../ciphers/babington.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Babington Plot</span><span class="related-card__tag">Earlier royal interception and cryptanalysis</span></a>
+    <a href="../ciphers/nomenclator.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Nomenclator</span><span class="related-card__tag">The cipher type Black Chambers targeted</span></a>
+  </div>
+</section>
+<div class="hall-nav">
+
+  <a href="../ciphers/station-hypo.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">Station HYPO</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall X · Codebreakers</span></div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

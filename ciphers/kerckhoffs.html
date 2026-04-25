@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerckhoffs's Principle — The Cipher Museum</title>
+  <meta name="description" content="Auguste Kerckhoffs's 1883 principle — 'A cipher should be secure even if everything about the system, except the key, is public knowledge' — is the bedrock of modern cryptographic design.">
+  <meta property="og:title" content="Kerckhoffs's Principle — The Cipher Museum">
+  <meta property="og:description" content="Auguste Kerckhoffs's 1883 principle — 'A cipher should be secure even if everything about the system, except the key, is public knowledge' — is the bedrock of modern cryptographic design.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/kerckhoffs.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kerckhoffs's Principle — The Cipher Museum">
+  <meta name="twitter:description" content="Auguste Kerckhoffs's 1883 principle — 'A cipher should be secure even if everything about the system, except the key, is public knowledge' — is the bedrock of modern cryptographic design.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/kerckhoffs.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+  .track-b-widget {
+    border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;
+    margin:2rem 0;background:var(--s1);
+  }
+  .track-b-widget h3 { color:var(--gold);margin-top:0; }
+  .track-b-widget label { display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem; }
+  .track-b-widget input, .track-b-widget textarea {
+    width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);
+    border-radius:4px;color:var(--fg);font-family:var(--fm);box-sizing:border-box;
+  }
+  .track-b-widget button {
+    padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;
+    border-radius:4px;cursor:pointer;font-weight:700;margin-top:.5rem;
+  }
+  .track-b-output {
+    font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
+    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/modern-crypto.html">Hall XI: Modern Cryptography</a><span>&rsaquo;</span>
+    Kerckhoffs's Principle
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall XI · Modern Cryptography</span>
+    <span class="badge era-ancient">Foundational · 1883</span>
+    <span class="badge sec-broken">Principle (not a cipher)</span>
+  </div>
+  <h1 class="page-title">Kerckhoffs's Principle</h1>
+  <p class="page-tagline">The most important rule in cryptography: assume your adversary knows everything about your system except the key.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Author</span><span class="fact-value">Auguste Kerckhoffs van Nieuwenhof (1835–1903)</span></div>
+    <div class="fact"><span class="fact-label">Published</span><span class="fact-value">La Cryptographie Militaire, 1883</span></div>
+    <div class="fact"><span class="fact-label">Principle</span><span class="fact-value">System security must depend only on key secrecy, not system secrecy</span></div>
+    <div class="fact"><span class="fact-label">Shannon equivalent</span><span class="fact-value">Shannon's maxim: "the enemy knows the system"</span></div>
+    <div class="fact"><span class="fact-label">Violated by</span><span class="fact-value">Security through obscurity, DRM, most "proprietary" crypto</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Open design allows public scrutiny that defeats hidden flaws</span></div>
+  </div>
+</div>
+<div class="track-b-widget">
+  <h3>&#128275; Interactive Explorer</h3>
+  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
+  <label for="input">Message — key is public, algorithm is public, but only you have THE KEY</label>
+  <input id="input" type="text" value="HELLO WORLD" placeholder="Secret message…">
+  <button onclick="encode()">Encode</button>
+  <div id="output" class="track-b-output"></div>
+  <script>
+    function encode() {
+      const t = document.getElementById('input').value;
+      const o = kpDemo(t);
+      document.getElementById('output').textContent = o;
+    }
+  </script>
+</div>
+  <script>
+    // Demonstrates Kerckhoffs: algorithm is Caesar (public), key is known (public for demo),
+    // but in real Kerckhoffs-compliant systems ONLY the key is secret.
+    function kpDemo(t) {
+      const shift = 13; // In Kerckhoffs-compliant system: algorithm public (Caesar),
+      // key PUBLIC IN THIS DEMO. Only in real use would key be kept private.
+      const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const enc = t.toUpperCase().replace(/[^A-Z]/g,'').split('').map(c=>{
+        const i=A.indexOf(c); return i>=0?A[(i+shift)%26]:c;
+      }).join('');
+      return enc + ' ← (Algorithm: Caesar +13 [PUBLIC]. Key: 13 [PUBLIC in demo, secret in real use])';
+    }
+  </script>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance"><h3>Why This Matters</h3><p>Kerckhoffs's Principle — articulated by Dutch linguist Auguste Kerckhoffs in his 1883 paper <em>La Cryptographie Militaire</em> — is the foundational design rule of modern cryptography. It states that a cryptographic system must remain secure even if everything about the system, except the key, is publicly known. The corollary is profound: security through obscurity (hiding the algorithm) is not security at all, because algorithms can be reverse-engineered, leaked, or discovered; only a short, easily changed key needs to remain secret. Every major cipher used today — AES, RSA, the Diffie-Hellman key exchange, TLS — is fully published and open to public scrutiny, with security depending entirely on key secrecy.</p></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">The Six Requirements</span></div><div class="panel-body"><p>Kerckhoffs stated six design criteria for military ciphers: (1) the system must be practically, if not mathematically, indecipherable; (2) <strong>the system must not require secrecy and can be stolen by the enemy without causing trouble</strong>; (3) it must be easy to communicate and remember without written notes; (4) the cipher must be applicable to telegraph correspondence; (5) the apparatus must be portable and operable by a single person; (6) the system must be easy to use. Criterion 2 is what posterity calls "Kerckhoffs's Principle."</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Why Secrecy Through Obscurity Fails</span></div><div class="panel-body"><p>Obscuring an algorithm provides only temporary security — the time until the algorithm is reverse-engineered, the circuit board is captured, or an insider defects. Once exposed, every message ever sent with that algorithm can potentially be re-examined. A Kerckhoffs-compliant system with a strong key: even if the algorithm is known for decades, every message remains protected by its unique key. Changing a compromised key takes minutes; redesigning and deploying a new secret algorithm takes years and may introduce new weaknesses.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Enigma's Critical Violation</span></div><div class="panel-body"><p>Nazi Germany fundamentally violated Kerckhoffs's Principle when it believed Enigma's machine design could be kept permanently secret. Captured machines (from the submarine U-110 and elsewhere), captured key documents, and operator errors gave Bletchley Park everything needed to break the system — because the underlying cipher machine's wiring was not designed to be secure if known. A Kerckhoffs-compliant system would have been designed so that machine capture only helped if the specific daily key settings were also known.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">The Modern Implication</span></div><div class="panel-body"><p>AES was selected by the US NIST through a public five-year competition (1997–2001). The algorithm was published, attacked by the world's best cryptanalysts, analyzed for weaknesses, and refined through open peer review. The competition's winning algorithm — designed by Joan Daemen and Vincent Rijmen (Belgian) — is used in virtually every encrypted communication on earth. Its security has been publicly scrutinized for 25 years. This is Kerckhoffs's Principle in action at planetary scale.</p></div></div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body"><table class="cipher-table"><tbody><tr><td>Author</td><td>Auguste Kerckhoffs van Nieuwenhof (1835–1903)</td></tr><tr><td>Published</td><td>La Cryptographie Militaire, 1883</td></tr><tr><td>Principle</td><td>System security must depend only on key secrecy, not system secrecy</td></tr><tr><td>Shannon equivalent</td><td>Shannon's maxim: "the enemy knows the system"</td></tr><tr><td>Violated by</td><td>Security through obscurity, DRM, most "proprietary" crypto</td></tr><tr><td>Modern Lesson</td><td>Open design allows public scrutiny that defeats hidden flaws</td></tr></tbody></table></div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/aes.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">AES</span><span class="related-card__tag">The most successful Kerckhoffs-compliant cipher</span></a>
+    <a href="../ciphers/enigma.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Enigma</span><span class="related-card__tag">What happens when you violate the principle</span></a>
+    <a href="../ciphers/bletchley-park.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Bletchley Park</span><span class="related-card__tag">How obscurity-dependent systems were broken</span></a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/bletchley-park.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">Bletchley Park</span></a>
+  <a href="../ciphers/venona.html" class="hall-nav-link next"><span class="hall-nav-dir">Next &rarr;</span><span class="hall-nav-name">VENONA Project</span></a>
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/modern-crypto.html">Hall XI: Modern Cryptography</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall XI · Modern Cryptography</span></div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

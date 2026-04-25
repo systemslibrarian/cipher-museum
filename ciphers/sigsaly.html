@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGSALY — The Encrypted Speech System — The Cipher Museum</title>
+  <meta name="description" content="SIGSALY (1943–1946) was the world's first perfectly secure voice encryption system — a 50-ton machine using vinyl phonograph records as one-time pads to protect Roosevelt-Churchill phone calls during WWII.">
+  <meta property="og:title" content="SIGSALY — The Encrypted Speech System — The Cipher Museum">
+  <meta property="og:description" content="SIGSALY (1943–1946) was the world's first perfectly secure voice encryption system — a 50-ton machine using vinyl phonograph records as one-time pads to protect Roosevelt-Churchill phone calls during WWII.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/sigsaly.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SIGSALY — The Encrypted Speech System — The Cipher Museum">
+  <meta name="twitter:description" content="SIGSALY (1943–1946) was the world's first perfectly secure voice encryption system — a 50-ton machine using vinyl phonograph records as one-time pads to protect Roosevelt-Churchill phone calls during WWII.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/sigsaly.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+  .track-b-widget {
+    border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;
+    margin:2rem 0;background:var(--s1);
+  }
+  .track-b-widget h3 { color:var(--gold);margin-top:0; }
+  .track-b-widget label { display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem; }
+  .track-b-widget input, .track-b-widget textarea {
+    width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);
+    border-radius:4px;color:var(--fg);font-family:var(--fm);box-sizing:border-box;
+  }
+  .track-b-widget button {
+    padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;
+    border-radius:4px;cursor:pointer;font-weight:700;margin-top:.5rem;
+  }
+  .track-b-output {
+    font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
+    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    SIGSALY — The Encrypted Speech System
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Hall VII · Mechanical Machines</span>
+    <span class="badge era-ancient">WWII · 1943–1946</span>
+    <span class="badge sec-broken">Unbroken</span>
+  </div>
+  <h1 class="page-title">SIGSALY — The Encrypted Speech System</h1>
+  <p class="page-tagline">Twelve rooms, 50 tons, two synchronized phonograph records — the system that kept Churchill's phone calls secret from Hitler.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Development</span><span class="fact-value">Bell Laboratories (Claude Shannon, et al.), 1941–1943</span></div>
+    <div class="fact"><span class="fact-label">Security</span><span class="fact-value">Theoretically unbreakable — voice one-time pad</span></div>
+    <div class="fact"><span class="fact-label">Machine size</span><span class="fact-value">50 tons; 40+ racks of vacuum tubes; 12 rooms</span></div>
+    <div class="fact"><span class="fact-label">Synchronization</span><span class="fact-value">Matched vinyl phonograph records as key material</span></div>
+    <div class="fact"><span class="fact-label">Lines installed</span><span class="fact-value">Washington D.C., London, Paris, Algiers, Brisbane, Guam,  SHAPE HQ</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">The first practical secure voice communication predates digital age by 50 years</span></div>
+  </div>
+</div>
+<div class="track-b-widget">
+  <h3>&#128275; Interactive Explorer</h3>
+  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
+  <label for="input">Spoken message (SIGSALY digitized and OTP-enciphered it)</label>
+  <input id="input" type="text" value="ATTACK AT DAWN CONFIRM" placeholder="Spoken phrase…">
+  <button onclick="encode()">Encode</button>
+  <div id="output" class="track-b-output"></div>
+  <script>
+    function encode() {
+      const t = document.getElementById('input').value;
+      const o = sigDemo(t);
+      document.getElementById('output').textContent = o;
+    }
+  </script>
+</div>
+  <script>
+    // Conceptual demo: show SIGSALY's core innovation — voice quantized to digits then OTP-encrypted
+    function sigDemo(t) {
+      // Simulate 6-level PCM quantization then XOR with 'key'
+      const bytes = [];
+      for (let i=0; i<Math.min(t.length,20); i++) {
+        const q = (t.charCodeAt(i) % 6) + 1; // 6-level quantization
+        const k = (i * 37 + 19) % 6 + 1;     // 'random' key digit
+        bytes.push(((q + k - 2) % 6) + 1);   // modulo-6 add
+      }
+      return 'Quantized PCM + OTP: [' + bytes.join(' ') + '] ← 6-level voice samples encrypted with one-time pad digits';
+    }
+  </script>
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+    <div class="cipher-significance"><h3>Why This Matters</h3><p>SIGSALY was the world's first secure voice communication system and the first operational digital voice to be transmitted over radio. Bell Laboratories engineers — including Claude Shannon, who used his SIGSALY work as the foundation for his 1945 classified paper "A Mathematical Theory of Cryptography" (later the basis of information theory) — designed a system that digitized speech using 6-level pulse-code modulation, encrypted each sample with a random digit from a vinyl phonograph record, and transmitted the encrypted digital signal. An identical phonograph record, synchronized within milliseconds, decrypted at the receiving end. Because the noise levels on the phonograph records were genuinely random, the system had the same theoretical security as a written one-time pad.</p></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Context: Churchill-Roosevelt Communications</span></div><div class="panel-body"><p>By mid-1942, both Roosevelt and Churchill knew that AT&T's A-3 scrambler system — which they had been using for transatlantic phone calls — had been broken by Germany's Forschungsamt intercept service. German intelligence was reading their phone calls. Bell Labs was commissioned to build a replacement at the highest urgency. The resulting SIGSALY system was operational by July 1943, just in time for the buildup to Operation Overlord planning.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How SIGSALY Worked</span></div><div class="panel-body"><p>SIGSALY converted speech to digital form using 6-level quantization at 50 samples per second — the first operational PCM voice digitization in history. Each 2-bit sample was added modulo 6 to a random digit from a specially recorded vinyl phonograph record. The encrypted samples were transmitted as frequency-shift keying on shortwave radio. At the receiver, an identical phonograph record played in exact synchronization and the subtraction was performed, recovering the original PCM stream. The recovered PCM was then converted back to analog speech through a vocoder (voice coder) — also a SIGSALY invention.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Shannon's Foundation</span></div><div class="panel-body"><p>Claude Shannon worked on SIGSALY at Bell Labs from 1941. His classified 1945 paper "A Mathematical Theory of Cryptography" — which proved that the one-time pad is the only provably perfect cipher — was directly motivated by SIGSALY's design. Shannon's 1948 paper "A Mathematical Theory of Communication," the foundation of information theory, used the same mathematical framework. The world's greatest theoretical contribution to communications security came directly from the problem of keeping Churchill's phone calls private.</p></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-icon">📡</span><span class="panel-title">Global Network</span></div><div class="panel-body"><p>Twelve SIGSALY terminals were installed worldwide: the Pentagon, 10 Downing Street, SHAEF headquarters, Algiers (for Eisenhower), Brisbane (MacArthur), Manila, Guam, and others. Each terminal weighed approximately 50 tons and occupied 12 large rooms. The matched phonograph records were physically carried to both terminals and played exactly once before being destroyed. When Churchill called Roosevelt, the records at both ends were started simultaneously; if synchronization drifted, the call could not continue. The record pairs were produced at a single Bell Labs facility and shipped under armed guard.</p></div></div>
+  </div>
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body"><table class="cipher-table"><tbody><tr><td>Development</td><td>Bell Laboratories (Claude Shannon, et al.), 1941–1943</td></tr><tr><td>Security</td><td>Theoretically unbreakable — voice one-time pad</td></tr><tr><td>Machine size</td><td>50 tons; 40+ racks of vacuum tubes; 12 rooms</td></tr><tr><td>Synchronization</td><td>Matched vinyl phonograph records as key material</td></tr><tr><td>Lines installed</td><td>Washington D.C., London, Paris, Algiers, Brisbane, Guam,  SHAPE HQ</td></tr><tr><td>Modern Lesson</td><td>The first practical secure voice communication predates digital age by 50 years</td></tr></tbody></table></div>
+    </div>
+  </div>
+</div>
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/one-time-pad.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">One-Time Pad</span><span class="related-card__tag">SIGSALY's mathematical foundation</span></a>
+    <a href="../ciphers/lorenz.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Lorenz Cipher</span><span class="related-card__tag">Axis equivalent for teleprinter traffic</span></a>
+    <a href="../ciphers/kerckhoffs.html" class="related-card"><span class="related-card__number">Related</span><span class="related-card__name">Kerckhoffs's Principle</span><span class="related-card__tag">Why SIGSALY lasted the war securely</span></a>
+  </div>
+</section>
+<div class="hall-nav">
+  <a href="../ciphers/venona.html" class="hall-nav-link"><span class="hall-nav-dir">&larr; Previous</span><span class="hall-nav-name">VENONA Project</span></a>
+
+</div>
+</main>
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
+    <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall VII · Mechanical Machines</span></div>
+</footer>
+<script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/demo-loader.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
