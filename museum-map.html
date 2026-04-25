@@ -92,6 +92,45 @@
   </div>
 </div>
 
+<!-- ───────── TRUST LABEL LEGEND ───────── -->
+<div class="section" id="trust-labels" style="padding-top:1rem;">
+  <div class="section-head">
+    <span class="section-eyebrow">Reading the Exhibits</span>
+    <h2 class="section-title">Trust Labels</h2>
+    <p class="section-sub">Every cipher exhibit carries one of four labels indicating its modern security status. Click a label on any exhibit to return here.</p>
+  </div>
+  <div class="trust-legend" role="list" aria-label="Trust label categories">
+    <div class="trust-legend__item" role="listitem">
+      <span class="trust-label trust-label--broken" aria-label="Broken">
+        <svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>
+        <span class="trust-label__text">Broken</span>
+      </span>
+      <p class="trust-legend__desc">Historically important and well-studied, but cryptographically broken. Use only for learning — never for real secrets.</p>
+    </div>
+    <div class="trust-legend__item" role="listitem">
+      <span class="trust-label trust-label--historical" aria-label="Historical Only">
+        <svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h11v12a2 2 0 0 0 2 2H6a3 3 0 0 1-3-3V7z"/><path d="M16 5a2 2 0 0 1 2 2v8h3a0 0 0 0 1 0 0v2a2 2 0 0 1-2 2"/></svg>
+        <span class="trust-label__text">Historical Only</span>
+      </span>
+      <p class="trust-legend__desc">Curiosities, primitive shifts, undeciphered manuscripts, and steganographic devices. Important to the story of cryptography; never serious modern security.</p>
+    </div>
+    <div class="trust-legend__item" role="listitem">
+      <span class="trust-label trust-label--educational" aria-label="Educational">
+        <svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
+        <span class="trust-label__text">Educational</span>
+      </span>
+      <p class="trust-legend__desc">Useful for teaching a specific cryptographic concept (substitution, fractionation, key reuse) but not intended for security. Reserved for explicitly didactic constructions.</p>
+    </div>
+    <div class="trust-legend__item" role="listitem">
+      <span class="trust-label trust-label--secure" aria-label="Secure (Modern)">
+        <svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span class="trust-label__text">Secure (Modern)</span>
+      </span>
+      <p class="trust-legend__desc">Still considered secure when used correctly with modern key handling — AES, RSA, SHA-256, Diffie–Hellman, and the one classical cipher that survives: the one-time pad.</p>
+    </div>
+  </div>
+</div>
+
 <!-- ───────── VISUAL FLOOR PLAN ───────── -->
 <div class="section">
   <div class="section-head">

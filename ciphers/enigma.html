@@ -16,7 +16,7 @@
   <link rel="canonical" href="https://ciphermuseum.com/ciphers/enigma.html">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="stylesheet" href="../css/museum.css">
-  
+  <link rel="stylesheet" href="../css/enigma-flagship.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -58,6 +58,7 @@
     <span class="badge sec-broken">Broken</span>
   </div>
   <h1 class="page-title">Enigma Machine</h1>
+  <div class="trust-label-wrap"><a class="trust-label trust-label--broken" href="../museum-map.html#trust-labels" title="Cryptographically broken — historically important but unsafe to use today." aria-label="Trust label: Broken. Cryptographically broken — historically important but unsafe to use today."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg><span class="trust-label__text">Broken</span></a></div>
   <p class="page-tagline">158 quintillion settings. Broken by a crossword puzzle and a weather forecast.</p>
   <div class="exhibit-facts">
     <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Arthur Scherbius (inventor) · German Armed Forces (operator)</span></div>
@@ -68,7 +69,124 @@
   </div>
 </div>
 
-<div class="demo-section" data-cipher="enigma"></div>
+<div class="demo-section">
+  <div class="demo-panel">
+    <div class="demo-head">
+      <span class="panel-icon">⚙</span>
+      <span class="demo-title">Enigma I — Live Machine</span>
+    </div>
+    <div class="demo-body">
+      <p style="font-size:1rem;color:var(--tx2);margin:0;">
+        A faithful Wehrmacht Enigma I, in the browser. Choose three rotors, set the rings,
+        position the wheels, wire the plugboard, and type. The rotors step on every keypress
+        — including the famous middle-rotor double-step. Verified against the canonical test
+        vector <code>AAAAA → BDZGO</code>.
+      </p>
+
+      <div id="enigma-flagship">
+        <!-- Rotor windows -->
+        <div class="eg-rotor-windows" aria-label="Current rotor positions">
+          <div class="eg-rotor-window">
+            <span class="eg-rotor-window-label">Left</span>
+            <span class="eg-rotor-window-letter" id="eg-window-left" aria-live="polite">A</span>
+          </div>
+          <div class="eg-rotor-window">
+            <span class="eg-rotor-window-label">Middle</span>
+            <span class="eg-rotor-window-letter" id="eg-window-mid" aria-live="polite">A</span>
+          </div>
+          <div class="eg-rotor-window">
+            <span class="eg-rotor-window-label">Right</span>
+            <span class="eg-rotor-window-letter" id="eg-window-right" aria-live="polite">A</span>
+          </div>
+        </div>
+
+        <!-- Configuration -->
+        <fieldset style="border:1px solid var(--s4);border-radius:var(--r);padding:1rem;margin:0;">
+          <legend style="font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);padding:0 .5rem;">Rotor Selection</legend>
+          <div class="eg-config-grid">
+            <div class="input-group">
+              <label class="input-label" for="eg-rotor-left">Left rotor</label>
+              <select class="museum-input" id="eg-rotor-left">
+                <option value="I" selected>I</option><option value="II">II</option>
+                <option value="III">III</option><option value="IV">IV</option><option value="V">V</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="eg-rotor-mid">Middle rotor</label>
+              <select class="museum-input" id="eg-rotor-mid">
+                <option value="I">I</option><option value="II" selected>II</option>
+                <option value="III">III</option><option value="IV">IV</option><option value="V">V</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="eg-rotor-right">Right rotor</label>
+              <select class="museum-input" id="eg-rotor-right">
+                <option value="I">I</option><option value="II">II</option>
+                <option value="III" selected>III</option><option value="IV">IV</option><option value="V">V</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="eg-reflector">Reflector (UKW)</label>
+              <select class="museum-input" id="eg-reflector">
+                <option value="B" selected>B</option><option value="C">C</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:1px solid var(--s4);border-radius:var(--r);padding:1rem;margin:0;">
+          <legend style="font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);padding:0 .5rem;">Ring Settings · Initial Positions</legend>
+          <div class="eg-config-grid">
+            <div class="input-group"><label class="input-label" for="eg-ring-left">Ring L</label><input class="museum-input" id="eg-ring-left" maxlength="1" pattern="[A-Za-z]" value="A" inputmode="text"></div>
+            <div class="input-group"><label class="input-label" for="eg-ring-mid">Ring M</label><input class="museum-input" id="eg-ring-mid" maxlength="1" pattern="[A-Za-z]" value="A" inputmode="text"></div>
+            <div class="input-group"><label class="input-label" for="eg-ring-right">Ring R</label><input class="museum-input" id="eg-ring-right" maxlength="1" pattern="[A-Za-z]" value="A" inputmode="text"></div>
+            <div class="input-group"><label class="input-label" for="eg-pos-left">Position L</label><input class="museum-input" id="eg-pos-left" maxlength="1" pattern="[A-Za-z]" value="A" inputmode="text"></div>
+            <div class="input-group"><label class="input-label" for="eg-pos-mid">Position M</label><input class="museum-input" id="eg-pos-mid" maxlength="1" pattern="[A-Za-z]" value="A" inputmode="text"></div>
+            <div class="input-group"><label class="input-label" for="eg-pos-right">Position R</label><input class="museum-input" id="eg-pos-right" maxlength="1" pattern="[A-Za-z]" value="A" inputmode="text"></div>
+          </div>
+        </fieldset>
+
+        <div class="input-group">
+          <label class="input-label" for="eg-plugboard">Plugboard (Steckerbrett) — up to 10 letter pairs, e.g. <code>AB CD EF</code></label>
+          <input class="museum-input" id="eg-plugboard" type="text" placeholder="AB CD EF GH IJ KL MN OP QR ST" autocomplete="off" spellcheck="false">
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="eg-plaintext">Message (A–Z only; other characters are silently dropped, as on real Enigma operators' tape)</label>
+          <textarea class="museum-input" id="eg-plaintext" rows="3" placeholder="HELLO FROM BLETCHLEY" autocomplete="off" spellcheck="false"></textarea>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="eg-ciphertext">Ciphertext (5-letter groups, Wehrmacht convention)</label>
+          <div class="eg-cipher-output" id="eg-ciphertext" aria-live="polite">
+            <span class="output-empty">Output will appear here…</span>
+          </div>
+        </div>
+
+        <label class="eg-path-toggle">
+          <input type="checkbox" id="eg-show-path"> Show electrical path for last letter
+        </label>
+        <div class="eg-path-wrap" aria-hidden="false">
+          <svg id="eg-path-svg" role="img" aria-label="Electrical path through the Enigma rotors for the most recently encrypted letter"></svg>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" id="eg-encrypt" type="button">Encrypt</button>
+          <button class="btn btn-secondary" id="eg-reset" type="button">Reset to defaults</button>
+        </div>
+
+        <div class="eg-a11y-log" id="eg-a11y-log" aria-live="polite" role="status"></div>
+      </div>
+
+      <div class="callout callout-info" style="margin:0;">
+        <span class="callout-icon">🔐</span>
+        <div class="callout-body">
+          <p><strong>Symmetric by design.</strong> Enigma encrypts and decrypts with the same machine state. To decrypt, set the same rotors, rings, positions, and plugboard, then type the ciphertext. The original plaintext appears.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
@@ -132,7 +250,21 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>Arthur Scherbius patented the Enigma machine in 1918 as a commercial product. The German military adopted it in 1926 and progressively enhanced it throughout WWII. At its peak, the naval Enigma M4 had 158,962,555,217,826,360,000 possible initial configurations — far beyond any conceivable brute force.</p><p style='margin-top:1rem;'>Polish mathematicians Marian Rejewski, Jerzy Różycki, and Henryk Zygalski first broke Enigma in 1932. When Germany added complexity, they passed their work to Britain. Alan Turing and Gordon Welchman at Bletchley Park built the Bombe machine — an electromechanical device that could test configurations far faster than any human. By the end of the war, over 10,000 people worked at Bletchley Park reading German traffic in near-real-time.</p></div>
+      <div class="panel-body">
+        <p>Arthur Scherbius patented the Enigma machine in 1918 as a commercial product. The German military adopted it in 1926 and progressively enhanced it throughout WWII. At its peak, the naval Enigma M4 had 158,962,555,217,826,360,000 possible initial configurations — a number meant to put the cipher far beyond any conceivable brute force.</p>
+
+        <p style="margin-top:1rem;"><strong>The Polish breakthrough.</strong> The story properly begins not at Bletchley but in Warsaw. In 1932 the young Polish mathematician <strong>Marian Rejewski</strong>, working for the Biuro Szyfrów with colleagues <strong>Jerzy Różycki</strong> and <strong>Henryk Zygalski</strong>, reconstructed the wiring of the German Army Enigma's rotors using only intercepted traffic and a handful of compromised documents passed by a French agent. Rejewski did this by formulating message-key permutations as group-theoretic equations and solving them — a feat the German cryptographic establishment had explicitly believed to be impossible. By 1938 the Poles were reading roughly three-quarters of intercepted German Enigma traffic, using their own electromechanical machines (the <em>bomba kryptologiczna</em>, the direct ancestor of Turing's bombe) and Zygalski's perforated sheets.</p>
+
+        <p style="margin-top:1rem;"><strong>The handover.</strong> When Germany added two new rotors and changed procedures in late 1938, the Polish bureau's lead shrank. On <strong>25 July 1939</strong>, five weeks before the German invasion, Rejewski and his colleagues met British and French cryptanalysts in a forest near Pyry, south of Warsaw, and presented them with everything: the rotor wirings, the bomby, the Zygalski sheets, working Enigma replicas. Without that meeting, Bletchley Park would have started from zero.</p>
+
+        <p style="margin-top:1rem;"><strong>Hut 6 and Hut 8.</strong> At Bletchley Park, <strong>Hut 6</strong> (under Gordon Welchman, then Stuart Milner-Barry) attacked German Army and Luftwaffe Enigma; <strong>Hut 8</strong> (under Alan Turing, then Hugh Alexander) attacked Naval Enigma — a far harder problem due to rigorous procedures and, from February 1942, the four-rotor M4 used by the U-boat fleet. The breaks at Hut 8 were the difference between the Atlantic convoys getting through or being annihilated.</p>
+
+        <p style="margin-top:1rem;"><strong>Turing's bombe and Welchman's diagonal board.</strong> Turing's bombe mechanised crib-based attacks: given a guessed plaintext fragment, it tested rotor settings electrically at the rate of thousands per second, exploiting the loops in the implied permutation graph. Welchman's diagonal board roughly tripled its efficiency by adding a constraint between scrambler banks. Over 200 bombes were built, operated by Wrens working in shifts day and night.</p>
+
+        <p style="margin-top:1rem;"><strong>Strategic impact.</strong> Sir Harry Hinsley, the official historian of British intelligence in WWII, estimated that ULTRA — the codename covering decrypts from Enigma and other systems — shortened the war in Europe by <em>at least</em> two years and "possibly four." The figure is contested at the margins, but no serious historian disputes that the breaks were strategically decisive in the Battle of the Atlantic, the Mediterranean campaign, and the deception planning for D-Day.</p>
+
+        <p style="margin-top:1rem;"><em>Sources: Hinsley, &ldquo;British Intelligence in the Second World War,&rdquo; HMSO 1979–1990; Kozaczuk, &ldquo;Enigma,&rdquo; 1984; Welchman, &ldquo;The Hut Six Story,&rdquo; 1982; Hodges, &ldquo;Alan Turing: The Enigma,&rdquo; 1983.</em></p>
+      </div>
     </div>
 
     <div class="panel">
@@ -221,7 +353,80 @@ But: same letter never encrypts to itself → cribs work</pre>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
-      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Crib-Based Cryptanalysis (Turing's Bombe)</div><div class="attack-diff">Complexity: Computationally intensive · Required dedicated machines</div><p class="attack-desc">Enigma's fatal flaw: a letter can never encrypt to itself (the reflector guarantees this). If you know (or guess) a plaintext word — called a crib — you can eliminate all configurations where any crib letter would encrypt to itself. Weather forecasts always began with WETTER. Messages often ended with HEIL HITLER. These cribs eliminated millions of possible settings. The Bombe machine tested the remaining configurations electromechanically at thousands per minute.</p></div><div class="attack-panel"><div class="attack-name">Operator Errors</div><div class="attack-diff">Human factors</div><p class="attack-desc">Operators sent lazy key indicators (AAA, BBB), repeated message keys, used predictable cribs (operator's girlfriend's name as daily setting), and sent stereotyped messages. These human failures, not mathematical weaknesses, gave Bletchley Park most of its entry points.</p></div></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Crib-Based Cryptanalysis (Turing's Bombe)</div><div class="attack-diff">Complexity: Computationally intensive · Required dedicated machines</div><p class="attack-desc">Enigma's fatal flaw: a letter can never encrypt to itself (the reflector guarantees this). If you know (or guess) a plaintext word — called a crib — you can eliminate all configurations where any crib letter would encrypt to itself. Weather forecasts always began with WETTER. Messages often ended with HEIL HITLER. These cribs eliminated millions of possible settings. The Bombe machine tested the remaining configurations electromechanically at thousands per minute.</p></div><div class="attack-panel"><div class="attack-name">Operator Errors</div><div class="attack-diff">Human factors</div><p class="attack-desc">Operators sent lazy key indicators (AAA, BBB), repeated message keys, used predictable cribs (operator's girlfriend's name as daily setting), and sent stereotyped messages. These human failures, not mathematical weaknesses, gave Bletchley Park most of its entry points.</p></div>
+
+      <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);letter-spacing:.06em;margin:2rem 0 .75rem;">1 · Self-encryption rejection</h3>
+      <p>Enigma's reflector means no letter can ever encrypt to itself. This single fact lets you eliminate most candidate alignments of a crib without testing rotor settings at all: if any letter of the crib lines up with the same letter in the ciphertext, that placement is impossible.</p>
+
+      <div class="demo-panel" style="margin-top:1rem;border-color:var(--gold-b);">
+        <div class="demo-head"><span class="panel-icon">🔍</span><span class="demo-title">Crib Placement Check</span></div>
+        <div class="demo-body">
+          <div class="input-group">
+            <label class="input-label" for="eg-crib-cipher">Ciphertext (A–Z, spaces ignored)</label>
+            <textarea class="museum-input" id="eg-crib-cipher" rows="2" autocomplete="off" spellcheck="false">BDZGOWCXLTKSBTMCDLPBMUQOFXYHCX</textarea>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="eg-crib-text">Suspected crib (e.g. WETTER, KEINE, OBERKOMMANDODERWEHRMACHT)</label>
+            <input class="museum-input" id="eg-crib-text" type="text" value="WETTER" autocomplete="off" spellcheck="false">
+          </div>
+          <button class="btn btn-primary" id="eg-crib-check" type="button">Check all placements</button>
+          <div id="eg-crib-output">
+            <span class="output-empty">Click "Check all placements" to see which positions survive the self-encryption rule.</span>
+          </div>
+          <p style="font-size:.9rem;color:var(--tx3);margin:.5rem 0 0;font-style:italic;">
+            Each row is a candidate placement of the crib over the ciphertext. Rows in red are impossible (a crib letter would have to encrypt to itself). Rows in green survive and would be passed to the bombe for full testing.
+          </p>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);letter-spacing:.06em;margin:2rem 0 .75rem;">2 · Brute-force rotor &amp; position search</h3>
+      <p>With the plugboard and ring settings fixed, the rotor order and starting positions form a search space of <strong>60 × 17 576 ≈ 1 054 560</strong> configurations. The bombe was needed because the plugboard explodes this by a further factor of ~10<sup>11</sup>. Without the plugboard, the search is small enough to run in your browser. Below: enter a ciphertext encrypted with rings AAA and no plugboard, give it a known crib, and watch the search recover the rotor settings.</p>
+
+      <div class="demo-panel" style="margin-top:1rem;border-color:var(--gold-b);">
+        <div class="demo-head"><span class="panel-icon">⚙</span><span class="demo-title">Rotor-Order Search</span></div>
+        <div class="demo-body">
+          <div class="input-group">
+            <label class="input-label" for="eg-bf-cipher">Ciphertext</label>
+            <textarea class="museum-input" id="eg-bf-cipher" rows="2" autocomplete="off" spellcheck="false">BDZGOWCXLTKSBTMCDLPBMUQOFXYHCX</textarea>
+          </div>
+          <div class="eg-bf-controls">
+            <div class="input-group">
+              <label class="input-label" for="eg-bf-crib">Crib (known plaintext)</label>
+              <input class="museum-input" id="eg-bf-crib" type="text" value="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="eg-bf-offset">Crib offset</label>
+              <input class="museum-input" id="eg-bf-offset" type="number" min="0" value="0">
+            </div>
+            <div class="input-group">
+              <button class="btn btn-primary" id="eg-bf-run" type="button">Search</button>
+            </div>
+          </div>
+          <label class="eg-bf-fullsearch">
+            <input type="checkbox" id="eg-bf-full">
+            Full Wehrmacht set (rotors I–V, 60 orderings, ≈10.5M settings — slower)
+          </label>
+          <div class="btn-group" style="margin-top:.5rem;">
+            <button class="btn btn-secondary" id="eg-bf-cancel" type="button" disabled>Cancel</button>
+          </div>
+          <div class="eg-bf-progress" id="eg-bf-progress" hidden>
+            <div class="eg-bf-progress-track"><div class="eg-bf-progress-bar" id="eg-bf-progress-bar"></div></div>
+            <span class="eg-bf-status" aria-live="polite">Ready.</span>
+          </div>
+          <div id="eg-bf-candidates" class="eg-bf-candidates" aria-live="polite"></div>
+          <p style="font-size:.9rem;color:var(--tx3);margin:.5rem 0 0;font-style:italic;">
+            The defaults reproduce the canonical "AAAAA → BDZGO" vector and its 25-letter extension. The search recovers <code>I · II · III</code> at positions <code>AAA</code>. Click "Load into machine" on any candidate to test it above.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout callout-warn" style="margin-top:1.5rem;">
+        <span class="callout-icon">⚠</span>
+        <div class="callout-body">
+          <p><strong>Honest scope.</strong> A complete Turing-bombe-style attack — recovering rotor order, ring settings <em>and</em> plugboard from realistic ciphertext — adds a search factor of roughly 10<sup>11</sup>. That is exactly what the bombe was built for, and reproducing it in a single browser tab is beyond the budget of any general-audience exhibit. What you have here is the cryptanalytic <em>core</em>: the self-encryption rejection that filters cribs, and the rotor-position search that the bombe accelerated. Together they show how the impossible-looking 158-quintillion key space becomes tractable once the right structural weakness is exploited.</p>
+        </div>
+      </div>
+      </div>
     </div>
 
     <div class="panel">
@@ -377,7 +582,9 @@ The wiring path changes every single keypress
   </div>
 </footer>
 <script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/ciphers/enigma.js"></script>
 <script src="../js/demo-loader.js"></script>
+<script src="../js/ciphers/enigma-flagship.js" defer></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
 </body>
