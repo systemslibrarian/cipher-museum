@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bible Code (ELS) — The Cipher Museum</title>
+  <meta name="description" content="The Bible Code — equidistant letter sequences (ELS) claimed to hide prophecies in the Hebrew scriptures. A rigorous statistical refutation by McKay et al. (1999) showed the same method finds identical 'predictions' in War and Peace and Moby-Dick.">
+  <meta property="og:title" content="Bible Code (ELS) — The Cipher Museum">
+  <meta property="og:description" content="Not a real cipher — a cautionary tale about applying pattern-finding to long texts and misreading probability. The Bible Code controversy and its statistical refutation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/bible-code.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bible Code (ELS) — The Cipher Museum">
+  <meta name="twitter:description" content="Not a real cipher — a cautionary tale about misreading probability.">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/bible-code.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="../css/museum.css">
+  <style>
+    /* ELS grid display */
+    .els-grid-wrap { overflow-x: auto; margin: 1rem 0; }
+    .els-grid {
+      display: grid;
+      gap: 1px;
+      font-family: var(--fm, monospace);
+      font-size: .72rem;
+      line-height: 1;
+    }
+    .els-grid-cell {
+      width: 1.55rem; height: 1.55rem;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--s3);
+      border: 1px solid transparent;
+      border-radius: 2px;
+      color: var(--tx3);
+      transition: background .1s, color .1s;
+      cursor: default;
+      user-select: none;
+    }
+    .els-grid-cell.els-hit { background: var(--gold-glow); color: var(--gold); border-color: var(--gold-b); font-weight: 700; }
+    .els-hit-list { display: flex; flex-direction: column; gap: .4rem; margin: .75rem 0; }
+    .els-hit-item {
+      font-family: var(--fm, monospace); font-size: .8rem;
+      padding: .4rem .75rem; background: var(--s3); border-left: 3px solid var(--gold);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0; color: var(--tx2);
+    }
+    .els-hit-item span { color: var(--gold); font-weight: 700; }
+    .els-stat-row { display: flex; gap: 2rem; flex-wrap: wrap; margin: .75rem 0; font-family: var(--fm); font-size: .8rem; }
+    .els-stat { display: flex; flex-direction: column; gap: .2rem; }
+    .els-stat-val { font-size: 1.4rem; color: var(--gold); font-weight: 700; font-family: var(--fd); }
+    .els-stat-label { font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--tx3); }
+    .els-compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    @media (max-width: 600px) { .els-compare-row { grid-template-columns: 1fr; } }
+    .els-compare-box { background: var(--s3); border: 1px solid var(--s4); border-radius: var(--r); padding: 1rem; }
+    .els-compare-box h4 { font-family: var(--fd); font-size: .85rem; letter-spacing: .06em; color: var(--gold); margin: 0 0 .6rem; }
+    .els-compare-count { font-size: 2rem; font-family: var(--fd); color: var(--gold); font-weight: 700; margin: .5rem 0; }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Entrance</a></li>
+      <li><a href="../museum-map.html">Museum Map</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/puzzle.html">Hall VIII: Puzzle &amp; Novelty Ciphers</a><span>&rsaquo;</span>
+    Bible Code (ELS)
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 140 of 140</span>
+    <span class="badge era-modern">1994 · Refuted 1999</span>
+    <span class="badge sec-broken">Debunked</span>
+  </div>
+  <h1 class="page-title">Bible Code — Equidistant Letter Sequences</h1>
+  <div class="trust-label-wrap">
+    <a class="trust-label trust-label--broken" href="../museum-map.html#trust-labels"
+       title="Cryptographically broken — historically important but unsafe to use today."
+       aria-label="Trust label: Broken.">
+      <svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/>
+      </svg>
+      <span class="trust-label__text">Broken</span>
+    </a>
+  </div>
+  <p class="page-tagline">Not a cipher — a lesson in probability. The same method finds the same "prophecies" in Moby-Dick.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Claimed by</span><span class="fact-value">Witztum, Rips &amp; Rosenberg (1994); Michael Drosnin (1997)</span></div>
+    <div class="fact"><span class="fact-label">Method</span><span class="fact-value">Equidistant Letter Sequences (ELS) in Hebrew Torah text</span></div>
+    <div class="fact"><span class="fact-label">Refuted by</span><span class="fact-value">McKay, Bar-Natan, Bar-Hillel &amp; Kalai — <em>Statistical Science</em> 14:150 (1999)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">The law of large numbers always produces patterns — the question is whether they exceed expectation</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h2>Why This Exhibit Exists</h2>
+      <p>The Bible Code is the museum's only exhibit on a claim that is <em>not</em> a real cipher. It is here because the tools used to "find" it are the same statistical tools used to <em>break</em> real ciphers — and misunderstanding those tools has caused enormous harm. The 1994 paper appeared in a peer-reviewed journal. Drosnin's 1997 bestseller sold millions of copies. The statistical error it embodies — confusing "pattern found" with "pattern is significant" — remains one of the most common mistakes in security and intelligence analysis today.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>In 1994 Israeli mathematicians Doron Witztum, Eliyahu Rips, and Yoav Rosenberg published a paper in <em>Statistical Science</em> claiming to find statistically significant equidistant letter sequences (ELS) in the Hebrew text of Genesis. They claimed that the names of famous medieval rabbis appeared encoded in the text at unusually short skip intervals, clustered near their dates of birth and death.</p>
+        <p style="margin-top:1rem;">The paper caused a sensation. In 1997 journalist Michael Drosnin published <em>The Bible Code</em>, extending the method to predict modern events — the assassination of Yitzhak Rabin (cited after the fact), the Gulf War, and others. Drosnin's challenge: "When my critics find a message about the assassination of a prime minister encrypted in <em>Moby-Dick</em>, I'll believe them."</p>
+        <p style="margin-top:1rem;">In 1997, mathematician Brendan McKay accepted the challenge. He found messages in the English text of <em>Moby-Dick</em> predicting the assassinations of Indira Gandhi, Yitzhak Rabin, John F. Kennedy, Robert F. Kennedy, Martin Luther King, Abraham Lincoln, and Leon Trotsky — all using Drosnin's exact method. The findings appeared in <em>Statistical Science</em> in 1999, co-authored with Dror Bar-Natan, Maya Bar-Hillel, and Gil Kalai. The original Witztum-Rips experiment was independently shown to depend entirely on a specific controversial list of rabbis; when an independent list was substituted, the effect disappeared entirely.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How ELS Works</span></div>
+      <div class="panel-body">
+        <p>Take any text. Remove all spaces, punctuation, and numbers, keeping only letters. This gives you a letter string. Now pick a target word and a <strong>skip value</strong> <em>d</em>. Starting at position <em>p</em>, read every <em>d</em>-th letter: positions <em>p</em>, <em>p+d</em>, <em>p+2d</em>, and so on. If the result spells your target word, you have found an ELS at (start=<em>p</em>, skip=<em>d</em>).</p>
+        <pre>Example: text = THEQUICKBROWNFOX
+Word = "TOX", skip = 4
+Position 0 → T
+Position 4 → U  ✗  (not O)
+
+Word = "TRX", skip = 4
+Position 0 → T
+Position 4 → U  ✗
+
+Try skip = 5:
+Position 0 → T
+Position 5 → I  ✗
+
+Finding real words requires scanning ALL (start, skip) pairs.
+In a 100,000-letter corpus with skips up to 1,000, that is
+100,000 × 1,000 = 100,000,000 pairs per target word.
+Any 4-letter word with average letter frequencies is
+expected to appear hundreds to thousands of times.</pre>
+
+        <p style="margin-top:1rem;">The key statistical fact: for a 100,000-character text searched with skips up to 1,000, a 4-letter word like EDEN or FIRE has an <strong>expected hit count of roughly 400–2,000</strong> depending on its letter frequencies. Finding hundreds of hits is not evidence of hidden messages — it is arithmetic.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">The Refutation — Run It Yourself</span></div>
+      <div class="panel-body">
+        <p>The two boxes below search the same word in two texts of identical length: a passage of English prose and a randomly generated text with the same letter frequencies. <strong>The hit counts are statistically indistinguishable.</strong> Finding a word in a long text by ELS is not evidence of intent — it is the expected consequence of searching enough (start, skip) pairs.</p>
+
+        <div class="input-group" style="margin-top:1rem;">
+          <label class="input-label" for="els-word">Search word (3–8 letters, A–Z)</label>
+          <input class="museum-input" id="els-word" type="text" value="FIRE" maxlength="8"
+                 autocomplete="off" spellcheck="false" style="max-width:12rem;text-transform:uppercase;">
+        </div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem;align-items:center;">
+          <div class="input-group" style="margin:0;">
+            <label class="input-label" for="els-maxskip">Max skip</label>
+            <input class="museum-input" id="els-maxskip" type="number" value="500" min="10" max="5000" style="width:6rem;">
+          </div>
+          <button class="btn btn-primary" id="els-search" type="button" style="margin-top:1.2rem;">Search both texts</button>
+          <button class="btn btn-secondary" id="els-random" type="button" style="margin-top:1.2rem;">Regenerate random text</button>
+        </div>
+
+        <div class="els-compare-row" id="els-compare" style="display:none;">
+          <div class="els-compare-box">
+            <h4>Prose text (Moby-Dick excerpt)</h4>
+            <div class="els-compare-count" id="els-prose-count">—</div>
+            <div style="font-size:.8rem;color:var(--tx3);">hits found</div>
+            <div id="els-prose-hits" class="els-hit-list" style="margin-top:.75rem;max-height:160px;overflow-y:auto;"></div>
+          </div>
+          <div class="els-compare-box">
+            <h4>Random text (same length, same letter distribution)</h4>
+            <div class="els-compare-count" id="els-rand-count">—</div>
+            <div style="font-size:.8rem;color:var(--tx3);">hits found</div>
+            <div id="els-rand-hits" class="els-hit-list" style="margin-top:.75rem;max-height:160px;overflow-y:auto;"></div>
+          </div>
+        </div>
+
+        <div id="els-expected-row" style="display:none;margin-top:1rem;">
+          <div class="callout callout-info">
+            <span class="callout-icon">📊</span>
+            <div class="callout-body">
+              <strong>Analytic expectation:</strong> searching for <strong id="els-word-display"></strong>
+              in a text of <strong id="els-n-display"></strong> letters at skips 2–<strong id="els-maxskip-display"></strong>
+              predicts approximately <strong id="els-expected-display"></strong> hits.
+              The Bible Code's "discovery" is arithmetic, not prophecy.
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:.9rem;color:var(--tx3);margin:.75rem 0 0;font-style:italic;">
+          Try target words: <code>EDEN</code>, <code>DEATH</code>, <code>WAR</code>, <code>KING</code>, <code>ASSASSIN</code>.
+          Every one appears hundreds of times in any long text. The "Bible Code" method gives you no way to distinguish these hits from noise.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How the Claim Was Refuted</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Statistical Replication Test (McKay et al., 1999)</div>
+          <div class="attack-diff">Method: Exact replication in non-biblical texts</div>
+          <p class="attack-desc">McKay's team applied Drosnin's own method — identical parameters, identical search procedure — to Hebrew translations of <em>War and Peace</em> and to the English text of <em>Moby-Dick</em>. Both texts produced equally "remarkable" clusters of famous names near death dates. The original Witztum-Rips result also proved sensitive to which list of rabbis was used: the specific list in the 1994 paper was a version that had been informally optimised for the experiment over several years. When an independent scholar's list was substituted, the result vanished completely.</p>
+        </div>
+        <div class="attack-panel" style="margin-top:1rem;">
+          <div class="attack-name">The Multiplicity Problem (searching for significance)</div>
+          <div class="attack-diff">Method: Combinatorial argument</div>
+          <p class="attack-desc">A 100,000-letter text, words of length 3–6, skips up to 1,000, forward and backward: the total search space exceeds 10<sup>9</sup> (start, skip, direction, word) combinations. If any combination counts as a "hit," and you search widely enough, hits are certain. The post-hoc selection of "remarkable" hits from a universe of a billion candidates is not statistical significance — it is the Texas Sharpshooter Fallacy at scale. Modern cryptanalysis requires pre-specifying the hypothesis before searching.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What This Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Mistake in the Bible Code claim</th><th>Modern cryptographic parallel</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Searching billions of (start, skip) pairs post-hoc and reporting only the hits</td>
+              <td><strong>Statistical significance in security audits:</strong> running 1,000 statistical tests and reporting the 50 that pass at p&lt;0.05 produces 50 false positives by construction — the same error that plagued early side-channel research</td>
+            </tr>
+            <tr>
+              <td>Treating a pattern found in scripture as non-accidental without comparing to a random baseline</td>
+              <td><strong>Distinguisher attacks:</strong> a valid linear or differential distinguisher requires showing the bias in the cipher is <em>greater than expected from a random permutation</em>, not merely that a bias exists</td>
+            </tr>
+            <tr>
+              <td>The "remarkable" result depended on a specific optimised dataset the authors had adjusted over years</td>
+              <td><strong>Chosen-input bias:</strong> constructing a test set to fit a desired result is the practitioner error behind broken PRNG certification tests — e.g. the Dual EC DRBG backdoor design</td>
+            </tr>
+            <tr>
+              <td>Short ciphertext + flexible parameters = near-certain matching</td>
+              <td><strong>Over-parameterised models find anything:</strong> a cipher analysis with enough free parameters can "fit" any plaintext hypothesis to any ciphertext — the same reason differential cryptanalysis requires strict key and round constraints</td>
+            </tr>
+            <tr>
+              <td>Peer review passed the original claim; independent replication killed it</td>
+              <td><strong>Security proofs require adversarial review:</strong> the NSA's BSAFE RNG and WEP both passed internal review; independent public cryptanalysis found flaws within months. The parallel refutation is why open cryptographic standards survive and secret ones fail</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout callout-warn" style="margin-top:0;margin-bottom:0;">
+      <span class="callout-icon">⚠</span>
+      <div class="callout-body">
+        <p><strong>On the original 1994 paper.</strong> Witztum, Rips, and Rosenberg were not fraudsters — they were mathematicians who made a genuine statistical error of a kind that was not well-understood in 1994. The journal editors published the paper as a challenge to the community to find the flaw. The community found it. That process — publication, replication, refutation — is exactly how science and cryptanalysis are supposed to work. The exhibit is critical of the claim, not of the people who made it.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Related Exhibits</span></div>
+      <div class="panel-body">
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;">
+          <li><a href="voynich.html" style="color:var(--gold);">Voynich Manuscript</a> — genuinely unsolved; statistical analysis has proved its letter distributions are unlike any known cipher or natural language</li>
+          <li><a href="beale.html" style="color:var(--gold);">Beale Ciphers</a> — another case where "finding" a partial decode via book cipher may be pattern-matching rather than cryptanalysis</li>
+          <li><a href="kryptos.html" style="color:var(--gold);">Kryptos</a> — four panels, three solved; the fourth is a genuine open problem, not a statistical artefact</li>
+          <li><a href="caesar.html" style="color:var(--gold);">Caesar Cipher</a> — chi-squared scoring is the correct way to distinguish signal from noise in a short substitution cipher</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">⚔</span>
+        <span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table"><tbody>
+          <tr><td>Exhibit</td><td>140 of 140</td></tr>
+          <tr><td>Claimed</td><td>1994 (Witztum et al.); 1997 (Drosnin)</td></tr>
+          <tr><td>Refuted</td><td>1999 (McKay et al., <em>Statistical Science</em>)</td></tr>
+          <tr><td>Method</td><td>Equidistant Letter Sequences (ELS)</td></tr>
+          <tr><td>Error type</td><td>Multiple comparisons / Texas Sharpshooter Fallacy</td></tr>
+          <tr><td>Hall</td><td>VIII — Puzzle &amp; Novelty Ciphers</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📐</span><span class="panel-title">The Numbers</span></div>
+      <div class="panel-body">
+        <p style="font-size:.88rem;color:var(--tx2);line-height:1.8;">For a 78,000-letter Hebrew text (the Torah), searching words of length 5 at skips up to 1,000:</p>
+        <div class="els-stat-row">
+          <div class="els-stat">
+            <span class="els-stat-val">~780M</span>
+            <span class="els-stat-label">start × skip pairs searched</span>
+          </div>
+          <div class="els-stat">
+            <span class="els-stat-val">1 in 26⁵</span>
+            <span class="els-stat-label">= 1 in 11.9M chance per pair</span>
+          </div>
+        </div>
+        <div class="els-stat-row" style="margin-top:.5rem;">
+          <div class="els-stat">
+            <span class="els-stat-val">~66</span>
+            <span class="els-stat-label">expected hits for any 5-letter uniform word</span>
+          </div>
+          <div class="els-stat">
+            <span class="els-stat-val">~660</span>
+            <span class="els-stat-label">expected hits for a common 5-letter word (e.g. WATER)</span>
+          </div>
+        </div>
+        <p style="font-size:.8rem;color:var(--tx3);margin-top:.75rem;">Before asking whether a hit is "significant," you must ask: how many hits were expected? In a 780M-pair search, finding 50 hits for a specific name is exactly what chance predicts.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📖</span><span class="panel-title">Primary Sources</span></div>
+      <div class="panel-body">
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;font-size:.88rem;color:var(--tx2);line-height:1.7;">
+          <li><strong style="color:var(--gold);">The claim:</strong> Witztum, Rips &amp; Rosenberg — "Equidistant Letter Sequences in the Book of Genesis." <em>Statistical Science</em> 9:3 (1994), pp. 429–438.</li>
+          <li><strong style="color:var(--gold);">The popular version:</strong> Michael Drosnin — <em>The Bible Code</em>. Simon &amp; Schuster, 1997. (<em>This exhibit is a direct response to this book's methodology and conclusions.</em>)</li>
+          <li><strong style="color:var(--gold);">The refutation:</strong> McKay, Bar-Natan, Bar-Hillel &amp; Kalai — "Solving the Bible Code Puzzle." <em>Statistical Science</em> 14:2 (1999), pp. 150–173. Freely available online.</li>
+          <li><strong style="color:var(--gold);">Moby-Dick experiment:</strong> Brendan McKay's personal site preserves the analysis: <a href="https://users.cecs.anu.edu.au/~bdm/dilugim/moby.html" target="_blank" rel="noopener" style="color:var(--gold);">users.cecs.anu.edu.au/~bdm/dilugim/moby.html</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/voynich.html" class="related-card">
+      <span class="related-card__number">Hall XII</span>
+      <span class="related-card__name">Voynich Manuscript</span>
+      <span class="related-card__tag">Genuinely Unsolved</span>
+    </a>
+    <a href="../ciphers/beale.html" class="related-card">
+      <span class="related-card__number">Hall VIII</span>
+      <span class="related-card__name">Beale Ciphers</span>
+      <span class="related-card__tag">Pattern vs Signal</span>
+    </a>
+    <a href="../ciphers/caesar.html" class="related-card">
+      <span class="related-card__number">Hall I</span>
+      <span class="related-card__name">Caesar Cipher</span>
+      <span class="related-card__tag">Chi-squared Scoring</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/zodiac.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Zodiac Cipher</span>
+  </a>
+  <a href="../halls/puzzle.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Back to Hall &rarr;</span>
+    <span class="hall-nav-name">Hall VIII: Puzzle &amp; Novelty Ciphers</span>
+  </a>
+</div>
+
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo-text">The Cipher Museum</span>
+      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Hall VIII: Puzzle &amp; Novelty Ciphers</div>
+      <ul class="footer-links">
+        <li><a href="../halls/puzzle.html">&larr; Back to Hall</a></li>
+        <li><a href="../ciphers/zodiac.html">Zodiac Cipher</a></li>
+        <li><a href="../ciphers/copiale.html">Copiale Cipher</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="../museum-map.html">Museum Map</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
+        <li><a href="../further-reading.html">Further Reading</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
+    <span class="footer-copy">Exhibit 140 of 140</span>
+  </div>
+</footer>
+
+<script src="../js/ciphers/els.js"></script>
+<script>
+(function () {
+  'use strict';
+  if (typeof window.ELS === 'undefined') return;
+  const { normalise, findELS, expectedHits } = window.ELS;
+
+  // A passage from Moby-Dick (opening + early chapters) — public domain.
+  // ~1 400 letters after normalisation; enough for a live demo without
+  // making the page slow on mobile.
+  const MOBY_SOURCE = `
+  Call me Ishmael. Some years ago never mind how long precisely having
+  little money in my purse and nothing particular to interest me on shore
+  I thought I would sail about a little and see the watery part of the world.
+  It is a way I have of driving off the spleen and regulating the circulation.
+  Whenever I find myself growing grim about the mouth whenever it is a damp
+  drizzly November in my soul whenever I find myself involuntarily pausing
+  before coffin warehouses and bringing up the rear of every funeral I meet
+  and especially whenever my hypos get such an upper hand of me that it
+  requires a strong moral principle to prevent me from deliberately stepping
+  into the street and methodically knocking peoples hats off then I account
+  it high time to get to sea as soon as I can. This is my substitute for
+  pistol and ball. With a philosophical flourish Cato throws himself upon
+  his sword I quietly take to the ship. There is nothing surprising in this.
+  If they only knew it almost all men in their degree some time or other
+  cherish very nearly the same feelings towards the ocean with me.
+  There now is your insular city of the Manhattoes belted round by wharves
+  as Indian isles by coral reefs commerce surrounds it with her surf.
+  Right and left the streets take you waterward. Its extreme downtown is
+  the battery where that noble mole is washed by waves and cooled by breezes
+  which a few hours previous were out of sight of land. Look at the crowds
+  of water gazers there. Circumambulate the city of a dreamy Sabbath afternoon.
+  Go from Corlears Hook to Coenties Slip and from thence by Whitehall
+  northward. What do you see. Posted like silent sentinels all around the
+  town stand thousands upon thousands of mortal men fixed in ocean reveries.
+  Some leaning against the spiles some seated upon the pier heads some
+  looking over the bulwarks of ships from China some high aloft in the
+  rigging as if striving to get a still better seaward peep. But these are
+  all landsmen of week days pent up in lath and plaster tied to counters
+  nailed to benches clinched to desks. How then is this. Are the green
+  fields gone. What do they here. But look. Here come more crowds pacing
+  straight for the water and seemingly bound for a dive. Strange. Nothing
+  will content them but the extremest limit of the land.`;
+
+  const PROSE_LETTERS = normalise(MOBY_SOURCE);
+
+  // Build a letter frequency table from the prose
+  function buildFreq(s) {
+    const f = {};
+    for (let i = 0; i < s.length; i++) {
+      const c = s[i];
+      f[c] = (f[c] || 0) + 1;
+    }
+    return f;
+  }
+
+  // Generate a random text of the same length with the same letter distribution
+  function makeRandom(len, freq) {
+    const pool = [];
+    for (const [ch, cnt] of Object.entries(freq)) {
+      for (let i = 0; i < cnt; i++) pool.push(ch);
+    }
+    let out = '';
+    for (let i = 0; i < len; i++) {
+      out += pool[Math.floor(Math.random() * pool.length)];
+    }
+    return out;
+  }
+
+  const PROSE_FREQ = buildFreq(PROSE_LETTERS);
+  let randText = makeRandom(PROSE_LETTERS.length, PROSE_FREQ);
+
+  // --- DOM helpers ---
+  function $(id) { return document.getElementById(id); }
+  function escHtml(s) {
+    return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  }
+
+  function renderHits(hits, containerId) {
+    const el = $(containerId);
+    if (!hits.length) {
+      el.innerHTML = '<span style="color:var(--tx3);font-size:.8rem;">No hits at these parameters.</span>';
+      return;
+    }
+    const show = hits.slice(0, 12);
+    el.innerHTML = show.map(h =>
+      `<div class="els-hit-item">start=<span>${h.start}</span>  skip=<span>${h.skip}</span>  &hellip;<span>${h.skip > 0 ? '' : '(rev)'}</span></div>`
+    ).join('') + (hits.length > 12
+      ? `<div style="color:var(--tx3);font-size:.75rem;margin-top:.4rem;">&hellip; and ${hits.length - 12} more</div>`
+      : '');
+  }
+
+  function runSearch() {
+    const word = ($('els-word').value || '').toUpperCase().replace(/[^A-Z]/g,'');
+    if (!word.length) return;
+    const maxSkip = Math.min(5000, Math.max(10, parseInt($('els-maxskip').value, 10) || 500));
+
+    const opts = { minSkip: 2, maxSkip: maxSkip, maxResults: 500 };
+    const proseHits = findELS(PROSE_LETTERS, word, opts);
+    const randHits = findELS(randText, word, opts);
+    const expected = expectedHits(PROSE_LETTERS.length, word, { minSkip: 2, maxSkip: maxSkip });
+
+    $('els-prose-count').textContent = proseHits.length >= 500 ? '500+ ' : proseHits.length;
+    $('els-rand-count').textContent = randHits.length >= 500 ? '500+' : randHits.length;
+    renderHits(proseHits, 'els-prose-hits');
+    renderHits(randHits, 'els-rand-hits');
+
+    $('els-compare').style.display = '';
+    $('els-expected-row').style.display = '';
+    $('els-word-display').textContent = word;
+    $('els-n-display').textContent = PROSE_LETTERS.length.toLocaleString();
+    $('els-maxskip-display').textContent = maxSkip;
+    $('els-expected-display').textContent = Math.round(expected).toLocaleString();
+  }
+
+  $('els-search').addEventListener('click', runSearch);
+  $('els-word').addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
+  $('els-word').addEventListener('input', e => {
+    e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '');
+  });
+  $('els-random').addEventListener('click', function () {
+    randText = makeRandom(PROSE_LETTERS.length, PROSE_FREQ);
+    runSearch();
+  });
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>
