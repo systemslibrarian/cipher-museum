@@ -4,39 +4,89 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cipher Detective — The Cipher Museum</title>
-  <meta name="description" content="Paste ciphertext to mathematically analyze its properties and identify likely cipher families using IoC, Kasiski examination, and chi-square analysis.">
+  <meta name="description" content="Paste unknown ciphertext and let the Cipher Detective walk you through the evidence — frequency analysis, Index of Coincidence, Kasiski examination — to identify the most likely cipher family.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://ciphermuseum.com/cipher-detective.html">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="stylesheet" href="css/museum.css">
   <style>
-    .detective-grid { display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: start; }
-    .analysis-panel { background: var(--s2); border: 1px solid var(--gold-b); border-radius: var(--rl); padding: 1.5rem; }
-    .candidate-card { background: var(--s3); border: 1px solid var(--s4); border-radius: var(--r); padding: 1rem; margin-bottom: 1rem; }
-    .candidate-card.high-confidence { border-color: var(--green); }
-    .candidate-card.med-confidence { border-color: var(--gold-dim); }
-    .candidate-title { font-family: var(--fd); font-size: 1.2rem; color: var(--tx); margin-bottom: .25rem; display: flex; justify-content: space-between; align-items: center; }
-    .confidence-badge { font-family: var(--fb); font-size: .8rem; padding: .15rem .5rem; border-radius: 3px; }
-    .conf-high { background: rgba(0,255,0,0.1); color: var(--green); }
-    .conf-med { background: rgba(255,200,0,0.1); color: var(--gold); }
-    .conf-low { background: rgba(255,255,255,0.05); color: var(--tx3); }
-    .evidence-list { list-style: none; padding: 0; margin: .75rem 0 0; font-size: .85rem; color: var(--tx2); line-height: 1.5; }
-    .evidence-list li { margin-bottom: .4rem; padding-left: 1.2rem; position: relative; }
-    .evidence-list li.pro::before { content: '+'; color: var(--green); position: absolute; left: 0; font-family: var(--fm); font-weight: bold; }
-    .evidence-list li.con::before { content: '-'; color: var(--red); position: absolute; left: 0; font-family: var(--fm); font-weight: bold; }
-    
-    .stats-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-family: var(--fm); font-size: .8rem; }
-    .stats-table th, .stats-table td { padding: .5rem; text-align: left; border-bottom: 1px solid var(--s4); }
-    .stats-table th { color: var(--tx3); font-weight: normal; letter-spacing: .05em; text-transform: uppercase; font-size: .65rem; }
-    .stats-table td { color: var(--gold-lt); }
-
-    .textarea-wrap { position: relative; margin-bottom: 1.5rem; }
-    .textarea-wrap textarea { width: 100%; height: 200px; padding: 1rem; background: var(--s3); border: 1px solid var(--s5); border-radius: var(--r); color: var(--tx); font-family: var(--fm); font-size: .9rem; resize: vertical; }
-    .textarea-wrap textarea:focus { outline: none; border-color: var(--gold); }
-    
-    @media(max-width: 768px) {
-      .detective-grid { grid-template-columns: 1fr; }
-    }
+    .det-workspace    { max-width: 1100px; margin: 0 auto; }
+    .det-grid         { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
+    @media(max-width: 820px) { .det-grid { grid-template-columns: 1fr; } }
+    .det-input-label  { display: block; margin-bottom: .5rem; font-family: var(--fm); font-size: .7rem;
+                        letter-spacing: .15em; text-transform: uppercase; color: var(--tx3); }
+    .det-textarea     { width: 100%; height: 200px; padding: 1rem; background: var(--s3); border: 1px solid var(--s5);
+                        border-radius: var(--r); color: var(--tx); font-family: var(--fm); font-size: .9rem;
+                        resize: vertical; box-sizing: border-box; }
+    .det-textarea:focus { outline: none; border-color: var(--gold); }
+    .det-labels-strip { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.25rem 0 1rem; }
+    .det-label        { display: inline-flex; align-items: center; font-family: var(--fm); font-size: .68rem;
+                        letter-spacing: .07em; padding: .28rem .75rem .28rem .65rem;
+                        border-left: 3px solid var(--gold); background: var(--gold-glow);
+                        border-radius: 0 3px 3px 0; color: var(--tx2); cursor: default; }
+    .det-callout-warn { background: rgba(200,90,90,.07); border-left: 3px solid var(--red);
+                        border-radius: 0 var(--r) var(--r) 0; padding: .9rem 1.1rem;
+                        font-family: var(--fb); font-size: .88rem; color: var(--tx2);
+                        line-height: 1.5; margin-bottom: 1.5rem; }
+    .det-callout-warn strong { color: var(--red); }
+    .det-section      { margin-bottom: 2.5rem; }
+    .det-section-title { font-family: var(--fd); font-size: 1.1rem; color: var(--gold);
+                         letter-spacing: .05em; margin: 0 0 1rem; padding-bottom: .4rem;
+                         border-bottom: 1px solid var(--s4); }
+    .det-chart-wrap   { margin-bottom: .75rem; }
+    .det-interp       { font-family: var(--fb); font-size: .88rem; color: var(--tx2);
+                        line-height: 1.6; margin: 0 0 .25rem; }
+    .visually-hidden  { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+                        overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .suspect-card     { background: var(--s3); border: 1px solid var(--s4); border-radius: var(--r);
+                        padding: 1rem 1.1rem; margin-bottom: .9rem; }
+    .suspect-header   { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; margin-bottom: .6rem; }
+    .suspect-rank     { font-family: var(--fm); font-size: .62rem; letter-spacing: .12em;
+                        text-transform: uppercase; color: var(--tx3); flex-shrink: 0; }
+    .suspect-name     { font-family: var(--fd); font-size: 1.1rem; color: var(--tx); flex-grow: 1; }
+    .conf-badge       { font-family: var(--fm); font-size: .72rem; padding: .18rem .55rem;
+                        border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+    .conf-very-likely { background: rgba(90,200,160,.12); color: var(--green); border: 1px solid rgba(90,200,160,.3); }
+    .conf-likely      { background: var(--gold-glow); color: var(--gold); border: 1px solid var(--gold-b); }
+    .conf-possible    { background: rgba(160,127,204,.10); color: var(--purple); border: 1px solid rgba(160,127,204,.25); }
+    .conf-unlikely    { background: var(--s4); color: var(--tx3); border: 1px solid var(--s5); }
+    .conf-inconclusive{ background: var(--s3); color: var(--tx3); border: 1px solid var(--s4); }
+    .evidence-list    { list-style: none; padding: 0; margin: 0 0 .5rem; font-size: .83rem;
+                        color: var(--tx2); line-height: 1.55; }
+    .evidence-item    { padding-left: 1.4rem; position: relative; margin-bottom: .3rem; }
+    .evidence-item span { position: absolute; left: 0; font-family: var(--fm); font-weight: 700; font-size: .9rem; }
+    .evidence-item--pro span { color: var(--green); }
+    .evidence-item--con span { color: var(--red); }
+    .suspect-link     { margin-top: .75rem; font-family: var(--fm); font-size: .68rem;
+                        text-transform: uppercase; letter-spacing: .08em; }
+    .det-section--notes { background: var(--s2); border-radius: var(--r); padding: 1.25rem 1.4rem; margin-bottom: 2.5rem; }
+    .det-section--notes .det-section-title { border-color: var(--gold-b); }
+    #det-case-notes p { font-family: var(--fb); font-size: .95rem; color: var(--tx2); line-height: 1.75; margin: 0; }
+    .next-attack-box  { background: var(--s2); border: 1px solid var(--gold-b); border-radius: var(--r);
+                        padding: 1.1rem 1.3rem; }
+    .next-attack-text { font-family: var(--fb); font-size: .95rem; color: var(--tx2); line-height: 1.7; margin: 0 0 .75rem; }
+    .next-attack-link { font-family: var(--fm); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+    .analysis-panel   { background: var(--s2); border: 1px solid var(--gold-b); border-radius: var(--rl);
+                        padding: 1.4rem; position: sticky; top: 80px; }
+    .det-panel-title  { font-family: var(--fd); font-size: 1rem; color: var(--gold); margin: 0 0 1rem; }
+    .stats-table      { width: 100%; border-collapse: collapse; font-family: var(--fm); font-size: .78rem; }
+    .stats-table th, .stats-table td { padding: .45rem .3rem; text-align: left; border-bottom: 1px solid var(--s4); }
+    .stats-table th   { color: var(--tx3); font-weight: normal; letter-spacing: .05em;
+                        text-transform: uppercase; font-size: .62rem; }
+    .stats-table td   { color: var(--gold-lt); }
+    .det-panel-footer { margin-top: 1.5rem; font-family: var(--fm); font-size: .68rem;
+                        letter-spacing: .1em; text-transform: uppercase; }
+    .det-learn-link   { color: var(--gold-dim); text-decoration: none; }
+    .det-learn-link:hover { color: var(--gold); }
+    .det-limitations  { margin-top: 3rem; background: var(--s2); padding: 1.5rem 1.75rem;
+                        border-radius: var(--r); font-size: .85rem; color: var(--tx2); line-height: 1.65; }
+    .det-limitations h3 { font-family: var(--fb); color: var(--tx); margin: 0 0 .75rem; font-size: .95rem; }
+    .det-limitations ul { margin: 0 0 0 1.2rem; padding: 0; }
+    .det-limitations li { margin-bottom: .4rem; }
+    .det-empty        { padding: 3rem 1rem; text-align: center; border: 1px dashed var(--s5);
+                        border-radius: var(--r); color: var(--tx3); font-family: var(--fm);
+                        font-size: .82rem; letter-spacing: .05em; margin-bottom: 1.5rem; }
+    .det-muted        { color: var(--tx3); font-family: var(--fb); font-size: .9rem; }
   </style>
 </head>
 <body>
@@ -63,86 +113,102 @@
 </nav>
 
 <main id="main-content" tabindex="-1">
+
 <div class="page-hero">
-  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span><a href="lab/workbench.html">Lab</a><span>›</span>Cipher Detective</div>
-  <span class="page-eyebrow">Interactive Identification</span>
+  <div class="breadcrumb"><a href="index.html">Entrance</a><span>&#8250;</span><a href="lab/workbench.html">Lab</a><span>&#8250;</span>Cipher Detective</div>
+  <span class="page-eyebrow">Statistical Cryptanalysis</span>
   <h1 class="page-title">Cipher Detective</h1>
-  <p class="page-desc">Paste unknown ciphertext below. The engine will run statistical tests to identify the most likely cryptographic family based on Index of Coincidence, chi-square, and structure.</p>
+  <p class="page-desc">Paste unknown ciphertext and the Detective will walk you through the evidence &#8212; letter frequencies, Index of Coincidence, chi-square analysis, Kasiski examination &#8212; and show which cipher families best fit the data.</p>
 </div>
 
 <div class="section">
-  <div class="detective-grid content-wide">
-    
-    <!-- Input Area -->
-    <div>
-      <div class="textarea-wrap">
-        <label for="detective-input" style="display:block;margin-bottom:.5rem;font-family:var(--fm);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tx3);">Unknown Ciphertext</label>
-        <textarea id="detective-input" spellcheck="false" placeholder="Paste cipher text here to begin analysis...&#10;&#10;e.g. JXUSQ JYIIX UDOJH..."></textarea>
-      </div>
-      
-      <div id="results-area" style="display: none;">
-        <h2 style="font-family:var(--fd);font-size:1.4rem;color:var(--tx);margin-bottom:1rem;border-bottom:1px solid var(--s4);padding-bottom:.5rem;">Most Likely Candidates</h2>
-        <div id="candidates-container"></div>
-      </div>
-      
-      <div id="empty-state" style="padding: 3rem 1rem; text-align: center; border: 1px dashed var(--s4); border-radius: var(--r); color: var(--tx3);">
-        Awaiting input. Mathematical analysis will appear instantly as you type or paste text.
-      </div>
-      
-      <div id="limitations" style="margin-top: 3rem; background: var(--s2); padding: 1.5rem; border-radius: var(--r); font-size: .85rem; color: var(--tx2); line-height: 1.6;">
-        <h3 style="font-family:var(--fb);color:var(--tx);margin:0 0 .5rem;font-size:1rem;">Limitations</h3>
-        <p>The Detective relies on standard English text frequencies. It will be less accurate for:</p>
-        <ul style="margin: .5rem 0 0 1.2rem; padding: 0;">
-          <li>Very short messages (under 20 characters).</li>
-          <li>Plaintext in languages other than English.</li>
-          <li>Texts heavily skewed with names, acronyms, or non-standard vocabulary.</li>
-          <li>Ciphers utilizing nulls or non-standard alphabets.</li>
-        </ul>
-      </div>
-    </div>
+<div class="det-workspace content-wide">
 
-    <!-- Stats Panel -->
-    <div class="analysis-panel">
-      <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);margin-bottom:1rem;">Cryptanalytic Profile</h3>
-      <table class="stats-table">
-        <tbody>
-          <tr>
-            <th>Length</th>
-            <td id="stat-length">-</td>
-          </tr>
-          <tr>
-            <th>Characters</th>
-            <td id="stat-charset">-</td>
-          </tr>
-          <tr>
-            <th>IoC</th>
-            <td id="stat-ioc">-</td>
-          </tr>
-          <tr>
-            <th>Base Chi-Square</th>
-            <td id="stat-chi">-</td>
-          </tr>
-          <tr>
-            <th>Best Shift</th>
-            <td id="stat-shift">-</td>
-          </tr>
-          <tr>
-            <th>Probable Period</th>
-            <td id="stat-period">-</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <div style="margin-top:2rem;">
-        <a href="cryptanalysis.html" style="font-family:var(--fm);font-size:.7rem;color:var(--gold-dim);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;">Learn these metrics →</a>
-      </div>
-    </div>
-
+  <div style="margin-bottom:0;">
+    <label for="detective-input" class="det-input-label">Unknown Ciphertext</label>
+    <textarea id="detective-input" class="det-textarea" spellcheck="false"
+      placeholder="Paste ciphertext here to begin the investigation&#8230;&#10;&#10;e.g.  WKHTXLFNEURZQIRAMXSVRYHU WKHODCBGRJ&#8230;"></textarea>
   </div>
+
+  <div id="det-empty" class="det-empty" aria-live="polite">
+    Awaiting input. The Detective analyses text as you type or paste.
+  </div>
+
+  <div id="det-results" hidden>
+
+    <div id="det-reality" class="det-labels-strip" aria-label="Analysis context" hidden></div>
+
+    <div id="det-short-warning" class="det-callout-warn" hidden role="alert">
+      <strong>Insufficient evidence.</strong> This text is too short for reliable
+      statistical analysis. The suspects below are best guesses, not confident
+      identifications. Paste a longer sample if available.
+    </div>
+
+    <div class="det-grid" style="margin-top:1.5rem;">
+
+      <div class="det-main">
+
+        <section class="det-section" aria-labelledby="det-evidence-heading">
+          <h2 id="det-evidence-heading" class="det-section-title">Evidence</h2>
+          <div id="det-freq-chart-wrap" class="det-chart-wrap"></div>
+          <p id="det-freq-interpretation" class="det-interp"></p>
+        </section>
+
+        <section class="det-section" aria-labelledby="det-suspects-heading">
+          <h2 id="det-suspects-heading" class="det-section-title">Suspects</h2>
+          <div id="det-suspects-list"></div>
+        </section>
+
+        <section class="det-section det-section--notes" aria-labelledby="det-notes-heading">
+          <h2 id="det-notes-heading" class="det-section-title">Case Notes</h2>
+          <div id="det-case-notes"></div>
+        </section>
+
+        <section class="det-section" aria-labelledby="det-attack-heading">
+          <h2 id="det-attack-heading" class="det-section-title">Recommended Next Attack</h2>
+          <div id="det-next-attack"></div>
+        </section>
+
+      </div>
+
+      <aside class="det-sidebar" aria-label="Cryptanalytic profile">
+        <div class="analysis-panel">
+          <h3 class="det-panel-title">Cryptanalytic Profile</h3>
+          <table class="stats-table" aria-label="Raw statistics">
+            <tbody>
+              <tr><th scope="row">Length</th>         <td id="stat-length">&#8212;</td></tr>
+              <tr><th scope="row">Character set</th>  <td id="stat-charset">&#8212;</td></tr>
+              <tr><th scope="row">IoC</th>            <td id="stat-ioc">&#8212;</td></tr>
+              <tr><th scope="row">Base chi-square</th><td id="stat-chi">&#8212;</td></tr>
+              <tr><th scope="row">Best shift</th>     <td id="stat-shift">&#8212;</td></tr>
+              <tr><th scope="row">Period hint</th>    <td id="stat-period">&#8212;</td></tr>
+            </tbody>
+          </table>
+          <div class="det-panel-footer">
+            <a href="cryptanalysis.html" class="det-learn-link">Learn these metrics &#8594;</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <div class="det-limitations" id="det-limitations">
+    <h3>What the Detective can&#8217;t tell you</h3>
+    <ul>
+      <li>Short ciphertext (under ~60 characters) makes statistical analysis unreliable.</li>
+      <li>Non-English plaintext breaks all English-based frequency analysis.</li>
+      <li>Modern ciphers (AES, ChaCha20) produce statistically random output; the Detective will report &#8220;random&#8221; but cannot identify <em>which</em> modern cipher.</li>
+      <li>Layered ciphers (VIC, Purple, multi-stage) defeat single-pass identification.</li>
+      <li>The Detective does not decrypt. For decryption, open the <a href="lab/workbench.html">Codebreaker&#8217;s Workbench</a>.</li>
+    </ul>
+  </div>
+
+</div>
 </div>
 </main>
 
-<footer>
+<footer class="museum-footer">
   <div class="footer-grid">
     <div>
       <h4>The Cipher Museum</h4>
@@ -152,113 +218,21 @@
       <h4>Related</h4>
       <ul>
         <li><a href="cryptanalysis.html">Cryptanalysis Techniques</a></li>
-        <li><a href="lab/workbench.html">Codebreaker's Workbench</a></li>
+        <li><a href="lab/workbench.html">Codebreaker&#8217;s Workbench</a></li>
         <li><a href="glossary.html">Glossary</a></li>
+        <li><a href="further-reading.html">Further Reading</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; 2025 The Cipher Museum — An Interactive Digital Exhibit</p>
+    <p>&#169; 2026 The Cipher Museum &#8212; An Interactive Digital Exhibit</p>
   </div>
 </footer>
 
 <script src="js/nav.js" defer></script>
-<script src="js/cipher-detective.js"></script>
-<script>
-'use strict';
-(function() {
-  var input = document.getElementById('detective-input');
-  var resultsArea = document.getElementById('results-area');
-  var emptyState = document.getElementById('empty-state');
-  var candidatesCont = document.getElementById('candidates-container');
-  
-  var statLen = document.getElementById('stat-length');
-  var statCharset = document.getElementById('stat-charset');
-  var statIoC = document.getElementById('stat-ioc');
-  var statChi = document.getElementById('stat-chi');
-  var statShift = document.getElementById('stat-shift');
-  var statPeriod = document.getElementById('stat-period');
-  
-  function update() {
-    var text = input.value;
-    if (!text || text.trim().length === 0) {
-      resultsArea.style.display = 'none';
-      emptyState.style.display = 'block';
-      statLen.textContent = '-';
-      statCharset.textContent = '-';
-      statIoC.textContent = '-';
-      statChi.textContent = '-';
-      statShift.textContent = '-';
-      statPeriod.textContent = '-';
-      return;
-    }
-    
-    var result = window.CipherDetective.analyse(text);
-    if (!result || !result.stats) return;
-    
-    // Update Stats
-    statLen.textContent = result.stats.n + ' letters';
-    statCharset.textContent = result.stats.charset;
-    statIoC.textContent = result.stats.ioc.toFixed(4) + ' (Eng ~0.066)';
-    statChi.textContent = result.stats.chi0.toFixed(1);
-    
-    if (result.stats.bestShift > 0 && result.stats.bestShiftChi < 150) {
-      statShift.textContent = 'Shift ' + result.stats.bestShift + ' (χ² ' + result.stats.bestShiftChi.toFixed(1) + ')';
-    } else {
-      statShift.textContent = 'None match English';
-    }
-    
-    statPeriod.textContent = result.stats.periodHint ? result.stats.periodHint + ' (Kasiski/Sliced-IoC)' : 'None detected';
-    
-    // Update Candidates
-    candidatesCont.innerHTML = '';
-    
-    var visible = result.candidates.filter(function(c) { return c.score > 0; });
-    if (visible.length === 0) {
-      candidatesCont.innerHTML = '<p style="color:var(--tx2);">No strong signatures matching known classical ciphers.</p>';
-    } else {
-      visible.forEach(function(c) {
-        var card = document.createElement('div');
-        card.className = 'candidate-card';
-        
-        var confClass = c.confidence >= 80 ? 'conf-high' : (c.confidence >= 50 ? 'conf-med' : 'conf-low');
-        if (c.confidence >= 80) card.classList.add('high-confidence');
-        else if (c.confidence >= 50) card.classList.add('med-confidence');
-        
-        var html = '<div class="candidate-title">' + 
-                     '<span>' + c.name + '</span>' + 
-                     '<span class="confidence-badge ' + confClass + '">' + c.confidence + '% Match</span>' +
-                   '</div>';
-        
-        html += '<ul class="evidence-list">';
-        c.forEv.forEach(function(ev) { html += '<li class="pro">' + ev + '</li>'; });
-        c.againstEv.forEach(function(ev) { html += '<li class="con">' + ev + '</li>'; });
-        html += '</ul>';
-        
-        if (c.url) {
-          html += '<div style="margin-top:1rem;font-family:var(--fm);font-size:.7rem;text-transform:uppercase;"><a href="' + c.url + '" style="color:var(--gold);text-decoration:none;">Read about this cipher →</a></div>';
-        }
-        
-        card.innerHTML = html;
-        candidatesCont.appendChild(card);
-      });
-    }
-    
-    emptyState.style.display = 'none';
-    resultsArea.style.display = 'block';
-  }
-  
-  input.addEventListener('input', update);
-  
-  // Also check if we were passed a prepopulated hash
-  if (location.hash && location.hash.length > 1) {
-    try {
-      var decoded = decodeURIComponent(location.hash.substring(1));
-      input.value = decoded;
-      update();
-    } catch(e){}
-  }
-})();
-</script>
+<script src="js/detective/analyses.js"></script>
+<script src="js/detective/scoring.js"></script>
+<script src="js/detective/render.js"></script>
+<script src="js/detective/detective.js"></script>
 </body>
 </html>

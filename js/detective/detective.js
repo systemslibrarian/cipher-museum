@@ -41,7 +41,7 @@
 
   /* ─── Page boot (only runs in browser context with a real DOM) ── */
   if (typeof document !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', function () {
+    function boot() {
       var input = document.getElementById('detective-input');
       if (!input) return;
 
@@ -59,14 +59,20 @@
       input.addEventListener('input', update);
 
       /* Pre-populate from URL hash (e.g., inbound links with sample ciphertext) */
-      if (location.hash && location.hash.length > 1) {
+      if (typeof location !== 'undefined' && location.hash && location.hash.length > 1) {
         try {
           var decoded = decodeURIComponent(location.hash.substring(1));
           input.value = decoded;
           update();
         } catch (e) { /* ignore malformed hash */ }
       }
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
   }
 
   /* ─── Export ─────────────────────────────────────────────────── */

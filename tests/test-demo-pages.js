@@ -342,22 +342,22 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
     const { window } = dom;
     const { document } = window;
     const input = document.getElementById('detective-input');
-    const resultsArea = document.getElementById('results-area');
-    const candidates = document.getElementById('candidates-container');
+    const resultsArea = document.getElementById('det-results');
+    const candidates = document.getElementById('det-suspects-list');
 
     ok('cipher-detective.html: input textarea present', !!input);
     ok('cipher-detective.html: results area present', !!resultsArea);
     ok('cipher-detective.html: candidates container present', !!candidates);
 
     if (input && resultsArea && candidates) {
-      input.value = 'WKHTXLFNEURZQIRAMXPSVRYHUWKHODCBGRJ';
+      input.value = 'WKHTXLFNEURZQIRAMXPSVRYHUWKHODCBGRJWKHTXLFNEURZQIRAMXPSVRYHUWKHODCBGRJWKHTXLFNEURZQIRA';
       input.dispatchEvent(new window.Event('input', { bubbles: true }));
       await tick(20);
 
-      const cards = candidates.querySelectorAll('.candidate-card');
-      ok('cipher-detective.html: renders candidate cards after input', cards.length >= 1, `count=${cards.length}`);
+      const cards = candidates.querySelectorAll('.suspect-card');
+      ok('cipher-detective.html: renders suspect cards after input', cards.length >= 1, `count=${cards.length}`);
       ok('cipher-detective.html: results become visible after analysis',
-        resultsArea.style.display !== 'none', `display=${resultsArea.style.display || '(empty)'}`);
+        !resultsArea.hasAttribute('hidden'), `hidden=${resultsArea.hasAttribute('hidden')}`);
     }
     window.close();
   }
