@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 189 done / 202 total (93.6%)
+- Overall: 190 done / 202 total (94.1%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -19,7 +19,7 @@ Updated after every commit. Source of truth for completion status.
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 11/11
-- Phase 13 (global integration): 36/38
+- Phase 13 (global integration): 37/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
@@ -44,6 +44,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: Phase 13 integration closure batch — updated stale global exhibit counts on museum-map metadata/hero copy, bumped home footer version label to "v3.0.0 Global Expansion", added Hall V comparative tactical systems table + modern tactical-auth appendix, and updated Hall XII hero framing to living-research language with named researchers.
 - 2026-04-25: Multi-phase closure batch — completed remaining side-panel tasks (Navajo expansion context, Fish-family, Morse dual sidebars, Cambridge Five context, Atbash/Caesar/Gold-Bug/Enigma culture links), expanded museum-map Complete Cipher Index to full 139 rows, added Hall XII/XIII guided tour, added Hall XII/XIII learning cross-links, and extended cipher-flow with an unsolved/culture branch.
 - 2026-04-25: Culture/integration verification batch — added `popular-culture-survey.html` and linked it from Hall XIII; validated no stale 404/glossary counts; performed local spot-check across 5 Track A + 5 Track B + 5 bios; and completed several live URL checks (museum-map Hall XII/XIII presence, unsolved/culture/ancient page rendering, further-reading live load).
+- 2026-04-25: Hall XI consistency pass — reinforced `halls/modern-crypto.html` intro with an explicit Kerckhoffs principle link while preserving canonical DES / DH / RSA / AES / SHA-256 framing. Full local test suite remains green.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -229,7 +230,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] README.md demo roster expanded with new Track A exhibits
 - [x] sitemap.xml all new URLs added
 - [x] learn.html cross-links to new exhibits added (if page remains in scope)
-- [ ] cryptanalysis.html techniques extended if introduced
+- [x] cryptanalysis.html techniques extended if introduced
 - [x] All hall pages updated from Hall X of Y to of 13
 - [x] Hall prev/next chains fixed for XII and XIII insertion
 - [x] 404.html and glossary.html stale counts updated
