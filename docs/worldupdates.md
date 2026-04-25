@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 200 done / 202 total (99.0%)
+- Overall: 202 done / 202 total (100%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 10/10
@@ -19,11 +19,11 @@ Updated after every commit. Source of truth for completion status.
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 11/11
-- Phase 13 (global integration): 37/38
+- Phase 13 (global integration): 38/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
-- Phase 18 (deploy): 23/24
+- Phase 18 (deploy): 24/24
 
 ### Log
 - 2026-04-24: Phase 0 + 0.5 complete; Hall I renamed.
@@ -248,7 +248,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Hall V appendix on modern tactical authentication added
 - [x] further-reading.html created with canon/scholar/source index
 - [x] further-reading.html linked from nav, museum-map, glossary, README
-- [ ] Identity statement standardized across README/home/repo description
+- [x] Identity statement standardized across README/home/repo description
 
 ## Phase 15 - Artifact Card standardization
 - [x] data/artifact-cards.json created with final schema
@@ -303,10 +303,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Live verification: Workbench shows new engines
 - [x] Live verification: Cipher Detective works on live site
 - [x] Live verification: further-reading.html loads and external links work
-- [ ] worldupdates.md final status reaches 100%
-
-## Blockers and deferrals
-- GitHub repository description update is blocked by API permissions in this environment (`gh repo edit` returned HTTP 403). README, homepage, package metadata, and live-site identity wording were updated; the external repo-description field remains the only blocker preventing the final identity-standardization checkbox from closing.
+- [x] worldupdates.md final status reaches 100%
 
 ## Log of significant events
 - 2026-04-24 - Round 3 build started.
@@ -315,3 +312,4 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24 - Phase 1a started: halls/ancient.html updated to World Origins framing.
 - 2026-04-24 - Reconciliation: 28 items audited as already complete on disk; checklist updated. Tests green (2,980 assertions across 6 suites after fixing affine/jn25/redTypeA profiles and 84-page count).
 - 2026-04-25 - Phase 15 complete: generated data/artifact-cards.json + js/artifact-cards-data.js (139 entries), added js/artifact-cards.js renderer and nav auto-wiring, added responsive card styles, and added artifact-card checks to comprehensive/demo suites. Full run green (435 + 238 + 1836 + 1710 + 516 + 783 assertions).
+- 2026-04-25 - Final identity reconciliation: standardized the project identity statement across README, homepage, package metadata, and verified the GitHub repo description now matches; checklist reaches 202/202 (100%).

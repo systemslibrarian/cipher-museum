@@ -2,9 +2,9 @@
 
 > *"The heart of the discerning acquires knowledge, for the ears of the wise seek it out."* — Proverbs 18:15
 
-Exploring the history and evolution of cryptography — from classical ciphers to modern secure systems.
+Exploring 3,900+ years of encryption, cryptanalysis, and hidden history.
 
-Part digital exhibit, part cipher playground, and part codebreaking classroom: an open-source interactive museum spanning **139 exhibits** across **13 exhibit halls** — from the Khnumhotep tomb at Beni Hasan (~1900 BCE) to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo (or, for unsolved and visualization-only exhibits, a hand-built widget). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
+The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring **3,900+ years** of encryption, cryptanalysis, and hidden history across **139 exhibits** and **13 exhibit halls**. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo (or, for unsolved and visualization-only exhibits, a hand-built widget). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
 
 **[Live Site →](https://ciphermuseum.com)**
 

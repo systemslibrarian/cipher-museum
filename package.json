@@ -1,7 +1,7 @@
 {
   "name": "cipher-museum",
   "version": "1.0.0",
-  "description": "The Cipher Museum — part digital exhibit, part cipher playground, and part codebreaking classroom.",
+  "description": "The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring 3,900+ years of encryption, cryptanalysis, and hidden history.",
   "private": true,
   "scripts": {
     "test": "node tests/run-all.js",
