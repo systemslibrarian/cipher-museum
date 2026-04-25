@@ -67,21 +67,21 @@
   <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Field hollers used rhythmic syllable patterns. Enter a message and see how it maps to a simple stress-beat code (long STRESS / short unstressed).</p>
   <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1rem;">
     <div style="flex:1;min-width:200px;">
-      <label for="input" style="display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem;">Plain message</label>
-      <input id="input" type="text" value="MEET AT THE OLD OAK" style="width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);border-radius:4px;color:var(--fg);font-family:var(--fm);">
+      <label for="hollerInput" style="display:block;font-size:.8rem;color:var(--fg-dim);margin-bottom:.3rem;">Plain message</label>
+      <input id="hollerInput" type="text" value="MEET AT THE OLD OAK" style="width:100%;padding:.5rem .75rem;background:var(--s2);border:1px solid var(--b1);border-radius:4px;color:var(--fg);font-family:var(--fm);">
     </div>
-    <button onclick="encode()" style="padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;border-radius:4px;cursor:pointer;font-weight:700;">Encode</button>
+    <button onclick="runHollerCode()" style="padding:.5rem 1.25rem;background:var(--gold);color:#000;border:none;border-radius:4px;cursor:pointer;font-weight:700;">Encode</button>
   </div>
-  <div id="output" style="font-family:var(--fm);font-size:1.1rem;color:var(--gold-lt);letter-spacing:.15em;min-height:2rem;"></div>
+  <div id="hollerOutput" style="font-family:var(--fm);font-size:1.1rem;color:var(--gold-lt);letter-spacing:.15em;min-height:2rem;"></div>
   <script>
-    function encode() {
-      const msg = document.getElementById('input').value.toUpperCase().replace(/[^A-Z ]/g,'');
+    function runHollerCode() {
+      const msg = document.getElementById('hollerInput').value.toUpperCase().replace(/[^A-Z ]/g,'');
       const out = msg.split('').map(c => {
         if (c === ' ') return ' | ';
         const v = 'AEIOU'.includes(c);
         return c + (v ? '●' : '◦');
       }).join(' ');
-      document.getElementById('output').textContent = out;
+      document.getElementById('hollerOutput').textContent = out;
     }
   </script>
 </div>

@@ -47,20 +47,11 @@ const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
   'bach-motif', 'dancing-men', 'gold-bug', 'cicada-3301', 'krypto-arg',
   'mit-mystery-hunt', 'sator-square', 'freemason-pigpen',
   // Phase 8 — global underground traditions (Track B / audio visualization):
-  'field-hollers',
-  // Phase 9 — Cipher Culture (Track B visualization):
-  'da-vinci-code', 'national-treasure', 'gravity-falls',
-  // Phase 10 — Steganography technique (Track B):
-  'microdot',
-  // Phase 11 — Historical context pages (Track B):
-  'cabinet-noir', 'kerckhoffs', 'sigsaly']);
+  'field-hollers']);
 
 // Pages that are intentionally static (no engine, no interactive widget) -
-// modern-crypto math walkthroughs, the unsolved Dorabella manuscript, and bio pages.
-const STATIC_PAGES = new Set(['aes', 'des', 'diffie-hellman', 'dorabella', 'rsa', 'sha256',
-  // Phase 12 — Codebreaker biography pages (no cipher demo):
-  'rochefort', 'beurling', 'dilly-knox', 'yardley', 'mavis-batey',
-  'gchq-trio', 'kahn', 'dunin', 'lasry']);
+// modern-crypto math walkthroughs and the unsolved Dorabella manuscript.
+const STATIC_PAGES = new Set(['aes', 'des', 'diffie-hellman', 'dorabella', 'rsa', 'sha256']);
 
 /* ════════════════════════════════════════════════════════════════
    1. PAGE → ENGINE WIRING
@@ -76,7 +67,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 132', allPages.length === 132, `actual=${allPages.length}`);
+ok('Cipher pages count is 113', allPages.length === 113, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
