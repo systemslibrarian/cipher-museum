@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 153 done / 202 total (75.7%)
+- Overall: 163 done / 202 total (80.7%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -19,7 +19,7 @@ Updated after every commit. Source of truth for completion status.
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 10/11
-- Phase 13 (global integration): 18/38
+- Phase 13 (global integration): 28/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
@@ -41,6 +41,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: Phase 16 audit-gated catalog decision complete — selected UPGRADE path, recorded decision in `docs/round3-shipped-audit.md`, and extended `comparison.html` with Hall + Solved Status filters.
 - 2026-04-25: README integration pass — refreshed top-level exhibit/engine counts and explicitly linked `further-reading.html` in the tools section.
 - 2026-04-25: Phase 13 sidebar batch — added six lineage/context sidebars (M-209, Playfair, Nihilist, Columnar, Straddling Checkerboard, Jefferson Disk) and re-validated all six test suites.
+- 2026-04-25: Phase 13 integration closure batch — updated stale global exhibit counts on museum-map metadata/hero copy, bumped home footer version label to "v3.0.0 Global Expansion", added Hall V comparative tactical systems table + modern tactical-auth appendix, and updated Hall XII hero framing to living-research language with named researchers.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -211,27 +212,27 @@ Updated after every commit. Source of truth for completion status.
 - [x] museum-map.html subtitle and footer count updated
 - [ ] timeline.html year markers added for every new exhibit
 - [ ] timeline.html new era anchors added (Egyptian, India, Phaistos, Histiaeus)
-- [ ] timeline.html six-stage evolution strip preserved
+- [x] timeline.html six-stage evolution strip preserved
 - [x] comparison.html data updated with all new rows
 - [x] comparison.html total count in header updated
 - [ ] cipher-flow.html family map updated with new families
 - [x] search.html search index rebuilt for all new items
 - [ ] tours/ optional new Hall XII/Hall XIII themed tour
 - [x] index.html hero counts updated (about 113 ciphers, 13 halls)
-- [ ] index.html featured ciphers refreshed (include Hall XII and Hall XIII)
-- [ ] index.html playground dropdown updated for new simple ciphers
-- [ ] index.html footer version bumped to v3.0.0 Global Expansion
+- [x] index.html featured ciphers refreshed (include Hall XII and Hall XIII)
+- [x] index.html playground dropdown updated for new simple ciphers
+- [x] index.html footer version bumped to v3.0.0 Global Expansion
 - [x] README.md hall table regenerated with Hall XII and Hall XIII
 - [x] README.md count references updated (63->about 113, 11->13)
 - [ ] README.md demo roster expanded with new Track A exhibits
 - [x] sitemap.xml all new URLs added
 - [ ] learn.html cross-links to new exhibits added (if page remains in scope)
 - [ ] cryptanalysis.html techniques extended if introduced
-- [ ] All hall pages updated from Hall X of Y to of 13
-- [ ] Hall prev/next chains fixed for XII and XIII insertion
+- [x] All hall pages updated from Hall X of Y to of 13
+- [x] Hall prev/next chains fixed for XII and XIII insertion
 - [ ] 404.html and glossary.html stale counts updated
 - [x] Workbench header engine count updated
-- [ ] Hall XII hero copy includes living-research framing with named researchers
+- [x] Hall XII hero copy includes living-research framing with named researchers
 - [ ] Cryptiana bibliographic enrichments applied to listed exhibits
 - [x] M-209 sidebar added (Hagelin family + Rubicon note)
 - [x] Playfair sidebar added (Wheatstone vs Playfair)
@@ -239,8 +240,8 @@ Updated after every commit. Source of truth for completion status.
 - [x] Columnar sidebar added (route/myszkowski/nihilist variants)
 - [x] Straddling checkerboard sidebar added (family lineage)
 - [x] Jefferson disk sidebar added (wheel-cipher lineage)
-- [ ] Hall V comparative tactical systems table added
-- [ ] Hall V appendix on modern tactical authentication added
+- [x] Hall V comparative tactical systems table added
+- [x] Hall V appendix on modern tactical authentication added
 - [x] further-reading.html created with canon/scholar/source index
 - [x] further-reading.html linked from nav, museum-map, glossary, README
 - [ ] Identity statement standardized across README/home/repo description

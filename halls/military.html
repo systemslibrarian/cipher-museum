@@ -215,6 +215,73 @@
     </div>
   </div>
 
+  <div class="panel" style="margin-top:2.25rem;">
+    <div class="panel-head">
+      <span class="panel-icon">📊</span>
+      <span class="panel-title">Comparative Tactical Systems Table</span>
+    </div>
+    <div class="panel-body" style="padding-top:.5rem;">
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem;min-width:720px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--s4);text-align:left;">
+              <th style="padding:.65rem .5rem;color:var(--gold);font-family:var(--fm);letter-spacing:.08em;text-transform:uppercase;font-size:.6rem;">System</th>
+              <th style="padding:.65rem .5rem;color:var(--gold);font-family:var(--fm);letter-spacing:.08em;text-transform:uppercase;font-size:.6rem;">Primary Use</th>
+              <th style="padding:.65rem .5rem;color:var(--gold);font-family:var(--fm);letter-spacing:.08em;text-transform:uppercase;font-size:.6rem;">Field Speed</th>
+              <th style="padding:.65rem .5rem;color:var(--gold);font-family:var(--fm);letter-spacing:.08em;text-transform:uppercase;font-size:.6rem;">Cryptanalytic Resistance</th>
+              <th style="padding:.65rem .5rem;color:var(--gold);font-family:var(--fm);letter-spacing:.08em;text-transform:uppercase;font-size:.6rem;">Operational Failure Mode</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--s4);">
+              <td style="padding:.6rem .5rem;"><a href="../ciphers/nihilist.html">Nihilist</a></td>
+              <td style="padding:.6rem .5rem;">Cell-based covert messaging</td>
+              <td style="padding:.6rem .5rem;">Medium</td>
+              <td style="padding:.6rem .5rem;">Moderate</td>
+              <td style="padding:.6rem .5rem;">Key reuse exposes additive structure</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--s4);">
+              <td style="padding:.6rem .5rem;"><a href="../ciphers/adfgx.html">ADFGX</a> / <a href="../ciphers/adfgvx.html">ADFGVX</a></td>
+              <td style="padding:.6rem .5rem;">WWI operational traffic</td>
+              <td style="padding:.6rem .5rem;">Fast once drilled</td>
+              <td style="padding:.6rem .5rem;">High for its day</td>
+              <td style="padding:.6rem .5rem;">Message volume + reused structure enabled Painvin's break</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--s4);">
+              <td style="padding:.6rem .5rem;"><a href="../ciphers/bazeries.html">Bazeries</a></td>
+              <td style="padding:.6rem .5rem;">Officer-level secure correspondence</td>
+              <td style="padding:.6rem .5rem;">Slow in field conditions</td>
+              <td style="padding:.6rem .5rem;">Moderate-High</td>
+              <td style="padding:.6rem .5rem;">Complex procedure encourages operator shortcuts</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--s4);">
+              <td style="padding:.6rem .5rem;"><a href="../ciphers/book-cipher.html">Book Cipher</a></td>
+              <td style="padding:.6rem .5rem;">Long-form clandestine dispatches</td>
+              <td style="padding:.6rem .5rem;">Slow</td>
+              <td style="padding:.6rem .5rem;">Variable</td>
+              <td style="padding:.6rem .5rem;">Compromise of shared edition collapses secrecy</td>
+            </tr>
+            <tr>
+              <td style="padding:.6rem .5rem;"><a href="../ciphers/vic.html">VIC</a></td>
+              <td style="padding:.6rem .5rem;">Cold War espionage bursts</td>
+              <td style="padding:.6rem .5rem;">Slow but disciplined</td>
+              <td style="padding:.6rem .5rem;">Very High</td>
+              <td style="padding:.6rem .5rem;">Human compromise (defection, capture), not pure crypto break</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:.9rem;color:var(--tx3);font-size:.82rem;line-height:1.7;">Legend: this table compares practical trade-offs for operators in the field, not abstract mathematical strength alone.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:1.25rem;">
+    <span class="callout-icon">🛰️</span>
+    <div class="callout-body">
+      <p><strong>Appendix: modern tactical authentication.</strong> Contemporary military systems separate <em>confidentiality</em> from <em>authentication</em>. Historical hand ciphers in this hall mostly protect secrecy, but modern tactical traffic also requires anti-spoofing guarantees: message authentication codes, signed command channels, rolling challenge-response procedures, and strict key-rotation discipline. The enduring lesson is procedural: even strong ciphers fail without authenticated operator workflows.</p>
+    </div>
+  </div>
+
 </div>
 
 <div class="hall-nav">
