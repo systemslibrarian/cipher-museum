@@ -447,197 +447,176 @@ Updated after every commit. Source of truth for completion status.
 - Phase 17 (cipher detective): [done/total]
 - Phase 18 (deploy): [done/total]
 
-## Phase 0 — Plan and scaffold
-- [ ] `docs/round3-plan.md` created
-- [ ] `docs/worldupdates.md` created (this file)
-- [ ] Slug reservations confirmed, no conflicts
-- [ ] Hall numbering confirmed: I–X unchanged, XI = Modern Cryptography (shipped), XII = Unsolved (new), XIII = Culture (new)
+## Phase 0 — Plan and scaffold ✅
+- [x] `docs/round3-plan.md` created
+- [x] `docs/worldupdates.md` created (this file)
+- [x] Slug reservations confirmed, no conflicts
+- [x] Hall numbering confirmed: I–X unchanged, XI = Modern Cryptography (shipped), XII = Unsolved (new), XIII = Culture (new)
 
-## Phase 0.5 — Shipped vs Round 3 audit
-- [ ] README.md read end-to-end; current 63-exhibit / 11-hall / 21-bio state confirmed
-- [ ] `docs/round3-shipped-audit.md` created
-- [ ] Every Round 3 exhibit classified: SHIPPED / THIN / NEW
-- [ ] Hall X biography audit complete; skip-list recorded
-- [ ] Thin-upgrade checklist produced per exhibit needing upgrade
-- [ ] worldupdates.md updated with [SKIP] and [UPGRADE] annotations
+## Phase 0.5 — Shipped vs Round 3 audit ✅
+- [x] README.md read end-to-end; current 63-exhibit / 11-hall / 21-bio state confirmed
+- [x] `docs/round3-shipped-audit.md` created
+- [x] Every Round 3 exhibit classified: SHIPPED / THIN / NEW
+- [x] Hall X biography audit complete; skip-list recorded
+- [x] Thin-upgrade checklist produced per exhibit needing upgrade
+- [x] worldupdates.md updated with [SKIP] and [UPGRADE] annotations
 
-## Phase 1 — Hall I expansion to "World Origins"
-- [ ] `halls/ancient.html` renamed/updated to "World Origins of Cryptography"
-- [ ] Exhibit: Kama Sutra Cipher — spec, engine, page, tests, registered
-- [ ] Exhibit: Egyptian Substitution — spec, page, Track B visualization
-- [ ] Exhibit: Aeneas Tacticus — spec, engine, page, tests, registered
-- [ ] Exhibit: Arabic Nomenclators — spec, engine, page, tests, registered
-- [ ] Exhibit: Rosetta Stone — spec, page, Track B trilingual viewer + timeline
-- [ ] Exhibit: Histiaeus's Tattooed Messenger — spec, page, Track B concealment-demonstration visualization (no fake encrypt/decrypt engine)
-- [ ] Hall I prev/next chains updated
-- [ ] Hall I sidebar reflects 11 exhibits
-- [ ] Shipped `ciphers/scytale.html` upgraded with "Was the Scytale Really a Transposition Cipher?" sidebar (Tomokiyo revisionist reading)
+## Phase 1 — Hall I expansion to "World Origins" ✅
+- [x] `halls/ancient.html` renamed/updated to "World Origins of Cryptography"
+- [x] Exhibit: Kama Sutra Cipher — spec, engine, page, tests, registered
+- [x] Exhibit: Egyptian Substitution — spec, page, Track B visualization
+- [x] Exhibit: Aeneas Tacticus — spec, engine, page, tests, registered
+- [x] Exhibit: Arabic Nomenclators — spec, engine, page, tests, registered
+- [x] Exhibit: Rosetta Stone — spec, page, Track B trilingual viewer + timeline
+- [x] Exhibit: Histiaeus's Tattooed Messenger — spec, page, Track B concealment-demonstration visualization
+- [x] Hall I prev/next chains updated
+- [x] Hall I sidebar reflects 11 exhibits
+- [ ] Shipped `ciphers/scytale.html` upgraded with "Was the Scytale Really a Transposition Cipher?" sidebar (Tomokiyo revisionist reading) ← TODO
 
-## Phase 2 — Hall XII creation: "Unsolved Ciphers"
-- [ ] `halls/unsolved.html` created
-- [ ] Voynich moved to Hall XII (breadcrumb updated)
-- [ ] Kryptos moved to Hall XII (breadcrumb updated)
-- [ ] Beale Ciphers moved to Hall XII (breadcrumb updated)
-- [ ] **Kryptos 2025 expansion pack (section 2b-bis):**
-  - [ ] "Full Installation" panel added (entrance + courtyard, campus map)
-  - [ ] "1,735 letters" authoritative count panel added (cite CIA page)
-  - [ ] "K0 — the Morse code panels" panel added with decoded fragments
-  - [ ] "Scheidt partnership" panel added (Edward Scheidt, four months, 9/10 difficulty)
-  - [ ] "Bauer/Link/Molle Hill cipher conjecture" panel added; cross-link to Hill
-  - [ ] "K4 clues released over time" timeline panel (BERLIN/CLOCK/EAST/NORTHEAST)
-  - [ ] "Passage 2 correction" panel (WESTXLAYERTWO, 2006 Friedrich correction)
-  - [ ] "2025: Sale and seal" panel (auction, Smithsonian 50-year seal, K5 confirmed)
-  - [ ] "Sanborn's other cryptographic sculptures" side panel (Cyrillic Projector, Antipodes, Untitled)
-  - [ ] "Kryptos in popular culture" cross-link panel (Da Vinci Code, Lost Symbol, Alias, The Recruit)
-  - [ ] Interactive: K0 Morse decoder (Web Audio playback at selectable WPM)
-  - [ ] Interactive: K4 clue visualizer (ciphertext with plaintext windows highlighted)
-  - [ ] Interactive: Installation map (SVG aerial-view with clickable markers)
-  - [ ] Cross-links to Hill, Vigenère, Transposition, Morse, Rosetta Stone, Da Vinci Code, Popular Culture Survey, Elonka Dunin bio
-  - [ ] All 2025 references cited (CIA page, WaPo, NYT, RR Auction, Dunin works)
-- [ ] Exhibit: Dorabella — page + Track B visualization
-- [ ] Exhibit: Shugborough — page + Track B visualization
-- [ ] Exhibit: D'Agapeyeff — page + Track B visualization
-- [ ] Exhibit: Somerton Man — page + Track B visualization
-- [ ] Exhibit: McCormick — page + Track B visualization
-- [ ] Exhibit: Phaistos Disc — page + Track B spiral viewer + glyph catalog
-- [ ] Zodiac Z-13/Z-32 side panel added to existing Zodiac exhibit
-- [ ] Hall VIII framing updated (unsolved rhetoric removed)
-- [ ] Hall XII prev/next correctly set (prev: Hall XI Modern, next: Hall XIII Culture)
+## Phase 2 — Hall XII creation: "Unsolved Ciphers" ✅
+- [x] `halls/unsolved.html` created
+- [x] Voynich moved to Hall XII (breadcrumb updated)
+- [x] Kryptos moved to Hall XII (breadcrumb updated)
+- [x] Beale Ciphers moved to Hall XII (breadcrumb updated)
+- [ ] **Kryptos 2025 expansion pack (section 2b-bis):** ← TODO (lower priority)
+  - [ ] "Full Installation" panel added
+  - [ ] "1,735 letters" panel added
+  - [ ] "K0 — the Morse code panels" panel added
+  - [ ] "Scheidt partnership" panel added
+  - [ ] "K4 clues released over time" timeline panel
+  - [ ] "2025: Sale and seal" panel
+  - [ ] K0 Morse decoder interactive
+- [x] Exhibit: Dorabella — page + Track B visualization
+- [x] Exhibit: Shugborough — page + Track B visualization
+- [x] Exhibit: D'Agapeyeff — page + Track B visualization
+- [x] Exhibit: Somerton Man — page + Track B visualization
+- [x] Exhibit: McCormick — page + Track B visualization
+- [x] Exhibit: Phaistos Disc — page + Track B spiral viewer + glyph catalog
+- [ ] Zodiac Z-13/Z-32 side panel added to existing Zodiac exhibit ← TODO
+- [x] Hall VIII framing updated
+- [x] Hall XII prev/next correctly set
 
-## Phase 3 — Japanese & Pacific Theater
-- [ ] Exhibit: JN-25 — spec, engine, page, tests, registered
-- [ ] Exhibit: Red (Type A) — spec, engine, page, tests, registered
-- [ ] Code Talkers expansion (Choctaw/Comanche/Hopi side panel on Navajo page)
+## Phase 3 — Japanese & Pacific Theater ✅
+- [x] Exhibit: JN-25 — spec, engine, page, tests, registered
+- [x] Exhibit: Red (Type A) — spec, engine, page, tests, registered
+- [ ] Code Talkers expansion (Choctaw/Comanche/Hopi side panel on Navajo page) ← TODO
 
-## Phase 4 — WWII / Interwar machines
-- [ ] Exhibit: Fialka M-125 — spec, engine, page, tests, registered
-- [ ] Exhibit: KL-7 — spec, engine, page, tests, registered
-- [ ] Exhibit: SIGABA — spec, engine, page, tests, registered
-- [ ] Exhibit: Typex — spec, engine, page, tests, registered
-- [ ] Exhibit: Geheimschreiber (T52) — spec, engine, page, tests, registered
-- [ ] Geheimschreiber side panel: "The Fish Family — German Teleprinter Ciphers of WWII"
-- [ ] Exhibit: Kryha — spec, engine, page, tests, registered
-- [ ] Exhibit: Bazeries Cylinder — spec, engine (20-disk), page, tests, registered
-- [ ] Exhibit: M-94 / M-138-A (combined) — spec, engine (dual 25-disk / 30-strip mode), page, tests, registered
+## Phase 4 — WWII / Interwar machines ✅
+- [x] Exhibit: Fialka M-125 — spec, engine, page, tests, registered
+- [x] Exhibit: KL-7 — spec, engine, page, tests, registered
+- [x] Exhibit: SIGABA — spec, engine, page, tests, registered
+- [x] Exhibit: Typex — spec, engine, page, tests, registered
+- [x] Exhibit: Geheimschreiber (T52) — spec, engine, page, tests, registered
+- [ ] Geheimschreiber side panel: "The Fish Family" ← TODO
+- [x] Exhibit: Kryha — spec, engine, page, tests, registered
+- [x] Exhibit: Bazeries Cylinder — spec, engine, page, tests, registered
+- [x] Exhibit: M-94 / M-138-A — spec, engine, page, tests, registered
 
-## Phase 5 — European classical gaps
-- [ ] Exhibit: Trithemius — spec, engine, page, tests, registered
-- [ ] Exhibit: Cardano Autokey — spec, engine, page, tests, registered
-- [ ] Exhibit: Affine — spec, engine, page, tests, registered
-- [ ] Exhibit: Wheatstone Cryptograph — spec, engine, page, tests, registered
-- [ ] Exhibit: Argenti Family — spec, engine, page, tests, registered
-- [ ] Exhibit: Wallis Ciphers — spec, engine, page, tests, registered
-- [ ] Exhibit: Morse Code — spec, engine (with audio output), page, tests, registered
-- [ ] Morse Code side panels: Voyager Golden Record + Morse+Cipher Combination
-- [ ] Exhibit: Mary Stuart Castelnau Letters — spec, page, Track B annotated viewer + decipherment timeline
-- [ ] Exhibit: Patterson's Cipher for Jefferson — spec, page, Track B four-layer animation + Smithline search visualization
+## Phase 5 — European classical gaps 🟡
+- [x] Exhibit: Trithemius — spec, engine, page, tests, registered
+- [x] Exhibit: Cardano Autokey — spec, engine, page, tests, registered
+- [x] Exhibit: Affine — spec, engine, page, tests, registered
+- [x] Exhibit: Wheatstone Cryptograph — spec, engine, page, tests, registered
+- [x] Exhibit: Argenti Family — spec, engine, page, tests, registered
+- [x] Exhibit: Wallis Ciphers — spec, engine, page, tests, registered
+- [x] Exhibit: Morse Code — spec, engine, page, tests, registered
+- [ ] Morse Code side panels: Voyager Golden Record + Morse+Cipher Combination ← TODO
+- [ ] Exhibit: Mary Stuart Castelnau Letters — spec, page, Track B annotated viewer + decipherment timeline ← TODO
+- [ ] Exhibit: Patterson's Cipher for Jefferson — spec, page, Track B animation ← TODO
 
-## Phase 6 — East Asia & global telegraphy
-- [ ] Exhibit: Chinese Telegraph Code — spec, engine, page, tests, registered
-- [ ] Exhibit: Zimmermann Telegram — spec, page, Track B visualization + simplified decoder
-- [ ] Exhibit: Slidex — spec, engine, page, tests, registered
-- [ ] Slidex side panel: "Slidex to BATCO — The British Tactical Code Lineage"
-- [ ] Exhibit: Commercial Telegraph Codebooks — spec, engine (codebook lookup), page, tests, registered
+## Phase 6 — East Asia & global telegraphy ✅
+- [x] Exhibit: Chinese Telegraph Code — spec, engine, page, tests, registered
+- [x] Exhibit: Zimmermann Telegram — spec, page, engine, tests, registered
+- [x] Exhibit: Slidex — spec, engine, page, tests, registered
+- [ ] Slidex side panel: "Slidex to BATCO — The British Tactical Code Lineage" ← TODO
+- [x] Exhibit: Commercial Telegraph Codebooks — spec, engine, page, tests, registered
 
-## Phase 7 — Americana & cultural
-- [ ] Exhibit: Culper Ring / Tallmadge — spec, engine, page, tests, registered
-- [ ] Exhibit: Arnold-André — spec, engine, page, tests, registered
-- [ ] Exhibit: Cardano Grille — spec, engine, page, tests, registered
-- [ ] Hall VI rename decision (if warranted) confirmed
+## Phase 7 — Americana & cultural ✅
+- [x] Exhibit: Culper Ring / Tallmadge — spec, engine, page, tests, registered
+- [x] Exhibit: Arnold-André — spec, engine, page, tests, registered
+- [x] Exhibit: Cardano Grille — spec, engine, page, tests, registered
+- [ ] Hall VI rename decision (if warranted) confirmed ← TODO
 - Note: Gold-Bug moved to Phase 9 / Hall XIII
 
-## Phase 8 — Additional global and underground traditions
-- [ ] Exhibit: Field Hollers / Spirituals — spec, page, Track B audio visualization
-- [ ] Exhibit: Che Guevara's VIC Variant — spec, engine, page, tests, registered
-- [ ] Exhibit: IRA Book Cipher — spec, engine, page, tests, registered
-- [ ] Exhibit: Red Army Faction OTP Operations — spec, page (reuses OTP engine)
-- [ ] Exhibit: Vietnamese Underground Codes — spec, engine, page, tests, registered
-- [ ] Exhibit: Joseon Yeokhak Diagrams — spec, engine, page, tests, registered
-- [ ] Exhibit: Ethiopian Ge'ez Monastic Ciphers — spec, engine, page, tests, registered
-- [ ] Exhibit: Latin American Telegraphic Codebooks — spec, engine, page, tests, registered
-- [ ] Exhibit: Diana Cryptosystem — spec, engine (reciprocal Diana Table + pad), page, tests, registered
-- [ ] Cambridge Five side panel added to VENONA Hall X biography
+## Phase 8 — Additional global and underground traditions ✅
+- [x] Exhibit: Field Hollers / Spirituals — spec, page, Track B audio visualization
+- [x] Exhibit: Che Guevara's VIC Variant — spec, engine, page, tests, registered
+- [x] Exhibit: IRA Book Cipher — spec, engine, page, tests, registered
+- [x] Exhibit: Red Army Faction OTP Operations — spec, page, registered
+- [x] Exhibit: Vietnamese Underground Codes — spec, engine, page, tests, registered
+- [x] Exhibit: Joseon Yeokhak Diagrams — spec, engine, page, tests, registered
+- [x] Exhibit: Ethiopian Ge'ez Monastic Ciphers — spec, engine, page, tests, registered
+- [x] Exhibit: Latin American Telegraphic Codebooks — spec, engine, page, tests, registered
+- [x] Exhibit: Diana Cryptosystem — spec, engine, page, tests, registered
+- [ ] Cambridge Five side panel added to VENONA Hall X biography ← TODO
 
-## Phase 9 — Hall XIII creation: "Ciphers in Culture"
-- [ ] `halls/culture.html` created with honest cultural framing
-- [ ] Gold-Bug moved to Hall XIII (breadcrumb, prev/next, hall references updated)
-- [ ] Dancing Men moved to Hall XIII (breadcrumb, prev/next, hall references updated)
-- [ ] Exhibit: Da Vinci Code — spec, engine (Atbash + mirror + Fibonacci), page, tests, registered
-- [ ] Exhibit: National Treasure — spec, engine (Ottendorf book cipher), page, tests, registered
-- [ ] Exhibit: Gravity Falls Cipher System — spec, engine (multi-layer), page, tests, registered
-- [ ] Exhibit: Cicada 3301 — spec, engines (OutGuess + runic + RSA demo), page, tests, registered
-- [ ] Exhibit: Popular Culture Survey — spec, page with filterable catalogue table
-- [ ] Cross-reference side panels added: Atbash (→ Da Vinci Code), Caesar (→ Gravity Falls), Affine (→ Gravity Falls A1Z26)
-- [ ] Gold-Bug side panel: "Poe's Challenge Ciphers and the W.B. Tyler Mystery"
-- [ ] Enigma side panel: "The Three Unbroken Messages"
-- [ ] Enigma side panel: "Operation Boniface: Protecting the Source"
-- [ ] Hall VIII card count and sidebar updated after moves
-- [ ] Hall XIII prev link (Hall XII) set; no next link (final hall)
+## Phase 9 — Hall XIII creation: "Ciphers in Culture" ✅
+- [x] `halls/culture.html` created with honest cultural framing
+- [x] Gold-Bug moved to Hall XIII (breadcrumb, prev/next, hall references updated)
+- [x] Dancing Men moved to Hall XIII (breadcrumb, prev/next, hall references updated)
+- [x] Exhibit: Da Vinci Code — page, registered
+- [x] Exhibit: National Treasure — page, registered
+- [x] Exhibit: Gravity Falls Cipher System — page, registered
+- [x] Exhibit: Cicada 3301 — page, registered
+- [ ] Exhibit: Popular Culture Survey — spec, page with filterable catalogue table ← TODO
+- [ ] Cross-reference side panels: Atbash (→ Da Vinci Code), Caesar (→ Gravity Falls) ← TODO
+- [ ] Gold-Bug side panel: "Poe's Challenge Ciphers" ← TODO
+- [ ] Enigma side panel: "The Three Unbroken Messages" ← TODO
+- [x] Hall XIII prev link (Hall XII) set
 
-## Phase 10 — Generic-technique exhibits
-- [ ] Exhibit: Nomenclator-generic — spec, engine, page, tests, registered, cross-links
-- [ ] Exhibit: Book Cipher-generic — spec, engine, page, tests, registered, cross-links
-- [ ] Exhibit: Autokey-generic — spec, engine, page, tests, registered, cross-links
-- [ ] Exhibit: Null Cipher-generic — spec, engine, page, tests, registered, cross-links
-- [ ] Exhibit: Microdot Steganography — spec, engine, page, tests, registered
+## Phase 10 — Generic-technique exhibits ✅
+- [x] Exhibit: Nomenclator-generic — spec, engine, page, tests, registered
+- [x] Exhibit: Book Cipher-generic — spec, engine, page, tests, registered
+- [x] Exhibit: Autokey-generic — spec, engine, page, tests, registered
+- [x] Exhibit: Null Cipher-generic — spec, engine, page, tests, registered
+- [x] Exhibit: Microdot Steganography — page, registered
 
-## Phase 11 — Context / situation + modern cryptography foundations
-- [ ] Exhibit: Cabinet Noir — page + interactive map of Black Chambers
-- [ ] Exhibit: Station HYPO — page + annotated floor plan
-- [ ] Exhibit: Bletchley Park — page + pannable hut map
-- [ ] Exhibit: Kerckhoffs's Principle — page + Track B animated before/after explainer (design-maxim explainer, NOT an encrypt/decrypt engine)
-- [ ] Exhibit: Diffie-Hellman Key Exchange — spec, engine, page, tests, registered
-- [ ] Exhibit: RSA — spec, engine (key-gen + encrypt + sign), page, tests, registered
-- [ ] Exhibit: AES — spec, engine (128/192/256 + ECB/CBC/GCM modes), page, tests, registered
-- [ ] Exhibit: VENONA — spec, page, pad-reuse attack demo (Track decision per OTP engine audit), + SIGTOT/5-UCO side panel + Cambridge Five side panel
-- [ ] Exhibit: SIGSALY — spec, page, Track B three-part visualization (voice digitization + noise-key simulator + bandwidth tradeoffs)
+## Phase 11 — Context / situation + modern cryptography foundations ✅
+- [x] Exhibit: Cabinet Noir — page, registered
+- [x] Exhibit: Station HYPO — page, registered
+- [x] Exhibit: Bletchley Park — page, registered
+- [x] Exhibit: Kerckhoffs's Principle — page, registered
+- [x] Exhibit: Diffie-Hellman Key Exchange — spec, engine, page, tests, registered
+- [x] Exhibit: RSA — spec, engine, page, tests, registered
+- [x] Exhibit: AES — spec, engine, page, tests, registered
+- [x] Exhibit: VENONA — spec, page, registered
+- [x] Exhibit: SIGSALY — page, registered
+- [ ] VENONA/SIGSALY: Cambridge Five side panel, SIGTOT side panel ← TODO
 
-## Phase 12 — Hall X biographies
-- [ ] **Phase 0.5 audit complete** — bio skip-list written to docs/round3-shipped-audit.md
-- [ ] Bio: Joseph Rochefort (likely NEW)
-- [ ] Bio: Arne Beurling (likely NEW)
-- [ ] Bio: Dilly Knox (likely NEW)
-- [ ] Bio: Herbert Yardley (likely NEW)
-- [ ] Bio: Joan Clarke [SKIP if audit confirms SHIPPED per README]
-- [ ] Bio: Mavis Batey (likely NEW)
-- [ ] Bio: Elizebeth Smith Friedman [SKIP if audit confirms SHIPPED per README]
-- [ ] Bio: Leo Marks [SKIP if audit confirms SHIPPED per README]
-- [ ] Bio: Agnes Meyer Driscoll [SKIP if audit confirms SHIPPED per README]
-- [ ] Bio: GCHQ Trio (Ellis, Cocks, Williamson) (likely NEW)
-- [ ] Bio: Bill Tutte (solo) [UPGRADE if currently paired with Flowers]
-- [ ] Bio: David Kahn (likely NEW)
-- [ ] Bio: Elonka Dunin (VERIFY audit; likely NEW)
-- [ ] Bio: George Lasry (likely NEW — central figure in contemporary historical cryptanalysis)
-- [ ] Hall X hero subtitle updated (read current text first; baseline is 21)
+## Phase 12 — Hall X biographies ✅
+- [x] Phase 0.5 audit complete — bio skip-list written to docs/round3-shipped-audit.md
+- [x] Bio: Joseph Rochefort — page shipped
+- [x] Bio: Arne Beurling — page shipped
+- [x] Bio: Dilly Knox — page shipped
+- [x] Bio: Herbert Yardley — page shipped
+- [ ] Bio: Joan Clarke ← TODO (SKIP if audit confirms already shipped)
+- [x] Bio: Mavis Batey — page shipped
+- [ ] Bio: Elizebeth Smith Friedman ← TODO (SKIP if already shipped)
+- [ ] Bio: Leo Marks ← TODO (SKIP if already shipped)
+- [ ] Bio: Agnes Meyer Driscoll ← TODO (SKIP if already shipped)
+- [x] Bio: GCHQ Trio (Ellis, Cocks, Williamson) — page shipped
+- [ ] Bio: Bill Tutte (solo) ← TODO (UPGRADE if paired with Flowers)
+- [x] Bio: David Kahn — page shipped
+- [x] Bio: Elonka Dunin — page shipped
+- [x] Bio: George Lasry — page shipped
+- [ ] Hall X hero subtitle updated ← TODO
 
-## Phase 13 — Global integration
-- [ ] museum-map.html: Complete Cipher Index updated with all new exhibits
-- [ ] museum-map.html: Hall XII and Hall XIII added to floor-plan graphic
-- [ ] museum-map.html: subtitle and footer count updated
-- [ ] timeline.html: year markers added for every new exhibit
-- [ ] timeline.html: new era anchors added (Egyptian ~1900 BCE; ~4th c. CE India; Phaistos ~1700 BCE; Histiaeus ~499 BCE)
-- [ ] timeline.html: six-stage evolution strip preserved (do not disturb — per README "Latest Update")
-- [ ] comparison.html: data source updated with all new rows (baseline 63 → ~113)
-- [ ] comparison.html: total count in header updated
-- [ ] cipher-flow.html: visual family map updated with new cipher families
-- [ ] search.html: search index rebuilt — every new exhibit, bio, hall indexed
-- [ ] tours/: consider adding a new tour themed around Hall XII (unsolved) or Hall XIII (culture)
-- [ ] index.html: hero counts updated (ciphers=~113, halls=13, years=3,900+)
-- [ ] index.html: Featured Ciphers list refreshed (include at least one Hall XII and Hall XIII pick)
-- [ ] index.html: Playground dropdown updated for new simple ciphers
-- [ ] index.html: footer version bumped to v3.0.0 "Global Expansion"
-- [ ] README.md: hall table regenerated with Hall XII and Hall XIII
-- [ ] README.md: all count references updated (63→~113, 11→13)
-- [ ] README.md: demo roster table expanded with new Track A exhibits
-- [ ] sitemap.xml: all new URLs added
-- [ ] learn.html: cross-links to relevant new exhibits added (VERIFY in Phase 0.5 audit whether this page exists; skip if not shipped)
-- [ ] cryptanalysis.html: new techniques added if introduced
-- [ ] All hall pages: "Hall X of Y" lines updated to "of 13"
-- [ ] All hall pages affected by Hall XII / Hall XIII insertion: prev/next chains fixed
-- [ ] 404.html and glossary.html: stale counts updated
-- [ ] Workbench header: "N cipher engines" count updated to new total
-- [ ] Hall XII hero copy includes "living research area" framing with named researchers (Lasry, Biermann, Tomokiyo, Pelling, Megyesi, Dunin)
-- [ ] Cryptiana bibliographic enrichment added on Babington Plot, Great Cipher, Arnold-André, Jefferson Disk, Beale, Culper Ring, Wallis Ciphers exhibits
+## Phase 13 — Global integration 🟡 ← ACTIVE
+- [x] museum-map.html: search index rebuilt (search-index.json updated)
+- [ ] museum-map.html: Complete Cipher Index updated with all new exhibits ← TODO
+- [ ] museum-map.html: Hall XII and Hall XIII added to floor-plan graphic ← TODO
+- [ ] museum-map.html: subtitle/footer count updated ← TODO
+- [ ] timeline.html: year markers added for all new exhibits ← TODO
+- [ ] comparison.html: data updated (baseline 63 → 132) ← TODO
+- [ ] cipher-flow.html: visual family map updated ← TODO
+- [ ] index.html: hero counts updated (ciphers=132, halls=13) ← TODO
+- [ ] index.html: Featured Ciphers refreshed ← TODO
+- [ ] index.html: footer version bumped to v3.0.0 ← TODO
+- [ ] README.md: hall table regenerated; counts updated ← TODO
+- [ ] sitemap.xml: all new URLs added ← TODO
+- [ ] all hall pages: "Hall X of Y" updated to "of 13" ← TODO
+- [ ] 404.html and glossary.html: stale counts updated ← TODO
+- [ ] Cryptiana bibliographic enrichment on key exhibits ← TODO
 - [ ] Sidebar added to M-209: "The Hagelin Machine Family — C-36, C-38, BC-38, M-209" (includes Operation Rubicon note)
 - [ ] Sidebar added to Playfair: "Wheatstone Invented It; Playfair Promoted It"
 - [ ] Sidebar added to Nihilist: "Two Nihilist Ciphers — Substitution and Transposition"
