@@ -157,4 +157,26 @@
   <url><loc>https://ciphermuseum.com/ciphers/wheatstone.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/yardley.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/zimmermann.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Codebreaker biographies added Round 3 -->
+  <url><loc>https://ciphermuseum.com/ciphers/agnes-driscoll.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/bill-tutte.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/elizebeth-friedman.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/joan-clarke.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/leo-marks.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/patterson-jefferson-cipher.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- Exhibit 140 -->
+  <url><loc>https://ciphermuseum.com/ciphers/bible-code.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- Tools and utility pages -->
+  <url><loc>https://ciphermuseum.com/cipher-detective.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ciphermuseum.com/cipher-flow.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/comparison.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/further-reading.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/workbench.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ciphermuseum.com/learn.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/my-path.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/popular-culture-survey.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/tours/index.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/tours/tour.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/community/index.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

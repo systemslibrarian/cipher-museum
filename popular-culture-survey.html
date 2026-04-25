@@ -31,7 +31,7 @@
   <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span><a href="halls/culture.html">Hall XIII</a><span>›</span>Popular Culture Survey</div>
   <span class="page-eyebrow">Hall XIII Companion</span>
   <h1 class="page-title">Popular Culture Survey</h1>
-  <p class="page-tagline">A filterable catalogue of how classical ciphers appear in stories, games, and internet puzzle communities.</p>
+  <p class="page-tagline">A filterable catalogue of how classical ciphers appear in stories, games, film, and internet puzzle communities — 14 entries across four media types.</p>
 </div>
 
 <div class="section" style="max-width:1000px;margin:0 auto;">
@@ -80,14 +80,20 @@
 'use strict';
 (function(){
   var DATA = [
-    { title:'Poe, The Gold-Bug', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/gold-bug.html', note:'Teaches full frequency-analysis workflow in-story.' },
-    { title:'Conan Doyle, Dancing Men', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/dancing-men.html', note:'A cryptographic plot solved by pattern frequency and word shape.' },
-    { title:'The Da Vinci Code', medium:'novel', family:'multi-stage', period:'2000s', href:'ciphers/da-vinci-code.html', note:'Layered clue progression using simple substitutions and symbolic puzzles.' },
-    { title:'National Treasure', medium:'film', family:'multi-stage', period:'2000s', href:'ciphers/national-treasure.html', note:'Adventure-film chain of historical clue extraction and decoding.' },
-    { title:'Gravity Falls Credits Ciphers', medium:'television', family:'substitution', period:'2010s', href:'ciphers/gravity-falls.html', note:'Broadcast audience puzzle loop built on Caesar/Atbash variants.' },
-    { title:'Cicada 3301', medium:'internet', family:'multi-stage', period:'2010s', href:'ciphers/cicada-3301.html', note:'Internet-scale collaborative cryptography and steganography hunt.' },
-    { title:'MIT Mystery Hunt', medium:'internet', family:'transposition', period:'2010s', href:'ciphers/mit-mystery-hunt.html', note:'Team puzzle ecosystem featuring recurring cipher families.' },
-    { title:'Krypto ARG', medium:'internet', family:'multi-stage', period:'2010s', href:'ciphers/krypto-arg.html', note:'ARG-era integration of text ciphers and media-layer clues.' }
+    { title:'Poe, The Gold-Bug', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/gold-bug.html', note:'Teaches full frequency-analysis workflow in-story; the detective narrator walks through every step of breaking the substitution cipher.' },
+    { title:'Conan Doyle, Dancing Men', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/dancing-men.html', note:'A cryptographic plot solved by pattern frequency and word shape — Holmes decodes by recognising E and common short words.' },
+    { title:'Doyle, The Gloria Scott', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/null-cipher.html', note:'Holmes breaks a null cipher hidden in a letter — every third word carries the real message, illustrated in the Null Cipher exhibit.' },
+    { title:'The Da Vinci Code', medium:'novel', family:'multi-stage', period:'2000s', href:'ciphers/da-vinci-code.html', note:'Layered clue progression using simple substitutions and symbolic puzzles; popularised cryptographic thinking for millions of readers.' },
+    { title:'National Treasure', medium:'film', family:'multi-stage', period:'2000s', href:'ciphers/national-treasure.html', note:'Adventure-film chain of historical clue extraction and decoding; cipher literacy presented as heroic problem-solving.' },
+    { title:'Gravity Falls Credits Ciphers', medium:'television', family:'substitution', period:'2010s', href:'ciphers/gravity-falls.html', note:'Broadcast audience puzzle loop built on Caesar/Atbash/A1Z26 variants — one of the first serialised TV ARGs aimed at children.' },
+    { title:'Cicada 3301', medium:'internet', family:'multi-stage', period:'2010s', href:'ciphers/cicada-3301.html', note:'Internet-scale collaborative cryptography and steganography hunt spanning three years and multiple continents.' },
+    { title:'MIT Mystery Hunt', medium:'internet', family:'transposition', period:'2010s', href:'ciphers/mit-mystery-hunt.html', note:'Annual team puzzle ecosystem featuring recurring cipher families; over 50 years of collaborative code-solving tradition.' },
+    { title:'Krypto ARG', medium:'internet', family:'multi-stage', period:'2010s', href:'ciphers/krypto-arg.html', note:'ARG-era integration of text ciphers and media-layer clues; community collaborative decryption as social event.' },
+    { title:'The BACH Motif', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/bach-motif.html', note:'Bach embedded B-A-C-H (German note names) as a musical cipher signature in his own contrapuntal compositions.' },
+    { title:'Kryptos (Sanborn sculpture)', medium:'internet', family:'multi-stage', period:'2000s', href:'ciphers/kryptos.html', note:'CIA headquarters sculpture bearing a 865-character ciphertext — three sections solved, section K4 remains open after 35 years.' },
+    { title:'Zodiac Killer Ciphers', medium:'internet', family:'substitution', period:'2000s', href:'ciphers/zodiac.html', note:'Z408 solved in 1969; Z340 finally cracked in 2020 by an international team using HMM and period-detection algorithms.' },
+    { title:'Sator Square', medium:'television', family:'transposition', period:'2010s', href:'ciphers/sator-square.html', note:'Ancient Latin word square revived in pop culture — notably in the film Tenet — as a symbol of palindromic mystery.' },
+    { title:'Freemason Pigpen Tradition', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/freemason-pigpen.html', note:'Secret fraternal society cipher used in rituals and rituals; inspired dozens of popular fiction references from The Man in the Iron Mask to National Treasure.' }
   ];
 
   var resultWrap = document.getElementById('survey-results');

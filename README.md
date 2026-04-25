@@ -12,14 +12,11 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 ## 📰 Latest Update
 
-- Added a premium six-stage cryptography evolution strip to [timeline.html](https://ciphermuseum.com/timeline.html), positioned above the historical event timeline.
-- Sequence is explicit and ordered: Ancient → Classical → Mechanical → Modern → Symmetric (AES) → Asymmetric (Public-Key).
-- Implemented mathematically even horizontal spacing, straight directional connectors, and clear arrowheads.
-- Enforced strict two-line node labels, including exact wording for:
-    - AES / Modern Symmetric Encryption
-    - Public-Key Cryptography / Asymmetric Encryption
-- Standardized icon style using consistent inline SVG sizing and stroke weight.
-- Added subtle exhibit-style glow, responsive mobile behavior, and reduced-motion support.
+- **Exhibit 140 — Bible Code / ELS** ([ciphers/bible-code.html](https://ciphermuseum.com/ciphers/bible-code.html)): Interactive equidistant letter sequence explorer comparing Genesis/Exodus against length-matched random text with the same letter distribution. Registered in Hall VIII and the museum map.
+- **Lorenz depth-attack interactive** ([ciphers/lorenz.html](https://ciphermuseum.com/ciphers/lorenz.html)): Two-time-pad crib-drag demo and Enigma↔Lorenz comparison table added to the existing Lorenz exhibit.
+- **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 436 + 238 + 1843 + 1730 + 522 + 1735 + 777 + 4897 assertions.
+- **Sitemap expanded** to all 172 indexable pages (tools, tours, community, all biographies, and the new exhibit).
+- **README factual audit**: corrected interactive-demo count (110/140), page counts (173), and test assertion totals site-wide.
 
 ---
 
@@ -103,7 +100,7 @@ cipher-museum/
 ├── comparison.html          ← Sortable comparison table across the collection
 ├── challenges.html          ← 10 progressive cipher challenges
 ├── glossary.html            ← Cryptography glossary
-├── cryptanalysis.html       ← Cryptanalysis Techniques (7 interactive techniques)
+├── cryptanalysis.html       ← Cryptanalysis Techniques (10 interactive techniques)
 ├── cipher-flow.html         ← Visual cipher family relationships
 ├── modern.html              ← Modern Cryptography overview
 ├── favicon.svg              ← Gold cipher wheel icon
@@ -131,11 +128,21 @@ cipher-museum/
 │   ├── vigenere.html          ← with tabula recta SVG + Kasiski analysis
 │   ├── playfair.html          ← with key square builder SVG
 │   └── [130+ additional exhibits]
+├── data/
+│   └── artifact-cards.json  ← Metadata cards (era, family, region, key type…) for all 140 exhibits
+├── lab/
+│   └── workbench.html       ← Codebreaker's Workbench (all 83 engines in one lab)
 ├── tours/                    ← Guided learning paths
-├── community/                ← Community discussion pages
+├── community/                ← Community discussion and write-up space
 └── tests/
     ├── test-all-engines.js    ← Engine roundtrip & known-answer tests
-    └── test-deep-ciphers.js   ← Edge cases & stress tests
+    ├── test-deep-ciphers.js   ← Edge cases & stress tests
+    ├── test-comprehensive.js  ← Cross-cipher invariants across the collection
+    ├── test-accessibility.js  ← ADA / WCAG audit
+    ├── test-mobile.js         ← Responsive / mobile audit
+    ├── test-structural.js     ← Structural / framing audit
+    ├── test-demo-pages.js     ← End-to-end JSDOM simulation of every interactive demo
+    └── test-local-links.js    ← Local href/src link checker
 ```
 
 ---
@@ -167,7 +174,7 @@ cipher-museum/
 - Unique meta descriptions on every page
 - Open Graph + Twitter cards
 - Canonical URLs
-- XML sitemap (54+ pages)
+- XML sitemap (172 pages)
 - Structured data (JSON-LD)
 - Custom 404 page
 
@@ -182,14 +189,14 @@ The museum ships with **eight test harnesses, all green.** They cover everything
 npm install
 
 # Run any suite individually …
-node tests/test-all-engines.js      # 435 — engine roundtrip & known-answer tests across 83 engines
+node tests/test-all-engines.js      # 436 — engine roundtrip & known-answer tests across 83 engines
 node tests/test-deep-ciphers.js     # 238 — edge cases & stress tests
-node tests/test-comprehensive.js    # 1836 — cross-cipher invariants across the collection
+node tests/test-comprehensive.js    # 1843 — cross-cipher invariants across the collection
 node tests/test-accessibility.js    # 1730 — ADA / WCAG audit across 173 pages
 node tests/test-mobile.js           #  522 — responsive / mobile audit across 173 pages
 node tests/test-structural.js       # 1734 — structural / framing audit across 173 pages
 node tests/test-demo-pages.js       #  777 — end-to-end JSDOM simulation of every interactive demo
-node tests/test-local-links.js      # 4897 — local href/src link checker across 173 HTML files
+node tests/test-local-links.js      # 4901 — local href/src link checker across 173 HTML files
 
 # … or via npm scripts
 npm run test:engines
