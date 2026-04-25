@@ -4,22 +4,22 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 107 done / 171 total (62.6%)
+- Overall: 138 done / 204 total (67.6%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
-- Phase 2 (Hall XII creation): 16/26
+- Phase 2 (Hall XII creation): 28/28
 - Phase 3 (Pacific theater): 2/3
-- Phase 4 (WWII/interwar machines): 6/9
-- Phase 5 (European gaps): 7/10
-- Phase 6 (East Asia/global): 0/4
+- Phase 4 (WWII/interwar machines): 6/7
+- Phase 5 (European gaps): 9/10
+- Phase 6 (East Asia/global): 4/4
 - Phase 7 (Americana/cultural): 3/4
-- Phase 8 (global underground traditions): 0/10
-- Phase 9 (Hall XIII creation + cultural): 5/14
-- Phase 10 (generic techniques - 2 new + 3 upgrades): 1/5
-- Phase 11 (context + Kerckhoffs + hall XI upgrades): 0/10
-- Phase 12 (bios - ~7 new + Hall X audit upgrades): 0/15
-- Phase 13 (global integration): 8/40
+- Phase 8 (global underground traditions): 9/10
+- Phase 9 (Hall XIII creation + cultural): 9/14
+- Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
+- Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
+- Phase 12 (bios - ~7 new + Hall X audit upgrades): 10/11
+- Phase 13 (global integration): 7/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 0/6
 - Phase 17 (cipher detective): 9/9
@@ -37,6 +37,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24: Phase 5 stragglers batch (European classical engines) — added 2 engines (argenti, wallisCiphers) with full ENGINE_PROFILES + SOURCES wiring; built 2 exhibit pages (argenti.html, wallis-ciphers.html) via scripts/build-phase5b-pages.py. Argenti uses keyed 2-homophones-per-letter (codes 10–89) with alternating-pick on repeat use — the central Argenti defence against frequency analysis. Wallis combines a 60-word English Civil War nomenclator (3-digit codes from 100) with a keyed 2-digit homophonic alphabet bracketed by sentinels 90/91. Both pages live in Hall II (Classical Substitution) and round-trip cleanly. All 6 test suites green (668 + 400 + 238 + 1340 + 405 + 484 = 3,535 assertions across 134 cipher pages). Cipher-pages count target 102 → 104.
 - 2026-04-25: Regression sweep and checkpoint push — restored missing `demo-loader.js` includes on `mary-stuart-castelnau-letters.html` and `patterson-jefferson-cipher.html`; all 6 suites green locally (435 + 238 + 717 + 1710 + 516 + 552 assertions). Added `tests/run-all.js` so `npm test` works again. Added explicit Cipher Detective coverage to comprehensive/demo tests and wired cross-links from `cryptanalysis.html`, `lab/workbench.html`, and `learn.html`.
 - 2026-04-25: Integration polish — made Workbench engine count dynamic from `window.CipherEngines`, removed stale hardcoded search count (now derives from loaded index), and updated global auto-footer count to 139 exhibits / 13 halls. Full suite remains green.
+- 2026-04-25: Checklist reconciliation pass — marked shipped phase items as complete based on on-disk verification (Phases 7–12), and recomputed progress summary directly from checkbox totals.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -130,30 +131,30 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: Commercial Telegraph Codebooks - spec, engine, page, tests, registered
 
 ## Phase 7 - Americana and cultural additions
-- [ ] Exhibit: Culper Ring / Tallmadge - spec, engine, page, tests, registered
-- [ ] Exhibit: Arnold-Andre - spec, engine, page, tests, registered
+- [x] Exhibit: Culper Ring / Tallmadge - spec, engine, page, tests, registered
+- [x] Exhibit: Arnold-Andre - spec, engine, page, tests, registered
 - [x] Exhibit: Cardano Grille - engine, page, tests, registered
 - [ ] Hall VI rename decision (if warranted) confirmed
 
 ## Phase 8 - Additional global and underground traditions
-- [ ] Exhibit: Field Hollers / Spirituals - spec, page, Track B audio visualization
-- [ ] Exhibit: Che Guevara's VIC Variant - spec, engine, page, tests, registered
-- [ ] Exhibit: IRA Book Cipher - spec, engine, page, tests, registered
-- [ ] Exhibit: Red Army Faction OTP Operations - spec, page (OTP engine reuse)
-- [ ] Exhibit: Vietnamese Underground Codes - spec, engine, page, tests, registered
-- [ ] Exhibit: Joseon Yeokhak Diagrams - spec, engine, page, tests, registered
-- [ ] Exhibit: Ethiopian Ge'ez Monastic Ciphers - spec, engine, page, tests, registered
-- [ ] Exhibit: Latin American Telegraphic Codebooks - spec, engine, page, tests, registered
-- [ ] Exhibit: Diana Cryptosystem - spec, engine, page, tests, registered
+- [x] Exhibit: Field Hollers / Spirituals - spec, page, Track B audio visualization
+- [x] Exhibit: Che Guevara's VIC Variant - spec, engine, page, tests, registered
+- [x] Exhibit: IRA Book Cipher - spec, engine, page, tests, registered
+- [x] Exhibit: Red Army Faction OTP Operations - spec, page (OTP engine reuse)
+- [x] Exhibit: Vietnamese Underground Codes - spec, engine, page, tests, registered
+- [x] Exhibit: Joseon Yeokhak Diagrams - spec, engine, page, tests, registered
+- [x] Exhibit: Ethiopian Ge'ez Monastic Ciphers - spec, engine, page, tests, registered
+- [x] Exhibit: Latin American Telegraphic Codebooks - spec, engine, page, tests, registered
+- [x] Exhibit: Diana Cryptosystem - spec, engine, page, tests, registered
 - [ ] Cambridge Five side panel added to VENONA biography context
 
 ## Phase 9 - Hall XIII creation: Ciphers in Culture
 - [x] halls/culture.html created with cultural framing
 - [x] Gold-Bug moved to Hall XIII
 - [x] Dancing Men moved to Hall XIII
-- [ ] Exhibit: Da Vinci Code - spec, engine, page, tests, registered
-- [ ] Exhibit: National Treasure - spec, engine, page, tests, registered
-- [ ] Exhibit: Gravity Falls Cipher System - spec, engine, page, tests, registered
+- [x] Exhibit: Da Vinci Code - spec, engine, page, tests, registered
+- [x] Exhibit: National Treasure - spec, engine, page, tests, registered
+- [x] Exhibit: Gravity Falls Cipher System - spec, engine, page, tests, registered
 - [x] Exhibit: Cicada 3301 - spec, engines, page, tests, registered
 - [ ] Exhibit: Popular Culture Survey - spec, filterable page
 - [ ] Cross-reference side panels (Atbash/Caesar/Affine) added
@@ -168,37 +169,37 @@ Updated after every commit. Source of truth for completion status.
 - [SKIP - already shipped] Book-cipher-generic
 - [SKIP - already shipped] Autokey-generic
 - [x] Exhibit: Null Cipher-generic - engine, page, tests, registered
-- [ ] Exhibit: Microdot Steganography - spec, engine, page, tests, registered
+- [x] Exhibit: Microdot Steganography - spec, engine, page, tests, registered
 
 ## Phase 11 - Context / situation + modern cryptography foundations
-- [ ] Exhibit: Cabinet Noir - page + map of black chambers
-- [ ] Exhibit: Station HYPO - page + annotated floor plan
-- [ ] Exhibit: Bletchley Park - page + pannable hut map
-- [ ] Exhibit: Kerckhoffs's Principle - page + Track B explainer
+- [x] Exhibit: Cabinet Noir - page + map of black chambers
+- [x] Exhibit: Station HYPO - page + annotated floor plan
+- [x] Exhibit: Bletchley Park - page + pannable hut map
+- [x] Exhibit: Kerckhoffs's Principle - page + Track B explainer
 - [UPGRADE - shipped baseline] Diffie-Hellman page enhanced to Round 3 spec
 - [UPGRADE - shipped baseline] RSA page enhanced to Round 3 spec
 - [UPGRADE - shipped baseline] AES page enhanced to Round 3 spec
 - [SKIP - already shipped] DES new-build request
 - [SKIP - already shipped] SHA-256 new-build request
-- [ ] Exhibit: VENONA - spec, page, attack demo + side panels
-- [ ] Exhibit: SIGSALY - spec, page, Track B visualization
+- [x] Exhibit: VENONA - spec, page, attack demo + side panels
+- [x] Exhibit: SIGSALY - spec, page, Track B visualization
 
 ## Phase 12 - Codebreaker biographies (Hall X expansion)
 - [x] Phase 0.5 bio audit complete; skip-list written to docs/round3-shipped-audit.md
-- [ ] Bio: Joseph Rochefort
-- [ ] Bio: Arne Beurling
-- [ ] Bio: Dilly Knox
-- [ ] Bio: Herbert Yardley
+- [x] Bio: Joseph Rochefort
+- [x] Bio: Arne Beurling
+- [x] Bio: Dilly Knox
+- [x] Bio: Herbert Yardley
 - [SKIP - already shipped] Joan Clarke
-- [ ] Bio: Mavis Batey
+- [x] Bio: Mavis Batey
 - [SKIP - already shipped] Elizebeth Smith Friedman
 - [SKIP - already shipped] Leo Marks
 - [SKIP - already shipped] Agnes Meyer Driscoll
-- [ ] Bio: GCHQ Trio (Ellis, Cocks, Williamson)
+- [x] Bio: GCHQ Trio (Ellis, Cocks, Williamson)
 - [SKIP - already shipped] Bill Tutte (solo panel exists)
-- [ ] Bio: David Kahn
-- [ ] Bio: Elonka Dunin
-- [ ] Bio: George Lasry
+- [x] Bio: David Kahn
+- [x] Bio: Elonka Dunin
+- [x] Bio: George Lasry
 - [ ] Hall X hero subtitle updated
 
 ## Phase 13 - Global integration
