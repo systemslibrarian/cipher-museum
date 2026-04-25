@@ -1,0 +1,490 @@
+{
+  "version": "2",
+  "challenges": [
+    {
+      "id": "b1",
+      "level": "beginner",
+      "levelLabel": "Beginner",
+      "title": "The Garden Wall",
+      "setup": "A note was tucked beneath the stone at the garden gate. The messenger used the device Julius Caesar himself favoured — every letter shifted the same fixed number of positions through the alphabet. One of 25 possible shifts. The Caesar Brute-Force tool can try them all.",
+      "ciphertext": "WKHTX LFNEU RZQIR AMXPS VRYHU WKHOD CBGRJ",
+      "hints": [
+        "This is a Caesar cipher — every letter has been shifted the same fixed number of positions in the alphabet.",
+        "The most common letter in English is E. Look for the most frequent ciphertext letter and assume it maps to E. H is the most frequent here. What shift takes H back to E?",
+        "The shift is 3. Shift every letter back 3 positions: W→T, K→H, H→E… The plaintext is a famous English pangram."
+      ],
+      "solution": {
+        "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+        "key": "Caesar shift 3 (each letter shifted 3 positions forward)",
+        "explanation": "Julius Caesar reputedly used a shift of 3 in his military correspondence. To break it, count letter frequencies. The ciphertext's most-common letter maps to E. Chi-square analysis confirms shift 3 gives the distribution closest to English. The brute-force tool ranks all 25 candidates by fitness — shift 3 appears at the top."
+      },
+      "whatYouLearned": {
+        "text": "You used frequency analysis and Caesar brute-force — the oldest recorded cryptanalytic techniques.",
+        "links": [
+          {
+            "text": "Caesar Cipher exhibit",
+            "url": "ciphers/caesar.html"
+          },
+          {
+            "text": "Frequency Analysis",
+            "url": "cryptanalysis.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b2",
+      "level": "beginner",
+      "levelLabel": "Beginner",
+      "title": "The Mirror Code",
+      "setup": "Atbash reverses the alphabet: A maps to Z, B to Y, Z to A. Hebrew scribes encoded parts of the book of Jeremiah this way in the 6th century BC. The word Sheshach (Jeremiah 25:26) is Atbash for Babel. Applying Atbash twice returns the original text.",
+      "ciphertext": "YIZEV IBRHM LGGSV ZYHVM XVLUU VIZFY GZXGR MTRMH KRGVL URG",
+      "hints": [
+        "Atbash reverses the alphabet: A↔Z, B↔Y, C↔X, and so on. Apply the same transformation to decrypt.",
+        "V is the most common ciphertext letter here. In Atbash, V (22nd letter) maps to E (5th letter) because 22+5=27=26+1.",
+        "Use the Atbash button in the Attack Tools section for a one-click decode. The plaintext is a statement about bravery and fear."
+      ],
+      "solution": {
+        "plaintext": "BRAVERY IS NOT THE ABSENCE OF FEAR BUT ACTING IN SPITE OF IT",
+        "key": "Atbash cipher (A↔Z, B↔Y, C↔X — alphabet reversed onto itself)",
+        "explanation": "Atbash is its own inverse. The Hebrew Masorites used it in Jeremiah and Ezekiel. To break it, recognise the reversed frequency pattern: the most-frequent ciphertext letter still maps to the most-frequent plaintext letter, just reflected across the alphabet midpoint."
+      },
+      "whatYouLearned": {
+        "text": "Atbash is the oldest named cipher in history, preserved in the Hebrew scriptures for over 2,500 years.",
+        "links": [
+          {
+            "text": "Atbash Cipher exhibit",
+            "url": "ciphers/atbash.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b3",
+      "level": "beginner",
+      "levelLabel": "Beginner",
+      "title": "Halfway There",
+      "setup": "ROT13 is the internet's own cipher, used on Usenet since the 1980s to hide spoilers and puzzle answers. It is a Caesar shift of 13, which has the elegant property of being its own inverse: applying it twice always returns the original text.",
+      "ciphertext": "XABJY RQTRV FCBJR ENAQC BJREV FXABJ YRQTR GURPV CUREA RIREY VRF",
+      "hints": [
+        "This is ROT13 — a Caesar cipher with a fixed shift of 13. Every A becomes N, every N becomes A.",
+        "Because the alphabet has 26 letters, a shift of 13 is perfectly symmetric. Applying ROT13 once encodes; applying it again decodes.",
+        "Use the ROT13 Attack Tool button. The plaintext is about knowledge, power, and ciphers."
+      ],
+      "solution": {
+        "plaintext": "KNOWLEDGE IS POWER AND POWER IS KNOWLEDGE THE CIPHER NEVER LIES",
+        "key": "ROT13 (Caesar shift 13)",
+        "explanation": "ROT13 emerged on Usenet around 1984 as a convention for voluntary concealment of spoilers. It provides zero security; any observer who notices the pattern can decode it. Its value is social, not cryptographic."
+      },
+      "whatYouLearned": {
+        "text": "ROT13 shows how a 2,000-year-old technique found new life in the digital age as a cultural convention.",
+        "links": [
+          {
+            "text": "Caesar Cipher exhibit",
+            "url": "ciphers/caesar.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b4",
+      "level": "beginner",
+      "levelLabel": "Beginner",
+      "title": "The Season Changes",
+      "setup": "Not all Caesar ciphers use a shift of 3. This message uses a different offset. The brute-force tool can find it in milliseconds; the question is recognising the English plaintext when you see it.",
+      "ciphertext": "HDPZL THUJO HUNLZ OPZTP UKHMV VSULC LYKVL ZAOLZ ABIIV YUOLH YAPZP AZVDU WYBZV U",
+      "hints": [
+        "This is a Caesar cipher with a shift other than 3 or 13. It is between 5 and 10.",
+        "Use the Caesar Brute-Force Attack Tool. Each shift produces a candidate; the chi-square fitness score ranks them. One will be clearly English.",
+        "The shift is 7. H→A, D→W, P→I, Z→S, L→E. Read the first word."
+      ],
+      "solution": {
+        "plaintext": "A WISE MAN CHANGES HIS MIND A FOOL NEVER DOES THE STUBBORN HEART IS ITS OWN PRISON",
+        "key": "Caesar shift 7",
+        "explanation": "The Caesar brute-force tool tries all 25 candidates and scores each with chi-square analysis. At shift 7, the score drops sharply. This is exactly the attack Julius Caesar's contemporaries could have used by hand."
+      },
+      "whatYouLearned": {
+        "text": "Brute-forcing all 25 Caesar shifts is instantaneous for a computer. The chi-square fitness function is what distinguishes the real plaintext from the other 24 candidates.",
+        "links": [
+          {
+            "text": "Caesar Cipher exhibit",
+            "url": "ciphers/caesar.html"
+          },
+          {
+            "text": "Cryptanalysis techniques",
+            "url": "cryptanalysis.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b5",
+      "level": "beginner",
+      "levelLabel": "Beginner",
+      "title": "Signal from the Sea",
+      "setup": "Samuel Morse patented this encoding system in 1837. Each letter is a unique sequence of dots and dashes. Word boundaries are marked by a slash (/). Morse dominated long-distance communication for over a century.",
+      "ciphertext": "- .... . / . .- --. .-.. . / .... .- ... / .-.. .- -. -.. . -.. / .-. . - ..- .-. -. / .. -- -- . -.. .. .- - . .-.. -.--",
+      "hints": [
+        "Morse code: a single dot is E, a single dash is T. Letters separated by spaces; words separated by slashes.",
+        "Start decoding: - = T, .... = H, . = E → THE. Then . .- --. .-.. . = E A G L E.",
+        "Use the Morse Detection tool. The message is a famous phrase from the Apollo 11 lunar landing (1969)."
+      ],
+      "solution": {
+        "plaintext": "THE EAGLE HAS LANDED RETURN IMMEDIATELY",
+        "key": "International Morse Code",
+        "explanation": "Morse letter lengths were designed by frequency: E (one dot) is the shortest because it is the most common English letter. The phrase was transmitted from Apollo 11's lunar module on 20 July 1969. Morse is detectable by character-set analysis: only dots, dashes, slashes, and spaces."
+      },
+      "whatYouLearned": {
+        "text": "Morse code applied frequency-informed encoding — a cryptanalytic principle turned into a practical communications system.",
+        "links": [
+          {
+            "text": "Morse Code history",
+            "url": "ciphers/morse.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i1",
+      "level": "intermediate",
+      "levelLabel": "Intermediate",
+      "title": "Layers of the Lemon",
+      "setup": "The Vigrenère cipher (1590s) cycles a keyword to apply different Caesar shifts to successive plaintext letters. This flattens frequency distributions compared to Caesar. It earned the name 'le chiffre indéchiffrable' — the unbreakable cipher. Key length: 5 letters. The Vigenere Key Length tool will find it.",
+      "ciphertext": "LXFOP VEFRN HRFVR NEHOY CCIWY WVURR QVAAG SIZCE ELMBQ XIQHG SIUBS LRFFL LXFVR NVAGF TRS",
+      "hints": [
+        "This is a Vigenère cipher. Each letter is shifted by the corresponding letter of a repeating keyword. Run the Vigenere Key Length Estimator tool.",
+        "With a 5-letter key, every 5th ciphertext letter has been shifted by the same amount. Those strands each behave like a Caesar cipher, giving IoC close to 0.067.",
+        "The keyword is LEMON. Decrypt using the Vigenere tool on the Codebreaker's Workbench with key LEMON. The plaintext is a military dispatch."
+      ],
+      "solution": {
+        "plaintext": "ATTACK AT DAWN THE CAVALRY WILL RIDE FROM THE NORTH AND MEET THE INFANTRY AT THE CROSSING",
+        "key": "Vigenère keyword LEMON (length 5)",
+        "explanation": "Friedman's Index of Coincidence test (1920) detects Vigenere key length: if you split the ciphertext into every-nth-letter strands, the right n makes each strand's IoC rise toward 0.067. Kasiski also finds it by repeated trigrams. Once key length is known, each strand is a Caesar cipher broken by frequency analysis."
+      },
+      "whatYouLearned": {
+        "text": "You used the Kasiski/Friedman key-length attack — the technique that finally broke 'le chiffre indéchiffrable' in the 19th century.",
+        "links": [
+          {
+            "text": "Vigenère Cipher exhibit",
+            "url": "ciphers/vigenere.html"
+          },
+          {
+            "text": "Index of Coincidence",
+            "url": "cryptanalysis.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i2",
+      "level": "intermediate",
+      "levelLabel": "Intermediate",
+      "title": "The Threefold Lock",
+      "setup": "A shorter Vigenère keyword makes Kasiski examination more effective because the repetition pattern is denser. This message uses a 3-letter key. Churchill's wartime speech was encrypted for practice.",
+      "ciphertext": "GIQRE JVJGQ LRYRR RIZOE ARIQG IQREJ VJGQL RYRRR IJKRB SREQV MERBC ACCLY VPLOZ CBWSB VCXHC B",
+      "hints": [
+        "Vigenère with a short 3-letter key. The Kasiski repeated-trigram analysis will score key length 3 very high because the same triplets repeat every 3 positions.",
+        "Split the ciphertext into 3 interleaved strands (positions 1,4,7… then 2,5,8… then 3,6,9…). Each strand is a Caesar cipher. Solve them independently.",
+        "The keyword is KEY. The plaintext is a Churchill speech."
+      ],
+      "solution": {
+        "plaintext": "WE SHALL FIGHT ON THE BEACHES WE SHALL FIGHT ON THE LANDING GROUNDS WE SHALL NEVER SURRENDER",
+        "key": "Vigenère keyword KEY (length 3)",
+        "explanation": "Churchill repeatedly used 'we shall fight' in the speech for rhetorical emphasis. After Vigenere encryption with KEY, those repetitions appear as 'GIQ REJ VJ' each time, giving Kasiski clear trigrams spaced at multiples of 3."
+      },
+      "whatYouLearned": {
+        "text": "Repeated plaintext phrases are a Kasiski vulnerability. Rhetorical repetition that strengthens a speech weakens the cipher.",
+        "links": [
+          {
+            "text": "Vigenère Cipher exhibit",
+            "url": "ciphers/vigenere.html"
+          },
+          {
+            "text": "Kasiski examination",
+            "url": "cryptanalysis.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i3",
+      "level": "intermediate",
+      "levelLabel": "Intermediate",
+      "title": "The Monarch's Alphabet",
+      "setup": "A monoalphabetic substitution cipher replaces each letter consistently with a different letter. There are 26! ≈ 4×10²³ possible keys, but the frequency distribution betrays it. This one uses the keyword-derived alphabet MONARCHYBDEFGIJKLPQSTUVWXZ (A maps to M, B maps to O, etc.).",
+      "ciphertext": "CJTPQ NJPRM IAQRU RIXRM PQMHJ JTPCM SYRPQ OPJTH YSCJP SYJIS YBQNJ ISBIR ISMIR VIMSB JI",
+      "hints": [
+        "Monoalphabetic substitution: each letter maps consistently to exactly one other letter. Frequency analysis is the primary attack.",
+        "Count ciphertext letter frequencies. The most common ciphertext letters likely represent E, T, and A. The keyword starts with MONARCHY, placing those letters first in the substitution alphabet.",
+        "The alphabet is A→M B→O C→N D→A E→R F→C G→H H→Y I→B J→D K→E L→F M→G N→I O→J P→K Q→L R→P S→Q T→S U→T V→U W→V X→W Y→X Z→Z. The plaintext is from Lincoln's Gettysburg Address."
+      ],
+      "solution": {
+        "plaintext": "FOUR SCORE AND SEVEN YEARS AGO OUR FATHERS BROUGHT FORTH ON THIS CONTINENT A NEW NATION",
+        "key": "Monoalphabetic substitution with keyword-derived alphabet MONARCHYBDEFGIJKLPQSTUVWXZ",
+        "explanation": "Frequency analysis makes 26! keys irrelevant. The Substitution Frequency Suggestions tool reveals the top-6 ciphertext letters and their likely plaintext counterparts. Arab cryptanalysts documented this attack in the 9th century AD in al-Kindi's Manuscript on Deciphering Cryptographic Messages."
+      },
+      "whatYouLearned": {
+        "text": "Despite quadrillions of possible keys, monoalphabetic substitution falls to simple frequency analysis — a 1,200-year-old technique.",
+        "links": [
+          {
+            "text": "Kama Sutra cipher",
+            "url": "ciphers/kama-sutra.html"
+          },
+          {
+            "text": "Cryptanalysis and frequency analysis",
+            "url": "cryptanalysis.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i4",
+      "level": "intermediate",
+      "levelLabel": "Intermediate",
+      "title": "At the Agora",
+      "setup": "The Polybius square (2nd century BC) converts each letter into a pair of row-column digits. I and J share one cell. Standard layout: Row 1 = ABCDE, Row 2 = FGHIK, Row 3 = LMNOP, Row 4 = QRSTU, Row 5 = VWXYZ. So A=11, B=12, E=15, F=21, Z=55.",
+      "ciphertext": "11 31 31 52 11 42 21 11 42 15 24 43 12 11 43 15 14 34 33 14 15 13 15 35 44 24 34 33 23 15 33 13 15 52 23 15 33 11 12 31 15 44 34 11 44 44 11 13 25 52 15 32 45 43 44 43 15 15 32 45 33 11 12 31 15 11 33 14 13 11 35 11 12 31 15 52 23 15 33 33 34 44",
+      "hints": [
+        "Each digit pair is a row and column coordinate: first digit = row (1–5), second = column (1–5). The grid is alphabetical with I/J merged.",
+        "Row 1: A(11) B(12) C(13) D(14) E(15). Row 2: F(21) G(22) H(23) I/J(24) K(25). Row 3: L(31) M(32) N(33) O(34) P(35). Row 4: Q(41) R(42) S(43) T(44) U(45). Row 5: V(51) W(52) X(53) Y(54) Z(55).",
+        "11=A, 31=L, 31=L. The plaintext begins ALL WARFARE IS… — a famous Sun Tzu quote."
+      ],
+      "solution": {
+        "plaintext": "ALL WARFARE IS BASED ON DECEPTION HENCE WHEN ABLE TO ATTACK WE MUST SEEM UNABLE AND CAPABLE WHEN NOT",
+        "key": "Standard Polybius square (5×5, alphabetical, I/J merged, row-then-column coordinates)",
+        "explanation": "The Polybius square is a fractionating cipher: it turns one letter into two characters. This fractionation underpins the ADFGVX cipher (which replaces the digits 1–5 with the letters A,D,F,G,V,X) and the Bifid cipher. The tap code used in POW camps used the same square with tapped counts instead of digits."
+      },
+      "whatYouLearned": {
+        "text": "Fractionation — turning one character into two — is a foundational technique in cipher design, from Polybius to AES.",
+        "links": [
+          {
+            "text": "ADFGVX Cipher",
+            "url": "ciphers/adfgvx.html"
+          },
+          {
+            "text": "Bifid (Polybius-based)",
+            "url": "ciphers/bifid.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i5",
+      "level": "intermediate",
+      "levelLabel": "Intermediate",
+      "title": "The Winding Fence",
+      "setup": "The Rail-Fence cipher writes the message in a zigzag across N rails (rows), then reads off each row in order. It is a transposition cipher — letters are rearranged, not substituted. The frequency distribution remains identical to English plaintext. This version uses 3 rails.",
+      "ciphertext": "BEHCR AHEEH IONHP KAETU EWETE OKDOM NTEPN ILTEE SDOOL TEIHR ECNPN TOOTN LEODO FDRAR YCEYO IY",
+      "hints": [
+        "Transposition cipher: the IoC will be close to 0.067 (English), meaning the letters are just rearranged. Rail-fence with 3 rails was used.",
+        "With 3 rails, the zigzag periods every 2×(3−1)=4 positions. Top rail: positions 1,5,9,13… Middle rail: 2,4,6,8… Bottom rail: 3,7,11,15…",
+        "The plaintext starts BETWEEN THE LOCKED ROOM. Work the zigzag reconstruction with the rail layout above."
+      ],
+      "solution": {
+        "plaintext": "BETWEEN THE LOCKED ROOM AND THE OPEN FIELD THERE IS A DOOR ONLY THE CIPHER KEY CAN OPEN IT TO YOU",
+        "key": "Rail-Fence cipher, 3 rails (zigzag transposition)",
+        "explanation": "Rail-fence transposition preserves every letter, rearranging positions only. The giveaway: if the IoC is near English but the text is unreadable, think transposition. To decrypt, determine the number of rails, reconstruct the zigzag pattern, and fill the rails back from the ciphertext."
+      },
+      "whatYouLearned": {
+        "text": "Transposition ciphers leave frequency distributions intact — a critical diagnostic clue for the Detective.",
+        "links": [
+          {
+            "text": "Columnar Transposition",
+            "url": "ciphers/columnar.html"
+          },
+          {
+            "text": "Double Transposition",
+            "url": "ciphers/double-transposition.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a1",
+      "level": "advanced",
+      "levelLabel": "Advanced",
+      "title": "The Lighthouse Dispatch",
+      "setup": "Columnar transposition writes the message into a grid row by row, then reads columns in keyword-alphabetical order. This was standard for armies and navies in the 19th and early 20th centuries. Keyword: CIPHER (6 letters). Column read order is determined by sorting the keyword letters alphabetically.",
+      "ciphertext": "MMHLV CDTUT LTOLA IEHEG NOTEG SEXTN HSENI DNHIU HFEIT AEHBH MODHN IEDTN BAREE TLOTF TGPAN EGCSO HECX",
+      "hints": [
+        "Columnar transposition with 6-column keyword CIPHER. The IoC is high (transposition, not substitution). You need to find the column read order by sorting CIPHER alphabetically.",
+        "Sort CIPHER: C(1st in ABC order), E(2nd), H(3rd), I(4th), P(5th), R(6th). So: column C is read 1st, E is 2nd, H is 3rd, I is 4th, P is 5th, R is 6th. Map back to positions in CIPHER: C=col1, I=col2, P=col3, H=col4, E=col5, R=col6 — wait, map keyword positions: C is at position 1 in CIPHER, I at 4, P at 5, H at 3, E at 6 (wait, E is position 6? No: C-I-P-H-E-R: position 1=C, 2=I, 3=P, 4=H, 5=E, 6=R). Sort those: C(1)<E(5)<H(4)<I(2)<P(3)<R(6). Read order: col1,col5,col4,col2,col3,col6.",
+        "The message begins MEET AT MIDNIGHT. The text was padded with X to fill the grid."
+      ],
+      "solution": {
+        "plaintext": "MEET AT MIDNIGHT THE PLANS HAVE BEEN CHANGED BRING THE DOCUMENTS TO THE OLD LIGHTHOUSE ON THE CLIFF",
+        "key": "Columnar transposition with keyword CIPHER (6 letters)",
+        "explanation": "Columnar transposition was broken by digram analysis: since each column contains plaintext letters at fixed intervals, high-frequency English digrams (TH, HE, ER) reappear when the column order is correct. The ADFGVX cipher was designed specifically to resist this attack by combining substitution with transposition."
+      },
+      "whatYouLearned": {
+        "text": "Columnar transposition was the backbone of many classical military ciphers. Breaking it requires digram analysis.",
+        "links": [
+          {
+            "text": "Columnar Transposition exhibit",
+            "url": "ciphers/columnar.html"
+          },
+          {
+            "text": "ADFGVX Cipher",
+            "url": "ciphers/adfgvx.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a2",
+      "level": "advanced",
+      "levelLabel": "Advanced",
+      "title": "The Six Letters",
+      "setup": "The ADFGVX cipher (1918) combines two stages: Polybius-square substitution using only the letters A,D,F,G,V (in this version) followed by columnar transposition. This puzzle uses Polybius square key PHQGMEAYLNOFDXKRCVSZWBUTI and columnar keyword MARK. Both stages must be undone to read the message.",
+      "ciphertext": "GVAVD AAAGD ADGAA FAGDA DFDAA FFDDG DVGAG AAAFA VADVV GGVAD DVGVG VVVGA VVDFV AAAFF DGDFG DGVFG DDVDF GVDGF DGDDD FADDD FDGGD VDDGV GDFDD FGADG VDDAV VAVVF DDVDD ADGDD GAFDD VDF",
+      "hints": [
+        "Step 1 — undo the columnar transposition (key MARK, 4 columns). Sort MARK: A(3rd)<K(4th)<M(1st)<R(2nd). So column positions by keyword: M=col1 A=col2 R=col3 K=col4; sorted order A<K<M<R means read col2,col4,col1,col3.",
+        "Step 2 — decode the Polybius pairs. Square key: PHQGMEAYLNOFDXKRCVSZWBUTI. ADFGV rows and columns. P=AA H=AD Q=AF G=AG M=AV E=DA A=DD Y=DF L=DG N=DV O=FA F=FD D=FF X=FG K=FV R=GA C=GD V=GF S=GG Z=GV W=VD B=VF U=VG T=VV I/J=VA.",
+        "After undoing the transposition, decode each 2-letter ADFGV pair as a Polybius coordinate. The message is a WWI field order about a bridge."
+      ],
+      "solution": {
+        "plaintext": "SEND REINFORCEMENTS AT ONCE THE BRIDGE IS TAKEN AND THE ENEMY ADVANCES RAPIDLY EASTWARD",
+        "key": "ADFGVX-style: Polybius square (key PHQGMEAYLNOFDXKRCVSZWBUTI, ADFGV coords), then columnar transposition (key MARK)",
+        "explanation": "The real ADFGVX was introduced by the German Army in March 1918 and defeated French cryptanalysts until Georges Painvin broke it in June 1918 by exploiting messages of the same length with matching opening characters. He lost 15 kg during the effort. The cipher shows why combining substitution and transposition is much stronger than either alone."
+      },
+      "whatYouLearned": {
+        "text": "ADFGVX demonstrates the power of composing ciphers. Understanding why it is harder requires seeing both layers and knowing which attack breaks each separately.",
+        "links": [
+          {
+            "text": "ADFGVX Cipher exhibit",
+            "url": "ciphers/adfgvx.html"
+          },
+          {
+            "text": "Bifid cipher (Polybius-based)",
+            "url": "ciphers/bifid.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a3",
+      "level": "advanced",
+      "levelLabel": "Advanced",
+      "title": "The Agent's Codebook",
+      "setup": "In the Babington Plot (1586), Mary Queen of Scots communicated using a nomenclator: common words replaced by numbers, individual letters by symbols. This puzzle uses a simplified version. The codebook is provided below. Words absent from the codebook appear in plaintext. Decode the message and consider what it implies.",
+      "ciphertext": "042 079 055 025 039 076 015 028 058 033 071 062 042 044 055 035 022 042 GATE 099",
+      "codebook": {
+        "042": "THE",
+        "031": "AND",
+        "018": "OF",
+        "097": "TO",
+        "064": "IN",
+        "001": "A",
+        "055": "IS",
+        "022": "AT",
+        "039": "WE",
+        "015": "ALL",
+        "028": "BE",
+        "088": "MEET",
+        "093": "TONIGHT",
+        "067": "DAWN",
+        "033": "SEND",
+        "071": "WORD",
+        "012": "QUEEN",
+        "044": "GUARD",
+        "062": "WHEN",
+        "079": "PLAN",
+        "025": "SET",
+        "011": "FOR",
+        "058": "READY",
+        "035": "NOT",
+        "099": "YET",
+        "076": "MUST"
+      },
+      "hints": [
+        "Apply the codebook directly: each three-digit code maps to a word. An unknown word (GATE) appears in plaintext because no code exists for it.",
+        "Decode each token in order: 042=THE, 079=PLAN, 055=IS, 025=SET, 039=WE, 076=MUST, 015=ALL, 028=BE, 058=READY…",
+        "The full message: THE PLAN IS SET WE MUST ALL BE READY SEND WORD WHEN THE GUARD IS NOT AT THE GATE YET. This is a Babington Plot-style instruction."
+      ],
+      "solution": {
+        "plaintext": "THE PLAN IS SET WE MUST ALL BE READY SEND WORD WHEN THE GUARD IS NOT AT THE GATE YET",
+        "key": "Nomenclator codebook (three-digit codes for common words; unknown words transmitted in plaintext)",
+        "explanation": "The Babington Plot's nomenclator was deciphered by Thomas Phelippes, Walsingham's code-breaker. The fatal flaw: some words passed through as plaintext, and the codebook was eventually intercepted. When Mary's letter approving the assassination arrived, Walsingham let it through, arrested all conspirators, and Mary was executed in 1587. A nomenclator is only as secure as its distribution."
+      },
+      "whatYouLearned": {
+        "text": "The Babington Plot is the most famous man-in-the-middle intercept in pre-modern cryptography. Plaintext leakage through an incomplete codebook was the decisive vulnerability.",
+        "links": [
+          {
+            "text": "Babington Plot exhibit",
+            "url": "ciphers/babington.html"
+          },
+          {
+            "text": "Mary Stuart cipher letters",
+            "url": "ciphers/mary-stuart-castelnau-letters.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a4",
+      "level": "advanced",
+      "levelLabel": "Advanced",
+      "title": "The Buried Coordinates",
+      "setup": "Double transposition applies columnar transposition twice with two different keys. German spies used it in World War II. Undoing the second transposition without knowing the key reveals only a second scrambled message. Keys: first ROYAL (5 letters), then CODE (4 letters).",
+      "ciphertext": "TAEOU MOHNE HETDE EVEBE NRTNL IOUTE STSNE XDEOR SSLIR TEHPD EKHXU EELBR FATAM RARSH CI",
+      "hints": [
+        "Double transposition: the IoC is near English (transposition, not substitution). The message was first scrambled by columnar transposition with key ROYAL, then again with key CODE. To decrypt, undo CODE first, then ROYAL.",
+        "For key CODE (4 letters): sort C(1)<D(2)<E(3)<O(4). In keyword CODE: C=col1, O=col2, D=col3, E=col4. Sorted order C<D<E<O means read order is col1,col3,col4,col2. Reverse that: insert columns in positions col3,col1,col4,col2.",
+        "After undoing CODE, undo ROYAL (5 letters, sorting A<L<O<R<Y; positions in ROYAL: R=col1,O=col2,Y=col3,A=col4,L=col5). Plaintext is a buried-treasure location."
+      ],
+      "solution": {
+        "plaintext": "THE TREASURE IS BURIED BENEATH THE STONE MARKER SEVEN PACES DUE NORTH OF THE OLD MILL",
+        "key": "Double transposition: first key ROYAL, second key CODE",
+        "explanation": "Double transposition was considered field-secure well into WWII. Breaking it without computers requires depth (multiple messages under the same key). A single isolated message is significantly harder. Modern brute-force is feasible for short keys but wartime manual cryptanalysts found it formidable."
+      },
+      "whatYouLearned": {
+        "text": "Double transposition shows how composing two weak operations can produce a much harder cipher — the principle later formalised in product ciphers and AES rounds.",
+        "links": [
+          {
+            "text": "Double Transposition exhibit",
+            "url": "ciphers/double-transposition.html"
+          },
+          {
+            "text": "Bletchley Park",
+            "url": "ciphers/bletchley-park.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a5",
+      "level": "advanced",
+      "levelLabel": "Advanced",
+      "title": "The Veiled Message",
+      "setup": "Layering two ciphers can confuse analysis tools that expect a single cipher. This message was first encrypted with Vigenère (keyword ATLAS, 5 letters), then each letter of the result was passed through Atbash. The Vigenère flattens frequencies; the Atbash reflection remaps them in a way that misleads standard sorters.",
+      "ciphertext": "WGXPU VOWXH MTAGE IYTVT FNLZQ PTKHP LTDBW RAHGF ZTLLO SGVSH GCMZU MSVWQ RLKLN GZOGD LTDBW LLKXH M",
+      "hints": [
+        "The IoC is very flat, suggesting polyalphabetic or composite encryption. The Atbash outer layer means that high-frequency ciphertext letters correspond to low-frequency English letters in the partially-decrypted intermediate. Step 1: undo Atbash (apply Atbash again — it is self-inverse).",
+        "After applying Atbash to the ciphertext, you get a Vigenère-encrypted intermediate. Run the Vigenere Key Length tool on that result — it should detect key length 5.",
+        "The Vigenere keyword is ATLAS (5 letters). Decrypt the Atbash-stripped intermediate with key ATLAS. The plaintext is a famous MLK Jr. quotation about light and darkness."
+      ],
+      "solution": {
+        "plaintext": "DARKNESS CANNOT DRIVE OUT DARKNESS ONLY LIGHT CAN DO THAT HATE CANNOT DRIVE OUT HATE ONLY LOVE CAN",
+        "key": "Vigenère (keyword ATLAS) then Atbash. Decrypt: Atbash first (self-inverse), then Vigenère with ATLAS.",
+        "explanation": "This layered cipher illustrates the meet-in-the-middle perspective: because Atbash requires no key and is self-inverse, stripping it first costs nothing cryptanalytically. Once removed, the familiar Kasiski/Friedman attack finds key length 5 and resolves ATLAS. The lesson: composing ciphers where one layer is trivially invertible (or keyless) adds almost no security — the real strength lives in the keyed layer."
+      },
+      "whatYouLearned": {
+        "text": "Layered ciphers can be peeled apart one layer at a time if any layer is trivially invertible. Understanding each component separately is the key to breaking composites.",
+        "links": [
+          {
+            "text": "Vigenère Cipher",
+            "url": "ciphers/vigenere.html"
+          },
+          {
+            "text": "Atbash Cipher",
+            "url": "ciphers/atbash.html"
+          },
+          {
+            "text": "Index of Coincidence",
+            "url": "cryptanalysis.html"
+          }
+        ]
+      }
+    }
+  ]
+}
