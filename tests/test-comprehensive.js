@@ -60,7 +60,7 @@ const STATIC_PAGES = new Set([
   // Phase 12 additional biographies:
   'agnes-driscoll', 'bill-tutte', 'elizebeth-friedman', 'joan-clarke', 'leo-marks',
   // Track B visualization pages:
-  'mary-stuart-castelnau-letters'
+  'mary-stuart-castelnau-letters', 'patterson-jefferson-cipher'
 ]);
 
 /* ════════════════════════════════════════════════════════════════
@@ -77,7 +77,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 138', allPages.length === 138, `actual=${allPages.length}`);
+ok('Cipher pages count is 139', allPages.length === 139, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher|runHollerCode)/i;
