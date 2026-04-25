@@ -3,6 +3,16 @@
    Reuses museum.css design tokens. No new colours, no new fonts.
    ============================================================ */
 
+/* The site-wide .demo-section forces a 2-column grid on .demo-body
+   (intended for the auto-generated input/output demos). The flagship
+   needs a single vertical column so its rotor windows, fieldsets,
+   plugboard, output, electrical-path SVG and buttons stack naturally. */
+/* The site-wide .demo-section forces a 2-column grid on .demo-body
+   (intended for the auto-generated input/output demos). The flagship
+   needs a single vertical column so its rotor windows, fieldsets,
+   plugboard, output, electrical-path SVG and buttons stack naturally. */
+.demo-section--flagship .demo-body,
+.demo-section:has(#enigma-flagship) .demo-body { display: flex; flex-direction: column; gap: 1.5rem; }
 #enigma-flagship { display: flex; flex-direction: column; gap: 1.5rem; }
 
 /* ── Configuration grid ────────────────────────────────────────────────── */
