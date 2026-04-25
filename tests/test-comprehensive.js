@@ -50,8 +50,14 @@ const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
   'field-hollers']);
 
 // Pages that are intentionally static (no engine, no interactive widget) -
-// modern-crypto math walkthroughs and the unsolved Dorabella manuscript.
-const STATIC_PAGES = new Set(['aes', 'des', 'diffie-hellman', 'dorabella', 'rsa', 'sha256']);
+// modern-crypto math walkthroughs, unsolved manuscripts, biography pages.
+const STATIC_PAGES = new Set([
+  'aes', 'des', 'diffie-hellman', 'dorabella', 'rsa', 'sha256',
+  // Biography / historical narrative pages (no engine):
+  'beurling', 'cabinet-noir', 'da-vinci-code', 'dilly-knox', 'dunin',
+  'gchq-trio', 'gravity-falls', 'kahn', 'kerckhoffs', 'lasry',
+  'mavis-batey', 'microdot', 'national-treasure', 'rochefort', 'sigsaly', 'yardley'
+]);
 
 /* ════════════════════════════════════════════════════════════════
    1. PAGE → ENGINE WIRING
@@ -67,10 +73,10 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 113', allPages.length === 113, `actual=${allPages.length}`);
+ok('Cipher pages count is 132', allPages.length === 132, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
-const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher)/i;
+const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher|runHollerCode)/i;
 const HAND_BUILT_IDS = /id="(msgInput|pf-keyword|zLetterInput|shiftSlider|keyInput|plaintext|ciphertext|input|output)"/i;
 
 for (const file of allPages) {
