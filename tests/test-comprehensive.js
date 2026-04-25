@@ -41,6 +41,7 @@ function section(name) { console.log('\n━━━ ' + name + ' ━━━'); }
 
 const REPO = path.resolve(__dirname, '..');
 const CIPHERS_DIR = path.join(REPO, 'ciphers');
+const ARTIFACT_CARDS_JSON = path.join(REPO, 'data', 'artifact-cards.json');
 const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
   // Round 3 Track B (visualization-only exhibits with hand-built widgets):
   'egyptian-substitution', 'rosetta-stone', 'histiaeus-tattoo',
@@ -446,6 +447,40 @@ if (D && typeof D.analyse === 'function') {
   ok('CipherDetective identifies Morse sample as top candidate',
     morseAnalysis.candidates[0] && morseAnalysis.candidates[0].id === 'morse',
     `top=${morseAnalysis.candidates[0] ? morseAnalysis.candidates[0].id : 'none'}`);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   7. ARTIFACT CARD COMPLETENESS
+   ════════════════════════════════════════════════════════════════ */
+section('7. Artifact card completeness');
+
+ok('artifact-cards.json exists', fs.existsSync(ARTIFACT_CARDS_JSON));
+
+if (fs.existsSync(ARTIFACT_CARDS_JSON)) {
+  let parsed = null;
+  try {
+    parsed = JSON.parse(fs.readFileSync(ARTIFACT_CARDS_JSON, 'utf8'));
+  } catch (err) {
+    ok('artifact-cards.json parses as valid JSON', false, err.message);
+  }
+
+  if (parsed && parsed.cards) {
+    const required = ['era', 'family', 'region', 'usedBy', 'keyType', 'keyIdea', 'securityFailure', 'modernLesson'];
+    const slugs = allPages.map((f) => f.replace('.html', ''));
+
+    ok('artifact-cards has entry for every cipher page',
+      slugs.every((slug) => !!parsed.cards[slug]),
+      `missing=${slugs.filter((slug) => !parsed.cards[slug]).slice(0, 8).join(',')}`);
+
+    for (const slug of slugs) {
+      const card = parsed.cards[slug] || {};
+      for (const key of required) {
+        ok(`artifact card ${slug}.${key} populated`,
+          typeof card[key] === 'string' && card[key].trim().length > 0,
+          `value=${JSON.stringify(card[key])}`);
+      }
+    }
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════

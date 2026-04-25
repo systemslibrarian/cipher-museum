@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 95 done / 171 total (55.6%)
+- Overall: 106 done / 171 total (62.0%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -20,10 +20,10 @@ Updated after every commit. Source of truth for completion status.
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 0/10
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 0/15
 - Phase 13 (global integration): 7/40
-- Phase 15 (artifact cards): 0/8
+- Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 0/6
 - Phase 17 (cipher detective): 9/9
-- Phase 18 (deploy): 4/24
+- Phase 18 (deploy): 7/24
 
 ### Log
 - 2026-04-24: Phase 0 + 0.5 complete; Hall I renamed.
@@ -241,14 +241,14 @@ Updated after every commit. Source of truth for completion status.
 - [ ] Identity statement standardized across README/home/repo description
 
 ## Phase 15 - Artifact Card standardization
-- [ ] data/artifact-cards.json created with final schema
-- [ ] Card renderer added (demo-loader extension or companion module)
-- [ ] All 63 existing exhibits have artifact-card entries
-- [ ] All new Round 3 exhibits have artifact-card entries
-- [ ] Artifact-card hook added to all exhibit pages
-- [ ] Card styling matches museum aesthetic, mobile, and accessibility goals
-- [ ] test-comprehensive.js validates card completeness
-- [ ] test-demo-pages.js verifies card render on every exhibit page
+- [x] data/artifact-cards.json created with final schema
+- [x] Card renderer added (demo-loader extension or companion module)
+- [x] All 63 existing exhibits have artifact-card entries
+- [x] All new Round 3 exhibits have artifact-card entries
+- [x] Artifact-card hook added to all exhibit pages
+- [x] Card styling matches museum aesthetic, mobile, and accessibility goals
+- [x] test-comprehensive.js validates card completeness
+- [x] test-demo-pages.js verifies card render on every exhibit page
 
 ## Phase 16 - Research / Catalog Mode (audit-gated)
 - [ ] Audit of comparison.html, search.html, cipher-flow.html completed
@@ -272,13 +272,13 @@ Updated after every commit. Source of truth for completion status.
 ## Phase 18 - Deploy and verify
 - [x] All six test suites pass locally
 - [x] test-demo-pages.js passes for every new exhibit page
-- [ ] test-comprehensive.js validates artifact-card completeness
-- [ ] test-comprehensive.js validates Cipher Detective sample identification
+- [x] test-comprehensive.js validates artifact-card completeness
+- [x] test-comprehensive.js validates Cipher Detective sample identification
 - [ ] Every Track A engine works in Workbench
 - [ ] Every Track A Try It Yourself block produces output via demo-loader
 - [ ] Every Track A Break This Cipher reveal works
 - [ ] Every Track B visualization renders
-- [ ] Every exhibit page shows Artifact Card at top
+- [x] Every exhibit page shows Artifact Card at top
 - [ ] Catalog/research mode page works with all filters
 - [x] Cipher Detective page loads and returns evidence-based candidates
 - [ ] Local server spot-check: 5 Track A, 5 Track B, 5 bios
@@ -304,3 +304,4 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-24 - Phase 0.5 complete: shipped audit produced with SKIP/UPGRADE/BUILD tables.
 - 2026-04-24 - Phase 1a started: halls/ancient.html updated to World Origins framing.
 - 2026-04-24 - Reconciliation: 28 items audited as already complete on disk; checklist updated. Tests green (2,980 assertions across 6 suites after fixing affine/jn25/redTypeA profiles and 84-page count).
+- 2026-04-25 - Phase 15 complete: generated data/artifact-cards.json + js/artifact-cards-data.js (139 entries), added js/artifact-cards.js renderer and nav auto-wiring, added responsive card styles, and added artifact-card checks to comprehensive/demo suites. Full run green (435 + 238 + 1836 + 1710 + 516 + 783 assertions).

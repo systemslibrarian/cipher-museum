@@ -25,6 +25,8 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 
 const REPO = path.resolve(__dirname, '..');
 const CIPHERS_DIR = path.join(REPO, 'ciphers');
+const ARTIFACT_DATA = path.join(REPO, 'js', 'artifact-cards-data.js');
+const ARTIFACT_RENDER = path.join(REPO, 'js', 'artifact-cards.js');
 
 let pass = 0, fail = 0;
 const failures = [];
@@ -70,14 +72,22 @@ async function loadPage(file, extraScripts = []) {
   const inlined = inlineScripts(raw, path.dirname(file), extraScripts);
   const vc = new VirtualConsole();
   vc.on('jsdomError', () => { /* swallow */ });
+  const rel = path.relative(REPO, file).replace(/\\/g, '/');
   const dom = new JSDOM(inlined, {
     runScripts: 'dangerously',
     pretendToBeVisual: true,
     virtualConsole: vc,
-    url: 'http://localhost/'
+    url: 'http://localhost/' + rel
   });
   await tick();
   return dom;
+}
+
+async function loadCipherPageWithArtifact(file, extraScripts = []) {
+  const scriptList = [];
+  if (fs.existsSync(ARTIFACT_DATA)) scriptList.push(ARTIFACT_DATA);
+  if (fs.existsSync(ARTIFACT_RENDER)) scriptList.push(ARTIFACT_RENDER);
+  return loadPage(file, scriptList.concat(extraScripts));
 }
 
 const NON_ROUNDTRIP = new Set([
@@ -124,10 +134,13 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
     const filePath = path.join(CIPHERS_DIR, file);
 
     let dom;
-    try { dom = await loadPage(filePath); }
+    try { dom = await loadCipherPageWithArtifact(filePath); }
     catch (err) { ok(`${pad(slug, 28)} loads in jsdom`, false, err.message); continue; }
     const { window } = dom;
     const { document } = window;
+
+    const artifactCard = document.querySelector('.artifact-card[data-artifact-slug="' + slug + '"]');
+    ok(`${pad(slug, 28)} renders artifact card`, !!artifactCard);
 
     const section = document.querySelector('div.demo-section[data-cipher]');
     if (!section) { ok(`${pad(slug, 28)} has demo-section`, false); window.close(); continue; }
@@ -204,7 +217,7 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
 
   // ── Caesar ────────────────────────────────────────────────────────────
   {
-    const dom = await loadPage(path.join(CIPHERS_DIR, 'caesar.html'));
+    const dom = await loadCipherPageWithArtifact(path.join(CIPHERS_DIR, 'caesar.html'));
     const { window } = dom;
     const { document } = window;
     const msg = document.getElementById('msgInput');
@@ -238,7 +251,7 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
 
   // ── Playfair (inject all-engines.js for the decode assertion) ────────
   {
-    const dom = await loadPage(path.join(CIPHERS_DIR, 'playfair.html'), [ALL_ENGINES]);
+    const dom = await loadCipherPageWithArtifact(path.join(CIPHERS_DIR, 'playfair.html'), [ALL_ENGINES]);
     const { window } = dom;
     const { document } = window;
     const kw = document.getElementById('pf-keyword');
@@ -268,7 +281,7 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
 
   // ── Vigenère ─────────────────────────────────────────────────────────
   {
-    const dom = await loadPage(path.join(CIPHERS_DIR, 'vigenere.html'));
+    const dom = await loadCipherPageWithArtifact(path.join(CIPHERS_DIR, 'vigenere.html'));
     const { window } = dom;
     const { document } = window;
     const msg = document.getElementById('msgInput');
@@ -301,7 +314,7 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
 
   // ── Zodiac ───────────────────────────────────────────────────────────
   {
-    const dom = await loadPage(path.join(CIPHERS_DIR, 'zodiac.html'));
+    const dom = await loadCipherPageWithArtifact(path.join(CIPHERS_DIR, 'zodiac.html'));
     const { window } = dom;
     const { document } = window;
     ok('zodiac.html: zAssignLetter() defined', typeof window.zAssignLetter === 'function');
@@ -345,6 +358,17 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
         resultsArea.style.display !== 'none', `display=${resultsArea.style.display || '(empty)'}`);
     }
     window.close();
+  }
+
+  console.log('\n━━━ Part C: artifact cards across all exhibit pages ━━━\n');
+
+  for (const file of allPages) {
+    const slug = file.replace('.html', '');
+    const dom = await loadCipherPageWithArtifact(path.join(CIPHERS_DIR, file));
+    const { document, close } = dom.window;
+    const card = document.querySelector('.artifact-card[data-artifact-slug="' + slug + '"]');
+    ok(`${pad(slug, 28)} artifact card present`, !!card);
+    close();
   }
 
   console.log('\n' + '═'.repeat(70));
