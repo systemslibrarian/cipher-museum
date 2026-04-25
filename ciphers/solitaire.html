@@ -312,7 +312,7 @@
         state.deck=keyDeck(key);
         state.phase=0; state.hi=[]; state.stream=''; state.cipher=''; state.plain=''; state.plainIdx=0;
         render(); refreshStream();
-        setStatus(`<strong>Deck keyed with "${key}".</strong> The 54 cards above are the secret state shared by sender and receiver. Now click <strong>Next Phase</strong> to watch one keystream letter emerge.`);
+        setStatus(`<strong>Deck keyed with "${key}".</strong> The 54 cards below are the secret state shared by sender and receiver. Now click <strong>Next Phase</strong> to watch one keystream letter emerge.`);
         [$btnStep,$btnLetter,$btnEnc].forEach(b=>b.disabled=false);
       });
 
