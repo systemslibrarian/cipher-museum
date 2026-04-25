@@ -44,6 +44,18 @@
     .brute-text { font-family:var(--fm); font-size:.75rem; color:var(--tx2); letter-spacing:.08em; }
     .brute-row.match .brute-shift { color:var(--gold); }
     .brute-row.match .brute-text { color:var(--gold-lt); font-weight:600; }
+    /* Auto-Break ranked results */
+    .break-results { display:flex; flex-direction:column; gap:.3rem; max-height:340px; overflow-y:auto; padding-right:.25rem; }
+    .break-row { display:grid; grid-template-columns:2.4rem 1fr 4.5rem; gap:.6rem; align-items:center; padding:.45rem .6rem; background:var(--s3); border:1px solid var(--s4); border-radius:var(--r); }
+    .break-row.best { background:var(--gold-glow); border:1px solid var(--gold-b); padding:.7rem .75rem; }
+    .break-shift { font-family:var(--fm); font-size:.7rem; color:var(--tx3); text-align:right; }
+    .break-row.best .break-shift { color:var(--gold); font-weight:700; font-size:.85rem; }
+    .break-text { font-family:var(--fm); font-size:.78rem; color:var(--tx2); letter-spacing:.06em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .break-row.best .break-text { color:var(--gold-lt); font-size:.92rem; font-weight:600; }
+    .break-score { font-family:var(--fm); font-size:.62rem; color:var(--tx3); text-align:right; }
+    .break-row.best .break-score { color:var(--gold); font-weight:700; }
+    .break-rank-tag { font-family:var(--fm); font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:.4rem; }
+    .break-empty { font-family:var(--fb); font-style:italic; color:var(--tx3); font-size:.9rem; }
   </style>
 </head>
 <body>
@@ -283,14 +295,25 @@ Example (shift = 3):
       </div>
     </div>
 
-    <!-- Brute Force -->
-    <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚔️</span><span class="panel-title">Brute Force All 25 Shifts</span></div>
+    <!-- Auto-Break (chi-squared cryptanalysis) -->
+    <div class="panel" id="autobreak">
+      <div class="panel-head"><span class="panel-icon">⚔️</span><span class="panel-title">Break a Caesar Cipher</span></div>
       <div class="panel-body">
-        <p style="font-size:.88rem;margin-bottom:.75rem;">Paste a Caesar ciphertext — see all 25 decryptions at once. One of them is plaintext.</p>
-        <label class="input-label" for="bruteInput">Ciphertext to brute force</label>
-        <textarea class="museum-input" id="bruteInput" rows="2" placeholder="e.g. KHOOR ZRUOG" oninput="updateBrute()" style="font-size:.82rem;"></textarea>
-        <div class="brute-table" id="bruteTable" style="margin-top:.75rem;max-height:280px;overflow-y:auto;"></div>
+        <p style="font-size:.88rem;margin-bottom:.75rem;">Paste any Caesar ciphertext. The tool tries all 25 shifts and ranks each candidate by how close its letter frequencies are to standard English (chi-squared distance — lower is better).</p>
+        <label class="input-label" for="breakInput">Ciphertext to break</label>
+        <textarea class="museum-input" id="breakInput" rows="3" placeholder="e.g. KHOOR ZRUOG" style="font-size:.82rem;" aria-describedby="breakHelp"></textarea>
+        <div class="btn-group" style="margin-top:.75rem;">
+          <button class="btn btn-primary" id="breakRunBtn" type="button" aria-controls="breakResults">Break Cipher</button>
+          <button class="btn btn-secondary" id="breakClearBtn" type="button">Clear</button>
+        </div>
+        <p id="breakHelp" class="sr-only">Press Break Cipher to score all 25 candidate decryptions and rank them by English-likelihood.</p>
+        <div id="breakResults" class="break-results" role="region" aria-live="polite" aria-label="Ranked decryption candidates" style="margin-top:1rem;"></div>
+        <div class="callout callout-success" style="margin-top:1.25rem;">
+          <span class="callout-icon">🎓</span>
+          <div class="callout-body">
+            <p><strong>What you just witnessed.</strong> This is the cryptanalytic technique that broke Caesar ciphers in practice. Because there are only 25 possible shifts, an attacker can simply try all of them and pick the one whose letter frequencies look most like real English. The chi-squared score above measures exactly that distance: the winning row is the candidate whose letter distribution is closest to E&nbsp;12.7%, T&nbsp;9.1%, A&nbsp;8.2%, and so on. This is why short keyspaces are fatal in cryptography — and why every modern cipher has a key space astronomically larger than 25. AES-256 has 2²⁵⁶ keys, more than the number of atoms in the observable universe.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -381,6 +404,7 @@ Example (shift = 3):
 </footer>
 
 <script src="../js/ciphers/caesar.js"></script>
+<script src="../js/ciphers/caesar-break.js"></script>
 <script>
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 let mode = 'enc';
@@ -514,31 +538,56 @@ function updateFreq() {
     `Most common: ${maxCh} → Guessed shift: ${guessedShift}`;
 }
 
-// ── Brute force ──────────────────────────────────────
-function updateBrute() {
-  const txt = document.getElementById('bruteInput').value.trim();
-  const container = document.getElementById('bruteTable');
-  if (!txt) { container.innerHTML = ''; return; }
-  let html = '';
-  for (let s = 1; s <= 25; s++) {
-    const dec = caesar(txt, s, false);
-    const score = scoreEnglish(dec);
-    html += `<div class="brute-row ${score > 0.06 ? 'match' : ''}">
-      <span class="brute-shift">${s}</span>
-      <span class="brute-text">${dec.substring(0,40)}${dec.length>40?'…':''}</span>
-    </div>`;
-  }
-  container.innerHTML = html;
+// ── Auto-break (chi-squared cryptanalysis) ───────────
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
 }
 
-function scoreEnglish(txt) {
-  const common = 'ETAOINSHRDLU';
-  const upper = txt.toUpperCase().replace(/[^A-Z]/g,'');
-  if (!upper.length) return 0;
-  let score = 0;
-  for (const ch of upper) if (common.includes(ch)) score++;
-  return score / upper.length;
+function renderBreakResults(candidates) {
+  const box = document.getElementById('breakResults');
+  if (!box) return;
+  if (!candidates.length) { box.innerHTML = ''; return; }
+  let html = '<div class="break-rank-tag">Most likely → least likely (chi-squared distance, lower = better)</div>';
+  candidates.forEach((c, i) => {
+    const truncated = c.plaintext.length > 80 ? c.plaintext.slice(0, 80) + '…' : c.plaintext;
+    const cls = i === 0 ? 'break-row best' : 'break-row';
+    html += `<div class="${cls}">
+      <span class="break-shift" aria-label="Shift ${c.shift}">+${c.shift}</span>
+      <span class="break-text" title="${escapeHtml(c.plaintext)}">${escapeHtml(truncated)}</span>
+      <span class="break-score" aria-label="Chi-squared score">${c.score.toFixed(1)}</span>
+    </div>`;
+  });
+  box.innerHTML = html;
 }
+
+function runAutoBreak() {
+  const txt = document.getElementById('breakInput').value.trim();
+  const box = document.getElementById('breakResults');
+  if (!txt) {
+    box.innerHTML = '<p class="break-empty">Paste a Caesar ciphertext above and press Break Cipher.</p>';
+    return;
+  }
+  if (!window.CaesarBreak) {
+    box.innerHTML = '<p class="break-empty">Auto-break engine failed to load.</p>';
+    return;
+  }
+  const ranked = window.CaesarBreak.breakCaesar(txt);
+  renderBreakResults(ranked);
+}
+
+function clearAutoBreak() {
+  document.getElementById('breakInput').value = '';
+  document.getElementById('breakResults').innerHTML = '';
+}
+
+document.getElementById('breakRunBtn').addEventListener('click', runAutoBreak);
+document.getElementById('breakClearBtn').addEventListener('click', clearAutoBreak);
+// Allow Ctrl/Cmd+Enter inside the textarea to run the break.
+document.getElementById('breakInput').addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runAutoBreak(); }
+});
 
 function revealAnswer() {
   document.getElementById('answerReveal').style.display = 'block';
