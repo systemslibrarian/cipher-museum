@@ -101,13 +101,18 @@
           Step through the actual deck operations one at a time. Watch the two jokers shuffle, the triple-cut swap segments, and the keystream letter emerge from the count-cut. Each click advances <strong>one phase</strong> of the algorithm; "Next Letter" runs all five phases until a usable keystream letter is produced.
         </p>
 
+        <div class="mode-toggle" style="margin-bottom:.6rem;">
+          <button class="mode-btn active" id="sv-modeEnc" type="button">Encrypt</button>
+          <button class="mode-btn" id="sv-modeDec" type="button">Decrypt</button>
+        </div>
+
         <div class="input-group" style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end;">
           <div style="flex:1;min-width:170px;">
             <label class="input-label" for="sv-key">Deck Key (letters only)</label>
             <input type="text" class="museum-input" id="sv-key" value="CRYPTONOMICON" style="text-transform:uppercase;">
           </div>
           <div style="flex:1;min-width:170px;">
-            <label class="input-label" for="sv-msg">Plaintext (optional)</label>
+            <label class="input-label" for="sv-msg"><span id="sv-msgLabel">Plaintext</span> (optional)</label>
             <input type="text" class="museum-input" id="sv-msg" value="DO NOT USE PC" style="text-transform:uppercase;">
           </div>
         </div>
@@ -116,7 +121,7 @@
           <button class="btn btn-primary" id="sv-init">① Key &amp; Initialize Deck</button>
           <button class="btn btn-secondary" id="sv-step" disabled>▶ Next Phase</button>
           <button class="btn btn-secondary" id="sv-letter" disabled>⏭ Next Keystream Letter</button>
-          <button class="btn btn-secondary" id="sv-encipher" disabled>🔒 Encipher Whole Message</button>
+          <button class="btn btn-secondary" id="sv-encipher" disabled><span id="sv-encLabel">🔒 Encipher Whole Message</span></button>
           <button class="btn btn-secondary" id="sv-reset">⟲ Reset</button>
         </div>
 
@@ -132,9 +137,50 @@
         </div>
 
         <div id="sv-cipherWrap" style="margin-top:.7rem;display:none;">
-          <div style="font-size:.78rem;color:var(--tx3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;">Plaintext → Ciphertext</div>
+          <div style="font-size:.78rem;color:var(--tx3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;"><span id="sv-cipherHdr">Input → Output</span></div>
           <div id="sv-cipher" style="font-family:var(--fm);font-size:.95rem;color:var(--tx);background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:.55rem .7rem;letter-spacing:.1em;word-break:break-all;line-height:1.7;"></div>
         </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🃏</span><span class="panel-title">Operator's Field Manual</span></div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;color:var(--tx2);margin-bottom:.6rem;">Distilled from <a href="https://steemit.com/steemiteducation/@shai-hulud/solitaire-encryption-low-tech-high-security-a-how-to" target="_blank" rel="noopener">@shai-hulud's Solitaire how-to</a> and Schneier's original spec — the conventions that make a hand-cipher actually survive contact with the real world.</p>
+        <table class="cipher-table">
+          <thead><tr><th style="width:32%;">Convention</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>X-pad to multiples of 5</strong></td>
+              <td>Pad the plaintext with <code>X</code> until its length is a multiple of 5. Both sides know <code>X</code> at the end of a word is filler. Eliminates the cribs that obvious sentence boundaries would give an attacker.</td>
+            </tr>
+            <tr>
+              <td><strong>Group output in 5-letter blocks</strong></td>
+              <td>Telegraph and radio convention since the 19th century. Makes the cipher easy to copy by hand without losing your place — and it hides word lengths.</td>
+            </tr>
+            <tr>
+              <td><strong>Identical decks, identical key</strong></td>
+              <td>Sender and receiver must start from the <em>exact same</em> 54-card ordering. The key (a passphrase, or a memorized initial deck) is the secret. The cipher is symmetric: same procedure for encrypt and decrypt — only the final <code>±</code> changes.</td>
+            </tr>
+            <tr>
+              <td><strong>Never reuse a deck for two messages</strong></td>
+              <td>Two messages on the same keystream is a classic two-time-pad break. After sending, re-key from a fresh passphrase or shuffle to a new agreed-on order.</td>
+            </tr>
+            <tr>
+              <td><strong>Mind the jokers</strong></td>
+              <td>Both jokers count as 53 in the count-cut and the top-card lookup. If the lookup card itself is a joker, <em>discard</em> the output and run the algorithm again — never write a joker into the keystream.</td>
+            </tr>
+            <tr>
+              <td><strong>One slip = gibberish forever after</strong></td>
+              <td>The deck is the state; one mis-counted card desynchronizes sender and receiver permanently. Slow is smooth. Smooth is fast. Recount every step.</td>
+            </tr>
+            <tr>
+              <td><strong>Destroy the deck after use</strong></td>
+              <td>Burn, shuffle thoroughly, or return to bridge order. A deck left in its keyed state is a written copy of your key sitting on the table.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:.85rem;color:var(--tx3);margin-top:.7rem;"><strong>Decryption recipe:</strong> Identical key → identical deck → identical keystream. Then <code>p = (c − k − 1) mod 26 + 1</code> — toggle the <em>Decrypt</em> button above to watch it run in reverse.</p>
       </div>
     </div>
 
@@ -221,6 +267,25 @@
       const $streamWrap=document.getElementById('sv-streamWrap');
       const $cipher=document.getElementById('sv-cipher');
       const $cipherWrap=document.getElementById('sv-cipherWrap');
+      const $modeEnc=document.getElementById('sv-modeEnc');
+      const $modeDec=document.getElementById('sv-modeDec');
+      const $msgLabel=document.getElementById('sv-msgLabel');
+      const $encLabel=document.getElementById('sv-encLabel');
+      let mode='enc'; // 'enc' or 'dec'
+      function setMode(m){
+        mode=m;
+        $modeEnc.classList.toggle('active', m==='enc');
+        $modeDec.classList.toggle('active', m==='dec');
+        $msgLabel.textContent = m==='enc' ? 'Plaintext' : 'Ciphertext';
+        $encLabel.textContent = m==='enc' ? '🔒 Encipher Whole Message' : '🔓 Decipher Whole Message';
+      }
+      $modeEnc.addEventListener('click', ()=>setMode('enc'));
+      $modeDec.addEventListener('click', ()=>setMode('dec'));
+      const $cipherHdr=document.getElementById('sv-cipherHdr');
+      function syncHdr(){ $cipherHdr.textContent = mode==='enc' ? 'Plaintext → Ciphertext' : 'Ciphertext → Plaintext'; }
+      $modeEnc.addEventListener('click', syncHdr);
+      $modeDec.addEventListener('click', syncHdr);
+      syncHdr();
 
       function render(){
         if(!state.deck){ $deck.innerHTML='<div style="grid-column:1/-1;color:var(--tx3);font-size:.85rem;padding:.5rem;">Deck not initialized.</div>'; return; }
@@ -305,11 +370,13 @@
             const L=String.fromCharCode(64+v);
             state.stream+=L;
             setStatus(`<strong>Phase 5 · Keystream output!</strong> Top card <strong>${tlab.rank}${tlab.suit}</strong> (value ${cnt}) → the card at position ${cnt+1} is <strong>${olab.rank}${olab.suit}</strong> (value ${out}). ${out} mod 26 = ${v} → letter <strong style="color:var(--gold);">${L}</strong>.`);
-            // if there's plaintext, encipher one letter
+            // if there's input text, process one letter (encrypt or decrypt)
             if(state.plainIdx < clean($msg.value).length){
               const p=clean($msg.value)[state.plainIdx];
               const pv=p.charCodeAt(0)-64;
-              const cv=((pv+v-1)%26)+1;
+              let cv;
+              if(mode==='enc'){ cv=((pv+v-1)%26)+1; }
+              else { cv=((pv-v+26-1)%26)+1; if(cv===0) cv=26; }
               const c=String.fromCharCode(64+cv);
               state.plain+=p; state.cipher+=c; state.plainIdx++;
             }
@@ -337,7 +404,9 @@
         while(state.plainIdx<msg.length && safety++<5000){
           advancePhase();
         }
-        setStatus(`<strong>Done.</strong> Enciphered ${msg.length} letter(s). Final keystream: <code>${state.stream}</code>. Plaintext + keystream = ciphertext (mod 26).`);
+        const verb = mode==='enc' ? 'Enciphered' : 'Deciphered';
+        const formula = mode==='enc' ? 'plaintext + keystream' : 'ciphertext − keystream';
+        setStatus(`<strong>Done.</strong> ${verb} ${msg.length} letter(s). Final keystream: <code>${state.stream}</code>. ${formula} (mod 26) gives the result above.`);
       });
 
       $btnReset.addEventListener('click', ()=>{
