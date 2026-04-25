@@ -138,7 +138,7 @@
   <div class="exhibit-main">
 
     <div class="cipher-significance">
-      <h3>Why This Matters</h3>
+      <h2>Why This Matters</h2>
       <p>In December 1801, Robert Patterson — a respected American mathematician and vice provost of the University of Pennsylvania — sent President Thomas Jefferson a cipher he believed could never be broken. Jefferson, a sophisticated cryptographer in his own right (designer of the wheel cipher in <a href="jefferson-disk.html">Hall VII</a>), was so impressed that he forwarded the system to Secretary of State James Madison with an endorsement calling it "the most perfect cipher he had ever seen."</p>
       <p style="margin-top:1rem;">Patterson included a specimen ciphertext for Jefferson to decrypt. The key followed in a separate letter. Jefferson tried. <strong>Jefferson failed.</strong> He wrote back asking for hints. Madison tried. Madison failed. The cipher was archived in Jefferson's papers, unresolved.</p>
       <p style="margin-top:1rem;">It stayed unresolved for <strong>206 years</strong>. In 2007, Lawren Smithline at Princeton's Center for Communications Research read about the cipher in an NSA history journal, recognized it as a hill-climbing problem, and broke it. The plaintext turned out to be the opening lines of the Declaration of Independence — Patterson had used a patriotic source text for his demonstration. This exhibit walks through Patterson's four-layer construction, Jefferson's failed attempts, and the modern search algorithm that finally cracked it.</p>
@@ -163,7 +163,7 @@
         <p>Patterson's design stacks four independent transformations on top of an N-row by M-column grid. The key is a list of small numbers — one set per row.</p>
 
         <div class="layer-step">
-          <h4>Layer 1 — Write the plaintext into a grid (column-by-column)</h4>
+          <h3>Layer 1 — Write the plaintext into a grid (column-by-column)</h3>
           <p>Take the plaintext and write it into a grid of N rows. The grid is read column-by-column. Patterson typically used 40 rows.</p>
           <div class="layer-grid">
             <div class="grid-cell">W H E N</div>
@@ -176,7 +176,7 @@
         </div>
 
         <div class="layer-step">
-          <h4>Layer 2 — Insert random junk letters at the start of each row</h4>
+          <h3>Layer 2 — Insert random junk letters at the start of each row</h3>
           <p>For each row, insert a secret number of meaningless letters at the start. The count varies row-by-row according to the key. The decryptor must know exactly how many junk letters to skip in each row.</p>
           <div class="layer-grid">
             <div class="grid-cell"><span style="color:var(--tx3)">QXJ</span> W H E N</div>
@@ -189,12 +189,12 @@
         </div>
 
         <div class="layer-step">
-          <h4>Layer 3 — Right-shift each row by a different amount</h4>
+          <h3>Layer 3 — Right-shift each row by a different amount</h3>
           <p>Cyclically shift each row right by a row-specific amount (also from the key). What falls off the right wraps back to the left. Different shifts on different rows scramble the column structure that any straightforward column-reader attack would rely on.</p>
         </div>
 
         <div class="layer-step">
-          <h4>Layer 4 — Permute the row order</h4>
+          <h3>Layer 4 — Permute the row order</h3>
           <p>Finally, shuffle the rows themselves into a new secret order. The rows are no longer in their natural sequence — row 17 might now be the 1st row of the ciphertext, row 4 might be the 2nd, etc. The ciphertext is then read off column-by-column from this scrambled grid.</p>
         </div>
 

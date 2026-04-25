@@ -10,7 +10,8 @@
     "test:comprehensive": "node tests/test-comprehensive.js",
     "test:demos": "node tests/test-demo-pages.js",
     "test:a11y": "node tests/test-accessibility.js",
-    "test:mobile": "node tests/test-mobile.js"
+    "test:mobile": "node tests/test-mobile.js",
+    "test:structural": "node tests/test-structural.js"
   },
   "repository": {
     "type": "git",
