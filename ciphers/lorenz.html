@@ -157,8 +157,69 @@ Total period: LCM of all wheels
     </div>
 
     <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚖️</span><span class="panel-title">Enigma vs Lorenz — what changed when Enigma was no longer enough</span></div>
+      <div class="panel-body">
+        <p style="margin-top:0;">Both ran in parallel through the war, and both lived in the same Bletchley campus. They are the same family of problem solved with very different ambitions — and they failed for very different reasons.</p>
+        <table class="cipher-table">
+          <thead><tr><th></th><th style="color:var(--gold);">Enigma (1923 / field)</th><th style="color:var(--gold);">Lorenz SZ40/42 (1940 / strategic)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Who used it</strong></td><td>Army, Navy, Luftwaffe — every front-line unit</td><td>OKW &harr; Hitler &amp; senior commanders only</td></tr>
+            <tr><td><strong>Operator model</strong></td><td>Hand-typed, lamp-board readout, telegraph the result</td><td>Inline teleprinter attachment — paper tape in, encrypted tape out, fully automatic</td></tr>
+            <tr><td><strong>Cipher primitive</strong></td><td>Polyalphabetic substitution via 3–4 stepping rotors + reflector + plugboard</td><td>Vernam XOR of 5-bit Baudot characters with a 12-wheel pseudo-random keystream</td></tr>
+            <tr><td><strong>Key space</strong></td><td>≈ 1.6 × 10<sup>20</sup> (with plugboard)</td><td>≈ 1.6 × 10<sup>19</sup> wheel period — but reusable settings, not a one-time pad</td></tr>
+            <tr><td><strong>Fatal weakness</strong></td><td>Reflector → no letter encrypts to itself → cribs eliminate placements</td><td>Reusing a wheel setting collapses two messages into a depth (P<sub>A</sub> ⊕ P<sub>B</sub>)</td></tr>
+            <tr><td><strong>What broke it</strong></td><td>Cribs + electromechanical Bombe (Turing, Welchman, 1940)</td><td>One operator's depth + Tutte's wheel reconstruction (1942) + Colossus (1944)</td></tr>
+            <tr><td><strong>What it built</strong></td><td>Cryptanalysis as an industrial discipline — 10 000 staff, daily key recovery</td><td>Programmable electronic computing — Colossus is the direct ancestor of every machine you own</td></tr>
+            <tr><td><strong>Modern echo</strong></td><td>Side-channel and operational security still beat strong primitives</td><td>Nonce reuse on AES-GCM, IV collisions on WEP — the depth attack, unchanged</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.95rem;color:var(--tx3);margin:1rem 0 0;font-style:italic;">If Enigma is the canonical example of <em>strong primitive defeated by usage patterns</em>, Lorenz is the canonical example of <em>strong primitive defeated by a single repeated key</em>. Eight decades later, both lessons are still being relearned in production code.</p>
+      </div>
+    </div>
+
+    <div class="panel">
       <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
-      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Known Plaintext + Depth Attack (1941)</div><div class="attack-diff">Complexity: Extreme · Required Colossus</div><p class="attack-desc">The operator's mistake (same settings, similar plaintext) created a "depth" — two messages XORed together give P1 XOR P2 (the keys cancel). From this, Tutte deduced the complete wheel structure without seeing the machine — a cryptanalytic feat considered one of the greatest intellectual achievements of WWII. Colossus (1943) automated the wheel-setting problem, running at 5,000 characters per second.</p></div></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Known Plaintext + Depth Attack (1941)</div><div class="attack-diff">Complexity: Extreme · Required Colossus</div><p class="attack-desc">The operator's mistake (same settings, similar plaintext) created a "depth" — two messages XORed together give P1 XOR P2 (the keys cancel). From this, Tutte deduced the complete wheel structure without seeing the machine — a cryptanalytic feat considered one of the greatest intellectual achievements of WWII. Colossus (1943) automated the wheel-setting problem, running at 5,000 characters per second.</p></div>
+
+      <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);letter-spacing:.06em;margin:2rem 0 .75rem;">The depth attack, in your browser</h3>
+      <p>Two ciphertexts encrypted under the <em>same</em> Lorenz keystream. XOR them together and the keystream cancels — what remains is <code>P1 ⊕ P2</code>, a "depth" that leaks structure. Drag a guessed crib across the depth: where the result reads as English, the crib is correct in one message and the slice you recover is the matching plaintext from the other.</p>
+
+      <div class="demo-panel" style="margin-top:1rem;border-color:var(--gold-b);">
+        <div class="demo-head"><span class="panel-icon">🔍</span><span class="demo-title">Two-Time-Pad Crib Drag</span></div>
+        <div class="demo-body">
+          <div class="input-group">
+            <label class="input-label" for="lz-c1">Ciphertext A (hex)</label>
+            <textarea class="museum-input" id="lz-c1" rows="2" autocomplete="off" spellcheck="false" style="font-family:var(--fm,monospace);"></textarea>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="lz-c2">Ciphertext B (hex) — <em>encrypted under the same keystream</em></label>
+            <textarea class="museum-input" id="lz-c2" rows="2" autocomplete="off" spellcheck="false" style="font-family:var(--fm,monospace);"></textarea>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="lz-depth">C<sub>A</sub> ⊕ C<sub>B</sub> = P<sub>A</sub> ⊕ P<sub>B</sub> &nbsp;<span style="color:var(--tx3);font-style:italic;font-weight:normal;">(the keystream is gone)</span></label>
+            <textarea class="museum-input" id="lz-depth" rows="2" readonly style="font-family:var(--fm,monospace);color:var(--gold);background:#0a0a12;"></textarea>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="lz-crib">Guessed crib (try <code>ATTACK</code>, <code>WEHRMACHT</code>, <code>OBERKOMMANDO</code>)</label>
+            <input class="museum-input" id="lz-crib" type="text" value="ATTACK" autocomplete="off" spellcheck="false">
+          </div>
+          <button class="btn btn-primary" id="lz-drag" type="button">Drag crib across depth</button>
+          <div id="lz-results" style="margin-top:1rem;">
+            <span class="output-empty">Click "Drag crib across depth" to see what the crib reveals at every offset. The top hits — readable English — are positions where your guess is correct.</span>
+          </div>
+          <p style="font-size:.9rem;color:var(--tx3);margin:.75rem 0 0;font-style:italic;">
+            What you just witnessed: a single repeated key turns a Vernam cipher into a paper exercise. The keystream cancels in the XOR, the plaintexts leak through each other, and one good crib unzips both messages. Bill Tutte recovered the entire 12-wheel structure of Lorenz from <em>one</em> 4 000-character depth — without ever seeing the machine.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout callout-warn" style="margin-top:1.5rem;">
+        <span class="callout-icon">⚠</span>
+        <div class="callout-body">
+          <p><strong>Why this still matters.</strong> Every modern stream cipher — RC4, ChaCha20, AES-CTR, AES-GCM — is a Vernam construction with a generated keystream. The depth attack you just ran is bit-for-bit identical to the WEP IV-collision attack that broke Wi-Fi (2001), the nonce-reuse attack on AES-GCM (still rediscovered in audits), and the forbidden-attack on TLS 1.2 GCM cipher suites. The cryptography textbooks call it <em>two-time pad</em>. The wartime cryptanalysts called it <em>depth</em>. The mistake is the same mistake.</p>
+        </div>
+      </div>
+      </div>
     </div>
 
     <div class="panel">
@@ -303,6 +364,8 @@ With all 12 wheels: period before repetition
   </div>
 </footer>
 <script src="../js/ciphers/all-engines.js"></script>
+<script src="../js/ciphers/lorenz-depth.js"></script>
+<script src="../js/ciphers/lorenz-page.js" defer></script>
 <script src="../js/demo-loader.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
