@@ -11,7 +11,8 @@
     "test:demos": "node tests/test-demo-pages.js",
     "test:a11y": "node tests/test-accessibility.js",
     "test:mobile": "node tests/test-mobile.js",
-    "test:structural": "node tests/test-structural.js"
+    "test:structural": "node tests/test-structural.js",
+    "test:links": "node tests/test-local-links.js"
   },
   "repository": {
     "type": "git",

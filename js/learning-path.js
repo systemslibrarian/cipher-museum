@@ -6,16 +6,16 @@
  */
 (function(){
   var HALLS = [
-    {id:'ancient',      label:'Hall I',   name:'Birth of Cryptography', href:'halls/ancient.html'},
+    {id:'ancient',      label:'Hall I',   name:'World Origins of Cryptography', href:'halls/ancient.html'},
     {id:'substitution', label:'Hall II',  name:'Classical Substitution', href:'halls/substitution.html'},
     {id:'polyalphabetic',label:'Hall III',name:'Polyalphabetic',         href:'halls/polyalphabetic.html'},
     {id:'transposition',label:'Hall IV',  name:'Transposition',          href:'halls/transposition.html'},
     {id:'military',     label:'Hall V',   name:'Military & Spy',         href:'halls/military.html'},
     {id:'civil-war',    label:'CW',       name:'Civil War Gallery',      href:'halls/civil-war.html'},
-    {id:'machines',     label:'Hall VI',  name:'Mechanical Machines',     href:'halls/machines.html'},
-    {id:'puzzle',       label:'Hall VII', name:'Puzzle Ciphers',          href:'halls/puzzle.html'},
-    {id:'unbreakable',  label:'Final',    name:'Unbreakable Ciphers',    href:'halls/unbreakable.html'},
-    {id:'codebreakers', label:'⚜',       name:'Hall of Codebreakers',   href:'halls/codebreakers.html'}
+    {id:'machines',     label:'Hall VII', name:'Mechanical Machines',     href:'halls/machines.html'},
+    {id:'puzzle',       label:'Hall VIII',name:'Puzzle Ciphers',          href:'halls/puzzle.html'},
+    {id:'unbreakable',  label:'Hall IX',  name:'The Unbreakable',        href:'halls/unbreakable.html'},
+    {id:'codebreakers', label:'Hall X',   name:'Hall of Codebreakers',   href:'halls/codebreakers.html'}
   ];
 
   var QUIZZES = {

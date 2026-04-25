@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * THE CIPHER MUSEUM — Automated Engine Test Suite
- * Tests all 35 cipher engines for:
+ * Tests every registered cipher engine in window.CipherEngines for:
  *   1. Engine exists and has encode/decode methods
  *   2. Encode produces non-empty output
  *   3. Decode(Encode(plaintext)) roundtrips back to plaintext (where applicable)
@@ -176,10 +176,10 @@ const tests = [
    ══════════════════════════════════════════════════════════════ */
 console.log('╔══════════════════════════════════════════════════════╗');
 console.log('║   THE CIPHER MUSEUM — Engine Test Suite             ║');
-console.log('║   Testing all 42 cipher engines                     ║');
+console.log('║   Testing all registered cipher engines             ║');
 console.log('╚══════════════════════════════════════════════════════╝');
 
-/* ── 1. Check that all 40 engines exist ── */
+/* ── 1. Check that the core engines exist ── */
 section('Engine Existence');
 const expectedEngines = [
   'caesar', 'monoalphabetic', 'polybius', 'homophonic', 'playfair', 'hill',

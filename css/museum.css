@@ -549,7 +549,9 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 @media(max-width:600px){
   .ticker-strip{padding:.6rem 0}
   .ticker-item{font-size:.7rem;letter-spacing:.1em;gap:.4rem;min-height:40px}
-  .ticker-track{gap:2rem;animation-duration:30s}
+  /* Slower on mobile — narrow viewport reveals each item for less time, so a
+     30s loop felt frantic on phones. 90s keeps text readable while scrolling. */
+  .ticker-track{gap:2rem;animation-duration:90s}
 }
 
 /* ── Page hero: tighter on mobile ── */

@@ -1705,7 +1705,7 @@
     },
     {
       "t": "M-94 Strip Cipher",
-      "u": "ciphers/m94.html",
+      "u": "ciphers/m-94.html",
       "k": "cipher",
       "h": "Hall VII: Mechanical Cipher Machines",
       "c": "1922–1942",
@@ -1782,7 +1782,7 @@
     },
     {
       "t": "Morse Code",
-      "u": "ciphers/morse-code.html",
+      "u": "ciphers/morse.html",
       "k": "cipher",
       "h": "Hall II: Substitution Ciphers",
       "c": "1838",
@@ -2583,6 +2583,96 @@
         "games",
         "pop culture"
       ]
+    },
+    {
+      "t": "Agnes Meyer Driscoll",
+      "u": "ciphers/agnes-driscoll.html",
+      "k": "person",
+      "h": "Hall X: Hall of Codebreakers",
+      "c": "1889–1971",
+      "b": "Biography",
+      "s": "US Navy cryptanalyst — \"Madame X\" — who broke Japanese naval codes between the world wars and trained a generation of US codebreakers.",
+      "g": ["biography", "us navy", "japanese naval codes", "interwar", "wwii"]
+    },
+    {
+      "t": "Bill Tutte",
+      "u": "ciphers/bill-tutte.html",
+      "k": "person",
+      "h": "Hall X: Hall of Codebreakers",
+      "c": "1917–2002",
+      "b": "Biography",
+      "s": "Bletchley Park cryptanalyst who reverse-engineered the Lorenz SZ40 cipher machine from ciphertext alone — one of the greatest cryptanalytic feats in history.",
+      "g": ["biography", "bletchley park", "lorenz", "tunny", "wwii"]
+    },
+    {
+      "t": "Elizebeth Smith Friedman",
+      "u": "ciphers/elizebeth-friedman.html",
+      "k": "person",
+      "h": "Hall X: Hall of Codebreakers",
+      "c": "1892–1980",
+      "b": "Biography",
+      "s": "Pioneering US codebreaker who broke Prohibition-era smuggling codes and Nazi spy ring ciphers in South America for the Coast Guard and FBI.",
+      "g": ["biography", "us coast guard", "smuggling", "nazi spy rings", "wwii"]
+    },
+    {
+      "t": "Joan Clarke",
+      "u": "ciphers/joan-clarke.html",
+      "k": "person",
+      "h": "Hall X: Hall of Codebreakers",
+      "c": "1917–1996",
+      "b": "Biography",
+      "s": "Bletchley Park cryptanalyst in Hut 8 who worked alongside Alan Turing on Naval Enigma — one of the few women promoted to senior cryptanalyst rank.",
+      "g": ["biography", "bletchley park", "enigma", "naval enigma", "wwii"]
+    },
+    {
+      "t": "Leo Marks",
+      "u": "ciphers/leo-marks.html",
+      "k": "person",
+      "h": "Hall X: Hall of Codebreakers",
+      "c": "1920–2001",
+      "b": "Biography",
+      "s": "SOE cryptographer who designed silk one-time-pad codes for agents in occupied Europe and authored the poem-code memoir Between Silk and Cyanide.",
+      "g": ["biography", "soe", "one-time pad", "poem code", "wwii"]
+    },
+    {
+      "t": "M-94 Strip Cipher",
+      "u": "ciphers/m-94.html",
+      "k": "cipher",
+      "h": "Hall VII: Mechanical Cipher Machines",
+      "c": "1922–1942",
+      "b": "Broken (frequency analysis)",
+      "s": "US Army strip cipher device based on Jefferson Disk design — standard equipment from WWI through WWII.",
+      "g": ["strip", "machine", "us army", "jefferson", "disk"]
+    },
+    {
+      "t": "Mary Stuart Castelnau Letters",
+      "u": "ciphers/mary-stuart-castelnau-letters.html",
+      "k": "cipher",
+      "h": "Hall X: Hall of Codebreakers",
+      "c": "1578–1584",
+      "b": "Solved (Lasry et al., 2023)",
+      "s": "57 enciphered letters from Mary, Queen of Scots to Michel de Castelnau, decoded in 2023 by Lasry, Biermann, and Tomokiyo using hill-climbing on a homophonic nomenclator.",
+      "g": ["nomenclator", "homophonic", "mary stuart", "lasry", "rediscovered"]
+    },
+    {
+      "t": "Morse Code",
+      "u": "ciphers/morse.html",
+      "k": "cipher",
+      "h": "Hall II: Substitution Ciphers",
+      "c": "1838",
+      "b": "Not a cipher (public encoding)",
+      "s": "International encoding system using dots and dashes — historically confused with encryption but actually a public code.",
+      "g": ["encoding", "morse", "telegraph", "dots dashes"]
+    },
+    {
+      "t": "Patterson Cipher for Jefferson",
+      "u": "ciphers/patterson-jefferson-cipher.html",
+      "k": "cipher",
+      "h": "Hall II: Classical Substitution",
+      "c": "1801",
+      "b": "Solved (Lasry, 2009)",
+      "s": "Robert Patterson's columnar transposition with line-shuffling and random null padding, sent to Thomas Jefferson and unsolved until George Lasry broke it in 2009.",
+      "g": ["transposition", "columnar", "jefferson", "patterson", "lasry"]
     }
   ]
 }

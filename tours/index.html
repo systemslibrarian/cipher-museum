@@ -90,8 +90,9 @@
   }
 
   TOURS.forEach(function(t){
+    if (typeof fetch !== 'function') return;
     fetch(t.file)
-      .then(function(r){ return r.json(); })
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(data){
         var visited = getVisitedCount(t.id, data.stops.length);
         var pct = Math.round((visited / data.stops.length)*100);
@@ -105,7 +106,8 @@
           '<div class="tour-meta">' + data.stops.length + ' stops · ' + visited + ' visited</div>' +
           '<div class="tour-progress-bar"><div class="tour-progress-fill" style="width:' + pct + '%"></div></div>';
         grid.appendChild(tile);
-      });
+      })
+      .catch(function(){ /* skip tours that fail to load rather than break the grid */ });
   });
 })();
 </script>

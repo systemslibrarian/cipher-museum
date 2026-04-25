@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * THE CIPHER MUSEUM — Deep Cipher Test Suite
- * Comprehensive edge-case, boundary, and correctness tests for all 35 engines.
+ * Comprehensive edge-case, boundary, and correctness tests for every
+ * registered engine in window.CipherEngines.
  *
  * Categories:
  *   A. Edge cases       — empty input, single char, full alphabet

@@ -90,6 +90,94 @@ for (const file of files) {
     if (!/\brel\s*=\s*["'][^"']*noopener/i.test(m[0])) unsafe.push(m[0].slice(0, 80));
   }
   ok(`${rel}: target="_blank" links include rel="noopener"`, unsafe.length === 0, unsafe[0]);
+
+  // 6. Form labels and aria references must point at real ids on the same page
+  const ids = new Set();
+  for (const m of html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)) ids.add(m[1]);
+  const badLabel = [];
+  for (const m of html.matchAll(/<label\b[^>]*\bfor\s*=\s*["']([^"']+)["']/gi)) {
+    if (!ids.has(m[1])) badLabel.push(m[1]);
+  }
+  ok(`${rel}: <label for="..."> targets exist`, badLabel.length === 0, badLabel[0]);
+
+  const badAria = [];
+  for (const attr of ['aria-labelledby', 'aria-describedby', 'aria-controls', 'aria-owns']) {
+    const re = new RegExp('\\b' + attr + '\\s*=\\s*["\']([^"\']+)["\']', 'gi');
+    for (const m of html.matchAll(re)) {
+      for (const r of m[1].split(/\s+/).filter(Boolean)) if (!ids.has(r)) badAria.push(`${attr}="${r}"`);
+    }
+  }
+  ok(`${rel}: aria-* id references exist`, badAria.length === 0, badAria[0]);
+
+  // 7. No stale legacy labels / counts in user-facing copy
+  const stale = [
+    [/\bFinal Hall\b/, 'Final Hall'],
+    [/\bBirth of Cryptography\b/, 'Birth of Cryptography'],
+    [/2,500\s+[Yy]ears\s+of\s+(Encryption|Secrets|Cryptographic|cryptographic|Encryption)/, '2,500 Years of …'],
+    [/2,400\s+[Yy]ears\s+of\s+Encryption/, '2,400 Years of Encryption'],
+  ];
+  const hits = [];
+  for (const [re, label] of stale) if (re.test(html)) hits.push(label);
+  ok(`${rel}: no stale legacy labels in copy`, hits.length === 0, hits.join(', '));
+
+  // 8. <a href=""> must not be empty
+  let emptyHref = false;
+  for (const _ of html.matchAll(/<a\b[^>]*\bhref\s*=\s*["']\s*["']/gi)) { emptyHref = true; break; }
+  ok(`${rel}: no empty href attributes`, !emptyHref);
+
+  // 9. Inline alt text must not be a placeholder token
+  const placeholderAlts = [];
+  for (const m of html.matchAll(/\balt\s*=\s*["'](TODO|TBD|todo|placeholder|image|alt)["']/gi)) {
+    placeholderAlts.push(m[1]);
+  }
+  ok(`${rel}: <img alt> not placeholder`, placeholderAlts.length === 0, placeholderAlts[0]);
+}
+
+// JS-level checks: every fetch() call site should guard against missing fetch
+const jsDir = path.join(REPO, 'js');
+function listJs(dir, out = []) {
+  for (const f of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, f.name);
+    if (f.isDirectory()) listJs(p, out);
+    else if (f.name.endsWith('.js')) out.push(p);
+  }
+  return out;
+}
+if (fs.existsSync(jsDir)) {
+  for (const jsFile of listJs(jsDir)) {
+    const rel = path.relative(REPO, jsFile).replace(/\\/g, '/');
+    const src = fs.readFileSync(jsFile, 'utf8');
+    if (/\bfetch\s*\(/.test(src)) {
+      ok(`${rel}: fetch() guarded by typeof check`,
+        /typeof\s+fetch\s*[!=]==?\s*['"]function['"]/.test(src));
+    }
+  }
+}
+
+// JSON validity for shipped data files
+const dataDir = path.join(REPO, 'data');
+if (fs.existsSync(dataDir)) {
+  function listJson(dir, out = []) {
+    for (const f of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, f.name);
+      if (f.isDirectory()) listJson(p, out);
+      else if (f.name.endsWith('.json')) out.push(p);
+    }
+    return out;
+  }
+  for (const jf of listJson(dataDir)) {
+    const rel = path.relative(REPO, jf).replace(/\\/g, '/');
+    let ok2 = true;
+    try { JSON.parse(fs.readFileSync(jf, 'utf8')); }
+    catch (e) { ok2 = false; }
+    ok(`${rel}: valid JSON`, ok2);
+  }
+}
+const sidx = path.join(REPO, 'js', 'search-index.json');
+if (fs.existsSync(sidx)) {
+  let ok2 = true;
+  try { JSON.parse(fs.readFileSync(sidx, 'utf8')); } catch (e) { ok2 = false; }
+  ok('js/search-index.json: valid JSON', ok2);
 }
 
 // CSS-level checks

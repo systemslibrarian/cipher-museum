@@ -293,11 +293,18 @@
 </footer>
 
 <script>
-// Intersection observer for fade-up animations
-var io = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) { if (e.isIntersecting) { e.target.style.animationPlayState='running'; io.unobserve(e.target); }});
-}, {threshold:.1});
-document.querySelectorAll('.fade-up').forEach(function(el) { el.style.animationPlayState='paused'; io.observe(el); });
+// Intersection observer for fade-up animations (graceful fallback for older browsers)
+(function(){
+  var els = document.querySelectorAll('.fade-up');
+  if (typeof IntersectionObserver === 'undefined') {
+    els.forEach(function(el){ el.style.animationPlayState = 'running'; });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.style.animationPlayState='running'; io.unobserve(e.target); }});
+  }, {threshold:.1});
+  els.forEach(function(el) { el.style.animationPlayState='paused'; io.observe(el); });
+})();
 </script>
 
 <!-- Playground engine (self-contained, no external deps) -->

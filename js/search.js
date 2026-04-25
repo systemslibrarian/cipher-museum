@@ -1,7 +1,8 @@
 /**
  * THE CIPHER MUSEUM — Site Search
  * Loads /js/search-index.json and provides ranked substring + token matching
- * across 63 ciphers, 11 halls, and 12+ key pages.
+ * across the 139-exhibit collection (cipher pages, exhibit halls, biographies,
+ * cryptanalysis techniques, the timeline, and key tool pages).
  *
  * Public API on window.CipherSearch:
  *   load()            → Promise<entries>
@@ -26,6 +27,10 @@
   function load() {
     if (_entries) return Promise.resolve(_entries);
     if (_loadPromise) return _loadPromise;
+    if (typeof fetch !== 'function') {
+      _entries = [];
+      return Promise.resolve(_entries);
+    }
     _loadPromise = fetch(BASE + INDEX_URL_REL, {cache: 'force-cache'})
       .then(function (r) {
         if (!r.ok) throw new Error('Index HTTP ' + r.status);
