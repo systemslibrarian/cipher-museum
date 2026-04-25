@@ -1,7 +1,7 @@
 /**
  * THE CIPHER MUSEUM — All Cipher Engines
- * Complete implementations for every cipher exhibit (83 engines across the
- * 139-exhibit collection; the remaining exhibits are biographies, context
+ * Complete implementations for every cipher exhibit (83 engines across the 140-exhibit
+ * collection; the remaining exhibits are biographies, context
  * pages, and unsolved/visualization-only widgets).
  */
 'use strict';

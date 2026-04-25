@@ -185,11 +185,11 @@ npm install
 node tests/test-all-engines.js      # 435 — engine roundtrip & known-answer tests across 83 engines
 node tests/test-deep-ciphers.js     # 238 — edge cases & stress tests
 node tests/test-comprehensive.js    # 1836 — cross-cipher invariants across the collection
-node tests/test-accessibility.js    # 1720 — ADA / WCAG audit across 172 pages
-node tests/test-mobile.js           #  519 — responsive / mobile audit across 172 pages
-node tests/test-structural.js       # 1725 — structural / framing audit across 172 pages
-node tests/test-demo-pages.js       #  783 — end-to-end JSDOM simulation of every interactive demo
-node tests/test-local-links.js      # 4710 — local href/src link checker across 172 HTML files
+node tests/test-accessibility.js    # 1730 — ADA / WCAG audit across 173 pages
+node tests/test-mobile.js           #  522 — responsive / mobile audit across 173 pages
+node tests/test-structural.js       # 1734 — structural / framing audit across 173 pages
+node tests/test-demo-pages.js       #  777 — end-to-end JSDOM simulation of every interactive demo
+node tests/test-local-links.js      # 4897 — local href/src link checker across 173 HTML files
 
 # … or via npm scripts
 npm run test:engines

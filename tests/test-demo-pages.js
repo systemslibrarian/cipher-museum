@@ -106,7 +106,9 @@ const HAND_BUILT = new Set(['caesar.html', 'playfair.html', 'vigenere.html', 'zo
   'bach-motif.html', 'dancing-men.html', 'gold-bug.html', 'cicada-3301.html', 'krypto-arg.html',
   'mit-mystery-hunt.html', 'sator-square.html', 'freemason-pigpen.html',
   // Phase 8 — Track B audio/visualization exhibits:
-  'field-hollers.html']);
+  'field-hollers.html',
+  // Phase 9+ — hand-built analytics + flagship simulation:
+  'bible-code.html', 'enigma.html']);
 // Pure-content modern-crypto, unsolved pages, and biography pages with no interactive demo:
 const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
   'dorabella.html', 'rsa.html', 'sha256.html', 'cipher-detective.html',

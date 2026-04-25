@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-25T02:02:44.083Z",
-  "totalExhibits": 139,
+  "generatedAt": "2026-04-25T14:09:17.961Z",
+  "totalExhibits": 140,
   "cards": {
     "adfgvx": {
       "name": "ADFGVX Cipher",
@@ -127,11 +127,11 @@
     "atbash": {
       "name": "Atbash",
       "era": "Ancient · ~500 BC",
-      "family": "Historical Cryptography",
+      "family": "Ancient and Foundational Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "None (fixed reflection)",
-      "keyIdea": "Historical Cryptography transformation of plaintext into protected form",
+      "keyIdea": "Ancient and Foundational Ciphers transformation of plaintext into protected form",
       "securityFailure": "Trivial",
       "modernLesson": "Ciphers without keys offer no security"
     },
@@ -222,6 +222,17 @@
       "keyIdea": "Codebreakers and Cryptanalysis transformation of plaintext into protected form",
       "securityFailure": "Codebreaker Biography",
       "modernLesson": "Security depends on design quality, key management, and implementation."
+    },
+    "bible-code": {
+      "name": "Bible Code — Equidistant Letter Sequences",
+      "era": "1994 · Refuted 1999",
+      "family": "Puzzle and Cultural Ciphers",
+      "region": "Global",
+      "usedBy": "Historical operators, states, or communities documented for this exhibit",
+      "keyType": "Varies by system",
+      "keyIdea": "Puzzle and Cultural Ciphers transformation of plaintext into protected form",
+      "securityFailure": "Debunked",
+      "modernLesson": "The law of large numbers always produces patterns — the question is whether they exceed expectation"
     },
     "bifid": {
       "name": "Bifid Cipher",
@@ -1106,11 +1117,11 @@
     "polybius": {
       "name": "Polybius Square",
       "era": "Ancient Greece · ~150 BC",
-      "family": "Historical Cryptography",
+      "family": "Ancient and Foundational Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "None (fixed grid)",
-      "keyIdea": "Historical Cryptography transformation of plaintext into protected form",
+      "keyIdea": "Ancient and Foundational Ciphers transformation of plaintext into protected form",
       "securityFailure": "Broken",
       "modernLesson": "Coordinate encoding → Bit-slicing in AES"
     },
@@ -1194,11 +1205,11 @@
     "rot13": {
       "name": "ROT13",
       "era": "Modern · 1980s",
-      "family": "Historical Cryptography",
+      "family": "Ancient and Foundational Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "None (fixed shift of 13)",
-      "keyIdea": "Historical Cryptography transformation of plaintext into protected form",
+      "keyIdea": "Ancient and Foundational Ciphers transformation of plaintext into protected form",
       "securityFailure": "Trivial",
       "modernLesson": "Obfuscation ≠ encryption"
     },

@@ -50,7 +50,11 @@ const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
   'bach-motif', 'dancing-men', 'gold-bug', 'cicada-3301', 'krypto-arg',
   'mit-mystery-hunt', 'sator-square', 'freemason-pigpen',
   // Phase 8 — global underground traditions (Track B / audio visualization):
-  'field-hollers']);
+  'field-hollers',
+  // Phase 9+ — hand-built analytics exhibits:
+  'bible-code',
+  // Flagship hand-built simulation:
+  'enigma']);
 
 // Pages that are intentionally static (no engine, no interactive widget) -
 // modern-crypto math walkthroughs, unsolved manuscripts, biography pages.
@@ -86,7 +90,7 @@ ok('Cipher pages count is 140', allPages.length === 140, `actual=${allPages.leng
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher|runHollerCode)/i;
-const HAND_BUILT_IDS = /id="(msgInput|pf-keyword|zLetterInput|shiftSlider|keyInput|plaintext|ciphertext|input|output)"/i;
+const HAND_BUILT_IDS = /id="(msgInput|pf-keyword|zLetterInput|shiftSlider|keyInput|plaintext|ciphertext|input|output|els-word|els-search|eg-plaintext)"/i;
 
 for (const file of allPages) {
   const slug = file.replace('.html', '');
