@@ -153,3 +153,16 @@ Downstream phases should use this mapping:
 - If item is in SKIP: do not rebuild; annotate phase log as skipped per audit.
 - If item is in UPGRADE: perform in-place enhancement of existing page/feature.
 - If item is in BUILD: create new page/engine/tests per phase requirements.
+
+## Phase 16 decision — Research / Catalog Mode
+
+Decision: **UPGRADE existing `comparison.html`** rather than creating a new `catalog.html`.
+
+Rationale:
+- The repository already ships three catalog-adjacent discovery surfaces: `comparison.html`, `search.html`, and `cipher-flow.html`.
+- `comparison.html` already contains the largest normalized dataset and sorting/filtering scaffolding.
+- A focused upgrade avoids fragmenting discovery across two separate catalog pages.
+
+Applied upgrade (2026-04-25):
+- Added additional filter dimensions to `comparison.html`: **Hall** and **Solved Status**.
+- Ensured initial count label is computed from live dataset by running filters on load.

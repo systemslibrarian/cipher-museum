@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 138 done / 204 total (67.6%)
+- Overall: 145 done / 202 total (71.8%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -19,9 +19,9 @@ Updated after every commit. Source of truth for completion status.
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 10/11
-- Phase 13 (global integration): 7/38
+- Phase 13 (global integration): 10/38
 - Phase 15 (artifact cards): 8/8
-- Phase 16 (research/catalog mode - audit-gated): 0/6
+- Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
 - Phase 18 (deploy): 7/24
 
@@ -38,6 +38,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: Regression sweep and checkpoint push — restored missing `demo-loader.js` includes on `mary-stuart-castelnau-letters.html` and `patterson-jefferson-cipher.html`; all 6 suites green locally (435 + 238 + 717 + 1710 + 516 + 552 assertions). Added `tests/run-all.js` so `npm test` works again. Added explicit Cipher Detective coverage to comprehensive/demo tests and wired cross-links from `cryptanalysis.html`, `lab/workbench.html`, and `learn.html`.
 - 2026-04-25: Integration polish — made Workbench engine count dynamic from `window.CipherEngines`, removed stale hardcoded search count (now derives from loaded index), and updated global auto-footer count to 139 exhibits / 13 halls. Full suite remains green.
 - 2026-04-25: Checklist reconciliation pass — marked shipped phase items as complete based on on-disk verification (Phases 7–12), and recomputed progress summary directly from checkbox totals.
+- 2026-04-25: Phase 16 audit-gated catalog decision complete — selected UPGRADE path, recorded decision in `docs/round3-shipped-audit.md`, and extended `comparison.html` with Hall + Solved Status filters.
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -209,10 +210,10 @@ Updated after every commit. Source of truth for completion status.
 - [ ] timeline.html year markers added for every new exhibit
 - [ ] timeline.html new era anchors added (Egyptian, India, Phaistos, Histiaeus)
 - [ ] timeline.html six-stage evolution strip preserved
-- [ ] comparison.html data updated with all new rows
-- [ ] comparison.html total count in header updated
+- [x] comparison.html data updated with all new rows
+- [x] comparison.html total count in header updated
 - [ ] cipher-flow.html family map updated with new families
-- [ ] search.html search index rebuilt for all new items
+- [x] search.html search index rebuilt for all new items
 - [ ] tours/ optional new Hall XII/Hall XIII themed tour
 - [x] index.html hero counts updated (about 113 ciphers, 13 halls)
 - [ ] index.html featured ciphers refreshed (include Hall XII and Hall XIII)
@@ -253,12 +254,12 @@ Updated after every commit. Source of truth for completion status.
 - [x] test-demo-pages.js verifies card render on every exhibit page
 
 ## Phase 16 - Research / Catalog Mode (audit-gated)
-- [ ] Audit of comparison.html, search.html, cipher-flow.html completed
-- [ ] Decision recorded in docs/round3-shipped-audit.md (skip / upgrade / build)
-- [ ] If UPGRADE: new filter dimensions added to comparison.html
-- [ ] If BUILD: catalog.html created with round spec
-- [ ] Global nav updated with catalog/research link
-- [ ] Mobile-responsive and accessible with no backend
+- [x] Audit of comparison.html, search.html, cipher-flow.html completed
+- [x] Decision recorded in docs/round3-shipped-audit.md (skip / upgrade / build)
+- [x] If UPGRADE: new filter dimensions added to comparison.html
+- [SKIP - upgrade path selected] If BUILD: catalog.html created with round spec
+- [SKIP - upgrade path selected] Global nav updated with catalog/research link
+- [x] Mobile-responsive and accessible with no backend
 
 ## Phase 17 - Cipher Detective
 - [x] cipher-detective.html created

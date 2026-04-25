@@ -138,6 +138,27 @@
         <option value="Broken">Broken</option>
         <option value="Unbreakable">Unbreakable</option>
       </select>
+      <select class="comp-filter" id="hall-filter" aria-label="Filter by hall">
+        <option value="">All Halls</option>
+        <option value="I">Hall I</option>
+        <option value="II">Hall II</option>
+        <option value="III">Hall III</option>
+        <option value="IV">Hall IV</option>
+        <option value="V">Hall V</option>
+        <option value="VI">Hall VI</option>
+        <option value="VII">Hall VII</option>
+        <option value="VIII">Hall VIII</option>
+        <option value="IX">Hall IX</option>
+        <option value="X">Hall X</option>
+        <option value="XI">Hall XI</option>
+        <option value="XII">Hall XII</option>
+        <option value="XIII">Hall XIII</option>
+      </select>
+      <select class="comp-filter" id="solved-filter" aria-label="Filter by solved status">
+        <option value="">All Statuses</option>
+        <option value="Solved">Solved</option>
+        <option value="Unsolved">Unsolved</option>
+      </select>
       <span class="comp-count" id="cipher-count">Showing 52 of 52</span>
     </div>
 
@@ -322,10 +343,17 @@
   var typeFilter = document.getElementById('type-filter');
   var eraFilter = document.getElementById('era-filter');
   var securityFilter = document.getElementById('security-filter');
+  var hallFilter = document.getElementById('hall-filter');
+  var solvedFilter = document.getElementById('solved-filter');
   var countEl = document.getElementById('cipher-count');
 
   var eraClasses = { 'Ancient':'ancient','Medieval':'medieval','Renaissance':'renaissance','Baroque':'renaissance','19th Century':'19c','World War I':'wwi','World War II':'wwii','Modern':'modern' };
   var secClasses = { 'Trivial':'trivial','Weak':'weak','Moderate':'moderate','Strong':'strong','Unbreakable':'unbreakable' };
+
+  function solvedStatus(c) {
+    if (c.type === 'Unsolved' || c.hall === 'XII') return 'Unsolved';
+    return 'Solved';
+  }
 
   // Build rows
   CIPHERS.forEach(function(c, i) {
@@ -385,6 +413,8 @@
     var type = typeFilter.value;
     var era = eraFilter.value;
     var security = securityFilter.value;
+    var hall = hallFilter.value;
+    var solved = solvedFilter.value;
     var visible = 0;
     var rows = tbody.querySelectorAll('tr');
     rows.forEach(function(row) {
@@ -394,6 +424,8 @@
       if (type && c.type !== type) show = false;
       if (era && c.era !== era) show = false;
       if (security && c.security !== security) show = false;
+      if (hall && c.hall !== hall) show = false;
+      if (solved && solvedStatus(c) !== solved) show = false;
       row.classList.toggle('hidden', !show);
       if (show) visible++;
     });
@@ -404,10 +436,13 @@
   typeFilter.addEventListener('change', applyFilters);
   eraFilter.addEventListener('change', applyFilters);
   securityFilter.addEventListener('change', applyFilters);
+  hallFilter.addEventListener('change', applyFilters);
+  solvedFilter.addEventListener('change', applyFilters);
 
   // Initial sort by year
   document.querySelector('th[data-col="year"]').classList.add('sorted-asc');
   sortTable();
+  applyFilters();
 })();
 </script>
 <script src="js/lightbox.js"></script>
