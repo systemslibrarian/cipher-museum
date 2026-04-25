@@ -589,13 +589,13 @@ Updated after every commit. Source of truth for completion status.
 - [x] Bio: Arne Beurling — page shipped
 - [x] Bio: Dilly Knox — page shipped
 - [x] Bio: Herbert Yardley — page shipped
-- [ ] Bio: Joan Clarke ← TODO (SKIP if audit confirms already shipped)
+- [x] Bio: Joan Clarke — [SKIP] already shipped
 - [x] Bio: Mavis Batey — page shipped
-- [ ] Bio: Elizebeth Smith Friedman ← TODO (SKIP if already shipped)
-- [ ] Bio: Leo Marks ← TODO (SKIP if already shipped)
-- [ ] Bio: Agnes Meyer Driscoll ← TODO (SKIP if already shipped)
+- [x] Bio: Elizebeth Smith Friedman — [SKIP] already shipped
+- [x] Bio: Leo Marks — [SKIP] already shipped
+- [x] Bio: Agnes Meyer Driscoll — [SKIP] already shipped
 - [x] Bio: GCHQ Trio (Ellis, Cocks, Williamson) — page shipped
-- [ ] Bio: Bill Tutte (solo) ← TODO (UPGRADE if paired with Flowers)
+- [x] Bio: Bill Tutte (solo) — [SKIP] already shipped
 - [x] Bio: David Kahn — page shipped
 - [x] Bio: Elonka Dunin — page shipped
 - [x] Bio: George Lasry — page shipped
