@@ -115,7 +115,7 @@
       '</defs>',
       /* Baseline */
       '<line x1="' + (LEFT_PAD - 2) + '" y1="' + BASE_Y + '" x2="' + (LEFT_PAD + 26 * SLOT_W) + '" ',
-      'y1="' + BASE_Y + '" y2="' + BASE_Y + '" ',
+      'y2="' + BASE_Y + '" ',
       'stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>'
     ];
 
