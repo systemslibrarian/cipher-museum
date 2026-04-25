@@ -4,7 +4,7 @@
 
 Exploring the history and evolution of cryptography — from classical ciphers to modern secure systems.
 
-An open-source, interactive educational website spanning **69 historically important ciphers** across **13 exhibit halls** — from the Khnumhotep tomb at Beni Hasan (~1900 BCE) to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo (or, for unsolved and visualization-only exhibits, a hand-built widget). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
+An open-source, interactive educational website spanning **132 historically important ciphers** across **13 exhibit halls** — from the Khnumhotep tomb at Beni Hasan (~1900 BCE) to post-quantum cryptography. Every cipher exhibit ships with a fully interactive encrypt/decrypt demo (or, for unsolved and visualization-only exhibits, a hand-built widget). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
 
 **[Live Site →](https://ciphermuseum.com)**
 
@@ -25,7 +25,7 @@ An open-source, interactive educational website spanning **69 historically impor
 
 ## ✨ Features
 
-### 🗺️ Thirteen Exhibit Halls · 69 Ciphers
+### 🗺️ Thirteen Exhibit Halls · 132 Ciphers
 
 | Hall | Title | Ciphers |
 |------|-------|---------|
@@ -121,11 +121,11 @@ Each row gives the year the cipher was first known/published and when it was bro
     - **N-gram & entropy panel** — bigram/trigram counts and Shannon entropy for distinguishing transposition (preserves frequencies) from substitution (alters them).
     - **Side-by-side Encrypt/Decrypt panes** with copy-to-clipboard and a swap button so you can iterate on a key without retyping ciphertext.
     - **Same engine source as the exhibits** — the workbench pulls from [js/ciphers/all-engines.js](js/ciphers/all-engines.js), so anything you reproduce here matches every demo on the site.
-- **[Site Search](search.html)** — Search across all 63 ciphers, 11 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
+- **[Site Search](search.html)** — Search across all 132 ciphers, 13 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
 - **[Cryptanalysis Techniques](cryptanalysis.html)** — 10 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), HMM/SMT decoding (Copiale), and Chaocipher reconstruction.
 - **[Cipher Challenges](challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
 - **[Timeline](timeline.html)** — Interactive 2,500-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
-- **[Comparison Table](comparison.html)** — Sortable, filterable table comparing all 63 ciphers by type, era, security level, and key method.
+- **[Comparison Table](comparison.html)** — Sortable, filterable table comparing all 132 ciphers by type, era, security level, and key method.
 - **[Cipher Flow Explorer](cipher-flow.html)** — Visual relationship map between cipher families.
 - **[Museum Map](museum-map.html)** — Architectural floor plan with all exhibit halls and cipher exhibits.
 - **[Guided Tours](tours/index.html)** — Structured learning paths through the collection.
@@ -154,7 +154,7 @@ cipher-museum/
 ├── index.html               ← Entrance Hall (hero + 10 hall cards)
 ├── museum-map.html          ← Interactive floor plan with all exhibits
 ├── timeline.html            ← 2,400-year timeline with era filtering & scroll-spy
-├── comparison.html          ← Sortable 69-cipher comparison table
+├── comparison.html          ← Sortable 132-cipher comparison table
 ├── challenges.html          ← 10 progressive cipher challenges
 ├── glossary.html            ← Cryptography glossary
 ├── cryptanalysis.html       ← Cryptanalysis Techniques (7 interactive techniques)
@@ -168,7 +168,7 @@ cipher-museum/
 │   ├── demo-loader.js       ← Dynamic demo UI generator for all cipher pages
 │   └── ciphers/
 │       └── all-engines.js   ← 57 cipher engine implementations
-├── halls/                   ← 11 exhibit halls
+├── halls/                   ← 13 exhibit halls
 │   ├── ancient.html          ← Hall I: Birth of Cryptography
 │   ├── substitution.html     ← Hall II: Classical Substitution
 │   ├── polyalphabetic.html   ← Hall III: Polyalphabetic Revolution
@@ -179,7 +179,7 @@ cipher-museum/
 │   ├── puzzle.html           ← Hall VII: Puzzle & Novelty
 │   ├── unbreakable.html      ← Final Hall: The Unbreakable
 │   └── codebreakers.html     ← Special Exhibition: Hall of Codebreakers
-├── ciphers/                  ← 63 cipher exhibit pages (62 with interactive demos)
+├── ciphers/                  ← 132 cipher exhibit pages
 │   ├── caesar.html            ← with interactive demo + SVG wheel diagram
 │   ├── enigma.html            ← with rotor wiring SVG diagram
 │   ├── vigenere.html          ← with tabula recta SVG + Kasiski analysis
