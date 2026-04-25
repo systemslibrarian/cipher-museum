@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popular Culture Survey — The Cipher Museum</title>
+  <meta name="description" content="Filterable survey of cipher references in novels, television, films, and internet puzzle culture.">
+  <link rel="stylesheet" href="css/museum.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    .survey-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin:1.25rem 0 1.5rem; }
+    .survey-card { background:var(--s2); border:1px solid var(--s4); border-radius:var(--rl); padding:1rem; }
+    .survey-card h3 { margin:.2rem 0 .45rem; font-family:var(--fd); letter-spacing:.04em; }
+    .survey-meta { font-family:var(--fm); font-size:.62rem; letter-spacing:.1em; color:var(--tx3); text-transform:uppercase; }
+    .survey-controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.8rem; margin:1rem 0; }
+    .survey-select { width:100%; background:var(--s3); border:1px solid var(--s5); border-radius:var(--r); color:var(--tx); font-family:var(--fm); font-size:.8rem; padding:.55rem .65rem; }
+    .survey-empty { font-family:var(--fm); color:var(--tx3); padding:1rem; border:1px dashed var(--s5); border-radius:var(--r); }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="nav-logo-text">The Cipher Museum</span></a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span><a href="halls/culture.html">Hall XIII</a><span>›</span>Popular Culture Survey</div>
+  <span class="page-eyebrow">Hall XIII Companion</span>
+  <h1 class="page-title">Popular Culture Survey</h1>
+  <p class="page-tagline">A filterable catalogue of how classical ciphers appear in stories, games, and internet puzzle communities.</p>
+</div>
+
+<div class="section" style="max-width:1000px;margin:0 auto;">
+  <div class="survey-controls" aria-label="Survey filters">
+    <label>
+      <span class="survey-meta">Medium</span>
+      <select id="filter-medium" class="survey-select">
+        <option value="all">All media</option>
+        <option value="novel">Novel / Literary</option>
+        <option value="film">Film</option>
+        <option value="television">Television</option>
+        <option value="internet">Internet / ARG</option>
+      </select>
+    </label>
+    <label>
+      <span class="survey-meta">Cipher Family</span>
+      <select id="filter-family" class="survey-select">
+        <option value="all">All families</option>
+        <option value="substitution">Substitution</option>
+        <option value="transposition">Transposition</option>
+        <option value="multi-stage">Multi-stage / hybrid</option>
+      </select>
+    </label>
+    <label>
+      <span class="survey-meta">Period</span>
+      <select id="filter-period" class="survey-select">
+        <option value="all">All periods</option>
+        <option value="1843-1903">1843–1903</option>
+        <option value="2000s">2000s</option>
+        <option value="2010s">2010s+</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="survey-results" class="survey-grid"></div>
+  <div id="survey-empty" class="survey-empty" style="display:none;">No entries match the selected filters.</div>
+</div>
+</main>
+
+<footer class="museum-footer">
+  <div class="footer-bottom"><span class="footer-copy">© The Cipher Museum · MIT License</span></div>
+</footer>
+
+<script src="js/nav.js" defer></script>
+<script>
+'use strict';
+(function(){
+  var DATA = [
+    { title:'Poe, The Gold-Bug', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/gold-bug.html', note:'Teaches full frequency-analysis workflow in-story.' },
+    { title:'Conan Doyle, Dancing Men', medium:'novel', family:'substitution', period:'1843-1903', href:'ciphers/dancing-men.html', note:'A cryptographic plot solved by pattern frequency and word shape.' },
+    { title:'The Da Vinci Code', medium:'novel', family:'multi-stage', period:'2000s', href:'ciphers/da-vinci-code.html', note:'Layered clue progression using simple substitutions and symbolic puzzles.' },
+    { title:'National Treasure', medium:'film', family:'multi-stage', period:'2000s', href:'ciphers/national-treasure.html', note:'Adventure-film chain of historical clue extraction and decoding.' },
+    { title:'Gravity Falls Credits Ciphers', medium:'television', family:'substitution', period:'2010s', href:'ciphers/gravity-falls.html', note:'Broadcast audience puzzle loop built on Caesar/Atbash variants.' },
+    { title:'Cicada 3301', medium:'internet', family:'multi-stage', period:'2010s', href:'ciphers/cicada-3301.html', note:'Internet-scale collaborative cryptography and steganography hunt.' },
+    { title:'MIT Mystery Hunt', medium:'internet', family:'transposition', period:'2010s', href:'ciphers/mit-mystery-hunt.html', note:'Team puzzle ecosystem featuring recurring cipher families.' },
+    { title:'Krypto ARG', medium:'internet', family:'multi-stage', period:'2010s', href:'ciphers/krypto-arg.html', note:'ARG-era integration of text ciphers and media-layer clues.' }
+  ];
+
+  var resultWrap = document.getElementById('survey-results');
+  var empty = document.getElementById('survey-empty');
+  var m = document.getElementById('filter-medium');
+  var f = document.getElementById('filter-family');
+  var p = document.getElementById('filter-period');
+
+  function render(){
+    var mm = m.value, ff = f.value, pp = p.value;
+    var rows = DATA.filter(function(item){
+      return (mm === 'all' || item.medium === mm)
+        && (ff === 'all' || item.family === ff)
+        && (pp === 'all' || item.period === pp);
+    });
+
+    resultWrap.innerHTML = '';
+    if(!rows.length){ empty.style.display = ''; return; }
+    empty.style.display = 'none';
+
+    rows.forEach(function(item){
+      var card = document.createElement('article');
+      card.className = 'survey-card';
+      card.innerHTML =
+        '<div class="survey-meta">' + item.medium + ' · ' + item.period + '</div>' +
+        '<h3>' + item.title + '</h3>' +
+        '<p style="margin:0 0 .75rem;line-height:1.65;color:var(--tx2);">' + item.note + '</p>' +
+        '<a href="' + item.href + '" class="view-all-link">Open exhibit →</a>';
+      resultWrap.appendChild(card);
+    });
+  }
+
+  m.addEventListener('change', render);
+  f.addEventListener('change', render);
+  p.addEventListener('change', render);
+  render();
+})();
+</script>
+<script src="js/lightbox.js"></script>
+</body>
+</html>

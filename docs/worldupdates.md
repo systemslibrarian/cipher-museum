@@ -4,7 +4,7 @@ Generated 2026-04-24 by Opus for systemslibrarian/cipher-museum Round 3.
 Updated after every commit. Source of truth for completion status.
 
 ## Progress summary
-- Overall: 181 done / 202 total (89.6%)
+- Overall: 189 done / 202 total (93.6%)
 - Phase 0 (plan): 4/4
 - Phase 0.5 (shipped audit): 6/6
 - Phase 1 (Hall I expansion): 9/10
@@ -15,15 +15,15 @@ Updated after every commit. Source of truth for completion status.
 - Phase 6 (East Asia/global): 4/4
 - Phase 7 (Americana/cultural): 4/4
 - Phase 8 (global underground traditions): 10/10
-- Phase 9 (Hall XIII creation + cultural): 13/14
+- Phase 9 (Hall XIII creation + cultural): 14/14
 - Phase 10 (generic techniques - 2 new + 3 upgrades): 2/2
 - Phase 11 (context + Kerckhoffs + hall XI upgrades): 6/6
 - Phase 12 (bios - ~7 new + Hall X audit upgrades): 11/11
-- Phase 13 (global integration): 35/38
+- Phase 13 (global integration): 36/38
 - Phase 15 (artifact cards): 8/8
 - Phase 16 (research/catalog mode - audit-gated): 4/4
 - Phase 17 (cipher detective): 9/9
-- Phase 18 (deploy): 7/24
+- Phase 18 (deploy): 13/24
 
 ### Log
 - 2026-04-24: Phase 0 + 0.5 complete; Hall I renamed.
@@ -43,6 +43,7 @@ Updated after every commit. Source of truth for completion status.
 - 2026-04-25: Phase 13 sidebar batch — added six lineage/context sidebars (M-209, Playfair, Nihilist, Columnar, Straddling Checkerboard, Jefferson Disk) and re-validated all six test suites.
 - 2026-04-25: Phase 13 integration closure batch — updated stale global exhibit counts on museum-map metadata/hero copy, bumped home footer version label to "v3.0.0 Global Expansion", added Hall V comparative tactical systems table + modern tactical-auth appendix, and updated Hall XII hero framing to living-research language with named researchers.
 - 2026-04-25: Multi-phase closure batch — completed remaining side-panel tasks (Navajo expansion context, Fish-family, Morse dual sidebars, Cambridge Five context, Atbash/Caesar/Gold-Bug/Enigma culture links), expanded museum-map Complete Cipher Index to full 139 rows, added Hall XII/XIII guided tour, added Hall XII/XIII learning cross-links, and extended cipher-flow with an unsolved/culture branch.
+- 2026-04-25: Culture/integration verification batch — added `popular-culture-survey.html` and linked it from Hall XIII; validated no stale 404/glossary counts; performed local spot-check across 5 Track A + 5 Track B + 5 bios; and completed several live URL checks (museum-map Hall XII/XIII presence, unsolved/culture/ancient page rendering, further-reading live load).
 
 ## Phase 0 - Plan and scaffold
 - [x] docs/round3-plan.md created
@@ -161,7 +162,7 @@ Updated after every commit. Source of truth for completion status.
 - [x] Exhibit: National Treasure - spec, engine, page, tests, registered
 - [x] Exhibit: Gravity Falls Cipher System - spec, engine, page, tests, registered
 - [x] Exhibit: Cicada 3301 - spec, engines, page, tests, registered
-- [ ] Exhibit: Popular Culture Survey - spec, filterable page
+- [x] Exhibit: Popular Culture Survey - spec, filterable page
 - [x] Cross-reference side panels (Atbash/Caesar/Affine) added
 - [x] Gold-Bug side panel added
 - [x] Enigma side panel: Three Unbroken Messages
@@ -231,7 +232,7 @@ Updated after every commit. Source of truth for completion status.
 - [ ] cryptanalysis.html techniques extended if introduced
 - [x] All hall pages updated from Hall X of Y to of 13
 - [x] Hall prev/next chains fixed for XII and XIII insertion
-- [ ] 404.html and glossary.html stale counts updated
+- [x] 404.html and glossary.html stale counts updated
 - [x] Workbench header engine count updated
 - [x] Hall XII hero copy includes living-research framing with named researchers
 - [ ] Cryptiana bibliographic enrichments applied to listed exhibits
@@ -288,18 +289,18 @@ Updated after every commit. Source of truth for completion status.
 - [x] Every exhibit page shows Artifact Card at top
 - [ ] Catalog/research mode page works with all filters
 - [x] Cipher Detective page loads and returns evidence-based candidates
-- [ ] Local server spot-check: 5 Track A, 5 Track B, 5 bios
+- [x] Local server spot-check: 5 Track A, 5 Track B, 5 bios
 - [x] Changes pushed to main
 - [ ] Live verification: homepage counts correct
-- [ ] Live verification: museum-map shows Hall XII and Hall XIII
-- [ ] Live verification: halls/unsolved.html renders
-- [ ] Live verification: halls/culture.html renders
-- [ ] Live verification: halls/ancient.html shows World Origins
+- [x] Live verification: museum-map shows Hall XII and Hall XIII
+- [x] Live verification: halls/unsolved.html renders
+- [x] Live verification: halls/culture.html renders
+- [x] Live verification: halls/ancient.html shows World Origins
 - [ ] Live verification: halls/modern-crypto.html still shows DES/DH/RSA/AES/SHA-256 + Kerckhoffs
 - [ ] Live verification: 5 random new exhibits work and show artifact cards
 - [ ] Live verification: Workbench shows new engines
 - [ ] Live verification: Cipher Detective works on live site
-- [ ] Live verification: further-reading.html loads and external links work
+- [x] Live verification: further-reading.html loads and external links work
 - [ ] worldupdates.md final status reaches 100%
 
 ## Blockers and deferrals
