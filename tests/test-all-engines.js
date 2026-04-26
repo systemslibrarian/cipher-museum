@@ -123,6 +123,10 @@ const tests = [
   { engine: 'otp', label: 'One-Time Pad', msg: 'ATTACK', key: 'SECRET', roundtrip: false,
     customTest: true },
 
+  // 23b. VENONA Pad-Reuse demo engine (5-bit XOR + crib drag helpers)
+  { engine: 'venonaPadReuse', label: 'VENONA Pad-Reuse', msg: 'ATOMICSECRETS', key: 'MINSKCHANNEL', roundtrip: true,
+    customTest: true },
+
   // 24. Fractionated Morse (encrypt-only)
   { engine: 'fractionatedMorse', label: 'Fractionated Morse', msg: 'HELLO WORLD', key: 'ROUNDTABLE',
     encryptOnly: true },
@@ -315,6 +319,31 @@ for (const t of tests) {
           `got "${dec}"`);
       } catch (err) {
         assert(`${t.label}: Dictionary custom test`, false, err.message);
+      }
+    }
+    if (t.engine === 'venonaPadReuse') {
+      try {
+        const key = 'MINSKCHANNELONETIMEPADSEQUENCE';
+        const p1 = 'SOVIETAGENTREPORTSATOMICTRANSFER';
+        const p2 = 'STATIONREQUESTSCOURIERMEETATMIDNIGHT';
+        const c1 = engine.encode(p1, key);
+        const c2 = engine.encode(p2, key);
+
+        assert(`${t.label}: engine exposes combineCiphertexts`, typeof engine.combineCiphertexts === 'function');
+        assert(`${t.label}: engine exposes cribAtPosition`, typeof engine.cribAtPosition === 'function');
+        assert(`${t.label}: engine exposes scanCribPositions`, typeof engine.scanCribPositions === 'function');
+
+        const hit = engine.cribAtPosition(c1, c2, 'ATOMIC', 18);
+        assert(`${t.label}: known crib reveals expected other fragment`,
+          clean(hit.otherPlaintextFragment).startsWith('RIERME'),
+          `got "${hit.otherPlaintextFragment}"`);
+
+        const miss = engine.cribAtPosition(c1, c2, 'PLANET', 18);
+        assert(`${t.label}: wrong crib degrades output quality`,
+          (miss.confidence || 0) < (hit.confidence || 0),
+          `hit=${(hit.confidence || 0).toFixed(2)} miss=${(miss.confidence || 0).toFixed(2)}`);
+      } catch (err) {
+        assert(`${t.label}: VENONA custom test`, false, err.message);
       }
     }
   }

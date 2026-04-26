@@ -611,6 +611,115 @@ window.CipherEngines = (() => {
     }
   }))();
 
+  /* Option A (audit remediation): VENONA uses a dedicated pad-reuse XOR demo engine, not generic otp. */
+  /* ─── 23b. VENONA Pad-Reuse (5-bit XOR over A-Z) ─── */
+  const venonaPadReuse = (() => {
+    const ALPHA32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+
+    function cleanAlpha26(text) {
+      return (text || '').toUpperCase().replace(/[^A-Z]/g, '');
+    }
+
+    function cleanAlpha32(text) {
+      return (text || '').toUpperCase().replace(/[^A-Z2-7]/g, '');
+    }
+
+    function toVal(ch) {
+      const idx = ALPHA32.indexOf(ch);
+      return idx >= 0 ? idx : 0;
+    }
+
+    function toGlyph(v) {
+      return ALPHA32[mod(v, 32)];
+    }
+
+    function xorStream(left, right) {
+      const len = Math.min(left.length, right.length);
+      let out = '';
+      for (let i = 0; i < len; i++) out += toGlyph(toVal(left[i]) ^ toVal(right[i]));
+      return out;
+    }
+
+    function scoreNaturalAlpha(fragment) {
+      if (!fragment) return 0;
+      let good = 0;
+      for (let i = 0; i < fragment.length; i++) {
+        const code = fragment.charCodeAt(i);
+        if (code >= 65 && code <= 90) good++;
+      }
+      return good / fragment.length;
+    }
+
+    return {
+      encode: (text, key) => {
+        const t = cleanAlpha26(text);
+        const k = cleanAlpha26(key || 'XMCKL');
+        if (!k.length) return 'Key required';
+        let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const pv = t.charCodeAt(i) - 65;
+          const kv = k.charCodeAt(i % k.length) - 65;
+          out += toGlyph(pv ^ kv);
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const t = cleanAlpha32(text);
+        const k = cleanAlpha26(key || 'XMCKL');
+        if (!k.length) return 'Key required';
+        let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const cv = toVal(t[i]);
+          const kv = k.charCodeAt(i % k.length) - 65;
+          const pv = cv ^ kv;
+          out += (pv >= 0 && pv < 26) ? A[pv] : '·';
+        }
+        return out;
+      },
+      combineCiphertexts: (cipherA, cipherB) => {
+        return xorStream(cleanAlpha32(cipherA), cleanAlpha32(cipherB));
+      },
+      cribAtPosition: (cipherA, cipherB, crib, position) => {
+        const combined = xorStream(cleanAlpha32(cipherA), cleanAlpha32(cipherB));
+        const c = cleanAlpha26(crib);
+        const pos = Math.max(0, parseInt(position, 10) || 0);
+        let other = '';
+        for (let i = 0; i < c.length && (pos + i) < combined.length; i++) {
+          const vv = toVal(combined[pos + i]) ^ (c.charCodeAt(i) - 65);
+          other += (vv >= 0 && vv < 26) ? A[vv] : '·';
+        }
+        return {
+          position: pos,
+          crib: c,
+          otherPlaintextFragment: other,
+          combinedStream: combined,
+          confidence: scoreNaturalAlpha(other)
+        };
+      },
+      scanCribPositions: (cipherA, cipherB, crib) => {
+        const combined = xorStream(cleanAlpha32(cipherA), cleanAlpha32(cipherB));
+        const c = cleanAlpha26(crib);
+        const max = Math.max(0, combined.length - c.length);
+        const rows = [];
+        for (let pos = 0; pos <= max; pos++) {
+          let other = '';
+          for (let i = 0; i < c.length && (pos + i) < combined.length; i++) {
+            const vv = toVal(combined[pos + i]) ^ (c.charCodeAt(i) - 65);
+            other += (vv >= 0 && vv < 26) ? A[vv] : '·';
+          }
+          rows.push({
+            position: pos,
+            crib: c,
+            otherPlaintextFragment: other,
+            combinedStream: combined,
+            confidence: scoreNaturalAlpha(other)
+          });
+        }
+        return rows;
+      }
+    };
+  })();
+
   /* ─── 24. Fractionated Morse ─── */
   const fractionatedMorse = (() => {
     const morseMap = {
@@ -3487,7 +3596,7 @@ window.CipherEngines = (() => {
     railFence, columnar, doubleTransposition,
     bacon, tapCode, pigpen,
     bifid, trifid, adfgx, adfgvx, nihilist,
-    otp, fractionatedMorse, confederateVigenere,
+    otp, venonaPadReuse, fractionatedMorse, confederateVigenere,
     bazeries, alberti, jefferson, enigma, lorenz,
     dictionaryCode, stager, vic,
     scytale, vernam, greatCipher, babington, navajo, voynich,

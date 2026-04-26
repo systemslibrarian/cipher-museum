@@ -17,6 +17,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="stylesheet" href="../css/museum.css">
   <style>
+  /* Option A selected: page ships a real pad-reuse XOR demo to match VENONA prose. */
   .track-b-widget {
     border:1px solid var(--gold-b);border-radius:8px;padding:1.5rem;
     margin:2rem 0;background:var(--s1);
@@ -34,6 +35,51 @@
   .track-b-output {
     font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
     letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+  }
+  .venona-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+  }
+  .venona-controls {
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:.75rem;
+    align-items:end;
+    margin-top:.75rem;
+  }
+  .venona-actions {
+    display:flex;
+    gap:.6rem;
+    flex-wrap:wrap;
+    margin-top:.75rem;
+  }
+  .venona-actions button {
+    margin-top:0;
+  }
+  .venona-crib-table {
+    width:100%;
+    border-collapse:collapse;
+    margin-top:1rem;
+    font-size:.85rem;
+  }
+  .venona-crib-table th,
+  .venona-crib-table td {
+    border:1px solid var(--b1);
+    padding:.45rem .5rem;
+    text-align:left;
+    font-family:var(--fm);
+  }
+  .venona-crib-table tbody tr:nth-child(odd) { background:var(--s2); }
+  .venona-help {
+    font-size:.84rem;
+    color:var(--tx3);
+    margin-top:.5rem;
+    line-height:1.6;
+  }
+  @media (max-width: 920px) {
+    .venona-grid,
+    .venona-controls { grid-template-columns:1fr; }
   }
 </style>
 </head>
@@ -63,11 +109,11 @@
 <div class="page-hero">
   <div class="breadcrumb">
     <a href="../index.html">Entrance</a><span>&rsaquo;</span>
-    <a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a><span>&rsaquo;</span>
+    <a href="../halls/unbreakable.html">Hall IX: The Unbreakable</a><span>&rsaquo;</span>
     VENONA Project
   </div>
   <div class="page-meta">
-    <span class="page-num">Hall X · Codebreakers</span>
+    <span class="page-num">Hall IX · The Unbreakable</span>
     <span class="badge era-ancient">Cold War · 1943–1980</span>
     <span class="badge sec-broken">Partial break (key reuse exploit)</span>
   </div>
@@ -82,6 +128,50 @@
     <div class="fact"><span class="fact-label">Revelations</span><span class="fact-value">Julius and Ethel Rosenberg; Kim Philby; Cambridge Five; Donald Maclean</span></div>
     <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Even perfect ciphers fail when key generation is flawed</span></div>
   </div>
+</div>
+<section class="track-b-widget" id="venona-pad-reuse-demo" aria-labelledby="venona-pad-reuse-title">
+  <h2 id="venona-pad-reuse-title">Pad Reuse Attack Demo</h2>
+  <p style="margin-top:0.35rem;line-height:1.65;">This is the real VENONA failure mode. Two Soviet messages were enciphered with the same one-time pad segment. Enter a guessed crib and drag it across positions; the pad cancels and reveals candidate fragments of the other plaintext.</p>
+  <div class="venona-grid">
+    <div>
+      <label for="venona-cipher-a">Ciphertext A (same reused pad)</label>
+      <textarea id="venona-cipher-a" rows="3" aria-describedby="venona-alpha-note"></textarea>
+    </div>
+    <div>
+      <label for="venona-cipher-b">Ciphertext B (same reused pad)</label>
+      <textarea id="venona-cipher-b" rows="3" aria-describedby="venona-alpha-note"></textarea>
+    </div>
+  </div>
+  <p id="venona-alpha-note" class="venona-help">Alphabet: A–Z plaintext with 5-bit XOR output encoded as A–Z2–7. This keeps the cancellation math visible while remaining readable in text form.</p>
+  <div class="venona-controls">
+    <div>
+      <label for="venona-crib">Candidate crib (known/plaintext guess)</label>
+      <input id="venona-crib" type="text" value="ATOMIC" maxlength="24">
+    </div>
+    <div>
+      <label for="venona-position">Try this position</label>
+      <input id="venona-position" type="number" value="0" min="0" step="1">
+    </div>
+  </div>
+  <div class="venona-actions">
+    <button id="venona-try" type="button">Try This Position</button>
+    <button id="venona-scan" type="button">Drag Crib Across All Positions</button>
+  </div>
+  <div class="track-b-output" id="venona-single-output" aria-live="polite"></div>
+  <div class="venona-help" id="venona-what-happened">
+    <strong>What just happened:</strong> $C_1 = P_1 \oplus K$ and $C_2 = P_2 \oplus K$. So $C_1 \oplus C_2 = P_1 \oplus P_2$.
+    The key $K$ cancels. When you XOR a crib against that combined stream, you recover a candidate fragment of the other plaintext.
+  </div>
+  <table class="venona-crib-table" aria-label="Crib-drag candidate outputs">
+    <thead>
+      <tr><th>Position</th><th>Recovered fragment of other plaintext</th><th>Letter score</th></tr>
+    </thead>
+    <tbody id="venona-scan-results"></tbody>
+  </table>
+</section>
+<div class="panel" style="margin:1rem 0 0;">
+  <div class="panel-head"><span class="panel-icon">🧪</span><span class="panel-title">Compare: Generic OTP Demo</span></div>
+  <div class="panel-body"><p style="margin:0;">Below is the museum's generic one-time-pad playground. It demonstrates OTP operation itself; the dedicated VENONA pad-reuse attack is the panel above.</p></div>
 </div>
 <div class="demo-section" data-cipher="otp"></div>
 <div class="exhibit-layout">
@@ -115,6 +205,18 @@
         <p style="font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;">VENONA codewords: Maclean = HOMER, Burgess = HICKS, Blunt = TONY, Cairncross = LISZT, Philby = not formally in VENONA but identified through combined MI5/CIA analysis of VENONA leads.</p>
       </div>
     </div>
+    <div class="panel" style="margin-top:1.5rem;border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--s2);border-color:var(--gold-b);">
+        <span class="panel-icon">📼</span><span class="panel-title" style="color:var(--gold);">SIGTOT and 5-UCO — Allied One-Time Tape Systems</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;line-height:1.75;">SIGTOT was the US Army's one-time-tape teleprinter system for high-level wartime and early Cold War traffic. Like Soviet one-time-pad channels, it depended on pad tape manufacture and strict destruction discipline, but US handling doctrine enforced one-use tape segments and burn-after-use controls.</p>
+        <p style="font-size:.9rem;line-height:1.75;">Britain's 5-UCO (One-Time Cipher Office) served the same strategic role for sensitive UK channels. It used one-time tape workflows with equally strict handling controls. SIGTOT and 5-UCO had the same theoretical strengths as Soviet OTP traffic, and the same operational dependencies.</p>
+        <p style="font-size:.9rem;line-height:1.75;">Parallel lesson: same mathematics, different outcomes. SIGTOT and 5-UCO remained operationally disciplined and resisted Soviet cryptanalysis; Soviet duplicate pads under wartime production pressure created VENONA's exploitable depths. The cipher math stayed sound in all three systems. Operations decided the result.</p>
+        <p style="font-size:.82rem;color:var(--gold-lt);margin-top:.85rem;">References: David Kahn, <em>The Codebreakers</em> (rev. ed., ch. 18); NSA Center for Cryptologic History (SIGTOT declassified materials); Robert L. Benson, <em>The VENONA Story</em>.</p>
+        <p style="font-size:.82rem;color:var(--tx3);margin-top:.5rem;">See also: <a href="../ciphers/one-time-pad.html">One-Time Pad</a>, <a href="../ciphers/diana-cryptosystem.html">Diana Cryptosystem</a>, and the Cambridge Five panel above.</p>
+      </div>
+    </div>
   </div>
 </div>
 <section class="related-exhibits">
@@ -134,10 +236,83 @@
   <div class="footer-grid">
     <div class="footer-brand"><span class="footer-logo-text">The Cipher Museum</span><p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p></div>
     <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="../museum-map.html">Museum Map</a></li><li><a href="../timeline.html">Timeline</a></li><li><a href="../challenges.html">Challenges</a></li><li><a href="../glossary.html">Glossary</a></li></ul></div>
-    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/codebreakers.html">Hall X: Hall of Codebreakers</a></li></ul></div>
+    <div><div class="footer-col-title">This Hall</div><ul class="footer-links"><li><a href="../halls/unbreakable.html">Hall IX: The Unbreakable</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall X · Codebreakers</span></div>
+  <div class="footer-bottom"><span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span><span class="footer-copy">Hall IX · The Unbreakable</span></div>
 </footer>
+<script>
+/* Option A runtime wiring: dedicated VENONA crib-drag uses CipherEngines.venonaPadReuse. */
+(function(){
+  function init() {
+    if (!window.CipherEngines || !window.CipherEngines.venonaPadReuse) return;
+    var engine = window.CipherEngines.venonaPadReuse;
+    var c1 = document.getElementById('venona-cipher-a');
+    var c2 = document.getElementById('venona-cipher-b');
+    var crib = document.getElementById('venona-crib');
+    var pos = document.getElementById('venona-position');
+    var tryBtn = document.getElementById('venona-try');
+    var scanBtn = document.getElementById('venona-scan');
+    var out = document.getElementById('venona-single-output');
+    var table = document.getElementById('venona-scan-results');
+    if (!c1 || !c2 || !crib || !pos || !tryBtn || !scanBtn || !out || !table) return;
+
+    if (!c1.value.trim() || !c2.value.trim()) {
+      var key = 'MINSKCHANNELONETIMEPADSEQUENCE';
+      var p1 = 'SOVIETAGENTREPORTSATOMICTRANSFER';
+      var p2 = 'STATIONREQUESTSCOURIERMEETATMIDNIGHT';
+      c1.value = engine.encode(p1, key);
+      c2.value = engine.encode(p2, key);
+    }
+
+    function clampPosition() {
+      var max = Math.max(0, Math.min(c1.value.replace(/[^A-Z2-7]/gi, '').length, c2.value.replace(/[^A-Z2-7]/gi, '').length) - crib.value.toUpperCase().replace(/[^A-Z]/g, '').length);
+      var v = parseInt(pos.value, 10);
+      if (!Number.isFinite(v) || v < 0) v = 0;
+      if (v > max) v = max;
+      pos.value = String(v);
+      pos.max = String(max);
+      return v;
+    }
+
+    function renderSingle() {
+      var at = clampPosition();
+      var r = engine.cribAtPosition(c1.value, c2.value, crib.value, at);
+      out.textContent = 'Position ' + r.position + ': crib "' + r.crib + '" suggests other plaintext fragment "' + r.otherPlaintextFragment + '"';
+    }
+
+    function renderScan() {
+      var rows = engine.scanCribPositions(c1.value, c2.value, crib.value)
+        .sort(function(a,b){ return b.confidence - a.confidence; })
+        .slice(0, 12);
+      table.innerHTML = '';
+      rows.forEach(function(row) {
+        var tr = document.createElement('tr');
+        var tdPos = document.createElement('td');
+        var tdFrag = document.createElement('td');
+        var tdScore = document.createElement('td');
+        tdPos.textContent = String(row.position);
+        tdFrag.textContent = row.otherPlaintextFragment || '·';
+        tdScore.textContent = Math.round(row.confidence * 100) + '%';
+        tr.appendChild(tdPos);
+        tr.appendChild(tdFrag);
+        tr.appendChild(tdScore);
+        table.appendChild(tr);
+      });
+    }
+
+    tryBtn.addEventListener('click', renderSingle);
+    scanBtn.addEventListener('click', function(){ renderSingle(); renderScan(); });
+    crib.addEventListener('keydown', function(ev){ if (ev.key === 'Enter') { ev.preventDefault(); renderSingle(); } });
+    crib.addEventListener('input', clampPosition);
+    pos.addEventListener('input', renderSingle);
+
+    renderSingle();
+    renderScan();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 <script src="../js/ciphers/all-engines.js"></script>
 <script src="../js/demo-loader.js"></script>
 <script src="../js/nav.js" defer></script>

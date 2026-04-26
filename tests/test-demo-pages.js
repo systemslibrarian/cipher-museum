@@ -314,6 +314,56 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
     window.close();
   }
 
+  // ── VENONA pad-reuse (custom widget + crib drag) ─────────────────────
+  {
+    const dom = await loadCipherPageWithArtifact(path.join(CIPHERS_DIR, 'venona.html'));
+    const { window } = dom;
+    const { document } = window;
+    const c1 = document.getElementById('venona-cipher-a');
+    const c2 = document.getElementById('venona-cipher-b');
+    const crib = document.getElementById('venona-crib');
+    const pos = document.getElementById('venona-position');
+    const tryBtn = document.getElementById('venona-try');
+    const scanBtn = document.getElementById('venona-scan');
+    const out = document.getElementById('venona-single-output');
+    const rows = document.getElementById('venona-scan-results');
+
+    ok('venona.html: pad-reuse widget ciphertext A present', !!c1);
+    ok('venona.html: pad-reuse widget ciphertext B present', !!c2);
+    ok('venona.html: crib input present', !!crib);
+    ok('venona.html: position input present', !!pos);
+    ok('venona.html: try-position button present', !!tryBtn);
+    ok('venona.html: scan button present', !!scanBtn);
+    ok('venona.html: output panel present', !!out);
+
+    if (c1 && c2 && crib && pos && tryBtn && scanBtn && out && rows) {
+      ok('venona.html: prefilled ciphertext A on load', c1.value.trim().length > 0);
+      ok('venona.html: prefilled ciphertext B on load', c2.value.trim().length > 0);
+      const before = out.textContent;
+
+      crib.focus();
+      crib.value = 'STALIN';
+      crib.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      await tick(10);
+      const afterEnter = out.textContent;
+      ok('venona.html: Enter key in crib field updates output', afterEnter && afterEnter !== before,
+        `before="${before}" after="${afterEnter}"`);
+
+      pos.value = '5';
+      tryBtn.click();
+      await tick(10);
+      ok('venona.html: Try This Position updates output', out.textContent && out.textContent.length > 0,
+        `out="${out.textContent}"`);
+
+      scanBtn.click();
+      await tick(10);
+      ok('venona.html: scan renders crib-drag rows', rows.querySelectorAll('tr').length > 0,
+        `rows=${rows.querySelectorAll('tr').length}`);
+    }
+
+    window.close();
+  }
+
   // ── Zodiac ───────────────────────────────────────────────────────────
   {
     const dom = await loadCipherPageWithArtifact(path.join(CIPHERS_DIR, 'zodiac.html'));
