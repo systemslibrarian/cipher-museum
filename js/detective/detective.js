@@ -1,16 +1,40 @@
-/* ================================================================
-   THE CIPHER MUSEUM — Detective Entry Point v1.5
-
-   Ties analyses → scoring → render together.
-   Also exports window.CipherDetective for backward compatibility
-   with test-comprehensive.js.
-
-   Load order (in HTML / require calls):
-     1. js/detective/analyses.js
-     2. js/detective/scoring.js
-     3. js/detective/render.js
-     4. js/detective/detective.js   ← this file
-   ================================================================ */
+/**
+ * Cipher Detective
+ * --------------------------------------------------
+ * Current version: v2+ (post-Round 3 expansion)
+ *
+ * Shipped capabilities:
+ *   - Ranked detection with confidence labels (v1.5 spec)
+ *   - Detective UX framing: Evidence / Suspects / Case Notes /
+ *     Recommended Next Attack (v1.5 spec)
+ *   - Frequency chart with English overlay + accessible table (v1.5 spec)
+ *   - Reality Labels strip (v1.5 spec)
+ *   - Modular code structure (v1.5 spec)
+ *   - Interactive attack tools: Caesar brute force, ROT13, Atbash,
+ *     Morse decoding, encoding detection, Vigenere key-length,
+ *     substitution frequency suggestions (v2 spec)
+ *   - Step-by-step Attack Playback (v2 spec)
+ *   - Challenge Mode (v2 spec)
+ *   - Auto-solve panel for selected cipher families (post-v2 extension)
+ *
+ * Modules:
+ *   analyses.js     — pure analysis functions (frequency, IoC, etc.)
+ *   scoring.js      — cipher-family scoring and confidence assignment
+ *   render.js       — DOM rendering, no analysis logic
+ *   attacks.js      — attack tool implementations
+ *   solvers.js      — auto-solve implementations
+ *   lang-model.js   — n-gram English fitness scoring
+ *   playback.js     — narrated step-by-step Attack Playback
+ *   challenges.js   — Challenge Mode corpus + progression
+ *   detective.js    — entry point and orchestration
+ *
+ * Note: solvers.js implements its own cipher logic rather than
+ * importing from js/ciphers/all-engines.js. This is by design —
+ * solver paths need candidate ranking and plaintext fitness scoring,
+ * which encrypt/decrypt engines do not provide.
+ *
+ * Future revisions: see docs/detective-roadmap.md if it exists.
+ */
 'use strict';
 
 (function (global) {

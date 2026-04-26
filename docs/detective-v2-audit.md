@@ -1,5 +1,7 @@
 # Cipher Detective v2 — Pre-Flight Audit
 
+*Superseded — see `js/detective/detective.js` header for current state.*
+
 **Date:** 2026-01  
 **Status:** Complete — ready for v2 implementation
 

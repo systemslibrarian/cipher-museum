@@ -1,5 +1,7 @@
 # Cipher Detective v1.5 — Pre-Flight Audit
 
+*Superseded — see `js/detective/detective.js` header for current state.*
+
 **Audited:** 2026-04-25  
 **Files examined:** `cipher-detective.html`, `js/cipher-detective.js`
 

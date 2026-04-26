@@ -68,7 +68,7 @@
   /* ─── Data loading ───────────────────────────────────────────── */
   function loadData(cb) {
     if (_loaded) { cb(); return; }
-    if (typeof fetch !== 'undefined') {
+    if (typeof fetch === 'function') {
       fetch('data/detective-challenges.json')
         .then(function (r) { return r.json(); })
         .then(function (data) {
