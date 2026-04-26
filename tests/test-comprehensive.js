@@ -172,6 +172,7 @@ const ENGINE_PROFILES = {
   adfgvx:                 { key: 'PRIVACY,GERMAN',                   mode: 'roundtrip' },
   nihilist:               { key: 'RUSSIAN,KEY',                      mode: 'roundtrip-ij' },
   otp:                    { key: 'SECRETSECRETSECRETSECRETSECRETSECRETSECRETSECRETSECRETSECRET', mode: 'roundtrip' },
+  venonaPadReuse:         { key: 'SECRETSECRETSECRETSECRETSECRETSECRETSECRETSECRETSECRETSECRET', mode: 'roundtrip' },
   fractionatedMorse:      { key: 'ROUNDTABLE',                       mode: 'roundtrip' },
   confederateVigenere:    { key: 'CONFEDERATE',                      mode: 'roundtrip' },
   bazeries:               { key: '42',                               mode: 'roundtrip' },
