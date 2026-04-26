@@ -19,6 +19,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 - **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 436 + 238 + 1843 + 1730 + 522 + 1735 + 777 + 4897 assertions.
 - **Sitemap expanded** to all 172 indexable pages (tools, tours, community, all biographies, and the new exhibit).
 - **README factual audit**: corrected interactive-demo count (110/140), page counts (173), and test assertion totals site-wide.
+- April 2026: Cipher Museum listed in Crypto Museum's (cryptomuseum.com) curated Virtual Museums directory, alongside Cipher History Museum, Jerry Proc's Crypto Pages, and other established crypto-history archives.
 
 ---
 
