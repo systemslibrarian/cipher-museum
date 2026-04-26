@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hall IX: The Unbreakable — The Cipher Museum</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <meta name="description" content="One-Time Pad, Vernam cipher, Solitaire, and Claude Shannon's proof of perfect secrecy — where classical cryptography reached its limits.">
+    <meta name="description" content="One-Time Pad, Vernam cipher, VENONA, and Claude Shannon's proof of perfect secrecy — where perfect theory met operational failure.">
   <meta property="og:title" content="Hall IX: The Unbreakable — The Cipher Museum">
-  <meta property="og:description" content="One-Time Pad, Vernam cipher, Solitaire, and Claude Shannon's proof of perfect secrecy — where classical cryptography reached its limits.">
+  <meta property="og:description" content="One-Time Pad, Vernam cipher, VENONA, and Claude Shannon's proof of perfect secrecy — where perfect theory met operational failure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/halls/unbreakable.html">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Hall IX: The Unbreakable — The Cipher Museum">
-  <meta name="twitter:description" content="One-Time Pad, Vernam cipher, Solitaire, and Claude Shannon's proof of perfect secrecy — where classical cryptography reached its limits.">
+  <meta name="twitter:description" content="One-Time Pad, Vernam cipher, VENONA, and Claude Shannon's proof of perfect secrecy — where perfect theory met operational failure.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/halls/unbreakable.html">
   <link rel="stylesheet" href="../css/museum.css">
@@ -108,6 +108,27 @@
         <div class="card-badges">
           <span class="badge sec-weak">Key-Dependent</span>
           <span class="badge era-19c">XOR Foundation</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/venona.html" class="cipher-card" style="border-color:rgba(206,126,132,.35);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 108</span>
+        <span class="badge era-coldwar">1943–1980 · Cold War</span>
+      </div>
+      <div class="card-name">VENONA Project</div>
+      <p class="card-desc">The canonical one-time-pad failure case. Soviet operators reused OTP key material under wartime pressure; Arlington Hall analysts exploited message depths to recover plaintext and identify major espionage networks.</p>
+      <div style="font-family:var(--fm);font-size:.78rem;background:var(--s3);border-radius:var(--r);padding:.75rem;margin:.25rem 0;line-height:1.9;letter-spacing:.06em;">
+        <span style="color:var(--tx3);">Depth relation: </span><span style="color:var(--gold-lt);">C₁ ⊕ C₂ = P₁ ⊕ P₂</span><br>
+        <span style="color:var(--tx3);">Failure mode: </span><span style="color:var(--gold);">Key page reuse</span><br>
+        <span style="color:var(--tx3);">Lesson: </span><span style="color:var(--tx);">Math stayed sound; operations failed</span>
+      </div>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-broken">Broken via reuse</span>
+          <span class="badge era-coldwar">Operational failure</span>
         </div>
         <span class="card-arrow">→</span>
       </div>

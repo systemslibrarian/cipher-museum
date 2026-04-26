@@ -1423,6 +1423,7 @@
     },
     "venona": {
       "name": "VENONA Project",
+      "hall": "IX",
       "era": "Cold War · 1943–1980",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",

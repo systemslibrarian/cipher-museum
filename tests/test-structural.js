@@ -133,6 +133,39 @@ for (const file of files) {
   ok(`${rel}: <img alt> not placeholder`, placeholderAlts.length === 0, placeholderAlts[0]);
 }
 
+// VENONA hall consistency checks (Round 3 remediation)
+{
+  const halls = ['halls/unbreakable.html', 'halls/codebreakers.html'];
+  const hallsWithVenona = halls.filter(rel => {
+    const html = fs.readFileSync(path.join(REPO, rel), 'utf8');
+    return /href\s*=\s*["']\.\.\/ciphers\/venona\.html["']/i.test(html);
+  });
+  ok('VENONA appears in exactly one hall page', hallsWithVenona.length === 1,
+    hallsWithVenona.join(', '));
+
+  const venonaHtml = fs.readFileSync(path.join(REPO, 'ciphers/venona.html'), 'utf8');
+  const crumb = venonaHtml.match(/<div class="breadcrumb">[\s\S]*?<a href="\.\.\/halls\/([^"]+)"/i);
+  const crumbHall = crumb ? `halls/${crumb[1]}` : null;
+  ok('VENONA breadcrumb links to a hall page', !!crumbHall, crumbHall || 'missing breadcrumb hall link');
+  if (crumbHall && hallsWithVenona.length === 1) {
+    ok('VENONA breadcrumb matches containing hall page', crumbHall === hallsWithVenona[0],
+      `breadcrumb=${crumbHall} hall=${hallsWithVenona[0]}`);
+  }
+
+  const cardData = JSON.parse(fs.readFileSync(path.join(REPO, 'data/artifact-cards.json'), 'utf8'));
+  const venonaCard = cardData && cardData.cards && cardData.cards.venona;
+  const hallMap = {
+    'halls/unbreakable.html': 'IX',
+    'halls/codebreakers.html': 'X'
+  };
+  const expectedHall = hallsWithVenona.length === 1 ? hallMap[hallsWithVenona[0]] : null;
+  ok('VENONA artifact card has hall field', !!(venonaCard && venonaCard.hall), venonaCard ? JSON.stringify(venonaCard) : 'missing card');
+  if (venonaCard && expectedHall) {
+    ok('VENONA artifact-card hall matches breadcrumb hall', venonaCard.hall === expectedHall,
+      `card=${venonaCard.hall} expected=${expectedHall}`);
+  }
+}
+
 // JS-level checks: every fetch() call site should guard against missing fetch
 const jsDir = path.join(REPO, 'js');
 function listJs(dir, out = []) {

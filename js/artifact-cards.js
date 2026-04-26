@@ -45,6 +45,7 @@
     grid.appendChild(dd);
   }
 
+  if (card.hall) addField('Hall', card.hall);
   addField('Era', card.era);
   addField('Family', card.family);
   addField('Region', card.region);
