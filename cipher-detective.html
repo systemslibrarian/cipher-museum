@@ -118,6 +118,56 @@
                         font-size: .78rem; color: var(--gold-lt); margin: .1rem 0; }
     .subst-freq-result { }
 
+    /* ── v3: Auto-Solve panel ─────────────────────────────────── */
+    .det-autosolve-intro { font-family: var(--fb); font-size: .88rem; line-height: 1.55;
+                            color: var(--tx2); margin: 0 0 .9rem; }
+    .autosolve-btn    { font-family: var(--fm); font-size: .78rem; letter-spacing: .08em;
+                        padding: .55rem 1.2rem; background: linear-gradient(180deg, var(--s3), var(--s2));
+                        border: 1px solid var(--gold-b); border-radius: 3px; color: var(--gold-lt);
+                        cursor: pointer; transition: background .15s, border-color .15s, color .15s; }
+    .autosolve-btn:not([disabled]):hover { background: var(--gold-glow); border-color: var(--gold); color: var(--gold); }
+    .autosolve-btn[disabled] { opacity: .4; cursor: not-allowed; }
+    .autosolve-btn--running { color: var(--gold); border-color: var(--gold); }
+    .autosolve-result:empty { display: none; }
+    .autosolve-result { margin-top: 1rem; }
+    .autosolve-best   { background: var(--s2); border: 1px solid var(--gold-b); border-radius: var(--r);
+                        padding: 1.1rem 1.3rem; margin-bottom: 1rem; }
+    .autosolve-best-header { display: flex; justify-content: space-between; align-items: baseline;
+                              flex-wrap: wrap; gap: .6rem; margin-bottom: .6rem; }
+    .autosolve-best-method { font-family: var(--fd); font-size: 1rem; color: var(--gold); margin: 0; }
+    .autosolve-best-key    { font-family: var(--fm); font-size: .78rem; color: var(--tx3); margin: .1rem 0 .7rem;
+                              word-break: break-all; }
+    .autosolve-best-plain  { font-family: var(--fm); font-size: .92rem; color: var(--gold-lt);
+                              background: var(--s1); border: 1px solid var(--s4); border-radius: 3px;
+                              padding: .7rem .9rem; line-height: 1.55; white-space: pre-wrap; word-break: break-word;
+                              max-height: 14rem; overflow-y: auto; }
+    .conf-badge       { display: inline-block; padding: .2rem .6rem; border-radius: 999px;
+                         font-family: var(--fm); font-size: .7rem; letter-spacing: .04em;
+                         text-transform: uppercase; border: 1px solid currentColor; }
+    .conf-badge--very-likely  { color: #7CFC8F; }
+    .conf-badge--likely       { color: var(--gold); }
+    .conf-badge--possible     { color: #E0B97E; }
+    .conf-badge--unlikely     { color: #C9806B; }
+    .conf-badge--inconclusive { color: var(--tx3); }
+    .autosolve-others { font-family: var(--fb); font-size: .82rem; color: var(--tx3); }
+    .autosolve-others-title { font-family: var(--fm); font-size: .7rem; letter-spacing: .06em;
+                              text-transform: uppercase; color: var(--tx3); margin: 0 0 .5rem; }
+    .autosolve-others-table { width: 100%; border-collapse: collapse; font-family: var(--fm);
+                              font-size: .76rem; }
+    .autosolve-others-table th,
+    .autosolve-others-table td { padding: .35rem .4rem; text-align: left; border-bottom: 1px solid var(--s4);
+                                  color: var(--tx2); vertical-align: top; }
+    .autosolve-others-table th { color: var(--tx3); font-weight: normal; font-size: .62rem;
+                                  letter-spacing: .05em; text-transform: uppercase; }
+    .autosolve-others-table .ao-plain { font-family: var(--fm); color: var(--tx2); }
+    .autosolve-runtime { font-family: var(--fm); font-size: .7rem; color: var(--tx3); margin: .8rem 0 0; }
+    .autosolve-skip   { font-family: var(--fb); font-size: .85rem; color: var(--tx3); margin: 0;
+                         padding: .8rem 1rem; background: var(--s2); border: 1px dashed var(--s4); border-radius: var(--r); }
+    .autosolve-cta    { display: inline-block; margin-top: .8rem; font-family: var(--fm); font-size: .72rem;
+                         letter-spacing: .06em; padding: .4rem .9rem; background: var(--s3); border: 1px solid var(--s5);
+                         border-radius: 3px; color: var(--gold-lt); text-decoration: none; transition: border-color .15s, color .15s; }
+    .autosolve-cta:hover { border-color: var(--gold); color: var(--gold); }
+
     /* ── v2: Watch / Playback ─────────────────────────────────── */
     .watch-btn        { margin-top: .9rem; font-family: var(--fm); font-size: .72rem;
                         letter-spacing: .08em; padding: .45rem 1rem; background: var(--s2);
@@ -350,6 +400,22 @@
           <div id="det-attack-tools" hidden></div>
         </section>
 
+        <section class="det-section" aria-labelledby="det-autosolve-heading">
+          <h2 id="det-autosolve-heading" class="det-section-title">
+            &#128274; Auto-Solve (Advanced)
+          </h2>
+          <p class="det-autosolve-intro">
+            Run every applicable solver against this ciphertext and rank the results
+            by how English-like each candidate plaintext is. Works on Caesar, ROT13,
+            Atbash, Vigen&egrave;re, monoalphabetic substitution and columnar
+            transposition. May take a few seconds for substitution.
+          </p>
+          <button id="det-autosolve-btn" class="autosolve-btn" type="button" disabled>
+            &#9881;&#65039; Run Auto-Solve
+          </button>
+          <div id="det-autosolve-result" class="autosolve-result" aria-live="polite"></div>
+        </section>
+
       </div>
 
       <aside class="det-sidebar" aria-label="Cryptanalytic profile">
@@ -381,7 +447,7 @@
       <li>Non-English plaintext breaks all English-based frequency analysis.</li>
       <li>Modern ciphers (AES, ChaCha20) produce statistically random output; the Detective will report &#8220;random&#8221; but cannot identify <em>which</em> modern cipher.</li>
       <li>Layered ciphers (VIC, Purple, multi-stage) defeat single-pass identification.</li>
-      <li>The Detective does not decrypt. For decryption, open the <a href="lab/workbench.html">Codebreaker&#8217;s Workbench</a>.</li>
+      <li>The Detective&#8217;s <em>Auto-Solve</em> can recover plaintext for Caesar, ROT13, Atbash, Vigen&egrave;re, monoalphabetic substitution, and columnar transposition. For richer hand-tools and other ciphers, open the <a href="lab/workbench.html">Codebreaker&#8217;s Workbench</a>.</li>
     </ul>
   </div>
 
@@ -415,6 +481,8 @@
 <script src="js/detective/scoring.js"></script>
 <script src="js/detective/render.js"></script>
 <script src="js/detective/attacks.js"></script>
+<script src="js/detective/lang-model.js"></script>
+<script src="js/detective/solvers.js"></script>
 <script src="js/detective/playback.js"></script>
 <script src="js/detective/challenges.js"></script>
 <script src="js/detective/detective.js"></script>

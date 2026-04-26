@@ -55,6 +55,7 @@
           global.DetectiveRender.clear();
           _lastStats  = null;
           _lastRanked = null;
+          updateAutoSolveButton();
           return;
         }
         var stats  = global.DetectiveAnalyses.run(text);
@@ -62,6 +63,14 @@
         _lastStats  = stats;
         _lastRanked = ranked;
         global.DetectiveRender.draw(stats, ranked);
+        updateAutoSolveButton();
+      }
+
+      function updateAutoSolveButton() {
+        var btn = document.getElementById('det-autosolve-btn');
+        if (!btn) return;
+        var ok = !!(_lastStats && _lastStats.charset === 'alpha' && _lastStats.n >= 4 && global.DetectiveSolvers);
+        btn.disabled = !ok;
       }
 
       input.addEventListener('input', update);
@@ -85,6 +94,12 @@
         /* Challenge mode entry button */
         if (e.target && e.target.id === 'det-challenge-btn' && global.DetectiveChallenges) {
           global.DetectiveChallenges.init();
+          return;
+        }
+
+        /* Auto-Solve button */
+        if (e.target && e.target.id === 'det-autosolve-btn' && _lastStats && global.DetectiveSolvers) {
+          runAutoSolve(input.value, _lastStats, _lastRanked);
           return;
         }
       });
@@ -200,6 +215,84 @@
   function esc(s) {
     if (typeof s !== 'string') return '';
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ─── Auto-Solve runner (v3) ────────────────────────────────── */
+  function runAutoSolve(ciphertext, stats, ranked) {
+    var btn  = document.getElementById('det-autosolve-btn');
+    var out  = document.getElementById('det-autosolve-result');
+    if (!btn || !out || !global.DetectiveSolvers) return;
+
+    /* Lock the button and show a working indicator. The actual
+       compute is synchronous (~1-5s) so we yield to the browser
+       once with setTimeout so the UI can repaint the spinner. */
+    btn.disabled = true;
+    btn.classList.add('autosolve-btn--running');
+    var oldLabel = btn.innerHTML;
+    btn.innerHTML = '\u2699\uFE0F Working\u2026';
+    out.innerHTML = '<p class="autosolve-runtime">Running every applicable solver\u2026</p>';
+
+    setTimeout(function () {
+      var result;
+      try {
+        result = global.DetectiveSolvers.solveAuto(ciphertext, { stats: stats, ranked: ranked });
+      } catch (err) {
+        out.innerHTML = '<p class="autosolve-skip">Auto-Solve crashed: ' + esc(err && err.message || String(err)) + '</p>';
+        btn.disabled = false;
+        btn.classList.remove('autosolve-btn--running');
+        btn.innerHTML = oldLabel;
+        return;
+      }
+      out.innerHTML = renderAutoSolveResult(result, ciphertext);
+      btn.disabled = false;
+      btn.classList.remove('autosolve-btn--running');
+      btn.innerHTML = oldLabel;
+    }, 30);
+  }
+
+  function renderAutoSolveResult(result, ciphertext) {
+    if (!result) return '<p class="autosolve-skip">No result.</p>';
+    if (result.skipped) return '<p class="autosolve-skip">' + esc(result.skipped) + '</p>';
+    if (!result.best || !result.attempts.length) {
+      return '<p class="autosolve-skip">No applicable solver produced a result for this input.</p>';
+    }
+
+    var best = result.best;
+    var conf = best.confidence || { tier: 'inconclusive', label: 'Inconclusive' };
+    var encodedCt = encodeURIComponent(ciphertext || '');
+
+    var html = '<div class="autosolve-best">' +
+      '<div class="autosolve-best-header">' +
+        '<h3 class="autosolve-best-method">Best candidate: ' + esc(best.method) + '</h3>' +
+        '<span class="conf-badge conf-badge--' + esc(conf.tier) + '">' + esc(conf.label) + '</span>' +
+      '</div>' +
+      '<p class="autosolve-best-key"><strong>Key:</strong> ' + esc(best.key) + '</p>' +
+      '<div class="autosolve-best-plain">' + esc(best.plaintext) + '</div>' +
+      '<a class="autosolve-cta" href="lab/workbench.html#ct=' + encodedCt + '">Refine in the Workbench \u2192</a>' +
+      '</div>';
+
+    if (result.attempts.length > 1) {
+      html += '<div class="autosolve-others">' +
+        '<p class="autosolve-others-title">Other candidates considered</p>' +
+        '<table class="autosolve-others-table">' +
+        '<thead><tr><th>Method</th><th>Per-char fit</th><th>Confidence</th><th>Plaintext start</th></tr></thead>' +
+        '<tbody>';
+      for (var i = 1; i < result.attempts.length; i++) {
+        var a = result.attempts[i];
+        var ac = a.confidence || { tier: 'inconclusive', label: 'Inconclusive' };
+        var preview = (a.plaintext || '').replace(/\s+/g, ' ').slice(0, 60);
+        html += '<tr>' +
+          '<td>' + esc(a.method) + '</td>' +
+          '<td>' + (typeof a.perChar === 'number' ? a.perChar.toFixed(2) : '\u2014') + '</td>' +
+          '<td><span class="conf-badge conf-badge--' + esc(ac.tier) + '">' + esc(ac.label) + '</span></td>' +
+          '<td class="ao-plain">' + esc(preview) + (a.plaintext && a.plaintext.length > 60 ? '\u2026' : '') + '</td>' +
+        '</tr>';
+      }
+      html += '</tbody></table></div>';
+    }
+
+    html += '<p class="autosolve-runtime">Solved in ' + result.runtimeMs + ' ms.</p>';
+    return html;
   }
 
   /* ─── Export ─────────────────────────────────────────────────── */
