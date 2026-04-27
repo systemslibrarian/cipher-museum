@@ -16,10 +16,10 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 - **Exhibit 140 — Bible Code / ELS** ([ciphers/bible-code.html](https://ciphermuseum.com/ciphers/bible-code.html)): Interactive equidistant letter sequence explorer comparing Genesis/Exodus against length-matched random text with the same letter distribution. Registered in Hall VIII and the museum map.
 - **Lorenz depth-attack interactive** ([ciphers/lorenz.html](https://ciphermuseum.com/ciphers/lorenz.html)): Two-time-pad crib-drag demo and Enigma↔Lorenz comparison table added to the existing Lorenz exhibit.
-- **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 436 + 238 + 1843 + 1730 + 522 + 1735 + 777 + 4897 assertions.
-- **Sitemap expanded** to all 172 indexable pages (tools, tours, community, all biographies, and the new exhibit).
+- **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 443 + 238 + 1848 + 1760 + 531 + 1773 + 789 + 4944 assertions.
+- **Sitemap expanded** to all 176 indexable pages (tools, tours, community, all biographies, and the new exhibit).
 - **Cipher Corpus v0.2** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)): 21,602+ test cases across 82 cipher types, 9 languages, 55 historical records. Challenge Mode for learners, Known Mode for tool builders. LLM 3-shot evaluation export, per-cipher benchmark report, WCAG 2.1 AA. All tests passing.
-- **README factual audit**: corrected interactive-demo count (110/140), page counts (173), and test assertion totals site-wide.
+- **README factual audit**: corrected interactive-demo count (110/140), page counts (176), and test assertion totals site-wide.
 - April 2026: Cipher Museum listed in Crypto Museum's (cryptomuseum.com) curated Virtual Museums directory, alongside Cipher History Museum, Jerry Proc's Crypto Pages, and other established crypto-history archives.
 
 ---
@@ -31,7 +31,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 | Hall | Title | Ciphers |
 |------|-------|---------|
 | [I](https://ciphermuseum.com/halls/ancient.html) | World Origins of Cryptography | [Egyptian Substitution](https://ciphermuseum.com/ciphers/egyptian-substitution.html), [Rosetta Stone](https://ciphermuseum.com/ciphers/rosetta-stone.html), [Histiaeus's Tattoo](https://ciphermuseum.com/ciphers/histiaeus-tattoo.html), [Scytale](https://ciphermuseum.com/ciphers/scytale.html), [Aeneas Tacticus](https://ciphermuseum.com/ciphers/aeneas-tacticus.html), [Caesar](https://ciphermuseum.com/ciphers/caesar.html), [Atbash](https://ciphermuseum.com/ciphers/atbash.html), [Kama Sutra](https://ciphermuseum.com/ciphers/kama-sutra.html), [Polybius](https://ciphermuseum.com/ciphers/polybius.html), [Arabic Nomenclators](https://ciphermuseum.com/ciphers/arabic-nomenclators.html), [ROT13](https://ciphermuseum.com/ciphers/rot13.html) |
-| [II](https://ciphermuseum.com/halls/substitution.html) | Classical Substitution | [Monfirst known-answer benchmoalphabetic](https://ciphermuseum.com/ciphers/monoalphabetic.html), [Nomenclator](https://ciphermuseum.com/ciphers/nomenclator.html), [Babington](https://ciphermuseum.com/ciphers/babington.html), [Homophonic](https://ciphermuseum.com/ciphers/homophonic.html), [Great Cipher](https://ciphermuseum.com/ciphers/great-cipher.html), [Playfair](https://ciphermuseum.com/ciphers/playfair.html), [Four-Square](https://ciphermuseum.com/ciphers/four-square.html), [Two-Square](https://ciphermuseum.com/ciphers/two-square.html), [Hill](https://ciphermuseum.com/ciphers/hill.html) |
+| [II](https://ciphermuseum.com/halls/substitution.html) | Classical Substitution | [Monoalphabetic](https://ciphermuseum.com/ciphers/monoalphabetic.html), [Nomenclator](https://ciphermuseum.com/ciphers/nomenclator.html), [Babington](https://ciphermuseum.com/ciphers/babington.html), [Homophonic](https://ciphermuseum.com/ciphers/homophonic.html), [Great Cipher](https://ciphermuseum.com/ciphers/great-cipher.html), [Playfair](https://ciphermuseum.com/ciphers/playfair.html), [Four-Square](https://ciphermuseum.com/ciphers/four-square.html), [Two-Square](https://ciphermuseum.com/ciphers/two-square.html), [Hill](https://ciphermuseum.com/ciphers/hill.html) |
 | [III](https://ciphermuseum.com/halls/polyalphabetic.html) | Polyalphabetic Revolution | [Alberti Disk](https://ciphermuseum.com/ciphers/alberti-disk.html), [Vigenère](https://ciphermuseum.com/ciphers/vigenere.html), [Porta](https://ciphermuseum.com/ciphers/porta.html), [Gronsfeld](https://ciphermuseum.com/ciphers/gronsfeld.html), [Beaufort](https://ciphermuseum.com/ciphers/beaufort.html), [Running Key](https://ciphermuseum.com/ciphers/running-key.html), [Autokey](https://ciphermuseum.com/ciphers/autokey.html) |
 | [IV](https://ciphermuseum.com/halls/transposition.html) | Transposition & Fractionation | [Rail Fence](https://ciphermuseum.com/ciphers/rail-fence.html), [Columnar](https://ciphermuseum.com/ciphers/columnar.html), [Double Transposition](https://ciphermuseum.com/ciphers/double-transposition.html), [Bifid](https://ciphermuseum.com/ciphers/bifid.html), [Trifid](https://ciphermuseum.com/ciphers/trifid.html), [ADFGX](https://ciphermuseum.com/ciphers/adfgx.html), [ADFGVX](https://ciphermuseum.com/ciphers/adfgvx.html), [Fractionated Morse](https://ciphermuseum.com/ciphers/fractionated-morse.html) |
 | [V](https://ciphermuseum.com/halls/military.html) | Military & Spy Ciphers | [Nihilist](https://ciphermuseum.com/ciphers/nihilist.html), [Bazeries](https://ciphermuseum.com/ciphers/bazeries.html), [VIC](https://ciphermuseum.com/ciphers/vic.html), [Straddling Checkerboard](https://ciphermuseum.com/ciphers/straddling-checkerboard.html), [Book Cipher](https://ciphermuseum.com/ciphers/book-cipher.html) |
@@ -51,9 +51,9 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 3. **How It Was Broken** — The specific technique, with context
 4. **What It Teaches Modern Crypto** — The direct line from this cipher to AES/RSA
 
-### 🎯 83 Cipher Engines · 110 Interactive Demos
+### 🎯 84 Cipher Engines · 110 Interactive Demos
 
-The 140-exhibit collection includes **83 working cipher engines** plus **~27 hand-built widgets** — **110 of the 140 exhibits ship a fully interactive demo**, all built in vanilla JavaScript with no frameworks or build tools. The remaining 30 exhibits are codebreaker biographies, historical context pages (e.g. Cabinet Noir, Bletchley Park figures), and a small number of cipher pages not yet wired with a demo.
+The 140-exhibit collection includes **84 working cipher engines** plus **~27 hand-built widgets** — **110 of the 140 exhibits ship a fully interactive demo**, all built in vanilla JavaScript with no frameworks or build tools. The remaining 30 exhibits are codebreaker biographies, historical context pages (e.g. Cabinet Noir, Bletchley Park figures), and a small number of cipher pages not yet wired with a demo.
 
 Type a message, set a key, and watch the cipher work in real time. Demos are dynamically generated by [js/demo-loader.js](js/demo-loader.js) from the engine implementations in [js/ciphers/all-engines.js](js/ciphers/all-engines.js), and the same engines power the [Codebreaker's Workbench](https://ciphermuseum.com/lab/workbench.html).
 
@@ -371,7 +371,7 @@ cipher-museum/
 - Unique meta descriptions on every page
 - Open Graph + Twitter cards
 - Canonical URLs
-- XML sitemap (172 pages)
+- XML sitemap (176 pages)
 - Structured data (JSON-LD)
 - Custom 404 page
 
@@ -386,14 +386,14 @@ The museum ships with **eight test harnesses, all green.** They cover everything
 npm install
 
 # Run any suite individually …
-node tests/test-all-engines.js      # 436 — engine roundtrip & known-answer tests across 83 engines
+node tests/test-all-engines.js      # 443 — engine roundtrip & known-answer tests across 84 engines
 node tests/test-deep-ciphers.js     # 238 — edge cases & stress tests
-node tests/test-comprehensive.js    # 1843 — cross-cipher invariants across the collection
-node tests/test-accessibility.js    # 1730 — ADA / WCAG audit across 173 pages
-node tests/test-mobile.js           #  522 — responsive / mobile audit across 173 pages
-node tests/test-structural.js       # 1734 — structural / framing audit across 173 pages
-node tests/test-demo-pages.js       #  777 — end-to-end JSDOM simulation of every interactive demo
-node tests/test-local-links.js      # 4901 — local href/src link checker across 173 HTML files
+node tests/test-comprehensive.js    # 1848 — cross-cipher invariants across the collection
+node tests/test-accessibility.js    # 1760 — ADA / WCAG audit across 176 pages
+node tests/test-mobile.js           #  531 — responsive / mobile audit across 176 pages
+node tests/test-structural.js       # 1773 — structural / framing audit across 176 pages
+node tests/test-demo-pages.js       #  789 — end-to-end JSDOM simulation of every interactive demo
+node tests/test-local-links.js      # 4944 — local href/src link checker across 176 HTML files
 
 # … or via npm scripts
 npm run test:engines
