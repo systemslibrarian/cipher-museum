@@ -1,6 +1,6 @@
 {
-  "$version": "0.2.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$version": "0.2.0",
   "title": "CipherCorpusRecord",
   "type": "object",
   "required": [
@@ -18,27 +18,27 @@
       "type": "string",
       "description": "ISO 639-1/2 code or BCP-47 language tag (e.g., 'en', 'fr', 'de', 'la', 'es')"
     },
-        "split": {
-          "type": "string",
-          "enum": ["public", "blind"],
-          "description": "Benchmark split: public (downloadable) or blind (held-out for evaluation)"
-        },
-        "transcription_quality": {
-          "type": "string",
-          "enum": ["clean", "noisy"],
-          "description": "Indicates whether the transcription is clean or contains realistic noise/errors"
-        },
-        "source_provenance": {
-          "type": "object",
-          "description": "Provenance and rights info for historical or synthetic records",
-          "properties": {
-            "url": { "type": "string", "format": "uri" },
-            "archive": { "type": "string" },
-            "publication_date": { "type": "string" },
-            "license": { "type": "string" }
-          },
-          "required": ["url", "archive", "publication_date", "license"]
-        },
+    "split": {
+      "type": "string",
+      "enum": ["public", "blind"],
+      "description": "Benchmark split: public (downloadable) or blind (held-out for evaluation)"
+    },
+    "transcription_quality": {
+      "type": "string",
+      "enum": ["clean", "noisy"],
+      "description": "Indicates whether the transcription is clean or contains realistic noise/errors"
+    },
+    "source_provenance": {
+      "type": "object",
+      "description": "Provenance and rights info for historical or synthetic records",
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "archive": { "type": "string" },
+        "publication_date": { "type": "string" },
+        "license": { "type": "string" }
+      },
+      "required": ["url", "archive", "publication_date", "license"]
+    },
     "alphabet": { "type": "string" },
     "text_length": { "type": "integer" },
     "normalized_text_length": { "type": "integer" },

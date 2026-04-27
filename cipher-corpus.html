@@ -8,6 +8,8 @@
   <meta property="og:title" content="Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum">
   <meta property="og:description" content="A curated library of ciphertext challenges, known plaintexts, keys, and metadata for learning, teaching, scoring, and benchmarking classical cryptanalysis.">
 
+  <meta name="keywords" content="cipher corpus, cryptanalysis, classical ciphers, benchmark, ciphertext, plaintext, cryptography, teaching, education, reproducibility, LLM, solver, open data, schema.org">
+
   <link rel="stylesheet" href="/css/museum.css">
   <style>
     .ciphertext-block, .corpus-ciphertext, pre.ciphertext, code.ciphertext {
@@ -89,7 +91,7 @@
       margin: 0.3em 0.7em 0.3em 0;
       padding: 0.4em 1.2em;
       border-radius: 5px;
-      border: none;
+      .community-panel {
       background: var(--bg-btn, #2d230c);
       color: var(--fg-btn, #ffd700);
       cursor: pointer;
@@ -155,8 +157,26 @@
       <button onclick="downloadFile('advanced.jsonl')">Download advanced set</button>
       <button onclick="downloadFile('expert.jsonl')">Download expert set</button>
       <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
-        If you use Cipher Corpus in a project, please cite Cipher Museum and include the dataset version.<br>
         <b>Cipher Corpus v0.2</b>
+      <h3>API Access</h3>
+      <div style="font-size:0.97em;color:var(--fg-muted,#bfa76a);margin-bottom:1em;">
+        The Cipher Corpus is available as a public JSON API for tool integration and research. Fetch records directly:
+        <ul>
+          <li><b>All records (JSON):</b> <code>https://ciphermuseum.com/public/corpus/all.json</code></li>
+          <li><b>All records (JSONL):</b> <code>https://ciphermuseum.com/public/corpus/all.jsonl</code></li>
+          <li><b>Beginner split:</b> <code>https://ciphermuseum.com/public/corpus/beginner.jsonl</code></li>
+          <li><b>Intermediate split:</b> <code>https://ciphermuseum.com/public/corpus/intermediate.jsonl</code></li>
+          <li><b>Advanced split:</b> <code>https://ciphermuseum.com/public/corpus/advanced.jsonl</code></li>
+          <li><b>Expert split:</b> <code>https://ciphermuseum.com/public/corpus/expert.jsonl</code></li>
+          <li><b>Schema:</b> <code>https://ciphermuseum.com/public/corpus/cipher-corpus.schema.json</code></li>
+          <li><b>Receipts:</b> <code>https://ciphermuseum.com/reports/receipt-*.json</code></li>
+        </ul>
+        <div style="margin-top:0.7em;">Example (Python):<br>
+        <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.97em;">import requests
+  resp = requests.get('https://ciphermuseum.com/public/corpus/all.json')
+  data = resp.json()</pre>
+        </div>
+      </div>
       </div>
     </section>
     <section>
@@ -241,8 +261,48 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
   </main>
   <footer style="margin-top:3em;padding:2em 0 1em 0;text-align:center;color:var(--fg-muted,#bfa76a);font-size:1.1em;">
     <div>Whether therefore ye eat, or drink, or whatsoever ye do, do all to the glory of God.<br>— 1 Corinthians 10:31</div>
+    <script>
+      // Community submission form logic
+      const form = document.getElementById('corpus-submit-form');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const data = Object.fromEntries(new FormData(form).entries());
+          let keyObj = {};
+          try { keyObj = JSON.parse(data.key); } catch { keyObj = data.key; }
+          const record = {
+            id: (data.cipher_type + '-' + data.language + '-' + Math.random().toString(36).slice(2,7)).toLowerCase(),
+            title: data.title,
+            cipher_family: data.cipher_family,
+            cipher_type: data.cipher_type,
+            plaintext: data.plaintext,
+            ciphertext: data.ciphertext,
+            key: keyObj,
+            language: data.language,
+            alphabet: data.alphabet,
+            text_length: data.plaintext.length,
+            normalized_text_length: data.plaintext.replace(/[^A-Za-z]/g,"").length,
+            spacing: "preserved",
+            punctuation: "removed",
+            casing: "uppercase",
+            difficulty: data.difficulty,
+            source_type: data.source_type,
+            source: data.source,
+            license: data.license,
+            notes: data.notes,
+            expected_attacks: [],
+            tags: [data.cipher_type, data.language, data.difficulty],
+            created_by: "user",
+            verified: false,
+            dataset_version: "user",
+          };
+          document.getElementById('corpus-submit-preview').textContent = JSON.stringify(record, null, 2);
+        });
+      }
+    </script>
     <div style="margin-top:0.7em;font-size:0.95em;">&copy; Cipher Museum. All rights reserved. Synthetic benchmark records are CC0.</div>
   </footer>
+  <script src="/js/detective-integration.js"></script>
   <script src="/js/cipher-corpus.js"></script>
 </body>
 </html>

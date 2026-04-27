@@ -1,11 +1,12 @@
 # Cipher Corpus Changelog
 
 
+
 ## v0.2
-- Major dataset expansion: added Playfair, Hill, Polybius, Bacon, Rail Fence, and multilingual (Spanish, French) records.
-- Added more difficulty splits and metadata diversity.
-- Updated beginner/intermediate/advanced splits.
-- Placeholder for expert-level records (coming soon).
+- Major dataset expansion: added Playfair, Hill, Polybius, Bacon, Rail Fence, and multilingual (Spanish, French, Russian, German) records.
+- Added noisy ciphertext records simulating OCR errors and typos (English, French).
+- Added modern cipher baselines (AES, DES, RSA) for educational contrast.
+- Updated beginner/intermediate/advanced/expert splits.
 
 ## v0.1
 - Initial synthetic benchmark release.

@@ -1,0 +1,14 @@
+{
+  "cipher_name": "Beale Ciphers (Historical Example)",
+  "ciphertext": "115, 73, 24, 807, ...",
+  "plaintext": "A historical example of the Beale ciphers.",
+  "language": "en",
+  "homophonic": false,
+  "noisy": false,
+  "synthetic": false,
+  "source_provenance": {
+    "type": "historical",
+    "details": "Beale Papers, 1885 pamphlet, Library of Congress, https://www.loc.gov/item/06020447/"
+  },
+  "notes": "This is a sample historical cipher record for v0.2 compliance."
+}

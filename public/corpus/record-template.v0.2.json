@@ -1,0 +1,14 @@
+{
+  "cipher_name": "EXAMPLE CIPHER",
+  "ciphertext": "ABCDEF...",
+  "plaintext": "EXAMPLE...",
+  "language": "en",
+  "homophonic": false,
+  "noisy": false,
+  "synthetic": false,
+  "source_provenance": {
+    "type": "historical",
+    "details": "Describe the source, publication, or archive. Include references."
+  },
+  "notes": "Any additional context or explanation."
+}

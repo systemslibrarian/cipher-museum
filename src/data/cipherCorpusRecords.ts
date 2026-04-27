@@ -26,7 +26,15 @@ export const cipherCorpusRecords: CipherCorpusRecord[] = [
     tags: ["classical", "substitution", "beginner"],
     created_by: "Cipher Museum",
     verified: true,
-    dataset_version: "0.1"
+    dataset_version: "0.1",
+    split: "public",
+    transcription_quality: "clean",
+    source_provenance: {
+      url: "https://ciphermuseum.com/cipher-corpus.html",
+      archive: "Cipher Museum Synthetic Corpus",
+      publication_date: "2026-04-27",
+      license: "CC0"
+    }
   },
   {
     id: "vigenere-en-001",
@@ -52,7 +60,15 @@ export const cipherCorpusRecords: CipherCorpusRecord[] = [
     tags: ["classical", "polyalphabetic", "vigenere"],
     created_by: "Cipher Museum",
     verified: true,
-    dataset_version: "0.1"
+    dataset_version: "0.1",
+    split: "public",
+    transcription_quality: "clean",
+    source_provenance: {
+      url: "https://ciphermuseum.com/cipher-corpus.html",
+      archive: "Cipher Museum Synthetic Corpus",
+      publication_date: "2026-04-27",
+      license: "CC0"
+    }
   },
   {
     id: "atbash-en-001",
@@ -78,6 +94,14 @@ export const cipherCorpusRecords: CipherCorpusRecord[] = [
     tags: ["classical", "substitution", "atbash"],
     created_by: "Cipher Museum",
     verified: true,
-    dataset_version: "0.1"
+    dataset_version: "0.1",
+    split: "public",
+    transcription_quality: "clean",
+    source_provenance: {
+      url: "https://ciphermuseum.com/cipher-corpus.html",
+      archive: "Cipher Museum Synthetic Corpus",
+      publication_date: "2026-04-27",
+      license: "CC0"
+    }
   }
 ];
