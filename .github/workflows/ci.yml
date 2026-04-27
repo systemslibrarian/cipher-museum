@@ -23,6 +23,9 @@ jobs:
       - name: Run test suites
         run: npm test
 
+      - name: Lint HTML
+        run: npm run lint:html
+
   validate-corpus:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'

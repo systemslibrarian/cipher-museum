@@ -14,7 +14,8 @@
     "test:structural": "node tests/test-structural.js",
     "test:links": "node tests/test-local-links.js",
     "validate:corpus": "node scripts/validate-corpus-v0.2.js public/corpus/all.jsonl",
-    "build:search-index": "node scripts/build-search-index.js"
+    "build:search-index": "node scripts/build-search-index.js",
+    "lint:html": "htmlhint 'ciphers/*.html' 'halls/*.html' '*.html' 'lab/*.html' 'tours/*.html' 'community/*.html'"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
+    "htmlhint": "^1.9.2",
     "jsdom": "^24.0.0"
   },
   "dependencies": {

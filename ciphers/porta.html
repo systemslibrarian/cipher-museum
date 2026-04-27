@@ -81,12 +81,12 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>Giambattista della Porta was one of the most prolific natural philosophers of the Renaissance — he wrote on optics, agriculture, meteorology, and magic. His 1563 book <em>De Furtivis Literarum Notis</em> contained one of the most sophisticated cipher systems of his era: a 13-row reciprocal polyalphabetic cipher.</p><p style='margin-top:1rem;'>Unlike Vigenère's 26 rows, Porta used 13 rows — each shared by two key letters. This made the table smaller and easier to use in the field, while still providing polyalphabetic variation. The cipher remained in use by European courts for decades.</p></div>
+      <div class="panel-body"><p>Giambattista della Porta was one of the most prolific natural philosophers of the Renaissance — he wrote on optics, agriculture, meteorology, and magic. His 1563 book <em>De Furtivis Literarum Notis</em> contained one of the most sophisticated cipher systems of his era: a 13-row reciprocal polyalphabetic cipher.</p><p style="margin-top:1rem;">Unlike Vigenère's 26 rows, Porta used 13 rows — each shared by two key letters. This made the table smaller and easier to use in the field, while still providing polyalphabetic variation. The cipher remained in use by European courts for decades.</p></div>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>The Porta cipher uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class='steps' style='margin:1rem 0;'><li class='step'><div class='step-text'>Find the row whose label contains the current key letter</div></li><li class='step'><div class='step-text'>Look up the plaintext letter in that row</div></li><li class='step'><div class='step-text'>The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p>
+      <div class="panel-body"><p>The Porta cipher uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class="steps" style="margin:1rem 0;"><li class="step"><div class="step-text">Find the row whose label contains the current key letter</div></li><li class="step"><div class="step-text">Look up the plaintext letter in that row</div></li><li class="step"><div class="step-text">The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p>
 <figure class="figure">
 <svg viewBox="0 0 380 190" style="width:100%;max-width:380px;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Porta cipher 13-row reciprocal tableau">
   <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:2}</style>
@@ -193,36 +193,7 @@
 
 </main>
 
-<footer class="museum-footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="footer-logo-text">The Cipher Museum</span>
-      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Navigate</div>
-      <ul class="footer-links">
-        <li><a href="../museum-map.html">Museum Map</a></li>
-        <li><a href="../timeline.html">Timeline</a></li>
-      <li><a href="../challenges.html">Challenges</a></li>
-      <li><a href="../glossary.html">Glossary</a></li>
-      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
-        <li><a href="../modern.html">Modern Crypto</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">This Exhibit</div>
-      <ul class="footer-links">
-        <li><a href="beaufort.html">&larr; Beaufort Cipher</a></li>
-        <li><a href="gronsfeld.html">Gronsfeld Cipher &rarr;</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
-    <span class="footer-copy">Exhibit 09 of 139</span>
-  </div>
-</footer>
+<footer></footer>
 <script src="../js/ciphers/all-engines.js"></script>
 <script src="../js/demo-loader.js"></script>
 <script src="../js/nav.js" defer></script>

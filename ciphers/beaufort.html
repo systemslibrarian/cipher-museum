@@ -81,7 +81,7 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>Sir Francis Beaufort — famous for the Beaufort wind scale — devised a variant of the Vigenère cipher with an elegant property: the same operation encrypts and decrypts. Where Vigenère adds key to plaintext modulo 26, Beaufort subtracts plaintext from key. Because of this reciprocal property, you never need to switch between an encryption and decryption mode.</p><p style='margin-top:1rem;'>Beaufort's cipher was used by the British Royal Navy and represents one of the cleaner historical cipher designs. Its weakness is identical to Vigenère's: the repeating key creates detectable periodicity.</p></div>
+      <div class="panel-body"><p>Sir Francis Beaufort — famous for the Beaufort wind scale — devised a variant of the Vigenère cipher with an elegant property: the same operation encrypts and decrypts. Where Vigenère adds key to plaintext modulo 26, Beaufort subtracts plaintext from key. Because of this reciprocal property, you never need to switch between an encryption and decryption mode.</p><p style="margin-top:1rem;">Beaufort's cipher was used by the British Royal Navy and represents one of the cleaner historical cipher designs. Its weakness is identical to Vigenère's: the repeating key creates detectable periodicity.</p></div>
     </div>
 
     <div class="panel">
@@ -91,7 +91,7 @@ Beaufort: C = (K - P + 26) mod 26
 
 Key:    S  E  C  R  E  T
 Plain:  H  E  L  L  O  W
-Cipher: K  A  R  G  A  N</pre><p style='margin-top:1rem;'>Because subtraction is its own inverse: Decrypt(C, K) = Encrypt(C, K). This makes key management simpler — operators only need one table.</p>
+Cipher: K  A  R  G  A  N</pre><p style="margin-top:1rem;">Because subtraction is its own inverse: Decrypt(C, K) = Encrypt(C, K). This makes key management simpler — operators only need one table.</p>
 <figure class="figure">
 <svg viewBox="0 0 380 130" style="width:100%;max-width:380px;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beaufort vs Vigenere formula comparison">
   <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}</style>
@@ -188,36 +188,7 @@ Cipher: K  A  R  G  A  N</pre><p style='margin-top:1rem;'>Because subtraction is
 
 </main>
 
-<footer class="museum-footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="footer-logo-text">The Cipher Museum</span>
-      <p class="footer-brand-desc">Open-source cryptography education. MIT License. GitHub Pages.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Navigate</div>
-      <ul class="footer-links">
-        <li><a href="../museum-map.html">Museum Map</a></li>
-        <li><a href="../timeline.html">Timeline</a></li>
-      <li><a href="../challenges.html">Challenges</a></li>
-      <li><a href="../glossary.html">Glossary</a></li>
-      <li><a href="../cryptanalysis.html">Cryptanalysis Techniques</a></li>
-        <li><a href="../modern.html">Modern Crypto</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">This Exhibit</div>
-      <ul class="footer-links">
-        <li><a href="vigenere.html">&larr; Vigenère Cipher</a></li>
-        <li><a href="porta.html">Porta Cipher &rarr;</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">&copy; The Cipher Museum &middot; MIT License</span>
-    <span class="footer-copy">Exhibit 08 of 139</span>
-  </div>
-</footer>
+<footer></footer>
 <script src="../js/ciphers/all-engines.js"></script>
 <script src="../js/demo-loader.js"></script>
 <script src="../js/nav.js" defer></script>
