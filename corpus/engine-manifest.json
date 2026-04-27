@@ -1,6 +1,6 @@
 {
   "generated": "2026-04-27",
-  "total_records": 17425,
+  "total_records": 97900,
   "engines": [
     {
       "name": "caesar",
@@ -8,7 +8,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 10,
-      "record_count": 600
+      "record_count": 4050
     },
     {
       "name": "rot13",
@@ -16,7 +16,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 1,
-      "record_count": 60
+      "record_count": 290
     },
     {
       "name": "atbash",
@@ -24,7 +24,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 1,
-      "record_count": 60
+      "record_count": 290
     },
     {
       "name": "monoalphabetic",
@@ -32,7 +32,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 10,
-      "record_count": 600
+      "record_count": 3360
     },
     {
       "name": "affine",
@@ -40,7 +40,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 10,
-      "record_count": 600
+      "record_count": 4050
     },
     {
       "name": "trithemius",
@@ -48,7 +48,7 @@
       "category": "polyalphabetic",
       "difficulty": "beginner",
       "variants": 2,
-      "record_count": 120
+      "record_count": 350
     },
     {
       "name": "polybius",
@@ -56,7 +56,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 1,
-      "record_count": 56
+      "record_count": 268
     },
     {
       "name": "tapCode",
@@ -64,7 +64,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 1,
-      "record_count": 39
+      "record_count": 192
     },
     {
       "name": "bacon",
@@ -72,7 +72,7 @@
       "category": "steganography",
       "difficulty": "beginner",
       "variants": 1,
-      "record_count": 30
+      "record_count": 116
     },
     {
       "name": "morse",
@@ -80,7 +80,7 @@
       "category": "encoding",
       "difficulty": "beginner",
       "variants": 1,
-      "record_count": 60
+      "record_count": 290
     },
     {
       "name": "joseonYeokhak",
@@ -88,7 +88,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 3,
-      "record_count": 180
+      "record_count": 1100
     },
     {
       "name": "vigenere",
@@ -96,7 +96,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 10,
-      "record_count": 600
+      "record_count": 4050
     },
     {
       "name": "beaufort",
@@ -104,7 +104,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 5,
-      "record_count": 300
+      "record_count": 2370
     },
     {
       "name": "gronsfeld",
@@ -112,7 +112,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 6,
-      "record_count": 360
+      "record_count": 2430
     },
     {
       "name": "porta",
@@ -120,7 +120,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1680
     },
     {
       "name": "runningKey",
@@ -128,7 +128,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 3,
-      "record_count": 90
+      "record_count": 348
     },
     {
       "name": "railFence",
@@ -136,7 +136,7 @@
       "category": "transposition",
       "difficulty": "intermediate",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1680
     },
     {
       "name": "columnar",
@@ -144,7 +144,7 @@
       "category": "transposition",
       "difficulty": "intermediate",
       "variants": 8,
-      "record_count": 480
+      "record_count": 2780
     },
     {
       "name": "scytale",
@@ -152,7 +152,7 @@
       "category": "transposition",
       "difficulty": "intermediate",
       "variants": 6,
-      "record_count": 360
+      "record_count": 1740
     },
     {
       "name": "playfair",
@@ -160,7 +160,7 @@
       "category": "polygraphic",
       "difficulty": "intermediate",
       "variants": 8,
-      "record_count": 448
+      "record_count": 2548
     },
     {
       "name": "homophonic",
@@ -168,7 +168,7 @@
       "category": "substitution",
       "difficulty": "intermediate",
       "variants": 5,
-      "record_count": 44
+      "record_count": 107
     },
     {
       "name": "autokey",
@@ -176,7 +176,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1680
     },
     {
       "name": "confederateVigenere",
@@ -184,7 +184,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1680
     },
     {
       "name": "kamaSutra",
@@ -192,7 +192,7 @@
       "category": "substitution",
       "difficulty": "intermediate",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "diana",
@@ -200,7 +200,7 @@
       "category": "polyalphabetic",
       "difficulty": "intermediate",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1680
     },
     {
       "name": "bifid",
@@ -208,7 +208,7 @@
       "category": "fractionation",
       "difficulty": "advanced",
       "variants": 5,
-      "record_count": 280
+      "record_count": 1552
     },
     {
       "name": "trifid",
@@ -216,7 +216,7 @@
       "category": "fractionation",
       "difficulty": "advanced",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1450
     },
     {
       "name": "adfgx",
@@ -224,7 +224,7 @@
       "category": "fractionation",
       "difficulty": "advanced",
       "variants": 5,
-      "record_count": 280
+      "record_count": 1552
     },
     {
       "name": "adfgvx",
@@ -232,7 +232,7 @@
       "category": "fractionation",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1390
     },
     {
       "name": "nihilist",
@@ -240,7 +240,7 @@
       "category": "fractionation",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 224
+      "record_count": 1072
     },
     {
       "name": "straddlingCheckerboard",
@@ -248,7 +248,7 @@
       "category": "substitution",
       "difficulty": "advanced",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "foursquare",
@@ -256,7 +256,7 @@
       "category": "polygraphic",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 224
+      "record_count": 1284
     },
     {
       "name": "twosquare",
@@ -264,7 +264,7 @@
       "category": "polygraphic",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 224
+      "record_count": 1072
     },
     {
       "name": "fractionatedMorse",
@@ -272,7 +272,7 @@
       "category": "fractionation",
       "difficulty": "advanced",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1450
     },
     {
       "name": "doubleTransposition",
@@ -280,7 +280,7 @@
       "category": "transposition",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1390
     },
     {
       "name": "bazeries",
@@ -288,7 +288,7 @@
       "category": "transposition",
       "difficulty": "advanced",
       "variants": 6,
-      "record_count": 360
+      "record_count": 1970
     },
     {
       "name": "chaocipher",
@@ -296,7 +296,7 @@
       "category": "machine",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1390
     },
     {
       "name": "hill",
@@ -304,7 +304,7 @@
       "category": "polygraphic",
       "difficulty": "advanced",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1450
     },
     {
       "name": "vic",
@@ -312,7 +312,7 @@
       "category": "substitution",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 224
+      "record_count": 1072
     },
     {
       "name": "copiale",
@@ -320,7 +320,7 @@
       "category": "substitution",
       "difficulty": "advanced",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "kryptos",
@@ -328,7 +328,7 @@
       "category": "polyalphabetic",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "cardanoAutokey",
@@ -336,7 +336,7 @@
       "category": "polyalphabetic",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "wheatstone",
@@ -344,7 +344,7 @@
       "category": "polygraphic",
       "difficulty": "advanced",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "geezMonastic",
@@ -352,7 +352,7 @@
       "category": "substitution",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 240
+      "record_count": 930
     },
     {
       "name": "redTypeA",
@@ -360,7 +360,7 @@
       "category": "machine",
       "difficulty": "advanced",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "nullCipher",
@@ -368,7 +368,7 @@
       "category": "steganography",
       "difficulty": "advanced",
       "variants": 2,
-      "record_count": 60
+      "record_count": 232
     },
     {
       "name": "enigma",
@@ -376,7 +376,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 7,
-      "record_count": 420
+      "record_count": 2720
     },
     {
       "name": "lorenz",
@@ -384,7 +384,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 5,
-      "record_count": 259
+      "record_count": 1300
     },
     {
       "name": "sigaba",
@@ -392,7 +392,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "typex",
@@ -400,7 +400,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "m209",
@@ -408,7 +408,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 5,
-      "record_count": 300
+      "record_count": 1220
     },
     {
       "name": "purple",
@@ -416,7 +416,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "fialka",
@@ -424,7 +424,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "kl7",
@@ -432,7 +432,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "geheimschreiber",
@@ -440,7 +440,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 4,
-      "record_count": 240
+      "record_count": 1160
     },
     {
       "name": "kryha",
@@ -448,7 +448,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "m94",
@@ -456,7 +456,7 @@
       "category": "machine",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 180
+      "record_count": 771
     },
     {
       "name": "solitaire",
@@ -464,7 +464,7 @@
       "category": "stream",
       "difficulty": "expert",
       "variants": 2,
-      "record_count": 120
+      "record_count": 810
     },
     {
       "name": "jefferson",
@@ -472,7 +472,7 @@
       "category": "disk",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 165
+      "record_count": 756
     },
     {
       "name": "alberti",
@@ -480,7 +480,7 @@
       "category": "disk",
       "difficulty": "expert",
       "variants": 5,
-      "record_count": 300
+      "record_count": 2140
     },
     {
       "name": "stager",
@@ -488,7 +488,7 @@
       "category": "transposition",
       "difficulty": "expert",
       "variants": 6,
-      "record_count": 360
+      "record_count": 1280
     },
     {
       "name": "greatCipher",
@@ -496,7 +496,7 @@
       "category": "nomenclator",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "babington",
@@ -504,7 +504,7 @@
       "category": "nomenclator",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 63
+      "record_count": 246
     },
     {
       "name": "nomenclator",
@@ -512,7 +512,7 @@
       "category": "nomenclator",
       "difficulty": "expert",
       "variants": 2,
-      "record_count": 120
+      "record_count": 810
     },
     {
       "name": "bookCipher",
@@ -520,7 +520,7 @@
       "category": "codebook",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 17
+      "record_count": 63
     },
     {
       "name": "argenti",
@@ -528,7 +528,7 @@
       "category": "nomenclator",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "wallisCiphers",
@@ -536,7 +536,7 @@
       "category": "nomenclator",
       "difficulty": "expert",
       "variants": 2,
-      "record_count": 120
+      "record_count": 580
     },
     {
       "name": "chineseTelegraph",
@@ -544,7 +544,7 @@
       "category": "codebook",
       "difficulty": "expert",
       "variants": 2,
-      "record_count": 120
+      "record_count": 810
     },
     {
       "name": "zimmermann",
@@ -552,7 +552,7 @@
       "category": "codebook",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 60
+      "record_count": 290
     },
     {
       "name": "culperRing",
@@ -560,7 +560,7 @@
       "category": "codebook",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 60
+      "record_count": 290
     },
     {
       "name": "arnoldAndre",
@@ -568,7 +568,7 @@
       "category": "codebook",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 30
+      "record_count": 116
     },
     {
       "name": "commercialCode",
@@ -576,7 +576,7 @@
       "category": "codebook",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 60
+      "record_count": 290
     },
     {
       "name": "aeneasTacticus",
@@ -584,7 +584,7 @@
       "category": "steganography",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 30
+      "record_count": 116
     },
     {
       "name": "jn25",
@@ -592,7 +592,7 @@
       "category": "codebook",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "venonaPadReuse",
@@ -600,7 +600,7 @@
       "category": "stream",
       "difficulty": "expert",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     },
     {
       "name": "otp",
@@ -608,7 +608,7 @@
       "category": "stream",
       "difficulty": "expert",
       "variants": 2,
-      "record_count": 109
+      "record_count": 485
     },
     {
       "name": "vernam",
@@ -616,7 +616,7 @@
       "category": "stream",
       "difficulty": "expert",
       "variants": 2,
-      "record_count": 109
+      "record_count": 485
     },
     {
       "name": "navajo",
@@ -624,7 +624,7 @@
       "category": "code",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 30
+      "record_count": 116
     },
     {
       "name": "pigpen",
@@ -632,7 +632,7 @@
       "category": "substitution",
       "difficulty": "beginner",
       "variants": 1,
-      "record_count": 55
+      "record_count": 252
     },
     {
       "name": "voynich",
@@ -640,7 +640,7 @@
       "category": "substitution",
       "difficulty": "expert",
       "variants": 1,
-      "record_count": 55
+      "record_count": 252
     },
     {
       "name": "slidex",
@@ -648,7 +648,7 @@
       "category": "transposition",
       "difficulty": "advanced",
       "variants": 3,
-      "record_count": 180
+      "record_count": 870
     }
   ]
 }
