@@ -295,7 +295,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
         <li>✓ Multilingual examples (French, German, Latin, Spanish, Italian)</li>
         <li>✓ Noisy transcription variants (OCR errors, telegraph noise, historical spelling)</li>
         <li>✓ 55 historical records with primary source citations (150 BCE – 1999 CE)</li>
-        <li>✓ Downloadable benchmark report with per-cipher statistics (<a href="/reports/benchmark-baselines.html">view report</a>)</li>
+        <li>✓ Downloadable benchmark report with per-cipher statistics (<a href="public/reports/benchmark-baselines.html">view report</a>)</li>
         <li>✓ LLM 3-shot evaluation export format (<code>llm-3shot-eval.jsonl</code>)</li>
         <li>✓ Community submission workflow (see below)</li>
         <li>✓ Academic citation format (CITATION.cff)</li>
@@ -361,7 +361,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
       <div style="margin-top:0.5em;font-size:0.97em;">
         <b>Benchmark evaluation:</b> <code>node scripts/benchmark-runner.js</code> — tests cipher solvers against corpus records, reporting success rate, key accuracy, plaintext similarity, and time to result.<br>
         <b>LLM 3-shot export:</b> <code>node scripts/export-llm-3shot.js --difficulty intermediate --count 100</code> — exports structured evaluation prompts with 3-shot context, challenge mode, and key recovery tasks.<br>
-        <b>Benchmark report:</b> <code>node scripts/generate-benchmark-report.js</code> — generates per-cipher baseline statistics. <a href="/reports/benchmark-baselines.html">View current report →</a><br>
+        <b>Benchmark report:</b> <code>node scripts/generate-benchmark-report.js</code> — generates per-cipher baseline statistics. <a href="public/reports/benchmark-baselines.html">View current report →</a><br>
         All 17,425 core records pass roundtrip verification.
       </div>
     </section>
