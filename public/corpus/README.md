@@ -11,9 +11,9 @@ Cipher Corpus is an educational benchmark library for classical cryptanalysis �
 | **Total records** | 100,026 |
 | **Cipher types** | 82 |
 | **Cipher engines** | 84 |
-| **Languages** | 9 (en, fr, de, la, es, it, ja, ru, zh) |
-| **Historical records** | 55 |
-| **Multilingual records** | 3,638 |
+| **Languages** | 10 (en, fr, de, la, es, it, ar, ja, ru, zh) |
+| **Historical records** | 101 (spanning 4,000 years, 78 cipher types) |
+| **Multilingual records** | 5,348 (fr/de/la/es/it/ar) |
 | **Noisy transcription variants** | 484 |
 | **Public split** | ~70% |
 | **Blind split** | ~30% |
@@ -43,8 +43,8 @@ All core records pass roundtrip verification (`decrypt(encrypt(plaintext)) == pl
 | `intermediate.jsonl` | 4,422 intermediate records |
 | `advanced.jsonl` | 5,176 advanced records |
 | `expert.jsonl` | 5,367 expert records |
-| `historical.jsonl` | 55 historical records with provenance |
-| `multilingual.jsonl` | 3,638 multilingual records (fr/de/la/es/it) |
+| `historical.jsonl` | 101 historical records with provenance (4,000 years, 78 cipher types) |
+| `multilingual.jsonl` | 5,348 multilingual records (fr/de/la/es/it/ar) |
 | `noisy.jsonl` | 484 noisy transcription variants |
 | `llm-3shot-eval.jsonl` | 300 LLM 3-shot evaluation prompts |
 | `cipher-corpus.schema.json` | JSON Schema v0.2 |
@@ -92,16 +92,77 @@ Top cipher types by record count: Caesar (600+), Monoalphabetic (600+), Affine (
 
 ## Historical Records
 
-55 historical records spanning 150 BCE to 1999 CE, including:
-- Caesar's cipher (documented by Suetonius, c. 121 AD)
+101 historical records spanning 4,000 years of cryptographic history — from the Hebrew Bible to the Cold War — covering 78 cipher types with verified citations:
+
+**Ancient World (c. 600 BCE – 500 CE):**
+- Atbash cipher in the Hebrew Bible (Jeremiah 25:26, c. 600 BCE)
+- Spartan scytale dispatches (Plutarch/Thucydides, c. 400 BCE)
+- Aeneas Tacticus cipher disk (Poliorketika, c. 360 BCE)
+- Caesar's ROT3 cipher (Suetonius, c. 50 BCE) and Augustus's ROT1 variant
+- Polybius square signaling (c. 150 BCE)
+- Kamasutra mlecchita-vikalpa cipher (Vātsyāyana, c. 200 CE)
+
+**Medieval & Renaissance (500–1700 CE):**
+- Ethiopian monastic Ge'ez cipher (c. 1200 CE)
+- Korean Joseon postal cipher (Gyeongguk Daejeon, c. 1400 CE)
+- Argenti papal cipher — Argenti family cryptographers (Vatican, 1585)
+- Trithemius tabula recta (Polygraphia, 1518)
+- Porta reciprocal cipher (De Furtivis Literarum Notis, 1563)
+- Cardano grille and autokey (De Subtilitate, c. 1550)
+- Bacon bilateral steganographic cipher (Advancement of Learning, 1605)
 - Babington Plot nomenclator (Mary Queen of Scots, 1586)
-- Zimmermann Telegram (Room 40, 1917)
-- Enigma training vectors (Bletchley Park, WWII)
-- VENONA intercepts (NSA, 1944-1980)
+
+**18th–19th Century:**
+- Gronsfeld numeric-key cipher (Count von Gronsfeld, c. 1734)
+- Vigenère demonstration (Traicté des Chiffres, 1586) — 2nd record
+- Beaufort reciprocal cipher (Admiral Beaufort, 1857)
+- Freemason pigpen cipher (c. 1740)
+- Poe Gold Bug monoalphabetic (Graham's Magazine, 1843)
+- First telegraph message in Morse code (1844)
+- Russian Nihilist Party cipher (Narodnaya Volya, c. 1880)
+- Rail fence Civil War telegrams (Union Army, c. 1864)
+- Bazeries cylinder cipher (French Army, 1891)
+
+**20th Century:**
+- Delastelle bifid, trifid, and four-square ciphers (1901–1902)
+- WWI ciphers: ADFGX (1918), double transposition, columnar transposition, running key
+- Kryha cipher machine — broken by Friedman in 2.5 hours (1926)
+- WWII ciphers: Enigma, Lorenz, TypeX, Slidex, Japanese Red Machine, SOE double transposition
+- Soviet straddling checkerboard (NKVD/GRU, c. 1920)
+- Vernam one-time pad (patent 1919, proved perfect by Shannon 1949)
+- Vietnam War POW tap code (Hanoi Hilton, 1965)
+- ROT13 Usenet convention (c. 1982)
+- Hill cipher — linear algebra cryptography (1929)
 - Kryptos K1 and K3 (CIA headquarters, 1990)
-- And 49 more...
+- Solitaire cipher (Neal Stephenson's Cryptonomicon, 1999)
+- And 30+ more...
 
 Each historical record includes: `historical_context`, `year`, `source_provenance` with archive URL.
+
+## Analysis Tools
+
+The `scripts/` directory contains automated cryptanalysis tools for research and education:
+
+| Script | Description |
+|---|---|
+| `scripts/hill-climbing-solver.js` | Monoalphabetic cipher solver: hill climbing + quadgram scoring. 95% accuracy on 80+ char ciphertexts. |
+| `scripts/sa-solver.js` | Simulated annealing solver: better than hill climbing on short ciphertexts; SA + HC hybrid mode. |
+| `scripts/build-quadgrams.js` | Regenerates English quadgram statistics from corpus plaintext. |
+| `scripts/data/english-quadgrams.json` | 8,877 quadgram log-probability entries from 896K corpus observations. |
+
+```bash
+# Solve a monoalphabetic cipher (hill climbing):
+node scripts/hill-climbing-solver.js "CIPHERTEXT" --restarts 25
+
+# Solve a short cipher (simulated annealing):
+node scripts/sa-solver.js "SHORT CIPHER" --restarts 10 --verbose
+
+# Test accuracy on corpus records:
+node scripts/hill-climbing-solver.js --corpus public/corpus/beginner.jsonl --limit 20
+
+# Compare SA vs HC:
+node scripts/sa-solver.js --compare --corpus public/corpus/beginner.jsonl --limit 30
+```
 
 ## Attribution & Related Work
 
@@ -130,7 +191,7 @@ Cipher Corpus builds on the pioneering work of **CipherBank** by Li et al. (2025
 | Benchmark | Records | Algorithms | Historical | Multilingual | Blind Splits | LLM Eval Format |
 |---|---|---|---|---|---|---|
 | CipherBank (Li et al., 2025) | 2,358 | 9 | No | No | No | No |
-| **Cipher Corpus v0.3** | **100,026** | **82** | **Yes (55)** | **Yes (9 langs)** | **Yes** | **Yes** |
+| **Cipher Corpus v0.4** | **100,026+** | **82** | **Yes (101)** | **Yes (10 langs)** | **Yes** | **Yes** |
 
 ### Cite Cipher Corpus
 
@@ -140,7 +201,7 @@ Cipher Corpus builds on the pioneering work of **CipherBank** by Li et al. (2025
   author={Lester, Paul},
   year={2026},
   url={https://ciphermuseum.com/cipher-corpus.html},
-  note={100,026 test cases across 82 cipher algorithms, 9 languages}
+  note={100,026+ test cases across 82 cipher algorithms, 10 languages, 101 historical records}
 }
 ```
 
