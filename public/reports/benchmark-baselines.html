@@ -33,21 +33,21 @@
   <p style="color:var(--fg-muted,#bfa76a)">Generated 2026-04-27 · v0.2 · <a href="benchmark-baselines.json">Download JSON</a></p>
 
   <div>
-    <div class="stat-box"><div class="stat-num">21,557</div><div class="stat-label">Total Records</div></div>
-    <div class="stat-box"><div class="stat-num">81</div><div class="stat-label">Cipher Types</div></div>
-    <div class="stat-box"><div class="stat-num">6</div><div class="stat-label">Languages</div></div>
+    <div class="stat-box"><div class="stat-num">21,602</div><div class="stat-label">Total Records</div></div>
+    <div class="stat-box"><div class="stat-num">82</div><div class="stat-label">Cipher Types</div></div>
+    <div class="stat-box"><div class="stat-num">9</div><div class="stat-label">Languages</div></div>
     <div class="stat-box"><div class="stat-num">6435</div><div class="stat-label">Blind Split Records</div></div>
-    <div class="stat-box"><div class="stat-num">9</div><div class="stat-label">Historical Records</div></div>
+    <div class="stat-box"><div class="stat-num">54</div><div class="stat-label">Historical Records</div></div>
   </div>
 
   <h2>Expected Solver Accuracy by Difficulty</h2>
   <table>
     <thead><tr><th>Difficulty</th><th>Records</th><th>Human Expert</th><th>Automated Solver</th><th>LLM 3-Shot</th><th>LLM 0-Shot Challenge</th></tr></thead>
     <tbody>
-      <tr><td class="diff-beginner">beginner</td><td>3931</td><td>95-100%</td><td>95-100%</td><td>80-95%</td><td>60-80%</td></tr>
-<tr><td class="diff-intermediate">intermediate</td><td>6859</td><td>60-90%</td><td>60-90%</td><td>40-70%</td><td>20-50%</td></tr>
-<tr><td class="diff-advanced">advanced</td><td>5393</td><td>20-60%</td><td>20-60%</td><td>10-40%</td><td>5-20%</td></tr>
-<tr><td class="diff-expert">expert</td><td>5374</td><td>5-30%</td><td>5-30%</td><td>2-15%</td><td>1-5%</td></tr>
+      <tr><td class="diff-beginner">beginner</td><td>3934</td><td>95-100%</td><td>95-100%</td><td>80-95%</td><td>60-80%</td></tr>
+<tr><td class="diff-intermediate">intermediate</td><td>6863</td><td>60-90%</td><td>60-90%</td><td>40-70%</td><td>20-50%</td></tr>
+<tr><td class="diff-advanced">advanced</td><td>5403</td><td>20-60%</td><td>20-60%</td><td>10-40%</td><td>5-20%</td></tr>
+<tr><td class="diff-expert">expert</td><td>5402</td><td>5-30%</td><td>5-30%</td><td>2-15%</td><td>1-5%</td></tr>
     </tbody>
   </table>
 
@@ -58,7 +58,7 @@
     <td>vigenere</td>
     <td>polyalphabetic</td>
     <td class="diff-intermediate">intermediate</td>
-    <td>1287</td>
+    <td>1289</td>
     <td>38</td>
     <td>40-70%</td>
     <td>20-50%</td>
@@ -67,7 +67,7 @@
     <td>caesar</td>
     <td>substitution</td>
     <td class="diff-beginner">beginner</td>
-    <td>1285</td>
+    <td>1287</td>
     <td>38</td>
     <td>80-95%</td>
     <td>60-80%</td>
@@ -94,7 +94,7 @@
     <td>playfair</td>
     <td>polygraphic</td>
     <td class="diff-intermediate">intermediate</td>
-    <td>823</td>
+    <td>824</td>
     <td>36</td>
     <td>40-70%</td>
     <td>20-50%</td>
@@ -148,7 +148,7 @@
     <td>enigma</td>
     <td>machine</td>
     <td class="diff-expert">expert</td>
-    <td>421</td>
+    <td>423</td>
     <td>41</td>
     <td>2-15%</td>
     <td>1-5%</td>
@@ -157,7 +157,7 @@
     <td>stager_route</td>
     <td>transposition</td>
     <td class="diff-expert">expert</td>
-    <td>361</td>
+    <td>362</td>
     <td>43</td>
     <td>2-15%</td>
     <td>1-5%</td>
@@ -193,22 +193,40 @@
     <td>confederate_vigenere</td>
     <td>polyalphabetic</td>
     <td class="diff-intermediate">intermediate</td>
-    <td>301</td>
-    <td>41</td>
-    <td>40-70%</td>
-    <td>20-50%</td>
-  </tr>
-<tr>
-    <td>porta</td>
-    <td>polyalphabetic</td>
-    <td class="diff-intermediate">intermediate</td>
-    <td>300</td>
+    <td>302</td>
     <td>41</td>
     <td>40-70%</td>
     <td>20-50%</td>
   </tr>
 <tr>
     <td>diana</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>301</td>
+    <td>41</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>m209</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>301</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>alberti_disk</td>
+    <td>disk</td>
+    <td class="diff-expert">expert</td>
+    <td>301</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>porta</td>
     <td>polyalphabetic</td>
     <td class="diff-intermediate">intermediate</td>
     <td>300</td>
@@ -244,24 +262,6 @@
     <td>5-20%</td>
   </tr>
 <tr>
-    <td>m209</td>
-    <td>machine</td>
-    <td class="diff-expert">expert</td>
-    <td>300</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
-    <td>alberti_disk</td>
-    <td>disk</td>
-    <td class="diff-expert">expert</td>
-    <td>300</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
     <td>adfgx</td>
     <td>fractionation</td>
     <td class="diff-advanced">advanced</td>
@@ -274,8 +274,71 @@
     <td>lorenz</td>
     <td>machine</td>
     <td class="diff-expert">expert</td>
-    <td>259</td>
+    <td>260</td>
     <td>38</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>kryptos</td>
+    <td>polyalphabetic</td>
+    <td class="diff-advanced">advanced</td>
+    <td>242</td>
+    <td>42</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>adfgvx</td>
+    <td>fractionation</td>
+    <td class="diff-advanced">advanced</td>
+    <td>241</td>
+    <td>82</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>chaocipher</td>
+    <td>machine</td>
+    <td class="diff-advanced">advanced</td>
+    <td>241</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>sigaba</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>241</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>fialka</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>241</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>kl7</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>241</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>geheimschreiber</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>241</td>
+    <td>41</td>
     <td>2-15%</td>
     <td>1-5%</td>
   </tr>
@@ -289,35 +352,8 @@
     <td>20-50%</td>
   </tr>
 <tr>
-    <td>adfgvx</td>
-    <td>fractionation</td>
-    <td class="diff-advanced">advanced</td>
-    <td>240</td>
-    <td>82</td>
-    <td>10-40%</td>
-    <td>5-20%</td>
-  </tr>
-<tr>
     <td>double_transposition</td>
     <td>transposition</td>
-    <td class="diff-advanced">advanced</td>
-    <td>240</td>
-    <td>41</td>
-    <td>10-40%</td>
-    <td>5-20%</td>
-  </tr>
-<tr>
-    <td>chaocipher</td>
-    <td>machine</td>
-    <td class="diff-advanced">advanced</td>
-    <td>240</td>
-    <td>41</td>
-    <td>10-40%</td>
-    <td>5-20%</td>
-  </tr>
-<tr>
-    <td>kryptos</td>
-    <td>polyalphabetic</td>
     <td class="diff-advanced">advanced</td>
     <td>240</td>
     <td>41</td>
@@ -352,43 +388,7 @@
     <td>5-20%</td>
   </tr>
 <tr>
-    <td>sigaba</td>
-    <td>machine</td>
-    <td class="diff-expert">expert</td>
-    <td>240</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
     <td>typex</td>
-    <td>machine</td>
-    <td class="diff-expert">expert</td>
-    <td>240</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
-    <td>fialka</td>
-    <td>machine</td>
-    <td class="diff-expert">expert</td>
-    <td>240</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
-    <td>kl7</td>
-    <td>machine</td>
-    <td class="diff-expert">expert</td>
-    <td>240</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
-    <td>geheimschreiber</td>
     <td>machine</td>
     <td class="diff-expert">expert</td>
     <td>240</td>
@@ -400,7 +400,7 @@
     <td>vic</td>
     <td>substitution</td>
     <td class="diff-advanced">advanced</td>
-    <td>225</td>
+    <td>226</td>
     <td>0</td>
     <td>10-40%</td>
     <td>5-20%</td>
@@ -433,28 +433,19 @@
     <td>5-20%</td>
   </tr>
 <tr>
-    <td>joseon_yeokhak</td>
-    <td>substitution</td>
-    <td class="diff-beginner">beginner</td>
-    <td>180</td>
+    <td>purple</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>182</td>
     <td>41</td>
-    <td>80-95%</td>
-    <td>60-80%</td>
-  </tr>
-<tr>
-    <td>straddling_checkerboard</td>
-    <td>substitution</td>
-    <td class="diff-advanced">advanced</td>
-    <td>180</td>
-    <td>0</td>
-    <td>10-40%</td>
-    <td>5-20%</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
   </tr>
 <tr>
     <td>copiale</td>
     <td>substitution</td>
     <td class="diff-advanced">advanced</td>
-    <td>180</td>
+    <td>181</td>
     <td>41</td>
     <td>10-40%</td>
     <td>5-20%</td>
@@ -463,34 +454,16 @@
     <td>wheatstone</td>
     <td>polygraphic</td>
     <td class="diff-advanced">advanced</td>
-    <td>180</td>
+    <td>181</td>
     <td>41</td>
     <td>10-40%</td>
     <td>5-20%</td>
   </tr>
 <tr>
-    <td>purple</td>
-    <td>machine</td>
-    <td class="diff-expert">expert</td>
-    <td>180</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
-    <td>kryha</td>
-    <td>machine</td>
-    <td class="diff-expert">expert</td>
-    <td>180</td>
-    <td>41</td>
-    <td>2-15%</td>
-    <td>1-5%</td>
-  </tr>
-<tr>
     <td>m94</td>
     <td>machine</td>
     <td class="diff-expert">expert</td>
-    <td>180</td>
+    <td>181</td>
     <td>41</td>
     <td>2-15%</td>
     <td>1-5%</td>
@@ -499,10 +472,37 @@
     <td>great_cipher</td>
     <td>nomenclator</td>
     <td class="diff-expert">expert</td>
-    <td>180</td>
+    <td>181</td>
     <td>0</td>
     <td>2-15%</td>
     <td>1-5%</td>
+  </tr>
+<tr>
+    <td>jn25</td>
+    <td>codebook</td>
+    <td class="diff-expert">expert</td>
+    <td>181</td>
+    <td>0</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>venona_pad_reuse</td>
+    <td>stream</td>
+    <td class="diff-expert">expert</td>
+    <td>181</td>
+    <td>35</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>joseon_yeokhak</td>
+    <td>substitution</td>
+    <td class="diff-beginner">beginner</td>
+    <td>180</td>
+    <td>41</td>
+    <td>80-95%</td>
+    <td>60-80%</td>
   </tr></tbody>
   </table>
 
@@ -511,7 +511,7 @@
     <thead><tr><th>Benchmark</th><th>Records</th><th>Algorithms</th><th>Historical</th><th>Blind Splits</th><th>Multilingual</th></tr></thead>
     <tbody>
       <tr><td><a href="https://arxiv.org/pdf/2504.19093" target="_blank" rel="noopener noreferrer">CipherBank (Li et al., 2025)</a></td><td>2,358</td><td>9</td><td>No</td><td>No</td><td>No</td></tr>
-      <tr><td><strong><a href="../../cipher-corpus.html">Cipher Corpus v0.2</a></strong></td><td><strong>21,557</strong></td><td><strong>81</strong></td><td><strong>Yes (9)</strong></td><td><strong>Yes (6435)</strong></td><td><strong>Yes (6 langs)</strong></td></tr>
+      <tr><td><strong><a href="../../cipher-corpus.html">Cipher Corpus v0.2</a></strong></td><td><strong>21,602</strong></td><td><strong>82</strong></td><td><strong>Yes (54)</strong></td><td><strong>Yes (6435)</strong></td><td><strong>Yes (9 langs)</strong></td></tr>
     </tbody>
   </table>
 
@@ -521,7 +521,7 @@
   author={Lester, Paul},
   year={2026},
   url={https://ciphermuseum.com/cipher-corpus.html},
-  note={21557+ test cases across 81+ cipher algorithms}
+  note={21602+ test cases across 82+ cipher algorithms}
 }
 
 @article{li2025cipherbank,

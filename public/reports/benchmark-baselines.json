@@ -20,9 +20,9 @@
     }
   },
   "summary": {
-    "total_records": 21557,
-    "verified_records": 21073,
-    "cipher_types": 81,
+    "total_records": 21602,
+    "verified_records": 21118,
+    "cipher_types": 82,
     "cipher_families": 13,
     "languages": [
       "en",
@@ -30,26 +30,32 @@
       "de",
       "la",
       "es",
-      "it"
+      "it",
+      "ja",
+      "ru",
+      "zh"
     ],
-    "public_split": 15122,
+    "public_split": 15167,
     "blind_split": 6435,
-    "clean_records": 21071,
+    "clean_records": 21116,
     "noisy_records": 486,
-    "historical_records": 9,
+    "historical_records": 54,
     "difficulty_distribution": {
-      "beginner": 3931,
-      "intermediate": 6859,
-      "advanced": 5393,
-      "expert": 5374
+      "beginner": 3934,
+      "intermediate": 6863,
+      "advanced": 5403,
+      "expert": 5402
     },
     "language_distribution": {
-      "en": 17919,
-      "fr": 776,
-      "de": 794,
-      "la": 800,
+      "en": 17947,
+      "fr": 779,
+      "de": 800,
+      "la": 804,
       "es": 788,
-      "it": 480
+      "it": 480,
+      "ja": 2,
+      "ru": 1,
+      "zh": 1
     }
   },
   "solver_baselines": {
@@ -87,8 +93,8 @@
       "cipher_type": "vigenere",
       "cipher_family": "polyalphabetic",
       "difficulty": "intermediate",
-      "record_count": 1287,
-      "public_count": 887,
+      "record_count": 1289,
+      "public_count": 889,
       "blind_count": 400,
       "avg_normalized_length": 38,
       "languages": [
@@ -111,15 +117,15 @@
         "llm_3shot": "40-70%",
         "llm_0shot": "20-50%"
       },
-      "verified_count": 1175,
+      "verified_count": 1177,
       "noisy_count": 112
     },
     {
       "cipher_type": "caesar",
       "cipher_family": "substitution",
       "difficulty": "beginner",
-      "record_count": 1285,
-      "public_count": 903,
+      "record_count": 1287,
+      "public_count": 905,
       "blind_count": 382,
       "avg_normalized_length": 38,
       "languages": [
@@ -142,7 +148,7 @@
         "llm_3shot": "80-95%",
         "llm_0shot": "60-80%"
       },
-      "verified_count": 1175,
+      "verified_count": 1177,
       "noisy_count": 110
     },
     {
@@ -211,8 +217,8 @@
       "cipher_type": "playfair",
       "cipher_family": "polygraphic",
       "difficulty": "intermediate",
-      "record_count": 823,
-      "public_count": 594,
+      "record_count": 824,
+      "public_count": 595,
       "blind_count": 229,
       "avg_normalized_length": 36,
       "languages": [
@@ -235,7 +241,7 @@
         "llm_3shot": "40-70%",
         "llm_0shot": "20-50%"
       },
-      "verified_count": 772,
+      "verified_count": 773,
       "noisy_count": 51
     },
     {
@@ -390,12 +396,13 @@
       "cipher_type": "enigma",
       "cipher_family": "machine",
       "difficulty": "expert",
-      "record_count": 421,
-      "public_count": 303,
+      "record_count": 423,
+      "public_count": 305,
       "blind_count": 118,
       "avg_normalized_length": 41,
       "languages": [
-        "en"
+        "en",
+        "de"
       ],
       "expected_attacks": [
         "bombe attack",
@@ -409,15 +416,15 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 421,
+      "verified_count": 423,
       "noisy_count": 0
     },
     {
       "cipher_type": "stager_route",
       "cipher_family": "transposition",
       "difficulty": "expert",
-      "record_count": 361,
-      "public_count": 266,
+      "record_count": 362,
+      "public_count": 267,
       "blind_count": 95,
       "avg_normalized_length": 43,
       "languages": [
@@ -426,7 +433,8 @@
       "expected_attacks": [
         "multiple anagramming",
         "probable word",
-        "route reconstruction"
+        "route reconstruction",
+        "route analysis"
       ],
       "solver_baselines": {
         "human": "5-30%",
@@ -434,7 +442,7 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 361,
+      "verified_count": 362,
       "noisy_count": 0
     },
     {
@@ -515,8 +523,8 @@
       "cipher_type": "confederate_vigenere",
       "cipher_family": "polyalphabetic",
       "difficulty": "intermediate",
-      "record_count": 301,
-      "public_count": 206,
+      "record_count": 302,
+      "public_count": 207,
       "blind_count": 95,
       "avg_normalized_length": 41,
       "languages": [
@@ -525,6 +533,33 @@
       "expected_attacks": [
         "Kasiski examination",
         "disk alignment analysis",
+        "index of coincidence",
+        "probable word"
+      ],
+      "solver_baselines": {
+        "human": "60-90%",
+        "automated": "60-90%",
+        "llm_3shot": "40-70%",
+        "llm_0shot": "20-50%"
+      },
+      "verified_count": 302,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "diana",
+      "cipher_family": "polyalphabetic",
+      "difficulty": "intermediate",
+      "record_count": 301,
+      "public_count": 203,
+      "blind_count": 98,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "Beaufort analysis",
+        "reciprocal property",
+        "frequency analysis",
         "index of coincidence"
       ],
       "solver_baselines": {
@@ -532,6 +567,59 @@
         "automated": "60-90%",
         "llm_3shot": "40-70%",
         "llm_0shot": "20-50%"
+      },
+      "verified_count": 301,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "m209",
+      "cipher_family": "machine",
+      "difficulty": "expert",
+      "record_count": 301,
+      "public_count": 233,
+      "blind_count": 68,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "probable word",
+        "wheel recovery",
+        "pin-and-lug analysis",
+        "known plaintext attack"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 301,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "alberti_disk",
+      "cipher_family": "disk",
+      "difficulty": "expert",
+      "record_count": 301,
+      "public_count": 208,
+      "blind_count": 93,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en",
+        "la"
+      ],
+      "expected_attacks": [
+        "disk alignment analysis",
+        "probable word",
+        "frequency analysis",
+        "disk cryptanalysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
       },
       "verified_count": 301,
       "noisy_count": 0
@@ -550,31 +638,6 @@
       "expected_attacks": [
         "reciprocal properties",
         "index of coincidence",
-        "frequency analysis"
-      ],
-      "solver_baselines": {
-        "human": "60-90%",
-        "automated": "60-90%",
-        "llm_3shot": "40-70%",
-        "llm_0shot": "20-50%"
-      },
-      "verified_count": 300,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "diana",
-      "cipher_family": "polyalphabetic",
-      "difficulty": "intermediate",
-      "record_count": 300,
-      "public_count": 202,
-      "blind_count": 98,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "Beaufort analysis",
-        "reciprocal property",
         "frequency analysis"
       ],
       "solver_baselines": {
@@ -662,56 +725,6 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "m209",
-      "cipher_family": "machine",
-      "difficulty": "expert",
-      "record_count": 300,
-      "public_count": 232,
-      "blind_count": 68,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "probable word",
-        "wheel recovery",
-        "pin-and-lug analysis"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 300,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "alberti_disk",
-      "cipher_family": "disk",
-      "difficulty": "expert",
-      "record_count": 300,
-      "public_count": 207,
-      "blind_count": 93,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "disk alignment analysis",
-        "probable word",
-        "frequency analysis"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 300,
-      "noisy_count": 0
-    },
-    {
       "cipher_type": "adfgx",
       "cipher_family": "fractionation",
       "difficulty": "advanced",
@@ -740,17 +753,19 @@
       "cipher_type": "lorenz",
       "cipher_family": "machine",
       "difficulty": "expert",
-      "record_count": 259,
-      "public_count": 180,
+      "record_count": 260,
+      "public_count": 181,
       "blind_count": 79,
       "avg_normalized_length": 38,
       "languages": [
-        "en"
+        "en",
+        "de"
       ],
       "expected_attacks": [
         "statistical analysis",
         "Colossus methods",
-        "Tutte reconstruction"
+        "Tutte reconstruction",
+        "wheel pattern analysis"
       ],
       "solver_baselines": {
         "human": "5-30%",
@@ -758,7 +773,192 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 259,
+      "verified_count": 260,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "kryptos",
+      "cipher_family": "polyalphabetic",
+      "difficulty": "advanced",
+      "record_count": 242,
+      "public_count": 168,
+      "blind_count": 74,
+      "avg_normalized_length": 42,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "Kasiski examination",
+        "frequency analysis",
+        "known plaintext",
+        "Vigenere attack"
+      ],
+      "solver_baselines": {
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
+      },
+      "verified_count": 242,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "adfgvx",
+      "cipher_family": "fractionation",
+      "difficulty": "advanced",
+      "record_count": 241,
+      "public_count": 162,
+      "blind_count": 79,
+      "avg_normalized_length": 82,
+      "languages": [
+        "en",
+        "de"
+      ],
+      "expected_attacks": [
+        "hexadecimal frequency",
+        "columnar recovery",
+        "superimposition",
+        "Polybius recovery"
+      ],
+      "solver_baselines": {
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
+      },
+      "verified_count": 241,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "chaocipher",
+      "cipher_family": "machine",
+      "difficulty": "advanced",
+      "record_count": 241,
+      "public_count": 169,
+      "blind_count": 72,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "statistical analysis",
+        "probable word",
+        "dual-disk recovery",
+        "algorithmic reconstruction"
+      ],
+      "solver_baselines": {
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
+      },
+      "verified_count": 241,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "sigaba",
+      "cipher_family": "machine",
+      "difficulty": "expert",
+      "record_count": 241,
+      "public_count": 174,
+      "blind_count": 67,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "statistical analysis",
+        "pseudo-random analysis",
+        "never broken",
+        "rotor analysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 241,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "fialka",
+      "cipher_family": "machine",
+      "difficulty": "expert",
+      "record_count": 241,
+      "public_count": 166,
+      "blind_count": 75,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en",
+        "ru"
+      ],
+      "expected_attacks": [
+        "statistical analysis",
+        "multi-rotor recovery",
+        "Soviet methods",
+        "rotor analysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 241,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "kl7",
+      "cipher_family": "machine",
+      "difficulty": "expert",
+      "record_count": 241,
+      "public_count": 167,
+      "blind_count": 74,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "statistical analysis",
+        "notch wheel recovery",
+        "TSEC methods",
+        "rotor analysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 241,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "geheimschreiber",
+      "cipher_family": "machine",
+      "difficulty": "expert",
+      "record_count": 241,
+      "public_count": 163,
+      "blind_count": 78,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en",
+        "de"
+      ],
+      "expected_attacks": [
+        "wheel pattern analysis",
+        "T52 Sturgeon methods",
+        "XOR analysis",
+        "statistical attack"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 241,
       "noisy_count": 0
     },
     {
@@ -786,31 +986,6 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "adfgvx",
-      "cipher_family": "fractionation",
-      "difficulty": "advanced",
-      "record_count": 240,
-      "public_count": 161,
-      "blind_count": 79,
-      "avg_normalized_length": 82,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "hexadecimal frequency",
-        "columnar recovery",
-        "superimposition"
-      ],
-      "solver_baselines": {
-        "human": "20-60%",
-        "automated": "20-60%",
-        "llm_3shot": "10-40%",
-        "llm_0shot": "5-20%"
-      },
-      "verified_count": 240,
-      "noisy_count": 0
-    },
-    {
       "cipher_type": "double_transposition",
       "cipher_family": "transposition",
       "difficulty": "advanced",
@@ -825,57 +1000,6 @@
         "multiple anagramming",
         "probable word",
         "transposition analysis"
-      ],
-      "solver_baselines": {
-        "human": "20-60%",
-        "automated": "20-60%",
-        "llm_3shot": "10-40%",
-        "llm_0shot": "5-20%"
-      },
-      "verified_count": 240,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "chaocipher",
-      "cipher_family": "machine",
-      "difficulty": "advanced",
-      "record_count": 240,
-      "public_count": 168,
-      "blind_count": 72,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "statistical analysis",
-        "probable word",
-        "dual-disk recovery"
-      ],
-      "solver_baselines": {
-        "human": "20-60%",
-        "automated": "20-60%",
-        "llm_3shot": "10-40%",
-        "llm_0shot": "5-20%"
-      },
-      "verified_count": 240,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "kryptos",
-      "cipher_family": "polyalphabetic",
-      "difficulty": "advanced",
-      "record_count": 240,
-      "public_count": 166,
-      "blind_count": 74,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "Kasiski examination",
-        "frequency analysis",
-        "known plaintext",
-        "Vigenere attack"
       ],
       "solver_baselines": {
         "human": "20-60%",
@@ -962,31 +1086,6 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "sigaba",
-      "cipher_family": "machine",
-      "difficulty": "expert",
-      "record_count": 240,
-      "public_count": 173,
-      "blind_count": 67,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "statistical analysis",
-        "pseudo-random analysis",
-        "never broken"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 240,
-      "noisy_count": 0
-    },
-    {
       "cipher_type": "typex",
       "cipher_family": "machine",
       "difficulty": "expert",
@@ -1012,86 +1111,11 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "fialka",
-      "cipher_family": "machine",
-      "difficulty": "expert",
-      "record_count": 240,
-      "public_count": 165,
-      "blind_count": 75,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "statistical analysis",
-        "multi-rotor recovery",
-        "Soviet methods"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 240,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "kl7",
-      "cipher_family": "machine",
-      "difficulty": "expert",
-      "record_count": 240,
-      "public_count": 166,
-      "blind_count": 74,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "statistical analysis",
-        "notch wheel recovery",
-        "TSEC methods"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 240,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "geheimschreiber",
-      "cipher_family": "machine",
-      "difficulty": "expert",
-      "record_count": 240,
-      "public_count": 162,
-      "blind_count": 78,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "wheel pattern analysis",
-        "T52 Sturgeon methods",
-        "XOR analysis"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 240,
-      "noisy_count": 0
-    },
-    {
       "cipher_type": "vic",
       "cipher_family": "substitution",
       "difficulty": "advanced",
-      "record_count": 225,
-      "public_count": 147,
+      "record_count": 226,
+      "public_count": 148,
       "blind_count": 78,
       "avg_normalized_length": 0,
       "languages": [
@@ -1109,7 +1133,7 @@
         "llm_3shot": "10-40%",
         "llm_0shot": "5-20%"
       },
-      "verified_count": 225,
+      "verified_count": 226,
       "noisy_count": 0
     },
     {
@@ -1187,6 +1211,191 @@
       "noisy_count": 0
     },
     {
+      "cipher_type": "purple",
+      "cipher_family": "machine",
+      "difficulty": "expert",
+      "record_count": 182,
+      "public_count": 127,
+      "blind_count": 55,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en",
+        "ja"
+      ],
+      "expected_attacks": [
+        "probable word",
+        "stepping switch analysis",
+        "vowel/consonant separation",
+        "switch analysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 182,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "copiale",
+      "cipher_family": "substitution",
+      "difficulty": "advanced",
+      "record_count": 181,
+      "public_count": 131,
+      "blind_count": 50,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en",
+        "de"
+      ],
+      "expected_attacks": [
+        "homophonic frequency analysis",
+        "codebook recovery",
+        "symbolic analysis",
+        "symbol frequency analysis"
+      ],
+      "solver_baselines": {
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
+      },
+      "verified_count": 181,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "wheatstone",
+      "cipher_family": "polygraphic",
+      "difficulty": "advanced",
+      "record_count": 181,
+      "public_count": 128,
+      "blind_count": 53,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "bigram analysis",
+        "probable word",
+        "Playfair variant analysis",
+        "disk analysis"
+      ],
+      "solver_baselines": {
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
+      },
+      "verified_count": 181,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "m94",
+      "cipher_family": "machine",
+      "difficulty": "expert",
+      "record_count": 181,
+      "public_count": 129,
+      "blind_count": 52,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "multiple anagramming",
+        "disk recovery",
+        "probable word",
+        "column analysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 181,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "great_cipher",
+      "cipher_family": "nomenclator",
+      "difficulty": "expert",
+      "record_count": 181,
+      "public_count": 131,
+      "blind_count": 50,
+      "avg_normalized_length": 0,
+      "languages": [
+        "en",
+        "fr"
+      ],
+      "expected_attacks": [
+        "codebook reconstruction",
+        "frequency analysis",
+        "Bazeries method",
+        "syllabic analysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 181,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "jn25",
+      "cipher_family": "codebook",
+      "difficulty": "expert",
+      "record_count": 181,
+      "public_count": 123,
+      "blind_count": 58,
+      "avg_normalized_length": 0,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "additive recovery",
+        "superencipherment analysis",
+        "Pacific COMINT",
+        "codebook reconstruction"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 181,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "venona_pad_reuse",
+      "cipher_family": "stream",
+      "difficulty": "expert",
+      "record_count": 181,
+      "public_count": 122,
+      "blind_count": 59,
+      "avg_normalized_length": 35,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "pad reuse attack",
+        "crib dragging",
+        "XOR analysis",
+        "Venona project"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 181,
+      "noisy_count": 0
+    },
+    {
       "cipher_type": "joseon_yeokhak",
       "cipher_family": "substitution",
       "difficulty": "beginner",
@@ -1236,81 +1445,6 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "copiale",
-      "cipher_family": "substitution",
-      "difficulty": "advanced",
-      "record_count": 180,
-      "public_count": 130,
-      "blind_count": 50,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "homophonic frequency analysis",
-        "codebook recovery",
-        "symbolic analysis"
-      ],
-      "solver_baselines": {
-        "human": "20-60%",
-        "automated": "20-60%",
-        "llm_3shot": "10-40%",
-        "llm_0shot": "5-20%"
-      },
-      "verified_count": 180,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "wheatstone",
-      "cipher_family": "polygraphic",
-      "difficulty": "advanced",
-      "record_count": 180,
-      "public_count": 127,
-      "blind_count": 53,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "bigram analysis",
-        "probable word",
-        "Playfair variant analysis"
-      ],
-      "solver_baselines": {
-        "human": "20-60%",
-        "automated": "20-60%",
-        "llm_3shot": "10-40%",
-        "llm_0shot": "5-20%"
-      },
-      "verified_count": 180,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "purple",
-      "cipher_family": "machine",
-      "difficulty": "expert",
-      "record_count": 180,
-      "public_count": 125,
-      "blind_count": 55,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "probable word",
-        "stepping switch analysis",
-        "vowel/consonant separation"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 180,
-      "noisy_count": 0
-    },
-    {
       "cipher_type": "kryha",
       "cipher_family": "machine",
       "difficulty": "expert",
@@ -1336,56 +1470,6 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "m94",
-      "cipher_family": "machine",
-      "difficulty": "expert",
-      "record_count": 180,
-      "public_count": 128,
-      "blind_count": 52,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "multiple anagramming",
-        "disk recovery",
-        "probable word"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 180,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "great_cipher",
-      "cipher_family": "nomenclator",
-      "difficulty": "expert",
-      "record_count": 180,
-      "public_count": 130,
-      "blind_count": 50,
-      "avg_normalized_length": 0,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "codebook reconstruction",
-        "frequency analysis",
-        "Bazeries method"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 180,
-      "noisy_count": 0
-    },
-    {
       "cipher_type": "argenti",
       "cipher_family": "nomenclator",
       "difficulty": "expert",
@@ -1400,57 +1484,6 @@
         "frequency analysis",
         "codebook recovery",
         "papal methods"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 180,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "jn25",
-      "cipher_family": "codebook",
-      "difficulty": "expert",
-      "record_count": 180,
-      "public_count": 122,
-      "blind_count": 58,
-      "avg_normalized_length": 0,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "additive recovery",
-        "superencipherment analysis",
-        "Pacific COMINT"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 180,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "venona_pad_reuse",
-      "cipher_family": "stream",
-      "difficulty": "expert",
-      "record_count": 180,
-      "public_count": 121,
-      "blind_count": 59,
-      "avg_normalized_length": 35,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "pad reuse attack",
-        "crib dragging",
-        "XOR analysis",
-        "Venona project"
       ],
       "solver_baselines": {
         "human": "5-30%",
@@ -1551,8 +1584,8 @@
       "cipher_type": "polybius",
       "cipher_family": "substitution",
       "difficulty": "beginner",
-      "record_count": 165,
-      "public_count": 116,
+      "record_count": 166,
+      "public_count": 117,
       "blind_count": 49,
       "avg_normalized_length": 0,
       "languages": [
@@ -1575,15 +1608,15 @@
         "llm_3shot": "80-95%",
         "llm_0shot": "60-80%"
       },
-      "verified_count": 165,
+      "verified_count": 166,
       "noisy_count": 0
     },
     {
       "cipher_type": "jefferson_disk",
       "cipher_family": "disk",
       "difficulty": "expert",
-      "record_count": 165,
-      "public_count": 100,
+      "record_count": 166,
+      "public_count": 101,
       "blind_count": 65,
       "avg_normalized_length": 32,
       "languages": [
@@ -1592,7 +1625,8 @@
       "expected_attacks": [
         "multiple anagramming",
         "probable word",
-        "disk alignment"
+        "disk alignment",
+        "column analysis"
       ],
       "solver_baselines": {
         "human": "5-30%",
@@ -1600,7 +1634,60 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 165,
+      "verified_count": 166,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "solitaire",
+      "cipher_family": "stream",
+      "difficulty": "expert",
+      "record_count": 121,
+      "public_count": 82,
+      "blind_count": 39,
+      "avg_normalized_length": 41,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "card deck reconstruction",
+        "Pontifex cryptanalysis",
+        "card deck analysis",
+        "keystream recovery"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 121,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "chinese_telegraph",
+      "cipher_family": "codebook",
+      "difficulty": "expert",
+      "record_count": 121,
+      "public_count": 89,
+      "blind_count": 32,
+      "avg_normalized_length": 0,
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "expected_attacks": [
+        "codebook reconstruction",
+        "numeric frequency analysis",
+        "frequency analysis",
+        "context-based attack"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 121,
       "noisy_count": 0
     },
     {
@@ -1623,30 +1710,6 @@
         "automated": "95-100%",
         "llm_3shot": "80-95%",
         "llm_0shot": "60-80%"
-      },
-      "verified_count": 120,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "solitaire",
-      "cipher_family": "stream",
-      "difficulty": "expert",
-      "record_count": 120,
-      "public_count": 81,
-      "blind_count": 39,
-      "avg_normalized_length": 41,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "card deck reconstruction",
-        "Pontifex cryptanalysis"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
       },
       "verified_count": 120,
       "noisy_count": 0
@@ -1690,30 +1753,6 @@
         "codebook reconstruction",
         "frequency analysis",
         "Wallis methods"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 120,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "chinese_telegraph",
-      "cipher_family": "codebook",
-      "difficulty": "expert",
-      "record_count": 120,
-      "public_count": 88,
-      "blind_count": 32,
-      "avg_normalized_length": 0,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "codebook reconstruction",
-        "numeric frequency analysis"
       ],
       "solver_baselines": {
         "human": "5-30%",
@@ -1800,8 +1839,8 @@
       "cipher_type": "babington",
       "cipher_family": "nomenclator",
       "difficulty": "expert",
-      "record_count": 64,
-      "public_count": 45,
+      "record_count": 66,
+      "public_count": 47,
       "blind_count": 19,
       "avg_normalized_length": 15,
       "languages": [
@@ -1819,15 +1858,42 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 64,
+      "verified_count": 66,
       "noisy_count": 1
+    },
+    {
+      "cipher_type": "null_cipher",
+      "cipher_family": "steganography",
+      "difficulty": "advanced",
+      "record_count": 62,
+      "public_count": 47,
+      "blind_count": 15,
+      "avg_normalized_length": 61,
+      "languages": [
+        "en",
+        "fr"
+      ],
+      "expected_attacks": [
+        "letter position extraction",
+        "statistical analysis",
+        "carrier detection",
+        "word selection pattern"
+      ],
+      "solver_baselines": {
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
+      },
+      "verified_count": 62,
+      "noisy_count": 0
     },
     {
       "cipher_type": "zimmermann",
       "cipher_family": "codebook",
       "difficulty": "expert",
-      "record_count": 61,
-      "public_count": 47,
+      "record_count": 62,
+      "public_count": 48,
       "blind_count": 14,
       "avg_normalized_length": 1,
       "languages": [
@@ -1836,7 +1902,8 @@
       "expected_attacks": [
         "codebook reconstruction",
         "diplomatic code analysis",
-        "Room 40 methods"
+        "Room 40 methods",
+        "traffic analysis"
       ],
       "solver_baselines": {
         "human": "5-30%",
@@ -1844,15 +1911,15 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 61,
+      "verified_count": 62,
       "noisy_count": 0
     },
     {
       "cipher_type": "culper_ring",
       "cipher_family": "codebook",
       "difficulty": "expert",
-      "record_count": 61,
-      "public_count": 39,
+      "record_count": 62,
+      "public_count": 40,
       "blind_count": 22,
       "avg_normalized_length": 0,
       "languages": [
@@ -1870,7 +1937,7 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 61,
+      "verified_count": 62,
       "noisy_count": 0
     },
     {
@@ -1893,31 +1960,6 @@
         "automated": "95-100%",
         "llm_3shot": "80-95%",
         "llm_0shot": "60-80%"
-      },
-      "verified_count": 60,
-      "noisy_count": 0
-    },
-    {
-      "cipher_type": "null_cipher",
-      "cipher_family": "steganography",
-      "difficulty": "advanced",
-      "record_count": 60,
-      "public_count": 45,
-      "blind_count": 15,
-      "avg_normalized_length": 60,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "letter position extraction",
-        "statistical analysis",
-        "carrier detection"
-      ],
-      "solver_baselines": {
-        "human": "20-60%",
-        "automated": "20-60%",
-        "llm_3shot": "10-40%",
-        "llm_0shot": "5-20%"
       },
       "verified_count": 60,
       "noisy_count": 0
@@ -2050,10 +2092,10 @@
       "cipher_type": "navajo_code",
       "cipher_family": "code",
       "difficulty": "expert",
-      "record_count": 31,
-      "public_count": 21,
+      "record_count": 33,
+      "public_count": 23,
       "blind_count": 10,
-      "avg_normalized_length": 83,
+      "avg_normalized_length": 80,
       "languages": [
         "en"
       ],
@@ -2062,6 +2104,32 @@
         "phonetic analysis",
         "word frequency",
         "linguistic analysis"
+      ],
+      "solver_baselines": {
+        "human": "5-30%",
+        "automated": "5-30%",
+        "llm_3shot": "2-15%",
+        "llm_0shot": "1-5%"
+      },
+      "verified_count": 33,
+      "noisy_count": 0
+    },
+    {
+      "cipher_type": "arnold_andre",
+      "cipher_family": "codebook",
+      "difficulty": "expert",
+      "record_count": 31,
+      "public_count": 22,
+      "blind_count": 9,
+      "avg_normalized_length": 0,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "book identification",
+        "word frequency analysis",
+        "West Point treason",
+        "codebook reconstruction"
       ],
       "solver_baselines": {
         "human": "5-30%",
@@ -2097,31 +2165,6 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "arnold_andre",
-      "cipher_family": "codebook",
-      "difficulty": "expert",
-      "record_count": 30,
-      "public_count": 21,
-      "blind_count": 9,
-      "avg_normalized_length": 0,
-      "languages": [
-        "en"
-      ],
-      "expected_attacks": [
-        "book identification",
-        "word frequency analysis",
-        "West Point treason"
-      ],
-      "solver_baselines": {
-        "human": "5-30%",
-        "automated": "5-30%",
-        "llm_3shot": "2-15%",
-        "llm_0shot": "1-5%"
-      },
-      "verified_count": 30,
-      "noisy_count": 0
-    },
-    {
       "cipher_type": "aeneas_tacticus",
       "cipher_family": "steganography",
       "difficulty": "expert",
@@ -2149,8 +2192,8 @@
       "cipher_type": "book_cipher",
       "cipher_family": "codebook",
       "difficulty": "expert",
-      "record_count": 18,
-      "public_count": 15,
+      "record_count": 19,
+      "public_count": 16,
       "blind_count": 3,
       "avg_normalized_length": 5,
       "languages": [
@@ -2168,14 +2211,39 @@
         "llm_3shot": "2-15%",
         "llm_0shot": "1-5%"
       },
-      "verified_count": 18,
+      "verified_count": 19,
       "noisy_count": 1
+    },
+    {
+      "cipher_type": "wallis_ciphers",
+      "cipher_family": "polyalphabetic",
+      "difficulty": "advanced",
+      "record_count": 1,
+      "public_count": 1,
+      "blind_count": 0,
+      "avg_normalized_length": 20,
+      "languages": [
+        "en"
+      ],
+      "expected_attacks": [
+        "frequency analysis",
+        "bigram analysis",
+        "index of coincidence"
+      ],
+      "solver_baselines": {
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
+      },
+      "verified_count": 1,
+      "noisy_count": 0
     }
   ],
   "per_family_stats": [
     {
       "family": "substitution",
-      "record_count": 5260,
+      "record_count": 5271,
       "cipher_types": [
         "caesar",
         "rot13",
@@ -2193,18 +2261,21 @@
         "geez_monastic",
         "pigpen",
         "voynich_render",
-        "playfair"
+        "playfair",
+        "babington",
+        "null_cipher",
+        "chaocipher"
       ],
       "difficulty_distribution": {
-        "beginner": 3721,
-        "intermediate": 659,
-        "advanced": 825,
-        "expert": 55
+        "beginner": 3724,
+        "intermediate": 660,
+        "advanced": 828,
+        "expert": 59
       }
     },
     {
       "family": "polyalphabetic",
-      "record_count": 4413,
+      "record_count": 4421,
       "cipher_types": [
         "trithemius",
         "vigenere",
@@ -2216,17 +2287,21 @@
         "confederate_vigenere",
         "diana",
         "kryptos",
-        "cardano_autokey"
+        "cardano_autokey",
+        "alberti_disk",
+        "wallis_ciphers",
+        "wheatstone"
       ],
       "difficulty_distribution": {
         "beginner": 120,
-        "intermediate": 3813,
-        "advanced": 480
+        "intermediate": 3815,
+        "advanced": 485,
+        "expert": 1
       }
     },
     {
       "family": "machine",
-      "record_count": 3200,
+      "record_count": 3212,
       "cipher_types": [
         "chaocipher",
         "red_type_a",
@@ -2240,16 +2315,17 @@
         "kl7",
         "geheimschreiber",
         "kryha",
-        "m94"
+        "m94",
+        "jefferson_disk"
       ],
       "difficulty_distribution": {
         "advanced": 480,
-        "expert": 2720
+        "expert": 2732
       }
     },
     {
       "family": "transposition",
-      "record_count": 3080,
+      "record_count": 3082,
       "cipher_types": [
         "rail_fence",
         "columnar_transposition",
@@ -2257,17 +2333,18 @@
         "double_transposition",
         "bazeries",
         "stager_route",
-        "slidex"
+        "slidex",
+        "kryptos"
       ],
       "difficulty_distribution": {
-        "intermediate": 1939,
-        "advanced": 780,
+        "intermediate": 1940,
+        "advanced": 781,
         "expert": 361
       }
     },
     {
       "family": "fractionation",
-      "record_count": 1840,
+      "record_count": 1841,
       "cipher_types": [
         "bifid",
         "trifid",
@@ -2277,7 +2354,7 @@
         "fractionated_morse"
       ],
       "difficulty_distribution": {
-        "advanced": 1840
+        "advanced": 1841
       }
     },
     {
@@ -2311,7 +2388,7 @@
     },
     {
       "family": "codebook",
-      "record_count": 530,
+      "record_count": 539,
       "cipher_types": [
         "book_cipher",
         "chinese_telegraph",
@@ -2319,15 +2396,17 @@
         "culper_ring",
         "arnold_andre",
         "commercial_code",
-        "jn25"
+        "jn25",
+        "great_cipher",
+        "navajo_code"
       ],
       "difficulty_distribution": {
-        "expert": 530
+        "expert": 539
       }
     },
     {
       "family": "stream",
-      "record_count": 518,
+      "record_count": 520,
       "cipher_types": [
         "solitaire",
         "venona_pad_reuse",
@@ -2335,7 +2414,7 @@
         "vernam"
       ],
       "difficulty_distribution": {
-        "expert": 518
+        "expert": 520
       }
     },
     {
@@ -2386,7 +2465,7 @@
   ],
   "benchmark_splits": {
     "public": {
-      "count": 15122,
+      "count": 15167,
       "description": "70% of records — available for training and development evaluation",
       "note": "Do not train and evaluate on the same split"
     },
@@ -2405,9 +2484,9 @@
       "blind_splits": false
     },
     "cipher_corpus": {
-      "records": 21557,
-      "cipher_types": 81,
-      "historical": 9,
+      "records": 21602,
+      "cipher_types": 82,
+      "historical": 54,
       "live_infrastructure": true,
       "blind_splits": true,
       "multilingual": true
