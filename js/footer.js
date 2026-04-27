@@ -30,6 +30,7 @@
   var LEARN = [
     ['learn.html',               'How Ciphers Work'],
     ['modern.html',              'Modern Cryptography'],
+    ['cipher-corpus.html',       'Cipher Corpus'],
     ['challenges.html',          'Challenges'],
     ['lab/workbench.html',       "Codebreaker's Workbench"],
     ['cryptanalysis.html',       'Cryptanalysis Techniques'],

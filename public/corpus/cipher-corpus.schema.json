@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CipherCorpusRecord",
+  "type": "object",
+  "required": [
+    "id", "title", "cipher_family", "cipher_type", "plaintext", "ciphertext", "key", "language", "alphabet", "text_length", "normalized_text_length", "spacing", "punctuation", "casing", "difficulty", "source_type", "source", "license", "expected_attacks", "tags", "created_by", "verified", "dataset_version"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "cipher_family": { "type": "string" },
+    "cipher_type": { "type": "string" },
+    "plaintext": { "type": "string" },
+    "ciphertext": { "type": "string" },
+    "key": { "type": "object" },
+    "language": { "type": "string" },
+    "alphabet": { "type": "string" },
+    "text_length": { "type": "integer" },
+    "normalized_text_length": { "type": "integer" },
+    "spacing": { "type": "string", "enum": ["preserved", "removed", "grouped", "mixed"] },
+    "punctuation": { "type": "string", "enum": ["preserved", "removed", "mixed"] },
+    "casing": { "type": "string", "enum": ["uppercase", "lowercase", "mixed"] },
+    "difficulty": { "type": "string", "enum": ["beginner", "intermediate", "advanced", "expert"] },
+    "source_type": { "type": "string", "enum": ["synthetic", "historical", "public_domain", "user_contributed"] },
+    "source": { "type": "string" },
+    "license": { "type": "string" },
+    "notes": { "type": "string" },
+    "expected_attacks": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "created_by": { "type": "string" },
+    "verified": { "type": "boolean" },
+    "dataset_version": { "type": "string" },
+    "year": { "type": "string" },
+    "historical_context": { "type": "string" },
+    "known_solution_method": { "type": "string" },
+    "hints": { "type": "array", "items": { "type": "string" } },
+    "tool_notes": { "type": "string" },
+    "related_exhibit_url": { "type": "string" },
+    "try_in_cipher_detective_url": { "type": "string" },
+    "benchmark_split": { "type": "string", "enum": ["beginner", "intermediate", "advanced", "expert", "historical", "blind"] },
+    "scoring_notes": { "type": "string" }
+  }
+}

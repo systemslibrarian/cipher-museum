@@ -1,3 +1,7 @@
+// Node.js compatibility export for build/validation scripts
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = window.CipherEngines;
+}
 /**
  * THE CIPHER MUSEUM — All Cipher Engines
  * Complete implementations for every cipher exhibit (83 engines across the 140-exhibit

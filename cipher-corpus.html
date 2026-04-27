@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum</title>
+  <meta name="description" content="A curated library of ciphertext challenges, known plaintexts, keys, and metadata for learning, teaching, scoring, and benchmarking classical cryptanalysis.">
+  <meta property="og:title" content="Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum">
+  <meta property="og:description" content="A curated library of ciphertext challenges, known plaintexts, keys, and metadata for learning, teaching, scoring, and benchmarking classical cryptanalysis.">
+
+  <link rel="stylesheet" href="/css/museum.css">
+  <style>
+    .ciphertext-block, .corpus-ciphertext, pre.ciphertext, code.ciphertext {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: pre-wrap;
+      max-width: 100%;
+      font-family: var(--font-mono, monospace);
+      background: var(--bg-code, #222);
+      color: var(--fg-code, #ffd700);
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      font-size: 1.1em;
+      margin: 0.5em 0;
+    }
+    .corpus-browser {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .corpus-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .corpus-card {
+      background: var(--bg-card, #18140e);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 1px solid var(--border-card, #3a2c13);
+    }
+    .corpus-card .ciphertext-block {
+      font-size: 1em;
+      margin: 0.5em 0 0.2em 0;
+    }
+    .corpus-card .corpus-meta {
+      font-size: 0.95em;
+      color: var(--fg-muted, #bfa76a);
+      margin-bottom: 0.5em;
+    }
+    .corpus-card .corpus-actions {
+      display: flex;
+      gap: 0.5em;
+      flex-wrap: wrap;
+      margin-top: 0.5em;
+    }
+    .corpus-card .corpus-actions button {
+      font-size: 0.95em;
+      padding: 0.3em 0.9em;
+      border-radius: 5px;
+      border: none;
+      background: var(--bg-btn, #2d230c);
+      color: var(--fg-btn, #ffd700);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .corpus-card .corpus-actions button:hover {
+      background: var(--bg-btn-hover, #3a2c13);
+    }
+    .corpus-mode-toggle {
+      margin: 1.5em 0 0.5em 0;
+      display: flex;
+      gap: 1em;
+      align-items: center;
+    }
+    .download-panel {
+      margin: 2em 0;
+      padding: 1.5em;
+      background: var(--bg-card, #18140e);
+      border-radius: 10px;
+      border: 1px solid var(--border-card, #3a2c13);
+    }
+    .download-panel button {
+      margin: 0.3em 0.7em 0.3em 0;
+      padding: 0.4em 1.2em;
+      border-radius: 5px;
+      border: none;
+      background: var(--bg-btn, #2d230c);
+      color: var(--fg-btn, #ffd700);
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .download-panel button:hover {
+      background: var(--bg-btn-hover, #3a2c13);
+    }
+    @media (max-width: 600px) {
+      .corpus-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#corpus-browser" class="skip-link" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;background:#ffd700;color:#18140e;padding:0.5em 1em;border-radius:6px;z-index:1000;">Skip to corpus browser</a>
+  <header>
+    <nav>
+      <a href="/">🏛️ Cipher Museum</a>
+      <a href="/cipher-corpus.html" aria-current="page">Cipher Corpus</a>
+      <a href="/lab/workbench.html">Workbench</a>
+      <a href="/cipher-detective.html">Cipher Detective</a>
+      <a href="/cryptanalysis.html">Cryptanalysis Tools</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Cipher Corpus</h1>
+      <h2>Known ciphertexts for learning, testing, and benchmarking classical cryptanalysis.</h2>
+      <p>Cipher Corpus is a curated library of ciphertext challenges with known solutions. Each record includes the cipher type, key or settings, plaintext, difficulty, language, expected attack methods, and source information. Learners can practice codebreaking in Challenge Mode, while tool builders can download the known-answer dataset for benchmarking classical cipher solvers.</p>
+      <div class="badges">
+        <span>Known-answer ciphertext challenges</span>
+        <span>Classical cryptanalysis</span>
+        <span>Synthetic + historical examples</span>
+        <span>JSONL / CSV / JSON export</span>
+        <span>Cipher Detective integration</span>
+        <span>Workbench integration</span>
+      </div>
+      <div class="reality-label">Educational benchmark data, not production cryptography.</div>
+    </section>
+    <section class="corpus-browser" id="corpus-browser">
+      <div class="corpus-mode-toggle">
+        <fieldset style="border:none;padding:0;margin:0;">
+          <legend class="visually-hidden" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Select corpus mode</legend>
+          <input type="radio" id="mode-challenge" name="mode" value="challenge" checked>
+          <label for="mode-challenge">Challenge Mode</label>
+          <input type="radio" id="mode-known" name="mode" value="known">
+          <label for="mode-known">Known Corpus Mode</label>
+        </fieldset>
+        <span id="mode-explanation">Challenge Mode hides the solution so you can attempt a ciphertext-only solve. Known Corpus Mode shows the answer metadata for teaching, testing, and benchmarking.</span>
+      </div>
+      <div class="corpus-cards" id="corpus-cards"></div>
+    </section>
+    <section class="download-panel">
+      <h3>Download Corpus</h3>
+      <button onclick="downloadFile('all.jsonl')">Download all.jsonl</button>
+      <button onclick="downloadFile('all.json')">Download all.json</button>
+      <button onclick="downloadFile('all.csv')">Download all.csv</button>
+      <button onclick="downloadFile('cipher-corpus.schema.json')">Download schema</button>
+      <button onclick="downloadFile('beginner.jsonl')">Download beginner set</button>
+      <button onclick="downloadFile('intermediate.jsonl')">Download intermediate set</button>
+      <button onclick="downloadFile('advanced.jsonl')">Download advanced set</button>
+      <button onclick="downloadFile('expert.jsonl')">Download expert set</button>
+      <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
+        If you use Cipher Corpus in a project, please cite Cipher Museum and include the dataset version.<br>
+        <b>Cipher Corpus v0.1</b>
+      </div>
+    </section>
+    <section>
+      <h3>Corpus Quality Rules</h3>
+      <ul>
+        <li>Every record must have verified plaintext.</li>
+        <li>Every record must identify the cipher type.</li>
+        <li>Every synthetic record must be labeled synthetic.</li>
+        <li>Every historical record must include source and rights information.</li>
+        <li>Every record must include a license.</li>
+        <li>Every record must include expected attack methods.</li>
+        <li>Every record must include text length.</li>
+        <li>Every record must state whether spacing and punctuation were preserved.</li>
+        <li>Every record must be reproducible where possible.</li>
+        <li>Known answers must be documented even if hidden in Challenge Mode.</li>
+      </ul>
+    </section>
+    <section>
+      <h3>For Learners and Educators</h3>
+      <p>Use Cipher Corpus to practice identifying cipher types, testing attack methods, teaching frequency analysis, comparing difficulty levels, and understanding how text length, spacing, language, and key choice affect solvability.</p>
+      <ul>
+        <li>Break a Caesar cipher by brute force</li>
+        <li>Compare long vs short substitution ciphertexts</li>
+        <li>Estimate Vigenère key length using index of coincidence</li>
+        <li>Use Kasiski examination on repeated patterns</li>
+        <li>Test Playfair digraph behavior</li>
+        <li>Compare transposition with substitution</li>
+        <li>Attempt a mixed cipher challenge</li>
+        <li>Measure how spacing removal changes difficulty</li>
+      </ul>
+    </section>
+    <section>
+      <h3>For Tool Builders</h3>
+      <p>Cipher Corpus provides machine-readable known plaintext/ciphertext pairs for testing classical cipher solvers, cryptanalysis tools, and LLM-assisted cracking workflows.</p>
+      <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.97em;">import json
+with open("all.jsonl", "r", encoding="utf-8") as f:
+    for line in f:
+        record = json.loads(line)
+        print(record["id"], record["cipher_type"], record["ciphertext"])
+</pre>
+      <div style="margin-top:0.7em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
+        Do not train and evaluate on the same split if you are measuring model performance. Future versions may include public and blind benchmark splits.
+      </div>
+    </section>
+    <section>
+      <h3>Known Limitations</h3>
+      <p>
+        Cipher Corpus v0.1 begins with synthetic benchmark examples. Synthetic records are useful for controlled testing but are not a substitute for historical cipher archives.<br>
+        Classical ciphers vary widely in notation, alphabet handling, spacing, spelling, and operational use. Metadata is included to make those assumptions explicit.<br>
+        This corpus is intended for education and benchmarking classical cryptanalysis, not for evaluating modern cryptographic security.
+      </p>
+    </section>
+    <section>
+      <h3>Why Classical Ciphers Break</h3>
+      <p>
+        Many classical ciphers leak patterns from the underlying language. Frequency analysis, repeated sequences, index of coincidence, n-gram scoring, and transposition patterns exploit this leakage.<br>
+        Modern cryptography is designed so that ciphertext should not reveal useful statistical structure about the plaintext. Cipher Corpus helps learners see why that distinction matters.
+      </p>
+    </section>
+    <section>
+      <h3>Future Roadmap</h3>
+      <ul>
+        <li>Add more historical public-domain examples.</li>
+        <li>Add blind benchmark splits.</li>
+        <li>Add multilingual examples.</li>
+        <li>Add noisy transcription examples.</li>
+        <li>Add homophonic substitution records.</li>
+        <li>Add direct Cipher Detective integration.</li>
+        <li>Add direct Codebreaker’s Workbench integration.</li>
+        <li>Add hill-climbing and simulated annealing solvers.</li>
+        <li>Add downloadable benchmark reports.</li>
+        <li>Add contribution workflow.</li>
+        <li>Add benchmark leaderboards.</li>
+        <li>Add LLM evaluation export format.</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Known-Ciphertext Benchmark Lab</h3>
+      <div style="color:var(--fg-muted,#bfa76a);font-size:1.1em;">Benchmark Runner coming in v0.2.</div>
+      <div style="margin-top:0.5em;font-size:0.97em;">Future benchmark runs will test built-in cryptanalysis tools against corpus records and report success rate, recovered key accuracy, plaintext similarity, and time to result.</div>
+    </section>
+  </main>
+  <footer style="margin-top:3em;padding:2em 0 1em 0;text-align:center;color:var(--fg-muted,#bfa76a);font-size:1.1em;">
+    <div>Whether therefore ye eat, or drink, or whatsoever ye do, do all to the glory of God.<br>— 1 Corinthians 10:31</div>
+    <div style="margin-top:0.7em;font-size:0.95em;">&copy; Cipher Museum. All rights reserved. Synthetic benchmark records are CC0.</div>
+  </footer>
+  <script src="/js/cipher-corpus.js"></script>
+</body>
+</html>
