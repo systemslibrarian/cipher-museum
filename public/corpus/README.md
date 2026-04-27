@@ -32,10 +32,12 @@ All core records pass roundtrip verification (`decrypt(encrypt(plaintext)) == pl
 
 ## Files
 
+> **Git LFS:** `all.json` (125 MB) and `all.jsonl` (98 MB) are stored via [Git Large File Storage](https://git-lfs.github.com/). Run `git lfs install` before cloning, or `git lfs pull` if you already cloned without it.
+
 | File | Description |
 |---|---|
-| `all.jsonl` | All 21,602 records (JSONL, one per line) |
-| `all.json` | All records as JSON array |
+| `all.jsonl` | All 21,602 records (JSONL, one per line) — **Git LFS** |
+| `all.json` | All records as JSON array — **Git LFS** |
 | `all.csv` | Tabular export of key fields |
 | `beginner.jsonl` | 2,460 beginner records |
 | `intermediate.jsonl` | 4,422 intermediate records |
