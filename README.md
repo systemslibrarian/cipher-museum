@@ -253,6 +253,40 @@ Pure HTML + CSS + Vanilla JavaScript. GitHub Pages ready.
 
 ---
 
+## Corpus Data (Git LFS)
+
+The cipher corpus files are stored via [Git Large File Storage (LFS)](https://git-lfs.github.com/)
+due to their size. To access them after cloning:
+
+### Prerequisites
+```bash
+git lfs install
+```
+
+### Clone with LFS files
+```bash
+git clone https://github.com/systemslibrarian/cipher-museum
+```
+LFS files download automatically if Git LFS is installed.
+
+### If you already cloned without LFS
+```bash
+git lfs pull
+```
+
+### Corpus Files
+
+| File | Size | Description |
+|------|------|-------------|
+| [`public/corpus/all.json`](https://github.com/systemslibrarian/cipher-museum/blob/main/public/corpus/all.json) | 125 MB | Full cipher corpus (JSON) |
+| [`public/corpus/all.jsonl`](https://github.com/systemslibrarian/cipher-museum/blob/main/public/corpus/all.jsonl) | 98 MB | Full cipher corpus (JSONL, for RAG ingestion) |
+
+> These files are intended for use with the
+> [crypto-counsel](https://github.com/systemslibrarian/crypto-counsel)
+> RAG pipeline (LlamaIndex + ChromaDB).
+
+---
+
 ## 📁 Project Structure
 
 ```
