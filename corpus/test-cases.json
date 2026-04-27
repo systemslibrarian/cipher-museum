@@ -1,0 +1,55 @@
+{
+  "_comment": "Test case definitions for cipher benchmark. Each entry includes: id, cipher, key, plaintext_id, ciphertext, difficulty, tags, and metadata.",
+  "test_cases": [
+    {
+      "id": "tc001",
+      "cipher": "caesar",
+      "key": 3,
+      "plaintext_id": "pt001",
+      "ciphertext": "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+      "difficulty": "beginner",
+      "tags": ["shift", "classic", "alphabet"],
+      "metadata": {"roundtrip": true, "demo": true}
+    },
+    {
+      "id": "tc002",
+      "cipher": "vigenere",
+      "key": "LEMON",
+      "plaintext_id": "pt004",
+      "ciphertext": "LXFOPVEFRNHR",
+      "difficulty": "beginner",
+      "tags": ["polyalphabetic", "classic"],
+      "metadata": {"roundtrip": true, "demo": true}
+    },
+    {
+      "id": "tc003",
+      "cipher": "columnar",
+      "key": "ZEBRA",
+      "plaintext_id": "pt005",
+      "ciphertext": "FEEWEDLCEVROAATNNOECSIDRUB",
+      "difficulty": "intermediate",
+      "tags": ["transposition", "historical", "telegram"],
+      "metadata": {"roundtrip": true, "demo": true}
+    },
+    {
+      "id": "tc004",
+      "cipher": "playfair",
+      "key": "MONARCHY",
+      "plaintext_id": "pt002",
+      "ciphertext": "WEMLHDTHESITRUTOBESELFVIDENTTHATLMENARCREATEDEQUAL",
+      "difficulty": "intermediate",
+      "tags": ["polygraphic", "historical", "declaration"],
+      "metadata": {"roundtrip": true, "demo": true}
+    },
+    {
+      "id": "tc005",
+      "cipher": "atbash",
+      "key": null,
+      "plaintext_id": "pt003",
+      "ciphertext": "MVEVI TLLZ ZIRE FVB FM MVEVI TLLZ OVG BLF WLFM",
+      "difficulty": "beginner",
+      "tags": ["reflection", "pop culture", "meme"],
+      "metadata": {"roundtrip": true, "demo": true}
+    }
+  ]
+}

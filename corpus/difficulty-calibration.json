@@ -1,0 +1,46 @@
+{
+  "generated": "2026-04-27",
+  "description": "Difficulty tier assignments for Cipher Museum corpus engines, based on cryptanalytic complexity and historical breaking difficulty.",
+  "tiers": {
+    "beginner": {
+      "description": "Single-alphabet substitution and simple encoding. Breakable with basic frequency analysis or brute force in minutes.",
+      "target_records": 2000,
+      "actual_records": 2460,
+      "cipher_types": ["caesar", "rot13", "atbash", "monoalphabetic", "affine", "trithemius", "polybius", "tap_code", "bacon_cipher", "morse_code", "joseon_yeokhak", "pigpen"],
+      "expected_attacks": ["frequency analysis", "brute force", "known encoding"],
+      "estimated_human_break_time": "1–30 minutes",
+      "estimated_solver_accuracy": "95–100%"
+    },
+    "intermediate": {
+      "description": "Polyalphabetic and simple transposition ciphers. Require Kasiski test, index of coincidence, or multiple anagramming.",
+      "target_records": 3000,
+      "actual_records": 4422,
+      "cipher_types": ["vigenere", "beaufort", "gronsfeld", "porta", "running_key", "rail_fence", "columnar_transposition", "scytale", "playfair", "homophonic", "autokey", "confederate_vigenere", "kama_sutra", "diana"],
+      "expected_attacks": ["Kasiski examination", "index of coincidence", "multiple anagramming", "bigram frequency"],
+      "estimated_human_break_time": "30 minutes – 8 hours",
+      "estimated_solver_accuracy": "60–90%"
+    },
+    "advanced": {
+      "description": "Fractionation, polygraphic, and combined-technique ciphers. Require specialist knowledge of cipher structure.",
+      "target_records": 3000,
+      "actual_records": 5176,
+      "cipher_types": ["bifid", "trifid", "adfgx", "adfgvx", "nihilist", "straddling_checkerboard", "four_square", "two_square", "fractionated_morse", "double_transposition", "bazeries", "chaocipher", "hill", "vic", "copiale", "kryptos", "cardano_autokey", "wheatstone", "geez_monastic", "red_type_a", "null_cipher", "slidex"],
+      "expected_attacks": ["bigram frequency analysis", "Polybius recovery", "probable word", "matrix analysis"],
+      "estimated_human_break_time": "hours – days",
+      "estimated_solver_accuracy": "20–60%"
+    },
+    "expert": {
+      "description": "Machine ciphers, codebooks, and superenciphered systems. Require specialized equipment models, codebook reconstruction, or historical known-plaintext.",
+      "target_records": 3000,
+      "actual_records": 5367,
+      "cipher_types": ["enigma", "lorenz", "sigaba", "typex", "m209", "purple", "fialka", "kl7", "geheimschreiber", "kryha", "m94", "solitaire", "jefferson_disk", "alberti_disk", "stager_route", "great_cipher", "babington", "nomenclator", "book_cipher", "argenti", "wallis_cipher", "chinese_telegraph", "zimmermann", "culper_ring", "arnold_andre", "commercial_code", "aeneas_tacticus", "jn25", "venona_pad_reuse", "one_time_pad", "vernam", "navajo_code", "voynich_render"],
+      "expected_attacks": ["bombe attack", "cribs", "codebook reconstruction", "superimposition", "pad reuse"],
+      "estimated_human_break_time": "days – years (or impossible without key)",
+      "estimated_solver_accuracy": "5–30%"
+    }
+  },
+  "methodology": "Difficulty tiers are assigned based on: key space size, required cryptanalytic technique complexity, historical time-to-break, and estimated LLM/solver success rates. Machine ciphers are expert due to state-dependent keystream generation even when simplified for the pedagogical model.",
+  "total_records": 17425,
+  "total_cipher_types": 81,
+  "total_engines": 84
+}

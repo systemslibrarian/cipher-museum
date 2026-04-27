@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite both Cipher Corpus and the foundational CipherBank work."
+title: "Cipher Corpus: Comprehensive Classical Cryptanalysis Benchmark"
+authors:
+  - family-names: Lester
+    given-names: Paul
+    website: "https://systemslibrarian.dev"
+url: "https://ciphermuseum.com/cipher-corpus.html"
+date-released: 2026-04-27
+license: MIT
+version: "0.2"
+keywords:
+  - cryptanalysis
+  - classical ciphers
+  - benchmark dataset
+  - cipher breaking
+  - llm evaluation
+  - cryptography education
+preferred-citation:
+  type: misc
+  title: "Cipher Corpus: Comprehensive Classical Cryptanalysis Benchmark"
+  authors:
+    - family-names: Lester
+      given-names: Paul
+  url: "https://ciphermuseum.com/cipher-corpus.html"
+  year: 2026
+  notes: "21,602+ test cases across 82+ cipher algorithms, 9 languages"
+references:
+  - type: article
+    title: "CipherBank: Exploring the Boundary of LLM Reasoning Capabilities through Cryptography Challenges"
+    authors:
+      - family-names: Li
+        given-names: Yu
+      - family-names: Pei
+        given-names: Qizhi
+      - family-names: Sun
+        given-names: Mengyuan
+      - family-names: Lin
+        given-names: Honglin
+      - family-names: Ming
+        given-names: Chenlin
+      - family-names: Gao
+        given-names: Xin
+      - family-names: Wu
+        given-names: Jiang
+      - family-names: He
+        given-names: Conghui
+      - family-names: Wu
+        given-names: Lijun
+    journal: "arXiv preprint arXiv:2504.19093"
+    year: 2025
+    url: "https://arxiv.org/pdf/2504.19093"
+    notes: "Foundational benchmark establishing LLM cryptanalysis evaluation methodology"

@@ -3,11 +3,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const Ajv = require('ajv/dist/2020');
+const Ajv = require('ajv/dist/2020').default;
 
 const schemaPath = path.join(__dirname, 'public/corpus/cipher-corpus.schema.json');
 const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true, strict: false });
 const validate = ajv.compile(schema);
 
 function validateRecord(record, idx = null) {

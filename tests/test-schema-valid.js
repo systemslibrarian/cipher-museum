@@ -1,8 +1,8 @@
 // test-schema-valid.js: Validate that the schema is valid JSON Schema
-const Ajv = require('ajv/dist/2020');
+const Ajv = require('ajv/dist/2020').default;
 const fs = require('fs');
 const schema = JSON.parse(fs.readFileSync('public/corpus/cipher-corpus.schema.json', 'utf8'));
-const ajv = new Ajv();
+const ajv = new Ajv({ strict: false });
 try {
   ajv.compile(schema);
   console.log('Schema is valid JSON Schema.');

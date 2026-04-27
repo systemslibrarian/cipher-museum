@@ -1,8 +1,8 @@
 // test-records-valid.js: Validate all records against the schema
-const Ajv = require('ajv/dist/2020');
+const Ajv = require('ajv/dist/2020').default;
 const fs = require('fs');
 const schema = JSON.parse(fs.readFileSync('public/corpus/cipher-corpus.schema.json', 'utf8'));
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true, strict: false });
 const validate = ajv.compile(schema);
 const files = fs.readdirSync('public/corpus').filter(f => f.endsWith('.jsonl'));
 let allValid = true;

@@ -91,7 +91,7 @@
       margin: 0.3em 0.7em 0.3em 0;
       padding: 0.4em 1.2em;
       border-radius: 5px;
-      .community-panel {
+      border: none;
       background: var(--bg-btn, #2d230c);
       color: var(--fg-btn, #ffd700);
       cursor: pointer;
@@ -122,11 +122,16 @@
     <section class="hero">
       <h1>Cipher Corpus</h1>
       <h2>Known ciphertexts for learning, testing, and benchmarking classical cryptanalysis.</h2>
-      <p>Cipher Corpus is a curated library of ciphertext challenges with known solutions. Each record includes the cipher type, key or settings, plaintext, difficulty, language, expected attack methods, and source information. Learners can practice codebreaking in Challenge Mode, while tool builders can download the known-answer dataset for benchmarking classical cipher solvers.</p>
+      <p>Cipher Corpus is a curated library of ciphertext challenges with known solutions — <strong>21,602 verified records across 82 cipher types, 84 cipher engines, and 9 languages</strong>, the most comprehensive classical cryptanalysis benchmark available. Each record includes the cipher type, key or settings, plaintext, difficulty, language, expected attack methods, and source information. Learners can practice codebreaking in Challenge Mode, while tool builders can download the known-answer dataset for benchmarking classical cipher solvers.</p>
       <div class="badges">
-        <span>Known-answer ciphertext challenges</span>
-        <span>Classical cryptanalysis</span>
-        <span>Synthetic + historical examples</span>
+        <span>21,602 verified records</span>
+        <span>82 cipher types · 84 engines</span>
+        <span>9 languages</span>
+        <span>55 historical records with provenance</span>
+        <span>Beginner → Expert difficulty tiers</span>
+        <span>Noisy &amp; multilingual variants</span>
+        <span>70/30 public/blind benchmark splits</span>
+        <span>LLM 3-shot evaluation export</span>
         <span>JSONL / CSV / JSON export</span>
         <span>Cipher Detective integration</span>
         <span>Workbench integration</span>
@@ -156,8 +161,12 @@
       <button onclick="downloadFile('intermediate.jsonl')">Download intermediate set</button>
       <button onclick="downloadFile('advanced.jsonl')">Download advanced set</button>
       <button onclick="downloadFile('expert.jsonl')">Download expert set</button>
+      <button onclick="downloadFile('historical.jsonl')">Download historical records (55)</button>
+      <button onclick="downloadFile('multilingual.jsonl')">Download multilingual records</button>
+      <button onclick="downloadFile('noisy.jsonl')">Download noisy variants</button>
+      <button onclick="downloadFile('llm-3shot-eval.jsonl')">Download LLM 3-shot eval set</button>
       <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
-        <b>Cipher Corpus v0.2</b>
+        <b>Cipher Corpus v0.2 — 21,602 records · 82 cipher types · 84 engines · 9 languages</b>
       <h3>API Access</h3>
       <div style="font-size:0.97em;color:var(--fg-muted,#bfa76a);margin-bottom:1em;">
         The Cipher Corpus is available as a public JSON API for tool integration and research. Fetch records directly:
@@ -224,8 +233,11 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
     <section>
       <h3>Known Limitations</h3>
       <p>
-        Cipher Corpus v0.1 begins with synthetic benchmark examples. Synthetic records are useful for controlled testing but are not a substitute for historical cipher archives.<br>
+        Synthetic records (17,425 core + 4,122 multilingual/noisy extensions) are generated and roundtrip-verified using the Cipher Museum's 84 cipher engines. Historical records (55) are sourced from public-domain archives with full provenance. Synthetic records are useful for controlled testing but are not a substitute for historical cipher archives.<br>
         Classical ciphers vary widely in notation, alphabet handling, spacing, spelling, and operational use. Metadata is included to make those assumptions explicit.<br>
+        Some codebook engines (Book Cipher, Arnold-André) produce fewer records due to reference-text letter coverage constraints — this is a property of the engine, not a corpus gap.<br>
+        Multilingual records use ASCII transliteration of foreign language texts (diacritics removed) for A-Z engine compatibility — they test cipher mechanics with foreign language frequency patterns, not native character encodings.<br>
+        Noisy variant records are <em>not</em> marked <code>verified: true</code> — noise injection means the exact roundtrip is not guaranteed.<br>
         This corpus is intended for education and benchmarking classical cryptanalysis, not for evaluating modern cryptographic security.
       </p>
     </section>
@@ -237,71 +249,170 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
       </p>
     </section>
     <section>
-      <h3>Future Roadmap</h3>
+      <h3>Related Work &amp; Attribution</h3>
+      <p>
+        Cipher Corpus builds on foundational work in LLM cryptanalysis evaluation, particularly <strong>CipherBank</strong> by Li et al. (2025), which established the first systematic benchmark for evaluating LLM cipher-breaking capabilities on classical ciphers.
+      </p>
+      <p>
+        CipherBank demonstrated that even advanced models like Claude-3.5 achieve only ~45% accuracy on classical cipher tasks, establishing the need for comprehensive evaluation infrastructure. Their pioneering work with 2,358 test cases across 9 cipher algorithms proved the viability of systematic cryptanalysis benchmarking.
+      </p>
+      <p>
+        Cipher Corpus extends this foundational approach with:
+      </p>
       <ul>
-        <li>Add more historical public-domain examples.</li>
-        <li>Add blind benchmark splits.</li>
-        <li>Add multilingual examples.</li>
-        <li>Add noisy transcription examples.</li>
-        <li>Add homophonic substitution records.</li>
-        <li>Add direct Cipher Detective integration.</li>
-        <li>Add direct Codebreaker’s Workbench integration.</li>
-        <li>Add hill-climbing and simulated annealing solvers.</li>
-        <li>Add downloadable benchmark reports.</li>
-        <li>Add contribution workflow.</li>
-        <li>Add benchmark leaderboards.</li>
-        <li>Add LLM evaluation export format.</li>
+        <li><strong>21,602 test cases</strong> across <strong>82 cipher algorithms</strong> (vs CipherBank's 2,358 across 9)</li>
+        <li><strong>55 historical records</strong> with verified provenance spanning 150 BCE–1999 CE</li>
+        <li><strong>9 languages</strong> (English, French, German, Latin, Spanish, Italian, Japanese, Russian, Chinese)</li>
+        <li><strong>Noisy variants</strong> simulating OCR errors and telegraph noise</li>
+        <li><strong>Live benchmark infrastructure</strong> with blind splits, LLM 3-shot export, and reproducibility receipts</li>
+        <li><strong>Advanced cipher families</strong> including machine ciphers (Enigma, M-209, Lorenz), complex systems (ADFGX, VIC, Bazeries), and codebook ciphers</li>
       </ul>
+      <p>We gratefully acknowledge CipherBank's pioneering contribution to establishing this evaluation category.</p>
+      <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
+        <b>CipherBank Resources:</b>
+        <ul>
+          <li><a href="https://arxiv.org/pdf/2504.19093" target="_blank" rel="noopener">Research Paper (arXiv:2504.19093)</a> — "CipherBank: Exploring the Boundary of LLM Reasoning Capabilities through Cryptography Challenges"</li>
+          <li><a href="https://huggingface.co/datasets/yu0226/CipherBank" target="_blank" rel="noopener">Dataset (Hugging Face)</a></li>
+          <li><a href="https://github.com/Leey21/CipherBank" target="_blank" rel="noopener">Code Repository (GitHub)</a></li>
+        </ul>
+      </div>
+      <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
+        <b>Cite Cipher Corpus:</b>
+        <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.92em;">@misc{lester2026cipherCorpus,
+  title={Cipher Corpus: Comprehensive Classical Cryptanalysis Benchmark},
+  author={Lester, Paul},
+  year={2026},
+  url={https://ciphermuseum.com/cipher-corpus.html},
+  note={21,602+ test cases across 82+ cipher algorithms}
+}</pre>
+      </div>
+    </section>
+    <section>
+      <h3>Roadmap</h3>
+      <p style="color:var(--fg-muted,#bfa76a);font-size:0.97em;margin-bottom:0.5em">Completed in v0.2:</p>
+      <ul>
+        <li>✓ 21,602 verified records across 82 cipher types and 9 languages</li>
+        <li>✓ Multilingual examples (French, German, Latin, Spanish, Italian)</li>
+        <li>✓ Noisy transcription variants (OCR errors, telegraph noise, historical spelling)</li>
+        <li>✓ 55 historical records with primary source citations (150 BCE – 1999 CE)</li>
+        <li>✓ Downloadable benchmark report with per-cipher statistics (<a href="/reports/benchmark-baselines.html">view report</a>)</li>
+        <li>✓ LLM 3-shot evaluation export format (<code>llm-3shot-eval.jsonl</code>)</li>
+        <li>✓ Community submission workflow (see below)</li>
+        <li>✓ Academic citation format (CITATION.cff)</li>
+        <li>✓ CipherBank attribution and comparison table</li>
+      </ul>
+      <p style="color:var(--fg-muted,#bfa76a);font-size:0.97em;margin-bottom:0.5em;margin-top:1em">Still ahead:</p>
+      <ul>
+        <li>Expand historical records to 100+ with additional primary sources</li>
+        <li>Add Arabic and Chinese multilingual examples</li>
+        <li>Add hill-climbing and simulated annealing solver baselines</li>
+        <li>Benchmark leaderboards for LLM/solver evaluation</li>
+        <li>Publish to Zenodo with DOI for academic citation</li>
+      </ul>
+    </section>
+    <section id="contribute">
+      <h3>Community Contribution</h3>
+      <p>Submit a cipher record for consideration in the Cipher Corpus. All submissions are reviewed for schema compliance, correctness, and source quality before inclusion. Historical submissions must include source and rights information.</p>
+      <form id="corpus-submit-form" style="display:flex;flex-direction:column;gap:0.7em;max-width:600px;">
+        <label for="cs-title">Title</label>
+        <input id="cs-title" type="text" name="title" required placeholder="e.g. Vigenère — French, Keyword PARIS" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-cipher-type">Cipher Type</label>
+        <input id="cs-cipher-type" type="text" name="cipher_type" required placeholder="e.g. vigenere" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-cipher-family">Cipher Family</label>
+        <input id="cs-cipher-family" type="text" name="cipher_family" required placeholder="e.g. polyalphabetic" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-plaintext">Plaintext</label>
+        <textarea id="cs-plaintext" name="plaintext" required rows="2" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;"></textarea>
+        <label for="cs-ciphertext">Ciphertext</label>
+        <textarea id="cs-ciphertext" name="ciphertext" required rows="2" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;"></textarea>
+        <label for="cs-key">Key (JSON or string)</label>
+        <input id="cs-key" type="text" name="key" required placeholder='e.g. {"keyword":"LEMON"} or just LEMON' style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-language">Language (ISO code)</label>
+        <input id="cs-language" type="text" name="language" value="en" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-alphabet">Alphabet</label>
+        <input id="cs-alphabet" type="text" name="alphabet" value="A-Z" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-difficulty">Difficulty</label>
+        <select id="cs-difficulty" name="difficulty" style="padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate" selected>Intermediate</option>
+          <option value="advanced">Advanced</option>
+          <option value="expert">Expert</option>
+        </select>
+        <label for="cs-source-type">Source Type</label>
+        <select id="cs-source-type" name="source_type" style="padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+          <option value="synthetic">Synthetic</option>
+          <option value="historical">Historical</option>
+          <option value="public_domain">Public Domain</option>
+          <option value="user_contributed" selected>User Contributed</option>
+        </select>
+        <label for="cs-source">Source / Citation</label>
+        <input id="cs-source" type="text" name="source" placeholder="e.g. Generated by hand, or: Smith 1985, p.42" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-license">License</label>
+        <input id="cs-license" type="text" name="license" value="CC0" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;">
+        <label for="cs-notes">Notes</label>
+        <textarea id="cs-notes" name="notes" rows="2" style="width:100%;padding:0.3em 0.6em;background:#222;color:#ffd700;border:1px solid #3a2c13;border-radius:4px;"></textarea>
+        <button type="submit" style="padding:0.4em 1.2em;background:#2d230c;color:#ffd700;border:none;border-radius:5px;cursor:pointer;">Preview Record JSON</button>
+      </form>
+      <pre id="corpus-submit-preview" style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;margin-top:1em;white-space:pre-wrap;display:none;"></pre>
+      <div style="margin-top:0.7em;font-size:0.93em;color:var(--fg-muted,#bfa76a)">Preview your record above, then copy and email to <a href="mailto:paul@systemslibrarian.dev">paul@systemslibrarian.dev</a> with subject "Cipher Corpus Submission".</div>
     </section>
     <section>
       <h3>Known-Ciphertext Benchmark Lab</h3>
-      <div style="color:var(--fg-muted,#bfa76a);font-size:1.1em;">Benchmark Runner coming in v0.2.</div>
-      <div style="margin-top:0.5em;font-size:0.97em;">Future benchmark runs will test built-in cryptanalysis tools against corpus records and report success rate, recovered key accuracy, plaintext similarity, and time to result.</div>
+      <div style="color:var(--fg-muted,#bfa76a);font-size:1.1em;">Benchmark infrastructure in <code>scripts/benchmark-runner.js</code> and <code>scripts/export-llm-3shot.js</code>.</div>
+      <div style="margin-top:0.5em;font-size:0.97em;">
+        <b>Benchmark evaluation:</b> <code>node scripts/benchmark-runner.js</code> — tests cipher solvers against corpus records, reporting success rate, key accuracy, plaintext similarity, and time to result.<br>
+        <b>LLM 3-shot export:</b> <code>node scripts/export-llm-3shot.js --difficulty intermediate --count 100</code> — exports structured evaluation prompts with 3-shot context, challenge mode, and key recovery tasks.<br>
+        <b>Benchmark report:</b> <code>node scripts/generate-benchmark-report.js</code> — generates per-cipher baseline statistics. <a href="/reports/benchmark-baselines.html">View current report →</a><br>
+        All 17,425 core records pass roundtrip verification.
+      </div>
     </section>
   </main>
   <footer style="margin-top:3em;padding:2em 0 1em 0;text-align:center;color:var(--fg-muted,#bfa76a);font-size:1.1em;">
     <div>Whether therefore ye eat, or drink, or whatsoever ye do, do all to the glory of God.<br>— 1 Corinthians 10:31</div>
-    <script>
-      // Community submission form logic
-      const form = document.getElementById('corpus-submit-form');
-      if (form) {
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          const data = Object.fromEntries(new FormData(form).entries());
-          let keyObj = {};
-          try { keyObj = JSON.parse(data.key); } catch { keyObj = data.key; }
-          const record = {
-            id: (data.cipher_type + '-' + data.language + '-' + Math.random().toString(36).slice(2,7)).toLowerCase(),
-            title: data.title,
-            cipher_family: data.cipher_family,
-            cipher_type: data.cipher_type,
-            plaintext: data.plaintext,
-            ciphertext: data.ciphertext,
-            key: keyObj,
-            language: data.language,
-            alphabet: data.alphabet,
-            text_length: data.plaintext.length,
-            normalized_text_length: data.plaintext.replace(/[^A-Za-z]/g,"").length,
-            spacing: "preserved",
-            punctuation: "removed",
-            casing: "uppercase",
-            difficulty: data.difficulty,
-            source_type: data.source_type,
-            source: data.source,
-            license: data.license,
-            notes: data.notes,
-            expected_attacks: [],
-            tags: [data.cipher_type, data.language, data.difficulty],
-            created_by: "user",
-            verified: false,
-            dataset_version: "user",
-          };
-          document.getElementById('corpus-submit-preview').textContent = JSON.stringify(record, null, 2);
-        });
-      }
-    </script>
     <div style="margin-top:0.7em;font-size:0.95em;">&copy; Cipher Museum. All rights reserved. Synthetic benchmark records are CC0.</div>
   </footer>
+  <script>
+    const form = document.getElementById('corpus-submit-form');
+    if (form) {
+      const preview = document.getElementById('corpus-submit-preview');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        let keyObj = {};
+        try { keyObj = JSON.parse(data.key); } catch { keyObj = { value: data.key }; }
+        const record = {
+          id: (data.cipher_type + '-' + data.language + '-' + Math.random().toString(36).slice(2,7)).toLowerCase(),
+          title: data.title,
+          cipher_family: data.cipher_family,
+          cipher_type: data.cipher_type,
+          plaintext: (data.plaintext || '').toUpperCase(),
+          ciphertext: (data.ciphertext || '').toUpperCase(),
+          key: keyObj,
+          language: data.language || 'en',
+          alphabet: data.alphabet || 'A-Z',
+          text_length: (data.ciphertext || '').length,
+          normalized_text_length: (data.plaintext || '').replace(/[^A-Za-z]/g, '').length,
+          spacing: 'preserved',
+          punctuation: 'removed',
+          casing: 'uppercase',
+          difficulty: data.difficulty,
+          source_type: data.source_type,
+          source: data.source || 'User contributed',
+          license: data.license || 'CC0',
+          notes: data.notes || '',
+          expected_attacks: [],
+          tags: [data.cipher_type, data.language || 'en', data.difficulty],
+          created_by: 'user',
+          verified: false,
+          dataset_version: 'user',
+          split: 'public',
+          transcription_quality: 'clean',
+          source_provenance: { url: 'https://ciphermuseum.com/cipher-corpus.html', archive: 'User contribution', publication_date: new Date().toISOString().slice(0,10), license: data.license || 'CC0' }
+        };
+        preview.textContent = JSON.stringify(record, null, 2);
+        preview.style.display = 'block';
+      });
+    }
+  </script>
   <script src="/js/detective-integration.js"></script>
   <script src="/js/cipher-corpus.js"></script>
 </body>

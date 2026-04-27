@@ -1,14 +1,2 @@
-{
-  "cipher_name": "Beale Ciphers (Historical Example)",
-  "ciphertext": "115, 73, 24, 807, ...",
-  "plaintext": "A historical example of the Beale ciphers.",
-  "language": "en",
-  "homophonic": false,
-  "noisy": false,
-  "synthetic": false,
-  "source_provenance": {
-    "type": "historical",
-    "details": "Beale Papers, 1885 pamphlet, Library of Congress, https://www.loc.gov/item/06020447/"
-  },
-  "notes": "This is a sample historical cipher record for v0.2 compliance."
-}
+{"id": "beale-hist-001", "title": "Beale Ciphers (Historical Example)", "cipher_family": "number code", "cipher_type": "beale", "plaintext": "A historical example of the Beale ciphers.", "ciphertext": "115, 73, 24, 807, ...", "key": {"type": "unknown"}, "language": "en", "alphabet": "A-Z", "text_length": 20, "normalized_text_length": 20, "spacing": "mixed", "punctuation": "removed", "casing": "uppercase", "difficulty": "advanced", "source_type": "historical", "source": "Beale Papers, 1885 pamphlet, Library of Congress", "expected_attacks": ["book code analysis", "frequency analysis"], "tags": ["historical", "beale", "unsolved"], "created_by": "Cipher Museum", "verified": false, "dataset_version": "0.2", "split": "public", "transcription_quality": "noisy", "source_provenance": {"url": "https://www.loc.gov/item/06020447/", "archive": "Library of Congress", "publication_date": "1885-01-01", "license": "Public Domain"}, "license": "Public Domain", "notes": "This is a sample historical cipher record for v0.2 compliance."}
+{"id": "beale-hist-001", "title": "Beale Ciphers (Historical Example)", "cipher_family": "number code", "cipher_type": "beale", "plaintext": "A historical example of the Beale ciphers.", "ciphertext": "115, 73, 24, 807, ...", "key": {"type": "unknown"}, "language": "en", "alphabet": "A-Z", "text_length": 20, "normalized_text_length": 20, "spacing": "preserved", "punctuation": "removed", "casing": "uppercase", "difficulty": "advanced", "source_type": "historical", "source": "Beale Papers, 1885 pamphlet, Library of Congress", "expected_attacks": ["book code analysis", "frequency analysis"], "tags": ["historical", "beale", "unsolved"], "created_by": "Cipher Museum", "verified": false, "dataset_version": "0.2", "split": "public", "transcription_quality": "noisy", "source_provenance": {"url": "https://www.loc.gov/item/06020447/", "archive": "Library of Congress", "publication_date": "1885-01-01", "license": "Public Domain"}, "license": "Public Domain", "notes": "This is a sample historical cipher record for v0.2 compliance."}

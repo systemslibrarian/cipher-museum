@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Corpus Benchmark Baselines</title>
+  <link rel="stylesheet" href="/css/museum.css">
+  <style>
+    table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; }
+    th, td { border: 1px solid var(--border-card,#3a2c13); padding: 0.4em 0.8em; text-align: left; }
+    th { background: var(--bg-card,#18140e); color: var(--fg-heading,#ffd700); }
+    tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+    .diff-beginner { color: #4caf50; }
+    .diff-intermediate { color: #ffc107; }
+    .diff-advanced { color: #ff9800; }
+    .diff-expert { color: #f44336; }
+    .stat-box { display: inline-block; background: var(--bg-card,#18140e); border: 1px solid var(--border-card,#3a2c13); border-radius: 8px; padding: 1em 1.5em; margin: 0.5em; text-align: center; }
+    .stat-num { font-size: 2em; font-weight: bold; color: var(--fg-heading,#ffd700); }
+    .stat-label { font-size: 0.9em; color: var(--fg-muted,#bfa76a); }
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;background:#ffd700;color:#18140e;padding:0.5em 1em;border-radius:6px;z-index:1000;">Skip to main content</a>
+<header>
+  <nav>
+    <a href="/">🏛️ Cipher Museum</a>
+    <a href="/cipher-corpus.html">Cipher Corpus</a>
+    <a href="/reports/benchmark-baselines.html" aria-current="page">Benchmark Report</a>
+  </nav>
+</header>
+<main id="main-content">
+  <h1>Cipher Corpus Benchmark Baselines</h1>
+  <p style="color:var(--fg-muted,#bfa76a)">Generated 2026-04-27 · v0.2 · <a href="/public/reports/benchmark-baselines.json">Download JSON</a></p>
+
+  <div>
+    <div class="stat-box"><div class="stat-num">21,557</div><div class="stat-label">Total Records</div></div>
+    <div class="stat-box"><div class="stat-num">81</div><div class="stat-label">Cipher Types</div></div>
+    <div class="stat-box"><div class="stat-num">6</div><div class="stat-label">Languages</div></div>
+    <div class="stat-box"><div class="stat-num">6435</div><div class="stat-label">Blind Split Records</div></div>
+    <div class="stat-box"><div class="stat-num">9</div><div class="stat-label">Historical Records</div></div>
+  </div>
+
+  <h2>Expected Solver Accuracy by Difficulty</h2>
+  <table>
+    <thead><tr><th>Difficulty</th><th>Records</th><th>Human Expert</th><th>Automated Solver</th><th>LLM 3-Shot</th><th>LLM 0-Shot Challenge</th></tr></thead>
+    <tbody>
+      <tr><td class="diff-beginner">beginner</td><td>3931</td><td>95-100%</td><td>95-100%</td><td>80-95%</td><td>60-80%</td></tr>
+<tr><td class="diff-intermediate">intermediate</td><td>6859</td><td>60-90%</td><td>60-90%</td><td>40-70%</td><td>20-50%</td></tr>
+<tr><td class="diff-advanced">advanced</td><td>5393</td><td>20-60%</td><td>20-60%</td><td>10-40%</td><td>5-20%</td></tr>
+<tr><td class="diff-expert">expert</td><td>5374</td><td>5-30%</td><td>5-30%</td><td>2-15%</td><td>1-5%</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Per-Cipher Statistics (Top 50 by Record Count)</h2>
+  <table>
+    <thead><tr><th>Cipher Type</th><th>Family</th><th>Difficulty</th><th>Records</th><th>Avg Length</th><th>LLM 3-Shot</th><th>LLM 0-Shot</th></tr></thead>
+    <tbody><tr>
+    <td>vigenere</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>1287</td>
+    <td>38</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>caesar</td>
+    <td>substitution</td>
+    <td class="diff-beginner">beginner</td>
+    <td>1285</td>
+    <td>38</td>
+    <td>80-95%</td>
+    <td>60-80%</td>
+  </tr>
+<tr>
+    <td>affine</td>
+    <td>substitution</td>
+    <td class="diff-beginner">beginner</td>
+    <td>945</td>
+    <td>37</td>
+    <td>80-95%</td>
+    <td>60-80%</td>
+  </tr>
+<tr>
+    <td>columnar_transposition</td>
+    <td>transposition</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>934</td>
+    <td>39</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>playfair</td>
+    <td>polygraphic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>823</td>
+    <td>36</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>monoalphabetic</td>
+    <td>substitution</td>
+    <td class="diff-beginner">beginner</td>
+    <td>702</td>
+    <td>44</td>
+    <td>80-95%</td>
+    <td>60-80%</td>
+  </tr>
+<tr>
+    <td>beaufort</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>645</td>
+    <td>35</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>rail_fence</td>
+    <td>transposition</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>645</td>
+    <td>35</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>autokey</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>530</td>
+    <td>36</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>bifid</td>
+    <td>fractionation</td>
+    <td class="diff-advanced">advanced</td>
+    <td>496</td>
+    <td>34</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>enigma</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>421</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>stager_route</td>
+    <td>transposition</td>
+    <td class="diff-expert">expert</td>
+    <td>361</td>
+    <td>43</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>gronsfeld</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>360</td>
+    <td>41</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>scytale</td>
+    <td>transposition</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>360</td>
+    <td>43</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>bazeries</td>
+    <td>transposition</td>
+    <td class="diff-advanced">advanced</td>
+    <td>360</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>confederate_vigenere</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>301</td>
+    <td>41</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>porta</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>300</td>
+    <td>41</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>diana</td>
+    <td>polyalphabetic</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>300</td>
+    <td>41</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>trifid</td>
+    <td>fractionation</td>
+    <td class="diff-advanced">advanced</td>
+    <td>300</td>
+    <td>40</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>fractionated_morse</td>
+    <td>fractionation</td>
+    <td class="diff-advanced">advanced</td>
+    <td>300</td>
+    <td>48</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>hill</td>
+    <td>polygraphic</td>
+    <td class="diff-advanced">advanced</td>
+    <td>300</td>
+    <td>42</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>m209</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>300</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>alberti_disk</td>
+    <td>disk</td>
+    <td class="diff-expert">expert</td>
+    <td>300</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>adfgx</td>
+    <td>fractionation</td>
+    <td class="diff-advanced">advanced</td>
+    <td>280</td>
+    <td>74</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>lorenz</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>259</td>
+    <td>38</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>kama_sutra</td>
+    <td>substitution</td>
+    <td class="diff-intermediate">intermediate</td>
+    <td>240</td>
+    <td>41</td>
+    <td>40-70%</td>
+    <td>20-50%</td>
+  </tr>
+<tr>
+    <td>adfgvx</td>
+    <td>fractionation</td>
+    <td class="diff-advanced">advanced</td>
+    <td>240</td>
+    <td>82</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>double_transposition</td>
+    <td>transposition</td>
+    <td class="diff-advanced">advanced</td>
+    <td>240</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>chaocipher</td>
+    <td>machine</td>
+    <td class="diff-advanced">advanced</td>
+    <td>240</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>kryptos</td>
+    <td>polyalphabetic</td>
+    <td class="diff-advanced">advanced</td>
+    <td>240</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>cardano_autokey</td>
+    <td>polyalphabetic</td>
+    <td class="diff-advanced">advanced</td>
+    <td>240</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>geez_monastic</td>
+    <td>substitution</td>
+    <td class="diff-advanced">advanced</td>
+    <td>240</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>red_type_a</td>
+    <td>machine</td>
+    <td class="diff-advanced">advanced</td>
+    <td>240</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>sigaba</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>240</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>typex</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>240</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>fialka</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>240</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>kl7</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>240</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>geheimschreiber</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>240</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>vic</td>
+    <td>substitution</td>
+    <td class="diff-advanced">advanced</td>
+    <td>225</td>
+    <td>0</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>nihilist</td>
+    <td>fractionation</td>
+    <td class="diff-advanced">advanced</td>
+    <td>224</td>
+    <td>0</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>four_square</td>
+    <td>polygraphic</td>
+    <td class="diff-advanced">advanced</td>
+    <td>224</td>
+    <td>37</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>two_square</td>
+    <td>polygraphic</td>
+    <td class="diff-advanced">advanced</td>
+    <td>224</td>
+    <td>37</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>joseon_yeokhak</td>
+    <td>substitution</td>
+    <td class="diff-beginner">beginner</td>
+    <td>180</td>
+    <td>41</td>
+    <td>80-95%</td>
+    <td>60-80%</td>
+  </tr>
+<tr>
+    <td>straddling_checkerboard</td>
+    <td>substitution</td>
+    <td class="diff-advanced">advanced</td>
+    <td>180</td>
+    <td>0</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>copiale</td>
+    <td>substitution</td>
+    <td class="diff-advanced">advanced</td>
+    <td>180</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>wheatstone</td>
+    <td>polygraphic</td>
+    <td class="diff-advanced">advanced</td>
+    <td>180</td>
+    <td>41</td>
+    <td>10-40%</td>
+    <td>5-20%</td>
+  </tr>
+<tr>
+    <td>purple</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>180</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>kryha</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>180</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>m94</td>
+    <td>machine</td>
+    <td class="diff-expert">expert</td>
+    <td>180</td>
+    <td>41</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr>
+<tr>
+    <td>great_cipher</td>
+    <td>nomenclator</td>
+    <td class="diff-expert">expert</td>
+    <td>180</td>
+    <td>0</td>
+    <td>2-15%</td>
+    <td>1-5%</td>
+  </tr></tbody>
+  </table>
+
+  <h2>Comparison with CipherBank</h2>
+  <table>
+    <thead><tr><th>Benchmark</th><th>Records</th><th>Algorithms</th><th>Historical</th><th>Blind Splits</th><th>Multilingual</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://arxiv.org/pdf/2504.19093" target="_blank">CipherBank (Li et al., 2025)</a></td><td>2,358</td><td>9</td><td>No</td><td>No</td><td>No</td></tr>
+      <tr><td><strong><a href="/cipher-corpus.html">Cipher Corpus v0.2</a></strong></td><td><strong>21,557</strong></td><td><strong>81</strong></td><td><strong>Yes (9)</strong></td><td><strong>Yes (6435)</strong></td><td><strong>Yes (6 langs)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Citation</h2>
+  <pre style="background:#222;color:#ffd700;padding:1em;border-radius:6px;overflow-x:auto">@misc{lester2026cipherCorpus,
+  title={Cipher Corpus: Comprehensive Classical Cryptanalysis Benchmark},
+  author={Lester, Paul},
+  year={2026},
+  url={https://ciphermuseum.com/cipher-corpus.html},
+  note={21557+ test cases across 81+ cipher algorithms}
+}
+
+@article{li2025cipherbank,
+  title={CipherBank: Exploring the Boundary of LLM Reasoning Capabilities through Cryptography Challenges},
+  author={Li, Yu and Pei, Qizhi and Sun, Mengyuan and Lin, Honglin and Ming, Chenlin and Gao, Xin and Wu, Jiang and He, Conghui and Wu, Lijun},
+  journal={arXiv preprint arXiv:2504.19093},
+  year={2025},
+  url={https://arxiv.org/pdf/2504.19093}
+}</pre>
+</main>
+<footer style="margin-top:3em;padding:2em 0 1em 0;text-align:center;color:var(--fg-muted,#bfa76a)">
+  <div>Whether therefore ye eat, or drink, or whatsoever ye do, do all to the glory of God. — 1 Corinthians 10:31</div>
+  <div style="margin-top:0.5em">&copy; Cipher Museum. Synthetic records CC0.</div>
+</footer>
+</body>
+</html>

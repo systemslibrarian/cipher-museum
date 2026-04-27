@@ -1,0 +1,654 @@
+{
+  "generated": "2026-04-27",
+  "total_records": 17425,
+  "engines": [
+    {
+      "name": "caesar",
+      "label": "caesar",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 10,
+      "record_count": 600
+    },
+    {
+      "name": "rot13",
+      "label": "rot13",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 1,
+      "record_count": 60
+    },
+    {
+      "name": "atbash",
+      "label": "atbash",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 1,
+      "record_count": 60
+    },
+    {
+      "name": "monoalphabetic",
+      "label": "monoalphabetic",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 10,
+      "record_count": 600
+    },
+    {
+      "name": "affine",
+      "label": "affine",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 10,
+      "record_count": 600
+    },
+    {
+      "name": "trithemius",
+      "label": "trithemius",
+      "category": "polyalphabetic",
+      "difficulty": "beginner",
+      "variants": 2,
+      "record_count": 120
+    },
+    {
+      "name": "polybius",
+      "label": "polybius",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 1,
+      "record_count": 56
+    },
+    {
+      "name": "tapCode",
+      "label": "tap code",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 1,
+      "record_count": 39
+    },
+    {
+      "name": "bacon",
+      "label": "bacon cipher",
+      "category": "steganography",
+      "difficulty": "beginner",
+      "variants": 1,
+      "record_count": 30
+    },
+    {
+      "name": "morse",
+      "label": "morse code",
+      "category": "encoding",
+      "difficulty": "beginner",
+      "variants": 1,
+      "record_count": 60
+    },
+    {
+      "name": "joseonYeokhak",
+      "label": "joseon yeokhak",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "vigenere",
+      "label": "vigenere",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 10,
+      "record_count": 600
+    },
+    {
+      "name": "beaufort",
+      "label": "beaufort",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "gronsfeld",
+      "label": "gronsfeld",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 6,
+      "record_count": 360
+    },
+    {
+      "name": "porta",
+      "label": "porta",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "runningKey",
+      "label": "running key",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 3,
+      "record_count": 90
+    },
+    {
+      "name": "railFence",
+      "label": "rail fence",
+      "category": "transposition",
+      "difficulty": "intermediate",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "columnar",
+      "label": "columnar transposition",
+      "category": "transposition",
+      "difficulty": "intermediate",
+      "variants": 8,
+      "record_count": 480
+    },
+    {
+      "name": "scytale",
+      "label": "scytale",
+      "category": "transposition",
+      "difficulty": "intermediate",
+      "variants": 6,
+      "record_count": 360
+    },
+    {
+      "name": "playfair",
+      "label": "playfair",
+      "category": "polygraphic",
+      "difficulty": "intermediate",
+      "variants": 8,
+      "record_count": 448
+    },
+    {
+      "name": "homophonic",
+      "label": "homophonic",
+      "category": "substitution",
+      "difficulty": "intermediate",
+      "variants": 5,
+      "record_count": 44
+    },
+    {
+      "name": "autokey",
+      "label": "autokey",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "confederateVigenere",
+      "label": "confederate vigenere",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "kamaSutra",
+      "label": "kama sutra",
+      "category": "substitution",
+      "difficulty": "intermediate",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "diana",
+      "label": "diana",
+      "category": "polyalphabetic",
+      "difficulty": "intermediate",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "bifid",
+      "label": "bifid",
+      "category": "fractionation",
+      "difficulty": "advanced",
+      "variants": 5,
+      "record_count": 280
+    },
+    {
+      "name": "trifid",
+      "label": "trifid",
+      "category": "fractionation",
+      "difficulty": "advanced",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "adfgx",
+      "label": "adfgx",
+      "category": "fractionation",
+      "difficulty": "advanced",
+      "variants": 5,
+      "record_count": 280
+    },
+    {
+      "name": "adfgvx",
+      "label": "adfgvx",
+      "category": "fractionation",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "nihilist",
+      "label": "nihilist",
+      "category": "fractionation",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 224
+    },
+    {
+      "name": "straddlingCheckerboard",
+      "label": "straddling checkerboard",
+      "category": "substitution",
+      "difficulty": "advanced",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "foursquare",
+      "label": "four square",
+      "category": "polygraphic",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 224
+    },
+    {
+      "name": "twosquare",
+      "label": "two square",
+      "category": "polygraphic",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 224
+    },
+    {
+      "name": "fractionatedMorse",
+      "label": "fractionated morse",
+      "category": "fractionation",
+      "difficulty": "advanced",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "doubleTransposition",
+      "label": "double transposition",
+      "category": "transposition",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "bazeries",
+      "label": "bazeries",
+      "category": "transposition",
+      "difficulty": "advanced",
+      "variants": 6,
+      "record_count": 360
+    },
+    {
+      "name": "chaocipher",
+      "label": "chaocipher",
+      "category": "machine",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "hill",
+      "label": "hill",
+      "category": "polygraphic",
+      "difficulty": "advanced",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "vic",
+      "label": "vic",
+      "category": "substitution",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 224
+    },
+    {
+      "name": "copiale",
+      "label": "copiale",
+      "category": "substitution",
+      "difficulty": "advanced",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "kryptos",
+      "label": "kryptos",
+      "category": "polyalphabetic",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "cardanoAutokey",
+      "label": "cardano autokey",
+      "category": "polyalphabetic",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "wheatstone",
+      "label": "wheatstone",
+      "category": "polygraphic",
+      "difficulty": "advanced",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "geezMonastic",
+      "label": "geez monastic",
+      "category": "substitution",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "redTypeA",
+      "label": "red type a",
+      "category": "machine",
+      "difficulty": "advanced",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "nullCipher",
+      "label": "null cipher",
+      "category": "steganography",
+      "difficulty": "advanced",
+      "variants": 2,
+      "record_count": 60
+    },
+    {
+      "name": "enigma",
+      "label": "enigma",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 7,
+      "record_count": 420
+    },
+    {
+      "name": "lorenz",
+      "label": "lorenz",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 5,
+      "record_count": 259
+    },
+    {
+      "name": "sigaba",
+      "label": "sigaba",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "typex",
+      "label": "typex",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "m209",
+      "label": "m209",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "purple",
+      "label": "purple",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "fialka",
+      "label": "fialka",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "kl7",
+      "label": "kl7",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "geheimschreiber",
+      "label": "geheimschreiber",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 4,
+      "record_count": 240
+    },
+    {
+      "name": "kryha",
+      "label": "kryha",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "m94",
+      "label": "m94",
+      "category": "machine",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "solitaire",
+      "label": "solitaire",
+      "category": "stream",
+      "difficulty": "expert",
+      "variants": 2,
+      "record_count": 120
+    },
+    {
+      "name": "jefferson",
+      "label": "jefferson disk",
+      "category": "disk",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 165
+    },
+    {
+      "name": "alberti",
+      "label": "alberti disk",
+      "category": "disk",
+      "difficulty": "expert",
+      "variants": 5,
+      "record_count": 300
+    },
+    {
+      "name": "stager",
+      "label": "stager route",
+      "category": "transposition",
+      "difficulty": "expert",
+      "variants": 6,
+      "record_count": 360
+    },
+    {
+      "name": "greatCipher",
+      "label": "great cipher",
+      "category": "nomenclator",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "babington",
+      "label": "babington",
+      "category": "nomenclator",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 63
+    },
+    {
+      "name": "nomenclator",
+      "label": "nomenclator",
+      "category": "nomenclator",
+      "difficulty": "expert",
+      "variants": 2,
+      "record_count": 120
+    },
+    {
+      "name": "bookCipher",
+      "label": "book cipher",
+      "category": "codebook",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 17
+    },
+    {
+      "name": "argenti",
+      "label": "argenti",
+      "category": "nomenclator",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "wallisCiphers",
+      "label": "wallis cipher",
+      "category": "nomenclator",
+      "difficulty": "expert",
+      "variants": 2,
+      "record_count": 120
+    },
+    {
+      "name": "chineseTelegraph",
+      "label": "chinese telegraph",
+      "category": "codebook",
+      "difficulty": "expert",
+      "variants": 2,
+      "record_count": 120
+    },
+    {
+      "name": "zimmermann",
+      "label": "zimmermann",
+      "category": "codebook",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 60
+    },
+    {
+      "name": "culperRing",
+      "label": "culper ring",
+      "category": "codebook",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 60
+    },
+    {
+      "name": "arnoldAndre",
+      "label": "arnold andre",
+      "category": "codebook",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 30
+    },
+    {
+      "name": "commercialCode",
+      "label": "commercial code",
+      "category": "codebook",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 60
+    },
+    {
+      "name": "aeneasTacticus",
+      "label": "aeneas tacticus",
+      "category": "steganography",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 30
+    },
+    {
+      "name": "jn25",
+      "label": "jn25",
+      "category": "codebook",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "venonaPadReuse",
+      "label": "venona pad reuse",
+      "category": "stream",
+      "difficulty": "expert",
+      "variants": 3,
+      "record_count": 180
+    },
+    {
+      "name": "otp",
+      "label": "one time pad",
+      "category": "stream",
+      "difficulty": "expert",
+      "variants": 2,
+      "record_count": 109
+    },
+    {
+      "name": "vernam",
+      "label": "vernam",
+      "category": "stream",
+      "difficulty": "expert",
+      "variants": 2,
+      "record_count": 109
+    },
+    {
+      "name": "navajo",
+      "label": "navajo code",
+      "category": "code",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 30
+    },
+    {
+      "name": "pigpen",
+      "label": "pigpen",
+      "category": "substitution",
+      "difficulty": "beginner",
+      "variants": 1,
+      "record_count": 55
+    },
+    {
+      "name": "voynich",
+      "label": "voynich render",
+      "category": "substitution",
+      "difficulty": "expert",
+      "variants": 1,
+      "record_count": 55
+    },
+    {
+      "name": "slidex",
+      "label": "slidex",
+      "category": "transposition",
+      "difficulty": "advanced",
+      "variants": 3,
+      "record_count": 180
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "_comment": "Plaintext corpus for benchmark generation. Each entry includes: id, text, language, source, license, and tags.",
+  "plaintexts": [
+    {
+      "id": "pt001",
+      "text": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+      "language": "en",
+      "source": "pangram, public domain",
+      "license": "CC0",
+      "tags": ["pangram", "short", "alphabet"]
+    },
+    {
+      "id": "pt002",
+      "text": "WE HOLD THESE TRUTHS TO BE SELF EVIDENT THAT ALL MEN ARE CREATED EQUAL",
+      "language": "en",
+      "source": "US Declaration of Independence (opening)",
+      "license": "public domain",
+      "tags": ["historical", "medium", "declaration"]
+    },
+    {
+      "id": "pt003",
+      "text": "NEVER GONNA GIVE YOU UP NEVER GONNA LET YOU DOWN",
+      "language": "en",
+      "source": "Rick Astley, meme",
+      "license": "fair use (benchmark excerpt)",
+      "tags": ["pop culture", "short", "meme"]
+    },
+    {
+      "id": "pt004",
+      "text": "ATTACK AT DAWN",
+      "language": "en",
+      "source": "classical cipher example",
+      "license": "CC0",
+      "tags": ["classic", "short", "military"]
+    },
+    {
+      "id": "pt005",
+      "text": "FLEE AT ONCE WE ARE DISCOVERED",
+      "language": "en",
+      "source": "historical telegram",
+      "license": "public domain",
+      "tags": ["historical", "telegram", "short"]
+    },
+    {
+      "id": "pt006",
+      "text": "IT WAS THE BEST OF TIMES IT WAS THE WORST OF TIMES",
+      "language": "en",
+      "source": "Charles Dickens, A Tale of Two Cities",
+      "license": "public domain",
+      "tags": ["literary", "long", "classic"]
+    },
+    {
+      "id": "pt007",
+      "text": "CRYPTOGRAPHY IS THE ART OF WRITING OR SOLVING CODES",
+      "language": "en",
+      "source": "synthetic educational",
+      "license": "CC0",
+      "tags": ["synthetic", "education", "medium"]
+    },
+    {
+      "id": "pt008",
+      "text": "NEVER INTERRUPT YOUR ENEMY WHEN HE IS MAKING A MISTAKE",
+      "language": "en",
+      "source": "Napoleon Bonaparte (attributed)",
+      "license": "public domain",
+      "tags": ["historical", "quote", "medium"]
+    },
+    {
+      "id": "pt009",
+      "text": "THE ONLY THING WE HAVE TO FEAR IS FEAR ITSELF",
+      "language": "en",
+      "source": "Franklin D. Roosevelt, 1933",
+      "license": "public domain",
+      "tags": ["historical", "speech", "medium"]
+    },
+    {
+      "id": "pt010",
+      "text": "SYNTHETIC BENCHMARK PLAINTEXT FOR DIFFICULTY TIER TESTING",
+      "language": "en",
+      "source": "synthetic benchmark",
+      "license": "CC0",
+      "tags": ["synthetic", "benchmark", "difficulty"]
+    }
+  ]
+}

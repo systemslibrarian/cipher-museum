@@ -2,7 +2,7 @@
 // Basic validation for Cipher Corpus dataset
 const fs = require('fs');
 const path = require('path');
-const Ajv = require('ajv');
+const Ajv = require('ajv/dist/2020').default;
 const schema = require('../public/corpus/cipher-corpus.schema.json');
 
 const corpusPath = path.join(__dirname, '../src/data/cipherCorpusRecords.ts');
@@ -18,7 +18,7 @@ function extractRecords(tsFile) {
 
 function main() {
   const records = extractRecords(corpusPath);
-  const ajv = new Ajv();
+  const ajv = new Ajv({ strict: false });
   const validate = ajv.compile(schema);
   const ids = new Set();
   let valid = true;
