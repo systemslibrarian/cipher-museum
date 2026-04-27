@@ -175,6 +175,8 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .era-wwii{background:rgba(200,90,90,.12);color:#C85A5A;border:1px solid rgba(200,90,90,.25)}
 .era-coldwar{background:rgba(160,127,204,.12);color:#A07FCC;border:1px solid rgba(160,127,204,.25)}
 .era-theoretical{background:rgba(90,200,160,.10);color:#5AC8A0;border:1px solid rgba(90,200,160,.2)}
+.era-modern{background:rgba(90,160,200,.12);color:#5AA0C8;border:1px solid rgba(90,160,200,.25)}
+.era-victorian{background:rgba(200,168,90,.12);color:#C8A85A;border:1px solid rgba(200,168,90,.25)}
 .sec-broken{background:var(--red-d);color:var(--red);border:1px solid var(--red-b)}
 .sec-weak{background:rgba(200,144,90,.12);color:var(--orange);border:1px solid rgba(200,144,90,.3)}
 .sec-secure{background:rgba(90,200,160,.10);color:var(--green);border:1px solid rgba(90,200,160,.3)}

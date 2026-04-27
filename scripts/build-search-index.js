@@ -106,10 +106,13 @@ const ERA_MAP = {
   'era-medieval':     'medieval',
   'era-renaissance':  'renaissance',
   'era-early-modern': 'early modern',
+  'era-19c':          '19th century',
+  'era-victorian':    'victorian',
   'era-modern':       'modern',
   'era-wwi':          'wwi',
   'era-wwii':         'wwii',
   'era-coldwar':      'cold war',
+  'era-theoretical':  'theoretical',
   'era-digital':      'digital',
 };
 
