@@ -122,9 +122,9 @@
     <section class="hero">
       <h1>Cipher Corpus</h1>
       <h2>Known ciphertexts for learning, testing, and benchmarking classical cryptanalysis.</h2>
-      <p>Cipher Corpus is a curated library of ciphertext challenges with known solutions — <strong>21,602 verified records across 82 cipher types, 84 cipher engines, and 9 languages</strong>, the most comprehensive classical cryptanalysis benchmark available. Each record includes the cipher type, key or settings, plaintext, difficulty, language, expected attack methods, and source information. Learners can practice codebreaking in Challenge Mode, while tool builders can download the known-answer dataset for benchmarking classical cipher solvers.</p>
+      <p>Cipher Corpus is a curated library of ciphertext challenges with known solutions — <strong>100,026 verified records across 82 cipher types, 84 cipher engines, and 9 languages</strong>, the most comprehensive classical cryptanalysis benchmark available. Each record includes the cipher type, key or settings, plaintext, difficulty, language, expected attack methods, and source information. Learners can practice codebreaking in Challenge Mode, while tool builders can download the known-answer dataset for benchmarking classical cipher solvers.</p>
       <div class="badges">
-        <span>21,602 verified records</span>
+        <span>100,026 verified records</span>
         <span>82 cipher types · 84 engines</span>
         <span>9 languages</span>
         <span>55 historical records with provenance</span>
@@ -166,7 +166,7 @@
       <button onclick="downloadFile('noisy.jsonl')">Download noisy variants</button>
       <button onclick="downloadFile('llm-3shot-eval.jsonl')">Download LLM 3-shot eval set</button>
       <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
-        <b>Cipher Corpus v0.2 — 21,602 records · 82 cipher types · 84 engines · 9 languages</b>
+        <b>Cipher Corpus v0.3 — 100,026 records · 82 cipher types · 84 engines · 9 languages</b>
       <h3>API Access</h3>
       <div style="font-size:0.97em;color:var(--fg-muted,#bfa76a);margin-bottom:1em;">
         The Cipher Corpus is available as a public JSON API for tool integration and research. Fetch records directly:
@@ -233,7 +233,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
     <section>
       <h3>Known Limitations</h3>
       <p>
-        Synthetic records (17,425 core + 4,122 multilingual/noisy extensions) are generated and roundtrip-verified using the Cipher Museum's 84 cipher engines. Historical records (55) are sourced from public-domain archives with full provenance. Synthetic records are useful for controlled testing but are not a substitute for historical cipher archives.<br>
+        Synthetic records (95,849 core + 4,122 multilingual/noisy extensions) are generated and roundtrip-verified using the Cipher Museum's 84 cipher engines. Historical records (55) are sourced from public-domain archives with full provenance. Synthetic records are useful for controlled testing but are not a substitute for historical cipher archives.<br>
         Classical ciphers vary widely in notation, alphabet handling, spacing, spelling, and operational use. Metadata is included to make those assumptions explicit.<br>
         Some codebook engines (Book Cipher, Arnold-André) produce fewer records due to reference-text letter coverage constraints — this is a property of the engine, not a corpus gap.<br>
         Multilingual records use ASCII transliteration of foreign language texts (diacritics removed) for A-Z engine compatibility — they test cipher mechanics with foreign language frequency patterns, not native character encodings.<br>
@@ -260,7 +260,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
         Cipher Corpus extends this foundational approach with:
       </p>
       <ul>
-        <li><strong>21,602 test cases</strong> across <strong>82 cipher algorithms</strong> (vs CipherBank's 2,358 across 9)</li>
+        <li><strong>100,026 test cases</strong> across <strong>82 cipher algorithms</strong> (vs CipherBank's 2,358 across 9)</li>
         <li><strong>55 historical records</strong> with verified provenance spanning 150 BCE–1999 CE</li>
         <li><strong>9 languages</strong> (English, French, German, Latin, Spanish, Italian, Japanese, Russian, Chinese)</li>
         <li><strong>Noisy variants</strong> simulating OCR errors and telegraph noise</li>
@@ -283,15 +283,15 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
   author={Lester, Paul},
   year={2026},
   url={https://ciphermuseum.com/cipher-corpus.html},
-  note={21,602+ test cases across 82+ cipher algorithms}
+  note={100,026 test cases across 82 cipher algorithms}
 }</pre>
       </div>
     </section>
     <section>
       <h3>Roadmap</h3>
-      <p style="color:var(--fg-muted,#bfa76a);font-size:0.97em;margin-bottom:0.5em">Completed in v0.2:</p>
+      <p style="color:var(--fg-muted,#bfa76a);font-size:0.97em;margin-bottom:0.5em">Completed in v0.3:</p>
       <ul>
-        <li>✓ 21,602 verified records across 82 cipher types and 9 languages</li>
+        <li>✓ 100,026 verified records across 82 cipher types and 9 languages</li>
         <li>✓ Multilingual examples (French, German, Latin, Spanish, Italian)</li>
         <li>✓ Noisy transcription variants (OCR errors, telegraph noise, historical spelling)</li>
         <li>✓ 55 historical records with primary source citations (150 BCE – 1999 CE)</li>
@@ -362,7 +362,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
         <b>Benchmark evaluation:</b> <code>node scripts/benchmark-runner.js</code> — tests cipher solvers against corpus records, reporting success rate, key accuracy, plaintext similarity, and time to result.<br>
         <b>LLM 3-shot export:</b> <code>node scripts/export-llm-3shot.js --difficulty intermediate --count 100</code> — exports structured evaluation prompts with 3-shot context, challenge mode, and key recovery tasks.<br>
         <b>Benchmark report:</b> <code>node scripts/generate-benchmark-report.js</code> — generates per-cipher baseline statistics. <a href="public/reports/benchmark-baselines.html">View current report →</a><br>
-        All 17,425 core records pass roundtrip verification.
+        All 95,849 core records pass roundtrip verification.
       </div>
     </section>
   </main>

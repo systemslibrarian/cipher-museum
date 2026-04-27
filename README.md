@@ -18,7 +18,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 - **Lorenz depth-attack interactive** ([ciphers/lorenz.html](https://ciphermuseum.com/ciphers/lorenz.html)): Two-time-pad crib-drag demo and Enigma↔Lorenz comparison table added to the existing Lorenz exhibit.
 - **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 443 + 238 + 1848 + 1760 + 531 + 1773 + 789 + 4944 assertions.
 - **Sitemap expanded** to all 176 indexable pages (tools, tours, community, all biographies, and the new exhibit).
-- **Cipher Corpus v0.2** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)): 21,602+ test cases across 82 cipher types, 9 languages, 55 historical records. Challenge Mode for learners, Known Mode for tool builders. LLM 3-shot evaluation export, per-cipher benchmark report, WCAG 2.1 AA. All tests passing.
+- **Cipher Corpus v0.3** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)): 100,026 test cases across 82 cipher types, 9 languages, 55 historical records. Challenge Mode for learners, Known Mode for tool builders. LLM 3-shot evaluation export, per-cipher benchmark report, WCAG 2.1 AA. All tests passing.
 - **README factual audit**: corrected interactive-demo count (110/140), page counts (176), and test assertion totals site-wide.
 - April 2026: Cipher Museum listed in Crypto Museum's (cryptomuseum.com) curated Virtual Museums directory, alongside Cipher History Museum, Jerry Proc's Crypto Pages, and other established crypto-history archives.
 
@@ -60,7 +60,7 @@ Type a message, set a key, and watch the cipher work in real time. Demos are dyn
 For a sortable, filterable view of every cipher system in the museum (era, type, security, hall, solved status, key method) see the [Cipher Comparison Table](https://ciphermuseum.com/comparison.html). For the full 140-exhibit roster including biographies and context pages, see the [Museum Map](https://ciphermuseum.com/museum-map.html).
 
 ### 📊 Additional Tools
-- **[Cipher Corpus](https://ciphermuseum.com/cipher-corpus.html)** — The most comprehensive open library of known-answer ciphertext challenges for classical ciphers, with 21,602+ test cases across 82+ algorithms. Includes:
+- **[Cipher Corpus](https://ciphermuseum.com/cipher-corpus.html)** — The most comprehensive open library of known-answer ciphertext challenges for classical ciphers, with 100,026 test cases across 82 algorithms. Includes:
     - **Challenge Mode** for learners: hides solutions for ciphertext-only practice.
     - **Known Corpus Mode** for teaching, benchmarking, and tool-building: shows all metadata, keys, and plaintexts.
     - **Downloadable datasets**: JSONL, JSON, CSV, schema, difficulty splits (beginner–expert), multilingual records (9 languages), noisy transcription variants, and LLM 3-shot evaluation export.

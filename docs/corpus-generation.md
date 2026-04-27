@@ -17,7 +17,7 @@ This means you can run batches indefinitely and the corpus grows monotonically w
 
 | File | Purpose |
 |------|---------|
-| `scripts/generate-full-corpus.js` | Batch 1 — original 21,602 records (v1 plaintexts + v1 keys) |
+| `scripts/generate-full-corpus.js` | Batch 1 — original ~21,602 records (v1 plaintexts + v1 keys) |
 | `scripts/generate-corpus-v2.js` | Batch 2 — +41,730 records (v2 plaintexts + v2 keys) |
 | `scripts/generate-corpus-v3.js` | Batch 3 — +~36,000 records (v3 plaintexts + v2 keys) |
 | `scripts/generate-benchmark-report.js` | Regenerates `public/reports/benchmark-baselines.*` |
@@ -207,7 +207,7 @@ To add a cipher engine not currently in the corpus:
 ## Maintenance
 
 After any generation run that changes record counts, update:
-- `README.md` — the "21,602+" figure in the Cipher Corpus section
+- `README.md` — the record count figure in the Cipher Corpus section
 - `cipher-corpus.html` — hero stats and badge counts
 - `public/reports/benchmark-baselines.*` — run `node scripts/generate-benchmark-report.js`
 - `public/corpus/browser-sample.json` — regenerate if you want fresh samples in the browser UI:

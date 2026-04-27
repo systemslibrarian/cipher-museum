@@ -1,6 +1,6 @@
 # Cipher Corpus — Classical Cryptanalysis Benchmark
 
-A comprehensive benchmark library for evaluating classical cipher breaking capabilities, containing **21,602+ test cases across 82+ cipher algorithms** with historical records, multilingual examples, and verified provenance.
+A comprehensive benchmark library for evaluating classical cipher breaking capabilities, containing **100,026 test cases across 82 cipher algorithms** with historical records, multilingual examples, and verified provenance.
 
 Cipher Corpus is an educational benchmark library for classical cryptanalysis — not a collection of secrets, not a production cryptography resource. Known answers are the point. Learners can hide the solution in Challenge Mode; tools can use the answer metadata for scoring.
 
@@ -8,7 +8,7 @@ Cipher Corpus is an educational benchmark library for classical cryptanalysis �
 
 | Metric | Value |
 |---|---|
-| **Total records** | 21,602 |
+| **Total records** | 100,026 |
 | **Cipher types** | 82 |
 | **Cipher engines** | 84 |
 | **Languages** | 9 (en, fr, de, la, es, it, ja, ru, zh) |
@@ -22,11 +22,11 @@ Cipher Corpus is an educational benchmark library for classical cryptanalysis �
 
 | Difficulty | Records |
 |---|---|
-| Beginner | 2,460 |
-| Intermediate | 4,422 |
-| Advanced | 5,176 |
-| Expert | 5,367 |
-| **Core total** | **17,425** |
+| Beginner | 15,533 |
+| Intermediate | 26,969 |
+| Advanced | 26,381 |
+| Expert | 26,966 |
+| **Core total** | **95,849** |
 
 All core records pass roundtrip verification (`decrypt(encrypt(plaintext)) == plaintext`).
 
@@ -36,7 +36,7 @@ All core records pass roundtrip verification (`decrypt(encrypt(plaintext)) == pl
 
 | File | Description |
 |---|---|
-| `all.jsonl` | All 21,602 records (JSONL, one per line) — **Git LFS** |
+| `all.jsonl` | All 100,026 records (JSONL, one per line) — **Git LFS** |
 | `all.json` | All records as JSON array — **Git LFS** |
 | `all.csv` | Tabular export of key fields |
 | `beginner.jsonl` | 2,460 beginner records |
@@ -130,7 +130,7 @@ Cipher Corpus builds on the pioneering work of **CipherBank** by Li et al. (2025
 | Benchmark | Records | Algorithms | Historical | Multilingual | Blind Splits | LLM Eval Format |
 |---|---|---|---|---|---|---|
 | CipherBank (Li et al., 2025) | 2,358 | 9 | No | No | No | No |
-| **Cipher Corpus v0.2** | **21,602** | **82** | **Yes (55)** | **Yes (9 langs)** | **Yes** | **Yes** |
+| **Cipher Corpus v0.3** | **100,026** | **82** | **Yes (55)** | **Yes (9 langs)** | **Yes** | **Yes** |
 
 ### Cite Cipher Corpus
 
@@ -140,7 +140,7 @@ Cipher Corpus builds on the pioneering work of **CipherBank** by Li et al. (2025
   author={Lester, Paul},
   year={2026},
   url={https://ciphermuseum.com/cipher-corpus.html},
-  note={21,602+ test cases across 82+ cipher algorithms, 9 languages}
+  note={100,026 test cases across 82 cipher algorithms, 9 languages}
 }
 ```
 

@@ -1,6 +1,9 @@
 # Cipher Corpus Changelog
 
-
+## v0.3 (2026-04-27)
+- **100,026 verified records** across 82 cipher types and 84 cipher engines — ~5× scale-up from v0.2.1.
+- Difficulty distribution: 15,533 beginner · 26,969 intermediate · 26,381 advanced · 26,966 expert · 3,638 multilingual · 484 noisy · 55 historical.
+- All core records pass automated roundtrip verification.
 
 ## v0.2.1 (2026-04-27)
 - **17,425 verified records** across 81 cipher types and 84 cipher engines — full-scale comprehensive generation.
