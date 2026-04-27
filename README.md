@@ -18,7 +18,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 - **Lorenz depth-attack interactive** ([ciphers/lorenz.html](https://ciphermuseum.com/ciphers/lorenz.html)): Two-time-pad crib-drag demo and Enigma↔Lorenz comparison table added to the existing Lorenz exhibit.
 - **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 436 + 238 + 1843 + 1730 + 522 + 1735 + 777 + 4897 assertions.
 - **Sitemap expanded** to all 172 indexable pages (tools, tours, community, all biographies, and the new exhibit).
-- **Cipher Corpus v0.1** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)): Classical cipher corpus with a browser UI and JSON/CSV downloads. Challenge Mode for learners, Known Mode for tool builders, designed against WCAG 2.1 AA. Integrated site-wide in nav and footer. All tests passing.
+- **Cipher Corpus v0.2** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)): 21,602+ test cases across 82 cipher types, 9 languages, 55 historical records. Challenge Mode for learners, Known Mode for tool builders. LLM 3-shot evaluation export, per-cipher benchmark report, WCAG 2.1 AA. All tests passing.
 - **README factual audit**: corrected interactive-demo count (110/140), page counts (173), and test assertion totals site-wide.
 - April 2026: Cipher Museum listed in Crypto Museum's (cryptomuseum.com) curated Virtual Museums directory, alongside Cipher History Museum, Jerry Proc's Crypto Pages, and other established crypto-history archives.
 
@@ -60,14 +60,14 @@ Type a message, set a key, and watch the cipher work in real time. Demos are dyn
 For a sortable, filterable view of every cipher system in the museum (era, type, security, hall, solved status, key method) see the [Cipher Comparison Table](https://ciphermuseum.com/comparison.html). For the full 140-exhibit roster including biographies and context pages, see the [Museum Map](https://ciphermuseum.com/museum-map.html).
 
 ### 📊 Additional Tools
-- **[Cipher Corpus](https://ciphermuseum.com/cipher-corpus.html)** — The world's first open, curated library of known-answer ciphertext challenges for classical ciphers. Includes:
+- **[Cipher Corpus](https://ciphermuseum.com/cipher-corpus.html)** — The most comprehensive open library of known-answer ciphertext challenges for classical ciphers, with 21,602+ test cases across 82+ algorithms. Includes:
     - **Challenge Mode** for learners: hides solutions for ciphertext-only practice.
     - **Known Corpus Mode** for teaching, benchmarking, and tool-building: shows all metadata, keys, and plaintexts.
-    - **Downloadable datasets**: JSONL, JSON, CSV, schema, and difficulty splits (beginner–expert).
-    - **Quality rules**: Every record includes cipher type, key/settings, plaintext, difficulty, language, expected attack methods, and source/license info. Synthetic and historical records are labeled.
+    - **Downloadable datasets**: JSONL, JSON, CSV, schema, difficulty splits (beginner–expert), multilingual records (9 languages), noisy transcription variants, and LLM 3-shot evaluation export.
+    - **Quality rules**: Every record includes cipher type, key/settings, plaintext, difficulty, language, expected attack methods, and source/license info. Synthetic and historical records are labeled. 55 historical records with primary source citations (150 BCE–1999 CE).
     - **Integration**: Linked from main nav, mobile nav, and footer. Direct integration with Cipher Detective and Workbench.
     - **Accessibility**: Fully WCAG-compliant with skip links, labeled controls, and keyboard navigation.
-    - **For educators, learners, and tool builders**: Practice, teach, or benchmark cryptanalysis tools with reproducible, documented examples.
+    - **For educators, learners, and tool builders**: Practice, teach, or benchmark cryptanalysis tools with reproducible, documented examples. Builds on foundational benchmark work by [CipherBank (Li et al., 2025)](https://arxiv.org/pdf/2504.19093).
 
 - **[Codebreaker's Workbench](https://ciphermuseum.com/lab/workbench.html)** — A unified hands-on lab that exposes **all 83 cipher engines** behind one consistent interface. Pick any cipher from the dropdown, paste your text, set a key (or accept the default), and encrypt/decrypt instantly. Beyond the per-exhibit demos it adds:
     - **Frequency analyser** — letter-frequency histogram with Index of Coincidence and Chi-square against English, useful for detecting monoalphabetic vs. polyalphabetic ciphertext at a glance.
