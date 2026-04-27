@@ -308,9 +308,9 @@
                   placeholder="Your answer…" aria-label="Decrypted answer for challenge ${ch.level}"
                   aria-describedby="feedback-${ch.level}"
                   autocomplete="off">
-                <button class="ch-submit" onclick="checkAnswer(${ch.level})">Submit</button>
+                <button class="ch-submit" data-fn="checkAnswer" data-arg="${ch.level}">Submit</button>
               </div>
-              <button class="ch-hint-btn" onclick="showHint(${ch.level})">💡 Hint ${attempts >= 3 ? '' : '(-1 pt)'}</button>
+              <button class="ch-hint-btn" data-fn="showHint" data-arg="${ch.level}">💡 Hint ${attempts >= 3 ? '' : '(-1 pt)'}</button>
               <div class="ch-hint" id="hint-${ch.level}" role="status" aria-live="polite"></div>
               ${attempts >= 3 ? `<div class="ch-walkthrough visible"><h4>Walkthrough</h4><p>${ch.walkthrough}</p></div>` : ''}
             `}

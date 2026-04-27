@@ -68,7 +68,7 @@
   <p style="opacity:.85;">The disc uses 45 distinct pictograms across 241 stamped tokens. Type a sign number (1–45) to see how often Pernier counted it on each face. Track B exhibit — corpus is too small for true decipherment, but you can audit the standard sign counts.</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Sign number (1–45)</label>
   <input type="number" id="input" min="1" max="45" value="2" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
-  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Look up</button>
+  <button type="button" data-fn="encode" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Look up</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {

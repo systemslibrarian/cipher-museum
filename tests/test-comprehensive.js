@@ -89,7 +89,7 @@ const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).so
 ok('Cipher pages count is 140', allPages.length === 140, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
-const HAND_BUILT_MARKERS = /onclick="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher|runHollerCode)/i;
+const HAND_BUILT_MARKERS = /(?:onclick|data-fn)="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher|runHollerCode)/i;
 const HAND_BUILT_IDS = /id="(msgInput|pf-keyword|zLetterInput|shiftSlider|keyInput|plaintext|ciphertext|input|output|els-word|els-search|eg-plaintext)"/i;
 
 for (const file of allPages) {

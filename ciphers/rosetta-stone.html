@@ -68,9 +68,9 @@
   <h2>Trilingual Viewer</h2>
   <p style="opacity:.85;">Toggle between the three scripts to see how Champollion lined up the cartouche of "Ptolemy" across them. Track B exhibit — visualization rather than encryption.</p>
   <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap;">
-    <button type="button" id="btn-h" onclick="encode('hiero')" style="padding:.5rem 1rem;background:var(--gold-glow);border:1px solid var(--gold-b);color:var(--gold);border-radius:6px;cursor:pointer;font-weight:600;">Hieroglyphic</button>
-    <button type="button" id="btn-d" onclick="encode('demotic')" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">Demotic</button>
-    <button type="button" id="btn-g" onclick="encode('greek')" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">Greek</button>
+    <button type="button" id="btn-h" data-fn="encode" data-arg="hiero" style="padding:.5rem 1rem;background:var(--gold-glow);border:1px solid var(--gold-b);color:var(--gold);border-radius:6px;cursor:pointer;font-weight:600;">Hieroglyphic</button>
+    <button type="button" id="btn-d" data-fn="encode" data-arg="demotic" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">Demotic</button>
+    <button type="button" id="btn-g" data-fn="encode" data-arg="greek" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;font-weight:600;">Greek</button>
   </div>
   <label for="input" style="display:block;margin-top:1rem;opacity:.7;font-size:.85rem;">Cartouche shown (fixed sample): "PTOLEMY"</label>
   <input type="hidden" id="input" value="PTOLEMY">

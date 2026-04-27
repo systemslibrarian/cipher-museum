@@ -70,11 +70,11 @@
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Secret message</label>
   <input type="text" id="input" value="REVOLT NOW" maxlength="40" style="width:100%;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
   <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap;">
-    <button type="button" onclick="encode(0)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">1. Shave scalp</button>
-    <button type="button" onclick="encode(1)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">2. Tattoo</button>
-    <button type="button" onclick="encode(2)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">3. Wait for regrowth</button>
-    <button type="button" onclick="encode(3)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">4. Send messenger</button>
-    <button type="button" onclick="encode(4)" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">5. Recipient re-shaves</button>
+    <button type="button" data-fn="encode" data-arg="0" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">1. Shave scalp</button>
+    <button type="button" data-fn="encode" data-arg="1" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">2. Tattoo</button>
+    <button type="button" data-fn="encode" data-arg="2" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">3. Wait for regrowth</button>
+    <button type="button" data-fn="encode" data-arg="3" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">4. Send messenger</button>
+    <button type="button" data-fn="encode" data-arg="4" style="padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">5. Recipient re-shaves</button>
   </div>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:6rem;white-space:pre-wrap;"></div>
   <script>

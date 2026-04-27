@@ -88,7 +88,7 @@
   <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
   <label for="input">Message to hide in a period</label>
   <input id="input" type="text" value="MEETING LOCATION CONFIRMED" placeholder="Secret message…">
-  <button onclick="encode()">Encode</button>
+  <button data-fn="encode">Encode</button>
   <div id="output" class="track-b-output"></div>
   <script>
     function encode() {

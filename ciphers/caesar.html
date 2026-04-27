@@ -251,8 +251,8 @@ Example (shift = 3):
       </div>
       <div class="demo-body">
         <div class="mode-toggle" role="group">
-          <button class="mode-btn active" id="btnEnc" onclick="setMode('enc')">Encrypt</button>
-          <button class="mode-btn" id="btnDec" onclick="setMode('dec')">Decrypt</button>
+          <button class="mode-btn active" id="btnEnc" data-fn="setMode" data-arg="enc">Encrypt</button>
+          <button class="mode-btn" id="btnDec" data-fn="setMode" data-arg="dec">Decrypt</button>
         </div>
         <div class="input-group">
           <label class="input-label" for="msgInput">Message</label>
@@ -266,8 +266,8 @@ Example (shift = 3):
           </div>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary" onclick="runCipher()">Run Cipher</button>
-          <button class="btn btn-secondary" onclick="clearDemo()">Clear</button>
+          <button class="btn btn-primary" data-fn="runCipher">Run Cipher</button>
+          <button class="btn btn-secondary" data-fn="clearDemo">Clear</button>
         </div>
         <div class="input-group">
           <label class="input-label" for="outputBox">Output</label>
@@ -328,7 +328,7 @@ Example (shift = 3):
         <div style="font-family:var(--fm);font-size:.85rem;background:var(--s3);border-radius:var(--r);padding:.85rem;letter-spacing:.12em;color:var(--tx);word-break:break-all;line-height:1.8;">
           QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
         </div>
-        <button class="btn btn-secondary" onclick="revealAnswer()" style="width:100%;margin-top:.75rem;font-size:.7rem;">Reveal Answer</button>
+        <button class="btn btn-secondary" data-fn="revealAnswer" style="width:100%;margin-top:.75rem;font-size:.7rem;">Reveal Answer</button>
         <p id="answerReveal" style="display:none;font-family:var(--fm);font-size:.75rem;color:var(--gold-lt);margin-top:.5rem;text-align:center;">Shift = 23 · "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"</p>
       </div>
     </div>

@@ -88,7 +88,7 @@
   <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
   <label for="input">Spoken message (SIGSALY digitized and OTP-enciphered it)</label>
   <input id="input" type="text" value="ATTACK AT DAWN CONFIRM" placeholder="Spoken phrase…">
-  <button onclick="encode()">Encode</button>
+  <button data-fn="encode">Encode</button>
   <div id="output" class="track-b-output"></div>
   <script>
     function encode() {

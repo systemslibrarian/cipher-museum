@@ -237,8 +237,8 @@ Formula: C = (P + K) mod 26</pre>
       <div class="demo-head"><span>🔐</span><span class="demo-title">Try It Yourself</span></div>
       <div class="demo-body">
         <div class="mode-toggle" role="group">
-          <button class="mode-btn active" id="btnEnc" onclick="setMode('enc')">Encrypt</button>
-          <button class="mode-btn" id="btnDec" onclick="setMode('dec')">Decrypt</button>
+          <button class="mode-btn active" id="btnEnc" data-fn="setMode" data-arg="enc">Encrypt</button>
+          <button class="mode-btn" id="btnDec" data-fn="setMode" data-arg="dec">Decrypt</button>
         </div>
         <div class="input-group">
           <label class="input-label" for="msgInput">Message</label>
@@ -249,8 +249,8 @@ Formula: C = (P + K) mod 26</pre>
           <input type="text" class="museum-input" id="keyInput" value="LEMON" placeholder="Enter keyword…" style="text-transform:uppercase;">
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary" onclick="runVigenere()">Run Cipher</button>
-          <button class="btn btn-secondary" onclick="clearDemo()">Clear</button>
+          <button class="btn btn-primary" data-fn="runVigenere">Run Cipher</button>
+          <button class="btn btn-secondary" data-fn="clearDemo">Clear</button>
         </div>
         <div class="input-group">
           <label class="input-label" for="outputBox">Output</label>
@@ -293,7 +293,7 @@ Formula: C = (P + K) mod 26</pre>
           VVQECILMYMPM
         </div>
         <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-top:.5rem;">Key: COMPLETEVICT… (15 letters)</p>
-        <button class="btn btn-secondary" style="width:100%;margin-top:.75rem;font-size:.7rem;" onclick="this.nextElementSibling.style.display='block';this.style.display='none';">Reveal Answer</button>
+        <button class="btn btn-secondary" style="width:100%;margin-top:.75rem;font-size:.7rem;" data-reveal-next>Reveal Answer</button>
         <p style="display:none;font-family:var(--fm);font-size:.75rem;color:var(--gold-lt);margin-top:.5rem;text-align:center;">Key: COMPLETEVICTORY · Plain: THEPRESIDEN[T]</p>
       </div>
     </div>

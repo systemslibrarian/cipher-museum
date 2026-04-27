@@ -76,8 +76,7 @@
 
 <section class="hall-hero-banner">
   <img src="../images/halls/substitution-hero.svg"
-       alt="Victorian-era cryptographic letter with handwritten cipher key"
-       onerror="this.parentElement.style.display='none'">
+       alt="Victorian-era cryptographic letter with handwritten cipher key">
   <div class="hall-hero-overlay"></div>
   <div class="hall-hero-caption">Hall II · Classical Substitution</div>
 </section>
@@ -245,8 +244,8 @@
       <div class="panel-head"><span class="panel-icon">🔐</span><span class="panel-title">Full Message Encrypt / Decrypt</span></div>
       <div class="panel-body">
         <div style="display:flex;gap:.5rem;margin-bottom:.75rem;">
-          <button class="pf-btn" id="pf-mode-enc" onclick="setMode('encrypt')">Encrypt</button>
-          <button class="pf-btn" id="pf-mode-dec" onclick="setMode('decrypt')" style="opacity:.5">Decrypt</button>
+          <button class="pf-btn" id="pf-mode-enc" data-fn="setMode" data-arg="encrypt">Encrypt</button>
+          <button class="pf-btn" id="pf-mode-dec" data-fn="setMode" data-arg="decrypt" style="opacity:.5">Decrypt</button>
         </div>
         <label class="pf-label" for="pf-msg-input" id="pf-msg-label">Plaintext</label>
         <input type="text" id="pf-msg-input" class="pf-input" value="HIDE THE GOLD IN THE TREE STUMP" autocomplete="off" spellcheck="false">

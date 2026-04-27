@@ -241,12 +241,5 @@
   const diffFilter = document.getElementById('corpus-diff-filter');
   if (diffFilter) diffFilter.addEventListener('change', applyFilter);
 
-  // downloadFile: handle files outside /public/corpus/ directory
-  window.downloadFile = function(name) {
-    const evalFiles = ['llm-3shot-eval.jsonl'];
-    const base = evalFiles.includes(name) ? '/public/eval/' : '/public/corpus/';
-    window.open(base + name, '_blank');
-  };
-
   renderCards();
 })();

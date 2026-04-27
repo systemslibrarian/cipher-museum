@@ -7,5 +7,6 @@
   "id-unique": true,
   "src-not-empty": true,
   "alt-require": true,
-  "spec-char-escape": true
+  "spec-char-escape": true,
+  "inline-script-disabled": true
 }

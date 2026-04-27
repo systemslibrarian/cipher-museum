@@ -68,7 +68,7 @@
   <p style="opacity:.85;">Enter a short English plaintext and the widget will encode it using Poe's exact symbol set from <em>The Gold-Bug</em> (digits and punctuation). Click 'analyse' to see the frequency table Poe walked his readers through. Track B — illustrative.</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">English plaintext</label>
   <input type="text" id="input" value="A GOOD GLASS IN THE BISHOPS HOSTEL" maxlength="80" style="width:100%;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
-  <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Encode + analyse</button>
+  <button type="button" data-fn="encode" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Encode + analyse</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {

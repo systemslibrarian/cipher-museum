@@ -68,7 +68,7 @@
   <p style="opacity:.85;">Type a short message and the widget will display each letter as a labelled 'dancing man' tag. Then run a frequency count — exactly the way Holmes did. Track B — illustrative.</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Plaintext message</label>
   <input type="text" id="input" value="ELSIE PREPARE TO MEET THY GOD" maxlength="80" style="width:100%;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
-  <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Encode</button>
+  <button type="button" data-fn="encode" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Encode</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.8;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {

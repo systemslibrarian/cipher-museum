@@ -302,13 +302,13 @@
   </div>
 
   <div class="lab-tabs" role="tablist" aria-label="Cryptanalysis techniques">
-    <button class="lab-tab active" id="tab-btn-freq" role="tab" aria-selected="true" aria-controls="tab-freq" tabindex="0" onclick="showTab('freq', this)">Frequency Analysis</button>
-    <button class="lab-tab" id="tab-btn-kasiski" role="tab" aria-selected="false" aria-controls="tab-kasiski" tabindex="-1" onclick="showTab('kasiski', this)">Kasiski Examination</button>
-    <button class="lab-tab" id="tab-btn-ioc" role="tab" aria-selected="false" aria-controls="tab-ioc" tabindex="-1" onclick="showTab('ioc', this)">Index of Coincidence</button>
-    <button class="lab-tab" id="tab-btn-crib" role="tab" aria-selected="false" aria-controls="tab-crib" tabindex="-1" onclick="showTab('crib', this)">Crib Dragging</button>
-    <button class="lab-tab" id="tab-btn-kpa" role="tab" aria-selected="false" aria-controls="tab-kpa" tabindex="-1" onclick="showTab('kpa', this)">Known Plaintext</button>
-    <button class="lab-tab" id="tab-btn-hillclimb" role="tab" aria-selected="false" aria-controls="tab-hillclimb" tabindex="-1" onclick="showTab('hillclimb', this)">Hill Climbing</button>
-    <button class="lab-tab" id="tab-btn-anneal" role="tab" aria-selected="false" aria-controls="tab-anneal" tabindex="-1" onclick="showTab('anneal', this)">Simulated Annealing</button>
+    <button class="lab-tab active" id="tab-btn-freq" role="tab" aria-selected="true" aria-controls="tab-freq" tabindex="0" data-fn="showTab" data-arg="freq">Frequency Analysis</button>
+    <button class="lab-tab" id="tab-btn-kasiski" role="tab" aria-selected="false" aria-controls="tab-kasiski" tabindex="-1" data-fn="showTab" data-arg="kasiski">Kasiski Examination</button>
+    <button class="lab-tab" id="tab-btn-ioc" role="tab" aria-selected="false" aria-controls="tab-ioc" tabindex="-1" data-fn="showTab" data-arg="ioc">Index of Coincidence</button>
+    <button class="lab-tab" id="tab-btn-crib" role="tab" aria-selected="false" aria-controls="tab-crib" tabindex="-1" data-fn="showTab" data-arg="crib">Crib Dragging</button>
+    <button class="lab-tab" id="tab-btn-kpa" role="tab" aria-selected="false" aria-controls="tab-kpa" tabindex="-1" data-fn="showTab" data-arg="kpa">Known Plaintext</button>
+    <button class="lab-tab" id="tab-btn-hillclimb" role="tab" aria-selected="false" aria-controls="tab-hillclimb" tabindex="-1" data-fn="showTab" data-arg="hillclimb">Hill Climbing</button>
+    <button class="lab-tab" id="tab-btn-anneal" role="tab" aria-selected="false" aria-controls="tab-anneal" tabindex="-1" data-fn="showTab" data-arg="anneal">Simulated Annealing</button>
   </div>
 
   <!-- Tab: Frequency Analysis (SVG bar chart with English reference) -->
@@ -382,7 +382,7 @@
         <label class="input-label" for="cribWord">Crib (guessed plaintext word)</label>
         <input type="text" class="museum-input" id="cribWord" placeholder="e.g. ATTACK or WEATHER" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
       </div>
-      <button class="btn btn-primary" onclick="runCribDrag()" style="font-size:.7rem;">Drag Crib</button>
+      <button class="btn btn-primary" data-fn="runCribDrag" style="font-size:.7rem;">Drag Crib</button>
       <div id="cribResult" class="lab-result" aria-live="polite"></div>
     </div>
   </div>
@@ -399,7 +399,7 @@
         <label class="input-label" for="kpaCipher">Corresponding Ciphertext</label>
         <input type="text" class="museum-input" id="kpaCipher" placeholder="e.g. LXFOPVEFRNHR" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
       </div>
-      <button class="btn btn-primary" onclick="runKPA()" style="font-size:.7rem;">Derive Key</button>
+      <button class="btn btn-primary" data-fn="runKPA" style="font-size:.7rem;">Derive Key</button>
       <div id="kpaResult" class="lab-result" aria-live="polite"></div>
     </div>
   </div>
@@ -412,7 +412,7 @@
         <label class="input-label" for="hillInput">Ciphertext</label>
         <input type="text" class="museum-input" id="hillInput" value="KHOOR ZRUOG" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
       </div>
-      <button class="btn btn-primary" id="hillBtn" onclick="runHillClimb()" style="font-size:.7rem;">Run Hill Climb</button>
+      <button class="btn btn-primary" id="hillBtn" data-fn="runHillClimb" style="font-size:.7rem;">Run Hill Climb</button>
       <div id="hillOutput" style="margin-top:1.25rem;font-family:var(--fm);font-size:.82rem;line-height:2.2;color:var(--tx2);"></div>
     </div>
   </div>
@@ -425,7 +425,7 @@
         <label class="input-label" for="annealInput">Ciphertext (Caesar)</label>
         <input type="text" class="museum-input" id="annealInput" value="WKLV LV D WHVW PHVVDJH" autocomplete="off" spellcheck="false" style="font-family:var(--fm);letter-spacing:.1em;">
       </div>
-      <button class="btn btn-primary" id="annealBtn" onclick="runAnneal()" style="font-size:.7rem;">Run Annealing</button>
+      <button class="btn btn-primary" id="annealBtn" data-fn="runAnneal" style="font-size:.7rem;">Run Annealing</button>
       <div id="annealOutput" style="margin-top:1.25rem;font-family:var(--fm);font-size:.82rem;line-height:2;color:var(--tx2);"></div>
     </div>
   </div>

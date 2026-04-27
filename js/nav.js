@@ -128,7 +128,7 @@
   });
 
   /* ── Auto-load companion scripts ─────────────────────── */
-  var companions = ['breadcrumbs.js', 'footer.js'];
+  var companions = ['breadcrumbs.js', 'footer.js', 'ui-delegates.js'];
   if (/\/ciphers\//.test(path)) {
     companions.push('artifact-cards-data.js', 'artifact-cards.js');
   }

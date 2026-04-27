@@ -68,7 +68,7 @@
   <p style="opacity:.85;">Pick one of the classical ciphers most commonly used in ARGs and the widget will show a short worked example. Track B — overview tool.</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Pick a classical cipher (1=Caesar 2=Vigen\u00e8re 3=Bacon 4=Pigpen)</label>
   <input type="number" id="input" min="1" max="4" value="1" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
-  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Show ARG example</button>
+  <button type="button" data-fn="encode" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Show ARG example</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {

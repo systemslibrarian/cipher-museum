@@ -69,7 +69,7 @@
   <p style="opacity:.85;font-family:monospace;background:rgba(0,0,0,.2);padding:.6rem;border-radius:4px;">MRGOABABD<br>MTBIMPANETP<br>MLIABOAIAQC<br>ITTMTSAMSTGAB</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Substitute (cipher letter \u2192 plaintext guess)</label>
   <input type="text" id="input" value="M=W" maxlength="3" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
-  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Apply substitution</button>
+  <button type="button" data-fn="encode" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Apply substitution</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {

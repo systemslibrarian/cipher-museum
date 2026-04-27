@@ -68,7 +68,7 @@
   <p style="opacity:.85;">Paste the 395-digit ciphertext (or use the loaded sample) and the widget will tally adjacent digit pairs. A real Polybius-style fractionation will show a non-uniform distribution. Track B — analytic helper, not a solver.</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Numeric ciphertext</label>
   <textarea id="input" rows="5" style="width:100%;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">75628 28591 62916 48164 91748 58464 74748 28483 81638 18174 74826 26475 83828 49175 74658 37575 75936 36565 81638 17585 75756 46282 92857 46382 75748 38165</textarea>
-  <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Tally digit pairs</button>
+  <button type="button" data-fn="encode" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Tally digit pairs</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {

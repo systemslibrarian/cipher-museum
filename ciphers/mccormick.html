@@ -68,7 +68,7 @@
   <p style="opacity:.85;">Paste a fragment of one of the McCormick notes (or use the loaded sample) and the widget will list bigrams (two-letter clusters) by frequency. Track B — pattern explorer, not a decoder.</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Note fragment (use uppercase letters)</label>
   <textarea id="input" rows="5" style="width:100%;padding:.6rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">RNCBE LRRSE NSE EE NEAR NCBE WLDS NLSE WNSE NCBE NCBSE</textarea>
-  <button type="button" onclick="encode()" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Tally bigrams</button>
+  <button type="button" data-fn="encode" style="margin-top:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Tally bigrams</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {

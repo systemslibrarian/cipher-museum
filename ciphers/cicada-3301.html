@@ -68,7 +68,7 @@
   <p style="opacity:.85;">Step through the four major puzzle layers used in Cicada's 2012 release: Caesar decode, URL extraction, image steg hint, and book-cipher index. Each button reveals the kind of move solvers had to make. Track B — narrative walkthrough.</p>
   <label for="input" style="display:block;margin-top:1rem;font-weight:600;">Pick a Cicada 2012 puzzle stage (1\u20134)</label>
   <input type="number" id="input" min="1" max="4" value="1" style="width:6rem;padding:.5rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;font-family:monospace;">
-  <button type="button" onclick="encode()" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Walk this stage</button>
+  <button type="button" data-fn="encode" style="margin-left:.5rem;padding:.5rem 1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);color:var(--ink);border-radius:6px;cursor:pointer;">Walk this stage</button>
   <div id="output" style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.3);border:1px solid var(--gold-b);border-radius:6px;font-family:monospace;line-height:1.6;min-height:5rem;white-space:pre-wrap;"></div>
   <script>
     (function () {
