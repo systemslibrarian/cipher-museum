@@ -7,103 +7,185 @@
   <meta name="description" content="A curated library of ciphertext challenges, known plaintexts, keys, and metadata for learning, teaching, scoring, and benchmarking classical cryptanalysis.">
   <meta property="og:title" content="Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum">
   <meta property="og:description" content="A curated library of ciphertext challenges, known plaintexts, keys, and metadata for learning, teaching, scoring, and benchmarking classical cryptanalysis.">
-
-  <meta name="keywords" content="cipher corpus, cryptanalysis, classical ciphers, benchmark, ciphertext, plaintext, cryptography, teaching, education, reproducibility, LLM, solver, open data, schema.org">
+  <meta name="keywords" content="cipher corpus, cryptanalysis, classical ciphers, benchmark, ciphertext, plaintext, cryptography, teaching, education, reproducibility, LLM, solver, open data">
 
   <link rel="stylesheet" href="/css/museum.css">
   <style>
-    .ciphertext-block, .corpus-ciphertext, pre.ciphertext, code.ciphertext {
-      overflow-wrap: anywhere;
-      word-break: break-word;
-      white-space: pre-wrap;
-      max-width: 100%;
-      font-family: var(--font-mono, monospace);
-      background: var(--bg-code, #222);
-      color: var(--fg-code, #ffd700);
-      padding: 0.5em 1em;
-      border-radius: 6px;
-      font-size: 1.1em;
-      margin: 0.5em 0;
-    }
-    .corpus-browser {
+    /* ── Corpus browser ─────────────────────────── */
+    .corpus-controls {
       display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin: 2rem 0;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .corpus-filters {
+      display: flex;
+      gap: .75rem;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+    .corpus-filters .museum-input {
+      flex: 1;
+      min-width: 180px;
+    }
+    #corpus-search { max-width: 340px; }
+    #corpus-diff-filter { max-width: 180px; }
+    .corpus-mode-desc {
+      font-family: var(--fm);
+      font-size: .78rem;
+      letter-spacing: .04em;
+      color: var(--tx3);
+      margin: 0 0 1.5rem;
     }
     .corpus-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.5rem;
     }
     .corpus-card {
-      background: var(--bg-card, #18140e);
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      background: var(--s1);
+      border: 1px solid var(--s4);
+      border-radius: var(--rl);
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      border: 1px solid var(--border-card, #3a2c13);
+      gap: .5rem;
     }
-    .corpus-card .ciphertext-block {
-      font-size: 1em;
-      margin: 0.5em 0 0.2em 0;
+    .corpus-card b { color: var(--tx); font-family: var(--fd); letter-spacing: .04em; }
+    .corpus-meta {
+      font-family: var(--fm);
+      font-size: .72rem;
+      letter-spacing: .06em;
+      color: var(--tx3);
     }
-    .corpus-card .corpus-meta {
-      font-size: 0.95em;
-      color: var(--fg-muted, #bfa76a);
-      margin-bottom: 0.5em;
+    .corpus-ciphertext {
+      font-family: var(--fm);
+      font-size: .82rem;
+      background: var(--s2);
+      border: 1px solid var(--s4);
+      border-radius: var(--r);
+      color: var(--gold-lt);
+      padding: .6em .9em;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: pre-wrap;
+      max-height: 80px;
+      overflow-y: auto;
     }
-    .corpus-card .corpus-actions {
+    .corpus-actions {
       display: flex;
-      gap: 0.5em;
+      gap: .4rem;
       flex-wrap: wrap;
-      margin-top: 0.5em;
+      margin-top: .25rem;
     }
-    .corpus-card .corpus-actions button {
-      font-size: 0.95em;
-      padding: 0.3em 0.9em;
-      border-radius: 5px;
-      border: none;
-      background: var(--bg-btn, #2d230c);
-      color: var(--fg-btn, #ffd700);
+    .corpus-actions button {
+      font-family: var(--fm);
+      font-size: .68rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .35rem .75rem;
+      border-radius: var(--r);
+      border: 1px solid var(--s5);
+      background: var(--s3);
+      color: var(--tx2);
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all var(--tr);
+      min-height: 32px;
     }
-    .corpus-card .corpus-actions button:hover {
-      background: var(--bg-btn-hover, #3a2c13);
-    }
-    .corpus-mode-toggle {
-      margin: 1.5em 0 0.5em 0;
-      display: flex;
-      gap: 1em;
-      align-items: center;
-    }
-    .download-panel {
-      margin: 2em 0;
-      padding: 1.5em;
-      background: var(--bg-card, #18140e);
-      border-radius: 10px;
-      border: 1px solid var(--border-card, #3a2c13);
-    }
-    .download-panel button {
-      margin: 0.3em 0.7em 0.3em 0;
-      padding: 0.4em 1.2em;
-      border-radius: 5px;
-      border: none;
-      background: var(--bg-btn, #2d230c);
-      color: var(--fg-btn, #ffd700);
+    .corpus-actions button:hover { border-color: var(--gold-dim); color: var(--gold); }
+    .corpus-reveal, .corpus-known { margin-top: .5rem; }
+    .corpus-reveal button, .corpus-known .btn-reveal {
+      font-family: var(--fm);
+      font-size: .68rem;
+      letter-spacing: .06em;
+      padding: .3rem .7rem;
+      border-radius: var(--r);
+      border: 1px solid var(--gold-b);
+      background: transparent;
+      color: var(--gold-dim);
       cursor: pointer;
-      font-size: 1em;
+      transition: all var(--tr);
+      margin-right: .3rem;
+      margin-bottom: .3rem;
     }
-    .download-panel button:hover {
-      background: var(--bg-btn-hover, #3a2c13);
+    .corpus-reveal button:hover { background: var(--gold-glow); color: var(--gold); }
+    .corpus-known-meta {
+      font-family: var(--fm);
+      font-size: .78rem;
+      color: var(--tx3);
+      line-height: 1.7;
     }
-    @media (max-width: 600px) {
-      .corpus-cards {
-        grid-template-columns: 1fr;
-      }
+    .corpus-details {
+      font-family: var(--fm);
+      font-size: .8rem;
+      color: var(--gold-lt);
+      background: var(--s2);
+      border: 1px solid var(--s4);
+      border-radius: var(--r);
+      padding: .5em .75em;
+      margin-top: .5rem;
+      display: none;
+    }
+    .freq-canvas, .bigram-canvas { display: block; max-width: 100%; }
+
+    /* ── Download section ───────────────────────── */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .download-group h4 {
+      font-family: var(--fm);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: .75rem;
+    }
+    .download-group .btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: .4rem;
+      font-size: .75rem;
+    }
+
+    /* ── Use-it two-col ─────────────────────────── */
+    .use-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .use-card {
+      background: var(--s1);
+      border: 1px solid var(--s4);
+      border-radius: var(--rl);
+      padding: 1.75rem;
+    }
+    .use-card h3 {
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .use-card ul {
+      padding-left: 1.1em;
+      color: var(--tx2);
+      font-size: .97rem;
+      line-height: 1.9;
+    }
+    .use-card pre { margin-top: 1rem; font-size: .82rem; }
+
+    @media (max-width: 700px) {
+      .corpus-cards { grid-template-columns: 1fr; }
+      .use-grid { grid-template-columns: 1fr; }
+      .download-grid { grid-template-columns: 1fr 1fr; }
+      .corpus-controls { flex-direction: column; align-items: stretch; }
+    }
+    @media (max-width: 480px) {
+      .download-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -134,164 +216,127 @@
       </ul>
     </div>
   </nav>
+
   <main id="main-content" tabindex="-1">
+
     <div class="page-hero">
       <div class="breadcrumb"><a href="index.html">Entrance</a><span>›</span>Cipher Corpus</div>
       <span class="page-eyebrow">Known-Ciphertext Benchmark Library</span>
       <h1 class="page-title">Cipher Corpus</h1>
-      <p class="page-tagline">Known ciphertexts for learning, testing, and benchmarking classical cryptanalysis.</p>
-      <p class="page-desc">A curated library of ciphertext challenges with known solutions — <strong>100,026 verified records across 82 cipher types, 84 cipher engines, and 9 languages</strong>. Each record includes the cipher type, key or settings, plaintext, difficulty, language, expected attack methods, and source information. Learners can practice codebreaking in Challenge Mode; tool builders can download the known-answer dataset for benchmarking cipher solvers.</p>
+      <p class="page-tagline">100,026 verified ciphertexts for learning, testing, and benchmarking classical cryptanalysis.</p>
+      <p class="page-desc">Each record includes cipher type, key, plaintext, difficulty, language, and expected attacks — fully machine-readable and openly licensed. Browse in Challenge Mode to attempt a solve, or switch to Known Answers to study the metadata.</p>
       <div class="badge-group">
-        <span class="pill">100,026 verified records</span>
         <span class="pill">82 cipher types · 84 engines</span>
         <span class="pill">9 languages</span>
         <span class="pill">55 historical records</span>
         <span class="pill">Beginner → Expert tiers</span>
         <span class="pill">Noisy &amp; multilingual variants</span>
-        <span class="pill">LLM 3-shot eval export</span>
         <span class="pill">JSONL / CSV / JSON</span>
-        <span class="pill">Cipher Detective integration</span>
-        <span class="pill">Workbench integration</span>
+        <span class="pill">LLM 3-shot eval export</span>
       </div>
-      <p style="color:var(--gold-dim);font-size:.85rem;margin-top:1rem;font-style:italic;">Educational benchmark data, not production cryptography.</p>
     </div>
-    <section class="section corpus-browser" id="corpus-browser">
-      <div class="corpus-mode-toggle">
-        <fieldset style="border:none;padding:0;margin:0;">
-          <legend class="visually-hidden" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Select corpus mode</legend>
-          <input type="radio" id="mode-challenge" name="mode" value="challenge" checked>
-          <label for="mode-challenge">Challenge Mode</label>
-          <input type="radio" id="mode-known" name="mode" value="known">
-          <label for="mode-known">Known Corpus Mode</label>
-        </fieldset>
-        <span id="mode-explanation">Challenge Mode hides the solution so you can attempt a ciphertext-only solve. Known Corpus Mode shows the answer metadata for teaching, testing, and benchmarking.</span>
+
+    <!-- ── Corpus Browser ───────────────────────── -->
+    <section class="section" id="corpus-browser">
+      <div class="corpus-controls">
+        <div class="corpus-filters">
+          <input class="museum-input" id="corpus-search" type="search"
+            placeholder="Search cipher type, family, language…" aria-label="Search corpus">
+          <select class="museum-input" id="corpus-diff-filter" aria-label="Filter by difficulty">
+            <option value="">All difficulties</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+        <div class="mode-toggle" role="group" aria-label="Corpus display mode">
+          <button class="mode-btn active" data-mode="challenge">Challenge</button>
+          <button class="mode-btn" data-mode="known">Known Answers</button>
+        </div>
       </div>
+      <p class="corpus-mode-desc" id="mode-explanation">Challenge Mode hides the solution — attempt a ciphertext-only solve. Switch to Known Answers to see plaintext, key, and expected attacks.</p>
       <div class="corpus-cards" id="corpus-cards"></div>
     </section>
-    <section class="section download-panel">
-      <h3>Download Corpus</h3>
-      <button onclick="downloadFile('all.jsonl')">Download all.jsonl</button>
-      <button onclick="downloadFile('all.json')">Download all.json</button>
-      <button onclick="downloadFile('all.csv')">Download all.csv</button>
-      <button onclick="downloadFile('cipher-corpus.schema.json')">Download schema</button>
-      <button onclick="downloadFile('beginner.jsonl')">Download beginner set</button>
-      <button onclick="downloadFile('intermediate.jsonl')">Download intermediate set</button>
-      <button onclick="downloadFile('advanced.jsonl')">Download advanced set</button>
-      <button onclick="downloadFile('expert.jsonl')">Download expert set</button>
-      <button onclick="downloadFile('historical.jsonl')">Download historical records (55)</button>
-      <button onclick="downloadFile('multilingual.jsonl')">Download multilingual records</button>
-      <button onclick="downloadFile('noisy.jsonl')">Download noisy variants</button>
-      <button onclick="downloadFile('llm-3shot-eval.jsonl')">Download LLM 3-shot eval set</button>
-      <p style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)"><b>Cipher Corpus v0.3 — 100,026 records · 82 cipher types · 84 engines · 9 languages</b></p>
+
+    <!-- ── Download ─────────────────────────────── -->
+    <section class="section section--dark">
+      <div class="section-head">
+        <span class="section-eyebrow">Open Dataset</span>
+        <h2 class="section-title">Download Corpus</h2>
+        <p class="section-sub">All records are openly licensed. Synthetic records are CC0.</p>
+      </div>
+      <div class="download-grid">
+        <div class="download-group">
+          <h4>Complete Dataset</h4>
+          <button class="btn btn-secondary" onclick="downloadFile('all.jsonl')">all.jsonl</button>
+          <button class="btn btn-secondary" onclick="downloadFile('all.json')">all.json</button>
+          <button class="btn btn-secondary" onclick="downloadFile('all.csv')">all.csv</button>
+          <button class="btn btn-secondary" onclick="downloadFile('cipher-corpus.schema.json')">Schema (JSON)</button>
+        </div>
+        <div class="download-group">
+          <h4>By Difficulty</h4>
+          <button class="btn btn-secondary" onclick="downloadFile('beginner.jsonl')">beginner.jsonl</button>
+          <button class="btn btn-secondary" onclick="downloadFile('intermediate.jsonl')">intermediate.jsonl</button>
+          <button class="btn btn-secondary" onclick="downloadFile('advanced.jsonl')">advanced.jsonl</button>
+          <button class="btn btn-secondary" onclick="downloadFile('expert.jsonl')">expert.jsonl</button>
+        </div>
+        <div class="download-group">
+          <h4>Specialty Sets</h4>
+          <button class="btn btn-secondary" onclick="downloadFile('historical.jsonl')">historical.jsonl (55)</button>
+          <button class="btn btn-secondary" onclick="downloadFile('multilingual.jsonl')">multilingual.jsonl</button>
+          <button class="btn btn-secondary" onclick="downloadFile('noisy.jsonl')">noisy.jsonl</button>
+          <button class="btn btn-secondary" onclick="downloadFile('llm-3shot-eval.jsonl')">llm-3shot-eval.jsonl</button>
+        </div>
+        <div class="download-group">
+          <h4>Reports</h4>
+          <a class="btn btn-secondary" href="public/reports/benchmark-baselines.html">Benchmark Report →</a>
+        </div>
+      </div>
     </section>
+
+    <!-- ── Use It ────────────────────────────────── -->
     <section class="section">
-      <h3>API Access</h3>
-      <p>The Cipher Corpus is available as a public JSON API for tool integration and research. Fetch records directly:</p>
-      <ul>
-        <li><b>All records (JSON):</b> <code>https://ciphermuseum.com/public/corpus/all.json</code></li>
-        <li><b>All records (JSONL):</b> <code>https://ciphermuseum.com/public/corpus/all.jsonl</code></li>
-        <li><b>Beginner split:</b> <code>https://ciphermuseum.com/public/corpus/beginner.jsonl</code></li>
-        <li><b>Intermediate split:</b> <code>https://ciphermuseum.com/public/corpus/intermediate.jsonl</code></li>
-        <li><b>Advanced split:</b> <code>https://ciphermuseum.com/public/corpus/advanced.jsonl</code></li>
-        <li><b>Expert split:</b> <code>https://ciphermuseum.com/public/corpus/expert.jsonl</code></li>
-        <li><b>Schema:</b> <code>https://ciphermuseum.com/public/corpus/cipher-corpus.schema.json</code></li>
-      </ul>
-      <p>Example (Python):</p>
-      <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.97em;">import requests
-resp = requests.get('https://ciphermuseum.com/public/corpus/all.json')
-data = resp.json()</pre>
-    </section>
-    <section class="section">
-      <h3>Corpus Quality Rules</h3>
-      <ul>
-        <li>Every record must have verified plaintext.</li>
-        <li>Every record must identify the cipher type.</li>
-        <li>Every synthetic record must be labeled synthetic.</li>
-        <li>Every historical record must include source and rights information.</li>
-        <li>Every record must include a license.</li>
-        <li>Every record must include expected attack methods.</li>
-        <li>Every record must include text length.</li>
-        <li>Every record must state whether spacing and punctuation were preserved.</li>
-        <li>Every record must be reproducible where possible.</li>
-        <li>Known answers must be documented even if hidden in Challenge Mode.</li>
-      </ul>
-    </section>
-    <section class="section">
-      <h3>For Learners and Educators</h3>
-      <p>Use Cipher Corpus to practice identifying cipher types, testing attack methods, teaching frequency analysis, comparing difficulty levels, and understanding how text length, spacing, language, and key choice affect solvability.</p>
-      <ul>
-        <li>Break a Caesar cipher by brute force</li>
-        <li>Compare long vs short substitution ciphertexts</li>
-        <li>Estimate Vigenère key length using index of coincidence</li>
-        <li>Use Kasiski examination on repeated patterns</li>
-        <li>Test Playfair digraph behavior</li>
-        <li>Compare transposition with substitution</li>
-        <li>Attempt a mixed cipher challenge</li>
-        <li>Measure how spacing removal changes difficulty</li>
-      </ul>
-    </section>
-    <section class="section">
-      <h3>For Tool Builders</h3>
-      <p>Cipher Corpus provides machine-readable known plaintext/ciphertext pairs for testing classical cipher solvers, cryptanalysis tools, and LLM-assisted cracking workflows.</p>
-      <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.97em;">import json
+      <div class="section-head">
+        <span class="section-eyebrow">Working With the Corpus</span>
+        <h2 class="section-title">For Learners &amp; Builders</h2>
+      </div>
+      <div class="use-grid">
+        <div class="use-card">
+          <h3>Learners &amp; Educators</h3>
+          <p>Practice identifying cipher types, applying attack methods, and measuring how text length, spacing, language, and key choice affect solvability.</p>
+          <ul>
+            <li>Break a Caesar cipher by brute force</li>
+            <li>Estimate Vigenère key length by index of coincidence</li>
+            <li>Use Kasiski examination on repeated patterns</li>
+            <li>Compare transposition with substitution</li>
+            <li>Measure how spacing removal changes difficulty</li>
+          </ul>
+        </div>
+        <div class="use-card">
+          <h3>Tool Builders &amp; Researchers</h3>
+          <p>Machine-readable known-plaintext/ciphertext pairs for testing solvers, cryptanalysis tools, and LLM evaluation workflows.</p>
+<pre>import json
 with open("all.jsonl", "r", encoding="utf-8") as f:
     for line in f:
-        record = json.loads(line)
-        print(record["id"], record["cipher_type"], record["ciphertext"])
-</pre>
-      <div style="margin-top:0.7em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
-        Do not train and evaluate on the same split if you are measuring model performance. Future versions may include public and blind benchmark splits.
+        rec = json.loads(line)
+        print(rec["id"], rec["cipher_type"])</pre>
+          <p style="margin-top:.75rem;font-size:.87rem;">Do not train and evaluate on the same split when measuring model performance.</p>
+        </div>
       </div>
     </section>
-    <section class="section">
-      <h3>Known Limitations</h3>
-      <p>
-        Synthetic records (95,849 core + 4,122 multilingual/noisy extensions) are generated and roundtrip-verified using the Cipher Museum's 84 cipher engines. Historical records (55) are sourced from public-domain archives with full provenance. Synthetic records are useful for controlled testing but are not a substitute for historical cipher archives.<br>
-        Classical ciphers vary widely in notation, alphabet handling, spacing, spelling, and operational use. Metadata is included to make those assumptions explicit.<br>
-        Some codebook engines (Book Cipher, Arnold-André) produce fewer records due to reference-text letter coverage constraints — this is a property of the engine, not a corpus gap.<br>
-        Multilingual records use ASCII transliteration of foreign language texts (diacritics removed) for A-Z engine compatibility — they test cipher mechanics with foreign language frequency patterns, not native character encodings.<br>
-        Noisy variant records are <em>not</em> marked <code>verified: true</code> — noise injection means the exact roundtrip is not guaranteed.<br>
-        This corpus is intended for education and benchmarking classical cryptanalysis, not for evaluating modern cryptographic security.
-      </p>
-    </section>
-    <section class="section">
-      <h3>Why Classical Ciphers Break</h3>
-      <p>
-        Many classical ciphers leak patterns from the underlying language. Frequency analysis, repeated sequences, index of coincidence, n-gram scoring, and transposition patterns exploit this leakage.<br>
-        Modern cryptography is designed so that ciphertext should not reveal useful statistical structure about the plaintext. Cipher Corpus helps learners see why that distinction matters.
-      </p>
-    </section>
-    <section class="section">
-      <h3>Related Work &amp; Attribution</h3>
-      <p>
-        Cipher Corpus builds on foundational work in LLM cryptanalysis evaluation, particularly <strong>CipherBank</strong> by Li et al. (2025), which established the first systematic benchmark for evaluating LLM cipher-breaking capabilities on classical ciphers.
-      </p>
-      <p>
-        CipherBank demonstrated that even advanced models like Claude-3.5 achieve only ~45% accuracy on classical cipher tasks, establishing the need for comprehensive evaluation infrastructure. Their pioneering work with 2,358 test cases across 9 cipher algorithms proved the viability of systematic cryptanalysis benchmarking.
-      </p>
-      <p>
-        Cipher Corpus extends this foundational approach with:
-      </p>
-      <ul>
-        <li><strong>100,026 test cases</strong> across <strong>82 cipher algorithms</strong> (vs CipherBank's 2,358 across 9)</li>
-        <li><strong>55 historical records</strong> with verified provenance spanning 150 BCE–1999 CE</li>
-        <li><strong>9 languages</strong> (English, French, German, Latin, Spanish, Italian, Japanese, Russian, Chinese)</li>
-        <li><strong>Noisy variants</strong> simulating OCR errors and telegraph noise</li>
-        <li><strong>Live benchmark infrastructure</strong> with blind splits, LLM 3-shot export, and reproducibility receipts</li>
-        <li><strong>Advanced cipher families</strong> including machine ciphers (Enigma, M-209, Lorenz), complex systems (ADFGX, VIC, Bazeries), and codebook ciphers</li>
-      </ul>
-      <p>We gratefully acknowledge CipherBank's pioneering contribution to establishing this evaluation category.</p>
-      <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
-        <b>CipherBank Resources:</b>
-        <ul>
-          <li><a href="https://arxiv.org/pdf/2504.19093" target="_blank" rel="noopener">Research Paper (arXiv:2504.19093)</a> — "CipherBank: Exploring the Boundary of LLM Reasoning Capabilities through Cryptography Challenges"</li>
-          <li><a href="https://huggingface.co/datasets/yu0226/CipherBank" target="_blank" rel="noopener">Dataset (Hugging Face)</a></li>
-          <li><a href="https://github.com/Leey21/CipherBank" target="_blank" rel="noopener">Code Repository (GitHub)</a></li>
-        </ul>
+
+    <!-- ── Attribution ───────────────────────────── -->
+    <section class="section section--dark">
+      <div class="section-head">
+        <span class="section-eyebrow">Research Context</span>
+        <h2 class="section-title">Attribution &amp; Citation</h2>
       </div>
-      <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
-        <b>Cite Cipher Corpus:</b>
-        <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.92em;">@misc{lester2026cipherCorpus,
+      <p>Cipher Corpus builds on <strong>CipherBank</strong> by Li et al. (2025) — the first systematic benchmark for LLM cipher-breaking on classical ciphers. CipherBank demonstrated that even advanced models achieve only ~45% accuracy, establishing the need for comprehensive evaluation infrastructure.</p>
+      <p style="margin-top:1rem;">Cipher Corpus extends this with 100,026 test cases across 82 algorithms (vs. CipherBank's 2,358 across 9), 55 historical records with verified provenance, 9 languages, noisy variants, and blind benchmark splits. <a href="https://arxiv.org/pdf/2504.19093" target="_blank" rel="noopener">CipherBank paper →</a></p>
+      <div style="margin-top:2rem;">
+        <span class="section-eyebrow" style="display:block;margin-bottom:.75rem;">Cite Cipher Corpus</span>
+<pre>@misc{lester2026cipherCorpus,
   title={Cipher Corpus: Comprehensive Classical Cryptanalysis Benchmark},
   author={Lester, Paul},
   year={2026},
@@ -300,17 +345,9 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
 }</pre>
       </div>
     </section>
-    <section class="section">
-      <h3>Known-Ciphertext Benchmark Lab</h3>
-      <div style="color:var(--fg-muted,#bfa76a);font-size:1.1em;">Benchmark infrastructure in <code>scripts/benchmark-runner.js</code> and <code>scripts/export-llm-3shot.js</code>.</div>
-      <div style="margin-top:0.5em;font-size:0.97em;">
-        <b>Benchmark evaluation:</b> <code>node scripts/benchmark-runner.js</code> — tests cipher solvers against corpus records, reporting success rate, key accuracy, plaintext similarity, and time to result.<br>
-        <b>LLM 3-shot export:</b> <code>node scripts/export-llm-3shot.js --difficulty intermediate --count 100</code> — exports structured evaluation prompts with 3-shot context, challenge mode, and key recovery tasks.<br>
-        <b>Benchmark report:</b> <code>node scripts/generate-benchmark-report.js</code> — generates per-cipher baseline statistics. <a href="public/reports/benchmark-baselines.html">View current report →</a><br>
-        All 95,849 core records pass roundtrip verification.
-      </div>
-    </section>
+
   </main>
+
   <footer class="museum-footer">
     <div class="footer-grid">
       <div class="footer-brand">
@@ -341,6 +378,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
       <span class="footer-copy">&copy; Cipher Museum. Synthetic benchmark records are CC0.</span>
     </div>
   </footer>
+
   <script src="/js/nav.js" defer></script>
   <script src="/js/detective-integration.js"></script>
   <script src="/js/cipher-corpus.js"></script>

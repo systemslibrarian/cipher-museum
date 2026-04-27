@@ -219,15 +219,17 @@
     });
   }
 
-  // Mode toggle — re-renders cards so challenge/known sections show correctly
-  document.querySelectorAll('input[name="mode"]').forEach(radio => {
-    radio.addEventListener('change', e => {
-      mode = e.target.value;
+  // Mode toggle — button group (.mode-btn / .mode-btn.active)
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      mode = this.dataset.mode;
       const explanation = document.getElementById('mode-explanation');
       if (explanation) {
         explanation.textContent = mode === 'challenge'
-          ? 'Challenge Mode hides the solution so you can attempt a ciphertext-only solve. Known Corpus Mode shows the answer metadata for teaching, testing, and benchmarking.'
-          : 'Known Corpus Mode shows plaintext, key, and expected attacks for each record — for teaching, benchmarking, and tool development.';
+          ? 'Challenge Mode hides the solution — attempt a ciphertext-only solve. Switch to Known Answers to see plaintext, key, and expected attacks.'
+          : 'Known Answers shows plaintext, key, and expected attacks for each record — for teaching, benchmarking, and tool development.';
       }
       renderCards();
     });
