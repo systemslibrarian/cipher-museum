@@ -14,11 +14,14 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 ## 📰 Latest Update
 
+- **Cipher Corpus v0.4** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)): Expanded corpus with three research-grade additions:
+  - **Historical records: 55 → 101** — 46 new verified records spanning 4,000 years of cryptographic history (Atbash in the Hebrew Bible c. 600 BCE through Vietnam-era tap code 1965). Now covers 78 distinct cipher types with primary-source citations and `historical_context` narratives. New cipher types: atbash, scytale, Aeneas Tacticus, affine, autokey, Bacon bilateral, Bazeries, Beaufort, bifid, trifid, foursquare, Cardano, fractionated Morse, hill, kryha, Nihilist, pigpen, Porta, rail fence, Red Type A, ROT13, running key, Slidex, straddling checkerboard, tap code, Trithemius, TypeX, Vernam OTP, and more.
+  - **Arabic multilingual: 1,710 new records** — Arabic (ar) added using Buckwalter Latin transliteration across 12 cipher types. Corpus now covers **10 languages** (en, fr, de, la, es, it, ar, ja, ru, zh), **5,348 total multilingual records** (up from 3,638).
+  - **Cryptanalysis solver scripts** — `scripts/hill-climbing-solver.js` (monoalphabetic cipher solver using quadgram scoring + hill climbing, 95% accuracy on 80+ char ciphertexts) and `scripts/sa-solver.js` (simulated annealing variant with HC polish, better on short ciphertexts, `--compare` benchmarking mode). Backed by `scripts/data/english-quadgrams.json` (8,877 quadgrams computed from corpus plaintext).
 - **Exhibit 140 — Bible Code / ELS** ([ciphers/bible-code.html](https://ciphermuseum.com/ciphers/bible-code.html)): Interactive equidistant letter sequence explorer comparing Genesis/Exodus against length-matched random text with the same letter distribution. Registered in Hall VIII and the museum map.
 - **Lorenz depth-attack interactive** ([ciphers/lorenz.html](https://ciphermuseum.com/ciphers/lorenz.html)): Two-time-pad crib-drag demo and Enigma↔Lorenz comparison table added to the existing Lorenz exhibit.
-- **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 443 + 238 + 1848 + 1760 + 531 + 1773 + 789 + 4944 assertions.
+- **Full test audit** — resolved 12 pre-existing test failures (enigma.html `data-cipher` attribute, bible-code artifact card, heading hierarchy); all eight suites green at 443 + 238 + 1848 + 1760 + 531 + 1773 + 789 + 4945 assertions.
 - **Sitemap expanded** to all 176 indexable pages (tools, tours, community, all biographies, and the new exhibit).
-- **Cipher Corpus v0.3** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)): 100,026 test cases across 82 cipher types, 9 languages, 55 historical records. Challenge Mode for learners, Known Mode for tool builders. LLM 3-shot evaluation export, per-cipher benchmark report, WCAG 2.1 AA. All tests passing.
 - **README factual audit**: corrected interactive-demo count (110/140), page counts (176), and test assertion totals site-wide.
 - April 2026: Cipher Museum listed in Crypto Museum's (cryptomuseum.com) curated Virtual Museums directory, alongside Cipher History Museum, Jerry Proc's Crypto Pages, and other established crypto-history archives.
 
@@ -60,16 +63,17 @@ Type a message, set a key, and watch the cipher work in real time. Demos are dyn
 For a sortable, filterable view of every cipher system in the museum (era, type, security, hall, solved status, key method) see the [Cipher Comparison Table](https://ciphermuseum.com/comparison.html). For the full 140-exhibit roster including biographies and context pages, see the [Museum Map](https://ciphermuseum.com/museum-map.html).
 
 ### 📊 Additional Tools
-- **[Cipher Corpus](https://ciphermuseum.com/cipher-corpus.html)** — The most comprehensive open library of known-answer ciphertext challenges for classical ciphers, with 100,026 test cases across 82 algorithms. Includes:
+- **[Cipher Corpus](https://ciphermuseum.com/cipher-corpus.html)** — The most comprehensive open library of known-answer ciphertext challenges for classical ciphers, with 100,026+ test cases across 82 algorithms. Includes:
     - **Challenge Mode** for learners: hides solutions for ciphertext-only practice.
     - **Known Corpus Mode** for teaching, benchmarking, and tool-building: shows all metadata, keys, and plaintexts.
-    - **Downloadable datasets**: JSONL, JSON, CSV, schema, difficulty splits (beginner–expert), multilingual records (9 languages), noisy transcription variants, and LLM 3-shot evaluation export.
-    - **Quality rules**: Every record includes cipher type, key/settings, plaintext, difficulty, language, expected attack methods, and source/license info. Synthetic and historical records are labeled. 55 historical records with primary source citations (150 BCE–1999 CE).
+    - **Downloadable datasets**: JSONL, JSON, CSV, schema, difficulty splits (beginner–expert), multilingual records (10 languages, 5,348 records including Arabic), noisy transcription variants, and LLM 3-shot evaluation export.
+    - **Quality rules**: Every record includes cipher type, key/settings, plaintext, difficulty, language, expected attack methods, and source/license info. Synthetic and historical records are labeled. **101 historical records** spanning 4,000 years with primary source citations (c. 600 BCE–1999 CE).
+    - **Cryptanalysis tools**: `scripts/hill-climbing-solver.js` and `scripts/sa-solver.js` for automated monoalphabetic cipher breaking (quadgram scoring, 95% accuracy on 80+ char ciphertexts).
     - **Integration**: Linked from main nav, mobile nav, and footer. Direct integration with Cipher Detective and Workbench.
     - **Accessibility**: Fully WCAG-compliant with skip links, labeled controls, and keyboard navigation.
     - **For educators, learners, and tool builders**: Practice, teach, or benchmark cryptanalysis tools with reproducible, documented examples. Builds on foundational benchmark work by [CipherBank (Li et al., 2025)](https://arxiv.org/pdf/2504.19093).
 
-- **[Codebreaker's Workbench](https://ciphermuseum.com/lab/workbench.html)** — A unified hands-on lab that exposes **all 83 cipher engines** behind one consistent interface. Pick any cipher from the dropdown, paste your text, set a key (or accept the default), and encrypt/decrypt instantly. Beyond the per-exhibit demos it adds:
+- **[Codebreaker's Workbench](https://ciphermuseum.com/lab/workbench.html)** — A unified hands-on lab that exposes **all 84 cipher engines** behind one consistent interface. Pick any cipher from the dropdown, paste your text, set a key (or accept the default), and encrypt/decrypt instantly. Beyond the per-exhibit demos it adds:
     - **Frequency analyser** — letter-frequency histogram with Index of Coincidence and Chi-square against English, useful for detecting monoalphabetic vs. polyalphabetic ciphertext at a glance.
     - **Kasiski / period detector** — repeated-trigram spacing analysis for breaking Vigenère-family ciphers.
     - **N-gram & entropy panel** — bigram/trigram counts and Shannon entropy for distinguishing transposition (preserves frequencies) from substitution (alters them).
@@ -307,7 +311,7 @@ cipher-museum/
 │   ├── nav.js               ← Navigation system (sticky nav, hamburger, ARIA)
 │   ├── demo-loader.js       ← Dynamic demo UI generator for all cipher pages
 │   └── ciphers/
-│       └── all-engines.js   ← 83 cipher engine implementations
+│       └── all-engines.js   ← 84 cipher engine implementations
 ├── halls/                   ← 13 exhibit halls
 │   ├── ancient.html          ← Hall I: World Origins of Cryptography
 │   ├── substitution.html     ← Hall II: Classical Substitution
@@ -327,8 +331,16 @@ cipher-museum/
 │   └── [130+ additional exhibits]
 ├── data/
 │   └── artifact-cards.json  ← Metadata cards (era, family, region, key type…) for all 140 exhibits
+├── scripts/                  ← Corpus tools and cryptanalysis solvers
+│   ├── hill-climbing-solver.js  ← Monoalphabetic solver: hill climbing + quadgram scoring
+│   ├── sa-solver.js             ← Simulated annealing solver (better on short ciphertexts)
+│   ├── build-quadgrams.js       ← Regenerates quadgram stats from corpus plaintext
+│   ├── qa-corpus.js             ← Comprehensive corpus QA: roundtrip, KAT, schema
+│   ├── generate-corpus-v*.js    ← Corpus generation batch scripts (v1–v3)
+│   └── data/
+│       └── english-quadgrams.json  ← 8,877 quadgram log-probabilities (896K observations)
 ├── lab/
-│   └── workbench.html       ← Codebreaker's Workbench (all 83 engines in one lab)
+│   └── workbench.html       ← Codebreaker's Workbench (all 84 engines in one lab)
 ├── tours/                    ← Guided learning paths
 ├── community/                ← Community discussion and write-up space
 └── tests/
@@ -393,7 +405,7 @@ node tests/test-accessibility.js    # 1760 — ADA / WCAG audit across 176 pages
 node tests/test-mobile.js           #  531 — responsive / mobile audit across 176 pages
 node tests/test-structural.js       # 1773 — structural / framing audit across 176 pages
 node tests/test-demo-pages.js       #  789 — end-to-end JSDOM simulation of every interactive demo
-node tests/test-local-links.js      # 4944 — local href/src link checker across 176 HTML files
+node tests/test-local-links.js      # 4945 — local href/src link checker across 176 HTML files
 
 # … or via npm scripts
 npm run test:engines
