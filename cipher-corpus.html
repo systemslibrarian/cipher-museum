@@ -165,28 +165,24 @@
       <button onclick="downloadFile('multilingual.jsonl')">Download multilingual records</button>
       <button onclick="downloadFile('noisy.jsonl')">Download noisy variants</button>
       <button onclick="downloadFile('llm-3shot-eval.jsonl')">Download LLM 3-shot eval set</button>
-      <div style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)">
-        <b>Cipher Corpus v0.3 — 100,026 records · 82 cipher types · 84 engines · 9 languages</b>
+      <p style="margin-top:1em;font-size:0.97em;color:var(--fg-muted,#bfa76a)"><b>Cipher Corpus v0.3 — 100,026 records · 82 cipher types · 84 engines · 9 languages</b></p>
+    </section>
+    <section>
       <h3>API Access</h3>
-      <div style="font-size:0.97em;color:var(--fg-muted,#bfa76a);margin-bottom:1em;">
-        The Cipher Corpus is available as a public JSON API for tool integration and research. Fetch records directly:
-        <ul>
-          <li><b>All records (JSON):</b> <code>https://ciphermuseum.com/public/corpus/all.json</code></li>
-          <li><b>All records (JSONL):</b> <code>https://ciphermuseum.com/public/corpus/all.jsonl</code></li>
-          <li><b>Beginner split:</b> <code>https://ciphermuseum.com/public/corpus/beginner.jsonl</code></li>
-          <li><b>Intermediate split:</b> <code>https://ciphermuseum.com/public/corpus/intermediate.jsonl</code></li>
-          <li><b>Advanced split:</b> <code>https://ciphermuseum.com/public/corpus/advanced.jsonl</code></li>
-          <li><b>Expert split:</b> <code>https://ciphermuseum.com/public/corpus/expert.jsonl</code></li>
-          <li><b>Schema:</b> <code>https://ciphermuseum.com/public/corpus/cipher-corpus.schema.json</code></li>
-          <li><b>Receipts:</b> <code>https://ciphermuseum.com/reports/receipt-*.json</code></li>
-        </ul>
-        <div style="margin-top:0.7em;">Example (Python):<br>
-        <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.97em;">import requests
-  resp = requests.get('https://ciphermuseum.com/public/corpus/all.json')
-  data = resp.json()</pre>
-        </div>
-      </div>
-      </div>
+      <p>The Cipher Corpus is available as a public JSON API for tool integration and research. Fetch records directly:</p>
+      <ul>
+        <li><b>All records (JSON):</b> <code>https://ciphermuseum.com/public/corpus/all.json</code></li>
+        <li><b>All records (JSONL):</b> <code>https://ciphermuseum.com/public/corpus/all.jsonl</code></li>
+        <li><b>Beginner split:</b> <code>https://ciphermuseum.com/public/corpus/beginner.jsonl</code></li>
+        <li><b>Intermediate split:</b> <code>https://ciphermuseum.com/public/corpus/intermediate.jsonl</code></li>
+        <li><b>Advanced split:</b> <code>https://ciphermuseum.com/public/corpus/advanced.jsonl</code></li>
+        <li><b>Expert split:</b> <code>https://ciphermuseum.com/public/corpus/expert.jsonl</code></li>
+        <li><b>Schema:</b> <code>https://ciphermuseum.com/public/corpus/cipher-corpus.schema.json</code></li>
+      </ul>
+      <p>Example (Python):</p>
+      <pre style="background:#222;color:#ffd700;padding:0.7em 1em;border-radius:6px;overflow-x:auto;font-size:0.97em;">import requests
+resp = requests.get('https://ciphermuseum.com/public/corpus/all.json')
+data = resp.json()</pre>
     </section>
     <section>
       <h3>Corpus Quality Rules</h3>
@@ -301,13 +297,13 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
         <li>✓ Academic citation format (CITATION.cff)</li>
         <li>✓ CipherBank attribution and comparison table</li>
       </ul>
-      <p style="color:var(--fg-muted,#bfa76a);font-size:0.97em;margin-bottom:0.5em;margin-top:1em">Still ahead:</p>
+      <p style="color:var(--fg-muted,#bfa76a);font-size:0.97em;margin-bottom:0.5em;margin-top:1em">Still ahead (v0.4+):</p>
       <ul>
-        <li>Expand historical records to 100+ with additional primary sources</li>
-        <li>Add Arabic and Chinese multilingual examples</li>
-        <li>Add hill-climbing and simulated annealing solver baselines</li>
-        <li>Benchmark leaderboards for LLM/solver evaluation</li>
-        <li>Publish to Zenodo with DOI for academic citation</li>
+        <li>Expand historical records from 55 → 100+ with additional primary-source ciphertexts</li>
+        <li>Add Arabic multilingual examples (Chinese records exist; systematic Arabic set not yet built)</li>
+        <li>Hill-climbing and simulated annealing solver baselines for automated cryptanalysis scoring</li>
+        <li>Benchmark leaderboard for LLM and solver evaluation (public submission + scoring pipeline)</li>
+        <li>Zenodo publication with DOI for formal academic citation</li>
       </ul>
     </section>
     <section id="contribute">
@@ -413,6 +409,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
       });
     }
   </script>
+  <script src="/js/nav.js" defer></script>
   <script src="/js/detective-integration.js"></script>
   <script src="/js/cipher-corpus.js"></script>
 </body>
