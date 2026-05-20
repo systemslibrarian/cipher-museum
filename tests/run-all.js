@@ -12,6 +12,7 @@ const suites = [
   'tests/test-accessibility.js',
   'tests/test-mobile.js',
   'tests/test-demo-pages.js',
+  'tests/test-playground.js',
   'tests/test-structural.js',
   'tests/test-local-links.js'
 ];

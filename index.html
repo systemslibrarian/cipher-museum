@@ -405,8 +405,12 @@
       }
     },
     bacon: {
+      // 25-letter Bacon (I/J merged). 25 × 5 = 125 chars.
+      // A=AAAAA B=AAAAB C=AAABA D=AAABB E=AABAA F=AABAB G=AABBA H=AABBB
+      // I/J=ABAAA K=ABAAB L=ABABA M=ABABB N=ABBAA O=ABBAB P=ABBBA Q=ABBBB
+      // R=BAAAA S=BAAAB T=BAABA U=BAABB V=BABAA W=BABAB X=BABBA Y=BABBB Z=BBAAA
       enc: function(t){
-        var codes='AABAAABABAABABAAABBAAABABABABBAAABABBBABABAABBABABBABBAAABBABABBBBAABBABBABABBBABABBB';
+        var codes='AAAAAAAAABAAABAAAABBAABAAAABABAABBAAABBBABAAAABAABABABAABABBABBAAABBABABBBAABBBBBAAAABAAABBAABABAABBBABAABABABBABBABABBBBBAAA';
         return t.split('').map(function(ch){
           var c=ch.toUpperCase(); if(c==='J') c='I'; var i=A.indexOf(c);
           if(i<0) return ch; if(i>9) i--;
@@ -414,12 +418,12 @@
         }).join(' ');
       },
       dec: function(t){
-        var codes='AABAAABABAABABAAABBAAABABABABBAAABABBBABABAABBABABBABBAAABBABABBBBAABBABBABABBBABABBB';
+        var codes='AAAAAAAAABAAABAAAABBAABAAAABABAABBAAABBBABAAAABAABABABAABABBABBAAABBABABBBAABBBBBAAAABAAABBAABABAABBBABAABABABBABBABABBBBBAAA';
         var clean=t.replace(/[^AaBb]/g,'').toUpperCase();
         var out='';
         for(var i=0;i+5<=clean.length;i+=5){
           var chunk=clean.substr(i,5);
-          for(var j=0;j<24;j++){ if(codes.substr(j*5,5)===chunk){ var c=j; if(c>=9) c++; out+=A[c]; break; }}
+          for(var j=0;j<25;j++){ if(codes.substr(j*5,5)===chunk){ var c=j; if(c>=9) c++; out+=A[c]; break; }}
         }
         return out;
       }
