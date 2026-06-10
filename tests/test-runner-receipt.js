@@ -3,6 +3,16 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const outDir = 'tests/';
 const corpus = 'tests/minicorpus.jsonl';
+fs.writeFileSync(corpus, JSON.stringify({
+  ciphertext: 'ABC',
+  plaintext: 'ABC',
+  cipher_name: 'Dummy',
+  language: 'en',
+  homophonic: false,
+  noisy: false,
+  synthetic: false,
+  source_provenance: { type: 'synthetic', details: 'test' }
+}) + '\n');
 execSync('node scripts/benchmark-runner.js --corpus ' + corpus + ' --solvers solvers/ --out ' + outDir, { stdio: 'inherit' });
 const files = fs.readdirSync(outDir).filter(f => f.startsWith('receipt-') && f.endsWith('.json'));
 if (files.length === 0) throw new Error('No receipt file produced.');

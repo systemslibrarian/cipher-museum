@@ -17,7 +17,7 @@ const records = fs.readFileSync(corpusPath, 'utf8').split('\n').filter(Boolean).
 const solverFiles = fs.readdirSync(solversDir).filter(f => f.endsWith('.js'));
 const solvers = solverFiles.map(f => ({
   name: f.replace(/\.js$/, ''),
-  solve: require(path.join(solversDir, f)).solve
+  solve: require(path.resolve(solversDir, f)).solve
 }));
 
 

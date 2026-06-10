@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 
-const HTML_PATH = path.join(__dirname, '..', 'workspaces', 'cipher-museum', 'ciphers', 'solitaire.html');
-const html = fs.readFileSync('/workspaces/cipher-museum/ciphers/solitaire.html', 'utf8');
+const HTML_PATH = path.join(__dirname, '..', 'ciphers', 'solitaire.html');
+const html = fs.readFileSync(HTML_PATH, 'utf8');
 
-const dom = new JSDOM(html, { runScripts: 'dangerously', pretendToBeVisual: true, url: 'file:///workspaces/cipher-museum/ciphers/solitaire.html' });
+const dom = new JSDOM(html, { runScripts: 'dangerously', pretendToBeVisual: true, url: 'file:///' + HTML_PATH.replace(/\\/g, '/') });
 const { window } = dom;
 const { document } = window;
 
