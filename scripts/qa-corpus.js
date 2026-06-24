@@ -134,7 +134,7 @@ function extractKey(r) {
   // Standard {type, value}
   if (k.value !== undefined) return String(k.value);
   // Affine {a, b}
-  if (k.a !== undefined && k.c === undefined) return `${k.a},${k.b}`;
+  if (k.a !== undefined && k.c === undefined) return `${k.a},${k.b ?? 0}`;
   // Hill {a,b,c,d}
   if (k.a !== undefined && k.c !== undefined) return `${k.a},${k.b},${k.c},${k.d}`;
   // Four-square {key1, key2}
@@ -150,7 +150,7 @@ function extractKey(r) {
   // Chaocipher
   if (k.initial_left !== undefined) return `${k.initial_left},${k.initial_right}`;
   // Alberti {outer, inner, index}
-  if (k.outer !== undefined) return `${k.outer},${k.inner},${k.index || 'A'}`;
+  if (k.outer !== undefined) return `${k.outer},${k.inner},${k.index ?? 'A'}`;
   // Wheatstone {inner_disk, outer_disk, starting_position}
   if (k.inner_disk !== undefined) return k.inner_disk;
   // Diana {key, variant}

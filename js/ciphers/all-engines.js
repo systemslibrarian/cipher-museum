@@ -937,25 +937,35 @@ window.CipherEngines = (() => {
   /* ─── 30. Lorenz (Simplified SZ40) ─── */
   const lorenz = (() => {
     function makeWheel(size, seed) {
-      const bits = []; const rng = (s => () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s & 1; })(seed);
+      const bits = [];
+      // Keep the seed inside 32-bit range and take a HIGH-order bit of the
+      // LCG. The low bit of an LCG with an odd multiplier/increment merely
+      // alternates 0,1,0,1…, which collapses the keystream to a near no-op.
+      const rng = (s => () => { s = (Math.imul(s, 1103515245) + 12345) & 0x7fffffff; return (s >>> 30) & 1; })(seed & 0x7fffffff);
       for (let i = 0; i < size; i++) bits.push(rng());
       return bits;
     }
     function run(text, key) {
       const t = clean(text);
-      const seed = clean(key || 'LORENZ').split('').reduce((s, c) => s * 31 + c.charCodeAt(0), 7);
+      const seed = clean(key || 'LORENZ').split('').reduce((s, c) => (Math.imul(s, 31) + c.charCodeAt(0)) & 0x7fffffff, 7);
       const chi = [makeWheel(41, seed), makeWheel(31, seed + 1), makeWheel(29, seed + 2),
         makeWheel(26, seed + 3), makeWheel(23, seed + 4)];
       const psi = [makeWheel(43, seed + 5), makeWheel(47, seed + 6), makeWheel(51, seed + 7),
         makeWheel(53, seed + 8), makeWheel(59, seed + 9)];
       let result = '';
       for (let i = 0; i < t.length; i++) {
-        let val = t.charCodeAt(i) - 65;
+        const p = t.charCodeAt(i) - 65;
+        // Assemble the 5-bit chi⊕psi keystream value (0..31) for this position.
+        let k = 0;
         for (let b = 0; b < 5; b++) {
           const xorBit = chi[b][i % chi[b].length] ^ psi[b][i % psi[b].length];
-          val ^= (xorBit << b);
+          k |= (xorBit << b);
         }
-        result += A[mod(val, 26)];
+        // The real SZ40 XORs 5-bit Baudot, which is reciprocal because 32 is a
+        // power of two. Over a 26-letter alphabet XOR + (mod 26) is NOT
+        // reversible, so we use a Beaufort combiner — c = (k - p) mod 26 — which
+        // is its own inverse and lets a single `run` serve as encode and decode.
+        result += A[mod(k - p, 26)];
       }
       return result;
     }
@@ -2873,13 +2883,16 @@ window.CipherEngines = (() => {
         return w.length > pos && w[pos].toUpperCase() === letter;
       });
       if (candidates.length) return candidates[salt % candidates.length];
-      // Fabricate a 4-letter filler word that places `letter` at the
-      // requested position. Use a sentinel different from any letter so
+      // Fabricate a filler word that places `letter` at the requested
+      // position. The word must be long enough to actually HOLD that
+      // position (>= pos + 1 chars) or decode would read past its end and
+      // silently drop the letter. Use a sentinel different from any letter so
       // the placeholder fill loop never collides with `letter` itself
       // (e.g. letter === 'X' would have collided with an 'x' sentinel).
       const fill = 'aeioutnsr';
-      const arr = ['_', '_', '_', '_'];
-      const target = pos === -1 ? 3 : Math.min(pos, 3);
+      const len = pos === -1 ? 4 : Math.max(4, pos + 1);
+      const arr = new Array(len).fill('_');
+      const target = pos === -1 ? len - 1 : pos;
       arr[target] = letter.toLowerCase();
       for (let i = 0; i < arr.length; i++) if (arr[i] === '_') arr[i] = fill[(salt + i) % fill.length];
       return arr.join('');

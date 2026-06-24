@@ -240,7 +240,8 @@
   function scoreToLabel(score, maxScore, tooShort) {
     var pct = maxScore > 0 ? (score / maxScore) : 0;
     if (tooShort) {
-      if (pct >= 0.60) return 'Possible';
+      // Cap confidence for short inputs: even a strong score can't be trusted,
+      // so the ceiling is 'Possible' regardless of how high pct climbs.
       if (pct >= 0.20) return 'Possible';
       if (pct >= 0.05) return 'Unlikely';
       return 'Inconclusive';

@@ -48,7 +48,7 @@ function scoreText(text) {
   const { logProbs, floor } = loadQuadgrams();
   let score = 0;
   const n = text.length;
-  if (n < 4) return floor * 4;
+  if (n < 4) return 0; // no quadgram windows exist → empty-sum score is 0
   for (let i = 0; i <= n - 4; i++) {
     const q = text.slice(i, i + 4);
     score += (q in logProbs) ? logProbs[q] : floor;

@@ -19,7 +19,7 @@ const fs = require('fs');
 const path = require('path');
 
 const REPO = path.resolve(__dirname, '..');
-const SKIP_DIRS = new Set(['node_modules', '.git', 'docs']);
+const SKIP_DIRS = new Set(['node_modules', '.git', 'docs', 'tests']);
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {

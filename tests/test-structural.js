@@ -29,7 +29,7 @@ function listHtml(dir, out = []) {
   for (const f of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, f.name);
     if (f.isDirectory()) {
-      if (['node_modules', '.git', 'images', 'scripts'].includes(f.name)) continue;
+      if (['node_modules', '.git', 'images', 'scripts', 'tests'].includes(f.name)) continue;
       listHtml(p, out);
     } else if (f.name.endsWith('.html')) out.push(p);
   }

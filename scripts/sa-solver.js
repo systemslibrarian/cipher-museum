@@ -81,7 +81,10 @@ function randomSwap(key) {
  */
 function saOnce(ciphertext, opts = {}) {
   const T0 = opts.T0 || 10;
-  const coolingRate = opts.coolingRate || 0.9997;
+  // Cooling must be strictly within (0,1): >= 1 never cools (search degenerates
+  // into a non-converging random walk), <= 0 is meaningless.
+  let coolingRate = opts.coolingRate || 0.9997;
+  if (!(coolingRate > 0 && coolingRate < 1)) coolingRate = 0.9997;
   const maxSteps = opts.maxSteps || 50000;
 
   let key = randomKey();
@@ -112,7 +115,9 @@ function saOnce(ciphertext, opts = {}) {
       }
     }
 
-    T *= coolingRate;
+    // Floor the temperature so exp(delta / T) can never divide by an
+    // underflowed-to-zero T (which would yield NaN and corrupt acceptance).
+    T = Math.max(T * coolingRate, 1e-6);
   }
 
   return { key: bestKey, plaintext: bestPlain, score: bestScore };

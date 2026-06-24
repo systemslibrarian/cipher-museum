@@ -6,4 +6,5 @@ package-lock.json
 tests/minicorpus.jsonl
 tests/benchmark-report.json
 tests/benchmark-report.html
+tests/benchmark-summary.json
 tests/receipt-runner-*.json
