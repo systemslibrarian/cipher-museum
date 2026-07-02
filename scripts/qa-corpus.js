@@ -113,6 +113,14 @@ const XPAD_CIPHERS = new Set([
   'double_transposition','rail_fence','fractionated_morse',
 ]);
 
+// Grid ciphers built on a 25-letter alphabet merge J into I; a J in the
+// plaintext legitimately decodes as I, so canonicalize before comparing.
+// (Trifid is NOT here — its 27-letter alphabet keeps J.)
+const IJ_MERGED_CIPHERS = new Set([
+  'playfair','four_square','two_square','bifid','polybius',
+  'adfgx','nihilist',
+]);
+
 // Ciphers whose "decode" legitimately can't reproduce plaintext from corpus record
 // (illustrative/irreversible engines, complex key material not in record, etc.)
 const SKIP_ROUNDTRIP = new Set([
@@ -219,16 +227,18 @@ function roundtripCheck(records) {
       const decoded = eng.decode(r.ciphertext, keyStr);
       const ptClean = clean(r.plaintext);
       const decClean = clean(decoded);
+      const ptCompare = IJ_MERGED_CIPHERS.has(r.cipher_type)
+        ? ptClean.replace(/J/g, 'I') : ptClean;
       // For block/pad ciphers, strip trailing X padding only if it extends beyond plaintext length
       let decCompare = decClean;
       if (XPAD_CIPHERS.has(r.cipher_type)) {
-        while (decCompare.endsWith('X') && decCompare.length > ptClean.length) {
+        while (decCompare.endsWith('X') && decCompare.length > ptCompare.length) {
           decCompare = decCompare.slice(0, -1);
         }
       }
-      const ok = decCompare === ptClean || decClean === ptClean ||
+      const ok = decCompare === ptCompare || decClean === ptCompare ||
                  decoded === r.plaintext.toUpperCase() ||
-                 (XPAD_CIPHERS.has(r.cipher_type) && decClean.startsWith(ptClean));
+                 (XPAD_CIPHERS.has(r.cipher_type) && decClean.startsWith(ptCompare));
       if (ok) { pass++; }
       else {
         failures.push({ id: r.id, cipher: r.cipher_type, key: keyStr.slice(0,20),

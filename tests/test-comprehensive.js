@@ -196,7 +196,7 @@ const ENGINE_PROFILES = {
   straddlingCheckerboard: { key: 'ATONESIRE',                        mode: 'roundtrip' },
   chaocipher:             { key: 'CHAOCIPHER',                       mode: 'roundtrip' },
   m209:                   { key: 'HAGELIN',                          mode: 'self-reciprocal' },
-  solitaire:              { key: 'CRYPTONOMICON',                    mode: 'roundtrip' },
+  solitaire:              { key: 'CRYPTONOMICON',                    mode: 'roundtrip-padded' },
   beale:                  { key: 'when in the course of human events it becomes necessary for one people to dissolve the political bands which have connected them with another people and to assume among the powers of the earth the separate and equal station to which the laws of nature and of natures god entitle them',
                             mode: 'beale' },
   copiale:                { key: 'COPIALE',                          mode: 'random-key' },

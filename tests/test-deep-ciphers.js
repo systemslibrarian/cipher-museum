@@ -162,6 +162,17 @@ section('Playfair — Digraph Rules');
   eq('two-letter message roundtrip', clean(pf.decode(short, 'KEY')), 'AB');
   // Different keywords produce different ciphertext
   neq('different keys differ', pf.encode('HELLO', 'ALPHA'), pf.encode('HELLO', 'BRAVO'));
+  // Wikipedia known-answer vector
+  eq('Wikipedia KAT encode', pf.encode('hide the gold in the tree stump', 'PLAYFAIREXAMPLE'),
+     'BMODZBXDNABEKUDMUIXMMOUVIF');
+  eq('Wikipedia KAT decode', pf.decode('BMODZBXDNABEKUDMUIXMMOUVIF', 'PLAYFAIREXAMPLE'),
+     'HIDETHEGOLDINTHETREESTUMP');
+  // Doubled X uses Q filler (an X,X digraph is invalid) and roundtrips
+  eq('doubled X roundtrip', pf.decode(pf.encode('XX', 'MONARCHY'), 'MONARCHY'), 'XX');
+  eq('FOXX roundtrip', pf.decode(pf.encode('FOXX', 'MONARCHY'), 'MONARCHY'), 'FOXX');
+  // Decode must not inject filler into ciphertext containing aligned doubles
+  ok('decode output never longer than ciphertext',
+     pf.decode('ZZZZ', 'MONARCHY').length <= 4);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -682,6 +693,25 @@ section('Repeated Characters — Frequency Resistance');
   // Enigma: same letter → all different (rotor stepping)
   const enigEnc = clean(E.enigma.encode('AAAAAA', 'AAA'));
   ok('enigma: 6×A → all different', new Set(enigEnc.split('')).size > 1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SOLITAIRE — Schneier's published test vectors
+   ═══════════════════════════════════════════════════════════════ */
+section('Solitaire — Schneier Known Answers');
+{
+  const s = E.solitaire;
+  // Vectors from Schneier's Solitaire spec (schneier.com/academic/solitaire)
+  eq('unkeyed deck, 15×A', s.encode('AAAAAAAAAAAAAAA', '1'), 'EXKYIZSGEHUNTIQ');
+  eq('key FOO, 15×A', s.encode('AAAAAAAAAAAAAAA', 'FOO'), 'ITHZUJIWGRFARMW');
+  eq('key A, 15×A', s.encode('AAAAAAAAAAAAAAA', 'A'), 'XODALGSCULIQNSC');
+  // Cryptonomicon vector — requires X-padding to a multiple of 5
+  eq('SOLITAIRE/CRYPTONOMICON', s.encode('SOLITAIRE', 'CRYPTONOMICON'), 'KIRAKSFJAN');
+  // Decode keeps the X pad (filler by convention; stripping could eat a real X)
+  eq('decode keeps pad', s.decode('KIRAKSFJAN', 'CRYPTONOMICON'), 'SOLITAIREX');
+  // Multiple-of-5 plaintext is unpadded and roundtrips exactly
+  eq('exact roundtrip ×5', s.decode(s.encode('DONOTUSEPC', 'CRYPTONOMICON'), 'CRYPTONOMICON'),
+     'DONOTUSEPC');
 }
 
 /* ═══════════════════════════════════════════════════════════════

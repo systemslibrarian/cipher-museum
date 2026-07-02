@@ -126,9 +126,12 @@ window.CipherEngines = (() => {
     }
     function pos(grid, ch) { const i = grid.indexOf(ch); return [Math.floor(i / 5), i % 5]; }
     function pairs(text) {
+      // Filler is X, except when the letter needing a filler IS X — then use Q,
+      // since a same-letter digraph (X,X) cannot be enciphered by Playfair rules.
       let t = clean(text).replace(/J/g, 'I'), p = [], i = 0;
       while (i < t.length) {
-        const a = t[i], b = (i + 1 < t.length && t[i + 1] !== a) ? t[++i] : 'X';
+        const a = t[i];
+        const b = (i + 1 < t.length && t[i + 1] !== a) ? t[++i] : (a === 'X' ? 'Q' : 'X');
         p.push([a, b]); i++;
       }
       return p;
@@ -145,17 +148,28 @@ window.CipherEngines = (() => {
     return {
       encode: (t, k) => process(pairs(t), makeGrid(k), true),
       decode: (t, k) => {
-        const raw = process(pairs(t), makeGrid(k), false);
-        // Playfair encode inserts 'X' between doubled letters and pads odd-length
-        // plaintext with a trailing 'X'. Strip those helper X's on decode so the
-        // roundtrip recovers the original plaintext (J/I merging is intrinsic
-        // to the 5x5 grid and cannot be reversed).
+        // Ciphertext is already valid digraphs — split it straight. Running it
+        // through pairs() would inject filler letters INTO the ciphertext
+        // whenever it happens to contain an aligned doubled letter.
+        const c = clean(t).replace(/J/g, 'I');
+        const ps = [];
+        for (let i = 0; i + 1 < c.length; i += 2) ps.push([c[i], c[i + 1]]);
+        const raw = process(ps, makeGrid(k), false);
+        // Playfair encode inserts a filler (X, or Q around X) between doubled
+        // letters and pads odd-length plaintext. Strip those fillers on decode
+        // so the roundtrip recovers the original plaintext (J/I merging is
+        // intrinsic to the 5x5 grid and cannot be reversed).
         let out = '';
         for (let i = 0; i < raw.length; i++) {
-          if (raw[i] === 'X' && i > 0 && i < raw.length - 1 && raw[i - 1] === raw[i + 1]) continue;
-          out += raw[i];
+          const ch = raw[i];
+          // A filler is always the second letter of its digraph, so it can only
+          // sit at an odd index — never strip letters at even positions.
+          const filler = i % 2 === 1 && i < raw.length - 1 && raw[i - 1] === raw[i + 1] &&
+                         (ch === 'X' || (ch === 'Q' && raw[i - 1] === 'X'));
+          if (filler) continue;
+          out += ch;
         }
-        if (out.endsWith('X')) out = out.slice(0, -1);
+        if (out.endsWith('X') || (out.endsWith('Q') && out[out.length - 2] === 'X')) out = out.slice(0, -1);
         return out;
       }
     };
@@ -1513,6 +1527,10 @@ window.CipherEngines = (() => {
 
   /* ─── 41. Four-Square Cipher (Delastelle) ─── */
   const foursquare = (() => {
+    // Uses the ACA convention (25 letters, J merged into I) — documented on the
+    // exhibit page and baked into the published corpus records. Note Wikipedia's
+    // four-square example instead omits Q, so its vector (HELPMEOBIWANKENOBI →
+    // FYGMKYHOBXMFKKKIMD) will not match; the digraph rule itself is identical.
     const G = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'; // 25 letters, J→I
     function makeSquare(key) {
       const k = clean(key || 'EXAMPLE').replace(/J/g, 'I');
@@ -1788,7 +1806,12 @@ window.CipherEngines = (() => {
     }
     function run(text, key, enc) {
       let deck = initDeck(key);
-      const t = clean(text); let out = '';
+      let t = clean(text); let out = '';
+      // Schneier's spec pads the plaintext with X to a multiple of five before
+      // encrypting; his published test vectors (e.g. SOLITAIRE/CRYPTONOMICON →
+      // KIRAK SFJAN) require it. Padding stays in the decoded output — both
+      // sides know trailing X is filler.
+      if (enc) while (t.length % 5) t += 'X';
       for (const ch of t) {
         const r = nextKeystream(deck); deck = r.deck;
         const p = ch.charCodeAt(0) - 64;
