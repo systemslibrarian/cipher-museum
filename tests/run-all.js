@@ -14,7 +14,8 @@ const suites = [
   'tests/test-demo-pages.js',
   'tests/test-playground.js',
   'tests/test-structural.js',
-  'tests/test-local-links.js'
+  'tests/test-local-links.js',
+  'tests/test-min-fresh.js'
 ];
 
 for (const suite of suites) {

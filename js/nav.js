@@ -127,10 +127,27 @@
     el.setAttribute('aria-hidden', 'true');
   });
 
+  /* ── "/" focuses search from anywhere ─────────────────── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+    var q = document.getElementById('q');
+    e.preventDefault();
+    if (q) { q.focus(); q.select(); }
+    else { location.href = pre + 'search.html'; }
+  });
+
+  /* ── Offline support ──────────────────────────────────── */
+  if ('serviceWorker' in navigator &&
+      (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    navigator.serviceWorker.register(pre + 'sw.js').catch(function () {});
+  }
+
   /* ── Auto-load companion scripts ─────────────────────── */
   var companions = ['breadcrumbs.js', 'footer.js', 'ui-delegates.js'];
   if (/\/ciphers\//.test(path)) {
-    companions.push('artifact-cards-data.js', 'artifact-cards.js');
+    companions.push('artifact-cards-data.min.js', 'artifact-cards.js');
   }
 
   companions.forEach(function(f){

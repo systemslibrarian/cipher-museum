@@ -861,3 +861,23 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
 .trust-legend__item{display:flex;flex-direction:column;gap:.4rem;padding:1rem;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl)}
 .trust-legend__item .trust-label{margin:0;cursor:default;align-self:flex-start}
 .trust-legend__desc{font-family:var(--fb);font-size:.92rem;color:var(--tx2);line-height:1.6}
+
+/* ═══ Print stylesheet — exhibit pages as clean classroom handouts ═══ */
+@media print {
+  :root{--s1:#fff;--s2:#fff;--s3:#fff;--s4:#bbb;--s5:#999;--tx:#000;--tx2:#222;--tx3:#444;
+        --gold:#5c4b26;--gold-lt:#5c4b26;--gold-dim:#5c4b26;--gold-glow:transparent}
+  *{background:#fff !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}
+  body{font-size:11pt;line-height:1.5}
+  /* Chrome that has no meaning on paper */
+  .museum-nav,.ticker-strip,.museum-footer,footer,.skip-link,.nav-hamburger,
+  .lightbox,.demo-section,.breadcrumbs,button,.btn,.reveal:not(.visible),
+  .ch-progress,.trust-label-wrap svg{display:none !important}
+  .reveal{opacity:1 !important;transform:none !important}
+  a{color:#000 !important;text-decoration:underline}
+  /* Show destinations for external references (books, archives) */
+  .panel-body a[href^="http"]::after{content:" (" attr(href) ")";font-size:.78em;color:#444 !important;word-break:break-all}
+  .panel,.fact,.exhibit-side,.trust-legend__item{border:1px solid #bbb !important;page-break-inside:avoid}
+  h1,h2,h3{page-break-after:avoid}
+  pre{white-space:pre-wrap;border:1px solid #bbb;padding:.5rem}
+  img{max-width:100% !important;filter:none !important}
+}

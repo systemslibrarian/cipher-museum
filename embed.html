@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Demo — The Cipher Museum</title>
+  <meta name="description" content="Embeddable interactive cipher demo from The Cipher Museum.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="stylesheet" href="css/museum.css">
+  <style>
+    body{padding:.75rem;min-height:0}
+    .embed-header{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.6rem}
+    .embed-header h1{font-size:.72rem;font-family:var(--fm);letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);margin:0;font-weight:400}
+    .embed-credit{font-family:var(--fm);font-size:.68rem;color:var(--gold);text-decoration:none;white-space:nowrap}
+    .embed-credit:hover{text-decoration:underline}
+    .embed-error{border:1px dashed var(--s5);border-radius:var(--rl);padding:1.5rem;text-align:center;color:var(--tx3);font-family:var(--fm);font-size:.85rem}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content">
+  <div class="embed-header">
+    <h1 id="embed-title">Interactive Cipher Demo</h1>
+    <a class="embed-credit" href="https://ciphermuseum.com/" target="_blank" rel="noopener">The Cipher Museum ↗</a>
+  </div>
+  <div class="demo-section" id="embed-demo"></div>
+</main>
+<script>
+  // Chrome-less embeddable demo: /embed.html?cipher=caesar
+  // The cipher name is validated against a strict pattern, then handed to the
+  // same demo-loader that renders exhibit-page demos.
+  (function () {
+    'use strict';
+    var m = /[?&]cipher=([A-Za-z]{1,40})(?:&|$)/.exec(location.search);
+    var el = document.getElementById('embed-demo');
+    if (m) {
+      el.setAttribute('data-cipher', m[1]);
+      document.getElementById('embed-title').textContent = 'Interactive Demo — ' + m[1];
+      document.title = m[1] + ' Demo — The Cipher Museum';
+    } else {
+      el.innerHTML = '<p class="embed-error">No cipher specified. Use embed.html?cipher=caesar (or vigenere, playfair, railFence…)</p>';
+    }
+    // If the loader doesn't recognise the cipher, replace the spinner text.
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        if (el.hasAttribute('data-cipher') && !el.querySelector('input, select, textarea, button')) {
+          el.innerHTML = '<p class="embed-error">Unknown cipher "' + el.getAttribute('data-cipher').replace(/[^A-Za-z]/g, '') + '". Check the demo name on its exhibit page.</p>';
+        }
+      }, 400);
+    });
+  })();
+</script>
+<script src="js/ciphers/all-engines.min.js"></script>
+<script src="js/demo-loader.min.js"></script>
+</body>
+</html>

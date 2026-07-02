@@ -537,6 +537,51 @@
       outputBox.innerHTML = '<span class="output-empty">Result appears here…</span>';
     });
 
+    // Embed affordance — teachers can drop any demo into their own page.
+    // Hidden on the embed page itself and when already inside an iframe.
+    const isEmbedPage = /embed\.html$/.test(location.pathname);
+    let framed = false;
+    try { framed = window.self !== window.top; } catch { framed = true; }
+    if (!isEmbedPage && !framed) {
+      const snippet = '<iframe src="https://ciphermuseum.com/embed.html?cipher=' + cipherName +
+        '" width="100%" height="520" style="border:1px solid #2e2e3a;border-radius:8px" ' +
+        'title="' + config.label + ' interactive demo — The Cipher Museum" loading="lazy"></iframe>';
+      const embed = document.createElement('details');
+      embed.className = 'demo-embed';
+      embed.style.cssText = 'margin-top:.5rem;font-family:var(--fm);font-size:.72rem;color:var(--tx3);';
+      const summary = document.createElement('summary');
+      summary.textContent = '‹/› Embed this demo on your own page';
+      summary.style.cssText = 'cursor:pointer;letter-spacing:.06em;';
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap;';
+      const field = document.createElement('input');
+      field.type = 'text';
+      field.readOnly = true;
+      field.value = snippet;
+      field.setAttribute('aria-label', 'Embed code for this demo');
+      field.className = 'museum-input';
+      field.style.cssText = 'flex:1;min-width:220px;font-size:.7rem;';
+      field.addEventListener('focus', () => field.select());
+      const copy = document.createElement('button');
+      copy.type = 'button';
+      copy.className = 'btn btn-secondary';
+      copy.textContent = 'Copy';
+      copy.addEventListener('click', () => {
+        const done = () => {
+          copy.textContent = 'Copied!';
+          setTimeout(() => { copy.textContent = 'Copy'; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(snippet).then(done, () => field.select());
+        } else { field.select(); try { document.execCommand('copy'); done(); } catch {} }
+      });
+      row.appendChild(field);
+      row.appendChild(copy);
+      embed.appendChild(summary);
+      embed.appendChild(row);
+      container.appendChild(embed);
+    }
+
     // Auto-run on load for instant feedback
     runBtn.click();
   }

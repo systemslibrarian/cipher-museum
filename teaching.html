@@ -7,6 +7,7 @@
   <meta name="description" content="Teaching and overview page for the Cipher Corpus: learn about classical ciphers, cryptanalysis, and how to use the benchmark dataset.">
   <meta name="keywords" content="cipher corpus, teaching, cryptanalysis, classical ciphers, education, benchmark, reproducibility, open data, schema">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="css/museum.css">
 </head>
 <body>
@@ -48,6 +49,22 @@
         <li>Use the schema for integration and validation</li>
         <li>Publish results with reproducibility receipts</li>
       </ul>
+
+      <h2 id="accuracy">Engine Accuracy &amp; Provenance</h2>
+      <p>Every interactive cipher engine in the museum is verified against published
+      known-answer test vectors, not just internal roundtrips:</p>
+      <ul>
+        <li>Bruce Schneier's four published Solitaire/Pontifex vectors (including <code>SOLITAIRE</code> / <code>CRYPTONOMICON</code> → <code>KIRAK SFJAN</code>)</li>
+        <li>Wikipedia and Practical Cryptography known answers for Playfair, Hill, Rail Fence, Bifid, Nihilist, and others</li>
+        <li>A 100,000+-record corpus with a 100% decode-roundtrip validation pass on every release</li>
+        <li>An automated suite of 9,000+ checks (engines, demos, accessibility, structure) run on every change</li>
+      </ul>
+      <p>Where an engine follows a specific historical convention (for example, the
+      Four-square exhibit uses the ACA 25-letter I/J-merged alphabet rather than
+      Wikipedia's Q-omitted example), the exhibit page documents that choice. The
+      test suites are public in the
+      <a href="https://github.com/systemslibrarian/cipher-museum/tree/main/tests" rel="noopener">GitHub repository</a>
+      if you want to inspect or re-run them.</p>
 
       <h2>Resources</h2>
       <ul>

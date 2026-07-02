@@ -34,7 +34,8 @@
     ['challenges.html',          'Challenges'],
     ['lab/workbench.html',       "Codebreaker's Workbench"],
     ['cryptanalysis.html',       'Cryptanalysis Techniques'],
-    ['glossary.html',            'Glossary']
+    ['glossary.html',            'Glossary'],
+    ['teaching.html#accuracy',   'Engine Accuracy']
   ];
 
   function listHtml(items) {

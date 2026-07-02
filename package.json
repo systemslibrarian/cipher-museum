@@ -16,6 +16,7 @@
     "test:links": "node tests/test-local-links.js",
     "validate:corpus": "node scripts/validate-corpus-v0.2.js public/corpus/all.jsonl",
     "build:search-index": "node scripts/build-search-index.js",
+    "build:js": "node scripts/build-min.js",
     "lint:html": "htmlhint \"ciphers/*.html\" \"halls/*.html\" \"*.html\" \"lab/*.html\" \"tours/*.html\" \"community/*.html\""
   },
   "repository": {
@@ -26,7 +27,8 @@
   "type": "commonjs",
   "devDependencies": {
     "htmlhint": "^1.9.2",
-    "jsdom": "^24.0.0"
+    "jsdom": "^24.0.0",
+    "terser": "^5.48.0"
   },
   "dependencies": {
     "ajv": "^8.20.0",

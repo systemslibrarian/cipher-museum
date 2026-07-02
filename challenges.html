@@ -9,12 +9,18 @@
   <meta property="og:description" content="Break real ciphers. Six progressively harder challenges — from Caesar to Enigma.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/challenges.html">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Cipher Museum — an interactive history of encryption">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cipher Challenges — The Cipher Museum">
   <meta name="twitter:description" content="Break real ciphers. Six progressively harder challenges — from Caesar to Enigma.">
+  <meta name="twitter:image" content="https://ciphermuseum.com/images/og/og-default.png">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/challenges.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="css/museum.css">
   <style>
     .challenges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
@@ -60,6 +66,9 @@
     .ch-progress-bar{flex:1;height:6px;background:var(--s4);border-radius:3px;overflow:hidden}
     .ch-progress-fill{height:100%;background:var(--gold);border-radius:3px;transition:width 500ms ease;width:0%}
     .ch-progress-label{font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);white-space:nowrap}
+    .ch-share-btn{background:var(--s3);border:1px solid var(--s5);border-radius:var(--r);color:var(--tx2);font-family:var(--fm);font-size:.68rem;letter-spacing:.08em;padding:.45rem .8rem;cursor:pointer;white-space:nowrap;transition:border-color 150ms ease,color 150ms ease}
+    .ch-share-btn:hover{border-color:var(--gold);color:var(--gold)}
+    .ch-share-status{font-family:var(--fm);font-size:.68rem;color:var(--gold);white-space:nowrap}
     .ch-congrats{display:none;max-width:800px;margin:2rem auto;text-align:center;padding:3rem;background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border:1px solid var(--gold-b);border-radius:var(--rx)}
     .ch-congrats.visible{display:block}
     .ch-congrats h2{font-family:var(--fd);font-size:2rem;color:var(--gold);margin-bottom:1rem}
@@ -109,6 +118,8 @@
   <div class="ch-progress">
     <span class="ch-progress-label" id="progress-text">0 of 10 solved</span>
     <div class="ch-progress-bar"><div class="ch-progress-fill" id="progress-fill"></div></div>
+    <button type="button" id="share-progress" class="ch-share-btn" title="Copy a shareable summary of your progress">📋 Share</button>
+    <span id="share-status" role="status" aria-live="polite" class="ch-share-status"></span>
   </div>
 
   <div class="challenges-grid" id="challenges-container"></div>
@@ -126,7 +137,7 @@
 
 <footer></footer>
 
-<script src="js/ciphers/all-engines.js"></script>
+<script src="js/ciphers/all-engines.min.js"></script>
 <script>
 'use strict';
 (function() {
@@ -363,6 +374,30 @@
     if (e.key === 'Enter' && e.target.classList.contains('ch-input')) {
       const level = parseInt(e.target.id.replace('input-', ''));
       if (level) window.checkAnswer(level);
+    }
+  });
+
+  // Copy a Wordle-style shareable summary of progress
+  document.getElementById('share-progress').addEventListener('click', () => {
+    const state = getState();
+    const squares = CHALLENGES.map(c => state['ch' + c.level] ? '🟩' : '⬛').join('');
+    const solved = CHALLENGES.filter(c => state['ch' + c.level]).length;
+    const text = '🔐 The Cipher Museum — Challenges ' + solved + '/' + CHALLENGES.length +
+                 '\n' + squares + '\nhttps://ciphermuseum.com/challenges.html';
+    const status = document.getElementById('share-status');
+    const done = () => {
+      status.textContent = 'Copied!';
+      setTimeout(() => { status.textContent = ''; }, 2500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, () => { status.textContent = text; });
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch { status.textContent = text; }
+      ta.remove();
     }
   });
 

@@ -437,8 +437,8 @@ let hasDemo = 0, hasScripts = 0;
 for (const file of htmlFiles) {
   const content = fs.readFileSync(path.join(ciphersDir, file), 'utf8');
   const hasDemoSection = content.includes('demo-section');
-  const hasLoader = content.includes('demo-loader.js');
-  const hasEngines = content.includes('all-engines.js') || content.includes('caesar.js');
+  const hasLoader = /demo-loader(\.min)?\.js/.test(content);
+  const hasEngines = /all-engines(\.min)?\.js/.test(content) || content.includes('caesar.js');
 
   if (hasDemoSection) hasDemo++;
   if (hasLoader) hasScripts++;
