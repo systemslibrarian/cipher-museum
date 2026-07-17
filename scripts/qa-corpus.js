@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 // scripts/qa-corpus.js — Comprehensive Cipher Corpus QA
+//
+// DEPRECATED (2026-07): superseded by tests/engines/corpus-replay.js, which
+// replays the canonical public/corpus/all.jsonl with exact pinned accounting
+// (run via `npm run test:engines`). This script predates the 2026 engine
+// verification sweep and now reports ~52 roundtrip failures for records that
+// store the pre-sweep lossy padding format (playfair, hill, scytale, stager,
+// four_square, two_square, slidex) — those are documented known deviations in
+// the replay, not engine bugs. Kept for corpus-generation history only.
 
 'use strict';
 global.window = global;

@@ -82,7 +82,14 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>Each Slidex card carries a 17×17 grid (or 12×12 in some issues). The rows and columns are headed by mixed alphabets that change daily. Inside each cell is a printed bigram (e.g. “BT”, “QM”) drawn from a pool of 289 distinct two-letter combinations. To encrypt:</p><ol style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li>Find your plaintext bigram by locating its two letters as the row label and column label.</li><li>Read off the cipher bigram printed in that cell.</li></ol><p style="margin-top:1rem;">A sliding paper strip lets the operator change the row alphabet rapidly, giving a polyalphabetic flavour to long messages. Decryption reverses the lookup.</p><p style="margin-top:1rem;">The demo above builds a deterministic 26×26 Slidex card from your seed and substitutes plaintext bigrams accordingly. Odd-length messages are padded with X (the standard Slidex convention).</p></div>
+      <div class="panel-body"><p>Each Slidex card carries a 17×17 grid (or 12×12 in some issues). The rows and columns are headed by mixed alphabets that change daily. Inside each cell is a printed bigram (e.g. “BT”, “QM”) drawn from a pool of 289 distinct two-letter combinations. To encrypt:</p><ol style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li>Find your plaintext bigram by locating its two letters as the row label and column label.</li><li>Read off the cipher bigram printed in that cell.</li></ol><p style="margin-top:1rem;">A sliding paper strip lets the operator change the row alphabet rapidly, giving a polyalphabetic flavour to long messages. Decryption reverses the lookup.</p><p style="margin-top:1rem;">The demo above builds a deterministic 26×26 Slidex card from your seed and substitutes plaintext bigrams accordingly. Odd-length messages are padded with X (the standard Slidex convention).</p>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> To guarantee that Decrypt exactly restores your original message, this demo reversibly escapes the letters X, Q, and Z (as ZA, ZB, ZC) before enciphering, so padding and filler X can never be confused with a real letter. Messages containing X, Q, or Z therefore produce slightly different ciphertext than a strictly classical Slidex would. Odd-length messages are padded with a trailing X.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="panel">

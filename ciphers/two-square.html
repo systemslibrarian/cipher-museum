@@ -90,7 +90,14 @@
       <div class="panel-body"><p>Arrange two keyed 5×5 squares horizontally. For each digram, look up the first letter in the left square and the second in the right square. Read the ciphertext from the opposite corners of the rectangle they form.<br><br><pre>If the two letters share a row → leave them unchanged.
 Otherwise:
   cipher[0] = left[ row(L), col(R) ]
-  cipher[1] = right[ row(R), col(L) ]</pre></p></div>
+  cipher[1] = right[ row(R), col(L) ]</pre></p>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> To guarantee that Decrypt exactly restores your original message, this demo reversibly escapes the letters X, Q, and Z (as ZA, ZB, ZC) before enciphering, so padding and filler X can never be confused with a real letter. Messages containing X, Q, or Z therefore produce slightly different ciphertext than a strictly classical two-square cipher would. Odd-length messages are padded with a trailing X.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="panel">

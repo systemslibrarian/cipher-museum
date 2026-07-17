@@ -121,7 +121,13 @@ C XOR K = P  (XOR is its own inverse)
 When key tape is:
   Random + same length + used once → One-Time Pad (unbreakable)
   Repeating or non-random          → Vigenère-equivalent (breakable)</pre>
-        <p style="margin-top:1rem;">The elegance of XOR is that encryption and decryption are the same operation. There is no separate decryption algorithm — just XOR the ciphertext with the same key, and the plaintext reappears.</p>
+        <p style="margin-top:1rem;">The elegance of XOR is that applying the same key a second time returns the plaintext: C XOR K = P. There is no separate decryption <em>algorithm</em> — the demo's Decrypt button simply reads the hex bytes back in and XORs them with the key again.</p>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> Plaintext is normalized to the letters A–Z, XORed byte-by-byte with the key, and the ciphertext is displayed as two hexadecimal digits per byte — so Decrypt expects hex input, not letters. Leave the key blank and the demo generates a random pad using the browser's secure random source, appending it to the output as <code>[Key: …]</code>. A key shorter than the message is rejected rather than repeated, and a raw byte key can be supplied as <code>hex:&lt;bytes&gt;</code>.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -165,11 +171,11 @@ When key tape is:
         <span class="panel-title" style="color:var(--gold);">Can You Break This?</span>
       </div>
       <div class="panel-body">
-        <p style="font-size:.9rem;margin-bottom:1rem;">A short Vernam cipher message. Use what you just learned.</p>
-        <div style="font-family:var(--fm);font-size:.95rem;background:var(--s3);border-radius:var(--r);padding:1.25rem;letter-spacing:.15em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">11001010  10110111  01011101</div>
-        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Key: 10101010  10101010  10101010 · Hint: XOR each bit. What do you get?</p>
+        <p style="font-size:.9rem;margin-bottom:1rem;">A short Vernam message, exactly as the demo above produces it. Use what you just learned.</p>
+        <div style="font-family:var(--fm);font-size:.95rem;background:var(--s3);border-radius:var(--r);padding:1.25rem;letter-spacing:.15em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">0c0a1517</div>
+        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Key: KEYS · Hint: each pair of hex digits is one XORed byte. Paste ciphertext and key into the demo above, or work the XOR by hand.</p>
         <button class="btn btn-secondary" style="width:100%;font-size:.72rem;" data-reveal-next>Reveal Answer</button>
-        <div style="display:none;font-family:var(--fm);font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;background:var(--s3);border-radius:var(--r);padding:1rem;line-height:1.8;">01100000  00011101  11110111 → plaintext bytes</div>
+        <div style="display:none;font-family:var(--fm);font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;background:var(--s3);border-radius:var(--r);padding:1rem;line-height:1.8;">GOLD — first byte: G = 01000111, K = 01001011, XOR = 00001100 = hex 0c.</div>
       </div>
     </div>
 

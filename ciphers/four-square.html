@@ -91,7 +91,14 @@
 │  PLAIN A→Z  │  KEY 1      │
 ├─────────────┼─────────────┤
 │  KEY 2      │  PLAIN A→Z  │
-└─────────────┴─────────────┘</pre>To encrypt a digram: locate the first letter in the top-left and the second in the bottom-right. Read the cipher digram from the top-right (row of letter 1, column of letter 2) and the bottom-left (row of letter 2, column of letter 1).</p></div>
+└─────────────┴─────────────┘</pre>To encrypt a digram: locate the first letter in the top-left and the second in the bottom-right. Read the cipher digram from the top-right (row of letter 1, column of letter 2) and the bottom-left (row of letter 2, column of letter 1).</p>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> To guarantee that Decrypt exactly restores your original message, this demo reversibly escapes the letters X, Q, and Z (as ZA, ZB, ZC) before enciphering, so padding and filler X can never be confused with a real letter. Messages containing X, Q, or Z therefore produce slightly different ciphertext than a strictly classical four-square cipher would. Odd-length messages are padded with a trailing X.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="panel">

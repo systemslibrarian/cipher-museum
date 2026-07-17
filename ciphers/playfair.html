@@ -243,6 +243,12 @@
             <div id="pf-grid-pair" class="key-square"></div>
           </div>
         </div>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> The interactive widget on this page follows the classical convention: an X filler splits doubled letters (Q when the doubled letter is X itself) and pads an odd-length message. The museum's shared Playfair engine additionally escapes literal X, Q, and Z (as ZA, ZB, ZC) so decryption can exactly restore any message — so ciphertext for messages containing X, Q, or Z differs slightly between the widget and the shared engine.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -296,11 +302,11 @@
       </div>
       <div class="panel-body">
         <p>Decrypt this ciphertext using keyword <strong>PLAYFAIR</strong>:</p>
-        <pre style="margin:.75rem 0;font-size:1.1rem;color:var(--gold-lt);letter-spacing:.2em;">BM ND ZB ND</pre>
+        <pre style="margin:.75rem 0;font-size:1.1rem;color:var(--gold-lt);letter-spacing:.2em;">KG AL EG</pre>
         <details>
           <summary style="cursor:pointer;color:var(--gold-dim);font-family:var(--fm);font-size:.75rem;letter-spacing:.1em;">Reveal Answer</summary>
           <p style="margin-top:.5rem;color:var(--green);font-family:var(--fm);letter-spacing:.15em;">HE LP ME</p>
-          <p style="margin-top:.25rem;font-size:.85rem;color:var(--tx2);">Keyword PLAYFAIR produces the square: P L A Y F / I R B C D / E G H K M / N O Q S T / U V W X Z. The digraphs BM ND ZB ND decrypt to HE LP ME XZ — drop the trailing pad X.</p>
+          <p style="margin-top:.25rem;font-size:.85rem;color:var(--tx2);">Keyword PLAYFAIR produces the square: P L A Y F / I R B C D / E G H K M / N O Q S T / U V W X Z. Each digraph of HELPME (HE, LP, ME) sits in a single row of the square, so every letter shifts one place left to decrypt: KG&nbsp;→&nbsp;HE, AL&nbsp;→&nbsp;LP, EG&nbsp;→&nbsp;ME.</p>
         </details>
       </div>
     </div>

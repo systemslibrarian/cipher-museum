@@ -8,5 +8,7 @@ Two small things to remember going forward:
    renders where you plan to share the site.
 
 Good luck with the award run — the accuracy story you now have (published test
-vectors, 100% corpus validation, public test suite) is a genuinely rare
-differentiator for an educational site.
+vectors, per-engine spec suite, a pinned replay of all 100,026 corpus records
+with zero unexplained failures, public test suite) is a genuinely rare
+differentiator for an educational site. The authoritative engine check is
+`npm run test:engines`; `scripts/qa-corpus.js` is deprecated (see its header).

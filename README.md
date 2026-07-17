@@ -335,7 +335,7 @@ cipher-museum/
 │   ├── hill-climbing-solver.js  ← Monoalphabetic solver: hill climbing + quadgram scoring
 │   ├── sa-solver.js             ← Simulated annealing solver (better on short ciphertexts)
 │   ├── build-quadgrams.js       ← Regenerates quadgram stats from corpus plaintext
-│   ├── qa-corpus.js             ← Comprehensive corpus QA: roundtrip, KAT, schema
+│   ├── qa-corpus.js             ← DEPRECATED corpus QA (superseded by tests/engines/corpus-replay.js)
 │   ├── generate-corpus-v*.js    ← Corpus generation batch scripts (v1–v3)
 │   └── data/
 │       └── english-quadgrams.json  ← 8,877 quadgram log-probabilities (896K observations)
@@ -344,6 +344,11 @@ cipher-museum/
 ├── tours/                    ← Guided learning paths
 ├── community/                ← Community discussion and write-up space
 └── tests/
+    ├── engines/               ← Engine verification suite (per-engine specs, KATs, corpus replay)
+    │   ├── run.js             ← Master runner for `npm run test:engines`
+    │   ├── specs/             ← One spec file per engine (84): fast-check properties + robustness
+    │   ├── helpers/           ← Shared contracts, canonicalization, known-answer registry
+    │   └── corpus-replay.js   ← Pinned replay of all 100,026 published corpus records
     ├── test-all-engines.js    ← Engine roundtrip & known-answer tests
     ├── test-deep-ciphers.js   ← Edge cases & stress tests
     ├── test-comprehensive.js  ← Cross-cipher invariants across the collection
@@ -391,13 +396,19 @@ cipher-museum/
 
 ## 🧪 Testing
 
-The museum ships with **eight test harnesses, all green.** They cover everything from the cipher engines themselves to the rendered DOM a visitor actually clicks on, plus a local link checker that verifies every relative `href`/`src` resolves.
+The museum ships with two layers of tests, **all green**: the site suites (rendered DOM, accessibility, links, demo pages) and a dedicated engine verification suite governed by [docs/CIPHER_ENGINE_STANDARD.md](docs/CIPHER_ENGINE_STANDARD.md).
 
 ```bash
-# One-time setup (only needed for the demo-page simulator)
+# One-time setup (needed for the demo-page simulator and fast-check)
 npm install
 
-# Run any suite individually …
+# Engine verification suite — 84 per-engine spec files (fast-check property
+# roundtrips, robustness, invalid keys, Unicode policy, state isolation, one
+# fixed KAT each), the legacy KAT suites, full Enigma vectors, and a pinned
+# replay of all 100,026 published corpus records (0 unexplained failures):
+npm run test:engines                # tests/engines/run.js
+
+# Run any site suite individually …
 node tests/test-all-engines.js      # 443 — engine roundtrip & known-answer tests across 84 engines
 node tests/test-deep-ciphers.js     # 238 — edge cases & stress tests
 node tests/test-comprehensive.js    # 1848 — cross-cipher invariants across the collection
@@ -408,7 +419,6 @@ node tests/test-demo-pages.js       #  789 — end-to-end JSDOM simulation of ev
 node tests/test-local-links.js      # 4945 — local href/src link checker across 176 HTML files
 
 # … or via npm scripts
-npm run test:engines
 npm run test:deep
 npm run test:comprehensive
 npm run test:a11y
@@ -416,7 +426,7 @@ npm run test:mobile
 npm run test:structural
 npm run test:demos
 npm run test:links
-npm test                            # runs every suite end-to-end
+npm test                            # runs every site suite end-to-end (CI runs test:engines first)
 ```
 
 `test-demo-pages.js` is the strongest correctness proof: it loads every `ciphers/*.html` page in JSDOM with the real scripts inlined, lets `js/demo-loader.js` build the demo UI, then **clicks the actual on-page Encrypt and Decrypt buttons** and verifies the ciphertext roundtrips back to the original plaintext through the rendered DOM — exactly what a visitor sees. Hand-built pages (Caesar, Playfair, Vigenère, Zodiac) get dedicated assertions against canonical KATs (Caesar shift-3 → `WKHTXLFNEURZQIRA`, Vigenère `LEMON` → `LXFOPVEFRNHR`, Playfair `MONARCHY` decode, Zodiac Z408 reveal).

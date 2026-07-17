@@ -96,6 +96,12 @@
 5. Look at the top card's value N. Count N cards down. The next card
    (mod 26) is the keystream output. If it is a joker, repeat from step 1.</pre>Encryption is then a simple Vigenère-style shift: <code>c = (p + k - 1) mod 26 + 1</code>.</p>
       <p style="font-size:.82rem;color:var(--tx3);margin-top:.5rem;">Procedure adapted from Schneier's specification; see the plain-language walkthrough at <a href="https://steemit.com/steemiteducation/@shai-hulud/solitaire-encryption-low-tech-high-security-a-how-to" target="_blank" rel="noopener">@shai-hulud · Solitaire Encryption: Low-Tech High-Security How-To</a>.</p>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> To guarantee that Decrypt exactly restores your original message, this demo reversibly escapes the letters X, Q, and Z (as ZA, ZB, ZC) before enciphering, so padding and filler X can never be confused with a real letter. Messages containing X, Q, or Z therefore produce slightly different ciphertext than a strictly classical Solitaire would. Encryption pads to a multiple of five letters with X, per Schneier's specification.</p>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -1,5 +1,14 @@
 # Cipher Engine Verification Sweep Summary
 
+> **Snapshot note (2026-07-17):** this file is the handoff summary written at
+> the end of the sweep and is not maintained. The canonical, up-to-date record
+> is [docs/ENGINE_AUDIT.md](docs/ENGINE_AUDIT.md) (findings and remediation),
+> [docs/ENGINE_INVENTORY.md](docs/ENGINE_INVENTORY.md) (per-engine table), and
+> [docs/CIPHER_ENGINE_STANDARD.md](docs/CIPHER_ENGINE_STANDARD.md) (contract).
+> A post-sweep review subsequently fixed a `hill` invalid-key defect, corrected
+> several exhibit examples, added demo disclosure notes, and hardened the
+> corpus replay — see the audit's "Post-Sweep Review Remediation" section.
+
 This repository completed a full verification sweep of the 84 cipher engines
 registered in `window.CipherEngines`.
 

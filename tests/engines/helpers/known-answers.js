@@ -3,6 +3,14 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
 
+// Two classes of vector live here:
+//  1. Derived KATs — the expected value comes from a published source or a
+//     hand-computable derivation that never consults the engine.
+//  2. Pinned regression vectors — for seeded pedagogical machine models whose
+//     output cannot be derived by hand, the expected value was captured from
+//     the audited implementation. They lock the behavior against regressions
+//     but are NOT independent evidence of correctness; each is labeled
+//     "pinned regression vector" (see docs/ENGINE_AUDIT.md, KAT provenance).
 const KATS = {
   // Caesar definition: A shifted once is B. See Suetonius, Divus Julius 56.
   caesar: kat('B', engine => engine.encode('A', '1'), 'Caesar shift definition'),
@@ -40,10 +48,13 @@ const KATS = {
   tapCode: kat('. .', engine => engine.encode('A'), 'Tap Code coordinate derivation'),
   // The museum's displayed Pigpen table assigns its first grid glyph to A.
   pigpen: kat('⌐', engine => engine.encode('A'), 'displayed Pigpen table'),
-  // A one-letter Bifid coordinate stream recombines to the same coordinate.
-  bifid: kat('A', engine => engine.encode('A', 'SECRET'), 'singleton Bifid derivation'),
-  // A one-letter Trifid coordinate stream recombines to the same cube cell.
-  trifid: kat('A', engine => engine.encode('A', 'FELIX', 5), 'singleton Trifid derivation'),
+  // Hand derivation. SECRET square (J merged): SECRT/ABDFG/HIKLM/NOPQU/VWXYZ.
+  // ATTACKATDAWN rows = 100102101143, cols = 044022042010; concatenated and
+  // re-paired per Delastelle: (1,0)(0,1)(0,2)(1,0)(1,1)(4,3)(0,4)(4,0)(2,2)(0,4)(2,0)(1,0).
+  bifid: kat('AECABYTVKTHA', engine => engine.encode('ATTACKATDAWN', 'SECRET'), 'Delastelle square derivation'),
+  // Pinned from the audited implementation (period-5 Delastelle cube; the
+  // 27-cell cube layout is implementation-defined, so no independent reference).
+  trifid: kat('CLMQLHGTTFVQ', engine => engine.encode('ATTACKATDAWN', 'FELIX', 5), 'pinned regression vector'),
   // Natural keyed square puts A at (0,0), emitted as AA; one-column key preserves order.
   adfgx: kat('AA', engine => engine.encode('A', 'A,B'), 'ADFGX square derivation'),
   // Natural 6x6 square puts A at (0,0), emitted as AA.
@@ -66,22 +77,24 @@ const KATS = {
   jefferson: kat('H', engine => engine.encode('A', '1,2'), 'Jefferson disk-table derivation'),
   // Canonical I-II-III/B/AAA vector: https://cryptomuseum.com/crypto/enigma/i/
   enigma: kat('BDZGO', engine => engine.encode('AAAAA', 'AAA'), 'canonical Enigma vector'),
-  // Independently derived ITA2 output using 5 chi, 5 psi, and 37/61 motor wheels.
-  lorenz: kat('4Q2HKXOOMKAT', engine => engine.encode('ATTACKATDAWN', 'LORENZ'), 'independent 12-wheel derivation'),
+  // Pinned from the audited implementation (seeded 12-wheel model; the spec's
+  // reference model shares the algorithm, so this is not independent evidence).
+  lorenz: kat('4Q2HKXOOMKAT', engine => engine.encode('ATTACKATDAWN', 'LORENZ'), 'pinned regression vector'),
   // ALFA is reference word 1 and starts with A.
   dictionaryCode: kat('1', engine => engine.encode('A', 'ALFA BRAVO'), 'dictionary-index derivation'),
   // Two-column grid AB/CD reads AC then the second column bottom-up, DB.
   stager: kat('ACDB', engine => engine.encode('ABCD', '2'), 'Stager route derivation'),
-  // Key A maps A to checkerboard 0; chain digit 1 makes 1; one digit survives both transpositions.
-  vic: kat('1', engine => engine.encode('A', 'A'), 'four-stage VIC derivation'),
+  // Pinned from the audited implementation (checkerboard + chain addition +
+  // double transposition, all derived from the keyword).
+  vic: kat('897004678276227388', engine => engine.encode('ATTACKATDAWN', 'SNOWFALL'), 'pinned regression vector'),
   // Three rows containing AB/CD/EF read columns as ACE|BDF.
   scytale: kat('ACEBDF', engine => engine.encode('ABCDEF', '3'), 'Scytale grid derivation'),
   // Exhibit bit example: 0x48 XOR 0xB4 = 0xFC.
   vernam: kat('fc', engine => engine.encode('H', 'hex:b4'), 'published Vernam XOR example'),
-  // Independent seed/table derivation: ROI maps single-letter token A to code 182.
-  greatCipher: kat('182', engine => engine.encode('A', 'ROI'), 'independent seeded codebook derivation'),
-  // Independent symbol-pool shuffle: BABINGTON maps A to bracket token w32.
-  babington: kat('⟨w32⟩', engine => engine.encode('A', 'BABINGTON'), 'independent seeded symbol derivation'),
+  // Pinned from the audited implementation (seeded codebook).
+  greatCipher: kat('182', engine => engine.encode('A', 'ROI'), 'pinned regression vector'),
+  // Pinned from the audited implementation (seeded symbol pool).
+  babington: kat('⟨w32⟩', engine => engine.encode('A', 'BABINGTON'), 'pinned regression vector'),
   // TANK is a fixed USMC vocabulary entry rather than a randomized spelling path.
   navajo: kat('[CHAY-DA-GAHI]', engine => engine.encode('TANK'), 'USMC vocabulary lookup'),
   // The visualization maps Latin A to the first EVA-safe glyph, o.
@@ -98,36 +111,37 @@ const KATS = {
   straddlingCheckerboard: kat('0', engine => engine.encode('A', 'ATONESIRE'), 'checkerboard derivation'),
   // Key A yields natural left alphabet and right rotated by 13; right-A index 13 -> left-N.
   chaocipher: kat('N', engine => engine.encode('A', 'A'), 'Chaocipher initial-alphabet derivation'),
-  // Independent pin-wheel seed derivation gives four active position-zero pins; Beaufort A -> E.
-  m209: kat('E', engine => engine.encode('A', 'HAGELIN'), 'independent seeded pin derivation'),
+  // Pinned from the audited implementation (seeded pin-and-lug model).
+  m209: kat('E', engine => engine.encode('A', 'HAGELIN'), 'pinned regression vector'),
   // Official Schneier vector: https://www.schneier.com/academic/solitaire/
   solitaire: kat('ITHZUJIWGRFARMW', engine => engine.encode('AAAAAAAAAAAAAAA', 'FOO'), 'Schneier Solitaire vector'),
   // A book containing ALPHA at position 1 encodes A as index 1.
   beale: kat('1', engine => engine.encode('A', 'ALPHA'), 'book-index derivation'),
-  // Independent symbol-pool derivation for seed COPIALE assigns first A selection V5.
-  copiale: kat('V5', engine => engine.encode('A', 'COPIALE'), 'independent seeded homophone derivation'),
+  // Pinned from the audited implementation (seeded homophone pool).
+  copiale: kat('V5', engine => engine.encode('A', 'COPIALE'), 'pinned regression vector'),
   // K is custom-tableau index zero, so it adds no displacement to A.
   kryptos: kat('A', engine => engine.encode('A', 'K'), 'Kryptos-tableau derivation'),
-  // Independent sixes-bank seed derivation maps initial A to A for key PURPLE.
-  purple: kat('A', engine => engine.encode('A', 'PURPLE'), 'independent sixes-bank derivation'),
+  // Pinned from the audited implementation (seeded sixes/twenties model). The
+  // sixes/twenties partition itself is asserted separately in purple.spec.js.
+  purple: kat('ALDYKSEJPYMD', engine => engine.encode('ATTACKATDAWN', 'PURPLE'), 'pinned regression vector'),
   // Vigenere autokey primer B maps initial A to B.
   autokey: kat('B', engine => engine.encode('A', 'B'), 'Autokey primer derivation'),
   // The fixed nomenclator assigns THE code 60.
   nomenclator: kat('60', engine => engine.encode('THE'), 'nomenclator table lookup'),
   // WHEN is the first word in the embedded Declaration reference.
   bookCipher: kat('1', engine => engine.encode('WHEN'), 'embedded book lookup'),
-  // Independent 64-alphabet/step derivation maps initial A to X for seed SIGABA.
-  sigaba: kat('X', engine => engine.encode('A', 'SIGABA'), 'independent seeded schedule derivation'),
-  // Independent rotor/reflector derivation maps initial A to U for seed TYPEX.
-  typex: kat('U', engine => engine.encode('A', 'TYPEX'), 'independent seeded rotor derivation'),
+  // Pinned from the audited implementation (seeded substitution schedule).
+  sigaba: kat('X', engine => engine.encode('A', 'SIGABA'), 'pinned regression vector'),
+  // Pinned from the audited implementation (seeded rotor model).
+  typex: kat('U', engine => engine.encode('A', 'TYPEX'), 'pinned regression vector'),
   // Natural keyed alphabet pairs opposite ends, A with Z.
   kamaSutra: kat('Z', engine => engine.encode('A', 'A'), 'paired-alphabet derivation'),
   // Water-clock code uses one-based alphabet positions.
   aeneasTacticus: kat('1', engine => engine.encode('A'), 'one-based signal derivation'),
   // Pedagogical codebook A=10000 and zero additive leaves 10000.
   jn25: kat('10000', engine => engine.encode('A', '00000'), 'JN-25 group derivation'),
-  // Independent vowel-table seed derivation maps initial A to O.
-  redTypeA: kat('O', engine => engine.encode('A', 'TOKYORED'), 'independent switch-table derivation'),
+  // Pinned from the audited implementation (seeded vowel/consonant tables).
+  redTypeA: kat('O', engine => engine.encode('A', 'TOKYORED'), 'pinned regression vector'),
   // Published affine example: E(x)=5x+8 maps HELLO to RCLLA.
   affine: kat('RCLLA', engine => engine.encode('HELLO', '5,8'), 'published Affine vector'),
   // Progressive shifts 0,1,2,3,4 map HELLO to HFNOS.
@@ -142,36 +156,36 @@ const KATS = {
   cardanoGrille: kat('AH\nEQ', engine => engine.encode('A', '2:0'), 'Cardano grid derivation'),
   // The first carrier beginning with A in the fixed list is "and".
   nullCipher: kat('and', engine => engine.encode('A', 'first'), 'carrier-list derivation'),
-  // Independent ten-rotor seed derivation maps initial A to J (M125 normalizes to M).
-  fialka: kat('J', engine => engine.encode('A', 'M125'), 'independent seeded rotor derivation'),
-  // Independent eight-rotor/notch derivation maps initial A to C.
-  kl7: kat('C', engine => engine.encode('A', 'TSEC'), 'independent seeded rotor derivation'),
-  // Independent ten-wheel additive/permutation derivation maps initial A to S.
-  geheimschreiber: kat('S', engine => engine.encode('A', 'STURGEON'), 'independent seeded wheel derivation'),
-  // Independent mixed-wheel derivation puts B at plaintext-A position initially.
-  kryha: kat('B', engine => engine.encode('A', 'POCKET'), 'independent seeded wheel derivation'),
-  // Independent standard-disk derivation reads five places after A as O.
-  m94: kat('O', engine => engine.encode('A', '5'), 'independent seeded disk derivation'),
+  // Pinned from the audited implementation (seeded ten-rotor model).
+  fialka: kat('J', engine => engine.encode('A', 'M125'), 'pinned regression vector'),
+  // Pinned from the audited implementation (seeded eight-rotor model).
+  kl7: kat('C', engine => engine.encode('A', 'TSEC'), 'pinned regression vector'),
+  // Pinned from the audited implementation (seeded wheel model).
+  geheimschreiber: kat('S', engine => engine.encode('A', 'STURGEON'), 'pinned regression vector'),
+  // Pinned from the audited implementation (seeded wheel model).
+  kryha: kat('B', engine => engine.encode('A', 'POCKET'), 'pinned regression vector'),
+  // Pinned from the audited implementation (seeded disk set).
+  m94: kat('O', engine => engine.encode('A', '5'), 'pinned regression vector'),
   // The illustrative fixed table assigns A code 0012; additive zero leaves it unchanged.
   chineseTelegraph: kat('0012', engine => engine.encode('A', '0'), 'fixed telegraph-table derivation'),
   // THE is embedded word-list index zero and formats as five digits.
   zimmermann: kat('00000', engine => engine.encode('THE', '0'), 'embedded codebook derivation'),
-  // Independent keyed-card derivation maps plaintext bigram AB to LQ.
-  slidex: kat('LQ', engine => engine.encode('AB', 'SLIDEX'), 'independent seeded card derivation'),
+  // Pinned from the audited implementation (seeded bigram card).
+  slidex: kat('LQ', engine => engine.encode('AB', 'SLIDEX'), 'pinned regression vector'),
   // CVCVC index zero selects B,A,B,A,B.
   commercialCode: kat('BABAB', engine => engine.encode('THE'), 'commercial codeword derivation'),
   // THE is codebook entry zero and Culper codes begin at 100.
   culperRing: kat('100', engine => engine.encode('THE'), 'Tallmadge-table derivation'),
   // OF is the first word in the reconstructed source: page 1, line 1, word 1.
   arnoldAndre: kat('1.1.1', engine => engine.encode('OF'), 'book-coordinate derivation'),
-  // Independent homophone-pool derivation assigns the first A use code 66.
-  argenti: kat('66', engine => engine.encode('A', 'ARGENTI'), 'independent seeded homophone derivation'),
+  // Pinned from the audited implementation (seeded homophone pool).
+  argenti: kat('66', engine => engine.encode('A', 'ARGENTI'), 'pinned regression vector'),
   // KING is the first fixed Wallis codebook entry, numbered 100.
   wallisCiphers: kat('100', engine => engine.encode('KING', 'WALLIS'), 'Wallis codebook derivation'),
   // YEOKHAK letter values sum to 76; 76 mod 64 mod 26 = 12, so A -> M.
   joseonYeokhak: kat('M', engine => engine.encode('A', 'YEOKHAK'), 'hexagram arithmetic derivation'),
-  // Independent keyed permutation derivation places P in plaintext-A position.
-  geezMonastic: kat('P', engine => engine.encode('A', 'GEEZ'), 'independent seeded alphabet derivation'),
+  // Pinned from the audited implementation (seeded keyed permutation).
+  geezMonastic: kat('P', engine => engine.encode('A', 'GEEZ'), 'pinned regression vector'),
   // Diana/Beaufort arithmetic: D(3)-A(0)=D(3).
   diana: kat('D', engine => engine.encode('A', 'D'), 'Diana table derivation')
 };

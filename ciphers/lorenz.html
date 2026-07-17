@@ -159,7 +159,14 @@ Total period: LCM of all wheels
           <text class="lz-lbl" style="fill:#555" x="220" y="165">Numbers = pin counts per wheel · Motor wheels control ψ stepping</text>
         </svg>
         <figcaption class="figure-caption">Lorenz SZ42: 12 wheels generating two keystreams XORed with 5-bit Baudot character codes</figcaption>
-      </figure></div>
+      </figure>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> This is a pedagogical model of the SZ40's structure — five chi wheels, five psi wheels, and the 37/61 motor wheels — with wheel bit-patterns generated deterministically from your seed rather than taken from historical pin settings. Ciphertext uses a 32-glyph alphabet (A–Z plus the digits 2–7) representing the machine's 5-bit teleprinter code, so digits in the output are expected. Encrypt and Decrypt are distinct directions — running Encrypt twice does not decrypt.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="panel">

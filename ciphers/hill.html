@@ -93,12 +93,12 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Convert letters to numbers (A=0, B=1…Z=25). Arrange plaintext in column vectors of length n. Multiply by an invertible n×n key matrix modulo 26.</p><pre>Key matrix K (2×2):     Plaintext: HI = [7, 8]
-| 6  24 |               
-| 1  13 |   C = K × P mod 26
-                        = [6×7+24×8, 1×7+13×8] mod 26
-                        = [234, 111] mod 26
-                        = [0, 7]
-                        = AG</pre>
+| 3  3 |
+| 2  5 |    C = K × P mod 26
+                        = [3×7+3×8, 2×7+5×8] mod 26
+                        = [45, 54] mod 26
+                        = [19, 2]
+                        = TC</pre>
       <figure class="figure">
         <svg viewBox="0 0 440 140" style="max-width:440px;width:100%;height:auto;" aria-label="Hill cipher matrix multiplication diagram">
           <style>
@@ -112,10 +112,10 @@
           <text class="hi-lbl" x="50" y="15">Key Matrix</text>
           <path class="hi-bkt" d="M20,25 Q15,25 15,35 L15,95 Q15,105 20,105"/>
           <path class="hi-bkt" d="M80,25 Q85,25 85,35 L85,95 Q85,105 80,105"/>
-          <text class="hi-mat" x="40" y="55">6</text>
-          <text class="hi-mat" x="65" y="55">24</text>
-          <text class="hi-mat" x="40" y="85">1</text>
-          <text class="hi-mat" x="65" y="85">13</text>
+          <text class="hi-mat" x="40" y="55">3</text>
+          <text class="hi-mat" x="65" y="55">3</text>
+          <text class="hi-mat" x="40" y="85">2</text>
+          <text class="hi-mat" x="65" y="85">5</text>
           <!-- × -->
           <text class="hi-op" x="110" y="65">×</text>
           <!-- Plaintext vector -->
@@ -131,19 +131,26 @@
           <text class="hi-lbl" x="255" y="15">mod 26</text>
           <path class="hi-bkt" d="M225,25 Q220,25 220,35 L220,95 Q220,105 225,105"/>
           <path class="hi-bkt" d="M285,25 Q290,25 290,35 L290,95 Q290,105 285,105"/>
-          <text class="hi-mat" x="255" y="55">234→<tspan class="hi-res">0</tspan></text>
-          <text class="hi-mat" x="255" y="85">111→<tspan class="hi-res">7</tspan></text>
+          <text class="hi-mat" x="255" y="55">45→<tspan class="hi-res">19</tspan></text>
+          <text class="hi-mat" x="255" y="85">54→<tspan class="hi-res">2</tspan></text>
           <!-- = -->
           <text class="hi-op" x="320" y="65">→</text>
           <!-- Final letters -->
           <rect x="345" y="35" width="40" height="30" rx="5" fill="#d4af37" fill-opacity=".15" stroke="#d4af37" stroke-width="1"/>
-          <text class="hi-mat hi-res" x="365" y="55" style="font-size:20px">A</text>
+          <text class="hi-mat hi-res" x="365" y="55" style="font-size:20px">T</text>
           <rect x="345" y="70" width="40" height="30" rx="5" fill="#d4af37" fill-opacity=".15" stroke="#d4af37" stroke-width="1"/>
-          <text class="hi-mat hi-res" x="365" y="88" style="font-size:20px">G</text>
+          <text class="hi-mat hi-res" x="365" y="88" style="font-size:20px">C</text>
           <text class="hi-lbl" x="365" y="120" style="font-size:10px">Cipher</text>
         </svg>
-        <figcaption class="figure-caption">Hill cipher: plaintext vector multiplied by key matrix mod 26 — HI becomes AG</figcaption>
-      </figure><p style="margin-top:1rem;">Decryption uses the matrix inverse: P = K⁻¹ × C mod 26. Not all matrices have inverses mod 26 — the key matrix must be chosen carefully.</p></div>
+        <figcaption class="figure-caption">Hill cipher: plaintext vector multiplied by key matrix mod 26 — HI becomes TC (this is the demo's default key)</figcaption>
+      </figure><p style="margin-top:1rem;">Decryption uses the matrix inverse: P = K⁻¹ × C mod 26. Not all matrices have inverses mod 26 — the key matrix must be chosen carefully.</p>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> To guarantee that Decrypt exactly restores your original message, this demo reversibly escapes the letters X, Q, and Z (as ZA, ZB, ZC) before enciphering, so padding and filler X can never be confused with a real letter. Messages containing X, Q, or Z therefore produce slightly different ciphertext than a strictly classical Hill cipher would. Odd-length messages are padded with a trailing X, and the key matrix must be invertible mod 26 — the demo rejects singular matrices.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="panel">

@@ -82,7 +82,14 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>The grille is a square card of side <em>N</em> with holes punched at agreed-upon positions. Sender and receiver each have an identical card. To encrypt:</p><ol><li>Place the grille over a blank N×N grid.</li><li>Write the secret letter-by-letter through the holes.</li><li>Lift the grille; fill the remaining cells with plausible filler (a poem, a shopping list, a love letter).</li></ol><p style="margin-top:1rem;">To decrypt, the recipient places their grille over the received grid in the same orientation and reads the letters visible through the holes.</p><p style="margin-top:1rem;">The demo on this page uses a key of the form <code>size:idx,idx,idx,…</code> — the grid side length followed by the zero-based positions of the holes. The default <code>5:0,3,7,12,19,21,24</code> places six holes in a 5×5 grid.</p></div>
+      <div class="panel-body"><p>The grille is a square card of side <em>N</em> with holes punched at agreed-upon positions. Sender and receiver each have an identical card. To encrypt:</p><ol><li>Place the grille over a blank N×N grid.</li><li>Write the secret letter-by-letter through the holes.</li><li>Lift the grille; fill the remaining cells with plausible filler (a poem, a shopping list, a love letter).</li></ol><p style="margin-top:1rem;">To decrypt, the recipient places their grille over the received grid in the same orientation and reads the letters visible through the holes.</p><p style="margin-top:1rem;">The demo on this page uses a key of the form <code>size:idx,idx,idx,…</code> — the grid side length followed by the zero-based positions of the holes. The default <code>5:0,3,7,12,19,21,24</code> places six holes in a 5×5 grid.</p>
+        <div class="callout callout-info">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">
+            <p><strong>About this demo:</strong> To guarantee that Decrypt exactly restores your original message, this demo reversibly escapes the letters X, Q, and Z (as ZA, ZB, ZC) before enciphering, so padding and filler X can never be confused with a real letter. Messages containing X, Q, or Z therefore produce slightly different ciphertext than a strictly classical Cardano grille would. Messages longer than one grille continue into additional grids rather than being truncated.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="panel">

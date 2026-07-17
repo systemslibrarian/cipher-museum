@@ -12,7 +12,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-v1';
+const VERSION = 'cipher-museum-v2';
 const CORE = [
   '/',
   '/index.html',

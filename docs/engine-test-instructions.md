@@ -1,39 +1,57 @@
-# How to Validate Cipher Engine Roundtrip and Known-Answer Tests
+# How to Validate the Cipher Engines
 
-To ensure all cipher engines and benchmark test cases are working as expected, follow these steps:
-
-## 1. Run the Automated Engine Test Suite
-
-This script tests every registered cipher engine for:
-- Existence and encode/decode methods
-- Non-empty encode output
-- Roundtrip correctness (decode(encode(plaintext)) == plaintext)
-- Known-answer tests for published/verified values
-
-**Command:**
+The authoritative engine check is the verification suite added by the 2026
+engine sweep, governed by [CIPHER_ENGINE_STANDARD.md](./CIPHER_ENGINE_STANDARD.md):
 
 ```sh
-node tests/test-all-engines.js
+npm run test:engines
 ```
 
-A summary of passes/fails will be printed to the console. All engines should pass for the benchmark to be valid.
+This runs [tests/engines/run.js](../tests/engines/run.js), which executes:
 
-## 2. Validate Corpus Test Cases
+- all 84 per-engine spec files in `tests/engines/specs/` (fast-check roundtrip
+  properties, boundary and robustness cases, invalid-key handling, Unicode
+  policy, 100 KB performance ceilings, state isolation, and one fixed
+  known-answer test per engine);
+- the legacy suites `tests/test-all-engines.js`, `tests/test-deep-ciphers.js`,
+  and `tests/test-enigma.js`;
+- a full replay of all 100,026 published corpus records in
+  `public/corpus/all.jsonl` with exact pinned accounting — the run fails if a
+  single record total or per-deviation-rule event count drifts.
 
-- Ensure `/corpus/test-cases.json` ciphertexts match the output of the corresponding engine and key.
-- For roundtrip ciphers, verify that decoding the ciphertext with the same key returns the original plaintext.
+All stages must pass; the run ends with
+`All cipher engine verification suites passed.`
 
-## 3. Troubleshooting
+## Quick individual checks
 
-- If any engine fails, check the implementation in `js/ciphers/all-engines.js` and the test definition in `tests/test-all-engines.js`.
-- For schema or data errors, run:
+```sh
+node --test tests/engines/specs/<engine>.spec.js   # one engine's spec
+node tests/engines/corpus-replay.js                # corpus replay only
+node tests/engines/corpus-replay.js --engine hill  # one engine's corpus records
+node tests/test-all-engines.js                     # legacy roundtrip/KAT suite
+```
+
+## Corpus schema validation
 
 ```sh
 npm run validate:corpus
 ```
 
-This will check the corpus files for schema and record validity.
+This checks the corpus files for schema and record validity (data shape, not
+engine behavior).
 
----
+## Troubleshooting
 
-**Note:** All test and corpus files are tracked in the `/corpus` and `/tests` directories. Update or add new test cases as needed for new engines or plaintexts.
+- If a spec fails, check the engine in `js/ciphers/all-engines.js`, its
+  contract in `tests/engines/helpers/contracts.js`, and its KAT in
+  `tests/engines/helpers/known-answers.js`.
+- If the corpus replay reports pinned-count drift, an engine change added or
+  removed a mismatch inside a known-deviation family. Either revert the
+  behavior change or update the pinned counts in
+  `tests/engines/corpus-replay.js` alongside a reviewed explanation.
+- After any change to `js/ciphers/all-engines.js`, run `npm run build:js` —
+  `tests/test-min-fresh.js` fails if the minified bundle is stale, and the
+  service-worker `VERSION` in `sw.js` should be bumped so offline visitors get
+  the new bundle.
+- `scripts/qa-corpus.js` is deprecated and reports pre-sweep expectations; do
+  not use it as an engine gate (see its header comment).

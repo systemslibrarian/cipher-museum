@@ -217,7 +217,8 @@ window.CipherEngines = (() => {
     return {
       encode: (text, keyStr) => {
         const t = escapeFillers(clean(text)); const k = (keyStr || '3,3,2,5').split(',').map(Number);
-        if (k.length < 4) return 'Need 4 numbers (2x2 matrix)';
+        if (k.length < 4 || k.some(v => !Number.isFinite(v))) return 'Need 4 numbers (2x2 matrix)';
+        if (modInv(mod(k[0] * k[3] - k[1] * k[2], 26), 26) < 0) return 'Matrix not invertible mod 26';
         const padded = t.length % 2 ? t + 'X' : t; let r = '';
         for (let i = 0; i < padded.length; i += 2) {
           const p0 = padded.charCodeAt(i) - 65, p1 = padded.charCodeAt(i + 1) - 65;

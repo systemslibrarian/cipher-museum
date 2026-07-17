@@ -240,8 +240,70 @@ function compactCiphertext(value) {
 }
 
 function deviationFor(record, kind, engineName) {
+  // Deviation rules may only explain encode/decode mismatches. A thrown
+  // exception or a missing engine is always an unexplained failure.
+  if (kind !== 'encode' && kind !== 'decode') return null;
   return KNOWN_DEVIATIONS.find(rule => rule.matches(record, kind, engineName)) || null;
 }
+
+// Exact accounting for a full, unfiltered replay of public/corpus/all.jsonl.
+// Every deviation rule is pinned to its exact event count, so an engine
+// regression cannot hide inside an engine-wide rule: any new mismatch (or a
+// vanished one) changes the count and fails the run. Update these numbers only
+// alongside a reviewed engine or corpus change that explains the delta.
+const EXPECTED_FULL_RUN = {
+  records: 100026,
+  passed: 91746,
+  knownRecords: 8280,
+  knownEvents: 13645,
+  events: {
+    'lorenz-identity-placeholder': 2584,
+    'legacy-filler-format': 2183,
+    'legacy-vic-checkerboard-only': 2128,
+    'legacy-purple-unpartitioned': 1728,
+    'legacy-vernam-mod26': 962,
+    'intentional-noise': 961,
+    'descending-pad-mislabeled': 848,
+    'non-schneier-solitaire-model': 808,
+    'running-key-material-omitted': 696,
+    'legacy-unicode-normalization': 588,
+    'legacy-book-fallback': 65,
+    'historical-variant-navajo': 6,
+    'historical-variant-stager': 4,
+    'historical-variant-confederateVigenere': 4,
+    'historical-variant-zimmermann': 4,
+    'historical-variant-vic': 4,
+    'historical-variant-culperRing': 4,
+    'historical-variant-vigenere': 4,
+    'historical-variant-enigma': 4,
+    'historical-variant-purple': 4,
+    'historical-variant-babington': 4,
+    'historical-variant-nullCipher': 4,
+    'historical-variant-kryptos': 4,
+    'malformed-enigma-vector': 2,
+    'malformed-augustus-vector': 2,
+    'playfair-omit-q-variant': 2,
+    'historical-variant-alberti': 2,
+    'historical-variant-adfgvx': 2,
+    'historical-variant-sigaba': 2,
+    'historical-variant-jefferson': 2,
+    'historical-variant-m94': 2,
+    'historical-variant-greatCipher': 2,
+    'historical-variant-venonaPadReuse': 2,
+    'historical-variant-arnoldAndre': 2,
+    'historical-variant-diana': 2,
+    'historical-variant-m209': 2,
+    'historical-variant-jn25': 2,
+    'historical-variant-geheimschreiber': 2,
+    'historical-variant-kl7': 2,
+    'historical-variant-fialka': 2,
+    'historical-variant-chaocipher': 2,
+    'historical-variant-wallisCiphers': 2,
+    'historical-variant-chineseTelegraph': 2,
+    'historical-variant-wheatstone': 2,
+    'historical-variant-copiale': 2
+  }
+};
 
 async function main() {
   const input = fs.createReadStream(corpusPath, { encoding: 'utf8' });
@@ -324,7 +386,31 @@ async function main() {
   }
   for (const failure of failures) console.log(`  ${JSON.stringify(failure)}`);
 
+  if (process.argv.includes('--json')) {
+    console.log(JSON.stringify({ records, passed, knownRecords, knownEvents: known, events: Object.fromEntries(knownCounts) }));
+  }
+
   if (records === 0 || failureCounts.size > 0) process.exitCode = 1;
+
+  const isFullRun = limit === Infinity && !engineFilter;
+  if (isFullRun && EXPECTED_FULL_RUN.events) {
+    const drift = [];
+    if (records !== EXPECTED_FULL_RUN.records) drift.push(`records ${records} != ${EXPECTED_FULL_RUN.records}`);
+    if (passed !== EXPECTED_FULL_RUN.passed) drift.push(`passed ${passed} != ${EXPECTED_FULL_RUN.passed}`);
+    if (knownRecords !== EXPECTED_FULL_RUN.knownRecords) drift.push(`known-deviation records ${knownRecords} != ${EXPECTED_FULL_RUN.knownRecords}`);
+    if (known !== EXPECTED_FULL_RUN.knownEvents) drift.push(`known-deviation events ${known} != ${EXPECTED_FULL_RUN.knownEvents}`);
+    const ruleIds = new Set([...Object.keys(EXPECTED_FULL_RUN.events), ...knownCounts.keys()]);
+    for (const id of ruleIds) {
+      const expected = EXPECTED_FULL_RUN.events[id] || 0;
+      const actual = knownCounts.get(id) || 0;
+      if (expected !== actual) drift.push(`rule ${id}: ${actual} events != pinned ${expected}`);
+    }
+    if (drift.length > 0) {
+      console.log('Pinned corpus accounting drifted (a mismatch appeared or vanished inside a deviation rule):');
+      for (const line of drift) console.log(`  ${line}`);
+      process.exitCode = 1;
+    }
+  }
 }
 
 main().catch(error => {
