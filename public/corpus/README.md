@@ -45,15 +45,31 @@ represent (each carries an explicit rationale in
 | `all.jsonl` | All 100,026 records (JSONL, one per line) — **Git LFS** |
 | `all.json` | All records as JSON array — **Git LFS** |
 | `all.csv` | Tabular export of key fields |
-| `beginner.jsonl` | 15,533 beginner records |
-| `intermediate.jsonl` | 26,969 intermediate records |
-| `advanced.jsonl` | 26,381 advanced records |
-| `expert.jsonl` | 26,966 expert records |
-| `historical.jsonl` | 101 historical records with provenance (4,000 years, 78 cipher types) |
-| `multilingual.jsonl` | 5,348 multilingual records (fr/de/la/es/it/ar) |
-| `noisy.jsonl` | 484 noisy transcription variants |
+| `beginner.jsonl` | 15,533 beginner records (subset of `all.jsonl`) |
+| `intermediate.jsonl` | 26,969 intermediate records (subset of `all.jsonl`) |
+| `advanced.jsonl` | 26,381 advanced records (subset of `all.jsonl`) |
+| `expert.jsonl` | 26,966 expert records (subset of `all.jsonl`) |
+| `historical.jsonl` | 101 historical records with provenance — 55 are in `all.jsonl`; 46 v0.4 additions are pending canonical merge (planned v0.6) |
+| `multilingual.jsonl` | 5,348 multilingual records — 3,638 are in `all.jsonl`; the 1,710 Arabic (Buckwalter) v0.4 additions are pending canonical merge (planned v0.6) |
+| `noisy.jsonl` | 484 noisy transcription variants (subset of `all.jsonl`) |
+| `llm-3shot-eval.jsonl` | 300 LLM evaluation prompts (3-shot, 0-shot challenge, key recovery) drawn from the public split only |
+| `SHA256SUMS.txt` | SHA-256 checksums for the files above |
 | `cipher-corpus.schema.json` | JSON Schema v0.2 |
 | `CHANGELOG.md` | Version history |
+| `archive/` | Superseded v0.2 expansion/template files kept for history |
+
+**Canonical vs. subsets:** `all.jsonl` is the canonical dataset (100,026 records)
+and the only file the engine verification suite replays. The difficulty and
+noisy files are strict subsets. `historical.jsonl` and `multilingual.jsonl`
+additionally contain the v0.4 expansion records that have not yet been merged
+into the canonical set — they are valid records but are not covered by the
+pinned replay until the planned v0.6 merge.
+
+### Verify your download
+
+```sh
+sha256sum -c SHA256SUMS.txt
+```
 
 ## Usage
 
@@ -66,6 +82,26 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
         record = json.loads(line)
         print(record["id"], record["cipher_type"], record["ciphertext"])
 ```
+
+### LLM Evaluation Prompts
+
+`llm-3shot-eval.jsonl` contains 300 deterministic evaluation records (one per
+line) built from public-split records only. Each record has three prompt
+variants with ground-truth targets:
+
+```python
+import json
+with open("llm-3shot-eval.jsonl") as f:
+    for line in f:
+        r = json.loads(line)
+        prompt = r["prompts"]["three_shot"]["prompt"]       # 3 solved examples + test
+        target = r["prompts"]["three_shot"]["evaluation"]["target"]
+        # also: r["prompts"]["challenge"] (0-shot, no key)
+        #       r["prompts"]["key_recovery"] (recover key from PT/CT pair)
+```
+
+Regenerate with `node scripts/generate-llm-eval.js` (deterministic — same
+corpus in, same file out).
 
 ### Benchmark Splits
 

@@ -93,8 +93,8 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><ol class="steps" style="margin:1rem 0;"><li class="step"><div class="step-text">Convert plaintext to Morse code (dots, dashes, letter separators)</div></li><li class="step"><div class="step-text">Group the Morse stream into triples (·, -, X where X = separator)</div></li><li class="step"><div class="step-text">Replace each triple with a letter using a keyed substitution alphabet</div></li></ol><pre>H = · · · ·   E = ·   L = · - · ·
-HELLO → ···· · ·-·· ·-·· ---
-Group triples: ···  ·_·  -··  ·-··  ---
+HELLO → ····x·x·-··x·-··x---x  (x = letter separator)
+Group triples: ···  ·x·  x·-  ··x  ·-·  ·x-  --x
 Each triple → substituted letter</pre>
 <figure class="figure">
 <svg viewBox="0 0 380 170" style="width:100%;max-width:380px;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fractionated Morse cipher three-step process">
@@ -109,14 +109,14 @@ Each triple → substituted letter</pre>
   <g transform="translate(15,70)">
     <rect x="0" y="0" width="28" height="18" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.25)" stroke-width=".5" rx="2"/><text x="4" y="13" font-size="8" fill="#C9A84C">···</text>
     <rect x="34" y="0" width="28" height="18" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.25)" stroke-width=".5" rx="2"/><text x="38" y="13" font-size="8" fill="#C9A84C">·x·</text>
-    <rect x="68" y="0" width="28" height="18" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.25)" stroke-width=".5" rx="2"/><text x="72" y="13" font-size="8" fill="#C9A84C">–··</text>
-    <rect x="102" y="0" width="28" height="18" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.25)" stroke-width=".5" rx="2"/><text x="106" y="13" font-size="8" fill="#C9A84C">·–·</text>
+    <rect x="68" y="0" width="28" height="18" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.25)" stroke-width=".5" rx="2"/><text x="72" y="13" font-size="8" fill="#C9A84C">x·–</text>
+    <rect x="102" y="0" width="28" height="18" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.25)" stroke-width=".5" rx="2"/><text x="106" y="13" font-size="8" fill="#C9A84C">··x</text>
     <text x="140" y="13" font-size="9" fill="#706878">... (27 possible triples)</text>
   </g>
   <!-- Step 3 -->
   <rect x="5" y="106" width="370" height="35" fill="rgba(90,200,160,.06)" stroke="rgba(90,200,160,.15)" stroke-width=".5"/>
   <text x="15" y="120" font-size="9" fill="#5AC8A0">3. SUBSTITUTE EACH TRIPLE</text>
-  <text x="15" y="134" font-size="9" fill="#B8B0A0">···→R  ·x·→K  –··→W  ·–·→F  ... (keyed mapping)</text>
+  <text x="15" y="134" font-size="9" fill="#B8B0A0">···→R  ·x·→A  x·–→Q  ··x→U  ... (keyed mapping)</text>
   <!-- Result -->
   <text x="10" y="162" font-size="9" fill="#C9A84C">★ Variable-length Morse creates irregular groupings → diffusion across letters</text>
 </svg>

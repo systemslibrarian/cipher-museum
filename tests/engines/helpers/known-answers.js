@@ -186,8 +186,10 @@ const KATS = {
   joseonYeokhak: kat('M', engine => engine.encode('A', 'YEOKHAK'), 'hexagram arithmetic derivation'),
   // Pinned from the audited implementation (seeded keyed permutation).
   geezMonastic: kat('P', engine => engine.encode('A', 'GEEZ'), 'pinned regression vector'),
-  // Diana/Beaufort arithmetic: D(3)-A(0)=D(3).
-  diana: kat('D', engine => engine.encode('A', 'D'), 'Diana table derivation')
+  // Published Special Forces worked example (radio operator account, repr.
+  // Programming Praxis 2014): pad GORWY WETFR COYET over ATTAC KATDA WNXYZ
+  // gives TSPDZ TVNRI BYEXH under the DIANA rule P+K+C ≡ 25 (mod 26).
+  diana: kat('TSPDZTVNRIBYEXH', engine => engine.encode('ATTACKATDAWNXYZ', 'GORWYWETFRCOYET'), 'published DIANA vector')
 };
 
 function kat(expected, run, provenance) {

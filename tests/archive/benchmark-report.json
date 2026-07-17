@@ -1,0 +1,2 @@
+{"record_id":"Dummy","solver_name":"anneal","run_id":"runner-2026-06-24T07-12-44-056Z","timestamp":"2026-06-24T07:12:44.056Z","correct":true,"char_accuracy":1,"result":{"plaintext":"ABC","score":0,"details":"Simulated annealing not implemented."}}
+{"record_id":"Dummy","solver_name":"hillclimb","run_id":"runner-2026-06-24T07-12-44-056Z","timestamp":"2026-06-24T07:12:44.056Z","correct":true,"char_accuracy":1,"result":{"plaintext":"ABC","score":0,"details":"Hill-climb not implemented."}}

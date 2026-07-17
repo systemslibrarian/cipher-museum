@@ -39,4 +39,19 @@ const OPTIONS = { compress: true, mangle: true };
     const pct = Math.round((1 - result.code.length / code.length) * 100);
     console.log(`✅ ${rel} → ${path.basename(out)}  (${(code.length / 1024).toFixed(0)} KB → ${(result.code.length / 1024).toFixed(0)} KB, −${pct}%)`);
   }
+
+  // Derive the service-worker cache version from the minified bundles so a
+  // changed bundle can never ship with a stale offline cache. Deterministic:
+  // same bundles in, same VERSION out. tests/test-sw-version.js verifies.
+  const { swVersionFor } = require('./sw-version.js');
+  const swPath = path.join(ROOT, 'sw.js');
+  const sw = fs.readFileSync(swPath, 'utf8');
+  const version = swVersionFor(ROOT);
+  const updated = sw.replace(/const VERSION = '[^']*';/, `const VERSION = '${version}';`);
+  if (updated !== sw) {
+    fs.writeFileSync(swPath, updated, 'utf8');
+    console.log(`✅ sw.js VERSION → ${version}`);
+  } else {
+    console.log(`✅ sw.js VERSION already ${version}`);
+  }
 })().catch((e) => { console.error(e); process.exit(1); });

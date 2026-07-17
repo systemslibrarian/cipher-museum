@@ -44,7 +44,8 @@ CJK, RTL text, and emoji must likewise be preserved, normalized away, or rejecte
 an explicit policy.
 
 Intrinsic historical aliases are allowed only when declared, such as Playfair J/I,
-Tap Code K/C, and Babington J/I and V/U.
+Tap Code K/C, and Babington's 24-letter Elizabethan alphabet (J/I, V/U, and W
+omitted — historically written as double-V).
 
 ## 3. Reversible framing
 

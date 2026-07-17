@@ -1,0 +1,16 @@
+[
+  {
+    "solver_name": "anneal",
+    "scored": 1,
+    "correct": 1,
+    "exact_accuracy": 1,
+    "mean_char_accuracy": 1
+  },
+  {
+    "solver_name": "hillclimb",
+    "scored": 1,
+    "correct": 1,
+    "exact_accuracy": 1,
+    "mean_char_accuracy": 1
+  }
+]

@@ -457,16 +457,19 @@ Settings:   Rotors I-II-III, Reflector B
             Start position: A-A-Z
 
 Encrypting the first letter "A":
+(Rotor III steps first: positions A-A-Z → A-A-A)
 1. Plugboard: A → M  (A is swapped with M)
-2. Rotor III:  M → position 12 → maps to J
-3. Rotor II:   J → position 9  → maps to D
-4. Rotor I:    D → position 3  → maps to F
-5. Reflector B: F → maps to S
-6. Rotor I  ←  S → maps to S
-7. Rotor II ←  S → maps to E
-8. Rotor III←  E → maps to P
-9. Plugboard:  P → P  (no swap for P)
-Lamp "P" lights up.
+2. Rotor III:  M → maps to Z
+3. Rotor II:   Z → maps to E
+4. Rotor I:    E → maps to L
+5. Reflector B: L → maps to G
+6. Rotor I  ←  G → maps to F
+7. Rotor II ←  F → maps to W
+8. Rotor III←  W → maps to R
+9. Plugboard:  R → R  (no swap for R)
+Lamp "R" lights up.
+
+Full message: ATTACK → RXWKBV
 
 Key behaviour: after each keypress,
 Rotor III advances one position.

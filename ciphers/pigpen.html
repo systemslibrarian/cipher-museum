@@ -94,17 +94,22 @@
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>The grid layouts:
 
-┌───┬───┐   ┌───┬───┐
-│ A │ B │   │ J │ K │
-├───┼───┤   ├───┼───┤  (dotted versions)
-│ C │ D │   │ L │ M │
-└───┴───┘   └───┴───┘
+ A │ B │ C     J │ K │ L
+───┼───┼───   ───┼───┼───
+ D │ E │ F     M │ N │ O   (dotted versions)
+───┼───┼───   ───┼───┼───
+ G │ H │ I     P │ Q │ R
+
+S = ╲   T = ╳   U = ╱      (X shapes)
+V = ╲•  W = ╳•  X = ╱•     (dotted X)
+Y = ▽   Z = △              (chevrons)
 
 The shape of the cell containing the letter
 becomes the symbol for that letter:
-A = └┘  (bottom-right corner shape)
-B = the full middle-section shape
-...etc
+A = ⌐  (top-left cell shape)
+E = ┼  (the full middle-section shape)
+H = ⊓  (bottom-middle cell — open at the bottom)
+...etc — a dot marks the second grid (J–R)
 
 Famous users:
 - Freemasons (lodge records)
@@ -126,11 +131,16 @@ Famous users:
           <text class="pp-ltr" x="25" y="42">A</text><text class="pp-ltr" x="65" y="42">B</text><text class="pp-ltr" x="105" y="42">C</text>
           <text class="pp-ltr" x="25" y="72">D</text><text class="pp-ltr" x="65" y="72">E</text><text class="pp-ltr" x="105" y="72">F</text>
           <text class="pp-ltr" x="25" y="102">G</text><text class="pp-ltr" x="65" y="102">H</text><text class="pp-ltr" x="105" y="102">I</text>
-          <!-- Grid 2: X -->
-          <text class="pp-lbl" x="190" y="15">Grid 2</text>
-          <line class="pp-grid" x1="155" y1="25" x2="225" y2="115"/><line class="pp-grid" x1="225" y1="25" x2="155" y2="115"/>
-          <text class="pp-ltr" x="190" y="42">J</text><text class="pp-ltr" x="215" y="72">K</text>
-          <text class="pp-ltr" x="190" y="102">L</text><text class="pp-ltr" x="165" y="72">M</text>
+          <!-- Grid 2: dotted tic-tac-toe (J-R) -->
+          <text class="pp-lbl" x="202" y="15">Grid 2 (dotted)</text>
+          <line class="pp-grid" x1="185" y1="25" x2="185" y2="115"/><line class="pp-grid" x1="220" y1="25" x2="220" y2="115"/>
+          <line class="pp-grid" x1="150" y1="55" x2="255" y2="55"/><line class="pp-grid" x1="150" y1="85" x2="255" y2="85"/>
+          <text class="pp-ltr" x="167" y="42">J</text><text class="pp-ltr" x="202" y="42">K</text><text class="pp-ltr" x="237" y="42">L</text>
+          <text class="pp-ltr" x="167" y="72">M</text><text class="pp-ltr" x="202" y="72">N</text><text class="pp-ltr" x="237" y="72">O</text>
+          <text class="pp-ltr" x="167" y="102">P</text><text class="pp-ltr" x="202" y="102">Q</text><text class="pp-ltr" x="237" y="102">R</text>
+          <circle class="pp-dot" cx="176" cy="47" r="2.5"/><circle class="pp-dot" cx="211" cy="47" r="2.5"/><circle class="pp-dot" cx="246" cy="47" r="2.5"/>
+          <circle class="pp-dot" cx="176" cy="77" r="2.5"/><circle class="pp-dot" cx="211" cy="77" r="2.5"/><circle class="pp-dot" cx="246" cy="77" r="2.5"/>
+          <circle class="pp-dot" cx="176" cy="107" r="2.5"/><circle class="pp-dot" cx="211" cy="107" r="2.5"/><circle class="pp-dot" cx="246" cy="107" r="2.5"/>
           <!-- Example symbols -->
           <text class="pp-lbl" x="320" y="15">Example symbols:</text>
           <!-- A = open bottom-right -->
@@ -139,17 +149,18 @@ Famous users:
           <!-- E = box (closed) -->
           <text class="pp-lbl" x="345" y="48">E =</text>
           <rect class="pp-sym" x="360" y="33" width="22" height="22"/>
-          <!-- H = U shape -->
+          <!-- H = open-bottom shape -->
           <text class="pp-lbl" x="280" y="88">H =</text>
-          <polyline class="pp-sym" points="300,70 300,90 320,90 320,70"/>
-          <!-- J = < shape -->
+          <polyline class="pp-sym" points="300,90 300,70 320,70 320,90"/>
+          <!-- J = A shape + dot -->
           <text class="pp-lbl" x="345" y="88">J =</text>
-          <polyline class="pp-sym" points="380,70 365,82 380,95"/>
+          <polyline class="pp-sym" points="365,95 365,75 385,75"/>
+          <circle class="pp-dot" cx="377" cy="87" r="2.5"/>
           <!-- info -->
           <text class="pp-lbl" x="200" y="140">Each letter's symbol is the shape of the cell it occupies</text>
-          <text class="pp-lbl" x="200" y="158">Dots distinguish grids 3 &amp; 4 (dotted versions of 1 &amp; 2)</text>
+          <text class="pp-lbl" x="200" y="158">S&#8211;U use the X shapes, V&#8211;X their dotted forms, Y&#8211;Z chevrons</text>
         </svg>
-        <figcaption class="figure-caption">Pigpen cipher: letter shapes come from tic-tac-toe and X grids — dots distinguish the second set</figcaption>
+        <figcaption class="figure-caption">Pigpen cipher: A–I from the plain grid, J–R from the dotted grid, S–U from the X shapes, V–X dotted, Y–Z chevrons</figcaption>
       </figure></div>
     </div>
 

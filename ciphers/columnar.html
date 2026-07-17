@@ -92,18 +92,18 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>Write the message in rows across a grid whose width is the keyword length. Number the columns by alphabetical order of the keyword letters. Read off columns in that numbered order.</p><pre>Keyword: ZEBRA → Z=5, E=2, B=1, R=4, A=3
-Columns:  5  2  1  4  3
+      <div class="panel-body"><p>Write the message in rows across a grid whose width is the keyword length. Number the columns by alphabetical order of the keyword letters. Read off columns in that numbered order.</p><pre>Keyword: ZEBRA → Z=5, E=3, B=2, R=4, A=1
+Columns:  5  3  2  4  1
           W  E  A  T  H
           E  R  F  O  R
-          C  A  S  T  I
-          N  G  X  X  X
+          E  C  A  S  T
+          I  N  G  X  X
 
-Read col 1(B): AFSX
-Read col 2(E): ERAG
-Read col 3(A): HRIX
-Read col 4(R): OTXX
-Read col 5(Z): WECN</pre>
+Read col 1(A): HRTX
+Read col 2(B): AFAG
+Read col 3(E): ERCN
+Read col 4(R): TOSX
+Read col 5(Z): WEEI</pre>
       <figure class="figure">
         <svg viewBox="0 0 440 260" style="max-width:440px;width:100%;height:auto;" aria-label="Columnar transposition grid diagram">
           <style>
@@ -127,10 +127,10 @@ Read col 5(Z): WECN</pre>
           <text class="ct-key" x="200" y="40">A</text>
           <!-- Column numbers -->
           <text class="ct-num" x="40" y="55">5</text>
-          <text class="ct-num" x="80" y="55">2</text>
-          <text class="ct-num" x="120" y="55">1</text>
+          <text class="ct-num" x="80" y="55">3</text>
+          <text class="ct-num" x="120" y="55">2</text>
           <text class="ct-num" x="160" y="55">4</text>
-          <text class="ct-num" x="200" y="55">3</text>
+          <text class="ct-num" x="200" y="55">1</text>
           <!-- Grid -->
           <rect class="ct-box" x="20" y="62" width="200" height="130"/>
           <line class="ct-box" x1="60" y1="62" x2="60" y2="192"/>
@@ -140,22 +140,22 @@ Read col 5(Z): WECN</pre>
           <line class="ct-box" x1="20" y1="94" x2="220" y2="94"/>
           <line class="ct-box" x1="20" y1="126" x2="220" y2="126"/>
           <line class="ct-box" x1="20" y1="158" x2="220" y2="158"/>
-          <!-- Highlight column 1 (B) -->
-          <rect class="ct-hi" x="100" y="62" width="40" height="130"/>
+          <!-- Highlight column 1 (A) -->
+          <rect class="ct-hi" x="180" y="62" width="40" height="130"/>
           <!-- Grid content -->
           <text class="ct-cell" x="40" y="80">W</text><text class="ct-cell" x="80" y="80">E</text><text class="ct-cell" x="120" y="80">A</text><text class="ct-cell" x="160" y="80">T</text><text class="ct-cell" x="200" y="80">H</text>
           <text class="ct-cell" x="40" y="112">E</text><text class="ct-cell" x="80" y="112">R</text><text class="ct-cell" x="120" y="112">F</text><text class="ct-cell" x="160" y="112">O</text><text class="ct-cell" x="200" y="112">R</text>
-          <text class="ct-cell" x="40" y="144">C</text><text class="ct-cell" x="80" y="144">A</text><text class="ct-cell" x="120" y="144">S</text><text class="ct-cell" x="160" y="144">T</text><text class="ct-cell" x="200" y="144">I</text>
-          <text class="ct-cell" x="40" y="176">N</text><text class="ct-cell" x="80" y="176">G</text><text class="ct-cell" x="120" y="176">X</text><text class="ct-cell" x="160" y="176">X</text><text class="ct-cell" x="200" y="176">X</text>
+          <text class="ct-cell" x="40" y="144">E</text><text class="ct-cell" x="80" y="144">C</text><text class="ct-cell" x="120" y="144">A</text><text class="ct-cell" x="160" y="144">S</text><text class="ct-cell" x="200" y="144">T</text>
+          <text class="ct-cell" x="40" y="176">I</text><text class="ct-cell" x="80" y="176">N</text><text class="ct-cell" x="120" y="176">G</text><text class="ct-cell" x="160" y="176">X</text><text class="ct-cell" x="200" y="176">X</text>
           <!-- Output -->
           <text class="ct-lbl" x="110" y="210">Output: </text>
-          <text style="font-family:'JetBrains Mono',monospace;font-size:12px;fill:#d4af37;text-anchor:middle" x="110" y="228">AFSX · ERAG · HRIX · OTXX · WECN</text>
+          <text style="font-family:'JetBrains Mono',monospace;font-size:12px;fill:#d4af37;text-anchor:middle" x="110" y="228">HRTX · AFAG · ERCN · TOSX · WEEI</text>
           <!-- Read arrows on right side -->
-          <text class="ct-num" x="350" y="80" style="fill:#d4af37">Col 1 (B): A F S X</text>
-          <text class="ct-num" x="350" y="100">Col 2 (E): E R A G</text>
-          <text class="ct-num" x="350" y="120">Col 3 (A): H R I X</text>
-          <text class="ct-num" x="350" y="140">Col 4 (R): O T X X</text>
-          <text class="ct-num" x="350" y="160">Col 5 (Z): W E C N</text>
+          <text class="ct-num" x="350" y="80" style="fill:#d4af37">Col 1 (A): H R T X</text>
+          <text class="ct-num" x="350" y="100">Col 2 (B): A F A G</text>
+          <text class="ct-num" x="350" y="120">Col 3 (E): E R C N</text>
+          <text class="ct-num" x="350" y="140">Col 4 (R): T O S X</text>
+          <text class="ct-num" x="350" y="160">Col 5 (Z): W E E I</text>
         </svg>
         <figcaption class="figure-caption">Columnar transposition: plaintext fills a grid by rows, then columns are read in keyword-alphabetical order</figcaption>
       </figure>

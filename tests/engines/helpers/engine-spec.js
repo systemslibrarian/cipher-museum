@@ -9,6 +9,19 @@ require('../../../js/ciphers/all-engines.js');
 
 const engines = global.CipherEngines;
 
+// Mutation-canary hook: when CIPHER_ENGINE_CANARY names an engine, corrupt its
+// encode output. tests/engines/canary.js runs a spec with this set and asserts
+// the spec FAILS — proving the harness catches broken engines. Never set in
+// normal runs.
+if (process.env.CIPHER_ENGINE_CANARY && engines[process.env.CIPHER_ENGINE_CANARY]) {
+  const target = engines[process.env.CIPHER_ENGINE_CANARY];
+  const originalEncode = target.encode.bind(target);
+  target.encode = (text, key) => {
+    const out = originalEncode(text, key);
+    return typeof out === 'string' && out.length > 0 ? out.slice(0, -1) + (out.endsWith('Q') ? 'R' : 'Q') : out;
+  };
+}
+
 function stringFrom(charArbitrary, constraints = {}) {
   return fc.array(charArbitrary, constraints).map(chars => chars.join(''));
 }
@@ -148,7 +161,9 @@ function defineRobustnessSpec({
   edgeKey,
   edgeKeyFor,
   run = roundtrip,
-  maxLongRunMs = 5000
+  maxLongRunMs = 5000,
+  longAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  allowsMissMarkers = false
 }) {
   const engine = engines[name];
   const edgeInputs = [
@@ -171,16 +186,25 @@ function defineRobustnessSpec({
   });
 
   test(`${name}: invalid keys do not throw uncaught exceptions`, () => {
-    for (const key of [undefined, null, '', '!!!', '999999999999999999999']) {
+    const invalidKeys = [
+      undefined, null, '', '   ', '!!!', '0', '-5', '3.7', 'a,b,c,d',
+      '999999999999999999999', 'A'.repeat(10000)
+    ];
+    const garbage = allowsMissMarkers ? /undefined|NaN|�/ : /undefined|NaN|\?{2,}|�/;
+    for (const key of invalidKeys) {
       assert.doesNotThrow(() => {
         const encoded = engine.encode('TEST', key);
         assert.equal(typeof encoded, 'string');
-        assert.doesNotMatch(encoded, /undefined|NaN|\?{2,}|�/);
+        assert.doesNotMatch(encoded, garbage);
         const decoded = engine.decode(encoded, key);
         assert.equal(typeof decoded, 'string');
-        assert.doesNotMatch(decoded, /undefined|NaN|\?{2,}|�/);
-      }, `key=${JSON.stringify(key)}`);
+        assert.doesNotMatch(decoded, garbage);
+      }, `key=${String(JSON.stringify(key)).slice(0, 40)}`);
     }
+    // Behavioral floor: after all invalid-key calls the engine must still work
+    // correctly with a valid key — no residual corruption, no dead engine.
+    const validKey = edgeKeyFor ? edgeKeyFor('ATTACKATDAWN') : edgeKey;
+    assert.equal(run(engine, 'ATTACKATDAWN', validKey), canonicalize('ATTACKATDAWN'));
   });
 
   test(`${name}: output is isolated from other engine calls`, () => {
@@ -193,7 +217,11 @@ function defineRobustnessSpec({
   });
 
   test(`${name}: roundtrips 100 KB without excessive runtime`, () => {
-    const plaintext = 'A'.repeat(100 * 1024);
+    // Mixed content from the engine's declared alphabet, so this exercises
+    // correctness at scale, not just throughput on a degenerate input.
+    const plaintext = longAlphabet
+      .repeat(Math.ceil((100 * 1024) / longAlphabet.length))
+      .slice(0, 100 * 1024);
     const key = edgeKeyFor ? edgeKeyFor(plaintext) : edgeKey;
     const startedAt = process.hrtime.bigint();
     const actual = run(engine, plaintext, key);

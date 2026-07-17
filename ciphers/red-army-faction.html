@@ -77,18 +77,15 @@
       <p>The Red Army Faction (founded 1970 by Andreas Baader and Ulrike Meinhof) maintained encrypted communications with East Germany's Stasi intelligence service, which supplied one-time pad material, safe houses, forged documents, and weapons. After German reunification in 1990, investigators gained access to archived Stasi files confirming the communications channel. The OTP messages themselves could not be decoded — pads had been destroyed — but the metadata and paper trails were sufficient to reconstruct the operational relationships. The RAF formally disbanded in 1998.</p>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span>'
-      f'<span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Throughout the 1970s–1990s West German domestic counterterrorism effort, BKA (Federal Criminal Police) had intercepted hundreds of RAF transmissions but could not decrypt fully encrypted OTP messages. The Stasi's <em>Hauptverwaltung Aufklärung</em> (HVA) provided RAF cells with field-grade one-time pad kits produced by the KGB-affiliated <em>Aufklärungsamt</em> technical section — the same infrastructure supporting Soviet deep-cover agents inside NATO structures.</p></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span>'
-      f'<span class="panel-title">The KGB Field OTP Format</span></div>
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">The KGB Field OTP Format</span></div>
       <div class="panel-body"><p>Soviet field OTPs used 5-digit number groups on printed one-time sheets arranged in columns. Messages were encoded by converting each plaintext letter to a number (A=01 through Z=26) and adding the corresponding pad digit modulo 10 (Fibonacci addition — no carry). Sheets were destroyed by fire after use. The system is identical in security to Vernam's original 1917 cipher; correctness of implementation was the KGB's quality control problem, not the cipher itself.</p></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span>'
-      f'<span class="panel-title">The Stasi Files Exposure</span></div>
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">The Stasi Files Exposure</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Archive exposure post-reunification</div><div class="attack-diff">Complexity: Metadata attack — cipher itself not broken</div><p class="attack-desc">When the Berlin Wall fell on November 9, 1989, BStU (Federal Commissioner for Stasi Records) began the multi-decade effort to reconstruct shredded Stasi paper archives. By 1993, investigators had confirmed Stasi material support for RAF. No OTP key material was recovered — the pads had been destroyed per Soviet protocol — but the structural evidence was sufficient for criminal prosecution and historical reconstruction.</p></div></div>
     </div>
   </div>

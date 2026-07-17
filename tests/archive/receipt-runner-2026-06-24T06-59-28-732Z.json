@@ -1,0 +1,43 @@
+{
+  "run_id": "runner-2026-06-24T06-59-28-732Z",
+  "timestamp": "2026-06-24T06:59:28.732Z",
+  "corpus_version": "sha256:00035054b74afc47c6d0a03e9cfdf5c29e4149e0156f93a4e2d276f39ab59508",
+  "schema_version": "0.2.0",
+  "solvers": [
+    {
+      "name": "anneal",
+      "version": "0.1.0"
+    },
+    {
+      "name": "hillclimb",
+      "version": "0.1.0"
+    }
+  ],
+  "runner_version": "sha256:de8d7eb5d05064301d0105953716875a6c64244f31875a83d9536496b16e91d9",
+  "environment": {
+    "node": "v26.3.0",
+    "os": "win32 x64"
+  },
+  "parameters": {
+    "corpus": "tests/minicorpus.jsonl",
+    "solvers": "solvers/",
+    "out": "tests/"
+  },
+  "results_file": "tests\\benchmark-report.json",
+  "summary": [
+    {
+      "solver_name": "anneal",
+      "scored": 1,
+      "correct": 0,
+      "exact_accuracy": 0,
+      "mean_char_accuracy": 0
+    },
+    {
+      "solver_name": "hillclimb",
+      "scored": 1,
+      "correct": 0,
+      "exact_accuracy": 0,
+      "mean_char_accuracy": 0
+    }
+  ]
+}

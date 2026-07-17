@@ -93,19 +93,22 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Bacon's binary alphabet:
-A = AAAAA    N = ABBAB
-B = AAAAB    O = ABBBA
-C = AAABA    P = ABBBB
-D = AAABB    Q = BAAAA
-E = AABAA    R = BAAAB
+A = AAAAA    N = ABBAA
+B = AAAAB    O = ABBAB
+C = AAABA    P = ABBBA
+D = AAABB    Q = ABBBB
+E = AABAA    R = BAAAA
 ...
-Z = BBAAB
+Z = BBAAA
 
-Example: HI = AABBB AABAA
+Example: HI = AABBB ABAAA
 (each letter = 5 A/B symbols)
 
+Following Bacon's classic convention, I and J share
+the same code ABAAA (a 25-letter alphabet).
+
 Steganographic use:
-Normal text: AABBB AABAA
+Normal text: AABBB ABAAA
 Hidden in cover text by using two fonts:
 normal=A, italic=B across 10 characters</pre>
 <figure class="figure">
@@ -121,13 +124,13 @@ normal=A, italic=B across 10 characters</pre>
     <rect x="112" y="0" width="24" height="24" fill="rgba(201,168,76,.15)" stroke="rgba(201,168,76,.3)" stroke-width="1" rx="2"/><text x="119" y="17" font-size="12" fill="#C9A84C">B</text>
   </g>
   <!-- Binary -->
-  <text x="160" y="48" font-size="10" fill="#706878">= 00111 = 7th letter</text>
+  <text x="160" y="48" font-size="10" fill="#706878">= 00111 = 8th letter</text>
   <!-- Steganography demo -->
   <text x="10" y="85" font-size="11" fill="#C9A84C">Hidden in cover text:</text>
   <g transform="translate(10,95)">
-    <text x="0" y="16" font-size="14"><tspan fill="#5AC8A0">T</tspan><tspan fill="#5AC8A0">h</tspan><tspan fill="#E8C97A" font-style="italic">i</tspan><tspan fill="#E8C97A" font-style="italic">s</tspan><tspan fill="#E8C97A" font-style="italic"> </tspan><tspan fill="#5AC8A0">i</tspan><tspan fill="#5AC8A0">s</tspan><tspan fill="#E8C97A" font-style="italic"> </tspan><tspan fill="#E8C97A" font-style="italic">a</tspan><tspan fill="#E8C97A" font-style="italic">n</tspan></text>
-    <text x="0" y="36" font-size="9" fill="#706878">A  A  B  B  B  A  A  B  B  B</text>
-    <text x="0" y="52" font-size="9" fill="#C9A84C">→ H=AABBB + I=AABBA</text>
+    <text x="0" y="16" font-size="14"><tspan fill="#5AC8A0">T</tspan><tspan fill="#5AC8A0">h</tspan><tspan fill="#E8C97A" font-style="italic">i</tspan><tspan fill="#E8C97A" font-style="italic">s</tspan><tspan fill="#E8C97A" font-style="italic"> </tspan><tspan fill="#5AC8A0">i</tspan><tspan fill="#E8C97A" font-style="italic">s</tspan><tspan fill="#5AC8A0"> </tspan><tspan fill="#5AC8A0">a</tspan><tspan fill="#5AC8A0">n</tspan></text>
+    <text x="0" y="36" font-size="9" fill="#706878">A  A  B  B  B  A  B  A  A  A</text>
+    <text x="0" y="52" font-size="9" fill="#C9A84C">→ H=AABBB + I=ABAAA</text>
   </g>
 </svg>
 <figcaption class="figure-caption">Each letter = 5 binary symbols. Normal typeface = A, italic = B — hiding messages in plain sight</figcaption>

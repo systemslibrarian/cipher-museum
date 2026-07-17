@@ -124,11 +124,11 @@
             <text x="240" y="14" class="bb-lbl" style="font-size:11px;fill:#c9a84c;letter-spacing:.15em">PLAIN: "THE QUEEN MUST DIE"</text>
             <text class="bb-pt" x="60" y="46">THE</text>
             <text class="bb-pt" x="160" y="46">QUEEN</text>
-            <text class="bb-pt" x="250" y="46">M</text>
-            <text class="bb-pt" x="290" y="46">U</text>
-            <text class="bb-pt" x="330" y="46">S</text>
-            <text class="bb-pt" x="370" y="46">T</text>
-            <text class="bb-pt" x="430" y="46">DIE</text>
+            <text class="bb-pt" x="250" y="46">MUST</text>
+            <text class="bb-pt" x="290" y="46">D</text>
+            <text class="bb-pt" x="330" y="46">∅</text>
+            <text class="bb-pt" x="370" y="46">I</text>
+            <text class="bb-pt" x="430" y="46">E</text>
             <line class="bb-line" x1="60" y1="56" x2="60" y2="86"/>
             <line class="bb-line" x1="160" y1="56" x2="160" y2="86"/>
             <line class="bb-line" x1="250" y1="56" x2="250" y2="86"/>
@@ -138,20 +138,20 @@
             <line class="bb-line" x1="430" y1="56" x2="430" y2="86"/>
             <rect class="bb-nom"  x="32"  y="88" width="56" height="26"/><text class="bb-sym" x="60"  y="101">⟨w33⟩</text>
             <rect class="bb-nom"  x="132" y="88" width="56" height="26"/><text class="bb-sym" x="160" y="101">⟨w28⟩</text>
-            <rect class="bb-let"  x="225" y="88" width="50" height="26"/><text class="bb-sym" x="250" y="101">⟨a05⟩</text>
-            <rect class="bb-let"  x="265" y="88" width="50" height="26"/><text class="bb-sym" x="290" y="101">⟨a14⟩</text>
-            <rect class="bb-let"  x="305" y="88" width="50" height="26"/><text class="bb-sym" x="330" y="101">⟨a20⟩</text>
-            <rect class="bb-let"  x="345" y="88" width="50" height="26"/><text class="bb-sym" x="370" y="101">⟨a17⟩</text>
-            <rect class="bb-nom"  x="402" y="88" width="56" height="26"/><text class="bb-sym" x="430" y="101">⟨w15⟩</text>
+            <rect class="bb-nom"  x="225" y="88" width="50" height="26"/><text class="bb-sym" x="250" y="101">⟨n04⟩</text>
+            <rect class="bb-let"  x="265" y="88" width="50" height="26"/><text class="bb-sym" x="290" y="101">⟨a23⟩</text>
+            <rect class="bb-null" x="305" y="88" width="50" height="26"/><text class="bb-sym" x="330" y="101">⟨a16⟩</text>
+            <rect class="bb-let"  x="345" y="88" width="50" height="26"/><text class="bb-sym" x="370" y="101">⟨w15⟩</text>
+            <rect class="bb-let"  x="402" y="88" width="56" height="26"/><text class="bb-sym" x="430" y="101">⟨a07⟩</text>
             <text x="240" y="142" class="bb-lbl" style="font-size:11px;fill:#c85a5a;letter-spacing:.15em">…AND ONE GLYPH ("DOUBLETH") MEANS "DOUBLE THE NEXT LETTER"</text>
             <text class="bb-pt" x="80" y="170">L</text>
-            <rect class="bb-let"  x="55"  y="180" width="50" height="24"/><text class="bb-sym" x="80"  y="192">⟨a11⟩</text>
-            <rect class="bb-trap" x="125" y="180" width="50" height="24"/><text class="bb-sym" x="150" y="192">⟨x2⟩</text>
+            <rect class="bb-let"  x="55"  y="180" width="50" height="24"/><text class="bb-sym" x="80"  y="192">⟨w16⟩</text>
+            <rect class="bb-trap" x="125" y="180" width="50" height="24"/><text class="bb-sym" x="150" y="192">⟨w18⟩</text>
             <text class="bb-lbl" x="150" y="170" style="fill:#c85a5a;">DOUBLETH</text>
             <text class="bb-sym" x="200" y="192" style="font-size:18px;fill:#e8d5a3">⇒</text>
             <text x="280" y="195" class="bb-lbl" style="font-size:14px;fill:#e8d5a3">decodes as "LL"</text>
           </svg>
-          <figcaption class="figure-caption">Common words like THE and QUEEN got their own glyphs; rare letters used letter symbols; one trap glyph doubled the previous letter — exactly as the original 1586 key did.</figcaption>
+          <figcaption class="figure-caption">Common words like THE, QUEEN, and MUST got their own glyphs; rare letters used letter symbols; dashed glyphs are nulls (decoys dropped on decode); one trap glyph doubled the previous letter — exactly as the original 1586 key did.</figcaption>
         </figure>
         <p style="margin-top:1rem;">Encryption is a greedy-longest-match scan: clerks looked for the longest codeword that started at the current position. Where no codeword matched, they dropped to a single letter glyph. Nulls were sprinkled in as decoys. Decryption requires the codebook in front of you.</p>
       </div>
@@ -228,7 +228,7 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon">🎴</span><span class="panel-title">About this Demo</span></div>
       <div class="panel-body">
-        <p>The original 64-glyph key is in the British Library (Cotton MS Caligula C IX). This demo uses ASCII tokens — <code>⟨a01⟩…⟨a23⟩</code> for letters, <code>⟨w01⟩…⟨w36⟩</code> for codewords, <code>⟨n01⟩…⟨n04⟩</code> for nulls, and <code>⟨x2⟩</code> for the doubleth — deterministically assigned from the seed.</p>
+        <p>The original 64-glyph key is in the British Library (Cotton MS Caligula C IX). This demo uses ASCII tokens drawn from a 64-symbol pool — <code>⟨a01⟩…⟨a23⟩</code>, <code>⟨w01⟩…⟨w36⟩</code>, <code>⟨n01⟩…⟨n04⟩</code>, and <code>⟨x2⟩</code> — but the seed shuffles which symbol stands for which letter, codeword, null, or the doubleth, so a symbol's prefix says nothing about its role. Under the default seed <code>BABINGTON</code>, for example, the doubleth is <code>⟨w18⟩</code> and <code>⟨x2⟩</code> is the codeword DEATH.</p>
         <p style="margin-top:.75rem;">Try encoding "<em>POISON THE QUEEN AT THE TOWER</em>" and notice how POISON, THE, QUEEN, and TOWER each get their own codeword (one glyph for the whole word). Then encode "ATTACK" and watch the doubleth trap fire on the doubled T.</p>
         <p style="margin-top:.75rem;">J folds to I and V folds to U, matching the historical 23-letter Elizabethan alphabet.</p>
       </div>

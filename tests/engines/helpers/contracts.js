@@ -141,11 +141,11 @@ const contracts = {
     exampleKeys: ['3', '0', '11', '25', '7']
   },
   jefferson: {
-    keyArbitrary: fc.constantFrom(
-      '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26',
-      '3,1,5,2,4,6',
-      '26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1'
-    ),
+    // Random disk orders: any shuffled subset of the 26 disks, length >= 2.
+    keyArbitrary: fc.shuffledSubarray(
+      Array.from({ length: 26 }, (_, index) => index + 1),
+      { minLength: 2, maxLength: 26 }
+    ).map(order => order.join(',')),
     exampleKeys: [
       '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26',
       '3,1,5,2,4,6',
@@ -162,7 +162,10 @@ const contracts = {
     keyArbitrary: keywordArbitrary(),
     exampleKeys: keywordKeys
   },
-  dictionaryCode: dictionaryContract(),
+  // dictionaryCode legitimately emits '?' as its documented marker for letters
+  // absent from the reference text (decode uses the same marker), so the
+  // invalid-key garbage check must not treat ?-runs as leakage.
+  dictionaryCode: { ...dictionaryContract(), allowsMissMarkers: true },
   stager: {
     keyArbitrary: numericKeyArbitrary({ min: 2, max: 32 }),
     exampleKeys: ['5', '2', '4', '32', '7']
@@ -288,12 +291,10 @@ const contracts = {
   },
   morse: { alphabet: UPPER + '0123456789' },
   cardanoGrille: {
-    keyArbitrary: fc.constantFrom(
-      '5:0,3,7,12,19,21,24',
-      '2:0',
-      '3:0,2,4,6,8',
-      '4:0,1,2,3,4,5,6,7',
-      '6:0,5,7,12,18,23,30,35'
+    // Random grille patterns: size 2-6 with 1..size*2 distinct hole indexes.
+    keyArbitrary: fc.integer({ min: 2, max: 6 }).chain(size =>
+      fc.uniqueArray(fc.nat({ max: size * size - 1 }), { minLength: 1, maxLength: size * 2 })
+        .map(holes => `${size}:${[...holes].sort((a, b) => a - b).join(',')}`)
     ),
     exampleKeys: [
       '5:0,3,7,12,19,21,24',
@@ -400,15 +401,18 @@ function dictionaryContract() {
 }
 
 function bealeContract() {
-  const book = [
+  const words = [
     'ALFA', 'BRAVO', 'CHARLIE', 'DELTA', 'ECHO', 'FOXTROT', 'GOLF', 'HOTEL',
     'INDIA', 'JULIETT', 'KILO', 'LIMA', 'MIKE', 'NOVEMBER', 'OSCAR', 'PAPA',
     'QUEBEC', 'ROMEO', 'SIERRA', 'TANGO', 'UNIFORM', 'VICTOR', 'WHISKEY',
     'XRAY', 'YANKEE', 'ZULU'
-  ].join(' ');
+  ];
+  // Any rotation still covers all 26 initials, so index selection varies
+  // between runs without ever leaving the engine's supported domain.
+  const bookForOffset = offset => words.slice(offset).concat(words.slice(0, offset)).join(' ');
   return {
-    keyArbitrary: fc.constant(book),
-    exampleKeys: [book],
+    keyArbitrary: fc.integer({ min: 0, max: 25 }).map(bookForOffset),
+    exampleKeys: [0, 5, 13, 21, 25].map(bookForOffset),
     numRuns: 100
   };
 }
@@ -440,7 +444,11 @@ function defineContractSpec(name) {
     edgeKey: contract.exampleKeys?.[0] ?? contract.examples?.[0]?.key,
     edgeKeyFor: contract.edgeKeyFor,
     run: contract.run,
-    maxLongRunMs: contract.maxLongRunMs
+    maxLongRunMs: contract.maxLongRunMs,
+    // The 100 KB mixed-content roundtrip cycles the engine's declared
+    // alphabet, so it must match the property-test domain exactly.
+    longAlphabet: contract.longAlphabet ?? contract.alphabet,
+    allowsMissMarkers: contract.allowsMissMarkers
   });
 }
 
@@ -462,6 +470,9 @@ function canonicalizeInput(name, input) {
     : normalized.toUpperCase().replace(/[^A-Z]/g, '');
   if (IJ_TEXT.has(name)) result = result.replace(/J/g, 'I');
   if (name === 'tapCode') result = result.replace(/K/g, 'C');
+  // Babington uses the 24-letter Elizabethan alphabet: J folds into I, V into
+  // U, and W (historically written as double-V) has no symbol and is dropped.
+  // Declared in CIPHER_ENGINE_STANDARD.md §2 and disclosed on the exhibit page.
   if (name === 'babington') result = result.replace(/J/g, 'I').replace(/V/g, 'U').replace(/W/g, '');
   return result;
 }

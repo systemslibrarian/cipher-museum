@@ -3788,9 +3788,12 @@ window.CipherEngines = (() => {
 
   /* ─── Round 3: Diana Cryptosystem (reciprocal US SF field cipher) ─── */
   const diana = (() => {
-    // Diana is a Beaufort-style reciprocal cipher: c = (key - plain) mod 26.
-    // encode == decode, making it a true involution.  The US Special Forces
-    // "Diana" card printed this same table; we re-derive it algorithmically.
+    // DIANA trigraph rule: P + K + C ≡ 25 (mod 26), i.e. c = (25 - p - k) mod 26.
+    // Fully symmetric in all three letters — any two of {plain, key, cipher}
+    // yield the third from the same Tri-Graph table, so one lookup both
+    // encrypts and decrypts (a strict involution). Sources: NSA, Boak Lectures
+    // Vol. I (1973, decl. 2015) pp. 22-25; D. Rijmenants, "DIANA - A Fast
+    // Reciprocal One Time Pad Table" (2017); sfrvn.net Commo Security.
     function run(text, key) {
       const t = clean(text);
       const k = clean(key || 'DIANA');
@@ -3798,7 +3801,7 @@ window.CipherEngines = (() => {
       return t.split('').map((ch, i) => {
         const p = A.indexOf(ch);
         const kp = A.indexOf(k[i % k.length]);
-        return A[(26 + kp - p) % 26];
+        return A[(77 - p - kp) % 26];
       }).join('');
     }
     return { encode: run, decode: run };

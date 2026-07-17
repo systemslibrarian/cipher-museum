@@ -356,6 +356,8 @@ cipher-museum/
     ├── test-mobile.js         ← Responsive / mobile audit
     ├── test-structural.js     ← Structural / framing audit
     ├── test-demo-pages.js     ← End-to-end JSDOM simulation of every interactive demo
+    ├── test-exhibit-examples.js ← Every hardcoded exhibit example pinned against the engines
+    ├── test-sw-version.js     ← Service-worker cache version matches bundle hashes
     └── test-local-links.js    ← Local href/src link checker
 ```
 
@@ -417,6 +419,8 @@ node tests/test-mobile.js           #  531 — responsive / mobile audit across 
 node tests/test-structural.js       # 1773 — structural / framing audit across 176 pages
 node tests/test-demo-pages.js       #  789 — end-to-end JSDOM simulation of every interactive demo
 node tests/test-local-links.js      # 4945 — local href/src link checker across 176 HTML files
+node tests/test-exhibit-examples.js #   60 — every hardcoded exhibit example verified against the engines
+node tests/test-sw-version.js       #    1 — service-worker cache version derived from bundle hashes
 
 # … or via npm scripts
 npm run test:deep

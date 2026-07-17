@@ -17,7 +17,7 @@ Final report for the registry-engine verification sweep requested in
 | Corpus unexplained failures | 0 | [tests/engines/corpus-replay.js](../tests/engines/corpus-replay.js) |
 | Open P0 findings | 0 | this report |
 | Open P1 findings | 0 | this report |
-| Open P2 findings | 1 | Diana provenance caveat below |
+| Open P2 findings | 0 | Diana provenance resolved 2026-07-17 (see remediation) |
 | Open P3 findings | 1 | seeded-model KAT independence below |
 
 ## Resolved Findings
@@ -41,7 +41,6 @@ new per-engine spec suite.
 
 | Severity | Scope | Finding | Disposition |
 |---|---|---|---|
-| P2 | `diana` | The current engine is a reciprocal Beaufort-style implementation and passes roundtrip, fixed-vector, robustness, and corpus checks, but the sweep did not establish an independent authoritative Diana arithmetic/vector from locally available sources. | Keep the engine, but treat it as historically plausible rather than fully provenance-closed until an external primary or secondary source is attached. |
 | P3 | Seeded-model KATs | 18 seeded pedagogical machine models (`lorenz`, `purple`, `vic`, `sigaba`, `typex`, `fialka`, `kl7`, `geheimschreiber`, `kryha`, `m94`, `m209`, `redTypeA`, `slidex`, `copiale`, `argenti`, `greatCipher`, `babington`, `geezMonastic`, `trifid`) have pinned regression vectors rather than independently derived KATs, because their seeded shuffle pipelines have no external reference. They are labeled `pinned regression vector` in [known-answers.js](../tests/engines/helpers/known-answers.js). | Acceptable for pedagogical models: roundtrip properties, robustness checks, and exact-count corpus pinning still cover them. Upgrade any of them by authoring a genuinely independent reference derivation. |
 
 No open P0 or P1 engine defects remain after the sweep.
@@ -86,12 +85,17 @@ the start of the sweep and now pass the shared contract.
 These engines satisfied the current contract once they were covered by the new
 roundtrip, robustness, known-answer, and corpus replay suite.
 
-### Pass With One Open Caveat
+### Diana: Provenance Closed (2026-07-17)
 
-`diana`
-
-Current status: contract-compliant and reproducible, but historical provenance is
-still one source short of full closure.
+Web research against primary and secondary sources (NSA Boak Lectures Vol. I
+pp. 22–25; Rijmenants 2017; Special Forces in Vietnam veterans' accounts)
+established the authentic DIANA rule as `C = (25 - P - K) mod 26` — reciprocal
+and fully symmetric in plaintext, key, and cipher letters. The engine's former
+Beaufort arithmetic (`C = K - P`) did not match and was corrected; the engine
+now passes a published Special Forces pad vector
+(`ATTACKATDAWNXYZ` + pad `GORWYWETFRCOYET` → `TSPDZTVNRIBYEXH`) as an external
+KAT, the 1,680 synthetic corpus records were regenerated, and the exhibit page
+carries the sources.
 
 ## Post-Sweep Review Remediation (2026-07-17)
 
@@ -144,6 +148,6 @@ Accept the sweep results.
 - Engine correctness: cleared.
 - Robustness and state isolation: cleared.
 - Corpus replay: cleared with documented deviation rules and 0 unexplained failures.
-- Historical accuracy: materially improved; only Diana remains a provenance caveat.
-- Follow-up work: attach a sourced Diana note when an authoritative reference is
-  available.
+- Historical accuracy: cleared — the final provenance caveat (Diana) was closed
+  on 2026-07-17 with primary-source citations and an engine correction.
+- Follow-up work: none open at P0-P2; see the P3 seeded-model KAT note above.
