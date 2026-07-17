@@ -148,8 +148,7 @@ const tests = [
     customRoundtrip: true },
 
   // 30. Lorenz (self-reciprocal)
-  { engine: 'lorenz', label: 'Lorenz', msg: 'URGENT MESSAGE', key: 'LORENZ', roundtrip: false,
-    customRoundtrip: true },
+  { engine: 'lorenz', label: 'Lorenz', msg: 'URGENT MESSAGE', key: 'LORENZ', roundtrip: true },
 
   // 31. Dictionary Code
   { engine: 'dictionaryCode', label: 'Dictionary Code', msg: 'WTUSC', key: 'We the People of the United States in Order to form a more perfect Union establish Justice insure domestic Tranquility provide for the common defence', roundtrip: false,

@@ -179,7 +179,7 @@ const ENGINE_PROFILES = {
   alberti:                { key: '3',                                mode: 'roundtrip' },
   jefferson:              { key: '3,1,5,2,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26', mode: 'roundtrip' },
   enigma:                 { key: 'AAA',                              mode: 'self-reciprocal' },
-  lorenz:                 { key: 'LORENZ',                           mode: 'self-reciprocal' },
+  lorenz:                 { key: 'LORENZ',                           mode: 'roundtrip' },
   dictionaryCode:         { key: 'we the people of the united states form a perfect union establish justice insure domestic tranquility provide for the common defence', mode: 'dictionary' },
   stager:                 { key: '5',                                mode: 'roundtrip-padded' },
   vic:                    { key: 'SNOWFALL',                         mode: 'roundtrip-ij' },

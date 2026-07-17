@@ -4,7 +4,7 @@ if (typeof module !== "undefined" && module.exports) {
 }
 /**
  * THE CIPHER MUSEUM — All Cipher Engines
- * Complete implementations for every cipher exhibit (83 engines across the 140-exhibit
+ * Complete implementations for every cipher exhibit (84 engines across the 140-exhibit
  * collection; the remaining exhibits are biographies, context
  * pages, and unsolved/visualization-only widgets).
  */
@@ -12,8 +12,49 @@ if (typeof module !== "undefined" && module.exports) {
 
 window.CipherEngines = (() => {
   const A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const clean = t => t.toUpperCase().replace(/[^A-Z]/g, '');
+  const clean = text => String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '')
+    .toUpperCase().replace(/[^A-Z]/g, '');
+  const cleanAlphanumeric = text => String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '')
+    .toUpperCase().replace(/[^A-Z0-9]/g, '');
   const mod = (a, m) => ((a % m) + m) % m;
+  const boundedInt = (value, fallback, min, max) => {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isSafeInteger(parsed) && parsed >= min && parsed <= max ? parsed : fallback;
+  };
+  const secureRandomLetters = length => {
+    const crypto = globalThis.crypto;
+    if (!crypto || typeof crypto.getRandomValues !== 'function') {
+      throw new Error('Secure random generator unavailable');
+    }
+    let result = '';
+    while (result.length < length) {
+      const bytes = new Uint8Array(Math.max(32, (length - result.length) * 2));
+      crypto.getRandomValues(bytes);
+      for (const byte of bytes) {
+        if (byte < 234) result += A[byte % 26];
+        if (result.length === length) break;
+      }
+    }
+    return result;
+  };
+  const escapeFillers = text => text.split('').map(ch => {
+    if (ch === 'X') return 'ZA';
+    if (ch === 'Q') return 'ZB';
+    if (ch === 'Z') return 'ZC';
+    return ch;
+  }).join('');
+  const unescapeFillers = text => {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] === 'Z' && /[ABC]/.test(text[i + 1] || '')) {
+        result += { A: 'X', B: 'Q', C: 'Z' }[text[i + 1]];
+        i++;
+      } else {
+        result += text[i];
+      }
+    }
+    return result;
+  };
 
   /* ─── 1. Caesar ─── */
   const caesar = (() => {
@@ -110,7 +151,7 @@ window.CipherEngines = (() => {
         const table = buildTable(seed);
         const rev = {};
         for (const [ch, codes] of Object.entries(table)) for (const code of codes) rev[code] = ch;
-        return text.replace(/[^0-9]/g, '').match(/.{2}/g)?.map(c => rev[c] || '?').join('') || '';
+        return (String(text).match(/\d+/g) || []).map(code => rev[code] || '?').join('');
       }
     };
   })();
@@ -128,7 +169,7 @@ window.CipherEngines = (() => {
     function pairs(text) {
       // Filler is X, except when the letter needing a filler IS X — then use Q,
       // since a same-letter digraph (X,X) cannot be enciphered by Playfair rules.
-      let t = clean(text).replace(/J/g, 'I'), p = [], i = 0;
+      let t = escapeFillers(clean(text).replace(/J/g, 'I')), p = [], i = 0;
       while (i < t.length) {
         const a = t[i];
         const b = (i + 1 < t.length && t[i + 1] !== a) ? t[++i] : (a === 'X' ? 'Q' : 'X');
@@ -155,22 +196,17 @@ window.CipherEngines = (() => {
         const ps = [];
         for (let i = 0; i + 1 < c.length; i += 2) ps.push([c[i], c[i + 1]]);
         const raw = process(ps, makeGrid(k), false);
-        // Playfair encode inserts a filler (X, or Q around X) between doubled
-        // letters and pads odd-length plaintext. Strip those fillers on decode
-        // so the roundtrip recovers the original plaintext (J/I merging is
-        // intrinsic to the 5x5 grid and cannot be reversed).
+        // Literal X and Q are escaped before encryption, so X is unambiguously
+        // structural here: it either separates a doubled letter or pads the end.
         let out = '';
         for (let i = 0; i < raw.length; i++) {
           const ch = raw[i];
-          // A filler is always the second letter of its digraph, so it can only
-          // sit at an odd index — never strip letters at even positions.
-          const filler = i % 2 === 1 && i < raw.length - 1 && raw[i - 1] === raw[i + 1] &&
-                         (ch === 'X' || (ch === 'Q' && raw[i - 1] === 'X'));
+          const filler = i % 2 === 1 && i < raw.length - 1 && raw[i - 1] === raw[i + 1] && ch === 'X';
           if (filler) continue;
           out += ch;
         }
-        if (out.endsWith('X') || (out.endsWith('Q') && out[out.length - 2] === 'X')) out = out.slice(0, -1);
-        return out;
+        if (out.endsWith('X')) out = out.slice(0, -1);
+        return unescapeFillers(out);
       }
     };
   })();
@@ -180,7 +216,7 @@ window.CipherEngines = (() => {
     function modInv(a, m) { a = mod(a, m); for (let x = 1; x < m; x++) if ((a * x) % m === 1) return x; return -1; }
     return {
       encode: (text, keyStr) => {
-        const t = clean(text); const k = (keyStr || '3,3,2,5').split(',').map(Number);
+        const t = escapeFillers(clean(text)); const k = (keyStr || '3,3,2,5').split(',').map(Number);
         if (k.length < 4) return 'Need 4 numbers (2x2 matrix)';
         const padded = t.length % 2 ? t + 'X' : t; let r = '';
         for (let i = 0; i < padded.length; i += 2) {
@@ -200,7 +236,8 @@ window.CipherEngines = (() => {
           const c0 = t.charCodeAt(i) - 65, c1 = t.charCodeAt(i + 1) - 65;
           r += A[mod(inv[0] * c0 + inv[1] * c1, 26)] + A[mod(inv[2] * c0 + inv[3] * c1, 26)];
         }
-        return r;
+        if (r.endsWith('X')) r = r.slice(0, -1);
+        return unescapeFillers(r);
       }
     };
   })();
@@ -208,7 +245,7 @@ window.CipherEngines = (() => {
   /* ─── 7. Vigenère ─── */
   const vigenere = (() => {
     function run(text, key, enc) {
-      const t = clean(text), k = clean(key || 'KEY'); let r = '';
+      const t = clean(text), k = clean(key) || 'KEY'; let r = '';
       for (let i = 0; i < t.length; i++) {
         const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
         r += A[enc ? mod(p + ki, 26) : mod(p - ki, 26)];
@@ -221,7 +258,7 @@ window.CipherEngines = (() => {
   /* ─── 8. Beaufort ─── */
   const beaufort = (() => {
     function run(text, key) {
-      const t = clean(text), k = clean(key || 'KEY'); let r = '';
+      const t = clean(text), k = clean(key) || 'KEY'; let r = '';
       for (let i = 0; i < t.length; i++) {
         const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
         r += A[mod(ki - p, 26)];
@@ -256,7 +293,7 @@ window.CipherEngines = (() => {
       'ZNOPQRSTUVWXYBCDEFGHIJKLMA'
     ];
     function run(text, key) {
-      const t = clean(text), k = clean(key || 'KEY'); let r = '';
+      const t = clean(text), k = clean(key || 'KEY') || 'KEY'; let r = '';
       for (let i = 0; i < t.length; i++) {
         const ki = Math.floor((k.charCodeAt(i % k.length) - 65) / 2);
         const row = tableaux[ki % 13];
@@ -272,7 +309,7 @@ window.CipherEngines = (() => {
   const runningKey = (() => {
     const defaultKey = 'WE HOLD THESE TRUTHS TO BE SELF EVIDENT THAT ALL MEN ARE CREATED EQUAL';
     function run(text, key, enc) {
-      const t = clean(text), k = clean(key || defaultKey); let r = '';
+      const t = clean(text), k = clean(key) || clean(defaultKey); let r = '';
       for (let i = 0; i < t.length; i++) {
         const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
         r += A[enc ? mod(p + ki, 26) : mod(p - ki, 26)];
@@ -285,7 +322,7 @@ window.CipherEngines = (() => {
   /* ─── 12. Rail Fence ─── */
   const railFence = (() => ({
     encode: (text, key) => {
-      const t = clean(text), rails = Math.max(2, parseInt(key) || 3);
+      const t = clean(text), rails = boundedInt(key, 3, 2, 10000);
       const fence = Array.from({ length: rails }, () => []);
       let rail = 0, dir = 1;
       for (const ch of t) {
@@ -296,7 +333,7 @@ window.CipherEngines = (() => {
       return fence.flat().join('');
     },
     decode: (text, key) => {
-      const t = clean(text), n = t.length, rails = Math.max(2, parseInt(key) || 3);
+      const t = clean(text), n = t.length, rails = boundedInt(key, 3, 2, 10000);
       const pattern = Array(n); let rail = 0, dir = 1;
       for (let i = 0; i < n; i++) {
         pattern[i] = rail;
@@ -543,7 +580,7 @@ window.CipherEngines = (() => {
       encode: (text, key) => {
         const keys = (key || 'PRIVACY,GERMAN').split(',');
         const grid = makeGrid(keys[0]);
-        const t = text.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        const t = cleanAlphanumeric(text);
         let fractionated = '';
         for (const ch of t) {
           const i = grid.indexOf(ch);
@@ -591,6 +628,7 @@ window.CipherEngines = (() => {
         }).join(' ');
       },
       decode: (text, key) => {
+        if (!String(text).trim()) return '';
         const keys = (key || 'RUSSIAN,KEY').split(',');
         const grid = makeGrid(keys[0]), kw = clean(keys[1] || 'KEY').replace(/J/g, 'I');
         return text.trim().split(/\s+/).map((n, i) => {
@@ -608,10 +646,10 @@ window.CipherEngines = (() => {
       const userKey = clean(key || '');
       let k = userKey;
       let autoGenerated = false;
-      if (k.length < t.length) {
+      if (k.length > 0 && k.length < t.length) return 'Key must be at least as long as message';
+      if (!k.length && t.length) {
         autoGenerated = true;
-        const rng = (s => () => { s = (s * 1664525 + 1013904223) & 0x7fffffff; return s % 26; })(Date.now());
-        while (k.length < t.length) k += A[rng()];
+        k = secureRandomLetters(t.length);
       }
       let r = '';
       for (let i = 0; i < t.length; i++) r += A[mod(t.charCodeAt(i) - 65 + k.charCodeAt(i) - 65, 26)];
@@ -635,7 +673,7 @@ window.CipherEngines = (() => {
     const ALPHA32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 
     function cleanAlpha26(text) {
-      return (text || '').toUpperCase().replace(/[^A-Z]/g, '');
+      return clean(text);
     }
 
     function cleanAlpha32(text) {
@@ -802,7 +840,7 @@ window.CipherEngines = (() => {
   const confederateVigenere = (() => {
     const inner = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     function run(text, key, enc) {
-      const t = clean(text), k = clean(key || 'CONFEDERATE'); let r = '';
+      const t = clean(text), k = clean(key) || 'CONFEDERATE'; let r = '';
       for (let i = 0; i < t.length; i++) {
         const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
         r += A[enc ? mod(p + ki, 26) : mod(p - ki, 26)];
@@ -825,7 +863,7 @@ window.CipherEngines = (() => {
       encode: (text, key) => {
         const num = parseInt(key) || 42;
         const word = numToWord(Math.min(num, 99));
-        const subst = monoalphabetic.encode(text, word);
+        const subst = monoalphabetic.encode(clean(text), word);
         const t = clean(subst), group = Math.max(2, Math.min(num % 7 + 2, 6));
         const blocks = [];
         for (let i = 0; i < t.length; i += group) blocks.push(t.substr(i, group).split('').reverse().join(''));
@@ -875,7 +913,7 @@ window.CipherEngines = (() => {
       'XJKCRMQGIVHNASLBWEZTFDYOUP', 'UFJKDHGAQLMNZXRBPEYCSWVITO',
       'GLCBXQJFHZOYMVTPWNIUDRSAKE', 'WHQDUMEYPNIFJZARXLTOCSVGKB',
       'JDVFATBSMCPZYKUOWENRHGQLXI', 'TMNFQXZLHKAWBUIVRGDSPECYOJ',
-      'OYQBFHMCZKTIJAPGLEDSRUXNWV', 'YXTQLJDZWKFVSRMPGOBIAUNCHM',
+      'OYQBFHMCZKTIJAPGLEDSRUXNWV', 'YXTQLJDZWKFVSRMPGOBIAUNCHE',
       'CSKDLHQRGBJMWZXIPVTOYFNUAE', 'LDBJITMWPFGVUYCNHSAOXQREKZ',
       'BFQEMYIRZAKOWJHCTSVDNLGPUX', 'NOQIFYJWGRHUBLPXDTSKZACMVE',
       'AXHDMQGZNRJFYVPBCWSLTEUIOK', 'WRNEIBKDGFQZJVOMSLHTUPYCXA',
@@ -950,48 +988,77 @@ window.CipherEngines = (() => {
 
   /* ─── 30. Lorenz (Simplified SZ40) ─── */
   const lorenz = (() => {
+    const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+    const ita2 = {
+      A:3, B:25, C:14, D:9, E:1, F:13, G:26, H:20, I:6, J:11, K:15,
+      L:18, M:28, N:12, O:24, P:22, Q:23, R:10, S:5, T:16, U:7,
+      V:30, W:19, X:29, Y:21, Z:17
+    };
+    const ita2Letters = Object.fromEntries(Object.entries(ita2).map(([letter, value]) => [value, letter]));
     function makeWheel(size, seed) {
       const bits = [];
-      // Keep the seed inside 32-bit range and take a HIGH-order bit of the
-      // LCG. The low bit of an LCG with an odd multiplier/increment merely
-      // alternates 0,1,0,1…, which collapses the keystream to a near no-op.
       const rng = (s => () => { s = (Math.imul(s, 1103515245) + 12345) & 0x7fffffff; return (s >>> 30) & 1; })(seed & 0x7fffffff);
       for (let i = 0; i < size; i++) bits.push(rng());
       return bits;
     }
-    function run(text, key) {
-      const t = clean(text);
+    function run(text, key, decrypt) {
+      const input = decrypt
+        ? String(text ?? '').toUpperCase().replace(/[^A-Z2-7]/g, '')
+        : clean(text);
       const seed = clean(key || 'LORENZ').split('').reduce((s, c) => (Math.imul(s, 31) + c.charCodeAt(0)) & 0x7fffffff, 7);
-      const chi = [makeWheel(41, seed), makeWheel(31, seed + 1), makeWheel(29, seed + 2),
-        makeWheel(26, seed + 3), makeWheel(23, seed + 4)];
-      const psi = [makeWheel(43, seed + 5), makeWheel(47, seed + 6), makeWheel(51, seed + 7),
-        makeWheel(53, seed + 8), makeWheel(59, seed + 9)];
+      const chiLengths = [41, 31, 29, 26, 23];
+      const psiLengths = [43, 47, 51, 53, 59];
+      const chi = chiLengths.map((length, index) => makeWheel(length, seed + index));
+      const psi = psiLengths.map((length, index) => makeWheel(length, seed + 5 + index));
+      const motor37 = makeWheel(37, seed + 10);
+      const motor61 = makeWheel(61, seed + 11);
+      const chiPosition = [0, 0, 0, 0, 0];
+      const psiPosition = [0, 0, 0, 0, 0];
+      let motor37Position = 0;
+      let motor61Position = 0;
       let result = '';
-      for (let i = 0; i < t.length; i++) {
-        const p = t.charCodeAt(i) - 65;
-        // Assemble the 5-bit chi⊕psi keystream value (0..31) for this position.
-        let k = 0;
-        for (let b = 0; b < 5; b++) {
-          const xorBit = chi[b][i % chi[b].length] ^ psi[b][i % psi[b].length];
-          k |= (xorBit << b);
+      for (const character of input) {
+        let keyValue = 0;
+        for (let bit = 0; bit < 5; bit++) {
+          keyValue |= ((chi[bit][chiPosition[bit]] ^ psi[bit][psiPosition[bit]]) << bit);
         }
-        // The real SZ40 XORs 5-bit Baudot, which is reciprocal because 32 is a
-        // power of two. Over a 26-letter alphabet XOR + (mod 26) is NOT
-        // reversible, so we use a Beaufort combiner — c = (k - p) mod 26 — which
-        // is its own inverse and lets a single `run` serve as encode and decode.
-        result += A[mod(k - p, 26)];
+        const inputValue = decrypt ? glyphs.indexOf(character) : ita2[character];
+        const outputValue = inputValue ^ keyValue;
+        result += decrypt ? (ita2Letters[outputValue] || '·') : glyphs[outputValue];
+
+        for (let bit = 0; bit < 5; bit++) {
+          chiPosition[bit] = (chiPosition[bit] + 1) % chiLengths[bit];
+        }
+        const stepMotor61 = motor37[motor37Position] === 1;
+        motor37Position = (motor37Position + 1) % motor37.length;
+        if (stepMotor61) {
+          const stepPsi = motor61[motor61Position] === 1;
+          motor61Position = (motor61Position + 1) % motor61.length;
+          if (stepPsi) {
+            for (let bit = 0; bit < 5; bit++) {
+              psiPosition[bit] = (psiPosition[bit] + 1) % psiLengths[bit];
+            }
+          }
+        }
       }
       return result;
     }
-    return { encode: run, decode: run };
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
   })();
 
   /* ─── 31. Dictionary Code ─── */
   const dictionaryCode = (() => {
     const defaultText = 'We the People of the United States in Order to form a more perfect Union establish Justice insure domestic Tranquility provide for the common defence promote the general Welfare and secure the Blessings of Liberty to ourselves and our Posterity do ordain and establish this Constitution for the United States of America';
+    function referenceWords(key) {
+      const words = String(key ?? '').split(/\s+/).filter(word => /^[A-Za-z]/.test(word));
+      return words.length ? words : defaultText.split(/\s+/);
+    }
     return {
       encode: (text, key) => {
-        const ref = (key || defaultText).split(/\s+/);
+        const ref = referenceWords(key);
         const t = clean(text);
         const indices = [];
         for (const ch of t) {
@@ -1004,7 +1071,8 @@ window.CipherEngines = (() => {
         return indices.join('-');
       },
       decode: (text, key) => {
-        const ref = (key || defaultText).split(/\s+/);
+        if (!String(text).trim()) return '';
+        const ref = referenceWords(key);
         return text.split(/[-\s]+/).map(n => {
           const idx = parseInt(n) - 1;
           return (idx >= 0 && idx < ref.length) ? ref[idx][0].toUpperCase() : '?';
@@ -1016,8 +1084,8 @@ window.CipherEngines = (() => {
   /* ─── 32. Stager (Route Cipher) ─── */
   const stager = (() => ({
     encode: (text, key) => {
-      const t = clean(text);
-      const cols = Math.max(2, parseInt(key) || 5);
+      const t = escapeFillers(clean(text));
+      const cols = boundedInt(key, 5, 2, 10000);
       const rows = Math.ceil(t.length / cols);
       const grid = [];
       let idx = 0;
@@ -1034,7 +1102,7 @@ window.CipherEngines = (() => {
     },
     decode: (text, key) => {
       const t = clean(text);
-      const cols = Math.max(2, parseInt(key) || 5);
+      const cols = boundedInt(key, 5, 2, 10000);
       const rows = Math.ceil(t.length / cols);
       const grid = Array.from({ length: rows }, () => Array(cols).fill(''));
       let idx = 0;
@@ -1044,7 +1112,7 @@ window.CipherEngines = (() => {
       }
       let result = '';
       for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) result += grid[r][c];
-      return result;
+      return unescapeFillers(result.replace(/X+$/, ''));
     }
   }))();
 
@@ -1067,21 +1135,90 @@ window.CipherEngines = (() => {
       }
       return { map, rev };
     }
+
+    function chainDigits(key, length) {
+      const source = clean(key || 'SNOWFALL') || 'SNOWFALL';
+      const base = source.split('').map(ch => (ch.charCodeAt(0) - 64) % 10);
+      const digits = Array.from({ length: 10 }, (_, index) => base[index % base.length]);
+      for (let index = 0; digits.length < length; index++) {
+        digits.push((digits[index] + digits[index + 1]) % 10);
+      }
+      return digits.slice(0, length);
+    }
+
+    function transpositionKeys(key) {
+      const derived = chainDigits(key, 22);
+      return [derived.slice(10, 15).join(''), derived.slice(15, 22).join('')];
+    }
+
+    function digitOrder(key) {
+      return key.split('').map((digit, index) => ({ digit: Number(digit), index }))
+        .sort((left, right) => left.digit - right.digit || left.index - right.index)
+        .map(entry => entry.index);
+    }
+
+    function transpose(text, key) {
+      if (!text) return '';
+      const columns = Array.from({ length: key.length }, () => '');
+      for (let index = 0; index < text.length; index++) columns[index % key.length] += text[index];
+      return digitOrder(key).map(index => columns[index]).join('');
+    }
+
+    function untranspose(text, key) {
+      if (!text) return '';
+      const columnCount = key.length;
+      const rows = Math.ceil(text.length / columnCount);
+      const remainder = text.length % columnCount;
+      const columns = Array(columnCount).fill('');
+      let offset = 0;
+      for (const index of digitOrder(key)) {
+        const length = remainder === 0 || index < remainder ? rows : rows - 1;
+        columns[index] = text.slice(offset, offset + length);
+        offset += length;
+      }
+      let result = '';
+      for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columnCount; column++) {
+          if (row < columns[column].length) result += columns[column][row];
+        }
+      }
+      return result;
+    }
+
+    function decodeCheckerboard(text, key) {
+      const { rev } = makeCheckerboard(key);
+      let result = '';
+      for (let index = 0; index < text.length;) {
+        if (rev[text[index]]) {
+          result += rev[text[index]];
+          index++;
+        } else if (index + 1 < text.length && rev[text.slice(index, index + 2)]) {
+          result += rev[text.slice(index, index + 2)];
+          index += 2;
+        } else {
+          result += '?';
+          index++;
+        }
+      }
+      return result;
+    }
+
     return {
       encode: (text, key) => {
         const { map } = makeCheckerboard(key);
-        return clean(text).replace(/J/g, 'I').split('').map(ch => map[ch] || '??').join('');
+        const checkerboard = clean(text).replace(/J/g, 'I').split('').map(ch => map[ch] || '').join('');
+        const stream = chainDigits(key, checkerboard.length);
+        const added = checkerboard.split('').map((digit, index) => (Number(digit) + stream[index]) % 10).join('');
+        const [firstKey, secondKey] = transpositionKeys(key);
+        return transpose(transpose(added, firstKey), secondKey);
       },
       decode: (text, key) => {
-        const { rev } = makeCheckerboard(key);
         const nums = text.replace(/[^0-9]/g, '');
-        let result = '', i = 0;
-        while (i < nums.length) {
-          if (rev[nums[i]]) { result += rev[nums[i]]; i++; }
-          else if (i + 1 < nums.length && rev[nums.substr(i, 2)]) { result += rev[nums.substr(i, 2)]; i += 2; }
-          else { result += '?'; i++; }
-        }
-        return result;
+        const [firstKey, secondKey] = transpositionKeys(key);
+        const added = untranspose(untranspose(nums, secondKey), firstKey);
+        const stream = chainDigits(key, added.length);
+        const checkerboard = added.split('').map((digit, index) => mod(Number(digit) - stream[index], 10)).join('');
+        return decodeCheckerboard(checkerboard, key);
       }
     };
   })();
@@ -1089,7 +1226,7 @@ window.CipherEngines = (() => {
   /* ─── 34. Scytale ─── */
   const scytale = (() => ({
     encode: (text, key) => {
-      const t = clean(text), rows = Math.max(2, parseInt(key) || 3);
+      const t = escapeFillers(clean(text)), rows = boundedInt(key, 3, 2, 10000);
       const cols = Math.ceil(t.length / rows);
       const padded = t.padEnd(rows * cols, 'X');
       let r = '';
@@ -1098,41 +1235,56 @@ window.CipherEngines = (() => {
       return r;
     },
     decode: (text, key) => {
-      const t = clean(text), rows = Math.max(2, parseInt(key) || 3);
+      const t = clean(text), rows = boundedInt(key, 3, 2, 10000);
       const cols = Math.ceil(t.length / rows);
       const padded = t.padEnd(rows * cols, 'X');
       let r = '';
       for (let row = 0; row < rows; row++)
         for (let c = 0; c < cols; c++) r += padded[c * rows + row];
-      return r;
+      return unescapeFillers(r.replace(/X+$/, ''));
     }
   }))();
 
   /* ─── 35. Vernam (XOR) ─── */
-  const vernam = (() => ({
-    encode: (text, key) => {
-      const t = clean(text);
-      const userKey = clean(key || '');
-      let k = userKey;
-      let autoGenerated = false;
-      if (k.length < t.length) {
-        autoGenerated = true;
-        const rng = (s => () => { s = (s * 1664525 + 1013904223) & 0x7fffffff; return s % 26; })(Date.now());
-        while (k.length < t.length) k += A[rng()];
+  const vernam = (() => {
+    function parseKey(key) {
+      const raw = String(key ?? '');
+      if (/^hex:/i.test(raw)) {
+        const hex = raw.slice(4).replace(/\s+/g, '');
+        if (!/^(?:[0-9a-f]{2})*$/i.test(hex)) return null;
+        return Uint8Array.from(hex.match(/.{2}/g)?.map(byte => parseInt(byte, 16)) || []);
       }
-      let r = '';
-      for (let i = 0; i < t.length; i++) r += A[mod(t.charCodeAt(i) - 65 + k.charCodeAt(i) - 65, 26)];
-      return autoGenerated ? r + '\n[Key: ' + k.substr(0, t.length) + ']' : r;
-    },
-    decode: (text, key) => {
-      const raw = (text || '').replace(/\n?\[Key:[^\]]*\]\s*$/i, '');
-      const t = clean(raw), k = clean(key || '');
-      if (k.length < t.length) return 'Key must be at least as long as message';
-      let r = '';
-      for (let i = 0; i < t.length; i++) r += A[mod(t.charCodeAt(i) - 65 - (k.charCodeAt(i) - 65), 26)];
-      return r;
+      return Uint8Array.from(clean(raw).split('').map(ch => ch.charCodeAt(0)));
     }
-  }))();
+
+    return {
+      encode: (text, key) => {
+        const plaintext = clean(text);
+        const plainBytes = Uint8Array.from(plaintext.split('').map(ch => ch.charCodeAt(0)));
+        let keyBytes = parseKey(key);
+        if (keyBytes === null) return 'Key must be text or hex:<bytes>';
+        let generatedKey = '';
+        if (keyBytes.length > 0 && keyBytes.length < plainBytes.length) return 'Key must be at least as long as message';
+        if (!keyBytes.length && plainBytes.length) {
+          generatedKey = secureRandomLetters(plainBytes.length);
+          keyBytes = parseKey(generatedKey);
+        }
+        const ciphertext = Array.from(plainBytes, (byte, index) => (byte ^ keyBytes[index]).toString(16).padStart(2, '0')).join('');
+        return generatedKey ? ciphertext + '\n[Key: ' + generatedKey + ']' : ciphertext;
+      },
+      decode: (text, key) => {
+        const source = String(text ?? '');
+        const annotation = source.match(/\n?\[Key:\s*([^\]]+)\]\s*$/i);
+        const raw = source.replace(/\n?\[Key:[^\]]*\]\s*$/i, '').replace(/\s+/g, '');
+        if (!/^(?:[0-9a-f]{2})*$/i.test(raw)) return 'Ciphertext must be hexadecimal bytes';
+        const cipherBytes = Uint8Array.from(raw.match(/.{2}/g)?.map(byte => parseInt(byte, 16)) || []);
+        const keyBytes = parseKey(key || annotation?.[1] || '');
+        if (keyBytes === null) return 'Key must be text or hex:<bytes>';
+        if (keyBytes.length < cipherBytes.length) return 'Key must be at least as long as message';
+        return Array.from(cipherBytes, (byte, index) => String.fromCharCode(byte ^ keyBytes[index])).join('');
+      }
+    };
+  })();
 
   /* ─── 38. Great Cipher (Grand Chiffre des Rossignols) ─── */
   // Syllable-based nomenclator used by Antoine & Bonaventure Rossignol
@@ -1544,6 +1696,7 @@ window.CipherEngines = (() => {
       const [k1, k2] = (key || 'EXAMPLE,KEYWORD').split(',');
       const TL = G, TR = makeSquare(k1), BL = makeSquare(k2), BR = G;
       let t = clean(text).replace(/J/g, 'I');
+      if (enc) t = escapeFillers(t);
       if (t.length % 2) t += 'X';
       let out = '';
       for (let i = 0; i < t.length; i += 2) {
@@ -1556,6 +1709,7 @@ window.CipherEngines = (() => {
           out += TL[r1 * 5 + c2] + BR[r2 * 5 + c1];
         }
       }
+      if (!enc) return unescapeFillers(out.replace(/X+$/, ''));
       return out;
     }
     return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
@@ -1576,15 +1730,17 @@ window.CipherEngines = (() => {
       const [k1, k2] = (key || 'EXAMPLE,KEYWORD').split(',');
       const L = makeSquare(k1), R = makeSquare(k2);
       let t = clean(text).replace(/J/g, 'I');
+      if (enc) t = escapeFillers(t);
       if (t.length % 2) t += 'X';
       let out = '';
       for (let i = 0; i < t.length; i += 2) {
         const a = t[i], b = t[i + 1];
-        const [r1, c1] = pos(enc ? L : L, a);
-        const [r2, c2] = pos(enc ? R : R, b);
+        const [r1, c1] = pos(L, a);
+        const [r2, c2] = pos(R, b);
         if (r1 === r2) { out += L[r1 * 5 + c1] + R[r2 * 5 + c2]; } // same row → unchanged
         else { out += L[r1 * 5 + c2] + R[r2 * 5 + c1]; }
       }
+      if (!enc) return unescapeFillers(out.replace(/X+$/, ''));
       return out;
     }
     // Two-square is reciprocal in the "no-flip" variant we use
@@ -1807,6 +1963,7 @@ window.CipherEngines = (() => {
     function run(text, key, enc) {
       let deck = initDeck(key);
       let t = clean(text); let out = '';
+      if (enc) t = escapeFillers(t);
       // Schneier's spec pads the plaintext with X to a multiple of five before
       // encrypting; his published test vectors (e.g. SOLITAIRE/CRYPTONOMICON →
       // KIRAK SFJAN) require it. Padding stays in the decoded output — both
@@ -1818,6 +1975,7 @@ window.CipherEngines = (() => {
         const c = enc ? ((p + r.value - 1) % 26) + 1 : ((p - r.value + 26 - 1) % 26) + 1;
         out += String.fromCharCode(64 + (c === 0 ? 26 : c));
       }
+      if (!enc) return unescapeFillers(out.replace(/X+$/, ''));
       return out;
     }
     return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
@@ -1928,50 +2086,62 @@ window.CipherEngines = (() => {
   })();
 
   /* ─── 50. Purple (Japanese WWII — simplified stepping rotor model) ─── */
-  // The real Purple split letters into "sixes" (6 vowels) and "twenties" (20 consonants)
-  // routed through stepping switches. We model the essence: a substitution that
-  // changes per character based on three stepping wheels.
   const purple = (() => {
+    const sixes = 'AEIOUY';
+    const twenties = 'BCDFGHJKLMNPQRSTVWXZ';
+
+    function shuffled(alphabet, rng) {
+      const values = alphabet.split('');
+      for (let index = values.length - 1; index > 0; index--) {
+        const swapAt = Math.floor(rng() * (index + 1));
+        [values[index], values[swapAt]] = [values[swapAt], values[index]];
+      }
+      return values.join('');
+    }
+
     function build(key) {
       const k = (clean(key || 'PURPLE') + 'TOKYO').split('').map(c => c.charCodeAt(0));
       let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
       if (s === 0) s = 1;
       const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
-      // 25 substitution alphabets (simulating switch positions)
-      const alphas = [];
-      for (let i = 0; i < 25; i++) {
-        const arr = A.split('');
-        for (let j = arr.length - 1; j > 0; j--) {
-          const r = Math.floor(rng() * (j + 1));
-          [arr[j], arr[r]] = [arr[r], arr[j]];
+      const sixesTables = Array.from({ length: 25 }, () => shuffled(sixes, rng));
+      const twentiesBanks = Array.from({ length: 3 }, () =>
+        Array.from({ length: 25 }, () => shuffled(twenties, rng)));
+      return { sixesTables, twentiesBanks };
+    }
+
+    function substitute(character, alphabet, table, decrypt) {
+      return decrypt ? alphabet[table.indexOf(character)] : table[alphabet.indexOf(character)];
+    }
+
+    function run(text, key, decrypt) {
+      const { sixesTables, twentiesBanks } = build(key);
+      const input = clean(text);
+      let result = '';
+      for (let index = 0; index < input.length; index++) {
+        let character = input[index];
+        if (sixes.includes(character)) {
+          character = substitute(character, sixes, sixesTables[index % 25], decrypt);
+        } else {
+          const positions = [index % 25, Math.floor(index / 25) % 25, Math.floor(index / 625) % 25];
+          if (decrypt) {
+            for (let bank = 2; bank >= 0; bank--) {
+              character = substitute(character, twenties, twentiesBanks[bank][positions[bank]], true);
+            }
+          } else {
+            for (let bank = 0; bank < 3; bank++) {
+              character = substitute(character, twenties, twentiesBanks[bank][positions[bank]], false);
+            }
+          }
         }
-        alphas.push(arr.join(''));
+        result += character;
       }
-      return alphas;
+      return result;
     }
-    function step(i) {
-      // Three wheels with periods 25, 24, 23 — pick alphabet by their sum
-      return ((i % 25) + Math.floor(i / 25) % 24 + Math.floor(i / 600) % 23) % 25;
-    }
+
     return {
-      encode: (text, key) => {
-        const alphas = build(key);
-        const t = clean(text); let out = '';
-        for (let i = 0; i < t.length; i++) {
-          const a = alphas[step(i)];
-          out += a[A.indexOf(t[i])];
-        }
-        return out;
-      },
-      decode: (text, key) => {
-        const alphas = build(key);
-        const t = clean(text); let out = '';
-        for (let i = 0; i < t.length; i++) {
-          const a = alphas[step(i)];
-          out += A[a.indexOf(t[i])];
-        }
-        return out;
-      }
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
     };
   })();
 
@@ -2012,7 +2182,7 @@ window.CipherEngines = (() => {
     };
     const REV = Object.fromEntries(Object.entries(VOCAB).map(([k,v])=>[v,k]));
     function enc(text, _key) {
-      const tokens = (text || '').toUpperCase().split(/\b/);
+      const tokens = String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '').toUpperCase().split(/\b/);
       const out = [];
       for (const tok of tokens) {
         if (/^[A-Z]+$/.test(tok)) {
@@ -2057,11 +2227,8 @@ window.CipherEngines = (() => {
       for (const w of words) {
         const i = BOOK.indexOf(w);
         if (i >= 0) { out.push(String(i + 1)); continue; }
-        // letter-level fallback: position of first matching first-letter
-        for (const ch of w) {
-          const j = BOOK.findIndex(b => b[0] === ch);
-          if (j >= 0) out.push(String(j + 1) + '.' + 1);
-        }
+        const literal = w.replace(/[^A-Z]/g, '').split('').map(ch => A.indexOf(ch) + 1);
+        if (literal.length) out.push('0.' + literal.join('.'));
       }
       return out.join(' ');
     }
@@ -2069,7 +2236,10 @@ window.CipherEngines = (() => {
       const groups = (text || '').trim().split(/\s+/);
       const out = [];
       for (const g of groups) {
-        if (g.includes('.')) {
+        if (/^0(?:\.\d+)+$/.test(g)) {
+          const literal = g.split('.').slice(1).map(n => A[parseInt(n, 10) - 1] || '?').join('');
+          out.push(literal);
+        } else if (g.includes('.')) {
           const [w, l] = g.split('.').map(n => parseInt(n, 10));
           if (BOOK[w - 1]) out.push(BOOK[w - 1][l - 1] || '?');
         } else {
@@ -2806,16 +2976,10 @@ window.CipherEngines = (() => {
     const REV = Object.fromEntries(Object.entries(TABLE).map(([k,v])=>[v,k]));
     return {
       encode: (text /* key ignored */) => {
-        const src = String(text || '').toUpperCase();
-        const out = [];
-        for (const ch of src) {
-          if (ch === ' ' || ch === '\n' || ch === '\t') {
-            if (out.length && out[out.length - 1] !== '/') out.push('/');
-            continue;
-          }
-          if (TABLE[ch]) out.push(TABLE[ch]);
-        }
-        return out.join(' ').replace(/\s*\/\s*/g, ' / ').trim();
+        const words = String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '')
+          .toUpperCase().split(/\s+/).map(word => word.replace(/[^A-Z0-9]/g, ''))
+          .filter(Boolean);
+        return words.map(word => word.split('').map(ch => TABLE[ch]).join(' ')).join(' / ');
       },
       decode: (text) => {
         const tokens = String(text || '').trim().split(/\s+/);
@@ -2858,27 +3022,36 @@ window.CipherEngines = (() => {
     return {
       encode: (text, key) => {
         const { size, indices } = parsePattern(key);
-        const msg = clean(text);
+        const msg = escapeFillers(clean(text));
+        if (!msg) return '';
         const total = size * size;
-        const slots = indices.length ? indices : Array.from({ length: Math.min(msg.length, total) }, (_, i) => i);
-        // Pad message with X to fill all grille slots so encode/decode round-trip.
-        const padded = msg.length < slots.length ? msg + 'X'.repeat(slots.length - msg.length) : msg.slice(0, slots.length);
-        const grid = new Array(total).fill('');
-        for (let i = 0; i < slots.length; i++) grid[slots[i]] = padded[i];
-        for (let i = 0; i < total; i++) if (!grid[i]) grid[i] = FILLERS[i % FILLERS.length];
-        let out = '';
-        for (let r = 0; r < size; r++) {
-          out += grid.slice(r * size, (r + 1) * size).join('') + (r < size - 1 ? '\n' : '');
+        const slots = indices.length ? indices : Array.from({ length: total }, (_, i) => i);
+        const blocks = [];
+        for (let offset = 0; offset < msg.length; offset += slots.length) {
+          const chunk = msg.slice(offset, offset + slots.length).padEnd(slots.length, 'X');
+          const grid = new Array(total).fill('');
+          for (let i = 0; i < slots.length; i++) grid[slots[i]] = chunk[i];
+          for (let i = 0; i < total; i++) if (!grid[i]) grid[i] = FILLERS[i % FILLERS.length];
+          const rows = [];
+          for (let row = 0; row < size; row++) {
+            rows.push(grid.slice(row * size, (row + 1) * size).join(''));
+          }
+          blocks.push(rows.join('\n'));
         }
-        return out;
+        return blocks.join('\n\n');
       },
       decode: (text, key) => {
         const { size, indices } = parsePattern(key);
-        const flat = String(text || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, size * size);
-        const slots = indices.length ? indices : Array.from({ length: flat.length }, (_, i) => i);
+        const source = String(text || '').trim();
+        if (!source) return '';
+        const total = size * size;
+        const slots = indices.length ? indices : Array.from({ length: total }, (_, i) => i);
         let out = '';
-        for (const idx of slots) if (idx < flat.length) out += flat[idx];
-        return out;
+        for (const block of source.split(/\n\s*\n/)) {
+          const flat = block.toUpperCase().replace(/[^A-Z]/g, '').slice(0, total);
+          for (const idx of slots) if (idx < flat.length) out += flat[idx];
+        }
+        return unescapeFillers(out.replace(/X+$/, ''));
       }
     };
   })();
@@ -2897,7 +3070,7 @@ window.CipherEngines = (() => {
       if (k === 'first' || k === '1') return 0;
       if (k === 'last') return -1;
       const n = parseInt(k, 10);
-      if (!isNaN(n) && n >= 1) return n - 1;
+      if (Number.isSafeInteger(n) && n >= 1 && n <= 1024) return n - 1;
       return 0;
     }
     function pickCarrier(letter, pos, salt) {
@@ -2923,7 +3096,7 @@ window.CipherEngines = (() => {
     return {
       encode: (text, key) => {
         const pos = pickPos(key);
-        const msg = String(text || '').toUpperCase().replace(/[^A-Z]/g, '');
+        const msg = clean(text);
         const words = [];
         for (let i = 0; i < msg.length; i++) words.push(pickCarrier(msg[i], pos, i));
         return words.join(' ');
@@ -3098,7 +3271,7 @@ window.CipherEngines = (() => {
     return {
       encode: (text, key) => {
         const { enc } = buildCard(key);
-        let msg = clean(text);
+        let msg = escapeFillers(clean(text));
         if (msg.length % 2 === 1) msg += 'X';
         let r = '';
         for (let i = 0; i < msg.length; i += 2) {
@@ -3115,7 +3288,7 @@ window.CipherEngines = (() => {
           const bg = msg.substr(i, 2);
           r += dec[bg] || bg;
         }
-        return r;
+        return unescapeFillers(r.replace(/X+$/, ''));
       }
     };
   })();

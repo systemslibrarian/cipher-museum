@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "node tests/run-all.js",
-    "test:engines": "node tests/test-all-engines.js",
+    "test:engines": "node tests/engines/run.js",
     "test:deep": "node tests/test-deep-ciphers.js",
     "test:comprehensive": "node tests/test-comprehensive.js",
     "test:demos": "node tests/test-demo-pages.js",
@@ -26,6 +26,7 @@
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
+    "fast-check": "^4.9.0",
     "htmlhint": "^1.9.2",
     "jsdom": "^24.0.0",
     "terser": "^5.48.0"

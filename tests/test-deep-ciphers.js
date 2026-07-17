@@ -188,7 +188,7 @@ section('Hill — Matrix Operations');
   eq('HI roundtrip', dec, 'HI');
   // Longer message
   const enc2 = h.encode('SHORT', '3,3,2,5');
-  eq('SHORT roundtrip', clean(h.decode(enc2, '3,3,2,5')), 'SHORTX');
+  eq('SHORT roundtrip', clean(h.decode(enc2, '3,3,2,5')), 'SHORT');
   // Non-invertible matrix
   const bad = h.decode('AB', '2,4,1,2');
   ok('non-invertible returns message', bad.length > 0);
@@ -562,15 +562,15 @@ section('Enigma — Self-Reciprocal Rotor Machine');
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   30. LORENZ (self-reciprocal)
+   30. LORENZ (ITA2 XOR)
    ═══════════════════════════════════════════════════════════════ */
-section('Lorenz — Self-Reciprocal XOR Stream');
+section('Lorenz — ITA2 XOR Stream');
 {
   const lz = E.lorenz;
   for (const key of ['LORENZ', 'SECRET', 'BLETCHLEY']) {
     const msg = 'URGENTMESSAGE';
     const enc = lz.encode(msg, key);
-    eq(`self-reciprocal key=${key}`, clean(lz.encode(enc, key)), clean(msg));
+    eq(`roundtrip key=${key}`, clean(lz.decode(enc, key)), clean(msg));
   }
 }
 
@@ -707,8 +707,8 @@ section('Solitaire — Schneier Known Answers');
   eq('key A, 15×A', s.encode('AAAAAAAAAAAAAAA', 'A'), 'XODALGSCULIQNSC');
   // Cryptonomicon vector — requires X-padding to a multiple of 5
   eq('SOLITAIRE/CRYPTONOMICON', s.encode('SOLITAIRE', 'CRYPTONOMICON'), 'KIRAKSFJAN');
-  // Decode keeps the X pad (filler by convention; stripping could eat a real X)
-  eq('decode keeps pad', s.decode('KIRAKSFJAN', 'CRYPTONOMICON'), 'SOLITAIREX');
+  // The engine's reversible filler escape removes only the structural X pad.
+  eq('decode removes structural pad', s.decode('KIRAKSFJAN', 'CRYPTONOMICON'), 'SOLITAIRE');
   // Multiple-of-5 plaintext is unpadded and roundtrips exactly
   eq('exact roundtrip ×5', s.decode(s.encode('DONOTUSEPC', 'CRYPTONOMICON'), 'CRYPTONOMICON'),
      'DONOTUSEPC');
