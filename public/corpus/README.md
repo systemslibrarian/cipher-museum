@@ -10,7 +10,7 @@ Cipher Corpus is an educational benchmark library for classical cryptanalysis �
 |---|---|
 | **Total records** | 100,026 |
 | **Cipher types** | 82 |
-| **Cipher engines** | 84 |
+| **Cipher engines** | 81 of the museum's 84 (dictionaryCode, beale, and cardanoGrille have no corpus family) |
 | **Languages** | 10 (en, fr, de, la, es, it, ar, ja, ru, zh) |
 | **Historical records** | 101 (spanning 4,000 years, 78 cipher types) |
 | **Multilingual records** | 5,348 (fr/de/la/es/it/ar) |
@@ -28,7 +28,13 @@ Cipher Corpus is an educational benchmark library for classical cryptanalysis �
 | Expert | 26,966 |
 | **Core total** | **95,849** |
 
-All core records pass roundtrip verification (`decrypt(encrypt(plaintext)) == plaintext`).
+As of corpus v0.5 (2026-07-17), every record reproduces exactly with the museum's
+published, test-verified cipher engines (`npm run test:engines` replays all
+100,026 records with pinned accounting), with two documented exception classes:
+the intentionally noisy transcription variants and a small set of historical
+records whose real-world keys or codebooks the pedagogical engines cannot
+represent (each carries an explicit rationale in
+`tests/engines/corpus-replay.js`).
 
 ## Files
 
@@ -39,14 +45,13 @@ All core records pass roundtrip verification (`decrypt(encrypt(plaintext)) == pl
 | `all.jsonl` | All 100,026 records (JSONL, one per line) — **Git LFS** |
 | `all.json` | All records as JSON array — **Git LFS** |
 | `all.csv` | Tabular export of key fields |
-| `beginner.jsonl` | 2,460 beginner records |
-| `intermediate.jsonl` | 4,422 intermediate records |
-| `advanced.jsonl` | 5,176 advanced records |
-| `expert.jsonl` | 5,367 expert records |
+| `beginner.jsonl` | 15,533 beginner records |
+| `intermediate.jsonl` | 26,969 intermediate records |
+| `advanced.jsonl` | 26,381 advanced records |
+| `expert.jsonl` | 26,966 expert records |
 | `historical.jsonl` | 101 historical records with provenance (4,000 years, 78 cipher types) |
 | `multilingual.jsonl` | 5,348 multilingual records (fr/de/la/es/it/ar) |
 | `noisy.jsonl` | 484 noisy transcription variants |
-| `llm-3shot-eval.jsonl` | 300 LLM 3-shot evaluation prompts |
 | `cipher-corpus.schema.json` | JSON Schema v0.2 |
 | `CHANGELOG.md` | Version history |
 
@@ -60,24 +65,6 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
     for line in f:
         record = json.loads(line)
         print(record["id"], record["cipher_type"], record["ciphertext"])
-```
-
-### 3-Shot LLM Evaluation
-
-Use `llm-3shot-eval.jsonl` for structured LLM evaluation. Each record includes:
-- `prompts.three_shot.prompt` — 3-shot prompt with examples
-- `prompts.challenge.prompt` — 0-shot challenge (no key)
-- `prompts.key_recovery.prompt` — key recovery from known PT/CT pair
-- `evaluation.target` — ground-truth answer for scoring
-
-```python
-import json
-with open("llm-3shot-eval.jsonl") as f:
-    for line in f:
-        r = json.loads(line)
-        prompt = r["prompts"]["three_shot"]["prompt"]
-        target = r["prompts"]["three_shot"]["evaluation"]["target"]
-        # Send prompt to LLM, compare response to target
 ```
 
 ### Benchmark Splits
@@ -191,7 +178,7 @@ Cipher Corpus builds on the pioneering work of **CipherBank** by Li et al. (2025
 | Benchmark | Records | Algorithms | Historical | Multilingual | Blind Splits | LLM Eval Format |
 |---|---|---|---|---|---|---|
 | CipherBank (Li et al., 2025) | 2,358 | 9 | No | No | No | No |
-| **Cipher Corpus v0.4** | **100,026+** | **82** | **Yes (101)** | **Yes (10 langs)** | **Yes** | **Yes** |
+| **Cipher Corpus v0.5** | **100,026** | **82** | **Yes (101)** | **Yes (10 langs)** | **Yes** | **No** |
 
 ### Cite Cipher Corpus
 

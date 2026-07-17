@@ -18,7 +18,7 @@ Final report for the registry-engine verification sweep requested in
 | Open P0 findings | 0 | this report |
 | Open P1 findings | 0 | this report |
 | Open P2 findings | 1 | Diana provenance caveat below |
-| Open P3 findings | 2 | corpus metadata drift and seeded-model KAT independence below |
+| Open P3 findings | 1 | seeded-model KAT independence below |
 
 ## Resolved Findings
 
@@ -42,7 +42,6 @@ new per-engine spec suite.
 | Severity | Scope | Finding | Disposition |
 |---|---|---|---|
 | P2 | `diana` | The current engine is a reciprocal Beaufort-style implementation and passes roundtrip, fixed-vector, robustness, and corpus checks, but the sweep did not establish an independent authoritative Diana arithmetic/vector from locally available sources. | Keep the engine, but treat it as historically plausible rather than fully provenance-closed until an external primary or secondary source is attached. |
-| P3 | Corpus metadata | [public/corpus/README.md](../public/corpus/README.md) reports 100,026 cases across 84 engines, while [corpus/engine-manifest.json](../corpus/engine-manifest.json) header totals do not match the summed manifest rows and three registry engines are absent from that manifest. | Documentation follow-up only. Replay used the canonical [public/corpus/all.jsonl](../public/corpus/all.jsonl) dataset and found 0 unexplained failures. |
 | P3 | Seeded-model KATs | 18 seeded pedagogical machine models (`lorenz`, `purple`, `vic`, `sigaba`, `typex`, `fialka`, `kl7`, `geheimschreiber`, `kryha`, `m94`, `m209`, `redTypeA`, `slidex`, `copiale`, `argenti`, `greatCipher`, `babington`, `geezMonastic`, `trifid`) have pinned regression vectors rather than independently derived KATs, because their seeded shuffle pipelines have no external reference. They are labeled `pinned regression vector` in [known-answers.js](../tests/engines/helpers/known-answers.js). | Acceptable for pedagogical models: roundtrip properties, robustness checks, and exact-count corpus pinning still cover them. Upgrade any of them by authoring a genuinely independent reference derivation. |
 
 No open P0 or P1 engine defects remain after the sweep.
@@ -123,6 +122,20 @@ An adversarial review of the completed sweep found and fixed the following:
   vernam covered by its rewrite above).
 - **Offline cache:** the service-worker cache version was bumped so returning
   and offline visitors receive the corrected engine bundle.
+- **Cipher Corpus v0.5 (data fix):** because the corpus is a published dataset,
+  the 8,280 records that no longer reproduced with the corrected engines were
+  fixed at the data layer rather than excused by deviation rules:
+  7,708 ciphertexts regenerated with the live engines, 1,292 records repaired
+  to carry reproducible key metadata, and three historical records corrected
+  (`hist-caesar-augustus-001`, `hist-playfair-wheatstone-001`,
+  `hist-solitaire-cryptonomicon-001` — the latter two were metadata errors on
+  otherwise-correct published vectors). 99,500 of 100,026 records now
+  reproduce exactly; the remaining 526 are intentionally noisy variants and
+  genuinely historical records, each with an explicit rationale. The manifest
+  totals, README statistics, and summed rows now all agree at 100,026, which
+  also closes the former P3 corpus-metadata finding. See
+  [public/corpus/CHANGELOG.md](../public/corpus/CHANGELOG.md) and
+  [scripts/regenerate-corpus-v05.js](../scripts/regenerate-corpus-v05.js).
 
 ## Release Recommendation
 
@@ -132,5 +145,5 @@ Accept the sweep results.
 - Robustness and state isolation: cleared.
 - Corpus replay: cleared with documented deviation rules and 0 unexplained failures.
 - Historical accuracy: materially improved; only Diana remains a provenance caveat.
-- Follow-up work: reconcile corpus metadata counts and attach a sourced Diana note
-  when an authoritative reference is available.
+- Follow-up work: attach a sourced Diana note when an authoritative reference is
+  available.

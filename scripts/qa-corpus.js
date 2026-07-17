@@ -3,11 +3,13 @@
 //
 // DEPRECATED (2026-07): superseded by tests/engines/corpus-replay.js, which
 // replays the canonical public/corpus/all.jsonl with exact pinned accounting
-// (run via `npm run test:engines`). This script predates the 2026 engine
-// verification sweep and now reports ~52 roundtrip failures for records that
-// store the pre-sweep lossy padding format (playfair, hill, scytale, stager,
-// four_square, two_square, slidex) — those are documented known deviations in
-// the replay, not engine bugs. Kept for corpus-generation history only.
+// (run via `npm run test:engines`). This script's comparison logic predates
+// the 2026 engine verification sweep and corpus v0.5: it compares raw spaced/
+// accented plaintext against engine output, while the engines now document an
+// NFD-folding A-Z policy, so it reports roundtrip failures that the
+// authoritative replay correctly explains (0 unexplained there). It also loads
+// the split/expansion files rather than the canonical all.jsonl. Kept for
+// corpus-generation history only — do not use it as an engine or data gate.
 
 'use strict';
 global.window = global;
