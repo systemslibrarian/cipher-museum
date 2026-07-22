@@ -18,6 +18,8 @@ const suites = [
   'tests/test-exhibit-examples.js',
   'tests/test-min-fresh.js',
   'tests/test-sw-version.js',
+  'tests/test-protocol-math.js',
+  'tests/test-protocol-pages.js',
   'hall-of-foundations/lattice-math.test.js',
   'hall-of-foundations/lwe-math.test.js',
   'hall-of-foundations/crypto-algebra.test.js',

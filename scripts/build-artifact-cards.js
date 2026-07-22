@@ -92,6 +92,38 @@ function main() {
   const files = fs.readdirSync(ciphersDir).filter((f) => f.endsWith('.html')).sort();
   const cards = {};
 
+  // Per-slug corrections. The generated keyIdea assumes every exhibit turns
+  // plaintext into ciphertext, which is false for the protocol exhibits: a
+  // key agreement, a hash, a signature, a sharing scheme and a proof system
+  // all protect something without encrypting anything.
+  const OVERRIDES = {
+    'diffie-hellman': {
+      keyIdea: 'Two parties derive a shared secret over a public channel; nothing is encrypted',
+      keyType: 'No key input — the protocol produces one',
+      usedBy: 'Every TLS handshake negotiating forward secrecy'
+    },
+    'sha256': {
+      keyIdea: 'One-way compression of any input to a fixed 256-bit digest; not reversible by design',
+      keyType: 'Unkeyed',
+      usedBy: 'Certificate chains, Bitcoin mining, file integrity, password storage (via KDFs)'
+    },
+    'ecdsa': {
+      keyIdea: 'Proves authorship of a message hash using a private scalar on an elliptic curve',
+      keyType: 'Private scalar d with public point Q = dG',
+      usedBy: 'TLS certificates, Bitcoin and Ethereum transactions, secure-boot chains'
+    },
+    'shamir-secret-sharing': {
+      keyIdea: 'Hides a secret as a polynomial constant term; any k of n points recover it, k−1 reveal nothing',
+      keyType: 'No key — the secret is the object being split',
+      usedBy: 'DNSSEC root key ceremonies, HSM master key custody, cryptocurrency custodians'
+    },
+    'zero-knowledge-proofs': {
+      keyIdea: 'Demonstrates knowledge of a secret without transmitting any part of it',
+      keyType: 'Witness known only to the prover',
+      usedBy: 'Zcash shielded transactions, Ethereum rollups, anonymous credential systems'
+    }
+  };
+
   for (const file of files) {
     const slug = file.replace(/\.html$/, '');
     const html = fs.readFileSync(path.join(ciphersDir, file), 'utf8');
@@ -102,6 +134,11 @@ function main() {
 
     cards[slug] = {
       name: title || titleizeSlug(slug),
+      // Emitted so the structural tests can check a card's hall against the
+      // page's own breadcrumb. Dropping it silently de-links the two.
+      // Stored as the bare Roman numeral ("IX"), which is the form those tests
+      // compare against — not the full "Hall IX: The Unbreakable" title.
+      hall: (String(hall).match(/\b([IVX]+)\b/) || [, String(hall)])[1],
       era: eraFromHtml(html),
       family,
       region: 'Global',
@@ -111,6 +148,7 @@ function main() {
       securityFailure: securityFromHtml(html),
       modernLesson: lessonFromHtml(html)
     };
+    if (OVERRIDES[slug]) Object.assign(cards[slug], OVERRIDES[slug]);
   }
 
   fs.mkdirSync(outDir, { recursive: true });

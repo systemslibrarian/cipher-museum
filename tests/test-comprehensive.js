@@ -59,6 +59,8 @@ const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
 // Pages that are intentionally static (no engine, no interactive widget) -
 // modern-crypto math walkthroughs, unsolved manuscripts, biography pages.
 const STATIC_PAGES = new Set([
+  // Modern protocol exhibits: bespoke interactives, no demo-loader CONFIG
+  'ecdsa', 'shamir-secret-sharing', 'zero-knowledge-proofs',
   'aes', 'des', 'diffie-hellman', 'dorabella', 'rsa', 'sha256',
   // Biography / historical narrative pages (no engine):
   'beurling', 'cabinet-noir', 'da-vinci-code', 'dilly-knox', 'dunin',
@@ -86,7 +88,7 @@ function configHasEngine(slug) {
 }
 
 const allPages = fs.readdirSync(CIPHERS_DIR).filter(f => f.endsWith('.html')).sort();
-ok('Cipher pages count is 140', allPages.length === 140, `actual=${allPages.length}`);
+ok('Cipher pages count is 143', allPages.length === 143, `actual=${allPages.length}`);
 
 // Broad detection of interactive demo markup for hand-built pages
 const HAND_BUILT_MARKERS = /(?:onclick|data-fn)="(setMode|runCipher|runVigenere|encrypt|decrypt|zReveal|zAssignLetter|encode|decode|cipher|runHollerCode)/i;

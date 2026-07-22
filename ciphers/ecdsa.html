@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECDSA &mdash; The Cipher Museum</title>
+  <meta name="description" content="ECDSA (1992) — signing with elliptic curves, and the one-line mistake that handed Sony's PlayStation 3 master key to the world.">
+  <meta property="og:title" content="ECDSA &mdash; The Cipher Museum">
+  <meta property="og:description" content="ECDSA (1992) — signing with elliptic curves, and the one-line mistake that handed Sony's PlayStation 3 master key to the world.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/ecdsa.html">
+  <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Cipher Museum — an interactive history of encryption">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ECDSA &mdash; The Cipher Museum">
+  <meta name="twitter:description" content="ECDSA (1992) — signing with elliptic curves, and the one-line mistake that handed Sony's PlayStation 3 master key to the world.">
+  <meta name="twitter:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/ecdsa.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/modern-crypto.html">Hall XI: Modern Cryptography</a><span>&rsaquo;</span>
+    ECDSA
+  </div>
+  <div class="page-meta">
+    <span class="badge era-modern">Modern &middot; 1992</span>
+    <span class="badge sec-secure">Secure (with a sound nonce)</span>
+  </div>
+  <h1 class="page-title">ECDSA</h1>
+  <div class="trust-label-wrap"><a class="trust-label trust-label--secure" href="../museum-map.html#trust-labels" title="Still considered secure when used correctly with modern key handling." aria-label="Trust label: Secure (Modern). Still considered secure when used correctly with modern key handling."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg><span class="trust-label__text">Secure (Modern)</span></a></div>
+  <p class="page-tagline">A signature scheme built on elliptic curves &mdash; and the one-line mistake that handed Sony's PlayStation 3 master key to the world.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Scott Vanstone, 1992; standardised as ANSI X9.62 (1999) and FIPS 186</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1992</span></div>
+    <div class="fact"><span class="fact-label">Type</span><span class="fact-value">Digital signature algorithm &mdash; <strong>not a cipher</strong> (proves authorship, encrypts nothing)</span></div>
+    <div class="fact"><span class="fact-label">Rests on</span><span class="fact-value">The elliptic-curve discrete logarithm problem</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">Signs TLS certificates, Bitcoin and Ethereum transactions, and software updates</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h2>Why This Matters</h2>
+      <p>Encryption keeps a message private. A signature does something different and, on the open internet, more urgent: it proves who wrote it. ECDSA is how a web server proves it owns its domain, how a Bitcoin transaction proves it may spend a coin, and how your phone proves an update really came from its manufacturer.</p>
+      <p>It is also the museum's clearest case of a scheme whose mathematics is sound and whose <em>implementations</em> have failed repeatedly &mdash; always in the same place, always for the same reason.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Elliptic curves entered cryptography in 1985, proposed independently by Neal Koblitz and Victor Miller. The appeal was efficiency: the discrete logarithm problem seemed much harder on a curve than in the integers modulo a prime, so a 256-bit curve key offered roughly the security of a 3072-bit RSA key. Scott Vanstone adapted the existing Digital Signature Algorithm to curves in 1992, and ECDSA was standardised as ANSI X9.62 in 1999. Bitcoin adopted it in 2009, which put the algorithm in front of a far larger and more adversarial audience than the standards bodies had imagined.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>Fix a curve, a base point <em>G</em> on it, and the number <em>n</em> of points <em>G</em> generates. A private key is a number <em>d</em>; the matching public key is the point <em>Q</em> = <em>dG</em>. Recovering <em>d</em> from <em>Q</em> means solving the elliptic-curve discrete logarithm problem, which nobody knows how to do at full size.</p>
+        <p>To sign a message hash <em>h</em>, pick a one-time random number <em>k</em> &mdash; the <strong>nonce</strong> &mdash; and compute:</p>
+        <p style="font-family:ui-monospace,monospace;background:var(--bg2,rgba(255,255,255,.04));padding:12px 16px;border-radius:6px;overflow-x:auto;">R = kG &nbsp;&middot;&nbsp; r = R<sub>x</sub> mod n &nbsp;&middot;&nbsp; s = k<sup>&minus;1</sup>(h + rd) mod n</p>
+        <p>The signature is the pair (<em>r</em>, <em>s</em>). A verifier who has only <em>Q</em>, <em>h</em> and the signature recomputes a point from them and checks that its x-coordinate comes back to <em>r</em>. The private key never appears in the check &mdash; that asymmetry is the whole point.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🧪</span><span class="panel-title">Sign and verify, live</span></div>
+      <div class="panel-body">
+        <p>This runs a genuine curve, small enough to read: <em>y</em>&sup2; = <em>x</em>&sup3; + 3<em>x</em> + 2 over the integers mod 97. It has 102 points plus the point at infinity, so <em>n</em> = 103 &mdash; a prime, which means every point generates the whole group. Real ECDSA uses the same arithmetic with numbers around 2<sup>256</sup>.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin:18px 0;">
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.85rem;">private key d
+            <input type="number" id="d" value="42" min="1" max="102" step="1" style="width:90px;">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.85rem;">message hash h
+            <input type="number" id="h" value="17" min="0" max="102" step="1" style="width:90px;">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.85rem;">nonce k
+            <input type="number" id="k" value="7" min="1" max="102" step="1" style="width:90px;">
+          </label>
+          <button id="sign" class="btn">Sign</button>
+          <button id="verifyOther" class="btn">Verify against a different message</button>
+        </div>
+        <svg viewBox="0 0 700 360" id="curve" role="img" style="width:100%;height:auto;background:rgba(255,255,255,.03);border-radius:8px;"
+             aria-label="All 102 points of the curve, with the base point G and the public key Q marked."></svg>
+        <p id="sigOut" aria-live="polite" role="status" style="font-family:ui-monospace,monospace;margin-top:14px;">Press <strong>Sign</strong>.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">The nonce that sank the PlayStation 3</span></div>
+      <div class="panel-body">
+        <p>The nonce <em>k</em> must be secret, and it must be <strong>different every time</strong>. Sign two different messages with the same <em>k</em> and the two equations share an unknown. Subtract them and <em>k</em> falls out; substitute back and the private key follows. No lattice, no supercomputer &mdash; secondary-school algebra:</p>
+        <p style="font-family:ui-monospace,monospace;background:var(--bg2,rgba(255,255,255,.04));padding:12px 16px;border-radius:6px;overflow-x:auto;">k = (h&#8321; &minus; h&#8322;) / (s&#8321; &minus; s&#8322;) &nbsp;&nbsp;then&nbsp;&nbsp; d = (s&#8321;k &minus; h&#8321;) / r</p>
+        <p>In December 2010 the group fail0verflow demonstrated that Sony's PlayStation 3 signed every firmware release with the same fixed <em>k</em>. The console's master signing key was recoverable by anyone who owned two signed updates. Sony could not fix it with a patch: the key was the root of the console's trust, and it was now public. The identical bug drained Bitcoin wallets in 2013 when an Android random-number generator repeated its output.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin:18px 0;">
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.85rem;">first message h&#8321;
+            <input type="number" id="h1" value="11" min="0" max="102" step="1" style="width:90px;">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.85rem;">second message h&#8322;
+            <input type="number" id="h2" value="29" min="0" max="102" step="1" style="width:90px;">
+          </label>
+          <button id="reuse" class="btn">Sign both with the same nonce</button>
+          <button id="attack" class="btn">Recover the private key</button>
+        </div>
+        <p id="atkOut" aria-live="polite" role="status" style="font-family:ui-monospace,monospace;">Sign two messages with one nonce, then attack.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🛡️</span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-body">
+        <p>No practical attack is known against ECDSA's mathematics on a well-chosen curve. Every notable break has been an implementation failure, and almost all of them concern the nonce: repeating it, generating it with a weak random source, or leaking a few of its bits through a timing or cache side channel. Even partial leakage is fatal &mdash; recovering a handful of nonce bits across a few hundred signatures lets an attacker reconstruct the private key by lattice reduction.</p>
+        <p>The standard defence is to stop generating <em>k</em> randomly at all. <strong>Deterministic ECDSA</strong> (RFC 6979) derives the nonce from the private key and the message hash together, so identical messages produce identical signatures and different messages cannot collide. EdDSA (Ed25519) builds the same idea into the scheme by design, which is one reason it is now often preferred.</p>
+        <p>Like all discrete-logarithm cryptography, ECDSA falls to a sufficiently large quantum computer running Shor's algorithm. Its replacement, ML-DSA, rests on lattice problems instead &mdash; the reason that shift works is set out in the <a href="../hall-of-foundations/learning-with-errors.html">Learning With Errors</a> exhibit.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌐</span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-body"><p>Every HTTPS connection to a site with an EC certificate verifies an ECDSA signature during the handshake. Every Bitcoin and Ethereum transaction is authorised by one. Secure-boot chains in phones, games consoles and cars use ECDSA or its close relatives to check that firmware came from the manufacturer. When your browser shows a padlock, an elliptic-curve signature was almost certainly checked to put it there.</p></div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">🔑</span><span class="panel-title">At a glance</span>
+      </div>
+      <div class="panel-body">
+        <p><strong>Private key:</strong> a number <em>d</em>.</p>
+        <p><strong>Public key:</strong> the point <em>Q</em> = <em>dG</em>.</p>
+        <p><strong>Signature:</strong> a pair (<em>r</em>, <em>s</em>).</p>
+        <p><strong>Hard problem:</strong> find <em>d</em> given <em>Q</em> &mdash; the elliptic-curve discrete logarithm.</p>
+        <p><strong>Fatal mistake:</strong> reusing the nonce <em>k</em>. One repeat exposes the private key completely.</p>
+        <p style="margin-top:14px;border-top:1px solid var(--gold-b);padding-top:12px;">The mathematics is in the <a href="../hall-of-foundations/elliptic-curves-real.html">Hall of Foundations</a>: the group law that makes <em>dG</em> meaningful, and the finite field it runs in.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../hall-of-foundations/elliptic-curves-real.html" class="related-card">
+      <span class="related-card__number">&sect;150 &middot; Foundations</span>
+      <span class="related-card__name">Elliptic Curves over &#8477;</span>
+      <span class="related-card__tag">The mathematics beneath: the chord-and-tangent group law that gives dG a meaning</span>
+    </a>
+    <a href="../hall-of-foundations/finite-fields.html" class="related-card">
+      <span class="related-card__number">&sect;142 &middot; Foundations</span>
+      <span class="related-card__name">Finite Fields</span>
+      <span class="related-card__tag">Why this works: the smooth curve shatters into a scatter of points, and the discrete log gets hard</span>
+    </a>
+    <a href="../hall-of-foundations/group-theory.html" class="related-card">
+      <span class="related-card__number">&sect;149 &middot; Foundations</span>
+      <span class="related-card__name">Group Theory</span>
+      <span class="related-card__tag">Why n must be prime: generators, order, and where a secret has room to hide</span>
+    </a>
+    <a href="../ciphers/sha256.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">SHA-256</span>
+      <span class="related-card__tag">ECDSA signs the hash of a message, never the message itself</span>
+    </a>
+    <a href="zero-knowledge-proofs.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Zero-Knowledge Proofs</span>
+      <span class="related-card__tag">A signature is a proof you know a key — made non-interactive by the same Fiat-Shamir trick</span>
+    </a>
+    <a href="../ciphers/diffie-hellman.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Diffie-Hellman</span>
+      <span class="related-card__tag">The same discrete-logarithm bet, made for key agreement rather than signing</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/sha256.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">SHA-256</span>
+  </a>
+  <a href="shamir-secret-sharing.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Shamir's Secret Sharing</span>
+  </a>
+</div>
+
+</main>
+
+<footer></footer>
+<script src="../js/protocol-math.js"></script>
+<script>
+(function(){
+  "use strict";
+  var PM = window.ProtocolMath, C = PM.CURVE;
+  var NS = "http://www.w3.org/2000/svg";
+  function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(id){return document.getElementById(id);}
+
+  // every affine point, for the scatter
+  var PTS=[];
+  for(var x=0;x<C.p;x++){
+    var rhs=PM.mod(x*x%C.p*x + C.a*x + C.b, C.p);
+    for(var y=0;y<C.p;y++) if(y*y%C.p===rhs) PTS.push({x:x,y:y});
+  }
+
+  var svg=el("curve");
+  function draw(Q){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var W=700,H=360,pad=34;
+    var sx=function(v){return pad + v*(W-2*pad)/(C.p-1);};
+    var sy=function(v){return H-pad - v*(H-2*pad)/(C.p-1);};
+    PTS.forEach(function(pt){
+      svg.appendChild(mk("circle",{cx:sx(pt.x),cy:sy(pt.y),r:2.4,fill:"var(--tx3,#8a8a94)","fill-opacity":".55"}));
+    });
+    function mark(pt,color,label){
+      if(!pt) return;
+      svg.appendChild(mk("circle",{cx:sx(pt.x),cy:sy(pt.y),r:7,fill:"none",stroke:color,"stroke-width":"2.5"}));
+      var t=mk("text",{x:sx(pt.x)+11,y:sy(pt.y)-9,fill:color,"font-family":"ui-monospace,monospace","font-size":"14","font-weight":"700"});
+      t.textContent=label; svg.appendChild(t);
+    }
+    mark(C.G,"var(--gold,#d4a24c)","G");
+    mark(Q,"var(--red,#c94f3d)","Q = dG");
+  }
+
+  function clampInt(id,lo,hi){
+    var v=parseInt(el(id).value,10);
+    if(isNaN(v)) v=lo;
+    v=Math.max(lo,Math.min(hi,v));
+    el(id).value=v; return v;
+  }
+
+  function sign(){
+    var d=clampInt("d",1,C.n-1), h=clampInt("h",0,C.n-1), k=clampInt("k",1,C.n-1);
+    var Q=PM.ecMul(d,C.G,C.a,C.p);
+    draw(Q);
+    var sig=PM.ecdsaSign(h,d,k,C);
+    if(!sig){ el("sigOut").innerHTML="Nonce k = "+k+" is degenerate for this message &mdash; real ECDSA resamples and tries again."; return; }
+    var ok=PM.ecdsaVerify(h,sig,Q,C);
+    el("sigOut").innerHTML =
+      "Q = dG = ("+Q.x+", "+Q.y+")<br>"+
+      "signature (r, s) = (<b>"+sig.r+"</b>, <b>"+sig.s+"</b>)<br>"+
+      "verify with public key only: <b style=\"color:"+(ok?"var(--green,#5AC8A0)":"var(--red,#c94f3d)")+"\">"+
+      (ok?"valid":"REJECTED")+"</b>";
+    window.__lastSig={sig:sig,h:h,Q:Q,d:d};
+  }
+
+  function verifyOther(){
+    if(!window.__lastSig){ sign(); }
+    var L=window.__lastSig;
+    var h2=(L.h+1)%C.n;
+    var ok=PM.ecdsaVerify(h2,L.sig,L.Q,C);
+    el("sigOut").innerHTML =
+      "Same signature (r, s) = ("+L.sig.r+", "+L.sig.s+"), but message hash changed "+L.h+" &rarr; "+h2+"<br>"+
+      "verify: <b style=\"color:"+(ok?"var(--red,#c94f3d)":"var(--green,#5AC8A0)")+"\">"+
+      (ok?"accepted &mdash; a 1-in-103 coincidence on this toy curve":"REJECTED, as it must be")+
+      "</b><br><span style=\"opacity:.75\">On a real curve n is about 2<sup>256</sup>, so that coincidence never happens.</span>";
+  }
+
+  function reuse(){
+    var d=clampInt("d",1,C.n-1), k=clampInt("k",1,C.n-1);
+    var h1=clampInt("h1",0,C.n-1), h2=clampInt("h2",0,C.n-1);
+    if(h1===h2){ el("atkOut").textContent="Use two different messages — identical messages give identical signatures, which is not a leak."; return; }
+    var s1=PM.ecdsaSign(h1,d,k,C), s2=PM.ecdsaSign(h2,d,k,C);
+    if(!s1||!s2){ el("atkOut").textContent="Degenerate nonce for this pair; nudge k and retry."; return; }
+    window.__reuse={h1:h1,h2:h2,s1:s1,s2:s2,d:d,k:k};
+    el("atkOut").innerHTML =
+      "Signed both with the same nonce k = "+k+":<br>"+
+      "&nbsp;&nbsp;h&#8321;="+h1+" &rarr; (r, s) = ("+s1.r+", "+s1.s+")<br>"+
+      "&nbsp;&nbsp;h&#8322;="+h2+" &rarr; (r, s) = ("+s2.r+", "+s2.s+")<br>"+
+      "<b>Notice r is identical in both.</b> That is the tell — r depends only on k. Now press <em>Recover the private key</em>.";
+  }
+
+  function attack(){
+    var R=window.__reuse;
+    if(!R){ el("atkOut").textContent="Sign two messages with one nonce first."; return; }
+    var out=PM.recoverFromReusedNonce(R.h1,R.s1.s,R.h2,R.s2.s,R.s1.r,C.n);
+    if(!out){ el("atkOut").textContent="Could not solve — try a different message pair."; return; }
+    var hit=(out.d===R.d);
+    el("atkOut").innerHTML =
+      "k = (h&#8321; &minus; h&#8322;) / (s&#8321; &minus; s&#8322;) = <b>"+out.k+"</b>"+(out.k===R.k?" &check;":"")+"<br>"+
+      "d = (s&#8321;k &minus; h&#8321;) / r = <b style=\"color:var(--red,#c94f3d)\">"+out.d+"</b>"+
+      (hit?" &mdash; that is the private key, recovered from two signatures and nothing else.":"")+
+      "<br><span style=\"opacity:.75\">No search, no guessing. This is the arithmetic that cost Sony its console.</span>";
+  }
+
+  el("sign").addEventListener("click",sign);
+  el("verifyOther").addEventListener("click",verifyOther);
+  el("reuse").addEventListener("click",reuse);
+  el("attack").addEventListener("click",attack);
+  sign();
+})();
+</script>
+<script src="../js/demo-loader.min.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

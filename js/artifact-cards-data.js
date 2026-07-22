@@ -4,6 +4,7 @@
   "cards": {
     "adfgvx": {
       "name": "ADFGVX Cipher",
+      "hall": "V",
       "era": "WWI · June 1918",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -15,6 +16,7 @@
     },
     "adfgx": {
       "name": "ADFGX Cipher",
+      "hall": "V",
       "era": "WWI · March 1918",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -26,6 +28,7 @@
     },
     "aeneas-tacticus": {
       "name": "Aeneas Tacticus Water-Clock Signal Code",
+      "hall": "I",
       "era": "Classical Greece · ~350 BCE",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -37,6 +40,7 @@
     },
     "aes": {
       "name": "AES (Advanced Encryption Standard)",
+      "hall": "XI",
       "era": "Modern &middot; 2001",
       "family": "Modern Cryptography",
       "region": "Global",
@@ -48,6 +52,7 @@
     },
     "affine": {
       "name": "Affine Cipher E(x) = a·x + b mod 26",
+      "hall": "II",
       "era": "Antiquity → 1800s · math-age",
       "family": "Substitution",
       "region": "Global",
@@ -59,6 +64,7 @@
     },
     "agnes-driscoll": {
       "name": "Agnes Meyer Driscoll",
+      "hall": "X",
       "era": "Interwar & WWII · USA",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -70,6 +76,7 @@
     },
     "alberti-disk": {
       "name": "Alberti Cipher Disk",
+      "hall": "VI",
       "era": "Renaissance · 1467",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -81,6 +88,7 @@
     },
     "amharic-ge-ez-ciphers": {
       "name": "Ethiopian Geʼez Monastic Ciphers",
+      "hall": "I",
       "era": "East Africa · 14th–19th c.",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -92,6 +100,7 @@
     },
     "arabic-nomenclators": {
       "name": "Arabic Nomenclators",
+      "hall": "I",
       "era": "Abbasid Caliphate · ~850 CE",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -103,6 +112,7 @@
     },
     "argenti": {
       "name": "Argenti Family Cipher Vatican papal nomenclators · 1500s–1600s",
+      "hall": "II",
       "era": "Renaissance Italy · 1500s–1600s",
       "family": "Substitution",
       "region": "Global",
@@ -114,6 +124,7 @@
     },
     "arnold-andre": {
       "name": "Arnold–André Book Cipher Blackstone’s Commentaries · 1779–1780",
+      "hall": "V",
       "era": "American Revolution · 1779–1780",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -125,6 +136,7 @@
     },
     "atbash": {
       "name": "Atbash",
+      "hall": "I",
       "era": "Ancient · ~500 BC",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -136,6 +148,7 @@
     },
     "autokey": {
       "name": "Autokey",
+      "hall": "III",
       "era": "Renaissance · 1586",
       "family": "Polyalphabetic",
       "region": "Global",
@@ -147,6 +160,7 @@
     },
     "babington": {
       "name": "The Babington Plot Cipher",
+      "hall": "II",
       "era": "Elizabethan · 1586",
       "family": "Substitution",
       "region": "Global",
@@ -158,6 +172,7 @@
     },
     "bach-motif": {
       "name": "Bach's B-A-C-H Motif",
+      "hall": "XIII",
       "era": "Baroque Germany · 1750",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -169,6 +184,7 @@
     },
     "bacon": {
       "name": "Bacon's Cipher",
+      "hall": "VII",
       "era": "1605",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
@@ -180,6 +196,7 @@
     },
     "bazeries": {
       "name": "Bazeries Cipher",
+      "hall": "V",
       "era": "1890s · France",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -191,6 +208,7 @@
     },
     "beale": {
       "name": "Beale Ciphers",
+      "hall": "XII",
       "era": "19th Century · published 1885",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -202,6 +220,7 @@
     },
     "beaufort": {
       "name": "Beaufort Cipher",
+      "hall": "III",
       "era": "Victorian · 1857",
       "family": "Polyalphabetic",
       "region": "Global",
@@ -213,6 +232,7 @@
     },
     "beurling": {
       "name": "Arne Beurling",
+      "hall": "X",
       "era": "WWII · Sweden",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -224,6 +244,7 @@
     },
     "bible-code": {
       "name": "Bible Code — Equidistant Letter Sequences",
+      "hall": "VIII",
       "era": "1994 · Refuted 1999",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
@@ -235,6 +256,7 @@
     },
     "bifid": {
       "name": "Bifid Cipher",
+      "hall": "IV",
       "era": "1901",
       "family": "Transposition",
       "region": "Global",
@@ -246,6 +268,7 @@
     },
     "bill-tutte": {
       "name": "Bill Tutte",
+      "hall": "X",
       "era": "WWII · Britain",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -257,6 +280,7 @@
     },
     "bletchley-park": {
       "name": "Bletchley Park",
+      "hall": "X",
       "era": "WWII · 1939–1945",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -268,6 +292,7 @@
     },
     "book-cipher": {
       "name": "Book Cipher",
+      "hall": "V",
       "era": "18th–20th c.",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -279,6 +304,7 @@
     },
     "cabinet-noir": {
       "name": "Cabinet Noir — Black Chambers of Europe",
+      "hall": "X",
       "era": "Europe · 1550–1850",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -290,6 +316,7 @@
     },
     "caesar": {
       "name": "Caesar Cipher",
+      "hall": "I",
       "era": "Ancient Rome",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -301,6 +328,7 @@
     },
     "cardano-autokey": {
       "name": "Cardano Autokey 1550 · the original self-keying cipher",
+      "hall": "III",
       "era": "Italian Renaissance · 1550",
       "family": "Polyalphabetic",
       "region": "Global",
@@ -312,6 +340,7 @@
     },
     "cardano-grille": {
       "name": "Cardano Grille 1550 · steganography by template",
+      "hall": "IV",
       "era": "Italian Renaissance · 1550",
       "family": "Transposition",
       "region": "Global",
@@ -323,6 +352,7 @@
     },
     "chaocipher": {
       "name": "Chaocipher",
+      "hall": "VII",
       "era": "Modern · 1918",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -334,6 +364,7 @@
     },
     "che-guevara": {
       "name": "Che Guevara's VIC Variant",
+      "hall": "V",
       "era": "Cold War · 1956–1967",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -345,6 +376,7 @@
     },
     "chinese-telegraph": {
       "name": "Chinese Telegraph Code Standard Telegraph Codebook · 1881",
+      "hall": "VI",
       "era": "Late Qing → PRC · 1881–1980s",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -356,6 +388,7 @@
     },
     "cicada-3301": {
       "name": "Cicada 3301",
+      "hall": "XIII",
       "era": "Internet era · 2012–2014",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -367,6 +400,7 @@
     },
     "columnar": {
       "name": "Columnar Transposition",
+      "hall": "IV",
       "era": "19th Century",
       "family": "Transposition",
       "region": "Global",
@@ -378,6 +412,7 @@
     },
     "commercial-codebooks": {
       "name": "Commercial Telegraph Codebooks ABC, Bentley’s, Lieber’s · 1870s–1930s",
+      "hall": "VI",
       "era": "Victorian → inter-war · 1870s–1930s",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -389,6 +424,7 @@
     },
     "confederate-vigenere": {
       "name": "Confederate Vigenère",
+      "hall": "Museum exhibit",
       "era": "Confederate · 1862",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -400,6 +436,7 @@
     },
     "copiale": {
       "name": "Copiale Cipher",
+      "hall": "VIII",
       "era": "18th Century · ~1760s",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
@@ -411,6 +448,7 @@
     },
     "culper-ring": {
       "name": "Culper Ring / Tallmadge Code Washington’s spy ring codebook · 1779",
+      "hall": "V",
       "era": "American Revolution · 1778–1783",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -422,6 +460,7 @@
     },
     "da-vinci-code": {
       "name": "The Da Vinci Code",
+      "hall": "XIII",
       "era": "Fiction · 2003",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -433,6 +472,7 @@
     },
     "dagapeyeff": {
       "name": "D'Agapeyeff Cipher",
+      "hall": "XII",
       "era": "Pre-WWII Britain · 1939",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -444,6 +484,7 @@
     },
     "dancing-men": {
       "name": "Conan Doyle's Dancing Men",
+      "hall": "XIII",
       "era": "Edwardian Britain · 1903",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -455,6 +496,7 @@
     },
     "des": {
       "name": "DES (Data Encryption Standard)",
+      "hall": "XI",
       "era": "Modern &middot; 1977",
       "family": "Modern Cryptography",
       "region": "Global",
@@ -466,6 +508,7 @@
     },
     "diana-cryptosystem": {
       "name": "Diana Cryptosystem",
+      "hall": "V",
       "era": "Cold War · 1960s–1990s",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -477,6 +520,7 @@
     },
     "dictionary-code": {
       "name": "Confederate Dictionary Code",
+      "hall": "Museum exhibit",
       "era": "Confederate · 1862",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -488,17 +532,19 @@
     },
     "diffie-hellman": {
       "name": "Diffie-Hellman Key Exchange",
+      "hall": "XI",
       "era": "Modern &middot; 1976",
       "family": "Modern Cryptography",
       "region": "Global",
-      "usedBy": "Historical operators, states, or communities documented for this exhibit",
-      "keyType": "Varies by system",
-      "keyIdea": "Modern Cryptography transformation of plaintext into protected form",
+      "usedBy": "Every TLS handshake negotiating forward secrecy",
+      "keyType": "No key input — the protocol produces one",
+      "keyIdea": "Two parties derive a shared secret over a public channel; nothing is encrypted",
       "securityFailure": "Secure (with 2048+ bit groups)",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
     "dilly-knox": {
       "name": "Dilly Knox",
+      "hall": "X",
       "era": "WWI/WWII · Britain",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -510,6 +556,7 @@
     },
     "dorabella": {
       "name": "Dorabella Cipher",
+      "hall": "XII",
       "era": "19th c. · 1897",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -521,6 +568,7 @@
     },
     "double-transposition": {
       "name": "Double Transposition",
+      "hall": "IV",
       "era": "WWI · Germany",
       "family": "Transposition",
       "region": "Global",
@@ -532,6 +580,7 @@
     },
     "dunin": {
       "name": "Elonka Dunin",
+      "hall": "X",
       "era": "Modern · Cryptographer",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -541,8 +590,21 @@
       "securityFailure": "Living Legend",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
+    "ecdsa": {
+      "name": "ECDSA",
+      "hall": "XI",
+      "era": "Modern &middot; 1992",
+      "family": "Modern Cryptography",
+      "region": "Global",
+      "usedBy": "TLS certificates, Bitcoin and Ethereum transactions, secure-boot chains",
+      "keyType": "Private scalar d with public point Q = dG",
+      "keyIdea": "Proves authorship of a message hash using a private scalar on an elliptic curve",
+      "securityFailure": "Secure (with a sound nonce)",
+      "modernLesson": "Security depends on design quality, key management, and implementation."
+    },
     "egyptian-substitution": {
       "name": "Egyptian Substitution Hieroglyphs",
+      "hall": "I",
       "era": "Middle Kingdom Egypt · ~1900 BCE",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -554,6 +616,7 @@
     },
     "elizebeth-friedman": {
       "name": "Elizebeth Smith Friedman",
+      "hall": "X",
       "era": "Interwar & WWII · USA",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -565,6 +628,7 @@
     },
     "enigma": {
       "name": "Enigma Machine",
+      "hall": "IX",
       "era": "WWII · 1918–1945",
       "family": "One-Time Pad and Theoretical Security",
       "region": "Global",
@@ -576,6 +640,7 @@
     },
     "fialka": {
       "name": "Fialka M-125 Soviet 10-rotor machine · 1956",
+      "hall": "VII",
       "era": "Cold War · 1956",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -587,6 +652,7 @@
     },
     "field-hollers": {
       "name": "Field Hollers and Coding Songs",
+      "hall": "XIII",
       "era": "Americas · 1619–1865",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -598,6 +664,7 @@
     },
     "four-square": {
       "name": "Four-Square Cipher",
+      "hall": "II",
       "era": "Late 19th Century · ~1902",
       "family": "Substitution",
       "region": "Global",
@@ -609,6 +676,7 @@
     },
     "fractionated-morse": {
       "name": "Fractionated Morse Cipher",
+      "hall": "IV",
       "era": "19th Century",
       "family": "Transposition",
       "region": "Global",
@@ -620,6 +688,7 @@
     },
     "freemason-pigpen": {
       "name": "Freemason Pigpen Tradition",
+      "hall": "XIII",
       "era": "Early modern Europe · 17th–19th c.",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -631,6 +700,7 @@
     },
     "gchq-trio": {
       "name": "The GCHQ Trio — Ellis, Cocks, and Williamson",
+      "hall": "X",
       "era": "Cold War · GCHQ",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -642,6 +712,7 @@
     },
     "geheimschreiber": {
       "name": "Geheimschreiber T52 (Sturgeon) Siemens & Halske teleprinter cipher",
+      "hall": "VII",
       "era": "WWII · 1932–1945",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -653,6 +724,7 @@
     },
     "gold-bug": {
       "name": "Poe's Gold-Bug Cipher",
+      "hall": "XIII",
       "era": "Antebellum America · 1843",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -664,6 +736,7 @@
     },
     "gravity-falls": {
       "name": "Gravity Falls Cipher System",
+      "hall": "XIII",
       "era": "Animation · 2012–2016",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -675,6 +748,7 @@
     },
     "great-cipher": {
       "name": "The Great Cipher",
+      "hall": "II",
       "era": "Baroque · ~1626",
       "family": "Substitution",
       "region": "Global",
@@ -686,6 +760,7 @@
     },
     "gronsfeld": {
       "name": "Gronsfeld Cipher",
+      "hall": "III",
       "era": "17th Century",
       "family": "Polyalphabetic",
       "region": "Global",
@@ -697,6 +772,7 @@
     },
     "hill": {
       "name": "Hill Cipher",
+      "hall": "II",
       "era": "1929",
       "family": "Substitution",
       "region": "Global",
@@ -708,6 +784,7 @@
     },
     "histiaeus-tattoo": {
       "name": "Histiaeus's Tattooed Messenger",
+      "hall": "I",
       "era": "Classical Greece · ~499 BCE",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -719,6 +796,7 @@
     },
     "homophonic": {
       "name": "Homophonic Substitution",
+      "hall": "II",
       "era": "Renaissance · ~1400",
       "family": "Substitution",
       "region": "Global",
@@ -730,6 +808,7 @@
     },
     "ira-book-cipher": {
       "name": "IRA Book Cipher",
+      "hall": "V",
       "era": "Modern · 1970s–1990s",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -741,6 +820,7 @@
     },
     "jefferson-disk": {
       "name": "Jefferson Disk",
+      "hall": "VI",
       "era": "1795 (Jefferson) · 1922 (M-94)",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -752,6 +832,7 @@
     },
     "jn-25": {
       "name": "JN-25 (Japanese Naval Code)",
+      "hall": "VII",
       "era": "World War II - 1939-1945",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -763,6 +844,7 @@
     },
     "joan-clarke": {
       "name": "Joan Clarke",
+      "hall": "X",
       "era": "WWII · Britain",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -774,6 +856,7 @@
     },
     "joseon-yeokhak": {
       "name": "Joseon Yeokhak Cipher",
+      "hall": "I",
       "era": "East Asia · 1392–1897",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -785,6 +868,7 @@
     },
     "kahn": {
       "name": "David Kahn",
+      "hall": "X",
       "era": "Modern · Journalist/Historian",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -796,6 +880,7 @@
     },
     "kama-sutra": {
       "name": "Kama Sutra Cipher (Mlecchita Vikalpa)",
+      "hall": "I",
       "era": "Classical India · ~400 CE",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -807,6 +892,7 @@
     },
     "kerckhoffs": {
       "name": "Kerckhoffs's Principle",
+      "hall": "XI",
       "era": "Foundational · 1883",
       "family": "Modern Cryptography",
       "region": "Global",
@@ -818,6 +904,7 @@
     },
     "kl-7": {
       "name": "KL-7 ADONIS NATO eight-rotor machine · 1952",
+      "hall": "VII",
       "era": "Cold War · 1952",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -829,6 +916,7 @@
     },
     "kryha": {
       "name": "Kryha Pocket cipher machine · 1924",
+      "hall": "VII",
       "era": "Inter-war commercial · 1924",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -840,6 +928,7 @@
     },
     "krypto-arg": {
       "name": "ARG Ciphers",
+      "hall": "XIII",
       "era": "Web 2.0 · 2001–present",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -851,6 +940,7 @@
     },
     "kryptos": {
       "name": "Kryptos",
+      "hall": "XII",
       "era": "Modern · 1990",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -862,6 +952,7 @@
     },
     "lasry": {
       "name": "George Lasry",
+      "hall": "X",
       "era": "Modern · Computational",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -873,6 +964,7 @@
     },
     "latin-american-codebooks": {
       "name": "Latin American Telegraphic Codebooks",
+      "hall": "VII",
       "era": "Americas · 1870s–1940s",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -884,6 +976,7 @@
     },
     "leo-marks": {
       "name": "Leo Marks",
+      "hall": "X",
       "era": "WWII · Britain",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -895,6 +988,7 @@
     },
     "lorenz": {
       "name": "Lorenz Cipher",
+      "hall": "IX",
       "era": "WWII · Germany · 1940",
       "family": "One-Time Pad and Theoretical Security",
       "region": "Global",
@@ -906,6 +1000,7 @@
     },
     "m-94": {
       "name": "M-94 / CSP-488 US Army strip / disk cipher · 1922",
+      "hall": "VII",
       "era": "WWI → WWII tactical · 1922–1942",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -917,6 +1012,7 @@
     },
     "m209": {
       "name": "M-209 (Hagelin C-38)",
+      "hall": "VII",
       "era": "World War II · 1940",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -928,6 +1024,7 @@
     },
     "mary-stuart-castelnau-letters": {
       "name": "Mary Queen of Scots — The Castelnau Letters",
+      "hall": "X",
       "era": "1586",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -939,6 +1036,7 @@
     },
     "mavis-batey": {
       "name": "Mavis Batey",
+      "hall": "X",
       "era": "WWII · Britain",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -950,6 +1048,7 @@
     },
     "mccormick": {
       "name": "McCormick Notes",
+      "hall": "XII",
       "era": "Late 20th-c. United States · 1999",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -961,6 +1060,7 @@
     },
     "microdot": {
       "name": "Microdot Steganography",
+      "hall": "V",
       "era": "Modern · 1941–1980s",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -972,6 +1072,7 @@
     },
     "mit-mystery-hunt": {
       "name": "MIT Mystery Hunt",
+      "hall": "XIII",
       "era": "MIT · 1981–present",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -983,6 +1084,7 @@
     },
     "monoalphabetic": {
       "name": "Monoalphabetic Substitution",
+      "hall": "II",
       "era": "Medieval · ~800 AD",
       "family": "Substitution",
       "region": "Global",
@@ -994,6 +1096,7 @@
     },
     "morse": {
       "name": "Morse Code Telegraphy's universal alphabet · 1840s",
+      "hall": "I",
       "era": "Telegraph age · 1840s →",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -1005,6 +1108,7 @@
     },
     "national-treasure": {
       "name": "National Treasure",
+      "hall": "XIII",
       "era": "Fiction · 2004",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -1016,6 +1120,7 @@
     },
     "navajo-code-talkers": {
       "name": "Navajo Code Talkers",
+      "hall": "VI",
       "era": "WWII · 1942–1945",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1027,6 +1132,7 @@
     },
     "nihilist": {
       "name": "Nihilist Cipher",
+      "hall": "V",
       "era": "1880s · Russia",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -1038,6 +1144,7 @@
     },
     "nomenclator": {
       "name": "Nomenclator",
+      "hall": "II",
       "era": "Renaissance · 1400s–1800s",
       "family": "Substitution",
       "region": "Global",
@@ -1049,6 +1156,7 @@
     },
     "null-cipher": {
       "name": "Null Cipher Concealment by selective reading · ancient → modern",
+      "hall": "IV",
       "era": "Antiquity → present",
       "family": "Transposition",
       "region": "Global",
@@ -1060,6 +1168,7 @@
     },
     "one-time-pad": {
       "name": "One-Time Pad",
+      "hall": "IX",
       "era": "1882 · Theoretical",
       "family": "One-Time Pad and Theoretical Security",
       "region": "Global",
@@ -1071,6 +1180,7 @@
     },
     "patterson-jefferson-cipher": {
       "name": "Patterson's Cipher for Jefferson",
+      "hall": "II",
       "era": "1801",
       "family": "Substitution",
       "region": "Global",
@@ -1082,6 +1192,7 @@
     },
     "phaistos-disc": {
       "name": "Phaistos Disc",
+      "hall": "XII",
       "era": "Bronze Age Crete · ~1700 BCE",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -1093,6 +1204,7 @@
     },
     "pigpen": {
       "name": "Pigpen Cipher",
+      "hall": "VII",
       "era": "18th Century",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
@@ -1104,6 +1216,7 @@
     },
     "playfair": {
       "name": "Playfair Cipher",
+      "hall": "II",
       "era": "Victorian · 1854",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -1115,6 +1228,7 @@
     },
     "polybius": {
       "name": "Polybius Square",
+      "hall": "I",
       "era": "Ancient Greece · ~150 BC",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -1126,6 +1240,7 @@
     },
     "porta": {
       "name": "Porta Cipher",
+      "hall": "III",
       "era": "Renaissance · 1563",
       "family": "Polyalphabetic",
       "region": "Global",
@@ -1137,6 +1252,7 @@
     },
     "purple": {
       "name": "Purple (Type 97 jiki-O-bun-In-ji-ki)",
+      "hall": "VII",
       "era": "World War II · 1939–1945",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1148,6 +1264,7 @@
     },
     "rail-fence": {
       "name": "Rail Fence Cipher",
+      "hall": "IV",
       "era": "19th Century",
       "family": "Transposition",
       "region": "Global",
@@ -1159,6 +1276,7 @@
     },
     "red-army-faction": {
       "name": "Red Army Faction One-Time Pad",
+      "hall": "V",
       "era": "Cold War · 1970–1998",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -1170,6 +1288,7 @@
     },
     "red-type-a": {
       "name": "Red (Type A)",
+      "hall": "VII",
       "era": "Interwar to WWII - 1931-1938",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1181,6 +1300,7 @@
     },
     "rochefort": {
       "name": "Joseph Rochefort",
+      "hall": "X",
       "era": "WWII · Pacific",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -1192,6 +1312,7 @@
     },
     "rosetta-stone": {
       "name": "The Rosetta Stone",
+      "hall": "I",
       "era": "Ptolemaic Egypt · 196 BCE",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -1203,6 +1324,7 @@
     },
     "rot13": {
       "name": "ROT13",
+      "hall": "I",
       "era": "Modern · 1980s",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -1214,6 +1336,7 @@
     },
     "rsa": {
       "name": "RSA",
+      "hall": "XI",
       "era": "Modern &middot; 1977",
       "family": "Modern Cryptography",
       "region": "Global",
@@ -1225,6 +1348,7 @@
     },
     "running-key": {
       "name": "Running Key Cipher",
+      "hall": "III",
       "era": "19th Century",
       "family": "Polyalphabetic",
       "region": "Global",
@@ -1236,6 +1360,7 @@
     },
     "sator-square": {
       "name": "Sator Square",
+      "hall": "XIII",
       "era": "Roman Empire · 1st–4th c. CE",
       "family": "Ciphers in Culture",
       "region": "Global",
@@ -1247,6 +1372,7 @@
     },
     "scytale": {
       "name": "Scytale",
+      "hall": "I",
       "era": "Sparta · ~500 BC",
       "family": "Ancient and Foundational Ciphers",
       "region": "Global",
@@ -1258,17 +1384,31 @@
     },
     "sha256": {
       "name": "SHA-256",
+      "hall": "XI",
       "era": "Modern &middot; 2001",
       "family": "Modern Cryptography",
       "region": "Global",
-      "usedBy": "Historical operators, states, or communities documented for this exhibit",
-      "keyType": "Varies by system",
-      "keyIdea": "Modern Cryptography transformation of plaintext into protected form",
+      "usedBy": "Certificate chains, Bitcoin mining, file integrity, password storage (via KDFs)",
+      "keyType": "Unkeyed",
+      "keyIdea": "One-way compression of any input to a fixed 256-bit digest; not reversible by design",
       "securityFailure": "Secure (no practical collision)",
+      "modernLesson": "Security depends on design quality, key management, and implementation."
+    },
+    "shamir-secret-sharing": {
+      "name": "Shamir's Secret Sharing",
+      "hall": "XI",
+      "era": "Modern &middot; 1979",
+      "family": "Modern Cryptography",
+      "region": "Global",
+      "usedBy": "DNSSEC root key ceremonies, HSM master key custody, cryptocurrency custodians",
+      "keyType": "No key — the secret is the object being split",
+      "keyIdea": "Hides a secret as a polynomial constant term; any k of n points recover it, k−1 reveal nothing",
+      "securityFailure": "Information-theoretically secure",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
     "shugborough": {
       "name": "Shugborough Inscription",
+      "hall": "XII",
       "era": "Georgian England · ~1748–1763",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -1280,6 +1420,7 @@
     },
     "sigaba": {
       "name": "SIGABA (ECM Mark II)",
+      "hall": "VII",
       "era": "WWII · 1940",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1291,6 +1432,7 @@
     },
     "sigsaly": {
       "name": "SIGSALY — The Encrypted Speech System",
+      "hall": "VII",
       "era": "WWII · 1943–1946",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1302,6 +1444,7 @@
     },
     "slidex": {
       "name": "Slidex British WWII tactical bigram cipher card",
+      "hall": "VI",
       "era": "WWII · 1943–1945",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -1313,6 +1456,7 @@
     },
     "solitaire": {
       "name": "Solitaire / Pontifex",
+      "hall": "IX",
       "era": "Modern · 1999",
       "family": "One-Time Pad and Theoretical Security",
       "region": "Global",
@@ -1324,6 +1468,7 @@
     },
     "somerton-man": {
       "name": "Somerton Man Code",
+      "hall": "XII",
       "era": "Post-WWII Australia · 1948",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -1335,6 +1480,7 @@
     },
     "stager": {
       "name": "Stager Cipher",
+      "hall": "Museum exhibit",
       "era": "Union · 1861",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -1346,6 +1492,7 @@
     },
     "station-hypo": {
       "name": "Station HYPO — Pearl Harbor to Midway",
+      "hall": "X",
       "era": "WWII · 1940–1942",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -1357,6 +1504,7 @@
     },
     "straddling-checkerboard": {
       "name": "Straddling Checkerboard",
+      "hall": "V",
       "era": "Late 19th – 20th Century",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -1368,6 +1516,7 @@
     },
     "tap-code": {
       "name": "Tap Code",
+      "hall": "VII",
       "era": "Korean War · Vietnam War",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
@@ -1379,6 +1528,7 @@
     },
     "trifid": {
       "name": "Trifid Cipher",
+      "hall": "IV",
       "era": "1902",
       "family": "Transposition",
       "region": "Global",
@@ -1390,6 +1540,7 @@
     },
     "trithemius": {
       "name": "Trithemius Progressive Cipher Steganographia · 1518",
+      "hall": "III",
       "era": "German Renaissance · 1518",
       "family": "Polyalphabetic",
       "region": "Global",
@@ -1401,6 +1552,7 @@
     },
     "two-square": {
       "name": "Two-Square Cipher",
+      "hall": "II",
       "era": "Late 19th Century · ~1902",
       "family": "Substitution",
       "region": "Global",
@@ -1412,6 +1564,7 @@
     },
     "typex": {
       "name": "Typex",
+      "hall": "VII",
       "era": "WWII · 1937",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1425,16 +1578,17 @@
       "name": "VENONA Project",
       "hall": "IX",
       "era": "Cold War · 1943–1980",
-      "family": "Codebreakers and Cryptanalysis",
+      "family": "One-Time Pad and Theoretical Security",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
-      "keyIdea": "Codebreakers and Cryptanalysis transformation of plaintext into protected form",
+      "keyIdea": "One-Time Pad and Theoretical Security transformation of plaintext into protected form",
       "securityFailure": "Partial break (key reuse exploit)",
       "modernLesson": "Even perfect ciphers fail when key generation is flawed"
     },
     "vernam": {
       "name": "Vernam Cipher",
+      "hall": "IX",
       "era": "1917",
       "family": "One-Time Pad and Theoretical Security",
       "region": "Global",
@@ -1446,6 +1600,7 @@
     },
     "vic": {
       "name": "VIC Cipher",
+      "hall": "V",
       "era": "Cold War · 1950s",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -1457,6 +1612,7 @@
     },
     "vietnamese-underground": {
       "name": "Vietnamese Underground Codes",
+      "hall": "V",
       "era": "Modern · 1940s–1975",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -1468,6 +1624,7 @@
     },
     "vigenere": {
       "name": "Vigenère Cipher",
+      "hall": "III",
       "era": "Renaissance · 1553",
       "family": "Historical Cryptography",
       "region": "Global",
@@ -1479,6 +1636,7 @@
     },
     "voynich": {
       "name": "The Voynich Manuscript",
+      "hall": "XII",
       "era": "Early 15th c. · Carbon-dated 1404–1438",
       "family": "Unsolved Ciphers",
       "region": "Global",
@@ -1490,6 +1648,7 @@
     },
     "wallis-ciphers": {
       "name": "Wallis Ciphers John Wallis & the English Civil War · 1640s",
+      "hall": "II",
       "era": "English Civil War · 1642–1651",
       "family": "Substitution",
       "region": "Global",
@@ -1501,6 +1660,7 @@
     },
     "wheatstone": {
       "name": "Wheatstone Cryptograph A clock-face polyalphabetic · 1867",
+      "hall": "VII",
       "era": "Victorian London · 1867",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1512,6 +1672,7 @@
     },
     "yardley": {
       "name": "Herbert Yardley",
+      "hall": "X",
       "era": "Interwar · USA",
       "family": "Codebreakers and Cryptanalysis",
       "region": "Global",
@@ -1521,8 +1682,21 @@
       "securityFailure": "Codebreaker Biography",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
+    "zero-knowledge-proofs": {
+      "name": "Zero-Knowledge Proofs",
+      "hall": "XI",
+      "era": "Modern &middot; 1985",
+      "family": "Modern Cryptography",
+      "region": "Global",
+      "usedBy": "Zcash shielded transactions, Ethereum rollups, anonymous credential systems",
+      "keyType": "Witness known only to the prover",
+      "keyIdea": "Demonstrates knowledge of a secret without transmitting any part of it",
+      "securityFailure": "Secure (foundational result)",
+      "modernLesson": "Security depends on design quality, key management, and implementation."
+    },
     "zimmermann": {
       "name": "Zimmermann Telegram German codes 0075 / 13040 · 1917",
+      "hall": "VI",
       "era": "WWI · January 1917",
       "family": "Military and Field Ciphers",
       "region": "Global",
@@ -1534,6 +1708,7 @@
     },
     "zodiac": {
       "name": "Zodiac Cipher",
+      "hall": "VIII",
       "era": "1969 · Solved 2020",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",

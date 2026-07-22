@@ -77,29 +77,33 @@ CI workflow (`.github/workflows/ci.yml`) run them on every push and PR.
   wing's exhibit components on top of it. The wing is linked from the
   entrance, museum map, mobile nav drawer, sitemap, and site search.
 
-## Where the Hall points nowhere
+## Where each exhibit meets the museum
 
 A link-topology pass (`foundations-links.test.js`) measured how each exhibit
-connects to the rest of the museum. Most map cleanly onto an application page:
-§142→AES, §143/§149→Diffie–Hellman, §144/§145→RSA, §151→one-time pad,
-§154→SHA-256, §147/§152/§153/§157→the Modern Cryptography wing.
+connects to the rest of the museum, and found three teaching the mathematics
+under primitives the museum did not yet exhibit. Those three applications were
+subsequently built, so every foundation now has somewhere to lead:
 
-Three do not, and the reason is worth recording rather than papering over.
-
-| Exhibit | Teaches | Museum has no exhibit on |
+| Exhibit | Teaches | Applied in |
 | --- | --- | --- |
-| §150 Elliptic Curves over ℝ | the group law on a curve | ECDH, ECDSA, or any deployed EC primitive |
-| §155 Polynomial Interpolation | *k* points fix a degree-(*k*−1) curve | Shamir's Secret Sharing, threshold signatures |
-| §156 Bilinear Pairings | e(aP,bQ) = e(P,Q)^ab | zk-SNARKs, identity-based encryption, BLS aggregation |
+| §142 Finite Fields | arithmetic mod a prime | AES, ECDSA |
+| §143 / §149 Modular Arithmetic, Group Theory | cyclic groups and generators | Diffie-Hellman, ECDSA, zero-knowledge proofs |
+| §144 / §145 Prime Number Theorem, Euler & Fermat | prime density, the RSA congruence | RSA |
+| §147 / §152 / §157 lattice arc | SVP, decoding, `t = As + e` | the Modern Cryptography wing (ML-KEM, ML-DSA) |
+| §150 Elliptic Curves over ℝ | the chord-and-tangent group law | **§158 ECDSA** |
+| §151 Information & Entropy | Shannon entropy | the one-time pad, Vernam, §159 |
+| §154 The Random Oracle | avalanche, Fiat–Shamir | SHA-256, §160 |
+| §155 Polynomial Interpolation | *k* points fix a degree-(*k*−1) curve | **§159 Shamir's Secret Sharing** |
+| §156 Bilinear Pairings | e(aP,bQ) = e(P,Q)^ab | **§160 Zero-Knowledge Proofs** |
 
-These three now link to neighbouring *foundations* so no page is a dead end,
-which is the correct interim answer. The wrong answer would be to point them at
-`modern.html` and call the navigation complete: that page has no section
-anchors, and mentions ML-KEM, zero-knowledge, threshold cryptography, IBE and
-BLS zero times between them. A link there would satisfy a link checker while
-teaching the visitor nothing.
+`foundations-links.test.js` asserts both directions for these pairs: the
+application links back to the foundation, and the foundation points forward to
+the application. Neither can be dropped by an unrelated edit without a failure.
 
-So the gap is content, not navigation. If the museum ever adds an
-elliptic-curve primitive, a secret-sharing exhibit, or a zero-knowledge
-exhibit, these three foundations already have the mathematics waiting and
-should be wired to it in the same pass.
+The interim answer, before those exhibits existed, was to link the three
+orphans to neighbouring *foundations* so no page was a dead end. The wrong
+answer would have been to point them at `modern.html` and call the navigation
+complete — that page has no section anchors and mentioned zero-knowledge,
+threshold cryptography and BLS zero times between them. A link there would have
+satisfied a link checker while teaching nothing, and would have erased the
+signal that the exhibits were missing in the first place.

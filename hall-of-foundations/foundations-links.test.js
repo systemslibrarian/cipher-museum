@@ -94,8 +94,26 @@ var RECIPROCAL = [
   ["ciphers/one-time-pad.html",    "entropy.html",              "perfect secrecy is an entropy statement"],
   ["halls/modern-crypto.html",     "finite-fields.html",        "the hall's AES card rests on finite fields"],
   ["halls/modern-crypto.html",     "euler-fermat.html",         "the hall's RSA card rests on Euler-Fermat"],
-  ["modern.html",                  "lattices-svp.html",         "the PQ wing rests on lattice hardness"]
+  ["modern.html",                  "lattices-svp.html",         "the PQ wing rests on lattice hardness"],
+  // Added when the three application exhibits these foundations had been
+  // waiting for were finally built. Before §158-160 existed, §150, §155 and
+  // §156 had nothing in the museum to point at.
+  ["ciphers/ecdsa.html",                 "elliptic-curves-real.html", "ECDSA is the curve group law at working size"],
+  ["ciphers/shamir-secret-sharing.html", "interpolation.html",        "Shamir sharing IS Lagrange interpolation"],
+  ["ciphers/zero-knowledge-proofs.html", "pairings.html",             "pairing-based zk-SNARKs rest on the bilinear identity"],
+  ["ciphers/zero-knowledge-proofs.html", "random-oracle.html",        "Fiat-Shamir replaces the verifier's coins with a hash"]
 ];
+
+// ---- 6. the foundations must point forward to their applications ----
+// The reverse of the pairs above. A foundation that explains the mathematics
+// under a museum exhibit should offer the visitor that exhibit.
+[["elliptic-curves-real.html", "ecdsa.html"],
+ ["interpolation.html",        "shamir-secret-sharing.html"],
+ ["pairings.html",             "zero-knowledge-proofs.html"]].forEach(function (row) {
+  var raw = fs.readFileSync(path.join(DIR, row[0]), "utf8");
+  assert(raw.indexOf("../ciphers/" + row[1]) !== -1,
+    row[0] + " should point forward to its application, ciphers/" + row[1]);
+});
 RECIPROCAL.forEach(function (row) {
   var src = path.join(ROOT, row[0]);
   if (!fs.existsSync(src)) { assert(false, "reciprocal source missing: " + row[0]); return; }

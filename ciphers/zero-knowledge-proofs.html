@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero-Knowledge Proofs &mdash; The Cipher Museum</title>
+  <meta name="description" content="Zero-knowledge proofs (1985) — convince someone a statement is true while revealing nothing beyond its truth. Run the Schnorr protocol and its simulator.">
+  <meta property="og:title" content="Zero-Knowledge Proofs &mdash; The Cipher Museum">
+  <meta property="og:description" content="Zero-knowledge proofs (1985) — convince someone a statement is true while revealing nothing beyond its truth. Run the Schnorr protocol and its simulator.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/zero-knowledge-proofs.html">
+  <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Cipher Museum — an interactive history of encryption">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zero-Knowledge Proofs &mdash; The Cipher Museum">
+  <meta name="twitter:description" content="Zero-knowledge proofs (1985) — convince someone a statement is true while revealing nothing beyond its truth. Run the Schnorr protocol and its simulator.">
+  <meta name="twitter:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/zero-knowledge-proofs.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links"></ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/modern-crypto.html">Hall XI: Modern Cryptography</a><span>&rsaquo;</span>
+    Zero-Knowledge Proofs
+  </div>
+  <div class="page-meta">
+    <span class="badge era-modern">Modern &middot; 1985</span>
+    <span class="badge sec-secure">Secure (foundational result)</span>
+  </div>
+  <h1 class="page-title">Zero-Knowledge Proofs</h1>
+  <div class="trust-label-wrap"><a class="trust-label trust-label--secure" href="../museum-map.html#trust-labels" title="Still considered secure when used correctly with modern key handling." aria-label="Trust label: Secure (Modern). Still considered secure when used correctly with modern key handling."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg><span class="trust-label__text">Secure (Modern)</span></a></div>
+  <p class="page-tagline">Convince someone that a statement is true while revealing nothing at all beyond the fact of its truth &mdash; not even a hint of why.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Shafi Goldwasser, Silvio Micali &amp; Charles Rackoff, &lsquo;The Knowledge Complexity of Interactive Proof-Systems' (1985)</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1985; Schnorr's protocol 1989; zk-SNARKs from 2012</span></div>
+    <div class="fact"><span class="fact-label">Type</span><span class="fact-value">Interactive proof system &mdash; <strong>not a cipher</strong> (proves knowledge, transmits none of it)</span></div>
+    <div class="fact"><span class="fact-label">Recognition</span><span class="fact-value">Goldwasser and Micali received the 2012 Turing Award, in part for this work</span></div>
+    <div class="fact"><span class="fact-label">Status</span><span class="fact-value">Underlies private cryptocurrencies, blockchain rollups, and modern anonymous credentials</span></div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h2>Why This Matters</h2>
+      <p>Every other exhibit in this hall moves a secret from one place to another while keeping it hidden in transit. A zero-knowledge proof does something that sounds impossible instead: it lets you <em>demonstrate</em> you hold a secret without moving it anywhere at all.</p>
+      <p>The consequence is a whole category of systems that were previously unbuildable &mdash; proving you are over eighteen without revealing your birthday, proving a transaction is valid without revealing who paid whom, proving a computation ran correctly without repeating it.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body"><p>Goldwasser, Micali and Rackoff introduced the idea in 1985, and their paper was rejected three times before publication &mdash; reviewers doubted the concept was coherent. Their contribution was not a protocol so much as a <em>definition</em>: a way to say precisely what &lsquo;revealed nothing' means. Claus-Peter Schnorr gave a compact and practical instance in 1989, and its non-interactive form became the template for a great many modern signature schemes. From 2012 the succinct variants known as zk-SNARKs made proofs small enough and fast enough to verify on a blockchain.</p></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>A zero-knowledge proof must satisfy three properties at once, and the third is the hard one:</p>
+        <ul style="line-height:1.9;">
+          <li><strong>Completeness</strong> &mdash; an honest prover who really knows the secret always convinces the verifier.</li>
+          <li><strong>Soundness</strong> &mdash; a prover who does not know it is almost certain to be caught.</li>
+          <li><strong>Zero knowledge</strong> &mdash; the verifier learns nothing they could not have produced alone.</li>
+        </ul>
+        <p>Schnorr's protocol demonstrates all three in three messages. The prover knows <em>x</em>; everyone knows <em>y</em> = <em>g</em><sup><em>x</em></sup>. The prover commits to a random <em>r</em> by sending <em>t</em> = <em>g</em><sup><em>r</em></sup>. The verifier replies with a random challenge <em>c</em>. The prover answers <em>s</em> = <em>r</em> + <em>cx</em>, and the verifier checks:</p>
+        <p style="font-family:ui-monospace,monospace;background:var(--bg2,rgba(255,255,255,.04));padding:12px 16px;border-radius:6px;overflow-x:auto;">g<sup>s</sup> &nbsp;=&nbsp; t &middot; y<sup>c</sup> &nbsp;(mod p)</p>
+        <p>The response <em>s</em> is the secret <em>x</em> masked by the fresh random <em>r</em>, so it discloses nothing. But it could only have been produced by someone who knew <em>x</em> &mdash; unless they guessed the challenge in advance.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🧪</span><span class="panel-title">Run the protocol</span></div>
+      <div class="panel-body">
+        <p>Arithmetic runs in a group of prime order 233 modulo 467 &mdash; small enough to print every value. Choose a secret, then play as an honest prover or as a cheat who does not know it.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin:18px 0;">
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:.85rem;">secret x
+            <input type="number" id="x" value="77" min="1" max="232" step="1" style="width:90px;">
+          </label>
+          <button id="honest" class="btn">Prove honestly</button>
+          <button id="cheat" class="btn">Cheat (guess the response)</button>
+          <button id="cheatRuns" class="btn">Let a cheat try 500 times</button>
+        </div>
+        <p id="proofOut" aria-live="polite" role="status" style="font-family:ui-monospace,monospace;padding:12px 16px;background:rgba(255,255,255,.04);border-radius:6px;">Press <strong>Prove honestly</strong>.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🎭</span><span class="panel-title">Why a transcript proves nothing &mdash; the simulator</span></div>
+      <div class="panel-body">
+        <p>Here is the argument that makes &lsquo;zero knowledge' precise, and it is genuinely surprising. Take the protocol's steps <em>out of order</em>: choose the challenge and the response first, then work backwards to the commitment that makes the check succeed. The resulting transcript passes verification perfectly &mdash; and it was produced by someone with no secret at all.</p>
+        <p>So a recorded transcript is worthless as evidence. Anyone can forge one. The proof only convinces <strong>the verifier who chose the challenge themselves</strong>, after the commitment was locked in. Conviction lives in the ordering of the messages, not in their contents &mdash; which is exactly why the verifier learns nothing: everything they saw, they could have written themselves.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin:18px 0;">
+          <button id="simulate" class="btn">Forge a transcript with no secret</button>
+          <button id="extract" class="btn">Answer two challenges on one commitment</button>
+        </div>
+        <p id="simOut" aria-live="polite" role="status" style="font-family:ui-monospace,monospace;padding:12px 16px;background:rgba(255,255,255,.04);border-radius:6px;">Forge a transcript and check it against the same verifier.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🛡️</span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-body">
+        <p>Schnorr's soundness is not perfect and is not meant to be: a cheat who guesses the challenge in advance succeeds, with probability 1 divided by the size of the challenge space. On this page that is 1 in 233, which you can watch happen. Real deployments use challenge spaces around 2<sup>256</sup>, where the same gap is unreachable.</p>
+        <p>Making the protocol non-interactive introduces the sharper risk. The <strong>Fiat&ndash;Shamir transform</strong> replaces the verifier's random challenge with a hash of the commitment, so the prover can generate the challenge themselves without being able to control it. This is how a Schnorr proof becomes a signature &mdash; but its security then rests on the hash behaving like an ideal random function, an assumption examined honestly in <a href="../hall-of-foundations/random-oracle.html">The Random Oracle</a>. Implementations that hash too little into the challenge have been broken repeatedly; the class of bug is common enough to have a name, the &lsquo;weak Fiat&ndash;Shamir' attack.</p>
+        <p>Succinct proof systems add their own concerns. Many pairing-based zk-SNARKs require a trusted setup whose discarded randomness would forge arbitrary proofs if retained &mdash; the reason for elaborate multi-party ceremonies. Transparent systems such as STARKs avoid that setup entirely, at the cost of larger proofs. Pairing-based constructions also inherit the discrete logarithm's vulnerability to quantum attack, while hash-based ones do not.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon">🌐</span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-body"><p>Zcash uses zk-SNARKs to validate shielded transactions without revealing sender, recipient or amount. Ethereum rollups post a succinct proof that thousands of transactions executed correctly, so the main chain need not re-run them. Anonymous credential systems let you prove an attribute &mdash; over eighteen, a citizen, a subscriber &mdash; without disclosing the underlying document. And every Schnorr or EdDSA signature you verify is a zero-knowledge proof of knowledge that has been made non-interactive.</p></div>
+    </div>
+
+  </div>
+
+  <div class="exhibit-side">
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon">🔑</span><span class="panel-title">At a glance</span>
+      </div>
+      <div class="panel-body">
+        <p><strong>Claim:</strong> &lsquo;I know <em>x</em> with <em>g</em><sup><em>x</em></sup> = <em>y</em>.'</p>
+        <p><strong>Three messages:</strong> commit, challenge, respond.</p>
+        <p><strong>Completeness:</strong> honest provers always pass.</p>
+        <p><strong>Soundness:</strong> a cheat's odds are 1 in the challenge space.</p>
+        <p><strong>Zero knowledge:</strong> the transcript can be forged by anyone, so it reveals nothing.</p>
+        <p style="margin-top:14px;border-top:1px solid var(--gold-b);padding-top:12px;">The mathematics is in the <a href="../hall-of-foundations/pairings.html">Hall of Foundations</a>: the bilinear pairing behind the succinct variants, and <a href="../hall-of-foundations/random-oracle.html">the oracle</a> Fiat&ndash;Shamir leans on.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../hall-of-foundations/pairings.html" class="related-card">
+      <span class="related-card__number">&sect;156 &middot; Foundations</span>
+      <span class="related-card__name">Bilinear Pairings</span>
+      <span class="related-card__tag">The mathematics beneath the pairing-based zk-SNARK family — verify a product of hidden values</span>
+    </a>
+    <a href="../hall-of-foundations/random-oracle.html" class="related-card">
+      <span class="related-card__number">&sect;154 &middot; Foundations</span>
+      <span class="related-card__name">The Random Oracle</span>
+      <span class="related-card__tag">Why this works: Fiat–Shamir replaces the verifier's coins with a hash, and what that assumes</span>
+    </a>
+    <a href="../hall-of-foundations/group-theory.html" class="related-card">
+      <span class="related-card__number">&sect;149 &middot; Foundations</span>
+      <span class="related-card__name">Group Theory</span>
+      <span class="related-card__tag">Why this works: the prime-order group the commitment and challenge live in</span>
+    </a>
+    <a href="../hall-of-foundations/reduction.html" class="related-card">
+      <span class="related-card__number">&sect;148 &middot; Foundations</span>
+      <span class="related-card__name">Reduction &amp; Proof</span>
+      <span class="related-card__tag">Related foundation: what 'proves knowledge' claims, and what it quietly assumes</span>
+    </a>
+    <a href="ecdsa.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">ECDSA</span>
+      <span class="related-card__tag">A signature is this protocol with the challenge replaced by a hash</span>
+    </a>
+    <a href="shamir-secret-sharing.html" class="related-card">
+      <span class="related-card__number">Related</span>
+      <span class="related-card__name">Shamir's Secret Sharing</span>
+      <span class="related-card__tag">Verifiable secret sharing adds proofs so a lying shareholder can be caught</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="shamir-secret-sharing.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Shamir's Secret Sharing</span>
+  </a>
+  <a href="../hall-of-foundations/index.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Hall of Foundations</span>
+  </a>
+</div>
+
+</main>
+
+<footer></footer>
+<script src="../js/protocol-math.js"></script>
+<script>
+(function(){
+  "use strict";
+  var PM=window.ProtocolMath, G=PM.GROUP;
+  function el(id){return document.getElementById(id);}
+  function ri(lo,hi){return lo+Math.floor(Math.random()*(hi-lo+1));}
+  function getX(){
+    var v=parseInt(el("x").value,10);
+    if(isNaN(v)) v=1;
+    v=Math.max(1,Math.min(G.q-1,v));
+    el("x").value=v; return v;
+  }
+  function pass(ok){
+    return "<b style=\"color:"+(ok?"var(--green,#5AC8A0)":"var(--red,#c94f3d)")+"\">"+(ok?"ACCEPTED":"REJECTED")+"</b>";
+  }
+
+  function honest(){
+    var x=getX(), y=PM.powmod(G.g,x,G.p);
+    var r=ri(1,G.q-1), t=PM.schnorrCommit(r,G);
+    var c=ri(0,G.q-1), s=PM.schnorrRespond(r,c,x,G);
+    var ok=PM.schnorrVerify(t,c,s,y,G);
+    el("proofOut").innerHTML=
+      "public key &nbsp;y = g<sup>x</sup> = "+y+"<br>"+
+      "1. prover commits &nbsp;t = g<sup>r</sup> = <b>"+t+"</b> &nbsp;<span style=\"opacity:.6\">(r is secret)</span><br>"+
+      "2. verifier challenges &nbsp;c = <b>"+c+"</b><br>"+
+      "3. prover responds &nbsp;s = r + cx = <b>"+s+"</b><br>"+
+      "check g<sup>s</sup> = t&middot;y<sup>c</sup> &rarr; "+pass(ok)+
+      "<br><span style=\"opacity:.75\">s is x masked by the fresh random r — the verifier never sees x.</span>";
+  }
+
+  function cheat(){
+    var x=getX(), y=PM.powmod(G.g,x,G.p);
+    var t=PM.schnorrCommit(ri(1,G.q-1),G);
+    var c=ri(0,G.q-1), s=ri(0,G.q-1);
+    var ok=PM.schnorrVerify(t,c,s,y,G);
+    el("proofOut").innerHTML=
+      "A prover who does <b>not</b> know x commits, then guesses:<br>"+
+      "&nbsp;&nbsp;t = "+t+" &nbsp;&middot;&nbsp; c = "+c+" &nbsp;&middot;&nbsp; guessed s = "+s+"<br>"+
+      "check &rarr; "+pass(ok)+
+      "<br><span style=\"opacity:.75\">"+(ok
+        ? "A 1-in-233 fluke — the soundness error is real, not zero. Real systems use a challenge space near 2<sup>256</sup>."
+        : "As expected. Only one response in 233 works for this commitment and challenge.")+"</span>";
+  }
+
+  function cheatRuns(){
+    var x=getX(), y=PM.powmod(G.g,x,G.p), wins=0, T=500;
+    for(var i=0;i<T;i++){
+      var t=PM.schnorrCommit(ri(1,G.q-1),G);
+      if(PM.schnorrVerify(t,ri(0,G.q-1),ri(0,G.q-1),y,G)) wins++;
+    }
+    el("proofOut").innerHTML=
+      "500 attempts by a prover with no secret: <b>"+wins+"</b> succeeded.<br>"+
+      "Expected from the soundness bound 1/q = 1/233 &rarr; about "+(500/G.q).toFixed(1)+".<br>"+
+      "<span style=\"opacity:.75\">Soundness is a probability, not a guarantee. Widening the challenge space is what makes it negligible.</span>";
+  }
+
+  function simulate(){
+    var x=getX(), y=PM.powmod(G.g,x,G.p);
+    var c=ri(0,G.q-1), s=ri(1,G.q-1);
+    var sim=PM.schnorrSimulate(c,s,y,G);
+    if(!sim){ el("simOut").textContent="Degenerate draw; press again."; return; }
+    var ok=PM.schnorrVerify(sim.t,sim.c,sim.s,y,G);
+    el("simOut").innerHTML=
+      "Built <b>backwards</b>, with no knowledge of x:<br>"+
+      "&nbsp;&nbsp;pick response s = "+sim.s+" and challenge c = "+sim.c+" first<br>"+
+      "&nbsp;&nbsp;solve for the commitment &nbsp;t = g<sup>s</sup>&middot;y<sup>&minus;c</sup> = <b>"+sim.t+"</b><br>"+
+      "the same verifier's check &rarr; "+pass(ok)+
+      "<br><span style=\"opacity:.75\">Identical in form to an honest transcript, and produced without the secret. "+
+      "This is what 'zero knowledge' means: the verifier saw nothing they could not have written themselves.</span>";
+  }
+
+  function extract(){
+    var x=getX();
+    var r=ri(1,G.q-1);
+    var c1=ri(0,G.q-1), c2=ri(0,G.q-1);
+    if(c1===c2) c2=(c1+1)%G.q;
+    var s1=PM.schnorrRespond(r,c1,x,G), s2=PM.schnorrRespond(r,c2,x,G);
+    var got=PM.schnorrExtract(s1,c1,s2,c2,G);
+    el("simOut").innerHTML=
+      "One commitment, two different challenges answered:<br>"+
+      "&nbsp;&nbsp;(c&#8321;, s&#8321;) = ("+c1+", "+s1+") &nbsp;&middot;&nbsp; (c&#8322;, s&#8322;) = ("+c2+", "+s2+")<br>"+
+      "x = (s&#8321; &minus; s&#8322;) / (c&#8321; &minus; c&#8322;) = <b style=\"color:var(--red,#c94f3d)\">"+got+"</b>"+
+      (got===x?" &mdash; the secret itself.":"")+
+      "<br><span style=\"opacity:.75\">This is why the protocol proves <em>knowledge</em>: anyone who could answer two challenges on one commitment must hold x. "+
+      "It is also why r must never be reused &mdash; the same arithmetic that breaks a repeated ECDSA nonce.</span>";
+  }
+
+  el("honest").addEventListener("click",honest);
+  el("cheat").addEventListener("click",cheat);
+  el("cheatRuns").addEventListener("click",cheatRuns);
+  el("simulate").addEventListener("click",simulate);
+  el("extract").addEventListener("click",extract);
+  honest();
+})();
+</script>
+<script src="../js/demo-loader.min.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

@@ -49,7 +49,7 @@
   <span class="page-eyebrow" style="color:var(--gold);">Hall XI &middot; 1976 &ndash; Present</span>
   <h1 class="page-title">Modern Cryptography</h1>
   <p class="page-tagline">The canonical five primitives that founded the modern era &mdash; plus the wider landscape they unlocked</p>
-  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">Every cipher in the previous ten halls eventually fell. The five primitives in this hall &mdash; DES, Diffie-Hellman, RSA, AES, SHA-256 &mdash; were designed in the public eye, scrutinised for decades, and now anchor essentially every secure system on Earth. They are not the <em>only</em> modern primitives &mdash; ChaCha20, ECDH (X25519), Ed25519, BLAKE2/3, and the post-quantum NIST finalists all sit alongside them &mdash; but they are the canonical foundation from which the rest of the field is built. Only one of them, AES, is technically a cipher in the classical sense. The other four solve problems that classical cryptography could not: distributing keys without meeting in person, signing documents at a distance, and verifying integrity without a shared secret.</p>
+  <p style="max-width:680px;font-size:1.1rem;color:var(--tx2);line-height:1.9;position:relative;z-index:1;">Every cipher in the previous ten halls eventually fell. The five classical primitives in this hall &mdash; DES, Diffie-Hellman, RSA, AES, SHA-256 &mdash; were designed in the public eye, scrutinised for decades, and now anchor essentially every secure system on Earth. They are not the <em>only</em> modern primitives &mdash; ChaCha20, ECDH (X25519), Ed25519, BLAKE2/3, and the post-quantum NIST finalists all sit alongside them &mdash; but they are the canonical foundation from which the rest of the field is built. Only one of them, AES, is technically a cipher in the classical sense. The other four solve problems that classical cryptography could not: distributing keys without meeting in person, signing documents at a distance, and verifying integrity without a shared secret.</p>
   <p style="max-width:680px;font-size:.95rem;color:var(--tx3);line-height:1.8;margin-top:1rem;position:relative;z-index:1;">For the broader landscape &mdash; ChaCha20, ECDH, post-quantum standardisation, and the cipher-vs-protocol taxonomy &mdash; see the <a href="../modern.html" style="color:var(--gold);">Modern Cryptography wing</a>. For the design rule that underpins every card in this hall, see <a href="../ciphers/kerckhoffs.html" style="color:var(--gold);">Kerckhoffs's Principle</a>.</p>
   <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem;position:relative;z-index:1;">
     <span class="badge era-modern">Modern Era</span>
@@ -137,6 +137,54 @@
         <div class="card-badges">
           <span class="badge sec-secure">Secure (no collision)</span>
           <span class="badge era-modern">FIPS 180-2</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/ecdsa.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 158</span>
+        <span class="badge era-modern">1992 &middot; Vanstone</span>
+      </div>
+      <div class="card-name">ECDSA</div>
+      <p class="card-desc">Signing with elliptic curves &mdash; how a server proves it owns its domain and a wallet proves it may spend a coin. Its mathematics has never been broken; its implementations have, repeatedly, always at the same one-time nonce.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Secure (sound nonce)</span>
+          <span class="badge era-modern">FIPS 186</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/shamir-secret-sharing.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 159</span>
+        <span class="badge era-modern">1979 &middot; Adi Shamir</span>
+      </div>
+      <div class="card-name">Shamir&#39;s Secret Sharing</div>
+      <p class="card-desc">Split a secret among n holders so any k rebuild it and any k&minus;1 learn nothing at all. Not hard to break &mdash; mathematically undetermined, like the one-time pad, and just as immune to a quantum computer.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Information-theoretic</span>
+          <span class="badge era-modern">CACM 1979</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </div>
+    </a>
+
+    <a href="../ciphers/zero-knowledge-proofs.html" class="cipher-card" style="border-color:rgba(90,200,160,.25);">
+      <div class="card-head">
+        <span class="card-num">Exhibit 160</span>
+        <span class="badge era-modern">1985 &middot; GMR</span>
+      </div>
+      <div class="card-name">Zero-Knowledge Proofs</div>
+      <p class="card-desc">Prove a statement is true while revealing nothing but its truth. Rejected by reviewers three times before publication; now the engine of private transactions, blockchain rollups, and anonymous credentials.</p>
+      <div class="card-foot">
+        <div class="card-badges">
+          <span class="badge sec-secure">Foundational result</span>
+          <span class="badge era-modern">Turing Award 2012</span>
         </div>
         <span class="card-arrow">&rarr;</span>
       </div>
