@@ -69,9 +69,8 @@
     short, near-perpendicular vectors &#8212; the closest corner falls out of a
     single rounding step. With a "bad" basis for that same lattice, the rounding
     lands on the wrong corner most of the time. That gap is the shape of a
-    lattice <span class="term">trapdoor</span>. Read it as the geometry, not as
-    any particular key format: the deployed standards get their trapdoor a
-    different way, and &#167;4 says how.
+    lattice <span class="term">trapdoor</span>, and it is what
+    <a href="learning-with-errors.html">a noise term</a> is defending.
   </div>
 
   <section class="exhibit">
@@ -188,7 +187,10 @@
     </p>
     <div class="eq">public: (A, t) &nbsp;where&nbsp; t = A&#183;s + e &nbsp;&#183;&nbsp; secret: the short vector s</div>
     <p>
-      There is no secret good basis anywhere in that key. Recovering <em>s</em>
+      There is no secret good basis anywhere in that key.
+      <a href="learning-with-errors.html">§157</a> is that equation, live &#8212;
+      solve it with the noise off, then switch the noise on and watch the same
+      algebra collapse. Recovering <em>s</em>
       from <em>(A, t)</em> is the <span class="term">Module-LWE</span> problem,
       which lives in the <a href="polynomial-rings.html">polynomial ring</a>
       next door. Decryption does not round with a private basis either &#8212; it
@@ -226,7 +228,11 @@
         choice of that margin.
       </p>
     </div>
-    <p class="aside">Read first: <a href="lattices-svp.html" style="color:var(--vermilion)">Lattices &amp; the SVP</a>. Related: <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a> for how ML-KEM's security reduces to this problem.</p>
+    <p class="aside"><b>Three views of one problem.</b>
+      <a href="lattices-svp.html" style="color:var(--vermilion)">§147</a> is the geometry — why the secret stays hidden.
+      <a href="closest-vector.html" style="color:var(--vermilion)">§152</a> is the decoding — why its owner still gets in.
+      <a href="learning-with-errors.html" style="color:var(--vermilion)">§157</a> is the algebra — what the keys are actually made of.
+      Also related: <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a>, for what "reduces to this problem" claims.</p>
   </section>
 
   </main>

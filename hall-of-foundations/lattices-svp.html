@@ -67,8 +67,9 @@
   <div class="honesty">
     <strong>The basis is a disguise.</strong> The <em>same</em> lattice can be
     described by a tidy basis that reveals its short vectors, or a skewed one
-    that hides them. Cryptography publishes the skewed basis and keeps the tidy
-    one secret. Drag the vectors below and watch the disguise work.
+    that hides them &#8212; and recovering the short vectors from a skewed
+    description is the hard problem the post-quantum standards are built on.
+    Drag the vectors below and watch the disguise work.
   </div>
 
   <section class="exhibit">
@@ -148,7 +149,11 @@
         lattice is what their security ultimately rests on.
       </p>
     </div>
-    <p class="aside">Next: <a href="closest-vector.html" style="color:var(--vermilion)">The Closest Vector Problem</a> — the companion that shows how the key-holder actually decrypts, and where Kyber's LWE lives.</p>
+    <p class="aside"><b>Three views of one problem.</b>
+      <a href="lattices-svp.html" style="color:var(--vermilion)">§147</a> is the geometry — why the secret stays hidden.
+      <a href="closest-vector.html" style="color:var(--vermilion)">§152</a> is the decoding — why its owner still gets in.
+      <a href="learning-with-errors.html" style="color:var(--vermilion)">§157</a> is the algebra — what the keys are actually made of.
+      Read them in that order.</p>
   </section>
 
   </main>

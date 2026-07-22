@@ -66,12 +66,11 @@
   </div>
 
   <div class="honesty">
-    <strong>Why this exhibit exists.</strong> Its neighbours
-    <a href="lattices-svp.html">§147</a> and <a href="closest-vector.html">§152</a>
-    show the <em>geometry</em> of lattice hardness using the classical
-    good-basis/bad-basis trapdoor. That picture is real, but it is not how the
-    deployed standards are keyed. This exhibit shows the structure ML-KEM and
-    ML-DSA genuinely use: a matrix, a short secret vector, and an error term.
+    <strong>A public key you can read.</strong> Everything ML-KEM publishes is
+    on this page: a matrix, and that matrix multiplied by a short secret vector
+    with a little noise added. Nothing is hidden but the noise and the secret.
+    Set the error to zero and the secret falls out in one click &#8212; which is
+    the fastest way to see what the error is for.
   </div>
 
   <section class="exhibit">
@@ -242,12 +241,12 @@
         <a href="../ciphers/diffie-hellman.html">Diffie–Hellman</a> made.
       </p>
     </div>
-    <p class="aside">
-      Read alongside: <a href="closest-vector.html" style="color:var(--vermilion)">The Closest Vector Problem</a>
-      (the geometry this is the algebra of) and
-      <a href="polynomial-rings.html" style="color:var(--vermilion)">Polynomial Rings</a>
-      (where the plain vectors become polynomials). Tested logic in <code>lwe-math.js</code>.
-    </p>
+    <p class="aside"><b>Three views of one problem.</b>
+      <a href="lattices-svp.html" style="color:var(--vermilion)">§147</a> is the geometry — why the secret stays hidden.
+      <a href="closest-vector.html" style="color:var(--vermilion)">§152</a> is the decoding — why its owner still gets in.
+      <a href="learning-with-errors.html" style="color:var(--vermilion)">§157</a> is the algebra — what the keys are actually made of.
+      Next: <a href="polynomial-rings.html" style="color:var(--vermilion)">Polynomial Rings</a>, where these plain vectors become polynomials.
+      Tested logic in <code>lwe-math.js</code>.</p>
   </section>
 
   </main>
