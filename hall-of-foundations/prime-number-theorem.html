@@ -108,11 +108,15 @@
     <div class="step-head"><span class="step-num">§2</span><h2>The keygen coin-flip</h2></div>
     <p>
       Here's the payoff. To make a 2048-bit RSA modulus you need a random
-      1024-bit prime. A random 1024-bit odd number is prime with probability
-      about 1⁄ln(2¹⁰²⁴) ≈ 1⁄710. So on average you test a few hundred candidates,
-      each with a fast primality check, and you're done — in milliseconds.
+      1024-bit prime. The theorem says a random 1024-bit <em>integer</em> is
+      prime with probability about 1⁄ln(2¹⁰²⁴) ≈ 1⁄710. But no keygen routine
+      tests even numbers, and discarding half the candidates doubles your odds:
+      roughly <strong>1 in 355 odd candidates</strong> is prime. Sieve out small
+      factors like 3 and 5 first and the rate improves again. So you test a few
+      hundred candidates with a fast primality check, and you're done — in
+      milliseconds.
     </p>
-    <div class="eq" id="bitsbox">at 1024 bits: ~1 in 710 candidates is prime</div>
+    <div class="eq" id="bitsbox">at 1024 bits: ~1 in 710 integers &#183; ~1 in 355 <em>odd</em> candidates</div>
     <p>
       Without the theorem's guarantee that primes stay this dense, key generation
       could take longer than the age of the universe. The density is the whole

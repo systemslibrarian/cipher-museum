@@ -135,16 +135,29 @@
     <div class="step-head"><span class="step-num">&#167;3</span><h2>Why this unlocks zero-knowledge</h2></div>
     <p>
       A <span class="term">zk-SNARK</span> proves a statement is true while
-      revealing nothing but the proof's validity. The final check is almost always
-      a pairing equation: the verifier confirms that certain hidden values satisfy
-      a multiplicative relationship &#8212; that the prover's secret witness makes the
-      circuit's equations balance &#8212; using exactly the identity above. No pairing,
-      no succinct verification.
+      revealing nothing but the proof's validity. In the pairing-based family
+      &#8212; Groth16 above all, plus the KZG-committed systems and BLS
+      signature aggregation &#8212; the final check is a pairing equation: the verifier confirms that certain hidden
+      values satisfy a multiplicative relationship, that the prover's secret
+      witness makes the circuit's equations balance, using exactly the identity
+      above.
     </p>
     <div class="pull">
       The discrete log hides the numbers; the pairing checks their product. That
       is the seam where zero-knowledge lives.
     </div>
+    <p>
+      Pairings power several of the most influential and compact proof systems,
+      but they are one major family rather than a requirement for succinctness.
+      STARKs verify with hashes and no pairing at all; Bulletproofs and
+      Halo-style systems get short proofs and recursion from ordinary
+      discrete-log groups. The distinction matters here more than most places in
+      this hall: pairing-friendly curves rest on the discrete log, so a quantum
+      computer takes them with everything else in
+      <a href="modular-arithmetic.html">&#167;143</a>'s lineage &#8212; while
+      hash-based STARKs are expected to survive. Succinct verification has more
+      than one foundation, and they don't share a fate.
+    </p>
   </section>
 
   <section class="exhibit">

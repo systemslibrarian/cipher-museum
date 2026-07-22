@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Flip one input bit, scramble half the output — the hash assumption every signature stands on.">
+<meta name="description" content="Flip one input bit, scramble half the output — the idealized hash assumption beneath Fiat–Shamir signatures.">
 <title>The Random Oracle &#183; Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
 <meta property="og:title" content="The Random Oracle &#183; Hall of Foundations — The Cipher Museum">
-<meta property="og:description" content="Flip one input bit, scramble half the output — the hash assumption every signature stands on.">
+<meta property="og:description" content="Flip one input bit, scramble half the output — the idealized hash assumption beneath Fiat–Shamir signatures.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/random-oracle.html">
 <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
@@ -54,7 +54,7 @@
   <main id="main">
 
   <div class="hero">
-    <div class="kicker">The Assumption Beneath Every Signature</div>
+    <div class="kicker">The Assumption Beneath Fiat&#8211;Shamir</div>
     <h1>The oracle that<br>can't be <em>predicted</em></h1>
     <p class="standfirst">
       Much of cryptography leans on a fiction so useful it's treated as bedrock:
@@ -109,6 +109,14 @@
         output bits are the ones that changed versus the previous output. A good
         mixer changes about <b>half</b>, unpredictably &#8212; that's the avalanche.
       </div>
+      <div class="lab-hint">
+        <strong>Necessary, not sufficient.</strong> Avalanche is what a broken
+        hash <em>fails</em> to show, so it's a useful first look &#8212; but a
+        deliberately weak function can pass this eye test and still be trivial to
+        invert or collide. The toy mixer here is one of them. Seeing the
+        scramble is not evidence of one-wayness; it only tells you the output
+        isn't obviously tracking the input.
+      </div>
       <div class="a11y-fallback">
         <span class="vh" id="avaKb">Keyboard alternative: enter a bit position 0 to 15 to toggle, then apply.</span>
         <label>toggle bit #
@@ -137,14 +145,18 @@
   <section class="exhibit">
     <div class="connect">
       <div class="flag">Where this touches your keys</div>
-      <h3>Under every deployed signature</h3>
+      <h3>Under most deployed signatures</h3>
       <p>
         Fiat&#8211;Shamir is everywhere in deployed cryptography: <strong>ML-DSA</strong>
         and Schnorr-style signatures convert an interactive identification proof
         into a signature by hashing &#8212; with <a href="../ciphers/sha256.html">SHA-256</a>-class
         functions playing the oracle. <strong>ML-DSA</strong> is literally
         "Fiat&#8211;Shamir with aborts" over the <a href="polynomial-rings.html">polynomial
-        ring</a>. The random-oracle assumption is the ground all of that stands on.
+        ring</a>. The random-oracle assumption is the ground all of that stands
+        on &#8212; though not every signature needs it. <strong>SLH-DSA</strong>,
+        the hash-based standard, is built to rest on concrete properties of its
+        hash function rather than on an idealized oracle, which is exactly why
+        it exists as a conservative backup.
       </p>
     </div>
     <p class="aside">Related: <a href="one-way-function.html" style="color:var(--vermilion)">One-Way Functions</a> (pre-image resistance in general), <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a> (what a proof in this model claims).</p>

@@ -14,9 +14,9 @@
     {"href": "../hall-of-foundations/one-way-function.html", "label": "The One-Way Function", "note": "Multiply in a blink; factor and sweat. The conceptual keystone everything is downstream of (§146)."},
     {"href": "../hall-of-foundations/reduction.html", "label": "Reduction & Proof", "note": "What \"provably as hard as factoring\" actually claims — and what it quietly assumes (§148)."},
     {"href": "../hall-of-foundations/entropy.html", "label": "Information & Entropy", "note": "Shannon's measure of surprise: why the one-time pad is perfect and key length is destiny (§151)."},
-    {"href": "../hall-of-foundations/random-oracle.html", "label": "The Random Oracle", "note": "Flip one input bit, scramble half the output — the hash assumption every signature stands on (§154)."},
+    {"href": "../hall-of-foundations/random-oracle.html", "label": "The Random Oracle", "note": "Flip one input bit, scramble half the output — the idealized hash assumption beneath Fiat–Shamir signatures (§154)."},
     {"href": "../hall-of-foundations/lattices-svp.html", "label": "Lattices & the SVP", "note": "Drag a basis, hunt the shortest vector — the ground the post-quantum standards stand on (§147)."},
-    {"href": "../hall-of-foundations/closest-vector.html", "label": "The Closest Vector Problem", "note": "Round to the nearest lattice corner — right with the secret basis, wrong with the public one. This is ML-KEM decryption (§152)."},
+    {"href": "../hall-of-foundations/closest-vector.html", "label": "The Closest Vector Problem", "note": "Round to the nearest lattice corner — right with a short basis, wrong with a skewed one. The decoding problem beneath lattice cryptography (§152)."},
     {"href": "../hall-of-foundations/polynomial-rings.html", "label": "Polynomial Rings", "note": "R_q = Z_q[X]/(X^n+1): the structured lattice inside ML-KEM and ML-DSA (§153)."},
     {"href": "../hall-of-foundations/interpolation.html", "label": "Polynomial Interpolation", "note": "k points fix a curve — the heart of Shamir's Secret Sharing and threshold signatures (§155)."},
     {"href": "../hall-of-foundations/pairings.html", "label": "Bilinear Pairings", "note": "e(aP,bQ) = e(P,Q)^ab — verify hidden scalars without revealing them; the magic under zk-SNARKs (§156)."}

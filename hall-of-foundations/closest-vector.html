@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Round a target to the nearest lattice corner — right with the secret basis, wrong with the public one. This is ML-KEM decryption.">
+<meta name="description" content="Round a target to the nearest lattice corner — right with a short basis, wrong with a skewed one. The decoding problem beneath lattice cryptography.">
 <title>The Closest Vector Problem · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
 <meta property="og:title" content="The Closest Vector Problem — The Cipher Museum">
-<meta property="og:description" content="Round a target to the nearest lattice corner — right with the secret basis, wrong with the public one. This is ML-KEM decryption.">
+<meta property="og:description" content="Round a target to the nearest lattice corner — right with a short basis, wrong with a skewed one. The decoding problem beneath lattice cryptography.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/closest-vector.html">
 <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
@@ -65,10 +65,13 @@
   </div>
 
   <div class="honesty">
-    <strong>The same lattice, two fortunes.</strong> With the secret "good"
-    basis, the closest corner falls out of a single rounding step. With the
-    public "bad" basis, that same rounding lands on the wrong corner most of the
-    time. The gap between those two outcomes <em>is</em> the encryption.
+    <strong>The same lattice, two fortunes.</strong> With a "good" basis &#8212;
+    short, near-perpendicular vectors &#8212; the closest corner falls out of a
+    single rounding step. With a "bad" basis for that same lattice, the rounding
+    lands on the wrong corner most of the time. That gap is the shape of a
+    lattice <span class="term">trapdoor</span>. Read it as the geometry, not as
+    any particular key format: the deployed standards get their trapdoor a
+    different way, and &#167;4 says how.
   </div>
 
   <section class="exhibit">
@@ -123,8 +126,8 @@
     </p>
     <div class="eq">t = a&#183;b&#8321; + b&#183;b&#8322; &nbsp;&#8594;&nbsp; round(a), round(b) &nbsp;&#8594;&nbsp; nearest corner?</div>
     <ul class="ladder">
-      <li><span class="rung">Good basis<span>the secret key</span></span><span class="gloss">Short, near-perpendicular vectors. Rounding lands on the true nearest corner every time.</span></li>
-      <li><span class="rung">Bad basis<span>the public key</span></span><span class="gloss">Long, skewed vectors for the same lattice. Rounding misfires on most targets &#8212; about four in five.</span></li>
+      <li><span class="rung">Good basis<span>the trapdoor</span></span><span class="gloss">Short, near-perpendicular vectors. Rounding lands on the true nearest corner every time.</span></li>
+      <li><span class="rung">Bad basis<span>what an attacker gets</span></span><span class="gloss">Long, skewed vectors for the same lattice. Rounding misfires on most targets &#8212; about four in five.</span></li>
     </ul>
   </section>
 
@@ -174,19 +177,53 @@
   </section>
 
   <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;4</span><h2>What ML-KEM actually holds</h2></div>
+    <p>
+      The two-basis picture above is the classical way to build a lattice
+      trapdoor, and it is how schemes in the GGH and NTRU lineage work. It is
+      <strong>not</strong> how the deployed standards are keyed, and the
+      difference is worth stating plainly. <strong>ML-KEM</strong> (Kyber) and
+      <strong>ML-DSA</strong> (Dilithium) publish a matrix <em>A</em> together
+      with a noisy product of that matrix and a <em>short secret vector</em>:
+    </p>
+    <div class="eq">public: (A, t) &nbsp;where&nbsp; t = A&#183;s + e &nbsp;&#183;&nbsp; secret: the short vector s</div>
+    <p>
+      There is no secret good basis anywhere in that key. Recovering <em>s</em>
+      from <em>(A, t)</em> is the <span class="term">Module-LWE</span> problem,
+      which lives in the <a href="polynomial-rings.html">polynomial ring</a>
+      next door. Decryption does not round with a private basis either &#8212; it
+      uses <em>s</em> to cancel the large shared term out of the ciphertext,
+      leaving the message plus a little noise, and then rounds that away.
+    </p>
+    <div class="pull">
+      The secret is a short <em>vector</em>, not a short <em>basis</em>. Same
+      hardness, different trapdoor.
+    </div>
+    <p>
+      So why keep this exhibit? Because the geometry survives the change of key
+      format. LWE <em>is</em> a bounded-distance decoding problem: the ciphertext
+      is a point sitting near a lattice point, and everything you just watched
+      &#8212; why a noise budget exists, why exceeding it breaks decryption, why
+      a skewed view of a lattice is useless &#8212; is what the noise is
+      defending. The best known attacks on ML-KEM run lattice reduction and then
+      solve exactly this problem. The picture is right; only the key layout
+      differs.
+    </p>
+  </section>
+
+  <section class="exhibit">
     <div class="connect">
       <div class="flag">Where this touches your keys</div>
-      <h3>The ML-KEM decryption step, laid bare</h3>
+      <h3>Why the owner can still get in</h3>
       <p>
-        This is exactly what <strong>ML-KEM</strong> (the standardized name for
-        Kyber, surveyed in <a href="../modern.html">Modern Cryptography</a>) does. It encrypts by
-        encoding your message into a lattice point and adding LWE noise; it
-        decrypts by rounding back to the nearest point with the secret key. The
-        public key is the bad basis everyone gets; the secret key is the good
-        basis that makes the rounding land true &#8212; as long as the noise was
-        bounded. Where <a href="lattices-svp.html">the SVP exhibit</a> showed
-        <em>why the key is hidden</em>, this shows <strong>why the owner can
-        still get in &#8212; and why the noise budget matters.</strong>
+        Where <a href="lattices-svp.html">the SVP exhibit</a> showed <em>why the
+        secret stays hidden</em>, this one shows <strong>why its holder can
+        still decrypt &#8212; and why the noise budget is the whole game.</strong>
+        Set the error too small and an attacker can decode the ciphertext
+        themselves; too large and the legitimate recipient rounds to the wrong
+        answer. Every lattice standard surveyed in
+        <a href="../modern.html">Modern Cryptography</a> is, in part, a careful
+        choice of that margin.
       </p>
     </div>
     <p class="aside">Read first: <a href="lattices-svp.html" style="color:var(--vermilion)">Lattices &amp; the SVP</a>. Related: <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a> for how ML-KEM's security reduces to this problem.</p>

@@ -95,6 +95,18 @@
       nothing at all. The message returns untouched. Type a small number and send
       it through.
     </p>
+    <p class="aside">
+      One honest caveat: Euler's theorem as stated needs gcd(<em>m</em>,&nbsp;<em>n</em>) = 1,
+      and with this toy key a few messages — the multiples of 61 or 53 — fail
+      that test. RSA still round-trips them, but the reason is slightly
+      different: you check the congruence separately modulo <em>p</em> and
+      modulo <em>q</em>, where it holds either trivially or by Fermat, then glue
+      the two halves back together with the
+      <span class="term">Chinese Remainder Theorem</span>. Real implementations
+      also use Carmichael's λ(<em>n</em>) rather than φ(<em>n</em>) to pick
+      <em>d</em>; it divides φ(<em>n</em>) and yields the same round trip with a
+      smaller exponent.
+    </p>
 
     <div class="lab">
       <div class="lab-stage">

@@ -339,7 +339,7 @@
       <div class="gl-term">
         <h3 class="gl-word">Learning With Errors (LWE)</h3>
         <span class="gl-origin">Post-Quantum Cryptography</span>
-        <p class="gl-def">The problem of recovering a secret from linear equations that have each been perturbed by a small amount of noise — equivalent to decoding a point lying near a lattice. LWE is the direct hardness assumption behind ML-KEM: decryption is rounding the noise away with a good basis. Interactive: <a href="hall-of-foundations/closest-vector.html">The Closest Vector Problem (§152)</a>.</p>
+        <p class="gl-def">The problem of recovering a secret from linear equations that have each been perturbed by a small amount of noise — equivalent to decoding a point lying near a lattice. LWE is the direct hardness assumption behind ML-KEM, whose public key is a matrix and a noisy product of it with a short secret vector; decryption uses that vector to cancel the shared term and rounds the remaining noise away. Interactive: <a href="hall-of-foundations/closest-vector.html">The Closest Vector Problem (§152)</a>.</p>
       </div>
 </div>
 

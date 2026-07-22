@@ -140,7 +140,12 @@
         <a href="../modern.html">Modern Cryptography</a> — all
         rest on lattice hardness. When factoring and discrete logs fall to
         quantum computers, <strong>this</strong> is the ground that's expected to
-        hold. The public key is a bad basis; the secret key is a good one.
+        hold. Their keys don't literally publish a bad basis and hide a good one
+        &#8212; that's the older GGH/NTRU trapdoor shape. Both standards instead
+        publish noisy linear equations and keep a <em>short secret vector</em>;
+        <a href="closest-vector.html">the CVP exhibit</a> lays that out. What
+        carries over is the hardness: finding short vectors in a high-dimensional
+        lattice is what their security ultimately rests on.
       </p>
     </div>
     <p class="aside">Next: <a href="closest-vector.html" style="color:var(--vermilion)">The Closest Vector Problem</a> — the companion that shows how the key-holder actually decrypts, and where Kyber's LWE lives.</p>
