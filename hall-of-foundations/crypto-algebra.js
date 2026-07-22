@@ -16,6 +16,18 @@
     return null;
   }
 
+  // ---- Multiplicative order & primitive roots (Exhibit 143) ----
+  // The successive powers g^1..g^(p-1) mod p; g is a primitive root when
+  // they visit every nonzero residue.
+  function powersOf(g, p) {
+    const out = []; let x = 1;
+    for (let i = 1; i < p; i++) { x = mod(x * g, p); out.push(x); }
+    return out;
+  }
+  function isPrimitiveRoot(g, p) {
+    return new Set(powersOf(g, p)).size === p - 1;
+  }
+
   // ---- Polynomial ring R_q = Z_q[X] / (X^n + 1) ----
   // Negacyclic convolution: X^n = -1, so a term of degree k >= n wraps to
   // degree k-n with a sign flip. Coefficients reduced mod q.
@@ -78,6 +90,7 @@
 
   const api = {
     mod, modInv,
+    powersOf, isPrimitiveRoot,
     ringMul, ringAdd,
     lagrangeAtZero, polyEval,
     powmod, pairingCheck

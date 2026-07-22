@@ -7,6 +7,13 @@
 <title>Euler &amp; Fermat · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Euler &amp; Fermat — The Cipher Museum">
+<meta property="og:description" content="The little theorem that makes RSA decryption undo RSA encryption. Watch a message round-trip.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/euler-fermat.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/euler-fermat.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -119,7 +126,7 @@
       <div class="flag">Where this touches your keys</div>
       <h3>The reason the mailbox opens</h3>
       <p>
-        The security of RSA rests on factoring being hard (see
+        The security of <a href="../ciphers/rsa.html">RSA</a> rests on factoring being hard (see
         <a href="one-way-function.html">The One-Way Function</a>). But its
         <strong>correctness</strong> — the promise that the right key recovers
         the message — rests entirely here, on Euler's theorem. Hardness keeps
@@ -134,12 +141,14 @@
   <footer></footer>
 </div>
 
+<script src="crypto-algebra.js"></script>
 <script>
 (function(){
   "use strict";
   var NS="http://www.w3.org/2000/svg";
   function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
-  function powmod(a,e,m){var r=1;a%=m;while(e>0){if(e&1)r=(r*a)%m;a=(a*a)%m;e=Math.floor(e/2);}return r;}
+  // Modular exponentiation lives in crypto-algebra.js, proven in crypto-algebra.test.js.
+  var powmod=window.CryptoAlgebra.powmod;
   var n=3233,e=17,d=2753;
 
   var trip=document.getElementById("trip"), mr=document.getElementById("mr"), tread=document.getElementById("tread");

@@ -85,7 +85,7 @@
   var params = new URLSearchParams(location.search);
   var tourId = params.get('tour') || 'mathematics';
   /* Whitelist valid tour IDs */
-  var VALID_TOURS = ['mathematics','wartime','hacker','unsolved-culture'];
+  var VALID_TOURS = ['mathematics','wartime','hacker','unsolved-culture','foundations'];
   if(VALID_TOURS.indexOf(tourId) === -1) tourId = 'mathematics';
 
   var currentStop = 0;

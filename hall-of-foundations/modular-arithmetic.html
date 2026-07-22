@@ -7,6 +7,13 @@
 <title>Modular Arithmetic · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Modular Arithmetic — The Cipher Museum">
+<meta property="og:description" content="Clock arithmetic, primitive roots, and the cyclic group Diffie–Hellman lives inside.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/modular-arithmetic.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/modular-arithmetic.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -118,7 +125,7 @@
       <div class="flag">Where this touches your keys</div>
       <h3>The original public-key setting</h3>
       <p>
-        Classic Diffie–Hellman happens in exactly this group: a prime with a
+        Classic <a href="../ciphers/diffie-hellman.html">Diffie–Hellman</a> happens in exactly this group: a prime with a
         primitive root, thousands of bits wide. Alice sends <em>gᵃ</em>, Bob
         sends <em>gᵇ</em>, and both compute <em>gᵃᵇ</em> — while an eavesdropper,
         stuck with the discrete log, cannot. Elliptic curves later swapped this
@@ -135,13 +142,14 @@
   <footer></footer>
 </div>
 
+<script src="crypto-algebra.js"></script>
 <script>
 (function(){
   "use strict";
   var NS="http://www.w3.org/2000/svg";
   function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
-  function isPrimRoot(g,p){var s=new Set(),x=1;for(var i=0;i<p-1;i++){x=(x*g)%p;s.add(x);}return s.size===p-1;}
-  function powers(g,p){var out=[],x=1;for(var i=1;i<p;i++){x=(x*g)%p;out.push(x);}return out;}
+  // Primitive-root logic lives in crypto-algebra.js, proven in crypto-algebra.test.js.
+  var isPrimRoot=window.CryptoAlgebra.isPrimitiveRoot, powers=window.CryptoAlgebra.powersOf;
 
   var clock=document.getElementById("clock");
   var psel=document.getElementById("psel"), gsel=document.getElementById("gsel");

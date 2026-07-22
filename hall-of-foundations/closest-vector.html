@@ -7,6 +7,13 @@
 <title>The Closest Vector Problem · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="The Closest Vector Problem — The Cipher Museum">
+<meta property="og:description" content="Round a target to the nearest lattice corner — right with the secret basis, wrong with the public one. This is ML-KEM decryption.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/closest-vector.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/closest-vector.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -171,8 +178,8 @@
       <div class="flag">Where this touches your keys</div>
       <h3>The ML-KEM decryption step, laid bare</h3>
       <p>
-        This is exactly what <span style="color:var(--vermilion-soft)">kyber-vault</span>
-        does. <strong>ML-KEM</strong> (the standardized name for Kyber) encrypts by
+        This is exactly what <strong>ML-KEM</strong> (the standardized name for
+        Kyber, surveyed in <a href="../modern.html">Modern Cryptography</a>) does. It encrypts by
         encoding your message into a lattice point and adding LWE noise; it
         decrypts by rounding back to the nearest point with the secret key. The
         public key is the bad basis everyone gets; the secret key is the good

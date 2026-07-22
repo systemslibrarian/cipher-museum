@@ -6,7 +6,7 @@
 
 Exploring 3,900+ years of encryption, cryptanalysis, and hidden history.
 
-The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring **3,900+ years** of encryption, cryptanalysis, and hidden history across **140 exhibits** and **13 exhibit halls**. 110 of the 140 exhibits ship a fully interactive encrypt/decrypt demo or hand-built widget — the remaining 30 are codebreaker biographies and historical context pages. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
+The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring **3,900+ years** of encryption, cryptanalysis, and hidden history across **156 exhibits** — 140 cipher exhibits in **13 exhibit halls**, plus the 16-exhibit **Hall of Foundations** mathematics annex (§141–156). 110 of the 140 exhibits ship a fully interactive encrypt/decrypt demo or hand-built widget — the remaining 30 are codebreaker biographies and historical context pages. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
 
 **[Live Site →](https://ciphermuseum.com)**
 
@@ -14,6 +14,9 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 ## 📰 Latest Update
 
+- **Hall of Foundations** ([hall-of-foundations/](https://ciphermuseum.com/hall-of-foundations/index.html)) — a new 16-exhibit mathematics annex (**§141–156**) on the number theory, hardness assumptions, and structures under modern cryptography: finite fields, Euler–Fermat, the Prime Number Theorem, one-way functions, lattices (SVP / CVP / LWE), polynomial rings, random oracles, Shamir interpolation, and bilinear pairings — each with a working interactive in the museum's dark/gold design system.
+  - **Integrated museum-wide** — floor-plan annex on the museum map, a "Mathematics Under Cryptography" guided tour, timeline entries (Fermat 1640, Euler 1763, Shor 1994), 11 new glossary terms, site-search coverage, and two-way cross-links with the RSA, Diffie–Hellman, One-Time Pad, SHA-256, and AES exhibits ("the mathematics beneath").
+  - **Tested like the engines** — the math lives in DOM-free modules (`lattice-math.js`, `crypto-algebra.js`, `ec-math.js`) behind five CI suites: unit vectors, fast-check property fuzzing (ring axioms, Shamir threshold recovery, pairing bilinearity, Hasse bounds, Babai exactness), and a page-constant pinning suite so on-page examples can never drift from the modules.
 - **Cipher Corpus v0.5** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)) — a reproducibility and release-packaging milestone. The headline: **every one of the 100,026 canonical records now reproduces exactly with the museum's own published, test-verified cipher engines**, so the dataset and the site can never silently disagree.
   - **Strict corpus replay** — `npm run test:engines` re-encrypts all 100,026 published records through the live engines with pinned accounting and **0 unexplained failures**. Only two documented exception classes are allowed (intentionally noisy transcription variants and a handful of historical records whose real-world keys/codebooks the pedagogical engines can't represent), each carrying an explicit rationale.
   - **Release packaging** — `SHA256SUMS.txt` for download verification, `CITATION.cff` bumped to v0.5, a `corpus-v0.5` git tag, the 300-prompt `llm-3shot-eval.jsonl` regenerated deterministically via `scripts/generate-llm-eval.js`, superseded v0.2 files archived, and [docs/CORPUS_PUBLISHING.md](docs/CORPUS_PUBLISHING.md) documenting the Zenodo-DOI / Hugging Face handoff. Canonical-vs-subset relationships are now spelled out: the 1,710 Arabic (Buckwalter) and 46 v0.4 historical additions are valid but sit outside the pinned canonical set until the planned v0.6 merge.
@@ -27,7 +30,9 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 ## ✨ Features
 
-### 🗺️ Thirteen Exhibit Halls · 140 Exhibits
+### 🗺️ Thirteen Exhibit Halls · 140 Cipher Exhibits · The Foundations Annex
+
+Beyond the 13 cipher halls below, the **[Hall of Foundations](https://ciphermuseum.com/hall-of-foundations/index.html)** annex (§141–156) exhibits the mathematics under the cryptography — from modular arithmetic to lattices and pairings.
 
 | Hall | Title | Ciphers |
 |------|-------|---------|

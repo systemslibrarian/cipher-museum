@@ -7,6 +7,13 @@
 <title>Polynomial Rings &#183; Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Polynomial Rings &#183; Hall of Foundations — The Cipher Museum">
+<meta property="og:description" content="The polynomial ring R_q = Z_q[X]/(Xⁿ+1) — the structured lattice inside ML-KEM and ML-DSA.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/polynomial-rings.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/polynomial-rings.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -144,9 +151,8 @@
       <p>
         <strong>ML-KEM</strong> and <strong>ML-DSA</strong> spend nearly all
         their time doing exactly this: multiplying polynomials in R_q, accelerated
-        by the Number Theoretic Transform. Your
-        <span style="color:var(--vermilion-soft)">kyber-vault</span> and
-        <span style="color:var(--vermilion-soft)">dilithium-seal</span> demos are
+        by the Number Theoretic Transform. Both standards
+        (see <a href="../modern.html">Modern Cryptography</a>) are
         built on Module-LWE, which is the <a href="closest-vector.html">LWE
         problem</a> transplanted from plain vectors into this ring. This exhibit
         is the structure those primitives are made of.

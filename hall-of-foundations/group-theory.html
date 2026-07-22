@@ -7,6 +7,13 @@
 <title>Group Theory · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Group Theory — The Cipher Museum">
+<meta property="og:description" content="Generators, order, and cyclic structure — the grammar of nearly every public-key scheme.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/group-theory.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/group-theory.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -51,7 +58,7 @@
     <h1>The vocabulary<br>everything <em>shares</em></h1>
     <p class="standfirst">
       Groups, generators, order. These three words describe the structure half
-      the Crypto Lab quietly depends on. A group is a set with one well-behaved
+      of modern cryptography quietly depends on. A group is a set with one well-behaved
       operation; a generator is an element whose repeated application reaches
       everything; the order is how many steps that takes.
     </p>
@@ -117,12 +124,12 @@
       <div class="flag">Where this touches your keys</div>
       <h3>Every scheme is a group in disguise</h3>
       <p>
-        ECDH walks a generator point around an elliptic-curve group. Diffie–Hellman
-        walks a generator through residues mod a prime. Schnorr and
-        <span style="color:var(--vermilion-soft)">frost-threshold</span> signatures
+        ECDH walks a generator point around an elliptic-curve group.
+        <a href="../ciphers/diffie-hellman.html">Diffie–Hellman</a>
+        walks a generator through residues mod a prime. Schnorr-style signatures
         live in prime-order groups by design. Once you see the
         <strong>generator and its order</strong>, every public-key primitive in
-        the Lab has the same skeleton.
+        the modern wing has the same skeleton.
       </p>
     </div>
     <p class="aside">Related: <a href="modular-arithmetic.html" style="color:var(--vermilion)">Modular Arithmetic</a> is this exhibit's multiplicative cousin.</p>

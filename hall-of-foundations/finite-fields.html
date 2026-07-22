@@ -7,6 +7,13 @@
 <title>Finite Fields · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Finite Fields — The Cipher Museum">
+<meta property="og:description" content="Watch a smooth elliptic curve shatter into a scatter of dots over a finite field — and see why the discrete logarithm becomes hard.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/finite-fields.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/finite-fields.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -158,8 +165,8 @@
         with <strong>256 bits</strong> — a field with more elements than there
         are atoms in the observable universe. Your ECDH shared secret is some
         <em>kG</em>; your ECDSA signature proves you know a <em>k</em> without
-        revealing it. The curve <span style="color:var(--vermilion-soft)">curve-lens</span>
-        in the Crypto Lab lets you drive the real thing. This exhibit is why it's safe.
+        revealing it. Even <a href="../ciphers/aes.html">AES</a> lives here: its
+        S-box is inversion in the field GF(2&#8312;). This exhibit is why it all works.
       </p>
     </div>
     <p class="aside">
@@ -174,6 +181,7 @@
   <footer></footer>
 </div>
 
+<script src="ec-math.js"></script>
 <script>
 (function(){
   "use strict";
@@ -181,26 +189,11 @@
   var A=2, B=2;   // y^2 = x^3 + 2x + 2
 
   function el(tag,at){var e=document.createElementNS(NS,tag);for(var k in at)e.setAttribute(k,at[k]);return e;}
-  function mod(n,p){return ((n%p)+p)%p;}
-  function inv(k,p){k=mod(k,p);for(var i=1;i<p;i++)if(mod(k*i,p)===1)return i;return null;}
-  function rhs(x,p){return mod(x*x*x+A*x+B,p);}
-
-  function points(p){
-    var pts=[];
-    for(var x=0;x<p;x++){var r=rhs(x,p);
-      for(var y=0;y<p;y++){ if(mod(y*y,p)===r) pts.push([x,y]); }}
-    return pts;
-  }
-  function addFp(P,Q,p){
-    if(P===null)return Q; if(Q===null)return P;
-    if(P[0]===Q[0] && mod(P[1]+Q[1],p)===0) return null;
-    var m;
-    if(P[0]===Q[0]&&P[1]===Q[1]) m=mod(mod(3*P[0]*P[0]+A,p)*inv(mod(2*P[1],p),p),p);
-    else m=mod(mod(Q[1]-P[1],p)*inv(mod(Q[0]-P[0],p),p),p);
-    var x3=mod(m*m-P[0]-Q[0],p);
-    var y3=mod(m*(P[0]-x3)-P[1],p);
-    return [x3,y3];
-  }
+  // Curve math lives in ec-math.js (window.ECMath), proven in ec-math.test.js.
+  var EC=window.ECMath;
+  function mod(n,p){return EC.mod(n,p);}
+  function points(p){return EC.ecPoints(A,B,p);}
+  function addFp(P,Q,p){return EC.ecAdd(P,Q,A,p);}
 
   // ---------- scatter plot ----------
   var scatter=document.getElementById("scatter");

@@ -14,7 +14,7 @@
     "test:mobile": "node tests/test-mobile.js",
     "test:structural": "node tests/test-structural.js",
     "test:links": "node tests/test-local-links.js",
-    "test:foundations": "node hall-of-foundations/lattice-math.test.js && node hall-of-foundations/crypto-algebra.test.js",
+    "test:foundations": "node hall-of-foundations/lattice-math.test.js && node hall-of-foundations/crypto-algebra.test.js && node hall-of-foundations/ec-math.test.js && node hall-of-foundations/foundations-properties.test.js && node hall-of-foundations/exhibit-examples.test.js",
     "validate:corpus": "node scripts/validate-corpus-v0.2.js public/corpus/all.jsonl",
     "build:search-index": "node scripts/build-search-index.js",
     "build:js": "node scripts/build-min.js",

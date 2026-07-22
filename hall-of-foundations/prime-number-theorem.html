@@ -7,6 +7,13 @@
 <title>The Prime Number Theorem · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="The Prime Number Theorem — The Cipher Museum">
+<meta property="og:description" content="Why RSA can find a 2048-bit prime in moments — the Prime Number Theorem at work.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/prime-number-theorem.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/prime-number-theorem.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -118,9 +125,8 @@
       <div class="flag">Where this touches your keys</div>
       <h3>Every RSA key ever made</h3>
       <p>
-        The <span style="color:var(--vermilion-soft)">rsa-forge</span> demo in
-        the Crypto Lab generates keys by exactly this loop: pick random, test
-        primality, repeat. It terminates quickly for one reason — the Prime
+        Every <a href="../ciphers/rsa.html">RSA</a> key generator works by
+        exactly this loop: pick random, test primality, repeat. It terminates quickly for one reason — the Prime
         Number Theorem promises the primes are there to be found. This is the
         rare foundation you <strong>do</strong> lean on every single time.
       </p>

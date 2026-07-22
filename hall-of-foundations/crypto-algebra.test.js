@@ -53,5 +53,17 @@ assert(s1 === s2, "pairing exponent is symmetric (ab = ba)");
 assert(CA.modInv(1, 13) === 1, "inverse of 1 is 1");
 assert(CA.mod(CA.modInv(5, 13) * 5, 13) === 1, "modInv(5,13) times 5 is 1 mod 13");
 
+// ---- primitive roots (Exhibit 143) ----
+assert(CA.isPrimitiveRoot(3, 7), "3 is a primitive root mod 7");
+assert(!CA.isPrimitiveRoot(2, 7), "2 is NOT a primitive root mod 7 (order 3)");
+assert(CA.isPrimitiveRoot(2, 13), "2 is a primitive root mod 13");
+var pw = CA.powersOf(3, 7);
+assert(eqArr(pw, [3, 2, 6, 4, 5, 1]), "powers of 3 mod 7 in order");
+assert(pw[pw.length - 1] === 1, "g^(p-1) = 1 (Fermat's little theorem)");
+// the number of primitive roots mod 13 is phi(phi(13)) = phi(12) = 4: {2, 6, 7, 11}
+var prCount = 0;
+for (var g13 = 2; g13 < 13; g13++) if (CA.isPrimitiveRoot(g13, 13)) prCount++;
+assert(prCount === 4, "exactly phi(12) = 4 primitive roots mod 13");
+
 console.log("\ncrypto-algebra: " + passed + " passed, " + failed + " failed");
 process.exit(failed ? 1 : 0);

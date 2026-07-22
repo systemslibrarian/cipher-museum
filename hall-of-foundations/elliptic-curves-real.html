@@ -7,6 +7,13 @@
 <title>Elliptic Curves over ℝ · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Elliptic Curves over ℝ — The Cipher Museum">
+<meta property="og:description" content="A gentle first look at the elliptic-curve group law, drawn by hand, before it moves to a finite field.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/elliptic-curves-real.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/elliptic-curves-real.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -142,6 +149,7 @@
   <footer></footer>
 </div>
 
+<script src="ec-math.js"></script>
 <script>
 (function () {
   "use strict";
@@ -159,7 +167,7 @@
   for (var gx=Math.ceil(xmin); gx<=xmax; gx++) axis(sx(gx),0,sx(gx),H,1, gx===0?0.9:0.35);
   for (var gy=Math.ceil(ymin); gy<=ymax; gy++) axis(0,sy(gy),W,sy(gy),1, gy===0?0.9:0.35);
 
-  function fx(x){ return x*x*x + A*x + B; }
+  function fx(x){ return window.ECMath.curveY2(x, A, B); }
   var top=[], bot=[], step=0.012;
   for (var x=xmin; x<=xmax; x+=step){ var v=fx(x); if(v>=0){ var r=Math.sqrt(v); top.push([x,r]); bot.push([x,-r]); } }
   var d="";
@@ -177,13 +185,8 @@
   }
   function dot(x,y,color,r){ return make("circle",{cx:sx(x),cy:sy(y),r:r||6,fill:color,stroke:"#1c1c22","stroke-width":2}); }
   function label(x,y,txt,color){ var t=make("text",{x:sx(x)+11,y:sy(y)-9,fill:color,"font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700"}); t.textContent=txt; return t; }
-  function addPoints(P,Q){
-    var m;
-    if (Math.abs(P[0]-Q[0])<1e-9 && Math.abs(P[1]-Q[1])<1e-9) m=(3*P[0]*P[0]+A)/(2*P[1]);
-    else m=(Q[1]-P[1])/(Q[0]-P[0]);
-    var x3=m*m-P[0]-Q[0], y3=m*(P[0]-x3)-P[1];
-    return { third:[x3,-y3], sum:[x3,y3], slope:m };
-  }
+  // Group law lives in ec-math.js (window.ECMath), proven in ec-math.test.js.
+  function addPoints(P,Q){ return window.ECMath.ecAddReal(P, Q, A); }
   function drawConstruction(){
     cons.innerHTML=""; if(picks.length<2)return;
     var P=picks[0],Q=picks[1],res=addPoints(P,Q),third=res.third,sum=res.sum,m=res.slope;

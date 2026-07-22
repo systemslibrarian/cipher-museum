@@ -15,7 +15,8 @@
     {id:'machines',     label:'Hall VII', name:'Mechanical Machines',     href:'halls/machines.html'},
     {id:'puzzle',       label:'Hall VIII',name:'Puzzle Ciphers',          href:'halls/puzzle.html'},
     {id:'unbreakable',  label:'Hall IX',  name:'The Unbreakable',        href:'halls/unbreakable.html'},
-    {id:'codebreakers', label:'Hall X',   name:'Hall of Codebreakers',   href:'halls/codebreakers.html'}
+    {id:'codebreakers', label:'Hall X',   name:'Hall of Codebreakers',   href:'halls/codebreakers.html'},
+    {id:'foundations',  label:'Annex',    name:'Hall of Foundations',    href:'hall-of-foundations/index.html'}
   ];
 
   var QUIZZES = {
@@ -68,6 +69,11 @@
       {q:'Who was the first person to describe frequency analysis?',opts:['Al-Kindi (9th century)','Alan Turing (20th century)','Charles Babbage (19th century)','Julius Caesar (1st century BC)'],a:0},
       {q:'What did Marian Rejewski use to initially break Enigma?',opts:['A captured machine','Mathematical group theory applied to rotor permutations','Brute force','A defector'],a:1},
       {q:'What principle states that a cipher\'s security must depend only on the key, not secrecy of the algorithm?',opts:['Shannon\'s theorem','Kerckhoffs\'s principle','Turing\'s law','Diffie-Hellman theorem'],a:1}
+    ],
+    foundations:[
+      {q:'Why can RSA key generation find a 2048-bit prime in moments?',opts:['Primes become denser as numbers grow','The Prime Number Theorem: about 1 in ln(x) numbers near x is prime','Factoring large numbers is easy'],a:1},
+      {q:'What makes a lattice basis "good" for decryption (Babai rounding)?',opts:['Short and nearly orthogonal vectors','The largest possible determinant','It contains the encrypted point'],a:0},
+      {q:'For a bilinear pairing, e(aP, bQ) equals…',opts:['e(P,Q)^(a+b)','e(P,Q)^(ab)','e(P,Q)^(a−b)'],a:1}
     ]
   };
 
@@ -89,10 +95,13 @@
   var path = location.pathname;
   var pageName = path.split('/').pop() || 'index.html';
   var parentDir = path.split('/').slice(-2,-1)[0] || '';
-  var inSub = ['halls','ciphers','tours','lab','community'].indexOf(parentDir) !== -1;
+  var inSub = ['halls','ciphers','tours','lab','community','hall-of-foundations'].indexOf(parentDir) !== -1;
   var pre = inSub ? '../' : '';
 
   function currentHallIndex(){
+    if(parentDir==='hall-of-foundations' && pageName==='index.html'){
+      for(var f=0;f<HALLS.length;f++){ if(HALLS[f].id==='foundations') return f; }
+    }
     if(parentDir!=='halls') return -1;
     var id = pageName.replace('.html','');
     for(var i=0;i<HALLS.length;i++){ if(HALLS[i].id===id) return i; }

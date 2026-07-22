@@ -7,6 +7,13 @@
 <title>Polynomial Interpolation &#183; Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Polynomial Interpolation &#183; Hall of Foundations — The Cipher Museum">
+<meta property="og:description" content="Drag points until the curve locks and the secret intercept appears — the heart of Shamir’s Secret Sharing.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/interpolation.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/interpolation.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -118,13 +125,11 @@
   <section class="exhibit">
     <div class="connect">
       <div class="flag">Where this touches your keys</div>
-      <h3>The threshold in your distributed demos</h3>
+      <h3>The threshold behind shared keys</h3>
       <p>
-        This is the exact mechanism in
-        <span style="color:var(--vermilion-soft)">shamir-gate</span>, and the
-        threshold logic under <span style="color:var(--vermilion-soft)">frost-threshold</span>
-        (FROST) and <span style="color:var(--vermilion-soft)">silent-tally</span>
-        (MPC). A key is split so that <strong>any k of n</strong> parties can act
+        This is the exact mechanism of <strong>Shamir&#8217;s Secret Sharing</strong>,
+        and the threshold logic under modern threshold-signature schemes such
+        as FROST. A key is split so that <strong>any k of n</strong> parties can act
         together but no k&#8722;1 can &#8212; guaranteed not by policy but by the
         impossibility of pinning down a degree-(k&#8722;1) curve from too few points.
       </p>

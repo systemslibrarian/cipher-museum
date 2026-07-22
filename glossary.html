@@ -88,7 +88,7 @@
       <a href="#gl-E" class="has-entries">E</a><a href="#gl-F" class="has-entries">F</a>
       <span class="empty" aria-disabled="true">G</span><a href="#gl-H" class="has-entries">H</a>
       <a href="#gl-I" class="has-entries">I</a><span class="empty" aria-disabled="true">J</span>
-      <a href="#gl-K" class="has-entries">K</a><span class="empty" aria-disabled="true">L</span>
+      <a href="#gl-K" class="has-entries">K</a><a href="#gl-L" class="has-entries">L</a>
       <a href="#gl-M" class="has-entries">M</a><a href="#gl-N" class="has-entries">N</a>
       <a href="#gl-O" class="has-entries">O</a><a href="#gl-P" class="has-entries">P</a>
       <span class="empty" aria-disabled="true">Q</span><a href="#gl-R" class="has-entries">R</a>
@@ -97,7 +97,7 @@
       <span class="empty" aria-disabled="true">W</span><a href="#gl-X" class="has-entries">X</a>
       <span class="empty" aria-disabled="true">Y</span><span class="empty" aria-disabled="true">Z</span>
     </div>
-    <p class="gl-count">47 terms</p>
+    <p class="gl-count">58 terms</p>
 
     <!-- ═══ A ═══ -->
     <div class="gl-section" id="gl-A">
@@ -127,7 +127,12 @@
     <div class="gl-section" id="gl-B">
       <h2 class="gl-letter">B</h2>
 
-      <div class="gl-term">
+            <div class="gl-term">
+        <h3 class="gl-word">Bilinear Pairing</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">A map e(P,Q) taking two elliptic-curve points to a value in which hidden scalars slide out: e(aP,bQ) = e(P,Q)<sup>ab</sup>. It lets a verifier check multiplicative relations between secret values without learning them — the engine of zk-SNARKs and identity-based encryption. Interactive: <a href="hall-of-foundations/pairings.html">Bilinear Pairings (§156)</a>.</p>
+      </div>
+<div class="gl-term">
         <h3 class="gl-word">Block Cipher</h3>
         <span class="gl-origin">Modern Cryptography</span>
         <p class="gl-def">A cipher that operates on fixed-size groups (blocks) of bits. AES uses 128-bit blocks. The same plaintext block always produces the same ciphertext block under the same key — unless a <em>mode of operation</em> like CBC or GCM is used to introduce variation.</p>
@@ -212,7 +217,12 @@
     <div class="gl-section" id="gl-E">
       <h2 class="gl-letter">E</h2>
 
-      <div class="gl-term">
+            <div class="gl-term">
+        <h3 class="gl-word">Elliptic Curve</h3>
+        <span class="gl-origin">Mathematics</span>
+        <p class="gl-def">The solution set of y² = x³ + ax + b, carrying a natural addition: draw a line through two points, take the third intersection, reflect across the x-axis. Over a finite field this addition scrambles points unpredictably — the basis of ECDH key exchange and ECDSA signatures. Interactives: <a href="hall-of-foundations/elliptic-curves-real.html">the group law (§150)</a> and <a href="hall-of-foundations/finite-fields.html">the curve over 𝔽ₚ (§142)</a>.</p>
+      </div>
+<div class="gl-term">
         <h3 class="gl-word">Encryption</h3>
         <span class="gl-origin">Core Concept</span>
         <p class="gl-def">The process of converting plaintext into ciphertext using a cipher and a key. The result is unintelligible without the corresponding decryption key. Encryption protects <em>confidentiality</em> — one of the three pillars of information security (CIA triad).</p>
@@ -229,7 +239,12 @@
     <div class="gl-section" id="gl-F">
       <h2 class="gl-letter">F</h2>
 
-      <div class="gl-term">
+            <div class="gl-term">
+        <h3 class="gl-word">Finite Field</h3>
+        <span class="gl-origin">Mathematics</span>
+        <p class="gl-def">A number system with finitely many elements in which addition, subtraction, multiplication, and division all stay inside — the integers mod a prime p are the canonical example. Public-key cryptography largely lives in finite fields; even the AES S-box is inversion in GF(2⁸). Interactive: <a href="hall-of-foundations/finite-fields.html">Finite Fields (§142)</a>.</p>
+      </div>
+<div class="gl-term">
         <h3 class="gl-word">Fractionation</h3>
         <span class="gl-origin">19th Century · Delastelle</span>
         <p class="gl-def">A technique that breaks each plaintext letter into multiple components (e.g., coordinates on a grid), manipulates the components separately, then recombines them. Used in Bifid, Trifid, and ADFGVX ciphers. The ancestor of modern bit-level diffusion.</p>
@@ -312,6 +327,22 @@
     </div>
 
     <!-- ═══ M ═══ -->
+    <!-- ═══ L ═══ -->
+    <div class="gl-section" id="gl-L">
+      <h2 class="gl-letter">L</h2>
+
+          <div class="gl-term">
+        <h3 class="gl-word">Lattice</h3>
+        <span class="gl-origin">Post-Quantum Cryptography</span>
+        <p class="gl-def">The regular grid of all integer combinations of a set of basis vectors. Finding the shortest vector (SVP) or the closest lattice point (CVP) in high dimension is believed hard even for quantum computers — the foundation of the ML-KEM and ML-DSA standards. Interactive: <a href="hall-of-foundations/lattices-svp.html">Lattices &amp; the SVP (§147)</a>.</p>
+      </div>
+      <div class="gl-term">
+        <h3 class="gl-word">Learning With Errors (LWE)</h3>
+        <span class="gl-origin">Post-Quantum Cryptography</span>
+        <p class="gl-def">The problem of recovering a secret from linear equations that have each been perturbed by a small amount of noise — equivalent to decoding a point lying near a lattice. LWE is the direct hardness assumption behind ML-KEM: decryption is rounding the noise away with a good basis. Interactive: <a href="hall-of-foundations/closest-vector.html">The Closest Vector Problem (§152)</a>.</p>
+      </div>
+</div>
+
     <div class="gl-section" id="gl-M">
       <h2 class="gl-letter">M</h2>
 
@@ -321,7 +352,12 @@
         <p class="gl-def">A method for applying a block cipher to messages longer than one block. ECB (Electronic Codebook) encrypts each block independently — insecure because identical blocks produce identical ciphertext. CBC (Cipher Block Chaining) XORs each block with the previous ciphertext block. GCM provides both encryption and authentication.</p>
       </div>
 
-      <div class="gl-term">
+            <div class="gl-term">
+        <h3 class="gl-word">Modular Arithmetic</h3>
+        <span class="gl-origin">Mathematics</span>
+        <p class="gl-def">Clock arithmetic: numbers wrap around at a modulus n, so 9 + 5 ≡ 2 (mod 12). The multiplicative structure of the integers mod a prime — cyclic, generated by primitive roots — is the original home of Diffie–Hellman and RSA. Interactive: <a href="hall-of-foundations/modular-arithmetic.html">Modular Arithmetic (§143)</a>.</p>
+      </div>
+<div class="gl-term">
         <h3 class="gl-word">Monoalphabetic Cipher</h3>
         <span class="gl-origin">Ancient</span>
         <p class="gl-def">A substitution cipher using a single fixed alphabet mapping. Each plaintext letter always maps to the same ciphertext letter. Caesar, Atbash, and keyword substitution are all monoalphabetic. Vulnerable to frequency analysis because letter frequencies are preserved exactly.</p>
@@ -354,7 +390,12 @@
         <h3 class="gl-word">One-Time Pad (OTP)</h3>
         <span class="gl-origin">Gilbert Vernam · 1917 / Claude Shannon · 1949</span>
         <p class="gl-def">The only cipher proven to be unbreakable — if the key is truly random, at least as long as the message, used only once, and kept secret. Shannon proved this mathematically in 1949. Impractical for most uses because the key distribution problem is equivalent to the message distribution problem.</p>
+      </div>      <div class="gl-term">
+        <h3 class="gl-word">One-Way Function</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">A function easy to compute forward but believed infeasible to invert — multiplying two large primes takes microseconds; factoring the product would take longer than the age of the universe. The conceptual keystone beneath every public-key scheme. Interactive: <a href="hall-of-foundations/one-way-function.html">The One-Way Function (§146)</a>.</p>
       </div>
+
     </div>
 
     <!-- ═══ P ═══ -->
@@ -381,7 +422,12 @@
         <p class="gl-def">A 5×5 grid containing 25 letters (I and J share a cell) used to convert letters into two-digit coordinates. The foundation of many fractionation ciphers (Bifid, Trifid, ADFGX, Nihilist) where coordinates are manipulated separately before recombination.</p>
       </div>
 
-      <div class="gl-term">
+            <div class="gl-term">
+        <h3 class="gl-word">Polynomial Ring</h3>
+        <span class="gl-origin">Post-Quantum Cryptography</span>
+        <p class="gl-def">Arithmetic on polynomials whose coefficients wrap mod q and whose powers wrap at Xⁿ = −1: the ring R_q = ℤ_q[X]/(Xⁿ+1). This is the structured lattice inside ML-KEM and ML-DSA, where nearly all their computation happens. Interactive: <a href="hall-of-foundations/polynomial-rings.html">Polynomial Rings (§153)</a>.</p>
+      </div>
+<div class="gl-term">
         <h3 class="gl-word">Public Key</h3>
         <span class="gl-origin">Diffie-Hellman · 1976</span>
         <p class="gl-def">The freely shared half of an asymmetric key pair. Anyone can use your public key to encrypt a message to you or to verify your digital signature. The mathematical relationship between public and private keys must be computationally infeasible to reverse (factoring for RSA, discrete log for DH/ECDH).</p>
@@ -392,7 +438,12 @@
     <div class="gl-section" id="gl-R">
       <h2 class="gl-letter">R</h2>
 
-      <div class="gl-term">
+            <div class="gl-term">
+        <h3 class="gl-word">Random Oracle</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">An idealized hash function that answers every new query with perfect randomness and every repeat consistently. Security proofs "in the random-oracle model" treat real hashes like SHA-256 as this ideal; the Fiat–Shamir transform uses it to turn interactive proofs into signatures. Interactive: <a href="hall-of-foundations/random-oracle.html">The Random Oracle (§154)</a>.</p>
+      </div>
+<div class="gl-term">
         <h3 class="gl-word">Rotor</h3>
         <span class="gl-origin">Enigma Machine · 1920s</span>
         <p class="gl-def">A wired disk that performs a substitution cipher by routing electrical signals through scrambled connections. Multiple rotors in series create a polyalphabetic cipher. The rotors step after each keypress, changing the substitution — giving Enigma ~17,576 initial rotor positions per rotor order.</p>
@@ -415,7 +466,17 @@
         <p class="gl-def">A lookup table that performs nonlinear substitution in block ciphers. In AES, each byte of state is replaced via a 256-entry S-box derived from finite field inversion. The S-box provides <em>confusion</em> — the nonlinearity that makes the cipher resistant to linear and differential cryptanalysis.</p>
       </div>
 
+            <div class="gl-term">
+        <h3 class="gl-word">Secret Sharing (Shamir&#39;s)</h3>
+        <span class="gl-origin">Modern Cryptography</span>
+        <p class="gl-def">Splitting a secret into n shares so that any k of them reconstruct it and any k−1 reveal nothing — guaranteed by polynomial interpolation, since k points fix a degree-(k−1) curve and fewer leave it completely free. Interactive: <a href="hall-of-foundations/interpolation.html">Polynomial Interpolation (§155)</a>.</p>
+      </div>
       <div class="gl-term">
+        <h3 class="gl-word">Shortest Vector Problem (SVP)</h3>
+        <span class="gl-origin">Post-Quantum Cryptography</span>
+        <p class="gl-def">Given a skewed basis for a lattice, find the shortest nonzero lattice vector. Trivial in two dimensions, believed exponentially hard in hundreds — the bedrock hardness assumption of post-quantum cryptography. Interactive: <a href="hall-of-foundations/lattices-svp.html">Lattices &amp; the SVP (§147)</a>.</p>
+      </div>
+<div class="gl-term">
         <h3 class="gl-word">Steganography</h3>
         <span class="gl-origin">Greek: steganos (covered) + graphein (to write)</span>
         <p class="gl-def">Hiding the existence of a message, rather than hiding its meaning. Invisible ink, microdots, messages hidden in image pixels. Complementary to cryptography: steganography conceals the fact that communication is happening; cryptography protects the content if it's discovered.</p>

@@ -7,6 +7,13 @@
 <title>The Random Oracle &#183; Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="The Random Oracle &#183; Hall of Foundations — The Cipher Museum">
+<meta property="og:description" content="Flip one input bit, scramble half the output — the hash assumption every signature stands on.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/random-oracle.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/random-oracle.html">
 <link rel="stylesheet" href="../css/museum.css">
 <link rel="stylesheet" href="foundations.css">
 </head>
@@ -130,13 +137,12 @@
   <section class="exhibit">
     <div class="connect">
       <div class="flag">Where this touches your keys</div>
-      <h3>Under the signatures in your Lab</h3>
+      <h3>Under every deployed signature</h3>
       <p>
-        Fiat&#8211;Shamir is everywhere in your portfolio:
-        <span style="color:var(--vermilion-soft)">dilithium-seal</span> (ML-DSA),
-        <span style="color:var(--vermilion-soft)">frost-threshold</span>, and
-        Schnorr-style signatures all convert an interactive identification proof
-        into a signature by hashing. <strong>ML-DSA</strong> is literally
+        Fiat&#8211;Shamir is everywhere in deployed cryptography: <strong>ML-DSA</strong>
+        and Schnorr-style signatures convert an interactive identification proof
+        into a signature by hashing &#8212; with <a href="../ciphers/sha256.html">SHA-256</a>-class
+        functions playing the oracle. <strong>ML-DSA</strong> is literally
         "Fiat&#8211;Shamir with aborts" over the <a href="polynomial-rings.html">polynomial
         ring</a>. The random-oracle assumption is the ground all of that stands on.
       </p>

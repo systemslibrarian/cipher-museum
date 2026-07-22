@@ -234,6 +234,26 @@ function processHallPage(file) {
 // The Foundations annex uses its own page chrome (no h1.page-title): title
 // comes from <title>, the exhibit number from the masthead .hall span.
 
+// Curated search keywords per exhibit — the terms a visitor would type.
+const FOUNDATION_TAGS = {
+  'modularity-exhibit.html':   ['modularity theorem', 'fermat', 'wiles', 'number theory', 'ecc'],
+  'finite-fields.html':        ['finite field', 'galois field', 'gf', 'discrete log', 'ecc'],
+  'modular-arithmetic.html':   ['modular arithmetic', 'clock', 'primitive root', 'diffie-hellman'],
+  'prime-number-theorem.html': ['prime number theorem', 'primes', 'rsa', 'key generation'],
+  'euler-fermat.html':         ['euler', 'fermat', 'totient', 'rsa', 'little theorem'],
+  'one-way-function.html':     ['one-way function', 'factoring', 'trapdoor', 'hardness'],
+  'lattices-svp.html':         ['lattice', 'svp', 'shortest vector', 'post-quantum', 'kyber', 'ml-kem'],
+  'reduction.html':            ['reduction', 'security proof', 'provable security', 'hardness'],
+  'group-theory.html':         ['group theory', 'cyclic group', 'generator', 'order', 'diffie-hellman'],
+  'elliptic-curves-real.html': ['elliptic curve', 'group law', 'chord tangent', 'ecc', 'ecdsa'],
+  'entropy.html':              ['entropy', 'shannon', 'information theory', 'perfect secrecy', 'one-time pad'],
+  'closest-vector.html':       ['cvp', 'closest vector', 'lwe', 'learning with errors', 'kyber', 'ml-kem', 'babai'],
+  'polynomial-rings.html':     ['polynomial ring', 'ntt', 'module-lwe', 'ml-kem', 'ml-dsa', 'post-quantum'],
+  'random-oracle.html':        ['random oracle', 'hash', 'avalanche', 'fiat-shamir', 'signatures'],
+  'interpolation.html':        ['interpolation', 'lagrange', 'shamir', 'secret sharing', 'threshold'],
+  'pairings.html':             ['pairing', 'bilinear', 'zk-snark', 'zero-knowledge', 'ibe'],
+};
+
 function processFoundationsPage(file) {
   const html = fs.readFileSync(file, 'utf8');
   const slug = path.basename(file);
@@ -255,7 +275,9 @@ function processFoundationsPage(file) {
     c: num,
     b: '—',
     s: summary,
-    g: ['foundations', 'mathematics', ...(isIndex ? ['hall'] : [])],
+    g: ['foundations', 'mathematics',
+        ...(isIndex ? ['hall'] : []),
+        ...(FOUNDATION_TAGS[slug] || [])],
   };
 }
 
