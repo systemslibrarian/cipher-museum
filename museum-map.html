@@ -58,6 +58,11 @@
 .bldg-legend-door{display:inline-block;width:4px;height:12px;border:1px solid var(--gold-b);border-radius:var(--r-sm);background:var(--s2)}
 .bldg-legend-here{color:var(--gold)}
 .bldg-wing-rooms--duo{grid-template-columns:1fr auto 1fr}
+.bldg-wing-rooms--solo{grid-template-columns:1fr}
+.bldg-annex-head{display:block;text-decoration:none}
+.bldg-room--annex{min-height:0}
+.bldg-room--annex .bldg-room-era{border-bottom:1px solid var(--s4)}
+.bldg-room--annex .bldg-room-exhibits{flex-direction:row;flex-wrap:wrap;gap:.4rem 1.75rem;margin-top:.75rem}
 .fp-marker-dot{color:var(--gold-dim);font-size:.5rem;vertical-align:middle;margin-right:.15rem}
 .bldg-room-count{font-family:var(--fm);font-size:.5rem;letter-spacing:.1em;color:var(--tx3);margin-top:.5rem;border-top:1px solid var(--s4);padding-top:.4rem}
 .trust-label--sm{font-size:.48rem;padding:.15rem .42rem;margin:0 0 0 .4rem;min-height:0;vertical-align:middle;display:inline-flex;line-height:1.3;letter-spacing:.12em}
@@ -397,11 +402,13 @@
     <!-- ── Annex: Hall of Foundations ── -->
     <div class="bldg-wing">
       <div class="bldg-wing-label">FOUNDATIONS ANNEX — THE MATHEMATICS UNDER THE CRYPTOGRAPHY</div>
-      <div class="bldg-wing-rooms">
-        <a href="hall-of-foundations/index.html" class="bldg-room bldg-room--special" data-hall-id="foundations" data-color="#2A6F6B" style="border-top:2px solid #2A6F6B">
-          <div class="bldg-room-num">§141–156</div>
-          <div class="bldg-room-name">Hall of Foundations</div>
-          <div class="bldg-room-era">Number Theory · Hardness · Structures</div>
+      <div class="bldg-wing-rooms bldg-wing-rooms--solo">
+        <div class="bldg-room bldg-room--special bldg-room--annex" data-hall-id="foundations" data-color="#2A6F6B" style="border-top:2px solid #2A6F6B">
+          <a href="hall-of-foundations/index.html" class="bldg-annex-head">
+            <div class="bldg-room-num">ANNEX</div>
+            <div class="bldg-room-name">Hall of Foundations</div>
+            <div class="bldg-room-era">Exhibits 141–156 · Number Theory · Hardness · Structures</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="hall-of-foundations/finite-fields.html">Finite Fields</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="hall-of-foundations/one-way-function.html">One-Way Functions</a></span>
@@ -411,7 +418,7 @@
             <span><span class="fp-marker-dot">●</span> <a href="hall-of-foundations/pairings.html">Pairings</a></span>
             <span>+ 16 interactive exhibits on the mathematics your keys stand on</span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
