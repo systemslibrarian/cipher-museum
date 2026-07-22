@@ -70,7 +70,9 @@
     single rounding step. With a "bad" basis for that same lattice, the rounding
     lands on the wrong corner most of the time. That gap is the shape of a
     lattice <span class="term">trapdoor</span>, and it is what
-    <a href="learning-with-errors.html">a noise term</a> is defending.
+    <a href="learning-with-errors.html">a noise term</a> is defending. Read the
+    two bases as a model of that asymmetry: &#167;4 below shows the rather
+    different form ML-KEM's own key takes.
   </div>
 
   <section class="exhibit">
@@ -133,7 +135,7 @@
   <section class="exhibit">
     <div class="step-head"><span class="step-num">§3</span><h2>Add noise, and you have Learning With Errors</h2></div>
     <p>
-      Here is the actual encryption mechanism. Take a genuine lattice point, nudge
+      Here is the geometric model behind noisy lattice encryption. Take a genuine lattice point, nudge
       it by a small random <span class="term">error</span>, and publish the
       result &#8212; that's a ciphertext. Decryption is a Closest Vector Problem: round
       back to the nearest corner to recover the point. It works only while the
@@ -199,7 +201,7 @@
     </p>
     <div class="pull">
       The secret is a short <em>vector</em>, not a short <em>basis</em>. Same
-      hardness, different trapdoor.
+      geometric family, different key structure.
     </div>
     <p>
       So why keep this exhibit? Because the geometry survives the change of key
@@ -250,8 +252,8 @@
   const make = (t,a) => { const e=document.createElementNS(NS,t); for(const k in a)e.setAttribute(k,a[k]); return e; };
 
   const bases = {
-    good: { b1:[1,0], b2:[0,1], name:"good basis (secret)" },
-    bad:  { b1:[4,3], b2:[5,4], name:"bad basis (public)" }
+    good: { b1:[1,0], b2:[0,1], name:"good basis (trapdoor model)" },
+    bad:  { b1:[4,3], b2:[5,4], name:"skewed basis (public description)" }
   };
 
   /* ================= section 1: CVP interactive ================= */

@@ -131,6 +131,35 @@ var BANNED = [
     re: /1 in 710 candidates is prime/i,
     why: "1/ln(2^1024) is the density over all integers. Conditioned on odd — " +
          "which is what keygen tests — it is about 1 in 355."
+  },
+  // The pass below came from a reviewer noticing that §152 was accurate only
+  // by §4: a visitor who stopped earlier still met control labels and section
+  // openers asserting the old claim. Note these matched inside a <script>
+  // body — tag stripping leaves JS string literals in the scanned text, so
+  // interface labels are covered as well as prose.
+  {
+    re: /good basis \(secret\)|bad basis \(public\)/i,
+    why: "Labelled the two bases as ML-KEM's secret and public key in the CVP " +
+         "readout. They are a model of the trapdoor asymmetry, not Kyber's keys."
+  },
+  {
+    re: /Here is the actual encryption mechanism/i,
+    why: "§152 §3 teaches the geometric decoding model, not the mechanism " +
+         "ML-KEM literally implements."
+  },
+  {
+    re: /Same hardness, different trapdoor/i,
+    why: "A short secret vector is not a trapdoor in the lattice sense a short " +
+         "basis is. Same geometric family, different key structure."
+  },
+  {
+    re: /Everything ML-KEM publishes/i,
+    why: "A real ML-KEM key also carries seeds, encodings and compression. The " +
+         "page shows the essential public relation, not the whole key."
+  },
+  {
+    re: /Every key exchange your browser negotiates/i,
+    why: "Reads as though every browser connection uses ML-KEM."
   }
 ];
 
@@ -183,7 +212,15 @@ var REQUIRED = [
   ["hall-of-foundations/euler-fermat.html", /Carmichael/,
     "§145 must note implementations use lambda(n)"],
   ["glossary.html", /short secret vector/i,
-    "the LWE glossary entry must describe ML-KEM's real key structure"]
+    "the LWE glossary entry must describe ML-KEM's real key structure"],
+  // §152 must qualify the two-basis model BEFORE §4, not only in it — a
+  // visitor who stops early should not leave with the misconception.
+  ["hall-of-foundations/closest-vector.html", /trapdoor model/i,
+    "§152's basis labels must mark themselves as a model, not as Kyber's keys"],
+  ["hall-of-foundations/closest-vector.html", /§4 below shows/i,
+    "§152's honesty box must point forward to the real key structure"],
+  ["hall-of-foundations/learning-with-errors.html", /essential public relation/i,
+    "§157 must claim the public relation, not the whole published key"]
 ];
 REQUIRED.forEach(function (row) {
   var t = fileText(row[0]);

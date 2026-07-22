@@ -66,11 +66,13 @@
   </div>
 
   <div class="honesty">
-    <strong>A public key you can read.</strong> Everything ML-KEM publishes is
-    on this page: a matrix, and that matrix multiplied by a short secret vector
-    with a little noise added. Nothing is hidden but the noise and the secret.
-    Set the error to zero and the secret falls out in one click &#8212; which is
-    the fastest way to see what the error is for.
+    <strong>A public key you can read.</strong> The essential public relation
+    behind ML-KEM is on this page: a public matrix, and a noisy product of that
+    matrix with a short secret vector. A real key adds seeds, encodings and
+    compression on top &#8212; &#167;4 lists what this leaves out &#8212; but the
+    relation is the part that carries the security. Set the error to zero and
+    the secret falls out in one click, which is the fastest way to see what the
+    error is for.
   </div>
 
   <section class="exhibit">
@@ -230,8 +232,8 @@
       <div class="flag">Where this touches your keys</div>
       <h3>The bet the post-quantum standards make</h3>
       <p>
-        Every key exchange your browser negotiates with <strong>ML-KEM</strong>
-        runs this structure at full size. The reason it is expected to survive a
+        Whenever a browser negotiates <strong>ML-KEM</strong>, this structure is
+        running at full size. The reason it is expected to survive a
         quantum computer is that Shor's algorithm attacks <em>periodicity</em>
         &#8212; the hidden repeating structure inside factoring and the discrete
         log, both of which live in the <a href="group-theory.html">cyclic
