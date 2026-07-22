@@ -127,6 +127,15 @@
         quantum computer would win the factoring and discrete-log bets. Different
         walls, same architecture: <strong>easy forward, hard back, secret gate.</strong>
       </p>
+      <p>
+        One family deliberately omits the gate.
+        <a href="../ciphers/sha256.html">SHA-256</a> is meant to be one-way with
+        <em>no</em> trapdoor at all &#8212; nobody, including its designers,
+        should be able to run it backwards. That makes a hash the purest example
+        on this page: all wall, no door. Public-key cryptography is the harder
+        trick, because it needs the wall <em>and</em> a way through for exactly
+        one person.
+      </p>
     </div>
     <p class="aside">Next: <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a> — how we argue one wall is at least as tall as another.</p>
   </section>

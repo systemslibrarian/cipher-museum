@@ -76,3 +76,30 @@ CI workflow (`.github/workflows/ci.yml`) run them on every push and PR.
   provides tokens, typography, nav, and footer; `foundations.css` styles the
   wing's exhibit components on top of it. The wing is linked from the
   entrance, museum map, mobile nav drawer, sitemap, and site search.
+
+## Where the Hall points nowhere
+
+A link-topology pass (`foundations-links.test.js`) measured how each exhibit
+connects to the rest of the museum. Most map cleanly onto an application page:
+§142→AES, §143/§149→Diffie–Hellman, §144/§145→RSA, §151→one-time pad,
+§154→SHA-256, §147/§152/§153/§157→the Modern Cryptography wing.
+
+Three do not, and the reason is worth recording rather than papering over.
+
+| Exhibit | Teaches | Museum has no exhibit on |
+| --- | --- | --- |
+| §150 Elliptic Curves over ℝ | the group law on a curve | ECDH, ECDSA, or any deployed EC primitive |
+| §155 Polynomial Interpolation | *k* points fix a degree-(*k*−1) curve | Shamir's Secret Sharing, threshold signatures |
+| §156 Bilinear Pairings | e(aP,bQ) = e(P,Q)^ab | zk-SNARKs, identity-based encryption, BLS aggregation |
+
+These three now link to neighbouring *foundations* so no page is a dead end,
+which is the correct interim answer. The wrong answer would be to point them at
+`modern.html` and call the navigation complete: that page has no section
+anchors, and mentions ML-KEM, zero-knowledge, threshold cryptography, IBE and
+BLS zero times between them. A link there would satisfy a link checker while
+teaching the visitor nothing.
+
+So the gap is content, not navigation. If the museum ever adds an
+elliptic-curve primitive, a secret-sharing exhibit, or a zero-knowledge
+exhibit, these three foundations already have the mathematics waiting and
+should be wired to it in the same pass.

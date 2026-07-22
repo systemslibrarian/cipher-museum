@@ -25,7 +25,8 @@ const suites = [
   'hall-of-foundations/foundations-properties.test.js',
   'hall-of-foundations/exhibit-examples.test.js',
   'hall-of-foundations/exhibit-interaction.test.js',
-  'hall-of-foundations/foundations-claims.test.js'
+  'hall-of-foundations/foundations-claims.test.js',
+  'hall-of-foundations/foundations-links.test.js'
 ];
 
 for (const suite of suites) {

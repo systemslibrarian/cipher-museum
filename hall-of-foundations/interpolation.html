@@ -134,7 +134,11 @@
         impossibility of pinning down a degree-(k&#8722;1) curve from too few points.
       </p>
     </div>
-    <p class="aside">Tested logic (Lagrange interpolation over a field) in <code>crypto-algebra.js</code>. Related: <a href="finite-fields.html" style="color:var(--vermilion)">Finite Fields</a>.</p>
+    <p class="aside">Related foundations:
+      <a href="finite-fields.html" style="color:var(--vermilion)">Finite Fields</a> — the arithmetic the shares actually live in, without which the "curve" leaks information;
+      <a href="entropy.html" style="color:var(--vermilion)">Information &amp; Entropy</a> — why <em>k</em>&#8722;1 shares reveal nothing at all, which is an information-theoretic claim rather than a computational one;
+      <a href="polynomial-rings.html" style="color:var(--vermilion)">Polynomial Rings</a> — the same objects put to a very different use.
+      Tested logic (Lagrange interpolation over a field) in <code>crypto-algebra.js</code>.</p>
   </section>
 
   </main>
