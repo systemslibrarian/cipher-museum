@@ -201,7 +201,9 @@
 
   function draw(){
     ring.innerHTML="";
-    const W=700, colX=90, colGap=250, rowY=80, rowGap=44, boxW=190;
+    // viewBox is 700 wide: last column starts at colX+2*colGap-30 and must
+    // end (plus its "wrapped" tag) inside 700, so keep the geometry tight
+    const colX=80, colGap=235, rowY=80, rowGap=44, boxW=175;
     // headers
     const head=(x,label,color)=>{const t=mk("text",{x,y:50,fill:color||"#F3EEDF","font-family":"ui-monospace,monospace","font-size":"14","font-weight":"700"});t.textContent=label;ring.appendChild(t);};
     head(colX,"a(X)"); head(colX+colGap,"b(X)"); head(colX+2*colGap,"a\u00b7b in R_q","#C85A5A");
@@ -228,7 +230,7 @@
     // wrap illustration arc
     const anyWrap=wrapped.some(Boolean);
     if(anyWrap){
-      const note=mk("text",{x:colX+2*colGap-30,y:rowY+n*rowGap+8,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"12"});
+      const note=mk("text",{x:colX-30,y:rowY+n*rowGap+8,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"12"});
       note.textContent="X\u207f = \u22121, so high-degree terms fold back with a sign flip";
       ring.appendChild(note);
     }
