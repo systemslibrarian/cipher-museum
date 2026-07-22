@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Generators, order, and cyclic structure — the grammar of nearly every public-key scheme.">
+<title>Group Theory · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 149 · ⟨g⟩</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Grammar of Public-Key Cryptography</div>
+    <h1>The vocabulary<br>everything <em>shares</em></h1>
+    <p class="standfirst">
+      Groups, generators, order. These three words describe the structure half
+      the Crypto Lab quietly depends on. A group is a set with one well-behaved
+      operation; a generator is an element whose repeated application reaches
+      everything; the order is how many steps that takes.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>The unifying abstraction.</strong> Diffie–Hellman's clock,
+    elliptic-curve points, RSA's residues — these look different but are all
+    <em>groups</em>. Learn the vocabulary once and every scheme reads the same.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Generators and the ground they cover</h2></div>
+    <p>
+      Take the numbers 0 to n−1 with addition that wraps around — the group
+      ℤ/nℤ. Pick a <span class="term">generator</span> <em>g</em> and keep adding
+      it to itself: g, 2g, 3g, … Some choices sweep through <em>every</em> element
+      before returning to 0; others get trapped in a small sub-cycle. Watch which
+      is which.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 520" id="grp" role="img"
+             aria-label="A cyclic group with a generator sweeping around the ring."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>group size n
+          <select id="nsel">
+            <option value="10">10</option>
+            <option value="12" selected>12</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+          </select>
+        </label>
+        <label>generator g
+          <select id="gsel"></select>
+        </label>
+        <button id="trace">Trace ⟨g⟩</button>
+        <div class="readout" id="gread">—</div>
+      </div>
+      <div class="lab-hint">
+        When ⟨g⟩ covers all n elements, <b>g is a generator</b> and the group is
+        <span class="term">cyclic</span> under it. Otherwise g reaches only a
+        <b>subgroup</b> — and its order divides n (Lagrange's theorem, live).
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>Why cryptographers care about order</h2></div>
+    <p>
+      The <span class="term">order</span> of a generator is the size of the space
+      a secret can hide in. Too small, and an attacker just enumerates it. Real
+      schemes insist on generators of large prime order — hundreds of bits —
+      precisely so the "keep adding g" walk has nowhere small to get trapped.
+    </p>
+    <div class="eq">order of g = smallest k &gt; 0 with k·g ≡ 0 &nbsp;(divides n)</div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>Every scheme is a group in disguise</h3>
+      <p>
+        ECDH walks a generator point around an elliptic-curve group. Diffie–Hellman
+        walks a generator through residues mod a prime. Schnorr and
+        <span style="color:var(--vermilion-soft)">frost-threshold</span> signatures
+        live in prime-order groups by design. Once you see the
+        <strong>generator and its order</strong>, every public-key primitive in
+        the Lab has the same skeleton.
+      </p>
+    </div>
+    <p class="aside">Related: <a href="modular-arithmetic.html" style="color:var(--vermilion)">Modular Arithmetic</a> is this exhibit's multiplicative cousin.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function gcd(a,b){while(b){var t=b;b=a%b;a=t;}return a;}
+
+  var grp=document.getElementById("grp"), nsel=document.getElementById("nsel"),
+      gsel=document.getElementById("gsel"), gread=document.getElementById("gread");
+  var cx=350, cy=270, R=200;
+
+  function pos(k,n){var ang=-Math.PI/2+2*Math.PI*k/n;return [cx+R*Math.cos(ang),cy+R*Math.sin(ang)];}
+  function orbit(g,n){var out=[],x=0;for(var i=0;i<n;i++){x=(x+g)%n;out.push(x);if(x===0)break;}return out;}
+
+  function refreshG(){
+    var n=+nsel.value; gsel.innerHTML="";
+    for(var g=1;g<n;g++){var o=document.createElement("option");o.value=g;
+      o.textContent=g+(gcd(g,n)===1?" ✓":"");gsel.appendChild(o);}
+    for(var g2=1;g2<n;g2++){if(gcd(g2,n)===1){gsel.value=g2;break;}}
+  }
+  function draw(animate){
+    var n=+nsel.value, g=+gsel.value;
+    grp.innerHTML="";
+    grp.appendChild(el("circle",{cx:cx,cy:cy,r:R,fill:"none",stroke:"#2e2e3a","stroke-width":1.5}));
+    for(var k=0;k<n;k++){var p=pos(k,n);
+      grp.appendChild(el("circle",{cx:p[0],cy:p[1],r:4,fill:"#2e2e3a"}));
+      var t=el("text",{x:cx+(R+24)*Math.cos(-Math.PI/2+2*Math.PI*k/n),
+        y:cy+(R+24)*Math.sin(-Math.PI/2+2*Math.PI*k/n)+4,fill:"#D5CDDF",
+        "font-family":"ui-monospace,monospace","font-size":"13","text-anchor":"middle"});
+      t.textContent=k; grp.appendChild(t);
+    }
+    var orb=orbit(g,n);
+    var full=(orb.length===n);
+    var color=full?"#5AC8A0":"#C85A5A";
+    var layer=el("g",{}); grp.appendChild(layer);
+    function upto(m){
+      layer.innerHTML="";
+      var prev=pos(0,n);
+      for(var i=0;i<m;i++){var p=pos(orb[i],n);
+        layer.appendChild(el("line",{x1:prev[0],y1:prev[1],x2:p[0],y2:p[1],
+          stroke:color,"stroke-width":2,"stroke-opacity":0.55})); prev=p;}
+      for(var j=0;j<m;j++){var q=pos(orb[j],n);
+        layer.appendChild(el("circle",{cx:q[0],cy:q[1],r:6,fill:color,stroke:"#1c1c22","stroke-width":1.5}));}
+      if(m>0){var last=pos(orb[m-1],n);
+        layer.appendChild(el("circle",{cx:last[0],cy:last[1],r:9,fill:color,stroke:"#1c1c22","stroke-width":2}));}
+    }
+    gread.innerHTML="⟨"+g+"⟩ in ℤ/"+n+" · order <b>"+orb.length+"</b> "+(full?"<b style='color:#5AC8A0'>(generator)</b>":"(subgroup)");
+    if(animate){var m=0;var iv=setInterval(function(){upto(++m);if(m>=orb.length)clearInterval(iv);},110);}
+    else upto(orb.length);
+  }
+  nsel.addEventListener("change",function(){refreshG();draw(false);});
+  gsel.addEventListener("change",function(){draw(false);});
+  document.getElementById("trace").addEventListener("click",function(){draw(true);});
+  refreshG(); draw(false);
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

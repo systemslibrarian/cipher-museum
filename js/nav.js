@@ -25,11 +25,11 @@
     ['search.html',       'Search']
   ];
   var path = location.pathname;
-  var inSub = /\/(ciphers|halls|tours|lab|community)\//.test(path);
+  var inSub = /\/(ciphers|halls|tours|lab|community|hall-of-foundations)\//.test(path);
   var pre = inSub ? '../' : '';
   var basename = path.split('/').pop() || 'index.html';
   var parentDir = path.split('/').slice(-2, -1)[0] || '';
-  var DIR_ACTIVE = {halls:'Explore',tours:'Explore',community:'Explore',lab:'Lab'};
+  var DIR_ACTIVE = {halls:'Explore',tours:'Explore',community:'Explore',lab:'Lab','hall-of-foundations':'Explore'};
   var ALIASES = {
     'index.html': null,
     'museum-map.html': 'Explore',
@@ -70,6 +70,7 @@
   /* ── Mobile-only extra links (visible in drawer only) ── */
   var MOBILE_NAV = [
     ['tours/index.html',    'Guided Tours'],
+    ['hall-of-foundations/index.html', 'Hall of Foundations'],
     ['timeline.html',       'Timeline'],
     ['glossary.html',       'Glossary'],
     ['modern.html',         'Modern Cryptography'],

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Watch a smooth elliptic curve shatter into a scatter of dots over a finite field — and see why the discrete logarithm becomes hard.">
+<title>Finite Fields · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 142 · 𝔽ₚ</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Arithmetic World Everything Happens In</div>
+    <h1>When the curve<br><em>shatters</em></h1>
+    <p class="standfirst">
+      The elliptic curve you saw drawn as a smooth loop doesn't live on paper
+      when it does real work. It lives over a finite field — a world with only
+      finitely many numbers, where the curve becomes a scatter of dots. This is
+      where the discrete logarithm becomes hard.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>The whole point.</strong> Over the real numbers, addition on a curve
+    is smooth and geometric — you can see where a point is going. Over 𝔽ₚ, the
+    same rule sends points leaping around unpredictably. That unpredictability
+    <em>is</em> the security.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>A field with no infinity</h2></div>
+    <p>
+      A <span class="term">finite field</span> 𝔽ₚ is arithmetic modulo a prime
+      <em>p</em>: the only numbers are 0, 1, …, p−1, and everything wraps around.
+      Add, subtract, multiply, and — crucially — divide, all staying inside that
+      finite set. Every nonzero element has an inverse, which is what makes it a
+      <em>field</em> rather than just a ring.
+    </p>
+    <div class="eq">𝔽ₚ = { 0, 1, 2, …, p−1 } &nbsp;with arithmetic mod p</div>
+    <p>
+      The same elliptic-curve equation, y² = x³ + ax + b, now asks: for which
+      pairs (x, y) in this finite world does the equation hold? The answer is a
+      finite set of points — no smooth curve, just dots.
+    </p>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>The curve, over 𝔽ₚ</h2></div>
+    <p>
+      Below is y² = x³ + 2x + 2 over 𝔽ₚ. Change <em>p</em> and watch the point
+      set redraw. Notice the vertical symmetry — for every point (x, y) there's a
+      mirror (x, p−y) — the finite-field ghost of the real curve's reflection.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 500" id="scatter" role="img"
+             aria-label="Elliptic curve points over a finite field, as a scatter plot."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>prime p
+          <select id="psel">
+            <option value="23">23</option>
+            <option value="37">37</option>
+            <option value="61">61</option>
+            <option value="97" selected>97</option>
+            <option value="127">127</option>
+          </select>
+        </label>
+        <div class="readout" id="count">—</div>
+      </div>
+      <div class="lab-hint">
+        Every dot is a genuine solution of y² ≡ x³ + 2x + 2 (mod p), computed
+        exactly. The count is the <b>order</b> of the curve — the size of the
+        group your key lives in.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§3</span><h2>Adding points in the dark</h2></div>
+    <p>
+      The chord-and-tangent rule still works — but algebraically, not
+      geometrically. Pick a starting point <em>G</em> and repeatedly add it to
+      itself. Over the reals you could watch it slide along the curve. Here it
+      jumps. Press <em>step</em> and follow G, 2G, 3G… as they scatter with no
+      visible pattern.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 500" id="walk" role="img"
+             aria-label="Repeated point addition over a finite field, jumping unpredictably."></svg>
+      </div>
+      <div class="lab-bar">
+        <button id="step">Step · add G</button>
+        <button id="run">Run to 12G</button>
+        <button id="wreset" class="ghost">Reset</button>
+        <div class="readout" id="kread"><b>k = 0</b></div>
+      </div>
+      <div class="lab-hint">
+        You can see <em>k</em> and where <em>kG</em> landed. The
+        <span class="term">discrete log problem</span> is the reverse: given only
+        the landing spot, recover <em>k</em>. With thousands of points and no
+        pattern, there's nothing to do but search.
+      </div>
+    </div>
+
+    <div class="pull">
+      Forward is a walk. Backward is a search of the whole field. That gap is
+      the entire fortress.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>This is the ground floor of ECC</h3>
+      <p>
+        Real elliptic-curve cryptography uses this exact machinery over a prime
+        with <strong>256 bits</strong> — a field with more elements than there
+        are atoms in the observable universe. Your ECDH shared secret is some
+        <em>kG</em>; your ECDSA signature proves you know a <em>k</em> without
+        revealing it. The curve <span style="color:var(--vermilion-soft)">curve-lens</span>
+        in the Crypto Lab lets you drive the real thing. This exhibit is why it's safe.
+      </p>
+    </div>
+    <p class="aside">
+      Companion: <a href="modularity-exhibit.html" style="color:var(--vermilion)">The Ground Beneath the Curve</a>
+      shows the smooth real-number version and the deep theory of why these curves are so well-behaved.
+    </p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  var A=2, B=2;   // y^2 = x^3 + 2x + 2
+
+  function el(tag,at){var e=document.createElementNS(NS,tag);for(var k in at)e.setAttribute(k,at[k]);return e;}
+  function mod(n,p){return ((n%p)+p)%p;}
+  function inv(k,p){k=mod(k,p);for(var i=1;i<p;i++)if(mod(k*i,p)===1)return i;return null;}
+  function rhs(x,p){return mod(x*x*x+A*x+B,p);}
+
+  function points(p){
+    var pts=[];
+    for(var x=0;x<p;x++){var r=rhs(x,p);
+      for(var y=0;y<p;y++){ if(mod(y*y,p)===r) pts.push([x,y]); }}
+    return pts;
+  }
+  function addFp(P,Q,p){
+    if(P===null)return Q; if(Q===null)return P;
+    if(P[0]===Q[0] && mod(P[1]+Q[1],p)===0) return null;
+    var m;
+    if(P[0]===Q[0]&&P[1]===Q[1]) m=mod(mod(3*P[0]*P[0]+A,p)*inv(mod(2*P[1],p),p),p);
+    else m=mod(mod(Q[1]-P[1],p)*inv(mod(Q[0]-P[0],p),p),p);
+    var x3=mod(m*m-P[0]-Q[0],p);
+    var y3=mod(m*(P[0]-x3)-P[1],p);
+    return [x3,y3];
+  }
+
+  // ---------- scatter plot ----------
+  var scatter=document.getElementById("scatter");
+  var count=document.getElementById("count");
+  function drawScatter(p){
+    scatter.innerHTML="";
+    var pad=32, W=700, H=500, span=Math.max(W,H)-2*pad;
+    var cell=Math.min((W-2*pad)/p,(H-2*pad)/p);
+    var ox=(W-cell*p)/2, oy=(H-cell*p)/2;
+    // faint grid frame
+    scatter.appendChild(el("rect",{x:ox,y:oy,width:cell*p,height:cell*p,
+      fill:"none",stroke:"#2e2e3a","stroke-width":1}));
+    // axis at mid isn't meaningful mod p; show border only
+    var pts=points(p);
+    pts.forEach(function(pt){
+      var cx=ox+(pt[0]+0.5)*cell;
+      var cy=oy+(p-1-pt[1]+0.5)*cell; // flip so y grows upward
+      scatter.appendChild(el("circle",{cx:cx.toFixed(1),cy:cy.toFixed(1),
+        r:Math.max(1.6,cell*0.32).toFixed(1),fill:"#F3EEDF","fill-opacity":0.85}));
+    });
+    count.innerHTML="p = <b>"+p+"</b> &nbsp;·&nbsp; <b>"+(pts.length+1)+"</b> points (with ∞)";
+  }
+
+  // ---------- walk ----------
+  var walk=document.getElementById("walk");
+  var kread=document.getElementById("kread");
+  var Wp=97, G=null, cur=null, k=0, history=[];
+  function findG(p){ var pts=points(p); return pts.length?pts[Math.floor(pts.length*0.18)]:null; }
+  function drawWalk(){
+    walk.innerHTML="";
+    var p=Wp, W=700,H=500,pad=32;
+    var cell=Math.min((W-2*pad)/p,(H-2*pad)/p);
+    var ox=(W-cell*p)/2, oy=(H-cell*p)/2;
+    walk.appendChild(el("rect",{x:ox,y:oy,width:cell*p,height:cell*p,fill:"none",stroke:"#2e2e3a","stroke-width":1}));
+    var pts=points(p);
+    pts.forEach(function(pt){
+      var cx=ox+(pt[0]+0.5)*cell, cy=oy+(p-1-pt[1]+0.5)*cell;
+      walk.appendChild(el("circle",{cx:cx.toFixed(1),cy:cy.toFixed(1),
+        r:Math.max(1.4,cell*0.28).toFixed(1),fill:"#F3EEDF","fill-opacity":0.28}));
+    });
+    // draw history path
+    for(var i=0;i<history.length;i++){
+      var pt=history[i]; if(pt===null) continue;
+      var cx=ox+(pt[0]+0.5)*cell, cy=oy+(p-1-pt[1]+0.5)*cell;
+      var isLast=(i===history.length-1);
+      if(i>0 && history[i-1]!==null){
+        var pv=history[i-1];
+        var px=ox+(pv[0]+0.5)*cell, py=oy+(p-1-pv[1]+0.5)*cell;
+        walk.appendChild(el("line",{x1:px,y1:py,x2:cx,y2:cy,
+          stroke:"#C85A5A","stroke-width":1.4,"stroke-opacity":0.5,"stroke-dasharray":"3 3"}));
+      }
+      walk.appendChild(el("circle",{cx:cx.toFixed(1),cy:cy.toFixed(1),
+        r:isLast?7:4.5,fill:isLast?"#C85A5A":"#d98a7a",stroke:"#1c1c22","stroke-width":1.5}));
+      if(isLast){
+        var t=el("text",{x:cx+11,y:cy-9,fill:"#C85A5A",
+          "font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700"});
+        t.textContent=k+"G"; walk.appendChild(t);
+      }
+    }
+  }
+  function stepWalk(){
+    if(G===null) G=findG(Wp);
+    if(k===0){ cur=G; k=1; history=[G]; }
+    else { cur=addFp(cur,G,Wp); k++; history.push(cur); if(history.length>13)history.shift(); }
+    kread.innerHTML="<b>k = "+k+"</b> &nbsp; kG = "+(cur?("("+cur[0]+", "+cur[1]+")"):"∞");
+    drawWalk();
+  }
+  function resetWalk(){ k=0; cur=null; history=[]; G=findG(Wp); kread.innerHTML="<b>k = 0</b>"; drawWalk(); }
+
+  document.getElementById("step").addEventListener("click",stepWalk);
+  document.getElementById("run").addEventListener("click",function(){
+    resetWalk(); var n=0; var iv=setInterval(function(){ stepWalk(); if(++n>=12)clearInterval(iv); },160);
+  });
+  document.getElementById("wreset").addEventListener("click",resetWalk);
+  document.getElementById("psel").addEventListener("change",function(e){ drawScatter(+e.target.value); });
+
+  drawScatter(97);
+  resetWalk();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

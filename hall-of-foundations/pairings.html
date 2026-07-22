@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Verify a product of hidden scalars without revealing them — the bilinear pairing under zk-SNARKs.">
+<title>Bilinear Pairings &#183; Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">&#8592; Hall of Foundations</a>
+    <span class="hall">Exhibit 156 &#183; e(aP,bQ)=e(P,Q)&#7491;&#7495;</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Magic Behind zk-SNARKs</div>
+    <h1>Multiplying the<br><em>unmultipliable</em></h1>
+    <p class="standfirst">
+      On an elliptic curve you can add points, but you cannot multiply two of
+      them together &#8212; and the discrete log keeps their secret scalars hidden.
+      A pairing is a strange, powerful function that reaches across two points and
+      checks a multiplicative relationship between those hidden scalars, without
+      ever revealing them.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Advanced, and worth it.</strong> This is the deepest exhibit in the
+    hall. The takeaway is one identity: a pairing lets a verifier confirm that
+    hidden numbers multiply correctly &#8212; the exact power that makes succinct
+    zero-knowledge proofs and identity-based encryption possible.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;1</span><h2>A bridge between two worlds</h2></div>
+    <p>
+      A <span class="term">bilinear pairing</span> e takes two points from
+      elliptic-curve groups and maps them into a finite field, in a way that turns
+      point-scaling into exponentiation. Scale the inputs by hidden scalars a and
+      b, and the output is the base pairing raised to the <em>product</em> a&#183;b.
+    </p>
+    <div class="eq">e(aP, bQ) = e(P, Q)<sup>a&#183;b</sup></div>
+    <p>
+      That's the entire superpower. The scalars a and b stay locked behind the
+      discrete log on the curve, but the pairing lets anyone verify that the
+      multiplication a&#183;b happened &#8212; blindly.
+    </p>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;2</span><h2>Verify a product you can't see</h2></div>
+    <p>
+      Set the two secret scalars a and b. On the curve side, all a verifier sees
+      are the scaled points aP and bQ &#8212; the scalars themselves are hidden. Yet
+      feeding those points through the pairing lands on the <em>same</em> field
+      value as taking the base pairing to the power a&#183;b. Watch the two paths
+      meet.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 470" id="pair" role="img"
+             aria-label="Two computation paths that both arrive at e(P,Q) to the power ab, showing the pairing identity."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>a
+          <input type="range" id="aR" min="1" max="10" step="1" value="3">
+        </label>
+        <label>b
+          <input type="range" id="bR" min="1" max="10" step="1" value="5">
+        </label>
+        <div class="readout" id="pread" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        Left path scales the points on the curve, then pairs. Right path pairs
+        first, then exponentiates by a&#183;b. Both land on the <span
+        style="color:var(--teal)">same field element</span> &#8212; that equality is
+        bilinearity. (Values use a toy group so the arithmetic stays small.)
+      </div>
+      <div class="a11y-fallback">
+        <span class="vh" id="pairKb">Keyboard alternative: set scalars a and b, then evaluate both paths.</span>
+        <label>a =
+          <input type="number" id="aIn" value="3" min="1" max="10" step="1" aria-describedby="pairKb">
+        </label>
+        <label>b =
+          <input type="number" id="bIn" value="5" min="1" max="10" step="1">
+        </label>
+        <button id="evalBtn" type="button">Evaluate both paths</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;3</span><h2>Why this unlocks zero-knowledge</h2></div>
+    <p>
+      A <span class="term">zk-SNARK</span> proves a statement is true while
+      revealing nothing but the proof's validity. The final check is almost always
+      a pairing equation: the verifier confirms that certain hidden values satisfy
+      a multiplicative relationship &#8212; that the prover's secret witness makes the
+      circuit's equations balance &#8212; using exactly the identity above. No pairing,
+      no succinct verification.
+    </p>
+    <div class="pull">
+      The discrete log hides the numbers; the pairing checks their product. That
+      is the seam where zero-knowledge lives.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>Under the privacy demos</h3>
+      <p>
+        Pairings extend your <a href="elliptic-curves-real.html">elliptic-curve</a>
+        exhibits into the privacy-preserving landscape:
+        <span style="color:var(--vermilion-soft)">zk-proof-lab</span> and the
+        zero-knowledge work in <span style="color:var(--vermilion-soft)">NullBox</span>
+        rest on pairing-based verification, and identity-based encryption schemes
+        use the same e(aP,bQ) identity to derive keys from names. Where the curve
+        gave you <strong>a hard discrete log</strong>, the pairing gives you
+        <strong>a way to compute across it</strong> without breaking it.
+      </p>
+    </div>
+    <p class="aside">Builds on: <a href="elliptic-curves-real.html" style="color:var(--vermilion)">Elliptic Curves</a>, <a href="group-theory.html" style="color:var(--vermilion)">Group Theory</a>. Bilinearity identity tested in <code>crypto-algebra.js</code>.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script src="crypto-algebra.js"></script>
+<script>
+(function(){
+  "use strict";
+  const CA=window.CryptoAlgebra;
+  const NS="http://www.w3.org/2000/svg";
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const pair=document.getElementById("pair");
+  const pread=document.getElementById("pread");
+  const aR=document.getElementById("aR"), bR=document.getElementById("bR");
+  const aIn=document.getElementById("aIn"), bIn=document.getElementById("bIn");
+
+  const BASE=5, MOD=23; // toy target group: e(P,Q) modelled as BASE in Z_23*
+
+  function node(x,y,label,val,color){
+    const g=mk("g",{});
+    g.appendChild(mk("rect",{x:x-64,y:y-26,width:128,height:52,rx:4,fill:"#1c1c22",stroke:color,"stroke-width":2}));
+    const l=mk("text",{x,y:y-32,fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"11","text-anchor":"middle"});
+    l.textContent=label; g.appendChild(l);
+    const v=mk("text",{x,y:y+7,fill:color,"font-family":"ui-monospace,monospace","font-size":"18","font-weight":"700","text-anchor":"middle"});
+    v.textContent=val; g.appendChild(v);
+    pair.appendChild(g); return g;
+  }
+  function arrow(x1,y1,x2,y2,label){
+    pair.appendChild(mk("line",{x1,y1,x2,y2,stroke:"#F3EEDF","stroke-width":1.8}));
+    const ang=Math.atan2(y2-y1,x2-x1);
+    pair.appendChild(mk("polygon",{points:(x2)+","+(y2)+" "+(x2-10*Math.cos(ang-0.4))+","+(y2-10*Math.sin(ang-0.4))+" "+(x2-10*Math.cos(ang+0.4))+","+(y2-10*Math.sin(ang+0.4)),fill:"#F3EEDF"}));
+    if(label){const t=mk("text",{x:(x1+x2)/2,y:(y1+y2)/2-8,fill:"#D4B765","font-family":"ui-monospace,monospace","font-size":"12","text-anchor":"middle","font-weight":"700"});t.textContent=label;pair.appendChild(t);}
+  }
+
+  function draw(a,b){
+    pair.innerHTML="";
+    const r=CA.pairingCheck(a,b,BASE,MOD);
+    // LEFT PATH: scale points then pair
+    node(150,90,"P, Q (base points)","P, Q","#F3EEDF");
+    arrow(150,116,150,164,"scale by a, b");
+    node(150,190,"aP, bQ (scalars hidden)","aP, bQ","#C85A5A");
+    arrow(150,216,300,300,"pair e(\u00b7,\u00b7)");
+    // RIGHT PATH: pair then exponentiate
+    node(550,90,"e(P, Q) base pairing","e(P,Q) = "+BASE,"#5AC8A0");
+    arrow(550,116,550,164,"raise to a\u00b7b = "+(a*b));
+    node(550,190,"e(P,Q)^(ab)","= "+r.viaProduct,"#5AC8A0");
+    arrow(550,216,400,300,"");
+    // MEETING POINT
+    const meet=node(350,340,"both paths agree",""+r.viaProduct,r.equal?"#5AC8A0":"#C85A5A");
+    // check mark
+    const chk=mk("text",{x:350,y:400,fill:r.equal?"#5AC8A0":"#C85A5A","font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700","text-anchor":"middle"});
+    chk.textContent=r.equal?"\u2713 e(aP,bQ) = e(P,Q)^(ab) = "+r.viaProduct:"mismatch"; pair.appendChild(chk);
+
+    pread.innerHTML="a="+a+", b="+b+" \u00b7 e(aP,bQ) = <b>"+r.viaChain+"</b> = e(P,Q)^"+(a*b)+" = <b>"+r.viaProduct+"</b> "+(r.equal?"<b style='color:#5AC8A0'>\u2713</b>":"\u2717");
+    aIn.value=a; bIn.value=b; aR.value=a; bR.value=b;
+  }
+  function fromSliders(){ draw(+aR.value,+bR.value); }
+  aR.addEventListener("input",fromSliders);
+  bR.addEventListener("input",fromSliders);
+  document.getElementById("evalBtn").addEventListener("click",()=>{
+    let a=parseInt(aIn.value,10), b=parseInt(bIn.value,10);
+    a=Math.max(1,Math.min(10,isNaN(a)?3:a)); b=Math.max(1,Math.min(10,isNaN(b)?5:b));
+    draw(a,b);
+  });
+  draw(3,5);
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

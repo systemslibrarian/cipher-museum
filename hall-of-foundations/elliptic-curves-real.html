@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A gentle first look at the elliptic-curve group law, drawn by hand, before it moves to a finite field.">
+<title>Elliptic Curves over ℝ · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 150 · y² = x³ + ax + b</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">A Gentle First Look</div>
+    <h1>Adding points<br>on a <em>curve</em></h1>
+    <p class="standfirst">
+      Before elliptic curves become the engine of modern cryptography, they are
+      just a graceful loop with one surprising trick: you can add two points on
+      the curve and land on a third. This exhibit introduces that trick slowly,
+      by hand, over the ordinary real numbers.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Start here.</strong> If the finite-field version felt like a jump,
+    this is the on-ramp. Same rule, but drawn smoothly so you can see the
+    geometry before it hides inside a field.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Not an ellipse</h2></div>
+    <p>
+      An <span class="term">elliptic curve</span> is the graph of a cubic in
+      Weierstrass form. The name is a historical hand-me-down from the integrals
+      that measure an ellipse's arc — the curve itself is this looping shape,
+      symmetric across the x-axis.
+    </p>
+    <div class="eq">y² = x³ + ax + b</div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>The chord-and-tangent rule</h2></div>
+    <p>
+      To add points <em>P</em> and <em>Q</em>: draw the line through them, find
+      the third point where it meets the curve, and reflect that across the
+      x-axis. The reflection is <em>P + Q</em>. Tap two points and watch the
+      construction draw itself.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 460" id="stage" role="img"
+             aria-label="Interactive elliptic curve over the reals. Tap points to add them.">
+          <g id="grid"></g>
+          <path id="curvePath" fill="none" stroke="#F3EEDF" stroke-width="2.4"/>
+          <g id="construction"></g>
+          <g id="points"></g>
+        </svg>
+      </div>
+      <div class="lab-bar">
+        <button id="pick">Pick two points</button>
+        <button id="reset" class="ghost">Reset</button>
+        <div class="readout" id="readout">y² = x³ + x + 1 · <b>tap the curve</b></div>
+      </div>
+      <div class="lab-hint">
+        <kbd>tap</kbd> once for <em>P</em>, again for <em>Q</em>. The chord, the
+        third intersection, and the reflection to <em>P+Q</em> all draw in
+        <span style="color:var(--vermilion)">vermilion</span>. Coordinates are
+        computed from the real group law.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§3</span><h2>Why an addition at all?</h2></div>
+    <p>
+      This rule isn't arbitrary — it turns the points of the curve into a
+      <a href="group-theory.html">group</a>, with all the structure that word
+      carries: an identity (the "point at infinity"), inverses (the reflection),
+      and associativity. That group is exactly what cryptography moves into a
+      finite field to build keys on.
+    </p>
+    <div class="pull">
+      A shape becomes a group, and a group becomes a fortress.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this leads</div>
+      <h3>Two doors from here</h3>
+      <p>
+        Follow this into <a href="finite-fields.html">Finite Fields</a> to watch
+        the smooth curve shatter into the scatter that makes the discrete log
+        hard — the security payoff. Or follow it up into
+        <a href="modularity-exhibit.html">The Ground Beneath the Curve</a> to
+        meet the deep number theory of <strong>why these curves are so
+        astonishingly well-behaved</strong>.
+      </p>
+    </div>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var svg = document.getElementById("stage");
+  var NS = "http://www.w3.org/2000/svg";
+  var W = 700, H = 460;
+  var A = 1, B = 1;                 // single connected component
+  var xmin = -1.4, xmax = 3.2, ymin = -4.2, ymax = 4.2;
+  function sx(x){ return (x - xmin)/(xmax - xmin) * W; }
+  function sy(y){ return H - (y - ymin)/(ymax - ymin) * H; }
+  function make(tag, at){ var e=document.createElementNS(NS,tag); for(var k in at)e.setAttribute(k,at[k]); return e; }
+
+  var grid = document.getElementById("grid");
+  function axis(x1,y1,x2,y2,w,op){ grid.appendChild(make("line",{x1:x1,y1:y1,x2:x2,y2:y2,stroke:"#2e2e3a","stroke-width":w,"stroke-opacity":op})); }
+  for (var gx=Math.ceil(xmin); gx<=xmax; gx++) axis(sx(gx),0,sx(gx),H,1, gx===0?0.9:0.35);
+  for (var gy=Math.ceil(ymin); gy<=ymax; gy++) axis(0,sy(gy),W,sy(gy),1, gy===0?0.9:0.35);
+
+  function fx(x){ return x*x*x + A*x + B; }
+  var top=[], bot=[], step=0.012;
+  for (var x=xmin; x<=xmax; x+=step){ var v=fx(x); if(v>=0){ var r=Math.sqrt(v); top.push([x,r]); bot.push([x,-r]); } }
+  var d="";
+  top.forEach(function(p,i){ d += (i?"L":"M")+sx(p[0]).toFixed(1)+" "+sy(p[1]).toFixed(1)+" "; });
+  for (var j=bot.length-1; j>=0; j--){ d += "L"+sx(bot[j][0]).toFixed(1)+" "+sy(bot[j][1]).toFixed(1)+" "; }
+  document.getElementById("curvePath").setAttribute("d", d.trim());
+
+  var cons=document.getElementById("construction"), pts=document.getElementById("points"), readout=document.getElementById("readout");
+  var picks=[];
+  function onCurveNear(px,py){
+    var best=null,bestd=1e9;
+    for (var xx=xmin; xx<=xmax; xx+=0.004){ var v=fx(xx); if(v<0)continue; var r=Math.sqrt(v);
+      [[xx,r],[xx,-r]].forEach(function(c){ var dd=(sx(c[0])-px)*(sx(c[0])-px)+(sy(c[1])-py)*(sy(c[1])-py); if(dd<bestd){bestd=dd;best=c;} }); }
+    return best;
+  }
+  function dot(x,y,color,r){ return make("circle",{cx:sx(x),cy:sy(y),r:r||6,fill:color,stroke:"#1c1c22","stroke-width":2}); }
+  function label(x,y,txt,color){ var t=make("text",{x:sx(x)+11,y:sy(y)-9,fill:color,"font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700"}); t.textContent=txt; return t; }
+  function addPoints(P,Q){
+    var m;
+    if (Math.abs(P[0]-Q[0])<1e-9 && Math.abs(P[1]-Q[1])<1e-9) m=(3*P[0]*P[0]+A)/(2*P[1]);
+    else m=(Q[1]-P[1])/(Q[0]-P[0]);
+    var x3=m*m-P[0]-Q[0], y3=m*(P[0]-x3)-P[1];
+    return { third:[x3,-y3], sum:[x3,y3], slope:m };
+  }
+  function drawConstruction(){
+    cons.innerHTML=""; if(picks.length<2)return;
+    var P=picks[0],Q=picks[1],res=addPoints(P,Q),third=res.third,sum=res.sum,m=res.slope;
+    var yL=P[1]+m*(xmin-P[0]), yR=P[1]+m*(xmax-P[0]);
+    cons.appendChild(make("line",{x1:sx(xmin),y1:sy(yL),x2:sx(xmax),y2:sy(yR),stroke:"#C85A5A","stroke-width":2,"stroke-opacity":0.85}));
+    cons.appendChild(dot(third[0],third[1],"#d98a7a",5));
+    cons.appendChild(make("line",{x1:sx(third[0]),y1:sy(third[1]),x2:sx(sum[0]),y2:sy(sum[1]),stroke:"#C85A5A","stroke-width":1.6,"stroke-dasharray":"4 4","stroke-opacity":0.8}));
+    cons.appendChild(dot(sum[0],sum[1],"#C85A5A",7));
+    cons.appendChild(label(sum[0],sum[1],"P+Q","#C85A5A"));
+    readout.innerHTML="P+Q = ( <b>"+sum[0].toFixed(2)+"</b>, <b>"+sum[1].toFixed(2)+"</b> )";
+  }
+  function redrawPoints(){ pts.innerHTML=""; picks.forEach(function(p,i){ pts.appendChild(dot(p[0],p[1],"#F3EEDF",6)); pts.appendChild(label(p[0],p[1],i===0?"P":"Q","#F3EEDF")); }); }
+  function handle(evt){
+    var rect=svg.getBoundingClientRect();
+    var cx=((evt.touches?evt.touches[0].clientX:evt.clientX)-rect.left)*(W/rect.width);
+    var cy=((evt.touches?evt.touches[0].clientY:evt.clientY)-rect.top)*(H/rect.height);
+    var p=onCurveNear(cx,cy); if(!p)return;
+    if(picks.length>=2){ picks=[]; cons.innerHTML=""; }
+    picks.push(p); redrawPoints();
+    if(picks.length===2) drawConstruction();
+    else readout.innerHTML="P = ( <b>"+p[0].toFixed(2)+"</b>, <b>"+p[1].toFixed(2)+"</b> ) · tap for Q";
+  }
+  svg.addEventListener("click",handle);
+  svg.addEventListener("touchstart",function(e){ e.preventDefault(); handle(e); },{passive:false});
+  document.getElementById("reset").addEventListener("click",function(){ picks=[]; cons.innerHTML=""; pts.innerHTML=""; readout.innerHTML="y² = x³ + x + 1 · <b>tap the curve</b>"; });
+  document.getElementById("pick").addEventListener("click",function(){ picks=[]; var Px=-0.6,Qx=1.2; picks.push([Px,Math.sqrt(fx(Px))]); picks.push([Qx,-Math.sqrt(fx(Qx))]); redrawPoints(); drawConstruction(); });
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

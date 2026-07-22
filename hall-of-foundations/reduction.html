@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What “provably as hard as factoring” actually claims — and what it quietly assumes.">
+<title>Reduction &amp; Proof · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 148 · A ≤ B</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">What "Provably Secure" Actually Claims</div>
+    <h1>Standing on a<br><em>borrowed</em> difficulty</h1>
+    <p class="standfirst">
+      Cryptographers rarely prove a scheme is hard to break. They prove something
+      subtler and stronger: that breaking it would let you solve a problem
+      everyone already believes is hard. Security is borrowed from a difficulty
+      we trust — and the loan is made by a <em>reduction</em>.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>The honest caveat, stated plainly.</strong> "Provably secure" never
+    means "unbreakable." It means "no easier to break than the underlying hard
+    problem." If that problem falls, so does the scheme. The proof moves the
+    risk; it doesn't erase it.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>The contrapositive machine</h2></div>
+    <p>
+      A <span class="term">reduction</span> is an argument by contradiction. To
+      show a scheme is at least as hard as factoring, you assume an attacker who
+      breaks the scheme — and then use that attacker as a tool to factor. Since
+      factoring is believed impossible-in-practice, the attacker must be too.
+      Trace the logic below.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 420" id="red" role="img"
+             aria-label="A reduction: a scheme-breaker is used to build a factoring machine."></svg>
+      </div>
+      <div class="lab-bar">
+        <button id="play">Run the reduction</button>
+        <button id="rreset" class="ghost">Reset</button>
+        <div class="readout" id="rread">Suppose a break exists…</div>
+      </div>
+      <div class="lab-hint">
+        Read it as a machine: feed a hard factoring instance in, wrap it as a
+        fake scheme challenge, let the hypothetical breaker crack it, and read
+        the factors back out. If the breaker is fast, factoring is fast — a
+        contradiction.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>The chain of trust</h2></div>
+    <p>
+      This is why the whole edifice hangs together. Each scheme reduces to a hard
+      problem; break the scheme and you'd break the problem beneath it. The
+      difficulty flows downhill from a small set of assumptions everyone watches
+      closely.
+    </p>
+    <ul class="ladder">
+      <li><span class="rung">RSA<span>reduces to</span></span><span class="gloss">the hardness of factoring large integers.</span></li>
+      <li><span class="rung">ECC · DH<span>reduces to</span></span><span class="gloss">the discrete logarithm problem in a group.</span></li>
+      <li><span class="rung">Kyber · Dilithium<span>reduces to</span></span><span class="gloss">worst-case lattice problems like the SVP.</span></li>
+    </ul>
+    <div class="pull">
+      A proof of security is a promise: to break me, you must first break
+      something older and better-studied than me.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>Why the Lab trusts its primitives</h3>
+      <p>
+        When a Crypto Lab demo claims a security level, that claim is a
+        reduction to one of the hard problems in this hall. It's also why
+        <strong>assumptions matter more than cleverness</strong>: a scheme with a
+        tight reduction to lattices is trusted not because it looks complex, but
+        because its difficulty is anchored to a problem the world has failed to
+        solve for decades.
+      </p>
+    </div>
+    <p class="aside">Foundations referenced here: <a href="one-way-function.html" style="color:var(--vermilion)">One-Way Functions</a>, <a href="lattices-svp.html" style="color:var(--vermilion)">Lattices &amp; the SVP</a>.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var red=document.getElementById("red"), rread=document.getElementById("rread");
+
+  var steps=[
+    {box:"factoring\ninstance n",x:90,color:"#F3EEDF",note:"Start with a hard problem: factor n."},
+    {box:"wrap as fake\nscheme challenge",x:270,color:"#D4B765",note:"Disguise n as a challenge for the scheme."},
+    {box:"the BREAKER\n(hypothetical)",x:450,color:"#C85A5A",note:"Hand it to the attacker who 'breaks' the scheme."},
+    {box:"read off\np and q",x:630,color:"#5AC8A0",note:"Its answer hands you the factors. Contradiction."}
+  ];
+
+  function drawUpTo(n){
+    red.innerHTML="";
+    var y=210;
+    for(var i=0;i<steps.length;i++){
+      var s=steps[i], active=(i<n);
+      var op=active?1:0.22;
+      // connector
+      if(i>0){
+        var prev=steps[i-1];
+        red.appendChild(el("line",{x1:prev.x+62,y1:y,x2:s.x-62,y2:y,
+          stroke:"#F3EEDF","stroke-width":2,"stroke-opacity":active?0.9:0.15}));
+        if(active) red.appendChild(el("polygon",{points:(s.x-62)+","+y+" "+(s.x-74)+","+(y-6)+" "+(s.x-74)+","+(y+6),fill:"#F3EEDF"}));
+      }
+      var g=el("g",{opacity:op});
+      g.appendChild(el("circle",{cx:s.x,cy:y,r:56,fill:"#1c1c22",stroke:s.color,"stroke-width":2.5}));
+      var lines=s.box.split("\n");
+      lines.forEach(function(ln,li){
+        var t=el("text",{x:s.x,y:y-6+li*18,fill:s.color,"font-family":"ui-monospace,monospace",
+          "font-size":"12","font-weight":"700","text-anchor":"middle"});
+        t.textContent=ln; g.appendChild(t);
+      });
+      red.appendChild(g);
+    }
+    rread.textContent = n>0 ? steps[Math.min(n-1,3)].note : "Suppose a break exists…";
+  }
+
+  var cur=0, iv=null;
+  document.getElementById("play").addEventListener("click",function(){
+    if(iv)clearInterval(iv); cur=0;
+    iv=setInterval(function(){ cur++; drawUpTo(cur); if(cur>=steps.length)clearInterval(iv); },700);
+  });
+  document.getElementById("rreset").addEventListener("click",function(){ if(iv)clearInterval(iv); cur=0; drawUpTo(0); });
+  drawUpTo(0);
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

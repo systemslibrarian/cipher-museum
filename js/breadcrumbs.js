@@ -10,7 +10,7 @@
   var parts = path.split('/').filter(Boolean);
   var pageName = parts[parts.length - 1] || 'index.html';
   var parentDir = parts.length > 1 ? parts[parts.length - 2] : '';
-  var inSub = ['ciphers','halls','tours','lab','community'].indexOf(parentDir) !== -1;
+  var inSub = ['ciphers','halls','tours','lab','community','hall-of-foundations'].indexOf(parentDir) !== -1;
   var pre = inSub ? '../' : '';
 
   /* Map of directory → breadcrumb segment */

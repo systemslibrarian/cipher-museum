@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Shannon’s measure of surprise: why the one-time pad is perfect and why key length is destiny.">
+<title>Information &amp; Entropy · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 151 · H = −Σ p log p</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Measure of Surprise</div>
+    <h1>Counting what<br>you <em>don't</em> know</h1>
+    <p class="standfirst">
+      Shannon gave uncertainty a number. Entropy measures how surprising a
+      source is — how many bits of genuine unknowing it holds. It's why the
+      one-time pad is provably unbreakable, and why a weak password falls in
+      seconds regardless of how the cipher is built.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Secrecy is bounded by surprise.</strong> No cipher can protect a key
+    that wasn't surprising to begin with. Entropy is the ceiling on security —
+    everything else is just not wasting it.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Bits of the unknown</h2></div>
+    <p>
+      A fair coin holds exactly one bit of entropy: two outcomes, equally likely.
+      Bias the coin and the entropy drops — a coin that's 90% heads barely
+      surprises you. Drag the bias and watch the entropy fall from its peak.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 380" id="hcurve" role="img"
+             aria-label="Entropy of a biased coin as bias varies."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>P(heads)
+          <input type="range" id="pr" min="1" max="99" step="1" value="50">
+        </label>
+        <div class="readout" id="hread">—</div>
+      </div>
+      <div class="lab-hint">
+        Entropy peaks at <b>1 bit</b> when the coin is fair and collapses toward
+        <b>0</b> as it becomes predictable. Maximum uncertainty means maximum
+        secrecy-carrying capacity.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>Why key length is destiny</h2></div>
+    <p>
+      Every character of a password or key adds entropy — but only as much as its
+      alphabet allows. The comparison below shows how fast real key strength grows
+      with length and character set. This is the arithmetic behind every "use a
+      longer passphrase" warning.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 340" id="keybar" role="img"
+             aria-label="Entropy in bits for different password lengths and alphabets."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>length
+          <input type="range" id="lr" min="4" max="24" step="1" value="12">
+        </label>
+        <div class="readout" id="kread">—</div>
+      </div>
+      <div class="lab-hint">
+        Bars show total entropy in bits for three alphabets. As a rule of thumb,
+        <b>128 bits</b> is the modern floor for a symmetric key — the dotted line.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§3</span><h2>The one-time pad's perfect secret</h2></div>
+    <p>
+      Shannon proved that if your key is truly random, at least as long as the
+      message, and never reused, the ciphertext reveals <em>nothing</em> —
+      perfect secrecy, unbreakable even with infinite computing power. The catch
+      is entropy: you need as many truly random bits as message bits, which is
+      exactly why the pad is rarely practical.
+    </p>
+    <div class="pull">
+      Perfect secrecy exists. It just costs one bit of true randomness for every
+      bit you want to hide.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The ceiling on everything</h3>
+      <p>
+        The Crypto Lab's RANDOMNESS category lives here. A cipher fed a
+        low-entropy key is broken before the algorithm runs — the attacker just
+        searches the small space of likely keys. Entropy is why
+        <strong>the random number generator matters as much as the cipher</strong>,
+        and why "128-bit security" is a statement about surprise, not about
+        arithmetic difficulty.
+      </p>
+    </div>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+  // ---- §1 entropy curve ----
+  var hcurve=document.getElementById("hcurve"), pr=document.getElementById("pr"), hread=document.getElementById("hread");
+  function H2(p){ if(p<=0||p>=1)return 0; return -(p*Math.log2(p)+(1-p)*Math.log2(1-p)); }
+  function drawH(){
+    var W=700,H=380,pad=48; hcurve.innerHTML="";
+    function px(p){return pad+p*(W-2*pad);}
+    function py(v){return H-pad-(v/1.05)*(H-2*pad);}
+    hcurve.appendChild(el("line",{x1:pad,y1:H-pad,x2:W-pad,y2:H-pad,stroke:"#F3EEDF","stroke-width":1.5}));
+    hcurve.appendChild(el("line",{x1:pad,y1:pad,x2:pad,y2:H-pad,stroke:"#F3EEDF","stroke-width":1.5}));
+    var d="";
+    for(var p=0.001;p<1;p+=0.004){ d+=(d?"L":"M")+px(p).toFixed(1)+" "+py(H2(p)).toFixed(1)+" "; }
+    hcurve.appendChild(el("path",{d:d.trim(),fill:"none",stroke:"#5AC8A0","stroke-width":2.6}));
+    var cp=+pr.value/100, cy=H2(cp);
+    hcurve.appendChild(el("line",{x1:px(cp),y1:H-pad,x2:px(cp),y2:py(cy),stroke:"#C85A5A","stroke-width":1.5,"stroke-dasharray":"4 4"}));
+    hcurve.appendChild(el("circle",{cx:px(cp),cy:py(cy),r:7,fill:"#C85A5A",stroke:"#1c1c22","stroke-width":2}));
+    var l1=el("text",{x:px(0.5),y:py(1)-12,fill:"#5AC8A0","font-family":"ui-monospace,monospace","font-size":"12","text-anchor":"middle","font-weight":"700"});
+    l1.textContent="1 bit (fair)"; hcurve.appendChild(l1);
+    hread.innerHTML="P(heads) = <b>"+cp.toFixed(2)+"</b> · entropy = <b>"+cy.toFixed(3)+"</b> bits";
+  }
+  pr.addEventListener("input",drawH); drawH();
+
+  // ---- §2 key bars ----
+  var keybar=document.getElementById("keybar"), lr=document.getElementById("lr"), kread=document.getElementById("kread");
+  var sets=[{name:"digits (10)",n:10,c:"#D4B765"},{name:"lower (26)",n:26,c:"#5AC8A0"},{name:"full ASCII (94)",n:94,c:"#C85A5A"}];
+  function drawKeys(){
+    var W=700,H=340,pad=54; keybar.innerHTML="";
+    var L=+lr.value;
+    var vals=sets.map(function(s){return L*Math.log2(s.n);});
+    var maxV=Math.max(256, Math.max.apply(null,vals)*1.1);
+    function by(v){return (v/maxV)*(H-2*pad);}
+    keybar.appendChild(el("line",{x1:pad,y1:H-pad,x2:W-pad,y2:H-pad,stroke:"#F3EEDF","stroke-width":1.5}));
+    // 128-bit floor line
+    var floorY=H-pad-by(128);
+    keybar.appendChild(el("line",{x1:pad,y1:floorY,x2:W-pad,y2:floorY,stroke:"#F3EEDF","stroke-width":1.2,"stroke-dasharray":"5 5","stroke-opacity":0.6}));
+    var ft=el("text",{x:W-pad,y:floorY-6,fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"11","text-anchor":"end"});
+    ft.textContent="128-bit floor"; keybar.appendChild(ft);
+    var bw=110, gap=90, x0=140;
+    sets.forEach(function(s,i){
+      var v=vals[i], h=by(v), x=x0+i*(bw+gap);
+      keybar.appendChild(el("rect",{x:x,y:H-pad-h,width:bw,height:h,fill:s.c,"fill-opacity":v>=128?1:0.55}));
+      var vt=el("text",{x:x+bw/2,y:H-pad-h-8,fill:s.c,"font-family":"ui-monospace,monospace","font-size":"14","text-anchor":"middle","font-weight":"700"});
+      vt.textContent=Math.round(v)+" b"; keybar.appendChild(vt);
+      var nt=el("text",{x:x+bw/2,y:H-pad+20,fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"11","text-anchor":"middle"});
+      nt.textContent=s.name; keybar.appendChild(nt);
+    });
+    kread.innerHTML="length <b>"+L+"</b> · full-ASCII ≈ <b>"+Math.round(vals[2])+"</b> bits "+(vals[2]>=128?"✓":"(below floor)");
+  }
+  lr.addEventListener("input",drawKeys); drawKeys();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

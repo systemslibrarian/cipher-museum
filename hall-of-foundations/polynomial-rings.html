@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The polynomial ring R_q = Z_q[X]/(Xⁿ+1) — the structured lattice inside ML-KEM and ML-DSA.">
+<title>Polynomial Rings &#183; Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">&#8592; Hall of Foundations</a>
+    <span class="hall">Exhibit 153 &#183; R_q = Z_q[X]/(X&#8319;+1)</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Structure Inside ML-KEM &amp; ML-DSA</div>
+    <h1>Numbers that<br>are <em>polynomials</em></h1>
+    <p class="standfirst">
+      The lattice exhibits showed why hard problems on a grid protect a key. But
+      the deployed post-quantum standards don't use plain grids &#8212; they use
+      lattices built from <em>polynomials</em>, where a whole list of numbers
+      multiplies as a single object and wraps around a ring boundary. That
+      structure is what makes ML-KEM fast enough to ship.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>The missing bridge.</strong> Between the finite-fields exhibit
+    (numbers mod q) and the lattice exhibits (geometry) sits this: arithmetic on
+    polynomials whose coefficients are numbers mod q, and which themselves wrap
+    modulo X&#8319;+1. Module-LWE &#8212; the real hardness assumption under Kyber and
+    Dilithium &#8212; lives in exactly this ring.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;1</span><h2>A coefficient list that acts as one number</h2></div>
+    <p>
+      A polynomial like 3 + 2X + 5X&#178; + X&#179; is just its list of coefficients,
+      [3, 2, 5, 1]. In the ring <span class="term">R_q = Z_q[X]/(X&#8319;+1)</span>
+      two rules apply: every coefficient is reduced <em>mod q</em>, and any power
+      X&#8319; or higher wraps back down &#8212; because X&#8319; is defined to equal &#8722;1.
+      That single rule, X&#8319; = &#8722;1, is what makes the ring "negacyclic."
+    </p>
+    <div class="eq">X&#8319; = &#8722;1 &nbsp;&#8594;&nbsp; X&#8319;&#8314;&#7503; wraps to &#8722;X&#7503;, coefficients mod q</div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;2</span><h2>Watch the multiplication wrap</h2></div>
+    <p>
+      Multiplying two polynomials would normally push degrees up to 2n&#8722;2. The
+      ring folds everything above degree n&#8722;1 back down with a sign flip, and
+      reduces mod q, so the product is another length-n list. Edit either
+      polynomial's coefficients and watch the product &#8212; and the terms that
+      wrapped &#8212; recompute.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 470" id="ring" role="img"
+             aria-label="Polynomial multiplication in a ring, showing terms wrapping around the modulus."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>n
+          <select id="nsel"><option value="4" selected>4</option><option value="8">8</option></select>
+        </label>
+        <label>q
+          <select id="qsel"><option value="17" selected>17</option><option value="97">97</option></select>
+        </label>
+        <button id="rand">Randomize</button>
+        <div class="readout" id="rread" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        <span style="color:var(--teal)">Teal</span> terms landed in place; the
+        <span style="color:var(--vermilion)">vermilion</span> arc shows terms
+        that exceeded degree n&#8722;1 and <b>wrapped with a sign flip</b> (X&#8319; = &#8722;1).
+        Edit coefficients with the fields below.
+      </div>
+      <div class="a11y-fallback">
+        <span class="vh" id="ringKb">Keyboard alternative: enter comma-separated coefficients for polynomials a and b, then multiply.</span>
+        <label>a =
+          <input type="text" id="aIn" value="1,2,3,4" size="12" aria-describedby="ringKb">
+        </label>
+        <label>b =
+          <input type="text" id="bIn" value="0,1,0,1" size="12">
+        </label>
+        <button id="mulBtn" type="button">Multiply in R_q</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;3</span><h2>Why a ring and not just a grid</h2></div>
+    <p>
+      A single ring element already packs n numbers. Stack a few of them into a
+      <em>module</em> and you have a lattice with enormous dimension but a tiny,
+      structured description &#8212; you store a handful of polynomials, not a giant
+      matrix. That compression is the difference between a post-quantum scheme
+      that's a research curiosity and one that fits in a TLS handshake.
+    </p>
+    <div class="pull">
+      The polynomial ring is how you get a thousand-dimensional lattice into a
+      few kilobytes &#8212; security from geometry, efficiency from structure.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The arithmetic inside every ML-KEM operation</h3>
+      <p>
+        <strong>ML-KEM</strong> and <strong>ML-DSA</strong> spend nearly all
+        their time doing exactly this: multiplying polynomials in R_q, accelerated
+        by the Number Theoretic Transform. Your
+        <span style="color:var(--vermilion-soft)">kyber-vault</span> and
+        <span style="color:var(--vermilion-soft)">dilithium-seal</span> demos are
+        built on Module-LWE, which is the <a href="closest-vector.html">LWE
+        problem</a> transplanted from plain vectors into this ring. This exhibit
+        is the structure those primitives are made of.
+      </p>
+    </div>
+    <p class="aside">Bridges: <a href="finite-fields.html" style="color:var(--vermilion)">Finite Fields</a> (coefficients mod q) &#8594; here &#8594; <a href="lattices-svp.html" style="color:var(--vermilion)">Lattices</a> (the geometry). Tested logic in <code>crypto-algebra.js</code>.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script src="crypto-algebra.js"></script>
+<script>
+(function(){
+  "use strict";
+  const CA=window.CryptoAlgebra;
+  const NS="http://www.w3.org/2000/svg";
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const ring=document.getElementById("ring");
+  const rread=document.getElementById("rread");
+  const nsel=document.getElementById("nsel"), qsel=document.getElementById("qsel");
+  const aIn=document.getElementById("aIn"), bIn=document.getElementById("bIn");
+
+  let n=4, q=17, A=[1,2,3,4], B=[0,1,0,1];
+
+  function parse(str,len){
+    const parts=str.split(",").map(s=>parseInt(s.trim(),10));
+    const out=new Array(len).fill(0);
+    for(let i=0;i<len;i++) out[i]=isNaN(parts[i])?0:CA.mod(parts[i],q);
+    return out;
+  }
+
+  // compute product AND track which product terms came from a wrap (deg>=n)
+  function mulTraced(a,b){
+    const c=new Array(n).fill(0), wrapped=new Array(n).fill(false);
+    for(let i=0;i<n;i++)for(let j=0;j<n;j++){
+      let k=i+j, sign=1;
+      if(k>=n){k-=n; sign=-1; wrapped[k]=true;}
+      c[k]=CA.mod(c[k]+sign*a[i]*b[j],q);
+    }
+    return {c,wrapped};
+  }
+
+  function draw(){
+    ring.innerHTML="";
+    const W=700, colX=90, colGap=250, rowY=80, rowGap=44, boxW=190;
+    // headers
+    const head=(x,label,color)=>{const t=mk("text",{x,y:50,fill:color||"#F3EEDF","font-family":"ui-monospace,monospace","font-size":"14","font-weight":"700"});t.textContent=label;ring.appendChild(t);};
+    head(colX,"a(X)"); head(colX+colGap,"b(X)"); head(colX+2*colGap,"a\u00b7b in R_q","#C85A5A");
+
+    const {c,wrapped}=mulTraced(A,B);
+    // draw coefficient rows for A, B, C
+    function col(x,arr,wrapMark){
+      for(let i=0;i<n;i++){
+        const y=rowY+i*rowGap;
+        const wrap=wrapMark&&wrapMark[i];
+        ring.appendChild(mk("rect",{x:x-30,y:y-20,width:boxW,height:32,rx:3,
+          fill:"#1c1c22",stroke:wrap?"#C85A5A":"#2e2e3a","stroke-width":wrap?2:1}));
+        const deg=mk("text",{x:x-20,y:y+2,fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"12"});
+        deg.textContent="X"+(i===0?"\u2070":i===1?"\u00b9":i===2?"\u00b2":i===3?"\u00b3":"^"+i); ring.appendChild(deg);
+        const v=mk("text",{x:x+30,y:y+2,fill:wrap?"#C85A5A":"#F3EEDF","font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700"});
+        v.textContent=arr[i]; ring.appendChild(v);
+        if(wrap){
+          const tag=mk("text",{x:x+70,y:y+2,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"11"});
+          tag.textContent="\u21b5 wrapped"; ring.appendChild(tag);
+        }
+      }
+    }
+    col(colX,A,null); col(colX+colGap,B,null); col(colX+2*colGap,c,wrapped);
+    // wrap illustration arc
+    const anyWrap=wrapped.some(Boolean);
+    if(anyWrap){
+      const note=mk("text",{x:colX+2*colGap-30,y:rowY+n*rowGap+8,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"12"});
+      note.textContent="X\u207f = \u22121, so high-degree terms fold back with a sign flip";
+      ring.appendChild(note);
+    }
+    rread.innerHTML="a\u00b7b = [ <b>"+c.join(", ")+"</b> ] in Z_"+q+"[X]/(X"+(n===4?"\u2074":"^"+n)+"+1)";
+    aIn.value=A.join(","); bIn.value=B.join(",");
+  }
+
+  function reparse(){ A=parse(aIn.value,n); B=parse(bIn.value,n); draw(); }
+  nsel.addEventListener("change",()=>{ n=+nsel.value; A=parse(aIn.value,n); B=parse(bIn.value,n); draw(); });
+  qsel.addEventListener("change",()=>{ q=+qsel.value; A=A.map(v=>CA.mod(v,q)); B=B.map(v=>CA.mod(v,q)); draw(); });
+  document.getElementById("mulBtn").addEventListener("click",reparse);
+  document.getElementById("rand").addEventListener("click",()=>{
+    A=Array.from({length:n},()=>Math.floor(Math.random()*q));
+    B=Array.from({length:n},()=>Math.floor(Math.random()*q));
+    draw();
+  });
+  draw();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

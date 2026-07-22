@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The little theorem that makes RSA decryption undo RSA encryption. Watch a message round-trip.">
+<title>Euler &amp; Fermat · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 145 · aᵠ⁽ⁿ⁾ ≡ 1</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Engine of RSA Decryption</div>
+    <h1>Why RSA<br><em>undoes itself</em></h1>
+    <p class="standfirst">
+      RSA encrypts by raising a message to a power, and decrypts by raising the
+      result to another. That these two operations cancel — that you land back
+      on the exact message you started with — is not luck. It's a 400-year-old
+      theorem of Fermat, generalized by Euler.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Small but essential.</strong> This is the shortest exhibit in the
+    hall, because the idea is compact: one congruence explains why RSA works at
+    all. Watch a real message make the round trip below.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Fermat's little theorem</h2></div>
+    <p>
+      For any prime <em>p</em> and any <em>a</em> not divisible by <em>p</em>,
+      raising <em>a</em> to the (p−1) power lands exactly on 1, modulo <em>p</em>.
+      Every base, no exceptions.
+    </p>
+    <div class="eq">aᵖ⁻¹ ≡ 1 (mod p)</div>
+    <p>
+      Euler generalized it from primes to any modulus <em>n</em>, replacing p−1
+      with φ(n) — the count of numbers below <em>n</em> that share no factor with
+      it. This is the version RSA runs on.
+    </p>
+    <div class="eq">a<sup>φ(n)</sup> ≡ 1 (mod n) &nbsp;when gcd(a, n) = 1</div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>The round trip</h2></div>
+    <p>
+      RSA picks exponents <em>e</em> and <em>d</em> that are inverses modulo φ(n),
+      so that e·d ≡ 1. Then encrypting (raise to <em>e</em>) and decrypting (raise
+      to <em>d</em>) compose to raising by e·d — which, by Euler's theorem, does
+      nothing at all. The message returns untouched. Type a small number and send
+      it through.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 300" id="trip" role="img"
+             aria-label="A message encrypted then decrypted, returning to itself."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>message m
+          <input type="range" id="mr" min="2" max="3231" step="1" value="65">
+        </label>
+        <button id="send">Encrypt → Decrypt</button>
+        <div class="readout" id="tread">—</div>
+      </div>
+      <div class="lab-hint">
+        Toy key: p = 61, q = 53, n = 3233, e = 17, d = 2753. Real RSA uses the
+        same arithmetic with a 2048-bit <em>n</em>. The ciphertext is genuine
+        modular exponentiation, computed live.
+      </div>
+    </div>
+
+    <div class="pull">
+      Encryption and decryption aren't opposites by design — they're opposites
+      by theorem.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The reason the mailbox opens</h3>
+      <p>
+        The security of RSA rests on factoring being hard (see
+        <a href="one-way-function.html">The One-Way Function</a>). But its
+        <strong>correctness</strong> — the promise that the right key recovers
+        the message — rests entirely here, on Euler's theorem. Hardness keeps
+        the attacker out; this theorem lets the owner back in.
+      </p>
+    </div>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function powmod(a,e,m){var r=1;a%=m;while(e>0){if(e&1)r=(r*a)%m;a=(a*a)%m;e=Math.floor(e/2);}return r;}
+  var n=3233,e=17,d=2753;
+
+  var trip=document.getElementById("trip"), mr=document.getElementById("mr"), tread=document.getElementById("tread");
+
+  function stageNode(x,label,val,color){
+    var g=el("g",{});
+    g.appendChild(el("rect",{x:x-70,y:110,width:140,height:80,rx:4,
+      fill:"#1c1c22",stroke:color,"stroke-width":2}));
+    var l=el("text",{x:x,y:100,fill:"#D5CDDF","font-family":"ui-monospace,monospace",
+      "font-size":"12","text-anchor":"middle"}); l.textContent=label;
+    var v=el("text",{x:x,y:158,fill:color,"font-family":"ui-monospace,monospace",
+      "font-size":"26","font-weight":"700","text-anchor":"middle"}); v.textContent=val;
+    g.appendChild(l); g.appendChild(v); return g;
+  }
+  function arrow(x1,x2,label){
+    var g=el("g",{});
+    g.appendChild(el("line",{x1:x1,y1:150,x2:x2,y2:150,stroke:"#F3EEDF","stroke-width":2}));
+    g.appendChild(el("polygon",{points:(x2)+",150 "+(x2-10)+",144 "+(x2-10)+",156",fill:"#F3EEDF"}));
+    var t=el("text",{x:(x1+x2)/2,y:138,fill:"#C85A5A","font-family":"ui-monospace,monospace",
+      "font-size":"13","font-weight":"700","text-anchor":"middle"}); t.textContent=label;
+    g.appendChild(t); return g;
+  }
+
+  function draw(animate){
+    var m=+mr.value;
+    var c=powmod(m,e,n);
+    var back=powmod(c,d,n);
+    trip.innerHTML="";
+    trip.appendChild(stageNode(120,"message m",m,"#F3EEDF"));
+    trip.appendChild(arrow(200,340,"^"+e+" mod n"));
+    trip.appendChild(stageNode(410,"ciphertext",c,"#C85A5A"));
+    trip.appendChild(arrow(490,630,"^"+d+" mod n"));
+    trip.appendChild(stageNode(580,"recovered",back,"#5AC8A0"));
+    tread.innerHTML="m = <b>"+m+"</b> → c = <b>"+c+"</b> → <b style='color:#5AC8A0'>"+back+"</b> "+(back===m?"✓":"✗");
+  }
+  mr.addEventListener("input",function(){ draw(false); });
+  document.getElementById("send").addEventListener("click",function(){ draw(true); });
+  draw(false);
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

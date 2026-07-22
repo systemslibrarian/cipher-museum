@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Multiply in a blink; factor and sweat — the one-way function, conceptual keystone of modern cryptography.">
+<title>The One-Way Function · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 146 · easy → · hard ←</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Conceptual Keystone</div>
+    <h1>Easy one way,<br><em>hard</em> the other</h1>
+    <p class="standfirst">
+      Strip cryptography down to a single idea and this is what remains: a
+      function anyone can compute forward, but no one can practically reverse.
+      Every cipher, signature, and key exchange in the building is downstream
+      of this one asymmetry.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>An assumption, not a proof.</strong> We <em>believe</em> these
+    functions are hard to reverse; we cannot prove it. All of public-key
+    cryptography is a bet that certain problems have no fast solution. So far,
+    the bet has held.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Multiply, then try to undo it</h2></div>
+    <p>
+      The friendliest one-way function is multiplication of primes. Multiplying
+      two large primes is instant. Recovering them from the product — factoring —
+      is, as far as anyone knows, brutally slow. Move the slider to enlarge the
+      primes and watch the two costs diverge.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 380" id="owf" role="img"
+             aria-label="Cost of multiplying versus factoring as numbers grow."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>size (bits)
+          <input type="range" id="br" min="4" max="48" step="1" value="16">
+        </label>
+        <button id="fac">Factor it (watch it crawl)</button>
+        <div class="readout" id="oread">—</div>
+      </div>
+      <div class="lab-hint">
+        Forward stays flat and fast. The factoring bar climbs exponentially —
+        and this is only tens of bits. Real keys use <b>2048</b>. The factoring
+        here is a live trial-division counter, not a simulation.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>The trapdoor twist</h2></div>
+    <p>
+      A plain one-way function locks the door for everyone. Cryptography needs a
+      little more: a <span class="term">trapdoor</span> — a secret that makes the
+      reverse easy for the one who holds it. In RSA, knowing the two primes is the
+      trapdoor; without them you factor, with them you divide.
+    </p>
+    <div class="eq">public: n = p·q &nbsp;·&nbsp; trapdoor: the pair (p, q)</div>
+    <p>
+      That is the shape of every public-key scheme: a wall everyone faces, with a
+      hidden gate only the key-holder can walk through.
+    </p>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The bet under everything</h3>
+      <p>
+        RSA bets on factoring. Diffie–Hellman and ECC bet on discrete logs.
+        The post-quantum schemes in the Crypto Lab bet on
+        <a href="lattices-svp.html">lattice problems</a> instead — because a
+        quantum computer would win the factoring and discrete-log bets. Different
+        walls, same architecture: <strong>easy forward, hard back, secret gate.</strong>
+      </p>
+    </div>
+    <p class="aside">Next: <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a> — how we argue one wall is at least as tall as another.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function randPrime(bits){
+    var lo=Math.pow(2,bits-1), hi=Math.pow(2,bits)-1;
+    function isP(n){if(n<2)return false;for(var i=2;i*i<=n;i++)if(n%i===0)return false;return true;}
+    for(var tries=0;tries<9999;tries++){var c=Math.floor(lo+Math.random()*(hi-lo));c|=1;if(isP(c))return c;}
+    return 3;
+  }
+  var owf=document.getElementById("owf"), br=document.getElementById("br"), oread=document.getElementById("oread");
+  var W=700,H=380,pad=54;
+
+  function draw(){
+    var bits=+br.value; owf.innerHTML="";
+    var half=Math.max(2,Math.floor(bits/2));
+    var p=randPrime(half), q=randPrime(half), n=p*q;
+    // forward cost ~ constant; factoring cost ~ sqrt(n) trial divisions (worst case bar)
+    var fwd=1;
+    var facCost=Math.sqrt(n);
+    var maxBar=Math.sqrt(Math.pow(2,48));
+    function barH(v){ return Math.min(1, Math.log(v+1)/Math.log(maxBar+1))*(H-2*pad); }
+    owf.appendChild(el("line",{x1:pad,y1:H-pad,x2:W-pad,y2:H-pad,stroke:"#F3EEDF","stroke-width":1.5}));
+    // forward bar
+    var fh=Math.max(6,barH(fwd));
+    owf.appendChild(el("rect",{x:180,y:H-pad-fh,width:120,height:fh,fill:"#5AC8A0"}));
+    var t1=el("text",{x:240,y:H-pad+22,fill:"#5AC8A0","font-family":"ui-monospace,monospace","font-size":"13","text-anchor":"middle","font-weight":"700"});
+    t1.textContent="multiply"; owf.appendChild(t1);
+    // factor bar
+    var gh=Math.max(6,barH(facCost));
+    owf.appendChild(el("rect",{x:400,y:H-pad-gh,width:120,height:gh,fill:"#C85A5A"}));
+    var t2=el("text",{x:460,y:H-pad+22,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"13","text-anchor":"middle","font-weight":"700"});
+    t2.textContent="factor"; owf.appendChild(t2);
+    // n label
+    var tn=el("text",{x:W/2,y:pad-14,fill:"#F3EEDF","font-family":"ui-monospace,monospace","font-size":"15","text-anchor":"middle","font-weight":"700"});
+    tn.textContent=p+" × "+q+" = "+n; owf.appendChild(tn);
+    oread.innerHTML="n = <b>"+n+"</b> ("+bits+" bits) · factor cost ≈ √n ≈ <b>"+Math.round(facCost)+"</b> steps";
+    owf._current={n:n,p:p,q:q};
+  }
+  function runFactor(){
+    var st=owf._current; if(!st)return; var n=st.n, count=0, found=null;
+    for(var i=2;i*i<=n;i++){ count++; if(n%i===0){ found=[i,n/i]; break; } }
+    oread.innerHTML="factored n = <b>"+n+"</b> = "+found[0]+" × "+found[1]+" after <b>"+count+"</b> trial divisions";
+  }
+  br.addEventListener("input",draw);
+  document.getElementById("fac").addEventListener("click",runFactor);
+  draw();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

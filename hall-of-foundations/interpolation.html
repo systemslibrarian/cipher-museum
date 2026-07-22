@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Drag points until the curve locks and the secret intercept appears — the heart of Shamir’s Secret Sharing.">
+<title>Polynomial Interpolation &#183; Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">&#8592; Hall of Foundations</a>
+    <span class="hall">Exhibit 155 &#183; k points fix a curve</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Math Behind Splitting a Secret</div>
+    <h1>Points that<br><em>lock</em> a curve</h1>
+    <p class="standfirst">
+      Two points determine a line. Three determine a parabola. In general, k
+      points pin down exactly one polynomial of degree k&#8722;1 &#8212; and any fewer
+      leave it free to be anything. That rigidity is the whole trick behind
+      sharing a secret among many people so that only a quorum can recover it.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Secrecy from geometry.</strong> Hide a secret as a curve's height at
+    x = 0. Hand out points on the curve as "shares." Below the threshold, the
+    curve &#8212; and the secret &#8212; could be anything. At the threshold, it snaps
+    into place.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;1</span><h2>Drop points, watch the curve commit</h2></div>
+    <p>
+      The secret is the <span style="color:var(--vermilion)">height where the
+      curve crosses x = 0</span>. Add points one at a time. With too few, infinitely
+      many curves fit &#8212; the secret is unknowable. The moment you place the k-th
+      point, a single polynomial locks in and the intercept is revealed.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 480" id="interp" role="img"
+             aria-label="Points on a graph; when enough are placed a unique polynomial locks in and reveals the y-intercept secret."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>threshold k
+          <select id="ksel"><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select>
+        </label>
+        <button id="addPt">Add a share</button>
+        <button id="clr" class="ghost">Clear</button>
+        <div class="readout" id="iread" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        Each <span style="color:var(--ink)">ink dot</span> is a share. Below k
+        shares the <span style="color:var(--muted)">grey ghost curves</span> show
+        some of the many polynomials that still fit. At k shares the
+        <span style="color:var(--vermilion)">vermilion curve</span> is the unique
+        answer and the secret intercept appears. Drag any dot to move it.
+      </div>
+      <div class="a11y-fallback">
+        <span class="vh" id="interpKb">Keyboard alternative: add a share at a chosen x by entering it here.</span>
+        <label>add share at x =
+          <input type="number" id="xIn" value="1" min="1" max="6" step="1" aria-describedby="interpKb">
+        </label>
+        <button id="addAt" type="button">Add share</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;2</span><h2>Recovering the secret with Lagrange</h2></div>
+    <p>
+      Given k shares, <span class="term">Lagrange interpolation</span> reconstructs
+      the polynomial and evaluates it at x = 0 in one formula &#8212; no guessing. In
+      real <span class="term">Shamir's Secret Sharing</span> this all happens over
+      a finite field, so the shares leak nothing about the secret's size, but the
+      geometry is identical to what you see here.
+    </p>
+    <div class="eq">secret = f(0) = &#931; y&#7522; &#183; &#8719;&#11388;&#8800;&#7522; (&#8722;x&#11388;) / (x&#7522; &#8722; x&#11388;) &nbsp;(mod p)</div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The threshold in your distributed demos</h3>
+      <p>
+        This is the exact mechanism in
+        <span style="color:var(--vermilion-soft)">shamir-gate</span>, and the
+        threshold logic under <span style="color:var(--vermilion-soft)">frost-threshold</span>
+        (FROST) and <span style="color:var(--vermilion-soft)">silent-tally</span>
+        (MPC). A key is split so that <strong>any k of n</strong> parties can act
+        together but no k&#8722;1 can &#8212; guaranteed not by policy but by the
+        impossibility of pinning down a degree-(k&#8722;1) curve from too few points.
+      </p>
+    </div>
+    <p class="aside">Tested logic (Lagrange interpolation over a field) in <code>crypto-algebra.js</code>. Related: <a href="finite-fields.html" style="color:var(--vermilion)">Finite Fields</a>.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script src="crypto-algebra.js"></script>
+<script>
+(function(){
+  "use strict";
+  const NS="http://www.w3.org/2000/svg";
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const svg=document.getElementById("interp");
+  const iread=document.getElementById("iread");
+  const W=700,H=480,pad=54;
+  // plot region: x in [0,7], y in [0,10]
+  const xmin=0,xmax=7,ymin=0,ymax=10;
+  const px=x=>pad+(x-xmin)/(xmax-xmin)*(W-2*pad);
+  const py=y=>H-pad-(y-ymin)/(ymax-ymin)*(H-2*pad);
+
+  let k=3;
+  let pts=[[1,3],[3,7]]; // start below threshold
+  let dragging=-1;
+
+  // real-number Lagrange for smooth drawing (display), through given pts
+  function lagrangePoly(points){
+    return function(x){
+      let sum=0;
+      for(let i=0;i<points.length;i++){
+        let term=points[i][1];
+        for(let j=0;j<points.length;j++){ if(i===j)continue;
+          term*=(x-points[j][0])/(points[i][0]-points[j][0]);
+        }
+        sum+=term;
+      }
+      return sum;
+    };
+  }
+
+  function draw(){
+    svg.innerHTML="";
+    // axes
+    svg.appendChild(mk("line",{x1:px(0),y1:py(ymin),x2:px(0),y2:py(ymax),stroke:"#F3EEDF","stroke-width":2}));
+    svg.appendChild(mk("line",{x1:px(xmin),y1:py(0),x2:px(xmax),y2:py(0),stroke:"#2e2e3a","stroke-width":1}));
+    // x=0 secret axis highlight
+    svg.appendChild(mk("line",{x1:px(0),y1:py(ymin),x2:px(0),y2:py(ymax),stroke:"#C85A5A","stroke-width":1.5,"stroke-dasharray":"4 4","stroke-opacity":0.5}));
+    const sl=mk("text",{x:px(0)-8,y:py(ymax)-6,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"12","text-anchor":"end"});
+    sl.textContent="secret = f(0)"; svg.appendChild(sl);
+
+    const enough=pts.length>=k;
+    if(!enough && pts.length>=1){
+      // draw several ghost curves that all pass through current points but differ
+      for(let g=0;g<4;g++){
+        const extra=[...pts,[6-g*0.7, 1+g*2.3]]; // add a varying phantom point
+        if(extra.length>=2){
+          const f=lagrangePoly(extra.slice(0,Math.max(pts.length+1,2)));
+          let d="";
+          for(let x=xmin;x<=xmax;x+=0.05){const y=f(x); if(y>=ymin-3&&y<=ymax+3){d+=(d?"L":"M")+px(x).toFixed(1)+" "+py(y).toFixed(1)+" ";}}
+          svg.appendChild(mk("path",{d:d.trim(),fill:"none",stroke:"#C3A96F","stroke-width":1.2,"stroke-opacity":0.4}));
+        }
+      }
+    }
+    if(enough){
+      const f=lagrangePoly(pts.slice(0,k));
+      let d="";
+      for(let x=xmin;x<=xmax;x+=0.03){const y=f(x); if(y>=ymin-3&&y<=ymax+3){d+=(d?"L":"M")+px(x).toFixed(1)+" "+py(y).toFixed(1)+" ";}}
+      svg.appendChild(mk("path",{d:d.trim(),fill:"none",stroke:"#C85A5A","stroke-width":2.6}));
+      // secret marker at x=0
+      const secret=f(0);
+      svg.appendChild(mk("circle",{cx:px(0),cy:py(secret),r:8,fill:"#C85A5A",stroke:"#1c1c22","stroke-width":2}));
+      const st=mk("text",{x:px(0)+12,y:py(secret)+5,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700"});
+      st.textContent="\u2248 "+secret.toFixed(2); svg.appendChild(st);
+    }
+    // points
+    pts.forEach((p,i)=>{
+      svg.appendChild(mk("circle",{cx:px(p[0]),cy:py(p[1]),r:7,fill:"#F3EEDF",stroke:"#1c1c22","stroke-width":2,cursor:"grab"}));
+    });
+
+    if(enough){
+      iread.innerHTML="<b>"+pts.length+"/"+k+"</b> shares \u00b7 curve locked \u00b7 <b style='color:#C85A5A'>secret revealed</b>";
+    } else {
+      iread.innerHTML="<b>"+pts.length+"/"+k+"</b> shares \u00b7 <b>need "+(k-pts.length)+" more</b> \u00b7 secret still free";
+    }
+  }
+
+  function nearestPt(evt){
+    const rect=svg.getBoundingClientRect();
+    const mx=((evt.touches?evt.touches[0].clientX:evt.clientX)-rect.left)*(W/rect.width);
+    const my=((evt.touches?evt.touches[0].clientY:evt.clientY)-rect.top)*(H/rect.height);
+    for(let i=0;i<pts.length;i++){ if(Math.hypot(mx-px(pts[i][0]),my-py(pts[i][1]))<24) return i; }
+    return -1;
+  }
+  function moveTo(evt){
+    if(dragging<0)return;
+    const rect=svg.getBoundingClientRect();
+    const mx=((evt.touches?evt.touches[0].clientX:evt.clientX)-rect.left)*(W/rect.width);
+    const my=((evt.touches?evt.touches[0].clientY:evt.clientY)-rect.top)*(H/rect.height);
+    let nx=xmin+(mx-pad)/(W-2*pad)*(xmax-xmin);
+    let ny=ymin+(H-pad-my)/(H-2*pad)*(ymax-ymin);
+    nx=Math.max(0.5,Math.min(xmax,nx)); ny=Math.max(ymin,Math.min(ymax,ny));
+    // keep x distinct so interpolation stays defined
+    pts[dragging]=[nx,ny]; draw();
+  }
+  svg.addEventListener("mousedown",e=>{ dragging=nearestPt(e); });
+  svg.addEventListener("mousemove",moveTo);
+  window.addEventListener("mouseup",()=>{dragging=-1;});
+  svg.addEventListener("touchstart",e=>{ dragging=nearestPt(e); if(dragging>=0)e.preventDefault(); },{passive:false});
+  svg.addEventListener("touchmove",e=>{ if(dragging>=0){moveTo(e);e.preventDefault();} },{passive:false});
+  window.addEventListener("touchend",()=>{dragging=-1;});
+
+  function addShare(atX){
+    // pick an x not already used
+    let x=atX;
+    if(x==null){ x=1; while(pts.some(p=>Math.abs(p[0]-x)<0.4)&&x<xmax) x++; }
+    if(pts.some(p=>Math.abs(p[0]-x)<0.4)) return;
+    pts.push([x, 2+Math.random()*6]);
+    draw();
+  }
+  document.getElementById("ksel").addEventListener("change",e=>{ k=+e.target.value; draw(); });
+  document.getElementById("addPt").addEventListener("click",()=>addShare(null));
+  document.getElementById("clr").addEventListener("click",()=>{ pts=[]; draw(); });
+  document.getElementById("addAt").addEventListener("click",()=>{
+    const x=parseInt(document.getElementById("xIn").value,10);
+    if(!isNaN(x)) addShare(x);
+  });
+  draw();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

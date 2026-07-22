@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Clock arithmetic, primitive roots, and the cyclic group Diffie–Hellman lives inside.">
+<title>Modular Arithmetic · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 143 · ℤ/nℤ</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Cyclic World Diffie–Hellman Lives In</div>
+    <h1>Arithmetic on<br>a <em>clock</em></h1>
+    <p class="standfirst">
+      A clock counts to twelve and starts over. Modular arithmetic does the
+      same with any number — and inside that wrap-around lives the cyclic
+      structure that key exchange is built on. Some starting points visit every
+      hour on the clock; those are the ones cryptography wants.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Why this matters.</strong> Diffie–Hellman picks a number <em>g</em>
+    whose powers cycle through <em>every</em> nonzero residue mod a prime. Find
+    such a <span class="term">primitive root</span> and you have a group large
+    and uniform enough to hide a secret exponent in.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Powers that walk the clock</h2></div>
+    <p>
+      Fix a prime <em>p</em> and a base <em>g</em>. Compute g¹, g², g³, … mod p
+      and mark each result on the ring below. If <em>g</em> is a primitive root,
+      the marks visit all p−1 positions before returning home — a single
+      unbroken orbit. If not, the orbit closes early, missing most of the clock.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 520" id="clock" role="img"
+             aria-label="Powers of g modulo p plotted around a clock face."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>prime p
+          <select id="psel">
+            <option value="11">11</option>
+            <option value="13">13</option>
+            <option value="23" selected>23</option>
+            <option value="29">29</option>
+          </select>
+        </label>
+        <label>base g
+          <select id="gsel"></select>
+        </label>
+        <button id="anim">Trace the orbit</button>
+        <div class="readout" id="read">—</div>
+      </div>
+      <div class="lab-hint">
+        A green ring means <b>g is a primitive root</b> — its powers cover every
+        residue. A short red loop means it doesn't. Try g = 5 vs g = 2 at p = 23.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>The one-way staircase</h2></div>
+    <p>
+      Going <em>up</em> — from an exponent to gˣ mod p — is a quick climb.
+      Coming back <em>down</em> — from gˣ to x — is the
+      <span class="term">discrete logarithm problem</span>, the same wall we met
+      with elliptic curves, in its original multiplicative form. The orbit above
+      looks orderly, but knowing a landing spot tells you nothing about how many
+      steps it took to get there.
+    </p>
+    <div class="eq">x ↦ gˣ mod p &nbsp; easy &nbsp;·&nbsp; gˣ ↦ x &nbsp; hard</div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The original public-key setting</h3>
+      <p>
+        Classic Diffie–Hellman happens in exactly this group: a prime with a
+        primitive root, thousands of bits wide. Alice sends <em>gᵃ</em>, Bob
+        sends <em>gᵇ</em>, and both compute <em>gᵃᵇ</em> — while an eavesdropper,
+        stuck with the discrete log, cannot. Elliptic curves later swapped this
+        multiplicative clock for a point group, but the shape of the idea was
+        born here.
+      </p>
+    </div>
+    <p class="aside">See also: <a href="group-theory.html" style="color:var(--vermilion)">Group Theory</a> for the general structure, and <a href="finite-fields.html" style="color:var(--vermilion)">Finite Fields</a> for the elliptic-curve version.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function isPrimRoot(g,p){var s=new Set(),x=1;for(var i=0;i<p-1;i++){x=(x*g)%p;s.add(x);}return s.size===p-1;}
+  function powers(g,p){var out=[],x=1;for(var i=1;i<p;i++){x=(x*g)%p;out.push(x);}return out;}
+
+  var clock=document.getElementById("clock");
+  var psel=document.getElementById("psel"), gsel=document.getElementById("gsel");
+  var read=document.getElementById("read");
+  var cx=350, cy=270, R=200;
+
+  function pos(residue,p){
+    var ang=-Math.PI/2 + (2*Math.PI*residue)/p; // place residue r at angle
+    return [cx+R*Math.cos(ang), cy+R*Math.sin(ang)];
+  }
+
+  function refreshG(){
+    var p=+psel.value; gsel.innerHTML="";
+    for(var g=2;g<p;g++){ var o=document.createElement("option"); o.value=g;
+      o.textContent=g+(isPrimRoot(g,p)?" ✓":""); gsel.appendChild(o); }
+    // default to a primitive root
+    for(var g2=2;g2<p;g2++){ if(isPrimRoot(g2,p)){ gsel.value=g2; break; } }
+  }
+
+  function draw(animate){
+    var p=+psel.value, g=+gsel.value;
+    clock.innerHTML="";
+    clock.appendChild(el("circle",{cx:cx,cy:cy,r:R,fill:"none",stroke:"#2e2e3a","stroke-width":1.5}));
+    // residue ticks 0..p-1
+    for(var r=0;r<p;r++){
+      var pt=pos(r,p);
+      clock.appendChild(el("circle",{cx:pt[0],cy:pt[1],r:3,fill:"#2e2e3a"}));
+      if(p<=29){
+        var t=el("text",{x:cx+(R+22)*Math.cos(-Math.PI/2+2*Math.PI*r/p),
+          y:cy+(R+22)*Math.sin(-Math.PI/2+2*Math.PI*r/p)+4,
+          fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"12",
+          "text-anchor":"middle"});
+        t.textContent=r; clock.appendChild(t);
+      }
+    }
+    var prim=isPrimRoot(g,p);
+    var color=prim?"#5AC8A0":"#C85A5A";
+    var seq=powers(g,p);
+    // draw the orbit as connected chords
+    var pathG=el("g",{});
+    clock.appendChild(pathG);
+    function drawUpTo(n){
+      pathG.innerHTML="";
+      var prev=pos(1,p); // g^0 = 1 start
+      for(var i=0;i<n;i++){
+        var pt=pos(seq[i],p);
+        pathG.appendChild(el("line",{x1:prev[0],y1:prev[1],x2:pt[0],y2:pt[1],
+          stroke:color,"stroke-width":1.6,"stroke-opacity":0.55}));
+        prev=pt;
+      }
+      // mark visited
+      for(var j=0;j<n;j++){ var q=pos(seq[j],p);
+        pathG.appendChild(el("circle",{cx:q[0],cy:q[1],r:5,fill:color,stroke:"#1c1c22","stroke-width":1.5})); }
+      // current highlighted
+      if(n>0){ var last=pos(seq[n-1],p);
+        pathG.appendChild(el("circle",{cx:last[0],cy:last[1],r:8,fill:color,stroke:"#1c1c22","stroke-width":2}));
+        var lt=el("text",{x:last[0]+12,y:last[1]-10,fill:color,
+          "font-family":"ui-monospace,monospace","font-size":"14","font-weight":"700"});
+        lt.textContent="g^"+n; pathG.appendChild(lt);
+      }
+    }
+    read.innerHTML="g = <b>"+g+"</b> mod "+p+" · "+(prim?"<b style='color:#5AC8A0'>primitive root</b>":"order "+new Set(seq).size);
+    if(animate){ var n=0; var iv=setInterval(function(){ drawUpTo(++n); if(n>=seq.length)clearInterval(iv); },70); }
+    else drawUpTo(seq.length);
+  }
+
+  psel.addEventListener("change",function(){ refreshG(); draw(false); });
+  gsel.addEventListener("change",function(){ draw(false); });
+  document.getElementById("anim").addEventListener("click",function(){ draw(true); });
+
+  refreshG(); draw(false);
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

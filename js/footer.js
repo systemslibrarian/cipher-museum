@@ -16,7 +16,7 @@
   if (!foot) return;
 
   var path = location.pathname;
-  var inSub = /\/(ciphers|halls|tours|lab|community)\//.test(path);
+  var inSub = /\/(ciphers|halls|tours|lab|community|hall-of-foundations)\//.test(path);
   var pre = inSub ? '../' : '';
 
   var EXPLORE = [

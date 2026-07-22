@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Drag a basis and hunt the shortest vector — the lattice foundation under Kyber, Dilithium, and post-quantum cryptography.">
+<title>Lattices &amp; the SVP · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 147 · shortest vector</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Foundation Under Post-Quantum Crypto</div>
+    <h1>A grid that<br><em>hides</em> its shortcut</h1>
+    <p class="standfirst">
+      A lattice is an infinite grid of points. Somewhere in it sits a shortest
+      nonzero vector — the point nearest the origin. Finding it, in high
+      dimensions, is believed hard even for a quantum computer. That difficulty
+      is the bedrock beneath Kyber, Dilithium, and the whole post-quantum shelf.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>The basis is a disguise.</strong> The <em>same</em> lattice can be
+    described by a tidy basis that reveals its short vectors, or a skewed one
+    that hides them. Cryptography publishes the skewed basis and keeps the tidy
+    one secret. Drag the vectors below and watch the disguise work.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Two vectors, infinite grid</h2></div>
+    <p>
+      Pick two vectors <em>b₁</em> and <em>b₂</em>. Every integer combination
+      <em>i·b₁ + j·b₂</em> is a lattice point. Those two vectors are a
+      <span class="term">basis</span> — but they're not the only basis for the
+      same grid. Drag the arrowheads and the grid stays put while the basis that
+      generates it changes.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 520" id="lat" role="img"
+             aria-label="A 2D lattice with draggable basis vectors and its shortest vector marked."></svg>
+      </div>
+      <div class="lab-bar">
+        <button id="reveal">Reveal shortest vector</button>
+        <button id="good" class="ghost">Snap to good basis</button>
+        <button id="bad" class="ghost">Snap to bad basis</button>
+        <div class="readout" id="lread" aria-live="polite" role="status">—</div>
+      </div>
+      <div class="lab-hint">
+        Drag either <span style="color:var(--vermilion)">arrowhead</span> to
+        change the basis. <b>Reveal</b> marks the true shortest vector (teal). A
+        "bad" basis has long, nearly-parallel vectors that make it hard to spot.
+      </div>
+      <!-- keyboard / screen-reader fallback -->
+      <div class="a11y-fallback">
+        <span class="vh" id="svpKbLabel">Keyboard alternative: type integer components for each basis vector, then reveal the shortest vector.</span>
+        <label>b&#8321;
+          <input type="number" id="b1x" value="2" step="1" min="-6" max="6" aria-label="b1 x component" aria-describedby="svpKbLabel">
+          <input type="number" id="b1y" value="1" step="1" min="-6" max="6" aria-label="b1 y component">
+        </label>
+        <label>b&#8322;
+          <input type="number" id="b2x" value="1" step="1" min="-6" max="6" aria-label="b2 x component">
+          <input type="number" id="b2y" value="2" step="1" min="-6" max="6" aria-label="b2 y component">
+        </label>
+        <button id="applyBasis" type="button">Set basis</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>Easy in two dimensions, brutal in five hundred</h2></div>
+    <p>
+      In the plane you can almost eyeball the shortest vector. But cryptographic
+      lattices live in <em>hundreds</em> of dimensions, where the number of
+      candidate combinations explodes beyond any search. The
+      <span class="term">Shortest Vector Problem</span> — and its cousin, finding
+      the closest lattice point to a target — is the hard problem the schemes
+      lean on.
+    </p>
+    <div class="eq">SVP: given a basis, find the shortest nonzero lattice vector</div>
+    <div class="pull">
+      The security gap is the distance between eyeballing it in 2D and searching
+      for it in 500D.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The post-quantum shelf stands here</h3>
+      <p>
+        Your Crypto Lab's post-quantum work —
+        <span style="color:var(--vermilion-soft)">kyber-vault</span>,
+        <span style="color:var(--vermilion-soft)">dilithium-seal</span>,
+        <span style="color:var(--vermilion-soft)">quantum-vault-kpqc</span> — all
+        rest on lattice hardness. When factoring and discrete logs fall to
+        quantum computers, <strong>this</strong> is the ground that's expected to
+        hold. The public key is a bad basis; the secret key is a good one.
+      </p>
+    </div>
+    <p class="aside">Next: <a href="closest-vector.html" style="color:var(--vermilion)">The Closest Vector Problem</a> — the companion that shows how the key-holder actually decrypts, and where Kyber's LWE lives.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script src="lattice-math.js"></script>
+<script>
+(function(){
+  "use strict";
+  const LM = window.LatticeMath;
+  const NS="http://www.w3.org/2000/svg";
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const svg=document.getElementById("lat");
+  const lread=document.getElementById("lread");
+  const W=700,H=520, ox=350, oy=270, scale=42;
+
+  // basis in lattice units (integer components keep the grid a true lattice)
+  let b1={x:2,y:1}, b2={x:1,y:2};
+  let dragging=null, showShort=false;
+
+  const sx=u=>ox+u*scale, sy=v=>oy-v*scale;
+
+  // sync the keyboard number inputs with the current basis
+  function syncInputs(){
+    document.getElementById("b1x").value=b1.x; document.getElementById("b1y").value=b1.y;
+    document.getElementById("b2x").value=b2.x; document.getElementById("b2y").value=b2.y;
+  }
+
+  function draw(){
+    svg.innerHTML="";
+    const R=6;
+    for(let i=-R;i<=R;i++)for(let j=-R;j<=R;j++){
+      const x=i*b1.x+j*b2.x, y=i*b1.y+j*b2.y;
+      const px=sx(x), py=sy(y);
+      if(px<10||px>W-10||py<10||py>H-10) continue;
+      const origin=(x===0&&y===0);
+      svg.appendChild(el("circle",{cx:px,cy:py,r:origin?5:3,fill:origin?"#F3EEDF":"#C3A96F"}));
+    }
+    const drawVec=(b,label)=>{
+      svg.appendChild(el("line",{x1:sx(0),y1:sy(0),x2:sx(b.x),y2:sy(b.y),stroke:"#C85A5A","stroke-width":2.5}));
+      svg.appendChild(el("circle",{cx:sx(b.x),cy:sy(b.y),r:9,fill:"#C85A5A",stroke:"#1c1c22","stroke-width":2,cursor:"grab"}));
+      const t=el("text",{x:sx(b.x)+13,y:sy(b.y)-11,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700"});
+      t.textContent=label; svg.appendChild(t);
+    };
+    drawVec(b1,"b\u2081"); drawVec(b2,"b\u2082");
+    if(showShort){
+      const s=LM.shortestVector([b1.x,b1.y],[b2.x,b2.y]);
+      svg.appendChild(el("line",{x1:sx(0),y1:sy(0),x2:sx(s.x),y2:sy(s.y),stroke:"#5AC8A0","stroke-width":3.5,"stroke-opacity":0.9}));
+      svg.appendChild(el("circle",{cx:sx(s.x),cy:sy(s.y),r:7,fill:"#5AC8A0",stroke:"#1c1c22","stroke-width":2}));
+      lread.innerHTML="shortest = ("+s.x+", "+s.y+") \u00b7 length <b>"+s.len.toFixed(2)+"</b> = "+s.i+"\u00b7b\u2081 + "+s.j+"\u00b7b\u2082";
+    } else {
+      const det=Math.abs(LM.det2([b1.x,b1.y],[b2.x,b2.y]));
+      lread.innerHTML="b\u2081=("+b1.x+","+b1.y+") b\u2082=("+b2.x+","+b2.y+") \u00b7 det <b>"+det+"</b>";
+    }
+  }
+
+  function nearestUnit(evt){
+    const rect=svg.getBoundingClientRect();
+    const mx=((evt.touches?evt.touches[0].clientX:evt.clientX)-rect.left)*(W/rect.width);
+    const my=((evt.touches?evt.touches[0].clientY:evt.clientY)-rect.top)*(H/rect.height);
+    let ux=Math.round((mx-ox)/scale), uy=Math.round((oy-my)/scale);
+    return {x:Math.max(-6,Math.min(6,ux)), y:Math.max(-6,Math.min(6,uy))};
+  }
+  function pick(evt){
+    const rect=svg.getBoundingClientRect();
+    const mx=((evt.touches?evt.touches[0].clientX:evt.clientX)-rect.left)*(W/rect.width);
+    const my=((evt.touches?evt.touches[0].clientY:evt.clientY)-rect.top)*(H/rect.height);
+    const d1=Math.hypot(mx-sx(b1.x),my-sy(b1.y)), d2=Math.hypot(mx-sx(b2.x),my-sy(b2.y));
+    if(Math.min(d1,d2)>26) return null;
+    return d1<d2?"b1":"b2";
+  }
+  function move(evt){
+    if(!dragging)return;
+    const u=nearestUnit(evt);
+    if(u.x===0&&u.y===0) return;
+    const tgt=dragging==="b1"?b1:b2, other=dragging==="b1"?b2:b1;
+    if(u.x===other.x&&u.y===other.y) return;
+    tgt.x=u.x; tgt.y=u.y;
+    showShort=false; syncInputs(); draw();
+  }
+  svg.addEventListener("mousedown",e=>{ dragging=pick(e); });
+  svg.addEventListener("mousemove",move);
+  window.addEventListener("mouseup",()=>{ dragging=null; });
+  svg.addEventListener("touchstart",e=>{ dragging=pick(e); if(dragging)e.preventDefault(); },{passive:false});
+  svg.addEventListener("touchmove",e=>{ if(dragging){move(e);e.preventDefault();} },{passive:false});
+  window.addEventListener("touchend",()=>{ dragging=null; });
+
+  document.getElementById("reveal").addEventListener("click",()=>{ showShort=true; draw(); });
+  document.getElementById("good").addEventListener("click",()=>{ b1={x:1,y:0}; b2={x:0,y:1}; showShort=false; syncInputs(); draw(); });
+  document.getElementById("bad").addEventListener("click",()=>{ b1={x:4,y:3}; b2={x:5,y:4}; showShort=false; syncInputs(); draw(); });
+
+  // keyboard fallback: type basis components, guard against degenerate/collinear
+  document.getElementById("applyBasis").addEventListener("click",()=>{
+    const n1x=parseInt(document.getElementById("b1x").value,10), n1y=parseInt(document.getElementById("b1y").value,10);
+    const n2x=parseInt(document.getElementById("b2x").value,10), n2y=parseInt(document.getElementById("b2y").value,10);
+    if([n1x,n1y,n2x,n2y].some(isNaN)) return;
+    if(LM.det2([n1x,n1y],[n2x,n2y])===0){
+      lread.innerHTML="<b style='color:#C85A5A'>those vectors are parallel</b> \u2014 they collapse the lattice to a line. Try again.";
+      return;
+    }
+    b1={x:n1x,y:n1y}; b2={x:n2x,y:n2y}; showShort=true; draw(); // reveal + announce
+  });
+
+  syncInputs(); draw();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

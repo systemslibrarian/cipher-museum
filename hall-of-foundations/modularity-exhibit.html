@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Ground Beneath the Curve — the modularity theorem and the number theory elliptic-curve cryptography inherits.">
+<title>The Ground Beneath the Curve · Cipher Museum</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Hall of Foundations · Exhibit 141</span>
+  </header>
+
+  <div class="hero">
+    <div class="kicker">The Number Theory Beneath ECC</div>
+    <h1>The ground beneath<br>the <em>curve</em></h1>
+    <p class="standfirst">
+      Elliptic-curve cryptography rests on objects far older and stranger
+      than any key exchange. This exhibit walks from a cubic equation to the
+      deepest theorem it touches — and is honest about where the mathematics
+      stops being useful to a cryptographer.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>A note on honesty.</strong> Fermat's Last Theorem — the 100-page
+    proof this exhibit builds toward — has no direct use in cryptography.
+    What ECC actually stands on is the <em>world</em> that proof revealed:
+    the deep link between elliptic curves and modular forms. We'll show you
+    that world without overselling the theorem itself.
+  </div>
+</div>
+
+<div class="wrap">
+  <main id="main">
+
+  <!-- STEP 1 -->
+  <section class="exhibit">
+    <div class="step-head">
+      <span class="step-num">§1</span>
+      <h2>A curve is a cubic</h2>
+    </div>
+    <p>
+      An <span class="term">elliptic curve</span> over the rationals is the set
+      of solutions to a cubic in <em>Weierstrass form</em>. It is not an ellipse;
+      the name is a historical accident inherited from the integrals that measure
+      an ellipse's arc length.
+    </p>
+    <div class="eq">y² = x³ + ax + b</div>
+    <p>
+      Fix <em>a</em> and <em>b</em> so the curve is smooth — no cusps, no
+      self-crossings — and you get the graceful looping shape below. What makes
+      it cryptographically interesting is not the shape but a hidden operation
+      living on it: you can <em>add</em> two points and land on a third.
+    </p>
+  </section>
+
+  <!-- STEP 2 — SIGNATURE INTERACTIVE -->
+  <section class="exhibit">
+    <div class="step-head">
+      <span class="step-num">§2</span>
+      <h2>The group law, drawn by hand</h2>
+    </div>
+    <p>
+      Here is the whole secret. To add points <em>P</em> and <em>Q</em>: draw
+      the line through them, find the third place it meets the curve, and reflect
+      that point across the x-axis. That reflection is <em>P + Q</em>. Tap two
+      points and watch the construction draw itself.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 460" id="stage" role="img"
+             aria-label="Interactive elliptic curve. Tap points to add them.">
+          <!-- axes + curve drawn by JS -->
+          <g id="grid"></g>
+          <path id="curvePath" fill="none" stroke="#F3EEDF" stroke-width="2.4"/>
+          <g id="construction"></g>
+          <g id="points"></g>
+        </svg>
+      </div>
+      <div class="lab-bar">
+        <button id="pick">Pick two points</button>
+        <button id="reset" class="ghost">Reset</button>
+        <div class="readout" id="readout" aria-live="polite" role="status">y² = x³ + x + 1 &nbsp;·&nbsp; <b>tap the curve</b></div>
+      </div>
+      <div class="lab-hint">
+        <kbd>tap</kbd> once for <em>P</em>, again for <em>Q</em> — the chord,
+        the third intersection, and the reflection to <em>P+Q</em> all draw
+        in <span style="color:var(--vermilion)">vermilion</span>.
+      </div>
+      <!-- Keyboard/screen-reader fallback: select P and Q from actual on-curve points -->
+      <div class="a11y-fallback">
+        <span class="vh" id="kbLabel">Keyboard alternative: choose two points on the curve to add.</span>
+        <label>Point P
+          <select id="selP" aria-describedby="kbLabel"></select>
+        </label>
+        <label>Point Q
+          <select id="selQ"></select>
+        </label>
+        <button id="addKb" type="button">Add P + Q</button>
+      </div>
+    </div>
+
+    <p class="aside">
+      Real primitive, no simulated math: point coordinates are computed from the
+      actual group law over the reals and projected to the canvas.
+    </p>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="exhibit">
+    <div class="step-head">
+      <span class="step-num">§3</span>
+      <h2>Why the addition is a fortress</h2>
+    </div>
+    <p>
+      Over a finite field instead of a smooth drawing, that same addition scatters
+      unpredictably. Add a point to itself <em>k</em> times and you reach a new
+      point <em>Q = kP</em>. Recovering <em>k</em> from <em>P</em> and <em>Q</em>
+      is the <span class="term">elliptic-curve discrete logarithm problem</span> —
+      easy to compute forward, believed infeasible to reverse.
+    </p>
+    <div class="eq">P, Q known &nbsp;→&nbsp; find k such that Q = kP &nbsp; ✗ hard</div>
+    <p>
+      That asymmetry is the entire basis of ECDH key exchange and ECDSA
+      signatures. But <em>why</em> should such curves behave so regularly, so
+      reliably, across every prime you might build a key on? To answer that,
+      number theorists had to look at the curve from an entirely different
+      direction.
+    </p>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="exhibit">
+    <div class="step-head">
+      <span class="step-num">§4</span>
+      <h2>The second face: modular forms</h2>
+    </div>
+    <p>
+      Every elliptic curve over ℚ carries a <span class="term">Hasse–Weil
+      zeta function</span> — a bookkeeping of how many points the curve has
+      modulo each prime. Separately, in complex analysis, live
+      <span class="term">modular forms</span>: wildly symmetric functions on the
+      upper half-plane, unrelated on their face to any cubic.
+    </p>
+    <p>
+      The <span class="term">Modularity Theorem</span> says these two faces are
+      one. Every elliptic curve over ℚ <em>is</em> modular: its zeta function
+      matches a modular form exactly. This is the bridge — proved for semistable
+      curves by Wiles, completed by Taylor–Wiles, and in full by 2001.
+    </p>
+    <div class="pull">
+      Two traditions that never spoke — point-counting and the analysis of
+      symmetric functions — turned out to be the same language.
+    </div>
+  </section>
+
+  <!-- STEP 5 — the ladder to FLT -->
+  <section class="exhibit">
+    <div class="step-head">
+      <span class="step-num">§5</span>
+      <h2>The rungs to Fermat</h2>
+    </div>
+    <p>
+      Modularity is where Fermat's Last Theorem falls. Not by attacking
+      <em>aⁿ + bⁿ = cⁿ</em> directly, but by showing a hypothetical
+      counterexample would build an elliptic curve too strange to exist.
+    </p>
+    <ul class="ladder">
+      <li>
+        <span class="rung">Frey · 1985<span>the trap</span></span>
+        <span class="gloss">A counterexample to Fermat yields a curve
+          y² = x(x + aⁿ)(x − bⁿ) with impossible properties.</span>
+      </li>
+      <li>
+        <span class="rung">Serre · Ribet<span>the tightening</span></span>
+        <span class="gloss">Made precise: such a curve, if modular, forces a
+          modular form that plainly cannot exist.</span>
+      </li>
+      <li>
+        <span class="rung">Wiles · 1994<span>the keystone</span></span>
+        <span class="gloss">Proved semistable curves are modular — so the Frey
+          curve would be modular — so it cannot exist — so Fermat holds.</span>
+      </li>
+    </ul>
+    <p class="aside">
+      The proof runs 109 pages plus a 20-page companion. Its engine is an
+      equality between a deformation ring and a Hecke ring — "R = T" — reached
+      through commutative algebra, not through the curves themselves.
+    </p>
+  </section>
+
+  <!-- CRYPTO CONNECTION -->
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>Foundations, not primitives</h3>
+      <p>
+        No cipher calls Fermat's Last Theorem. What ECC inherits is the
+        <strong>structural certainty</strong> the modularity world provides:
+        the theory of Galois representations attached to elliptic curves, the
+        control over how points behave modulo each prime, and the confidence
+        that these objects are as rigid and well-understood as any in
+        mathematics. When you generate an ECDSA key, you are standing on ground
+        that this 100-page proof helped survey — even though you never touch the
+        theorem itself.
+      </p>
+    </div>
+    <p class="aside">
+      This exhibit is reference and education. For the deployable primitives —
+      ECDH, ECDSA, and post-quantum successors — see the Crypto Lab demos.
+    </p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+  const svg = document.getElementById("stage");
+  const NS = "http://www.w3.org/2000/svg";
+  const W = 700, H = 460;
+
+  // curve: y^2 = x^3 + Ax + B  (A=1, B=1 -> smooth, single connected branch)
+  const A = 1, B = 1;
+
+  // world<->screen mapping
+  const xmin = -1.4, xmax = 3.2, ymin = -4.2, ymax = 4.2;
+  const sx = (x) => (x - xmin) / (xmax - xmin) * W;
+  const sy = (y) => H - (y - ymin) / (ymax - ymin) * H;
+
+  function make(tag, attrs) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // ---- grid + axes ----
+  const grid = document.getElementById("grid");
+  function axisLine(x1, y1, x2, y2, w, op) {
+    grid.appendChild(make("line", { x1, y1, x2, y2,
+      stroke: "#2e2e3a", "stroke-width": w, "stroke-opacity": op }));
+  }
+  for (let gx = Math.ceil(xmin); gx <= xmax; gx++)
+    axisLine(sx(gx), 0, sx(gx), H, 1, gx === 0 ? 0.9 : 0.35);
+  for (let gy = Math.ceil(ymin); gy <= ymax; gy++)
+    axisLine(0, sy(gy), W, sy(gy), 1, gy === 0 ? 0.9 : 0.35);
+
+  // ---- curve path (single connected branch for A=1, B=1) ----
+  const fx = (x) => x * x * x + A * x + B;
+  const topBranch = [], botBranch = [], step = 0.012;
+  for (let x = xmin; x <= xmax; x += step) {
+    const v = fx(x);
+    if (v >= 0) {
+      const r = Math.sqrt(v);
+      topBranch.push([x, r]);
+      botBranch.push([x, -r]);
+    }
+  }
+  let d = "";
+  topBranch.forEach((p, i) => { d += (i ? "L" : "M") + sx(p[0]).toFixed(1) + " " + sy(p[1]).toFixed(1) + " "; });
+  for (let j = botBranch.length - 1; j >= 0; j--) {
+    d += "L" + sx(botBranch[j][0]).toFixed(1) + " " + sy(botBranch[j][1]).toFixed(1) + " ";
+  }
+  document.getElementById("curvePath").setAttribute("d", d.trim());
+
+  // ---- interaction state ----
+  const cons = document.getElementById("construction");
+  const pts = document.getElementById("points");
+  const readout = document.getElementById("readout");
+  let picks = []; // world-space points on curve
+
+  function onCurveNear(px, py) {
+    let best = null, bestd = Infinity;
+    for (let xx = xmin; xx <= xmax; xx += 0.004) {
+      const v = fx(xx);
+      if (v < 0) continue;
+      const r = Math.sqrt(v);
+      for (const c of [[xx, r], [xx, -r]]) {
+        const dd = (sx(c[0]) - px) ** 2 + (sy(c[1]) - py) ** 2;
+        if (dd < bestd) { bestd = dd; best = c; }
+      }
+    }
+    return best;
+  }
+
+  const dot = (x, y, color, r) => make("circle",
+    { cx: sx(x), cy: sy(y), r: r || 6, fill: color, stroke: "#1c1c22", "stroke-width": 2 });
+
+  function label(x, y, txt, color) {
+    const t = make("text", { x: sx(x) + 11, y: sy(y) - 9, fill: color,
+      "font-family": "ui-monospace, monospace", "font-size": "15", "font-weight": "700" });
+    t.textContent = txt;
+    return t;
+  }
+
+  // add two points via chord-and-tangent (handles the doubling case)
+  function addPoints(P, Q) {
+    let m;
+    if (Math.abs(P[0] - Q[0]) < 1e-9 && Math.abs(P[1] - Q[1]) < 1e-9) {
+      m = (3 * P[0] * P[0] + A) / (2 * P[1]);      // tangent slope (P = Q)
+    } else {
+      m = (Q[1] - P[1]) / (Q[0] - P[0]);           // chord slope
+    }
+    const x3 = m * m - P[0] - Q[0];
+    const y3 = m * (P[0] - x3) - P[1];
+    return { third: [x3, -y3], sum: [x3, y3], slope: m };
+  }
+
+  function drawConstruction() {
+    cons.innerHTML = "";
+    if (picks.length < 2) return;
+    const [P, Q] = picks;
+    const { third, sum, slope: m } = addPoints(P, Q);
+
+    const yL = P[1] + m * (xmin - P[0]);
+    const yR = P[1] + m * (xmax - P[0]);
+    cons.appendChild(make("line", { x1: sx(xmin), y1: sy(yL), x2: sx(xmax), y2: sy(yR),
+      stroke: "#C85A5A", "stroke-width": 2, "stroke-opacity": 0.85 }));
+
+    cons.appendChild(dot(third[0], third[1], "#d98a7a", 5));
+
+    cons.appendChild(make("line", { x1: sx(third[0]), y1: sy(third[1]),
+      x2: sx(sum[0]), y2: sy(sum[1]),
+      stroke: "#C85A5A", "stroke-width": 1.6, "stroke-dasharray": "4 4", "stroke-opacity": 0.8 }));
+
+    cons.appendChild(dot(sum[0], sum[1], "#C85A5A", 7));
+    cons.appendChild(label(sum[0], sum[1], "P+Q", "#C85A5A"));
+
+    // aria-live readout announces the full result to screen readers
+    readout.innerHTML = "P+Q = ( <b>" + sum[0].toFixed(2) + "</b>, <b>" + sum[1].toFixed(2) + "</b> )";
+  }
+
+  function redrawPoints() {
+    pts.innerHTML = "";
+    picks.forEach((p, i) => {
+      pts.appendChild(dot(p[0], p[1], "#F3EEDF", 6));
+      pts.appendChild(label(p[0], p[1], i === 0 ? "P" : "Q", "#F3EEDF"));
+    });
+  }
+
+  // register a chosen point, update visuals + announce
+  function choose(p) {
+    if (!p) return;
+    if (picks.length >= 2) { picks = []; cons.innerHTML = ""; }
+    picks.push(p);
+    redrawPoints();
+    if (picks.length === 2) {
+      drawConstruction();
+    } else {
+      readout.innerHTML = "P = ( <b>" + p[0].toFixed(2) + "</b>, <b>" +
+        p[1].toFixed(2) + "</b> ) &nbsp;·&nbsp; select a second point for Q";
+    }
+  }
+
+  function pointFromEvent(clientX, clientY) {
+    const rect = svg.getBoundingClientRect();
+    const cx = (clientX - rect.left) * (W / rect.width);
+    const cy = (clientY - rect.top) * (H / rect.height);
+    return onCurveNear(cx, cy);
+  }
+
+  // ---- pointer (mouse) ----
+  svg.addEventListener("click", (e) => choose(pointFromEvent(e.clientX, e.clientY)));
+
+  // ---- touch: only intercept a deliberate tap, never a scroll ----
+  // Track the start point; if the finger moves beyond a small threshold we treat
+  // it as a scroll and leave the page's default behaviour untouched.
+  let touchStart = null;
+  const TAP_SLOP = 12; // px of movement still counted as a tap
+
+  svg.addEventListener("touchstart", (e) => {
+    if (e.touches.length !== 1) { touchStart = null; return; }
+    const t = e.touches[0];
+    touchStart = { x: t.clientX, y: t.clientY, scrolled: false };
+    // note: do NOT preventDefault here — that would trap a scroll gesture
+  }, { passive: true });
+
+  svg.addEventListener("touchmove", (e) => {
+    if (!touchStart) return;
+    const t = e.touches[0];
+    if (Math.hypot(t.clientX - touchStart.x, t.clientY - touchStart.y) > TAP_SLOP) {
+      touchStart.scrolled = true; // it's a scroll — let the page move
+    }
+  }, { passive: true });
+
+  svg.addEventListener("touchend", (e) => {
+    if (!touchStart || touchStart.scrolled) { touchStart = null; return; }
+    // confirmed tap: now it's safe to suppress the emulated click and act
+    e.preventDefault();
+    const t = e.changedTouches[0];
+    choose(pointFromEvent(t.clientX, t.clientY));
+    touchStart = null;
+  }, { passive: false });
+
+  // ---- reset ----
+  document.getElementById("reset").addEventListener("click", () => {
+    picks = [];
+    cons.innerHTML = "";
+    pts.innerHTML = "";
+    readout.innerHTML = "y² = x³ + x + 1 &nbsp;·&nbsp; <b>tap the curve</b>";
+  });
+
+  // ---- preload a demonstrative pair ----
+  document.getElementById("pick").addEventListener("click", () => {
+    const Px = -0.6, Qx = 1.2;
+    picks = [[Px, Math.sqrt(fx(Px))], [Qx, -Math.sqrt(fx(Qx))]];
+    redrawPoints();
+    drawConstruction();
+  });
+
+  // ---- keyboard / screen-reader fallback ----
+  // Populate two <select>s with real on-curve points; adding announces via aria-live.
+  const selP = document.getElementById("selP");
+  const selQ = document.getElementById("selQ");
+  const sampleXs = [-0.6, -0.2, 0.4, 1.0, 1.6, 2.4]; // spread across the domain
+  const kbPoints = [];
+  sampleXs.forEach((x) => {
+    const v = fx(x);
+    if (v < 0) return;
+    const r = Math.sqrt(v);
+    kbPoints.push([x, r]);
+    kbPoints.push([x, -r]);
+  });
+  kbPoints.forEach((p, i) => {
+    const text = "( " + p[0].toFixed(2) + ", " + p[1].toFixed(2) + " )";
+    const oP = document.createElement("option"); oP.value = i; oP.textContent = text; selP.appendChild(oP);
+    const oQ = document.createElement("option"); oQ.value = i; oQ.textContent = text; selQ.appendChild(oQ);
+  });
+  selP.value = "0";
+  selQ.value = String(Math.min(3, kbPoints.length - 1));
+
+  document.getElementById("addKb").addEventListener("click", () => {
+    const P = kbPoints[+selP.value];
+    const Q = kbPoints[+selQ.value];
+    picks = [P, Q];
+    redrawPoints();
+    drawConstruction(); // updates the aria-live readout with P+Q
+  });
+})();
+</script>
+
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

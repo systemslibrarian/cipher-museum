@@ -17,7 +17,9 @@ const suites = [
   'tests/test-local-links.js',
   'tests/test-exhibit-examples.js',
   'tests/test-min-fresh.js',
-  'tests/test-sw-version.js'
+  'tests/test-sw-version.js',
+  'hall-of-foundations/lattice-math.test.js',
+  'hall-of-foundations/crypto-algebra.test.js'
 ];
 
 for (const suite of suites) {

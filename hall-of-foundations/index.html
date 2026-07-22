@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Hall of Foundations — interactive exhibits on the mathematics under cryptography: the number theory, hardness assumptions, and structures behind RSA, ECC, and the post-quantum standards.">
+<title>Hall of Foundations · Cipher Museum</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap-wide">
+  <header class="masthead">
+    <a class="home" href="../index.html">← Cipher Museum</a>
+    <span class="hall">Hall of Foundations</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Mathematics Under the Cryptography</div>
+    <h1>The ground your<br>keys <em>stand on</em></h1>
+    <p class="standfirst">
+      Every cipher in the Crypto Lab rests on mathematics far older than any
+      protocol. This hall shows that bedrock — the number theory, the hardness
+      assumptions, the structures — with a working interactive for each, and
+      an honest account of where the math stops being something a cryptographer
+      directly uses.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>What belongs here.</strong> These are foundations, not primitives.
+    You stand on every one of them when you generate a key or verify a
+    signature — but you never call them directly. For the deployable tools,
+    see the Crypto Lab. This hall is for understanding <em>why they work</em>.
+  </div>
+
+  <h2 class="group-label">The number theory ECC &amp; RSA rest on</h2>
+  <p class="group-sub">The arithmetic world where public-key cryptography actually happens.</p>
+  <div class="cards">
+    <a class="card" href="finite-fields.html">
+      <span class="cnum">§142</span>
+      <h3>Finite Fields</h3>
+      <span class="sym">𝔽ₚ · arithmetic mod a prime</span>
+      <p>Watch a smooth elliptic curve shatter into a scatter of dots — and see why the discrete log becomes hard.</p>
+    </a>
+    <a class="card" href="modular-arithmetic.html">
+      <span class="cnum">§143</span>
+      <h3>Modular Arithmetic</h3>
+      <span class="sym">ℤ/nℤ · clock arithmetic</span>
+      <p>Primitive roots and the cyclic group Diffie–Hellman lives inside.</p>
+    </a>
+    <a class="card" href="prime-number-theorem.html">
+      <span class="cnum">§144</span>
+      <h3>The Prime Number Theorem</h3>
+      <span class="sym">π(x) ~ x / ln x</span>
+      <p>Why RSA can find a 2048-bit prime in moments — the one theorem here that's genuinely load-bearing.</p>
+    </a>
+    <a class="card" href="euler-fermat.html">
+      <span class="cnum">§145</span>
+      <h3>Euler &amp; Fermat</h3>
+      <span class="sym">aᵠ⁽ⁿ⁾ ≡ 1 (mod n)</span>
+      <p>The little theorem that makes RSA decryption undo RSA encryption. Watch a message round-trip.</p>
+    </a>
+  </div>
+
+  <h2 class="group-label">Hardness assumptions — the honest bedrock</h2>
+  <p class="group-sub">Cryptography rests on problems believed hard. Here is what that means.</p>
+  <div class="cards">
+    <a class="card" href="one-way-function.html">
+      <span class="cnum">§146</span>
+      <h3>The One-Way Function</h3>
+      <span class="sym">easy → · hard ←</span>
+      <p>The conceptual keystone everything is downstream of. Multiply in a blink; factor and sweat.</p>
+    </a>
+    <a class="card" href="lattices-svp.html">
+      <span class="cnum">§147</span>
+      <h3>Lattices &amp; the SVP</h3>
+      <span class="sym">ℤⁿ · shortest vector</span>
+      <p>Drag a basis and hunt the shortest vector — the foundation under Kyber, Dilithium, and the post-quantum batch.</p>
+    </a>
+    <a class="card" href="closest-vector.html">
+      <span class="cnum">§152</span>
+      <h3>The Closest Vector Problem</h3>
+      <span class="sym">CVP · LWE · Kyber's core</span>
+      <p>Round a target to the nearest lattice corner — right with the secret basis, wrong with the public one. This is decryption.</p>
+    </a>
+    <a class="card" href="reduction.html">
+      <span class="cnum">§148</span>
+      <h3>Reduction &amp; Proof</h3>
+      <span class="sym">A ≤ B · "as hard as"</span>
+      <p>What "provably as hard as factoring" actually claims — and what it quietly assumes.</p>
+    </a>
+  </div>
+
+  <h2 class="group-label">Structures the protocols assume</h2>
+  <p class="group-sub">The vocabulary half the Lab silently depends on.</p>
+  <div class="cards">
+    <a class="card" href="group-theory.html">
+      <span class="cnum">§149</span>
+      <h3>Group Theory</h3>
+      <span class="sym">⟨g⟩ · cyclic groups &amp; order</span>
+      <p>Generators, order, and cyclic structure — the grammar of nearly every public-key scheme.</p>
+    </a>
+    <a class="card" href="elliptic-curves-real.html">
+      <span class="cnum">§150</span>
+      <h3>Elliptic Curves over ℝ</h3>
+      <span class="sym">y² = x³ + ax + b</span>
+      <p>A gentle first look at the group law, drawn by hand, before it moves to a finite field.</p>
+    </a>
+    <a class="card" href="entropy.html">
+      <span class="cnum">§151</span>
+      <h3>Information &amp; Entropy</h3>
+      <span class="sym">H = −Σ p log p</span>
+      <p>Shannon's measure of surprise: why the one-time pad is perfect and why key length is destiny.</p>
+    </a>
+  </div>
+
+  <h2 class="group-label">Post-quantum &amp; advanced structures</h2>
+  <p class="group-sub">The exact math the deployed standards and privacy protocols are built from.</p>
+  <div class="cards">
+    <a class="card" href="polynomial-rings.html">
+      <span class="cnum">§153</span>
+      <h3>Polynomial Rings</h3>
+      <span class="sym">R_q = ℤ_q[X]/(Xⁿ+1)</span>
+      <p>The structured lattices inside ML-KEM and ML-DSA — watch polynomials wrap around the ring boundary.</p>
+    </a>
+    <a class="card" href="random-oracle.html">
+      <span class="cnum">§154</span>
+      <h3>The Random Oracle</h3>
+      <span class="sym">avalanche · Fiat–Shamir</span>
+      <p>Flip one input bit, scramble half the output — the hash assumption every signature stands on.</p>
+    </a>
+    <a class="card" href="interpolation.html">
+      <span class="cnum">§155</span>
+      <h3>Polynomial Interpolation</h3>
+      <span class="sym">k points fix a degree-(k−1) curve</span>
+      <p>Drag points until the curve locks and the secret intercept appears — the heart of Shamir sharing.</p>
+    </a>
+    <a class="card" href="pairings.html">
+      <span class="cnum">§156</span>
+      <h3>Bilinear Pairings</h3>
+      <span class="sym">e(aP,bQ) = e(P,Q)ᵃᵇ</span>
+      <p>Verify a product of hidden scalars without revealing them — the magic under zk-SNARKs.</p>
+    </a>
+  </div>
+
+  <div style="height:20px"></div>
+  <section class="exhibit">
+    <p class="aside" style="border-top:none">
+      Companion exhibit: <a href="modularity-exhibit.html" style="color:var(--vermilion)">The Ground Beneath the Curve</a>
+      — the modularity theorem and the number theory ECC inherits. Start there if
+      you came from the Fermat's Last Theorem thread.
+    </p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

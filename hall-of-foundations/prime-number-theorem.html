@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Why RSA can find a 2048-bit prime in moments — the Prime Number Theorem at work.">
+<title>The Prime Number Theorem · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 144 · π(x) ~ x/ln x</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The One Foundation That's Genuinely Load-Bearing</div>
+    <h1>How to find a<br>prime in the <em>dark</em></h1>
+    <p class="standfirst">
+      RSA needs two enormous primes — hundreds of digits each. There is no
+      formula that hands them to you. Instead you guess, test, and repeat. The
+      only reason this ever finishes is a theorem about how densely primes are
+      scattered among the integers.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Unlike the rest of this hall,</strong> the Prime Number Theorem is
+    not background structure — it is directly load-bearing. Every RSA key you
+    have ever used exists because primes are common enough to stumble onto by
+    chance.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>Primes thin out — but slowly</h2></div>
+    <p>
+      Among small numbers, primes are everywhere. As you climb, they thin. The
+      <span class="term">Prime Number Theorem</span> pins down exactly how fast:
+      the count of primes below <em>x</em>, written π(x), grows like x⁄ln x.
+      Equivalently, a number near <em>x</em> is prime with probability about
+      1⁄ln x.
+    </p>
+    <div class="eq">π(x) ≈ x / ln x &nbsp;·&nbsp; density near x ≈ 1 / ln x</div>
+    <p>
+      Drag the slider from small numbers up toward cryptographic sizes and watch
+      the true prime count track the theorem's smooth prediction.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 420" id="pnt" role="img"
+             aria-label="Prime counting function versus x over ln x."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>x up to
+          <input type="range" id="xr" min="100" max="5000" step="100" value="1000">
+        </label>
+        <div class="readout" id="pread">—</div>
+      </div>
+      <div class="lab-hint">
+        Ink dots: the <b>true</b> π(x), counted by sieve. Teal line: the theorem's
+        estimate x⁄ln x. They hug each other — and the fit only improves as x grows.
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>The keygen coin-flip</h2></div>
+    <p>
+      Here's the payoff. To make a 2048-bit RSA modulus you need a random
+      1024-bit prime. A random 1024-bit odd number is prime with probability
+      about 1⁄ln(2¹⁰²⁴) ≈ 1⁄710. So on average you test a few hundred candidates,
+      each with a fast primality check, and you're done — in milliseconds.
+    </p>
+    <div class="eq" id="bitsbox">at 1024 bits: ~1 in 710 candidates is prime</div>
+    <p>
+      Without the theorem's guarantee that primes stay this dense, key generation
+      could take longer than the age of the universe. The density is the whole
+      reason RSA is practical.
+    </p>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>Every RSA key ever made</h3>
+      <p>
+        The <span style="color:var(--vermilion-soft)">rsa-forge</span> demo in
+        the Crypto Lab generates keys by exactly this loop: pick random, test
+        primality, repeat. It terminates quickly for one reason — the Prime
+        Number Theorem promises the primes are there to be found. This is the
+        rare foundation you <strong>do</strong> lean on every single time.
+      </p>
+    </div>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function sieve(n){var s=new Array(n+1).fill(true);s[0]=s[1]=false;
+    for(var i=2;i*i<=n;i++)if(s[i])for(var j=i*i;j<=n;j+=i)s[j]=false;return s;}
+
+  var pnt=document.getElementById("pnt"), xr=document.getElementById("xr"), pread=document.getElementById("pread");
+  var W=700,H=420,pad=52;
+
+  function draw(){
+    var X=+xr.value; pnt.innerHTML="";
+    var s=sieve(X);
+    // compute pi(x) samples
+    var samples=[], cumcount=0, maxpi=0;
+    for(var x=2;x<=X;x++){ if(s[x])cumcount++; if(x%Math.max(1,Math.floor(X/120))===0||x===X){ samples.push([x,cumcount]); } maxpi=cumcount; }
+    var estMax=X/Math.log(X);
+    var yMax=Math.max(maxpi,estMax)*1.08;
+    function px(x){return pad+(x/X)*(W-2*pad);}
+    function py(v){return H-pad-(v/yMax)*(H-2*pad);}
+    // axes
+    pnt.appendChild(el("line",{x1:pad,y1:H-pad,x2:W-pad,y2:H-pad,stroke:"#F3EEDF","stroke-width":1.5}));
+    pnt.appendChild(el("line",{x1:pad,y1:pad,x2:pad,y2:H-pad,stroke:"#F3EEDF","stroke-width":1.5}));
+    // estimate curve x/ln x
+    var d="";
+    for(var x=2;x<=X;x+=Math.max(1,Math.floor(X/200))){ var v=x/Math.log(x);
+      d+=(d?"L":"M")+px(x).toFixed(1)+" "+py(v).toFixed(1)+" "; }
+    pnt.appendChild(el("path",{d:d.trim(),fill:"none",stroke:"#5AC8A0","stroke-width":2.4}));
+    // true pi(x) dots
+    samples.forEach(function(pt){
+      pnt.appendChild(el("circle",{cx:px(pt[0]).toFixed(1),cy:py(pt[1]).toFixed(1),r:2.4,fill:"#F3EEDF","fill-opacity":0.8}));
+    });
+    // labels
+    var lx=el("text",{x:W-pad,y:H-pad+22,fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"12","text-anchor":"end"});
+    lx.textContent="x = "+X; pnt.appendChild(lx);
+    var ly=el("text",{x:pad+8,y:pad-8,fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"12"});
+    ly.textContent="count of primes ≤ x"; pnt.appendChild(ly);
+    // legend
+    var lg=el("text",{x:px(X*0.55),y:py(X*0.55/Math.log(X*0.55))-10,fill:"#5AC8A0","font-family":"ui-monospace,monospace","font-size":"13","font-weight":"700"});
+    lg.textContent="x / ln x"; pnt.appendChild(lg);
+    pread.innerHTML="π("+X+") = <b>"+maxpi+"</b> &nbsp;·&nbsp; x/ln x ≈ <b>"+Math.round(estMax)+"</b>";
+  }
+  xr.addEventListener("input",draw);
+  draw();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

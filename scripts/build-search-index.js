@@ -230,6 +230,35 @@ function processHallPage(file) {
   };
 }
 
+// ── process hall-of-foundations/*.html ───────────────────────────────────────
+// The Foundations annex uses its own page chrome (no h1.page-title): title
+// comes from <title>, the exhibit number from the masthead .hall span.
+
+function processFoundationsPage(file) {
+  const html = fs.readFileSync(file, 'utf8');
+  const slug = path.basename(file);
+
+  const title = decodeEntities(((html.match(/<title>([^<|]+)/) || [])[1] || '')
+    .split('·')[0].trim());
+  if (!title) return null;
+
+  const summary = extractMeta(html, 'description');
+  const numM    = html.match(/class=["']hall["'][^>]*>\s*Exhibit\s+(\d+)/i);
+  const num     = numM ? `§${numM[1]}` : '—';
+  const isIndex = slug === 'index.html';
+
+  return {
+    t: isIndex ? 'Hall of Foundations' : title,
+    u: 'hall-of-foundations/' + slug,
+    k: isIndex ? 'hall' : 'exhibit',
+    h: isIndex ? '—' : 'Foundations',
+    c: num,
+    b: '—',
+    s: summary,
+    g: ['foundations', 'mathematics', ...(isIndex ? ['hall'] : [])],
+  };
+}
+
 // ── process top-level pages ───────────────────────────────────────────────────
 
 // Explicit inclusion list — index.html (homepage) and search.html excluded
@@ -313,6 +342,20 @@ function main() {
       entries.push(entry);
     } else {
       warnings.push('  skip (no h1.page-title): halls/' + f);
+    }
+  }
+
+  // 2b. Hall of Foundations annex pages
+  const foundationFiles = fs.readdirSync(path.join(ROOT, 'hall-of-foundations'))
+    .filter(f => f.endsWith('.html'))
+    .sort();
+
+  for (const f of foundationFiles) {
+    const entry = processFoundationsPage(path.join(ROOT, 'hall-of-foundations', f));
+    if (entry) {
+      entries.push(entry);
+    } else {
+      warnings.push('  skip (no title): hall-of-foundations/' + f);
     }
   }
 

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Round a target to the nearest lattice corner — right with the secret basis, wrong with the public one. This is ML-KEM decryption.">
+<title>The Closest Vector Problem · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 152 · CVP → LWE</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Problem ML-KEM (Kyber) Actually Leans On</div>
+    <h1>Finding the<br>nearest <em>corner</em></h1>
+    <p class="standfirst">
+      Its sibling exhibit asked for the shortest vector in a lattice. This one
+      asks something subtler: given a target point floating <em>off</em> the
+      grid, which lattice corner is closest? Answer it and you can decrypt.
+      Fail, and you're staring at noise. This is the ground Kyber stands on.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>The same lattice, two fortunes.</strong> With the secret "good"
+    basis, the closest corner falls out of a single rounding step. With the
+    public "bad" basis, that same rounding lands on the wrong corner most of the
+    time. The gap between those two outcomes <em>is</em> the encryption.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§1</span><h2>A point that isn't on the grid</h2></div>
+    <p>
+      Drag the <span style="color:var(--vermilion)">target</span> anywhere. The
+      <span class="term">Closest Vector Problem</span> asks for the lattice point
+      nearest to it. In two dimensions your eye finds it instantly — but your eye
+      is using the grid's true shape, which the attacker doesn't get to see.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 520" id="cvp" role="img"
+             aria-label="A lattice with a draggable target point and the closest lattice point marked."></svg>
+      </div>
+      <div class="lab-bar">
+        <button id="basisToggle" class="ghost">Basis: bad &#8594; good</button>
+        <button id="solve">Round with this basis</button>
+        <button id="truth" class="ghost">Show true nearest</button>
+        <div class="readout" id="cread" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        The <span style="color:var(--teal)">teal ring</span> is the <b>true</b>
+        closest corner. The <span style="color:var(--vermilion)">vermilion
+        square</span> is where <b>Babai rounding with the current basis</b>
+        lands. With a good basis they coincide; with a bad one they part ways.
+      </div>
+      <!-- keyboard / screen-reader fallback -->
+      <div class="a11y-fallback">
+        <span class="vh" id="cvpKbLabel">Keyboard alternative: set the target coordinates and choose a basis, then round.</span>
+        <label>target x
+          <input type="number" id="tx" value="2.3" step="0.1" min="-5" max="5" aria-describedby="cvpKbLabel">
+        </label>
+        <label>target y
+          <input type="number" id="ty" value="1.7" step="0.1" min="-5" max="5">
+        </label>
+        <button id="applyTarget" type="button">Set target</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§2</span><h2>Rounding in the basis you're handed</h2></div>
+    <p>
+      The natural algorithm &#8212; <span class="term">Babai's rounding</span> &#8212;
+      rewrites the target in terms of the two basis vectors, then rounds each
+      coordinate to the nearest whole number. It's fast and exact when the
+      vectors are short and near-perpendicular. When they're long and skewed, the
+      rounding boxes are stretched slivers, and the nearest lattice coordinates
+      point at the wrong corner.
+    </p>
+    <div class="eq">t = a&#183;b&#8321; + b&#183;b&#8322; &nbsp;&#8594;&nbsp; round(a), round(b) &nbsp;&#8594;&nbsp; nearest corner?</div>
+    <ul class="ladder">
+      <li><span class="rung">Good basis<span>the secret key</span></span><span class="gloss">Short, near-perpendicular vectors. Rounding lands on the true nearest corner every time.</span></li>
+      <li><span class="rung">Bad basis<span>the public key</span></span><span class="gloss">Long, skewed vectors for the same lattice. Rounding misfires on most targets &#8212; about four in five.</span></li>
+    </ul>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">§3</span><h2>Add noise, and you have Learning With Errors</h2></div>
+    <p>
+      Here is the actual encryption mechanism. Take a genuine lattice point, nudge
+      it by a small random <span class="term">error</span>, and publish the
+      result &#8212; that's a ciphertext. Decryption is a Closest Vector Problem: round
+      back to the nearest corner to recover the point. It works only while the
+      noise stays inside the cell around that corner. Push the
+      <b>noise</b> slider and watch even the good basis start to fail as the error
+      grows past what its cell can absorb.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 460" id="lwe" role="img"
+             aria-label="Learning With Errors: a lattice point plus growing noise, and whether decryption recovers it."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>noise &#963;
+          <input type="range" id="noise" min="0" max="150" step="1" value="30" aria-describedby="lweRead">
+        </label>
+        <label>basis
+          <select id="lweBasis">
+            <option value="good">good (secret)</option>
+            <option value="bad">bad (public)</option>
+          </select>
+        </label>
+        <button id="resample">New sample</button>
+        <div class="readout" id="lweRead" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        The <span style="color:var(--ink)">ink dot</span> is the true point (the
+        message). The <span style="color:var(--vermilion)">vermilion dot</span>
+        is the published ciphertext = point + noise. Decryption succeeds when
+        rounding returns the ink dot &#8212; a <span style="color:var(--teal)">teal
+        ring</span>. As &#963; grows, the good basis holds far longer than the bad one.
+      </div>
+    </div>
+
+    <div class="pull">
+      Security is the noise. Too little and it's plain CVP; enough, in high
+      dimensions, and only the good-basis holder can round back home.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The ML-KEM decryption step, laid bare</h3>
+      <p>
+        This is exactly what <span style="color:var(--vermilion-soft)">kyber-vault</span>
+        does. <strong>ML-KEM</strong> (the standardized name for Kyber) encrypts by
+        encoding your message into a lattice point and adding LWE noise; it
+        decrypts by rounding back to the nearest point with the secret key. The
+        public key is the bad basis everyone gets; the secret key is the good
+        basis that makes the rounding land true &#8212; as long as the noise was
+        bounded. Where <a href="lattices-svp.html">the SVP exhibit</a> showed
+        <em>why the key is hidden</em>, this shows <strong>why the owner can
+        still get in &#8212; and why the noise budget matters.</strong>
+      </p>
+    </div>
+    <p class="aside">Read first: <a href="lattices-svp.html" style="color:var(--vermilion)">Lattices &amp; the SVP</a>. Related: <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a> for how ML-KEM's security reduces to this problem.</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script src="lattice-math.js"></script>
+<script>
+(function(){
+  "use strict";
+  const LM = window.LatticeMath;
+  const NS = "http://www.w3.org/2000/svg";
+  const make = (t,a) => { const e=document.createElementNS(NS,t); for(const k in a)e.setAttribute(k,a[k]); return e; };
+
+  const bases = {
+    good: { b1:[1,0], b2:[0,1], name:"good basis (secret)" },
+    bad:  { b1:[4,3], b2:[5,4], name:"bad basis (public)" }
+  };
+
+  /* ================= section 1: CVP interactive ================= */
+  const svg = document.getElementById("cvp");
+  const cread = document.getElementById("cread");
+  const W=700, H=520, ox=310, oy=270, scale=44;
+  let current="bad", target={x:2.3,y:1.7};
+  let showTruth=false, showRound=false, dragging=false;
+  const sx=u=>ox+u*scale, sy=v=>oy-v*scale;
+
+  function drawCVP(){
+    svg.innerHTML="";
+    const R=6;
+    for(let i=-R;i<=R;i++)for(let j=-R;j<=R;j++){
+      const px=sx(i), py=sy(j);
+      if(px<12||px>W-12||py<12||py>H-12) continue;
+      svg.appendChild(make("circle",{cx:px,cy:py,r:(i===0&&j===0)?5:3,fill:(i===0&&j===0)?"#F3EEDF":"#C3A96F"}));
+    }
+    const {b1,b2}=bases[current];
+    [[b1,"b\u2081"],[b2,"b\u2082"]].forEach(([b,lab])=>{
+      svg.appendChild(make("line",{x1:sx(0),y1:sy(0),x2:sx(b[0]),y2:sy(b[1]),stroke:"#D4B765","stroke-width":2,"stroke-opacity":0.7}));
+      const t=make("text",{x:sx(b[0])+8,y:sy(b[1])-8,fill:"#D4B765","font-family":"ui-monospace,monospace","font-size":"13","font-weight":"700"});
+      t.textContent=lab; svg.appendChild(t);
+    });
+    if(showTruth){
+      const tn=LM.closestPoint(target);
+      svg.appendChild(make("circle",{cx:sx(tn.x),cy:sy(tn.y),r:12,fill:"none",stroke:"#5AC8A0","stroke-width":3}));
+    }
+    if(showRound){
+      const br=LM.babaiRound(target,bases[current].b1,bases[current].b2);
+      svg.appendChild(make("rect",{x:sx(br.x)-9,y:sy(br.y)-9,width:18,height:18,fill:"none",stroke:"#C85A5A","stroke-width":3}));
+      svg.appendChild(make("line",{x1:sx(target.x),y1:sy(target.y),x2:sx(br.x),y2:sy(br.y),stroke:"#C85A5A","stroke-width":1.4,"stroke-dasharray":"4 4","stroke-opacity":0.7}));
+    }
+    svg.appendChild(make("circle",{cx:sx(target.x),cy:sy(target.y),r:9,fill:"#C85A5A",stroke:"#1c1c22","stroke-width":2,cursor:"grab"}));
+    const tl=make("text",{x:sx(target.x)+13,y:sy(target.y)+5,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"13","font-weight":"700"});
+    tl.textContent="target"; svg.appendChild(tl);
+
+    if(showRound||showTruth){
+      const tn=LM.closestPoint(target), br=LM.babaiRound(target,bases[current].b1,bases[current].b2);
+      const correct=(br.x===tn.x&&br.y===tn.y);
+      cread.innerHTML=bases[current].name+" \u00b7 rounds \u2192 ("+br.x+", "+br.y+") "+(correct?"<b style='color:#5AC8A0'>\u2713 correct corner</b>":"<b style='color:#C85A5A'>\u2717 wrong corner</b>");
+    } else {
+      cread.innerHTML="target ( <b>"+target.x.toFixed(2)+"</b>, <b>"+target.y.toFixed(2)+"</b> ) \u00b7 "+bases[current].name+" \u00b7 drag or type coordinates";
+    }
+  }
+  function toUnits(evt){
+    const rect=svg.getBoundingClientRect();
+    const mx=((evt.touches?evt.touches[0].clientX:evt.clientX)-rect.left)*(W/rect.width);
+    const my=((evt.touches?evt.touches[0].clientY:evt.clientY)-rect.top)*(H/rect.height);
+    return {x:(mx-ox)/scale, y:(oy-my)/scale};
+  }
+  function nearTarget(evt){
+    const rect=svg.getBoundingClientRect();
+    const mx=((evt.touches?evt.touches[0].clientX:evt.clientX)-rect.left)*(W/rect.width);
+    const my=((evt.touches?evt.touches[0].clientY:evt.clientY)-rect.top)*(H/rect.height);
+    return Math.hypot(mx-sx(target.x),my-sy(target.y))<28;
+  }
+  function moveTarget(evt){
+    if(!dragging)return;
+    const u=toUnits(evt);
+    target.x=Math.max(-5,Math.min(5,u.x)); target.y=Math.max(-5,Math.min(5,u.y));
+    document.getElementById("tx").value=target.x.toFixed(2);
+    document.getElementById("ty").value=target.y.toFixed(2);
+    showRound=false; showTruth=false; drawCVP();
+  }
+  svg.addEventListener("mousedown",e=>{ if(nearTarget(e))dragging=true; });
+  svg.addEventListener("mousemove",moveTarget);
+  window.addEventListener("mouseup",()=>{dragging=false;});
+  svg.addEventListener("touchstart",e=>{ if(nearTarget(e)){dragging=true;e.preventDefault();} },{passive:false});
+  svg.addEventListener("touchmove",e=>{ if(dragging){moveTarget(e);e.preventDefault();} },{passive:false});
+  window.addEventListener("touchend",()=>{dragging=false;});
+
+  document.getElementById("solve").addEventListener("click",()=>{ showRound=true; drawCVP(); });
+  document.getElementById("truth").addEventListener("click",()=>{ showTruth=true; drawCVP(); });
+  document.getElementById("basisToggle").addEventListener("click",function(){
+    current = current==="bad" ? "good" : "bad";
+    this.textContent = current==="bad" ? "Basis: bad \u2192 good" : "Basis: good \u2192 bad";
+    showRound=false; showTruth=false; drawCVP();
+  });
+  document.getElementById("applyTarget").addEventListener("click",()=>{
+    const nx=parseFloat(document.getElementById("tx").value);
+    const ny=parseFloat(document.getElementById("ty").value);
+    if(!isNaN(nx)&&!isNaN(ny)){
+      target.x=Math.max(-5,Math.min(5,nx)); target.y=Math.max(-5,Math.min(5,ny));
+      showRound=true; showTruth=true; drawCVP();
+    }
+  });
+  drawCVP();
+
+  /* ================= section 3: LWE noise interactive ================= */
+  const lwe=document.getElementById("lwe");
+  const noiseR=document.getElementById("noise");
+  const lweBasis=document.getElementById("lweBasis");
+  const lweRead=document.getElementById("lweRead");
+  const LW=700, LH=460, lox=350, loy=230, lscale=52;
+  const lsx=u=>lox+u*lscale, lsy=v=>loy-v*lscale;
+  let truePoint={x:1,y:0};
+  let noiseDir=Math.random()*2*Math.PI;
+
+  function drawLWE(){
+    lwe.innerHTML="";
+    const cur=lweBasis.value, {b1,b2}=bases[cur];
+    const sigma=(+noiseR.value)/100;
+    const e={x:sigma*Math.cos(noiseDir), y:sigma*Math.sin(noiseDir)};
+    const res=LM.lweRecover(truePoint,e,b1,b2);
+    const R=5;
+    for(let i=-R;i<=R;i++)for(let j=-R;j<=R;j++){
+      const px=lsx(i),py=lsy(j);
+      if(px<12||px>LW-12||py<12||py>LH-12)continue;
+      lwe.appendChild(make("circle",{cx:px,cy:py,r:3,fill:"#C3A96F","fill-opacity":0.7}));
+    }
+    lwe.appendChild(make("circle",{cx:lsx(truePoint.x),cy:lsy(truePoint.y),r:sigma*lscale,
+      fill:"#C85A5A","fill-opacity":0.06,stroke:"#C85A5A","stroke-width":1,"stroke-dasharray":"3 3","stroke-opacity":0.5}));
+    if(res.recovered){
+      const okColor = res.ok ? "#5AC8A0" : "#C85A5A";
+      lwe.appendChild(make("circle",{cx:lsx(res.recovered.x),cy:lsy(res.recovered.y),r:14,fill:"none",stroke:okColor,"stroke-width":3}));
+    }
+    lwe.appendChild(make("circle",{cx:lsx(truePoint.x),cy:lsy(truePoint.y),r:8,fill:"#F3EEDF",stroke:"#1c1c22","stroke-width":2}));
+    lwe.appendChild(make("line",{x1:lsx(truePoint.x),y1:lsy(truePoint.y),x2:lsx(res.noisyTarget.x),y2:lsy(res.noisyTarget.y),stroke:"#C85A5A","stroke-width":1.5}));
+    lwe.appendChild(make("circle",{cx:lsx(res.noisyTarget.x),cy:lsy(res.noisyTarget.y),r:7,fill:"#C85A5A",stroke:"#1c1c22","stroke-width":2}));
+    const l1=make("text",{x:lsx(truePoint.x)-12,y:lsy(truePoint.y)+26,fill:"#F3EEDF","font-family":"ui-monospace,monospace","font-size":"12","text-anchor":"end","font-weight":"700"}); l1.textContent="message"; lwe.appendChild(l1);
+    const l2=make("text",{x:lsx(res.noisyTarget.x)+12,y:lsy(res.noisyTarget.y)-10,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"12","font-weight":"700"}); l2.textContent="ciphertext"; lwe.appendChild(l2);
+
+    lweRead.innerHTML="\u03c3 = <b>"+sigma.toFixed(2)+"</b> \u00b7 "+cur+" basis \u00b7 decryption "+
+      (res.ok?"<b style='color:#5AC8A0'>\u2713 recovered</b>":"<b style='color:#C85A5A'>\u2717 lost the message</b>");
+  }
+  noiseR.addEventListener("input",drawLWE);
+  lweBasis.addEventListener("change",drawLWE);
+  document.getElementById("resample").addEventListener("click",()=>{
+    truePoint={x:Math.floor(Math.random()*5)-2, y:Math.floor(Math.random()*5)-2};
+    noiseDir=Math.random()*2*Math.PI; drawLWE();
+  });
+  drawLWE();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

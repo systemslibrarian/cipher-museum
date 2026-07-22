@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Flip one input bit, scramble half the output — the hash assumption every signature stands on.">
+<title>The Random Oracle &#183; Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">&#8592; Hall of Foundations</a>
+    <span class="hall">Exhibit 154 &#183; the perfect hash</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">The Assumption Beneath Every Signature</div>
+    <h1>The oracle that<br>can't be <em>predicted</em></h1>
+    <p class="standfirst">
+      Much of cryptography leans on a fiction so useful it's treated as bedrock:
+      a hash function that behaves like a perfectly random one. Feed it anything,
+      get back noise you could never have guessed &#8212; and the same input always
+      returns the same noise. From that single idea, signatures are built.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>A model, held on purpose.</strong> No real function is a true random
+    oracle. But designing a scheme as if one exists, then instantiating it with
+    a strong hash like SHA-3, is how a huge fraction of deployed cryptography is
+    proven and built. This exhibit shows the two properties that make the fiction
+    hold up.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;1</span><h2>Two demands on a hash</h2></div>
+    <p>
+      A cryptographic hash must be <span class="term">one-way</span> &#8212; given an
+      output, you cannot find an input that produces it &#8212; and
+      <span class="term">collision-resistant</span> &#8212; you cannot find two
+      inputs that produce the same output. Both reduce to one visible behavior:
+      the output must look utterly unrelated to the input.
+    </p>
+    <div class="eq">pre-image: given h, find m with H(m)=h &nbsp;&#183;&nbsp; collision: find m&#8321; &#8800; m&#8322; with H(m&#8321;)=H(m&#8322;)</div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;2</span><h2>The avalanche</h2></div>
+    <p>
+      Here's the property you can see. Flip a <em>single</em> input bit and, in a
+      good hash, roughly <em>half</em> the output bits flip &#8212; with no pattern
+      linking which. Toggle any input bit below and watch the change cascade
+      through the mixing rounds. A one-bit nudge should scramble the whole output.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 460" id="ava" role="img"
+             aria-label="Avalanche effect: flipping one input bit cascades to change about half the output bits."></svg>
+      </div>
+      <div class="lab-bar">
+        <button id="flipRand">Flip a random bit</button>
+        <button id="newIn" class="ghost">New input</button>
+        <div class="readout" id="aread" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        Click any <span style="color:var(--ink)">input bit</span> (top row) to
+        toggle it. The <span style="color:var(--vermilion)">vermilion</span>
+        output bits are the ones that changed versus the previous output. A good
+        mixer changes about <b>half</b>, unpredictably &#8212; that's the avalanche.
+      </div>
+      <div class="a11y-fallback">
+        <span class="vh" id="avaKb">Keyboard alternative: enter a bit position 0 to 15 to toggle, then apply.</span>
+        <label>toggle bit #
+          <input type="number" id="bitIn" value="0" min="0" max="15" step="1" aria-describedby="avaKb">
+        </label>
+        <button id="toggleBtn" type="button">Toggle bit</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;3</span><h2>From random oracle to signature</h2></div>
+    <p>
+      The random-oracle model is the engine of the <span class="term">Fiat&#8211;Shamir
+      heuristic</span>: it turns an interactive proof &#8212; where a verifier sends
+      random challenges &#8212; into a non-interactive signature, by replacing the
+      verifier's coins with a hash of the message. If the hash behaves like a
+      random oracle, the challenge is unpredictable, and the proof stays sound.
+    </p>
+    <div class="pull">
+      Hash the message to get an unforgeable challenge, and an interactive proof
+      becomes a signature anyone can check.
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>Under the signatures in your Lab</h3>
+      <p>
+        Fiat&#8211;Shamir is everywhere in your portfolio:
+        <span style="color:var(--vermilion-soft)">dilithium-seal</span> (ML-DSA),
+        <span style="color:var(--vermilion-soft)">frost-threshold</span>, and
+        Schnorr-style signatures all convert an interactive identification proof
+        into a signature by hashing. <strong>ML-DSA</strong> is literally
+        "Fiat&#8211;Shamir with aborts" over the <a href="polynomial-rings.html">polynomial
+        ring</a>. The random-oracle assumption is the ground all of that stands on.
+      </p>
+    </div>
+    <p class="aside">Related: <a href="one-way-function.html" style="color:var(--vermilion)">One-Way Functions</a> (pre-image resistance in general), <a href="reduction.html" style="color:var(--vermilion)">Reduction &amp; Proof</a> (what a proof in this model claims).</p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const NS="http://www.w3.org/2000/svg";
+  const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const ava=document.getElementById("ava");
+  const aread=document.getElementById("aread");
+
+  // toy 16-bit mixer with several rounds; deterministic, strong avalanche
+  function mix(x){
+    x&=0xFFFF;
+    x=(x^(x<<7))&0xFFFF;
+    x=(x^(x>>>3))&0xFFFF;
+    x=(x^(x<<5))&0xFFFF;
+    x=(x*0x9E37)&0xFFFF;
+    x=(x^(x>>>8))&0xFFFF;
+    x=(x^(x<<2))&0xFFFF;
+    return x&0xFFFF;
+  }
+  const bits=v=>Array.from({length:16},(_,i)=>(v>>>(15-i))&1);
+
+  let input=0b1011001110100101;
+  let prevOut=mix(input);
+
+  function draw(changedInputBit){
+    ava.innerHTML="";
+    const out=mix(input);
+    const inB=bits(input), outB=bits(out), prevB=bits(prevOut);
+    const W=700, x0=70, cell=36, gap=2, topY=120, botY=300;
+    const lab=(y,txt)=>{const t=mk("text",{x:x0,y:y-18,fill:"#D5CDDF","font-family":"ui-monospace,monospace","font-size":"13","font-weight":"700"});t.textContent=txt;ava.appendChild(t);};
+    lab(topY,"input  (click a bit to flip)");
+    lab(botY,"output  (vermilion = changed)");
+
+    // input row (clickable)
+    inB.forEach((b,i)=>{
+      const x=x0+i*(cell+gap);
+      const changed=(changedInputBit===i);
+      const g=mk("g",{cursor:"pointer",class:"inbit","data-i":i});
+      g.appendChild(mk("rect",{x,y:topY,width:cell,height:cell,rx:3,
+        fill:b?"#F3EEDF":"#1c1c22",stroke:changed?"#C85A5A":"#2e2e3a","stroke-width":changed?2.5:1}));
+      const t=mk("text",{x:x+cell/2,y:topY+cell/2+5,fill:b?"#1c1c22":"#F3EEDF",
+        "font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700","text-anchor":"middle"});
+      t.textContent=b; g.appendChild(t);
+      g.addEventListener("click",()=>toggle(i));
+      ava.appendChild(g);
+    });
+
+    // connecting "mixing" lines
+    ava.appendChild(mk("text",{x:W/2,y:(topY+botY)/2+18,fill:"#D4B765",
+      "font-family":"ui-monospace,monospace","font-size":"13","text-anchor":"middle","font-style":"italic",
+    })).textContent="6 rounds of shift \u00b7 xor \u00b7 multiply";
+
+    // output row
+    let flips=0;
+    outB.forEach((b,i)=>{
+      const x=x0+i*(cell+gap);
+      const changed=(b!==prevB[i]); if(changed)flips++;
+      ava.appendChild(mk("rect",{x,y:botY,width:cell,height:cell,rx:3,
+        fill:changed?"#C85A5A":(b?"#F3EEDF":"#1c1c22"),stroke:"#2e2e3a","stroke-width":1}));
+      const t=mk("text",{x:x+cell/2,y:botY+cell/2+5,fill:(changed||b)?"#1c1c22":"#F3EEDF",
+        "font-family":"ui-monospace,monospace","font-size":"15","font-weight":"700","text-anchor":"middle"});
+      t.textContent=b; ava.appendChild(t);
+    });
+
+    aread.innerHTML="input 0x"+input.toString(16).toUpperCase().padStart(4,"0")+
+      " \u2192 output 0x"+out.toString(16).toUpperCase().padStart(4,"0")+
+      " \u00b7 <b>"+flips+"/16</b> output bits changed";
+  }
+
+  function toggle(i){
+    prevOut=mix(input);
+    input^=(1<<(15-i));
+    draw(i);
+  }
+  document.getElementById("flipRand").addEventListener("click",()=>toggle(Math.floor(Math.random()*16)));
+  document.getElementById("newIn").addEventListener("click",()=>{
+    input=Math.floor(Math.random()*0x10000); prevOut=mix(input); draw(-1);
+  });
+  document.getElementById("toggleBtn").addEventListener("click",()=>{
+    const b=parseInt(document.getElementById("bitIn").value,10);
+    if(!isNaN(b)&&b>=0&&b<=15) toggle(b);
+  });
+  draw(-1);
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

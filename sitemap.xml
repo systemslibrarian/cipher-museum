@@ -22,6 +22,24 @@
   <url><loc>https://ciphermuseum.com/halls/modern-crypto.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/halls/unsolved.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/halls/culture.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <!-- Hall of Foundations (mathematics annex, exhibits 141-156) -->
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/index.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/modularity-exhibit.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/finite-fields.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/modular-arithmetic.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/prime-number-theorem.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/euler-fermat.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/one-way-function.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/lattices-svp.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/reduction.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/group-theory.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/elliptic-curves-real.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/entropy.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/closest-vector.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/polynomial-rings.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/random-oracle.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/interpolation.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/hall-of-foundations/pairings.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <!-- Cipher Exhibits -->
   <url><loc>https://ciphermuseum.com/ciphers/egyptian-substitution.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/ciphers/rosetta-stone.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
