@@ -124,12 +124,22 @@
       <div class="flag">Where this touches your keys</div>
       <h3>Why anyone trusts a primitive</h3>
       <p>
-        When a modern scheme claims a security level, that claim is a
-        reduction to one of the hard problems in this hall. It's also why
+        When a <em>public-key</em> scheme claims a security level, that claim is
+        a reduction to one of the hard problems in this hall. It's also why
         <strong>assumptions matter more than cleverness</strong>: a scheme with a
         tight reduction to lattices is trusted not because it looks complex, but
         because its difficulty is anchored to a problem the world has failed to
         solve for decades.
+      </p>
+      <p>
+        Symmetric cryptography earns trust the other way, and the contrast is
+        the honest end of this exhibit. There is no reduction proving
+        <a href="../ciphers/aes.html">AES</a> secure &#8212; no hard problem
+        underneath it to reduce to. What AES has instead is thirty years of the
+        world's best cryptanalysts attacking it in public and failing to find
+        anything close to practical. That is evidence, not proof, and it is a
+        genuinely different currency from the arguments on this page. Both kinds
+        of trust are load-bearing; neither is a substitute for the other.
       </p>
     </div>
     <p class="aside">Foundations referenced here: <a href="one-way-function.html" style="color:var(--vermilion)">One-Way Functions</a>, <a href="lattices-svp.html" style="color:var(--vermilion)">Lattices &amp; the SVP</a>.</p>

@@ -5,7 +5,7 @@
   "icon": "𝔽",
   "stops": [
     {"href": "../hall-of-foundations/modular-arithmetic.html", "label": "Modular Arithmetic", "note": "Start with the clock: Z/nZ, primitive roots, and the cyclic group Diffie–Hellman lives inside (§143)."},
-    {"href": "../hall-of-foundations/group-theory.html", "label": "Group Theory", "note": "Generators, order, cyclic structure — the grammar of nearly every public-key scheme (§149)."},
+    {"href": "../hall-of-foundations/group-theory.html", "label": "Group Theory", "note": "Generators, order, cyclic structure — the grammar of the discrete-log family (§149)."},
     {"href": "../hall-of-foundations/finite-fields.html", "label": "Finite Fields", "note": "Arithmetic mod a prime, where the elliptic curve shatters into a scatter and the discrete log gets hard (§142)."},
     {"href": "../hall-of-foundations/prime-number-theorem.html", "label": "The Prime Number Theorem", "note": "Why RSA can find a 2048-bit prime in moments — the one theorem that is genuinely load-bearing (§144)."},
     {"href": "../hall-of-foundations/euler-fermat.html", "label": "Euler & Fermat", "note": "The theorem that makes RSA decryption undo encryption. Watch a message round-trip (§145)."},
@@ -17,6 +17,7 @@
     {"href": "../hall-of-foundations/random-oracle.html", "label": "The Random Oracle", "note": "Flip one input bit, scramble half the output — the idealized hash assumption beneath Fiat–Shamir signatures (§154)."},
     {"href": "../hall-of-foundations/lattices-svp.html", "label": "Lattices & the SVP", "note": "Drag a basis, hunt the shortest vector — the ground the post-quantum standards stand on (§147)."},
     {"href": "../hall-of-foundations/closest-vector.html", "label": "The Closest Vector Problem", "note": "Round to the nearest lattice corner — right with a short basis, wrong with a skewed one. The decoding problem beneath lattice cryptography (§152)."},
+    {"href": "../hall-of-foundations/learning-with-errors.html", "label": "Learning With Errors", "note": "t = As + e: solve for the secret, then switch the noise on and watch exact algebra fail (§157)."},
     {"href": "../hall-of-foundations/polynomial-rings.html", "label": "Polynomial Rings", "note": "R_q = Z_q[X]/(X^n+1): the structured lattice inside ML-KEM and ML-DSA (§153)."},
     {"href": "../hall-of-foundations/interpolation.html", "label": "Polynomial Interpolation", "note": "k points fix a curve — the heart of Shamir's Secret Sharing and threshold signatures (§155)."},
     {"href": "../hall-of-foundations/pairings.html", "label": "Bilinear Pairings", "note": "e(aP,bQ) = e(P,Q)^ab — verify hidden scalars without revealing them; the magic under zk-SNARKs (§156)."}

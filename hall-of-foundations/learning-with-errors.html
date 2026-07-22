@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Solve for a secret vector, then switch the noise on and watch the same algebra fail — the Learning With Errors problem beneath ML-KEM and ML-DSA.">
+<title>Learning With Errors · Hall of Foundations</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Learning With Errors — The Cipher Museum">
+<meta property="og:description" content="Solve for a secret vector, then switch the noise on and watch the same algebra fail — the Learning With Errors problem beneath ML-KEM and ML-DSA.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/learning-with-errors.html">
+<meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ciphermuseum.com/hall-of-foundations/learning-with-errors.html">
+<link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="foundations.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <a class="home" href="index.html">← Hall of Foundations</a>
+    <span class="hall">Exhibit 157 · t = As + e</span>
+  </header>
+
+  <main id="main">
+
+  <div class="hero">
+    <div class="kicker">What ML-KEM &amp; ML-DSA Actually Hold</div>
+    <h1>The secret hidden<br>by <em>a little noise</em></h1>
+    <p class="standfirst">
+      Schoolroom algebra says a system of linear equations with as many equations
+      as unknowns has exactly one solution, and a mechanical procedure finds it.
+      That is completely true. <span class="term">Learning With Errors</span>
+      breaks it anyway — by perturbing every equation just slightly, so the
+      procedure still runs, still returns an answer, and the answer is worthless.
+    </p>
+  </div>
+
+  <div class="honesty">
+    <strong>Why this exhibit exists.</strong> Its neighbours
+    <a href="lattices-svp.html">§147</a> and <a href="closest-vector.html">§152</a>
+    show the <em>geometry</em> of lattice hardness using the classical
+    good-basis/bad-basis trapdoor. That picture is real, but it is not how the
+    deployed standards are keyed. This exhibit shows the structure ML-KEM and
+    ML-DSA genuinely use: a matrix, a short secret vector, and an error term.
+  </div>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;1</span><h2>A system anyone can solve</h2></div>
+    <p>
+      Below is a public matrix <em>A</em> and a public vector <em>t</em>, both
+      with entries modulo <em>q</em> = 97. Hidden behind them is a
+      <span class="term">short secret vector</span> <em>s</em> &#8212; every entry
+      is &#8722;1, 0, or 1. The relationship is the plainest one in mathematics:
+    </p>
+    <div class="eq">t = A&#183;s + e &nbsp;(mod 97)</div>
+    <p>
+      Set the <b>error</b> to zero and that <em>e</em> vanishes, leaving
+      <em>t</em> = <em>A</em>&#183;<em>s</em>. Press <b>Solve</b> and Gaussian
+      elimination &#8212; the same procedure you learned for three equations in
+      three unknowns &#8212; recovers <em>s</em> instantly and exactly, every
+      time. There is no security here at all.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 460" id="lwe" role="img"
+             aria-label="The equation t equals A times s plus e, shown as a matrix, a secret column, an error column, and a result column."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>error bound
+          <input type="range" id="err" min="0" max="24" step="1" value="0"
+                 aria-describedby="errNote">
+        </label>
+        <button id="solve">Solve for s</button>
+        <button id="reveal" class="ghost">Reveal s</button>
+        <button id="fresh" class="ghost">New keys</button>
+        <div class="readout" id="lread" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        <span id="errNote">The <b>error bound</b> is the largest value any entry
+        of <em>e</em> may take, plus or minus.</span> At <b>0</b> the system is
+        exact and elimination wins. Nudge it to <b>1</b> &#8212; a perturbation of
+        at most one, in a world 97 wide &#8212; and the same elimination returns
+        a vector with nothing in common with the real secret.
+      </div>
+      <div class="a11y-fallback">
+        <span class="vh" id="lweKb">Keyboard alternative: set the error bound with the slider, then activate Solve. Results are announced in the readout.</span>
+        <label>error bound value
+          <input type="number" id="errNum" value="0" min="0" max="24" step="1" aria-describedby="lweKb">
+        </label>
+        <button id="applyErr" type="button">Apply</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;2</span><h2>Why so small a change ruins it</h2></div>
+    <p>
+      Elimination works by scaling rows and subtracting them from one another.
+      Modulo a prime, "scaling" means multiplying by numbers like 43 or 88 &#8212;
+      there is no notion of a <em>small</em> multiplier to keep things tidy. So a
+      single unit of error, multiplied by 43 and added to another row's error,
+      multiplied again at the next step, is smeared across the whole computation
+      within a few rows.
+    </p>
+    <div class="pull">
+      The algorithm never fails, never warns, and never notices. It returns a
+      confident answer that happens to be noise.
+    </div>
+    <p>
+      That is the asymmetry the whole construction rests on. The error is far too
+      small to interfere with anyone who knows <em>s</em>, and far too destructive
+      for anyone applying exact linear algebra without it. Recovering <em>s</em>
+      from <em>(A, t)</em> is the <span class="term">LWE problem</span>; doing it
+      with polynomials instead of plain numbers, as the standards do, is
+      <span class="term">Module-LWE</span>, and it lives in the
+      <a href="polynomial-rings.html">ring next door</a>.
+    </p>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;3</span><h2>The cancellation that lets the owner in</h2></div>
+    <p>
+      A hard problem alone is not cryptography &#8212; the legitimate recipient has
+      to get through. Encryption picks fresh small randomness <em>r</em> and sends
+      two things: a vector <em>u</em> = <em>A</em>&#7488;<em>r</em> + <em>e</em>&#8321;,
+      and a number <em>v</em> = <em>t</em>&#183;<em>r</em> + <em>e</em>&#8322; plus
+      the message bit multiplied by ⌊q/2⌋ &#8212; a value large enough to spot
+      from across the ring.
+    </p>
+    <p>
+      Decryption computes <em>v</em> &#8722; <em>s</em>&#183;<em>u</em>. Expand
+      both sides and a large term appears twice, with opposite signs:
+    </p>
+    <div class="eq">v &#8722; s&#183;u = <s>s&#7488;A&#7488;r</s> + e&#183;r + e&#8322; &#8722; s&#183;e&#8321; + m&#183;&#8970;q/2&#8971; &nbsp;&#8594;&nbsp; <b>m&#183;&#8970;q/2&#8971; + small</b></div>
+    <p>
+      The bulk cancels. What survives is the message bit, sitting on top of a
+      pile of error terms that were all small to begin with. Round to whichever
+      of 0 or ⌊q/2⌋ is nearer, and the bit falls out. <strong>Nothing here
+      rounds with a private basis</strong> &#8212; the secret's job is to make one
+      big term disappear.
+    </p>
+
+    <div class="lab">
+      <div class="lab-stage">
+        <svg class="curve" viewBox="0 0 700 400" id="dec" role="img"
+             aria-label="Decryption arithmetic: the residual value after cancellation, shown against the noise budget."></svg>
+      </div>
+      <div class="lab-bar">
+        <label>send bit
+          <select id="bit">
+            <option value="0">0</option>
+            <option value="1" selected>1</option>
+          </select>
+        </label>
+        <label>error bound
+          <input type="range" id="derr" min="1" max="24" step="1" value="1">
+        </label>
+        <button id="send">Encrypt &amp; decrypt</button>
+        <button id="run100" class="ghost">Run 200 times</button>
+        <div class="readout" id="dread" aria-live="polite" role="status">&#8212;</div>
+      </div>
+      <div class="lab-hint">
+        The bar shows how far the decrypted value landed from the ideal
+        <b>m&#183;&#8970;q/2&#8971;</b> for the bit that was actually sent. The
+        <span style="color:var(--vermilion)">vermilion line</span> is the budget,
+        ⌊q/4⌋ = 24; the track runs to 48, the furthest a value can sit from
+        either ideal. Cross the line and the rounding tips to the wrong bit.
+        Raise the error and watch the bar climb.
+      </div>
+      <div class="a11y-fallback">
+        <span class="vh" id="decKb">Keyboard alternative: choose a bit and an error bound, then activate Encrypt and decrypt. The residual noise and recovered bit are announced.</span>
+        <label>error bound value
+          <input type="number" id="derrNum" value="1" min="1" max="24" step="1" aria-describedby="decKb">
+        </label>
+        <button id="applyDerr" type="button">Apply</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="exhibit">
+    <div class="step-head"><span class="step-num">&#167;4</span><h2>Honest limits of this model</h2></div>
+    <p>
+      Three things here are toys, and it is worth naming them.
+    </p>
+    <ul class="ladder">
+      <li><span class="rung">The size<span>4 &#215; 4, q = 97</span></span><span class="gloss">ML-KEM works over a 256-coefficient polynomial ring with q = 3329, arranged in modules of rank 2 to 4. A 4&#215;4 system mod 97 is brute-forceable in microseconds; it is here to be readable, not hard.</span></li>
+      <li><span class="rung">The randomness<span>uniform, not Gaussian</span></span><span class="gloss">Real schemes draw errors from a centered binomial distribution, and the security proofs depend on that shape. This exhibit picks uniformly in a range, which makes the slider legible but is not what gets deployed.</span></li>
+      <li><span class="rung">The scheme<span>one bit, no KEM</span></span><span class="gloss">This is Regev-style encryption of a single bit. ML-KEM is a key-encapsulation mechanism with compression, a Fujisaki–Okamoto transform for chosen-ciphertext security, and rejection steps this page has no equivalent of.</span></li>
+    </ul>
+    <p>
+      What is faithful is the shape: the public key really is a matrix plus a
+      noisy product, the secret really is a short vector, decryption really does
+      work by cancelling a shared term, and the noise budget really is the thing
+      parameter choices are fighting over.
+    </p>
+  </section>
+
+  <section class="exhibit">
+    <div class="connect">
+      <div class="flag">Where this touches your keys</div>
+      <h3>The bet the post-quantum standards make</h3>
+      <p>
+        Every key exchange your browser negotiates with <strong>ML-KEM</strong>
+        runs this structure at full size. The reason it is expected to survive a
+        quantum computer is that Shor's algorithm attacks <em>periodicity</em>
+        &#8212; the hidden repeating structure inside factoring and the discrete
+        log, both of which live in the <a href="group-theory.html">cyclic
+        groups</a> of §149. Noisy linear algebra over a module has no such
+        period to find. That is the whole bet, and it is a different bet from the
+        one <a href="../ciphers/rsa.html">RSA</a> and
+        <a href="../ciphers/diffie-hellman.html">Diffie–Hellman</a> made.
+      </p>
+    </div>
+    <p class="aside">
+      Read alongside: <a href="closest-vector.html" style="color:var(--vermilion)">The Closest Vector Problem</a>
+      (the geometry this is the algebra of) and
+      <a href="polynomial-rings.html" style="color:var(--vermilion)">Polynomial Rings</a>
+      (where the plain vectors become polynomials). Tested logic in <code>lwe-math.js</code>.
+    </p>
+  </section>
+
+  </main>
+
+
+  <footer></footer>
+</div>
+
+<script src="lwe-math.js"></script>
+<script>
+(function(){
+  "use strict";
+  var L = window.LWEMath;
+  var NS = "http://www.w3.org/2000/svg";
+  function mk(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
+  function txt(x,y,s,fill,anchor,weight){
+    var t=mk("text",{x:x,y:y,fill:fill||"var(--ink)","font-family":"ui-monospace,monospace",
+      "font-size":"15","text-anchor":anchor||"middle","font-weight":weight||"400"});
+    t.textContent=s; return t;
+  }
+
+  var Q=97, N=4;
+  var svg=document.getElementById("lwe"), lread=document.getElementById("lread");
+  var errS=document.getElementById("err"), errNum=document.getElementById("errNum");
+  var A=[], s=[], e=[], t=[], shown=false, solved=null;
+
+  function ri(lo,hi){ return lo+Math.floor(Math.random()*(hi-lo+1)); }
+
+  function regen(){
+    // resample A until it is invertible mod q, so "Solve" always has an answer
+    var guard=0;
+    do {
+      A=[]; for(var i=0;i<N;i++){ var r=[]; for(var j=0;j<N;j++) r.push(ri(0,Q-1)); A.push(r); }
+      guard++;
+    } while(L.gaussianSolve(A,[0,0,0,0],Q)===null && guard<50);
+    s=[]; for(var k=0;k<N;k++) s.push(ri(-1,1));
+    reErr(); solved=null; shown=false;
+  }
+  function reErr(){
+    var b=+errS.value;
+    e=[]; for(var i=0;i<N;i++) e.push(b===0?0:ri(-b,b));
+    t=L.lweSample(A,s,e,Q);
+    solved=null;
+  }
+
+  function draw(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var cw=44, ch=44, ax=48, ay=150;
+    // headers
+    svg.appendChild(txt(ax+cw*2, ay-26, "A  (public)", "var(--muted)"));
+    svg.appendChild(txt(ax+cw*4+62, ay-26, "s", "var(--vermilion)", "middle", "700"));
+    svg.appendChild(txt(ax+cw*4+166, ay-26, "e", "var(--teal)", "middle", "700"));
+    svg.appendChild(txt(ax+cw*4+272, ay-26, "t  (public)", "var(--muted)"));
+
+    // A grid
+    for(var i=0;i<N;i++) for(var j=0;j<N;j++){
+      svg.appendChild(mk("rect",{x:ax+j*cw,y:ay+i*ch,width:cw-3,height:ch-3,
+        fill:"none",stroke:"var(--line,#3a3a44)","stroke-width":"1",rx:"3"}));
+      svg.appendChild(txt(ax+j*cw+(cw-3)/2, ay+i*ch+27, String(A[i][j]), "var(--ink-soft)"));
+    }
+    svg.appendChild(txt(ax+cw*4+18, ay+2*ch+27, "×", "var(--muted)"));
+
+    function col(x,vals,color,secret){
+      for(var i=0;i<N;i++){
+        svg.appendChild(mk("rect",{x:x,y:ay+i*ch,width:cw-3,height:ch-3,fill:"none",
+          stroke:color,"stroke-width":"1.5",rx:"3"}));
+        var label = (secret && !shown) ? "?" : String(vals[i]);
+        svg.appendChild(txt(x+(cw-3)/2, ay+i*ch+27, label, color, "middle", "700"));
+      }
+    }
+    col(ax+cw*4+40, s, "var(--vermilion)", true);
+    svg.appendChild(txt(ax+cw*4+122, ay+2*ch+27, "+", "var(--muted)"));
+    col(ax+cw*4+144, e, "var(--teal)", false);
+    svg.appendChild(txt(ax+cw*4+226, ay+2*ch+27, "=", "var(--muted)"));
+    col(ax+cw*4+250, t, "var(--ink-soft)", false);
+
+    // solved row
+    if(solved){
+      var sy=ay+N*ch+44;
+      svg.appendChild(txt(ax, sy, "elimination returns:", "var(--muted)", "start"));
+      var match=true;
+      for(var m=0;m<N;m++) if(solved[m]!==L.mod(s[m],Q)) match=false;
+      for(var c=0;c<N;c++){
+        var cc = match ? "var(--teal)" : "var(--vermilion)";
+        svg.appendChild(mk("rect",{x:ax+190+c*cw,y:sy-24,width:cw-3,height:32,fill:"none",
+          stroke:cc,"stroke-width":"1.5",rx:"3"}));
+        svg.appendChild(txt(ax+190+c*cw+(cw-3)/2, sy-1, String(L.center(solved[c],Q)), cc, "middle", "700"));
+      }
+      svg.appendChild(txt(ax+190+cw*4+16, sy-1,
+        match ? "✓ that is s" : "✗ not s", match?"var(--teal)":"var(--vermilion)", "start", "700"));
+    }
+    var b=+errS.value;
+    svg.appendChild(txt(350, 420, b===0 ? "error bound 0 — an exact linear system"
+      : "error bound ±"+b+" — every equation slightly wrong", "var(--muted)"));
+  }
+
+  function report(){
+    var b=+errS.value;
+    if(!solved){ lread.textContent = b===0
+      ? "Exact system. Press Solve." : "Error ±"+b+" applied. Press Solve."; return; }
+    var match=true;
+    for(var m=0;m<N;m++) if(solved[m]!==L.mod(s[m],Q)) match=false;
+    lread.innerHTML = match
+      ? "<b>Recovered s exactly.</b> With no error this is just algebra."
+      : "<b>Wrong.</b> Elimination returned a confident answer that is not s.";
+  }
+
+  errS.addEventListener("input",function(){ errNum.value=errS.value; reErr(); draw(); report(); });
+  document.getElementById("applyErr").addEventListener("click",function(){
+    var v=Math.max(0,Math.min(24,+errNum.value||0));
+    errS.value=v; errNum.value=v; reErr(); draw(); report();
+  });
+  document.getElementById("solve").addEventListener("click",function(){
+    solved=L.gaussianSolve(A,t,Q); draw(); report();
+  });
+  document.getElementById("reveal").addEventListener("click",function(){
+    shown=!shown; this.textContent = shown ? "Hide s" : "Reveal s"; draw();
+  });
+  document.getElementById("fresh").addEventListener("click",function(){
+    regen(); draw(); report();
+  });
+  regen(); draw(); report();
+
+  // ---------- §3 decryption ----------
+  var dsvg=document.getElementById("dec"), dread=document.getElementById("dread");
+  var derr=document.getElementById("derr"), derrNum=document.getElementById("derrNum");
+  var bitSel=document.getElementById("bit");
+  var last=null;
+
+  function trial(bound,m){
+    var AA=[], i, j;
+    var guard=0;
+    do{
+      AA=[]; for(i=0;i<N;i++){ var r=[]; for(j=0;j<N;j++) r.push(ri(0,Q-1)); AA.push(r); }
+      guard++;
+    } while(L.gaussianSolve(AA,[0,0,0,0],Q)===null && guard<50);
+    var ss=[], ee=[], rr=[], e1=[];
+    for(i=0;i<N;i++){ ss.push(ri(-1,1)); ee.push(ri(-bound,bound)); rr.push(ri(-1,1)); e1.push(ri(-bound,bound)); }
+    var tt=L.lweSample(AA,ss,ee,Q);
+    var ct=L.encryptBit(AA,tt,m,rr,e1,ri(-bound,bound),Q);
+    var out=L.decryptBit(ct.u,ct.v,ss,Q);
+    // measure the error against the bit we SENT — decryptBit's own `noise` is
+    // measured against the bit it decoded, which understates a failure.
+    return { out:out, m:m, resid:Math.abs(L.residualNoise(out.raw,m,Q)) };
+  }
+
+  function drawDec(){
+    while(dsvg.firstChild) dsvg.removeChild(dsvg.firstChild);
+    var budget=L.noiseBudget(Q); // 24
+    var x0=90, x1=610, y=250, w=x1-x0;
+    dsvg.appendChild(txt(350, 54, "residual after cancelling sᵀAᵀr", "var(--muted)"));
+
+    if(!last){
+      dsvg.appendChild(txt(350, y, "Press “Encrypt & decrypt”", "var(--muted)"));
+      return;
+    }
+    // Scale the track to the largest residual possible, q/2 — so an
+    // over-budget result visibly crosses the line instead of pinning at it.
+    var full=Math.floor(Q/2);
+    var n=last.resid, frac=Math.min(1, n/full);
+    var bx=x0+w*(budget/full);
+    dsvg.appendChild(mk("rect",{x:x0,y:y-22,width:w,height:44,fill:"none",
+      stroke:"var(--line,#3a3a44)","stroke-width":"1",rx:"4"}));
+    var ok = last.out.bit===last.m;
+    dsvg.appendChild(mk("rect",{x:x0+2,y:y-20,width:Math.max(2,(w-4)*frac),height:40,
+      fill: ok?"var(--teal)":"var(--vermilion)","fill-opacity":"0.35"}));
+    // budget line, mid-track
+    dsvg.appendChild(mk("line",{x1:bx,y1:y-34,x2:bx,y2:y+34,
+      stroke:"var(--vermilion)","stroke-width":"2"}));
+    dsvg.appendChild(txt(bx, y+54, "budget ⌊q/4⌋ = "+budget, "var(--vermilion)"));
+    dsvg.appendChild(txt(x0, y+54, "0", "var(--muted)"));
+    dsvg.appendChild(txt(x1, y+54, String(full), "var(--muted)"));
+    dsvg.appendChild(txt(350, y+6, "error from ideal = "+n, ok?"var(--teal)":"var(--vermilion)","middle","700"));
+
+    dsvg.appendChild(txt(350, 130, "sent m = "+last.m+"   →   decrypted "+last.out.bit,
+      ok?"var(--teal)":"var(--vermilion)","middle","700"));
+    dsvg.appendChild(txt(350, 160, "v − s·u = "+last.out.raw+
+      "   (centered "+last.out.centered+")", "var(--ink-soft)"));
+    dsvg.appendChild(txt(350, 340, ok ? "inside the budget — rounding lands on the right bit"
+      : "past the budget — rounding tipped the wrong way",
+      ok?"var(--muted)":"var(--vermilion)"));
+  }
+
+  function send(){
+    last=trial(+derr.value, +bitSel.value);
+    drawDec();
+    dread.innerHTML = last.out.bit===last.m
+      ? "Decrypted <b>"+last.out.bit+"</b> — correct. Accumulated error "+last.resid+", budget 24."
+      : "Decrypted <b>"+last.out.bit+"</b> — <b>wrong</b>. Accumulated error "+last.resid+
+        " reached the budget of 24, so the rounding tipped over.";
+  }
+  derr.addEventListener("input",function(){ derrNum.value=derr.value; });
+  document.getElementById("applyDerr").addEventListener("click",function(){
+    var v=Math.max(1,Math.min(24,+derrNum.value||1)); derr.value=v; derrNum.value=v; send();
+  });
+  document.getElementById("send").addEventListener("click",send);
+  document.getElementById("run100").addEventListener("click",function(){
+    var ok=0, T=200, b=+derr.value;
+    for(var i=0;i<T;i++){ var r=trial(b,i%2); if(r.out.bit===r.m) ok++; }
+    dread.innerHTML="At error ±"+b+": <b>"+ok+"/"+T+"</b> decryptions correct ("+
+      Math.round(100*ok/T)+"%).";
+  });
+  drawDec();
+})();
+</script>
+<script src="../js/nav.js" defer></script>
+</body>
+</html>

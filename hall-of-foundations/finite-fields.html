@@ -165,8 +165,19 @@
         with <strong>256 bits</strong> — a field with more elements than there
         are atoms in the observable universe. Your ECDH shared secret is some
         <em>kG</em>; your ECDSA signature proves you know a <em>k</em> without
-        revealing it. Even <a href="../ciphers/aes.html">AES</a> lives here: its
-        S-box is inversion in the field GF(2&#8312;). This exhibit is why it all works.
+        revealing it. This exhibit is why it all works.
+      </p>
+      <p>
+        <a href="../ciphers/aes.html">AES</a> uses a finite field too, but a
+        different <em>kind</em> of one, and the distinction is worth drawing.
+        This exhibit builds GF(<em>p</em>) &#8212; arithmetic modulo a prime.
+        The AES S-box lives in GF(2&#8312;), an <span class="term">extension
+        field</span> of 256 elements whose members are polynomials, added
+        bitwise and multiplied modulo a fixed irreducible polynomial. Same
+        guarantee &#8212; every nonzero element has an inverse &#8212; reached by
+        different construction, and the S-box takes that inverse and then
+        applies an affine map on top. The polynomial machinery is next door in
+        <a href="polynomial-rings.html">Polynomial Rings</a>.
       </p>
     </div>
     <p class="aside">

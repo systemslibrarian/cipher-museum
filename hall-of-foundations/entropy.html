@@ -148,9 +148,18 @@
         secrecy is this measure made physical. A cipher fed a
         low-entropy key is broken before the algorithm runs — the attacker just
         searches the small space of likely keys. Entropy is why
-        <strong>the random number generator matters as much as the cipher</strong>,
-        and why "128-bit security" is a statement about surprise, not about
-        arithmetic difficulty.
+        <strong>the random number generator matters as much as the cipher</strong>.
+      </p>
+      <p>
+        Be careful with the phrase "128-bit security," though &#8212; it means two
+        different things. For a symmetric cipher it really is a statement about
+        surprise: AES-128 has 2¹²⁸ keys and no better attack than trying them.
+        For a public-key scheme it is a statement about
+        <em>arithmetic</em> difficulty: a 256-bit elliptic curve is called
+        128-bit-secure because the best known discrete-log attack costs about
+        2¹²⁸ operations, not because the key holds 128 bits of entropy. Same
+        label, different claim &#8212; which is why key sizes across the two
+        families are not comparable.
       </p>
     </div>
   </section>

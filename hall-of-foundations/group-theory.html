@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Generators, order, and cyclic structure — the grammar of nearly every public-key scheme.">
+<meta name="description" content="Generators, order, and cyclic structure — the grammar of the discrete-log family.">
 <title>Group Theory · Hall of Foundations</title>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0a0a0f">
 <meta property="og:title" content="Group Theory — The Cipher Museum">
-<meta property="og:description" content="Generators, order, and cyclic structure — the grammar of nearly every public-key scheme.">
+<meta property="og:description" content="Generators, order, and cyclic structure — the grammar of the discrete-log family.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ciphermuseum.com/hall-of-foundations/group-theory.html">
 <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
@@ -122,14 +122,24 @@
   <section class="exhibit">
     <div class="connect">
       <div class="flag">Where this touches your keys</div>
-      <h3>Every scheme is a group in disguise</h3>
+      <h3>The discrete-log family, in one skeleton</h3>
       <p>
         ECDH walks a generator point around an elliptic-curve group.
         <a href="../ciphers/diffie-hellman.html">Diffie–Hellman</a>
         walks a generator through residues mod a prime. Schnorr-style signatures
         live in prime-order groups by design. Once you see the
-        <strong>generator and its order</strong>, every public-key primitive in
-        the modern wing has the same skeleton.
+        <strong>generator and its order</strong>, every scheme in that family
+        reads the same way.
+      </p>
+      <p>
+        The family has an edge, though, and it is worth knowing where it falls.
+        The post-quantum standards are not built this way: ML-KEM and ML-DSA
+        rest on <a href="lattices-svp.html">lattice</a> problems over
+        <a href="polynomial-rings.html">polynomial rings</a>, and hash-based
+        signatures on nothing but a hash function. Those are rings and modules,
+        not cyclic groups with a generator. That is not a footnote &#8212; it is
+        the whole reason they survive a quantum computer, which breaks this
+        exhibit's structure specifically.
       </p>
     </div>
     <p class="aside">Related: <a href="modular-arithmetic.html" style="color:var(--vermilion)">Modular Arithmetic</a> is this exhibit's multiplicative cousin.</p>

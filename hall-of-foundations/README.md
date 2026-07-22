@@ -37,6 +37,7 @@ open them from the repo root.
 - `random-oracle.html` (§154) — the avalanche effect; Fiat–Shamir → signatures
 - `interpolation.html` (§155) — k points fix a curve; Shamir's Secret Sharing
 - `pairings.html` (§156) — e(aP,bQ) = e(P,Q)ᵃᵇ; the zk-SNARK identity
+- `learning-with-errors.html` (§157) — t = As + e; the algebra ML-KEM and ML-DSA are actually keyed on
 
 **Companion**
 - `modularity-exhibit.html` (§141) — "The Ground Beneath the Curve": the
@@ -48,7 +49,7 @@ open them from the repo root.
   Smithsonian Dark / Scholarly Gold tokens in `css/museum.css` (loaded first
   on every page). The wing's original ink-on-vellum palette names survive as
   semantic aliases mapped onto museum tokens.
-- `lattice-math.js` / `crypto-algebra.js` — pure, DOM-free math modules powering
+- `lattice-math.js` / `lwe-math.js` / `crypto-algebra.js` — pure, DOM-free math modules powering
   the lattice and post-quantum exhibits, exported for both browser and Node.
 
 ## Tests & CI
@@ -68,7 +69,7 @@ CI workflow (`.github/workflows/ci.yml`) run them on every push and PR.
 - The pairing exhibit uses a multiplicative *toy model* of the target group to
   keep the arithmetic legible; it demonstrates the bilinearity identity
   faithfully, not a full Weil/Tate pairing.
-- Exhibit numbers (§141–156) follow the museum's existing count: the Complete
+- Exhibit numbers (§141–157) follow the museum's existing count: the Complete
   Cipher Index on the museum map ends at exhibit 140, and this wing continues
   from §141.
 - Exhibits share the museum's dark/gold design system: `css/museum.css`

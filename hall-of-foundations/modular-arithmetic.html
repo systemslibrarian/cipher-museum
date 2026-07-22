@@ -125,12 +125,23 @@
       <div class="flag">Where this touches your keys</div>
       <h3>The original public-key setting</h3>
       <p>
-        Classic <a href="../ciphers/diffie-hellman.html">Diffie–Hellman</a> happens in exactly this group: a prime with a
+        Textbook <a href="../ciphers/diffie-hellman.html">Diffie–Hellman</a> happens in exactly this group: a prime with a
         primitive root, thousands of bits wide. Alice sends <em>gᵃ</em>, Bob
         sends <em>gᵇ</em>, and both compute <em>gᵃᵇ</em> — while an eavesdropper,
         stuck with the discrete log, cannot. Elliptic curves later swapped this
         multiplicative clock for a point group, but the shape of the idea was
         born here.
+      </p>
+      <p>
+        Deployed Diffie–Hellman adds one refinement worth knowing. A primitive
+        root generates <em>everything</em> mod <em>p</em>, including the small
+        cycles hiding inside the group, and an attacker who can push a key
+        exchange into one of those learns far more than they should. So the
+        standard groups use a safe prime and a generator chosen to walk a single
+        large <span class="term">prime-order subgroup</span> instead &#8212;
+        often <em>g</em> = 2, which is not a primitive root at all. No small
+        cycles to be trapped in. The clock is the right picture; real
+        implementations just fence off part of the dial.
       </p>
     </div>
     <p class="aside">See also: <a href="group-theory.html" style="color:var(--vermilion)">Group Theory</a> for the general structure, and <a href="finite-fields.html" style="color:var(--vermilion)">Finite Fields</a> for the elliptic-curve version.</p>
