@@ -6,7 +6,7 @@
 
 Exploring 3,900+ years of encryption, cryptanalysis, and hidden history.
 
-The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring **3,900+ years** of encryption, cryptanalysis, and hidden history across **156 exhibits** — 140 cipher exhibits in **13 exhibit halls**, plus the 16-exhibit **Hall of Foundations** mathematics annex (§141–156). 110 of the 140 exhibits ship a fully interactive encrypt/decrypt demo or hand-built widget — the remaining 30 are codebreaker biographies and historical context pages. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, and hashing.
+The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring **3,900+ years** of encryption, cryptanalysis, and hidden history across **160 exhibits** — 140 cipher exhibits in **13 exhibit halls**, the 17-exhibit **Hall of Foundations** mathematics annex (§141–157), and 3 **modern-protocol exhibits** (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs). 110 of the 140 cipher exhibits ship a fully interactive encrypt/decrypt demo or hand-built widget — the remaining 30 are codebreaker biographies and historical context pages. Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, hashing, signatures, secret sharing, and proofs.
 
 **[Live Site →](https://ciphermuseum.com)**
 
@@ -14,7 +14,8 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 ## 📰 Latest Update
 
-- **Hall of Foundations** ([hall-of-foundations/](https://ciphermuseum.com/hall-of-foundations/index.html)) — a new 16-exhibit mathematics annex (**§141–156**) on the number theory, hardness assumptions, and structures under modern cryptography: finite fields, Euler–Fermat, the Prime Number Theorem, one-way functions, lattices (SVP / CVP / LWE), polynomial rings, random oracles, Shamir interpolation, and bilinear pairings — each with a working interactive in the museum's dark/gold design system.
+- **Modern-protocol exhibits — §158–160** — three new exhibits extend **Hall XI (Modern Cryptography)** beyond ciphers into the protocols that secure the modern internet: **[ECDSA](https://ciphermuseum.com/ciphers/ecdsa.html)** (elliptic-curve signatures), **[Shamir's Secret Sharing](https://ciphermuseum.com/ciphers/shamir-secret-sharing.html)** (information-theoretic threshold splitting), and **[Zero-Knowledge Proofs](https://ciphermuseum.com/ciphers/zero-knowledge-proofs.html)** (prove a statement while revealing nothing). Each ships a working interactive and cross-links to the mathematics beneath it in the Hall of Foundations. Alongside them, **§157 [Learning With Errors](https://ciphermuseum.com/hall-of-foundations/learning-with-errors.html)** joins the Hall of Foundations as its own exhibit — the lattice algebra ML-KEM and ML-DSA are actually keyed on.
+- **Hall of Foundations** ([hall-of-foundations/](https://ciphermuseum.com/hall-of-foundations/index.html)) — a 17-exhibit mathematics annex (**§141–157**) on the number theory, hardness assumptions, and structures under modern cryptography: finite fields, Euler–Fermat, the Prime Number Theorem, one-way functions, lattices (SVP / CVP / Learning With Errors), polynomial rings, random oracles, Shamir interpolation, and bilinear pairings — each with a working interactive in the museum's dark/gold design system.
   - **Integrated museum-wide** — floor-plan annex on the museum map, a "Mathematics Under Cryptography" guided tour, timeline entries (Fermat 1640, Euler 1763, Shor 1994), 11 new glossary terms, site-search coverage, and two-way cross-links with the RSA, Diffie–Hellman, One-Time Pad, SHA-256, and AES exhibits ("the mathematics beneath").
   - **Tested like the engines** — the math lives in DOM-free modules (`lattice-math.js`, `crypto-algebra.js`, `ec-math.js`) behind five CI suites: unit vectors, fast-check property fuzzing (ring axioms, Shamir threshold recovery, pairing bilinearity, Hasse bounds, Babai exactness), and a page-constant pinning suite so on-page examples can never drift from the modules.
 - **Cipher Corpus v0.5** ([cipher-corpus.html](https://ciphermuseum.com/cipher-corpus.html)) — a reproducibility and release-packaging milestone. The headline: **every one of the 100,026 canonical records now reproduces exactly with the museum's own published, test-verified cipher engines**, so the dataset and the site can never silently disagree.
@@ -32,7 +33,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 ### 🗺️ Thirteen Exhibit Halls · 140 Cipher Exhibits · The Foundations Annex
 
-Beyond the 13 cipher halls below, the **[Hall of Foundations](https://ciphermuseum.com/hall-of-foundations/index.html)** annex (§141–156) exhibits the mathematics under the cryptography — from modular arithmetic to lattices and pairings.
+Beyond the 13 cipher halls below, the **[Hall of Foundations](https://ciphermuseum.com/hall-of-foundations/index.html)** annex (§141–157) exhibits the mathematics under the cryptography — from modular arithmetic to lattices and pairings — and three **modern-protocol exhibits** (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs) extend Hall XI beyond ciphers.
 
 | Hall | Title | Ciphers |
 |------|-------|---------|
@@ -46,7 +47,7 @@ Beyond the 13 cipher halls below, the **[Hall of Foundations](https://ciphermuse
 | [VIII](https://ciphermuseum.com/halls/puzzle.html) | Puzzle & Novelty Ciphers | [Pigpen](https://ciphermuseum.com/ciphers/pigpen.html), [Bacon](https://ciphermuseum.com/ciphers/bacon.html), [Tap Code](https://ciphermuseum.com/ciphers/tap-code.html), [Copiale](https://ciphermuseum.com/ciphers/copiale.html), [Beale](https://ciphermuseum.com/ciphers/beale.html), [Voynich](https://ciphermuseum.com/ciphers/voynich.html), [Dorabella](https://ciphermuseum.com/ciphers/dorabella.html), [Zodiac](https://ciphermuseum.com/ciphers/zodiac.html), [Kryptos](https://ciphermuseum.com/ciphers/kryptos.html) |
 | [IX](https://ciphermuseum.com/halls/unbreakable.html) | The Unbreakable | [One-Time Pad](https://ciphermuseum.com/ciphers/one-time-pad.html), [Vernam](https://ciphermuseum.com/ciphers/vernam.html), [VENONA](https://ciphermuseum.com/ciphers/venona.html), [Solitaire / Pontifex](https://ciphermuseum.com/ciphers/solitaire.html) |
 | [X](https://ciphermuseum.com/halls/codebreakers.html) | Hall of Codebreakers | [Cabinet Noir](https://ciphermuseum.com/ciphers/cabinet-noir.html), [Station HYPO](https://ciphermuseum.com/ciphers/station-hypo.html), [Bletchley Park](https://ciphermuseum.com/ciphers/bletchley-park.html), [Joseph Rochefort](https://ciphermuseum.com/ciphers/rochefort.html), [Arne Beurling](https://ciphermuseum.com/ciphers/beurling.html), [Dilly Knox](https://ciphermuseum.com/ciphers/dilly-knox.html), [Herbert Yardley](https://ciphermuseum.com/ciphers/yardley.html), [Mavis Batey](https://ciphermuseum.com/ciphers/mavis-batey.html), [GCHQ Trio](https://ciphermuseum.com/ciphers/gchq-trio.html), [David Kahn](https://ciphermuseum.com/ciphers/kahn.html), [Elonka Dunin](https://ciphermuseum.com/ciphers/dunin.html), [George Lasry](https://ciphermuseum.com/ciphers/lasry.html), [Agnes Driscoll](https://ciphermuseum.com/ciphers/agnes-driscoll.html), [Bill Tutte](https://ciphermuseum.com/ciphers/bill-tutte.html), [Elizebeth Friedman](https://ciphermuseum.com/ciphers/elizebeth-friedman.html), [Joan Clarke](https://ciphermuseum.com/ciphers/joan-clarke.html), [Leo Marks](https://ciphermuseum.com/ciphers/leo-marks.html), [Mary Stuart Castelnau Letters](https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html) |
-| [XI](https://ciphermuseum.com/halls/modern-crypto.html) | Modern Cryptography | [DES](https://ciphermuseum.com/ciphers/des.html), [Diffie-Hellman](https://ciphermuseum.com/ciphers/diffie-hellman.html), [RSA](https://ciphermuseum.com/ciphers/rsa.html), [AES](https://ciphermuseum.com/ciphers/aes.html), [SHA-256](https://ciphermuseum.com/ciphers/sha256.html) |
+| [XI](https://ciphermuseum.com/halls/modern-crypto.html) | Modern Cryptography | [DES](https://ciphermuseum.com/ciphers/des.html), [Diffie-Hellman](https://ciphermuseum.com/ciphers/diffie-hellman.html), [RSA](https://ciphermuseum.com/ciphers/rsa.html), [AES](https://ciphermuseum.com/ciphers/aes.html), [SHA-256](https://ciphermuseum.com/ciphers/sha256.html), [ECDSA](https://ciphermuseum.com/ciphers/ecdsa.html) (§158), [Shamir's Secret Sharing](https://ciphermuseum.com/ciphers/shamir-secret-sharing.html) (§159), [Zero-Knowledge Proofs](https://ciphermuseum.com/ciphers/zero-knowledge-proofs.html) (§160) |
 | [XII](https://ciphermuseum.com/halls/unsolved.html) | Unsolved Ciphers | [Voynich](https://ciphermuseum.com/ciphers/voynich.html), [Kryptos](https://ciphermuseum.com/ciphers/kryptos.html), [Beale](https://ciphermuseum.com/ciphers/beale.html), [Dorabella](https://ciphermuseum.com/ciphers/dorabella.html), [Zodiac Z-13/Z-32](https://ciphermuseum.com/ciphers/zodiac.html), [Phaistos Disc](https://ciphermuseum.com/ciphers/phaistos-disc.html), [Shugborough](https://ciphermuseum.com/ciphers/shugborough.html), [D'Agapeyeff](https://ciphermuseum.com/ciphers/dagapeyeff.html), [Somerton Man](https://ciphermuseum.com/ciphers/somerton-man.html), [McCormick](https://ciphermuseum.com/ciphers/mccormick.html) |
 | [XIII](https://ciphermuseum.com/halls/culture.html) | Cipher Culture | [Bach's BACH motif](https://ciphermuseum.com/ciphers/bach-motif.html), [Conan Doyle's Dancing Men](https://ciphermuseum.com/ciphers/dancing-men.html), [Poe's Gold-Bug](https://ciphermuseum.com/ciphers/gold-bug.html), [Cicada 3301](https://ciphermuseum.com/ciphers/cicada-3301.html), [Krypto ARG](https://ciphermuseum.com/ciphers/krypto-arg.html), [MIT Mystery Hunt](https://ciphermuseum.com/ciphers/mit-mystery-hunt.html), [Sator Square](https://ciphermuseum.com/ciphers/sator-square.html), [Freemason pigpen tradition](https://ciphermuseum.com/ciphers/freemason-pigpen.html), [Da Vinci Code](https://ciphermuseum.com/ciphers/da-vinci-code.html), [National Treasure](https://ciphermuseum.com/ciphers/national-treasure.html), [Gravity Falls](https://ciphermuseum.com/ciphers/gravity-falls.html), [Field Hollers](https://ciphermuseum.com/ciphers/field-hollers.html) |
 
@@ -83,7 +84,7 @@ For a sortable, filterable view of every cipher system in the museum (era, type,
     - **Side-by-side Encrypt/Decrypt panes** with copy-to-clipboard and a swap button so you can iterate on a key without retyping ciphertext.
     - **Same engine source as the exhibits** — the workbench pulls from [js/ciphers/all-engines.js](js/ciphers/all-engines.js), so anything you reproduce here matches every demo on the site.
 - **[Cipher Detective](https://ciphermuseum.com/cipher-detective.html)** — Identify likely cipher families from unknown ciphertext using IoC, chi-square, and Kasiski evidence, then pivot into ranked suspects and next-attack guidance.
-- **[Site Search](https://ciphermuseum.com/search.html)** — Search across all 140 exhibits, 13 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
+- **[Site Search](https://ciphermuseum.com/search.html)** — Search across all 160 exhibits (140 ciphers, the Hall of Foundations annex, and the modern-protocol exhibits), 13 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
 - **[Cryptanalysis Techniques](https://ciphermuseum.com/cryptanalysis.html)** — 10 interactive techniques: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), HMM/SMT decoding (Copiale), and Chaocipher reconstruction.
 - **[Cipher Challenges](https://ciphermuseum.com/challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
 - **[Timeline](https://ciphermuseum.com/timeline.html)** — Interactive 3,900+-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
@@ -99,7 +100,7 @@ For a sortable, filterable view of every cipher system in the museum (era, type,
 
 ## 📖 Complete Cipher Index
 
-All 140 exhibits, alphabetically. Biographies and context pages are noted; plain text entries are dedicated cipher exhibits.
+All 140 cipher exhibits, alphabetically. Biographies and context pages are noted; plain text entries are dedicated cipher exhibits. The 17 Hall of Foundations exhibits (§141–157) and the 3 modern-protocol exhibits (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs) are listed separately above.
 
 
 | Cipher | Era | Brief Description | How It Was Broken / Status |
@@ -326,14 +327,18 @@ cipher-museum/
 │   ├── puzzle.html           ← Hall VII: Puzzle & Novelty
 │   ├── unbreakable.html      ← Hall IX: The Unbreakable
 │   └── codebreakers.html     ← Special Exhibition: Hall of Codebreakers
-├── ciphers/                  ← 140 exhibit pages
+├── ciphers/                  ← 143 exhibit pages (140 ciphers + ECDSA/Shamir/ZKP protocol exhibits)
 │   ├── caesar.html            ← with interactive demo + SVG wheel diagram
 │   ├── enigma.html            ← with rotor wiring SVG diagram
 │   ├── vigenere.html          ← with tabula recta SVG + Kasiski analysis
 │   ├── playfair.html          ← with key square builder SVG
 │   └── [130+ additional exhibits]
+├── hall-of-foundations/      ← Mathematics annex (§141–157): 17 exhibits + DOM-free math modules
+│   ├── index.html             ← Annex entrance
+│   ├── finite-fields.html     ← …and 16 more (lattices, LWE, pairings, interpolation…)
+│   └── *-math.js              ← lattice-math / crypto-algebra / ec-math engines, unit-tested
 ├── data/
-│   └── artifact-cards.json  ← Metadata cards (era, family, region, key type…) for all 140 exhibits
+│   └── artifact-cards.json  ← Metadata cards (era, family, region, key type…) for all 143 ciphers/protocol exhibits
 ├── scripts/                  ← Corpus tools and cryptanalysis solvers
 │   ├── hill-climbing-solver.js  ← Monoalphabetic solver: hill climbing + quadgram scoring
 │   ├── sa-solver.js             ← Simulated annealing solver (better on short ciphertexts)
