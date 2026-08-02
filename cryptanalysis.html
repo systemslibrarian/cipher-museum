@@ -150,7 +150,7 @@
       <div class="technique-by">Al-Kindi · Baghdad · ~850 AD</div>
       <p class="technique-desc">Languages have predictable letter frequencies. In English, E=12.7%, T=9.1%, A=8.2%. Any cipher that maps one letter to one symbol preserves these frequencies. Count the symbols, compare to known frequencies, recover the key.</p>
       <figure class="figure" style="margin-top:1rem;">
-        <img src="images/artifacts/cryptanalysis-letter-frequency-chart.png" alt="Chart showing English letter frequency distribution used in cryptanalysis" loading="lazy">
+        <img width="800" height="560" src="images/artifacts/cryptanalysis-letter-frequency-chart.png" alt="Chart showing English letter frequency distribution used in cryptanalysis" loading="lazy">
         <figcaption class="figure-caption">English letter frequency distribution — the foundation of frequency analysis attacks. Illustration: Google Gemini AI</figcaption>
       </figure>
       <div class="technique-breaks">
@@ -167,7 +167,7 @@
       <div class="technique-by">Friedrich Kasiski · 1863</div>
       <p class="technique-desc">In a Vigenère cipher, the same plaintext + same key position = same ciphertext. Identical repeated strings in the ciphertext reveal probable key length. Their spacing is likely a multiple of the key length.</p>
       <figure class="figure" style="margin-top:1rem;">
-        <img src="images/artifacts/cryptanalysis-kasiski-examination-vigenere-attack.png" alt="Diagram illustrating the Kasiski examination technique for breaking Vigenère ciphers" loading="lazy">
+        <img width="800" height="500" src="images/artifacts/cryptanalysis-kasiski-examination-vigenere-attack.png" alt="Diagram illustrating the Kasiski examination technique for breaking Vigenère ciphers" loading="lazy">
         <figcaption class="figure-caption">Kasiski examination — finding repeated ciphertext sequences to determine Vigenère key length. Illustration: Google Gemini AI</figcaption>
       </figure>
       <div class="technique-breaks">
@@ -183,7 +183,7 @@
       <div class="technique-by">William Friedman · 1920</div>
       <p class="technique-desc">Measures statistical similarity to natural language. English text has an IC of ~0.066. Random text has ~0.038. A polyalphabetic cipher produces values between these — and the IC can reveal the key length without finding repeated strings.</p>
       <figure class="figure" style="margin-top:1rem;">
-        <img src="images/artifacts/cryptanalysis-index-of-coincidence.png" alt="Diagram explaining the Index of Coincidence technique used to distinguish encrypted text from natural language" loading="lazy">
+        <img width="1536" height="1024" src="images/artifacts/cryptanalysis-index-of-coincidence.png" alt="Diagram explaining the Index of Coincidence technique used to distinguish encrypted text from natural language" loading="lazy">
         <figcaption class="figure-caption">Index of Coincidence — measuring statistical deviation from random to determine cipher type and key length. Illustration: Google Gemini AI</figcaption>
       </figure>
       <div class="technique-breaks">
@@ -199,7 +199,7 @@
       <div class="technique-by">Polish Mathematicians · WWII Bletchley</div>
       <p class="technique-desc">Guess probable plaintext words called "cribs" — military messages often start with standard phrases. The Enigma was broken partly because operators always began with WETTER (weather), HEIL HITLER, or ANX (a header). Known structure is a fatal weakness.</p>
       <figure class="figure" style="margin-top:1rem;">
-        <img src="images/artifacts/cryptanalysis-crib-method.png" alt="Diagram illustrating the crib-based cryptanalysis method used to break Enigma by exploiting known plaintext patterns" loading="lazy">
+        <img width="1024" height="1024" src="images/artifacts/cryptanalysis-crib-method.png" alt="Diagram illustrating the crib-based cryptanalysis method used to break Enigma by exploiting known plaintext patterns" loading="lazy">
         <figcaption class="figure-caption">Crib-based cryptanalysis — exploiting predictable message headers and standard phrases to break machine ciphers. Illustration: Google Gemini AI</figcaption>
       </figure>
       <div class="technique-breaks">
@@ -215,7 +215,7 @@
       <div class="technique-by">Universal · Classical through Modern</div>
       <p class="technique-desc">When some plaintext is known, the key can often be derived directly. The Hill cipher's matrix key is recoverable with just two known plaintext-ciphertext pairs by solving a system of linear equations. Enigma used weather forecasts as cribs.</p>
       <figure class="figure" style="margin-top:1rem;">
-        <img src="images/artifacts/cryptanalysis-known-plaintext-attack.png" alt="Diagram showing how a known plaintext attack derives cipher keys from matched plaintext-ciphertext pairs" loading="lazy">
+        <img width="1536" height="1024" src="images/artifacts/cryptanalysis-known-plaintext-attack.png" alt="Diagram showing how a known plaintext attack derives cipher keys from matched plaintext-ciphertext pairs" loading="lazy">
         <figcaption class="figure-caption">Known plaintext attack — using matched plaintext-ciphertext pairs to recover the encryption key. Illustration: Google Gemini AI</figcaption>
       </figure>
       <div class="technique-breaks">
@@ -231,7 +231,7 @@
       <div class="technique-by">Modern · Computer Era</div>
       <p class="technique-desc">Start with a random key. Decrypt. Score the result using English language statistics — common digrams like TH, HE, IN. Make random changes to the key. Keep improvements, discard downgrades. Repeat millions of times. Works against substitution, Playfair, transposition.</p>
       <figure class="figure" style="margin-top:1rem;">
-        <img src="images/artifacts/cryptanalysis-hill-climbing.png" alt="Diagram showing the hill climbing search algorithm iteratively improving cipher key guesses to break substitution ciphers" loading="lazy">
+        <img width="1536" height="1024" src="images/artifacts/cryptanalysis-hill-climbing.png" alt="Diagram showing the hill climbing search algorithm iteratively improving cipher key guesses to break substitution ciphers" loading="lazy">
         <figcaption class="figure-caption">Hill climbing search — iteratively refining key guesses by scoring decrypted output against English language statistics. Illustration: Google Gemini AI</figcaption>
       </figure>
       <div class="technique-breaks">
@@ -247,7 +247,7 @@
       <div class="technique-by">Modern · AI-Assisted</div>
       <p class="technique-desc">Advanced optimization heuristics that explore key space more broadly than pure hill climbing. Genetic algorithms evolve populations of candidate keys. Simulated annealing occasionally accepts worse solutions to escape local optima. Breaks double transposition, Playfair, Hill cipher in seconds.</p>
       <figure class="figure" style="margin-top:1rem;">
-        <img src="images/artifacts/cryptanalysis-simulated-annealing.png" alt="Diagram illustrating simulated annealing and genetic algorithm optimization techniques used in modern cryptanalysis" loading="lazy">
+        <img width="1536" height="1024" src="images/artifacts/cryptanalysis-simulated-annealing.png" alt="Diagram illustrating simulated annealing and genetic algorithm optimization techniques used in modern cryptanalysis" loading="lazy">
         <figcaption class="figure-caption">Simulated annealing — escaping local optima to find the global best key through controlled randomness. Illustration: Google Gemini AI</figcaption>
       </figure>
       <div class="technique-breaks">

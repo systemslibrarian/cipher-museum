@@ -254,7 +254,7 @@
     const n2x=parseInt(document.getElementById("b2x").value,10), n2y=parseInt(document.getElementById("b2y").value,10);
     if([n1x,n1y,n2x,n2y].some(isNaN)) return;
     if(LM.det2([n1x,n1y],[n2x,n2y])===0){
-      lread.innerHTML="<b style='color:#C85A5A'>those vectors are parallel</b> \u2014 they collapse the lattice to a line. Try again.";
+      lread.innerHTML="<b style='color:var(--red)'>those vectors are parallel</b> \u2014 they collapse the lattice to a line. Try again.";
       return;
     }
     b1={x:n1x,y:n1y}; b2={x:n2x,y:n2y}; showShort=true; draw(); // reveal + announce

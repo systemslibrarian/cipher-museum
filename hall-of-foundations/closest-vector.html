@@ -294,7 +294,7 @@
     if(showRound||showTruth){
       const tn=LM.closestPoint(target), br=LM.babaiRound(target,bases[current].b1,bases[current].b2);
       const correct=(br.x===tn.x&&br.y===tn.y);
-      cread.innerHTML=bases[current].name+" \u00b7 rounds \u2192 ("+br.x+", "+br.y+") "+(correct?"<b style='color:#5AC8A0'>\u2713 correct corner</b>":"<b style='color:#C85A5A'>\u2717 wrong corner</b>");
+      cread.innerHTML=bases[current].name+" \u00b7 rounds \u2192 ("+br.x+", "+br.y+") "+(correct?"<b style='color:#5AC8A0'>\u2713 correct corner</b>":"<b style='color:var(--red)'>\u2717 wrong corner</b>");
     } else {
       cread.innerHTML="target ( <b>"+target.x.toFixed(2)+"</b>, <b>"+target.y.toFixed(2)+"</b> ) \u00b7 "+bases[current].name+" \u00b7 drag or type coordinates";
     }
@@ -378,7 +378,7 @@
     const l2=make("text",{x:lsx(res.noisyTarget.x)+12,y:lsy(res.noisyTarget.y)-10,fill:"#C85A5A","font-family":"ui-monospace,monospace","font-size":"12","font-weight":"700"}); l2.textContent="ciphertext"; lwe.appendChild(l2);
 
     lweRead.innerHTML="\u03c3 = <b>"+sigma.toFixed(2)+"</b> \u00b7 "+cur+" basis \u00b7 decryption "+
-      (res.ok?"<b style='color:#5AC8A0'>\u2713 recovered</b>":"<b style='color:#C85A5A'>\u2717 lost the message</b>");
+      (res.ok?"<b style='color:#5AC8A0'>\u2713 recovered</b>":"<b style='color:var(--red)'>\u2717 lost the message</b>");
   }
   noiseR.addEventListener("input",drawLWE);
   lweBasis.addEventListener("change",drawLWE);

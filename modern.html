@@ -171,7 +171,7 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
       <a href="ciphers/aes.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">📦</span><span class="panel-title">AES-256 (Symmetric) <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>128-bit blocks, 256-bit key, 14 rounds. 2²⁵⁶ possible keys with no known practical attack. Protects everything from HTTPS to full-disk encryption.</p>
         <figure class="figure" style="margin-top:1rem;">
-          <img src="images/artifacts/aes-encryption-simplified.png" alt="Simplified diagram of AES encryption showing the substitution-permutation round structure" loading="lazy">
+          <img width="1600" height="873" src="images/artifacts/aes-encryption-simplified.png" alt="Simplified diagram of AES encryption showing the substitution-permutation round structure" loading="lazy">
           <figcaption class="figure-caption">AES encryption — simplified view of the substitution-permutation rounds that protect modern data. Illustration: Google Gemini AI</figcaption>
         </figure>
       </div></a>
@@ -185,7 +185,7 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
       <a href="ciphers/diffie-hellman.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">🤝</span><span class="panel-title">Diffie-Hellman Key Exchange <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>Derives a shared secret over a public channel. Based on the discrete logarithm problem. <em>Not a cipher — it does not encrypt data.</em></p>
         <figure class="figure" style="margin-top:1rem;">
-          <img src="images/artifacts/public-key-diffie-hellman-diagram.png" alt="Diagram illustrating the Diffie-Hellman key exchange protocol" loading="lazy">
+          <img width="800" height="500" src="images/artifacts/public-key-diffie-hellman-diagram.png" alt="Diagram illustrating the Diffie-Hellman key exchange protocol" loading="lazy">
           <figcaption class="figure-caption">Diffie-Hellman key exchange — how two parties establish a shared secret over an insecure channel. Illustration: Google Gemini AI</figcaption>
         </figure>
       </div></a>
@@ -198,7 +198,7 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
       <a href="ciphers/rsa.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">RSA (Asymmetric) <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>Rivest, Shamir, Adleman (1977). Two keys — public (encrypt) and private (decrypt) — secured by the difficulty of factoring large primes. Used in TLS, email, and digital signatures.</p>
         <figure class="figure" style="margin-top:1rem;">
-          <img src="images/artifacts/public-key-cryptography-diagram.png" alt="Diagram illustrating the principles of public key cryptography" loading="lazy">
+          <img width="1408" height="768" src="images/artifacts/public-key-cryptography-diagram.png" alt="Diagram illustrating the principles of public key cryptography" loading="lazy">
           <figcaption class="figure-caption">Public key cryptography — asymmetric encryption using public and private key pairs. Illustration: Google Gemini AI</figcaption>
         </figure>
       </div></a>
@@ -211,7 +211,7 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
       <a href="ciphers/sha256.html" class="panel" style="text-decoration:none;color:inherit;display:block;"><div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">SHA-256 (Hash Function) <span style="color:var(--gold);font-size:.7rem;">→ exhibit</span></span></div><div class="panel-body"><p>Produces a fixed 256-bit fingerprint of any input. One-way: given the hash, you cannot recover the input. Collision-resistant: finding two inputs with the same hash requires 2¹²⁸ operations. Used in digital signatures, certificate verification, blockchain. <em>Not a cipher — it cannot be reversed.</em></p>
         <figure class="figure" style="margin-top:1rem;">
-          <img src="images/artifacts/hashing-avalanche-effect-diagram.png" alt="Diagram showing the avalanche effect in hash functions where small input changes produce completely different outputs" loading="lazy">
+          <img width="1600" height="873" src="images/artifacts/hashing-avalanche-effect-diagram.png" alt="Diagram showing the avalanche effect in hash functions where small input changes produce completely different outputs" loading="lazy">
           <figcaption class="figure-caption">The avalanche effect — changing a single input bit transforms the entire hash output. Illustration: Google Gemini AI</figcaption>
         </figure>
       </div></a>

@@ -220,7 +220,7 @@
     });
 
     if(enough){
-      iread.innerHTML="<b>"+pts.length+"/"+k+"</b> shares \u00b7 curve locked \u00b7 <b style='color:#C85A5A'>secret revealed</b>";
+      iread.innerHTML="<b>"+pts.length+"/"+k+"</b> shares \u00b7 curve locked \u00b7 <b style='color:var(--red)'>secret revealed</b>";
     } else {
       iread.innerHTML="<b>"+pts.length+"/"+k+"</b> shares \u00b7 <b>need "+(k-pts.length)+" more</b> \u00b7 secret still free";
     }

@@ -948,11 +948,11 @@
 
     var body = '';
     if (sources.length) {
-      body += '<h4 style="color:var(--tx1);margin:0 0 .75rem;font-size:.95rem;">Exhibit Sources</h4>' +
+      body += '<h3 style="color:var(--tx1);margin:0 0 .75rem;font-size:.95rem;">Exhibit Sources</h3>' +
               renderList(sources);
       body += '<hr style="border:none;border-top:1px solid var(--gold-b);margin:1.25rem 0;">';
     }
-    body += '<h4 style="color:var(--tx1);margin:0 0 .75rem;font-size:.95rem;">General Cryptography Resources</h4>' +
+    body += '<h3 style="color:var(--tx1);margin:0 0 .75rem;font-size:.95rem;">General Cryptography Resources</h3>' +
             renderList(GENERAL_RESOURCES);
 
     const panel = document.createElement('div');
