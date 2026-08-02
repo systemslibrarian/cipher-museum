@@ -31,6 +31,7 @@ h1,h2,h3,h4{font-family:var(--fd);font-weight:400;letter-spacing:.04em;line-heig
 h1{font-size:clamp(2.2rem,5vw,4rem)}h2{font-size:clamp(1.5rem,3.5vw,2.4rem)}h3{font-size:clamp(1.1rem,2.5vw,1.5rem)}
 p{color:var(--tx2);line-height:1.85;font-weight:400;overflow-wrap:break-word;word-break:normal}
 a{color:var(--gold);text-decoration:none;transition:color var(--tr)}a:hover{color:var(--gold-lt)}
+p a{text-decoration:underline;text-decoration-color:var(--gold-b);text-underline-offset:.2em}p a:hover{text-decoration-color:var(--gold-lt)}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--gold-lt);outline-offset:3px;border-radius:var(--r)}
 :focus:not(:focus-visible){outline:none}
 button:focus,a:focus{outline:2px solid var(--gold-lt);outline-offset:3px;border-radius:var(--r)}

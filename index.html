@@ -500,6 +500,7 @@
     var c=el.cloneNode(true);
     c.setAttribute('data-ticker-clone','');
     c.setAttribute('aria-hidden','true');
+    c.setAttribute('tabindex','-1');
     track.appendChild(c);
   });
 })();
