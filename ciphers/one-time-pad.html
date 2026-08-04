@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Frank Miller described a one-time pad system in 1882. Gilbert Vernam patented a teletype version in 1917. But it was Claude Shannon who proved in 1949 that the OTP achieves <em>perfect secrecy</em> — ciphertext reveals absolutely nothing about the plaintext to an attacker with unlimited computing power.</p><p style="margin-top:1rem;">The VENONA project showed exactly what happens when the rules are broken: Soviet signals officers reused key pages under WWII supply pressure. The NSA decoded thousands of messages and identified Julius Rosenberg, Klaus Fuchs, and other Soviet agents.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Encryption: C = P XOR K
 Decryption: P = C XOR K
 
@@ -180,12 +180,12 @@ Violate any condition → security collapses</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="callout callout-success"><span class="callout-icon">🔒</span><div class="callout-body"><p><strong>Shannon's proof (1949):</strong> For any ciphertext C and any possible plaintext P, P(plaintext=P | ciphertext=C) = P(plaintext=P). The ciphertext provides zero information about the plaintext. An attacker with unlimited computing power cannot do better than random guessing.</p></div></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">VENONA: Key Reuse Attack</div><div class="attack-diff">Complexity: Moderate if pads reused</div><p class="attack-desc">C1 XOR C2 = P1 XOR P2. If two messages are encrypted with the same key, XORing the ciphertexts eliminates the key and produces the XOR of the plaintexts. With enough crib-based guessing, both plaintexts can be recovered. The Soviets reused pads in 1942-1943 under wartime supply pressure — giving the NSA its entry point.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from One-Time Pad</th><th>Modern Evolution</th></tr></thead>
@@ -198,7 +198,7 @@ Violate any condition → security collapses</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📝</span><span class="panel-title">Worked Example</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-quill"/></svg></span><span class="panel-title">Worked Example</span></div>
       <div class="panel-body"><pre>Message: A T T A C K   (6 letters)
 As numbers (A=0): 0  19  19  0  2  10
 
@@ -225,7 +225,7 @@ Without the key, all plaintexts are equally likely.</pre></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Related Exhibits</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-columns"/></svg></span><span class="panel-title">Related Exhibits</span></div>
       <div class="panel-body">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;">
           <li><a href="enigma.html" style="color:var(--gold);text-decoration:underline;">Enigma Machine</a> — Rotor cipher that traded perfect secrecy for practicality</li>
@@ -240,7 +240,7 @@ Without the key, all plaintexts are equally likely.</pre></div>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

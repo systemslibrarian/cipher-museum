@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Count Josef von Gronsfeld modified the Vigenère cipher to use numeric keys instead of letter keys. A soldier could memorize '31415' far more easily than 'LEMON'. The tradeoff: digits only give 10 possible shift values (0-9) instead of 26, dramatically weakening the cipher.</p><p style="margin-top:1rem;">The Gronsfeld cipher illustrates a persistent tension in cryptography: usability versus security. A cipher that field operators can't remember correctly is useless — but a cipher that trades security for memorability may be worse than none.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Key:    3  1  4  1  5  3  1  4
 Plain:  A  T  T  A  C  K  A  T
 Cipher: D  U  X  B  H  N  B  X
@@ -129,12 +129,12 @@ Only 10 possible shifts per position (0-9)</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Kasiski + Reduced Keyspace</div><div class="attack-diff">Complexity: Easy</div><p class="attack-desc">Gronsfeld shares Vigenère's periodicity weakness, but with only 10 possible shift values per position, each column's key digit can be found by testing just 10 possibilities instead of 26. A cryptanalyst with the key length (from Kasiski) can break each column in seconds.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Gronsfeld Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -150,7 +150,7 @@ Only 10 possible shifts per position (0-9)</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

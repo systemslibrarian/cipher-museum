@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Eight rotors sit on a spindle, but only <strong>seven step</strong>; the eighth is stationary and acts as a permutation between the rotor stack and the keyboard mapping. The seven moving rotors advance under the control of a notch table that changes daily, producing an irregular stepping pattern reminiscent of SIGABA but mechanically lighter.</p><p style="margin-top:1rem;">Two further details matter for security:</p><ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li><strong>Re-entrant alphabet.</strong> The rotor alphabet is wider than 26 (it carries numerals, space, and control codes), so the keyboard mapping is not a fixed bijection on A–Z. This breaks the symmetry that crib-fitters exploited in Enigma.</li><li><strong>No reflector.</strong> Signal flow is one-way through the rotor stack — there is no Enigma-style reflection that forces “no letter encrypts to itself”.</li></ul></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was (Not) Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was (Not) Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">No public cryptanalytic break</div><div class="attack-diff">Complexity: Believed infeasible without key material</div><p class="attack-desc">Through 17 years of operational use and another 30 of declassified study, no published attack on the KL-7 cipher itself has appeared. The eight-rotor stack with irregular stepping puts it well beyond Enigma-class workloads.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">The Walker spy ring (1968–1985)</div><div class="attack-diff">Complexity: N/A — keys were stolen, not derived</div><p class="attack-desc">John Walker, a US Navy communications watch officer, photographed KL-7 key lists and sold them to the KGB through a network that included his brother, son, and a friend. The Soviets read US Navy traffic for the entire period — the most damaging American cipher compromise of the Cold War. Walker was arrested in 1985.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>KL-7 lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Rotor stepping that breaks Enigma’s regularity</td><td>Modern stream ciphers irregularly clock multiple LFSRs (A5/1)</td></tr><tr><td>Re-entrant alphabet defeats fixed-bijection cribs</td><td>Authenticated encryption breaks the “known header” crib path</td></tr><tr><td>Walker compromise: stolen keys are total breaks</td><td>Why HSMs, key wrapping, and split-knowledge protocols exist</td></tr><tr><td>The whole machine was secure; the people leaked</td><td>Modern threat models put insider risk near the top</td></tr></tbody></table></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

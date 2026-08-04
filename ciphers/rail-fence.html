@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>The Rail Fence cipher is one of the simplest transposition techniques, used informally for centuries before cryptographers took it seriously. The name comes from the appearance of the zigzag pattern resembling a split-rail fence. It was reportedly used during the American Civil War for simple field messages, though the Union Stager cipher was far superior.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Write the message diagonally across a set of 'rails', then read off each rail in sequence:</p><pre>3 rails, HELLOWORLD:
 H . . . O . . . L
 . E . L . W . R . D
@@ -148,12 +148,12 @@ Read rows: HOL + ELWRD + LO = HOLELWRDLO</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Brute Force</div><div class="attack-diff">Complexity: Trivial</div><p class="attack-desc">The Rail Fence cipher has at most a dozen practical key values (number of rails). An attacker simply tries each rail count, decrypts, and checks if the result is English. The correct decryption is immediately obvious. Even a human can crack it in under a minute.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Rail Fence Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -169,7 +169,7 @@ Read rows: HOL + ELWRD + LO = HOLELWRDLO</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

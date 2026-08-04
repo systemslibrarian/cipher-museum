@@ -83,7 +83,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>The grille is a square card of side <em>N</em> with holes punched at agreed-upon positions. Sender and receiver each have an identical card. To encrypt:</p><ol><li>Place the grille over a blank N×N grid.</li><li>Write the secret letter-by-letter through the holes.</li><li>Lift the grille; fill the remaining cells with plausible filler (a poem, a shopping list, a love letter).</li></ol><p style="margin-top:1rem;">To decrypt, the recipient places their grille over the received grid in the same orientation and reads the letters visible through the holes.</p><p style="margin-top:1rem;">The demo on this page uses a key of the form <code>size:idx,idx,idx,…</code> — the grid side length followed by the zero-based positions of the holes. The default <code>5:0,3,7,12,19,21,24</code> places seven holes in a 5×5 grid.</p>
         <div class="callout callout-info">
           <span class="callout-icon">ℹ️</span>
@@ -95,12 +95,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Capture the grille</div><div class="attack-diff">Complexity: A search of the office</div><p class="attack-desc">There is essentially no algorithm — the security rests entirely on the secrecy of the physical card. Once the card is photographed, copied, or stolen, every past and future message becomes readable.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Style mismatch</div><div class="attack-diff">Complexity: Easy with practice</div><p class="attack-desc">Convincing filler text is hard. A trained censor reading thousands of letters notices stilted phrasing, awkward grammar, and the distinctive cadence of grille-fill — and flags suspicious correspondence for closer inspection.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Brute-force the holes</div><div class="attack-diff">Complexity: Tractable for small grids</div><p class="attack-desc">For a 5×5 grid with 6 holes there are only C(25,6) ≈ 177,000 possible grille patterns. Try each, accept the one whose extracted letters spell English. The turning-grille variant raises the count enough to need cleverer tooling, but not enough to resist a determined cryptanalytic bureau.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><p>The Cardano grille is the cleanest historical example of <strong>steganography</strong> as distinct from cryptography: the goal is not to make the message unreadable, but to make the message <em>invisible</em>. Modern steganography (LSB embedding in images, DNS-tunnel exfiltration, Cicada 3301's OutGuess puzzles) is methodologically a direct descendant.</p><p style="margin-top:1rem;">The strategic lesson is also unchanged: stego buys you traffic-analysis resistance, not confidentiality. Anyone who suspects the channel and acquires the carrier method reads everything. Best practice today is to encrypt first and steganographically hide the ciphertext — belt and braces.</p></div>
     </div>
 
@@ -108,7 +108,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

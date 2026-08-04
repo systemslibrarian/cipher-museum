@@ -80,7 +80,7 @@
 <div class="demo-section demo-section--flagship" data-cipher="enigma">
   <div class="demo-panel">
     <div class="demo-head">
-      <span class="panel-icon">⚙</span>
+      <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span>
       <span class="demo-title">Enigma I — Live Machine</span>
     </div>
     <div class="demo-body">
@@ -257,7 +257,7 @@
     </figure>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body">
         <p>Arthur Scherbius patented the Enigma machine in 1918 as a commercial product. The German military adopted it in 1926 and progressively enhanced it throughout WWII. At its peak, the naval Enigma M4 had 158,962,555,217,826,360,000 possible initial configurations — a number meant to put the cipher far beyond any conceivable brute force.</p>
 
@@ -276,7 +276,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Three-rotor Enigma (basic model):
 
 1. Plugboard: swap 10 pairs of letters
@@ -360,14 +360,14 @@ But: same letter never encrypts to itself → cribs work</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Crib-Based Cryptanalysis (Turing's Bombe)</div><div class="attack-diff">Complexity: Computationally intensive · Required dedicated machines</div><p class="attack-desc">Enigma's fatal flaw: a letter can never encrypt to itself (the reflector guarantees this). If you know (or guess) a plaintext word — called a crib — you can eliminate all configurations where any crib letter would encrypt to itself. Weather forecasts always began with WETTER. Messages often ended with HEIL HITLER. These cribs eliminated millions of possible settings. The Bombe machine tested the remaining configurations electromechanically at thousands per minute.</p></div><div class="attack-panel"><div class="attack-name">Operator Errors</div><div class="attack-diff">Human factors</div><p class="attack-desc">Operators sent lazy key indicators (AAA, BBB), repeated message keys, used predictable cribs (operator's girlfriend's name as daily setting), and sent stereotyped messages. These human failures, not mathematical weaknesses, gave Bletchley Park most of its entry points.</p></div>
 
       <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);letter-spacing:.06em;margin:2rem 0 .75rem;">1 · Self-encryption rejection</h3>
       <p>Enigma's reflector means no letter can ever encrypt to itself. This single fact lets you eliminate most candidate alignments of a crib without testing rotor settings at all: if any letter of the crib lines up with the same letter in the ciphertext, that placement is impossible.</p>
 
       <div class="demo-panel" style="margin-top:1rem;border-color:var(--gold-b);">
-        <div class="demo-head"><span class="panel-icon">🔍</span><span class="demo-title">Crib Placement Check</span></div>
+        <div class="demo-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="demo-title">Crib Placement Check</span></div>
         <div class="demo-body">
           <div class="input-group">
             <label class="input-label" for="eg-crib-cipher">Ciphertext (A–Z, spaces ignored)</label>
@@ -391,7 +391,7 @@ But: same letter never encrypts to itself → cribs work</pre>
       <p>With the plugboard and ring settings fixed, the rotor order and starting positions form a search space of <strong>60 × 17 576 ≈ 1 054 560</strong> configurations. The bombe was needed because the plugboard explodes this by a further factor of ~10<sup>11</sup>. Without the plugboard, the search is small enough to run in your browser. Below: enter a ciphertext encrypted with rings AAA and no plugboard, give it a known crib, and watch the search recover the rotor settings.</p>
 
       <div class="demo-panel" style="margin-top:1rem;border-color:var(--gold-b);">
-        <div class="demo-head"><span class="panel-icon">⚙</span><span class="demo-title">Rotor-Order Search</span></div>
+        <div class="demo-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="demo-title">Rotor-Order Search</span></div>
         <div class="demo-body">
           <div class="input-group">
             <label class="input-label" for="eg-bf-cipher">Ciphertext</label>
@@ -438,7 +438,7 @@ But: same letter never encrypts to itself → cribs work</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Enigma Machine</th><th>Modern Evolution</th></tr></thead>
@@ -451,7 +451,7 @@ But: same letter never encrypts to itself → cribs work</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📝</span><span class="panel-title">Worked Example</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-quill"/></svg></span><span class="panel-title">Worked Example</span></div>
       <div class="panel-body"><pre>Plaintext:  A T T A C K
 Settings:   Rotors I-II-III, Reflector B
             Ring setting: 01-01-01 (AAA)
@@ -481,7 +481,7 @@ The wiring path changes every single keypress
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">Further Reading &amp; Other Enigma Resources</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Further Reading &amp; Other Enigma Resources</span></div>
       <div class="panel-body">
         <p style="margin-bottom:1rem;">The encryption side of Enigma is well-covered on the open web. Several excellent simulators and explainers already exist; the rotor-search and crib-rejection demos above are this museum's contribution. The resources below are the best of the rest, and we recommend them without reservation.</p>
 
@@ -540,7 +540,7 @@ The wiring path changes every single keypress
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
@@ -557,13 +557,13 @@ The wiring path changes every single keypress
       </div>
     </div>
     <div class="panel" style="margin-top:1.25rem;">
-      <div class="panel-head"><span class="panel-icon">🔒</span><span class="panel-title">Three Unbroken Enigma Messages</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lock"/></svg></span><span class="panel-title">Three Unbroken Enigma Messages</span></div>
       <div class="panel-body">
         <p>Despite enormous Allied success, a small set of Enigma traffic remains unsolved today, largely due to missing metadata or truncated intercept context rather than fundamental Enigma strength. The "last few" are a reminder that intelligence work is as much about archived context as algorithms.</p>
       </div>
     </div>
     <div class="panel" style="margin-top:1.25rem;">
-      <div class="panel-head"><span class="panel-icon">🕶️</span><span class="panel-title">Operation Boniface</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-mask"/></svg></span><span class="panel-title">Operation Boniface</span></div>
       <div class="panel-body">
         <p>British planners concealed ULTRA's true source by attributing critical insights to a fictional high-level human spy codenamed <strong>Boniface</strong>. This deception protected the Enigma break by explaining "impossibly accurate" intelligence without revealing cryptanalytic capability.</p>
       </div>

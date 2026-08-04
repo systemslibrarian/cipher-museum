@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>As Germany prepared its 1918 Spring Offensive, Colonel Fritz Nebel designed the ADFGX cipher for front-line use. The letters A, D, F, G, X were specifically chosen because they sound very distinct in Morse code — reducing the risk of garbled transmissions misreading one letter as another.</p><p style="margin-top:1rem;">French cryptanalyst Georges Painvin broke the cipher within weeks of its introduction, despite working under extreme pressure with limited ciphertext. When ADFGVX replaced it in June 1918, Painvin broke that version too — an achievement that may have changed the outcome of WWI.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Step 1: Polybius substitution using 5×5 square
         Each letter → pair from {A,D,F,G,X}
         H → FF   E → DX   L → FX
@@ -138,12 +138,12 @@ HELLO → FF DX FX FX GF → columnar → ciphertext</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Painvin's Differential Analysis (1918)</div><div class="attack-diff">Complexity: Hard · Broken under wartime pressure</div><p class="attack-desc">Painvin exploited repeated message headers and known message structures (military traffic had predictable formats) to identify probable plaintext positions. He used differential frequency analysis across multiple messages with the same key to gradually recover first the transposition key, then the substitution square. The attack required enormous amounts of intercepted traffic and days of continuous work.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from ADFGX Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -159,7 +159,7 @@ HELLO → FF DX FX FX GF → columnar → ciphertext</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Columnar transposition became the workhorse of 19th-century military cryptography. Simple enough to perform in the field without equipment, it resists casual interception while remaining fast to encrypt and decrypt. The system was used by various military forces throughout the 1800s and into WWI, often combined with substitution ciphers for added security.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Write the message in rows across a grid whose width is the keyword length. Number the columns by alphabetical order of the keyword letters. Read off columns in that numbered order.</p><pre>Keyword: ZEBRA → Z=5, E=3, B=2, R=4, A=1
 Columns:  5  3  2  4  1
           W  E  A  T  H
@@ -168,12 +168,12 @@ Read col 5(Z): WEEI</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Frequency Analysis + Anagramming</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">Because transposition preserves all original letters, the ciphertext has the same letter frequency distribution as English plaintext. This immediately identifies it as a transposition cipher. With enough ciphertext, the column width can be determined and columns rearranged using digram/trigram frequency analysis.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Columnar Transposition</th><th>Modern Evolution</th></tr></thead>
@@ -189,7 +189,7 @@ Read col 5(Z): WEEI</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
@@ -207,7 +207,7 @@ Read col 5(Z): WEEI</pre>
     </div>
 
     <div class="panel" style="margin-top:1rem;">
-      <div class="panel-head"><span class="panel-icon">🧭</span><span class="panel-title">Transposition Variants</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-compass"/></svg></span><span class="panel-title">Transposition Variants</span></div>
       <div class="panel-body">
         <p style="font-size:.92rem;line-height:1.7;">Classical transposition practice includes route systems, regular columnar, Myszkowski ordering, and compound forms such as double transposition. Each variant preserves letter frequencies while changing positional structure.</p>
         <p style="font-size:.92rem;line-height:1.7;margin-top:.7rem;">The Nihilist transposition family extends these ideas into numbered-grid operations, showing how small procedural tweaks can significantly change attack difficulty.</p>

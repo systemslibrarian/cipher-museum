@@ -80,22 +80,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Diffie and Hellman published &lsquo;New Directions in Cryptography' in <em>IEEE Transactions on Information Theory</em>, November 1976. The paper proposed both public-key encryption (as a goal) and the key-exchange protocol (as a working example). Three British researchers at GCHQ &mdash; James Ellis, Clifford Cocks, and Malcolm Williamson &mdash; had discovered the same ideas between 1969 and 1974 but classification kept their work secret until 1997. The 1976 paper directly inspired Rivest, Shamir, and Adleman to find RSA the following year.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Both parties agree on a large prime <em>p</em> and a generator <em>g</em>. Alice picks a secret integer <em>a</em> and sends <em>g<sup>a</sup> mod p</em>. Bob picks a secret integer <em>b</em> and sends <em>g<sup>b</sup> mod p</em>. Each computes the shared key <em>K = g<sup>ab</sup> mod p</em> &mdash; Alice raises Bob's value to her secret, Bob raises Alice's value to his. An eavesdropper sees <em>p</em>, <em>g</em>, <em>g<sup>a</sup></em>, <em>g<sup>b</sup></em> but cannot recover <em>a</em>, <em>b</em>, or <em>K</em> without solving the <strong>discrete logarithm problem</strong>, which has no known efficient classical algorithm.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🛡️</span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
       <div class="panel-body"><p>Security rests on the discrete logarithm problem in a finite cyclic group. With a 2048-bit prime, no classical attack is known to be feasible. The 2015 <em>Logjam</em> attack exploited servers using common 512-bit primes &mdash; the lesson was to use larger groups and to switch to elliptic curves where 256-bit keys suffice (X25519). DH is vulnerable to <em>active</em> man-in-the-middle attacks because the exchanged values are unauthenticated &mdash; in practice DH is always combined with authentication (signatures, certificates, or a pre-shared password).</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🌐</span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Where</th><th>How Diffie-Hellman is Used</th></tr></thead>
@@ -114,7 +114,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

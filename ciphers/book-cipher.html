@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Benedict Arnold and John André used a book cipher keyed to <em>Blackstone's Commentaries</em> in 1780; Aaron Burr used one for his 1807 conspiracy correspondence. The most famous book cipher is the second of the three Beale papers — encoded against the Declaration of Independence and decoded by James Ward in 1885 (who then published it along with the still-unsolved papers 1 and 3). German agent ciphers in both World Wars frequently used commercial novels (so they could be replaced if compromised). SOE used printed-silk one-time pads for high-value circuits but reverted to book ciphers for low-priority agents whose loss could be tolerated.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Pick a book and an edition. To encode the word <em>RIVER</em>, scan the book until you find that word; record its location as <code>(page, line, word)</code> — say <code>(127, 14, 6)</code>. Send the triplet. Variants: <strong>letter-level</strong> book ciphers (every plaintext letter is encoded as the position of any matching letter in the book), <strong>word-only</strong> ciphers (faster but less flexible — rare words must be spelled out), and <strong>number-only</strong> ciphers (the running Beale-style format that is just lists of integers).</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body">
         <div class="attack-panel">
           <div class="attack-name">Identify the Book</div>
@@ -104,7 +104,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Book Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -118,7 +118,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚔</span><span class="panel-title">Break This Cipher</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title">Break This Cipher</span></div>
       <div class="panel-body">
         <p style="margin-bottom:1rem;color:var(--tx2);">Ciphertext: <code>48.1 5.1 42.1 15.1</code></p>
         <p style="color:var(--tx3);font-size:.9rem;">Hint: each pair is a lookup into the shared text. The word is short, valuable, and famous in this cipher family.</p>
@@ -133,7 +133,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

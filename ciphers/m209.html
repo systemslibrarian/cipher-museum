@@ -84,22 +84,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Hagelin's family company — Cryptoteknik in Stockholm — had been producing pin-and-lug machines since the 1920s. When Germany invaded Norway in 1940, Hagelin escaped to the United States with the C-38 design rolled up under his arm. The US Signal Corps bought it, mass-produced it as the M-209, and shipped 140,000 units to the front lines. The cipher was known to be vulnerable to skilled cryptanalysis (German B-Dienst broke many M-209 messages), so it was used only for tactical traffic — operational orders meant to be obsolete within hours of being intercepted.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Six pinwheels with co-prime lengths (26, 25, 23, 21, 19, 17) advance one position per letter. Each wheel has tiny pins around its edge, set to "active" or "inactive" by the operator. A bank of 27 lug bars reads which wheels are currently active and produces a number K from 0 to 27 — the key shift for the current letter. Encryption uses a Beaufort transformation:<br><br><pre>cipher = (K - plaintext) mod 26</pre>Because the wheel lengths are pairwise co-prime, the key sequence has period 26 × 25 × 23 × 21 × 19 × 17 = <strong>101,405,850</strong> letters before repeating.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Known-Plaintext Attack</div><div class="attack-diff">Complexity: Hard (in the field) · Moderate (with computers)</div><p class="attack-desc">If an attacker knows or guesses the plaintext of a message (a stereotyped opening, known place name, time stamp), the resulting key stream constrains the lug settings. German cryptanalysts in WWII broke many M-209 messages this way, though it took hours per message.</p></div><div class="attack-panel"><div class="attack-name">Statistical Lug Recovery</div><div class="attack-diff">Complexity: Moderate (with sufficient ciphertext)</div><p class="attack-desc">Because the key is a sum of binary signals modulo 26, certain shift values are over- or under-represented. With enough ciphertext, a statistical attack on the key distribution recovers the lug count for each wheel.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from M-209 (Hagelin C-38)</th><th>Modern Evolution</th></tr></thead>
@@ -116,7 +116,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
@@ -136,7 +136,7 @@
     </div>
 
     <div class="panel" style="margin-top:1rem;">
-      <div class="panel-head"><span class="panel-icon">🧭</span><span class="panel-title">Hagelin Machine Family</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-compass"/></svg></span><span class="panel-title">Hagelin Machine Family</span></div>
       <div class="panel-body">
         <p style="font-size:.92rem;line-height:1.7;">The M-209 belongs to the broader Hagelin line (C-36, C-38/BC-38, and M-209). These pin-and-lug pocket machines traded top-tier security for field practicality and became the standard tactical wheel ciphers for multiple armies.</p>
         <p style="font-size:.92rem;line-height:1.7;margin-top:.7rem;">Later Hagelin successors became part of the Crypto AG ecosystem connected to Operation Rubicon, where intelligence services reportedly leveraged supply-chain influence for cryptanalytic advantage.</p>

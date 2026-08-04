@@ -384,7 +384,10 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 /* PANELS */
 .panel{background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);overflow:hidden}
 .panel-head{background:var(--s3);border-bottom:1px solid var(--s4);padding:.9rem 1.5rem;display:flex;align-items:center;gap:.75rem}
-.panel-icon{font-size:1rem}.panel-title{font-family:var(--fd);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tx2);white-space:normal;overflow-wrap:anywhere}
+.panel-icon{font-size:1rem}
+.panel-icon .icon,.path-card-icon .icon{width:1.05em;height:1.05em;display:block;color:var(--gold)}
+.path-card-icon .icon{margin:0 auto}
+.panel-title{font-family:var(--fd);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tx2);white-space:normal;overflow-wrap:anywhere}
 .panel-body{padding:1.5rem;overflow-x:auto;min-width:0}.panel-body p{font-size:1rem;line-height:1.85;overflow-wrap:anywhere;word-break:normal}
 /* DEMO PANEL */
 .demo-panel{background:var(--s2);border:1px solid var(--gold-b);border-radius:var(--rl);overflow:hidden;box-shadow:0 0 24px rgba(201,168,76,.08)}

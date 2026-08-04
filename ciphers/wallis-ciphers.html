@@ -83,22 +83,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>The Royalist ciphers Wallis attacked were Argenti-pattern nomenclators of the standard 17th-century kind: a small alphabetic substitution table (often with one or two homophones for common letters) plus a longer codebook of person-and-place codes. Royalist operators were also fond of nulls and of inserting the names of their own family members as agreed cover-words.</p><p style="margin-top:1rem;">The demo above implements this dominant design: a 60-word codebook of English Civil War vocabulary (people, places, military terms) using 3-digit codes from <code>100</code>, plus a keyed 2-digit homophonic alphabet (codes 10–89) for words not in the codebook — wrapped in sentinel codes <code>90</code> and <code>91</code> so the decoder can tell which is which. Try encoding <code>KING CHARLES MARCH OXFORD</code> to see how the codebook handles the named entities directly.</p><p style="margin-top:1rem;">Wallis’s attack technique was the standard one of the next two centuries: identify the most-frequent codes, guess the alphabet portion against expected high-frequency English letters, look for repeated <em>codeword</em> patterns that match expected proper nouns (“the King”, “Parliament”, “Oxford”), and bootstrap from there. He was unusually fast at it.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Wallis’s frequency-and-context attack</div><div class="attack-diff">Complexity: A few hours per nomenclator for an experienced analyst</div><p class="attack-desc">Once Wallis had read a few intercepts in a given system he could identify codewords by their distribution: a code that appeared once or twice per letter, around proper noun positions, was almost always a person or place name. He kept running tables of broken codewords and shared them across the war effort. The Royalists never developed an equivalent counter-cryptography effort.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Operational laxity by the Royalists</div><div class="attack-diff">Complexity: Self-inflicted</div><p class="attack-desc">Royalist agents reused nomenclators across years, mixed plaintext and cipher in the same letter, and sometimes labelled their codebook entries with the person’s actual name in the margin. Captured agents carried codebooks; captured letters carried decryption hints. By 1645 Wallis had a substantial library of broken material.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Wallis’s longevity</div><div class="attack-diff">Complexity: Sixty years of cumulative expertise</div><p class="attack-desc">Because Wallis worked continuously for the English state from 1643 to his death in 1703, he accumulated a body of cryptographic knowledge unmatched in Europe. Continental ciphers he had broken decades earlier were still being modestly evolved by their users. He recorded much of his technique in cipher notes now in the Bodleian Library.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Wallis lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Concentrated, persistent, well-funded cryptanalysis beats episodic effort</td><td>Modern signals intelligence: NSA, GCHQ — the same institutional pattern, scaled</td></tr><tr><td>Operational discipline matters as much as algorithm choice</td><td>Modern crypto failures are almost always implementation or operational, not algorithmic</td></tr><tr><td>Cumulative knowledge across years compounds the attacker’s advantage</td><td>Why crypto-agility &amp; aggressive deprecation cycles are now standard</td></tr><tr><td>The defender publishes; the attacker doesn’t</td><td>Why open cryptanalysis (NIST competitions, IACR) is so valuable to defenders</td></tr></tbody></table></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">Research Trail</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Research Trail</span></div>
       <div class="panel-body"><p>Wallis sits inside the same nomenclator tradition mapped in <em>Cryptiana</em>, especially the archival work on 16th- and 17th-century diplomatic cipher practice. Read him in sequence with <a href="../ciphers/argenti.html">Argenti</a> for the design side and with <a href="../ciphers/arnold-andre.html">Arnold-André</a> for the later book-cipher branch of state secrecy.</p></div>
     </div>
 
@@ -106,7 +106,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

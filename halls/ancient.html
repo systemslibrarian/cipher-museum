@@ -301,19 +301,19 @@
 
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:4rem;">
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔄</span><span class="panel-title">Modular Arithmetic</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">Modular Arithmetic</span></div>
       <div class="panel-body">
         <p>The Caesar cipher wraps around the alphabet using modulo 26. <code>(position + shift) mod 26</code>. This operation is fundamental to modern symmetric encryption including AES.</p>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📍</span><span class="panel-title">Coordinate Encoding</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-compass"/></svg></span><span class="panel-title">Coordinate Encoding</span></div>
       <div class="panel-body">
         <p>Polybius's grid converts letters to (row, col) pairs — splitting each letter into two symbols. This "fractionation" concept underlies the Bifid, ADFGVX, and modern bit-slicing techniques.</p>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📊</span><span class="panel-title">Frequency Analysis (the weakness)</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-chart"/></svg></span><span class="panel-title">Frequency Analysis (the weakness)</span></div>
       <div class="panel-body">
         <p>Both ciphers preserve letter frequencies. In English, E appears ~12.7% of the time. Any cipher that maps E to one symbol can be attacked by finding the most common symbol in the ciphertext.</p>
       </div>

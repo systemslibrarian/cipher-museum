@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Sir Francis Bacon described his cipher in <em>De Augmentis Scientiarum</em> (1623). Each letter of the alphabet is represented by a 5-bit binary sequence using only two symbols (A and B). Bacon's original application was steganography: hide a secret message within an innocuous text by printing secret-message letters in two slightly different typefaces — bold for B, normal for A, or italic for B.</p><p style="margin-top:1rem;">Bacon's cipher is historically significant not for its cryptographic strength but for being an early documented example of binary encoding — 200 years before Boole, 300 years before Shannon, and 350 years before modern computing.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Bacon's binary alphabet:
 A = AAAAA    N = ABBAA
 B = AAAAB    O = ABBAB
@@ -140,12 +140,12 @@ normal=A, italic=B across 10 characters</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">A/B Distribution Analysis</div><div class="attack-diff">Complexity: Trivial (as cipher) · Moderate (as steganography)</div><p class="attack-desc">As a pure cipher, Bacon is trivially broken — it's a fixed binary encoding of the alphabet. As steganography in printed text, detection requires identifying two typefaces, which is usually obvious with magnification. Modern steganography detection uses statistical analysis of pixel distributions or bit-level patterns.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Bacon's Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -161,7 +161,7 @@ normal=A, italic=B across 10 characters</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

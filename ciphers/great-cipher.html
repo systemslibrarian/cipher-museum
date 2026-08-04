@@ -88,7 +88,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body">
         <p>Antoine Rossignol (1600–1682) was France's first true cryptanalyst. His talent was discovered at the 1626 siege of Réalmont, where he broke a Huguenot ciphered letter overnight — and the rebels surrendered the next day. Cardinal Richelieu brought him to court, and Antoine, joined by his son Bonaventure, designed a new cipher so strong it became the official cipher of the French crown.</p>
         <p style="margin-top:1rem;">The Rossignols' code book contained roughly <strong>587 numbers</strong>, each standing for a syllable, a common word, a single letter, or — critically — nothing at all. Some numbers were pure decoys (nulls); at least one number meant <em>"ignore the previous letter"</em>. After Bonaventure's grandson Antoine-Bonaventure died in 1751, the codebook itself vanished, and the Rossignol papers in the French archives became unreadable artifacts.</p>
@@ -97,7 +97,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body">
         <p>Unlike a substitution cipher (one symbol per letter), the Great Cipher is a <strong>nomenclator</strong> — a coded vocabulary. The codebook lists numbers paired with syllables:</p>
         <pre>124 → "le"         301 → "roi"         412 → null (ignore)
@@ -155,7 +155,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body">
         <div class="attack-panel">
           <div class="attack-name">Frequency Analysis on Syllables</div>
@@ -176,7 +176,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🎭</span><span class="panel-title">The Man in the Iron Mask</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-mask"/></svg></span><span class="panel-title">The Man in the Iron Mask</span></div>
       <div class="panel-body">
         <p>Among the letters Bazeries finally read in 1893 was a dispatch from war minister Louvois to General Catinat dated 1691, discussing the imprisonment of one <strong>"general Vivien de Bulonde"</strong> who had cowardly lifted the siege of Cuneo. The order: arrest him, take him to the fortress of Pignerol, and <em>"have him conducted to the prison at night with a mask on his face."</em></p>
         <p style="margin-top:1rem;">Bazeries believed this was the famous Iron Mask. Most modern historians disagree — Bulonde was alive and free again by 1708 — but the discovery showed the world that the Great Cipher had finally fallen, and that its protected secrets had been historically significant ones.</p>
@@ -184,7 +184,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from the Great Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -204,7 +204,7 @@
 
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
@@ -223,7 +223,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🎴</span><span class="panel-title">About this Demo</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">About this Demo</span></div>
       <div class="panel-body">
         <p>The historical Rossignol codebook (587 entries) is lost in detail. This demo uses a teaching-scale codebook — 50 common digrams + 26 letters + 6 nulls + 1 "delete previous" trap (83 codewords) — deterministically generated from the Codebook Seed.</p>
         <p style="margin-top:.75rem;">Try encoding the same message twice: notice how the output changes because common syllables have multiple codes and nulls are sprinkled in randomly. Decoding always recovers the original (provided the seed matches).</p>

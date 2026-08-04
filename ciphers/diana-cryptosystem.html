@@ -79,12 +79,12 @@
       <p>The Diana Cryptosystem is the US Army Special Forces implementation of the one-time pad, designed for field use under combat conditions. Issued to Green Berets operating in Vietnam, Laos, and Cambodia, it paired booklets of random key letters with a pocket Tri-Graph card: for each plaintext letter and its pad letter, the card gives the cipher letter — and because every trigram of plaintext, key, and cipher letters sums to 25, the very same lookup decrypts. Pad pages were burned after use. When used correctly the system is mathematically unbreakable, and NSA's declassified COMSEC history names DIANA as its most-used letter pad format.</p>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>DIANA was the NSA's standard letter one-time pad, described in the agency's declassified <em>History of U.S. Communications Security</em> (the Boak lectures, 1973) as "the oldest type still in substantial use" and, with its numeric sibling CALYPSO, "still the most used one-time pads" — later joined by the faster ORION and MEDEA formats. US Special Forces operating in denied territory needed a cipher light enough to destroy quickly under ambush conditions: printed pad booklets small enough to burn page by page replaced bulky teletype key tape, and a pocket Tri-Graph conversion card did the arithmetic.</p>
       <p style="margin-top:1rem;font-size:.85rem;color:var(--tx2);">Sources: NSA, <a href="https://www.cryptomuseum.com/intel/nsa/files/nsa_history_comsec_1.pdf">Boak Lectures Vol. I</a> (1973, decl. 2015), pp. 22–25 · D. Rijmenants, <a href="https://rijmenants.blogspot.com/2017/10/a-fast-reciprocal-one-time-pad-table.html">"DIANA — A Fast Reciprocal One Time Pad Table"</a> · <a href="http://www.sfrvn.net/c1/diana.asp">Special Forces in Vietnam — Commo Security</a>.</p></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Each pad page carries lines of random key letters, used once and destroyed. The DIANA rule is that plaintext, key, and cipher letters of every position always sum to 25 (with A=0 … Z=25): <strong>C = 25 − P − K (mod 26)</strong>. That makes the system doubly reciprocal — the same Tri-Graph table both encrypts and decrypts, and any two letters of the trigram give the third — so an operator who memorized the 126 trigram combinations could work without the card at all.</p>
         <pre style="background:var(--s3);border:1px solid var(--s4);border-radius:var(--r);padding:1.25rem;font-family:var(--fm);font-size:.8rem;color:var(--tx2);line-height:1.8;overflow-x:auto;margin-top:1rem;">
 Worked example (Special Forces radio operator's account):
@@ -104,18 +104,18 @@ Decryption is the same lookup: T with key G → 25−19−6 = 0 = A</pre>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">Why Pads Fail in Practice</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">Why Pads Fail in Practice</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Pad reuse / loss / capture</div><div class="attack-diff">Complexity: Trivial once key material is compromised</div><p class="attack-desc">The fatal weakness of all OTP systems is logistical, not mathematical. If a pad card is captured, reused, or reproduced without secure randomness, the system collapses immediately. The Soviet VENONA failure stemmed from key reuse under wartime production pressure. Diana training manuals emphasize card destruction above all other security procedures.</p></div></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">Relationship to Modern Crypto</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">Relationship to Modern Crypto</span></div>
       <div class="panel-body"><p>The Diana system demonstrates the same security proof as unconditional secrecy: Shannon's 1949 theorem shows that a truly random key used only once produces a ciphertext with no information-theoretic correlation to plaintext. AES, TLS, and every modern symmetric cipher sacrifice this absolute guarantee in exchange for the practicality of small, reusable keys.</p></div>
     </div>
   </div>
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">&#9876;</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table"><tbody><tr><td>Origin</td><td>US Army Special Forces / NSA</td></tr><tr><td>Era</td><td>~1960–1995</td></tr><tr><td>Family</td><td>One-Time Pad (trigraphic variant)</td></tr><tr><td>Key Material</td><td>Printed pad cards, 13 trigraph columns</td></tr><tr><td>Security</td><td>Theoretically unbreakable if pad not reused</td></tr><tr><td>Modern Lesson</td><td>Correct OTP use is unbreakable; logistics often fail before the math</td></tr></tbody></table>

@@ -94,12 +94,12 @@
     </figure>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>While Enigma protected German field communications, the Lorenz SZ40/42 protected Hitler's strategic communications to his senior commanders. Where Enigma was a hand-operated cipher machine, Lorenz was a fully automatic teleprinter attachment — messages fed in on paper tape, encrypted output punched automatically.</p><p style="margin-top:1rem;">On August 30, 1941, a German operator sent a 4,000-character message, received a request to resend, and sent it again — with the same settings but slightly different plaintext (abbreviating some words). This catastrophic procedural error gave Bletchley Park cryptanalyst Bill Tutte enough to reconstruct the entire Lorenz cipher structure without ever seeing the machine. Tommy Flowers then built Colossus to automate the attack.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Lorenz SZ42 used 12 cipher wheels:
 5 Chi (χ) wheels: key stream
 5 Psi (ψ) wheels: irregular key
@@ -172,7 +172,7 @@ Total period: LCM of all wheels
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚖️</span><span class="panel-title">Enigma vs Lorenz — what changed when Enigma was no longer enough</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-diamond"/></svg></span><span class="panel-title">Enigma vs Lorenz — what changed when Enigma was no longer enough</span></div>
       <div class="panel-body">
         <p style="margin-top:0;">Both ran in parallel through the war, and both lived in the same Bletchley campus. They are the same family of problem solved with very different ambitions — and they failed for very different reasons.</p>
         <table class="cipher-table">
@@ -193,14 +193,14 @@ Total period: LCM of all wheels
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Known Plaintext + Depth Attack (1941)</div><div class="attack-diff">Complexity: Extreme · Required Colossus</div><p class="attack-desc">The operator's mistake (same settings, similar plaintext) created a "depth" — two messages XORed together give P1 XOR P2 (the keys cancel). From this, Tutte deduced the complete wheel structure without seeing the machine — a cryptanalytic feat considered one of the greatest intellectual achievements of WWII. Colossus (1943) automated the wheel-setting problem, running at 5,000 characters per second.</p></div>
 
       <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);letter-spacing:.06em;margin:2rem 0 .75rem;">The depth attack, in your browser</h3>
       <p>Two ciphertexts encrypted under the <em>same</em> Lorenz keystream. XOR them together and the keystream cancels — what remains is <code>P1 ⊕ P2</code>, a "depth" that leaks structure. Drag a guessed crib across the depth: where the result reads as English, the crib is correct in one message and the slice you recover is the matching plaintext from the other.</p>
 
       <div class="demo-panel" style="margin-top:1rem;border-color:var(--gold-b);">
-        <div class="demo-head"><span class="panel-icon">🔍</span><span class="demo-title">Two-Time-Pad Crib Drag</span></div>
+        <div class="demo-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="demo-title">Two-Time-Pad Crib Drag</span></div>
         <div class="demo-body">
           <div class="input-group">
             <label class="input-label" for="lz-c1">Ciphertext A (hex)</label>
@@ -238,7 +238,7 @@ Total period: LCM of all wheels
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Lorenz Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -251,7 +251,7 @@ Total period: LCM of all wheels
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📝</span><span class="panel-title">Worked Example</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-quill"/></svg></span><span class="panel-title">Worked Example</span></div>
       <div class="panel-body"><pre>Plaintext character: H
 Baudot (ITA2) code:  10100  (5-bit)
 
@@ -279,7 +279,7 @@ With all 12 wheels: period before repetition
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🏛️</span><span class="panel-title">Related Exhibits</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-columns"/></svg></span><span class="panel-title">Related Exhibits</span></div>
       <div class="panel-body">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;">
           <li><a href="enigma.html" style="color:var(--gold);text-decoration:underline;">Enigma Machine</a> — The field-level rotor cipher Lorenz outranked</li>
@@ -294,7 +294,7 @@ With all 12 wheels: period before repetition
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

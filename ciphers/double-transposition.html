@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>The German military recognized that a single columnar transposition was breakable and responded with the obvious solution: do it twice with different keys. The combined permutation creates a dramatically larger effective keyspace. Messages encrypted with double transposition were used extensively in WWI and remained in limited military use through WWII.</p><p style="margin-top:1rem;">Even modern computer attacks struggle with double transposition when the ciphertext is short and the key lengths are unknown. It remains one of the hardest classical ciphers to crack automatically.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Apply columnar transposition twice using two different keywords:</p><pre>Step 1: Apply columnar transposition with key MARK
 Step 2: Apply columnar transposition with key LION
 
@@ -152,12 +152,12 @@ where k1, k2 are the key lengths.</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Hill Climbing / Simulated Annealing</div><div class="attack-diff">Complexity: Hard — especially on short ciphertext</div><p class="attack-desc">Modern solvers use hill climbing: start with random keys, score the decryption using English n-gram statistics, mutate the keys, and keep improvements. For double transposition with unknown key lengths, this requires millions of iterations and can fail on short messages where statistical signals are weak.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Double Transposition</th><th>Modern Evolution</th></tr></thead>
@@ -173,7 +173,7 @@ where k1, k2 are the key lengths.</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

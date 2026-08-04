@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Belaso (1553) and Cardano (1556) had both proposed self-extending keys; Vigenère's <em>Traicté des chiffres</em> (1586) gave the construction its definitive form and unfortunately also presented the much weaker repeating-key variant. History remembered the wrong one: the polyalphabetic that became known as &lsquo;the Vigenère cipher&rsquo; for the next four centuries is the breakable repeating-key version, and Vigenère's actually-strong autokey was largely forgotten until Friedman's interwar work.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Pick a short keyword K. Encrypt the first |K| plaintext letters with K under a Vigenère shift. Then take the plaintext itself, prepend K, and use that string as the running key for the rest of the message. Decryption recovers K-many letters first, then uses those recovered plaintext letters as the key for the next stretch — and so on. The key never repeats; its statistics are those of natural English (or French, etc.), not of a short cycled keyword.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body">
         <div class="attack-panel">
           <div class="attack-name">Friedman's Autokey Attack</div>
@@ -104,7 +104,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Autokey</th><th>Modern Evolution</th></tr></thead>
@@ -118,7 +118,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚔</span><span class="panel-title">Break This Cipher</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title">Break This Cipher</span></div>
       <div class="panel-body">
         <p style="margin-bottom:1rem;color:var(--tx2);">Ciphertext: <code>QOXSXPWRYOSKP</code></p>
         <p style="color:var(--tx3);font-size:.9rem;">Hint: the primer is a single Renaissance-style keyword, but the rest of the key comes from the plaintext itself.</p>
@@ -134,7 +134,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

@@ -83,12 +83,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Published alongside the Four-square in Delastelle's 1902 treatise. The "horizontal" variant places the squares side by side; a "vertical" variant stacks them. Both share the same-row leak. Used recreationally rather than militarily.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Arrange two keyed 5×5 squares horizontally. For each digram, look up the first letter in the left square and the second in the right square. Read the ciphertext from the opposite corners of the rectangle they form.<br><br><pre>If the two letters share a row → leave them unchanged.
 Otherwise:
   cipher[0] = left[ row(L), col(R) ]
@@ -103,12 +103,12 @@ Otherwise:
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Same-Row Leakage</div><div class="attack-diff">Complexity: Easy</div><p class="attack-desc">Roughly one in five digrams passes through the cipher unchanged. An attacker can identify these by noticing common English digrams (TH, HE, IN, ER) appearing as themselves in the ciphertext. From there, the rows are partially recovered.</p></div><div class="attack-panel"><div class="attack-name">Digram Frequency Analysis</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">As with Four-square, the cipher is a fixed digram-to-digram substitution. Digram frequency tables and simulated annealing recover both keys with a few hundred characters of ciphertext.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Two-Square Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -124,7 +124,7 @@ Otherwise:
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

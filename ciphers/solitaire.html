@@ -84,12 +84,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Schneier published Solitaire in an appendix to Cryptonomicon and later on his Counterpane website. Within months, cryptanalysts including Paul Crowley discovered small biases in the keystream — enough to make Solitaire weaker than ideal but not catastrophically broken. Schneier maintains the design as a teaching example and acknowledges the analysis. Real-world use by activists and journalists has been documented but is rare.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Treat the 54-card deck as state. Each "round" produces one keystream letter (1–26):<br><br><pre>1. Move the A-joker (53) one card down.
 2. Move the B-joker (54) two cards down.
 3. Triple-cut: swap the chunks above and below the two jokers.
@@ -109,7 +109,7 @@
 
     <!-- ── Visual Step-by-Step Solitaire Demonstrator ── -->
     <div class="panel" id="solitaireViz">
-      <div class="panel-head"><span class="panel-icon">🎴</span><span class="panel-title">Watch It Work · Step-by-Step Deck Visualizer</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">Watch It Work · Step-by-Step Deck Visualizer</span></div>
       <div class="panel-body">
         <p style="font-size:.9rem;color:var(--tx2);margin-bottom:.75rem;">
           Step through the actual deck operations one at a time. Watch the two jokers shuffle, the triple-cut swap segments, and the keystream letter emerge from the count-cut. Each click advances <strong>one phase</strong> of the algorithm; "Next Letter" runs all five phases until a usable keystream letter is produced.
@@ -158,7 +158,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🃏</span><span class="panel-title">Operator's Field Manual</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">Operator's Field Manual</span></div>
       <div class="panel-body">
         <p style="font-size:.9rem;color:var(--tx2);margin-bottom:.6rem;">Distilled from <a href="https://steemit.com/steemiteducation/@shai-hulud/solitaire-encryption-low-tech-high-security-a-how-to" target="_blank" rel="noopener">@shai-hulud's Solitaire how-to</a> and Schneier's original spec — the conventions that make a hand-cipher actually survive contact with the real world.</p>
         <table class="cipher-table">
@@ -434,12 +434,12 @@
     </script>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Crowley Bias (1999)</div><div class="attack-diff">Complexity: Distinguisher only</div><p class="attack-desc">Paul Crowley showed that the Solitaire keystream has a measurable bias: the probability that two consecutive keystream values are equal is about 1/22.5 instead of the ideal 1/26. This is enough to <em>distinguish</em> Solitaire output from random, but not enough to recover plaintext or key in practice.</p></div><div class="attack-panel"><div class="attack-name">Operator Errors</div><div class="attack-diff">Complexity: The real risk</div><p class="attack-desc">A single mis-step in the count-cut or keystream extraction misaligns the recipient's deck and turns the rest of the message into gibberish. In practice, operator error is the main threat — not cryptanalysis.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Solitaire / Pontifex</th><th>Modern Evolution</th></tr></thead>
@@ -456,7 +456,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

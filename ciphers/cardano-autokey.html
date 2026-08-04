@@ -83,7 +83,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Pick a single seed letter <code>S</code>. The keystream is</p><pre>k₀ = S
 kᵢ = pᵢ₋₁  for i ≥ 1</pre><p>Encryption uses the standard Vigenère table: cᵢ = (pᵢ + kᵢ) mod 26. Decryption recovers p₀ from c₀ using S, then uses each just-recovered pᵢ as the key for cᵢ₊₁.</p><p style="margin-top:1rem;"><strong>Worked example with S = Q, plaintext MEET ME AT MIDNIGHT:</strong></p><pre>Plain : M E E T M E A T M I D N I G H T
 Key   : Q M E E T M E A T M I D N I G H
@@ -91,12 +91,12 @@ Cipher: C Q I X F Q E T F U L Q V O N A</pre></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Probable-word cascade</div><div class="attack-diff">Complexity: Easy with a crib</div><p class="attack-desc">Guess the first plaintext word. Each correct letter immediately reveals the next key letter and therefore the next plaintext letter. The attack propagates forward through the message at no extra cost. The whole reason Vigenère replaced Cardano with a multi-letter primer was to deny the attacker this foothold.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">26 priming guesses</div><div class="attack-diff">Complexity: Trivial on short messages</div><p class="attack-desc">Try every possible seed letter. For each, run the cascade and look for English. Twenty-six attempts and a frequency check is enough.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><p>Cardano's autokey is the cleanest historical example of <em>state confusion</em>: he conflated <em>using the plaintext</em> with <em>using a fresh key</em>. Modern stream ciphers and AEAD modes go to great length to make sure the keystream is independent of the data being encrypted, precisely because Cardano-style coupling enables exactly the cascade attack shown above.</p><p style="margin-top:1rem;">CTR mode and ChaCha20 are the modern correct version of the same idea: the keystream is generated from a key and a counter, never from the plaintext. The lesson — never let your key depend on your data — is one of the load-bearing rules of modern cryptography.</p></div>
     </div>
 
@@ -104,7 +104,7 @@ Cipher: C Q I X F Q E T F U L Q V O N A</pre></div>
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

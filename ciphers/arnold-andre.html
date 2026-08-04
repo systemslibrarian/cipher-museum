@@ -83,22 +83,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Both correspondents own identical copies of an agreed reference book. To encrypt a word, the sender finds it in the book and writes down a triple <code>page.line.word</code>. To decrypt, the receiver looks up that triple in their own copy and recovers the plaintext.</p><p style="margin-top:1rem;">Unique to a book cipher: the “key” is a published book, easy to obtain innocuously and impossible to memorise. There is no codebook to capture, no machine to seize — unless the courier is searched, in which case everything is exposed at once.</p><p style="margin-top:1rem;">Words not in the book had to be spelled out letter by letter using a parallel scheme — either a simple letter-position code or, in Arnold’s correspondence, occasional substitutions and abbreviations agreed in advance. Modern cryptanalysis classifies this as a homophonic / nomenclator hybrid.</p><p style="margin-top:1rem;">The demo above uses a deterministic 240-word “book” organised as 12 pages × 5 lines × 4 words. Words not in the book fall through to per-letter triples on “page 14”, bracketed by sentinel triples <code>13.1.1</code> and <code>15.1.1</code> — mirroring how Arnold and André handled out-of-book words in practice.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Compromised</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Compromised</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Capture of the courier (23 September 1780)</div><div class="attack-diff">Complexity: Three militiamen, an unscheduled patrol</div><p class="attack-desc">André was returning from West Point in civilian clothes — a fatal mistake, since it made him a spy under the laws of war rather than a uniformed officer. John Paulding, David Williams, and Isaac Van Wart stopped him near Tarrytown, found the documents in his boot, and turned him over to the Continental Army. He was tried, convicted, and hanged within ten days.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Cryptanalysis was never required</div><div class="attack-diff">Complexity: Moot — the plaintext was recovered with the key</div><p class="attack-desc">A book cipher with a published reference is genuinely hard to break given only ciphertext: the analyst must guess which book is the key, and there are millions to try. But once the courier and the key are captured together, the entire correspondence becomes readable. The Arnold cipher was never broken cryptanalytically; it never needed to be.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Arnold–André lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Public reference as the key</td><td>Trusted-third-party root certificates: well-known but high-value targets</td></tr><tr><td>Single point of failure (the courier)</td><td>The 2010s SolarWinds / supply-chain attacks against single trusted channels</td></tr><tr><td>Cryptography held; operations failed</td><td>The defining pattern of modern breaches: TLS is fine, the operator clicked the link</td></tr><tr><td>Carrying key + ciphertext together</td><td>Why modern protocols separate key storage from encrypted data (HSM ≠ disk)</td></tr></tbody></table></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">Research Trail</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Research Trail</span></div>
       <div class="panel-body"><p>Satoshi Tomokiyo's <em>Cryptiana</em> notes on the Arnold-André correspondence are among the clearest specialist introductions to how Revolutionary-era book ciphers were actually organised on the page. They pair well with this exhibit because they show the operational side of book codes rather than only the treason narrative.</p></div>
     </div>
 
@@ -106,7 +106,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

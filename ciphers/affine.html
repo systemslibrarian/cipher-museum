@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Number the alphabet A=0, B=1, …, Z=25. Pick two integers <em>a</em> and <em>b</em>. Encryption is</p><pre>E(x) = (a·x + b) mod 26</pre><p>Decryption uses the modular inverse of <em>a</em>:</p><pre>D(y) = a⁻¹·(y - b) mod 26</pre><p style="margin-top:1rem;"><strong>Critical constraint:</strong> <em>a</em> must be coprime to 26 (no shared factor with 26 = 2·13). Only twelve values of <em>a</em> qualify: <code>1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25</code>. Pair each with one of 26 offsets and you get 12·26 = 312 keys — small enough to brute-force by hand.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Brute force</div><div class="attack-diff">Complexity: Trivial (312 keys)</div><p class="attack-desc">Try all 312 (a, b) pairs and pick the decryption that looks like English. A modern laptop does this in microseconds; an attentive teenager does it in an afternoon.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Frequency analysis</div><div class="attack-diff">Complexity: Trivial (any monoalphabetic substitution)</div><p class="attack-desc">Affine is a monoalphabetic substitution: each plaintext letter always maps to the same ciphertext letter. Letter frequencies survive intact, so the methods al-Kindi described in the ninth century apply unchanged.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Affine concept</th><th>Modern echo</th></tr></thead><tbody><tr><td>Coprime requirement on <em>a</em></td><td>RSA's coprime requirement on the public exponent <em>e</em></td></tr><tr><td>Linear transformation in mod 26</td><td>The Hill cipher generalises this to matrix multiplication</td></tr><tr><td>Tiny key space</td><td>The reason modern keys are 128–256 bits, not 9 bits</td></tr><tr><td>Linearity = trivially invertible</td><td>Modern primitives deliberately add non-linear S-boxes</td></tr></tbody></table></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

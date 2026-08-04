@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>In May 1862, the Confederate Signal Corps established the Vigenère cipher as 'the government cipher' — to be used by Jefferson Davis, Robert E. Lee, and all Confederate field commanders. The choice was tragically timed: Friedrich Kasiski would publish his method for breaking Vigenère just one year later, in 1863. Whether Confederate cryptographers were aware of the cipher's theoretical vulnerability is unclear.</p><p style="margin-top:1rem;">Union cryptanalysts read Confederate dispatches throughout the war. The keywords were sometimes shared for months across all military departments — meaning a single key compromise allowed all messages to be read retrospectively.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><pre>Confederate keywords documented in historical record:
 
 1862: 'Manchester Bluff' (15 letters)
@@ -147,12 +147,12 @@ All Vigenère: C = (P + K) mod 26</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Key Length Detection + Frequency Analysis</div><div class="attack-diff">Complexity: Moderate · Union cryptanalysts succeeded routinely</div><p class="attack-desc">With 15-letter keywords and messages often hundreds of words long, Union cryptanalysts had ample ciphertext. The key length (15) produces detectable periodicity through Kasiski examination and Index of Coincidence. Once the key length was known, each of the 15 letter positions was solved independently using frequency analysis.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Confederate Vigenère</th><th>Modern Evolution</th></tr></thead>
@@ -168,7 +168,7 @@ All Vigenère: C = (P + K) mod 26</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

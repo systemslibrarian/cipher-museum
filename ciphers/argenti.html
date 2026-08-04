@@ -83,22 +83,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>An Argenti cipher has three layers stacked on top of one another:</p><ol style="margin-top:.75rem;line-height:1.7;"><li><strong>Homophonic alphabet.</strong> Each plaintext letter is assigned several cipher symbols (typically 2–4 for common letters, 1–2 for rare). The encoder rotates between them so common letters never produce the same code twice in a row.</li><li><strong>Nomenclator.</strong> A short list of named persons, places, offices, and frequent words gets dedicated codes that bypass the alphabet entirely — “the Pope”, “the Emperor”, “Paris”, etc.</li><li><strong>Nulls.</strong> Meaningless symbols sprinkled at agreed positions to confuse a cryptanalyst counting frequencies.</li></ol><p style="margin-top:1rem;">The demo above implements the homophonic core: each letter receives two keyed 2-digit codes (in the range 10–89), and the encoder alternates between them on every repeat use. Try encoding <code>AAAAAA</code> — you will see two distinct codes interleaved, exactly the Argenti defence against frequency attack.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Single-letter frequency attack (limited)</div><div class="attack-diff">Complexity: Very high against a properly-designed nomenclator</div><p class="attack-desc">A homophonic cipher with two homophones per letter still leaks information — the <em>combined</em> frequency of a letter’s codes equals the letter’s natural frequency. Skilled cryptanalysts (including the Argentis themselves, when reading enemy traffic) used this to anchor common letters, then bootstrapped the rest from suspected plaintext words. Long ciphertexts fall to this. Short diplomatic notes do not.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Compromise of the codebook itself</div><div class="attack-diff">Complexity: Espionage problem, not cryptanalytic</div><p class="attack-desc">Like every nomenclator system in history, Argenti ciphers fell most often when a courier was bribed or a chancery clerk defected with the keylist. The Vatican changed nomenclators on a roughly annual cycle to limit this exposure — a discipline most contemporaneous chanceries did not match.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Eventually obsolete</div><div class="attack-diff">Complexity: 18th-century mathematics</div><p class="attack-desc">By the time of John Wallis (next exhibit) and his contemporaries, professional state cryptanalysts could routinely break Argenti-class systems given enough traffic. The era of pure nomenclators ended around 1700; the polyalphabetic Vigenère-family ciphers — themselves long ignored by chanceries who trusted their nomenclators — finally came into operational use.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Argenti lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Homophones spread frequency — but never erase it</td><td>Why ECB-mode block ciphers leak; why authenticated encryption is mandatory</td></tr><tr><td>Layered defences (alphabet + nomenclator + nulls)</td><td>Defence in depth: cipher + MAC + nonces + key rotation</td></tr><tr><td>Annual key rollover policy</td><td>Modern key rotation discipline (90-day TLS certs, crypto-period limits)</td></tr><tr><td>Best-in-class systems still need cryptanalysts to validate them</td><td>Independent academic review; NIST competitions; open-source scrutiny</td></tr></tbody></table></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">Research Trail</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Research Trail</span></div>
       <div class="panel-body"><p>For the Vatican cryptographic tradition, David Kahn's chapter on papal ciphers remains the standard narrative entry point, but the best specialist trail runs through Satoshi Tomokiyo's <em>Cryptiana</em> essays and archival notes on early-modern nomenclators. Use this exhibit alongside <a href="../ciphers/wallis-ciphers.html">Wallis Ciphers</a> and <a href="../ciphers/mary-stuart-castelnau-letters.html">Mary Stuart's Castelnau letters</a> to follow the same diplomatic cipher family across three centuries.</p></div>
     </div>
 
@@ -106,7 +106,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

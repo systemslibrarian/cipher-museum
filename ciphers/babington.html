@@ -88,7 +88,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body">
         <p>By 1586, Mary Stuart had been imprisoned in England for 19 years. Catholic plots to free her and depose Elizabeth I had come and gone (Ridolfi, Throckmorton). Walsingham — who ran what historians now consider Europe's first modern intelligence service — believed Mary was guilty of conspiracy but had no evidence Elizabeth would accept. He needed Mary's own words, written by her own hand, endorsing regicide. So he <em>built a trap</em>.</p>
         <p style="margin-top:1rem;">Walsingham's agent Gilbert Gifford, a double agent posing as a Catholic courier, established a covert channel: letters to and from Mary at Chartley Manor would be hidden in the bung-hole of beer kegs delivered by the local brewer. Mary believed it was secure. In reality, every letter passed through Phelippes's workshop in London, where it was opened, copied, decoded, resealed, and forwarded — usually within a day. The cipher she trusted was a 64-symbol nomenclator: 23 disguised letters, 36 codewords for common terms (THE, MARY, QUEEN, POISON, DEATH), 4 nulls, and one trap symbol called the <em>"doubleth"</em> meaning "double the next letter."</p>
@@ -101,7 +101,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body">
         <p>The cipher is a <strong>nomenclator</strong> — a hybrid of substitution cipher and codebook. Mary's actual key (preserved in the British Library and reproduced in Pollen's 1922 edition) had four classes of symbol:</p>
         <pre>23 letter symbols   (no J, V, W — folded onto I, U, II)
@@ -160,7 +160,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body">
         <div class="attack-panel">
           <div class="attack-name">Frequency Analysis on the Letter Glyphs</div>
@@ -185,7 +185,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🎓</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Babington-Era Concept</th><th>Modern Evolution</th></tr></thead>
@@ -208,7 +208,7 @@
 
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
@@ -228,7 +228,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🎴</span><span class="panel-title">About this Demo</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">About this Demo</span></div>
       <div class="panel-body">
         <p>The original 64-glyph key is in the British Library (Cotton MS Caligula C IX). This demo uses ASCII tokens drawn from a 64-symbol pool — <code>⟨a01⟩…⟨a23⟩</code>, <code>⟨w01⟩…⟨w36⟩</code>, <code>⟨n01⟩…⟨n04⟩</code>, and <code>⟨x2⟩</code> — but the seed shuffles which symbol stands for which letter, codeword, null, or the doubleth, so a symbol's prefix says nothing about its role. Under the default seed <code>BABINGTON</code>, for example, the doubleth is <code>⟨w18⟩</code> and <code>⟨x2⟩</code> is the codeword DEATH.</p>
         <p style="margin-top:.75rem;">Try encoding "<em>POISON THE QUEEN AT THE TOWER</em>" and notice how POISON, THE, QUEEN, and TOWER each get their own codeword (one glyph for the whole word). Then encode "ATTACK" and watch the doubleth trap fire on the doubled T.</p>
@@ -237,7 +237,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🗡️</span><span class="panel-title">Break This Cipher</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title">Break This Cipher</span></div>
       <div class="panel-body">
         <p>Decode this intercepted dispatch (seed: <code>BABINGTON</code>):</p>
         <pre style="white-space:pre-wrap;word-break:break-all;">⟨w25⟩ ⟨a14⟩ ⟨w32⟩ ⟨a20⟩ ⟨w33⟩ ⟨a17⟩ ⟨x2⟩</pre>

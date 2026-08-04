@@ -25,6 +25,7 @@ const CORE = [
   '/js/ui-delegates.js',
   '/hall-of-foundations/index.html',
   '/hall-of-foundations/foundations.css',
+  '/images/icons.svg',
   '/favicon.svg',
   '/manifest.webmanifest',
   '/images/icons/icon-192.png',

@@ -196,7 +196,7 @@
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔍</span><span class="panel-title">The Kasiski Examination</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">The Kasiski Examination</span></div>
       <div class="panel-body">
         <p>When the same plaintext aligns with the same key letter, it produces the same ciphertext. Search the ciphertext for repeated 3+ letter sequences. The distances between them are multiples of the key length.</p>
         <pre style="margin-top:1rem;font-size:.78rem;">Ciphertext:
@@ -207,7 +207,7 @@ LXFOP<strong style="color:var(--gold);">VEF</strong>RNHRLXFOP<strong style="colo
       </div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📐</span><span class="panel-title">Index of Coincidence</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-chart"/></svg></span><span class="panel-title">Index of Coincidence</span></div>
       <div class="panel-body">
         <p>William Friedman's 1920 method works even without visible repetitions. Random text: IC ≈ 0.038. Natural English: IC ≈ 0.066. A Vigenère cipher falls between. The IC value narrows down the key length — split the ciphertext into columns matching the guessed key length, then apply frequency analysis to each column.</p>
         <table class="cipher-table" style="margin-top:.75rem;">
@@ -225,15 +225,15 @@ LXFOP<strong style="color:var(--gold);">VEF</strong>RNHRLXFOP<strong style="colo
   <!-- Modern Connection -->
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🌊</span><span class="panel-title">Vigenère → Stream Ciphers</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Vigenère → Stream Ciphers</span></div>
       <div class="panel-body"><p>Vigenère uses a repeating key stream. Modern stream ciphers like ChaCha20 generate a non-repeating, cryptographically random keystream of the same length as the message — the same XOR operation, with an unguessable key.</p></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📚</span><span class="panel-title">Running Key → One-Time Pad</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Running Key → One-Time Pad</span></div>
       <div class="panel-body"><p>The running key cipher is one step from the one-time pad. The difference: a book passage is not random. If the source text has linguistic structure, that structure leaks into the ciphertext and enables statistical attacks.</p></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔑</span><span class="panel-title">Key Length = Security</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-key"/></svg></span><span class="panel-title">Key Length = Security</span></div>
       <div class="panel-body"><p>The Vigenère lesson: short repeating keys are fatal. Modern cryptography uses 128–256 bit keys that never repeat within a session, and key derivation functions ensure no two sessions share key material.</p></div>
     </div>
   </div>

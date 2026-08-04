@@ -81,12 +81,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Elliptic curves entered cryptography in 1985, proposed independently by Neal Koblitz and Victor Miller. The appeal was efficiency: the discrete logarithm problem seemed much harder on a curve than in the integers modulo a prime, so a 256-bit curve key offered roughly the security of a 3072-bit RSA key. Scott Vanstone adapted the existing Digital Signature Algorithm to curves in 1992, and ECDSA was standardised as ANSI X9.62 in 1999. Bitcoin adopted it in 2009, which put the algorithm in front of a far larger and more adversarial audience than the standards bodies had imagined.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body">
         <p>Fix a curve, a base point <em>G</em> on it, and the number <em>n</em> of points <em>G</em> generates. A private key is a number <em>d</em>; the matching public key is the point <em>Q</em> = <em>dG</em>. Recovering <em>d</em> from <em>Q</em> means solving the elliptic-curve discrete logarithm problem, which nobody knows how to do at full size.</p>
         <p>To sign a message hash <em>h</em>, pick a one-time random number <em>k</em> &mdash; the <strong>nonce</strong> &mdash; and compute:</p>
@@ -96,7 +96,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🧪</span><span class="panel-title">Sign and verify, live</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-flask"/></svg></span><span class="panel-title">Sign and verify, live</span></div>
       <div class="panel-body">
         <p>This runs a genuine curve, small enough to read: <em>y</em>&sup2; = <em>x</em>&sup3; + 3<em>x</em> + 2 over the integers mod 97. It has 102 points plus the point at infinity, so <em>n</em> = 103 &mdash; a prime, which means every point generates the whole group. Real ECDSA uses the same arithmetic with numbers around 2<sup>256</sup>.</p>
         <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin:18px 0;">
@@ -119,7 +119,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">The nonce that sank the PlayStation 3</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">The nonce that sank the PlayStation 3</span></div>
       <div class="panel-body">
         <p>The nonce <em>k</em> must be secret, and it must be <strong>different every time</strong>. Sign two different messages with the same <em>k</em> and the two equations share an unknown. Subtract them and <em>k</em> falls out; substitute back and the private key follows. No lattice, no supercomputer &mdash; secondary-school algebra:</p>
         <p style="font-family:ui-monospace,monospace;background:var(--bg2,rgba(255,255,255,.04));padding:12px 16px;border-radius:6px;overflow-x:auto;">k = (h&#8321; &minus; h&#8322;) / (s&#8321; &minus; s&#8322;) &nbsp;&nbsp;then&nbsp;&nbsp; d = (s&#8321;k &minus; h&#8321;) / r</p>
@@ -139,7 +139,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🛡️</span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
       <div class="panel-body">
         <p>No practical attack is known against ECDSA's mathematics on a well-chosen curve. Every notable break has been an implementation failure, and almost all of them concern the nonce: repeating it, generating it with a weak random source, or leaking a few of its bits through a timing or cache side channel. Even partial leakage is fatal &mdash; recovering a handful of nonce bits across a few hundred signatures lets an attacker reconstruct the private key by lattice reduction.</p>
         <p>The standard defence is to stop generating <em>k</em> randomly at all. <strong>Deterministic ECDSA</strong> (RFC 6979) derives the nonce from the private key and the message hash together, so identical messages produce identical signatures and different messages cannot collide. EdDSA (Ed25519) builds the same idea into the scheme by design, which is one reason it is now often preferred.</p>
@@ -148,7 +148,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🌐</span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
       <div class="panel-body"><p>Every HTTPS connection to a site with an EC certificate verifies an ECDSA signature during the handshake. Every Bitcoin and Ethereum transaction is authorised by one. Secure-boot chains in phones, games consoles and cars use ECDSA or its close relatives to check that firmware came from the manufacturer. When your browser shows a padlock, an elliptic-curve signature was almost certainly checked to put it there.</p></div>
     </div>
 
@@ -157,7 +157,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">🔑</span><span class="panel-title">At a glance</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-key"/></svg></span><span class="panel-title">At a glance</span>
       </div>
       <div class="panel-body">
         <p><strong>Private key:</strong> a number <em>d</em>.</p>

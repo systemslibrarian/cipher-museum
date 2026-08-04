@@ -203,15 +203,15 @@
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔀</span><span class="panel-title">ShiftRows in AES</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">ShiftRows in AES</span></div>
       <div class="panel-body"><p>AES's ShiftRows step cyclically shifts the rows of its 4×4 state matrix — a direct descendant of columnar transposition. Every byte's position changes, ensuring that input patterns don't propagate directly to output patterns.</p></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🧮</span><span class="panel-title">MixColumns = Fractionation</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-chart"/></svg></span><span class="panel-title">MixColumns = Fractionation</span></div>
       <div class="panel-body"><p>AES's MixColumns operation mixes the four bytes of each column using matrix multiplication over GF(2⁸) — exactly the fractionation principle from Bifid, made mathematically rigorous and non-linear.</p></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔁</span><span class="panel-title">Diffusion</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">Diffusion</span></div>
       <div class="panel-body"><p>Shannon defined "diffusion" as spreading the influence of each plaintext bit across many ciphertext bits. Double transposition approximates this. AES achieves it completely: after 2 rounds, every output bit depends on every input bit.</p></div>
     </div>
   </div>

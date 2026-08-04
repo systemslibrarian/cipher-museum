@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">📜</span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>After Al-Kindi's frequency analysis destroyed simple substitution ciphers, Renaissance cryptographers fought back. Their solution: if common letters betray themselves by appearing too often, give them multiple disguises. The letter E might encrypt as 12, 37, or 44 — chosen at random each time. With enough symbols, no single ciphertext character stands out as overwhelmingly common.</p><p style="margin-top:1rem;">This system was widely used in European diplomatic correspondence from the 15th through 17th centuries. The Vatican, Italian city-states, and royal courts all employed variations. Some systems used over 100 symbols.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Assign multiple ciphertext symbols to each plaintext letter, weighted by letter frequency. Common letters get more symbols; rare letters get fewer.</p><pre>E → 12, 37, 44, 71, 83  (5 symbols, ~12.7% freq)
 T → 21, 90             (2 symbols, ~9.1% freq)
 A → 05, 63             (2 symbols, ~8.2% freq)
@@ -140,12 +140,12 @@ Z → 99                 (1 symbol,  ~0.07% freq)</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Structural Pattern Analysis</div><div class="attack-diff">Complexity: Moderate</div><p class="attack-desc">Even with flattened frequencies, the cipher retains structural patterns. Digraph frequencies (two-symbol sequences) still reflect English digraph statistics — TH, HE, IN, ER appear more often than XX, QQ, ZZ. With enough ciphertext and modern hill-climbing algorithms, the symbol-to-letter mapping can be recovered.</p></div><div class="attack-panel"><div class="attack-name">Poor Symbol Distribution</div><div class="attack-diff">Complexity: Easy if symbols not perfectly weighted</div><p class="attack-desc">In practice, operators rarely assigned symbols with mathematically correct frequencies. A symbol appearing 8% of the time when it should appear 2% immediately identifies itself. Real historical systems were broken this way.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Homophonic Substitution</th><th>Modern Evolution</th></tr></thead>
@@ -161,7 +161,7 @@ Z → 99                 (1 symbol,  ~0.07% freq)</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

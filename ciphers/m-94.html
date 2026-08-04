@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">⚙️</span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Twenty-five aluminum or brass disks slide onto a single spindle. Each disk has the 26 letters of the alphabet engraved around its rim in a different mixed order, and each carries a number (1 through 25) for ordering on the spindle. To encrypt:</p><ol style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li>Both sender and recipient agree on the order of the 25 disks for the day.</li><li>The sender turns each disk so that the plaintext message reads horizontally across one row.</li><li>The sender then chooses any <em>other</em> row and reads the ciphertext off horizontally.</li></ol><p style="margin-top:1rem;">The recipient stacks the disks in the same agreed order, dials in the ciphertext on the corresponding row, and looks for the row that reads as English. Because there are 25 rows, only one will be sensible plaintext — the rest are gibberish.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">💀</span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Multiple-anagram attack on the disk order</div><div class="attack-diff">Complexity: Tractable for short tactical traffic</div><p class="attack-desc">The cipher’s key is the daily disk-order permutation (25!) and the chosen offset row. With several intercepts of similar length the analyst can superimpose them at the same offset; columns then come from the same disk, and a multiple-anagram attack on the columns recovers the disk order. The Friedman / Kullback team at the SIS demonstrated practical breaks well before WWII.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Captured disk sets</div><div class="attack-diff">Complexity: Trivial once disks are in hand</div><p class="attack-desc">A disk set captured intact reduces the daily key from 25! to 25! / (25 ⋅ 24!) — you only need the order, not the wirings. The US Army accepted this risk for tactical traffic and reserved SIGABA for anything strategic.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon">🔬</span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>M-94 lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>The hardware key (disk wiring) is the standing key</td><td>Modern HSMs hold a master key with a long lifetime</td></tr><tr><td>The session key is just the disk order</td><td>Modern session keys are derived per-message from a master</td></tr><tr><td>Tactical vs strategic security tiers</td><td>Modern crypto-agility — different protections for different threat models</td></tr><tr><td>Jefferson’s 127-year lag to deployment</td><td>Good cryptographic ideas often arrive decades before the engineering catches up</td></tr></tbody></table></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon">⚔</span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
