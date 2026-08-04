@@ -103,13 +103,24 @@
       <div class="lab-bar">
         <button id="pick">Pick two points</button>
         <button id="reset" class="ghost">Reset</button>
-        <div class="readout" id="readout">y² = x³ + x + 1 · <b>tap the curve</b></div>
+        <div class="readout" id="readout" aria-live="polite" role="status">y² = x³ + x + 1 · <b>tap the curve</b></div>
       </div>
       <div class="lab-hint">
         <kbd>tap</kbd> once for <em>P</em>, again for <em>Q</em>. The chord, the
         third intersection, and the reflection to <em>P+Q</em> all draw in
         <span style="color:var(--vermilion)">vermilion</span>. Coordinates are
         computed from the real group law.
+      </div>
+      <!-- Keyboard/screen-reader fallback: select P and Q from actual on-curve points -->
+      <div class="a11y-fallback">
+        <span class="vh" id="kbLabel">Keyboard alternative: choose two points on the curve to add.</span>
+        <label>Point P
+          <select id="selP" aria-describedby="kbLabel"></select>
+        </label>
+        <label>Point Q
+          <select id="selQ"></select>
+        </label>
+        <button id="addKb" type="button">Add P + Q</button>
       </div>
     </div>
   </section>
@@ -215,9 +226,52 @@
     else readout.innerHTML="P = ( <b>"+p[0].toFixed(2)+"</b>, <b>"+p[1].toFixed(2)+"</b> ) · tap for Q";
   }
   svg.addEventListener("click",handle);
-  svg.addEventListener("touchstart",function(e){ e.preventDefault(); handle(e); },{passive:false});
+
+  // Touch: only intercept a deliberate tap, never a scroll. Track the start
+  // point; movement past a small slop means the finger is scrolling and the
+  // page's default behaviour is left alone.
+  var touchStart=null, TAP_SLOP=12;
+  svg.addEventListener("touchstart",function(e){
+    if(e.touches.length!==1){ touchStart=null; return; }
+    var t=e.touches[0];
+    touchStart={x:t.clientX,y:t.clientY,scrolled:false};
+  },{passive:true});
+  svg.addEventListener("touchmove",function(e){
+    if(!touchStart)return;
+    var t=e.touches[0];
+    if(Math.hypot(t.clientX-touchStart.x,t.clientY-touchStart.y)>TAP_SLOP) touchStart.scrolled=true;
+  },{passive:true});
+  svg.addEventListener("touchend",function(e){
+    if(!touchStart||touchStart.scrolled){ touchStart=null; return; }
+    e.preventDefault(); // confirmed tap: suppress the emulated click and act
+    var t=e.changedTouches[0];
+    handle({clientX:t.clientX,clientY:t.clientY});
+    touchStart=null;
+  },{passive:false});
   document.getElementById("reset").addEventListener("click",function(){ picks=[]; cons.innerHTML=""; pts.innerHTML=""; readout.innerHTML="y² = x³ + x + 1 · <b>tap the curve</b>"; });
   document.getElementById("pick").addEventListener("click",function(){ picks=[]; var Px=-0.6,Qx=1.2; picks.push([Px,Math.sqrt(fx(Px))]); picks.push([Qx,-Math.sqrt(fx(Qx))]); redrawPoints(); drawConstruction(); });
+
+  // Keyboard / screen-reader fallback: populate the two <select>s with real
+  // on-curve points; adding announces the sum via the aria-live readout.
+  var selP=document.getElementById("selP"), selQ=document.getElementById("selQ");
+  var sampleXs=[-0.6,-0.2,0.4,1.0,1.6,2.4], kbPoints=[];
+  sampleXs.forEach(function(x){
+    var v=fx(x); if(v<0)return;
+    var r=Math.sqrt(v);
+    kbPoints.push([x,r]); kbPoints.push([x,-r]);
+  });
+  kbPoints.forEach(function(p,i){
+    var text="( "+p[0].toFixed(2)+", "+p[1].toFixed(2)+" )";
+    var oP=document.createElement("option"); oP.value=i; oP.textContent=text; selP.appendChild(oP);
+    var oQ=document.createElement("option"); oQ.value=i; oQ.textContent=text; selQ.appendChild(oQ);
+  });
+  selP.value="0";
+  selQ.value=String(Math.min(3,kbPoints.length-1));
+  document.getElementById("addKb").addEventListener("click",function(){
+    picks=[kbPoints[+selP.value],kbPoints[+selQ.value]];
+    redrawPoints();
+    drawConstruction(); // updates the aria-live readout with P+Q
+  });
 })();
 </script>
 <script src="../js/nav.js" defer></script>
