@@ -84,7 +84,19 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>The codebook is a parallel-list nomenclator. The plaintext list runs alphabetically through the words and proper names of interest; each entry has a number from 1 to roughly 760. The cipher list runs in numeric order, each number against its plaintext, so the recipient can decode.</p><p style="margin-top:1rem;">Operators wrote messages using ordinary English for low-value content and substituted code numbers for sensitive words — names of officers, ship counts, place names. Numbers were embedded in otherwise innocuous letters (“I saw 711 yesterday and he asked after the 486 in 727” — “I saw Washington yesterday and he asked after the people in New York”).</p><p style="margin-top:1rem;">For deeper concealment, Culper messages were written in James Jay’s invisible ink (“sympathetic stain”) between the lines of cover letters. The ink itself was Washington’s second-most carefully guarded secret of the war — only a handful of people knew the recipe.</p><p style="margin-top:1rem;">The demo above uses a stable 215-entry codebook indexed from 100. Words not in the codebook fall through to per-letter codes in the 800s, bracketed by sentinels 998 and 999 — the same trick Tallmadge would have used (he had a small alphabet table for proper nouns the codebook didn’t cover).</p></div>
+      <div class="panel-body"><p>The codebook is a parallel-list nomenclator. The plaintext list runs alphabetically through the words and proper names of interest; each entry has a number from 1 to roughly 760. The cipher list runs in numeric order, each number against its plaintext, so the recipient can decode.</p><p style="margin-top:1rem;">Operators wrote messages using ordinary English for low-value content and substituted code numbers for sensitive words — names of officers, ship counts, place names. Numbers were embedded in otherwise innocuous letters (“I saw 711 yesterday and he asked after the 486 in 727” — “I saw Washington yesterday and he asked after the people in New York”).</p>
+      <p style="margin-top:1rem;">Because the word list is alphabetical, an entry's number tells you roughly where its word falls in the alphabet. Entries 1–710 are common words; 711–763 are the proper nouns. Read straight from the codebook:</p>
+      <table class="cipher-table" style="margin:.8rem 0;">
+        <thead><tr><th>Code</th><th>Meaning</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>178</td><td>enemy</td><td>sits in the alphabetical run 175 <em>embark</em> · 176 <em>employ</em> · 179 <em>example</em></td></tr>
+          <tr><td>355</td><td>lady</td><td>the entry behind the "Agent 355" legend — a word, not a person</td></tr>
+          <tr><td>596</td><td>secret</td><td></td></tr>
+          <tr><td>711</td><td>Gen.<span> </span>Washington</td><td>first of the proper nouns</td></tr>
+          <tr><td>727</td><td>New York</td><td></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:1rem;">One absence is worth noting, because it is often reported otherwise: <strong>the codebook has no entry for “spy” at all.</strong> Its <em>s</em>-words run 596 <em>secret</em>, 606 <em>speaker</em>, then straight on to the proper nouns at 756 <em>Spain</em>. A number widely quoted as meaning “spy” — 178 — is in fact <em>enemy</em>, and could not be “spy”: at 178 the list is still in the <em>e</em>'s.</p><p style="margin-top:1rem;">For deeper concealment, Culper messages were written in James Jay’s invisible ink (“sympathetic stain”) between the lines of cover letters. The ink itself was Washington’s second-most carefully guarded secret of the war — only a handful of people knew the recipe.</p><p style="margin-top:1rem;">The demo above uses a stable 215-entry codebook indexed from 100. Words not in the codebook fall through to per-letter codes in the 800s, bracketed by sentinels 998 and 999 — the same trick Tallmadge would have used (he had a small alphabet table for proper nouns the codebook didn’t cover).</p></div>
     </div>
 
     <div class="panel">
@@ -115,6 +127,22 @@
         </table>
       </div>
     </div>
+    <div class="panel" id="sources" style="margin-top:1.25rem;border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title" style="color:var(--gold);">Sources</span></div>
+      <div class="panel-body">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;margin:0;padding:0;">
+          <li style="font-size:.9rem;line-height:1.65;color:var(--tx2);"><a href="https://raynhamhallmuseum.org/wp-content/uploads/2020/04/Culper-Code-Book.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">The Culper Code Book, created by Col. Benjamin Tallmadge, 1779 — Raynham Hall Museum facsimile &#8599;</a> <span style="color:var(--tx3);">Every code number quoted on this page was read from this document: 749 of its 763 entries are legible in the file's text layer.</span></li>
+          <li style="font-size:.9rem;line-height:1.65;color:var(--tx2);"><a href="https://www.mountvernon.org/george-washington/the-revolutionary-war/spying-and-espionage/the-culper-code-book" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">George Washington's Mount Vernon — The Culper Code Book &#8599;</a></li>
+          <li style="font-size:.9rem;line-height:1.65;color:var(--tx2);"><a href="https://www.loc.gov/exhibitions/two-georges/about-this-exhibition/american-revolution/espionage/secret-codes-for-washingtons-spies/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Library of Congress — Secret Codes for Washington's Spies &#8599;</a></li>
+        </ul>
+        <p style="font-size:.82rem;line-height:1.7;color:var(--tx3);margin-top:.9rem;">
+          This page previously stated that “spy” was encoded as 178. Checked against the
+          codebook itself, 178 is <em>enemy</em>, and no entry for “spy” exists. The claim
+          has been removed and the real values printed above.
+        </p>
+      </div>
+    </div>
+
   </div>
 </div>
 
