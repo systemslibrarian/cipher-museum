@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cipher Challenges — The Cipher Museum</title>
-  <meta name="description" content="Break real ciphers. Six progressively harder challenges — from Caesar to Enigma.">
+  <meta name="description" content="Break real ciphers. Ten progressively harder challenges — from Caesar to Enigma.">
     <meta property="og:title" content="Cipher Challenges — The Cipher Museum">
-  <meta property="og:description" content="Break real ciphers. Six progressively harder challenges — from Caesar to Enigma.">
+  <meta property="og:description" content="Break real ciphers. Ten progressively harder challenges — from Caesar to Enigma.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/challenges.html">
   <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
@@ -15,7 +15,7 @@
   <meta property="og:image:alt" content="The Cipher Museum — an interactive history of encryption">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cipher Challenges — The Cipher Museum">
-  <meta name="twitter:description" content="Break real ciphers. Six progressively harder challenges — from Caesar to Enigma.">
+  <meta name="twitter:description" content="Break real ciphers. Ten progressively harder challenges — from Caesar to Enigma.">
   <meta name="twitter:image" content="https://ciphermuseum.com/images/og/og-default.png">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/challenges.html">
@@ -170,43 +170,43 @@
     {
       level: 3, cipher: 'Substitution', difficulty: 'Intermediate',
       prompt: 'A monoalphabetic substitution with keyword CIPHER. Use frequency analysis or the keyword to crack it.',
-      ciphertext: 'SHFRHS JPGH PL MDCPL SPIJT',
+      ciphertext: 'SEPQETS BDHE DL NJCDL SDABT',
       answer: 'SECRETS HIDE IN PLAIN SIGHT',
       lesson: 'Monoalphabetic ciphers preserve letter frequency. The letter E still appears most often — just under a different name. This is why AES uses non-linear S-boxes.',
       hints: [
         'The keyword CIPHER produces the alphabet: C I P H E R A B D F G J K L M N O Q S T U V W X Y Z. Map ciphertext back.',
-        'S→S? No — S is the 19th letter. In the cipher alphabet, position 19 = S maps to original S. Check: position for P in cipher = 3rd letter, which maps to original C… work through the mapping.'
+        'E encrypts to itself under this keyword alphabet — so the most common ciphertext letter is your entry point.'
       ],
       walkthrough: 'Keyword CIPHER generates the substitution alphabet: C-I-P-H-E-R-A-B-D-F-G-J-K-L-M-N-O-Q-S-T-U-V-W-X-Y-Z. To decrypt, find each ciphertext letter\'s position in the cipher alphabet and map it to the standard alphabet position.'
     },
     {
       level: 4, cipher: 'Vigenère', difficulty: 'Intermediate',
       prompt: 'This message was encrypted with a Vigenère cipher. The key is a common English word related to waiting.',
-      ciphertext: 'IAS DGC XH JTIGGTQW',
+      ciphertext: 'IHX SIL KW EAMQIAEI',
       answer: 'THE KEY IS PATIENCE',
       lesson: 'Vigenère defeated frequency analysis for 300 years by using multiple alphabets. But the repeating key creates patterns — Kasiski examination finds the key length, then each position reduces to Caesar.',
       hints: [
         'The key relates to "waiting." Try PATIENCE as the key word.',
-        'Vigenère: subtract key letters from ciphertext letters mod 26. I-P=T, A-A=A..? Try aligning the key PATIENCE with letters only.'
+        'Vigenère: subtract key letters from ciphertext letters mod 26. I-P=T, H-A=H, X-T=E… Align the key PATIENCE with letters only.'
       ],
-      walkthrough: 'The keyword is PATIENCE. Align it with the ciphertext letters (skipping spaces): I-P=T, A-A=H, S-T=E, D-I=K… Vigenère decryption: (ciphertext - key) mod 26 for each letter position.'
+      walkthrough: 'The keyword is PATIENCE. Align it with the ciphertext letters (skipping spaces): I-P=T, H-A=H, X-T=E, S-I=K… Vigenère decryption: (ciphertext - key) mod 26 for each letter position.'
     },
     {
       level: 5, cipher: 'Playfair', difficulty: 'Expert',
       prompt: 'This Playfair-encrypted message uses the keyword MONARCHY. Decrypt the digraph pairs.',
-      ciphertext: 'SQBRLG MK RDHAFM FKEE',
+      ciphertext: 'ZD XL QR AP GA EQ LU MH IZ',
       answer: 'TRUST NO SINGLE LOCK',
       lesson: 'Playfair encrypts letter pairs (digraphs), making frequency analysis harder. But digraph frequencies still leak information — modern block ciphers use 128-bit blocks to eliminate this.',
       hints: [
         'Build the 5×5 Playfair grid with MONARCHY: M-O-N-A-R / C-H-Y-B-D / E-F-G-I-K / L-P-Q-S-T / U-V-W-X-Z',
-        'Apply the rectangle/row/column rules in reverse for each pair: SQ→TR, BR→US, etc.'
+        'Apply the rectangle/row/column rules in reverse for each pair: ZD→TR, XL→US, etc.'
       ],
-      walkthrough: 'Grid: M-O-N-A-R / C-H-Y-B-D / E-F-G-I-K / L-P-Q-S-T / U-V-W-X-Z. To decrypt, reverse the Playfair rules: same row → shift left, same column → shift up, rectangle → swap corners. Process pairs: SQ, BR, LG, MK, RD, HA, FM, FK, EE.'
+      walkthrough: 'Grid: M-O-N-A-R / C-H-Y-B-D / E-F-G-I-K / L-P-Q-S-T / U-V-W-X-Z. To decrypt, reverse the Playfair rules: same row → shift left, same column → shift up, rectangle → swap corners. Process pairs: ZD, XL, QR, AP, GA, EQ, LU, MH, IZ.'
     },
     {
       level: 6, cipher: 'Enigma', difficulty: 'Expert',
       prompt: 'Enigma-encrypted with rotors I-II-III at starting position MCK. Type each letter to trace the signal.',
-      ciphertext: 'YPR CTYWK DSJWH',
+      ciphertext: 'APZ LBTFZ OXPBB',
       answer: 'THE BOMBE TURNS',
       lesson: 'Enigma had 158 quintillion settings but structural flaws (no letter encrypts to itself) gave codebreakers a foothold. Even huge keyspaces fail if the algorithm has exploitable properties.',
       hints: [
