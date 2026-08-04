@@ -283,7 +283,14 @@ console.log("  checking announced results against independent truth...");
   assert(/Recovered s exactly/.test(p.$("lread").textContent),
     "§157 at error 0: elimination recovers the secret (got: " + p.$("lread").textContent + ")");
 
-  // Any real error destroys that, across fresh key sets.
+  // Any real error destroys that, across fresh key sets. Note the bound, not
+  // zero: on these toy parameters a fresh key set can occasionally be solved by
+  // luck even at error 5. Measured directly against this exhibit, the rate is
+  // 1 in 30,000 (30,000 fresh key sets, one exact recovery), so a 25-trial
+  // block sees one about 0.08% of the time. Asserting `recovered === 0` claimed
+  // the toy was stronger than the mathematics allows, and duly flaked. What a
+  // regression would actually look like is error ceasing to be applied at all,
+  // which drives this straight back to 25/25.
   var recovered = 0;
   for (var i = 0; i < 25; i++) {
     p.click("fresh");
@@ -291,8 +298,8 @@ console.log("  checking announced results against independent truth...");
     p.click("solve");
     if (/Recovered s exactly/.test(p.$("lread").textContent)) recovered++;
   }
-  assert(recovered === 0,
-    "§157 at error 5: elimination never recovers the secret (" + recovered + "/25 did)");
+  assert(recovered <= 1,
+    "§157 at error 5: elimination essentially never recovers the secret (" + recovered + "/25 did)");
 
   // The reveal control must not lie about its own state.
   var before = p.$("reveal").textContent;

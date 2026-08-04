@@ -219,15 +219,66 @@ function defineRobustnessSpec({
   test(`${name}: roundtrips 100 KB without excessive runtime`, () => {
     // Mixed content from the engine's declared alphabet, so this exercises
     // correctness at scale, not just throughput on a degenerate input.
-    const plaintext = longAlphabet
-      .repeat(Math.ceil((100 * 1024) / longAlphabet.length))
-      .slice(0, 100 * 1024);
-    const key = edgeKeyFor ? edgeKeyFor(plaintext) : edgeKey;
-    const startedAt = process.hrtime.bigint();
-    const actual = run(engine, plaintext, key);
-    const elapsedMs = Number(process.hrtime.bigint() - startedAt) / 1e6;
-    assert.equal(actual, plaintext);
-    assert.ok(elapsedMs <= maxLongRunMs, `elapsed=${elapsedMs.toFixed(1)}ms limit=${maxLongRunMs}ms`);
+    const build = size => longAlphabet
+      .repeat(Math.ceil(size / longAlphabet.length))
+      .slice(0, size);
+
+    const quarter = build(25 * 1024);
+    const full = build(100 * 1024);
+
+    // Best of three. A single sample is at the mercy of one scheduler hiccup or
+    // GC pause; the minimum of a few is a stable estimate of the real cost, which
+    // is what keeps this usable while the rest of the suite runs in parallel.
+    const time = text => {
+      const key = edgeKeyFor ? edgeKeyFor(text) : edgeKey;
+      let actual = null;
+      let bestMs = Infinity;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const startedAt = process.hrtime.bigint();
+        actual = run(engine, text, key);
+        const elapsedMs = Number(process.hrtime.bigint() - startedAt) / 1e6;
+        if (elapsedMs < bestMs) bestMs = elapsedMs;
+      }
+      return { actual, elapsedMs: bestMs };
+    };
+
+    const small = time(quarter);
+    const large = time(full);
+
+    // Correctness at scale is the assertion that always holds.
+    assert.equal(small.actual, quarter);
+    assert.equal(large.actual, full);
+
+    // What this guard is really for is pathological complexity — an engine that
+    // quietly goes quadratic. An absolute wall-clock deadline is a bad proxy for
+    // that: it fails on a loaded machine and passes on an idle one, which is why
+    // this suite was kept out of `npm test`. Comparing 4x the input against the
+    // same engine in the same process is load-neutral, because contention slows
+    // both measurements together.
+    //
+    // Quadratic growth shows up as exactly 16x here, and linear as 4x, so the
+    // threshold has to sit between them — a looser bound would not catch the
+    // thing this test exists for. That leaves no room to absorb noise, so the
+    // ratio is only judged once the smaller run is long enough for the timing to
+    // mean something. Below that, scheduler jitter alone can produce 15x.
+    //
+    // This is not hypothetical: it caught autokey decrypting in quadratic time
+    // (47.6ms -> 774.4ms, a ratio of 16.3) because it indexed back into a string
+    // it was building with +=. Fixed, that engine now measures 2.4x.
+    const MEASURABLE_MS = 20;
+    if (small.elapsedMs >= MEASURABLE_MS) {
+      const ratio = large.elapsedMs / small.elapsedMs;
+      assert.ok(ratio <= 10,
+        `4x the input took ${ratio.toFixed(1)}x the time ` +
+        `(25 KB ${small.elapsedMs.toFixed(1)}ms, 100 KB ${large.elapsedMs.toFixed(1)}ms) ` +
+        '— suggests worse-than-linear scaling');
+    }
+
+    // A very loose absolute backstop, so a true hang still fails rather than
+    // hanging the run. Deliberately far above any real engine's cost.
+    const hangCeilingMs = Math.max(maxLongRunMs * 12, 60000);
+    assert.ok(large.elapsedMs <= hangCeilingMs,
+      `elapsed=${large.elapsedMs.toFixed(1)}ms exceeded hang backstop ${hangCeilingMs}ms`);
   });
 }
 

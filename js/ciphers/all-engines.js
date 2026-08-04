@@ -2160,13 +2160,18 @@ window.CipherEngines = (() => {
     }
     function dec(text, key) {
       const k = clean(key || 'KEY');
-      const c = clean(text); let out = '';
+      const c = clean(text);
+      // Accumulate into an array, not a string. Autokey decryption has to read
+      // back the plaintext it has already recovered, and indexing into a string
+      // that is being built by += forces V8 to flatten the rope on every read —
+      // which made this quadratic (4x the input cost 16x the time).
+      const out = new Array(c.length);
       for (let i = 0; i < c.length; i++) {
         const ki = i < k.length ? A.indexOf(k[i]) : A.indexOf(out[i - k.length]);
         const ci = A.indexOf(c[i]);
-        out += A[mod(ci - ki, 26)];
+        out[i] = A[mod(ci - ki, 26)];
       }
-      return out;
+      return out.join('');
     }
     return { encode: enc, decode: dec };
   })();
