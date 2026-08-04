@@ -98,7 +98,7 @@
           <select id="gsel"></select>
         </label>
         <button id="anim">Trace the orbit</button>
-        <div class="readout" id="read">—</div>
+        <div class="readout" id="read" aria-live="polite" role="status">—</div>
       </div>
       <div class="lab-hint">
         A green ring means <b>g is a primitive root</b> — its powers cover every
@@ -223,7 +223,9 @@
       }
     }
     read.innerHTML="g = <b>"+g+"</b> mod "+p+" · "+(prim?"<b style='color:#5AC8A0'>primitive root</b>":"order "+new Set(seq).size);
-    if(animate){ var n=0; var iv=setInterval(function(){ drawUpTo(++n); if(n>=seq.length)clearInterval(iv); },70); }
+    if(animate&&!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)){
+      var n=0; var iv=setInterval(function(){ drawUpTo(++n); if(n>=seq.length)clearInterval(iv); },70);
+    }
     else drawUpTo(seq.length);
   }
 
