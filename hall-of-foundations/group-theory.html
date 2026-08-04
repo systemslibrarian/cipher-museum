@@ -98,7 +98,7 @@
           <select id="gsel"></select>
         </label>
         <button id="trace">Trace ⟨g⟩</button>
-        <div class="readout" id="gread">—</div>
+        <div class="readout" id="gread" aria-live="polite" role="status">—</div>
       </div>
       <div class="lab-hint">
         When ⟨g⟩ covers all n elements, <b>g is a generator</b> and the group is
@@ -198,7 +198,9 @@
         layer.appendChild(el("circle",{cx:last[0],cy:last[1],r:9,fill:color,stroke:"#1c1c22","stroke-width":2}));}
     }
     gread.innerHTML="⟨"+g+"⟩ in ℤ/"+n+" · order <b>"+orb.length+"</b> "+(full?"<b style='color:#5AC8A0'>(generator)</b>":"(subgroup)");
-    if(animate){var m=0;var iv=setInterval(function(){upto(++m);if(m>=orb.length)clearInterval(iv);},110);}
+    if(animate&&!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)){
+      var m=0;var iv=setInterval(function(){upto(++m);if(m>=orb.length)clearInterval(iv);},110);
+    }
     else upto(orb.length);
   }
   nsel.addEventListener("change",function(){refreshG();draw(false);});
