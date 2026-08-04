@@ -23,6 +23,8 @@ const CORE = [
   '/js/footer.js',
   '/js/breadcrumbs.js',
   '/js/ui-delegates.js',
+  '/hall-of-foundations/index.html',
+  '/hall-of-foundations/foundations.css',
   '/favicon.svg',
   '/manifest.webmanifest',
   '/images/icons/icon-192.png',
