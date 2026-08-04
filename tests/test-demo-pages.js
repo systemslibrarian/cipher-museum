@@ -123,7 +123,7 @@ const STATIC_PAGES = new Set(['aes.html', 'des.html', 'diffie-hellman.html',
   'agnes-driscoll.html', 'bill-tutte.html', 'elizebeth-friedman.html',
   'joan-clarke.html', 'leo-marks.html',
   // Track B visualization pages:
-'mary-stuart-castelnau-letters.html', 'patterson-jefferson-cipher.html'
+'mary-stuart-castelnau-letters.html'
 ]);
 
 (async () => {

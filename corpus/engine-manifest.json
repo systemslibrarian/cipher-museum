@@ -83,10 +83,10 @@
       "record_count": 290
     },
     {
-      "name": "joseonYeokhak",
-      "label": "joseon yeokhak",
-      "category": "substitution",
-      "difficulty": "beginner",
+      "name": "wadsworth",
+      "label": "wadsworth",
+      "category": "polyalphabetic",
+      "difficulty": "advanced",
       "variants": 3,
       "record_count": 1100
     },

@@ -92,7 +92,7 @@
       <div class="panel-body">
         <p>Antoine Rossignol (1600–1682) was France's first true cryptanalyst. His talent was discovered at the 1626 siege of Réalmont, where he broke a Huguenot ciphered letter overnight — and the rebels surrendered the next day. Cardinal Richelieu brought him to court, and Antoine, joined by his son Bonaventure, designed a new cipher so strong it became the official cipher of the French crown.</p>
         <p style="margin-top:1rem;">The Rossignols' code book contained roughly <strong>587 numbers</strong>, each standing for a syllable, a common word, a single letter, or — critically — nothing at all. Some numbers were pure decoys (nulls); at least one number meant <em>"ignore the previous letter"</em>. After Bonaventure's grandson Antoine-Bonaventure died in 1751, the codebook itself vanished, and the Rossignol papers in the French archives became unreadable artifacts.</p>
-        <p style="margin-top:1rem;">In 1890 the historian Victor Gendron passed a stack of these encrypted letters to Étienne Bazeries (see <a href="bazeries.html">Exhibit 22</a>; full biography in <a href="../halls/codebreakers.html#bazeries">Hall X &middot; Codebreakers</a>), already famous for breaking diplomatic ciphers. Bazeries spent three years on it. His breakthrough: noticing that one common number was followed only by certain other numbers — and that interpreting it as <em>"delete the previous letter"</em> suddenly produced French words. Among the messages he read was finally an answer to one of history's great mysteries: a 1691 letter naming a prisoner who would later become legend as <strong>"the Man in the Iron Mask."</strong></p>
+        <p style="margin-top:1rem;">Around 1890 a stack of these encrypted letters reached Étienne Bazeries (see <a href="bazeries.html">Exhibit 22</a>; full biography in <a href="../halls/codebreakers.html#bazeries">Hall X &middot; Codebreakers</a>), already famous for breaking diplomatic ciphers. Bazeries spent three years on it. His breakthrough: noticing that one common number was followed only by certain other numbers — and that interpreting it as <em>"delete the previous letter"</em> suddenly produced French words. Among the messages he read was finally an answer to one of history's great mysteries: a 1691 letter naming a prisoner who would later become legend as <strong>"the Man in the Iron Mask."</strong></p>
       </div>
     </div>
 
@@ -165,7 +165,7 @@
         <div class="attack-panel">
           <div class="attack-name">The "Delete" Trap</div>
           <div class="attack-diff">Complexity: The breakthrough insight</div>
-          <p class="attack-desc">For two centuries every attacker assumed each codeword stood for <em>something</em>. Bazeries noticed that one common number, no matter how he interpreted it, produced gibberish — but if he treated it as a command to <em>erase the preceding letter</em>, French words emerged. This single trick — borrowed from the medieval Italian tradition of <em>cifre dolose</em> ("malicious figures") — was what kept the cipher unreadable for so long.</p>
+          <p class="attack-desc">For two centuries every attacker assumed each codeword stood for <em>something</em>. Bazeries noticed that one common number, no matter how he interpreted it, produced gibberish — but if he treated it as a command to <em>erase the preceding letter</em>, French words emerged. That single trap was what kept the cipher unreadable for so long.</p>
         </div>
         <div class="attack-panel">
           <div class="attack-name">Modern Cryptanalytic Tools</div>
@@ -226,7 +226,7 @@
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">About this Demo</span></div>
       <div class="panel-body">
         <p>The historical Rossignol codebook (587 entries) is lost in detail. This demo uses a teaching-scale codebook — 50 common digrams + 26 letters + 6 nulls + 1 "delete previous" trap (83 codewords) — deterministically generated from the Codebook Seed.</p>
-        <p style="margin-top:.75rem;">Try encoding the same message twice: notice how the output changes because common syllables have multiple codes and nulls are sprinkled in randomly. Decoding always recovers the original (provided the seed matches).</p>
+        <p style="margin-top:.75rem;">Try encoding the same message under two different Codebook Seeds: notice how the output changes because common syllables have multiple codes and nulls are sprinkled in at seed-determined positions. Decoding always recovers the original (provided the seed matches).</p>
       </div>
     </div>
 
@@ -256,17 +256,15 @@
 </section>
 
 <div class="hall-nav">
-  <a href="../ciphers/zodiac.html" class="hall-nav-link">
+  <a href="../ciphers/babington.html" class="hall-nav-link">
     <span class="hall-nav-dir">&larr; Previous</span>
-    <span class="hall-nav-name">Zodiac Cipher</span>
+    <span class="hall-nav-name">The Babington Plot Cipher</span>
   </a>
-  <a href="../halls/substitution.html" class="hall-nav-link next">
-    <span class="hall-nav-dir">Back to Hall &rarr;</span>
-    <span class="hall-nav-name">Hall II: Classical Substitution</span>
+  <a href="../ciphers/four-square.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Four-Square Cipher</span>
   </a>
-</div>
-
-</main>
+</div></main>
 
 <footer></footer>
 <script src="../js/ciphers/all-engines.min.js"></script>

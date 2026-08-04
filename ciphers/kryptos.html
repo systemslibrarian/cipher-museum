@@ -68,6 +68,7 @@
     <div class="fact"><span class="fact-label">Cryptographic consultant</span><span class="fact-value">Edward Scheidt (former CIA)</span></div>
     <div class="fact"><span class="fact-label">Installed</span><span class="fact-value">November 3, 1990 · CIA HQ, Langley</span></div>
     <div class="fact"><span class="fact-label">Copper screen</span><span class="fact-value">1,735 letters cut into the main screen</span></div>
+    <div class="fact"><span class="fact-label">Ciphertext half</span><span class="fact-value">869 characters — 865 letters + 4 question marks</span></div>
     <div class="fact"><span class="fact-label">Full artwork</span><span class="fact-value">Courtyard screen + entrance Morse / compass installation</span></div>
     <div class="fact"><span class="fact-label">K1</span><span class="fact-value">Vigenère, key PALIMPSEST · solved 1999</span></div>
     <div class="fact"><span class="fact-label">K2</span><span class="fact-value">Vigenère, key ABSCISSA · solved 1999</span></div>
@@ -147,10 +148,10 @@
       };
       var K4_TEXT = 'OBKRUOXOGHULBSOLIFBBWFLRVQQPRNGKSSOTWTQSJQSSEKZZWATJKLUDIAWINFBNYPVTTMZFPKWGDKZXTJCDIGKUHUAUEKCAR';
       var K4_WINDOWS = [
-        { start: 22, end: 25, plain: 'EAST', note: 'Sanborn released this clue in 2020.' },
-        { start: 26, end: 34, plain: 'NORTHEAST', note: 'Released in 2020; later tied to the Berlin world clock context.' },
-        { start: 64, end: 69, plain: 'BERLIN', note: 'The first public K4 crib, released in 2010.' },
-        { start: 70, end: 74, plain: 'CLOCK', note: 'Released in 2014; Sanborn later clarified it meant the Alexanderplatz world clock.' }
+        { start: 22, end: 25, plain: 'EAST', note: 'Released by Sanborn in August 2020.' },
+        { start: 26, end: 34, plain: 'NORTHEAST', note: 'Released in January 2020; with EAST it gives the phrase EAST NORTHEAST.' },
+        { start: 64, end: 69, plain: 'BERLIN', note: 'The first public K4 crib, released in November 2010.' },
+        { start: 70, end: 74, plain: 'CLOCK', note: 'Released in November 2014. Solvers assumed the Mengenlehreuhr for a decade; in 2025 Sanborn confirmed he meant the World Clock on Alexanderplatz.' }
       ];
 
       function decodeMorse(source) {
@@ -251,7 +252,7 @@
 
     <div class="cipher-significance">
       <h3>Why This Matters</h3>
-      <p>Kryptos is a 12-foot copper sculpture installed in the CIA's courtyard in 1990, encoded with four separate cryptographic puzzles totaling 865 characters. It was meant to take the agency a few months to solve; instead a small NSA team cracked K1–K3 by 1993 and kept it quiet, and the public CIA team eight. The fourth section, K4 — only 97 characters long — remains unsolved more than 35 years later, despite hints from the artist Jim Sanborn (BERLIN, CLOCK, NORTHEAST, EAST) and two solving prizes that have gone unclaimed.</p>
+      <p>Kryptos is a 12-foot copper sculpture installed in the CIA's courtyard in 1990. Its ciphertext half carries four separate cryptographic puzzles across 869 characters — 865 letters and four question marks. It was meant to take the agency a few months to solve; instead a small NSA team cracked K1–K3 by 1993 and kept it quiet, and the public CIA team eight. The fourth section, K4 — only 97 characters long — remains unsolved more than 35 years later, despite hints from the artist Jim Sanborn (BERLIN, CLOCK, NORTHEAST, EAST) and two solving prizes that have gone unclaimed.</p>
     </div>
 
     <div class="panel">
@@ -265,8 +266,11 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-chart"/></svg></span><span class="panel-title">1,735 Letters, Not 1,800</span></div>
-      <div class="panel-body"><p>The authoritative count from the CIA is 1,735 alphabetic letters cut into the copper screen. The often-repeated 1,800 figure comes from workshop recollections about the approximate labor involved, not the final installed total. The discrepancy is worth noting because Kryptos lore has accumulated many rounded numbers and repeated anecdotes; this museum uses the CIA count when discussing the main screen itself.</p></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-chart"/></svg></span><span class="panel-title">Which Number? 1,735, 869 and 865</span></div>
+      <div class="panel-body"><p>Three counts circulate, and they measure three different things.</p>
+        <p style="margin-top:1rem;"><strong>1,735</strong> is the whole copper screen — the authoritative CIA figure for the letters cut into the S-curve, covering both halves: the ciphertext panel <em>and</em> the keyed Vigen&egrave;re tableau beside it. The often-repeated <strong>1,800</strong> comes from workshop recollections about the approximate labour involved, not the final installed total.</p>
+        <p style="margin-top:1rem;"><strong>869</strong> is the ciphertext half alone — the K1&ndash;K4 passages as a solver actually transcribes them. Of those 869 characters, <strong>865 are letters and four are question marks</strong>. That is the whole of the 865-versus-869 discrepancy: one figure counts the letters, the other counts every carved character. This museum quotes 869 for the ciphertext and 1,735 for the screen.</p>
+        <p style="margin-top:1rem;">The distinction is worth labouring because Kryptos lore has accumulated many rounded numbers and repeated anecdotes, and a solver working from the wrong transcript starts with the wrong indices.</p></div>
     </div>
 
     <div class="panel">
@@ -286,7 +290,15 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">K4 Clues Released Over Time</span></div>
-      <div class="panel-body"><p>Sanborn has disclosed K4 in narrow slices rather than broad explanations: BERLIN (2010), CLOCK (2014), EAST (2020), and NORTHEAST (2020). In 2025 he clarified that the clock reference points specifically to the World Clock at Alexanderplatz in Berlin. These clues are enough to constrain local hypotheses, but not enough to expose the underlying system. That asymmetry is why K4 remains so compelling: the puzzle is neither untouched nor genuinely open-ended. It is deliberately half-lit.</p></div>
+      <div class="panel-body"><p>Sanborn has disclosed K4 in narrow slices rather than broad explanations. Four cribs are on the public record:</p>
+        <ul style="margin:.75rem 0 0 1.25rem;line-height:1.8;">
+          <li><strong>November 2010</strong> — the ciphertext NYPVTT at positions 64&ndash;69 decrypts to <strong>BERLIN</strong>.</li>
+          <li><strong>November 2014</strong> — MZFPK at positions 70&ndash;74 decrypts to <strong>CLOCK</strong>, so the plaintext reads BERLIN CLOCK.</li>
+          <li><strong>January 2020</strong> — QQPRNGKSS at positions 26&ndash;34 decrypts to <strong>NORTHEAST</strong>.</li>
+          <li><strong>August 2020</strong> — FLRV at positions 22&ndash;25 decrypts to <strong>EAST</strong>, giving EAST NORTHEAST.</li>
+        </ul>
+        <p style="margin-top:1rem;"><strong>Which Berlin clock?</strong> This is the clue the community got wrong for a decade. When CLOCK was released in 2014, Sanborn was asked whether he meant the <em>Mengenlehreuhr</em> — the Berlin-Uhr or &ldquo;Set Theory Clock&rdquo;, the famous illuminated-field clock installed in West Berlin in 1975. He answered only &ldquo;You'd better delve into that particular clock,&rdquo; and added that &ldquo;there are several really interesting clocks in Berlin.&rdquo; Solvers took the first half of that answer and spent eleven years on the Mengenlehreuhr. In 2025 Sanborn confirmed that the intended referent was in fact the <em>Weltzeituhr</em>, the World Clock on Alexanderplatz — which stands on a compass-rose mosaic, echoing the compass rose in Kryptos's own entrance installation.</p>
+        <p style="margin-top:1rem;">Twenty-four of K4's 97 letters sit inside these windows. That is enough to constrain local hypotheses and nowhere near enough to expose the underlying system. The puzzle is neither untouched nor genuinely open-ended; it is deliberately half-lit.</p></div>
     </div>
 
     <div class="panel">
@@ -332,7 +344,7 @@ Tableau K R Y P T O S A B C D E F G H I J L M N Q U V W X Z</pre>Each plaintext 
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
-      <div class="panel-body"><div class="attack-panel"><div class="attack-name">K1, K2, K3 — broken 1992–1999</div><div class="attack-diff">Complexity: Hard but solvable</div><p class="attack-desc">NSA cryptanalysts Dennis McDaniel, Ken Miller, and others solved K1–K3 in 1992 using standard polyalphabetic and transposition techniques. The CIA's in-house team led by David Stein solved them independently in 1998. Computer scientist Jim Gillogly published the public solution in 1999. The plaintexts contain the words BETWEEN SUBTLE SHADING AND THE ABSENCE OF LIGHT… and a quotation about Tutankhamun's tomb.</p></div><div class="attack-panel"><div class="attack-name">K4 — open since 1990</div><div class="attack-diff">Complexity: Unknown</div><p class="attack-desc">K4 is only 97 characters long. Sanborn has provided four cribs to constrain the search, but the underlying system has resisted every public and (presumably) classified attempt. Speculation includes a one-time pad (in which case it cannot be solved without the pad), a customized periodic cipher with a very long key, or a multi-step composite. Sanborn has said he will reveal the answer if he dies, but as of 2026 it remains open.</p></div></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">K1, K2, K3 — broken 1992–1999</div><div class="attack-diff">Complexity: Hard but solvable</div><p class="attack-desc">NSA cryptanalysts Dennis McDaniel, Ken Miller, and others solved K1–K3 in 1992 using standard polyalphabetic and transposition techniques. The CIA's in-house team led by David Stein solved them independently in 1998. Computer scientist Jim Gillogly published the public solution in 1999. The plaintexts contain the words BETWEEN SUBTLE SHADING AND THE ABSENCE OF LIGHT… and a quotation about Tutankhamun's tomb.</p></div><div class="attack-panel"><div class="attack-name">K4 — open since 1990</div><div class="attack-diff">Complexity: Unknown</div><p class="attack-desc">K4 is only 97 characters long. Sanborn has provided four cribs to constrain the search, but the underlying system has resisted every public and (presumably) classified attempt. Speculation includes a one-time pad (in which case it cannot be solved without the pad), a customized periodic cipher with a very long key, or a multi-step composite. In September 2025 the plaintext surfaced by accident rather than by cryptanalysis: journalists Jarett Kobek and Richard Byrne found it among Sanborn's working papers in the Smithsonian's Archives of American Art, where it had been deposited by mistake. Sanborn confirmed the pages were genuine and asked for the file to be sealed; the two men have not published the text. Sanborn's Kryptos archive, the solution included, sold at RR Auction on 20 November 2025 for $962,500. <strong>The cipher system that produced K4 is still unknown, and no one has broken it.</strong> The exhibit therefore continues to treat K4 as an open cryptanalytic problem.</p></div></div>
     </div>
 
     <div class="panel">
@@ -365,6 +377,7 @@ Tableau K R Y P T O S A B C D E F G H I J L M N Q U V W X Z</pre>Each plaintext 
             <tr><td>Cryptographic consultant</td><td>Edward Scheidt (former CIA)</td></tr>
             <tr><td>Installed</td><td>November 3, 1990 · CIA HQ, Langley</td></tr>
             <tr><td>Main screen</td><td>1,735 letters</td></tr>
+            <tr><td>Ciphertext half</td><td>869 characters — 865 letters + 4 question marks</td></tr>
             <tr><td>Full artwork</td><td>Screen + entrance installation</td></tr>
             <tr><td>K1</td><td>Vigenère, key PALIMPSEST · solved 1999</td></tr>
             <tr><td>K2</td><td>Vigenère, key ABSCISSA · solved 1999</td></tr>
@@ -403,6 +416,11 @@ Tableau K R Y P T O S A B C D E F G H I J L M N Q U V W X Z</pre>Each plaintext 
           <li>David Stein, <em>The Puzzle at CIA Headquarters: Cracking the Courtyard Crypto</em>, <em>Studies in Intelligence</em> 43(1), 1999.</li>
           <li>Elonka Dunin, essays and FOIA-related Kryptos documentation; also coverage of <em>Cyrillic Projector</em> and the wider Kryptos-solving community.</li>
           <li>Craig Bauer, Gregory Link, and Dante Molle’s <em>Cryptologia</em> paper on the Hill-cipher conjecture, plus community discussions.</li>
+          <li>“A New Clue to ‘Kryptos’,” <em>The New York Times</em>, 20 November 2014 — the release of the CLOCK crib (MZFPK at positions 70–74), and the source of Sanborn’s “you’d better delve into that particular clock” and “there are several really interesting clocks in Berlin.”</li>
+          <li><a href="https://en.wikipedia.org/wiki/Kryptos" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Wikipedia, <em>Kryptos</em> ↗</a> — source for the 869-character ciphertext (865 letters and four question marks), the dated clue list with positions, and Sanborn’s 2025 confirmation that the CLOCK clue refers to the Weltzeituhr on Alexanderplatz rather than the Mengenlehreuhr.</li>
+          <li>Sarah Lewin Frasier, “<a href="https://www.scientificamerican.com/article/a-solution-to-the-cias-kryptos-code-is-found-after-35-years/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">A Solution to the CIA’s Kryptos Code Is Found after 35 Years</a>,” <em>Scientific American</em>, September 2025 — the Smithsonian archive discovery by Jarett Kobek and Richard Byrne, and Sanborn’s confirmation.</li>
+          <li><a href="https://content.rrauction.com/jim-sanborns-complete-kryptos-archive-sells-for-962500-at-auction/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">RR Auction, “Jim Sanborn’s Complete Kryptos Archive Sells for $962,500 at Auction” ↗</a>, 20 November 2025.</li>
+          <li><a href="https://www.elonka.com/kryptos/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Elonka Dunin’s Kryptos page ↗</a> — the dated crib releases (BERLIN November 2010, CLOCK November 2014, NORTHEAST January 2020, EAST August 2020).</li>
         </ul>
       </div>
     </div>

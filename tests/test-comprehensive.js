@@ -69,7 +69,7 @@ const STATIC_PAGES = new Set([
   // Phase 12 additional biographies:
   'agnes-driscoll', 'bill-tutte', 'elizebeth-friedman', 'joan-clarke', 'leo-marks',
   // Track B visualization pages:
-  'mary-stuart-castelnau-letters', 'patterson-jefferson-cipher',
+  'mary-stuart-castelnau-letters',
   // Utilities:
   'cipher-detective'
 ]);
@@ -233,7 +233,8 @@ const ENGINE_PROFILES = {
   arnoldAndre:            { key: 'BLACKSTONE',                         mode: 'roundtrip' },
   argenti:                { key: 'ARGENTI',                            mode: 'roundtrip' },
   wallisCiphers:          { key: 'WALLIS',                             mode: 'roundtrip' },
-  joseonYeokhak:          { key: 'YEOKHAK',                            mode: 'roundtrip' },
+  patterson:              { key: '13,34,57,65,22,78,49',                mode: 'roundtrip' },
+  wadsworth:              { key: 'WADSWORTH',                          mode: 'roundtrip' },
   geezMonastic:           { key: 'GEEZ',                               mode: 'roundtrip' },
   diana:                  { key: 'DIANA',                              mode: 'self-reciprocal' }
 };

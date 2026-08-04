@@ -48,11 +48,20 @@ or could not be confirmed.
 
 ## Deferred — needs a human decision
 
-1. **`ciphers/joseon-yeokhak.html` — the whole exhibit.** No documented
-   "hexagram-keyed" Joseon cipher exists in the cryptographic-history
-   literature; the exhibit (and its claimed "Palace archives" provenance)
-   appears invented. Options: remove it, reframe it explicitly as a
-   speculative reconstruction, or produce a primary source.
+1. ~~**`ciphers/joseon-yeokhak.html` — the whole exhibit.**~~ **RESOLVED.**
+   No documented "hexagram-keyed" Joseon cipher exists in the
+   cryptographic-history literature; the exhibit and its claimed provenance
+   were invented. The page was **removed** and its roster slot (exhibit 69)
+   reassigned to a new, fully sourced exhibit: **Wadsworth Cipher (1817)**,
+   `ciphers/wadsworth-cipher.html`, in Hall VII. Sourced to Louis Kruh,
+   *Cryptologia* 6(3) 1982, 238–247 (DOI 10.1080/0161-118291857037) and
+   Thomas Kaeding, IACR ePrint 2020/1492. The `joseonYeokhak` engine was
+   replaced by a `wadsworth` engine (26:33 gearing) with a derived KAT and
+   five pinned page vectors. Corpus fallout handled: 1,100 synthetic records
+   re-enciphered and retiered beginner → advanced, and the one *historical*
+   Joseon record was **deleted outright** — its provenance (a Gyeongguk
+   Daejeon postal cipher, with a non-resolving archive.org URL) was
+   fabricated, and no documented Wadsworth ciphertext exists to replace it.
 2. **`ciphers/patterson-jefferson-cipher.html`** — the "paraphrased"
    Jefferson/Madison letters and the "Bowman / NSA Cryptologic Almanac
    2006" sourcing remain; the 40-row description conflicts with Patterson's

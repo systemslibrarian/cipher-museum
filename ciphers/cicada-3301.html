@@ -81,10 +81,10 @@
   <script>
     (function () {
       var STAGES = {
-        1: 'STAGE 1 \u2014 Caesar shift\n\n  Image text reads: \u201cTIBERIVS CLAVDIVS CAESAR says \u201clxxat\u201d\u201d\n  \u201cCaesar\u201d hint \u2192 try ROT-3 of the bracketed string.\n  lxxat \u2192 ioxxq? No \u2014 a small Caesar shift on the wider hidden text\n  yields a Tor URL fragment.',
-        2: 'STAGE 2 \u2014 OutGuess steganography\n\n  Run `outguess -k <password> -r image.jpg out.txt`.\n  Hidden file decrypts to a book reference: Mariko \u014ahara\u2019s \n  \u201cMental Fitness Puzzles\u201d, page/line/word indices included.',
-        3: 'STAGE 3 \u2014 Phone + audio\n\n  Solve indices to a phone number in Oregon. Recorded message:\n  \u201cVery good. You have done well\u2026 the cicada will sing in the cool dawn.\u201d\n  Spectrogram of the recording reveals further GPS coordinates.',
-        4: 'STAGE 4 \u2014 Physical posters + onion service\n\n  GPS leads to QR-coded posters in 14 cities (Warsaw, Seoul, Sydney\u2026).\n  QR codes link to a Tor hidden service requiring PGP-signed reply.\n  Successful solvers received an email \u2014 then silence.'
+        1: 'STAGE 1 \u2014 Caesar shift\n\n  Text hidden in the 4chan image (5 January 2012) carries a\n  \u201cTIBERIVS CLAVDIVS CAESAR\u201d hint. A Caesar shift of 4\n  yields a link to an image on Imgur.',
+        2: 'STAGE 2 \u2014 OutGuess steganography\n\n  Run OutGuess against the Imgur image. The recovered text\n  gives a book code \u2014 page/line/word indices \u2014 and a link to the\n  subreddit r/a2e7j6ic78h0j. The book is the Mabinogion, in the\n  \u201cLady of the Fountain\u201d text from Bulfinch\u2019s Mythology.',
+        3: 'STAGE 3 \u2014 A telephone number\n\n  The book code resolves to (214) 390-9608, a Dallas number,\n  long since disconnected. The recording told callers to find the\n  three primes belonging to the original image, one of which is\n  3301; the image is 509 x 503 pixels. 509 x 503 x 3301 gives\n  845145127.com.',
+        4: 'STAGE 4 \u2014 Physical posters + onion service\n\n  That site produced GPS coordinates for QR-coded posters in\n  cities on several continents (Warsaw, Seoul, Sydney and more).\n  A second book code \u2014 this one on William Gibson\u2019s \u201cAgrippa\n  (A Book of the Dead)\u201d \u2014 gave a Tor hidden service. Solvers who\n  arrived late were told: \u201cWe want the best, not the followers.\u201d'
       };
       window.encode = function () {
         var n = parseInt(document.getElementById('input').value, 10);
@@ -102,12 +102,12 @@
 
     <div class="cipher-significance">
       <h3>Why This Matters</h3>
-      <p>On 4 January 2012 a plain image appeared on 4chan reading 'Hello. We are looking for highly intelligent individuals.' Solving it required Caesar-shift decoding, OutGuess image steganography, identification of a William Gibson book reference, a phone call to an Oregon number, GPS coordinates that pointed to QR-coded posters in 14 cities on three continents, and ultimately a Tor hidden service. Two further puzzles ran in 2013 and 2014. The third culminated in a hand-bound book — <em>Liber Primus</em> — written in a runic alphabet, only the first 19 pages of which have ever been decrypted. The identity of '3301' has never been confirmed.</p>
+      <p>On 4 January 2012 a plain image appeared on 4chan reading 'Hello. We are looking for highly intelligent individuals.' Solving it required Caesar-shift decoding, OutGuess image steganography, a book code on the Mabinogion, a call to a Dallas telephone number, a prime-number step, GPS coordinates that pointed to QR-coded posters in cities on several continents, a second book code on William Gibson's <em>Agrippa (A Book of the Dead)</em>, and ultimately a Tor hidden service. Two further puzzles ran in 2013 and 2014. The third culminated in a hand-bound book — <em>Liber Primus</em> — written in a runic alphabet, only the first 19 pages of which have ever been decrypted. The identity of '3301' has never been confirmed.</p>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>The 2012 puzzle alone employed: Caesar shift (ROT-N), digital steganography (the OutGuess tool, hiding a message in the image's least-significant bits), URL discovery, a recorded message about 'the cicada will sing in the cool dawn', book-cipher pages from Mariko Ohara's <em>Mental Fitness Puzzles</em> and from Gibson's <em>Agrippa</em>, prime-number clues, and finally an invitation to a private email confirming admission. Solvers who finished within the deadline reported being asked to write essays on cryptography and privacy; some never heard back. Theories about who '3301' was range from a private intelligence-recruitment outfit to a libertarian cryptography collective.</p></div>
+      <div class="panel-body"><p>The 2012 puzzle alone employed: a Caesar shift, digital steganography (the OutGuess tool), URL discovery, a book code on the Mabinogion — the "Lady of the Fountain" text as printed in Bulfinch's <em>Mythology</em> — a telephone recording that set a prime-number task, a second book code on Gibson's <em>Agrippa (A Book of the Dead)</em>, and finally an invitation by private email. Solvers who finished within the deadline reported being asked to write essays on cryptography and privacy; some never heard back. Theories about who '3301' was range from a private intelligence-recruitment outfit to a libertarian cryptography collective.</p></div>
     </div>
 
     <div class="panel">
@@ -137,6 +137,25 @@
             <tr><td>Modern echo</td><td>Steganography · book ciphers · puzzle recruitment</td></tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:1.25rem;">
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Sources</span></div>
+      <div class="panel-body">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.7rem;margin:0;padding:0;">
+          <li style="font-size:.9rem;line-height:1.65;color:var(--tx2);"><a href="https://en.wikipedia.org/wiki/Cicada_3301" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Wikipedia — Cicada 3301 ↗</a></li>
+          <li style="font-size:.9rem;line-height:1.65;color:var(--tx2);"><a href="https://www.boxentriq.com/guides/cicada-3301-first-puzzle-walkthrough" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Boxentriq — Cicada 3301 first-puzzle walkthrough ↗</a></li>
+          <li style="font-size:.9rem;line-height:1.65;color:var(--tx2);"><a href="https://uncovering-cicada.fandom.com/wiki/What_Happened_(2012)" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Uncovering Cicada Wiki — What Happened (2012) ↗</a></li>
+          <li style="font-size:.9rem;line-height:1.65;color:var(--tx2);"><a href="https://grantland.com/hollywood-prospectus/a-wild-bug-chase-cracking-cicada-3301-the-internets-biggest-puzzle/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Grantland — A Wild-Bug Chase: Cracking Cicada 3301 ↗</a></li>
+        </ul>
+        <p style="font-size:.82rem;line-height:1.7;color:var(--tx3);margin-top:.9rem;">
+          This page previously named a book — "Mariko Ōhara's <em>Mental Fitness Puzzles</em>" —
+          and quoted a recorded phone message, neither of which appears in any documented
+          account of the 2012 solve. Both have been removed. The recording's wording is
+          paraphrased here rather than quoted, because no verbatim transcript of it could be
+          verified.
+        </p>
       </div>
     </div>
   </div>

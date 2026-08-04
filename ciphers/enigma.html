@@ -409,7 +409,7 @@ But: same letter never encrypts to itself → cribs work</pre>
           </div>
           <label class="eg-bf-fullsearch">
             <input type="checkbox" id="eg-bf-full">
-            Full Wehrmacht set (rotors I–V, 60 orderings, ≈10.5M settings — slower)
+            Full Wehrmacht set (rotors I–V, 60 orderings, ≈1.05M settings — slower)
           </label>
           <div class="btn-group" style="margin-top:.5rem;">
             <button class="btn btn-secondary" id="eg-bf-cancel" type="button" disabled>Cancel</button>
@@ -554,9 +554,17 @@ The wiring path changes every single keypress
       </div>
     </div>
     <div class="panel" style="margin-top:1.25rem;">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lock"/></svg></span><span class="panel-title">Three Unbroken Enigma Messages</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lock"/></svg></span><span class="panel-title">The Erskine Messages — All Three Now Broken</span></div>
       <div class="panel-body">
-        <p>Despite enormous Allied success, a small set of Enigma traffic remains unsolved today, largely due to missing metadata or truncated intercept context rather than fundamental Enigma strength. The "last few" are a reminder that intelligence work is as much about archived context as algorithms.</p>
+        <p>Three naval M4 signals intercepted by HMS <em>Hurricane</em> in the North Atlantic in 1942 went unread at the time. Ralph Erskine reprinted them in a 1995 letter to <em>Cryptologia</em> as an open challenge, and for a decade they were the best-known still-unsolved Enigma traffic.</p>
+
+        <p style="margin-top:1rem;">In January 2006 Stefan Krah launched the <strong>M4 Message Breaking Project</strong>, a distributed-computing effort combining brute-force rotor search with hill-climbing on the plugboard. The first signal fell on <strong>20 February 2006</strong> — Kptlt. Hartwig Looks of <em>U-264</em>, forced under by depth charges. The second fell on <strong>7 March 2006</strong> — a routine sighting-and-weather report signed Schroeder, matching the war diary of <em>U-623</em>.</p>
+
+        <p style="margin-top:1rem;">The third resisted for another seven years. It was broken in <strong>January 2013</strong> by Dan Girard, with Michael Hörenberg, and proved to be a fuel-and-provisions report from Kptlt. Hermann Rasch of <em>U-106</em>. <strong>None of the three remains unsolved.</strong></p>
+
+        <p style="margin-top:1rem;">What defeated the codebreakers for sixty years was not Enigma's strength but missing context: no cribs, no captured key sheets, no sister traffic in the same key. The keyspace only became searchable once idle CPUs around the world could be pointed at it.</p>
+
+        <p style="margin-top:1rem;"><em>Sources: Stefan Krah, <a href="https://www.bytereef.org/m4_project.html" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">M4 Message Breaking Project ↗</a>; Michael Hörenberg, <a href="https://enigma.hoerenberg.com/index.php?cat=M4+Project+2006" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Breaking German Navy Ciphers ↗</a>; John Leyden, &ldquo;Codebreakers unravel second Enigma intercept,&rdquo; <em>The Register</em>, 15 March 2006; Ralph Erskine, letter to <em>Cryptologia</em>, 1995.</em></p>
       </div>
     </div>
     <div class="panel" style="margin-top:1.25rem;">

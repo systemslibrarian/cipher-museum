@@ -376,10 +376,10 @@
       defaultMsg: 'COMRADES MOVE NORTH',
       inputs: [{ type: 'text', id: 'keyword', label: 'Personal Key', value: 'GUEVARA', placeholder: 'Personal phrase' }]
     },
-    'ira-book-cipher': {
-      label: 'IRA Book Cipher (1970s\u20131990s)', engine: 'bookCipher',
-      defaultMsg: 'GOLD',
-      inputs: []
+    'ira-ciphers': {
+      label: 'IRA Cipher Traffic (Twomey papers, 1926\u20131928)', engine: 'columnar',
+      defaultMsg: 'SEND ADDRESS TO SMITH',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Transposition Keyword', value: 'IRELAND', placeholder: 'Keyword\u2026' }]
     },
     'latin-american-codebooks': {
       label: 'Latin American Telegraphic Codebooks (1870s\u20131940s)', engine: 'commercialCode',
@@ -391,10 +391,16 @@
       defaultMsg: 'EXTRACT NOW',
       inputs: [{ type: 'text', id: 'keyword', label: 'Pad Trigraphs', value: 'XKCDQNJVMZAPLR', placeholder: 'Random pad text\u2026' }]
     },
-    'joseon-yeokhak': {
-      label: 'Joseon Yeokhak Cipher (Korean royal court, 1392\u20131897)', engine: 'joseonYeokhak',
-      defaultMsg: 'PROTECT THE KING',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Hexagram Key', value: 'YEOKHAK', placeholder: 'Key word\u2026' }]
+    'patterson-jefferson-cipher': {
+      label: 'Patterson\u2019s Cipher for Jefferson (1801) \u2014 sections of \u22649 lines',
+      engine: 'patterson',
+      defaultMsg: 'IN CONGRESS JULY FOURTH',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Key \u2014 pairs of (line number, arbitrary letters)', value: '13,34,57,65,22,78,49', placeholder: '13,34,57,65,22,78,49' }]
+    },
+    'wadsworth': {
+      label: 'Wadsworth Cipher Device (1817) \u2014 26:33 geared disks', engine: 'wadsworth',
+      defaultMsg: 'ATTACK',
+      inputs: [{ type: 'text', id: 'keyword', label: 'Inner-Disk Keyword', value: 'WADSWORTH', placeholder: 'Keyword\u2026' }]
     },
     'amharic-ge-ez-ciphers': {
       label: 'Ethiopian Ge\u02bcez Monastic Cipher (~14th\u201319th c.)', engine: 'geezMonastic',
@@ -856,6 +862,7 @@
     culperRing: [
       { text: 'Rose, Alexander. <em>Washington\'s Spies: The Story of America\'s First Spy Ring</em> (2006)', url: 'https://www.simonandschuster.com/books/Washingtons-Spies/Alexander-Rose/9780553383294' },
       { text: 'Library of Congress — Tallmadge\'s codebook (digitised pages)', url: 'https://www.loc.gov/collections/george-washington-papers/' },
+      { text: 'Mount Vernon — “Culper Spy Ring Codes”, full transcription of the code book (PDF). This is the source for the numbers quoted on this page: 711 = “Gen Washington”, 727 = “New York”', url: 'https://mtv-main-assets.mountvernon.org/files/resources/culpercodebook.pdf' },
       { text: 'Mount Vernon — The Culper Spy Ring', url: 'https://www.mountvernon.org/library/digitalhistory/digital-encyclopedia/article/the-culper-code-book/' },
       { text: 'Wikipedia — Culper Ring', url: 'https://en.wikipedia.org/wiki/Culper_Ring' }
     ],
@@ -889,11 +896,11 @@
       { text: 'National Security Archive \u2014 Bolivia &amp; Che Guevara documents (Peter Kornbluh)', url: 'https://nsarchive.gwu.edu/' },
       { text: 'Wikipedia \u2014 VIC Cipher', url: 'https://en.wikipedia.org/wiki/VIC_cipher' }
     ],
-    'ira-book-cipher': [
+    'ira-ciphers': [
       { text: 'Moloney, Ed. <em>A Secret History of the IRA</em> (2002)', url: 'https://www.penguinrandomhouse.com/books/89164/a-secret-history-of-the-ira-by-ed-moloney/' },
       { text: 'Smith, M.L.R. <em>Fighting for Ireland?</em> (1995)', url: 'https://www.routledge.com/' },
       { text: 'Powell, Jonathan. <em>Great Hatred, Little Room: Making Peace in Northern Ireland</em> (2008)', url: 'https://www.bodleyhead.co.uk/' },
-      { text: 'British Army FRU/14 Intelligence Company manuals (declassified, 2010s)', url: 'https://www.gov.uk/government/organisations/ministry-of-defence' }
+      { text: 'Wikipedia — Book cipher (the general technique and its dependence on a shared edition)', url: 'https://en.wikipedia.org/wiki/Book_cipher' }
     ],
     'latin-american-codebooks': [
       { text: '<em>C\u00f3digo Comercial Mexicano</em> (Mexican commercial telegraph code)', url: 'https://www.bnm.unam.mx/' },
@@ -907,11 +914,31 @@
       { text: 'Kahn, David. <em>The Codebreakers</em> revised ed. (1996) \u2014 postwar Army cryptography', url: 'https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9780684831305' },
       { text: 'Wikipedia \u2014 Beaufort cipher (mathematical kin)', url: 'https://en.wikipedia.org/wiki/Beaufort_cipher' }
     ],
-    'joseon-yeokhak': [
-      { text: '<em>Veritable Records of the Joseon Dynasty</em> (UNESCO Memory of the World)', url: 'https://www.unesco.org/en/memory-world/veritable-records-joseon-dynasty' },
-      { text: 'Baker, Don. <em>Korean Spirituality</em> (2008)', url: 'https://uhpress.hawaii.edu/title/korean-spirituality/' },
-      { text: 'Seth, Michael J. <em>A Concise History of Premodern Korea</em>', url: 'https://rowman.com/' },
-      { text: 'Wikipedia \u2014 I Ching (Yijing) hexagrams', url: 'https://en.wikipedia.org/wiki/I_Ching' }
+    'patterson-jefferson-cipher': [
+      { text: 'Smithline, Lawren M. \u201cA Cipher to Thomas Jefferson\u201d, <em>American Scientist</em> 97(2), 2009, 142\u2013149', url: 'https://www.americanscientist.org/article/a-cipher-to-thomas-jefferson' },
+      { text: 'Robert Patterson to Thomas Jefferson, 19 December 1801 \u2014 Founders Online', url: 'https://founders.archives.gov/documents/Jefferson/01-36-02-0025' },
+      { text: 'Thomas Jefferson to Robert Patterson, 22 March 1802 \u2014 Founders Online', url: 'https://founders.archives.gov/documents/Jefferson/01-37-02-0083' },
+      { text: 'Thomas Jefferson, 12 April 1802, Patterson\u2019s Cipher \u2014 Library of Congress', url: 'https://www.loc.gov/resource/mtj1.026_0086_0094/?st=gallery' }
+    ],
+    'wadsworth': [
+      { text: 'Kruh, Louis. \u201cThe Mystery of Colonel Decius Wadsworth\u2019s Cipher Device\u201d, <em>Cryptologia</em> 6(3), 1982, 238\u2013247', url: 'https://doi.org/10.1080/0161-118291857037' },
+      { text: '\u201cDecius Wadsworth Disc Cipher\u201d \u2014 William F. Friedman collection, NSA (declassified)', url: 'https://archive.org/stream/41788379082740/41788379082740_djvu.txt' },
+      { text: 'Kaeding, Thomas. \u201cAutomated ciphertext-only attack on the Wheatstone Cryptograph and related devices\u201d, IACR ePrint 2020/1492', url: 'https://eprint.iacr.org/2020/1492' }
+    ],
+    dagapeyeff: [
+      { text: 'D’Agapeyeff, Alexander. <em>Codes and Ciphers</em> (Oxford University Press, 1939) — the challenge cryptogram appears on the last page of the first edition only', url: 'https://archive.org/details/codesciphers0000daga' },
+      { text: 'Pelling, Nick. “The D’Agapeyeff Cipher” — Cipher Mysteries; the computational analysis proposing a 5×5 Polybius substitution followed by a transposition', url: 'https://ciphermysteries.com/the-dagapeyeff-cipher' },
+      { text: 'Wikipedia — D’Agapeyeff cipher (encyclopaedia overview; no scholarly monograph on this cipher exists)', url: 'https://en.wikipedia.org/wiki/D%27Agapeyeff_cipher' }
+    ],
+    dorabella: [
+      { text: 'Cipher Mysteries — The Dorabella Cipher (symbol inventory and survey of proposed solutions)', url: 'https://ciphermysteries.com/other-ciphers/the-dorabella-cipher' },
+      { text: 'The Elgar Society', url: 'https://elgarsociety.org/' },
+      { text: 'Wikipedia — Dorabella Cipher (encyclopaedia overview; cited here because no peer-reviewed solution exists)', url: 'https://en.wikipedia.org/wiki/Dorabella_Cipher' }
+    ],
+    greatCipher: [
+      { text: 'Kahn, David. <em>The Codebreakers</em>, ch. 4 (the Rossignols and the Grand Chiffre)', url: 'https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9780684831305' },
+      { text: 'Wikipedia — Étienne Bazeries (career and the three-year attack on the Rossignol papers)', url: 'https://en.wikipedia.org/wiki/%C3%89tienne_Bazeries' },
+      { text: 'Wikipedia — Great Cipher (records the syllabic code and the “ignore the previous codegroup” trap)', url: 'https://en.wikipedia.org/wiki/Great_Cipher' }
     ],
     'amharic-ge-ez-ciphers': [
       { text: 'Hammerschmidt, Ernst. <em>\u00c4thiopische Handschriften</em>', url: 'https://www.steiner-verlag.de/' },
@@ -932,8 +959,28 @@
     { text: 'CryptoHack — Modern cryptography puzzles &amp; challenges', url: 'https://cryptohack.org/' }
   ];
 
+  /* Twelve SOURCES entries were keyed in camelCase while their pages carry the
+     hyphenated slug in data-cipher, so the curated citations silently rendered
+     as an empty list and the page showed only the generic resources. Map the
+     slug a page actually uses onto the key the citations live under. */
+  const SOURCE_KEY_ALIASES = {
+    'jn-25': 'jn25',
+    'red-type-a': 'redTypeA',
+    'cardano-autokey': 'cardanoAutokey',
+    'cardano-grille': 'cardanoGrille',
+    'null-cipher': 'nullCipher',
+    'kl-7': 'kl7',
+    'm-94': 'm94',
+    'chinese-telegraph': 'chineseTelegraph',
+    'commercial-codebooks': 'commercialCode',
+    'culper-ring': 'culperRing',
+    'arnold-andre': 'arnoldAndre',
+    'wallis-ciphers': 'wallisCiphers'
+  };
+
   function buildSources(cipherName) {
-    const sources = SOURCES[cipherName] || [];
+    const key = SOURCES[cipherName] ? cipherName : (SOURCE_KEY_ALIASES[cipherName] || cipherName);
+    const sources = SOURCES[key] || [];
     const target = document.querySelector('.exhibit-side') || document.querySelector('.exhibit-main');
     if (!target) return;
 

@@ -416,8 +416,10 @@
     var pairs = [];
     var i = 0;
     while (i < clean.length) {
-      if (i + 1 >= clean.length) { pairs.push(clean[i] + 'X'); i++; }
-      else if (clean[i] === clean[i+1]) { pairs.push(clean[i] + 'X'); i++; }
+      // Filler is X, except when the letter needing a filler IS X — then Q,
+      // since a same-letter digraph cannot be enciphered by Playfair rules.
+      if (i + 1 >= clean.length) { pairs.push(clean[i] + (clean[i] === 'X' ? 'Q' : 'X')); i++; }
+      else if (clean[i] === clean[i+1]) { pairs.push(clean[i] + (clean[i] === 'X' ? 'Q' : 'X')); i++; }
       else { pairs.push(clean[i] + clean[i+1]); i += 2; }
     }
     return pairs;

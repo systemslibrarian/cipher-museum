@@ -3717,33 +3717,156 @@ window.CipherEngines = (() => {
     };
   })();
 
-  // Joseon Yeokhak Cipher Diagrams (1392\u20131897, Korea).
-  // Korean royal cipher tradition based on the I Ching\u2019s 64 hexagrams.
-  // Each hexagram is a stack of six lines, each broken (yin) or solid
-  // (yang); together they index 64 distinct symbols. Demo: derives a
-  // 0\u201363 hexagram offset from the key, then applies that offset (mod 26)
-  // as a Caesar-style shift over the Latin alphabet \u2014 mirroring how the
-  // Joseon court used hexagram arithmetic for cipher transformations
-  // applied to a Hangul or Hanja syllabary.
-  const joseonYeokhak = (() => {
-    function hexagramShift(key) {
-      let h = 0;
-      for (const ch of String(key || 'YEOKHAK').toUpperCase()) {
-        if (ch >= 'A' && ch <= 'Z') h = (h + (ch.charCodeAt(0) - 64)) % 64;
+  // Robert Patterson's cipher, from his letter to Thomas Jefferson of
+  // 19 December 1801.
+  //
+  // Patterson's own instructions, as quoted by Smithline (2009): the message
+  // is written DOWN the lines -- "the first letter of the message is placed at
+  // the beginning of the first line, the second letter at the beginning of the
+  // second line, and so on, writing column after column, from left to right".
+  // That writing "is then to be distributed into sections of not more than
+  // nine lines in each section". Each section is transcribed with its lines
+  // "in any order at pleasure", prefixing each line with "any number of
+  // arbitrary or insignificant letters, not exceeding nine".
+  //
+  // The key is a column of two-digit numbers: the first digit of each pair is
+  // a line number (their order gives the line permutation), the second is how
+  // many arbitrary letters that line carries. The same permutation and the
+  // same counts are reused in every section.
+  //
+  // Source: Lawren M. Smithline, "A Cipher to Thomas Jefferson", American
+  // Scientist 97(2), 2009, 142-149.
+  const patterson = (() => {
+    // Patterson's "arbitrary or insignificant letters" were his choice at the
+    // time of writing. A deterministic stand-in keeps the demo reproducible.
+    const FILLER = 'QXZJVKWYBGPFMHDCLNTSRAEIOU';
+
+    // Smithline recovered this key for Patterson's challenge cipher.
+    const DEFAULT_KEY = '13,34,57,65,22,78,49';
+
+    function parseKey(key) {
+      const digits = String(key ?? '').replace(/[^0-9]/g, '');
+      const order = [], adds = [];
+      for (let i = 0; i + 1 < digits.length; i += 2) {
+        order.push(+digits[i]);
+        adds.push(+digits[i + 1]);
       }
-      return h;
+      const K = order.length;
+      // Patterson caps a section at nine lines; the line numbers must be a
+      // permutation of 1..K or the key cannot be inverted.
+      const valid = K >= 1 && K <= 9 &&
+        new Set(order).size === K && order.every(n => n >= 1 && n <= K);
+      return valid ? { K, order, adds } : null;
     }
+
+    function junk(lineIndex, count) {
+      let s = '';
+      for (let t = 0; t < count; t++) s += FILLER[(lineIndex * 5 + t * 3) % 26];
+      return s;
+    }
+
+    // Writing column-wise into K lines gives line r the characters at
+    // positions r, r+K, r+2K, ... so its length follows from the total.
+    function lineLength(total, K, r) {
+      return Math.floor(total / K) + (r < total % K ? 1 : 0);
+    }
+
     return {
       encode: (text, key) => {
-        const t = clean(text), s = hexagramShift(key) % 26;
+        const k = parseKey(key) || parseKey(DEFAULT_KEY);
+        const src = clean(text);
+        if (!src) return '';
+        const lines = Array.from({ length: k.K }, () => '');
+        for (let i = 0; i < src.length; i++) lines[i % k.K] += src[i];
         let out = '';
-        for (const ch of t) out += A[mod(ch.charCodeAt(0) - 65 + s, 26)];
+        for (let j = 0; j < k.K; j++) {
+          out += junk(j, k.adds[j]) + lines[k.order[j] - 1];
+        }
         return out;
       },
       decode: (text, key) => {
-        const t = clean(text), s = hexagramShift(key) % 26;
+        const k = parseKey(key) || parseKey(DEFAULT_KEY);
+        const ct = clean(text);
+        const added = k.adds.reduce((a, b) => a + b, 0);
+        const total = ct.length - added;
+        if (total < 0) return '';
+        const lines = new Array(k.K);
+        let p = 0;
+        for (let j = 0; j < k.K; j++) {
+          p += k.adds[j];
+          const r = k.order[j] - 1;
+          lines[r] = ct.slice(p, p + lineLength(total, k.K, r));
+          p += lines[r].length;
+        }
         let out = '';
-        for (const ch of t) out += A[mod(ch.charCodeAt(0) - 65 - s, 26)];
+        const width = Math.ceil(total / k.K);
+        for (let c = 0; c < width; c++) {
+          for (let r = 0; r < k.K; r++) {
+            if (c < lines[r].length) out += lines[r][c];
+          }
+        }
+        return out;
+      }
+    };
+  })();
+
+  // Wadsworth's cipher device (Col. Decius Wadsworth, 1817).
+  // Two concentric geared discs: the OUTER carries 33 positions (the 26
+  // letters plus the digits 2-8), the INNER carries the 26 letters only,
+  // and the two are geared 26:33. Enciphering turns the inner disc until
+  // the wanted plaintext letter reaches the index; the number of steps
+  // that took is read off the outer disc and sent as the ciphertext.
+  //
+  // Because the step count for a repeated plaintext letter is a full 26
+  // and gcd(26, 33) = 1, a given plaintext letter walks through all 33
+  // outer symbols before any ciphertext value recurs -- the progressive,
+  // long-period behaviour that is the device's whole point. The discs
+  // realign only after lcm(26, 33) = 858 steps.
+  //
+  // Sources: Louis Kruh, "The Mystery of Colonel Decius Wadsworth's
+  // Cipher Device", Cryptologia 6(3), 1982, 238-247. The keyed inner
+  // sequence is this museum's modelling choice, not a documented setting.
+  const wadsworth = (() => {
+    const OUTER = A + '2345678';           // 33 positions
+    const cleanOuter = text => String(text ?? '').normalize('NFD')
+      .replace(/\p{M}/gu, '').toUpperCase().replace(/[^A-Z2-8]/g, '');
+
+    function makeInner(key) {
+      const k = clean(key || 'WADSWORTH');
+      const seen = new Set();
+      let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of A) if (!seen.has(c)) { seen.add(c); s += c; }
+      return s;
+    }
+
+    return {
+      encode: (text, key) => {
+        const inner = makeInner(key);
+        let innerPos = 0, outerPos = 0, out = '';
+        for (const ch of clean(text)) {
+          const target = inner.indexOf(ch);
+          // "Turn until the letter comes up": never zero steps, so a
+          // repeated letter costs a full revolution of 26.
+          const steps = mod(target - innerPos, 26) || 26;
+          innerPos = target;
+          outerPos = mod(outerPos + steps, 33);
+          out += OUTER[outerPos];
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const inner = makeInner(key);
+        let innerPos = 0, outerPos = 0, out = '';
+        for (const ch of cleanOuter(text)) {
+          const newOuter = OUTER.indexOf(ch);
+          const steps = mod(newOuter - outerPos, 33);
+          outerPos = newOuter;
+          // steps === 26 lands the inner disc back where it started,
+          // which is exactly how a repeated letter is recovered.
+          innerPos = mod(innerPos + steps, 26);
+          out += inner[innerPos];
+        }
         return out;
       }
     };
@@ -3827,7 +3950,7 @@ window.CipherEngines = (() => {
     chineseTelegraph, zimmermann, slidex, commercialCode,
     culperRing, arnoldAndre,
     argenti, wallisCiphers,
-    joseonYeokhak, geezMonastic,
+    patterson, wadsworth, geezMonastic,
     diana
   };
 })();

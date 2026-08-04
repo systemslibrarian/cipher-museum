@@ -183,7 +183,13 @@ const KATS = {
   // KING is the first fixed Wallis codebook entry, numbered 100.
   wallisCiphers: kat('100', engine => engine.encode('KING', 'WALLIS'), 'Wallis codebook derivation'),
   // YEOKHAK letter values sum to 76; 76 mod 64 mod 26 = 12, so A -> M.
-  joseonYeokhak: kat('M', engine => engine.encode('A', 'YEOKHAK'), 'hexagram arithmetic derivation'),
+  // Hand derivation. Key WADSWORTH gives the inner sequence
+  // W,A,D,S,O,R,T,H,B,C,... so plaintext A sits one step from the index;
+  // one step advances the 33-symbol outer disc from A to B.
+  // Key "10" is a single line taking zero arbitrary letters, so the cipher
+  // reduces to the identity -- the smallest hand-checkable Patterson case.
+  patterson: kat('ATTACK', engine => engine.encode('ATTACK', '10'), 'Patterson single-line identity'),
+  wadsworth: kat('B', engine => engine.encode('A', 'WADSWORTH'), 'Wadsworth 26:33 gearing derivation'),
   // Pinned from the audited implementation (seeded keyed permutation).
   geezMonastic: kat('P', engine => engine.encode('A', 'GEEZ'), 'pinned regression vector'),
   // Published Special Forces worked example (radio operator account, repr.

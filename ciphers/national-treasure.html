@@ -110,9 +110,9 @@
     // Pigpen substitution demo
     function ntEncode(t) {
       // Map A-Z to 26 symbolic names for display
-      const names = ['#+','#-','#=','|-','||','|-',']|',']]','[|',
-                     '.+','.-','.=','L+','L-','L=','r+','r-','r=',
-                     'v+','v-','v=','x+','x-','x=','<>','<|'];
+      const names = ['⌐','┴','¬','├','┼','┤','┌','┬','┐',
+                     '⌐•','┴•','¬•','├•','┼•','┤•','┌•','┬•','┐•',
+                     '╲','╳','╱','╲•','╳•','╱•','▽','△'];
       return t.toUpperCase().replace(/[^A-Z]/g,'').split('').map(c=>{
         const i=c.charCodeAt(0)-65; return names[i]||c;
       }).join(' ') + ' (Pigpen grid)';

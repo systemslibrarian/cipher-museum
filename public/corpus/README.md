@@ -12,7 +12,7 @@ Cipher Corpus is an educational benchmark library for classical cryptanalysis �
 | **Cipher types** | 82 |
 | **Cipher engines** | 81 of the museum's 84 (dictionaryCode, beale, and cardanoGrille have no corpus family) |
 | **Languages** | 10 (en, fr, de, la, es, it, ar, ja, ru, zh) |
-| **Historical records** | 101 (spanning 4,000 years, 78 cipher types) |
+| **Historical records** | 100 (spanning 4,000 years, 77 cipher types) |
 | **Multilingual records** | 5,348 (fr/de/la/es/it/ar) |
 | **Noisy transcription variants** | 484 |
 | **Public split** | ~70% |
@@ -22,9 +22,9 @@ Cipher Corpus is an educational benchmark library for classical cryptanalysis �
 
 | Difficulty | Records |
 |---|---|
-| Beginner | 15,533 |
+| Beginner | 14,433 |
 | Intermediate | 26,969 |
-| Advanced | 26,381 |
+| Advanced | 27,481 |
 | Expert | 26,966 |
 | **Core total** | **95,849** |
 
@@ -45,11 +45,11 @@ represent (each carries an explicit rationale in
 | `all.jsonl` | All 100,026 records (JSONL, one per line) — **Git LFS** |
 | `all.json` | All records as JSON array — **Git LFS** |
 | `all.csv` | Tabular export of key fields |
-| `beginner.jsonl` | 15,533 beginner records (subset of `all.jsonl`) |
+| `beginner.jsonl` | 14,433 beginner records (subset of `all.jsonl`) |
 | `intermediate.jsonl` | 26,969 intermediate records (subset of `all.jsonl`) |
-| `advanced.jsonl` | 26,381 advanced records (subset of `all.jsonl`) |
+| `advanced.jsonl` | 27,481 advanced records (subset of `all.jsonl`) |
 | `expert.jsonl` | 26,966 expert records (subset of `all.jsonl`) |
-| `historical.jsonl` | 101 historical records with provenance — 55 are in `all.jsonl`; 46 v0.4 additions are pending canonical merge (planned v0.6) |
+| `historical.jsonl` | 100 historical records with provenance — 55 are in `all.jsonl`; 45 v0.4 additions are pending canonical merge (planned v0.6) |
 | `multilingual.jsonl` | 5,348 multilingual records — 3,638 are in `all.jsonl`; the 1,710 Arabic (Buckwalter) v0.4 additions are pending canonical merge (planned v0.6) |
 | `noisy.jsonl` | 484 noisy transcription variants (subset of `all.jsonl`) |
 | `llm-3shot-eval.jsonl` | 300 LLM evaluation prompts (3-shot, 0-shot challenge, key recovery) drawn from the public split only |
@@ -115,7 +115,7 @@ Top cipher types by record count: Caesar (600+), Monoalphabetic (600+), Affine (
 
 ## Historical Records
 
-101 historical records spanning 4,000 years of cryptographic history — from the Hebrew Bible to the Cold War — covering 78 cipher types with verified citations:
+100 historical records spanning 4,000 years of cryptographic history — from the Hebrew Bible to the Cold War — covering 77 cipher types with verified citations:
 
 **Ancient World (c. 600 BCE – 500 CE):**
 - Atbash cipher in the Hebrew Bible (Jeremiah 25:26, c. 600 BCE)
@@ -127,7 +127,6 @@ Top cipher types by record count: Caesar (600+), Monoalphabetic (600+), Affine (
 
 **Medieval & Renaissance (500–1700 CE):**
 - Ethiopian monastic Ge'ez cipher (c. 1200 CE)
-- Korean Joseon postal cipher (Gyeongguk Daejeon, c. 1400 CE)
 - Argenti papal cipher — Argenti family cryptographers (Vatican, 1585)
 - Trithemius tabula recta (Polygraphia, 1518)
 - Porta reciprocal cipher (De Furtivis Literarum Notis, 1563)
@@ -214,7 +213,7 @@ Cipher Corpus builds on the pioneering work of **CipherBank** by Li et al. (2025
 | Benchmark | Records | Algorithms | Historical | Multilingual | Blind Splits | LLM Eval Format |
 |---|---|---|---|---|---|---|
 | CipherBank (Li et al., 2025) | 2,358 | 9 | No | No | No | No |
-| **Cipher Corpus v0.5** | **100,026** | **82** | **Yes (101)** | **Yes (10 langs)** | **Yes** | **No** |
+| **Cipher Corpus v0.5** | **100,026** | **82** | **Yes (100)** | **Yes (10 langs)** | **Yes** | **No** |
 
 ### Cite Cipher Corpus
 
@@ -224,7 +223,7 @@ Cipher Corpus builds on the pioneering work of **CipherBank** by Li et al. (2025
   author={Lester, Paul},
   year={2026},
   url={https://ciphermuseum.com/cipher-corpus.html},
-  note={100,026+ test cases across 82 cipher algorithms, 10 languages, 101 historical records}
+  note={100,026+ test cases across 82 cipher algorithms, 10 languages, 100 historical records}
 }
 ```
 

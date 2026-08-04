@@ -41,9 +41,9 @@
     "noisy_records": 486,
     "historical_records": 54,
     "difficulty_distribution": {
-      "beginner": 17007,
+      "beginner": 15907,
+      "advanced": 27708,
       "intermediate": 29410,
-      "advanced": 26608,
       "expert": 27001
     },
     "language_distribution": {
@@ -1111,9 +1111,9 @@
       "noisy_count": 0
     },
     {
-      "cipher_type": "joseon_yeokhak",
-      "cipher_family": "substitution",
-      "difficulty": "beginner",
+      "cipher_type": "wadsworth",
+      "cipher_family": "polyalphabetic",
+      "difficulty": "advanced",
       "record_count": 1100,
       "public_count": 753,
       "blind_count": 347,
@@ -1122,14 +1122,14 @@
         "en"
       ],
       "expected_attacks": [
-        "frequency analysis",
-        "shift analysis"
+        "hill climbing",
+        "stream/substitution factorisation"
       ],
       "solver_baselines": {
-        "human": "95-100%",
-        "automated": "95-100%",
-        "llm_3shot": "80-95%",
-        "llm_0shot": "60-80%"
+        "human": "20-60%",
+        "automated": "20-60%",
+        "llm_3shot": "10-40%",
+        "llm_0shot": "5-20%"
       },
       "verified_count": 1100,
       "noisy_count": 0
@@ -1629,7 +1629,7 @@
       "record_count": 580,
       "public_count": 411,
       "blind_count": 169,
-      "avg_normalized_length": 0,
+      "avg_normalized_length": 1,
       "languages": [
         "en"
       ],
@@ -1843,7 +1843,7 @@
       "record_count": 292,
       "public_count": 219,
       "blind_count": 73,
-      "avg_normalized_length": 0,
+      "avg_normalized_length": 1,
       "languages": [
         "en"
       ],
@@ -1869,7 +1869,7 @@
       "record_count": 292,
       "public_count": 203,
       "blind_count": 89,
-      "avg_normalized_length": 0,
+      "avg_normalized_length": 1,
       "languages": [
         "en"
       ],
@@ -1919,7 +1919,7 @@
       "record_count": 290,
       "public_count": 197,
       "blind_count": 93,
-      "avg_normalized_length": 342,
+      "avg_normalized_length": 339,
       "languages": [
         "en"
       ],
@@ -2244,42 +2244,11 @@
   ],
   "per_family_stats": [
     {
-      "family": "substitution",
-      "record_count": 21896,
-      "cipher_types": [
-        "caesar",
-        "rot13",
-        "atbash",
-        "monoalphabetic",
-        "affine",
-        "polybius",
-        "tap_code",
-        "joseon_yeokhak",
-        "homophonic",
-        "kama_sutra",
-        "straddling_checkerboard",
-        "vic",
-        "copiale",
-        "geez_monastic",
-        "pigpen",
-        "voynich_render",
-        "playfair",
-        "babington",
-        "null_cipher",
-        "chaocipher"
-      ],
-      "difficulty_distribution": {
-        "beginner": 16251,
-        "intermediate": 1643,
-        "advanced": 3746,
-        "expert": 256
-      }
-    },
-    {
       "family": "polyalphabetic",
-      "record_count": 20307,
+      "record_count": 21407,
       "cipher_types": [
         "trithemius",
+        "wadsworth",
         "vigenere",
         "beaufort",
         "gronsfeld",
@@ -2296,9 +2265,40 @@
       ],
       "difficulty_distribution": {
         "beginner": 350,
+        "advanced": 3425,
         "intermediate": 17631,
-        "advanced": 2325,
         "expert": 1
+      }
+    },
+    {
+      "family": "substitution",
+      "record_count": 20796,
+      "cipher_types": [
+        "caesar",
+        "rot13",
+        "atbash",
+        "monoalphabetic",
+        "affine",
+        "polybius",
+        "tap_code",
+        "homophonic",
+        "kama_sutra",
+        "straddling_checkerboard",
+        "vic",
+        "copiale",
+        "geez_monastic",
+        "pigpen",
+        "voynich_render",
+        "playfair",
+        "babington",
+        "null_cipher",
+        "chaocipher"
+      ],
+      "difficulty_distribution": {
+        "beginner": 15151,
+        "intermediate": 1643,
+        "advanced": 3746,
+        "expert": 256
       }
     },
     {

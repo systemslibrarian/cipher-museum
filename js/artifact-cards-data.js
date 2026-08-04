@@ -76,7 +76,7 @@
     },
     "alberti-disk": {
       "name": "Alberti Cipher Disk",
-      "hall": "VI",
+      "hall": "VII",
       "era": "Renaissance · 1467",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -126,11 +126,11 @@
       "name": "Arnold–André Book Cipher Blackstone’s Commentaries · 1779–1780",
       "hall": "V",
       "era": "American Revolution · 1779–1780",
-      "family": "Historical Cryptography",
+      "family": "Military and Field Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
-      "keyIdea": "Historical Cryptography transformation of plaintext into protected form",
+      "keyIdea": "Military and Field Ciphers transformation of plaintext into protected form",
       "securityFailure": "Compromised by capture (1780)",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
@@ -184,7 +184,7 @@
     },
     "bacon": {
       "name": "Bacon's Cipher",
-      "hall": "VII",
+      "hall": "VIII",
       "era": "1605",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
@@ -378,11 +378,11 @@
       "name": "Chinese Telegraph Code Standard Telegraph Codebook · 1881",
       "hall": "VI",
       "era": "Late Qing → PRC · 1881–1980s",
-      "family": "Military and Field Ciphers",
+      "family": "American and Civil War Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
-      "keyIdea": "Military and Field Ciphers transformation of plaintext into protected form",
+      "keyIdea": "American and Civil War Ciphers transformation of plaintext into protected form",
       "securityFailure": "Public codebook (super-enciphered when secret)",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
@@ -414,11 +414,11 @@
       "name": "Commercial Telegraph Codebooks ABC, Bentley’s, Lieber’s · 1870s–1930s",
       "hall": "VI",
       "era": "Victorian → inter-war · 1870s–1930s",
-      "family": "Military and Field Ciphers",
+      "family": "American and Civil War Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
-      "keyIdea": "Military and Field Ciphers transformation of plaintext into protected form",
+      "keyIdea": "American and Civil War Ciphers transformation of plaintext into protected form",
       "securityFailure": "Public codebooks (compression, not secrecy)",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
@@ -450,12 +450,12 @@
       "name": "Culper Ring / Tallmadge Code Washington’s spy ring codebook · 1779",
       "hall": "V",
       "era": "American Revolution · 1778–1783",
-      "family": "Historical Cryptography",
+      "family": "Military and Field Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
-      "keyIdea": "Historical Cryptography transformation of plaintext into protected form",
-      "securityFailure": "Codebook (compromised by capture, never broken)",
+      "keyIdea": "Military and Field Ciphers transformation of plaintext into protected form",
+      "securityFailure": "Codebook (never captured, never broken)",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
     "da-vinci-code": {
@@ -806,26 +806,26 @@
       "securityFailure": "Weak",
       "modernLesson": "Non-uniform output distributions"
     },
-    "ira-book-cipher": {
-      "name": "IRA Book Cipher",
+    "ira-ciphers": {
+      "name": "IRA Cipher Traffic",
       "hall": "V",
-      "era": "Modern · 1970s–1990s",
+      "era": "Ireland · 1926–1928",
       "family": "Military and Field Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
       "keyIdea": "Military and Field Ciphers transformation of plaintext into protected form",
-      "securityFailure": "Broken (library edition seized)",
-      "modernLesson": "The security of a cipher is only as strong as the secrecy of its key distribution"
+      "securityFailure": "Broken (key text identifiable)",
+      "modernLesson": "Security depends on design quality, key management, and implementation."
     },
     "jefferson-disk": {
       "name": "Jefferson Disk",
-      "hall": "VI",
+      "hall": "VII",
       "era": "1795 (Jefferson) · 1922 (M-94)",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
-      "keyType": "Physical disk arrangement (25 disks)",
+      "keyType": "Physical disk arrangement (36 disks)",
       "keyIdea": "Mechanical and Rotor Machines transformation of plaintext into protected form",
       "securityFailure": "Broken",
       "modernLesson": "Mechanical cipher → rotor machines"
@@ -853,18 +853,6 @@
       "keyIdea": "Codebreakers and Cryptanalysis transformation of plaintext into protected form",
       "securityFailure": "Codebreaker Biography",
       "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "joseon-yeokhak": {
-      "name": "Joseon Yeokhak Cipher",
-      "hall": "I",
-      "era": "East Asia · 1392–1897",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "Historical operators, states, or communities documented for this exhibit",
-      "keyType": "Varies by system",
-      "keyIdea": "Ancient and Foundational Ciphers transformation of plaintext into protected form",
-      "securityFailure": "Historical (low security)",
-      "modernLesson": "Cryptographic innovation occurs in every literate culture independently"
     },
     "kahn": {
       "name": "David Kahn",
@@ -1001,7 +989,7 @@
     "m-94": {
       "name": "M-94 / CSP-488 US Army strip / disk cipher · 1922",
       "hall": "VII",
-      "era": "WWI → WWII tactical · 1922–1942",
+      "era": "WWI → WWII tactical · 1922–1943",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
@@ -1120,7 +1108,7 @@
     },
     "navajo-code-talkers": {
       "name": "Navajo Code Talkers",
-      "hall": "VI",
+      "hall": "VII",
       "era": "WWII · 1942–1945",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
@@ -1218,11 +1206,11 @@
       "name": "Playfair Cipher",
       "hall": "II",
       "era": "Victorian · 1854",
-      "family": "Historical Cryptography",
+      "family": "Substitution",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "5×5 keyword square",
-      "keyIdea": "Historical Cryptography transformation of plaintext into protected form",
+      "keyIdea": "Substitution transformation of plaintext into protected form",
       "securityFailure": "Broken",
       "modernLesson": "Block encryption and diffusion"
     },
@@ -1251,7 +1239,7 @@
       "modernLesson": "Lookup-table cipher design"
     },
     "purple": {
-      "name": "Purple (Type 97 jiki-O-bun-In-ji-ki)",
+      "name": "Purple (97-shiki ōbun injiki)",
       "hall": "VII",
       "era": "World War II · 1939–1945",
       "family": "Mechanical and Rotor Machines",
@@ -1443,14 +1431,14 @@
       "modernLesson": "The first practical secure voice communication predates digital age by 50 years"
     },
     "slidex": {
-      "name": "Slidex British WWII tactical bigram cipher card",
+      "name": "Slidex British WWII tactical code card",
       "hall": "VI",
-      "era": "WWII · 1943–1945",
-      "family": "Military and Field Ciphers",
+      "era": "WWII & Cold War · 1943–1980s",
+      "family": "American and Civil War Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
-      "keyIdea": "Military and Field Ciphers transformation of plaintext into protected form",
+      "keyIdea": "American and Civil War Ciphers transformation of plaintext into protected form",
       "securityFailure": "Tactical (intentionally weak)",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
@@ -1516,7 +1504,7 @@
     },
     "tap-code": {
       "name": "Tap Code",
-      "hall": "VII",
+      "hall": "VIII",
       "era": "Korean War · Vietnam War",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
@@ -1539,7 +1527,7 @@
       "modernLesson": "3D lookup tables in modern cipher design"
     },
     "trithemius": {
-      "name": "Trithemius Progressive Cipher Steganographia · 1518",
+      "name": "Trithemius Progressive Cipher Polygraphia · 1518",
       "hall": "III",
       "era": "German Renaissance · 1518",
       "family": "Polyalphabetic",
@@ -1646,6 +1634,18 @@
       "securityFailure": "Historical security profile varies",
       "modernLesson": "Statistical signatures alone cannot tell cipher from constructed language from hoax"
     },
+    "wadsworth-cipher": {
+      "name": "Wadsworth Cipher",
+      "hall": "VII",
+      "era": "1817 · USA",
+      "family": "Mechanical and Rotor Machines",
+      "region": "Global",
+      "usedBy": "Historical operators, states, or communities documented for this exhibit",
+      "keyType": "Varies by system",
+      "keyIdea": "Mechanical and Rotor Machines transformation of plaintext into protected form",
+      "securityFailure": "Broken",
+      "modernLesson": "Coprime periods buy length; they do not buy security"
+    },
     "wallis-ciphers": {
       "name": "Wallis Ciphers John Wallis & the English Civil War · 1640s",
       "hall": "II",
@@ -1698,11 +1698,11 @@
       "name": "Zimmermann Telegram German codes 0075 / 13040 · 1917",
       "hall": "VI",
       "era": "WWI · January 1917",
-      "family": "Military and Field Ciphers",
+      "family": "American and Civil War Ciphers",
       "region": "Global",
       "usedBy": "Historical operators, states, or communities documented for this exhibit",
       "keyType": "Varies by system",
-      "keyIdea": "Military and Field Ciphers transformation of plaintext into protected form",
+      "keyIdea": "American and Civil War Ciphers transformation of plaintext into protected form",
       "securityFailure": "Broken (Room 40)",
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },

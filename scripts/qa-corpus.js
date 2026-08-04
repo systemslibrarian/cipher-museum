@@ -40,7 +40,7 @@ const TYPE_MAP = {
   null_cipher:              'nullCipher',
   cardano_autokey:          'cardanoAutokey',
   cardano_grille:           'cardanoGrille',
-  joseon_yeokhak:           'joseonYeokhak',
+  wadsworth:                'wadsworth',
   geez_monastic:            'geezMonastic',
   chinese_telegraph:        'chineseTelegraph',
   wallis_cipher:            'wallisCiphers',
@@ -141,7 +141,7 @@ const SKIP_ROUNDTRIP = new Set([
   'lorenz','sigaba','typex','fialka','kl7','geheimschreiber','m94',
   'purple','enigma','m209','chaocipher','solitaire','vic',
   'venona_pad_reuse','wallis_cipher','wallis_ciphers','wallis_ciphers',
-  'geez_monastic','joseon_yeokhak','kama_sutra','aeneas_tacticus',
+  'geez_monastic','wadsworth','kama_sutra','aeneas_tacticus',
 ]);
 
 // ── key extraction ────────────────────────────────────────────────────────────

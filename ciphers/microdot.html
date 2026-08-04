@@ -111,7 +111,7 @@
       // Demo: represent text as base64 (conceptual stand-in for optical reduction)
       const encoded = btoa(t.trim() || 'MESSAGE');
       return '.' + ' ← this period contains: [' + encoded + '] (base64, ~' +
-             Math.ceil(encoded.length/8) + ' bytes when photographically reduced to 0.1mm)';
+             Math.ceil(encoded.length*3/4) + ' bytes when photographically reduced to 0.1mm)';
     }
   </script>
 <div class="exhibit-layout">
@@ -140,10 +140,15 @@
   </div>
 </section>
 <div class="hall-nav">
-
-
-</div>
-</main>
+  <a href="../ciphers/ecdsa.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">ECDSA</span>
+  </a>
+  <a href="../ciphers/cabinet-noir.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Cabinet Noir — Black Chambers of Europe</span>
+  </a>
+</div></main>
 <footer></footer>
 <script src="../js/ciphers/all-engines.min.js"></script>
 <script src="../js/demo-loader.min.js"></script>

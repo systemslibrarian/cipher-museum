@@ -106,19 +106,25 @@ S = ╲   T = ╳   U = ╱      (X shapes)
 V = ╲•  W = ╳•  X = ╱•     (dotted X)
 Y = ▽   Z = △              (chevrons)
 
-The shape of the cell containing the letter
-becomes the symbol for that letter:
-A = ⌐  (top-left cell shape)
-E = ┼  (the full middle-section shape)
-H = ⊓  (bottom-middle cell — open at the bottom)
+The symbol for a letter is the set of grid lines
+that enclose its cell — nothing more:
+A = top-left cell    &rarr; line on the right, line below
+E = centre cell      &rarr; all four sides: a closed box
+H = bottom-middle    &rarr; left, top and right: open below
+I = bottom-right     &rarr; line above, line to the left
 ...etc — a dot marks the second grid (J–R)
+
+(The demo above prints single text characters as
+stand-ins, because plain text has no glyphs for
+most of these shapes. The diagram below shows the
+authentic drawn forms.)
 
 Famous users:
 - Freemasons (lodge records)
 - George Washington
 - Civil War soldiers (personal letters)</pre>
       <figure class="figure">
-        <svg viewBox="0 0 400 200" style="max-width:400px;width:100%;height:auto;" aria-label="Pigpen cipher grid shapes">
+        <svg viewBox="0 0 400 340" style="max-width:400px;width:100%;height:auto;" aria-label="Pigpen cipher: the two lettered grids, and the nine glyph shapes derived from the boundary lines of each cell">
           <style>
             .pp-grid{stroke:#c8b273;stroke-width:1.5;fill:none}
             .pp-dot{fill:#d4af37;r:3}
@@ -143,26 +149,56 @@ Famous users:
           <circle class="pp-dot" cx="176" cy="47" r="2.5"/><circle class="pp-dot" cx="211" cy="47" r="2.5"/><circle class="pp-dot" cx="246" cy="47" r="2.5"/>
           <circle class="pp-dot" cx="176" cy="77" r="2.5"/><circle class="pp-dot" cx="211" cy="77" r="2.5"/><circle class="pp-dot" cx="246" cy="77" r="2.5"/>
           <circle class="pp-dot" cx="176" cy="107" r="2.5"/><circle class="pp-dot" cx="211" cy="107" r="2.5"/><circle class="pp-dot" cx="246" cy="107" r="2.5"/>
-          <!-- Example symbols -->
-          <text class="pp-lbl" x="320" y="15">Example symbols:</text>
-          <!-- A = open bottom-right -->
-          <text class="pp-lbl" x="280" y="48">A =</text>
-          <polyline class="pp-sym" points="300,55 300,35 320,35"/>
-          <!-- E = box (closed) -->
-          <text class="pp-lbl" x="345" y="48">E =</text>
-          <rect class="pp-sym" x="360" y="33" width="22" height="22"/>
-          <!-- H = open-bottom shape -->
-          <text class="pp-lbl" x="280" y="88">H =</text>
-          <polyline class="pp-sym" points="300,90 300,70 320,70 320,90"/>
-          <!-- J = A shape + dot -->
-          <text class="pp-lbl" x="345" y="88">J =</text>
-          <polyline class="pp-sym" points="365,95 365,75 385,75"/>
-          <circle class="pp-dot" cx="377" cy="87" r="2.5"/>
-          <!-- info -->
-          <text class="pp-lbl" x="200" y="140">Each letter's symbol is the shape of the cell it occupies</text>
-          <text class="pp-lbl" x="200" y="158">S&#8211;U use the X shapes, V&#8211;X their dotted forms, Y&#8211;Z chevrons</text>
+          <!-- S-Z key: diagonals and chevrons -->
+          <text class="pp-lbl" x="335" y="15">S&#8211;Z</text>
+          <line class="pp-sym" x1="286" y1="31" x2="304" y2="49"/>
+          <line class="pp-sym" x1="321" y1="31" x2="339" y2="49"/><line class="pp-sym" x1="339" y1="31" x2="321" y2="49"/>
+          <line class="pp-sym" x1="374" y1="31" x2="356" y2="49"/>
+          <text class="pp-lbl" x="295" y="60">S</text><text class="pp-lbl" x="330" y="60">T</text><text class="pp-lbl" x="365" y="60">U</text>
+          <line class="pp-sym" x1="286" y1="63" x2="304" y2="81"/>
+          <line class="pp-sym" x1="321" y1="63" x2="339" y2="81"/><line class="pp-sym" x1="339" y1="63" x2="321" y2="81"/>
+          <line class="pp-sym" x1="374" y1="63" x2="356" y2="81"/>
+          <circle class="pp-dot" cx="308" cy="79" r="2.5"/><circle class="pp-dot" cx="343" cy="79" r="2.5"/><circle class="pp-dot" cx="378" cy="79" r="2.5"/>
+          <text class="pp-lbl" x="295" y="92">V</text><text class="pp-lbl" x="330" y="92">W</text><text class="pp-lbl" x="365" y="92">X</text>
+          <polyline class="pp-sym" points="303,95 321,95 312,113 303,95"/>
+          <polyline class="pp-sym" points="341,113 350,95 359,113 341,113"/>
+          <text class="pp-lbl" x="312" y="124">Y</text><text class="pp-lbl" x="350" y="124">Z</text>
+
+          <!-- Derived glyphs, grid 1 -->
+          <text class="pp-lbl" x="200" y="147">Grid 1 &#8212; each glyph is the boundary of that letter's cell</text>
+          <!-- A: top-left cell, closed right and below -->
+          <polyline class="pp-sym" points="43,167 43,193 17,193"/>
+          <!-- B: top-middle, closed left, right, below -->
+          <polyline class="pp-sym" points="59,167 59,193 85,193 85,167"/>
+          <!-- C: top-right, closed left and below -->
+          <polyline class="pp-sym" points="101,167 101,193 127,193"/>
+          <!-- D: middle-left, closed above, right, below -->
+          <polyline class="pp-sym" points="143,167 169,167 169,193 143,193"/>
+          <!-- E: centre, closed on all four sides -->
+          <rect class="pp-sym" x="185" y="167" width="26" height="26"/>
+          <!-- F: middle-right, closed above, left, below -->
+          <polyline class="pp-sym" points="253,167 227,167 227,193 253,193"/>
+          <!-- G: bottom-left, closed above and right -->
+          <polyline class="pp-sym" points="269,167 295,167 295,193"/>
+          <!-- H: bottom-middle, closed left, above, right -->
+          <polyline class="pp-sym" points="311,193 311,167 337,167 337,193"/>
+          <!-- I: bottom-right, closed above and left -->
+          <polyline class="pp-sym" points="379,167 353,167 353,193"/>
+          <text class="pp-ltr" x="30" y="209">A</text><text class="pp-ltr" x="72" y="209">B</text><text class="pp-ltr" x="114" y="209">C</text>
+          <text class="pp-ltr" x="156" y="209">D</text><text class="pp-ltr" x="198" y="209">E</text><text class="pp-ltr" x="240" y="209">F</text>
+          <text class="pp-ltr" x="282" y="209">G</text><text class="pp-ltr" x="324" y="209">H</text><text class="pp-ltr" x="366" y="209">I</text>
+
+          <!-- Derived glyphs, grid 2 -->
+          <text class="pp-lbl" x="200" y="240">Grid 2 (J&#8211;R) &#8212; the same nine shapes, each with a dot</text>
+          <polyline class="pp-sym" points="133,252 133,278 107,278"/><circle class="pp-dot" cx="120" cy="265" r="2.5"/>
+          <rect class="pp-sym" x="187" y="252" width="26" height="26"/><circle class="pp-dot" cx="200" cy="265" r="2.5"/>
+          <polyline class="pp-sym" points="293,252 267,252 267,278"/><circle class="pp-dot" cx="280" cy="265" r="2.5"/>
+          <text class="pp-ltr" x="120" y="294">J</text><text class="pp-ltr" x="200" y="294">N</text><text class="pp-ltr" x="280" y="294">R</text>
+
+          <text class="pp-lbl" x="200" y="316">A is open to the top and left; I is open to the bottom and right.</text>
+          <text class="pp-lbl" x="200" y="332">Corner glyphs are never interchangeable &#8212; that is the whole key.</text>
         </svg>
-        <figcaption class="figure-caption">Pigpen cipher: A–I from the plain grid, J–R from the dotted grid, S–U from the X shapes, V–X dotted, Y–Z chevrons</figcaption>
+        <figcaption class="figure-caption">Pigpen cipher: A–I from the plain grid, J–R from the dotted grid, S–U from the diagonals, V–X their dotted forms, Y–Z the chevrons. Each glyph is drawn as the lines that enclose its cell, so the corner letters (A, C, G, I) each open toward a different corner of the page.</figcaption>
       </figure></div>
     </div>
 

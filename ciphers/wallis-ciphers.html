@@ -84,7 +84,7 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>The Royalist ciphers Wallis attacked were Argenti-pattern nomenclators of the standard 17th-century kind: a small alphabetic substitution table (often with one or two homophones for common letters) plus a longer codebook of person-and-place codes. Royalist operators were also fond of nulls and of inserting the names of their own family members as agreed cover-words.</p><p style="margin-top:1rem;">The demo above implements this dominant design: a 60-word codebook of English Civil War vocabulary (people, places, military terms) using 3-digit codes from <code>100</code>, plus a keyed 2-digit homophonic alphabet (codes 10–89) for words not in the codebook — wrapped in sentinel codes <code>90</code> and <code>91</code> so the decoder can tell which is which. Try encoding <code>KING CHARLES MARCH OXFORD</code> to see how the codebook handles the named entities directly.</p><p style="margin-top:1rem;">Wallis’s attack technique was the standard one of the next two centuries: identify the most-frequent codes, guess the alphabet portion against expected high-frequency English letters, look for repeated <em>codeword</em> patterns that match expected proper nouns (“the King”, “Parliament”, “Oxford”), and bootstrap from there. He was unusually fast at it.</p></div>
+      <div class="panel-body"><p>The Royalist ciphers Wallis attacked were Argenti-pattern nomenclators of the standard 17th-century kind: a small alphabetic substitution table (often with one or two homophones for common letters) plus a longer codebook of person-and-place codes. Royalist operators were also fond of nulls and of inserting the names of their own family members as agreed cover-words.</p><p style="margin-top:1rem;">The demo above implements this dominant design: a 64-word codebook of English Civil War vocabulary (people, places, military terms) using 3-digit codes from <code>100</code>, plus a keyed 2-digit homophonic alphabet (codes 10–89) for words not in the codebook — wrapped in sentinel codes <code>90</code> and <code>91</code> so the decoder can tell which is which. Try encoding <code>KING CHARLES MARCH OXFORD</code> to see how the codebook handles the named entities directly.</p><p style="margin-top:1rem;">Wallis’s attack technique was the standard one of the next two centuries: identify the most-frequent codes, guess the alphabet portion against expected high-frequency English letters, look for repeated <em>codeword</em> patterns that match expected proper nouns (“the King”, “Parliament”, “Oxford”), and bootstrap from there. He was unusually fast at it.</p></div>
     </div>
 
     <div class="panel">
@@ -152,15 +152,13 @@
 <div class="hall-nav">
   <a href="../ciphers/argenti.html" class="hall-nav-link">
     <span class="hall-nav-dir">&larr; Previous</span>
-    <span class="hall-nav-name">Argenti Family Cipher</span>
+    <span class="hall-nav-name">Argenti Family Cipher Vatican papal nomenclators · 1500s–1600s</span>
   </a>
-  <a href="../ciphers/great-cipher.html" class="hall-nav-link next">
+  <a href="../ciphers/cardano-grille.html" class="hall-nav-link next">
     <span class="hall-nav-dir">Next &rarr;</span>
-    <span class="hall-nav-name">Great Cipher of Louis XIV</span>
+    <span class="hall-nav-name">Cardano Grille 1550 · steganography by template</span>
   </a>
-</div>
-
-</main>
+</div></main>
 
 <footer></footer>
 <script src="../js/ciphers/all-engines.min.js"></script>

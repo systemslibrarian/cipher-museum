@@ -133,10 +133,9 @@ Step 2: A diagonal transposition is applied
         BEFORE encryption — the text reads
         diagonally rather than left-to-right
 
-Z-408 symbol sample (from the solved cipher —
-see the interactive demo below):
+Z-408 first row (17 symbols — the row used by
+the interactive demo below):
 HER&gt;pl^VPk|1LTG2d
-Kp-IlO+Pq4k5RZN&lt;
 
 The diagonal transposition is why the cipher
 resisted 51 years of analysis — solvers were
@@ -175,8 +174,8 @@ looking for patterns in the wrong reading order</pre>
             <span class="callout-icon">✅</span>
             <div class="callout-body">
               <strong>Known Solution (Z-408, first 17 symbols):</strong>
-              <div style="font-family:var(--fm);font-size:1rem;letter-spacing:.18em;color:var(--green);margin-top:.4rem;">I LIKE KILLING PE</div>
-              <p style="margin-top:.5rem;font-size:.85rem;color:var(--tx2);">The full Z-408 begins: <em>"I LIKE KILLING PEOPLE BECAUSE IT IS SO MUCH FUN…"</em> — solved by Donald and Bettye Harden within a week of publication in 1969.</p>
+              <div style="font-family:var(--fm);font-size:1rem;letter-spacing:.18em;color:var(--green);margin-top:.4rem;">ILIKEKILLINGPEOPL</div>
+              <p style="margin-top:.5rem;font-size:.85rem;color:var(--tx2);">The Zodiac enciphered no word spaces, so the row runs straight on: the full Z-408 begins <em>"I LIKE KILLING PEOPLE BECAUSE IT IS SO MUCH FUN…"</em> — solved by Donald and Bettye Harden within a week of publication in 1969.</p>
             </div>
           </div>
         </div>
@@ -226,7 +225,7 @@ looking for patterns in the wrong reading order</pre>
       <div class="panel-body">
         <p style="font-size:.9rem;margin-bottom:1rem;">A short cipher message. Use what you just learned.</p>
         <div style="font-family:var(--fm);font-size:.95rem;background:var(--s3);border-radius:var(--r);padding:1.25rem;letter-spacing:.15em;color:var(--tx);word-break:break-all;line-height:1.8;margin-bottom:1rem;">XLI UYMGO FVSAR JSB</div>
-        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Hint: Not the Zodiac's cipher — this one is simpler. What shift makes the most common letter = E?</p>
+        <p style="font-family:var(--fm);font-size:.65rem;color:var(--tx3);margin-bottom:1rem;">Hint: Not the Zodiac's cipher — this one is simpler. Sixteen letters is too short for frequency counts, but there are only 25 shifts to try. Which one reads as English?</p>
         <button class="btn btn-secondary" style="width:100%;font-size:.72rem;" data-reveal-next>Reveal Answer</button>
         <div style="display:none;font-family:var(--fm);font-size:.8rem;color:var(--gold-lt);margin-top:.75rem;background:var(--s3);border-radius:var(--r);padding:1rem;line-height:1.8;">Shift = 4 · Plaintext: THE QUICK BROWN FOX</div>
       </div>
@@ -306,23 +305,21 @@ looking for patterns in the wrong reading order</pre>
 
 <div class="hall-nav">
   <a href="../ciphers/tap-code.html" class="hall-nav-link">
-    <span class="hall-nav-dir">← Previous</span>
+    <span class="hall-nav-dir">&larr; Previous</span>
     <span class="hall-nav-name">Tap Code</span>
   </a>
-  <a href="../index.html" class="hall-nav-link next">
-    <span class="hall-nav-dir">Next →</span>
-    <span class="hall-nav-name">Museum Entrance</span>
+  <a href="../ciphers/copiale.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Copiale Cipher</span>
   </a>
-</div>
-
-</main>
+</div></main>
 <footer></footer>
 
 <script>
 // Z-408 demo — first 17 symbols and their known solutions
 (function(){
   const SYMS = ['H','E','R','>','p','l','^','V','P','k','|','1','L','T','G','2','d'];
-  const ANSWER = 'I LIKE KILLING PE';
+  const ANSWER = 'ILIKEKILLINGPEOPL';
   const map = {}; // sym → assigned letter
   let selectedSym = null;
 

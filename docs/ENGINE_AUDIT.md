@@ -80,7 +80,7 @@ the start of the sweep and now pass the shared contract.
 `jn25`, `redTypeA`, `affine`, `trithemius`, `cardanoAutokey`,
 `wheatstone`, `morse`, `fialka`, `kl7`, `geheimschreiber`, `kryha`, `m94`,
 `chineseTelegraph`, `zimmermann`, `commercialCode`, `culperRing`,
-`arnoldAndre`, `argenti`, `wallisCiphers`, `joseonYeokhak`
+`arnoldAndre`, `argenti`, `wallisCiphers`, `wadsworth`
 
 These engines satisfied the current contract once they were covered by the new
 roundtrip, robustness, known-answer, and corpus replay suite.

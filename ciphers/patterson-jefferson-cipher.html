@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patterson's Cipher for Jefferson (1801, solved 2007) — The Cipher Museum</title>
-  <meta name="description" content="Robert Patterson's 1801 four-layer transposition cipher — sent to Thomas Jefferson, who couldn't break it. Stumped American statesmen for 206 years until Lawren Smithline cracked it in 2007 using hill-climbing search.">
+  <meta name="description" content="Robert Patterson's 1801 cipher for Thomas Jefferson — text written down the lines, cut into sections of at most nine, the lines shuffled and padded with arbitrary letters. Unread for 206 years until Lawren Smithline solved it in 2007 by dynamic programming over digraph frequencies.">
   <meta property="og:title" content="Patterson's Cipher for Jefferson — The Cipher Museum">
   <meta property="og:description" content="The cipher that stumped Thomas Jefferson for 206 years.">
   <meta property="og:type" content="website">
@@ -76,22 +76,11 @@
       font-family: var(--fm); font-size: .72rem; letter-spacing: .12em;
       text-transform: uppercase; color: var(--gold);
     }
-    .search-viz {
-      background: var(--s2); border: 1px solid var(--s4); border-radius: var(--r);
-      padding: 1rem; margin: 1rem 0;
-    }
-    .search-row {
       display: grid; grid-template-columns: 80px 1fr 80px;
       gap: .75rem; align-items: center;
       padding: .35rem 0; border-bottom: 1px solid var(--s4);
       font-family: var(--fm); font-size: .76rem;
     }
-    .search-row:last-child { border-bottom: none; }
-    .search-row .iter { color: var(--tx3); }
-    .search-row .candidate { color: var(--gold-lt); letter-spacing: .08em; }
-    .search-row .score { text-align: right; color: var(--gold); }
-    .search-row.winner .candidate { color: var(--green); }
-    .search-row.winner .score { color: var(--green); }
   </style>
 </head>
 <body>
@@ -131,19 +120,21 @@
     <span class="badge era-modern">1801</span>
     <span class="badge sec-broken">Solved 2007 — after 206 years</span>
   </div>
-  <span class="track-b-badge">⬡ Track B · Four-Layer Animation + Hill-Climb Search</span>
+  <span class="track-b-badge">⬡ Track B · Deep Dive</span>
   <h1 class="page-title">Patterson's Cipher for Jefferson</h1>
   <div class="trust-label-wrap"><a class="trust-label trust-label--broken" href="../museum-map.html#trust-labels" title="Cryptographically broken — historically important but unsafe to use today." aria-label="Trust label: Broken. Cryptographically broken — historically important but unsafe to use today."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg><span class="trust-label__text">Broken</span></a></div>
-  <p class="page-tagline">A four-layer transposition cipher that Thomas Jefferson called "the most perfect cipher he had ever seen" — and could not himself solve. It stumped the American founders for 206 years before falling to a 21st-century hill-climbing search.</p>
+  <p class="page-tagline">Patterson told Jefferson it would be "absolutely impossible … ever to desypher" without the key, and put a specimen in the letter to prove it. No record shows anyone reading that specimen for 206 years.</p>
   <div class="exhibit-facts">
-    <div class="fact"><span class="fact-label">Designer</span><span class="fact-value">Robert Patterson, vice provost, University of Pennsylvania</span></div>
+    <div class="fact"><span class="fact-label">Designer</span><span class="fact-value">Robert Patterson, professor of mathematics, University of Pennsylvania</span></div>
     <div class="fact"><span class="fact-label">Year</span><span class="fact-value">December 1801</span></div>
     <div class="fact"><span class="fact-label">Recipient</span><span class="fact-value">Thomas Jefferson (then US President)</span></div>
-    <div class="fact"><span class="fact-label">Mechanism</span><span class="fact-value">Columnar transposition + per-row junk + per-row right-shift + row permutation</span></div>
+    <div class="fact"><span class="fact-label">Mechanism</span><span class="fact-value">Write down the lines · sections of ≤9 lines · shuffle lines · prefix ≤9 arbitrary letters</span></div>
     <div class="fact"><span class="fact-label">Solved by</span><span class="fact-value">Lawren Smithline, Princeton CCR (2007)</span></div>
-    <div class="fact"><span class="fact-label">Plaintext</span><span class="fact-value">Opening of the Declaration of Independence</span></div>
+    <div class="fact"><span class="fact-label">Plaintext</span><span class="fact-value">"In Congress July Fourth", then the preamble to the Declaration</span></div>
   </div>
 </div>
+
+<div class="demo-section" data-cipher="patterson-jefferson-cipher"></div>
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
@@ -151,65 +142,52 @@
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
       <p>In December 1801, Robert Patterson — a respected American mathematician and vice provost of the University of Pennsylvania — sent President Thomas Jefferson a cipher he believed could never be broken. Jefferson, a sophisticated cryptographer in his own right (designer of the wheel cipher in <a href="jefferson-disk.html">Hall VII</a>), was so impressed that he forwarded the system to Robert Livingston, the US minister to France, with an endorsement calling it "the most perfect cipher he had ever seen."</p>
-      <p style="margin-top:1rem;">Patterson included a specimen ciphertext for Jefferson to decrypt. The key followed in a separate letter. No solution in Jefferson's hand survives; the cipher was archived in his papers, unresolved.</p>
-      <p style="margin-top:1rem;">It stayed unresolved for <strong>206 years</strong>. In 2007, Lawren Smithline at Princeton's Center for Communications Research read about the cipher in an NSA history journal, recognized it as a hill-climbing problem, and broke it. The plaintext turned out to be the opening lines of the Declaration of Independence — Patterson had used a patriotic source text for his demonstration. This exhibit walks through Patterson's four-layer construction, Jefferson's failed attempts, and the modern search algorithm that finally cracked it.</p>
+      <p style="margin-top:1rem;">Patterson closed the letter with a specimen in his own cipher, and a boast: "It will be absolutely impossible, even for one perfectly acquainted with the general system, ever to desypher the writing of another without his key." He put the number of possible keys at more than "ninety millions of millions".</p>
+      <p style="margin-top:1rem;">There is no evidence Jefferson ever read it. Smithline, who solved it, puts it carefully: Jefferson "probably never cracked the enciphered portion of the letter", and no record indicates that anyone else had either. In June 2007 Lawren Smithline, a mathematician at the Center for Communications Research in Princeton, heard about the cipher letters from his neighbour Amy Speckart, who was working at <em>The Papers of Thomas Jefferson</em>; she pointed him at the Library of Congress scan. He solved it with dynamic programming over digraph frequencies. The message opens "In Congress July Fourth" and continues into the preamble to the Declaration of Independence — the document Jefferson himself had drafted.</p>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body">
-        <p>Patterson was, on paper, the right person to design an American state cipher. He was vice provost of the University of Pennsylvania, a published mathematician, friend of Benjamin Franklin, and was appointed director of the United States Mint by Jefferson in 1805. His December 19, 1801 letter to Jefferson is preserved in the Library of Congress's Jefferson Papers.</p>
+        <p>Robert Patterson was professor of mathematics at the University of Pennsylvania. He and Jefferson corresponded often, and on a range of subjects including cryptography: at the time Jefferson was president of the American Philosophical Society and Patterson its vice president. Patterson's letter of 19 December 1801 is preserved in the Library of Congress's Jefferson Papers.</p>
         <p style="margin-top:1rem;">Jefferson received the proposal at exactly the right moment to be receptive: he was newly inaugurated, building out the State Department's diplomatic correspondence apparatus, and acutely aware of the European cabinets noirs (see <a href="cabinet-noir.html">Cabinet Noir</a>) reading every American dispatch they could intercept. A genuinely unbreakable cipher would have been a strategic asset.</p>
         <div class="quote-box">
-          "I have thoroughly considered your cipher, and find it so much more convenient in practice than my own, that I am proposing to lay it aside, and to substitute yours."
-          <cite>— Thomas Jefferson to Robert Patterson, March 22, 1802</cite>
+          "I have thoroughly considered your cypher, and find it so much more convenient in practice than my wheel cypher, that I am proposing it to the Secretary of state for use in his office."
+          <cite>— Thomas Jefferson to Robert Patterson, 22 March 1802 (<a href="https://founders.archives.gov/documents/Jefferson/01-37-02-0083">Founders Online</a>)</cite>
         </div>
-        <p>Three weeks later, after struggling with the specimen, Jefferson wrote again — this time confessing failure and asking Patterson for hints. We have those letters too. Patterson sent more guidance. Jefferson still couldn't recover the plaintext. Eventually the correspondence trailed off; the cipher was filed away; the Patterson system was never adopted by the State Department, and Jefferson kept using his own less-elegant systems.</p>
+        <p>Jefferson was taken enough with the method to pass it on: he forwarded it to Robert Livingston, the American minister to France. Livingston went on using a nomenclator anyway. The system did not displace existing practice, and the specimen stayed unread. Beyond that the record is thin, and this page stops where the record does: there is no evidence that Jefferson worked the specimen and failed, and none that anyone else at his side attempted it.</p>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How Patterson's Four-Layer Cipher Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How Patterson's Cipher Works</span></div>
       <div class="panel-body">
-        <p>Patterson's design stacks four independent transformations on top of an N-row by M-column grid. The key is a list of small numbers — one set per row.</p>
+        <p>Patterson set out four requirements for a "perfect cypher": it should suit any language, be easy to memorise, be simple to perform, and be "absolutely inscrutable to all unacquainted with the particular key". His construction has three steps, and only three.</p>
 
         <div class="layer-step">
-          <h3>Layer 1 — Write the plaintext into a grid (column-by-column)</h3>
-          <p>Take the plaintext and write it into a grid of N rows. The grid is read column-by-column. Patterson typically used 40 rows.</p>
+          <h3>Step 1 — Write the message down the lines</h3>
+          <p>In Patterson's words, "the first letter of the message is placed at the beginning of the first line, the second letter at the beginning of the second line, and so on, writing column after column, from left to right, till the whole is written." The text runs <em>downward</em> through the lines, column by column — Smithline likens the layout to writing in columns.</p>
           <div class="layer-grid">
-            <div class="grid-cell">W H E N</div>
-            <div class="grid-cell">I N T H</div>
-            <div class="grid-cell">E C O U</div>
-            <div class="grid-cell">R S E O</div>
-            <div class="grid-cell">F H U M</div>
-            <div class="grid-cell">A N E V</div>
+            <div class="grid-cell">line 1 &nbsp; I N R S U T</div>
+            <div class="grid-cell">line 2 &nbsp; N G E S L H</div>
+            <div class="grid-cell">line 3 &nbsp; C R S J Y …</div>
           </div>
         </div>
 
         <div class="layer-step">
-          <h3>Layer 2 — Insert random junk letters at the start of each row</h3>
-          <p>For each row, insert a secret number of meaningless letters at the start. The count varies row-by-row according to the key. The decryptor must know exactly how many junk letters to skip in each row.</p>
-          <div class="layer-grid">
-            <div class="grid-cell"><span style="color:var(--tx3)">QXJ</span> W H E N</div>
-            <div class="grid-cell"><span style="color:var(--tx3)">RZP</span> I N T H</div>
-            <div class="grid-cell"><span style="color:var(--tx3)">M</span> E C O U</div>
-            <div class="grid-cell"><span style="color:var(--tx3)">VWQK</span> R S E O</div>
-            <div class="grid-cell"><span style="color:var(--tx3)">XB</span> F H U M</div>
-            <div class="grid-cell"><span style="color:var(--tx3)">JNZ</span> A N E V</div>
-          </div>
+          <h3>Step 2 — Cut into sections of at most nine lines</h3>
+          <p>"This writing is then to be distributed into sections of not more than <strong>nine</strong> lines in each section, and these are to be numbered 1. 2. 3 &amp;c." Nine is Patterson's own ceiling, and it is the single most important number on this page — a section is small, not large.</p>
         </div>
 
         <div class="layer-step">
-          <h3>Layer 3 — Right-shift each row by a different amount</h3>
-          <p>Cyclically shift each row right by a row-specific amount (also from the key). What falls off the right wraps back to the left. Different shifts on different rows scramble the column structure that any straightforward column-reader attack would rely on.</p>
+          <h3>Step 3 — Transcribe the lines in a secret order, each behind arbitrary letters</h3>
+          <p>Each section is written out "taking the lines of each section in any order at pleasure, inserting at the beginning of each line respectively any number of arbitrary or insignificant letters, not exceeding nine; &amp; also filling up the vacant spaces at the end of the lines with like letters."</p>
+          <p style="margin-top:.7rem;">The same shuffle and the same counts are reused in <em>every</em> section — that repetition is what eventually gives the cipher away.</p>
         </div>
 
-        <div class="layer-step">
-          <h3>Layer 4 — Permute the row order</h3>
-          <p>Finally, shuffle the rows themselves into a new secret order. The rows are no longer in their natural sequence — row 17 might now be the 1st row of the ciphertext, row 4 might be the 2nd, etc. The ciphertext is then read off column-by-column from this scrambled grid.</p>
-        </div>
+        <p style="margin-top:1rem;"><strong>The key</strong>, again in Patterson's words, "will consist in knowing — the number of lines in each section, the order in which these are transcribed, and the number of insignificant letters at the beginning of each line." Written down it is a column of two-digit numbers: the first digit of each pair names a line, the sequence of those first digits gives the shuffle, and the second digit says how many arbitrary letters that line carries.</p>
 
-        <p style="margin-top:1rem;">The key is the full set: per-row junk-counts, per-row right-shifts, and the row permutation. With a 40-row grid, the search space is roughly: row-order permutations (40! ≈ 10⁴⁷) × per-row junk-counts (say up to 8 per row, so 8⁴⁰ ≈ 10³⁶) × per-row shifts. This is hopelessly far beyond pencil-and-paper attack. It is also far beyond brute-force computer attack — Smithline's break required hill-climbing, not exhaustion.</p>
+        <p style="margin-top:1rem;">Patterson reckoned the number of available keys at more than "ninety millions of millions" — about 9&nbsp;&times;&nbsp;10<sup>13</sup>. That is a real number, and for 1801 an intimidating one, but it is not the astronomical figure a large grid would give you: the nine-line ceiling is what keeps it that size.</p>
       </div>
     </div>
 
@@ -222,32 +200,20 @@
             <div class="dt-event">Patterson sends Jefferson the cipher proposal with a specimen ciphertext. Key follows in a separate letter for security.</div>
           </div>
           <div class="dt-step">
-            <div class="dt-year">March 22, 1802</div>
-            <div class="dt-event">Jefferson endorses the cipher to Patterson with enthusiasm — "the most perfect cipher he had ever seen." Begins attempting the specimen.</div>
+            <div class="dt-year">22 March 1802</div>
+            <div class="dt-event">Jefferson replies: he has "thoroughly considered your cypher", finds it "so much more convenient in practice than my wheel cypher", and is proposing it to the Secretary of State for use in his office. He also forwards the method to Robert Livingston, minister to France.</div>
           </div>
           <div class="dt-step">
-            <div class="dt-year">April–June 1802</div>
-            <div class="dt-event">Jefferson cannot solve the specimen even with the key. Writes to Patterson asking for clarification of the procedure. Madison also tries — also fails.</div>
+            <div class="dt-year">April 1802</div>
+            <div class="dt-event">The correspondence on the cipher continues — a Jefferson document on Patterson's cipher dated 12 April and a Patterson reply of 24 April both survive. Nothing in the record shows the specimen being solved.</div>
           </div>
           <div class="dt-step">
-            <div class="dt-year">1803–1807</div>
-            <div class="dt-event">Patterson sends additional guidance. Jefferson still cannot reproduce the plaintext. Correspondence on the cipher tapers off. State Department continues using older nomenclator-based systems.</div>
+            <div class="dt-year">Afterwards</div>
+            <div class="dt-event">Livingston went on using a nomenclator regardless. In 1979 Ralph E. Weber described Patterson's method in <em>United States Diplomatic Codes and Ciphers 1775–1938</em> but dealt only with the worked example, skipping the challenge cipher entirely. No record indicates anyone decrypted it.</div>
           </div>
           <div class="dt-step">
-            <div class="dt-year">1809</div>
-            <div class="dt-event">Jefferson leaves the presidency. The Patterson papers are filed in Jefferson's personal archive at Monticello.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-year">1815</div>
-            <div class="dt-event">Jefferson sells his library to Congress. The Patterson cipher specimen and correspondence move to the Library of Congress, where they sit unread for the next 191 years.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-year">2006</div>
-            <div class="dt-event">Thomas Bowman publishes <em>Jefferson's "Perfect Cipher"</em> in the NSA Center for Cryptologic History's <em>Cryptologic Almanac</em>, describing the system and noting it had never been solved.</div>
-          </div>
-          <div class="dt-step">
-            <div class="dt-year">2007</div>
-            <div class="dt-event"><strong>Lawren Smithline</strong>, mathematician at Princeton's Center for Communications Research (IDA/CCR), reads the Bowman article. Recognizes it as a hill-climbing search problem. Implements a fitness function based on English letter-frequency statistics, runs hill-climbing over candidate row-permutations and junk-counts, and recovers the plaintext: the opening lines of the Declaration of Independence.</div>
+            <div class="dt-year">June 2007</div>
+            <div class="dt-event"><strong>Lawren Smithline</strong>, a mathematician at the Center for Communications Research in Princeton, hears about the cipher letters from his neighbour <strong>Amy Speckart</strong>, then working at <em>The Papers of Thomas Jefferson</em>: "We have a letter in cipher, and we can't read it." She sends him the Library of Congress scan. He solves it by scoring candidate alignments on digraph frequencies and searching with dynamic programming, recovering the key <code>13, 34, 57, 65, 22, 78, 49</code>.</div>
           </div>
           <div class="dt-step">
             <div class="dt-year">July–August 2009</div>
@@ -258,44 +224,20 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">How the 2007 Hill-Climbing Search Worked</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">How the 2007 Solution Worked</span></div>
       <div class="panel-body">
-        <p>Smithline's attack treats the cipher's key as a point in a high-dimensional search space and uses a <strong>fitness score</strong> — how English-like is the candidate plaintext? — to climb toward the correct key.</p>
-        <p style="margin-top:.75rem;">The fitness function used N-gram frequencies of English letters and bigrams (pairs of letters). Real English has very specific bigram statistics: <code>TH</code>, <code>HE</code>, <code>IN</code>, <code>ER</code> are extremely common; <code>QZ</code>, <code>VX</code>, <code>JX</code> are nearly nonexistent. A candidate plaintext that scores high on English-ness is much more likely to be on the right track than one that scores low.</p>
-        <p style="margin-top:.75rem;">The search loop:</p>
-        <ol style="margin:.5rem 0 1rem 1.5rem;line-height:1.7;">
-          <li>Pick a starting point in the key space (random row-permutation, random junk-counts).</li>
-          <li>Decrypt with that key — get a candidate plaintext.</li>
-          <li>Score it for English-ness using the N-gram fitness function.</li>
-          <li>Make a small random change (swap two rows; tweak one junk-count by ±1).</li>
-          <li>Re-decrypt, re-score. If the score went up, accept the change. If it went down, sometimes accept it anyway (simulated-annealing-style randomness to escape local maxima).</li>
-          <li>Repeat for thousands of iterations.</li>
-        </ol>
-        <p>Below is a stylized visualization of what the search trajectory looked like. Real Smithline runs were much longer — these rows are illustrative.</p>
-        <div class="search-viz">
-          <div class="search-row"><span class="iter">iter 1</span><span class="candidate">QXWZ JNTPVH MZ ECOU VWQKRS EOXBFHU MJNZAEV…</span><span class="score">0.018</span></div>
-          <div class="search-row"><span class="iter">iter 50</span><span class="candidate">QX WHEN RZIN THMZ EC OUVWRSEO XB FHUM JNAEV…</span><span class="score">0.094</span></div>
-          <div class="search-row"><span class="iter">iter 200</span><span class="candidate">QX WHEN RZ INTH M ECOU VWQK RSEO XB FHUM JN AEV…</span><span class="score">0.187</span></div>
-          <div class="search-row"><span class="iter">iter 800</span><span class="candidate">WHEN INTH ECOU RSEO FHUM ANEV ENTS IT BE COMES…</span><span class="score">0.412</span></div>
-          <div class="search-row winner"><span class="iter">iter 2400</span><span class="candidate">WHEN IN THE COURSE OF HUMAN EVENTS IT BECOMES NECESSARY…</span><span class="score">0.847</span></div>
-        </div>
-        <p style="margin-top:1rem;">Once the fitness score crossed a threshold and started spitting out recognizable English fragments, Smithline could see the plaintext was the Declaration of Independence and finish the decryption manually. The whole search took minutes of compute time.</p>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Jefferson's Failed-Attempt Letters</span></div>
-      <div class="panel-body">
-        <p>Jefferson's correspondence with Patterson and Madison about the cipher survives. The letters are remarkable for their honesty: a sitting US President, an accomplished cryptographer, openly admitting he could not break a cipher mailed to him by a friend.</p>
-        <div class="quote-box">
-          "Sir, I have not been able to recover your message from your specimen, although I believe I have apprehended your scheme correctly. I think the difficulty must lie with my own arithmetic in the row-shifting, and I beg you to indulge me with one further example…"
-          <cite>— Thomas Jefferson to Robert Patterson (paraphrased from surviving correspondence, c. April–May 1802)</cite>
-        </div>
-        <div class="quote-box">
-          "Mr Madison has made trial of your cipher and reports the same difficulty I have encountered. We have not yet recovered the plaintext of your specimen, although we are persuaded the system is sound. I shall continue to study it…"
-          <cite>— Thomas Jefferson to Robert Patterson (paraphrased)</cite>
-        </div>
-        <p>These letters are now part of the Library of Congress's Jefferson Papers (Series 1, General Correspondence) and have been digitised. They are the historical record of the moment the system was actually accepted as unbreakable — by the only people who needed to break it.</p>
+        <p>Smithline's attack does not guess whole keys, and it is not a hill climb. It scores how plausibly two deciphered lines sit <em>next to</em> each other, and builds the key up one line at a time.</p>
+        <p style="margin-top:.75rem;">The scoring is on <strong>digraphs</strong> — adjacent letter pairs. Reading down a column of the reconstructed grid produces pairs of letters; some pairs are common in English, some are unlikely, some cannot occur. Smithline calibrated on a corpus close to the target: the letter frequencies of Jefferson's own State of the Union addresses. Each candidate alignment scores:</p>
+        <table class="cipher-table" style="margin:.7rem 0;">
+          <thead><tr><th>Digraph class</th><th>Example</th><th>Score</th></tr></thead>
+          <tbody>
+            <tr><td>Favourable</td><td>common English pairs</td><td>+1</td></tr>
+            <tr><td>Unfavourable</td><td><code>od</code>, <code>et</code> — rarer than chance</td><td>&minus;1</td></tr>
+            <tr><td>Nonexistent</td><td><code>wd</code>, <code>vz</code> — absent from the corpus</td><td>&minus;5</td></tr>
+          </tbody>
+        </table>
+        <p>Because the number of arbitrary letters differs from line to line, lines do not start flush; letters that overhang with no partner score 0. Smithline guessed the section size and a starting pair of rows — anchoring on a <code>q</code> in cipher row 22, which in English is followed by <code>u</code> — and let <strong>dynamic programming</strong> compute the best number of extra letters for each candidate.</p>
+        <p style="margin-top:1rem;">Adding one row at a time, the key emerged: <code>13, 34, 57, 65, 22, 78, 49</code> — seven lines to a section. Smithline notes the kinship with biological sequence alignment: lining up cipher rows is the same shape of problem as the Smith&ndash;Waterman algorithm of 1981. Transcription errors in Patterson's handwriting did not stop it; the method found the right key anyway, and the mistakes could be corrected once the text could be read.</p>
       </div>
     </div>
 
@@ -308,7 +250,7 @@
             <tr><td>Cipher strength is relative to attacker capability</td><td>Quantum cryptography deprecation: today's "strong" ciphers may fall to algorithms that don't yet exist</td></tr>
             <tr><td>Asymmetric effort: encrypt in hours, decrypt in centuries</td><td>The standard threat model — attacker may have far more compute than designer expected</td></tr>
             <tr><td>"Perfect cipher" claims age badly</td><td>Why every modern algorithm is published for adversarial review, not declared perfect</td></tr>
-            <tr><td>Hill-climbing + good fitness function beats huge search spaces</td><td>Same technique: <a href="../cryptanalysis.html#hill-climbing">hill-climbing in modern cryptanalysis</a>; broke <a href="double-transposition.html">Double Transposition</a> in 2013, the M-209 in the 2010s, the <a href="mary-stuart-castelnau-letters.html">Mary Stuart letters</a> in 2022</td></tr>
+            <tr><td>A good scoring function over local structure beats searching whole keys</td><td>Same technique: <a href="../cryptanalysis.html#hill-climbing">hill-climbing in modern cryptanalysis</a>; broke <a href="double-transposition.html">Double Transposition</a> in 2013, the M-209 in the 2010s, the <a href="mary-stuart-castelnau-letters.html">Mary Stuart letters</a> in 2022</td></tr>
             <tr><td>The patriotic-plaintext signal helped Smithline confirm the break</td><td>Modern: known-plaintext attacks; chosen-plaintext attacks; the cryptanalyst always wants any anchor in the plaintext space</td></tr>
           </tbody>
         </table>
@@ -327,26 +269,38 @@
             <tr><td>Designer</td><td>Robert Patterson (1743–1824)</td></tr>
             <tr><td>Year</td><td>December 1801</td></tr>
             <tr><td>Recipient</td><td>Thomas Jefferson</td></tr>
-            <tr><td>Layers</td><td>Grid + junk + row-shift + row-permute (4)</td></tr>
-            <tr><td>Years unsolved</td><td>206 (1801 → 2007)</td></tr>
-            <tr><td>Solver</td><td>Lawren Smithline, Princeton CCR</td></tr>
-            <tr><td>Method</td><td>Hill-climbing + N-gram fitness</td></tr>
-            <tr><td>Plaintext</td><td>Declaration of Independence (opening)</td></tr>
-            <tr><td>Solution paper</td><td><em>American Scientist</em> 97(4), 2009</td></tr>
+            <tr><td>Steps</td><td>Write down the lines → sections of ≤9 → shuffle lines, prefix ≤9 arbitrary letters (3)</td></tr>
+            <tr><td>Section size</td><td>Not more than nine lines (Patterson's own limit)</td></tr>
+            <tr><td>Keyspace</td><td>Patterson's estimate: "ninety millions of millions" (~9×10¹³)</td></tr>
+            <tr><td>Years unread</td><td>206 (1801 → 2007)</td></tr>
+            <tr><td>Solver</td><td>Lawren Smithline, Center for Communications Research, Princeton</td></tr>
+            <tr><td>Method</td><td>Digraph scoring (+1 / −1 / −5) + dynamic programming</td></tr>
+            <tr><td>Recovered key</td><td>13, 34, 57, 65, 22, 78, 49</td></tr>
+            <tr><td>Plaintext</td><td>"In Congress July Fourth" + preamble to the Declaration</td></tr>
+            <tr><td>Solution paper</td><td><em>American Scientist</em> 97(2), 2009, 142–149</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <div class="panel" style="margin-top:1rem;">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Further Reading</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Sources</span></div>
       <div class="panel-body">
         <ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem;margin:0;padding:0;">
-          <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://www.americanscientist.org/article/using-computers-to-decrypt-jeffersons-cipher" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Smithline, Lawren. <em>Using Computers to Decrypt Jefferson's Cipher</em>. American Scientist 97(4), 2009. ↗</a></li>
+          <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://www.americanscientist.org/article/a-cipher-to-thomas-jefferson" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Smithline, Lawren M. <em>A Cipher to Thomas Jefferson</em>. American Scientist 97(2), 2009, 142–149. ↗</a></li>
+          <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://founders.archives.gov/documents/Jefferson/01-37-02-0083" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Thomas Jefferson to Robert Patterson, 22 March 1802 — Founders Online. ↗</a></li>
+          <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://www.loc.gov/resource/mtj1.026_0086_0094/?st=gallery" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Thomas Jefferson, 12 April 1802, Patterson's Cipher — Library of Congress. ↗</a></li>
           <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://cryptiana.web.fc2.com/code/jeffers4.htm" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Tomokiyo, Satoshi. <em>Patterson's Cipher for Jefferson — Challenge Solved After 200 Years</em>. Cryptiana. ↗</a></li>
           <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://www.loc.gov/collections/thomas-jefferson-papers/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Library of Congress — Thomas Jefferson Papers (Patterson correspondence). ↗</a></li>
-          <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://en.wikipedia.org/wiki/Robert_Patterson_(scientist)" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Wikipedia — Robert Patterson (mathematician). ↗</a></li>
+          <li style="font-size:.92rem;line-height:1.65;color:var(--tx2);"><a href="https://en.wikipedia.org/wiki/Robert_Patterson_(educator)" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">Wikipedia — Robert Patterson (educator). ↗</a></li>
         </ul>
+        <p style="font-size:.82rem;line-height:1.7;color:var(--tx3);margin-top:.9rem;">
+          Every quotation of Patterson on this page is taken from his letter as reproduced
+          in Smithline (2009); the Jefferson quotation is from Founders Online. Claims that
+          previously appeared here and are <em>not</em> in these sources — that Jefferson
+          attempted the specimen and failed, that Madison tried it, and a pair of quoted
+          letters to that effect — have been removed as unsourced.
+        </p>
       </div>
     </div>
   </div>
@@ -381,17 +335,12 @@
 <div class="hall-nav">
   <a href="../ciphers/mary-stuart-castelnau-letters.html" class="hall-nav-link">
     <span class="hall-nav-dir">&larr; Previous</span>
-    <span class="hall-nav-name">Mary Stuart Castelnau Letters</span>
+    <span class="hall-nav-name">Mary Queen of Scots — The Castelnau Letters</span>
   </a>
-  <a href="../ciphers/great-cipher.html" class="hall-nav-link next">
-    <span class="hall-nav-dir">Next &rarr;</span>
-    <span class="hall-nav-name">Great Cipher of Louis XIV</span>
-  </a>
-</div>
-
-</main>
+</div></main>
 
 <footer></footer>
+<script src="../js/ciphers/all-engines.min.js"></script>
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>

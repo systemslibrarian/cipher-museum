@@ -170,6 +170,7 @@ const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cipher Corpus Benchmark Baselines</title>
   <link rel="stylesheet" href="/css/museum.css">
   <style>
@@ -187,11 +188,12 @@ const html = `<!DOCTYPE html>
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#ffd700;color:#000;padding:0.5em 1em;z-index:9999">Skip to main content</a>
 <header>
   <nav>
-    <a href="/">🏛️ Cipher Museum</a>
-    <a href="/cipher-corpus.html">Cipher Corpus</a>
-    <a href="/reports/benchmark-baselines.html" aria-current="page">Benchmark Report</a>
+    <a href="../../index.html">🏛️ Cipher Museum</a>
+    <a href="../../cipher-corpus.html">Cipher Corpus</a>
+    <a href="benchmark-baselines.html" aria-current="page">Benchmark Report</a>
   </nav>
 </header>
 <main>
@@ -226,8 +228,8 @@ const html = `<!DOCTYPE html>
   <table>
     <thead><tr><th>Benchmark</th><th>Records</th><th>Algorithms</th><th>Historical</th><th>Blind Splits</th><th>Multilingual</th></tr></thead>
     <tbody>
-      <tr><td><a href="https://arxiv.org/pdf/2504.19093" target="_blank">CipherBank (Li et al., 2025)</a></td><td>2,358</td><td>9</td><td>No</td><td>No</td><td>No</td></tr>
-      <tr><td><strong><a href="/cipher-corpus.html">Cipher Corpus v0.2</a></strong></td><td><strong>${report.summary.total_records.toLocaleString()}</strong></td><td><strong>${report.summary.cipher_types}</strong></td><td><strong>Yes (${report.summary.historical_records})</strong></td><td><strong>Yes (${report.summary.blind_split})</strong></td><td><strong>Yes (${report.summary.languages.length} langs)</strong></td></tr>
+      <tr><td><a href="https://arxiv.org/pdf/2504.19093" target="_blank" rel="noopener noreferrer">CipherBank (Li et al., 2025)</a></td><td>2,358</td><td>9</td><td>No</td><td>No</td><td>No</td></tr>
+      <tr><td><strong><a href="../../cipher-corpus.html">Cipher Corpus v0.2</a></strong></td><td><strong>${report.summary.total_records.toLocaleString()}</strong></td><td><strong>${report.summary.cipher_types}</strong></td><td><strong>Yes (${report.summary.historical_records})</strong></td><td><strong>Yes (${report.summary.blind_split})</strong></td><td><strong>Yes (${report.summary.languages.length} langs)</strong></td></tr>
     </tbody>
   </table>
 

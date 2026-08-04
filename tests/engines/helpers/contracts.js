@@ -347,9 +347,21 @@ const contracts = {
     exampleKeys: keywordKeys,
     numRuns: 100
   },
-  joseonYeokhak: {
+  wadsworth: {
     keyArbitrary: keywordArbitrary(),
     exampleKeys: keywordKeys
+  },
+  patterson: {
+    // Patterson keys are two-digit pairs: line number (a permutation of
+    // 1..K, K<=9) then the count of arbitrary letters prefixed to it.
+    keyArbitrary: fc.integer({ min: 1, max: 9 }).chain(K =>
+      fc.tuple(
+        fc.shuffledSubarray(Array.from({ length: K }, (_, i) => i + 1), { minLength: K, maxLength: K }),
+        fc.array(fc.integer({ min: 0, max: 9 }), { minLength: K, maxLength: K })
+      ).map(([order, adds]) => order.map((n, i) => `${n}${adds[i]}`).join(','))
+    ),
+    exampleKeys: ['13,34,57,65,22,78,49', '10', '12,21', '31,12,23',
+                  '91,82,73,64,55,46,37,28,19']
   },
   geezMonastic: {
     keyArbitrary: keywordArbitrary(),

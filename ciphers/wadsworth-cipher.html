@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wadsworth Cipher — The Cipher Museum</title>
+  <meta name="description" content="Wadsworth's cipher device (1817) — Colonel Decius Wadsworth's two geared disks, 33 outer positions against 26 inner letters, the first working progressive cipher machine. Broken by a ciphertext-only hill-climbing attack in 2020.">
+  <meta property="og:title" content="Wadsworth Cipher — The Cipher Museum">
+  <meta property="og:description" content="Wadsworth's cipher device (1817) — Colonel Decius Wadsworth's two geared disks, 33 outer positions against 26 inner letters, the first working progressive cipher machine. Broken by a ciphertext-only hill-climbing attack in 2020.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/ciphers/wadsworth-cipher.html">
+  <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Cipher Museum — an interactive history of encryption">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wadsworth Cipher — The Cipher Museum">
+  <meta name="twitter:description" content="Wadsworth's cipher device (1817) — Colonel Decius Wadsworth's two geared disks, 33 outer positions against 26 inner letters, the first working progressive cipher machine. Broken by a ciphertext-only hill-climbing attack in 2020.">
+  <meta name="twitter:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/ciphers/wadsworth-cipher.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/museum.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="../index.html">Entrance</a><span>&rsaquo;</span>
+    <a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span>&rsaquo;</span>
+    Wadsworth Cipher
+  </div>
+  <div class="page-meta">
+    <span class="page-num">Exhibit 69 of 140</span>
+    <span class="badge era-19c">1817 · USA</span>
+    <span class="badge sec-broken">Broken</span>
+  </div>
+  <h1 class="page-title">Wadsworth Cipher</h1>
+  <div class="trust-label-wrap"><a class="trust-label trust-label--broken" href="../museum-map.html#trust-labels" title="Cryptographically broken — historically important but unsafe to use today." aria-label="Trust label: Broken. Cryptographically broken — historically important but unsafe to use today."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg><span class="trust-label__text">Broken</span></a></div>
+  <p class="page-tagline">Thirty-three teeth against twenty-six. The mismatch was the whole idea — and it made this the better machine that history forgot.</p>
+  <div class="exhibit-facts">
+    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Colonel Decius Wadsworth, U.S. Army Ordnance Corps</span></div>
+    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1817</span></div>
+    <div class="fact"><span class="fact-label">Mechanism</span><span class="fact-value">Two concentric geared disks — 33 outer, 26 inner</span></div>
+    <div class="fact"><span class="fact-label">Gear ratio</span><span class="fact-value">26:33 — deliberately unequal</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Ciphertext-only stochastic hill climbing (2020)</span></div>
+    <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Coprime periods buy length; they do not buy security</span></div>
+  </div>
+</div>
+
+<div class="demo-section" data-cipher="wadsworth"></div>
+
+<div class="demo-section">
+  <div class="demo-panel">
+    <div class="demo-head">
+      <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span>
+      <span class="demo-title">Turn the Disks</span>
+    </div>
+    <div class="demo-body">
+      <p style="font-size:1rem;color:var(--tx2);margin:0 0 1rem;">
+        Step through a message one letter at a time. Each step turns the inner disk until
+        the next plaintext letter reaches the index mark at the top; the outer disk is geared
+        to it, so it turns by the same number of teeth. Whatever outer symbol lands under the
+        index <em>is</em> the ciphertext — the count of turns, read off a 33-position scale.
+      </p>
+
+      <div class="input-group">
+        <label class="input-label" for="wd-msg">Message</label>
+        <input class="museum-input" id="wd-msg" type="text" value="ATTACK" maxlength="40"
+               autocomplete="off" spellcheck="false">
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="wd-key">Inner-disk keyword</label>
+        <input class="museum-input" id="wd-key" type="text" value="WADSWORTH" maxlength="26"
+               autocomplete="off" spellcheck="false">
+      </div>
+
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0;">
+        <button class="btn" id="wd-step" type="button">Turn to next letter</button>
+        <button class="btn btn-ghost" id="wd-all" type="button">Encipher all</button>
+        <button class="btn btn-ghost" id="wd-reset" type="button">Reset disks</button>
+      </div>
+
+      <svg id="wd-stage" viewBox="0 0 360 380" role="img"
+           aria-label="Two concentric cipher disks. The outer ring carries thirty-three positions, the twenty-six letters followed by the digits 2 to 8. The inner ring carries twenty-six letters in keyword order. An index mark at the top reads one position from each ring."
+           style="max-width:360px;width:100%;height:auto;display:block;margin:0 auto;background:#12121c;border:1px solid var(--s4);border-radius:var(--r);">
+        <!-- index mark -->
+        <path d="M180 14 L172 34 L188 34 Z" fill="#D4B765"/>
+        <text x="180" y="50" fill="#8b7355" text-anchor="middle"
+              font-family="ui-monospace,monospace" font-size="10">index</text>
+        <!-- rings -->
+        <circle cx="180" cy="196" r="152" fill="none" stroke="#2e2e3a" stroke-width="1"/>
+        <circle cx="180" cy="196" r="126" fill="none" stroke="#3a3a48" stroke-width="1"/>
+        <circle cx="180" cy="196" r="104" fill="none" stroke="#3a3a48" stroke-width="1"/>
+        <circle cx="180" cy="196" r="78" fill="none" stroke="#2e2e3a" stroke-width="1"/>
+        <!-- gear teeth hint between the rings -->
+        <circle cx="180" cy="196" r="115" fill="none" stroke="#2e2e3a"
+                stroke-width="6" stroke-dasharray="2 9" opacity=".8"/>
+        <!-- hub -->
+        <circle cx="180" cy="196" r="22" fill="#1c1c22" stroke="#8b7355" stroke-width="1.5"/>
+        <text x="180" y="200" fill="#8b7355" text-anchor="middle"
+              font-family="ui-monospace,monospace" font-size="9">26:33</text>
+        <g id="wd-outer"></g>
+        <g id="wd-inner"></g>
+        <text x="180" y="372" fill="#8b7355" text-anchor="middle"
+              font-family="ui-monospace,monospace" font-size="10">outer 33 · inner 26</text>
+      </svg>
+
+      <div class="readout" id="wd-read" aria-live="polite" role="status"
+           style="margin-top:.9rem;font-family:var(--fm);font-size:.82rem;color:var(--tx2);line-height:1.7;">
+        Disks at rest. Inner disk shows W at the index; outer disk shows A.
+      </div>
+
+      <div class="readout" id="wd-tape"
+           style="margin-top:.5rem;font-family:var(--fm);font-size:1.05rem;letter-spacing:.18em;color:var(--gold);min-height:1.6em;">
+      </div>
+
+      <p style="font-size:.82rem;color:var(--tx3);margin-top:.9rem;line-height:1.7;">
+        <strong>Honest limits.</strong> The surviving device is a physical object; this is a
+        model of its arithmetic, not a replica of its handling. Two choices here are the
+        museum's own and are not documented settings: the inner disk is mixed by a keyword,
+        and both disks start at their first position. The sources describe the disks, the
+        26:33 gearing and the turns-as-ciphertext rule — not a key schedule or a starting
+        convention.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="exhibit-layout">
+  <div class="exhibit-main">
+
+    <div class="cipher-significance">
+      <h2>Why This Matters</h2>
+      <p>Charles Wheatstone's Cryptograph is the famous one — displayed, reproduced, written about. Wadsworth's device did the same job half a century earlier and did one thing distinctly better. Wheatstone geared 27 outer positions against 26 inner; Wadsworth geared 33 against 26. Both mismatches produce a cipher whose alphabet keeps advancing, but 33 and 26 share no common factor and sit far enough apart that a given plaintext letter must exhaust all thirty-three of its possible substitutions before any of them can recur. That is a deliberate piece of design, and it is the more thoughtful of the two.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-body">
+        <p>Decius Wadsworth was a colonel in the United States Army's Ordnance Corps, and it was there, in 1817, that he produced the cipher device that carries his name. That is very nearly the whole of what can be said with confidence about it.</p>
+        <p style="margin-top:1rem;">Louis Kruh's study of the device, the standard reference, is titled <em>The Mystery of Colonel Decius Wadsworth's Cipher Device</em> — and the word is doing real work. This exhibit makes no claim about where the device was carried, which dispatches it protected, or which office adopted it, because the record does not support one. It was a personal invention by a serving officer, and its operational history is obscure. Summaries elsewhere sometimes report that the design "was used until the end of the Second World War"; that sentence describes the long afterlife of geared and disk ciphers generally, not documented service by this device, and it is not repeated here.</p>
+        <p style="margin-top:1rem;">What survives instead is the mechanism, and the mechanism is enough. It is a working progressive cipher machine built in 1817, at a moment when practically every cipher in field use was still pen, paper and a table.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-body">
+        <p>Two disks, one inside the other, geared together so that neither can turn alone.</p>
+        <pre>Outer disk:  33 positions
+             A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+             plus the digits 2 3 4 5 6 7 8
+
+Inner disk:  26 positions
+             the letters only
+
+Gearing:     26 : 33   (no common factor)
+
+To encipher one letter:
+1. Turn until the plaintext letter reaches the index
+2. Count the teeth that went by  (1 to 26 — never zero)
+3. Send the outer symbol now standing at the index</pre>
+
+        <p style="margin-top:1rem;">The count is the message. "Turn until the letter comes up" means a repeated letter is not free: bringing <em>T</em> back round to <em>T</em> costs a full revolution of the inner disk, twenty-six teeth. And twenty-six teeth on a thirty-three-position outer ring does not return you to where you started. That single fact is the engine of the whole design.</p>
+
+        <h3 style="margin:1.4rem 0 .6rem;font-size:1rem;color:var(--gold);">Worked example — ATTACK, keyword WADSWORTH</h3>
+        <p style="font-size:.92rem;">The keyword lays out the inner disk as <code>W A D S O R T H B C E F G I J K L M N P Q U V X Y Z</code>. Both disks start at their first position.</p>
+        <table class="cipher-table">
+          <thead><tr><th>Plain</th><th>Inner position</th><th>Teeth turned</th><th>Outer lands on</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>1</td><td>1</td><td>B</td></tr>
+            <tr><td>T</td><td>6</td><td>5</td><td>G</td></tr>
+            <tr><td>T</td><td>6</td><td>26</td><td>8</td></tr>
+            <tr><td>A</td><td>1</td><td>21</td><td>U</td></tr>
+            <tr><td>C</td><td>9</td><td>8</td><td>4</td></tr>
+            <tr><td>K</td><td>15</td><td>6</td><td>B</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:1rem;">Ciphertext: <code>BG8U4B</code>. Look at the two <em>T</em>s — <code>G</code> and <code>8</code>. Look at the two <em>A</em>s — <code>B</code> and <code>U</code>. Frequency analysis has nothing to count.</p>
+        <p style="margin-top:1rem;">Note also the honest wrinkle: the final <em>K</em> also lands on <code>B</code>, colliding with the first <em>A</em>. The guarantee is per plaintext letter, not across the whole message — different letters may share a ciphertext symbol. And because one turn moves the outer disk by between 1 and 26 teeth, seven of its thirty-three positions are out of reach from wherever it currently stands — a different seven at every step.</p>
+        <p style="margin-top:1rem;">Feed the letter <em>A</em> to the device forty times and, after the first, the outer disk advances twenty-six positions every time — a repeated letter always costs a full revolution of the inner disk. Because 26 and 33 are coprime, those advances walk every one of the thirty-three outer symbols before the sequence repeats — on the thirty-fourth <em>A</em>, not before. The disks themselves only return to their common starting alignment after 858 teeth, the least common multiple of 26 and 33.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <div class="attack-name">Ciphertext-only stochastic hill climbing</div>
+          <div class="attack-diff">Complexity: tractable on a modern computer — no known plaintext required</div>
+          <p class="attack-desc">In 2020 Thomas Kaeding published an automated attack covering this whole family of devices — what he calls "cipher clocks", the machines built from revolving hands or rotating concentric disks: Wheatstone's Cryptograph, Wadsworth's device, and the Urkryptografen. The key observation is structural. The action of a cipher clock <em>factors</em>: it is a stream cipher followed by a monoalphabetic substitution. Once you see it that way, the disk arrangement stops being an unbreakable physical secret and becomes an ordinary substitution sitting on top of a known, deterministic stream — and substitutions fall to search. Kaeding hill-climbs the substitution against a fitness measure of how well the result looks like the stream component alone, with no crib and no known plaintext.</p>
+        </div>
+        <p style="margin-top:1rem;font-size:.92rem;line-height:1.7;">The techniques are ones this museum covers in their own right: see <a href="../cryptanalysis.html#hill-climbing">hill climbing</a> and <a href="../cryptanalysis.html#simulated-annealing">simulated annealing</a>. The lesson generalises past this device. A long period is not the same thing as a large search space. Wadsworth bought 858 teeth of non-repetition, and that defeats the pencil-and-paper cryptanalysis of his own century completely — but it never hid the fact that the machine's output is a fixed function of a small, searchable secret.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <thead><tr><th>Concept from Wadsworth's device</th><th>Modern evolution</th></tr></thead>
+          <tbody>
+            <tr><td>Coprime disk sizes stretch the period to their least common multiple</td><td>Coprime LFSR lengths in stream-cipher combiners; the same trick, and the same insufficiency on its own</td></tr>
+            <tr><td>The keystream advances on its own, independent of what it encrypts</td><td>Synchronous stream ciphers: keystream generated from key and position, never from plaintext</td></tr>
+            <tr><td>Structure that factors into stream-then-substitution</td><td>Divide-and-conquer cryptanalysis: attack the components separately rather than the composition</td></tr>
+            <tr><td>Long period, small secret</td><td>Period is not entropy — security is bounded by keyspace, not by how long the output takes to repeat</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="exhibit-side">
+
+    <div class="panel" style="border-color:var(--gold-b);">
+      <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+      </div>
+      <div class="panel-body">
+        <table class="cipher-table">
+          <tbody>
+            <tr><td>Exhibit</td><td>69 of 140</td></tr>
+            <tr><td>Hall</td><td>VII — Mechanical Cipher Machines</td></tr>
+            <tr><td>Inventor</td><td>Col. Decius Wadsworth, U.S. Army Ordnance Corps</td></tr>
+            <tr><td>Year</td><td>1817</td></tr>
+            <tr><td>Outer disk</td><td>33 positions — A–Z plus 2–8</td></tr>
+            <tr><td>Inner disk</td><td>26 positions — letters only</td></tr>
+            <tr><td>Gearing</td><td>26:33</td></tr>
+            <tr><td>Period</td><td>858 teeth (lcm of 26 and 33)</td></tr>
+            <tr><td>Security</td><td>Broken</td></tr>
+            <tr><td>Broken By</td><td>Kaeding, ciphertext-only hill climbing (2020)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:1.25rem;">
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-compass"/></svg></span><span class="panel-title">Disk-Cipher Chronology</span></div>
+      <div class="panel-body">
+        <p style="font-size:.92rem;line-height:1.7;">Three devices in this hall turn disks against each other. They are listed here in date order, and in date order only:</p>
+        <table class="cipher-table" style="margin-top:.6rem;">
+          <tbody>
+            <tr><td>1790s</td><td><a href="../ciphers/jefferson-disk.html">Jefferson</a> — 36 stacked wheels; unpublished, and it stayed in his papers until the 20th century</td></tr>
+            <tr><td>1817</td><td><strong>Wadsworth</strong> — two geared disks, 26:33</td></tr>
+            <tr><td>1860s</td><td><a href="../ciphers/wheatstone.html">Wheatstone</a> — two geared hands on a clock face, 26:27</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.92rem;line-height:1.7;margin-top:.8rem;">That is a sequence, not a lineage. The museum makes <em>no</em> claim that any of these inventors drew on an earlier one. Jefferson's wheel cipher was never published and lay unread for over a century, so a derivation from it in 1817 would need evidence that the sources here do not provide; Wheatstone's device is generally treated as an independent invention. Where later devices are demonstrably descended from earlier ones — as with Bazeries and the M-94 from Jefferson's wheel — this museum says so and cites it. Here it does not.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:1.25rem;">
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-book"/></svg></span><span class="panel-title">Sources</span></div>
+      <div class="panel-body">
+        <p style="font-size:.9rem;line-height:1.8;">Every historical claim on this page traces
+        to one of these three.</p>
+        <ol style="font-size:.9rem;line-height:1.8;padding-left:1.1rem;margin:.6rem 0 0;">
+          <li style="margin-bottom:.8rem;">
+            Louis Kruh, "The Mystery of Colonel Decius Wadsworth's Cipher Device",
+            <em>Cryptologia</em>, vol. 6, no. 3 (1982), pp. 238–247.
+            DOI: <a href="https://doi.org/10.1080/0161-118291857037">10.1080/0161-118291857037</a>.
+            <span style="color:var(--tx3);">The standard historical reference for the device.
+            It is paywalled; the specific statements below are cited to the archival document
+            in note 2, which this museum read directly.</span>
+          </li>
+          <li style="margin-bottom:.8rem;">
+            "Decius Wadsworth Disc Cipher", William F. Friedman collection, U.S. National
+            Security Agency (declassified), item 41788379082740 —
+            <a href="https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/friedman-documents/patent-equipment/FOLDER_515/41788379082740.pdf">NSA scan</a>,
+            <a href="https://archive.org/stream/41788379082740/41788379082740_djvu.txt">full text</a>.
+            <span style="color:var(--tx3);">Source for Wadsworth's rank and Ordnance service,
+            the 1817 date, the 26-and-33 character sequences, the statement that it is not
+            known whether the device was ever used, and that it antedates Wheatstone's by
+            half a century.</span>
+          </li>
+          <li>
+            Thomas Kaeding, "Automated ciphertext-only attack on the Wheatstone Cryptograph
+            and related devices", IACR Cryptology ePrint Archive, report
+            <a href="https://eprint.iacr.org/2020/1492">2020/1492</a> (2020).
+            <span style="color:var(--tx3);">The cryptanalysis: the "cipher clock" family
+            factors into a stream cipher followed by a monoalphabetic substitution, which a
+            stochastic hill-climbing attack then breaks from ciphertext alone.</span>
+          </li>
+        </ol>
+        <p style="font-size:.82rem;line-height:1.7;color:var(--tx3);margin-top:.9rem;">
+          Not cited, and deliberately: the widely repeated claim that Wadsworth's device was
+          "based on a 1790 design by Thomas Jefferson". No source above supports it, and
+          Jefferson's wheel cipher was unpublished until the 20th century. See the chronology
+          panel above.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related-exhibits">
+  <h2 class="related-exhibits__heading">Related Exhibits</h2>
+  <div class="related-exhibits__grid">
+    <a href="../ciphers/jefferson-disk.html" class="related-card">
+      <span class="related-card__number">Exhibit 28</span>
+      <span class="related-card__name">Jefferson Disk</span>
+      <span class="related-card__tag">Same Hall</span>
+    </a>
+    <a href="../ciphers/wheatstone.html" class="related-card">
+      <span class="related-card__number">Exhibit 74</span>
+      <span class="related-card__name">Wheatstone Cryptograph</span>
+      <span class="related-card__tag">The same idea, 26:27, fifty years later</span>
+    </a>
+    <a href="../ciphers/alberti-disk.html" class="related-card">
+      <span class="related-card__number">Exhibit 27</span>
+      <span class="related-card__name">Alberti Cipher Disk</span>
+      <span class="related-card__tag">Concentric disks, turned by hand</span>
+    </a>
+  </div>
+</section>
+
+<div class="hall-nav">
+  <a href="../ciphers/jefferson-disk.html" class="hall-nav-link">
+    <span class="hall-nav-dir">&larr; Previous</span>
+    <span class="hall-nav-name">Jefferson Disk</span>
+  </a>
+  <a href="../ciphers/alberti-disk.html" class="hall-nav-link next">
+    <span class="hall-nav-dir">Next &rarr;</span>
+    <span class="hall-nav-name">Alberti Cipher Disk</span>
+  </a>
+</div>
+
+</main>
+<footer></footer>
+
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var OUTER = A + "2345678";               // 33 positions
+  var CX = 180, CY = 196, R_OUT = 139, R_IN = 91;
+
+  var svg = document.getElementById("wd-stage");
+  var gOuter = document.getElementById("wd-outer");
+  var gInner = document.getElementById("wd-inner");
+  var read = document.getElementById("wd-read");
+  var tape = document.getElementById("wd-tape");
+  var msgEl = document.getElementById("wd-msg");
+  var keyEl = document.getElementById("wd-key");
+
+  var inner = "", plain = "", cursor = 0, innerPos = 0, outerPos = 0, cipher = "";
+
+  function mod(a, m) { return ((a % m) + m) % m; }
+
+  function reduceMotion() {
+    return window.matchMedia &&
+           window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function makeInner(key) {
+    var k = String(key || "").toUpperCase().replace(/[^A-Z]/g, "") || "WADSWORTH";
+    var seen = Object.create(null), s = "", i;
+    for (i = 0; i < k.length; i++) if (!seen[k[i]]) { seen[k[i]] = 1; s += k[i]; }
+    for (i = 0; i < 26; i++) if (!seen[A[i]]) { seen[A[i]] = 1; s += A[i]; }
+    return s;
+  }
+
+  function el(tag, attrs) {
+    var e = document.createElementNS(NS, tag), k;
+    for (k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // Lay one ring of characters out around the hub. Position 0 sits at the
+  // index mark; the whole group is then rotated so the live position is on top.
+  function ring(group, chars, radius, pos, live) {
+    group.innerHTML = "";
+    var n = chars.length, step = 360 / n, i;
+    for (i = 0; i < n; i++) {
+      var ang = (i * step - 90) * Math.PI / 180;
+      var on = i === pos;
+      var t = el("text", {
+        x: CX + radius * Math.cos(ang),
+        y: CY + radius * Math.sin(ang) + 4,
+        fill: on ? live : "#6f6f80",
+        "text-anchor": "middle",
+        "font-family": "ui-monospace,monospace",
+        "font-size": on ? "14" : "11",
+        "font-weight": on ? "700" : "400"
+      });
+      t.textContent = chars[i];
+      group.appendChild(t);
+    }
+    group.setAttribute("transform",
+      "rotate(" + (-pos * step) + " " + CX + " " + CY + ")");
+    if (!reduceMotion()) group.style.transition = "transform .35s ease";
+  }
+
+  function draw() {
+    ring(gOuter, OUTER, R_OUT, outerPos, "#D4B765");
+    ring(gInner, inner, R_IN, innerPos, "#C85A5A");
+  }
+
+  function announce(extra) {
+    read.textContent = "Inner disk shows " + inner[innerPos] +
+      " at the index; outer disk shows " + OUTER[outerPos] + "." +
+      (extra ? " " + extra : "");
+  }
+
+  function reset() {
+    inner = makeInner(keyEl.value);
+    plain = String(msgEl.value || "").toUpperCase().replace(/[^A-Z]/g, "");
+    cursor = 0; innerPos = 0; outerPos = 0; cipher = "";
+    tape.textContent = "";
+    draw();
+    read.textContent = "Disks at rest. Inner disk shows " + inner[0] +
+      " at the index; outer disk shows " + OUTER[0] + ".";
+  }
+
+  function step() {
+    if (cursor >= plain.length) {
+      announce(plain.length ? "Message complete." : "Nothing left to encipher.");
+      return false;
+    }
+    var ch = plain[cursor++];
+    var target = inner.indexOf(ch);
+    var teeth = mod(target - innerPos, 26) || 26;   // never zero turns
+    innerPos = target;
+    outerPos = mod(outerPos + teeth, 33);
+    cipher += OUTER[outerPos];
+    tape.textContent = cipher;
+    draw();
+    announce("Turned " + teeth + (teeth === 1 ? " tooth" : " teeth") +
+             " to reach " + ch + "; enciphered as " + OUTER[outerPos] +
+             ". " + cursor + " of " + plain.length + " letters done.");
+    return true;
+  }
+
+  function all() {
+    if (cursor >= plain.length) reset();
+    if (reduceMotion()) {
+      while (step()) { /* straight to the end, no animation */ }
+      return;
+    }
+    var iv = setInterval(function () { if (!step()) clearInterval(iv); }, 480);
+  }
+
+  document.getElementById("wd-step").addEventListener("click", step);
+  document.getElementById("wd-all").addEventListener("click", all);
+  document.getElementById("wd-reset").addEventListener("click", reset);
+  msgEl.addEventListener("change", reset);
+  keyEl.addEventListener("change", reset);
+
+  reset();
+})();
+</script>
+
+<script src="../js/ciphers/all-engines.min.js"></script>
+<script src="../js/demo-loader.min.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/lightbox.js"></script>
+</body>
+</html>

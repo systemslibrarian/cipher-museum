@@ -383,7 +383,7 @@
             const v=((out-1)%26)+1;
             const L=String.fromCharCode(64+v);
             state.stream+=L;
-            setStatus(`<strong>Phase 5 · Keystream output!</strong> Top card <strong>${tlab.rank}${tlab.suit}</strong> (value ${cnt}) → the card at position ${cnt+1} is <strong>${olab.rank}${olab.suit}</strong> (value ${out}). ${out} mod 26 = ${v} → letter <strong style="color:var(--gold);">${L}</strong>.`);
+            setStatus(`<strong>Phase 5 · Keystream output!</strong> Top card <strong>${tlab.rank}${tlab.suit}</strong> (value ${cnt}) → the card at position ${cnt+1} is <strong>${olab.rank}${olab.suit}</strong> (value ${out}). (${out} − 1) mod 26 + 1 = ${v} → letter <strong style="color:var(--gold);">${L}</strong>.`);
             // if there's input text, process one letter (encrypt or decrypt)
             if(state.plainIdx < clean($msg.value).length){
               const p=clean($msg.value)[state.plainIdx];
