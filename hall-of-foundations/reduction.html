@@ -89,7 +89,7 @@
       <div class="lab-bar">
         <button id="play">Run the reduction</button>
         <button id="rreset" class="ghost">Reset</button>
-        <div class="readout" id="rread">Suppose a break exists…</div>
+        <div class="readout" id="rread" aria-live="polite" role="status">Suppose a break exists…</div>
       </div>
       <div class="lab-hint">
         Read it as a machine: feed a hard factoring instance in, wrap it as a
@@ -194,6 +194,10 @@
   var cur=0, iv=null;
   document.getElementById("play").addEventListener("click",function(){
     if(iv)clearInterval(iv); cur=0;
+    if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      drawUpTo(steps.length);   // same end state, no animation
+      return;
+    }
     iv=setInterval(function(){ cur++; drawUpTo(cur); if(cur>=steps.length)clearInterval(iv); },700);
   });
   document.getElementById("rreset").addEventListener("click",function(){ if(iv)clearInterval(iv); cur=0; drawUpTo(0); });
