@@ -37,7 +37,8 @@
     'glossary.html': 'Learn',
     'modern.html': 'Learn',
     'learn.html': 'Learn',
-    'cryptanalysis.html': 'Learn',
+    'cipher-corpus.html': 'Cipher Corpus',
+    'cryptanalysis.html': 'Cryptanalysis',
     'challenges.html': 'Challenges',
     'comparison.html': 'Learn',
     'cipher-flow.html': 'Explore',
@@ -97,10 +98,11 @@
     links.appendChild(li);
   });
 
-  /* Give the links list an id for aria-controls */
+  /* Give the links list an id for aria-controls. No role/aria-label here:
+     the list already sits inside <nav aria-label="Primary">, and a second
+     navigation landmark nested in the first just duplicates the entry in a
+     screen reader's landmark list. */
   links.id = 'nav-drawer';
-  links.setAttribute('role', 'navigation');
-  links.setAttribute('aria-label', 'Site navigation');
 
   /* ── Toggle drawer ────────────────────────────────────── */
   btn.addEventListener('click', function () {

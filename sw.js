@@ -8,13 +8,15 @@
  *   - Static assets (css/js/images/json): cache-first with background refresh.
  *   - The multi-megabyte corpus downloads under /public/ are never cached.
  *
- * VERSION is stamped automatically by `npm run build:js` from a hash of the
- * minified bundles (scripts/sw-version.js); tests/test-sw-version.js fails the
- * suite if it drifts. Old caches are purged on activate.
+ * VERSION is stamped automatically by `npm run build:js` from a hash of every
+ * asset served cache-first — the minified bundles plus the non-HTML entries of
+ * CORE below, read straight out of this list (scripts/sw-version.js).
+ * tests/test-sw-version.js fails the suite if it drifts. Old caches are purged
+ * on activate, so adding an asset to CORE also re-stamps VERSION.
  */
 'use strict';
 
-const VERSION = 'cipher-museum-1c4bc553';
+const VERSION = 'cipher-museum-6c3297cb';
 const CORE = [
   '/',
   '/index.html',

@@ -40,9 +40,10 @@ const OPTIONS = { compress: true, mangle: true };
     console.log(`✅ ${rel} → ${path.basename(out)}  (${(code.length / 1024).toFixed(0)} KB → ${(result.code.length / 1024).toFixed(0)} KB, −${pct}%)`);
   }
 
-  // Derive the service-worker cache version from the minified bundles so a
-  // changed bundle can never ship with a stale offline cache. Deterministic:
-  // same bundles in, same VERSION out. tests/test-sw-version.js verifies.
+  // Derive the service-worker cache version from every asset served
+  // cache-first — the bundles above plus sw.js's own CORE list — so a changed
+  // asset can never ship with a stale offline cache. Deterministic: same
+  // inputs in, same VERSION out. tests/test-sw-version.js verifies.
   const { swVersionFor } = require('./sw-version.js');
   const swPath = path.join(ROOT, 'sw.js');
   const sw = fs.readFileSync(swPath, 'utf8');
