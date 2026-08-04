@@ -118,7 +118,7 @@
 
       <div class="gl-term">
         <h3 class="gl-word">Avalanche Effect</h3>
-        <span class="gl-origin">Claude Shannon · 1949</span>
+        <span class="gl-origin">Horst Feistel · 1973</span>
         <p class="gl-def">The property where a small change in the input (flipping one bit of plaintext or key) causes a large, unpredictable change in the output. Good ciphers exhibit strong avalanche: changing one bit should flip roughly half the output bits. AES achieves full avalanche within 2 rounds.</p>
       </div>
     </div>
@@ -316,7 +316,7 @@
       <div class="gl-term">
         <h3 class="gl-word">Key Pair</h3>
         <span class="gl-origin">Asymmetric Cryptography · 1976</span>
-        <p class="gl-def">A matched set of public key and private key in an asymmetric cryptosystem. The public key is shared openly; the private key is kept secret. Data encrypted with one can only be decrypted with the other. Used for encryption (RSA), digital signatures (ECDSA), and key exchange (DH).</p>
+        <p class="gl-def">A matched set of public key and private key in an asymmetric cryptosystem. The public key is shared openly; the private key is kept secret. In encryption schemes like RSA, what the public key encrypts only the private key can decrypt; in signature schemes the roles reverse — the private key signs, the public key verifies. Used for encryption (RSA), digital signatures (ECDSA), and key exchange (DH).</p>
       </div>
 
       <div class="gl-term">
@@ -419,7 +419,7 @@
 
       <div class="gl-term">
         <h3 class="gl-word">Polybius Square</h3>
-        <span class="gl-origin">Polybius · ~200 BC</span>
+        <span class="gl-origin">Polybius · ~150 BC</span>
         <p class="gl-def">A 5×5 grid containing 25 letters (I and J share a cell) used to convert letters into two-digit coordinates. The foundation of many fractionation ciphers (Bifid, Trifid, ADFGX, Nihilist) where coordinates are manipulated separately before recombination.</p>
       </div>
 
@@ -453,7 +453,7 @@
       <div class="gl-term">
         <h3 class="gl-word">Round</h3>
         <span class="gl-origin">Modern Block Ciphers</span>
-        <p class="gl-def">One complete iteration of a cipher's internal transformation. AES uses 10, 12, or 14 rounds depending on key size. Each round applies the same sequence of operations (SubBytes, ShiftRows, MixColumns, AddRoundKey). More rounds = more security, more computation.</p>
+        <p class="gl-def">One complete iteration of a cipher's internal transformation. AES uses 10, 12, or 14 rounds depending on key size. Each AES round applies SubBytes, ShiftRows, MixColumns, and AddRoundKey — except the final round, which skips MixColumns. More rounds = more security, more computation.</p>
       </div>
     </div>
 

@@ -203,19 +203,6 @@
         </div>
         <div class="evo-arrow" aria-hidden="true"></div>
 
-        <div class="evo-node" role="listitem" aria-label="AES, Modern Symmetric Encryption">
-          <span class="evo-stage">Symmetric (AES)</span>
-          <div class="evo-badge" aria-hidden="true">
-            <svg class="evo-icon" viewBox="0 0 32 32">
-              <rect x="8" y="13" width="16" height="12" rx="2"></rect>
-              <path d="M12 13V9a4 4 0 0 1 8 0v4"></path>
-              <circle cx="16" cy="19" r="1.8"></circle>
-            </svg>
-          </div>
-          <div class="evo-label"><span class="evo-name">AES</span><span class="evo-type">Modern Symmetric Encryption</span></div>
-        </div>
-        <div class="evo-arrow" aria-hidden="true"></div>
-
         <div class="evo-node" role="listitem" aria-label="Public-Key Cryptography, Asymmetric Encryption">
           <span class="evo-stage">Asymmetric (Public-Key)</span>
           <div class="evo-badge" aria-hidden="true">
@@ -226,6 +213,19 @@
               <circle cx="20" cy="18" r="1.2"></circle>
             </svg>
           </div>
+          <div class="evo-label"><span class="evo-name">AES</span><span class="evo-type">Modern Symmetric Encryption</span></div>
+        </div>
+        <div class="evo-arrow" aria-hidden="true"></div>
+
+        <div class="evo-node" role="listitem" aria-label="AES, Modern Symmetric Encryption">
+          <span class="evo-stage">Symmetric (AES)</span>
+          <div class="evo-badge" aria-hidden="true">
+            <svg class="evo-icon" viewBox="0 0 32 32">
+              <rect x="8" y="13" width="16" height="12" rx="2"></rect>
+              <path d="M12 13V9a4 4 0 0 1 8 0v4"></path>
+              <circle cx="16" cy="19" r="1.8"></circle>
+            </svg>
+          </div>
           <div class="evo-label"><span class="evo-name">Public-Key Cryptography</span><span class="evo-type">Asymmetric Encryption</span></div>
         </div>
       </div>
@@ -233,13 +233,13 @@
   </div>
 
   <div class="tl-legend" aria-label="Era color legend">
-    <a href="#era-ancient" class="tl-legend-item" data-filter="ancient"><span class="tl-legend-dot" style="background:#C8845A"></span> Ancient <span class="tl-legend-count">(3)</span></a>
-    <a href="#era-medieval" class="tl-legend-item" data-filter="medieval"><span class="tl-legend-dot" style="background:#7AA8D8"></span> Medieval <span class="tl-legend-count">(1)</span></a>
-    <a href="#era-renaissance" class="tl-legend-item" data-filter="renaissance"><span class="tl-legend-dot" style="background:#9FC87A"></span> Renaissance <span class="tl-legend-count">(5)</span></a>
-    <a href="#era-19c" class="tl-legend-item" data-filter="19c"><span class="tl-legend-dot" style="background:#C8A85A"></span> 19th Century <span class="tl-legend-count">(3)</span></a>
-    <a href="#era-wwi" class="tl-legend-item" data-filter="wwi"><span class="tl-legend-dot" style="background:#D4962A"></span> World War I <span class="tl-legend-count">(2)</span></a>
-    <a href="#era-wwii" class="tl-legend-item" data-filter="wwii"><span class="tl-legend-dot" style="background:#C85A5A"></span> World War II <span class="tl-legend-count">(4)</span></a>
-    <a href="#era-modern" class="tl-legend-item" data-filter="modern"><span class="tl-legend-dot" style="background:#5AC8A0"></span> Modern <span class="tl-legend-count">(6)</span></a>
+    <a href="#era-ancient" class="tl-legend-item" data-filter="ancient"><span class="tl-legend-dot" style="background:#C8845A"></span> Ancient <span class="tl-legend-count">(7)</span></a>
+    <a href="#era-medieval" class="tl-legend-item" data-filter="medieval"><span class="tl-legend-dot" style="background:#7AA8D8"></span> Medieval <span class="tl-legend-count">(5)</span></a>
+    <a href="#era-renaissance" class="tl-legend-item" data-filter="renaissance"><span class="tl-legend-dot" style="background:#9FC87A"></span> Renaissance <span class="tl-legend-count">(16)</span></a>
+    <a href="#era-19c" class="tl-legend-item" data-filter="19c"><span class="tl-legend-dot" style="background:#C8A85A"></span> 19th Century <span class="tl-legend-count">(20)</span></a>
+    <a href="#era-wwi" class="tl-legend-item" data-filter="wwi"><span class="tl-legend-dot" style="background:#D4962A"></span> World War I <span class="tl-legend-count">(10)</span></a>
+    <a href="#era-wwii" class="tl-legend-item" data-filter="wwii"><span class="tl-legend-dot" style="background:#C85A5A"></span> World War II <span class="tl-legend-count">(7)</span></a>
+    <a href="#era-modern" class="tl-legend-item" data-filter="modern"><span class="tl-legend-dot" style="background:#5AC8A0"></span> Modern <span class="tl-legend-count">(16)</span></a>
     <a href="#era-quantum" class="tl-legend-item" data-filter="quantum"><span class="tl-legend-dot" style="background:#A07FCC"></span> Quantum Era <span class="tl-legend-count">(1)</span></a>
   </div>
 
@@ -247,7 +247,7 @@
 
     <div class="tl-era-header" id="era-ancient"><span>Ancient World</span></div>
 
-    <div class="tl-event" data-era="ancient" role="listitem"><span class="tl-dot era-dot-ancient"></span><div class="tl-card" data-href="ciphers/egyptian-substitution.html"><span class="tl-date">~1900 BC</span><h2 class="tl-title">Egyptian Hieroglyphic Substitution</h2><span class="tl-loc">🇳🇵 Ancient Egypt</span><p class="tl-desc">A tomb inscription in Khnumhotep II's tomb at Beni Hasan (c. 1900 BC) uses non-standard hieroglyphs in place of conventional signs — the earliest known example of deliberate graphemic substitution in writing. Not used to conceal secrets but to add dignity and invitation to the text; the substitution principle is identical to every cipher that followed.</p><a href="ciphers/egyptian-substitution.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="ancient" role="listitem"><span class="tl-dot era-dot-ancient"></span><div class="tl-card" data-href="ciphers/egyptian-substitution.html"><span class="tl-date">~1900 BC</span><h2 class="tl-title">Egyptian Hieroglyphic Substitution</h2><span class="tl-loc">🇪🇬 Ancient Egypt</span><p class="tl-desc">A tomb inscription in Khnumhotep II's tomb at Beni Hasan (c. 1900 BC) uses non-standard hieroglyphs in place of conventional signs — the earliest known example of deliberate graphemic substitution in writing. Not used to conceal secrets but to add dignity and invitation to the text; the substitution principle is identical to every cipher that followed.</p><a href="ciphers/egyptian-substitution.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="ancient" role="listitem">
       <span class="tl-dot era-dot-ancient"></span>
@@ -293,7 +293,7 @@
       </div>
     </div>
 
-    <div class="tl-event" data-era="ancient" role="listitem"><span class="tl-dot era-dot-ancient"></span><div class="tl-card" data-href="ciphers/rail-fence.html"><span class="tl-date">~500 BC</span><h3 class="tl-title">Rail Fence Cipher</h3><span class="tl-loc">🌍 Antiquity</span><p class="tl-desc">A zigzag transposition written along an imaginary fence of N rails. Attested in the ancient Mediterranean and reborn during the American Civil War as a hand cipher for field telegraph operators — simple, fast, and trivially broken once the rail count is guessed.</p><a href="ciphers/rail-fence.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="ancient" role="listitem"><span class="tl-dot era-dot-ancient"></span><div class="tl-card" data-href="ciphers/rail-fence.html"><span class="tl-date">Antiquity?</span><h3 class="tl-title">Rail Fence Cipher</h3><span class="tl-loc">🌍 Origins undocumented</span><p class="tl-desc">A zigzag transposition written along an imaginary fence of N rails. Traditionally attributed to antiquity, though no ancient use is documented; its attested service came in the American Civil War as a hand cipher for field telegraph operators — simple, fast, and trivially broken once the rail count is guessed.</p><a href="ciphers/rail-fence.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="ancient" role="listitem"><span class="tl-dot era-dot-ancient"></span><div class="tl-card" data-href="ciphers/aeneas-tacticus.html"><span class="tl-date">~350 BC</span><h3 class="tl-title">Aeneas Tacticus — The Wheel</h3><span class="tl-loc">🇬🇷 Greece</span><p class="tl-desc">The earliest systematic cryptographic treatise. Aeneas the Tactician, in <em>Poliorketika</em>, describes a disk cipher — holes drilled around the rim, thread wound through them spelling a message. Unwind the thread: no message visible. He also describes steganographic techniques: hidden ink, women couriers, wax tablets with shaved-head messages. The oldest surviving technical manual of information security.</p><a href="ciphers/aeneas-tacticus.html" class="tl-link">View exhibit →</a></div></div>
 
@@ -363,7 +363,7 @@
       </div>
     </div>
 
-    <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="ciphers/argenti.html"><span class="tl-date">1591</span><h3 class="tl-title">The Argenti Cipher</h3><span class="tl-loc">🇮🇹 Papal States</span><p class="tl-desc">Matteo and Giambattista Argenti serve as papal cipher secretaries from 1561 to 1620, designing the most sophisticated nomenclators of the Renaissance. Their system couples a 391-symbol substitution alphabet with code-groups, nulls, and deliberate traps — the first thoroughly professional approach to cipher design. Their manuscript <em>Trattato de' Ciferi</em> is the era's definitive insider account of cryptographic theory.</p><a href="ciphers/argenti.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="ciphers/argenti.html"><span class="tl-date">1591</span><h3 class="tl-title">The Argenti Cipher</h3><span class="tl-loc">🇮🇹 Papal States</span><p class="tl-desc">Matteo and Giambattista Argenti serve as papal cipher secretaries from the 1580s to 1605, designing the most sophisticated nomenclators of the Renaissance. Their system couples a 391-symbol substitution alphabet with code-groups, nulls, and deliberate traps — the first thoroughly professional approach to cipher design. Their manuscript <em>Trattato de' Ciferi</em> is the era's definitive insider account of cryptographic theory.</p><a href="ciphers/argenti.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="renaissance" role="listitem">
       <span class="tl-dot era-dot-renaissance"></span>
@@ -393,11 +393,11 @@
 
     <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="ciphers/gronsfeld.html"><span class="tl-date">~1700</span><h3 class="tl-title">Gronsfeld Cipher</h3><span class="tl-loc">🇩🇪 Germany</span><p class="tl-desc">Count Gronsfeld's reduced-keyspace Vigenère uses a numeric key (0–9) instead of a keyword. Easier to memorize, easier to break: only ten alphabets, often a short repeating digit string.</p><a href="ciphers/gronsfeld.html" class="tl-link">View exhibit →</a></div></div>
 
-    <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="ciphers/copiale.html"><span class="tl-date">~1730</span><h3 class="tl-title">Copiale Cipher</h3><span class="tl-loc">🇩🇪 Wolfenbüttel</span><p class="tl-desc">An 18th-century German oculist secret society binds 105 pages of Roman letters, Greek letters, and abstract symbols. Sits unsolved in archives for 250 years until Knight, Megyesi, and Schaefer crack it in 2011 with statistical-machine-translation tools.</p><a href="ciphers/copiale.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="ciphers/copiale.html"><span class="tl-date">~1760s</span><h3 class="tl-title">Copiale Cipher</h3><span class="tl-loc">🇩🇪 Wolfenbüttel</span><p class="tl-desc">An 18th-century German oculist secret society binds 105 pages of Roman letters, Greek letters, and abstract symbols. Sits unsolved in archives for 250 years until Knight, Megyesi, and Schaefer crack it in 2011 with statistical-machine-translation tools.</p><a href="ciphers/copiale.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="hall-of-foundations/euler-fermat.html"><span class="tl-date">1640</span><h3 class="tl-title">Fermat's Little Theorem</h3><span class="tl-loc">🇫🇷 France</span><p class="tl-desc">In a letter to Frénicle de Bessy, Pierre de Fermat states that aᵖ ≡ a (mod p) for every prime p — offered without proof ("I would send you the demonstration, did I not fear it being too long"). Three centuries later the off-hand remark becomes load-bearing: primality testing leans on it, and its generalization is the reason RSA decryption undoes encryption.</p><a href="hall-of-foundations/euler-fermat.html" class="tl-link">View exhibit →</a></div></div>
 
-    <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="ciphers/wallis-ciphers.html"><span class="tl-date">1643</span><h3 class="tl-title">John Wallis and the Civil War Ciphers</h3><span class="tl-loc">🇬🇧 England</span><p class="tl-desc">Oxford mathematician John Wallis — best known for the ∞ symbol and contributions to calculus — begins breaking Royalist ciphers for the Parliamentary side in 1643. He solves nomenclators, polyalphabetics, and Confederate Vigenère-class systems entirely by hand, without any prior training. Wallis continues as a government cryptanalyst through the Restoration and into the 1690s, demonstrating that pure mathematical insight can substitute for tradecraft.</p><a href="ciphers/wallis-ciphers.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="ciphers/wallis-ciphers.html"><span class="tl-date">1643</span><h3 class="tl-title">John Wallis and the Civil War Ciphers</h3><span class="tl-loc">🇬🇧 England</span><p class="tl-desc">Oxford mathematician John Wallis — best known for the ∞ symbol and contributions to calculus — begins breaking Royalist ciphers for the Parliamentary side in 1643. He solves nomenclators and polyalphabetic ciphers entirely by hand, without any prior training. Wallis continues as a government cryptanalyst through the Restoration and into the 1690s, demonstrating that pure mathematical insight can substitute for tradecraft.</p><a href="ciphers/wallis-ciphers.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="renaissance" role="listitem"><span class="tl-dot era-dot-renaissance"></span><div class="tl-card" data-href="hall-of-foundations/euler-fermat.html"><span class="tl-date">1763</span><h3 class="tl-title">Euler's Theorem &amp; the Totient</h3><span class="tl-loc">🇷🇺 St. Petersburg</span><p class="tl-desc">Leonhard Euler generalizes Fermat's little theorem to composite moduli — aᵠ⁽ⁿ⁾ ≡ 1 (mod n) for a coprime to n — introducing the totient function φ along the way. In 1977 this identity becomes the correctness proof of RSA, the reason the private exponent undoes the public one, making a 1763 theorem one of the most-executed pieces of pure mathematics on Earth.</p><a href="hall-of-foundations/euler-fermat.html" class="tl-link">View exhibit →</a></div></div>
 
@@ -413,7 +413,7 @@
         <span class="tl-date">1795</span>
         <h3 class="tl-title">Jefferson Disk</h3>
         <span class="tl-loc">🇺🇸 United States</span>
-        <p class="tl-desc">Thomas Jefferson designs a cylinder cipher with 26 scrambled-alphabet disks on an axle. The concept is so sound it's reinvented by Bazeries and officially adopted as the US Army's M-94 in 1922.</p>
+        <p class="tl-desc">Thomas Jefferson designs a cylinder cipher with 36 scrambled-alphabet disks on an axle. The concept is so sound it's reinvented by Bazeries and officially adopted as the US Army's M-94 in 1922.</p>
         <a href="ciphers/jefferson-disk.html" class="tl-link">View exhibit →</a>
       </div>
     </div>
@@ -445,7 +445,7 @@
         <span class="tl-date">1885</span>
         <h3 class="tl-title">The Beale Ciphers</h3>
         <span class="tl-loc">🇺🇸 Bedford County, Virginia</span>
-        <p class="tl-desc">A pamphlet titled <em>The Beale Papers</em> publishes three numerical ciphers said to locate a buried fortune in gold and silver. Cipher #2 is solved with the Declaration of Independence as the running key; #1 and #3 remain unsolved 140 years later. The original case study in book ciphers — and in the operational fragility of key reuse.</p>
+        <p class="tl-desc">A pamphlet titled <em>The Beale Papers</em> publishes three numerical ciphers said to locate a buried fortune in gold and silver. Cipher #2 is solved as a book cipher keyed to the Declaration of Independence; #1 and #3 remain unsolved 140 years later. The original case study in book ciphers — and in the operational fragility of key reuse.</p>
         <a href="ciphers/beale.html" class="tl-link">View exhibit →</a>
       </div>
     </div>
@@ -454,7 +454,7 @@
 
     <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/columnar.html"><span class="tl-date">~1850</span><h3 class="tl-title">Columnar Transposition</h3><span class="tl-loc">🌍 Military Use</span><p class="tl-desc">A keyword-ordered grid where plaintext is written across rows and read out by columns in keyword-alphabetical order. The workhorse field-cipher of late-19th and early-20th-century militaries; reused as a building block inside ADFGVX and the German double-transposition.</p><a href="ciphers/columnar.html" class="tl-link">View exhibit →</a></div></div>
 
-    <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/four-square.html"><span class="tl-date">1854</span><h3 class="tl-title">Four-Square Cipher</h3><span class="tl-loc">🇫🇷 France</span><p class="tl-desc">Félix Delastelle's two-keyword refinement of Playfair: four 5×5 squares laid in a 2×2 grid, two of them keyed. Encrypts digraphs without Playfair's awkward double-letter rule.</p><a href="ciphers/four-square.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/four-square.html"><span class="tl-date">~1902</span><h3 class="tl-title">Four-Square Cipher</h3><span class="tl-loc">🇫🇷 France</span><p class="tl-desc">Félix Delastelle's two-keyword refinement of Playfair: four 5×5 squares laid in a 2×2 grid, two of them keyed. Encrypts digraphs without Playfair's awkward double-letter rule.</p><a href="ciphers/four-square.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/beaufort.html"><span class="tl-date">1857</span><h3 class="tl-title">Beaufort Cipher</h3><span class="tl-loc">🇬🇧 United Kingdom</span><p class="tl-desc">Admiral Sir Francis Beaufort's reciprocal polyalphabetic cipher — same operation for encryption and decryption — used on the Hagelin M-209 mechanical cipher machine eighty years later.</p><a href="ciphers/beaufort.html" class="tl-link">View exhibit →</a></div></div>
 
@@ -474,7 +474,7 @@
 
     <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/fractionated-morse.html"><span class="tl-date">~1890</span><h3 class="tl-title">Fractionated Morse</h3><span class="tl-loc">🌍 Telegraph Era</span><p class="tl-desc">Convert plaintext to dots and dashes, regroup the symbols into triplets, then map each triplet through a keyword-shuffled alphabet. A clever marriage of Morse encoding and substitution that scrambles letter boundaries entirely.</p><a href="ciphers/fractionated-morse.html" class="tl-link">View exhibit →</a></div></div>
 
-    <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/bazeries.html"><span class="tl-date">1898</span><h3 class="tl-title">Bazeries Cylinder</h3><span class="tl-loc">🇫🇷 France</span><p class="tl-desc">Étienne Bazeries reinvents the Jefferson disk as a 20-disk cylinder for the French Army. Rejected by the army; vindicated when the United States adopts the same concept as the M-94 in 1922.</p><a href="ciphers/bazeries.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/bazeries.html"><span class="tl-date">1891</span><h3 class="tl-title">Bazeries Cylinder</h3><span class="tl-loc">🇫🇷 France</span><p class="tl-desc">Étienne Bazeries reinvents the Jefferson disk as a 20-disk cylinder for the French Army. Rejected by the army; vindicated when the United States adopts the same concept as the M-94 in 1922.</p><a href="ciphers/bazeries.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="19c" role="listitem"><span class="tl-dot era-dot-19c"></span><div class="tl-card" data-href="ciphers/two-square.html"><span class="tl-date">~1901</span><h3 class="tl-title">Two-Square Cipher</h3><span class="tl-loc">🇫🇷 France</span><p class="tl-desc">Delastelle's pared-back digraph cipher — only two keyed squares, arranged horizontally or vertically. Faster to set up than Four-Square but leaks more digraph structure.</p><a href="ciphers/two-square.html" class="tl-link">View exhibit →</a></div></div>
 
@@ -490,7 +490,7 @@
         <span class="tl-date">1917</span>
         <h3 class="tl-title">One-Time Pad</h3>
         <span class="tl-loc">🇺🇸 United States</span>
-        <p class="tl-desc">Gilbert Vernam patents the one-time pad — proven by Shannon in 1949 to be the only theoretically unbreakable cipher. The catch: the key must be truly random, as long as the message, and never reused.</p>
+        <p class="tl-desc">Gilbert Vernam builds the electric tape cipher that, with Joseph Mauborgne’s never-reuse rule, becomes the one-time pad — proven by Shannon in 1949 to be the only theoretically unbreakable cipher. The catch: the key must be truly random, as long as the message, and never reused.</p>
         <a href="ciphers/one-time-pad.html" class="tl-link">View exhibit →</a>
       </div>
     </div>
@@ -508,17 +508,20 @@
 
     <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/double-transposition.html"><span class="tl-date">1914</span><h3 class="tl-title">German Double Transposition</h3><span class="tl-loc">🇩🇪 Germany · WWI</span><p class="tl-desc">The German Army standardizes a two-keyword columnar transposition. Apply columnar transposition once, then transpose the resulting block again with a second keyword. Considered effectively unbreakable in the field for the era; used until ADFGX replaced it in 1918.</p><a href="ciphers/double-transposition.html" class="tl-link">View exhibit →</a></div></div>
 
-    <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/vernam.html"><span class="tl-date">1917</span><h3 class="tl-title">Vernam Patent</h3><span class="tl-loc">🇺🇸 AT&amp;T</span><p class="tl-desc">Gilbert Vernam at AT&amp;T patents an XOR-tape teleprinter cipher. With a truly random, never-reused tape it becomes the one-time pad; with any reuse, it falls catastrophically. The first electrically-implemented stream cipher.</p><a href="ciphers/vernam.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/vernam.html"><span class="tl-date">1917</span><h3 class="tl-title">Vernam Tape Cipher</h3><span class="tl-loc">🇺🇸 AT&amp;T</span><p class="tl-desc">Gilbert Vernam at AT&amp;T invents an XOR-tape teleprinter cipher (patented 1919). With a truly random, never-reused tape it becomes the one-time pad; with any reuse, it falls catastrophically. The first electrically-implemented stream cipher.</p><a href="ciphers/vernam.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/adfgx.html"><span class="tl-date">March 1918</span><h3 class="tl-title">ADFGX Cipher</h3><span class="tl-loc">🇩🇪 Germany · WWI</span><p class="tl-desc">Colonel Fritz Nebel's first Polybius-plus-transposition field cipher uses only the letters A, D, F, G, X — chosen because their Morse code is hardest to confuse over noisy radio. Replaced three months later by ADFGVX.</p><a href="ciphers/adfgx.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/chaocipher.html"><span class="tl-date">1918</span><h3 class="tl-title">Chaocipher</h3><span class="tl-loc">🇺🇸 United States</span><p class="tl-desc">John F. Byrne invents a hand cipher with two permuting alphabet wheels that scramble themselves after every letter. He spends decades trying to interest the US government and fails. The mechanism is finally revealed by his estate in 2010 — 92 years later.</p><a href="ciphers/chaocipher.html" class="tl-link">View exhibit →</a></div></div>
 
-    <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/zimmermann.html"><span class="tl-date">1917</span><h3 class="tl-title">Zimmermann Telegram</h3><span class="tl-loc">🇩🇪 Germany → 🇲🇽 Mexico</span><p class="tl-desc">German Foreign Secretary Arthur Zimmermann cables Mexico City a secret offer of an alliance against the United States. British Room 40 intercepts and decodes it — then waits three weeks before revealing it to Washington in a way that protects their codebreaking source. The telegram helps bring America into WWI in April 1917.</p><a href="ciphers/zimmermann.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/zimmermann.html"><span class="tl-date">1917</span><h3 class="tl-title">Zimmermann Telegram</h3><span class="tl-loc">🇩🇪 Germany → 🇲🇽 Mexico</span><p class="tl-desc">German Foreign Secretary Arthur Zimmermann cables Mexico City a secret offer of an alliance against the United States. British Room 40 intercepts and decodes it — then waits five weeks before revealing it to Washington in a way that protects their codebreaking source. The telegram helps bring America into WWI in April 1917.</p><a href="ciphers/zimmermann.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/m-94.html"><span class="tl-date">1922</span><h3 class="tl-title">M-94 Cylinder Cipher Device</h3><span class="tl-loc">🇺🇸 US Army</span><p class="tl-desc">The US Army adopts the M-94 — a 25-disk Jefferson-Bazeries cylinder — as its standard tactical cipher device. Compact, mechanical, and far more portable than a codebook. Used by US forces through the early WWII period, when it was gradually replaced by SIGABA and M-209 for higher-traffic circuits.</p><a href="ciphers/m-94.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/kryha.html"><span class="tl-date">1926</span><h3 class="tl-title">KRYHA Machine</h3><span class="tl-loc">🇩🇪🇺🇸 Germany / US commercial</span><p class="tl-desc">Alexander von Kryha's pocket-sized cipher machine uses a 25-letter substitution wheel driven by a spring-wound irregular stepping mechanism. It is sold commercially and adopted by several small governments and businesses. William Friedman breaks a 1,135-character KRYHA message in 2 hours and 41 minutes in 1933, demonstrating that the irregular stepping mechanism provides far less security than its operators believed.</p><a href="ciphers/kryha.html" class="tl-link">View exhibit →</a></div></div>
+
+
+    <div class="tl-event" data-era="wwi" role="listitem"><span class="tl-dot era-dot-wwi"></span><div class="tl-card" data-href="ciphers/hill.html"><span class="tl-date">1929</span><h3 class="tl-title">Hill Cipher</h3><span class="tl-loc">🇺🇸 United States</span><p class="tl-desc">Lester Hill publishes a cipher built on matrix multiplication mod 26 — the first practical algebraic cipher. Mostly broken by known-plaintext linear algebra, but its core idea (mixing multiple input symbols to produce each output symbol) survives directly in AES MixColumns.</p><a href="ciphers/hill.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-era-header" id="era-wwii"><span>World War II</span></div>
 
@@ -563,7 +566,7 @@
         <span class="tl-date">1942–1945</span>
         <h3 class="tl-title">Navajo Code Talkers</h3>
         <span class="tl-loc">🇺🇸 Pacific Theater</span>
-        <p class="tl-desc">420 Navajo Marines transmit battlefield orders in a language no adversary can decode. Their code, based on the Navajo language with military-specific vocabulary layered on top, is the only widely-used military cipher that was never broken.</p>
+        <p class="tl-desc">420 Navajo Marines transmit battlefield orders in a language no adversary can decode. Their code, based on the Navajo language with military-specific vocabulary layered on top, is among the very few widely-used military ciphers never broken.</p>
         <a href="ciphers/navajo-code-talkers.html" class="tl-link">View exhibit →</a>
       </div>
     </div>
@@ -578,7 +581,6 @@
       </div>
     </div>
 
-    <div class="tl-event" data-era="modern" role="listitem"><span class="tl-dot era-dot-modern"></span><div class="tl-card" data-href="ciphers/hill.html"><span class="tl-date">1929</span><h3 class="tl-title">Hill Cipher</h3><span class="tl-loc">🇺🇸 United States</span><p class="tl-desc">Lester Hill publishes a cipher built on matrix multiplication mod 26 — the first practical algebraic cipher. Mostly broken by known-plaintext linear algebra, but its core idea (mixing multiple input symbols to produce each output symbol) survives directly in AES MixColumns.</p><a href="ciphers/hill.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="wwii" role="listitem"><span class="tl-dot era-dot-wwii"></span><div class="tl-card" data-href="ciphers/m209.html"><span class="tl-date">1940</span><h3 class="tl-title">Hagelin M-209</h3><span class="tl-loc">🇺🇸 US Army</span><p class="tl-desc">Boris Hagelin's pin-and-lug mechanical cipher machine becomes the US Army's tactical workhorse — 140,000 units issued. Cryptographically a Beaufort cipher with a deterministic but long key cycle. Captured M-209 traffic was readable to German cryptanalysts within hours, but Allied operational discipline limited the damage.</p><a href="ciphers/m209.html" class="tl-link">View exhibit →</a></div></div>
 
@@ -600,7 +602,7 @@
         <span class="tl-date">1977</span>
         <h3 class="tl-title">RSA &amp; DES</h3>
         <span class="tl-loc">🇺🇸 United States</span>
-        <p class="tl-desc">Rivest, Shamir, and Adleman publish RSA — the first practical public-key cryptosystem. The same year, NIST standardizes DES as the federal encryption standard. The era of algorithmic, standardized cryptography begins.</p>
+        <p class="tl-desc">Rivest, Shamir, and Adleman publish RSA — the first practical public-key cryptosystem. The same year, the National Bureau of Standards (NIST’s predecessor) standardizes DES as the federal encryption standard. The era of algorithmic, standardized cryptography begins.</p>
       </div>
     </div>
 
@@ -610,7 +612,7 @@
         <span class="tl-date">1990</span>
         <h3 class="tl-title">Kryptos at CIA Headquarters</h3>
         <span class="tl-loc">🇺🇸 Langley, Virginia</span>
-        <p class="tl-desc">Sculptor Jim Sanborn installs <em>Kryptos</em> in the CIA's New Headquarters courtyard — a copper screen of 1,735 carved characters in four sections. K1 (keyed Vigenère with PALIMPSEST), K2 (keyed Vigenère with ABSCISSA), and K3 (a 192-character transposition) are publicly solved by 1999. K4 — 97 characters — remains unsolved despite three Sanborn-released cribs (BERLIN, CLOCK, NORTHEAST). Living cryptography in stainless steel and copper.</p>
+        <p class="tl-desc">Sculptor Jim Sanborn installs <em>Kryptos</em> in the CIA's New Headquarters courtyard — a copper screen of 1,735 carved characters in four sections. K1 (keyed Vigenère with PALIMPSEST), K2 (keyed Vigenère with ABSCISSA), and K3 (a 336-character transposition) are publicly solved by 1999. K4 — 97 characters — remains unsolved despite three Sanborn-released cribs (BERLIN, CLOCK, NORTHEAST). Living cryptography in stainless steel and copper.</p>
         <a href="ciphers/kryptos.html" class="tl-link">View exhibit →</a>
       </div>
     </div>
@@ -662,7 +664,7 @@
 
     <div class="tl-event" data-era="modern" role="listitem"><span class="tl-dot era-dot-modern"></span><div class="tl-card" data-href="ciphers/vic.html"><span class="tl-date">1950s</span><h3 class="tl-title">VIC Cipher</h3><span class="tl-loc">🇷🇺 Soviet Union</span><p class="tl-desc">The most sophisticated hand cipher ever fielded in espionage — carried by Soviet spy Reino Häyhänen to America. Combines straddling checkerboard, chain addition, and double transposition with a key derived from a song lyric. Most intercepted VIC messages were never broken by cryptanalysis; the cipher was exposed only by Häyhänen's defection in 1957.</p><a href="ciphers/vic.html" class="tl-link">View exhibit →</a></div></div>
 
-    <div class="tl-event" data-era="modern" role="listitem"><span class="tl-dot era-dot-modern"></span><div class="tl-card" data-href="ciphers/venona.html"><span class="tl-date">1943–1980</span><h3 class="tl-title">VENONA Project</h3><span class="tl-loc">🇺🇸 Arlington Hall / NSA</span><p class="tl-desc">The US Army discovers Soviet one-time pad key reuse: two messages encrypted with the same OTP key are XOR-able, yielding P1 ⊕ P2. Over 37 years, analysts decode thousands of Soviet intelligence cables and identify Julius Rosenberg, Klaus Fuchs, Kim Philby, and the Cambridge Five. VENONA remains classified until 1995.</p><a href="ciphers/venona.html" class="tl-link">View exhibit →</a></div></div>
+    <div class="tl-event" data-era="modern" role="listitem"><span class="tl-dot era-dot-modern"></span><div class="tl-card" data-href="ciphers/venona.html"><span class="tl-date">1943–1980</span><h3 class="tl-title">VENONA Project</h3><span class="tl-loc">🇺🇸 Arlington Hall / NSA</span><p class="tl-desc">The US Army discovers Soviet one-time pad key reuse: two messages encrypted with the same OTP key are XOR-able, yielding P1 ⊕ P2. Over 37 years, analysts decode thousands of Soviet intelligence cables and identify Julius Rosenberg, Klaus Fuchs, and members of the Cambridge Five. VENONA remains classified until 1995.</p><a href="ciphers/venona.html" class="tl-link">View exhibit →</a></div></div>
 
     <div class="tl-event" data-era="modern" role="listitem"><span class="tl-dot era-dot-modern"></span><div class="tl-card" data-href="ciphers/kl-7.html"><span class="tl-date">1952</span><h3 class="tl-title">KL-7 ADONIS</h3><span class="tl-loc">🇺🇸 NSA / NATO</span><p class="tl-desc">The KL-7 is the principal NATO cipher machine of the 1950s–60s: eight rotor wheels (one stationary), a non-standard stepping mechanism, and interchangeable core wiring. Issued to all NATO allies. Compromised by John Walker's spy ring from 1968 to 1985 — the worst peacetime naval intelligence loss in US history.</p><a href="ciphers/kl-7.html" class="tl-link">View exhibit →</a></div></div>
 
@@ -679,10 +681,10 @@
     <div class="tl-event" data-era="quantum" role="listitem">
       <span class="tl-dot era-dot-quantum"></span>
       <div class="tl-card">
-        <span class="tl-date">2017–2024</span>
+        <span class="tl-date">2016–2024</span>
         <h3 class="tl-title">Post-Quantum Cryptography</h3>
         <span class="tl-loc">🌍 Global · NIST</span>
-        <p class="tl-desc">NIST launches the Post-Quantum Cryptography competition in 2017. In 2024, ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205) are standardized — designed to resist quantum computers running Shor's algorithm. The ancient arms race continues.</p>
+        <p class="tl-desc">NIST launches the Post-Quantum Cryptography project in 2016. In 2024, ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205) are standardized — designed to resist quantum computers running Shor's algorithm. The ancient arms race continues.</p>
       </div>
     </div>
 
