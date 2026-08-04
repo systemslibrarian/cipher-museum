@@ -70,13 +70,31 @@ or could not be confirmed.
 3. **`ciphers/cicada-3301.html`** — the "Mariko Ōhara" book reference and
    phone-message wording don't match the documented 2012 solution
    (Mabinogion + Agrippa); the section needs a rewrite against sources.
-4. **Unsourced color, left in place pending review**: D'Agapeyeff "three
-   doctoral theses" and "Vincent Lynch"; Driscoll FDR anecdote; Elizebeth
-   Friedman "Olmstead testimony", LUNA/SARGO/MAGICIAN codenames, "always
-   wins" quote; Dorabella "Elgar Society standing prize"; Dunin "NSA Day of
-   Cryptology"; Great Cipher "cifre dolose" and "Victor Gendron";
-   Gravity Falls season-2 key details; IRA book-cipher FBI/Garda story;
-   da Vinci Code museum-attendance statistic; Culper "178 = spy".
+4. ~~**Unsourced color, left in place pending review**~~ **RESOLVED.** All
+   items worked under source-it-or-cut-it: search for a real source, and if
+   none is found in ~2 searches, delete the sentence rather than soften it.
+   **One kept, ten cut.**
+   - *Kept, now cited:* da Vinci Code tourism figures (CBC on the Louvre's 2005
+     record; Rosslyn Chapel Trust's own visitor numbers).
+   - *Cut:* D'Agapeyeff "three doctoral theses" and "Vincent Lynch" (the
+     surviving two-layer hypothesis is Nick Pelling's and is now attributed);
+     Driscoll FDR anecdote; Elizebeth Friedman "Olmstead testimony" (she had no
+     role in that case), the LUNA/SARGO/MAGICIAN "network codenames" (LUNA and
+     SARGO are real but are *agent* aliases) and the "always wins" quote;
+     Dorabella "standing prize" (it was a time-limited 2007 competition, never
+     awarded); Dunin "NSA Day of Cryptology" (no such event; the real one is the
+     NSA Cryptologic History Symposium); Great Cipher "cifre dolose" and
+     "Victor Gendron"; Gravity Falls season-2 key (wrong in four places — every
+     episode uses a different keyword); IRA FBI/Garda seizure story (cut across
+     seven surfaces, and the page's whole premise was subsequently rebuilt on
+     the documented Twomey corpus); Culper "178 = spy".
+   - *Two adjacent claims found during the sweep and also cut:* da Vinci Code
+     "a **verified** spike in enrollment in cryptography and medieval history
+     courses", and Driscoll "the first serious historical account of her work
+     appeared in 1995" — replaced with her documented recognition record.
+   - **Circularity worth recording:** for "cifre dolose" and "Victor Gendron"
+     the only search hit was ciphermuseum.com itself. The site was its own
+     source.
 5. **Small structural items**: pigpen glyph diagram draws the wrong corner
    shapes (needs an SVG redraw); polybius HELLO highlight cells; slidex
    grid-size contradictions (17×17 vs 26×26 vs 676); alberti/chaocipher
