@@ -95,7 +95,7 @@
         <p style="margin-top:1rem;">On July 6, 1586, Anthony Babington wrote to Mary describing the plot: six gentlemen would assassinate Elizabeth; Mary would be freed by an invasion force. On July 17, Mary replied — endorsing the plot in writing, asking only for details on the gentlemen and the timing. Phelippes decoded it the same week. Famously, before forwarding the letter to Babington, Phelippes added a forged postscript in Mary's cipher asking for the names of the six conspirators. Babington wrote back with the names. Walsingham now had evidence enough to arrest the conspirators (they were hanged, drawn, and quartered in September) and to put Mary on trial. She was beheaded at Fotheringhay Castle on February 8, 1587.</p>
         <div class="callout">
           <span class="callout-icon">💡</span>
-          <div class="callout-body"><p><em>"She trusted in her cipher, and her cipher betrayed her."</em> — Simon Singh, <em>The Code Book</em>, summarizing the moment Mary realized at her trial that her own letters had been read all along. The trial transcripts record her shock when the deciphered correspondence was produced.</p></div>
+          <div class="callout-body"><p>She trusted in her cipher, and her cipher betrayed her: at her trial, the deciphered correspondence was produced in full. The trial transcripts record her shock when the deciphered correspondence was produced.</p></div>
         </div>
       </div>
     </div>
@@ -153,7 +153,7 @@
             <text class="bb-sym" x="200" y="192" style="font-size:18px;fill:#e8d5a3">⇒</text>
             <text x="280" y="195" class="bb-lbl" style="font-size:14px;fill:#e8d5a3">decodes as "LL"</text>
           </svg>
-          <figcaption class="figure-caption">Common words like THE, QUEEN, and MUST got their own glyphs; rare letters used letter symbols; dashed glyphs are nulls (decoys dropped on decode); one trap glyph doubled the previous letter — exactly as the original 1586 key did.</figcaption>
+          <figcaption class="figure-caption">Common words like THE, QUEEN, and MUST got their own glyphs; rare letters used letter symbols; dashed glyphs are nulls (decoys dropped on decode); one trap glyph doubled the next letter — exactly as the original 1586 key did.</figcaption>
         </figure>
         <p style="margin-top:1rem;">Encryption is a greedy-longest-match scan: clerks looked for the longest codeword that started at the current position. Where no codeword matched, they dropped to a single letter glyph. Nulls were sprinkled in as decoys. Decryption requires the codebook in front of you.</p>
       </div>
@@ -230,7 +230,7 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-puzzle"/></svg></span><span class="panel-title">About this Demo</span></div>
       <div class="panel-body">
-        <p>The original 64-glyph key is in the British Library (Cotton MS Caligula C IX). This demo uses ASCII tokens drawn from a 64-symbol pool — <code>⟨a01⟩…⟨a23⟩</code>, <code>⟨w01⟩…⟨w36⟩</code>, <code>⟨n01⟩…⟨n04⟩</code>, and <code>⟨x2⟩</code> — but the seed shuffles which symbol stands for which letter, codeword, null, or the doubleth, so a symbol's prefix says nothing about its role. Under the default seed <code>BABINGTON</code>, for example, the doubleth is <code>⟨w18⟩</code> and <code>⟨x2⟩</code> is the codeword DEATH.</p>
+        <p>The original cipher chart survives in The National Archives (SP 12/193). This demo uses ASCII tokens drawn from a 64-symbol pool — <code>⟨a01⟩…⟨a23⟩</code>, <code>⟨w01⟩…⟨w36⟩</code>, <code>⟨n01⟩…⟨n04⟩</code>, and <code>⟨x2⟩</code> — but the seed shuffles which symbol stands for which letter, codeword, null, or the doubleth, so a symbol's prefix says nothing about its role. Under the default seed <code>BABINGTON</code>, for example, the doubleth is <code>⟨w18⟩</code> and <code>⟨x2⟩</code> is the codeword DEATH.</p>
         <p style="margin-top:.75rem;">Try encoding "<em>POISON THE QUEEN AT THE TOWER</em>" and notice how POISON, THE, QUEEN, and TOWER each get their own codeword (one glyph for the whole word). Then encode "ATTACK" and watch the doubleth trap fire on the doubled T.</p>
         <p style="margin-top:.75rem;">J folds to I and V folds to U, matching the historical 23-letter Elizabethan alphabet.</p>
       </div>

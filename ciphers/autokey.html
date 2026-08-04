@@ -79,12 +79,12 @@
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
-      <p>Vigenère's <em>autokey</em> is the under-appreciated half of his 1586 system. After the keyword is exhausted, the plaintext itself is appended to the key — so the key never repeats. That single change wiped out the Kasiski attack a century before Kasiski wrote it down. For nearly 350 years the autokey was effectively unbreakable in the field, until William F. Friedman's 1920s statistical machinery made it tractable.</p>
+      <p>Vigenère's <em>autokey</em> is the under-appreciated half of his 1586 system. After the keyword is exhausted, the plaintext itself is appended to the key — so the key never repeats. That single change wiped out the Kasiski attack nearly three centuries before Kasiski wrote it down. For nearly 350 years the autokey was effectively unbreakable in the field, until William F. Friedman's 1920s statistical machinery made it tractable.</p>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>Belaso (1553) and Cardano (1556) had both proposed self-extending keys; Vigenère's <em>Traicté des chiffres</em> (1586) gave the construction its definitive form and unfortunately also presented the much weaker repeating-key variant. History remembered the wrong one: the polyalphabetic that became known as &lsquo;the Vigenère cipher&rsquo; for the next four centuries is the breakable repeating-key version, and Vigenère's actually-strong autokey was largely forgotten until Friedman's interwar work.</p></div>
+      <div class="panel-body"><p>Cardano (1550) had proposed a flawed self-keying scheme, and Bellaso (1553) the repeating countersign; Vigenère's <em>Traicté des chiffres</em> (1586) gave the construction its definitive form and unfortunately also presented the much weaker repeating-key variant. History remembered the wrong one: the polyalphabetic that became known as &lsquo;the Vigenère cipher&rsquo; for the next four centuries is the breakable repeating-key version, and Vigenère's actually-strong autokey was largely forgotten until Friedman's interwar work.</p></div>
     </div>
 
     <div class="panel">
@@ -109,7 +109,7 @@
         <table class="cipher-table">
           <thead><tr><th>Concept from Autokey</th><th>Modern Evolution</th></tr></thead>
           <tbody>
-            <tr><td>Self-extending key</td><td>Modern stream ciphers feed plaintext-derived state back in too — but only via cryptographic mixing (e.g., AES-OFB key schedule)</td></tr>
+            <tr><td>Self-extending key</td><td>Modern stream ciphers feed plaintext-derived state back in too — but only via cryptographic mixing (e.g., CFB mode feeding ciphertext back through the cipher)</td></tr>
             <tr><td>Friedman's index of coincidence (κ)</td><td>Still the canonical periodicity test taught in cryptanalysis courses</td></tr>
             <tr><td>&lsquo;Don't reuse keys&rsquo; isn't enough</td><td>If your &lsquo;key' has natural-language structure you've leaked it</td></tr>
           </tbody>

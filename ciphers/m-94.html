@@ -57,7 +57,7 @@
   </div>
   <div class="page-meta">
     <span class="page-num">Hall VII · Machines</span>
-    <span class="badge era-modern">WWI → WWII tactical · 1922–1942</span>
+    <span class="badge era-modern">WWI → WWII tactical · 1922–1943</span>
     <span class="badge sec-broken">Tactical only</span>
   </div>
   <h1 class="page-title">M-94 / CSP-488 <span style="opacity:.6;font-weight:400;">US Army strip / disk cipher · 1922</span></h1>
@@ -79,7 +79,7 @@
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
-      <p>Thomas Jefferson sketched a cipher wheel of 36 lettered disks on a spindle around 1795, used it briefly, and tucked the design away — it was rediscovered in his papers in 1922. Within months the US Army adopted essentially the same idea as the M-94 (the Navy version was the CSP-488). It is the only major US cipher system whose direct ancestor is a Founding Father.</p><p style="margin-top:1rem;">The M-94 served as the standard tactical cipher of the US Army through the 1920s and 1930s and was still in field use in early WWII alongside the M-209 and SIGABA. It was retired in 1943, by which point its tactical-level security was acknowledged as marginal.</p>
+      <p>Thomas Jefferson sketched a cipher wheel of 36 lettered disks on a spindle around 1795, used it briefly, and tucked the design away — it was rediscovered in his papers in 1922 — the same year the US Army fielded the M-94 (Navy: CSP-488), independently developed from Parker Hitt’s strip-cipher designs. The resemblance to Jefferson’s wheel was noticed only afterwards: a Founding Father had anticipated the concept by 127 years.</p><p style="margin-top:1rem;">The M-94 served as the standard tactical cipher of the US Army through the 1920s and 1930s and was still in field use in early WWII alongside the M-209 and SIGABA. It was retired in 1943, by which point its tactical-level security was acknowledged as marginal.</p>
     </div>
 
     <div class="panel">
@@ -89,7 +89,7 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
-      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Multiple-anagram attack on the disk order</div><div class="attack-diff">Complexity: Tractable for short tactical traffic</div><p class="attack-desc">The cipher’s key is the daily disk-order permutation (25!) and the chosen offset row. With several intercepts of similar length the analyst can superimpose them at the same offset; columns then come from the same disk, and a multiple-anagram attack on the columns recovers the disk order. The Friedman / Kullback team at the SIS demonstrated practical breaks well before WWII.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Captured disk sets</div><div class="attack-diff">Complexity: Trivial once disks are in hand</div><p class="attack-desc">A disk set captured intact reduces the daily key from 25! to 25! / (25 ⋅ 24!) — you only need the order, not the wirings. The US Army accepted this risk for tactical traffic and reserved SIGABA for anything strategic.</p></div></div>
+      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Multiple-anagram attack on the disk order</div><div class="attack-diff">Complexity: Tractable for short tactical traffic</div><p class="attack-desc">The cipher’s key is the daily disk-order permutation (25!) and the chosen offset row. With several intercepts of similar length the analyst can superimpose them at the same offset; columns then come from the same disk, and a multiple-anagram attack on the columns recovers the disk order. The Friedman / Kullback team at the SIS demonstrated practical breaks well before WWII.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Captured disk sets</div><div class="attack-diff">Complexity: Trivial once disks are in hand</div><p class="attack-desc">A disk set captured intact leaves only the daily disk order to find — the 25! orderings remain the key, but the alphabets are no longer secret. The US Army accepted this risk for tactical traffic and reserved SIGABA for anything strategic.</p></div></div>
     </div>
 
     <div class="panel">
