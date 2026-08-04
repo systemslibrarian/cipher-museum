@@ -118,7 +118,7 @@
           <input type="range" id="mr" min="2" max="3231" step="1" value="65">
         </label>
         <button id="send">Encrypt → Decrypt</button>
-        <div class="readout" id="tread">—</div>
+        <div class="readout" id="tread" aria-live="polite" role="status">—</div>
       </div>
       <div class="lab-hint">
         Toy key: p = 61, q = 53, n = 3233, e = 17, d = 2753. Real RSA uses the
