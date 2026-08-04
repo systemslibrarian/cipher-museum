@@ -1142,3 +1142,26 @@ pre,.output-box,.wb-output-area{overflow-x:auto;max-width:100%}
   pre{white-space:pre-wrap;border:1px solid #bbb;padding:.5rem}
   img{max-width:100% !important;filter:none !important}
 }
+
+/* ── Motion polish ─────────────────────────────────────────────── */
+/* Cross-page fade via the View Transitions API. Progressive enhancement:
+   unsupported browsers ignore all of this and navigate as before. */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vt-fade-out .18s ease both}
+::view-transition-new(root){animation:vt-fade-in .22s ease both}
+@keyframes vt-fade-out{to{opacity:0}}
+@keyframes vt-fade-in{from{opacity:0}}
+/* Keyboard focus earns the same micro-states as hover on every card. */
+.hall-card:focus-visible{border-color:var(--gold-b);transform:translateY(-3px);box-shadow:var(--sh)}
+.hall-card:focus-visible::after{opacity:1}
+.hall-card:focus-visible .hall-card-arrow{color:var(--gold);gap:.75rem}
+.cipher-card:focus-visible{border-color:var(--gold-b);background:var(--s3);transform:translateY(-3px);box-shadow:var(--sh)}
+.cipher-card:focus-visible .card-arrow{color:var(--gold);transform:translateX(4px)}
+.related-card:focus-visible{border-color:var(--gold-b);background:var(--s3);transform:translateY(-2px);box-shadow:var(--sh)}
+.path-card:focus-visible{border-color:var(--gold-b);transform:translateY(-4px);box-shadow:var(--sh)}
+.path-card:focus-visible .path-card-cta{color:var(--gold-lt)}
+.ticker-item:focus-visible{color:var(--gold)}
+@media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .hall-card:focus-visible,.cipher-card:focus-visible,.related-card:focus-visible,.path-card:focus-visible{transform:none}
+}
