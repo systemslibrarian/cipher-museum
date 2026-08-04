@@ -80,22 +80,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>SHA-0 (1993) was the NSA's first published hash; an undisclosed weakness led to SHA-1 in 1995. Cryptanalytic advances against MD5 (broken 2004) and SHA-1 (theoretical break 2005, full collision 2017) prompted NIST to standardise the SHA-2 family in 2001 (FIPS 180-2): SHA-224, SHA-256, SHA-384, SHA-512. SHA-256 became the default. After the SHA-1 wake-up call NIST also ran an open competition (2007&ndash;2012) for a structurally different backup; Keccak won and became SHA-3 in 2015 &mdash; not because SHA-256 broke, but to avoid a single-point-of-failure design.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>The input is padded so its length is congruent to 448 mod 512, then a 64-bit length is appended. The padded message is split into 512-bit blocks. Each block is processed by the <em>compression function</em>, which mixes the block into a 256-bit internal state through 64 rounds of bitwise operations: rotations, XORs, AND/OR/NOT, modular addition, and round constants derived from the cube roots of the first 64 primes. After the last block the internal state is the hash output.</p><p>Two security properties matter: <strong>preimage resistance</strong> (given a hash, you cannot find an input that produces it &mdash; would take ~2<sup>256</sup> tries) and <strong>collision resistance</strong> (you cannot find two inputs with the same hash &mdash; would take ~2<sup>128</sup> tries by the birthday bound).</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
       <div class="panel-body"><p>No collision has ever been found in SHA-256. The best published attack reaches 31 of the 64 rounds. SHA-256 is theoretically vulnerable to length-extension attacks &mdash; if you know <code>H(secret &Vert; data)</code> and <code>len(secret &Vert; data)</code>, you can compute <code>H(secret &Vert; data &Vert; padding &Vert; extension)</code> without knowing the secret. The standard mitigation is HMAC-SHA-256 or SHA-3, neither of which has the flaw. Quantum computers using Grover's algorithm reduce SHA-256 preimage resistance from 2<sup>256</sup> to 2<sup>128</sup> &mdash; still secure, which is why SHA-256 is considered post-quantum-safe at lower security levels.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Where</th><th>How SHA-256 is Used</th></tr></thead>
@@ -115,7 +115,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

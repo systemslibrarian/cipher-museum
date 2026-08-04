@@ -83,19 +83,19 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Each letter, digit, and punctuation mark is assigned a unique sequence of dots and dashes. Within a character, elements are separated by one short gap; between characters by a longer gap; between words by a still longer gap (this demo uses <code>/</code> for the word break).</p><pre>SOS   = ... --- ...
 HELLO = .... . .-.. .-.. ---
 73    = --... ...--   (amateur-radio sign-off, "best regards")</pre><p style="margin-top:1rem;">The code is roughly optimised for English letter frequencies — E is a single dot, T is a single dash, common letters are short, rare letters long. This makes Morse one of the earliest examples of variable-length coding, predating Huffman by a century.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">It was never "broken" — it is a public encoding</div><div class="attack-diff">Complexity: Trivial (look up the table)</div><p class="attack-desc">Morse is not, and was never intended to be, a cipher. It is a public encoding designed for transmission efficiency and readability. The cryptographic question is always about the cipher running on top of Morse, not Morse itself.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Operator-fingerprinting</div><div class="attack-diff">Used for traffic analysis throughout WWII</div><p class="attack-desc">Skilled operators have a recognisable rhythm — their <em>fist</em>. Allied direction-finding stations could identify individual German operators by ear, track them as they moved between units, and reconstruct order-of-battle even when the underlying Enigma traffic remained unread. The encoding was public, but the human at the key was unique.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Morse-era idea</th><th>Modern echo</th></tr></thead><tbody><tr><td>Encoding ≠ encryption</td><td>Base64, hex, ASCII vs. ChaCha20 — same distinction</td></tr><tr><td>Variable-length symbols</td><td>Huffman coding, gzip, JPEG entropy stages</td></tr><tr><td>Layered transport</td><td>TLS-over-TCP-over-IP — separate concerns at each layer</td></tr><tr><td>Side-channel: operator fist</td><td>Modern timing attacks, keystroke fingerprinting</td></tr></tbody></table></div>
     </div>
 
@@ -103,7 +103,7 @@ HELLO = .... . .-.. .-.. ---
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
@@ -118,13 +118,13 @@ HELLO = .... . .-.. .-.. ---
       </div>
     </div>
     <div class="panel" style="margin-top:1.25rem;">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-signal"/></svg></span><span class="panel-title">Voyager Golden Record Sidebar</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-signal"/></svg></span><span class="panel-title">Voyager Golden Record Sidebar</span></div>
       <div class="panel-body">
         <p>The Voyager probes (1977) did not transmit Morse as an encryption system, but they inherited its core insight: <strong>make symbols decodable without language sharing</strong>. The Golden Record's playback and image instructions are encoded as universal mathematical diagrams, just as Morse normalised telegraph symbols for any trained operator.</p>
       </div>
     </div>
     <div class="panel" style="margin-top:1.25rem;">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-signal"/></svg></span><span class="panel-title">Morse + Cipher Combination Pattern</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-signal"/></svg></span><span class="panel-title">Morse + Cipher Combination Pattern</span></div>
       <div class="panel-body">
         <p>Historically, operators rarely sent plain Morse in contested channels. The common stack was:</p>
         <ol style="margin-top:.6rem;line-height:1.7;padding-left:1.25rem;">

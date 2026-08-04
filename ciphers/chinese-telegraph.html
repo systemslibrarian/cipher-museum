@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>The codebook is a giant lookup table. Each Chinese character maps to a fixed 4-digit number (0001–9999); the operator transmits the digits as Morse code. The receiver looks up each 4-digit group in their copy of the same codebook and recovers the character.</p><p style="margin-top:1rem;">For confidentiality, codebook digits were <strong>super-enciphered</strong> by an additive: a numeric key (often supplied by a daily one-time pad page) was added to each code group modulo 10,000, then transmitted. The recipient subtracted the same additive before consulting the codebook. This is the architecture later adopted by the Japanese Navy in JN-25 and many other 20th-century military codebooks.</p><p style="margin-top:1rem;">The demo above operates over the Latin alphabet to keep the round-trip transparent: each A–Z letter receives one of 26 stable 4-digit codes, and the additive key is your numeric input.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was (and Was Not) Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was (and Was Not) Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Public codebook → trivial without superencipherment</div><div class="attack-diff">Complexity: Lookup only</div><p class="attack-desc">Civil traffic used the published codebook with no additive. Anyone with a copy could read the messages — the codebook was a transmission convenience, not a cipher.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">With additive: depth attack</div><div class="attack-diff">Complexity: Same as JN-25 — hard, but reduces to additive recovery</div><p class="attack-desc">When two messages were sent with overlapping additives, the difference of ciphertexts equalled the difference of underlying codegroups. Frequency analysis of common characters (the, of, to-style fillers in Chinese) recovered the additive. This is precisely the technique Rochefort’s team used against JN-25.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>CTC lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Codebook + additive = the workhorse military system of the 20th c.</td><td>Block cipher + nonce-based mode is the same architecture (lookup + masking)</td></tr><tr><td>Codebook ID numbers persist in identity systems</td><td>Unicode codepoints are the same idea, with cryptographic neutrality</td></tr><tr><td>Adapting a script to a hostile transport</td><td>Punycode / IDN encoding for non-ASCII domain names</td></tr><tr><td>Once the additive repeats, the system collapses</td><td>Why nonces must never repeat (AES-GCM, ChaCha20-Poly1305)</td></tr></tbody></table></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

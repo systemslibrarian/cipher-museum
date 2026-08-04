@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>The Zimmermann Telegram was protected by the German diplomatic code <strong>0075</strong>: a two-part codebook in which common words and phrases mapped to 4- and 5-digit code groups, and the resulting digit string was super-enciphered by an additive key. By January 1917 the British had recovered enough of 0075 from intercepts and a captured codebook (Magdeburg, 1914) to read most of it.</p><p style="margin-top:1rem;">Because Washington could not receive 0075, the cable was forwarded by the German Embassy from Washington to Mexico City re-encoded in the older diplomatic code <strong>13040</strong>, which the British had also broken. The retransmission was a critical operational error: it gave Room 40 a parallel text in two ciphers and let them attribute the leak to Mexican rather than British sources.</p><p style="margin-top:1rem;">The demo above is a faithful but simplified codebook engine: each input word is encoded as a 5-digit group via a fixed 140-word codebook, with super-enciphered additive applied to every group. Words not in the codebook fall through to a per-letter mode marked by sentinel groups — mirroring how operators handled proper nouns and place names.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Codebook recovery from depth (1914–1917)</div><div class="attack-diff">Complexity: Years of patient analysis</div><p class="attack-desc">Room 40 had been collecting German diplomatic traffic since 1914. Repeated codegroup contexts, captured codebooks (notably the SKM and HVB books from sunk warships), and stylised diplomatic boilerplate let analysts gradually map most of the 0075 and 13040 codebooks before the Zimmermann cable arrived.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Hall’s deception operation</div><div class="attack-diff">Complexity: Statecraft, not cryptanalysis</div><p class="attack-desc">Admiral Sir William “Blinker” Hall, head of Room 40, used a British agent in Mexico to obtain a copy of the cable from a commercial telegraph office in Mexico City — an entirely real document that allowed the British to share the plaintext with the Americans without revealing they had been reading German cable traffic since 1914.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Zimmermann lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Re-encoding the same plaintext in two systems leaks both</td><td>Same key, two protocols → cross-protocol attacks (DROWN, ALPACA)</td></tr><tr><td>Operationally, intercepts depend on owning the wires</td><td>BGP hijack, undersea cable taps, lawful intercept architectures</td></tr><tr><td>The hardest problem is using the intelligence without burning the source</td><td>The Bletchley “ULTRA” disclosure problem; modern source protection in SIGINT</td></tr><tr><td>Diplomatic codebooks are huge symmetric secrets distributed by hand</td><td>Why public-key cryptography was a generational leap forward</td></tr></tbody></table></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Ten rotors sit on a single spindle. Five of them step <strong>forward</strong> on each keypress, and the other five step <strong>backward</strong>. Each rotor advances at its own rate; the stepping pattern is irregular and depends on punched-card key sheets that change daily.</p><p style="margin-top:1rem;">Three further design choices matter:</p><ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li><strong>Asymmetric reflector.</strong> Enigma’s reflector forced the property that no letter could ever encipher to itself (a fatal crib-fitter’s gift). Fialka’s reflector and rotor wiring are arranged so this never holds for the operator.</li><li><strong>Per-message key card.</strong> Operators punched the daily key on a card that physically reconfigured rotor order, ring settings, and stepping. There was no plug-board to mis-set.</li><li><strong>Numeric alphabet.</strong> The rotor alphabet has 30 contacts, not 26 — enough to cover Cyrillic plus digits without a separate “figures” shift.</li></ul></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was (Not) Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was (Not) Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">No public cryptanalytic break</div><div class="attack-diff">Complexity: Believed infeasible without key material</div><p class="attack-desc">No Western agency has admitted to reading Fialka traffic by cryptanalysis. The combination of ten irregularly-stepping rotors and daily key cards puts the workload well beyond contemporary Enigma-style hand methods.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Compromise via key material and HUMINT</div><div class="attack-diff">Complexity: N/A — traffic decrypted using stolen settings, not cryptanalysis</div><p class="attack-desc">What Western intelligence did read it read by stealing key cards or capturing operators — the same way the Soviets read American traffic via Walker. Fialka’s mathematics held; its <em>operational</em> security was the leak.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Fialka design choice</th><th>Modern echo</th></tr></thead><tbody><tr><td>Bidirectional rotor stepping</td><td>Modern stream ciphers mix several clocks at coprime rates (A5/1, Trivium)</td></tr><tr><td>Removing “no letter encrypts to itself”</td><td>Bias removal in modern S-box design</td></tr><tr><td>Daily punched-card key</td><td>Per-session symmetric keys derived from a master key</td></tr><tr><td>Compromise was operational, not mathematical</td><td>Most real-world breaks today are still implementation, not algorithmic</td></tr></tbody></table></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

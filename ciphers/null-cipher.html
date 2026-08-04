@@ -83,18 +83,18 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Pick a position rule. The simplest is <em>first letter of every word</em>:</p><pre>Carrier: <strong>H</strong>elp <strong>E</strong>very <strong>L</strong>ittle <strong>P</strong>up
 Hidden : H E L P</pre><p>The demo on this page builds carrier sentences from a dictionary of common English words and selects ones whose chosen letter matches the next character of your secret. Position keys it accepts:</p><ul><li><code>first</code> — first letter of each word (default)</li><li><code>last</code> — last letter of each word</li><li><code>2</code>, <code>3</code>, … — Nth letter of each word</li></ul><p style="margin-top:1rem;">When no real word fits a needed letter, the demo fabricates a plausible-looking filler so the round-trip always closes. In real use a writer would simply rewrite the carrier sentence around the constraint.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Suspicion plus the right reading rule</div><div class="attack-diff">Complexity: Trivial once you check</div><p class="attack-desc">Once a censor suspects a letter, they read the first letters, then the last letters, then every second letter, and so on. Within a few minutes any single-rule null cipher is exposed.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Statistical anomaly</div><div class="attack-diff">Complexity: Detectable on long carriers</div><p class="attack-desc">Because the carrier is constrained to spell something, its letter and word-length distributions drift away from natural English. Bletchley-era censors maintained statistical baselines for ordinary correspondence and flagged outliers.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><p>The null cipher is the ancestor of every <em>covert channel</em> in computer security: timing channels, DNS-tunnel exfiltration, image-LSB steganography, even the way malware hides in CDN traffic. The mechanism is unchanged from the Roman version — pick a carrier nobody will look at, encode the secret in a property of the carrier nobody will measure.</p><p style="margin-top:1rem;">The defensive lesson is also unchanged. Defenders cannot watch every field of every packet, so attackers have rich choices for where to hide. Best modern practice is to assume covert channels exist and to design protocols that minimise the bandwidth available for them — not to chase every clever new carrier.</p></div>
     </div>
 
@@ -102,7 +102,7 @@ Hidden : H E L P</pre><p>The demo on this page builds carrier sentences from a d
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

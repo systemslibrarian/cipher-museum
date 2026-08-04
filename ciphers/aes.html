@@ -80,22 +80,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>By 1997 NIST knew DES was finished and ran an open international competition to replace it. Fifteen submissions from twelve countries; five finalists (MARS, RC6, Rijndael, Serpent, Twofish) survived to round two. After three years of public cryptanalysis NIST chose <em>Rijndael</em> by Joan Daemen and Vincent Rijmen of Belgium &mdash; the first non-American cipher ever to become a US government standard. The choice was driven by speed, hardware-friendliness, and design clarity. FIPS 197 was published 26 November 2001.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>AES is a substitution-permutation network operating on a 4&times;4 byte state. Each round applies four operations:</p><ul><li><strong>SubBytes</strong> &mdash; replace each byte via a non-linear S-box (algebraic inverse in GF(2<sup>8</sup>))</li><li><strong>ShiftRows</strong> &mdash; cyclically shift each row by 0/1/2/3 positions</li><li><strong>MixColumns</strong> &mdash; multiply each column by a fixed polynomial (skipped in the final round)</li><li><strong>AddRoundKey</strong> &mdash; XOR with the round-specific subkey</li></ul><p>AES-128 runs 10 rounds, AES-192 runs 12, AES-256 runs 14. The key schedule expands the master key into all round keys. The four-operation round delivers Shannon's confusion (S-box) and diffusion (ShiftRows + MixColumns); after 2 rounds every output bit depends on every input bit, after the full round count the dependency is mathematically saturated.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
       <div class="panel-body"><p>The best known attack on full AES-128 is biclique cryptanalysis at 2<sup>126.1</sup> operations &mdash; faster than brute force by a factor of four, but still completely impractical. Practical AES failures are always implementation flaws: cache-timing side channels (BEAST, CRIME, Lucky 13), weak modes (ECB), nonce reuse in GCM, or padding oracles in CBC. Modern Intel and ARM CPUs include AES-NI / AES instructions that make AES essentially free in software, removing the last reason to roll alternative ciphers.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Where</th><th>How AES is Used</th></tr></thead>
@@ -114,7 +114,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

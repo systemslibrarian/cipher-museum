@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Each codebook is essentially two parallel sorted lists:</p><ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li>A <strong>plain index</strong> listing every English word or phrase the codebook covers, in alphabetical order, each beside its codeword.</li><li>A <strong>code index</strong> listing every codeword in alphabetical order, each beside its plaintext.</li></ul><p style="margin-top:1rem;">The CVCVC structure (e.g. <code>BAFEK</code>, <code>QILUP</code>) gave 200,000 possible codewords per book — enough for thousands of phrases plus inflections and proper-name placeholders. Codebooks were rated by their <em>checking distance</em>: how many letters had to differ between any two valid codewords, so that single-character telegraph errors would not turn one valid message into another.</p><p style="margin-top:1rem;">The demo above operates on a small fixed wordlist using exactly the CVCVC encoding scheme. Words not in the wordlist fall through to a per-letter codebook so the round-trip stays clean for arbitrary input.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">Where the Confidentiality Came From (and Where It Failed)</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">Where the Confidentiality Came From (and Where It Failed)</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Public codebooks: no confidentiality at all</div><div class="attack-diff">Complexity: Lookup</div><p class="attack-desc">Anyone with a copy of ABC or Bentley’s could read public-codebook traffic. Their job was compression and error-checking, not secrecy.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Private codebooks: tractable for state actors</div><div class="attack-diff">Complexity: Within reach of professional cryptanalytic bureaus</div><p class="attack-desc">A private codebook is a monoalphabetic substitution on the phrase alphabet — enormous in size, but stable. With enough intercepted traffic and known business context (shipping schedules, commodity prices, named correspondents), professional bureaus reconstructed the codebooks. Yardley’s American Black Chamber and the British GC&amp;CS routinely read private commercial codes between the wars.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Codebook + super-encipherment</div><div class="attack-diff">Complexity: Same as JN-25 / 0075-class systems</div><p class="attack-desc">Banks and shipping firms in the 1920s sometimes added a second-layer additive cipher to a private codebook — essentially the architecture of contemporary military codes. The same depth-attack techniques that worked on JN-25 worked here.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Codebook lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Compression layer that incidentally also encrypts</td><td>HTTP/2 HPACK and QPACK — compression that leaks plaintext via timing (CRIME, BREACH)</td></tr><tr><td>Pronounceable codewords for telegram tariffs</td><td>BIP-39 mnemonic seed words for Bitcoin wallets</td></tr><tr><td>Checking distance between codewords</td><td>Hamming distance in modern error-correcting codes</td></tr><tr><td>Private codebook = monoalphabetic on the phrase alphabet</td><td>Why “custom secret protocol” almost always loses to standard public protocols</td></tr></tbody></table></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

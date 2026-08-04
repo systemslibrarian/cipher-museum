@@ -81,12 +81,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Goldwasser, Micali and Rackoff introduced the idea in 1985, and their paper was rejected three times before publication &mdash; reviewers doubted the concept was coherent. Their contribution was not a protocol so much as a <em>definition</em>: a way to say precisely what &lsquo;revealed nothing' means. Claus-Peter Schnorr gave a compact and practical instance in 1989, and its non-interactive form became the template for a great many modern signature schemes. From 2012 the succinct variants known as zk-SNARKs made proofs small enough and fast enough to verify on a blockchain.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body">
         <p>A zero-knowledge proof must satisfy three properties at once, and the third is the hard one:</p>
         <ul style="line-height:1.9;">
@@ -101,7 +101,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-flask"/></svg></span><span class="panel-title">Run the protocol</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-flask"/></svg></span><span class="panel-title">Run the protocol</span></div>
       <div class="panel-body">
         <p>Arithmetic runs in a group of prime order 233 modulo 467 &mdash; small enough to print every value. Choose a secret, then play as an honest prover or as a cheat who does not know it.</p>
         <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin:18px 0;">
@@ -117,7 +117,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-mask"/></svg></span><span class="panel-title">Why a transcript proves nothing &mdash; the simulator</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-mask"/></svg></span><span class="panel-title">Why a transcript proves nothing &mdash; the simulator</span></div>
       <div class="panel-body">
         <p>Here is the argument that makes &lsquo;zero knowledge' precise, and it is genuinely surprising. Take the protocol's steps <em>out of order</em>: choose the challenge and the response first, then work backwards to the commitment that makes the check succeed. The resulting transcript passes verification perfectly &mdash; and it was produced by someone with no secret at all.</p>
         <p>So a recorded transcript is worthless as evidence. Anyone can forge one. The proof only convinces <strong>the verifier who chose the challenge themselves</strong>, after the commitment was locked in. Conviction lives in the ordering of the messages, not in their contents &mdash; which is exactly why the verifier learns nothing: everything they saw, they could have written themselves.</p>
@@ -130,7 +130,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
       <div class="panel-body">
         <p>Schnorr's soundness is not perfect and is not meant to be: a cheat who guesses the challenge in advance succeeds, with probability 1 divided by the size of the challenge space. On this page that is 1 in 233, which you can watch happen. Real deployments use challenge spaces around 2<sup>256</sup>, where the same gap is unreachable.</p>
         <p>Making the protocol non-interactive introduces the sharper risk. The <strong>Fiat&ndash;Shamir transform</strong> replaces the verifier's random challenge with a hash of the commitment, so the prover can generate the challenge themselves without being able to control it. This is how a Schnorr proof becomes a signature &mdash; but its security then rests on the hash behaving like an ideal random function, an assumption examined honestly in <a href="../hall-of-foundations/random-oracle.html">The Random Oracle</a>. Implementations that hash too little into the challenge have been broken repeatedly; the class of bug is common enough to have a name, the &lsquo;weak Fiat&ndash;Shamir' attack.</p>
@@ -139,7 +139,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
       <div class="panel-body"><p>Zcash uses zk-SNARKs to validate shielded transactions without revealing sender, recipient or amount. Ethereum rollups post a succinct proof that thousands of transactions executed correctly, so the main chain need not re-run them. Anonymous credential systems let you prove an attribute &mdash; over eighteen, a citizen, a subscriber &mdash; without disclosing the underlying document. And every Schnorr or EdDSA signature you verify is a zero-knowledge proof of knowledge that has been made non-interactive.</p></div>
     </div>
 
@@ -148,7 +148,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-key"/></svg></span><span class="panel-title">At a glance</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-key"/></svg></span><span class="panel-title">At a glance</span>
       </div>
       <div class="panel-body">
         <p><strong>Claim:</strong> &lsquo;I know <em>x</em> with <em>g</em><sup><em>x</em></sup> = <em>y</em>.'</p>

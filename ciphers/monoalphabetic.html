@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Monoalphabetic substitution ciphers — where each letter maps permanently to another letter or symbol — are among the oldest cryptographic techniques. They appear in ancient Hebrew texts (the Atbash cipher), Roman inscriptions, and medieval manuscripts. The sheer number of possible keys (26! ≈ 4×10²⁶) made cryptographers believe they were unbreakable.</p><p style="margin-top:1rem;">That belief shattered in 850 AD when Al-Kindi of Baghdad wrote <em>A Manuscript on Deciphering Cryptographic Messages</em> — a nine-page treatise that introduced frequency analysis and rendered every monoalphabetic cipher permanently insecure.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Replace each plaintext letter with a fixed ciphertext letter according to a secret permutation table. The same letter always maps to the same symbol.</p><pre>Plain:  ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Cipher: QWERTYUIOPASDFGHJKLZXCVBNM
 
@@ -172,20 +172,16 @@ HELLO → ITSSG</pre>
         </svg>
         <figcaption class="figure-caption">Each plaintext letter maps to exactly one cipher letter — frequencies are perfectly preserved</figcaption>
       </figure>
-      <figure class="figure">
-        <img width="1600" height="873" src="../images/artifacts/substitution-monoalphabetic-mapping.png" alt="Monoalphabetic substitution cipher mapping showing a scrambled alphabet key and letter-by-letter encryption" loading="lazy">
-        <figcaption class="figure-caption">Monoalphabetic mapping — a full alphabet permutation creates the substitution key, but preserves letter frequencies. Illustration: Google Gemini AI</figcaption>
-      </figure>
       <p style="margin-top:1rem;">With 26! ≈ 4×10²⁶ possible keys, brute force is impossible. But the key is irrelevant — the statistical structure of English leaks through every substitution.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Frequency Analysis (Al-Kindi, 850 AD)</div><div class="attack-diff">Complexity: Easy · Time: Minutes by hand</div><p class="attack-desc">In English, E appears ~12.7% of the time, T ~9.1%, A ~8.2%. Because monoalphabetic ciphers map each letter to exactly one symbol, these frequencies are perfectly preserved. Count ciphertext symbols. The most frequent is almost certainly E. The second is T. Map frequencies to expected values, use word patterns (THE, AND, IS) to confirm, and the key reveals itself.</p></div><div class="callout callout-danger" style="margin-top:1rem;"><span class="callout-icon">⚠️</span><div class="callout-body"><p><strong>Why 26! keys doesn't help:</strong> The keyspace is astronomically large but the statistical fingerprint of English is inescapable. Key size is meaningless if the ciphertext leaks information about the plaintext.</p></div></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Monoalphabetic Substitution</th><th>Modern Evolution</th></tr></thead>
@@ -201,7 +197,7 @@ HELLO → ITSSG</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

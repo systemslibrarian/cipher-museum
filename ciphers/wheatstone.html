@@ -83,17 +83,17 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>The cryptograph is two concentric dials. The outer dial carries the standard alphabet (plus a 27th mark for word-space on the original brass version). The inner dial carries a <strong>mixed</strong> alphabet derived from a keyword — Polybius-style: write the keyword, drop duplicates, then append the unused letters in order.</p><p style="margin-top:1rem;">The two hands are geared together so that the inner hand advances one step for every step of the outer hand. To encrypt a letter you sweep the outer hand around to that plaintext letter; the inner hand simultaneously walks across the mixed alphabet, and you read off the ciphertext letter under the inner hand.</p><p style="margin-top:1rem;">Because the inner hand never returns to a known position relative to the outer alphabet (each successive plaintext letter advances it by a different amount), the substitution changes letter-by-letter. The cipher is genuinely polyalphabetic, even though the operator only handles a single physical key (the keyword that built the inner dial).</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Kasiski / index of coincidence</div><div class="attack-diff">Complexity: Comparable to Vigenère</div><p class="attack-desc">The keystream is fully determined by the plaintext (it is, in effect, a Cardano-style autokey running over a mixed alphabet). Once the mixed alphabet is recovered — and twenty or thirty plausible keywords cover most operator choices — the rest is a Vigenère-grade cryptanalytic problem.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Mechanical capture</div><div class="attack-diff">Complexity: Steal the device</div><p class="attack-desc">The cipher's only secret is the inner-dial keyword. A captured machine, with a known-keyword crib, becomes a Vigenère table.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><p>The Wheatstone cryptograph is the cleanest Victorian illustration of a principle that took another sixty years to be stated as <em>Kerckhoffs's principle</em>: the security of a cipher must rest on its key, not on the secrecy of its mechanism. Wheatstone's machine had a beautiful mechanism and a small key. The mechanism on its own bought no security.</p></div>
     </div>
 
@@ -101,7 +101,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

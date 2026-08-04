@@ -83,19 +83,19 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Encrypt the first letter with shift 0, the second with shift 1, the third with shift 2, and so on. The keystream is just the position counter:</p><pre>Plain:  S T E G A N O G R A P H I A
 Shift:  0 1 2 3 4 5 6 7 8 9 10 11 12 13
 Cipher: S U G J E S U N Z J Z S U N</pre><p style="margin-top:1rem;">The optional starting offset simply moves the counter's origin. There is no keyword. The system is <em>polyalphabetic</em> in form — every letter uses a different alphabet — but the alphabet sequence is public knowledge, so it offers no real secrecy.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Try 26 starting offsets</div><div class="attack-diff">Complexity: Trivial</div><p class="attack-desc">Because the keystream is fixed and public, the only secret is the starting position. Twenty-six guesses recover the plaintext — Caesar-grade work.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Frequency drift</div><div class="attack-diff">Complexity: Easy on long messages</div><p class="attack-desc">After 26 letters the shifts wrap around and a 26-period structure emerges. Splitting the ciphertext into 26 columns and frequency-analysing each one yields the offset.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><p>Trithemius is the proof-of-concept that a single ciphertext letter need not always come from the same alphabet. That single idea unlocks Vigenère, Beaufort, Porta, the Jefferson disk, the Bazeries cylinder, the M-94, the Hagelin lug-and-pin family, and ultimately the rotor machines (Enigma, SIGABA, Typex). Every twentieth-century mechanical cipher is a descendant of Trithemius's table.</p><p style="margin-top:1rem;">The flaw — a public, predictable keystream — is also the lesson. Modern stream ciphers (RC4, ChaCha20) are <em>polyalphabetic</em> in exactly Trithemius's sense, but their keystreams are pseudorandom outputs of a keyed PRF. Same architecture, immensely larger key.</p></div>
     </div>
 
@@ -103,7 +103,7 @@ Cipher: S U G J E S U N Z J Z S U N</pre><p style="margin-top:1rem;">The optiona
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

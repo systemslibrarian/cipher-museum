@@ -85,22 +85,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Knight's team treated the unknown symbols as an unknown language and ran an expectation-maximization (EM) algorithm to find the most likely letter mappings, scoring hypotheses against German n-gram statistics. The breakthrough was recognizing that some symbols were nulls (decoys), some were homophones (multiple symbols → one letter), and that the language was German rather than Latin. The decoded text turned out to be a manual of initiation: candidates for membership had a single hair plucked from their eyebrow; new members took an oath in a darkened chamber; the ritual involved an "eye operation" symbolizing the gain of secret sight. The order has no documented connection to the Bavarian Illuminati but may have been a related fraternal experiment.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Each plaintext letter is enciphered as one of multiple symbols (a homophonic substitution). Common letters (E, N, R, S in German) get more symbols; rare letters get fewer. Some symbols stand for nothing — they are pure decoys inserted to flatten frequencies. A small set of symbols stands for whole words or syllables.<br><br>The Copiale uses ~90 symbols to encode a 26-letter alphabet, giving about 3–4 symbols per letter on average for the most common ones.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Statistical Machine Translation (2011)</div><div class="attack-diff">Complexity: Computational</div><p class="attack-desc">Kevin Knight, Beáta Megyesi, and Christiane Schaefer treated the cipher as an unknown language. Their EM algorithm iteratively refined a probability distribution over symbol-to-letter mappings, scoring against German letter and bigram frequencies. Wrong guesses about the language (Latin, English) produced gibberish; switching to German immediately produced fluent text.</p></div><div class="attack-panel"><div class="attack-name">Hypothesis-Driven Symbol Classification</div><div class="attack-diff">Complexity: Insight</div><p class="attack-desc">The team discovered that certain frequent-but-strange symbols had to be nulls (decoys), and that letter pairs like CH and SCH had dedicated symbols — exactly the German bigrams that needed compression. Recognizing the structural patterns of German shrank the search space dramatically.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Copiale Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -117,7 +117,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

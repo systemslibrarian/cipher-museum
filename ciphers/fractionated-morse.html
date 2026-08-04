@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>The Fractionated Morse cipher exploits Morse code's variable-length encoding as a cryptographic feature. Because different letters produce different numbers of dots and dashes, converting plaintext to Morse before encryption destroys the regular letter-by-letter structure that frequency analysis relies on.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><ol class="steps" style="margin:1rem 0;"><li class="step"><div class="step-text">Convert plaintext to Morse code (dots, dashes, letter separators)</div></li><li class="step"><div class="step-text">Group the Morse stream into triples (·, -, X where X = separator)</div></li><li class="step"><div class="step-text">Replace each triple with a letter using a keyed substitution alphabet</div></li></ol><pre>H = · · · ·   E = ·   L = · - · ·
 HELLO → ····x·x·-··x·-··x---x  (x = letter separator)
 Group triples: ···  ·x·  x·-  ··x  ·-·  ·x-  --x
@@ -127,12 +127,12 @@ Each triple → substituted letter</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Morse Structure Analysis</div><div class="attack-diff">Complexity: Moderate-Hard</div><p class="attack-desc">Despite the variable-length encoding, Morse has predictable structure. Single dots (E) and single dashes (T) are the most common elements. The frequency distribution of triples is non-uniform and reflects Morse letter frequencies. With enough ciphertext, the triple-to-letter mapping can be recovered through frequency analysis of the 27 possible triples.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Fractionated Morse Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -148,7 +148,7 @@ Each triple → substituted letter</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

@@ -83,7 +83,7 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Each Slidex card carries a 17×17 grid (or 12×12 in some issues). The rows and columns are headed by mixed alphabets that change daily. Inside each cell is a printed bigram (e.g. “BT”, “QM”) drawn from a pool of 289 distinct two-letter combinations. To encrypt:</p><ol style="margin:0.5rem 0 0 1.5rem;line-height:1.8;"><li>Find your plaintext bigram by locating its two letters as the row label and column label.</li><li>Read off the cipher bigram printed in that cell.</li></ol><p style="margin-top:1rem;">A sliding paper strip lets the operator change the row alphabet rapidly, giving a polyalphabetic flavour to long messages. Decryption reverses the lookup.</p><p style="margin-top:1rem;">The demo above builds a deterministic 26×26 Slidex card from your seed and substitutes plaintext bigrams accordingly. Odd-length messages are padded with X (the standard Slidex convention).</p>
         <div class="callout callout-info">
           <span class="callout-icon">ℹ️</span>
@@ -95,12 +95,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Bigram frequency analysis</div><div class="attack-diff">Complexity: Routine — days of traffic suffice</div><p class="attack-desc">A bigram cipher with a fixed daily card is essentially a monoalphabetic substitution on the 676-symbol bigram alphabet. The bigrams TH, HE, IN, ER are extremely common in English; identifying just the top few collapses the cipher quickly. German Y-Service units routinely read tactical Slidex within hours of intercept.</p></div><div class="attack-panel" style="margin-top:1rem;"><div class="attack-name">Stereotyped tactical traffic</div><div class="attack-diff">Complexity: Trivial when message templates are predictable</div><p class="attack-desc">“Wilco out”, “roger over”, position reports with grid references, fixed call-signs — tactical traffic is full of cribs. Slidex relied on the message being obsolete by the time the cipher was broken, not on resisting analysis.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body"><table class="cipher-table"><thead><tr><th>Slidex lesson</th><th>Modern echo</th></tr></thead><tbody><tr><td>Cryptographic strength is a function of how long the secret matters</td><td>Modern “forward secrecy” — yesterday’s key shouldn’t decrypt tomorrow’s traffic</td></tr><tr><td>Tactical cipher ≠ strategic cipher</td><td>Different threat models for ephemeral vs long-lived data</td></tr><tr><td>Paper crypto for non-specialist users</td><td>Modern “one-glance” safety: emoji codes, SAS pairing, QR-key exchange</td></tr><tr><td>Stereotyped templates leak structure</td><td>Why protocol designers obsess over removing predictable headers (HTTP/2 HPACK)</td></tr></tbody></table></div>
     </div>
 
@@ -108,7 +108,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

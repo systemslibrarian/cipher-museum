@@ -151,14 +151,9 @@
       <figcaption class="figure-caption">Caesar Cipher Disc (Chiffrierscheibe) — Linge, Pleidelsheim, Germany. Modern reproduction of the classical rotary disc design. Image: Hubert Berberich (HubiB) · Public Domain</figcaption>
     </figure>
 
-    <figure class="figure">
-      <img width="1600" height="873" src="../images/artifacts/substitution-caesar-example.png" alt="Step-by-step Caesar cipher encryption example showing each letter shifted by the key value" loading="lazy">
-      <figcaption class="figure-caption">Caesar cipher worked example — each plaintext letter shifted by a fixed number of positions in the alphabet. Illustration: Google Gemini AI</figcaption>
-    </figure>
-
     <!-- History -->
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body">
         <p>Julius Caesar used this cipher to communicate with his generals during the Gallic Wars. Suetonius records it in <em>The Twelve Caesars</em> (c. 121 AD): <em>"If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out."</em></p>
         <p style="margin-top:1rem;">Caesar typically used a shift of 3. His nephew Augustus preferred a shift of 1. The cipher offered minimal protection — most of Caesar's enemies were illiterate, so even an unencrypted Latin message was safe from most interceptors.</p>
@@ -171,7 +166,7 @@
 
     <!-- How It Works -->
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body">
         <p>Each letter is replaced by the letter a fixed number of positions down the alphabet. The shift wraps around using modular arithmetic:</p>
         <pre style="margin:1rem 0;">Encrypt: C = (P + shift) mod 26
@@ -206,7 +201,7 @@ Example (shift = 3):
 
     <!-- Cryptanalysis -->
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body">
         <div class="attack-panel">
           <div class="attack-name">Frequency Analysis</div>
@@ -227,7 +222,7 @@ Example (shift = 3):
 
     <!-- Modern Lesson -->
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Caesar Concept</th><th>Evolved Into</th></tr></thead>
@@ -282,7 +277,7 @@ Example (shift = 3):
         </div>
 
         <div class="panel" style="margin-top:1.25rem;">
-          <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-signal"/></svg></span><span class="panel-title">Culture Link: Caesar in Gravity Falls</span></div>
+          <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-signal"/></svg></span><span class="panel-title">Culture Link: Caesar in Gravity Falls</span></div>
           <div class="panel-body">
             <p>The Disney series <a href="../ciphers/gravity-falls.html">Gravity Falls</a> popularized a generation of Caesar-solvers by hiding end-credit clues in simple shifts and layered substitutions. It is a modern example of why classical ciphers remain pedagogically powerful: fast to learn, satisfying to break, and instantly reusable in storytelling.</p>
           </div>
@@ -292,7 +287,7 @@ Example (shift = 3):
 
     <!-- Frequency Analyzer -->
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-chart"/></svg></span><span class="panel-title">Letter Frequency Analyzer</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-chart"/></svg></span><span class="panel-title">Letter Frequency Analyzer</span></div>
       <div class="panel-body">
         <p style="font-size:.88rem;margin-bottom:1rem;">Paste any ciphertext to see letter frequencies. Gold bars reveal the pattern — find the tallest bar to guess the shift.</p>
         <label class="input-label" for="freqInput">Ciphertext to analyze</label>
@@ -304,7 +299,7 @@ Example (shift = 3):
 
     <!-- Auto-Break (chi-squared cryptanalysis) -->
     <div class="panel" id="autobreak">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title">Break a Caesar Cipher</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title">Break a Caesar Cipher</span></div>
       <div class="panel-body">
         <p style="font-size:.88rem;margin-bottom:.75rem;">Paste any Caesar ciphertext. The tool tries all 25 shifts and ranks each candidate by how close its letter frequencies are to standard English (chi-squared distance — lower is better).</p>
         <label class="input-label" for="breakInput">Ciphertext to break</label>
@@ -327,7 +322,7 @@ Example (shift = 3):
     <!-- Challenge -->
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span>
         <span class="panel-title" style="color:var(--gold);">Break This Cipher</span>
       </div>
       <div class="panel-body">

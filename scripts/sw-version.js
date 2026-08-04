@@ -4,12 +4,17 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// The bundles whose content defines the offline cache generation. Keep in
-// sync with scripts/build-min.js TARGETS.
+// The files whose content defines the offline cache generation. The minified
+// bundles must stay in sync with scripts/build-min.js TARGETS; the shared
+// stylesheet and icon sprite are hashed too, so a returning visitor's cached
+// copies are purged whenever they change (new HTML + stale CSS once broke
+// icon sizing for exactly one visit).
 const BUNDLES = [
   'js/ciphers/all-engines.min.js',
   'js/demo-loader.min.js',
-  'js/artifact-cards-data.min.js'
+  'js/artifact-cards-data.min.js',
+  'css/museum.css',
+  'images/icons.svg'
 ];
 
 function swVersionFor(root) {

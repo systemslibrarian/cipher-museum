@@ -80,22 +80,22 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>IBM's Horst Feistel led the design of <em>Lucifer</em> in the early 1970s. NBS (now NIST) issued an open call for a standard cipher; IBM submitted a hardened Lucifer derivative; NSA modified the S-boxes and reduced the key from 112 bits to 56 bits. Cryptographers cried foul over the key-length cut and the unexplained S-box changes &mdash; until 1991, when Biham and Shamir showed the NSA's S-boxes were specifically hardened against differential cryptanalysis, a technique IBM and NSA both knew about and the public did not.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>DES is a 16-round Feistel network. The 64-bit plaintext is split into two 32-bit halves L and R. Each round computes <code>L<sub>i+1</sub> = R<sub>i</sub></code> and <code>R<sub>i+1</sub> = L<sub>i</sub> &oplus; F(R<sub>i</sub>, K<sub>i</sub>)</code>. The round function F expands R to 48 bits, XORs the round subkey, passes the result through eight 6-to-4-bit S-boxes (the heart of DES's non-linearity), and applies a final permutation. Sixteen rounds of this with sixteen subkeys derived from the 56-bit master key produce ciphertext that survives all linear and differential attacks within its key budget &mdash; but not exhaustive search.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-shield"/></svg></span><span class="panel-title">Security &amp; Cryptanalysis</span></div>
       <div class="panel-body"><p>In 1998 the EFF's $250,000 <em>Deep Crack</em> machine recovered a DES key in 56 hours by brute force. By 2008 a single FPGA cluster could do it in under a day. Differential and linear cryptanalysis require ~2<sup>47</sup> chosen plaintexts &mdash; impractical operationally, but a clear theoretical break. Triple-DES (3DES) extended the effective key to 112 bits and bought DES another two decades, but by 2023 NIST formally retired 3DES because of the small 64-bit block size (the Sweet32 birthday attack) and modern computing capacity.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-globe"/></svg></span><span class="panel-title">Where You Use It Today</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Where</th><th>How DES is Used</th></tr></thead>
@@ -113,7 +113,7 @@
   <div class="exhibit-side">
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">

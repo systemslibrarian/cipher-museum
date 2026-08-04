@@ -88,12 +88,12 @@
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body"><p>Felix Delastelle was a French amateur cryptographer who invented several remarkable ciphers in the late 19th century. The Bifid (from Latin <em>bis</em> = twice, <em>fidus</em> = split) is widely considered his masterpiece. It combines a Polybius square with a transposition technique in a way that creates genuine interdependence between letter positions — a property Shannon would later call diffusion.</p></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
       <div class="panel-body"><p>Using a 5×5 Polybius square with a keyword:</p><ol class="steps" style="margin:1rem 0;"><li class="step"><div class="step-text">Convert each plaintext letter to its (row, col) coordinates</div></li><li class="step"><div class="step-text">Write all row numbers in a row, then all column numbers beneath</div></li><li class="step"><div class="step-text">Read pairs from the combined sequence</div></li><li class="step"><div class="step-text">Convert each pair back to a letter using the square</div></li></ol><pre>Key square (keyword SECRET):
   S E C R T
   A B D F G
@@ -170,12 +170,12 @@ Cipher: HKNFO</pre>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body"><div class="attack-panel"><div class="attack-name">Statistical Cryptanalysis + Hill Climbing</div><div class="attack-diff">Complexity: Moderate-Hard</div><p class="attack-desc">The Bifid's fractionation mixes coordinate information across positions, making simple frequency analysis ineffective. However, because the period is the message length, modern hill climbing with bigram/trigram scoring can recover the key square. The attack requires a few hundred characters of ciphertext to work reliably.</p></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
+      <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
       <div class="panel-body">
         <table class="cipher-table">
           <thead><tr><th>Concept from Bifid Cipher</th><th>Modern Evolution</th></tr></thead>
@@ -191,7 +191,7 @@ Cipher: HKNFO</pre>
     
     <div class="panel" style="border-color:var(--gold-b);">
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
-        <span class="panel-icon" aria-hidden="true"><svg class="icon"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
+        <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
       <div class="panel-body">
         <table class="cipher-table">
