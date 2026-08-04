@@ -106,6 +106,11 @@
           <input type="number" id="xIn" value="1" min="1" max="6" step="1" aria-describedby="interpKb">
         </label>
         <button id="addAt" type="button">Add share</button>
+        <span class="vh" id="interpKbMove">Pick a share, focus the move button, then arrow keys move it by 0.25 per press. The result is announced.</span>
+        <label>move share
+          <select id="shareSel" aria-describedby="interpKbMove"></select>
+        </label>
+        <button id="movePad" type="button" aria-describedby="interpKbMove">Move with arrow keys</button>
       </div>
     </div>
   </section>
@@ -224,6 +229,20 @@
     } else {
       iread.innerHTML="<b>"+pts.length+"/"+k+"</b> shares \u00b7 <b>need "+(k-pts.length)+" more</b> \u00b7 secret still free";
     }
+    refreshShareSel();
+  }
+
+  // keyboard drag: keep the share <select> in step with the current points
+  const shareSel=document.getElementById("shareSel");
+  function refreshShareSel(){
+    const keep=shareSel.selectedIndex;
+    while(shareSel.options.length>pts.length) shareSel.remove(shareSel.options.length-1);
+    pts.forEach((p,i)=>{
+      const text="share "+(i+1)+" ( "+p[0].toFixed(2)+", "+p[1].toFixed(2)+" )";
+      if(i<shareSel.options.length) shareSel.options[i].textContent=text;
+      else { const o=document.createElement("option"); o.value=i; o.textContent=text; shareSel.appendChild(o); }
+    });
+    if(keep>=0&&keep<pts.length) shareSel.selectedIndex=keep;
   }
 
   function nearestPt(evt){
@@ -265,6 +284,24 @@
   document.getElementById("addAt").addEventListener("click",()=>{
     const x=parseInt(document.getElementById("xIn").value,10);
     if(!isNaN(x)) addShare(x);
+  });
+
+  // arrow keys on the move pad drag the selected share; the step size and new
+  // position are announced through the aria-live readout
+  const KB_STEP=0.25;
+  document.getElementById("movePad").addEventListener("keydown",(e)=>{
+    const i=shareSel.selectedIndex;
+    if(i<0||i>=pts.length) return;
+    let [nx,ny]=pts[i];
+    if(e.key==="ArrowLeft") nx-=KB_STEP;
+    else if(e.key==="ArrowRight") nx+=KB_STEP;
+    else if(e.key==="ArrowUp") ny+=KB_STEP;
+    else if(e.key==="ArrowDown") ny-=KB_STEP;
+    else return;
+    e.preventDefault();
+    nx=Math.max(0.5,Math.min(xmax,nx)); ny=Math.max(ymin,Math.min(ymax,ny));
+    pts[i]=[nx,ny]; draw();
+    iread.innerHTML+=" · share "+(i+1)+" moved to ( <b>"+nx.toFixed(2)+"</b>, <b>"+ny.toFixed(2)+"</b> ), step "+KB_STEP;
   });
   draw();
 })();
