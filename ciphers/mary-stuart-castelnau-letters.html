@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mary Queen of Scots — Castelnau Letters — The Cipher Museum</title>
-  <meta name="description" content="The 1586 Castelnau letters by Mary Queen of Scots — a 50,000-character cipher solved by George Lasry, Beáta Megyesi, and Satoshi Tomokiyo in 2022, revealing undocumented French diplomatic intelligence.">
+  <meta name="description" content="The 1586 Castelnau letters by Mary Queen of Scots — a 50,000-character cipher solved by George Lasry, Norbert Biermann, and Satoshi Tomokiyo in 2022, revealing undocumented French diplomatic intelligence.">
   <meta property="og:title" content="Mary Queen of Scots — Castelnau Letters — The Cipher Museum">
-  <meta property="og:description" content="The 1586 Castelnau letters by Mary Queen of Scots solved by Lasry, Megyesi, and Tomokiyo in 2022 — a 50,000-character nomenclator cipher revealing 400-year-old diplomatic secrets.">
+  <meta property="og:description" content="The 1586 Castelnau letters by Mary Queen of Scots solved by Lasry, Biermann, and Tomokiyo in 2022 — a 50,000-character nomenclator cipher revealing 400-year-old diplomatic secrets.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html">
   <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
@@ -119,9 +119,9 @@
   <div class="exhibit-facts">
     <div class="fact"><span class="fact-label">Cipher Type</span><span class="fact-value">Nomenclator with ~100 symbols + code groups + nulls</span></div>
     <div class="fact"><span class="fact-label">Language</span><span class="fact-value">French</span></div>
-    <div class="fact"><span class="fact-label">Date</span><span class="fact-value">1586 (written by Mary at Chartley, Staffordshire)</span></div>
+    <div class="fact"><span class="fact-label">Date</span><span class="fact-value">1578–1584 (written during the Sheffield captivity)</span></div>
     <div class="fact"><span class="fact-label">Archive Location</span><span class="fact-value">Bibliothèque nationale de France, Paris (MS français 2932)</span></div>
-    <div class="fact"><span class="fact-label">Solved By</span><span class="fact-value">George Lasry, Beáta Megyesi, Satoshi Tomokiyo</span></div>
+    <div class="fact"><span class="fact-label">Solved By</span><span class="fact-value">George Lasry, Norbert Biermann, Satoshi Tomokiyo</span></div>
     <div class="fact"><span class="fact-label">Published</span><span class="fact-value"><em>Cryptologia</em>, 2022, vol. 47 no. 2</span></div>
   </div>
 </div>
@@ -131,7 +131,7 @@
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
-      <p>Mary's correspondence with the French ambassador Michel de Castelnau (1580–1586) has been known to historians for centuries — but the seventeen cipher letters among them were unreadable. The documents sat in the Bibliothèque nationale de France, correctly identified as Mary's hand, correctly attributed to the Castelnau correspondence, but opaque: a Renaissance nomenclator too complex for manual attack and not previously subjected to automated cryptanalysis. When Lasry, Megyesi, and Tomokiyo deciphered them in 2021 and published in <em>Cryptologia</em> in 2022, they revealed Mary's own account — in her words, to a sympathetic French diplomat — of her captivity conditions, her political strategy, her communications with the French and Spanish crowns, and her reading of the Elizabethan court. Four hundred and thirty-six years of diplomatic silence, lifted by a computational hill-climber.</p>
+      <p>Mary's correspondence with the French ambassador Michel de Castelnau (1580–1586) has been known to historians for centuries — but the fifty-seven cipher letters among them were unreadable. The documents sat in the Bibliothèque nationale de France, correctly identified as Mary's hand, correctly attributed to the Castelnau correspondence, but opaque: a Renaissance nomenclator too complex for manual attack and not previously subjected to automated cryptanalysis. When Lasry, Biermann, and Tomokiyo deciphered them in 2021 and published in <em>Cryptologia</em> in 2022, they revealed Mary's own account — in her words, to a sympathetic French diplomat — of her captivity conditions, her political strategy, her communications with the French and Spanish crowns, and her reading of the Elizabethan court. Four hundred and thirty-six years of diplomatic silence, lifted by a computational hill-climber.</p>
     </div>
 
     <div class="panel">
@@ -157,7 +157,7 @@
           <li><strong>Null identification:</strong> Statistical analysis of symbol frequency distributions identified probable null characters (symbols appearing with anomalous frequency patterns inconsistent with natural French).</li>
           <li><strong>Codeword separation:</strong> Compound symbols and high-frequency sequences were tentatively identified as code groups (names and words), isolated, and set aside while the substitution alphabet was attacked first.</li>
           <li><strong>Hill-climbing on n-gram fitness:</strong> The substitution key (mapping of cipher symbols to French letter/syllable hypotheses) was optimised using a hill-climbing search scored by French 4-gram and 5-gram text fitness — the probability that a trial decryption matches French natural-language statistics.</li>
-          <li><strong>Manual refinement:</strong> Once the hill-climber converged on a near-correct key, Lasry, Megyesi, and Tomokiyo examined readable passages, identified remaining errors, and resolved codeword assignments from context.</li>
+          <li><strong>Manual refinement:</strong> Once the hill-climber converged on a near-correct key, Lasry, Biermann, and Tomokiyo examined readable passages, identified remaining errors, and resolved codeword assignments from context.</li>
         </ol>
         <p style="margin-top:.5rem;">The approach is a modern instance of a decades-old technique in historical cryptanalysis, but applied to a cipher of unprecedented size (for hand-written Renaissance matter) and complexity. The full computational work took several months.</p>
       </div>
@@ -189,7 +189,7 @@
           </div>
           <div class="dt-step">
             <div class="dt-year">February 2022 — Published</div>
-            <div class="dt-event">Lasry, Megyesi, and Tomokiyo publish "A ciphertext-only cryptanalysis of a historical nomenclator" in <em>Cryptologia</em>, vol. 47, no. 2. First presentation at HistoCrypt 2021.</div>
+            <div class="dt-event">Lasry, Biermann, and Tomokiyo publish "A Deciphering Mary Stuart’s lost letters from 1578-1584" in <em>Cryptologia</em>, vol. 47, no. 2. First presentation at HistoCrypt 2021.</div>
           </div>
           <div class="dt-step">
             <div class="dt-year">2022–2023 — Historical analysis</div>
@@ -210,7 +210,7 @@
         </div>
         <p style="font-size:.85rem;color:var(--tx3);margin-top:.5rem;">Each number represents a single item in the nomenclator table. A null symbol (cryptographer's decoy) might appear as · ·98· · or · ·100· · — a high-frequency interspersed symbol that does not contribute to plaintext.</p>
 
-        <p style="margin-top:1rem;">Reconstructed sample entries from the Lasry–Megyesi–Tomokiyo solution (simplified illustration — exact character assignments are in the published paper):</p>
+        <p style="margin-top:1rem;">Reconstructed sample entries from the Lasry–Biermann–Tomokiyo solution (simplified illustration — exact character assignments are in the published paper):</p>
         <div class="symbol-table">
           <div class="symbol-row"><span class="sym-code">Symbol A</span><span class="sym-meaning">letter <em>e</em></span></div>
           <div class="symbol-row"><span class="sym-code">Symbol B</span><span class="sym-meaning">letter <em>t</em></span></div>
@@ -229,7 +229,7 @@
       <div class="panel-body">
         <p>The full content of the deciphered letters is reported in the <em>Cryptologia</em> paper and its supplementary materials. Key categories of newly revealed content include:</p>
         <ul style="margin:1rem 0;padding-left:1.5rem;line-height:2.1;">
-          <li><strong>Captivity conditions:</strong> Mary describes her treatment at Chartley, her access to correspondence and to her attendants, and her physical health — primary-source details not previously available from the cipher side of the archive.</li>
+          <li><strong>Captivity conditions:</strong> Mary describes her treatment in captivity, her access to correspondence and to her attendants, and her physical health — primary-source details not previously available from the cipher side of the archive.</li>
           <li><strong>Political strategy:</strong> Mary outlines her diplomatic positioning — appealing to the French crown for intervention, requesting Castelnau relay messages to specific parties at the French court, and describing her view of her prospects in England.</li>
           <li><strong>Undocumented intermediaries:</strong> The letters name individuals not previously known to have been involved in Mary's communications network, expanding the known cast of her diplomatic circle.</li>
           <li><strong>Assessment of Walsingham:</strong> Mary's own characterisation of Sir Francis Walsingham and her awareness of surveillance — a rare first-person account of Tudor intelligence from the surveilled rather than the surveiller.</li>
@@ -246,7 +246,7 @@
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-link"/></svg></span><span class="panel-title">Primary Source &amp; Reference</span></div>
       <div class="panel-body">
-        <p><strong>Lasry, G., Megyesi, B., &amp; Tomokiyo, S.</strong> (2022). "A ciphertext-only cryptanalysis of a historical nomenclator." <em>Cryptologia</em>, 47(2), 165–195. DOI: 10.1080/01611194.2022.2030632</p>
+        <p><strong>Lasry, G., Biermann, B., &amp; Tomokiyo, S.</strong> (2022). "A Deciphering Mary Stuart’s lost letters from 1578-1584." <em>Cryptologia</em>, 47(2), 165–195. DOI: 10.1080/01611194.2022.2160677</p>
         <p style="margin-top:.5rem;"><strong>Original manuscript:</strong> Bibliothèque nationale de France, Paris. Département des manuscrits, French MS 2932.</p>
         <p style="margin-top:1rem;">The paper includes the full transcription, the reconstructed symbol/code-group table, the complete plaintext in French, and a commentary on the historical significance. The preprint version was presented at HistoCrypt 2021.</p>
         <p style="margin-top:1rem;"><strong>Cryptiana context:</strong> Satoshi Tomokiyo's wider <em>Cryptiana</em> work on Renaissance diplomatic ciphers provides the archival and technical backdrop for why the Castelnau nomenclator could be recognised, classified, and finally attacked computationally in the first place.</p>
@@ -281,7 +281,7 @@
       </div>
       <div class="panel-body">
         <p style="margin-bottom:.75rem;font-size:.9rem;"><strong style="color:var(--gold-lt);">George Lasry</strong> — Israeli cryptanalyst; built the hill-climbing toolkit used across multiple historical cipher solutions; <em>Cryptologia</em> contributor.</p>
-        <p style="margin-bottom:.75rem;font-size:.9rem;"><strong style="color:var(--gold-lt);">Beáta Megyesi</strong> — Uppsala University professor; leads the DECODE database; co-solver of the Copiale Cipher (2011); principal academic coordinator of HistoCrypt.</p>
+        <p style="margin-bottom:.75rem;font-size:.9rem;"><strong style="color:var(--gold-lt);">Norbert Biermann</strong> — Uppsala University professor; leads the DECODE database; co-solver of the Copiale Cipher (2011); principal academic coordinator of HistoCrypt.</p>
         <p style="font-size:.9rem;"><strong style="color:var(--gold-lt);">Satoshi Tomokiyo</strong> — Independent researcher; specialist in Renaissance and early-modern European diplomatic cipher manuscripts; extensive bibliography on Argenti-family systems.</p>
       </div>
     </div>
