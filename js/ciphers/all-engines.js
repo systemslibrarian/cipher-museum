@@ -1488,19 +1488,27 @@ window.CipherEngines = (() => {
       decode: (text, key) => {
         const { dec } = buildTable(key);
         const matches = (text.match(/\u27e8[a-zA-Z0-9]+\u27e9|\u27e8x2\u27e9/g) || []);
-        let out = '';
+        // Accumulate into an array and track the trailing character separately.
+        // The "doubleth" symbol repeats the last character emitted, and reading
+        // that back off a string built with += forces V8 to flatten the rope on
+        // every occurrence \u2014 which made this quadratic (200 KB took 18x the time
+        // of 50 KB). Same defect autokey had.
+        const out = [];
+        let last = '';
         for (const m of matches) {
           const sym = m.slice(1, -1).toLowerCase();
           const tok = dec[sym];
-          if (tok === undefined) { out += '?'; continue; }
+          if (tok === undefined) { out.push('?'); last = '?'; continue; }
           if (tok === NULL) continue;
           if (tok === DOUB) {
-            if (out.length) out += out[out.length - 1];
+            // Repeating the last character leaves the last character unchanged.
+            if (last) out.push(last);
             continue;
           }
-          out += tok;
+          out.push(tok);
+          if (tok.length) last = tok[tok.length - 1];
         }
-        return out;
+        return out.join('');
       }
     };
   })();

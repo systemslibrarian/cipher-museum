@@ -23,6 +23,7 @@ if (specs.length !== engineCount) {
 
 const commands = [
   ['Property, edge, state, and performance specs', ['--test', '--test-concurrency=4', ...specs]],
+  ['Engine complexity (serial — timing needs a quiet process)', ['tests/engines/scaling.js']],
   ['Mutation canary (suite must catch a corrupted engine)', ['tests/engines/canary.js']],
   ['Legacy engine integration checks', ['tests/test-all-engines.js']],
   ['Known-answer and deep checks', ['tests/test-deep-ciphers.js']],

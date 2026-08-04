@@ -17,6 +17,7 @@ const suites = [
   'tests/test-structural.js',
   'tests/test-local-links.js',
   'tests/test-nav-reciprocity.js',
+  'tests/test-counts.js',
   'tests/test-exhibit-examples.js',
   'tests/test-min-fresh.js',
   'tests/test-sw-version.js',
