@@ -14,7 +14,8 @@ const BUNDLES = [
   'js/demo-loader.min.js',
   'js/artifact-cards-data.min.js',
   'css/museum.css',
-  'images/icons.svg'
+  'images/icons.svg',
+  'js/lightbox.js'
 ];
 
 function swVersionFor(root) {
