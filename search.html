@@ -132,7 +132,7 @@
         resultsEl.innerHTML = '';
         emptyEl.style.display = 'none';
         suggestionsEl.style.display = '';
-        statusEl.textContent = 'Type to search · ' + (window.CipherSearch._count || '139') + ' exhibits · 13 halls · indexed pages';
+        statusEl.textContent = 'Type to search · ' + (window.CipherSearch._count || '160') + ' exhibits · 13 halls · indexed pages';
         return;
       }
       suggestionsEl.style.display = 'none';
@@ -187,8 +187,12 @@
 
     function init(entries) {
       var list = Array.isArray(entries) ? entries : [];
-      var cipherCount = list.filter(function (e) { return e.kind === 'cipher'; }).length;
-      window.CipherSearch._count = cipherCount || list.length || '?';
+      // Index entries carry their type on `k`, not `kind`. Reading the wrong
+      // field silently counted zero and fell through to list.length, which
+      // includes halls and utility pages — the status line claimed 188.
+      var EXHIBIT_KINDS = { cipher: 1, exhibit: 1, person: 1, unsolved: 1 };
+      var exhibitCount = list.filter(function (e) { return EXHIBIT_KINDS[e.k]; }).length;
+      window.CipherSearch._count = exhibitCount || '?';
       render();
     }
 

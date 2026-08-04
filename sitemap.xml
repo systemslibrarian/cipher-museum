@@ -28,7 +28,7 @@
   <url><loc>https://ciphermuseum.com/halls/modern-crypto.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/halls/unsolved.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/halls/culture.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <!-- Hall of Foundations (mathematics annex, exhibits 141-156) -->
+  <!-- Hall of Foundations (mathematics annex, exhibits 141-157) -->
   <url><loc>https://ciphermuseum.com/hall-of-foundations/index.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://ciphermuseum.com/hall-of-foundations/modularity-exhibit.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ciphermuseum.com/hall-of-foundations/finite-fields.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>

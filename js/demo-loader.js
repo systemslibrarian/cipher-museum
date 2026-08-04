@@ -923,6 +923,7 @@
     'wadsworth': [
       { text: 'Kruh, Louis. \u201cThe Mystery of Colonel Decius Wadsworth\u2019s Cipher Device\u201d, <em>Cryptologia</em> 6(3), 1982, 238\u2013247', url: 'https://doi.org/10.1080/0161-118291857037' },
       { text: '\u201cDecius Wadsworth Disc Cipher\u201d \u2014 William F. Friedman collection, NSA (declassified)', url: 'https://archive.org/stream/41788379082740/41788379082740_djvu.txt' },
+      { text: 'National Cryptologic Foundation \u2014 Inventors\u2019 Day &amp; the Wadsworth Cipher', url: 'https://archive.cryptologicfoundation.org/community/cryptologic-history/cryptologic-history-calendar.html/event/2026/02/11/1770807600/inventors-day-the-wadsworth-cipher/496980' },
       { text: 'Kaeding, Thomas. \u201cAutomated ciphertext-only attack on the Wheatstone Cryptograph and related devices\u201d, IACR ePrint 2020/1492', url: 'https://eprint.iacr.org/2020/1492' }
     ],
     dagapeyeff: [
