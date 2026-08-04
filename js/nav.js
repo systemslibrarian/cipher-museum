@@ -67,21 +67,25 @@
     '<span class="hamburger-bar"></span>';
   inner.appendChild(btn);
 
-  /* ── Mobile-only extra links (visible in drawer only) ── */
+  /* ── Mobile-only extra links (visible in drawer only) ──
+     Must not repeat anything in NAV above — the drawer shows both lists,
+     so an entry in both renders twice. */
   var MOBILE_NAV = [
     ['tours/index.html',    'Guided Tours'],
     ['hall-of-foundations/index.html', 'Hall of Foundations'],
-    ['timeline.html',       'Timeline'],
     ['glossary.html',       'Glossary'],
     ['modern.html',         'Modern Cryptography'],
-    ['cipher-corpus.html',  'Cipher Corpus'],
     ['cipher-detective.html','Cipher Detective'],
     ['comparison.html',     'Cipher Comparison'],
     ['community/index.html','Community']
   ];
+  var primary = {};
+  NAV.forEach(function (n) { primary[n[0]] = true; });
+  MOBILE_NAV = MOBILE_NAV.filter(function (n) { return !primary[n[0]]; });
+
   var divider = document.createElement('li');
   divider.className = 'nav-drawer-divider';
-  divider.setAttribute('aria-hidden','true');
+  divider.textContent = 'More to Explore';
   links.appendChild(divider);
   MOBILE_NAV.forEach(function (n) {
     var li = document.createElement('li');

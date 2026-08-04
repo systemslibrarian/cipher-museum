@@ -91,6 +91,21 @@ for (const file of files) {
   }
   ok(`${rel}: target="_blank" links include rel="noopener"`, unsafe.length === 0, unsafe[0]);
 
+  // 5b. Anchors must never nest. The parser silently re-splits an <a> inside an
+  //     <a>, so the resulting click targets and tab order are the browser's
+  //     guess, not the markup's. Wrap the card in a <div> and link the heading.
+  const nestedAnchors = [];
+  let aDepth = 0;
+  for (const m of html.matchAll(/<a\b[^>]*>|<\/a\s*>/gi)) {
+    if (m[0][1] === '/') aDepth = Math.max(0, aDepth - 1);
+    else {
+      if (aDepth > 0) nestedAnchors.push(m[0].slice(0, 70));
+      aDepth++;
+    }
+  }
+  ok(`${rel}: no nested <a> elements`, nestedAnchors.length === 0,
+    nestedAnchors.length ? `${nestedAnchors.length} nested, first: ${nestedAnchors[0]}` : '');
+
   // 6. Form labels and aria references must point at real ids on the same page
   const ids = new Set();
   for (const m of html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)) ids.add(m[1]);

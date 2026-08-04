@@ -32,10 +32,13 @@
 .bldg-wing:last-of-type{border-bottom:none}
 .bldg-wing-label{font-family:var(--fm);font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dim);text-align:center;padding:.75rem 1rem .5rem;background:var(--s2);border-bottom:1px solid var(--s4)}
 .bldg-wing-rooms{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0}
-.bldg-room{padding:1.25rem 1rem;text-decoration:none;display:block;border-right:1px solid var(--s4);transition:background var(--trs);position:relative;min-height:140px}
+.bldg-room{padding:1.25rem 1rem;display:block;border-right:1px solid var(--s4);transition:background var(--trs);position:relative;min-height:140px}
 .bldg-room:last-child{border-right:none}
 .bldg-room:hover{background:var(--s3)}
-.bldg-room:hover .bldg-room-num{transform:scale(1.1)}
+/* The room is a container, not a link — only this heading enters the hall. */
+.bldg-room-head{display:block;text-decoration:none}
+.bldg-room-head:hover .bldg-room-num{transform:scale(1.1)}
+.bldg-room-head:hover .bldg-room-name{color:var(--gold)}
 .bldg-room.bldg-here{background:rgba(201,168,76,.08);box-shadow:inset 0 0 20px rgba(201,168,76,.1)}
 .bldg-room.bldg-here::after{content:'📍';position:absolute;top:.6rem;right:.6rem;font-size:.8rem}
 .bldg-room-num{font-family:var(--fd);font-size:1.2rem;color:var(--gold);margin-bottom:.25rem;transition:transform .2s}
@@ -59,7 +62,6 @@
 .bldg-legend-here{color:var(--gold)}
 .bldg-wing-rooms--duo{grid-template-columns:1fr auto 1fr}
 .bldg-wing-rooms--solo{grid-template-columns:1fr}
-.bldg-annex-head{display:block;text-decoration:none}
 .bldg-room--annex{min-height:0}
 .bldg-room--annex .bldg-room-era{border-bottom:1px solid var(--s4)}
 .bldg-room--annex .bldg-room-exhibits{flex-direction:row;flex-wrap:wrap;gap:.4rem 1.75rem;margin-top:.75rem}
@@ -169,10 +171,12 @@
     <div class="bldg-wing">
       <div class="bldg-wing-label">ANCIENT &amp; CLASSICAL WING</div>
       <div class="bldg-wing-rooms">
-        <a href="halls/ancient.html" class="bldg-room" data-hall-id="ancient" data-color="#C8845A" style="border-top:2px solid #C8845A">
-          <div class="bldg-room-num">I</div>
-          <div class="bldg-room-name">World Origins of Cryptography</div>
-          <div class="bldg-room-era">c. 1900 BC – 1350 AD</div>
+        <div class="bldg-room" data-hall-id="ancient" data-color="#C8845A" style="border-top:2px solid #C8845A">
+          <a href="halls/ancient.html" class="bldg-room-head">
+            <div class="bldg-room-num">I</div>
+            <div class="bldg-room-name">World Origins of Cryptography</div>
+            <div class="bldg-room-era">c. 1900 BC – 1350 AD</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/atbash.html">Atbash</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/scytale.html">Scytale</a></span>
@@ -183,12 +187,14 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/egyptian-substitution.html">Egyptian Substitution</a></span>
             <span>+ Arabic Nomenclators · Aeneas Tacticus · Histiaeus · Ge’ez</span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="halls/substitution.html" class="bldg-room" data-hall-id="substitution" data-color="#C8A85A" style="border-top:2px solid #C8A85A">
-          <div class="bldg-room-num">II</div>
-          <div class="bldg-room-name">Classical Substitution</div>
-          <div class="bldg-room-era">800 – 1929</div>
+        <div class="bldg-room" data-hall-id="substitution" data-color="#C8A85A" style="border-top:2px solid #C8A85A">
+          <a href="halls/substitution.html" class="bldg-room-head">
+            <div class="bldg-room-num">II</div>
+            <div class="bldg-room-name">Classical Substitution</div>
+            <div class="bldg-room-era">800 – 1929</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/monoalphabetic.html">Monoalphabetic</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/homophonic.html">Homophonic</a></span>
@@ -199,12 +205,14 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/great-cipher.html">Great Cipher</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/babington.html">Babington Plot</a></span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="halls/polyalphabetic.html" class="bldg-room" data-hall-id="polyalphabetic" data-color="#9FC87A" style="border-top:2px solid #9FC87A">
-          <div class="bldg-room-num">III</div>
-          <div class="bldg-room-name">Polyalphabetic Revolution</div>
-          <div class="bldg-room-era">1508 – 1880</div>
+        <div class="bldg-room" data-hall-id="polyalphabetic" data-color="#9FC87A" style="border-top:2px solid #9FC87A">
+          <a href="halls/polyalphabetic.html" class="bldg-room-head">
+            <div class="bldg-room-num">III</div>
+            <div class="bldg-room-name">Polyalphabetic Revolution</div>
+            <div class="bldg-room-era">1508 – 1880</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/vigenere.html">Vigenère</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/beaufort.html">Beaufort</a></span>
@@ -212,7 +220,7 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/gronsfeld.html">Gronsfeld</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/running-key.html">Running Key</a></span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -225,10 +233,12 @@
     <div class="bldg-wing">
       <div class="bldg-wing-label">MILITARY &amp; TRANSPOSITION WING</div>
       <div class="bldg-wing-rooms">
-        <a href="halls/transposition.html" class="bldg-room" data-hall-id="transposition" data-color="#5A90C8" style="border-top:2px solid #5A90C8">
-          <div class="bldg-room-num">IV</div>
-          <div class="bldg-room-name">Transposition &amp; Fractionation</div>
-          <div class="bldg-room-era">19th – 20th Century</div>
+        <div class="bldg-room" data-hall-id="transposition" data-color="#5A90C8" style="border-top:2px solid #5A90C8">
+          <a href="halls/transposition.html" class="bldg-room-head">
+            <div class="bldg-room-num">IV</div>
+            <div class="bldg-room-name">Transposition &amp; Fractionation</div>
+            <div class="bldg-room-era">19th – 20th Century</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/rail-fence.html">Rail Fence</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/columnar.html">Columnar</a></span>
@@ -237,12 +247,14 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/trifid.html">Trifid</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/fractionated-morse.html">Fractionated Morse</a></span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="halls/military.html" class="bldg-room" data-hall-id="military" data-color="#C85A5A" style="border-top:2px solid #C85A5A">
-          <div class="bldg-room-num">V</div>
-          <div class="bldg-room-name">Military &amp; Spy Ciphers</div>
-          <div class="bldg-room-era">WWI – Cold War</div>
+        <div class="bldg-room" data-hall-id="military" data-color="#C85A5A" style="border-top:2px solid #C85A5A">
+          <a href="halls/military.html" class="bldg-room-head">
+            <div class="bldg-room-num">V</div>
+            <div class="bldg-room-name">Military &amp; Spy Ciphers</div>
+            <div class="bldg-room-era">WWI – Cold War</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/nihilist.html">Nihilist</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/adfgx.html">ADFGX</a></span>
@@ -252,12 +264,14 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/vic.html">VIC</a></span>
             <span>+ Argenti · Culper Ring · Arnold-André · Diana · IRA Book · Null Cipher</span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="halls/civil-war.html" class="bldg-room bldg-room--special" data-hall-id="civil-war" data-color="#A07FCC" style="border-top:2px solid #A07FCC">
-          <div class="bldg-room-num">VI</div>
-          <div class="bldg-room-name">Civil War Gallery</div>
-          <div class="bldg-room-era">1838 – 1945 · Civil War &amp; Telegraph Era</div>
+        <div class="bldg-room bldg-room--special" data-hall-id="civil-war" data-color="#A07FCC" style="border-top:2px solid #A07FCC">
+          <a href="halls/civil-war.html" class="bldg-room-head">
+            <div class="bldg-room-num">VI</div>
+            <div class="bldg-room-name">Civil War Gallery</div>
+            <div class="bldg-room-era">1838 – 1945 · Civil War &amp; Telegraph Era</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/stager.html">Stager</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/confederate-vigenere.html">Confederate Vigenère</a></span>
@@ -266,7 +280,7 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/zimmermann.html">Zimmermann</a></span>
             <span>+ Morse · Slidex · Commercial Codebooks · Latin American Codebooks</span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -279,10 +293,12 @@
     <div class="bldg-wing">
       <div class="bldg-wing-label">MACHINES &amp; CURIOSITIES WING</div>
       <div class="bldg-wing-rooms bldg-wing-rooms--duo">
-        <a href="halls/machines.html" class="bldg-room" data-hall-id="machines" data-color="#C8905A" style="border-top:2px solid #C8905A">
-          <div class="bldg-room-num">VII</div>
-          <div class="bldg-room-name">Mechanical Cipher Machines</div>
-          <div class="bldg-room-era">1467 – 1956</div>
+        <div class="bldg-room" data-hall-id="machines" data-color="#C8905A" style="border-top:2px solid #C8905A">
+          <a href="halls/machines.html" class="bldg-room-head">
+            <div class="bldg-room-num">VII</div>
+            <div class="bldg-room-name">Mechanical Cipher Machines</div>
+            <div class="bldg-room-era">1467 – 1956</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/alberti-disk.html">Alberti Disk</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/enigma.html">Enigma</a></span>
@@ -292,12 +308,14 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/fialka.html">Fialka</a></span>
             <span>+ KL-7 · Geheimschreiber · Kryha · M-94 · Red · JN-25 · Purple · Navajo</span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="halls/puzzle.html" class="bldg-room" data-hall-id="puzzle" data-color="#5AC8A0" style="border-top:2px solid #5AC8A0">
-          <div class="bldg-room-num">VIII</div>
-          <div class="bldg-room-name">Puzzle &amp; Novelty</div>
-          <div class="bldg-room-era">1605 – Present</div>
+        <div class="bldg-room" data-hall-id="puzzle" data-color="#5AC8A0" style="border-top:2px solid #5AC8A0">
+          <a href="halls/puzzle.html" class="bldg-room-head">
+            <div class="bldg-room-num">VIII</div>
+            <div class="bldg-room-name">Puzzle &amp; Novelty</div>
+            <div class="bldg-room-era">1605 – Present</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/pigpen.html">Pigpen</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/bacon.html">Bacon's Cipher</a></span>
@@ -306,7 +324,7 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/copiale.html">Copiale</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/bible-code.html">Bible Code (ELS)</a></span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -319,26 +337,30 @@
     <div class="bldg-wing">
       <div class="bldg-wing-label">UNBREAKABLE WING &amp; LABORATORY</div>
       <div class="bldg-wing-rooms bldg-wing-rooms--duo">
-        <a href="halls/unbreakable.html" class="bldg-room bldg-room--final" data-hall-id="unbreakable" data-color="#C9A84C" style="border-top:2px solid #C9A84C">
-          <div class="bldg-room-num">IX</div>
-          <div class="bldg-room-name">The Unbreakable</div>
-          <div class="bldg-room-era">1882 – Present</div>
+        <div class="bldg-room bldg-room--final" data-hall-id="unbreakable" data-color="#C9A84C" style="border-top:2px solid #C9A84C">
+          <a href="halls/unbreakable.html" class="bldg-room-head">
+            <div class="bldg-room-num">IX</div>
+            <div class="bldg-room-name">The Unbreakable</div>
+            <div class="bldg-room-era">1882 – Present</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/one-time-pad.html">One-Time Pad</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/vernam.html">Vernam</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/solitaire.html">Solitaire / Pontifex</a></span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="cryptanalysis.html" class="bldg-room bldg-room--lab" data-hall-id="lab" data-color="#5AC8A0" style="border-top:2px solid #5AC8A0">
-          <div class="bldg-room-num">⚗</div>
-          <div class="bldg-room-name">Cryptanalysis Techniques</div>
-          <div class="bldg-room-era">Interactive Research</div>
+        <div class="bldg-room bldg-room--lab" data-hall-id="lab" data-color="#5AC8A0" style="border-top:2px solid #5AC8A0">
+          <a href="cryptanalysis.html" class="bldg-room-head">
+            <div class="bldg-room-num">⚗</div>
+            <div class="bldg-room-name">Cryptanalysis Techniques</div>
+            <div class="bldg-room-era">Interactive Research</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span>10 techniques · 12 famous codebreaks</span>
             <span><a href="lab/workbench.html" style="color:var(--gold)">→ Workbench</a></span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -351,10 +373,12 @@
     <div class="bldg-wing">
       <div class="bldg-wing-label">SPECIAL EXHIBITIONS</div>
       <div class="bldg-wing-rooms bldg-wing-rooms--duo">
-        <a href="halls/codebreakers.html" class="bldg-room bldg-room--special" data-hall-id="codebreakers" data-color="#A07FCC" style="border-top:2px solid #A07FCC">
-          <div class="bldg-room-num">X</div>
-          <div class="bldg-room-name">Hall of Codebreakers</div>
-          <div class="bldg-room-era">850 AD – 2020</div>
+        <div class="bldg-room bldg-room--special" data-hall-id="codebreakers" data-color="#A07FCC" style="border-top:2px solid #A07FCC">
+          <a href="halls/codebreakers.html" class="bldg-room-head">
+            <div class="bldg-room-num">X</div>
+            <div class="bldg-room-name">Hall of Codebreakers</div>
+            <div class="bldg-room-era">850 AD – 2020</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/elizebeth-friedman.html">Elizebeth Friedman</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/agnes-driscoll.html">Agnes Driscoll</a></span>
@@ -364,12 +388,14 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/mavis-batey.html">Mavis Batey</a></span>
             <span>+ Rochefort · Beurling · Yardley · Kahn · Dunin · Lasry · GCHQ Trio</span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="halls/modern-crypto.html" class="bldg-room bldg-room--final" data-hall-id="modern-crypto" data-color="#5A90C8" style="border-top:2px solid #5A90C8">
-          <div class="bldg-room-num">XI</div>
-          <div class="bldg-room-name">Modern Cryptography</div>
-          <div class="bldg-room-era">1976 – Present · + historical context</div>
+        <div class="bldg-room bldg-room--final" data-hall-id="modern-crypto" data-color="#5A90C8" style="border-top:2px solid #5A90C8">
+          <a href="halls/modern-crypto.html" class="bldg-room-head">
+            <div class="bldg-room-num">XI</div>
+            <div class="bldg-room-name">Modern Cryptography</div>
+            <div class="bldg-room-era">1976 – Present · + historical context</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/des.html">DES</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/diffie-hellman.html">Diffie-Hellman</a></span>
@@ -377,13 +403,15 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/aes.html">AES</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/sha256.html">SHA-256</a></span>            <span><span class="fp-marker-dot">●</span> <a href="ciphers/ecdsa.html">ECDSA</a></span>            <span><span class="fp-marker-dot">●</span> <a href="ciphers/zero-knowledge-proofs.html">Zero-Knowledge</a></span>            <span>+ SIGSALY · Bletchley Park · Cabinet Noir · Microdot</span>            <span><a href="modern.html" style="color:var(--gold)">→ Wider landscape</a></span>
           </div>
-        </a>
+        </div>
       </div>
       <div class="bldg-wing-rooms bldg-wing-rooms--duo" style="margin-top:1rem;">
-        <a href="halls/unsolved.html" class="bldg-room bldg-room--special" data-hall-id="unsolved" data-color="#C8945A" style="border-top:2px solid #C8945A">
-          <div class="bldg-room-num">XII</div>
-          <div class="bldg-room-name">Unsolved Ciphers</div>
-          <div class="bldg-room-era">~1700 BCE – Present</div>
+        <div class="bldg-room bldg-room--special" data-hall-id="unsolved" data-color="#C8945A" style="border-top:2px solid #C8945A">
+          <a href="halls/unsolved.html" class="bldg-room-head">
+            <div class="bldg-room-num">XII</div>
+            <div class="bldg-room-name">Unsolved Ciphers</div>
+            <div class="bldg-room-era">~1700 BCE – Present</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/voynich.html">Voynich</a></span>
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/kryptos.html">Kryptos K4</a></span>
@@ -391,18 +419,20 @@
             <span><span class="fp-marker-dot">●</span> <a href="ciphers/dorabella.html">Dorabella</a></span>
             <span>+ Phaistos · Shugborough · D'Agapeyeff · Somerton · McCormick · Z-13/Z-32</span>
           </div>
-        </a>
+        </div>
         <div class="bldg-door" aria-hidden="true"><span></span></div>
-        <a href="halls/culture.html" class="bldg-room bldg-room--special" data-hall-id="culture" data-color="#7FA8C8" style="border-top:2px solid #7FA8C8">
-          <div class="bldg-room-num">XIII</div>
-          <div class="bldg-room-name">Cipher Culture</div>
-          <div class="bldg-room-era">pre-79 CE – Present</div>
+        <div class="bldg-room bldg-room--special" data-hall-id="culture" data-color="#7FA8C8" style="border-top:2px solid #7FA8C8">
+          <a href="halls/culture.html" class="bldg-room-head">
+            <div class="bldg-room-num">XIII</div>
+            <div class="bldg-room-name">Cipher Culture</div>
+            <div class="bldg-room-era">pre-79 CE – Present</div>
+          </a>
           <div class="bldg-room-exhibits">
             <span><span class="fp-marker-dot">●</span> Bach motif · Dancing Men · Gold-Bug</span>
             <span><span class="fp-marker-dot">●</span> Cicada 3301 · ARG ciphers · MIT Mystery Hunt</span>
             <span><span class="fp-marker-dot">●</span> Sator Square · Freemason pigpen tradition</span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -411,7 +441,7 @@
       <div class="bldg-wing-label">FOUNDATIONS ANNEX — THE MATHEMATICS UNDER THE CRYPTOGRAPHY</div>
       <div class="bldg-wing-rooms bldg-wing-rooms--solo">
         <div class="bldg-room bldg-room--special bldg-room--annex" data-hall-id="foundations" data-color="#2A6F6B" style="border-top:2px solid #2A6F6B">
-          <a href="hall-of-foundations/index.html" class="bldg-annex-head">
+          <a href="hall-of-foundations/index.html" class="bldg-room-head">
             <div class="bldg-room-num">ANNEX</div>
             <div class="bldg-room-name">Hall of Foundations</div>
             <div class="bldg-room-era">Exhibits 141–157 · Number Theory · Hardness · Structures</div>

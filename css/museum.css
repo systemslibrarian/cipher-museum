@@ -558,7 +558,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
   .nav-links li{border-bottom:1px solid var(--s4)}
   .nav-links a{display:flex;align-items:center;padding:1rem 0;font-size:1rem;min-height:44px}
   .nav-drawer-only{display:list-item}
-  .nav-drawer-divider{display:block;border-bottom:1px solid var(--gold-b);margin:.5rem 0;opacity:.35}
+  .nav-drawer-divider{display:block;border-bottom:none;border-top:1px solid var(--gold-b);margin:.75rem 0 0;padding:.9rem 0 .35rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3)}
   .nav-drawer-only a{font-size:.92rem;color:var(--tx3)}
   .nav-drawer-only a:hover{color:var(--gold)}
 }
@@ -665,7 +665,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 
 /* ── §2 Choose Your Path ── */
 .path-section{padding-top:5rem;padding-bottom:5rem}
-.path-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.path-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
 .path-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--s2);border:1px solid var(--s4);border-radius:var(--rl);padding:2.5rem 2rem;text-decoration:none;transition:all var(--trs);position:relative;overflow:hidden}
 .path-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold-glow) 0%,transparent 60%);opacity:0;transition:opacity var(--trs)}
 .path-card:hover{border-color:var(--gold-b);transform:translateY(-4px);box-shadow:var(--sh)}
@@ -673,6 +673,7 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 .path-card--explore{border-top:3px solid #C8845A}
 .path-card--learn{border-top:3px solid #5A90C8}
 .path-card--challenge{border-top:3px solid #C85A5A}
+.path-card--corpus{border-top:3px solid #5AC8A0}
 .path-card-icon{font-size:2.5rem;margin-bottom:1.25rem;position:relative;z-index:1}
 .path-card-title{font-family:var(--fd);font-size:1.3rem;color:var(--tx);letter-spacing:.06em;margin-bottom:.75rem;position:relative;z-index:1}
 .path-card-desc{font-size:1rem;color:var(--tx2);line-height:1.75;margin-bottom:1.5rem;position:relative;z-index:1;flex:1}
