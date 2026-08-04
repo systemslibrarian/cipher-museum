@@ -1192,7 +1192,7 @@
     },
     "pigpen": {
       "name": "Pigpen Cipher",
-      "hall": "VII",
+      "hall": "VIII",
       "era": "18th Century",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",

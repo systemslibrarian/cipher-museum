@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-04T18:59:06.208Z",
+  "generatedAt": "2026-08-04T19:06:03.777Z",
   "totalExhibits": 143,
   "cards": {
     "adfgvx": {
@@ -1193,7 +1193,7 @@
     },
     "pigpen": {
       "name": "Pigpen Cipher",
-      "hall": "VII",
+      "hall": "VIII",
       "era": "18th Century",
       "family": "Puzzle and Cultural Ciphers",
       "region": "Global",
