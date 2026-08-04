@@ -309,8 +309,10 @@ pre{font-family:var(--fm);font-size:.88rem;background:var(--s2);border:1px solid
 /* TICKER */
 .ticker-strip{background:var(--s1);border-bottom:1px solid var(--s4);padding:.85rem 0}
 .ticker-wrap{overflow:hidden}
-.ticker-track{display:flex;flex-wrap:nowrap;gap:4rem;width:max-content;animation:ticker 55s linear infinite}
-.ticker-track:hover{animation-play-state:paused}
+/* 110s ≈ 90px/s — the same reading speed the 90s mobile override below settled
+   on; 55s scrolled twice that fast and read as frantic on desktop too. */
+.ticker-track{display:flex;flex-wrap:nowrap;gap:4rem;width:max-content;animation:ticker 110s linear infinite}
+.ticker-track:hover,.ticker-track:focus-within{animation-play-state:paused}
 .ticker-item{font-family:var(--fm);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx2);white-space:nowrap;display:flex;align-items:center;gap:.6rem;text-decoration:none;transition:color var(--tr);min-height:44px;flex-shrink:0}
 .ticker-item:hover{color:var(--gold)}
 .ticker-dot{color:var(--gold);font-size:.55rem}
