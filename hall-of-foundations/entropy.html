@@ -87,7 +87,7 @@
         <label>P(heads)
           <input type="range" id="pr" min="1" max="99" step="1" value="50">
         </label>
-        <div class="readout" id="hread">—</div>
+        <div class="readout" id="hread" aria-live="polite" role="status">—</div>
       </div>
       <div class="lab-hint">
         Entropy peaks at <b>1 bit</b> when the coin is fair and collapses toward
@@ -115,7 +115,7 @@
         <label>length
           <input type="range" id="lr" min="4" max="24" step="1" value="12">
         </label>
-        <div class="readout" id="kread">—</div>
+        <div class="readout" id="kread" aria-live="polite" role="status">—</div>
       </div>
       <div class="lab-hint">
         Bars show total entropy in bits for three alphabets. As a rule of thumb,
