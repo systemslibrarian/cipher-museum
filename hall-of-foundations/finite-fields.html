@@ -111,7 +111,7 @@
             <option value="127">127</option>
           </select>
         </label>
-        <div class="readout" id="count">—</div>
+        <div class="readout" id="count" aria-live="polite" role="status">—</div>
       </div>
       <div class="lab-hint">
         Every dot is a genuine solution of y² ≡ x³ + 2x + 2 (mod p), computed
@@ -140,7 +140,7 @@
         <button id="step">Step · add G</button>
         <button id="run">Run to 12G</button>
         <button id="wreset" class="ghost">Reset</button>
-        <div class="readout" id="kread"><b>k = 0</b></div>
+        <div class="readout" id="kread" aria-live="polite" role="status"><b>k = 0</b></div>
       </div>
       <div class="lab-hint">
         You can see <em>k</em> and where <em>kG</em> landed. The
@@ -276,7 +276,12 @@
 
   document.getElementById("step").addEventListener("click",stepWalk);
   document.getElementById("run").addEventListener("click",function(){
-    resetWalk(); var n=0; var iv=setInterval(function(){ stepWalk(); if(++n>=12)clearInterval(iv); },160);
+    resetWalk();
+    if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      for(var n=0;n<12;n++) stepWalk();   // same end state, no animation
+      return;
+    }
+    var n=0; var iv=setInterval(function(){ stepWalk(); if(++n>=12)clearInterval(iv); },160);
   });
   document.getElementById("wreset").addEventListener("click",resetWalk);
   document.getElementById("psel").addEventListener("change",function(e){ drawScatter(+e.target.value); });
