@@ -9,11 +9,10 @@
  * thing this file exists for.
  *
  * Why this is its own serial script rather than part of the property specs:
- * the spec suite runs at --test-concurrency=4, and under that contention the
- * *larger* of the two runs is proportionally more likely to absorb a GC pause
- * or a scheduler preemption. That produced 10-15x readings for engines which
- * measure 2-6x on a quiet process — false alarms that would have trained people
- * to ignore this check. Measurement needs a quiet room.
+ * the spec suite runs at --test-concurrency=4, and concurrent work can perturb
+ * the process itself (for example, through garbage collection). CPU time keeps
+ * unrelated scheduler pauses out of the measurement, while serial execution
+ * keeps process-local contention low.
  *
  * Why it exists at all: autokey decrypted in quadratic time for the entire life
  * of this repo. It indexed back into a string it was building with `+=`, and V8
@@ -22,10 +21,10 @@
  * complexity class is still the right answer, just slowly.
  *
  * Coverage note: an engine is only judged once its baseline is long enough for
- * the timing to mean anything, so the input is doubled until it is. At a fixed
- * 25 KB only 8 of 85 engines were slow enough to judge; escalating brings the
- * check to most of the registry. Engines that stay too fast to measure even at
- * the cap are reported as skipped rather than silently passed.
+ * the timing to mean anything. Fast engines are measured in batches of repeated
+ * 25 KB roundtrips, then the same batch size is measured at 100 KB. Runtime no
+ * longer decides whether a fast engine counts toward coverage. Every registry
+ * engine must be measurable; one with a special key format needs an entry below.
  */
 
 const assert = require('node:assert/strict');
@@ -35,14 +34,14 @@ require('../../js/ciphers/all-engines.js');
 const engines = global.CipherEngines;
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const MEASURABLE_MS = 20;      // below this, jitter swamps the signal
+const MEASURABLE_CPU_MS = 20;  // below this, timer granularity swamps the signal
 const BASE_BYTES = 25 * 1024;
-const MAX_BASE_BYTES = 8 * BASE_BYTES;
 const RATIO_LIMIT = 10;        // linear 4, quadratic 16
-const SAMPLES = 3;             // best-of, to shrug off a single pause
+const SAMPLES = 3;             // best-of, to shrug off transient process work
+const MAX_REPEATS = 128;
 
 // Keys that satisfy each engine's documented format. An engine whose key format
-// is not represented here simply cannot be timed generically, and is skipped.
+// is not represented here is reported as skipped and fails the coverage check.
 const KEYS = {
   hill: '3,3,2,5', trifid: 'FELIX', railFence: '3', scytale: '3', stager: '2',
   alberti: '3', bazeries: '42', jefferson: '3,1,5,2,4,6', enigma: 'AAA',
@@ -53,17 +52,23 @@ const KEYS = {
 };
 
 const build = size => ALPHABET.repeat(Math.ceil(size / ALPHABET.length)).slice(0, size);
+const keyFor = (name, text) => name === 'otp'
+  ? 'K'.repeat(text.length)
+  : (KEYS[name] || 'KEY');
 
-function timeRoundtrip(engine, text, key) {
+function timeRoundtrip(engine, text, key, repeats) {
   let best = Infinity;
   for (let i = 0; i < SAMPLES; i++) {
-    const startedAt = process.hrtime.bigint();
+    const startedAt = process.cpuUsage();
     try {
-      engine.decode(engine.encode(text, key), key);
+      for (let repeat = 0; repeat < repeats; repeat++) {
+        engine.decode(engine.encode(text, key), key);
+      }
     } catch (err) {
       return null;
     }
-    const ms = Number(process.hrtime.bigint() - startedAt) / 1e6;
+    const usage = process.cpuUsage(startedAt);
+    const ms = (usage.user + usage.system) / 1000;
     if (ms < best) best = ms;
   }
   return best;
@@ -78,28 +83,33 @@ console.log(`\n━━━ Engine complexity: ${names.length} engines, ratio limit
 
 for (const name of names) {
   const engine = engines[name];
-  const key = KEYS[name] || 'KEY';
 
-  let baseBytes = BASE_BYTES;
-  let small = timeRoundtrip(engine, build(baseBytes), key);
-  while (small !== null && small < MEASURABLE_MS && baseBytes < MAX_BASE_BYTES) {
-    baseBytes *= 2;
-    small = timeRoundtrip(engine, build(baseBytes), key);
+  let repeats = 1;
+  const smallText = build(BASE_BYTES);
+  const smallKey = keyFor(name, smallText);
+  let small = timeRoundtrip(engine, smallText, smallKey, repeats);
+  while (small !== null && small < MEASURABLE_CPU_MS && repeats < MAX_REPEATS) {
+    repeats *= 2;
+    small = timeRoundtrip(engine, smallText, smallKey, repeats);
   }
 
   if (small === null) { skipped.push(`${name} (key format not timeable here)`); continue; }
-  if (small < MEASURABLE_MS) { skipped.push(`${name} (too fast to time at ${MAX_BASE_BYTES / 1024} KB)`); continue; }
+  if (small < MEASURABLE_CPU_MS) {
+    skipped.push(`${name} (too fast to time in ${MAX_REPEATS} × ${BASE_BYTES / 1024} KB batch)`);
+    continue;
+  }
 
-  const large = timeRoundtrip(engine, build(baseBytes * 4), key);
+  const largeText = build(BASE_BYTES * 4);
+  const large = timeRoundtrip(engine, largeText, keyFor(name, largeText), repeats);
   if (large === null) { skipped.push(`${name} (failed at 4x)`); continue; }
 
   judged++;
   const ratio = large / small;
   if (ratio > RATIO_LIMIT) {
-    failures.push({ name, baseBytes, small, large, ratio });
+    failures.push({ name, repeats, small, large, ratio });
     console.error(`  ❌  ${name.padEnd(24)} ${ratio.toFixed(1)}x  ` +
-      `(${Math.round(baseBytes / 1024)} KB ${small.toFixed(1)}ms → ` +
-      `${Math.round(baseBytes * 4 / 1024)} KB ${large.toFixed(1)}ms)`);
+      `(${repeats} × ${BASE_BYTES / 1024} KB ${small.toFixed(1)} CPU-ms → ` +
+      `${repeats} × ${BASE_BYTES * 4 / 1024} KB ${large.toFixed(1)} CPU-ms)`);
   }
 }
 
@@ -119,4 +129,5 @@ if (failures.length) {
   process.exit(1);
 }
 
-assert.ok(judged >= 40, `only ${judged} engines were timeable — coverage has regressed`);
+assert.equal(judged, names.length,
+  `${names.length - judged} engines were not timeable — coverage has regressed`);
