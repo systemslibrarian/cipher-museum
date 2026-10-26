@@ -2,7 +2,9 @@
 
 Run `node scripts/evaluate-solvers.js --check` to reproduce `data/solver-evaluation/results.json` exactly. `node scripts/evaluate-solvers.js` regenerates it. Original synthetic evaluation prose was written after the existing model tables were frozen. The report hashes both models and the fixture file; evaluation text is never used to build a language model. No parameters were tuned against these fixtures.
 
-Each run receives 6,000 score evaluations, including initial scores, preprocessing, phase changes, restarts and hybrid polishing. Counts are not equivalent CPU time: a column-pair score and a whole-text score do different work. Substitution compares matched random-swap kernels for hill climbing, simulated annealing and a 70% annealing / 30% hill-climbing hybrid, each with three restarts. It does not measure all implementations of these methods. The older standalone SA solver now accepts `--seed`, and `--compare` uses the bounded kernels with explicit method labels.
+Each run receives 6,000 score evaluations, including initial scores, preprocessing, phase changes, restarts and hybrid polishing. Run `node scripts/evaluate-solvers.js --check --timing` to also record wall-clock durations in `data/solver-evaluation/timings.json`. That separate file records runtime/hardware context and each complete solver call, including preprocessing and polishing. Timing varies with machine load and JIT warm-up and is excluded from byte-for-byte replay; it does not support a general speed ranking.
+
+Counts are not equivalent CPU time: a column-pair score and a whole-text score do different work. Substitution compares matched random-swap kernels for hill climbing, simulated annealing and a 70% annealing / 30% hill-climbing hybrid, each with three restarts. It does not measure all implementations of these methods. The older standalone SA solver now accepts `--seed`, and `--compare` uses the bounded kernels with explicit method labels.
 
 ## Observed results
 
