@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="../css/museum.css">
   <link rel="stylesheet" href="../css/multiple-anagramming.css">
   
+<link rel="stylesheet" href="../css/ebook-experiments.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -83,6 +84,18 @@
 <div class="exhibit-layout">
   <div class="exhibit-main">
 
+    <section class="panel ebook-experiment"><div class="panel-body"><h2>Advanced Bounded Columnar Search</h2>
+<p>Supply a known width first. The staged option estimates column adjacency, and for incomplete rectangles retains the best relative-offset alignment. Segment slides and segment swaps preserve some neighboring columns while moving larger blocks. The second phase scores the full candidate text using the museum language model.</p>
+<label for="columnar-search-text">Ciphertext (letters only; up to 2,000)</label><textarea id="columnar-search-text" rows="4">TIIEATFSHSSROMTEETX</textarea>
+<div class="demo-controls"><label for="columnar-search-width">Known width (0 searches 2–12)</label><input id="columnar-search-width" type="number" min="0" max="12" value="8">
+<label for="columnar-search-seed">Seed</label><input id="columnar-search-seed" type="number" min="0" max="4294967295" value="2018">
+<label for="columnar-search-budget">Total score evaluations</label><input id="columnar-search-budget" type="number" min="100" max="20000" value="6000">
+<label for="columnar-search-restarts">Restarts</label><input id="columnar-search-restarts" type="number" min="1" max="8" value="4">
+<label><input id="columnar-search-staged" type="checkbox" checked> Adjacency initialization</label><label><input id="columnar-search-align" type="checkbox" checked> Incomplete-column alignment</label><label><input id="columnar-search-segments" type="checkbox" checked> Segment slides and swaps</label><button id="columnar-search-run" type="button">Search candidates</button></div>
+<pre id="columnar-search-output" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere">Change one option at a time to compare searches with the same seed and budget.</pre>
+<p>Limits: widths 2–12, at most 20,000 score evaluations, including adjacency preprocessing, phase-transition scoring and every restart. Unknown-width mode divides one total budget across widths 2–12; preprocessing may exhaust a width's allocation. This bounded adaptation samples moves and combines normalized adjacency/alignment scores; it does not reproduce Lasry's alternating thresholds, exhaustive neighborhoods, optimized triplet scores or large-key performance. Language-model fitness uses the museum's bigram/trigram model. A candidate remains unverified even if it looks readable.</p>
+<p>Source: George Lasry, <cite>A Methodology for the Cryptanalysis of Classical Ciphers with Search Metaheuristics</cite> (2018), §§5.3.2–5.3.4, printed pp. 69–78 / supplied PDF pp. 90–99. Evaluation principles: §§4.5–4.7, printed pp. 57–60 / PDF pp. 78–81.</p>
+</div></section>
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
       <p>Columnar transposition was the workhorse of 19th-century military cryptography — simple enough to perform in the field without equipment, yet resistant enough to casual interception to protect battlefield communications through World War I.</p>
@@ -287,6 +300,9 @@ Read col 5(Z): WEEI</pre>
 <script src="../js/ciphers/all-engines.min.js"></script>
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/multiple-anagramming.js" defer></script>
+<script src="../js/detective/lang-model.js"></script>
+<script src="../js/columnar-search.js"></script>
+<script src="../js/columnar-search-ui.js" defer></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
 </body>

@@ -1,0 +1,10 @@
+{
+  "provenance": "Original synthetic evaluation prose written for this implementation on 2026-10-26, after the existing language-model tables were frozen. These texts are evaluation inputs only, never used to build or tune the models. Small convenience sample, not representative historical traffic.",
+  "texts": [
+    "The station keeper checked the lamps before the evening train arrived. Beyond the bridge a small boat waited beside the steps while three visitors studied an old map. They had agreed to meet the next morning and compare their notes before walking toward the harbour.",
+    "A patient reader copied the damaged letter into a notebook and marked every uncertain symbol. Several possible readings seemed plausible at first. After comparing the repeated groups with another message the team kept two alternatives and recorded why the evidence could not yet decide between them.",
+    "Wind moved across the open field as the observers counted birds near the river. Their first estimate was much too high because several birds had circled back. A second count used fixed intervals and separate records so that repeated sightings could be distinguished from new arrivals."
+  ],
+  "lengths": [48, 96, 192],
+  "seeds": [19, 83, 211]
+}

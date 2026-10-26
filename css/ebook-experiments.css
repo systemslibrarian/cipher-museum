@@ -1,0 +1,12 @@
+.ebook-experiment .demo-controls { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:.6rem 1rem; align-items:center; margin:1rem 0; }
+.ebook-experiment label { color:#e4d8bd; font-size:1rem; }
+.ebook-experiment input:not([type=checkbox]), .ebook-experiment select, .ebook-experiment textarea { box-sizing:border-box; width:100%; min-width:0; max-width:100%; min-height:44px; padding:.65rem; background:#0d0d11; color:#f2ead9; border:1px solid #a18b56; border-radius:4px; font:1rem ui-monospace,monospace; }
+.ebook-experiment textarea { margin:.6rem 0; resize:vertical; }
+.ebook-experiment .demo-controls label:has(input[type=checkbox]) { grid-column:1/-1; min-height:32px; display:flex; gap:.7rem; align-items:center; }
+.ebook-experiment input[type=checkbox] { width:20px; height:20px; accent-color:#d5b85a; }
+.ebook-experiment button { grid-column:1/-1; min-height:44px; padding:.7rem 1rem; background:#d5b85a; color:#16130c; border:1px solid #d5b85a; border-radius:4px; font:600 1rem ui-sans-serif,sans-serif; cursor:pointer; }
+.ebook-experiment button:disabled { opacity:.65; cursor:wait; }
+.ebook-experiment :focus-visible { outline:3px solid #f5dc8d; outline-offset:3px; }
+.ebook-experiment pre { white-space:pre-wrap; overflow-wrap:anywhere; }
+.ebook-experiment details p { overflow-wrap:anywhere; }
+@media(max-width:480px) { .ebook-experiment .demo-controls { grid-template-columns:minmax(0,1fr); } }

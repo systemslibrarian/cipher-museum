@@ -41,3 +41,15 @@ The initial compact Detective language model was inadequate for unconstrained ho
 At the published 15,000-step budget, unassisted plaintext edit-error rates on the two independently encrypted original English passages were **33.2% and 46.0%**; the modern-French language-shift case had **73.3%** error. These are retained failures, not successful decipherments. Applying the complete known keys was exact. Narrow assisted runs with only one symbol unlocked were exact for the two English passages and had 2.5% plaintext error for French. They do not establish general key recovery. Arbitrary symbol relabelling preserved the search outcomes; applying an earlier key to an independent encryption failed as expected.
 
 The tools support inspecting hypotheses, transcription and mechanical consistency. General reliable historical homophonic recovery remains future work, especially with unknown languages, short texts, nulls, nomenclature or control signs. See [the evaluation protocol and complete results](../data/research/v1/README.md).
+
+## Ebook extensions reviewed 26 October 2026
+
+Book credit uses full titles and pagination, without links to ebook copies.
+
+| Exercise / claim | Full source | Scope and pagination |
+| --- | --- | --- |
+| Colossus known-pattern chi-setting and selected-score interpretation (`js/chi-setting.js`, `ciphers/colossus.html`) | I. J. Good, Donald Michie and Geoffrey Timms, *General Report on Tunny* (1945) | §§23A–C, printed pp. 78–80 / collected PDF pp. 81–83. The two-impulse dot condition and single-setting versus searched-score distinction are historical; the traffic, wheel pins and Monte Carlo null are declared synthetic teaching choices. §§53A–D, printed pp. 333–335 / PDF pp. 327–329, describe Colossus machinery, which this exercise does not fully emulate. |
+| Bounded columnar initialization and segment neighborhoods (`js/columnar-search.js`) | George Lasry, *A Methodology for the Cryptanalysis of Classical Ciphers with Search Metaheuristics* (2018) | §§5.3.2–5.3.4, printed pp. 69–78 / PDF pp. 90–99. Uses bigram adjacency, relative-offset alignment and segment slides/swaps. Sampled neighborhoods, normalized combined alignment scoring and the museum's bigram/trigram finish are explicit adaptations; no claim to reproduce the thesis's large-key results. |
+| Solver evaluation (`scripts/evaluate-solvers.js`) | George Lasry, *A Methodology for the Cryptanalysis of Classical Ciphers with Search Metaheuristics* (2018) | §§4.5–4.7, printed pp. 57–60 / PDF pp. 78–81. Repeatable held-out evaluation and ablation principles; the small original-prose fixtures and budgets are this implementation's choices. See `SOLVER_EVALUATION.md` for measured outcomes and limits. |
+
+The public exhibit pages carry these same full-title citations. No book copies are distributed with these changes.

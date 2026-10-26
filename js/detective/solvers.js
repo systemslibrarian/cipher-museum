@@ -331,7 +331,14 @@
        - For 8 ≤ k ≤ 10, hill climb on the column ordering.
      Score every reading with the English language model and
      keep the strongest.                                          */
-  function solveColumnar(ct) {
+  function solveColumnar(ct, options) {
+    if (options && options.advanced) {
+      if (!global.ColumnarSearch) throw new Error('Advanced columnar search is not loaded.');
+      var advanced = options.width ? global.ColumnarSearch.solve(ct, options) : global.ColumnarSearch.unknownWidth(ct, options).best;
+      if (!advanced || !advanced.best) return null;
+      return makeResult('Columnar Transposition', advanced.width + ' columns, bounded seeded search', advanced.best.plaintext,
+        { columns: advanced.width, order: advanced.best.order, evaluations: advanced.evaluations, preprocessing: advanced.preprocessing, verified: false });
+    }
     var letters = lettersOnly(ct);
     if (letters.length < 20) return null;
 

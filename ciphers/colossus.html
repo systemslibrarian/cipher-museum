@@ -22,6 +22,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="../css/ebook-experiments.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -53,22 +54,32 @@
 <div class="breadcrumb"><a href="../index.html">Entrance</a><span> › </span><a href="../halls/machines.html">Hall VII: Mechanical Cipher Machines</a><span> › </span>Colossus</div>
 <div class="page-meta"><span class="page-num">Exhibit 169 of 172</span><span class="badge era-wwii">1944 · Britain</span></div>
 <h1 class="page-title">Colossus</h1><p class="page-tagline">Electronic counting accelerated the statistical search behind the Tunny breakthrough.</p>
-  <p class="exhibit-status-note">Codebreaking machine; not an encryption system.</p>
+  <p class="exhibit-status-note">Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.</p>
 </div>
 <div class="exhibit-layout"><div class="exhibit-main">
 <div class="cipher-significance"><h2>Why This Matters</h2><p>Colossus helped attack Lorenz teleprinter traffic, known at Bletchley Park as Tunny. Tommy Flowers and his team built it at the Post Office Research Station. The first machine was working at Bletchley Park in February 1944.</p></div>
 <section class="panel"><div class="panel-body"><h2>How the Search Worked</h2><p>Punched paper tape supplied ciphertext. Electronic logic evaluated combinations of tape data and generated wheel patterns, while counters accumulated statistical scores. This accelerated the search for Lorenz chi-wheel settings. Colossus supported a larger cryptanalytic process; it did not automatically turn arbitrary intercepted traffic into readable messages.</p></div></section>
-<section class="panel"><div class="panel-body"><h2>Read a Statistical Score</h2><p>Imagine two candidate settings tested on the same tape. One produces more matches to a selected Boolean condition. That difference can guide further investigation only if the condition has a justified relationship to the cipher and language. A large count alone is not a decryption. This conceptual example is not a simulation of Colossus or a historical scoring formula.</p></div></section>
+<section class="panel ebook-experiment"><div class="panel-body"><h2>Try a Two-Wheel Chi-Setting Search</h2>
+<p>Given known chi-wheel patterns, search their initial settings. Here D = Z XOR chi, and delta means XOR of adjacent symbols. Count dots (zeroes) in delta D1 XOR delta D2, equivalently delta Z1 XOR delta Z2 XOR delta chi1 XOR delta chi2. Impulses 1 and 2 are the two low bits in this five-bit representation. All 41 × 31 = 1,271 candidate settings are counted.</p>
+<p>This is synthetic five-bit traffic with an explicitly planted residual statistic: the parity of D1 XOR D2 changes with probability 0.30 before added noise. The known wheel patterns are synthetic. It illustrates the historical two-impulse counting condition; it does not emulate German language, psi/motor wheels, Colossus hardware or full Tunny decryption.</p>
+<div class="demo-controls"><label for="chi-length">Tape length</label><select id="chi-length"><option>64</option><option>256</option><option selected>1024</option><option>4096</option></select>
+<label for="chi-noise">Additional parity noise</label><select id="chi-noise"><option value="0">None</option><option value="0.25">25%</option><option value="0.5">50% — no planted bias</option></select>
+<button id="chi-run" type="button">Search settings</button></div>
+<div id="chi-results" aria-live="polite"><p>Run the search, then compare a short tape or the no-bias control. A high score alone does not identify a plaintext.</p></div>
+<p>The displayed sigma is a single-setting score. Selecting the best of 1,271 settings changes its interpretation; the experiment compares that maximum against maxima from 39 seeded independent uniform-symbol null tapes. The null assumes independent five-bit symbols and is not a historical traffic model. Short or noisy traffic can be inconclusive. Finding wheel settings, recovering unknown wheel patterns, and recovering plaintext are separate problems.</p>
+<p>Source: I. J. Good, Donald Michie and Geoffrey Timms, <cite>General Report on Tunny</cite> (1945), §§23A–C, printed pp. 78–80 / collected PDF pp. 81–83; Colossus machinery in §§53A–D, printed pp. 333–335 / collected PDF pp. 327–329. Formula and notation checked against the page images.</p>
+</div></section>
 <section class="panel"><div class="panel-body"><h2>Historical Context and Limits</h2><p>Bill Tutte reconstructed the cipher’s logical structure, enabling later machine-assisted methods. Colossus was programmable through controls and connections, but was neither a stored-program computer nor a general-purpose machine. Its role concerned Lorenz, not Enigma. The National Museum of Computing houses a working reconstruction.</p></div></section>
 </div><aside class="exhibit-side"><section class="panel"><div class="panel-body"><h2>Quick Facts</h2>
 <table class="cipher-table"><tbody><tr><td>Exhibit</td><td>169 of 172</td></tr><tr><td>Type</td><td>Codebreaking machine</td></tr><tr><td>In service</td><td>1944</td></tr></tbody></table>
 <h2>Sources and Further Reading</h2><p><a href="https://www.tnmoc.org/colossus" target="_blank" rel="noopener noreferrer">The National Museum of Computing: Colossus</a> — reconstruction and historical account.</p>
-<p>This is a static historical exhibit. No cipher engine or machine simulator is claimed.</p></div></section></aside></div>
+<p>The interactive is a bounded two-wheel statistical experiment with synthetic traffic, not a complete machine simulator.</p></div></section></aside></div>
 <section class="related-exhibits"><h2 class="related-exhibits__heading">Related Exhibits</h2><div class="related-exhibits__grid"><a class="related-card" href="enigma.html"><span class="related-card__name">Enigma</span></a><a class="related-card" href="lorenz.html"><span class="related-card__name">Lorenz</span></a><a class="related-card" href="bletchley-park.html"><span class="related-card__name">Bletchley Park</span></a><a class="related-card" href="bill-tutte.html"><span class="related-card__name">Bill Tutte</span></a><a class="related-card" href="bombe.html"><span class="related-card__name">Turing–Welchman Bombe</span></a></div></section>
 <div class="hall-nav"><a class="hall-nav-link" href="../halls/machines.html">Return to Hall VII</a></div>
 </main><footer></footer>
 <script src="../js/trust-labels.js"></script>
 <script src="../js/demo-loader.min.js"></script>
+<script src="../js/chi-setting.js" defer></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
 </body></html>

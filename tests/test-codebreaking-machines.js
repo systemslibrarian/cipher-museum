@@ -10,7 +10,7 @@ const manifest = JSON.parse(read('data/exhibit-trust.json')).exhibits;
 for (const [slug, number, target] of [['bombe',168,'Enigma'], ['colossus',169,'Lorenz']]) {
   const file = `ciphers/${slug}.html`;
   const entry = manifest.find(e => e.path === file);
-  assert.deepEqual([entry.number, entry.label, entry.collection, entry.interactive], [number, null, 'cipher-history', false]);
+  assert.deepEqual([entry.number, entry.label, entry.collection, entry.interactive], [number, null, 'cipher-history', slug === 'colossus']);
   const dom = new JSDOM(read(file));
   const d = dom.window.document;
   assert.equal(d.querySelectorAll('.trust-label').length, 0);

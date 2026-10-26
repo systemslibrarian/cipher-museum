@@ -3,9 +3,9 @@
  * Simulated Annealing Monoalphabetic Solver
  *
  * Breaks monoalphabetic substitution ciphers using quadgram scoring and
- * simulated annealing (SA). SA outperforms pure hill climbing on short
- * ciphertexts by accepting worse moves with decreasing probability, escaping
- * local optima that trap hill climbing.
+ * simulated annealing (SA). Accepting some worse moves can escape local optima;
+ * relative success depends on the ciphertext, model and budget. See the seeded,
+ * equal-evaluation-budget comparison in evaluate-solvers.js.
  *
  * Usage:
  *   node scripts/sa-solver.js "CIPHERTEXT HERE"
@@ -24,8 +24,8 @@
  *
  * SA vs Hill Climbing:
  *   Hill climbing: fast, deterministic convergence, stuck in local optima
- *   SA: slower per restart, escapes local optima, better on short/noisy ciphertexts
- *   Recommendation: Use SA for ciphertexts < 100 chars; hill climbing for 200+ chars
+ *   SA: accepts some worse moves; no universal superiority is claimed
+ *   Compare HC, SA and SA+HC under matched budgets on held-out tasks
  *
  * Educational note: Simulated annealing was introduced by Kirkpatrick et al. (1983)
  * and named for the metallurgical process of controlled cooling to reduce defects.
@@ -49,20 +49,21 @@ const hc = require('./hill-climbing-solver');
 const { scoreText, decrypt, cleanText, hillClimbOnce } = hc;
 
 const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const { rng } = require('../js/columnar-search');
 
-function randomKey() {
+function randomKey(random = Math.random) {
   const arr = ALPHA.split('');
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr.join('');
 }
 
-function randomSwap(key) {
+function randomSwap(key, random = Math.random) {
   const arr = key.split('');
-  const i = Math.floor(Math.random() * 26);
-  let j = Math.floor(Math.random() * 25);
+  const i = Math.floor(random() * 26);
+  let j = Math.floor(random() * 25);
   if (j >= i) j++;
   [arr[i], arr[j]] = [arr[j], arr[i]];
   return arr.join('');
@@ -87,7 +88,8 @@ function saOnce(ciphertext, opts = {}) {
   if (!(coolingRate > 0 && coolingRate < 1)) coolingRate = 0.9997;
   const maxSteps = opts.maxSteps || 50000;
 
-  let key = randomKey();
+  const random = opts.random || (opts.seed === undefined ? Math.random : rng(opts.seed));
+  let key = randomKey(random);
   let plain = decrypt(ciphertext, key);
   let score = scoreText(plain);
 
@@ -98,12 +100,12 @@ function saOnce(ciphertext, opts = {}) {
   let T = T0;
 
   for (let step = 0; step < maxSteps; step++) {
-    const newKey = randomSwap(key);
+    const newKey = randomSwap(key, random);
     const newPlain = decrypt(ciphertext, newKey);
     const newScore = scoreText(newPlain);
     const delta = newScore - score;
 
-    if (delta > 0 || Math.random() < Math.exp(delta / T)) {
+    if (delta > 0 || random() < Math.exp(delta / T)) {
       key = newKey;
       plain = newPlain;
       score = newScore;
@@ -147,10 +149,12 @@ function solve(ciphertext, opts = {}) {
     console.warn(`Warning: ciphertext only ${ct.length} chars. SA needs 30+ chars for reliable results.`);
   }
 
-  let best = { key: randomKey(), plaintext: '', score: -Infinity };
+  const random = opts.seed === undefined ? Math.random : rng(opts.seed);
+  let best = { key: randomKey(random), plaintext: '', score: -Infinity };
 
   for (let r = 0; r < restarts; r++) {
     let result = saOnce(ct, {
+      random,
       T0: opts.T0,
       coolingRate: opts.coolingRate,
       maxSteps: opts.maxSteps,
@@ -213,53 +217,15 @@ function hillClimbFromKey(ciphertext, startKey) {
 /**
  * Run a head-to-head comparison of SA vs hill-climbing on a set of corpus records.
  */
-function compareOnCorpus(corpusPath, limit, verbose) {
-  const { solve: hcSolve } = hc;
-  const lines = fs.readFileSync(corpusPath, 'utf8').split('\n').filter(l => l.trim());
-  const records = lines
-    .map(l => { try { return JSON.parse(l); } catch { return null; } })
-    .filter(r => r && r.cipher_type === 'monoalphabetic' && r.language === 'en'
-              && r.transcription_quality === 'clean' && r.source_type !== 'historical');
-
-  const tests = records.slice(0, limit);
-  console.log(`Comparing SA vs Hill-Climbing on ${tests.length} monoalphabetic records\n`);
-
-  let saCorrect = 0, hcCorrect = 0;
-  const rows = [];
-
-  for (const record of tests) {
-    const expected = cleanText(record.plaintext);
-    const ct = record.ciphertext;
-
-    const saResult = solve(ct, { restarts: 3, verbose: false });
-    const hcResult = hcSolve(ct, { restarts: 10, verbose: false });
-
-    const saMatch = cleanText(saResult.plaintext) === expected;
-    const hcMatch = cleanText(hcResult.plaintext) === expected;
-
-    if (saMatch) saCorrect++;
-    if (hcMatch) hcCorrect++;
-
-    rows.push({
-      id: record.id,
-      len: expected.length,
-      saOk: saMatch ? '✓' : '✗',
-      hcOk: hcMatch ? '✓' : '✗',
-      saScore: saResult.score.toFixed(0),
-      hcScore: hcResult.score.toFixed(0),
-    });
+function compareOnCorpus(corpusPath, limit) {
+  const bounded = require('./budgeted-solvers');
+  const records = fs.readFileSync(corpusPath, 'utf8').split('\n').filter(Boolean).map(JSON.parse)
+    .filter(r => r.cipher_type === 'monoalphabetic' && r.language === 'en' && typeof r.plaintext === 'string').slice(0,limit);
+  for (const record of records) for (const seed of [19,83,211]) for (const method of ['hc','sa','sa+hc']) {
+    const result = bounded.solve(record.ciphertext, { method, seed, budget:6000 });
+    console.log(JSON.stringify({ id:record.id, seed, method, evaluations:result.evaluations, exact:result.plaintext===cleanText(record.plaintext) }));
   }
-
-  console.log('ID                          Len  SA    HC    SA-score  HC-score');
-  console.log('─'.repeat(70));
-  for (const r of rows) {
-    console.log(
-      `${r.id.padEnd(28)} ${String(r.len).padStart(3)}  ${r.saOk}     ${r.hcOk}     ${r.saScore.padStart(6)}    ${r.hcScore.padStart(6)}`
-    );
-  }
-  console.log('─'.repeat(70));
-  console.log(`SA  accuracy: ${saCorrect}/${tests.length} (${(100 * saCorrect / tests.length).toFixed(1)}%)`);
-  console.log(`HC  accuracy: ${hcCorrect}/${tests.length} (${(100 * hcCorrect / tests.length).toFixed(1)}%)`);
+  console.log('Equal evaluation counts include initial scores, restarts and hybrid polishing. Use evaluate-solvers.js for the versioned held-out benchmark; a supplied corpus may overlap model training.');
 }
 
 // ── Output formatting ──────────────────────────────────────────────────────────
@@ -296,6 +262,7 @@ USAGE:
   node scripts/sa-solver.js --compare --corpus public/corpus/beginner.jsonl --limit 20
 
 OPTIONS:
+  --seed N         Reproduce a solve with this unsigned 32-bit seed
   --restarts N     SA restarts (default: 5)
   --steps N        SA steps per restart (default: 50000)
   --T0 F           Initial temperature (default: 10.0)
@@ -316,9 +283,8 @@ EXAMPLES:
   node scripts/sa-solver.js --compare --corpus public/corpus/beginner.jsonl --limit 20
 
 WHEN TO USE SA vs HILL CLIMBING:
-  - Short ciphertext (< 80 chars): SA recommended (escapes local optima better)
-  - Medium (80-200 chars):         Either; SA+HC hybrid is best
-  - Long (200+ chars):             Hill climbing (sa-solver still works but slower)
+  Compare matched budgets and report failures; success depends on length and model.
+  Run node scripts/evaluate-solvers.js for held-out comparisons and ablations.
 `);
     process.exit(0);
   }
@@ -334,9 +300,11 @@ WHEN TO USE SA vs HILL CLIMBING:
   let verbose = false;
   let compare = false;
   let limit = 20;
+  let seed;
 
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--file') filePath = args[++i];
+    if (args[i] === '--seed') seed = Number(args[++i]);
+    else if (args[i] === '--file') filePath = args[++i];
     else if (args[i] === '--corpus') corpusPath = args[++i];
     else if (args[i] === '--restarts') restarts = parseInt(args[++i], 10);
     else if (args[i] === '--steps') steps = parseInt(args[++i], 10);
@@ -371,7 +339,7 @@ WHEN TO USE SA vs HILL CLIMBING:
 
     let correct = 0;
     for (const record of tests) {
-      const result = solve(record.ciphertext, { restarts, maxSteps: steps, T0, coolingRate, hybridFinish, verbose });
+      const result = solve(record.ciphertext, { seed, restarts, maxSteps: steps, T0, coolingRate, hybridFinish, verbose });
       const expected = cleanText(record.plaintext);
       const got = cleanText(result.plaintext);
       const match = got === expected;
@@ -391,7 +359,7 @@ WHEN TO USE SA vs HILL CLIMBING:
   }
 
   console.log('Solving monoalphabetic cipher using simulated annealing...');
-  const result = solve(ciphertext, { restarts, maxSteps: steps, T0, coolingRate, hybridFinish, verbose });
+  const result = solve(ciphertext, { seed, restarts, maxSteps: steps, T0, coolingRate, hybridFinish, verbose });
   printResult(result);
   printKey(result.key);
 }
