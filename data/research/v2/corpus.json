@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "id": "museum-research-corpus-v2",
+  "scope": "Source documents for research-evaluation v2. Museum-authored prose is original to this repository and is not historical material. Historical passages are held-out extracts from the same public-domain works used to build the language profiles: unseen by the model, but the same work and author.",
+  "rights": "Museum-authored text: MIT, with the rest of this repository. Historical passages: pre-1800 works, public domain worldwide; the extracts are short and their provenance is recorded in data/research/v2/holdout.json.",
+  "collections": [
+    {"id": "museum-prose-en", "description": "Original museum-authored modern English. Retained from research-evaluation v1 so its published failures stay the baseline."},
+    {"id": "museum-prose-fr", "description": "Original museum-authored modern French. A language-shift control, not early modern French."},
+    {"id": "gutenberg-pre1800", "description": "Held-out passages from pre-1800 public-domain works. Author and work overlap the profile training material; this is a document-internal holdout."},
+    {"id": "authentic-z340", "description": "The published first section of the Zodiac 340 cipher. Known-key replay only."}
+  ],
+  "documents": [
+    {"id": "letter-a", "collection": "museum-prose-en", "language": "modern English", "origin": "Museum-authored; identical to the research-evaluation v1 fixture of the same identifier.",
+     "text": "The messenger returned before the rain. She carried a letter and a small wooden box. We read the letter together, but the name at the end was missing. The keeper asked us to compare the marks on the box with the marks in the book before making a decision."},
+    {"id": "letter-b", "collection": "museum-prose-en", "language": "modern English", "origin": "Museum-authored; identical to the research-evaluation v1 fixture of the same identifier.",
+     "text": "The old map showed a road across the valley. There were three bridges on the road and a tower beside the river. The first report said that the eastern bridge was closed. A second report arrived in the morning, so the travelers checked both accounts before leaving."},
+    {"id": "language-shift", "collection": "museum-prose-fr", "language": "modern French", "origin": "Museum-authored; identical to the research-evaluation v1 fixture of the same identifier.",
+     "text": "La lettre arrive avant la nuit. Nous gardons les signes et les espaces du document original. Une lecture possible ne suffit pas pour prouver le sens du message. Il faut comparer les autres lettres et expliquer les passages qui restent incertains."},
+    {"id": "letter-c", "collection": "museum-prose-en", "language": "modern English", "origin": "Museum-authored for research-evaluation v2. New in v2; it was never part of the released v1 results.",
+     "text": "The clerk copied the register twice and signed only the second copy. A reader who sees one page cannot tell which hand made the correction. Compare the ink, the ruling and the spacing before deciding that two entries were written on the same day."}
+  ],
+  "historicalPassages": "Loaded from data/research/v2/holdout.json by identifier; see that file for provenance and hashes."
+}

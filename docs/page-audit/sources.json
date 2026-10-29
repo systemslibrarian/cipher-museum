@@ -1460,10 +1460,19 @@
     "revision": "ePrint record: last of two revisions, 22 September 2026",
     "url": "https://eprint.iacr.org/2026/1309",
     "passages_read": [
-      "Complete accessible ePrint abstract: forensic study of UA-8295 backdoor design and intended attacks; proposed methodology based on the Backdoor Conjecture.",
-      "ePrint publication metadata and revision history: preprint; received 23 June 2026, last revision 22 September 2026."
+      "§1.2 Background and §1.3 Our Contributions, PDF pp.3–5: USFA provenance; the UA-8295 is based on the Nokia DA-8520 (Sanomalaite m/90 / SANLA, late 1970s) whose original algorithm was DES in OFB mode; the NSA supplied drop-in replacement EPROMs; both devices show the same startup version number, user interface and EPROM checksum, distinguishable only by the checksum displayed for a newly entered user key; both ROM images were available, which is what allowed the cryptographically relevant code to be isolated; Onkruit sales records and the 1986/1988 Jane's Military Communications entries; the stated goal is NOT to show the cipher is breakable but to work out which attack the backdoor was designed for.",
+      "§2 Forensic Cryptanalysis Methodology, PDF p.5: Conjecture 1 (Backdoor Conjecture) and its three evaluation steps, stated as a conjecture.",
+      "§§3.5–3.7, PDF pp.10–11: counter-like mode; fixed first input block from LFSR²⁴ of CF17AF8A107AC0F5 with polynomial 1 + x³¹ + x⁶³; lossy encryption discarding bits 6 and 7 of every plaintext byte; the first five ciphertext characters are the nonce; three plaintext bytes become five ciphertext characters over A–P; a 15-character user key and 5-character nonce derive a 56-bit key.",
+      "§4 and §§4.1–4.2, PDF pp.11–14: the five design issues, three of them cryptographic weaknesses inside SBTcipher; the explicit statement that there is no obvious reduction to a 40-bit effective key; Mix updating a nibble from a 2-bit crumb with no cross-nibble update at probability 3/4; Table 1, byte paths using 19–25 unique key bits.",
+      "§§5.2–5.4 and Tables 4 and 6, PDF pp.18–22 and 25: constraint propagation over per-variable domains with key, forward, backward and second forward passes; the Branch-and-Prune depth-first search with backtracking on an empty domain; both attacks implemented in C++ for MIT-licensed release; benchmarks over 20 random keys on two Intel Xeon Gold 6248 CPUs with 1.5 TB RAM, single-threaded; BnP median 33,311 s at 3 MiB with one block pair, falling to 365 s with one extra pair; List Merge key-likelihood median 12,429 s at ~227 MiB plus precomputation; the mid-1980s feasibility discussion.",
+      "§§6.1–6.3 and Table 5, PDF pp.22–25: ByP ranked 73/3435 under the exact metric M₁ but first under M₂ in every permutation set; the unique global optimum of local optima described as strong evidence of design; the IV effect bounded by a factor 1.25 and judged a class (ii) freedom; §6 described as a first application whose exhaustive version is left to future work.",
+      "§§7.1–7.3, PDF pp.25–26: nonce independence and the 327,680 versus 1,280 precomputed Lists; the nonce byte construction L₅₋ᵢ = tl₀ ⊕ ẑᵢ from a hardware counter and the previous message's keystream; the measured bias — user key 15×'A', plaintext 'AAA', 388 cases, difference exactly 15 in 75.5% and 12 in a further 14.9%, over 90% of all nonce differences; the statement that the issue was already present in the Nokia DA-8520 and was 'not deliberately inserted, but potentially deliberately kept'; §7.3 leaving fixed-format-message encryption explicitly unknown and that part of the binary not yet reverse-engineered."
     ],
-    "scope": "Primary abstract and metadata only. Full PDF retrieval returned HTTP 403; no full-paper or experiment-table verification is claimed. The exhibit now confines itself to the verified research question and methodology, distinguishing inference about intended attacks from observation of designer decisions. Removed unsupported detailed original/replacement cipher history, ROM checksums and interface comparisons, nonce claims, named attack procedures, 20-key sample count, Xeon Gold 6248/1.5 TB hardware and 3 MiB memory figures, and purported full-PDF locators. This source remains a preprint, not established peer-reviewed publication."
+    "corroboration": [
+      "https://www.cryptomuseum.com/crypto/philips/ua8295/",
+      "https://www.cryptomuseum.com/crypto/philips/ua8295/sbt.htm"
+    ],
+    "scope": "Full preprint read on 29 October 2026 from a locally supplied PDF after the publisher's server refused direct retrieval. The exhibit now labels every claim observed, implemented, conditional inference or open question. This remains a PREPRINT, not peer-reviewed publication; the attacks were not reproduced; and the paper's own conclusions about which attack the backdoor was designed for are conditional on the Backdoor Conjecture, which the authors posit rather than demonstrate. Device and firmware provenance is corroborated against the public Crypto Museum pages."
   },
   "GEA-FAULTS-2026": {
     "title": "Practical Differential Fault Attacks on the GPRS Standard Ciphers",
@@ -1484,11 +1493,13 @@
       "https://pure.bit.edu.cn/en/publications/practical-differential-fault-attacks-on-the-gprs-standard-ciphers/"
     ],
     "passages_read": [
-      "Complete accessible ePrint abstract and publication metadata: random fault model for GEA-1/GEA-2, validation by simulating whole attacks on ChipWhisperer Lite, reported completion within sixteen minutes on a common laptop.",
-      "Beijing Institute of Technology institutional abstract and bibliographic record: peer-reviewed journal article, IEEE Transactions on Dependable and Secure Computing 23(3), pp.7129–7142, 1 May 2026, DOI 10.1109/TDSC.2026.3671957.",
-      "ePrint publication information identifies the deposit as published elsewhere, minor revision, with the same IEEE DOI."
+      "Abstract and §I Introduction, PDF pp.1–2: random fault model; 64-bit keys of GEA-1 and GEA-2 recovered with time complexities 2^33.807 and 2^33.858; validation by simulating the whole attacks on ChipWhisperer Lite; both broken within sixteen minutes on a common laptop; ETSI prohibited GEA-1 in mobile phones from 2013 yet tested handsets still supported it, and GEA-2 remains deployed.",
+      "§III.B The Attack Model, PDF p.5: the two assumed capabilities — (a) reinitialize the encryption operation repeatedly with the same key–IV pair, (b) flip a state bit without knowing its location — and the authors' own statement that such an adversary 'is certainly more powerful than a normal passive attacker and has the ability to access the keystream generator as a physical device'.",
+      "§IV.C–D, PDF p.9: Fig. 3 showing the ChipWhisperer Lite main board with an XMEGA target; random bit faults injected by voltage glitches; the GEA-1 process implemented 64 times; faults injected into at least two of three LFSRs within about 343.330 s on average; internal-state recovery of registers A, B and C in about 46.414 s, 82.323 s and 180.131 s for a total of about 308.868 s on a 1.19 GHz Intel Core i5-1035G1 laptop; 343.330 + 308.868 = 652.198 s (approximately 10.870 minutes); 2048 keystream bits used against GEA's 12,800-bit frame limit; p_GEA-1 = p₄ · (0.995)² = 0.953 for recovering the full 96-bit internal state.",
+      "§V.A–D and Table II, PDF p.10: Table II gives 0.995 as the probability that Algorithm 2 identifies the EXACT fault location once at least 2048 keystream bits are available; the GEA-2 process implemented 32 times, faults injected into at least three of four LFSRs within about 587.625 s on average, all 125 internal-state bits recovered in about 320.473 s, total 587.625 + 320.473 = 908.098 s (approximately 15.135 minutes); p_GEA-2 = q₆ · (0.995)³ = 0.893 for recovering the full 125-bit internal state.",
+      "§VI Countermeasures, PDF pp.11–12: GEA-2M, a proposed GEA-2 variant XORing the filter function's four output bits onto the registers' feedback so the LFSRs become mutually dependent NFSRs and signature vectors cannot be constructed; plus generic countermeasures including double modular redundancy."
     ],
-    "scope": "Corrected preprint-only characterization: the institutional record identifies a peer-reviewed journal article, with ePrint hosting a minor revision. Full PDF returned HTTP 403, so the review supports the abstract-level random-fault/ChipWhisperer experiment and publication status, not detailed same-key/IV reinitialization, single-bit internal-state, voltage-glitch or GEA-2M claims. Those details were removed or visibly bounded. A controlled fault-model result is not passive interception or proof of an attack on arbitrary commercial phones; inducing the required faults remains a separate implementation condition."
+    "scope": "Full published version read on 29 October 2026 from a locally supplied PDF after the publisher's server refused direct retrieval. Peer-reviewed journal article, IEEE Transactions on Dependable and Secure Computing 23(3), pp.7129–7142, 1 May 2026; the ePrint deposit is a minor revision of it. The exhibit separates fault acquisition and location from internal-state recovery, states both phase timings and their sums, and distinguishes the 0.995 fault-location probability from the 0.953 and 0.893 per-cipher state-recovery figures. A controlled fault-model result on an instrumented board is not passive interception and is not an attack on arbitrary commercial phones; GEA-2M is a research countermeasure proposal, not a standardized or independently evaluated replacement. Phase sums and minute conversions were recomputed independently."
   },
   "GPU-SEARCH-2025": {
     "title": "GPU Assisted Brute Force Cryptanalysis of GPRS, GSM, RFID, and TETRA",
@@ -1712,5 +1723,204 @@
     ],
     "scope": "Specific implementation/leakage assumptions; no generic AES break, universal trace count or masking certification. Original covariance example independently enumerated over all65536 byte/mask pairs.",
     "review": "Ebook follow-up,26October2026; selected passages only."
+  },
+  "JUNIPER-DUAL-EC-2016": {
+    "title": "A Systematic Analysis of the Juniper Dual EC Incident",
+    "authors": [
+      "Stephen Checkoway",
+      "Jacob Maskiewicz",
+      "Christina Garman",
+      "Joshua Fried",
+      "Shaanan Cohney",
+      "Matthew Green",
+      "Nadia Heninger",
+      "Ralf-Philipp Weinmann",
+      "Eric Rescorla",
+      "Hovav Shacham"
+    ],
+    "year": 2016,
+    "url": "https://doi.org/10.1145/2976749.2978395",
+    "urls": [
+      "https://eprint.iacr.org/2016/376",
+      "https://hovav.net/ucsd/dist/juniper.pdf"
+    ],
+    "passages_read": [
+      "Abstract and §§1–3, PDF pp.1–3: ScreenOS vulnerable to passive exploitation since 2008 by an attacker who selects the Dual EC point; the 2012 change of a 32-byte constant between 6.2.0r14 and 6.2.0r15; Juniper's 17 December 2015 bulletin, CVE-2015-7756, affected releases and the statement that exploitation cannot be detected; patched April 2016; the explicit note that questions of motive and actor identity require a different body of material.",
+      "§4 The ScreenOS PRNG and Listing 1, PDF p.4: prng_reseed() sets the global prng_output_index to 32, and the loop that would invoke the ANSI X9.31 generator uses that same global as its counter, so no X9.31 call executes and Dual EC output is emitted directly; the index changed from a local variable to that global between the last ScreenOS 6.1 and the first 6.2.",
+      "§§5–5.3, PDF pp.4–5: Dual EC emits 30 of a point's 32 bytes; ScreenOS 6.2 uses a 32-byte IKE nonce assembled from one 30-byte output and 2 bytes of the next, narrowing candidate states to typically one to three; proof of concept on an SSG-550M running ScreenOS 6.3.0 with a researcher-chosen Q, decrypting VPN connections from a single handshake without other traffic."
+    ],
+    "scope": "Peer-reviewed CCS 2016 paper, author's version read in full for these passages. Used only for the access, assumptions and recovery of the attack. Attribution is NOT settled by this analysis: the paper itself calls a third party's change of Q suggestive but not dispositive and sets aside motive and identity."
+  },
+  "OFFICE-RC4-2005": {
+    "title": "The Misuse of RC4 in Microsoft Word and Excel",
+    "authors": [
+      "Hongjun Wu"
+    ],
+    "year": 2005,
+    "url": "https://eprint.iacr.org/2005/007",
+    "passages_read": [
+      "Abstract and record metadata, 11 January 2005: an encrypted document modified and saved again keeps the same initialization vector, so the same RC4 keystream encrypts different versions; Word 2002 is used to illustrate; Office 97, 2000 and 2003 Word and Excel are named as affected."
+    ],
+    "scope": "Abstract and publication record verified. A twenty-year-old finding about a superseded format, carried as a historical comparison and explicitly not as a current product advisory. What is recovered is document content from a two-time pad, not the password or the key."
+  },
+  "KASUMI-SANDWICH-2010": {
+    "title": "A Practical-Time Attack on the A5/3 Cryptosystem Used in Third Generation GSM Telephony",
+    "authors": [
+      "Orr Dunkelman",
+      "Nathan Keller",
+      "Adi Shamir"
+    ],
+    "year": 2010,
+    "url": "https://eprint.iacr.org/2010/013",
+    "passages_read": [
+      "Abstract: a sandwich distinguisher over 7 of 8 KASUMI rounds at probability 2^-14; the full 128-bit key recovered using 4 related keys, 2^26 data, 2^30 bytes of memory and 2^32 time, simulated in under two hours on a single PC; the explicit statement that neither this technique nor any other published attack breaks MISTY in less than 2^128."
+    ],
+    "scope": "Abstract verified. The four-related-key requirement is the whole point of the card: this is not passive decryption of ordinary calls, and the result is specific to KASUMI rather than to MISTY1."
+  },
+  "BLUETOOTH-FIXED-COORD-2019": {
+    "title": "Breaking the Bluetooth Pairing — The Fixed Coordinate Invalid Curve Attack",
+    "authors": [
+      "Eli Biham",
+      "Lior Neumann"
+    ],
+    "year": 2019,
+    "url": "https://eprint.iacr.org/2019/1043",
+    "passages_read": [
+      "Abstract and §§1–4 summary, SAC 2019: an active man-in-the-middle during pairing modifies the y coordinate, which the user-checked numeric comparison does not cover; setting y = 0 gives a point of order 2 and two possible shared secrets, both known to the attacker; the encryption keys of about 50% of pairing attempts are compromised while the other 50% fail to pair; both devices must be vulnerable; vendors patched and the specification now requires public-key validation."
+    ],
+    "scope": "Abstract and summary verified. This deduces the session shared secret; unlike the classical invalid-curve attack it does NOT recover a long-term private key. Historical: treat as a worked example of unvalidated input, not a current advisory."
+  },
+  "SMALL-SUBGROUP-DH-2016": {
+    "title": "Measuring small subgroup attacks against Diffie-Hellman",
+    "authors": [
+      "Luke Valenta",
+      "David Adrian",
+      "Antonio Sanso",
+      "Shaanan Cohney",
+      "Joshua Fried",
+      "Marcella Hastings",
+      "J. Alex Halderman",
+      "Nadia Heninger"
+    ],
+    "year": 2016,
+    "url": "https://eprint.iacr.org/2016/995",
+    "passages_read": [
+      "Abstract, NDSS 2017: of more than twenty open-source cryptographic libraries and applications examined, not one validated subgroup orders by default until January 2016; millions of hosts use DSA and other non-'safe' primes; feasible full or partial key recovery found in OpenSSL, Exim, Unbound and Amazon's load balancer, with weaker attacks far more widely applicable."
+    ],
+    "scope": "Abstract verified. Used to keep small-subgroup confinement distinct from static private-key recovery: the validation failure was near-universal, while full key recovery needed particular exponent-reuse conditions in particular software."
+  },
+  "HISTCIPH-2026": {
+    "title": "Bridging the Low Resource Gap in Historical Cryptology: A Multilingual Diachronic Synthetic Dataset for Reproducible Cryptanalysis",
+    "authors": [
+      "Micaella Bruton",
+      "Meriem Beloucif",
+      "Beáta Megyesi"
+    ],
+    "year": 2026,
+    "url": "https://aclanthology.org/2026.resourceful-4.2/",
+    "passages_read": [
+      "Abstract and record, RESOURCEFUL 2026 pp.13–24: ten languages across multiple centuries; diachronically balanced historical plaintext combined with INDEPENDENTLY GENERATED homophonic substitution keys and controlled transcription noise; generation constrained by documented properties of historical ciphers including multi-homophone allocation and variable-length codes."
+    ],
+    "scope": "Abstract and publication record verified. Cited for the independently-generated-per-text key structure that the museum's pooled-entropy example contrasts with. The museum's log2(130) bound is the museum's own mathematical inference from a stated model, NOT a replication of this dataset's measurements, and the museum does not assert that any published pooled figure is wrong."
+  },
+  "Z340-UNICITY-2021": {
+    "title": "Unicity distance of the Zodiac-340 cipher",
+    "authors": [
+      "Joachim von zur Gathen"
+    ],
+    "year": 2021,
+    "url": "https://eprint.iacr.org/2021/1620",
+    "passages_read": [
+      "Abstract and record (also Cryptologia 47(5), 2023): plaintext-language entropy computed under three different assumptions — standard English, the Z340 plaintext alone, and Zodiac's entire correspondence — with the resulting unicity distance reported as a range of at most 152 characters rather than one figure."
+    ],
+    "scope": "Abstract and publication record verified. Cited to show that a unicity estimate depends on its language and key-space assumptions, certifies no particular reading, and promises no efficient solver."
+  },
+  "ACTS-2026": {
+    "title": "ACTS: A multi-tier benchmark evaluating LLM cipher identification under controlled blind conditions",
+    "authors": [
+      "Youssef Hamdi Zafaan Ibrahim",
+      "Mohammed Khalaf Salama"
+    ],
+    "year": 2026,
+    "url": "https://arxiv.org/abs/2609.26893",
+    "passages_read": [
+      "Abstract and tier description, submitted 22 September 2026: tiered metadata deprivation — Tier 1 full metadata, Tier 2 filename only, Tier 3 completely blind; live API inference on a randomized-padding corpus gives combined accuracy of 71.7% at Tier 1 against 30.8% at Tier 3, a 40.9-point gap; Tier 5 forced-reasoning formats are executed by DETERMINISTIC HEURISTIC SUBSTITUTION rather than live API calls."
+    ],
+    "scope": "arXiv preprint, abstract verified. Cited for the measurable metadata gap and for the explicit disclosure that one tier used no live model. A deterministic substitute cannot establish the causal effect of reasoning prompts on a live model."
+  },
+  "CIPHER-FINGERPRINT-2025": {
+    "title": "Plaintext Structure Vulnerability: Robust Cipher Identification via a Distributional Randomness Fingerprint Feature Extractor",
+    "authors": [
+      "Xiwen Ren",
+      "Min Luo",
+      "Cong Peng",
+      "Debiao He"
+    ],
+    "year": 2025,
+    "url": "https://arxiv.org/abs/2511.08296",
+    "passages_read": [
+      "Abstract: classifier performance declines when the test plaintext distribution departs from training; randomness features of the ciphertext build algorithm fingerprints; AUC above 0.98 on the Canterbury Corpus; baselines degrade sharply as structured plaintext thins while the method holds above 0.90 even on purely random data."
+    ],
+    "scope": "arXiv preprint, abstract verified. Cited to keep cipher IDENTIFICATION separate from plaintext recovery: a strong AUC for telling ciphers apart says nothing about a single plaintext letter and is not a break of any cipher."
+  },
+  "HOMOPHONIC-LSTM-2026": {
+    "title": "Attention-Augmented LSTMs for Automatic Homophonic Ciphertext Decipherment",
+    "authors": [
+      "Micaella Bruton",
+      "Meriem Beloucif",
+      "Beáta Megyesi"
+    ],
+    "year": 2026,
+    "url": "https://arxiv.org/abs/2606.05078",
+    "passages_read": [
+      "Abstract, submitted 3 June 2026: near-perfect character-level accuracy on synthetic ciphertexts from historical English and Swedish texts, 1500–1899; 'all ciphertexts draw from the same known homophonic code pool, while individual keys use different consistent subsets of that pool'; trained only on aligned ciphertext–plaintext pairs with no external language model, frequency statistics or key-search heuristics; presented as a tool for cases where key reuse is suspected."
+    ],
+    "scope": "arXiv preprint, abstract verified. Cited as the clearest statement that a shared global code pool is a structurally different task from recovering a key drawn for one message. The museum's own evaluation measures both and reports opposite outcomes."
+  },
+  "COMPLETE-FORMULAS-2016": {
+    "title": "Complete Addition Formulas for Prime Order Elliptic Curves",
+    "authors": [
+      "Joost Renes",
+      "Craig Costello",
+      "Lejla Batina"
+    ],
+    "year": 2016,
+    "url": "https://eprint.iacr.org/2015/1060",
+    "passages_read": [
+      "Abstract and Algorithm 1, EUROCRYPT 2016: branch-free addition formulas correct for every pair of points on SHORT WEIERSTRASS curves of PRIME ORDER over fields of characteristic other than 2 and 3, with their field-multiplication cost."
+    ],
+    "scope": "Peer-reviewed. Algorithm 1 was re-implemented independently in hall-of-foundations/ec-math.test.js and compared against the museum's affine arithmetic on all 361 ordered point pairs of the prime-order curve y^2 = x^3 + 2x + 2 over F_17, identity, inverses and doublings included: zero disagreements. The completeness guarantee is stated for that curve class and does not transfer outside it."
+  },
+  "FIAT-CRYPTO-2019": {
+    "title": "Simple High-Level Code for Cryptographic Arithmetic — With Proofs, Without Compromises",
+    "authors": [
+      "Andres Erbsen",
+      "Jade Philipoom",
+      "Jason Gross",
+      "Robert Sloan",
+      "Adam Chlipala"
+    ],
+    "year": 2019,
+    "url": "https://doi.org/10.1109/SP.2019.00005",
+    "passages_read": [
+      "Abstract and overview, IEEE S&P 2019: machine-checked functional correctness for field arithmetic including bounds reasoning, with the compiler and pretty-printer outside the proof's trusted boundary."
+    ],
+    "scope": "Peer-reviewed. Cited only to distinguish a functional-correctness proof from a timing guarantee and to locate the trusted boundary at the compiler. The museum makes no formal-verification claim about any of its own JavaScript."
+  },
+  "CRYPTOMUSEUM-UA8295": {
+    "title": "UA-8295 Short-burst message terminal with encryption, and the SBT algorithm",
+    "authors": [
+      "Crypto Museum"
+    ],
+    "year": 2026,
+    "url": "https://www.cryptomuseum.com/crypto/philips/ua8295/",
+    "urls": [
+      "https://www.cryptomuseum.com/crypto/philips/ua8295/sbt.htm"
+    ],
+    "passages_read": [
+      "Device page: the UA-8295/00 developed by Nokia as the DA-8520 (Sanomalaite m/90 / SANLA); Philips Usfa obtained the design in 1984; the original used DES in OFB mode; the NSA-developed replacement firmware carries the same version number E22444, the same date of 30 October 1984, the same size and the same checksum; four 27C64 EPROMs.",
+      "SBT algorithm page: eleven steps over LFSRs, bit and box permutations, S-boxes and nibble switches; 64-bit user key; keystream generated a byte at a time; the LFSR stepped 64 times with primitive polynomial 1 + x^32 + x^63."
+    ],
+    "scope": "Public secondary source used to corroborate device lineage, firmware version/date/checksum coincidence and hardware details from the hardware side, alongside the primary preprint. Not a peer-reviewed publication."
   }
 }

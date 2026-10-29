@@ -171,7 +171,7 @@
     {"number":167,"path":"ciphers/amsco.html","label":"broken","note":"Variable-cell transposition preserves frequencies and is susceptible to probable-word and scored permutation search.","collection":"cipher-history","interactive":true},
     {"number":168,"path":"ciphers/bombe.html","label":null,"note":"Codebreaking machine; not an encryption system.","collection":"cipher-history","interactive":false},
     {"number":169,"path":"ciphers/colossus.html","label":null,"note":"Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.","collection":"cipher-history","interactive":true},
-    {"number":170,"path":"ciphers/ua-8295.html","label":null,"note":"Forensic cryptanalysis case study; abstract and publication record verified, with full-paper technical details outside this exhibit’s verified scope.","collection":"cipher-history","interactive":false},
+    {"number":170,"path":"ciphers/ua-8295.html","label":null,"note":"Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.","collection":"cipher-history","interactive":false},
     {"number":171,"path":"ciphers/sodark.html","label":"broken","note":"Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.","collection":"cipher-history","interactive":false},
     {"number":172,"path":"ciphers/nfc-deployment.html","label":null,"note":"Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.","collection":"cipher-history","interactive":false}
   ]

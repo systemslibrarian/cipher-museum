@@ -132,6 +132,7 @@
     <div class="pull">
       The group law supplies arithmetic. Security requires suitable finite-field parameters and a complete protocol.
     </div>
+    <p>The construction drawn above also has <em>exceptional cases</em>: two points sharing an x-coordinate have no chord with a finite slope, and a point added to itself needs the tangent instead. Any implementation must branch on those cases, or use <strong>complete addition formulas</strong> that are correct for every pair without branching — a guarantee stated for a particular curve class, not for curves in general. Whether a correct formula was implemented correctly, and whether the compiled result runs in constant time, are two further questions that a correct formula does not settle. <a href="finite-fields.html#assurance">Four different promises about the same addition</a> sets them side by side.</p>
   </section>
 
   <section class="exhibit">

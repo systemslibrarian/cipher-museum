@@ -1,10 +1,10 @@
 # Cipher Museum — complete independent audit document
 
-This snapshot brings together **214 public HTML pages**, **80 nonempty inline scripts**, **52 shared/supporting JavaScript files**, **26 JSON/manifest data files**, and **160 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
+This snapshot brings together **214 public HTML pages**, **80 nonempty inline scripts**, **53 shared/supporting JavaScript files**, **29 JSON/manifest data files**, and **173 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
 
 - Source repository: systemslibrarian/cipher-museum
-- Exact source commit: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`
-- Source commit time: 2026-10-26T18:48:31-04:00
+- Exact source commit: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`
+- Source commit time: 2026-10-29T09:15:03-04:00
 - Public website: https://ciphermuseum.com/
 - Inventory authority: docs/page-audit/coverage.json, checked against every tracked public HTML page.
 - Snapshot hashes identify the original files. Exported text is reformatted; direct ebook URLs are replaced with a visible omission marker. Book titles, authors and publication details remain.
@@ -255,7 +255,7 @@ Suggested finding fields: `id, page_id, path, quotation_or_location, category, s
 
 # Pages P001–P020
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P001: 404.html -->
 <a id="p001"></a>
@@ -765,7 +765,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `cipher-corpus.html`
 - Public page: https://ciphermuseum.com/cipher-corpus.html
-- Snapshot source SHA-256: `5bcda2a6c12d22498a2984525d05291f2121f56a4f61d6b15cc5eba0d02405f3`
+- Snapshot source SHA-256: `6972244367a9ac25f7f8ddf7d0734736383f70c8750a5840ced55790b3155829`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -922,11 +922,17 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
 
 Do not train and evaluate on the same split when measuring model performance.
 
+##### Two statistics that are easy to swap
+
+Corpus-level entropy and per-message entropy are different measurements. With 26 plaintext letters and at most five homophones each, one fixed homophonic key has at most 130 code types, so a code symbol under that key carries at most log<sub>2</sub> 130 ≈ 7.022 bits. Pooling ciphertext produced under many independently generated keys enlarges the observed alphabet — eleven thousand codes gives log<sub>2</sub> 11000 ≈ 13.425 bits — but that figure describes the collection. It does not describe what an attacker holding one message faces, and a recovery result that improves when the pool grows is measuring the pool rather than the cipher. The [entropy exhibit](<https://ciphermuseum.com/hall-of-foundations/entropy.html#pooled-entropy>) works a small enumerable case, and explains why a unicity estimate neither certifies a reading nor guarantees an efficient solver.
+
 Research Context
 
 #### Attribution & Citation
 
 CipherBank (Li et al., 2025) is a research benchmark studying LLM performance on cryptographic decryption tasks. Its reported results depend on model, prompt, algorithm and metric; they are not a measured accuracy result for this museum’s corpus or solvers.
+
+**Four claims that are not the same claim.** An AI cipher result may be measuring metadata recognition (the filename gave it away), cipher-family classification (the ciphertext has a statistical signature, and the message stays unread), fixed-codebook recognition (a code pool the system was already trained on), or genuine plaintext and key recovery. Only the last is decipherment, and it is the one least often measured. The gap is quantifiable: the ACTS benchmark strips metadata in tiers and reports combined accuracy falling from 71.7% with metadata to 30.8% blind. Before benchmarking anything against this corpus, read the [matched-input evaluation recipe and benchmark checklist](<https://ciphermuseum.com/lab/modern-attack-evidence.html#ai-results>) — including the label-shuffled and length-only floors, and the rule that a deterministic stand-in for a model establishes nothing about a live one.
 
 The corrected v0.8 corpus contains 100,313 records across 85 cipher types, including 41 historically themed entries and 7 languages. The published v0.6 archive has 100,326 records, 54 historically themed entries, and 9 languages. Its legacy `verified` field is not a claim that each historical pair is an authenticated source transcription; see the [v0.6 errata](<https://ciphermuseum.com/docs/CORPUS-V06-ERRATA.md>). CipherBank (Li et al., 2025) has 2,358 cases across 9 types; the collections use different records and evaluation methods. [CipherBank paper →](<https://arxiv.org/pdf/2504.19093>)
 
@@ -994,9 +1000,9 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "bounded review and local release validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [],
-  "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy.",
+  "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "corpus_utilities",
@@ -1013,7 +1019,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -5500,7 +5507,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P021–P040
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P021: ciphers/bach-motif.html -->
 <a id="p021"></a>
@@ -10800,7 +10807,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P041–P060
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P041: ciphers/colossus.html -->
 <a id="p041"></a>
@@ -13965,7 +13972,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/diffie-hellman.html`
 - Public page: https://ciphermuseum.com/ciphers/diffie-hellman.html
-- Snapshot source SHA-256: `3ae1be5c51ac24f2ac14e1ae2b164966d1f51f80102ec51926bfcf8295c860ed`
+- Snapshot source SHA-256: `804b6bcfb454c870d1b0a7c717ed7788cfbc996aa540b61b880638cb4df12891`
 - Source identities in the prior evidence ledger: LOGJAM-2015, BONEH-SHOUP-2023, WONG-2021
 
 ### Metadata and search/social descriptions
@@ -14112,6 +14119,8 @@ Security & Cryptanalysis
 
 Resistance to recovering the shared value rests on the computational Diffie–Hellman assumption in the selected group; discrete-log hardness alone does not establish that assumption. Parameter size, subgroup choice and public-key validation all matter; a bit length alone does not establish security. The 2015 Logjam work demonstrated a downgrade to export-grade 512-bit finite-field DH and studied the benefits of precomputation for widely shared groups. Suitable group sizes and validation matter; moving to an elliptic curve also requires a specified secure construction. DH is vulnerable to *active* man-in-the-middle attacks because the exchanged values are unauthenticated — protocols that need protection from active attackers must combine DH with authentication (for example signatures, certificates or a suitable pre-shared-key protocol). A human password requires a properly designed password-authenticated key exchange, not an improvised password check.
 
+Two input-validation failures are often merged and should not be. Forcing a peer’s shared secret into a small subgroup compromises that session and can leak a few bits; recovering a server’s *static* private exponent additionally requires that one exponent be reused across many such queries. A 2016 measurement study found that none of more than twenty surveyed libraries validated subgroup orders by default before January 2016, yet feasible full key recovery was confined to particular applications. The elliptic-curve counterpart — altering only the *y* coordinate of a peer’s public point — broke Bluetooth pairing in 2018. Both are laid out with their access and assumptions in [what an attack result actually shows](<https://ciphermuseum.com/lab/modern-attack-evidence.html#small-subgroup>).
+
 [Inline SVG: original diagram/icon markup]
 
 ```html
@@ -14181,13 +14190,13 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "ebook follow-up implementation and local validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "LOGJAM-2015",
     "BONEH-SHOUP-2023",
     "WONG-2021"
   ],
-  "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+  "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 29 Oct 2026 research review R12: added a paragraph separating small-subgroup confinement from static private-key recovery, with the 2016 measurement study figures, and cross-linked the comparison cards. Existing protocol explanation unchanged.",
   "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
   "final_prose_review": {
     "reader": "exhibit_final_read",
@@ -14215,7 +14224,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "browser_evidence": "docs/ebook-followup/browser.json",
     "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
     "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-  }
+  },
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -16241,7 +16251,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P061–P080
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P061: ciphers/elizebeth-friedman.html -->
 <a id="p061"></a>
@@ -20718,7 +20728,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/homophonic.html`
 - Public page: https://ciphermuseum.com/ciphers/homophonic.html
-- Snapshot source SHA-256: `f47352da281338697bd44e12efa751200abcebbe7b5fa1c189935cdba2b99491`
+- Snapshot source SHA-256: `3a603b26511379d5448c5703ec06310fe9609b394b162756d7ce62a85d3b079d`
 - Source identities in the prior evidence ledger: HAC-1997, KAHN-1996
 
 ### Metadata and search/social descriptions
@@ -20932,6 +20942,14 @@ Quick Facts
 | Key Type | Symbol-to-letter mapping table |
 | Broken By | Statistical analysis · Structural pattern detection |
 
+#### How Many Codes Is the Reader Facing?
+
+A homophonic key is usually described by how many code symbols it holds, and that number does the work. With 26 plaintext letters and at most five homophones each, one fixed key has **at most 130 code types**, so each code symbol carries at most **log<sub>2</sub> 130 ≈ 7.022 bits** — and only if all 130 were equally likely, which proportional allocation does not achieve.
+
+Research collections are built by encrypting many texts, each under its own independently generated key. Pool all that ciphertext and the measured alphabet becomes much larger: eleven thousand codes gives log<sub>2</sub> 11000 ≈ 13.425 bits. **That is a statistic about the collection, not about the letter in front of you.** An attacker who holds one message still faces one key with its own small set of codes. Growing the pool cannot make a single message harder to read, and a cryptanalytic result that improves as the pool grows is measuring the pool.
+
+The worked, fully enumerable version of this — and why a unicity estimate neither certifies a proposed reading nor promises an efficient solver — is in [the entropy exhibit](<https://ciphermuseum.com/hall-of-foundations/entropy.html#pooled-entropy>).
+
 #### Sources and Reading
 
 *Handbook of Applied Cryptography*, Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone (1997), §7.3.2, p.240: proportional homophone sets and residual statistics. *The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet*, David Kahn (revised edition, 1996), “The Rise of the West”: the Mantuan 1401 example and the uncertain transmission of cryptanalytic knowledge.
@@ -20972,12 +20990,12 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "bounded review and local release validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "HAC-1997",
     "KAHN-1996"
   ],
-  "notes": "HAC proportional/random homophone model and Kahn Mantua1401 checked; example E/T/Z allocations are not uniform. Final metadata removes conflation of Mary1586 and GreatCipher1893 with one simple letter scheme.",
+  "notes": "HAC proportional/random homophone model and Kahn Mantua1401 checked; example E/T/Z allocations are not uniform. Final metadata removes conflation of Mary1586 and GreatCipher1893 with one simple letter scheme. 29 Oct 2026 research review R10: added a panel on how many codes one fixed key actually holds, with the log2(130) bound and why a pooled corpus statistic measures something else.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "teaching_pages",
@@ -20994,7 +21012,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -21782,7 +21801,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P081–P100
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P081: ciphers/joan-clarke.html -->
 <a id="p081"></a>
@@ -24608,7 +24627,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/lorenz.html`
 - Public page: https://ciphermuseum.com/ciphers/lorenz.html
-- Snapshot source SHA-256: `db274be3d557cb0a7a7bd975a829a51ebbd5b86d245d96f1f4371cc063bdc091`
+- Snapshot source SHA-256: `08e383041a63e499219c42c03b43b72c7a2e7fae7765a36effa54742085591d9`
 - Source identities in the prior evidence ledger: TNMOC-TUNNY, TUNNY-1945
 
 ### Metadata and search/social descriptions
@@ -24841,6 +24860,8 @@ In general, `C_A ⊕ C_B = P_A ⊕ P_B ⊕ K_A ⊕ K_B`. The keys cancel only wh
 
 Source: I. J. Good, Donald Michie and Geoffrey Timms, *General Report on Tunny: With Emphasis on Statistical Methods* (1945), §11B(g), (j), printed pp. 8, 10 / collected PDF pp. 11, 13; §43C(g), printed p. 317 / collected PDF p. 311, on the Herring link’s diverging psi streams. This distinction is not a claim that feedback made Lorenz generally secure.
 
+Keystream reuse did not stay in 1941. In 2005 Hongjun Wu reported that Microsoft Word and Excel kept the same RC4 initialization vector when an encrypted document was re-saved, so two versions of one document were enciphered under the same keystream — the same `C_A ⊕ C_B = P_A ⊕ P_B` situation Tiltman exploited, with the versions playing the part of the two messages. Compare the access and assumptions side by side in [what an attack result actually shows](<https://ciphermuseum.com/lab/modern-attack-evidence.html#office-rc4>).
+
 Enigma and Lorenz were attacked through combinations of mathematical structure, traffic, operating practices and intelligence. Neither story is adequately explained by operator error alone.
 
 [Inline SVG: original diagram/icon markup]
@@ -25017,12 +25038,12 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "ebook follow-up implementation and local validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "TNMOC-TUNNY",
     "TUNNY-1945"
   ],
-  "notes": "Final body/table/SVG/sidebar read reconciled Tiltman recovery, Tutte/team inference and later Colossus; wheel-state product is not an unconditional output period. Removed universal computing/LFSR lineage and unchanged WEP/GCM attack claims.",
+  "notes": "Final body/table/SVG/sidebar read reconciled Tiltman recovery, Tutte/team inference and later Colossus; wheel-state product is not an unconditional output period. Removed universal computing/LFSR lineage and unchanged WEP/GCM attack claims. 29 Oct 2026 research review R12: added a paragraph linking the 1941 depth to the 2005 Office RC4 keystream-reuse finding and the comparison cards. Historical account unchanged.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "teaching_pages",
@@ -25056,7 +25077,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "browser_evidence": "docs/ebook-followup/browser.json",
     "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
     "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-  }
+  },
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -27147,7 +27169,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P101–P120
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P101: ciphers/morse.html -->
 <a id="p101"></a>
@@ -32842,7 +32864,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P121–P140
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P121: ciphers/rochefort.html -->
 <a id="p121"></a>
@@ -38145,7 +38167,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P141–P160
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P141: ciphers/tap-code.html -->
 <a id="p141"></a>
@@ -39728,12 +39750,12 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/ua-8295.html`
 - Public page: https://ciphermuseum.com/ciphers/ua-8295.html
-- Snapshot source SHA-256: `34d7db11418101403181d0a7c0ada838ab5afeb4288933c91306a19312a58fb1`
+- Snapshot source SHA-256: `6e60800a62101ee3338e85e32b7e60dc0c63a6f5b951ce54449503222b552618`
 - Source identities in the prior evidence ledger: UA8295-2026
 
 ### Metadata and search/social descriptions
 
-- description: A preprint case study separating cryptanalytic findings from inferences about backdoor design.
+- description: A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.
 
 ### Complete static body text and inline diagrams
 
@@ -39779,9 +39801,9 @@ Exhibit 170 of 172 Modern cryptography · research case study
 
 ### UA-8295: Forensic Cryptanalysis of a Message Terminal
 
-A preprint case study separating cryptanalytic findings from inferences about backdoor design.
+A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.
 
-Forensic cryptanalysis case study; abstract and publication record verified, with full-paper technical details outside this exhibit’s verified scope.
+Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.
 
 Device USFA UA-8295 Short Burst Terminal
 
@@ -39791,25 +39813,85 @@ Methodology Backdoor Conjecture
 
 Research 2026 · ePrint preprint
 
-#### What the primary record establishes
+#### Reading this case: four kinds of evidence
 
-Stijn Maatje and Marc Stevens’s 2026 preprint studies the UA-8295 message terminal as an example of backdoored cryptographic equipment. Its abstract describes a forensic cryptanalysis aimed at understanding how the backdoor was designed and which attack it was intended to enable.
+A backdoor case mixes things that were *seen* in firmware with things that were *computed*, and both with things that are *argued* from a design. Maatje and Stevens keep those apart, and this exhibit labels every claim the same way.
 
-The authors propose a methodology based on the “Backdoor Conjecture” for reasoning about those questions. Inferring an intended attack from a design is distinct from directly observing the designers’ decisions.
+- Observed read out of the device, its ROMs or the documentary record
 
-#### Evidence available for this exhibit
+- Implemented an experiment or attack the authors actually ran
 
-**Evidence scope:** this exhibit relies on the accessible abstract and ePrint publication record. The full paper was unavailable for verification, so detailed claims about firmware differences, attack performance and data requirements remain outside its scope.
+- Inference a conclusion that holds only if the Backdoor Conjecture holds
+
+- Open explicitly unresolved in the paper
+
+The authors state their aim directly: “it is not our goal to demonstrate its encryption can be broken, we already know it is weak.” The goal is to work out *which attack the backdoor was built for*. That is a different question from whether a weakness exists, and it is the question the labels below keep in view.
+
+#### One device, two ROMs
+
+Observed The UA-8295 Short Burst Terminal was sold by USFA, a Philips subsidiary supplying the Dutch government, Dutch Army and other NATO countries. It is based on the **DA-8520**, known in the Finnish Army as Sanomalaite m/90 (SANLA), manufactured by Nokia in the late 1970s. The original Nokia algorithm was **DES in Output Feedback mode**.
+
+Observed From 1977 the NSA had an arrangement with USFA to sell backdoored encryption equipment. For the UA-8295, marketed from 1984, the NSA supplied a new algorithm and **drop-in replacement EPROMs**. From the outside the two devices are near-indistinguishable: the same startup version number, the same user interface, and even the same checksum over the EPROM data. The authors note one way to tell them apart — the checksum the device displays for a newly entered user key differs.
+
+Observed Both ROM images were available for comparison, which is what made the work possible: “since both the original DES implementation as well as the NSA-modified algorithm are available to us, a simple comparison of the two allowed us to easily locate and isolate the cryptographically relevant code.” The reverse engineering is described as partial.
+
+Observed Sales records published by the Dutch action group Onkruit show UA-8295 units sold on to Philips subsidiaries in Belgium and the United Kingdom, the UK order being a UA-8295/06 with an Arabic keyboard intended for Saudi Arabia. The device appears in the 1986 and 1988 editions of *Jane’s Military Communications*.
+
+#### What the replacement cipher actually does
+
+Observed The NSA algorithm — the paper calls its block primitive **SBTcipher** — is used in a counter-like mode. A 15-character user key and a 5-character nonce derive a **56-bit** encryption key. Input blocks depend on the nonce and the block position only; no plaintext or ciphertext feeds back. A fixed 64-bit value is run through a Fibonacci LFSR with polynomial 1 + x³¹ + x⁶³ to produce the first input block.
+
+Observed The message format is unusual and worth seeing: the first five ciphertext characters *are* the nonce, and each group of three plaintext bytes becomes five ciphertext characters drawn from the alphabet A–P. The encryption is **lossy** — bits 6 and 7 of every plaintext byte are discarded and reconstructed by a fixed rule on decryption.
+
+Observed Five design issues are identified, three of them cryptographic weaknesses inside SBTcipher. The mode fixes the very first input block for *every* key and nonce, which helps precomputation. The only byte-mixing operation updates a 4-bit nibble using just a 2-bit crumb of its neighbour, and with probability 3/4 performs no cross-nibble update at all. And the key schedule interacts strongly with the byte permutation, so each byte path uses only 19–25 unique key bits out of the 40 control bits it consumes per round.
+
+Observed The authors explicitly record what they did *not* find: “there is no obvious backdoor in the form of a reduction to an effective key of say only 40 bits, as is frequent in weakening cryptographic primitives under export control.” The weakening here is subtler than a shortened key.
+
+#### Two attacks, actually implemented
+
+Implemented Both attacks assume one or more **known input/output block pairs** and are written in C++, to be released open-source under the MIT licence. A *List Merge* attack builds, for each byte path, a list of candidate partial keys consistent with a known block pair, then merges the lists pairwise, discarding combinations that disagree where their key masks overlap.
+
+Implemented A *Branch-and-Prune* attack walks a depth-first tree over the key space. Each variable carries a **domain** — the set of values still possible for it — and after each key-bit guess the attack runs **constraint propagation** through the round functions, forward, then backward, then forward again. If any domain becomes empty the branch is inconsistent, so it is pruned and the search backtracks. The order in which key bits are guessed is taken from the List Merge attack’s byte-path merge order.
+
+Implemented Measured on a server with two Intel Xeon Gold 6248 CPUs and 1.5 TB RAM, single-threaded, over 20 randomly generated keys: with one known block pair the Branch-and-Prune median runtime is 33,311 s (Q1 18,960 s, Q3 66,215 s) in about 3 MiB of memory; List Merge with key-likelihood ordering has a median of 12,429 s but needs roughly 227 MiB plus precomputation. **Adding a single extra known pair drops both by about two orders of magnitude** — Branch-and-Prune falls to a 365 s median — and two or three extra pairs bring it to seconds or milliseconds. The authors summarise the one-pair case as recovering the key “on a laptop in a weekend.”
+
+Observed Those are modern measurements. The authors reason separately about 1980s feasibility: Branch-and-Prune’s ~3 MiB working set would have fitted the 640 KiB of a mid-1980s personal computer if written for it, and List Merge might have fitted a Cray X-MP (1982) or Cray 2 (1985) with further optimization. They concede that a daily key-recovery operation against many keys in the 1980s is “hard to imagine” at the zero-extra-pair runtime, and that the single-extra-pair case is the plausible one.
+
+#### The nonce: a weakness the NSA did not add
+
+Observed Two separate nonce issues are reported, and conflating them would misstate the case. **Nonce independence:** because the first input block is fixed, the first eight keystream bytes depend on the encryption key alone. That is the classic setting for a time–memory trade-off, and it also shrinks the List Merge precomputation from 327,680 lists to 1,280.
+
+Observed **Biased nonce generation** is a different flaw. Each of the five nonce bytes is formed by XORing a hardware-counter byte with a byte of the *previous* message’s keystream, in a tight loop with a fixed number of instructions between counter reads. The counter therefore advances by a predictable amount between bytes, so differences between adjacent nonce characters are strongly biased.
+
+Implemented The authors measured it on the device: encrypting consecutive sample messages with the user key 15×‘A’ and plaintext ‘AAA’, across 388 observed cases the difference between nonce characters was exactly 15 in 75.5% of cases and 12 in a further 14.9% — **two values accounting for over 90% of all nonce differences**.
+
+Observed This is the finding that most resists a simple story. The paper records that **the same nonce-generation issue was already present in the Nokia DA-8520**, the DES-based original. Their own careful wording: “At least this issue was not deliberately inserted, but potentially deliberately kept, by the NSA into the UA-8295.” Not every weakness in a backdoored device was put there by the party that backdoored it.
+
+Open Why the weakness was there in the Nokia original is left as an open question.
+
+#### What the Backdoor Conjecture does, and what it cannot do
+
+Observed The methodology rests on a stated conjecture: backdoors are designed both to optimize a specific attack and to look secure under casual analysis. Design choices are then sorted into those that serve the intended attack (class i) and those that are attack-neutral and merely conventional (class ii). Optimality of a class-(i) choice is read as evidence for a candidate attack; suboptimality as evidence against it.
+
+Inference On that basis the byte permutation is argued to be a class-(i) choice. Under the exact attack-cost metric it ranks 73rd of 3,435 permutations — *not* optimal — but under a cheap predictive metric that a 1980s designer might plausibly have used, it ranks first in every permutation set tested. The stronger structural argument is that the optimal byte-path sets form a single global optimum built from local optima, which the authors call “an unexpectedly strong structure in the attack design space.”
+
+Inference The fixed IV is argued to be class (ii). Changing it shifts attack time by at most a factor 1.25, and the authors judge there is no apparent structure in the chosen value: weak evidence against the Branch-and-Prune attack having been the intended one, and most likely a choice made to look conventional.
+
+Open Every conclusion in this section is conditional. The Backdoor Conjecture is posited, not demonstrated. The paper describes its own §6 as “a first application” of the methodology and says a more exhaustive treatment of the UA-8295 “would cost significant effort beyond the scope of this paper.” **That two modern attacks succeed does not establish which attack the designer intended.** It establishes that the device is breakable, which the authors already took as given.
+
+Open **Fixed-format messages are unresolved, and they matter.** The UA-8295 can send messages conforming to a user-selected format, and ships with a pre-programmed one for coordinates, bearing and range. The authors state: “At present, we do not know how such a fixed format message is encrypted… In either case a fixed-format message could act as a crib, further increasing practicability for known-plaintext attacks such as the ones described in section 5, but more research on this has to be carried out. In particular, that part of the binary code is not yet reverse-engineered.” Since both implemented attacks need known input/output pairs, this open question sits directly between the laboratory result and any claim about operational traffic.
 
 #### The museum connection
 
-Compare this case with [Hagelin and Crypto AG’s supplier history](<https://ciphermuseum.com/ciphers/hagelin-c36.html>), while keeping the organizations, equipment and evidence distinct. The shared historical question is whether the delivered implementation matches the security story told to its users.
+Compare this case with [Hagelin and Crypto AG’s supplier history](<https://ciphermuseum.com/ciphers/hagelin-c36.html>), while keeping the organizations, equipment and evidence distinct. The shared historical question is whether the delivered implementation matches the security story told to its users. For a modern counterpart where a parameter substitution was the whole backdoor, see the Juniper Dual EC card on [what an attack result actually shows](<https://ciphermuseum.com/lab/modern-attack-evidence.html#juniper>).
 
-This exhibit introduces the research question and its evidence limits. It does not simulate the terminal or reproduce the paper’s attacks.
+This exhibit summarizes a published forensic study and labels its evidence. **It does not simulate the terminal, reproduce the attacks, or offer a key-recovery tool.** No runtime claim is made here about recovering anything.
 
 #### Primary source
 
-Stijn Maatje and Marc Stevens, [“Forensic Cryptanalysis of the Backdoored UA-8295 Message Terminal”](<https://eprint.iacr.org/2026/1309>), ePrint 2026/1309. The record lists a last revision of 22 September 2026 and identifies the work as a preprint. Abstract and metadata verified; full-paper claims remain outside this exhibit’s verified scope. Posting to ePrint is not evidence of peer review.
+Stijn Maatje and Marc Stevens, [“Forensic Cryptanalysis of the Backdoored UA-8295 Message Terminal”](<https://eprint.iacr.org/2026/1309>), ePrint 2026/1309, CWI Cryptology Group; record last revised 22 September 2026. Claims above are drawn from §§1.2–1.3 (pp. 3–5), §3.5–3.7 (pp. 10–11), §4 and 4.1–4.2 (pp. 11–14), §5.2–5.4 and Tables 4 and 6 (pp. 18–22, 25), §6.1–6.3 and Table 5 (pp. 22–25) and §7.1–7.3 (pp. 25–26).
+
+**This is a preprint.** Posting to ePrint is not evidence of peer review, and the attack implementations were not independently rerun for this exhibit. Device and provenance details are corroborated against the Crypto Museum’s [UA-8295](<https://www.cryptomuseum.com/crypto/philips/ua8295/>) and [SBT algorithm](<https://www.cryptomuseum.com/crypto/philips/ua8295/sbt.htm>) pages, which document the same firmware version, date and checksum coincidence from the hardware side.
 
 [Next case → SoDark and Radio Linking](<https://ciphermuseum.com/ciphers/sodark.html>)
 
@@ -39837,11 +39919,11 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "bounded review and local release validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "UA8295-2026"
   ],
-  "notes": "Primary abstract and record only; full PDF inaccessible. Removed unverified cipher history, ROM/interface, hardware/sample/memory/timing specifics and false full-PDF locators. Remaining prose distinguishes forensic methodology and intent inference from a verified designer decision.",
+  "notes": "Primary abstract and record only; full PDF inaccessible. Removed unverified cipher history, ROM/interface, hardware/sample/memory/timing specifics and false full-PDF locators. Remaining prose distinguishes forensic methodology and intent inference from a verified designer decision. 29 Oct 2026 research review R02: rebuilt from an abstract-only summary into a sourced forensic case after reading the full preprint. Every claim labelled observed, implemented, conditional inference or open. Includes the nonce bias already present in the Nokia DA-8520 and the unresolved fixed-format-message question. Preprint status retained; no attack reproduced and no simulator added.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "corpus_utilities",
@@ -39866,7 +39948,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "reader": "root",
     "status": "semantic overrides corrected; generated rebuild and final validation pending",
     "scope": "Root removed stale UA8295technical override; separated HallIX grouping from OTP classification for Enigma/Lorenz/Solitaire/Vernam; qualified SHA256length and Shamirconditions. Generator corrections are not a new historical-source verification."
-  }
+  },
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -44087,7 +44170,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P161–P180
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P161: community/index.html -->
 <a id="p161"></a>
@@ -47766,7 +47849,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `hall-of-foundations/elliptic-curves-real.html`
 - Public page: https://ciphermuseum.com/hall-of-foundations/elliptic-curves-real.html
-- Snapshot source SHA-256: `a2ee8a14f899ecf4877cd4f8abe85e1b311336aa34b7c9934384b5de121682d1`
+- Snapshot source SHA-256: `0fb24ee190b7bb366c8f3d64927711eee62955860151d7b707194abe4180b3be`
 - Source identities in the prior evidence ledger: BONEH-SHOUP-2023
 
 ### Metadata and search/social descriptions
@@ -47868,6 +47951,8 @@ Keyboard alternative: choose two points on the curve to add. Point P   Point Q  
 This rule isn't arbitrary — it turns the points of the curve into a [group](<https://ciphermuseum.com/hall-of-foundations/group-theory.html>), with all the structure that word carries: an identity (the "point at infinity"), inverses (the reflection), and associativity. That group is exactly what cryptography moves into a finite field to build keys on.
 
 The group law supplies arithmetic. Security requires suitable finite-field parameters and a complete protocol.
+
+The construction drawn above also has *exceptional cases*: two points sharing an x-coordinate have no chord with a finite slope, and a point added to itself needs the tangent instead. Any implementation must branch on those cases, or use **complete addition formulas** that are correct for every pair without branching — a guarantee stated for a particular curve class, not for curves in general. Whether a correct formula was implemented correctly, and whether the compiled result runs in constant time, are two further questions that a correct formula does not settle. [Four different promises about the same addition](<https://ciphermuseum.com/hall-of-foundations/finite-fields.html#assurance>) sets them side by side.
 
 Where this leads
 
@@ -48023,11 +48108,11 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "bounded review and local release validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "BONEH-SHOUP-2023"
   ],
-  "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification.",
+  "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification. 29 Oct 2026 research review R13: added a pointer paragraph on exceptional cases, complete formulas and the separate questions of correct implementation and constant-time compilation. Visualization and arithmetic unchanged.",
   "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
   "final_prose_review": {
     "reader": "root",
@@ -48043,7 +48128,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -48058,7 +48144,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `hall-of-foundations/entropy.html`
 - Public page: https://ciphermuseum.com/hall-of-foundations/entropy.html
-- Snapshot source SHA-256: `8177bf619c350287e1f2984f08ef3e28c18dc24842ed804819831a43381f4a65`
+- Snapshot source SHA-256: `eb29af70866c5fad91a87cd0cb0faa355b9804c5ab1a679be72088d2c5b34f22`
 - Source identities in the prior evidence ledger: BONEH-SHOUP-2023, GRAY-1990-CORRECTED-2023, VADHAN-2012, TYAGI-WATANABE-2023
 
 ### Metadata and search/social descriptions
@@ -48223,6 +48309,47 @@ Himanshu Tyagi and Shun Watanabe, *Information-theoretic Cryptography*, Cambridg
 
 §6
 
+#### Pooling many keys measures the collection, not the message
+
+Research datasets of homophonic ciphers are built by encrypting many plaintexts, each under a key generated independently for it. Measure the entropy of all that ciphertext together and you get a large number. It is easy to read that number as a statement about how well any one message is hidden. It is not.
+
+Here is a fully enumerable case. Three plaintext letters A, B, C; two homophones each; sixty letters per message, with the three letters equally frequent and the two homophones alternating evenly. Four independent keys draw their code symbols from **disjoint** inventories, so no symbol is shared.
+
+The same four messages, measured two ways
+
+| What is measured | Distinct code symbols | Entropy per code symbol |
+| --- | --- | --- |
+| One message under one fixed key | 6 | log₂ 6 = 2.5850 bits |
+| All four messages pooled | 24 | log₂ 24 = 4.5850 bits |
+
+The pooled figure is exactly **2 bits higher**, and 2 = log₂ 4 is the number of keys. Nothing about any single message changed. An attacker holding one of these messages still faces a three-letter cipher with six code symbols; the extra two bits only record which of the four keys a symbol came from, which is not a secret the message is keeping.
+
+**The bound for a realistic size.** Take the usual research setting: 26 plaintext letters, at most five homophones for each. One fixed key then has **at most 26 × 5 = 130 code types**, so the entropy of its code-symbol distribution is at most **log₂ 130 ≈ 7.022 bits** per symbol — and only if all 130 were equally likely, which proportional homophone allocation never quite achieves. A pooled alphabet of eleven thousand codes gives log₂ 11000 ≈ 13.425 bits, almost double. That larger number is a property of the collection, not of the cipher a reader of one letter is facing.
+
+**Status of this example:** a mathematical consequence of the stated model, worked and checked here. It is not a replication of any published dataset measurement, and it does not say a published pooled figure is wrong — a pooled statistic is simply a different statistic, and it cannot establish per-message uniformity or security.
+
+§7
+
+#### Unicity distance answers a narrower question than it looks
+
+Shannon’s unicity distance estimates how much ciphertext is needed before only one key is expected to yield a sensible plaintext. It is an expectation computed from two assumptions: the size of the key space, and the redundancy of the plaintext language. Change either assumption and the estimate changes.
+
+Three things it does not do.
+
+- **It does not certify a proposed reading.** The estimate says spurious readings become unlikely past some length. It says nothing about whether the particular reading in front of you is the right one. That still needs evidence outside the cipher: corroborating documents, the archive, the hand, the history.
+
+- **It does not promise an efficient solver.** A unique solution can exist and remain out of reach. Unicity is an information-theoretic count of how many keys survive, not a statement about the work of finding the survivor.
+
+- **It does not cover alternative systems.** The calculation fixes a cipher family and a key space. It cannot rule out that some different enciphering scheme also produces readable text.
+
+The published analysis of the Zodiac 340 cipher makes the dependence visible: its author computes the plaintext-language entropy under three different assumptions — standard English, the Z340 plaintext alone, and Zodiac’s whole correspondence — and reports the resulting unicity distance as a *range*, at most 152 characters, rather than a single figure.
+
+**A rule that follows from both sections.** Enlarging the pooled code alphabet changes a dataset statistic. It does not make any individual message easier or harder to recover, and a cryptanalytic result that improves when the pool grows is measuring the pool, not the cipher. The museum’s [research-evaluation v2](<https://ciphermuseum.com/data/research/v2/README.md>) keeps those tasks apart for exactly this reason.
+
+Micaella Bruton, Meriem Beloucif and Beáta Megyesi, “Bridging the Low Resource Gap in Historical Cryptology: A Multilingual Diachronic Synthetic Dataset for Reproducible Cryptanalysis,” [RESOURCEFUL 2026, pp. 13–24](<https://aclanthology.org/2026.resourceful-4.2/>): independently generated per-text homophonic keys. Joachim von zur Gathen, [“Unicity distance of the Zodiac-340 cipher,” ePrint 2021/1620](<https://eprint.iacr.org/2021/1620>) (Cryptologia 47(5), 2023): the three language-entropy assumptions and the resulting range. Continue with [the homophonic exhibit](<https://ciphermuseum.com/ciphers/homophonic.html>) and [the Evidence Workbench](<https://ciphermuseum.com/lab/evidence-workbench.html>).
+
+§8
+
 #### The one-time pad's perfect secret
 
 A pad chosen uniformly and independently of the message, kept secret, as long as the message and used once provides perfect secrecy for fixed-length messages. Entropy is part of that argument, but a high-entropy string that is public or related to the message is not a secure pad.
@@ -48247,6 +48374,7 @@ Where the ceiling is reached: [the One-Time Pad](<https://ciphermuseum.com/ciphe
 - div — aria-label: Source dependence comparison
 - div — aria-label: First guess and entropy comparison
 - div — aria-label: Privacy amplification worked outcomes
+- div — aria-label: Within-key and pooled code entropy
 
 ### Control identities, constraints and initial-state attributes
 
@@ -48328,14 +48456,14 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "ebook follow-up implementation and local validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "BONEH-SHOUP-2023",
     "GRAY-1990-CORRECTED-2023",
     "VADHAN-2012",
     "TYAGI-WATANABE-2023"
   ],
-  "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification.",
+  "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification. 29 Oct 2026 research review R10: added sections 6 and 7. A fully enumerable four-key example separating within-key from pooled code entropy (verified here), the at-most-130-code-types bound labelled as mathematical inference, and why a unicity estimate certifies no reading and promises no solver. Sections renumbered; earlier sections unchanged.",
   "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
   "final_prose_review": {
     "reader": "root",
@@ -48364,7 +48492,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "browser_evidence": "docs/ebook-followup/browser.json",
     "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
     "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-  }
+  },
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -48597,7 +48726,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `hall-of-foundations/finite-fields.html`
 - Public page: https://ciphermuseum.com/hall-of-foundations/finite-fields.html
-- Snapshot source SHA-256: `d86469cd9152640d590487672f227caccc29601014a8e0d68b90c9bb32f5b67f`
+- Snapshot source SHA-256: `393b5faa5bf2b17a3398f7a2e63e5eb88e21cedd3eb09c27ae7236cbf06c82ef`
 - Source identities in the prior evidence ledger: BONEH-SHOUP-2023
 
 ### Metadata and search/social descriptions
@@ -48716,6 +48845,27 @@ You can see *k* and where *kG* landed. The discrete log problem is the reverse: 
 
 Forward scalar multiplication is efficient. Generic reverse attacks take roughly the square root of the subgroup order, with special curves permitting faster attacks. That distinction is one algebraic ingredient in a secure protocol.
 
+§4
+
+#### Four different promises about the same addition
+
+The arithmetic above is correct and it is also a teaching model. Production elliptic-curve code carries claims this exhibit does not, and the claims are not interchangeable. Four of them are worth separating.
+
+What each assurance covers, and what it leaves open
+
+| Claim | What it means | What it does not cover |
+| --- | --- | --- |
+| Exceptional cases handled | The affine chord-and-tangent rule has no slope when the two points share an x-coordinate, so an implementation must branch: identity, inverse pair, doubling, general case. | Branching is where bugs and timing differences live. Handling a case is not handling it in constant time. |
+| Complete addition formulas | One branch-free expression that is correct for *every* pair of points, including the identity and a point with itself. Renes, Costello and Batina give such formulas for short Weierstrass curves. | The completeness guarantee holds for a stated curve class — prime-order short Weierstrass curves over fields of characteristic other than 2 and 3. Outside that class the guarantee does not transfer, and the formulas cost more field multiplications. |
+| Functional-correctness proof | A machine-checked argument that a particular implementation computes the specified mathematical function, including the bounds that keep intermediate values in range. Fiat-Cryptography produces field arithmetic this way. | A proof has a boundary. The compiler, the pretty-printer and anything below them are trusted, not proved, and the proof says nothing about timing. |
+| Constant-time assurance | That the execution time and memory-access pattern do not depend on secret values. | This is a property of the *emitted machine code*. A compiler is free to introduce a branch or a table lookup that the source did not have, so the assurance has to be re-established after compilation. |
+
+**Where that leaves the code on this page.** The museum’s `ec-math.js` is affine, branching, and uses a linear search to invert a field element because the fields here have fewer than a hundred elements. It is **not production-ready, not constant-time, and not formally verified**, and it is not trying to be. What it *is* is checked: the museum’s test suite compares its result against an independent implementation of the complete projective formulas on all 361 ordered pairs of points on the prime-order curve y² = x³ + 2x + 2 over 𝔽₁₇, identity, inverses and doublings included. Agreement on a tiny curve is evidence about these formulas on this curve; it is not an assurance claim about anything else.
+
+Property testing, proof and timing assurance answer different questions, and passing one says nothing about the others. For side-channel behaviour as a measured phenomenon rather than a source-code property, see [what a power-analysis result actually shows](<https://ciphermuseum.com/lab/modern-attack-evidence.html#power-leakage>) and Crypto Lab’s [Power Trace](<https://systemslibrarian.github.io/crypto-lab-power-trace/>), which computes those statistics over simulated leakage.
+
+Joost Renes, Craig Costello and Lejla Batina, [“Complete Addition Formulas for Prime Order Elliptic Curves,” EUROCRYPT 2016](<https://eprint.iacr.org/2015/1060>): the curve class the completeness guarantee is stated for, and its cost. Andres Erbsen, Jade Philipoom, Jason Gross, Robert Sloan and Adam Chlipala, [“Simple High-Level Code for Cryptographic Arithmetic — With Proofs, Without Compromises,” IEEE S&P 2019](<https://doi.org/10.1109/SP.2019.00005>): the proof pipeline, its bounds reasoning, and the trusted compiler and pretty-printer at its edge.
+
 Where this touches your keys
 
 ##### This is the ground floor of ECC
@@ -48733,6 +48883,7 @@ Companion: [The Ground Beneath the Curve](<https://ciphermuseum.com/hall-of-foun
 - nav — aria-label: Primary
 - svg#scatter — aria-label: Elliptic curve points over a finite field, as a scatter plot.
 - svg#walk — aria-label: Repeated point addition over a finite field, jumping unpredictably.
+- div — aria-label: Four kinds of assurance about elliptic-curve addition
 
 ### Control identities, constraints and initial-state attributes
 
@@ -48869,11 +49020,11 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "bounded review and local release validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "BONEH-SHOUP-2023"
   ],
-  "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification.",
+  "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification. 29 Oct 2026 research review R13: added section 4 separating affine exceptional cases, complete formulas on their stated curve class, functional-correctness proofs and their trusted-compiler boundary, and constant-time assurance. The exhibit JavaScript is explicitly not production-ready, constant-time or verified. No arithmetic changed; it is now validated against an independent complete-formula oracle on all 361 ordered point pairs.",
   "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
   "final_prose_review": {
     "reader": "root",
@@ -48889,7 +49040,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -51630,7 +51782,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P181–P200
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P181: hall-of-foundations/polynomial-rings.html -->
 <a id="p181"></a>
@@ -56883,7 +57035,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `lab/evidence-workbench.html`
 - Public page: https://ciphermuseum.com/lab/evidence-workbench.html
-- Snapshot source SHA-256: `0375b1b235e1c3350fd44c60a217dd136d0e96a73782a0ef7cb4372bd6ceadd4`
+- Snapshot source SHA-256: `eaa2ece9d7739a487f83f7ca9d885bf1b503f0f0d9b978141d5e672fa9cb53f8`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -56928,7 +57080,7 @@ Keep the original, compare readings, and make every decipherment hypothesis insp
 
 Read a manuscript, preserve competing interpretations, and test a cipher hypothesis. Everything runs in this browser. Export your record before closing; source images stay on your device. [Start with the historical investigations](<https://ciphermuseum.com/lab/decipherment-cases.html>) or [return to Cipher Detective](<https://ciphermuseum.com/cipher-detective.html>).
 
-[Source](<https://ciphermuseum.com/lab/evidence-workbench.html#source>) · [Readings](<https://ciphermuseum.com/lab/evidence-workbench.html#annotations>) · [Known keys](<https://ciphermuseum.com/lab/evidence-workbench.html#keys>) · [Number grouping](<https://ciphermuseum.com/lab/evidence-workbench.html#segmentation>) · [Homophonic search](<https://ciphermuseum.com/lab/evidence-workbench.html#homophonic>)
+[Source](<https://ciphermuseum.com/lab/evidence-workbench.html#source>) · [Images](<https://ciphermuseum.com/lab/evidence-workbench.html#images>) · [Readings](<https://ciphermuseum.com/lab/evidence-workbench.html#annotations>) · [Symbol inventory](<https://ciphermuseum.com/lab/evidence-workbench.html#inventory>) · [Known keys](<https://ciphermuseum.com/lab/evidence-workbench.html#keys>) · [Number grouping](<https://ciphermuseum.com/lab/evidence-workbench.html#segmentation>) · [Homophonic search](<https://ciphermuseum.com/lab/evidence-workbench.html#homophonic>) · [Hypotheses](<https://ciphermuseum.com/lab/evidence-workbench.html#hypotheses>) · [Save and resume](<https://ciphermuseum.com/lab/evidence-workbench.html#bundle>)
 
 Start with a transcription or import a Cipher Detective JSON export.
 
@@ -56942,9 +57094,7 @@ Keep case, diacritics, spaces and line breaks. A missing symbol is different fro
 
 Stable artifact identifier [Input source-artifactId: type=text; initial value=]  Archive or holding institution [Input source-archive: type=text; initial value=]  Shelfmark [Input source-shelfmark: type=text; initial value=]  Folio or page [Input source-folio: type=text; initial value=]  Public source URL (optional) [Input source-url: type=url; initial value=]
 
-Transcriber [Input source-transcriber: type=text; initial value=]  Transcription date, including uncertainty if needed [Input source-date: type=text; initial value=]  Method and transcription convention [Input source-method: type=text; initial value=]  Recorded image filename [Input source-imageName: type=text; initial value=]  Open a local source image (PNG, JPEG or WebP; under 8 MB) [Input image-file: type=file; initial value=]
-
-[Image: Locally selected manuscript source; source: https://ciphermuseum.com/lab/evidence-workbench.html]
+Transcriber [Input source-transcriber: type=text; initial value=]  Transcription date, including uncertainty if needed [Input source-date: type=text; initial value=]  Method and transcription convention [Input source-method: type=text; initial value=]  Recorded image filename [Input source-imageName: type=text; initial value=]
 
  Transcription, exactly as recorded (up to 10,000 characters)
 
@@ -56954,7 +57104,35 @@ Save source and revisionUse selected text for a reading span
 
 Retained source revisions
 
-#### 2. Record readings and uncertainty
+#### 2. Register the source images
+
+A record can carry several images. Each one keeps its **original pixel dimensions**, so a region recorded today still means the same part of the page after you zoom, rotate the view or crop it. Region coordinates are always stored against the original image and are never rewritten by a change of presentation.
+
+Opening a file computes its **SHA-256 content hash**. That detects different bytes arriving under the same filename — a genuinely useful check. It is **not** an authenticity check: byte identity says two files are the same file, never that either is the archival object it claims to be. Keep the archive identifier and URL above for that.
+
+Open a local image (PNG, JPEG or WebP; under 8 MB) [Input image-file: type=file; initial value=]  What this image shows [Input image-note: type=text; initial value=]
+
+Display rotation (clockwise)
+- 0°
+
+- 90°
+
+- 180°
+
+- 270°
+ Display crop: left, top, width, height (fractions 0–1) [Input image-crop: type=text; initial value=0, 0, 1, 1]
+
+Cropping and rotation change only what you see. Recorded regions keep their original-image coordinates.
+
+Register this image in the recordApply rotation and crop
+
+[Image: Locally selected manuscript source; source: https://ciphermuseum.com/lab/evidence-workbench.html]
+
+No image opened.
+
+ Registered images
+
+#### 3. Record readings and uncertainty
 
 Select text above, then use “Use selected text,” or enter positions. Positions count Unicode characters from 1 and include both endpoints. New interpretations are appended; earlier readings remain visible.
 
@@ -56968,9 +57146,11 @@ First character [Input span-start: type=number; initial value=1] Last character 
 - Missing or illegible material
 
 - Editorial notation
-  [Input span-uncertain: type=checkbox; initial value=; checked] Reading remains uncertain Image region: left, top, width, height (fractions 0–1; optional) [Input span-region: type=text; initial value=]
+  [Input span-uncertain: type=checkbox; initial value=; checked] Reading remains uncertain Attach to registered image (optional)
+- No image region
+ Image region: left, top, width, height (fractions 0–1 of the *original* image) [Input span-region: type=text; initial value=]
 
-For example, 0.1 is 10% of the image width or height. Coordinates attach to the recorded image, not a changing screen size.
+For example, 0.1 is 10% of the original image width or height.
 
 Alternative readings, one per line
 
@@ -56996,7 +57176,45 @@ Reading
 
  Append reading layer
 
-#### 3. Apply a known key
+#### 4. Build a revisable symbol inventory
+
+Deciding which marks are the same symbol *is* research, not a step before it. Two strokes that were transcribed alike may be a letter and the same letter with a diacritic; two that look different may be one hand varying. Build the inventory, look at every occurrence of a class, and split or merge with a recorded reason before you apply any key.
+
+Splitting moves **only the occurrences you select** and leaves the rest where they were. Merging keeps every earlier label and reason in the decision history. The whole history travels with the exported record.
+
+How to divide the transcription
+- Whitespace-separated symbols
+
+- Fixed-width groups
+ Group width, for fixed-width [Input inventory-width: type=number; initial value=1]
+
+The inventory belongs to the current source revision. Revise the transcription and you build a new inventory against the new text; the earlier record keeps its own.
+
+Build inventory from the current revision
+
+ Symbol class
+
+No inventory built.
+
+##### Every occurrence of this class
+
+Each occurrence is a button. Use Tab to move through them and Space or Enter to select; selected occurrences are the ones a split will move. The list is the keyboard-accessible counterpart to picking a box on the image.
+
+Label for the split-out class [Input split-label: type=text; initial value=] Why are these a different symbol?
+
+Split the selected occurrences
+
+Merge the selected class withLabel for the merged class [Input merge-label: type=text; initial value=] Why are these one symbol?
+
+Merge the two classes
+
+Inventory decision history
+
+```text
+
+```
+
+#### 5. Apply a known key
 
 Historical nomenclators mix letters, syllables, whole words, names and controls. This tool applies an entered key; it does not recover one. Multiple readings stay unresolved. The explicit teaching convention for `repeat` and `erase` acts on one preceding resolved Unicode character; check the manuscript’s actual convention.
 
@@ -57036,50 +57254,143 @@ Record relationship
 
 ```
 
-#### 4. Compare numerical segmentations
+#### 6. Compare numerical segmentations
 
 A known key can leave the boundaries ambiguous: `2228` can be `2|2|2|8`, `2|22|8` or `22|2|8`. Compare readings without changing the original digits. This is bounded known-key path enumeration, not unknown-key cryptanalysis.
 
-Exact digit stream (1–80 digits) [Input segment-digits: type=text; initial value=2228] Code-to-reading key (JSON object)
+The search builds a **lattice** over the digit stream, discards positions that cannot reach the end, then either enumerates every complete path or — when there are more paths than the budget allows — keeps a bounded best-first set. The result says which happened, and whether the globally best path is still guaranteed.
+
+Exact digit stream (1–80 digits; line breaks allowed)
+
+2228
+
+Code-to-reading key (JSON object)
 
 {"2":"A","22":"N","8":"D"}
 
+A plain string is one reading. A typed entry is `{"type":"null","values":[]}`, `{"type":"word","values":["AND","ALSO"]}` or `{"type":"name","values":["MARY"]}`. Types: letter, syllable, word, name, null.
+
 Mandatory cuts after these digit positions (comma separated) [Input segment-locks: type=text; initial value=]
 
-Search-node budget (1–20,000) [Input segment-budget: type=number; initial value=10000] Ranking model
+Search-node budget (1–20,000) [Input segment-budget: type=number; initial value=10000] Line breaks in the source
+- Are mandatory cuts: no code may span one
+
+- May be spanned by a code
+Ranking model
 - Neutral: preserve equal alternatives
 
 - Museum modern-English n-gram model
 
-At most 32 complete paths are retained. Scores compare candidates; they are not probabilities. The English model is unsuitable for historical French, German or Latin, and assigns zero to readings shorter than three letters.
+At most 32 complete paths are retained. Scores compare candidates; they are not probabilities. The English model is unsuitable for historical French, Italian, German or Latin, and assigns zero to readings shorter than three letters.
 
  Compare segmentations
 
-#### 5. Search a homophonic letter key (experimental)
+Where the boundaries are actually ambiguous
 
-Several symbol IDs may map to the same letter. A seeded simulated-annealing search tests consistent mappings using a four-letter model built from museum exhibit prose, with a declared letter-frequency penalty. Short texts can still produce persuasive errors; inspect alternatives and use independent evidence. It does not handle nulls, word codes, control signs, uncertain symbols or transposition. Resolve those hypotheses first.
+A position is **forced** when every complete path cuts there, **impossible** when none does, and genuinely ambiguous otherwise. This view is read from the lattice, so it is exact even when the retained paths are only a bounded sample.
+
+#### 7. Search a homophonic letter key (experimental)
+
+Several symbol IDs may map to the same letter. Two bounded solvers are offered, and they are offered *against* each other rather than as a recommendation. Short texts can still produce persuasive errors; inspect alternatives and use independent evidence. Neither handles nulls, word codes, control signs, uncertain symbols or transposition. Resolve those hypotheses first.
+
+- **Simulated annealing** mutates a complete key under a cooling schedule, with periodic restarts. It is seeded, so the same seed and budget replay exactly.
+
+- **Beam search** fixes symbols one at a time in order of first appearance — a disclosed extension order chosen so every step lengthens the decoded prefix that gets scored. The partial score is informative but **not admissible**: pruning can discard the branch holding the correct key. It is deterministic and needs no seed.
+
+The measured comparison between them, on identical inputs and language resources, is in [research-evaluation v2](<https://ciphermuseum.com/data/research/v2/README.md>). Neither solver recovered any held-out text there.
 
  Whitespace-separated symbol IDs (3–600 tokens; up to 100 distinct IDs)
 
-Locked symbol-to-letter mappings (JSON; uppercase A–Z)
+Solver
+- Simulated annealing (seeded)
+
+- Beam search (deterministic)
+ Scoring model
+
+The modern-English baseline is cached for offline use. The historical profiles are a 0.74 MB download fetched on demand and are deliberately **not** in the offline bundle, so selecting one needs a connection.
+
+ Locked symbol-to-letter mappings (JSON; uppercase A–Z)
 
 {}
 
 A crib becomes a declared lock. If every symbol is locked, the result is known-key application, not recovery.
 
-Random seed [Input search-seed: type=number; initial value=41] Mutation-step budget [Input search-steps: type=number; initial value=15000]
+Random seed (annealing only) [Input search-seed: type=number; initial value=41] Mutation-step budget (annealing only) [Input search-steps: type=number; initial value=15000] Beam width (beam search only) [Input search-beam: type=number; initial value=150]
 
-Maximum 20 million token evaluations. Five distinct candidates are retained. Use Cancel to stop the background worker. Larger budgets do not guarantee recovery.
+Maximum 20 million token evaluations for annealing. Five distinct candidates are retained. Use Cancel to stop the background worker. Larger budgets do not guarantee recovery.
 
 Load generated exerciseSearch for candidatesCancel searchExport search receipt
 
 No search performed.
 
+##### Compare language hypotheses
+
+Paste or decode a candidate reading and compare it against the versioned historical-language profiles. The comparison ranks profiles by mean log-probability per letter and **declines to choose** when the input is too short, the margin too small or the profile’s coverage of this text too low. A profile names a language *and* a period. A language with no profile can never be chosen, only abstained on or mis-assigned.
+
+ Candidate reading (letters A–Z; everything else is ignored)
+
+Compare language profilesUse the top search candidate
+
 What would count as evidence?
 
-The receipt records the exact input, locks, seed, budget, model, candidate keys and score trace. A high score alone does not establish a historical reading. Check the mapping against every occurrence, account for exceptions, and seek evidence that did not select the candidate. Short or damaged texts can yield convincing errors.
+The receipt records the exact input, solver, locks, seed or beam width, budget, model, candidate keys and score trace. A high score alone does not establish a historical reading. Check the mapping against every occurrence, account for exceptions, and seek evidence that did not select the candidate. Short or damaged texts can yield convincing errors.
 
-The public generated exercise reads THE SECRET LETTER IS IN THE CHEST… It is a practice fixture, not a blind benchmark. [Read the evaluation protocol and limitations](<https://ciphermuseum.com/data/research/v1/README.md>).
+The public generated exercise reads THE SECRET LETTER IS IN THE CHEST… It is a practice fixture, not a blind benchmark. [Read the v1 evaluation protocol](<https://ciphermuseum.com/data/research/v1/README.md>) and [the v2 task matrix and measured results](<https://ciphermuseum.com/data/research/v2/README.md>).
+
+#### 8. Keep a visible hypothesis register
+
+A key that applies cleanly to every symbol is a mechanical result. It is not evidence of who wrote the letter, when, or what the words meant to its reader. The register keeps each claim beside the evidence for it, the evidence against it, and the alternatives nobody has ruled out.
+
+Confidence is a **word from a fixed list**, not a number: `unsupported`, `possible`, `probable`, `well-supported`, `contradicted`. Calling a claim well-supported requires at least two separately recorded pieces of supporting evidence and no unanswered counterevidence — the record refuses it otherwise.
+
+Claim
+
+ Confidence
+- unsupported
+
+- possible [selected]
+
+- probable
+
+- well-supported
+
+- contradicted
+ Unresolved alternatives, one per line
+
+Supporting evidence: `identifier | what it shows`, one per line
+
+ Contradictory evidence, same format
+
+ Note
+
+Record hypothesisLoad the unidentified-document case
+
+#### 9. Save and resume the whole investigation
+
+Exporting the evidence record alone loses everything around it: which derived layer you were reading, which mappings you had locked, which solver and scoring model produced a candidate, and which candidate you chose. A **versioned investigation bundle** carries all of it in one file, and importing one in a fresh session restores the declared state.
+
+Two honesty constraints are built in. **Stale results are marked, never silently reused**: the bundle fingerprints its inputs, and a changed transcription, key or solver input shows up as stale on import. And **image bytes stay on your device** — the bundle carries a manifest of filenames, dimensions and hashes so you can reopen the right files yourself. Nothing is fetched from a URL on your behalf.
+
+Replay also needs the same solver and scoring-model build, not only the same seed. The bundle records the build it was made with and tells you when they differ.
+
+Investigation title [Input bundle-title: type=text; initial value=]  Import an investigation bundle (up to 1.5 MB) [Input bundle-import: type=file; initial value=]
+
+Guided saved examples
+- Choose an example…
+
+- Unidentified document, incomplete outcome
+
+- Numerical segmentation with an ambiguous boundary
+
+A guided example loads a complete worked state, including the parts that stay unresolved. Loading one replaces the record in this tab; export first if you want to keep it.
+
+Export investigation bundleLoad the selected example
+
+No bundle imported in this tab.
+
+```text
+
+```
 
 #### Research behind the workbench
 
@@ -57094,14 +57405,21 @@ The public generated exercise reads THE SECRET LETTER IS IN THE CHEST… It is a
 - nav — aria-label: Primary
 - nav — aria-label: Workbench sections
 - input#source-artifactId — placeholder: For example: archive:collection:folio
-- input#source-date — placeholder: 2026-10-25
+- input#source-date — placeholder: 2026-10-29
 - input#source-method — placeholder: Manual reading; symbol IDs assigned by first appearance
-- img#source-image — alt: Locally selected manuscript source
 - input#revision-reason — placeholder: Required when the saved transcription changes
+- input#image-note — placeholder: Folio 12 recto, full page
+- img#source-image — alt: Locally selected manuscript source
 - input#span-region — placeholder: 0.1, 0.2, 0.15, 0.05
 - textarea#span-alternatives — placeholder: g17
 g17-dot
+- div#occurrence-list — aria-label: Occurrences of the selected symbol class
+- input#split-label — placeholder: g17-dot
 - input#segment-locks — placeholder: For example: 1, 3
+- textarea#hypothesis-claim — placeholder: The letter was written by the person named in the catalogue entry.
+- textarea#hypothesis-alternatives — placeholder: A secretary writing on the named person's behalf
+- textarea#hypothesis-supports — placeholder: key-1 | The key applies to all 153 symbols with no exception
+- input#bundle-title — placeholder: Unidentified letter, shelfmark unknown
 
 ### Control identities, constraints and initial-state attributes
 
@@ -57116,14 +57434,24 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - input: id="source-folio" maxlength="500"
 - input: id="source-url" type="url" maxlength="2000"
 - input: id="source-transcriber" maxlength="500"
-- input: id="source-date" maxlength="500" placeholder="2026-10-25"
+- input: id="source-date" maxlength="500" placeholder="2026-10-29"
 - input: id="source-method" maxlength="500" placeholder="Manual reading; symbol IDs assigned by first appearance"
 - input: id="source-imageName" maxlength="500"
-- input: id="image-file" type="file" accept="image/png,image/jpeg,image/webp"
 - textarea: id="source-raw" maxlength="10000" rows="5" spellcheck="false"
 - input: id="revision-reason" maxlength="1000" placeholder="Required when the saved transcription changes"
 - button: id="save-revision" type="button"
 - button: id="select-span" type="button"
+- input: id="image-file" type="file" accept="image/png,image/jpeg,image/webp"
+- input: id="image-note" maxlength="1000" placeholder="Folio 12 recto, full page"
+- select: id="image-rotation"
+- option: value="0"
+- option: value="90"
+- option: value="180"
+- option: value="270"
+- input: id="image-crop" value="0, 0, 1, 1" aria-describedby="crop-help"
+- button: id="image-register" type="button" disabled=""
+- button: id="image-apply-view" type="button" disabled=""
+- select: id="image-select"
 - input: id="span-start" type="number" min="1" value="1"
 - input: id="span-end" type="number" min="1" value="1"
 - select: id="span-type"
@@ -57133,6 +57461,8 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - option: value="missing"
 - option: value="editorial"
 - input: id="span-uncertain" type="checkbox" checked=""
+- select: id="span-image"
+- option: value=""
 - input: id="span-region" placeholder="0.1, 0.2, 0.15, 0.05" aria-describedby="region-help"
 - textarea: id="span-alternatives" maxlength="4000" placeholder="g17\ng17-dot"
 - input: id="span-reading" maxlength="200"
@@ -57147,6 +57477,19 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - textarea: id="layer-note" maxlength="1000"
 - textarea: id="layer-text" maxlength="20000" rows="7"
 - button: id="add-layer" type="button"
+- select: id="inventory-tokens"
+- option: value="whitespace"
+- option: value="fixed"
+- input: id="inventory-width" type="number" min="1" max="8" value="1"
+- button: id="inventory-build" type="button"
+- select: id="class-select"
+- input: id="split-label" maxlength="200" placeholder="g17-dot"
+- textarea: id="split-reason" maxlength="2000"
+- button: id="inventory-split" type="button"
+- select: id="merge-with"
+- input: id="merge-label" maxlength="200"
+- textarea: id="merge-reason" maxlength="2000"
+- button: id="inventory-merge" type="button"
 - textarea: id="typed-key" rows="10" spellcheck="false"
 - textarea: id="key-input" maxlength="20000" spellcheck="false"
 - input: id="key-title" maxlength="200" value="Original teaching key"
@@ -57162,27 +57505,60 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - option: value="alternative-to"
 - textarea: id="relation-evidence" maxlength="2000"
 - button: id="add-relation" type="button"
-- input: id="segment-digits" value="2228" maxlength="80" inputmode="numeric"
+- textarea: id="segment-digits" maxlength="160" rows="2" spellcheck="false"
 - textarea: id="segment-key" spellcheck="false"
 - input: id="segment-locks" placeholder="For example: 1, 3"
 - input: id="segment-budget" type="number" min="1" max="20000" value="10000"
+- select: id="segment-lines"
+- option: value="boundary"
+- option: value="span"
 - select: id="segment-score"
 - option: value="neutral"
 - option: value="english"
 - button: id="segment-run" type="button"
 - textarea: id="search-raw" maxlength="12000" rows="5" spellcheck="false"
+- select: id="search-algorithm"
+- option: value="annealing"
+- option: value="beam"
+- select: id="search-model"
 - textarea: id="search-locks" spellcheck="false"
 - input: id="search-seed" type="number" min="0" max="4294967295" value="41"
 - input: id="search-steps" type="number" min="1" max="100000" value="15000"
+- input: id="search-beam" type="number" min="1" max="2000" value="150"
 - button: id="search-example" type="button"
 - button: id="search-run" type="button"
 - button: id="search-cancel" type="button" disabled=""
 - button: id="search-export" type="button" disabled=""
+- textarea: id="language-text" maxlength="4000" rows="3" spellcheck="false"
+- button: id="language-run" type="button"
+- button: id="language-from-candidate" type="button"
+- textarea: id="hypothesis-claim" maxlength="2000" placeholder="The letter was written by the person named in the catalogue entry."
+- select: id="hypothesis-confidence"
+- option: value="unsupported"
+- option: value="possible" selected=""
+- option: value="probable"
+- option: value="well-supported"
+- option: value="contradicted"
+- textarea: id="hypothesis-alternatives" maxlength="4000" placeholder="A secretary writing on the named person's behalf"
+- textarea: id="hypothesis-supports" maxlength="4000" placeholder="key-1 | The key applies to all 153 symbols with no exception"
+- textarea: id="hypothesis-contradicts" maxlength="4000"
+- textarea: id="hypothesis-note" maxlength="2000"
+- button: id="hypothesis-add" type="button"
+- button: id="hypothesis-case" type="button"
+- input: id="bundle-title" maxlength="200" placeholder="Unidentified letter, shelfmark unknown"
+- input: id="bundle-import" type="file" accept="application/json,.json"
+- select: id="bundle-example"
+- option: value=""
+- option: value="unidentified"
+- option: value="segmentation"
+- button: id="bundle-export" type="button"
+- button: id="bundle-load-example" type="button"
 
 ### Scripts supporting this page
 
 - https://ciphermuseum.com/js/nav.js
 - https://ciphermuseum.com/js/detective/lang-model.js
+- https://ciphermuseum.com/js/research-language-model.js
 - https://ciphermuseum.com/js/research-model.js
 - https://ciphermuseum.com/js/research-ui.js
 
@@ -57194,9 +57570,9 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "bounded review and local release validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [],
-  "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records.",
+  "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "root",
@@ -57212,7 +57588,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -57223,7 +57600,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P201–P214
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P201: lab/modern-attack-evidence.html -->
 <a id="p201"></a>
@@ -57231,7 +57608,7 @@ Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum 
 
 - Site path: `lab/modern-attack-evidence.html`
 - Public page: https://ciphermuseum.com/lab/modern-attack-evidence.html
-- Snapshot source SHA-256: `14bc65124bbe165aba374b7b90e2ddb0c5e78e561075af3528906ccd5e57fb21`
+- Snapshot source SHA-256: `ccc959ef9c1e9a50b46ba1d0d6748fdd8392f5fecc4ef30f6dfe0c2883ed4e6b`
 - Source identities in the prior evidence ledger: GPU-SEARCH-2025, GEA-FAULTS-2026, CONDITIONAL-DES-2018, BIHAM-SHAMIR-1993-2009, MANGARD-OSWALD-POPP-2007
 
 ### Metadata and search/social descriptions
@@ -57302,13 +57679,30 @@ Stefan Mangard, Elisabeth Oswald and Thomas Popp, *Power Analysis Attacks: Revea
 
 #### GPRS faults: physical access changes the model
 
-“Practical Differential Fault Attacks on the GPRS Standard Ciphers” studies GEA-1 and GEA-2 under a random fault model. The authors’ abstract reports validation by simulating the attacks on ChipWhisperer Lite, with the experimental attacks completing within sixteen minutes on a common laptop.
+“Practical Differential Fault Attacks on the GPRS Standard Ciphers” analyses GEA-1 and GEA-2 under the **random fault model**: the attacker may induce faults into the internal state bits but does not know the exact location at the moment of injection. The authors implemented both ciphers on a **ChipWhisperer Lite** board with an XMEGA target, injected faults by **voltage glitches**, and ran the whole attack there. That is evidence about a cipher running on an instrumented board the attacker controls.
 
-This is evidence about the tested implementation and fault model. It is not a demonstration of passive traffic interception or a universal attack on arbitrary commercial phones. The abstract does not establish that the required faults can be induced in every deployed device. Detailed fault-injection and reinitialization requirements require the full paper, which was unavailable during this review.
+**The two capabilities the attack assumes.** The paper states its model as (a) the attacker can reinitialize the encryption operation repeatedly *with the same key–IV pair*, and (b) the attacker can flip a state bit without knowing which one. Both fault-free and faulty **keystream** must be readable, because the keystream is what filters out wrong internal-state guesses; the attacks use 2,048 keystream bits, well inside GEA’s 12,800-bit frame limit. The authors say plainly that such an adversary “is certainly more powerful than a normal passive attacker and has the ability to access the keystream generator as a physical device.”
+
+**Locating the fault is a separate problem from recovering the state.** Because the location is random, the attack runs in two processes: a dedicated algorithm identifies the exact fault location, and only then is the internal state reconstructed. The paper measures those phases apart. Fault acquisition and location is bench work on the board; state recovery is computation afterwards on a 1.19 GHz Intel Core i5-1035G1 laptop.
+
+Reported experimental timings — one platform, one implementation
+
+| Cipher | Executions | Fault injection and location | Internal-state recovery | Reported total |
+| --- | --- | --- | --- | --- |
+| GEA-1 (96-bit state) | 64 | 343.330 s average | 308.868 s | 652.198 s ≈ 10.870 min |
+| GEA-2 (125-bit state) | 32 | 587.625 s average | 320.473 s | 908.098 s ≈ 15.135 min |
+
+Both rows sum exactly, and 908.098 s is the figure behind the abstract’s “within sixteen minutes.” The GEA-1 recovery time is itself a sum: about 46.414 s, 82.323 s and 180.131 s for registers A, B and C. Separately, the paper gives *analytical* time complexities of 2<sup>33.807</sup> and 2<sup>33.858</sup> for recovering each 64-bit key. A wall-clock measurement on one laptop and an operation count are different quantities; neither is a guarantee.
+
+**Three success probabilities, three different questions.** Table II reports about **0.995** for one thing only: the probability that the fault-location algorithm identifies the *exact* location, once at least 2,048 keystream bits are available. The attack’s modelled success is then built from it. For GEA-1 the paper computes p ≈ p₄ · (0.995)² = **0.953** of recovering the full 96-bit internal state; for GEA-2, p ≈ q₆ · (0.995)³ = **0.893** of recovering the full 125-bit internal state. Quoting 0.995 or 0.893 as “the chance of breaking GPRS” merges a sub-step, a per-cipher state-recovery model, and an operational claim that the paper never makes.
+
+**What this is not.** The experiment does not demonstrate passive interception of arbitrary commercial phones. It does not show that the required bit flips can be induced in a deployed handset, that an eavesdropper without the device can reach the internal state, or that same-key–IV re-initialization on demand is available to a remote attacker. A result obtained by glitching a board you hold is a statement about the cipher’s fault resistance, not about the radio link. The paper’s own framing of why the ciphers still matter — ETSI prohibited GEA-1 in phones from 2013 but tested handsets were found still supporting it, and GEA-2 remains in use — is a deployment argument, separate from what the fault experiment measured.
+
+**GEA-2M is a proposal, not a standard.** The authors propose a modified GEA-2 in which the filter function’s output bits are XORed back onto the four registers’ feedback, turning the LFSRs into mutually dependent NFSRs so that signature vectors — and therefore the fault-location step — cannot be constructed. They also discuss generic countermeasures such as double modular redundancy. GEA-2M is a research countermeasure put forward in this paper; it is not standardized, deployed, or independently evaluated.
 
 Compare the need for controlled physical faults with the data/oracle access in [SoDark](<https://ciphermuseum.com/ciphers/sodark.html>) and the authentication/configuration conditions in [NFC](<https://ciphermuseum.com/ciphers/nfc-deployment.html>). The point of the comparison is to ask what an attacker must actually be able to do.
 
-Zhengting Li and coauthors, [IEEE Transactions on Dependable and Secure Computing 23(3), pp. 7129–7142 (2026)](<https://doi.org/10.1109/TDSC.2026.3671957>). The [authors’ institutional record](<https://pure.bit.edu.cn/en/publications/practical-differential-fault-attacks-on-the-gprs-standard-ciphers/>) identifies a peer-reviewed journal article; [ePrint 2026/1806](<https://eprint.iacr.org/2026/1806>) is a minor revision of that published work. This summary uses the verified abstract and publication records.
+Zhengting Li, Lin Ding, An Wang, Haotong Xu, Zheng Liu, Zheng Wu, Xinhai Wang and Jiang Wan, [IEEE Transactions on Dependable and Secure Computing 23(3), pp. 7129–7142 (2026)](<https://doi.org/10.1109/TDSC.2026.3671957>); [ePrint 2026/1806](<https://eprint.iacr.org/2026/1806>) is a minor revision of that published work, and the [authors’ institutional record](<https://pure.bit.edu.cn/en/publications/practical-differential-fault-attacks-on-the-gprs-standard-ciphers/>) confirms the journal article. Figures above read from §§I–III and IV.C–D, V.A–D and VI, PDF pp. 1–2, 4–5 and 9–12: attack model p. 5, GEA-1 timings p. 9, Table II and GEA-2 timings p. 10, GEA-2M pp. 11–12. Phase sums and the minute conversions were recomputed here.
 
 #### Historic full-DES differential attack: collection is not analysis
 
@@ -57341,6 +57735,171 @@ This is **conditional-linear** analysis. Crypto Lab’s [Matsui Line differentia
 
 [Biham and Perle, primary ToSC paper (2018)](<https://doi.org/10.46586/tosc.v2018.i3.215-264>), Tables 1–2 and §4.7–4.7.1, PDF pp. 5–6 and 30–34. [Journal full text](<https://tosc.iacr.org/index.php/ToSC/article/download/7302/6476>). [Return to the DES exhibit](<https://ciphermuseum.com/ciphers/des.html>).
 
+#### Four more results, read the same way
+
+Each card below answers the same six questions: **what version, when, what access, what special assumptions, what resources, and what was actually recovered.** These are historical findings about specific tested releases. None is a current product advisory, and none is reproduced here as a simulator — where the museum already explains the underlying mechanism, the card links to it.
+
+##### Juniper Dual EC: the backdoor was a constant
+
+Target and date
+
+Juniper NetScreen devices running ScreenOS. The enabling changes shipped in a single 2008 release (6.2); the substituted constant was introduced between 6.2.0r14 and 6.2.0r15 in 2012; Juniper announced it on 17 December 2015 (CVE-2015-7756, “VPN Decryption”) and patched in April 2016.
+
+Access
+
+**Passive.** Observing one IKE handshake is enough — the analysis shows it is possible “to passively decrypt an individual VPN session in isolation without observing any other network traffic.”
+
+Special assumptions
+
+The attacker must know the discrete logarithm of the substituted Dual EC point *Q*. Three ScreenOS choices made that sufficient: Dual EC emits only 30 of a point’s 32 bytes; ScreenOS’s IKE nonce was enlarged to 32 bytes, assembled from one 30-byte output plus 2 bytes of the next, which narrows candidate states to typically one to three; and the ANSI X9.31 layer that was supposed to filter the output **never runs** — `prng_reseed()` sets the global output index to 32, and the loop that would invoke X9.31 uses that same global as its counter, so it executes zero iterations.
+
+Resources
+
+Negligible once *d* is known. Demonstrated as a proof of concept against an SSG-550M running ScreenOS 6.3.0 with a *Q* of the researchers’ choosing.
+
+Recovered
+
+The PRNG state, hence the IKE Diffie–Hellman private share, hence the VPN session keys.
+
+Limits
+
+**Cryptanalysis does not settle attribution.** The paper establishes what the code does and that a third party changed *Q*; it says knowing that “is suggestive — but not dispositive,” and explicitly sets aside questions of motive and identity as requiring “a different body of material.” Juniper’s own 2008 constants were never verifiably shown to have unknown discrete logs. Juniper also noted there is no way to detect whether the vulnerability was exploited.
+
+Stephen Checkoway, Jacob Maskiewicz, Christina Garman, Joshua Fried, Shaanan Cohney, Matthew Green, Nadia Heninger, Ralf-Philipp Weinmann, Eric Rescorla and Hovav Shacham, [“A Systematic Analysis of the Juniper Dual EC Incident,” CCS 2016](<https://doi.org/10.1145/2976749.2978395>) ([ePrint 2016/376](<https://eprint.iacr.org/2016/376>)), abstract and §§3–5.3, PDF pp. 1–5. Compare a backdoor delivered as firmware rather than a constant: [UA-8295](<https://ciphermuseum.com/ciphers/ua-8295.html>).
+
+##### Word and Excel: the same keystream, twice
+
+Target and date
+
+RC4 document encryption in Microsoft Word and Excel, reported January 2005; the analysis uses **Word 2002** to illustrate and names Office 97, 2000 and 2003 Word and Excel as affected.
+
+Access
+
+**Passive**, but the attacker needs *two or more saved versions* of the same password-protected document.
+
+Special assumptions
+
+The encrypted document is modified and saved again under the same password *and the initialization vector does not change*, so RC4 produces the same keystream for both versions.
+
+Resources
+
+Trivial. The work is reading a two-time pad, not searching a key space.
+
+Recovered
+
+Document content, wherever the two versions differ — not the password and not the RC4 key.
+
+Limits
+
+A twenty-year-old finding about a superseded format. Modern Office formats use different encryption, and this card is not a statement about any current release. What transfers is the principle, not the advisory.
+
+Hongjun Wu, [“The Misuse of RC4 in Microsoft Word and Excel,” ePrint 2005/007](<https://eprint.iacr.org/2005/007>) (11 January 2005), abstract and §§1–3. This is the same depth problem the Allies exploited on [Lorenz](<https://ciphermuseum.com/ciphers/lorenz.html>), where two messages sent on one wheel setting opened the traffic; see also [why a pad must be used once](<https://ciphermuseum.com/ciphers/one-time-pad.html>).
+
+##### KASUMI: four related keys, not one phone call
+
+Target and date
+
+The full 8-round KASUMI block cipher underlying A5/3 in third-generation GSM, 2010.
+
+Access
+
+**Related-key.** The attack needs encryptions under **four keys with a chosen relationship** to the unknown key. A passive listener to an ordinary call has no way to obtain these.
+
+Special assumptions
+
+A “sandwich” distinguisher covering 7 of 8 rounds with probability 2⁻¹⁴, available only in the related-key model.
+
+Resources
+
+2²⁶ data, 2³⁰ bytes of memory, 2³² time. The authors simulated the attack in under two hours on a single PC.
+
+Recovered
+
+The complete 128-bit KASUMI key — *within that model*.
+
+Limits
+
+**This does not passively decrypt ordinary calls.** It is also specific to KASUMI: the authors state that neither their technique nor any other published attack breaks MISTY, the cipher KASUMI was derived from, in less than 2¹²⁸ work. The simplifications made to MISTY for hardware efficiency are what the attack exploits.
+
+Orr Dunkelman, Nathan Keller and Adi Shamir, [“A Practical-Time Attack on the A5/3 Cryptosystem Used in Third Generation GSM Telephony,” ePrint 2010/013](<https://eprint.iacr.org/2010/013>), abstract. For a different question about KASUMI’s deployed key, see the [GPU search card above](<https://ciphermuseum.com/lab/modern-attack-evidence.html#gpu>): a repeated 64-bit key is not an independent 128-bit key.
+
+##### Bluetooth pairing: changing a coordinate nobody checks
+
+Target and date
+
+Bluetooth Secure Simple Pairing’s authenticated elliptic-curve Diffie–Hellman, disclosed 2018 and published at SAC 2019.
+
+Access
+
+**Active** man-in-the-middle, present during pairing, in radio range of both devices.
+
+Special assumptions
+
+Both devices must fail to validate that a received public key lies on the curve. The standard transmits both coordinates but the user-checked numeric comparison covers only *x*, so the attacker can silently replace *y*. Setting *y* = 0 produces a point of order 2, leaving only two possible shared secrets, both known to the attacker.
+
+Resources
+
+Negligible computation; the cost is the radio position and timing.
+
+Recovered
+
+The session encryption key, in about **50%** of pairing attempts; the other half simply fail to pair. **Not** a long-term private key — unlike the classical invalid-curve attack, this one deduces the shared secret rather than extracting the victim’s private scalar.
+
+Limits
+
+Affected vendors patched, and the specification was amended to require public-key validation. Treat this as a worked example of what unvalidated inputs cost, not as a live advisory about current devices.
+
+Eli Biham and Lior Neumann, [“Breaking the Bluetooth Pairing — The Fixed Coordinate Invalid Curve Attack,” SAC 2019](<https://eprint.iacr.org/2019/1043>), abstract and §§1–4. The group law being abused is the one built in [Elliptic Curves](<https://ciphermuseum.com/hall-of-foundations/elliptic-curves-real.html>) and moved to a finite field in [Finite Fields](<https://ciphermuseum.com/hall-of-foundations/finite-fields.html>).
+
+##### Confinement is not key recovery
+
+These two Diffie–Hellman failures are routinely merged, and they should not be. **Small-subgroup confinement** means an active attacker sends a key-exchange value of small order, forcing the shared secret into a tiny set the attacker can enumerate. That compromises the session and can leak a few bits of the victim’s exponent. **Static private-key recovery** is a different, much stronger outcome: it needs the victim to reuse one exponent across many such queries, so that the leaked residues can be combined.
+
+The 2016 measurement study found that of more than twenty open-source cryptographic libraries and applications examined, *none* validated subgroup orders by default before January 2016, and that millions of hosts use DSA and other non-“safe” primes. Feasible full or partial key recovery was found in specific applications — OpenSSL, Exim, Unbound and Amazon’s load balancer — with weaker attacks applicable far more widely. The distinction the paper draws is exactly the one to keep: a validation failure is near-universal; a full static-key recovery needed particular reuse conditions in particular software.
+
+Luke Valenta, David Adrian, Antonio Sanso, Shaanan Cohney, Joshua Fried, Marcella Hastings, J. Alex Halderman and Nadia Heninger, [“Measuring small subgroup attacks against Diffie-Hellman,” ePrint 2016/995](<https://eprint.iacr.org/2016/995>) (NDSS 2017), abstract. The exchange itself is explained in the [Diffie–Hellman exhibit](<https://ciphermuseum.com/ciphers/diffie-hellman.html>); the same exhibit’s security panel covers the related question of shared primes, precomputation and the 2015 Logjam downgrade.
+
+#### What an AI cipher result actually tested
+
+“A model got 85% on ciphers” is four different claims wearing one sentence. Separating them is the whole job, and the separation is not pedantry: the four sit at wildly different distances from reading a message.
+
+Four tasks, in increasing order of what they would actually demonstrate
+
+| Task | What the system is given | What a high score shows |
+| --- | --- | --- |
+| **Metadata recognition** | A filename, a header, a dataset label — anything beside the ciphertext | That the label was readable. Nothing about the ciphertext. |
+| **Cipher-family classification** | Ciphertext only; answer is a family or mode | That the output carries a statistical signature. The message stays unread. |
+| **Fixed-codebook recognition** | Ciphertext drawn from a code pool the system was trained on | That a mapping already seen can be reapplied. Not recovery of an unseen key. |
+| **Plaintext or key recovery** | Ciphertext under a key generated for that message alone | Decipherment. This is the hard one, and it is the one most rarely measured. |
+
+**The metadata gap is measurable, and it is large.** The ACTS benchmark removes metadata in tiers — full metadata, filename only, completely blind — and reports the drop directly: combined accuracy falls from **71.7% with metadata to 30.8% blind**, a gap of 40.9 points, on live API inference over a corpus with randomized padding. Whatever the blind number means, the difference between the two is a measurement of how much of the original score was the filename.
+
+**A deterministic substitute is not a model.** ACTS is explicit that its forced-reasoning tier is executed by *deterministic heuristic substitution rather than live API calls*. That design answers a real question — whether a prompt format changes classification under otherwise fixed conditions — but it cannot establish what reasoning prompts do to a live model, because no live model ran. A perturbation that leaves a content-blind heuristic unchanged is not evidence of semantic robustness; a content-blind procedure was never going to move.
+
+**Classification is not recovery, and it degrades off-domain.** Work on cipher identification by randomness fingerprints reports AUC above 0.98 on the Canterbury Corpus and, more usefully, reports what happens when the plaintext distribution shifts: baseline classifiers degrade sharply as structured plaintext thins out, while the fingerprint method holds above 0.90 even on purely random data. The honest reading is that identification can be robust and still be identification — a strong AUC for telling ciphers apart is not a break of any of them, and says nothing about a single plaintext letter.
+
+**A shared code pool changes the task.** An attention-augmented LSTM reports near-perfect character-level accuracy on synthetic historical homophonic ciphertext, and states the setting plainly: “all ciphertexts draw from the same known homophonic code pool, while individual keys use different consistent subsets of that pool.” That is a deliberate, historically motivated choice for cases where key reuse is suspected — and it is structurally a different problem from recovering a key drawn for one message. The museum’s own [research-evaluation v2](<https://ciphermuseum.com/data/research/v2/README.md>) measures both and gets opposite answers: applying a held pool is exact 13 of 13, while recovering the same pool from one short text leaves 72.8% mean plaintext error.
+
+##### A matched-input recipe you can actually run
+
+This is a **reproducible procedure, not a result**. The museum has not executed it, and no numbers from it are published here. Run it yourself and the claim you end up with will be about your model, on your date, under your settings.
+
+- **Build matched pairs.** The same ciphertexts twice: once with filenames, headers and dataset labels intact, once with every one of them stripped or randomized. Identical bytes of ciphertext in both arms.
+
+- **Fix the inference procedure.** One model version, one temperature, one prompt template, one date, one maximum token count, recorded. A changed model version invalidates the comparison as surely as a changed prompt.
+
+- **Add two floors.** A *label-shuffled* baseline, where the answer key is permuted, shows what the scoring itself yields by chance. A *length-only* baseline, predicting from ciphertext length alone, shows how much is carried by a feature that has nothing to do with content. A result not clearly above both floors has not shown anything.
+
+- **Report each task on its own line.** Family classification, codebook recognition and plaintext recovery get separate denominators and separate numbers. Never one combined figure.
+
+- **Disclose what actually ran.** State for every tier whether a live model was called or a deterministic procedure stood in for it. If no model ran, the result is about the procedure.
+
+##### Reading someone else’s benchmark
+
+Six questions, in the order they usually need asking. *Was metadata present?* *Which of the four tasks above was scored?* *Were the keys independent per text, or drawn from a shared pool?* *What were the floors?* *Did a live model run at every tier reported?* *Were training and evaluation material separated by source document, not just by row?* A benchmark that answers all six can be read. One that answers none cannot, whatever its headline number.
+
+Youssef Hamdi Zafaan Ibrahim and Mohammed Khalaf Salama, [“ACTS: A multi-tier benchmark evaluating LLM cipher identification under controlled blind conditions” (arXiv:2609.26893, 22 September 2026)](<https://arxiv.org/abs/2609.26893>), abstract and tier description. Xiwen Ren, Min Luo, Cong Peng and Debiao He, [“Plaintext Structure Vulnerability: Robust Cipher Identification via a Distributional Randomness Fingerprint Feature Extractor” (arXiv:2511.08296)](<https://arxiv.org/abs/2511.08296>), abstract. Micaella Bruton, Meriem Beloucif and Beáta Megyesi, [“Attention-Augmented LSTMs for Automatic Homophonic Ciphertext Decipherment” (arXiv:2606.05078, 3 June 2026)](<https://arxiv.org/abs/2606.05078>), abstract. These are preprints, not settled general results. Classification accuracy is not plaintext recovery, and neither is a break of a modern primitive. Compare the museum’s bounded CipherBank note on the [Cipher Corpus](<https://ciphermuseum.com/cipher-corpus.html>) page.
+
 #### Continue the research trail
 
 [UA-8295 firmware forensics](<https://ciphermuseum.com/ciphers/ua-8295.html>) · [SoDark radio linking](<https://ciphermuseum.com/ciphers/sodark.html>) · [NFC deployment](<https://ciphermuseum.com/ciphers/nfc-deployment.html>) · [Historical decipherment evidence](<https://ciphermuseum.com/lab/decipherment-cases.html>)
@@ -57350,6 +57909,8 @@ The companion [Crypto Lab encyclopedia roadmap](<https://github.com/systemslibra
 ### Additional image, accessibility, tooltip and placeholder text
 
 - nav — aria-label: Primary
+- div — aria-label: Reported GPRS fault-attack phase timings
+- div — aria-label: Four tasks often reported as one
 
 ### Control identities, constraints and initial-state attributes
 
@@ -57369,7 +57930,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 ```json
 {
-  "status": "ebook follow-up implementation and local validation complete",
+  "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [
     "GPU-SEARCH-2025",
     "GEA-FAULTS-2026",
@@ -57377,7 +57938,7 @@ This describes work recorded before this export. Treat these notes as assertions
     "BIHAM-SHAMIR-1993-2009",
     "MANGARD-OSWALD-POPP-2007"
   ],
-  "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained.",
+  "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained. 29 Oct 2026 research review R01/R12/R14: replaced the obsolete full-paper-unavailable GPRS paragraph with the tested conditions and a phase table after reading the published paper; added five comparative attack-evidence cards; added a section separating four AI tasks with a matched-input recipe that is published as a procedure and was not executed.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "research_cases",
@@ -57409,7 +57970,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "browser_evidence": "docs/ebook-followup/browser.json",
     "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
     "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-  }
+  },
+  "research_review_2026_10_29": "revised"
 }
 ```
 
@@ -61918,9 +62480,9 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Source register and recorded access limits
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
-These 160 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
+These 173 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
 ## HAC-1997 — Handbook of Applied Cryptography
 
@@ -64106,10 +64668,19 @@ These 160 identities and reading scopes come from the prior review ledger. They 
   "revision": "ePrint record: last of two revisions, 22 September 2026",
   "url": "https://eprint.iacr.org/2026/1309",
   "passages_read": [
-    "Complete accessible ePrint abstract: forensic study of UA-8295 backdoor design and intended attacks; proposed methodology based on the Backdoor Conjecture.",
-    "ePrint publication metadata and revision history: preprint; received 23 June 2026, last revision 22 September 2026."
+    "§1.2 Background and §1.3 Our Contributions, PDF pp.3–5: USFA provenance; the UA-8295 is based on the Nokia DA-8520 (Sanomalaite m/90 / SANLA, late 1970s) whose original algorithm was DES in OFB mode; the NSA supplied drop-in replacement EPROMs; both devices show the same startup version number, user interface and EPROM checksum, distinguishable only by the checksum displayed for a newly entered user key; both ROM images were available, which is what allowed the cryptographically relevant code to be isolated; Onkruit sales records and the 1986/1988 Jane's Military Communications entries; the stated goal is NOT to show the cipher is breakable but to work out which attack the backdoor was designed for.",
+    "§2 Forensic Cryptanalysis Methodology, PDF p.5: Conjecture 1 (Backdoor Conjecture) and its three evaluation steps, stated as a conjecture.",
+    "§§3.5–3.7, PDF pp.10–11: counter-like mode; fixed first input block from LFSR²⁴ of CF17AF8A107AC0F5 with polynomial 1 + x³¹ + x⁶³; lossy encryption discarding bits 6 and 7 of every plaintext byte; the first five ciphertext characters are the nonce; three plaintext bytes become five ciphertext characters over A–P; a 15-character user key and 5-character nonce derive a 56-bit key.",
+    "§4 and §§4.1–4.2, PDF pp.11–14: the five design issues, three of them cryptographic weaknesses inside SBTcipher; the explicit statement that there is no obvious reduction to a 40-bit effective key; Mix updating a nibble from a 2-bit crumb with no cross-nibble update at probability 3/4; Table 1, byte paths using 19–25 unique key bits.",
+    "§§5.2–5.4 and Tables 4 and 6, PDF pp.18–22 and 25: constraint propagation over per-variable domains with key, forward, backward and second forward passes; the Branch-and-Prune depth-first search with backtracking on an empty domain; both attacks implemented in C++ for MIT-licensed release; benchmarks over 20 random keys on two Intel Xeon Gold 6248 CPUs with 1.5 TB RAM, single-threaded; BnP median 33,311 s at 3 MiB with one block pair, falling to 365 s with one extra pair; List Merge key-likelihood median 12,429 s at ~227 MiB plus precomputation; the mid-1980s feasibility discussion.",
+    "§§6.1–6.3 and Table 5, PDF pp.22–25: ByP ranked 73/3435 under the exact metric M₁ but first under M₂ in every permutation set; the unique global optimum of local optima described as strong evidence of design; the IV effect bounded by a factor 1.25 and judged a class (ii) freedom; §6 described as a first application whose exhaustive version is left to future work.",
+    "§§7.1–7.3, PDF pp.25–26: nonce independence and the 327,680 versus 1,280 precomputed Lists; the nonce byte construction L₅₋ᵢ = tl₀ ⊕ ẑᵢ from a hardware counter and the previous message's keystream; the measured bias — user key 15×'A', plaintext 'AAA', 388 cases, difference exactly 15 in 75.5% and 12 in a further 14.9%, over 90% of all nonce differences; the statement that the issue was already present in the Nokia DA-8520 and was 'not deliberately inserted, but potentially deliberately kept'; §7.3 leaving fixed-format-message encryption explicitly unknown and that part of the binary not yet reverse-engineered."
   ],
-  "scope": "Primary abstract and metadata only. Full PDF retrieval returned HTTP 403; no full-paper or experiment-table verification is claimed. The exhibit now confines itself to the verified research question and methodology, distinguishing inference about intended attacks from observation of designer decisions. Removed unsupported detailed original/replacement cipher history, ROM checksums and interface comparisons, nonce claims, named attack procedures, 20-key sample count, Xeon Gold 6248/1.5 TB hardware and 3 MiB memory figures, and purported full-PDF locators. This source remains a preprint, not established peer-reviewed publication."
+  "corroboration": [
+    "https://www.cryptomuseum.com/crypto/philips/ua8295/",
+    "https://www.cryptomuseum.com/crypto/philips/ua8295/sbt.htm"
+  ],
+  "scope": "Full preprint read on 29 October 2026 from a locally supplied PDF after the publisher's server refused direct retrieval. The exhibit now labels every claim observed, implemented, conditional inference or open question. This remains a PREPRINT, not peer-reviewed publication; the attacks were not reproduced; and the paper's own conclusions about which attack the backdoor was designed for are conditional on the Backdoor Conjecture, which the authors posit rather than demonstrate. Device and firmware provenance is corroborated against the public Crypto Museum pages."
 }
 ```
 
@@ -64135,11 +64706,13 @@ These 160 identities and reading scopes come from the prior review ledger. They 
     "https://pure.bit.edu.cn/en/publications/practical-differential-fault-attacks-on-the-gprs-standard-ciphers/"
   ],
   "passages_read": [
-    "Complete accessible ePrint abstract and publication metadata: random fault model for GEA-1/GEA-2, validation by simulating whole attacks on ChipWhisperer Lite, reported completion within sixteen minutes on a common laptop.",
-    "Beijing Institute of Technology institutional abstract and bibliographic record: peer-reviewed journal article, IEEE Transactions on Dependable and Secure Computing 23(3), pp.7129–7142, 1 May 2026, DOI 10.1109/TDSC.2026.3671957.",
-    "ePrint publication information identifies the deposit as published elsewhere, minor revision, with the same IEEE DOI."
+    "Abstract and §I Introduction, PDF pp.1–2: random fault model; 64-bit keys of GEA-1 and GEA-2 recovered with time complexities 2^33.807 and 2^33.858; validation by simulating the whole attacks on ChipWhisperer Lite; both broken within sixteen minutes on a common laptop; ETSI prohibited GEA-1 in mobile phones from 2013 yet tested handsets still supported it, and GEA-2 remains deployed.",
+    "§III.B The Attack Model, PDF p.5: the two assumed capabilities — (a) reinitialize the encryption operation repeatedly with the same key–IV pair, (b) flip a state bit without knowing its location — and the authors' own statement that such an adversary 'is certainly more powerful than a normal passive attacker and has the ability to access the keystream generator as a physical device'.",
+    "§IV.C–D, PDF p.9: Fig. 3 showing the ChipWhisperer Lite main board with an XMEGA target; random bit faults injected by voltage glitches; the GEA-1 process implemented 64 times; faults injected into at least two of three LFSRs within about 343.330 s on average; internal-state recovery of registers A, B and C in about 46.414 s, 82.323 s and 180.131 s for a total of about 308.868 s on a 1.19 GHz Intel Core i5-1035G1 laptop; 343.330 + 308.868 = 652.198 s (approximately 10.870 minutes); 2048 keystream bits used against GEA's 12,800-bit frame limit; p_GEA-1 = p₄ · (0.995)² = 0.953 for recovering the full 96-bit internal state.",
+    "§V.A–D and Table II, PDF p.10: Table II gives 0.995 as the probability that Algorithm 2 identifies the EXACT fault location once at least 2048 keystream bits are available; the GEA-2 process implemented 32 times, faults injected into at least three of four LFSRs within about 587.625 s on average, all 125 internal-state bits recovered in about 320.473 s, total 587.625 + 320.473 = 908.098 s (approximately 15.135 minutes); p_GEA-2 = q₆ · (0.995)³ = 0.893 for recovering the full 125-bit internal state.",
+    "§VI Countermeasures, PDF pp.11–12: GEA-2M, a proposed GEA-2 variant XORing the filter function's four output bits onto the registers' feedback so the LFSRs become mutually dependent NFSRs and signature vectors cannot be constructed; plus generic countermeasures including double modular redundancy."
   ],
-  "scope": "Corrected preprint-only characterization: the institutional record identifies a peer-reviewed journal article, with ePrint hosting a minor revision. Full PDF returned HTTP 403, so the review supports the abstract-level random-fault/ChipWhisperer experiment and publication status, not detailed same-key/IV reinitialization, single-bit internal-state, voltage-glitch or GEA-2M claims. Those details were removed or visibly bounded. A controlled fault-model result is not passive interception or proof of an attack on arbitrary commercial phones; inducing the required faults remains a separate implementation condition."
+  "scope": "Full published version read on 29 October 2026 from a locally supplied PDF after the publisher's server refused direct retrieval. Peer-reviewed journal article, IEEE Transactions on Dependable and Secure Computing 23(3), pp.7129–7142, 1 May 2026; the ePrint deposit is a minor revision of it. The exhibit separates fault acquisition and location from internal-state recovery, states both phase timings and their sums, and distinguishes the 0.995 fault-location probability from the 0.953 and 0.893 per-cipher state-recovery figures. A controlled fault-model result on an instrumented board is not passive interception and is not an attack on arbitrary commercial phones; GEA-2M is a research countermeasure proposal, not a standardized or independently evaluated replacement. Phase sums and minute conversions were recomputed independently."
 }
 ```
 
@@ -64436,12 +65009,276 @@ These 160 identities and reading scopes come from the prior review ledger. They 
 }
 ```
 
+## JUNIPER-DUAL-EC-2016 — A Systematic Analysis of the Juniper Dual EC Incident
+
+```json
+{
+  "title": "A Systematic Analysis of the Juniper Dual EC Incident",
+  "authors": [
+    "Stephen Checkoway",
+    "Jacob Maskiewicz",
+    "Christina Garman",
+    "Joshua Fried",
+    "Shaanan Cohney",
+    "Matthew Green",
+    "Nadia Heninger",
+    "Ralf-Philipp Weinmann",
+    "Eric Rescorla",
+    "Hovav Shacham"
+  ],
+  "year": 2016,
+  "url": "https://doi.org/10.1145/2976749.2978395",
+  "urls": [
+    "https://eprint.iacr.org/2016/376",
+    "https://hovav.net/ucsd/dist/juniper.pdf"
+  ],
+  "passages_read": [
+    "Abstract and §§1–3, PDF pp.1–3: ScreenOS vulnerable to passive exploitation since 2008 by an attacker who selects the Dual EC point; the 2012 change of a 32-byte constant between 6.2.0r14 and 6.2.0r15; Juniper's 17 December 2015 bulletin, CVE-2015-7756, affected releases and the statement that exploitation cannot be detected; patched April 2016; the explicit note that questions of motive and actor identity require a different body of material.",
+    "§4 The ScreenOS PRNG and Listing 1, PDF p.4: prng_reseed() sets the global prng_output_index to 32, and the loop that would invoke the ANSI X9.31 generator uses that same global as its counter, so no X9.31 call executes and Dual EC output is emitted directly; the index changed from a local variable to that global between the last ScreenOS 6.1 and the first 6.2.",
+    "§§5–5.3, PDF pp.4–5: Dual EC emits 30 of a point's 32 bytes; ScreenOS 6.2 uses a 32-byte IKE nonce assembled from one 30-byte output and 2 bytes of the next, narrowing candidate states to typically one to three; proof of concept on an SSG-550M running ScreenOS 6.3.0 with a researcher-chosen Q, decrypting VPN connections from a single handshake without other traffic."
+  ],
+  "scope": "Peer-reviewed CCS 2016 paper, author's version read in full for these passages. Used only for the access, assumptions and recovery of the attack. Attribution is NOT settled by this analysis: the paper itself calls a third party's change of Q suggestive but not dispositive and sets aside motive and identity."
+}
+```
+
+## OFFICE-RC4-2005 — The Misuse of RC4 in Microsoft Word and Excel
+
+```json
+{
+  "title": "The Misuse of RC4 in Microsoft Word and Excel",
+  "authors": [
+    "Hongjun Wu"
+  ],
+  "year": 2005,
+  "url": "https://eprint.iacr.org/2005/007",
+  "passages_read": [
+    "Abstract and record metadata, 11 January 2005: an encrypted document modified and saved again keeps the same initialization vector, so the same RC4 keystream encrypts different versions; Word 2002 is used to illustrate; Office 97, 2000 and 2003 Word and Excel are named as affected."
+  ],
+  "scope": "Abstract and publication record verified. A twenty-year-old finding about a superseded format, carried as a historical comparison and explicitly not as a current product advisory. What is recovered is document content from a two-time pad, not the password or the key."
+}
+```
+
+## KASUMI-SANDWICH-2010 — A Practical-Time Attack on the A5/3 Cryptosystem Used in Third Generation GSM Telephony
+
+```json
+{
+  "title": "A Practical-Time Attack on the A5/3 Cryptosystem Used in Third Generation GSM Telephony",
+  "authors": [
+    "Orr Dunkelman",
+    "Nathan Keller",
+    "Adi Shamir"
+  ],
+  "year": 2010,
+  "url": "https://eprint.iacr.org/2010/013",
+  "passages_read": [
+    "Abstract: a sandwich distinguisher over 7 of 8 KASUMI rounds at probability 2^-14; the full 128-bit key recovered using 4 related keys, 2^26 data, 2^30 bytes of memory and 2^32 time, simulated in under two hours on a single PC; the explicit statement that neither this technique nor any other published attack breaks MISTY in less than 2^128."
+  ],
+  "scope": "Abstract verified. The four-related-key requirement is the whole point of the card: this is not passive decryption of ordinary calls, and the result is specific to KASUMI rather than to MISTY1."
+}
+```
+
+## BLUETOOTH-FIXED-COORD-2019 — Breaking the Bluetooth Pairing — The Fixed Coordinate Invalid Curve Attack
+
+```json
+{
+  "title": "Breaking the Bluetooth Pairing — The Fixed Coordinate Invalid Curve Attack",
+  "authors": [
+    "Eli Biham",
+    "Lior Neumann"
+  ],
+  "year": 2019,
+  "url": "https://eprint.iacr.org/2019/1043",
+  "passages_read": [
+    "Abstract and §§1–4 summary, SAC 2019: an active man-in-the-middle during pairing modifies the y coordinate, which the user-checked numeric comparison does not cover; setting y = 0 gives a point of order 2 and two possible shared secrets, both known to the attacker; the encryption keys of about 50% of pairing attempts are compromised while the other 50% fail to pair; both devices must be vulnerable; vendors patched and the specification now requires public-key validation."
+  ],
+  "scope": "Abstract and summary verified. This deduces the session shared secret; unlike the classical invalid-curve attack it does NOT recover a long-term private key. Historical: treat as a worked example of unvalidated input, not a current advisory."
+}
+```
+
+## SMALL-SUBGROUP-DH-2016 — Measuring small subgroup attacks against Diffie-Hellman
+
+```json
+{
+  "title": "Measuring small subgroup attacks against Diffie-Hellman",
+  "authors": [
+    "Luke Valenta",
+    "David Adrian",
+    "Antonio Sanso",
+    "Shaanan Cohney",
+    "Joshua Fried",
+    "Marcella Hastings",
+    "J. Alex Halderman",
+    "Nadia Heninger"
+  ],
+  "year": 2016,
+  "url": "https://eprint.iacr.org/2016/995",
+  "passages_read": [
+    "Abstract, NDSS 2017: of more than twenty open-source cryptographic libraries and applications examined, not one validated subgroup orders by default until January 2016; millions of hosts use DSA and other non-'safe' primes; feasible full or partial key recovery found in OpenSSL, Exim, Unbound and Amazon's load balancer, with weaker attacks far more widely applicable."
+  ],
+  "scope": "Abstract verified. Used to keep small-subgroup confinement distinct from static private-key recovery: the validation failure was near-universal, while full key recovery needed particular exponent-reuse conditions in particular software."
+}
+```
+
+## HISTCIPH-2026 — Bridging the Low Resource Gap in Historical Cryptology: A Multilingual Diachronic Synthetic Dataset for Reproducible Cryptanalysis
+
+```json
+{
+  "title": "Bridging the Low Resource Gap in Historical Cryptology: A Multilingual Diachronic Synthetic Dataset for Reproducible Cryptanalysis",
+  "authors": [
+    "Micaella Bruton",
+    "Meriem Beloucif",
+    "Beáta Megyesi"
+  ],
+  "year": 2026,
+  "url": "https://aclanthology.org/2026.resourceful-4.2/",
+  "passages_read": [
+    "Abstract and record, RESOURCEFUL 2026 pp.13–24: ten languages across multiple centuries; diachronically balanced historical plaintext combined with INDEPENDENTLY GENERATED homophonic substitution keys and controlled transcription noise; generation constrained by documented properties of historical ciphers including multi-homophone allocation and variable-length codes."
+  ],
+  "scope": "Abstract and publication record verified. Cited for the independently-generated-per-text key structure that the museum's pooled-entropy example contrasts with. The museum's log2(130) bound is the museum's own mathematical inference from a stated model, NOT a replication of this dataset's measurements, and the museum does not assert that any published pooled figure is wrong."
+}
+```
+
+## Z340-UNICITY-2021 — Unicity distance of the Zodiac-340 cipher
+
+```json
+{
+  "title": "Unicity distance of the Zodiac-340 cipher",
+  "authors": [
+    "Joachim von zur Gathen"
+  ],
+  "year": 2021,
+  "url": "https://eprint.iacr.org/2021/1620",
+  "passages_read": [
+    "Abstract and record (also Cryptologia 47(5), 2023): plaintext-language entropy computed under three different assumptions — standard English, the Z340 plaintext alone, and Zodiac's entire correspondence — with the resulting unicity distance reported as a range of at most 152 characters rather than one figure."
+  ],
+  "scope": "Abstract and publication record verified. Cited to show that a unicity estimate depends on its language and key-space assumptions, certifies no particular reading, and promises no efficient solver."
+}
+```
+
+## ACTS-2026 — ACTS: A multi-tier benchmark evaluating LLM cipher identification under controlled blind conditions
+
+```json
+{
+  "title": "ACTS: A multi-tier benchmark evaluating LLM cipher identification under controlled blind conditions",
+  "authors": [
+    "Youssef Hamdi Zafaan Ibrahim",
+    "Mohammed Khalaf Salama"
+  ],
+  "year": 2026,
+  "url": "https://arxiv.org/abs/2609.26893",
+  "passages_read": [
+    "Abstract and tier description, submitted 22 September 2026: tiered metadata deprivation — Tier 1 full metadata, Tier 2 filename only, Tier 3 completely blind; live API inference on a randomized-padding corpus gives combined accuracy of 71.7% at Tier 1 against 30.8% at Tier 3, a 40.9-point gap; Tier 5 forced-reasoning formats are executed by DETERMINISTIC HEURISTIC SUBSTITUTION rather than live API calls."
+  ],
+  "scope": "arXiv preprint, abstract verified. Cited for the measurable metadata gap and for the explicit disclosure that one tier used no live model. A deterministic substitute cannot establish the causal effect of reasoning prompts on a live model."
+}
+```
+
+## CIPHER-FINGERPRINT-2025 — Plaintext Structure Vulnerability: Robust Cipher Identification via a Distributional Randomness Fingerprint Feature Extractor
+
+```json
+{
+  "title": "Plaintext Structure Vulnerability: Robust Cipher Identification via a Distributional Randomness Fingerprint Feature Extractor",
+  "authors": [
+    "Xiwen Ren",
+    "Min Luo",
+    "Cong Peng",
+    "Debiao He"
+  ],
+  "year": 2025,
+  "url": "https://arxiv.org/abs/2511.08296",
+  "passages_read": [
+    "Abstract: classifier performance declines when the test plaintext distribution departs from training; randomness features of the ciphertext build algorithm fingerprints; AUC above 0.98 on the Canterbury Corpus; baselines degrade sharply as structured plaintext thins while the method holds above 0.90 even on purely random data."
+  ],
+  "scope": "arXiv preprint, abstract verified. Cited to keep cipher IDENTIFICATION separate from plaintext recovery: a strong AUC for telling ciphers apart says nothing about a single plaintext letter and is not a break of any cipher."
+}
+```
+
+## HOMOPHONIC-LSTM-2026 — Attention-Augmented LSTMs for Automatic Homophonic Ciphertext Decipherment
+
+```json
+{
+  "title": "Attention-Augmented LSTMs for Automatic Homophonic Ciphertext Decipherment",
+  "authors": [
+    "Micaella Bruton",
+    "Meriem Beloucif",
+    "Beáta Megyesi"
+  ],
+  "year": 2026,
+  "url": "https://arxiv.org/abs/2606.05078",
+  "passages_read": [
+    "Abstract, submitted 3 June 2026: near-perfect character-level accuracy on synthetic ciphertexts from historical English and Swedish texts, 1500–1899; 'all ciphertexts draw from the same known homophonic code pool, while individual keys use different consistent subsets of that pool'; trained only on aligned ciphertext–plaintext pairs with no external language model, frequency statistics or key-search heuristics; presented as a tool for cases where key reuse is suspected."
+  ],
+  "scope": "arXiv preprint, abstract verified. Cited as the clearest statement that a shared global code pool is a structurally different task from recovering a key drawn for one message. The museum's own evaluation measures both and reports opposite outcomes."
+}
+```
+
+## COMPLETE-FORMULAS-2016 — Complete Addition Formulas for Prime Order Elliptic Curves
+
+```json
+{
+  "title": "Complete Addition Formulas for Prime Order Elliptic Curves",
+  "authors": [
+    "Joost Renes",
+    "Craig Costello",
+    "Lejla Batina"
+  ],
+  "year": 2016,
+  "url": "https://eprint.iacr.org/2015/1060",
+  "passages_read": [
+    "Abstract and Algorithm 1, EUROCRYPT 2016: branch-free addition formulas correct for every pair of points on SHORT WEIERSTRASS curves of PRIME ORDER over fields of characteristic other than 2 and 3, with their field-multiplication cost."
+  ],
+  "scope": "Peer-reviewed. Algorithm 1 was re-implemented independently in hall-of-foundations/ec-math.test.js and compared against the museum's affine arithmetic on all 361 ordered point pairs of the prime-order curve y^2 = x^3 + 2x + 2 over F_17, identity, inverses and doublings included: zero disagreements. The completeness guarantee is stated for that curve class and does not transfer outside it."
+}
+```
+
+## FIAT-CRYPTO-2019 — Simple High-Level Code for Cryptographic Arithmetic — With Proofs, Without Compromises
+
+```json
+{
+  "title": "Simple High-Level Code for Cryptographic Arithmetic — With Proofs, Without Compromises",
+  "authors": [
+    "Andres Erbsen",
+    "Jade Philipoom",
+    "Jason Gross",
+    "Robert Sloan",
+    "Adam Chlipala"
+  ],
+  "year": 2019,
+  "url": "https://doi.org/10.1109/SP.2019.00005",
+  "passages_read": [
+    "Abstract and overview, IEEE S&P 2019: machine-checked functional correctness for field arithmetic including bounds reasoning, with the compiler and pretty-printer outside the proof's trusted boundary."
+  ],
+  "scope": "Peer-reviewed. Cited only to distinguish a functional-correctness proof from a timing guarantee and to locate the trusted boundary at the compiler. The museum makes no formal-verification claim about any of its own JavaScript."
+}
+```
+
+## CRYPTOMUSEUM-UA8295 — UA-8295 Short-burst message terminal with encryption, and the SBT algorithm
+
+```json
+{
+  "title": "UA-8295 Short-burst message terminal with encryption, and the SBT algorithm",
+  "authors": [
+    "Crypto Museum"
+  ],
+  "year": 2026,
+  "url": "https://www.cryptomuseum.com/crypto/philips/ua8295/",
+  "urls": [
+    "https://www.cryptomuseum.com/crypto/philips/ua8295/sbt.htm"
+  ],
+  "passages_read": [
+    "Device page: the UA-8295/00 developed by Nokia as the DA-8520 (Sanomalaite m/90 / SANLA); Philips Usfa obtained the design in 1984; the original used DES in OFB mode; the NSA-developed replacement firmware carries the same version number E22444, the same date of 30 October 1984, the same size and the same checksum; four 27C64 EPROMs.",
+    "SBT algorithm page: eleven steps over LFSRs, bit and box permutations, S-boxes and nibble switches; 64-bit user key; keystream generated a byte at a time; the LFSR stepped 64 times with primitive polynomial 1 + x^32 + x^63."
+  ],
+  "scope": "Public secondary source used to corroborate device lineage, firmware version/date/checksum coincidence and hardware details from the hardware side, alongside the primary preprint. Not a peer-reviewed publication."
+}
+```
+
 
 ---
 
 # javascript appendix 1
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -64967,8 +65804,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/artifact-cards-data.min.js`
-- Served SHA-256: `7476a7f0c6ac697bff8fc43e42cd6d96db4edc94d0d6f8c033bfc55367164598`
-- Readable-source SHA-256: `a307cf5f0a376ace446edfe5b7f4b197ddaa997812829278be2c0be83d9ee31e`
+- Served SHA-256: `7c06bbd8f43c5e15c87216234017f1c00af20b41f55355ccc7c722e8b12b9687`
+- Readable-source SHA-256: `7932b5417c0acaf74a03a35cbd20c3bd489adac964942634e6bd82536cb14f30`
 
 
 ```javascript
@@ -67220,11 +68057,11 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       "family": "Firmware forensics",
       "region": "Finland / Netherlands",
       "usedBy": "Nokia DA-8520 / USFA UA-8295 terminal users",
-      "keyType": "See the source-scope note; full-paper technical details are not verified here",
-      "keyIdea": "A preprint case study separating cryptanalytic findings from inferences about backdoor design.",
+      "keyType": "15-character user key plus a 5-character nonce derive a 56-bit key",
+      "keyIdea": "A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.",
       "trust": null,
       "securityFailure": null,
-      "modernLesson": "Distinguish the verified research question from unverified implementation details and inferences about intent."
+      "modernLesson": "Separate what was observed in firmware, what was implemented as an attack, what is conditional inference, and what is still open."
     },
     "venona": {
       "name": "VENONA Project",
@@ -68129,7 +68966,7 @@ if (typeof require !== 'undefined') {
 
 # javascript appendix 2
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/all-engines.js
 
@@ -72401,7 +73238,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 # javascript appendix 3
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/caesar-break.js
 
@@ -75811,7 +76648,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 4
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/detective/challenges.js
 
@@ -79140,7 +79977,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 5
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/learning-path.js
 
@@ -80657,8 +81494,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-language-model.js`
-- Served SHA-256: `2621e72bf6124d1d0e864d7ff643bcac62cbb22ae56a4cb0be70388f6129a492`
-- Readable-source SHA-256: `2621e72bf6124d1d0e864d7ff643bcac62cbb22ae56a4cb0be70388f6129a492`
+- Served SHA-256: `e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb`
+- Readable-source SHA-256: `e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb`
 
 
 ```javascript
@@ -80683,8 +81520,69 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     }
     fitness.modelId=data.id;return{fitness,id:data.id};
   }
-  if(typeof module!=='undefined'&&module.exports)module.exports={build};
-  global.MuseumResearchLanguage={build};
+  // ── Versioned historical-language profiles ──────────────────────────────
+  // Each profile scores letters A–Z under its own corpus. Scores from different
+  // profiles are NOT comparable as raw likelihoods, so comparison uses the mean
+  // log-probability per letter and reports a margin, never a probability.
+  function profileScorer(p){
+    const qfloor=Math.log(p.floorCount/p.quadTotal),tfloor=Math.log(p.floorCount/p.triTotal);
+    const quad=new Float64Array(26**4).fill(qfloor),tri=new Float64Array(26**3).fill(tfloor);
+    const seenQuad=new Uint8Array(26**4);
+    p.quad.forEach(([i,n])=>{quad[i]=Math.log(n/p.quadTotal);seenQuad[i]=1;});
+    p.tri.forEach(([i,n])=>{tri[i]=Math.log(n/p.triTotal);});
+    const letterLogs=p.letters.map(n=>Math.log((n||p.floorCount)/p.letterTotal));
+    function read(text){
+      const n=text.length,counts=new Uint16Array(26);let score=0,last=0,grams=0,seen=0;
+      for(let i=0;i<n;i++){
+        const c=text.charCodeAt(i)-65;
+        if(c<0||c>25)throw new Error('Language profiles accept uppercase A–Z only.');
+        counts[c]++;last=(last%17576)*26+c;
+        if(i>=3){score+=quad[last];grams++;if(seenQuad[last])seen++;}
+        else if(i===2&&n===3)score+=tri[last];
+      }
+      for(let c=0;c<26;c++)if(counts[c])score-=p.frequencyPenalty*counts[c]*(Math.log(counts[c]/n)-letterLogs[c]);
+      return{score,letters:n,grams,coverage:grams?seen/grams:0,meanLogProbability:n?score/n:0};
+    }
+    function fitness(text){return read(text).score;}
+    fitness.modelId=p.id;
+    // Decomposable view for the segmentation lattice: the increment a reading adds,
+    // given the text before it. Exact for this quadgram sum apart from the declared
+    // unigram-distribution penalty, which depends on the whole string.
+    fitness.step=function(prefix,reading){
+      if(!reading)return 0;
+      const a=prefix?read(prefix).score:0,b=read(prefix+reading).score;
+      return b-a;
+    };
+    return{id:p.id,language:p.language,period:p.period,fitness,read,meta:p};
+  }
+  function buildProfiles(data){
+    if(!data||data.id!=='museum-language-profiles-v1'||data.version!==1)throw new Error('Unsupported historical-language profile set.');
+    const profiles=data.profiles.map(profileScorer),byId={};
+    profiles.forEach(p=>{byId[p.id]=p;});
+    const rule=data.abstention;
+    // Compare language hypotheses, and decline when the evidence does not separate them.
+    function compare(text,ids){
+      const chosen=(ids&&ids.length?ids:profiles.map(p=>p.id)).map(id=>{
+        const p=byId[id];if(!p)throw new Error('Unknown language profile: '+id);return p;});
+      if(chosen.length<2)throw new Error('Comparing language hypotheses needs at least two profiles.');
+      const rows=chosen.map(p=>{const r=p.read(text);
+        return{id:p.id,language:p.language,period:p.period,meanLogProbability:r.meanLogProbability,
+          coverage:r.coverage,letters:r.letters};});
+      rows.sort((a,b)=>b.meanLogProbability-a.meanLogProbability);
+      const margin=rows.length>1?rows[0].meanLogProbability-rows[1].meanLogProbability:0;
+      const reasons=[];
+      if(rows[0].letters<rule.minimumLetters)reasons.push('Input is '+rows[0].letters+' letters; at least '+rule.minimumLetters+' are required.');
+      if(margin<rule.minimumMargin)reasons.push('Margin '+margin.toFixed(3)+' is below the declared '+rule.minimumMargin+'.');
+      if(rows[0].coverage<rule.minimumCoverage)reasons.push('Best profile covers only '+(100*rows[0].coverage).toFixed(1)+'% of this text\u2019s quadgrams; at least '+(100*rule.minimumCoverage).toFixed(0)+'% are required.');
+      return{ranking:rows,margin,decided:reasons.length===0,
+        choice:reasons.length?null:rows[0].id,abstentionReasons:reasons,
+        rule:rule,
+        meaning:'Ranking by mean log-probability per letter under each profile. This is not a probability that the text is in that language, and a language absent from the profile set can never be chosen.'};
+    }
+    return{id:data.id,version:data.version,profiles,byId,compare,abstention:rule,baseline:data.baseline};
+  }
+  if(typeof module!=='undefined'&&module.exports)module.exports={build,buildProfiles};
+  global.MuseumResearchLanguage={build,buildProfiles};
 })(typeof window!=='undefined'?window:globalThis);
 ```
 
@@ -80696,8 +81594,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-model.js`
-- Served SHA-256: `8b7b94977421047d3cb360dad250af8513c3d7d350c141b0d4f1fc466e42b174`
-- Readable-source SHA-256: `8b7b94977421047d3cb360dad250af8513c3d7d350c141b0d4f1fc466e42b174`
+- Served SHA-256: `883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128`
+- Readable-source SHA-256: `883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128`
 
 
 ```javascript
@@ -80730,7 +81628,8 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   function create(raw = '') {
     string(raw, 10000, 'Transcription');
     return { version: 2, kind: KIND, raw, mode: 'symbols', width: 1, annotations: {}, revision: 1,
-      source: source({}), revisions: [{ id: 1, raw, reason: 'Initial transcription' }], spans: [], layers: [], keys: [], relations: [] };
+      source: source({}), revisions: [{ id: 1, raw, reason: 'Initial transcription' }], spans: [], layers: [], keys: [], relations: [],
+      images: [], inventory: null, hypotheses: [] };
   }
   // Legacy positions count Unicode code points, not UTF-16 code units.
   function legacyTokens(raw, mode, width) {
@@ -80774,6 +81673,16 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     check(revisions.has(1), 'The original transcription must be retained.');
     check(d.revisions.every((r,i) => r.id === i+1) && d.revision === d.revisions.length, 'Revisions must be consecutive, with the latest revision current.');
     d.annotations = {}; // v2 annotations use source spans, never mutable token indices.
+    // Version 2 records written before these existed simply have none of them.
+    if (!Array.isArray(d.images)) d.images = [];
+    if (!Array.isArray(d.hypotheses)) d.hypotheses = [];
+    if (d.inventory === undefined) d.inventory = null;
+    const imageIds = new Set();
+    list(d.images, 50, 'images').forEach(i => {
+      const rec = imageRecord(i);
+      check(!imageIds.has(rec.id), 'Duplicate image ID.'); imageIds.add(rec.id);
+      Object.assign(i, rec);
+    });
     const ids = new Set();
     function unique(id) { string(id, 100, 'Record ID'); check(/^[A-Za-z][A-Za-z0-9_-]*$/.test(id) && !/^revision-/.test(id) && !ids.has(id), 'Invalid, reserved or duplicate record ID.'); ids.add(id); }
     list(d.spans, 500, 'spans').forEach(s => {
@@ -80788,6 +81697,9 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       check(s.uncertain || (!s.alternatives.length || (s.reading && s.reason.trim())), 'Resolving alternative readings requires a choice and reason.');
       if (s.region !== null) {
         string(s.imageName, 500, 'Region image filename'); check(s.imageName.trim(), 'An image region needs its recorded source filename.');
+        s.imageId = string(s.imageId || '', 100, 'Region image ID');
+        check(!s.imageId || imageIds.has(s.imageId), 'An image region must reference a recorded image.');
+        check(!s.imageId || d.images.find(i => i.id === s.imageId).name === s.imageName, 'The region filename must match its image record.');
         list(s.region, 4, 'image region'); check(s.region.length === 4 && s.region.every(n => Number.isFinite(n) && n >= 0 && n <= 1), 'Image region uses four fractions between 0 and 1.');
         check(s.region[2] > 0 && s.region[3] > 0 && s.region[0] + s.region[2] <= 1.00000001 && s.region[1] + s.region[3] <= 1.00000001, 'Image region must fit inside the image.');
       }
@@ -80808,6 +81720,52 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       check(r.from.trim() && r.to.trim() && r.evidence.trim(), 'Relationships need two identifiers and supporting evidence.');
       check(['transcribes', 'applies-key', 'supports', 'alternative-to'].includes(r.type), 'Unsupported relationship type.');
     });
+    if (d.inventory !== null) {
+      const inv = d.inventory;
+      check(inv && typeof inv === 'object' && !Array.isArray(inv), 'Invalid symbol inventory.');
+      check(revisions.has(inv.revision), 'The symbol inventory has no source revision.');
+      check(INVENTORY_TOKENS.includes(inv.tokens), 'Unknown inventory tokenization.');
+      integer(inv.width, 1, 8, 'inventory token width'); integer(inv.nextId, 1, 5000, 'inventory counter');
+      const src = inventoryTokens(revisions.get(inv.revision).raw, inv.tokens, inv.width);
+      list(inv.occurrences, 2000, 'inventory occurrences');
+      check(inv.occurrences.length === src.length, 'The symbol inventory does not match its source revision.');
+      inv.occurrences.forEach((o, i) => check(o.index === i && o.start === src[i].start && o.end === src[i].end && o.literal === src[i].literal,
+        'Inventory occurrence ' + i + ' no longer matches the recorded source.'));
+      const assigned = new Set(), classIds = new Set();
+      list(inv.classes, 500, 'symbol classes').forEach(c => {
+        check(/^class-[1-9][0-9]*$/.test(c.id) && !classIds.has(c.id), 'Invalid or duplicate symbol-class ID.'); classIds.add(c.id);
+        string(c.label, 200, 'Class label'); check(c.label.trim(), 'Every symbol class needs a label.');
+        string(c.note, 4000, 'Class note'); check(c.note.trim(), 'Every symbol class records why it exists.');
+        list(c.occurrences, 2000, 'class occurrences').forEach(i => {
+          integer(i, 0, inv.occurrences.length - 1, 'occurrence index');
+          check(!assigned.has(i), 'An occurrence belongs to exactly one symbol class.'); assigned.add(i); });
+        check(c.occurrences.length > 0, 'A symbol class cannot be empty.');
+      });
+      check(assigned.size === inv.occurrences.length, 'Every occurrence must belong to a symbol class.');
+      list(inv.history, 2000, 'inventory history').forEach((h, i) => {
+        check(h.step === i + 1, 'Inventory decision history must stay in order.');
+        check(INVENTORY_OPS.includes(h.op), 'Unknown inventory operation.');
+        string(h.detail, 4000, 'History detail'); check(h.detail.trim(), 'Every inventory decision records what changed.'); });
+      check(inv.history.length > 0, 'The inventory must retain its decision history.');
+    }
+    list(d.hypotheses, 100, 'hypotheses').forEach(h => {
+      unique(h.id); check(/^hypothesis-[1-9][0-9]*$/.test(h.id), 'Invalid hypothesis ID.');
+      string(h.claim, 2000, 'Hypothesis claim'); check(h.claim.trim(), 'A hypothesis needs a claim.');
+      check(CONFIDENCE.includes(h.confidence), 'Use one of the declared confidence words: ' + CONFIDENCE.join(', ') + '.');
+      ['supports', 'contradicts'].forEach(field => list(h[field], 50, field + ' evidence').forEach(e => {
+        check(e && typeof e === 'object' && !Array.isArray(e), 'Evidence entries are objects.');
+        string(e.ref, 2000, 'Evidence reference'); string(e.note, 2000, 'Evidence note');
+        check(e.ref.trim() && e.note.trim(), 'Each piece of evidence needs an identifier and a note.'); }));
+      list(h.alternatives, 20, 'unresolved alternatives').forEach(a => string(a, 500, 'Unresolved alternative'));
+      string(h.note, 2000, 'Hypothesis note');
+      // Applying a key cleanly is not evidence of authorship, attribution or date.
+      check(h.confidence !== 'well-supported' || h.supports.length >= 2,
+        'Calling a claim well-supported needs at least two separately recorded pieces of supporting evidence.');
+      check(h.confidence !== 'well-supported' || h.contradicts.length === 0,
+        'Recorded counterevidence must be answered before a claim is called well-supported.');
+      check(h.confidence !== 'contradicted' || h.contradicts.length > 0,
+        'A contradicted claim must record the evidence against it.');
+    });
     return d;
   }
   function revise(d, raw, reason) {
@@ -80821,7 +81779,11 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     d = validate(d); const s = copy(input);
     s.id = 'span-' + (1 + Math.max(0, ...d.spans.map(x => Number(x.id.split('-').pop()) || 0)));
     s.revision = d.revision; s.literal = Array.from(d.raw).slice(s.start, s.end).join('');
-    if (s.region !== null) s.imageName = d.source.imageName;
+    // A region names the image record it belongs to; the filename follows from it.
+    if (s.region !== null) {
+      if (s.imageId) { const image = d.images.find(i => i.id === s.imageId); check(image, 'An image region must reference a recorded image.'); s.imageName = image.name; }
+      else s.imageName = d.source.imageName;
+    }
     d.spans.push(s); return validate(d);
   }
   function addLayer(d, kind, parent, text, note) {
@@ -80851,27 +81813,179 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       else text += e.values[0];
     }); return { text, unresolved, tokens: tokens.length };
   }
-  function segment(digits, key, boundaries = [], limit = 10000, score = () => 0) {
-    check(typeof digits === 'string' && /^[0-9]{1,80}$/.test(digits), 'Use 1–80 digits without spaces; the source will not be normalized.');
-    check(key && typeof key === 'object' && !Array.isArray(key), 'Supply a code-to-reading object.');
-    const entries = Object.entries(key); check(entries.length > 0 && entries.length <= 64, 'Use 1–64 numerical key entries.');
-    entries.forEach(([c, p]) => { check(/^[0-9]{1,6}$/.test(c), 'Codes must contain 1–6 digits.'); string(p, 50, 'Code reading'); check(p.length > 0, 'Code readings cannot be empty.'); });
-    integer(limit, 1, 20000, 'path budget'); list(boundaries, 79, 'locked boundaries').forEach(b => integer(b, 1, digits.length - 1, 'locked boundary'));
-    const paths = []; let visited = 0, complete = true, total = 0;
-    function visit(pos, codes, text) {
-      if (visited >= limit) { complete = false; return; } visited++;
-      if (pos === digits.length) {
-        const value = score(text); check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
-        paths.push({ codes, text, score: value }); total++;
-        paths.sort((a,b) => b.score - a.score || a.codes.join('|').localeCompare(b.codes.join('|'))); if (paths.length > 32) paths.pop(); return;
+  // ── Numerical segmentation ────────────────────────────────────────────────
+  // A typed entry distinguishes a letter, a syllable, a whole word, a name and a
+  // null that deliberately contributes nothing. A bare string stays one reading.
+  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'null'];
+  const SEG_LINES = ['boundary', 'span'];
+  const COUNT_CAP = 1e15;
+  function normalizeCodes(key) {
+    const raw = Object.entries(key);
+    check(raw.length > 0 && raw.length <= 64, 'Use 1–64 numerical key entries.');
+    return raw.map(([code, value]) => {
+      check(/^[0-9]{1,6}$/.test(code), 'Codes must contain 1–6 digits.');
+      if (typeof value === 'string') {
+        string(value, 50, 'Code reading'); check(value.length > 0, 'Code readings cannot be empty.');
+        return { code, type: Array.from(value).length === 1 ? 'letter' : 'word', values: [value], note: '' };
       }
-      for (const [code, reading] of entries) {
-        const end = pos + code.length;
-        if (digits.startsWith(code, pos) && !boundaries.some(b => b > pos && b < end)) visit(end, codes.concat(code), text + reading);
-        if (!complete) return;
+      check(value && typeof value === 'object' && !Array.isArray(value), 'A code entry is a string or a typed object.');
+      check(SEG_TYPES.includes(value.type), 'Unknown numerical code type.');
+      const values = list(value.values || [], 8, 'code readings').map(v => string(v, 50, 'Code reading'));
+      if (value.type === 'null') check(values.length === 0, 'A null code contributes no reading.');
+      else check(values.length > 0 && values.every(v => v.length > 0), 'Supply at least one reading.');
+      return { code, type: value.type, values, note: string(value.note || '', 200, 'Code note') };
+    });
+  }
+  const codeReading = e => (e.type === 'null' ? '' : e.values[0]);
+  // Lattice segmentation. Backward reachability prunes dead ends before any path is
+  // built. When every complete path fits the node budget the enumeration is exhaustive
+  // and the retained set is globally best; otherwise a per-state beam bounds the work
+  // and the global optimum is no longer guaranteed. The result says which happened.
+  function segment(digits, key, boundaries = [], limit = 10000, score = () => 0, options = {}) {
+    check(typeof digits === 'string' && /^[0-9](?:[0-9\n]*[0-9])?$/.test(digits) && digits.replace(/\n/g, '').length <= 80,
+      'Use 1–80 digits without spaces; line breaks are allowed and kept as source structure. The source will not be normalized.');
+    check(key && typeof key === 'object' && !Array.isArray(key), 'Supply a code-to-reading object.');
+    const entries = normalizeCodes(key);
+    integer(limit, 1, 20000, 'path budget');
+    const opts = options && typeof options === 'object' ? options : {};
+    const policy = opts.lineBreaks || 'boundary';
+    check(SEG_LINES.includes(policy), 'Unknown line-break policy.');
+    const beam = integer(opts.beam === undefined ? 32 : opts.beam, 1, 64, 'retained-path limit');
+    const n = digits.length;
+    list(boundaries, 159, 'locked boundaries').forEach(b => integer(b, 1, n - 1, 'locked boundary'));
+    const cuts = new Set(boundaries);
+    // Line breaks are source structure, not data. Under the default policy they are
+    // mandatory cuts that no code may cross; under 'span' a code may continue across
+    // one. Either way the break itself is never consumed, so the original digits and
+    // their line layout survive in every path.
+    // Line positions are tracked only for the ambiguity report. Whether a code may
+    // cross one is decided in exactly one place, matchAt below, so a change there
+    // cannot be masked by a second mechanism quietly enforcing the same rule.
+    const lineCuts = new Set();
+    if (policy === 'boundary') for (let i = 0; i < n; i++) if (digits[i] === '\n') { lineCuts.add(i); lineCuts.add(i + 1); }
+    // Returns the end position of a code matched from pos, or -1.
+    function matchAt(pos, code) {
+      let i = pos, k = 0;
+      while (k < code.length) {
+        if (i >= n) return -1;
+        if (digits[i] === '\n') { if (policy !== 'span') return -1; i++; continue; }
+        if (digits[i] !== code[k]) return -1;
+        i++; k++;
+      }
+      return i;
+    }
+    const edges = [];
+    for (let pos = 0; pos < n; pos++) {
+      edges[pos] = [];
+      if (digits[pos] === '\n') { edges[pos].push({ entry: null, end: pos + 1 }); continue; }
+      for (const e of entries) {
+        const end = matchAt(pos, e.code);
+        if (end < 0) continue;
+        let blocked = false;
+        for (let b = pos + 1; b < end; b++) if (cuts.has(b)) { blocked = true; break; }
+        if (!blocked) edges[pos].push({ entry: e, end });
       }
     }
-    visit(0, [], ''); return { paths, visited, complete, total, retained: paths.length, limit, boundaries: boundaries.slice() };
+    const reach = new Array(n + 1).fill(false), bwd = new Array(n + 1).fill(0);
+    reach[n] = true; bwd[n] = 1;
+    for (let pos = n - 1; pos >= 0; pos--) {
+      let sum = 0;
+      for (const edge of edges[pos]) if (reach[edge.end]) sum += bwd[edge.end];
+      bwd[pos] = Math.min(sum, COUNT_CAP); reach[pos] = sum > 0;
+    }
+    const fwd = new Array(n + 1).fill(0); fwd[0] = 1;
+    for (let pos = 0; pos < n; pos++) {
+      if (!fwd[pos] || !reach[pos]) continue;
+      for (const edge of edges[pos]) if (reach[edge.end]) fwd[edge.end] = Math.min(fwd[edge.end] + fwd[pos], COUNT_CAP);
+    }
+    const total = bwd[0], exhaustive = total <= limit;
+    const paths = []; let visited = 0, truncated = false, beamPruned = false;
+    const order = (a, b) => b.score - a.score || a.codes.join('|').localeCompare(b.codes.join('|'));
+    function keep(codes, items, text) {
+      const value = score(text);
+      check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
+      paths.push({ codes, entries: items, text, score: value,
+        alternatives: items.filter(i => i.values.length > 1).map(i => ({ code: i.code, start: i.start, values: i.values.slice() })) });
+      paths.sort(order); if (paths.length > beam) paths.pop();
+    }
+    function step(pos, edge, codes, items, text) {
+      if (!edge.entry) return { codes: codes.concat('\n'), items, text };
+      const reading = codeReading(edge.entry);
+      // The recorded chunk is the SOURCE slice, so joining a path's chunks always
+      // reproduces the original digits, line breaks included.
+      const source = digits.slice(pos, edge.end);
+      return { codes: codes.concat(source), text: text + reading,
+        items: items.concat([{ code: edge.entry.code, source, type: edge.entry.type, reading,
+          values: edge.entry.values.slice(), start: pos, end: edge.end }]) };
+    }
+    if (exhaustive) {
+      (function walk(pos, codes, items, text) {
+        if (visited >= limit) { truncated = true; return; }
+        visited++;
+        if (pos === n) { keep(codes, items, text); return; }
+        for (const edge of edges[pos]) {
+          if (!reach[edge.end]) continue;
+          const nx = step(pos, edge, codes, items, text);
+          walk(edge.end, nx.codes, nx.items, nx.text);
+          if (truncated) return;
+        }
+      })(0, [], [], '');
+    } else {
+      const decomposable = typeof score.step === 'function';
+      const states = new Array(n + 1);
+      states[0] = [{ codes: [], items: [], text: '', score: 0 }];
+      for (let pos = 0; pos < n && !truncated; pos++) {
+        const here = states[pos];
+        if (!here || !here.length || !reach[pos]) continue;
+        if (here.length > beam) { here.sort(order); here.length = beam; beamPruned = true; }
+        for (const edge of edges[pos]) {
+          if (!reach[edge.end]) continue;
+          const bucket = states[edge.end] || (states[edge.end] = []);
+          for (const partial of here) {
+            if (visited >= limit) { truncated = true; break; }
+            visited++;
+            const nx = step(pos, edge, partial.codes, partial.items, partial.text);
+            const value = decomposable ? partial.score + score.step(partial.text, nx.text.slice(partial.text.length)) : 0;
+            check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
+            bucket.push({ codes: nx.codes, items: nx.items, text: nx.text, score: value });
+          }
+          if (truncated) break;
+        }
+      }
+      const finals = (states[n] || []).slice();
+      finals.sort(order);
+      if (finals.length > beam) beamPruned = true;
+      finals.slice(0, beam).forEach(f => keep(f.codes, f.items, f.text));
+    }
+    // The ambiguity view is read off the lattice itself, so it is exact in both modes.
+    const ambiguity = [];
+    if (total > 0) for (let p = 1; p < n; p++) {
+      const through = Math.min(fwd[p] * bwd[p], COUNT_CAP);
+      ambiguity.push({ position: p, pathsCutting: through, locked: cuts.has(p) || lineCuts.has(p),
+        forced: through >= total, impossible: through === 0,
+        startingCodes: (edges[p] || []).filter(e => e.entry && reach[e.end]).map(e => e.entry.code) });
+    }
+    const complete = exhaustive && !truncated;
+    return { paths, visited, complete, total, totalCapped: total >= COUNT_CAP, retained: paths.length, limit,
+      boundaries: boundaries.slice(), lineBreaks: policy, beam, beamPruned, ambiguity,
+      mode: exhaustive ? 'exhaustive-lattice' : 'bounded-k-best',
+      globalBestGuaranteed: complete,
+      pruning: complete
+        ? 'Backward reachability only. Every complete path was enumerated and scored, so the retained ranking is globally best.'
+        : 'Backward reachability plus a per-state beam of ' + beam + ' within a ' + limit + '-node budget. Pruning can discard the globally best path.' };
+  }
+  // Segmentation error is reported apart from plaintext error: a boundary can move
+  // without changing a letter, and a reading can change without moving a boundary.
+  function segmentMetrics(expected, actual) {
+    const bounds = codes => { const s = new Set(); let p = 0;
+      list(codes, 200, 'code sequence').forEach(c => { p += String(c).length; s.add(p); }); s.delete(p); return s; };
+    const a = bounds(expected), b = bounds(actual);
+    let shared = 0; a.forEach(x => { if (b.has(x)) shared++; });
+    const union = new Set(); a.forEach(x => union.add(x)); b.forEach(x => union.add(x));
+    return { boundaryMatches: shared, boundariesExpected: a.size, boundariesActual: b.size,
+      boundarySymmetricDifference: union.size - shared,
+      boundaryError: a.size ? (a.size - shared) / a.size : (b.size ? 1 : 0),
+      exactCodes: expected.length === actual.length && expected.every((c, i) => String(c) === String(actual[i])) };
   }
   function rng(seed) {
     let x = seed >>> 0;
@@ -80922,6 +82036,399 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       task: free.length ? 'key-recovery-candidates' : 'known-key-application', locks: copy(locks),
       model: score.modelId || 'custom-scoring-function', verified: false, scope: 'Letter homophones only; no word codes, nulls, control signs or historical-language model.' };
   }
+  // ── Images, coordinate transforms and occurrence linking ──────────────────
+  // A region is always stored in the ORIGINAL image's normalized coordinates.
+  // Crop and rotation describe only how the image is presented, so changing the
+  // presentation never rewrites a recorded region.
+  const ROTATIONS = [0, 90, 180, 270];
+  function imageRecord(x) {
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid image record.');
+    const r = {};
+    r.id = string(x.id, 100, 'Image ID');
+    check(/^[A-Za-z][A-Za-z0-9_-]*$/.test(r.id), 'Invalid image ID.');
+    r.name = string(x.name || '', 500, 'Image filename');
+    check(r.name.trim(), 'An image record needs its recorded filename.');
+    r.sha256 = string(x.sha256 || '', 64, 'Image content hash');
+    check(r.sha256 === '' || /^[0-9a-f]{64}$/.test(r.sha256), 'An image hash is 64 lowercase hexadecimal characters.');
+    r.width = integer(x.width, 1, 100000, 'image width');
+    r.height = integer(x.height, 1, 100000, 'image height');
+    r.rotation = integer(x.rotation === undefined ? 0 : x.rotation, 0, 270, 'image rotation');
+    check(ROTATIONS.includes(r.rotation), 'Rotation must be 0, 90, 180 or 270 degrees clockwise.');
+    const crop = x.crop === undefined || x.crop === null ? [0, 0, 1, 1] : x.crop;
+    list(crop, 4, 'image crop');
+    check(crop.length === 4 && crop.every(v => Number.isFinite(v) && v >= 0 && v <= 1), 'A crop uses four fractions between 0 and 1.');
+    check(crop[2] > 0 && crop[3] > 0 && crop[0] + crop[2] <= 1.00000001 && crop[1] + crop[3] <= 1.00000001, 'A crop must fit inside the image.');
+    r.crop = crop.map(Number);
+    r.note = string(x.note || '', 1000, 'Image note');
+    return r;
+  }
+  function regionToDisplay(image, region) {
+    const img = imageRecord(image);
+    list(region, 4, 'image region');
+    check(region.length === 4 && region.every(v => Number.isFinite(v)), 'A region is four finite numbers.');
+    const c = img.crop;
+    let x = (region[0] - c[0]) / c[2], y = (region[1] - c[1]) / c[3], w = region[2] / c[2], h = region[3] / c[3];
+    const visible = x + w > 1e-9 && y + h > 1e-9 && x < 1 - 1e-9 && y < 1 - 1e-9;
+    if (img.rotation === 90) { const nx = 1 - (y + h); y = x; x = nx; const t = w; w = h; h = t; }
+    else if (img.rotation === 180) { x = 1 - (x + w); y = 1 - (y + h); }
+    else if (img.rotation === 270) { const nx = y; y = 1 - (x + w); x = nx; const t = w; w = h; h = t; }
+    const clipped = x < -1e-9 || y < -1e-9 || x + w > 1 + 1e-9 || y + h > 1 + 1e-9;
+    return { visible, clipped, box: [x, y, w, h] };
+  }
+  function displayToRegion(image, box) {
+    const img = imageRecord(image);
+    list(box, 4, 'display box');
+    check(box.length === 4 && box.every(v => Number.isFinite(v)), 'A display box is four finite numbers.');
+    let x = box[0], y = box[1], w = box[2], h = box[3];
+    if (img.rotation === 90) { const nx = y; y = 1 - (x + w); x = nx; const t = w; w = h; h = t; }
+    else if (img.rotation === 180) { x = 1 - (x + w); y = 1 - (y + h); }
+    else if (img.rotation === 270) { const nx = 1 - (y + h); y = x; x = nx; const t = w; w = h; h = t; }
+    const c = img.crop;
+    return [c[0] + x * c[2], c[1] + y * c[3], w * c[2], h * c[3]];
+  }
+  // Pixel size of what the viewer sees, after cropping and rotation.
+  function displayAspect(image) {
+    const img = imageRecord(image);
+    const w = img.width * img.crop[2], h = img.height * img.crop[3];
+    return img.rotation % 180 === 0 ? { width: w, height: h } : { width: h, height: w };
+  }
+  function addImage(d, input) {
+    d = validate(d);
+    const next = copy(input || {});
+    if (!next.id) next.id = 'image-' + (d.images.length + 1);
+    check(!d.images.some(i => i.id === next.id), 'Duplicate image ID.');
+    d.images.push(imageRecord(next));
+    return validate(d);
+  }
+  // ── Symbol inventory ──────────────────────────────────────────────────────
+  const INVENTORY_TOKENS = ['whitespace', 'fixed'];
+  const INVENTORY_OPS = ['build', 'split', 'merge', 'relabel'];
+  function inventoryTokens(raw, mode, width) {
+    check(INVENTORY_TOKENS.includes(mode), 'Unknown inventory tokenization.');
+    const chars = Array.from(raw), out = [];
+    let start = -1, text = '';
+    const flush = end => { if (text) out.push({ start, end, literal: text }); text = ''; start = -1; };
+    chars.forEach((ch, i) => {
+      if (/\s/u.test(ch)) { flush(i); return; }
+      if (start < 0) start = i;
+      text += ch;
+      if (mode === 'fixed' && Array.from(text).length === width) flush(i + 1);
+    });
+    flush(chars.length);
+    return out.map((t, i) => ({ index: i, start: t.start, end: t.end, literal: t.literal }));
+  }
+  function buildInventory(d, options = {}) {
+    d = validate(d);
+    const mode = options.tokens || 'whitespace';
+    const width = mode === 'fixed' ? integer(options.width || 1, 1, 8, 'token width') : 1;
+    const tokens = inventoryTokens(d.raw, mode, width);
+    check(tokens.length > 0 && tokens.length <= 2000, 'A symbol inventory needs 1–2,000 occurrences.');
+    const byLiteral = new Map();
+    tokens.forEach(t => { if (!byLiteral.has(t.literal)) byLiteral.set(t.literal, []); byLiteral.get(t.literal).push(t.index); });
+    check(byLiteral.size <= 400, 'Use at most 400 distinct symbols in one inventory.');
+    let seq = 0;
+    const classes = Array.from(byLiteral.entries()).map(([literal, occ]) => ({
+      id: 'class-' + (++seq), label: literal,
+      note: 'Initial class: every occurrence transcribed as ' + literal + '. Not yet inspected.',
+      occurrences: occ.slice() }));
+    d.inventory = { revision: d.revision, tokens: mode, width, nextId: seq + 1, occurrences: tokens, classes,
+      history: [{ step: 1, op: 'build',
+        detail: 'Built ' + classes.length + ' classes from ' + tokens.length + ' occurrences at revision ' + d.revision +
+          '. Identical transcriptions start together; splitting them is a research decision.' }] };
+    return validate(d);
+  }
+  function requireInventory(d) { check(d.inventory, 'Build the symbol inventory before changing it.'); return d.inventory; }
+  function splitClass(d, classId, indices, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const source = inv.classes.find(c => c.id === classId);
+    check(source, 'Unknown symbol class.');
+    const chosen = Array.from(new Set(list(indices, 2000, 'selected occurrences')
+      .map(i => integer(i, 0, inv.occurrences.length - 1, 'occurrence index')))).sort((a, b) => a - b);
+    check(chosen.length > 0, 'Select at least one occurrence to split out.');
+    check(chosen.every(i => source.occurrences.includes(i)), 'Every selected occurrence must belong to the class being split.');
+    check(chosen.length < source.occurrences.length, 'Splitting every occurrence would empty the class; relabel it instead.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why these occurrences are a different symbol.');
+    const id = 'class-' + inv.nextId++;
+    const before = source.label;
+    source.occurrences = source.occurrences.filter(i => chosen.indexOf(i) < 0);
+    inv.classes.push({ id, label: string(label, 200, 'Class label'), note: reason, occurrences: chosen });
+    check(label.trim(), 'The new class needs a label.');
+    inv.history.push({ step: inv.history.length + 1, op: 'split',
+      detail: 'Split occurrences ' + chosen.join(', ') + ' out of ' + source.id + ' (' + before + ') into ' + id +
+        ' (' + label + '). Remaining occurrences keep their earlier assignment. Reason: ' + reason });
+    return validate(d);
+  }
+  function mergeClasses(d, ids, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const chosen = list(ids, 50, 'merged classes').map(id => {
+      const c = inv.classes.find(x => x.id === id); check(c, 'Unknown symbol class.'); return c; });
+    check(new Set(ids).size === chosen.length, 'List each merged class once.');
+    check(chosen.length >= 2, 'Select at least two classes to merge.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why these are one symbol.');
+    check(typeof label === 'string' && label.trim(), 'The merged class needs a label.');
+    const kept = chosen[0];
+    const prior = chosen.map(c => c.id + ' labelled ' + c.label + ' (' + c.note + ')').join(' | ');
+    const occ = []; chosen.forEach(c => c.occurrences.forEach(i => occ.push(i)));
+    kept.occurrences = Array.from(new Set(occ)).sort((a, b) => a - b);
+    kept.label = string(label, 200, 'Class label'); kept.note = reason;
+    inv.classes = inv.classes.filter(c => c === kept || chosen.indexOf(c) < 0);
+    inv.history.push({ step: inv.history.length + 1, op: 'merge',
+      detail: 'Merged into ' + kept.id + ' as ' + label + '. Earlier assignments were: ' + prior + '. Reason: ' + reason });
+    return validate(d);
+  }
+  function relabelClass(d, classId, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const c = inv.classes.find(x => x.id === classId); check(c, 'Unknown symbol class.');
+    check(typeof label === 'string' && label.trim(), 'A class needs a label.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why the label changed.');
+    const before = c.label;
+    c.label = string(label, 200, 'Class label'); c.note = reason;
+    inv.history.push({ step: inv.history.length + 1, op: 'relabel',
+      detail: 'Relabelled ' + classId + ' from ' + before + ' to ' + label + '. Reason: ' + reason });
+    return validate(d);
+  }
+  // Every occurrence of a class, with the spans and image regions recorded over it.
+  function classOccurrences(d, classId) {
+    d = validate(d); const inv = requireInventory(d);
+    const c = inv.classes.find(x => x.id === classId); check(c, 'Unknown symbol class.');
+    return c.occurrences.map(i => {
+      const o = inv.occurrences[i];
+      const spans = d.spans.filter(s => s.revision === inv.revision && s.start < o.end && s.end > o.start);
+      return { index: i, start: o.start, end: o.end, literal: o.literal,
+        spans: spans.map(s => s.id),
+        regions: spans.filter(s => s.region).map(s => ({ span: s.id, imageId: s.imageId || '', imageName: s.imageName || '', region: s.region.slice() })) };
+    });
+  }
+  // The reverse direction: which transcription characters a recorded region covers.
+  function regionOccurrences(d, spanId) {
+    d = validate(d);
+    const s = d.spans.find(x => x.id === spanId); check(s, 'Unknown evidence span.');
+    const inv = d.inventory;
+    const classes = [];
+    if (inv && inv.revision === s.revision) inv.classes.forEach(c => {
+      const hit = c.occurrences.filter(i => { const o = inv.occurrences[i]; return o.start < s.end && o.end > s.start; });
+      if (hit.length) classes.push({ id: c.id, label: c.label, occurrences: hit });
+    });
+    return { span: s.id, revision: s.revision, start: s.start, end: s.end, literal: s.literal,
+      imageId: s.imageId || '', imageName: s.imageName || '', region: s.region ? s.region.slice() : null, classes };
+  }
+  // ── Hypothesis register ───────────────────────────────────────────────────
+  const CONFIDENCE = ['unsupported', 'possible', 'probable', 'well-supported', 'contradicted'];
+  function addHypothesis(d, input) {
+    d = validate(d);
+    const h = copy(input || {});
+    h.id = 'hypothesis-' + (d.hypotheses.length + 1);
+    h.supports = h.supports || []; h.contradicts = h.contradicts || [];
+    h.alternatives = h.alternatives || []; h.note = h.note || '';
+    d.hypotheses.push(h);
+    return validate(d);
+  }
+  // ── Investigation bundle ──────────────────────────────────────────────────
+  const BUNDLE_KIND = 'cipher-museum-investigation';
+  const BUNDLE_VERSION = 1;
+  const MODEL_BUILD = 'research-model-2026-10-29';
+  // A declared NON-cryptographic 64-bit fingerprint. It detects a changed input so
+  // stale results can be invalidated; it is not an integrity or authenticity check.
+  function fingerprint(text) {
+    string(text, 4000000, 'Fingerprint input');
+    let a = 0x811c9dc5, b = 0x01000193;
+    for (let i = 0; i < text.length; i++) {
+      const c = text.charCodeAt(i);
+      a = Math.imul(a ^ c, 16777619) >>> 0;
+      b = Math.imul(b + c + i, 2246822519) >>> 0; b = (b ^ b >>> 13) >>> 0;
+    }
+    return (a >>> 0).toString(16).padStart(8, '0') + (b >>> 0).toString(16).padStart(8, '0');
+  }
+  function lockMap(x, label) {
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid ' + label + '.');
+    const out = {};
+    Object.entries(x).forEach(([k, v]) => { string(k, 40, label + ' symbol'); check(/^[A-Z]$/.test(v), 'A lock names one A–Z letter.'); out[k] = v; });
+    check(Object.keys(out).length <= 100, 'Too many locked mappings.');
+    return out;
+  }
+  function searchState(s) {
+    check(s && typeof s === 'object' && !Array.isArray(s), 'Invalid solver state.');
+    return { algorithm: string(s.algorithm || 'annealing', 40, 'Solver algorithm'),
+      raw: string(s.raw || '', 12000, 'Solver input'),
+      seed: integer(s.seed === undefined ? 0 : s.seed, 0, 4294967295, 'seed'),
+      steps: integer(s.steps === undefined ? 1 : s.steps, 1, 100000, 'search budget'),
+      beam: integer(s.beam === undefined ? 0 : s.beam, 0, 2000, 'beam width'),
+      locks: lockMap(s.locks || {}, 'locked key'),
+      elapsedMs: integer(s.elapsedMs === undefined ? 0 : s.elapsedMs, 0, 86400000, 'elapsed time'),
+      // Recorded at the time the result was produced, so a later edit shows up as stale.
+      inputFingerprint: s.inputFingerprint === undefined
+        ? fingerprint(string(s.raw || '', 12000, 'Solver input'))
+        : string(s.inputFingerprint, 32, 'Solver input fingerprint') };
+  }
+  function segmentationState(s) {
+    check(s && typeof s === 'object' && !Array.isArray(s), 'Invalid segmentation state.');
+    return { digits: string(s.digits || '', 200, 'Digit stream'),
+      key: (() => { const k = s.key || {}; normalizeCodes(Object.keys(k).length ? k : { 0: 'A' }); return copy(k); })(),
+      boundaries: list(s.boundaries || [], 159, 'locked boundaries').map(b => integer(b, 1, 200, 'locked boundary')),
+      budget: integer(s.budget === undefined ? 10000 : s.budget, 1, 20000, 'path budget'),
+      scoring: string(s.scoring || 'neutral', 60, 'Segmentation scoring'),
+      lineBreaks: string(s.lineBreaks || 'boundary', 20, 'Line-break policy'),
+      inputFingerprint: s.inputFingerprint === undefined
+        ? fingerprint(string(s.digits || '', 200, 'Digit stream') + '|' + JSON.stringify(s.key || {}))
+        : string(s.inputFingerprint, 32, 'Segmentation input fingerprint') };
+  }
+  function candidateRecord(c) {
+    check(c && typeof c === 'object' && !Array.isArray(c), 'Invalid candidate record.');
+    return { plaintext: string(c.plaintext || '', 20000, 'Candidate plaintext'),
+      score: (check(Number.isFinite(c.score), 'A candidate needs a finite score.'), c.score),
+      key: lockMap(c.key || {}, 'candidate key'),
+      chosen: c.chosen === true,
+      provenance: string(c.provenance || '', 1000, 'Candidate provenance'),
+      verified: false };
+  }
+  function bundle(d, state = {}) {
+    d = validate(d);
+    const s = state && typeof state === 'object' ? state : {};
+    const value = {
+      version: BUNDLE_VERSION, kind: BUNDLE_KIND,
+      title: string(s.title || '', 200, 'Investigation title'),
+      created: string(s.created || '', 40, 'Bundle timestamp'),
+      tool: { modelBuild: MODEL_BUILD, evidenceVersion: d.version,
+        scoringModel: string(s.scoringModel || '', 200, 'Scoring-model identity'),
+        solver: string(s.solver || '', 200, 'Solver identity') },
+      evidence: d,
+      selectedLayer: string(s.selectedLayer || '', 100, 'Selected derived layer'),
+      keyRevisions: list(s.keyRevisions || [], 50, 'key revisions').map(k => ({
+        at: string(k.at || '', 40, 'Key revision time'),
+        reason: string(k.reason || '', 1000, 'Key revision reason'),
+        locks: lockMap(k.locks || {}, 'locked key') })),
+      search: s.search ? searchState(s.search) : null,
+      segmentation: s.segmentation ? segmentationState(s.segmentation) : null,
+      candidates: list(s.candidates || [], 20, 'retained candidates').map(candidateRecord),
+      images: d.images.map(i => ({ id: i.id, name: i.name, sha256: i.sha256, width: i.width, height: i.height,
+        rotation: i.rotation, crop: i.crop.slice() })),
+      imageBytes: 'Image bytes are deliberately not included. Reopen each file locally; the recorded hash tells you whether the bytes match.',
+      sourceFingerprint: fingerprint(d.raw),
+      limits: 'Replay needs the same solver and scoring-model build, not only the same seed. A recorded filename or hash identifies bytes; it does not establish that an image is the archival object it claims to be.'
+    };
+    return openBundle(copy(value));
+  }
+  function openBundle(value) {
+    check(value && typeof value === 'object' && !Array.isArray(value), 'This file is not an investigation bundle.');
+    check(value.kind === BUNDLE_KIND, 'This file is not a Cipher Museum investigation bundle.');
+    check(value.version === BUNDLE_VERSION,
+      'Unsupported investigation-bundle version ' + value.version + '; this workbench reads version ' + BUNDLE_VERSION + '.');
+    check(JSON.stringify(value).length <= 1500000, 'Investigation bundle exceeds 1,500,000 characters.');
+    const b = copy(value);
+    b.title = string(b.title || '', 200, 'Investigation title');
+    b.created = string(b.created || '', 40, 'Bundle timestamp');
+    check(b.tool && typeof b.tool === 'object', 'A bundle must record the tools that produced it.');
+    b.tool.modelBuild = string(b.tool.modelBuild || '', 100, 'Model build');
+    b.tool.scoringModel = string(b.tool.scoringModel || '', 200, 'Scoring-model identity');
+    b.tool.solver = string(b.tool.solver || '', 200, 'Solver identity');
+    b.evidence = validate(b.evidence);
+    b.selectedLayer = string(b.selectedLayer || '', 100, 'Selected derived layer');
+    check(!b.selectedLayer || b.selectedLayer.indexOf('revision-') === 0 || b.evidence.layers.some(l => l.id === b.selectedLayer),
+      'The bundle names a derived layer that its evidence record does not contain.');
+    b.keyRevisions = list(b.keyRevisions || [], 50, 'key revisions').map(k => ({
+      at: string(k.at || '', 40, 'Key revision time'), reason: string(k.reason || '', 1000, 'Key revision reason'),
+      locks: lockMap(k.locks || {}, 'locked key') }));
+    b.search = b.search ? searchState(b.search) : null;
+    b.segmentation = b.segmentation ? segmentationState(b.segmentation) : null;
+    b.candidates = list(b.candidates || [], 20, 'retained candidates').map(candidateRecord);
+    b.images = list(b.images || [], 50, 'image manifest').map(i => ({
+      id: string(i.id, 100, 'Image ID'), name: string(i.name, 500, 'Image filename'),
+      sha256: string(i.sha256 || '', 64, 'Image hash'),
+      width: integer(i.width, 1, 100000, 'image width'), height: integer(i.height, 1, 100000, 'image height'),
+      rotation: integer(i.rotation, 0, 270, 'image rotation'), crop: i.crop }));
+    b.sourceFingerprint = string(b.sourceFingerprint || '', 32, 'Source fingerprint');
+    // Stale results are reported, never silently reused.
+    const sourceMoved = b.sourceFingerprint !== fingerprint(b.evidence.raw);
+    const searchMoved = !!(b.search && b.search.inputFingerprint !== fingerprint(b.search.raw));
+    const segmentationMoved = !!(b.segmentation &&
+      b.segmentation.inputFingerprint !== fingerprint(b.segmentation.digits + '|' + JSON.stringify(b.segmentation.key)));
+    b.stale = { source: sourceMoved, search: searchMoved, segmentation: segmentationMoved,
+      modelBuild: b.tool.modelBuild !== MODEL_BUILD,
+      candidates: b.candidates.length > 0 && (sourceMoved || searchMoved) };
+    return b;
+  }
+  // ── Beam-search solver baseline ───────────────────────────────────────────
+  // A second, bounded homophonic baseline alongside the annealing search.
+  // Extension order is DISCLOSED: symbols are fixed in order of first appearance,
+  // so every extension lengthens the decoded prefix. Partial hypotheses are scored
+  // on that decoded prefix. The heuristic is informative but NOT admissible:
+  // beam pruning can discard the branch that contains the correct key.
+  function beamSearch(tokens, options, score, progress = () => {}) {
+    parseSymbols(tokens.join(' '));
+    const opts = options && typeof options === 'object' ? options : {};
+    const symbols = Array.from(new Set(tokens));
+    const beam = integer(opts.beam === undefined ? 50 : opts.beam, 1, 2000, 'beam width');
+    const branch = integer(opts.branch === undefined ? 26 : opts.branch, 1, 26, 'extensions per hypothesis');
+    const seed = integer(opts.seed === undefined ? 0 : opts.seed, 0, 4294967295, 'seed');
+    const locks = opts.locks || {};
+    check(locks && typeof locks === 'object' && !Array.isArray(locks), 'Invalid locked key.');
+    Object.entries(locks).forEach(([s, v]) => check(symbols.indexOf(s) >= 0 && /^[A-Z]$/.test(v),
+      'A lock must name a present symbol and one A–Z letter.'));
+    const alphabet = 'ETAOINSHRDLCUMWFGYPBVKJXQZ'.slice(0, branch);
+    const order = symbols.filter(s => !own(locks, s));
+    // Longest token prefix decodable once the first k free symbols are assigned.
+    const known = new Set(Object.keys(locks));
+    const coverage = [];
+    for (let k = 0; k <= order.length; k++) {
+      if (k > 0) known.add(order[k - 1]);
+      let len = 0; while (len < tokens.length && known.has(tokens[len])) len++;
+      coverage.push(len);
+    }
+    check(beam * branch * tokens.length * Math.max(1, order.length) <= 400000000,
+      'Reduce the beam width, branching factor or input length: the comparison budget is 400 million symbol evaluations.');
+    const decodeWith = (assign, len) => { let t = ''; for (let i = 0; i < len; i++) t += assign[tokens[i]]; return t; };
+    const base = Object.assign(Object.create(null), locks);
+    let frontier = [{ assign: base, score: 0, covered: coverage[0] }];
+    if (coverage[0] > 0) {
+      const v = score(decodeWith(base, coverage[0]));
+      check(Number.isFinite(v), 'Scoring model returned an invalid value.');
+      frontier[0].score = v;
+    }
+    const trace = []; let evaluations = 0;
+    const rank = (a, b) => b.score - a.score || keyString(a.assign).localeCompare(keyString(b.assign));
+    function keyString(assign) { return symbols.map(s => assign[s] || '.').join(''); }
+    for (let k = 0; k < order.length; k++) {
+      const symbol = order[k], len = coverage[k + 1], next = [];
+      for (const hyp of frontier) for (const letter of alphabet) {
+        const assign = Object.assign(Object.create(null), hyp.assign); assign[symbol] = letter;
+        let value = hyp.score;
+        if (len > hyp.covered) {
+          value = score(decodeWith(assign, len)); evaluations++;
+          check(Number.isFinite(value), 'Scoring model returned an invalid value.');
+        }
+        next.push({ assign, score: value, covered: len });
+      }
+      next.sort(rank);
+      frontier = next.slice(0, beam);
+      trace.push({ step: k + 1, score: frontier[0].score, hypotheses: next.length, retained: frontier.length });
+      progress({ step: k + 1, steps: order.length, score: frontier[0].score });
+    }
+    const candidates = [];
+    const seen = new Set();
+    for (const hyp of frontier) {
+      const plaintext = tokens.map(t => hyp.assign[t]).join('');
+      if (seen.has(plaintext)) continue; seen.add(plaintext);
+      const value = score(plaintext); evaluations++;
+      check(Number.isFinite(value), 'Scoring model returned an invalid value.');
+      const key = {}; symbols.forEach(s => { key[s] = hyp.assign[s]; });
+      candidates.push({ plaintext, score: value, step: order.length, key });
+    }
+    candidates.sort((a, b) => b.score - a.score || a.plaintext.localeCompare(b.plaintext));
+    candidates.length = Math.min(candidates.length, 5);
+    if (!candidates.length) {
+      const key = {}; symbols.forEach(s => { key[s] = locks[s]; });
+      const plaintext = tokens.map(t => locks[t]).join('');
+      candidates.push({ plaintext, score: score(plaintext), step: 0, key });
+    }
+    return { candidates, trace, seed, requestedSteps: order.length, completedSteps: order.length,
+      task: order.length ? 'key-recovery-candidates' : 'known-key-application',
+      locks: copy(locks), model: score.modelId || 'custom-scoring-function', verified: false,
+      algorithm: 'beam-search', beam, branch, evaluations, admissible: false,
+      extensionOrder: order.slice(),
+      extensionOrderNote: 'Free symbols are fixed in order of first appearance, so every extension lengthens the decoded prefix that is scored.',
+      scope: 'Letter homophones only; no word codes, nulls, control signs or historical-language model. ' +
+        'Partial scores are non-admissible: beam pruning can discard the branch holding the correct key.' };
+  }
   function metrics(expected, actual, expectedKey, actualKey) {
     // Levenshtein distance keeps insertions/deletions distinct from key errors.
     const a = Array.from(expected), b = Array.from(actual); let row = b.map((_,i) => i + 1); row.unshift(0);
@@ -80934,12 +82441,23 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     check(['diagonal', 'row-major'].includes(kind), 'Unknown route.');
     return Array.from({length:153}, (_, i) => kind === 'diagonal' ? (i % 9) * 17 + (2 * i % 17) : i);
   }
-  const api = { TYPES, KEY_TYPES, create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey, segment, rng, parseSymbols, search, metrics, url, z340Route };
+  const api = { TYPES, KEY_TYPES, SEG_TYPES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
+    create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey,
+    segment, segmentMetrics, normalizeCodes, rng, parseSymbols, search, beamSearch, metrics, url, z340Route,
+    imageRecord, addImage, regionToDisplay, displayToRegion, displayAspect,
+    inventoryTokens, buildInventory, splitClass, mergeClasses, relabelClass, classOccurrences, regionOccurrences,
+    addHypothesis, bundle, openBundle, fingerprint };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.MuseumResearch = api;
 })(typeof window !== 'undefined' ? window : globalThis);
 ```
 
+
+---
+
+# javascript appendix 6
+
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-ui.js
 
@@ -80948,8 +82466,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-ui.js`
-- Served SHA-256: `848a83b9b5fdd26f278b1843e1b6cf5a75fa162788be29c75a19df4e83cacba6`
-- Readable-source SHA-256: `848a83b9b5fdd26f278b1843e1b6cf5a75fa162788be29c75a19df4e83cacba6`
+- Served SHA-256: `08e08c4ece2db4bf019cb8ab04f7aed993789b6206f6ae8d9300643223f45352`
+- Readable-source SHA-256: `08e08c4ece2db4bf019cb8ab04f7aed993789b6206f6ae8d9300643223f45352`
 
 
 ```javascript
@@ -80957,14 +82475,23 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 'use strict';
 (function () {
   const R = window.MuseumResearch, $ = id => document.getElementById(id);
-  let doc = R.create(''), previous = null, imageURL = null, worker = null, receipt = null, searchGeneration = 0;
+  let doc = R.create(''), previous = null, worker = null, receipt = null, searchGeneration = 0;
+  let imageURL = null, pendingImage = null, activeImage = null, languageSet = null, languageError = '';
+  let selectedClass = '', selectedOccurrences = new Set(), lastCandidate = '';
   const sourceFields = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName'];
+  const BASELINE = { id: 'museum-prose-quadgram-v1', label: 'Museum modern-English baseline (disclosed: modern, museum prose)' };
   function status(message, error = false) { $('record-status').textContent = message; $('record-status').dataset.error = String(error); }
+  function note(id, message, error = false) { $(id).textContent = message; $(id).dataset.error = String(error); }
   function guard(fn) { return function () { try { fn(); } catch (e) { status(e.message, true); } }; }
   function el(tag, text, parent) { const n = document.createElement(tag); n.textContent = text; if (parent) parent.appendChild(n); return n; }
   function download(name, value) {
     const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], {type:'application/json'}));
     const a = el('a', ''); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function numbers(value, count, label) {
+    const parts = String(value).split(',').map(x => Number(x.trim()));
+    if (parts.length !== count || parts.some(n => !Number.isFinite(n))) throw new Error('Enter ' + count + ' numbers for ' + label + '.');
+    return parts;
   }
   function pending() { return $('source-raw').value !== doc.raw; }
   function commit() {
@@ -80973,27 +82500,242 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     next = R.validate(next); previous = doc; doc = next; $('restore-record').disabled = false;
     $('revision-reason').value = ''; render();
   }
-  function paintRegion(region) {
-    const box = $('image-region'); box.hidden = !region || !imageURL;
-    if (region) ['left','top','width','height'].forEach((f,i) => { box.style[f] = (region[i] * 100) + '%'; });
+  function adopt(next, message) { previous = doc; doc = R.validate(next); $('restore-record').disabled = false; render(); if (message) status(message); }
+
+  // ── Images and coordinate transforms ──────────────────────────────────────
+  function currentImage() { return doc.images.find(i => i.id === $('image-select').value) || null; }
+  function paintRegion(region, image) {
+    const box = $('image-region');
+    if (!region || !image || !imageURL || !activeImage || activeImage.id !== image.id) { box.hidden = true; return; }
+    const placed = R.regionToDisplay(image, region);
+    box.hidden = !placed.visible;
+    if (!placed.visible) return;
+    ['left','top','width','height'].forEach((f, i) => { box.style[f] = (placed.box[i] * 100) + '%'; });
+    box.dataset.clipped = String(placed.clipped);
   }
-  function clearImage() { if (imageURL) URL.revokeObjectURL(imageURL); imageURL = null; $('source-image').removeAttribute('src'); $('image-wrap').hidden = true; $('image-file').value = ''; }
+  function applyView(image) {
+    const img = $('source-image');
+    if (!image) { img.style.transform = ''; img.style.clipPath = ''; return; }
+    const c = image.crop;
+    // The crop is expressed as a clip of the whole image, so recorded region
+    // percentages and the visible picture stay in the same coordinate space.
+    img.style.clipPath = 'inset(' + (100 * c[1]) + '% ' + (100 * (1 - c[0] - c[2])) + '% ' + (100 * (1 - c[1] - c[3])) + '% ' + (100 * c[0]) + '%)';
+    img.style.transform = 'rotate(' + image.rotation + 'deg)';
+  }
+  function clearImage() {
+    if (imageURL) URL.revokeObjectURL(imageURL);
+    imageURL = null; activeImage = null; pendingImage = null;
+    $('source-image').removeAttribute('src'); $('image-wrap').hidden = true;
+    $('image-file').value = ''; $('image-register').disabled = true; $('image-apply-view').disabled = true;
+    $('image-region').hidden = true;
+  }
+  async function sha256(file) {
+    if (!self.crypto || !self.crypto.subtle) return '';
+    const digest = await self.crypto.subtle.digest('SHA-256', await file.arrayBuffer());
+    return Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
+  }
+  $('image-file').onchange = async function () {
+    const file = this.files[0]; if (!file) return;
+    if (!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size > 8000000) { note('image-status','Choose a PNG, JPEG or WebP image under 8 MB.',true); return; }
+    if (imageURL) URL.revokeObjectURL(imageURL);
+    imageURL = URL.createObjectURL(file);
+    const img = $('source-image');
+    img.src = imageURL; $('image-wrap').hidden = false;
+    const hash = await sha256(file);
+    img.onload = () => {
+      pendingImage = { name: file.name, width: img.naturalWidth, height: img.naturalHeight, sha256: hash };
+      $('image-register').disabled = false; $('image-apply-view').disabled = false;
+      const known = doc.images.find(i => i.name === file.name);
+      if (known && hash && known.sha256 && known.sha256 !== hash) {
+        note('image-status','Different bytes under a recorded filename. ' + file.name + ' was registered with hash ' + known.sha256.slice(0,12) + '…, this file hashes to ' + hash.slice(0,12) + '…. Registering it will add a second image record rather than overwrite the first.', true);
+      } else if (known) {
+        activeImage = known; $('image-select').value = known.id; applyView(known);
+        note('image-status','Matches registered image ' + known.id + ' (' + known.name + '), ' + known.width + '×' + known.height + ' pixels' + (hash ? ', same content hash' : '') + '. Byte identity is not an authenticity check.');
+      } else {
+        note('image-status','Opened ' + file.name + ' at ' + img.naturalWidth + '×' + img.naturalHeight + ' pixels' + (hash ? ', SHA-256 ' + hash.slice(0,12) + '…' : ', no hash available in this browser') + '. Register it to attach regions.');
+      }
+      render();
+    };
+  };
+  $('source-image').onerror = () => { clearImage(); note('image-status','The selected file could not be decoded as an image.',true); };
+  $('image-register').onclick = guard(() => {
+    if (!pendingImage) throw new Error('Open an image first.');
+    const next = R.addImage(doc, Object.assign({}, pendingImage, {
+      rotation: Number($('image-rotation').value), crop: numbers($('image-crop').value, 4, 'the crop'), note: $('image-note').value }));
+    adopt(next, '');
+    const added = doc.images[doc.images.length - 1];
+    activeImage = added; $('image-select').value = added.id; applyView(added);
+    note('image-status','Registered ' + added.id + ': ' + added.name + ', ' + added.width + '×' + added.height + ' pixels. The bytes stay on your device; only the filename, size and hash are exported.');
+    render();
+  });
+  $('image-apply-view').onclick = guard(() => {
+    const image = currentImage();
+    if (!image) throw new Error('Register the image before changing its view.');
+    image.rotation = Number($('image-rotation').value);
+    image.crop = numbers($('image-crop').value, 4, 'the crop');
+    adopt(R.validate(doc), '');
+    activeImage = doc.images.find(i => i.id === image.id); applyView(activeImage);
+    const a = R.displayAspect(activeImage);
+    note('image-status','View updated: rotation ' + activeImage.rotation + '°, visible area ' + Math.round(a.width) + '×' + Math.round(a.height) + ' pixels. Recorded regions were not rewritten.');
+  });
+  $('image-select').onchange = () => {
+    const image = currentImage();
+    if (!image) return;
+    $('image-rotation').value = String(image.rotation);
+    $('image-crop').value = image.crop.join(', ');
+    if (activeImage && activeImage.id === image.id) applyView(image);
+    note('image-status', activeImage && activeImage.id === image.id
+      ? 'Showing ' + image.id + '.'
+      : 'Selected ' + image.id + ' (' + image.name + '). Open that file above to see its regions.');
+    render();
+  };
+
+  // ── Symbol inventory ──────────────────────────────────────────────────────
+  function inventory() { return doc.inventory; }
+  function renderOccurrences() {
+    const box = $('occurrence-list'); box.replaceChildren();
+    const inv = inventory(); if (!inv) return;
+    const klass = inv.classes.find(c => c.id === selectedClass);
+    if (!klass) return;
+    const linked = R.classOccurrences(doc, klass.id);
+    linked.forEach(o => {
+      const b = el('button', o.literal + ' @' + (o.start + 1) + (o.regions.length ? ' ▣' : ''), box);
+      b.type = 'button'; b.className = 'occurrence';
+      b.setAttribute('aria-pressed', String(selectedOccurrences.has(o.index)));
+      b.dataset.selected = String(selectedOccurrences.has(o.index));
+      b.title = 'Occurrence ' + o.index + ', characters ' + (o.start + 1) + '–' + o.end +
+        (o.spans.length ? '; spans ' + o.spans.join(', ') : '; no evidence span') +
+        (o.regions.length ? '; ' + o.regions.length + ' image region(s)' : '');
+      b.onclick = () => {
+        if (selectedOccurrences.has(o.index)) selectedOccurrences.delete(o.index); else selectedOccurrences.add(o.index);
+        // Selecting an occurrence highlights its crop on the registered image.
+        const region = o.regions[0];
+        if (region) {
+          const image = doc.images.find(i => i.id === region.imageId) || doc.images.find(i => i.name === region.imageName);
+          paintRegion(region.region, image);
+          note('inventory-status','Occurrence ' + o.index + ' is linked to span ' + region.span + ' on ' + (image ? image.id : region.imageName) +
+            (activeImage && image && activeImage.id === image.id ? '. Its region is highlighted above.' : '. Open that image to see the region.'));
+        } else {
+          $('image-region').hidden = true;
+          note('inventory-status','Occurrence ' + o.index + ' has no recorded image region. ' + selectedOccurrences.size + ' occurrence(s) selected.');
+        }
+        renderOccurrences();
+      };
+    });
+  }
+  function renderInventory() {
+    const inv = inventory();
+    const select = $('class-select'), merge = $('merge-with');
+    select.replaceChildren(); merge.replaceChildren();
+    $('inventory-history').textContent = inv ? inv.history.map(h => h.step + '. ' + h.op + ' — ' + h.detail).join('\n\n') : '';
+    if (!inv) { $('occurrence-list').replaceChildren(); return; }
+    inv.classes.forEach(c => {
+      const o = el('option', c.id + ' · ' + c.label + ' · ' + c.occurrences.length + ' occurrence(s)', select); o.value = c.id;
+      const m = el('option', c.id + ' · ' + c.label, merge); m.value = c.id;
+    });
+    if (!inv.classes.some(c => c.id === selectedClass)) selectedClass = inv.classes.length ? inv.classes[0].id : '';
+    select.value = selectedClass;
+    renderOccurrences();
+  }
+  $('inventory-build').onclick = guard(() => {
+    if (pending()) throw new Error('Save the revised source before building an inventory from it.');
+    adopt(R.buildInventory(doc, { tokens: $('inventory-tokens').value, width: Number($('inventory-width').value) }), '');
+    selectedClass = ''; selectedOccurrences.clear(); renderInventory();
+    note('inventory-status','Built ' + doc.inventory.classes.length + ' classes from ' + doc.inventory.occurrences.length +
+      ' occurrences at revision ' + doc.inventory.revision + '. Identical transcriptions start together; splitting them is your decision to record.');
+  });
+  $('class-select').onchange = () => { selectedClass = $('class-select').value; selectedOccurrences.clear(); renderOccurrences(); note('inventory-status','Selected ' + selectedClass + '.'); };
+  $('inventory-split').onclick = guard(() => {
+    if (!selectedOccurrences.size) throw new Error('Select the occurrences to split out first.');
+    adopt(R.splitClass(doc, selectedClass, Array.from(selectedOccurrences), $('split-label').value, $('split-reason').value), '');
+    const added = doc.inventory.classes[doc.inventory.classes.length - 1];
+    selectedOccurrences.clear(); selectedClass = added.id; renderInventory();
+    note('inventory-status','Split ' + added.occurrences.length + ' occurrence(s) into ' + added.id + '. The occurrences you did not select stayed where they were.');
+  });
+  $('inventory-merge').onclick = guard(() => {
+    const other = $('merge-with').value;
+    if (!other || other === selectedClass) throw new Error('Choose a different class to merge with.');
+    adopt(R.mergeClasses(doc, [selectedClass, other], $('merge-label').value, $('merge-reason').value), '');
+    selectedOccurrences.clear(); renderInventory();
+    note('inventory-status','Merged. Both earlier labels and their reasons are kept in the decision history below.');
+  });
+
+  // ── Hypothesis register ───────────────────────────────────────────────────
+  function evidenceLines(value) {
+    return value.split('\n').map(line => line.trim()).filter(Boolean).map(line => {
+      const bar = line.indexOf('|');
+      if (bar < 0) throw new Error('Write each piece of evidence as "identifier | what it shows".');
+      return { ref: line.slice(0, bar).trim(), note: line.slice(bar + 1).trim() };
+    });
+  }
+  function renderHypotheses() {
+    const box = $('hypothesis-list'); box.replaceChildren();
+    doc.hypotheses.forEach(h => {
+      const card = el('div', '', box); card.className = 'research-card';
+      el('h3', h.id + ' · ' + h.confidence, card);
+      el('p', h.claim, card);
+      el('p', 'Supporting: ' + (h.supports.map(e => e.ref + ' — ' + e.note).join(' · ') || 'none recorded'), card);
+      el('p', 'Contradicting: ' + (h.contradicts.map(e => e.ref + ' — ' + e.note).join(' · ') || 'none recorded'), card);
+      el('p', 'Unresolved alternatives: ' + (h.alternatives.join(' · ') || 'none recorded'), card);
+      if (h.note) el('p', h.note, card);
+    });
+  }
+  $('hypothesis-add').onclick = guard(() => {
+    adopt(R.addHypothesis(doc, { claim: $('hypothesis-claim').value, confidence: $('hypothesis-confidence').value,
+      supports: evidenceLines($('hypothesis-supports').value), contradicts: evidenceLines($('hypothesis-contradicts').value),
+      alternatives: $('hypothesis-alternatives').value.split('\n').map(x => x.trim()).filter(Boolean),
+      note: $('hypothesis-note').value }), 'Hypothesis recorded with its evidence on both sides. Applying a key cleanly does not promote a claim.');
+    renderHypotheses();
+  });
+
+  // ── Rendering ─────────────────────────────────────────────────────────────
   function render() {
     $('source-raw').value = doc.raw;
     sourceFields.forEach(f => { $('source-' + f).value = doc.source[f]; });
     $('revision-label').textContent = 'Current revision ' + doc.revision + ' · ' + Array.from(doc.raw).length + ' Unicode characters. Original transcription retained.';
     const revisions = $('revision-list'); revisions.replaceChildren();
     doc.revisions.forEach(r => { const d = el('details','',revisions); el('summary','Revision ' + r.id + ' — ' + r.reason,d); el('pre',r.raw,d); });
+    const imageSelect = $('image-select'), spanImage = $('span-image');
+    const keepImage = imageSelect.value, keepSpanImage = spanImage.value;
+    imageSelect.replaceChildren(); spanImage.replaceChildren();
+    el('option','No image region',spanImage).value = '';
+    const imageList = $('image-list'); imageList.replaceChildren();
+    doc.images.forEach(i => {
+      const o = el('option', i.id + ' · ' + i.name, imageSelect); o.value = i.id;
+      const s = el('option', i.id + ' · ' + i.name, spanImage); s.value = i.id;
+      const card = el('div','',imageList); card.className = 'research-card';
+      el('h3', i.id + ' · ' + i.name, card);
+      const aspect = R.displayAspect(i);
+      el('p','Original ' + i.width + '×' + i.height + ' pixels. Display rotation ' + i.rotation + '°, crop ' + i.crop.join(', ') +
+        ', visible ' + Math.round(aspect.width) + '×' + Math.round(aspect.height) + ' pixels.', card);
+      el('p','Content hash: ' + (i.sha256 ? i.sha256 : 'not recorded') + '. Byte identity, not authenticity.', card);
+      if (i.note) el('p', i.note, card);
+    });
+    if (doc.images.some(i => i.id === keepImage)) imageSelect.value = keepImage;
+    if (doc.images.some(i => i.id === keepSpanImage)) spanImage.value = keepSpanImage;
     const spans = $('span-list'); spans.replaceChildren();
     doc.spans.forEach(s => {
       const card = el('div','',spans); card.className = 'research-card';
       el('h3',s.id + ' · ' + s.type + (s.uncertain ? ' · unresolved' : ' · recorded reading'),card);
       el('p','Revision ' + s.revision + (s.revision === doc.revision ? ' (current)' : ' (earlier source; not moved to current text)') + ', characters ' + (s.start+1) + '–' + s.end + ': ' + s.literal,card);
       el('p','Alternatives: ' + (s.alternatives.join(' / ') || 'none recorded') + '. Reading: ' + (s.reading || 'unresolved') + '. Reason: ' + (s.reason || 'not recorded'),card);
-      if (s.region) { el('p','Region image: '+s.imageName,card); const b = el('button','Show image region',card); b.type = 'button'; b.onclick = () => {
-        if (!imageURL || !$('image-file').files[0] || $('image-file').files[0].name !== s.imageName) { paintRegion(null);status('Choose the recorded image '+s.imageName+' first. A matching filename is not an authenticity check.');return; }
-        paintRegion(s.region);status('Region displayed. Verify the selected image against the archive source; filenames alone cannot establish identity.');
-      }; }
+      if (s.region) {
+        const image = doc.images.find(i => i.id === s.imageId) || doc.images.find(i => i.name === s.imageName);
+        el('p','Region image: ' + s.imageName + (s.imageId ? ' (' + s.imageId + ')' : ' (filename only; register the image to link it)'),card);
+        const b = el('button','Show image region and transcription span',card); b.type = 'button';
+        b.onclick = guard(() => {
+          // Selecting a region identifies the transcription span it covers.
+          const back = R.regionOccurrences(doc, s.id);
+          if (!image) throw new Error('Register ' + s.imageName + ' as an image before showing its regions.');
+          if (!activeImage || activeImage.id !== image.id) {
+            $('image-region').hidden = true;
+            status('Open ' + image.name + ' under “Register the source images” to display this region. A matching filename is not an authenticity check.');
+          } else { paintRegion(s.region, image); status('Region displayed on ' + image.id + '.'); }
+          const classes = back.classes.map(c => c.id + ' (' + c.label + ', ' + c.occurrences.length + ' occurrence(s) here)').join('; ');
+          el('p','This region covers characters ' + (back.start + 1) + '–' + back.end + ' of revision ' + back.revision + ': “' + back.literal + '”' +
+            (classes ? '. Symbol classes: ' + classes : '. No inventory covers this revision yet.'), card);
+        });
+      }
     });
     const layers = $('layer-list'), parent = $('layer-parent'); layers.replaceChildren(); parent.replaceChildren();
     const op = el('option','Source revision ' + doc.revision,parent); op.value = 'revision-' + doc.revision;
@@ -81002,8 +82744,9 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       const d = el('details','',layers); el('summary',l.id + ' · ' + l.kind + ' · revision ' + l.revision,d); el('p','Derived from ' + l.parent + '. ' + l.note,d); el('pre',l.text,d);
     });
     $('relations-list').textContent = JSON.stringify({keys:doc.keys,relations:doc.relations},null,2);
-    paintRegion(null);
+    renderInventory(); renderHypotheses();
   }
+
   $('save-revision').onclick = guard(() => { commit(); status('Source and revision saved in this tab. Export the record to keep it after closing.'); });
   $('restore-record').onclick = guard(() => { if (previous) { const current = doc; doc = previous; previous = current; clearImage(); render(); status('Previous record restored. Press again to return to the other record.'); } });
   $('export-record').onclick = guard(() => { commit(); download('cipher-museum-evidence-v2.json', doc); status('Evidence record exported. Local image bytes are separate.'); });
@@ -81011,19 +82754,11 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     const file = this.files[0]; if (!file) return;
     try {
       if (file.size > 750000) throw new Error('Import is limited to 750,000 bytes.');
-      const next = R.migrate(JSON.parse(await file.text())); previous = doc; doc = next; clearImage(); render(); $('restore-record').disabled = false;
+      const next = R.migrate(JSON.parse(await file.text())); previous = doc; doc = next; clearImage(); selectedClass = ''; selectedOccurrences.clear(); render(); $('restore-record').disabled = false;
       status('Imported version ' + doc.version + ' evidence record. Previous saved record is available with Restore.');
     } catch (e) { status('Import rejected; saved record retained. ' + e.message, true); }
     this.value = '';
   };
-  $('image-file').onchange = function () {
-    const file = this.files[0]; if (!file) return;
-    if (!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size > 8000000) { status('Choose a PNG, JPEG or WebP image under 8 MB.',true); return; }
-    if (imageURL) URL.revokeObjectURL(imageURL); imageURL = URL.createObjectURL(file);
-    $('source-image').src = imageURL; $('image-wrap').hidden = false; $('source-imageName').value = file.name; paintRegion(null);
-    status('Image opened locally. Save the source record to retain its filename; the image itself is not exported.');
-  };
-  $('source-image').onerror = () => { clearImage(); status('The selected file could not be decoded as an image.',true); };
   $('select-span').onclick = () => {
     const t = $('source-raw'); $('span-start').value = Array.from(t.value.slice(0,t.selectionStart)).length + 1;
     $('span-end').value = Array.from(t.value.slice(0,t.selectionEnd)).length;
@@ -81031,17 +82766,21 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   };
   $('add-span').onclick = guard(() => {
     if (pending()) throw new Error('Save the revised source before annotating it.');
-    const region = $('span-region').value.trim() ? JSON.parse('[' + $('span-region').value + ']') : null;
-    if (region && $('source-imageName').value !== doc.source.imageName) throw new Error('Save the source image filename before attaching a region.');
+    const imageId = $('span-image').value;
+    const region = $('span-region').value.trim() ? numbers($('span-region').value, 4, 'the region') : null;
+    if (region && !imageId) throw new Error('Choose the registered image this region belongs to.');
+    if (imageId && !region) throw new Error('Enter the region coordinates, or choose “No image region”.');
+    const image = doc.images.find(i => i.id === imageId);
     const next = R.annotate(doc,{start:Number($('span-start').value)-1,end:Number($('span-end').value),type:$('span-type').value,
       uncertain:$('span-uncertain').checked, alternatives:$('span-alternatives').value.split('\n').map(x=>x.trim()).filter(Boolean),
-      reading:$('span-reading').value, reason:$('span-reason').value, region});
-    previous = doc; doc = next; $('restore-record').disabled=false; render(); paintRegion(region); status('Evidence span appended. Earlier annotations remain in the record.');
+      reading:$('span-reading').value, reason:$('span-reason').value, region, imageId});
+    adopt(next, 'Evidence span appended. Earlier annotations remain in the record.');
+    if (region && image) paintRegion(region, image);
   });
   $('add-layer').onclick = guard(() => {
     if (pending()) throw new Error('Save the source revision first.');
-    const next = R.addLayer(doc,$('layer-kind').value,$('layer-parent').value,$('layer-text').value,$('layer-note').value);
-    previous=doc;doc=next;$('restore-record').disabled=false;render();status('Derived reading appended; the source has not been overwritten.');
+    adopt(R.addLayer(doc,$('layer-kind').value,$('layer-parent').value,$('layer-text').value,$('layer-note').value),
+      'Derived reading appended; the source has not been overwritten.');
   });
   ['typed-key','key-input'].forEach(id=>$(id).addEventListener('input',()=>{$('key-output').textContent='Inputs changed. Apply the key again.';}));
   $('apply-key').onclick = guard(() => {
@@ -81053,38 +82792,58 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   $('save-key').onclick = guard(() => {
     const next=R.validate(doc), entries=JSON.parse($('typed-key').value); R.validateKey(entries);
     const id='key-'+(next.keys.length+1);next.keys.push({id,title:$('key-title').value,sourceUrl:$('key-source').value,entries});
-    previous=doc;doc=R.validate(next);$('restore-record').disabled=false;render();status(id+' recorded. Add an evidence-backed relationship below if you applied it to a reading.');
+    adopt(next, id+' recorded. Add an evidence-backed relationship below if you applied it to a reading.');
   });
   $('add-relation').onclick = guard(() => {
     const next=R.validate(doc);next.relations.push({from:$('relation-from').value,to:$('relation-to').value,type:$('relation-type').value,evidence:$('relation-evidence').value});
-    previous=doc;doc=R.validate(next);$('restore-record').disabled=false;render();status('Relationship and its supporting evidence recorded. External identifiers are allowed.');
+    adopt(next, 'Relationship and its supporting evidence recorded. External identifiers are allowed.');
   });
+
+  // ── Segmentation ──────────────────────────────────────────────────────────
   let segmentation=null;
-  function invalidateSegments() { segmentation=null;$('segment-output').textContent='Inputs changed. Recompute the alternatives.'; }
-  ['segment-digits','segment-key','segment-locks','segment-budget','segment-score'].forEach(id=>$(id).addEventListener('input',invalidateSegments));
+  function invalidateSegments() { segmentation=null;$('segment-output').textContent='Inputs changed. Recompute the alternatives.';$('segment-ambiguity').replaceChildren(); }
+  ['segment-digits','segment-key','segment-locks','segment-budget','segment-score','segment-lines'].forEach(id=>$(id).addEventListener('input',invalidateSegments));
+  $('segment-lines').addEventListener('change',invalidateSegments);
   $('segment-run').onclick=guard(()=>{
-    const digits=$('segment-digits').value,key=JSON.parse($('segment-key').value),bounds=$('segment-locks').value.trim();
+    const digits=$('segment-digits').value.replace(/\r/g,''),key=JSON.parse($('segment-key').value),bounds=$('segment-locks').value.trim();
     const scoring=$('segment-score').value;
     const fit=scoring==='english' ? s=>{const letters=s.toUpperCase().replace(/[^A-Z]/g,'');return letters.length>=3 ? DetectiveLangModel.fitness(letters) : 0;} : ()=>0;
-    segmentation=R.segment(digits,key,bounds?bounds.split(',').map(s=>Number(s.trim())):[],Number($('segment-budget').value),fit);
+    segmentation=R.segment(digits,key,bounds?bounds.split(',').map(s=>Number(s.trim())):[],Number($('segment-budget').value),fit,{lineBreaks:$('segment-lines').value});
     const out=$('segment-output');out.replaceChildren();
-    el('p',(segmentation.complete?'All paths explored.':'Budget reached; alternatives may be missing.')+' '+segmentation.total+' complete paths found; '+segmentation.retained+' retained. '+segmentation.visited+' search nodes visited. Scoring: '+scoring+'.',out);
+    el('p',(segmentation.complete?'Every complete path was enumerated and scored.':'Budget reached; the retained set is a bounded sample.')+' '+
+      segmentation.total+(segmentation.totalCapped?'+':'')+' complete paths exist; '+segmentation.retained+' retained. '+segmentation.visited+' lattice nodes visited. Scoring: '+scoring+'.',out);
+    el('p',(segmentation.globalBestGuaranteed?'The highest-scoring retained path is the globally best one. ':'The globally best path is NOT guaranteed: ')+segmentation.pruning,out);
     if (!segmentation.paths.length) el('p',segmentation.complete?'No path matches this key and these boundary locks. Every digit is unresolved.':'No complete path found within the budget. This is not proof that no path exists.',out);
     segmentation.paths.forEach(p=>{
-      const d=el('div','',out);d.className='research-card';el('pre',p.codes.join(' | ')+' → '+p.text+'\nModel score: '+p.score.toFixed(2),d);
+      const d=el('div','',out);d.className='research-card';
+      el('pre',p.codes.join(' | ')+' → '+p.text+'\nModel score: '+p.score.toFixed(2)+
+        (p.alternatives.length?'\nUnresolved alternative readings: '+p.alternatives.map(a=>a.code+' → '+a.values.join('/')).join('; '):''),d);
       const b=el('button','Record this segmentation as a hypothesis',d);b.type='button';b.onclick=guard(()=>{
         if(pending()||doc.raw!==digits)throw new Error('The saved source must be exactly these digits before attaching a segmentation. Copy them into the source and save a revision first.');
-        const note='Known-key segmentation hypothesis. Key: '+JSON.stringify(key)+'. Mandatory boundaries: '+JSON.stringify(segmentation.boundaries)+'. Scoring: '+scoring+'. Choice does not establish a historical reading.';
-        previous=doc;doc=R.addLayer(doc,'symbols','revision-'+doc.revision,p.codes.join(' | '),note);$('restore-record').disabled=false;render();status('Segmentation hypothesis appended; original digits retained.');
+        const note='Known-key segmentation hypothesis. Key: '+JSON.stringify(key)+'. Mandatory boundaries: '+JSON.stringify(segmentation.boundaries)+'. Line-break policy: '+segmentation.lineBreaks+'. Scoring: '+scoring+'. Mode: '+segmentation.mode+'; globally best guaranteed: '+segmentation.globalBestGuaranteed+'. Choice does not establish a historical reading.';
+        adopt(R.addLayer(doc,'symbols','revision-'+doc.revision,p.codes.join(' | '),note),'Segmentation hypothesis appended; original digits retained.');
       });
     });
+    const amb=$('segment-ambiguity');amb.replaceChildren();
+    const open=segmentation.ambiguity.filter(a=>!a.forced&&!a.impossible);
+    el('p',open.length?open.length+' of '+segmentation.ambiguity.length+' interior positions are genuinely ambiguous.':'No interior position is ambiguous under this key and these locks.',amb);
+    el('pre',segmentation.ambiguity.map(a=>'after digit '+a.position+': '+
+      (a.impossible?'impossible':a.forced?'forced':a.pathsCutting+' of '+segmentation.total+' paths cut here')+
+      (a.locked?' (locked)':'')+(a.startingCodes.length?' · codes starting here: '+a.startingCodes.join(', '):'')).join('\n'),amb);
   });
+
+  // ── Homophonic search and language comparison ─────────────────────────────
   function stopSearch(message) { searchGeneration++;if(worker)worker.terminate();worker=null;receipt=null;$('search-run').disabled=false;$('search-cancel').disabled=true;$('search-export').disabled=true;$('search-results').replaceChildren();$('search-status').textContent=message; }
-  ['search-raw','search-locks','search-seed','search-steps'].forEach(id=>$(id).addEventListener('input',()=>stopSearch('Inputs changed. Run a new search.')));
+  ['search-raw','search-locks','search-seed','search-steps','search-beam','search-algorithm','search-model'].forEach(id=>$(id).addEventListener('input',()=>stopSearch('Inputs changed. Run a new search.')));
+  ['search-algorithm','search-model'].forEach(id=>$(id).addEventListener('change',()=>stopSearch('Solver or scoring model changed. Run a new search.')));
   $('search-cancel').onclick=()=>stopSearch('Search cancelled. No completed receipt was recorded.');
   $('search-run').onclick=guard(()=>{
     stopSearch('Starting local search…');const raw=$('search-raw').value;R.parseSymbols(raw);
-    const options={seed:Number($('search-seed').value),steps:Number($('search-steps').value),locks:JSON.parse($('search-locks').value)};
+    const algorithm=$('search-algorithm').value, model=$('search-model').value;
+    const locks=JSON.parse($('search-locks').value);
+    const options=algorithm==='beam'
+      ? {beam:Number($('search-beam').value),branch:26,seed:Number($('search-seed').value),locks}
+      : {seed:Number($('search-seed').value),steps:Number($('search-steps').value),locks};
     if(!window.Worker)throw new Error('This browser does not support the background worker required for search.');
     const started=performance.now(),generation=searchGeneration;worker=new Worker('../js/research-worker.js');$('search-run').disabled=true;$('search-cancel').disabled=false;
     worker.onerror=()=>{if(generation===searchGeneration)stopSearch('Search worker could not run. Reload online to cache its files, then try again.');};
@@ -81093,12 +82852,16 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       if(event.data.error){stopSearch('Search rejected: '+event.data.error);return;}
       if(event.data.progress){$('search-status').textContent='Searching: '+event.data.progress.step+' / '+event.data.progress.steps+' steps.';return;}
       const r=event.data.result;worker.terminate();worker=null;$('search-run').disabled=false;$('search-cancel').disabled=true;
-      receipt={version:1,kind:'cipher-museum-homophonic-search',raw,options,result:r,elapsedMs:Math.round(performance.now()-started)};
-      $('search-export').disabled=false;$('search-status').textContent=(r.task==='known-key-application'?'Known-key application: all symbols were locked.':'Search completed; these are unverified candidates.')+' '+r.completedSteps+' mutation steps. Seed '+r.seed+'.';
+      receipt={version:2,kind:'cipher-museum-homophonic-search',raw,algorithm,model,options,result:r,elapsedMs:Math.round(performance.now()-started)};
+      lastCandidate=r.candidates[0]?r.candidates[0].plaintext:'';
+      $('search-export').disabled=false;
+      $('search-status').textContent=(r.task==='known-key-application'?'Known-key application: all symbols were locked.':'Search completed; these are unverified candidates.')+
+        ' Solver: '+(r.algorithm||'simulated annealing')+'. '+(r.algorithm==='beam-search'?('Beam width '+r.beam+', '+r.evaluations+' scored hypotheses. The partial score is NOT admissible, so pruning can have discarded the branch holding the correct key.'):(r.completedSteps+' mutation steps. Seed '+r.seed+'.'))+' Model: '+r.model+'.';
       const out=$('search-results');out.replaceChildren();
       r.candidates.forEach((c,i)=>{const d=el('details','',out);d.open=i===0;el('summary','Candidate '+(i+1)+' · model score '+c.score.toFixed(2),d);el('pre',c.plaintext,d);el('pre',JSON.stringify(c.key,null,2),d);});
       const d=el('details','',out);el('summary','Best retained score by step',d);el('pre',r.trace.map(t=>t.step+': '+t.score.toFixed(2)).join('\n'),d);
-    };worker.postMessage({raw,options});
+      if(r.extensionOrder){const e=el('details','',out);el('summary','Disclosed symbol-extension order',e);el('pre',r.extensionOrder.join(' '),e);}
+    };worker.postMessage({raw,options,algorithm,model});
   });
   $('search-export').onclick=()=>{if(receipt)download('homophonic-search-receipt.json',receipt);};
   $('search-example').onclick=()=>{
@@ -81108,9 +82871,154 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     $('search-raw').value=Array.from(plain).map((c,i)=>{const k=c+(i%2);if(!ids.has(k))ids.set(k,'s'+next++);return ids.get(k);}).join(' ');
     $('search-locks').value='{}';$('search-seed').value='41';$('search-steps').value='15000';
   };
+  function renderLanguage(text) {
+    const out=$('language-output');out.replaceChildren();
+    if(!languageSet){el('p','Historical-language profiles are not loaded. '+(languageError||'They are fetched on demand and are deliberately not part of the offline bundle, so this comparison needs a network connection.'),out);return;}
+    const letters=text.toUpperCase().normalize('NFD').replace(/[^A-Z]/g,'');
+    if(!letters){el('p','Enter a candidate reading first.',out);return;}
+    const r=languageSet.compare(letters);
+    el('p',r.decided
+      ? 'Best fit: '+r.choice+', margin '+r.margin.toFixed(3)+' over the next profile. A profile names a language AND a period; this says nothing about which is right historically.'
+      : 'No decision. '+r.abstentionReasons.join(' '),out);
+    const table=el('pre',r.ranking.map(x=>x.id.padEnd(30)+' mean log-probability '+x.meanLogProbability.toFixed(3)+'  coverage '+(100*x.coverage).toFixed(1)+'%').join('\n'),out);
+    table.setAttribute('aria-label','Language profile ranking');
+    el('p',r.meaning,out);
+    el('p','Thresholds: at least '+r.rule.minimumLetters+' letters, margin at least '+r.rule.minimumMargin+', coverage at least '+(100*r.rule.minimumCoverage).toFixed(0)+'%. Abstention is a result, not a failure.',out);
+  }
+  $('language-run').onclick=guard(()=>renderLanguage($('language-text').value));
+  $('language-from-candidate').onclick=guard(()=>{
+    if(!lastCandidate)throw new Error('Run a search first, or paste a reading.');
+    $('language-text').value=lastCandidate;renderLanguage(lastCandidate);
+  });
+
+  // ── Investigation bundle ──────────────────────────────────────────────────
+  function bundleState() {
+    return { title: $('bundle-title').value, created: new Date().toISOString().slice(0,10),
+      scoringModel: $('search-model').value, solver: $('search-algorithm').value,
+      selectedLayer: $('layer-parent').value || ('revision-' + doc.revision),
+      keyRevisions: doc.keys.map(k => ({ at: doc.source.date || '', reason: 'Saved key ' + k.id + ': ' + k.title,
+        locks: Object.fromEntries(k.entries.filter(e => e.type === 'letter' && e.values.length === 1 && /^[A-Z]$/.test(e.values[0])).map(e => [e.symbol, e.values[0]])) })),
+      search: receipt ? { algorithm: receipt.algorithm, raw: receipt.raw, seed: receipt.options.seed || 0,
+        steps: receipt.options.steps || 1, beam: receipt.options.beam || 0, locks: receipt.options.locks || {},
+        elapsedMs: receipt.elapsedMs } : null,
+      segmentation: segmentation ? { digits: $('segment-digits').value, key: JSON.parse($('segment-key').value),
+        boundaries: segmentation.boundaries, budget: Number($('segment-budget').value),
+        scoring: $('segment-score').value, lineBreaks: segmentation.lineBreaks } : null,
+      candidates: receipt ? receipt.result.candidates.slice(0,5).map((c,i) => ({ plaintext: c.plaintext, score: c.score, key: c.key,
+        chosen: i === 0, provenance: receipt.algorithm + ' · ' + receipt.model + ' · ' + (receipt.options.seed !== undefined ? 'seed ' + receipt.options.seed : 'deterministic') })) : [] };
+  }
+  function describeBundle(b) {
+    const flags = Object.entries(b.stale).filter(([,v]) => v).map(([k]) => k);
+    $('bundle-state').textContent = JSON.stringify({ title: b.title, created: b.created, tool: b.tool,
+      selectedLayer: b.selectedLayer, keyRevisions: b.keyRevisions.length, search: b.search,
+      segmentation: b.segmentation, candidates: b.candidates.length, images: b.images, stale: b.stale }, null, 2);
+    return flags;
+  }
+  $('bundle-export').onclick = guard(() => {
+    if (pending()) throw new Error('Save the source revision before exporting the investigation.');
+    const b = R.bundle(doc, bundleState());
+    download('cipher-museum-investigation.json', b);
+    describeBundle(b);
+    note('bundle-status','Investigation bundle exported. Image bytes were not included: reopen each file locally and the recorded hash will tell you whether the bytes match.');
+  });
+  $('bundle-import').onchange = async function () {
+    const file = this.files[0]; if (!file) return;
+    try {
+      if (file.size > 1500000) throw new Error('A bundle is limited to 1,500,000 bytes.');
+      const b = R.openBundle(JSON.parse(await file.text()));
+      // Only once the bundle validates is the current record replaced.
+      previous = doc; doc = b.evidence; $('restore-record').disabled = false;
+      $('bundle-title').value = b.title; clearImage(); selectedClass=''; selectedOccurrences.clear();
+      if (b.search) { $('search-raw').value = b.search.raw; $('search-locks').value = JSON.stringify(b.search.locks);
+        $('search-algorithm').value = b.search.algorithm === 'beam' ? 'beam' : 'annealing';
+        if (b.search.seed) $('search-seed').value = String(b.search.seed);
+        if (b.search.steps) $('search-steps').value = String(b.search.steps);
+        if (b.search.beam) $('search-beam').value = String(b.search.beam); }
+      if (b.segmentation) { $('segment-digits').value = b.segmentation.digits; $('segment-key').value = JSON.stringify(b.segmentation.key);
+        $('segment-locks').value = b.segmentation.boundaries.join(', '); $('segment-budget').value = String(b.segmentation.budget);
+        $('segment-score').value = b.segmentation.scoring; $('segment-lines').value = b.segmentation.lineBreaks; }
+      stopSearch('Imported investigation: run the search again to reproduce its candidates.');
+      invalidateSegments(); render();
+      const flags = describeBundle(b);
+      note('bundle-status','Investigation restored: evidence record, selected layer, ' + b.keyRevisions.length + ' key revision(s), solver settings and ' +
+        b.candidates.length + ' recorded candidate(s). ' + (flags.length
+          ? 'STALE: ' + flags.join(', ') + '. Those results no longer match their inputs and must be recomputed before they mean anything.'
+          : 'No stale results. Reproducing a candidate still needs the same solver and scoring-model build, not only the same seed.'), flags.length > 0);
+    } catch (e) { note('bundle-status','Bundle rejected; your current record was not touched. ' + e.message, true); }
+    this.value = '';
+  };
+  const EXAMPLES = {
+    unidentified: () => {
+      let d = R.create('g1 g2 g3 g1 g4 g2 g5 g3 g1 g2');
+      d.source = Object.assign(d.source, { artifactId: 'unknown:unidentified-letter:1',
+        archive: 'Unidentified; the catalogue entry is for the surrounding bundle, not this leaf',
+        folio: 'Single leaf, unfoliated', transcriber: 'Workbench example',
+        method: 'Symbol IDs assigned by first appearance; no facsimile is distributed with this example' });
+      d.revisions[0].raw = d.raw;
+      d = R.addHypothesis(d, { claim: 'The catalogue describes this leaf as a letter from the secretary named in the bundle heading.',
+        confidence: 'unsupported',
+        supports: [{ ref: 'catalogue-entry', note: 'The bundle heading names that secretary.' }],
+        contradicts: [{ ref: 'physical-leaf', note: 'The heading describes the bundle. Nothing on this leaf names anyone, and neighbouring documents are a clue, not a foundation for attribution.' }],
+        alternatives: ['A different correspondent whose papers were bound into the same bundle', 'A copy made later and filed with the originals'],
+        note: 'DELIBERATELY MISLEADING CATALOGUE DESCRIPTION. The entry is about the bundle; the leaf is unidentified.' });
+      d = R.addHypothesis(d, { claim: 'The repeated group g1 g2 stands for a proper name.',
+        confidence: 'possible',
+        supports: [{ ref: 'revision-1', note: 'The pair recurs at the opening and the close, where a salutation and a signature would sit.' }],
+        contradicts: [],
+        alternatives: ['A common word rather than a name', 'Two independent symbols that happen to adjoin'],
+        note: 'UNRESOLVED NAME. Position is suggestive and is not evidence of identity. This case has no complete outcome and is not meant to acquire one.' });
+      d = R.addHypothesis(d, { claim: 'A letter key that applies to every symbol would establish who wrote the leaf.',
+        confidence: 'contradicted',
+        supports: [], contradicts: [{ ref: 'method', note: 'Applying a key is a mechanical result. Authorship, date and normalized spelling are separate claims needing separate evidence.' }],
+        alternatives: [], note: 'Recorded so the register itself states the rule it exists to enforce.' });
+      return { doc: d, state: { title: 'Unidentified document, incomplete outcome' },
+        message: 'Loaded the unidentified-document case. Its outcome is deliberately incomplete: a misleading catalogue description and an unresolved name both stay visible, and no key application would resolve either.' };
+    },
+    segmentation: () => {
+      let d = R.create('2228');
+      d.revisions[0].raw = d.raw;
+      d.source = Object.assign(d.source, { artifactId: 'example:numerical-segmentation:1',
+        transcriber: 'Workbench example', method: 'Digits recorded exactly as written; no spacing inferred' });
+      d = R.addHypothesis(d, { claim: 'The digit stream 2228 has one correct reading.',
+        confidence: 'contradicted', supports: [],
+        contradicts: [{ ref: 'segmentation', note: 'Under the key {2:A, 22:N, 8:D} three complete paths exist: AAAD, AND and NAD. The source alone selects none of them.' }],
+        alternatives: ['AAAD', 'AND', 'NAD'],
+        note: 'A language score ranks these; it does not remove the ambiguity.' });
+      return { doc: d, state: { title: 'Numerical segmentation with an ambiguous boundary',
+          segmentation: { digits: '2228', key: { '2':'A','22':'N','8':'D' }, boundaries: [], budget: 10000, scoring: 'neutral', lineBreaks: 'boundary' } },
+        message: 'Loaded the segmentation example. Press “Compare segmentations” to see all three readings and which boundary positions are genuinely ambiguous.' };
+    }
+  };
+  $('bundle-load-example').onclick = guard(() => {
+    const key = $('bundle-example').value;
+    if (!key) throw new Error('Choose an example first.');
+    const made = EXAMPLES[key]();
+    const b = R.bundle(made.doc, made.state);
+    previous = doc; doc = b.evidence; $('restore-record').disabled = false;
+    $('bundle-title').value = b.title; clearImage(); selectedClass=''; selectedOccurrences.clear();
+    if (b.segmentation) { $('segment-digits').value = b.segmentation.digits; $('segment-key').value = JSON.stringify(b.segmentation.key);
+      $('segment-locks').value = b.segmentation.boundaries.join(', '); $('segment-score').value = b.segmentation.scoring;
+      $('segment-lines').value = b.segmentation.lineBreaks; }
+    stopSearch('Example loaded. No search has been run.'); invalidateSegments(); render(); describeBundle(b);
+    note('bundle-status', made.message);
+  });
+
   window.addEventListener('pagehide',()=>{if(worker)worker.terminate();if(imageURL)URL.revokeObjectURL(imageURL);});
   // Explicit handoff from Detective; never fetch source images or papers automatically.
   try {const v=sessionStorage.getItem('museum-evidence-import');if(v){doc=R.migrate(JSON.parse(v));sessionStorage.removeItem('museum-evidence-import');status('Imported your Detective transcription. Add source information, then export to keep the record.');}}catch(e){status('Could not read the Detective handoff: '+e.message,true);}
+  // Scoring models: the modern-English baseline is always available; the historical
+  // profiles load from a separate versioned file and are disclosed as what they are.
+  const modelSelect = $('search-model');
+  el('option', BASELINE.label, modelSelect).value = BASELINE.id;
+  if (typeof fetch === 'function') {
+    fetch('../data/research/v2/language-profiles.json').then(r => { if (!r.ok) throw new Error('Could not load the historical-language profiles.'); return r.json(); })
+      .then(data => {
+        languageSet = window.MuseumResearchLanguage.buildProfiles(data);
+        languageSet.profiles.forEach(p => {
+          el('option', p.language + ' — ' + p.period + ' (' + p.id + ')', modelSelect).value = p.id;
+        });
+      }).catch(e => { languageError = e.message; });
+  } else { languageError = 'This browser cannot load the profile file.'; }
   render();
 })();
 ```
@@ -81123,24 +83031,41 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-worker.js`
-- Served SHA-256: `ed2a941f8f50a76f690ffc2ffa4a49e1fd3c164f59041996fd0e13133627ca35`
-- Readable-source SHA-256: `ed2a941f8f50a76f690ffc2ffa4a49e1fd3c164f59041996fd0e13133627ca35`
+- Served SHA-256: `f7e930bbecb8f488c917382b43bad7ca5d0923fd789616e75a0f3fb63281b105`
+- Readable-source SHA-256: `f7e930bbecb8f488c917382b43bad7ca5d0923fd789616e75a0f3fb63281b105`
 
 
 ```javascript
 'use strict';
 importScripts('research-language-model.js', 'research-model.js');
-let modelPromise;
+const BASELINE = 'museum-prose-quadgram-v1';
+const loaded = {};
+// Scoring models are fetched once each and cached for the life of the worker.
+function load(id) {
+  if (loaded[id]) return loaded[id];
+  const file = id === BASELINE ? '../data/research/v1/language-model.json' : '../data/research/v2/language-profiles.json';
+  loaded[id] = fetch(file).then(response => {
+    if (!response.ok) throw new Error('Could not load the scoring model.');
+    return response.json();
+  }).then(data => {
+    if (id === BASELINE) return MuseumResearchLanguage.build(data).fitness;
+    const set = MuseumResearchLanguage.buildProfiles(data);
+    const profile = set.byId[id];
+    if (!profile) throw new Error('Unknown scoring profile: ' + id);
+    return profile.fitness;
+  });
+  return loaded[id];
+}
 self.onmessage = async function (event) {
   try {
     const input = event.data;
     if (typeof fetch !== 'function') throw new Error('This browser cannot load the scoring model.');
-    if (!modelPromise) modelPromise = fetch('../data/research/v1/language-model.json').then(response => {
-      if (!response.ok) throw new Error('Could not load the scoring model.'); return response.json();
-    }).then(data => MuseumResearchLanguage.build(data));
-    const model = await modelPromise;
-    const result = MuseumResearch.search(MuseumResearch.parseSymbols(input.raw), input.options,
-      model.fitness, progress => self.postMessage({ progress }));
+    const fitness = await load(input.model || BASELINE);
+    const tokens = MuseumResearch.parseSymbols(input.raw);
+    const progress = value => self.postMessage({ progress: value });
+    const result = input.algorithm === 'beam'
+      ? MuseumResearch.beamSearch(tokens, input.options, fitness, progress)
+      : MuseumResearch.search(tokens, input.options, fitness, progress);
     self.postMessage({ result });
   } catch (error) { self.postMessage({ error: error.message }); }
 };
@@ -81537,6 +83462,105 @@ module.exports = {runExperiment, withoutTimings, referenceEncrypt};
 ```
 
 
+## JavaScript — scripts/research-splits.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `scripts/research-splits.js`
+- Served SHA-256: `fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010`
+- Readable-source SHA-256: `fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010`
+
+
+```javascript
+'use strict';
+// Declared split and grouping rules for research-evaluation v2.
+//
+// Two leakage routes are closed explicitly.
+//   1. SOURCE GROUPING. Every ciphertext variant derived from one source document
+//      belongs to the same split. Variants of one plaintext are not independent items,
+//      and scattering them across splits would let a tuning split reveal a test answer.
+//   2. KEY AND CODE-POOL DISJOINTNESS. A key seed used in one split is never reused in
+//      another, and the fixed code pools of the pool-recognition task are disjoint
+//      between splits. A pool shared across splits turns recognition into memorization.
+//
+// Splits are assigned from the COLLECTION, not the document, so a whole collection can
+// be held out when a question is about generalizing beyond a body of material.
+const SPLITS = ['development', 'test'];
+// Collections marked development are the only material thresholds or budgets may be
+// tuned on. Everything else is reported as a held-out measurement.
+const COLLECTION_SPLIT = {
+  // The only tuning material: the probes the language-profile abstention thresholds
+  // were calibrated on. Nothing else may be tuned against.
+  'language-development-probes': 'development',
+  'museum-prose-en': 'test',
+  'museum-prose-fr': 'test',
+  'gutenberg-pre1800': 'test',
+  'authentic-z340': 'test'
+};
+// Key seeds are allocated from per-split disjoint ranges.
+const SEED_RANGES = { development: [10000, 19999], test: [20000, 29999] };
+const POOL_RANGES = { development: [30000, 30999], test: [31000, 31999] };
+
+function splitOf(collection) {
+  const split = COLLECTION_SPLIT[collection];
+  if (!split) throw new Error('Unknown collection: ' + collection);
+  return split;
+}
+// Deterministic, order-independent seed allocation inside a split's own range.
+function seedFor(split, label, kind) {
+  const range = (kind === 'pool' ? POOL_RANGES : SEED_RANGES)[split];
+  if (!range) throw new Error('Unknown split: ' + split);
+  let h = 2166136261;
+  for (let i = 0; i < label.length; i++) { h ^= label.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  return range[0] + (h % (range[1] - range[0] + 1));
+}
+// Check the rules rather than trusting them: used by the evaluation and by its test.
+function audit(items) {
+  const problems = [];
+  const splitByDocument = new Map();
+  const seedsBySplit = new Map();
+  const poolsBySplit = new Map();
+  for (const item of items) {
+    const prior = splitByDocument.get(item.sourceDocument);
+    if (prior && prior !== item.split) {
+      problems.push('Source document ' + item.sourceDocument + ' appears in both ' + prior + ' and ' + item.split + '.');
+    }
+    splitByDocument.set(item.sourceDocument, item.split);
+    if (item.keySeed !== undefined && item.keySeed !== null) {
+      if (!seedsBySplit.has(item.split)) seedsBySplit.set(item.split, new Set());
+      seedsBySplit.get(item.split).add(item.keySeed);
+      const range = SEED_RANGES[item.split];
+      if (item.keySeed < range[0] || item.keySeed > range[1]) {
+        problems.push('Key seed ' + item.keySeed + ' is outside the ' + item.split + ' range.');
+      }
+    }
+    if (item.poolId !== undefined && item.poolId !== null) {
+      if (!poolsBySplit.has(item.split)) poolsBySplit.set(item.split, new Set());
+      poolsBySplit.get(item.split).add(item.poolId);
+    }
+  }
+  const splits = Array.from(seedsBySplit.keys());
+  for (let i = 0; i < splits.length; i++) for (let j = i + 1; j < splits.length; j++) {
+    for (const seed of seedsBySplit.get(splits[i])) {
+      if (seedsBySplit.get(splits[j]).has(seed)) problems.push('Key seed ' + seed + ' is shared by ' + splits[i] + ' and ' + splits[j] + '.');
+    }
+  }
+  const poolSplits = Array.from(poolsBySplit.keys());
+  for (let i = 0; i < poolSplits.length; i++) for (let j = i + 1; j < poolSplits.length; j++) {
+    for (const pool of poolsBySplit.get(poolSplits[i])) {
+      if (poolsBySplit.get(poolSplits[j]).has(pool)) problems.push('Code pool ' + pool + ' is shared by ' + poolSplits[i] + ' and ' + poolSplits[j] + '.');
+    }
+  }
+  return { ok: problems.length === 0, problems,
+    documents: splitByDocument.size, items: items.length,
+    perSplit: Object.fromEntries(SPLITS.map(s => [s, items.filter(i => i.split === s).length])) };
+}
+module.exports = { SPLITS, COLLECTION_SPLIT, SEED_RANGES, POOL_RANGES, splitOf, seedFor, audit };
+```
+
+
 ## JavaScript — sw.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
@@ -81544,8 +83568,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `e5afa22bfa4aa21f19e72b90f1a5f8607f2add60cbf15ca64d5c890e1a147bed`
-- Readable-source SHA-256: `e5afa22bfa4aa21f19e72b90f1a5f8607f2add60cbf15ca64d5c890e1a147bed`
+- Served SHA-256: `c9e4f5cebc6f9f2befce23c17e95c91e10f2fc517d4a6ed0a7a9f9c645a1005a`
+- Readable-source SHA-256: `c9e4f5cebc6f9f2befce23c17e95c91e10f2fc517d4a6ed0a7a9f9c645a1005a`
 
 
 ```javascript
@@ -81567,7 +83591,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  */
 'use strict';
 
-const VERSION = 'cipher-museum-56ec9ae8';
+const VERSION = 'cipher-museum-868b5b92';
 
 const CORE = [
   '/',
@@ -81718,7 +83742,7 @@ self.addEventListener('fetch', (event) => {
 
 # data appendix 1
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — tours/foundations.json
 
@@ -82650,7 +84674,7 @@ Source SHA-256: `72c9a03dfa48a2e2a1ae78e44e880042471e53fb871ca22dffdc8bd38a9f64e
 
 # data appendix 2
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v1/language-model.json
 
@@ -82665,7 +84689,7 @@ Source SHA-256: `5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2
 
 # data appendix 3
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — public/corpus/v0.8/browser-sample.json
 
@@ -88444,14 +90468,14 @@ Source SHA-256: `788eb1bc8977cb9fd38d8584521bd150ebaf0a660f24f732b8ccead684291b7
 
 # data appendix 4
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — js/search-index.json
 
-Source SHA-256: `5e2e6b1e3bd8493005403ec74508306412217aa4f750730496ef57590c388e86`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+Source SHA-256: `58a4b33b2fb98bfaaad9d7e13664f38a2492dab83b1f506faa519ec0464919a5`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
 
 ```json
-{"version":1,"generated":"2026-10-26T20:54:44Z","entries":[{"t":"ADFGVX Cipher","u":"ciphers/adfgvx.html","k":"cipher","h":"Military & Spy Ciphers","c":"WWI · June 1918","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Painvin recovered keys from German traffic in June 1918.","s":"ADFGVX combined a 6×6 substitution square with columnar transposition. Painvin’s June 1918 solutions exploited particular traffic and keys, not every later message automatically.","g":["wwi","military & spy ciphers","broken"],"exhibitNumber":21,"collection":"cipher-history"},{"t":"ADFGX Cipher","u":"ciphers/adfgx.html","k":"cipher","h":"Military & Spy Ciphers","c":"WWI · March 1918","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Painvin and other Allied analysts used repeated traffic, statistics and transposition analysis in 1918.","s":"Germany’s ADFGX field cipher appeared in March 1918; Painvin obtained solutions in April. Its square-plus-transposition construction required continuing key recovery.","g":["wwi","military & spy ciphers","broken"],"exhibitNumber":20,"collection":"cipher-history"},{"t":"Aeneas Tacticus","u":"ciphers/aeneas-tacticus.html","k":"exhibit","h":"World Origins of Cryptography","c":"Classical Greece · ~350 BCE","b":"—","trust":null,"n":"","s":"Aeneas’s water-clock signaling, preserved in Polybius: synchronized vessels selected preset military messages, not letters of an alphabet.","g":["ancient","world origins of cryptography"],"exhibitNumber":66,"collection":"cipher-history"},{"t":"AES (Advanced Encryption Standard)","u":"ciphers/aes.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 2001","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"AES, standardized in 2001, is a widely deployed block cipher. No practical key-recovery attack is known against correctly used full-round AES.","g":["digital","modern cryptography","secure (modern)"],"exhibitNumber":62,"collection":"cipher-history"},{"t":"Affine Cipher","u":"ciphers/affine.html","k":"cipher","h":"The Substitution Hall","c":"Antiquity → 1800s · math-age","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"","s":"The affine cipher — a single linear formula E(x)=a·x+b mod 26 that generalises Caesar (a=1) and Atbash (a=25, b=25). Just 312 keys; trivially broken.","g":["ancient","the substitution hall","broken"],"exhibitNumber":73,"collection":"cipher-history"},{"t":"Agnes Meyer Driscoll","u":"ciphers/agnes-driscoll.html","k":"person","h":"Hall of Codebreakers","c":"Interwar & WWII · USA","b":"—","trust":null,"n":"Codebreaker Biography","s":"Agnes Meyer Driscoll helped develop U.S. naval cryptanalysis and trained later analysts. Her work included Japanese naval codes, early JN-25 and cipher-machine analysis.","g":["wwii","hall of codebreakers"],"exhibitNumber":133,"collection":"cipher-history"},{"t":"Alberti Cipher Disk","u":"ciphers/alberti-disk.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Renaissance · 1467","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Index of Coincidence · Frequency analysis","s":"Alberti’s fifteenth-century cipher disk illustrates changing substitutions using two alphabets. The exhibit distinguishes historical instructions from a regular-step teaching model.","g":["renaissance","mechanical cipher machines","broken"],"exhibitNumber":27,"collection":"cipher-history"},{"t":"Geʼez Script and a Substitution Model","u":"ciphers/amharic-ge-ez-ciphers.html","k":"cipher","h":"World Origins of Cryptography","c":"East Africa · teaching model","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Illustrative Latin-letter substitution model; no identified manuscript authenticates this as a particular Geʽez monastic cipher.","s":"Explore Geʼez manuscript heritage alongside a modern Latin-letter substitution exercise, with no historical cipher attribution claimed for the model.","g":["medieval","world origins of cryptography","educational","amharic","ethiopic","geez"],"exhibitNumber":70,"collection":"cipher-history"},{"t":"AMSCO Transposition","u":"ciphers/amsco.html","k":"cipher","h":"Transposition Ciphers","c":"American Cryptogram Association specification","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Variable-cell transposition preserves frequencies and is susceptible to probable-word and scored permutation search.","s":"AMSCO from the American Cryptogram Association specification: alternate one-letter and two-letter cells, read keyed columns, and reconstruct an incomplete final row.","g":["modern","transposition ciphers","broken"],"exhibitNumber":167,"collection":"cipher-history"},{"t":"Arabic Nomenclators","u":"ciphers/arabic-nomenclators.html","k":"cipher","h":"World Origins of Cryptography","c":"Abbasid Caliphate · ~850 CE","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (by its own inventors)","s":"Arabic cryptanalytic scholarship and a teaching model of nomenclators: frequency analysis, codewords, and the need to identify a particular historical key.","g":["medieval","world origins of cryptography","broken"],"exhibitNumber":68,"collection":"cipher-history"},{"t":"Argenti Family Cipher","u":"ciphers/argenti.html","k":"cipher","h":"Classical Substitution","c":"Renaissance Italy · 1500s–1600s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"","s":"Giovanni Battista Argenti and his nephew Matteo documented papal nomenclators, homophones, nulls and cryptanalytic methods in Renaissance Italy.","g":["renaissance","classical substitution","broken"],"exhibitNumber":77,"collection":"cipher-history"},{"t":"Arnold–André Book Cipher","u":"ciphers/arnold-andre.html","k":"cipher","h":"Military & Spy Ciphers","c":"American Revolution · 1779–1780","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Compromised by capture (1780)","s":"Arnold and André used changing book codes in their 1779–1780 correspondence, including Blackstone’s Commentaries and dictionary schemes. Captured West Point documents exposed the plot.","g":["modern","military & spy ciphers","historical only"],"exhibitNumber":80,"collection":"cipher-history"},{"t":"Atbash","u":"ciphers/atbash.html","k":"cipher","h":"World Origins of Cryptography","c":"Ancient · ~500 BC","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Inspection (it is its own inverse)","s":"Atbash reverses the Hebrew alphabet and appears in Jeremiah’s Sheshach references. This exhibit demonstrates a modern, self-inverse A–Z adaptation.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":41,"collection":"cipher-history"},{"t":"Autokey","u":"ciphers/autokey.html","k":"cipher","h":"Polyalphabetic Frontier","c":"Renaissance · 1586","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Crib propagation and language-scored searches; ordinary repeating-key Kasiski analysis does not apply directly.","s":"Plaintext autokey extends a primer with message letters. It removes a fixed repeating keyword but retains exploitable language structure and error propagation.","g":["renaissance","polyalphabetic frontier","broken"],"exhibitNumber":53,"collection":"cipher-history"},{"t":"The Babington Plot Cipher","u":"ciphers/babington.html","k":"cipher","h":"Classical Substitution","c":"Elizabethan · 1586","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Thomas Phelippes, working for Sir Francis Walsingham · within days of interception","s":"The 1586 Babington Plot: intercepted nomenclator letters, a forged postscript, and the difference between compromised keys and an insecure transport channel.","g":["renaissance","classical substitution","broken"],"exhibitNumber":39,"collection":"cipher-history"},{"t":"Bach's B-A-C-H Motif","u":"ciphers/bach-motif.html","k":"cipher","h":"Cipher Culture","c":"Baroque Germany · 1750","b":"—","trust":null,"n":"Musical cryptogram","s":"The four notes B♭ – A – C – B♮ spell 'BACH' in German musical notation — a self-signature Bach embedded in his final unfinished fugue.","g":["modern","cipher culture"],"exhibitNumber":101,"collection":"cipher-history"},{"t":"Bacon's Cipher","u":"ciphers/bacon.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"1605","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Pattern recognition · Statistical analysis of A/B distribution","s":"Bacon’s biliteral alphabet represents letters with patterns of two forms and can hide them in a carrier. Binary representation is distinct from a direct historical origin for ASCII.","g":["renaissance","puzzle & novelty ciphers","broken"],"exhibitNumber":33,"collection":"cipher-history"},{"t":"Bazeries Cipher","u":"ciphers/bazeries.html","k":"cipher","h":"Military & Spy Ciphers","c":"1890s · France","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Layered frequency analysis","s":"Explore the Bazeries hand-cipher procedure and a simplified browser model, distinguished from his separate mechanical cipher cylinder.","g":["19th century","military & spy ciphers","broken"],"exhibitNumber":22,"collection":"cipher-history"},{"t":"Beale Ciphers","u":"ciphers/beale.html","k":"unsolved","h":"Unsolved Ciphers","c":"19th Century · published 1885","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unsolved (Beale 1 & 3)","s":"Beale ciphers — three numerical ciphers published in an 1885 Lynchburg pamphlet, said to have been written in the 1820s and to point to a Virginia treasure. Only #2 was solved (Declaration of Independence key); #1 and #3 unsolved.","g":["19th century","unsolved ciphers","historical only"],"exhibitNumber":49,"collection":"cipher-history"},{"t":"Beaufort Cipher","u":"ciphers/beaufort.html","k":"cipher","h":"Polyalphabetic Revolution","c":"Victorian · 1857","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Kasiski Examination · Index of Coincidence","s":"Beaufort cipher (1857) — Sir Francis Beaufort's reciprocal Vigenère variant where encrypt and decrypt are the same operation. Broken by Kasiski examination.","g":["19th century","polyalphabetic revolution","broken"],"exhibitNumber":9,"collection":"cipher-history"},{"t":"Arne Beurling","u":"ciphers/beurling.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Sweden","b":"—","trust":null,"n":"Codebreaker Biography","s":"Arne Beurling’s 1940 reconstruction of the Siemens T52, with assistance and subsequent daily-key recovery distinguished from the initial breakthrough.","g":["wwii","hall of codebreakers"],"exhibitNumber":116,"collection":"cipher-history"},{"t":"Bible Code — Equidistant Letter Sequences","u":"ciphers/bible-code.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"1994 · Refuted 1999","b":"—","trust":null,"n":"Statistical claims challenged by controlled counterexamples and analysis of selection flexibility.","s":"The Bible Code — equidistant letter sequences (ELS) claimed to hide prophecies in the Hebrew scriptures. McKay et al. (1999) examined experimental flexibility; separate Moby-Dick counterexamples addressed popular prophecy claims.","g":["digital","puzzle & novelty ciphers"],"exhibitNumber":140,"collection":"cipher-history"},{"t":"Bifid Cipher","u":"ciphers/bifid.html","k":"cipher","h":"Transposition & Fractionation","c":"1902","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Statistical analysis · Hill climbing","s":"Bifid cipher (1902) — Felix Delastelle's fractionation cipher that splits Polybius coordinates, transposes them across a period, and recombines.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":16,"collection":"cipher-history"},{"t":"Bill Tutte","u":"ciphers/bill-tutte.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Bill Tutte and the Research Section inferred the Lorenz structure by early 1942, analysing key material recovered by John Tiltman from a 1941 repeated-key transmission.","g":["wwii","hall of codebreakers"],"exhibitNumber":134,"collection":"cipher-history"},{"t":"Bletchley Park","u":"ciphers/bletchley-park.html","k":"person","h":"Hall of Codebreakers","c":"WWII · 1939–1945","b":"—","trust":null,"n":"","s":"Bletchley Park was a British wartime codebreaking centre. About 10,000 people worked at the site and associated outstations at peak, contributing to Allied intelligence.","g":["wwii","hall of codebreakers"],"exhibitNumber":111,"collection":"cipher-history"},{"t":"Turing–Welchman Bombe","u":"ciphers/bombe.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1940 · Britain","b":"—","trust":null,"n":"Codebreaking machine; not an encryption system.","s":"A crib becomes a network of constraints; machinery searches for settings that survive.","g":["wwii","mechanical cipher machines"],"exhibitNumber":168,"collection":"cipher-history"},{"t":"Book Cipher","u":"ciphers/book-cipher.html","k":"cipher","h":"Military & Field","c":"18th–20th c.","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Security depends on the book, edition and indexing rule; identifying the source or exploiting context can expose messages.","s":"Book ciphers use an agreed reference text and indexing rule. Explore historical book codes and distinguish them from the disputed Beale treasure narrative.","g":["19th century","military & field","broken"],"exhibitNumber":55,"collection":"cipher-history"},{"t":"Cabinet Noir — Black Chambers of Europe","u":"ciphers/cabinet-noir.html","k":"person","h":"Hall of Codebreakers","c":"Europe · 1550–1850","b":"—","trust":null,"n":"","s":"The European Black Chambers (cabinets noirs) were government departments that intercepted, deciphered, and resealed diplomatic mail from the 16th through 19th centuries — proto-signals-intelligence agencies.","g":["renaissance","hall of codebreakers"],"exhibitNumber":112,"collection":"cipher-history"},{"t":"Caesar Cipher","u":"ciphers/caesar.html","k":"cipher","h":"Hall I","c":"Ancient Rome","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Exhaustive shift search; frequency evidence helps rank candidates.","s":"Caesar’s recorded shift of three, demonstrated on a modern alphabet. Exhaustive shift search is small; frequency analysis helps rank candidate plaintexts.","g":["ancient","hall i","broken"],"exhibitNumber":2,"collection":"cipher-history"},{"t":"Cardano Autokey","u":"ciphers/cardano-autokey.html","k":"cipher","h":"The Polyalphabetic Era","c":"Italian Renaissance · 1550","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"The one-letter-primer widget is a modern comparison with Vigenère-style plaintext autokey, not Cardano’s exact procedure.","s":"Cardano’s self-keying idea and a modern one-letter-primer comparison model. The demo is not an exact reconstruction of Cardano’s historical procedure.","g":["renaissance","the polyalphabetic era","broken"],"exhibitNumber":76,"collection":"cipher-history"},{"t":"Cardano Grille","u":"ciphers/cardano-grille.html","k":"cipher","h":"The Transposition Hall","c":"Italian Renaissance · 1550","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Weak (steganography, not encryption)","s":"Girolamo Cardano's 1550 grille — a card with cut-out windows. Write the secret through the windows; fill the rest with innocuous text; the recipient overlays an identical grille to read.","g":["renaissance","the transposition hall","historical only"],"exhibitNumber":78,"collection":"cipher-history"},{"t":"Chaocipher","u":"ciphers/chaocipher.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Modern · 1918","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Published key-recovery attacks by Lasry, Rubin, Kopal and Wacker (2016).","s":"Chaocipher (1918) — John F. Byrne's two-disk dynamic cipher. Disclosed in 2010; published known-plaintext and in-depth ciphertext-only attacks recover its keys.","g":["wwi","mechanical cipher machines","broken"],"exhibitNumber":46,"collection":"cipher-history"},{"t":"Che Guevara’s Checkerboard and Pad","u":"ciphers/che-guevara.html","k":"cipher","h":"Military & Spy Ciphers","c":"Cold War · 1956–1967","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical checkerboard-plus-pad system; the widget compares a condensed VIC model, not Guevara’s historical pad system.","s":"Che Guevara’s checkerboard and digit-pad communications, distinguished from the VIC cipher and from the museum’s simplified comparison demo.","g":["cold war","military & spy ciphers","historical only"],"exhibitNumber":82,"collection":"cipher-history"},{"t":"Chinese Telegraph Code","u":"ciphers/chinese-telegraph.html","k":"cipher","h":"Civil War Gallery","c":"Late Qing → PRC · 1881–1980s","b":"—","trust":null,"n":"Public codebook (super-enciphered when secret)","s":"Chinese telegraph codebooks map characters to four-digit groups. Public character encoding differs from additional encipherment used to protect some diplomatic and military messages.","g":["modern","civil war gallery"],"exhibitNumber":87,"collection":"cipher-history"},{"t":"Cicada 3301","u":"ciphers/cicada-3301.html","k":"cipher","h":"Cipher Culture","c":"Internet era · 2012–2014","b":"—","trust":null,"n":"Multi-stage ARG / recruitment puzzle","s":"An anonymous 2012–2014 internet recruitment puzzle that combined steganography, classical ciphers, GPS coordinates on physical posters, and a copy of the Liber Primus hand-illustrated in glyphic runes.","g":["digital","cipher culture"],"exhibitNumber":130,"collection":"cipher-history"},{"t":"Colossus","u":"ciphers/colossus.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1944 · Britain","b":"—","trust":null,"n":"Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.","s":"Electronic counting accelerated the statistical search behind the Tunny breakthrough.","g":["wwii","mechanical cipher machines"],"exhibitNumber":169,"collection":"cipher-history"},{"t":"Columnar Transposition","u":"ciphers/columnar.html","k":"cipher","h":"Transposition & Fractionation","c":"19th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis · Anagramming","s":"Explore columnar transposition and multiple anagramming: rearrange column strips across three synthetic same-key intercepts and compare a different-key control.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":14,"collection":"cipher-history"},{"t":"Commercial Telegraph Codebooks","u":"ciphers/commercial-codebooks.html","k":"cipher","h":"Civil War Gallery","c":"Victorian → inter-war · 1870s–1930s","b":"—","trust":null,"n":"Public commercial codebooks reduce telegraph length and ambiguity; they do not inherently provide confidentiality.","s":"Commercial telegraph codebooks replaced business phrases with compact code groups. Formats and tariffs varied, and a public codebook did not itself provide secrecy.","g":["modern","civil war gallery"],"exhibitNumber":90,"collection":"cipher-history"},{"t":"Confederate Vigenère","u":"ciphers/confederate-vigenere.html","k":"cipher","h":"Civil War Gallery","c":"Confederate · 1862","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Union analysts exploited repeated keywords and language patterns.","s":"Confederate forces used repeating-key Vigenère ciphers during the Civil War. Union analysts read particular dispatches using language clues and recovered keys.","g":["19th century","civil war gallery","broken"],"exhibitNumber":25,"collection":"cipher-history"},{"t":"Copiale Cipher","u":"ciphers/copiale.html","k":"exhibit","h":"Puzzle & Novelty","c":"18th Century · ~1760–1780","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Knight, Megyesi, Schaefer (USC/Uppsala, 2011)","s":"Knight, Megyesi and Schaefer deciphered the Copiale manuscript in 2011 using transcription, statistics and manual analysis. The exhibit separates that result from its invented demonstration alphabet.","g":["renaissance","puzzle & novelty","broken"],"exhibitNumber":48,"collection":"cipher-history"},{"t":"Culper Ring / Tallmadge Code","u":"ciphers/culper-ring.html","k":"cipher","h":"Military & Spy Ciphers","c":"American Revolution · 1778–1783","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical numerical codebook; captured documents and contextual evidence are distinct from cryptanalytic breaks.","s":"Major Benjamin Tallmadge’s 1779 codebook for George Washington’s Culper Spy Ring. Roughly 760 numbered entries covering people, places, military terms, and common words — used by Abraham Woodhull and Robert Townsend on British-occupied Long Island and Manhattan.","g":["modern","military & spy ciphers","historical only"],"exhibitNumber":79,"collection":"cipher-history"},{"t":"The Da Vinci Code","u":"ciphers/da-vinci-code.html","k":"cipher","h":"Cipher Culture","c":"Fiction · 2003","b":"—","trust":null,"n":"Pop Culture","s":"Dan Brown’s 2003 thriller uses Atbash, the Fibonacci sequence and anagrams as fictional clues. Explore those devices and the limits of treating fiction as cryptographic history.","g":["digital","cipher culture"],"exhibitNumber":127,"collection":"cipher-history"},{"t":"D'Agapeyeff Cipher","u":"ciphers/dagapeyeff.html","k":"unsolved","h":"Unsolved Ciphers","c":"Pre-WWII Britain · 1939","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unsolved challenge cipher","s":"Alexander d’Agapeyeff’s 1939 numeric challenge: a verified ciphertext excerpt, overlapping-pair analysis and explicit limits on proposed reconstructions.","g":["wwii","unsolved ciphers","historical only"],"exhibitNumber":104,"collection":"cipher-history"},{"t":"Conan Doyle's Dancing Men","u":"ciphers/dancing-men.html","k":"cipher","h":"Cipher Culture","c":"Edwardian Britain · 1903","b":"—","trust":null,"n":"Fictional substitution cipher","s":"The fictional stick-figure cipher Sherlock Holmes solves in The Adventure of the Dancing Men (1903) — a frequency-analysis primer disguised as a Strand magazine story.","g":["modern","cipher culture"],"exhibitNumber":126,"collection":"cipher-history"},{"t":"DES (Data Encryption Standard)","u":"ciphers/des.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1977","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (brute force, 1998)","s":"DES was standardized in 1977. Its 56-bit key became vulnerable to practical exhaustive search, demonstrated by EFF’s Deep Crack in 1998.","g":["cold war","modern cryptography","broken"],"exhibitNumber":59,"collection":"cipher-history"},{"t":"Diana Cryptosystem","u":"ciphers/diana-cryptosystem.html","k":"cipher","h":"Military & Spy Ciphers","c":"Historical letter-pad system","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"","s":"DIANA uses a reciprocal trigraph table to combine message and pad letters. This exhibit verifies the conversion method while leaving exact service dates and deployments unestablished.","g":["cold war","military & spy ciphers","historical only"],"exhibitNumber":83,"collection":"cipher-history"},{"t":"Confederate Dictionary Code","u":"ciphers/dictionary-code.html","k":"cipher","h":"Civil War Gallery","c":"Confederate · 1862","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Known dictionary + position lookup","s":"Dictionary codes replace words with references in an agreed book. Repeated references and language patterns can still leak information; this widget is a simplified model.","g":["19th century","civil war gallery","broken"],"exhibitNumber":26,"collection":"cipher-history"},{"t":"Diffie-Hellman Key Exchange","u":"ciphers/diffie-hellman.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1976","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"Diffie–Hellman derives a shared group element over a public channel. Authentication, appropriate groups and key derivation are needed for secure protocol use.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":60,"collection":"cipher-history"},{"t":"Dilly Knox","u":"ciphers/dilly-knox.html","k":"person","h":"Hall of Codebreakers","c":"WWI/WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Dilly Knox worked on commercial and military Enigma variants, including Italian naval and Abwehr traffic, with colleagues whose contributions the exhibit identifies.","g":["wwii","hall of codebreakers"],"exhibitNumber":117,"collection":"cipher-history"},{"t":"Dorabella Cipher","u":"ciphers/dorabella.html","k":"unsolved","h":"Unsolved Ciphers","c":"19th c. · 1897","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"No generally accepted reading","s":"Edward Elgar’s 1897 Dorabella cryptogram contains 87 symbols. No proposed reading has achieved general acceptance.","g":["19th century","unsolved ciphers","historical only"],"exhibitNumber":56,"collection":"cipher-history"},{"t":"Doppelkastenschlüssel — German Double Playfair","u":"ciphers/double-playfair.html","k":"cipher","h":"Classical Substitution","c":"German armed forces · December 1941 edition","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Allied crib and digraph-statistical attacks are documented for German double-box field ciphers; variants must be distinguished.","s":"German Double Playfair: reconstruct the December 1941 Doppelkastenschlüssel manual, including 17-column pairing, two substitution stages and its published example.","g":["wwii","classical substitution","broken"],"exhibitNumber":166,"collection":"cipher-history"},{"t":"Double Transposition","u":"ciphers/double-transposition.html","k":"cipher","h":"Transposition & Fractionation","c":"WWI · Germany","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Anagramming · Hill climbing (difficult)","s":"Two successive columnar transpositions: historical military use, attack conditions, and modern computerized cryptanalysis; not an unbroken cipher until 2013.","g":["wwi","transposition & fractionation","broken"],"exhibitNumber":15,"collection":"cipher-history"},{"t":"Elonka Dunin","u":"ciphers/dunin.html","k":"person","h":"Hall of Codebreakers","c":"Modern · Cryptographer","b":"—","trust":null,"n":"Cryptography researcher and puzzle author.","s":"Elonka Dunin documents Kryptos and unresolved cryptograms and writes about classical cryptanalysis, including Codebreaking: A Practical Guide with Klaus Schmeh.","g":["modern","hall of codebreakers"],"exhibitNumber":122,"collection":"cipher-history"},{"t":"ECDSA","u":"ciphers/ecdsa.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1992","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"ECDSA signs messages using elliptic curves. Reusing a secret nonce across distinct message hashes can expose the signing key, as the PlayStation 3 episode illustrates.","g":["digital","modern cryptography","secure (modern)"],"exhibitNumber":158,"collection":"protocols"},{"t":"Egyptian Substitution Hieroglyphs","u":"ciphers/egyptian-substitution.html","k":"cipher","h":"World Origins of Cryptography","c":"Middle Kingdom Egypt · ~1900 BCE","b":"—","trust":null,"n":"Decorative concealment","s":"Unusual hieroglyphic spellings in the tomb of Khnumhotep II, around 1900 BCE: an early example discussed in histories of cryptography, with uncertain intent.","g":["ancient","world origins of cryptography"],"exhibitNumber":64,"collection":"cipher-history"},{"t":"Elizebeth Smith Friedman","u":"ciphers/elizebeth-friedman.html","k":"person","h":"Hall of Codebreakers","c":"Interwar & WWII · USA","b":"—","trust":null,"n":"Codebreaker Biography","s":"Elizebeth Smith Friedman led important American cryptanalytic work against smuggling and wartime clandestine communications, with a team whose work remained little known for years.","g":["wwii","hall of codebreakers"],"exhibitNumber":135,"collection":"cipher-history"},{"t":"Enigma Machine","u":"ciphers/enigma.html","k":"cipher","h":"The Unbreakable","c":"WWII · 1918–1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Polish prewar reconstruction; later Allied crib searches and bombe machinery.","s":"Enigma was a family of rotor machines. Rejewski reconstructed German Army Enigma in 1932; later Allied teams attacked changing systems, keys and procedures.","g":["wwii","the unbreakable","broken"],"exhibitNumber":29,"collection":"cipher-history"},{"t":"Fialka M-125","u":"ciphers/fialka.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Cold War · 1956","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in operational service; obsolete today.","s":"Fialka was a Soviet ten-rotor machine with variant-specific alphabets, stepping and a punched-card permutation. The browser uses a simplified Latin-alphabet model.","g":["cold war","mechanical cipher machines","historical only"],"exhibitNumber":93,"collection":"cipher-history"},{"t":"Field Hollers and Coding Songs","u":"ciphers/field-hollers.html","k":"cipher","h":"Cipher Culture","c":"African American oral traditions","b":"—","trust":null,"n":"Oral expression and context can conceal meaning; this widget is not an authenticated historical code.","s":"Song, shared meaning, and covert communication: documented traditions, disputed Drinking Gourd claims, and a clearly labeled modern annotation exercise.","g":["modern","cipher culture"],"exhibitNumber":124,"collection":"cipher-history"},{"t":"Four-Square Cipher","u":"ciphers/four-square.html","k":"cipher","h":"Classical Substitution","c":"Early 20th Century · 1902 publication","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Digram frequency analysis · simulated annealing","s":"Four-Square cipher (1902) — Delastelle's digram cipher using two keyed and two standard 5x5 squares. Disrupts Playfair frequencies but breaks to digrams.","g":["19th century","classical substitution","broken"],"exhibitNumber":43,"collection":"cipher-history"},{"t":"Fractionated Morse Cipher","u":"ciphers/fractionated-morse.html","k":"cipher","h":"Transposition & Fractionation","c":"Classical Puzzle Cipher","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Structural analysis of Morse patterns","s":"Fractionated Morse — converts text to Morse, regroups dots, dashes, and separators in trigrams, then substitutes via a keyed alphabet. Broken by trigram stats.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":18,"collection":"cipher-history"},{"t":"Freemason Pigpen Tradition","u":"ciphers/freemason-pigpen.html","k":"cipher","h":"Cipher Culture","c":"Masonic inscriptions and later puzzle traditions","b":"—","trust":null,"n":"Fraternal symbol-substitution alphabet","s":"Pigpen uses geometric symbols for letters and appears in fraternal cipher traditions. The fixed substitution is readily reversible once the alphabet is known.","g":["modern","cipher culture"],"exhibitNumber":100,"collection":"cipher-history"},{"t":"The GCHQ Trio — Ellis, Cocks, and Williamson","u":"ciphers/gchq-trio.html","k":"person","h":"Hall of Codebreakers","c":"Cold War · GCHQ","b":"—","trust":null,"n":"Invention Biography","s":"Ellis’s January 1970 non-secret encryption report, Cocks’s 1973 construction, and Williamson’s 1974 key-agreement work, disclosed publicly in 1997.","g":["cold war","hall of codebreakers"],"exhibitNumber":120,"collection":"cipher-history"},{"t":"Geheimschreiber T52 (Sturgeon)","u":"ciphers/geheimschreiber.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWII · 1932–1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (Beurling, 1940)","s":"The Siemens T52 “Sturgeon” — a German WWII teleprinter cipher with ten wheels, with stepping that varied by model feeding an additive keystream and a per-character permutation. Broken by Arne Beurling and the Swedish Defence Staff’s cryptographic service in 1940.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":95,"collection":"cipher-history"},{"t":"Poe's Gold-Bug Cipher","u":"ciphers/gold-bug.html","k":"cipher","h":"Cipher Culture","c":"Antebellum America · 1843","b":"—","trust":null,"n":"Fictional substitution cipher","s":"Poe’s The Gold-Bug (1843) makes a substitution decipherment central to a fictional treasure hunt and explains the reasoning to readers.","g":["modern","cipher culture"],"exhibitNumber":125,"collection":"cipher-history"},{"t":"Gravity Falls Cipher System","u":"ciphers/gravity-falls.html","k":"cipher","h":"Cipher Culture","c":"Animation · 2012–2016","b":"—","trust":null,"n":"Pop Culture","s":"Gravity Falls used classical ciphers and visual clues across its episodes and associated puzzles, inviting viewers to decode messages.","g":["digital","cipher culture"],"exhibitNumber":129,"collection":"cipher-history"},{"t":"The Great Cipher","u":"ciphers/great-cipher.html","k":"cipher","h":"Classical Substitution","c":"Baroque · 17th century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Étienne Bazeries (1893): syllabic frequency analysis and contextual cribs.","s":"The Rossignols’ syllabic nomenclator was deciphered by Bazeries in the 1890s. His proposed Man in the Iron Mask identification remains disputed.","g":["renaissance","classical substitution","broken"],"exhibitNumber":38,"collection":"cipher-history"},{"t":"Gronsfeld Cipher","u":"ciphers/gronsfeld.html","k":"cipher","h":"Polyalphabetic Revolution","c":"17th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Kasiski · Only 10 possible shifts per position","s":"Gronsfeld restricts repeating-key shifts to digits 0–9. Its traditional attribution does not establish an exact invention date, and attack success depends on the available text.","g":["renaissance","polyalphabetic revolution","broken"],"exhibitNumber":11,"collection":"cipher-history"},{"t":"Hagelin C-36 / C-52 Lineage","u":"ciphers/hagelin-c36.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1930s–1950s · Sweden / Switzerland","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"The pin-and-lug family has published cryptanalytic attacks; Greenough’s 1999 C-52 attack uses known plaintext.","s":"Hagelin C-36 and C-52 lineage — pin-and-lug cipher machines, the M-209 connection, published known-plaintext attacks, and the Crypto AG supplier history.","g":["wwi","mechanical cipher machines","broken"],"exhibitNumber":162,"collection":"cipher-history"},{"t":"Hill Cipher","u":"ciphers/hill.html","k":"cipher","h":"Classical Substitution","c":"1929","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Known plaintext attack (matrix algebra)","s":"Hill’s 1929 cipher mixes groups of letters using an invertible matrix modulo 26. Suitable matched plaintext blocks can expose the key by linear algebra.","g":["interwar","classical substitution","broken"],"exhibitNumber":7,"collection":"cipher-history"},{"t":"Histiaeus's Tattooed Messenger","u":"ciphers/histiaeus-tattoo.html","k":"cipher","h":"World Origins of Cryptography","c":"Classical Greece · ~499 BCE","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Steganography (concealment)","s":"Histiaeus of Miletus (~499 BCE) — the Greek tyrant who tattooed a secret revolt order on a slave's shaved scalp, then waited for the hair to regrow before sending him.","g":["ancient","world origins of cryptography","historical only"],"exhibitNumber":65,"collection":"cipher-history"},{"t":"Homophonic Substitution","u":"ciphers/homophonic.html","k":"cipher","h":"Classical Substitution","c":"Renaissance · ~1400","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Statistical analysis · Structural pattern detection","s":"Homophonic substitution assigns several symbols to common letters to reduce frequency peaks. Statistical attacks still depend on the message, mapping and available evidence.","g":["renaissance","classical substitution","broken"],"exhibitNumber":5,"collection":"cipher-history"},{"t":"IRA Cipher Traffic","u":"ciphers/ira-ciphers.html","k":"cipher","h":"Military & Spy Ciphers","c":"Ireland · 1920s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Jim Gillogly; Richard Bean solved the final published challenge in 2019","s":"Interwar IRA columnar-transposition traffic studied by Jim Gillogly and Tom Mahon. Richard Bean solved the remaining 51-letter published challenge in 2019.","g":["modern","military & spy ciphers","broken"],"exhibitNumber":81,"collection":"cipher-history"},{"t":"Jefferson Disk","u":"ciphers/jefferson-disk.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1795 (Jefferson) · 1922 (M-94)","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Brute force · Probable word attack","s":"Jefferson proposed a 36-disk wheel cipher in the 1790s. The later, independently developed US Army M-94 used 25 disks and was adopted in 1922.","g":["interwar","mechanical cipher machines","broken"],"exhibitNumber":28,"collection":"cipher-history"},{"t":"JN-25","u":"ciphers/jn-25.html","k":"cipher","h":"Mechanical Cipher Machines","c":"World War II - 1939-1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Station HYPO and allied Pacific units","s":"JN-25 (1939-1945) - the Imperial Japanese Navy's superenciphered codebook system broken by Station HYPO and central to Midway intelligence.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":99,"collection":"cipher-history"},{"t":"Joan Clarke","u":"ciphers/joan-clarke.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Joan Clarke, Hut 8 cryptanalyst and expert practitioner of Banburismus, helped reduce the search for Naval Enigma settings.","g":["wwii","hall of codebreakers"],"exhibitNumber":136,"collection":"cipher-history"},{"t":"David Kahn","u":"ciphers/kahn.html","k":"person","h":"Hall of Codebreakers","c":"Modern · Journalist/Historian","b":"—","trust":null,"n":"Cryptohistory Biography","s":"David Kahn (1930–2024), author of The Codebreakers, helped bring cryptologic history to a wide readership. He entered the NSA Cryptologic Hall of Honor in 2020.","g":["modern","hall of codebreakers"],"exhibitNumber":121,"collection":"cipher-history"},{"t":"Kama Sutra Cipher","u":"ciphers/kama-sutra.html","k":"cipher","h":"World Origins of Cryptography","c":"Classical India · ~400 CE","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"","s":"Mlecchita-vikalpa, secret writing among the Kama Sutra’s arts. The interactive illustrates a modern paired-letter substitution, not a recovered ancient alphabet.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":67,"collection":"cipher-history"},{"t":"Kerckhoffs's Principle","u":"ciphers/kerckhoffs.html","k":"cipher","h":"Modern Cryptography","c":"Foundational · 1883","b":"—","trust":null,"n":"Principle (not a cipher)","s":"Auguste Kerckhoffs's 1883 principle — 'A cipher should be secure even if everything about the system, except the key, is public knowledge' — is the bedrock of modern cryptographic design.","g":["19th century","modern cryptography"],"exhibitNumber":113,"collection":"cipher-history"},{"t":"KL-7 ADONIS","u":"ciphers/kl-7.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Cold War · 1952","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in operational service; stolen keys exposed traffic.","s":"KL-7: an American eight-rotor cipher machine with irregular stepping and re-entry. Stolen key material compromised traffic during the Walker espionage case.","g":["cold war","mechanical cipher machines","historical only"],"exhibitNumber":94,"collection":"cipher-history"},{"t":"Kryha","u":"ciphers/kryha.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Inter-war commercial · 1924","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (Friedman, 1933)","s":"Kryha’s clockwork cipher devices used irregularly moving alphabets. Friedman and colleagues attacked a published challenge in 1933; this widget uses generated settings.","g":["interwar","mechanical cipher machines","broken"],"exhibitNumber":96,"collection":"cipher-history"},{"t":"ARG Ciphers","u":"ciphers/krypto-arg.html","k":"cipher","h":"Cipher Culture","c":"Web 2.0 · 2001–present","b":"—","trust":null,"n":"Promotional / collaborative cipher hunts","s":"Alternate-reality games — from The Beast (2001) to Year Zero (2007) and beyond — built on the assumption that players will recognise, transcribe, and crack classical ciphers across forums, phone calls, and physical artifacts.","g":["digital","cipher culture"],"exhibitNumber":132,"collection":"cipher-history"},{"t":"Kryptos","u":"ciphers/kryptos.html","k":"unsolved","h":"Unsolved Ciphers","c":"Modern · 1990","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"K1–K3 publicly solved. K4 plaintext was recovered from archival papers in 2025; that is distinct from a public cryptanalytic solution.","s":"Kryptos: K1–K3 publicly solved; K4 plaintext recovered from an archive in 2025, without a publicly demonstrated cryptanalytic solution.","g":["digital","unsolved ciphers","historical only"],"exhibitNumber":50,"collection":"cipher-history"},{"t":"George Lasry","u":"ciphers/lasry.html","k":"person","h":"Hall of Codebreakers","c":"Modern · Computational","b":"—","trust":null,"n":"Cryptanalysis researcher.","s":"George Lasry applies computational search to classical ciphers. His work includes a 2017 Kassel dissertation and collaborative decipherment of Mary Stuart’s letters.","g":["modern","hall of codebreakers"],"exhibitNumber":123,"collection":"cipher-history"},{"t":"Latin American Telegraphic Codebooks","u":"ciphers/latin-american-codebooks.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Americas · 1870s–1940s","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Commercial codebook illustration; specific regional military use requires archival evidence.","s":"Commercial telegraph codebooks compressed business messages. Their regional use and editions need documentary evidence; the demo uses an invented vocabulary.","g":["modern","mechanical cipher machines","educational"],"exhibitNumber":91,"collection":"cipher-history"},{"t":"Leo Marks","u":"ciphers/leo-marks.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Leo Marks worked on SOE communications security, prepared keying material and letter one-time pads. His memoir recounts the practical problems of agent communications.","g":["wwii","hall of codebreakers"],"exhibitNumber":137,"collection":"cipher-history"},{"t":"Lorenz Cipher","u":"ciphers/lorenz.html","k":"cipher","h":"The Unbreakable","c":"WWII · Germany · 1940","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Tiltman: depth (1941) · Tutte: structure (1942) · Colossus: wheel settings (1944)","s":"Lorenz SZ40/42: Tiltman recovered messages and key from a 1941 depth; Tutte and the Research Section inferred the structure by early 1942; Colossus accelerated wheel-setting from February 1944.","g":["wwii","the unbreakable","broken"],"exhibitNumber":30,"collection":"cipher-history"},{"t":"M-94 / CSP-488","u":"ciphers/m-94.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWI → WWII tactical · 1922–1943","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Tactical only","s":"The M-94, adopted by the US Army in 1922, used 25 alphabet disks. It resembles Jefferson’s earlier unpublished wheel but was independently developed.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":97,"collection":"cipher-history"},{"t":"M-209 (Hagelin C-38)","u":"ciphers/m209.html","k":"cipher","h":"Mechanical Cipher Machines","c":"World War II · 1942 production","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Strong (tactical)","s":"M-209 cipher machine (US production from 1942) — the US Army's portable Hagelin C-38 with six co-prime pin-wheels and a 27-bar lug cage. Broken in the field in WWII.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":47,"collection":"cipher-history"},{"t":"Mary Queen of Scots — The Castelnau Letters","u":"ciphers/mary-stuart-castelnau-letters.html","k":"person","h":"Hall of Codebreakers","c":"1578–1584","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"57 letters from 1578–1584, approximately 50,000 words; decipherment published 8 February 2023.","s":"Mary Stuart’s letters from 1578–1584: 57 deciphered letters, about 50,000 words, published by Lasry, Biermann and Tomokiyo in 2023.","g":["renaissance","hall of codebreakers","broken","mary stuart","stuart"],"exhibitNumber":138,"collection":"cipher-history"},{"t":"Mavis Batey","u":"ciphers/mavis-batey.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Mavis Batey worked with Dilly Knox’s team on Italian naval Enigma. Their decrypts contributed intelligence before the Battle of Cape Matapan in March 1941.","g":["wwii","hall of codebreakers"],"exhibitNumber":119,"collection":"cipher-history"},{"t":"McCormick Notes","u":"ciphers/mccormick.html","k":"unsolved","h":"Unsolved Ciphers","c":"Late 20th-c. United States · 1999","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"The FBI’s 2011 appeal reported the notes unresolved.","s":"Two handwritten notes found with Ricky McCormick in 1999. The FBI’s 2011 appeal sought contextual evidence and help interpreting their notation.","g":["digital","unsolved ciphers","historical only"],"exhibitNumber":106,"collection":"cipher-history"},{"t":"Microdot Steganography","u":"ciphers/microdot.html","k":"cipher","h":"Military & Spy Ciphers","c":"Twentieth-century espionage","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Physical concealment can be discovered by inspection and magnification","s":"Microdots conceal miniature photographic images in ordinary carriers. The browser demonstration is a visual metaphor, not optical microphotography or encryption.","g":["wwi","military & spy ciphers","historical only"],"exhibitNumber":110,"collection":"cipher-history"},{"t":"MIT Mystery Hunt","u":"ciphers/mit-mystery-hunt.html","k":"cipher","h":"Cipher Culture","c":"MIT · 1981–present","b":"—","trust":null,"n":"Annual collaborative puzzle hunt","s":"An annual puzzle hunt at MIT (since 1981) where teams solve dozens of layered cryptographic, linguistic, and lateral-thinking puzzles to find a hidden coin somewhere on campus.","g":["cold war","cipher culture"],"exhibitNumber":131,"collection":"cipher-history"},{"t":"Monoalphabetic Substitution","u":"ciphers/monoalphabetic.html","k":"cipher","h":"Classical Substitution","c":"Ancient roots · medieval cryptanalysis","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Language statistics and word patterns can expose a fixed substitution.","s":"Monoalphabetic substitution — replace each letter with a fixed substitute. A large keyspace can still leak language patterns; al-Kindi described frequency analysis in the ninth century.","g":["medieval","classical substitution","broken"],"exhibitNumber":4,"collection":"cipher-history"},{"t":"Morse Code","u":"ciphers/morse.html","k":"cipher","h":"World Origins of Cryptography","c":"Telegraph age · 1840s →","b":"—","trust":null,"n":"Encoding, not encryption","s":"International Morse code — the dot-dash telegraph alphabet that made the wired world possible and provided the carrier signal for a century of military and amateur ciphers.","g":["victorian","world origins of cryptography"],"exhibitNumber":88,"collection":"cipher-history"},{"t":"Myszkowski Transposition","u":"ciphers/myszkowski.html","k":"cipher","h":"Transposition & Fractionation","c":"1902 · France","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Repeated-keyword transposition preserves letter frequencies and is vulnerable to statistical and keyword-search attacks.","s":"Myszkowski transposition (1902) — repeated keyword letters share a rank. Encrypt and decrypt interactively, including incomplete final rows, and compare columnar transposition.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":164,"collection":"cipher-history"},{"t":"National Treasure","u":"ciphers/national-treasure.html","k":"cipher","h":"Cipher Culture","c":"Fiction · 2004","b":"—","trust":null,"n":"Pop Culture","s":"The 2004 film National Treasure turns historical documents and landmarks into a fictional cipher hunt; its book clue uses the Silence Dogood letters.","g":["digital","cipher culture"],"exhibitNumber":128,"collection":"cipher-history"},{"t":"Navajo Code Talkers","u":"ciphers/navajo-code-talkers.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWII · 1942–1945","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken in wartime service; a historical military code.","s":"Navajo code talkers used a specialized military vocabulary and spelling alphabet during World War II. Their language and the constructed code were distinct layers.","g":["wwii","mechanical cipher machines","historical only"],"exhibitNumber":31,"collection":"cipher-history"},{"t":"NEMA — Swiss Rotor Machine","u":"ciphers/nema.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Postwar Switzerland · 1947","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Obsolete Swiss military rotor machine. The demo fixes one historical wheel configuration; the 17,576-keypress state period is not its key space.","s":"Swiss NEMA rotor machine (1947) — four cipher wheels, independent stepping wheels, and a moving reflector. Explore historical military encryption and decryption.","g":["cold war","mechanical cipher machines","historical only"],"exhibitNumber":161,"collection":"cipher-history"},{"t":"NFC Authentication: When the Tag Stays Unlocked","u":"ciphers/nfc-deployment.html","k":"cipher","h":"Modern Cryptography","c":"Modern cryptography · research case study","b":"—","trust":null,"n":"Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.","s":"A case study of protocol state, key storage, integrity checks and counterfeit hardware.","g":["modern","modern cryptography"],"exhibitNumber":172,"collection":"cipher-history"},{"t":"Nihilist Cipher","u":"ciphers/nihilist.html","k":"cipher","h":"Military & Spy Ciphers","c":"1880s · Russia","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis of digit pairs · Kasiski-equivalent","s":"The additive Nihilist cipher sums plaintext and repeating-key Polybius coordinates. Its traditional Russian revolutionary attribution is qualified, and it differs from Nihilist transposition.","g":["19th century","military & spy ciphers","broken"],"exhibitNumber":19,"collection":"cipher-history"},{"t":"Nomenclator","u":"ciphers/nomenclator.html","k":"cipher","h":"Substitution Era","c":"Renaissance · 1400s–1800s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Historical systems combine code groups, letter substitutions, homophones and nulls; evidence varies by key and traffic.","s":"Nomenclator (1400s) — The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary. Hall II of The Cipher Museum.","g":["renaissance","substitution era","broken"],"exhibitNumber":54,"collection":"cipher-history"},{"t":"Null Cipher","u":"ciphers/null-cipher.html","k":"cipher","h":"The Transposition Hall","c":"Antiquity → present","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Weak (concealment, not encryption)","s":"A null cipher selects a message from a cover text using a positional rule. It conceals information in ordinary-looking writing; discovery of the rule defeats that concealment.","g":["ancient","the transposition hall","historical only"],"exhibitNumber":86,"collection":"cipher-history"},{"t":"One-Time Pad","u":"ciphers/one-time-pad.html","k":"cipher","h":"The Unbreakable","c":"1882 · Theoretical","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"Perfect secrecy requires an independent, uniformly random secret pad at least as long as the message, used once. No authentication.","s":"A one-time pad offers perfect secrecy with a secret, uniform, independent message-length key used once. Try ciphertext tampering to see why secrecy is not authentication.","g":["theoretical","the unbreakable","secure (modern)"],"exhibitNumber":36,"collection":"cipher-history"},{"t":"Patterson's Cipher for Jefferson","u":"ciphers/patterson-jefferson-cipher.html","k":"cipher","h":"Classical Substitution","c":"1801","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Solved 2007 — after 206 years","s":"Robert Patterson's 1801 cipher for Thomas Jefferson — text written down the lines, cut into sections of at most nine, the lines shuffled and padded with arbitrary letters. No earlier decipherment is documented before Lawren Smithline solved it in 2007 by dynamic programming over digraph frequencies.","g":["modern","classical substitution","broken"],"exhibitNumber":139,"collection":"cipher-history"},{"t":"Phaistos Disc","u":"ciphers/phaistos-disc.html","k":"unsolved","h":"Unsolved Ciphers","c":"Bronze Age Crete · ~1700 BCE","b":"—","trust":null,"n":"Undeciphered script","s":"The Phaistos Disc is a Bronze Age stamped inscription from Crete. Its language and reading remain disputed; it is not established as a cipher.","g":["ancient","unsolved ciphers"],"exhibitNumber":107,"collection":"cipher-history"},{"t":"Pigpen Cipher","u":"ciphers/pigpen.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"18th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Symbol frequency analysis · Pattern recognition","s":"Pigpen cipher (~1700) — Freemason geometric substitution where each letter becomes the lines and dots of its grid cell. Trivial once the glyph table is seen.","g":["medieval","puzzle & novelty ciphers","broken"],"exhibitNumber":32,"collection":"cipher-history"},{"t":"Playfair Cipher","u":"ciphers/playfair.html","k":"cipher","h":"Classical Substitution","c":"Victorian · 1854","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Digraph statistics · hill climbing","s":"Playfair cipher (1854) — Charles Wheatstone's keyed 5x5 digram cipher promoted by Lord Playfair. Used by the British in WWI; broken by digram analysis.","g":["19th century","classical substitution","broken"],"exhibitNumber":6,"collection":"cipher-history"},{"t":"Polybius Square","u":"ciphers/polybius.html","k":"cipher","h":"World Origins of Cryptography","c":"Ancient Greece · ~150 BC","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis","s":"Polybius described a Greek torch-signalling system. The modern Latin 5×5 grid adapts its coordinate idea and supports later substitution and fractionation ciphers.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":3,"collection":"cipher-history"},{"t":"Porta Cipher","u":"ciphers/porta.html","k":"cipher","h":"Polyalphabetic Revolution","c":"Renaissance · 1563","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Index of Coincidence · Statistical analysis","s":"The Porta cipher uses reciprocal substitutions selected by a repeating key. This exhibit’s 26-letter, 13-row table is a modern adaptation of the historical construction.","g":["renaissance","polyalphabetic revolution","broken"],"exhibitNumber":10,"collection":"cipher-history"},{"t":"Purple (97-shiki ōbun injiki)","u":"ciphers/purple.html","k":"cipher","h":"Mechanical Cipher Machines","c":"World War II · 1939–1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frank Rowlett, Genevieve Grotjan & the US SIS · 20 September 1940","s":"Purple was Japan’s Type 97 diplomatic stepping-switch cipher. Grotjan’s 20 September 1940 breakthrough helped the US Army SIS team reconstruct it.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":52,"collection":"cipher-history"},{"t":"Rail Fence Cipher","u":"ciphers/rail-fence.html","k":"cipher","h":"Transposition & Fractionation","c":"Classical Transposition","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Brute force · Trivial keyspace","s":"Rail Fence transposes a message along a zigzag route. Rail count, offset conventions and message length define the search; there is no universal ten-rail maximum.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":13,"collection":"cipher-history"},{"t":"RAF–Stasi Records and an OTP Teaching Model","u":"ciphers/red-army-faction.html","k":"cipher","h":"Military & Spy Ciphers","c":"Cold War · 1970–1998","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Illustrative letter-pad arithmetic; not a reconstruction of an authenticated RAF key or message.","s":"RAF–Stasi contacts are documented, but this exhibit does not establish a specific RAF one-time-pad system. The interactive is a generic arithmetic illustration.","g":["cold war","military & spy ciphers","educational"],"exhibitNumber":85,"collection":"cipher-history"},{"t":"Red (Type A)","u":"ciphers/red-type-a.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Interwar to WWII - 1930s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken by SIS","s":"Red (Type A) (1930s) - the Japanese diplomatic half-rotor predecessor to Purple and the cryptanalytic bridge to MAGIC.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":98,"collection":"cipher-history"},{"t":"Joseph Rochefort","u":"ciphers/rochefort.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Pacific","b":"—","trust":null,"n":"Codebreaker Biography","s":"Joseph Rochefort led Station HYPO’s team. Its signals intelligence helped US commanders prepare for Midway alongside other Allied analysis, reconnaissance and operational decisions.","g":["wwii","hall of codebreakers"],"exhibitNumber":115,"collection":"cipher-history"},{"t":"The Rosetta Stone","u":"ciphers/rosetta-stone.html","k":"cipher","h":"World Origins of Cryptography","c":"Ptolemaic Egypt · 196 BCE","b":"—","trust":null,"n":"Two languages, three scripts; Champollion’s 1822 breakthrough was part of a longer decipherment.","s":"The Rosetta Stone (196 BCE) records a decree in two languages and three scripts. It supported the decipherment of Egyptian hieroglyphs; it is not an encryption system.","g":["ancient","world origins of cryptography"],"exhibitNumber":71,"collection":"cipher-history"},{"t":"ROT13","u":"ciphers/rot13.html","k":"cipher","h":"World Origins of Cryptography","c":"Modern · 1980s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Knowing the system","s":"ROT13 is a fixed Caesar shift of 13, popularized as an early Usenet viewing convention. Applying it twice restores the text; it provides no confidentiality.","g":["modern","world origins of cryptography","broken"],"exhibitNumber":42,"collection":"cipher-history"},{"t":"Rasterschlüssel 44 (RS44)","u":"ciphers/rs44.html","k":"cipher","h":"Transposition Ciphers","c":"German field cipher · 1944","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Published Allied attacks used captured stencils, retransmissions and probable plaintext; isolated traffic could remain difficult.","s":"Reconstruct the 27 March 1944 RS44 operating procedure with its original example stencil. Animate permitted-cell entry and keyed extraction.","g":["wwii","transposition ciphers","broken"],"exhibitNumber":165,"collection":"cipher-history"},{"t":"RSA","u":"ciphers/rsa.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1977","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"RSA uses a public modulus and exponents to support public-key constructions. Secure encryption and signatures need specified padding, adequate parameters and correct implementation.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":61,"collection":"cipher-history"},{"t":"Running Key Cipher","u":"ciphers/running-key.html","k":"cipher","h":"Polyalphabetic Revolution","c":"19th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Source text identification · Statistical analysis","s":"Running Key uses a message-length text passage as its Vigenère key. Language patterns in both message and key prevent the perfect secrecy of an ideal one-time pad.","g":["19th century","polyalphabetic revolution","broken"],"exhibitNumber":12,"collection":"cipher-history"},{"t":"Sator Square","u":"ciphers/sator-square.html","k":"cipher","h":"Cipher Culture","c":"Roman Empire · 1st–4th c. CE","b":"—","trust":null,"n":"Palindromic word square; proposed Christian interpretations remain hypotheses.","s":"The SATOR square has five palindromically arranged words. Its letters form a PATER NOSTER cross with two A’s and two O’s left over; the intended meaning remains debated.","g":["ancient","cipher culture"],"exhibitNumber":102,"collection":"cipher-history"},{"t":"Scytale","u":"ciphers/scytale.html","k":"cipher","h":"World Origins of Cryptography","c":"Ancient Sparta · interpretation debated","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Simple transposition model; historical origin and military use are debated.","s":"The traditional scytale reconstruction illustrates transposition, but the dates and cryptographic interpretation of ancient evidence are disputed.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":1,"collection":"cipher-history"},{"t":"SHA-256","u":"ciphers/sha256.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 2002","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"SHA-256 produces a 256-bit digest for messages shorter than 2^64 bits. Used in checksums, signatures and Bitcoin; a bare hash does not authenticate its sender.","g":["digital","modern cryptography","secure (modern)"],"exhibitNumber":63,"collection":"cipher-history"},{"t":"Shamir's Secret Sharing","u":"ciphers/shamir-secret-sharing.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1979","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"Shamir's Secret Sharing (1979) — split a secret so any k of n holders can rebuild it and any k−1 learn absolutely nothing.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":159,"collection":"protocols"},{"t":"Shugborough Inscription","u":"ciphers/shugborough.html","k":"unsolved","h":"Unsolved Ciphers","c":"Georgian England · mid-18th century","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unresolved inscription; an encoding method is not established","s":"An eighteenth-century garden monument with eight unexplained letters, O · U · O · S · V · A · V · V, and D · M below.","g":["modern","unsolved ciphers","historical only"],"exhibitNumber":103,"collection":"cipher-history"},{"t":"SIGABA (ECM Mark II)","u":"ciphers/sigaba.html","k":"cipher","h":"Mechanical Machines","c":"WWII · 1940","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in wartime service; obsolete today.","s":"SIGABA used fifteen rotors in cipher, control and index banks. No successful enemy wartime cryptanalytic break is publicly documented; the widget is a simplified model.","g":["wwii","mechanical machines","historical only"],"exhibitNumber":57,"collection":"cipher-history"},{"t":"SIGSALY — The Encrypted Speech System","u":"ciphers/sigsaly.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWII · 1943–1946","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"","s":"SIGSALY protected high-level Allied voice communications using quantised vocoder parameters and matched one-time key records. The demo illustrates modular addition only.","g":["wwii","mechanical cipher machines","historical only"],"exhibitNumber":109,"collection":"cipher-history"},{"t":"Slidex","u":"ciphers/slidex.html","k":"cipher","h":"Civil War Gallery","c":"WWII & Cold War · 1943–1980s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Short-lived tactical vocabulary cards and changing cursor settings; the widget is a simplified bigram model.","s":"Slidex used a 204-cell tactical vocabulary card and sliding coordinate strips. Reported German recovery times concerned particular wartime traffic, not every message.","g":["wwii","civil war gallery","broken"],"exhibitNumber":92,"collection":"cipher-history"},{"t":"SoDark and Radio Linking","u":"ciphers/sodark.html","k":"cipher","h":"Modern Cryptography","c":"Modern cryptography · research case study","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.","s":"An eight-round attack on HF link establishment, with its data and access conditions visible.","g":["modern","modern cryptography","broken"],"exhibitNumber":171,"collection":"cipher-history"},{"t":"Solitaire / Pontifex","u":"ciphers/solitaire.html","k":"cipher","h":"The Unbreakable","c":"Modern · 1999","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"","s":"Solitaire / Pontifex (1999) — Bruce Schneier's hand cipher driven by a 54-card deck (written for Cryptonomicon). Crowley showed a ~1/22.5 keystream bias.","g":["digital","the unbreakable","historical only"],"exhibitNumber":51,"collection":"cipher-history"},{"t":"Somerton Man Code","u":"ciphers/somerton-man.html","k":"unsolved","h":"Unsolved Ciphers","c":"Post-WWII Australia · 1948","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unresolved inscription; a 2022 genealogical identification proposal is separate from deciphering these letters.","s":"The Somerton Man inscription and a simplified transcription experiment. A 2022 genealogical identification proposal is separate from interpreting the letters.","g":["wwii","unsolved ciphers","historical only"],"exhibitNumber":105,"collection":"cipher-history"},{"t":"Stager Cipher","u":"ciphers/stager.html","k":"cipher","h":"Civil War Gallery","c":"Union · 1861","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical Union route-code system; wartime operational success is not a mathematical security guarantee.","s":"The Union’s Stager system combined word transposition, code words and operational procedures. Wartime success is a historical claim, not a proof of mathematical security.","g":["19th century","civil war gallery","historical only"],"exhibitNumber":24,"collection":"cipher-history"},{"t":"Station HYPO — Pearl Harbor to Midway","u":"ciphers/station-hypo.html","k":"person","h":"Hall of Codebreakers","c":"WWII · 1940–1942","b":"—","trust":null,"n":"Broken (JN-25)","s":"Station HYPO combined partial JN-25 recovery, traffic analysis and operational context to help anticipate the Japanese operation against Midway in 1942.","g":["wwii","hall of codebreakers"],"exhibitNumber":114,"collection":"cipher-history"},{"t":"Straddling Checkerboard","u":"ciphers/straddling-checkerboard.html","k":"cipher","h":"Military & Spy Ciphers","c":"Late 19th – 20th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Weak (alone) · Strong (in VIC)","s":"The straddling checkerboard uses one- and two-digit letter codes. It is a substitution component of VIC; this exhibit does not establish an exact first-use date.","g":["19th century","military & spy ciphers","broken"],"exhibitNumber":45,"collection":"cipher-history"},{"t":"Tap Code","u":"ciphers/tap-code.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"Vietnam War · earlier precedents","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis · Grid deduction","s":"Tap Code (1965) — the 5x5 Polybius square tapped through walls as row-then-column knocks. Used by US POWs in the Hanoi Hilton during the Vietnam War.","g":["cold war","puzzle & novelty ciphers","broken"],"exhibitNumber":34,"collection":"cipher-history"},{"t":"Trifid Cipher","u":"ciphers/trifid.html","k":"cipher","h":"Transposition & Fractionation","c":"1902","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Statistical analysis","s":"Trifid cipher (1902) — Felix Delastelle's three-dimensional 3x3x3 extension of the Bifid that fractionates letters into trits and shuffles them across a period.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":17,"collection":"cipher-history"},{"t":"Trithemius Progressive Cipher","u":"ciphers/trithemius.html","k":"cipher","h":"The Polyalphabetic Era","c":"German Renaissance · 1518","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Easy","s":"Johannes Trithemius's progressive shift cipher (Polygraphia, 1518) — the first published polyalphabetic, where every successive letter is shifted one further than the last.","g":["renaissance","the polyalphabetic era","broken"],"exhibitNumber":72,"collection":"cipher-history"},{"t":"Fleissner Turning Grille","u":"ciphers/turning-grille.html","k":"cipher","h":"Transposition & Fractionation","c":"1881 · German WWI use","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"A transposition cipher: quarter-turn holes permute a complete block, preserving letter frequencies.","s":"Fleissner turning grille — a transposition cipher used by Germany in WWI. Rotate an interactive mask 90 degrees and contrast it with Cardano steganography.","g":["wwi","transposition & fractionation","broken"],"exhibitNumber":163,"collection":"cipher-history"},{"t":"Two-Square Cipher","u":"ciphers/two-square.html","k":"cipher","h":"Classical Substitution","c":"Classical Digraph Cipher","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Digram frequency · same-row leak","s":"Two-square uses two keyed 5×5 squares to encipher letter pairs. This demo follows the ACA horizontal rectangle rule and discloses its extra filler-escape convention.","g":["19th century","classical substitution","broken"],"exhibitNumber":44,"collection":"cipher-history"},{"t":"Typex","u":"ciphers/typex.html","k":"cipher","h":"Mechanical Machines","c":"WWII · 1937","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in wartime service; obsolete today.","s":"Typex was a British Enigma-derived family with five rotor positions. Later models included plugboards; the browser widget is a simplified rotor model.","g":["wwii","mechanical machines","historical only"],"exhibitNumber":58,"collection":"cipher-history"},{"t":"UA-8295: Forensic Cryptanalysis of a Message Terminal","u":"ciphers/ua-8295.html","k":"cipher","h":"Modern Cryptography","c":"Modern cryptography · research case study","b":"—","trust":null,"n":"Forensic cryptanalysis case study; abstract and publication record verified, with full-paper technical details outside this exhibit’s verified scope.","s":"A preprint case study separating cryptanalytic findings from inferences about backdoor design.","g":["modern","modern cryptography"],"exhibitNumber":170,"collection":"cipher-history"},{"t":"VENONA Project","u":"ciphers/venona.html","k":"cipher","h":"The Unbreakable","c":"Cold War · 1943–1980","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Partial break (key reuse exploit)","s":"VENONA analysed intercepted Soviet messages, chiefly from the 1940s, by exploiting duplicated pad material. The project ran from 1943 to 1980.","g":["wwii","the unbreakable","broken"],"exhibitNumber":108,"collection":"cipher-history"},{"t":"Vernam Cipher","u":"ciphers/vernam.html","k":"cipher","h":"The Unbreakable","c":"1917","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"XOR gives perfect secrecy only with an independent, uniformly random secret pad at least as long as the message, used once. No authentication.","s":"Vernam’s teleprinter system combines text with a key stream. XOR supplies perfect secrecy only when the pad is uniformly random, independent, secret, long enough and never reused.","g":["wwi","the unbreakable","secure (modern)"],"exhibitNumber":37,"collection":"cipher-history"},{"t":"VIC Cipher","u":"ciphers/vic.html","k":"cipher","h":"Military & Spy Ciphers","c":"Cold War · 1950s","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical Soviet hand system; the key procedure became known through Häyhänen’s 1957 defection. No proof of unbreakability.","s":"VIC cipher (1953) — Reino Häyhänen's KGB hand cipher: straddling checkerboard, double transposition, date-driven keystream. Exposed in 1957 after his defection, not broken cryptanalytically.","g":["cold war","military & spy ciphers","historical only"],"exhibitNumber":23,"collection":"cipher-history"},{"t":"Vietnamese Underground Codes","u":"ciphers/vietnamese-underground.html","k":"cipher","h":"Military & Spy Ciphers","c":"Modern · 1940s–1975","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Illustrative concealment and cipher models; specific operational attribution is not established here.","s":"Vietnamese wartime communications used changing codes and ciphers. This keyword-substitution widget is a teaching model, not a verified universal underground system.","g":["cold war","military & spy ciphers","educational"],"exhibitNumber":84,"collection":"cipher-history"},{"t":"Vigenère Cipher","u":"ciphers/vigenere.html","k":"cipher","h":"Hall III","c":"Renaissance · 1553","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Babbage ~1854 · Kasiski 1863","s":"The repeating-key Vigenère cipher exposes periodic structure. Bellaso described a related system in 1553; Babbage and Kasiski developed attacks in the nineteenth century.","g":["renaissance","hall iii","broken"],"exhibitNumber":8,"collection":"cipher-history"},{"t":"The Voynich Manuscript","u":"ciphers/voynich.html","k":"unsolved","h":"Unsolved Ciphers","c":"Early 15th c. · Carbon-dated 1404–1438","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"No generally accepted decipherment; whether the text encodes language or a cipher remains unresolved.","s":"The Voynich manuscript has an undeciphered script. Parchment dating and sample-dependent text statistics constrain hypotheses without identifying its language or method.","g":["renaissance","unsolved ciphers","historical only"],"exhibitNumber":40,"collection":"cipher-history"},{"t":"Wadsworth Cipher","u":"ciphers/wadsworth-cipher.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1817 · USA","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Ciphertext-only stochastic hill climbing (2020)","s":"Wadsworth’s 1817 device uses geared disks with 33 and 26 positions. A published 2020 ciphertext-only search studied key recovery for this historical design.","g":["19th century","mechanical cipher machines","broken"],"exhibitNumber":69,"collection":"cipher-history"},{"t":"Wallis Ciphers","u":"ciphers/wallis-ciphers.html","k":"cipher","h":"Classical Substitution","c":"English Civil War · 1642–1651","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Royalist nomenclators — broken by Wallis","s":"John Wallis’s seventeenth-century cryptanalysis, with a clearly identified museum nomenclator model. Historical recovery times varied from hours to months.","g":["renaissance","classical substitution","broken"],"exhibitNumber":75,"collection":"cipher-history"},{"t":"Wheatstone Cryptograph","u":"ciphers/wheatstone.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Victorian London · 1867","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical unequal-dial device. The current equal-dial widget is a fixed-substitution teaching model, not its mechanism.","s":"Charles Wheatstone's 1867 cryptograph — two geared clock dials whose hands sweep an outer plain alphabet and an inner mixed alphabet, generating a polyalphabetic ciphertext one click at a time.","g":["victorian","mechanical cipher machines","historical only"],"exhibitNumber":74,"collection":"cipher-history"},{"t":"Herbert Yardley","u":"ciphers/yardley.html","k":"person","h":"Hall of Codebreakers","c":"Interwar · USA","b":"—","trust":null,"n":"Codebreaker Biography","s":"Herbert Osborne Yardley founded America's Black Chamber in 1919, broke Japanese diplomatic codes at the 1921 Washington Naval Conference, and then infamously published the secrets in his 1931 bestseller.","g":["interwar","hall of codebreakers"],"exhibitNumber":118,"collection":"cipher-history"},{"t":"Zero-Knowledge Proofs","u":"ciphers/zero-knowledge-proofs.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1985","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"Zero-knowledge proofs (1985) — convince someone a statement is true while revealing nothing beyond its truth. Run the Schnorr protocol and its simulator.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":160,"collection":"protocols"},{"t":"Zimmermann Telegram","u":"ciphers/zimmermann.html","k":"cipher","h":"Civil War Gallery","c":"WWI · January 1917","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (Room 40)","s":"The January 1917 Zimmermann Telegram: code 0075 to Washington, then re-encoded in 13040 for Mexico. Room 40’s reading helped draw the United States into WWI.","g":["wwi","civil war gallery","broken"],"exhibitNumber":89,"collection":"cipher-history"},{"t":"Zodiac Cipher","u":"ciphers/zodiac.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"1969 · Solved 2020","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Oranchak, Blake & Van Eycke (2020)","s":"Zodiac killer ciphers (1969) — homophonic substitution as in Z-408 (broken in 1969 by the Hardens) and Z-340 (broken in 2020 by Oranchak, Blake, and Van Eycke).","g":["cold war","puzzle & novelty ciphers","broken"],"exhibitNumber":35,"collection":"cipher-history"},{"t":"World Origins of Cryptography","u":"halls/ancient.html","k":"hall","h":"—","c":"Hall I · Ancient traditions and later comparisons","b":"—","s":"World origins of cryptography from ancient Egypt and Hebrew Atbash through Greek, Roman, Indian, and Arabic traditions.","g":["hall","ancient"]},{"t":"The American Civil War Gallery","u":"halls/civil-war.html","k":"hall","h":"—","c":"Hall VI · Special Exhibition · 1861 – 1865","b":"—","s":"Civil War cryptography: the Stager cipher, Confederate Vigenère, and dictionary codes from the American Civil War.","g":["hall"]},{"t":"Hall of Codebreakers","u":"halls/codebreakers.html","k":"hall","h":"—","c":"Hall X · The Human Stories","b":"—","s":"Twenty-one moments when human ingenuity broke what mathematics could not. From Al-Kindi (850 AD) to the Copiale and Chaocipher reconstructions of 2010-2014.","g":["hall","ancient","renaissance","19th century","wwi","cold war"]},{"t":"Cipher Culture","u":"halls/culture.html","k":"hall","h":"—","c":"Hall XIII · Cipher Culture","b":"—","s":"Cryptography in art, music, literature, espionage fiction, and games — Bach's BACH motif, Poe's 'The Gold-Bug', Conan Doyle's Dancing Men, ARG ciphers, and modern puzzle hunts.","g":["hall","renaissance","19th century","modern","ancient"]},{"t":"Mechanical Cipher Machines","u":"halls/machines.html","k":"hall","h":"—","c":"Hall VII · 1467 – 1950s","b":"—","s":"Mechanical cipher machines: Enigma, Lorenz, Jefferson Disk, and Alberti’s original cipher disk.","g":["hall","renaissance","19th century","wwi","cold war","modern"]},{"t":"Military & Spy Ciphers","u":"halls/military.html","k":"hall","h":"—","c":"Hall V · 1880s — Cold War · 1880 – 1970","b":"—","s":"Military and spy ciphers used in real warfare: Nihilist, VIC, Stager, and Confederate systems.","g":["hall","wwi","cold war","19th century"]},{"t":"Modern Cryptography","u":"halls/modern-crypto.html","k":"hall","h":"—","c":"Hall XI · 1976 – Present","b":"—","s":"Explore block ciphers, key agreement, public-key schemes, hashing, signatures, secret sharing and zero-knowledge proofs, with their assumptions and limits.","g":["hall","modern","theoretical"]},{"t":"The Polyalphabetic Revolution","u":"halls/polyalphabetic.html","k":"hall","h":"—","c":"Hall III · Renaissance — 19th century","b":"—","s":"The polyalphabetic revolution: Vigenère, Beaufort, Porta, and the ciphers that defeated simple frequency analysis.","g":["hall","renaissance","19th century"]},{"t":"Puzzle & Novelty Ciphers","u":"halls/puzzle.html","k":"hall","h":"—","c":"Hall VIII · 1605 – Present","b":"—","s":"Puzzle and novelty ciphers: Pigpen, Bacon’s bilateral, tap code, and other creative encoding systems.","g":["hall","medieval","renaissance","cold war","modern"]},{"t":"Classical Substitution","u":"halls/substitution.html","k":"hall","h":"—","c":"Hall II · Ancient roots — 20th century","b":"—","s":"Classical substitution ciphers: monoalphabetic, homophonic, and Polybius square techniques that shaped cryptography for centuries.","g":["hall","medieval","renaissance","19th century","modern","wwi"]},{"t":"Transposition & Fractionation","u":"halls/transposition.html","k":"hall","h":"—","c":"Hall IV · 19th – Early 20th Century","b":"—","s":"Transposition and fractionation ciphers: rail fence, columnar, bifid, trifid, and ADFGVX systems.","g":["hall","19th century","wwi","modern"]},{"t":"The Unbreakable","u":"halls/unbreakable.html","k":"hall","h":"—","c":"Hall IX · 1882 – Present","b":"—","s":"One-Time Pad, Vernam cipher, VENONA, and Claude Shannon's proof of perfect secrecy — where perfect theory met operational failure.","g":["hall","theoretical","wwi","19th century","cold war","modern"]},{"t":"Unsolved Ciphers","u":"halls/unsolved.html","k":"hall","h":"—","c":"Hall XII · Open Problems · Living Research","b":"—","s":"Unresolved cryptograms, inscriptions and writing systems. Distinguish unknown meanings, uncertain methods and missing evidence from proven cryptographic security.","g":["hall","renaissance","modern","19th century","wwi","ancient"]},{"t":"The Closest Vector Problem","u":"hall-of-foundations/closest-vector.html","k":"exhibit","h":"Foundations","c":"§152","b":"—","s":"Compare exact nearest-point search with coordinate rounding in two dimensions. An intuition for lattice decoding, not an implementation of ML-KEM.","g":["foundations","mathematics","cvp","closest vector","lwe","learning with errors","kyber","ml-kem","babai"],"exhibitNumber":152,"collection":"foundations"},{"t":"Elliptic Curves over ℝ","u":"hall-of-foundations/elliptic-curves-real.html","k":"exhibit","h":"Foundations","c":"§150","b":"—","s":"A gentle first look at the elliptic-curve group law, drawn by hand, before it moves to a finite field.","g":["foundations","mathematics","elliptic curve","group law","chord tangent","ecc","ecdsa"],"exhibitNumber":150,"collection":"foundations"},{"t":"Information & Entropy","u":"hall-of-foundations/entropy.html","k":"exhibit","h":"Foundations","c":"§151","b":"—","s":"Shannon’s measure of surprise: how distributions, independence and key generation affect secrecy.","g":["foundations","mathematics","entropy","shannon","information theory","perfect secrecy","one-time pad"],"exhibitNumber":151,"collection":"foundations"},{"t":"Euler & Fermat","u":"hall-of-foundations/euler-fermat.html","k":"exhibit","h":"Foundations","c":"§145","b":"—","s":"The little theorem that makes RSA decryption undo RSA encryption. Watch a message round-trip.","g":["foundations","mathematics","euler","fermat","totient","rsa","little theorem"],"exhibitNumber":145,"collection":"foundations"},{"t":"Finite Fields","u":"hall-of-foundations/finite-fields.html","k":"exhibit","h":"Foundations","c":"§142","b":"—","s":"Watch a smooth elliptic curve shatter into a scatter of dots over a finite field — and see why the discrete logarithm becomes hard.","g":["foundations","mathematics","finite field","galois field","gf","discrete log","ecc"],"exhibitNumber":142,"collection":"foundations"},{"t":"Group Theory","u":"hall-of-foundations/group-theory.html","k":"exhibit","h":"Foundations","c":"§149","b":"—","s":"Generators, order, and cyclic structure — the grammar of the discrete-log family.","g":["foundations","mathematics","group theory","cyclic group","generator","order","diffie-hellman"],"exhibitNumber":149,"collection":"foundations"},{"t":"Hall of Foundations","u":"hall-of-foundations/index.html","k":"hall","h":"—","c":"—","b":"—","s":"The Hall of Foundations — interactive exhibits on the mathematics under cryptography: the number theory, hardness assumptions, and structures behind RSA, ECC, and the post-quantum standards.","g":["foundations","mathematics","hall"]},{"t":"Polynomial Interpolation · Hall of Foundations","u":"hall-of-foundations/interpolation.html","k":"exhibit","h":"Foundations","c":"§155","b":"—","s":"Drag points until the curve locks and the secret intercept appears — the heart of Shamir’s Secret Sharing.","g":["foundations","mathematics","interpolation","lagrange","shamir","secret sharing","threshold"],"exhibitNumber":155,"collection":"foundations"},{"t":"Lattices & the SVP","u":"hall-of-foundations/lattices-svp.html","k":"exhibit","h":"Foundations","c":"§147","b":"—","s":"Drag a basis and hunt the shortest vector — the lattice foundation under Kyber, Dilithium, and post-quantum cryptography.","g":["foundations","mathematics","lattice","svp","shortest vector","post-quantum","kyber","ml-kem"],"exhibitNumber":147,"collection":"foundations"},{"t":"Learning With Errors","u":"hall-of-foundations/learning-with-errors.html","k":"exhibit","h":"Foundations","c":"§157","b":"—","s":"Solve for a secret vector, then switch the noise on and watch the same algebra fail — the Learning With Errors problem beneath ML-KEM and ML-DSA.","g":["foundations","mathematics"],"exhibitNumber":157,"collection":"foundations"},{"t":"Modular Arithmetic","u":"hall-of-foundations/modular-arithmetic.html","k":"exhibit","h":"Foundations","c":"§143","b":"—","s":"Clock arithmetic, primitive roots, and the cyclic group Diffie–Hellman lives inside.","g":["foundations","mathematics","modular arithmetic","clock","primitive root","diffie-hellman"],"exhibitNumber":143,"collection":"foundations"},{"t":"The Ground Beneath the Curve","u":"hall-of-foundations/modularity-exhibit.html","k":"exhibit","h":"Foundations","c":"—","b":"—","s":"The Ground Beneath the Curve — the modularity theorem and the number theory elliptic-curve cryptography inherits.","g":["foundations","mathematics","modularity theorem","fermat","wiles","number theory","ecc"],"exhibitNumber":141,"collection":"foundations"},{"t":"The One-Way Function","u":"hall-of-foundations/one-way-function.html","k":"exhibit","h":"Foundations","c":"§146","b":"—","s":"Multiply in a blink; factor and sweat — the one-way function, conceptual keystone of modern cryptography.","g":["foundations","mathematics","one-way function","factoring","trapdoor","hardness"],"exhibitNumber":146,"collection":"foundations"},{"t":"Bilinear Pairings · Hall of Foundations","u":"hall-of-foundations/pairings.html","k":"exhibit","h":"Foundations","c":"§156","b":"—","s":"Verify a product of hidden scalars without revealing them — the bilinear pairing under zk-SNARKs.","g":["foundations","mathematics","pairing","bilinear","zk-snark","zero-knowledge","ibe"],"exhibitNumber":156,"collection":"foundations"},{"t":"Polynomial Rings · Hall of Foundations","u":"hall-of-foundations/polynomial-rings.html","k":"exhibit","h":"Foundations","c":"§153","b":"—","s":"The polynomial ring R_q = Z_q[X]/(Xⁿ+1) — the structured lattice inside ML-KEM and ML-DSA.","g":["foundations","mathematics","polynomial ring","ntt","module-lwe","ml-kem","ml-dsa","post-quantum"],"exhibitNumber":153,"collection":"foundations"},{"t":"The Prime Number Theorem","u":"hall-of-foundations/prime-number-theorem.html","k":"exhibit","h":"Foundations","c":"§144","b":"—","s":"Prime density helps estimate candidate-search effort in RSA key generation; it does not prove primality or a fixed runtime.","g":["foundations","mathematics","prime number theorem","primes","rsa","key generation"],"exhibitNumber":144,"collection":"foundations"},{"t":"The Random Oracle · Hall of Foundations","u":"hall-of-foundations/random-oracle.html","k":"exhibit","h":"Foundations","c":"§154","b":"—","s":"Flip one input bit, scramble half the output — the idealized hash assumption beneath Fiat–Shamir signatures.","g":["foundations","mathematics","random oracle","hash","avalanche","fiat-shamir","signatures"],"exhibitNumber":154,"collection":"foundations"},{"t":"Reduction & Proof","u":"hall-of-foundations/reduction.html","k":"exhibit","h":"Foundations","c":"§148","b":"—","s":"What “provably as hard as factoring” actually claims — and what it quietly assumes.","g":["foundations","mathematics","reduction","security proof","provable security","hardness"],"exhibitNumber":148,"collection":"foundations"},{"t":"Museum Map","u":"museum-map.html","k":"page","h":"—","c":"Your Guide to the Collection","b":"—","s":"Navigate all 13 exhibit halls, the Hall of Foundations mathematics annex, and 172 exhibits in The Cipher Museum. Find your next cryptographic adventure.","g":[]},{"t":"History of Encryption","u":"timeline.html","k":"page","h":"—","c":"Writing, Secrecy and Cryptanalysis","b":"—","s":"A historical timeline of writing, ciphers and cryptanalysis, distinguishing documented milestones, approximate dates and undated teaching models.","g":[]},{"t":"How Ciphers Work","u":"learn.html","k":"page","h":"—","c":"Understanding Encryption","b":"—","s":"Understand classical ciphers and compare their mechanisms with modern encryption — from Caesar's shift to AES.","g":[]},{"t":"Cryptanalysis Techniques","u":"cryptanalysis.html","k":"page","h":"—","c":"Special Exhibit · The Science of Breaking Codes","b":"—","s":"Learn how codebreakers crack ciphers. Frequency analysis, Kasiski examination, index of coincidence, and modern computational methods.","g":[]},{"t":"Cipher Challenges","u":"challenges.html","k":"page","h":"—","c":"Test Your Skills","b":"—","s":"Break real ciphers. Ten progressively harder challenges — from Caesar to Enigma.","g":[]},{"t":"Cryptography Glossary","u":"glossary.html","k":"page","h":"—","c":"Reference Guide","b":"—","s":"Cryptography glossary: definitions of ciphers, cryptanalysis, key exchange, and encryption concepts from ancient to modern.","g":[]},{"t":"Modern Cryptography","u":"modern.html","k":"page","h":"—","c":"Beyond the Museum","b":"—","s":"From AES and RSA to quantum cryptography — explore how modern encryption protects the digital world.","g":[]},{"t":"Cipher Comparison Table","u":"comparison.html","k":"page","h":"—","c":"120 Compared Exhibits from the 172-exhibit Collection","b":"—","s":"Compare 120 exhibits from the 172-exhibit collection side by side. Sort by era, type, security level, hall, puzzle coverage, key method, and more.","g":[]},{"t":"Cipher Corpus","u":"cipher-corpus.html","k":"page","h":"—","c":"Known-Ciphertext Benchmark Library","b":"—","s":"A curated library of ciphertext challenges, known plaintexts, keys, and metadata for learning, teaching, scoring, and benchmarking classical cryptanalysis.","g":["v0.8 · 7 languages","v0.8 · 41 historical records","beginner → expert tiers","noisy & multilingual variants","v0.8 · jsonl","v0.6 archive · json / csv","versioned llm 3-shot eval export"]},{"t":"Cipher Detective","u":"cipher-detective.html","k":"page","h":"—","c":"Statistical Cryptanalysis","b":"—","s":"Inspect cipher evidence with frequency analysis and Kasiski tests, preserve annotated transcriptions, and try partial keys at a manual substitution desk.","g":[]},{"t":"Further Reading","u":"further-reading.html","k":"page","h":"—","c":"Curator's Library","b":"—","s":"Chapter-based reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.","g":[]},{"t":"Popular Culture Survey","u":"popular-culture-survey.html","k":"page","h":"—","c":"Hall XIII Companion","b":"—","s":"Filterable survey of cipher references in novels, television, films, and internet puzzle culture.","g":[]},{"t":"Teaching & Overview","u":"teaching.html","k":"page","h":"—","c":"Cipher Corpus","b":"—","s":"Teaching and overview page for the Cipher Corpus: learn about classical ciphers, cryptanalysis, and how to use the benchmark dataset.","g":[]},{"t":"My Cryptographer's Path — The Cipher Museum","u":"my-path.html","k":"page","h":"—","c":"—","b":"—","s":"Track your progress through the Cipher Museum learning path. View earned badges, quiz scores, and your journey through each hall.","g":[]},{"t":"Codebreaker's Workbench — The Cipher Museum","u":"lab/workbench.html","k":"page","h":"—","c":"—","b":"—","s":"A unified cryptanalysis interface: encrypt, decrypt, and analyze ciphertext with live frequency analysis and multiple cipher engines.","g":[]},{"t":"Evidence Workbench — The Cipher Museum","u":"lab/evidence-workbench.html","k":"page","h":"—","c":"—","b":"—","s":"Keep the original, compare readings, and make every decipherment hypothesis inspectable.","g":[]},{"t":"How a Decipherment Becomes Evidence — The Cipher Museum","u":"lab/decipherment-cases.html","k":"page","h":"—","c":"—","b":"—","s":"Follow Copiale, Mary Stuart and Z340 from uncertain marks to testable readings.","g":[]},{"t":"What an Attack Result Actually Shows — The Cipher Museum","u":"lab/modern-attack-evidence.html","k":"page","h":"—","c":"—","b":"—","s":"Compare the access, data, computation and validation behind modern cryptanalytic results.","g":[]}]}
+{"version":1,"generated":"2026-10-29T12:55:49Z","entries":[{"t":"ADFGVX Cipher","u":"ciphers/adfgvx.html","k":"cipher","h":"Military & Spy Ciphers","c":"WWI · June 1918","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Painvin recovered keys from German traffic in June 1918.","s":"ADFGVX combined a 6×6 substitution square with columnar transposition. Painvin’s June 1918 solutions exploited particular traffic and keys, not every later message automatically.","g":["wwi","military & spy ciphers","broken"],"exhibitNumber":21,"collection":"cipher-history"},{"t":"ADFGX Cipher","u":"ciphers/adfgx.html","k":"cipher","h":"Military & Spy Ciphers","c":"WWI · March 1918","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Painvin and other Allied analysts used repeated traffic, statistics and transposition analysis in 1918.","s":"Germany’s ADFGX field cipher appeared in March 1918; Painvin obtained solutions in April. Its square-plus-transposition construction required continuing key recovery.","g":["wwi","military & spy ciphers","broken"],"exhibitNumber":20,"collection":"cipher-history"},{"t":"Aeneas Tacticus","u":"ciphers/aeneas-tacticus.html","k":"exhibit","h":"World Origins of Cryptography","c":"Classical Greece · ~350 BCE","b":"—","trust":null,"n":"","s":"Aeneas’s water-clock signaling, preserved in Polybius: synchronized vessels selected preset military messages, not letters of an alphabet.","g":["ancient","world origins of cryptography"],"exhibitNumber":66,"collection":"cipher-history"},{"t":"AES (Advanced Encryption Standard)","u":"ciphers/aes.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 2001","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"AES, standardized in 2001, is a widely deployed block cipher. No practical key-recovery attack is known against correctly used full-round AES.","g":["digital","modern cryptography","secure (modern)"],"exhibitNumber":62,"collection":"cipher-history"},{"t":"Affine Cipher","u":"ciphers/affine.html","k":"cipher","h":"The Substitution Hall","c":"Antiquity → 1800s · math-age","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"","s":"The affine cipher — a single linear formula E(x)=a·x+b mod 26 that generalises Caesar (a=1) and Atbash (a=25, b=25). Just 312 keys; trivially broken.","g":["ancient","the substitution hall","broken"],"exhibitNumber":73,"collection":"cipher-history"},{"t":"Agnes Meyer Driscoll","u":"ciphers/agnes-driscoll.html","k":"person","h":"Hall of Codebreakers","c":"Interwar & WWII · USA","b":"—","trust":null,"n":"Codebreaker Biography","s":"Agnes Meyer Driscoll helped develop U.S. naval cryptanalysis and trained later analysts. Her work included Japanese naval codes, early JN-25 and cipher-machine analysis.","g":["wwii","hall of codebreakers"],"exhibitNumber":133,"collection":"cipher-history"},{"t":"Alberti Cipher Disk","u":"ciphers/alberti-disk.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Renaissance · 1467","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Index of Coincidence · Frequency analysis","s":"Alberti’s fifteenth-century cipher disk illustrates changing substitutions using two alphabets. The exhibit distinguishes historical instructions from a regular-step teaching model.","g":["renaissance","mechanical cipher machines","broken"],"exhibitNumber":27,"collection":"cipher-history"},{"t":"Geʼez Script and a Substitution Model","u":"ciphers/amharic-ge-ez-ciphers.html","k":"cipher","h":"World Origins of Cryptography","c":"East Africa · teaching model","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Illustrative Latin-letter substitution model; no identified manuscript authenticates this as a particular Geʽez monastic cipher.","s":"Explore Geʼez manuscript heritage alongside a modern Latin-letter substitution exercise, with no historical cipher attribution claimed for the model.","g":["medieval","world origins of cryptography","educational","amharic","ethiopic","geez"],"exhibitNumber":70,"collection":"cipher-history"},{"t":"AMSCO Transposition","u":"ciphers/amsco.html","k":"cipher","h":"Transposition Ciphers","c":"American Cryptogram Association specification","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Variable-cell transposition preserves frequencies and is susceptible to probable-word and scored permutation search.","s":"AMSCO from the American Cryptogram Association specification: alternate one-letter and two-letter cells, read keyed columns, and reconstruct an incomplete final row.","g":["modern","transposition ciphers","broken"],"exhibitNumber":167,"collection":"cipher-history"},{"t":"Arabic Nomenclators","u":"ciphers/arabic-nomenclators.html","k":"cipher","h":"World Origins of Cryptography","c":"Abbasid Caliphate · ~850 CE","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (by its own inventors)","s":"Arabic cryptanalytic scholarship and a teaching model of nomenclators: frequency analysis, codewords, and the need to identify a particular historical key.","g":["medieval","world origins of cryptography","broken"],"exhibitNumber":68,"collection":"cipher-history"},{"t":"Argenti Family Cipher","u":"ciphers/argenti.html","k":"cipher","h":"Classical Substitution","c":"Renaissance Italy · 1500s–1600s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"","s":"Giovanni Battista Argenti and his nephew Matteo documented papal nomenclators, homophones, nulls and cryptanalytic methods in Renaissance Italy.","g":["renaissance","classical substitution","broken"],"exhibitNumber":77,"collection":"cipher-history"},{"t":"Arnold–André Book Cipher","u":"ciphers/arnold-andre.html","k":"cipher","h":"Military & Spy Ciphers","c":"American Revolution · 1779–1780","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Compromised by capture (1780)","s":"Arnold and André used changing book codes in their 1779–1780 correspondence, including Blackstone’s Commentaries and dictionary schemes. Captured West Point documents exposed the plot.","g":["modern","military & spy ciphers","historical only"],"exhibitNumber":80,"collection":"cipher-history"},{"t":"Atbash","u":"ciphers/atbash.html","k":"cipher","h":"World Origins of Cryptography","c":"Ancient · ~500 BC","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Inspection (it is its own inverse)","s":"Atbash reverses the Hebrew alphabet and appears in Jeremiah’s Sheshach references. This exhibit demonstrates a modern, self-inverse A–Z adaptation.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":41,"collection":"cipher-history"},{"t":"Autokey","u":"ciphers/autokey.html","k":"cipher","h":"Polyalphabetic Frontier","c":"Renaissance · 1586","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Crib propagation and language-scored searches; ordinary repeating-key Kasiski analysis does not apply directly.","s":"Plaintext autokey extends a primer with message letters. It removes a fixed repeating keyword but retains exploitable language structure and error propagation.","g":["renaissance","polyalphabetic frontier","broken"],"exhibitNumber":53,"collection":"cipher-history"},{"t":"The Babington Plot Cipher","u":"ciphers/babington.html","k":"cipher","h":"Classical Substitution","c":"Elizabethan · 1586","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Thomas Phelippes, working for Sir Francis Walsingham · within days of interception","s":"The 1586 Babington Plot: intercepted nomenclator letters, a forged postscript, and the difference between compromised keys and an insecure transport channel.","g":["renaissance","classical substitution","broken"],"exhibitNumber":39,"collection":"cipher-history"},{"t":"Bach's B-A-C-H Motif","u":"ciphers/bach-motif.html","k":"cipher","h":"Cipher Culture","c":"Baroque Germany · 1750","b":"—","trust":null,"n":"Musical cryptogram","s":"The four notes B♭ – A – C – B♮ spell 'BACH' in German musical notation — a self-signature Bach embedded in his final unfinished fugue.","g":["modern","cipher culture"],"exhibitNumber":101,"collection":"cipher-history"},{"t":"Bacon's Cipher","u":"ciphers/bacon.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"1605","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Pattern recognition · Statistical analysis of A/B distribution","s":"Bacon’s biliteral alphabet represents letters with patterns of two forms and can hide them in a carrier. Binary representation is distinct from a direct historical origin for ASCII.","g":["renaissance","puzzle & novelty ciphers","broken"],"exhibitNumber":33,"collection":"cipher-history"},{"t":"Bazeries Cipher","u":"ciphers/bazeries.html","k":"cipher","h":"Military & Spy Ciphers","c":"1890s · France","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Layered frequency analysis","s":"Explore the Bazeries hand-cipher procedure and a simplified browser model, distinguished from his separate mechanical cipher cylinder.","g":["19th century","military & spy ciphers","broken"],"exhibitNumber":22,"collection":"cipher-history"},{"t":"Beale Ciphers","u":"ciphers/beale.html","k":"unsolved","h":"Unsolved Ciphers","c":"19th Century · published 1885","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unsolved (Beale 1 & 3)","s":"Beale ciphers — three numerical ciphers published in an 1885 Lynchburg pamphlet, said to have been written in the 1820s and to point to a Virginia treasure. Only #2 was solved (Declaration of Independence key); #1 and #3 unsolved.","g":["19th century","unsolved ciphers","historical only"],"exhibitNumber":49,"collection":"cipher-history"},{"t":"Beaufort Cipher","u":"ciphers/beaufort.html","k":"cipher","h":"Polyalphabetic Revolution","c":"Victorian · 1857","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Kasiski Examination · Index of Coincidence","s":"Beaufort cipher (1857) — Sir Francis Beaufort's reciprocal Vigenère variant where encrypt and decrypt are the same operation. Broken by Kasiski examination.","g":["19th century","polyalphabetic revolution","broken"],"exhibitNumber":9,"collection":"cipher-history"},{"t":"Arne Beurling","u":"ciphers/beurling.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Sweden","b":"—","trust":null,"n":"Codebreaker Biography","s":"Arne Beurling’s 1940 reconstruction of the Siemens T52, with assistance and subsequent daily-key recovery distinguished from the initial breakthrough.","g":["wwii","hall of codebreakers"],"exhibitNumber":116,"collection":"cipher-history"},{"t":"Bible Code — Equidistant Letter Sequences","u":"ciphers/bible-code.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"1994 · Refuted 1999","b":"—","trust":null,"n":"Statistical claims challenged by controlled counterexamples and analysis of selection flexibility.","s":"The Bible Code — equidistant letter sequences (ELS) claimed to hide prophecies in the Hebrew scriptures. McKay et al. (1999) examined experimental flexibility; separate Moby-Dick counterexamples addressed popular prophecy claims.","g":["digital","puzzle & novelty ciphers"],"exhibitNumber":140,"collection":"cipher-history"},{"t":"Bifid Cipher","u":"ciphers/bifid.html","k":"cipher","h":"Transposition & Fractionation","c":"1902","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Statistical analysis · Hill climbing","s":"Bifid cipher (1902) — Felix Delastelle's fractionation cipher that splits Polybius coordinates, transposes them across a period, and recombines.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":16,"collection":"cipher-history"},{"t":"Bill Tutte","u":"ciphers/bill-tutte.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Bill Tutte and the Research Section inferred the Lorenz structure by early 1942, analysing key material recovered by John Tiltman from a 1941 repeated-key transmission.","g":["wwii","hall of codebreakers"],"exhibitNumber":134,"collection":"cipher-history"},{"t":"Bletchley Park","u":"ciphers/bletchley-park.html","k":"person","h":"Hall of Codebreakers","c":"WWII · 1939–1945","b":"—","trust":null,"n":"","s":"Bletchley Park was a British wartime codebreaking centre. About 10,000 people worked at the site and associated outstations at peak, contributing to Allied intelligence.","g":["wwii","hall of codebreakers"],"exhibitNumber":111,"collection":"cipher-history"},{"t":"Turing–Welchman Bombe","u":"ciphers/bombe.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1940 · Britain","b":"—","trust":null,"n":"Codebreaking machine; not an encryption system.","s":"A crib becomes a network of constraints; machinery searches for settings that survive.","g":["wwii","mechanical cipher machines"],"exhibitNumber":168,"collection":"cipher-history"},{"t":"Book Cipher","u":"ciphers/book-cipher.html","k":"cipher","h":"Military & Field","c":"18th–20th c.","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Security depends on the book, edition and indexing rule; identifying the source or exploiting context can expose messages.","s":"Book ciphers use an agreed reference text and indexing rule. Explore historical book codes and distinguish them from the disputed Beale treasure narrative.","g":["19th century","military & field","broken"],"exhibitNumber":55,"collection":"cipher-history"},{"t":"Cabinet Noir — Black Chambers of Europe","u":"ciphers/cabinet-noir.html","k":"person","h":"Hall of Codebreakers","c":"Europe · 1550–1850","b":"—","trust":null,"n":"","s":"The European Black Chambers (cabinets noirs) were government departments that intercepted, deciphered, and resealed diplomatic mail from the 16th through 19th centuries — proto-signals-intelligence agencies.","g":["renaissance","hall of codebreakers"],"exhibitNumber":112,"collection":"cipher-history"},{"t":"Caesar Cipher","u":"ciphers/caesar.html","k":"cipher","h":"Hall I","c":"Ancient Rome","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Exhaustive shift search; frequency evidence helps rank candidates.","s":"Caesar’s recorded shift of three, demonstrated on a modern alphabet. Exhaustive shift search is small; frequency analysis helps rank candidate plaintexts.","g":["ancient","hall i","broken"],"exhibitNumber":2,"collection":"cipher-history"},{"t":"Cardano Autokey","u":"ciphers/cardano-autokey.html","k":"cipher","h":"The Polyalphabetic Era","c":"Italian Renaissance · 1550","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"The one-letter-primer widget is a modern comparison with Vigenère-style plaintext autokey, not Cardano’s exact procedure.","s":"Cardano’s self-keying idea and a modern one-letter-primer comparison model. The demo is not an exact reconstruction of Cardano’s historical procedure.","g":["renaissance","the polyalphabetic era","broken"],"exhibitNumber":76,"collection":"cipher-history"},{"t":"Cardano Grille","u":"ciphers/cardano-grille.html","k":"cipher","h":"The Transposition Hall","c":"Italian Renaissance · 1550","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Weak (steganography, not encryption)","s":"Girolamo Cardano's 1550 grille — a card with cut-out windows. Write the secret through the windows; fill the rest with innocuous text; the recipient overlays an identical grille to read.","g":["renaissance","the transposition hall","historical only"],"exhibitNumber":78,"collection":"cipher-history"},{"t":"Chaocipher","u":"ciphers/chaocipher.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Modern · 1918","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Published key-recovery attacks by Lasry, Rubin, Kopal and Wacker (2016).","s":"Chaocipher (1918) — John F. Byrne's two-disk dynamic cipher. Disclosed in 2010; published known-plaintext and in-depth ciphertext-only attacks recover its keys.","g":["wwi","mechanical cipher machines","broken"],"exhibitNumber":46,"collection":"cipher-history"},{"t":"Che Guevara’s Checkerboard and Pad","u":"ciphers/che-guevara.html","k":"cipher","h":"Military & Spy Ciphers","c":"Cold War · 1956–1967","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical checkerboard-plus-pad system; the widget compares a condensed VIC model, not Guevara’s historical pad system.","s":"Che Guevara’s checkerboard and digit-pad communications, distinguished from the VIC cipher and from the museum’s simplified comparison demo.","g":["cold war","military & spy ciphers","historical only"],"exhibitNumber":82,"collection":"cipher-history"},{"t":"Chinese Telegraph Code","u":"ciphers/chinese-telegraph.html","k":"cipher","h":"Civil War Gallery","c":"Late Qing → PRC · 1881–1980s","b":"—","trust":null,"n":"Public codebook (super-enciphered when secret)","s":"Chinese telegraph codebooks map characters to four-digit groups. Public character encoding differs from additional encipherment used to protect some diplomatic and military messages.","g":["modern","civil war gallery"],"exhibitNumber":87,"collection":"cipher-history"},{"t":"Cicada 3301","u":"ciphers/cicada-3301.html","k":"cipher","h":"Cipher Culture","c":"Internet era · 2012–2014","b":"—","trust":null,"n":"Multi-stage ARG / recruitment puzzle","s":"An anonymous 2012–2014 internet recruitment puzzle that combined steganography, classical ciphers, GPS coordinates on physical posters, and a copy of the Liber Primus hand-illustrated in glyphic runes.","g":["digital","cipher culture"],"exhibitNumber":130,"collection":"cipher-history"},{"t":"Colossus","u":"ciphers/colossus.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1944 · Britain","b":"—","trust":null,"n":"Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.","s":"Electronic counting accelerated the statistical search behind the Tunny breakthrough.","g":["wwii","mechanical cipher machines"],"exhibitNumber":169,"collection":"cipher-history"},{"t":"Columnar Transposition","u":"ciphers/columnar.html","k":"cipher","h":"Transposition & Fractionation","c":"19th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis · Anagramming","s":"Explore columnar transposition and multiple anagramming: rearrange column strips across three synthetic same-key intercepts and compare a different-key control.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":14,"collection":"cipher-history"},{"t":"Commercial Telegraph Codebooks","u":"ciphers/commercial-codebooks.html","k":"cipher","h":"Civil War Gallery","c":"Victorian → inter-war · 1870s–1930s","b":"—","trust":null,"n":"Public commercial codebooks reduce telegraph length and ambiguity; they do not inherently provide confidentiality.","s":"Commercial telegraph codebooks replaced business phrases with compact code groups. Formats and tariffs varied, and a public codebook did not itself provide secrecy.","g":["modern","civil war gallery"],"exhibitNumber":90,"collection":"cipher-history"},{"t":"Confederate Vigenère","u":"ciphers/confederate-vigenere.html","k":"cipher","h":"Civil War Gallery","c":"Confederate · 1862","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Union analysts exploited repeated keywords and language patterns.","s":"Confederate forces used repeating-key Vigenère ciphers during the Civil War. Union analysts read particular dispatches using language clues and recovered keys.","g":["19th century","civil war gallery","broken"],"exhibitNumber":25,"collection":"cipher-history"},{"t":"Copiale Cipher","u":"ciphers/copiale.html","k":"exhibit","h":"Puzzle & Novelty","c":"18th Century · ~1760–1780","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Knight, Megyesi, Schaefer (USC/Uppsala, 2011)","s":"Knight, Megyesi and Schaefer deciphered the Copiale manuscript in 2011 using transcription, statistics and manual analysis. The exhibit separates that result from its invented demonstration alphabet.","g":["renaissance","puzzle & novelty","broken"],"exhibitNumber":48,"collection":"cipher-history"},{"t":"Culper Ring / Tallmadge Code","u":"ciphers/culper-ring.html","k":"cipher","h":"Military & Spy Ciphers","c":"American Revolution · 1778–1783","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical numerical codebook; captured documents and contextual evidence are distinct from cryptanalytic breaks.","s":"Major Benjamin Tallmadge’s 1779 codebook for George Washington’s Culper Spy Ring. Roughly 760 numbered entries covering people, places, military terms, and common words — used by Abraham Woodhull and Robert Townsend on British-occupied Long Island and Manhattan.","g":["modern","military & spy ciphers","historical only"],"exhibitNumber":79,"collection":"cipher-history"},{"t":"The Da Vinci Code","u":"ciphers/da-vinci-code.html","k":"cipher","h":"Cipher Culture","c":"Fiction · 2003","b":"—","trust":null,"n":"Pop Culture","s":"Dan Brown’s 2003 thriller uses Atbash, the Fibonacci sequence and anagrams as fictional clues. Explore those devices and the limits of treating fiction as cryptographic history.","g":["digital","cipher culture"],"exhibitNumber":127,"collection":"cipher-history"},{"t":"D'Agapeyeff Cipher","u":"ciphers/dagapeyeff.html","k":"unsolved","h":"Unsolved Ciphers","c":"Pre-WWII Britain · 1939","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unsolved challenge cipher","s":"Alexander d’Agapeyeff’s 1939 numeric challenge: a verified ciphertext excerpt, overlapping-pair analysis and explicit limits on proposed reconstructions.","g":["wwii","unsolved ciphers","historical only"],"exhibitNumber":104,"collection":"cipher-history"},{"t":"Conan Doyle's Dancing Men","u":"ciphers/dancing-men.html","k":"cipher","h":"Cipher Culture","c":"Edwardian Britain · 1903","b":"—","trust":null,"n":"Fictional substitution cipher","s":"The fictional stick-figure cipher Sherlock Holmes solves in The Adventure of the Dancing Men (1903) — a frequency-analysis primer disguised as a Strand magazine story.","g":["modern","cipher culture"],"exhibitNumber":126,"collection":"cipher-history"},{"t":"DES (Data Encryption Standard)","u":"ciphers/des.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1977","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (brute force, 1998)","s":"DES was standardized in 1977. Its 56-bit key became vulnerable to practical exhaustive search, demonstrated by EFF’s Deep Crack in 1998.","g":["cold war","modern cryptography","broken"],"exhibitNumber":59,"collection":"cipher-history"},{"t":"Diana Cryptosystem","u":"ciphers/diana-cryptosystem.html","k":"cipher","h":"Military & Spy Ciphers","c":"Historical letter-pad system","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"","s":"DIANA uses a reciprocal trigraph table to combine message and pad letters. This exhibit verifies the conversion method while leaving exact service dates and deployments unestablished.","g":["cold war","military & spy ciphers","historical only"],"exhibitNumber":83,"collection":"cipher-history"},{"t":"Confederate Dictionary Code","u":"ciphers/dictionary-code.html","k":"cipher","h":"Civil War Gallery","c":"Confederate · 1862","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Known dictionary + position lookup","s":"Dictionary codes replace words with references in an agreed book. Repeated references and language patterns can still leak information; this widget is a simplified model.","g":["19th century","civil war gallery","broken"],"exhibitNumber":26,"collection":"cipher-history"},{"t":"Diffie-Hellman Key Exchange","u":"ciphers/diffie-hellman.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1976","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"Diffie–Hellman derives a shared group element over a public channel. Authentication, appropriate groups and key derivation are needed for secure protocol use.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":60,"collection":"cipher-history"},{"t":"Dilly Knox","u":"ciphers/dilly-knox.html","k":"person","h":"Hall of Codebreakers","c":"WWI/WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Dilly Knox worked on commercial and military Enigma variants, including Italian naval and Abwehr traffic, with colleagues whose contributions the exhibit identifies.","g":["wwii","hall of codebreakers"],"exhibitNumber":117,"collection":"cipher-history"},{"t":"Dorabella Cipher","u":"ciphers/dorabella.html","k":"unsolved","h":"Unsolved Ciphers","c":"19th c. · 1897","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"No generally accepted reading","s":"Edward Elgar’s 1897 Dorabella cryptogram contains 87 symbols. No proposed reading has achieved general acceptance.","g":["19th century","unsolved ciphers","historical only"],"exhibitNumber":56,"collection":"cipher-history"},{"t":"Doppelkastenschlüssel — German Double Playfair","u":"ciphers/double-playfair.html","k":"cipher","h":"Classical Substitution","c":"German armed forces · December 1941 edition","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Allied crib and digraph-statistical attacks are documented for German double-box field ciphers; variants must be distinguished.","s":"German Double Playfair: reconstruct the December 1941 Doppelkastenschlüssel manual, including 17-column pairing, two substitution stages and its published example.","g":["wwii","classical substitution","broken"],"exhibitNumber":166,"collection":"cipher-history"},{"t":"Double Transposition","u":"ciphers/double-transposition.html","k":"cipher","h":"Transposition & Fractionation","c":"WWI · Germany","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Anagramming · Hill climbing (difficult)","s":"Two successive columnar transpositions: historical military use, attack conditions, and modern computerized cryptanalysis; not an unbroken cipher until 2013.","g":["wwi","transposition & fractionation","broken"],"exhibitNumber":15,"collection":"cipher-history"},{"t":"Elonka Dunin","u":"ciphers/dunin.html","k":"person","h":"Hall of Codebreakers","c":"Modern · Cryptographer","b":"—","trust":null,"n":"Cryptography researcher and puzzle author.","s":"Elonka Dunin documents Kryptos and unresolved cryptograms and writes about classical cryptanalysis, including Codebreaking: A Practical Guide with Klaus Schmeh.","g":["modern","hall of codebreakers"],"exhibitNumber":122,"collection":"cipher-history"},{"t":"ECDSA","u":"ciphers/ecdsa.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1992","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"ECDSA signs messages using elliptic curves. Reusing a secret nonce across distinct message hashes can expose the signing key, as the PlayStation 3 episode illustrates.","g":["digital","modern cryptography","secure (modern)"],"exhibitNumber":158,"collection":"protocols"},{"t":"Egyptian Substitution Hieroglyphs","u":"ciphers/egyptian-substitution.html","k":"cipher","h":"World Origins of Cryptography","c":"Middle Kingdom Egypt · ~1900 BCE","b":"—","trust":null,"n":"Decorative concealment","s":"Unusual hieroglyphic spellings in the tomb of Khnumhotep II, around 1900 BCE: an early example discussed in histories of cryptography, with uncertain intent.","g":["ancient","world origins of cryptography"],"exhibitNumber":64,"collection":"cipher-history"},{"t":"Elizebeth Smith Friedman","u":"ciphers/elizebeth-friedman.html","k":"person","h":"Hall of Codebreakers","c":"Interwar & WWII · USA","b":"—","trust":null,"n":"Codebreaker Biography","s":"Elizebeth Smith Friedman led important American cryptanalytic work against smuggling and wartime clandestine communications, with a team whose work remained little known for years.","g":["wwii","hall of codebreakers"],"exhibitNumber":135,"collection":"cipher-history"},{"t":"Enigma Machine","u":"ciphers/enigma.html","k":"cipher","h":"The Unbreakable","c":"WWII · 1918–1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Polish prewar reconstruction; later Allied crib searches and bombe machinery.","s":"Enigma was a family of rotor machines. Rejewski reconstructed German Army Enigma in 1932; later Allied teams attacked changing systems, keys and procedures.","g":["wwii","the unbreakable","broken"],"exhibitNumber":29,"collection":"cipher-history"},{"t":"Fialka M-125","u":"ciphers/fialka.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Cold War · 1956","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in operational service; obsolete today.","s":"Fialka was a Soviet ten-rotor machine with variant-specific alphabets, stepping and a punched-card permutation. The browser uses a simplified Latin-alphabet model.","g":["cold war","mechanical cipher machines","historical only"],"exhibitNumber":93,"collection":"cipher-history"},{"t":"Field Hollers and Coding Songs","u":"ciphers/field-hollers.html","k":"cipher","h":"Cipher Culture","c":"African American oral traditions","b":"—","trust":null,"n":"Oral expression and context can conceal meaning; this widget is not an authenticated historical code.","s":"Song, shared meaning, and covert communication: documented traditions, disputed Drinking Gourd claims, and a clearly labeled modern annotation exercise.","g":["modern","cipher culture"],"exhibitNumber":124,"collection":"cipher-history"},{"t":"Four-Square Cipher","u":"ciphers/four-square.html","k":"cipher","h":"Classical Substitution","c":"Early 20th Century · 1902 publication","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Digram frequency analysis · simulated annealing","s":"Four-Square cipher (1902) — Delastelle's digram cipher using two keyed and two standard 5x5 squares. Disrupts Playfair frequencies but breaks to digrams.","g":["19th century","classical substitution","broken"],"exhibitNumber":43,"collection":"cipher-history"},{"t":"Fractionated Morse Cipher","u":"ciphers/fractionated-morse.html","k":"cipher","h":"Transposition & Fractionation","c":"Classical Puzzle Cipher","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Structural analysis of Morse patterns","s":"Fractionated Morse — converts text to Morse, regroups dots, dashes, and separators in trigrams, then substitutes via a keyed alphabet. Broken by trigram stats.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":18,"collection":"cipher-history"},{"t":"Freemason Pigpen Tradition","u":"ciphers/freemason-pigpen.html","k":"cipher","h":"Cipher Culture","c":"Masonic inscriptions and later puzzle traditions","b":"—","trust":null,"n":"Fraternal symbol-substitution alphabet","s":"Pigpen uses geometric symbols for letters and appears in fraternal cipher traditions. The fixed substitution is readily reversible once the alphabet is known.","g":["modern","cipher culture"],"exhibitNumber":100,"collection":"cipher-history"},{"t":"The GCHQ Trio — Ellis, Cocks, and Williamson","u":"ciphers/gchq-trio.html","k":"person","h":"Hall of Codebreakers","c":"Cold War · GCHQ","b":"—","trust":null,"n":"Invention Biography","s":"Ellis’s January 1970 non-secret encryption report, Cocks’s 1973 construction, and Williamson’s 1974 key-agreement work, disclosed publicly in 1997.","g":["cold war","hall of codebreakers"],"exhibitNumber":120,"collection":"cipher-history"},{"t":"Geheimschreiber T52 (Sturgeon)","u":"ciphers/geheimschreiber.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWII · 1932–1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (Beurling, 1940)","s":"The Siemens T52 “Sturgeon” — a German WWII teleprinter cipher with ten wheels, with stepping that varied by model feeding an additive keystream and a per-character permutation. Broken by Arne Beurling and the Swedish Defence Staff’s cryptographic service in 1940.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":95,"collection":"cipher-history"},{"t":"Poe's Gold-Bug Cipher","u":"ciphers/gold-bug.html","k":"cipher","h":"Cipher Culture","c":"Antebellum America · 1843","b":"—","trust":null,"n":"Fictional substitution cipher","s":"Poe’s The Gold-Bug (1843) makes a substitution decipherment central to a fictional treasure hunt and explains the reasoning to readers.","g":["modern","cipher culture"],"exhibitNumber":125,"collection":"cipher-history"},{"t":"Gravity Falls Cipher System","u":"ciphers/gravity-falls.html","k":"cipher","h":"Cipher Culture","c":"Animation · 2012–2016","b":"—","trust":null,"n":"Pop Culture","s":"Gravity Falls used classical ciphers and visual clues across its episodes and associated puzzles, inviting viewers to decode messages.","g":["digital","cipher culture"],"exhibitNumber":129,"collection":"cipher-history"},{"t":"The Great Cipher","u":"ciphers/great-cipher.html","k":"cipher","h":"Classical Substitution","c":"Baroque · 17th century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Étienne Bazeries (1893): syllabic frequency analysis and contextual cribs.","s":"The Rossignols’ syllabic nomenclator was deciphered by Bazeries in the 1890s. His proposed Man in the Iron Mask identification remains disputed.","g":["renaissance","classical substitution","broken"],"exhibitNumber":38,"collection":"cipher-history"},{"t":"Gronsfeld Cipher","u":"ciphers/gronsfeld.html","k":"cipher","h":"Polyalphabetic Revolution","c":"17th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Kasiski · Only 10 possible shifts per position","s":"Gronsfeld restricts repeating-key shifts to digits 0–9. Its traditional attribution does not establish an exact invention date, and attack success depends on the available text.","g":["renaissance","polyalphabetic revolution","broken"],"exhibitNumber":11,"collection":"cipher-history"},{"t":"Hagelin C-36 / C-52 Lineage","u":"ciphers/hagelin-c36.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1930s–1950s · Sweden / Switzerland","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"The pin-and-lug family has published cryptanalytic attacks; Greenough’s 1999 C-52 attack uses known plaintext.","s":"Hagelin C-36 and C-52 lineage — pin-and-lug cipher machines, the M-209 connection, published known-plaintext attacks, and the Crypto AG supplier history.","g":["wwi","mechanical cipher machines","broken"],"exhibitNumber":162,"collection":"cipher-history"},{"t":"Hill Cipher","u":"ciphers/hill.html","k":"cipher","h":"Classical Substitution","c":"1929","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Known plaintext attack (matrix algebra)","s":"Hill’s 1929 cipher mixes groups of letters using an invertible matrix modulo 26. Suitable matched plaintext blocks can expose the key by linear algebra.","g":["interwar","classical substitution","broken"],"exhibitNumber":7,"collection":"cipher-history"},{"t":"Histiaeus's Tattooed Messenger","u":"ciphers/histiaeus-tattoo.html","k":"cipher","h":"World Origins of Cryptography","c":"Classical Greece · ~499 BCE","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Steganography (concealment)","s":"Histiaeus of Miletus (~499 BCE) — the Greek tyrant who tattooed a secret revolt order on a slave's shaved scalp, then waited for the hair to regrow before sending him.","g":["ancient","world origins of cryptography","historical only"],"exhibitNumber":65,"collection":"cipher-history"},{"t":"Homophonic Substitution","u":"ciphers/homophonic.html","k":"cipher","h":"Classical Substitution","c":"Renaissance · ~1400","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Statistical analysis · Structural pattern detection","s":"Homophonic substitution assigns several symbols to common letters to reduce frequency peaks. Statistical attacks still depend on the message, mapping and available evidence.","g":["renaissance","classical substitution","broken"],"exhibitNumber":5,"collection":"cipher-history"},{"t":"IRA Cipher Traffic","u":"ciphers/ira-ciphers.html","k":"cipher","h":"Military & Spy Ciphers","c":"Ireland · 1920s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Jim Gillogly; Richard Bean solved the final published challenge in 2019","s":"Interwar IRA columnar-transposition traffic studied by Jim Gillogly and Tom Mahon. Richard Bean solved the remaining 51-letter published challenge in 2019.","g":["modern","military & spy ciphers","broken"],"exhibitNumber":81,"collection":"cipher-history"},{"t":"Jefferson Disk","u":"ciphers/jefferson-disk.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1795 (Jefferson) · 1922 (M-94)","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Brute force · Probable word attack","s":"Jefferson proposed a 36-disk wheel cipher in the 1790s. The later, independently developed US Army M-94 used 25 disks and was adopted in 1922.","g":["interwar","mechanical cipher machines","broken"],"exhibitNumber":28,"collection":"cipher-history"},{"t":"JN-25","u":"ciphers/jn-25.html","k":"cipher","h":"Mechanical Cipher Machines","c":"World War II - 1939-1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Station HYPO and allied Pacific units","s":"JN-25 (1939-1945) - the Imperial Japanese Navy's superenciphered codebook system broken by Station HYPO and central to Midway intelligence.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":99,"collection":"cipher-history"},{"t":"Joan Clarke","u":"ciphers/joan-clarke.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Joan Clarke, Hut 8 cryptanalyst and expert practitioner of Banburismus, helped reduce the search for Naval Enigma settings.","g":["wwii","hall of codebreakers"],"exhibitNumber":136,"collection":"cipher-history"},{"t":"David Kahn","u":"ciphers/kahn.html","k":"person","h":"Hall of Codebreakers","c":"Modern · Journalist/Historian","b":"—","trust":null,"n":"Cryptohistory Biography","s":"David Kahn (1930–2024), author of The Codebreakers, helped bring cryptologic history to a wide readership. He entered the NSA Cryptologic Hall of Honor in 2020.","g":["modern","hall of codebreakers"],"exhibitNumber":121,"collection":"cipher-history"},{"t":"Kama Sutra Cipher","u":"ciphers/kama-sutra.html","k":"cipher","h":"World Origins of Cryptography","c":"Classical India · ~400 CE","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"","s":"Mlecchita-vikalpa, secret writing among the Kama Sutra’s arts. The interactive illustrates a modern paired-letter substitution, not a recovered ancient alphabet.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":67,"collection":"cipher-history"},{"t":"Kerckhoffs's Principle","u":"ciphers/kerckhoffs.html","k":"cipher","h":"Modern Cryptography","c":"Foundational · 1883","b":"—","trust":null,"n":"Principle (not a cipher)","s":"Auguste Kerckhoffs's 1883 principle — 'A cipher should be secure even if everything about the system, except the key, is public knowledge' — is the bedrock of modern cryptographic design.","g":["19th century","modern cryptography"],"exhibitNumber":113,"collection":"cipher-history"},{"t":"KL-7 ADONIS","u":"ciphers/kl-7.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Cold War · 1952","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in operational service; stolen keys exposed traffic.","s":"KL-7: an American eight-rotor cipher machine with irregular stepping and re-entry. Stolen key material compromised traffic during the Walker espionage case.","g":["cold war","mechanical cipher machines","historical only"],"exhibitNumber":94,"collection":"cipher-history"},{"t":"Kryha","u":"ciphers/kryha.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Inter-war commercial · 1924","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (Friedman, 1933)","s":"Kryha’s clockwork cipher devices used irregularly moving alphabets. Friedman and colleagues attacked a published challenge in 1933; this widget uses generated settings.","g":["interwar","mechanical cipher machines","broken"],"exhibitNumber":96,"collection":"cipher-history"},{"t":"ARG Ciphers","u":"ciphers/krypto-arg.html","k":"cipher","h":"Cipher Culture","c":"Web 2.0 · 2001–present","b":"—","trust":null,"n":"Promotional / collaborative cipher hunts","s":"Alternate-reality games — from The Beast (2001) to Year Zero (2007) and beyond — built on the assumption that players will recognise, transcribe, and crack classical ciphers across forums, phone calls, and physical artifacts.","g":["digital","cipher culture"],"exhibitNumber":132,"collection":"cipher-history"},{"t":"Kryptos","u":"ciphers/kryptos.html","k":"unsolved","h":"Unsolved Ciphers","c":"Modern · 1990","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"K1–K3 publicly solved. K4 plaintext was recovered from archival papers in 2025; that is distinct from a public cryptanalytic solution.","s":"Kryptos: K1–K3 publicly solved; K4 plaintext recovered from an archive in 2025, without a publicly demonstrated cryptanalytic solution.","g":["digital","unsolved ciphers","historical only"],"exhibitNumber":50,"collection":"cipher-history"},{"t":"George Lasry","u":"ciphers/lasry.html","k":"person","h":"Hall of Codebreakers","c":"Modern · Computational","b":"—","trust":null,"n":"Cryptanalysis researcher.","s":"George Lasry applies computational search to classical ciphers. His work includes a 2017 Kassel dissertation and collaborative decipherment of Mary Stuart’s letters.","g":["modern","hall of codebreakers"],"exhibitNumber":123,"collection":"cipher-history"},{"t":"Latin American Telegraphic Codebooks","u":"ciphers/latin-american-codebooks.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Americas · 1870s–1940s","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Commercial codebook illustration; specific regional military use requires archival evidence.","s":"Commercial telegraph codebooks compressed business messages. Their regional use and editions need documentary evidence; the demo uses an invented vocabulary.","g":["modern","mechanical cipher machines","educational"],"exhibitNumber":91,"collection":"cipher-history"},{"t":"Leo Marks","u":"ciphers/leo-marks.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Leo Marks worked on SOE communications security, prepared keying material and letter one-time pads. His memoir recounts the practical problems of agent communications.","g":["wwii","hall of codebreakers"],"exhibitNumber":137,"collection":"cipher-history"},{"t":"Lorenz Cipher","u":"ciphers/lorenz.html","k":"cipher","h":"The Unbreakable","c":"WWII · Germany · 1940","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Tiltman: depth (1941) · Tutte: structure (1942) · Colossus: wheel settings (1944)","s":"Lorenz SZ40/42: Tiltman recovered messages and key from a 1941 depth; Tutte and the Research Section inferred the structure by early 1942; Colossus accelerated wheel-setting from February 1944.","g":["wwii","the unbreakable","broken"],"exhibitNumber":30,"collection":"cipher-history"},{"t":"M-94 / CSP-488","u":"ciphers/m-94.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWI → WWII tactical · 1922–1943","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Tactical only","s":"The M-94, adopted by the US Army in 1922, used 25 alphabet disks. It resembles Jefferson’s earlier unpublished wheel but was independently developed.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":97,"collection":"cipher-history"},{"t":"M-209 (Hagelin C-38)","u":"ciphers/m209.html","k":"cipher","h":"Mechanical Cipher Machines","c":"World War II · 1942 production","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Strong (tactical)","s":"M-209 cipher machine (US production from 1942) — the US Army's portable Hagelin C-38 with six co-prime pin-wheels and a 27-bar lug cage. Broken in the field in WWII.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":47,"collection":"cipher-history"},{"t":"Mary Queen of Scots — The Castelnau Letters","u":"ciphers/mary-stuart-castelnau-letters.html","k":"person","h":"Hall of Codebreakers","c":"1578–1584","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"57 letters from 1578–1584, approximately 50,000 words; decipherment published 8 February 2023.","s":"Mary Stuart’s letters from 1578–1584: 57 deciphered letters, about 50,000 words, published by Lasry, Biermann and Tomokiyo in 2023.","g":["renaissance","hall of codebreakers","broken","mary stuart","stuart"],"exhibitNumber":138,"collection":"cipher-history"},{"t":"Mavis Batey","u":"ciphers/mavis-batey.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Britain","b":"—","trust":null,"n":"Codebreaker Biography","s":"Mavis Batey worked with Dilly Knox’s team on Italian naval Enigma. Their decrypts contributed intelligence before the Battle of Cape Matapan in March 1941.","g":["wwii","hall of codebreakers"],"exhibitNumber":119,"collection":"cipher-history"},{"t":"McCormick Notes","u":"ciphers/mccormick.html","k":"unsolved","h":"Unsolved Ciphers","c":"Late 20th-c. United States · 1999","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"The FBI’s 2011 appeal reported the notes unresolved.","s":"Two handwritten notes found with Ricky McCormick in 1999. The FBI’s 2011 appeal sought contextual evidence and help interpreting their notation.","g":["digital","unsolved ciphers","historical only"],"exhibitNumber":106,"collection":"cipher-history"},{"t":"Microdot Steganography","u":"ciphers/microdot.html","k":"cipher","h":"Military & Spy Ciphers","c":"Twentieth-century espionage","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Physical concealment can be discovered by inspection and magnification","s":"Microdots conceal miniature photographic images in ordinary carriers. The browser demonstration is a visual metaphor, not optical microphotography or encryption.","g":["wwi","military & spy ciphers","historical only"],"exhibitNumber":110,"collection":"cipher-history"},{"t":"MIT Mystery Hunt","u":"ciphers/mit-mystery-hunt.html","k":"cipher","h":"Cipher Culture","c":"MIT · 1981–present","b":"—","trust":null,"n":"Annual collaborative puzzle hunt","s":"An annual puzzle hunt at MIT (since 1981) where teams solve dozens of layered cryptographic, linguistic, and lateral-thinking puzzles to find a hidden coin somewhere on campus.","g":["cold war","cipher culture"],"exhibitNumber":131,"collection":"cipher-history"},{"t":"Monoalphabetic Substitution","u":"ciphers/monoalphabetic.html","k":"cipher","h":"Classical Substitution","c":"Ancient roots · medieval cryptanalysis","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Language statistics and word patterns can expose a fixed substitution.","s":"Monoalphabetic substitution — replace each letter with a fixed substitute. A large keyspace can still leak language patterns; al-Kindi described frequency analysis in the ninth century.","g":["medieval","classical substitution","broken"],"exhibitNumber":4,"collection":"cipher-history"},{"t":"Morse Code","u":"ciphers/morse.html","k":"cipher","h":"World Origins of Cryptography","c":"Telegraph age · 1840s →","b":"—","trust":null,"n":"Encoding, not encryption","s":"International Morse code — the dot-dash telegraph alphabet that made the wired world possible and provided the carrier signal for a century of military and amateur ciphers.","g":["victorian","world origins of cryptography"],"exhibitNumber":88,"collection":"cipher-history"},{"t":"Myszkowski Transposition","u":"ciphers/myszkowski.html","k":"cipher","h":"Transposition & Fractionation","c":"1902 · France","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Repeated-keyword transposition preserves letter frequencies and is vulnerable to statistical and keyword-search attacks.","s":"Myszkowski transposition (1902) — repeated keyword letters share a rank. Encrypt and decrypt interactively, including incomplete final rows, and compare columnar transposition.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":164,"collection":"cipher-history"},{"t":"National Treasure","u":"ciphers/national-treasure.html","k":"cipher","h":"Cipher Culture","c":"Fiction · 2004","b":"—","trust":null,"n":"Pop Culture","s":"The 2004 film National Treasure turns historical documents and landmarks into a fictional cipher hunt; its book clue uses the Silence Dogood letters.","g":["digital","cipher culture"],"exhibitNumber":128,"collection":"cipher-history"},{"t":"Navajo Code Talkers","u":"ciphers/navajo-code-talkers.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWII · 1942–1945","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken in wartime service; a historical military code.","s":"Navajo code talkers used a specialized military vocabulary and spelling alphabet during World War II. Their language and the constructed code were distinct layers.","g":["wwii","mechanical cipher machines","historical only"],"exhibitNumber":31,"collection":"cipher-history"},{"t":"NEMA — Swiss Rotor Machine","u":"ciphers/nema.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Postwar Switzerland · 1947","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Obsolete Swiss military rotor machine. The demo fixes one historical wheel configuration; the 17,576-keypress state period is not its key space.","s":"Swiss NEMA rotor machine (1947) — four cipher wheels, independent stepping wheels, and a moving reflector. Explore historical military encryption and decryption.","g":["cold war","mechanical cipher machines","historical only"],"exhibitNumber":161,"collection":"cipher-history"},{"t":"NFC Authentication: When the Tag Stays Unlocked","u":"ciphers/nfc-deployment.html","k":"cipher","h":"Modern Cryptography","c":"Modern cryptography · research case study","b":"—","trust":null,"n":"Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.","s":"A case study of protocol state, key storage, integrity checks and counterfeit hardware.","g":["modern","modern cryptography"],"exhibitNumber":172,"collection":"cipher-history"},{"t":"Nihilist Cipher","u":"ciphers/nihilist.html","k":"cipher","h":"Military & Spy Ciphers","c":"1880s · Russia","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis of digit pairs · Kasiski-equivalent","s":"The additive Nihilist cipher sums plaintext and repeating-key Polybius coordinates. Its traditional Russian revolutionary attribution is qualified, and it differs from Nihilist transposition.","g":["19th century","military & spy ciphers","broken"],"exhibitNumber":19,"collection":"cipher-history"},{"t":"Nomenclator","u":"ciphers/nomenclator.html","k":"cipher","h":"Substitution Era","c":"Renaissance · 1400s–1800s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Historical systems combine code groups, letter substitutions, homophones and nulls; evidence varies by key and traffic.","s":"Nomenclator (1400s) — The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary. Hall II of The Cipher Museum.","g":["renaissance","substitution era","broken"],"exhibitNumber":54,"collection":"cipher-history"},{"t":"Null Cipher","u":"ciphers/null-cipher.html","k":"cipher","h":"The Transposition Hall","c":"Antiquity → present","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Weak (concealment, not encryption)","s":"A null cipher selects a message from a cover text using a positional rule. It conceals information in ordinary-looking writing; discovery of the rule defeats that concealment.","g":["ancient","the transposition hall","historical only"],"exhibitNumber":86,"collection":"cipher-history"},{"t":"One-Time Pad","u":"ciphers/one-time-pad.html","k":"cipher","h":"The Unbreakable","c":"1882 · Theoretical","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"Perfect secrecy requires an independent, uniformly random secret pad at least as long as the message, used once. No authentication.","s":"A one-time pad offers perfect secrecy with a secret, uniform, independent message-length key used once. Try ciphertext tampering to see why secrecy is not authentication.","g":["theoretical","the unbreakable","secure (modern)"],"exhibitNumber":36,"collection":"cipher-history"},{"t":"Patterson's Cipher for Jefferson","u":"ciphers/patterson-jefferson-cipher.html","k":"cipher","h":"Classical Substitution","c":"1801","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Solved 2007 — after 206 years","s":"Robert Patterson's 1801 cipher for Thomas Jefferson — text written down the lines, cut into sections of at most nine, the lines shuffled and padded with arbitrary letters. No earlier decipherment is documented before Lawren Smithline solved it in 2007 by dynamic programming over digraph frequencies.","g":["modern","classical substitution","broken"],"exhibitNumber":139,"collection":"cipher-history"},{"t":"Phaistos Disc","u":"ciphers/phaistos-disc.html","k":"unsolved","h":"Unsolved Ciphers","c":"Bronze Age Crete · ~1700 BCE","b":"—","trust":null,"n":"Undeciphered script","s":"The Phaistos Disc is a Bronze Age stamped inscription from Crete. Its language and reading remain disputed; it is not established as a cipher.","g":["ancient","unsolved ciphers"],"exhibitNumber":107,"collection":"cipher-history"},{"t":"Pigpen Cipher","u":"ciphers/pigpen.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"18th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Symbol frequency analysis · Pattern recognition","s":"Pigpen cipher (~1700) — Freemason geometric substitution where each letter becomes the lines and dots of its grid cell. Trivial once the glyph table is seen.","g":["medieval","puzzle & novelty ciphers","broken"],"exhibitNumber":32,"collection":"cipher-history"},{"t":"Playfair Cipher","u":"ciphers/playfair.html","k":"cipher","h":"Classical Substitution","c":"Victorian · 1854","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Digraph statistics · hill climbing","s":"Playfair cipher (1854) — Charles Wheatstone's keyed 5x5 digram cipher promoted by Lord Playfair. Used by the British in WWI; broken by digram analysis.","g":["19th century","classical substitution","broken"],"exhibitNumber":6,"collection":"cipher-history"},{"t":"Polybius Square","u":"ciphers/polybius.html","k":"cipher","h":"World Origins of Cryptography","c":"Ancient Greece · ~150 BC","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis","s":"Polybius described a Greek torch-signalling system. The modern Latin 5×5 grid adapts its coordinate idea and supports later substitution and fractionation ciphers.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":3,"collection":"cipher-history"},{"t":"Porta Cipher","u":"ciphers/porta.html","k":"cipher","h":"Polyalphabetic Revolution","c":"Renaissance · 1563","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Index of Coincidence · Statistical analysis","s":"The Porta cipher uses reciprocal substitutions selected by a repeating key. This exhibit’s 26-letter, 13-row table is a modern adaptation of the historical construction.","g":["renaissance","polyalphabetic revolution","broken"],"exhibitNumber":10,"collection":"cipher-history"},{"t":"Purple (97-shiki ōbun injiki)","u":"ciphers/purple.html","k":"cipher","h":"Mechanical Cipher Machines","c":"World War II · 1939–1945","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frank Rowlett, Genevieve Grotjan & the US SIS · 20 September 1940","s":"Purple was Japan’s Type 97 diplomatic stepping-switch cipher. Grotjan’s 20 September 1940 breakthrough helped the US Army SIS team reconstruct it.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":52,"collection":"cipher-history"},{"t":"Rail Fence Cipher","u":"ciphers/rail-fence.html","k":"cipher","h":"Transposition & Fractionation","c":"Classical Transposition","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Brute force · Trivial keyspace","s":"Rail Fence transposes a message along a zigzag route. Rail count, offset conventions and message length define the search; there is no universal ten-rail maximum.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":13,"collection":"cipher-history"},{"t":"RAF–Stasi Records and an OTP Teaching Model","u":"ciphers/red-army-faction.html","k":"cipher","h":"Military & Spy Ciphers","c":"Cold War · 1970–1998","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Illustrative letter-pad arithmetic; not a reconstruction of an authenticated RAF key or message.","s":"RAF–Stasi contacts are documented, but this exhibit does not establish a specific RAF one-time-pad system. The interactive is a generic arithmetic illustration.","g":["cold war","military & spy ciphers","educational"],"exhibitNumber":85,"collection":"cipher-history"},{"t":"Red (Type A)","u":"ciphers/red-type-a.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Interwar to WWII - 1930s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken by SIS","s":"Red (Type A) (1930s) - the Japanese diplomatic half-rotor predecessor to Purple and the cryptanalytic bridge to MAGIC.","g":["wwii","mechanical cipher machines","broken"],"exhibitNumber":98,"collection":"cipher-history"},{"t":"Joseph Rochefort","u":"ciphers/rochefort.html","k":"person","h":"Hall of Codebreakers","c":"WWII · Pacific","b":"—","trust":null,"n":"Codebreaker Biography","s":"Joseph Rochefort led Station HYPO’s team. Its signals intelligence helped US commanders prepare for Midway alongside other Allied analysis, reconnaissance and operational decisions.","g":["wwii","hall of codebreakers"],"exhibitNumber":115,"collection":"cipher-history"},{"t":"The Rosetta Stone","u":"ciphers/rosetta-stone.html","k":"cipher","h":"World Origins of Cryptography","c":"Ptolemaic Egypt · 196 BCE","b":"—","trust":null,"n":"Two languages, three scripts; Champollion’s 1822 breakthrough was part of a longer decipherment.","s":"The Rosetta Stone (196 BCE) records a decree in two languages and three scripts. It supported the decipherment of Egyptian hieroglyphs; it is not an encryption system.","g":["ancient","world origins of cryptography"],"exhibitNumber":71,"collection":"cipher-history"},{"t":"ROT13","u":"ciphers/rot13.html","k":"cipher","h":"World Origins of Cryptography","c":"Modern · 1980s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Knowing the system","s":"ROT13 is a fixed Caesar shift of 13, popularized as an early Usenet viewing convention. Applying it twice restores the text; it provides no confidentiality.","g":["modern","world origins of cryptography","broken"],"exhibitNumber":42,"collection":"cipher-history"},{"t":"Rasterschlüssel 44 (RS44)","u":"ciphers/rs44.html","k":"cipher","h":"Transposition Ciphers","c":"German field cipher · 1944","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Published Allied attacks used captured stencils, retransmissions and probable plaintext; isolated traffic could remain difficult.","s":"Reconstruct the 27 March 1944 RS44 operating procedure with its original example stencil. Animate permitted-cell entry and keyed extraction.","g":["wwii","transposition ciphers","broken"],"exhibitNumber":165,"collection":"cipher-history"},{"t":"RSA","u":"ciphers/rsa.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1977","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"RSA uses a public modulus and exponents to support public-key constructions. Secure encryption and signatures need specified padding, adequate parameters and correct implementation.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":61,"collection":"cipher-history"},{"t":"Running Key Cipher","u":"ciphers/running-key.html","k":"cipher","h":"Polyalphabetic Revolution","c":"19th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Source text identification · Statistical analysis","s":"Running Key uses a message-length text passage as its Vigenère key. Language patterns in both message and key prevent the perfect secrecy of an ideal one-time pad.","g":["19th century","polyalphabetic revolution","broken"],"exhibitNumber":12,"collection":"cipher-history"},{"t":"Sator Square","u":"ciphers/sator-square.html","k":"cipher","h":"Cipher Culture","c":"Roman Empire · 1st–4th c. CE","b":"—","trust":null,"n":"Palindromic word square; proposed Christian interpretations remain hypotheses.","s":"The SATOR square has five palindromically arranged words. Its letters form a PATER NOSTER cross with two A’s and two O’s left over; the intended meaning remains debated.","g":["ancient","cipher culture"],"exhibitNumber":102,"collection":"cipher-history"},{"t":"Scytale","u":"ciphers/scytale.html","k":"cipher","h":"World Origins of Cryptography","c":"Ancient Sparta · interpretation debated","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Simple transposition model; historical origin and military use are debated.","s":"The traditional scytale reconstruction illustrates transposition, but the dates and cryptographic interpretation of ancient evidence are disputed.","g":["ancient","world origins of cryptography","broken"],"exhibitNumber":1,"collection":"cipher-history"},{"t":"SHA-256","u":"ciphers/sha256.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 2002","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"SHA-256 produces a 256-bit digest for messages shorter than 2^64 bits. Used in checksums, signatures and Bitcoin; a bare hash does not authenticate its sender.","g":["digital","modern cryptography","secure (modern)"],"exhibitNumber":63,"collection":"cipher-history"},{"t":"Shamir's Secret Sharing","u":"ciphers/shamir-secret-sharing.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1979","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"Shamir's Secret Sharing (1979) — split a secret so any k of n holders can rebuild it and any k−1 learn absolutely nothing.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":159,"collection":"protocols"},{"t":"Shugborough Inscription","u":"ciphers/shugborough.html","k":"unsolved","h":"Unsolved Ciphers","c":"Georgian England · mid-18th century","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unresolved inscription; an encoding method is not established","s":"An eighteenth-century garden monument with eight unexplained letters, O · U · O · S · V · A · V · V, and D · M below.","g":["modern","unsolved ciphers","historical only"],"exhibitNumber":103,"collection":"cipher-history"},{"t":"SIGABA (ECM Mark II)","u":"ciphers/sigaba.html","k":"cipher","h":"Mechanical Machines","c":"WWII · 1940","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in wartime service; obsolete today.","s":"SIGABA used fifteen rotors in cipher, control and index banks. No successful enemy wartime cryptanalytic break is publicly documented; the widget is a simplified model.","g":["wwii","mechanical machines","historical only"],"exhibitNumber":57,"collection":"cipher-history"},{"t":"SIGSALY — The Encrypted Speech System","u":"ciphers/sigsaly.html","k":"cipher","h":"Mechanical Cipher Machines","c":"WWII · 1943–1946","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"","s":"SIGSALY protected high-level Allied voice communications using quantised vocoder parameters and matched one-time key records. The demo illustrates modular addition only.","g":["wwii","mechanical cipher machines","historical only"],"exhibitNumber":109,"collection":"cipher-history"},{"t":"Slidex","u":"ciphers/slidex.html","k":"cipher","h":"Civil War Gallery","c":"WWII & Cold War · 1943–1980s","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Short-lived tactical vocabulary cards and changing cursor settings; the widget is a simplified bigram model.","s":"Slidex used a 204-cell tactical vocabulary card and sliding coordinate strips. Reported German recovery times concerned particular wartime traffic, not every message.","g":["wwii","civil war gallery","broken"],"exhibitNumber":92,"collection":"cipher-history"},{"t":"SoDark and Radio Linking","u":"ciphers/sodark.html","k":"cipher","h":"Modern Cryptography","c":"Modern cryptography · research case study","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.","s":"An eight-round attack on HF link establishment, with its data and access conditions visible.","g":["modern","modern cryptography","broken"],"exhibitNumber":171,"collection":"cipher-history"},{"t":"Solitaire / Pontifex","u":"ciphers/solitaire.html","k":"cipher","h":"The Unbreakable","c":"Modern · 1999","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"","s":"Solitaire / Pontifex (1999) — Bruce Schneier's hand cipher driven by a 54-card deck (written for Cryptonomicon). Crowley showed a ~1/22.5 keystream bias.","g":["digital","the unbreakable","historical only"],"exhibitNumber":51,"collection":"cipher-history"},{"t":"Somerton Man Code","u":"ciphers/somerton-man.html","k":"unsolved","h":"Unsolved Ciphers","c":"Post-WWII Australia · 1948","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Unresolved inscription; a 2022 genealogical identification proposal is separate from deciphering these letters.","s":"The Somerton Man inscription and a simplified transcription experiment. A 2022 genealogical identification proposal is separate from interpreting the letters.","g":["wwii","unsolved ciphers","historical only"],"exhibitNumber":105,"collection":"cipher-history"},{"t":"Stager Cipher","u":"ciphers/stager.html","k":"cipher","h":"Civil War Gallery","c":"Union · 1861","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical Union route-code system; wartime operational success is not a mathematical security guarantee.","s":"The Union’s Stager system combined word transposition, code words and operational procedures. Wartime success is a historical claim, not a proof of mathematical security.","g":["19th century","civil war gallery","historical only"],"exhibitNumber":24,"collection":"cipher-history"},{"t":"Station HYPO — Pearl Harbor to Midway","u":"ciphers/station-hypo.html","k":"person","h":"Hall of Codebreakers","c":"WWII · 1940–1942","b":"—","trust":null,"n":"Broken (JN-25)","s":"Station HYPO combined partial JN-25 recovery, traffic analysis and operational context to help anticipate the Japanese operation against Midway in 1942.","g":["wwii","hall of codebreakers"],"exhibitNumber":114,"collection":"cipher-history"},{"t":"Straddling Checkerboard","u":"ciphers/straddling-checkerboard.html","k":"cipher","h":"Military & Spy Ciphers","c":"Late 19th – 20th Century","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Weak (alone) · Strong (in VIC)","s":"The straddling checkerboard uses one- and two-digit letter codes. It is a substitution component of VIC; this exhibit does not establish an exact first-use date.","g":["19th century","military & spy ciphers","broken"],"exhibitNumber":45,"collection":"cipher-history"},{"t":"Tap Code","u":"ciphers/tap-code.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"Vietnam War · earlier precedents","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Frequency analysis · Grid deduction","s":"Tap Code (1965) — the 5x5 Polybius square tapped through walls as row-then-column knocks. Used by US POWs in the Hanoi Hilton during the Vietnam War.","g":["cold war","puzzle & novelty ciphers","broken"],"exhibitNumber":34,"collection":"cipher-history"},{"t":"Trifid Cipher","u":"ciphers/trifid.html","k":"cipher","h":"Transposition & Fractionation","c":"1902","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Statistical analysis","s":"Trifid cipher (1902) — Felix Delastelle's three-dimensional 3x3x3 extension of the Bifid that fractionates letters into trits and shuffles them across a period.","g":["19th century","transposition & fractionation","broken"],"exhibitNumber":17,"collection":"cipher-history"},{"t":"Trithemius Progressive Cipher","u":"ciphers/trithemius.html","k":"cipher","h":"The Polyalphabetic Era","c":"German Renaissance · 1518","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Easy","s":"Johannes Trithemius's progressive shift cipher (Polygraphia, 1518) — the first published polyalphabetic, where every successive letter is shifted one further than the last.","g":["renaissance","the polyalphabetic era","broken"],"exhibitNumber":72,"collection":"cipher-history"},{"t":"Fleissner Turning Grille","u":"ciphers/turning-grille.html","k":"cipher","h":"Transposition & Fractionation","c":"1881 · German WWI use","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"A transposition cipher: quarter-turn holes permute a complete block, preserving letter frequencies.","s":"Fleissner turning grille — a transposition cipher used by Germany in WWI. Rotate an interactive mask 90 degrees and contrast it with Cardano steganography.","g":["wwi","transposition & fractionation","broken"],"exhibitNumber":163,"collection":"cipher-history"},{"t":"Two-Square Cipher","u":"ciphers/two-square.html","k":"cipher","h":"Classical Substitution","c":"Classical Digraph Cipher","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Digram frequency · same-row leak","s":"Two-square uses two keyed 5×5 squares to encipher letter pairs. This demo follows the ACA horizontal rectangle rule and discloses its extra filler-escape convention.","g":["19th century","classical substitution","broken"],"exhibitNumber":44,"collection":"cipher-history"},{"t":"Typex","u":"ciphers/typex.html","k":"cipher","h":"Mechanical Machines","c":"WWII · 1937","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Never publicly broken by cryptanalysis in wartime service; obsolete today.","s":"Typex was a British Enigma-derived family with five rotor positions. Later models included plugboards; the browser widget is a simplified rotor model.","g":["wwii","mechanical machines","historical only"],"exhibitNumber":58,"collection":"cipher-history"},{"t":"UA-8295: Forensic Cryptanalysis of a Message Terminal","u":"ciphers/ua-8295.html","k":"cipher","h":"Modern Cryptography","c":"Modern cryptography · research case study","b":"—","trust":null,"n":"Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.","s":"A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.","g":["modern","modern cryptography"],"exhibitNumber":170,"collection":"cipher-history"},{"t":"VENONA Project","u":"ciphers/venona.html","k":"cipher","h":"The Unbreakable","c":"Cold War · 1943–1980","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Partial break (key reuse exploit)","s":"VENONA analysed intercepted Soviet messages, chiefly from the 1940s, by exploiting duplicated pad material. The project ran from 1943 to 1980.","g":["wwii","the unbreakable","broken"],"exhibitNumber":108,"collection":"cipher-history"},{"t":"Vernam Cipher","u":"ciphers/vernam.html","k":"cipher","h":"The Unbreakable","c":"1917","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"XOR gives perfect secrecy only with an independent, uniformly random secret pad at least as long as the message, used once. No authentication.","s":"Vernam’s teleprinter system combines text with a key stream. XOR supplies perfect secrecy only when the pad is uniformly random, independent, secret, long enough and never reused.","g":["wwi","the unbreakable","secure (modern)"],"exhibitNumber":37,"collection":"cipher-history"},{"t":"VIC Cipher","u":"ciphers/vic.html","k":"cipher","h":"Military & Spy Ciphers","c":"Cold War · 1950s","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical Soviet hand system; the key procedure became known through Häyhänen’s 1957 defection. No proof of unbreakability.","s":"VIC cipher (1953) — Reino Häyhänen's KGB hand cipher: straddling checkerboard, double transposition, date-driven keystream. Exposed in 1957 after his defection, not broken cryptanalytically.","g":["cold war","military & spy ciphers","historical only"],"exhibitNumber":23,"collection":"cipher-history"},{"t":"Vietnamese Underground Codes","u":"ciphers/vietnamese-underground.html","k":"cipher","h":"Military & Spy Ciphers","c":"Modern · 1940s–1975","b":"Educational","trust":{"key":"educational","text":"Educational","description":"A didactic construction for learning cryptographic concepts, not for security."},"n":"Illustrative concealment and cipher models; specific operational attribution is not established here.","s":"Vietnamese wartime communications used changing codes and ciphers. This keyword-substitution widget is a teaching model, not a verified universal underground system.","g":["cold war","military & spy ciphers","educational"],"exhibitNumber":84,"collection":"cipher-history"},{"t":"Vigenère Cipher","u":"ciphers/vigenere.html","k":"cipher","h":"Hall III","c":"Renaissance · 1553","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Babbage ~1854 · Kasiski 1863","s":"The repeating-key Vigenère cipher exposes periodic structure. Bellaso described a related system in 1553; Babbage and Kasiski developed attacks in the nineteenth century.","g":["renaissance","hall iii","broken"],"exhibitNumber":8,"collection":"cipher-history"},{"t":"The Voynich Manuscript","u":"ciphers/voynich.html","k":"unsolved","h":"Unsolved Ciphers","c":"Early 15th c. · Carbon-dated 1404–1438","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"No generally accepted decipherment; whether the text encodes language or a cipher remains unresolved.","s":"The Voynich manuscript has an undeciphered script. Parchment dating and sample-dependent text statistics constrain hypotheses without identifying its language or method.","g":["renaissance","unsolved ciphers","historical only"],"exhibitNumber":40,"collection":"cipher-history"},{"t":"Wadsworth Cipher","u":"ciphers/wadsworth-cipher.html","k":"cipher","h":"Mechanical Cipher Machines","c":"1817 · USA","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Ciphertext-only stochastic hill climbing (2020)","s":"Wadsworth’s 1817 device uses geared disks with 33 and 26 positions. A published 2020 ciphertext-only search studied key recovery for this historical design.","g":["19th century","mechanical cipher machines","broken"],"exhibitNumber":69,"collection":"cipher-history"},{"t":"Wallis Ciphers","u":"ciphers/wallis-ciphers.html","k":"cipher","h":"Classical Substitution","c":"English Civil War · 1642–1651","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Royalist nomenclators — broken by Wallis","s":"John Wallis’s seventeenth-century cryptanalysis, with a clearly identified museum nomenclator model. Historical recovery times varied from hours to months.","g":["renaissance","classical substitution","broken"],"exhibitNumber":75,"collection":"cipher-history"},{"t":"Wheatstone Cryptograph","u":"ciphers/wheatstone.html","k":"cipher","h":"Mechanical Cipher Machines","c":"Victorian London · 1867","b":"Historical Only","trust":{"key":"historical","text":"Historical Only","description":"Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."},"n":"Historical unequal-dial device. The current equal-dial widget is a fixed-substitution teaching model, not its mechanism.","s":"Charles Wheatstone's 1867 cryptograph — two geared clock dials whose hands sweep an outer plain alphabet and an inner mixed alphabet, generating a polyalphabetic ciphertext one click at a time.","g":["victorian","mechanical cipher machines","historical only"],"exhibitNumber":74,"collection":"cipher-history"},{"t":"Herbert Yardley","u":"ciphers/yardley.html","k":"person","h":"Hall of Codebreakers","c":"Interwar · USA","b":"—","trust":null,"n":"Codebreaker Biography","s":"Herbert Osborne Yardley founded America's Black Chamber in 1919, broke Japanese diplomatic codes at the 1921 Washington Naval Conference, and then infamously published the secrets in his 1931 bestseller.","g":["interwar","hall of codebreakers"],"exhibitNumber":118,"collection":"cipher-history"},{"t":"Zero-Knowledge Proofs","u":"ciphers/zero-knowledge-proofs.html","k":"cipher","h":"Modern Cryptography","c":"Modern · 1985","b":"Secure (Modern)","trust":{"key":"secure","text":"Secure (Modern)","description":"Still considered secure when used correctly with modern key handling."},"n":"","s":"Zero-knowledge proofs (1985) — convince someone a statement is true while revealing nothing beyond its truth. Run the Schnorr protocol and its simulator.","g":["cold war","modern cryptography","secure (modern)"],"exhibitNumber":160,"collection":"protocols"},{"t":"Zimmermann Telegram","u":"ciphers/zimmermann.html","k":"cipher","h":"Civil War Gallery","c":"WWI · January 1917","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Broken (Room 40)","s":"The January 1917 Zimmermann Telegram: code 0075 to Washington, then re-encoded in 13040 for Mexico. Room 40’s reading helped draw the United States into WWI.","g":["wwi","civil war gallery","broken"],"exhibitNumber":89,"collection":"cipher-history"},{"t":"Zodiac Cipher","u":"ciphers/zodiac.html","k":"exhibit","h":"Puzzle & Novelty Ciphers","c":"1969 · Solved 2020","b":"Broken","trust":{"key":"broken","text":"Broken","description":"Cryptographically broken — historically important but unsafe to use today."},"n":"Oranchak, Blake & Van Eycke (2020)","s":"Zodiac killer ciphers (1969) — homophonic substitution as in Z-408 (broken in 1969 by the Hardens) and Z-340 (broken in 2020 by Oranchak, Blake, and Van Eycke).","g":["cold war","puzzle & novelty ciphers","broken"],"exhibitNumber":35,"collection":"cipher-history"},{"t":"World Origins of Cryptography","u":"halls/ancient.html","k":"hall","h":"—","c":"Hall I · Ancient traditions and later comparisons","b":"—","s":"World origins of cryptography from ancient Egypt and Hebrew Atbash through Greek, Roman, Indian, and Arabic traditions.","g":["hall","ancient"]},{"t":"The American Civil War Gallery","u":"halls/civil-war.html","k":"hall","h":"—","c":"Hall VI · Special Exhibition · 1861 – 1865","b":"—","s":"Civil War cryptography: the Stager cipher, Confederate Vigenère, and dictionary codes from the American Civil War.","g":["hall"]},{"t":"Hall of Codebreakers","u":"halls/codebreakers.html","k":"hall","h":"—","c":"Hall X · The Human Stories","b":"—","s":"Twenty-one moments when human ingenuity broke what mathematics could not. From Al-Kindi (850 AD) to the Copiale and Chaocipher reconstructions of 2010-2014.","g":["hall","ancient","renaissance","19th century","wwi","cold war"]},{"t":"Cipher Culture","u":"halls/culture.html","k":"hall","h":"—","c":"Hall XIII · Cipher Culture","b":"—","s":"Cryptography in art, music, literature, espionage fiction, and games — Bach's BACH motif, Poe's 'The Gold-Bug', Conan Doyle's Dancing Men, ARG ciphers, and modern puzzle hunts.","g":["hall","renaissance","19th century","modern","ancient"]},{"t":"Mechanical Cipher Machines","u":"halls/machines.html","k":"hall","h":"—","c":"Hall VII · 1467 – 1950s","b":"—","s":"Mechanical cipher machines: Enigma, Lorenz, Jefferson Disk, and Alberti’s original cipher disk.","g":["hall","renaissance","19th century","wwi","cold war","modern"]},{"t":"Military & Spy Ciphers","u":"halls/military.html","k":"hall","h":"—","c":"Hall V · 1880s — Cold War · 1880 – 1970","b":"—","s":"Military and spy ciphers used in real warfare: Nihilist, VIC, Stager, and Confederate systems.","g":["hall","wwi","cold war","19th century"]},{"t":"Modern Cryptography","u":"halls/modern-crypto.html","k":"hall","h":"—","c":"Hall XI · 1976 – Present","b":"—","s":"Explore block ciphers, key agreement, public-key schemes, hashing, signatures, secret sharing and zero-knowledge proofs, with their assumptions and limits.","g":["hall","modern","theoretical"]},{"t":"The Polyalphabetic Revolution","u":"halls/polyalphabetic.html","k":"hall","h":"—","c":"Hall III · Renaissance — 19th century","b":"—","s":"The polyalphabetic revolution: Vigenère, Beaufort, Porta, and the ciphers that defeated simple frequency analysis.","g":["hall","renaissance","19th century"]},{"t":"Puzzle & Novelty Ciphers","u":"halls/puzzle.html","k":"hall","h":"—","c":"Hall VIII · 1605 – Present","b":"—","s":"Puzzle and novelty ciphers: Pigpen, Bacon’s bilateral, tap code, and other creative encoding systems.","g":["hall","medieval","renaissance","cold war","modern"]},{"t":"Classical Substitution","u":"halls/substitution.html","k":"hall","h":"—","c":"Hall II · Ancient roots — 20th century","b":"—","s":"Classical substitution ciphers: monoalphabetic, homophonic, and Polybius square techniques that shaped cryptography for centuries.","g":["hall","medieval","renaissance","19th century","modern","wwi"]},{"t":"Transposition & Fractionation","u":"halls/transposition.html","k":"hall","h":"—","c":"Hall IV · 19th – Early 20th Century","b":"—","s":"Transposition and fractionation ciphers: rail fence, columnar, bifid, trifid, and ADFGVX systems.","g":["hall","19th century","wwi","modern"]},{"t":"The Unbreakable","u":"halls/unbreakable.html","k":"hall","h":"—","c":"Hall IX · 1882 – Present","b":"—","s":"One-Time Pad, Vernam cipher, VENONA, and Claude Shannon's proof of perfect secrecy — where perfect theory met operational failure.","g":["hall","theoretical","wwi","19th century","cold war","modern"]},{"t":"Unsolved Ciphers","u":"halls/unsolved.html","k":"hall","h":"—","c":"Hall XII · Open Problems · Living Research","b":"—","s":"Unresolved cryptograms, inscriptions and writing systems. Distinguish unknown meanings, uncertain methods and missing evidence from proven cryptographic security.","g":["hall","renaissance","modern","19th century","wwi","ancient"]},{"t":"The Closest Vector Problem","u":"hall-of-foundations/closest-vector.html","k":"exhibit","h":"Foundations","c":"§152","b":"—","s":"Compare exact nearest-point search with coordinate rounding in two dimensions. An intuition for lattice decoding, not an implementation of ML-KEM.","g":["foundations","mathematics","cvp","closest vector","lwe","learning with errors","kyber","ml-kem","babai"],"exhibitNumber":152,"collection":"foundations"},{"t":"Elliptic Curves over ℝ","u":"hall-of-foundations/elliptic-curves-real.html","k":"exhibit","h":"Foundations","c":"§150","b":"—","s":"A gentle first look at the elliptic-curve group law, drawn by hand, before it moves to a finite field.","g":["foundations","mathematics","elliptic curve","group law","chord tangent","ecc","ecdsa"],"exhibitNumber":150,"collection":"foundations"},{"t":"Information & Entropy","u":"hall-of-foundations/entropy.html","k":"exhibit","h":"Foundations","c":"§151","b":"—","s":"Shannon’s measure of surprise: how distributions, independence and key generation affect secrecy.","g":["foundations","mathematics","entropy","shannon","information theory","perfect secrecy","one-time pad"],"exhibitNumber":151,"collection":"foundations"},{"t":"Euler & Fermat","u":"hall-of-foundations/euler-fermat.html","k":"exhibit","h":"Foundations","c":"§145","b":"—","s":"The little theorem that makes RSA decryption undo RSA encryption. Watch a message round-trip.","g":["foundations","mathematics","euler","fermat","totient","rsa","little theorem"],"exhibitNumber":145,"collection":"foundations"},{"t":"Finite Fields","u":"hall-of-foundations/finite-fields.html","k":"exhibit","h":"Foundations","c":"§142","b":"—","s":"Watch a smooth elliptic curve shatter into a scatter of dots over a finite field — and see why the discrete logarithm becomes hard.","g":["foundations","mathematics","finite field","galois field","gf","discrete log","ecc"],"exhibitNumber":142,"collection":"foundations"},{"t":"Group Theory","u":"hall-of-foundations/group-theory.html","k":"exhibit","h":"Foundations","c":"§149","b":"—","s":"Generators, order, and cyclic structure — the grammar of the discrete-log family.","g":["foundations","mathematics","group theory","cyclic group","generator","order","diffie-hellman"],"exhibitNumber":149,"collection":"foundations"},{"t":"Hall of Foundations","u":"hall-of-foundations/index.html","k":"hall","h":"—","c":"—","b":"—","s":"The Hall of Foundations — interactive exhibits on the mathematics under cryptography: the number theory, hardness assumptions, and structures behind RSA, ECC, and the post-quantum standards.","g":["foundations","mathematics","hall"]},{"t":"Polynomial Interpolation · Hall of Foundations","u":"hall-of-foundations/interpolation.html","k":"exhibit","h":"Foundations","c":"§155","b":"—","s":"Drag points until the curve locks and the secret intercept appears — the heart of Shamir’s Secret Sharing.","g":["foundations","mathematics","interpolation","lagrange","shamir","secret sharing","threshold"],"exhibitNumber":155,"collection":"foundations"},{"t":"Lattices & the SVP","u":"hall-of-foundations/lattices-svp.html","k":"exhibit","h":"Foundations","c":"§147","b":"—","s":"Drag a basis and hunt the shortest vector — the lattice foundation under Kyber, Dilithium, and post-quantum cryptography.","g":["foundations","mathematics","lattice","svp","shortest vector","post-quantum","kyber","ml-kem"],"exhibitNumber":147,"collection":"foundations"},{"t":"Learning With Errors","u":"hall-of-foundations/learning-with-errors.html","k":"exhibit","h":"Foundations","c":"§157","b":"—","s":"Solve for a secret vector, then switch the noise on and watch the same algebra fail — the Learning With Errors problem beneath ML-KEM and ML-DSA.","g":["foundations","mathematics"],"exhibitNumber":157,"collection":"foundations"},{"t":"Modular Arithmetic","u":"hall-of-foundations/modular-arithmetic.html","k":"exhibit","h":"Foundations","c":"§143","b":"—","s":"Clock arithmetic, primitive roots, and the cyclic group Diffie–Hellman lives inside.","g":["foundations","mathematics","modular arithmetic","clock","primitive root","diffie-hellman"],"exhibitNumber":143,"collection":"foundations"},{"t":"The Ground Beneath the Curve","u":"hall-of-foundations/modularity-exhibit.html","k":"exhibit","h":"Foundations","c":"—","b":"—","s":"The Ground Beneath the Curve — the modularity theorem and the number theory elliptic-curve cryptography inherits.","g":["foundations","mathematics","modularity theorem","fermat","wiles","number theory","ecc"],"exhibitNumber":141,"collection":"foundations"},{"t":"The One-Way Function","u":"hall-of-foundations/one-way-function.html","k":"exhibit","h":"Foundations","c":"§146","b":"—","s":"Multiply in a blink; factor and sweat — the one-way function, conceptual keystone of modern cryptography.","g":["foundations","mathematics","one-way function","factoring","trapdoor","hardness"],"exhibitNumber":146,"collection":"foundations"},{"t":"Bilinear Pairings · Hall of Foundations","u":"hall-of-foundations/pairings.html","k":"exhibit","h":"Foundations","c":"§156","b":"—","s":"Verify a product of hidden scalars without revealing them — the bilinear pairing under zk-SNARKs.","g":["foundations","mathematics","pairing","bilinear","zk-snark","zero-knowledge","ibe"],"exhibitNumber":156,"collection":"foundations"},{"t":"Polynomial Rings · Hall of Foundations","u":"hall-of-foundations/polynomial-rings.html","k":"exhibit","h":"Foundations","c":"§153","b":"—","s":"The polynomial ring R_q = Z_q[X]/(Xⁿ+1) — the structured lattice inside ML-KEM and ML-DSA.","g":["foundations","mathematics","polynomial ring","ntt","module-lwe","ml-kem","ml-dsa","post-quantum"],"exhibitNumber":153,"collection":"foundations"},{"t":"The Prime Number Theorem","u":"hall-of-foundations/prime-number-theorem.html","k":"exhibit","h":"Foundations","c":"§144","b":"—","s":"Prime density helps estimate candidate-search effort in RSA key generation; it does not prove primality or a fixed runtime.","g":["foundations","mathematics","prime number theorem","primes","rsa","key generation"],"exhibitNumber":144,"collection":"foundations"},{"t":"The Random Oracle · Hall of Foundations","u":"hall-of-foundations/random-oracle.html","k":"exhibit","h":"Foundations","c":"§154","b":"—","s":"Flip one input bit, scramble half the output — the idealized hash assumption beneath Fiat–Shamir signatures.","g":["foundations","mathematics","random oracle","hash","avalanche","fiat-shamir","signatures"],"exhibitNumber":154,"collection":"foundations"},{"t":"Reduction & Proof","u":"hall-of-foundations/reduction.html","k":"exhibit","h":"Foundations","c":"§148","b":"—","s":"What “provably as hard as factoring” actually claims — and what it quietly assumes.","g":["foundations","mathematics","reduction","security proof","provable security","hardness"],"exhibitNumber":148,"collection":"foundations"},{"t":"Museum Map","u":"museum-map.html","k":"page","h":"—","c":"Your Guide to the Collection","b":"—","s":"Navigate all 13 exhibit halls, the Hall of Foundations mathematics annex, and 172 exhibits in The Cipher Museum. Find your next cryptographic adventure.","g":[]},{"t":"History of Encryption","u":"timeline.html","k":"page","h":"—","c":"Writing, Secrecy and Cryptanalysis","b":"—","s":"A historical timeline of writing, ciphers and cryptanalysis, distinguishing documented milestones, approximate dates and undated teaching models.","g":[]},{"t":"How Ciphers Work","u":"learn.html","k":"page","h":"—","c":"Understanding Encryption","b":"—","s":"Understand classical ciphers and compare their mechanisms with modern encryption — from Caesar's shift to AES.","g":[]},{"t":"Cryptanalysis Techniques","u":"cryptanalysis.html","k":"page","h":"—","c":"Special Exhibit · The Science of Breaking Codes","b":"—","s":"Learn how codebreakers crack ciphers. Frequency analysis, Kasiski examination, index of coincidence, and modern computational methods.","g":[]},{"t":"Cipher Challenges","u":"challenges.html","k":"page","h":"—","c":"Test Your Skills","b":"—","s":"Break real ciphers. Ten progressively harder challenges — from Caesar to Enigma.","g":[]},{"t":"Cryptography Glossary","u":"glossary.html","k":"page","h":"—","c":"Reference Guide","b":"—","s":"Cryptography glossary: definitions of ciphers, cryptanalysis, key exchange, and encryption concepts from ancient to modern.","g":[]},{"t":"Modern Cryptography","u":"modern.html","k":"page","h":"—","c":"Beyond the Museum","b":"—","s":"From AES and RSA to quantum cryptography — explore how modern encryption protects the digital world.","g":[]},{"t":"Cipher Comparison Table","u":"comparison.html","k":"page","h":"—","c":"120 Compared Exhibits from the 172-exhibit Collection","b":"—","s":"Compare 120 exhibits from the 172-exhibit collection side by side. Sort by era, type, security level, hall, puzzle coverage, key method, and more.","g":[]},{"t":"Cipher Corpus","u":"cipher-corpus.html","k":"page","h":"—","c":"Known-Ciphertext Benchmark Library","b":"—","s":"A curated library of ciphertext challenges, known plaintexts, keys, and metadata for learning, teaching, scoring, and benchmarking classical cryptanalysis.","g":["v0.8 · 7 languages","v0.8 · 41 historical records","beginner → expert tiers","noisy & multilingual variants","v0.8 · jsonl","v0.6 archive · json / csv","versioned llm 3-shot eval export"]},{"t":"Cipher Detective","u":"cipher-detective.html","k":"page","h":"—","c":"Statistical Cryptanalysis","b":"—","s":"Inspect cipher evidence with frequency analysis and Kasiski tests, preserve annotated transcriptions, and try partial keys at a manual substitution desk.","g":[]},{"t":"Further Reading","u":"further-reading.html","k":"page","h":"—","c":"Curator's Library","b":"—","s":"Chapter-based reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.","g":[]},{"t":"Popular Culture Survey","u":"popular-culture-survey.html","k":"page","h":"—","c":"Hall XIII Companion","b":"—","s":"Filterable survey of cipher references in novels, television, films, and internet puzzle culture.","g":[]},{"t":"Teaching & Overview","u":"teaching.html","k":"page","h":"—","c":"Cipher Corpus","b":"—","s":"Teaching and overview page for the Cipher Corpus: learn about classical ciphers, cryptanalysis, and how to use the benchmark dataset.","g":[]},{"t":"My Cryptographer's Path — The Cipher Museum","u":"my-path.html","k":"page","h":"—","c":"—","b":"—","s":"Track your progress through the Cipher Museum learning path. View earned badges, quiz scores, and your journey through each hall.","g":[]},{"t":"Codebreaker's Workbench — The Cipher Museum","u":"lab/workbench.html","k":"page","h":"—","c":"—","b":"—","s":"A unified cryptanalysis interface: encrypt, decrypt, and analyze ciphertext with live frequency analysis and multiple cipher engines.","g":[]},{"t":"Evidence Workbench — The Cipher Museum","u":"lab/evidence-workbench.html","k":"page","h":"—","c":"—","b":"—","s":"Keep the original, compare readings, and make every decipherment hypothesis inspectable.","g":[]},{"t":"How a Decipherment Becomes Evidence — The Cipher Museum","u":"lab/decipherment-cases.html","k":"page","h":"—","c":"—","b":"—","s":"Follow Copiale, Mary Stuart and Z340 from uncertain marks to testable readings.","g":[]},{"t":"What an Attack Result Actually Shows — The Cipher Museum","u":"lab/modern-attack-evidence.html","k":"page","h":"—","c":"—","b":"—","s":"Compare the access, data, computation and validation behind modern cryptanalytic results.","g":[]}]}
 ```
 
 
@@ -88459,16 +90483,16 @@ Source SHA-256: `5e2e6b1e3bd8493005403ec74508306412217aa4f750730496ef57590c388e8
 
 # data appendix 5
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/artifact-cards.json
 
-Source SHA-256: `ce5c573ce3557ab30c6bfc09914928b968f7752a0878e7616020a4b1761620be`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+Source SHA-256: `842169592579ae2389379591d48a405f2c7655eed02e5e839c5e30f8240c9992`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
 
 ```json
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T20:54:44.584Z",
+  "generatedAt": "2026-10-29T12:55:49.754Z",
   "totalExhibits": 155,
   "cards": {
     "adfgvx": {
@@ -90715,11 +92739,11 @@ Source SHA-256: `ce5c573ce3557ab30c6bfc09914928b968f7752a0878e7616020a4b1761620b
       "family": "Firmware forensics",
       "region": "Finland / Netherlands",
       "usedBy": "Nokia DA-8520 / USFA UA-8295 terminal users",
-      "keyType": "See the source-scope note; full-paper technical details are not verified here",
-      "keyIdea": "A preprint case study separating cryptanalytic findings from inferences about backdoor design.",
+      "keyType": "15-character user key plus a 5-character nonce derive a 56-bit key",
+      "keyIdea": "A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.",
       "trust": null,
       "securityFailure": null,
-      "modernLesson": "Distinguish the verified research question from unverified implementation details and inferences about intent."
+      "modernLesson": "Separate what was observed in firmware, what was implemented as an attack, what is conditional inference, and what is still open."
     },
     "venona": {
       "name": "VENONA Project",
@@ -90969,7 +92993,7 @@ Source SHA-256: `16bfa540a023856cbe4c377269e7bfaa9e1d1bc0f587cea23c26dc75554e927
 
 ## Data — data/exhibit-trust.json
 
-Source SHA-256: `232d7e9915b7ddd0a36320807ec783e0051bd8193f12358379ec5edfd69d5692`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+Source SHA-256: `1e893e9b86ca3cd83ac9038a88a9fd0b546ac43a73a19c2beea4a7994562368d`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
 
 ```json
 {
@@ -91145,7 +93169,7 @@ Source SHA-256: `232d7e9915b7ddd0a36320807ec783e0051bd8193f12358379ec5edfd69d569
     {"number":167,"path":"ciphers/amsco.html","label":"broken","note":"Variable-cell transposition preserves frequencies and is susceptible to probable-word and scored permutation search.","collection":"cipher-history","interactive":true},
     {"number":168,"path":"ciphers/bombe.html","label":null,"note":"Codebreaking machine; not an encryption system.","collection":"cipher-history","interactive":false},
     {"number":169,"path":"ciphers/colossus.html","label":null,"note":"Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.","collection":"cipher-history","interactive":true},
-    {"number":170,"path":"ciphers/ua-8295.html","label":null,"note":"Forensic cryptanalysis case study; abstract and publication record verified, with full-paper technical details outside this exhibit’s verified scope.","collection":"cipher-history","interactive":false},
+    {"number":170,"path":"ciphers/ua-8295.html","label":null,"note":"Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.","collection":"cipher-history","interactive":false},
     {"number":171,"path":"ciphers/sodark.html","label":"broken","note":"Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.","collection":"cipher-history","interactive":false},
     {"number":172,"path":"ciphers/nfc-deployment.html","label":null,"note":"Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.","collection":"cipher-history","interactive":false}
   ]
@@ -91546,7 +93570,7 @@ Source SHA-256: `3bd4770c7e3bdafad529f347a3e63703a5db49633054c20396147e9ac719f89
 
 # data appendix 6
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — corpus/engine-manifest.json
 
@@ -95274,15 +97298,15 @@ Source SHA-256: `30633f1a2bd3466e68032d9fed244fb185afd349c46e111e55c9639378661cb
 
 ## Data — data/research/v1/evaluation.json
 
-Source SHA-256: `46359af8d27c905e29ccc7bab3db031c5659a9f27ae9f43864edc68689fbe454`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+Source SHA-256: `20bfd97ade478872bcdeaed2c25fb22240b7078104bb5c0ada60adef26e46887`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
 
 ```json
 {
   "version": 1,
   "model": "museum-prose-quadgram-v1",
   "modelSha256": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
-  "scorerSha256": "2621e72bf6124d1d0e864d7ff643bcac62cbb22ae56a4cb0be70388f6129a492",
-  "solverSha256": "8b7b94977421047d3cb360dad250af8513c3d7d350c141b0d4f1fc466e42b174",
+  "scorerSha256": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
+  "solverSha256": "883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128",
   "fixturesSha256": "30633f1a2bd3466e68032d9fed244fb185afd349c46e111e55c9639378661cb8",
   "scope": "Public demonstrations; no training, blind holdout or historical-language coverage claim. One-symbol-unlocked runs disclose the rest of the key; they do not establish general recovery.",
   "records": [
@@ -95593,17 +97617,100 @@ Source SHA-256: `46359af8d27c905e29ccc7bab3db031c5659a9f27ae9f43864edc68689fbe45
           "2",
           "8"
         ],
+        "entries": [
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 0,
+            "end": 1
+          },
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 1,
+            "end": 2
+          },
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 2,
+            "end": 3
+          },
+          {
+            "code": "8",
+            "source": "8",
+            "type": "letter",
+            "reading": "D",
+            "values": [
+              "D"
+            ],
+            "start": 3,
+            "end": 4
+          }
+        ],
         "text": "AAAD",
-        "score": 0
+        "score": 0,
+        "alternatives": []
       },
       {
         "codes": [
           "2",
           "22",
           "8"
+        ],
+        "entries": [
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 0,
+            "end": 1
+          },
+          {
+            "code": "22",
+            "source": "22",
+            "type": "letter",
+            "reading": "N",
+            "values": [
+              "N"
+            ],
+            "start": 1,
+            "end": 3
+          },
+          {
+            "code": "8",
+            "source": "8",
+            "type": "letter",
+            "reading": "D",
+            "values": [
+              "D"
+            ],
+            "start": 3,
+            "end": 4
+          }
         ],
         "text": "AND",
-        "score": 0
+        "score": 0,
+        "alternatives": []
       },
       {
         "codes": [
@@ -95611,8 +97718,44 @@ Source SHA-256: `46359af8d27c905e29ccc7bab3db031c5659a9f27ae9f43864edc68689fbe45
           "2",
           "8"
         ],
+        "entries": [
+          {
+            "code": "22",
+            "source": "22",
+            "type": "letter",
+            "reading": "N",
+            "values": [
+              "N"
+            ],
+            "start": 0,
+            "end": 2
+          },
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 2,
+            "end": 3
+          },
+          {
+            "code": "8",
+            "source": "8",
+            "type": "letter",
+            "reading": "D",
+            "values": [
+              "D"
+            ],
+            "start": 3,
+            "end": 4
+          }
+        ],
         "text": "NAD",
-        "score": 0
+        "score": 0,
+        "alternatives": []
       }
     ],
     "wrongHypothesisBoundarySymmetricDifference": 1,
@@ -95750,11 +97893,2076 @@ Source SHA-256: `113473b36d39dccb1cdb7a7276dcf1fe634eb1d70d6109624e5d511ea8987fc
 ```
 
 
+## Data — data/research/v2/corpus.json
+
+Source SHA-256: `e00baf427f28f1a6008822db436cf2f561e58842833dad2e190558f48f33bbd6`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+
+```json
+{
+  "version": 1,
+  "id": "museum-research-corpus-v2",
+  "scope": "Source documents for research-evaluation v2. Museum-authored prose is original to this repository and is not historical material. Historical passages are held-out extracts from the same public-domain works used to build the language profiles: unseen by the model, but the same work and author.",
+  "rights": "Museum-authored text: MIT, with the rest of this repository. Historical passages: pre-1800 works, public domain worldwide; the extracts are short and their provenance is recorded in data/research/v2/holdout.json.",
+  "collections": [
+    {"id": "museum-prose-en", "description": "Original museum-authored modern English. Retained from research-evaluation v1 so its published failures stay the baseline."},
+    {"id": "museum-prose-fr", "description": "Original museum-authored modern French. A language-shift control, not early modern French."},
+    {"id": "gutenberg-pre1800", "description": "Held-out passages from pre-1800 public-domain works. Author and work overlap the profile training material; this is a document-internal holdout."},
+    {"id": "authentic-z340", "description": "The published first section of the Zodiac 340 cipher. Known-key replay only."}
+  ],
+  "documents": [
+    {"id": "letter-a", "collection": "museum-prose-en", "language": "modern English", "origin": "Museum-authored; identical to the research-evaluation v1 fixture of the same identifier.",
+     "text": "The messenger returned before the rain. She carried a letter and a small wooden box. We read the letter together, but the name at the end was missing. The keeper asked us to compare the marks on the box with the marks in the book before making a decision."},
+    {"id": "letter-b", "collection": "museum-prose-en", "language": "modern English", "origin": "Museum-authored; identical to the research-evaluation v1 fixture of the same identifier.",
+     "text": "The old map showed a road across the valley. There were three bridges on the road and a tower beside the river. The first report said that the eastern bridge was closed. A second report arrived in the morning, so the travelers checked both accounts before leaving."},
+    {"id": "language-shift", "collection": "museum-prose-fr", "language": "modern French", "origin": "Museum-authored; identical to the research-evaluation v1 fixture of the same identifier.",
+     "text": "La lettre arrive avant la nuit. Nous gardons les signes et les espaces du document original. Une lecture possible ne suffit pas pour prouver le sens du message. Il faut comparer les autres lettres et expliquer les passages qui restent incertains."},
+    {"id": "letter-c", "collection": "museum-prose-en", "language": "modern English", "origin": "Museum-authored for research-evaluation v2. New in v2; it was never part of the released v1 results.",
+     "text": "The clerk copied the register twice and signed only the second copy. A reader who sees one page cannot tell which hand made the correction. Compare the ink, the ruling and the spacing before deciding that two entries were written on the same day."}
+  ],
+  "historicalPassages": "Loaded from data/research/v2/holdout.json by identifier; see that file for provenance and hashes."
+}
+```
+
+
+## Data — data/research/v2/holdout.json
+
+Source SHA-256: `ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc707248`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+
+```json
+{
+  "version": 1,
+  "id": "museum-language-holdout-v1",
+  "scope": "Passages reserved from the SAME documents used to build the profiles. Unseen by the model, but the same work and author: use them to measure model fit, not independent-source generalization.",
+  "rights": "Pre-1800 works, public domain worldwide; short extracts.",
+  "passages": [
+    {
+      "id": "montaigne-essais-i-holdout-1",
+      "profile": "historical-french-1580",
+      "source": "montaigne-essais-i",
+      "characters": 400,
+      "sha256": "c130037c33fcd683d0eeefaf81f0041f7bb2df576b8725af8fb5f1379ad160df",
+      "text": "veuë si trouble, si foible, et si morte, que ie ne discernois encores Quant aux functions de l'ame, elles naissoient auec mesme progrez, que celles du corps. Ie me vy tout sanglant: car mon pourpoinct estoit taché par tout du sang que i'auoy rendu. La premiere pensée qui me vint, ce fut que i'auoy vne harquebusade en la teste: de vray en mesme temps, il s'en tiroit plusieurs autour de nous. Il me "
+    },
+    {
+      "id": "montaigne-essais-i-holdout-2",
+      "profile": "historical-french-1580",
+      "source": "montaigne-essais-i",
+      "characters": 400,
+      "sha256": "e0be6b25f869bbd3b8a13c1264f8c8ee1c8ca96a86f6a7946722ea14031858f5",
+      "text": "ination qui ne faisoit que nager superficiellement en mon ame, aussi tendre et aussi foible que tout le reste: mais à la verité non seulement exempte de desplaisir, ains meslée à cette douceur, que sentent ceux qui se laissent glisser au sommeil. Ie croy que c'est ce mesme estat, où se trouuent ceux qu'on void défaillans de foiblesse, en l'agonie de la mort: et tiens que nous les plaignons sans ca"
+    },
+    {
+      "id": "montaigne-essais-i-holdout-3",
+      "profile": "historical-french-1580",
+      "source": "montaigne-essais-i",
+      "characters": 400,
+      "sha256": "5538700f28273ee62fccb1510f6982633b02ba773670cb4537fe85d95b0a80df",
+      "text": "ue ceux que nous voyons ainsi renuersez et assoupis aux approches de leur fin, ou accablez de la longueur du mal, ou par accident d'vne apoplexie, ou mal caduc, ou blessez en la teste, que nous oyons rommeller, et rendre par fois des souspirs trenchans, quoy que nous en tirons aucuns signes, par où il semble qu'il leur reste encore de la cognoissance, et quelques mouuemens que nous leur voyons fai"
+    },
+    {
+      "id": "dante-commedia-holdout-1",
+      "profile": "historical-italian-1320",
+      "source": "dante-commedia",
+      "characters": 400,
+      "sha256": "19b8fac4ee5e020710c14578f5fad0f6444444cc424c0b235da272fc00b6fb85",
+      "text": "e anche la ragione il vede alquanto, che non concederebbe che ’ motori sanza sua perfezion fosser cotanto. Or sai tu dove e quando questi amori furon creati e come: sì che spenti nel tuo disïo già son tre ardori. Né giugneriesi, numerando, al venti sì tosto, come de li angeli parte turbò il suggetto d’i vostri alimenti. L’altra rimase, e cominciò quest’ arte che tu discerni, con tanto diletto, che"
+    },
+    {
+      "id": "dante-commedia-holdout-2",
+      "profile": "historical-italian-1320",
+      "source": "dante-commedia",
+      "characters": 400,
+      "sha256": "c360dfc1bb9144eda2dba458c588f2ea1c99ff7646fbc0d7f89fcffdc0f841b1",
+      "text": "tender presti: per che le viste lor furo essaltate con grazia illuminante e con lor merto, si c’hanno ferma e piena volontate; e non voglio che dubbi, ma sia certo, che ricever la grazia è meritorio secondo che l’affetto l’è aperto. Omai dintorno a questo consistorio puoi contemplare assai, se le parole mie son ricolte, sanz’ altro aiutorio. Ma perché ’n terra per le vostre scole è tal, che ’ntend"
+    },
+    {
+      "id": "dante-commedia-holdout-3",
+      "profile": "historical-italian-1320",
+      "source": "dante-commedia",
+      "characters": 400,
+      "sha256": "6616498b5dee99956be713f71fff7040ebc24b6e4634f558ac2b0831c8f7d5c0",
+      "text": " essa, da cui nulla si nasconde: però non hanno vedere interciso da novo obietto, e però non bisogna sì che là giù, non dormendo, si sogna, credendo e non credendo dicer vero; ma ne l’uno è più colpa e più vergogna. Voi non andate giù per un sentiero filosofando: tanto vi trasporta l’amor de l’apparenza e ’l suo pensiero! E ancor questo qua sù si comporta con men disdegno che quando è posposta la "
+    },
+    {
+      "id": "caesar-bello-gallico-holdout-1",
+      "profile": "historical-latin-classical",
+      "source": "caesar-bello-gallico",
+      "characters": 400,
+      "sha256": "a3c4103a609793c192f49063299e6477a7c395f65b5dbb14b28277dc1fe4578d",
+      "text": "Caesar cum complures suos vulnerari videret, ex omnibus oppidi partibus cohortes montem ascendere et simulatione moenium occupandorum clamorem undique iubet tollere. Quo facto perterriti oppidani, cum quid ageretur in locis reliquis essent suspensi, revocant ab impugnandis operibus armatos murisque disponunt. Ita nostri fine proeli facto celeriter opera flamma comprehensa partim restinguunt, parti"
+    },
+    {
+      "id": "caesar-bello-gallico-holdout-2",
+      "profile": "historical-latin-classical",
+      "source": "caesar-bello-gallico",
+      "characters": 400,
+      "sha256": "785830078022531ed78a29005ab4169bd5ad468ad051749ff0d6cc07350a265e",
+      "text": "nte perennis exaruit fons tantamque attulit oppidanis salutis desperationem, ut id non hominum consilio, sed deorum voluntate factum putarent. Itaque se necessitate coacti Caesar, cum suam lenitatem cognnitam omnibus sciret neque vereretur ne quid crudelitate naturae videretur asperius fecisse, neque exitum consiliorum suorum animadverteret, si tali ratione diversis in locis plures consilia inisse"
+    },
+    {
+      "id": "caesar-bello-gallico-holdout-3",
+      "profile": "historical-latin-classical",
+      "source": "caesar-bello-gallico",
+      "characters": 400,
+      "sha256": "df7376d5a9e72e56c0a34c9ec0cd78d9a1b1abad7b2dbfef3f5df4311c3751e8",
+      "text": "cui, sive indignitate et dolore vinculorum sive timore gravioris supplici paucis diebus cibo se abstinuit atque ita interiit. Eodem tempore Lacterius, quem profugisse ex proelio scripsi, cum in potestatem venisset Epasnacti Arverni (crebro enim mutandis locis multorum fidei se committebat, quod nusquam diutius sine periculo commoraturus videbatur, cum sibi conscius esset, quam inimicum deberet Cae"
+    }
+  ]
+}
+```
+
+
+## Data — data/research/v2/evaluation.json
+
+Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b46`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+
+```json
+{
+  "version": 2,
+  "id": "museum-research-evaluation-v2",
+  "generatedBy": "scripts/evaluate-research-v2.js",
+  "relationToV1": "Research-evaluation v1 is unchanged and still published. Its three fixtures and their failures are rerun here as the museum-prose baseline; v2 adds tasks and material rather than replacing results.",
+  "scope": "Public demonstrations. Every fixture, key and seed in this repository is visible, so none of this is a blind benchmark, and none of it may be quoted as general historical-decipherment accuracy.",
+  "budgets": {
+    "seed": 41,
+    "steps": 6000,
+    "beam": 150,
+    "branch": 26
+  },
+  "hashes": {
+    "solver": "883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128",
+    "scorer": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
+    "baselineModel": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
+    "profiles": "9273ab82bc558e070a1cd810b84e6830f62b9d3bb31865271416f48cb9e6bb3a",
+    "corpus": "e00baf427f28f1a6008822db436cf2f561e58842833dad2e190558f48f33bbd6",
+    "holdout": "ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc707248",
+    "splitRules": "fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010"
+  },
+  "models": {
+    "baseline": "museum-prose-quadgram-v1",
+    "profiles": [
+      "historical-french-1580",
+      "historical-italian-1320",
+      "historical-latin-classical"
+    ]
+  },
+  "grouping": {
+    "rules": "All variants of one source document share a split; key seeds and code pools are drawn from per-split disjoint ranges. Audited on every run by scripts/research-splits.js.",
+    "ok": true,
+    "problems": [],
+    "documents": 13,
+    "items": 39,
+    "perSplit": {
+      "development": 0,
+      "test": 39
+    }
+  },
+  "tasks": {
+    "independentKeyRecovery": {
+      "question": "Given one ciphertext under a key drawn for it alone, how much of the plaintext and key is recovered?",
+      "items": [
+        {
+          "id": "letter-a:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-a",
+          "language": "modern English",
+          "tokens": 202,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7624,
+            "keyError": 1,
+            "ms": 23.4,
+            "heapDeltaBytes": 8388696
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7079,
+            "keyError": 0.875,
+            "ms": 420,
+            "heapDeltaBytes": 10402456
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-a:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-a",
+          "language": "modern English",
+          "tokens": 202,
+          "symbols": 56,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7277,
+            "keyError": 0.8393,
+            "ms": 20.7,
+            "heapDeltaBytes": 4317640
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8069,
+            "keyError": 0.9821,
+            "ms": 769.1,
+            "heapDeltaBytes": 48688088
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-a:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-a",
+          "language": "modern English",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6167,
+            "keyError": 0.8286,
+            "ms": 13.4,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8167,
+            "keyError": 0.9714,
+            "ms": 303.9,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-b:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-b",
+          "language": "modern English",
+          "tokens": 213,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7606,
+            "keyError": 0.9231,
+            "ms": 22.5,
+            "heapDeltaBytes": 4548904
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8122,
+            "keyError": 0.8974,
+            "ms": 385.6,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-b:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-b",
+          "language": "modern English",
+          "tokens": 213,
+          "symbols": 54,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7793,
+            "keyError": 0.963,
+            "ms": 21.8,
+            "heapDeltaBytes": 1470424
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7793,
+            "keyError": 0.963,
+            "ms": 714.8,
+            "heapDeltaBytes": 6377520
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-b:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-b",
+          "language": "modern English",
+          "tokens": 120,
+          "symbols": 33,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7917,
+            "keyError": 1,
+            "ms": 12.9,
+            "heapDeltaBytes": 18895488
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7583,
+            "keyError": 0.9091,
+            "ms": 260.1,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "language-shift:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-fr",
+          "sourceDocument": "language-shift",
+          "language": "modern French",
+          "tokens": 202,
+          "symbols": 36,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.5149,
+            "keyError": 0.75,
+            "ms": 23.1,
+            "heapDeltaBytes": 7358952
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7772,
+            "keyError": 0.9167,
+            "ms": 334.2,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "language-shift:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-fr",
+          "sourceDocument": "language-shift",
+          "language": "modern French",
+          "tokens": 202,
+          "symbols": 52,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7921,
+            "keyError": 0.9231,
+            "ms": 21.6,
+            "heapDeltaBytes": 2588008
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7277,
+            "keyError": 0.8654,
+            "ms": 657.4,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "language-shift:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-fr",
+          "sourceDocument": "language-shift",
+          "language": "modern French",
+          "tokens": 120,
+          "symbols": 33,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7583,
+            "keyError": 0.8485,
+            "ms": 14,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9091,
+            "ms": 273.8,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-c:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-c",
+          "language": "modern English",
+          "tokens": 199,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7638,
+            "keyError": 1,
+            "ms": 22.3,
+            "heapDeltaBytes": 4888040
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.794,
+            "keyError": 0.9744,
+            "ms": 390.4,
+            "heapDeltaBytes": 764280
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-c:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-c",
+          "language": "modern English",
+          "tokens": 199,
+          "symbols": 52,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7839,
+            "keyError": 0.9231,
+            "ms": 20.9,
+            "heapDeltaBytes": 611136
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.799,
+            "keyError": 0.9808,
+            "ms": 662.6,
+            "heapDeltaBytes": 30731264
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-c:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-c",
+          "language": "modern English",
+          "tokens": 120,
+          "symbols": 34,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.5667,
+            "keyError": 0.7353,
+            "ms": 14.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9706,
+            "ms": 284.1,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-1",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 311,
+          "symbols": 44,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7814,
+            "keyError": 0.9773,
+            "ms": 33.9,
+            "heapDeltaBytes": 16780376
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8103,
+            "keyError": 0.9091,
+            "ms": 514.1,
+            "heapDeltaBytes": 20158320
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-1",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 311,
+          "symbols": 59,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7685,
+            "keyError": 0.9492,
+            "ms": 34.2,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7974,
+            "keyError": 1,
+            "ms": 876.6,
+            "heapDeltaBytes": 67507448
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-1",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6917,
+            "keyError": 0.8286,
+            "ms": 13.4,
+            "heapDeltaBytes": 19747280
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.9714,
+            "ms": 310.3,
+            "heapDeltaBytes": 51197472
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-2",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7712,
+            "keyError": 0.95,
+            "ms": 34.5,
+            "heapDeltaBytes": 19343408
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7837,
+            "keyError": 0.95,
+            "ms": 432.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-2",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 55,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7868,
+            "keyError": 1,
+            "ms": 33.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8025,
+            "keyError": 0.9818,
+            "ms": 773.8,
+            "heapDeltaBytes": 80141808
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-2",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 120,
+          "symbols": 32,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7833,
+            "keyError": 0.9688,
+            "ms": 14,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.625,
+            "keyError": 0.75,
+            "ms": 257.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-3",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 44,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7868,
+            "keyError": 0.9091,
+            "ms": 36.8,
+            "heapDeltaBytes": 22054744
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8307,
+            "keyError": 0.9773,
+            "ms": 494.2,
+            "heapDeltaBytes": 5946840
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-3",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 61,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8088,
+            "keyError": 0.9344,
+            "ms": 34.4,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.837,
+            "keyError": 0.9836,
+            "ms": 913.1,
+            "heapDeltaBytes": 55928776
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-3",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 120,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8333,
+            "keyError": 0.975,
+            "ms": 14.6,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.95,
+            "ms": 381,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-1:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-1",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6603,
+            "keyError": 0.725,
+            "ms": 35.6,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.975,
+            "ms": 408.7,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-1:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-1",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 57,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7556,
+            "keyError": 0.8772,
+            "ms": 32.5,
+            "heapDeltaBytes": 17125056
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9474,
+            "ms": 792.8,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-1:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-1",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 120,
+          "symbols": 36,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6667,
+            "keyError": 0.8056,
+            "ms": 14,
+            "heapDeltaBytes": 21176568
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7917,
+            "keyError": 0.9722,
+            "ms": 312.9,
+            "heapDeltaBytes": 34488296
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-2:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-2",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.419,
+            "keyError": 0.641,
+            "ms": 33.1,
+            "heapDeltaBytes": 17018016
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.781,
+            "keyError": 0.9744,
+            "ms": 392.1,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-2:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-2",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 55,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7746,
+            "keyError": 0.8545,
+            "ms": 32.9,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.819,
+            "keyError": 0.8909,
+            "ms": 720,
+            "heapDeltaBytes": 79834432
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-2:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-2",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7333,
+            "keyError": 0.8571,
+            "ms": 14.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8083,
+            "keyError": 0.9429,
+            "ms": 282.4,
+            "heapDeltaBytes": 10589048
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-3:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-3",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 311,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7814,
+            "keyError": 1,
+            "ms": 28.9,
+            "heapDeltaBytes": 17685904
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7331,
+            "keyError": 0.8462,
+            "ms": 400.4,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-3:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-3",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 311,
+          "symbols": 55,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8232,
+            "keyError": 0.9636,
+            "ms": 33.2,
+            "heapDeltaBytes": 17067608
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7974,
+            "keyError": 0.9091,
+            "ms": 765,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-3:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-3",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9714,
+            "ms": 13.2,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.725,
+            "keyError": 0.7429,
+            "ms": 282.3,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-1",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 343,
+          "symbols": 41,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8105,
+            "keyError": 1,
+            "ms": 35.5,
+            "heapDeltaBytes": 23386136
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7813,
+            "keyError": 0.878,
+            "ms": 446.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-1",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 343,
+          "symbols": 56,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7959,
+            "keyError": 1,
+            "ms": 37.5,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8367,
+            "keyError": 0.9643,
+            "ms": 778.2,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-1",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 120,
+          "symbols": 32,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8083,
+            "keyError": 0.9688,
+            "ms": 13.8,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8083,
+            "keyError": 0.9375,
+            "ms": 240.6,
+            "heapDeltaBytes": 14256904
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-2",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 342,
+          "symbols": 37,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7719,
+            "keyError": 1,
+            "ms": 30,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8041,
+            "keyError": 0.9459,
+            "ms": 342.8,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-2",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 342,
+          "symbols": 54,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.769,
+            "keyError": 0.9815,
+            "ms": 30.9,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7778,
+            "keyError": 0.9074,
+            "ms": 735.9,
+            "heapDeltaBytes": 1716976
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-2",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 120,
+          "symbols": 32,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.9688,
+            "ms": 12.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.9063,
+            "ms": 239.7,
+            "heapDeltaBytes": 7565856
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-3",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 338,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7604,
+            "keyError": 0.8718,
+            "ms": 28,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8077,
+            "keyError": 1,
+            "ms": 386.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-3",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 338,
+          "symbols": 56,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8077,
+            "keyError": 0.9821,
+            "ms": 31.3,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8107,
+            "keyError": 0.9643,
+            "ms": 759.6,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-3",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8167,
+            "keyError": 0.9143,
+            "ms": 11.3,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8333,
+            "keyError": 0.9429,
+            "ms": 278.2,
+            "heapDeltaBytes": 21335296
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        }
+      ],
+      "annealing": {
+        "denominator": 39,
+        "plaintextError": {
+          "n": 39,
+          "mean": 0.749,
+          "min": 0.419,
+          "max": 0.8333
+        },
+        "keyError": {
+          "n": 39,
+          "mean": 0.9131,
+          "min": 0.641,
+          "max": 1
+        },
+        "ms": {
+          "n": 39,
+          "mean": 24.2949,
+          "min": 11.3,
+          "max": 37.5
+        },
+        "heapDeltaBytes": {
+          "n": 39,
+          "mean": 6268009.8462,
+          "min": 0,
+          "max": 23386136
+        }
+      },
+      "beamSearch": {
+        "denominator": 39,
+        "plaintextError": {
+          "n": 39,
+          "mean": 0.7912,
+          "min": 0.625,
+          "max": 0.837
+        },
+        "keyError": {
+          "n": 39,
+          "mean": 0.9317,
+          "min": 0.7429,
+          "max": 1
+        },
+        "ms": {
+          "n": 39,
+          "mean": 486.5051,
+          "min": 239.7,
+          "max": 913.1
+        },
+        "heapDeltaBytes": {
+          "n": 39,
+          "mean": 14041822.5641,
+          "min": 0,
+          "max": 80141808
+        }
+      },
+      "exactRecovery": {
+        "annealing": 0,
+        "beamSearch": 0,
+        "denominator": 39
+      },
+      "knownKeyApplicationExact": 39,
+      "relabellingInvariant": {
+        "annealing": true,
+        "beamSearch": true
+      }
+    },
+    "fixedCodePoolRecognition": {
+      "question": "With one global code pool reused across texts, what is actually being measured?",
+      "items": [
+        {
+          "id": "letter-a:full-2hom",
+          "split": "test",
+          "poolId": "pool-31421",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 39,
+          "poolCoverage": 0.75,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.6535,
+          "unknownPoolKeyError": 0.8205
+        },
+        {
+          "id": "letter-b:full-2hom",
+          "split": "test",
+          "poolId": "pool-31421",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 40,
+          "poolCoverage": 0.7692,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7559,
+          "unknownPoolKeyError": 0.975
+        },
+        {
+          "id": "language-shift:full-2hom",
+          "split": "test",
+          "poolId": "pool-31374",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 35,
+          "poolCoverage": 0.6731,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7475,
+          "unknownPoolKeyError": 0.9714
+        },
+        {
+          "id": "letter-c:full-2hom",
+          "split": "test",
+          "poolId": "pool-31421",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 38,
+          "poolCoverage": 0.7308,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.4673,
+          "unknownPoolKeyError": 0.6579
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 42,
+          "poolCoverage": 0.8077,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7814,
+          "unknownPoolKeyError": 0.9286
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 39,
+          "poolCoverage": 0.75,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7492,
+          "unknownPoolKeyError": 0.8974
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 43,
+          "poolCoverage": 0.8269,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7962,
+          "unknownPoolKeyError": 0.9535
+        },
+        {
+          "id": "dante-commedia-holdout-1:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 41,
+          "poolCoverage": 0.7885,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.746,
+          "unknownPoolKeyError": 0.8537
+        },
+        {
+          "id": "dante-commedia-holdout-2:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 40,
+          "poolCoverage": 0.7692,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7873,
+          "unknownPoolKeyError": 0.975
+        },
+        {
+          "id": "dante-commedia-holdout-3:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 39,
+          "poolCoverage": 0.75,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.717,
+          "unknownPoolKeyError": 0.8205
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 40,
+          "poolCoverage": 0.7692,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7609,
+          "unknownPoolKeyError": 0.8
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 38,
+          "poolCoverage": 0.7308,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7456,
+          "unknownPoolKeyError": 0.8421
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 38,
+          "poolCoverage": 0.7308,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7544,
+          "unknownPoolKeyError": 0.8684
+        }
+      ],
+      "knownPoolExact": 13,
+      "denominator": 13,
+      "unknownPool": {
+        "denominator": 13,
+        "unknownPoolPlaintextError": {
+          "n": 13,
+          "mean": 0.7279,
+          "min": 0.4673,
+          "max": 0.7962
+        },
+        "unknownPoolKeyError": {
+          "n": 13,
+          "mean": 0.8742,
+          "min": 0.6579,
+          "max": 0.975
+        },
+        "poolCoverage": {
+          "n": 13,
+          "mean": 0.7574,
+          "min": 0.6731,
+          "max": 0.8269
+        }
+      },
+      "meaning": "Applying a pool you already hold is exact and trivial. Recovering it from one short text is not, and a system trained on a shared pool is not doing independent cryptanalysis."
+    },
+    "authenticKnownKeyReplay": {
+      "id": "z340-section-1",
+      "kind": "historical-source-replay",
+      "task": "known-key replay",
+      "symbols": 63,
+      "positions": 153,
+      "correctRouteExact": true,
+      "wrongRouteExact": false,
+      "fullZ340Recovery": false,
+      "meaning": "A published key applied along a published route. Nothing here is key recovery, and the later sections of Z340 are not reproduced."
+    },
+    "transcription": {
+      "input": "AB?DEFG?IJKL",
+      "glyphError": 0.1667,
+      "unresolvedCoverage": 0.1667,
+      "searchRejected": true,
+      "plaintextError": null,
+      "meaning": "Glyph error and unresolved coverage are reported separately from plaintext error, which is undefined while glyphs are missing. Unknown glyphs are never silently deleted to make a letter-only search run."
+    },
+    "numericalSegmentation": {
+      "cases": [
+        {
+          "id": "ambiguous-2228",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 3,
+          "retained": 3,
+          "readings": [
+            "AAAD",
+            "AND",
+            "NAD"
+          ],
+          "expectedReadings": [
+            "AAAD",
+            "AND",
+            "NAD"
+          ],
+          "matchesExpected": true,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            1,
+            2
+          ],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "locked-boundary",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 2,
+          "retained": 2,
+          "readings": [
+            "AAAD",
+            "AND"
+          ],
+          "expectedReadings": [
+            "AAAD",
+            "AND"
+          ],
+          "matchesExpected": true,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            2
+          ],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "wrong-key",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 0,
+          "retained": 0,
+          "readings": [],
+          "expectedReadings": [],
+          "matchesExpected": true,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "leading-zero-null",
+          "digits": "20228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 2,
+          "retained": 2,
+          "readings": [
+            "AAAD",
+            "AND"
+          ],
+          "expectedReadings": null,
+          "matchesExpected": null,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            3
+          ],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "word-code-alternatives",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 3,
+          "retained": 3,
+          "readings": [
+            "AAAD",
+            "AANDD",
+            "ANDAD"
+          ],
+          "expectedReadings": null,
+          "matchesExpected": null,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            1,
+            2
+          ],
+          "alternativeReadings": 2
+        },
+        {
+          "id": "line-boundary",
+          "digits": "22\n28",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 2,
+          "retained": 2,
+          "readings": [
+            "AAAD",
+            "NAD"
+          ],
+          "expectedReadings": null,
+          "matchesExpected": null,
+          "matchesExhaustiveOracle": null,
+          "ambiguousPositions": [
+            1
+          ],
+          "alternativeReadings": 0
+        }
+      ],
+      "cutoff": {
+        "digits": 20,
+        "total": 10946,
+        "retained": 32,
+        "complete": false,
+        "mode": "bounded-k-best",
+        "globalBestGuaranteed": false,
+        "pruning": "Backward reachability plus a per-state beam of 32 within a 1000-node budget. Pruning can discard the globally best path."
+      },
+      "boundaryVersusPlaintext": {
+        "codesA": [
+          "2",
+          "22",
+          "8"
+        ],
+        "codesB": [
+          "22",
+          "2",
+          "8"
+        ],
+        "boundaryMetrics": {
+          "boundaryMatches": 1,
+          "boundariesExpected": 2,
+          "boundariesActual": 2,
+          "boundarySymmetricDifference": 2,
+          "boundaryError": 0.5,
+          "exactCodes": false
+        },
+        "plaintextA": "AND",
+        "plaintextB": "NAD",
+        "plaintextError": 0.6667,
+        "meaning": "Two readings of the same digits differ in one boundary and in two letters. The two errors are different measurements and are reported apart."
+      }
+    },
+    "languageAndDomainShift": {
+      "passages": [
+        {
+          "id": "montaigne-essais-i-holdout-1",
+          "split": "test",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 2.637,
+          "letters": 311,
+          "ranking": [
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -9.204,
+              "coverage": 0.9708
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.841,
+              "coverage": 0.5779
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -12.202,
+              "coverage": 0.5584
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2",
+          "split": "test",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 2.82,
+          "letters": 319,
+          "ranking": [
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -8.666,
+              "coverage": 0.9842
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.486,
+              "coverage": 0.6203
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.692,
+              "coverage": 0.6582
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3",
+          "split": "test",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 3.184,
+          "letters": 319,
+          "ranking": [
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -9.093,
+              "coverage": 0.9715
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -12.277,
+              "coverage": 0.5285
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -12.391,
+              "coverage": 0.557
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "dante-commedia-holdout-1",
+          "split": "test",
+          "expectedProfile": "historical-italian-1320",
+          "decided": true,
+          "choice": "historical-italian-1320",
+          "correct": true,
+          "margin": 2.395,
+          "letters": 315,
+          "ranking": [
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -8.861,
+              "coverage": 0.9968
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.257,
+              "coverage": 0.6635
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.395,
+              "coverage": 0.7244
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "dante-commedia-holdout-2",
+          "split": "test",
+          "expectedProfile": "historical-italian-1320",
+          "decided": true,
+          "choice": "historical-italian-1320",
+          "correct": true,
+          "margin": 2.328,
+          "letters": 315,
+          "ranking": [
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -8.92,
+              "coverage": 0.984
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.247,
+              "coverage": 0.7436
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.617,
+              "coverage": 0.6346
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "dante-commedia-holdout-3",
+          "split": "test",
+          "expectedProfile": "historical-italian-1320",
+          "decided": true,
+          "choice": "historical-italian-1320",
+          "correct": true,
+          "margin": 2.204,
+          "letters": 311,
+          "ranking": [
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -9.164,
+              "coverage": 0.987
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.368,
+              "coverage": 0.7045
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.843,
+              "coverage": 0.6656
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1",
+          "split": "test",
+          "expectedProfile": "historical-latin-classical",
+          "decided": true,
+          "choice": "historical-latin-classical",
+          "correct": true,
+          "margin": 2.257,
+          "letters": 343,
+          "ranking": [
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -8.979,
+              "coverage": 0.9618
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.235,
+              "coverage": 0.7176
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.356,
+              "coverage": 0.7324
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2",
+          "split": "test",
+          "expectedProfile": "historical-latin-classical",
+          "decided": true,
+          "choice": "historical-latin-classical",
+          "correct": true,
+          "margin": 2.366,
+          "letters": 342,
+          "ranking": [
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -8.864,
+              "coverage": 0.9558
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.23,
+              "coverage": 0.7316
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.255,
+              "coverage": 0.7522
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3",
+          "split": "test",
+          "expectedProfile": "historical-latin-classical",
+          "decided": true,
+          "choice": "historical-latin-classical",
+          "correct": true,
+          "margin": 2.608,
+          "letters": 338,
+          "ranking": [
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -9.151,
+              "coverage": 0.9642
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.759,
+              "coverage": 0.7134
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.833,
+              "coverage": 0.6627
+            }
+          ],
+          "abstentionReasons": []
+        }
+      ],
+      "controls": [
+        {
+          "id": "absent-language-english",
+          "note": "English has no profile. Any decision here is a false positive.",
+          "expectedProfile": null,
+          "decided": false,
+          "choice": null,
+          "correct": true,
+          "margin": 0.138,
+          "letters": 202,
+          "abstentionReasons": [
+            "Margin 0.138 is below the declared 0.8.",
+            "Best profile covers only 45.7% of this text’s quadgrams; at least 75% are required."
+          ]
+        },
+        {
+          "id": "modern-french-domain-shift",
+          "note": "Right language, wrong period. A profile names both; ranking it first is correct about the language and silent about the period.",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 1.71,
+          "letters": 202,
+          "abstentionReasons": []
+        },
+        {
+          "id": "random-control",
+          "note": "No planted language. Abstention is the only correct outcome.",
+          "expectedProfile": null,
+          "decided": false,
+          "choice": null,
+          "correct": true,
+          "margin": 0.157,
+          "letters": 55,
+          "abstentionReasons": [
+            "Margin 0.157 is below the declared 0.8.",
+            "Best profile covers only 0.0% of this text’s quadgrams; at least 75% are required."
+          ]
+        }
+      ],
+      "summary": {
+        "denominator": 9,
+        "decided": 9,
+        "abstained": 0,
+        "correctWhenDecided": 9,
+        "perLanguage": {
+          "historical-french-1580": {
+            "denominator": 3,
+            "decided": 3,
+            "correct": 3
+          },
+          "historical-italian-1320": {
+            "denominator": 3,
+            "decided": 3,
+            "correct": 3
+          },
+          "historical-latin-classical": {
+            "denominator": 3,
+            "decided": 3,
+            "correct": 3
+          }
+        }
+      },
+      "unresolvedCoverage": "German, Spanish, English and every other language in the historical record have no profile. A text in one of them can only be abstained on or mis-assigned; it can never be identified."
+    }
+  },
+  "limits": [
+    "Held-out historical passages come from the same works and authors used to build the profiles. They are unseen by the model but are not independent source documents.",
+    "Three languages have profiles. Everything else in the historical record is uncovered.",
+    "Budgets are small enough to run inside a test suite. A larger budget is not reported here and would not change the conclusions about which task is which.",
+    "Runtime and heap figures are machine-dependent Node.js measurements around a single call, not peak resident size. The reproducibility check deliberately ignores them; every other recorded result must match exactly.",
+    "Nothing in this suite is a blind benchmark, and a public fixture does not become one by being renamed."
+  ]
+}
+```
+
+
 ---
 
 # Columnar classroom worksheet
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `public/teaching/columnar-classroom.md`. SHA-256: `195e139c2732cb0d3d6c2ab5dd6fe5addf6100e130bd875a52b0d2d945d68091`. Its Node.js runner and fixed JSON fixtures are in the preceding appendices.
 

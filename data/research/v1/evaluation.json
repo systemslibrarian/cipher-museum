@@ -2,8 +2,8 @@
   "version": 1,
   "model": "museum-prose-quadgram-v1",
   "modelSha256": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
-  "scorerSha256": "2621e72bf6124d1d0e864d7ff643bcac62cbb22ae56a4cb0be70388f6129a492",
-  "solverSha256": "8b7b94977421047d3cb360dad250af8513c3d7d350c141b0d4f1fc466e42b174",
+  "scorerSha256": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
+  "solverSha256": "883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128",
   "fixturesSha256": "30633f1a2bd3466e68032d9fed244fb185afd349c46e111e55c9639378661cb8",
   "scope": "Public demonstrations; no training, blind holdout or historical-language coverage claim. One-symbol-unlocked runs disclose the rest of the key; they do not establish general recovery.",
   "records": [
@@ -314,17 +314,100 @@
           "2",
           "8"
         ],
+        "entries": [
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 0,
+            "end": 1
+          },
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 1,
+            "end": 2
+          },
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 2,
+            "end": 3
+          },
+          {
+            "code": "8",
+            "source": "8",
+            "type": "letter",
+            "reading": "D",
+            "values": [
+              "D"
+            ],
+            "start": 3,
+            "end": 4
+          }
+        ],
         "text": "AAAD",
-        "score": 0
+        "score": 0,
+        "alternatives": []
       },
       {
         "codes": [
           "2",
           "22",
           "8"
+        ],
+        "entries": [
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 0,
+            "end": 1
+          },
+          {
+            "code": "22",
+            "source": "22",
+            "type": "letter",
+            "reading": "N",
+            "values": [
+              "N"
+            ],
+            "start": 1,
+            "end": 3
+          },
+          {
+            "code": "8",
+            "source": "8",
+            "type": "letter",
+            "reading": "D",
+            "values": [
+              "D"
+            ],
+            "start": 3,
+            "end": 4
+          }
         ],
         "text": "AND",
-        "score": 0
+        "score": 0,
+        "alternatives": []
       },
       {
         "codes": [
@@ -332,8 +415,44 @@
           "2",
           "8"
         ],
+        "entries": [
+          {
+            "code": "22",
+            "source": "22",
+            "type": "letter",
+            "reading": "N",
+            "values": [
+              "N"
+            ],
+            "start": 0,
+            "end": 2
+          },
+          {
+            "code": "2",
+            "source": "2",
+            "type": "letter",
+            "reading": "A",
+            "values": [
+              "A"
+            ],
+            "start": 2,
+            "end": 3
+          },
+          {
+            "code": "8",
+            "source": "8",
+            "type": "letter",
+            "reading": "D",
+            "values": [
+              "D"
+            ],
+            "start": 3,
+            "end": 4
+          }
+        ],
         "text": "NAD",
-        "score": 0
+        "score": 0,
+        "alternatives": []
       }
     ],
     "wrongHypothesisBoundarySymmetricDifference": 1,

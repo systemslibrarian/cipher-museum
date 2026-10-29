@@ -55,11 +55,11 @@
     {
       "path": "cipher-corpus.html",
       "title": "Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum",
-      "words": 761,
-      "sha256": "5bcda2a6c12d22498a2984525d05291f2121f56a4f61d6b15cc5eba0d02405f3",
-      "status": "bounded review and local release validation complete",
+      "words": 1527,
+      "sha256": "6972244367a9ac25f7f8ddf7d0734736383f70c8750a5840ced55790b3155829",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
-      "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy.",
+      "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -76,7 +76,8 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "cipher-detective.html",
@@ -1553,15 +1554,15 @@
     {
       "path": "ciphers/diffie-hellman.html",
       "title": "Diffie-Hellman Key Exchange — The Cipher Museum",
-      "words": 1083,
-      "sha256": "3ae1be5c51ac24f2ac14e1ae2b164966d1f51f80102ec51926bfcf8295c860ed",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 1258,
+      "sha256": "804b6bcfb454c870d1b0a7c717ed7788cfbc996aa540b61b880638cb4df12891",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "LOGJAM-2015",
         "BONEH-SHOUP-2023",
         "WONG-2021"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 29 Oct 2026 research review R12: added a paragraph separating small-subgroup confinement from static private-key recovery, with the 2016 measurement study figures, and cross-linked the comparison cards. Existing protocol explanation unchanged.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1589,7 +1590,8 @@
         "browser_evidence": "docs/ebook-followup/browser.json",
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-      }
+      },
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "ciphers/dilly-knox.html",
@@ -2263,14 +2265,14 @@
     {
       "path": "ciphers/homophonic.html",
       "title": "Homophonic Substitution — The Cipher Museum",
-      "words": 534,
-      "sha256": "f47352da281338697bd44e12efa751200abcebbe7b5fa1c189935cdba2b99491",
-      "status": "bounded review and local release validation complete",
+      "words": 915,
+      "sha256": "3a603b26511379d5448c5703ec06310fe9609b394b162756d7ce62a85d3b079d",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "HAC-1997",
         "KAHN-1996"
       ],
-      "notes": "HAC proportional/random homophone model and Kahn Mantua1401 checked; example E/T/Z allocations are not uniform. Final metadata removes conflation of Mary1586 and GreatCipher1893 with one simple letter scheme.",
+      "notes": "HAC proportional/random homophone model and Kahn Mantua1401 checked; example E/T/Z allocations are not uniform. Final metadata removes conflation of Mary1586 and GreatCipher1893 with one simple letter scheme. 29 Oct 2026 research review R10: added a panel on how many codes one fixed key actually holds, with the log2(130) bound and why a pooled corpus statistic measures something else.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -2287,7 +2289,8 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "ciphers/ira-ciphers.html",
@@ -2701,14 +2704,14 @@
     {
       "path": "ciphers/lorenz.html",
       "title": "Lorenz Cipher — The Cipher Museum",
-      "words": 1723,
-      "sha256": "db274be3d557cb0a7a7bd975a829a51ebbd5b86d245d96f1f4371cc063bdc091",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 1879,
+      "sha256": "08e383041a63e499219c42c03b43b72c7a2e7fae7765a36effa54742085591d9",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "TNMOC-TUNNY",
         "TUNNY-1945"
       ],
-      "notes": "Final body/table/SVG/sidebar read reconciled Tiltman recovery, Tutte/team inference and later Colossus; wheel-state product is not an unconditional output period. Removed universal computing/LFSR lineage and unchanged WEP/GCM attack claims.",
+      "notes": "Final body/table/SVG/sidebar read reconciled Tiltman recovery, Tutte/team inference and later Colossus; wheel-state product is not an unconditional output period. Removed universal computing/LFSR lineage and unchanged WEP/GCM attack claims. 29 Oct 2026 research review R12: added a paragraph linking the 1941 depth to the 2005 Office RC4 keystream-reuse finding and the comparison cards. Historical account unchanged.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -2742,7 +2745,8 @@
         "browser_evidence": "docs/ebook-followup/browser.json",
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-      }
+      },
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "ciphers/m-94.html",
@@ -4302,13 +4306,13 @@
     {
       "path": "ciphers/ua-8295.html",
       "title": "UA-8295: A Changed Cipher Behind the Same Interface — The Cipher Museum",
-      "words": 600,
-      "sha256": "34d7db11418101403181d0a7c0ada838ab5afeb4288933c91306a19312a58fb1",
-      "status": "bounded review and local release validation complete",
+      "words": 2016,
+      "sha256": "6e60800a62101ee3338e85e32b7e60dc0c63a6f5b951ce54449503222b552618",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "UA8295-2026"
       ],
-      "notes": "Primary abstract and record only; full PDF inaccessible. Removed unverified cipher history, ROM/interface, hardware/sample/memory/timing specifics and false full-PDF locators. Remaining prose distinguishes forensic methodology and intent inference from a verified designer decision.",
+      "notes": "Primary abstract and record only; full PDF inaccessible. Removed unverified cipher history, ROM/interface, hardware/sample/memory/timing specifics and false full-PDF locators. Remaining prose distinguishes forensic methodology and intent inference from a verified designer decision. 29 Oct 2026 research review R02: rebuilt from an abstract-only summary into a sourced forensic case after reading the full preprint. Every claim labelled observed, implemented, conditional inference or open. Includes the nonce bias already present in the Nokia DA-8520 and the unresolved fixed-format-message question. Preprint status retained; no attack reproduced and no simulator added.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4333,7 +4337,8 @@
         "reader": "root",
         "status": "semantic overrides corrected; generated rebuild and final validation pending",
         "scope": "Root removed stale UA8295technical override; separated HallIX grouping from OTP classification for Enigma/Lorenz/Solitaire/Vernam; qualified SHA256length and Shamirconditions. Generator corrections are not a new historical-source verification."
-      }
+      },
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "ciphers/venona.html",
@@ -4963,13 +4968,13 @@
     {
       "path": "hall-of-foundations/elliptic-curves-real.html",
       "title": "Elliptic Curves over ℝ · Hall of Foundations",
-      "words": 417,
-      "sha256": "a2ee8a14f899ecf4877cd4f8abe85e1b311336aa34b7c9934384b5de121682d1",
-      "status": "bounded review and local release validation complete",
+      "words": 867,
+      "sha256": "0fb24ee190b7bb366c8f3d64927711eee62955860151d7b707194abe4180b3be",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "BONEH-SHOUP-2023"
       ],
-      "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification.",
+      "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification. 29 Oct 2026 research review R13: added a pointer paragraph on exceptional cases, complete formulas and the separate questions of correct implementation and constant-time compilation. Visualization and arithmetic unchanged.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "root",
@@ -4985,21 +4990,22 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "hall-of-foundations/entropy.html",
       "title": "Information & Entropy · Hall of Foundations",
-      "words": 1219,
-      "sha256": "8177bf619c350287e1f2984f08ef3e28c18dc24842ed804819831a43381f4a65",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 2222,
+      "sha256": "eb29af70866c5fad91a87cd0cb0faa355b9804c5ab1a679be72088d2c5b34f22",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "BONEH-SHOUP-2023",
         "GRAY-1990-CORRECTED-2023",
         "VADHAN-2012",
         "TYAGI-WATANABE-2023"
       ],
-      "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification.",
+      "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification. 29 Oct 2026 research review R10: added sections 6 and 7. A fully enumerable four-key example separating within-key from pooled code entropy (verified here), the at-most-130-code-types bound labelled as mathematical inference, and why a unicity estimate certifies no reading and promises no solver. Sections renumbered; earlier sections unchanged.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "root",
@@ -5028,7 +5034,8 @@
         "browser_evidence": "docs/ebook-followup/browser.json",
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-      }
+      },
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "hall-of-foundations/euler-fermat.html",
@@ -5060,13 +5067,13 @@
     {
       "path": "hall-of-foundations/finite-fields.html",
       "title": "Finite Fields · Hall of Foundations",
-      "words": 626,
-      "sha256": "d86469cd9152640d590487672f227caccc29601014a8e0d68b90c9bb32f5b67f",
-      "status": "bounded review and local release validation complete",
+      "words": 1447,
+      "sha256": "393b5faa5bf2b17a3398f7a2e63e5eb88e21cedd3eb09c27ae7236cbf06c82ef",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "BONEH-SHOUP-2023"
       ],
-      "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification.",
+      "notes": "Root reread complete foundation page and teaching-model explanations; assumptions, examples and real-versus-finite-field or toy-versus-production boundaries reconciled. Earlier protocol/foundation tests remain bounded evidence, not independent proof verification. 29 Oct 2026 research review R13: added section 4 separating affine exceptional cases, complete formulas on their stated curve class, functional-correctness proofs and their trusted-compiler boundary, and constant-time assurance. The exhibit JavaScript is explicitly not production-ready, constant-time or verified. No arithmetic changed; it is now validated against an independent complete-formula oracle on all 361 ordered point pairs.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "root",
@@ -5082,7 +5089,8 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "hall-of-foundations/group-theory.html",
@@ -5867,11 +5875,11 @@
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "words": 855,
-      "sha256": "0375b1b235e1c3350fd44c60a217dd136d0e96a73782a0ef7cb4372bd6ceadd4",
-      "status": "bounded review and local release validation complete",
+      "words": 2060,
+      "sha256": "eaa2ece9d7739a487f83f7ca9d885bf1b503f0f0d9b978141d5e672fa9cb53f8",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
-      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records.",
+      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "root",
@@ -5887,14 +5895,15 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "lab/modern-attack-evidence.html",
       "title": "What an Attack Result Actually Shows — The Cipher Museum",
-      "words": 1045,
-      "sha256": "14bc65124bbe165aba374b7b90e2ddb0c5e78e561075af3528906ccd5e57fb21",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 3940,
+      "sha256": "ccc959ef9c1e9a50b46ba1d0d6748fdd8392f5fecc4ef30f6dfe0c2883ed4e6b",
+      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "GPU-SEARCH-2025",
         "GEA-FAULTS-2026",
@@ -5902,7 +5911,7 @@
         "BIHAM-SHAMIR-1993-2009",
         "MANGARD-OSWALD-POPP-2007"
       ],
-      "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained.",
+      "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained. 29 Oct 2026 research review R01/R12/R14: replaced the obsolete full-paper-unavailable GPRS paragraph with the tested conditions and a phase table after reading the published paper; added five comparative attack-evidence cards; added a section separating four AI tasks with a matched-input recipe that is published as a procedure and was not executed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -5934,7 +5943,8 @@
         "browser_evidence": "docs/ebook-followup/browser.json",
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
-      }
+      },
+      "research_review_2026_10_29": "revised"
     },
     {
       "path": "lab/workbench.html",
@@ -6369,5 +6379,19 @@
     "source_register_entries": 160,
     "evidence": "docs/ebook-followup/implementation.json",
     "scope": "All21 authorized Cipher Museum recommendations; existing Crypto Lab demos linked, not recreated. Selected passages in13 works, not whole-book certification."
+  },
+  "research_review_2026_10_29": {
+    "baseline": "e3ca79b6a657ad8a80828de7153dc327f0d82c5b",
+    "items": 14,
+    "completed": 14,
+    "blocked": 0,
+    "source_register_entries": 173,
+    "new_sources": 13,
+    "record": "docs/RESEARCH_REVIEW_2026-10-29.md",
+    "primary_papers_read_in_full": [
+      "CM023 (eprint 2026/1309)",
+      "CM026 (IEEE TDSC 23(3); eprint 2026/1806)"
+    ],
+    "scope": "All fourteen recommendations implemented. Detailed technical claims were checked against the primary papers; claims that could not be checked were not published. Browser verification was headless Chromium at 1280px and 375px, not a cross-browser matrix. The R14 matched-input recipe is published as a procedure and was not executed."
   }
 }

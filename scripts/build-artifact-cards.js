@@ -127,8 +127,8 @@ function main(check = false) {
     'ua-8295': {
       family: 'Firmware forensics', region: 'Finland / Netherlands',
       usedBy: 'Nokia DA-8520 / USFA UA-8295 terminal users',
-      keyType: 'See the source-scope note; full-paper technical details are not verified here',
-      modernLesson: 'Distinguish the verified research question from unverified implementation details and inferences about intent.'
+      keyType: '15-character user key plus a 5-character nonce derive a 56-bit key',
+      modernLesson: 'Separate what was observed in firmware, what was implemented as an attack, what is conditional inference, and what is still open.'
     },
     sodark: {
       family: 'Tweakable block cipher and radio protocol',

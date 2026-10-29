@@ -207,7 +207,7 @@ ${fence(JSON.stringify(notes, null, 2), 'json')}
   dom.window.close();
 }
 
-const extras = ['js/artifact-cards-data.min.js', 'js/artifact-cards.js', 'js/breadcrumbs.js', 'js/footer.js', 'js/ui-delegates.js', 'js/research-worker.js', 'js/research-language-model.js', 'sw.js', 'js/learning-path.js', 'scripts/columnar-classroom.js'];
+const extras = ['js/artifact-cards-data.min.js', 'js/artifact-cards.js', 'js/breadcrumbs.js', 'js/footer.js', 'js/ui-delegates.js', 'js/research-worker.js', 'js/research-language-model.js', 'scripts/research-splits.js', 'sw.js', 'js/learning-path.js', 'scripts/columnar-classroom.js'];
 extras.forEach(f => scriptFiles.add(f));
 const scriptRecords = [...scriptFiles].sort().map(served => {
   read(served);
@@ -226,7 +226,8 @@ const jsonFiles = [
   'data/exhibit-trust.json', 'data/trust-labels.json', 'data/release-identifiers.json', 'data/corpus-v0.8-supplement-replay-audit.json',
   'corpus/engine-manifest.json', 'public/corpus/stats.json', 'public/corpus/v0.8/stats.json',
   'public/corpus/v0.8/cipher-corpus.schema.json', 'public/corpus/v0.8/supplements-manifest.json',
-  'public/reports/benchmark-baselines.json', 'data/research/v1/exercises.json', 'data/research/v1/evaluation.json', 'manifest.webmanifest', 'public/teaching/columnar-classroom-fixtures.json'
+  'public/reports/benchmark-baselines.json', 'data/research/v1/exercises.json', 'data/research/v1/evaluation.json', 'manifest.webmanifest', 'public/teaching/columnar-classroom-fixtures.json',
+  'data/research/v2/corpus.json', 'data/research/v2/holdout.json', 'data/research/v2/evaluation.json'
 ];
 const dataRecords = jsonFiles.map(file => {
   const content = read(file); JSON.parse(content);
@@ -264,7 +265,7 @@ Complete static body text, including hidden panels, captions, tables, examples, 
 
 ## Limits the reviewer must preserve
 
-No external ebook/paper text, binary images, audio, videos, fonts, standalone CSS, installed dependencies, test execution environment, or complete 100,000-plus-record downloadable corpus is embedded. Image descriptions and inline SVG are available; independently checking other visual details requires the original image. Links identify sources but do not prove they were consulted. Program source allows reasoning about dynamic text; this export does not execute every interaction, random state, worker, browser crypto operation or user-supplied input. Shared scripts are included once; the learning-path script is explicitly labelled dormant. Corpus statistics and prior test results cannot substitute for independently checking omitted records. Readable-source versions of minified scripts are accompanied by their separate hashes, not a claim of byte identity.
+No external ebook/paper text, binary images, audio, videos, fonts, standalone CSS, installed dependencies, test execution environment, or complete 100,000-plus-record downloadable corpus is embedded. Image descriptions and inline SVG are available; independently checking other visual details requires the original image. Links identify sources but do not prove they were consulted. Program source allows reasoning about dynamic text; this export does not execute every interaction, random state, worker, browser crypto operation or user-supplied input. Shared scripts are included once; the learning-path script is explicitly labelled dormant. Corpus statistics and prior test results cannot substitute for independently checking omitted records. Readable-source versions of minified scripts are accompanied by their separate hashes, not a claim of byte identity. The historical-language profile tables in \`data/research/v2/language-profiles.json\` are excluded by size: roughly 0.74 MB of n-gram counts, not reviewable prose. Their provenance, rights, normalization, pruning and coverage are published inside that file and summarized in \`data/research/v2/README.md\`, and the research-evaluation v2 export records the file's SHA-256 so a reviewer can identify the exact build without the bulk.
 
 The earlier 214-page review was a complete reading/consistency pass with targeted source checks. It was **not independent source verification of every factual claim**. The 67-item tracker records completed bounded work packages, not proof that every statement is correct. Preserve all recorded evidence limits when deciding what to verify next.
 

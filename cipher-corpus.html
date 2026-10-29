@@ -371,6 +371,10 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
           <p style="margin-top:.75rem;font-size:.87rem;">Do not train and evaluate on the same split when measuring model performance.</p>
         </div>
       </div>
+      <div style="margin-top:2rem;">
+        <h3>Two statistics that are easy to swap</h3>
+        <p>Corpus-level entropy and per-message entropy are different measurements. With 26 plaintext letters and at most five homophones each, one fixed homophonic key has at most 130 code types, so a code symbol under that key carries at most log<sub>2</sub>&nbsp;130 &asymp; 7.022 bits. Pooling ciphertext produced under many independently generated keys enlarges the observed alphabet — eleven thousand codes gives log<sub>2</sub>&nbsp;11000 &asymp; 13.425 bits — but that figure describes the collection. It does not describe what an attacker holding one message faces, and a recovery result that improves when the pool grows is measuring the pool rather than the cipher. The <a href="hall-of-foundations/entropy.html#pooled-entropy">entropy exhibit</a> works a small enumerable case, and explains why a unicity estimate neither certifies a reading nor guarantees an efficient solver.</p>
+      </div>
     </section>
 
     <!-- ── Attribution ───────────────────────────── -->
@@ -380,6 +384,7 @@ with open("all.jsonl", "r", encoding="utf-8") as f:
         <h2 class="section-title">Attribution &amp; Citation</h2>
       </div>
       <p>CipherBank (Li et al., 2025) is a research benchmark studying LLM performance on cryptographic decryption tasks. Its reported results depend on model, prompt, algorithm and metric; they are not a measured accuracy result for this museum’s corpus or solvers.</p>
+      <p style="margin-top:1rem;"><strong>Four claims that are not the same claim.</strong> An AI cipher result may be measuring metadata recognition (the filename gave it away), cipher-family classification (the ciphertext has a statistical signature, and the message stays unread), fixed-codebook recognition (a code pool the system was already trained on), or genuine plaintext and key recovery. Only the last is decipherment, and it is the one least often measured. The gap is quantifiable: the ACTS benchmark strips metadata in tiers and reports combined accuracy falling from 71.7% with metadata to 30.8% blind. Before benchmarking anything against this corpus, read the <a href="lab/modern-attack-evidence.html#ai-results">matched-input evaluation recipe and benchmark checklist</a> — including the label-shuffled and length-only floors, and the rule that a deterministic stand-in for a model establishes nothing about a live one.</p>
       <p style="margin-top:1rem;">The corrected v0.8 corpus contains 100,313 records across 85 cipher types, including 41 historically themed entries and 7 languages. The published v0.6 archive has 100,326 records, 54 historically themed entries, and 9 languages. Its legacy <code>verified</code> field is not a claim that each historical pair is an authenticated source transcription; see the <a href="docs/CORPUS-V06-ERRATA.md">v0.6 errata</a>. CipherBank (Li et al., 2025) has 2,358 cases across 9 types; the collections use different records and evaluation methods. <a href="https://arxiv.org/pdf/2504.19093" target="_blank" rel="noopener">CipherBank paper →</a></p>
       <div style="margin-top:2rem;">
         <span class="section-eyebrow" style="display:block;margin-bottom:.75rem;">Cite Cipher Corpus</span>

@@ -23,3 +23,14 @@ Browser validation additionally covers the real worker, local-file imports, imag
 The design follows the reviewed transcription, numerical segmentation, Copiale, Mary Stuart and Z340 papers linked in the museum. Shared-key-pool learning is not independent cryptanalysis; synthetic historical-language corpora are not authentic archive pairs; three-shot plaintext/ciphertext pattern inference is not blind recovery. Metadata ablations need comparable procedures, and a language-model score is not a probability that a historical reading is correct.
 
 Neural training, automatic manuscript OCR, calibrated historical-language accuracy, unknown-key numerical segmentation and a general Z340 solver remain outside this implementation. The English baseline is experimental and deliberately exposes its limits.
+
+## Later versions and benchmark interpretation
+
+This version is frozen. [Research-evaluation v2](../v2/README.md) adds a declared task
+matrix, audited split rules, historical-language profiles and a second solver baseline; it
+reruns these fixtures rather than replacing their published failures.
+
+Before quoting any AI result against this material, read [what an AI cipher result actually
+tested](../../../lab/modern-attack-evidence.html#ai-results). Metadata recognition,
+cipher-family classification, fixed-codebook recognition and plaintext or key recovery are
+four different measurements, and only the last is decipherment.

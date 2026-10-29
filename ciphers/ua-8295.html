@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>UA-8295: Forensic Cryptanalysis of a Message Terminal — The Cipher Museum</title>
-<meta name="description" content="A preprint case study separating cryptanalytic findings from inferences about backdoor design.">
+<meta name="description" content="A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.">
 <link rel="canonical" href="https://ciphermuseum.com/ciphers/ua-8295.html">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../css/museum.css">
@@ -65,8 +65,8 @@
 <span class="badge era-modern">Modern cryptography · research case study</span>
 </div>
 <h1 class="page-title">UA-8295: Forensic Cryptanalysis of a Message Terminal</h1>
-<p class="page-tagline">A preprint case study separating cryptanalytic findings from inferences about backdoor design.</p>
-  <p class="exhibit-status-note">Forensic cryptanalysis case study; abstract and publication record verified, with full-paper technical details outside this exhibit’s verified scope.</p>
+<p class="page-tagline">A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.</p>
+  <p class="exhibit-status-note">Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.</p>
 <div class="exhibit-facts">
 <div class="fact">
 <span class="fact-label">Device</span>
@@ -88,22 +88,69 @@
 </div>
 <main id="main-content" class="research-main" tabindex="-1">
 <section>
-<h2>What the primary record establishes</h2>
-<p>Stijn Maatje and Marc Stevens’s 2026 preprint studies the UA-8295 message terminal as an example of backdoored cryptographic equipment. Its abstract describes a forensic cryptanalysis aimed at understanding how the backdoor was designed and which attack it was intended to enable.</p>
-<p>The authors propose a methodology based on the “Backdoor Conjecture” for reasoning about those questions. Inferring an intended attack from a design is distinct from directly observing the designers’ decisions.</p>
+<h2>Reading this case: four kinds of evidence</h2>
+<p>A backdoor case mixes things that were <em>seen</em> in firmware with things that were <em>computed</em>, and both with things that are <em>argued</em> from a design. Maatje and Stevens keep those apart, and this exhibit labels every claim the same way.</p>
+<ul class="evidence-key">
+<li><span class="ev" data-kind="observed">Observed</span> read out of the device, its ROMs or the documentary record</li>
+<li><span class="ev" data-kind="implemented">Implemented</span> an experiment or attack the authors actually ran</li>
+<li><span class="ev" data-kind="inference">Inference</span> a conclusion that holds only if the Backdoor Conjecture holds</li>
+<li><span class="ev" data-kind="open">Open</span> explicitly unresolved in the paper</li>
+</ul>
+<p>The authors state their aim directly: “it is not our goal to demonstrate its encryption can be broken, we already know it is weak.” The goal is to work out <em>which attack the backdoor was built for</em>. That is a different question from whether a weakness exists, and it is the question the labels below keep in view.</p>
 </section>
+
 <section>
-<h2>Evidence available for this exhibit</h2>
-<p><strong>Evidence scope:</strong> this exhibit relies on the accessible abstract and ePrint publication record. The full paper was unavailable for verification, so detailed claims about firmware differences, attack performance and data requirements remain outside its scope.</p>
+<h2>One device, two ROMs</h2>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> The UA-8295 Short Burst Terminal was sold by USFA, a Philips subsidiary supplying the Dutch government, Dutch Army and other NATO countries. It is based on the <strong>DA-8520</strong>, known in the Finnish Army as Sanomalaite m/90 (SANLA), manufactured by Nokia in the late 1970s. The original Nokia algorithm was <strong>DES in Output Feedback mode</strong>.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> From 1977 the NSA had an arrangement with USFA to sell backdoored encryption equipment. For the UA-8295, marketed from 1984, the NSA supplied a new algorithm and <strong>drop-in replacement EPROMs</strong>. From the outside the two devices are near-indistinguishable: the same startup version number, the same user interface, and even the same checksum over the EPROM data. The authors note one way to tell them apart — the checksum the device displays for a newly entered user key differs.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> Both ROM images were available for comparison, which is what made the work possible: “since both the original DES implementation as well as the NSA-modified algorithm are available to us, a simple comparison of the two allowed us to easily locate and isolate the cryptographically relevant code.” The reverse engineering is described as partial.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> Sales records published by the Dutch action group Onkruit show UA-8295 units sold on to Philips subsidiaries in Belgium and the United Kingdom, the UK order being a UA-8295/06 with an Arabic keyboard intended for Saudi Arabia. The device appears in the 1986 and 1988 editions of <em>Jane’s Military Communications</em>.</p>
 </section>
+
+<section>
+<h2>What the replacement cipher actually does</h2>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> The NSA algorithm — the paper calls its block primitive <strong>SBTcipher</strong> — is used in a counter-like mode. A 15-character user key and a 5-character nonce derive a <strong>56-bit</strong> encryption key. Input blocks depend on the nonce and the block position only; no plaintext or ciphertext feeds back. A fixed 64-bit value is run through a Fibonacci LFSR with polynomial 1 + x³¹ + x⁶³ to produce the first input block.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> The message format is unusual and worth seeing: the first five ciphertext characters <em>are</em> the nonce, and each group of three plaintext bytes becomes five ciphertext characters drawn from the alphabet A–P. The encryption is <strong>lossy</strong> — bits 6 and 7 of every plaintext byte are discarded and reconstructed by a fixed rule on decryption.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> Five design issues are identified, three of them cryptographic weaknesses inside SBTcipher. The mode fixes the very first input block for <em>every</em> key and nonce, which helps precomputation. The only byte-mixing operation updates a 4-bit nibble using just a 2-bit crumb of its neighbour, and with probability 3/4 performs no cross-nibble update at all. And the key schedule interacts strongly with the byte permutation, so each byte path uses only 19–25 unique key bits out of the 40 control bits it consumes per round.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> The authors explicitly record what they did <em>not</em> find: “there is no obvious backdoor in the form of a reduction to an effective key of say only 40 bits, as is frequent in weakening cryptographic primitives under export control.” The weakening here is subtler than a shortened key.</p>
+</section>
+
+<section>
+<h2>Two attacks, actually implemented</h2>
+<p class="evidence-claim"><span class="ev" data-kind="implemented">Implemented</span> Both attacks assume one or more <strong>known input/output block pairs</strong> and are written in C++, to be released open-source under the MIT licence. A <em>List Merge</em> attack builds, for each byte path, a list of candidate partial keys consistent with a known block pair, then merges the lists pairwise, discarding combinations that disagree where their key masks overlap.</p>
+<p class="evidence-claim"><span class="ev" data-kind="implemented">Implemented</span> A <em>Branch-and-Prune</em> attack walks a depth-first tree over the key space. Each variable carries a <strong>domain</strong> — the set of values still possible for it — and after each key-bit guess the attack runs <strong>constraint propagation</strong> through the round functions, forward, then backward, then forward again. If any domain becomes empty the branch is inconsistent, so it is pruned and the search backtracks. The order in which key bits are guessed is taken from the List Merge attack’s byte-path merge order.</p>
+<p class="evidence-claim"><span class="ev" data-kind="implemented">Implemented</span> Measured on a server with two Intel Xeon Gold 6248 CPUs and 1.5 TB RAM, single-threaded, over 20 randomly generated keys: with one known block pair the Branch-and-Prune median runtime is 33,311 s (Q1 18,960 s, Q3 66,215 s) in about 3 MiB of memory; List Merge with key-likelihood ordering has a median of 12,429 s but needs roughly 227 MiB plus precomputation. <strong>Adding a single extra known pair drops both by about two orders of magnitude</strong> — Branch-and-Prune falls to a 365 s median — and two or three extra pairs bring it to seconds or milliseconds. The authors summarise the one-pair case as recovering the key “on a laptop in a weekend.”</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> Those are modern measurements. The authors reason separately about 1980s feasibility: Branch-and-Prune’s ~3 MiB working set would have fitted the 640 KiB of a mid-1980s personal computer if written for it, and List Merge might have fitted a Cray X-MP (1982) or Cray 2 (1985) with further optimization. They concede that a daily key-recovery operation against many keys in the 1980s is “hard to imagine” at the zero-extra-pair runtime, and that the single-extra-pair case is the plausible one.</p>
+</section>
+
+<section>
+<h2>The nonce: a weakness the NSA did not add</h2>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> Two separate nonce issues are reported, and conflating them would misstate the case. <strong>Nonce independence:</strong> because the first input block is fixed, the first eight keystream bytes depend on the encryption key alone. That is the classic setting for a time–memory trade-off, and it also shrinks the List Merge precomputation from 327,680 lists to 1,280.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> <strong>Biased nonce generation</strong> is a different flaw. Each of the five nonce bytes is formed by XORing a hardware-counter byte with a byte of the <em>previous</em> message’s keystream, in a tight loop with a fixed number of instructions between counter reads. The counter therefore advances by a predictable amount between bytes, so differences between adjacent nonce characters are strongly biased.</p>
+<p class="evidence-claim"><span class="ev" data-kind="implemented">Implemented</span> The authors measured it on the device: encrypting consecutive sample messages with the user key 15×‘A’ and plaintext ‘AAA’, across 388 observed cases the difference between nonce characters was exactly 15 in 75.5% of cases and 12 in a further 14.9% — <strong>two values accounting for over 90% of all nonce differences</strong>.</p>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> This is the finding that most resists a simple story. The paper records that <strong>the same nonce-generation issue was already present in the Nokia DA-8520</strong>, the DES-based original. Their own careful wording: “At least this issue was not deliberately inserted, but potentially deliberately kept, by the NSA into the UA-8295.” Not every weakness in a backdoored device was put there by the party that backdoored it.</p>
+<p class="evidence-claim"><span class="ev" data-kind="open">Open</span> Why the weakness was there in the Nokia original is left as an open question.</p>
+</section>
+
+<section>
+<h2>What the Backdoor Conjecture does, and what it cannot do</h2>
+<p class="evidence-claim"><span class="ev" data-kind="observed">Observed</span> The methodology rests on a stated conjecture: backdoors are designed both to optimize a specific attack and to look secure under casual analysis. Design choices are then sorted into those that serve the intended attack (class i) and those that are attack-neutral and merely conventional (class ii). Optimality of a class-(i) choice is read as evidence for a candidate attack; suboptimality as evidence against it.</p>
+<p class="evidence-claim"><span class="ev" data-kind="inference">Inference</span> On that basis the byte permutation is argued to be a class-(i) choice. Under the exact attack-cost metric it ranks 73rd of 3,435 permutations — <em>not</em> optimal — but under a cheap predictive metric that a 1980s designer might plausibly have used, it ranks first in every permutation set tested. The stronger structural argument is that the optimal byte-path sets form a single global optimum built from local optima, which the authors call “an unexpectedly strong structure in the attack design space.”</p>
+<p class="evidence-claim"><span class="ev" data-kind="inference">Inference</span> The fixed IV is argued to be class (ii). Changing it shifts attack time by at most a factor 1.25, and the authors judge there is no apparent structure in the chosen value: weak evidence against the Branch-and-Prune attack having been the intended one, and most likely a choice made to look conventional.</p>
+<p class="evidence-claim"><span class="ev" data-kind="open">Open</span> Every conclusion in this section is conditional. The Backdoor Conjecture is posited, not demonstrated. The paper describes its own §6 as “a first application” of the methodology and says a more exhaustive treatment of the UA-8295 “would cost significant effort beyond the scope of this paper.” <strong>That two modern attacks succeed does not establish which attack the designer intended.</strong> It establishes that the device is breakable, which the authors already took as given.</p>
+<p class="evidence-claim"><span class="ev" data-kind="open">Open</span> <strong>Fixed-format messages are unresolved, and they matter.</strong> The UA-8295 can send messages conforming to a user-selected format, and ships with a pre-programmed one for coordinates, bearing and range. The authors state: “At present, we do not know how such a fixed format message is encrypted… In either case a fixed-format message could act as a crib, further increasing practicability for known-plaintext attacks such as the ones described in section 5, but more research on this has to be carried out. In particular, that part of the binary code is not yet reverse-engineered.” Since both implemented attacks need known input/output pairs, this open question sits directly between the laboratory result and any claim about operational traffic.</p>
+</section>
+
 <section>
 <h2>The museum connection</h2>
-<p>Compare this case with <a href="hagelin-c36.html">Hagelin and Crypto AG’s supplier history</a>, while keeping the organizations, equipment and evidence distinct. The shared historical question is whether the delivered implementation matches the security story told to its users.</p>
-<p>This exhibit introduces the research question and its evidence limits. It does not simulate the terminal or reproduce the paper’s attacks.</p>
+<p>Compare this case with <a href="hagelin-c36.html">Hagelin and Crypto AG’s supplier history</a>, while keeping the organizations, equipment and evidence distinct. The shared historical question is whether the delivered implementation matches the security story told to its users. For a modern counterpart where a parameter substitution was the whole backdoor, see the Juniper Dual EC card on <a href="../lab/modern-attack-evidence.html#juniper">what an attack result actually shows</a>.</p>
+<p>This exhibit summarizes a published forensic study and labels its evidence. <strong>It does not simulate the terminal, reproduce the attacks, or offer a key-recovery tool.</strong> No runtime claim is made here about recovering anything.</p>
 </section>
+
 <section>
 <h2>Primary source</h2>
-<p>Stijn Maatje and Marc Stevens, <a href="https://eprint.iacr.org/2026/1309">“Forensic Cryptanalysis of the Backdoored UA-8295 Message Terminal”</a>, ePrint 2026/1309. The record lists a last revision of 22 September 2026 and identifies the work as a preprint. Abstract and metadata verified; full-paper claims remain outside this exhibit’s verified scope. Posting to ePrint is not evidence of peer review.</p>
+<p>Stijn Maatje and Marc Stevens, <a href="https://eprint.iacr.org/2026/1309">“Forensic Cryptanalysis of the Backdoored UA-8295 Message Terminal”</a>, ePrint 2026/1309, CWI Cryptology Group; record last revised 22 September 2026. Claims above are drawn from §§1.2–1.3 (pp. 3–5), §3.5–3.7 (pp. 10–11), §4 and 4.1–4.2 (pp. 11–14), §5.2–5.4 and Tables 4 and 6 (pp. 18–22, 25), §6.1–6.3 and Table 5 (pp. 22–25) and §7.1–7.3 (pp. 25–26).</p>
+<p><strong>This is a preprint.</strong> Posting to ePrint is not evidence of peer review, and the attack implementations were not independently rerun for this exhibit. Device and provenance details are corroborated against the Crypto Museum’s <a href="https://www.cryptomuseum.com/crypto/philips/ua8295/">UA-8295</a> and <a href="https://www.cryptomuseum.com/crypto/philips/ua8295/sbt.htm">SBT algorithm</a> pages, which document the same firmware version, date and checksum coincidence from the hardware side.</p>
 </section>
 <div class="hall-nav">
 <a href="../ciphers/sodark.html" class="hall-nav-link next">

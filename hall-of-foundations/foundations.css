@@ -227,3 +227,14 @@ svg.curve { display: block; width: 100%; height: auto; touch-action: manipulatio
   .lab-bar .readout { margin-left: 0; width: 100%; text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Shared comparison table. §151 defines the same rules inline; this makes them
+   available to every exhibit in the wing that needs a side-by-side table. */
+.entropy-table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:.9rem; }
+.entropy-table caption { text-align:left; color:var(--gold-lt); margin-bottom:8px; font-weight:600; }
+.entropy-table th, .entropy-table td { padding:10px 8px; border-bottom:1px solid var(--rule); text-align:left; vertical-align:top; overflow-wrap:anywhere; }
+.entropy-table th { color:var(--tx); }
+.entropy-table td { color:var(--ink-soft); }
+.entropy-table-wrap { overflow-x:auto; max-width:100%; }
+.entropy-table-wrap:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+@media (max-width:480px) { .entropy-table { font-size:.8rem; } .entropy-table th, .entropy-table td { padding:8px 5px; } }

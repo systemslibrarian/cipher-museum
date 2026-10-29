@@ -21,3 +21,7 @@ public/corpus/v0.8/all.jsonl
 # Staged Zenodo upload packages: large generated payloads, rebuilt on demand
 # with `node scripts/build-corpus-deposit.js <version>`.
 dist/
+
+# Public-domain corpora fetched on demand by scripts/build-research-language-profiles.js.
+# Only the derived n-gram counts are committed; the source transcriptions are not.
+tmp/

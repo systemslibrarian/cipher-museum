@@ -187,8 +187,40 @@
     <p class="aside">Himanshu Tyagi and Shun Watanabe, <em>Information-theoretic Cryptography</em>, Cambridge University Press, 2023, §7.3, printed p.124, Example 7.9 and Definition 7.10; pp.125–127 develop conditional min-entropy and Theorem 7.13. The leaked-parity control is our contrasting example. See also the <a href="../glossary.html#gl-X">XOR glossary entry</a>.</p>
   </section>
 
+  <section class="exhibit" id="pooled-entropy">
+    <div class="step-head"><span class="step-num">§6</span><h2>Pooling many keys measures the collection, not the message</h2></div>
+    <p>Research datasets of homophonic ciphers are built by encrypting many plaintexts, each under a key generated independently for it. Measure the entropy of all that ciphertext together and you get a large number. It is easy to read that number as a statement about how well any one message is hidden. It is not.</p>
+    <p>Here is a fully enumerable case. Three plaintext letters A, B, C; two homophones each; sixty letters per message, with the three letters equally frequent and the two homophones alternating evenly. Four independent keys draw their code symbols from <strong>disjoint</strong> inventories, so no symbol is shared.</p>
+    <div class="entropy-table-wrap" tabindex="0" role="region" aria-label="Within-key and pooled code entropy">
+      <table class="entropy-table" id="pooled-entropy-table">
+        <caption>The same four messages, measured two ways</caption>
+        <thead><tr><th scope="col">What is measured</th><th scope="col">Distinct code symbols</th><th scope="col">Entropy per code symbol</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">One message under one fixed key</th><td>6</td><td>log₂ 6 = 2.5850 bits</td></tr>
+          <tr><th scope="row">All four messages pooled</th><td>24</td><td>log₂ 24 = 4.5850 bits</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The pooled figure is exactly <strong>2 bits higher</strong>, and 2 = log₂ 4 is the number of keys. Nothing about any single message changed. An attacker holding one of these messages still faces a three-letter cipher with six code symbols; the extra two bits only record which of the four keys a symbol came from, which is not a secret the message is keeping.</p>
+    <p><strong>The bound for a realistic size.</strong> Take the usual research setting: 26 plaintext letters, at most five homophones for each. One fixed key then has <strong>at most 26 × 5 = 130 code types</strong>, so the entropy of its code-symbol distribution is at most <strong>log₂ 130 ≈ 7.022 bits</strong> per symbol — and only if all 130 were equally likely, which proportional homophone allocation never quite achieves. A pooled alphabet of eleven thousand codes gives log₂ 11000 ≈ 13.425 bits, almost double. That larger number is a property of the collection, not of the cipher a reader of one letter is facing.</p>
+    <p class="aside"><strong>Status of this example:</strong> a mathematical consequence of the stated model, worked and checked here. It is not a replication of any published dataset measurement, and it does not say a published pooled figure is wrong — a pooled statistic is simply a different statistic, and it cannot establish per-message uniformity or security.</p>
+  </section>
+
+  <section class="exhibit" id="unicity">
+    <div class="step-head"><span class="step-num">§7</span><h2>Unicity distance answers a narrower question than it looks</h2></div>
+    <p>Shannon’s unicity distance estimates how much ciphertext is needed before only one key is expected to yield a sensible plaintext. It is an expectation computed from two assumptions: the size of the key space, and the redundancy of the plaintext language. Change either assumption and the estimate changes.</p>
+    <p>Three things it does not do.</p>
+    <ul>
+      <li><strong>It does not certify a proposed reading.</strong> The estimate says spurious readings become unlikely past some length. It says nothing about whether the particular reading in front of you is the right one. That still needs evidence outside the cipher: corroborating documents, the archive, the hand, the history.</li>
+      <li><strong>It does not promise an efficient solver.</strong> A unique solution can exist and remain out of reach. Unicity is an information-theoretic count of how many keys survive, not a statement about the work of finding the survivor.</li>
+      <li><strong>It does not cover alternative systems.</strong> The calculation fixes a cipher family and a key space. It cannot rule out that some different enciphering scheme also produces readable text.</li>
+    </ul>
+    <p>The published analysis of the Zodiac 340 cipher makes the dependence visible: its author computes the plaintext-language entropy under three different assumptions — standard English, the Z340 plaintext alone, and Zodiac’s whole correspondence — and reports the resulting unicity distance as a <em>range</em>, at most 152 characters, rather than a single figure.</p>
+    <p><strong>A rule that follows from both sections.</strong> Enlarging the pooled code alphabet changes a dataset statistic. It does not make any individual message easier or harder to recover, and a cryptanalytic result that improves when the pool grows is measuring the pool, not the cipher. The museum’s <a href="../data/research/v2/README.md">research-evaluation v2</a> keeps those tasks apart for exactly this reason.</p>
+    <p class="aside">Micaella Bruton, Meriem Beloucif and Beáta Megyesi, “Bridging the Low Resource Gap in Historical Cryptology: A Multilingual Diachronic Synthetic Dataset for Reproducible Cryptanalysis,” <a href="https://aclanthology.org/2026.resourceful-4.2/">RESOURCEFUL 2026, pp. 13–24</a>: independently generated per-text homophonic keys. Joachim von zur Gathen, <a href="https://eprint.iacr.org/2021/1620">“Unicity distance of the Zodiac-340 cipher,” ePrint 2021/1620</a> (Cryptologia 47(5), 2023): the three language-entropy assumptions and the resulting range. Continue with <a href="../ciphers/homophonic.html">the homophonic exhibit</a> and <a href="../lab/evidence-workbench.html">the Evidence Workbench</a>.</p>
+  </section>
   <section class="exhibit">
-    <div class="step-head"><span class="step-num">§6</span><h2>The one-time pad's perfect secret</h2></div>
+    <div class="step-head"><span class="step-num">§8</span><h2>The one-time pad's perfect secret</h2></div>
     <p>A pad chosen uniformly and independently of the message, kept secret, as long as the message and used once provides perfect secrecy for fixed-length messages. Entropy is part of that argument, but a high-entropy string that is public or related to the message is not a secure pad.</p>
     <div class="pull">
       Perfect secrecy exists. It just costs one bit of true randomness for every

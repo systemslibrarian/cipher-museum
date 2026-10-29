@@ -145,6 +145,25 @@
     </div>
   </section>
 
+  <section class="exhibit" id="assurance">
+    <div class="step-head"><span class="step-num">§4</span><h2>Four different promises about the same addition</h2></div>
+    <p>The arithmetic above is correct and it is also a teaching model. Production elliptic-curve code carries claims this exhibit does not, and the claims are not interchangeable. Four of them are worth separating.</p>
+    <div class="entropy-table-wrap" tabindex="0" role="region" aria-label="Four kinds of assurance about elliptic-curve addition">
+      <table class="entropy-table" id="assurance-table">
+        <caption>What each assurance covers, and what it leaves open</caption>
+        <thead><tr><th scope="col">Claim</th><th scope="col">What it means</th><th scope="col">What it does not cover</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Exceptional cases handled</th><td>The affine chord-and-tangent rule has no slope when the two points share an x-coordinate, so an implementation must branch: identity, inverse pair, doubling, general case.</td><td>Branching is where bugs and timing differences live. Handling a case is not handling it in constant time.</td></tr>
+          <tr><th scope="row">Complete addition formulas</th><td>One branch-free expression that is correct for <em>every</em> pair of points, including the identity and a point with itself. Renes, Costello and Batina give such formulas for short Weierstrass curves.</td><td>The completeness guarantee holds for a stated curve class — prime-order short Weierstrass curves over fields of characteristic other than 2 and 3. Outside that class the guarantee does not transfer, and the formulas cost more field multiplications.</td></tr>
+          <tr><th scope="row">Functional-correctness proof</th><td>A machine-checked argument that a particular implementation computes the specified mathematical function, including the bounds that keep intermediate values in range. Fiat-Cryptography produces field arithmetic this way.</td><td>A proof has a boundary. The compiler, the pretty-printer and anything below them are trusted, not proved, and the proof says nothing about timing.</td></tr>
+          <tr><th scope="row">Constant-time assurance</th><td>That the execution time and memory-access pattern do not depend on secret values.</td><td>This is a property of the <em>emitted machine code</em>. A compiler is free to introduce a branch or a table lookup that the source did not have, so the assurance has to be re-established after compilation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Where that leaves the code on this page.</strong> The museum’s <code>ec-math.js</code> is affine, branching, and uses a linear search to invert a field element because the fields here have fewer than a hundred elements. It is <strong>not production-ready, not constant-time, and not formally verified</strong>, and it is not trying to be. What it <em>is</em> is checked: the museum’s test suite compares its result against an independent implementation of the complete projective formulas on all 361 ordered pairs of points on the prime-order curve y² = x³ + 2x + 2 over 𝔽₁₇, identity, inverses and doublings included. Agreement on a tiny curve is evidence about these formulas on this curve; it is not an assurance claim about anything else.</p>
+    <p>Property testing, proof and timing assurance answer different questions, and passing one says nothing about the others. For side-channel behaviour as a measured phenomenon rather than a source-code property, see <a href="../lab/modern-attack-evidence.html#power-leakage">what a power-analysis result actually shows</a> and Crypto Lab’s <a href="https://systemslibrarian.github.io/crypto-lab-power-trace/">Power Trace</a>, which computes those statistics over simulated leakage.</p>
+    <p class="aside">Joost Renes, Craig Costello and Lejla Batina, <a href="https://eprint.iacr.org/2015/1060">“Complete Addition Formulas for Prime Order Elliptic Curves,” EUROCRYPT 2016</a>: the curve class the completeness guarantee is stated for, and its cost. Andres Erbsen, Jade Philipoom, Jason Gross, Robert Sloan and Adam Chlipala, <a href="https://doi.org/10.1109/SP.2019.00005">“Simple High-Level Code for Cryptographic Arithmetic — With Proofs, Without Compromises,” IEEE S&amp;P 2019</a>: the proof pipeline, its bounds reasoning, and the trusted compiler and pretty-printer at its edge.</p>
+  </section>
   <section class="exhibit">
     <div class="connect">
       <div class="flag">Where this touches your keys</div>

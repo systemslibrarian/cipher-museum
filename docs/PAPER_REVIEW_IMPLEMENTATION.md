@@ -53,3 +53,17 @@ Book credit uses full titles and pagination, without links to ebook copies.
 | Solver evaluation (`scripts/evaluate-solvers.js`) | George Lasry, *A Methodology for the Cryptanalysis of Classical Ciphers with Search Metaheuristics* (2018) | §§4.5–4.7, printed pp. 57–60 / PDF pp. 78–81. Repeatable held-out evaluation and ablation principles; the small original-prose fixtures and budgets are this implementation's choices. See `SOLVER_EVALUATION.md` for measured outcomes and limits. |
 
 The public exhibit pages carry these same full-title citations. No book copies are distributed with these changes.
+
+## Research review of 29 October 2026
+
+A later fourteen-item review (R01–R14) extended this work: corrected GPRS fault-attack and
+UA-8295 evidence read from the full primary papers, a symbol-linked reading desk with
+multi-image coordinate transforms, a revisable symbol inventory, a resumable investigation
+bundle, versioned historical French/Italian/Latin scoring profiles with abstention, lattice
+k-best numerical segmentation, a beam-search solver baseline compared against the annealing
+search, research-evaluation v2 with audited split rules, pooled-versus-within-key entropy,
+a hypothesis register, comparative modern attack-evidence cards, an implementation-assurance
+panel, and a benchmark-interpretation section.
+
+See [`RESEARCH_REVIEW_2026-10-29.md`](RESEARCH_REVIEW_2026-10-29.md) for the R01–R14 mapping,
+the checks actually run with their results, and the limitations that remain.

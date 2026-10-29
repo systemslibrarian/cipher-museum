@@ -1,0 +1,1938 @@
+{
+  "version": 2,
+  "id": "museum-research-evaluation-v2",
+  "generatedBy": "scripts/evaluate-research-v2.js",
+  "relationToV1": "Research-evaluation v1 is unchanged and still published. Its three fixtures and their failures are rerun here as the museum-prose baseline; v2 adds tasks and material rather than replacing results.",
+  "scope": "Public demonstrations. Every fixture, key and seed in this repository is visible, so none of this is a blind benchmark, and none of it may be quoted as general historical-decipherment accuracy.",
+  "budgets": {
+    "seed": 41,
+    "steps": 6000,
+    "beam": 150,
+    "branch": 26
+  },
+  "hashes": {
+    "solver": "883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128",
+    "scorer": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
+    "baselineModel": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
+    "profiles": "9273ab82bc558e070a1cd810b84e6830f62b9d3bb31865271416f48cb9e6bb3a",
+    "corpus": "e00baf427f28f1a6008822db436cf2f561e58842833dad2e190558f48f33bbd6",
+    "holdout": "ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc707248",
+    "splitRules": "fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010"
+  },
+  "models": {
+    "baseline": "museum-prose-quadgram-v1",
+    "profiles": [
+      "historical-french-1580",
+      "historical-italian-1320",
+      "historical-latin-classical"
+    ]
+  },
+  "grouping": {
+    "rules": "All variants of one source document share a split; key seeds and code pools are drawn from per-split disjoint ranges. Audited on every run by scripts/research-splits.js.",
+    "ok": true,
+    "problems": [],
+    "documents": 13,
+    "items": 39,
+    "perSplit": {
+      "development": 0,
+      "test": 39
+    }
+  },
+  "tasks": {
+    "independentKeyRecovery": {
+      "question": "Given one ciphertext under a key drawn for it alone, how much of the plaintext and key is recovered?",
+      "items": [
+        {
+          "id": "letter-a:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-a",
+          "language": "modern English",
+          "tokens": 202,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7624,
+            "keyError": 1,
+            "ms": 23.4,
+            "heapDeltaBytes": 8388696
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7079,
+            "keyError": 0.875,
+            "ms": 420,
+            "heapDeltaBytes": 10402456
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-a:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-a",
+          "language": "modern English",
+          "tokens": 202,
+          "symbols": 56,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7277,
+            "keyError": 0.8393,
+            "ms": 20.7,
+            "heapDeltaBytes": 4317640
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8069,
+            "keyError": 0.9821,
+            "ms": 769.1,
+            "heapDeltaBytes": 48688088
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-a:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-a",
+          "language": "modern English",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6167,
+            "keyError": 0.8286,
+            "ms": 13.4,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8167,
+            "keyError": 0.9714,
+            "ms": 303.9,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-b:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-b",
+          "language": "modern English",
+          "tokens": 213,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7606,
+            "keyError": 0.9231,
+            "ms": 22.5,
+            "heapDeltaBytes": 4548904
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8122,
+            "keyError": 0.8974,
+            "ms": 385.6,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-b:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-b",
+          "language": "modern English",
+          "tokens": 213,
+          "symbols": 54,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7793,
+            "keyError": 0.963,
+            "ms": 21.8,
+            "heapDeltaBytes": 1470424
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7793,
+            "keyError": 0.963,
+            "ms": 714.8,
+            "heapDeltaBytes": 6377520
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-b:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-b",
+          "language": "modern English",
+          "tokens": 120,
+          "symbols": 33,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7917,
+            "keyError": 1,
+            "ms": 12.9,
+            "heapDeltaBytes": 18895488
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7583,
+            "keyError": 0.9091,
+            "ms": 260.1,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "language-shift:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-fr",
+          "sourceDocument": "language-shift",
+          "language": "modern French",
+          "tokens": 202,
+          "symbols": 36,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.5149,
+            "keyError": 0.75,
+            "ms": 23.1,
+            "heapDeltaBytes": 7358952
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7772,
+            "keyError": 0.9167,
+            "ms": 334.2,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "language-shift:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-fr",
+          "sourceDocument": "language-shift",
+          "language": "modern French",
+          "tokens": 202,
+          "symbols": 52,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7921,
+            "keyError": 0.9231,
+            "ms": 21.6,
+            "heapDeltaBytes": 2588008
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7277,
+            "keyError": 0.8654,
+            "ms": 657.4,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "language-shift:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-fr",
+          "sourceDocument": "language-shift",
+          "language": "modern French",
+          "tokens": 120,
+          "symbols": 33,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7583,
+            "keyError": 0.8485,
+            "ms": 14,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9091,
+            "ms": 273.8,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-c:full-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-c",
+          "language": "modern English",
+          "tokens": 199,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7638,
+            "keyError": 1,
+            "ms": 22.3,
+            "heapDeltaBytes": 4888040
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.794,
+            "keyError": 0.9744,
+            "ms": 390.4,
+            "heapDeltaBytes": 764280
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-c:full-3hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-c",
+          "language": "modern English",
+          "tokens": 199,
+          "symbols": 52,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7839,
+            "keyError": 0.9231,
+            "ms": 20.9,
+            "heapDeltaBytes": 611136
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.799,
+            "keyError": 0.9808,
+            "ms": 662.6,
+            "heapDeltaBytes": 30731264
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "letter-c:short-2hom",
+          "split": "test",
+          "collection": "museum-prose-en",
+          "sourceDocument": "letter-c",
+          "language": "modern English",
+          "tokens": 120,
+          "symbols": 34,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.5667,
+            "keyError": 0.7353,
+            "ms": 14.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9706,
+            "ms": 284.1,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-1",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 311,
+          "symbols": 44,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7814,
+            "keyError": 0.9773,
+            "ms": 33.9,
+            "heapDeltaBytes": 16780376
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8103,
+            "keyError": 0.9091,
+            "ms": 514.1,
+            "heapDeltaBytes": 20158320
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-1",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 311,
+          "symbols": 59,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7685,
+            "keyError": 0.9492,
+            "ms": 34.2,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7974,
+            "keyError": 1,
+            "ms": 876.6,
+            "heapDeltaBytes": 67507448
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-1",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6917,
+            "keyError": 0.8286,
+            "ms": 13.4,
+            "heapDeltaBytes": 19747280
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.9714,
+            "ms": 310.3,
+            "heapDeltaBytes": 51197472
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-2",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7712,
+            "keyError": 0.95,
+            "ms": 34.5,
+            "heapDeltaBytes": 19343408
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7837,
+            "keyError": 0.95,
+            "ms": 432.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-2",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 55,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7868,
+            "keyError": 1,
+            "ms": 33.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8025,
+            "keyError": 0.9818,
+            "ms": 773.8,
+            "heapDeltaBytes": 80141808
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-2",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 120,
+          "symbols": 32,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7833,
+            "keyError": 0.9688,
+            "ms": 14,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.625,
+            "keyError": 0.75,
+            "ms": 257.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-3",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 44,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7868,
+            "keyError": 0.9091,
+            "ms": 36.8,
+            "heapDeltaBytes": 22054744
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8307,
+            "keyError": 0.9773,
+            "ms": 494.2,
+            "heapDeltaBytes": 5946840
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-3",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 319,
+          "symbols": 61,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8088,
+            "keyError": 0.9344,
+            "ms": 34.4,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.837,
+            "keyError": 0.9836,
+            "ms": 913.1,
+            "heapDeltaBytes": 55928776
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "montaigne-essais-i-holdout-3",
+          "language": "French (Sixteenth century (text first published 1580))",
+          "tokens": 120,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8333,
+            "keyError": 0.975,
+            "ms": 14.6,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.95,
+            "ms": 381,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-1:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-1",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 40,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6603,
+            "keyError": 0.725,
+            "ms": 35.6,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.975,
+            "ms": 408.7,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-1:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-1",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 57,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7556,
+            "keyError": 0.8772,
+            "ms": 32.5,
+            "heapDeltaBytes": 17125056
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9474,
+            "ms": 792.8,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-1:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-1",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 120,
+          "symbols": 36,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.6667,
+            "keyError": 0.8056,
+            "ms": 14,
+            "heapDeltaBytes": 21176568
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7917,
+            "keyError": 0.9722,
+            "ms": 312.9,
+            "heapDeltaBytes": 34488296
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-2:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-2",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.419,
+            "keyError": 0.641,
+            "ms": 33.1,
+            "heapDeltaBytes": 17018016
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.781,
+            "keyError": 0.9744,
+            "ms": 392.1,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-2:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-2",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 315,
+          "symbols": 55,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7746,
+            "keyError": 0.8545,
+            "ms": 32.9,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.819,
+            "keyError": 0.8909,
+            "ms": 720,
+            "heapDeltaBytes": 79834432
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-2:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-2",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7333,
+            "keyError": 0.8571,
+            "ms": 14.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8083,
+            "keyError": 0.9429,
+            "ms": 282.4,
+            "heapDeltaBytes": 10589048
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-3:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-3",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 311,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7814,
+            "keyError": 1,
+            "ms": 28.9,
+            "heapDeltaBytes": 17685904
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7331,
+            "keyError": 0.8462,
+            "ms": 400.4,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-3:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-3",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 311,
+          "symbols": 55,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8232,
+            "keyError": 0.9636,
+            "ms": 33.2,
+            "heapDeltaBytes": 17067608
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7974,
+            "keyError": 0.9091,
+            "ms": 765,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "dante-commedia-holdout-3:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "dante-commedia-holdout-3",
+          "language": "Italian (Early fourteenth century)",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8,
+            "keyError": 0.9714,
+            "ms": 13.2,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.725,
+            "keyError": 0.7429,
+            "ms": 282.3,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-1",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 343,
+          "symbols": 41,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8105,
+            "keyError": 1,
+            "ms": 35.5,
+            "heapDeltaBytes": 23386136
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7813,
+            "keyError": 0.878,
+            "ms": 446.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-1",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 343,
+          "symbols": 56,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7959,
+            "keyError": 1,
+            "ms": 37.5,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8367,
+            "keyError": 0.9643,
+            "ms": 778.2,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-1",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 120,
+          "symbols": 32,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8083,
+            "keyError": 0.9688,
+            "ms": 13.8,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8083,
+            "keyError": 0.9375,
+            "ms": 240.6,
+            "heapDeltaBytes": 14256904
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-2",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 342,
+          "symbols": 37,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7719,
+            "keyError": 1,
+            "ms": 30,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8041,
+            "keyError": 0.9459,
+            "ms": 342.8,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-2",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 342,
+          "symbols": 54,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.769,
+            "keyError": 0.9815,
+            "ms": 30.9,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.7778,
+            "keyError": 0.9074,
+            "ms": 735.9,
+            "heapDeltaBytes": 1716976
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-2",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 120,
+          "symbols": 32,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.9688,
+            "ms": 12.1,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.825,
+            "keyError": 0.9063,
+            "ms": 239.7,
+            "heapDeltaBytes": 7565856
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:full-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-3",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 338,
+          "symbols": 39,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.7604,
+            "keyError": 0.8718,
+            "ms": 28,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8077,
+            "keyError": 1,
+            "ms": 386.5,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:full-3hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-3",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 338,
+          "symbols": 56,
+          "homophones": 3,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8077,
+            "keyError": 0.9821,
+            "ms": 31.3,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8107,
+            "keyError": 0.9643,
+            "ms": 759.6,
+            "heapDeltaBytes": 0
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:short-2hom",
+          "split": "test",
+          "collection": "gutenberg-pre1800",
+          "sourceDocument": "caesar-bello-gallico-holdout-3",
+          "language": "Latin (First century BCE (classical))",
+          "tokens": 120,
+          "symbols": 35,
+          "homophones": 2,
+          "annealing": {
+            "exact": false,
+            "plaintextError": 0.8167,
+            "keyError": 0.9143,
+            "ms": 11.3,
+            "heapDeltaBytes": 0
+          },
+          "beamSearch": {
+            "exact": false,
+            "plaintextError": 0.8333,
+            "keyError": 0.9429,
+            "ms": 278.2,
+            "heapDeltaBytes": 21335296
+          },
+          "relabellingInvariant": {
+            "annealing": true,
+            "beamSearch": true
+          },
+          "knownKeyApplication": true
+        }
+      ],
+      "annealing": {
+        "denominator": 39,
+        "plaintextError": {
+          "n": 39,
+          "mean": 0.749,
+          "min": 0.419,
+          "max": 0.8333
+        },
+        "keyError": {
+          "n": 39,
+          "mean": 0.9131,
+          "min": 0.641,
+          "max": 1
+        },
+        "ms": {
+          "n": 39,
+          "mean": 24.2949,
+          "min": 11.3,
+          "max": 37.5
+        },
+        "heapDeltaBytes": {
+          "n": 39,
+          "mean": 6268009.8462,
+          "min": 0,
+          "max": 23386136
+        }
+      },
+      "beamSearch": {
+        "denominator": 39,
+        "plaintextError": {
+          "n": 39,
+          "mean": 0.7912,
+          "min": 0.625,
+          "max": 0.837
+        },
+        "keyError": {
+          "n": 39,
+          "mean": 0.9317,
+          "min": 0.7429,
+          "max": 1
+        },
+        "ms": {
+          "n": 39,
+          "mean": 486.5051,
+          "min": 239.7,
+          "max": 913.1
+        },
+        "heapDeltaBytes": {
+          "n": 39,
+          "mean": 14041822.5641,
+          "min": 0,
+          "max": 80141808
+        }
+      },
+      "exactRecovery": {
+        "annealing": 0,
+        "beamSearch": 0,
+        "denominator": 39
+      },
+      "knownKeyApplicationExact": 39,
+      "relabellingInvariant": {
+        "annealing": true,
+        "beamSearch": true
+      }
+    },
+    "fixedCodePoolRecognition": {
+      "question": "With one global code pool reused across texts, what is actually being measured?",
+      "items": [
+        {
+          "id": "letter-a:full-2hom",
+          "split": "test",
+          "poolId": "pool-31421",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 39,
+          "poolCoverage": 0.75,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.6535,
+          "unknownPoolKeyError": 0.8205
+        },
+        {
+          "id": "letter-b:full-2hom",
+          "split": "test",
+          "poolId": "pool-31421",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 40,
+          "poolCoverage": 0.7692,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7559,
+          "unknownPoolKeyError": 0.975
+        },
+        {
+          "id": "language-shift:full-2hom",
+          "split": "test",
+          "poolId": "pool-31374",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 35,
+          "poolCoverage": 0.6731,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7475,
+          "unknownPoolKeyError": 0.9714
+        },
+        {
+          "id": "letter-c:full-2hom",
+          "split": "test",
+          "poolId": "pool-31421",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 38,
+          "poolCoverage": 0.7308,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.4673,
+          "unknownPoolKeyError": 0.6579
+        },
+        {
+          "id": "montaigne-essais-i-holdout-1:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 42,
+          "poolCoverage": 0.8077,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7814,
+          "unknownPoolKeyError": 0.9286
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 39,
+          "poolCoverage": 0.75,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7492,
+          "unknownPoolKeyError": 0.8974
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 43,
+          "poolCoverage": 0.8269,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7962,
+          "unknownPoolKeyError": 0.9535
+        },
+        {
+          "id": "dante-commedia-holdout-1:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 41,
+          "poolCoverage": 0.7885,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.746,
+          "unknownPoolKeyError": 0.8537
+        },
+        {
+          "id": "dante-commedia-holdout-2:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 40,
+          "poolCoverage": 0.7692,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7873,
+          "unknownPoolKeyError": 0.975
+        },
+        {
+          "id": "dante-commedia-holdout-3:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 39,
+          "poolCoverage": 0.75,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.717,
+          "unknownPoolKeyError": 0.8205
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 40,
+          "poolCoverage": 0.7692,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7609,
+          "unknownPoolKeyError": 0.8
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 38,
+          "poolCoverage": 0.7308,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7456,
+          "unknownPoolKeyError": 0.8421
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3:full-2hom",
+          "split": "test",
+          "poolId": "pool-31903",
+          "poolSymbols": 52,
+          "symbolsSeenInThisText": 38,
+          "poolCoverage": 0.7308,
+          "knownPoolExact": true,
+          "knownPoolUnresolved": 0,
+          "unknownPoolPlaintextError": 0.7544,
+          "unknownPoolKeyError": 0.8684
+        }
+      ],
+      "knownPoolExact": 13,
+      "denominator": 13,
+      "unknownPool": {
+        "denominator": 13,
+        "unknownPoolPlaintextError": {
+          "n": 13,
+          "mean": 0.7279,
+          "min": 0.4673,
+          "max": 0.7962
+        },
+        "unknownPoolKeyError": {
+          "n": 13,
+          "mean": 0.8742,
+          "min": 0.6579,
+          "max": 0.975
+        },
+        "poolCoverage": {
+          "n": 13,
+          "mean": 0.7574,
+          "min": 0.6731,
+          "max": 0.8269
+        }
+      },
+      "meaning": "Applying a pool you already hold is exact and trivial. Recovering it from one short text is not, and a system trained on a shared pool is not doing independent cryptanalysis."
+    },
+    "authenticKnownKeyReplay": {
+      "id": "z340-section-1",
+      "kind": "historical-source-replay",
+      "task": "known-key replay",
+      "symbols": 63,
+      "positions": 153,
+      "correctRouteExact": true,
+      "wrongRouteExact": false,
+      "fullZ340Recovery": false,
+      "meaning": "A published key applied along a published route. Nothing here is key recovery, and the later sections of Z340 are not reproduced."
+    },
+    "transcription": {
+      "input": "AB?DEFG?IJKL",
+      "glyphError": 0.1667,
+      "unresolvedCoverage": 0.1667,
+      "searchRejected": true,
+      "plaintextError": null,
+      "meaning": "Glyph error and unresolved coverage are reported separately from plaintext error, which is undefined while glyphs are missing. Unknown glyphs are never silently deleted to make a letter-only search run."
+    },
+    "numericalSegmentation": {
+      "cases": [
+        {
+          "id": "ambiguous-2228",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 3,
+          "retained": 3,
+          "readings": [
+            "AAAD",
+            "AND",
+            "NAD"
+          ],
+          "expectedReadings": [
+            "AAAD",
+            "AND",
+            "NAD"
+          ],
+          "matchesExpected": true,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            1,
+            2
+          ],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "locked-boundary",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 2,
+          "retained": 2,
+          "readings": [
+            "AAAD",
+            "AND"
+          ],
+          "expectedReadings": [
+            "AAAD",
+            "AND"
+          ],
+          "matchesExpected": true,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            2
+          ],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "wrong-key",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 0,
+          "retained": 0,
+          "readings": [],
+          "expectedReadings": [],
+          "matchesExpected": true,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "leading-zero-null",
+          "digits": "20228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 2,
+          "retained": 2,
+          "readings": [
+            "AAAD",
+            "AND"
+          ],
+          "expectedReadings": null,
+          "matchesExpected": null,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            3
+          ],
+          "alternativeReadings": 0
+        },
+        {
+          "id": "word-code-alternatives",
+          "digits": "2228",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 3,
+          "retained": 3,
+          "readings": [
+            "AAAD",
+            "AANDD",
+            "ANDAD"
+          ],
+          "expectedReadings": null,
+          "matchesExpected": null,
+          "matchesExhaustiveOracle": true,
+          "ambiguousPositions": [
+            1,
+            2
+          ],
+          "alternativeReadings": 2
+        },
+        {
+          "id": "line-boundary",
+          "digits": "22\n28",
+          "mode": "exhaustive-lattice",
+          "complete": true,
+          "globalBestGuaranteed": true,
+          "total": 2,
+          "retained": 2,
+          "readings": [
+            "AAAD",
+            "NAD"
+          ],
+          "expectedReadings": null,
+          "matchesExpected": null,
+          "matchesExhaustiveOracle": null,
+          "ambiguousPositions": [
+            1
+          ],
+          "alternativeReadings": 0
+        }
+      ],
+      "cutoff": {
+        "digits": 20,
+        "total": 10946,
+        "retained": 32,
+        "complete": false,
+        "mode": "bounded-k-best",
+        "globalBestGuaranteed": false,
+        "pruning": "Backward reachability plus a per-state beam of 32 within a 1000-node budget. Pruning can discard the globally best path."
+      },
+      "boundaryVersusPlaintext": {
+        "codesA": [
+          "2",
+          "22",
+          "8"
+        ],
+        "codesB": [
+          "22",
+          "2",
+          "8"
+        ],
+        "boundaryMetrics": {
+          "boundaryMatches": 1,
+          "boundariesExpected": 2,
+          "boundariesActual": 2,
+          "boundarySymmetricDifference": 2,
+          "boundaryError": 0.5,
+          "exactCodes": false
+        },
+        "plaintextA": "AND",
+        "plaintextB": "NAD",
+        "plaintextError": 0.6667,
+        "meaning": "Two readings of the same digits differ in one boundary and in two letters. The two errors are different measurements and are reported apart."
+      }
+    },
+    "languageAndDomainShift": {
+      "passages": [
+        {
+          "id": "montaigne-essais-i-holdout-1",
+          "split": "test",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 2.637,
+          "letters": 311,
+          "ranking": [
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -9.204,
+              "coverage": 0.9708
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.841,
+              "coverage": 0.5779
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -12.202,
+              "coverage": 0.5584
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "montaigne-essais-i-holdout-2",
+          "split": "test",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 2.82,
+          "letters": 319,
+          "ranking": [
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -8.666,
+              "coverage": 0.9842
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.486,
+              "coverage": 0.6203
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.692,
+              "coverage": 0.6582
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "montaigne-essais-i-holdout-3",
+          "split": "test",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 3.184,
+          "letters": 319,
+          "ranking": [
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -9.093,
+              "coverage": 0.9715
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -12.277,
+              "coverage": 0.5285
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -12.391,
+              "coverage": 0.557
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "dante-commedia-holdout-1",
+          "split": "test",
+          "expectedProfile": "historical-italian-1320",
+          "decided": true,
+          "choice": "historical-italian-1320",
+          "correct": true,
+          "margin": 2.395,
+          "letters": 315,
+          "ranking": [
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -8.861,
+              "coverage": 0.9968
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.257,
+              "coverage": 0.6635
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.395,
+              "coverage": 0.7244
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "dante-commedia-holdout-2",
+          "split": "test",
+          "expectedProfile": "historical-italian-1320",
+          "decided": true,
+          "choice": "historical-italian-1320",
+          "correct": true,
+          "margin": 2.328,
+          "letters": 315,
+          "ranking": [
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -8.92,
+              "coverage": 0.984
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.247,
+              "coverage": 0.7436
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.617,
+              "coverage": 0.6346
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "dante-commedia-holdout-3",
+          "split": "test",
+          "expectedProfile": "historical-italian-1320",
+          "decided": true,
+          "choice": "historical-italian-1320",
+          "correct": true,
+          "margin": 2.204,
+          "letters": 311,
+          "ranking": [
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -9.164,
+              "coverage": 0.987
+            },
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -11.368,
+              "coverage": 0.7045
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.843,
+              "coverage": 0.6656
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-1",
+          "split": "test",
+          "expectedProfile": "historical-latin-classical",
+          "decided": true,
+          "choice": "historical-latin-classical",
+          "correct": true,
+          "margin": 2.257,
+          "letters": 343,
+          "ranking": [
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -8.979,
+              "coverage": 0.9618
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.235,
+              "coverage": 0.7176
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.356,
+              "coverage": 0.7324
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-2",
+          "split": "test",
+          "expectedProfile": "historical-latin-classical",
+          "decided": true,
+          "choice": "historical-latin-classical",
+          "correct": true,
+          "margin": 2.366,
+          "letters": 342,
+          "ranking": [
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -8.864,
+              "coverage": 0.9558
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.23,
+              "coverage": 0.7316
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.255,
+              "coverage": 0.7522
+            }
+          ],
+          "abstentionReasons": []
+        },
+        {
+          "id": "caesar-bello-gallico-holdout-3",
+          "split": "test",
+          "expectedProfile": "historical-latin-classical",
+          "decided": true,
+          "choice": "historical-latin-classical",
+          "correct": true,
+          "margin": 2.608,
+          "letters": 338,
+          "ranking": [
+            {
+              "id": "historical-latin-classical",
+              "meanLogProbability": -9.151,
+              "coverage": 0.9642
+            },
+            {
+              "id": "historical-french-1580",
+              "meanLogProbability": -11.759,
+              "coverage": 0.7134
+            },
+            {
+              "id": "historical-italian-1320",
+              "meanLogProbability": -11.833,
+              "coverage": 0.6627
+            }
+          ],
+          "abstentionReasons": []
+        }
+      ],
+      "controls": [
+        {
+          "id": "absent-language-english",
+          "note": "English has no profile. Any decision here is a false positive.",
+          "expectedProfile": null,
+          "decided": false,
+          "choice": null,
+          "correct": true,
+          "margin": 0.138,
+          "letters": 202,
+          "abstentionReasons": [
+            "Margin 0.138 is below the declared 0.8.",
+            "Best profile covers only 45.7% of this text’s quadgrams; at least 75% are required."
+          ]
+        },
+        {
+          "id": "modern-french-domain-shift",
+          "note": "Right language, wrong period. A profile names both; ranking it first is correct about the language and silent about the period.",
+          "expectedProfile": "historical-french-1580",
+          "decided": true,
+          "choice": "historical-french-1580",
+          "correct": true,
+          "margin": 1.71,
+          "letters": 202,
+          "abstentionReasons": []
+        },
+        {
+          "id": "random-control",
+          "note": "No planted language. Abstention is the only correct outcome.",
+          "expectedProfile": null,
+          "decided": false,
+          "choice": null,
+          "correct": true,
+          "margin": 0.157,
+          "letters": 55,
+          "abstentionReasons": [
+            "Margin 0.157 is below the declared 0.8.",
+            "Best profile covers only 0.0% of this text’s quadgrams; at least 75% are required."
+          ]
+        }
+      ],
+      "summary": {
+        "denominator": 9,
+        "decided": 9,
+        "abstained": 0,
+        "correctWhenDecided": 9,
+        "perLanguage": {
+          "historical-french-1580": {
+            "denominator": 3,
+            "decided": 3,
+            "correct": 3
+          },
+          "historical-italian-1320": {
+            "denominator": 3,
+            "decided": 3,
+            "correct": 3
+          },
+          "historical-latin-classical": {
+            "denominator": 3,
+            "decided": 3,
+            "correct": 3
+          }
+        }
+      },
+      "unresolvedCoverage": "German, Spanish, English and every other language in the historical record have no profile. A text in one of them can only be abstained on or mis-assigned; it can never be identified."
+    }
+  },
+  "limits": [
+    "Held-out historical passages come from the same works and authors used to build the profiles. They are unseen by the model but are not independent source documents.",
+    "Three languages have profiles. Everything else in the historical record is uncovered.",
+    "Budgets are small enough to run inside a test suite. A larger budget is not reported here and would not change the conclusions about which task is which.",
+    "Runtime and heap figures are machine-dependent Node.js measurements around a single call, not peak resident size. The reproducibility check deliberately ignores them; every other recorded result must match exactly.",
+    "Nothing in this suite is a blind benchmark, and a public fixture does not become one by being renamed."
+  ]
+}

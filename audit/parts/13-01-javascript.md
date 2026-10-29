@@ -1,6 +1,6 @@
 # javascript appendix 1
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -526,8 +526,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/artifact-cards-data.min.js`
-- Served SHA-256: `7476a7f0c6ac697bff8fc43e42cd6d96db4edc94d0d6f8c033bfc55367164598`
-- Readable-source SHA-256: `a307cf5f0a376ace446edfe5b7f4b197ddaa997812829278be2c0be83d9ee31e`
+- Served SHA-256: `7c06bbd8f43c5e15c87216234017f1c00af20b41f55355ccc7c722e8b12b9687`
+- Readable-source SHA-256: `7932b5417c0acaf74a03a35cbd20c3bd489adac964942634e6bd82536cb14f30`
 
 
 ```javascript
@@ -2779,11 +2779,11 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       "family": "Firmware forensics",
       "region": "Finland / Netherlands",
       "usedBy": "Nokia DA-8520 / USFA UA-8295 terminal users",
-      "keyType": "See the source-scope note; full-paper technical details are not verified here",
-      "keyIdea": "A preprint case study separating cryptanalytic findings from inferences about backdoor design.",
+      "keyType": "15-character user key plus a 5-character nonce derive a 56-bit key",
+      "keyIdea": "A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.",
       "trust": null,
       "securityFailure": null,
-      "modernLesson": "Distinguish the verified research question from unverified implementation details and inferences about intent."
+      "modernLesson": "Separate what was observed in firmware, what was implemented as an attack, what is conditional inference, and what is still open."
     },
     "venona": {
       "name": "VENONA Project",

@@ -180,6 +180,12 @@ Z → 99                 (1 symbol,  ~0.07% freq)</pre>
   </div>
 </div>
 
+<section class="panel" aria-labelledby="pooled-entropy-title"><div class="panel-head"><h2 class="panel-title" id="pooled-entropy-title">How Many Codes Is the Reader Facing?</h2></div><div class="panel-body">
+<p>A homophonic key is usually described by how many code symbols it holds, and that number does the work. With 26 plaintext letters and at most five homophones each, one fixed key has <strong>at most 130 code types</strong>, so each code symbol carries at most <strong>log<sub>2</sub>&nbsp;130 &asymp; 7.022 bits</strong> — and only if all 130 were equally likely, which proportional allocation does not achieve.</p>
+<p>Research collections are built by encrypting many texts, each under its own independently generated key. Pool all that ciphertext and the measured alphabet becomes much larger: eleven thousand codes gives log<sub>2</sub>&nbsp;11000 &asymp; 13.425 bits. <strong>That is a statistic about the collection, not about the letter in front of you.</strong> An attacker who holds one message still faces one key with its own small set of codes. Growing the pool cannot make a single message harder to read, and a cryptanalytic result that improves as the pool grows is measuring the pool.</p>
+<p>The worked, fully enumerable version of this &mdash; and why a unicity estimate neither certifies a proposed reading nor promises an efficient solver &mdash; is in <a href="../hall-of-foundations/entropy.html#pooled-entropy">the entropy exhibit</a>.</p>
+</div></section>
+
 <!-- Related Exhibits -->
 <section class="panel" aria-labelledby="audit-reading-title"><div class="panel-head"><h2 class="panel-title" id="audit-reading-title">Sources and Reading</h2></div><div class="panel-body"><p><em>Handbook of Applied Cryptography</em>, Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone (1997), §7.3.2, p.240: proportional homophone sets and residual statistics. <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, David Kahn (revised edition, 1996), “The Rise of the West”: the Mantuan 1401 example and the uncertain transmission of cryptanalytic knowledge.</p></div></section>
 

@@ -1,6 +1,6 @@
 # javascript appendix 5
 
-Snapshot: `96e6d4efcb2cadce34bdfbe4bcac2e884472e619`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/learning-path.js
 
@@ -1517,8 +1517,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-language-model.js`
-- Served SHA-256: `2621e72bf6124d1d0e864d7ff643bcac62cbb22ae56a4cb0be70388f6129a492`
-- Readable-source SHA-256: `2621e72bf6124d1d0e864d7ff643bcac62cbb22ae56a4cb0be70388f6129a492`
+- Served SHA-256: `e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb`
+- Readable-source SHA-256: `e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb`
 
 
 ```javascript
@@ -1543,8 +1543,69 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     }
     fitness.modelId=data.id;return{fitness,id:data.id};
   }
-  if(typeof module!=='undefined'&&module.exports)module.exports={build};
-  global.MuseumResearchLanguage={build};
+  // ── Versioned historical-language profiles ──────────────────────────────
+  // Each profile scores letters A–Z under its own corpus. Scores from different
+  // profiles are NOT comparable as raw likelihoods, so comparison uses the mean
+  // log-probability per letter and reports a margin, never a probability.
+  function profileScorer(p){
+    const qfloor=Math.log(p.floorCount/p.quadTotal),tfloor=Math.log(p.floorCount/p.triTotal);
+    const quad=new Float64Array(26**4).fill(qfloor),tri=new Float64Array(26**3).fill(tfloor);
+    const seenQuad=new Uint8Array(26**4);
+    p.quad.forEach(([i,n])=>{quad[i]=Math.log(n/p.quadTotal);seenQuad[i]=1;});
+    p.tri.forEach(([i,n])=>{tri[i]=Math.log(n/p.triTotal);});
+    const letterLogs=p.letters.map(n=>Math.log((n||p.floorCount)/p.letterTotal));
+    function read(text){
+      const n=text.length,counts=new Uint16Array(26);let score=0,last=0,grams=0,seen=0;
+      for(let i=0;i<n;i++){
+        const c=text.charCodeAt(i)-65;
+        if(c<0||c>25)throw new Error('Language profiles accept uppercase A–Z only.');
+        counts[c]++;last=(last%17576)*26+c;
+        if(i>=3){score+=quad[last];grams++;if(seenQuad[last])seen++;}
+        else if(i===2&&n===3)score+=tri[last];
+      }
+      for(let c=0;c<26;c++)if(counts[c])score-=p.frequencyPenalty*counts[c]*(Math.log(counts[c]/n)-letterLogs[c]);
+      return{score,letters:n,grams,coverage:grams?seen/grams:0,meanLogProbability:n?score/n:0};
+    }
+    function fitness(text){return read(text).score;}
+    fitness.modelId=p.id;
+    // Decomposable view for the segmentation lattice: the increment a reading adds,
+    // given the text before it. Exact for this quadgram sum apart from the declared
+    // unigram-distribution penalty, which depends on the whole string.
+    fitness.step=function(prefix,reading){
+      if(!reading)return 0;
+      const a=prefix?read(prefix).score:0,b=read(prefix+reading).score;
+      return b-a;
+    };
+    return{id:p.id,language:p.language,period:p.period,fitness,read,meta:p};
+  }
+  function buildProfiles(data){
+    if(!data||data.id!=='museum-language-profiles-v1'||data.version!==1)throw new Error('Unsupported historical-language profile set.');
+    const profiles=data.profiles.map(profileScorer),byId={};
+    profiles.forEach(p=>{byId[p.id]=p;});
+    const rule=data.abstention;
+    // Compare language hypotheses, and decline when the evidence does not separate them.
+    function compare(text,ids){
+      const chosen=(ids&&ids.length?ids:profiles.map(p=>p.id)).map(id=>{
+        const p=byId[id];if(!p)throw new Error('Unknown language profile: '+id);return p;});
+      if(chosen.length<2)throw new Error('Comparing language hypotheses needs at least two profiles.');
+      const rows=chosen.map(p=>{const r=p.read(text);
+        return{id:p.id,language:p.language,period:p.period,meanLogProbability:r.meanLogProbability,
+          coverage:r.coverage,letters:r.letters};});
+      rows.sort((a,b)=>b.meanLogProbability-a.meanLogProbability);
+      const margin=rows.length>1?rows[0].meanLogProbability-rows[1].meanLogProbability:0;
+      const reasons=[];
+      if(rows[0].letters<rule.minimumLetters)reasons.push('Input is '+rows[0].letters+' letters; at least '+rule.minimumLetters+' are required.');
+      if(margin<rule.minimumMargin)reasons.push('Margin '+margin.toFixed(3)+' is below the declared '+rule.minimumMargin+'.');
+      if(rows[0].coverage<rule.minimumCoverage)reasons.push('Best profile covers only '+(100*rows[0].coverage).toFixed(1)+'% of this text\u2019s quadgrams; at least '+(100*rule.minimumCoverage).toFixed(0)+'% are required.');
+      return{ranking:rows,margin,decided:reasons.length===0,
+        choice:reasons.length?null:rows[0].id,abstentionReasons:reasons,
+        rule:rule,
+        meaning:'Ranking by mean log-probability per letter under each profile. This is not a probability that the text is in that language, and a language absent from the profile set can never be chosen.'};
+    }
+    return{id:data.id,version:data.version,profiles,byId,compare,abstention:rule,baseline:data.baseline};
+  }
+  if(typeof module!=='undefined'&&module.exports)module.exports={build,buildProfiles};
+  global.MuseumResearchLanguage={build,buildProfiles};
 })(typeof window!=='undefined'?window:globalThis);
 ```
 
@@ -1556,8 +1617,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-model.js`
-- Served SHA-256: `8b7b94977421047d3cb360dad250af8513c3d7d350c141b0d4f1fc466e42b174`
-- Readable-source SHA-256: `8b7b94977421047d3cb360dad250af8513c3d7d350c141b0d4f1fc466e42b174`
+- Served SHA-256: `883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128`
+- Readable-source SHA-256: `883c85c526bb4322319ecb47c42e3171d63693290605eedff63d94f081c12128`
 
 
 ```javascript
@@ -1590,7 +1651,8 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   function create(raw = '') {
     string(raw, 10000, 'Transcription');
     return { version: 2, kind: KIND, raw, mode: 'symbols', width: 1, annotations: {}, revision: 1,
-      source: source({}), revisions: [{ id: 1, raw, reason: 'Initial transcription' }], spans: [], layers: [], keys: [], relations: [] };
+      source: source({}), revisions: [{ id: 1, raw, reason: 'Initial transcription' }], spans: [], layers: [], keys: [], relations: [],
+      images: [], inventory: null, hypotheses: [] };
   }
   // Legacy positions count Unicode code points, not UTF-16 code units.
   function legacyTokens(raw, mode, width) {
@@ -1634,6 +1696,16 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     check(revisions.has(1), 'The original transcription must be retained.');
     check(d.revisions.every((r,i) => r.id === i+1) && d.revision === d.revisions.length, 'Revisions must be consecutive, with the latest revision current.');
     d.annotations = {}; // v2 annotations use source spans, never mutable token indices.
+    // Version 2 records written before these existed simply have none of them.
+    if (!Array.isArray(d.images)) d.images = [];
+    if (!Array.isArray(d.hypotheses)) d.hypotheses = [];
+    if (d.inventory === undefined) d.inventory = null;
+    const imageIds = new Set();
+    list(d.images, 50, 'images').forEach(i => {
+      const rec = imageRecord(i);
+      check(!imageIds.has(rec.id), 'Duplicate image ID.'); imageIds.add(rec.id);
+      Object.assign(i, rec);
+    });
     const ids = new Set();
     function unique(id) { string(id, 100, 'Record ID'); check(/^[A-Za-z][A-Za-z0-9_-]*$/.test(id) && !/^revision-/.test(id) && !ids.has(id), 'Invalid, reserved or duplicate record ID.'); ids.add(id); }
     list(d.spans, 500, 'spans').forEach(s => {
@@ -1648,6 +1720,9 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       check(s.uncertain || (!s.alternatives.length || (s.reading && s.reason.trim())), 'Resolving alternative readings requires a choice and reason.');
       if (s.region !== null) {
         string(s.imageName, 500, 'Region image filename'); check(s.imageName.trim(), 'An image region needs its recorded source filename.');
+        s.imageId = string(s.imageId || '', 100, 'Region image ID');
+        check(!s.imageId || imageIds.has(s.imageId), 'An image region must reference a recorded image.');
+        check(!s.imageId || d.images.find(i => i.id === s.imageId).name === s.imageName, 'The region filename must match its image record.');
         list(s.region, 4, 'image region'); check(s.region.length === 4 && s.region.every(n => Number.isFinite(n) && n >= 0 && n <= 1), 'Image region uses four fractions between 0 and 1.');
         check(s.region[2] > 0 && s.region[3] > 0 && s.region[0] + s.region[2] <= 1.00000001 && s.region[1] + s.region[3] <= 1.00000001, 'Image region must fit inside the image.');
       }
@@ -1668,6 +1743,52 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       check(r.from.trim() && r.to.trim() && r.evidence.trim(), 'Relationships need two identifiers and supporting evidence.');
       check(['transcribes', 'applies-key', 'supports', 'alternative-to'].includes(r.type), 'Unsupported relationship type.');
     });
+    if (d.inventory !== null) {
+      const inv = d.inventory;
+      check(inv && typeof inv === 'object' && !Array.isArray(inv), 'Invalid symbol inventory.');
+      check(revisions.has(inv.revision), 'The symbol inventory has no source revision.');
+      check(INVENTORY_TOKENS.includes(inv.tokens), 'Unknown inventory tokenization.');
+      integer(inv.width, 1, 8, 'inventory token width'); integer(inv.nextId, 1, 5000, 'inventory counter');
+      const src = inventoryTokens(revisions.get(inv.revision).raw, inv.tokens, inv.width);
+      list(inv.occurrences, 2000, 'inventory occurrences');
+      check(inv.occurrences.length === src.length, 'The symbol inventory does not match its source revision.');
+      inv.occurrences.forEach((o, i) => check(o.index === i && o.start === src[i].start && o.end === src[i].end && o.literal === src[i].literal,
+        'Inventory occurrence ' + i + ' no longer matches the recorded source.'));
+      const assigned = new Set(), classIds = new Set();
+      list(inv.classes, 500, 'symbol classes').forEach(c => {
+        check(/^class-[1-9][0-9]*$/.test(c.id) && !classIds.has(c.id), 'Invalid or duplicate symbol-class ID.'); classIds.add(c.id);
+        string(c.label, 200, 'Class label'); check(c.label.trim(), 'Every symbol class needs a label.');
+        string(c.note, 4000, 'Class note'); check(c.note.trim(), 'Every symbol class records why it exists.');
+        list(c.occurrences, 2000, 'class occurrences').forEach(i => {
+          integer(i, 0, inv.occurrences.length - 1, 'occurrence index');
+          check(!assigned.has(i), 'An occurrence belongs to exactly one symbol class.'); assigned.add(i); });
+        check(c.occurrences.length > 0, 'A symbol class cannot be empty.');
+      });
+      check(assigned.size === inv.occurrences.length, 'Every occurrence must belong to a symbol class.');
+      list(inv.history, 2000, 'inventory history').forEach((h, i) => {
+        check(h.step === i + 1, 'Inventory decision history must stay in order.');
+        check(INVENTORY_OPS.includes(h.op), 'Unknown inventory operation.');
+        string(h.detail, 4000, 'History detail'); check(h.detail.trim(), 'Every inventory decision records what changed.'); });
+      check(inv.history.length > 0, 'The inventory must retain its decision history.');
+    }
+    list(d.hypotheses, 100, 'hypotheses').forEach(h => {
+      unique(h.id); check(/^hypothesis-[1-9][0-9]*$/.test(h.id), 'Invalid hypothesis ID.');
+      string(h.claim, 2000, 'Hypothesis claim'); check(h.claim.trim(), 'A hypothesis needs a claim.');
+      check(CONFIDENCE.includes(h.confidence), 'Use one of the declared confidence words: ' + CONFIDENCE.join(', ') + '.');
+      ['supports', 'contradicts'].forEach(field => list(h[field], 50, field + ' evidence').forEach(e => {
+        check(e && typeof e === 'object' && !Array.isArray(e), 'Evidence entries are objects.');
+        string(e.ref, 2000, 'Evidence reference'); string(e.note, 2000, 'Evidence note');
+        check(e.ref.trim() && e.note.trim(), 'Each piece of evidence needs an identifier and a note.'); }));
+      list(h.alternatives, 20, 'unresolved alternatives').forEach(a => string(a, 500, 'Unresolved alternative'));
+      string(h.note, 2000, 'Hypothesis note');
+      // Applying a key cleanly is not evidence of authorship, attribution or date.
+      check(h.confidence !== 'well-supported' || h.supports.length >= 2,
+        'Calling a claim well-supported needs at least two separately recorded pieces of supporting evidence.');
+      check(h.confidence !== 'well-supported' || h.contradicts.length === 0,
+        'Recorded counterevidence must be answered before a claim is called well-supported.');
+      check(h.confidence !== 'contradicted' || h.contradicts.length > 0,
+        'A contradicted claim must record the evidence against it.');
+    });
     return d;
   }
   function revise(d, raw, reason) {
@@ -1681,7 +1802,11 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     d = validate(d); const s = copy(input);
     s.id = 'span-' + (1 + Math.max(0, ...d.spans.map(x => Number(x.id.split('-').pop()) || 0)));
     s.revision = d.revision; s.literal = Array.from(d.raw).slice(s.start, s.end).join('');
-    if (s.region !== null) s.imageName = d.source.imageName;
+    // A region names the image record it belongs to; the filename follows from it.
+    if (s.region !== null) {
+      if (s.imageId) { const image = d.images.find(i => i.id === s.imageId); check(image, 'An image region must reference a recorded image.'); s.imageName = image.name; }
+      else s.imageName = d.source.imageName;
+    }
     d.spans.push(s); return validate(d);
   }
   function addLayer(d, kind, parent, text, note) {
@@ -1711,27 +1836,179 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       else text += e.values[0];
     }); return { text, unresolved, tokens: tokens.length };
   }
-  function segment(digits, key, boundaries = [], limit = 10000, score = () => 0) {
-    check(typeof digits === 'string' && /^[0-9]{1,80}$/.test(digits), 'Use 1–80 digits without spaces; the source will not be normalized.');
-    check(key && typeof key === 'object' && !Array.isArray(key), 'Supply a code-to-reading object.');
-    const entries = Object.entries(key); check(entries.length > 0 && entries.length <= 64, 'Use 1–64 numerical key entries.');
-    entries.forEach(([c, p]) => { check(/^[0-9]{1,6}$/.test(c), 'Codes must contain 1–6 digits.'); string(p, 50, 'Code reading'); check(p.length > 0, 'Code readings cannot be empty.'); });
-    integer(limit, 1, 20000, 'path budget'); list(boundaries, 79, 'locked boundaries').forEach(b => integer(b, 1, digits.length - 1, 'locked boundary'));
-    const paths = []; let visited = 0, complete = true, total = 0;
-    function visit(pos, codes, text) {
-      if (visited >= limit) { complete = false; return; } visited++;
-      if (pos === digits.length) {
-        const value = score(text); check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
-        paths.push({ codes, text, score: value }); total++;
-        paths.sort((a,b) => b.score - a.score || a.codes.join('|').localeCompare(b.codes.join('|'))); if (paths.length > 32) paths.pop(); return;
+  // ── Numerical segmentation ────────────────────────────────────────────────
+  // A typed entry distinguishes a letter, a syllable, a whole word, a name and a
+  // null that deliberately contributes nothing. A bare string stays one reading.
+  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'null'];
+  const SEG_LINES = ['boundary', 'span'];
+  const COUNT_CAP = 1e15;
+  function normalizeCodes(key) {
+    const raw = Object.entries(key);
+    check(raw.length > 0 && raw.length <= 64, 'Use 1–64 numerical key entries.');
+    return raw.map(([code, value]) => {
+      check(/^[0-9]{1,6}$/.test(code), 'Codes must contain 1–6 digits.');
+      if (typeof value === 'string') {
+        string(value, 50, 'Code reading'); check(value.length > 0, 'Code readings cannot be empty.');
+        return { code, type: Array.from(value).length === 1 ? 'letter' : 'word', values: [value], note: '' };
       }
-      for (const [code, reading] of entries) {
-        const end = pos + code.length;
-        if (digits.startsWith(code, pos) && !boundaries.some(b => b > pos && b < end)) visit(end, codes.concat(code), text + reading);
-        if (!complete) return;
+      check(value && typeof value === 'object' && !Array.isArray(value), 'A code entry is a string or a typed object.');
+      check(SEG_TYPES.includes(value.type), 'Unknown numerical code type.');
+      const values = list(value.values || [], 8, 'code readings').map(v => string(v, 50, 'Code reading'));
+      if (value.type === 'null') check(values.length === 0, 'A null code contributes no reading.');
+      else check(values.length > 0 && values.every(v => v.length > 0), 'Supply at least one reading.');
+      return { code, type: value.type, values, note: string(value.note || '', 200, 'Code note') };
+    });
+  }
+  const codeReading = e => (e.type === 'null' ? '' : e.values[0]);
+  // Lattice segmentation. Backward reachability prunes dead ends before any path is
+  // built. When every complete path fits the node budget the enumeration is exhaustive
+  // and the retained set is globally best; otherwise a per-state beam bounds the work
+  // and the global optimum is no longer guaranteed. The result says which happened.
+  function segment(digits, key, boundaries = [], limit = 10000, score = () => 0, options = {}) {
+    check(typeof digits === 'string' && /^[0-9](?:[0-9\n]*[0-9])?$/.test(digits) && digits.replace(/\n/g, '').length <= 80,
+      'Use 1–80 digits without spaces; line breaks are allowed and kept as source structure. The source will not be normalized.');
+    check(key && typeof key === 'object' && !Array.isArray(key), 'Supply a code-to-reading object.');
+    const entries = normalizeCodes(key);
+    integer(limit, 1, 20000, 'path budget');
+    const opts = options && typeof options === 'object' ? options : {};
+    const policy = opts.lineBreaks || 'boundary';
+    check(SEG_LINES.includes(policy), 'Unknown line-break policy.');
+    const beam = integer(opts.beam === undefined ? 32 : opts.beam, 1, 64, 'retained-path limit');
+    const n = digits.length;
+    list(boundaries, 159, 'locked boundaries').forEach(b => integer(b, 1, n - 1, 'locked boundary'));
+    const cuts = new Set(boundaries);
+    // Line breaks are source structure, not data. Under the default policy they are
+    // mandatory cuts that no code may cross; under 'span' a code may continue across
+    // one. Either way the break itself is never consumed, so the original digits and
+    // their line layout survive in every path.
+    // Line positions are tracked only for the ambiguity report. Whether a code may
+    // cross one is decided in exactly one place, matchAt below, so a change there
+    // cannot be masked by a second mechanism quietly enforcing the same rule.
+    const lineCuts = new Set();
+    if (policy === 'boundary') for (let i = 0; i < n; i++) if (digits[i] === '\n') { lineCuts.add(i); lineCuts.add(i + 1); }
+    // Returns the end position of a code matched from pos, or -1.
+    function matchAt(pos, code) {
+      let i = pos, k = 0;
+      while (k < code.length) {
+        if (i >= n) return -1;
+        if (digits[i] === '\n') { if (policy !== 'span') return -1; i++; continue; }
+        if (digits[i] !== code[k]) return -1;
+        i++; k++;
+      }
+      return i;
+    }
+    const edges = [];
+    for (let pos = 0; pos < n; pos++) {
+      edges[pos] = [];
+      if (digits[pos] === '\n') { edges[pos].push({ entry: null, end: pos + 1 }); continue; }
+      for (const e of entries) {
+        const end = matchAt(pos, e.code);
+        if (end < 0) continue;
+        let blocked = false;
+        for (let b = pos + 1; b < end; b++) if (cuts.has(b)) { blocked = true; break; }
+        if (!blocked) edges[pos].push({ entry: e, end });
       }
     }
-    visit(0, [], ''); return { paths, visited, complete, total, retained: paths.length, limit, boundaries: boundaries.slice() };
+    const reach = new Array(n + 1).fill(false), bwd = new Array(n + 1).fill(0);
+    reach[n] = true; bwd[n] = 1;
+    for (let pos = n - 1; pos >= 0; pos--) {
+      let sum = 0;
+      for (const edge of edges[pos]) if (reach[edge.end]) sum += bwd[edge.end];
+      bwd[pos] = Math.min(sum, COUNT_CAP); reach[pos] = sum > 0;
+    }
+    const fwd = new Array(n + 1).fill(0); fwd[0] = 1;
+    for (let pos = 0; pos < n; pos++) {
+      if (!fwd[pos] || !reach[pos]) continue;
+      for (const edge of edges[pos]) if (reach[edge.end]) fwd[edge.end] = Math.min(fwd[edge.end] + fwd[pos], COUNT_CAP);
+    }
+    const total = bwd[0], exhaustive = total <= limit;
+    const paths = []; let visited = 0, truncated = false, beamPruned = false;
+    const order = (a, b) => b.score - a.score || a.codes.join('|').localeCompare(b.codes.join('|'));
+    function keep(codes, items, text) {
+      const value = score(text);
+      check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
+      paths.push({ codes, entries: items, text, score: value,
+        alternatives: items.filter(i => i.values.length > 1).map(i => ({ code: i.code, start: i.start, values: i.values.slice() })) });
+      paths.sort(order); if (paths.length > beam) paths.pop();
+    }
+    function step(pos, edge, codes, items, text) {
+      if (!edge.entry) return { codes: codes.concat('\n'), items, text };
+      const reading = codeReading(edge.entry);
+      // The recorded chunk is the SOURCE slice, so joining a path's chunks always
+      // reproduces the original digits, line breaks included.
+      const source = digits.slice(pos, edge.end);
+      return { codes: codes.concat(source), text: text + reading,
+        items: items.concat([{ code: edge.entry.code, source, type: edge.entry.type, reading,
+          values: edge.entry.values.slice(), start: pos, end: edge.end }]) };
+    }
+    if (exhaustive) {
+      (function walk(pos, codes, items, text) {
+        if (visited >= limit) { truncated = true; return; }
+        visited++;
+        if (pos === n) { keep(codes, items, text); return; }
+        for (const edge of edges[pos]) {
+          if (!reach[edge.end]) continue;
+          const nx = step(pos, edge, codes, items, text);
+          walk(edge.end, nx.codes, nx.items, nx.text);
+          if (truncated) return;
+        }
+      })(0, [], [], '');
+    } else {
+      const decomposable = typeof score.step === 'function';
+      const states = new Array(n + 1);
+      states[0] = [{ codes: [], items: [], text: '', score: 0 }];
+      for (let pos = 0; pos < n && !truncated; pos++) {
+        const here = states[pos];
+        if (!here || !here.length || !reach[pos]) continue;
+        if (here.length > beam) { here.sort(order); here.length = beam; beamPruned = true; }
+        for (const edge of edges[pos]) {
+          if (!reach[edge.end]) continue;
+          const bucket = states[edge.end] || (states[edge.end] = []);
+          for (const partial of here) {
+            if (visited >= limit) { truncated = true; break; }
+            visited++;
+            const nx = step(pos, edge, partial.codes, partial.items, partial.text);
+            const value = decomposable ? partial.score + score.step(partial.text, nx.text.slice(partial.text.length)) : 0;
+            check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
+            bucket.push({ codes: nx.codes, items: nx.items, text: nx.text, score: value });
+          }
+          if (truncated) break;
+        }
+      }
+      const finals = (states[n] || []).slice();
+      finals.sort(order);
+      if (finals.length > beam) beamPruned = true;
+      finals.slice(0, beam).forEach(f => keep(f.codes, f.items, f.text));
+    }
+    // The ambiguity view is read off the lattice itself, so it is exact in both modes.
+    const ambiguity = [];
+    if (total > 0) for (let p = 1; p < n; p++) {
+      const through = Math.min(fwd[p] * bwd[p], COUNT_CAP);
+      ambiguity.push({ position: p, pathsCutting: through, locked: cuts.has(p) || lineCuts.has(p),
+        forced: through >= total, impossible: through === 0,
+        startingCodes: (edges[p] || []).filter(e => e.entry && reach[e.end]).map(e => e.entry.code) });
+    }
+    const complete = exhaustive && !truncated;
+    return { paths, visited, complete, total, totalCapped: total >= COUNT_CAP, retained: paths.length, limit,
+      boundaries: boundaries.slice(), lineBreaks: policy, beam, beamPruned, ambiguity,
+      mode: exhaustive ? 'exhaustive-lattice' : 'bounded-k-best',
+      globalBestGuaranteed: complete,
+      pruning: complete
+        ? 'Backward reachability only. Every complete path was enumerated and scored, so the retained ranking is globally best.'
+        : 'Backward reachability plus a per-state beam of ' + beam + ' within a ' + limit + '-node budget. Pruning can discard the globally best path.' };
+  }
+  // Segmentation error is reported apart from plaintext error: a boundary can move
+  // without changing a letter, and a reading can change without moving a boundary.
+  function segmentMetrics(expected, actual) {
+    const bounds = codes => { const s = new Set(); let p = 0;
+      list(codes, 200, 'code sequence').forEach(c => { p += String(c).length; s.add(p); }); s.delete(p); return s; };
+    const a = bounds(expected), b = bounds(actual);
+    let shared = 0; a.forEach(x => { if (b.has(x)) shared++; });
+    const union = new Set(); a.forEach(x => union.add(x)); b.forEach(x => union.add(x));
+    return { boundaryMatches: shared, boundariesExpected: a.size, boundariesActual: b.size,
+      boundarySymmetricDifference: union.size - shared,
+      boundaryError: a.size ? (a.size - shared) / a.size : (b.size ? 1 : 0),
+      exactCodes: expected.length === actual.length && expected.every((c, i) => String(c) === String(actual[i])) };
   }
   function rng(seed) {
     let x = seed >>> 0;
@@ -1782,6 +2059,399 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       task: free.length ? 'key-recovery-candidates' : 'known-key-application', locks: copy(locks),
       model: score.modelId || 'custom-scoring-function', verified: false, scope: 'Letter homophones only; no word codes, nulls, control signs or historical-language model.' };
   }
+  // ── Images, coordinate transforms and occurrence linking ──────────────────
+  // A region is always stored in the ORIGINAL image's normalized coordinates.
+  // Crop and rotation describe only how the image is presented, so changing the
+  // presentation never rewrites a recorded region.
+  const ROTATIONS = [0, 90, 180, 270];
+  function imageRecord(x) {
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid image record.');
+    const r = {};
+    r.id = string(x.id, 100, 'Image ID');
+    check(/^[A-Za-z][A-Za-z0-9_-]*$/.test(r.id), 'Invalid image ID.');
+    r.name = string(x.name || '', 500, 'Image filename');
+    check(r.name.trim(), 'An image record needs its recorded filename.');
+    r.sha256 = string(x.sha256 || '', 64, 'Image content hash');
+    check(r.sha256 === '' || /^[0-9a-f]{64}$/.test(r.sha256), 'An image hash is 64 lowercase hexadecimal characters.');
+    r.width = integer(x.width, 1, 100000, 'image width');
+    r.height = integer(x.height, 1, 100000, 'image height');
+    r.rotation = integer(x.rotation === undefined ? 0 : x.rotation, 0, 270, 'image rotation');
+    check(ROTATIONS.includes(r.rotation), 'Rotation must be 0, 90, 180 or 270 degrees clockwise.');
+    const crop = x.crop === undefined || x.crop === null ? [0, 0, 1, 1] : x.crop;
+    list(crop, 4, 'image crop');
+    check(crop.length === 4 && crop.every(v => Number.isFinite(v) && v >= 0 && v <= 1), 'A crop uses four fractions between 0 and 1.');
+    check(crop[2] > 0 && crop[3] > 0 && crop[0] + crop[2] <= 1.00000001 && crop[1] + crop[3] <= 1.00000001, 'A crop must fit inside the image.');
+    r.crop = crop.map(Number);
+    r.note = string(x.note || '', 1000, 'Image note');
+    return r;
+  }
+  function regionToDisplay(image, region) {
+    const img = imageRecord(image);
+    list(region, 4, 'image region');
+    check(region.length === 4 && region.every(v => Number.isFinite(v)), 'A region is four finite numbers.');
+    const c = img.crop;
+    let x = (region[0] - c[0]) / c[2], y = (region[1] - c[1]) / c[3], w = region[2] / c[2], h = region[3] / c[3];
+    const visible = x + w > 1e-9 && y + h > 1e-9 && x < 1 - 1e-9 && y < 1 - 1e-9;
+    if (img.rotation === 90) { const nx = 1 - (y + h); y = x; x = nx; const t = w; w = h; h = t; }
+    else if (img.rotation === 180) { x = 1 - (x + w); y = 1 - (y + h); }
+    else if (img.rotation === 270) { const nx = y; y = 1 - (x + w); x = nx; const t = w; w = h; h = t; }
+    const clipped = x < -1e-9 || y < -1e-9 || x + w > 1 + 1e-9 || y + h > 1 + 1e-9;
+    return { visible, clipped, box: [x, y, w, h] };
+  }
+  function displayToRegion(image, box) {
+    const img = imageRecord(image);
+    list(box, 4, 'display box');
+    check(box.length === 4 && box.every(v => Number.isFinite(v)), 'A display box is four finite numbers.');
+    let x = box[0], y = box[1], w = box[2], h = box[3];
+    if (img.rotation === 90) { const nx = y; y = 1 - (x + w); x = nx; const t = w; w = h; h = t; }
+    else if (img.rotation === 180) { x = 1 - (x + w); y = 1 - (y + h); }
+    else if (img.rotation === 270) { const nx = 1 - (y + h); y = x; x = nx; const t = w; w = h; h = t; }
+    const c = img.crop;
+    return [c[0] + x * c[2], c[1] + y * c[3], w * c[2], h * c[3]];
+  }
+  // Pixel size of what the viewer sees, after cropping and rotation.
+  function displayAspect(image) {
+    const img = imageRecord(image);
+    const w = img.width * img.crop[2], h = img.height * img.crop[3];
+    return img.rotation % 180 === 0 ? { width: w, height: h } : { width: h, height: w };
+  }
+  function addImage(d, input) {
+    d = validate(d);
+    const next = copy(input || {});
+    if (!next.id) next.id = 'image-' + (d.images.length + 1);
+    check(!d.images.some(i => i.id === next.id), 'Duplicate image ID.');
+    d.images.push(imageRecord(next));
+    return validate(d);
+  }
+  // ── Symbol inventory ──────────────────────────────────────────────────────
+  const INVENTORY_TOKENS = ['whitespace', 'fixed'];
+  const INVENTORY_OPS = ['build', 'split', 'merge', 'relabel'];
+  function inventoryTokens(raw, mode, width) {
+    check(INVENTORY_TOKENS.includes(mode), 'Unknown inventory tokenization.');
+    const chars = Array.from(raw), out = [];
+    let start = -1, text = '';
+    const flush = end => { if (text) out.push({ start, end, literal: text }); text = ''; start = -1; };
+    chars.forEach((ch, i) => {
+      if (/\s/u.test(ch)) { flush(i); return; }
+      if (start < 0) start = i;
+      text += ch;
+      if (mode === 'fixed' && Array.from(text).length === width) flush(i + 1);
+    });
+    flush(chars.length);
+    return out.map((t, i) => ({ index: i, start: t.start, end: t.end, literal: t.literal }));
+  }
+  function buildInventory(d, options = {}) {
+    d = validate(d);
+    const mode = options.tokens || 'whitespace';
+    const width = mode === 'fixed' ? integer(options.width || 1, 1, 8, 'token width') : 1;
+    const tokens = inventoryTokens(d.raw, mode, width);
+    check(tokens.length > 0 && tokens.length <= 2000, 'A symbol inventory needs 1–2,000 occurrences.');
+    const byLiteral = new Map();
+    tokens.forEach(t => { if (!byLiteral.has(t.literal)) byLiteral.set(t.literal, []); byLiteral.get(t.literal).push(t.index); });
+    check(byLiteral.size <= 400, 'Use at most 400 distinct symbols in one inventory.');
+    let seq = 0;
+    const classes = Array.from(byLiteral.entries()).map(([literal, occ]) => ({
+      id: 'class-' + (++seq), label: literal,
+      note: 'Initial class: every occurrence transcribed as ' + literal + '. Not yet inspected.',
+      occurrences: occ.slice() }));
+    d.inventory = { revision: d.revision, tokens: mode, width, nextId: seq + 1, occurrences: tokens, classes,
+      history: [{ step: 1, op: 'build',
+        detail: 'Built ' + classes.length + ' classes from ' + tokens.length + ' occurrences at revision ' + d.revision +
+          '. Identical transcriptions start together; splitting them is a research decision.' }] };
+    return validate(d);
+  }
+  function requireInventory(d) { check(d.inventory, 'Build the symbol inventory before changing it.'); return d.inventory; }
+  function splitClass(d, classId, indices, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const source = inv.classes.find(c => c.id === classId);
+    check(source, 'Unknown symbol class.');
+    const chosen = Array.from(new Set(list(indices, 2000, 'selected occurrences')
+      .map(i => integer(i, 0, inv.occurrences.length - 1, 'occurrence index')))).sort((a, b) => a - b);
+    check(chosen.length > 0, 'Select at least one occurrence to split out.');
+    check(chosen.every(i => source.occurrences.includes(i)), 'Every selected occurrence must belong to the class being split.');
+    check(chosen.length < source.occurrences.length, 'Splitting every occurrence would empty the class; relabel it instead.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why these occurrences are a different symbol.');
+    const id = 'class-' + inv.nextId++;
+    const before = source.label;
+    source.occurrences = source.occurrences.filter(i => chosen.indexOf(i) < 0);
+    inv.classes.push({ id, label: string(label, 200, 'Class label'), note: reason, occurrences: chosen });
+    check(label.trim(), 'The new class needs a label.');
+    inv.history.push({ step: inv.history.length + 1, op: 'split',
+      detail: 'Split occurrences ' + chosen.join(', ') + ' out of ' + source.id + ' (' + before + ') into ' + id +
+        ' (' + label + '). Remaining occurrences keep their earlier assignment. Reason: ' + reason });
+    return validate(d);
+  }
+  function mergeClasses(d, ids, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const chosen = list(ids, 50, 'merged classes').map(id => {
+      const c = inv.classes.find(x => x.id === id); check(c, 'Unknown symbol class.'); return c; });
+    check(new Set(ids).size === chosen.length, 'List each merged class once.');
+    check(chosen.length >= 2, 'Select at least two classes to merge.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why these are one symbol.');
+    check(typeof label === 'string' && label.trim(), 'The merged class needs a label.');
+    const kept = chosen[0];
+    const prior = chosen.map(c => c.id + ' labelled ' + c.label + ' (' + c.note + ')').join(' | ');
+    const occ = []; chosen.forEach(c => c.occurrences.forEach(i => occ.push(i)));
+    kept.occurrences = Array.from(new Set(occ)).sort((a, b) => a - b);
+    kept.label = string(label, 200, 'Class label'); kept.note = reason;
+    inv.classes = inv.classes.filter(c => c === kept || chosen.indexOf(c) < 0);
+    inv.history.push({ step: inv.history.length + 1, op: 'merge',
+      detail: 'Merged into ' + kept.id + ' as ' + label + '. Earlier assignments were: ' + prior + '. Reason: ' + reason });
+    return validate(d);
+  }
+  function relabelClass(d, classId, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const c = inv.classes.find(x => x.id === classId); check(c, 'Unknown symbol class.');
+    check(typeof label === 'string' && label.trim(), 'A class needs a label.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why the label changed.');
+    const before = c.label;
+    c.label = string(label, 200, 'Class label'); c.note = reason;
+    inv.history.push({ step: inv.history.length + 1, op: 'relabel',
+      detail: 'Relabelled ' + classId + ' from ' + before + ' to ' + label + '. Reason: ' + reason });
+    return validate(d);
+  }
+  // Every occurrence of a class, with the spans and image regions recorded over it.
+  function classOccurrences(d, classId) {
+    d = validate(d); const inv = requireInventory(d);
+    const c = inv.classes.find(x => x.id === classId); check(c, 'Unknown symbol class.');
+    return c.occurrences.map(i => {
+      const o = inv.occurrences[i];
+      const spans = d.spans.filter(s => s.revision === inv.revision && s.start < o.end && s.end > o.start);
+      return { index: i, start: o.start, end: o.end, literal: o.literal,
+        spans: spans.map(s => s.id),
+        regions: spans.filter(s => s.region).map(s => ({ span: s.id, imageId: s.imageId || '', imageName: s.imageName || '', region: s.region.slice() })) };
+    });
+  }
+  // The reverse direction: which transcription characters a recorded region covers.
+  function regionOccurrences(d, spanId) {
+    d = validate(d);
+    const s = d.spans.find(x => x.id === spanId); check(s, 'Unknown evidence span.');
+    const inv = d.inventory;
+    const classes = [];
+    if (inv && inv.revision === s.revision) inv.classes.forEach(c => {
+      const hit = c.occurrences.filter(i => { const o = inv.occurrences[i]; return o.start < s.end && o.end > s.start; });
+      if (hit.length) classes.push({ id: c.id, label: c.label, occurrences: hit });
+    });
+    return { span: s.id, revision: s.revision, start: s.start, end: s.end, literal: s.literal,
+      imageId: s.imageId || '', imageName: s.imageName || '', region: s.region ? s.region.slice() : null, classes };
+  }
+  // ── Hypothesis register ───────────────────────────────────────────────────
+  const CONFIDENCE = ['unsupported', 'possible', 'probable', 'well-supported', 'contradicted'];
+  function addHypothesis(d, input) {
+    d = validate(d);
+    const h = copy(input || {});
+    h.id = 'hypothesis-' + (d.hypotheses.length + 1);
+    h.supports = h.supports || []; h.contradicts = h.contradicts || [];
+    h.alternatives = h.alternatives || []; h.note = h.note || '';
+    d.hypotheses.push(h);
+    return validate(d);
+  }
+  // ── Investigation bundle ──────────────────────────────────────────────────
+  const BUNDLE_KIND = 'cipher-museum-investigation';
+  const BUNDLE_VERSION = 1;
+  const MODEL_BUILD = 'research-model-2026-10-29';
+  // A declared NON-cryptographic 64-bit fingerprint. It detects a changed input so
+  // stale results can be invalidated; it is not an integrity or authenticity check.
+  function fingerprint(text) {
+    string(text, 4000000, 'Fingerprint input');
+    let a = 0x811c9dc5, b = 0x01000193;
+    for (let i = 0; i < text.length; i++) {
+      const c = text.charCodeAt(i);
+      a = Math.imul(a ^ c, 16777619) >>> 0;
+      b = Math.imul(b + c + i, 2246822519) >>> 0; b = (b ^ b >>> 13) >>> 0;
+    }
+    return (a >>> 0).toString(16).padStart(8, '0') + (b >>> 0).toString(16).padStart(8, '0');
+  }
+  function lockMap(x, label) {
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid ' + label + '.');
+    const out = {};
+    Object.entries(x).forEach(([k, v]) => { string(k, 40, label + ' symbol'); check(/^[A-Z]$/.test(v), 'A lock names one A–Z letter.'); out[k] = v; });
+    check(Object.keys(out).length <= 100, 'Too many locked mappings.');
+    return out;
+  }
+  function searchState(s) {
+    check(s && typeof s === 'object' && !Array.isArray(s), 'Invalid solver state.');
+    return { algorithm: string(s.algorithm || 'annealing', 40, 'Solver algorithm'),
+      raw: string(s.raw || '', 12000, 'Solver input'),
+      seed: integer(s.seed === undefined ? 0 : s.seed, 0, 4294967295, 'seed'),
+      steps: integer(s.steps === undefined ? 1 : s.steps, 1, 100000, 'search budget'),
+      beam: integer(s.beam === undefined ? 0 : s.beam, 0, 2000, 'beam width'),
+      locks: lockMap(s.locks || {}, 'locked key'),
+      elapsedMs: integer(s.elapsedMs === undefined ? 0 : s.elapsedMs, 0, 86400000, 'elapsed time'),
+      // Recorded at the time the result was produced, so a later edit shows up as stale.
+      inputFingerprint: s.inputFingerprint === undefined
+        ? fingerprint(string(s.raw || '', 12000, 'Solver input'))
+        : string(s.inputFingerprint, 32, 'Solver input fingerprint') };
+  }
+  function segmentationState(s) {
+    check(s && typeof s === 'object' && !Array.isArray(s), 'Invalid segmentation state.');
+    return { digits: string(s.digits || '', 200, 'Digit stream'),
+      key: (() => { const k = s.key || {}; normalizeCodes(Object.keys(k).length ? k : { 0: 'A' }); return copy(k); })(),
+      boundaries: list(s.boundaries || [], 159, 'locked boundaries').map(b => integer(b, 1, 200, 'locked boundary')),
+      budget: integer(s.budget === undefined ? 10000 : s.budget, 1, 20000, 'path budget'),
+      scoring: string(s.scoring || 'neutral', 60, 'Segmentation scoring'),
+      lineBreaks: string(s.lineBreaks || 'boundary', 20, 'Line-break policy'),
+      inputFingerprint: s.inputFingerprint === undefined
+        ? fingerprint(string(s.digits || '', 200, 'Digit stream') + '|' + JSON.stringify(s.key || {}))
+        : string(s.inputFingerprint, 32, 'Segmentation input fingerprint') };
+  }
+  function candidateRecord(c) {
+    check(c && typeof c === 'object' && !Array.isArray(c), 'Invalid candidate record.');
+    return { plaintext: string(c.plaintext || '', 20000, 'Candidate plaintext'),
+      score: (check(Number.isFinite(c.score), 'A candidate needs a finite score.'), c.score),
+      key: lockMap(c.key || {}, 'candidate key'),
+      chosen: c.chosen === true,
+      provenance: string(c.provenance || '', 1000, 'Candidate provenance'),
+      verified: false };
+  }
+  function bundle(d, state = {}) {
+    d = validate(d);
+    const s = state && typeof state === 'object' ? state : {};
+    const value = {
+      version: BUNDLE_VERSION, kind: BUNDLE_KIND,
+      title: string(s.title || '', 200, 'Investigation title'),
+      created: string(s.created || '', 40, 'Bundle timestamp'),
+      tool: { modelBuild: MODEL_BUILD, evidenceVersion: d.version,
+        scoringModel: string(s.scoringModel || '', 200, 'Scoring-model identity'),
+        solver: string(s.solver || '', 200, 'Solver identity') },
+      evidence: d,
+      selectedLayer: string(s.selectedLayer || '', 100, 'Selected derived layer'),
+      keyRevisions: list(s.keyRevisions || [], 50, 'key revisions').map(k => ({
+        at: string(k.at || '', 40, 'Key revision time'),
+        reason: string(k.reason || '', 1000, 'Key revision reason'),
+        locks: lockMap(k.locks || {}, 'locked key') })),
+      search: s.search ? searchState(s.search) : null,
+      segmentation: s.segmentation ? segmentationState(s.segmentation) : null,
+      candidates: list(s.candidates || [], 20, 'retained candidates').map(candidateRecord),
+      images: d.images.map(i => ({ id: i.id, name: i.name, sha256: i.sha256, width: i.width, height: i.height,
+        rotation: i.rotation, crop: i.crop.slice() })),
+      imageBytes: 'Image bytes are deliberately not included. Reopen each file locally; the recorded hash tells you whether the bytes match.',
+      sourceFingerprint: fingerprint(d.raw),
+      limits: 'Replay needs the same solver and scoring-model build, not only the same seed. A recorded filename or hash identifies bytes; it does not establish that an image is the archival object it claims to be.'
+    };
+    return openBundle(copy(value));
+  }
+  function openBundle(value) {
+    check(value && typeof value === 'object' && !Array.isArray(value), 'This file is not an investigation bundle.');
+    check(value.kind === BUNDLE_KIND, 'This file is not a Cipher Museum investigation bundle.');
+    check(value.version === BUNDLE_VERSION,
+      'Unsupported investigation-bundle version ' + value.version + '; this workbench reads version ' + BUNDLE_VERSION + '.');
+    check(JSON.stringify(value).length <= 1500000, 'Investigation bundle exceeds 1,500,000 characters.');
+    const b = copy(value);
+    b.title = string(b.title || '', 200, 'Investigation title');
+    b.created = string(b.created || '', 40, 'Bundle timestamp');
+    check(b.tool && typeof b.tool === 'object', 'A bundle must record the tools that produced it.');
+    b.tool.modelBuild = string(b.tool.modelBuild || '', 100, 'Model build');
+    b.tool.scoringModel = string(b.tool.scoringModel || '', 200, 'Scoring-model identity');
+    b.tool.solver = string(b.tool.solver || '', 200, 'Solver identity');
+    b.evidence = validate(b.evidence);
+    b.selectedLayer = string(b.selectedLayer || '', 100, 'Selected derived layer');
+    check(!b.selectedLayer || b.selectedLayer.indexOf('revision-') === 0 || b.evidence.layers.some(l => l.id === b.selectedLayer),
+      'The bundle names a derived layer that its evidence record does not contain.');
+    b.keyRevisions = list(b.keyRevisions || [], 50, 'key revisions').map(k => ({
+      at: string(k.at || '', 40, 'Key revision time'), reason: string(k.reason || '', 1000, 'Key revision reason'),
+      locks: lockMap(k.locks || {}, 'locked key') }));
+    b.search = b.search ? searchState(b.search) : null;
+    b.segmentation = b.segmentation ? segmentationState(b.segmentation) : null;
+    b.candidates = list(b.candidates || [], 20, 'retained candidates').map(candidateRecord);
+    b.images = list(b.images || [], 50, 'image manifest').map(i => ({
+      id: string(i.id, 100, 'Image ID'), name: string(i.name, 500, 'Image filename'),
+      sha256: string(i.sha256 || '', 64, 'Image hash'),
+      width: integer(i.width, 1, 100000, 'image width'), height: integer(i.height, 1, 100000, 'image height'),
+      rotation: integer(i.rotation, 0, 270, 'image rotation'), crop: i.crop }));
+    b.sourceFingerprint = string(b.sourceFingerprint || '', 32, 'Source fingerprint');
+    // Stale results are reported, never silently reused.
+    const sourceMoved = b.sourceFingerprint !== fingerprint(b.evidence.raw);
+    const searchMoved = !!(b.search && b.search.inputFingerprint !== fingerprint(b.search.raw));
+    const segmentationMoved = !!(b.segmentation &&
+      b.segmentation.inputFingerprint !== fingerprint(b.segmentation.digits + '|' + JSON.stringify(b.segmentation.key)));
+    b.stale = { source: sourceMoved, search: searchMoved, segmentation: segmentationMoved,
+      modelBuild: b.tool.modelBuild !== MODEL_BUILD,
+      candidates: b.candidates.length > 0 && (sourceMoved || searchMoved) };
+    return b;
+  }
+  // ── Beam-search solver baseline ───────────────────────────────────────────
+  // A second, bounded homophonic baseline alongside the annealing search.
+  // Extension order is DISCLOSED: symbols are fixed in order of first appearance,
+  // so every extension lengthens the decoded prefix. Partial hypotheses are scored
+  // on that decoded prefix. The heuristic is informative but NOT admissible:
+  // beam pruning can discard the branch that contains the correct key.
+  function beamSearch(tokens, options, score, progress = () => {}) {
+    parseSymbols(tokens.join(' '));
+    const opts = options && typeof options === 'object' ? options : {};
+    const symbols = Array.from(new Set(tokens));
+    const beam = integer(opts.beam === undefined ? 50 : opts.beam, 1, 2000, 'beam width');
+    const branch = integer(opts.branch === undefined ? 26 : opts.branch, 1, 26, 'extensions per hypothesis');
+    const seed = integer(opts.seed === undefined ? 0 : opts.seed, 0, 4294967295, 'seed');
+    const locks = opts.locks || {};
+    check(locks && typeof locks === 'object' && !Array.isArray(locks), 'Invalid locked key.');
+    Object.entries(locks).forEach(([s, v]) => check(symbols.indexOf(s) >= 0 && /^[A-Z]$/.test(v),
+      'A lock must name a present symbol and one A–Z letter.'));
+    const alphabet = 'ETAOINSHRDLCUMWFGYPBVKJXQZ'.slice(0, branch);
+    const order = symbols.filter(s => !own(locks, s));
+    // Longest token prefix decodable once the first k free symbols are assigned.
+    const known = new Set(Object.keys(locks));
+    const coverage = [];
+    for (let k = 0; k <= order.length; k++) {
+      if (k > 0) known.add(order[k - 1]);
+      let len = 0; while (len < tokens.length && known.has(tokens[len])) len++;
+      coverage.push(len);
+    }
+    check(beam * branch * tokens.length * Math.max(1, order.length) <= 400000000,
+      'Reduce the beam width, branching factor or input length: the comparison budget is 400 million symbol evaluations.');
+    const decodeWith = (assign, len) => { let t = ''; for (let i = 0; i < len; i++) t += assign[tokens[i]]; return t; };
+    const base = Object.assign(Object.create(null), locks);
+    let frontier = [{ assign: base, score: 0, covered: coverage[0] }];
+    if (coverage[0] > 0) {
+      const v = score(decodeWith(base, coverage[0]));
+      check(Number.isFinite(v), 'Scoring model returned an invalid value.');
+      frontier[0].score = v;
+    }
+    const trace = []; let evaluations = 0;
+    const rank = (a, b) => b.score - a.score || keyString(a.assign).localeCompare(keyString(b.assign));
+    function keyString(assign) { return symbols.map(s => assign[s] || '.').join(''); }
+    for (let k = 0; k < order.length; k++) {
+      const symbol = order[k], len = coverage[k + 1], next = [];
+      for (const hyp of frontier) for (const letter of alphabet) {
+        const assign = Object.assign(Object.create(null), hyp.assign); assign[symbol] = letter;
+        let value = hyp.score;
+        if (len > hyp.covered) {
+          value = score(decodeWith(assign, len)); evaluations++;
+          check(Number.isFinite(value), 'Scoring model returned an invalid value.');
+        }
+        next.push({ assign, score: value, covered: len });
+      }
+      next.sort(rank);
+      frontier = next.slice(0, beam);
+      trace.push({ step: k + 1, score: frontier[0].score, hypotheses: next.length, retained: frontier.length });
+      progress({ step: k + 1, steps: order.length, score: frontier[0].score });
+    }
+    const candidates = [];
+    const seen = new Set();
+    for (const hyp of frontier) {
+      const plaintext = tokens.map(t => hyp.assign[t]).join('');
+      if (seen.has(plaintext)) continue; seen.add(plaintext);
+      const value = score(plaintext); evaluations++;
+      check(Number.isFinite(value), 'Scoring model returned an invalid value.');
+      const key = {}; symbols.forEach(s => { key[s] = hyp.assign[s]; });
+      candidates.push({ plaintext, score: value, step: order.length, key });
+    }
+    candidates.sort((a, b) => b.score - a.score || a.plaintext.localeCompare(b.plaintext));
+    candidates.length = Math.min(candidates.length, 5);
+    if (!candidates.length) {
+      const key = {}; symbols.forEach(s => { key[s] = locks[s]; });
+      const plaintext = tokens.map(t => locks[t]).join('');
+      candidates.push({ plaintext, score: score(plaintext), step: 0, key });
+    }
+    return { candidates, trace, seed, requestedSteps: order.length, completedSteps: order.length,
+      task: order.length ? 'key-recovery-candidates' : 'known-key-application',
+      locks: copy(locks), model: score.modelId || 'custom-scoring-function', verified: false,
+      algorithm: 'beam-search', beam, branch, evaluations, admissible: false,
+      extensionOrder: order.slice(),
+      extensionOrderNote: 'Free symbols are fixed in order of first appearance, so every extension lengthens the decoded prefix that is scored.',
+      scope: 'Letter homophones only; no word codes, nulls, control signs or historical-language model. ' +
+        'Partial scores are non-admissible: beam pruning can discard the branch holding the correct key.' };
+  }
   function metrics(expected, actual, expectedKey, actualKey) {
     // Levenshtein distance keeps insertions/deletions distinct from key errors.
     const a = Array.from(expected), b = Array.from(actual); let row = b.map((_,i) => i + 1); row.unshift(0);
@@ -1794,781 +2464,13 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     check(['diagonal', 'row-major'].includes(kind), 'Unknown route.');
     return Array.from({length:153}, (_, i) => kind === 'diagonal' ? (i % 9) * 17 + (2 * i % 17) : i);
   }
-  const api = { TYPES, KEY_TYPES, create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey, segment, rng, parseSymbols, search, metrics, url, z340Route };
+  const api = { TYPES, KEY_TYPES, SEG_TYPES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
+    create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey,
+    segment, segmentMetrics, normalizeCodes, rng, parseSymbols, search, beamSearch, metrics, url, z340Route,
+    imageRecord, addImage, regionToDisplay, displayToRegion, displayAspect,
+    inventoryTokens, buildInventory, splitClass, mergeClasses, relabelClass, classOccurrences, regionOccurrences,
+    addHypothesis, bundle, openBundle, fingerprint };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   global.MuseumResearch = api;
 })(typeof window !== 'undefined' ? window : globalThis);
-```
-
-
-## JavaScript — js/research-ui.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/research-ui.js`
-- Served SHA-256: `848a83b9b5fdd26f278b1843e1b6cf5a75fa162788be29c75a19df4e83cacba6`
-- Readable-source SHA-256: `848a83b9b5fdd26f278b1843e1b6cf5a75fa162788be29c75a19df4e83cacba6`
-
-
-```javascript
-/* Evidence workbench: local files only; imported text is never inserted as HTML. */
-'use strict';
-(function () {
-  const R = window.MuseumResearch, $ = id => document.getElementById(id);
-  let doc = R.create(''), previous = null, imageURL = null, worker = null, receipt = null, searchGeneration = 0;
-  const sourceFields = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName'];
-  function status(message, error = false) { $('record-status').textContent = message; $('record-status').dataset.error = String(error); }
-  function guard(fn) { return function () { try { fn(); } catch (e) { status(e.message, true); } }; }
-  function el(tag, text, parent) { const n = document.createElement(tag); n.textContent = text; if (parent) parent.appendChild(n); return n; }
-  function download(name, value) {
-    const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], {type:'application/json'}));
-    const a = el('a', ''); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
-  function pending() { return $('source-raw').value !== doc.raw; }
-  function commit() {
-    let next = R.revise(doc, $('source-raw').value, $('revision-reason').value);
-    for (const f of sourceFields) next.source[f] = $('source-' + f).value;
-    next = R.validate(next); previous = doc; doc = next; $('restore-record').disabled = false;
-    $('revision-reason').value = ''; render();
-  }
-  function paintRegion(region) {
-    const box = $('image-region'); box.hidden = !region || !imageURL;
-    if (region) ['left','top','width','height'].forEach((f,i) => { box.style[f] = (region[i] * 100) + '%'; });
-  }
-  function clearImage() { if (imageURL) URL.revokeObjectURL(imageURL); imageURL = null; $('source-image').removeAttribute('src'); $('image-wrap').hidden = true; $('image-file').value = ''; }
-  function render() {
-    $('source-raw').value = doc.raw;
-    sourceFields.forEach(f => { $('source-' + f).value = doc.source[f]; });
-    $('revision-label').textContent = 'Current revision ' + doc.revision + ' · ' + Array.from(doc.raw).length + ' Unicode characters. Original transcription retained.';
-    const revisions = $('revision-list'); revisions.replaceChildren();
-    doc.revisions.forEach(r => { const d = el('details','',revisions); el('summary','Revision ' + r.id + ' — ' + r.reason,d); el('pre',r.raw,d); });
-    const spans = $('span-list'); spans.replaceChildren();
-    doc.spans.forEach(s => {
-      const card = el('div','',spans); card.className = 'research-card';
-      el('h3',s.id + ' · ' + s.type + (s.uncertain ? ' · unresolved' : ' · recorded reading'),card);
-      el('p','Revision ' + s.revision + (s.revision === doc.revision ? ' (current)' : ' (earlier source; not moved to current text)') + ', characters ' + (s.start+1) + '–' + s.end + ': ' + s.literal,card);
-      el('p','Alternatives: ' + (s.alternatives.join(' / ') || 'none recorded') + '. Reading: ' + (s.reading || 'unresolved') + '. Reason: ' + (s.reason || 'not recorded'),card);
-      if (s.region) { el('p','Region image: '+s.imageName,card); const b = el('button','Show image region',card); b.type = 'button'; b.onclick = () => {
-        if (!imageURL || !$('image-file').files[0] || $('image-file').files[0].name !== s.imageName) { paintRegion(null);status('Choose the recorded image '+s.imageName+' first. A matching filename is not an authenticity check.');return; }
-        paintRegion(s.region);status('Region displayed. Verify the selected image against the archive source; filenames alone cannot establish identity.');
-      }; }
-    });
-    const layers = $('layer-list'), parent = $('layer-parent'); layers.replaceChildren(); parent.replaceChildren();
-    const op = el('option','Source revision ' + doc.revision,parent); op.value = 'revision-' + doc.revision;
-    doc.layers.forEach(l => {
-      if (l.revision === doc.revision) { const o = el('option',l.id + ' (' + l.kind + ')',parent); o.value = l.id; }
-      const d = el('details','',layers); el('summary',l.id + ' · ' + l.kind + ' · revision ' + l.revision,d); el('p','Derived from ' + l.parent + '. ' + l.note,d); el('pre',l.text,d);
-    });
-    $('relations-list').textContent = JSON.stringify({keys:doc.keys,relations:doc.relations},null,2);
-    paintRegion(null);
-  }
-  $('save-revision').onclick = guard(() => { commit(); status('Source and revision saved in this tab. Export the record to keep it after closing.'); });
-  $('restore-record').onclick = guard(() => { if (previous) { const current = doc; doc = previous; previous = current; clearImage(); render(); status('Previous record restored. Press again to return to the other record.'); } });
-  $('export-record').onclick = guard(() => { commit(); download('cipher-museum-evidence-v2.json', doc); status('Evidence record exported. Local image bytes are separate.'); });
-  $('import-file').onchange = async function () {
-    const file = this.files[0]; if (!file) return;
-    try {
-      if (file.size > 750000) throw new Error('Import is limited to 750,000 bytes.');
-      const next = R.migrate(JSON.parse(await file.text())); previous = doc; doc = next; clearImage(); render(); $('restore-record').disabled = false;
-      status('Imported version ' + doc.version + ' evidence record. Previous saved record is available with Restore.');
-    } catch (e) { status('Import rejected; saved record retained. ' + e.message, true); }
-    this.value = '';
-  };
-  $('image-file').onchange = function () {
-    const file = this.files[0]; if (!file) return;
-    if (!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size > 8000000) { status('Choose a PNG, JPEG or WebP image under 8 MB.',true); return; }
-    if (imageURL) URL.revokeObjectURL(imageURL); imageURL = URL.createObjectURL(file);
-    $('source-image').src = imageURL; $('image-wrap').hidden = false; $('source-imageName').value = file.name; paintRegion(null);
-    status('Image opened locally. Save the source record to retain its filename; the image itself is not exported.');
-  };
-  $('source-image').onerror = () => { clearImage(); status('The selected file could not be decoded as an image.',true); };
-  $('select-span').onclick = () => {
-    const t = $('source-raw'); $('span-start').value = Array.from(t.value.slice(0,t.selectionStart)).length + 1;
-    $('span-end').value = Array.from(t.value.slice(0,t.selectionEnd)).length;
-    status('Selected text copied to character positions. Save any source change before adding a span.');
-  };
-  $('add-span').onclick = guard(() => {
-    if (pending()) throw new Error('Save the revised source before annotating it.');
-    const region = $('span-region').value.trim() ? JSON.parse('[' + $('span-region').value + ']') : null;
-    if (region && $('source-imageName').value !== doc.source.imageName) throw new Error('Save the source image filename before attaching a region.');
-    const next = R.annotate(doc,{start:Number($('span-start').value)-1,end:Number($('span-end').value),type:$('span-type').value,
-      uncertain:$('span-uncertain').checked, alternatives:$('span-alternatives').value.split('\n').map(x=>x.trim()).filter(Boolean),
-      reading:$('span-reading').value, reason:$('span-reason').value, region});
-    previous = doc; doc = next; $('restore-record').disabled=false; render(); paintRegion(region); status('Evidence span appended. Earlier annotations remain in the record.');
-  });
-  $('add-layer').onclick = guard(() => {
-    if (pending()) throw new Error('Save the source revision first.');
-    const next = R.addLayer(doc,$('layer-kind').value,$('layer-parent').value,$('layer-text').value,$('layer-note').value);
-    previous=doc;doc=next;$('restore-record').disabled=false;render();status('Derived reading appended; the source has not been overwritten.');
-  });
-  ['typed-key','key-input'].forEach(id=>$(id).addEventListener('input',()=>{$('key-output').textContent='Inputs changed. Apply the key again.';}));
-  $('apply-key').onclick = guard(() => {
-    const tokens=$('key-input').value.trim().split(/\s+/u).filter(Boolean);
-    if (!tokens.length || tokens.length>3000) throw new Error('Use 1–3,000 whitespace-separated symbol IDs.');
-    const result=R.applyKey(tokens,JSON.parse($('typed-key').value));
-    $('key-output').textContent=result.text+'\n'+result.unresolved+' unresolved occurrences. Known-key application; no key recovery performed.';
-  });
-  $('save-key').onclick = guard(() => {
-    const next=R.validate(doc), entries=JSON.parse($('typed-key').value); R.validateKey(entries);
-    const id='key-'+(next.keys.length+1);next.keys.push({id,title:$('key-title').value,sourceUrl:$('key-source').value,entries});
-    previous=doc;doc=R.validate(next);$('restore-record').disabled=false;render();status(id+' recorded. Add an evidence-backed relationship below if you applied it to a reading.');
-  });
-  $('add-relation').onclick = guard(() => {
-    const next=R.validate(doc);next.relations.push({from:$('relation-from').value,to:$('relation-to').value,type:$('relation-type').value,evidence:$('relation-evidence').value});
-    previous=doc;doc=R.validate(next);$('restore-record').disabled=false;render();status('Relationship and its supporting evidence recorded. External identifiers are allowed.');
-  });
-  let segmentation=null;
-  function invalidateSegments() { segmentation=null;$('segment-output').textContent='Inputs changed. Recompute the alternatives.'; }
-  ['segment-digits','segment-key','segment-locks','segment-budget','segment-score'].forEach(id=>$(id).addEventListener('input',invalidateSegments));
-  $('segment-run').onclick=guard(()=>{
-    const digits=$('segment-digits').value,key=JSON.parse($('segment-key').value),bounds=$('segment-locks').value.trim();
-    const scoring=$('segment-score').value;
-    const fit=scoring==='english' ? s=>{const letters=s.toUpperCase().replace(/[^A-Z]/g,'');return letters.length>=3 ? DetectiveLangModel.fitness(letters) : 0;} : ()=>0;
-    segmentation=R.segment(digits,key,bounds?bounds.split(',').map(s=>Number(s.trim())):[],Number($('segment-budget').value),fit);
-    const out=$('segment-output');out.replaceChildren();
-    el('p',(segmentation.complete?'All paths explored.':'Budget reached; alternatives may be missing.')+' '+segmentation.total+' complete paths found; '+segmentation.retained+' retained. '+segmentation.visited+' search nodes visited. Scoring: '+scoring+'.',out);
-    if (!segmentation.paths.length) el('p',segmentation.complete?'No path matches this key and these boundary locks. Every digit is unresolved.':'No complete path found within the budget. This is not proof that no path exists.',out);
-    segmentation.paths.forEach(p=>{
-      const d=el('div','',out);d.className='research-card';el('pre',p.codes.join(' | ')+' → '+p.text+'\nModel score: '+p.score.toFixed(2),d);
-      const b=el('button','Record this segmentation as a hypothesis',d);b.type='button';b.onclick=guard(()=>{
-        if(pending()||doc.raw!==digits)throw new Error('The saved source must be exactly these digits before attaching a segmentation. Copy them into the source and save a revision first.');
-        const note='Known-key segmentation hypothesis. Key: '+JSON.stringify(key)+'. Mandatory boundaries: '+JSON.stringify(segmentation.boundaries)+'. Scoring: '+scoring+'. Choice does not establish a historical reading.';
-        previous=doc;doc=R.addLayer(doc,'symbols','revision-'+doc.revision,p.codes.join(' | '),note);$('restore-record').disabled=false;render();status('Segmentation hypothesis appended; original digits retained.');
-      });
-    });
-  });
-  function stopSearch(message) { searchGeneration++;if(worker)worker.terminate();worker=null;receipt=null;$('search-run').disabled=false;$('search-cancel').disabled=true;$('search-export').disabled=true;$('search-results').replaceChildren();$('search-status').textContent=message; }
-  ['search-raw','search-locks','search-seed','search-steps'].forEach(id=>$(id).addEventListener('input',()=>stopSearch('Inputs changed. Run a new search.')));
-  $('search-cancel').onclick=()=>stopSearch('Search cancelled. No completed receipt was recorded.');
-  $('search-run').onclick=guard(()=>{
-    stopSearch('Starting local search…');const raw=$('search-raw').value;R.parseSymbols(raw);
-    const options={seed:Number($('search-seed').value),steps:Number($('search-steps').value),locks:JSON.parse($('search-locks').value)};
-    if(!window.Worker)throw new Error('This browser does not support the background worker required for search.');
-    const started=performance.now(),generation=searchGeneration;worker=new Worker('../js/research-worker.js');$('search-run').disabled=true;$('search-cancel').disabled=false;
-    worker.onerror=()=>{if(generation===searchGeneration)stopSearch('Search worker could not run. Reload online to cache its files, then try again.');};
-    worker.onmessage=event=>{
-      if(generation!==searchGeneration)return;
-      if(event.data.error){stopSearch('Search rejected: '+event.data.error);return;}
-      if(event.data.progress){$('search-status').textContent='Searching: '+event.data.progress.step+' / '+event.data.progress.steps+' steps.';return;}
-      const r=event.data.result;worker.terminate();worker=null;$('search-run').disabled=false;$('search-cancel').disabled=true;
-      receipt={version:1,kind:'cipher-museum-homophonic-search',raw,options,result:r,elapsedMs:Math.round(performance.now()-started)};
-      $('search-export').disabled=false;$('search-status').textContent=(r.task==='known-key-application'?'Known-key application: all symbols were locked.':'Search completed; these are unverified candidates.')+' '+r.completedSteps+' mutation steps. Seed '+r.seed+'.';
-      const out=$('search-results');out.replaceChildren();
-      r.candidates.forEach((c,i)=>{const d=el('details','',out);d.open=i===0;el('summary','Candidate '+(i+1)+' · model score '+c.score.toFixed(2),d);el('pre',c.plaintext,d);el('pre',JSON.stringify(c.key,null,2),d);});
-      const d=el('details','',out);el('summary','Best retained score by step',d);el('pre',r.trace.map(t=>t.step+': '+t.score.toFixed(2)).join('\n'),d);
-    };worker.postMessage({raw,options});
-  });
-  $('search-export').onclick=()=>{if(receipt)download('homophonic-search-receipt.json',receipt);};
-  $('search-example').onclick=()=>{
-    stopSearch('Original generated exercise loaded. This is a public demonstration, not a blind historical test.');
-    const plain='THESECRETLETTERISINTHECHESTTHEKEYISINTHELETTERREADTHELETTERTHENOPENTHECHEST';
-    const ids=new Map();let next=1;
-    $('search-raw').value=Array.from(plain).map((c,i)=>{const k=c+(i%2);if(!ids.has(k))ids.set(k,'s'+next++);return ids.get(k);}).join(' ');
-    $('search-locks').value='{}';$('search-seed').value='41';$('search-steps').value='15000';
-  };
-  window.addEventListener('pagehide',()=>{if(worker)worker.terminate();if(imageURL)URL.revokeObjectURL(imageURL);});
-  // Explicit handoff from Detective; never fetch source images or papers automatically.
-  try {const v=sessionStorage.getItem('museum-evidence-import');if(v){doc=R.migrate(JSON.parse(v));sessionStorage.removeItem('museum-evidence-import');status('Imported your Detective transcription. Add source information, then export to keep the record.');}}catch(e){status('Could not read the Detective handoff: '+e.message,true);}
-  render();
-})();
-```
-
-
-## JavaScript — js/research-worker.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/research-worker.js`
-- Served SHA-256: `ed2a941f8f50a76f690ffc2ffa4a49e1fd3c164f59041996fd0e13133627ca35`
-- Readable-source SHA-256: `ed2a941f8f50a76f690ffc2ffa4a49e1fd3c164f59041996fd0e13133627ca35`
-
-
-```javascript
-'use strict';
-importScripts('research-language-model.js', 'research-model.js');
-let modelPromise;
-self.onmessage = async function (event) {
-  try {
-    const input = event.data;
-    if (typeof fetch !== 'function') throw new Error('This browser cannot load the scoring model.');
-    if (!modelPromise) modelPromise = fetch('../data/research/v1/language-model.json').then(response => {
-      if (!response.ok) throw new Error('Could not load the scoring model.'); return response.json();
-    }).then(data => MuseumResearchLanguage.build(data));
-    const model = await modelPromise;
-    const result = MuseumResearch.search(MuseumResearch.parseSymbols(input.raw), input.options,
-      model.fitness, progress => self.postMessage({ progress }));
-    self.postMessage({ result });
-  } catch (error) { self.postMessage({ error: error.message }); }
-};
-```
-
-
-## JavaScript — js/search.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/search.js`
-- Served SHA-256: `cb152e1c07e71650fb727b994c94a0c3685217bf139dd194e52372039bedf0d7`
-- Readable-source SHA-256: `cb152e1c07e71650fb727b994c94a0c3685217bf139dd194e52372039bedf0d7`
-
-
-```javascript
-/**
- * THE CIPHER MUSEUM — Site Search
- * Loads /js/search-index.json and provides ranked substring + token matching
- * across the 167-exhibit collection (cipher pages, exhibit halls, biographies,
- * cryptanalysis techniques, the timeline, and key tool pages).
- *
- * Public API on window.CipherSearch:
- *   load()            → Promise<entries>
- *   query(q, limit)   → array of {entry, score, matchedField}
- *   highlight(text,q) → text with <mark> wrapped tokens
- *
- * Resolves URLs relative to the page that loaded the script
- * (handles ciphers/, halls/, etc. subfolders automatically).
- */
-'use strict';
-(function () {
-  var INDEX_URL_REL = 'js/search-index.json';
-  var BASE = (function () {
-    var p = location.pathname;
-    var inSub = /\/(ciphers|halls|tours|lab|community|hall-of-foundations)\//.test(p);
-    return inSub ? '../' : '';
-  })();
-
-  var _entries = null;
-  var _loadPromise = null;
-
-  function normalizeSearchText(value) {
-    return String(value || '')
-      .normalize('NFKD')
-      .replace(/[\u0300-\u036f]/g, '')
-      // Elide every apostrophe form rather than folding them to one, so an
-      // apostrophe-free query ("geez") reaches an apostrophised title ("Geʼez").
-      .replace(/[\u2018\u2019\u02bbʼ']/g, '')
-      .toLowerCase();
-  }
-
-  function words(value) {
-    return normalizeSearchText(value).match(/[\p{L}\p{N}]+/gu) || [];
-  }
-
-  // Separator-insensitive form. Titles hyphenate designations that visitors type
-  // closed up — "M-209", "SHA-256", "KL-7" are searched as "m209", "sha256",
-  // "kl7" — so matching also consults a form with every separator removed.
-  // Used only as an extra alternative, never to replace a normal match.
-  function flatten(value) {
-    return normalizeSearchText(value).replace(/[^\p{L}\p{N}]+/gu, '');
-  }
-
-  function load() {
-    if (_entries) return Promise.resolve(_entries);
-    if (_loadPromise) return _loadPromise;
-    if (typeof fetch !== 'function') {
-      return Promise.reject(new Error('Fetch is unavailable'));
-    }
-    _loadPromise = fetch(BASE + INDEX_URL_REL, {cache: 'force-cache'})
-      .then(function (r) {
-        if (!r.ok) throw new Error('Index HTTP ' + r.status);
-        return r.json();
-      })
-      .then(function (data) {
-        if (!data || !Array.isArray(data.entries)) throw new Error('Invalid search index');
-        _entries = data.entries.map(function (e) {
-          var haystack = e.t + ' ' + (e.h || '') + ' ' + (e.s || '') + ' ' + (e.g || []).join(' ');
-          return {
-            title: e.t,
-            url: BASE + e.u,
-            kind: e.k,
-            hall: e.h,
-            created: e.c,
-            broken: e.b,
-            trust: e.trust || null,
-            exhibitNumber: e.exhibitNumber,
-            note: e.n || '',
-            summary: e.s,
-            tags: e.g || [],
-            _hay: normalizeSearchText(haystack),
-            _words: words(haystack),
-            _flat: flatten(haystack)
-          };
-        });
-        return _entries;
-      })
-      .catch(function (err) {
-        console.error('[CipherSearch] index load failed:', err);
-        _loadPromise = null;
-        throw err;
-      });
-    return _loadPromise;
-  }
-
-  function tokenize(q) {
-    return words(q);
-  }
-
-  /**
-   * Score an entry against the query.
-   *  +50 exact title match
-   *  +25 title startsWith
-   *  +12 title substring
-   *  +10 tag exact
-   *  +6  hall match
-   *  +4  summary substring
-   *  +2  any haystack substring
-   * AND-mode: every token must hit something.
-   */
-  function score(entry, tokens, raw) {
-    var rawLower = normalizeSearchText(raw);
-    var titleLower = normalizeSearchText(entry.title);
-    var s = 0;
-    var matchedField = null;
-
-    var rawFlat = flatten(raw);
-    var titleFlat = flatten(entry.title);
-    if (titleLower === rawLower || titleFlat === rawFlat) { s += 50; matchedField = 'title'; }
-    else if (titleLower.indexOf(rawLower) === 0 || titleFlat.indexOf(rawFlat) === 0) { s += 25; matchedField = 'title'; }
-    else if (titleLower.indexOf(rawLower) >= 0 || titleFlat.indexOf(rawFlat) >= 0) { s += 12; matchedField = 'title'; }
-
-    for (var i = 0; i < tokens.length; i++) {
-      var tok = tokens[i];
-      var hit = false;
-      var eraToken = tok === 'wwi' || tok === 'wwii';
-      var includesToken = function (value) {
-        if (eraToken) return words(value).indexOf(tok) >= 0;
-        return normalizeSearchText(value).indexOf(tok) >= 0 || flatten(value).indexOf(tok) >= 0;
-      };
-
-      if (includesToken(titleLower)) { s += 8; hit = true; matchedField = matchedField || 'title'; }
-      for (var j = 0; j < entry.tags.length; j++) {
-        var tag = normalizeSearchText(entry.tags[j]);
-        if (tag === tok) { s += 10; hit = true; matchedField = matchedField || 'tag'; break; }
-        if (!eraToken && tag.indexOf(tok) >= 0) { s += 4; hit = true; matchedField = matchedField || 'tag'; }
-      }
-      if (includesToken(entry.hall || '')) { s += 6; hit = true; matchedField = matchedField || 'hall'; }
-      if (includesToken(entry.summary || '')) { s += 4; hit = true; matchedField = matchedField || 'summary'; }
-      if (!hit && (eraToken ? entry._words.indexOf(tok) >= 0
-          : (entry._hay.indexOf(tok) >= 0 || entry._flat.indexOf(tok) >= 0))) { s += 2; hit = true; matchedField = matchedField || 'any'; }
-      if (!hit) return 0; // AND-mode: must hit every token
-    }
-
-    // Kind preference: ciphers > halls > pages
-    if (entry.kind === 'cipher') s += 1;
-    if (entry.kind === 'hall') s += 0.5;
-    return s;
-  }
-
-  function query(q, limit) {
-    if (!_entries) return [];
-    var raw = (q || '').trim();
-    if (!raw) return [];
-    var tokens = tokenize(raw);
-    if (!tokens.length) return [];
-    var out = [];
-    for (var i = 0; i < _entries.length; i++) {
-      var sc = score(_entries[i], tokens, raw);
-      if (sc > 0) out.push({entry: _entries[i], score: sc});
-    }
-    out.sort(function (a, b) { return b.score - a.score; });
-    return limit ? out.slice(0, limit) : out;
-  }
-
-  function escapeHTML(s) {
-    return String(s).replace(/[&<>"']/g, function (c) {
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-    });
-  }
-
-  function highlight(text, q) {
-    var raw = String(text);
-    var tokens = tokenize(q).filter(function (t) { return t.length >= 2; });
-    if (!tokens.length) return escapeHTML(raw);
-    // Match original text once. Repeated replacements over escaped HTML can
-    // highlight inside an entity or inside the <mark> tags just inserted.
-    tokens.sort(function (a, b) { return b.length - a.length; });
-    var re = new RegExp(tokens.map(function (t) {
-      return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }).join('|'), 'gi');
-    var result = '', cursor = 0, match;
-    while ((match = re.exec(raw))) {
-      result += escapeHTML(raw.slice(cursor, match.index)) + '<mark>' + escapeHTML(match[0]) + '</mark>';
-      cursor = match.index + match[0].length;
-    }
-    return result + escapeHTML(raw.slice(cursor));
-  }
-
-  window.CipherSearch = {
-    load: load,
-    query: query,
-    highlight: highlight,
-    normalize: normalizeSearchText,
-    base: BASE
-  };
-})();
-```
-
-
-## JavaScript — js/trust-labels.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/trust-labels.js`
-- Served SHA-256: `df5dd97d87412f530ae69bc145c70159f52e13b7a1cfa8d3403c0f0c83d0476e`
-- Readable-source SHA-256: `df5dd97d87412f530ae69bc145c70159f52e13b7a1cfa8d3403c0f0c83d0476e`
-
-
-```javascript
-/* Canonical metadata is generated from data/exhibit-trust.json and data/trust-labels.json. */
-'use strict';
-(function (global) {
-  function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  function badge(trust) {
-    if (!trust) return '';
-    if (!/^(broken|historical|educational|secure)$/.test(trust.key)) throw new Error('Unknown trust category');
-    return '<span class="trust-label trust-label--' + trust.key + ' trust-label--sm" title="' +
-      escapeHTML(trust.description) + '">' + escapeHTML(trust.text) + '</span>';
-  }
-  const api = { badge, escapeHTML };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else global.TrustLabels = api;
-})(typeof window !== 'undefined' ? window : globalThis);
-```
-
-
-## JavaScript — js/ui-delegates.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/ui-delegates.js`
-- Served SHA-256: `533029a0253d48b410e3e6f14dfbb616ff3bc233a2f6ef7d1387babd26af4959`
-- Readable-source SHA-256: `533029a0253d48b410e3e6f14dfbb616ff3bc233a2f6ef7d1387babd26af4959`
-
-
-```javascript
-'use strict';
-/**
- * Global delegated event handlers — replaces inline onclick= attributes.
- *
- * Handles three data-attribute patterns:
- *   data-file="name.jsonl"      → open corpus/eval file in new tab
- *   data-reveal-next            → show nextElementSibling, hide self
- *   data-fn="fnName"            → call window[fnName](data-arg)
- *   data-fn="fnName" data-arg   → call window[fnName](arg), numeric args coerced
- */
-(function () {
-  // Hide broken images (replaces onerror= inline handlers)
-  document.addEventListener('error', function (e) {
-    if (e.target && e.target.tagName === 'IMG' && e.target.parentElement) {
-      e.target.parentElement.style.display = 'none';
-    }
-  }, true);
-
-  document.addEventListener('click', function (e) {
-    var el = e.target.closest('[data-file],[data-reveal-next],[data-fn]');
-    if (!el) return;
-
-    if ('file' in el.dataset) {
-      var name = el.dataset.file;
-      var base = '/public/corpus/';
-      window.open(base + name, '_blank');
-      return;
-    }
-
-    if ('revealNext' in el.dataset) {
-      var next = el.nextElementSibling;
-      if (next) { next.hidden = false; next.style.display = 'block'; }
-      el.style.display = 'none';
-      return;
-    }
-
-    if ('fn' in el.dataset) {
-      var fn = window[el.dataset.fn];
-      if (typeof fn !== 'function') return;
-      if ('arg' in el.dataset) {
-        var arg = el.dataset.arg;
-        fn(!isNaN(arg) && arg !== '' ? Number(arg) : arg);
-      } else {
-        fn();
-      }
-    }
-  });
-})();
-```
-
-
-## JavaScript — scripts/columnar-classroom.js
-
-**Classroom command-line tool:** runs with Node.js in a repository checkout; it is not a browser demo. The linked worksheet and fixed fixtures are included separately.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `scripts/columnar-classroom.js`
-- Served SHA-256: `fc4b64e8877c3fad1c6866029f58189c1c7a6f555a4a44fdcc148f78e68fc4f3`
-- Readable-source SHA-256: `fc4b64e8877c3fad1c6866029f58189c1c7a6f555a4a44fdcc148f78e68fc4f3`
-
-
-```javascript
-#!/usr/bin/env node
-'use strict';
-// A small receipt-producing classroom experiment; reuses the Museum solver.
-const fs = require('node:fs');
-const path = require('node:path');
-const crypto = require('node:crypto');
-const { performance } = require('node:perf_hooks');
-const root = path.join(__dirname, '..');
-const columnar = require('../js/columnar-search');
-require('../js/detective/lang-model');
-const fixturePath = 'public/teaching/columnar-classroom-fixtures.json';
-const corpus = JSON.parse(fs.readFileSync(path.join(root, fixturePath), 'utf8'));
-const digest = file => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
-
-// Reference preparation is separate from the search implementation: write rows,
-// then read the specified columns. Fixed ciphertexts are retained in the fixture.
-function referenceEncrypt(plaintext, order) {
-  const rows = [];
-  for (let i = 0; i < plaintext.length; i += order.length) rows.push(plaintext.slice(i, i + order.length));
-  return order.map(column => rows.map(row => row[column] || '').join('')).join('');
-}
-function runExperiment({clock = () => performance.now()} = {}) {
-  const runs = [];
-  const variants = [{id:'direct', staged:false}, {id:'staged', staged:true}];
-  for (const fixture of corpus.fixtures) {
-    if (referenceEncrypt(fixture.plaintext, fixture.order) !== fixture.ciphertext) throw Error('Fixture does not match its independent row/column reference: ' + fixture.id);
-    if (fixture.length !== fixture.plaintext.length || fixture.width !== fixture.order.length || fixture.remainder !== fixture.length % fixture.width) throw Error('Fixture shape mismatch: ' + fixture.id);
-    for (const seed of corpus.seeds) for (const variant of variants) {
-      const options = {width:fixture.width, budget:corpus.budget, restarts:corpus.restarts, seed, staged:variant.staged, alignment:true, segments:true};
-      const started = clock();
-      const result = columnar.solve(fixture.ciphertext, options);
-      const elapsedMs = Math.max(0, clock() - started);
-      if (result.evaluations > options.budget || result.preprocessing > result.evaluations) throw Error('Budget accounting failed.');
-      const exactPlaintext = !!result.best && result.best.plaintext === fixture.plaintext;
-      const exactKey = !!result.best && result.best.order.every((value, i) => value === fixture.order[i]);
-      runs.push({fixture:fixture.id, variant:variant.id, options, length:fixture.length, remainder:fixture.remainder,
-        rectangle:fixture.remainder ? 'incomplete' : 'complete', evaluations:result.evaluations,
-        preprocessingEvaluations:result.preprocessing, elapsedMs,
-        exactPlaintext, exactKey, outcome:exactPlaintext ? 'plaintext-recovered' : result.best ? 'different-candidate' : 'no-candidate',
-        candidate:result.best ? {plaintext:result.best.plaintext, order:result.best.order, score:result.best.score} : null,
-        reason:result.reason});
-    }
-  }
-  const summary = variants.map(variant => {
-    const rows = runs.filter(run => run.variant === variant.id);
-    return {variant:variant.id, runs:rows.length, exactPlaintexts:rows.filter(run => run.exactPlaintext).length,
-      exactKeys:rows.filter(run => run.exactKey).length, noCandidate:rows.filter(run => !run.candidate).length,
-      unsuccessfulPlaintexts:rows.filter(run => !run.exactPlaintext).length};
-  });
-  return {schema:'museum-columnar-classroom-receipt-v1', fixtureSet:corpus,
-    sources:{fixturesSha256:digest(fixturePath), solverSha256:digest('js/columnar-search.js'), languageModelSha256:digest('js/detective/lang-model.js'), runnerSha256:digest('scripts/columnar-classroom.js')},
-    runtime:{node:process.version, platform:process.platform, arch:process.arch},
-    scope:'24 fixed runs: four synthetic messages, three seeds, two variants differing only in staged initialization. Every failure is retained. These counts describe this small fixture set, not general recovery probabilities. Repeated seeds on a message are dependent. Equal evaluation budgets are not equal CPU work. Timings vary and are excluded from exact replay.',
-    summary, runs};
-}
-function withoutTimings(report) {
-  return {...report, runs:report.runs.map(({elapsedMs, ...run}) => run)};
-}
-if (require.main === module) {
-  const args = process.argv.slice(2);
-  if (args.some(arg => !['--check','--help'].includes(arg))) throw Error('Usage: node scripts/columnar-classroom.js [--check | --help]');
-  if (args.includes('--help')) {
-    console.log('Emit 24-run JSON receipt to stdout: node scripts/columnar-classroom.js > columnar-classroom-results.json\nCheck deterministic replay, excluding time: node scripts/columnar-classroom.js --check');
-  } else if (args.includes('--check')) {
-    const first = runExperiment(), second = runExperiment();
-    require('node:assert/strict').deepEqual(withoutTimings(first), withoutTimings(second));
-    console.log('All 24 classroom runs replay exactly apart from elapsed time. Failures and exhausted budgets remain in the receipt.');
-  } else {
-    console.log(JSON.stringify(runExperiment(), null, 2));
-  }
-}
-module.exports = {runExperiment, withoutTimings, referenceEncrypt};
-```
-
-
-## JavaScript — sw.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `sw.js`
-- Served SHA-256: `e5afa22bfa4aa21f19e72b90f1a5f8607f2add60cbf15ca64d5c890e1a147bed`
-- Readable-source SHA-256: `e5afa22bfa4aa21f19e72b90f1a5f8607f2add60cbf15ca64d5c890e1a147bed`
-
-
-```javascript
-/**
- * THE CIPHER MUSEUM — Service Worker
- * Offline support for classrooms and flaky connections.
- *
- * Strategy:
- *   - HTML navigations: network-first, falling back to cache (content stays fresh
- *     online; cached pages may be available offline while their assets remain cached).
- *   - Static assets (css/js/images/json): cache-first with background refresh.
- *   - Requests under /public/, including corpus samples and reports, bypass this cache.
- *
- * VERSION is stamped automatically by `npm run build:js` from a hash of every
- * asset served cache-first — the minified bundles, the non-HTML entries of
- * CORE below, and the self-contained offline fallback page (scripts/sw-version.js).
- * tests/test-sw-version.js fails the suite if it drifts. Old caches are purged
- * on activate, so adding an asset to CORE also re-stamps VERSION.
- */
-'use strict';
-
-const VERSION = 'cipher-museum-56ec9ae8';
-
-const CORE = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/ciphers/myszkowski.html',
-  '/ciphers/turning-grille.html',
-  '/ciphers/hagelin-c36.html',
-  '/ciphers/nema.html',
-  '/ciphers/rs44.html',
-  '/ciphers/double-playfair.html',
-  '/ciphers/amsco.html',
-  '/css/manual-cipher-demos.css',
-  '/js/manual-cipher-demos.js',
-  '/css/multiple-anagramming.css',
-  '/js/multiple-anagramming.js',
-  '/css/pad-experiments.css',
-  '/js/pad-experiments.js',
-  '/css/detective-workspaces.css',
-  '/js/detective/workspaces.js',
-  '/js/detective/playback.js',
-  '/js/detective/lang-model.js',
-  '/lab/evidence-workbench.html',
-  '/lab/decipherment-cases.html',
-  '/lab/modern-attack-evidence.html',
-  '/ciphers/ua-8295.html',
-  '/ciphers/sodark.html',
-  '/ciphers/nfc-deployment.html',
-  '/css/research-workbench.css',
-  '/js/research-model.js',
-  '/js/research-worker.js',
-  '/js/research-language-model.js',
-  '/data/research/v1/language-model.json',
-  '/js/research-ui.js',
-  '/js/research-cases.js',
-  '/data/research/v1/z340-section-1.json',
-  '/js/ciphers/all-engines.min.js',
-  '/css/museum.css',
-  '/css/historical-demos.css',
-  '/js/historical-ciphers.js',
-  '/js/historical-demos.js',
-  '/js/nav.js',
-  '/js/footer.js',
-  '/js/breadcrumbs.js',
-  '/js/ui-delegates.js',
-  '/js/trust-labels.js',
-  '/js/search.js',
-  '/js/search-index.json',
-  '/js/artifact-cards.js',
-  '/js/artifact-cards-data.min.js',
-  '/js/demo-loader.min.js',
-  '/js/lightbox.js',
-  '/fonts/cinzel-400-latin-ext.woff2',
-  '/fonts/cinzel-400-latin.woff2',
-  '/fonts/cinzel-600-latin-ext.woff2',
-  '/fonts/cinzel-600-latin.woff2',
-  '/fonts/cinzel-700-latin-ext.woff2',
-  '/fonts/cinzel-700-latin.woff2',
-  '/fonts/cormorant-garamond-italic-300-latin-ext.woff2',
-  '/fonts/cormorant-garamond-italic-300-latin.woff2',
-  '/fonts/cormorant-garamond-italic-400-latin-ext.woff2',
-  '/fonts/cormorant-garamond-italic-400-latin.woff2',
-  '/fonts/cormorant-garamond-italic-600-latin-ext.woff2',
-  '/fonts/cormorant-garamond-italic-600-latin.woff2',
-  '/fonts/cormorant-garamond-300-latin-ext.woff2',
-  '/fonts/cormorant-garamond-300-latin.woff2',
-  '/fonts/cormorant-garamond-400-latin-ext.woff2',
-  '/fonts/cormorant-garamond-400-latin.woff2',
-  '/fonts/cormorant-garamond-600-latin-ext.woff2',
-  '/fonts/cormorant-garamond-600-latin.woff2',
-  '/fonts/cormorant-garamond-700-latin-ext.woff2',
-  '/fonts/cormorant-garamond-700-latin.woff2',
-  '/fonts/jetbrains-mono-300-latin-ext.woff2',
-  '/fonts/jetbrains-mono-300-latin.woff2',
-  '/fonts/jetbrains-mono-400-latin-ext.woff2',
-  '/fonts/jetbrains-mono-400-latin.woff2',
-  '/fonts/jetbrains-mono-500-latin-ext.woff2',
-  '/fonts/jetbrains-mono-500-latin.woff2',
-  '/fonts/jetbrains-mono-700-latin-ext.woff2',
-  '/fonts/jetbrains-mono-700-latin.woff2',
-  '/hall-of-foundations/index.html',
-  '/hall-of-foundations/foundations.css',
-  '/images/icons.svg',
-  '/favicon.svg',
-  '/manifest.webmanifest',
-  '/images/icons/icon-192.png',
-  '/images/icons/icon-512.png'
-];
-
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(VERSION).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting())
-  );
-});
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  const req = event.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-  if (url.origin !== self.location.origin) return;
-  // Bypass all /public/ requests, including corpus downloads, samples and reports.
-  if (url.pathname.startsWith('/public/')) return;
-
-  if (req.mode === 'navigate') {
-    // Network-first for pages. An unvisited exhibit must display an explicit
-    // offline notice, not the homepage at an exhibit URL with broken relative
-    // assets (or misleading homepage content).
-    event.respondWith(
-      fetch(req)
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(VERSION).then((cache) => cache.put(req, copy));
-          return res;
-        })
-        .catch(() => caches.match(req).then((hit) => hit || caches.match('/offline.html')))
-    );
-    return;
-  }
-
-  // Cache-first with background refresh for static assets.
-  event.respondWith(
-    caches.match(req).then((hit) => {
-      const refresh = fetch(req)
-        .then((res) => {
-          if (res && res.ok) {
-            const copy = res.clone();
-            caches.open(VERSION).then((cache) => cache.put(req, copy));
-          }
-          return res;
-        })
-        .catch(() => hit);
-      return hit || refresh;
-    })
-  );
-});
 ```

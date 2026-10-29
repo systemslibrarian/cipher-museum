@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "id": "museum-language-holdout-v1",
+  "scope": "Passages reserved from the SAME documents used to build the profiles. Unseen by the model, but the same work and author: use them to measure model fit, not independent-source generalization.",
+  "rights": "Pre-1800 works, public domain worldwide; short extracts.",
+  "passages": [
+    {
+      "id": "montaigne-essais-i-holdout-1",
+      "profile": "historical-french-1580",
+      "source": "montaigne-essais-i",
+      "characters": 400,
+      "sha256": "c130037c33fcd683d0eeefaf81f0041f7bb2df576b8725af8fb5f1379ad160df",
+      "text": "veuë si trouble, si foible, et si morte, que ie ne discernois encores Quant aux functions de l'ame, elles naissoient auec mesme progrez, que celles du corps. Ie me vy tout sanglant: car mon pourpoinct estoit taché par tout du sang que i'auoy rendu. La premiere pensée qui me vint, ce fut que i'auoy vne harquebusade en la teste: de vray en mesme temps, il s'en tiroit plusieurs autour de nous. Il me "
+    },
+    {
+      "id": "montaigne-essais-i-holdout-2",
+      "profile": "historical-french-1580",
+      "source": "montaigne-essais-i",
+      "characters": 400,
+      "sha256": "e0be6b25f869bbd3b8a13c1264f8c8ee1c8ca96a86f6a7946722ea14031858f5",
+      "text": "ination qui ne faisoit que nager superficiellement en mon ame, aussi tendre et aussi foible que tout le reste: mais à la verité non seulement exempte de desplaisir, ains meslée à cette douceur, que sentent ceux qui se laissent glisser au sommeil. Ie croy que c'est ce mesme estat, où se trouuent ceux qu'on void défaillans de foiblesse, en l'agonie de la mort: et tiens que nous les plaignons sans ca"
+    },
+    {
+      "id": "montaigne-essais-i-holdout-3",
+      "profile": "historical-french-1580",
+      "source": "montaigne-essais-i",
+      "characters": 400,
+      "sha256": "5538700f28273ee62fccb1510f6982633b02ba773670cb4537fe85d95b0a80df",
+      "text": "ue ceux que nous voyons ainsi renuersez et assoupis aux approches de leur fin, ou accablez de la longueur du mal, ou par accident d'vne apoplexie, ou mal caduc, ou blessez en la teste, que nous oyons rommeller, et rendre par fois des souspirs trenchans, quoy que nous en tirons aucuns signes, par où il semble qu'il leur reste encore de la cognoissance, et quelques mouuemens que nous leur voyons fai"
+    },
+    {
+      "id": "dante-commedia-holdout-1",
+      "profile": "historical-italian-1320",
+      "source": "dante-commedia",
+      "characters": 400,
+      "sha256": "19b8fac4ee5e020710c14578f5fad0f6444444cc424c0b235da272fc00b6fb85",
+      "text": "e anche la ragione il vede alquanto, che non concederebbe che ’ motori sanza sua perfezion fosser cotanto. Or sai tu dove e quando questi amori furon creati e come: sì che spenti nel tuo disïo già son tre ardori. Né giugneriesi, numerando, al venti sì tosto, come de li angeli parte turbò il suggetto d’i vostri alimenti. L’altra rimase, e cominciò quest’ arte che tu discerni, con tanto diletto, che"
+    },
+    {
+      "id": "dante-commedia-holdout-2",
+      "profile": "historical-italian-1320",
+      "source": "dante-commedia",
+      "characters": 400,
+      "sha256": "c360dfc1bb9144eda2dba458c588f2ea1c99ff7646fbc0d7f89fcffdc0f841b1",
+      "text": "tender presti: per che le viste lor furo essaltate con grazia illuminante e con lor merto, si c’hanno ferma e piena volontate; e non voglio che dubbi, ma sia certo, che ricever la grazia è meritorio secondo che l’affetto l’è aperto. Omai dintorno a questo consistorio puoi contemplare assai, se le parole mie son ricolte, sanz’ altro aiutorio. Ma perché ’n terra per le vostre scole è tal, che ’ntend"
+    },
+    {
+      "id": "dante-commedia-holdout-3",
+      "profile": "historical-italian-1320",
+      "source": "dante-commedia",
+      "characters": 400,
+      "sha256": "6616498b5dee99956be713f71fff7040ebc24b6e4634f558ac2b0831c8f7d5c0",
+      "text": " essa, da cui nulla si nasconde: però non hanno vedere interciso da novo obietto, e però non bisogna sì che là giù, non dormendo, si sogna, credendo e non credendo dicer vero; ma ne l’uno è più colpa e più vergogna. Voi non andate giù per un sentiero filosofando: tanto vi trasporta l’amor de l’apparenza e ’l suo pensiero! E ancor questo qua sù si comporta con men disdegno che quando è posposta la "
+    },
+    {
+      "id": "caesar-bello-gallico-holdout-1",
+      "profile": "historical-latin-classical",
+      "source": "caesar-bello-gallico",
+      "characters": 400,
+      "sha256": "a3c4103a609793c192f49063299e6477a7c395f65b5dbb14b28277dc1fe4578d",
+      "text": "Caesar cum complures suos vulnerari videret, ex omnibus oppidi partibus cohortes montem ascendere et simulatione moenium occupandorum clamorem undique iubet tollere. Quo facto perterriti oppidani, cum quid ageretur in locis reliquis essent suspensi, revocant ab impugnandis operibus armatos murisque disponunt. Ita nostri fine proeli facto celeriter opera flamma comprehensa partim restinguunt, parti"
+    },
+    {
+      "id": "caesar-bello-gallico-holdout-2",
+      "profile": "historical-latin-classical",
+      "source": "caesar-bello-gallico",
+      "characters": 400,
+      "sha256": "785830078022531ed78a29005ab4169bd5ad468ad051749ff0d6cc07350a265e",
+      "text": "nte perennis exaruit fons tantamque attulit oppidanis salutis desperationem, ut id non hominum consilio, sed deorum voluntate factum putarent. Itaque se necessitate coacti Caesar, cum suam lenitatem cognnitam omnibus sciret neque vereretur ne quid crudelitate naturae videretur asperius fecisse, neque exitum consiliorum suorum animadverteret, si tali ratione diversis in locis plures consilia inisse"
+    },
+    {
+      "id": "caesar-bello-gallico-holdout-3",
+      "profile": "historical-latin-classical",
+      "source": "caesar-bello-gallico",
+      "characters": 400,
+      "sha256": "df7376d5a9e72e56c0a34c9ec0cd78d9a1b1abad7b2dbfef3f5df4311c3751e8",
+      "text": "cui, sive indignitate et dolore vinculorum sive timore gravioris supplici paucis diebus cibo se abstinuit atque ita interiit. Eodem tempore Lacterius, quem profugisse ex proelio scripsi, cum in potestatem venisset Epasnacti Arverni (crebro enim mutandis locis multorum fidei se committebat, quod nusquam diutius sine periculo commoraturus videbatur, cum sibi conscius esset, quam inimicum deberet Cae"
+    }
+  ]
+}

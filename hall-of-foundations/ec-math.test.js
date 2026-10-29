@@ -54,6 +54,56 @@ assert(order === 19, "G = (5,1) generates a group of order 19");
     "Hasse bound holds for p = " + p + " (N = " + n + ")");
 });
 
+// ---- independent oracle: the complete addition formulas (Exhibit 142/150 panel) ----
+// The museum's ecAdd uses affine chord-and-tangent arithmetic with explicit branches
+// for the identity, for inverses and for doubling. The complete projective formulas of
+// Renes, Costello and Batina (EUROCRYPT 2016, Algorithm 1) take no branch at all, but
+// they are only guaranteed complete on a PRIME-ORDER short Weierstrass curve. The test
+// curve above has order 19, so the guarantee applies and the two are comparable.
+//
+// This is an independent re-derivation, not a refactor of ecAdd: if either had an
+// exceptional case wrong, the exhaustive comparison below would disagree.
+function completeAdd(P1, P2, a, b, p) {
+  var m = function (x) { return EC.mod(x, p); };
+  // Affine point or null (infinity) -> projective (X : Y : Z).
+  var X1 = P1 === null ? 0 : P1[0], Y1 = P1 === null ? 1 : P1[1], Z1 = P1 === null ? 0 : 1;
+  var X2 = P2 === null ? 0 : P2[0], Y2 = P2 === null ? 1 : P2[1], Z2 = P2 === null ? 0 : 1;
+  var b3 = m(3 * b);
+  var t0 = m(X1 * X2), t1 = m(Y1 * Y2), t2 = m(Z1 * Z2);
+  var t3 = m(X1 + Y1), t4 = m(X2 + Y2);
+  t3 = m(t3 * t4); t4 = m(t0 + t1); t3 = m(t3 - t4);
+  t4 = m(X1 + Z1); var t5 = m(X2 + Z2);
+  t4 = m(t4 * t5); t5 = m(t0 + t2); t4 = m(t4 - t5);
+  t5 = m(Y1 + Z1); var X3 = m(Y2 + Z2);
+  t5 = m(t5 * X3); X3 = m(t1 + t2); t5 = m(t5 - X3);
+  var Z3 = m(a * t4); X3 = m(b3 * t2); Z3 = m(X3 + Z3);
+  X3 = m(t1 - Z3); Z3 = m(t1 + Z3); var Y3 = m(X3 * Z3);
+  t1 = m(t0 + t0); t1 = m(t1 + t0); t2 = m(a * t2);
+  t4 = m(b3 * t4); t1 = m(t1 + t2); t2 = m(t0 - t2);
+  t2 = m(a * t2); t4 = m(t4 + t2); t0 = m(t1 * t4);
+  Y3 = m(Y3 + t0); t0 = m(t5 * t4); X3 = m(t3 * X3);
+  X3 = m(X3 - t0); t0 = m(t3 * t1); t1 = m(t5 * Z3);
+  Z3 = m(t1 + t0);
+  if (Z3 === 0) return null;
+  var inv = EC.modInv(Z3, p);
+  return [m(X3 * inv), m(Y3 * inv)];
+}
+var withInfinity = [null].concat(pts);
+var mismatches = 0, compared = 0;
+for (var oi = 0; oi < withInfinity.length; oi++) {
+  for (var oj = 0; oj < withInfinity.length; oj++) {
+    var museum = EC.ecAdd(withInfinity[oi], withInfinity[oj], A, P17);
+    var oracle = completeAdd(withInfinity[oi], withInfinity[oj], A, B, P17);
+    compared++;
+    var same = museum === null ? oracle === null
+      : (oracle !== null && museum[0] === oracle[0] && museum[1] === oracle[1]);
+    if (!same) { mismatches++; if (mismatches < 4) console.error("  mismatch at " + JSON.stringify([withInfinity[oi], withInfinity[oj]]) + ": " + JSON.stringify(museum) + " vs " + JSON.stringify(oracle)); }
+  }
+}
+assert(compared === 361, "all 19 x 19 ordered point pairs are compared, identity included");
+assert(mismatches === 0, "affine chord-and-tangent agrees with the complete formulas on every pair, including identity, inverses and doubling");
+
+
 // ---- the real group law (Exhibit 150: y^2 = x^3 + x + 1) ----
 var a = 1, b = 1;
 assert(EC.ecIsSmooth(a, b), "y^2 = x^3+x+1 is smooth (nonzero discriminant)");

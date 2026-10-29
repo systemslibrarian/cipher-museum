@@ -8,7 +8,7 @@
     "validate:release": "node scripts/validate-release-metadata.js",
     "test:engines": "node tests/engines/run.js",
     "test:deep": "node tests/test-deep-ciphers.js",
-    "test:research": "node tests/test-research-workbench.js && node scripts/evaluate-research.js --check",
+    "test:research": "node tests/test-research-workbench.js && node tests/test-research-workbench-v2.js && node scripts/evaluate-research.js --check && node tests/test-research-evaluation-v2.js",
     "test:comprehensive": "node tests/test-comprehensive.js",
     "test:demos": "node tests/test-demo-pages.js",
     "test:playground": "node tests/test-playground.js",
@@ -31,7 +31,9 @@
     "validate:corpus:v08": "node scripts/validate-corpus.js public/corpus/v0.8/all.jsonl --contract 0.8",
     "build:corpus:v08": "node scripts/build-corpus-v08.js",
     "build:corpus:replay-status": "node scripts/build-corpus-replay-status.js",
-    "record:dataset-doi": "node scripts/record-dataset-doi.js"
+    "record:dataset-doi": "node scripts/record-dataset-doi.js",
+    "build:language-profiles": "node scripts/build-research-language-profiles.js",
+    "eval:research:v2": "node scripts/evaluate-research-v2.js"
   },
   "repository": {
     "type": "git",

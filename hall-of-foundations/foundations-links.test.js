@@ -48,7 +48,11 @@ var FOLLOW_UP_LABS = {
   "closest-vector.html": new Set([
     "https://systemslibrarian.github.io/crypto-lab-lattice-gentle/",
     "https://systemslibrarian.github.io/crypto-lab-lattice-builder/"
-  ])
+  ]),
+  // §142's implementation-assurance panel contrasts a source-code property with a
+  // measured side-channel one. Power Trace is the existing demonstration of the
+  // latter; the panel is explicit that it computes statistics over simulated leakage.
+  "finite-fields.html": new Set(["https://systemslibrarian.github.io/crypto-lab-power-trace/"])
 };
 function reviewedLab(page, url) {
   return !!FOLLOW_UP_LABS[page] && FOLLOW_UP_LABS[page].has(url);
@@ -77,7 +81,15 @@ var PRIMARY_SOURCES = new Set([
   "https://doi.org/10.1145/359168.359176",
   "https://crypto.stanford.edu/~dabo/cryptobook/",
   "https://crypto.stanford.edu/~dabo/pubs/papers/weilsigs.pdf",
-  "https://eprint.iacr.org/2016/260"
+  "https://eprint.iacr.org/2016/260",
+  // §142 implementation-assurance panel: the curve class the completeness guarantee is
+  // stated for, and the proof pipeline with its trusted compiler boundary.
+  "https://eprint.iacr.org/2015/1060",
+  "https://doi.org/10.1109/SP.2019.00005",
+  // §151 pooled-entropy and unicity sections: the dataset whose keys are independently
+  // generated per text, and the Z340 unicity analysis with its three language assumptions.
+  "https://aclanthology.org/2026.resourceful-4.2/",
+  "https://eprint.iacr.org/2021/1620"
 ]);
 // Canonical self-references, reviewed citations and page-specific labs only.
 pages.forEach(function (p) {
