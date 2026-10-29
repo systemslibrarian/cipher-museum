@@ -14,7 +14,7 @@ Complete static body text, including hidden panels, captions, tables, examples, 
 
 ## Limits the reviewer must preserve
 
-No external ebook/paper text, binary images, audio, videos, fonts, standalone CSS, installed dependencies, test execution environment, or complete 100,000-plus-record downloadable corpus is embedded. Image descriptions and inline SVG are available; independently checking other visual details requires the original image. Links identify sources but do not prove they were consulted. Program source allows reasoning about dynamic text; this export does not execute every interaction, random state, worker, browser crypto operation or user-supplied input. Shared scripts are included once; the learning-path script is explicitly labelled dormant. Corpus statistics and prior test results cannot substitute for independently checking omitted records. Readable-source versions of minified scripts are accompanied by their separate hashes, not a claim of byte identity.
+No external ebook/paper text, binary images, audio, videos, fonts, standalone CSS, installed dependencies, test execution environment, or complete 100,000-plus-record downloadable corpus is embedded. Image descriptions and inline SVG are available; independently checking other visual details requires the original image. Links identify sources but do not prove they were consulted. Program source allows reasoning about dynamic text; this export does not execute every interaction, random state, worker, browser crypto operation or user-supplied input. Shared scripts are included once; the learning-path script is explicitly labelled dormant. Corpus statistics and prior test results cannot substitute for independently checking omitted records. Readable-source versions of minified scripts are accompanied by their separate hashes, not a claim of byte identity. The historical-language profile tables in `data/research/v2/language-profiles.json` are excluded by size: roughly 0.74 MB of n-gram counts, not reviewable prose. Their provenance, rights, normalization, pruning and coverage are published inside that file and summarized in `data/research/v2/README.md`, and the research-evaluation v2 export records the file's SHA-256 so a reviewer can identify the exact build without the bulk.
 
 The earlier 214-page review was a complete reading/consistency pass with targeted source checks. It was **not independent source verification of every factual claim**. The 67-item tracker records completed bounded work packages, not proof that every statement is correct. Preserve all recorded evidence limits when deciding what to verify next.
 
@@ -22,7 +22,7 @@ The earlier 214-page review was a complete reading/consistency pass with targete
 
 ## Snapshot and regeneration
 
-Source commit: `24fb333f7ce93fca0c58a3c634b4a9565ba70e64` (2026-10-29T09:15:03-04:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
+Source commit: `da0f1694b67fb303bd10fb96485347c6ea2792d0` (2026-10-29T09:17:04-04:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
 
 With repository access and dependencies installed:
 
