@@ -279,21 +279,72 @@ const report = {
     'Held-out historical passages come from the same works and authors used to build the profiles. They are unseen by the model but are not independent source documents.',
     'Three languages have profiles. Everything else in the historical record is uncovered.',
     'Budgets are small enough to run inside a test suite. A larger budget is not reported here and would not change the conclusions about which task is which.',
-    'Runtime and heap figures are machine-dependent Node.js measurements around a single call, not peak resident size. The reproducibility check deliberately ignores them; every other recorded result must match exactly.',
+    'Runtime and heap figures are machine-dependent Node.js measurements around a single call, not peak resident size. The reproducibility check ignores them entirely.',
+    'What reproduces, stated precisely. EXACTLY: every structure, identifier, count, denominator, boolean and exact-recovery outcome \u2014 including 0 exact recoveries of 39, 39 of 39 known-key applications, relabelling invariance for both solvers, every segmentation oracle agreement and cutoff flag, and every language decision and control. WITHIN 5e-3: aggregate means and extremes. WITHIN 0.35: one item\u2019s own search error rates. NOT COMPARED: runtime and heap.',
+    'Why the per-item slack exists: Math.exp and Math.log are implementation-defined in ECMAScript, so two conforming engines may differ in the last bits. One annealing accept/reject flips on that and the rest of that run takes a different path. Bit-exact cross-platform reproduction of a stochastic search is not claimed here, because it is not true. The conclusions rest on the exactly-compared outcomes, not on any single trajectory.',
     'Nothing in this suite is a blind benchmark, and a public fixture does not become one by being renamed.'
   ]
 };
 const out = path.join(root, 'data/research/v2/evaluation.json');
 const encoded = JSON.stringify(report, null, 2) + '\n';
-// Runtime and heap figures are machine-dependent, so --check compares everything else.
-// A change in any measured result still fails the check; only the resource columns float.
+// What reproduction actually guarantees, stated rather than assumed.
+//
+// Structure, identifiers, counts, booleans and exact-recovery outcomes must match
+// EXACTLY. Floating-point results are compared within a declared tolerance, because
+// Math.exp and Math.log are implementation-defined in ECMAScript: two conforming
+// engines may differ in the last bits, an annealing accept/reject can flip on that,
+// and a mean error rate then moves in the third decimal. Claiming bit-exact
+// cross-platform reproduction here would be claiming something untrue. Runtime and
+// heap figures are machine-dependent and are not compared at all.
 const VOLATILE = new Set(['ms', 'heapDeltaBytes']);
-const stable = value => JSON.stringify(value, (key, v) => (VOLATILE.has(key) ? null : v), 2);
+// Aggregates average a divergence away, so they are held tightly. A single item's
+// annealing run can take a different path entirely once an accept/reject flips, so
+// its own numbers are held loosely: enough to catch a gross regression, not enough
+// to pretend one trajectory is portable. The exact comparisons below carry the
+// weight — every count, flag and outcome the conclusions actually rest on.
+const TOLERANCE = 5e-3, ITEM_TOLERANCE = 0.35;
+function compare(expected, actual, path, problems) {
+  if (problems.length > 12) return;
+  if (typeof expected === 'number' && typeof actual === 'number') {
+    if (Number.isInteger(expected) && Number.isInteger(actual) && !/\.(mean|min|max)$/.test(path)) {
+      if (expected !== actual) problems.push(path + ': ' + expected + ' -> ' + actual);
+      return;
+    }
+    const tol = path.includes('.items[') ? ITEM_TOLERANCE : TOLERANCE;
+    const slack = tol * Math.max(1, Math.abs(expected), Math.abs(actual));
+    if (!(Math.abs(expected - actual) <= slack) && !(Number.isNaN(expected) && Number.isNaN(actual))) {
+      problems.push(path + ': ' + expected + ' -> ' + actual);
+    }
+    return;
+  }
+  if (Array.isArray(expected) || Array.isArray(actual)) {
+    if (!Array.isArray(expected) || !Array.isArray(actual) || expected.length !== actual.length) {
+      problems.push(path + ': array shape changed'); return;
+    }
+    expected.forEach((v, i) => compare(v, actual[i], path + '[' + i + ']', problems));
+    return;
+  }
+  if (expected && actual && typeof expected === 'object' && typeof actual === 'object') {
+    const keys = new Set([...Object.keys(expected), ...Object.keys(actual)]);
+    for (const key of keys) {
+      if (VOLATILE.has(key)) continue;
+      if (!(key in expected) || !(key in actual)) { problems.push(path + '.' + key + ': key added or removed'); continue; }
+      compare(expected[key], actual[key], path + '.' + key, problems);
+    }
+    return;
+  }
+  if (expected !== actual) problems.push(path + ': ' + JSON.stringify(expected) + ' -> ' + JSON.stringify(actual));
+}
 if (process.argv.includes('--check')) {
   if (!fs.existsSync(out)) { console.error('Research evaluation v2 has not been generated.'); process.exitCode = 1; }
-  else if (stable(JSON.parse(fs.readFileSync(out, 'utf8'))) !== stable(report)) {
-    console.error('Research evaluation v2 is stale: a recorded result no longer reproduces.'); process.exitCode = 1;
-  } else console.log('Research evaluation v2 reproduces (runtime and heap figures excluded).');
+  else {
+    const problems = [];
+    compare(JSON.parse(fs.readFileSync(out, 'utf8')), JSON.parse(JSON.stringify(report)), 'report', problems);
+    if (problems.length) {
+      console.error('Research evaluation v2 is stale: a recorded result no longer reproduces.\n  ' + problems.join('\n  '));
+      process.exitCode = 1;
+    } else console.log('Research evaluation v2 reproduces: every count, flag and outcome exactly; aggregates within ' + TOLERANCE + '; per-item search results within ' + ITEM_TOLERANCE + '; runtime and heap excluded.');
+  }
 } else fs.writeFileSync(out, encoded);
 const t = report.tasks;
 console.log('independent-key recovery: ' + t.independentKeyRecovery.annealing.denominator + ' items; annealing mean plaintext error ' +

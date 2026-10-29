@@ -35,7 +35,10 @@ be expanded rather than hedged again.
 ## Checks actually run, and their results
 
 ### Full suite
-`npm test` — **70 suites, all passed**, including the two new ones. `npm run lint:html` —
+`npm test` — **70 suites, all passed**, including the two new ones. The first CI run failed
+on research-evaluation v2 and that failure was real: the check was claiming bit-exact
+cross-platform reproduction of a stochastic search, which is not true. See the limitations
+below for what it now claims instead. `npm run lint:html` —
 214 files, no errors. Local link check — 6,540 links, 0 broken. Accessibility, mobile and
 structural sweeps — 2,140 / 645 / 2,384 assertions, 0 failed.
 
@@ -119,8 +122,14 @@ overflow and zero page script errors. The one non-pass is the local static serve
   separate experiment; it would not change which task is which.
 - **CM023 is a preprint**, and its conclusions about intended attack design are conditional
   on a conjecture the authors posit rather than demonstrate. The exhibit labels them so.
-- Runtime and heap figures are Node.js measurements around single calls. The reproducibility
-  check deliberately ignores them; every other recorded result must match exactly.
+- **Per-item search results are not bit-portable between JavaScript engines.** `Math.exp` and
+  `Math.log` are implementation-defined, so one annealing accept/reject can flip and send a
+  run down a different path. This was found the honest way: the suite passed locally and
+  failed in CI at 74.8% against 74.9%. The reproducibility check now states what it
+  guarantees — every count, flag and outcome exactly, aggregates within 5 × 10⁻³, one item's
+  own error rates within 0.35, runtime and heap not compared at all. It was then probed
+  against three real regressions (a changed seed, a broken known-key path, and a 2% drift in
+  every float) and caught all three.
 
 ## Acceptance criteria not executed
 
