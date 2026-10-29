@@ -3,8 +3,8 @@
 This snapshot brings together **214 public HTML pages**, **80 nonempty inline scripts**, **53 shared/supporting JavaScript files**, **29 JSON/manifest data files**, and **173 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
 
 - Source repository: systemslibrarian/cipher-museum
-- Exact source commit: `da0f1694b67fb303bd10fb96485347c6ea2792d0`
-- Source commit time: 2026-10-29T09:17:04-04:00
+- Exact source commit: `51fc1e02338ac0b05976a769f51b401bf3f5a171`
+- Source commit time: 2026-10-29T09:50:07-04:00
 - Public website: https://ciphermuseum.com/
 - Inventory authority: docs/page-audit/coverage.json, checked against every tracked public HTML page.
 - Snapshot hashes identify the original files. Exported text is reformatted; direct ebook URLs are replaced with a visible omission marker. Book titles, authors and publication details remain.
@@ -255,7 +255,7 @@ Suggested finding fields: `id, page_id, path, quotation_or_location, category, s
 
 # Pages P001–P020
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P001: 404.html -->
 <a id="p001"></a>
@@ -5507,7 +5507,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P021–P040
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P021: ciphers/bach-motif.html -->
 <a id="p021"></a>
@@ -10807,7 +10807,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P041–P060
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P041: ciphers/colossus.html -->
 <a id="p041"></a>
@@ -16251,7 +16251,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P061–P080
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P061: ciphers/elizebeth-friedman.html -->
 <a id="p061"></a>
@@ -21801,7 +21801,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P081–P100
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P081: ciphers/joan-clarke.html -->
 <a id="p081"></a>
@@ -27169,7 +27169,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P101–P120
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P101: ciphers/morse.html -->
 <a id="p101"></a>
@@ -32864,7 +32864,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P121–P140
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P121: ciphers/rochefort.html -->
 <a id="p121"></a>
@@ -38167,7 +38167,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P141–P160
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P141: ciphers/tap-code.html -->
 <a id="p141"></a>
@@ -44170,7 +44170,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P161–P180
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P161: community/index.html -->
 <a id="p161"></a>
@@ -51782,7 +51782,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P181–P200
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P181: hall-of-foundations/polynomial-rings.html -->
 <a id="p181"></a>
@@ -57600,7 +57600,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P201–P214
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P201: lab/modern-attack-evidence.html -->
 <a id="p201"></a>
@@ -62480,7 +62480,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Source register and recorded access limits
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 These 173 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
@@ -65278,7 +65278,7 @@ These 173 identities and reading scopes come from the prior review ledger. They 
 
 # javascript appendix 1
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -68966,7 +68966,7 @@ if (typeof require !== 'undefined') {
 
 # javascript appendix 2
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/all-engines.js
 
@@ -73238,7 +73238,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 # javascript appendix 3
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/caesar-break.js
 
@@ -76648,7 +76648,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 4
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/detective/challenges.js
 
@@ -79977,7 +79977,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 5
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/learning-path.js
 
@@ -82457,7 +82457,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 6
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-ui.js
 
@@ -83742,7 +83742,7 @@ self.addEventListener('fetch', (event) => {
 
 # data appendix 1
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — tours/foundations.json
 
@@ -84674,7 +84674,7 @@ Source SHA-256: `72c9a03dfa48a2e2a1ae78e44e880042471e53fb871ca22dffdc8bd38a9f64e
 
 # data appendix 2
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v1/language-model.json
 
@@ -84689,7 +84689,7 @@ Source SHA-256: `5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2
 
 # data appendix 3
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — public/corpus/v0.8/browser-sample.json
 
@@ -90468,7 +90468,7 @@ Source SHA-256: `788eb1bc8977cb9fd38d8584521bd150ebaf0a660f24f732b8ccead684291b7
 
 # data appendix 4
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — js/search-index.json
 
@@ -90483,7 +90483,7 @@ Source SHA-256: `58a4b33b2fb98bfaaad9d7e13664f38a2492dab83b1f506faa519ec0464919a
 
 # data appendix 5
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/artifact-cards.json
 
@@ -93570,7 +93570,7 @@ Source SHA-256: `3bd4770c7e3bdafad529f347a3e63703a5db49633054c20396147e9ac719f89
 
 # data appendix 6
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — corpus/engine-manifest.json
 
@@ -98014,7 +98014,7 @@ Source SHA-256: `ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc70724
 
 ## Data — data/research/v2/evaluation.json
 
-Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b46`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+Source SHA-256: `65729ebf3bf2dd475cdc861253054e7629340f10dd035ab487905f551ebb0ceb`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
 
 ```json
 {
@@ -98074,15 +98074,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7624,
             "keyError": 1,
-            "ms": 23.4,
-            "heapDeltaBytes": 8388696
+            "ms": 28,
+            "heapDeltaBytes": 8368792
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7079,
             "keyError": 0.875,
-            "ms": 420,
-            "heapDeltaBytes": 10402456
+            "ms": 455,
+            "heapDeltaBytes": 12344672
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98103,15 +98103,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7277,
             "keyError": 0.8393,
-            "ms": 20.7,
-            "heapDeltaBytes": 4317640
+            "ms": 21.3,
+            "heapDeltaBytes": 395960
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8069,
             "keyError": 0.9821,
-            "ms": 769.1,
-            "heapDeltaBytes": 48688088
+            "ms": 814.4,
+            "heapDeltaBytes": 103012552
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98132,14 +98132,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.6167,
             "keyError": 0.8286,
-            "ms": 13.4,
+            "ms": 13.5,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8167,
             "keyError": 0.9714,
-            "ms": 303.9,
+            "ms": 305.3,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98161,14 +98161,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7606,
             "keyError": 0.9231,
-            "ms": 22.5,
-            "heapDeltaBytes": 4548904
+            "ms": 23,
+            "heapDeltaBytes": 4445424
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8122,
             "keyError": 0.8974,
-            "ms": 385.6,
+            "ms": 401.2,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98190,15 +98190,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7793,
             "keyError": 0.963,
-            "ms": 21.8,
-            "heapDeltaBytes": 1470424
+            "ms": 23.1,
+            "heapDeltaBytes": 1637192
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7793,
             "keyError": 0.963,
-            "ms": 714.8,
-            "heapDeltaBytes": 6377520
+            "ms": 746.2,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98219,15 +98219,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7917,
             "keyError": 1,
-            "ms": 12.9,
-            "heapDeltaBytes": 18895488
+            "ms": 13.5,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7583,
             "keyError": 0.9091,
-            "ms": 260.1,
-            "heapDeltaBytes": 0
+            "ms": 273.7,
+            "heapDeltaBytes": 8504912
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98248,14 +98248,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.5149,
             "keyError": 0.75,
-            "ms": 23.1,
-            "heapDeltaBytes": 7358952
+            "ms": 24.8,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7772,
             "keyError": 0.9167,
-            "ms": 334.2,
+            "ms": 345.3,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98277,15 +98277,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7921,
             "keyError": 0.9231,
-            "ms": 21.6,
-            "heapDeltaBytes": 2588008
+            "ms": 21.9,
+            "heapDeltaBytes": 4133832
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7277,
             "keyError": 0.8654,
-            "ms": 657.4,
-            "heapDeltaBytes": 0
+            "ms": 675.3,
+            "heapDeltaBytes": 12809752
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98306,14 +98306,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7583,
             "keyError": 0.8485,
-            "ms": 14,
+            "ms": 14.6,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9091,
-            "ms": 273.8,
+            "ms": 284.5,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98335,15 +98335,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7638,
             "keyError": 1,
-            "ms": 22.3,
-            "heapDeltaBytes": 4888040
+            "ms": 23.6,
+            "heapDeltaBytes": 3436936
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.794,
             "keyError": 0.9744,
-            "ms": 390.4,
-            "heapDeltaBytes": 764280
+            "ms": 405.8,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98364,15 +98364,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7839,
             "keyError": 0.9231,
-            "ms": 20.9,
-            "heapDeltaBytes": 611136
+            "ms": 23.5,
+            "heapDeltaBytes": 832280
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.799,
             "keyError": 0.9808,
-            "ms": 662.6,
-            "heapDeltaBytes": 30731264
+            "ms": 676.2,
+            "heapDeltaBytes": 41064488
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98393,14 +98393,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.5667,
             "keyError": 0.7353,
-            "ms": 14.1,
+            "ms": 14,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9706,
-            "ms": 284.1,
+            "ms": 284.3,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98422,15 +98422,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7814,
             "keyError": 0.9773,
-            "ms": 33.9,
-            "heapDeltaBytes": 16780376
+            "ms": 34,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8103,
             "keyError": 0.9091,
-            "ms": 514.1,
-            "heapDeltaBytes": 20158320
+            "ms": 541.4,
+            "heapDeltaBytes": 44260464
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98451,15 +98451,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7685,
             "keyError": 0.9492,
-            "ms": 34.2,
-            "heapDeltaBytes": 0
+            "ms": 33.4,
+            "heapDeltaBytes": 19938784
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7974,
             "keyError": 1,
-            "ms": 876.6,
-            "heapDeltaBytes": 67507448
+            "ms": 889.5,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98480,15 +98480,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.6917,
             "keyError": 0.8286,
-            "ms": 13.4,
-            "heapDeltaBytes": 19747280
+            "ms": 14.4,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9714,
-            "ms": 310.3,
-            "heapDeltaBytes": 51197472
+            "ms": 317.9,
+            "heapDeltaBytes": 52782528
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98509,14 +98509,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7712,
             "keyError": 0.95,
-            "ms": 34.5,
-            "heapDeltaBytes": 19343408
+            "ms": 34.7,
+            "heapDeltaBytes": 18764616
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7837,
             "keyError": 0.95,
-            "ms": 432.5,
+            "ms": 435.7,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98538,15 +98538,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7868,
             "keyError": 1,
-            "ms": 33.1,
-            "heapDeltaBytes": 0
+            "ms": 32.4,
+            "heapDeltaBytes": 15607136
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8025,
             "keyError": 0.9818,
-            "ms": 773.8,
-            "heapDeltaBytes": 80141808
+            "ms": 797.6,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98567,15 +98567,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7833,
             "keyError": 0.9688,
-            "ms": 14,
+            "ms": 15.1,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.625,
             "keyError": 0.75,
-            "ms": 257.5,
-            "heapDeltaBytes": 0
+            "ms": 277.1,
+            "heapDeltaBytes": 19454224
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98596,15 +98596,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7868,
             "keyError": 0.9091,
-            "ms": 36.8,
-            "heapDeltaBytes": 22054744
+            "ms": 36.5,
+            "heapDeltaBytes": 20987832
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8307,
             "keyError": 0.9773,
-            "ms": 494.2,
-            "heapDeltaBytes": 5946840
+            "ms": 521.8,
+            "heapDeltaBytes": 2473440
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98625,15 +98625,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.8088,
             "keyError": 0.9344,
-            "ms": 34.4,
+            "ms": 35.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.837,
             "keyError": 0.9836,
-            "ms": 913.1,
-            "heapDeltaBytes": 55928776
+            "ms": 958.6,
+            "heapDeltaBytes": 44469816
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98654,14 +98654,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.8333,
             "keyError": 0.975,
-            "ms": 14.6,
+            "ms": 13.6,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.95,
-            "ms": 381,
+            "ms": 398.5,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98683,15 +98683,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.6603,
             "keyError": 0.725,
-            "ms": 35.6,
+            "ms": 36.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.975,
-            "ms": 408.7,
-            "heapDeltaBytes": 0
+            "ms": 420.9,
+            "heapDeltaBytes": 13268496
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98712,15 +98712,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7556,
             "keyError": 0.8772,
-            "ms": 32.5,
-            "heapDeltaBytes": 17125056
+            "ms": 33.6,
+            "heapDeltaBytes": 17394680
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9474,
-            "ms": 792.8,
-            "heapDeltaBytes": 0
+            "ms": 837.8,
+            "heapDeltaBytes": 67459056
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98742,14 +98742,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "plaintextError": 0.6667,
             "keyError": 0.8056,
             "ms": 14,
-            "heapDeltaBytes": 21176568
+            "heapDeltaBytes": 21176544
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7917,
             "keyError": 0.9722,
-            "ms": 312.9,
-            "heapDeltaBytes": 34488296
+            "ms": 305.8,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98770,15 +98770,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.419,
             "keyError": 0.641,
-            "ms": 33.1,
-            "heapDeltaBytes": 17018016
+            "ms": 33.3,
+            "heapDeltaBytes": 17323976
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.781,
             "keyError": 0.9744,
-            "ms": 392.1,
-            "heapDeltaBytes": 0
+            "ms": 393.8,
+            "heapDeltaBytes": 13519816
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98799,15 +98799,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7746,
             "keyError": 0.8545,
-            "ms": 32.9,
-            "heapDeltaBytes": 0
+            "ms": 29,
+            "heapDeltaBytes": 14767960
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.819,
             "keyError": 0.8909,
-            "ms": 720,
-            "heapDeltaBytes": 79834432
+            "ms": 734,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98828,15 +98828,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7333,
             "keyError": 0.8571,
-            "ms": 14.1,
-            "heapDeltaBytes": 0
+            "ms": 13.6,
+            "heapDeltaBytes": 20191592
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9429,
-            "ms": 282.4,
-            "heapDeltaBytes": 10589048
+            "ms": 292.3,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98857,15 +98857,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7814,
             "keyError": 1,
-            "ms": 28.9,
-            "heapDeltaBytes": 17685904
+            "ms": 34.7,
+            "heapDeltaBytes": 18294472
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7331,
             "keyError": 0.8462,
-            "ms": 400.4,
-            "heapDeltaBytes": 0
+            "ms": 421.3,
+            "heapDeltaBytes": 31366168
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -98886,14 +98886,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.8232,
             "keyError": 0.9636,
-            "ms": 33.2,
-            "heapDeltaBytes": 17067608
+            "ms": 31.1,
+            "heapDeltaBytes": 15102808
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7974,
             "keyError": 0.9091,
-            "ms": 765,
+            "ms": 770,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98922,7 +98922,7 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.725,
             "keyError": 0.7429,
-            "ms": 282.3,
+            "ms": 292.1,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98944,14 +98944,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.8105,
             "keyError": 1,
-            "ms": 35.5,
-            "heapDeltaBytes": 23386136
+            "ms": 41.1,
+            "heapDeltaBytes": 23764160
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7813,
             "keyError": 0.878,
-            "ms": 446.5,
+            "ms": 449.7,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -98973,15 +98973,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7959,
             "keyError": 1,
-            "ms": 37.5,
+            "ms": 35.9,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8367,
             "keyError": 0.9643,
-            "ms": 778.2,
-            "heapDeltaBytes": 0
+            "ms": 775.9,
+            "heapDeltaBytes": 13733984
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99002,15 +99002,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9688,
-            "ms": 13.8,
+            "ms": 11.3,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9375,
-            "ms": 240.6,
-            "heapDeltaBytes": 14256904
+            "ms": 235.6,
+            "heapDeltaBytes": 21512552
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99031,15 +99031,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7719,
             "keyError": 1,
-            "ms": 30,
+            "ms": 29.6,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8041,
             "keyError": 0.9459,
-            "ms": 342.8,
-            "heapDeltaBytes": 0
+            "ms": 357.3,
+            "heapDeltaBytes": 40909672
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99060,15 +99060,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.769,
             "keyError": 0.9815,
-            "ms": 30.9,
+            "ms": 30.8,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7778,
             "keyError": 0.9074,
-            "ms": 735.9,
-            "heapDeltaBytes": 1716976
+            "ms": 748.2,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99089,15 +99089,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9688,
-            "ms": 12.1,
+            "ms": 12.3,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9063,
-            "ms": 239.7,
-            "heapDeltaBytes": 7565856
+            "ms": 243.7,
+            "heapDeltaBytes": 8013144
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99118,15 +99118,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.7604,
             "keyError": 0.8718,
-            "ms": 28,
+            "ms": 27.9,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8077,
             "keyError": 1,
-            "ms": 386.5,
-            "heapDeltaBytes": 0
+            "ms": 390.2,
+            "heapDeltaBytes": 49345448
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99147,14 +99147,14 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.8077,
             "keyError": 0.9821,
-            "ms": 31.3,
+            "ms": 32.9,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8107,
             "keyError": 0.9643,
-            "ms": 759.6,
+            "ms": 754.4,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -99176,15 +99176,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
             "exact": false,
             "plaintextError": 0.8167,
             "keyError": 0.9143,
-            "ms": 11.3,
+            "ms": 11.6,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8333,
             "keyError": 0.9429,
-            "ms": 278.2,
-            "heapDeltaBytes": 21335296
+            "ms": 295.5,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99209,15 +99209,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
         },
         "ms": {
           "n": 39,
-          "mean": 24.2949,
+          "mean": 24.7846,
           "min": 11.3,
-          "max": 37.5
+          "max": 41.1
         },
         "heapDeltaBytes": {
           "n": 39,
-          "mean": 6268009.8462,
+          "mean": 6322178.8718,
           "min": 0,
-          "max": 23386136
+          "max": 23764160
         }
       },
       "beamSearch": {
@@ -99236,15 +99236,15 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
         },
         "ms": {
           "n": 39,
-          "mean": 486.5051,
-          "min": 239.7,
-          "max": 913.1
+          "mean": 500.6103,
+          "min": 235.6,
+          "max": 958.6
         },
         "heapDeltaBytes": {
           "n": 39,
-          "mean": 14041822.5641,
+          "mean": 15392440.6154,
           "min": 0,
-          "max": 80141808
+          "max": 103012552
         }
       },
       "exactRecovery": {
@@ -99951,7 +99951,9 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
     "Held-out historical passages come from the same works and authors used to build the profiles. They are unseen by the model but are not independent source documents.",
     "Three languages have profiles. Everything else in the historical record is uncovered.",
     "Budgets are small enough to run inside a test suite. A larger budget is not reported here and would not change the conclusions about which task is which.",
-    "Runtime and heap figures are machine-dependent Node.js measurements around a single call, not peak resident size. The reproducibility check deliberately ignores them; every other recorded result must match exactly.",
+    "Runtime and heap figures are machine-dependent Node.js measurements around a single call, not peak resident size. The reproducibility check ignores them entirely.",
+    "What reproduces, stated precisely. EXACTLY: every structure, identifier, count, denominator, boolean and exact-recovery outcome — including 0 exact recoveries of 39, 39 of 39 known-key applications, relabelling invariance for both solvers, every segmentation oracle agreement and cutoff flag, and every language decision and control. WITHIN 5e-3: aggregate means and extremes. WITHIN 0.35: one item’s own search error rates. NOT COMPARED: runtime and heap.",
+    "Why the per-item slack exists: Math.exp and Math.log are implementation-defined in ECMAScript, so two conforming engines may differ in the last bits. One annealing accept/reject flips on that and the rest of that run takes a different path. Bit-exact cross-platform reproduction of a stochastic search is not claimed here, because it is not true. The conclusions rest on the exactly-compared outcomes, not on any single trajectory.",
     "Nothing in this suite is a blind benchmark, and a public fixture does not become one by being renamed."
   ]
 }
@@ -99962,7 +99964,7 @@ Source SHA-256: `0bb1fee1ba045d29099d8d0bbb4b30373a46f33c2f0b285fea871924f3947b4
 
 # Columnar classroom worksheet
 
-Snapshot: `da0f1694b67fb303bd10fb96485347c6ea2792d0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `51fc1e02338ac0b05976a769f51b401bf3f5a171`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `public/teaching/columnar-classroom.md`. SHA-256: `195e139c2732cb0d3d6c2ab5dd6fe5addf6100e130bd875a52b0d2d945d68091`. Its Node.js runner and fixed JSON fixtures are in the preceding appendices.
 
