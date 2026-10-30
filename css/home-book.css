@@ -1,0 +1,19 @@
+/* Homepage feature for the forthcoming Cipher Museum ebook. */
+.home-book{padding:1.5rem 2rem 0;scroll-margin-top:6rem}
+.home-book-inner{display:grid;grid-template-columns:minmax(180px,250px) minmax(0,1fr);gap:3.5rem;align-items:center;max-width:1080px;margin:0 auto;padding:3rem 3.5rem;border:1px solid var(--gold-b);border-radius:var(--rl);background:radial-gradient(ellipse at 15% 50%,rgba(201,168,76,.1),transparent 65%),var(--s1)}
+.home-book-cover{display:block;max-width:250px;filter:drop-shadow(0 14px 18px rgba(0,0,0,.55))}
+.home-book-cover img{display:block;width:100%;height:auto;border:1px solid var(--gold-b)}
+.home-book-copy p{margin:0 0 1rem}
+.home-book-copy .home-book-eyebrow{font-family:var(--fm);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.home-book-copy h2{font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.18;letter-spacing:.01em;color:var(--tx);margin:0 0 .8rem;text-wrap:balance}
+.home-book-subtitle{font-size:1.1rem;line-height:1.5;font-style:italic;color:var(--tx2)}
+.home-book-copy .home-book-author{font-family:var(--fm);font-size:.65rem;line-height:1.7;color:var(--gold-dim);margin-bottom:1.4rem}
+.home-book-promise{font-size:1.25rem;line-height:1.6;color:var(--tx)}
+.home-book-detail{font-size:1rem;line-height:1.65;color:var(--tx2)}
+.home-book-actions{display:flex;align-items:center;gap:1rem 1.5rem;flex-wrap:wrap;margin:1.5rem 0 1rem}
+.home-book-button{display:inline-flex;align-items:center;gap:.8rem;min-height:46px;padding:.8rem 1.25rem;border:1px solid var(--gold);border-radius:var(--r);background:var(--gold);color:var(--black);font-family:var(--fm);font-size:.75rem;font-weight:600;line-height:1.5}
+.home-book-button:hover{background:var(--gold-lt);border-color:var(--gold-lt);color:var(--black)}
+.home-book-mystery{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;font-size:1rem;text-decoration:underline;text-decoration-color:var(--gold-b);text-underline-offset:.25em}
+.home-book-copy .home-book-status{font-size:.86rem;line-height:1.5;color:var(--tx3);margin-bottom:0}
+@media(max-width:760px){.home-book{padding:1rem 1rem 0}.home-book-inner{grid-template-columns:1fr;gap:1.75rem;padding:2rem 1.5rem}.home-book-cover{width:180px;max-width:100%;margin:0 auto}.home-book-copy h2{font-size:2rem}.home-book-promise{font-size:1.15rem}.home-book-actions{gap:.5rem 1rem}}
+@media(prefers-reduced-motion:reduce){.home-book a{transition:none}}
