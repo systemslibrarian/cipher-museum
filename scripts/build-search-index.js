@@ -306,6 +306,7 @@ function processFoundationsPage(file) {
 
 // Explicit inclusion list — index.html (homepage) and search.html excluded
 const TOP_LEVEL = [
+  'the-book.html',
   'museum-map.html',
   'timeline.html',
   'learn.html',
