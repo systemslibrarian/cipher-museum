@@ -3,7 +3,7 @@
   "model": "museum-prose-quadgram-v1",
   "modelSha256": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
   "scorerSha256": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
-  "solverSha256": "4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420",
+  "solverSha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
   "fixturesSha256": "30633f1a2bd3466e68032d9fed244fb185afd349c46e111e55c9639378661cb8",
   "scope": "Public demonstrations; no training, blind holdout or historical-language coverage claim. One-symbol-unlocked runs disclose the rest of the key; they do not establish general recovery.",
   "records": [

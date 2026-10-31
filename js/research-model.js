@@ -5,7 +5,12 @@
 (function (global) {
   const KIND = 'cipher-museum-transcription';
   const TYPES = ['ciphertext', 'cleartext', 'marginal', 'missing', 'editorial'];
-  const KEY_TYPES = ['letter', 'syllable', 'word', 'name', 'null', 'space', 'repeat', 'erase', 'unknown'];
+  const KEY_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null', 'space', 'repeat', 'erase', 'unknown'];
+  const SOURCE_FIELDS = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName',
+    'custodianCountry','repositoryRecordUrl','originPlace','originStatus','productionDateStart','productionDateEnd','productionDateStatus','provenance',
+    'scriptIdentification','scriptStatus','languageHypothesis','languageStatus',
+    'objectRights','objectAccess','objectAttribution','imageRights','imageAccess','imageAttribution','transcriptionRights','transcriptionAccess','transcriptionAttribution'];
+  const SOURCE_STATUSES = ['unknown', 'provisional', 'established'];
   const copy = x => JSON.parse(JSON.stringify(x));
   const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   function check(ok, message) { if (!ok) throw new Error(message); }
@@ -21,8 +26,13 @@
   function source(x) {
     check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid source record.');
     const result = {};
-    for (const field of ['artifactId', 'archive', 'shelfmark', 'folio', 'transcriber', 'date', 'method', 'imageName']) result[field] = string(x[field] || '', 500, field);
-    result.url = url(x.url || ''); return result;
+    for (const field of SOURCE_FIELDS) {
+      const value = x[field] === undefined ? '' : x[field];
+      if (field === 'url' || field === 'repositoryRecordUrl') result[field] = url(value);
+      else if (field.endsWith('Status')) { result[field] = value || 'unknown'; check(SOURCE_STATUSES.includes(result[field]), 'Invalid source uncertainty status.'); }
+      else result[field] = string(value, 500, field);
+    }
+    return result;
   }
   function create(raw = '') {
     string(raw, 10000, 'Transcription');
@@ -218,7 +228,7 @@
   // ── Numerical segmentation ────────────────────────────────────────────────
   // A typed entry distinguishes a letter, a syllable, a whole word, a name and a
   // null that deliberately contributes nothing. A bare string stays one reading.
-  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'null'];
+  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null'];
   const SEG_LINES = ['boundary', 'span'];
   const COUNT_CAP = 1e15;
   function normalizeCodes(key) {
@@ -651,9 +661,18 @@
     const state = copy(b[type]);
     delete state.inputFingerprint; delete state.configurationFingerprint;
     delete state.elapsedMs; // A measurement is not a solver input.
-    return fingerprint(canonical({ state, source: b.evidence, selectedLayer: b.selectedLayer,
+    return fingerprint(canonical({ state, source: bindingEvidence(b.evidence), selectedLayer: b.selectedLayer,
       modelBuild: b.tool.modelBuild, scoringModel: type === 'search' ? b.tool.scoringModel : state.scoring,
       solver: type === 'search' ? b.tool.solver : 'numerical-lattice' }));
+  }
+  // Empty optional metadata must not make an unchanged pre-extension bundle
+  // appear edited. Meaningful new metadata still participates in every binding.
+  function bindingEvidence(d) {
+    const result = copy(d);
+    for (const f of SOURCE_FIELDS.slice(9)) {
+      if (result.source[f] === '' || (f.endsWith('Status') && result.source[f] === 'unknown')) delete result.source[f];
+    }
+    return result;
   }
   // A declared NON-cryptographic 64-bit fingerprint. It detects a changed input so
   // stale results can be invalidated; it is not an integrity or authenticity check.
@@ -743,7 +762,7 @@
       images: d.images.map(i => ({ id: i.id, name: i.name, sha256: i.sha256, width: i.width, height: i.height,
         rotation: i.rotation, crop: i.crop.slice() })),
       imageBytes: 'Image bytes are deliberately not included. Reopen each file locally; the recorded hash tells you whether the bytes match.',
-      sourceFingerprint: s.sourceFingerprint === undefined ? fingerprint(canonical(d)) : s.sourceFingerprint,
+      sourceFingerprint: s.sourceFingerprint === undefined ? fingerprint(canonical(bindingEvidence(d))) : s.sourceFingerprint,
       limits: 'Replay needs the same solver and scoring-model build, not only the same seed. A recorded filename or hash identifies bytes; it does not establish that an image is the archival object it claims to be.'
     };
     for (const type of ['search', 'segmentation']) if (value[type]) {
@@ -784,7 +803,7 @@
       rotation: integer(i.rotation, 0, 270, 'image rotation'), crop: i.crop }));
     b.sourceFingerprint = string(b.sourceFingerprint || '', 32, 'Source fingerprint');
     // Stale results are reported, never silently reused.
-    const sourceMoved = b.legacyUnbound || b.sourceFingerprint !== fingerprint(canonical(b.evidence));
+    const sourceMoved = b.legacyUnbound || b.sourceFingerprint !== fingerprint(canonical(bindingEvidence(b.evidence)));
     const modelMoved = b.tool.modelBuild !== MODEL_BUILD;
     const searchMoved = !!(b.search && (b.legacyUnbound || modelMoved ||
       b.search.inputFingerprint !== fingerprint(b.search.raw) || b.search.configurationFingerprint !== resultBinding(b, 'search')));
@@ -889,7 +908,7 @@
     check(['diagonal', 'row-major'].includes(kind), 'Unknown route.');
     return Array.from({length:153}, (_, i) => kind === 'diagonal' ? (i % 9) * 17 + (2 * i % 17) : i);
   }
-  const api = { TYPES, KEY_TYPES, SEG_TYPES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
+  const api = { TYPES, KEY_TYPES, SEG_TYPES, SOURCE_FIELDS, SOURCE_STATUSES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
     create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey,
     segment, segmentMetrics, normalizeCodes, rng, parseSymbols, search, beamSearch, metrics, url, z340Route,
     imageRecord, addImage, regionToDisplay, displayToRegion, displayAspect,
