@@ -10,7 +10,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 **[Live Museum →](https://ciphermuseum.com)**
 
-**[Independent audit document — all 214 pages](audit/README.md)** — a downloadable snapshot with complete page text, examples, source notes, supporting scripts/data, and an AI review prompt. Available as one document or smaller review parts; no repository access is needed to read the exported files.
+**[Independent audit reading pack — 216-page snapshot](audit/README.md)** — the frozen 30 October 2026 export includes page text, examples, source notes, supporting scripts/data, and an AI review prompt. Available as one document or smaller parts. Its source commit and limits are recorded in the pack; it does not update automatically with the live museum.
 
 [![DOI](https://zenodo.org/badge/1182903273.svg)](https://doi.org/10.5281/zenodo.23298940)
 [![Cipher Corpus dataset v0.6 DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23297920.svg)](https://doi.org/10.5281/zenodo.23297920)
@@ -26,29 +26,36 @@ citation and rights information remains in [`public/corpus/README.md`](public/co
 
 ---
 
-## 📰 Latest Update
+## 📚 Forthcoming Book
 
-- **Cipher Corpus current downloads — 22 October 2026** — the on-page browser now samples corrected v0.8 records and shows each pair's verification and historical provenance status. Separate v0.8 historical and three-shot evaluation supplements replace misleading legacy examples without changing the published v0.6 archive. The corpus page labels version-specific counts, and uncached exhibits show a usable offline notice. See the [v0.8 release notes](docs/releases/corpus-v0.8.md).
+<a href="https://ciphermuseum.com/the-book.html"><img src="images/cipher-museum-book-cover.png" alt="Secrets of the Cipher Museum by Paul Clark" width="220"></a>
 
-- **Museum-wide accuracy and behavior audit — 22 October 2026** — corrected historical attributions, mathematical claims, bibliography destinations, cipher input handling, Two-square’s rule and interactive navigation. Updated shared summaries, added regressions, and documented simplified models and frozen-dataset errata. See [scope, evidence, fixes and verification](docs/FULL_MUSEUM_AUDIT.md).
+**[Secrets of the Cipher Museum](https://ciphermuseum.com/the-book.html)**
 
-- **Book-guided codebreaking — 22 October 2026** — six additions connect reading with hands-on work: a manual substitution desk, a transcription workspace, synchronized multiple anagramming, chapter reading trails, a decimal VENONA exercise, and an OTP tampering experiment. Nine correction areas distinguish evidence from guesses, mathematical assumptions from implementation conditions, and the stages of historical codebreaking. The experiments use original teaching fixtures and state their limits; book references link to public author or publisher resources. See [the changes and their checks](docs/BOOK_REVIEW_IMPROVEMENTS.md).
-- **Manual-cipher expansion — §165–167** — [RS44](https://ciphermuseum.com/ciphers/rs44.html) (27 March 1944), [German Double Playfair](https://ciphermuseum.com/ciphers/double-playfair.html) (December 1941), and [AMSCO](https://ciphermuseum.com/ciphers/amsco.html) (ACA specification). Registered pure engines reproduce complete independent source examples; accessible demos animate the procedures. See [source editions and limits](docs/HISTORICAL_PROCEDURES.md).
-- **Historical expansion — §161–164** — [NEMA](https://ciphermuseum.com/ciphers/nema.html), [Hagelin C-36 / C-52](https://ciphermuseum.com/ciphers/hagelin-c36.html), [Fleissner Turning Grille](https://ciphermuseum.com/ciphers/turning-grille.html), and [Myszkowski Transposition](https://ciphermuseum.com/ciphers/myszkowski.html). NEMA, turning grille, and Myszkowski have bespoke encrypt/decrypt demos; the Hagelin lineage links to the M-209 demo and separates public cryptanalysis from the Crypto AG supplier history. Existing exhibit numbers remain stable.
-- **Modern-protocol exhibits — §158–160** — three new exhibits extend **Hall XI (Modern Cryptography)** beyond ciphers into the protocols that secure the modern internet: **[ECDSA](https://ciphermuseum.com/ciphers/ecdsa.html)** (elliptic-curve signatures), **[Shamir's Secret Sharing](https://ciphermuseum.com/ciphers/shamir-secret-sharing.html)** (information-theoretic threshold splitting), and **[Zero-Knowledge Proofs](https://ciphermuseum.com/ciphers/zero-knowledge-proofs.html)** (prove a statement without disclosing its witness beyond the defined guarantee). Each ships a working interactive and cross-links to the mathematics beneath it in the Hall of Foundations. Alongside them, **§157 [Learning With Errors](https://ciphermuseum.com/hall-of-foundations/learning-with-errors.html)** joins the Hall of Foundations as its own exhibit — an introduction to lattice-based cryptography, with each standard’s assumptions distinguished.
-- **Hall of Foundations** ([hall-of-foundations/](https://ciphermuseum.com/hall-of-foundations/index.html)) — a 17-exhibit mathematics annex (**§141–157**) on the number theory, hardness assumptions, and structures under modern cryptography: finite fields, Euler–Fermat, the Prime Number Theorem, one-way functions, lattices (SVP / CVP / Learning With Errors), polynomial rings, random oracles, Shamir interpolation, and bilinear pairings — each with a working interactive in the museum's dark/gold design system.
-  - **Integrated museum-wide** — floor-plan annex on the museum map, a "Mathematics Under Cryptography" guided tour, timeline entries (Fermat 1640, Euler 1763, Shor 1994), 11 new glossary terms, site-search coverage, and two-way cross-links with the RSA, Diffie–Hellman, One-Time Pad, SHA-256, and AES exhibits ("the mathematics beneath").
-  - **Tested like the engines** — the math lives in DOM-free modules (`lattice-math.js`, `crypto-algebra.js`, `ec-math.js`) behind five CI suites: unit vectors, fast-check property fuzzing (ring axioms, Shamir threshold recovery, pairing bilinearity, Hasse bounds, Babai exactness), and a page-constant pinning suite so on-page examples can never drift from the modules.
-- **Cipher Corpus v0.6** ([cipher-corpus.html](cipher-corpus.html)) — **100,326 records across 85 cipher types**, including 100 synthetic exercises each for RS44, German Double Playfair, and AMSCO. All 100,026 v0.5 records and split assignments remain byte-identical; the new records include explicit reproducible settings and documented text conventions.
-  - **Pinned replay:** 99,800 exact matches and 526 existing known-deviation records; no new exceptions. The original independent manual/ACA known-answer tests remain separate from generated exercises.
-  - **Downloads and evaluation:** JSONL, JSON, CSV (including keys), browser samples, 300 public-split evaluation prompts, engine manifest and SHA-256 checksums are regenerated. See [corpus documentation](public/corpus/README.md).
-  - **Published archive:** [Zenodo v0.6](https://doi.org/10.5281/zenodo.23297920) preserves the canonical JSONL dataset and 11 supporting files. The website additionally provides JSON, CSV, difficulty subsets, and browser samples.
-  - The older Arabic and historical supplements remain outside the canonical benchmark; their merge is deferred to a future release.
-- **Engine verification suite** ([docs/CIPHER_ENGINE_STANDARD.md](docs/CIPHER_ENGINE_STANDARD.md)) — a dedicated `tests/engines/` layer with **one spec file per engine** (fast-check property roundtrips, robustness, invalid-key handling across 11 key shapes, Unicode policy, state isolation, and a fixed known-answer test each), the legacy KAT suites, full Enigma vectors, a mutation canary that proves the harness catches deliberately corrupted engines, and the strict corpus replay above.
-- **Exhibit accuracy sweep** — all 139 exhibit pages audited against the engines. **31 mismatched hardcoded examples corrected across 20+ pages** (ADFGX/ADFGVX squares, Bacon variant table, Enigma worked example recomputed from the real engine trace, Navajo challenge, pigpen figure, bible-code arithmetic, and more), plus the **Diana cryptosystem provenance closed** (rule corrected to the authentic Special Forces `C = (25 − P − K) mod 26` and pinned to a published pad vector). The new permanent suite `tests/test-exhibit-examples.js` pins every page-displayed vector against the engines so exhibit prose can no longer drift from engine behavior.
-- **DeckBook companion exhibit** — [Further Reading](https://ciphermuseum.com/further-reading.html) now opens an **Interactive Companion Exhibits** section linking [DeckBook](https://systemslibrarian.github.io/DeckBook/), a card-based one-time-keybook demo where the deck order is the key: watch a Vigenère-style stream cipher run card by card, break key reuse via crib dragging, and finish with a shareable intercept challenge.
-- **Test-suite & CI hardening** — the suite runs the complete registered engine and site verification layers, including exhibit-vector, corpus-semantic, browser-workflow, and service-worker-version guards; `sw.js` VERSION is stamped automatically from a hash of the cache-first assets; CI runs `npm ci` on Node 22 with npm caching.
-- April 2026: Cipher Museum listed in Crypto Museum's (cryptomuseum.com) curated Virtual Museums directory, alongside Cipher History Museum, Jerry Proc's Crypto Pages, and other established crypto-history archives.
+*Stories of Hidden Messages and the People Behind Them* · Paul Clark
+
+Twenty historical investigations follow the people who sent, intercepted, and recovered hidden messages—from Mary Stuart to the public struggle over encryption. Chapter links and QR codes lead into the free museum exhibits. The website offers an opening excerpt and reading-group questions; publication details are forthcoming.
+
+**[Read the opening →](https://ciphermuseum.com/the-book.html#sample)** · **[Try The Curator’s Sealed Letter →](https://ciphermuseum.com/sealed-letter.html)**
+
+The companion mystery uses four original puzzles to open a fictional document investigation, with progressive hints and an emphasis on what the evidence supports. It is free and requires no account or purchase. The cover and book excerpt retain their separate copyright; see [License](#-license).
+
+---
+
+## 📰 Recent Changes
+
+README reviewed against `main` on **31 October 2026**. These changes are already merged:
+
+- **30 October — Book preview and homepage feature.** Added the forthcoming book’s cover, opening excerpt, reading-group questions, and [Curator’s Sealed Letter](https://ciphermuseum.com/sealed-letter.html) companion. The homepage now features the book directly below its introduction. ([#16](https://github.com/systemslibrarian/cipher-museum/pull/16), [#17](https://github.com/systemslibrarian/cipher-museum/pull/17))
+- **30 October — Full-paper research follow-up.** Repaired numerical-boundary certainty, saved investigation context, symbol-inventory history, image overlays, and duplicate-reference handling. Added exact finite OTP experiments and scoped lessons on secrecy, authenticity, hardware leakage, quantum resources, and elliptic-curve formulas. The work does not claim reliable general decipherment or reproduce the papers’ hardware experiments. See the [implementation record and limits](docs/RESEARCH_REVIEW_2026-10-30.md). ([#15](https://github.com/systemslibrarian/cipher-museum/pull/15))
+- **29 October — Evidence-led research tools.** Added a multi-image reading desk, revisable symbol inventory, resumable investigation bundles, hypothesis register, bounded numerical segmentation, historical French/Italian/Latin scoring profiles, and a beam-search comparison. Expanded GPRS and UA-8295 evidence from the full papers. Both homophonic solvers still achieved **0 exact recoveries out of 39** in the published small-budget comparison; known-key application is a separate task. See [the review](docs/RESEARCH_REVIEW_2026-10-29.md) and [evaluation v2](data/research/v2/README.md). ([#14](https://github.com/systemslibrarian/cipher-museum/pull/14))
+- **26 October — Book-supported teaching and solver experiments.** Implemented [21 ebook-backed improvements](audit/EBOOK_IMPLEMENTATION_PROGRESS.md), including Lorenz chronology and operation, entropy, freshness, encoding, KDFs, lattice mechanisms, and implementation leakage. Added a synthetic Colossus chi-setting exercise, seeded columnar search, and a [reproducible classroom worksheet](public/teaching/columnar-classroom.md). The [solver evaluation](docs/SOLVER_EVALUATION.md) retains failures and does not establish a universal solver ranking. ([#12](https://github.com/systemslibrarian/cipher-museum/pull/12))
+- **26 October — Whole-museum accuracy review.** Completed a reading and consistency pass across the then-current **214 public HTML pages**, with targeted source checks and corrections to historical claims, teaching models, examples, navigation, and input handling. This was not independent verification of every fact. See the [completed tracker](docs/ACCURACY_REVIEW_PROGRESS.md) and [page-by-page record](docs/PAGE_BY_PAGE_ACCURACY_AUDIT.md). The later book pages bring the audit export to **216 pages**. ([#13](https://github.com/systemslibrarian/cipher-museum/pull/13))
+- **25 October — Research investigations and modern case studies.** Added the [Evidence Workbench](https://ciphermuseum.com/lab/evidence-workbench.html), [historical investigations](https://ciphermuseum.com/lab/decipherment-cases.html), [modern attack evidence](https://ciphermuseum.com/lab/modern-attack-evidence.html), and exhibits on [UA-8295](https://ciphermuseum.com/ciphers/ua-8295.html), [SoDark](https://ciphermuseum.com/ciphers/sodark.html), and [NFC deployment](https://ciphermuseum.com/ciphers/nfc-deployment.html). See the [research-paper implementation checklist](docs/PAPER_REVIEW_IMPLEMENTATION.md).
+
+Earlier work includes the [corrected Cipher Corpus v0.8](docs/releases/corpus-v0.8.md), [manual-cipher procedures](docs/HISTORICAL_PROCEDURES.md), [book-guided codebreaking exercises](docs/BOOK_REVIEW_IMPROVEMENTS.md), and [engine verification standard](docs/CIPHER_ENGINE_STANDARD.md). The published v0.6 dataset archive and software release DOIs remain distinct from the evolving website.
+
+April 2026: Cipher Museum listed in Crypto Museum’s (cryptomuseum.com) curated Virtual Museums directory, alongside Cipher History Museum, Jerry Proc’s Crypto Pages, and other established crypto-history archives.
 
 ---
 
@@ -63,14 +70,14 @@ Beyond the 13 cipher halls below, the **[Hall of Foundations](https://ciphermuse
 | [I](https://ciphermuseum.com/halls/ancient.html) | World Origins of Cryptography | [Egyptian Substitution](https://ciphermuseum.com/ciphers/egyptian-substitution.html), [Rosetta Stone](https://ciphermuseum.com/ciphers/rosetta-stone.html), [Histiaeus's Tattoo](https://ciphermuseum.com/ciphers/histiaeus-tattoo.html), [Scytale](https://ciphermuseum.com/ciphers/scytale.html), [Aeneas Tacticus](https://ciphermuseum.com/ciphers/aeneas-tacticus.html), [Caesar](https://ciphermuseum.com/ciphers/caesar.html), [Atbash](https://ciphermuseum.com/ciphers/atbash.html), [Kama Sutra](https://ciphermuseum.com/ciphers/kama-sutra.html), [Polybius](https://ciphermuseum.com/ciphers/polybius.html), [Arabic Nomenclators](https://ciphermuseum.com/ciphers/arabic-nomenclators.html), [ROT13](https://ciphermuseum.com/ciphers/rot13.html) |
 | [II](https://ciphermuseum.com/halls/substitution.html) | Classical Substitution | [Monoalphabetic](https://ciphermuseum.com/ciphers/monoalphabetic.html), [Nomenclator](https://ciphermuseum.com/ciphers/nomenclator.html), [Babington](https://ciphermuseum.com/ciphers/babington.html), [Homophonic](https://ciphermuseum.com/ciphers/homophonic.html), [Great Cipher](https://ciphermuseum.com/ciphers/great-cipher.html), [Playfair](https://ciphermuseum.com/ciphers/playfair.html), [Four-Square](https://ciphermuseum.com/ciphers/four-square.html), [Two-Square](https://ciphermuseum.com/ciphers/two-square.html), [Hill](https://ciphermuseum.com/ciphers/hill.html), [German Double Playfair](https://ciphermuseum.com/ciphers/double-playfair.html) |
 | [III](https://ciphermuseum.com/halls/polyalphabetic.html) | Polyalphabetic Revolution | [Alberti Disk](https://ciphermuseum.com/ciphers/alberti-disk.html), [Vigenère](https://ciphermuseum.com/ciphers/vigenere.html), [Porta](https://ciphermuseum.com/ciphers/porta.html), [Gronsfeld](https://ciphermuseum.com/ciphers/gronsfeld.html), [Beaufort](https://ciphermuseum.com/ciphers/beaufort.html), [Running Key](https://ciphermuseum.com/ciphers/running-key.html), [Autokey](https://ciphermuseum.com/ciphers/autokey.html) |
-| [IV](https://ciphermuseum.com/halls/transposition.html) | Transposition & Fractionation | [Rail Fence](https://ciphermuseum.com/ciphers/rail-fence.html), [Columnar](https://ciphermuseum.com/ciphers/columnar.html), [Double Transposition](https://ciphermuseum.com/ciphers/double-transposition.html), [Bifid](https://ciphermuseum.com/ciphers/bifid.html), [Trifid](https://ciphermuseum.com/ciphers/trifid.html), [ADFGX](https://ciphermuseum.com/ciphers/adfgx.html), [ADFGVX](https://ciphermuseum.com/ciphers/adfgvx.html), [Fractionated Morse](https://ciphermuseum.com/ciphers/fractionated-morse.html), [RS44](https://ciphermuseum.com/ciphers/rs44.html), [AMSCO](https://ciphermuseum.com/ciphers/amsco.html) |
+| [IV](https://ciphermuseum.com/halls/transposition.html) | Transposition & Fractionation | [Rail Fence](https://ciphermuseum.com/ciphers/rail-fence.html), [Columnar](https://ciphermuseum.com/ciphers/columnar.html), [Double Transposition](https://ciphermuseum.com/ciphers/double-transposition.html), [Bifid](https://ciphermuseum.com/ciphers/bifid.html), [Trifid](https://ciphermuseum.com/ciphers/trifid.html), [ADFGX](https://ciphermuseum.com/ciphers/adfgx.html), [ADFGVX](https://ciphermuseum.com/ciphers/adfgvx.html), [Fractionated Morse](https://ciphermuseum.com/ciphers/fractionated-morse.html), [Fleissner Turning Grille](https://ciphermuseum.com/ciphers/turning-grille.html), [Myszkowski](https://ciphermuseum.com/ciphers/myszkowski.html), [RS44](https://ciphermuseum.com/ciphers/rs44.html), [AMSCO](https://ciphermuseum.com/ciphers/amsco.html) |
 | [V](https://ciphermuseum.com/halls/military.html) | Military & Spy Ciphers | [Nihilist](https://ciphermuseum.com/ciphers/nihilist.html), [Bazeries](https://ciphermuseum.com/ciphers/bazeries.html), [VIC](https://ciphermuseum.com/ciphers/vic.html), [Straddling Checkerboard](https://ciphermuseum.com/ciphers/straddling-checkerboard.html), [Book Cipher](https://ciphermuseum.com/ciphers/book-cipher.html) |
 | [VI](https://ciphermuseum.com/halls/civil-war.html) | Civil War Gallery | [Stager](https://ciphermuseum.com/ciphers/stager.html), [Confederate Vigenère](https://ciphermuseum.com/ciphers/confederate-vigenere.html), [Dictionary Code](https://ciphermuseum.com/ciphers/dictionary-code.html) |
-| [VII](https://ciphermuseum.com/halls/machines.html) | Mechanical Cipher Machines | [Jefferson Disk](https://ciphermuseum.com/ciphers/jefferson-disk.html), [Wadsworth Cipher](https://ciphermuseum.com/ciphers/wadsworth-cipher.html), [Chaocipher](https://ciphermuseum.com/ciphers/chaocipher.html), [Enigma](https://ciphermuseum.com/ciphers/enigma.html), [M-209](https://ciphermuseum.com/ciphers/m209.html), [Lorenz](https://ciphermuseum.com/ciphers/lorenz.html), [Purple](https://ciphermuseum.com/ciphers/purple.html), [SIGABA](https://ciphermuseum.com/ciphers/sigaba.html), [Typex](https://ciphermuseum.com/ciphers/typex.html), [Navajo Code Talkers](https://ciphermuseum.com/ciphers/navajo-code-talkers.html) |
+| [VII](https://ciphermuseum.com/halls/machines.html) | Mechanical Cipher Machines | [Jefferson Disk](https://ciphermuseum.com/ciphers/jefferson-disk.html), [Wadsworth Cipher](https://ciphermuseum.com/ciphers/wadsworth-cipher.html), [Chaocipher](https://ciphermuseum.com/ciphers/chaocipher.html), [Enigma](https://ciphermuseum.com/ciphers/enigma.html), [M-209](https://ciphermuseum.com/ciphers/m209.html), [Lorenz](https://ciphermuseum.com/ciphers/lorenz.html), [Purple](https://ciphermuseum.com/ciphers/purple.html), [SIGABA](https://ciphermuseum.com/ciphers/sigaba.html), [Typex](https://ciphermuseum.com/ciphers/typex.html), [Navajo Code Talkers](https://ciphermuseum.com/ciphers/navajo-code-talkers.html), [NEMA](https://ciphermuseum.com/ciphers/nema.html), [Hagelin C-36 / C-52](https://ciphermuseum.com/ciphers/hagelin-c36.html) |
 | [VIII](https://ciphermuseum.com/halls/puzzle.html) | Puzzle & Novelty Ciphers | [Pigpen](https://ciphermuseum.com/ciphers/pigpen.html), [Bacon](https://ciphermuseum.com/ciphers/bacon.html), [Tap Code](https://ciphermuseum.com/ciphers/tap-code.html), [Copiale](https://ciphermuseum.com/ciphers/copiale.html), [Beale](https://ciphermuseum.com/ciphers/beale.html), [Voynich](https://ciphermuseum.com/ciphers/voynich.html), [Dorabella](https://ciphermuseum.com/ciphers/dorabella.html), [Zodiac](https://ciphermuseum.com/ciphers/zodiac.html), [Kryptos](https://ciphermuseum.com/ciphers/kryptos.html) |
 | [IX](https://ciphermuseum.com/halls/unbreakable.html) | The Unbreakable | [One-Time Pad](https://ciphermuseum.com/ciphers/one-time-pad.html), [Vernam](https://ciphermuseum.com/ciphers/vernam.html), [VENONA](https://ciphermuseum.com/ciphers/venona.html), [Solitaire / Pontifex](https://ciphermuseum.com/ciphers/solitaire.html) |
-| [X](https://ciphermuseum.com/halls/codebreakers.html) | Hall of Codebreakers | [Cabinet Noir](https://ciphermuseum.com/ciphers/cabinet-noir.html), [Station HYPO](https://ciphermuseum.com/ciphers/station-hypo.html), [Bletchley Park](https://ciphermuseum.com/ciphers/bletchley-park.html), [Joseph Rochefort](https://ciphermuseum.com/ciphers/rochefort.html), [Arne Beurling](https://ciphermuseum.com/ciphers/beurling.html), [Dilly Knox](https://ciphermuseum.com/ciphers/dilly-knox.html), [Herbert Yardley](https://ciphermuseum.com/ciphers/yardley.html), [Mavis Batey](https://ciphermuseum.com/ciphers/mavis-batey.html), [GCHQ Trio](https://ciphermuseum.com/ciphers/gchq-trio.html), [David Kahn](https://ciphermuseum.com/ciphers/kahn.html), [Elonka Dunin](https://ciphermuseum.com/ciphers/dunin.html), [George Lasry](https://ciphermuseum.com/ciphers/lasry.html), [Agnes Driscoll](https://ciphermuseum.com/ciphers/agnes-driscoll.html), [Bill Tutte](https://ciphermuseum.com/ciphers/bill-tutte.html), [Elizebeth Friedman](https://ciphermuseum.com/ciphers/elizebeth-friedman.html), [Joan Clarke](https://ciphermuseum.com/ciphers/joan-clarke.html), [Leo Marks](https://ciphermuseum.com/ciphers/leo-marks.html), [Mary Stuart Castelnau Letters](https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html) |
-| [XI](https://ciphermuseum.com/halls/modern-crypto.html) | Modern Cryptography | [DES](https://ciphermuseum.com/ciphers/des.html), [Diffie-Hellman](https://ciphermuseum.com/ciphers/diffie-hellman.html), [RSA](https://ciphermuseum.com/ciphers/rsa.html), [AES](https://ciphermuseum.com/ciphers/aes.html), [SHA-256](https://ciphermuseum.com/ciphers/sha256.html), [ECDSA](https://ciphermuseum.com/ciphers/ecdsa.html) (§158), [Shamir's Secret Sharing](https://ciphermuseum.com/ciphers/shamir-secret-sharing.html) (§159), [Zero-Knowledge Proofs](https://ciphermuseum.com/ciphers/zero-knowledge-proofs.html) (§160) |
+| [X](https://ciphermuseum.com/halls/codebreakers.html) | Hall of Codebreakers | [Cabinet Noir](https://ciphermuseum.com/ciphers/cabinet-noir.html), [Station HYPO](https://ciphermuseum.com/ciphers/station-hypo.html), [Bletchley Park](https://ciphermuseum.com/ciphers/bletchley-park.html), [Joseph Rochefort](https://ciphermuseum.com/ciphers/rochefort.html), [Arne Beurling](https://ciphermuseum.com/ciphers/beurling.html), [Dilly Knox](https://ciphermuseum.com/ciphers/dilly-knox.html), [Herbert Yardley](https://ciphermuseum.com/ciphers/yardley.html), [Mavis Batey](https://ciphermuseum.com/ciphers/mavis-batey.html), [GCHQ Trio](https://ciphermuseum.com/ciphers/gchq-trio.html), [David Kahn](https://ciphermuseum.com/ciphers/kahn.html), [Elonka Dunin](https://ciphermuseum.com/ciphers/dunin.html), [George Lasry](https://ciphermuseum.com/ciphers/lasry.html), [Agnes Driscoll](https://ciphermuseum.com/ciphers/agnes-driscoll.html), [Bill Tutte](https://ciphermuseum.com/ciphers/bill-tutte.html), [Elizebeth Friedman](https://ciphermuseum.com/ciphers/elizebeth-friedman.html), [Joan Clarke](https://ciphermuseum.com/ciphers/joan-clarke.html), [Leo Marks](https://ciphermuseum.com/ciphers/leo-marks.html), [Mary Stuart Castelnau Letters](https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html), [Bombe](https://ciphermuseum.com/ciphers/bombe.html), [Colossus](https://ciphermuseum.com/ciphers/colossus.html) |
+| [XI](https://ciphermuseum.com/halls/modern-crypto.html) | Modern Cryptography | [DES](https://ciphermuseum.com/ciphers/des.html), [Diffie-Hellman](https://ciphermuseum.com/ciphers/diffie-hellman.html), [RSA](https://ciphermuseum.com/ciphers/rsa.html), [AES](https://ciphermuseum.com/ciphers/aes.html), [SHA-256](https://ciphermuseum.com/ciphers/sha256.html), [ECDSA](https://ciphermuseum.com/ciphers/ecdsa.html) (§158), [Shamir's Secret Sharing](https://ciphermuseum.com/ciphers/shamir-secret-sharing.html) (§159), [Zero-Knowledge Proofs](https://ciphermuseum.com/ciphers/zero-knowledge-proofs.html) (§160), [UA-8295](https://ciphermuseum.com/ciphers/ua-8295.html), [SoDark](https://ciphermuseum.com/ciphers/sodark.html), [NFC Deployment](https://ciphermuseum.com/ciphers/nfc-deployment.html) |
 | [XII](https://ciphermuseum.com/halls/unsolved.html) | Unsolved Ciphers | [Voynich](https://ciphermuseum.com/ciphers/voynich.html), [Kryptos](https://ciphermuseum.com/ciphers/kryptos.html), [Beale](https://ciphermuseum.com/ciphers/beale.html), [Dorabella](https://ciphermuseum.com/ciphers/dorabella.html), [Zodiac Z-13/Z-32](https://ciphermuseum.com/ciphers/zodiac.html), [Phaistos Disc](https://ciphermuseum.com/ciphers/phaistos-disc.html), [Shugborough](https://ciphermuseum.com/ciphers/shugborough.html), [D'Agapeyeff](https://ciphermuseum.com/ciphers/dagapeyeff.html), [Somerton Man](https://ciphermuseum.com/ciphers/somerton-man.html), [McCormick](https://ciphermuseum.com/ciphers/mccormick.html) |
 | [XIII](https://ciphermuseum.com/halls/culture.html) | Cipher Culture | [Bach's BACH motif](https://ciphermuseum.com/ciphers/bach-motif.html), [Conan Doyle's Dancing Men](https://ciphermuseum.com/ciphers/dancing-men.html), [Poe's Gold-Bug](https://ciphermuseum.com/ciphers/gold-bug.html), [Cicada 3301](https://ciphermuseum.com/ciphers/cicada-3301.html), [Krypto ARG](https://ciphermuseum.com/ciphers/krypto-arg.html), [MIT Mystery Hunt](https://ciphermuseum.com/ciphers/mit-mystery-hunt.html), [Sator Square](https://ciphermuseum.com/ciphers/sator-square.html), [Freemason pigpen tradition](https://ciphermuseum.com/ciphers/freemason-pigpen.html), [Da Vinci Code](https://ciphermuseum.com/ciphers/da-vinci-code.html), [National Treasure](https://ciphermuseum.com/ciphers/national-treasure.html), [Gravity Falls](https://ciphermuseum.com/ciphers/gravity-falls.html), [Field Hollers](https://ciphermuseum.com/ciphers/field-hollers.html) |
 
@@ -87,27 +94,34 @@ The registry contains **<!-- count:engines -->88<!-- /count --> engines**. **<!-
 
 Type a message, set a key, and watch the cipher work in real time. Demos are dynamically generated by [js/demo-loader.js](js/demo-loader.js) from the engine implementations in [js/ciphers/all-engines.js](js/ciphers/all-engines.js), and the same engines power the [Codebreaker's Workbench](https://ciphermuseum.com/lab/workbench.html).
 
-For a sortable, filterable view of every cipher system in the museum (era, type, security, hall, solved status, key method) see the [Cipher Comparison Table](https://ciphermuseum.com/comparison.html). For the full <!-- count:cipherHistory -->152<!-- /count -->-exhibit roster including biographies and context pages, see the [Museum Map](https://ciphermuseum.com/museum-map.html).
+For a sortable, filterable selection of exhibits (era, type, security, hall, solved status, key method) see the [Cipher Comparison Table](https://ciphermuseum.com/comparison.html). For the full <!-- count:cipherHistory -->152<!-- /count -->-exhibit roster including biographies and context pages, see the [Museum Map](https://ciphermuseum.com/museum-map.html).
 
 ### 📊 Additional Tools
+
 - **[Cipher Corpus](https://ciphermuseum.com/cipher-corpus.html)** — A library of synthetic challenges and historically themed exercises for classical cryptanalysis. The current v0.8 download has 100,313 records across 85 cipher types; the published v0.6 archive has 100,326. Includes:
     - **Corrected v0.8 download**: the complete canonical dataset as compressed JSONL, with corrected Two-square pairs, five unsupported citations identified as errata, and v0.7's historical-pair and metadata corrections. [Download and read the change notes](https://ciphermuseum.com/cipher-corpus.html#corrected-corpus). The separately published v0.6 archive keeps its own DOI; v0.8 has no Zenodo DOI.
     - **Challenge Mode** for learners: hides solutions for ciphertext-only practice.
     - **Known Corpus Mode** for teaching, benchmarking, and tool-building: shows all metadata, keys, and plaintexts.
     - **Versioned exports**: the on-page browser, historical supplement and three-shot evaluation export use corrected v0.8 records. The older JSON, CSV, difficulty, multilingual and noisy exports remain labeled v0.6; its canonical set covers 9 languages, while v0.8 covers 7.
     - **Quality rules**: Each v0.8 browser card states pair verification and provenance status. Its canonical set contains **41 records labeled historical**. The corrected 87-record historical supplement overlaps 42 canonical IDs (41 historical and one reclassified synthetic Enigma exercise) and contains 45 additional entries that remain unverified and excluded from benchmarks. A documented citation and replay audit distinguishes contextual sources from authentic historical pairs. The original 100-record v0.6 supplement remains available as a labeled archive.
-    - **Cryptanalysis tools**: `scripts/hill-climbing-solver.js` and `scripts/sa-solver.js` for automated monoalphabetic cipher breaking (quadgram scoring; no validated accuracy rate is currently published).
+    - **Cryptanalysis tools**: `scripts/hill-climbing-solver.js` and `scripts/sa-solver.js` for automated monoalphabetic cipher breaking (quadgram scoring; [small-budget evaluation](docs/SOLVER_EVALUATION.md) reports the tested outcomes and limits).
     - **Integration**: Linked from main nav, mobile nav, and footer. Direct integration with Cipher Detective and Workbench.
     - **Accessibility**: Includes skip links, labeled controls and keyboard-navigation checks; this is not a complete WCAG conformance certification.
     - **For educators, learners, and tool builders**: Practice, teach, or benchmark cryptanalysis tools with reproducible, documented examples. Builds on foundational benchmark work by [CipherBank (Li et al., 2025)](https://arxiv.org/pdf/2504.19093).
 
 - **[Codebreaker's Workbench](https://ciphermuseum.com/lab/workbench.html)** — A unified hands-on lab that exposes **all <!-- count:engines -->88<!-- /count --> cipher engines** behind one consistent interface. Pick any cipher from the dropdown, paste your text, set a key (or accept the default), and encrypt/decrypt instantly. Beyond the per-exhibit demos it adds:
-    - **Frequency analyser** — letter-frequency histogram with Index of Coincidence and Chi-square against English, useful for detecting monoalphabetic vs. polyalphabetic ciphertext at a glance.
+    - **Frequency analyser** — letter-frequency histogram with Index of Coincidence and Chi-square against English, clues for comparing cipher hypotheses rather than identifying a system on their own.
     - **Kasiski / period detector** — repeated-trigram spacing analysis for breaking Vigenère-family ciphers.
     - **N-gram & entropy panel** — bigram/trigram counts and empirical Shannon entropy as descriptive evidence. A fixed bijective substitution relabels counts and preserves entropy, so this alone cannot distinguish it from transposition.
     - **Side-by-side Encrypt/Decrypt panes** with copy-to-clipboard and a swap button so you can iterate on a key without retyping ciphertext.
     - **Same engine source as the exhibits** — the workbench pulls from [js/ciphers/all-engines.js](js/ciphers/all-engines.js), so anything you reproduce here matches the shared-engine demos; bespoke exhibits may expose different settings and historical conventions.
 - **[Cipher Detective](https://ciphermuseum.com/cipher-detective.html)** — Identify likely cipher families from IoC, chi-square, and Kasiski evidence; preserve source transcriptions and annotations; and work through one-to-one substitution hypotheses at a manual solving desk.
+- **[Evidence Workbench](https://ciphermuseum.com/lab/evidence-workbench.html)** — Preserve source transcriptions, revisions, alternative readings, derived layers, and image-linked regions. Rotate/crop manuscript images, split or merge symbol classes with history, record hypotheses, and export/import investigation bundles that flag stale results.
+    - **Bounded research tools** — known-key numerical segmentation with alternative paths and explicit pruning limits; experimental homophonic annealing and beam search with locked mappings, seeds, budgets, retained candidates, and historical language profiles that can abstain.
+    - **Evidence is distinct from a readable candidate** — clean key application does not prove historical correctness; evaluation separates known-key application, unknown-key recovery, language/domain shift, segmentation, and wrong hypotheses. See [evaluation v1](data/research/v1/README.md) and [v2](data/research/v2/README.md).
+- **[Historical Investigations](https://ciphermuseum.com/lab/decipherment-cases.html)** — Source-backed Copiale and Mary Stuart cases, plus a replay of the first Z340 section with its route and exceptions disclosed.
+- **[Modern Attack Evidence](https://ciphermuseum.com/lab/modern-attack-evidence.html)** — Compare attack access, measurements, inferences, and open questions across published cases. The case studies describe their conditions and do not simulate an attack on real equipment.
+- **[Teaching Resources](https://ciphermuseum.com/teaching.html)** — Classroom activities, book-to-exhibit reading trails, research tools, and the reader mystery, with simplified models and evidence limits stated.
 - **[Site Search](https://ciphermuseum.com/search.html)** — Search across all <!-- count:total -->172<!-- /count --> exhibits (<!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits, the Hall of Foundations annex, and the modern-protocol exhibits), 13 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
 - **[Cryptanalysis Techniques](https://ciphermuseum.com/cryptanalysis.html)** — 10 explained approaches, with seven hands-on demonstrations: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), computer-assisted manuscript analysis (Copiale), and Chaocipher reconstruction.
 - **[Cipher Challenges](https://ciphermuseum.com/challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
@@ -230,6 +244,7 @@ All <!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits, 
 | [National Treasure](https://ciphermuseum.com/ciphers/national-treasure.html) | Fiction · 2004 | The 2004 Disney film National Treasure sent audiences hunting for cipher clues on the US dollar bill, the Liberty Bell, and Independence Hall — all real historical sites. | Pop Culture |
 | [Navajo Code Talkers](https://ciphermuseum.com/ciphers/navajo-code-talkers.html) | WWII · 1942–1945 | Navajo code talkers used a specialized military vocabulary and spelling alphabet during World War II. Their language and the constructed code were distinct layers. | Never publicly broken in wartime service; a historical military code. |
 | [NEMA — Swiss Rotor Machine](https://ciphermuseum.com/ciphers/nema.html) | Postwar Switzerland · 1947 | Swiss NEMA rotor machine (1947) — four cipher wheels, independent stepping wheels, and a moving reflector. Explore historical military encryption and decryption. | Obsolete Swiss military rotor machine. The demo fixes one historical wheel configuration; the 17,576-keypress state period is not its key space. |
+| [NFC Authentication and Deployment](https://ciphermuseum.com/ciphers/nfc-deployment.html) | Modern · 2026 research | A case study of authenticated tag state, key storage, relay access, and configuration in 3DES/AES-protected NFC products. | Device- and configuration-dependent attacks; not a break of AES. Untested models and theoretical proposals are labeled. |
 | [Nihilist Cipher](https://ciphermuseum.com/ciphers/nihilist.html) | 1880s · Russia | Nihilist cipher (1880s) — the Russian revolutionary classic adding Polybius numbers to a repeating keyword's Polybius numbers by plain addition. Broken early 1900s. | Frequency analysis of digit pairs · Kasiski-equivalent |
 | [Nomenclator](https://ciphermuseum.com/ciphers/nomenclator.html) | Renaissance · 1400s–1800s | Nomenclator (1400s) — The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary. Hall II of The Cipher Museum. | Historical systems combine code groups, letter substitutions, homophones and nulls; evidence varies by key and traffic. |
 | [Null Cipher Concealment by selective reading · ancient → modern](https://ciphermuseum.com/ciphers/null-cipher.html) | Antiquity → present | A null cipher selects a message from a cover text using a positional rule. It conceals information in ordinary-looking writing; discovery of the rule defeats that concealment. | Weak (concealment, not encryption) |
@@ -257,6 +272,7 @@ All <!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits, 
 | [SIGABA (ECM Mark II)](https://ciphermuseum.com/ciphers/sigaba.html) | WWII · 1940 | SIGABA used fifteen rotors in cipher, control and index banks. No successful enemy wartime cryptanalytic break is publicly documented; the widget is a simplified model. | Never publicly broken by cryptanalysis in wartime service; obsolete today. |
 | [SIGSALY — The Encrypted Speech System](https://ciphermuseum.com/ciphers/sigsaly.html) | WWII · 1943–1946 | SIGSALY protected high-level Allied voice communications using quantised vocoder parameters and matched one-time key records. The demo illustrates modular addition only. | Historical system; not a modern security recommendation. |
 | [Slidex British WWII tactical bigram cipher card](https://ciphermuseum.com/ciphers/slidex.html) | WWII & Cold War · 1943–1980s | Slidex (1943) — the British Army's front-line tactical code card. A 204-cell vocabulary grid plus two sliding coordinate strips. Fast for a platoon signaller; read by German units within hours. | Short-lived tactical vocabulary cards and changing cursor settings; the widget is a simplified bigram model. |
+| [SoDark and Radio Linking](https://ciphermuseum.com/ciphers/sodark.html) | Modern · 2021 cryptanalysis | SoDark protects HF automatic link-establishment traffic. The exhibit separates oracle access, passive collection, and computation. | Published practical attacks on eight-round 2G ALE under stated data assumptions; the same break is not established for sixteen-round 3G variants. |
 | [Solitaire / Pontifex](https://ciphermuseum.com/ciphers/solitaire.html) | Modern · 1999 | Solitaire / Pontifex (1999) — Bruce Schneier's hand cipher driven by a 54-card deck (written for Cryptonomicon). Crowley showed a ~1/22.5 keystream bias. | Historical system; not a modern security recommendation. |
 | [Somerton Man Code](https://ciphermuseum.com/ciphers/somerton-man.html) | Post-WWII Australia · 1948 | The Somerton Man inscription: uncertain letter groups associated with a 1948 death. Researchers proposed Carl Webb’s identity in 2022; the inscription’s meaning remains unconfirmed. | Unresolved inscription; a 2022 genealogical identification proposal is separate from deciphering these letters. |
 | [Stager Cipher](https://ciphermuseum.com/ciphers/stager.html) | Union · 1861 | The Union’s Stager system combined word transposition, code words and operational procedures. Wartime success is a historical claim, not a proof of mathematical security. | Historical Union route-code system; wartime operational success is not a mathematical security guarantee. |
@@ -267,6 +283,7 @@ All <!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits, 
 | [Trithemius Progressive Cipher Steganographia · 1518](https://ciphermuseum.com/ciphers/trithemius.html) | German Renaissance · 1518 | Johannes Trithemius's progressive shift cipher (Polygraphia, 1518) — the first published polyalphabetic, where every successive letter is shifted one further than the last. | Easy |
 | [Two-Square Cipher](https://ciphermuseum.com/ciphers/two-square.html) | Late 19th Century · ~1902 | Two-square uses two keyed 5×5 squares to encipher letter pairs. This demo follows the ACA horizontal rectangle rule and discloses its extra filler-escape convention. | Digram frequency · same-row leak |
 | [Typex](https://ciphermuseum.com/ciphers/typex.html) | WWII · 1937 | Typex (1937) — Britain's improved Enigma — five rotors, no plugboard, used at Bletchley to read its own intercepts. Hall VII of The Cipher Museum. | Never publicly broken by cryptanalysis in wartime service; obsolete today. |
+| [UA-8295 Message Terminal](https://ciphermuseum.com/ciphers/ua-8295.html) | Cold War · marketed 1984; 2026 research | Forensic comparison of an original DES-based terminal and a replacement cipher, with implemented attacks and design-intent arguments separated. | Preprint case study; observed evidence, implemented results, conditional inferences, and open questions are labeled. No attack is reproduced by the museum. |
 | [VENONA Project](https://ciphermuseum.com/ciphers/venona.html) | Cold War · 1943–1980 | VENONA analysed intercepted Soviet messages, chiefly from the 1940s, by exploiting duplicated pad material. The project ran from 1943 to 1980. | Partial break (key reuse exploit) |
 | [Vernam Cipher](https://ciphermuseum.com/ciphers/vernam.html) | 1917 | Vernam’s teleprinter system combines text with a key stream. XOR supplies perfect secrecy only when the pad is uniformly random, independent, secret, long enough and never reused. | XOR gives perfect secrecy only with an independent, uniformly random secret pad at least as long as the message, used once. No authentication. |
 | [VIC Cipher](https://ciphermuseum.com/ciphers/vic.html) | Cold War · 1950s | VIC cipher (1953) — Reino Häyhänen's KGB hand cipher: straddling checkerboard, double transposition, date-driven keystream. Exposed in 1957 after his defection, not broken cryptanalytically. | Historical Soviet hand system; the key procedure became known through Häyhänen’s 1957 defection. No proof of unbreakability. |
@@ -286,11 +303,12 @@ All <!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits, 
 ```bash
 git clone https://github.com/systemslibrarian/cipher-museum
 cd cipher-museum
-python3 -m http.server 8000   # or just open index.html
+python3 -m http.server 8000
 ```
 
-No build tools. No framework. No dependencies beyond Google Fonts.
-Pure HTML + CSS + Vanilla JavaScript. GitHub Pages ready.
+Open **http://localhost:8000**. Serve over HTTP so background workers, data fetches, and browser storage can function correctly.
+
+The public site uses HTML, CSS, and vanilla JavaScript with self-hosted fonts. No framework or build step is needed to serve a checkout. Contributor tooling uses Node.js and npm for tests, metadata generation, and minification; see [Testing](#-testing).
 
 ---
 
@@ -325,17 +343,20 @@ citations were checked. The earlier v0.6 supplemental files remain available for
 reproducing past results, with their known limitations documented.
 
 ### Prerequisites
+
 ```bash
 git lfs install
 ```
 
 ### Clone with LFS files
+
 ```bash
 git clone https://github.com/systemslibrarian/cipher-museum
 ```
 LFS files download automatically if Git LFS is installed.
 
 ### If you already cloned without LFS
+
 ```bash
 git lfs pull
 ```
@@ -344,8 +365,8 @@ git lfs pull
 
 | File | Size | Description |
 |------|------|-------------|
-| [`public/corpus/all.json`](https://github.com/systemslibrarian/cipher-museum/blob/main/public/corpus/all.json) | 125 MB | Full cipher corpus (JSON) |
-| [`public/corpus/all.jsonl`](https://github.com/systemslibrarian/cipher-museum/blob/main/public/corpus/all.jsonl) | 98 MB | Full cipher corpus (JSONL, for RAG ingestion) |
+| [`public/corpus/all.json`](https://github.com/systemslibrarian/cipher-museum/blob/main/public/corpus/all.json) | 132.2 MB | Frozen v0.6 corpus (JSON) |
+| [`public/corpus/all.jsonl`](https://github.com/systemslibrarian/cipher-museum/blob/main/public/corpus/all.jsonl) | 103.8 MB | Frozen v0.6 corpus (JSONL, for RAG ingestion) |
 
 > These files are intended for use with the
 > [crypto-counsel](https://github.com/systemslibrarian/crypto-counsel)
@@ -355,77 +376,27 @@ git lfs pull
 
 ## 📁 Project Structure
 
-```
-cipher-museum/
-├── index.html               ← Entrance Hall (hero + 10 hall cards)
-├── museum-map.html          ← Interactive floor plan with all exhibits
-├── timeline.html            ← 3,900+ year timeline with era filtering & scroll-spy
-├── comparison.html          ← Sortable comparison table across the collection
-├── challenges.html          ← 10 progressive cipher challenges
-├── glossary.html            ← Cryptography glossary
-├── cryptanalysis.html       ← Cryptanalysis Techniques (10 interactive techniques)
-├── cipher-flow.html         ← Visual cipher family relationships
-├── modern.html              ← Modern Cryptography overview
-├── favicon.svg              ← Gold cipher wheel icon
-├── css/
-│   └── museum.css           ← Complete design system (~400 rules)
-├── js/
-│   ├── nav.js               ← Navigation system (sticky nav, hamburger, ARIA)
-│   ├── demo-loader.js       ← Dynamic demo UI generator for all cipher pages
-│   └── ciphers/
-│       └── all-engines.js   ← registered engine implementations
-├── halls/                   ← 13 exhibit halls
-│   ├── ancient.html          ← Hall I: World Origins of Cryptography
-│   ├── substitution.html     ← Hall II: Classical Substitution
-│   ├── polyalphabetic.html   ← Hall III: Polyalphabetic Revolution
-│   ├── transposition.html    ← Hall IV: Transposition & Fractionation
-│   ├── military.html         ← Hall V: Military & Spy Ciphers
-│   ├── civil-war.html        ← Special Exhibition: Civil War
-│   ├── machines.html         ← Hall VI: Mechanical Machines
-│   ├── puzzle.html           ← Hall VII: Puzzle & Novelty
-│   ├── unbreakable.html      ← Hall IX: The Unbreakable
-│   └── codebreakers.html     ← Special Exhibition: Hall of Codebreakers
-├── ciphers/                  ← cipher/history and protocol/construction exhibit pages
-│   ├── caesar.html            ← with interactive demo + SVG wheel diagram
-│   ├── enigma.html            ← with rotor wiring SVG diagram
-│   ├── vigenere.html          ← with tabula recta SVG + Kasiski analysis
-│   ├── playfair.html          ← with key square builder SVG
-│   └── [130+ additional exhibits]
-├── hall-of-foundations/      ← Mathematics annex (§141–157): 17 exhibits + DOM-free math modules
-│   ├── index.html             ← Annex entrance
-│   ├── finite-fields.html     ← …and 16 more (lattices, LWE, pairings, interpolation…)
-│   └── *-math.js              ← lattice-math / crypto-algebra / ec-math engines, unit-tested
-├── data/
-│   └── artifact-cards.json  ← Metadata cards (era, family, region, key type…) for all 147 ciphers/protocol exhibits
-├── scripts/                  ← Corpus tools and cryptanalysis solvers
-│   ├── hill-climbing-solver.js  ← Monoalphabetic solver: hill climbing + quadgram scoring
-│   ├── sa-solver.js             ← Simulated annealing solver (better on short ciphertexts)
-│   ├── build-quadgrams.js       ← Regenerates quadgram stats from corpus plaintext
-│   ├── qa-corpus.js             ← DEPRECATED corpus QA (superseded by tests/engines/corpus-replay.js)
-│   ├── generate-corpus-v*.js    ← Corpus generation batch scripts (v1–v3)
-│   └── data/
-│       └── english-quadgrams.json  ← 8,877 quadgram log-probabilities (896K observations)
-├── lab/
-│   └── workbench.html       ← Codebreaker's Workbench (all registered engines in one lab)
-├── tours/                    ← Guided learning paths
-├── community/                ← Curated examples and local contribution-draft tool
-└── tests/
-    ├── engines/               ← Engine verification suite (per-engine specs, KATs, corpus replay)
-    │   ├── run.js             ← Master runner for `npm run test:engines`
-    │   ├── specs/             ← One spec file per registered engine: fast-check properties + robustness
-    │   ├── helpers/           ← Shared contracts, canonicalization, known-answer registry
-    │   └── corpus-replay.js   ← Pinned replay of all 100,326 published corpus records
-    ├── test-all-engines.js    ← Engine roundtrip & known-answer tests
-    ├── test-deep-ciphers.js   ← Edge cases & stress tests
-    ├── test-comprehensive.js  ← Cross-cipher invariants across the collection
-    ├── test-accessibility.js  ← ADA / WCAG audit
-    ├── test-mobile.js         ← Responsive / mobile audit
-    ├── test-structural.js     ← Structural / framing audit
-    ├── test-demo-pages.js     ← End-to-end JSDOM simulation of every interactive demo
-    ├── test-exhibit-examples.js ← Every hardcoded exhibit example pinned against the engines
-    ├── test-sw-version.js     ← Service-worker cache version matches bundle hashes
-    └── test-local-links.js    ← Local href/src link checker
-```
+| Path | Purpose |
+|------|---------|
+| `index.html` | Entrance hall, 13 hall cards, and forthcoming-book feature |
+| `halls/` | Thirteen exhibit-hall landing pages |
+| `ciphers/` | Cipher, machine, biography, history, and protocol/construction exhibits |
+| `hall-of-foundations/` | Seventeen mathematics exhibits and their tested math modules |
+| `lab/` | Shared-engine workbench, evidence workbench, historical investigations, modern attack evidence |
+| `the-book.html`, `sealed-letter.html` | Book preview and original reader mystery |
+| `cipher-detective.html`, `cryptanalysis.html` | Identification clues, manual solving, and cryptanalysis lessons |
+| `cipher-corpus.html`, `public/corpus/` | Corpus browser, versioned downloads, schemas, rights, and checksums |
+| `js/ciphers/all-engines.js` | Shared registered cipher engines |
+| `js/`, `solvers/` | Site interactions, evidence models, search tools, and workers |
+| `src/`, `css/`, `fonts/`, `images/` | Readable source modules, styles, self-hosted fonts, and visual assets |
+| `data/` | Exhibit identities/counts, trust labels, artifact cards, and research/evaluation data |
+| `scripts/` | Metadata and corpus builders, solvers, evaluations, audit export, and validation |
+| `tours/`, `teaching.html`, `further-reading.html` | Guided paths, classroom activities, and reading trails |
+| `community/` | Curated examples and local contribution-draft tool |
+| `docs/` | Accuracy/research reviews, source mappings, release notes, and evaluation limits |
+| `audit/` | Frozen independent-review reading pack, parts, prompt, and manifest |
+| `tests/`, `tests/engines/` | Site, research, content, and engine verification suites |
+| `.github/workflows/ci.yml` | Node 22 checks, corpus validation, and deployment of the validated commit |
 
 ---
 
@@ -483,37 +454,28 @@ bytes, so LF and CRLF checkouts generate the same version.
 The museum ships with two layers of tests: the site suites (rendered DOM, accessibility, links, demo pages) and a dedicated engine verification suite governed by [docs/CIPHER_ENGINE_STANDARD.md](docs/CIPHER_ENGINE_STANDARD.md).
 
 ```bash
-# One-time setup (needed for the demo-page simulator and fast-check)
-npm install
+# Install the locked contributor dependencies
+npm ci
 
-# Engine verification suite — one spec file per registered engine (fast-check property
-# roundtrips, robustness, invalid keys, Unicode policy, state isolation, one
-# fixed KAT each), the legacy KAT suites, full Enigma vectors, and a pinned
-# replay of all 100,326 published corpus records (0 unexplained failures):
-npm run test:engines                # tests/engines/run.js
+# Complete suite, including the engine verification layer
+npm test
 
-# Run any site suite individually …
-node tests/test-all-engines.js
-node tests/test-deep-ciphers.js
-node tests/test-comprehensive.js
-node tests/test-accessibility.js
-node tests/test-mobile.js
-node tests/test-structural.js
-node tests/test-demo-pages.js
-node tests/test-local-links.js
-node tests/test-exhibit-examples.js
-node tests/test-sw-version.js
+# Other CI checks
+npm run validate:release
+npm run lint:html
 
-# … or via npm scripts
-npm run test:deep
-npm run test:comprehensive
-npm run test:a11y
-npm run test:mobile
-npm run test:structural
-npm run test:demos
+# Focused checks while editing
+npm run test:engines
+npm run test:research
+npm run test:foundations
+npm run test:protocols
 npm run test:links
-npm test                            # runs every site suite end-to-end (CI runs test:engines first)
+node scripts/build-counts.js --check
 ```
+
+Corpus checks need the full v0.6 LFS data described above. CI also rebuilds v0.7 and v0.8 from the frozen archive, validates their contracts, and checks the published download checksums. See the [CI workflow](.github/workflows/ci.yml) for the exact sequence.
+
+After changing collection registrations, trust labels, or searchable content, run `npm run build:metadata` followed by `npm run build:js`, and inspect the generated diffs. Research changes should also preserve the [v1](data/research/v1/README.md) and [v2](data/research/v2/README.md) evaluation contracts, including their failures and replay limits. The audit reading pack is regenerated deliberately using the [export instructions](audit/README.md#snapshot-and-regeneration).
 
 `test-demo-pages.js` is an interaction check, not a correctness proof: it loads every `ciphers/*.html` page in JSDOM with the real scripts inlined, lets `js/demo-loader.js` build the demo UI, then **clicks the actual on-page Encrypt and Decrypt buttons** and verifies the ciphertext roundtrips back to the original plaintext in the simulated DOM. This does not test pixels or real assistive technology. Hand-built pages (Caesar, Playfair, Vigenère, Zodiac) get dedicated assertions against canonical KATs (Caesar shift-3 → `WKHTXLFNEURZQIRA`, Vigenère `LEMON` → `LXFOPVEFRNHR`, Playfair `MONARCHY` decode, Zodiac Z408 reveal).
 
@@ -527,14 +489,13 @@ use, fork, and build upon.
 Dataset and source-material rights remain separate. Synthetic Cipher Corpus
 records are CC0 1.0; historical records retain their per-record public-domain
 assertions and provenance. The MIT software license does not relicense the
-corpus, third-party works, or underlying historical source material. See the
+corpus, third-party works, or underlying historical source material. The cover
+and book excerpt for *Secrets of the Cipher Museum* are © 2026 Paul Clark and
+excluded from the MIT grant; the site code and original interactive teaching
+exercise remain MIT-licensed. See the
 [corpus license](public/corpus/LICENSE) and
-[rights documentation](public/corpus/RIGHTS_AND_PROVENANCE.md).
+[rights documentation](docs/CORPUS_PUBLISHING.md#rights-and-scope).
 
 ---
 
 *Built to honor the brilliant, flawed, and often fatal history of human secrecy.*
-
-### Book-supported experiments and evaluation
-
-The Colossus exhibit now runs a synthetic two-wheel chi-setting search and explains selection across 1,271 settings. The columnar exhibit offers bounded seeded search with segment moves, adjacency/alignment initialization and explicit ablations. See [solver evaluation](docs/SOLVER_EVALUATION.md) for successes, failures and limits, and [claim-to-source mapping](docs/PAPER_REVIEW_IMPLEMENTATION.md#ebook-extensions-reviewed-26-october-2026) for full book titles, authors and printed/PDF pagination. Book references do not link ebook copies.
