@@ -38,7 +38,7 @@ Twenty historical investigations follow the people who sent, intercepted, and re
 
 **[Read the opening →](https://ciphermuseum.com/the-book.html#sample)** · **[Try The Curator’s Sealed Letter →](https://ciphermuseum.com/sealed-letter.html)**
 
-The companion mystery uses four original puzzles to open a fictional document investigation, with progressive hints and an emphasis on what the evidence supports. It is free and requires no account or purchase. The cover and book excerpt retain their separate copyright; see [License](#-license).
+The companion mystery can be started directly online or opened with the book's four original puzzles. Readers decode a dispatch, compare conflicting copies, request a fifth source, and submit a finding that separates evidence from accusation. Progressive hints, an answer reveal, restart, and optional clipboard-only playtest notes support the first reader trial; see the [pilot plan](docs/reader-mystery-pilot.md). It is free and requires no account or purchase. The cover and book excerpt retain their separate copyright; see [License](#-license).
 
 ---
 

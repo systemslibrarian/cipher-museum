@@ -34,11 +34,37 @@ async function main() {
     submit('unlock-form');
     assert.equal($('investigation').hidden, false);
     assert.equal(doc.activeElement.id, 'case-title');
+    assert.equal($('copies-panel').hidden, true, 'Reading comes before comparing');
+    doc.querySelector('[value="room"]').checked = true; submit('compare-form');
+    assert.equal($('source-panel').hidden, true, 'Hidden stages cannot skip the dispatch');
+    doc.querySelector('[value="evidence"]').checked = true; submit('verdict-form');
+    assert.equal($('finding').hidden, true, 'A forged submit cannot skip the evidence stage');
+    const codebook = Object.fromEntries([...doc.querySelectorAll('#dispatch-key [data-code]')].map(el => [el.dataset.code, el.textContent.trim()]));
+    const decoded = $('dispatch-cipher').textContent.match(/\d{2}/g).map(code => codebook[code]).join(' ');
+    assert.equal(decoded, 'MOVE THE SEALED CASE TO ROOM FOUR AT NINE KEEP BOTH KEYS WITH ELLIS');
+    assert.equal(decoded, $('retained-message').textContent.replace(/[.]/g, ''));
+    for (const wrong of ['five', '9', 'four 123', '<script>four</script>']) {
+      $('dispatch-room').value = wrong; submit('decode-form');
+      assert.equal($('copies-panel').hidden, true, 'An incorrect room does not unlock the copies');
+    }
+    $('dispatch-room').value = 'room 4'; submit('decode-form');
+    assert.equal($('copies-panel').hidden, false);
+    assert.equal(doc.activeElement.id, 'copies-title');
     doc.querySelector('[value="time"]').checked = true; submit('compare-form');
     assert.equal($('verdict-form').hidden, true);
     doc.querySelector('[value="room"]').checked = true; submit('compare-form');
-    assert.equal($('verdict-form').hidden, false);
+    assert.equal($('source-panel').hidden, false);
+    assert.equal($('verdict-form').hidden, true, 'Comparison alone does not supply corroboration');
     assert.equal(doc.querySelectorAll('mark.revealed').length, 2);
+    for (const wrong of ['keys', 'rumour']) {
+      doc.querySelector('input[name="source"][value="'+wrong+'"]').checked = true; submit('source-form');
+      assert.equal($('register-record').hidden, true);
+      assert.equal($('verdict-form').hidden, true);
+    }
+    doc.querySelector('input[name="source"][value="register"]').checked = true; submit('source-form');
+    assert.equal($('register-record').hidden, false);
+    assert.equal($('verdict-form').hidden, false);
+    assert.equal(doc.activeElement.id, 'register-record');
     for (const wrong of ['theft', 'clerk', 'nothing']) {
       doc.querySelector('[value="'+wrong+'"]').checked = true; submit('verdict-form');
       assert.equal($('finding').hidden, true);
@@ -57,6 +83,28 @@ async function main() {
     await new Promise(resolve => setTimeout(resolve, 0));
     assert.match(copied, /https:\/\/ciphermuseum.com\/sealed-letter.html/);
     assert.match($('share-feedback').textContent, /Copied/);
+    submit('playtest-form');
+    assert.equal($('playtest-feedback').textContent, '', 'Incomplete playtest forms do not copy notes');
+    $('playtest-hardest').value = 'Choosing another source';
+    $('playtest-again').value = 'Yes';
+    $('playtest-note').value = '<img src=x onerror=alert(1)> The register was helpful.';
+    submit('playtest-form');
+    await new Promise(resolve => setTimeout(resolve, 0));
+    assert.match(copied, /Would try another case: Yes/);
+    assert.match(copied, /Entry: Four book slips/);
+    assert.match(copied, /The register was helpful/);
+    assert.equal(doc.querySelectorAll('img[src=x]').length, 0, 'Playtest text is never injected as markup');
+    Object.defineProperty(window.navigator, 'clipboard', { value: undefined, configurable: true });
+    submit('playtest-form');
+    await new Promise(resolve => setTimeout(resolve, 0));
+    assert.equal($('playtest-copy').hidden, false);
+    assert.match($('playtest-copy').value, /Case completed: yes/);
+    $('restart-case').click();
+    for (const id of ['copies-panel', 'source-panel', 'register-record', 'verdict-form', 'finding']) assert.equal($(id).hidden, true, 'Restart closes '+id);
+    assert.equal(doc.querySelectorAll('mark.revealed').length, 0);
+    assert.equal(doc.querySelector('[aria-current="step"]').dataset.step, '1');
+    $('reveal-dispatch').click();
+    assert.equal($('copies-panel').hidden, false, 'Readers can continue after an answer reveal');
     for (const page of ['sealed-letter.html', 'the-book.html']) {
       const p = new JSDOM(read(page)).window.document;
       assert.equal(p.querySelectorAll('h1').length, 1);
@@ -67,7 +115,13 @@ async function main() {
       }
       for (const img of p.images) assert.ok(img.alt);
     }
-    console.log('Reader companion: visible clues, wrong answers, full investigation, focus and both sharing paths passed.');
+    const direct = new JSDOM(read('sealed-letter.html'), { runScripts: 'outside-only' });
+    try {
+      direct.window.eval(read('js/reader-companion.js'));
+      direct.window.document.getElementById('start-case').click();
+      assert.equal(direct.window.document.getElementById('investigation').hidden, false, 'A visitor can start without the book slips');
+    } finally { direct.window.close(); }
+    console.log('Reader companion: book clues, dispatch, stage guards, evidence choices, finding, restart, feedback and clipboard fallbacks passed.');
   } finally { window.close(); }
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });
