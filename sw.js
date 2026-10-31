@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-53ea3c4f';
+const VERSION = 'cipher-museum-68df1af3';
 
 const CORE = [
   '/',
@@ -56,6 +56,8 @@ const CORE = [
   '/data/research/v1/z340-section-1.json',
   '/js/ciphers/all-engines.min.js',
   '/css/museum.css',
+  '/css/reader-companion.css',
+  '/js/reader-companion.js',
   '/css/historical-demos.css',
   '/js/historical-ciphers.js',
   '/js/historical-demos.js',

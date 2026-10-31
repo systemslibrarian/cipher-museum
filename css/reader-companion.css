@@ -44,4 +44,22 @@
 .reader-main [hidden]{display:none!important}
 @media(max-width:700px){.reader-main{padding:82px 20px 32px}.book-hero{grid-template-columns:1fr;gap:28px;padding-top:20px}.book-cover{max-width:260px;margin:0 auto;grid-row:2;transform:rotate(1deg)}.book-pitch,.book-sample,.reading-groups{padding:36px 0}.letter-invitation{grid-template-columns:1fr;padding:24px;gap:18px}.seal{width:56px;height:56px}.document-grid{grid-template-columns:1fr}.unlock-panel,.finding{padding:23px}.clue-body{padding-left:4px;padding-right:4px}.number-strips{font-size:.75rem;padding:12px;letter-spacing:0}.cipher-strip{font-size:.84rem}.letter-hero{padding-top:16px}.paper{padding:22px}}
 @media(prefers-reduced-motion:reduce){.reader-main *{scroll-behavior:auto!important;transition:none!important}}
+.reader-main select{display:block;width:100%;max-width:100%;padding:13px;background:var(--s1);color:var(--tx);border:1px solid var(--s5);font:inherit;line-height:1.5;border-radius:3px}
+.reader-main select:focus-visible{outline:3px solid var(--gold-lt);outline-offset:4px}
+.case-progress{margin:30px 0;padding:20px 0;border-block:1px solid var(--gold-b)}
+.case-progress ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:0;list-style:none;margin:0 0 15px}
+.case-progress li{font-family:var(--fm);font-size:.75rem;line-height:1.6;padding:10px;border:1px solid var(--s5)}
+.case-progress [aria-current=step]{border-color:var(--gold);color:var(--gold-lt)}
+.case-progress .is-complete{color:var(--tx);border-color:var(--gold-dim)}
+.case-progress p{font-size:.9rem;margin:0}
+.case-stage{padding:30px 0;border-bottom:1px solid var(--s5)}
+.codebook{margin:24px 0;border:1px solid var(--s5);padding:16px}
+.codebook summary{color:var(--gold-lt);cursor:pointer;min-height:44px;line-height:1.6}
+.codebook ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;list-style:none;padding:0;margin:12px 0 0;font-family:var(--fm);font-size:.85rem}
+.codebook li{display:flex;gap:12px}.codebook b{color:var(--gold-lt)}
+.archive-record{margin:28px 0}.museum-followup,.playtest{border-top:1px solid var(--s5);margin-top:28px;padding-top:26px}
+.reader-main .secondary-button{background:transparent;color:var(--gold-lt)}
+.reader-main .secondary-button:hover{background:var(--s3)}
+.playtest button{margin-top:20px}.curator-reply{font-size:1.13rem;color:var(--tx)}
+@media(max-width:700px){.case-progress ol{grid-template-columns:repeat(2,minmax(0,1fr))}.codebook ul{grid-template-columns:repeat(2,minmax(0,1fr))}.case-stage{padding:24px 0}}
 @media print{.museum-nav,footer,.reader-actions,.return-link{display:none}.reader-main{padding:0;color:#222;font-size:11pt}.reader-main h1,.reader-main h2,.reader-main h3,.reader-main p,.reader-main a{color:#222!important}.book-cover{max-width:180px}.book-hero{gap:24px}.paper{break-inside:avoid}.reading-groups{break-before:page}}
