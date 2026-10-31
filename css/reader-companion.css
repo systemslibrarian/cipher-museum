@@ -33,6 +33,7 @@
 .clue-body{padding:0 18px 22px}.cipher-strip,.number-strips{font-family:var(--fm);font-size:.95rem;line-height:1.9;border-left:3px solid var(--gold-dim);background:var(--s2);padding:18px;overflow-wrap:anywhere;letter-spacing:.035em}
 .number-strips p{margin:0}.key{font-family:var(--fm);font-size:.9rem;line-height:2}.route-grid{margin:16px 0 24px;border-collapse:collapse;width:240px;max-width:100%;text-align:center;font-family:var(--fm);color:var(--tx)}
 .route-grid caption{font-family:var(--fb);font-size:.9rem;text-align:left;margin-bottom:10px;color:var(--tx2)}.route-grid td{border:1px solid var(--s5);padding:12px}
+.route-directions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px;text-align:center;color:var(--gold-lt);font-family:var(--fm)}
 .hint{margin:14px 0;padding:0 0 0 14px;border-left:1px solid var(--gold-dim)}.hint summary{cursor:pointer;color:var(--gold-lt);min-height:44px;padding:8px 0;font-size:.96rem}.hint p{margin:6px 0 16px}
 .unlock-panel{max-width:880px;padding:34px;margin:40px 0 60px;background:var(--s2);border:1px solid var(--gold-b)}
 .reader-main label{display:block;margin:12px 0;color:var(--tx2)}
