@@ -96,6 +96,13 @@
       </div>
     </div>
 
+    <section class="panel" id="conditional-dh-oracle" aria-labelledby="dh-oracle-heading"><div class="panel-body">
+      <h2 id="dh-oracle-heading">Which oracle makes the reverse reduction possible?</h2>
+      <p>A DLP solver gives a CDH solver. The reverse direction needs additional, group-specific conditions. A <strong>full two-input DH oracle</strong> accepts two freely chosen points <code>[a]G, [b]G</code> and returns <code>[ab]G</code>, multiplying hidden scalars. Ordinary point addition gives <code>[a+b]G</code>. A fixed-secret service that only returns <code>[s]P</code> is a different capability and does not supply the paper's efficient method.</p>
+      <table class="cipher-table"><caption>Reported P256 experiment with a simulated full DH oracle</caption><thead><tr><th scope="col">Offline work</th><th scope="col">Online work</th><th scope="col">Required access</th></tr></thead><tbody><tr><td>About 3.0 TB auxiliary codebook; about one week on a dual AMD EPYC 7742</td><td>23,656 simulated full-oracle calls in 32 seconds</td><td>The experiment knew discrete logs to simulate the full oracle; the authors report no real-world instantiation</td></tr></tbody></table>
+      <p>These results do not establish that P256 was broken in 32 seconds. Other curves' figures are partly estimates, and the largest codebooks are unrealizable. The oracle, simulation status, offline cost and online time are inseparable parts of the result. Source: <a href="https://tches.iacr.org/index.php/TCHES/article/view/11161" target="_blank" rel="noopener noreferrer">Dlog is Practically as Hard (or Easy) as DH</a>, pp. 2–3, 7, 12–16.</p>
+    </div></section>
+
     <section class="panel" id="key-derivation" aria-labelledby="hkdf-heading">
       <div class="panel-body">
         <h2 id="hkdf-heading">From a shared value to keys for different purposes</h2>

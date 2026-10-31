@@ -39,6 +39,34 @@
 <label for="source-date">Transcription date, including uncertainty if needed</label><input id="source-date" maxlength="500" placeholder="2026-10-29">
 <label for="source-method">Method and transcription convention</label><input id="source-method" maxlength="500" placeholder="Manual reading; symbol IDs assigned by first appearance">
 <label for="source-imageName">Recorded image filename</label><input id="source-imageName" maxlength="500"></div></div>
+<details><summary>Custody, origin, script, language and rights</summary>
+<p>Present custody is not evidence of origin. Keep each attribution and its uncertainty separate. Empty legacy fields import as unknown. Rights for an object do not automatically permit reuse of its image or transcription.</p>
+<div class="research-grid"><div>
+<label for="source-custodianCountry">Current custodian country</label><input id="source-custodianCountry" maxlength="500">
+<label for="source-repositoryRecordUrl">Stable repository record URL</label><input id="source-repositoryRecordUrl" type="url" maxlength="2000">
+<label for="source-originPlace">Attributed production place</label><input id="source-originPlace" maxlength="500">
+<label for="source-originStatus">Production place evidence</label><select id="source-originStatus"><option>unknown</option><option>provisional</option><option>established</option></select>
+<label for="source-productionDateStart">Production date range start</label><input id="source-productionDateStart" maxlength="500" placeholder="For example: circa 1500">
+<label for="source-productionDateEnd">Production date range end</label><input id="source-productionDateEnd" maxlength="500" placeholder="For example: before 1550">
+<label for="source-productionDateStatus">Production date evidence</label><select id="source-productionDateStatus"><option>unknown</option><option>provisional</option><option>established</option></select>
+<label for="source-provenance">Provenance and supporting evidence</label><input id="source-provenance" maxlength="500">
+</div><div>
+<label for="source-scriptIdentification">Script identification</label><input id="source-scriptIdentification" maxlength="500">
+<label for="source-scriptStatus">Script evidence</label><select id="source-scriptStatus"><option>unknown</option><option>provisional</option><option>established</option></select>
+<label for="source-languageHypothesis">Language hypothesis</label><input id="source-languageHypothesis" maxlength="500" placeholder="Unknown is a valid result">
+<label for="source-languageStatus">Language evidence</label><select id="source-languageStatus"><option>unknown</option><option>provisional</option><option>established</option></select>
+<label for="source-objectRights">Object rights statement</label><input id="source-objectRights" maxlength="500">
+<label for="source-objectAccess">Object access conditions</label><input id="source-objectAccess" maxlength="500">
+<label for="source-objectAttribution">Object attribution requirements</label><input id="source-objectAttribution" maxlength="500">
+<label for="source-imageRights">Digital image reuse rights</label><input id="source-imageRights" maxlength="500">
+<label for="source-imageAccess">Digital image access conditions</label><input id="source-imageAccess" maxlength="500">
+<label for="source-imageAttribution">Digital image attribution requirements</label><input id="source-imageAttribution" maxlength="500">
+<label for="source-transcriptionRights">Transcription reuse rights</label><input id="source-transcriptionRights" maxlength="500">
+<label for="source-transcriptionAccess">Transcription access conditions</label><input id="source-transcriptionAccess" maxlength="500">
+<label for="source-transcriptionAttribution">Transcription attribution requirements</label><input id="source-transcriptionAttribution" maxlength="500">
+</div></div>
+<p>Image crops and rotations already retain original image identity, dimensions and coordinates in the Images section. Source: <a href="https://aclanthology.org/2026.lt4hala-1.17/" target="_blank" rel="noopener noreferrer">Building a Corpus and Database for Rare and Undeciphered Scripts</a>, pp. 4–10. Planned benchmarks are not demonstrated decipherment performance.</p>
+</details>
 <label for="source-raw">Transcription, exactly as recorded (up to 10,000 characters)</label><textarea id="source-raw" maxlength="10000" rows="5" spellcheck="false"></textarea>
 <p id="revision-label" class="research-note"></p><label for="revision-reason">Reason for changing the transcription</label><input id="revision-reason" maxlength="1000" placeholder="Required when the saved transcription changes">
 <div class="research-actions"><button id="save-revision" type="button">Save source and revision</button><button id="select-span" type="button">Use selected text for a reading span</button></div>
@@ -90,9 +118,10 @@
   {"symbol":"g3","type":"space","values":[]},
   {"symbol":"g4","type":"null","values":[]},
   {"symbol":"g5","type":"word","values":["KING","QUEEN"]}
-]</textarea><p class="research-note">Types: letter, syllable, word, name, null, space, repeat, erase, unknown. This example is invented, not Mary Stuart’s historical key.</p></div>
+]</textarea><p class="research-note">Linguistic types: letter, syllable, word, name, number, content-word, function-word, ending, phrase, sentence, punctuation. Operational types: null, space, repeat, erase; unknown preserves an unresolved reading. This example is invented, not Mary Stuart’s historical key.</p></div>
 <div><label for="key-input">Whitespace-separated symbol IDs</label><textarea id="key-input" maxlength="20000" spellcheck="false">g1 g3 g2 g4 g3 g5</textarea><label for="key-title">Key title</label><input id="key-title" maxlength="200" value="Original teaching key"><label for="key-source">Key source URL (optional)</label><input id="key-source" type="url" maxlength="2000"></div></div>
-<div class="research-actions"><button id="apply-key" type="button">Apply entered key</button><button id="save-key" type="button">Save key in evidence record</button></div><output id="key-output" aria-live="polite"></output>
+<div class="research-actions"><button id="apply-key" type="button">Apply entered key</button><button id="save-key" type="button">Save key in evidence record</button><button id="key-linguistic-example" type="button">Load invented ending and punctuation example</button></div><output id="key-output" aria-live="polite"></output>
+<p>Example: 21 → “seal” (word), 22 → “ed” (ending), 23 → “.” (punctuation); 21 22 23 emits “sealed.” These are linguistic content, not alphabet letters or null/repeat/erase instructions. <a href="https://ecp.ep.liu.se/index.php/histocrypt/article/view/404" target="_blank" rel="noopener noreferrer">What Was Encoded in Historical Cipher Keys in the Early Modern Era?</a>, pp. 2–8, motivates the taxonomy, not these invented entries. A code's century or frequency does not establish its meaning. The unknown-key search below remains letter-only.</p>
 <details><summary>Link sources, keys and readings</summary><p>Use IDs such as <code>revision-1</code>, <code>layer-1</code>, <code>key-1</code>, or an external archive identifier. A relationship records a claim and its evidence; matching metadata alone does not establish a historical connection.</p>
 <div class="research-grid"><div><label for="relation-from">From identifier</label><input id="relation-from" maxlength="2000"><label for="relation-to">To identifier</label><input id="relation-to" maxlength="2000"></div><div><label for="relation-type">Relationship</label><select id="relation-type"><option value="transcribes">Transcribes</option><option value="applies-key">Applies key</option><option value="supports">Supports</option><option value="alternative-to">Alternative to</option></select><label for="relation-evidence">Supporting evidence</label><textarea id="relation-evidence" maxlength="2000"></textarea></div></div><button id="add-relation" type="button">Record relationship</button><pre id="relations-list"></pre></details></section>
 

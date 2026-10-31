@@ -6,7 +6,7 @@
   let imageURL = null, pendingImage = null, activeImage = null, languageSet = null, languageError = '';
   let activeRegionSpan = '';
   let selectedClass = '', selectedOccurrences = new Set(), lastCandidate = '', retainedBundle = null;
-  const sourceFields = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName'];
+  const sourceFields = R.SOURCE_FIELDS;
   const BASELINE = { id: 'museum-prose-quadgram-v1', label: 'Museum modern-English baseline (disclosed: modern, museum prose)' };
   function status(message, error = false) { $('record-status').textContent = message; $('record-status').dataset.error = String(error); }
   function note(id, message, error = false) { $(id).textContent = message; $(id).dataset.error = String(error); }
@@ -347,6 +347,12 @@
       'Derived reading appended; the source has not been overwritten.');
   });
   ['typed-key','key-input'].forEach(id=>$(id).addEventListener('input',()=>{$('key-output').textContent='Inputs changed. Apply the key again.';}));
+  $('key-linguistic-example').onclick = guard(() => {
+    $('typed-key').value = JSON.stringify([{symbol:'21',type:'word',values:['seal']},{symbol:'22',type:'ending',values:['ed']},{symbol:'23',type:'punctuation',values:['.']}], null, 2);
+    $('key-input').value = '21 22 23'; $('key-title').value = 'Invented linguistic content example';
+    $('key-source').value = 'https://ecp.ep.liu.se/index.php/histocrypt/article/view/404';
+    $('apply-key').click();
+  });
   $('apply-key').onclick = guard(() => {
     const tokens=$('key-input').value.trim().split(/\s+/u).filter(Boolean);
     if (!tokens.length || tokens.length>3000) throw new Error('Use 1–3,000 whitespace-separated symbol IDs.');

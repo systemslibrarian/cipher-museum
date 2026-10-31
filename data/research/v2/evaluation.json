@@ -11,7 +11,7 @@
     "branch": 26
   },
   "hashes": {
-    "solver": "4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420",
+    "solver": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
     "scorer": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
     "baselineModel": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
     "profiles": "9273ab82bc558e070a1cd810b84e6830f62b9d3bb31865271416f48cb9e6bb3a",
@@ -55,15 +55,15 @@
             "exact": false,
             "plaintextError": 0.7624,
             "keyError": 1,
-            "ms": 55.7,
-            "heapDeltaBytes": 10506896
+            "ms": 72.7,
+            "heapDeltaBytes": 10606416
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7079,
             "keyError": 0.875,
-            "ms": 933,
-            "heapDeltaBytes": 40056648
+            "ms": 1365.3,
+            "heapDeltaBytes": 53644640
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -84,14 +84,14 @@
             "exact": false,
             "plaintextError": 0.7277,
             "keyError": 0.8393,
-            "ms": 44.5,
-            "heapDeltaBytes": 30125520
+            "ms": 65.7,
+            "heapDeltaBytes": 29473680
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8069,
             "keyError": 0.9821,
-            "ms": 1623.3,
+            "ms": 2909.7,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -113,14 +113,14 @@
             "exact": false,
             "plaintextError": 0.6167,
             "keyError": 0.8286,
-            "ms": 19.7,
-            "heapDeltaBytes": 16963288
+            "ms": 42.8,
+            "heapDeltaBytes": 16961800
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8167,
             "keyError": 0.9714,
-            "ms": 602.3,
+            "ms": 1581.6,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -142,15 +142,15 @@
             "exact": false,
             "plaintextError": 0.7606,
             "keyError": 0.9231,
-            "ms": 34.7,
-            "heapDeltaBytes": 29177264
+            "ms": 79.3,
+            "heapDeltaBytes": 29179496
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8122,
             "keyError": 0.8974,
-            "ms": 807.5,
-            "heapDeltaBytes": 28426144
+            "ms": 2009.2,
+            "heapDeltaBytes": 21874472
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -171,15 +171,15 @@
             "exact": false,
             "plaintextError": 0.7371,
             "keyError": 0.963,
-            "ms": 34.4,
-            "heapDeltaBytes": 0
+            "ms": 69.3,
+            "heapDeltaBytes": 29458992
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7793,
             "keyError": 0.963,
-            "ms": 1566.9,
-            "heapDeltaBytes": 37424208
+            "ms": 2225.7,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -200,14 +200,14 @@
             "exact": false,
             "plaintextError": 0.7917,
             "keyError": 1,
-            "ms": 22.5,
-            "heapDeltaBytes": 16832712
+            "ms": 52.8,
+            "heapDeltaBytes": 16834384
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7583,
             "keyError": 0.9091,
-            "ms": 589.4,
+            "ms": 1325.2,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -229,15 +229,15 @@
             "exact": false,
             "plaintextError": 0.5149,
             "keyError": 0.75,
-            "ms": 40.4,
+            "ms": 42.1,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7772,
             "keyError": 0.9167,
-            "ms": 738.5,
-            "heapDeltaBytes": 30162336
+            "ms": 951.9,
+            "heapDeltaBytes": 30623032
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -258,15 +258,15 @@
             "exact": false,
             "plaintextError": 0.7921,
             "keyError": 0.9231,
-            "ms": 35.1,
+            "ms": 60,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7277,
             "keyError": 0.8654,
-            "ms": 1318.2,
-            "heapDeltaBytes": 27658000
+            "ms": 3027.1,
+            "heapDeltaBytes": 29632560
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -287,14 +287,14 @@
             "exact": false,
             "plaintextError": 0.7583,
             "keyError": 0.8485,
-            "ms": 27,
-            "heapDeltaBytes": 17528920
+            "ms": 52.5,
+            "heapDeltaBytes": 17529536
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9091,
-            "ms": 707,
+            "ms": 948.2,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -316,15 +316,15 @@
             "exact": false,
             "plaintextError": 0.7638,
             "keyError": 1,
-            "ms": 35.8,
+            "ms": 50.3,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.794,
             "keyError": 0.9744,
-            "ms": 855.1,
-            "heapDeltaBytes": 7512520
+            "ms": 1015.5,
+            "heapDeltaBytes": 7782216
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -345,14 +345,14 @@
             "exact": false,
             "plaintextError": 0.7839,
             "keyError": 0.9231,
-            "ms": 39.2,
-            "heapDeltaBytes": 27809912
+            "ms": 58.8,
+            "heapDeltaBytes": 27745280
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.799,
             "keyError": 0.9808,
-            "ms": 1468.4,
+            "ms": 1815.7,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -374,14 +374,14 @@
             "exact": false,
             "plaintextError": 0.5667,
             "keyError": 0.7353,
-            "ms": 23.9,
-            "heapDeltaBytes": 17852792
+            "ms": 26.4,
+            "heapDeltaBytes": 17851320
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9706,
-            "ms": 586,
+            "ms": 810,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -403,15 +403,15 @@
             "exact": false,
             "plaintextError": 0.7814,
             "keyError": 0.9773,
-            "ms": 51.8,
+            "ms": 60.2,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8103,
             "keyError": 0.9091,
-            "ms": 1119.1,
-            "heapDeltaBytes": 51697376
+            "ms": 1853.8,
+            "heapDeltaBytes": 52083024
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -432,15 +432,15 @@
             "exact": false,
             "plaintextError": 0.7685,
             "keyError": 0.9492,
-            "ms": 67.5,
+            "ms": 71.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7974,
             "keyError": 1,
-            "ms": 1866,
-            "heapDeltaBytes": 11438424
+            "ms": 2556.8,
+            "heapDeltaBytes": 12897176
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -461,15 +461,15 @@
             "exact": false,
             "plaintextError": 0.6917,
             "keyError": 0.8286,
-            "ms": 24.3,
-            "heapDeltaBytes": 18598368
+            "ms": 32.7,
+            "heapDeltaBytes": 18799760
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9714,
-            "ms": 637.4,
-            "heapDeltaBytes": 17043720
+            "ms": 859.2,
+            "heapDeltaBytes": 28901448
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -490,15 +490,15 @@
             "exact": false,
             "plaintextError": 0.7712,
             "keyError": 0.95,
-            "ms": 56.4,
-            "heapDeltaBytes": 45081592
+            "ms": 73.9,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7837,
             "keyError": 0.95,
-            "ms": 911.4,
-            "heapDeltaBytes": 0
+            "ms": 1301.4,
+            "heapDeltaBytes": 37668488
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -519,15 +519,15 @@
             "exact": false,
             "plaintextError": 0.7868,
             "keyError": 1,
-            "ms": 57.4,
-            "heapDeltaBytes": 44003256
+            "ms": 67,
+            "heapDeltaBytes": 43968128
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8025,
             "keyError": 0.9818,
-            "ms": 1579.9,
-            "heapDeltaBytes": 5719224
+            "ms": 2476.3,
+            "heapDeltaBytes": 5847808
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -548,15 +548,15 @@
             "exact": false,
             "plaintextError": 0.7833,
             "keyError": 0.9688,
-            "ms": 22.3,
+            "ms": 30.3,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.625,
             "keyError": 0.75,
-            "ms": 529.3,
-            "heapDeltaBytes": 48799008
+            "ms": 730,
+            "heapDeltaBytes": 48945024
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -577,15 +577,15 @@
             "exact": false,
             "plaintextError": 0.7868,
             "keyError": 0.9091,
-            "ms": 54.3,
+            "ms": 70.9,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8307,
             "keyError": 0.9773,
-            "ms": 1182.1,
-            "heapDeltaBytes": 9880592
+            "ms": 1987.8,
+            "heapDeltaBytes": 10348760
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -606,15 +606,15 @@
             "exact": false,
             "plaintextError": 0.8088,
             "keyError": 0.9344,
-            "ms": 67,
+            "ms": 87.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.837,
             "keyError": 0.9836,
-            "ms": 1911.7,
-            "heapDeltaBytes": 39625840
+            "ms": 2716.6,
+            "heapDeltaBytes": 40934240
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -635,14 +635,14 @@
             "exact": false,
             "plaintextError": 0.8333,
             "keyError": 0.975,
-            "ms": 21.8,
-            "heapDeltaBytes": 17570952
+            "ms": 55.1,
+            "heapDeltaBytes": 17569544
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.95,
-            "ms": 799.3,
+            "ms": 1558.5,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -664,15 +664,15 @@
             "exact": false,
             "plaintextError": 0.6603,
             "keyError": 0.725,
-            "ms": 64.8,
+            "ms": 115.1,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.975,
-            "ms": 914.1,
-            "heapDeltaBytes": 0
+            "ms": 2295.5,
+            "heapDeltaBytes": 3008152
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -693,15 +693,15 @@
             "exact": false,
             "plaintextError": 0.7556,
             "keyError": 0.8772,
-            "ms": 57.8,
-            "heapDeltaBytes": 45814472
+            "ms": 107.1,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9474,
-            "ms": 1668.6,
-            "heapDeltaBytes": 0
+            "ms": 2731.6,
+            "heapDeltaBytes": 38726968
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -722,14 +722,14 @@
             "exact": false,
             "plaintextError": 0.6667,
             "keyError": 0.8056,
-            "ms": 23.2,
-            "heapDeltaBytes": 19174552
+            "ms": 51.9,
+            "heapDeltaBytes": 20098744
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7917,
             "keyError": 0.9722,
-            "ms": 653.5,
+            "ms": 1070.1,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -751,15 +751,15 @@
             "exact": false,
             "plaintextError": 0.419,
             "keyError": 0.641,
-            "ms": 59.3,
+            "ms": 79.5,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.781,
             "keyError": 0.9744,
-            "ms": 780.5,
-            "heapDeltaBytes": 37813176
+            "ms": 1565.5,
+            "heapDeltaBytes": 39097128
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -780,15 +780,15 @@
             "exact": false,
             "plaintextError": 0.7746,
             "keyError": 0.8545,
-            "ms": 60.4,
+            "ms": 77.7,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.819,
             "keyError": 0.8909,
-            "ms": 1547.3,
-            "heapDeltaBytes": 0
+            "ms": 2533.9,
+            "heapDeltaBytes": 29445120
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -809,15 +809,15 @@
             "exact": false,
             "plaintextError": 0.7333,
             "keyError": 0.8571,
-            "ms": 25,
-            "heapDeltaBytes": 0
+            "ms": 26,
+            "heapDeltaBytes": 18024000
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9429,
-            "ms": 591,
-            "heapDeltaBytes": 0
+            "ms": 987.5,
+            "heapDeltaBytes": 10663464
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -838,15 +838,15 @@
             "exact": false,
             "plaintextError": 0.7814,
             "keyError": 1,
-            "ms": 57.6,
+            "ms": 135.6,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7331,
             "keyError": 0.8462,
-            "ms": 902.6,
-            "heapDeltaBytes": 27615112
+            "ms": 1611.2,
+            "heapDeltaBytes": 31661472
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -867,15 +867,15 @@
             "exact": false,
             "plaintextError": 0.8232,
             "keyError": 0.9636,
-            "ms": 55.6,
+            "ms": 88.2,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7974,
             "keyError": 0.9091,
-            "ms": 1766,
-            "heapDeltaBytes": 31286960
+            "ms": 2444.6,
+            "heapDeltaBytes": 24284896
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -896,14 +896,14 @@
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9714,
-            "ms": 22.3,
-            "heapDeltaBytes": 17420704
+            "ms": 28.2,
+            "heapDeltaBytes": 17427248
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.725,
             "keyError": 0.7429,
-            "ms": 668.9,
+            "ms": 903.6,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -925,15 +925,15 @@
             "exact": false,
             "plaintextError": 0.8105,
             "keyError": 1,
-            "ms": 61.1,
+            "ms": 88.2,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7813,
             "keyError": 0.878,
-            "ms": 1041.2,
-            "heapDeltaBytes": 29902680
+            "ms": 1237.7,
+            "heapDeltaBytes": 30185312
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -954,15 +954,15 @@
             "exact": false,
             "plaintextError": 0.7959,
             "keyError": 1,
-            "ms": 65.6,
+            "ms": 71.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8367,
             "keyError": 0.9643,
-            "ms": 1637,
-            "heapDeltaBytes": 40694600
+            "ms": 2140.8,
+            "heapDeltaBytes": 39638136
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -983,15 +983,15 @@
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9688,
-            "ms": 22.1,
+            "ms": 28.1,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9375,
-            "ms": 506.2,
-            "heapDeltaBytes": 12289120
+            "ms": 698.7,
+            "heapDeltaBytes": 12668016
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -1012,15 +1012,15 @@
             "exact": false,
             "plaintextError": 0.7719,
             "keyError": 1,
-            "ms": 54.5,
+            "ms": 66.8,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8041,
             "keyError": 0.9459,
-            "ms": 738,
-            "heapDeltaBytes": 12155872
+            "ms": 912,
+            "heapDeltaBytes": 12459088
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -1041,15 +1041,15 @@
             "exact": false,
             "plaintextError": 0.769,
             "keyError": 0.9815,
-            "ms": 62.5,
+            "ms": 67.3,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7778,
             "keyError": 0.9074,
-            "ms": 1672.8,
-            "heapDeltaBytes": 39763984
+            "ms": 2157.5,
+            "heapDeltaBytes": 31943712
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -1070,15 +1070,15 @@
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9688,
-            "ms": 22.2,
-            "heapDeltaBytes": 0
+            "ms": 31.9,
+            "heapDeltaBytes": 18728640
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9063,
-            "ms": 495.5,
-            "heapDeltaBytes": 17784552
+            "ms": 657.3,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -1099,14 +1099,14 @@
             "exact": false,
             "plaintextError": 0.7604,
             "keyError": 0.8718,
-            "ms": 53.5,
+            "ms": 94.1,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8077,
             "keyError": 1,
-            "ms": 802.6,
+            "ms": 1078.9,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -1128,14 +1128,14 @@
             "exact": false,
             "plaintextError": 0.8077,
             "keyError": 0.9821,
-            "ms": 57.4,
+            "ms": 71.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8107,
             "keyError": 0.9643,
-            "ms": 1548.6,
+            "ms": 2121.1,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -1157,15 +1157,15 @@
             "exact": false,
             "plaintextError": 0.8167,
             "keyError": 0.9143,
-            "ms": 21.9,
+            "ms": 50.9,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8333,
             "keyError": 0.9429,
-            "ms": 607.5,
-            "heapDeltaBytes": 38980856
+            "ms": 784.7,
+            "heapDeltaBytes": 41397280
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -1190,15 +1190,15 @@
         },
         "ms": {
           "n": 39,
-          "mean": 43.141,
-          "min": 19.7,
-          "max": 67.5
+          "mean": 64.1282,
+          "min": 26,
+          "max": 135.6
         },
         "heapDeltaBytes": {
           "n": 39,
-          "mean": 9601569.2308,
+          "mean": 8980947.8974,
           "min": 0,
-          "max": 45814472
+          "max": 43968128
         }
       },
       "beamSearch": {
@@ -1217,15 +1217,15 @@
         },
         "ms": {
           "n": 39,
-          "mean": 1048.0436,
-          "min": 495.5,
-          "max": 1911.7
+          "mean": 1639.941,
+          "min": 657.3,
+          "max": 3027.1
         },
         "heapDeltaBytes": {
           "n": 39,
-          "mean": 16505921.8462,
+          "mean": 18624657.2308,
           "min": 0,
-          "max": 51697376
+          "max": 53644640
         }
       },
       "exactRecovery": {
