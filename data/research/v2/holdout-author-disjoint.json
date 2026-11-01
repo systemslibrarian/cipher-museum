@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "id": "museum-language-holdout-author-disjoint-v1",
+  "scope": "Passages from works by authors who appear NOWHERE in the profile training material. This is the stronger holdout: author, and usually genre and period as well, shift at the same time. Compare its results against holdout.json, which reserves text from the same works by the same authors.",
+  "rights": "Pre-1800 works, public domain worldwide; short extracts.",
+  "disjointness": "Asserted at build time against the training source list, not assumed.",
+  "passages": [
+    {
+      "id": "brantome-dames-galantes-disjoint-1",
+      "profile": "historical-french-1580",
+      "source": "brantome-dames-galantes",
+      "work": "Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)",
+      "edition": "Project Gutenberg eBook 39220.",
+      "url": "https://www.gutenberg.org/cache/epub/39220/pg39220.txt",
+      "shift": "Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy).",
+      "characters": 400,
+      "sha256": "9b9c499cddc0de260d8d1a883e88011eddc44ac630086bb6aff4bb647f076e33",
+      "text": "LEUE, 7. REVUE ET CORRIGÉE SUR L'ÉDITION DE 1740 AVEC DES REMARQUES HISTORIQUES ET CRITIQUES GARNIER FRÈRES, LIBRAIRES-ÉDITEURS 6, RUE DES SAINTS-PÈRES, 6 FILS ET FRÈRE DE NOS ROYS. D'autant que vous m'avez fait cet honneur souvent à la Cour de causer avec moy fort privement de plusieurs bons mots et contes, qui vous sont si familiers et assidus qu'on diroit qu'ils vous naissent à veüe d'oeil dans"
+    },
+    {
+      "id": "brantome-dames-galantes-disjoint-2",
+      "profile": "historical-french-1580",
+      "source": "brantome-dames-galantes",
+      "work": "Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)",
+      "edition": "Project Gutenberg eBook 39220.",
+      "url": "https://www.gutenberg.org/cache/epub/39220/pg39220.txt",
+      "shift": "Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy).",
+      "characters": 400,
+      "sha256": "32855e4749b8bc7e85dc019a2d21e58e045531f927b83890ee2aa66ef5a2baa0",
+      "text": "s chaudes que celles de l'hyver et de l'autre moitié de l'automne prochaine et voisine de l'hyver, qui, bien qu'on les puisse et doive joindre ensemble, si n'y peut-on si bien recueillir tous ces bons simples en leur vigueur, ny autre chose comme en la saison chaude, encore l'hyver s'efforce de produire ce qu'il peut, comme les bonnes cardes qui engendrent bien de la bonne chaleur et de la concupi"
+    },
+    {
+      "id": "brantome-dames-galantes-disjoint-3",
+      "profile": "historical-french-1580",
+      "source": "brantome-dames-galantes",
+      "work": "Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)",
+      "edition": "Project Gutenberg eBook 39220.",
+      "url": "https://www.gutenberg.org/cache/epub/39220/pg39220.txt",
+      "shift": "Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy).",
+      "characters": 400,
+      "sha256": "7a09bbec762dce2301e5cbf14c4ec92c2ad06f7b4138d3e7f7f08ff82e0cba5a",
+      "text": "vois avec moy un fort honneste gentilhomme de Périgord, mon amy, qui s'appeloit M. de Roche, qui me dit soudain: «Pensez que quelques-unes de ces dames qu'il aimoit le plus, et de la fidelité desquelles il s'assuroit le plus, il les avoit trouvées varier et luy faire faux-bons, et en elles avoit découvert quelque changement dont il n'estoit guères content, et, de despit, en avoit escrit ce mot.» L"
+    },
+    {
+      "id": "machiavelli-commedie-disjoint-1",
+      "profile": "historical-italian-1320",
+      "source": "machiavelli-commedie",
+      "work": "Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)",
+      "edition": "Project Gutenberg eBook 56498.",
+      "url": "https://www.gutenberg.org/cache/epub/56498/pg56498.txt",
+      "shift": "Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three.",
+      "characters": 400,
+      "sha256": "975e8c2a7882536803c4cd34805fba5366d5d71b500b70ef1612109d2d3c1f16",
+      "text": "ndragola, mi sono attenuto all'edizione curatane per la Bibliotheca romanica (Strasburgo, J. H. Ed. Heitz, 1912) da Santorre De Benedetti. Ne ho però tolto e modificato quelle peculiarità grafiche che già al principio del Cinquecento non avevano più alcuna rispondenza nella pronuncia. Per la Clizia, ho seguito l'edizione Italia, 1813. Per il Belfagor, l'edizione di G. A. Gargàni, Firenze, Dotti, 1"
+    },
+    {
+      "id": "machiavelli-commedie-disjoint-2",
+      "profile": "historical-italian-1320",
+      "source": "machiavelli-commedie",
+      "work": "Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)",
+      "edition": "Project Gutenberg eBook 56498.",
+      "url": "https://www.gutenberg.org/cache/epub/56498/pg56498.txt",
+      "shift": "Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three.",
+      "characters": 400,
+      "sha256": "371b080f75effcd6ec423c03a9eec2beb226b526b01432f23362720c0839902b",
+      "text": "ca, pu, ca, co, co, cu, cu, spu. Che ti venga la seccaggine, pezzo di manigoldo! Perdonatemi, che io ve ne ho data una in scambio, che io non me Ca, ca, pu, pu. Di che, che, che, era? Sia in malora! spu, spu. Maestro, voi non dite nulla? Ligurio mi ha fatto adirare. Oh! voi contraffate ben la voce. Non perdiam più tempo qui. Io voglio essere el capitano, e ordinare l'esercito per la giornata. Al d"
+    },
+    {
+      "id": "machiavelli-commedie-disjoint-3",
+      "profile": "historical-italian-1320",
+      "source": "machiavelli-commedie",
+      "work": "Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)",
+      "edition": "Project Gutenberg eBook 56498.",
+      "url": "https://www.gutenberg.org/cache/epub/56498/pg56498.txt",
+      "shift": "Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three.",
+      "characters": 400,
+      "sha256": "b3d808b4432e68505e7f2e13c111f54371c5e36575e8818192430f93f4dcef89",
+      "text": "in casa, scrivi le polizze, e reca due borse, che io voglio uscire di questo travaglio, o io entrerò in uno maggiore. A questo modo ci accorderemo noi. Prega Iddio, Pirro, per te. Tu di' ben a dire per me. Io arò una gran consolazione che tu Da' qua. Questa che dice? Clizia. E quest'altra? È bianca. Sta bene. Mettile in questa borsa di qua. Questa che dice? Eustachio. E quest'altra? Pirro. Ripiega"
+    },
+    {
+      "id": "cicero-orationes-disjoint-1",
+      "profile": "historical-latin-classical",
+      "source": "cicero-orationes",
+      "work": "Marcus Tullius Cicero, Orations (first century BCE)",
+      "edition": "Project Gutenberg eBook 226. Latin throughout, with no editorial translation or notes.",
+      "url": "https://www.gutenberg.org/cache/epub/226/pg226.txt",
+      "shift": "Different author, same century and language as the training text, forensic oratory rather than campaign commentary.",
+      "characters": 400,
+      "sha256": "f0cc4f586a13769ca68cb9cb3a8016bd9dad6d0a28abf8b9f596d45feb8d9d70",
+      "text": "u autem rem perficere prohibitus erat, ascitis ad consilium rei publicae opprimendae hominibus omnis generis perditissiis atque audacissimis, quos inopia, cupiditas, scelera stimulabant, consulatum in annum 691 p. u. c. petivit, sed cum, quae in animo habebat, perniciosa rei publicae consilia parum occultata essent, studiis bonorum omnium M. Tullius Cicero una cum C. Antonio consul factus est. Qua"
+    },
+    {
+      "id": "cicero-orationes-disjoint-2",
+      "profile": "historical-latin-classical",
+      "source": "cicero-orationes",
+      "work": "Marcus Tullius Cicero, Orations (first century BCE)",
+      "edition": "Project Gutenberg eBook 226. Latin throughout, with no editorial translation or notes.",
+      "url": "https://www.gutenberg.org/cache/epub/226/pg226.txt",
+      "shift": "Different author, same century and language as the training text, forensic oratory rather than campaign commentary.",
+      "characters": 400,
+      "sha256": "2f28dd056bc22132b6a0ec3af65f89ce3dcd0f880a9abc883867930c355d445e",
+      "text": "e vixisse fateatur? quae caedes per hosce annos sine illo facta est, quod nefarium stuprum non per illum? Iam vero quae tanta umquam in ullo [homine] iuventutis inlecebra fuit, quanta in illo? qui alios ipse amabat turpissime, aliorum amori flagitiosissime serviebat, aliis fructum lubidinum, aliis mortem parentum non modo inpellendo, verum etiam adiuvando pollicebatur. Nunc vero quam subito non so"
+    },
+    {
+      "id": "cicero-orationes-disjoint-3",
+      "profile": "historical-latin-classical",
+      "source": "cicero-orationes",
+      "work": "Marcus Tullius Cicero, Orations (first century BCE)",
+      "edition": "Project Gutenberg eBook 226. Latin throughout, with no editorial translation or notes.",
+      "url": "https://www.gutenberg.org/cache/epub/226/pg226.txt",
+      "shift": "Different author, same century and language as the training text, forensic oratory rather than campaign commentary.",
+      "characters": 400,
+      "sha256": "0906c7913ebaa817dd7047ca2095220cdfb1873b1dac092f781c857d4fb08ce3",
+      "text": "unc illo absente sic gesta sunt, ut nullum in privata domo furtum umquam sit tam palam inventum, quam haec tanta in re publica coniuratio manifesto inventa atque deprehensa est. Quodsi Catilina in urbe ad hanc diem remansisset, quamquam, quoad fuit, omnibus eius consiliis occurri atque obstiti, tamen, ut levissime dicam, dimicandum nobis cum illo fuisset, neque nos umquam, cum ille in urbe hostis "
+    }
+  ]
+}

@@ -75,6 +75,31 @@ const DEVELOPMENT = [
     text: 'QXZJKVWQPZXJKVQWZXJPKVQWZXJKPVQWZXJKVPQWZXJKVQPWZXJKVQZ' }
 ];
 
+// Author-disjoint held-out sources. NONE of these authors or works appears in the
+// training SOURCES above, and nothing from these files is ever counted into a profile.
+// They are a harder test than the document-internal holdout: author, and usually genre
+// and period too, all shift at once. That is the point.
+const DISJOINT = [
+  { profile: 'historical-french-1580', id: 'brantome-dames-galantes',
+    url: 'https://www.gutenberg.org/cache/epub/39220/pg39220.txt',
+    work: 'Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)',
+    edition: 'Project Gutenberg eBook 39220.',
+    shift: 'Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy).',
+    extract: 'unindented prose body lines' },
+  { profile: 'historical-italian-1320', id: 'machiavelli-commedie',
+    url: 'https://www.gutenberg.org/cache/epub/56498/pg56498.txt',
+    work: 'Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)',
+    edition: 'Project Gutenberg eBook 56498.',
+    shift: 'Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three.',
+    extract: 'unindented body lines with speaker tags and italic markers removed' },
+  { profile: 'historical-latin-classical', id: 'cicero-orationes',
+    url: 'https://www.gutenberg.org/cache/epub/226/pg226.txt',
+    work: 'Marcus Tullius Cicero, Orations (first century BCE)',
+    edition: 'Project Gutenberg eBook 226. Latin throughout, with no editorial translation or notes.',
+    shift: 'Different author, same century and language as the training text, forensic oratory rather than campaign commentary.',
+    extract: 'full body; the edition carries no English apparatus to remove' }
+];
+
 const PROFILES = {
   'historical-french-1580': {
     language: 'French', period: 'Sixteenth century (text first published 1580)',
@@ -121,6 +146,17 @@ function body(raw) {
   return end > start ? inner.slice(0, inner.indexOf('*** END OF')) : inner;
 }
 
+function extractDisjoint(source, raw) {
+  const lines = body(raw.toString('utf8')).split('\n');
+  let kept;
+  if (source.id === 'machiavelli-commedie') {
+    kept = lines.filter(l => l.trim() && !l.startsWith('  '))
+      .map(l => l.replace(/^_[A-Za-zÀ-ÿ]{1,12}\._\s*/, '').replace(/_/g, ''));
+  } else {
+    kept = lines.filter(l => l.trim() && !l.startsWith('  ') && !/^\s*\[/.test(l));
+  }
+  return kept.filter(l => l.trim().length > 25);
+}
 function extract(source, raw) {
   const lines = body(raw.toString('utf8')).split('\n');
   if (source.profile === 'historical-french-1580') {
@@ -243,19 +279,57 @@ const holdout = { version: 1, id: 'museum-language-holdout-v1',
       characters: t.length, sha256: sha(Buffer.from(t, 'utf8')), text: t }));
   }) };
 const holdoutFile = path.join(root, 'data', 'research', 'v2', 'holdout.json');
+
+// Author-disjoint holdout. Built from files the profile builder never counts, by
+// authors and works that appear nowhere in training. The disjointness is asserted
+// here rather than assumed, so a future edit that reuses a training author fails
+// the build instead of quietly inflating a score.
+const trainingAuthors = new Set(SOURCES.map(s => s.id));
+const trainingWorks = new Set(SOURCES.map(s => s.work));
+for (const d of DISJOINT) {
+  if (trainingAuthors.has(d.id) || trainingWorks.has(d.work)) {
+    throw new Error('Author-disjoint source ' + d.id + ' collides with a training source.');
+  }
+}
+const disjointPassages = [];
+for (const source of DISJOINT) {
+  const raw = await cached(source);
+  const text = extractDisjoint(source, raw).join(' ').replace(/\s+/g, ' ').trim();
+  const letters = normalize(text);
+  if (letters.length < 1200) throw new Error('Author-disjoint source ' + source.id + ' yielded too little text.');
+  // Three passages per language, spaced across the work so they are not one topic.
+  const stride = Math.floor((text.length - 400) / 3);
+  for (let n = 0; n < 3; n++) {
+    const slice = text.slice(200 + n * stride, 200 + n * stride + 400);
+    disjointPassages.push({ id: source.id + '-disjoint-' + (n + 1), profile: source.profile, source: source.id,
+      work: source.work, edition: source.edition, url: source.url, shift: source.shift,
+      characters: slice.length, sha256: sha(Buffer.from(slice, 'utf8')), text: slice });
+  }
+}
+const disjoint = { version: 1, id: 'museum-language-holdout-author-disjoint-v1',
+  scope: 'Passages from works by authors who appear NOWHERE in the profile training material. This is the stronger holdout: author, and usually genre and period as well, shift at the same time. Compare its results against holdout.json, which reserves text from the same works by the same authors.',
+  rights: 'Pre-1800 works, public domain worldwide; short extracts.',
+  disjointness: 'Asserted at build time against the training source list, not assumed.',
+  passages: disjointPassages };
+const disjointFile = path.join(root, 'data', 'research', 'v2', 'holdout-author-disjoint.json');
 const encoded = JSON.stringify(data) + '\n';
 if (want('--check')) {
   const holdoutEncoded = JSON.stringify(holdout, null, 2) + '\n';
+  const disjointEncoded = JSON.stringify(disjoint, null, 2) + '\n';
   if (!fs.existsSync(out) || fs.readFileSync(out, 'utf8') !== encoded) {
     console.error('Historical-language profiles are stale.'); process.exitCode = 1;
   } else if (!fs.existsSync(holdoutFile) || fs.readFileSync(holdoutFile, 'utf8') !== holdoutEncoded) {
     console.error('Held-out language passages are stale.'); process.exitCode = 1;
-  } else console.log('Historical-language profiles and held-out passages are current.');
+  } else if (!fs.existsSync(disjointFile) || fs.readFileSync(disjointFile, 'utf8') !== disjointEncoded) {
+    console.error('Author-disjoint held-out passages are stale.'); process.exitCode = 1;
+  } else console.log('Historical-language profiles and both held-out sets are current.');
 } else {
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, encoded);
   fs.writeFileSync(holdoutFile, JSON.stringify(holdout, null, 2) + '\n');
   console.log('Wrote ' + path.relative(root, holdoutFile) + ': ' + holdout.passages.length + ' held-out passages.');
+  fs.writeFileSync(disjointFile, JSON.stringify(disjoint, null, 2) + '\n');
+  console.log('Wrote ' + path.relative(root, disjointFile) + ': ' + disjoint.passages.length + ' author-disjoint passages.');
   profiles.forEach(p => console.log(p.id + ': ' + p.letterTotal + ' letters, ' + p.coverage.quadgramTypesObserved +
     ' quadgram types (' + p.coverage.quadgramTypesPublished + ' published, ' +
     (100 * p.coverage.quadgramTokenShareKept).toFixed(1) + '% of training occurrences covered)'));

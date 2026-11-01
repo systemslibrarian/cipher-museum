@@ -76,6 +76,31 @@ repository, and renaming a file does not change that.
 39 items at the published budget (seed 41, 6,000 annealing steps, beam width 150, 26-way
 branching), 13 source documents, all in the `test` split.
 
+### What 0 of 39 actually means
+
+The headline below is that neither solver recovered any of these texts. That number is
+easy to misread in two opposite directions, so here is the plain reading.
+
+**It does not mean the solvers are broken.** The same annealing code applies a complete
+known key correctly on all 39 items, and relabelling every symbol leaves its output
+unchanged. The machinery works; it is the recovery problem that is not being solved.
+
+**It also does not mean "nearly there."** At roughly 75% mean plaintext error, about three
+characters in four are wrong. These are not almost-readable texts with a few slips — they
+are wrong.
+
+**The reason is the size of the problem relative to the evidence.** Each item is 120–343
+symbols long and its key has 32–61 distinct symbols to pin down: about **5 observations per
+unknown** on average, as few as 3. Every letter has two or three interchangeable codes, so
+repetition — the thing frequency analysis lives on — is deliberately spread thin. A general
+English quadgram model asked to choose among that many unknowns, from that little text, has
+very little to go on. Short homophonic texts are hard for a reason that has nothing to do
+with implementation quality, and historical cryptanalysts met the same wall.
+
+What would change it is more text, a language model matched to the actual language and
+period, or outside evidence — a crib, a known correspondent, a partial key. That is exactly
+why the workbench is built around evidence and hypotheses rather than around a solve button.
+
 ### Independent-key recovery — both solvers fail, and that is the result
 
 | Solver | Mean plaintext error | Mean key error | Exact recoveries | Mean runtime |
@@ -91,6 +116,52 @@ are not superseded by these.
 
 Two invariants hold for both solvers on all 39 items: applying the complete known key is
 **exact 39 of 39**, and relabelling every symbol leaves the search outcome unchanged.
+
+### Tuning sweep: can beam search be made to win?
+
+Short answer: no, not with these two knobs. The grid, budget and win condition were fixed in
+the header of [`scripts/sweep-solvers.js`](../../../scripts/sweep-solvers.js) **before any
+result was read** — 4 beam widths x 3 scoring weights, plus annealing at two budgets under
+the same three weights, one run per cell on the 13 `full-2hom` items. Beam search was
+declared the winner only if some cell beat the shipped annealing row on mean plaintext error.
+
+| Solver | Beam | Steps | Penalty | Plaintext err | Key err | Exact | Mean ms |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Annealing | — | 6,000 | 0 | **72.9%** | 89.2% | 0/13 | 31 |
+| Annealing | — | 50,000 | 0 | **65.6%** | 80.7% | 0/13 | 186 |
+| Beam | 50 | — | 0 | **80.1%** | 94.4% | 0/13 | 189 |
+| Beam | 150 | — | 0 | **79.3%** | 93.7% | 0/13 | 592 |
+| Beam | 400 | — | 0 | **79.7%** | 94.5% | 0/13 | 1,607 |
+| Beam | 1000 | — | 0 | **76.7%** | 92.0% | 0/13 | 4,019 |
+| Annealing | — | 6,000 | 1.5 | **71.9%** | 90.4% | 0/13 | 32 |
+| Annealing | — | 50,000 | 1.5 | **57.6%** | 72.5% | 0/13 | 179 |
+| Beam | 50 | — | 1.5 | **79.3%** | 94.9% | 0/13 | 134 |
+| Beam | 150 | — | 1.5 | **78.6%** | 93.2% | 0/13 | 416 |
+| Beam | 400 | — | 1.5 | **79.0%** | 94.5% | 0/13 | 1,151 |
+| Beam | 1000 | — | 1.5 | **78.7%** | 92.3% | 0/13 | 2,978 |
+| Annealing | — | 6,000 | 3 | **71.7%** | 89.6% | 0/13 | 25 |
+| Annealing | — | 50,000 | 3 | **56.4%** | 72.7% | 0/13 | 179 |
+| Beam | 50 | — | 3 | **80.5%** | 97.1% | 0/13 | 132 |
+| Beam | 150 | — | 3 | **79.0%** | 93.8% | 0/13 | 425 |
+| Beam | 400 | — | 3 | **77.8%** | 93.1% | 0/13 | 1,159 |
+| Beam | 1000 | — | 3 | **78.1%** | 92.1% | 0/13 | 2,990 |
+
+**Every annealing cell beats every beam cell.** The best beam configuration (width 1,000,
+penalty 0) reaches 76.7% against the shipped annealing row's 71.9% — while taking 4,019 ms
+against 32 ms, about 126 times the work. Widening the beam from 50 to 1,000 buys at most a
+few points and not monotonically; the scoring weight moves things less than the gap between
+adjacent beam widths. Beam search is kept as a disclosed contrast, not as an alternative to
+reach for.
+
+One finding about the *other* solver fell out of the same grid: annealing at 50,000 steps
+with penalty 3.0 reaches **56.4%**, well below the shipped 6,000-step row's 71.9%. That is a
+tuning observation, not a change — the published v2 results keep the 6,000-step budget so
+the numbers stay comparable, and retuning the shipped budget would be a separate experiment
+needing its own held-out material. Still 0 exact recoveries in all 18 cells.
+
+Caveats are recorded in the file: 13 public fixtures, one run per cell, annealing is
+stochastic and a different seed would move its numbers, and only two knobs were swept — a
+different partial scoring function or extension order is a different experiment.
 
 ### Fixed-code-pool recognition — a different task
 
@@ -122,12 +193,37 @@ three controls behaved correctly: English — which has no profile — was **abs
 museum-written modern French ranked the French profile first, which is right about the
 language and silent about the period; random letters were abstained on.
 
-Nine passages from three works is a small measurement, and the passages share authors and
-works with the training material. It shows the comparison and its abstention rule function;
-it is not a language-identification accuracy figure.
+Nine passages from three works is a small measurement, and these passages share authors and
+works with the training material.
+
+#### Author-disjoint holdout — the stronger test
+
+The set above reserves text from the *same* works by the *same* authors. A second holdout
+removes that overlap entirely: three passages per language from authors and works that
+appear **nowhere** in training. The disjointness is asserted when the file is built, so a
+future edit that reused a training author fails the build instead of quietly inflating a
+score.
+
+| Profile | Author-disjoint source | Correct | What shifts |
+| --- | --- | --- | --- |
+| `historical-french-1580` | Pierre de Bourdeille, seigneur de Brantôme, Vies des dames | 3/3 | Different author, same language and century as the training text, memoir rather than essay |
+| `historical-italian-1320` | Niccolò Machiavelli, La mandragola, La Clizia and Belfagor | 3/3 | Different author, two centuries later than the training text, and dramatic prose rather than verse |
+| `historical-latin-classical` | Marcus Tullius Cicero, Orations | 3/3 | Different author, same century and language as the training text, forensic oratory rather than campaign commentary |
+
+**Result: 9 of 9 correct, 0 abstentions**, with margins from 1.53 to 2.75 — the same
+outcome as the document-internal set, on harder material. Every language in the profile set
+has usable author-disjoint text, so there is no language to report as uncovered here.
+
+Two honest qualifications. Three passages per language is still a small measurement, not an
+accuracy figure. And the shifts are not equal: Brantôme is the same language and century as
+Montaigne, Cicero the same century and language as Caesar, while Machiavelli is two
+centuries later than Dante and prose rather than verse — the Italian row is doing the most
+work, and it is the one with the narrowest margins.
 
 **Unresolved coverage:** German, Spanish, English and every other language in the historical
-record have no profile. A text in one of them can only be abstained on or mis-assigned.
+record have no profile. A text in one of them can only be abstained on or mis-assigned. This
+is a gap in the *profile set*, not in the holdout: every language that does have a profile
+also has author-disjoint held-out text.
 
 ## Limits
 

@@ -64,11 +64,11 @@
     {
       "path": "cipher-corpus.html",
       "title": "Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum",
-      "words": 1527,
-      "sha256": "6972244367a9ac25f7f8ddf7d0734736383f70c8750a5840ced55790b3155829",
+      "words": 1542,
+      "sha256": "020b63db620811d763b294799aa989898efcb8601c14e73af0515c84124271d8",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
-      "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged.",
+      "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged. 1 Nov 2026 follow-up: the matched-input recipe pointer now says the recipe is a specification nobody has run, so no results from it exist.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -86,7 +86,8 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-      "research_review_2026_10_29": "revised"
+      "research_review_2026_10_29": "revised",
+      "research_review_followup_2026_11_01": "revised"
     },
     {
       "path": "cipher-detective.html",
@@ -1573,8 +1574,8 @@
     {
       "path": "ciphers/diffie-hellman.html",
       "title": "Diffie-Hellman Key Exchange — The Cipher Museum",
-      "words": 1258,
-      "sha256": "804b6bcfb454c870d1b0a7c717ed7788cfbc996aa540b61b880638cb4df12891",
+      "words": 1429,
+      "sha256": "c4da8cef524826c72f27c3f3545f4be48c56183a694fef3e5a0875e9f91a4894",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "LOGJAM-2015",
@@ -1610,7 +1611,8 @@
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
       },
-      "research_review_2026_10_29": "revised"
+      "research_review_2026_10_29": "revised",
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
     },
     {
       "path": "ciphers/dilly-knox.html",
@@ -3206,8 +3208,8 @@
     {
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator — The Cipher Museum",
-      "words": 578,
-      "sha256": "7d1b7e09028a675823190fc1dd29c3a071224b7b3ba3e716cd1b6514d439bb69",
+      "words": 745,
+      "sha256": "52a700d4501e2631a9ed3abbb7234270b5a75f952bcd619dbc6a6fdb726b5a4a",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -3229,7 +3231,8 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
     },
     {
       "path": "ciphers/null-cipher.html",
@@ -4555,8 +4558,8 @@
     {
       "path": "ciphers/voynich.html",
       "title": "The Voynich Manuscript (c. 1404–1438) — The Cipher Museum",
-      "words": 1377,
-      "sha256": "7db56c507c768b0bb2f77dd0dd9de5b5da8a4be08e3be92c7bae949f181a1838",
+      "words": 1536,
+      "sha256": "f9106517f7fe3c115d5cb4ef28284069198a8e965a02c81917376a3dbf02e46f",
       "status": "bounded review and local release validation complete",
       "sources": [
         "REDDY-KNIGHT-2011",
@@ -4584,7 +4587,8 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
     },
     {
       "path": "ciphers/wadsworth-cipher.html",
@@ -5896,8 +5900,8 @@
     {
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
-      "words": 518,
-      "sha256": "eb0b1e31d61531c71f80229b2bea2423cc440e3506b2323adce4d4d2b0a5ef17",
+      "words": 897,
+      "sha256": "fa97477bfb3818abf7a585a89472d6452577ddf485bbc5e6e4115cdf80e949cf",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -5919,7 +5923,8 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
     },
     {
       "path": "lab/decipherment-cases.html",
@@ -5949,11 +5954,11 @@
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "words": 2060,
-      "sha256": "ddbe8a2f6e750dca046d868200dbcb2471ef60c77843bd69469bdf03fc3be4f7",
+      "words": 2450,
+      "sha256": "de9f518b2a41693a903bf93715a1a60b5f53fe82afab55a9fdba20d37eb3bf16",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
-      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported.",
+      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "root",
@@ -5976,13 +5981,14 @@
         "record": "docs/RESEARCH_REVIEW_2026-10-30.md",
         "validation": "docs/page-audit/research-2026-10-30-validation.json",
         "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
-      }
+      },
+      "research_review_followup_2026_11_01": "revised"
     },
     {
       "path": "lab/modern-attack-evidence.html",
       "title": "What an Attack Result Actually Shows — The Cipher Museum",
-      "words": 3940,
-      "sha256": "502b49a76bb3d22f610c4cbeb6065fa23223a44798524228a5de37a9974ca616",
+      "words": 5165,
+      "sha256": "adb7bac36e4d1df6ca2755e9f87d77a12c170fb409728ee210e5e3998df107cd",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "GPU-SEARCH-2025",
@@ -5996,7 +6002,7 @@
         "RESEARCH-CL980",
         "RESEARCH-CL984"
       ],
-      "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained. 29 Oct 2026 research review R01/R12/R14: replaced the obsolete full-paper-unavailable GPRS paragraph with the tested conditions and a phase table after reading the published paper; added five comparative attack-evidence cards; added a section separating four AI tasks with a matched-input recipe that is published as a procedure and was not executed.",
+      "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained. 29 Oct 2026 research review R01/R12/R14: replaced the obsolete full-paper-unavailable GPRS paragraph with the tested conditions and a phase table after reading the published paper; added five comparative attack-evidence cards; added a section separating four AI tasks with a matched-input recipe that is published as a procedure and was not executed. 1 Nov 2026 follow-up: the matched-input recipe is relabelled \"specified, not executed\" - nobody has run it, no results exist, and running it needs live model access with a declared version, date and settings. The recipe itself is unchanged.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -6035,7 +6041,8 @@
         "record": "docs/RESEARCH_REVIEW_2026-10-30.md",
         "validation": "docs/page-audit/research-2026-10-30-validation.json",
         "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
-      }
+      },
+      "research_review_followup_2026_11_01": "revised"
     },
     {
       "path": "lab/workbench.html",
@@ -6308,8 +6315,8 @@
     {
       "path": "sealed-letter.html",
       "title": "The Curator’s Sealed Letter — The Cipher Museum",
-      "words": 1370,
-      "sha256": "b33e010145bcec0c3f2e1de348b0b8d056d204219a3de9ac59fd7b40a2f952f4",
+      "words": 2138,
+      "sha256": "0a2a6664a35a5273dec69b463718bf698740131f9c8b4228ccc9cd0c2cac3c02",
       "status": "bounded integration reading and static puzzle checks complete; no browser execution in this inventory pass",
       "sources": [],
       "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified.",
@@ -6318,7 +6325,8 @@
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
         "scope": "Complete static HTML and checker-source reading, arithmetic/route/code-key consistency, and local link/fragment existence.",
         "limits": "No historical ciphertext reproduced or primary historical source checked. No browser interaction, visual accessibility or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
-      }
+      },
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
     },
     {
       "path": "search.html",
@@ -6397,8 +6405,8 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum — Paul Clark — The Cipher Museum",
-      "words": 854,
-      "sha256": "eaeaf19e6298ef912384852c23742da684bb20428663c7e037907055a68e5561",
+      "words": 880,
+      "sha256": "d0df1b135f437ff108cbc57e1efedcd4828daf2d86c59cc19056ef25de52b6c2",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
       "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration.",
@@ -6407,7 +6415,8 @@
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
         "scope": "Complete static HTML reading, metadata and navigation consistency, and local link/fragment existence.",
         "limits": "No new independent verification of the Mary Stuart narrative, manuscript contents or cover pixels. No browser, visual or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
-      }
+      },
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
     },
     {
       "path": "timeline.html",
@@ -6574,5 +6583,28 @@
     "word_count_method": "Whitespace-delimited static body text nodes with script/style contents excluded; includes hidden hints and case text.",
     "static_local_link_checks": 69,
     "limits": "Inventory coverage and static consistency are not new source verification, runtime/visual testing or deployment approval. The historical 214-page review was not expanded into a claim of 216 reviewed historical exhibits. Combined-source tests, audit export/package checks and deployment evidence are recorded separately."
+  },
+  "research_review_followup_2026_11_01": {
+    "date": "2026-11-01",
+    "baseline": "ac659d8",
+    "items": 6,
+    "completed": 6,
+    "blocked": 0,
+    "record": "docs/RESEARCH_REVIEW_2026-10-29.md (addendum)",
+    "pages_revised": [
+      "cipher-corpus.html",
+      "lab/evidence-workbench.html",
+      "lab/modern-attack-evidence.html"
+    ],
+    "hashes_refreshed_not_revised": [
+      "ciphers/diffie-hellman.html",
+      "ciphers/nomenclator.html",
+      "ciphers/voynich.html",
+      "index.html",
+      "sealed-letter.html",
+      "the-book.html"
+    ],
+    "scope": "R14 relabelled specified-not-executed; pre-registered beam/annealing tuning sweep (beam loses in all 12 cells, kept as a disclosed contrast); author-disjoint language holdout for all three languages, 9 of 9, reported beside the document-internal set; plain-language framing of 0 of 39 exact; cross-browser verification in Chromium, Firefox and WebKit at three viewports, 153 of 153, nothing differing from Chromium.",
+    "inherited_drift": "The default branch's audit pack was already stale: six pages carried recorded hashes that did not match their committed bytes, and export --check failed on origin/main before this branch existed. Those hashes are refreshed here so the pack regenerates; the pages themselves were not touched by this work and are listed separately above."
   }
 }
