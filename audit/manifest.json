@@ -1,14 +1,14 @@
 {
   "format_version": 1,
-  "source_commit": "c329dc19058c960a430ac62352191a47bccfeba5",
-  "source_commit_time": "2026-10-30T16:35:27-04:00",
+  "source_commit": "227086a353fbf8b3a91629f9a97d4eb2634bdc0a",
+  "source_commit_time": "2026-11-01T16:10:52-05:00",
   "page_count": 216,
   "inline_script_count": 80,
   "shared_script_count": 55,
   "data_file_count": 29,
   "source_register_count": 185,
-  "preserved_body_text_nodes": 25726,
-  "ebook_url_occurrences_suppressed": 5,
+  "preserved_body_text_nodes": 25952,
+  "ebook_url_occurrences_suppressed": 8,
   "limits": "Snapshot content export, not new factual verification. Full external books/papers, binary images, CSS, dependencies and full downloadable corpus are excluded. See README.md.",
   "pages": [
     {
@@ -44,7 +44,7 @@
       "id": "P003",
       "path": "cipher-corpus.html",
       "title": "Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum",
-      "source_sha256": "6972244367a9ac25f7f8ddf7d0734736383f70c8750a5840ced55790b3155829",
+      "source_sha256": "020b63db620811d763b294799aa989898efcb8601c14e73af0515c84124271d8",
       "text_nodes": 119,
       "inline_scripts": 0,
       "script_srcs": [
@@ -52,7 +52,7 @@
         "https://ciphermuseum.com/js/detective-integration.js",
         "https://ciphermuseum.com/js/cipher-corpus.js"
       ],
-      "words": 1114,
+      "words": 1129,
       "part": "01-pages-P001-P020.md"
     },
     {
@@ -899,8 +899,8 @@
       "id": "P053",
       "path": "ciphers/diffie-hellman.html",
       "title": "Diffie-Hellman Key Exchange — The Cipher Museum",
-      "source_sha256": "804b6bcfb454c870d1b0a7c717ed7788cfbc996aa540b61b880638cb4df12891",
-      "text_nodes": 209,
+      "source_sha256": "c4da8cef524826c72f27c3f3545f4be48c56183a694fef3e5a0875e9f91a4894",
+      "text_nodes": 231,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/trust-labels.js",
@@ -908,7 +908,7 @@
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 1438,
+      "words": 1622,
       "part": "03-pages-P041-P060.md"
     },
     {
@@ -1835,8 +1835,8 @@
       "id": "P108",
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator — The Cipher Museum",
-      "source_sha256": "7d1b7e09028a675823190fc1dd29c3a071224b7b3ba3e716cd1b6514d439bb69",
-      "text_nodes": 106,
+      "source_sha256": "52a700d4501e2631a9ed3abbb7234270b5a75f952bcd619dbc6a6fdb726b5a4a",
+      "text_nodes": 119,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/trust-labels.js",
@@ -1845,7 +1845,7 @@
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 778,
+      "words": 919,
       "part": "06-pages-P101-P120.md"
     },
     {
@@ -2597,8 +2597,8 @@
       "id": "P153",
       "path": "ciphers/voynich.html",
       "title": "The Voynich Manuscript (c. 1404–1438) — The Cipher Museum",
-      "source_sha256": "7db56c507c768b0bb2f77dd0dd9de5b5da8a4be08e3be92c7bae949f181a1838",
-      "text_nodes": 168,
+      "source_sha256": "f9106517f7fe3c115d5cb4ef28284069198a8e965a02c81917376a3dbf02e46f",
+      "text_nodes": 185,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/trust-labels.js",
@@ -2607,7 +2607,7 @@
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 1660,
+      "words": 1833,
       "part": "08-pages-P141-P160.md"
     },
     {
@@ -3244,14 +3244,14 @@
       "id": "P198",
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
-      "source_sha256": "eb0b1e31d61531c71f80229b2bea2423cc440e3506b2323adce4d4d2b0a5ef17",
-      "text_nodes": 147,
+      "source_sha256": "fa97477bfb3818abf7a585a89472d6452577ddf485bbc5e6e4115cdf80e949cf",
+      "text_nodes": 159,
       "inline_scripts": 4,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 626,
+      "words": 730,
       "part": "10-pages-P181-P200.md"
     },
     {
@@ -3273,8 +3273,8 @@
       "id": "P200",
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "source_sha256": "ddbe8a2f6e750dca046d868200dbcb2471ef60c77843bd69469bdf03fc3be4f7",
-      "text_nodes": 313,
+      "source_sha256": "de9f518b2a41693a903bf93715a1a60b5f53fe82afab55a9fdba20d37eb3bf16",
+      "text_nodes": 359,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
@@ -3283,20 +3283,20 @@
         "https://ciphermuseum.com/js/research-model.js",
         "https://ciphermuseum.com/js/research-ui.js"
       ],
-      "words": 2376,
+      "words": 2823,
       "part": "10-pages-P181-P200.md"
     },
     {
       "id": "P201",
       "path": "lab/modern-attack-evidence.html",
       "title": "What an Attack Result Actually Shows — The Cipher Museum",
-      "source_sha256": "502b49a76bb3d22f610c4cbeb6065fa23223a44798524228a5de37a9974ca616",
-      "text_nodes": 509,
+      "source_sha256": "adb7bac36e4d1df6ca2755e9f87d77a12c170fb409728ee210e5e3998df107cd",
+      "text_nodes": 510,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js"
       ],
-      "words": 5264,
+      "words": 5302,
       "part": "11-pages-P201-P216.md"
     },
     {
@@ -3410,14 +3410,14 @@
       "id": "P210",
       "path": "sealed-letter.html",
       "title": "The Curator’s Sealed Letter — The Cipher Museum",
-      "source_sha256": "b33e010145bcec0c3f2e1de348b0b8d056d204219a3de9ac59fd7b40a2f952f4",
-      "text_nodes": 137,
+      "source_sha256": "0a2a6664a35a5273dec69b463718bf698740131f9c8b4228ccc9cd0c2cac3c02",
+      "text_nodes": 252,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/reader-companion.js"
       ],
-      "words": 1431,
+      "words": 2240,
       "part": "11-pages-P201-P216.md"
     },
     {
@@ -3452,13 +3452,13 @@
       "id": "P213",
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum — Paul Clark — The Cipher Museum",
-      "source_sha256": "eaeaf19e6298ef912384852c23742da684bb20428663c7e037907055a68e5561",
+      "source_sha256": "d0df1b135f437ff108cbc57e1efedcd4828daf2d86c59cc19056ef25de52b6c2",
       "text_nodes": 54,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js"
       ],
-      "words": 889,
+      "words": 903,
       "part": "11-pages-P201-P216.md"
     },
     {
@@ -3844,8 +3844,8 @@
     {
       "served": "js/reader-companion.js",
       "readable": "js/reader-companion.js",
-      "served_sha256": "c13a44b3908714f5028d0e19e7e826517416df1f13ef412a4c8a27b08ac0e79e",
-      "readable_sha256": "c13a44b3908714f5028d0e19e7e826517416df1f13ef412a4c8a27b08ac0e79e",
+      "served_sha256": "2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468",
+      "readable_sha256": "2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468",
       "dormant": false,
       "classroom_cli": false
     },
@@ -3868,16 +3868,16 @@
     {
       "served": "js/research-model.js",
       "readable": "js/research-model.js",
-      "served_sha256": "4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420",
-      "readable_sha256": "4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420",
+      "served_sha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
+      "readable_sha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
       "dormant": false,
       "classroom_cli": false
     },
     {
       "served": "js/research-ui.js",
       "readable": "js/research-ui.js",
-      "served_sha256": "3d4d5a2928754cb6947e457bdbdef0a1027974ed1924d5c42d52bf3ebc3e04d9",
-      "readable_sha256": "3d4d5a2928754cb6947e457bdbdef0a1027974ed1924d5c42d52bf3ebc3e04d9",
+      "served_sha256": "efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9",
+      "readable_sha256": "efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9",
       "dormant": false,
       "classroom_cli": false
     },
@@ -3940,8 +3940,8 @@
     {
       "served": "sw.js",
       "readable": "sw.js",
-      "served_sha256": "4a9b3a4d637e7ac49a73c90a1dfe70963fdec5bde49798a46bb9dea91be764c9",
-      "readable_sha256": "4a9b3a4d637e7ac49a73c90a1dfe70963fdec5bde49798a46bb9dea91be764c9",
+      "served_sha256": "519251c79ea2c69f0ec967d3a6559bb16fbacd24dcb49f17317199804ca72f59",
+      "readable_sha256": "519251c79ea2c69f0ec967d3a6559bb16fbacd24dcb49f17317199804ca72f59",
       "dormant": false,
       "classroom_cli": false
     }
@@ -4041,7 +4041,7 @@
     },
     {
       "path": "data/research/v1/evaluation.json",
-      "sha256": "e6f8203ab4e9eb0b8ba02f0dfdaa16938d1f1190c5cfc4b01c430fe0c66ff595"
+      "sha256": "2e06136874d51905263143b322696477f415cee182e420800a9c37d921b840d5"
     },
     {
       "path": "manifest.webmanifest",
@@ -4061,13 +4061,13 @@
     },
     {
       "path": "data/research/v2/evaluation.json",
-      "sha256": "cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece816"
+      "sha256": "ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e9"
     }
   ],
   "input_files": [
     {
       "path": "docs/page-audit/coverage.json",
-      "sha256": "a85d9e26fcb596fef8fd6c944b81575f22a82b1ad58b5d6956907e9796e67df7"
+      "sha256": "aebd1846a327e9f7d8a712c21a630e3a49750e488cc90e7aac5cb942593b25b5"
     },
     {
       "path": "docs/page-audit/sources.json",
@@ -4083,7 +4083,7 @@
     },
     {
       "path": "cipher-corpus.html",
-      "sha256": "6972244367a9ac25f7f8ddf7d0734736383f70c8750a5840ced55790b3155829"
+      "sha256": "020b63db620811d763b294799aa989898efcb8601c14e73af0515c84124271d8"
     },
     {
       "path": "cipher-detective.html",
@@ -4283,7 +4283,7 @@
     },
     {
       "path": "ciphers/diffie-hellman.html",
-      "sha256": "804b6bcfb454c870d1b0a7c717ed7788cfbc996aa540b61b880638cb4df12891"
+      "sha256": "c4da8cef524826c72f27c3f3545f4be48c56183a694fef3e5a0875e9f91a4894"
     },
     {
       "path": "ciphers/dilly-knox.html",
@@ -4503,7 +4503,7 @@
     },
     {
       "path": "ciphers/nomenclator.html",
-      "sha256": "7d1b7e09028a675823190fc1dd29c3a071224b7b3ba3e716cd1b6514d439bb69"
+      "sha256": "52a700d4501e2631a9ed3abbb7234270b5a75f952bcd619dbc6a6fdb726b5a4a"
     },
     {
       "path": "ciphers/null-cipher.html",
@@ -4683,7 +4683,7 @@
     },
     {
       "path": "ciphers/voynich.html",
-      "sha256": "7db56c507c768b0bb2f77dd0dd9de5b5da8a4be08e3be92c7bae949f181a1838"
+      "sha256": "f9106517f7fe3c115d5cb4ef28284069198a8e965a02c81917376a3dbf02e46f"
     },
     {
       "path": "ciphers/wadsworth-cipher.html",
@@ -4863,7 +4863,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "eb0b1e31d61531c71f80229b2bea2423cc440e3506b2323adce4d4d2b0a5ef17"
+      "sha256": "fa97477bfb3818abf7a585a89472d6452577ddf485bbc5e6e4115cdf80e949cf"
     },
     {
       "path": "lab/decipherment-cases.html",
@@ -4871,11 +4871,11 @@
     },
     {
       "path": "lab/evidence-workbench.html",
-      "sha256": "ddbe8a2f6e750dca046d868200dbcb2471ef60c77843bd69469bdf03fc3be4f7"
+      "sha256": "de9f518b2a41693a903bf93715a1a60b5f53fe82afab55a9fdba20d37eb3bf16"
     },
     {
       "path": "lab/modern-attack-evidence.html",
-      "sha256": "502b49a76bb3d22f610c4cbeb6065fa23223a44798524228a5de37a9974ca616"
+      "sha256": "adb7bac36e4d1df6ca2755e9f87d77a12c170fb409728ee210e5e3998df107cd"
     },
     {
       "path": "lab/workbench.html",
@@ -4911,7 +4911,7 @@
     },
     {
       "path": "sealed-letter.html",
-      "sha256": "b33e010145bcec0c3f2e1de348b0b8d056d204219a3de9ac59fd7b40a2f952f4"
+      "sha256": "0a2a6664a35a5273dec69b463718bf698740131f9c8b4228ccc9cd0c2cac3c02"
     },
     {
       "path": "search.html",
@@ -4923,7 +4923,7 @@
     },
     {
       "path": "the-book.html",
-      "sha256": "eaeaf19e6298ef912384852c23742da684bb20428663c7e037907055a68e5561"
+      "sha256": "d0df1b135f437ff108cbc57e1efedcd4828daf2d86c59cc19056ef25de52b6c2"
     },
     {
       "path": "timeline.html",
@@ -5119,7 +5119,7 @@
     },
     {
       "path": "js/reader-companion.js",
-      "sha256": "c13a44b3908714f5028d0e19e7e826517416df1f13ef412a4c8a27b08ac0e79e"
+      "sha256": "2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468"
     },
     {
       "path": "js/research-cases.js",
@@ -5131,11 +5131,11 @@
     },
     {
       "path": "js/research-model.js",
-      "sha256": "4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420"
+      "sha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56"
     },
     {
       "path": "js/research-ui.js",
-      "sha256": "3d4d5a2928754cb6947e457bdbdef0a1027974ed1924d5c42d52bf3ebc3e04d9"
+      "sha256": "efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9"
     },
     {
       "path": "js/research-worker.js",
@@ -5167,7 +5167,7 @@
     },
     {
       "path": "sw.js",
-      "sha256": "4a9b3a4d637e7ac49a73c90a1dfe70963fdec5bde49798a46bb9dea91be764c9"
+      "sha256": "519251c79ea2c69f0ec967d3a6559bb16fbacd24dcb49f17317199804ca72f59"
     },
     {
       "path": "tours/foundations.json",
@@ -5263,7 +5263,7 @@
     },
     {
       "path": "data/research/v1/evaluation.json",
-      "sha256": "e6f8203ab4e9eb0b8ba02f0dfdaa16938d1f1190c5cfc4b01c430fe0c66ff595"
+      "sha256": "2e06136874d51905263143b322696477f415cee182e420800a9c37d921b840d5"
     },
     {
       "path": "manifest.webmanifest",
@@ -5283,7 +5283,7 @@
     },
     {
       "path": "data/research/v2/evaluation.json",
-      "sha256": "cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece816"
+      "sha256": "ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e9"
     },
     {
       "path": "public/teaching/columnar-classroom.md",
@@ -5298,138 +5298,143 @@
     },
     {
       "path": "parts/01-pages-P001-P020.md",
-      "bytes": 264737,
-      "sha256": "f726d53c96ae75e8e6341d921991707364b66a9b6d0d9b870763a579ecf5e107"
+      "bytes": 265006,
+      "sha256": "5c163bb7a7ffa124a588b9b971425bfd18de73b5acb020a0879e514d9868187a"
     },
     {
       "path": "parts/02-pages-P021-P040.md",
       "bytes": 257613,
-      "sha256": "085bb3bebb1c798fa546ff4a784beeed83e35fa6f4935356af0d8206b087f186"
+      "sha256": "38eb76455c5f474c60976e0999fa76809f609f4b9478c7fea6c8ea271dfcde14"
     },
     {
       "path": "parts/03-pages-P041-P060.md",
-      "bytes": 272354,
-      "sha256": "1cee5c7d3126bed731bdbc0c7fde94d9ce52505d9160c1741f8f1de99e94f5d1"
+      "bytes": 273689,
+      "sha256": "333384714f2e7da6350f05661ebe8ca1f22e44688fe660799ac8dd63063d1826"
     },
     {
       "path": "parts/04-pages-P061-P080.md",
       "bytes": 274695,
-      "sha256": "aef871ea530fb72117dca8c06f36435705cef39f3a7b7d7ad69a01735b8438c7"
+      "sha256": "fdc6a9ec2bbb51a04b5c10cde651db1bf75c77a755704e026f96e88853725602"
     },
     {
       "path": "parts/05-pages-P081-P100.md",
       "bytes": 262294,
-      "sha256": "37490720c52fda2232c31f7b312b70b0f282f51b6304adc942bda225a0042280"
+      "sha256": "446efed58e1edae4896c6b1468195e88cb4265099b347600ec844c3eb0636894"
     },
     {
       "path": "parts/06-pages-P101-P120.md",
-      "bytes": 282565,
-      "sha256": "2e0bc32dd465e72f684b48245490af7d7fd7fbed2e2155a8e195e96542cd88d5"
+      "bytes": 283729,
+      "sha256": "cbb7f713c9678fb2f7355dfb3355cc1fc09b0edac17a10273c2447e24964f5ba"
     },
     {
       "path": "parts/07-pages-P121-P140.md",
       "bytes": 262133,
-      "sha256": "904c81255e0ae90449241314646f0a1648bd92b6cddacdd4dbf466d4a362f6fc"
+      "sha256": "0cfcf8767f34d5cdb7882102ff7b75a4035e24be6dd03a90adf44c57b7341db3"
     },
     {
       "path": "parts/08-pages-P141-P160.md",
-      "bytes": 303127,
-      "sha256": "05e0a878992561324e0a4be5641af5be7e511bb322ecb3d657493059e4a6eb4a"
+      "bytes": 304493,
+      "sha256": "175e84b1cd453a8a5096a905a17c56d6d53ec965275f2753f2328f83022a5900"
     },
     {
       "path": "parts/09-pages-P161-P180.md",
       "bytes": 450765,
-      "sha256": "4bce974169eec96d6dab4f28a1935531655c1bf2bfd9b3f9dbe9e37673c99e6b"
+      "sha256": "a820ed1ff1545421c69116b25063bbe7945ed7acd8146e564b4b8c1b4b101b23"
     },
     {
       "path": "parts/10-pages-P181-P200.md",
-      "bytes": 279057,
-      "sha256": "971e0efe55731aba99cc2fe6a921e5be2e535fe46724c5bf33389b3627f11af6"
+      "bytes": 286033,
+      "sha256": "f9475f602f2740e28d9c17eaca9e9c331fa76f63ec040d6c30f8da46513ca906"
     },
     {
       "path": "parts/11-pages-P201-P216.md",
-      "bytes": 277346,
-      "sha256": "84656a1f734648c753b3714f51abafb2028053f07472f17cd06e7d1d385e5833"
+      "bytes": 284413,
+      "sha256": "024688b3141f8671d73c2ac78cddc1b4098739dbdf839179cbe405f5c724e351"
     },
     {
       "path": "parts/12-source-register.md",
       "bytes": 126777,
-      "sha256": "a184743b7250f978734b5ece4f50410cde1e9a1277d495a8c8a68c79f47e2eaf"
+      "sha256": "1695b12c233812b262d2434f58cd07f468a58e64c79a0ff93933e6ebc1fbbca0"
     },
     {
       "path": "parts/13-01-javascript.md",
       "bytes": 178360,
-      "sha256": "5445f614e728f9d1ac4eec3999b8c19be6551178dcdd796c8b1cdd2167974ea7"
+      "sha256": "7ea169be0febdac33b9156ef1f7a2c915ded932e08eb1eefc00bcae5285a10f8"
     },
     {
       "path": "parts/13-02-javascript.md",
       "bytes": 181217,
-      "sha256": "20d41e33085250f59503e7371a1328b1d5d13277fb3a6009208bef0679991a13"
+      "sha256": "79e43e6a921bb0b9925d2428d594c34f890470a97460752dd022c23ce2b716dc"
     },
     {
       "path": "parts/13-03-javascript.md",
       "bytes": 169151,
-      "sha256": "884f765674fcfc11739688389fed194ed9d98cf78587d84524ad7431b1cd4100"
+      "sha256": "b037af4601b20ade10fecdfd583cafd9563fe99db398ed11d14430fe00f1f3e6"
     },
     {
       "path": "parts/13-04-javascript.md",
       "bytes": 165998,
-      "sha256": "c78d2c11e2d7260087435933f41612e9d7c91024d52167493d347538ed612711"
+      "sha256": "1f60f097231734cf5bc71562df6b5c5b6e5b96edbf958182377345d19c5da250"
     },
     {
       "path": "parts/13-05-javascript.md",
-      "bytes": 149165,
-      "sha256": "dfc13cfeaaf8a0d9bffad7b6c8b209622362e677bab20c3f9517a931f5721230"
+      "bytes": 156354,
+      "sha256": "94e92b8f25b39b4094dbb32be82fdfe4e84ba488bb67c068f26947acf7def965"
     },
     {
       "path": "parts/13-06-javascript.md",
-      "bytes": 82726,
-      "sha256": "215fda1a22aed19b5e3eca21fbaaa4d090be9865ce3fa247c7780766eb02fbcf"
+      "bytes": 83174,
+      "sha256": "a72a60a057c91f727ca0bc21c949eb0cf82fd7ed8e14e0707bb2790513b7f96a"
     },
     {
       "path": "parts/14-01-data.md",
       "bytes": 48229,
-      "sha256": "7cd81d61cd7d06711a6e3a1b8b3fd5e8516b40669517d288f05bd34f0e45ed1a"
+      "sha256": "e4c7c1cdc1ff3e609fd0af8f6eb3af6d356c92a4afafd8039b3866b3993e3489"
     },
     {
       "path": "parts/14-02-data.md",
       "bytes": 465598,
-      "sha256": "eb075fb3734cc3ee1ef401729f48ee7aa35f3f0fb8bfec67d5c2cbb359625305"
+      "sha256": "f74bb57f7a1ad3fe16b53c5a78920cb739c92b7eff043a0d49e89ddd62d55d2f"
     },
     {
       "path": "parts/14-03-data.md",
       "bytes": 176025,
-      "sha256": "2c0b7e5b2a285730208ba738dc49aeb61703e37d32d2d1b9bc8e74e4875eccc9"
+      "sha256": "74e18521d8d5b11ad112f75c0d0797eefc41f854b8f2c815e554ceb93f7235dd"
     },
     {
       "path": "parts/14-04-data.md",
       "bytes": 106985,
-      "sha256": "e261f55450928e65b9e137b09a06daa1042dc27dad3856005ada1bee6fbfebcd"
+      "sha256": "cfab092b12bef3f8e81a0e6ebb98218d598d691717a6630c70fec6f93396a1bf"
     },
     {
       "path": "parts/14-05-data.md",
       "bytes": 170665,
-      "sha256": "efc8511072bed592849e716b9a365534c2a7c1ffad5c4a9f51facb8ca655fcbe"
+      "sha256": "e161dfc80176a1a4701a38bbe366a801832c229ef7a5b2d2ce8c9a4dec010957"
     },
     {
       "path": "parts/14-06-data.md",
-      "bytes": 178792,
-      "sha256": "57d3fb6df5537351de0f466189c5147266f7e1243737e962b11eb1984edcf888"
+      "bytes": 118334,
+      "sha256": "2f05acc74c836b372a8b933330cd42d28d0001a7ac05e567deadb2e5b20674ec"
+    },
+    {
+      "path": "parts/14-07-data.md",
+      "bytes": 69047,
+      "sha256": "4bb49ade732c239c3dcbe087c2e2ab13efb0243e8f6450aaefdd021d097ba712"
     },
     {
       "path": "parts/15-classroom-worksheet.md",
       "bytes": 5593,
-      "sha256": "43eb315e8687d3596055658583f163df1a4674bed5b9f274360211fbe575a092"
+      "sha256": "3d1d106be8e09a8150a310841bd81e10507cbd97e7950aa27bbf25411b5b53b9"
     },
     {
       "path": "CIPHER_MUSEUM_AUDIT.md",
-      "bytes": 5419365,
-      "sha256": "67f3d3d3ac641118c4b6a4865a8781892039b3dfa1860ef8d3fd000121d5220d"
+      "bytes": 5453775,
+      "sha256": "3a292a24d040587fc37656dd3b97f8a79d45d6506fcc6e9997edde443c58cca2"
     },
     {
       "path": "README.md",
-      "bytes": 6009,
-      "sha256": "77a8cba58370fe6f5efc824a78d825068e686a17187351f10c2c9c698c6ec563"
+      "bytes": 6065,
+      "sha256": "790202badd58d6aa74d99ae0a92fe5fdf3ebab4733e9d7f0dbcfafcf7e4279a4"
     }
   ]
 }

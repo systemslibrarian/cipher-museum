@@ -1,6 +1,6 @@
 # javascript appendix 6
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-ui.js
 
@@ -9,8 +9,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-ui.js`
-- Served SHA-256: `3d4d5a2928754cb6947e457bdbdef0a1027974ed1924d5c42d52bf3ebc3e04d9`
-- Readable-source SHA-256: `3d4d5a2928754cb6947e457bdbdef0a1027974ed1924d5c42d52bf3ebc3e04d9`
+- Served SHA-256: `efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9`
+- Readable-source SHA-256: `efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9`
 
 
 ```javascript
@@ -22,7 +22,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   let imageURL = null, pendingImage = null, activeImage = null, languageSet = null, languageError = '';
   let activeRegionSpan = '';
   let selectedClass = '', selectedOccurrences = new Set(), lastCandidate = '', retainedBundle = null;
-  const sourceFields = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName'];
+  const sourceFields = R.SOURCE_FIELDS;
   const BASELINE = { id: 'museum-prose-quadgram-v1', label: 'Museum modern-English baseline (disclosed: modern, museum prose)' };
   function status(message, error = false) { $('record-status').textContent = message; $('record-status').dataset.error = String(error); }
   function note(id, message, error = false) { $(id).textContent = message; $(id).dataset.error = String(error); }
@@ -363,6 +363,12 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       'Derived reading appended; the source has not been overwritten.');
   });
   ['typed-key','key-input'].forEach(id=>$(id).addEventListener('input',()=>{$('key-output').textContent='Inputs changed. Apply the key again.';}));
+  $('key-linguistic-example').onclick = guard(() => {
+    $('typed-key').value = JSON.stringify([{symbol:'21',type:'word',values:['seal']},{symbol:'22',type:'ending',values:['ed']},{symbol:'23',type:'punctuation',values:['.']}], null, 2);
+    $('key-input').value = '21 22 23'; $('key-title').value = 'Invented linguistic content example';
+    $('key-source').value = 'https://ecp.ep.liu.se/index.php/histocrypt/article/view/404';
+    $('apply-key').click();
+  });
   $('apply-key').onclick = guard(() => {
     const tokens=$('key-input').value.trim().split(/\s+/u).filter(Boolean);
     if (!tokens.length || tokens.length>3000) throw new Error('Use 1–3,000 whitespace-separated symbol IDs.');
@@ -1248,8 +1254,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `4a9b3a4d637e7ac49a73c90a1dfe70963fdec5bde49798a46bb9dea91be764c9`
-- Readable-source SHA-256: `4a9b3a4d637e7ac49a73c90a1dfe70963fdec5bde49798a46bb9dea91be764c9`
+- Served SHA-256: `519251c79ea2c69f0ec967d3a6559bb16fbacd24dcb49f17317199804ca72f59`
+- Readable-source SHA-256: `519251c79ea2c69f0ec967d3a6559bb16fbacd24dcb49f17317199804ca72f59`
 
 
 ```javascript
@@ -1271,7 +1277,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  */
 'use strict';
 
-const VERSION = 'cipher-museum-53ea3c4f';
+const VERSION = 'cipher-museum-5efc0080';
 
 const CORE = [
   '/',
@@ -1311,6 +1317,8 @@ const CORE = [
   '/data/research/v1/z340-section-1.json',
   '/js/ciphers/all-engines.min.js',
   '/css/museum.css',
+  '/css/reader-companion.css',
+  '/js/reader-companion.js',
   '/css/historical-demos.css',
   '/js/historical-ciphers.js',
   '/js/historical-demos.js',

@@ -22,7 +22,7 @@ The earlier 214-page review was a complete reading/consistency pass with targete
 
 ## Snapshot and regeneration
 
-Source commit: `c329dc19058c960a430ac62352191a47bccfeba5` (2026-10-30T16:35:27-04:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
+Source commit: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a` (2026-11-01T16:10:52-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
 
 With repository access and dependencies installed:
 
@@ -61,4 +61,5 @@ The exporter reads committed files, checks every public HTML page against the co
 - [14-04-data.md](parts/14-04-data.md): data appendix 4
 - [14-05-data.md](parts/14-05-data.md): data appendix 5
 - [14-06-data.md](parts/14-06-data.md): data appendix 6
+- [14-07-data.md](parts/14-07-data.md): data appendix 7
 - [15-classroom-worksheet.md](parts/15-classroom-worksheet.md): Columnar classroom worksheet

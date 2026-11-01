@@ -3,8 +3,8 @@
 This snapshot brings together **216 public HTML pages**, **80 nonempty inline scripts**, **55 shared/supporting JavaScript files**, **29 JSON/manifest data files**, and **185 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
 
 - Source repository: systemslibrarian/cipher-museum
-- Exact source commit: `c329dc19058c960a430ac62352191a47bccfeba5`
-- Source commit time: 2026-10-30T16:35:27-04:00
+- Exact source commit: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`
+- Source commit time: 2026-11-01T16:10:52-05:00
 - Public website: https://ciphermuseum.com/
 - Inventory authority: docs/page-audit/coverage.json, checked against every tracked public HTML page.
 - Snapshot hashes identify the original files. Exported text is reformatted; direct ebook URLs are replaced with a visible omission marker. Book titles, authors and publication details remain.
@@ -257,7 +257,7 @@ Suggested finding fields: `id, page_id, path, quotation_or_location, category, s
 
 # Pages P001–P020
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P001: 404.html -->
 <a id="p001"></a>
@@ -778,7 +778,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `cipher-corpus.html`
 - Public page: https://ciphermuseum.com/cipher-corpus.html
-- Snapshot source SHA-256: `6972244367a9ac25f7f8ddf7d0734736383f70c8750a5840ced55790b3155829`
+- Snapshot source SHA-256: `020b63db620811d763b294799aa989898efcb8601c14e73af0515c84124271d8`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -945,7 +945,7 @@ Research Context
 
 CipherBank (Li et al., 2025) is a research benchmark studying LLM performance on cryptographic decryption tasks. Its reported results depend on model, prompt, algorithm and metric; they are not a measured accuracy result for this museum’s corpus or solvers.
 
-**Four claims that are not the same claim.** An AI cipher result may be measuring metadata recognition (the filename gave it away), cipher-family classification (the ciphertext has a statistical signature, and the message stays unread), fixed-codebook recognition (a code pool the system was already trained on), or genuine plaintext and key recovery. Only the last is decipherment, and it is the one least often measured. The gap is quantifiable: the ACTS benchmark strips metadata in tiers and reports combined accuracy falling from 71.7% with metadata to 30.8% blind. Before benchmarking anything against this corpus, read the [matched-input evaluation recipe and benchmark checklist](<https://ciphermuseum.com/lab/modern-attack-evidence.html#ai-results>) — including the label-shuffled and length-only floors, and the rule that a deterministic stand-in for a model establishes nothing about a live one.
+**Four claims that are not the same claim.** An AI cipher result may be measuring metadata recognition (the filename gave it away), cipher-family classification (the ciphertext has a statistical signature, and the message stays unread), fixed-codebook recognition (a code pool the system was already trained on), or genuine plaintext and key recovery. Only the last is decipherment, and it is the one least often measured. The gap is quantifiable: the ACTS benchmark strips metadata in tiers and reports combined accuracy falling from 71.7% with metadata to 30.8% blind. Before benchmarking anything against this corpus, read the [matched-input evaluation recipe and benchmark checklist](<https://ciphermuseum.com/lab/modern-attack-evidence.html#ai-results>) — the recipe is a specification nobody has run, so no results from it exist — including the label-shuffled and length-only floors, and the rule that a deterministic stand-in for a model establishes nothing about a live one.
 
 The corrected v0.8 corpus contains 100,313 records across 85 cipher types, including 41 historically themed entries and 7 languages. The published v0.6 archive has 100,326 records, 54 historically themed entries, and 9 languages. Its legacy `verified` field is not a claim that each historical pair is an authenticated source transcription; see the [v0.6 errata](<https://ciphermuseum.com/docs/CORPUS-V06-ERRATA.md>). CipherBank (Li et al., 2025) has 2,358 cases across 9 types; the collections use different records and evaluation methods. [CipherBank paper →](<https://arxiv.org/pdf/2504.19093>)
 
@@ -1015,7 +1015,7 @@ This describes work recorded before this export. Treat these notes as assertions
 {
   "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [],
-  "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged.",
+  "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged. 1 Nov 2026 follow-up: the matched-input recipe pointer now says the recipe is a specification nobody has run, so no results from it exist.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "corpus_utilities",
@@ -1033,7 +1033,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
   "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-  "research_review_2026_10_29": "revised"
+  "research_review_2026_10_29": "revised",
+  "research_review_followup_2026_11_01": "revised"
 }
 ```
 
@@ -5530,7 +5531,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P021–P040
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P021: ciphers/bach-motif.html -->
 <a id="p021"></a>
@@ -10830,7 +10831,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P041–P060
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P041: ciphers/colossus.html -->
 <a id="p041"></a>
@@ -13995,7 +13996,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/diffie-hellman.html`
 - Public page: https://ciphermuseum.com/ciphers/diffie-hellman.html
-- Snapshot source SHA-256: `804b6bcfb454c870d1b0a7c717ed7788cfbc996aa540b61b880638cb4df12891`
+- Snapshot source SHA-256: `c4da8cef524826c72f27c3f3545f4be48c56183a694fef3e5a0875e9f91a4894`
 - Source identities in the prior evidence ledger: LOGJAM-2015, BONEH-SHOUP-2023, WONG-2021
 
 ### Metadata and search/social descriptions
@@ -14109,6 +14110,18 @@ One direction, with toy numbers
 With *p* = 23, *g* = 5, *A* = 8 and *B* = 19, a discrete-log solver finds *a* = 6 because 5<sup>6</sup> mod 23 = 8. It can then compute the shared value 19<sup>6</sup> mod 23 = 2. These tiny parameters are for arithmetic only.
 
 Source: Dan Boneh and Victor Shoup, *A Graduate Course in Applied Cryptography*, version 0.6 (January 2023), §10.4.2. Learning whether the value looks random is a further security question, distinct from merely computing it.
+
+#### Which oracle makes the reverse reduction possible?
+
+A DLP solver gives a CDH solver. The reverse direction needs additional, group-specific conditions. A **full two-input DH oracle** accepts two freely chosen points `[a]G, [b]G` and returns `[ab]G`, multiplying hidden scalars. Ordinary point addition gives `[a+b]G`. A fixed-secret service that only returns `[s]P` is a different capability and does not supply the paper's efficient method.
+
+Reported P256 experiment with a simulated full DH oracle
+
+| Offline work | Online work | Required access |
+| --- | --- | --- |
+| About 3.0 TB auxiliary codebook; about one week on a dual AMD EPYC 7742 | 23,656 simulated full-oracle calls in 32 seconds | The experiment knew discrete logs to simulate the full oracle; the authors report no real-world instantiation |
+
+These results do not establish that P256 was broken in 32 seconds. Other curves' figures are partly estimates, and the largest codebooks are unrealizable. The oracle, simulation status, offline cost and online time are inseparable parts of the result. Source: [Dlog is Practically as Hard (or Easy) as DH](<https://tches.iacr.org/index.php/TCHES/article/view/11161>), pp. 2–3, 7, 12–16.
 
 #### From a shared value to keys for different purposes
 
@@ -14248,7 +14261,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
     "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
   },
-  "research_review_2026_10_29": "revised"
+  "research_review_2026_10_29": "revised",
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
 }
 ```
 
@@ -16282,7 +16296,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P061–P080
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P061: ciphers/elizebeth-friedman.html -->
 <a id="p061"></a>
@@ -21832,7 +21846,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P081–P100
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P081: ciphers/joan-clarke.html -->
 <a id="p081"></a>
@@ -27200,7 +27214,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P101–P120
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P101: ciphers/morse.html -->
 <a id="p101"></a>
@@ -29003,7 +29017,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/nomenclator.html`
 - Public page: https://ciphermuseum.com/ciphers/nomenclator.html
-- Snapshot source SHA-256: `7d1b7e09028a675823190fc1dd29c3a071224b7b3ba3e716cd1b6514d439bb69`
+- Snapshot source SHA-256: `52a700d4501e2631a9ed3abbb7234270b5a75f952bcd619dbc6a6fdb726b5a4a`
 - Source identities in the prior evidence ledger: KAHN-1996
 
 ### Metadata and search/social descriptions
@@ -29087,6 +29101,12 @@ Modern LessonCombining methods does not by itself establish security
 #### Why This Matters
 
 Nomenclators combined a substitution alphabet with entries for words, names or phrases. They were widely used in European diplomacy over several centuries, but did not form one uniform system used by every court or every famous correspondent. Individual keys must be examined to distinguish substitution, syllabic codes and larger codebooks.
+
+##### What does one code stand for?
+
+An entry can encode a named entity, number, content word, function word, syllable, morphological ending, phrase, sentence or punctuation. These linguistic categories differ from operational null, repeat and erase instructions. The invented key `21 → seal; 22 → ed; 23 → .` reads `21 22 23` as **sealed.**: an ending and punctuation, neither treated as an alphabet letter. [Load and apply this example in the evidence workbench](<https://ciphermuseum.com/lab/evidence-workbench.html#keys>).
+
+The category must come from the key or other evidence, not its century or frequency. The archival sample in [What Was Encoded in Historical Cipher Keys in the Early Modern Era?](<https://ecp.ep.liu.se/index.php/histocrypt/article/view/404>), pp. 2–8 (examples pp. 3–4), is uneven and often lacks origin/use information; some chart counts disagree with nearby prose. It does not establish a universal diplomatic trend. The workbench's unknown-key solver remains restricted to letter substitutions.
 
 [Inline SVG: original diagram/icon markup]
 
@@ -29229,7 +29249,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
 }
 ```
 
@@ -32992,7 +33013,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P121–P140
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P121: ciphers/rochefort.html -->
 <a id="p121"></a>
@@ -38302,7 +38323,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P141–P160
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P141: ciphers/tap-code.html -->
 <a id="p141"></a>
@@ -41805,7 +41826,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/voynich.html`
 - Public page: https://ciphermuseum.com/ciphers/voynich.html
-- Snapshot source SHA-256: `7db56c507c768b0bb2f77dd0dd9de5b5da8a4be08e3be92c7bae949f181a1838`
+- Snapshot source SHA-256: `f9106517f7fe3c115d5cb4ef28284069198a8e965a02c81917376a3dbf02e46f`
 - Source identities in the prior evidence ledger: REDDY-KNIGHT-2011, DIMPERIO-1978, EVA-DESIGN, BAX-2014, BRISTOL-2019, YALE-MS408-PHYSICAL, HODGINS-2009
 
 ### Metadata and search/social descriptions
@@ -41895,6 +41916,18 @@ Modern LessonStatistical signatures alone cannot tell cipher from constructed la
 #### Why This Matters
 
 The Voynich manuscript contains an undeciphered script and distinctive illustrations. Its parchment dates to the early fifteenth century, but no generally accepted reading establishes its language or whether it is an encrypted text. Failed proposals are not evidence that every possible interpretation is impossible.
+
+##### Three tasks behind a decipherment headline
+
+Different experiments in Decoding Anagrammed Texts Written in an Unknown Language and Script
+
+| Task and corpus | Assumptions | Reported result and limit |
+| --- | --- | --- |
+| Language classification of 380 substituted samples from held-out portions of the same UDHR document per language | Specified candidate languages, transformation and same-document corpus | 97.1% top-one classification; not historical manuscript confidence |
+| Synthetic Wikipedia script/anagram recovery | The correct language is already supplied | 93.8% mean word accuracy; not end-to-end unknown-language decipherment |
+| Voynich hypothesis exploration on a selected subset | Chosen transcription alphabet and comparison corpora | No coherent syntactic/semantic decipherment; combinatorial artifacts remain possible |
+
+Do not multiply the separate stage percentages into a new success rate or label Voynich Hebrew on this evidence. The Museum does not replace its solver with this unreplicated pipeline. [Primary paper](<https://aclanthology.org/Q16-1006/>), pp. 4–8 for benchmarks and pp. 9–11 for the historical exploration. Corpus, task, assumptions and success metric belong beside every percentage.
 
 [Inline SVG: original diagram/icon markup]
 
@@ -42124,7 +42157,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
 }
 ```
 
@@ -44320,7 +44354,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P161–P180
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P161: community/index.html -->
 <a id="p161"></a>
@@ -51954,7 +51988,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P181–P200
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P181: hall-of-foundations/polynomial-rings.html -->
 <a id="p181"></a>
@@ -56510,7 +56544,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `index.html`
 - Public page: https://ciphermuseum.com/index.html
-- Snapshot source SHA-256: `eb0b1e31d61531c71f80229b2bea2423cc440e3506b2323adce4d4d2b0a5ef17`
+- Snapshot source SHA-256: `fa97477bfb3818abf7a585a89472d6452577ddf485bbc5e6e4115cdf80e949cf`
 - Source identities in the prior evidence ledger: KAHN-1996
 
 ### Metadata and search/social descriptions
@@ -56584,6 +56618,25 @@ History: c. 1900 BC — Present Day
 OTPExplore Perfect Secrecy
 
 [Start with Caesar Cipher →](<https://ciphermuseum.com/ciphers/caesar.html>) [Try the Playground](<https://ciphermuseum.com/index.html#playground>) [View Museum Map](<https://ciphermuseum.com/museum-map.html>)
+
+[[Image: Secrets of the Cipher Museum by Paul Clark: gold lettering, a brass cipher wheel and a red wax seal.; source: https://ciphermuseum.com/images/cipher-museum-book-cover.png]](<https://ciphermuseum.com/the-book.html>)
+
+Forthcoming ebook
+
+#### Secrets of the
+Cipher Museum
+
+Stories of Hidden Messages and the People Behind Them
+
+By Paul Clark · Creator of Cipher Museum
+
+Discover how people learned to read other people’s secrets—and what happened when they did. Then enter Cipher Museum and try the ideas yourself.
+
+Twenty historical investigations, eight original illustrations, and an optional mystery that takes you from the page into the museum.
+
+[Preview the ebook →](<https://ciphermuseum.com/the-book.html>) [Try the reader’s mystery →](<https://ciphermuseum.com/sealed-letter.html>)
+
+Coming soon. Read an excerpt now.
 
 Start Here
 
@@ -56701,6 +56754,8 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 ### Additional image, accessibility, tooltip and placeholder text
 
 - nav — aria-label: Primary
+- a — aria-label: Preview Secrets of the Cipher Museum
+- img — alt: Secrets of the Cipher Museum by Paul Clark: gold lettering, a brass cipher wheel and a red wax seal.
 - select#pg-cipher — aria-label: Choose cipher
 - input#pg-key — aria-label: Cipher key
 - button#pg-swap — aria-label: Switch between encrypt and decrypt
@@ -57008,7 +57063,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
 }
 ```
 
@@ -57207,7 +57263,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `lab/evidence-workbench.html`
 - Public page: https://ciphermuseum.com/lab/evidence-workbench.html
-- Snapshot source SHA-256: `ddbe8a2f6e750dca046d868200dbcb2471ef60c77843bd69469bdf03fc3be4f7`
+- Snapshot source SHA-256: `de9f518b2a41693a903bf93715a1a60b5f53fe82afab55a9fdba20d37eb3bf16`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -57267,6 +57323,40 @@ Keep case, diacritics, spaces and line breaks. A missing symbol is different fro
 Stable artifact identifier [Input source-artifactId: type=text; initial value=]  Archive or holding institution [Input source-archive: type=text; initial value=]  Shelfmark [Input source-shelfmark: type=text; initial value=]  Folio or page [Input source-folio: type=text; initial value=]  Public source URL (optional) [Input source-url: type=url; initial value=]
 
 Transcriber [Input source-transcriber: type=text; initial value=]  Transcription date, including uncertainty if needed [Input source-date: type=text; initial value=]  Method and transcription convention [Input source-method: type=text; initial value=]  Recorded image filename [Input source-imageName: type=text; initial value=]
+
+Custody, origin, script, language and rights
+
+Present custody is not evidence of origin. Keep each attribution and its uncertainty separate. Empty legacy fields import as unknown. Rights for an object do not automatically permit reuse of its image or transcription.
+
+Current custodian country [Input source-custodianCountry: type=text; initial value=]  Stable repository record URL [Input source-repositoryRecordUrl: type=url; initial value=]  Attributed production place [Input source-originPlace: type=text; initial value=]  Production place evidence
+- unknown
+
+- provisional
+
+- established
+ Production date range start [Input source-productionDateStart: type=text; initial value=]  Production date range end [Input source-productionDateEnd: type=text; initial value=]  Production date evidence
+- unknown
+
+- provisional
+
+- established
+ Provenance and supporting evidence [Input source-provenance: type=text; initial value=]
+
+Script identification [Input source-scriptIdentification: type=text; initial value=]  Script evidence
+- unknown
+
+- provisional
+
+- established
+ Language hypothesis [Input source-languageHypothesis: type=text; initial value=]  Language evidence
+- unknown
+
+- provisional
+
+- established
+ Object rights statement [Input source-objectRights: type=text; initial value=]  Object access conditions [Input source-objectAccess: type=text; initial value=]  Object attribution requirements [Input source-objectAttribution: type=text; initial value=]  Digital image reuse rights [Input source-imageRights: type=text; initial value=]  Digital image access conditions [Input source-imageAccess: type=text; initial value=]  Digital image attribution requirements [Input source-imageAttribution: type=text; initial value=]  Transcription reuse rights [Input source-transcriptionRights: type=text; initial value=]  Transcription access conditions [Input source-transcriptionAccess: type=text; initial value=]  Transcription attribution requirements [Input source-transcriptionAttribution: type=text; initial value=]
+
+Image crops and rotations already retain original image identity, dimensions and coordinates in the Images section. Source: [Building a Corpus and Database for Rare and Undeciphered Scripts](<https://aclanthology.org/2026.lt4hala-1.17/>), pp. 4–10. Planned benchmarks are not demonstrated decipherment performance.
 
  Transcription, exactly as recorded (up to 10,000 characters)
 
@@ -57402,7 +57492,7 @@ Typed key entries (JSON array)
 
 [ {"symbol":"g1","type":"letter","values":["A"]}, {"symbol":"g2","type":"name","values":["MARY"]}, {"symbol":"g3","type":"space","values":[]}, {"symbol":"g4","type":"null","values":[]}, {"symbol":"g5","type":"word","values":["KING","QUEEN"]} ]
 
-Types: letter, syllable, word, name, null, space, repeat, erase, unknown. This example is invented, not Mary Stuart’s historical key.
+Linguistic types: letter, syllable, word, name, number, content-word, function-word, ending, phrase, sentence, punctuation. Operational types: null, space, repeat, erase; unknown preserves an unresolved reading. This example is invented, not Mary Stuart’s historical key.
 
 Whitespace-separated symbol IDs
 
@@ -57410,7 +57500,9 @@ g1 g3 g2 g4 g3 g5
 
 Key title [Input key-title: type=text; initial value=Original teaching key] Key source URL (optional) [Input key-source: type=url; initial value=]
 
-Apply entered keySave key in evidence record
+Apply entered keySave key in evidence recordLoad invented ending and punctuation example
+
+Example: 21 → “seal” (word), 22 → “ed” (ending), 23 → “.” (punctuation); 21 22 23 emits “sealed.” These are linguistic content, not alphabet letters or null/repeat/erase instructions. [What Was Encoded in Historical Cipher Keys in the Early Modern Era?](<https://ecp.ep.liu.se/index.php/histocrypt/article/view/404>), pp. 2–8, motivates the taxonomy, not these invented entries. A code's century or frequency does not establish its meaning. The unknown-key search below remains letter-only.
 
 Link sources, keys and readings
 
@@ -57477,14 +57569,16 @@ Several symbol IDs may map to the same letter. Two bounded solvers are offered, 
 
 - **Beam search** fixes symbols one at a time in order of first appearance — a disclosed extension order chosen so every step lengthens the decoded prefix that gets scored. The partial score is informative but **not admissible**: pruning can discard the branch holding the correct key. It is deterministic and needs no seed.
 
-The measured comparison between them, on identical inputs and language resources, is in [research-evaluation v2](<https://ciphermuseum.com/data/research/v2/README.md>). Neither solver recovered any held-out text there.
+**Annealing is the stronger of the two. Beam search is here as a contrast, not as a better option.** A pre-registered tuning sweep — four beam widths crossed with three scoring weights, against annealing at two budgets — found that **every annealing setting beat every beam setting**. The best beam configuration reached 76.7% mean plaintext error against the shipped annealing row’s 71.9%, while taking about 126 times as long. Choose beam search to see how a different search strategy behaves on the same input, not because it will do better.
+
+The full sweep table, the measured head-to-head comparison on identical inputs and language resources, and what the result means are in [research-evaluation v2](<https://ciphermuseum.com/data/research/v2/README.md>). Neither solver recovered any held-out text there, and that section explains what that does and does not imply.
 
  Whitespace-separated symbol IDs (3–600 tokens; up to 100 distinct IDs)
 
 Solver
 - Simulated annealing (seeded)
 
-- Beam search (deterministic)
+- Beam search (deterministic; contrast only, weaker)
  Scoring model
 
 The modern-English baseline is cached for offline use. The historical profiles are a 0.74 MB download fetched on demand and are deliberately **not** in the offline bundle, so selecting one needs a connection.
@@ -57587,6 +57681,9 @@ No bundle imported in this tab.
 - input#source-artifactId — placeholder: For example: archive:collection:folio
 - input#source-date — placeholder: 2026-10-29
 - input#source-method — placeholder: Manual reading; symbol IDs assigned by first appearance
+- input#source-productionDateStart — placeholder: For example: circa 1500
+- input#source-productionDateEnd — placeholder: For example: before 1550
+- input#source-languageHypothesis — placeholder: Unknown is a valid result
 - input#revision-reason — placeholder: Required when the saved transcription changes
 - input#image-note — placeholder: Folio 12 recto, full page
 - img#source-image — alt: Locally selected manuscript source
@@ -57619,6 +57716,39 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - input: id="source-date" maxlength="500" placeholder="2026-10-29"
 - input: id="source-method" maxlength="500" placeholder="Manual reading; symbol IDs assigned by first appearance"
 - input: id="source-imageName" maxlength="500"
+- input: id="source-custodianCountry" maxlength="500"
+- input: id="source-repositoryRecordUrl" type="url" maxlength="2000"
+- input: id="source-originPlace" maxlength="500"
+- select: id="source-originStatus"
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- input: id="source-productionDateStart" maxlength="500" placeholder="For example: circa 1500"
+- input: id="source-productionDateEnd" maxlength="500" placeholder="For example: before 1550"
+- select: id="source-productionDateStatus"
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- input: id="source-provenance" maxlength="500"
+- input: id="source-scriptIdentification" maxlength="500"
+- select: id="source-scriptStatus"
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- input: id="source-languageHypothesis" maxlength="500" placeholder="Unknown is a valid result"
+- select: id="source-languageStatus"
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- input: id="source-objectRights" maxlength="500"
+- input: id="source-objectAccess" maxlength="500"
+- input: id="source-objectAttribution" maxlength="500"
+- input: id="source-imageRights" maxlength="500"
+- input: id="source-imageAccess" maxlength="500"
+- input: id="source-imageAttribution" maxlength="500"
+- input: id="source-transcriptionRights" maxlength="500"
+- input: id="source-transcriptionAccess" maxlength="500"
+- input: id="source-transcriptionAttribution" maxlength="500"
 - textarea: id="source-raw" maxlength="10000" rows="5" spellcheck="false"
 - input: id="revision-reason" maxlength="1000" placeholder="Required when the saved transcription changes"
 - button: id="save-revision" type="button"
@@ -57679,6 +57809,7 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - input: id="key-source" type="url" maxlength="2000"
 - button: id="apply-key" type="button"
 - button: id="save-key" type="button"
+- button: id="key-linguistic-example" type="button"
 - input: id="relation-from" maxlength="2000"
 - input: id="relation-to" maxlength="2000"
 - select: id="relation-type"
@@ -57755,7 +57886,7 @@ This describes work recorded before this export. Treat these notes as assertions
 {
   "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
   "sources": [],
-  "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported.",
+  "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "root",
@@ -57778,7 +57909,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "record": "docs/RESEARCH_REVIEW_2026-10-30.md",
     "validation": "docs/page-audit/research-2026-10-30-validation.json",
     "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
-  }
+  },
+  "research_review_followup_2026_11_01": "revised"
 }
 ```
 
@@ -57789,7 +57921,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P201–P216
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P201: lab/modern-attack-evidence.html -->
 <a id="p201"></a>
@@ -57797,7 +57929,7 @@ Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum 
 
 - Site path: `lab/modern-attack-evidence.html`
 - Public page: https://ciphermuseum.com/lab/modern-attack-evidence.html
-- Snapshot source SHA-256: `502b49a76bb3d22f610c4cbeb6065fa23223a44798524228a5de37a9974ca616`
+- Snapshot source SHA-256: `adb7bac36e4d1df6ca2755e9f87d77a12c170fb409728ee210e5e3998df107cd`
 - Source identities in the prior evidence ledger: GPU-SEARCH-2025, GEA-FAULTS-2026, CONDITIONAL-DES-2018, BIHAM-SHAMIR-1993-2009, MANGARD-OSWALD-POPP-2007, RESEARCH-CL646, RESEARCH-CL648, RESEARCH-CL655, RESEARCH-CL980, RESEARCH-CL984
 
 ### Metadata and search/social descriptions
@@ -58176,7 +58308,7 @@ Four tasks, in increasing order of what they would actually demonstrate
 
 ##### A matched-input recipe you can actually run
 
-This is a **reproducible procedure, not a result**. The museum has not executed it, and no numbers from it are published here. Run it yourself and the claim you end up with will be about your model, on your date, under your settings.
+**Status: specified, not executed.** What follows is a specification. Nobody has run it — not the museum, and not anyone else that the museum is aware of — so **no results from it exist** and none are published here or implied anywhere. Running it needs live model access and a declared model version, date and settings. Run it yourself and the claim you end up with will be about your model, on your date, under your settings, and about nothing else.
 
 - **Build matched pairs.** The same ciphertexts twice: once with filenames, headers and dataset labels intact, once with every one of them stripped or randomized. Identical bytes of ciphertext in both arms.
 
@@ -58239,7 +58371,7 @@ This describes work recorded before this export. Treat these notes as assertions
     "RESEARCH-CL980",
     "RESEARCH-CL984"
   ],
-  "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained. 29 Oct 2026 research review R01/R12/R14: replaced the obsolete full-paper-unavailable GPRS paragraph with the tested conditions and a phase table after reading the published paper; added five comparative attack-evidence cards; added a section separating four AI tasks with a matched-input recipe that is published as a procedure and was not executed.",
+  "notes": "Research-case review checked KASUMI-64 repeated-key deployment versus independent 128-bit search, TEA3 target, GEA abstract-level controlled-fault result and corrected journal status, and conditional DES candidate-count experiments versus full key searches. Exact conditions and source-access limits retained. 29 Oct 2026 research review R01/R12/R14: replaced the obsolete full-paper-unavailable GPRS paragraph with the tested conditions and a phase table after reading the published paper; added five comparative attack-evidence cards; added a section separating four AI tasks with a matched-input recipe that is published as a procedure and was not executed. 1 Nov 2026 follow-up: the matched-input recipe is relabelled \"specified, not executed\" - nobody has run it, no results exist, and running it needs live model access with a declared version, date and settings. The recipe itself is unchanged.",
   "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
   "final_prose_review": {
     "reader": "research_cases",
@@ -58278,7 +58410,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "record": "docs/RESEARCH_REVIEW_2026-10-30.md",
     "validation": "docs/page-audit/research-2026-10-30-validation.json",
     "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
-  }
+  },
+  "research_review_followup_2026_11_01": "revised"
 }
 ```
 
@@ -60872,18 +61005,18 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `sealed-letter.html`
 - Public page: https://ciphermuseum.com/sealed-letter.html
-- Snapshot source SHA-256: `b33e010145bcec0c3f2e1de348b0b8d056d204219a3de9ac59fd7b40a2f952f4`
+- Snapshot source SHA-256: `0a2a6664a35a5273dec69b463718bf698740131f9c8b4228ccc9cd0c2cac3c02`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
 
-- description: Solve four original slips, open the curator’s envelope, and investigate what two conflicting documents can really prove.
+- description: Decode a dispatch, compare conflicting records, and make a finding in a free original Cipher Museum mystery.
 - og:title: The Curator’s Sealed Letter
-- og:description: Solve four original slips, open the curator’s envelope, and investigate what two conflicting documents can really prove.
+- og:description: Decode a dispatch, compare conflicting records, and make a finding in a free original Cipher Museum mystery.
 - og:type: website
 - og:url: https://ciphermuseum.com/sealed-letter.html
 - og:image: https://ciphermuseum.com/images/cipher-museum-book-cover.png
-- og:image:alt: Secrets of the Cipher Museum by Paul Clark
+- og:image:alt: Secrets of the Cipher Museum
 - twitter:card: summary_large_image
 - robots: noindex, follow
 
@@ -60906,14 +61039,16 @@ A reader’s mystery from Cipher Museum
 ### The Curator’s
 Sealed Letter
 
-Four slips. One instruction.
-Then a case that needs a careful reader.
+A readable message.
+A disputed order. Your finding.
 
-Someone has left you an envelope. The key to opening it is scattered through four small puzzles. Recover the words, put them in slip order, and bring the instruction here.
+A sealed case is about to move. Two instructions disagree about where it should go. Open the file and work out what the records justify. The book’s four optional slips offer another way into the same investigation.
 
 Original modern puzzle · Free · No account required
 
-[I have the instruction](<https://ciphermuseum.com/sealed-letter.html#unlock>)[Start with the four slips ↓](<https://ciphermuseum.com/sealed-letter.html#slips>)
+Start the investigation[Try the four book slips ↓](<https://ciphermuseum.com/sealed-letter.html#slips>)[I have the book’s instruction](<https://ciphermuseum.com/sealed-letter.html#unlock>)
+
+The interactive case needs JavaScript. You can still [read the four slips and their hints](<https://ciphermuseum.com/sealed-letter.html#slips>) below.
 
 #### A second way through the book
 
@@ -60949,7 +61084,7 @@ Slip 2 · After chapter 3The clerk’s route
 
 The second slip contains no disguised letters. The clerk has changed their order. A note on the envelope gives the route: start at the top left, read DOWN to the bottom, then start at the top of the next column to the right.
 
-Read down each column, left to right
+Read down each column, left to right1 ↓2 ↓3 ↓
 
 | T | C | I |
 | --- | --- | --- |
@@ -61026,25 +61161,105 @@ COMPARE / THE COPIES / BEFORE / YOU TRUST THEM.
 
 Enter that instruction above to open the document investigation.
 
-The slips and hints work without JavaScript. Enable JavaScript to check the instruction and open the interactive case.
+The slips and hints work without JavaScript. Enable JavaScript to check the instruction and start the interactive case. The book slips and their hints remain readable above.
 
-The envelope is open · A fictional evidence case
+Case file 01 · An original fictional investigation
 
 #### The room that changed
 
-A message orders the transfer of a sealed case inside a museum. Two copies of the instruction disagree. Someone has accused Ellis, the keeper of the keys, of arranging a theft. You have four documents. What do they actually establish?
+A sealed loan case is waiting to move. Two copies of its order name different rooms. Can you protect the case without making a bad accusation?
 
-All people, records and events in this exercise are invented. The times below are claims in the records, not independently verified facts.
+You are the museum’s duty reader. A transfer scheduled for nine is on hold while the paperwork is checked. Ellis, who holds the case keys, has been accused of arranging a theft. The curator needs a finding before the transfer can proceed. Recover the dispatch, compare the records, and decide what the museum should do.
 
-A · Dispatch carbon · Marked 08:10
+All people, documents and events in this case are invented. The simplified word code is a teaching puzzle. The times and signatures below are information in the records, not independent verification.
 
-##### The retained copy
+- 1 · Decode
+
+- 2 · Compare
+
+- 3 · Find a source
+
+- 4 · Make a finding
+
+Step 1 of 4: recover the destination.
+
+1 · Read the message
+
+##### A dispatch in numbers
+
+The retained dispatch uses a tiny codebook. Each two-digit group stands for a whole word. Use the entries below to read the message. Which room does it name?
+
+A · Dispatch carbon · Marked 08:10 · Reference CM-17
+
+14 33 18 29 06 41 52 08 27. 19 44 07 25 63.
+
+Filed in the dispatch tray. No signature.
+
+The working codebook
+
+- **06** TO
+
+- **07** KEYS
+
+- **08** AT
+
+- **14** MOVE
+
+- **18** SEALED
+
+- **19** KEEP
+
+- **25** WITH
+
+- **27** NINE
+
+- **29** CASE
+
+- **33** THE
+
+- **41** ROOM
+
+- **44** BOTH
+
+- **52** FOUR
+
+- **63** ELLIS
+
+ The destination in the encoded dispatch [Input dispatch-room: type=text; initial value=]
+
+Enter the room number, as a word or a digit.
+
+Check the dispatch
+
+A nudge
+
+Find the code for ROOM. The group immediately after it gives the destination.
+
+More help
+
+41 means ROOM. Look up the next group, 52.
+
+Show the answer and continue
+
+The dispatch names ROOM FOUR. You can still investigate the records if decoding is not your favourite part.
+
+Use this reading
+
+2 · Compare the documents
+
+##### A readable message is not the end
+
+Here is your reading beside the delivered copy. Keep the supporting records in view. You can establish a difference before you know how it happened.
+
+A · Dispatch carbon · Marked 08:10 · Reference CM-17
+
+##### The retained copy, decoded
 
 MOVE THE SEALED CASE TO ROOM FOUR AT NINE. KEEP BOTH KEYS WITH ELLIS.
 
 Filed in the dispatch tray. No signature.
 
-B · Delivery copy · Marked 08:25
+B · Delivery copy · Marked 08:25 · Reference CM-17
 
 ##### The delivered copy
 
@@ -61064,39 +61279,120 @@ The log does not identify who wrote either copy.
 
 D · Inventory note · Marked 09:12
 
-##### The case is still here
+##### A later observation
 
 Sealed case present in room four. Seal appears intact. Contents not checked.
 
-There is no accompanying record for room five.
+This note was made after the scheduled transfer time. It does not record what happened at nine. There is no accompanying record for room five.
 
-1. Compare the wording of A and B. What changed?
+What changed in the wording of A and B?
 
  [Input difference-time: type=radio; initial value=time]  The time of the move [Input difference-room: type=radio; initial value=room]  The destination room [Input difference-keys: type=radio; initial value=keys]  The person keeping the keys
 
 Check the difference
 
-2. Choose the conclusion these records can support.
+Help me compare
 
- [Input verdict-theft: type=radio; initial value=theft]  Ellis stole the case; possessing the keys proves responsibility. [Input verdict-clerk: type=radio; initial value=clerk]  R altered the instruction; opening the envelope proves authorship. [Input verdict-evidence: type=radio; initial value=evidence]  The copies name different rooms. The records do not establish who caused the difference or whether it was deliberate. [Input verdict-nothing: type=radio; initial value=nothing]  The inventory note proves that nothing was taken and no wrongdoing occurred.
+Ignore the document labels for a moment. Read the two instructions word for word. The time and the name at the end agree.
+
+3 · Ask for another source
+
+##### Which record would help most?
+
+You can request one record from the archive. You want evidence about the authorised destination, not another reason to suspect someone.
+
+Choose the most useful next record.
+
+ [Input source-keys: type=radio; initial value=keys]  A photograph of Ellis holding the keys [Input source-register: type=radio; initial value=register]  The curator’s signed dispatch register for reference CM-17 [Input source-rumour: type=radio; initial value=rumour]  A note saying R has always seemed suspicious
+
+Request this record
+
+A nudge about sources
+
+Which record is connected to this particular instruction and the person who authorised it?
+
+E · Dispatch register · Marked 08:09 · Reference CM-17
+
+##### The record you requested
+
+Authorised destination: ROOM FOUR.
+Scheduled move: 09:00.
+Key custodian: Ellis.
+Signed: M. Vale, curator.
+
+The register supports the retained copy’s destination. Its signature has not been independently authenticated. It does not identify who prepared the delivered copy.
+
+4 · Separate a finding from an accusation
+
+##### What can you tell the curator?
+
+Choose the finding and action these records support.
+
+ [Input verdict-theft: type=radio; initial value=theft]  Ellis stole the case. Holding the keys proves responsibility. [Input verdict-clerk: type=radio; initial value=clerk]  R changed the instruction. Opening the envelope proves authorship. [Input verdict-evidence: type=radio; initial value=evidence]  The retained copy and register name room four; the delivered copy names room five. Keep the move on hold while the records and custody are verified. These documents do not identify who caused the difference. [Input verdict-nothing: type=radio; initial value=nothing]  The later inventory note proves nothing was taken and no further checks are needed.
 
 Submit your finding
 
-Investigation complete
+Case file completed
 
-##### A difference established. An accusation unproved.
+##### Your finding reaches the curator.
 
-You have established the change from FOUR to FIVE. The handling log suggests a point to investigate, but opening an envelope does not establish that R changed its contents. Having keys does not establish that Ellis stole anything. Even the inventory note has a limit: it records an apparently intact seal, not a check of the contents.
+**The curator’s response:** “Keep both copies. Keep the transfer on hold until we have checked the register and the chain of custody. Do not treat possession of a key as a verdict against its keeper.”
 
-**The next useful evidence:** the dispatch original, the author of each copy, a documented chain of custody and a check of the case’s contents. A copying error, a changed instruction and a deliberate alteration remain different explanations. Nothing here lets you choose confidently among them.
+Your reading established FOUR in the encoded dispatch. Comparison established FIVE in the delivered copy. The register supplied another source supporting FOUR. That is enough to question the disputed order and preserve the evidence. It is not enough to identify an author or a motive.
 
-This is the decision at the heart of the book: what has been read, what has been proved, and what still needs another source?
+The later inventory note adds an observation, with a limit: someone recorded an apparently intact seal, but nobody recorded checking the contents. A copying error, an authorised change not reflected in the register, and a deliberate alteration still require investigation.
 
-Share your investigation[Read the history behind the question →](<https://ciphermuseum.com/the-book.html>)
+**Your next checks:** authenticate the register, locate the dispatch original, identify the writers and handlers of both copies, and inspect the case’s contents. You have resolved what the documents disagree about while keeping the unresolved questions visible.
+
+The curator’s response is the fictional ending to this exercise. It is not a new document you were expected to infer or evidence proving a culprit.
+
+##### Take the question into the museum
+
+In the [Babington exhibit](<https://ciphermuseum.com/ciphers/babington.html>), follow who controls the correspondence channel. At [the one-time pad exhibit](<https://ciphermuseum.com/ciphers/one-time-pad.html>), distinguish a sound method from the consequences of reusing its secret material. Then ask the same question of each recovery: what does readable text actually establish?
+
+For the physical side of interception, visit [Cabinet Noir](<https://ciphermuseum.com/ciphers/cabinet-noir.html>) to explore how postal offices opened, copied and resealed letters.
+
+[Read the history behind the investigation →](<https://ciphermuseum.com/the-book.html>)
+
+Copy a spoiler-free invitation[Tell us how the case played ↓](<https://ciphermuseum.com/sealed-letter.html#playtest-title>)
 
 Copy this spoiler-free text
 
-Sharing is optional. No answer or personal information is included.
+Help shape the next case
+
+##### Would you open another envelope?
+
+These notes stay in your browser until you choose to copy and share them. Nothing is submitted to the museum.
+
+Where did you most need help?
+- Choose a stage
+
+- The four book slips
+
+- Reading the dispatch
+
+- Comparing the copies
+
+- Choosing another source
+
+- Making the final finding
+
+- No stage needed help
+Would you try another case?
+- Choose an answer
+
+- Yes
+
+- Maybe
+
+- No
+What was unclear, too easy, or especially satisfying? (Optional)
+
+Copy my playtest notes
+
+Copy your notes, then send them to the person who invited you
+
+Start this case againNo timer. Hints and answer reveals are welcome.
 
 [About the book](<https://ciphermuseum.com/the-book.html>) · [More cipher challenges](<https://ciphermuseum.com/challenges.html>)
 
@@ -61105,16 +61401,25 @@ Sharing is optional. No answer or personal information is included.
 - nav — aria-label: Primary
 - p — aria-label: Encoded slip
 - p — aria-label: Encoded slip
+- nav — aria-label: Investigation progress
 
 ### Control identities, constraints and initial-state attributes
 
 These preserve IDs, option values, numeric limits, data attributes and event bindings used by the programs below.
 
+- button: id="start-case" type="button"
 - input: id="instruction" name="instruction" type="text" autocomplete="off" spellcheck="false" maxlength="160" required="" aria-describedby="instruction-help"
 - button: type="submit"
+- input: id="dispatch-room" name="dispatch-room" type="text" autocomplete="off" maxlength="30" aria-describedby="dispatch-help" required=""
+- button: type="submit"
+- button: id="reveal-dispatch" type="button"
 - input: id="difference-time" type="radio" name="difference" value="time" required=""
 - input: id="difference-room" type="radio" name="difference" value="room"
 - input: id="difference-keys" type="radio" name="difference" value="keys"
+- button: type="submit"
+- input: id="source-keys" type="radio" name="source" value="keys" required=""
+- input: id="source-register" type="radio" name="source" value="register"
+- input: id="source-rumour" type="radio" name="source" value="rumour"
 - button: type="submit"
 - input: id="verdict-theft" type="radio" name="verdict" value="theft" required=""
 - input: id="verdict-clerk" type="radio" name="verdict" value="clerk"
@@ -61123,6 +61428,23 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - button: type="submit"
 - button: id="share-finding" type="button"
 - textarea: id="share-copy" rows="3" readonly="" hidden=""
+- select: id="playtest-hardest" required=""
+- option: value=""
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- select: id="playtest-again" required=""
+- option: value=""
+- option: (no attributes)
+- option: (no attributes)
+- option: (no attributes)
+- textarea: id="playtest-note" rows="3" maxlength="800"
+- button: type="submit"
+- textarea: id="playtest-copy" rows="6" readonly="" hidden=""
+- button: id="restart-case" type="button"
 
 ### Scripts supporting this page
 
@@ -61145,7 +61467,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
     "scope": "Complete static HTML and checker-source reading, arithmetic/route/code-key consistency, and local link/fragment existence.",
     "limits": "No historical ciphertext reproduced or primary historical source checked. No browser interaction, visual accessibility or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
-  }
+  },
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
 }
 ```
 
@@ -61617,7 +61940,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `the-book.html`
 - Public page: https://ciphermuseum.com/the-book.html
-- Snapshot source SHA-256: `eaeaf19e6298ef912384852c23742da684bb20428663c7e037907055a68e5561`
+- Snapshot source SHA-256: `d0df1b135f437ff108cbc57e1efedcd4828daf2d86c59cc19056ef25de52b6c2`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -61680,7 +62003,7 @@ An envelope is waiting for you
 
 #### The Curator’s Sealed Letter
 
-Four optional slips run through the book. Solve them to open a fictional document investigation in the museum. The challenge is not just finding readable words. It is deciding what those words justify.
+Four optional slips run through the book. Solve them to open a fictional document investigation in the museum, or start the case directly online. The challenge is not just finding readable words. It is deciding what those words justify.
 
 [Open the reader’s mystery →](<https://ciphermuseum.com/sealed-letter.html>)
 
@@ -61718,7 +62041,7 @@ For libraries, classrooms and curious friends
 
 #### Read. Compare. Discuss.
 
-A simple 30–45 minute session: read the opening excerpt together, try the first two slips, then use the online hints to complete the letter. Compare the four fictional documents before discussing the accusation.
+A simple 30–45 minute session: read the opening excerpt together, try the first two slips, then use the online hints to complete the letter. Decode the dispatch, compare the four initial documents, and choose a fifth source before discussing the accusation.
 
 - Who controls a communication route—and who merely believes they do?
 
@@ -61763,7 +62086,8 @@ This describes work recorded before this export. Treat these notes as assertions
     "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
     "scope": "Complete static HTML reading, metadata and navigation consistency, and local link/fragment existence.",
     "limits": "No new independent verification of the Mary Stuart narrative, manuscript contents or cover pixels. No browser, visual or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
-  }
+  },
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
 }
 ```
 
@@ -63258,7 +63582,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Source register and recorded access limits
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 These 185 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
@@ -66313,7 +66637,7 @@ These 185 identities and reading scopes come from the prior review ledger. They 
 
 # javascript appendix 1
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -70001,7 +70325,7 @@ if (typeof require !== 'undefined') {
 
 # javascript appendix 2
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/all-engines.js
 
@@ -74273,7 +74597,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 # javascript appendix 3
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/caesar-break.js
 
@@ -77683,7 +78007,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 4
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/detective/challenges.js
 
@@ -81012,7 +81336,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 5
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/learning-path.js
 
@@ -82471,18 +82795,70 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/reader-companion.js`
-- Served SHA-256: `c13a44b3908714f5028d0e19e7e826517416df1f13ef412a4c8a27b08ac0e79e`
-- Readable-source SHA-256: `c13a44b3908714f5028d0e19e7e826517416df1f13ef412a4c8a27b08ac0e79e`
+- Served SHA-256: `2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468`
+- Readable-source SHA-256: `2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468`
 
 
 ```javascript
-/* An original reader puzzle. Client-side gates are a courtesy, not access control. */
+/* Original fictional reader case. Gates guide the activity; they are not access control. */
 'use strict';
 (function () {
   const $ = id => document.getElementById(id);
   if (!$('unlock-form')) return;
   const normalize = text => text.toUpperCase().replace(/[^A-Z0-9]/g, '');
   const instruction = 'COMPARE THE COPIES BEFORE YOU TRUST THEM';
+  const state = { started: false, decoded: false, compared: false, source: false, complete: false, entry: '', help: new Set() };
+  const stages = ['recover the destination', 'compare the copies', 'request another source', 'make a finding'];
+  const codebook = Object.fromEntries([...document.querySelectorAll('#dispatch-key [data-code]')].map(el => [el.dataset.code, el.textContent.trim()]));
+  const groups = $('dispatch-cipher').textContent.match(/\d{2}/g) || [];
+  const reading = groups.map(group => codebook[group]);
+  const room = reading[reading.indexOf('ROOM') + 1];
+  const validDispatch = groups.length > 0 && reading.every(Boolean) && normalize(reading.join(' ')) === normalize($('retained-message').textContent);
+  function progress(step) {
+    document.querySelectorAll('.case-progress [data-step]').forEach(el => {
+      const number = Number(el.dataset.step);
+      el.classList.toggle('is-complete', state.complete || number < step);
+      if (number === step && !state.complete) el.setAttribute('aria-current', 'step');
+      else el.removeAttribute('aria-current');
+    });
+    $('case-progress-text').textContent = state.complete ? 'Investigation complete. Your finding is below.' : `Step ${step} of 4: ${stages[step - 1]}.`;
+  }
+  function openCase(entry) {
+    if (!validDispatch) {
+      $('unlock-feedback').textContent = 'This case file has an inconsistent dispatch. Please reload the page before continuing.';
+      return;
+    }
+    if (!state.started) state.entry = entry;
+    state.started = true;
+    $('investigation').hidden = false;
+    $('case-title').focus();
+  }
+  function finishDecode(revealed) {
+    if (!state.started) return;
+    state.decoded = true;
+    if (revealed) state.help.add('dispatch-answer');
+    $('decode-feedback').textContent = `The dispatch names ROOM ${room}. The complete reading is beside the delivered copy below.`;
+    $('copies-panel').hidden = false;
+    progress(2);
+    $('copies-title').focus();
+  }
+  async function copyText(text, feedbackId, copyId, labelId, success) {
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(text);
+      $(copyId).hidden = true;
+      $(labelId).hidden = true;
+      $(feedbackId).textContent = success;
+    } catch (_) {
+      $(labelId).hidden = false;
+      $(copyId).hidden = false;
+      $(copyId).value = text;
+      $(copyId).focus();
+      $(copyId).select();
+      $(feedbackId).textContent = 'Select and copy the text below. Nothing has been sent.';
+    }
+  }
+  $('start-case').addEventListener('click', () => openCase('Direct start'));
   $('unlock-form').addEventListener('submit', event => {
     event.preventDefault();
     if (normalize($('instruction').value) !== normalize(instruction)) {
@@ -82490,53 +82866,110 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       return;
     }
     $('unlock-feedback').textContent = 'The instruction fits. The envelope is open below.';
-    $('investigation').hidden = false;
-    $('case-title').focus();
+    openCase('Four book slips');
+  });
+  $('decode-form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!state.started) return;
+    const answer = normalize($('dispatch-room').value).replace(/^ROOM/, '');
+    if (![normalize(room), '4'].includes(answer)) {
+      $('decode-feedback').textContent = 'Follow the code group immediately after ROOM. Enter its word or room number; the codebook and hints are available above.';
+      return;
+    }
+    finishDecode(false);
+  });
+  $('reveal-dispatch').addEventListener('click', () => {
+    $('dispatch-room').value = room;
+    finishDecode(true);
   });
   $('compare-form').addEventListener('submit', event => {
     event.preventDefault();
+    if (!state.decoded) return;
     const choice = document.querySelector('input[name="difference"]:checked');
     if (!choice) return;
     if (choice.value !== 'room') {
       $('compare-feedback').textContent = 'Compare the message wording again. Both copies say AT NINE and name ELLIS. The document timestamps are separate from the instruction.';
       return;
     }
+    state.compared = true;
     document.querySelectorAll('[data-difference]').forEach(mark => mark.classList.add('revealed'));
-    $('compare-feedback').textContent = 'Yes: FOUR became FIVE. You have found a difference. Now decide how much it proves.';
+    $('compare-feedback').textContent = 'Yes: A names FOUR and B names FIVE. The difference is established; its cause is not.';
+    $('source-panel').hidden = false;
+    progress(3);
+    $('source-title').focus();
+  });
+  $('source-form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!state.compared) return;
+    const choice = document.querySelector('input[name="source"]:checked');
+    if (!choice) return;
+    if (choice.value !== 'register') {
+      $('source-feedback').textContent = choice.value === 'keys'
+        ? 'A photograph could confirm possession of keys. It would not tell you which destination was authorised.'
+        : 'A suspicion about R supplies no check on this particular order. Look for a record linked to reference CM-17.';
+      return;
+    }
+    state.source = true;
+    $('register-record').hidden = false;
+    $('source-feedback').textContent = 'The register is below. It supports a destination, with limits of its own. Read it before making your finding.';
     $('verdict-form').hidden = false;
-    document.querySelector('input[name="verdict"]').focus();
+    progress(4);
+    $('register-record').setAttribute('tabindex', '-1');
+    $('register-record').focus();
   });
   $('verdict-form').addEventListener('submit', event => {
     event.preventDefault();
+    if (!state.source) return;
     const choice = document.querySelector('input[name="verdict"]:checked');
     if (!choice) return;
     const responses = {
       theft: 'Access to keys establishes an opportunity, not a theft. Which record actually says the contents were checked?',
       clerk: 'The log says R opened the envelope. It does not say R wrote or changed the instruction. Those are different claims.',
-      nothing: 'An apparently intact seal is an observation. The note explicitly says the contents were not checked.'
+      nothing: 'An apparently intact seal is an observation. The later note explicitly says the contents were not checked.'
     };
     if (choice.value !== 'evidence') {
+      state.complete = false;
+      $('finding').hidden = true;
+      progress(4);
       $('verdict-feedback').textContent = responses[choice.value] || 'Choose the conclusion supported by these documents.';
       return;
     }
-    $('verdict-feedback').textContent = 'That conclusion stays within the evidence.';
+    state.complete = true;
+    $('verdict-feedback').textContent = 'Your finding separates the supported destination from an unsupported accusation.';
     $('finding').hidden = false;
+    progress(4);
     $('finding-title').focus();
   });
-  $('share-finding').addEventListener('click', async () => {
-    const text = 'I opened the Curator’s Sealed Letter and completed its evidence investigation at Cipher Museum. Try the free reader’s mystery: https://ciphermuseum.com/sealed-letter.html';
-    try {
-      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(text);
-      $('share-feedback').textContent = 'Copied. Paste it wherever you choose—no solution included.';
-    } catch (_) {
-      $('share-copy-label').hidden = false;
-      $('share-copy').hidden = false;
-      $('share-copy').value = text;
-      $('share-copy').focus();
-      $('share-copy').select();
-      $('share-feedback').textContent = 'Select and copy the text below. It contains no solution.';
-    }
+  document.querySelectorAll('details.hint').forEach((el, index) => {
+    el.addEventListener('toggle', () => { if (el.open) state.help.add(`hint-${index}`); });
+  });
+  $('share-finding').addEventListener('click', () => {
+    if (!state.complete) return;
+    const text = 'I completed The Curator’s Sealed Letter, a free codebreaking and evidence investigation at Cipher Museum. Try the case: https://ciphermuseum.com/sealed-letter.html';
+    copyText(text, 'share-feedback', 'share-copy', 'share-copy-label', 'Copied. Paste the invitation wherever you choose—no solution included.');
+  });
+  $('playtest-form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!state.complete || !$('playtest-form').checkValidity()) return;
+    const text = [
+      'Cipher Museum playtest · The Curator’s Sealed Letter · Pilot 1',
+      `Entry: ${state.entry}`,
+      'Case completed: yes',
+      `Help items opened: ${state.help.size}`,
+      `Most needed help: ${$('playtest-hardest').value}`,
+      `Would try another case: ${$('playtest-again').value}`,
+      `Notes: ${$('playtest-note').value.trim() || '(none)'}`
+    ].join('\n');
+    copyText(text, 'playtest-feedback', 'playtest-copy', 'playtest-copy-label', 'Notes copied. Send them to the person who invited you when you are ready. Nothing was submitted here.');
+  });
+  $('restart-case').addEventListener('click', () => {
+    Object.assign(state, { decoded: false, compared: false, source: false, complete: false });
+    ['copies-panel', 'source-panel', 'register-record', 'verdict-form', 'finding', 'share-copy', 'share-copy-label', 'playtest-copy', 'playtest-copy-label'].forEach(id => { $(id).hidden = true; });
+    ['decode-form', 'compare-form', 'source-form', 'verdict-form', 'playtest-form'].forEach(id => $(id).reset());
+    ['decode-feedback', 'compare-feedback', 'source-feedback', 'verdict-feedback', 'share-feedback', 'playtest-feedback'].forEach(id => { $(id).textContent = ''; });
+    document.querySelectorAll('[data-difference]').forEach(mark => mark.classList.remove('revealed'));
+    progress(1);
+    $('case-title').focus();
   });
 })();
 ```
@@ -82707,8 +83140,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-model.js`
-- Served SHA-256: `4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420`
-- Readable-source SHA-256: `4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420`
+- Served SHA-256: `7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56`
+- Readable-source SHA-256: `7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56`
 
 
 ```javascript
@@ -82719,7 +83152,12 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 (function (global) {
   const KIND = 'cipher-museum-transcription';
   const TYPES = ['ciphertext', 'cleartext', 'marginal', 'missing', 'editorial'];
-  const KEY_TYPES = ['letter', 'syllable', 'word', 'name', 'null', 'space', 'repeat', 'erase', 'unknown'];
+  const KEY_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null', 'space', 'repeat', 'erase', 'unknown'];
+  const SOURCE_FIELDS = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName',
+    'custodianCountry','repositoryRecordUrl','originPlace','originStatus','productionDateStart','productionDateEnd','productionDateStatus','provenance',
+    'scriptIdentification','scriptStatus','languageHypothesis','languageStatus',
+    'objectRights','objectAccess','objectAttribution','imageRights','imageAccess','imageAttribution','transcriptionRights','transcriptionAccess','transcriptionAttribution'];
+  const SOURCE_STATUSES = ['unknown', 'provisional', 'established'];
   const copy = x => JSON.parse(JSON.stringify(x));
   const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   function check(ok, message) { if (!ok) throw new Error(message); }
@@ -82735,8 +83173,13 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   function source(x) {
     check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid source record.');
     const result = {};
-    for (const field of ['artifactId', 'archive', 'shelfmark', 'folio', 'transcriber', 'date', 'method', 'imageName']) result[field] = string(x[field] || '', 500, field);
-    result.url = url(x.url || ''); return result;
+    for (const field of SOURCE_FIELDS) {
+      const value = x[field] === undefined ? '' : x[field];
+      if (field === 'url' || field === 'repositoryRecordUrl') result[field] = url(value);
+      else if (field.endsWith('Status')) { result[field] = value || 'unknown'; check(SOURCE_STATUSES.includes(result[field]), 'Invalid source uncertainty status.'); }
+      else result[field] = string(value, 500, field);
+    }
+    return result;
   }
   function create(raw = '') {
     string(raw, 10000, 'Transcription');
@@ -82932,7 +83375,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   // ── Numerical segmentation ────────────────────────────────────────────────
   // A typed entry distinguishes a letter, a syllable, a whole word, a name and a
   // null that deliberately contributes nothing. A bare string stays one reading.
-  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'null'];
+  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null'];
   const SEG_LINES = ['boundary', 'span'];
   const COUNT_CAP = 1e15;
   function normalizeCodes(key) {
@@ -83365,9 +83808,18 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     const state = copy(b[type]);
     delete state.inputFingerprint; delete state.configurationFingerprint;
     delete state.elapsedMs; // A measurement is not a solver input.
-    return fingerprint(canonical({ state, source: b.evidence, selectedLayer: b.selectedLayer,
+    return fingerprint(canonical({ state, source: bindingEvidence(b.evidence), selectedLayer: b.selectedLayer,
       modelBuild: b.tool.modelBuild, scoringModel: type === 'search' ? b.tool.scoringModel : state.scoring,
       solver: type === 'search' ? b.tool.solver : 'numerical-lattice' }));
+  }
+  // Empty optional metadata must not make an unchanged pre-extension bundle
+  // appear edited. Meaningful new metadata still participates in every binding.
+  function bindingEvidence(d) {
+    const result = copy(d);
+    for (const f of SOURCE_FIELDS.slice(9)) {
+      if (result.source[f] === '' || (f.endsWith('Status') && result.source[f] === 'unknown')) delete result.source[f];
+    }
+    return result;
   }
   // A declared NON-cryptographic 64-bit fingerprint. It detects a changed input so
   // stale results can be invalidated; it is not an integrity or authenticity check.
@@ -83457,7 +83909,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       images: d.images.map(i => ({ id: i.id, name: i.name, sha256: i.sha256, width: i.width, height: i.height,
         rotation: i.rotation, crop: i.crop.slice() })),
       imageBytes: 'Image bytes are deliberately not included. Reopen each file locally; the recorded hash tells you whether the bytes match.',
-      sourceFingerprint: s.sourceFingerprint === undefined ? fingerprint(canonical(d)) : s.sourceFingerprint,
+      sourceFingerprint: s.sourceFingerprint === undefined ? fingerprint(canonical(bindingEvidence(d))) : s.sourceFingerprint,
       limits: 'Replay needs the same solver and scoring-model build, not only the same seed. A recorded filename or hash identifies bytes; it does not establish that an image is the archival object it claims to be.'
     };
     for (const type of ['search', 'segmentation']) if (value[type]) {
@@ -83498,7 +83950,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       rotation: integer(i.rotation, 0, 270, 'image rotation'), crop: i.crop }));
     b.sourceFingerprint = string(b.sourceFingerprint || '', 32, 'Source fingerprint');
     // Stale results are reported, never silently reused.
-    const sourceMoved = b.legacyUnbound || b.sourceFingerprint !== fingerprint(canonical(b.evidence));
+    const sourceMoved = b.legacyUnbound || b.sourceFingerprint !== fingerprint(canonical(bindingEvidence(b.evidence)));
     const modelMoved = b.tool.modelBuild !== MODEL_BUILD;
     const searchMoved = !!(b.search && (b.legacyUnbound || modelMoved ||
       b.search.inputFingerprint !== fingerprint(b.search.raw) || b.search.configurationFingerprint !== resultBinding(b, 'search')));
@@ -83603,7 +84055,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     check(['diagonal', 'row-major'].includes(kind), 'Unknown route.');
     return Array.from({length:153}, (_, i) => kind === 'diagonal' ? (i % 9) * 17 + (2 * i % 17) : i);
   }
-  const api = { TYPES, KEY_TYPES, SEG_TYPES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
+  const api = { TYPES, KEY_TYPES, SEG_TYPES, SOURCE_FIELDS, SOURCE_STATUSES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
     create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey,
     segment, segmentMetrics, normalizeCodes, rng, parseSymbols, search, beamSearch, metrics, url, z340Route,
     imageRecord, addImage, regionToDisplay, displayToRegion, displayAspect,
@@ -83619,7 +84071,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 6
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-ui.js
 
@@ -83628,8 +84080,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-ui.js`
-- Served SHA-256: `3d4d5a2928754cb6947e457bdbdef0a1027974ed1924d5c42d52bf3ebc3e04d9`
-- Readable-source SHA-256: `3d4d5a2928754cb6947e457bdbdef0a1027974ed1924d5c42d52bf3ebc3e04d9`
+- Served SHA-256: `efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9`
+- Readable-source SHA-256: `efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9`
 
 
 ```javascript
@@ -83641,7 +84093,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   let imageURL = null, pendingImage = null, activeImage = null, languageSet = null, languageError = '';
   let activeRegionSpan = '';
   let selectedClass = '', selectedOccurrences = new Set(), lastCandidate = '', retainedBundle = null;
-  const sourceFields = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName'];
+  const sourceFields = R.SOURCE_FIELDS;
   const BASELINE = { id: 'museum-prose-quadgram-v1', label: 'Museum modern-English baseline (disclosed: modern, museum prose)' };
   function status(message, error = false) { $('record-status').textContent = message; $('record-status').dataset.error = String(error); }
   function note(id, message, error = false) { $(id).textContent = message; $(id).dataset.error = String(error); }
@@ -83982,6 +84434,12 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       'Derived reading appended; the source has not been overwritten.');
   });
   ['typed-key','key-input'].forEach(id=>$(id).addEventListener('input',()=>{$('key-output').textContent='Inputs changed. Apply the key again.';}));
+  $('key-linguistic-example').onclick = guard(() => {
+    $('typed-key').value = JSON.stringify([{symbol:'21',type:'word',values:['seal']},{symbol:'22',type:'ending',values:['ed']},{symbol:'23',type:'punctuation',values:['.']}], null, 2);
+    $('key-input').value = '21 22 23'; $('key-title').value = 'Invented linguistic content example';
+    $('key-source').value = 'https://ecp.ep.liu.se/index.php/histocrypt/article/view/404';
+    $('apply-key').click();
+  });
   $('apply-key').onclick = guard(() => {
     const tokens=$('key-input').value.trim().split(/\s+/u).filter(Boolean);
     if (!tokens.length || tokens.length>3000) throw new Error('Use 1–3,000 whitespace-separated symbol IDs.');
@@ -84867,8 +85325,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `4a9b3a4d637e7ac49a73c90a1dfe70963fdec5bde49798a46bb9dea91be764c9`
-- Readable-source SHA-256: `4a9b3a4d637e7ac49a73c90a1dfe70963fdec5bde49798a46bb9dea91be764c9`
+- Served SHA-256: `519251c79ea2c69f0ec967d3a6559bb16fbacd24dcb49f17317199804ca72f59`
+- Readable-source SHA-256: `519251c79ea2c69f0ec967d3a6559bb16fbacd24dcb49f17317199804ca72f59`
 
 
 ```javascript
@@ -84890,7 +85348,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  */
 'use strict';
 
-const VERSION = 'cipher-museum-53ea3c4f';
+const VERSION = 'cipher-museum-5efc0080';
 
 const CORE = [
   '/',
@@ -84930,6 +85388,8 @@ const CORE = [
   '/data/research/v1/z340-section-1.json',
   '/js/ciphers/all-engines.min.js',
   '/css/museum.css',
+  '/css/reader-companion.css',
+  '/js/reader-companion.js',
   '/css/historical-demos.css',
   '/js/historical-ciphers.js',
   '/js/historical-demos.js',
@@ -85042,7 +85502,7 @@ self.addEventListener('fetch', (event) => {
 
 # data appendix 1
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — tours/foundations.json
 
@@ -85974,7 +86434,7 @@ Source SHA-256: `72c9a03dfa48a2e2a1ae78e44e880042471e53fb871ca22dffdc8bd38a9f64e
 
 # data appendix 2
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v1/language-model.json
 
@@ -85989,7 +86449,7 @@ Source SHA-256: `5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2
 
 # data appendix 3
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — public/corpus/v0.8/browser-sample.json
 
@@ -91768,7 +92228,7 @@ Source SHA-256: `788eb1bc8977cb9fd38d8584521bd150ebaf0a660f24f732b8ccead684291b7
 
 # data appendix 4
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — js/search-index.json
 
@@ -91783,7 +92243,7 @@ Source SHA-256: `d2d610cc32966a881223f62bff0f117c8ca2e6bd56721e627a881f17025fa35
 
 # data appendix 5
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/artifact-cards.json
 
@@ -94870,7 +95330,7 @@ Source SHA-256: `3bd4770c7e3bdafad529f347a3e63703a5db49633054c20396147e9ac719f89
 
 # data appendix 6
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — corpus/engine-manifest.json
 
@@ -98598,7 +99058,7 @@ Source SHA-256: `30633f1a2bd3466e68032d9fed244fb185afd349c46e111e55c9639378661cb
 
 ## Data — data/research/v1/evaluation.json
 
-Source SHA-256: `e6f8203ab4e9eb0b8ba02f0dfdaa16938d1f1190c5cfc4b01c430fe0c66ff595`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+Source SHA-256: `2e06136874d51905263143b322696477f415cee182e420800a9c37d921b840d5`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
 
 ```json
 {
@@ -98606,7 +99066,7 @@ Source SHA-256: `e6f8203ab4e9eb0b8ba02f0dfdaa16938d1f1190c5cfc4b01c430fe0c66ff59
   "model": "museum-prose-quadgram-v1",
   "modelSha256": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
   "scorerSha256": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
-  "solverSha256": "4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420",
+  "solverSha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
   "fixturesSha256": "30633f1a2bd3466e68032d9fed244fb185afd349c46e111e55c9639378661cb8",
   "scope": "Public demonstrations; no training, blind holdout or historical-language coverage claim. One-symbol-unlocked runs disclose the rest of the key; they do not establish general recovery.",
   "records": [
@@ -99312,9 +99772,15 @@ Source SHA-256: `ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc70724
 ```
 
 
+---
+
+# data appendix 7
+
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+
 ## Data — data/research/v2/evaluation.json
 
-Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece816`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
+Source SHA-256: `ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e9`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.
 
 ```json
 {
@@ -99330,7 +99796,7 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
     "branch": 26
   },
   "hashes": {
-    "solver": "4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420",
+    "solver": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
     "scorer": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
     "baselineModel": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
     "profiles": "9273ab82bc558e070a1cd810b84e6830f62b9d3bb31865271416f48cb9e6bb3a",
@@ -99374,15 +99840,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7624,
             "keyError": 1,
-            "ms": 55.7,
-            "heapDeltaBytes": 10506896
+            "ms": 23.6,
+            "heapDeltaBytes": 8500968
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7079,
             "keyError": 0.875,
-            "ms": 933,
-            "heapDeltaBytes": 40056648
+            "ms": 441.7,
+            "heapDeltaBytes": 9896328
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99403,15 +99869,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7277,
             "keyError": 0.8393,
-            "ms": 44.5,
-            "heapDeltaBytes": 30125520
+            "ms": 31.7,
+            "heapDeltaBytes": 4337264
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8069,
             "keyError": 0.9821,
-            "ms": 1623.3,
-            "heapDeltaBytes": 0
+            "ms": 785.7,
+            "heapDeltaBytes": 64720672
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99432,15 +99898,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.6167,
             "keyError": 0.8286,
-            "ms": 19.7,
-            "heapDeltaBytes": 16963288
+            "ms": 13.7,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8167,
             "keyError": 0.9714,
-            "ms": 602.3,
-            "heapDeltaBytes": 0
+            "ms": 306.6,
+            "heapDeltaBytes": 42575184
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99461,15 +99927,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7606,
             "keyError": 0.9231,
-            "ms": 34.7,
-            "heapDeltaBytes": 29177264
+            "ms": 23.1,
+            "heapDeltaBytes": 5448944
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8122,
             "keyError": 0.8974,
-            "ms": 807.5,
-            "heapDeltaBytes": 28426144
+            "ms": 395.8,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99488,17 +99954,17 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
           "homophones": 3,
           "annealing": {
             "exact": false,
-            "plaintextError": 0.7371,
+            "plaintextError": 0.7793,
             "keyError": 0.963,
-            "ms": 34.4,
-            "heapDeltaBytes": 0
+            "ms": 21.8,
+            "heapDeltaBytes": 1300224
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7793,
             "keyError": 0.963,
-            "ms": 1566.9,
-            "heapDeltaBytes": 37424208
+            "ms": 721.6,
+            "heapDeltaBytes": 55070400
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99519,14 +99985,14 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7917,
             "keyError": 1,
-            "ms": 22.5,
-            "heapDeltaBytes": 16832712
+            "ms": 13.6,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7583,
             "keyError": 0.9091,
-            "ms": 589.4,
+            "ms": 263.3,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -99548,15 +100014,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.5149,
             "keyError": 0.75,
-            "ms": 40.4,
-            "heapDeltaBytes": 0
+            "ms": 22.7,
+            "heapDeltaBytes": 4778568
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7772,
             "keyError": 0.9167,
-            "ms": 738.5,
-            "heapDeltaBytes": 30162336
+            "ms": 344.3,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99577,15 +100043,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7921,
             "keyError": 0.9231,
-            "ms": 35.1,
-            "heapDeltaBytes": 0
+            "ms": 21.8,
+            "heapDeltaBytes": 1949368
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7277,
             "keyError": 0.8654,
-            "ms": 1318.2,
-            "heapDeltaBytes": 27658000
+            "ms": 645.9,
+            "heapDeltaBytes": 32905528
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99606,14 +100072,14 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7583,
             "keyError": 0.8485,
-            "ms": 27,
-            "heapDeltaBytes": 17528920
+            "ms": 14,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9091,
-            "ms": 707,
+            "ms": 268.6,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -99635,15 +100101,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7638,
             "keyError": 1,
-            "ms": 35.8,
+            "ms": 22.2,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.794,
             "keyError": 0.9744,
-            "ms": 855.1,
-            "heapDeltaBytes": 7512520
+            "ms": 411.2,
+            "heapDeltaBytes": 81479192
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99664,15 +100130,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7839,
             "keyError": 0.9231,
-            "ms": 39.2,
-            "heapDeltaBytes": 27809912
+            "ms": 22.2,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.799,
             "keyError": 0.9808,
-            "ms": 1468.4,
-            "heapDeltaBytes": 0
+            "ms": 662.2,
+            "heapDeltaBytes": 49425632
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99693,14 +100159,14 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.5667,
             "keyError": 0.7353,
-            "ms": 23.9,
-            "heapDeltaBytes": 17852792
+            "ms": 14,
+            "heapDeltaBytes": 19975160
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9706,
-            "ms": 586,
+            "ms": 311.7,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -99722,15 +100188,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7814,
             "keyError": 0.9773,
-            "ms": 51.8,
-            "heapDeltaBytes": 0
+            "ms": 34.1,
+            "heapDeltaBytes": 18068416
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8103,
             "keyError": 0.9091,
-            "ms": 1119.1,
-            "heapDeltaBytes": 51697376
+            "ms": 509.7,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99751,15 +100217,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7685,
             "keyError": 0.9492,
-            "ms": 67.5,
+            "ms": 33.2,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7974,
             "keyError": 1,
-            "ms": 1866,
-            "heapDeltaBytes": 11438424
+            "ms": 875.9,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99780,15 +100246,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.6917,
             "keyError": 0.8286,
-            "ms": 24.3,
-            "heapDeltaBytes": 18598368
+            "ms": 13.4,
+            "heapDeltaBytes": 19744264
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9714,
-            "ms": 637.4,
-            "heapDeltaBytes": 17043720
+            "ms": 312,
+            "heapDeltaBytes": 1809072
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99809,15 +100275,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7712,
             "keyError": 0.95,
-            "ms": 56.4,
-            "heapDeltaBytes": 45081592
+            "ms": 34.9,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7837,
             "keyError": 0.95,
-            "ms": 911.4,
-            "heapDeltaBytes": 0
+            "ms": 465.5,
+            "heapDeltaBytes": 3513944
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99838,15 +100304,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7868,
             "keyError": 1,
-            "ms": 57.4,
-            "heapDeltaBytes": 44003256
+            "ms": 33,
+            "heapDeltaBytes": 16020024
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8025,
             "keyError": 0.9818,
-            "ms": 1579.9,
-            "heapDeltaBytes": 5719224
+            "ms": 778.2,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99867,15 +100333,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7833,
             "keyError": 0.9688,
-            "ms": 22.3,
-            "heapDeltaBytes": 0
+            "ms": 13.9,
+            "heapDeltaBytes": 19971280
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.625,
             "keyError": 0.75,
-            "ms": 529.3,
-            "heapDeltaBytes": 48799008
+            "ms": 261,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99896,15 +100362,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7868,
             "keyError": 0.9091,
-            "ms": 54.3,
+            "ms": 37.2,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8307,
             "keyError": 0.9773,
-            "ms": 1182.1,
-            "heapDeltaBytes": 9880592
+            "ms": 503.8,
+            "heapDeltaBytes": 35887424
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99925,15 +100391,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8088,
             "keyError": 0.9344,
-            "ms": 67,
+            "ms": 34.7,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.837,
             "keyError": 0.9836,
-            "ms": 1911.7,
-            "heapDeltaBytes": 39625840
+            "ms": 906.7,
+            "heapDeltaBytes": 27334576
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -99954,14 +100420,14 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8333,
             "keyError": 0.975,
-            "ms": 21.8,
-            "heapDeltaBytes": 17570952
+            "ms": 15.1,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.95,
-            "ms": 799.3,
+            "ms": 424.1,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -99983,15 +100449,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.6603,
             "keyError": 0.725,
-            "ms": 64.8,
+            "ms": 35.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.975,
-            "ms": 914.1,
-            "heapDeltaBytes": 0
+            "ms": 409.2,
+            "heapDeltaBytes": 97995512
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100012,15 +100478,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7556,
             "keyError": 0.8772,
-            "ms": 57.8,
-            "heapDeltaBytes": 45814472
+            "ms": 32.9,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9474,
-            "ms": 1668.6,
-            "heapDeltaBytes": 0
+            "ms": 831.3,
+            "heapDeltaBytes": 33312944
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100041,15 +100507,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.6667,
             "keyError": 0.8056,
-            "ms": 23.2,
-            "heapDeltaBytes": 19174552
+            "ms": 15.3,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7917,
             "keyError": 0.9722,
-            "ms": 653.5,
-            "heapDeltaBytes": 0
+            "ms": 329,
+            "heapDeltaBytes": 277104
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100070,15 +100536,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.419,
             "keyError": 0.641,
-            "ms": 59.3,
-            "heapDeltaBytes": 0
+            "ms": 37.8,
+            "heapDeltaBytes": 16301544
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.781,
             "keyError": 0.9744,
-            "ms": 780.5,
-            "heapDeltaBytes": 37813176
+            "ms": 396.1,
+            "heapDeltaBytes": 13928536
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100099,14 +100565,14 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7746,
             "keyError": 0.8545,
-            "ms": 60.4,
-            "heapDeltaBytes": 0
+            "ms": 42.8,
+            "heapDeltaBytes": 15068928
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.819,
             "keyError": 0.8909,
-            "ms": 1547.3,
+            "ms": 783.8,
             "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
@@ -100128,15 +100594,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7333,
             "keyError": 0.8571,
-            "ms": 25,
+            "ms": 13.8,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9429,
-            "ms": 591,
-            "heapDeltaBytes": 0
+            "ms": 288.1,
+            "heapDeltaBytes": 11385208
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100157,15 +100623,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7814,
             "keyError": 1,
-            "ms": 57.6,
-            "heapDeltaBytes": 0
+            "ms": 34,
+            "heapDeltaBytes": 18317024
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7331,
             "keyError": 0.8462,
-            "ms": 902.6,
-            "heapDeltaBytes": 27615112
+            "ms": 410,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100186,15 +100652,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8232,
             "keyError": 0.9636,
-            "ms": 55.6,
-            "heapDeltaBytes": 0
+            "ms": 53.1,
+            "heapDeltaBytes": 16052872
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7974,
             "keyError": 0.9091,
-            "ms": 1766,
-            "heapDeltaBytes": 31286960
+            "ms": 779.6,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100215,15 +100681,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8,
             "keyError": 0.9714,
-            "ms": 22.3,
-            "heapDeltaBytes": 17420704
+            "ms": 13.8,
+            "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.725,
             "keyError": 0.7429,
-            "ms": 668.9,
-            "heapDeltaBytes": 0
+            "ms": 295.2,
+            "heapDeltaBytes": 32930064
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100244,15 +100710,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8105,
             "keyError": 1,
-            "ms": 61.1,
-            "heapDeltaBytes": 0
+            "ms": 37.5,
+            "heapDeltaBytes": 23681800
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7813,
             "keyError": 0.878,
-            "ms": 1041.2,
-            "heapDeltaBytes": 29902680
+            "ms": 508.6,
+            "heapDeltaBytes": 27382912
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100273,15 +100739,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7959,
             "keyError": 1,
-            "ms": 65.6,
-            "heapDeltaBytes": 0
+            "ms": 32.6,
+            "heapDeltaBytes": 20032368
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8367,
             "keyError": 0.9643,
-            "ms": 1637,
-            "heapDeltaBytes": 40694600
+            "ms": 789.4,
+            "heapDeltaBytes": 76109856
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100302,15 +100768,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9688,
-            "ms": 22.1,
+            "ms": 13.2,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8083,
             "keyError": 0.9375,
-            "ms": 506.2,
-            "heapDeltaBytes": 12289120
+            "ms": 301.2,
+            "heapDeltaBytes": 14347520
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100331,15 +100797,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7719,
             "keyError": 1,
-            "ms": 54.5,
+            "ms": 31.8,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8041,
             "keyError": 0.9459,
-            "ms": 738,
-            "heapDeltaBytes": 12155872
+            "ms": 402.7,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100360,15 +100826,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.769,
             "keyError": 0.9815,
-            "ms": 62.5,
+            "ms": 30.5,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.7778,
             "keyError": 0.9074,
-            "ms": 1672.8,
-            "heapDeltaBytes": 39763984
+            "ms": 805.1,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100389,15 +100855,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9688,
-            "ms": 22.2,
+            "ms": 12.3,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.825,
             "keyError": 0.9063,
-            "ms": 495.5,
-            "heapDeltaBytes": 17784552
+            "ms": 248.6,
+            "heapDeltaBytes": 7562608
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100418,15 +100884,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.7604,
             "keyError": 0.8718,
-            "ms": 53.5,
+            "ms": 27.6,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8077,
             "keyError": 1,
-            "ms": 802.6,
-            "heapDeltaBytes": 0
+            "ms": 385.6,
+            "heapDeltaBytes": 49257608
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100447,15 +100913,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8077,
             "keyError": 0.9821,
-            "ms": 57.4,
+            "ms": 33.4,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8107,
             "keyError": 0.9643,
-            "ms": 1548.6,
-            "heapDeltaBytes": 0
+            "ms": 807.1,
+            "heapDeltaBytes": 10528552
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100476,15 +100942,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
             "exact": false,
             "plaintextError": 0.8167,
             "keyError": 0.9143,
-            "ms": 21.9,
+            "ms": 12.6,
             "heapDeltaBytes": 0
           },
           "beamSearch": {
             "exact": false,
             "plaintextError": 0.8333,
             "keyError": 0.9429,
-            "ms": 607.5,
-            "heapDeltaBytes": 38980856
+            "ms": 292.5,
+            "heapDeltaBytes": 0
           },
           "relabellingInvariant": {
             "annealing": true,
@@ -100497,7 +100963,7 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
         "denominator": 39,
         "plaintextError": {
           "n": 39,
-          "mean": 0.7479,
+          "mean": 0.749,
           "min": 0.419,
           "max": 0.8333
         },
@@ -100509,15 +100975,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
         },
         "ms": {
           "n": 39,
-          "mean": 43.141,
-          "min": 19.7,
-          "max": 67.5
+          "mean": 25.7513,
+          "min": 12.3,
+          "max": 53.1
         },
         "heapDeltaBytes": {
           "n": 39,
-          "mean": 9601569.2308,
+          "mean": 5885872.2051,
           "min": 0,
-          "max": 45814472
+          "max": 23681800
         }
       },
       "beamSearch": {
@@ -100536,15 +101002,15 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
         },
         "ms": {
           "n": 39,
-          "mean": 1048.0436,
-          "min": 495.5,
-          "max": 1911.7
+          "mean": 504.0667,
+          "min": 248.6,
+          "max": 906.7
         },
         "heapDeltaBytes": {
           "n": 39,
-          "mean": 16505921.8462,
+          "mean": 19990676.3077,
           "min": 0,
-          "max": 51697376
+          "max": 97995512
         }
       },
       "exactRecovery": {
@@ -101221,7 +101687,180 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
           ]
         }
       ],
+      "authorDisjoint": {
+        "passages": [
+          {
+            "id": "brantome-dames-galantes-disjoint-1",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-french-1580",
+            "work": "Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)",
+            "shift": "Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy).",
+            "decided": true,
+            "choice": "historical-french-1580",
+            "correct": true,
+            "margin": 1.868,
+            "letters": 311,
+            "abstentionReasons": []
+          },
+          {
+            "id": "brantome-dames-galantes-disjoint-2",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-french-1580",
+            "work": "Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)",
+            "shift": "Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy).",
+            "decided": true,
+            "choice": "historical-french-1580",
+            "correct": true,
+            "margin": 2.754,
+            "letters": 315,
+            "abstentionReasons": []
+          },
+          {
+            "id": "brantome-dames-galantes-disjoint-3",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-french-1580",
+            "work": "Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)",
+            "shift": "Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy).",
+            "decided": true,
+            "choice": "historical-french-1580",
+            "correct": true,
+            "margin": 2.341,
+            "letters": 312,
+            "abstentionReasons": []
+          },
+          {
+            "id": "machiavelli-commedie-disjoint-1",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-italian-1320",
+            "work": "Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)",
+            "shift": "Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three.",
+            "decided": true,
+            "choice": "historical-italian-1320",
+            "correct": true,
+            "margin": 1.872,
+            "letters": 309,
+            "abstentionReasons": []
+          },
+          {
+            "id": "machiavelli-commedie-disjoint-2",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-italian-1320",
+            "work": "Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)",
+            "shift": "Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three.",
+            "decided": true,
+            "choice": "historical-italian-1320",
+            "correct": true,
+            "margin": 1.775,
+            "letters": 291,
+            "abstentionReasons": []
+          },
+          {
+            "id": "machiavelli-commedie-disjoint-3",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-italian-1320",
+            "work": "Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)",
+            "shift": "Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three.",
+            "decided": true,
+            "choice": "historical-italian-1320",
+            "correct": true,
+            "margin": 1.891,
+            "letters": 303,
+            "abstentionReasons": []
+          },
+          {
+            "id": "cicero-orationes-disjoint-1",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-latin-classical",
+            "work": "Marcus Tullius Cicero, Orations (first century BCE)",
+            "shift": "Different author, same century and language as the training text, forensic oratory rather than campaign commentary.",
+            "decided": true,
+            "choice": "historical-latin-classical",
+            "correct": true,
+            "margin": 2.606,
+            "letters": 325,
+            "abstentionReasons": []
+          },
+          {
+            "id": "cicero-orationes-disjoint-2",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-latin-classical",
+            "work": "Marcus Tullius Cicero, Orations (first century BCE)",
+            "shift": "Different author, same century and language as the training text, forensic oratory rather than campaign commentary.",
+            "decided": true,
+            "choice": "historical-latin-classical",
+            "correct": true,
+            "margin": 1.531,
+            "letters": 329,
+            "abstentionReasons": []
+          },
+          {
+            "id": "cicero-orationes-disjoint-3",
+            "split": "test",
+            "holdout": "author-disjoint",
+            "expectedProfile": "historical-latin-classical",
+            "work": "Marcus Tullius Cicero, Orations (first century BCE)",
+            "shift": "Different author, same century and language as the training text, forensic oratory rather than campaign commentary.",
+            "decided": true,
+            "choice": "historical-latin-classical",
+            "correct": true,
+            "margin": 2.471,
+            "letters": 326,
+            "abstentionReasons": []
+          }
+        ],
+        "summary": {
+          "denominator": 9,
+          "decided": 9,
+          "abstained": 0,
+          "correctWhenDecided": 9,
+          "perLanguage": {
+            "historical-french-1580": {
+              "denominator": 3,
+              "decided": 3,
+              "correct": 3
+            },
+            "historical-italian-1320": {
+              "denominator": 3,
+              "decided": 3,
+              "correct": 3
+            },
+            "historical-latin-classical": {
+              "denominator": 3,
+              "decided": 3,
+              "correct": 3
+            }
+          }
+        },
+        "sources": {
+          "historical-french-1580": {
+            "work": "Pierre de Bourdeille, seigneur de Brantôme, Vies des dames galantes (written c. 1585–1614, first printed 1665)",
+            "url": "[ebook-url-omitted-596cb78911d8; bibliographic credit retained]",
+            "shift": "Different author, same language and century as the training text, memoir rather than essay. Original spelling retained (mesme, luy, tenoit, servy)."
+          },
+          "historical-italian-1320": {
+            "work": "Niccolò Machiavelli, La mandragola, La Clizia and Belfagor (c. 1518–1525)",
+            "url": "[ebook-url-omitted-e6e5d406f8a9; bibliographic credit retained]",
+            "shift": "Different author, two centuries later than the training text, and dramatic prose rather than verse. The largest shift of the three."
+          },
+          "historical-latin-classical": {
+            "work": "Marcus Tullius Cicero, Orations (first century BCE)",
+            "url": "[ebook-url-omitted-f45573521f48; bibliographic credit retained]",
+            "shift": "Different author, same century and language as the training text, forensic oratory rather than campaign commentary."
+          }
+        },
+        "meaning": "No author or work here appears anywhere in the training material, and the disjointness is asserted at build time rather than assumed. This is the stronger of the two holdouts: author, and usually genre and period as well, shift at the same time.",
+        "coverage": "Every language in the profile set has author-disjoint text. Three passages per language is a small measurement, not an accuracy figure."
+      },
       "summary": {
+        "holdout": "document-internal",
         "denominator": 9,
         "decided": 9,
         "abstained": 0,
@@ -101264,7 +101903,7 @@ Source SHA-256: `cb067bb3600bd33fea22608a17efdfb48546055b792ce3cdc5e81bf6deece81
 
 # Columnar classroom worksheet
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `public/teaching/columnar-classroom.md`. SHA-256: `195e139c2732cb0d3d6c2ab5dd6fe5addf6100e130bd875a52b0d2d945d68091`. Its Node.js runner and fixed JSON fixtures are in the preceding appendices.
 

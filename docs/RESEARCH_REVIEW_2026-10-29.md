@@ -264,6 +264,24 @@ Harness: `scripts/check-browsers.js`. Playwright is deliberately **not** a commi
 dependency — CI would install it on every run and never use it, since CI has no browser
 binaries. The script header carries the one-line install.
 
+## Rebase note, and a pre-existing problem found on the way
+
+This work was branched from `8b5dd46` and rebased onto `ac659d8` after a parallel
+thirteen-item review (PRs #18–#21) landed on the default branch. Three conflicts, all
+resolved by keeping both sides: the workbench solver section now carries that review's
+cross-engine replay caveat *and* this one's sweep framing; the coverage ledger keeps both
+review blocks; and the generated evaluation export and audit pack were regenerated rather
+than merged. The page count moved from 214 to 216 with that review's two new pages.
+
+While rebasing, `node scripts/export-audit-document.js --check` was found to **fail on
+`origin/main` itself**: six pages carried recorded hashes that did not match their committed
+bytes, so the audit pack could not be regenerated from the default branch. Those pages —
+`ciphers/diffie-hellman.html`, `ciphers/nomenclator.html`, `ciphers/voynich.html`,
+`index.html`, `sealed-letter.html` and `the-book.html` — are untouched by this work. Their
+hashes are refreshed here so the pack builds again, and they are listed in the coverage
+ledger under `hashes_refreshed_not_revised` rather than being claimed as revised by this
+review. The audit check passes again.
+
 ## Still not done, and why
 
 - **R14's recipe remains unrun.** It needs live model access with a declared version, date
