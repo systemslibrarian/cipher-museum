@@ -3,7 +3,7 @@
   "pages": [
     {
       "path": "404.html",
-      "title": "Exhibit Not Found — The Cipher Museum",
+      "title": "Exhibit Not Found \u2014 The Cipher Museum",
       "words": 57,
       "sha256": "977a605eb75e1c5940104dcfcd47cca61d5818fc5a3aaa49e41a1ec8d3cc9d3c",
       "status": "bounded review and local release validation complete",
@@ -29,7 +29,7 @@
     },
     {
       "path": "challenges.html",
-      "title": "Cipher Challenges — The Cipher Museum",
+      "title": "Cipher Challenges \u2014 The Cipher Museum",
       "words": 167,
       "sha256": "a086b50ab9e8cad0e8ad57117f38f06cd8af5e5d9d6467b8d2202f550d7e880d",
       "status": "book companion integration: changed invitation and local links checked; earlier reviews remain historical evidence",
@@ -63,7 +63,7 @@
     },
     {
       "path": "cipher-corpus.html",
-      "title": "Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum",
+      "title": "Cipher Corpus \u2014 Known-Ciphertext Benchmark Library | Cipher Museum",
       "words": 1542,
       "sha256": "020b63db620811d763b294799aa989898efcb8601c14e73af0515c84124271d8",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -91,7 +91,7 @@
     },
     {
       "path": "cipher-detective.html",
-      "title": "Cipher Detective — The Cipher Museum",
+      "title": "Cipher Detective \u2014 The Cipher Museum",
       "words": 898,
       "sha256": "0c63f1a92df29f6b913afbd15b1fba643ab3a34399096361f699f213c2465294",
       "status": "ebook follow-up implementation and local validation complete",
@@ -130,7 +130,7 @@
     },
     {
       "path": "cipher-flow.html",
-      "title": "Cipher Flow Explorer — The Cipher Museum",
+      "title": "Cipher Flow Explorer \u2014 The Cipher Museum",
       "words": 51,
       "sha256": "4e6c9454e0b6691b103a10670c286794df5cba745ba4163915671bd542ae5889",
       "status": "bounded review and local release validation complete",
@@ -156,7 +156,7 @@
     },
     {
       "path": "ciphers/adfgvx.html",
-      "title": "ADFGVX Cipher — The Cipher Museum",
+      "title": "ADFGVX Cipher \u2014 The Cipher Museum",
       "words": 565,
       "sha256": "2f494f685339cc5db5228c9d6b84dae8f12022e1e31f53dd6c557ecf5e529f9b",
       "status": "bounded review and local release validation complete",
@@ -184,7 +184,7 @@
     },
     {
       "path": "ciphers/adfgx.html",
-      "title": "ADFGX Cipher — The Cipher Museum",
+      "title": "ADFGX Cipher \u2014 The Cipher Museum",
       "words": 515,
       "sha256": "96cbc41ca4df9585873f04523007a5b1c7a6e2df7ea75a4cfc3b2030bbd97ab8",
       "status": "bounded review and local release validation complete",
@@ -212,14 +212,14 @@
     },
     {
       "path": "ciphers/aeneas-tacticus.html",
-      "title": "Aeneas Tacticus — Water-Clock Signal Code — The Cipher Museum",
+      "title": "Aeneas Tacticus \u2014 Water-Clock Signal Code \u2014 The Cipher Museum",
       "words": 316,
       "sha256": "e648620f2e0aa15ef9e2aed3fff1e8c6f63e912c593fde9a4f8666e2b9c31d9a",
       "status": "bounded review and local release validation complete",
       "sources": [
         "POLYBIUS-10"
       ],
-      "notes": "Polybius10.44–45 source supports preset-message water clock; removed overbroad earliest military-communications treatise claim. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Polybius10.44\u201345 source supports preset-message water clock; removed overbroad earliest military-communications treatise claim. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -240,7 +240,7 @@
     },
     {
       "path": "ciphers/aes.html",
-      "title": "AES (Advanced Encryption Standard) — The Cipher Museum",
+      "title": "AES (Advanced Encryption Standard) \u2014 The Cipher Museum",
       "words": 1051,
       "sha256": "92f765aaa9aae5d04307a5a86ff94114ebcb0e7e6d168da8274eff82de0f07ac",
       "status": "ebook follow-up implementation and local validation complete",
@@ -298,7 +298,7 @@
     },
     {
       "path": "ciphers/affine.html",
-      "title": "Affine Cipher (E(x) = a·x + b mod 26) — The Cipher Museum",
+      "title": "Affine Cipher (E(x) = a\u00b7x + b mod 26) \u2014 The Cipher Museum",
       "words": 527,
       "sha256": "51bbc57270b7b4dc99b3b2dde4438b0daa5366c818c4ff99b56f7e7bc6438b63",
       "status": "bounded review and local release validation complete",
@@ -326,7 +326,7 @@
     },
     {
       "path": "ciphers/agnes-driscoll.html",
-      "title": "Agnes Meyer Driscoll — The Cipher Museum",
+      "title": "Agnes Meyer Driscoll \u2014 The Cipher Museum",
       "words": 673,
       "sha256": "b58af9b88b32df7f822fdeb4b23585dd0cfe9160866e0fdab24392a1ae5125fd",
       "status": "bounded review and local release validation complete",
@@ -358,7 +358,7 @@
     },
     {
       "path": "ciphers/alberti-disk.html",
-      "title": "Alberti Cipher Disk — The Cipher Museum",
+      "title": "Alberti Cipher Disk \u2014 The Cipher Museum",
       "words": 550,
       "sha256": "74ce84dc2853db8d1716fe493538dbdd56d5b78bf844f17c0df58a89634a1863",
       "status": "bounded review and local release validation complete",
@@ -386,7 +386,7 @@
     },
     {
       "path": "ciphers/amharic-ge-ez-ciphers.html",
-      "title": "Geʼez Script and a Substitution Model — The Cipher Museum",
+      "title": "Ge\u02bcez Script and a Substitution Model \u2014 The Cipher Museum",
       "words": 423,
       "sha256": "de0009623d13c31d47e54d12acb520de70c60da88c2bbae054dbe575297f6314",
       "status": "bounded review and local release validation complete",
@@ -416,7 +416,7 @@
     },
     {
       "path": "ciphers/amsco.html",
-      "title": "AMSCO Transposition — The Cipher Museum",
+      "title": "AMSCO Transposition \u2014 The Cipher Museum",
       "words": 873,
       "sha256": "805dee560e933d51741a254b35aecc67af1129992f08cd057f323227add70110",
       "status": "bounded review and local release validation complete",
@@ -444,7 +444,7 @@
     },
     {
       "path": "ciphers/arabic-nomenclators.html",
-      "title": "Arabic Nomenclators (al-Kindi Era) — The Cipher Museum",
+      "title": "Arabic Nomenclators (al-Kindi Era) \u2014 The Cipher Museum",
       "words": 414,
       "sha256": "a3e0fff4325029257f1b4fa3aa421fd7a4541fb23132502f749e06f611c461c4",
       "status": "bounded review and local release validation complete",
@@ -472,7 +472,7 @@
     },
     {
       "path": "ciphers/argenti.html",
-      "title": "Argenti Family Cipher (Vatican papal nomenclators · 1500s–1600s) — The Cipher Museum",
+      "title": "Argenti Family Cipher (Vatican papal nomenclators \u00b7 1500s\u20131600s) \u2014 The Cipher Museum",
       "words": 768,
       "sha256": "89b41c65bbc16ea1bb59b8f71619560b9153abf1c1aae65c8a09e4b0aa605df4",
       "status": "bounded review and local release validation complete",
@@ -500,7 +500,7 @@
     },
     {
       "path": "ciphers/arnold-andre.html",
-      "title": "Arnold–André Book Cipher (Blackstone’s Commentaries · 1779–1780) — The Cipher Museum",
+      "title": "Arnold\u2013Andr\u00e9 Book Cipher (Blackstone\u2019s Commentaries \u00b7 1779\u20131780) \u2014 The Cipher Museum",
       "words": 849,
       "sha256": "afc2263a6a09a18e6f70ec1cccbaadcca04adbdfc7f9f333a695b99063aaf8e8",
       "status": "bounded review and local release validation complete",
@@ -529,14 +529,14 @@
     },
     {
       "path": "ciphers/atbash.html",
-      "title": "Atbash — The Cipher Museum",
+      "title": "Atbash \u2014 The Cipher Museum",
       "words": 458,
       "sha256": "2122549c626a3e6b88dae837843a30144d230419abb522d7330e5f2c664f8b7a",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Kahn supplied PDF113–114 supports Hebrew reversal and Jeremiah identifications; Latin example independently checked. Final metadata distinguishes the Hebrew alphabet from the modern A–Z model; related-card/direct-transmission overclaims removed.",
+      "notes": "Kahn supplied PDF113\u2013114 supports Hebrew reversal and Jeremiah identifications; Latin example independently checked. Final metadata distinguishes the Hebrew alphabet from the modern A\u2013Z model; related-card/direct-transmission overclaims removed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -557,7 +557,7 @@
     },
     {
       "path": "ciphers/autokey.html",
-      "title": "Autokey — The Cipher Museum",
+      "title": "Autokey \u2014 The Cipher Museum",
       "words": 522,
       "sha256": "c17de47b470c5e2f183e601138d6b6f9135bc6c3fcf8661338fb748ec12c99fa",
       "status": "bounded review and local release validation complete",
@@ -585,7 +585,7 @@
     },
     {
       "path": "ciphers/babington.html",
-      "title": "The Babington Plot Cipher (1586) — The Cipher Museum",
+      "title": "The Babington Plot Cipher (1586) \u2014 The Cipher Museum",
       "words": 1167,
       "sha256": "3a6febc8f1db2ba7e40f4ba987331ed9320732b81336d513c34e23723de270f3",
       "status": "bounded review and local release validation complete",
@@ -611,7 +611,7 @@
     },
     {
       "path": "ciphers/bach-motif.html",
-      "title": "Bach's B-A-C-H Motif — The Cipher Museum",
+      "title": "Bach's B-A-C-H Motif \u2014 The Cipher Museum",
       "words": 524,
       "sha256": "77ab21b6ee6a21eef3055abe20fdfbf17f0e8d1e83d91db08076f1e3cc85c768",
       "status": "bounded review and local release validation complete",
@@ -637,14 +637,14 @@
     },
     {
       "path": "ciphers/bacon.html",
-      "title": "Bacon's Cipher — The Cipher Museum",
+      "title": "Bacon's Cipher \u2014 The Cipher Museum",
       "words": 554,
       "sha256": "c7b3454743bf082112808f625f39b86ea01b8b0e2154c74a870f5be241f8b854",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Kahn supplied PDF1085–1088 supports1605allusion,1623description and24-letter alphabet. Museum25-letter variant remains named; Z=BBAAA is correct for index24. Final reread removed direct computing-lineage overstatement. Typeface readability belongs to pending rendered validation.",
+      "notes": "Kahn supplied PDF1085\u20131088 supports1605allusion,1623description and24-letter alphabet. Museum25-letter variant remains named; Z=BBAAA is correct for index24. Final reread removed direct computing-lineage overstatement. Typeface readability belongs to pending rendered validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -665,7 +665,7 @@
     },
     {
       "path": "ciphers/bazeries.html",
-      "title": "Bazeries Cipher — The Cipher Museum",
+      "title": "Bazeries Cipher \u2014 The Cipher Museum",
       "words": 465,
       "sha256": "2739c8fb92489e4aee3dcc70b661255521471e9ecaa66819d0432d185ea85580",
       "status": "bounded review and local release validation complete",
@@ -694,7 +694,7 @@
     },
     {
       "path": "ciphers/beale.html",
-      "title": "Beale Ciphers — The Cipher Museum",
+      "title": "Beale Ciphers \u2014 The Cipher Museum",
       "words": 928,
       "sha256": "fff431cc4d74447386746a2752835cb67aa8405bd89c638ddf7967d2026ff677",
       "status": "bounded review and local release validation complete",
@@ -722,7 +722,7 @@
     },
     {
       "path": "ciphers/beaufort.html",
-      "title": "Beaufort Cipher — The Cipher Museum",
+      "title": "Beaufort Cipher \u2014 The Cipher Museum",
       "words": 513,
       "sha256": "7b871f40a8d27f41715f09e2405327f642e91e8c0f19b540a70606af04dfb20a",
       "status": "bounded review and local release validation complete",
@@ -730,7 +730,7 @@
         "HAC-1997",
         "KAHN-1996"
       ],
-      "notes": "HAC p.241 Example7.54 confirms K−P and involution; SECRET/HELLOW vector independently correct. Kahn PDF261–262 supports1857posthumous card, not naval adoption. Corrected algorithm-involution and guaranteed period/recovery language; removed blanket nonce/no-repeated-values assertion. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "HAC p.241 Example7.54 confirms K\u2212P and involution; SECRET/HELLOW vector independently correct. Kahn PDF261\u2013262 supports1857posthumous card, not naval adoption. Corrected algorithm-involution and guaranteed period/recovery language; removed blanket nonce/no-repeated-values assertion. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -751,7 +751,7 @@
     },
     {
       "path": "ciphers/beurling.html",
-      "title": "Arne Beurling — The Cipher Museum",
+      "title": "Arne Beurling \u2014 The Cipher Museum",
       "words": 424,
       "sha256": "62402d3deb645b3b913b9f4419e8b1fb33f3c09e06dca5b3619e19ee41b9bfc1",
       "status": "bounded review and local release validation complete",
@@ -780,7 +780,7 @@
     },
     {
       "path": "ciphers/bible-code.html",
-      "title": "Bible Code (ELS) — The Cipher Museum",
+      "title": "Bible Code (ELS) \u2014 The Cipher Museum",
       "words": 1471,
       "sha256": "e9b502a1e503de034a3e5e0fc9fd51ab15880949e16a3402c0948445599e5100",
       "status": "bounded review and local release validation complete",
@@ -809,7 +809,7 @@
     },
     {
       "path": "ciphers/bifid.html",
-      "title": "Bifid Cipher — The Cipher Museum",
+      "title": "Bifid Cipher \u2014 The Cipher Museum",
       "words": 506,
       "sha256": "5cf12b9e3f0470f5ab2aee647d906e73f93ddbff6c423cb8fa086097f84767ce",
       "status": "bounded review and local release validation complete",
@@ -817,7 +817,7 @@
         "GAINES-1956",
         "KAHN-1996"
       ],
-      "notes": "Gaines ChapterXXII PDF322–324 and Kahn PDF312 support coordinate procedure and period dependence. HELLO/HKNFO arithmetic matches shown zero-index square. Date1901not established; original-era key naming/diffusion caution. AES S-box not key-dependent. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Gaines ChapterXXII PDF322\u2013324 and Kahn PDF312 support coordinate procedure and period dependence. HELLO/HKNFO arithmetic matches shown zero-index square. Date1901not established; original-era key naming/diffusion caution. AES S-box not key-dependent. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -838,7 +838,7 @@
     },
     {
       "path": "ciphers/bill-tutte.html",
-      "title": "Bill Tutte — The Cipher Museum",
+      "title": "Bill Tutte \u2014 The Cipher Museum",
       "words": 1168,
       "sha256": "7c3ee6feae98526a5a3980416d9f4888a1822887d2278c86fafaeaccb3fafd79",
       "status": "ebook follow-up implementation and local validation complete",
@@ -880,7 +880,7 @@
     },
     {
       "path": "ciphers/bletchley-park.html",
-      "title": "Bletchley Park — The Cipher Museum",
+      "title": "Bletchley Park \u2014 The Cipher Museum",
       "words": 523,
       "sha256": "8de0af5388d3ca4e25d132f66376b4762af025edf67140eba52004f02687a7cd",
       "status": "bounded review and local release validation complete",
@@ -913,7 +913,7 @@
     },
     {
       "path": "ciphers/bombe.html",
-      "title": "Turing–Welchman Bombe — The Cipher Museum",
+      "title": "Turing\u2013Welchman Bombe \u2014 The Cipher Museum",
       "words": 303,
       "sha256": "f1240b6ca0abdcac5edc3f7d75a57cf376d686691eb53634da7bf2da8cfb0306",
       "status": "bounded review and local release validation complete",
@@ -941,7 +941,7 @@
     },
     {
       "path": "ciphers/book-cipher.html",
-      "title": "Book Cipher — The Cipher Museum",
+      "title": "Book Cipher \u2014 The Cipher Museum",
       "words": 617,
       "sha256": "a448bb0e8404372c59d77a8cef000036715927b1f57c8d442525796a392e643d",
       "status": "bounded review and local release validation complete",
@@ -967,14 +967,14 @@
     },
     {
       "path": "ciphers/cabinet-noir.html",
-      "title": "Cabinet Noir — Black Chambers of Europe — The Cipher Museum",
+      "title": "Cabinet Noir \u2014 Black Chambers of Europe \u2014 The Cipher Museum",
       "words": 673,
       "sha256": "a089b7eb8e611f7e109372c2f11d75e5ea917dfa1144febf1bb2f96fadbbce70",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Removedsingleinstitutionallineage,firstEuropeanprofessionalsandallmailclaims; Réalmont1628 and1844institutions distinguished. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Removedsingleinstitutionallineage,firstEuropeanprofessionalsandallmailclaims; R\u00e9almont1628 and1844institutions distinguished. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -995,7 +995,7 @@
     },
     {
       "path": "ciphers/caesar.html",
-      "title": "Caesar Cipher — The Cipher Museum",
+      "title": "Caesar Cipher \u2014 The Cipher Museum",
       "words": 929,
       "sha256": "813730fa2937975e13f1233d28826c4a9d022206ea872c80fe1fde90fc045718",
       "status": "bounded review and local release validation complete",
@@ -1023,7 +1023,7 @@
     },
     {
       "path": "ciphers/cardano-autokey.html",
-      "title": "Cardano and Autokey — Historical Idea, Modern Model — The Cipher Museum",
+      "title": "Cardano and Autokey \u2014 Historical Idea, Modern Model \u2014 The Cipher Museum",
       "words": 573,
       "sha256": "1615a2b65231bc057bbe08be0a3ca8732dad2b73775e5151ff39d10de19e6089",
       "status": "bounded review and local release validation complete",
@@ -1051,7 +1051,7 @@
     },
     {
       "path": "ciphers/cardano-grille.html",
-      "title": "Cardano Grille (1550 · steganography by template) — The Cipher Museum",
+      "title": "Cardano Grille (1550 \u00b7 steganography by template) \u2014 The Cipher Museum",
       "words": 730,
       "sha256": "9ffaade174bdb8fc07b6af88c15ef34b65f82f77ea5e94a17a55f73a627cecec",
       "status": "bounded review and local release validation complete",
@@ -1079,7 +1079,7 @@
     },
     {
       "path": "ciphers/chaocipher.html",
-      "title": "Chaocipher — The Cipher Museum",
+      "title": "Chaocipher \u2014 The Cipher Museum",
       "words": 646,
       "sha256": "620789389603b41b0f530fdc3194e06757db931fc4a6a25bb1452759abc14cc2",
       "status": "bounded review and local release validation complete",
@@ -1107,7 +1107,7 @@
     },
     {
       "path": "ciphers/che-guevara.html",
-      "title": "Che Guevara’s Checkerboard and Pad — The Cipher Museum",
+      "title": "Che Guevara\u2019s Checkerboard and Pad \u2014 The Cipher Museum",
       "words": 417,
       "sha256": "bfc589bd1be98eeedc093dde34e36dffb4bff57ba6860b3e1689bc734e736387",
       "status": "bounded review and local release validation complete",
@@ -1133,7 +1133,7 @@
     },
     {
       "path": "ciphers/chinese-telegraph.html",
-      "title": "Chinese Telegraph Code (Standard Telegraph Codebook · 1881) — The Cipher Museum",
+      "title": "Chinese Telegraph Code (Standard Telegraph Codebook \u00b7 1881) \u2014 The Cipher Museum",
       "words": 657,
       "sha256": "0dd0812cd701507a075cc1d535b1202e64f569e1c8e6ddbc8b29a319e125da03",
       "status": "bounded review and local release validation complete",
@@ -1164,7 +1164,7 @@
     },
     {
       "path": "ciphers/cicada-3301.html",
-      "title": "Cicada 3301 — The Cipher Museum",
+      "title": "Cicada 3301 \u2014 The Cipher Museum",
       "words": 638,
       "sha256": "9fe1831d804d5289c573b3a075b0cc108d567c021bb5bad9d4f9d3ee2b5882be",
       "status": "bounded review and local release validation complete",
@@ -1192,7 +1192,7 @@
     },
     {
       "path": "ciphers/colossus.html",
-      "title": "Colossus — The Cipher Museum",
+      "title": "Colossus \u2014 The Cipher Museum",
       "words": 891,
       "sha256": "12f97888209a625a92e34af42b6b0ce0e92aebe1fea1161979edbc2acece39a5",
       "status": "ebook follow-up implementation and local validation complete",
@@ -1233,7 +1233,7 @@
     },
     {
       "path": "ciphers/columnar.html",
-      "title": "Columnar Transposition — The Cipher Museum",
+      "title": "Columnar Transposition \u2014 The Cipher Museum",
       "words": 1174,
       "sha256": "07d9490edf3d4cff5448979ae77c8841d8c345a68a9db4233925aab8d53c6e21",
       "status": "ebook follow-up implementation and local validation complete",
@@ -1274,7 +1274,7 @@
     },
     {
       "path": "ciphers/commercial-codebooks.html",
-      "title": "Commercial Telegraph Codebooks (ABC, Bentley’s, Lieber’s · 1870s–1930s) — The Cipher Museum",
+      "title": "Commercial Telegraph Codebooks (ABC, Bentley\u2019s, Lieber\u2019s \u00b7 1870s\u20131930s) \u2014 The Cipher Museum",
       "words": 715,
       "sha256": "2d2e9661ccb1b5029c57fde52435eadb9e2f28c29440af5a838d6d44965faf20",
       "status": "bounded review and local release validation complete",
@@ -1303,7 +1303,7 @@
     },
     {
       "path": "ciphers/confederate-vigenere.html",
-      "title": "Confederate Vigenère — The Cipher Museum",
+      "title": "Confederate Vigen\u00e8re \u2014 The Cipher Museum",
       "words": 532,
       "sha256": "14d562dd511c5ffbcebbb9f1232a1db8c7a7a74d4ceac6e0f635bb6496b7793b",
       "status": "bounded review and local release validation complete",
@@ -1331,7 +1331,7 @@
     },
     {
       "path": "ciphers/copiale.html",
-      "title": "Copiale Cipher — The Cipher Museum",
+      "title": "Copiale Cipher \u2014 The Cipher Museum",
       "words": 463,
       "sha256": "16f6df519522f4c657c5cdc662d946073154155d708beca78b4f3276c5fc78a7",
       "status": "bounded review and local release validation complete",
@@ -1360,7 +1360,7 @@
     },
     {
       "path": "ciphers/culper-ring.html",
-      "title": "Culper Ring / Tallmadge Code (Washington’s spy ring codebook · 1779) — The Cipher Museum",
+      "title": "Culper Ring / Tallmadge Code (Washington\u2019s spy ring codebook \u00b7 1779) \u2014 The Cipher Museum",
       "words": 1015,
       "sha256": "a256b9c8fbcebe0d7881ba12725bd8da50084a8de13cbafd2ff06d53506a278a",
       "status": "bounded review and local release validation complete",
@@ -1388,7 +1388,7 @@
     },
     {
       "path": "ciphers/da-vinci-code.html",
-      "title": "The Da Vinci Code — The Cipher Museum",
+      "title": "The Da Vinci Code \u2014 The Cipher Museum",
       "words": 680,
       "sha256": "8f5f8215bb2e05852b7e99200dc4ccf8bfb80cf4351b14b98a4cbc2d92a95341",
       "status": "bounded review and local release validation complete",
@@ -1414,14 +1414,14 @@
     },
     {
       "path": "ciphers/dagapeyeff.html",
-      "title": "D'Agapeyeff Cipher — The Cipher Museum",
+      "title": "D'Agapeyeff Cipher \u2014 The Cipher Museum",
       "words": 492,
       "sha256": "db471bab3b55ad41c2b7f49012dfbe2bc2d732da5a55fbdad6b5b79cf92ee1a4",
       "status": "bounded review and local release validation complete",
       "sources": [
         "DAGAPEYEFF-HYDE-RUGG"
       ],
-      "notes": "Verified 130-digit excerpt visually; removed unsupported forgotten-key and unicity-distance certainty. Adjacent overlapping pairs use N−1; tiny input independently tested. Photograph edition is not established. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Verified 130-digit excerpt visually; removed unsupported forgotten-key and unicity-distance certainty. Adjacent overlapping pairs use N\u22121; tiny input independently tested. Photograph edition is not established. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
       "browser_smoke": "Fourth-checkpoint local Chromium follow-up passed; external resources blocked. This does not certify historical claims.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1442,7 +1442,7 @@
     },
     {
       "path": "ciphers/dancing-men.html",
-      "title": "Conan Doyle's Dancing Men — The Cipher Museum",
+      "title": "Conan Doyle's Dancing Men \u2014 The Cipher Museum",
       "words": 532,
       "sha256": "c93a03dce365fdc5156b03840e042e3332e55f6236e34a5c0ee628c8d724588b",
       "status": "bounded review and local release validation complete",
@@ -1468,7 +1468,7 @@
     },
     {
       "path": "ciphers/des.html",
-      "title": "DES (Data Encryption Standard) — The Cipher Museum",
+      "title": "DES (Data Encryption Standard) \u2014 The Cipher Museum",
       "words": 880,
       "sha256": "bdd4bb74cf26f94c4a5ad6664d1e3822bd118be050cbd0147cdf4f47126f04e1",
       "status": "ebook follow-up implementation and local validation complete",
@@ -1509,7 +1509,7 @@
     },
     {
       "path": "ciphers/diana-cryptosystem.html",
-      "title": "Diana Cryptosystem — The Cipher Museum",
+      "title": "Diana Cryptosystem \u2014 The Cipher Museum",
       "words": 711,
       "sha256": "c975d5fafa4b1b183a089962316c8bd555221c57ee517ee8c5285345dd58783a",
       "status": "bounded review and local release validation complete",
@@ -1517,7 +1517,7 @@
         "RIJMENANTS-DIANA",
         "SHANNON-1949"
       ],
-      "notes": "Public conversion table distinguished from secret pad;126unordered triples and all676pairs checked for reciprocity. Final gap review by research_cases reread Rijmenants technical explanation and removed unsupported ~1960–1995/Vietnam-through-Gulf-War dates, theater deployments, Boak quotations and unverified pp.22–25 locator. Visible historical-evidence boundary added.",
+      "notes": "Public conversion table distinguished from secret pad;126unordered triples and all676pairs checked for reciprocity. Final gap review by research_cases reread Rijmenants technical explanation and removed unsupported ~1960\u20131995/Vietnam-through-Gulf-War dates, theater deployments, Boak quotations and unverified pp.22\u201325 locator. Visible historical-evidence boundary added.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1545,14 +1545,14 @@
     },
     {
       "path": "ciphers/dictionary-code.html",
-      "title": "Confederate Dictionary Code — The Cipher Museum",
+      "title": "Confederate Dictionary Code \u2014 The Cipher Museum",
       "words": 534,
       "sha256": "fec105c338f97738f8d7b88b26669dbcf4ef64c6addd3bd85782dfaf4990236a",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Kahn’s Davis146.L.20 example retained. Invented diagram no longer attributed to a1857 Primary-School dictionary; unsupported edition-mismatch anecdote removed. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Kahn\u2019s Davis146.L.20 example retained. Invented diagram no longer attributed to a1857 Primary-School dictionary; unsupported edition-mismatch anecdote removed. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1573,7 +1573,7 @@
     },
     {
       "path": "ciphers/diffie-hellman.html",
-      "title": "Diffie-Hellman Key Exchange — The Cipher Museum",
+      "title": "Diffie-Hellman Key Exchange \u2014 The Cipher Museum",
       "words": 1429,
       "sha256": "c4da8cef524826c72f27c3f3545f4be48c56183a694fef3e5a0875e9f91a4894",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -1616,7 +1616,7 @@
     },
     {
       "path": "ciphers/dilly-knox.html",
-      "title": "Dilly Knox — The Cipher Museum",
+      "title": "Dilly Knox \u2014 The Cipher Museum",
       "words": 518,
       "sha256": "ca384a731b84f9ec8df0fcbafcab8316e46b470925aa672319a8fb0dfbbec4a9",
       "status": "bounded review and local release validation complete",
@@ -1644,7 +1644,7 @@
     },
     {
       "path": "ciphers/dorabella.html",
-      "title": "Dorabella Cipher — The Cipher Museum",
+      "title": "Dorabella Cipher \u2014 The Cipher Museum",
       "words": 689,
       "sha256": "3b9998cdea2c89bb3dfe86ebfacd13498d82d2325363b1bd9259fafd8bfd5013",
       "status": "bounded review and local release validation complete",
@@ -1673,7 +1673,7 @@
     },
     {
       "path": "ciphers/double-playfair.html",
-      "title": "Doppelkastenschlüssel — German Double Playfair — The Cipher Museum",
+      "title": "Doppelkastenschl\u00fcssel \u2014 German Double Playfair \u2014 The Cipher Museum",
       "words": 985,
       "sha256": "8a94f2afcb6a469fceb59aef7cf3dcebf5dddd8f5cd8f5b7b3cf3b2af9ae0d69",
       "status": "bounded review and local release validation complete",
@@ -1701,7 +1701,7 @@
     },
     {
       "path": "ciphers/double-transposition.html",
-      "title": "Double Transposition — The Cipher Museum",
+      "title": "Double Transposition \u2014 The Cipher Museum",
       "words": 520,
       "sha256": "1dbbb842861213fe4bea74a01c11794d5c8b4eef82563a774053dab6d833ec79",
       "status": "bounded review and local release validation complete",
@@ -1727,7 +1727,7 @@
     },
     {
       "path": "ciphers/dunin.html",
-      "title": "Elonka Dunin — The Cipher Museum",
+      "title": "Elonka Dunin \u2014 The Cipher Museum",
       "words": 735,
       "sha256": "f1a788e71fed04babcc276ea1559274c60fa19753c7de792490c5879b629bfd4",
       "status": "bounded review and local release validation complete",
@@ -1758,7 +1758,7 @@
     },
     {
       "path": "ciphers/ecdsa.html",
-      "title": "ECDSA — The Cipher Museum",
+      "title": "ECDSA \u2014 The Cipher Museum",
       "words": 1178,
       "sha256": "28261ce68ffccd21d95fb4096ee75ba6d34b84ffb2370e0270047a162d102023",
       "status": "bounded review and local release validation complete",
@@ -1792,7 +1792,7 @@
     },
     {
       "path": "ciphers/egyptian-substitution.html",
-      "title": "Egyptian Substitution Hieroglyphs — The Cipher Museum",
+      "title": "Egyptian Substitution Hieroglyphs \u2014 The Cipher Museum",
       "words": 410,
       "sha256": "a7ca9023fb6f43acd9a3dc565526cd69477fe453ae5f62340187b82d5d1f9da2",
       "status": "bounded review and local release validation complete",
@@ -1820,7 +1820,7 @@
     },
     {
       "path": "ciphers/elizebeth-friedman.html",
-      "title": "Elizebeth Smith Friedman — The Cipher Museum",
+      "title": "Elizebeth Smith Friedman \u2014 The Cipher Museum",
       "words": 570,
       "sha256": "df364d273aa21d728aec8f769e3df22450227d12a9b80c33cb848af2bbf00ae6",
       "status": "bounded review and local release validation complete",
@@ -1848,7 +1848,7 @@
     },
     {
       "path": "ciphers/enigma.html",
-      "title": "Enigma Machine — The Cipher Museum",
+      "title": "Enigma Machine \u2014 The Cipher Museum",
       "words": 2308,
       "sha256": "325e685d24384e163220d5bd1b6bc1da77289d650f0128efe2f2fef19a6414e2",
       "status": "bounded review and local release validation complete",
@@ -1882,7 +1882,7 @@
     },
     {
       "path": "ciphers/fialka.html",
-      "title": "Fialka M-125 (Soviet 10-rotor machine · 1956) — The Cipher Museum",
+      "title": "Fialka M-125 (Soviet 10-rotor machine \u00b7 1956) \u2014 The Cipher Museum",
       "words": 585,
       "sha256": "c625c4c3676c4d2f29d02f6f4de9c8577eab428a785953ef8f54cdea2d3b1cc6",
       "status": "bounded review and local release validation complete",
@@ -1911,7 +1911,7 @@
     },
     {
       "path": "ciphers/field-hollers.html",
-      "title": "Field Hollers and Coding Songs — The Cipher Museum",
+      "title": "Field Hollers and Coding Songs \u2014 The Cipher Museum",
       "words": 486,
       "sha256": "1df2d83ef0898ec6a80f355e94cdb1ce7ed4ad247b2249219d80e3a76f5c5409",
       "status": "bounded review and local release validation complete",
@@ -1940,7 +1940,7 @@
     },
     {
       "path": "ciphers/four-square.html",
-      "title": "Four-Square Cipher — The Cipher Museum",
+      "title": "Four-Square Cipher \u2014 The Cipher Museum",
       "words": 528,
       "sha256": "0fda25831b56dc44b56e5ee0ed51d5c15d7ae0942fa2ac65bd300c941b3dbe3b",
       "status": "bounded review and local release validation complete",
@@ -1968,7 +1968,7 @@
     },
     {
       "path": "ciphers/fractionated-morse.html",
-      "title": "Fractionated Morse Cipher — The Cipher Museum",
+      "title": "Fractionated Morse Cipher \u2014 The Cipher Museum",
       "words": 452,
       "sha256": "028371c5f2b1b1f1ee745c2a38cbd00031bead0bd1456724d08007a91f2df5ae",
       "status": "bounded review and local release validation complete",
@@ -1996,7 +1996,7 @@
     },
     {
       "path": "ciphers/freemason-pigpen.html",
-      "title": "Freemason Pigpen Tradition — The Cipher Museum",
+      "title": "Freemason Pigpen Tradition \u2014 The Cipher Museum",
       "words": 562,
       "sha256": "0c051fc26bd6ce696653e92724d85d7edfa9261b0e957fada33bba5bb03a5246",
       "status": "bounded review and local release validation complete",
@@ -2024,7 +2024,7 @@
     },
     {
       "path": "ciphers/gchq-trio.html",
-      "title": "The GCHQ Trio — Ellis, Cocks, and Williamson — The Cipher Museum",
+      "title": "The GCHQ Trio \u2014 Ellis, Cocks, and Williamson \u2014 The Cipher Museum",
       "words": 521,
       "sha256": "f2fc3b8f50e47f8ea8057a987809fa9d6eaeedadaf305dfa3e6b2d8aa857165b",
       "status": "bounded review and local release validation complete",
@@ -2032,7 +2032,7 @@
         "COCKS-RSAC",
         "IEEE-GCHQ-MILESTONE"
       ],
-      "notes": "Corrected CB versusCMG,1970–1974range, proposal versusimplementation and unsupported universalacknowledgement. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Corrected CB versusCMG,1970\u20131974range, proposal versusimplementation and unsupported universalacknowledgement. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2053,7 +2053,7 @@
     },
     {
       "path": "ciphers/geheimschreiber.html",
-      "title": "Geheimschreiber T52 (Sturgeon) (Siemens & Halske teleprinter cipher) — The Cipher Museum",
+      "title": "Geheimschreiber T52 (Sturgeon) (Siemens & Halske teleprinter cipher) \u2014 The Cipher Museum",
       "words": 685,
       "sha256": "eabfd0dc97bc1b4ba73c2d79d515369ddaa64c41238d9b1abcb74d0c8dda7a4e",
       "status": "bounded review and local release validation complete",
@@ -2085,7 +2085,7 @@
     },
     {
       "path": "ciphers/gold-bug.html",
-      "title": "Poe's Gold-Bug Cipher — The Cipher Museum",
+      "title": "Poe's Gold-Bug Cipher \u2014 The Cipher Museum",
       "words": 627,
       "sha256": "202b0dfb71781b922c71099c40f57955cf50af00365e97af7dd387c3181a69c6",
       "status": "bounded review and local release validation complete",
@@ -2115,7 +2115,7 @@
     },
     {
       "path": "ciphers/gravity-falls.html",
-      "title": "Gravity Falls Cipher System — The Cipher Museum",
+      "title": "Gravity Falls Cipher System \u2014 The Cipher Museum",
       "words": 581,
       "sha256": "389c3c537a5d5205a488b5c1ac306c09d8bcf1b484d08703bba075bc6445edf2",
       "status": "bounded review and local release validation complete",
@@ -2146,14 +2146,14 @@
     },
     {
       "path": "ciphers/great-cipher.html",
-      "title": "The Great Cipher (Grand Chiffre des Rossignols) — The Cipher Museum",
+      "title": "The Great Cipher (Grand Chiffre des Rossignols) \u2014 The Cipher Museum",
       "words": 1164,
       "sha256": "00bd1d220c4e61fe2ac464a6281d431387836f4f0b7f591099e6a78ef9fe2c90",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Final reread directly checked Kahn supplied lines6825–6860 and35255–35385: Bonaventure and son Antoine-Bonaventure,587 equivalents, historical erasure sign and disputed Bulonde/mask interpretation. Invented model parsing distinguished from historical procedure; unsupported quoted order replaced by bounded paraphrase.",
+      "notes": "Final reread directly checked Kahn supplied lines6825\u20136860 and35255\u201335385: Bonaventure and son Antoine-Bonaventure,587 equivalents, historical erasure sign and disputed Bulonde/mask interpretation. Invented model parsing distinguished from historical procedure; unsupported quoted order replaced by bounded paraphrase.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2174,7 +2174,7 @@
     },
     {
       "path": "ciphers/gronsfeld.html",
-      "title": "Gronsfeld Cipher — The Cipher Museum",
+      "title": "Gronsfeld Cipher \u2014 The Cipher Museum",
       "words": 476,
       "sha256": "2d8da1fd65bc4a5b11367bdfd444b7613d95b7037338d81b6397e23d220072ab",
       "status": "bounded review and local release validation complete",
@@ -2202,7 +2202,7 @@
     },
     {
       "path": "ciphers/hagelin-c36.html",
-      "title": "Hagelin C-36 / C-52 Lineage — The Cipher Museum",
+      "title": "Hagelin C-36 / C-52 Lineage \u2014 The Cipher Museum",
       "words": 792,
       "sha256": "a436a80b1ec1741c3bcdef92c123a8f51587057a85ed5b270540afe991f187a9",
       "status": "bounded review and local release validation complete",
@@ -2235,7 +2235,7 @@
     },
     {
       "path": "ciphers/hill.html",
-      "title": "Hill Cipher — The Cipher Museum",
+      "title": "Hill Cipher \u2014 The Cipher Museum",
       "words": 715,
       "sha256": "bb1ef5876db178fe6981aeffef139e72671865028de700aa53bd19e567368a50",
       "status": "bounded review and local release validation complete",
@@ -2265,7 +2265,7 @@
     },
     {
       "path": "ciphers/histiaeus-tattoo.html",
-      "title": "Histiaeus's Tattooed Messenger — The Cipher Museum",
+      "title": "Histiaeus's Tattooed Messenger \u2014 The Cipher Museum",
       "words": 530,
       "sha256": "3d996366c78d63429a630575ce71e7c2ab0a59c380327ef2eb66424c98cf78bf",
       "status": "bounded review and local release validation complete",
@@ -2293,7 +2293,7 @@
     },
     {
       "path": "ciphers/homophonic.html",
-      "title": "Homophonic Substitution — The Cipher Museum",
+      "title": "Homophonic Substitution \u2014 The Cipher Museum",
       "words": 915,
       "sha256": "3a603b26511379d5448c5703ec06310fe9609b394b162756d7ce62a85d3b079d",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -2323,7 +2323,7 @@
     },
     {
       "path": "ciphers/ira-ciphers.html",
-      "title": "IRA Cipher Traffic (Twomey Papers) — The Cipher Museum",
+      "title": "IRA Cipher Traffic (Twomey Papers) \u2014 The Cipher Museum",
       "words": 758,
       "sha256": "b45e1a5e50fa475ecbf30ad9612f912b7d35cee73264fac357301370a333a178",
       "status": "bounded review and local release validation complete",
@@ -2332,7 +2332,7 @@
         "BEAN-IRA-2019",
         "BEAN-PROJECTS"
       ],
-      "notes": "Corrected obsolete unsolved/59-letter claim: 51 surviving letters, solved by Bean in 2019. Independently reproduced 56-letter reconstruction, equivalent 12-column order and five omissions. Original keyword is unknown. Reread preceding Vigenère case: 300 documents/1,300 cryptograms supported; removed unverified dispatch quotation and inaccurate all-columnar/date-range claims. The collection includes a 1923 Vigenère example. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate.",
+      "notes": "Corrected obsolete unsolved/59-letter claim: 51 surviving letters, solved by Bean in 2019. Independently reproduced 56-letter reconstruction, equivalent 12-column order and five omissions. Original keyword is unknown. Reread preceding Vigen\u00e8re case: 300 documents/1,300 cryptograms supported; removed unverified dispatch quotation and inaccurate all-columnar/date-range claims. The collection includes a 1923 Vigen\u00e8re example. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate.",
       "browser_smoke": "Fourth-checkpoint local Chromium follow-up passed; external resources blocked. This does not certify historical claims.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -2353,7 +2353,7 @@
     },
     {
       "path": "ciphers/jefferson-disk.html",
-      "title": "Jefferson Disk — The Cipher Museum",
+      "title": "Jefferson Disk \u2014 The Cipher Museum",
       "words": 610,
       "sha256": "847d2a20547b9e9a897cbe253c010cb603c661ee00ff2b8d5e87ebc94bd1292b",
       "status": "bounded review and local release validation complete",
@@ -2409,7 +2409,7 @@
     },
     {
       "path": "ciphers/joan-clarke.html",
-      "title": "Joan Clarke — The Cipher Museum",
+      "title": "Joan Clarke \u2014 The Cipher Museum",
       "words": 589,
       "sha256": "9410af8b10d43d26312057749a314a87d99c3da12ebe6ff38262db44f9aa4017",
       "status": "bounded review and local release validation complete",
@@ -2439,7 +2439,7 @@
     },
     {
       "path": "ciphers/kahn.html",
-      "title": "David Kahn — The Cipher Museum",
+      "title": "David Kahn \u2014 The Cipher Museum",
       "words": 643,
       "sha256": "1841ba5a4c8d29b6a52f7881e5feeff2ac72c9f9b4c96070017afdb5c0ece6a9",
       "status": "bounded review and local release validation complete",
@@ -2468,7 +2468,7 @@
     },
     {
       "path": "ciphers/kama-sutra.html",
-      "title": "Kama Sutra Cipher (Mlecchita Vikalpa) — The Cipher Museum",
+      "title": "Kama Sutra Cipher (Mlecchita Vikalpa) \u2014 The Cipher Museum",
       "words": 402,
       "sha256": "916a3600dd54eaa086d4e4542bdd1a26ba179e7f421be0607b3db85526bf8253",
       "status": "bounded review and local release validation complete",
@@ -2496,7 +2496,7 @@
     },
     {
       "path": "ciphers/kerckhoffs.html",
-      "title": "Kerckhoffs's Principle — The Cipher Museum",
+      "title": "Kerckhoffs's Principle \u2014 The Cipher Museum",
       "words": 642,
       "sha256": "963f036f4fd9bbbce8530c7ea9275cc49f751b131a63e7d03a2ddf1b3337260b",
       "status": "bounded review and local release validation complete",
@@ -2525,7 +2525,7 @@
     },
     {
       "path": "ciphers/kl-7.html",
-      "title": "KL-7 ADONIS (NATO eight-rotor machine · 1952) — The Cipher Museum",
+      "title": "KL-7 ADONIS (NATO eight-rotor machine \u00b7 1952) \u2014 The Cipher Museum",
       "words": 678,
       "sha256": "4bac32e5cd72995daa8438b5003556a54db425e4f5a3c8c956c7ef999bfccab4",
       "status": "bounded review and local release validation complete",
@@ -2555,7 +2555,7 @@
     },
     {
       "path": "ciphers/kryha.html",
-      "title": "Kryha (Pocket cipher machine · 1924) — The Cipher Museum",
+      "title": "Kryha (Pocket cipher machine \u00b7 1924) \u2014 The Cipher Museum",
       "words": 573,
       "sha256": "1e22494c7af71e55f7140487b058a6204c62ae8edcbba47abc824ab864f23b7c",
       "status": "bounded review and local release validation complete",
@@ -2583,12 +2583,12 @@
     },
     {
       "path": "ciphers/krypto-arg.html",
-      "title": "ARG Ciphers — The Cipher Museum",
+      "title": "ARG Ciphers \u2014 The Cipher Museum",
       "words": 496,
       "sha256": "ed451e4ffd3014ea76c5f94ee7d0ea91ef5882cb19001770ef89c346f8d9651b",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Removed unsupported specific game/cipher assignments and recruitment lineage. Caesar and Vigenère worked values independently calculated; repaired Bacon mixed-case carrier. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate.",
+      "notes": "Removed unsupported specific game/cipher assignments and recruitment lineage. Caesar and Vigen\u00e8re worked values independently calculated; repaired Bacon mixed-case carrier. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -2609,7 +2609,7 @@
     },
     {
       "path": "ciphers/kryptos.html",
-      "title": "Kryptos — The Cipher Museum",
+      "title": "Kryptos \u2014 The Cipher Museum",
       "words": 2644,
       "sha256": "3779c75e3c9a3374b9b806fb34c1fdf9abff6679147b86ab72305eda9586e790",
       "status": "bounded review and local release validation complete",
@@ -2643,12 +2643,12 @@
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
       "remaining_evidence_limits": [
-        "Bauer–Link–Molle full paper inaccessible; conjecture attribution only. Sanborn World Clock clue read through secondary quotation; original letter403. Paradigm verifier is an operator account, not an independent audit."
+        "Bauer\u2013Link\u2013Molle full paper inaccessible; conjecture attribution only. Sanborn World Clock clue read through secondary quotation; original letter403. Paradigm verifier is an operator account, not an independent audit."
       ]
     },
     {
       "path": "ciphers/lasry.html",
-      "title": "George Lasry — The Cipher Museum",
+      "title": "George Lasry \u2014 The Cipher Museum",
       "words": 480,
       "sha256": "49653c8f876595856e03f4f6b1c468fc65dfd53f078d72a040106dc79f026d8c",
       "status": "bounded review and local release validation complete",
@@ -2676,7 +2676,7 @@
     },
     {
       "path": "ciphers/latin-american-codebooks.html",
-      "title": "Latin American Telegraphic Codebooks — The Cipher Museum",
+      "title": "Latin American Telegraphic Codebooks \u2014 The Cipher Museum",
       "words": 397,
       "sha256": "9e7d2f164b8137886843eb462fa7b5134b752ace95daa068a3051520b369cbde",
       "status": "bounded review and local release validation complete",
@@ -2704,7 +2704,7 @@
     },
     {
       "path": "ciphers/leo-marks.html",
-      "title": "Leo Marks — The Cipher Museum",
+      "title": "Leo Marks \u2014 The Cipher Museum",
       "words": 494,
       "sha256": "b8805bba5a6cadd6d2d1c7f4d4b9694d98cc25a9485f5ab706ac61cb101b61f3",
       "status": "bounded review and local release validation complete",
@@ -2732,7 +2732,7 @@
     },
     {
       "path": "ciphers/lorenz.html",
-      "title": "Lorenz Cipher — The Cipher Museum",
+      "title": "Lorenz Cipher \u2014 The Cipher Museum",
       "words": 1879,
       "sha256": "08e383041a63e499219c42c03b43b72c7a2e7fae7765a36effa54742085591d9",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -2779,7 +2779,7 @@
     },
     {
       "path": "ciphers/m-94.html",
-      "title": "M-94 / CSP-488 (US Army strip / disk cipher · 1922) — The Cipher Museum",
+      "title": "M-94 / CSP-488 (US Army strip / disk cipher \u00b7 1922) \u2014 The Cipher Museum",
       "words": 612,
       "sha256": "3d1d96dad4a19597c25a5625a25c1914b2077cefcc5777fe8f147d573ca22bc3",
       "status": "bounded review and local release validation complete",
@@ -2805,7 +2805,7 @@
     },
     {
       "path": "ciphers/m209.html",
-      "title": "M-209 (Hagelin C-38) — The Cipher Museum",
+      "title": "M-209 (Hagelin C-38) \u2014 The Cipher Museum",
       "words": 730,
       "sha256": "499ac2a091d3416b9f50ed029bf0e7d4b50299ece04ef6e9f1c0a27c8e038360",
       "status": "bounded review and local release validation complete",
@@ -2836,7 +2836,7 @@
     },
     {
       "path": "ciphers/mary-stuart-castelnau-letters.html",
-      "title": "Mary Queen of Scots — Castelnau Letters — The Cipher Museum",
+      "title": "Mary Queen of Scots \u2014 Castelnau Letters \u2014 The Cipher Museum",
       "words": 1273,
       "sha256": "de9011a4b1d9abc09e90675b598287afd788c9b231f39045aa2fdca9d0463c9f",
       "status": "bounded review and local release validation complete",
@@ -2862,7 +2862,7 @@
     },
     {
       "path": "ciphers/mavis-batey.html",
-      "title": "Mavis Batey — The Cipher Museum",
+      "title": "Mavis Batey \u2014 The Cipher Museum",
       "words": 589,
       "sha256": "7b923cf4abb15bb8c06fe685c1f3b9ff21e1b01aa045583ea8f72b9c295cd03e",
       "status": "bounded review and local release validation complete",
@@ -2895,7 +2895,7 @@
     },
     {
       "path": "ciphers/mccormick.html",
-      "title": "McCormick Notes — The Cipher Museum",
+      "title": "McCormick Notes \u2014 The Cipher Museum",
       "words": 455,
       "sha256": "daae3fede3d9e8eab834ad86cfa5365105fcb7a452aa4729004c92fe016218bb",
       "status": "bounded review and local release validation complete",
@@ -2923,7 +2923,7 @@
     },
     {
       "path": "ciphers/microdot.html",
-      "title": "Microdot Steganography — The Cipher Museum",
+      "title": "Microdot Steganography \u2014 The Cipher Museum",
       "words": 469,
       "sha256": "d977958fc224a2bd4403d82a62579d0352e549dff61806ca4dbf3e4673960ac9",
       "status": "bounded review and local release validation complete",
@@ -2952,7 +2952,7 @@
     },
     {
       "path": "ciphers/mit-mystery-hunt.html",
-      "title": "MIT Mystery Hunt — The Cipher Museum",
+      "title": "MIT Mystery Hunt \u2014 The Cipher Museum",
       "words": 500,
       "sha256": "6f9c8cc324aa56632599e8ae2231ff7be9d3f2113e7c740e3b26376c13813531",
       "status": "bounded review and local release validation complete",
@@ -2980,14 +2980,14 @@
     },
     {
       "path": "ciphers/monoalphabetic.html",
-      "title": "Monoalphabetic Substitution — The Cipher Museum",
+      "title": "Monoalphabetic Substitution \u2014 The Cipher Museum",
       "words": 517,
       "sha256": "02017256685b8d843dbf393646331505309bbf1d63bfee04c7551d531be93350",
       "status": "bounded review and local release validation complete",
       "sources": [
         "HAC-1997"
       ],
-      "notes": "HAC pp.239–240 supports permutation and retained frequency distributions. Final metadata/body/SVG/sidebar read qualifies short-message ambiguity and ninth-century al-Kindi attribution, and distinguishes fixed S-box relabelling from full AES rounds/modes.",
+      "notes": "HAC pp.239\u2013240 supports permutation and retained frequency distributions. Final metadata/body/SVG/sidebar read qualifies short-message ambiguity and ninth-century al-Kindi attribution, and distinguishes fixed S-box relabelling from full AES rounds/modes.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -3008,7 +3008,7 @@
     },
     {
       "path": "ciphers/morse.html",
-      "title": "Morse Code (Telegraphy's universal alphabet · 1840s) — The Cipher Museum",
+      "title": "Morse Code (Telegraphy's universal alphabet \u00b7 1840s) \u2014 The Cipher Museum",
       "words": 649,
       "sha256": "29a96d9c17cc0a830b3647838f5655bd8b6520fe7deb78ed96538e49a7a0d8e8",
       "status": "bounded review and local release validation complete",
@@ -3036,7 +3036,7 @@
     },
     {
       "path": "ciphers/myszkowski.html",
-      "title": "Myszkowski Transposition — The Cipher Museum",
+      "title": "Myszkowski Transposition \u2014 The Cipher Museum",
       "words": 756,
       "sha256": "9901d71cdc2cb259da5212df9ef0fb81884483148a1cd1ad9c052079ba0960b5",
       "status": "bounded review and local release validation complete",
@@ -3062,14 +3062,14 @@
     },
     {
       "path": "ciphers/national-treasure.html",
-      "title": "National Treasure — The Cipher Museum",
+      "title": "National Treasure \u2014 The Cipher Museum",
       "words": 457,
       "sha256": "ade39255785b99f2a65428f3f14511439d1c4629c09c12bcd13c8a0828bec11b",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NATIONAL-TREASURE-2004"
       ],
-      "notes": "Complete n–r final reread includes film plot, metadata and related cards. Transcript supports Silence Dogood and Trinity Church setting; museum Pigpen example is separate and not historical evidence for treasure.",
+      "notes": "Complete n\u2013r final reread includes film plot, metadata and related cards. Transcript supports Silence Dogood and Trinity Church setting; museum Pigpen example is separate and not historical evidence for treasure.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -3090,7 +3090,7 @@
     },
     {
       "path": "ciphers/navajo-code-talkers.html",
-      "title": "Navajo Code Talkers — The Cipher Museum",
+      "title": "Navajo Code Talkers \u2014 The Cipher Museum",
       "words": 951,
       "sha256": "197db06127978ca597ec440856fd199f03a9bf7b2474945910abf7a127fdc378",
       "status": "bounded review and local release validation complete",
@@ -3123,7 +3123,7 @@
     },
     {
       "path": "ciphers/nema.html",
-      "title": "NEMA — Swiss Rotor Machine — The Cipher Museum",
+      "title": "NEMA \u2014 Swiss Rotor Machine \u2014 The Cipher Museum",
       "words": 706,
       "sha256": "212f3fb72d65d4864ffa1eacdec471c74f8baca88b03d35a9dcdc3eeb2c26a56",
       "status": "bounded review and local release validation complete",
@@ -3151,14 +3151,14 @@
     },
     {
       "path": "ciphers/nfc-deployment.html",
-      "title": "NFC Authentication: When the Tag Stays Unlocked — The Cipher Museum",
+      "title": "NFC Authentication: When the Tag Stays Unlocked \u2014 The Cipher Museum",
       "words": 606,
       "sha256": "3354093dd61b3753d80a17c3cfafae6de5fd1ddc6f6b8e8f5302fd7e016c05b8",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NFC-2026-REV1.1"
       ],
-      "notes": "Primary revision 1.1 inspected at §§12.1,14,17: CMAC blocks unauthorized command injection; relayed tearing interrupts genuine writes under reader timing/storage conditions; NTAG224 had no tested samples; 777 days covers first 28-bit segment only, not the complete attack.",
+      "notes": "Primary revision 1.1 inspected at \u00a7\u00a712.1,14,17: CMAC blocks unauthorized command injection; relayed tearing interrupts genuine writes under reader timing/storage conditions; NTAG224 had no tested samples; 777 days covers first 28-bit segment only, not the complete attack.",
       "browser_smoke": "Fourth-checkpoint local Chromium follow-up passed; external resources blocked. This does not certify historical claims.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -3179,7 +3179,7 @@
     },
     {
       "path": "ciphers/nihilist.html",
-      "title": "Nihilist Cipher — The Cipher Museum",
+      "title": "Nihilist Cipher \u2014 The Cipher Museum",
       "words": 564,
       "sha256": "e68a89f6e3c2e022d8b21c5e0379410f276eb3347d80850d6f7f1cc4364c5f0e",
       "status": "bounded review and local release validation complete",
@@ -3207,7 +3207,7 @@
     },
     {
       "path": "ciphers/nomenclator.html",
-      "title": "Nomenclator — The Cipher Museum",
+      "title": "Nomenclator \u2014 The Cipher Museum",
       "words": 745,
       "sha256": "52a700d4501e2631a9ed3abbb7234270b5a75f952bcd619dbc6a6fdb726b5a4a",
       "status": "bounded review and local release validation complete",
@@ -3236,7 +3236,7 @@
     },
     {
       "path": "ciphers/null-cipher.html",
-      "title": "Null Cipher (Concealment by selective reading · ancient → modern) — The Cipher Museum",
+      "title": "Null Cipher (Concealment by selective reading \u00b7 ancient \u2192 modern) \u2014 The Cipher Museum",
       "words": 588,
       "sha256": "3c4f2b264ce6092141b171e1a426ade3ed2595f967538c587ff34d66ec69c255",
       "status": "bounded review and local release validation complete",
@@ -3262,7 +3262,7 @@
     },
     {
       "path": "ciphers/one-time-pad.html",
-      "title": "One-Time Pad — The Cipher Museum",
+      "title": "One-Time Pad \u2014 The Cipher Museum",
       "words": 1206,
       "sha256": "28079f7691e7da66094849b2e9235baa1a1a24fc212debbdff628bb312a4202f",
       "status": "bounded review and local release validation complete",
@@ -3300,7 +3300,7 @@
     },
     {
       "path": "ciphers/patterson-jefferson-cipher.html",
-      "title": "Patterson's Cipher for Jefferson (1801, solved 2007) — The Cipher Museum",
+      "title": "Patterson's Cipher for Jefferson (1801, solved 2007) \u2014 The Cipher Museum",
       "words": 1972,
       "sha256": "fa120aa6428f7e08d1d4e7dbcb963923ac26acd4f20c7faafe353ed2a835d8ea",
       "status": "bounded review and local release validation complete",
@@ -3333,7 +3333,7 @@
     },
     {
       "path": "ciphers/phaistos-disc.html",
-      "title": "Phaistos Disc — The Cipher Museum",
+      "title": "Phaistos Disc \u2014 The Cipher Museum",
       "words": 408,
       "sha256": "8902bbf3270b0f9686678ae8490c1cbce0fbf81d7cc70b63b63ddc6d8dad4b15",
       "status": "bounded review and local release validation complete",
@@ -3365,14 +3365,14 @@
     },
     {
       "path": "ciphers/pigpen.html",
-      "title": "Pigpen Cipher — The Cipher Museum",
+      "title": "Pigpen Cipher \u2014 The Cipher Museum",
       "words": 708,
       "sha256": "ec3319d4f3becc84fce545147b94016f1986ca1a6ba64149b0c3453f56558f4d",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Leeson1794source checked; Washingtonpersonaluse removed; drawnS–Zvariant disclosed; publiclookupversussecretsubstitution. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
+      "notes": "Leeson1794source checked; Washingtonpersonaluse removed; drawnS\u2013Zvariant disclosed; publiclookupversussecretsubstitution. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -3393,7 +3393,7 @@
     },
     {
       "path": "ciphers/playfair.html",
-      "title": "Playfair Cipher — The Cipher Museum",
+      "title": "Playfair Cipher \u2014 The Cipher Museum",
       "words": 857,
       "sha256": "c0c6d9ba8fa1c265306eb629a87260126a7b6be109ee8b576f973d2fca3f871a",
       "status": "bounded review and local release validation complete",
@@ -3421,7 +3421,7 @@
     },
     {
       "path": "ciphers/polybius.html",
-      "title": "Polybius Square — The Cipher Museum",
+      "title": "Polybius Square \u2014 The Cipher Museum",
       "words": 523,
       "sha256": "2d470c1a91eb2f261997dffd1910ac99c846ea8c1548b8ad3b3b0656d5a07109",
       "status": "bounded review and local release validation complete",
@@ -3449,7 +3449,7 @@
     },
     {
       "path": "ciphers/porta.html",
-      "title": "Porta Cipher — The Cipher Museum",
+      "title": "Porta Cipher \u2014 The Cipher Museum",
       "words": 500,
       "sha256": "f10024e3a46df66650352f3e0f8fcd78a5e270c560deecb6aef191e3efc197f2",
       "status": "bounded review and local release validation complete",
@@ -3457,7 +3457,7 @@
         "HAC-1997",
         "KAHN-1996"
       ],
-      "notes": "Final n–r reread reconciled historical attribution and metadata with Kahn’s1563context and page-defined reciprocal mapping. A↔N applies to the AB row, not all rows; involution and general symmetric encryption are distinguished.",
+      "notes": "Final n\u2013r reread reconciled historical attribution and metadata with Kahn\u2019s1563context and page-defined reciprocal mapping. A\u2194N applies to the AB row, not all rows; involution and general symmetric encryption are distinguished.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -3478,7 +3478,7 @@
     },
     {
       "path": "ciphers/purple.html",
-      "title": "Purple (Type 97) — The Cipher Museum",
+      "title": "Purple (Type 97) \u2014 The Cipher Museum",
       "words": 880,
       "sha256": "aaabbaa3ce71003fe9132931878f4dc692632dbaf54eede9a2a7cea834d94279",
       "status": "bounded review and local release validation complete",
@@ -3504,7 +3504,7 @@
     },
     {
       "path": "ciphers/rail-fence.html",
-      "title": "Rail Fence Cipher — The Cipher Museum",
+      "title": "Rail Fence Cipher \u2014 The Cipher Museum",
       "words": 412,
       "sha256": "014ea2bf4ca7df5607fec7d901133a44eb80a70d2a6b3db05ef7b731be3e83fb",
       "status": "bounded review and local release validation complete",
@@ -3530,14 +3530,14 @@
     },
     {
       "path": "ciphers/red-army-faction.html",
-      "title": "Red Army Faction One-Time Pad — The Cipher Museum",
+      "title": "Red Army Faction One-Time Pad \u2014 The Cipher Museum",
       "words": 372,
       "sha256": "29b222f886a4f95093a194227a55d8e3f5948e6621b5f44c1e76351c40060610",
       "status": "bounded review and local release validation complete",
       "sources": [
         "RAF-BUNDESARCHIV"
       ],
-      "notes": "Headline, facts, trust note and body now consistently identify a teaching model. Runtime actually adds A–Z modulo26, not decimalmod10 or a bookcipher. Source documents relationships, not a recovered RAFpad. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
+      "notes": "Headline, facts, trust note and body now consistently identify a teaching model. Runtime actually adds A\u2013Z modulo26, not decimalmod10 or a bookcipher. Source documents relationships, not a recovered RAFpad. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -3584,7 +3584,7 @@
     },
     {
       "path": "ciphers/rochefort.html",
-      "title": "Joseph Rochefort — The Cipher Museum",
+      "title": "Joseph Rochefort \u2014 The Cipher Museum",
       "words": 649,
       "sha256": "938dcb3baca670afb050f03ee86b749b937c36a518488db73fbdd82b759894ce",
       "status": "bounded review and local release validation complete",
@@ -3616,12 +3616,12 @@
     },
     {
       "path": "ciphers/rosetta-stone.html",
-      "title": "The Rosetta Stone — The Cipher Museum",
+      "title": "The Rosetta Stone \u2014 The Cipher Museum",
       "words": 425,
       "sha256": "ac40984da9269a5cc37d86478c3b868cc48f7ced4b6dcc28354fe2476e426924",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Complete n–r public prose and inline-output reread. Two-language/three-script framing, gradual decipherment and teaching analogies corrected; falsely labelled Coptic display removed. All three widget modes directly exercised; final pass did not independently re-source every chronology detail.",
+      "notes": "Complete n\u2013r public prose and inline-output reread. Two-language/three-script framing, gradual decipherment and teaching analogies corrected; falsely labelled Coptic display removed. All three widget modes directly exercised; final pass did not independently re-source every chronology detail.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -3642,7 +3642,7 @@
     },
     {
       "path": "ciphers/rot13.html",
-      "title": "ROT13 — The Cipher Museum",
+      "title": "ROT13 \u2014 The Cipher Museum",
       "words": 401,
       "sha256": "864fb5747232d3ee36b96c2708768c9969fb9c0bf2fd0dedd19ee87d766ec543",
       "status": "bounded review and local release validation complete",
@@ -3670,7 +3670,7 @@
     },
     {
       "path": "ciphers/rs44.html",
-      "title": "Rasterschlüssel 44 (RS44) — The Cipher Museum",
+      "title": "Rasterschl\u00fcssel 44 (RS44) \u2014 The Cipher Museum",
       "words": 1004,
       "sha256": "5ac8a2702bb7b9bbff12a90d482ccf44e4522e36fcb65fd85e0420286e9f647e",
       "status": "bounded review and local release validation complete",
@@ -3698,7 +3698,7 @@
     },
     {
       "path": "ciphers/rsa.html",
-      "title": "RSA — The Cipher Museum",
+      "title": "RSA \u2014 The Cipher Museum",
       "words": 708,
       "sha256": "f42b66a881f6f82b4512fb88f7f9f1bdee821a2052d7b24d45aad221bdf211c0",
       "status": "bounded review and local release validation complete",
@@ -3733,7 +3733,7 @@
     },
     {
       "path": "ciphers/running-key.html",
-      "title": "Running Key Cipher — The Cipher Museum",
+      "title": "Running Key Cipher \u2014 The Cipher Museum",
       "words": 638,
       "sha256": "133587c0df28bb120d32151451a6eddc6925460c3b0315f21871e4043025b88b",
       "status": "bounded review and local release validation complete",
@@ -3759,7 +3759,7 @@
     },
     {
       "path": "ciphers/sator-square.html",
-      "title": "Sator Square — The Cipher Museum",
+      "title": "Sator Square \u2014 The Cipher Museum",
       "words": 481,
       "sha256": "d5a2a2e6f5ea82dbc7fad043b6c39261a6926d1f0c9cac004167b56d36903a5e",
       "status": "bounded review and local release validation complete",
@@ -3787,7 +3787,7 @@
     },
     {
       "path": "ciphers/scytale.html",
-      "title": "Scytale — The Cipher Museum",
+      "title": "Scytale \u2014 The Cipher Museum",
       "words": 809,
       "sha256": "e8f029b40a726a563c92014e287ac33fcf970f648398e479bed2850008d8564f",
       "status": "bounded review and local release validation complete",
@@ -3815,7 +3815,7 @@
     },
     {
       "path": "ciphers/sha256.html",
-      "title": "SHA-256 — The Cipher Museum",
+      "title": "SHA-256 \u2014 The Cipher Museum",
       "words": 969,
       "sha256": "cb1eeac3e05f9b6c89c8a9f845b83732c422579a70e2a1079914293be70f05c4",
       "status": "ebook follow-up implementation and local validation complete",
@@ -3859,7 +3859,7 @@
     },
     {
       "path": "ciphers/shamir-secret-sharing.html",
-      "title": "Shamir's Secret Sharing — The Cipher Museum",
+      "title": "Shamir's Secret Sharing \u2014 The Cipher Museum",
       "words": 1024,
       "sha256": "3520e08d6d925ee896667f00f47743d8488783e19097c0b64f0bd52328b4246b",
       "status": "bounded review and local release validation complete",
@@ -3892,7 +3892,7 @@
     },
     {
       "path": "ciphers/shugborough.html",
-      "title": "Shugborough Inscription — The Cipher Museum",
+      "title": "Shugborough Inscription \u2014 The Cipher Museum",
       "words": 407,
       "sha256": "84817fe63ef9b9c8f1ebcd999ad7112d23b55892c1efbd07c02dc0866f15f55a",
       "status": "bounded review and local release validation complete",
@@ -3920,7 +3920,7 @@
     },
     {
       "path": "ciphers/sigaba.html",
-      "title": "SIGABA (ECM Mark II) — The Cipher Museum",
+      "title": "SIGABA (ECM Mark II) \u2014 The Cipher Museum",
       "words": 606,
       "sha256": "940ff57361e2b83c2742d4cbf8dd830fae01fd805f5cf31a9bd5b03e3d31518d",
       "status": "bounded review and local release validation complete",
@@ -3946,7 +3946,7 @@
     },
     {
       "path": "ciphers/sigsaly.html",
-      "title": "SIGSALY — The Encrypted Speech System — The Cipher Museum",
+      "title": "SIGSALY \u2014 The Encrypted Speech System \u2014 The Cipher Museum",
       "words": 492,
       "sha256": "12e0c22d7220323bd2f88a4b49d0de19b9396bbf974bb5a9c9e6d3677a7ec5ab",
       "status": "bounded review and local release validation complete",
@@ -3974,12 +3974,12 @@
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
       "remaining_evidence_limits": [
-        "Earlier SIGSALY Story PDF inaccessible; separate NSA SIGSALY brochure pp.3–10 was read. The two source-access states must not be conflated."
+        "Earlier SIGSALY Story PDF inaccessible; separate NSA SIGSALY brochure pp.3\u201310 was read. The two source-access states must not be conflated."
       ]
     },
     {
       "path": "ciphers/slidex.html",
-      "title": "Slidex (British WWII tactical code card) — The Cipher Museum",
+      "title": "Slidex (British WWII tactical code card) \u2014 The Cipher Museum",
       "words": 1109,
       "sha256": "7de29813267d15a3ebbb13ee5028c3b84b6d2fbb16d6933a7a25a3b9fab0e5ce",
       "status": "bounded review and local release validation complete",
@@ -4007,14 +4007,14 @@
     },
     {
       "path": "ciphers/sodark.html",
-      "title": "SoDark and Radio Linking — The Cipher Museum",
+      "title": "SoDark and Radio Linking \u2014 The Cipher Museum",
       "words": 433,
       "sha256": "a3ac725d120df825d652e0f1f0e421fa55d0603ff9b996e78f0549f4d7aa85e5",
       "status": "bounded review and local release validation complete",
       "sources": [
         "SODARK-2021"
       ],
-      "notes": "Primary §§3.4–3.5 and Table4 rechecked: related-tweak oracle data differs from estimated 2^21.9 passively collected three-word frames; six-GPU 42-minute results have stated data and 50% success conditions. Eight-round result does not establish sixteen-round 3G recovery.",
+      "notes": "Primary \u00a7\u00a73.4\u20133.5 and Table4 rechecked: related-tweak oracle data differs from estimated 2^21.9 passively collected three-word frames; six-GPU 42-minute results have stated data and 50% success conditions. Eight-round result does not establish sixteen-round 3G recovery.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4035,7 +4035,7 @@
     },
     {
       "path": "ciphers/solitaire.html",
-      "title": "Solitaire / Pontifex — The Cipher Museum",
+      "title": "Solitaire / Pontifex \u2014 The Cipher Museum",
       "words": 1077,
       "sha256": "bae7ef2f8a90ce78713768c457ca4afdc4601796a9d38e316b8dc81dabf81235",
       "status": "bounded review and local release validation complete",
@@ -4070,7 +4070,7 @@
     },
     {
       "path": "ciphers/somerton-man.html",
-      "title": "Somerton Man Code — The Cipher Museum",
+      "title": "Somerton Man Code \u2014 The Cipher Museum",
       "words": 426,
       "sha256": "59ea21aea419d1183f160d2ab904976d0460e741db336887e59bbebd32b23b47",
       "status": "bounded review and local release validation complete",
@@ -4098,9 +4098,9 @@
     },
     {
       "path": "ciphers/stager.html",
-      "title": "Stager Cipher — The Cipher Museum",
+      "title": "Stager Cipher \u2014 The Cipher Museum",
       "words": 884,
-      "sha256": "b6b7d7cb8d0846730320fbcf035060f8af965f95fb98a6ee78c365fe8db59db0",
+      "sha256": "da67f89328b1ff0f00189f547a75cf99d64f6119f494d26d01f21c38f108911e",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -4126,7 +4126,7 @@
     },
     {
       "path": "ciphers/station-hypo.html",
-      "title": "Station HYPO — Pearl Harbor to Midway — The Cipher Museum",
+      "title": "Station HYPO \u2014 Pearl Harbor to Midway \u2014 The Cipher Museum",
       "words": 663,
       "sha256": "947249a54e58c2ea5f892a073bb589e755789a85dcb92f089ce4a24d6a6dea4b",
       "status": "bounded review and local release validation complete",
@@ -4155,7 +4155,7 @@
     },
     {
       "path": "ciphers/straddling-checkerboard.html",
-      "title": "Straddling Checkerboard — The Cipher Museum",
+      "title": "Straddling Checkerboard \u2014 The Cipher Museum",
       "words": 513,
       "sha256": "549a47a4d1b62c8e3698050fdfb2636d9beb29e8615c610b8aec985202fe94ef",
       "status": "bounded review and local release validation complete",
@@ -4181,7 +4181,7 @@
     },
     {
       "path": "ciphers/tap-code.html",
-      "title": "Tap Code — The Cipher Museum",
+      "title": "Tap Code \u2014 The Cipher Museum",
       "words": 572,
       "sha256": "fc9d526bd3ad42590074eb739ea1de0768a1abf94cbbdae0731418ea12f0123a",
       "status": "bounded review and local release validation complete",
@@ -4212,7 +4212,7 @@
     },
     {
       "path": "ciphers/trifid.html",
-      "title": "Trifid Cipher — The Cipher Museum",
+      "title": "Trifid Cipher \u2014 The Cipher Museum",
       "words": 421,
       "sha256": "f2fe16c1346e455f4a6594ee3b34d64c1ea9eb9dc64bfb4b06c57008617a7063",
       "status": "bounded review and local release validation complete",
@@ -4241,14 +4241,14 @@
     },
     {
       "path": "ciphers/trithemius.html",
-      "title": "Trithemius Progressive Cipher (Polygraphia · 1518) — The Cipher Museum",
+      "title": "Trithemius Progressive Cipher (Polygraphia \u00b7 1518) \u2014 The Cipher Museum",
       "words": 538,
       "sha256": "2a935aa568a55224c1aaa52322e9c8e386445088f0ae49b3b9064cac2805c7fa",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Kahn PDF175,179–183 supports1462–1516,1518posthumousprinting and BookV table; corrected erroneous opening-tables location. Independently computed STEGANOGRAPHIA progressive vector. Revised guaranteed recovery language. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
+      "notes": "Kahn PDF175,179\u2013183 supports1462\u20131516,1518posthumousprinting and BookV table; corrected erroneous opening-tables location. Independently computed STEGANOGRAPHIA progressive vector. Revised guaranteed recovery language. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4269,7 +4269,7 @@
     },
     {
       "path": "ciphers/turning-grille.html",
-      "title": "Fleissner Turning Grille — The Cipher Museum",
+      "title": "Fleissner Turning Grille \u2014 The Cipher Museum",
       "words": 813,
       "sha256": "3dc286d56187ef7f406c92e480a80041b7286b939172c7114b7d2d908e331456",
       "status": "bounded review and local release validation complete",
@@ -4297,7 +4297,7 @@
     },
     {
       "path": "ciphers/two-square.html",
-      "title": "Two-Square Cipher — The Cipher Museum",
+      "title": "Two-Square Cipher \u2014 The Cipher Museum",
       "words": 581,
       "sha256": "6632e2176553f3ec99cac791f5d094fb476f470aae7bdda243fd5996cf16b0fa",
       "status": "bounded review and local release validation complete",
@@ -4323,7 +4323,7 @@
     },
     {
       "path": "ciphers/typex.html",
-      "title": "Typex — The Cipher Museum",
+      "title": "Typex \u2014 The Cipher Museum",
       "words": 533,
       "sha256": "19a1441ddc2b6976fd7eadddc8ea14e9b60f79d01583e9bae98a06504ce6372e",
       "status": "bounded review and local release validation complete",
@@ -4351,7 +4351,7 @@
     },
     {
       "path": "ciphers/ua-8295.html",
-      "title": "UA-8295: A Changed Cipher Behind the Same Interface — The Cipher Museum",
+      "title": "UA-8295: A Changed Cipher Behind the Same Interface \u2014 The Cipher Museum",
       "words": 2016,
       "sha256": "f51c1d532314f53860dd8b2e32d8498cca7d76db3397737ab0f7a142e1e194e7",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -4394,7 +4394,7 @@
     },
     {
       "path": "ciphers/venona.html",
-      "title": "VENONA Project — The Cipher Museum",
+      "title": "VENONA Project \u2014 The Cipher Museum",
       "words": 1470,
       "sha256": "1a2ba2ad42f3cabe3fe72cd69687832cbfa6a12d2bec8ac05c8e17078a9db1d1",
       "status": "bounded review and local release validation complete",
@@ -4428,7 +4428,7 @@
     },
     {
       "path": "ciphers/vernam.html",
-      "title": "Vernam Cipher — The Cipher Museum",
+      "title": "Vernam Cipher \u2014 The Cipher Museum",
       "words": 766,
       "sha256": "47cf2bdf3dbd1dd3696112ef74c26920686f5f2c0fb032fa54bfb18c60d34209",
       "status": "bounded review and local release validation complete",
@@ -4471,7 +4471,7 @@
     },
     {
       "path": "ciphers/vic.html",
-      "title": "VIC Cipher — The Cipher Museum",
+      "title": "VIC Cipher \u2014 The Cipher Museum",
       "words": 609,
       "sha256": "c6017e1b053cc4858b22eb911694fc3ce29eff703aef90b775edb3a465aaa41e",
       "status": "bounded review and local release validation complete",
@@ -4499,7 +4499,7 @@
     },
     {
       "path": "ciphers/vietnamese-underground.html",
-      "title": "Vietnamese Underground Codes — The Cipher Museum",
+      "title": "Vietnamese Underground Codes \u2014 The Cipher Museum",
       "words": 360,
       "sha256": "adffe60734ed80617b20cfa29cf465e9927dfe4e39601b6626a4001aaea346cf",
       "status": "bounded review and local release validation complete",
@@ -4528,7 +4528,7 @@
     },
     {
       "path": "ciphers/vigenere.html",
-      "title": "Vigenère Cipher — The Cipher Museum",
+      "title": "Vigen\u00e8re Cipher \u2014 The Cipher Museum",
       "words": 746,
       "sha256": "0a1eba9f47724204785bf1e75795d6661c956ffdd57ec242a25c7dc973701ab5",
       "status": "bounded review and local release validation complete",
@@ -4536,7 +4536,7 @@
         "HAC-1997",
         "KAHN-1996"
       ],
-      "notes": "HAC p.241 and Kahn Bellaso1553passages support distinctions between repeating Vigenère and earlier related tables. LEMON/COMPLETEVICTORY examples independently reproduced. Final metadata drops300-year myth; modern keystream reuse is a usage condition, not a no-repeat guarantee.",
+      "notes": "HAC p.241 and Kahn Bellaso1553passages support distinctions between repeating Vigen\u00e8re and earlier related tables. LEMON/COMPLETEVICTORY examples independently reproduced. Final metadata drops300-year myth; modern keystream reuse is a usage condition, not a no-repeat guarantee.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4557,7 +4557,7 @@
     },
     {
       "path": "ciphers/voynich.html",
-      "title": "The Voynich Manuscript (c. 1404–1438) — The Cipher Museum",
+      "title": "The Voynich Manuscript (c. 1404\u20131438) \u2014 The Cipher Museum",
       "words": 1536,
       "sha256": "f9106517f7fe3c115d5cb4ef28284069198a8e965a02c81917376a3dbf02e46f",
       "status": "bounded review and local release validation complete",
@@ -4592,7 +4592,7 @@
     },
     {
       "path": "ciphers/wadsworth-cipher.html",
-      "title": "Wadsworth Cipher — The Cipher Museum",
+      "title": "Wadsworth Cipher \u2014 The Cipher Museum",
       "words": 1810,
       "sha256": "002aadc2b775fee66188b68ab5118c41a7dcb86c16370ca6ced6ddb1047bf459",
       "status": "bounded review and local release validation complete",
@@ -4625,7 +4625,7 @@
     },
     {
       "path": "ciphers/wallis-ciphers.html",
-      "title": "Wallis Ciphers (John Wallis & the English Civil War · 1640s) — The Cipher Museum",
+      "title": "Wallis Ciphers (John Wallis & the English Civil War \u00b7 1640s) \u2014 The Cipher Museum",
       "words": 876,
       "sha256": "5fa1ed3b24943d3e6a96b353304553735f08642eae5f67baf3ff94d07d17aa5c",
       "status": "bounded review and local release validation complete",
@@ -4653,7 +4653,7 @@
     },
     {
       "path": "ciphers/wheatstone.html",
-      "title": "Wheatstone Cryptograph (A clock-face polyalphabetic · 1867) — The Cipher Museum",
+      "title": "Wheatstone Cryptograph (A clock-face polyalphabetic \u00b7 1867) \u2014 The Cipher Museum",
       "words": 558,
       "sha256": "74d55b239d24525a271ffb79e295b925f57f537db0fc4d97f192f3813dedd9ae",
       "status": "bounded review and local release validation complete",
@@ -4685,7 +4685,7 @@
     },
     {
       "path": "ciphers/yardley.html",
-      "title": "Herbert Yardley — The Cipher Museum",
+      "title": "Herbert Yardley \u2014 The Cipher Museum",
       "words": 689,
       "sha256": "d4ad1b71df8b7960a4af8d8d234b287fd3f1704544142e9506093f02fac2a9c9",
       "status": "bounded review and local release validation complete",
@@ -4713,7 +4713,7 @@
     },
     {
       "path": "ciphers/zero-knowledge-proofs.html",
-      "title": "Zero-Knowledge Proofs — The Cipher Museum",
+      "title": "Zero-Knowledge Proofs \u2014 The Cipher Museum",
       "words": 1186,
       "sha256": "4eb70643acf9b20df9c9287b53688e67787e42481b367d3c685778ff33f1aa6f",
       "status": "bounded review and local release validation complete",
@@ -4742,7 +4742,7 @@
     },
     {
       "path": "ciphers/zimmermann.html",
-      "title": "Zimmermann Telegram (German codes 0075 / 13040 · 1917) — The Cipher Museum",
+      "title": "Zimmermann Telegram (German codes 0075 / 13040 \u00b7 1917) \u2014 The Cipher Museum",
       "words": 783,
       "sha256": "428aaecc217271202fda36c84d48a7c67262370b58fd3c43029bc5a0a9b49d38",
       "status": "bounded review and local release validation complete",
@@ -4751,7 +4751,7 @@
         "ZIMMERMANN-PAGE-1917",
         "ZIMMERMANN-NARA-2016"
       ],
-      "notes": "Corrected historical codebook versus additive teaching-model contradiction, unsupported routing/deception timeline, naval-codebook conflation and causal overstatement. NSA p.44 visually read and pp.43–45 text read; contemporary Page telegram compared. Model contains126 entries/123 distinct words. Three independent encode/decode vectors checked in browser at two widths. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
+      "notes": "Corrected historical codebook versus additive teaching-model contradiction, unsupported routing/deception timeline, naval-codebook conflation and causal overstatement. NSA p.44 visually read and pp.43\u201345 text read; contemporary Page telegram compared. Model contains126 entries/123 distinct words. Three independent encode/decode vectors checked in browser at two widths. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4772,7 +4772,7 @@
     },
     {
       "path": "ciphers/zodiac.html",
-      "title": "Zodiac Cipher — The Cipher Museum",
+      "title": "Zodiac Cipher \u2014 The Cipher Museum",
       "words": 932,
       "sha256": "0d042104261c85df15795ecd39c14025a492c2a9311178f2cdd883d07d733684",
       "status": "bounded review and local release validation complete",
@@ -4800,7 +4800,7 @@
     },
     {
       "path": "community/index.html",
-      "title": "Community Codebreaks — The Cipher Museum",
+      "title": "Community Codebreaks \u2014 The Cipher Museum",
       "words": 374,
       "sha256": "52ce80c383101faa98c37b1785617c859f69f92e4b15384d2ec22043426aaa83",
       "status": "bounded review and local release validation complete",
@@ -4825,7 +4825,7 @@
     },
     {
       "path": "comparison.html",
-      "title": "Cipher Comparison — The Cipher Museum",
+      "title": "Cipher Comparison \u2014 The Cipher Museum",
       "words": 145,
       "sha256": "9c11a0189b7ab991827488af384889501c5cf643718fa6514a0dd3536bd606a6",
       "status": "bounded review and local release validation complete",
@@ -4852,7 +4852,7 @@
     },
     {
       "path": "cryptanalysis.html",
-      "title": "Cryptanalysis Techniques — The Cipher Museum",
+      "title": "Cryptanalysis Techniques \u2014 The Cipher Museum",
       "words": 2232,
       "sha256": "7741435385b5b835f3942c51c7244f630d7c229b0881c0b0b70afe9ad8a89e57",
       "status": "ebook follow-up implementation and local validation complete",
@@ -4896,7 +4896,7 @@
     },
     {
       "path": "embed.html",
-      "title": "Cipher Demo — The Cipher Museum",
+      "title": "Cipher Demo \u2014 The Cipher Museum",
       "words": 17,
       "sha256": "9ecc87b93b5801a1b08f6e3b8997248e1780103ec1da37d96984d5dfd43bfa26",
       "status": "bounded review and local release validation complete",
@@ -4922,7 +4922,7 @@
     },
     {
       "path": "further-reading.html",
-      "title": "Further Reading — The Cipher Museum",
+      "title": "Further Reading \u2014 The Cipher Museum",
       "words": 4144,
       "sha256": "e430fad96ee25fb529cccdbec946f42bea4d4b6232cd9e07b059d5e5d4437899",
       "status": "bounded review and local release validation complete",
@@ -4956,7 +4956,7 @@
     },
     {
       "path": "glossary.html",
-      "title": "Glossary — The Cipher Museum",
+      "title": "Glossary \u2014 The Cipher Museum",
       "words": 2991,
       "sha256": "4cce04e36500c992e90bd84054d4e1c21b7711c28d5d47a24c4dbd2d507f1638",
       "status": "bounded review and local release validation complete",
@@ -4989,7 +4989,7 @@
     },
     {
       "path": "hall-of-foundations/closest-vector.html",
-      "title": "The Closest Vector Problem · Hall of Foundations",
+      "title": "The Closest Vector Problem \u00b7 Hall of Foundations",
       "words": 1201,
       "sha256": "a64e353495a3f32410d0b776f688dd2f9294661f2d9d525fe4ce370f30837645",
       "status": "ebook follow-up implementation and local validation complete",
@@ -5029,7 +5029,7 @@
     },
     {
       "path": "hall-of-foundations/elliptic-curves-real.html",
-      "title": "Elliptic Curves over ℝ · Hall of Foundations",
+      "title": "Elliptic Curves over \u211d \u00b7 Hall of Foundations",
       "words": 867,
       "sha256": "0fb24ee190b7bb366c8f3d64927711eee62955860151d7b707194abe4180b3be",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -5057,7 +5057,7 @@
     },
     {
       "path": "hall-of-foundations/entropy.html",
-      "title": "Information & Entropy · Hall of Foundations",
+      "title": "Information & Entropy \u00b7 Hall of Foundations",
       "words": 2222,
       "sha256": "5766e7d2c51b2d7aa1865bf55e09a5408762c851dffe767adf6b3cd4d72757aa",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -5108,7 +5108,7 @@
     },
     {
       "path": "hall-of-foundations/euler-fermat.html",
-      "title": "Euler & Fermat · Hall of Foundations",
+      "title": "Euler & Fermat \u00b7 Hall of Foundations",
       "words": 484,
       "sha256": "b50988adbf0498eb9025d7f5cb0c20c5db0e375f305d6ee228f5494cbe7465d3",
       "status": "bounded review and local release validation complete",
@@ -5135,7 +5135,7 @@
     },
     {
       "path": "hall-of-foundations/finite-fields.html",
-      "title": "Finite Fields · Hall of Foundations",
+      "title": "Finite Fields \u00b7 Hall of Foundations",
       "words": 1447,
       "sha256": "aa8bd8de6493a82fe83c3ebd6efc926465c0848bed05a85814f1eefbdf1c8564",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -5172,7 +5172,7 @@
     },
     {
       "path": "hall-of-foundations/group-theory.html",
-      "title": "Group Theory · Hall of Foundations",
+      "title": "Group Theory \u00b7 Hall of Foundations",
       "words": 387,
       "sha256": "e8883b3d18ab3d75b3619eaad4080155367ceff300226f8fc7dc90e59bda67b1",
       "status": "bounded review and local release validation complete",
@@ -5199,7 +5199,7 @@
     },
     {
       "path": "hall-of-foundations/index.html",
-      "title": "Hall of Foundations · Cipher Museum",
+      "title": "Hall of Foundations \u00b7 Cipher Museum",
       "words": 594,
       "sha256": "e19f97cb43c9bf1fda10b90e12faf31a2ade71ebbfb250d47a3f894c48a5ee3f",
       "status": "bounded review and local release validation complete",
@@ -5227,7 +5227,7 @@
     },
     {
       "path": "hall-of-foundations/interpolation.html",
-      "title": "Polynomial Interpolation · Hall of Foundations",
+      "title": "Polynomial Interpolation \u00b7 Hall of Foundations",
       "words": 442,
       "sha256": "b612f6f8cd11e25987725e6406a01ebeb469b6906e7608a9d0bbe6cb90507048",
       "status": "bounded review and local release validation complete",
@@ -5254,7 +5254,7 @@
     },
     {
       "path": "hall-of-foundations/lattices-svp.html",
-      "title": "Lattices & the SVP · Hall of Foundations",
+      "title": "Lattices & the SVP \u00b7 Hall of Foundations",
       "words": 402,
       "sha256": "968512cc7e7768c000db576a50857734350bc2587e5b89ce228a086835d65c32",
       "status": "bounded review and local release validation complete",
@@ -5282,7 +5282,7 @@
     },
     {
       "path": "hall-of-foundations/learning-with-errors.html",
-      "title": "Learning With Errors · Hall of Foundations",
+      "title": "Learning With Errors \u00b7 Hall of Foundations",
       "words": 1398,
       "sha256": "ce67bdc0d5d3c4fcd25fc1ae7f4a4025577996efc7ab48020d049a9e2cb0cb74",
       "status": "ebook follow-up implementation and local validation complete",
@@ -5323,7 +5323,7 @@
     },
     {
       "path": "hall-of-foundations/modular-arithmetic.html",
-      "title": "Modular Arithmetic · Hall of Foundations",
+      "title": "Modular Arithmetic \u00b7 Hall of Foundations",
       "words": 396,
       "sha256": "fa4e4fd6b22bc2a4a7df572e467597a2a7446726d0dceffb307e4d50c43913b9",
       "status": "bounded review and local release validation complete",
@@ -5350,7 +5350,7 @@
     },
     {
       "path": "hall-of-foundations/modularity-exhibit.html",
-      "title": "The Ground Beneath the Curve · Cipher Museum",
+      "title": "The Ground Beneath the Curve \u00b7 Cipher Museum",
       "words": 861,
       "sha256": "a5f7781d0bb337d794e5f54de6580cf98e568ebb9ebd9b9e04764c0e83874ce2",
       "status": "bounded review and local release validation complete",
@@ -5380,7 +5380,7 @@
     },
     {
       "path": "hall-of-foundations/one-way-function.html",
-      "title": "The One-Way Function · Hall of Foundations",
+      "title": "The One-Way Function \u00b7 Hall of Foundations",
       "words": 387,
       "sha256": "c390985186a041d8bcf2e71b62e3c5b20573acc6ebb90a929d7346668dd77616",
       "status": "bounded review and local release validation complete",
@@ -5407,7 +5407,7 @@
     },
     {
       "path": "hall-of-foundations/pairings.html",
-      "title": "Bilinear Pairings · Hall of Foundations",
+      "title": "Bilinear Pairings \u00b7 Hall of Foundations",
       "words": 563,
       "sha256": "ff011c6dafacd0aae447efb28d00dc53da17b7b2c14731854f70fe5cacd1522f",
       "status": "bounded review and local release validation complete",
@@ -5434,7 +5434,7 @@
     },
     {
       "path": "hall-of-foundations/polynomial-rings.html",
-      "title": "Polynomial Rings · Hall of Foundations",
+      "title": "Polynomial Rings \u00b7 Hall of Foundations",
       "words": 495,
       "sha256": "bd7f9996c029399923d90a98dae4bde85f3c75ed5510b69cd554c44720df0a54",
       "status": "bounded review and local release validation complete",
@@ -5462,7 +5462,7 @@
     },
     {
       "path": "hall-of-foundations/prime-number-theorem.html",
-      "title": "The Prime Number Theorem · Hall of Foundations",
+      "title": "The Prime Number Theorem \u00b7 Hall of Foundations",
       "words": 460,
       "sha256": "2797488fbb58c6f9a202ea6fc42e78c796107c8a73c43aa5460812834e6edbf0",
       "status": "bounded review and local release validation complete",
@@ -5489,7 +5489,7 @@
     },
     {
       "path": "hall-of-foundations/random-oracle.html",
-      "title": "The Random Oracle · Hall of Foundations",
+      "title": "The Random Oracle \u00b7 Hall of Foundations",
       "words": 829,
       "sha256": "ef9ac80c64a6ff45b28a1e41383d4cac8091b543d0fab5fb85851626159d2511",
       "status": "ebook follow-up implementation and local validation complete",
@@ -5529,7 +5529,7 @@
     },
     {
       "path": "hall-of-foundations/reduction.html",
-      "title": "Reduction & Proof · Hall of Foundations",
+      "title": "Reduction & Proof \u00b7 Hall of Foundations",
       "words": 479,
       "sha256": "0edee00543d7cb4844b5f80575811cadcaead5b5b2f705a96adc6943a1b21d1d",
       "status": "bounded review and local release validation complete",
@@ -5556,7 +5556,7 @@
     },
     {
       "path": "halls/ancient.html",
-      "title": "Hall I: World Origins of Cryptography — The Cipher Museum",
+      "title": "Hall I: World Origins of Cryptography \u2014 The Cipher Museum",
       "words": 681,
       "sha256": "14590f0b5c25b5291e16b3fbea78b72db75379b77e035b137c0b35af1e927854",
       "status": "bounded review and local release validation complete",
@@ -5582,7 +5582,7 @@
     },
     {
       "path": "halls/civil-war.html",
-      "title": "Hall VI: Civil War Gallery — The Cipher Museum",
+      "title": "Hall VI: Civil War Gallery \u2014 The Cipher Museum",
       "words": 510,
       "sha256": "5f238daf7b66dc8a67da4bb0fea67130c7ec7fe123a870a979b8ed807a262e50",
       "status": "bounded review and local release validation complete",
@@ -5608,7 +5608,7 @@
     },
     {
       "path": "halls/codebreakers.html",
-      "title": "Hall X: Hall of Codebreakers — The Cipher Museum",
+      "title": "Hall X: Hall of Codebreakers \u2014 The Cipher Museum",
       "words": 2889,
       "sha256": "34a2a805f679525c72e86f22dfe145938e010976e0665855bf7ab7b20f31ec0b",
       "status": "bounded review and local release validation complete",
@@ -5634,7 +5634,7 @@
     },
     {
       "path": "halls/culture.html",
-      "title": "Hall XIII: Cipher Culture — The Cipher Museum",
+      "title": "Hall XIII: Cipher Culture \u2014 The Cipher Museum",
       "words": 429,
       "sha256": "9d334b0f6b6d4a090eb22acee0a5a9f1c90ffa6a2aaa45a0bb651561fc5884bc",
       "status": "bounded review and local release validation complete",
@@ -5660,7 +5660,7 @@
     },
     {
       "path": "halls/machines.html",
-      "title": "Hall VII: Mechanical Cipher Machines — The Cipher Museum",
+      "title": "Hall VII: Mechanical Cipher Machines \u2014 The Cipher Museum",
       "words": 863,
       "sha256": "467fe53f86a13cd7b9ce86c67544cb1db5d721648b7f8e0aa3af330d1bd657f3",
       "status": "bounded review and local release validation complete",
@@ -5686,7 +5686,7 @@
     },
     {
       "path": "halls/military.html",
-      "title": "Hall V: Military & Spy Ciphers — The Cipher Museum",
+      "title": "Hall V: Military & Spy Ciphers \u2014 The Cipher Museum",
       "words": 785,
       "sha256": "39a01f699be6c616f622efbd40e797363cd5285601a29da5beaf5c44fc657d55",
       "status": "bounded review and local release validation complete",
@@ -5712,7 +5712,7 @@
     },
     {
       "path": "halls/modern-crypto.html",
-      "title": "Hall XI: Modern Cryptography — The Cipher Museum",
+      "title": "Hall XI: Modern Cryptography \u2014 The Cipher Museum",
       "words": 631,
       "sha256": "b87a43ad8b029aba713cf6064427fae0060f0359460ab8ff3e1a69234f518a58",
       "status": "bounded review and local release validation complete",
@@ -5738,7 +5738,7 @@
     },
     {
       "path": "halls/polyalphabetic.html",
-      "title": "Hall III: The Polyalphabetic Revolution — The Cipher Museum",
+      "title": "Hall III: The Polyalphabetic Revolution \u2014 The Cipher Museum",
       "words": 663,
       "sha256": "ff017309a28766db3496dc3cfc9772dddd683a72f8388919394b66bb0b80de84",
       "status": "bounded review and local release validation complete",
@@ -5764,7 +5764,7 @@
     },
     {
       "path": "halls/puzzle.html",
-      "title": "Hall VIII: Puzzle & Novelty Ciphers — The Cipher Museum",
+      "title": "Hall VIII: Puzzle & Novelty Ciphers \u2014 The Cipher Museum",
       "words": 493,
       "sha256": "9151abb5076732fe5f3fbc9a2d5ea1bbef128a5c41ab7785a10be6ae9c20de36",
       "status": "bounded review and local release validation complete",
@@ -5790,7 +5790,7 @@
     },
     {
       "path": "halls/substitution.html",
-      "title": "Hall II: Classical Substitution — The Cipher Museum",
+      "title": "Hall II: Classical Substitution \u2014 The Cipher Museum",
       "words": 703,
       "sha256": "9dc28e24aeb2e9aea0601ca1e44c2551ab359643bb55f46f7abccc38f078c8cb",
       "status": "bounded review and local release validation complete",
@@ -5816,7 +5816,7 @@
     },
     {
       "path": "halls/transposition.html",
-      "title": "Hall IV: Transposition & Fractionation — The Cipher Museum",
+      "title": "Hall IV: Transposition & Fractionation \u2014 The Cipher Museum",
       "words": 631,
       "sha256": "7a1b80ee7051fec41ee2c21d2ada8d3b25e57a52bcbc6f1453b8b61a8d24a14f",
       "status": "bounded review and local release validation complete",
@@ -5842,7 +5842,7 @@
     },
     {
       "path": "halls/unbreakable.html",
-      "title": "Hall IX: The Unbreakable — The Cipher Museum",
+      "title": "Hall IX: The Unbreakable \u2014 The Cipher Museum",
       "words": 880,
       "sha256": "86aa61795cc08776adad07e4ae8cc785b0ab04f54eb64bc761955715267d4edd",
       "status": "bounded review and local release validation complete",
@@ -5873,7 +5873,7 @@
     },
     {
       "path": "halls/unsolved.html",
-      "title": "Hall XII: Unsolved Ciphers — The Cipher Museum",
+      "title": "Hall XII: Unsolved Ciphers \u2014 The Cipher Museum",
       "words": 511,
       "sha256": "d0ac2958d0e2bbaae9efd9670f5ae356638576993c9b5c9c01dd7c963aa27ea2",
       "status": "bounded review and local release validation complete",
@@ -5899,14 +5899,14 @@
     },
     {
       "path": "index.html",
-      "title": "The Cipher Museum — Interactive History of Encryption",
+      "title": "The Cipher Museum \u2014 Interactive History of Encryption",
       "words": 904,
       "sha256": "793e9fac2530a9e166088dc218d24a8084df9a8a48dcf3e5c79c476677bdda06",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed.",
+      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul \u201cThe Cipher Librarian\u201d Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -5930,7 +5930,7 @@
     },
     {
       "path": "lab/decipherment-cases.html",
-      "title": "How a Decipherment Becomes Evidence — The Cipher Museum",
+      "title": "How a Decipherment Becomes Evidence \u2014 The Cipher Museum",
       "words": 892,
       "sha256": "c1810b3961ce4260314e67d5ac510516118baf7b5c8857ac960e175516709876",
       "status": "bounded review and local release validation complete",
@@ -5955,7 +5955,7 @@
     },
     {
       "path": "lab/evidence-workbench.html",
-      "title": "Evidence Workbench — The Cipher Museum",
+      "title": "Evidence Workbench \u2014 The Cipher Museum",
       "words": 2418,
       "sha256": "b5808df6ac7e4bcd92c27f8deb1e724f5e5190ca0592e7f7de7c8bbeba7da5fa",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -5988,7 +5988,7 @@
     },
     {
       "path": "lab/modern-attack-evidence.html",
-      "title": "What an Attack Result Actually Shows — The Cipher Museum",
+      "title": "What an Attack Result Actually Shows \u2014 The Cipher Museum",
       "words": 5165,
       "sha256": "adb7bac36e4d1df6ca2755e9f87d77a12c170fb409728ee210e5e3998df107cd",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
@@ -6048,7 +6048,7 @@
     },
     {
       "path": "lab/workbench.html",
-      "title": "Codebreaker's Workbench — The Cipher Museum",
+      "title": "Codebreaker's Workbench \u2014 The Cipher Museum",
       "words": 114,
       "sha256": "dc2633d4aff2872330a05c5d7d3306f2685489976069c8b66e4afef58699f848",
       "status": "ebook follow-up implementation and local validation complete",
@@ -6086,7 +6086,7 @@
     },
     {
       "path": "learn.html",
-      "title": "Learn — The Cipher Museum",
+      "title": "Learn \u2014 The Cipher Museum",
       "words": 579,
       "sha256": "447c41722da733924e63cacd416c543cdafe2ff99241b594671a8258831a9ba4",
       "status": "ebook follow-up implementation and local validation complete",
@@ -6131,7 +6131,7 @@
     },
     {
       "path": "modern.html",
-      "title": "Modern Cryptography — The Cipher Museum",
+      "title": "Modern Cryptography \u2014 The Cipher Museum",
       "words": 1799,
       "sha256": "315c0d1f2912a7c9d7a662418778a07960c56931d5e8608a45b456b6377e1a4c",
       "status": "ebook follow-up implementation and local validation complete",
@@ -6184,7 +6184,7 @@
     },
     {
       "path": "museum-map.html",
-      "title": "Museum Map — The Cipher Museum",
+      "title": "Museum Map \u2014 The Cipher Museum",
       "words": 1560,
       "sha256": "2f5e77993c4da440aecefac6a201cdbf1dbac4fa60590117885f6fb5b4228ed3",
       "status": "bounded review and local release validation complete",
@@ -6210,7 +6210,7 @@
     },
     {
       "path": "my-path.html",
-      "title": "My Cryptographer's Path — The Cipher Museum",
+      "title": "My Cryptographer's Path \u2014 The Cipher Museum",
       "words": 34,
       "sha256": "93440318da033b141a576fd121ec3ec681717db26c3db1b6650da0dd0f3a02b0",
       "status": "bounded review and local release validation complete",
@@ -6236,7 +6236,7 @@
     },
     {
       "path": "offline.html",
-      "title": "Exhibit unavailable offline — The Cipher Museum",
+      "title": "Exhibit unavailable offline \u2014 The Cipher Museum",
       "words": 49,
       "sha256": "55e94f9358935a1ea2b7d5f655e226e5f5bfb94b512bbba63a8df21d6ff14331",
       "status": "bounded review and local release validation complete",
@@ -6262,7 +6262,7 @@
     },
     {
       "path": "popular-culture-survey.html",
-      "title": "Popular Culture Survey — The Cipher Museum",
+      "title": "Popular Culture Survey \u2014 The Cipher Museum",
       "words": 80,
       "sha256": "42c53fa9e4bfb6105c0b03ad6e1d4629b74cacb157bbb41abe595264d9d7b5c3",
       "status": "bounded review and local release validation complete",
@@ -6316,7 +6316,7 @@
     },
     {
       "path": "sealed-letter.html",
-      "title": "The Curator’s Sealed Letter — The Cipher Museum",
+      "title": "The Curator\u2019s Sealed Letter \u2014 The Cipher Museum",
       "words": 1959,
       "sha256": "4c394fd7d590aaa3356acbbddbaa5367435d2d36ff327f067bba7c130c1e1cbd",
       "status": "bounded integration reading and static puzzle checks complete; no browser execution in this inventory pass",
@@ -6332,7 +6332,7 @@
     },
     {
       "path": "search.html",
-      "title": "Search — The Cipher Museum",
+      "title": "Search \u2014 The Cipher Museum",
       "words": 68,
       "sha256": "a90d6982ce9972ffc01a771dfbc4983841c945c2552b128673bba33e344a436b",
       "status": "bounded review and local release validation complete",
@@ -6358,7 +6358,7 @@
     },
     {
       "path": "teaching.html",
-      "title": "Corpus Teaching Guide — The Cipher Museum",
+      "title": "Corpus Teaching Guide \u2014 The Cipher Museum",
       "words": 580,
       "sha256": "536dd3de4048dc41a75232a1d760d65561686350e9f001f1c00d66d931d27d15",
       "status": "book companion integration: changed invitation and local links checked; earlier reviews remain historical evidence",
@@ -6406,12 +6406,12 @@
     },
     {
       "path": "the-book.html",
-      "title": "Secrets of the Cipher Museum — Paul Clark — The Cipher Museum",
+      "title": "Secrets of the Cipher Museum \u2014 Paul Clark \u2014 The Cipher Museum",
       "words": 736,
       "sha256": "6acd7fff1e48c2c2595593853e4e8506f10f7c4ccac20292eca45840b716fbe0",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
-      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description.",
+      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul \u201cThe Cipher Librarian\u201d Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description.",
       "integration_review": {
         "date": "2026-10-30",
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
@@ -6424,7 +6424,7 @@
     },
     {
       "path": "timeline.html",
-      "title": "Timeline — The Cipher Museum",
+      "title": "Timeline \u2014 The Cipher Museum",
       "words": 3073,
       "sha256": "b4efed8bcf6ac75b5c5738d50ddd5cdb8eda52eed3f244f390d4dcdf833b7dc6",
       "status": "bounded review and local release validation complete",
@@ -6456,7 +6456,7 @@
     },
     {
       "path": "tours/index.html",
-      "title": "Guided Tours — The Cipher Museum",
+      "title": "Guided Tours \u2014 The Cipher Museum",
       "words": 38,
       "sha256": "c4bc888b1829a79297e5c331beed7ffdc9e45a3a1cc60f48c411b743dc2fc3ba",
       "status": "bounded review and local release validation complete",
@@ -6482,7 +6482,7 @@
     },
     {
       "path": "tours/tour.html",
-      "title": "Guided Tour — The Cipher Museum",
+      "title": "Guided Tour \u2014 The Cipher Museum",
       "words": 20,
       "sha256": "6163461ac9b96fb68ae1aac38e33ae5721023f5259936f891545217d5e2ec5b2",
       "status": "bounded review and local release validation complete",
