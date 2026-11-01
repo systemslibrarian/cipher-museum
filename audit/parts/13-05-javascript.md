@@ -1,6 +1,6 @@
 # javascript appendix 5
 
-Snapshot: `3a2de507d2df3cca40f3535c6d18548299b25bc0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `a4edf7fd5755b4a75cc07cd6ac1bbbcd96e3eb8d`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/learning-path.js
 
@@ -1459,8 +1459,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/reader-companion.js`
-- Served SHA-256: `2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468`
-- Readable-source SHA-256: `2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468`
+- Served SHA-256: `bd405d04d2d4197c0e6a1eba6696b115f502a9351976e6c66122df0bfaca45cc`
+- Readable-source SHA-256: `bd405d04d2d4197c0e6a1eba6696b115f502a9351976e6c66122df0bfaca45cc`
 
 
 ```javascript
@@ -1569,8 +1569,8 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     if (!choice) return;
     if (choice.value !== 'register') {
       $('source-feedback').textContent = choice.value === 'keys'
-        ? 'A photograph could confirm possession of keys. It would not tell you which destination was authorised.'
-        : 'A suspicion about R supplies no check on this particular order. Look for a record linked to reference CM-17.';
+        ? 'The checkout log could clarify access to the contents. It would not establish which destination the curator authorised.'
+        : 'The arrival log could clarify delivery timing. It would not establish the authorised wording. Look for a record linked to reference CM-17.';
       return;
     }
     state.source = true;
@@ -1587,9 +1587,9 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     const choice = document.querySelector('input[name="verdict"]:checked');
     if (!choice) return;
     const responses = {
-      theft: 'Access to keys establishes an opportunity, not a theft. Which record actually says the contents were checked?',
-      clerk: 'The log says R opened the envelope. It does not say R wrote or changed the instruction. Those are different claims.',
-      nothing: 'An apparently intact seal is an observation. The later note explicitly says the contents were not checked.'
+      theft: 'A and E agree, but one could derive from the other. The signature also remains unauthenticated. Agreement alone does not establish two independent confirmations.',
+      clerk: 'A later delivery time is not evidence of an authorised revision. Which record says the curator changed the destination?',
+      nothing: 'D explicitly says the contents were not checked. An apparently intact seal cannot settle whether they remain intact.'
     };
     if (choice.value !== 'evidence') {
       state.complete = false;
