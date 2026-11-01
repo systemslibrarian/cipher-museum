@@ -50,6 +50,7 @@ const suites = [
   'tests/test-classical-review.js',
   'tests/test-history-modern-review.js',
   'tests/test-page-audit-claims.js',
+  'tests/test-audit-coverage-fresh.js',
   'tests/test-detective-review.js',
   'tests/test-research-workbench.js',
   'tests/test-research-evaluation.js',

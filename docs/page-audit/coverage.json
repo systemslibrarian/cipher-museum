@@ -5900,13 +5900,13 @@
     {
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
-      "words": 901,
-      "sha256": "ef1dc3e4945b77a600b3808296de17c2a6f09aa7feb85a6ecae8873dd5d00ef1",
+      "words": 904,
+      "sha256": "793e9fac2530a9e166088dc218d24a8084df9a8a48dcf3e5c79c476677bdda06",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed.",
+      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -5925,7 +5925,8 @@
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
       "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
-      "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup."
+      "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup.",
+      "book_cover_alignment_2026_11_01": "revised"
     },
     {
       "path": "lab/decipherment-cases.html",
@@ -6406,11 +6407,11 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum — Paul Clark — The Cipher Museum",
-      "words": 878,
-      "sha256": "2951fae1f5126eeae0051a7ecaa33cb5006e4b7e8ee21761efc3f4a4bbb66a16",
+      "words": 881,
+      "sha256": "f69fbfeb2c1fb0f0994b14aa2f64a4ef0ef84006c47795fa107068551d0abb7d",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
-      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration.",
+      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed.",
       "integration_review": {
         "date": "2026-10-30",
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
@@ -6418,7 +6419,8 @@
         "limits": "No new independent verification of the Mary Stuart narrative, manuscript contents or cover pixels. No browser, visual or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
       },
       "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
-      "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup."
+      "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup.",
+      "book_cover_alignment_2026_11_01": "revised"
     },
     {
       "path": "timeline.html",
@@ -6617,5 +6619,15 @@
       "the-book.html"
     ],
     "note": "The default branch's audit pack was stale again after the book-preview work: these pages' recorded hashes did not match their committed bytes, so export --check failed and the pack could not be regenerated. Content unchanged by this cleanup."
+  },
+  "book_cover_alignment_2026_11_01": {
+    "date": "2026-11-01",
+    "source": "PR #24",
+    "pages_revised": [
+      "index.html",
+      "the-book.html"
+    ],
+    "scope": "Author identity and approved cover artwork only. No historical, cryptographic or evidentiary claim changed.",
+    "ledger_note": "Recorded here so scripts/export-audit-document.js can regenerate; tests/test-audit-coverage-fresh.js now fails at the edit if this step is skipped."
   }
 }
