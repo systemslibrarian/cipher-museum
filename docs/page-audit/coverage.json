@@ -5900,8 +5900,8 @@
     {
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
-      "words": 897,
-      "sha256": "fa97477bfb3818abf7a585a89472d6452577ddf485bbc5e6e4115cdf80e949cf",
+      "words": 901,
+      "sha256": "ef1dc3e4945b77a600b3808296de17c2a6f09aa7feb85a6ecae8873dd5d00ef1",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -5924,7 +5924,8 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+      "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup."
     },
     {
       "path": "lab/decipherment-cases.html",
@@ -6405,8 +6406,8 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum — Paul Clark — The Cipher Museum",
-      "words": 880,
-      "sha256": "d0df1b135f437ff108cbc57e1efedcd4828daf2d86c59cc19056ef25de52b6c2",
+      "words": 878,
+      "sha256": "2951fae1f5126eeae0051a7ecaa33cb5006e4b7e8ee21761efc3f4a4bbb66a16",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
       "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration.",
@@ -6416,7 +6417,8 @@
         "scope": "Complete static HTML reading, metadata and navigation consistency, and local link/fragment existence.",
         "limits": "No new independent verification of the Mary Stuart narrative, manuscript contents or cover pixels. No browser, visual or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
       },
-      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+      "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup."
     },
     {
       "path": "timeline.html",
@@ -6606,5 +6608,14 @@
     ],
     "scope": "R14 relabelled specified-not-executed; pre-registered beam/annealing tuning sweep (beam loses in all 12 cells, kept as a disclosed contrast); author-disjoint language holdout for all three languages, 9 of 9, reported beside the document-internal set; plain-language framing of 0 of 39 exact; cross-browser verification in Chromium, Firefox and WebKit at three viewports, 153 of 153, nothing differing from Chromium.",
     "inherited_drift": "The default branch's audit pack was already stale: six pages carried recorded hashes that did not match their committed bytes, and export --check failed on origin/main before this branch existed. Those hashes are refreshed here so the pack regenerates; the pages themselves were not touched by this work and are listed separately above."
+  },
+  "branch_cleanup_2026_11_01": {
+    "date": "2026-11-01",
+    "action": "Repository cleanup: archived the one unmerged document, refreshed stale audit hashes, deleted every merged branch.",
+    "hashes_refreshed_not_revised": [
+      "index.html",
+      "the-book.html"
+    ],
+    "note": "The default branch's audit pack was stale again after the book-preview work: these pages' recorded hashes did not match their committed bytes, so export --check failed and the pack could not be regenerated. Content unchanged by this cleanup."
   }
 }
