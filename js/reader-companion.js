@@ -103,8 +103,8 @@
     if (!choice) return;
     if (choice.value !== 'register') {
       $('source-feedback').textContent = choice.value === 'keys'
-        ? 'A photograph could confirm possession of keys. It would not tell you which destination was authorised.'
-        : 'A suspicion about R supplies no check on this particular order. Look for a record linked to reference CM-17.';
+        ? 'The checkout log could clarify access to the contents. It would not establish which destination the curator authorised.'
+        : 'The arrival log could clarify delivery timing. It would not establish the authorised wording. Look for a record linked to reference CM-17.';
       return;
     }
     state.source = true;
@@ -121,9 +121,9 @@
     const choice = document.querySelector('input[name="verdict"]:checked');
     if (!choice) return;
     const responses = {
-      theft: 'Access to keys establishes an opportunity, not a theft. Which record actually says the contents were checked?',
-      clerk: 'The log says R opened the envelope. It does not say R wrote or changed the instruction. Those are different claims.',
-      nothing: 'An apparently intact seal is an observation. The later note explicitly says the contents were not checked.'
+      theft: 'A and E agree, but one could derive from the other. The signature also remains unauthenticated. Agreement alone does not establish two independent confirmations.',
+      clerk: 'A later delivery time is not evidence of an authorised revision. Which record says the curator changed the destination?',
+      nothing: 'D explicitly says the contents were not checked. An apparently intact seal cannot settle whether they remain intact.'
     };
     if (choice.value !== 'evidence') {
       state.complete = false;

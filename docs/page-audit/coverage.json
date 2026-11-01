@@ -1849,14 +1849,14 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "words": 2409,
-      "sha256": "fcb5ca7fb9176cc03153a92557aaeef2a9b586b74b1f0b2b9ad786b7a07ba210",
+      "words": 2308,
+      "sha256": "325e685d24384e163220d5bd1b6bc1da77289d650f0128efe2f2fef19a6414e2",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
         "TNMOC-BOMBE"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2382,13 +2382,13 @@
     {
       "path": "ciphers/jn-25.html",
       "title": "JN-25 (Japanese Naval Code) - The Cipher Museum",
-      "words": 527,
-      "sha256": "69b09f20b0e227f674bb685d744270d060eb1bc7157dda8539aad5813d21ba9a",
+      "words": 620,
+      "sha256": "4ac9d3d4b56851f320747e6c18d6d2c3fb032ddd9ec346267fecc37aca97e74c",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ROCHEFORT-WATER-2021"
       ],
-      "notes": "Removed claim additives must be fully stripped before any usefulstatistics; AF report contributedtoassessment, notsoledeploymentcause; codebookeditionsvaried. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate.",
+      "notes": "Removed claim additives must be fully stripped before any usefulstatistics; AF report contributedtoassessment, notsoledeploymentcause; codebookeditionsvaried. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate. Developmental book revision, November 2026: added Driscoll and Rochefort context with bibliographic sources.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -3091,8 +3091,8 @@
     {
       "path": "ciphers/navajo-code-talkers.html",
       "title": "Navajo Code Talkers — The Cipher Museum",
-      "words": 898,
-      "sha256": "0174d531ae7d63ff7d527e79462d932e9f0e4ecceaf5112c13b1747bccb571fd",
+      "words": 951,
+      "sha256": "197db06127978ca597ec440856fd199f03a9bf7b2474945910abf7a127fdc378",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NAVAJO-NARA-2001",
@@ -3101,7 +3101,7 @@
         "NAVAJO-CIA-ALPHABET",
         "COMANCHE-ARMY"
       ],
-      "notes": "People counts, developer/deployment distinction, military vocabulary and spelling code checked; no numerical security rating. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
+      "notes": "People counts, developer/deployment distinction, military vocabulary and spelling code checked; no numerical security rating. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. Developmental book revision, November 2026: added direct Smithsonian first-person account links.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "browser_followup": "Desktop1280/mobile390 loaded without errors or horizontal overflow; see browser-culture-fifth.json for interaction scope.",
       "final_prose_review": {
@@ -4099,13 +4099,13 @@
     {
       "path": "ciphers/stager.html",
       "title": "Stager Cipher — The Cipher Museum",
-      "words": 670,
-      "sha256": "23bb070762ebcc03e2406f2088d189918431559d8ad4f98c9cad16d3eb29f750",
+      "words": 884,
+      "sha256": "b6b7d7cb8d0846730320fbcf035060f8af965f95fb98a6ee78c365fe8db59db0",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Whole-word historical routes versus individual-letter browser route explicit. Removed every-message/never-broken absolutes, false1862diagram provenance and PKI lineage. KahnCipherNo.4page counts and1863Lincolnexample read. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
+      "notes": "Whole-word historical routes versus individual-letter browser route explicit. Removed every-message/never-broken absolutes, false1862diagram provenance and PKI lineage. KahnCipherNo.4page counts and1863Lincolnexample read. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate. Developmental book revision, November 2026: added a reversible whole-word teaching route with vocabulary and nulls; removed the split-word drawing; retained the separately labelled letter model.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4395,8 +4395,8 @@
     {
       "path": "ciphers/venona.html",
       "title": "VENONA Project — The Cipher Museum",
-      "words": 1343,
-      "sha256": "3c89f0246e93d2776ea9b7e9ccc71a30aac017d049d3a041359591176051bc9c",
+      "words": 1470,
+      "sha256": "1a2ba2ad42f3cabe3fe72cd69687832cbfa6a12d2bec8ac05c8e17078a9db1d1",
       "status": "bounded review and local release validation complete",
       "sources": [
         "CAIRNCROSS-TNA",
@@ -4404,7 +4404,7 @@
         "UKUS-1953",
         "5UCO-CRYPTOMUSEUM"
       ],
-      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: added Phillips, Gardner and Weisband context with sources.",
       "browser_smoke": "Sixth batch: desktop1280/mobile390 loaded without script errors or overflow. Colossus and three manual-cipher controls exercised; source vectors checked independently in Node. External resources blocked.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -5956,11 +5956,11 @@
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "words": 2450,
-      "sha256": "de9f518b2a41693a903bf93715a1a60b5f53fe82afab55a9fdba20d37eb3bf16",
+      "words": 2418,
+      "sha256": "b5808df6ac7e4bcd92c27f8deb1e724f5e5190ca0592e7f7de7c8bbeba7da5fa",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
-      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too.",
+      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too. Developmental book revision, November 2026: added a beginner evidence exercise with an optional answer reveal.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "root",
@@ -6317,11 +6317,11 @@
     {
       "path": "sealed-letter.html",
       "title": "The Curator’s Sealed Letter — The Cipher Museum",
-      "words": 2138,
-      "sha256": "0a2a6664a35a5273dec69b463718bf698740131f9c8b4228ccc9cd0c2cac3c02",
+      "words": 1959,
+      "sha256": "4c394fd7d590aaa3356acbbddbaa5367435d2d36ff327f067bba7c130c1e1cbd",
       "status": "bounded integration reading and static puzzle checks complete; no browser execution in this inventory pass",
       "sources": [],
-      "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified.",
+      "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified. Developmental book revision, November 2026: removed unused wraparound instruction and made source/finding choices more plausible.",
       "integration_review": {
         "date": "2026-10-30",
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
@@ -6407,11 +6407,11 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum — Paul Clark — The Cipher Museum",
-      "words": 881,
-      "sha256": "f69fbfeb2c1fb0f0994b14aa2f64a4ef0ef84006c47795fa107068551d0abb7d",
+      "words": 736,
+      "sha256": "6acd7fff1e48c2c2595593853e4e8506f10f7c4ccac20292eca45840b716fbe0",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
-      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed.",
+      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description.",
       "integration_review": {
         "date": "2026-10-30",
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
