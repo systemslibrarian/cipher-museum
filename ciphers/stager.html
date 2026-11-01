@@ -23,7 +23,14 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="stylesheet" href="../css/museum.css">
 
-</head>
+<style>
+#word-route,#letter-model{max-width:1216px;margin:2rem auto;width:calc(100% - 4rem)}
+#word-route h2{margin-bottom:1rem}#word-route details{margin-top:1rem;border-top:1px solid var(--gold-b);padding-top:1rem}
+#word-route summary,#letter-model>summary{cursor:pointer;font-weight:600;color:var(--gold);padding:.5rem 0}
+#word-route p{max-width:78ch;margin:.75rem 0}#word-route .cipher-table{margin:1rem 0;min-width:360px}#word-route caption{text-align:left;padding:.5rem 0}
+#letter-model>summary{padding:1.25rem 1.5rem}#letter-model .demo-section{padding:0 1.5rem 1.5rem}
+@media(max-width:600px){#word-route,#letter-model{width:calc(100% - 2rem)}}
+</style></head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <nav class="museum-nav" aria-label="Primary">
@@ -82,11 +89,11 @@
 <p>A short invented dispatch: <strong>MOVE THE SUPPLIES TO RIVER BRIDGE AT DAWN</strong>. This teaching model combines three ideas used in Union route codes. Its vocabulary, route and null word are invented; it is not a recovered wartime key.</p>
 <details><summary>1. Conceal the two place words</summary><p>Our small vocabulary replaces RIVER with ORCHARD and BRIDGE with LANTERN. The message becomes <strong>MOVE THE SUPPLIES TO ORCHARD LANTERN AT DAWN</strong>.</p></details>
 <details><summary>2. Follow the column route</summary><p>Write four whole words across each row. Read column 3 down, column 1 up, column 4 down, then column 2 up.</p>
-<div style="overflow-x:auto"><table class="data-table"><caption>Invented word-route grid</caption><thead><tr><th scope="col">1 ↑</th><th scope="col">2 ↑</th><th scope="col">3 ↓</th><th scope="col">4 ↓</th></tr></thead><tbody><tr><td>MOVE</td><td>THE</td><td>SUPPLIES</td><td>TO</td></tr><tr><td>ORCHARD</td><td>LANTERN</td><td>AT</td><td>DAWN</td></tr></tbody></table></div>
+<div style="overflow-x:auto"><table class="cipher-table"><caption>Invented word-route grid</caption><thead><tr><th scope="col">1 ↑</th><th scope="col">2 ↑</th><th scope="col">3 ↓</th><th scope="col">4 ↓</th></tr></thead><tbody><tr><td>MOVE</td><td>THE</td><td>SUPPLIES</td><td>TO</td></tr><tr><td>ORCHARD</td><td>LANTERN</td><td>AT</td><td>DAWN</td></tr></tbody></table></div>
 <p>Readout: <strong>SUPPLIES AT · ORCHARD MOVE · TO DAWN · LANTERN THE</strong>.</p></details>
 <details><summary>3. Add a null, then recover the dispatch</summary><p>Insert SKY after each column pair: <strong>SUPPLIES AT SKY ORCHARD MOVE SKY TO DAWN SKY LANTERN THE SKY</strong>. SKY carries no message in this invented key.</p><p>To recover the message, remove each SKY, place successive pairs into columns 3 down, 1 up, 4 down and 2 up, then read the rows. Finally replace ORCHARD and LANTERN using the vocabulary.</p><p><strong>Try it before opening the answer.</strong> Which two words remain concealed if you know the route but do not possess the vocabulary?</p><details><summary>Check the result</summary><p>The route restores MOVE THE SUPPLIES TO ORCHARD LANTERN AT DAWN. The vocabulary restores RIVER and BRIDGE. Reading the route alone does not establish the intended locations.</p></details></details>
 </div></section>
-<details class="panel"><summary>Explore a separate letter-transposition model</summary><p class="panel-body">This older widget rearranges letters, rather than the whole words used above. Its escape and padding rules are teaching conventions.</p><div class="demo-section" data-cipher="stager"></div></details>
+<details class="panel" id="letter-model"><summary>Explore a separate letter-transposition model</summary><p class="panel-body">This older widget rearranges letters, rather than the whole words used above. Its escape and padding rules are teaching conventions.</p><div class="demo-section" data-cipher="stager"></div></details>
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
