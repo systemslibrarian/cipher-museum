@@ -1,6 +1,6 @@
 # javascript appendix 5
 
-Snapshot: `c329dc19058c960a430ac62352191a47bccfeba5`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/learning-path.js
 
@@ -1459,18 +1459,70 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/reader-companion.js`
-- Served SHA-256: `c13a44b3908714f5028d0e19e7e826517416df1f13ef412a4c8a27b08ac0e79e`
-- Readable-source SHA-256: `c13a44b3908714f5028d0e19e7e826517416df1f13ef412a4c8a27b08ac0e79e`
+- Served SHA-256: `2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468`
+- Readable-source SHA-256: `2454127e265ec54292be151750e7dbbe55c02f99056d70f6d0f4fd7d6d965468`
 
 
 ```javascript
-/* An original reader puzzle. Client-side gates are a courtesy, not access control. */
+/* Original fictional reader case. Gates guide the activity; they are not access control. */
 'use strict';
 (function () {
   const $ = id => document.getElementById(id);
   if (!$('unlock-form')) return;
   const normalize = text => text.toUpperCase().replace(/[^A-Z0-9]/g, '');
   const instruction = 'COMPARE THE COPIES BEFORE YOU TRUST THEM';
+  const state = { started: false, decoded: false, compared: false, source: false, complete: false, entry: '', help: new Set() };
+  const stages = ['recover the destination', 'compare the copies', 'request another source', 'make a finding'];
+  const codebook = Object.fromEntries([...document.querySelectorAll('#dispatch-key [data-code]')].map(el => [el.dataset.code, el.textContent.trim()]));
+  const groups = $('dispatch-cipher').textContent.match(/\d{2}/g) || [];
+  const reading = groups.map(group => codebook[group]);
+  const room = reading[reading.indexOf('ROOM') + 1];
+  const validDispatch = groups.length > 0 && reading.every(Boolean) && normalize(reading.join(' ')) === normalize($('retained-message').textContent);
+  function progress(step) {
+    document.querySelectorAll('.case-progress [data-step]').forEach(el => {
+      const number = Number(el.dataset.step);
+      el.classList.toggle('is-complete', state.complete || number < step);
+      if (number === step && !state.complete) el.setAttribute('aria-current', 'step');
+      else el.removeAttribute('aria-current');
+    });
+    $('case-progress-text').textContent = state.complete ? 'Investigation complete. Your finding is below.' : `Step ${step} of 4: ${stages[step - 1]}.`;
+  }
+  function openCase(entry) {
+    if (!validDispatch) {
+      $('unlock-feedback').textContent = 'This case file has an inconsistent dispatch. Please reload the page before continuing.';
+      return;
+    }
+    if (!state.started) state.entry = entry;
+    state.started = true;
+    $('investigation').hidden = false;
+    $('case-title').focus();
+  }
+  function finishDecode(revealed) {
+    if (!state.started) return;
+    state.decoded = true;
+    if (revealed) state.help.add('dispatch-answer');
+    $('decode-feedback').textContent = `The dispatch names ROOM ${room}. The complete reading is beside the delivered copy below.`;
+    $('copies-panel').hidden = false;
+    progress(2);
+    $('copies-title').focus();
+  }
+  async function copyText(text, feedbackId, copyId, labelId, success) {
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(text);
+      $(copyId).hidden = true;
+      $(labelId).hidden = true;
+      $(feedbackId).textContent = success;
+    } catch (_) {
+      $(labelId).hidden = false;
+      $(copyId).hidden = false;
+      $(copyId).value = text;
+      $(copyId).focus();
+      $(copyId).select();
+      $(feedbackId).textContent = 'Select and copy the text below. Nothing has been sent.';
+    }
+  }
+  $('start-case').addEventListener('click', () => openCase('Direct start'));
   $('unlock-form').addEventListener('submit', event => {
     event.preventDefault();
     if (normalize($('instruction').value) !== normalize(instruction)) {
@@ -1478,53 +1530,110 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       return;
     }
     $('unlock-feedback').textContent = 'The instruction fits. The envelope is open below.';
-    $('investigation').hidden = false;
-    $('case-title').focus();
+    openCase('Four book slips');
+  });
+  $('decode-form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!state.started) return;
+    const answer = normalize($('dispatch-room').value).replace(/^ROOM/, '');
+    if (![normalize(room), '4'].includes(answer)) {
+      $('decode-feedback').textContent = 'Follow the code group immediately after ROOM. Enter its word or room number; the codebook and hints are available above.';
+      return;
+    }
+    finishDecode(false);
+  });
+  $('reveal-dispatch').addEventListener('click', () => {
+    $('dispatch-room').value = room;
+    finishDecode(true);
   });
   $('compare-form').addEventListener('submit', event => {
     event.preventDefault();
+    if (!state.decoded) return;
     const choice = document.querySelector('input[name="difference"]:checked');
     if (!choice) return;
     if (choice.value !== 'room') {
       $('compare-feedback').textContent = 'Compare the message wording again. Both copies say AT NINE and name ELLIS. The document timestamps are separate from the instruction.';
       return;
     }
+    state.compared = true;
     document.querySelectorAll('[data-difference]').forEach(mark => mark.classList.add('revealed'));
-    $('compare-feedback').textContent = 'Yes: FOUR became FIVE. You have found a difference. Now decide how much it proves.';
+    $('compare-feedback').textContent = 'Yes: A names FOUR and B names FIVE. The difference is established; its cause is not.';
+    $('source-panel').hidden = false;
+    progress(3);
+    $('source-title').focus();
+  });
+  $('source-form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!state.compared) return;
+    const choice = document.querySelector('input[name="source"]:checked');
+    if (!choice) return;
+    if (choice.value !== 'register') {
+      $('source-feedback').textContent = choice.value === 'keys'
+        ? 'A photograph could confirm possession of keys. It would not tell you which destination was authorised.'
+        : 'A suspicion about R supplies no check on this particular order. Look for a record linked to reference CM-17.';
+      return;
+    }
+    state.source = true;
+    $('register-record').hidden = false;
+    $('source-feedback').textContent = 'The register is below. It supports a destination, with limits of its own. Read it before making your finding.';
     $('verdict-form').hidden = false;
-    document.querySelector('input[name="verdict"]').focus();
+    progress(4);
+    $('register-record').setAttribute('tabindex', '-1');
+    $('register-record').focus();
   });
   $('verdict-form').addEventListener('submit', event => {
     event.preventDefault();
+    if (!state.source) return;
     const choice = document.querySelector('input[name="verdict"]:checked');
     if (!choice) return;
     const responses = {
       theft: 'Access to keys establishes an opportunity, not a theft. Which record actually says the contents were checked?',
       clerk: 'The log says R opened the envelope. It does not say R wrote or changed the instruction. Those are different claims.',
-      nothing: 'An apparently intact seal is an observation. The note explicitly says the contents were not checked.'
+      nothing: 'An apparently intact seal is an observation. The later note explicitly says the contents were not checked.'
     };
     if (choice.value !== 'evidence') {
+      state.complete = false;
+      $('finding').hidden = true;
+      progress(4);
       $('verdict-feedback').textContent = responses[choice.value] || 'Choose the conclusion supported by these documents.';
       return;
     }
-    $('verdict-feedback').textContent = 'That conclusion stays within the evidence.';
+    state.complete = true;
+    $('verdict-feedback').textContent = 'Your finding separates the supported destination from an unsupported accusation.';
     $('finding').hidden = false;
+    progress(4);
     $('finding-title').focus();
   });
-  $('share-finding').addEventListener('click', async () => {
-    const text = 'I opened the Curator’s Sealed Letter and completed its evidence investigation at Cipher Museum. Try the free reader’s mystery: https://ciphermuseum.com/sealed-letter.html';
-    try {
-      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(text);
-      $('share-feedback').textContent = 'Copied. Paste it wherever you choose—no solution included.';
-    } catch (_) {
-      $('share-copy-label').hidden = false;
-      $('share-copy').hidden = false;
-      $('share-copy').value = text;
-      $('share-copy').focus();
-      $('share-copy').select();
-      $('share-feedback').textContent = 'Select and copy the text below. It contains no solution.';
-    }
+  document.querySelectorAll('details.hint').forEach((el, index) => {
+    el.addEventListener('toggle', () => { if (el.open) state.help.add(`hint-${index}`); });
+  });
+  $('share-finding').addEventListener('click', () => {
+    if (!state.complete) return;
+    const text = 'I completed The Curator’s Sealed Letter, a free codebreaking and evidence investigation at Cipher Museum. Try the case: https://ciphermuseum.com/sealed-letter.html';
+    copyText(text, 'share-feedback', 'share-copy', 'share-copy-label', 'Copied. Paste the invitation wherever you choose—no solution included.');
+  });
+  $('playtest-form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!state.complete || !$('playtest-form').checkValidity()) return;
+    const text = [
+      'Cipher Museum playtest · The Curator’s Sealed Letter · Pilot 1',
+      `Entry: ${state.entry}`,
+      'Case completed: yes',
+      `Help items opened: ${state.help.size}`,
+      `Most needed help: ${$('playtest-hardest').value}`,
+      `Would try another case: ${$('playtest-again').value}`,
+      `Notes: ${$('playtest-note').value.trim() || '(none)'}`
+    ].join('\n');
+    copyText(text, 'playtest-feedback', 'playtest-copy', 'playtest-copy-label', 'Notes copied. Send them to the person who invited you when you are ready. Nothing was submitted here.');
+  });
+  $('restart-case').addEventListener('click', () => {
+    Object.assign(state, { decoded: false, compared: false, source: false, complete: false });
+    ['copies-panel', 'source-panel', 'register-record', 'verdict-form', 'finding', 'share-copy', 'share-copy-label', 'playtest-copy', 'playtest-copy-label'].forEach(id => { $(id).hidden = true; });
+    ['decode-form', 'compare-form', 'source-form', 'verdict-form', 'playtest-form'].forEach(id => $(id).reset());
+    ['decode-feedback', 'compare-feedback', 'source-feedback', 'verdict-feedback', 'share-feedback', 'playtest-feedback'].forEach(id => { $(id).textContent = ''; });
+    document.querySelectorAll('[data-difference]').forEach(mark => mark.classList.remove('revealed'));
+    progress(1);
+    $('case-title').focus();
   });
 })();
 ```
@@ -1695,8 +1804,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/research-model.js`
-- Served SHA-256: `4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420`
-- Readable-source SHA-256: `4ce9cdcf22c5457cb9307df662714f10671d9e8e94449f539ecda6583264a420`
+- Served SHA-256: `7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56`
+- Readable-source SHA-256: `7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56`
 
 
 ```javascript
@@ -1707,7 +1816,12 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 (function (global) {
   const KIND = 'cipher-museum-transcription';
   const TYPES = ['ciphertext', 'cleartext', 'marginal', 'missing', 'editorial'];
-  const KEY_TYPES = ['letter', 'syllable', 'word', 'name', 'null', 'space', 'repeat', 'erase', 'unknown'];
+  const KEY_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null', 'space', 'repeat', 'erase', 'unknown'];
+  const SOURCE_FIELDS = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName',
+    'custodianCountry','repositoryRecordUrl','originPlace','originStatus','productionDateStart','productionDateEnd','productionDateStatus','provenance',
+    'scriptIdentification','scriptStatus','languageHypothesis','languageStatus',
+    'objectRights','objectAccess','objectAttribution','imageRights','imageAccess','imageAttribution','transcriptionRights','transcriptionAccess','transcriptionAttribution'];
+  const SOURCE_STATUSES = ['unknown', 'provisional', 'established'];
   const copy = x => JSON.parse(JSON.stringify(x));
   const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   function check(ok, message) { if (!ok) throw new Error(message); }
@@ -1723,8 +1837,13 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   function source(x) {
     check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid source record.');
     const result = {};
-    for (const field of ['artifactId', 'archive', 'shelfmark', 'folio', 'transcriber', 'date', 'method', 'imageName']) result[field] = string(x[field] || '', 500, field);
-    result.url = url(x.url || ''); return result;
+    for (const field of SOURCE_FIELDS) {
+      const value = x[field] === undefined ? '' : x[field];
+      if (field === 'url' || field === 'repositoryRecordUrl') result[field] = url(value);
+      else if (field.endsWith('Status')) { result[field] = value || 'unknown'; check(SOURCE_STATUSES.includes(result[field]), 'Invalid source uncertainty status.'); }
+      else result[field] = string(value, 500, field);
+    }
+    return result;
   }
   function create(raw = '') {
     string(raw, 10000, 'Transcription');
@@ -1920,7 +2039,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   // ── Numerical segmentation ────────────────────────────────────────────────
   // A typed entry distinguishes a letter, a syllable, a whole word, a name and a
   // null that deliberately contributes nothing. A bare string stays one reading.
-  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'null'];
+  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null'];
   const SEG_LINES = ['boundary', 'span'];
   const COUNT_CAP = 1e15;
   function normalizeCodes(key) {
@@ -2353,9 +2472,18 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     const state = copy(b[type]);
     delete state.inputFingerprint; delete state.configurationFingerprint;
     delete state.elapsedMs; // A measurement is not a solver input.
-    return fingerprint(canonical({ state, source: b.evidence, selectedLayer: b.selectedLayer,
+    return fingerprint(canonical({ state, source: bindingEvidence(b.evidence), selectedLayer: b.selectedLayer,
       modelBuild: b.tool.modelBuild, scoringModel: type === 'search' ? b.tool.scoringModel : state.scoring,
       solver: type === 'search' ? b.tool.solver : 'numerical-lattice' }));
+  }
+  // Empty optional metadata must not make an unchanged pre-extension bundle
+  // appear edited. Meaningful new metadata still participates in every binding.
+  function bindingEvidence(d) {
+    const result = copy(d);
+    for (const f of SOURCE_FIELDS.slice(9)) {
+      if (result.source[f] === '' || (f.endsWith('Status') && result.source[f] === 'unknown')) delete result.source[f];
+    }
+    return result;
   }
   // A declared NON-cryptographic 64-bit fingerprint. It detects a changed input so
   // stale results can be invalidated; it is not an integrity or authenticity check.
@@ -2445,7 +2573,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       images: d.images.map(i => ({ id: i.id, name: i.name, sha256: i.sha256, width: i.width, height: i.height,
         rotation: i.rotation, crop: i.crop.slice() })),
       imageBytes: 'Image bytes are deliberately not included. Reopen each file locally; the recorded hash tells you whether the bytes match.',
-      sourceFingerprint: s.sourceFingerprint === undefined ? fingerprint(canonical(d)) : s.sourceFingerprint,
+      sourceFingerprint: s.sourceFingerprint === undefined ? fingerprint(canonical(bindingEvidence(d))) : s.sourceFingerprint,
       limits: 'Replay needs the same solver and scoring-model build, not only the same seed. A recorded filename or hash identifies bytes; it does not establish that an image is the archival object it claims to be.'
     };
     for (const type of ['search', 'segmentation']) if (value[type]) {
@@ -2486,7 +2614,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       rotation: integer(i.rotation, 0, 270, 'image rotation'), crop: i.crop }));
     b.sourceFingerprint = string(b.sourceFingerprint || '', 32, 'Source fingerprint');
     // Stale results are reported, never silently reused.
-    const sourceMoved = b.legacyUnbound || b.sourceFingerprint !== fingerprint(canonical(b.evidence));
+    const sourceMoved = b.legacyUnbound || b.sourceFingerprint !== fingerprint(canonical(bindingEvidence(b.evidence)));
     const modelMoved = b.tool.modelBuild !== MODEL_BUILD;
     const searchMoved = !!(b.search && (b.legacyUnbound || modelMoved ||
       b.search.inputFingerprint !== fingerprint(b.search.raw) || b.search.configurationFingerprint !== resultBinding(b, 'search')));
@@ -2591,7 +2719,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     check(['diagonal', 'row-major'].includes(kind), 'Unknown route.');
     return Array.from({length:153}, (_, i) => kind === 'diagonal' ? (i % 9) * 17 + (2 * i % 17) : i);
   }
-  const api = { TYPES, KEY_TYPES, SEG_TYPES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
+  const api = { TYPES, KEY_TYPES, SEG_TYPES, SOURCE_FIELDS, SOURCE_STATUSES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
     create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey,
     segment, segmentMetrics, normalizeCodes, rng, parseSymbols, search, beamSearch, metrics, url, z340Route,
     imageRecord, addImage, regionToDisplay, displayToRegion, displayAspect,
