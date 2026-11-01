@@ -33,7 +33,9 @@
     "build:corpus:replay-status": "node scripts/build-corpus-replay-status.js",
     "record:dataset-doi": "node scripts/record-dataset-doi.js",
     "build:language-profiles": "node scripts/build-research-language-profiles.js",
-    "eval:research:v2": "node scripts/evaluate-research-v2.js"
+    "eval:research:v2": "node scripts/evaluate-research-v2.js",
+    "sweep:solvers": "node scripts/sweep-solvers.js",
+    "check:browsers": "node scripts/check-browsers.js"
   },
   "repository": {
     "type": "git",

@@ -11,7 +11,10 @@ summaries in an earlier pass because the publisher's server refused retrieval; b
 PDFs were supplied locally during this pass and read, which is why those two exhibits could
 be expanded rather than hedged again.
 
-**Status: all fourteen implemented. No blocked items.**
+**Status: thirteen implemented; R14 specified, not executed.** R14's teaching material —
+the four-task table, the metadata gap, the checklist — is live. Its matched-input evaluation
+recipe is a specification that nobody has run, here or elsewhere, so R14 is recorded as
+**specified, not executed** rather than done. No item is blocked.
 
 ## R01–R14
 
@@ -30,7 +33,7 @@ be expanded rather than hedged again.
 | **R11** | Hypothesis register with claim, supporting evidence, contradictory evidence, a confidence **word** from a fixed list, and unresolved alternatives. The record refuses to call a claim well-supported on fewer than two separate pieces of evidence or with unanswered counterevidence, so a clean key application cannot promote a claim. Evidence on both sides survives export and import. A guided unidentified-document case carries a deliberately misleading catalogue description, an unresolved name, and an outcome that stays incomplete. | `js/research-model.js`, `js/research-ui.js`, `lab/evidence-workbench.html` | CM033, CM004, CM005 |
 | **R12** | Five comparison cards, each answering the same six questions: Juniper Dual EC, Office RC4 keystream reuse, KASUMI related-key, Bluetooth fixed-coordinate invalid curve, and small-subgroup confinement versus static-key recovery. Cross-linked both ways with the Lorenz depth explanation and the Diffie–Hellman exhibit. Evidence cards, not simulators. | `lab/modern-attack-evidence.html#cards`, `ciphers/lorenz.html`, `ciphers/diffie-hellman.html` | CL225, CL243, CL247, CL378, CL231 |
 | **R13** | §4 on the finite-fields exhibit separates exceptional cases in affine arithmetic, complete formulas **on their stated curve class**, functional-correctness proofs and their trusted-compiler boundary, and constant-time assurance as a property of emitted machine code. The small-curve visualization is unchanged and the JavaScript is explicitly not production-ready, constant-time or verified. A pointer paragraph on the real-curve exhibit. No arithmetic was changed. | `hall-of-foundations/finite-fields.html`, `hall-of-foundations/elliptic-curves-real.html`, `hall-of-foundations/ec-math.test.js` | CL572, CL581 |
-| **R14** | A four-row table separating metadata recognition, cipher-family classification, fixed-codebook recognition and genuine plaintext/key recovery, with the measurable metadata gap (71.7% → 30.8%) and the explicit note that one benchmark tier ran no live model. A five-step matched-input recipe with label-shuffled and length-only floors, presented as **a reproducible procedure the museum has not executed** — no numbers from it are published. A six-question checklist for reading someone else's benchmark. Pointers from the corpus page and the v1 protocol. | `lab/modern-attack-evidence.html#ai-results`, `cipher-corpus.html`, `data/research/v1/README.md` | CM012, CM013, CM010 |
+| **R14** *(specified, not executed)* | **Teaching material, live:** a four-row table separating metadata recognition, cipher-family classification, fixed-codebook recognition and genuine plaintext/key recovery; the measurable metadata gap (71.7% → 30.8%); the note that one benchmark tier ran no live model; a six-question checklist for reading someone else's benchmark; pointers from the corpus page and the v1 protocol. **Specification, not executed:** the five-step matched-input recipe with label-shuffled and length-only floors. It has not been run against a live model, by the museum or anyone else, and no numbers from it exist. The recipe is published unchanged; only its status wording is corrected. | `lab/modern-attack-evidence.html#ai-results`, `cipher-corpus.html`, `data/research/v1/README.md` | CM012, CM013, CM010 |
 
 ## Checks actually run, and their results
 
@@ -111,8 +114,10 @@ overflow and zero page script errors. The one non-pass is the local static serve
   historical record are uncovered; such a text can only be abstained on or mis-assigned.
 - **Nine passages from three works** is a small measurement. It shows the comparison and its
   abstention rule function. It is not a language-identification accuracy figure.
-- **The R14 recipe was not executed.** It is published as a procedure. No benchmark numbers
-  are invented or implied.
+- **R14 is specified, not executed.** The recipe is a procedure nobody has run. No benchmark
+  numbers from it exist, here or elsewhere, and none are invented or implied. Running it
+  needs live model access and a declared model version, date and settings; until that
+  happens the recipe is a specification and is labelled one everywhere it appears.
 - **The profile file is not in the offline bundle.** At 0.74 MB it would add a third to the
   service-worker precache that every visitor pays, for a feature only workbench users need.
   It is fetched on demand and the page says so.
@@ -137,3 +142,136 @@ The review's criteria were used as written except for these, which were not run 
 claimed: reproducing either paper's attacks; retraining or evaluating any neural model;
 executing the R14 matched-input recipe against a live LLM; and testing on browsers other than
 Chromium. Browser checks were headless Chromium at two widths, not a cross-browser matrix.
+
+
+---
+
+# Addendum — 1 November 2026
+
+Six follow-up items on PR #14. All six completed; nothing blocked.
+
+| # | Item | Outcome |
+| --- | --- | --- |
+| 1 | R14 status | Changed from "done" to **specified, not executed** in the status line, the R01–R14 table, the limitations list, the exhibit page and the corpus-page pointer. The recipe itself is published unchanged. |
+| 2 | Beam vs annealing tuning sweep | Pre-registered grid run. **Beam loses in all 12 cells**; kept, and the exhibit now says plainly it is a contrast, not the stronger solver. |
+| 3 | Author-disjoint language holdout | Built for **all three** languages. **9 of 9 correct**, reported beside the document-internal 9/9, never merged with it. |
+| 4 | Framing of 0 of 39 exact | Plain-language section added to the evaluation page. |
+| 5 | Cross-browser checks | Chromium, Firefox and WebKit at three viewports. **153 of 153 passed; nothing differs from Chromium.** |
+| 6 | Record and deployment | This addendum; deployed and verified. |
+
+## 1. R14 is specified, not executed
+
+The teaching material R14 added is live and unchanged. Its matched-input evaluation recipe
+has not been run — by the museum or, as far as the museum knows, by anyone — so it is now
+labelled a specification everywhere it appears, including on the public page. No numbers
+were added, removed or invented.
+
+## 2. Beam search was tuned and still loses
+
+The grid, budget and win condition were fixed in the header of `scripts/sweep-solvers.js`
+**before any result was read**: 4 beam widths × 3 scoring weights, against annealing at two
+budgets under the same three weights, one run per cell on the 13 `full-2hom` items. Beam
+would be declared the winner only if some cell beat the shipped annealing row on mean
+plaintext error.
+
+One protocol adjustment, recorded before results: the high annealing budget was registered
+at 60,000 steps, which the shipped solver refuses on the longest item (343 tokens × 60,000
+exceeds its 20-million-evaluation ceiling). The row uses 50,000 steps, the largest round
+budget accepted for every item. It grants annealing more compute, not less.
+
+| Solver | Beam | Steps | Penalty | Plaintext err | Key err | Exact | Mean ms |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Annealing | — | 6,000 | 0 | **72.9%** | 89.2% | 0/13 | 31 |
+| Annealing | — | 50,000 | 0 | **65.6%** | 80.7% | 0/13 | 186 |
+| Beam | 50 | — | 0 | **80.1%** | 94.4% | 0/13 | 189 |
+| Beam | 150 | — | 0 | **79.3%** | 93.7% | 0/13 | 592 |
+| Beam | 400 | — | 0 | **79.7%** | 94.5% | 0/13 | 1,607 |
+| Beam | 1000 | — | 0 | **76.7%** | 92.0% | 0/13 | 4,019 |
+| Annealing | — | 6,000 | 1.5 | **71.9%** | 90.4% | 0/13 | 32 |
+| Annealing | — | 50,000 | 1.5 | **57.6%** | 72.5% | 0/13 | 179 |
+| Beam | 50 | — | 1.5 | **79.3%** | 94.9% | 0/13 | 134 |
+| Beam | 150 | — | 1.5 | **78.6%** | 93.2% | 0/13 | 416 |
+| Beam | 400 | — | 1.5 | **79.0%** | 94.5% | 0/13 | 1,151 |
+| Beam | 1000 | — | 1.5 | **78.7%** | 92.3% | 0/13 | 2,978 |
+| Annealing | — | 6,000 | 3 | **71.7%** | 89.6% | 0/13 | 25 |
+| Annealing | — | 50,000 | 3 | **56.4%** | 72.7% | 0/13 | 179 |
+| Beam | 50 | — | 3 | **80.5%** | 97.1% | 0/13 | 132 |
+| Beam | 150 | — | 3 | **79.0%** | 93.8% | 0/13 | 425 |
+| Beam | 400 | — | 3 | **77.8%** | 93.1% | 0/13 | 1,159 |
+| Beam | 1000 | — | 3 | **78.1%** | 92.1% | 0/13 | 2,990 |
+
+**Every annealing cell beats every beam cell.** Best beam (width 1,000, penalty 0) is 76.7%
+against the shipped annealing row's 71.9%, at 4,019 ms against 32 ms — roughly 126× the work
+for a worse answer. Widening the beam buys at most a few points and not monotonically.
+
+Beam search is kept, as instructed, and the exhibit page now states that it is shown as a
+contrast to annealing and is not the stronger solver. The solver menu says so too.
+
+A side finding about the *other* solver: annealing at 50,000 steps with penalty 3.0 reaches
+**56.4%**, well below the shipped row's 71.9%. That is an observation, not a change — the
+published v2 numbers keep the 6,000-step budget so they stay comparable, and retuning the
+shipped budget is a separate experiment needing its own held-out material. Still 0 exact
+recoveries in all 18 cells.
+
+## 3. Author-disjoint language holdout
+
+The original holdout reserved text from the same works by the same authors. A second holdout
+now removes that overlap: three passages per language from authors and works appearing
+**nowhere** in training. Disjointness is asserted when the file is built and again in the
+test suite, so reusing a training author fails rather than quietly inflating a score.
+
+| Profile | Author-disjoint source | Correct | What shifts |
+| --- | --- | --- | --- |
+| `historical-french-1580` | Brantôme, *Vies des dames galantes* (PG 39220) | 3/3 | Author; memoir rather than essay. Same language and century. |
+| `historical-italian-1320` | Machiavelli, *La mandragola / La Clizia / Belfagor* (PG 56498) | 3/3 | Author, two centuries, and prose rather than verse. The largest shift. |
+| `historical-latin-classical` | Cicero, *Orations* (PG 226) | 3/3 | Author; oratory rather than campaign commentary. Same century. |
+
+**9 of 9 correct, 0 abstentions**, margins 1.53–2.75 — the same outcome as the
+document-internal set, on harder material, reported beside it rather than replacing it.
+
+Every language in the profile set has usable author-disjoint text, so there is no language
+to report as having none. The uncovered-language gap is unchanged and is a gap in the
+*profile set* (German, Spanish, English and the rest), not in the holdout. Three passages
+per language remains a small measurement, not an accuracy figure, and the three shifts are
+not equal in difficulty — the Italian row carries the most, and has the narrowest margins.
+
+## 4. What 0 of 39 exact means
+
+A plain-language section was added to the evaluation page. In short: it does not mean the
+solvers are broken — the same code applies a known key correctly 39 of 39 times and is
+invariant under relabelling — and it does not mean "nearly there" either, since at ~75%
+error about three characters in four are wrong. The reason is the ratio of unknowns to
+evidence: 120–343 symbols per item against 32–61 distinct key symbols, about **5
+observations per unknown**, with homophones deliberately spreading repetition thin.
+
+## 5. Cross-browser verification
+
+| Engine | desktop 1280 | narrow 375 | mobile (iPhone 13) | Total |
+| --- | --- | --- | --- | --- |
+| Chromium | 17/17 | 17/17 | 17/17 | **51/51** |
+| Firefox | 17/17 | 17/17 | 17/17 | **51/51** |
+| WebKit | 17/17 | 17/17 | 17/17 | **51/51** |
+
+**153 of 153 passed. Nothing differs from Chromium.** Specifically re-checked, since this is
+where the original regression hid: the historical profiles appear in the solver menu in every
+engine at every viewport, with an identical option list in all nine combinations. The real
+Web Worker completes a beam search in all three engines; the language comparison returns an
+identical margin to three decimals everywhere; the symbol inventory, its keyboard-operable
+occurrence list and the segmentation lattice behave identically; and no page shows
+horizontal overflow or a page error at any viewport.
+
+Harness: `scripts/check-browsers.js`. Playwright is deliberately **not** a committed
+dependency — CI would install it on every run and never use it, since CI has no browser
+binaries. The script header carries the one-line install.
+
+## Still not done, and why
+
+- **R14's recipe remains unrun.** It needs live model access with a declared version, date
+  and settings. That is the item's whole point and it is labelled accordingly.
+- **Per-item search results remain non-portable between engines** for the reason recorded
+  above; the reproducibility check's guarantee is unchanged.
+- **Three passages per language** in the author-disjoint set. More would need more public-
+  domain text per language vetted for author disjointness; the three chosen are the cleanest
+  available on Project Gutenberg in original orthography.
+- **The sweep moved only two knobs.** A different partial-scoring function or extension
+  order is a different experiment.

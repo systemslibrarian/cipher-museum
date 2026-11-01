@@ -17,6 +17,7 @@ const profileData = require('../data/research/v2/language-profiles.json');
 const profiles = Lang.buildProfiles(profileData);
 const corpus = require('../data/research/v2/corpus.json');
 const holdout = require('../data/research/v2/holdout.json');
+const disjoint = require('../data/research/v2/holdout-author-disjoint.json');
 const z340 = require('../data/research/v1/z340-section-1.json');
 const hash = f => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, f))).digest('hex');
 const letters = t => t.toUpperCase().normalize('NFD').replace(/[^A-Z]/g, '');
@@ -233,15 +234,35 @@ const languageShift = (() => {
     return { id: c.id, note: c.note, expectedProfile: c.expected, decided: r.decided, choice: r.choice,
       correct: c.expected === null ? !r.decided : (r.decided && r.choice === c.expected),
       margin: round(r.margin, 3), letters: c.text.length, abstentionReasons: r.abstentionReasons }; });
+  // Author-disjoint holdout: no author or work shared with the training material.
+  // Reported beside the document-internal set, never merged with it.
+  const disjointRows = disjoint.passages.map(p => {
+    const text = letters(p.text);
+    const c = profiles.compare(text);
+    return { id: p.id, split: 'test', holdout: 'author-disjoint', expectedProfile: p.profile,
+      work: p.work, shift: p.shift,
+      decided: c.decided, choice: c.choice, correct: c.decided ? c.choice === p.profile : null,
+      margin: round(c.margin, 3), letters: text.length, abstentionReasons: c.abstentionReasons };
+  });
+  const disjointDecided = disjointRows.filter(r => r.decided);
+  const byProfile = rowsIn => Object.fromEntries(profileData.profiles.map(p => {
+    const mine = rowsIn.filter(r => r.expectedProfile === p.id);
+    return [p.id, { denominator: mine.length, decided: mine.filter(r => r.decided).length,
+      correct: mine.filter(r => r.decided && r.correct).length }];
+  }));
   const decided = rows.filter(r => r.decided);
   return { passages: rows, controls,
-    summary: { denominator: rows.length, decided: decided.length, abstained: rows.length - decided.length,
-      correctWhenDecided: decided.filter(r => r.correct).length,
-      perLanguage: Object.fromEntries(profileData.profiles.map(p => {
-        const mine = rows.filter(r => r.expectedProfile === p.id);
-        const got = mine.filter(r => r.decided && r.correct);
-        return [p.id, { denominator: mine.length, decided: mine.filter(r => r.decided).length, correct: got.length }];
-      })) },
+    authorDisjoint: { passages: disjointRows,
+      summary: { denominator: disjointRows.length, decided: disjointDecided.length,
+        abstained: disjointRows.length - disjointDecided.length,
+        correctWhenDecided: disjointDecided.filter(r => r.correct).length,
+        perLanguage: byProfile(disjointRows) },
+      sources: disjoint.passages.reduce((acc, p) => { acc[p.profile] = { work: p.work, url: p.url, shift: p.shift }; return acc; }, {}),
+      meaning: 'No author or work here appears anywhere in the training material, and the disjointness is asserted at build time rather than assumed. This is the stronger of the two holdouts: author, and usually genre and period as well, shift at the same time.',
+      coverage: 'Every language in the profile set has author-disjoint text. Three passages per language is a small measurement, not an accuracy figure.' },
+    summary: { holdout: 'document-internal', denominator: rows.length, decided: decided.length,
+      abstained: rows.length - decided.length, correctWhenDecided: decided.filter(r => r.correct).length,
+      perLanguage: byProfile(rows) },
     unresolvedCoverage: 'German, Spanish, English and every other language in the historical record have no profile. A text in one of them can only be abstained on or mis-assigned; it can never be identified.' };
 })();
 
@@ -353,6 +374,9 @@ console.log('independent-key recovery: ' + t.independentKeyRecovery.annealing.de
   t.independentKeyRecovery.exactRecovery.annealing + '/' + t.independentKeyRecovery.exactRecovery.beamSearch + ' of ' + t.independentKeyRecovery.exactRecovery.denominator);
 console.log('fixed code pool: known-pool exact ' + t.fixedCodePoolRecognition.knownPoolExact + '/' + t.fixedCodePoolRecognition.denominator +
   '; unknown-pool mean plaintext error ' + (100 * t.fixedCodePoolRecognition.unknownPool.unknownPoolPlaintextError.mean).toFixed(1) + '%');
+const dj = t.languageAndDomainShift.authorDisjoint.summary;
+console.log('language shift (author-disjoint): ' + dj.correctWhenDecided + ' correct of ' + dj.decided + ' decided, ' +
+  dj.abstained + ' abstained, of ' + dj.denominator + ' passages');
 console.log('language shift: ' + t.languageAndDomainShift.summary.correctWhenDecided + ' correct of ' +
   t.languageAndDomainShift.summary.decided + ' decided, ' + t.languageAndDomainShift.summary.abstained + ' abstained, of ' +
   t.languageAndDomainShift.summary.denominator + ' held-out passages');

@@ -111,4 +111,50 @@ assert.match(t.languageAndDomainShift.unresolvedCoverage,/no profile/);
 assert.ok(report.limits.some(l=>/blind benchmark/.test(l)),'the suite states that it is not a blind benchmark');
 assert.ok(report.limits.some(l=>/not independent source documents/.test(l)),'the holdout limitation is published');
 assert.match(report.relationToV1,/not replaced|unchanged/i);
+
+// ── Author-disjoint holdout: the stronger language test ─────────────────────
+const disjoint=JSON.parse(fs.readFileSync(path.join(root,'data/research/v2/holdout-author-disjoint.json'),'utf8'));
+const training=JSON.parse(fs.readFileSync(path.join(root,'data/research/v2/language-profiles.json'),'utf8'));
+const trainingWorks=new Set(), trainingIds=new Set();
+training.profiles.forEach(p=>p.sources.forEach(src=>{trainingWorks.add(src.work);trainingIds.add(src.id);}));
+assert.ok(disjoint.passages.length>=9,'the author-disjoint holdout carries at least three passages per language');
+// The whole point: no author-disjoint passage may come from a training work or source.
+for(const p of disjoint.passages){
+  assert.ok(!trainingWorks.has(p.work),'author-disjoint passage '+p.id+' reuses the training work '+p.work);
+  assert.ok(!trainingIds.has(p.source),'author-disjoint passage '+p.id+' reuses the training source '+p.source);
+  assert.ok(p.url&&p.sha256&&p.work&&p.shift,'author-disjoint passage '+p.id+' records its provenance and what shifts');
+}
+// Every profile must have author-disjoint material, or the gap must be visible.
+const profileIds=training.profiles.map(p=>p.id);
+for(const id of profileIds){
+  assert.ok(disjoint.passages.some(p=>p.profile===id),'profile '+id+' has author-disjoint held-out text');
+}
+const dj=t.languageAndDomainShift.authorDisjoint;
+assert.equal(dj.summary.denominator,disjoint.passages.length);
+assert.ok(dj.summary.decided+dj.summary.abstained===dj.summary.denominator,'every author-disjoint passage is decided or abstained');
+assert.equal(Object.keys(dj.summary.perLanguage).length,profileIds.length,'author-disjoint recovery is reported per language');
+// The two holdouts stay separate; merging them would hide which one produced a number.
+assert.ok(t.languageAndDomainShift.summary.holdout==='document-internal');
+assert.ok(dj.passages.every(r=>r.holdout==='author-disjoint'));
+
+// ── Pre-registered solver sweep ─────────────────────────────────────────────
+const sweep=JSON.parse(fs.readFileSync(path.join(root,'data/research/v2/solver-sweep.json'),'utf8'));
+assert.equal(sweep.cells.length,sweep.protocol.cells);
+assert.ok(sweep.protocol.registeredBefore,'the sweep records that its grid was fixed in advance');
+assert.ok(sweep.protocol.decidedInAdvance,'the sweep records its win condition');
+// The published conclusion must follow from the published cells, not from prose.
+const beamCells=sweep.cells.filter(c=>c.solver==='beam-search');
+const annealCells=sweep.cells.filter(c=>c.solver==='annealing');
+assert.ok(beamCells.length&&annealCells.length);
+const bestBeam=Math.min(...beamCells.map(c=>c.plaintextError));
+const shippedRow=annealCells.find(c=>c.steps===6000&&c.penalty===1.5);
+assert.ok(shippedRow,'the sweep includes the shipped annealing configuration');
+assert.equal(sweep.beamBeatsShippedAnnealing,bestBeam<shippedRow.plaintextError,
+  'the recorded verdict must match the recorded cells');
+assert.equal(sweep.bestBeamCell.plaintextError,bestBeam);
+assert.ok(sweep.cells.every(c=>c.exact===0),'no sweep cell recovered a text exactly');
+// Every grid point declared in the protocol is actually present.
+for(const beam of sweep.protocol.grid.beam) for(const pen of sweep.protocol.grid.frequencyPenalty)
+  assert.ok(beamCells.some(c=>c.beam===beam&&c.penalty===pen),'sweep cell beam='+beam+' penalty='+pen+' is present');
+
 console.log('Research evaluation v2: split rules, task separation, preserved v1 baseline and declared limits passed.');
