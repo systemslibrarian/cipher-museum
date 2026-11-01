@@ -1,6 +1,6 @@
 # Source register and recorded access limits
 
-Snapshot: `227086a353fbf8b3a91629f9a97d4eb2634bdc0a`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `8421b8383ca4d05c3138821ec30e4b86fe2eb013`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 These 185 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
