@@ -28,13 +28,13 @@ citation and rights information remains in [`public/corpus/README.md`](public/co
 
 ## 📚 Forthcoming Book
 
-<a href="https://ciphermuseum.com/the-book.html"><img src="images/cipher-museum-book-cover.png" alt="Secrets of the Cipher Museum by Paul Clark" width="220"></a>
+<a href="https://ciphermuseum.com/the-book.html"><img src="images/cipher-museum-book-cover.png" alt="Secrets of the Cipher Museum by Paul “The Cipher Librarian” Clark" width="220"></a>
 
 **[Secrets of the Cipher Museum](https://ciphermuseum.com/the-book.html)**
 
-*Stories of Hidden Messages and the People Behind Them* · Paul Clark
+*Stories of Hidden Messages and the People Behind Them* · Paul “The Cipher Librarian” Clark
 
-Twenty historical investigations follow the people who sent, intercepted, and recovered hidden messages—from Mary Stuart to the public struggle over encryption. Chapter links and QR codes lead into the free museum exhibits. The website offers an opening excerpt and reading-group questions; publication details are forthcoming.
+Twenty true investigations into hidden messages, contested evidence, and the consequences of knowing—with an interactive museum where you can follow the clues yourself. The opening follows the identification and verification of Mary Stuart’s recovered letters, published in 2023. Chapter links and QR codes offer specific evidence questions to explore in the free museum; the historical narrative stands on its own. Read the new prologue excerpt and reading-group questions on the companion page. Publication details are forthcoming.
 
 **[Read the opening →](https://ciphermuseum.com/the-book.html#sample)** · **[Try The Curator’s Sealed Letter →](https://ciphermuseum.com/sealed-letter.html)**
 
