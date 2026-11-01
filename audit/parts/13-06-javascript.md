@@ -1,6 +1,6 @@
 # javascript appendix 6
 
-Snapshot: `8421b8383ca4d05c3138821ec30e4b86fe2eb013`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `3a2de507d2df3cca40f3535c6d18548299b25bc0`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-ui.js
 
@@ -1254,8 +1254,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `2c95153072d63a463f3b20c6066cd4dbec3b1a0671e8e5ba9f92f3c743ce95d3`
-- Readable-source SHA-256: `2c95153072d63a463f3b20c6066cd4dbec3b1a0671e8e5ba9f92f3c743ce95d3`
+- Served SHA-256: `b1a0561a0ccce32a8ab1273ec24e32f43ba7877f6a2df4a36de1c6317b50d9cc`
+- Readable-source SHA-256: `b1a0561a0ccce32a8ab1273ec24e32f43ba7877f6a2df4a36de1c6317b50d9cc`
 
 
 ```javascript
@@ -1277,7 +1277,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  */
 'use strict';
 
-const VERSION = 'cipher-museum-13cad36b';
+const VERSION = 'cipher-museum-2c2015b9';
 
 const CORE = [
   '/',
