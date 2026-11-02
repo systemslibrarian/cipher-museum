@@ -44,6 +44,8 @@ The companion mystery can be started directly online or opened with the book's f
 
 ## 📰 Recent Changes
 
+- **2 November — Four research-informed teaching additions.** Check a fluent but inconsistent reading in the [Evidence Workbench](https://ciphermuseum.com/lab/evidence-workbench.html#reading-consistency); investigate possible [encipherer key confusion](https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html#key-confusion); follow the [Swedish SIGINT operating chain and women’s roles](https://ciphermuseum.com/ciphers/geheimschreiber.html#daily-codebreaking); and test [regular versus shuffled key tables](https://ciphermuseum.com/ciphers/nomenclator.html#key-table-pattern). Exercises are original synthetic examples with explicit limits and visible primary sources. See [implementation and verification notes](docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md).
+
 README reviewed against `main` on **31 October 2026**. These changes are already merged:
 
 - **30 October — Book preview and homepage feature.** Added the forthcoming book’s cover, opening excerpt, reading-group questions, and [Curator’s Sealed Letter](https://ciphermuseum.com/sealed-letter.html) companion. The homepage now features the book directly below its introduction. ([#16](https://github.com/systemslibrarian/cipher-museum/pull/16), [#17](https://github.com/systemslibrarian/cipher-museum/pull/17))

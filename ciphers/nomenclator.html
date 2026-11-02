@@ -22,6 +22,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="../css/evidence-exercises.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -76,6 +77,19 @@
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
+<section class="evidence-exercise" id="key-table-pattern" aria-labelledby="key-table-pattern-title">
+<h2 id="key-table-pattern-title">Can you predict the next code?</h2>
+<p>You have learned two entries of an invented key: <strong>A → 41 and B → 42</strong>. What would you guess for C? Test the same clues against two tables.</p>
+<p><strong>What the analyst knows:</strong> the six-letter inventory A–F, the six codes 41–46, two mappings, and the separated ciphertext below. The plaintext is initially withheld. This is a partial-key exercise, not a ciphertext-only attack.</p>
+<label for="table-mode">Table to investigate</label><select id="table-mode"><option value="regular">Regular numbering</option><option value="shuffled">Shuffled numbering</option></select>
+<p><strong>Ciphertext:</strong> <code id="table-ciphertext">46 41 43 45</code></p>
+<form id="table-prediction"><label for="table-guess">Your prediction for C (41–46)</label><input id="table-guess" type="number" min="41" max="46" step="1" required><button class="btn btn-primary" type="submit">Test prediction and reveal</button><button class="btn btn-secondary" type="button" id="table-reset">Hide entries and try again</button></form>
+<p><strong>Remaining entries:</strong> <code id="table-hidden-entries">C → ?; D → ?; E → ?; F → ?</code></p>
+<p id="table-result" class="evidence-output" role="status" aria-live="polite">Make a prediction before revealing the remaining entries.</p>
+<details><summary>Compare both answers and the limits</summary><p>The regular table has C → 43, D → 44, E → 45, F → 46. The shuffled table has C → 46, D → 43, E → 45, F → 44. Both keep A → 41 and B → 42. Both encode the same invented message, FACE, with one code per letter: the inventory and selection rule stay fixed. Switch tables to see why two consecutive entries do not guarantee the rest.</p><p>This tiny table isolates one pattern found in larger keys. It omits word codes, homophones and nulls. Revealing a key in an exercise is not recovering it from intercepted traffic; shuffled numbering alone does not make a nomenclator secure.</p></details>
+<p>Source: <a href="https://ecp.ep.liu.se/index.php/histocrypt/article/view/387">Antal and Mírka, <em>Wrong Design of Cipher Keys</em> (2022), pp. 3–8</a>. Their historical sample illustrates key-design patterns, not a universal attack success rate. Regularity alone does not demonstrate a practical break.</p>
+</section>
+
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
@@ -200,5 +214,6 @@
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
+<script src="../js/evidence-exercises.js" defer></script>
 </body>
 </html>

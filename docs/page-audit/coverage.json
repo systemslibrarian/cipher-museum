@@ -2059,8 +2059,8 @@
     {
       "path": "ciphers/geheimschreiber.html",
       "title": "Geheimschreiber T52 (Sturgeon) (Siemens & Halske teleprinter cipher) \u2014 The Cipher Museum",
-      "words": 685,
-      "sha256": "eabfd0dc97bc1b4ba73c2d79d515369ddaa64c41238d9b1abcb74d0c8dda7a4e",
+      "words": 852,
+      "sha256": "7b63e27916fb5326d07d59a8cd3e949ff6dffbd1fb7f27d70e55b969845e6f15",
       "status": "bounded review and local release validation complete",
       "sources": [
         "T52-ARTIFACT",
@@ -2086,7 +2086,12 @@
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
       "remaining_evidence_limits": [
         "Exact historical T52 variant control paths have not been verified against a technical manual; the two-bank26-letter widget remains an explicitly different model."
-      ]
+      ],
+      "dot_research_additions": {
+        "date": "2026-11-02",
+        "note": "Added sourced operating-chain panel and women\u2019s roles. Wallin pp. 1\u20134 checked; 193/287 is civilian staffing, not 67% of all 400 staff or the T52 team.",
+        "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+      }
     },
     {
       "path": "ciphers/gold-bug.html",
@@ -2847,8 +2852,8 @@
     {
       "path": "ciphers/mary-stuart-castelnau-letters.html",
       "title": "Mary Queen of Scots \u2014 Castelnau Letters \u2014 The Cipher Museum",
-      "words": 1475,
-      "sha256": "a6ce31d4a4bf090a2152aabb6ace23e533311c4c90e40fcbb35c8b7350928886",
+      "words": 1718,
+      "sha256": "b28fb5ae456b6d75588f445535b94e8b66f5bc13af14399085533f152ced074c",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Final teaching_pages consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/teaching-hm-finalread-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
@@ -2868,7 +2873,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "dot_research_additions": {
+        "date": "2026-11-02",
+        "note": "Added synthetic two-key confusion exercise. Original symbols and key-A literal decode persist; alternate reading remains a hypothesis and symbol 9 unresolved. Appendix B checked directly.",
+        "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+      }
     },
     {
       "path": "ciphers/mavis-batey.html",
@@ -3218,8 +3228,8 @@
     {
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator \u2014 The Cipher Museum",
-      "words": 745,
-      "sha256": "52a700d4501e2631a9ed3abbb7234270b5a75f952bcd619dbc6a6fdb726b5a4a",
+      "words": 976,
+      "sha256": "a33b8807e9bc487f253097c1a0145bec55ed3c8c5070afaf55dbb3a0cd207e59",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -3242,7 +3252,12 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+      "dot_research_additions": {
+        "date": "2026-11-02",
+        "note": "Added regular/shuffled partial-key prediction exercise. Same message/inventory/selection rule; no ciphertext-only or practical-break claim.",
+        "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+      }
     },
     {
       "path": "ciphers/null-cipher.html",
@@ -5981,8 +5996,8 @@
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench \u2014 The Cipher Museum",
-      "words": 2418,
-      "sha256": "b5808df6ac7e4bcd92c27f8deb1e724f5e5190ca0592e7f7de7c8bbeba7da5fa",
+      "words": 2665,
+      "sha256": "c4d89ab2f22272f994cb9fa4bef6fb2db0a9a1f9dc69aeb5756ffc9528e8ad54",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
       "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too. Developmental book revision, November 2026: added a beginner evidence exercise with an optional answer reveal.",
@@ -6009,7 +6024,12 @@
         "validation": "docs/page-audit/research-2026-10-30-validation.json",
         "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
       },
-      "research_review_followup_2026_11_01": "revised"
+      "research_review_followup_2026_11_01": "revised",
+      "dot_research_additions": {
+        "date": "2026-11-02",
+        "note": "Added standalone fluent-but-inconsistent reading exercise; fixed noiseless substitution, repeated-symbol checks and evidence limits. No writes to research records.",
+        "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+      }
     },
     {
       "path": "lab/modern-attack-evidence.html",

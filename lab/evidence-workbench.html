@@ -3,6 +3,7 @@
 <title>Evidence Workbench — The Cipher Museum</title><meta name="description" content="Keep the original, compare readings, and make every decipherment hypothesis inspectable.">
 <link rel="canonical" href="https://ciphermuseum.com/lab/evidence-workbench.html"><link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../css/museum.css"><link rel="stylesheet" href="../css/research-workbench.css">
+<link rel="stylesheet" href="../css/evidence-exercises.css">
 </head><body><a class="skip-link" href="#main-content">Skip to main content</a><nav class="museum-nav" aria-label="Primary">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo">
@@ -28,6 +29,22 @@
 <p id="record-status" class="research-status" role="status">Start with a transcription or import a Cipher Detective JSON export.</p>
 <div class="research-actions"><button id="export-record" type="button">Export evidence JSON</button><button id="restore-record" type="button" disabled>Restore previous saved record</button></div>
 <label for="import-file">Import version 1 or 2 transcription JSON (up to 750 KB)</label><input id="import-file" type="file" accept="application/json,.json">
+<section class="evidence-exercise" id="reading-consistency" aria-labelledby="reading-consistency-title">
+<h2 id="reading-consistency-title">Sounds right—but does it fit?</h2>
+<p>Two readable messages. One fixed cipher. Can both readings be right? In this invented exercise, each ciphertext symbol always stands for the same letter, different symbols stand for different letters, and there are no copying errors. Spaces in the candidates are supplied for readability.</p>
+<p><strong>Recorded ciphertext:</strong> <code>A B B C A B D C E F F E</code></p>
+<label for="reading-candidate">Candidate reading</label>
+<select id="reading-candidate"><option value="fluent">SEND ME AT NOON</option><option value="consistent">MEET ME AT NOON</option></select>
+<p><strong>Proposed plaintext:</strong> <span id="reading-plaintext">SEND ME AT NOON</span></p>
+<p>Pick a symbol to compare every position where it occurs. Count positions without spaces.</p>
+<div id="reading-symbols" role="group" aria-label="Inspect ciphertext symbols"></div>
+<button id="reading-check" type="button" class="btn btn-primary">Check the whole reading</button>
+<p id="reading-result" class="evidence-output" role="status" aria-live="polite">The exercise loads when JavaScript is available.</p>
+<details><summary>What this check can—and cannot—tell you</summary><p>For SEND ME AT NOON, symbol B would mean E at positions 2 and 6 but N at position 3. MEET ME AT NOON fits all the mappings. Consistency is necessary under this model; it does not establish authenticity or a unique solution. A noisy transcription or a different cipher needs a different test, with every exception recorded.</p></details>
+<p>Related research: <a href="https://aclanthology.org/2021.acl-long.561/">Aldarrab and May, <em>Can Sequence-to-Sequence Models Crack Substitution Ciphers?</em> (2021)</a>. Their experiments study automatic decipherment, including noisy text. These two invented candidates are not outputs from that study; this exercise runs no neural model.</p>
+<p>Next: <a href="../ciphers/mary-stuart-castelnau-letters.html#key-confusion">what if the original encipherer used the wrong key?</a></p>
+</section>
+
 <section id="source"><h2>1. Preserve the source</h2><p>Keep case, diacritics, spaces and line breaks. A missing symbol is different from a null that deliberately contributes no plaintext. Revisions preserve the original transcription and its annotations.</p>
 <div class="research-grid">
 <div><label for="source-artifactId">Stable artifact identifier</label><input id="source-artifactId" maxlength="500" placeholder="For example: archive:collection:folio">
@@ -167,4 +184,5 @@
 <p id="bundle-status" class="research-status" role="status">No bundle imported in this tab.</p><pre id="bundle-state"></pre></section>
 <section><h2>Research behind the workbench</h2><ul class="source-list"><li><a href="https://ep.liu.se/en/conference-article.aspx?Article_No=14&amp;issue=171&amp;series=ecp">Historical-cipher transcription conventions (2020)</a>: preserve the source and uncertainty.</li><li><a href="https://aclanthology.org/2022.emnlp-main.44/">Numerical cipher segmentation (2022)</a>: known keys can still leave multiple paths.</li><li><a href="https://doi.org/10.1080/01611194.2022.2160677">Lasry, Biermann and Tomokiyo (2023), Appendix A</a>: annealing helps with letter homophones; nomenclature and archival corroboration still require human work.</li></ul></section>
 </main><footer></footer>
-<script src="../js/nav.js" defer></script><script src="../js/detective/lang-model.js"></script><script src="../js/research-language-model.js"></script><script src="../js/research-model.js"></script><script src="../js/research-ui.js"></script></body></html>
+<script src="../js/nav.js" defer></script><script src="../js/detective/lang-model.js"></script><script src="../js/research-language-model.js"></script><script src="../js/research-model.js"></script><script src="../js/research-ui.js"></script><script src="../js/evidence-exercises.js" defer></script>
+</body></html>

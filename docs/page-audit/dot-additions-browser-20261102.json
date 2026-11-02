@@ -1,0 +1,74 @@
+[
+  {
+    "file": "lab/evidence-workbench.html",
+    "anchor": "reading-consistency",
+    "width": 390,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  },
+  {
+    "file": "ciphers/mary-stuart-castelnau-letters.html",
+    "anchor": "key-confusion",
+    "width": 390,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  },
+  {
+    "file": "ciphers/geheimschreiber.html",
+    "anchor": "daily-codebreaking",
+    "width": 390,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  },
+  {
+    "file": "ciphers/nomenclator.html",
+    "anchor": "key-table-pattern",
+    "width": 390,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  },
+  {
+    "file": "lab/evidence-workbench.html",
+    "anchor": "reading-consistency",
+    "width": 1280,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  },
+  {
+    "file": "ciphers/mary-stuart-castelnau-letters.html",
+    "anchor": "key-confusion",
+    "width": 1280,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  },
+  {
+    "file": "ciphers/geheimschreiber.html",
+    "anchor": "daily-codebreaking",
+    "width": 1280,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  },
+  {
+    "file": "ciphers/nomenclator.html",
+    "anchor": "key-table-pattern",
+    "width": 1280,
+    "pageErrors": [],
+    "overflow": false,
+    "keyboard": true,
+    "axeViolations": []
+  }
+]
