@@ -2,6 +2,8 @@
 
 ## Independent content review
 
+- [Dot research additions, 2 November 2026](DOT_RESEARCH_ADDITIONS_2026-11-02.md) — three bounded evidence exercises and the Swedish SIGINT history panel.
+
 - [Ebook implementation progress](../audit/EBOOK_IMPLEMENTATION_PROGRESS.md) — implementation and verification of all 21 follow-up recommendations.
 - [Ebook review recommendations](../audit/EBOOK_REVIEW_RECOMMENDATIONS.md) — 21 implemented Cipher Museum work packages from selected passages in 13 works: five corrections and 16 teaching additions, with existing Crypto Lab reuse identified.
 - [Complete 214-page audit export](../audit/README.md) — one self-contained Markdown document, smaller upload parts, a source register, and independent-review instructions.

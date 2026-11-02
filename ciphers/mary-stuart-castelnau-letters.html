@@ -71,6 +71,7 @@
     .sym-meaning { font-size: .85rem; color: var(--tx2); }
   </style>
   <link rel="stylesheet" href="../css/book-invitation-demos.css">
+<link rel="stylesheet" href="../css/evidence-exercises.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -129,6 +130,21 @@
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
+<section class="evidence-exercise" id="key-confusion" aria-labelledby="key-confusion-title">
+<h2 id="key-confusion-title">Who made the mistake?</h2>
+<p>Suppose a clear copy shows the symbols below. Key A gives an odd reading. Did you copy it incorrectly, choose the wrong interpretation, or inherit an error made by the person who enciphered it?</p>
+<p><strong>Invented fixture:</strong> the symbols and keys below are not Mary’s. Slashes mark word boundaries. The copy is assumed accurate for this exercise.</p>
+<p><strong>Recorded symbols (kept unchanged):</strong> <code id="confusion-original">1 5 5 3 / 1 5 / 9</code></p>
+<div class="evidence-keys"><div><h3>Intended key A</h3><p><code>1 → M; 2 → E; 3 → T; 4 → N; 5 → O; 6 → R</code></p></div><div><h3>Other key B</h3><p><code>1 → N; 2 → O; 3 → R; 4 → M; 5 → E; 6 → T</code></p></div></div>
+<p><strong>Literal reading with key A:</strong> <code id="confusion-literal">M O O T / M O / ?</code></p>
+<label for="key-confusion-toggle"><input type="checkbox" id="key-confusion-toggle">Test key B for symbol 5 only; keep key A for the other symbols</label>
+<p><strong>Separate editorial proposal:</strong> <code id="confusion-proposal">No alternative reading applied.</code></p>
+<p id="confusion-result" class="evidence-output" role="status" aria-live="polite">Symbol 9 remains unknown under both keys.</p>
+<details><summary>How would you distinguish the explanations?</summary><ul><li><strong>Copying error:</strong> return to the source image. Does it actually show 5 or a different symbol?</li><li><strong>Original key confusion:</strong> check whether repeated exceptions match another key the writer might have used.</li><li><strong>Our interpretation:</strong> test the proposed rule on a new passage. A more familiar phrase alone does not settle it.</li></ul><p>The proposed reading is M E E T / M E / ?. Do not silently replace the original symbols or erase the unexplained 9.</p></details>
+<p><strong>Historical connection:</strong> Lasry, Biermann and Tomokiyo found recurring enciphering errors in a subset of 17 documents. Several fit symbols from the Mary–Beaton key instead of the Mary–Castelnau key, supporting their hypothesis of cross-cipher contamination. That explanation does not identify a particular secretary or account for every error. <a href="https://doi.org/10.1080/01611194.2022.2160677">Deciphering Mary Stuart’s lost letters from 1578–1584 (2023), Appendix B, pp. 198–200</a> (<a href="https://friendsofsheffieldcastle.org/wp-content/uploads/Deciphering-Mary-Stuart-s-lost-letters-from-1578-1584.pdf#page=99">author article PDF</a>).</p>
+<p><a href="../lab/evidence-workbench.html#annotations">Keep competing readings in the Evidence Workbench</a>.</p>
+</section>
+
 <section class="panel" id="plaintext-counterparts" aria-labelledby="plaintext-counterparts-title"><div class="panel-body"><h2 id="plaintext-counterparts-title">Check against another record</h2><p>Lasry, Biermann and Tomokiyo located plaintext counterparts of <strong>seven</strong> newly deciphered letters in British archives: F42, F46, F58, F69, F78, F96 and F221. They distinguish these from three previously known letters whose ciphertext was not among the recovered BnF material. Compare a decipherment with its counterpart: agreement can test the reading, while omissions require separate examination.</p><p>Source: <a href="https://doi.org/10.1080/01611194.2022.2160677">“Deciphering Mary Stuart’s lost letters from 1578–1584” (2023), §5.1 and the corresponding entries in §5.3</a>. <a href="https://friendsofsheffieldcastle.org/wp-content/uploads/Deciphering-Mary-Stuart-s-lost-letters-from-1578-1584.pdf#page=33">Read the article’s seven-letter inventory (PDF)</a>. <a href="../lab/decipherment-cases.html#mary">Continue to the case file</a>.</p></div></section>
 
 
@@ -296,5 +312,6 @@
 <script src="../js/nav.js" defer></script>
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/book-invitation-demos.js" defer></script>
+<script src="../js/evidence-exercises.js" defer></script>
 </body>
 </html>
