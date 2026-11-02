@@ -327,6 +327,7 @@ const TOP_LEVEL = [
   'my-path.html',
   'lab/workbench.html',
   'lab/evidence-workbench.html',
+  'lab/reading-the-evidence.html',
   'lab/decipherment-cases.html',
   'lab/modern-attack-evidence.html',
 ];

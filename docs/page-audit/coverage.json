@@ -5996,8 +5996,8 @@
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench \u2014 The Cipher Museum",
-      "words": 2665,
-      "sha256": "c4d89ab2f22272f994cb9fa4bef6fb2db0a9a1f9dc69aeb5756ffc9528e8ad54",
+      "words": 2868,
+      "sha256": "9a4b67cf116ad31d3545be18e07986309cd3d1fb94fa63760d049a63d320716f",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
       "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too. Developmental book revision, November 2026: added a beginner evidence exercise with an optional answer reveal.",
@@ -6029,6 +6029,31 @@
         "date": "2026-11-02",
         "note": "Added standalone fluent-but-inconsistent reading exercise; fixed noiseless substitution, repeated-symbol checks and evidence limits. No writes to research records.",
         "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+      },
+      "reading_evidence_2026_11_02": {
+        "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
+        "record": "docs/READING_THE_EVIDENCE.md"
+      }
+    },
+    {
+      "path": "lab/reading-the-evidence.html",
+      "title": "Reading the Evidence \u2014 The Cipher Museum",
+      "status": "2 November 2026: original synthetic teaching examples and source statements checked against selected sections of linked papers; source limitations recorded in docs/READING_THE_EVIDENCE.md",
+      "sources": [
+        "https://aclanthology.org/W19-6126/",
+        "https://aclanthology.org/2022.lt4hala-1.1/",
+        "https://doi.org/10.63317/2twwf4kj3cgk",
+        "https://aclanthology.org/2023.findings-eacl.160/"
+      ],
+      "notes": "One bounded, original exercise per cited paper. No archival authenticity or reproduction of trained models claimed. Browser and full-suite validation recorded separately.",
+      "sha256": "6dfc3817da72ac6b5426aa2e376167af5291c45fd5c9665435d7b2469b6fcadf",
+      "words": 1084,
+      "browser_smoke": "Local Chromium checked all four exercises using keyboard activation at 390 and 1280 px; no page errors, overflow, or automated WCAG A/AA violations in main content. This is not historical verification.",
+      "reading_evidence_2026_11_02": {
+        "date": "2026-11-02",
+        "record": "docs/READING_THE_EVIDENCE.md",
+        "browser": "docs/page-audit/reading-evidence-browser-20261102.json",
+        "scope": "Four invented bounded exercises. Public primary paper links, no source material republished. Selected methods and their non-reproduced parts recorded."
       }
     },
     {
@@ -6094,8 +6119,8 @@
     {
       "path": "lab/workbench.html",
       "title": "Codebreaker's Workbench \u2014 The Cipher Museum",
-      "words": 114,
-      "sha256": "dc2633d4aff2872330a05c5d7d3306f2685489976069c8b66e4afef58699f848",
+      "words": 2102,
+      "sha256": "95a950abe3add86b5222e32d1c3c0878861c494a33d7910d1e850dd6998bab54",
       "status": "ebook follow-up implementation and local validation complete",
       "sources": [
         "GRAY-1990-CORRECTED-2023"
@@ -6127,6 +6152,10 @@
         "browser_evidence": "docs/ebook-followup/browser.json",
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
+      },
+      "reading_evidence_2026_11_02": {
+        "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
+        "record": "docs/READING_THE_EVIDENCE.md"
       }
     },
     {
@@ -6414,8 +6443,8 @@
     {
       "path": "teaching.html",
       "title": "Teaching Resources \u2014 The Cipher Museum",
-      "words": 645,
-      "sha256": "19cb2cd6bce1b7e5e4a6df3297a33a5e2e0042cc839c38098af598bf05c651b2",
+      "words": 707,
+      "sha256": "4ff7e9197edb59fa031fc3341bb79af0ae4fa97945199f9f2096b19c92a5a093",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "LASRY-2018"
@@ -6462,6 +6491,10 @@
         "notes": "Added beginner session and separate student/answer sheets; updated title and description to include broader teaching resources.",
         "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
         "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      },
+      "reading_evidence_2026_11_02": {
+        "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
+        "record": "docs/READING_THE_EVIDENCE.md"
       }
     },
     {

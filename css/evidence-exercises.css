@@ -14,3 +14,7 @@
 .evidence-steps{padding-left:1.5rem;line-height:1.7}
 .evidence-steps li{margin:.5rem 0;padding-left:.2rem}
 .evidence-exercise [hidden]{display:none!important}
+
+.evidence-exercise .paper-credit{border-top:1px solid var(--gold-b);padding-top:1rem;font-size:.9rem}
+.evidence-exercise .research-card h3{font-size:1.15rem}
+.evidence-exercise #pattern-symbols{display:flex;flex-wrap:wrap;gap:.4rem}

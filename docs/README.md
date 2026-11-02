@@ -2,6 +2,8 @@
 
 ## Independent content review
 
+- [Reading the Evidence, four guided research exercises (2 November 2026)](READING_THE_EVIDENCE.md) — public paper citations, precise teaching scope, and verification.
+
 - [Dot research additions, 2 November 2026](DOT_RESEARCH_ADDITIONS_2026-11-02.md) — three bounded evidence exercises and the Swedish SIGINT history panel.
 
 - [Ebook implementation progress](../audit/EBOOK_IMPLEMENTATION_PROGRESS.md) — implementation and verification of all 21 follow-up recommendations.

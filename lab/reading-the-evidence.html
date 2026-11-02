@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Reading the Evidence — The Cipher Museum</title>
+<meta name="description" content="Four hands-on investigations: match a key, identify cleartext, test transcription errors, and uncover repeated-symbol patterns.">
+<link rel="canonical" href="https://ciphermuseum.com/lab/reading-the-evidence.html"><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/museum.css"><link rel="stylesheet" href="../css/research-workbench.css"><link rel="stylesheet" href="../css/evidence-exercises.css">
+</head><body><a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="page-hero"><p class="hero-sub">Four small investigations</p><h1>Reading the Evidence</h1><p class="hero-intro">A promising key. An ordinary-looking word. A single misread letter. Test what each clue can tell you.</p></header>
+<main id="main-content" class="research-main" tabindex="-1">
+<p>Predict what will happen, try it, then explain the result. All messages, keys and case notes below are <strong>invented teaching examples</strong>. The linked papers supply the research ideas; these activities do not reproduce their datasets or trained models. Everything runs in your browser, with no upload or account.</p>
+<nav aria-label="Activities"><p><a href="#key-match">1. Match a key</a> · <a href="#cleartext">2. Find the cleartext</a> · <a href="#transcription">3. Test a transcription</a> · <a href="#recurrence">4. Compare patterns</a></p></nav>
+<p>For your own documents, use the <a href="evidence-workbench.html">Evidence Workbench</a>. For sourced historical cases, visit <a href="decipherment-cases.html">Decipherment Investigations</a>.</p>
+<noscript><p>The explanations and paper links remain readable without JavaScript. Enable JavaScript to run the four exercises.</p></noscript>
+<section class="evidence-exercise" id="key-match" aria-labelledby="key-match-title">
+<h2 id="key-match-title">1. Which key belongs to this message?</h2>
+<p>A loose sheet and three key cards have been filed together. The folder label suggests one connection—but a folder can contain material from several dates. Which card deserves a closer look?</p>
+<p><strong>Exact recorded symbols:</strong> <code>1 2 2 3 / 4 3 / 5 4 3 2</code>. In this exercise, slashes are known word boundaries and each number represents one letter.</p>
+<ul><li><strong>Key A:</strong> found in a folder labeled “1625.” The loose sheet has no date.</li><li><strong>Key B:</strong> an incomplete card, with no surviving date.</li><li><strong>Key C:</strong> a later copy of a key, filed elsewhere. Its relationship to the loose sheet is initially unknown.</li></ul>
+<label for="key-choice">Apply a candidate key</label><select id="key-choice"><option value="A">Key A — same folder</option><option value="B">Key B — incomplete</option><option value="C">Key C — filed elsewhere</option></select>
+<p><strong>Entries:</strong> <span id="key-map"></span></p><p><strong>Literal reading:</strong> <code id="key-literal"></code></p><p id="key-coverage"></p>
+<div class="research-actions"><button id="keys-compare" type="button">Compare all three keys</button><button id="key-reveal" type="button">Reveal the separate copy</button><button id="key-reset" type="button">Reset investigation</button></div>
+<div id="key-copy" hidden><h3>Additional evidence</h3><p>The case notes supply a separate plaintext copy: <strong>MEET AT GATE</strong>. Treat its identification as a matching copy as a given for this invented case. In archival work, the copy’s identity and independence would themselves need verification. Spacing is retained; no spelling has been silently repaired.</p></div>
+<div id="key-result" class="evidence-output" role="status" aria-live="polite"></div>
+<p><strong>Explain:</strong> Why does mapping every symbol fail to distinguish A from C? What does the separate copy add that the folder label cannot?</p>
+<p class="paper-credit"><strong>Research credit:</strong> Eva Pettersson and Beáta Megyesi, <a href="https://aclanthology.org/W19-6126/"><em>Matching Keys and Encrypted Manuscripts</em> (2019)</a>, §§1 and 3–5. Their work connects transcribed keys with encrypted manuscripts and evaluates readings using historical language models. This three-card exercise uses literal decoding and supplied corroboration, not their scoring system.</p>
+</section>
+<section class="evidence-exercise" id="cleartext" aria-labelledby="cleartext-title">
+<h2 id="cleartext-title">2. Not everything in a cipher letter is encrypted</h2>
+<p>A letter may mix readable language, codes, dates and damage. Classify these six passages before revealing the case notes. <strong>Cleartext</strong> was left unencrypted; <strong>decrypted plaintext</strong> is recovered by applying a key. A readable-looking word alone does not settle which you have.</p>
+<p>The chunks are supplied for you. “Uncertain” is a valid initial judgment when evidence is missing. Brackets mark a modern transcriber’s note.</p>
+<div id="span-list"></div>
+<div class="research-actions"><button id="span-check" type="button">Compare with the case notes</button><button id="span-reset" type="button">Reset classifications</button></div>
+<div id="span-feedback" class="evidence-output" role="status" aria-live="polite">Classify the passages, then reveal the case notes.</div>
+<p><strong>Explain:</strong> Which digits belong to ordinary text? Why should a French greeting not decide the language of the whole letter? What should stay unresolved?</p>
+<p class="paper-credit"><strong>Research credit:</strong> Maria-Elena Gambardella, Beata Megyesi and Eva Pettersson, <a href="https://aclanthology.org/2022.lt4hala-1.1/"><em>Identifying Cleartext in Historical Ciphers</em> (2022)</a>, introduction and conclusion. Their study distinguishes cleartext detection from language identification and discusses short passages, mixed languages and numeral-filter errors. These invented chunks are a manual lesson, not their classifier or evaluation set.</p>
+</section>
+<section class="evidence-exercise" id="transcription" aria-labelledby="transcription-title">
+<h2 id="transcription-title">3. How much can one misread letter change?</h2>
+<p>Start with the clean message, then misread or lose one ciphertext letter. Does the search still find the key? Does finding the key restore the missing information?</p>
+<p>This bounded experiment searches <strong>all 26 Caesar shifts</strong>. It ranks each reading by exact matches to a five-word vocabulary shown below. Spaces are supplied, not recovered. Ties remain ties. This is a deliberately favorable classroom example, not a general historical-cipher solver.</p>
+<div class="research-grid"><div><label for="noise-spelling">Original wording</label><select id="noise-spelling"><option value="modern">Modern spelling</option><option value="older">Illustrative older spelling</option></select></div><div><label for="noise-kind">Transcription change</label><select id="noise-kind"><option value="none">None — clean copy</option><option value="substitute">Misread one letter</option><option value="delete">Lose one letter</option></select></div><div><label for="noise-profile">Scoring vocabulary</label><select id="noise-profile"><option value="modern">Modern words</option><option value="older">Illustrative older word forms</option></select></div></div>
+<p><strong>Original:</strong> <code id="noise-original"></code></p><p><strong>Clean ciphertext:</strong> <code id="noise-clean"></code></p><p><strong>Selected transcription:</strong> <code id="noise-damaged"></code></p><p id="noise-change"></p>
+<p><strong>Complete scoring vocabulary:</strong> <span id="noise-words"></span>. These word lists were chosen for this exercise, not learned from a historical corpus. The older-spelling sentence is invented and is not assigned to a particular date or dialect.</p>
+<div id="noise-results" class="research-grid" role="status" aria-live="polite"></div>
+<button id="noise-reset" type="button">Restore clean modern example</button>
+<details><summary>How the experiment is measured</summary><p>The generator encrypts with shift 7. The search receives only the ciphertext and selected vocabulary; it tries all shifts without being given the answer key. The original is used afterward to count edits. A correct key can coexist with an incorrect recovered message. Changing vocabulary can change a score without changing any letters in the source. No automatic spelling correction is applied.</p><p>Compare the older sentence under both vocabularies while leaving noise unchanged. Then change noise while keeping the sentence and vocabulary fixed. These comparisons separate model mismatch from a transcription error.</p></details>
+<p class="paper-credit"><strong>Research credit:</strong> Micaella Bruton, Meriem Beloucif and Beáta Megyesi, <a href="https://doi.org/10.63317/2twwf4kj3cgk"><em>Bridging the Low Resource Gap in Historical Cryptology: A Multilingual Diachronic Synthetic Dataset for Reproducible Cryptanalysis</em> (2026)</a>, introduction and dataset design; <a href="https://www.lrec-conf.org/proceedings/lrec2026/workshops/resourceful/pdf/2026.resourceful-1.2.pdf">publisher PDF</a>. HistCiph motivates testing transcription noise and language change. This Caesar experiment uses neither HistCiph records nor its homophonic generator and does not reproduce the paper’s results.</p>
+</section>
+<section class="evidence-exercise" id="recurrence" aria-labelledby="recurrence-title">
+<h2 id="recurrence-title">4. Different symbols, same hidden pattern</h2>
+<p>Rename every occurrence of a symbol consistently. What changes—and what stays? Give the first distinct symbol the number 1, the next new symbol 2, and so on. Whenever a symbol returns, reuse its number.</p>
+<label for="pattern-input">Space-separated ciphertext symbols (up to 64)</label><textarea id="pattern-input" maxlength="1088" rows="2" spellcheck="false">Q Z Z R Q Z S R</textarea>
+<div class="research-actions"><button id="pattern-rename" type="button">Rename every symbol</button><button id="pattern-alter" type="button">Change just one occurrence</button><button id="pattern-reset" type="button">Reset pattern</button></div>
+<div class="research-grid"><div><h3>Original</h3><p><code id="pattern-original"></code></p><p><strong>Pattern:</strong> <code id="pattern-a"></code></p></div><div><h3>Compared sequence</h3><p><code id="pattern-other"></code></p><p><strong>Pattern:</strong> <code id="pattern-b"></code></p></div></div>
+<p id="pattern-result" class="evidence-output" role="status" aria-live="polite"></p>
+<div id="pattern-symbols" role="group" aria-label="Locate a symbol in the original sequence"></div><p id="pattern-positions" role="status" aria-live="polite"></p>
+<details><summary>What does this reveal?</summary><p>It records equal-symbol positions, not plaintext. Renaming is one-to-one: different symbols keep different names. In a homophonic cipher, different ciphertext symbols can still stand for the same plaintext letter, so this pattern is not necessarily the plaintext’s pattern. This does not apply as a decipherment method to modern encryption or a properly used one-time pad.</p><p>The single-occurrence action replaces the first repeated occurrence with a new symbol. If all symbols are distinct, it replaces the last with the first. With only one symbol, no equality relationship can change. Separating spaces here are token boundaries, not symbols being encoded.</p></details>
+<p class="paper-credit"><strong>Research credit:</strong> Nishant Kambhatla, Logan Born and Anoop Sarkar, <a href="https://aclanthology.org/2023.findings-eacl.160/"><em>Decipherment as Regression: Solving Historical Substitution Ciphers by Learning Symbol Recurrence Relations</em> (2023)</a>, §3.1. This activity implements their first-occurrence numbering definition on an original example. It does not run their Transformer model or claim their decipherment performance.</p>
+</section>
+<p>Continue with <a href="evidence-workbench.html#annotations">recording uncertain readings</a>, <a href="evidence-workbench.html#keys">applying your own key</a>, or <a href="evidence-workbench.html#homophonic">the experimental homophonic search</a>.</p>
+</main><footer></footer><script src="../js/nav.js" defer></script><script src="../js/reading-evidence.js" defer></script></body></html>
