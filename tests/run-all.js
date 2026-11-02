@@ -12,6 +12,7 @@ const suites = [
   'tests/test-book-revision.js',
   'tests/test-research-review-20261031.js',
   'tests/test-reader-companion.js',
+  'tests/test-book-trail.js',
   'tests/test-ebook-extensions.js',
   'tests/test-ebook-symmetric.js',
   'tests/test-information-examples.js',

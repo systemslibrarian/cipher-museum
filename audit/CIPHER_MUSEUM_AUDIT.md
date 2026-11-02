@@ -1,10 +1,10 @@
 # Cipher Museum — complete independent audit document
 
-This snapshot brings together **220 public HTML pages**, **80 nonempty inline scripts**, **57 shared/supporting JavaScript files**, **29 JSON/manifest data files**, and **185 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
+This snapshot brings together **220 public HTML pages**, **80 nonempty inline scripts**, **59 shared/supporting JavaScript files**, **29 JSON/manifest data files**, and **185 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
 
 - Source repository: systemslibrarian/cipher-museum
-- Exact source commit: `0440bdf14982197590f424d4e8af720c8fe62234`
-- Source commit time: 2026-11-02T09:36:38-05:00
+- Exact source commit: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`
+- Source commit time: 2026-11-02T10:34:29-05:00
 - Public website: https://ciphermuseum.com/
 - Inventory authority: docs/page-audit/coverage.json, checked against every tracked public HTML page.
 - Snapshot hashes identify the original files. Exported text is reformatted; direct ebook URLs are replaced with a visible omission marker. Book titles, authors and publication details remain.
@@ -261,7 +261,7 @@ Suggested finding fields: `id, page_id, path, quotation_or_location, category, s
 
 # Pages P001–P020
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P001: 404.html -->
 <a id="p001"></a>
@@ -5562,7 +5562,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P021–P040
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P021: ciphers/bach-motif.html -->
 <a id="p021"></a>
@@ -10862,7 +10862,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P041–P060
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P041: ciphers/colossus.html -->
 <a id="p041"></a>
@@ -16344,7 +16344,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P061–P080
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P061: ciphers/elizebeth-friedman.html -->
 <a id="p061"></a>
@@ -18709,7 +18709,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/geheimschreiber.html`
 - Public page: https://ciphermuseum.com/ciphers/geheimschreiber.html
-- Snapshot source SHA-256: `eabfd0dc97bc1b4ba73c2d79d515369ddaa64c41238d9b1abcb74d0c8dda7a4e`
+- Snapshot source SHA-256: `7b63e27916fb5326d07d59a8cd3e949ff6dffbd1fb7f27d70e55b969845e6f15`
 - Source identities in the prior evidence ledger: T52-ARTIFACT, BEURLING-FRA-METHOD
 
 ### Metadata and search/social descriptions
@@ -18789,6 +18789,22 @@ Wheels10 pinwheels controlling bit addition and permutation; connections vary by
 Plaintext5-bit Baudot teleprinter code
 
 Broken byArne Beurling and the Swedish Defence Staff service, 1940
+
+#### The people behind daily codebreaking
+
+A structural breakthrough still left daily work. Fredrik Wallin’s account, based on FRA archives, describes this operating chain:
+
+- **Intercept:** collect the encrypted traffic.
+
+- **Recover the daily key:** determine the settings needed to read it.
+
+- **Operate App:** enter ciphertext into the decryption apparatus and monitor synchronization. App meant “apparatus,” not a software application.
+
+- **Prepare the report:** assemble the plaintext, clean up its language and type the final report.
+
+Women performed essential operating and interception work; some later led interception shifts. On **1 July 1942**, women were **193 of FRA’s 287 civilian staff**—about 67%. Another 113 seconded military personnel brought the agency total to 400. The 67% figure refers to civilians, not the whole agency.
+
+Source: [Fredrik Wallin, *“We just did it!”* (HistoCrypt 2023), pp. 1–4](<https://ecp.ep.liu.se/index.php/histocrypt/article/view/707>). These staffing totals concern FRA as a whole, not just its T52 team. This panel summarizes Wallin’s archival research; it does not claim an independent archive review.
 
 #### Why This Matters
 
@@ -18939,7 +18955,12 @@ This describes work recorded before this export. Treat these notes as assertions
   "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
   "remaining_evidence_limits": [
     "Exact historical T52 variant control paths have not been verified against a technical manual; the two-bank26-letter widget remains an explicitly different model."
-  ]
+  ],
+  "dot_research_additions": {
+    "date": "2026-11-02",
+    "note": "Added sourced operating-chain panel and women’s roles. Wallin pp. 1–4 checked; 193/287 is civilian staffing, not 67% of all 400 staff or the T52 team.",
+    "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+  }
 }
 ```
 
@@ -21935,7 +21956,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P081–P100
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P081: ciphers/joan-clarke.html -->
 <a id="p081"></a>
@@ -25708,7 +25729,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/mary-stuart-castelnau-letters.html`
 - Public page: https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html
-- Snapshot source SHA-256: `a6ce31d4a4bf090a2152aabb6ace23e533311c4c90e40fcbb35c8b7350928886`
+- Snapshot source SHA-256: `b28fb5ae456b6d75588f445535b94e8b66f5bc13af14399085533f152ced074c`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -25796,6 +25817,44 @@ Archive LocationBibliothèque nationale de France, Paris (several manuscript col
 Solved ByGeorge Lasry, Norbert Biermann, Satoshi Tomokiyo
 
 Published*Cryptologia*, 2023, vol. 47 no. 2
+
+#### Who made the mistake?
+
+Suppose a clear copy shows the symbols below. Key A gives an odd reading. Did you copy it incorrectly, choose the wrong interpretation, or inherit an error made by the person who enciphered it?
+
+**Invented fixture:** the symbols and keys below are not Mary’s. Slashes mark word boundaries. The copy is assumed accurate for this exercise.
+
+**Recorded symbols (kept unchanged):** `1 5 5 3 / 1 5 / 9`
+
+##### Intended key A
+
+`1 → M; 2 → E; 3 → T; 4 → N; 5 → O; 6 → R`
+
+##### Other key B
+
+`1 → N; 2 → O; 3 → R; 4 → M; 5 → E; 6 → T`
+
+**Literal reading with key A:** `M O O T / M O / ?`
+
+  [Input key-confusion-toggle: type=checkbox; initial value=] Test key B for symbol 5 only; keep key A for the other symbols
+
+**Separate editorial proposal:** `No alternative reading applied.`
+
+Symbol 9 remains unknown under both keys.
+
+How would you distinguish the explanations?
+
+- **Copying error:** return to the source image. Does it actually show 5 or a different symbol?
+
+- **Original key confusion:** check whether repeated exceptions match another key the writer might have used.
+
+- **Our interpretation:** test the proposed rule on a new passage. A more familiar phrase alone does not settle it.
+
+The proposed reading is M E E T / M E / ?. Do not silently replace the original symbols or erase the unexplained 9.
+
+**Historical connection:** Lasry, Biermann and Tomokiyo found recurring enciphering errors in a subset of 17 documents. Several fit symbols from the Mary–Beaton key instead of the Mary–Castelnau key, supporting their hypothesis of cross-cipher contamination. That explanation does not identify a particular secretary or account for every error. [Deciphering Mary Stuart’s lost letters from 1578–1584 (2023), Appendix B, pp. 198–200](<https://doi.org/10.1080/01611194.2022.2160677>) ([author article PDF](<https://friendsofsheffieldcastle.org/wp-content/uploads/Deciphering-Mary-Stuart-s-lost-letters-from-1578-1584.pdf#page=99>)).
+
+[Keep competing readings in the Evidence Workbench](<https://ciphermuseum.com/lab/evidence-workbench.html#annotations>).
 
 #### Check against another record
 
@@ -26024,6 +26083,7 @@ Cryptologia journal access
 
 These preserve IDs, option values, numeric limits, data attributes and event bindings used by the programs below.
 
+- input: type="checkbox" id="key-confusion-toggle"
 - input: id="mary-repeat" type="checkbox" checked="" disabled=""
 
 ### Scripts supporting this page
@@ -26032,6 +26092,7 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - https://ciphermuseum.com/js/nav.js
 - https://ciphermuseum.com/js/demo-loader.min.js
 - https://ciphermuseum.com/js/book-invitation-demos.js
+- https://ciphermuseum.com/js/evidence-exercises.js
 
 
 
@@ -26060,7 +26121,12 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "dot_research_additions": {
+    "date": "2026-11-02",
+    "note": "Added synthetic two-key confusion exercise. Original symbols and key-A literal decode persist; alternate reading remains a hypothesis and symbol 9 unresolved. Appendix B checked directly.",
+    "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+  }
 }
 ```
 
@@ -27322,7 +27388,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P101–P120
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P101: ciphers/morse.html -->
 <a id="p101"></a>
@@ -29131,7 +29197,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/nomenclator.html`
 - Public page: https://ciphermuseum.com/ciphers/nomenclator.html
-- Snapshot source SHA-256: `52a700d4501e2631a9ed3abbb7234270b5a75f952bcd619dbc6a6fdb726b5a4a`
+- Snapshot source SHA-256: `a33b8807e9bc487f253097c1a0145bec55ed3c8c5070afaf55dbb3a0cd207e59`
 - Source identities in the prior evidence ledger: KAHN-1996
 
 ### Metadata and search/social descriptions
@@ -29211,6 +29277,33 @@ Key TypeSubstitution alphabet plus a code list; sizes varied
 Broken ByContext, traffic patterns and sometimes captured keys
 
 Modern LessonCombining methods does not by itself establish security
+
+#### Can you predict the next code?
+
+You have learned two entries of an invented key: **A → 41 and B → 42**. What would you guess for C? Test the same clues against two tables.
+
+**What the analyst knows:** the six-letter inventory A–F, the six codes 41–46, two mappings, and the separated ciphertext below. The plaintext is initially withheld. This is a partial-key exercise, not a ciphertext-only attack.
+
+ Table to investigate
+- Regular numbering
+
+- Shuffled numbering
+
+**Ciphertext:** `46 41 43 45`
+
+ Your prediction for C (41–46) [Input table-guess: type=number; initial value=] Test prediction and revealHide entries and try again
+
+**Remaining entries:** `C → ?; D → ?; E → ?; F → ?`
+
+Make a prediction before revealing the remaining entries.
+
+Compare both answers and the limits
+
+The regular table has C → 43, D → 44, E → 45, F → 46. The shuffled table has C → 46, D → 43, E → 45, F → 44. Both keep A → 41 and B → 42. Both encode the same invented message, FACE, with one code per letter: the inventory and selection rule stay fixed. Switch tables to see why two consecutive entries do not guarantee the rest.
+
+This tiny table isolates one pattern found in larger keys. It omits word codes, homophones and nulls. Revealing a key in an exercise is not recovering it from intercepted traffic; shuffled numbering alone does not make a nomenclator secure.
+
+Source: [Antal and Mírka, *Wrong Design of Cipher Keys* (2022), pp. 3–8](<https://ecp.ep.liu.se/index.php/histocrypt/article/view/387>). Their historical sample illustrates key-design patterns, not a universal attack success rate. Regularity alone does not demonstrate a practical break.
 
 #### Why This Matters
 
@@ -29324,6 +29417,12 @@ David Kahn, *The Codebreakers: The Comprehensive History of Secret Communication
 
 These preserve IDs, option values, numeric limits, data attributes and event bindings used by the programs below.
 
+- select: id="table-mode"
+- option: value="regular"
+- option: value="shuffled"
+- input: id="table-guess" type="number" min="41" max="46" step="1" required=""
+- button: type="submit"
+- button: type="button" id="table-reset"
 - button: data-reveal-next=""
 
 ### Scripts supporting this page
@@ -29333,6 +29432,7 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - https://ciphermuseum.com/js/demo-loader.min.js
 - https://ciphermuseum.com/js/nav.js
 - https://ciphermuseum.com/js/lightbox.js
+- https://ciphermuseum.com/js/evidence-exercises.js
 
 
 
@@ -29364,7 +29464,12 @@ This describes work recorded before this export. Treat these notes as assertions
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
   "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+  "dot_research_additions": {
+    "date": "2026-11-02",
+    "note": "Added regular/shuffled partial-key prediction exercise. Same message/inventory/selection rule; no ciphertext-only or practical-break claim.",
+    "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+  }
 }
 ```
 
@@ -33127,7 +33232,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P121–P140
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P121: ciphers/rochefort.html -->
 <a id="p121"></a>
@@ -38463,7 +38568,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P141–P160
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P141: ciphers/tap-code.html -->
 <a id="p141"></a>
@@ -44529,7 +44634,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P161–P180
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P161: classical-guide.html -->
 <a id="p161"></a>
@@ -51595,7 +51700,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P181–P200
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P181: hall-of-foundations/modular-arithmetic.html -->
 <a id="p181"></a>
@@ -57183,7 +57288,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P201–P220
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P201: halls/unsolved.html -->
 <a id="p201"></a>
@@ -58051,7 +58156,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `lab/evidence-workbench.html`
 - Public page: https://ciphermuseum.com/lab/evidence-workbench.html
-- Snapshot source SHA-256: `b5808df6ac7e4bcd92c27f8deb1e724f5e5190ca0592e7f7de7c8bbeba7da5fa`
+- Snapshot source SHA-256: `c4d89ab2f22272f994cb9fa4bef6fb2db0a9a1f9dc69aeb5756ffc9528e8ad54`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -58119,6 +58224,33 @@ Start with a transcription or import a Cipher Detective JSON export.
 Export evidence JSONRestore previous saved record
 
  Import version 1 or 2 transcription JSON (up to 750 KB) [Input import-file: type=file; initial value=]
+
+#### Sounds right—but does it fit?
+
+Two readable messages. One fixed cipher. Can both readings be right? In this invented exercise, each ciphertext symbol always stands for the same letter, different symbols stand for different letters, and there are no copying errors. Spaces in the candidates are supplied for readability.
+
+**Recorded ciphertext:** `A B B C A B D C E F F E`
+
+ Candidate reading
+- SEND ME AT NOON
+
+- MEET ME AT NOON
+
+**Proposed plaintext:** SEND ME AT NOON
+
+Pick a symbol to compare every position where it occurs. Count positions without spaces.
+
+ Check the whole reading
+
+The exercise loads when JavaScript is available.
+
+What this check can—and cannot—tell you
+
+For SEND ME AT NOON, symbol B would mean E at positions 2 and 6 but N at position 3. MEET ME AT NOON fits all the mappings. Consistency is necessary under this model; it does not establish authenticity or a unique solution. A noisy transcription or a different cipher needs a different test, with every exception recorded.
+
+Related research: [Aldarrab and May, *Can Sequence-to-Sequence Models Crack Substitution Ciphers?* (2021)](<https://aclanthology.org/2021.acl-long.561/>). Their experiments study automatic decipherment, including noisy text. These two invented candidates are not outputs from that study; this exercise runs no neural model.
+
+Next: [what if the original encipherer used the wrong key?](<https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html#key-confusion>)
 
 #### 1. Preserve the source
 
@@ -58482,6 +58614,7 @@ No bundle imported in this tab.
 
 - nav — aria-label: Primary
 - nav — aria-label: Workbench sections
+- div#reading-symbols — aria-label: Inspect ciphertext symbols
 - input#source-artifactId — placeholder: For example: archive:collection:folio
 - input#source-date — placeholder: 2026-10-29
 - input#source-method — placeholder: Manual reading; symbol IDs assigned by first appearance
@@ -58511,6 +58644,10 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - button: id="export-record" type="button"
 - button: id="restore-record" type="button" disabled=""
 - input: id="import-file" type="file" accept="application/json,.json"
+- select: id="reading-candidate"
+- option: value="fluent"
+- option: value="consistent"
+- button: id="reading-check" type="button"
 - input: id="source-artifactId" maxlength="500" placeholder="For example: archive:collection:folio"
 - input: id="source-archive" maxlength="500"
 - input: id="source-shelfmark" maxlength="500"
@@ -58679,6 +58816,7 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 - https://ciphermuseum.com/js/research-language-model.js
 - https://ciphermuseum.com/js/research-model.js
 - https://ciphermuseum.com/js/research-ui.js
+- https://ciphermuseum.com/js/evidence-exercises.js
 
 
 
@@ -58714,7 +58852,12 @@ This describes work recorded before this export. Treat these notes as assertions
     "validation": "docs/page-audit/research-2026-10-30-validation.json",
     "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
   },
-  "research_review_followup_2026_11_01": "revised"
+  "research_review_followup_2026_11_01": "revised",
+  "dot_research_additions": {
+    "date": "2026-11-02",
+    "note": "Added standalone fluent-but-inconsistent reading exercise; fixed noiseless substitution, repeated-symbol checks and evidence limits. No writes to research records.",
+    "verification": "See docs/DOT_RESEARCH_ADDITIONS_2026-11-02.md; earlier browser/audit records describe earlier revisions."
+  }
 }
 ```
 
@@ -61816,7 +61959,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `sealed-letter.html`
 - Public page: https://ciphermuseum.com/sealed-letter.html
-- Snapshot source SHA-256: `36e83532942ab35d4de48d4dfafecd76bb49316e60156696b1a2bf18d4c7ef59`
+- Snapshot source SHA-256: `f37a75e60ec429b15412217474a115fca96531d09ba06c5f0e0eca8c0df7b3ca`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -61865,7 +62008,7 @@ The interactive case needs JavaScript. You can still [read the four slips and th
 
 The slips appear after chapters 1, 3, 14 and 17 of [*Secrets of the Cipher Museum*](<https://ciphermuseum.com/the-book.html>). You can also try all four here. They use simplified ideas, not historical ciphertexts. The book’s twenty historical investigations stand on their own.
 
-Work at your own pace. Each slip has a small hint and a separate answer reveal. Nothing depends on page numbers, a purchase or a timer. Your answers are checked in this browser and are not submitted to a server.
+Work at your own pace. Each slip has a small hint and a separate answer reveal. Nothing depends on page numbers, a purchase or a timer. Your answers are checked in this browser and are not submitted to a server. An optional [slip notebook](<https://ciphermuseum.com/sealed-letter.html#notebook>) lets you keep the four answers together.
 
 The four slips
 
@@ -61889,6 +62032,8 @@ Reveal this slip’s answer
 
 **COMPARE**. 31, 08, 42, 17, 24, 53 and 19 give C, O, M, P, A, R and E. The unused whole-word groups show how a small code vocabulary can sit beside an alphabet.
 
+[Keep this answer in your notebook →](<https://ciphermuseum.com/sealed-letter.html#notebook>)
+
 A miniature invented nomenclator, prompted by chapter 1. It is not Mary Stuart’s historical cipher.
 
 Slip 2 · After chapter 3The clerk’s route
@@ -61911,6 +62056,8 @@ The first column reads T, H, E. Move to the top of the middle column next.
 Reveal this slip’s answer
 
 **THE COPIES**. The columns give THE, COP and IES. Joined and respaced, they read THE COPIES. No letter has changed; its position has.
+
+[Keep this answer in your notebook →](<https://ciphermuseum.com/sealed-letter.html#notebook>)
 
 An invented route puzzle, prompted by chapter 3. It is not a reconstruction of a Union Army message.
 
@@ -61936,6 +62083,8 @@ Reveal this slip’s answer
 
 **BEFORE**. Removing the recovered strip gives 02 05 06 15 18 05: BEFORE. Knowing one message helps expose the other because the secret numbers were reused.
 
+[Keep this answer in your notebook →](<https://ciphermuseum.com/sealed-letter.html#notebook>)
+
 A tiny arithmetic illustration prompted by chapter 14, not a VENONA intercept or a secure encryption tool. Actual one-time-pad protection depends on a random secret pad used only once.
 
 Slip 4 · After chapter 17The letters that do nothing
@@ -61954,7 +62103,29 @@ Reveal this slip’s answer
 
 **YOU TRUST THEM**. The capitals spell YOUTRUSTTHEM. The spacing becomes YOU TRUST THEM. The familiar-looking lower-case letters were a distraction.
 
+[Keep this answer in your notebook →](<https://ciphermuseum.com/sealed-letter.html#notebook>)
+
 An invented null-letter puzzle prompted by the change of assumptions in chapter 17. It does not reproduce the Copiale cipher’s symbol system.
+
+Your four answers
+
+#### Keep the slips together
+
+Record an answer as you reach each slip. When all four spaces are filled, join them into the instruction. Nothing here marks an answer right or wrong.
+
+Slip 1 · After chapter 1 · One word [Input slip-answer-1: type=text; initial value=] [Read slip 1 and its hints](<https://ciphermuseum.com/sealed-letter.html#slip-1>)
+
+Slip 2 · After chapter 3 · Two words [Input slip-answer-2: type=text; initial value=] [Read slip 2 and its hints](<https://ciphermuseum.com/sealed-letter.html#slip-2>)
+
+Slip 3 · After chapter 14 · One word [Input slip-answer-3: type=text; initial value=] [Read slip 3 and its hints](<https://ciphermuseum.com/sealed-letter.html#slip-3>)
+
+Slip 4 · After chapter 17 · Three words [Input slip-answer-4: type=text; initial value=] [Read slip 4 and its hints](<https://ciphermuseum.com/sealed-letter.html#slip-4>)
+
+0 of 4 answer spaces filled.
+
+Join my four answersSave on this deviceClear my notebook
+
+Saving is optional and uses this browser on this device. Nothing is sent to the museum. Clearing your browser data can remove saved answers.
 
 At the envelope
 
@@ -62219,6 +62390,13 @@ Start this case againNo timer. Hints and answer reveals are welcome.
 These preserve IDs, option values, numeric limits, data attributes and event bindings used by the programs below.
 
 - button: id="start-case" type="button"
+- input: type="text" id="slip-answer-1" maxlength="60" autocomplete="off" spellcheck="false"
+- input: type="text" id="slip-answer-2" maxlength="60" autocomplete="off" spellcheck="false"
+- input: type="text" id="slip-answer-3" maxlength="60" autocomplete="off" spellcheck="false"
+- input: type="text" id="slip-answer-4" maxlength="60" autocomplete="off" spellcheck="false"
+- button: type="submit"
+- button: id="save-notebook" type="button"
+- button: id="clear-notebook" type="button"
 - input: id="instruction" name="instruction" type="text" autocomplete="off" spellcheck="false" maxlength="160" required="" aria-describedby="instruction-help"
 - button: type="submit"
 - input: id="dispatch-room" name="dispatch-room" type="text" autocomplete="off" maxlength="30" aria-describedby="dispatch-help" required=""
@@ -62261,6 +62439,7 @@ These preserve IDs, option values, numeric limits, data attributes and event bin
 
 - https://ciphermuseum.com/js/nav.js
 - https://ciphermuseum.com/js/reader-companion.js
+- https://ciphermuseum.com/js/book-trail.js
 
 
 
@@ -62272,14 +62451,19 @@ This describes work recorded before this export. Treat these notes as assertions
 {
   "status": "bounded integration reading and static puzzle checks complete; no browser execution in this inventory pass",
   "sources": [],
-  "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified. Developmental book revision, November 2026: removed unused wraparound instruction and made source/finding choices more plausible. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+  "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified. Developmental book revision, November 2026: removed unused wraparound instruction and made source/finding choices more plausible. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Reader-experience revision 2026-11-02: added an optional four-answer notebook with explicit device saving, restore, clear and assembly into the existing instruction checker; deep links open the intended slip without revealing its answer. New tests cover the whole notebook-to-case route, blocked storage and malformed saved data. Fictional records and the historical-model labels are unchanged.",
   "integration_review": {
     "date": "2026-10-30",
     "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
     "scope": "Complete static HTML and checker-source reading, arithmetic/route/code-key consistency, and local link/fragment existence.",
     "limits": "No historical ciphertext reproduced or primary historical source checked. No browser interaction, visual accessibility or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
   },
-  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+  "reader_experience_review_2026_11_02": {
+    "scope": "Directory links and notebook flow; no new historical source audit.",
+    "checks": "jsdom journey tests; full npm suite with regenerated service-worker version checked after final CSS changes; HTML lint; browser interaction and visual review at a 390 CSS pixel iframe width (375 pixel content viewport with scrollbar).",
+    "limits": "Phone-width browser review, not physical-device certification. No release date or purchase flow added."
+  }
 }
 ```
 
@@ -62768,7 +62952,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `the-book.html`
 - Public page: https://ciphermuseum.com/the-book.html
-- Snapshot source SHA-256: `6acd7fff1e48c2c2595593853e4e8506f10f7c4ccac20292eca45840b716fbe0`
+- Snapshot source SHA-256: `033f0c7f3419b9facd9b26cc063d5a49a8fc77b55c9d832f8d4ecba5df31d682`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -62808,7 +62992,7 @@ Paul “The Cipher Librarian” Clark
 
 Discover how people learned to read other people’s secrets—and what happened when they did. Then enter Cipher Museum and try the ideas yourself.
 
-[Read the opening](<https://ciphermuseum.com/the-book.html#sample>)[Try the reader’s mystery →](<https://ciphermuseum.com/sealed-letter.html>)
+[Read the opening](<https://ciphermuseum.com/the-book.html#sample>)[Find your chapter’s exhibit ↓](<https://ciphermuseum.com/the-book.html#chapter-visits>)[Try the reader’s mystery →](<https://ciphermuseum.com/sealed-letter.html>)
 
 Book preview · Publication details to follow
 
@@ -62823,7 +63007,149 @@ Unidentified letters in a French archive restore a queen’s voice. A British ad
 
 *Secrets of the Cipher Museum* follows hidden messages into the decisions they make possible—and the questions they leave unresolved. The recovery of Copiale in 2011, the Zodiac 340 cipher in 2020 and Mary Stuart’s letters in 2023 brings the story into the work of modern researchers.
 
-No mathematical background is needed. Eight original diagrams and four documentary images help where the method matters. Chapter links and QR codes lead to free exhibits where you can compare readings, test an assumption and inspect what a published recovery establishes. The historical narrative is complete without a browser.
+No mathematical background is needed. Eight original diagrams and six documentary images help where the method matters. Chapter links and QR codes lead to free exhibits where you can compare readings, test an assumption and inspect what a published recovery establishes. The historical narrative is complete without a browser.
+
+Keep exploring as you read
+
+#### Find your chapter’s next door
+
+Choose a chapter and try its invitation now, or return when you finish reading. These visits are optional and free. Teaching models are labelled; the book supplies the historical account.
+
+Part I Chapters 1–6
+
+- Chapter 1
+
+##### [The queen’s other reader](<https://ciphermuseum.com/ciphers/babington.html>)
+
+Follow the delivery route. Where could a copy leave the channel while the letter continued on its way?
+
+ [Optional envelope · Slip 1 of 4 →](<https://ciphermuseum.com/sealed-letter.html#slip-1>)
+
+- Chapter 2
+
+##### [The king’s unreadable orders](<https://ciphermuseum.com/ciphers/great-cipher.html>)
+
+Change the teaching codebook’s seed, then separate a repeatable reading from a claim about the Iron Mask.
+
+- Chapter 3
+
+##### [The war inside the telegraph office](<https://ciphermuseum.com/ciphers/stager.html>)
+
+Try your own words in the route model. What can you infer before restoring the instruction?
+
+ [Optional envelope · Slip 2 of 4 →](<https://ciphermuseum.com/sealed-letter.html#slip-2>)
+
+- Chapter 4
+
+##### [The telegram Britain could not simply reveal](<https://ciphermuseum.com/ciphers/zimmermann.html>)
+
+Follow the two coded versions. What could Britain reveal without exposing its access?
+
+- Chapter 5
+
+##### [The message before the offensive](<https://ciphermuseum.com/ciphers/adfgvx.html>)
+
+Change one character and inspect both stages. Consider when a correct reading would arrive too late.
+
+- Chapter 6
+
+##### [The codebreaker who told](<https://ciphermuseum.com/ciphers/yardley.html>)
+
+Compare Yardley’s disclosure with the Zimmermann Telegram. Who gained knowledge, and who risked losing access?
+
+Part II Chapters 7–14
+
+- Chapter 7
+
+##### [The millionaire’s hidden Shakespeare](<https://ciphermuseum.com/ciphers/elizebeth-friedman.html#riverbank>)
+
+Begin at Riverbank. In the linked evidence workbench, record a rule another reader could test without knowing your answer.
+
+- Chapter 8
+
+##### [The woman following the ships](<https://ciphermuseum.com/ciphers/elizebeth-friedman.html#radio-to-evidence>)
+
+Follow the radio traffic and the Bear Cat episode. What other record would connect a message to a person?
+
+- Chapter 9
+
+##### [The secret carried out of Poland](<https://ciphermuseum.com/ciphers/enigma.html>)
+
+Repeat a letter, reset the rotors and reproduce the result. Then compare the historical message-key procedure.
+
+- Chapter 10
+
+##### [The cost of getting back in](<https://ciphermuseum.com/ciphers/joan-clarke.html>)
+
+Follow a candidate setting to a checked reading. Use the chapter to trace what the books from U-559 made possible.
+
+- Chapter 11
+
+##### [The ocean in the intercepts](<https://ciphermuseum.com/ciphers/jn-25.html>)
+
+Remove an additive in the JN-25 model. Notice why the exposed group still needs a codebook.
+
+- Chapter 12
+
+##### [The men who carried the code](<https://ciphermuseum.com/ciphers/navajo-code-talkers.html>)
+
+Try the spelling exercise, then open a veteran’s oral history. What does the account add to the printed dictionary?
+
+- Chapter 13
+
+##### [The machine no one had seen](<https://ciphermuseum.com/ciphers/lorenz.html>)
+
+Follow the repeating structures. Which inference could you test against another stretch of material?
+
+- Chapter 14
+
+##### [The names inside the numbers](<https://ciphermuseum.com/ciphers/venona.html>)
+
+Compare pad reuse with the historical releases. Separate recovered text, gaps and editorial identifications.
+
+ [Optional envelope · Slip 3 of 4 →](<https://ciphermuseum.com/sealed-letter.html#slip-3>)
+
+Part III Chapters 15–20
+
+- Chapter 15
+
+##### [The secret that could be published](<https://ciphermuseum.com/ciphers/diffie-hellman.html>)
+
+Produce a shared value with small numbers. What would establish the other participant’s identity?
+
+- Chapter 16
+
+##### [Privacy leaves the laboratory](<https://ciphermuseum.com/ciphers/rsa.html>)
+
+Encrypt and decrypt a number with toy RSA keys. What does a successful round trip tell you about their owner?
+
+- Chapter 17
+
+##### [The letters that marked the spaces](<https://ciphermuseum.com/lab/decipherment-cases.html#copiale>)
+
+Compare the failed hypothesis with the recovered role of ordinary letters, then try the linked teaching model.
+
+ [Optional envelope · Slip 4 of 4 →](<https://ciphermuseum.com/sealed-letter.html#slip-4>)
+
+- Chapter 18
+
+##### [The book that will not answer](<https://ciphermuseum.com/ciphers/voynich.html>)
+
+Follow the manuscript images. Record an observation another reader can find before proposing a meaning.
+
+- Chapter 19
+
+##### [The message and the murderer](<https://ciphermuseum.com/lab/decipherment-cases.html>)
+
+Replay a published solution and compare raw and normalised readings. What does the message establish about its author?
+
+- Chapter 20
+
+##### [A queen speaks again](<https://ciphermuseum.com/ciphers/mary-stuart-castelnau-letters.html>)
+
+Try the labelled modifier sign, then follow the research source to the surviving plaintext copies.
+
+The four envelope links lead to a separate, original fictional investigation. You can collect the slips as you go, use their hints, or [start that case directly](<https://ciphermuseum.com/sealed-letter.html>).
 
 CM
 
@@ -62904,7 +63230,7 @@ This describes work recorded before this export. Treat these notes as assertions
 {
   "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
   "sources": [],
-  "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description.",
+  "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description. Reader-experience revision 2026-11-02: added a 20-chapter directory with exact exhibit destinations, four optional slip stops and prompts matched to the current manuscript invitations. Updated documentary image count from four to six against the book figure manifest. The approved promise, cover, historical excerpt and forthcoming status are preserved. No new historical claim introduced; existing sources were not independently reverified.",
   "integration_review": {
     "date": "2026-10-30",
     "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
@@ -62913,7 +63239,12 @@ This describes work recorded before this export. Treat these notes as assertions
   },
   "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
   "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup.",
-  "book_cover_alignment_2026_11_01": "revised"
+  "book_cover_alignment_2026_11_01": "revised",
+  "reader_experience_review_2026_11_02": {
+    "scope": "Directory links and notebook flow; no new historical source audit.",
+    "checks": "jsdom journey tests; full npm suite with regenerated service-worker version checked after final CSS changes; HTML lint; browser interaction and visual review at a 390 CSS pixel iframe width (375 pixel content viewport with scrollbar).",
+    "limits": "Phone-width browser review, not physical-device certification. No release date or purchase flow added."
+  }
 }
 ```
 
@@ -64408,7 +64739,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Source register and recorded access limits
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 These 185 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
@@ -67463,7 +67794,7 @@ These 185 identities and reading scopes come from the prior review ledger. They 
 
 # javascript appendix 1
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -70701,6 +71032,109 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 ```
 
 
+## JavaScript — js/book-trail.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/book-trail.js`
+- Served SHA-256: `fb2652ed090ddd95e5df66b3db40663c6604025a26360a26ef35236fa1339200`
+- Readable-source SHA-256: `fb2652ed090ddd95e5df66b3db40663c6604025a26360a26ef35236fa1339200`
+
+
+```javascript
+/* Optional notebook for the four invented book slips. No network requests. */
+(function () {
+  'use strict';
+  var panel = document.getElementById('notebook');
+  if (!panel) return;
+  var key = 'cipher-museum-book-slips-v1';
+  var fields = [1, 2, 3, 4].map(function (n) { return document.getElementById('slip-answer-' + n); });
+  var feedback = document.getElementById('notebook-feedback');
+  var saved = null;
+  function answers() { return fields.map(function (field) { return field.value.trim(); }); }
+  function count() {
+    document.getElementById('notebook-count').textContent = answers().filter(Boolean).length + ' of 4 answer spaces filled.';
+  }
+  function openSlip() {
+    if (!/^(#slip-[1-4]|#notebook)$/.test(window.location.hash)) return;
+    var slip = document.getElementById(window.location.hash.slice(1));
+    if (slip.tagName === 'DETAILS') slip.open = true;
+    if (typeof slip.scrollIntoView === 'function') slip.scrollIntoView({ block: 'start' });
+  }
+  panel.hidden = false;
+  try {
+    var raw = window.localStorage.getItem(key);
+    if (raw) {
+      var record = JSON.parse(raw);
+      if (!record || record.version !== 1 || !Array.isArray(record.answers) || record.answers.length !== 4 ||
+          !record.answers.every(function (a) { return typeof a === 'string' && a.length <= 60; })) {
+        throw new Error('Invalid notebook');
+      }
+      fields.forEach(function (field, i) { field.value = record.answers[i]; });
+      saved = JSON.stringify(answers());
+      feedback.textContent = 'Your saved answers are back. You can edit them and save again.';
+    }
+  } catch (_) {
+    feedback.textContent = 'Saved answers are unavailable in this browser. You can still fill in the notebook and join the answers.';
+  }
+  count();
+  fields.forEach(function (field) {
+    field.addEventListener('input', function () {
+      count();
+      feedback.textContent = saved === JSON.stringify(answers()) ? 'These answers match your saved notebook.' : 'These edits are not saved. Choose “Save on this device” if you want to return to them later.';
+    });
+  });
+  document.getElementById('save-notebook').addEventListener('click', function () {
+    try {
+      window.localStorage.setItem(key, JSON.stringify({ version: 1, answers: answers() }));
+      saved = JSON.stringify(answers());
+      feedback.textContent = 'Saved in this browser on this device. Save again after making changes.';
+    } catch (_) {
+      feedback.textContent = 'This browser could not save the notebook. Keep a paper copy; joining the answers still works.';
+    }
+  });
+  document.getElementById('clear-notebook').addEventListener('click', function () {
+    fields.forEach(function (field) { field.value = ''; });
+    document.getElementById('instruction').value = '';
+    saved = null;
+    count();
+    try {
+      window.localStorage.removeItem(key);
+      feedback.textContent = 'The notebook and its saved answers have been cleared.';
+    } catch (_) {
+      feedback.textContent = 'The visible notebook is clear. This browser did not allow access to any saved copy; clear site data in your browser if you need to remove it.';
+    }
+    fields[0].focus();
+  });
+  document.getElementById('notebook-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    var missing = fields.find(function (field) { return !field.value.trim(); });
+    if (missing) {
+      feedback.textContent = 'Fill all four spaces before joining them. Each slip has hints and an answer reveal.';
+      missing.focus();
+      return;
+    }
+    var instruction = document.getElementById('instruction');
+    instruction.value = answers().join(' ');
+    document.getElementById('unlock-feedback').textContent = 'Your four answers are joined. Choose “Open the sealed letter” to check the instruction.';
+    feedback.textContent = 'Your answers are ready at the envelope below.';
+    instruction.focus();
+  });
+  document.querySelectorAll('[data-notebook-slip]').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      window.location.hash = 'notebook';
+      fields[Number(link.dataset.notebookSlip) - 1].focus();
+    });
+  });
+  window.addEventListener('hashchange', openSlip);
+  openSlip();
+})();
+```
+
+
 ## JavaScript — js/breadcrumbs.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
@@ -70884,7 +71318,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 2
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/cipher-corpus.js
 
@@ -71293,7 +71727,7 @@ if (typeof require !== 'undefined') {
 
 # javascript appendix 3
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/all-engines.js
 
@@ -75570,7 +76004,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 # javascript appendix 4
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/caesar-break.js
 
@@ -79009,7 +79443,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 5
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/detective/challenges.js
 
@@ -81948,6 +82382,115 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 ```
 
 
+## JavaScript — js/evidence-exercises.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/evidence-exercises.js`
+- Served SHA-256: `4179e742eae419773c23b79969568a247de12e2951c5afe1e13baac56d3f134b`
+- Readable-source SHA-256: `4179e742eae419773c23b79969568a247de12e2951c5afe1e13baac56d3f134b`
+
+
+```javascript
+/* Original, bounded teaching fixtures. No manuscript or solver output is changed. */
+(function (root) {
+  'use strict';
+  const ciphertext = 'A B B C A B D C E F F E'.split(' ');
+  const candidates = { fluent: 'SEND ME AT NOON', consistent: 'MEET ME AT NOON' };
+  const keyA = { 1: 'M', 2: 'E', 3: 'T', 4: 'N', 5: 'O', 6: 'R' };
+  const keyB = { 1: 'N', 2: 'O', 3: 'R', 4: 'M', 5: 'E', 6: 'T' };
+  const original = '1 5 5 3 / 1 5 / 9';
+  const tables = {
+    regular: { A: 41, B: 42, C: 43, D: 44, E: 45, F: 46 },
+    shuffled: { A: 41, B: 42, C: 46, D: 43, E: 45, F: 44 }
+  };
+  function inspect(candidate) {
+    const letters = candidate.replace(/ /g, '');
+    if (!/^[A-Z]+$/.test(letters) || letters.length !== ciphertext.length) throw new Error('Expected twelve A–Z letters.');
+    return [...new Set(ciphertext)].map(symbol => {
+      const positions = ciphertext.flatMap((s, i) => s === symbol ? [i + 1] : []);
+      const readings = [...new Set(positions.map(p => letters[p - 1]))];
+      return { symbol, positions, readings, conflict: readings.length > 1 };
+    });
+  }
+  function decode(useOtherKey) {
+    return original.split(' ').map(s => s === '/' ? '/' : (useOtherKey && s === '5' ? keyB[s] : keyA[s]) || '?').join(' ');
+  }
+  function tableFor(mode) {
+    if (!Object.prototype.hasOwnProperty.call(tables, mode)) throw new Error('Unknown table.');
+    return tables[mode];
+  }
+  function encode(mode) { const t = tableFor(mode); return [...'FACE'].map(c => t[c]).join(' '); }
+  function checkPrediction(mode, guess) {
+    if (!Number.isInteger(guess) || guess < 41 || guess > 46) throw new Error('Choose a whole number from 41 to 46.');
+    return { correct: guess === tableFor(mode).C, answer: tableFor(mode).C };
+  }
+  function mount(doc) {
+    const byId = id => doc.getElementById(id);
+    if (byId('reading-candidate')) {
+      const choose = byId('reading-candidate');
+      function render() {
+        const candidate = candidates[choose.value];
+        byId('reading-plaintext').textContent = candidate;
+        const list = byId('reading-symbols'); list.replaceChildren();
+        for (const row of inspect(candidate)) {
+          const b = doc.createElement('button'); b.type = 'button'; b.className = 'btn btn-secondary';
+          b.textContent = row.symbol; b.setAttribute('aria-label', 'Inspect symbol ' + row.symbol);
+          b.addEventListener('click', () => {
+            list.querySelectorAll('button').forEach(el => el.setAttribute('aria-pressed', String(el === b)));
+            byId('reading-result').textContent = 'Symbol ' + row.symbol + ', positions ' + row.positions.join(', ') + ': ' + row.readings.join(' and ') + '. ' + (row.conflict ? 'Conflict: this symbol would need more than one plaintext letter.' : 'These occurrences agree. Check the other symbols too.');
+          });
+          b.setAttribute('aria-pressed', 'false'); list.append(b);
+        }
+        byId('reading-result').textContent = 'Choose a symbol to inspect its repeated occurrences.';
+      }
+      byId('reading-check').addEventListener('click', () => {
+        const conflicts = inspect(candidates[choose.value]).filter(r => r.conflict);
+        byId('reading-result').textContent = conflicts.length ? 'Reject this candidate under the stated model: symbols ' + conflicts.map(r => r.symbol).join(', ') + ' have conflicting readings. A fluent sentence is not enough.' : 'All mappings fit this fragment and are one-to-one. That is a consistency check, not proof of the message’s origin or a unique decipherment. Test a new passage and independent evidence.';
+      });
+      choose.addEventListener('change', render); render();
+    }
+    if (byId('key-confusion-toggle')) {
+      const toggle = byId('key-confusion-toggle');
+      function render() {
+        byId('confusion-literal').textContent = decode(false);
+        byId('confusion-proposal').textContent = toggle.checked ? decode(true) : 'No alternative reading applied.';
+        byId('confusion-result').textContent = toggle.checked ? 'Using key B only for symbol 5 gives E in three places. This supports testing key confusion; it does not prove who made an error. Symbol 9 remains unresolved under both keys.' : 'The recorded symbols and literal key-A reading are unchanged. Symbol 9 is unknown, not a null to discard.';
+      }
+      toggle.addEventListener('change', render); render();
+    }
+    if (byId('table-prediction')) {
+      const mode = byId('table-mode');
+      function reset() {
+        byId('table-ciphertext').textContent = encode(mode.value);
+        byId('table-hidden-entries').textContent = 'C → ?; D → ?; E → ?; F → ?';
+        byId('table-guess').value = ''; byId('table-result').textContent = 'A → 41 and B → 42 are known. Predict C, then reveal the remaining entries.';
+      }
+      byId('table-prediction').addEventListener('submit', event => {
+        event.preventDefault();
+        try {
+          const value = byId('table-guess').value.trim();
+          const result = checkPrediction(mode.value, value === '' ? NaN : Number(value));
+          const t = tableFor(mode.value);
+          byId('table-hidden-entries').textContent = ['C', 'D', 'E', 'F'].map(c => c + ' → ' + t[c]).join('; ');
+          byId('table-result').textContent = (result.correct ? 'Your prediction matches: ' : 'Your prediction does not match: ') + 'C → ' + result.answer + '. ' + (mode.value === 'regular' ? 'Consecutive numbering predicted this entry. Two observed mappings alone did not guarantee that rule; the revealed entries now let you test it.' : 'The same two clues also fit this shuffled table. A guessed numbering pattern is a hypothesis, not a recovered key.');
+        } catch (e) { byId('table-result').textContent = e.message; }
+      });
+      mode.addEventListener('change', reset); byId('table-reset').addEventListener('click', reset); reset();
+    }
+  }
+  const api = { ciphertext, candidates, inspect, decode, original, encode, checkPrediction, mount };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  if (root.document) {
+    if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', () => mount(root.document), { once: true });
+    else mount(root.document);
+  }
+})(typeof window !== 'undefined' ? window : globalThis);
+```
+
+
 ## JavaScript — js/first-codebreak.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
@@ -82238,6 +82781,12 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 ```
 
 
+---
+
+# javascript appendix 6
+
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+
 ## JavaScript — js/historical-ciphers.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
@@ -82386,12 +82935,6 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 })(typeof window === 'undefined' ? globalThis : window);
 ```
 
-
----
-
-# javascript appendix 6
-
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/historical-demos.js
 
@@ -85279,7 +85822,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 7
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-ui.js
 
@@ -86533,8 +87076,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `414cc7515af22e620f6044d86530a6477928012033f342ba950e7637f5a9d696`
-- Readable-source SHA-256: `414cc7515af22e620f6044d86530a6477928012033f342ba950e7637f5a9d696`
+- Served SHA-256: `b5969bb1aa67795dfee9f7f41a872a9484a1d231031a8944b29dd81b0e2ce3f9`
+- Readable-source SHA-256: `b5969bb1aa67795dfee9f7f41a872a9484a1d231031a8944b29dd81b0e2ce3f9`
 
 
 ```javascript
@@ -86556,9 +87099,11 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  */
 'use strict';
 
-const VERSION = 'cipher-museum-3b2766f8';
+const VERSION = 'cipher-museum-5e5208c8';
 
 const CORE = [
+  '/css/evidence-exercises.css',
+  '/js/evidence-exercises.js',
   '/first-codebreak.html',
   '/classical-guide.html',
   '/codebreak-worksheet.html',
@@ -86604,6 +87149,7 @@ const CORE = [
   '/css/museum.css',
   '/css/reader-companion.css',
   '/js/reader-companion.js',
+  '/js/book-trail.js',
   '/js/book-invitation-demos.js',
   '/css/book-invitation-demos.css',
   '/css/historical-demos.css',
@@ -86718,7 +87264,7 @@ self.addEventListener('fetch', (event) => {
 
 # data appendix 1
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — tours/foundations.json
 
@@ -87650,7 +88196,7 @@ Source SHA-256: `72c9a03dfa48a2e2a1ae78e44e880042471e53fb871ca22dffdc8bd38a9f64e
 
 # data appendix 2
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v1/language-model.json
 
@@ -87665,7 +88211,7 @@ Source SHA-256: `5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2
 
 # data appendix 3
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — public/corpus/v0.8/browser-sample.json
 
@@ -93444,7 +93990,7 @@ Source SHA-256: `788eb1bc8977cb9fd38d8584521bd150ebaf0a660f24f732b8ccead684291b7
 
 # data appendix 4
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — js/search-index.json
 
@@ -93459,7 +94005,7 @@ Source SHA-256: `b48a8293e32b18e79e1062156d2a0b5a7f5470a5e02f12b603702acfa0a7879
 
 # data appendix 5
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/artifact-cards.json
 
@@ -96546,7 +97092,7 @@ Source SHA-256: `3bd4770c7e3bdafad529f347a3e63703a5db49633054c20396147e9ac719f89
 
 # data appendix 6
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — corpus/engine-manifest.json
 
@@ -100992,7 +101538,7 @@ Source SHA-256: `ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc70724
 
 # data appendix 7
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v2/evaluation.json
 
@@ -103119,7 +103665,7 @@ Source SHA-256: `ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e
 
 # Columnar classroom worksheet
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `public/teaching/columnar-classroom.md`. SHA-256: `195e139c2732cb0d3d6c2ab5dd6fe5addf6100e130bd875a52b0d2d945d68091`. Its Node.js runner and fixed JSON fixtures are in the preceding appendices.
 

@@ -1,6 +1,6 @@
 # javascript appendix 5
 
-Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `7e44237d00d6cd7dd4ee598c8eaa3d550fd71195`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/detective/challenges.js
 
@@ -2939,6 +2939,115 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 ```
 
 
+## JavaScript — js/evidence-exercises.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/evidence-exercises.js`
+- Served SHA-256: `4179e742eae419773c23b79969568a247de12e2951c5afe1e13baac56d3f134b`
+- Readable-source SHA-256: `4179e742eae419773c23b79969568a247de12e2951c5afe1e13baac56d3f134b`
+
+
+```javascript
+/* Original, bounded teaching fixtures. No manuscript or solver output is changed. */
+(function (root) {
+  'use strict';
+  const ciphertext = 'A B B C A B D C E F F E'.split(' ');
+  const candidates = { fluent: 'SEND ME AT NOON', consistent: 'MEET ME AT NOON' };
+  const keyA = { 1: 'M', 2: 'E', 3: 'T', 4: 'N', 5: 'O', 6: 'R' };
+  const keyB = { 1: 'N', 2: 'O', 3: 'R', 4: 'M', 5: 'E', 6: 'T' };
+  const original = '1 5 5 3 / 1 5 / 9';
+  const tables = {
+    regular: { A: 41, B: 42, C: 43, D: 44, E: 45, F: 46 },
+    shuffled: { A: 41, B: 42, C: 46, D: 43, E: 45, F: 44 }
+  };
+  function inspect(candidate) {
+    const letters = candidate.replace(/ /g, '');
+    if (!/^[A-Z]+$/.test(letters) || letters.length !== ciphertext.length) throw new Error('Expected twelve A–Z letters.');
+    return [...new Set(ciphertext)].map(symbol => {
+      const positions = ciphertext.flatMap((s, i) => s === symbol ? [i + 1] : []);
+      const readings = [...new Set(positions.map(p => letters[p - 1]))];
+      return { symbol, positions, readings, conflict: readings.length > 1 };
+    });
+  }
+  function decode(useOtherKey) {
+    return original.split(' ').map(s => s === '/' ? '/' : (useOtherKey && s === '5' ? keyB[s] : keyA[s]) || '?').join(' ');
+  }
+  function tableFor(mode) {
+    if (!Object.prototype.hasOwnProperty.call(tables, mode)) throw new Error('Unknown table.');
+    return tables[mode];
+  }
+  function encode(mode) { const t = tableFor(mode); return [...'FACE'].map(c => t[c]).join(' '); }
+  function checkPrediction(mode, guess) {
+    if (!Number.isInteger(guess) || guess < 41 || guess > 46) throw new Error('Choose a whole number from 41 to 46.');
+    return { correct: guess === tableFor(mode).C, answer: tableFor(mode).C };
+  }
+  function mount(doc) {
+    const byId = id => doc.getElementById(id);
+    if (byId('reading-candidate')) {
+      const choose = byId('reading-candidate');
+      function render() {
+        const candidate = candidates[choose.value];
+        byId('reading-plaintext').textContent = candidate;
+        const list = byId('reading-symbols'); list.replaceChildren();
+        for (const row of inspect(candidate)) {
+          const b = doc.createElement('button'); b.type = 'button'; b.className = 'btn btn-secondary';
+          b.textContent = row.symbol; b.setAttribute('aria-label', 'Inspect symbol ' + row.symbol);
+          b.addEventListener('click', () => {
+            list.querySelectorAll('button').forEach(el => el.setAttribute('aria-pressed', String(el === b)));
+            byId('reading-result').textContent = 'Symbol ' + row.symbol + ', positions ' + row.positions.join(', ') + ': ' + row.readings.join(' and ') + '. ' + (row.conflict ? 'Conflict: this symbol would need more than one plaintext letter.' : 'These occurrences agree. Check the other symbols too.');
+          });
+          b.setAttribute('aria-pressed', 'false'); list.append(b);
+        }
+        byId('reading-result').textContent = 'Choose a symbol to inspect its repeated occurrences.';
+      }
+      byId('reading-check').addEventListener('click', () => {
+        const conflicts = inspect(candidates[choose.value]).filter(r => r.conflict);
+        byId('reading-result').textContent = conflicts.length ? 'Reject this candidate under the stated model: symbols ' + conflicts.map(r => r.symbol).join(', ') + ' have conflicting readings. A fluent sentence is not enough.' : 'All mappings fit this fragment and are one-to-one. That is a consistency check, not proof of the message’s origin or a unique decipherment. Test a new passage and independent evidence.';
+      });
+      choose.addEventListener('change', render); render();
+    }
+    if (byId('key-confusion-toggle')) {
+      const toggle = byId('key-confusion-toggle');
+      function render() {
+        byId('confusion-literal').textContent = decode(false);
+        byId('confusion-proposal').textContent = toggle.checked ? decode(true) : 'No alternative reading applied.';
+        byId('confusion-result').textContent = toggle.checked ? 'Using key B only for symbol 5 gives E in three places. This supports testing key confusion; it does not prove who made an error. Symbol 9 remains unresolved under both keys.' : 'The recorded symbols and literal key-A reading are unchanged. Symbol 9 is unknown, not a null to discard.';
+      }
+      toggle.addEventListener('change', render); render();
+    }
+    if (byId('table-prediction')) {
+      const mode = byId('table-mode');
+      function reset() {
+        byId('table-ciphertext').textContent = encode(mode.value);
+        byId('table-hidden-entries').textContent = 'C → ?; D → ?; E → ?; F → ?';
+        byId('table-guess').value = ''; byId('table-result').textContent = 'A → 41 and B → 42 are known. Predict C, then reveal the remaining entries.';
+      }
+      byId('table-prediction').addEventListener('submit', event => {
+        event.preventDefault();
+        try {
+          const value = byId('table-guess').value.trim();
+          const result = checkPrediction(mode.value, value === '' ? NaN : Number(value));
+          const t = tableFor(mode.value);
+          byId('table-hidden-entries').textContent = ['C', 'D', 'E', 'F'].map(c => c + ' → ' + t[c]).join('; ');
+          byId('table-result').textContent = (result.correct ? 'Your prediction matches: ' : 'Your prediction does not match: ') + 'C → ' + result.answer + '. ' + (mode.value === 'regular' ? 'Consecutive numbering predicted this entry. Two observed mappings alone did not guarantee that rule; the revealed entries now let you test it.' : 'The same two clues also fit this shuffled table. A guessed numbering pattern is a hypothesis, not a recovered key.');
+        } catch (e) { byId('table-result').textContent = e.message; }
+      });
+      mode.addEventListener('change', reset); byId('table-reset').addEventListener('click', reset); reset();
+    }
+  }
+  const api = { ciphertext, candidates, inspect, decode, original, encode, checkPrediction, mount };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  if (root.document) {
+    if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', () => mount(root.document), { once: true });
+    else mount(root.document);
+  }
+})(typeof window !== 'undefined' ? window : globalThis);
+```
+
+
 ## JavaScript — js/first-codebreak.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
@@ -3226,153 +3335,4 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       '<span class="footer-copy">172 exhibits · 13 halls · 3,900+ years</span>' +
     '</div>';
 })();
-```
-
-
-## JavaScript — js/historical-ciphers.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/historical-ciphers.js`
-- Served SHA-256: `0df911fca104641b48a6ef6dbde4ec141c8bcc526ffac157497dbb085510af6b`
-- Readable-source SHA-256: `0df911fca104641b48a6ef6dbde4ec141c8bcc526ffac157497dbb085510af6b`
-
-
-```javascript
-/* Historical exhibit algorithms. Each call starts from the supplied key.
- * NEMA wiring/notch measurements: https://www.cryptomuseum.com/crypto/nema/
- * Military stepping and window convention checked against Martin Grap's rmsk2:
- * https://github.com/rmsk2/rmsk2/blob/master/nema_test.cpp
- * This is an independent implementation of the published machine specification.
- */
-(function (root) {
-  'use strict';
-  const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const clean = text => String(text).normalize('NFD').replace(/\p{M}/gu, '')
-    .toUpperCase().replace(/[^A-Z]/g, '');
-  const mod = n => (n % 26 + 26) % 26;
-
-  // Electrical contact zero is I. Positions are the lower window row, not
-  // the top of the wheels. A two-contact offset connects those conventions.
-  const CONTACTS = 'IJKLMNOPQRSTUVWXYZABCDEFGH';
-  const physicalWiring = {
-    A: 'NSKITCOYMVWAUJDRLZXHFQEGPB', B: 'KJYNTMEHLOZQBWPSXIRFAGUDVC',
-    C: 'PNFUTEDIZYAHVRWOJSGBQMKCXL', D: 'WJBEYFUCMDTAZKXPIQHSVLGONR',
-    U: 'KWPNGHEFVTAZUDYCXSRJMIBQOL'
-  };
-  const wiring = Object.fromEntries(Object.entries(physicalWiring).map(([name, w]) =>
-    [name, [...CONTACTS].map(c => CONTACTS.indexOf(w[ABC.indexOf(c)]))]));
-  const entry = [...'QMNBVCXYLKJHGFDSAPOIUZTREW'].map(c => CONTACTS.indexOf(c));
-  const notches = {
-    1: 'BJSYZ', 12: 'BCDEFGHIJKLPQRSUVWXYZ', 13: 'ABDEFGJKMNPQRTUVWXY',
-    14: 'CEFGHJKLMNOPQSVXZ', 15: 'ADEGMOPQRSTVXYZ', 22: 'ABEGHKMNPQRSVWX'
-  };
-
-  function nema(text, windows = 'MQQPZQSOEV') {
-    const key = String(windows).trim().toUpperCase();
-    if (!/^[A-Z]{10}$/.test(key)) throw new Error('Enter exactly ten A–Z window letters.');
-    // Index from the right: red drive, D, drive 15, C, drive 14, B,
-    // drive 13, A, drive 12, reflector. The electrical entry is static.
-    const position = [0, ...[...key].reverse().map(c => CONTACTS.indexOf(c))];
-    const wheels = { 0: entry, 2: wiring.D, 4: wiring.C, 6: wiring.B, 8: wiring.A, 10: wiring.U };
-    const notch = (slot, wheel, offset) =>
-      notches[wheel].includes(CONTACTS[mod(position[slot] + offset)]);
-    const pass = (x, slot, inverse = false) => {
-      const displacement = slot === 0 ? 0 : mod(position[slot] - 2);
-      const contact = mod(x + displacement);
-      return mod((inverse ? wheels[slot].indexOf(contact) : wheels[slot][contact]) - displacement);
-    };
-    const trace = [];
-    let output = '';
-    for (const letter of clean(text)) {
-      // Sense all notches in the old state, then step backwards before
-      // passing current. The two red-wheel tracks drive separate linkages.
-      const slow = notch(1, 1, 17);
-      const moving = [1, 5, 9];
-      if (notch(1, 22, 16)) moving.push(2);
-      if (slow) moving.push(3, 7);
-      if (slow && notch(3, 15, 16)) moving.push(4);
-      if (notch(5, 14, 16)) moving.push(6);
-      if (slow && notch(7, 13, 16)) moving.push(8);
-      if (notch(9, 12, 16)) moving.push(10);
-      moving.forEach(slot => { position[slot] = mod(position[slot] - 1); });
-      let x = pass(CONTACTS.indexOf(letter), 0, true);
-      [2, 4, 6, 8, 10].forEach(slot => { x = pass(x, slot); });
-      [8, 6, 4, 2].forEach(slot => { x = pass(x, slot, true); });
-      const result = CONTACTS[pass(x, 0)];
-      output += result;
-      if (trace.length < 12) trace.push({ input: letter, output: result,
-        windows: position.slice(1).reverse().map(p => CONTACTS[p]).join('') });
-    }
-    return { output, trace, windows: position.slice(1).reverse().map(p => CONTACTS[p]).join('') };
-  }
-
-  function rotate(index, size) {
-    const row = Math.floor(index / size), col = index % size;
-    return col * size + size - 1 - row;
-  }
-
-  function grilleOrder(size, holes) {
-    if (![4, 6, 8].includes(size)) throw new Error('Choose a 4×4, 6×6, or 8×8 grille.');
-    if (!Array.isArray(holes) || holes.length !== size * size / 4 ||
-      holes.some(h => !Number.isInteger(h) || h < 0 || h >= size * size)) {
-      throw new Error('Select one hole from each rotation orbit.');
-    }
-    const orientations = [];
-    let current = [...holes];
-    for (let turn = 0; turn < 4; turn++) {
-      orientations.push([...current].sort((a, b) => a - b));
-      current = current.map(h => rotate(h, size));
-    }
-    const order = orientations.flat();
-    if (new Set(order).size !== size * size) throw new Error('Rotated holes overlap; every cell must be visited once.');
-    return { order, orientations };
-  }
-
-  function turningGrille(text, size, holes, decrypt = false) {
-    const { order, orientations } = grilleOrder(size, holes);
-    const capacity = size * size;
-    let input = clean(text);
-    const padding = decrypt ? 0 : (capacity - input.length % capacity) % capacity;
-    if (decrypt && input.length % capacity) throw new Error(`Ciphertext must contain complete ${capacity}-letter blocks.`);
-    input += 'X'.repeat(padding);
-    const blocks = [];
-    let output = '';
-    for (let start = 0; start < input.length; start += capacity) {
-      const chunk = input.slice(start, start + capacity);
-      const grid = decrypt ? [...chunk] : Array(capacity);
-      if (decrypt) output += order.map(i => grid[i]).join('');
-      else { order.forEach((cell, i) => { grid[cell] = chunk[i]; }); output += grid.join(''); }
-      blocks.push(grid);
-    }
-    return { output, blocks, padding, orientations };
-  }
-
-  function myszkowski(text, keyword, decrypt = false) {
-    const key = clean(keyword);
-    if (key.length < 2 || key.length > 24) throw new Error('Use a keyword of 2–24 letters.');
-    const input = clean(text), width = key.length;
-    const groups = [...new Set(key)].sort();
-    const ranks = [...key].map(c => groups.indexOf(c) + 1);
-    const order = [];
-    for (const letter of groups) {
-      const cols = [...key].flatMap((c, i) => c === letter ? [i] : []);
-      // One column: downwards. Tied columns: across each row before the
-      // next row. Missing cells in the last row are skipped, never padded.
-      for (let row = 0; row * width < input.length; row++) {
-        for (const col of cols) if (row * width + col < input.length) order.push(row * width + col);
-      }
-    }
-    const cells = decrypt ? Array(input.length) : [...input];
-    if (decrypt) order.forEach((cell, i) => { cells[cell] = input[i]; });
-    const output = decrypt ? cells.join('') : order.map(cell => input[cell]).join('');
-    return { output, cells, key, ranks, order };
-  }
-
-  const api = { clean, nema, rotate, grilleOrder, turningGrille, myszkowski };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else root.HistoricalCiphers = api;
-})(typeof window === 'undefined' ? globalThis : window);
 ```

@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-7e3242d6';
+const VERSION = 'cipher-museum-5e5208c8';
 
 const CORE = [
   '/css/evidence-exercises.css',
@@ -66,6 +66,7 @@ const CORE = [
   '/css/museum.css',
   '/css/reader-companion.css',
   '/js/reader-companion.js',
+  '/js/book-trail.js',
   '/js/book-invitation-demos.js',
   '/css/book-invitation-demos.css',
   '/css/historical-demos.css',

@@ -6367,18 +6367,23 @@
     {
       "path": "sealed-letter.html",
       "title": "The Curator\u2019s Sealed Letter \u2014 The Cipher Museum",
-      "words": 2193,
-      "sha256": "36e83532942ab35d4de48d4dfafecd76bb49316e60156696b1a2bf18d4c7ef59",
+      "words": 2169,
+      "sha256": "f37a75e60ec429b15412217474a115fca96531d09ba06c5f0e0eca8c0df7b3ca",
       "status": "bounded integration reading and static puzzle checks complete; no browser execution in this inventory pass",
       "sources": [],
-      "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified. Developmental book revision, November 2026: removed unused wraparound instruction and made source/finding choices more plausible. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+      "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified. Developmental book revision, November 2026: removed unused wraparound instruction and made source/finding choices more plausible. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Reader-experience revision 2026-11-02: added an optional four-answer notebook with explicit device saving, restore, clear and assembly into the existing instruction checker; deep links open the intended slip without revealing its answer. New tests cover the whole notebook-to-case route, blocked storage and malformed saved data. Fictional records and the historical-model labels are unchanged.",
       "integration_review": {
         "date": "2026-10-30",
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
         "scope": "Complete static HTML and checker-source reading, arithmetic/route/code-key consistency, and local link/fragment existence.",
         "limits": "No historical ciphertext reproduced or primary historical source checked. No browser interaction, visual accessibility or deployment verification performed in this inventory pass; the prior 214-page review did not include this new page."
       },
-      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+      "reader_experience_review_2026_11_02": {
+        "scope": "Directory links and notebook flow; no new historical source audit.",
+        "checks": "jsdom journey tests; full npm suite with regenerated service-worker version checked after final CSS changes; HTML lint; browser interaction and visual review at a 390 CSS pixel iframe width (375 pixel content viewport with scrollbar).",
+        "limits": "Phone-width browser review, not physical-device certification. No release date or purchase flow added."
+      }
     },
     {
       "path": "search.html",
@@ -6461,12 +6466,12 @@
     },
     {
       "path": "the-book.html",
-      "title": "Secrets of the Cipher Museum \u2014 Paul Clark \u2014 The Cipher Museum",
-      "words": 736,
-      "sha256": "6acd7fff1e48c2c2595593853e4e8506f10f7c4ccac20292eca45840b716fbe0",
+      "title": "Secrets of the Cipher Museum \u2014 Paul \u201cThe Cipher Librarian\u201d Clark \u2014 The Cipher Museum",
+      "words": 1280,
+      "sha256": "033f0c7f3419b9facd9b26cc063d5a49a8fc77b55c9d832f8d4ecba5df31d682",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
-      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul \u201cThe Cipher Librarian\u201d Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description.",
+      "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul \u201cThe Cipher Librarian\u201d Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description. Reader-experience revision 2026-11-02: added a 20-chapter directory with exact exhibit destinations, four optional slip stops and prompts matched to the current manuscript invitations. Updated documentary image count from four to six against the book figure manifest. The approved promise, cover, historical excerpt and forthcoming status are preserved. No new historical claim introduced; existing sources were not independently reverified.",
       "integration_review": {
         "date": "2026-10-30",
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",
@@ -6475,7 +6480,12 @@
       },
       "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
       "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup.",
-      "book_cover_alignment_2026_11_01": "revised"
+      "book_cover_alignment_2026_11_01": "revised",
+      "reader_experience_review_2026_11_02": {
+        "scope": "Directory links and notebook flow; no new historical source audit.",
+        "checks": "jsdom journey tests; full npm suite with regenerated service-worker version checked after final CSS changes; HTML lint; browser interaction and visual review at a 390 CSS pixel iframe width (375 pixel content viewport with scrollbar).",
+        "limits": "Phone-width browser review, not physical-device certification. No release date or purchase flow added."
+      }
     },
     {
       "path": "timeline.html",
