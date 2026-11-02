@@ -6520,8 +6520,8 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum \u2014 Paul \u201cThe Cipher Librarian\u201d Clark \u2014 The Cipher Museum",
-      "words": 1639,
-      "sha256": "95636aba861ca5b5cb94043aefa361cff6e3edce49912d59e262651cb63f52d8",
+      "words": 1681,
+      "sha256": "a43b07482d1c0bff3623e82b55241a1e69702ae8c282c648a73df72e2867207f",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
       "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul \u201cThe Cipher Librarian\u201d Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description. Reader-experience revision 2026-11-02: added a 20-chapter directory with exact exhibit destinations, four optional slip stops and prompts matched to the current manuscript invitations. Updated documentary image count from four to six against the book figure manifest. The approved promise, cover, historical excerpt and forthcoming status are preserved. No new historical claim introduced; existing sources were not independently reverified.",
@@ -6553,6 +6553,11 @@
         "scope": "Synchronized the eight existing public prologue paragraphs with the user\u2019s repaired Part 1 Word revision. No chapter text added; cover, source credit and companion links retained.",
         "verification": "Exact paragraph comparison against the repaired Word document; local HTML, links and companion checks, with CI and deployment recorded in the pull request.",
         "limits": "Wording synchronization only, not an additional historical fact-check. The separately dated audit reading pack remains a frozen snapshot."
+      },
+      "final_part1_prologue_2026_11_02": {
+        "scope": "Matched the revised Part1rev.pdf prologue by adding the three researchers\u2019 occupations and locations, using the supported description pianist and music professor for Biermann. Added biographical source links to the excerpt credit.",
+        "verification": "Research publisher announcement, NPR interview reporting and Berlin University of the Arts biography inspected; exact bounded HTML diff and local link/structural checks.",
+        "limits": "Only the new prologue biographical detail was fact-checked. The rest of Part1rev.pdf and the full museum were not re-audited. No fresh phone-width browser check in this pass."
       }
     },
     {
