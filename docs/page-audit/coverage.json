@@ -1821,13 +1821,13 @@
     {
       "path": "ciphers/elizebeth-friedman.html",
       "title": "Elizebeth Smith Friedman \u2014 The Cipher Museum",
-      "words": 856,
-      "sha256": "1f4dc1d6001a6821df982d2babc71124ca23e6fac51e1220d685ba8452a9ca1d",
+      "words": 803,
+      "sha256": "9c86faad05906076ce240ba41e378a961172fe20c6133f8c76fa9afe55a9240e",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ELIZEBETH-NSA-2020"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Citation-label follow-up (2026-11-02): corrected the title and page locator for Weadon\u2019s linked NSA PDF against the document; no historical claim or interaction changed. No new browser review for this text-only correction.",
       "browser_smoke": "Sixth batch: desktop1280/mobile390 loaded without script errors or overflow. Colossus and three manual-cipher controls exercised; source vectors checked independently in Node. External resources blocked.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
