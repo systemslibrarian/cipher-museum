@@ -22,6 +22,9 @@
 .book-cover{margin:0;transform:rotate(2deg);filter:drop-shadow(0 22px 24px #0008)}
 .book-cover img{display:block;width:100%;height:auto;border:1px solid #a28b4d55}
 .book-pitch,.book-sample,.reading-groups{padding:56px 0;border-top:1px solid var(--s5);max-width:780px;margin:0 auto}
+.book-questions{padding:48px 0;border-top:1px solid var(--s5);max-width:780px;margin:0 auto}
+.book-questions .clue-body p:last-child{margin-bottom:0}
+@media(max-width:700px){.book-questions{padding:36px 0}}
 .letter-invitation{display:grid;grid-template-columns:76px 1fr;gap:26px;padding:38px;margin:32px 0 56px;border:1px solid var(--gold-b);background:linear-gradient(135deg,#c9a84c0d,transparent)}
 .seal{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:#702e2d;border:4px double #a9604d;color:#f1c3a0;font-family:var(--fd);font-size:1.2rem;box-shadow:0 4px 12px #0005}
 .book-sample p{font-size:1.17rem;line-height:1.85}.book-sample .quiet{font-size:.85rem}.book-sample .sample-end{font-style:italic;color:var(--gold)}
