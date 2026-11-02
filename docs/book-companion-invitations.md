@@ -144,4 +144,4 @@ Working validation record: `tests/test-book-invitations.js`, the full `npm test`
 
 Fourteen deliberate regressions were caught before restoring the code: RSA arithmetic and invalid primes; Stager direction, null removal, vocabulary and restore wiring; Mary toggle; DH agreement; ADFGVX intermediate and comparison; puzzle answer length and Ellis option; OTP historical regression; VENONA algebra wording. The restored focused suite passes.
 
-Final full-suite and phone-width results are recorded in the PR description. No merge or deployment is authorized by this work item.
+Phone-width review covered all 14 changed HTML pages. The new RSA, Stager, Mary, ADFGVX and Diffie–Hellman controls were operated in the browser; the Sealed Letter was completed with both the Ellis accusation and supported finding. No page-level horizontal overflow was observed (390-pixel frame, 375-pixel content width). Final full-suite results are recorded in the PR description. No merge or deployment is authorized by this work item.

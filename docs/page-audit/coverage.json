@@ -3263,8 +3263,8 @@
     {
       "path": "ciphers/one-time-pad.html",
       "title": "One-Time Pad \u2014 The Cipher Museum",
-      "words": 2146,
-      "sha256": "694f24d1689e6492cac7e308f463ee6df9679667d366351241848707e1bdb6a1",
+      "words": 2132,
+      "sha256": "3b872186566db8ef233da71c7283e5f613e782a88c73016b5fa706d6e89287eb",
       "status": "bounded review and local release validation complete",
       "sources": [
         "SHANNON-1949",
