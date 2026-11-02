@@ -157,13 +157,13 @@
     {
       "path": "ciphers/adfgvx.html",
       "title": "ADFGVX Cipher \u2014 The Cipher Museum",
-      "words": 565,
-      "sha256": "2f494f685339cc5db5228c9d6b84dae8f12022e1e31f53dd6c557ecf5e529f9b",
+      "words": 778,
+      "sha256": "b55921266ae3f02ab04c2380a61263f50a1b4a926140d17b87a0221c13b6321a",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Seventh batch:1280/390page loads without script errors or document overflow; four classical vectors and puzzle controls exercised. See browser-puzzles-seventh.json.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -586,11 +586,11 @@
     {
       "path": "ciphers/babington.html",
       "title": "The Babington Plot Cipher (1586) \u2014 The Cipher Museum",
-      "words": 1167,
-      "sha256": "3a6febc8f1db2ba7e40f4ba987331ed9320732b81336d513c34e23723de270f3",
+      "words": 1301,
+      "sha256": "d0356a37d7388a5739404f1509b514db13b993b0b5542a16457f82e667ac36d0",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1574,15 +1574,15 @@
     {
       "path": "ciphers/diffie-hellman.html",
       "title": "Diffie-Hellman Key Exchange \u2014 The Cipher Museum",
-      "words": 1429,
-      "sha256": "c4da8cef524826c72f27c3f3545f4be48c56183a694fef3e5a0875e9f91a4894",
+      "words": 1535,
+      "sha256": "6bd971aa32cd82dcf05ecb6257af5c84b5c4f26d34eadad6f0724364d61bff21",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "LOGJAM-2015",
         "BONEH-SHOUP-2023",
         "WONG-2021"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 29 Oct 2026 research review R12: added a paragraph separating small-subgroup confinement from static private-key recovery, with the 2016 measurement study figures, and cross-linked the comparison cards. Existing protocol explanation unchanged.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 29 Oct 2026 research review R12: added a paragraph separating small-subgroup confinement from static private-key recovery, with the 2016 measurement study figures, and cross-linked the comparison cards. Existing protocol explanation unchanged. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1821,13 +1821,13 @@
     {
       "path": "ciphers/elizebeth-friedman.html",
       "title": "Elizebeth Smith Friedman \u2014 The Cipher Museum",
-      "words": 570,
-      "sha256": "df364d273aa21d728aec8f769e3df22450227d12a9b80c33cb848af2bbf00ae6",
+      "words": 856,
+      "sha256": "1f4dc1d6001a6821df982d2babc71124ca23e6fac51e1220d685ba8452a9ca1d",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ELIZEBETH-NSA-2020"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Sixth batch: desktop1280/mobile390 loaded without script errors or overflow. Colossus and three manual-cipher controls exercised; source vectors checked independently in Node. External resources blocked.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1849,14 +1849,14 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine \u2014 The Cipher Museum",
-      "words": 2308,
-      "sha256": "325e685d24384e163220d5bd1b6bc1da77289d650f0128efe2f2fef19a6414e2",
+      "words": 2544,
+      "sha256": "b6887f68513ce9ded0f6a55237ba5b6e4ab0b8249e05eb51b610de1bcc5fdf36",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
         "TNMOC-BOMBE"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2382,13 +2382,13 @@
     {
       "path": "ciphers/jn-25.html",
       "title": "JN-25 (Japanese Naval Code) - The Cipher Museum",
-      "words": 620,
-      "sha256": "4ac9d3d4b56851f320747e6c18d6d2c3fb032ddd9ec346267fecc37aca97e74c",
+      "words": 696,
+      "sha256": "2a4810daff0bcc8b24c87df7e1a7bf5442991d772165425489f11f617ecde869",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ROCHEFORT-WATER-2021"
       ],
-      "notes": "Removed claim additives must be fully stripped before any usefulstatistics; AF report contributedtoassessment, notsoledeploymentcause; codebookeditionsvaried. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate. Developmental book revision, November 2026: added Driscoll and Rochefort context with bibliographic sources.",
+      "notes": "Removed claim additives must be fully stripped before any usefulstatistics; AF report contributedtoassessment, notsoledeploymentcause; codebookeditionsvaried. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate. Developmental book revision, November 2026: added Driscoll and Rochefort context with bibliographic sources. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -2837,11 +2837,11 @@
     {
       "path": "ciphers/mary-stuart-castelnau-letters.html",
       "title": "Mary Queen of Scots \u2014 Castelnau Letters \u2014 The Cipher Museum",
-      "words": 1273,
-      "sha256": "de9011a4b1d9abc09e90675b598287afd788c9b231f39045aa2fdca9d0463c9f",
+      "words": 1475,
+      "sha256": "a6ce31d4a4bf090a2152aabb6ace23e533311c4c90e40fcbb35c8b7350928886",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final teaching_pages consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/teaching-hm-finalread-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final teaching_pages consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/teaching-hm-finalread-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -3091,8 +3091,8 @@
     {
       "path": "ciphers/navajo-code-talkers.html",
       "title": "Navajo Code Talkers \u2014 The Cipher Museum",
-      "words": 951,
-      "sha256": "197db06127978ca597ec440856fd199f03a9bf7b2474945910abf7a127fdc378",
+      "words": 992,
+      "sha256": "d5033f55a8f41e31c3310046600075633037426e968bbe345378075766a59f2b",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NAVAJO-NARA-2001",
@@ -3101,7 +3101,7 @@
         "NAVAJO-CIA-ALPHABET",
         "COMANCHE-ARMY"
       ],
-      "notes": "People counts, developer/deployment distinction, military vocabulary and spelling code checked; no numerical security rating. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. Developmental book revision, November 2026: added direct Smithsonian first-person account links.",
+      "notes": "People counts, developer/deployment distinction, military vocabulary and spelling code checked; no numerical security rating. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. Developmental book revision, November 2026: added direct Smithsonian first-person account links. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "browser_followup": "Desktop1280/mobile390 loaded without errors or horizontal overflow; see browser-culture-fifth.json for interaction scope.",
       "final_prose_review": {
@@ -3263,8 +3263,8 @@
     {
       "path": "ciphers/one-time-pad.html",
       "title": "One-Time Pad \u2014 The Cipher Museum",
-      "words": 1206,
-      "sha256": "28079f7691e7da66094849b2e9235baa1a1a24fc212debbdff628bb312a4202f",
+      "words": 2146,
+      "sha256": "694f24d1689e6492cac7e308f463ee6df9679667d366351241848707e1bdb6a1",
       "status": "bounded review and local release validation complete",
       "sources": [
         "SHANNON-1949",
@@ -3273,7 +3273,7 @@
         "RESEARCH-CL967",
         "RESEARCH-CL968"
       ],
-      "notes": "Fixedexamplekeys explicitlyillustrative; guaranteeversuspracticalbreak distinction; VENONAdecimalUSArmyorigin versusbinaryanalogy. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
+      "notes": "Fixedexamplekeys explicitlyillustrative; guaranteeversuspracticalbreak distinction; VENONAdecimalUSArmyorigin versusbinaryanalogy. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -3699,14 +3699,14 @@
     {
       "path": "ciphers/rsa.html",
       "title": "RSA \u2014 The Cipher Museum",
-      "words": 708,
-      "sha256": "f42b66a881f6f82b4512fb88f7f9f1bdee821a2052d7b24d45aad221bdf211c0",
+      "words": 855,
+      "sha256": "d07d007dfd44d779e061ed591a2d7d7ed55b6d113691552d83ff28a81e1fb482",
       "status": "bounded review and local release validation complete",
       "sources": [
         "RFC8017",
         "RESEARCH-CL646"
       ],
-      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -4099,13 +4099,13 @@
     {
       "path": "ciphers/stager.html",
       "title": "Stager Cipher \u2014 The Cipher Museum",
-      "words": 884,
-      "sha256": "da67f89328b1ff0f00189f547a75cf99d64f6119f494d26d01f21c38f108911e",
+      "words": 881,
+      "sha256": "20074f7ba7c939f00a3bd28d7b2b5e2fa3262c447879a9dc97fa080575f57fd8",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Whole-word historical routes versus individual-letter browser route explicit. Removed every-message/never-broken absolutes, false1862diagram provenance and PKI lineage. KahnCipherNo.4page counts and1863Lincolnexample read. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate. Developmental book revision, November 2026: added a reversible whole-word teaching route with vocabulary and nulls; removed the split-word drawing; retained the separately labelled letter model.",
+      "notes": "Whole-word historical routes versus individual-letter browser route explicit. Removed every-message/never-broken absolutes, false1862diagram provenance and PKI lineage. KahnCipherNo.4page counts and1863Lincolnexample read. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate. Developmental book revision, November 2026: added a reversible whole-word teaching route with vocabulary and nulls; removed the split-word drawing; retained the separately labelled letter model. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4395,8 +4395,8 @@
     {
       "path": "ciphers/venona.html",
       "title": "VENONA Project \u2014 The Cipher Museum",
-      "words": 1470,
-      "sha256": "1a2ba2ad42f3cabe3fe72cd69687832cbfa6a12d2bec8ac05c8e17078a9db1d1",
+      "words": 1580,
+      "sha256": "884780404d9dcbb11ae5ecf7976ac86e8eb5b2a3bd95b26b0c4ce567505b9ef5",
       "status": "bounded review and local release validation complete",
       "sources": [
         "CAIRNCROSS-TNA",
@@ -4404,7 +4404,7 @@
         "UKUS-1953",
         "5UCO-CRYPTOMUSEUM"
       ],
-      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: added Phillips, Gardner and Weisband context with sources.",
+      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: added Phillips, Gardner and Weisband context with sources. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Sixth batch: desktop1280/mobile390 loaded without script errors or overflow. Colossus and three manual-cipher controls exercised; source vectors checked independently in Node. External resources blocked.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -4743,15 +4743,15 @@
     {
       "path": "ciphers/zimmermann.html",
       "title": "Zimmermann Telegram (German codes 0075 / 13040 \u00b7 1917) \u2014 The Cipher Museum",
-      "words": 783,
-      "sha256": "428aaecc217271202fda36c84d48a7c67262370b58fd3c43029bc5a0a9b49d38",
+      "words": 945,
+      "sha256": "2af74f42b8be1a252380364bda67dc1ffd52103ffcceea2cd53cd8132491f238",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ZIMMERMANN-NSA",
         "ZIMMERMANN-PAGE-1917",
         "ZIMMERMANN-NARA-2016"
       ],
-      "notes": "Corrected historical codebook versus additive teaching-model contradiction, unsupported routing/deception timeline, naval-codebook conflation and causal overstatement. NSA p.44 visually read and pp.43\u201345 text read; contemporary Page telegram compared. Model contains126 entries/123 distinct words. Three independent encode/decode vectors checked in browser at two widths. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
+      "notes": "Corrected historical codebook versus additive teaching-model contradiction, unsupported routing/deception timeline, naval-codebook conflation and causal overstatement. NSA p.44 visually read and pp.43\u201345 text read; contemporary Page telegram compared. Model contains126 entries/123 distinct words. Three independent encode/decode vectors checked in browser at two widths. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -6317,11 +6317,11 @@
     {
       "path": "sealed-letter.html",
       "title": "The Curator\u2019s Sealed Letter \u2014 The Cipher Museum",
-      "words": 1959,
-      "sha256": "4c394fd7d590aaa3356acbbddbaa5367435d2d36ff327f067bba7c130c1e1cbd",
+      "words": 2193,
+      "sha256": "36e83532942ab35d4de48d4dfafecd76bb49316e60156696b1a2bf18d4c7ef59",
       "status": "bounded integration reading and static puzzle checks complete; no browser execution in this inventory pass",
       "sources": [],
-      "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified. Developmental book revision, November 2026: removed unused wraparound instruction and made source/finding choices more plausible.",
+      "notes": "Read the complete page, including hidden case documents, hints, answer reveals and conclusion, plus js/reader-companion.js. Independently followed the four invented clues: COMPARE / THE COPIES / BEFORE / YOU TRUST THEM. Confirmed that the instruction wording in the fictional copies differs only in destination room and that the conclusion does not attribute authorship, intention or theft from the supplied records. The page labels the exercise fictional and its cipher methods simplified. Developmental book revision, November 2026: removed unused wraparound instruction and made source/finding choices more plausible. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
       "integration_review": {
         "date": "2026-10-30",
         "source_pr": "https://github.com/systemslibrarian/cipher-museum/pull/16",

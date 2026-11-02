@@ -121,7 +121,7 @@
     const choice = document.querySelector('input[name="verdict"]:checked');
     if (!choice) return;
     const responses = {
-      theft: 'A and E agree, but one could derive from the other. The signature also remains unauthenticated. Agreement alone does not establish two independent confirmations.',
+      theft: 'Ellis holds the case keys, but none of these records identifies who altered the delivered copy. Custody is not evidence of authorship; check authorisation without turning that gap into an accusation.',
       clerk: 'A later delivery time is not evidence of an authorised revision. Which record says the curator changed the destination?',
       nothing: 'D explicitly says the contents were not checked. An apparently intact seal cannot settle whether they remain intact.'
     };

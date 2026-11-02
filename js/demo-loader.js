@@ -535,6 +535,20 @@
     const outputBox = document.getElementById('demo-output-' + cipherName);
     const msgInput = document.getElementById(inputId);
     const keyWarning = container.querySelector('.demo-key-warning');
+    let stages, previousRun;
+    if (cipherName === 'adfgvx') {
+      stages = document.createElement('div');
+      stages.className = 'input-group';
+      stages.setAttribute('aria-live', 'polite');
+      stages.innerHTML = '<h3>Between the two stages</h3><p>Letters and digits become coordinate pairs; the column route then rearranges those coordinates. Change one message character and run again with the same keys to compare. This model does not demonstrate avalanche diffusion.</p><p id="adfgvx-stage-label">Fractionated text will appear here.</p><div class="output-box" id="adfgvx-intermediate"></div><p id="adfgvx-comparison"></p>';
+      outputBox.parentElement.after(stages);
+    }
+    const clearStages = () => {
+      if (!stages) return;
+      document.getElementById('adfgvx-intermediate').textContent = '';
+      document.getElementById('adfgvx-comparison').textContent = '';
+    };
+    modeButtons.forEach(btn => btn.addEventListener('click', () => { previousRun = null; clearStages(); }));
 
     runBtn.addEventListener('click', () => {
       const msg = msgInput.value;
@@ -555,8 +569,22 @@
         const result = mode === 'enc' ? engine.encode(msg, key) : engine.decode(msg, key);
         outputBox.innerHTML = '';
         outputBox.textContent = result;
+        if (stages) {
+          const intermediate = mode === 'enc' ? engine.fractionate(msg, key) : engine.untranspose(msg, key);
+          document.getElementById('adfgvx-stage-label').textContent = mode === 'enc' ? 'Stage 1 · coordinate pairs before transposition' : 'After undoing transposition · coordinate pairs before substitution';
+          document.getElementById('adfgvx-intermediate').textContent = intermediate;
+          const normalized = msg.toUpperCase().replace(/[^A-Z0-9]/g, '');
+          const differences = (a, b) => [...a].filter((ch, i) => ch !== b[i]).length;
+          let comparison = 'Run an encryption, change one character without changing the length or keys, then run again.';
+          if (mode === 'enc' && previousRun && previousRun.key === key && previousRun.message.length === normalized.length) {
+            comparison = `Compared with the previous encryption: ${differences(previousRun.message, normalized)} message character(s), ${differences(previousRun.intermediate, intermediate)} intermediate position(s), and ${differences(previousRun.result, result)} final position(s) changed. Previous output: ${previousRun.result}`;
+          }
+          document.getElementById('adfgvx-comparison').textContent = comparison;
+          previousRun = mode === 'enc' ? {key, message: normalized, intermediate, result} : null;
+        }
       } catch (e) {
         outputBox.textContent = 'Error: ' + e.message;
+        previousRun = null; clearStages();
       }
     });
 
@@ -565,6 +593,7 @@
       keyWarning.hidden = true;
       keyWarning.textContent = '';
       outputBox.innerHTML = '<span class="output-empty">Result appears here…</span>';
+      previousRun = null; clearStages();
     });
 
     // Embed affordance — teachers can drop any demo into their own page.
