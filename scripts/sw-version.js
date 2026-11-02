@@ -46,6 +46,9 @@ function bundlesFor(root) {
 
 function swVersionFor(root) {
   const hash = crypto.createHash('sha256');
+  // Cache-policy changes also invalidate the cache; omit only the generated stamp.
+  hash.update(fs.readFileSync(path.join(root, 'sw.js'), 'utf8')
+    .replace(/\r\n/g, '\n').replace(/const VERSION = '[^']*';/, 'const VERSION = AUTO;'));
   for (const rel of bundlesFor(root)) {
     hash.update(rel);                 // a rename must change the version too
     // Git commits these text assets with LF. Hash their canonical bytes even

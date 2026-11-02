@@ -80,12 +80,15 @@ try {
     fs.copyFileSync(path.join(ROOT, rel), dest);
   }
   const original = swVersionFor(fixture);
-  for (const rel of hashed) {
+  for (const rel of ['sw.js', ...hashed]) {
     if (!/\.(css|html|js|json|svg|webmanifest)$/i.test(rel)) continue;
     const file = path.join(fixture, rel);
     fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace(/\r?\n/g, '\r\n'));
   }
   ok('CRLF checkout produces the same version as LF', swVersionFor(fixture) === original);
+  fs.appendFileSync(path.join(fixture, 'sw.js'), '\n// revised cache policy\n');
+  ok('worker changes invalidate the version', swVersionFor(fixture) !== original);
+  fs.writeFileSync(path.join(fixture, 'sw.js'), sw);
   fs.appendFileSync(path.join(fixture, 'offline.html'), '\n<!-- updated offline notice -->\n');
   ok('offline page changes invalidate the version', swVersionFor(fixture) !== original);
   const script = path.join(fixture, 'js/ui-delegates.js');

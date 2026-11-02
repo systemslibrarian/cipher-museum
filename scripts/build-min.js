@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { minify } = require('terser');
 
 const ROOT = path.join(__dirname, '..');
@@ -39,6 +40,20 @@ const OPTIONS = { compress: true, mangle: true };
     const pct = Math.round((1 - result.code.length / code.length) * 100);
     console.log(`✅ ${rel} → ${path.basename(out)}  (${(code.length / 1024).toFixed(0)} KB → ${(result.code.length / 1024).toFixed(0)} KB, −${pct}%)`);
   }
+
+  // A returning visitor can still have the preceding cache-first worker.
+  // A new URL makes that worker fetch the fixed teaching model on this visit.
+  const exhibitPath = path.join(ROOT, 'ciphers/babington.html');
+  let exhibit = fs.readFileSync(exhibitPath, 'utf8');
+  for (const rel of ['js/ciphers/all-engines.min.js', 'js/demo-loader.min.js']) {
+    const revision = crypto.createHash('sha256')
+      .update(fs.readFileSync(path.join(ROOT, rel))).digest('hex').slice(0, 12);
+    const escaped = rel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`src="\\.\\./${escaped}(?:\\?v=[a-f0-9]+)?"`);
+    if (!pattern.test(exhibit)) throw new Error(`Babington bundle missing: ${rel}`);
+    exhibit = exhibit.replace(pattern, `src="../${rel}?v=${revision}"`);
+  }
+  fs.writeFileSync(exhibitPath, exhibit, 'utf8');
 
   // Derive the service-worker cache version from every asset served
   // cache-first — the bundles above plus sw.js's own CORE list — so a changed
