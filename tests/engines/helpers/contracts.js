@@ -512,10 +512,10 @@ function canonicalizeInput(name, input) {
     : normalized.toUpperCase().replace(/[^A-Z]/g, '');
   if (IJ_TEXT.has(name)) result = result.replace(/J/g, 'I');
   if (name === 'tapCode') result = result.replace(/K/g, 'C');
-  // Babington uses the 24-letter Elizabethan alphabet: J folds into I, V into
-  // U, and W (historically written as double-V) has no symbol and is dropped.
-  // Declared in CIPHER_ENGINE_STANDARD.md §2 and disclosed on the exhibit page.
-  if (name === 'babington') result = result.replace(/J/g, 'I').replace(/V/g, 'U').replace(/W/g, '');
+  // Babington’s teaching letter alphabet folds J/I, V/U and W/UU.
+  // These probes exercise letter spelling; word-code preservation has separate
+  // known-answer coverage in test-book-invitations.js and test-exhibit-examples.js.
+  if (name === 'babington') result = result.replace(/J/g, 'I').replace(/V/g, 'U').replace(/W/g, 'UU');
   return result;
 }
 

@@ -3,8 +3,8 @@
 This snapshot brings together **221 public HTML pages**, **80 nonempty inline scripts**, **60 shared/supporting JavaScript files**, **29 JSON/manifest data files**, and **185 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
 
 - Source repository: systemslibrarian/cipher-museum
-- Exact source commit: `54e494a33aae131496b94b0089c32829533b3ece`
-- Source commit time: 2026-11-02T11:37:54-05:00
+- Exact source commit: `1001c42798bc98dc52bf9d3e61dc1b8738009676`
+- Source commit time: 2026-11-02T13:43:46-05:00
 - Public website: https://ciphermuseum.com/
 - Inventory authority: docs/page-audit/coverage.json, checked against every tracked public HTML page.
 - Snapshot hashes identify the original files. Exported text is reformatted; direct ebook URLs are replaced with a visible omission marker. Book titles, authors and publication details remain.
@@ -262,7 +262,7 @@ Suggested finding fields: `id, page_id, path, quotation_or_location, category, s
 
 # Pages P001–P020
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P001: 404.html -->
 <a id="p001"></a>
@@ -5208,7 +5208,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/babington.html`
 - Public page: https://ciphermuseum.com/ciphers/babington.html
-- Snapshot source SHA-256: `d0356a37d7388a5739404f1509b514db13b993b0b5542a16457f82e667ac36d0`
+- Snapshot source SHA-256: `3ce39a0a6d16bde4a505eafd4f84a396e3ec7d165ed3e5141cd6d97a00519dce`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -5343,7 +5343,7 @@ The cipher was a **nomenclator**, combining substitution with a codebook. The fo
 23 letter symbols   (no J, V, W — folded onto I, U, UU)
 36 codewords        (THE, AND, OF, MARY, QUEEN, ELIZABETH, POISON, …)
  4 null symbols     (decoys — drop on decode)
- 1 "doubleth"       (means: double the previous/next letter)
+ 1 "doubleth"       (means: double the previous letter)
 ─────────
 64 total glyphs
 ```
@@ -5384,7 +5384,7 @@ The cipher was a **nomenclator**, combining substitution with a codebook. The fo
             <rect class="bb-null" x="305" y="88" width="50" height="26"></rect><text class="bb-sym" x="330" y="101">⟨a16⟩</text>
             <rect class="bb-let" x="345" y="88" width="50" height="26"></rect><text class="bb-sym" x="370" y="101">⟨w15⟩</text>
             <rect class="bb-let" x="402" y="88" width="56" height="26"></rect><text class="bb-sym" x="430" y="101">⟨a07⟩</text>
-            <text x="240" y="142" class="bb-lbl" style="font-size:11px;fill:#c85a5a;letter-spacing:.15em">…AND ONE GLYPH ("DOUBLETH") MEANS "DOUBLE THE NEXT LETTER"</text>
+            <text x="240" y="142" class="bb-lbl" style="font-size:11px;fill:#c85a5a;letter-spacing:.15em">…AND ONE GLYPH ("DOUBLETH") MEANS "DOUBLE THE PREVIOUS LETTER"</text>
             <text class="bb-pt" x="80" y="170">L</text>
             <rect class="bb-let" x="55" y="180" width="50" height="24"></rect><text class="bb-sym" x="80" y="192">⟨w16⟩</text>
             <rect class="bb-trap" x="125" y="180" width="50" height="24"></rect><text class="bb-sym" x="150" y="192">⟨w18⟩</text>
@@ -5478,7 +5478,7 @@ The original cipher chart survives in The National Archives (SP 12/193). This de
 
 Try encoding "*POISON THE QUEEN AT THE TOWER*" and notice how POISON, THE, QUEEN, and TOWER each get their own codeword (one glyph for the whole word). Then encode "ATTACK" and watch the double-letter abbreviation apply on the doubled T.
 
-The demonstration folds J to I, V to U, and W to UU. These are explicit model conventions, not proof that all Elizabethan cipher alphabets used the same inventory.
+When spelling with letter symbols, the demonstration folds J to I, V to U, and W to UU. The recovered text keeps those folds: WORK returns as UUORK, and V as U. Whole-word code entries retain their complete spelling; for example, the codeword TOWER decodes as TOWER. Labels such as a01 are shuffled token names, not fixed alphabet positions. These are explicit model conventions, not proof that all Elizabethan cipher alphabets used the same inventory.
 
 [Inline SVG: original diagram/icon markup]
 
@@ -5552,7 +5552,12 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "fable_review_2026_11_02": {
+    "scope": "Repaired W/UU letter spelling and verified J/I and V/U; whole-word codes retain their words. Clarified shuffled token labels and previous-letter doubling. Removed the old W-dropping engine contract. No new historical claim.",
+    "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+    "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
+  }
 }
 ```
 
@@ -5563,7 +5568,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P021–P040
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P021: ciphers/bach-motif.html -->
 <a id="p021"></a>
@@ -10863,7 +10868,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P041–P060
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P041: ciphers/colossus.html -->
 <a id="p041"></a>
@@ -16345,7 +16350,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P061–P080
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P061: ciphers/elizebeth-friedman.html -->
 <a id="p061"></a>
@@ -21957,7 +21962,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P081–P100
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P081: ciphers/joan-clarke.html -->
 <a id="p081"></a>
@@ -27389,7 +27394,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P101–P120
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P101: ciphers/morse.html -->
 <a id="p101"></a>
@@ -33233,7 +33238,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P121–P140
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P121: ciphers/rochefort.html -->
 <a id="p121"></a>
@@ -38569,7 +38574,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P141–P160
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P141: ciphers/tap-code.html -->
 <a id="p141"></a>
@@ -42089,7 +42094,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/voynich.html`
 - Public page: https://ciphermuseum.com/ciphers/voynich.html
-- Snapshot source SHA-256: `f9106517f7fe3c115d5cb4ef28284069198a8e965a02c81917376a3dbf02e46f`
+- Snapshot source SHA-256: `e0497aa055cb1c5bc4a37b78c95e5445fc0da4793b3aa3afeadf299ed1c758b5`
 - Source identities in the prior evidence ledger: REDDY-KNIGHT-2011, DIMPERIO-1978, EVA-DESIGN, BAX-2014, BRISTOL-2019, YALE-MS408-PHYSICAL, HODGINS-2009
 
 ### Metadata and search/social descriptions
@@ -42175,6 +42180,12 @@ Script"Voynichese" — glyph units depend on the transcription scheme
 Broken ByNo generally accepted decipherment
 
 Modern LessonStatistical signatures alone cannot tell cipher from constructed language from hoax
+
+#### Open the manuscript itself
+
+[Browse the digitised Voynich manuscript — Beinecke MS 408, Yale Library](<https://collections.library.yale.edu/catalog/2002046>). Compare a page’s lettering, spacing and illustrations before proposing a reading.
+
+Yale’s [collection introduction](<https://beinecke.library.yale.edu/beinecke/collections/beinecke-cipher-voynich-manuscript>) provides the catalogue context. The letter-substitution playground below is invented; it does not decode these manuscript images.
 
 #### Why This Matters
 
@@ -42421,7 +42432,12 @@ This describes work recorded before this export. Treat these notes as assertions
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
   "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+  "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+  "fable_review_2026_11_02": {
+    "scope": "Added direct Yale digital images link and collection-context link, separating the manuscript from the invented playground. Destination linked by Yale collection page, checked 2026-11-02.",
+    "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+    "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
+  }
 }
 ```
 
@@ -43389,7 +43405,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `ciphers/yardley.html`
 - Public page: https://ciphermuseum.com/ciphers/yardley.html
-- Snapshot source SHA-256: `d4ad1b71df8b7960a4af8d8d234b287fd3f1704544142e9506093f02fac2a9c9`
+- Snapshot source SHA-256: `beb0a5e8f9213786be8147eb55559e3157bd3286514868a3f435733610e80fd5`
 - Source identities in the prior evidence ledger: NSA-YARDLEY
 
 ### Metadata and search/social descriptions
@@ -43486,7 +43502,7 @@ Yardley led an important peacetime codebreaking organization and later disclosed
 
 Building the Black Chamber
 
-Yardley joined the State Department as a telegraph code clerk, quickly recognized vulnerabilities in US diplomatic codes, and wrote a paper demonstrating he could read the President's messages. Promoted to Army intelligence (MI-8) in WWI, he ran a code-and-cipher section that broke German, Mexican, and other traffic. After the Armistice he persuaded both the Army and the State Department to fund a permanent joint bureau — unprecedented in American history — located in a Manhattan brownstone. The operation read the traffic of 20 nations over its decade of operation.
+Yardley joined the State Department as a telegraph code clerk, quickly recognized vulnerabilities in US diplomatic codes, and wrote a paper demonstrating he could read the President's messages. Promoted to Army intelligence (MI-8) in WWI, he ran a code-and-cipher section that broke German, Mexican, and other traffic. After the Armistice he persuaded both the Army and the State Department to fund a permanent joint bureau — unprecedented in American history — located in a Manhattan brownstone. Yardley later claimed successes against the systems of two dozen countries. NSA’s history notes that missing records prevent full verification of that claim.
 
 [Inline SVG: original diagram/icon markup]
 
@@ -43496,7 +43512,7 @@ Yardley joined the State Department as a telegraph code clerk, quickly recognize
 
 Washington Naval Conference
 
-The 1921 Washington Naval Conference negotiated the first major international arms limitation treaty — establishing ratios for capital ship tonnage among the great powers. The American delegation, briefed daily by Yardley's team on Japan's diplomatic instructions to its negotiators, knew in advance the maximum concessions Japan would accept. The US successfully pushed Japan to accept a 10:10:6 capital ship ratio rather than the 10:10:7 Japan was authorized to demand. This is among the clearest documented cases of intelligence-enabled diplomatic advantage in American history.
+The Washington Naval Conference of 1921–22 sought limits on the major powers’ fleets. Yardley’s bureau supplied decrypts revealing Japanese discussions and negotiating instructions. NSA’s history distinguishes timely intelligence from translations that arrived after their contents had appeared in the press. This access helped American negotiators assess Japan’s flexibility, but it did not make every translation timely or make the treaty the work of the codebreakers alone. [Source: NSA, “The Black Chamber.”](<https://www.nsa.gov/History/Cryptologic-History/Historical-Events/Article-View/article/2740622/the-black-chamber/>)
 
 [Inline SVG: original diagram/icon markup]
 
@@ -43582,7 +43598,12 @@ This describes work recorded before this export. Treat these notes as assertions
     "evidence": "docs/page-audit/browser-final.json",
     "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
   },
-  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+  "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+  "fable_review_2026_11_02": {
+    "scope": "Replaced unqualified country count and daily-briefing claim with NSA-attributed, qualified account; timely and late decrypts distinguished. NSA Black Chamber article consulted 2026-11-02.",
+    "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+    "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
+  }
 }
 ```
 
@@ -44635,7 +44656,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P161–P180
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P161: classical-guide.html -->
 <a id="p161"></a>
@@ -51701,7 +51722,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P181–P200
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P181: hall-of-foundations/modular-arithmetic.html -->
 <a id="p181"></a>
@@ -57289,7 +57310,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P201–P220
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P201: halls/unsolved.html -->
 <a id="p201"></a>
@@ -63222,7 +63243,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `the-book.html`
 - Public page: https://ciphermuseum.com/the-book.html
-- Snapshot source SHA-256: `9ce3dc2fdc7d43857fbcccaa05f8b245bc2de44becd52f483c8d53fc87bed7b8`
+- Snapshot source SHA-256: `6f0339a4ed4685926f5f59e399594e3140d0086e3171c2ff21b742aab36f6e50`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
@@ -63425,7 +63446,7 @@ Follow the manuscript images. Record an observation another reader can find befo
 
 - Chapter 19
 
-##### [The message and the murderer](<https://ciphermuseum.com/lab/decipherment-cases.html>)
+##### [The message and the murderer](<https://ciphermuseum.com/lab/decipherment-cases.html#z340>)
 
 Replay a published solution and compare raw and normalised readings. What does the message establish about its author?
 
@@ -63545,6 +63566,11 @@ This describes work recorded before this export. Treat these notes as assertions
     "scope": "Added reader FAQ on emphasis and nonfiction/fiction, three existing exhibit entry links, and a timed reading-group plan. No historical chapter or exhibit changed.",
     "verification": "Local link and reader-companion checks; phone-width browser review. Deployment and CI recorded in the pull request.",
     "limits": "Public copy and navigation review, not a new historical source audit or commercial forecast."
+  },
+  "fable_review_2026_11_02": {
+    "scope": "Chapter 19 directory destination now targets existing #z340 anchor; other invitation destinations unchanged.",
+    "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+    "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
   }
 }
 ```
@@ -64829,7 +64855,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P221–P221
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P221: tours/tour.html -->
 <a id="p221"></a>
@@ -65044,7 +65070,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Source register and recorded access limits
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 These 185 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
@@ -68099,7 +68125,7 @@ These 185 identities and reading scopes come from the prior review ledger. They 
 
 # javascript appendix 1
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -71623,7 +71649,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 2
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/cipher-corpus.js
 
@@ -72032,7 +72058,7 @@ if (typeof require !== 'undefined') {
 
 # javascript appendix 3
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/all-engines.js
 
@@ -72041,8 +72067,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/ciphers/all-engines.min.js`
-- Served SHA-256: `f4232c18d35d6edc8ce96a9845e4a825dc915565a128ef957c3b1a48fc3f8a45`
-- Readable-source SHA-256: `fe327365286f73d714d026ce3163342f14fc1c0497bf60fca5ae8a6846596edf`
+- Served SHA-256: `d805834f67ebdcee5d38e1fd76f4995da21456515a31817d2f93a214c8e370bf`
+- Readable-source SHA-256: `63530fba76348feca3c697e853cf8165a72f1e9d11580c0cedbf88682156a81a`
 
 
 ```javascript
@@ -73485,7 +73511,8 @@ cipherMuseumGlobal.CipherEngines = (() => {
       'DEATH','LIBERTY'
     ]; // 36 nomenclator codewords
     const NULL = '__BNULL__';
-    const DOUB = '__BDOUB__'; // "doubleth" — double next letter
+    const DOUB = '__BDOUB__'; // "doubleth" — repeat the preceding letter
+    const letterFold = ch => ch === 'J' ? 'I' : ch === 'V' ? 'U' : ch;
     function buildTable(seed) {
       const k = (clean(seed || 'BABINGTON') + 'PHELIPPES');
       let s = 0;
@@ -73510,12 +73537,6 @@ cipherMuseumGlobal.CipherEngines = (() => {
         (enc[s2.tok] = enc[s2.tok] || []).push(s2.sym);
       }
       return { enc, dec, nulls };
-    }
-    function letterFold(ch) {
-      // Map J→I, V→U, W→VV (handled at caller) for the 23-letter alphabet
-      if (ch === 'J') return 'I';
-      if (ch === 'V') return 'U';
-      return ch;
     }
     return {
       encode: (text, key) => {
@@ -73546,8 +73567,14 @@ cipherMuseumGlobal.CipherEngines = (() => {
             i += matched.length;
             continue;
           }
-          // Otherwise emit a letter symbol (folding J→I, V→U)
-          let ch = letterFold(t[i]);
+          // Word codes retain their spelling; letter symbols use J/I, V/U, W/UU.
+          if (t[i] === 'W') {
+            out.push('\u27e8' + enc.U[0] + '\u27e9');
+            out.push('\u27e8' + enc[DOUB][0] + '\u27e9');
+            i++;
+            continue;
+          }
+          const ch = letterFold(t[i]);
           // Doubled letter? Use the doubleth trap once in a while
           if (i + 1 < t.length && letterFold(t[i + 1]) === ch && enc[DOUB] && rng() < 0.6) {
             out.push('\u27e8' + enc[ch][0] + '\u27e9');
@@ -74589,17 +74616,22 @@ cipherMuseumGlobal.CipherEngines = (() => {
       return out;
     }
 
+    const codeGroups = text => clean(text).split('').map(ch => LETTER_GROUPS[ch]).join(' ');
+    const removeAdditive = (text, key) => {
+      const keyDigits = normalizeKeyDigits(key);
+      return (String(text || '').match(/\d{5}/g) || []).map(g => addGroup(g, keyDigits, true)).join(' ');
+    };
+
     return {
+      codeGroups, removeAdditive,
       encode: (text, key) => {
         const t = clean(text);
         const keyDigits = normalizeKeyDigits(key);
-        const groups = t.split('').map(ch => LETTER_GROUPS[ch]);
+        const groups = codeGroups(t).split(' ').filter(Boolean);
         return groups.map(g => addGroup(g, keyDigits, false)).join(' ');
       },
       decode: (text, key) => {
-        const keyDigits = normalizeKeyDigits(key);
-        const groups = (String(text || '').match(/\d{5}/g) || []);
-        return groups.map(g => REV_GROUPS[addGroup(g, keyDigits, true)] || '?').join('');
+        return removeAdditive(text, key).split(' ').filter(Boolean).map(g => REV_GROUPS[g] || '?').join('');
       }
     };
   })();
@@ -76309,7 +76341,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 # javascript appendix 4
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/caesar-break.js
 
@@ -77939,8 +77971,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/demo-loader.min.js`
-- Served SHA-256: `bfee21fa7c4a0c5f19634588eaf99aeaa34e9bf0ae217c7b70b9da23438b83c7`
-- Readable-source SHA-256: `d553f0fce8600307917d48c04f1ae4d16780872e0e72e00e3636b4cf6d8e9cfe`
+- Served SHA-256: `808edf0c99bf5e1ab02842b42b6dbf0424ab768a99143c32217f9c64db243f36`
+- Readable-source SHA-256: `1c2082623784809365784324549eb2bdc8409e2abe110eb87147218d5f74bf37`
 
 
 ```javascript
@@ -78489,7 +78521,19 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       stages.innerHTML = '<h3>Between the two stages</h3><p>Letters and digits become coordinate pairs; the column route then rearranges those coordinates. Change one message character and run again with the same keys to compare. This model does not demonstrate avalanche diffusion.</p><p id="adfgvx-stage-label">Fractionated text will appear here.</p><div class="output-box" id="adfgvx-intermediate"></div><p id="adfgvx-comparison"></p>';
       outputBox.parentElement.after(stages);
     }
+    let codeStage;
+    if (cipherName === 'jn-25') {
+      codeStage = document.createElement('div');
+      codeStage.className = 'input-group';
+      codeStage.setAttribute('aria-live', 'polite');
+      codeStage.innerHTML = '<h3>Between the two layers</h3><p id="jn25-stage-label">Code groups will appear here.</p><div class="output-box" id="jn25-intermediate"></div><p>This invented teaching codebook assigns one group to each letter. Removing an additive exposes a group; a codebook is still needed to read it. For example, this model assigns 10000 to A and 10005 to F. These are not historical JN-25 entries.</p>';
+      outputBox.parentElement.before(codeStage);
+    }
     const clearStages = () => {
+      if (codeStage) {
+        document.getElementById('jn25-intermediate').textContent = '';
+        document.getElementById('jn25-stage-label').textContent = 'Code groups will appear here.';
+      }
       if (!stages) return;
       document.getElementById('adfgvx-intermediate').textContent = '';
       document.getElementById('adfgvx-comparison').textContent = '';
@@ -78515,6 +78559,10 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
         const result = mode === 'enc' ? engine.encode(msg, key) : engine.decode(msg, key);
         outputBox.innerHTML = '';
         outputBox.textContent = result;
+        if (codeStage) {
+          document.getElementById('jn25-stage-label').textContent = mode === 'enc' ? 'Stage 1 · code groups before adding the key digits' : 'After additive removal · code groups before codebook lookup';
+          document.getElementById('jn25-intermediate').textContent = mode === 'enc' ? engine.codeGroups(msg) : engine.removeAdditive(msg, key);
+        }
         if (stages) {
           const intermediate = mode === 'enc' ? engine.fractionate(msg, key) : engine.untranspose(msg, key);
           document.getElementById('adfgvx-stage-label').textContent = mode === 'enc' ? 'Stage 1 · coordinate pairs before transposition' : 'After undoing transposition · coordinate pairs before substitution';
@@ -79748,7 +79796,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 5
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/detective/challenges.js
 
@@ -83090,7 +83138,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 6
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/historical-ciphers.js
 
@@ -85390,7 +85438,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 7
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-model.js
 
@@ -87578,8 +87626,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `efe9dd7741a58d22c8c9811b53f43b90bb010bc217f0b6078580bec63dd68ae4`
-- Readable-source SHA-256: `efe9dd7741a58d22c8c9811b53f43b90bb010bc217f0b6078580bec63dd68ae4`
+- Served SHA-256: `fe9b2b61ac5ba6a769fb274443d52fcd4b4b46702d813a5061d48f0ac4a520cd`
+- Readable-source SHA-256: `fe9b2b61ac5ba6a769fb274443d52fcd4b4b46702d813a5061d48f0ac4a520cd`
 
 
 ```javascript
@@ -87601,7 +87649,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  */
 'use strict';
 
-const VERSION = 'cipher-museum-4169796f';
+const VERSION = 'cipher-museum-6c014110';
 
 const CORE = [
   '/lab/reading-the-evidence.html',
@@ -87768,7 +87816,7 @@ self.addEventListener('fetch', (event) => {
 
 # data appendix 1
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — tours/foundations.json
 
@@ -88700,7 +88748,7 @@ Source SHA-256: `72c9a03dfa48a2e2a1ae78e44e880042471e53fb871ca22dffdc8bd38a9f64e
 
 # data appendix 2
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v1/language-model.json
 
@@ -88715,7 +88763,7 @@ Source SHA-256: `5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2
 
 # data appendix 3
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — public/corpus/v0.8/browser-sample.json
 
@@ -94494,7 +94542,7 @@ Source SHA-256: `788eb1bc8977cb9fd38d8584521bd150ebaf0a660f24f732b8ccead684291b7
 
 # data appendix 4
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — js/search-index.json
 
@@ -94509,7 +94557,7 @@ Source SHA-256: `71cb69a0061a375d571b77ef1488ba639aa6cab76431815154f7916a7168221
 
 # data appendix 5
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/artifact-cards.json
 
@@ -97596,7 +97644,7 @@ Source SHA-256: `3bd4770c7e3bdafad529f347a3e63703a5db49633054c20396147e9ac719f89
 
 # data appendix 6
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — corpus/engine-manifest.json
 
@@ -102042,7 +102090,7 @@ Source SHA-256: `ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc70724
 
 # data appendix 7
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v2/evaluation.json
 
@@ -104169,7 +104217,7 @@ Source SHA-256: `ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e
 
 # Columnar classroom worksheet
 
-Snapshot: `54e494a33aae131496b94b0089c32829533b3ece`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `public/teaching/columnar-classroom.md`. SHA-256: `195e139c2732cb0d3d6c2ab5dd6fe5addf6100e130bd875a52b0d2d945d68091`. Its Node.js runner and fixed JSON fixtures are in the preceding appendices.
 

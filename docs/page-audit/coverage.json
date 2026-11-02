@@ -591,8 +591,8 @@
     {
       "path": "ciphers/babington.html",
       "title": "The Babington Plot Cipher (1586) \u2014 The Cipher Museum",
-      "words": 1301,
-      "sha256": "d0356a37d7388a5739404f1509b514db13b993b0b5542a16457f82e667ac36d0",
+      "words": 1338,
+      "sha256": "3ce39a0a6d16bde4a505eafd4f84a396e3ec7d165ed3e5141cd6d97a00519dce",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
@@ -612,7 +612,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "fable_review_2026_11_02": {
+        "scope": "Repaired W/UU letter spelling and verified J/I and V/U; whole-word codes retain their words. Clarified shuffled token labels and previous-letter doubling. Removed the old W-dropping engine contract. No new historical claim.",
+        "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+        "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
+      }
     },
     {
       "path": "ciphers/bach-motif.html",
@@ -4588,8 +4593,8 @@
     {
       "path": "ciphers/voynich.html",
       "title": "The Voynich Manuscript (c. 1404\u20131438) \u2014 The Cipher Museum",
-      "words": 1536,
-      "sha256": "f9106517f7fe3c115d5cb4ef28284069198a8e965a02c81917376a3dbf02e46f",
+      "words": 1574,
+      "sha256": "e0497aa055cb1c5bc4a37b78c95e5445fc0da4793b3aa3afeadf299ed1c758b5",
       "status": "bounded review and local release validation complete",
       "sources": [
         "REDDY-KNIGHT-2011",
@@ -4618,7 +4623,12 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it."
+      "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
+      "fable_review_2026_11_02": {
+        "scope": "Added direct Yale digital images link and collection-context link, separating the manuscript from the invented playground. Destination linked by Yale collection page, checked 2026-11-02.",
+        "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+        "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
+      }
     },
     {
       "path": "ciphers/wadsworth-cipher.html",
@@ -4716,8 +4726,8 @@
     {
       "path": "ciphers/yardley.html",
       "title": "Herbert Yardley \u2014 The Cipher Museum",
-      "words": 689,
-      "sha256": "d4ad1b71df8b7960a4af8d8d234b287fd3f1704544142e9506093f02fac2a9c9",
+      "words": 645,
+      "sha256": "beb0a5e8f9213786be8147eb55559e3157bd3286514868a3f435733610e80fd5",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NSA-YARDLEY"
@@ -4739,7 +4749,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "fable_review_2026_11_02": {
+        "scope": "Replaced unqualified country count and daily-briefing claim with NSA-attributed, qualified account; timely and late decrypts distinguished. NSA Black Chamber article consulted 2026-11-02.",
+        "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+        "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
+      }
     },
     {
       "path": "ciphers/zero-knowledge-proofs.html",
@@ -6505,8 +6520,8 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum \u2014 Paul \u201cThe Cipher Librarian\u201d Clark \u2014 The Cipher Museum",
-      "words": 1543,
-      "sha256": "9ce3dc2fdc7d43857fbcccaa05f8b245bc2de44becd52f483c8d53fc87bed7b8",
+      "words": 1642,
+      "sha256": "6f0339a4ed4685926f5f59e399594e3140d0086e3171c2ff21b742aab36f6e50",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
       "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul \u201cThe Cipher Librarian\u201d Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description. Reader-experience revision 2026-11-02: added a 20-chapter directory with exact exhibit destinations, four optional slip stops and prompts matched to the current manuscript invitations. Updated documentary image count from four to six against the book figure manifest. The approved promise, cover, historical excerpt and forthcoming status are preserved. No new historical claim introduced; existing sources were not independently reverified.",
@@ -6528,6 +6543,11 @@
         "scope": "Added reader FAQ on emphasis and nonfiction/fiction, three existing exhibit entry links, and a timed reading-group plan. No historical chapter or exhibit changed.",
         "verification": "Local link and reader-companion checks; phone-width browser review. Deployment and CI recorded in the pull request.",
         "limits": "Public copy and navigation review, not a new historical source audit or commercial forecast."
+      },
+      "fable_review_2026_11_02": {
+        "scope": "Chapter 19 directory destination now targets existing #z340 anchor; other invitation destinations unchanged.",
+        "verification": "Engine and jsdom interaction regression tests; complete npm test suite and phone-width browser checks recorded in revision ledger.",
+        "limits": "Bounded correction pass, not a fresh all-page historical or accessibility audit."
       }
     },
     {
@@ -6789,5 +6809,10 @@
     ],
     "scope": "Author identity and approved cover artwork only. No historical, cryptographic or evidentiary claim changed.",
     "ledger_note": "Recorded here so scripts/export-audit-document.js can regenerate; tests/test-audit-coverage-fresh.js now fails at the edit if this step is skipped."
+  },
+  "fable_review_2026_11_02": {
+    "baseline": "90010f03f39493c6412f57aab1d815f98266a0a1",
+    "record": "docs/FABLE_REVIEW_2026-11-02.md",
+    "scope": "Four HTML pages, Babington engine, JN-25 stage API and demo loader; corresponding regression coverage."
   }
 }

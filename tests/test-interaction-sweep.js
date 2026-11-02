@@ -26,7 +26,7 @@ const engines = read('js/ciphers/all-engines.js'), loader = read('js/demo-loader
       if (!input) { bespoke.push(file); continue; }
       const key = panel.querySelector('[id^="demo-key-"]');
       const run = panel.querySelector('[id^="demo-run-"]'), clear = panel.querySelector('[id^="demo-clear-"]');
-      const output = panel.querySelector('.output-box');
+      const output = panel.querySelector('.output-box[id^="demo-output-"]');
       assert.ok(input && run && clear && output, 'Controller renders required controls');
       assert.ok(output.textContent.trim(), 'Default run produces output');
       assert.ok(!output.textContent.startsWith('Error:'), 'Default run must not fail: ' + output.textContent);

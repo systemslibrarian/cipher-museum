@@ -543,7 +543,19 @@
       stages.innerHTML = '<h3>Between the two stages</h3><p>Letters and digits become coordinate pairs; the column route then rearranges those coordinates. Change one message character and run again with the same keys to compare. This model does not demonstrate avalanche diffusion.</p><p id="adfgvx-stage-label">Fractionated text will appear here.</p><div class="output-box" id="adfgvx-intermediate"></div><p id="adfgvx-comparison"></p>';
       outputBox.parentElement.after(stages);
     }
+    let codeStage;
+    if (cipherName === 'jn-25') {
+      codeStage = document.createElement('div');
+      codeStage.className = 'input-group';
+      codeStage.setAttribute('aria-live', 'polite');
+      codeStage.innerHTML = '<h3>Between the two layers</h3><p id="jn25-stage-label">Code groups will appear here.</p><div class="output-box" id="jn25-intermediate"></div><p>This invented teaching codebook assigns one group to each letter. Removing an additive exposes a group; a codebook is still needed to read it. For example, this model assigns 10000 to A and 10005 to F. These are not historical JN-25 entries.</p>';
+      outputBox.parentElement.before(codeStage);
+    }
     const clearStages = () => {
+      if (codeStage) {
+        document.getElementById('jn25-intermediate').textContent = '';
+        document.getElementById('jn25-stage-label').textContent = 'Code groups will appear here.';
+      }
       if (!stages) return;
       document.getElementById('adfgvx-intermediate').textContent = '';
       document.getElementById('adfgvx-comparison').textContent = '';
@@ -569,6 +581,10 @@
         const result = mode === 'enc' ? engine.encode(msg, key) : engine.decode(msg, key);
         outputBox.innerHTML = '';
         outputBox.textContent = result;
+        if (codeStage) {
+          document.getElementById('jn25-stage-label').textContent = mode === 'enc' ? 'Stage 1 · code groups before adding the key digits' : 'After additive removal · code groups before codebook lookup';
+          document.getElementById('jn25-intermediate').textContent = mode === 'enc' ? engine.codeGroups(msg) : engine.removeAdditive(msg, key);
+        }
         if (stages) {
           const intermediate = mode === 'enc' ? engine.fractionate(msg, key) : engine.untranspose(msg, key);
           document.getElementById('adfgvx-stage-label').textContent = mode === 'enc' ? 'Stage 1 · coordinate pairs before transposition' : 'After undoing transposition · coordinate pairs before substitution';
