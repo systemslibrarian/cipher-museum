@@ -1,6 +1,6 @@
 # javascript appendix 7
 
-Snapshot: `e4bd1e3b2fa510091bd2e6c397906673eaf0a771`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0440bdf14982197590f424d4e8af720c8fe62234`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-ui.js
 
@@ -1254,8 +1254,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `979ab47d54df0e1d4744d820080bdb590511c4d6b6f34066de3568e2ed8ab830`
-- Readable-source SHA-256: `979ab47d54df0e1d4744d820080bdb590511c4d6b6f34066de3568e2ed8ab830`
+- Served SHA-256: `414cc7515af22e620f6044d86530a6477928012033f342ba950e7637f5a9d696`
+- Readable-source SHA-256: `414cc7515af22e620f6044d86530a6477928012033f342ba950e7637f5a9d696`
 
 
 ```javascript
@@ -1277,9 +1277,15 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  */
 'use strict';
 
-const VERSION = 'cipher-museum-00c39160';
+const VERSION = 'cipher-museum-3b2766f8';
 
 const CORE = [
+  '/first-codebreak.html',
+  '/classical-guide.html',
+  '/codebreak-worksheet.html',
+  '/codebreak-answers.html',
+  '/css/first-codebreak.css',
+  '/js/first-codebreak.js',
   '/',
   '/index.html',
   '/offline.html',
