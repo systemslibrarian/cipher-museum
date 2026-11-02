@@ -1437,7 +1437,8 @@ cipherMuseumGlobal.CipherEngines = (() => {
       'DEATH','LIBERTY'
     ]; // 36 nomenclator codewords
     const NULL = '__BNULL__';
-    const DOUB = '__BDOUB__'; // "doubleth" — double next letter
+    const DOUB = '__BDOUB__'; // "doubleth" — repeat the preceding letter
+    const letterFold = ch => ch === 'J' ? 'I' : ch === 'V' ? 'U' : ch;
     function buildTable(seed) {
       const k = (clean(seed || 'BABINGTON') + 'PHELIPPES');
       let s = 0;
@@ -1462,12 +1463,6 @@ cipherMuseumGlobal.CipherEngines = (() => {
         (enc[s2.tok] = enc[s2.tok] || []).push(s2.sym);
       }
       return { enc, dec, nulls };
-    }
-    function letterFold(ch) {
-      // Map J→I, V→U, W→VV (handled at caller) for the 23-letter alphabet
-      if (ch === 'J') return 'I';
-      if (ch === 'V') return 'U';
-      return ch;
     }
     return {
       encode: (text, key) => {
@@ -1498,8 +1493,14 @@ cipherMuseumGlobal.CipherEngines = (() => {
             i += matched.length;
             continue;
           }
-          // Otherwise emit a letter symbol (folding J→I, V→U)
-          let ch = letterFold(t[i]);
+          // Word codes retain their spelling; letter symbols use J/I, V/U, W/UU.
+          if (t[i] === 'W') {
+            out.push('\u27e8' + enc.U[0] + '\u27e9');
+            out.push('\u27e8' + enc[DOUB][0] + '\u27e9');
+            i++;
+            continue;
+          }
+          const ch = letterFold(t[i]);
           // Doubled letter? Use the doubleth trap once in a while
           if (i + 1 < t.length && letterFold(t[i + 1]) === ch && enc[DOUB] && rng() < 0.6) {
             out.push('\u27e8' + enc[ch][0] + '\u27e9');
@@ -2541,17 +2542,22 @@ cipherMuseumGlobal.CipherEngines = (() => {
       return out;
     }
 
+    const codeGroups = text => clean(text).split('').map(ch => LETTER_GROUPS[ch]).join(' ');
+    const removeAdditive = (text, key) => {
+      const keyDigits = normalizeKeyDigits(key);
+      return (String(text || '').match(/\d{5}/g) || []).map(g => addGroup(g, keyDigits, true)).join(' ');
+    };
+
     return {
+      codeGroups, removeAdditive,
       encode: (text, key) => {
         const t = clean(text);
         const keyDigits = normalizeKeyDigits(key);
-        const groups = t.split('').map(ch => LETTER_GROUPS[ch]);
+        const groups = codeGroups(t).split(' ').filter(Boolean);
         return groups.map(g => addGroup(g, keyDigits, false)).join(' ');
       },
       decode: (text, key) => {
-        const keyDigits = normalizeKeyDigits(key);
-        const groups = (String(text || '').match(/\d{5}/g) || []);
-        return groups.map(g => REV_GROUPS[addGroup(g, keyDigits, true)] || '?').join('');
+        return removeAdditive(text, key).split(' ').filter(Boolean).map(g => REV_GROUPS[g] || '?').join('');
       }
     };
   })();

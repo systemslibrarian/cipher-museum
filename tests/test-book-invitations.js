@@ -44,6 +44,29 @@ async function main() {
  doc.getElementById('demo-msg-adfgvx').value='ATTACJ';doc.getElementById('demo-run-adfgvx').click();assert.match(doc.getElementById('adfgvx-comparison').textContent,/1 message character\(s\), 1 intermediate position\(s\), and 1 final position\(s\)/);
  doc.querySelector('[data-mode="dec"]').click();doc.getElementById('demo-msg-adfgvx').value='GFVVAAGXGFGA';doc.getElementById('demo-run-adfgvx').click();assert.equal(doc.getElementById('adfgvx-intermediate').textContent,'AVGGGGAVAXFF');assert.equal(doc.getElementById('demo-output-adfgvx').textContent,'ATTACK');
  doc.getElementById('demo-clear-adfgvx').click();assert.equal(doc.getElementById('adfgvx-intermediate').textContent,'');w.close();
+ // Published book exercises: preserve folded letters and expose the codebook layer.
+ d=dom('ciphers/babington.html');w=d.window;doc=w.document;
+ w.eval(read('js/ciphers/all-engines.js'));w.eval(read('js/demo-loader.js'));
+ await new Promise(resolve=>doc.addEventListener('DOMContentLoaded',resolve,{once:true}));
+ for (const seed of ['BABINGTON','MARY','TEST']) {
+  doc.getElementById('demo-key-babington').value=seed;
+  for (const [message,expected] of [['WORK','UUORK'],['V','U'],['J','I'],['WW VV JJ','UUUUUUII'],['WITH YOUR MAJESTY','WITHYOURMAJESTY'],['ABCDEFGHIJKLMNOPQRSTUVWXYZ','ABCDEFGHIIKLMNOPQRSTUUUUXYZ']]) {
+   doc.querySelector('[data-mode="enc"]').click();doc.getElementById('demo-msg-babington').value=message;doc.getElementById('demo-run-babington').click();
+   const encoded=doc.getElementById('demo-output-babington').textContent;assert(!encoded.includes('?'),message+' must not disappear');
+   doc.querySelector('[data-mode="dec"]').click();doc.getElementById('demo-msg-babington').value=encoded;doc.getElementById('demo-run-babington').click();assert.equal(doc.getElementById('demo-output-babington').textContent,expected);
+  }
+ }
+ w.close();
+ d=dom('ciphers/jn-25.html');w=d.window;doc=w.document;
+ w.eval(read('js/ciphers/all-engines.js'));w.eval(read('js/demo-loader.js'));
+ await new Promise(resolve=>doc.addEventListener('DOMContentLoaded',resolve,{once:true}));
+ doc.getElementById('demo-msg-jn-25').value='AF';doc.getElementById('demo-key-jn-25').value='99999';doc.getElementById('demo-run-jn-25').click();
+ assert.equal(doc.getElementById('jn25-intermediate').textContent,'10000 10005');assert.equal(doc.getElementById('demo-output-jn-25').textContent,'09999 09994');
+ doc.querySelector('[data-mode="dec"]').click();assert.equal(doc.getElementById('jn25-intermediate').textContent,'');
+ doc.getElementById('demo-msg-jn-25').value='09999 09994';doc.getElementById('demo-run-jn-25').click();
+ assert.equal(doc.getElementById('jn25-intermediate').textContent,'10000 10005');assert.equal(doc.getElementById('demo-output-jn-25').textContent,'AF');
+ doc.getElementById('demo-key-jn-25').value='11111';doc.getElementById('demo-run-jn-25').click();assert.equal(doc.getElementById('jn25-intermediate').textContent,'98888 98883');assert.equal(doc.getElementById('demo-output-jn-25').textContent,'??');
+ doc.getElementById('demo-clear-jn-25').click();assert.equal(doc.getElementById('jn25-intermediate').textContent,'');w.close();
  d=dom('sealed-letter.html');doc=d.window.document;
  const choices=[...doc.querySelectorAll('#verdict-form label')].map(el=>el.textContent.trim());
  const lengths=choices.map(s=>s.split(/\s+/).length);assert(Math.max(...lengths)-Math.min(...lengths)<=5,'No choice gets a conspicuous length advantage');
@@ -52,6 +75,6 @@ async function main() {
  assert.doesNotMatch(read('ciphers/venona.html'),/XOR is the same algebra/);
  assert.match(read('ciphers/venona.html'),/Robert Lamphere/);
  assert.match(read('ciphers/mary-stuart-castelnau-letters.html'),/F42, F46, F58, F69, F78, F96 and F221/);
- console.log('Book invitations: RSA vectors/validation, whole-word route recovery, DOM controls, ADFGVX stages/comparison, modifier and puzzle fairness passed.');
+ console.log('Book invitations: Babington alphabet folds, JN-25 intermediate groups, RSA vectors/validation, whole-word route recovery, DOM controls, ADFGVX stages/comparison, modifier and puzzle fairness passed.');
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});

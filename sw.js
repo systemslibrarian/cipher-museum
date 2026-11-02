@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-4169796f';
+const VERSION = 'cipher-museum-6c014110';
 
 const CORE = [
   '/lab/reading-the-evidence.html',
