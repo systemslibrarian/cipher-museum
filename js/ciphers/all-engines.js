@@ -601,8 +601,7 @@ cipherMuseumGlobal.CipherEngines = (() => {
       for (const c of alpha36) if (!seen.has(c)) grid += c;
       return grid;
     }
-    return {
-      encode: (text, key) => {
+    function fractionate(text, key) {
         const keys = (key || 'PRIVACY,GERMAN').split(',');
         const grid = makeGrid(keys[0]);
         const t = cleanAlphanumeric(text);
@@ -611,7 +610,13 @@ cipherMuseumGlobal.CipherEngines = (() => {
           const i = grid.indexOf(ch);
           if (i >= 0) fractionated += letters[Math.floor(i / 6)] + letters[i % 6];
         }
-        return columnar.encode(fractionated, keys[1] || 'GERMAN');
+        return fractionated;
+    }
+    return {
+      fractionate,
+      untranspose: (text, key) => columnar.decode(clean(text), (key || 'PRIVACY,GERMAN').split(',')[1] || 'GERMAN'),
+      encode: (text, key) => {
+        return columnar.encode(fractionate(text, key), (key || 'PRIVACY,GERMAN').split(',')[1] || 'GERMAN');
       },
       decode: (text, key) => {
         const keys = (key || 'PRIVACY,GERMAN').split(',');
