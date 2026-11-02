@@ -1,6 +1,6 @@
 # javascript appendix 7
 
-Snapshot: `1001c42798bc98dc52bf9d3e61dc1b8738009676`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `f5a994abd27f5d28531efa53a23d5b8661e41b61`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-model.js
 
@@ -2188,8 +2188,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `sw.js`
-- Served SHA-256: `fe9b2b61ac5ba6a769fb274443d52fcd4b4b46702d813a5061d48f0ac4a520cd`
-- Readable-source SHA-256: `fe9b2b61ac5ba6a769fb274443d52fcd4b4b46702d813a5061d48f0ac4a520cd`
+- Served SHA-256: `ad0d9d625bf39fda259734e2a24345752a6059c0b81a0fba776b4c935f3c6cf2`
+- Readable-source SHA-256: `ad0d9d625bf39fda259734e2a24345752a6059c0b81a0fba776b4c935f3c6cf2`
 
 
 ```javascript
@@ -2200,18 +2200,20 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
  * Strategy:
  *   - HTML navigations: network-first, falling back to cache (content stays fresh
  *     online; cached pages may be available offline while their assets remain cached).
- *   - Static assets (css/js/images/json): cache-first with background refresh.
+ *   - JavaScript: network-first with cached fallback, so corrected models arrive
+ *     with the exhibit text on the first online visit.
+ *   - Other static assets (css/images/json): cache-first with background refresh.
  *   - Requests under /public/, including corpus samples and reports, bypass this cache.
  *
  * VERSION is stamped automatically by `npm run build:js` from a hash of every
  * asset served cache-first — the minified bundles, the non-HTML entries of
- * CORE below, and the self-contained offline fallback page (scripts/sw-version.js).
+ * CORE below, the offline fallback page, and this worker's policy (scripts/sw-version.js).
  * tests/test-sw-version.js fails the suite if it drifts. Old caches are purged
  * on activate, so adding an asset to CORE also re-stamps VERSION.
  */
 'use strict';
 
-const VERSION = 'cipher-museum-6c014110';
+const VERSION = 'cipher-museum-56bf27b0';
 
 const CORE = [
   '/lab/reading-the-evidence.html',
@@ -2355,7 +2357,32 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache-first with background refresh for static assets.
+  if (url.pathname.endsWith('.js')) {
+    const cachedScript = async () => {
+      const cache = await caches.open(VERSION);
+      // Versioned exhibit URLs use the precached current bundle while offline.
+      return (await cache.match(req)) || cache.match(url.pathname);
+    };
+    event.respondWith(
+      fetch(req, { cache: 'no-cache' })
+        .then(async (res) => {
+          if (!res.ok) return (await cachedScript()) || res;
+          try {
+            const cache = await caches.open(VERSION);
+            await cache.put(req, res.clone());
+          } catch (_) { /* A full cache must not discard a successful network response. */ }
+          return res;
+        })
+        .catch(async (error) => {
+          const hit = await cachedScript();
+          if (hit) return hit;
+          throw error;
+        })
+    );
+    return;
+  }
+
+  // Cache-first with background refresh for the remaining static assets.
   event.respondWith(
     caches.match(req).then((hit) => {
       const refresh = fetch(req)
