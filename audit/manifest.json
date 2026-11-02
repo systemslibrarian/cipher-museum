@@ -1,7 +1,7 @@
 {
   "format_version": 1,
-  "source_commit": "1001c42798bc98dc52bf9d3e61dc1b8738009676",
-  "source_commit_time": "2026-11-02T13:43:46-05:00",
+  "source_commit": "f5a994abd27f5d28531efa53a23d5b8661e41b61",
+  "source_commit_time": "2026-11-02T14:44:31-05:00",
   "page_count": 221,
   "inline_script_count": 80,
   "shared_script_count": 60,
@@ -335,13 +335,13 @@
       "id": "P020",
       "path": "ciphers/babington.html",
       "title": "The Babington Plot Cipher (1586) — The Cipher Museum",
-      "source_sha256": "3ce39a0a6d16bde4a505eafd4f84a396e3ec7d165ed3e5141cd6d97a00519dce",
+      "source_sha256": "c4b123a56b26947af8079b07879b0e2110c1e3fd7f028ea7f2e28e65fa7b02fa",
       "text_nodes": 179,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/trust-labels.js",
-        "https://ciphermuseum.com/js/ciphers/all-engines.min.js",
-        "https://ciphermuseum.com/js/demo-loader.min.js",
+        "https://ciphermuseum.com/js/ciphers/all-engines.min.js?v=d805834f67eb",
+        "https://ciphermuseum.com/js/demo-loader.min.js?v=808edf0c99bf",
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
@@ -4056,8 +4056,8 @@
     {
       "served": "sw.js",
       "readable": "sw.js",
-      "served_sha256": "fe9b2b61ac5ba6a769fb274443d52fcd4b4b46702d813a5061d48f0ac4a520cd",
-      "readable_sha256": "fe9b2b61ac5ba6a769fb274443d52fcd4b4b46702d813a5061d48f0ac4a520cd",
+      "served_sha256": "ad0d9d625bf39fda259734e2a24345752a6059c0b81a0fba776b4c935f3c6cf2",
+      "readable_sha256": "ad0d9d625bf39fda259734e2a24345752a6059c0b81a0fba776b4c935f3c6cf2",
       "dormant": false,
       "classroom_cli": false
     }
@@ -4183,7 +4183,7 @@
   "input_files": [
     {
       "path": "docs/page-audit/coverage.json",
-      "sha256": "1f1bca9743cf2bd1efce95d88237a530220adf434317dd84d3503fcec2f40433"
+      "sha256": "da6c7a442b3360cb468c8a2e122d35307dd4a98fa90824171ec11a79c4a1892a"
     },
     {
       "path": "docs/page-audit/sources.json",
@@ -4267,7 +4267,7 @@
     },
     {
       "path": "ciphers/babington.html",
-      "sha256": "3ce39a0a6d16bde4a505eafd4f84a396e3ec7d165ed3e5141cd6d97a00519dce"
+      "sha256": "c4b123a56b26947af8079b07879b0e2110c1e3fd7f028ea7f2e28e65fa7b02fa"
     },
     {
       "path": "ciphers/bach-motif.html",
@@ -5323,7 +5323,7 @@
     },
     {
       "path": "sw.js",
-      "sha256": "fe9b2b61ac5ba6a769fb274443d52fcd4b4b46702d813a5061d48f0ac4a520cd"
+      "sha256": "ad0d9d625bf39fda259734e2a24345752a6059c0b81a0fba776b4c935f3c6cf2"
     },
     {
       "path": "tours/foundations.json",
@@ -5454,153 +5454,153 @@
     },
     {
       "path": "parts/01-pages-P001-P020.md",
-      "bytes": 268902,
-      "sha256": "06990b90b3d8bb6670099609227be126863645de01e9750f919d961ffbf7656b"
+      "bytes": 269165,
+      "sha256": "af6a8c922c6cd0f46f9c0b873e3b280a6b79b899d35d9825ac33b1ab7479ab00"
     },
     {
       "path": "parts/02-pages-P021-P040.md",
       "bytes": 257613,
-      "sha256": "bd934aee1d28b44c136c059cb34551d4148d1da8308d25f6f5ba74b54252ff2b"
+      "sha256": "e078d6c16357241bc1a977b9e1c1585b3a28392802b742c0a1a45f5a2f570226"
     },
     {
       "path": "parts/03-pages-P041-P060.md",
       "bytes": 274906,
-      "sha256": "8ce2d59dd12e5080864444b7f875483a58a432ec433b51a22c1f38fa76b66f2b"
+      "sha256": "30d5e8091e426954f69e73a559e183156603fb4c1eff40f65ed6746c587dd163"
     },
     {
       "path": "parts/04-pages-P061-P080.md",
       "bytes": 282333,
-      "sha256": "33ffb8c0ed80cf8d98eb324bf963b1b8e7ae53918dd3ef1cc64b31ef7767834d"
+      "sha256": "d05c5540956be5c959a1272dfe97803a846dfac769d129952711217502a79cc4"
     },
     {
       "path": "parts/05-pages-P081-P100.md",
       "bytes": 266735,
-      "sha256": "aa5647d0575f2c4eb347040415b53d9ea3c09f2375695796495ab7078f0b74c3"
+      "sha256": "6d90462d598a73f80ef6a633d4b8432c440884d85bfdb3d419c1ed4dd1d21368"
     },
     {
       "path": "parts/06-pages-P101-P120.md",
       "bytes": 287648,
-      "sha256": "f6fbfff85b8a663905f278feeac7017497be1816183759407af916355c626c23"
+      "sha256": "ed884658325d82d38b5f1387cd1e6bd90762ea0fc33cd09b97882424598d9f25"
     },
     {
       "path": "parts/07-pages-P121-P140.md",
       "bytes": 262709,
-      "sha256": "2e360be24c303da8286aca6b21858250040c58a1422e94b28543aff659fc6341"
+      "sha256": "9794809d58560327b379a51488d130783ce550251bbf22fe958d3e4fe7acb983"
     },
     {
       "path": "parts/08-pages-P141-P160.md",
       "bytes": 310229,
-      "sha256": "376622a2f452f7ae6b0aca692d1988752925d0070210b4dd3b8057dfea5ddcfd"
+      "sha256": "8baafd1de79a2c113eb7ea16c29961bd83be20281a9dd2ee6c7aa264289f7b3d"
     },
     {
       "path": "parts/09-pages-P161-P180.md",
       "bytes": 430223,
-      "sha256": "5d28fe38c3f9f81b6d52279a51d678092c038075560298b18612c17a59e0235c"
+      "sha256": "4e37e83c473863d25d8b7abcb867a156c4680d3239146114b857a5d2adee0861"
     },
     {
       "path": "parts/10-pages-P181-P200.md",
       "bytes": 262307,
-      "sha256": "660371deaefa7ffa1b9c68bf6a9f82a5eca84f47364c0ee3d5730133ef5cbcbe"
+      "sha256": "8d46026cbdc61270ce1b6e9810f68279dbe64914bf5715ae873344465a87998d"
     },
     {
       "path": "parts/11-pages-P201-P220.md",
       "bytes": 390268,
-      "sha256": "2e4d935cb56d27b6e0a7dbdd856c8d006dfcc03dd6a864f6119852e3b82db1e5"
+      "sha256": "1a553a7430cf34636c15747a83f094ec46f7bf9c1d8e4e5668d67954afeaba84"
     },
     {
       "path": "parts/12-pages-P221-P221.md",
       "bytes": 8840,
-      "sha256": "54291c763ebfbbf79f33c47272c4c04fe3a2099d0edc0a20b9328711efda425f"
+      "sha256": "11b90e170c2696aaf987eb60686ea65e571829f10676dd6c8ab5dc1e5cedbee1"
     },
     {
       "path": "parts/12-source-register.md",
       "bytes": 126777,
-      "sha256": "ceefd0cae307e20ffea4be9a3dddc26f7bcb3e9e9b68e8df376ebc0f130c1428"
+      "sha256": "e45703c79539ea910c9be2f8604558394a815af895d861743ff7dc2c77e178c0"
     },
     {
       "path": "parts/13-01-javascript.md",
       "bytes": 173399,
-      "sha256": "4d5295d661ada439efd6ac149ad6caa5e3383174b29b1c7844e9f8aed0ce8a8d"
+      "sha256": "f439a5bcd70f3b3ad259f60b8efbb1ba2818d5dc0ba397e8c9070953b3d6f802"
     },
     {
       "path": "parts/13-02-javascript.md",
       "bytes": 18742,
-      "sha256": "6fece8a7ceb3c4251467dd516093ff5172455552dade2658f8311ee6fe3ed987"
+      "sha256": "5514e6f55c1b9798137dfcaa38226bd3c3e42c0bc07d299085a5e9d275415159"
     },
     {
       "path": "parts/13-03-javascript.md",
       "bytes": 181791,
-      "sha256": "004ea00c1145ebf17d2d642bb84e6661dc5bf9ff801373ce39bf94a1c65566a2"
+      "sha256": "f362c1d756731cd380bfaaafbf1b3f5aff136f46715b9cf6b4b20cc1369a7818"
     },
     {
       "path": "parts/13-04-javascript.md",
       "bytes": 172869,
-      "sha256": "d754d1a3cea89c2bea451be37ee23ccd2771afd7906ff549d3efe0312a7055fa"
+      "sha256": "b43798c77d53505ed8327a50537da1bd022363122f2df67098780e43c6a06de4"
     },
     {
       "path": "parts/13-05-javascript.md",
       "bytes": 176392,
-      "sha256": "920afd397f89c41599143f93d1f72204162b9e23e653cc4a72c9c1392706645d"
+      "sha256": "763bb669943c0fd13617baab5269b238b300d4b15e9d0142801b7615995f236d"
     },
     {
       "path": "parts/13-06-javascript.md",
       "bytes": 122326,
-      "sha256": "dc737f41f288bbe9c6b5d91d185cf043b87d83e88ffec21561b1b9f319916042"
+      "sha256": "df96e42e3314a93e636e728ceb732ce2f4d4bbd0a9bfd2ee9a14681d154b669e"
     },
     {
       "path": "parts/13-07-javascript.md",
-      "bytes": 146606,
-      "sha256": "ecfb555d83a5e7d1733f7566213fa316c1ed0d9e074313d371ea938fe76b9132"
+      "bytes": 147613,
+      "sha256": "ec587d90f7db8b6fe8ebbe2eb1a7c9e2b3d132ee31e242ba59a42daf1bf663ac"
     },
     {
       "path": "parts/14-01-data.md",
       "bytes": 48229,
-      "sha256": "1210e3b93a8dece36b53aaa8cde0b3114b257b7ba7d8626013a4098e1841532d"
+      "sha256": "1e2e4f9660248d97609b6b86765e5c0a1b3fcda0b44cfed4422c224001c8568c"
     },
     {
       "path": "parts/14-02-data.md",
       "bytes": 465598,
-      "sha256": "b6287405f2de2e2575df9f1afd5529a100db5691438b2724fe450bdd9ff00d4c"
+      "sha256": "6545d0257d4557f9ebed21af258311f07df078ccdc66d4a065b08bbe1472d205"
     },
     {
       "path": "parts/14-03-data.md",
       "bytes": 176025,
-      "sha256": "a3429b68822fb7a0eaaab4744a6f8a38c87dd66ddf1e1eded721a461f8aaed97"
+      "sha256": "39627888681e57dbbcc49a20ada144d2ddd17444a665f896d674aa36b9337445"
     },
     {
       "path": "parts/14-04-data.md",
       "bytes": 108418,
-      "sha256": "441958a559be0bc04f08e4c99b566d53fc56a74a2b91109ff2d092010f68f27d"
+      "sha256": "071474a9c4d73883460af106f2dd23f9356c1339158ab1941c5b61e288cd6d15"
     },
     {
       "path": "parts/14-05-data.md",
       "bytes": 170665,
-      "sha256": "7e16be04c1cbf9608313d3f67dd6a97fed34242245ca62ffd8389ea0225efa13"
+      "sha256": "3d54d37e37db94e0b21a5260fdfac0c8ef6f4ba7909cdccfc4c1cae6ceb1a496"
     },
     {
       "path": "parts/14-06-data.md",
       "bytes": 118334,
-      "sha256": "c31a00c29ed19111b9804eff23897a4ee836890a36b135bc0c0b265737124acc"
+      "sha256": "827d17424479fa8fa505bc5001c3e44e5d837afba139414131dbab6730e0bb46"
     },
     {
       "path": "parts/14-07-data.md",
       "bytes": 69047,
-      "sha256": "a429deb195ec7b596c1c2c72179db58828eea9f746f6fa4867d33d32a150b268"
+      "sha256": "a99c86c09ad5db5ce4f799e9eb4e9a364d511982078e4742af5a3c393c9c176f"
     },
     {
       "path": "parts/15-classroom-worksheet.md",
       "bytes": 5593,
-      "sha256": "d578f05275d73a3b58b0a2a1c26277258225148068c24a76f08c43091556b9f4"
+      "sha256": "87f0f4552ce7fbd95351367d0a670d6736b6ffb67b6eac53367993e304ac4056"
     },
     {
       "path": "CIPHER_MUSEUM_AUDIT.md",
-      "bytes": 5611491,
-      "sha256": "5034a23db6841c43809bc5d2233af6d5e52f53aad00f8468b4421addebcfc426"
+      "bytes": 5612761,
+      "sha256": "7f0460be603dfa3fa8a28f14334bdbb7ec0035b69e634b6ebebc073cdf73e684"
     },
     {
       "path": "README.md",
       "bytes": 6213,
-      "sha256": "414b8b6fc5bc39328f0a792c1d412670f6bc53fd376904a9287e5ebbc650e854"
+      "sha256": "f4534f5a89f14e04ddb08b15618e87c9d7b5a187cd6a5986873226d809629228"
     }
   ]
 }

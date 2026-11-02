@@ -45,7 +45,7 @@ function inlineScripts(html, pageDir, extraScripts = []) {
   html = html.replace(/<script\b([^>]*)\bsrc=["']([^"']+)["']([^>]*)><\/script>/gi,
     (full, before, src, after) => {
       if (/^https?:|^\/\//i.test(src)) return '';
-      const resolved = path.resolve(pageDir, src);
+      const resolved = path.resolve(pageDir, src.split(/[?#]/, 1)[0]);
       if (!fs.existsSync(resolved)) return '';
       let code = fs.readFileSync(resolved, 'utf8');
       // Escape </script> inside JS comments/strings so HTML parser doesn't

@@ -22,7 +22,7 @@ The earlier 214-page review was a complete reading/consistency pass with targete
 
 ## Snapshot and regeneration
 
-Source commit: `1001c42798bc98dc52bf9d3e61dc1b8738009676` (2026-11-02T13:43:46-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
+Source commit: `f5a994abd27f5d28531efa53a23d5b8661e41b61` (2026-11-02T14:44:31-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
 
 With repository access and dependencies installed:
 
