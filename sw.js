@@ -16,9 +16,15 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-21408fb9';
+const VERSION = 'cipher-museum-ad8cfca8';
 
 const CORE = [
+  '/first-codebreak.html',
+  '/classical-guide.html',
+  '/codebreak-worksheet.html',
+  '/codebreak-answers.html',
+  '/css/first-codebreak.css',
+  '/js/first-codebreak.js',
   '/',
   '/index.html',
   '/offline.html',
