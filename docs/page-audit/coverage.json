@@ -5935,8 +5935,8 @@
     {
       "path": "index.html",
       "title": "The Cipher Museum \u2014 Interactive History of Encryption",
-      "words": 589,
-      "sha256": "9dff6bffae0cd040542ea718eef985e6e035054a7fb9b2ebd60723dc690f1d99",
+      "words": 584,
+      "sha256": "012b8950e64010bcb716b673d29336dca8e8df1b7485aa16533f1d17613c7841",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996"
@@ -5966,6 +5966,11 @@
         "notes": "Added beginner lesson entry under Choose Your Path; existing paths retained.",
         "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
         "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      },
+      "positioning_review_2026_11_02": {
+        "scope": "Replaced abstract book-promo description with two concrete exhibit actions; promise and cover retained.",
+        "verification": "Local link and reader-companion checks; phone-width browser review. Deployment and CI recorded in the pull request.",
+        "limits": "Public copy and navigation review, not a new historical source audit or commercial forecast."
       }
     },
     {
@@ -6500,8 +6505,8 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum \u2014 Paul \u201cThe Cipher Librarian\u201d Clark \u2014 The Cipher Museum",
-      "words": 1280,
-      "sha256": "033f0c7f3419b9facd9b26cc063d5a49a8fc77b55c9d832f8d4ecba5df31d682",
+      "words": 1543,
+      "sha256": "9ce3dc2fdc7d43857fbcccaa05f8b245bc2de44becd52f483c8d53fc87bed7b8",
       "status": "bounded integration reading and local link checks complete; historical excerpt sources not reverified",
       "sources": [],
       "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul \u201cThe Cipher Librarian\u201d Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description. Reader-experience revision 2026-11-02: added a 20-chapter directory with exact exhibit destinations, four optional slip stops and prompts matched to the current manuscript invitations. Updated documentary image count from four to six against the book figure manifest. The approved promise, cover, historical excerpt and forthcoming status are preserved. No new historical claim introduced; existing sources were not independently reverified.",
@@ -6518,6 +6523,11 @@
         "scope": "Directory links and notebook flow; no new historical source audit.",
         "checks": "jsdom journey tests; full npm suite with regenerated service-worker version checked after final CSS changes; HTML lint; browser interaction and visual review at a 390 CSS pixel iframe width (375 pixel content viewport with scrollbar).",
         "limits": "Phone-width browser review, not physical-device certification. No release date or purchase flow added."
+      },
+      "positioning_review_2026_11_02": {
+        "scope": "Added reader FAQ on emphasis and nonfiction/fiction, three existing exhibit entry links, and a timed reading-group plan. No historical chapter or exhibit changed.",
+        "verification": "Local link and reader-companion checks; phone-width browser review. Deployment and CI recorded in the pull request.",
+        "limits": "Public copy and navigation review, not a new historical source audit or commercial forecast."
       }
     },
     {
