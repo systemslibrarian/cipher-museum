@@ -306,6 +306,10 @@ function processFoundationsPage(file) {
 
 // Explicit inclusion list — index.html (homepage) and search.html excluded
 const TOP_LEVEL = [
+  'first-codebreak.html',
+  'classical-guide.html',
+  'codebreak-worksheet.html',
+  'codebreak-answers.html',
   'the-book.html',
   'museum-map.html',
   'timeline.html',

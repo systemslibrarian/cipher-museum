@@ -92,9 +92,9 @@
     {
       "path": "cipher-detective.html",
       "title": "Cipher Detective \u2014 The Cipher Museum",
-      "words": 898,
-      "sha256": "0c63f1a92df29f6b913afbd15b1fba643ab3a34399096361f699f213c2465294",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 914,
+      "sha256": "9db21eadff4d10cedfe63c4a6e2ae085a8a999f005d3b919ff9211022104e035",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "LASRY-2018",
         "SWEIGART-2018"
@@ -126,6 +126,11 @@
         "browser_evidence": "docs/ebook-followup/browser.json",
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
+      },
+      "revision_2026_11_02": {
+        "notes": "Added beginner-lesson link beside the existing manual substitution desk; existing solver behavior unchanged.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
       }
     },
     {
@@ -2294,9 +2299,9 @@
     {
       "path": "ciphers/homophonic.html",
       "title": "Homophonic Substitution \u2014 The Cipher Museum",
-      "words": 915,
-      "sha256": "3a603b26511379d5448c5703ec06310fe9609b394b162756d7ce62a85d3b079d",
-      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
+      "words": 889,
+      "sha256": "6da830d3e138ac102f16b7772c5c5ac7040468b5e21f3fc88586501a092b7bd7",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "HAC-1997",
         "KAHN-1996"
@@ -2319,7 +2324,12 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
-      "research_review_2026_10_29": "revised"
+      "research_review_2026_10_29": "revised",
+      "revision_2026_11_02": {
+        "notes": "Added link to same-message homophone comparison; existing historical qualifications retained.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
     },
     {
       "path": "ciphers/ira-ciphers.html",
@@ -4529,9 +4539,9 @@
     {
       "path": "ciphers/vigenere.html",
       "title": "Vigen\u00e8re Cipher \u2014 The Cipher Museum",
-      "words": 746,
-      "sha256": "0a1eba9f47724204785bf1e75795d6661c956ffdd57ec242a25c7dc973701ab5",
-      "status": "bounded review and local release validation complete",
+      "words": 886,
+      "sha256": "369d89b9afb4059dc11a7d2e3d9e43ad4e1b86715e5c903517219fa5b8ca2e11",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "HAC-1997",
         "KAHN-1996"
@@ -4553,7 +4563,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "revision_2026_11_02": {
+        "notes": "Added link to complete guided repeating-key attack; existing exhibit retained.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
     },
     {
       "path": "ciphers/voynich.html",
@@ -4923,9 +4938,9 @@
     {
       "path": "further-reading.html",
       "title": "Further Reading \u2014 The Cipher Museum",
-      "words": 4144,
-      "sha256": "e430fad96ee25fb529cccdbec946f42bea4d4b6232cd9e07b059d5e5d4437899",
-      "status": "bounded review and local release validation complete",
+      "words": 4076,
+      "sha256": "b26d609cd3ea3a782ff6367240273a04b9adde1a605e585317038434995969f2",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996",
         "HOLDEN-2017",
@@ -4952,7 +4967,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "revision_2026_11_02": {
+        "notes": "Added direct Black Chamber reference and links to original museum lesson and subject crosswalk.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
     },
     {
       "path": "glossary.html",
@@ -5900,9 +5920,9 @@
     {
       "path": "index.html",
       "title": "The Cipher Museum \u2014 Interactive History of Encryption",
-      "words": 904,
-      "sha256": "793e9fac2530a9e166088dc218d24a8084df9a8a48dcf3e5c79c476677bdda06",
-      "status": "bounded review and local release validation complete",
+      "words": 589,
+      "sha256": "9dff6bffae0cd040542ea718eef985e6e035054a7fb9b2ebd60723dc690f1d99",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996"
       ],
@@ -5926,7 +5946,12 @@
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
       "hash_refreshed_2026_11_01": "Recorded hash was stale on the default branch before this work; page content unchanged by it.",
       "hash_refreshed_2026_11_01_cleanup": "Recorded hash was stale on the default branch; page content unchanged by this cleanup.",
-      "book_cover_alignment_2026_11_01": "revised"
+      "book_cover_alignment_2026_11_01": "revised",
+      "revision_2026_11_02": {
+        "notes": "Added beginner lesson entry under Choose Your Path; existing paths retained.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
     },
     {
       "path": "lab/decipherment-cases.html",
@@ -6087,9 +6112,9 @@
     {
       "path": "learn.html",
       "title": "Learn \u2014 The Cipher Museum",
-      "words": 579,
-      "sha256": "447c41722da733924e63cacd416c543cdafe2ff99241b594671a8258831a9ba4",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 614,
+      "sha256": "a61c33d6dc6eae71410f2728142760aa7febed657745f7d3a28953c1c97c0260",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "HOLDEN-2017",
         "HAC-1997",
@@ -6127,6 +6152,11 @@
         "browser_evidence": "docs/ebook-followup/browser.json",
         "browser_scope": "Both1280px and390px loaded without recorded script errors or document overflow; changed controls exercised separately.",
         "release_scope": "Local evidence only here; GitHub CI/deployment outcomes are tracked separately."
+      },
+      "revision_2026_11_02": {
+        "notes": "Added guided lesson, printable activities and topic-guide entry points.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
       }
     },
     {
@@ -6358,10 +6388,10 @@
     },
     {
       "path": "teaching.html",
-      "title": "Corpus Teaching Guide \u2014 The Cipher Museum",
-      "words": 580,
-      "sha256": "536dd3de4048dc41a75232a1d760d65561686350e9f001f1c00d66d931d27d15",
-      "status": "book companion integration: changed invitation and local links checked; earlier reviews remain historical evidence",
+      "title": "Teaching Resources \u2014 The Cipher Museum",
+      "words": 645,
+      "sha256": "19cb2cd6bce1b7e5e4a6df3297a33a5e2e0042cc839c38098af598bf05c651b2",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "LASRY-2018"
       ],
@@ -6402,6 +6432,11 @@
         "scope": "Read the added book-companion invitation and its surrounding page context; checked local href/src targets and HTML fragments. Refreshed this page inventory hash, title and static-body word count for the combined source.",
         "historical_review_scope": "Existing prose, browser and release records describe their earlier snapshots. This integration does not repeat or extend those evidence claims to the current combined source.",
         "limits": "No new external-source verification, browser run or deployment verification in this inventory update."
+      },
+      "revision_2026_11_02": {
+        "notes": "Added beginner session and separate student/answer sheets; updated title and description to include broader teaching resources.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
       }
     },
     {
@@ -6505,6 +6540,58 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+    },
+    {
+      "path": "classical-guide.html",
+      "sources": [],
+      "title": "Classical Codebreaking Topic Guide \u2014 The Cipher Museum",
+      "words": 585,
+      "sha256": "8a042c9bb5b3120fe94fa38002f882da199138a9477b2f2881cf2e92e9deda0b",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "All 27 Black Chamber subject labels mapped to existing museum exhibits or new lessons. Separates Sator anagram from historical intent, digraph category from Playfair, and Babington from the 2023 recovery. All destinations and fragments verified.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
+    },
+    {
+      "path": "codebreak-answers.html",
+      "sources": [],
+      "title": "First Codebreak \u2014 Facilitator\u2019s Answers \u2014 The Cipher Museum",
+      "words": 586,
+      "sha256": "dc12ccbabda757dbecda91ab2c6dae0c8dfa00dfe0df1438cb21cd8c17e12b45",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "Generated separate facilitator answer sheet; ciphertexts, known answers, actual repetition distances and equivalent key periods checked by executable tests.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
+    },
+    {
+      "path": "codebreak-worksheet.html",
+      "sources": [],
+      "title": "First Codebreak \u2014 Student Activities \u2014 The Cipher Museum",
+      "words": 508,
+      "sha256": "517924d48d66ffaf9761bd1fd6bccccbf8f56a4d40927366e376dfea4b3ecdaa",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "Generated student worksheet with original ciphertext fixtures, clue ladder, reflection and group activities. Full plaintexts and Vigen\u00e8re key are absent; facilitator answers are a separate linked document.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
+    },
+    {
+      "path": "first-codebreak.html",
+      "sources": [],
+      "title": "Your First Codebreak \u2014 The Cipher Museum",
+      "words": 972,
+      "sha256": "9c8d85563b57dd3218ae0a68a628771c46b85f97260d80be0ebd3774c044a214",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "Original substitution lesson with contextual clues and shared partial-key engine; full Vigen\u00e8re attack; five explicitly small modern-language samples; whole-token homophone comparison. DOM tests verify wrong-guess rejection, undo/locks, recovery and answer invalidation. Browser review recorded separately.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
     }
   ],
   "checkpoint": {
