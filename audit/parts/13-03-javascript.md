@@ -1,3406 +1,4273 @@
 # javascript appendix 3
 
-Snapshot: `a4edf7fd5755b4a75cc07cd6ac1bbbcd96e3eb8d`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `e913726355aa5b8e4060c0a007ac1f372edba4ce`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
-## JavaScript — js/ciphers/caesar-break.js
+## JavaScript — js/ciphers/all-engines.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
 
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
-- Served/distributed path: `js/ciphers/caesar-break.js`
-- Served SHA-256: `ceb478776f374e6994e649a26fc3e7c33c34e440e93896166832075a1974e9bb`
-- Readable-source SHA-256: `ceb478776f374e6994e649a26fc3e7c33c34e440e93896166832075a1974e9bb`
+- Served/distributed path: `js/ciphers/all-engines.min.js`
+- Served SHA-256: `f4232c18d35d6edc8ce96a9845e4a825dc915565a128ef957c3b1a48fc3f8a45`
+- Readable-source SHA-256: `fe327365286f73d714d026ce3163342f14fc1c0497bf60fca5ae8a6846596edf`
 
 
 ```javascript
 /**
- * Caesar Auto-Break Engine
- * ------------------------
- * Brute-forces all 25 non-trivial Caesar shifts and ranks each candidate
- * plaintext by English-likelihood using chi-squared distance against
- * standard English letter frequencies.
- *
- * Pure, deterministic, no DOM dependencies. Browser-friendly: attached to
- * window.CaesarBreak when loaded as a classic <script>.
- *
- * scoreEnglishChiSquared(text):
- *   Lower is better. 0 means identical to English distribution.
- * breakCaesar(ciphertext):
- *   Returns Array<{shift, plaintext, score}> sorted by ascending score
- *   (best candidate first). All 25 non-zero shifts are returned so the
- *   user can see the full process, not just the winner.
+ * THE CIPHER MUSEUM — All Cipher Engines
+ * Shared cipher implementations and explicitly scoped teaching models.
+ * See docs/ENGINE_INVENTORY.md for each engine's domain and evidence level;
+ * reproducible model output is not proof of historical-machine fidelity.
  */
-(function (root) {
-  'use strict';
+'use strict';
 
-  // Standard English letter frequencies (percent), from large-corpus norms.
-  // Matches the table used elsewhere on the site (cryptanalysis.html).
-  const ENGLISH_FREQ = {
-    A: 8.2,  B: 1.5,  C: 2.8,  D: 4.3,  E: 12.7, F: 2.2,
-    G: 2.0,  H: 6.1,  I: 7.0,  J: 0.15, K: 0.77, L: 4.0,
-    M: 2.4,  N: 6.7,  O: 7.5,  P: 1.9,  Q: 0.10, R: 6.0,
-    S: 6.3,  T: 9.1,  U: 2.8,  V: 0.98, W: 2.4,  X: 0.15,
-    Y: 2.0,  Z: 0.074,
+const cipherMuseumGlobal = typeof window !== 'undefined' ? window : globalThis;
+cipherMuseumGlobal.CipherEngines = (() => {
+  const A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const clean = text => String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '')
+    .toUpperCase().replace(/[^A-Z]/g, '');
+  const cleanAlphanumeric = text => String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '')
+    .toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const mod = (a, m) => ((a % m) + m) % m;
+  const boundedInt = (value, fallback, min, max) => {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isSafeInteger(parsed) && parsed >= min && parsed <= max ? parsed : fallback;
   };
-  const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-  /** Apply a Caesar shift to text. Non-letters pass through unchanged. */
-  function shiftText(text, shift) {
-    const s = ((shift % 26) + 26) % 26;
-    let out = '';
+  const secureRandomBytes = length => {
+    const crypto = globalThis.crypto;
+    if (!crypto || typeof crypto.getRandomValues !== 'function') {
+      throw new Error('Secure random generator unavailable');
+    }
+    const bytes = new Uint8Array(length);
+    for (let offset = 0; offset < length; offset += 65536) {
+      crypto.getRandomValues(bytes.subarray(offset, Math.min(offset + 65536, length)));
+    }
+    return bytes;
+  };
+  const secureRandomLetters = length => {
+    let result = '';
+    while (result.length < length) {
+      // Web Crypto rejects any single request larger than 65,536 bytes.
+      const bytes = secureRandomBytes(Math.min(65536, Math.max(32, (length - result.length) * 2)));
+      for (const byte of bytes) {
+        if (byte < 234) result += A[byte % 26];
+        if (result.length === length) break;
+      }
+    }
+    return result;
+  };
+  const escapeFillers = text => text.split('').map(ch => {
+    if (ch === 'X') return 'ZA';
+    if (ch === 'Q') return 'ZB';
+    if (ch === 'Z') return 'ZC';
+    return ch;
+  }).join('');
+  const unescapeFillers = text => {
+    let result = '';
     for (let i = 0; i < text.length; i++) {
-      const c = text.charCodeAt(i);
-      if (c >= 65 && c <= 90) {
-        out += String.fromCharCode(((c - 65 + s) % 26) + 65);
-      } else if (c >= 97 && c <= 122) {
-        out += String.fromCharCode(((c - 97 + s) % 26) + 97);
+      if (text[i] === 'Z' && /[ABC]/.test(text[i + 1] || '')) {
+        result += { A: 'X', B: 'Q', C: 'Z' }[text[i + 1]];
+        i++;
       } else {
-        out += text[i];
+        result += text[i];
       }
     }
-    return out;
-  }
-
-  /**
-   * Chi-squared distance between observed letter frequencies in `text`
-   * and standard English frequencies. Lower = more English-like.
-   * Formula: Σ ((observed_i − expected_i)² / expected_i)
-   */
-  function scoreEnglishChiSquared(text) {
-    const upper = String(text || '').toUpperCase().replace(/[^A-Z]/g, '');
-    const n = upper.length;
-    if (n === 0) return Infinity;
-    const counts = {};
-    for (let i = 0; i < 26; i++) counts[ALPHABET[i]] = 0;
-    for (let i = 0; i < n; i++) counts[upper[i]]++;
-    let chi = 0;
-    for (let i = 0; i < 26; i++) {
-      const ch = ALPHABET[i];
-      const expected = (ENGLISH_FREQ[ch] / 100) * n;
-      const observed = counts[ch];
-      const diff = observed - expected;
-      chi += (diff * diff) / expected;
-    }
-    return chi;
-  }
-
-  /**
-   * Try every shift 1..25, return ranked candidates (best first).
-   * Each entry: { shift, plaintext, score }
-   */
-  function breakCaesar(ciphertext) {
-    const text = String(ciphertext || '');
-    const candidates = [];
-    for (let shift = 1; shift <= 25; shift++) {
-      // Decryption with shift k is equivalent to encryption with 26-k.
-      const plaintext = shiftText(text, 26 - shift);
-      candidates.push({
-        shift: shift,
-        plaintext: plaintext,
-        score: scoreEnglishChiSquared(plaintext),
-      });
-    }
-    candidates.sort((a, b) => a.score - b.score);
-    return candidates;
-  }
-
-  const api = {
-    ENGLISH_FREQ: ENGLISH_FREQ,
-    shiftText: shiftText,
-    scoreEnglishChiSquared: scoreEnglishChiSquared,
-    breakCaesar: breakCaesar,
+    return result;
   };
 
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = api;
-  } else {
-    root.CaesarBreak = api;
-  }
-})(typeof window !== 'undefined' ? window : globalThis);
-```
-
-
-## JavaScript — js/ciphers/caesar.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/ciphers/caesar.js`
-- Served SHA-256: `ccb2014670c29e9aa0e2a9709afabe731ec032adf011220d4d8f84fb5acb3089`
-- Readable-source SHA-256: `ccb2014670c29e9aa0e2a9709afabe731ec032adf011220d4d8f84fb5acb3089`
-
-
-```javascript
-/**
- * THE CIPHER MUSEUM — Caesar Cipher Engine
- * Exhibit 01 · Ancient Rome · ~58 BC
- */
-'use strict';
-const CaesarCipher = (() => {
-  function shift(text, n, encode) {
-    const s = (((encode ? n : -n) % 26) + 26) % 26;
-    return text.split('').map(ch => {
-      const c = ch.charCodeAt(0);
-      if (c>=65&&c<=90) return String.fromCharCode(((c-65+s)%26)+65);
-      if (c>=97&&c<=122) return String.fromCharCode(((c-97+s)%26)+97);
-      return ch;
-    }).join('');
-  }
-  const encode = (text, key) => shift(text, parseInt(key)||0, true);
-  const decode = (text, key) => shift(text, parseInt(key)||0, false);
-  const bruteForce = text => Array.from({length:25},(_,i)=>({shift:i+1,text:shift(text,i+1,false)}));
-  return { encode, decode, bruteForce };
-})();
-```
-
-
-## JavaScript — js/ciphers/els.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/ciphers/els.js`
-- Served SHA-256: `ee13df6e1ceaae4bf6c34bbef8075497a2d439c757e3b03af03cb41527f4e450`
-- Readable-source SHA-256: `ee13df6e1ceaae4bf6c34bbef8075497a2d439c757e3b03af03cb41527f4e450`
-
-
-```javascript
-/**
- * Equidistant Letter Sequence (ELS) Search
- * ----------------------------------------
- * The pattern-finding method behind the "Bible code" claims of
- * Witztum-Rips-Rosenberg (1994) and the popular book by Drosnin (1997).
- * Given a body of text and a target word, ELS slides a "skip" of size
- * d across the text and asks: starting at position p, do every d-th
- * letter spell the target?
- *
- *     skip d=5, start p=0:  T____X____Y____Z   →  reads "TXYZ"
- *
- * Under an independent-letter model, the expected number of hits is
- * the number of legal placements times the product of letter frequencies.
- * Searching more placements creates more opportunities for coincidences.
- * This classroom search illustrates that effect; it does not reproduce
- * the full WRR experiment, the McKay et al. critique, or a significance
- * test comparing natural-language texts with random controls.
- *
- * Public API
- * ----------
- *   normalise(text)                     → letters-only uppercase string
- *   findELS(text, target, opts)         → array of {start, skip, end}
- *                                         opts: { minSkip=2, maxSkip=1000,
- *                                                 maxResults=100 }
- *   expectedHits(textLen, target)       → analytic estimate using English
- *                                         letter frequencies; explains why
- *                                         long texts trivially produce hits
- *
- *   This is purely a search; no claim is made about the meaningfulness
- *   of any hit.
- */
-(function (root) {
-  'use strict';
-
-  // Fixed rounded English letter-frequency heuristic. This is not a
-  // frequency estimate measured from the visitor's selected text.
-  const FREQ = {
-    A:0.0817, B:0.0150, C:0.0278, D:0.0425, E:0.1270, F:0.0223,
-    G:0.0202, H:0.0609, I:0.0697, J:0.0015, K:0.0077, L:0.0403,
-    M:0.0241, N:0.0675, O:0.0751, P:0.0193, Q:0.0010, R:0.0599,
-    S:0.0633, T:0.0906, U:0.0276, V:0.0098, W:0.0236, X:0.0015,
-    Y:0.0197, Z:0.0007,
-  };
-
-  /** Strip everything except letters; return uppercase. */
-  function normalise(text) {
-    if (!text) return '';
-    return String(text).toUpperCase().replace(/[^A-Z]/g, '');
-  }
-
-  function options(opts) {
-    const o = opts || {};
-    const positiveInteger = (value, fallback, name) => {
-      const number = value === undefined ? fallback : Number(value);
-      if (!Number.isSafeInteger(number) || number < 1) throw new Error(name + ' must be a positive safe integer.');
-      return number;
-    };
-    const minSkip = positiveInteger(o.minSkip, 2, 'Minimum skip');
+  /* ─── 1. Caesar ─── */
+  const caesar = (() => {
+    function parseShift(key) {
+      if (key === undefined || key === null || String(key).trim() === '') return 3;
+      const value = Number(String(key).trim());
+      if (!Number.isInteger(value) || value < 0 || value > 25) throw new Error('Caesar shift must be an integer from 0 to 25.');
+      return value;
+    }
+    function run(text, n, enc) {
+      const s = enc ? mod(n, 26) : mod(26 - n, 26);
+      return text.split('').map(ch => {
+        const c = ch.charCodeAt(0);
+        if (c >= 65 && c <= 90) return String.fromCharCode(mod(c - 65 + s, 26) + 65);
+        if (c >= 97 && c <= 122) return String.fromCharCode(mod(c - 97 + s, 26) + 97);
+        return ch;
+      }).join('');
+    }
     return {
-      minSkip,
-      maxSkip: Math.max(minSkip, positiveInteger(o.maxSkip, 1000, 'Maximum skip')),
-      maxResults: positiveInteger(o.maxResults, 100, 'Result limit')
+      encode: (t, k) => run(t, parseShift(k), true),
+      decode: (t, k) => run(t, parseShift(k), false)
     };
-  }
+  })();
 
-  /**
-   * Find every position where the target appears as an equidistant
-   * letter sequence in text (after normalisation).
-   *
-   * For each skip d in [minSkip, maxSkip], slide start p across the
-   * text and check whether text[p], text[p+d], text[p+2d], ... spells
-   * the target.
-   *
-   * Negative skips are not searched separately; they are equivalent to
-   * positive skips read in reverse, which the caller can do by
-   * reversing the input text.
-   *
-   * Returns at most maxResults hits, in scan order. Each hit is
-   * { start, skip, end } where end = start + skip*(target.length-1).
-   */
-  function findELS(text, target, opts) {
-    const { minSkip, maxSkip, maxResults } = options(opts);
-
-    const txt = normalise(text);
-    const tgt = normalise(target);
-    if (!txt.length || !tgt.length) return [];
-
-    const N = txt.length;
-    const L = tgt.length;
-    const hits = [];
-
-    const lastSkip = L > 1 ? Math.min(maxSkip, Math.floor((N - 1) / (L - 1))) : maxSkip;
-    for (let d = minSkip; d <= lastSkip && hits.length < maxResults; d++) {
-      const span = d * (L - 1);
-      const lastStart = N - span - 1;
-      if (lastStart < 0) continue;
-      // Only positions where text[p] === tgt[0] are candidates;
-      // this is a 26x speed-up vs blind scanning.
-      for (let p = 0; p <= lastStart; p++) {
-        if (txt.charCodeAt(p) !== tgt.charCodeAt(0)) continue;
-        let ok = true;
-        for (let k = 1; k < L; k++) {
-          if (txt.charCodeAt(p + k * d) !== tgt.charCodeAt(k)) { ok = false; break; }
-        }
-        if (ok) {
-          hits.push({ start: p, skip: d, end: p + span });
-          if (hits.length >= maxResults) break;
-        }
-      }
+  /* ─── 2. Monoalphabetic Substitution ─── */
+  const monoalphabetic = (() => {
+    function makeAlpha(key) {
+      const k = clean(key || 'KEYWORD');
+      const seen = new Set();
+      let alpha = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); alpha += c; }
+      for (let i = 0; i < 26; i++) { const c = A[i]; if (!seen.has(c)) alpha += c; }
+      return alpha;
     }
-    return hits;
-  }
-
-  /**
-   * Analytic estimate of expected ELS hits for a target word in a
-   * random text of given length, summed over skips [minSkip, maxSkip].
-   *
-   * For each (start, skip), the probability of a hit is the product of
-   * English letter frequencies of the target. The number of (start, skip)
-   * pairs is the sum of max(0, textLen - skip*(targetLength-1)).
-   * Multiplying gives the expectation under this independent-letter model;
-   * real prose need not follow that model. Overlapping placements do not
-   * invalidate the sum of their individual expectations.
-   *
-   * This is the single most important number on the page: it is why
-   * "the Bible predicts" any short word.
-   */
-  function expectedHits(textLen, target, opts) {
-    const { minSkip, maxSkip } = options(opts);
-    if (!Number.isSafeInteger(textLen) || textLen < 0) throw new Error('Text length must be a nonnegative safe integer.');
-    const tgt = normalise(target);
-    if (!tgt.length || textLen <= 0) return 0;
-    let p = 1;
-    for (let i = 0; i < tgt.length; i++) {
-      p *= (FREQ[tgt[i]] || 0.0001);
-    }
-    // Count only starts whose final character is inside the text. Summing
-    // this arithmetic progression is exact even for very short passages.
-    const strideCount = tgt.length - 1;
-    const lastSkip = strideCount ? Math.min(maxSkip, Math.floor((textLen - 1) / strideCount)) : maxSkip;
-    if (lastSkip < minSkip) return 0;
-    const count = lastSkip - minSkip + 1;
-    const pairs = count * textLen - strideCount * count * (minSkip + lastSkip) / 2;
-    return p * pairs;
-  }
-
-  const api = {
-    normalise: normalise,
-    findELS: findELS,
-    expectedHits: expectedHits,
-  };
-
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = api;
-  } else {
-    root.ELS = api;
-  }
-})(typeof window !== 'undefined' ? window : globalThis);
-```
-
-
-## JavaScript — js/ciphers/enigma-flagship.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/ciphers/enigma-flagship.js`
-- Served SHA-256: `868590fa71155f9473eb14eb64a556ef07867a38d0355a91cb3c3533a9eaeef6`
-- Readable-source SHA-256: `868590fa71155f9473eb14eb64a556ef07867a38d0355a91cb3c3533a9eaeef6`
-
-
-```javascript
-/**
- * THE CIPHER MUSEUM — Enigma Flagship Demo Controller
- * Drives the interactive Enigma machine, rotor visualisation,
- * self-encryption crib check, and brute-force rotor-order search.
- *
- * Depends on: js/ciphers/enigma.js (window.EnigmaEngine)
- */
-'use strict';
-
-(function () {
-  if (!window.EnigmaEngine) {
-    console.error('EnigmaEngine not loaded — flagship demo disabled.');
-    return;
-  }
-  const E = window.EnigmaEngine;
-  const $ = id => document.getElementById(id);
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // PART 1: Live encryption machine
-  // ─────────────────────────────────────────────────────────────────────────
-
-  const root = $('enigma-flagship');
-  if (!root) return;
-
-  const els = {
-    rotorL: $('eg-rotor-left'),
-    rotorM: $('eg-rotor-mid'),
-    rotorR: $('eg-rotor-right'),
-    reflector: $('eg-reflector'),
-    ringL: $('eg-ring-left'),
-    ringM: $('eg-ring-mid'),
-    ringR: $('eg-ring-right'),
-    posL:  $('eg-pos-left'),
-    posM:  $('eg-pos-mid'),
-    posR:  $('eg-pos-right'),
-    plugboard: $('eg-plugboard'),
-    plaintext: $('eg-plaintext'),
-    ciphertext: $('eg-ciphertext'),
-    encryptBtn: $('eg-encrypt'),
-    resetBtn:   $('eg-reset'),
-    rotorWindowL: $('eg-window-left'),
-    rotorWindowM: $('eg-window-mid'),
-    rotorWindowR: $('eg-window-right'),
-    pathSvg: $('eg-path-svg'),
-    pathToggle: $('eg-show-path'),
-    a11yLog: $('eg-a11y-log')
-  };
-
-  function readConfig() {
     return {
-      rotors: [els.rotorL.value, els.rotorM.value, els.rotorR.value],
-      reflector: els.reflector.value,
-      ringSettings:
-        (els.ringL.value || 'A') +
-        (els.ringM.value || 'A') +
-        (els.ringR.value || 'A'),
-      positions:
-        (els.posL.value || 'A') +
-        (els.posM.value || 'A') +
-        (els.posR.value || 'A'),
-      plugboard: E.parsePlugboard(els.plugboard.value)
+      encode: (text, key) => {
+        const alpha = makeAlpha(key);
+        return text.split('').map(ch => {
+          const u = ch.toUpperCase(); const idx = A.indexOf(u);
+          if (idx < 0) return ch;
+          const out = alpha[idx];
+          return ch === u ? out : out.toLowerCase();
+        }).join('');
+      },
+      decode: (text, key) => {
+        const alpha = makeAlpha(key);
+        return text.split('').map(ch => {
+          const u = ch.toUpperCase(); const idx = alpha.indexOf(u);
+          if (idx < 0) return ch;
+          const out = A[idx];
+          return ch === u ? out : out.toLowerCase();
+        }).join('');
+      }
     };
-  }
+  })();
 
-  function setRotorWindows(positions) {
-    if (els.rotorWindowL) els.rotorWindowL.textContent = positions[0];
-    if (els.rotorWindowM) els.rotorWindowM.textContent = positions[1];
-    if (els.rotorWindowR) els.rotorWindowR.textContent = positions[2];
-  }
-
-  function announce(msg) {
-    if (els.a11yLog) els.a11yLog.textContent = msg;
-  }
-
-  function runEncrypt() {
-    let cfg;
-    try {
-      cfg = readConfig();
-    } catch (e) {
-      els.ciphertext.textContent = 'Configuration error: ' + e.message;
-      return;
-    }
-    const machine = E.createEnigma(cfg);
-    const text = (els.plaintext.value || '').toUpperCase().replace(/[^A-Z]/g, '');
-    if (!text) {
-      els.ciphertext.innerHTML = '<span class="output-empty">Type a message above to encrypt…</span>';
-      setRotorWindows(cfg.positions);
-      return;
-    }
-    const result = machine.encryptWithTrace(text);
-
-    // Format ciphertext in 5-letter groups (Wehrmacht convention).
-    const grouped = result.ciphertext.replace(/(.{5})/g, '$1 ').trim();
-    els.ciphertext.textContent = grouped;
-    announce(
-      'Encrypted ' + text.length + ' letters. Rotor positions advanced from ' +
-      cfg.positions + ' to ' +
-      result.steps[result.steps.length - 1].positions.join('') + '. ' +
-      'Output: ' + grouped + '.'
-    );
-
-    // Window shows the position AFTER the last keystroke.
-    const finalPositions = result.steps[result.steps.length - 1].positions
-      .map(i => String.fromCharCode(65 + i)).join('');
-    setRotorWindows(finalPositions);
-
-    // Optional electrical-path visualisation for the last letter.
-    if (els.pathToggle && els.pathToggle.checked && els.pathSvg) {
-      drawPath(result.steps[result.steps.length - 1]);
-    } else if (els.pathSvg) {
-      els.pathSvg.innerHTML = '';
-    }
-  }
-
-  function resetMachine() {
-    els.rotorL.value = 'I'; els.rotorM.value = 'II'; els.rotorR.value = 'III';
-    els.reflector.value = 'B';
-    els.ringL.value = 'A'; els.ringM.value = 'A'; els.ringR.value = 'A';
-    els.posL.value  = 'A'; els.posM.value  = 'A'; els.posR.value  = 'A';
-    els.plugboard.value = '';
-    els.plaintext.value = '';
-    els.ciphertext.innerHTML = '<span class="output-empty">Output will appear here…</span>';
-    setRotorWindows(['A','A','A']);
-    if (els.pathSvg) els.pathSvg.innerHTML = '';
-    announce('Machine reset to default Enigma I configuration: rotors I, II, III; reflector B; rings AAA; positions AAA; no plugboard.');
-  }
-
-  // SVG electrical-path drawing for the last encrypted letter.
-  // Renders A-Z columns with the contact path traced in gold.
-  function drawPath(step) {
-    if (!step) return;
-    const svg = els.pathSvg;
-    const W = 600, H = 220;
-    const colX = stage => 30 + stage * 80;   // 7 columns
-    const rowY = idx => 14 + idx * 7.5;      // 26 rows
-
-    // 7 stages, in order: input letter, plug-in, rotor R fwd, rotor M fwd,
-    // rotor L fwd, reflector, then back through L, M, R, and plug-out.
-    // To keep the diagram readable, we collapse to one column per stage
-    // and trace the contact at each column.
-    const stages = [
-      { label: 'Key',     value: step.trace.find(s => s.stage === 'key').value },
-      { label: 'Plug',    value: step.trace.find(s => s.stage === 'plug-in').value },
-      { label: 'R',       value: step.trace.filter(s => s.stage === 'rotor-fwd' && s.rotor === 2).pop().value },
-      { label: 'M',       value: step.trace.filter(s => s.stage === 'rotor-fwd' && s.rotor === 1).pop().value },
-      { label: 'L',       value: step.trace.filter(s => s.stage === 'rotor-fwd' && s.rotor === 0).pop().value },
-      { label: 'UKW',     value: step.trace.find(s => s.stage === 'reflector').value },
-      { label: 'L\u2032', value: step.trace.filter(s => s.stage === 'rotor-rev' && s.rotor === 0).pop().value },
-      { label: 'M\u2032', value: step.trace.filter(s => s.stage === 'rotor-rev' && s.rotor === 1).pop().value },
-      { label: 'R\u2032', value: step.trace.filter(s => s.stage === 'rotor-rev' && s.rotor === 2).pop().value },
-      { label: 'Plug',    value: step.trace.find(s => s.stage === 'plug-out').value }
-    ];
-
-    const totalW = 30 + stages.length * 60 + 20;
-    let parts = [];
-    parts.push(`<svg viewBox="0 0 ${totalW} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Electrical path through Enigma for the letter ${step.input}">`);
-    parts.push('<style>' +
-      '.eg-col-bg{fill:#1c1c22;stroke:#2e2e3a;stroke-width:.5}' +
-      '.eg-col-lbl{font-family:Cinzel,serif;font-size:8px;fill:#C3A96F;text-anchor:middle;letter-spacing:.08em}' +
-      '.eg-row-lbl{font-family:JetBrains Mono,monospace;font-size:5px;fill:#5c5c66;text-anchor:middle;dominant-baseline:central}' +
-      '.eg-dot{fill:#5c4b26}' +
-      '.eg-dot-on{fill:#F1DDA2}' +
-      '.eg-wire{stroke:#D4B765;stroke-width:1.6;fill:none;opacity:.85}' +
-      '</style>');
-
-    // Background columns
-    for (let s = 0; s < stages.length; s++) {
-      const x = 30 + s * 60;
-      parts.push(`<rect class="eg-col-bg" x="${x - 14}" y="8" width="28" height="${26 * 7.5 + 6}" rx="3"/>`);
-      parts.push(`<text class="eg-col-lbl" x="${x}" y="${26 * 7.5 + 24}">${stages[s].label}</text>`);
-      for (let r = 0; r < 26; r++) {
-        const cy = 14 + r * 7.5;
-        const on = (stages[s].value === r);
-        parts.push(`<circle class="${on ? 'eg-dot-on' : 'eg-dot'}" cx="${x}" cy="${cy}" r="${on ? 2.4 : 1.4}"/>`);
-        if (s === 0 || s === stages.length - 1) {
-          parts.push(`<text class="eg-row-lbl" x="${x + (s === 0 ? -10 : 10)}" y="${cy}">${String.fromCharCode(65 + r)}</text>`);
+  /* ─── 3. Polybius Square ─── */
+  const polybius = (() => {
+    const grid = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
+    return {
+      encode: t => clean(t).replace(/J/g, 'I').split('').map(ch => {
+        const i = grid.indexOf(ch); return (Math.floor(i / 5) + 1) + '' + ((i % 5) + 1);
+      }).join(' '),
+      decode: t => {
+        const nums = t.replace(/[^1-5]/g, ''); let r = '';
+        for (let i = 0; i < nums.length; i += 2) {
+          const row = parseInt(nums[i]) - 1, col = parseInt(nums[i + 1]) - 1;
+          if (row >= 0 && row < 5 && col >= 0 && col < 5) r += grid[row * 5 + col];
         }
+        return r;
       }
-    }
-    // Wires connecting consecutive stages
-    for (let s = 0; s < stages.length - 1; s++) {
-      const x1 = 30 + s * 60, y1 = 14 + stages[s].value * 7.5;
-      const x2 = 30 + (s + 1) * 60, y2 = 14 + stages[s + 1].value * 7.5;
-      const cx1 = x1 + 30, cx2 = x2 - 30;
-      parts.push(`<path class="eg-wire" d="M${x1},${y1} C${cx1},${y1} ${cx2},${y2} ${x2},${y2}"/>`);
-    }
-    // Output letter callout
-    const finalLetter = String.fromCharCode(65 + stages[stages.length - 1].value);
-    parts.push(`<text x="${30 + (stages.length - 1) * 60}" y="6" font-family="Cinzel,serif" font-size="10" fill="#F1DDA2" text-anchor="middle">→ ${finalLetter}</text>`);
-    parts.push(`<text x="30" y="6" font-family="Cinzel,serif" font-size="10" fill="#F1DDA2" text-anchor="middle">${step.input} →</text>`);
-    parts.push('</svg>');
-    svg.innerHTML = parts.join('');
-  }
-
-  // Wire up live updates
-  ['change','input'].forEach(evt => {
-    [els.rotorL, els.rotorM, els.rotorR, els.reflector,
-     els.ringL, els.ringM, els.ringR,
-     els.posL, els.posM, els.posR,
-     els.plugboard, els.plaintext]
-      .filter(Boolean)
-      .forEach(el => el.addEventListener(evt, runEncrypt));
-  });
-  if (els.pathToggle) els.pathToggle.addEventListener('change', runEncrypt);
-  if (els.encryptBtn) els.encryptBtn.addEventListener('click', runEncrypt);
-  if (els.resetBtn)   els.resetBtn.addEventListener('click', resetMachine);
-
-  // Initial render
-  setRotorWindows(['A','A','A']);
-  runEncrypt();
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // PART 2: Self-encryption crib check
-  // ─────────────────────────────────────────────────────────────────────────
-
-  const cribEls = {
-    cipher: $('eg-crib-cipher'),
-    crib:   $('eg-crib-text'),
-    runBtn: $('eg-crib-check'),
-    output: $('eg-crib-output')
-  };
-
-  if (cribEls.runBtn) {
-    cribEls.runBtn.addEventListener('click', () => {
-      const ct = (cribEls.cipher.value || '').toUpperCase().replace(/[^A-Z]/g, '');
-      const cr = (cribEls.crib.value || '').toUpperCase().replace(/[^A-Z]/g, '');
-      if (!ct || !cr) {
-        cribEls.output.innerHTML = '<span class="output-empty">Enter both ciphertext and crib.</span>';
-        return;
-      }
-      const r = E.findCribPositions(ct, cr);
-      if (r.valid.length === 0 && r.rejected.length === 0) {
-        cribEls.output.innerHTML = '<span class="output-empty">Crib is longer than the ciphertext.</span>';
-        return;
-      }
-
-      // Build a position-by-position visual grid.
-      let html = '<div class="eg-crib-grid" role="table" aria-label="Crib placement analysis">';
-      // Header: ciphertext letters
-      html += '<div class="eg-crib-row eg-crib-row--header" role="row">';
-      html += '<div class="eg-crib-cell-lbl">Position</div>';
-      for (let i = 0; i < ct.length; i++) {
-        html += `<div class="eg-crib-cell eg-crib-cell--ct">${ct[i]}</div>`;
-      }
-      html += '</div>';
-
-      // One row per candidate placement
-      const rejectedMap = new Map();
-      r.rejected.forEach(rj => rejectedMap.set(rj.position, rj));
-      for (let pos = 0; pos <= ct.length - cr.length; pos++) {
-        const isValid = r.valid.includes(pos);
-        const rj = rejectedMap.get(pos);
-        html += `<div class="eg-crib-row ${isValid ? 'eg-crib-row--ok' : 'eg-crib-row--bad'}" role="row">`;
-        html += `<div class="eg-crib-cell-lbl">@${pos.toString().padStart(2, '0')} ${isValid ? '✓' : '✗'}</div>`;
-        for (let i = 0; i < ct.length; i++) {
-          if (i < pos || i >= pos + cr.length) {
-            html += '<div class="eg-crib-cell eg-crib-cell--blank"></div>';
-          } else {
-            const ci = i - pos;
-            const conflict = rj && rj.conflictAt === ci;
-            html += `<div class="eg-crib-cell ${conflict ? 'eg-crib-cell--conflict' : (isValid ? 'eg-crib-cell--ok' : 'eg-crib-cell--bad')}">${cr[ci]}</div>`;
-          }
-        }
-        html += '</div>';
-      }
-      html += '</div>';
-
-      const total = ct.length - cr.length + 1;
-      html += `<p class="eg-crib-summary"><strong>${r.valid.length}</strong> of ${total} positions survive the self-encryption rule. ` +
-        `<strong>${r.rejected.length}</strong> rejected because Enigma cannot encrypt a letter to itself.</p>`;
-
-      cribEls.output.innerHTML = html;
-      announce(`${r.valid.length} of ${total} positions survive. ${r.rejected.length} rejected.`);
-    });
-  }
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // PART 3: Brute-force rotor + position search
-  // Runs in the main thread but chunked via setTimeout to keep UI responsive.
-  // Searches: 6 rotor orderings × 26³ = 105 456 settings, with no plugboard,
-  // ring AAA. Larger search (60 orderings) available with checkbox.
-  // ─────────────────────────────────────────────────────────────────────────
-
-  const bfEls = {
-    cipher: $('eg-bf-cipher'),
-    crib:   $('eg-bf-crib'),
-    offset: $('eg-bf-offset'),
-    fullSearch: $('eg-bf-full'),
-    runBtn: $('eg-bf-run'),
-    cancelBtn: $('eg-bf-cancel'),
-    progress: $('eg-bf-progress'),
-    progressBar: $('eg-bf-progress-bar'),
-    candidates: $('eg-bf-candidates')
-  };
-
-  let bfCancelled = false;
-
-  if (bfEls.runBtn) {
-    bfEls.runBtn.addEventListener('click', () => {
-      const ct = (bfEls.cipher.value || '').toUpperCase().replace(/[^A-Z]/g, '');
-      const cr = (bfEls.crib.value || '').toUpperCase().replace(/[^A-Z]/g, '');
-      const offset = Math.max(0, parseInt(bfEls.offset.value, 10) || 0);
-      if (!ct || !cr) {
-        bfEls.candidates.innerHTML = '<span class="output-empty">Enter ciphertext and crib.</span>';
-        return;
-      }
-      if (offset + cr.length > ct.length) {
-        bfEls.candidates.innerHTML = '<span class="output-empty">Crib offset + length exceeds ciphertext length.</span>';
-        return;
-      }
-      // Self-encryption sanity check first.
-      for (let i = 0; i < cr.length; i++) {
-        if (ct[offset + i] === cr[i]) {
-          bfEls.candidates.innerHTML = `<p class="eg-bf-error">Crib placement contains a self-encryption at position ${offset + i} (letter ${cr[i]}). Enigma cannot do this — adjust the crib offset.</p>`;
-          return;
-        }
-      }
-
-      const available = bfEls.fullSearch && bfEls.fullSearch.checked
-        ? ['I','II','III','IV','V']
-        : ['I','II','III'];
-
-      bfCancelled = false;
-      bfEls.cancelBtn.disabled = false;
-      bfEls.runBtn.disabled = true;
-      bfEls.candidates.innerHTML = '';
-      bfEls.progress.hidden = false;
-      bfEls.progressBar.style.width = '0%';
-
-      // Build orderings
-      const orders = [];
-      for (let a = 0; a < available.length; a++)
-        for (let b = 0; b < available.length; b++)
-          if (b !== a)
-            for (let c = 0; c < available.length; c++)
-              if (c !== a && c !== b)
-                orders.push([available[a], available[b], available[c]]);
-
-      const slice = ct.substr(offset, cr.length);
-      const total = orders.length * 26 * 26 * 26;
-      let tested = 0, found = 0;
-      let oi = 0, p0 = 0, p1 = 0, p2 = 0;
-      const startedAt = Date.now();
-
-      // Process ~8000 machines per chunk, then yield to the event loop.
-      function chunk() {
-        if (bfCancelled) {
-          bfEls.progress.querySelector('.eg-bf-status').textContent =
-            `Cancelled at ${tested.toLocaleString()} / ${total.toLocaleString()}.`;
-          bfEls.runBtn.disabled = false;
-          bfEls.cancelBtn.disabled = true;
-          return;
-        }
-        const CHUNK = 4000;
-        for (let n = 0; n < CHUNK && oi < orders.length; n++) {
-          const order = orders[oi];
-          const positions = String.fromCharCode(65 + p0) +
-                            String.fromCharCode(65 + p1) +
-                            String.fromCharCode(65 + p2);
-          const m = E.createEnigma({
-            rotors: order, reflector: 'B',
-            ringSettings: 'AAA', positions, plugboard: []
-          });
-          if (offset > 0) m.encrypt('A'.repeat(offset));
-          const got = m.encrypt(cr);
-          tested++;
-          if (got === slice) {
-            found++;
-            const cand = document.createElement('div');
-            cand.className = 'eg-bf-candidate';
-            cand.innerHTML =
-              `<span class="eg-bf-rotors">${order.join(' · ')}</span>` +
-              `<span class="eg-bf-pos">positions ${positions}</span>` +
-              `<button type="button" class="eg-bf-load" data-rotors="${order.join(',')}" data-pos="${positions}">Load into machine</button>`;
-            bfEls.candidates.appendChild(cand);
-          }
-          // Advance position counters
-          p2++;
-          if (p2 === 26) { p2 = 0; p1++;
-            if (p1 === 26) { p1 = 0; p0++;
-              if (p0 === 26) { p0 = 0; oi++; }
-            }
-          }
-        }
-        const pct = (tested / total * 100);
-        bfEls.progressBar.style.width = pct.toFixed(1) + '%';
-        const elapsed = (Date.now() - startedAt) / 1000;
-        const rate = tested / elapsed;
-        bfEls.progress.querySelector('.eg-bf-status').textContent =
-          `${tested.toLocaleString()} / ${total.toLocaleString()} settings tested · ${found} candidate${found === 1 ? '' : 's'} · ${rate.toFixed(0)} settings/sec`;
-
-        if (oi < orders.length) {
-          setTimeout(chunk, 0);
-        } else {
-          bfEls.progress.querySelector('.eg-bf-status').textContent =
-            `Search complete. Tested ${tested.toLocaleString()} settings. Found ${found} candidate${found === 1 ? '' : 's'}.`;
-          bfEls.runBtn.disabled = false;
-          bfEls.cancelBtn.disabled = true;
-          announce(`Brute-force search complete. ${found} candidate settings found.`);
-        }
-      }
-      chunk();
-    });
-
-    bfEls.cancelBtn.addEventListener('click', () => { bfCancelled = true; });
-
-    // Click-to-load candidate settings into the machine
-    bfEls.candidates.addEventListener('click', e => {
-      const btn = e.target.closest('.eg-bf-load');
-      if (!btn) return;
-      const rotors = btn.dataset.rotors.split(',');
-      const positions = btn.dataset.pos;
-      els.rotorL.value = rotors[0];
-      els.rotorM.value = rotors[1];
-      els.rotorR.value = rotors[2];
-      els.ringL.value = 'A'; els.ringM.value = 'A'; els.ringR.value = 'A';
-      els.posL.value = positions[0];
-      els.posM.value = positions[1];
-      els.posR.value = positions[2];
-      els.plugboard.value = '';
-      els.plaintext.value = bfEls.cipher.value;
-      runEncrypt();
-      // Scroll to machine
-      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      announce(`Loaded candidate ${rotors.join(',')} ${positions} into machine.`);
-    });
-  }
-})();
-```
-
-
-## JavaScript — js/ciphers/enigma.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/ciphers/enigma.js`
-- Served SHA-256: `84fc2459d285d784945fb07af237691da44b5dd8b652f36c235ad400f562a947`
-- Readable-source SHA-256: `84fc2459d285d784945fb07af237691da44b5dd8b652f36c235ad400f562a947`
-
-
-```javascript
-/**
- * THE CIPHER MUSEUM — Enigma Machine Engine
- * Exhibit 27 · WWII · Wehrmacht Enigma I (3-rotor)
- *
- * Implements the German Wehrmacht / Luftwaffe Enigma I:
- *   • Rotors I, II, III, IV, V (Wehrmacht set)
- *   • Reflectors B and C (UKW-B, UKW-C)
- *   • Configurable Ringstellung (ring settings)
- *   • Configurable Grundstellung (initial rotor positions)
- *   • Configurable Steckerbrett (plugboard, up to 10 pairs)
- *   • Correct stepping including the middle-rotor double-step anomaly
- *
- * Wirings cited from:
- *   - Tony Sale, "The Bletchley Park 1944 Cryptographic Dictionary"
- *   - Crypto Museum (cryptomuseum.com/crypto/enigma/wiring.htm)
- *   - Wikipedia: Enigma rotor details
- *
- * Verified against canonical test vector:
- *   Rotors I-II-III, rings AAA, positions AAA, no plugboard:
- *     "AAAAA" → "BDZGO"
- */
-'use strict';
-
-const EnigmaEngine = (() => {
-
-  const A = 65;
-  const ord = c => c.charCodeAt(0) - A;
-  const chr = i => String.fromCharCode(((i % 26) + 26) % 26 + A);
-
-  // ── Rotor wirings (right-to-left when reading "A → wiring[0]") ──────────
-  // Each string is the substitution: contact i (A=0) → wiring[i].
-  // Notch letter = the position shown in the window at which the NEXT
-  // keypress causes the rotor to its left to step.
-  const ROTORS = {
-    I:   { wiring: 'EKMFLGDQVZNTOWYHXUSPAIBRCJ', notch: 'Q' },
-    II:  { wiring: 'AJDKSIRUXBLHWTMCQGZNPYFVOE', notch: 'E' },
-    III: { wiring: 'BDFHJLCPRTXVZNYEIWGAKMUSQO', notch: 'V' },
-    IV:  { wiring: 'ESOVPZJAYQUIRHXLNFTGKDCMWB', notch: 'J' },
-    V:   { wiring: 'VZBRGITYUPSDNHLXAWMJQOFECK', notch: 'Z' }
-  };
-
-  const REFLECTORS = {
-    B: 'YRUHQSLDPXNGOKMIEBFZCWVJAT',
-    C: 'FVPJIAOYEDRZXWGCTKUQSBNMHL'
-  };
-
-  // Pre-compute forward / inverse wiring arrays for each rotor.
-  const WIRING_CACHE = {};
-  for (const name of Object.keys(ROTORS)) {
-    const w = ROTORS[name].wiring;
-    const fwd = new Int8Array(26);
-    const inv = new Int8Array(26);
-    for (let i = 0; i < 26; i++) {
-      const o = w.charCodeAt(i) - A;
-      fwd[i] = o;
-      inv[o] = i;
-    }
-    WIRING_CACHE[name] = {
-      fwd, inv,
-      notch: ord(ROTORS[name].notch)
     };
-  }
+  })();
 
-  const REFL_CACHE = {};
-  for (const name of Object.keys(REFLECTORS)) {
-    const r = REFLECTORS[name];
-    const arr = new Int8Array(26);
-    for (let i = 0; i < 26; i++) arr[i] = r.charCodeAt(i) - A;
-    REFL_CACHE[name] = arr;
-  }
-
-  // ── Plugboard ────────────────────────────────────────────────────────────
-  // pairs: array of two-letter strings, e.g. [['A','B'],['C','D']]
-  // returns Int8Array(26) where map[i] = swapped index (i if no swap).
-  function buildPlugboard(pairs) {
-    const map = new Int8Array(26);
-    for (let i = 0; i < 26; i++) map[i] = i;
-    if (!pairs) return map;
-    const seen = new Set();
-    for (const pair of pairs) {
-      if (!pair || pair.length < 2) continue;
-      const a = (typeof pair === 'string' ? pair[0] : pair[0]).toUpperCase();
-      const b = (typeof pair === 'string' ? pair[1] : pair[1]).toUpperCase();
-      if (!/[A-Z]/.test(a) || !/[A-Z]/.test(b) || a === b) continue;
-      if (seen.has(a) || seen.has(b)) continue;   // Each letter at most once
-      seen.add(a); seen.add(b);
-      map[ord(a)] = ord(b);
-      map[ord(b)] = ord(a);
-    }
-    return map;
-  }
-
-  // Parse plugboard from a free-text string like "AB CD EF" or "AB,CD,EF"
-  function parsePlugboard(str) {
-    if (!str) return [];
-    const tokens = str.toUpperCase().match(/[A-Z]{2}/g) || [];
-    return tokens.map(t => [t[0], t[1]]);
-  }
-
-  // ── Core encryption of one letter, with stepping ─────────────────────────
-  function makeMachine(config) {
-    const rotorNames = (config.rotors || ['I','II','III']).slice(0, 3);
-    if (rotorNames.length !== 3) throw new Error('Enigma I requires exactly 3 rotors');
-    for (const n of rotorNames) {
-      if (!WIRING_CACHE[n]) throw new Error('Unknown rotor: ' + n);
-    }
-    const reflName = config.reflector || 'B';
-    if (!REFL_CACHE[reflName]) throw new Error('Unknown reflector: ' + reflName);
-
-    const ringStr = (config.ringSettings || 'AAA').toUpperCase().padEnd(3, 'A').slice(0, 3);
-    const posStr  = (config.positions    || 'AAA').toUpperCase().padEnd(3, 'A').slice(0, 3);
-
-    // Index 0 = LEFT rotor, 1 = MIDDLE, 2 = RIGHT
-    const rings     = [ord(ringStr[0]), ord(ringStr[1]), ord(ringStr[2])];
-    const positions = [ord(posStr[0]),  ord(posStr[1]),  ord(posStr[2])];
-    const wirings   = rotorNames.map(n => WIRING_CACHE[n]);
-    const reflector = REFL_CACHE[reflName];
-
-    const plugboard = buildPlugboard(config.plugboard);
-
-    function step() {
-      // Double-stepping anomaly: if middle rotor is at its notch, it steps
-      // (carrying the left rotor with it) on the next keypress — even if
-      // the right rotor isn't at its notch. The right rotor always steps.
-      const middleAtNotch = positions[1] === wirings[1].notch;
-      const rightAtNotch  = positions[2] === wirings[2].notch;
-      if (middleAtNotch) {
-        positions[0] = (positions[0] + 1) % 26;
-        positions[1] = (positions[1] + 1) % 26;
-      } else if (rightAtNotch) {
-        positions[1] = (positions[1] + 1) % 26;
+  /* ─── 4. Homophonic Substitution ─── */
+  const homophonic = (() => {
+    const freq = { E: 13, T: 9, A: 8, O: 8, I: 7, N: 7, S: 6, H: 6, R: 6, D: 4, L: 4, C: 3, U: 3, M: 3, W: 2, F: 2, G: 2, Y: 2, P: 2, B: 1, V: 1, K: 1, J: 1, X: 1, Q: 1, Z: 1 };
+    function buildTable(seed) {
+      const table = {}; let n = 10;
+      const rng = (s => () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s; })(seed || 42);
+      for (const ch of A) {
+        const count = freq[ch] || 1;
+        table[ch] = [];
+        for (let i = 0; i < count; i++) table[ch].push(String(n++).padStart(2, '0'));
       }
-      positions[2] = (positions[2] + 1) % 26;
+      return table;
     }
-
-    // Encrypt one A-Z letter (already uppercase index). Returns index.
-    // If `trace` is supplied, push intermediate stages into it.
-    function encryptIndex(c, trace) {
-      step();
-      if (trace) trace.push({ stage: 'key', value: c });
-
-      // Plugboard in
-      c = plugboard[c];
-      if (trace) trace.push({ stage: 'plug-in', value: c });
-
-      // Rotors right → left (forward pass)
-      for (let i = 2; i >= 0; i--) {
-        const offset = positions[i] - rings[i];
-        const inIdx  = (c + offset + 26) % 26;
-        const outIdx = wirings[i].fwd[inIdx];
-        c = (outIdx - offset + 26) % 26;
-        if (trace) trace.push({ stage: 'rotor-fwd', rotor: i, value: c });
+    return {
+      encode: (text, key) => {
+        const seed = clean(key || 'KEY').split('').reduce((s, c) => s + c.charCodeAt(0), 0);
+        const table = buildTable(seed);
+        const rng = (s => () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s; })(seed);
+        return clean(text).split('').map(ch => {
+          const opts = table[ch];
+          return opts ? opts[Math.abs(rng()) % opts.length] : '??';
+        }).join(' ');
+      },
+      decode: (text, key) => {
+        const seed = clean(key || 'KEY').split('').reduce((s, c) => s + c.charCodeAt(0), 0);
+        const table = buildTable(seed);
+        const rev = {};
+        for (const [ch, codes] of Object.entries(table)) for (const code of codes) rev[code] = ch;
+        return (String(text).match(/\d+/g) || []).map(code => rev[code] || '?').join('');
       }
+    };
+  })();
 
-      // Reflector
-      c = reflector[c];
-      if (trace) trace.push({ stage: 'reflector', value: c });
-
-      // Rotors left → right (inverse pass)
-      for (let i = 0; i < 3; i++) {
-        const offset = positions[i] - rings[i];
-        const inIdx  = (c + offset + 26) % 26;
-        const outIdx = wirings[i].inv[inIdx];
-        c = (outIdx - offset + 26) % 26;
-        if (trace) trace.push({ stage: 'rotor-rev', rotor: i, value: c });
-      }
-
-      // Plugboard out
-      c = plugboard[c];
-      if (trace) trace.push({ stage: 'plug-out', value: c });
-
-      return c;
+  /* ─── 5. Playfair ─── */
+  const playfair = (() => {
+    function makeGrid(key) {
+      const k = clean(key || 'MONARCHY').replace(/J/g, 'I');
+      const seen = new Set(); let grid = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); grid += c; }
+      for (const c of A) if (c !== 'J' && !seen.has(c)) grid += c;
+      return grid;
     }
+    function pos(grid, ch) { const i = grid.indexOf(ch); return [Math.floor(i / 5), i % 5]; }
+    function pairs(text) {
+      // Filler is X, except when the letter needing a filler IS X — then use Q,
+      // since a same-letter digraph (X,X) cannot be enciphered by Playfair rules.
+      let t = escapeFillers(clean(text).replace(/J/g, 'I')), p = [], i = 0;
+      while (i < t.length) {
+        const a = t[i];
+        const b = (i + 1 < t.length && t[i + 1] !== a) ? t[++i] : (a === 'X' ? 'Q' : 'X');
+        p.push([a, b]); i++;
+      }
+      return p;
+    }
+    function process(ps, grid, enc) {
+      const d = enc ? 1 : 4;
+      return ps.map(([a, b]) => {
+        const [ra, ca] = pos(grid, a), [rb, cb] = pos(grid, b);
+        if (ra === rb) return grid[ra * 5 + (ca + d) % 5] + grid[rb * 5 + (cb + d) % 5];
+        if (ca === cb) return grid[((ra + d) % 5) * 5 + ca] + grid[((rb + d) % 5) * 5 + cb];
+        return grid[ra * 5 + cb] + grid[rb * 5 + ca];
+      }).join('');
+    }
+    return {
+      encode: (t, k) => process(pairs(t), makeGrid(k), true),
+      decode: (t, k) => {
+        // Ciphertext is already valid digraphs — split it straight. Running it
+        // through pairs() would inject filler letters INTO the ciphertext
+        // whenever it happens to contain an aligned doubled letter.
+        const c = clean(t).replace(/J/g, 'I');
+        const ps = [];
+        for (let i = 0; i + 1 < c.length; i += 2) ps.push([c[i], c[i + 1]]);
+        const raw = process(ps, makeGrid(k), false);
+        // Literal X and Q are escaped before encryption, so X is unambiguously
+        // structural here: it either separates a doubled letter or pads the end.
+        let out = '';
+        for (let i = 0; i < raw.length; i++) {
+          const ch = raw[i];
+          const filler = i % 2 === 1 && i < raw.length - 1 && raw[i - 1] === raw[i + 1] && ch === 'X';
+          if (filler) continue;
+          out += ch;
+        }
+        if (out.endsWith('X')) out = out.slice(0, -1);
+        return unescapeFillers(out);
+      }
+    };
+  })();
 
-    function encrypt(text) {
-      const t = String(text).toUpperCase();
-      let out = '';
+  /* ─── 6. Hill ─── */
+  const hill = (() => {
+    function modInv(a, m) { a = mod(a, m); for (let x = 1; x < m; x++) if ((a * x) % m === 1) return x; return -1; }
+    function matrix(keyStr) {
+      const parts = String(keyStr || '3,3,2,5').split(',');
+      if (parts.length !== 4 || parts.some(v => v.trim() === '' || !Number.isSafeInteger(Number(v)))) return null;
+      // Reduce before multiplying: products of individually safe integers need
+      // not themselves be safe integers, while residues 0..25 are exact.
+      return parts.map(v => mod(Number(v), 26));
+    }
+    return {
+      encode: (text, keyStr) => {
+        const t = escapeFillers(clean(text)); const k = matrix(keyStr);
+        if (!k) return 'Need 4 safe integers (2x2 matrix)';
+        if (modInv(mod(k[0] * k[3] - k[1] * k[2], 26), 26) < 0) return 'Matrix not invertible mod 26';
+        const padded = t.length % 2 ? t + 'X' : t; let r = '';
+        for (let i = 0; i < padded.length; i += 2) {
+          const p0 = padded.charCodeAt(i) - 65, p1 = padded.charCodeAt(i + 1) - 65;
+          r += A[mod(k[0] * p0 + k[1] * p1, 26)] + A[mod(k[2] * p0 + k[3] * p1, 26)];
+        }
+        return r;
+      },
+      decode: (text, keyStr) => {
+        const t = clean(text); const k = matrix(keyStr);
+        if (!k) return 'Need 4 safe integers (2x2 matrix)';
+        if (t.length % 2) return 'Ciphertext must contain complete two-letter blocks';
+        const det = mod(k[0] * k[3] - k[1] * k[2], 26); const di = modInv(det, 26);
+        if (di < 0) return 'Matrix not invertible mod 26';
+        const inv = [mod(k[3] * di, 26), mod(-k[1] * di, 26), mod(-k[2] * di, 26), mod(k[0] * di, 26)];
+        let r = '';
+        for (let i = 0; i + 1 < t.length; i += 2) {
+          const c0 = t.charCodeAt(i) - 65, c1 = t.charCodeAt(i + 1) - 65;
+          r += A[mod(inv[0] * c0 + inv[1] * c1, 26)] + A[mod(inv[2] * c0 + inv[3] * c1, 26)];
+        }
+        if (r.endsWith('X')) r = r.slice(0, -1);
+        return unescapeFillers(r);
+      }
+    };
+  })();
+
+  /* ─── 7. Vigenère ─── */
+  const vigenere = (() => {
+    function run(text, key, enc) {
+      const t = clean(text), k = clean(key) || 'KEY'; let r = '';
       for (let i = 0; i < t.length; i++) {
-        const code = t.charCodeAt(i);
-        if (code >= 65 && code <= 90) {
-          out += chr(encryptIndex(code - 65));
-        }
-        // Non-A-Z characters silently dropped (matches original Enigma behaviour:
-        // operators omitted spaces and punctuation).
+        const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
+        r += A[enc ? mod(p + ki, 26) : mod(p - ki, 26)];
       }
+      return r;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 8. Beaufort ─── */
+  const beaufort = (() => {
+    function run(text, key) {
+      const t = clean(text), k = clean(key) || 'KEY'; let r = '';
+      for (let i = 0; i < t.length; i++) {
+        const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
+        r += A[mod(ki - p, 26)];
+      }
+      return r;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 9. Gronsfeld ─── */
+  const gronsfeld = (() => {
+    function run(text, key, enc) {
+      const t = clean(text), k = (key || '31415').replace(/[^0-9]/g, '') || '0'; let r = '';
+      for (let i = 0; i < t.length; i++) {
+        const p = t.charCodeAt(i) - 65, ki = parseInt(k[i % k.length]);
+        r += A[enc ? mod(p + ki, 26) : mod(p - ki, 26)];
+      }
+      return r;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 10. Porta ─── */
+  const porta = (() => {
+    const tableaux = [
+      'NOPQRSTUVWXYZABCDEFGHIJKLM', 'OPQRSTUVWXYZNMABCDEFGHIJKL',
+      'PQRSTUVWXYZNOLMABCDEFGHIJK', 'QRSTUVWXYZNOPKLMABCDEFGHIJ',
+      'RSTUVWXYZNOPQJKLMABCDEFGHI', 'STUVWXYZNOPQRIJKLMABCDEFGH',
+      'TUVWXYZNOPQRSHIJKLMABCDEFG', 'UVWXYZNOPQRSTGHIJKLMABCDEF',
+      'VWXYZNOPQRSTUFGHIJKLMABCDE', 'WXYZNOPQRSTUVEFGHIJKLMABCD',
+      'XYZNOPQRSTUVWDEFGHIJKLMABC', 'YZNOPQRSTUVWXCDEFGHIJKLMAB',
+      'ZNOPQRSTUVWXYBCDEFGHIJKLMA'
+    ];
+    function run(text, key) {
+      const t = clean(text), k = clean(key || 'KEY') || 'KEY'; let r = '';
+      for (let i = 0; i < t.length; i++) {
+        const ki = Math.floor((k.charCodeAt(i % k.length) - 65) / 2);
+        const row = tableaux[ki % 13];
+        const p = t.charCodeAt(i) - 65;
+        r += row[p];
+      }
+      return r;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 11. Running Key ─── */
+  const runningKey = (() => {
+    const defaultKey = 'WE HOLD THESE TRUTHS TO BE SELF EVIDENT THAT ALL MEN ARE CREATED EQUAL';
+    function run(text, key, enc) {
+      const t = clean(text), k = clean(key) || clean(defaultKey); let r = '';
+      for (let i = 0; i < t.length; i++) {
+        const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
+        r += A[enc ? mod(p + ki, 26) : mod(p - ki, 26)];
+      }
+      return r;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 12. Rail Fence ─── */
+  const railFence = (() => ({
+    encode: (text, key) => {
+      const t = clean(text), rails = boundedInt(key, 3, 2, 10000);
+      const fence = Array.from({ length: rails }, () => []);
+      let rail = 0, dir = 1;
+      for (const ch of t) {
+        fence[rail].push(ch);
+        if (rail === 0) dir = 1; else if (rail === rails - 1) dir = -1;
+        rail += dir;
+      }
+      return fence.flat().join('');
+    },
+    decode: (text, key) => {
+      const t = clean(text), n = t.length, rails = boundedInt(key, 3, 2, 10000);
+      const pattern = Array(n); let rail = 0, dir = 1;
+      for (let i = 0; i < n; i++) {
+        pattern[i] = rail;
+        if (rail === 0) dir = 1; else if (rail === rails - 1) dir = -1;
+        rail += dir;
+      }
+      const result = Array(n); let pos = 0;
+      for (let r = 0; r < rails; r++)
+        for (let i = 0; i < n; i++) if (pattern[i] === r) result[i] = t[pos++];
+      return result.join('');
+    }
+  }))();
+
+  /* ─── 13. Columnar Transposition ─── */
+  const columnar = (() => {
+    function order(key) {
+      return clean(key || 'ZEBRA').split('').map((ch, i) => ({ ch, i }))
+        .sort((a, b) => a.ch === b.ch ? a.i - b.i : a.ch.localeCompare(b.ch)).map(x => x.i);
+    }
+    return {
+      encode: (text, key) => {
+        // Classical columnar transposition: ragged columns, NO pad characters.
+        // This is what makes round-trips lossless and lets double-transposition compose cleanly.
+        const t = clean(text), k = clean(key || 'ZEBRA'), cols = k.length;
+        if (!cols || !t.length) return t;
+        const cells = Array.from({ length: cols }, () => '');
+        for (let i = 0; i < t.length; i++) cells[i % cols] += t[i];
+        const o = order(key);
+        return o.map(c => cells[c]).join('');
+      },
+      decode: (text, key) => {
+        const t = clean(text), k = clean(key || 'ZEBRA'), cols = k.length;
+        if (!cols || !t.length) return t;
+        const rows = Math.ceil(t.length / cols), o = order(key);
+        // Columns whose ORIGINAL index < (t.length % cols) are full (rows chars);
+        // the rest are short by 1. When t.length divides cols, all are full.
+        const rem = t.length % cols;
+        const colLens = Array.from({ length: cols }, (_, c) => (rem === 0 || c < rem) ? rows : rows - 1);
+        const cells = {}; let pos = 0;
+        for (const c of o) { cells[c] = t.substr(pos, colLens[c]); pos += colLens[c]; }
+        let r = '';
+        for (let row = 0; row < rows; row++)
+          for (let c = 0; c < cols; c++)
+            if (row < cells[c].length) r += cells[c][row];
+        return r;
+      }
+    };
+  })();
+
+  /* ─── 14. Double Transposition ─── */
+  const doubleTransposition = (() => ({
+    encode: (text, key) => {
+      const keys = (key || 'FIRST,SECOND').split(',').map(k => k.trim());
+      let t = columnar.encode(text, keys[0] || 'FIRST');
+      return columnar.encode(t, keys[1] || 'SECOND');
+    },
+    decode: (text, key) => {
+      const keys = (key || 'FIRST,SECOND').split(',').map(k => k.trim());
+      let t = columnar.decode(text, keys[1] || 'SECOND');
+      return columnar.decode(t, keys[0] || 'FIRST');
+    }
+  }))();
+
+  /* ─── 15. Bacon's Cipher ─── */
+  const bacon = (() => {
+    const alpha = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
+    return {
+      encode: t => clean(t).replace(/J/g, 'I').split('').map(ch => {
+        const i = alpha.indexOf(ch);
+        return i >= 0 ? i.toString(2).padStart(5, '0').replace(/0/g, 'A').replace(/1/g, 'B') : '?????';
+      }).join(' '),
+      decode: t => {
+        const ab = t.replace(/[^ABab]/g, '').toUpperCase(); let r = '';
+        for (let i = 0; i + 4 < ab.length; i += 5) {
+          const v = parseInt(ab.substr(i, 5).replace(/A/g, '0').replace(/B/g, '1'), 2);
+          if (v >= 0 && v < 25) r += alpha[v];
+        }
+        return r;
+      }
+    };
+  })();
+
+  /* ─── 16. Tap Code ─── */
+  const tapCode = (() => {
+    const grid = 'ABCDEFGHIJLMNOPQRSTUVWXYZ';
+    return {
+      encode: t => clean(t).replace(/K/g, 'C').split('').map(ch => {
+        const i = grid.indexOf(ch); if (i < 0) return '';
+        return '.'.repeat(Math.floor(i / 5) + 1) + ' ' + '.'.repeat((i % 5) + 1);
+      }).join('   '),
+      decode: t => {
+        return t.trim().split(/\s{2,}/).map(g => {
+          const parts = g.trim().split(/\s+/);
+          if (parts.length < 2) return '';
+          const r = (parts[0].match(/\./g) || []).length - 1;
+          const c = (parts[1].match(/\./g) || []).length - 1;
+          return (r >= 0 && r < 5 && c >= 0 && c < 5) ? grid[r * 5 + c] : '';
+        }).join('');
+      }
+    };
+  })();
+
+  /* ─── 17. Pigpen ─── */
+  const pigpen = (() => {
+    const symbols = {
+      A: '⌐', B: '┴', C: '¬', D: '├', E: '┼', F: '┤',
+      G: '┌', H: '┬', I: '┐', J: '⌐•', K: '┴•', L: '¬•',
+      M: '├•', N: '┼•', O: '┤•', P: '┌•', Q: '┬•', R: '┐•',
+      S: '╲', T: '╳', U: '╱', V: '╲•', W: '╳•', X: '╱•',
+      Y: '▽', Z: '△'
+    };
+    const rev = {};
+    for (const [k, v] of Object.entries(symbols)) rev[v] = k;
+    return {
+      encode: t => clean(t).split('').map(ch => symbols[ch] || ch).join(' '),
+      decode: t => t.split(/\s+/).map(s => rev[s] || s).join('')
+    };
+  })();
+
+  /* ─── 18. Bifid ─── */
+  const bifid = (() => {
+    function makeGrid(key) {
+      const k = clean(key || 'SECRET').replace(/J/g, 'I');
+      const seen = new Set(); let grid = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); grid += c; }
+      for (const c of A) if (c !== 'J' && !seen.has(c)) grid += c;
+      return grid;
+    }
+    function pos(grid, ch) { const i = grid.indexOf(ch === 'J' ? 'I' : ch); return [Math.floor(i / 5), i % 5]; }
+    return {
+      encode: (text, key) => {
+        const t = clean(text).replace(/J/g, 'I'), grid = makeGrid(key);
+        const rows = [], cols = [];
+        for (const ch of t) { const [r, c] = pos(grid, ch); rows.push(r); cols.push(c); }
+        const combined = [...rows, ...cols]; let result = '';
+        for (let i = 0; i < combined.length; i += 2) result += grid[combined[i] * 5 + combined[i + 1]];
+        return result;
+      },
+      decode: (text, key) => {
+        const t = clean(text).replace(/J/g, 'I'), grid = makeGrid(key);
+        const coords = [];
+        for (const ch of t) { const [r, c] = pos(grid, ch); coords.push(r, c); }
+        const half = coords.length / 2;
+        const rows = coords.slice(0, half), cols = coords.slice(half);
+        let result = '';
+        for (let i = 0; i < half; i++) result += grid[rows[i] * 5 + cols[i]];
+        return result;
+      }
+    };
+  })();
+
+  /* ─── 19. Trifid ─── */
+  const trifid = (() => {
+    const alpha27 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ+';
+    function parsePeriod(period) {
+      if (period === undefined || period === null || period === '') return 5;
+      const value = Number(period);
+      if (!Number.isSafeInteger(value) || value < 1) throw new Error('Trifid period must be a positive safe integer.');
+      return value;
+    }
+    function makeGrid(key) {
+      const k = clean(key || 'FELIX') + '+'; const seen = new Set(); let grid = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); grid += c; }
+      for (const c of alpha27) if (!seen.has(c)) grid += c;
+      return grid;
+    }
+    function pos(grid, ch) {
+      const i = grid.indexOf(ch === ' ' ? '+' : ch);
+      return [Math.floor(i / 9), Math.floor((i % 9) / 3), i % 3];
+    }
+    return {
+      encode: (text, key, period) => {
+        const t = clean(text).replace(/[^A-Z]/g, ''), grid = makeGrid(key);
+        const per = parsePeriod(period);
+        let result = '';
+        for (let s = 0; s < t.length; s += per) {
+          const block = t.substr(s, per);
+          const layers = [[], [], []];
+          for (const ch of block) { const [l, r, c] = pos(grid, ch); layers[0].push(l); layers[1].push(r); layers[2].push(c); }
+          const flat = [...layers[0], ...layers[1], ...layers[2]];
+          for (let i = 0; i + 2 < flat.length; i += 3) result += grid[flat[i] * 9 + flat[i + 1] * 3 + flat[i + 2]];
+        }
+        return result;
+      },
+      decode: (text, key, period) => {
+        // Trifid alphabet includes '+' so we cannot use the global clean() which strips non-letters.
+        const t = (text || '').toUpperCase().replace(/[^A-Z+]/g, ''), grid = makeGrid(key), per = parsePeriod(period);
+        let result = '';
+        for (let s = 0; s < t.length; s += per) {
+          const block = t.substr(s, per), blen = block.length;
+          const coords = [];
+          for (const ch of block) { const [l, r, c] = pos(grid, ch); coords.push(l, r, c); }
+          const third = blen;
+          const layers = [coords.slice(0, third), coords.slice(third, third * 2), coords.slice(third * 2)];
+          for (let i = 0; i < blen; i++) result += grid[layers[0][i] * 9 + layers[1][i] * 3 + layers[2][i]];
+        }
+        return result;
+      }
+    };
+  })();
+
+  /* ─── 20. ADFGX ─── */
+  const adfgx = (() => {
+    const letters = 'ADFGX';
+    function makeGrid(key) {
+      const k = clean(key || 'PRIVACY').replace(/J/g, 'I');
+      const seen = new Set(); let grid = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); grid += c; }
+      for (const c of A) if (c !== 'J' && !seen.has(c)) grid += c;
+      return grid;
+    }
+    return {
+      encode: (text, key) => {
+        const keys = (key || 'PRIVACY,GERMAN').split(',');
+        const grid = makeGrid(keys[0]);
+        const t = clean(text).replace(/J/g, 'I');
+        let fractionated = '';
+        for (const ch of t) {
+          const i = grid.indexOf(ch);
+          fractionated += letters[Math.floor(i / 5)] + letters[i % 5];
+        }
+        return columnar.encode(fractionated, keys[1] || 'GERMAN');
+      },
+      decode: (text, key) => {
+        const keys = (key || 'PRIVACY,GERMAN').split(',');
+        const grid = makeGrid(keys[0]);
+        const fractionated = columnar.decode(clean(text), keys[1] || 'GERMAN');
+        let result = '';
+        for (let i = 0; i + 1 < fractionated.length; i += 2) {
+          const r = letters.indexOf(fractionated[i]), c = letters.indexOf(fractionated[i + 1]);
+          if (r >= 0 && c >= 0) result += grid[r * 5 + c];
+        }
+        return result;
+      }
+    };
+  })();
+
+  /* ─── 21. ADFGVX ─── */
+  const adfgvx = (() => {
+    const letters = 'ADFGVX';
+    const alpha36 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    function makeGrid(key) {
+      const k = (key || 'PRIVACY').toUpperCase().replace(/[^A-Z0-9]/g, '');
+      const seen = new Set(); let grid = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); grid += c; }
+      for (const c of alpha36) if (!seen.has(c)) grid += c;
+      return grid;
+    }
+    function fractionate(text, key) {
+        const keys = (key || 'PRIVACY,GERMAN').split(',');
+        const grid = makeGrid(keys[0]);
+        const t = cleanAlphanumeric(text);
+        let fractionated = '';
+        for (const ch of t) {
+          const i = grid.indexOf(ch);
+          if (i >= 0) fractionated += letters[Math.floor(i / 6)] + letters[i % 6];
+        }
+        return fractionated;
+    }
+    return {
+      fractionate,
+      untranspose: (text, key) => columnar.decode(clean(text), (key || 'PRIVACY,GERMAN').split(',')[1] || 'GERMAN'),
+      encode: (text, key) => {
+        return columnar.encode(fractionate(text, key), (key || 'PRIVACY,GERMAN').split(',')[1] || 'GERMAN');
+      },
+      decode: (text, key) => {
+        const keys = (key || 'PRIVACY,GERMAN').split(',');
+        const grid = makeGrid(keys[0]);
+        const fractionated = columnar.decode(clean(text), keys[1] || 'GERMAN');
+        let result = '';
+        for (let i = 0; i + 1 < fractionated.length; i += 2) {
+          const r = letters.indexOf(fractionated[i]), c = letters.indexOf(fractionated[i + 1]);
+          if (r >= 0 && c >= 0) result += grid[r * 6 + c];
+        }
+        return result;
+      }
+    };
+  })();
+
+  /* ─── 22. Nihilist ─── */
+  const nihilist = (() => {
+    function makeGrid(key) {
+      const k = clean(key || 'RUSSIAN').replace(/J/g, 'I');
+      const seen = new Set(); let grid = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); grid += c; }
+      for (const c of A) if (c !== 'J' && !seen.has(c)) grid += c;
+      return grid;
+    }
+    function toNum(grid, ch) {
+      const i = grid.indexOf(ch === 'J' ? 'I' : ch);
+      return (Math.floor(i / 5) + 1) * 10 + (i % 5) + 1;
+    }
+    function fromNum(grid, n) {
+      const r = Math.floor(n / 10) - 1, c = (n % 10) - 1;
+      return (r >= 0 && r < 5 && c >= 0 && c < 5) ? grid[r * 5 + c] : '?';
+    }
+    return {
+      encode: (text, key) => {
+        const keys = (key || 'RUSSIAN,KEY').split(',');
+        const grid = makeGrid(keys[0]), kw = clean(keys[1] || 'KEY').replace(/J/g, 'I');
+        return clean(text).replace(/J/g, 'I').split('').map((ch, i) => {
+          return toNum(grid, ch) + toNum(grid, kw[i % kw.length]);
+        }).join(' ');
+      },
+      decode: (text, key) => {
+        if (!String(text).trim()) return '';
+        const keys = (key || 'RUSSIAN,KEY').split(',');
+        const grid = makeGrid(keys[0]), kw = clean(keys[1] || 'KEY').replace(/J/g, 'I');
+        return text.trim().split(/\s+/).map((n, i) => {
+          const v = parseInt(n) - toNum(grid, kw[i % kw.length]);
+          return fromNum(grid, v);
+        }).join('');
+      }
+    };
+  })();
+
+  /* ─── 23. One-Time Pad ─── */
+  const otp = (() => ({
+    encode: (text, key) => {
+      const t = clean(text);
+      const userKey = clean(key || '');
+      let k = userKey;
+      let autoGenerated = false;
+      if (k.length > 0 && k.length < t.length) return 'Key must be at least as long as message';
+      if (!k.length && t.length) {
+        autoGenerated = true;
+        k = secureRandomLetters(t.length);
+      }
+      let r = '';
+      for (let i = 0; i < t.length; i++) r += A[mod(t.charCodeAt(i) - 65 + k.charCodeAt(i) - 65, 26)];
+      // Only annotate with the auto-generated key so encode() output is clean ciphertext when the user supplied a sufficient key.
+      return autoGenerated ? r + '\n[Key: ' + k.substr(0, t.length) + ']' : r;
+    },
+    decode: (text, key) => {
+      // Tolerate annotated ciphertext by stripping any trailing "[Key: ...]" annotation.
+      const raw = (text || '').replace(/\n?\[Key:[^\]]*\]\s*$/i, '');
+      const t = clean(raw), k = clean(key || '');
+      if (k.length < t.length) return 'Key must be at least as long as message';
+      let r = '';
+      for (let i = 0; i < t.length; i++) r += A[mod(t.charCodeAt(i) - 65 - (k.charCodeAt(i) - 65), 26)];
+      return r;
+    }
+  }))();
+
+  /* Option A (audit remediation): VENONA uses a dedicated pad-reuse XOR demo engine, not generic otp. */
+  /* ─── 23b. VENONA Pad-Reuse (5-bit XOR over A-Z) ─── */
+  const venonaPadReuse = (() => {
+    const ALPHA32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+
+    function cleanAlpha26(text) {
+      return clean(text);
+    }
+
+    function cleanAlpha32(text) {
+      return (text || '').toUpperCase().replace(/[^A-Z2-7]/g, '');
+    }
+
+    function toVal(ch) {
+      const idx = ALPHA32.indexOf(ch);
+      return idx >= 0 ? idx : 0;
+    }
+
+    function toGlyph(v) {
+      return ALPHA32[mod(v, 32)];
+    }
+
+    function xorStream(left, right) {
+      const len = Math.min(left.length, right.length);
+      let out = '';
+      for (let i = 0; i < len; i++) out += toGlyph(toVal(left[i]) ^ toVal(right[i]));
       return out;
     }
 
-    // Encrypt with full per-letter trace (for visualisation).
-    function encryptWithTrace(text) {
-      const t = String(text).toUpperCase();
-      const result = { ciphertext: '', steps: [] };
-      for (let i = 0; i < t.length; i++) {
-        const code = t.charCodeAt(i);
-        if (code >= 65 && code <= 90) {
-          const trace = [];
-          const positionsBefore = positions.slice();
-          const out = encryptIndex(code - 65, trace);
-          result.steps.push({
-            input: t[i],
-            output: chr(out),
-            positions: positions.slice(),     // positions AFTER stepping
-            positionsBefore,
-            trace
+    function scoreNaturalAlpha(fragment) {
+      if (!fragment) return 0;
+      let good = 0;
+      for (let i = 0; i < fragment.length; i++) {
+        const code = fragment.charCodeAt(i);
+        if (code >= 65 && code <= 90) good++;
+      }
+      return good / fragment.length;
+    }
+
+    return {
+      encode: (text, key) => {
+        const t = cleanAlpha26(text);
+        const k = cleanAlpha26(key || 'XMCKL');
+        if (!k.length) return 'Key required';
+        let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const pv = t.charCodeAt(i) - 65;
+          const kv = k.charCodeAt(i % k.length) - 65;
+          out += toGlyph(pv ^ kv);
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const t = cleanAlpha32(text);
+        const k = cleanAlpha26(key || 'XMCKL');
+        if (!k.length) return 'Key required';
+        let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const cv = toVal(t[i]);
+          const kv = k.charCodeAt(i % k.length) - 65;
+          const pv = cv ^ kv;
+          out += (pv >= 0 && pv < 26) ? A[pv] : '·';
+        }
+        return out;
+      },
+      combineCiphertexts: (cipherA, cipherB) => {
+        return xorStream(cleanAlpha32(cipherA), cleanAlpha32(cipherB));
+      },
+      cribAtPosition: (cipherA, cipherB, crib, position) => {
+        const combined = xorStream(cleanAlpha32(cipherA), cleanAlpha32(cipherB));
+        const c = cleanAlpha26(crib);
+        const pos = Math.max(0, parseInt(position, 10) || 0);
+        let other = '';
+        for (let i = 0; i < c.length && (pos + i) < combined.length; i++) {
+          const vv = toVal(combined[pos + i]) ^ (c.charCodeAt(i) - 65);
+          other += (vv >= 0 && vv < 26) ? A[vv] : '·';
+        }
+        return {
+          position: pos,
+          crib: c,
+          otherPlaintextFragment: other,
+          combinedStream: combined,
+          confidence: scoreNaturalAlpha(other)
+        };
+      },
+      scanCribPositions: (cipherA, cipherB, crib) => {
+        const combined = xorStream(cleanAlpha32(cipherA), cleanAlpha32(cipherB));
+        const c = cleanAlpha26(crib);
+        const max = Math.max(0, combined.length - c.length);
+        const rows = [];
+        for (let pos = 0; pos <= max; pos++) {
+          let other = '';
+          for (let i = 0; i < c.length && (pos + i) < combined.length; i++) {
+            const vv = toVal(combined[pos + i]) ^ (c.charCodeAt(i) - 65);
+            other += (vv >= 0 && vv < 26) ? A[vv] : '·';
+          }
+          rows.push({
+            position: pos,
+            crib: c,
+            otherPlaintextFragment: other,
+            combinedStream: combined,
+            confidence: scoreNaturalAlpha(other)
           });
-          result.ciphertext += chr(out);
+        }
+        return rows;
+      }
+    };
+  })();
+
+  /* ─── 24. Fractionated Morse ─── */
+  const fractionatedMorse = (() => {
+    const morseMap = {
+      A: '.-', B: '-...', C: '-.-.', D: '-..', E: '.', F: '..-.', G: '--.', H: '....',
+      I: '..', J: '.---', K: '-.-', L: '.-..', M: '--', N: '-.', O: '---', P: '.--.',
+      Q: '--.-', R: '.-.', S: '...', T: '-', U: '..-', V: '...-', W: '.--', X: '-..-',
+      Y: '-.--', Z: '--..'
+    };
+    const triMap = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    function makeSubst(key) {
+      const k = clean(key || 'ROUNDTABLE');
+      const seen = new Set(); let alpha = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); alpha += c; }
+      for (const c of A) if (!seen.has(c)) alpha += c;
+      return alpha;
+    }
+    return {
+      encode: (text, key) => {
+        const t = clean(text), subst = makeSubst(key);
+        let morse = t.split('').map(ch => morseMap[ch] || '').join('x');
+        morse += 'x';
+        while (morse.length % 3 !== 0) morse += 'x';
+        const trigraphs = { '...': 0, '..-': 1, '..x': 2, '.-.': 3, '.--': 4, '.-x': 5,
+          '.x.': 6, '.x-': 7, '.xx': 8, '-..': 9, '-.-': 10, '-.x': 11, '--.': 12,
+          '---': 13, '--x': 14, '-x.': 15, '-x-': 16, '-xx': 17, 'x..': 18, 'x.-': 19,
+          'x.x': 20, 'x-.': 21, 'x--': 22, 'x-x': 23, 'xx.': 24, 'xx-': 25, 'xxx': 26 };
+        let result = '';
+        for (let i = 0; i + 2 < morse.length; i += 3) {
+          const tri = morse.substr(i, 3);
+          const idx = trigraphs[tri];
+          if (idx !== undefined && idx < 26) result += subst[idx];
+        }
+        return result;
+      },
+      decode: (text, key) => {
+        const t = clean(text), subst = makeSubst(key);
+        const revSubst = {};
+        for (let i = 0; i < 26; i++) revSubst[subst[i]] = i;
+        const trigraphKeys = ['...', '..-', '..x', '.-.', '.--', '.-x',
+          '.x.', '.x-', '.xx', '-..', '-.-', '-.x', '--.', '---', '--x',
+          '-x.', '-x-', '-xx', 'x..', 'x.-', 'x.x', 'x-.', 'x--', 'x-x',
+          'xx.', 'xx-', 'xxx'];
+        let morse = '';
+        for (const ch of t) {
+          const idx = revSubst[ch];
+          if (idx !== undefined && idx < 27) morse += trigraphKeys[idx];
+        }
+        const revMorse = {};
+        for (const [letter, code] of Object.entries(morseMap)) revMorse[code] = letter;
+        const parts = morse.split('x');
+        let result = '';
+        for (const p of parts) {
+          if (p && revMorse[p]) result += revMorse[p];
+        }
+        return result;
+      }
+    };
+  })();
+
+  /* ─── 25. Confederate Vigenère (Brass Cipher Disk) ─── */
+  const confederateVigenere = (() => {
+    const inner = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    function run(text, key, enc) {
+      const t = clean(text), k = clean(key) || 'CONFEDERATE'; let r = '';
+      for (let i = 0; i < t.length; i++) {
+        const p = t.charCodeAt(i) - 65, ki = k.charCodeAt(i % k.length) - 65;
+        r += A[enc ? mod(p + ki, 26) : mod(p - ki, 26)];
+      }
+      return r;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 26. Bazeries ─── */
+  const bazeries = (() => {
+    function numToWord(n) {
+      const ones = ['', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE'];
+      const teens = ['TEN', 'ELEVEN', 'TWELVE', 'THIRTEEN', 'FOURTEEN', 'FIFTEEN', 'SIXTEEN', 'SEVENTEEN', 'EIGHTEEN', 'NINETEEN'];
+      const tens = ['', '', 'TWENTY', 'THIRTY', 'FORTY', 'FIFTY', 'SIXTY', 'SEVENTY', 'EIGHTY', 'NINETY'];
+      if (n < 10) return ones[n]; if (n < 20) return teens[n - 10];
+      return tens[Math.floor(n / 10)] + ones[n % 10];
+    }
+    return {
+      encode: (text, key) => {
+        const num = parseInt(key) || 42;
+        const word = numToWord(Math.min(num, 99));
+        const subst = monoalphabetic.encode(clean(text), word);
+        const t = clean(subst), group = Math.max(2, Math.min(num % 7 + 2, 6));
+        const blocks = [];
+        for (let i = 0; i < t.length; i += group) blocks.push(t.substr(i, group).split('').reverse().join(''));
+        return blocks.join('');
+      },
+      decode: (text, key) => {
+        const num = parseInt(key) || 42;
+        const word = numToWord(Math.min(num, 99));
+        const t = clean(text), group = Math.max(2, Math.min(num % 7 + 2, 6));
+        const blocks = [];
+        for (let i = 0; i < t.length; i += group) blocks.push(t.substr(i, group).split('').reverse().join(''));
+        return monoalphabetic.decode(blocks.join(''), word);
+      }
+    };
+  })();
+
+  /* ─── 27. Alberti Disk ─── */
+  const alberti = (() => {
+    const outer = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const inner = 'AZBYCXDWEVFUGTHSIRJQKPLOMN';
+    function run(text, key, enc) {
+      const raw = key === undefined || key === null || String(key).trim() === '' ? '3' : String(key).trim();
+      const shift = Number(raw);
+      if (!Number.isInteger(shift) || shift < 0 || shift > 25) {
+        throw new Error('Alberti initial setting must be an integer from 0 to 25.');
+      }
+      const t = clean(text); let r = '', curShift = shift;
+      for (let i = 0; i < t.length; i++) {
+        if (enc) {
+          const idx = outer.indexOf(t[i]);
+          r += inner[mod(idx + curShift, 26)];
+        } else {
+          const idx = inner.indexOf(t[i]);
+          r += outer[mod(idx - curShift, 26)];
+        }
+        if ((i + 1) % 4 === 0) curShift = mod(curShift + 1, 26);
+      }
+      return r;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 28. Jefferson Disk ─── */
+  const jefferson = (() => {
+    const disks = [
+      'BQWJEZCTDMYSAHFLPIUKGRONXV', 'ZXSVCBQJGDMPLOEYWAKURHIFNT',
+      'JOMHKQSEUPVGNTDCWBRYFLXAZI', 'SGBDQJFLNKHYCOMXEIWRVPUAZT',
+      'VCREQTGNBDSKHYLJAXZMUOIPFW', 'KFZUYPWOBGTHSADLMJEIXNRCVQ',
+      'PXKYGQETUSMRLZJIVWFHNDCBOA', 'MOQIHWFXCZADVJPLRSBUGNKYETS',
+      'RZBQHFUYWJPVAXGONLEDTKMSCI', 'TBHPRICLZWQJVGNSEMDKFXOUYA',
+      'XJKCRMQGIVHNASLBWEZTFDYOUP', 'UFJKDHGAQLMNZXRBPEYCSWVITO',
+      'GLCBXQJFHZOYMVTPWNIUDRSAKE', 'WHQDUMEYPNIFJZARXLTOCSVGKB',
+      'JDVFATBSMCPZYKUOWENRHGQLXI', 'TMNFQXZLHKAWBUIVRGDSPECYOJ',
+      'OYQBFHMCZKTIJAPGLEDSRUXNWV', 'YXTQLJDZWKFVSRMPGOBIAUNCHE',
+      'CSKDLHQRGBJMWZXIPVTOYFNUAE', 'LDBJITMWPFGVUYCNHSAOXQREKZ',
+      'BFQEMYIRZAKOWJHCTSVDNLGPUX', 'NOQIFYJWGRHUBLPXDTSKZACMVE',
+      'AXHDMQGZNRJFYVPBCWSLTEUIOK', 'WRNEIBKDGFQZJVOMSLHTUPYCXA',
+      'QUIBEPJMDFSVYTZLGORWKANCXH', 'EAHFZICVWXYBKRLMDTSJGPNUOQ'
+    ];
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        const order = (key || '').replace(/[^0-9,]/g, '').split(',').map(Number).filter(n => n > 0 && n <= 26);
+        const diskOrder = order.length >= 2 ? order.map(n => n - 1) : Array.from({ length: 26 }, (_, i) => i);
+        const offset = 1;
+        let r = '';
+        for (let i = 0; i < t.length; i++) {
+          const disk = disks[diskOrder[i % diskOrder.length]];
+          const pos = disk.indexOf(t[i]);
+          r += disk[(pos + offset) % 26];
+        }
+        return r;
+      },
+      decode: (text, key) => {
+        const t = clean(text);
+        const order = (key || '').replace(/[^0-9,]/g, '').split(',').map(Number).filter(n => n > 0 && n <= 26);
+        const diskOrder = order.length >= 2 ? order.map(n => n - 1) : Array.from({ length: 26 }, (_, i) => i);
+        const offset = 1;
+        let r = '';
+        for (let i = 0; i < t.length; i++) {
+          const disk = disks[diskOrder[i % diskOrder.length]];
+          const pos = disk.indexOf(t[i]);
+          r += disk[mod(pos - offset, 26)];
+        }
+        return r;
+      }
+    };
+  })();
+
+  /* ─── 29. Enigma (Simplified 3-Rotor) ─── */
+  const enigma = (() => {
+    const rotors = [
+      { wiring: 'EKMFLGDQVZNTOWYHXUSPAIBRCJ', notch: 'Q' },
+      { wiring: 'AJDKSIRUXBLHWTMCQGZNPYFVOE', notch: 'E' },
+      { wiring: 'BDFHJLCPRTXVZNYEIWGAKMUSQO', notch: 'V' }
+    ];
+    const reflectorB = 'YRUHQSLDPXNGOKMIEBFZCWVJAT';
+    function step(positions) {
+      if (positions[1] === rotors[1].notch.charCodeAt(0) - 65) { positions[0]++; positions[1]++; }
+      else if (positions[2] === rotors[2].notch.charCodeAt(0) - 65) positions[1]++;
+      positions[2]++;
+      for (let i = 0; i < 3; i++) positions[i] = mod(positions[i], 26);
+    }
+    function run(text, key) {
+      const t = clean(text);
+      const raw = key === undefined || key === null || String(key).trim() === '' ? 'AAA' : String(key).trim().toUpperCase();
+      if (!/^[A-Z]{3}$/.test(raw)) {
+        throw new Error('This Enigma model accepts exactly three rotor-position letters (for example AAA).');
+      }
+      const positions = [...raw].map(ch => ch.charCodeAt(0) - 65);
+      let result = '';
+      for (let i = 0; i < t.length; i++) {
+        step(positions);
+        let c = t.charCodeAt(i) - 65;
+        for (let r = 2; r >= 0; r--) {
+          c = mod(rotors[r].wiring.charCodeAt(mod(c + positions[r], 26)) - 65 - positions[r], 26);
+        }
+        c = reflectorB.charCodeAt(c) - 65;
+        for (let r = 0; r < 3; r++) {
+          const w = rotors[r].wiring;
+          c = mod(w.indexOf(A[mod(c + positions[r], 26)]) - positions[r], 26);
+        }
+        result += A[c];
+      }
+      return result;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 30. Lorenz (Simplified SZ40) ─── */
+  const lorenz = (() => {
+    const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+    const ita2 = {
+      A:3, B:25, C:14, D:9, E:1, F:13, G:26, H:20, I:6, J:11, K:15,
+      L:18, M:28, N:12, O:24, P:22, Q:23, R:10, S:5, T:16, U:7,
+      V:30, W:19, X:29, Y:21, Z:17
+    };
+    const ita2Letters = Object.fromEntries(Object.entries(ita2).map(([letter, value]) => [value, letter]));
+    function makeWheel(size, seed) {
+      const bits = [];
+      const rng = (s => () => { s = (Math.imul(s, 1103515245) + 12345) & 0x7fffffff; return (s >>> 30) & 1; })(seed & 0x7fffffff);
+      for (let i = 0; i < size; i++) bits.push(rng());
+      return bits;
+    }
+    function run(text, key, decrypt) {
+      const input = decrypt
+        ? String(text ?? '').toUpperCase().replace(/[^A-Z2-7]/g, '')
+        : clean(text);
+      const seed = clean(key || 'LORENZ').split('').reduce((s, c) => (Math.imul(s, 31) + c.charCodeAt(0)) & 0x7fffffff, 7);
+      const chiLengths = [41, 31, 29, 26, 23];
+      const psiLengths = [43, 47, 51, 53, 59];
+      const chi = chiLengths.map((length, index) => makeWheel(length, seed + index));
+      const psi = psiLengths.map((length, index) => makeWheel(length, seed + 5 + index));
+      const motor37 = makeWheel(37, seed + 10);
+      const motor61 = makeWheel(61, seed + 11);
+      const chiPosition = [0, 0, 0, 0, 0];
+      const psiPosition = [0, 0, 0, 0, 0];
+      let motor37Position = 0;
+      let motor61Position = 0;
+      let result = '';
+      for (const character of input) {
+        let keyValue = 0;
+        for (let bit = 0; bit < 5; bit++) {
+          keyValue |= ((chi[bit][chiPosition[bit]] ^ psi[bit][psiPosition[bit]]) << bit);
+        }
+        const inputValue = decrypt ? glyphs.indexOf(character) : ita2[character];
+        const outputValue = inputValue ^ keyValue;
+        result += decrypt ? (ita2Letters[outputValue] || '·') : glyphs[outputValue];
+
+        for (let bit = 0; bit < 5; bit++) {
+          chiPosition[bit] = (chiPosition[bit] + 1) % chiLengths[bit];
+        }
+        const stepMotor61 = motor37[motor37Position] === 1;
+        motor37Position = (motor37Position + 1) % motor37.length;
+        if (stepMotor61) {
+          const stepPsi = motor61[motor61Position] === 1;
+          motor61Position = (motor61Position + 1) % motor61.length;
+          if (stepPsi) {
+            for (let bit = 0; bit < 5; bit++) {
+              psiPosition[bit] = (psiPosition[bit] + 1) % psiLengths[bit];
+            }
+          }
+        }
+      }
+      return result;
+    }
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
+  /* ─── 31. Dictionary Code ─── */
+  const dictionaryCode = (() => {
+    const defaultText = 'We the People of the United States in Order to form a more perfect Union establish Justice insure domestic Tranquility provide for the common defence promote the general Welfare and secure the Blessings of Liberty to ourselves and our Posterity do ordain and establish this Constitution for the United States of America';
+    function referenceWords(key) {
+      const words = String(key ?? '').split(/\s+/).filter(word => /^[A-Za-z]/.test(word));
+      return words.length ? words : defaultText.split(/\s+/);
+    }
+    return {
+      encode: (text, key) => {
+        const ref = referenceWords(key);
+        const t = clean(text);
+        const indices = [];
+        for (const ch of t) {
+          let found = false;
+          for (let i = 0; i < ref.length; i++) {
+            if (ref[i].toUpperCase().startsWith(ch)) { indices.push(i + 1); found = true; break; }
+          }
+          if (!found) indices.push('?');
+        }
+        return indices.join('-');
+      },
+      decode: (text, key) => {
+        if (!String(text).trim()) return '';
+        const ref = referenceWords(key);
+        return text.split(/[-\s]+/).map(n => {
+          const idx = parseInt(n) - 1;
+          return (idx >= 0 && idx < ref.length) ? ref[idx][0].toUpperCase() : '?';
+        }).join('');
+      }
+    };
+  })();
+
+  /* ─── 32. Stager (Route Cipher) ─── */
+  const stager = (() => ({
+    encode: (text, key) => {
+      const t = escapeFillers(clean(text));
+      const cols = boundedInt(key, 5, 2, 10000);
+      const rows = Math.ceil(t.length / cols);
+      // Read the route directly from a flat row-major message. Tens of
+      // thousands of tiny row arrays create avoidable allocation/GC pressure.
+      const result = [];
+      for (let col = 0; col < cols; col++) {
+        if (col % 2 === 0) for (let row = 0; row < rows; row++) result.push(t[row * cols + col] || 'X');
+        else for (let row = rows - 1; row >= 0; row--) result.push(t[row * cols + col] || 'X');
+      }
+      return result.join('');
+    },
+    decode: (text, key) => {
+      const t = clean(text);
+      const cols = boundedInt(key, 5, 2, 10000);
+      const rows = Math.ceil(t.length / cols);
+      const grid = Array(rows * cols).fill('');
+      let idx = 0;
+      for (let col = 0; col < cols; col++) {
+        if (col % 2 === 0) for (let row = 0; row < rows; row++) { if (idx < t.length) grid[row * cols + col] = t[idx++]; }
+        else for (let row = rows - 1; row >= 0; row--) { if (idx < t.length) grid[row * cols + col] = t[idx++]; }
+      }
+      return unescapeFillers(grid.join('').replace(/X+$/, ''));
+    }
+  }))();
+
+  /* ─── 33. VIC Cipher (Simplified) ─── */
+  const vic = (() => {
+    function makeCheckerboard(key) {
+      const k = clean(key || 'SNOWFALL').replace(/J/g, 'I');
+      const seen = new Set(); let alpha = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); alpha += c; }
+      for (const c of A) if (c !== 'J' && !seen.has(c)) alpha += c;
+      const topRow = alpha.substr(0, 8);
+      const map = {}; const rev = {};
+      for (let i = 0; i < 8; i++) { map[topRow[i]] = String(i); rev[String(i)] = topRow[i]; }
+      let code = 80;
+      for (let i = 8; i < 25; i++) {
+        const s = String(code + (i - 8) % 10);
+        const actual = i < 18 ? '8' + ((i - 8)) : '9' + ((i - 18));
+        map[alpha[i]] = actual;
+        rev[actual] = alpha[i];
+      }
+      return { map, rev };
+    }
+
+    function chainDigits(key, length) {
+      const source = clean(key || 'SNOWFALL') || 'SNOWFALL';
+      const base = source.split('').map(ch => (ch.charCodeAt(0) - 64) % 10);
+      const digits = Array.from({ length: 10 }, (_, index) => base[index % base.length]);
+      for (let index = 0; digits.length < length; index++) {
+        digits.push((digits[index] + digits[index + 1]) % 10);
+      }
+      return digits.slice(0, length);
+    }
+
+    function transpositionKeys(key) {
+      const derived = chainDigits(key, 22);
+      return [derived.slice(10, 15).join(''), derived.slice(15, 22).join('')];
+    }
+
+    function digitOrder(key) {
+      return key.split('').map((digit, index) => ({ digit: Number(digit), index }))
+        .sort((left, right) => left.digit - right.digit || left.index - right.index)
+        .map(entry => entry.index);
+    }
+
+    function transpose(text, key) {
+      if (!text) return '';
+      const columns = Array.from({ length: key.length }, () => '');
+      for (let index = 0; index < text.length; index++) columns[index % key.length] += text[index];
+      return digitOrder(key).map(index => columns[index]).join('');
+    }
+
+    function untranspose(text, key) {
+      if (!text) return '';
+      const columnCount = key.length;
+      const rows = Math.ceil(text.length / columnCount);
+      const remainder = text.length % columnCount;
+      const columns = Array(columnCount).fill('');
+      let offset = 0;
+      for (const index of digitOrder(key)) {
+        const length = remainder === 0 || index < remainder ? rows : rows - 1;
+        columns[index] = text.slice(offset, offset + length);
+        offset += length;
+      }
+      let result = '';
+      for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columnCount; column++) {
+          if (row < columns[column].length) result += columns[column][row];
+        }
+      }
+      return result;
+    }
+
+    function decodeCheckerboard(text, key) {
+      const { rev } = makeCheckerboard(key);
+      let result = '';
+      for (let index = 0; index < text.length;) {
+        if (rev[text[index]]) {
+          result += rev[text[index]];
+          index++;
+        } else if (index + 1 < text.length && rev[text.slice(index, index + 2)]) {
+          result += rev[text.slice(index, index + 2)];
+          index += 2;
+        } else {
+          result += '?';
+          index++;
         }
       }
       return result;
     }
 
     return {
-      encrypt,
-      encryptWithTrace,
-      // Encryption is involutive in Enigma (same machine state decrypts):
-      decrypt: encrypt,
-      getState: () => ({
-        rotors: rotorNames.slice(),
-        reflector: reflName,
-        ringSettings: rings.map(chr).join(''),
-        positions: positions.map(chr).join(''),
-        plugboardMap: Array.from(plugboard)
-      })
+      encode: (text, key) => {
+        const { map } = makeCheckerboard(key);
+        const checkerboard = clean(text).replace(/J/g, 'I').split('').map(ch => map[ch] || '').join('');
+        const stream = chainDigits(key, checkerboard.length);
+        const added = checkerboard.split('').map((digit, index) => (Number(digit) + stream[index]) % 10).join('');
+        const [firstKey, secondKey] = transpositionKeys(key);
+        return transpose(transpose(added, firstKey), secondKey);
+      },
+      decode: (text, key) => {
+        const nums = text.replace(/[^0-9]/g, '');
+        const [firstKey, secondKey] = transpositionKeys(key);
+        const added = untranspose(untranspose(nums, secondKey), firstKey);
+        const stream = chainDigits(key, added.length);
+        const checkerboard = added.split('').map((digit, index) => mod(Number(digit) - stream[index], 10)).join('');
+        return decodeCheckerboard(checkerboard, key);
+      }
     };
-  }
+  })();
 
-  // Convenience constructor matching the spec's public API.
-  function createEnigma(config) {
-    return makeMachine(config || {});
-  }
-
-  // ── Cryptanalysis helpers (Component 3) ──────────────────────────────────
-
-  /**
-   * Self-encryption check.
-   * Enigma cannot encrypt any letter to itself. Given a ciphertext and a
-   * crib (known plaintext fragment), returns the set of starting offsets
-   * at which the crib could legally appear (i.e. no character of the crib
-   * matches the ciphertext at that position).
-   */
-  function findCribPositions(ciphertext, crib) {
-    const ct = ciphertext.toUpperCase().replace(/[^A-Z]/g, '');
-    const cr = crib.toUpperCase().replace(/[^A-Z]/g, '');
-    const valid = [];
-    const rejected = [];
-    if (cr.length === 0 || cr.length > ct.length) {
-      return { valid, rejected, ciphertext: ct, crib: cr };
+  /* ─── 34. Scytale ─── */
+  const scytale = (() => ({
+    encode: (text, key) => {
+      const t = escapeFillers(clean(text)), rows = boundedInt(key, 3, 2, 10000);
+      const cols = Math.ceil(t.length / rows);
+      const padded = t.padEnd(rows * cols, 'X');
+      let r = '';
+      for (let c = 0; c < cols; c++)
+        for (let row = 0; row < rows; row++) r += padded[row * cols + c];
+      return r;
+    },
+    decode: (text, key) => {
+      const t = clean(text), rows = boundedInt(key, 3, 2, 10000);
+      const cols = Math.ceil(t.length / rows);
+      const padded = t.padEnd(rows * cols, 'X');
+      let r = '';
+      for (let row = 0; row < rows; row++)
+        for (let c = 0; c < cols; c++) r += padded[c * rows + row];
+      return unescapeFillers(r.replace(/X+$/, ''));
     }
-    outer: for (let pos = 0; pos <= ct.length - cr.length; pos++) {
-      for (let i = 0; i < cr.length; i++) {
-        if (ct[pos + i] === cr[i]) {
-          rejected.push({ position: pos, conflictAt: i, letter: cr[i] });
-          continue outer;
+  }))();
+
+  /* ─── 35. Vernam (XOR) ─── */
+  const vernam = (() => {
+    function parseKey(key) {
+      const raw = String(key ?? '');
+      if (/^hex:/i.test(raw)) {
+        const hex = raw.slice(4).replace(/\s+/g, '');
+        if (!/^(?:[0-9a-f]{2})*$/i.test(hex)) return null;
+        return Uint8Array.from(hex.match(/.{2}/g)?.map(byte => parseInt(byte, 16)) || []);
+      }
+      return Uint8Array.from(clean(raw).split('').map(ch => ch.charCodeAt(0)));
+    }
+
+    return {
+      encode: (text, key) => {
+        const plaintext = clean(text);
+        const plainBytes = Uint8Array.from(plaintext.split('').map(ch => ch.charCodeAt(0)));
+        let keyBytes = parseKey(key);
+        if (keyBytes === null) return 'Key must be text or hex:<bytes>';
+        let generatedKey = '';
+        if (keyBytes.length > 0 && keyBytes.length < plainBytes.length) return 'Key must be at least as long as message';
+        if (!keyBytes.length && plainBytes.length) {
+          // A bytewise XOR pad needs uniformly sampled bytes, not only ASCII
+          // uppercase letters. Hex preserves every byte, including 00 and ff.
+          keyBytes = secureRandomBytes(plainBytes.length);
+          generatedKey = 'hex:' + Array.from(keyBytes, byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+        const ciphertext = Array.from(plainBytes, (byte, index) => (byte ^ keyBytes[index]).toString(16).padStart(2, '0')).join('');
+        return generatedKey ? ciphertext + '\n[Key: ' + generatedKey + ']' : ciphertext;
+      },
+      decode: (text, key) => {
+        const source = String(text ?? '');
+        const annotation = source.match(/\n?\[Key:\s*([^\]]+)\]\s*$/i);
+        const raw = source.replace(/\n?\[Key:[^\]]*\]\s*$/i, '').replace(/\s+/g, '');
+        if (!/^(?:[0-9a-f]{2})*$/i.test(raw)) return 'Ciphertext must be hexadecimal bytes';
+        const cipherBytes = Uint8Array.from(raw.match(/.{2}/g)?.map(byte => parseInt(byte, 16)) || []);
+        const keyBytes = parseKey(key || annotation?.[1] || '');
+        if (keyBytes === null) return 'Key must be text or hex:<bytes>';
+        if (keyBytes.length < cipherBytes.length) return 'Key must be at least as long as message';
+        return Array.from(cipherBytes, (byte, index) => String.fromCharCode(byte ^ keyBytes[index])).join('');
+      }
+    };
+  })();
+
+  /* ─── 38. Great Cipher (Grand Chiffre des Rossignols) ─── */
+  // Syllable-based nomenclator used by Antoine & Bonaventure Rossignol
+  // for Louis XIV (~1626). Unbroken for 200 years until Étienne Bazeries
+  // cracked it in 1893. Famous features modeled here:
+  //   • Most numbers stand for syllables (not single letters)
+  //   • Some numbers are NULLS (decoy — ignored on decode)
+  //   • One special number means "delete the previous letter" — a trap
+  //     that fooled codebreakers for two centuries
+  const greatCipher = (() => {
+    // 50 of the most common English/French digrams + syllables
+    const SYLL = [
+      'TH','HE','IN','ER','AN','RE','ON','AT','EN','ND',
+      'ES','OR','TE','OF','ED','IS','IT','AL','AR','ST',
+      'TO','NT','NG','SE','HA','AS','OU','IO','LE','VE',
+      'CO','ME','DE','HI','RI','RO','IC','NE','EA','RA',
+      'CE','LI','CH','LL','BE','MA','SI','OM','UR','CA'
+    ];
+    const SINGLES = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const NULL = '__NULL__';
+    const TRAP = '__DEL__'; // "delete the previous letter" — Bazeries' breakthrough
+    // 50 syllables + 26 singles + 6 nulls + 1 trap = 83 codewords (numbers 100–182)
+    const TOKENS = [...SYLL, ...SINGLES, NULL, NULL, NULL, NULL, NULL, NULL, TRAP];
+
+    function buildTable(seed) {
+      const k = (clean(seed || 'ROI') + 'LOUISXIV');
+      let s = 0;
+      for (let i = 0; i < k.length; i++) s = (s * 131 + k.charCodeAt(i)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      const nums = TOKENS.map((_, i) => 100 + i);
+      // Fisher–Yates shuffle, deterministic from seed
+      for (let i = nums.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+      }
+      const enc = {}, dec = {}, nulls = [];
+      TOKENS.forEach((tok, i) => {
+        const n = nums[i];
+        dec[n] = tok;
+        if (tok === NULL) { nulls.push(n); }
+        else { (enc[tok] = enc[tok] || []).push(n); }
+      });
+      return { enc, dec, nulls };
+    }
+
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        if (!t) return '';
+        const { enc, nulls } = buildTable(key);
+        // Sort syllables longest-first for greedy match
+        const sortedSyll = SYLL.slice().sort((a, b) => b.length - a.length);
+        let s = 0;
+        const k2 = (clean(key || 'ROI') + 'BOURBON');
+        for (let i = 0; i < k2.length; i++) s = (s * 17 + k2.charCodeAt(i)) & 0x7fffffff;
+        if (s === 0) s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+
+        const out = [];
+        let i = 0;
+        while (i < t.length) {
+          // Occasional null insertion (~10%) — historical decoy
+          if (out.length > 0 && rng() < 0.1 && nulls.length) {
+            out.push(String(nulls[Math.floor(rng() * nulls.length)]).padStart(3, '0'));
+          }
+          let matched = null;
+          for (const syl of sortedSyll) {
+            if (t.startsWith(syl, i) && enc[syl]) { matched = syl; break; }
+          }
+          let tok;
+          if (matched) { tok = matched; i += matched.length; }
+          else { tok = t[i]; i++; }
+          const opts = enc[tok];
+          if (opts && opts.length) {
+            out.push(String(opts[Math.floor(rng() * opts.length)]).padStart(3, '0'));
+          } else {
+            out.push('???');
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { dec } = buildTable(key);
+        const nums = (text.match(/\d{2,4}/g) || []).map(n => parseInt(n, 10));
+        let out = '';
+        for (const n of nums) {
+          const tok = dec[n];
+          if (tok === undefined) { out += '?'; continue; }
+          if (tok === NULL) continue;
+          if (tok === TRAP) { out = out.slice(0, -1); continue; }
+          out += tok;
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 38b. Babington Plot Cipher (1586) — Mary, Queen of Scots ───
+     The actual cipher Anthony Babington used to correspond with Mary
+     used 23 cipher symbols for letters (no J, V, W), 36 nomenclator
+     symbols for common words/names, 4 nulls, and one "doubleth" symbol
+     meaning "double the next letter." Thomas Phelippes solved it within
+     days and added a forged postscript that exposed the conspirators.
+     Modeled here with bracketed tokens (since we lack a glyph font):
+       letters → ⟨α01⟩…⟨α23⟩
+       nomens  → ⟨ω01⟩…⟨ω36⟩  (THE, AND, OF, FOR, MARY, ELIZABETH, …)
+       nulls   → ⟨∅01⟩…⟨∅04⟩  (decoys, dropped on decode)
+       trap    → ⟨×2⟩         (doubles the following letter)               */
+  const babington = (() => {
+    const LETTERS = 'ABCDEFGHIKLMNOPQRSTUXYZ'.split(''); // 23 symbols, period letters
+    const NOMENS = [
+      'THE','AND','OF','FOR','WITH','THAT','THIS','SHALL','WILL','MUST',
+      'YOUR','MAJESTY','MARY','ELIZABETH','QUEEN','KING','PRINCE','PLOT',
+      'POISON','DAGGER','SHIP','SPAIN','FRANCE','SCOTLAND','ENGLAND','TOWER',
+      'PRISON','LETTER','SECRET','FRIEND','ENEMY','GENTLEMEN','NOBLE','SIX',
+      'DEATH','LIBERTY'
+    ]; // 36 nomenclator codewords
+    const NULL = '__BNULL__';
+    const DOUB = '__BDOUB__'; // "doubleth" — double next letter
+    function buildTable(seed) {
+      const k = (clean(seed || 'BABINGTON') + 'PHELIPPES');
+      let s = 0;
+      for (let i = 0; i < k.length; i++) s = (s * 131 + k.charCodeAt(i)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // Build symbol pool
+      const symbols = [];
+      LETTERS.forEach((_, i) => symbols.push({ kind: 'L', tok: LETTERS[i], sym: 'a' + String(i + 1).padStart(2, '0') }));
+      NOMENS.forEach((w, i) => symbols.push({ kind: 'N', tok: w, sym: 'w' + String(i + 1).padStart(2, '0') }));
+      for (let i = 0; i < 4; i++) symbols.push({ kind: '0', tok: NULL, sym: 'n' + String(i + 1).padStart(2, '0') });
+      symbols.push({ kind: 'D', tok: DOUB, sym: 'x2' });
+      // Shuffle so the seed determines which symbol goes to which token
+      for (let i = symbols.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [symbols[i].sym, symbols[j].sym] = [symbols[j].sym, symbols[i].sym];
+      }
+      const enc = {}, dec = {}, nulls = [];
+      for (const s2 of symbols) {
+        dec[s2.sym] = s2.tok;
+        if (s2.tok === NULL) { nulls.push(s2.sym); continue; }
+        (enc[s2.tok] = enc[s2.tok] || []).push(s2.sym);
+      }
+      return { enc, dec, nulls };
+    }
+    function letterFold(ch) {
+      // Map J→I, V→U, W→VV (handled at caller) for the 23-letter alphabet
+      if (ch === 'J') return 'I';
+      if (ch === 'V') return 'U';
+      return ch;
+    }
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        if (!t) return '';
+        const { enc, nulls } = buildTable(key);
+        const sortedWords = NOMENS.slice().sort((a, b) => b.length - a.length);
+        let s = 0;
+        const k2 = (clean(key || 'BABINGTON') + 'WALSINGHAM');
+        for (let i = 0; i < k2.length; i++) s = (s * 17 + k2.charCodeAt(i)) & 0x7fffffff;
+        if (s === 0) s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        const out = [];
+        let i = 0;
+        while (i < t.length) {
+          // ~8% chance to insert a null between tokens
+          if (out.length > 0 && rng() < 0.08 && nulls.length) {
+            out.push('\u27e8' + nulls[Math.floor(rng() * nulls.length)] + '\u27e9');
+          }
+          // Try longest nomenclator word match first
+          let matched = null;
+          for (const w of sortedWords) {
+            if (t.startsWith(w, i) && enc[w]) { matched = w; break; }
+          }
+          if (matched) {
+            const opts = enc[matched];
+            out.push('\u27e8' + opts[Math.floor(rng() * opts.length)] + '\u27e9');
+            i += matched.length;
+            continue;
+          }
+          // Otherwise emit a letter symbol (folding J→I, V→U)
+          let ch = letterFold(t[i]);
+          // Doubled letter? Use the doubleth trap once in a while
+          if (i + 1 < t.length && letterFold(t[i + 1]) === ch && enc[DOUB] && rng() < 0.6) {
+            out.push('\u27e8' + enc[ch][0] + '\u27e9');
+            out.push('\u27e8' + enc[DOUB][0] + '\u27e9');
+            i += 2;
+            continue;
+          }
+          if (enc[ch]) {
+            const opts = enc[ch];
+            out.push('\u27e8' + opts[Math.floor(rng() * opts.length)] + '\u27e9');
+          } else {
+            out.push('?');
+          }
+          i++;
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { dec } = buildTable(key);
+        const matches = (text.match(/\u27e8[a-zA-Z0-9]+\u27e9|\u27e8x2\u27e9/g) || []);
+        // Accumulate into an array and track the trailing character separately.
+        // The "doubleth" symbol repeats the last character emitted, and reading
+        // that back off a string built with += forces V8 to flatten the rope on
+        // every occurrence \u2014 which made this quadratic (200 KB took 18x the time
+        // of 50 KB). Same defect autokey had.
+        const out = [];
+        let last = '';
+        for (const m of matches) {
+          const sym = m.slice(1, -1).toLowerCase();
+          const tok = dec[sym];
+          if (tok === undefined) { out.push('?'); last = '?'; continue; }
+          if (tok === NULL) continue;
+          if (tok === DOUB) {
+            // Repeating the last character leaves the last character unchanged.
+            if (last) out.push(last);
+            continue;
+          }
+          out.push(tok);
+          if (tok.length) last = tok[tok.length - 1];
+        }
+        return out.join('');
+      }
+    };
+  })();
+
+  /* ─── 38c. Navajo Code Talkers (WWII USMC code) ───
+     The actual Navajo code combined two systems:
+       • A vocabulary of ~800 Navajo words for military terms
+         (e.g. "tortoise" = TANK, "iron-fish" = SUBMARINE)
+       • A spelling alphabet for words not in the codebook:
+         each English letter mapped to a Navajo word whose first
+         letter (in English) was that letter (e.g. A = WOL-LA-CHEE "ant").
+     Multiple Navajo words existed per letter to defeat frequency
+     analysis. Authoritative source: USMC FM 30-30 / Navajo Code
+     Talkers' Dictionary (declassified 1968).                            */
+  const navajo = (() => {
+    // Two Navajo equivalents per letter where the historical record provides them
+    const ALPHA = {
+      A: ['WOL-LA-CHEE','BE-LA-SANA'],         // ant, apple
+      B: ['SHUSH','TOISH-JEH'],                 // bear, barrel
+      C: ['MOASI','TLA-GIN'],                   // cat, coal
+      D: ['BE','LHA-CHA-EH'],                   // deer, dog
+      E: ['DZEH','AH-JAH'],                     // elk, ear
+      F: ['MA-E','CHUO'],                       // fox, fir
+      G: ['KLIZZIE','AH-TAD'],                  // goat, girl
+      H: ['LIN','CHA'],                         // horse, hat
+      I: ['TKIN','YEH-HES'],                    // ice, itch
+      J: ['TKELE-CHO-G','AH-YA-TSINNE'],        // jackass, jaw
+      K: ['JAD-HO-LONI','BA-AH-NE-DI-TININ'],   // kettle, key
+      L: ['DIBEH-YAZZIE','AH-JAD'],             // lamb, leg
+      M: ['TSIN-TLITI','BE-TAS-TNI'],           // match, mirror
+      N: ['TSAH','A-CHIN'],                     // needle, nose
+      O: ['A-KHA','TLO-CHIN'],                  // oil, onion
+      P: ['CLA-GI-AIH','BI-SO-DIH'],            // pant, pig
+      Q: ['CA-YEILTH'],                         // quiver
+      R: ['GAH','DAH-NES-TSA'],                 // rabbit, ram
+      S: ['DIBEH','KLESH'],                     // sheep, snake
+      T: ['THAN-ZIE','A-WOH'],                  // turkey, tooth
+      U: ['SHI-DA','NO-DA-IH'],                 // uncle, ute
+      V: ['A-KEH-DI-GLINI'],                    // victor
+      W: ['GLOE-IH','DAH-NES-TSA-EE'],          // weasel, weapon
+      X: ['AL-NA-AS-DZOH'],                     // crossed (X)
+      Y: ['TSAH-AS-ZIH'],                       // yucca
+      Z: ['BESH-DO-TLIZ']                       // zinc
+    };
+    // Common military code-vocabulary entries (subset of ~411 documented terms)
+    const VOCAB = {
+      AMERICA: 'NE-HE-MAH',          // "our mother"
+      AIRPLANE: 'WO-TAH-DE-NE-IH',
+      BOMB: 'A-YE-SHI',
+      SUBMARINE: 'BESH-LO',          // "iron fish"
+      TANK: 'CHAY-DA-GAHI',          // "tortoise"
+      BATTLESHIP: 'LO-TSO',          // "whale"
+      DESTROYER: 'CA-LO',            // "shark"
+      FIGHTER: 'DA-HE-TIH-HI',       // "hummingbird"
+      BOMBER: 'JAY-SHO',             // "buzzard"
+      MARINE: 'TOH-YIL-KAL',         // "sea soldier"
+      ENEMY: 'ANA-IH',
+      ATTACK: 'AL-TAH-JE-JAY',
+      RETREAT: 'JI-DI-JAH',
+      MACHINE: 'CHIDI',
+      GUN: 'BE-AL-DOH',
+      MORTAR: 'BE-AL-DOH-CID-DA-HI',
+      GRENADE: 'NI-MA-SI',           // "potato"
+      MINE: 'HA-GAH',
+      CAPTAIN: 'BESH-LEGAI-NAH-KIH', // "two silver bars"
+      MAJOR: 'CHE-CHIL-BE-TAH-OLA',  // "gold oak leaf"
+      GENERAL: 'BIH-KEH-HE',
+      ISLAND: 'SEI-TAH',
+      NIGHT: 'TLO-EE',
+      DAY: 'JI',
+      MORNING: 'A-YOR-ANH',
+      MESSAGE: 'HANE-AL-NEH'
+    };
+    function pick(arr, rng) { return arr[Math.floor(rng() * arr.length)]; }
+    return {
+      encode: (text, _key) => {
+        const t = text.toUpperCase();
+        // Deterministic per-message RNG so the same message reproduces
+        let s = 0;
+        for (let i = 0; i < t.length; i++) s = (s * 131 + t.charCodeAt(i)) & 0x7fffffff;
+        if (s === 0) s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        // Tokenize on whitespace, keeping word chunks
+        const words = t.split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const w of words) {
+          const stripped = w.replace(/[^A-Z]/g, '');
+          if (VOCAB[stripped]) {
+            out.push('[' + VOCAB[stripped] + ']');     // codeword path
+          } else {
+            const letters = [];
+            for (const ch of stripped) {
+              if (ALPHA[ch]) letters.push(pick(ALPHA[ch], rng));
+              else letters.push('?');
+            }
+            out.push(letters.join(' '));               // spelling-alphabet path
+          }
+        }
+        return out.join('   /   ');                    // " / " separates words
+      },
+      decode: (text) => {
+        const wordChunks = text.split(/\s*\/\s*/).map(s => s.trim()).filter(Boolean);
+        // Build reverse lookups
+        const codeWord2Eng = {};
+        for (const k in VOCAB) codeWord2Eng[VOCAB[k]] = k;
+        const navajo2Letter = {};
+        for (const k in ALPHA) for (const w of ALPHA[k]) navajo2Letter[w] = k;
+        const out = [];
+        for (const wc of wordChunks) {
+          const trimmed = wc.trim();
+          // Codeword form: [TOKEN]
+          const m = trimmed.match(/^\[([^\]]+)\]$/);
+          if (m && codeWord2Eng[m[1]]) { out.push(codeWord2Eng[m[1]]); continue; }
+          // Spelling alphabet form
+          const tokens = trimmed.split(/\s+/);
+          let s = '';
+          for (const tk of tokens) s += (navajo2Letter[tk] || '?');
+          out.push(s);
+        }
+        return out.join(' ');
+      }
+    };
+  })();
+
+  /* ─── 38d. Voynich exhibit: invented Latin-letter substitution ───
+     This reversible teaching model is not an EVA transcription, a glyph
+     renderer or a proposed decipherment. It preserves input word lengths. */
+  const voynich = (() => {
+    const EVA = ['o','a','y','e','d','s','h','c','k','t','p','f','l','r','i','n','m','q','x','g','z','v','j','b','u','w'];
+    // EVA is a legacy internal variable name; this permutation is invented.
+    function fold(ch) {
+      const c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return EVA[c - 65];
+      if (c >= 97 && c <= 122) return EVA[c - 97];
+      return ch;
+    }
+    function unfold(ch) {
+      const i = EVA.indexOf(ch.toLowerCase());
+      if (i >= 0) return String.fromCharCode(65 + i);
+      return ch;
+    }
+    return {
+      encode: (text) => {
+        // Preserve the user’s word breaks; these are not manuscript word patterns.
+        return text.split('').map(fold).join('');
+      },
+      decode: (text) => {
+        return text.split('').map(unfold).join('');
+      }
+    };
+  })();
+
+  /* ─── 39. Atbash (ancient Hebrew reflection cipher) ─── */
+  const atbash = (() => {
+    const run = t => t.split('').map(ch => {
+      const c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90)  return String.fromCharCode(90  - (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCharCode(122 - (c - 97));
+      return ch;
+    }).join('');
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 40. ROT13 (special-case Caesar) ─── */
+  const rot13 = (() => {
+    const run = t => caesar.encode(t, 13);
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── 41. Four-Square Cipher (Delastelle) ─── */
+  const foursquare = (() => {
+    // Uses the ACA convention (25 letters, J merged into I) — documented on the
+    // exhibit page and baked into the published corpus records. Note Wikipedia's
+    // four-square example instead omits Q, so its vector (HELPMEOBIWANKENOBI →
+    // FYGMKYHOBXMFKKKIMD) will not match; the digraph rule itself is identical.
+    const G = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'; // 25 letters, J→I
+    function makeSquare(key) {
+      const k = clean(key || 'EXAMPLE').replace(/J/g, 'I');
+      const seen = new Set(); let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of G) if (!seen.has(c)) s += c;
+      return s;
+    }
+    function pos(sq, ch) { const i = sq.indexOf(ch); return [Math.floor(i / 5), i % 5]; }
+    function run(text, key, enc) {
+      const [k1, k2] = (key || 'EXAMPLE,KEYWORD').split(',');
+      const TL = G, TR = makeSquare(k1), BL = makeSquare(k2), BR = G;
+      let t = clean(text).replace(/J/g, 'I');
+      if (enc) t = escapeFillers(t);
+      if (t.length % 2) t += 'X';
+      let out = '';
+      for (let i = 0; i < t.length; i += 2) {
+        const a = t[i], b = t[i + 1];
+        if (enc) {
+          const [r1, c1] = pos(TL, a); const [r2, c2] = pos(BR, b);
+          out += TR[r1 * 5 + c2] + BL[r2 * 5 + c1];
+        } else {
+          const [r1, c1] = pos(TR, a); const [r2, c2] = pos(BL, b);
+          out += TL[r1 * 5 + c2] + BR[r2 * 5 + c1];
         }
       }
-      valid.push(pos);
+      if (!enc) return unescapeFillers(out.replace(/X+$/, ''));
+      return out;
     }
-    return { valid, rejected, ciphertext: ct, crib: cr };
-  }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
 
-  /**
-   * Brute-force rotor-order + position search for a known crib.
-   * Tries all 60 rotor orders × 26³ positions = 1,054,560 settings.
-   * Ring settings fixed at AAA, plugboard empty (the cryptanalytically
-   * interesting subspace; the bombe's purpose was to extend this to the
-   * plugboard, which is far beyond browser scope).
-   *
-   * Yields candidates incrementally via the `onCandidate` callback so the
-   * caller can render progress. Use a Web Worker or chunked scheduling for
-   * UI responsiveness.
-   *
-   * @param {object} opts
-   * @param {string} opts.ciphertext  Full intercepted ciphertext.
-   * @param {string} opts.crib        Known plaintext fragment.
-   * @param {number} opts.cribOffset  Position of the crib in the ciphertext.
-   * @param {string} [opts.reflector] 'B' or 'C', default 'B'.
-   * @param {string[]} [opts.availableRotors] default ['I','II','III','IV','V'].
-   * @param {(c:object)=>void} [opts.onCandidate]
-   * @param {(p:object)=>void} [opts.onProgress] called every progressInterval.
-   * @param {number} [opts.progressInterval] default 5000.
-   * @returns {{candidates:Array, tested:number, totalSpace:number}}
-   */
-  function bruteForceCrib(opts) {
-    const ct = opts.ciphertext.toUpperCase().replace(/[^A-Z]/g, '');
-    const crib = opts.crib.toUpperCase().replace(/[^A-Z]/g, '');
-    const cribOffset = opts.cribOffset | 0;
-    const reflector = opts.reflector || 'B';
-    const available = opts.availableRotors || ['I','II','III','IV','V'];
-    const onCand = opts.onCandidate || (() => {});
-    const onProg = opts.onProgress || (() => {});
-    const progInt = opts.progressInterval || 5000;
-
-    if (cribOffset + crib.length > ct.length) {
-      throw new Error('Crib offset + length exceeds ciphertext');
+  /* ─── 42. Two-Square Cipher (horizontal variant) ─── */
+  const twosquare = (() => {
+    const G = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
+    function makeSquare(key) {
+      const k = clean(key || 'EXAMPLE').replace(/J/g, 'I');
+      const seen = new Set(); let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of G) if (!seen.has(c)) s += c;
+      return s;
     }
-    // Reject placements where any crib letter equals the corresponding
-    // ciphertext letter (Enigma cannot encrypt to itself).
-    for (let i = 0; i < crib.length; i++) {
-      if (ct[cribOffset + i] === crib[i]) {
-        return {
-          candidates: [],
-          tested: 0,
-          totalSpace: 0,
-          rejected: 'Crib placement contains a self-encryption — impossible in Enigma.'
-        };
+    function pos(sq, ch) { const i = sq.indexOf(ch); return [Math.floor(i / 5), i % 5]; }
+    function run(text, key, enc) {
+      const legacy = typeof key === 'string' && key.startsWith('legacy:');
+      const [k1, k2] = ((legacy ? key.slice(7) : key) || 'EXAMPLE,KEYWORD').split(',');
+      const L = makeSquare(k1), R = makeSquare(k2);
+      let t = clean(text).replace(/J/g, 'I');
+      if (enc) t = escapeFillers(t);
+      if (t.length % 2) {
+        if (!enc && !legacy) throw new Error('Two-square ciphertext must contain complete pairs');
+        t += 'X';
+      }
+      let out = '';
+      for (let i = 0; i < t.length; i += 2) {
+        const a = t[i], b = t[i + 1];
+        if (legacy) {
+          // Pre-audit museum transformation, retained only for frozen corpus replay.
+          const [r1,c1] = pos(L,a), [r2,c2] = pos(R,b);
+          out += r1 === r2 ? a+b : L[r1*5+c2]+R[r2*5+c1];
+        } else if (enc) {
+          // ACA horizontal convention: right-square corner first; same row reverses.
+          const [r1,c1] = pos(L,a), [r2,c2] = pos(R,b);
+          out += R[r1*5+c2] + L[r2*5+c1];
+        } else {
+          const [r1,c2] = pos(R,a), [r2,c1] = pos(L,b);
+          out += L[r1*5+c1] + R[r2*5+c2];
+        }
+      }
+      if (!enc) return unescapeFillers(out.replace(/X+$/, ''));
+      return out;
+    }
+    // Output order matters: decoding reads the first cipher letter in the right square.
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
+
+  /* ─── 43. Straddling Checkerboard (Soviet hand cipher core) ─── */
+  const straddlingCheckerboard = (() => {
+    function build(key) {
+      // Top row letters (8 most-frequent slots, 0–9 minus the two "escape" digits)
+      const k = clean(key || 'ATONESIRE');
+      const seen = new Set(); let topAlpha = '';
+      for (const c of k) if (!seen.has(c) && topAlpha.length < 8) { seen.add(c); topAlpha += c; }
+      // Pad if keyword too short (shouldn't happen with default)
+      for (const c of A) if (!seen.has(c) && topAlpha.length < 8) { seen.add(c); topAlpha += c; }
+      // Remaining 18 letters fill rows 2/6 (the two escape digits)
+      let rest = '';
+      for (const c of A) if (!seen.has(c)) rest += c;
+      // Top row digit slots: 0,1,3,4,5,6,8,9  (escape=2 and 7)
+      const topSlots = [0, 1, 3, 4, 5, 6, 8, 9];
+      const enc = {}, dec = {};
+      topAlpha.split('').forEach((ch, i) => {
+        const code = String(topSlots[i]);
+        enc[ch] = code; dec[code] = ch;
+      });
+      rest.split('').forEach((ch, i) => {
+        const prefix = i < 10 ? '2' : '7';
+        const digit  = String(i % 10);
+        const code = prefix + digit;
+        enc[ch] = code; dec[code] = ch;
+      });
+      return { enc, dec };
+    }
+    return {
+      encode: (text, key) => {
+        const { enc } = build(key);
+        return clean(text).split('').map(c => enc[c] || '').join('');
+      },
+      decode: (text, key) => {
+        const { dec } = build(key);
+        const digits = text.replace(/\D/g, '');
+        let out = '', i = 0;
+        while (i < digits.length) {
+          const d = digits[i];
+          if (d === '2' || d === '7') {
+            const pair = digits.substr(i, 2);
+            if (dec[pair]) { out += dec[pair]; i += 2; continue; }
+          }
+          if (dec[d]) { out += dec[d]; }
+          i++;
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 44. Chaocipher (Byrne, 1918) ─── */
+  const chaocipher = (() => {
+    function init(key) {
+      // Two 26-char alphabets seeded from key
+      const k = clean(key || 'CHAOCIPHER');
+      const seen = new Set(); let base = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); base += c; }
+      for (const c of A) if (!seen.has(c)) base += c;
+      // Right alphabet rotated by 13 from left for variety
+      const right = base.slice(13) + base.slice(0, 13);
+      return [base.split(''), right.split('')];
+    }
+    function permuteLeft(L) {
+      // Take char at position 1 (zenith+1), shift to end after zenith
+      // Standard Byrne permutation:
+      // 1. rotate so the just-enciphered letter (currently at idx 0) is at zenith → already there
+      // 2. extract char at position 1, insert at position 13 (after splitting)
+      const ch = L.splice(1, 1)[0];
+      L.splice(13, 0, ch);
+      return L;
+    }
+    function permuteRight(R) {
+      // Rotate so just-enciphered plaintext letter (at idx 0) → moves so that
+      // the next letter (idx 1) goes to zenith (idx 0); then take char at
+      // position 2 and insert at position 13.
+      // Per Byrne: shift entire alphabet one to the left (rotation), then
+      // extract char at position 2 and insert at position 13.
+      R.push(R.shift()); // rotate one position left
+      const ch = R.splice(2, 1)[0];
+      R.splice(13, 0, ch);
+      return R;
+    }
+    return {
+      encode: (text, key) => {
+        let [L, R] = init(key);
+        const t = clean(text); let out = '';
+        for (const ch of t) {
+          const idx = R.indexOf(ch);
+          if (idx < 0) continue;
+          out += L[idx];
+          // rotate both so the touched chars are at zenith (idx 0)
+          for (let i = 0; i < idx; i++) { L.push(L.shift()); R.push(R.shift()); }
+          L = permuteLeft(L);
+          R = permuteRight(R);
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        let [L, R] = init(key);
+        const t = clean(text); let out = '';
+        for (const ch of t) {
+          const idx = L.indexOf(ch);
+          if (idx < 0) continue;
+          out += R[idx];
+          for (let i = 0; i < idx; i++) { L.push(L.shift()); R.push(R.shift()); }
+          L = permuteLeft(L);
+          R = permuteRight(R);
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 45. M-209 (Hagelin C-38 — pedagogical pin-and-lug model) ─── */
+  // Six pinwheels with co-prime lengths 26,25,23,21,19,17 = period 101,405,850.
+  // A 27-bar cage has zero, one, or two wheel lugs on every bar. A bar contributes
+  // once when either contacted wheel is active, so the displacement is 0..27.
+  const m209 = (() => {
+    const lengths = [26, 25, 23, 21, 19, 17];
+    function seededSettings(key) {
+      const k = (clean(key || 'HAGELIN') + 'M209').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (Math.imul(s, 1103515245) + 12345) & 0x7fffffff; return s / 0x80000000; };
+      const pins = lengths.map(length => Array.from({ length }, () => rng() < 0.5 ? 1 : 0));
+      const lugs = Array.from({ length: 27 }, () => {
+        const first = 1 + Math.floor(rng() * 6);
+        const second = rng() < 0.45 ? 1 + Math.floor(rng() * 6) : 0;
+        return [first, second === first ? 0 : second];
+      });
+      return { pins, lugs, positions: [0, 0, 0, 0, 0, 0] };
+    }
+    function normalizeSettings(value) {
+      const source = typeof value === 'string' || value === undefined || value === null
+        ? seededSettings(value)
+        : value;
+      if (!source || !Array.isArray(source.pins) || source.pins.length !== 6 ||
+          !Array.isArray(source.lugs) || source.lugs.length !== 27) {
+        throw new Error('M-209 settings require six pin wheels and exactly 27 lug bars.');
+      }
+      const pins = source.pins.map((wheel, index) => {
+        const values = typeof wheel === 'string' ? [...wheel].map(Number) : wheel;
+        if (!Array.isArray(values) || values.length !== lengths[index] || values.some(pin => pin !== 0 && pin !== 1)) {
+          throw new Error(`M-209 wheel ${index + 1} requires ${lengths[index]} binary pins.`);
+        }
+        return [...values];
+      });
+      const lugs = source.lugs.map((bar, index) => {
+        if (!Array.isArray(bar) || bar.length !== 2 || bar.some(wheel => !Number.isInteger(wheel) || wheel < 0 || wheel > 6) ||
+            (bar[0] === 0 && bar[1] === 0) || (bar[0] !== 0 && bar[0] === bar[1])) {
+          throw new Error(`M-209 lug bar ${index + 1} must name one or two distinct wheels (1–6; use 0 for an empty lug).`);
+        }
+        return [...bar];
+      });
+      const positions = source.positions === undefined ? [0, 0, 0, 0, 0, 0] : source.positions;
+      if (!Array.isArray(positions) || positions.length !== 6 ||
+          positions.some((position, index) => !Number.isInteger(position) || position < 0 || position >= lengths[index])) {
+        throw new Error('M-209 starting positions must be six valid zero-based wheel indexes.');
+      }
+      return { pins, lugs, positions: [...positions] };
+    }
+    function legacyRun(text, key) {
+      const seed = String(key).slice('legacy:'.length);
+      const pins = (() => {
+        const k = (clean(seed || 'HAGELIN') + 'M209').split('').map(c => c.charCodeAt(0));
+        let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+        if (s === 0) s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        return lengths.map(length => Array.from({ length }, () => rng() < 0.5 ? 1 : 0));
+      })();
+      const input = clean(text); let out = '';
+      for (let i = 0; i < input.length; i++) {
+        let shift = 0;
+        for (let wheel = 0; wheel < 6; wheel++) shift += pins[wheel][i % lengths[wheel]];
+        out += A[mod(shift - (input.charCodeAt(i) - 65), 26)];
+      }
+      return out;
+    }
+    function trace(text, key) {
+      if (typeof key === 'string' && key.startsWith('legacy:')) {
+        return { output: legacyRun(text, key), shifts: [], legacy: true };
+      }
+      const { pins, lugs, positions } = normalizeSettings(key);
+      const input = clean(text); const shifts = []; let output = '';
+      for (const character of input) {
+        const active = pins.map((wheel, index) => wheel[positions[index]] === 1);
+        const shift = lugs.reduce((count, bar) => count + Number(
+          (bar[0] > 0 && active[bar[0] - 1]) || (bar[1] > 0 && active[bar[1] - 1])
+        ), 0);
+        shifts.push(shift);
+        // The indicator alphabet is reciprocal and reversed: with zero
+        // displacement A enciphers as Z. TM 11-380's worked check has A with
+        // displacement 20 encipher as T, hence C = 25 - P + D (mod 26).
+        output += A[mod(25 - (character.charCodeAt(0) - 65) + shift, 26)];
+        for (let wheel = 0; wheel < 6; wheel++) positions[wheel] = mod(positions[wheel] + 1, lengths[wheel]);
+      }
+      return { output, shifts, legacy: false };
+    }
+    const run = (text, key) => trace(text, key).output;
+    return { encode: run, decode: run, trace, seededSettings };
+  })();
+
+  /* ─── 46. Solitaire / Pontifex (Schneier, 1999) ─── */
+  // Card-deck stream cipher. Deck of 54 (52 cards + 2 jokers).
+  const solitaire = (() => {
+    // Card values: 1..52 = clubs, diamonds, hearts, spades A..K
+    // Jokers: A=53, B=54
+    function initDeck(key) {
+      const deck = [];
+      for (let i = 1; i <= 54; i++) deck.push(i);
+      const k = clean(key || 'CRYPTONOMICON');
+      // Key the deck: for each key letter, do one "cycle" then count-cut by letter value
+      function step(deck) { return solitaireStep(deck); }
+      let d = deck.slice();
+      for (const ch of k) {
+        d = step(d);
+        const v = ch.charCodeAt(0) - 64; // A=1
+        d = countCut(d, v);
+      }
+      return d;
+    }
+    function moveDown(deck, card, n) {
+      const i = deck.indexOf(card);
+      const arr = deck.slice();
+      arr.splice(i, 1);
+      let j = i + n;
+      // wrap as if circular with last card sticky
+      if (j > arr.length) j = ((j - 1) % arr.length) + 1;
+      arr.splice(j, 0, card);
+      return arr;
+    }
+    function tripleCut(deck) {
+      const i1 = deck.indexOf(53);
+      const i2 = deck.indexOf(54);
+      const [a, b] = i1 < i2 ? [i1, i2] : [i2, i1];
+      const top = deck.slice(0, a);
+      const mid = deck.slice(a, b + 1);
+      const bot = deck.slice(b + 1);
+      return bot.concat(mid).concat(top);
+    }
+    function countCut(deck, n) {
+      const last = deck[deck.length - 1];
+      const cut = Math.min(n, 53);
+      const top = deck.slice(0, cut);
+      const rest = deck.slice(cut, deck.length - 1);
+      return rest.concat(top).concat([last]);
+    }
+    function solitaireStep(deck) {
+      // Move A joker (53) down 1
+      let d = moveDown(deck, 53, 1);
+      // Move B joker (54) down 2
+      d = moveDown(d, 54, 2);
+      // Triple cut around the jokers
+      d = tripleCut(d);
+      // Count cut by value of bottom card (jokers count as 53)
+      const bottom = d[d.length - 1];
+      d = countCut(d, bottom === 54 ? 53 : bottom);
+      return d;
+    }
+    function nextKeystream(deck) {
+      while (true) {
+        deck = solitaireStep(deck);
+        const top = deck[0];
+        const cnt = top === 54 ? 53 : top;
+        const out = deck[cnt]; // 0-indexed: count cards down
+        if (out === 53 || out === 54) continue; // skip jokers
+        return { value: ((out - 1) % 26) + 1, deck };
       }
     }
+    function run(text, key, enc) {
+      let deck = initDeck(key);
+      let t = clean(text); let out = '';
+      if (enc) t = escapeFillers(t);
+      // Schneier's spec pads the plaintext with X to a multiple of five before
+      // encrypting; his published test vectors (e.g. SOLITAIRE/CRYPTONOMICON →
+      // KIRAK SFJAN) require it. Padding stays in the decoded output — both
+      // sides know trailing X is filler.
+      if (enc) while (t.length % 5) t += 'X';
+      for (const ch of t) {
+        const r = nextKeystream(deck); deck = r.deck;
+        const p = ch.charCodeAt(0) - 64;
+        const c = enc ? ((p + r.value - 1) % 26) + 1 : ((p - r.value + 26 - 1) % 26) + 1;
+        out += String.fromCharCode(64 + (c === 0 ? 26 : c));
+      }
+      if (!enc) return unescapeFillers(out.replace(/X+$/, ''));
+      return out;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
 
-    // We only need to test the slice that covers the crib.
-    const slice = ct.substr(cribOffset, crib.length);
+  /* ─── 47. Beale Cipher (book cipher — number = Nth word, take first letter) ─── */
+  const beale = (() => {
+    function tokens(book) {
+      return (book || '').split(/[^A-Za-z]+/).filter(Boolean).map(w => w.toUpperCase());
+    }
+    return {
+      encode: (text, book) => {
+        const ws = tokens(book);
+        if (!ws.length) return '';
+        // For each plaintext letter, find a word in the book starting with it
+        const indexByLetter = {};
+        ws.forEach((w, i) => {
+          const c = w[0];
+          (indexByLetter[c] = indexByLetter[c] || []).push(i + 1);
+        });
+        const t = clean(text); const out = [];
+        let s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        for (const ch of t) {
+          const choices = indexByLetter[ch];
+          if (!choices || !choices.length) { out.push('?'); continue; }
+          out.push(String(choices[Math.floor(rng() * choices.length)]));
+        }
+        return out.join(' ');
+      },
+      decode: (text, book) => {
+        const ws = tokens(book);
+        const nums = (text.match(/\d+/g) || []).map(n => parseInt(n, 10));
+        return nums.map(n => (ws[n - 1] ? ws[n - 1][0] : '?')).join('');
+      }
+    };
+  })();
 
-    // Generate all rotor orderings (permutations of 3 from `available`).
-    const orders = [];
-    for (let a = 0; a < available.length; a++)
-      for (let b = 0; b < available.length; b++)
-        if (b !== a)
-          for (let c = 0; c < available.length; c++)
-            if (c !== a && c !== b)
-              orders.push([available[a], available[b], available[c]]);
+  /* ─── 48. Copiale Cipher (homophonic substitution; demo uses simplified alphabet) ─── */
+  const copiale = (() => {
+    // Real Copiale uses ~90 unique symbols. We simulate with letter+digit pairs.
+    const symbolPool = (() => {
+      const arr = [];
+      for (const a of A) for (const d of '0123456789') arr.push(a + d);
+      return arr; // 260 symbols
+    })();
+    const freq = { E: 13, T: 9, A: 8, O: 8, I: 7, N: 7, S: 6, H: 6, R: 6, D: 4, L: 4, C: 3, U: 3, M: 3, W: 2, F: 2, G: 2, Y: 2, P: 2, B: 1, V: 1, K: 1, J: 1, X: 1, Q: 1, Z: 1 };
+    function build(key) {
+      const k = clean(key || 'COPIALE') + 'OCULIST';
+      let s = 0; for (let i = 0; i < k.length; i++) s = (s * 131 + k.charCodeAt(i)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      const pool = symbolPool.slice().sort((a, b) => {
+        const ha = (a.charCodeAt(0) * 31 + a.charCodeAt(1)) ^ Math.floor(rng() * 1e6);
+        const hb = (b.charCodeAt(0) * 31 + b.charCodeAt(1)) ^ Math.floor(rng() * 1e6);
+        return ha - hb;
+      });
+      const enc = {}, dec = {}; let pi = 0;
+      for (const ch of A) {
+        const n = freq[ch] || 1; enc[ch] = [];
+        for (let i = 0; i < n; i++) {
+          const sym = pool[pi++]; enc[ch].push(sym); dec[sym] = ch;
+        }
+      }
+      return { enc, dec };
+    }
+    return {
+      encode: (text, key) => {
+        const { enc } = build(key);
+        let s = 1;
+        const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+        return clean(text).split('').map(ch => {
+          const opts = enc[ch]; if (!opts) return '??';
+          return opts[Math.floor(rng() * opts.length)];
+        }).join(' ');
+      },
+      decode: (text, key) => {
+        const { dec } = build(key);
+        const toks = (text.match(/[A-Z]\d/g) || []);
+        return toks.map(t => dec[t] || '?').join('');
+      }
+    };
+  })();
 
-    const totalSpace = orders.length * 26 * 26 * 26;
-    const candidates = [];
-    let tested = 0;
+  /* ─── 49. Kryptos K1/K2-style (Vigenère with custom KRYPTOS-keyed tableau) ─── */
+  const kryptos = (() => {
+    // Custom alphabet: keyword KRYPTOS then remaining letters
+    function ktAlpha() {
+      const k = 'KRYPTOS';
+      const seen = new Set(); let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of A) if (!seen.has(c)) s += c;
+      return s;
+    }
+    const KT = ktAlpha();
+    function run(text, key, enc) {
+      const k = clean(key || 'PALIMPSEST');
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const pIdx = KT.indexOf(t[i]);
+        const kIdx = KT.indexOf(k[i % k.length]);
+        if (pIdx < 0 || kIdx < 0) { out += t[i]; continue; }
+        out += KT[mod(enc ? pIdx + kIdx : pIdx - kIdx, 26)];
+      }
+      return out;
+    }
+    return { encode: (t, k) => run(t, k, true), decode: (t, k) => run(t, k, false) };
+  })();
 
-    for (const order of orders) {
-      for (let p0 = 0; p0 < 26; p0++) {
-        for (let p1 = 0; p1 < 26; p1++) {
-          for (let p2 = 0; p2 < 26; p2++) {
-            // Advance the rotor state forward to the position the crib
-            // sits at: we need the machine state at `cribOffset` keypresses
-            // in. Rather than simulating, we use the trick that with no
-            // plugboard and ring AAA, we can just construct a fresh
-            // machine and encrypt cribOffset dummy letters first, then
-            // the crib slice. (Simpler and accurate; brute force speed
-            // is dominated by the 1M-machine outer loop.)
-            const positions = chr(p0) + chr(p1) + chr(p2);
-            const m = makeMachine({
-              rotors: order,
-              reflector,
-              ringSettings: 'AAA',
-              positions,
-              plugboard: []
-            });
-            // Fast-forward
-            if (cribOffset > 0) m.encrypt('A'.repeat(cribOffset));
-            const got = m.encrypt(crib);
-            tested++;
-            if (got === slice) {
-              const cand = {
-                rotors: order.slice(),
-                positions,
-                reflector,
-                producedCipher: got
-              };
-              candidates.push(cand);
-              onCand(cand);
+  /* ─── 50. Purple (Japanese WWII — simplified stepping rotor model) ─── */
+  const purple = (() => {
+    const sixes = 'AEIOUY';
+    const twenties = 'BCDFGHJKLMNPQRSTVWXZ';
+
+    function shuffled(alphabet, rng) {
+      const values = alphabet.split('');
+      for (let index = values.length - 1; index > 0; index--) {
+        const swapAt = Math.floor(rng() * (index + 1));
+        [values[index], values[swapAt]] = [values[swapAt], values[index]];
+      }
+      return values.join('');
+    }
+
+    function build(key) {
+      const k = (clean(key || 'PURPLE') + 'TOKYO').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      const sixesTables = Array.from({ length: 25 }, () => shuffled(sixes, rng));
+      const twentiesBanks = Array.from({ length: 3 }, () =>
+        Array.from({ length: 25 }, () => shuffled(twenties, rng)));
+      return { sixesTables, twentiesBanks };
+    }
+
+    function substitute(character, alphabet, table, decrypt) {
+      return decrypt ? alphabet[table.indexOf(character)] : table[alphabet.indexOf(character)];
+    }
+
+    function run(text, key, decrypt) {
+      const { sixesTables, twentiesBanks } = build(key);
+      const input = clean(text);
+      let result = '';
+      for (let index = 0; index < input.length; index++) {
+        let character = input[index];
+        if (sixes.includes(character)) {
+          character = substitute(character, sixes, sixesTables[index % 25], decrypt);
+        } else {
+          const positions = [index % 25, Math.floor(index / 25) % 25, Math.floor(index / 625) % 25];
+          if (decrypt) {
+            for (let bank = 2; bank >= 0; bank--) {
+              character = substitute(character, twenties, twentiesBanks[bank][positions[bank]], true);
             }
-            if (tested % progInt === 0) {
-              onProg({ tested, totalSpace, found: candidates.length });
+          } else {
+            for (let bank = 0; bank < 3; bank++) {
+              character = substitute(character, twenties, twentiesBanks[bank][positions[bank]], false);
             }
           }
         }
+        result += character;
+      }
+      return result;
+    }
+
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
+  /* ─── 51. Autokey (Vigenère self-extending) ─── */
+  const autokey = (() => {
+    function enc(text, key) {
+      const k = clean(key) || 'KEY';
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const ki = i < k.length ? A.indexOf(k[i]) : A.indexOf(t[i - k.length]);
+        const pi = A.indexOf(t[i]);
+        out += A[mod(pi + ki, 26)];
+      }
+      return out;
+    }
+    function dec(text, key) {
+      const k = clean(key) || 'KEY';
+      const c = clean(text);
+      // Accumulate into an array, not a string. Autokey decryption has to read
+      // back the plaintext it has already recovered, and indexing into a string
+      // that is being built by += forces V8 to flatten the rope on every read —
+      // which made this quadratic (4x the input cost 16x the time).
+      const out = new Array(c.length);
+      for (let i = 0; i < c.length; i++) {
+        const ki = i < k.length ? A.indexOf(k[i]) : A.indexOf(out[i - k.length]);
+        const ci = A.indexOf(c[i]);
+        out[i] = A[mod(ci - ki, 26)];
+      }
+      return out.join('');
+    }
+    return { encode: enc, decode: dec };
+  })();
+
+  /* ─── 52. Nomenclator (illustrative — small fixed codebook) ─── */
+  const nomenclator = (() => {
+    // A demo nomenclator: digits 01-26 are the substitution alphabet (shifted +0),
+    // larger numbers are vocabulary entries, 99 is a null.
+    const VOCAB = {
+      'THE': '60', 'AND': '61', 'OF': '62', 'TO': '63', 'IN': '64',
+      'KING': '70', 'QUEEN': '71', 'ARMY': '72', 'FLEET': '73',
+      'LONDON': '80', 'PARIS': '81', 'MADRID': '82', 'VIENNA': '83',
+      'ATTACK': '90', 'RETREAT': '91', 'DAWN': '92', 'MIDNIGHT': '93'
+    };
+    const REV = Object.fromEntries(Object.entries(VOCAB).map(([k,v])=>[v,k]));
+    function enc(text, _key) {
+      const tokens = String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '').toUpperCase().split(/\b/);
+      const out = [];
+      for (const tok of tokens) {
+        if (/^[A-Z]+$/.test(tok)) {
+          if (VOCAB[tok]) { out.push(VOCAB[tok]); continue; }
+          for (const ch of tok) {
+            const i = A.indexOf(ch);
+            if (i >= 0) out.push(String(i + 1).padStart(2, '0'));
+          }
+        }
+      }
+      return out.join(' ');
+    }
+    function dec(text, _key) {
+      const groups = (text || '').trim().split(/\s+/);
+      let out = '';
+      for (const g of groups) {
+        if (g === '99') continue;
+        if (REV[g]) { out += REV[g] + ' '; continue; }
+        const n = parseInt(g, 10);
+        if (n >= 1 && n <= 26) out += A[n - 1];
+      }
+      return out.trim();
+    }
+    return { encode: enc, decode: dec };
+  })();
+
+  /* ─── 53. Book Cipher (illustrative — Declaration of Independence opener) ─── */
+  const bookCipher = (() => {
+    const BOOK = (
+      'When in the course of human events it becomes necessary for one people ' +
+      'to dissolve the political bands which have connected them with another ' +
+      'and to assume among the powers of the earth the separate and equal station ' +
+      'to which the laws of nature and of natures God entitle them a decent respect ' +
+      'to the opinions of mankind requires that they should declare the causes ' +
+      'which impel them to the separation We hold these truths to be self evident ' +
+      'that all men are created equal that they are endowed by their creator with ' +
+      'certain unalienable rights that among these are life liberty and the pursuit of happiness'
+    ).toUpperCase().split(/\s+/);
+    function enc(text, _key) {
+      const words = (text || '').toUpperCase().split(/\s+/).filter(Boolean);
+      const out = [];
+      for (const w of words) {
+        const i = BOOK.indexOf(w);
+        if (i >= 0) { out.push(String(i + 1)); continue; }
+        const literal = w.replace(/[^A-Z]/g, '').split('').map(ch => A.indexOf(ch) + 1);
+        if (literal.length) out.push('0.' + literal.join('.'));
+      }
+      return out.join(' ');
+    }
+    function dec(text, _key) {
+      const groups = (text || '').trim().split(/\s+/);
+      const out = [];
+      for (const g of groups) {
+        if (/^0(?:\.\d+)+$/.test(g)) {
+          const literal = g.split('.').slice(1).map(n => A[parseInt(n, 10) - 1] || '?').join('');
+          out.push(literal);
+        } else if (g.includes('.')) {
+          const [w, l] = g.split('.').map(n => parseInt(n, 10));
+          if (BOOK[w - 1]) out.push(BOOK[w - 1][l - 1] || '?');
+        } else {
+          const w = parseInt(g, 10);
+          if (BOOK[w - 1]) out.push(BOOK[w - 1]);
+        }
+      }
+      return out.join(' ');
+    }
+    return { encode: enc, decode: dec };
+  })();
+
+  /* ─── 54. SIGABA (illustrative pseudo-random rotor stepping) ─── */
+  // Real SIGABA: 5 cipher rotors stepped by the output of 5 control rotors
+  // permuted through 5 index rotors. We model the essence: a substitution
+  // alphabet that advances 1-4 positions per character driven by a key-seeded PRNG.
+  const sigaba = (() => {
+    function build(key) {
+      const k = (clean(key || 'SIGABA') + 'ECMII').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // 32 rotor positions; at each step advance 1-4 of them
+      const alphas = [];
+      for (let i = 0; i < 64; i++) {
+        const arr = A.split('');
+        for (let j = arr.length - 1; j > 0; j--) {
+          const r = Math.floor(rng() * (j + 1));
+          [arr[j], arr[r]] = [arr[r], arr[j]];
+        }
+        alphas.push(arr.join(''));
+      }
+      // Stepping schedule: pseudo-random cumulative advance
+      const steps = [];
+      let pos = 0;
+      for (let i = 0; i < 4096; i++) {
+        const advance = 1 + Math.floor(rng() * 4); // 1..4
+        pos = (pos + advance) % 64;
+        steps.push(pos);
+      }
+      return { alphas, steps };
+    }
+    return {
+      encode: (text, key) => {
+        const { alphas, steps } = build(key);
+        const t = clean(text); let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const a = alphas[steps[i % steps.length]];
+          out += a[A.indexOf(t[i])];
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const { alphas, steps } = build(key);
+        const t = clean(text); let out = '';
+        for (let i = 0; i < t.length; i++) {
+          const a = alphas[steps[i % steps.length]];
+          out += A[a.indexOf(t[i])];
+        }
+        return out;
+      }
+    };
+  })();
+
+  /* ─── 55. Typex (illustrative — Enigma-style 5-rotor with multi-notch stepping) ─── */
+  const typex = (() => {
+    function build(key) {
+      const k = (clean(key || 'TYPEX') + 'BLETCHLEY').split('').map(c => c.charCodeAt(0));
+      let s = 0; for (const x of k) s = (s * 131 + x) & 0x7fffffff;
+      if (s === 0) s = 1;
+      const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      // 5 rotor wirings (random permutations of A)
+      const rotors = [];
+      for (let r = 0; r < 5; r++) {
+        const arr = A.split('');
+        for (let j = arr.length - 1; j > 0; j--) {
+          const i = Math.floor(rng() * (j + 1));
+          [arr[j], arr[i]] = [arr[i], arr[j]];
+        }
+        rotors.push(arr.join(''));
+      }
+      // Reflector (pairs)
+      const refArr = A.split('');
+      for (let j = refArr.length - 1; j > 0; j--) {
+        const i = Math.floor(rng() * (j + 1));
+        [refArr[j], refArr[i]] = [refArr[i], refArr[j]];
+      }
+      const reflector = {};
+      for (let i = 0; i < 26; i += 2) {
+        reflector[refArr[i]] = refArr[i + 1];
+        reflector[refArr[i + 1]] = refArr[i];
+      }
+      return { rotors, reflector };
+    }
+    function step(positions, i) {
+      // Synthetic schedule: first rotor every character, second every five,
+      // third every 35; this does not implement historical notch rings.
+      positions[0] = (positions[0] + 1) % 26;
+      if (i % 5 === 0) positions[1] = (positions[1] + 1) % 26;
+      if (i % 35 === 0) positions[2] = (positions[2] + 1) % 26;
+      // rotors 3 and 4 are stators (fixed)
+    }
+    function encChar(ch, rotors, reflector, positions) {
+      let i = A.indexOf(ch);
+      // Forward through 5 rotors
+      for (let r = 0; r < 5; r++) {
+        const offset = r < 3 ? positions[r] : 0;
+        i = A.indexOf(rotors[r][mod(i + offset, 26)]);
+        i = mod(i - offset, 26);
+      }
+      // Reflector
+      let c = A[i];
+      c = reflector[c];
+      i = A.indexOf(c);
+      // Backward through 5 rotors
+      for (let r = 4; r >= 0; r--) {
+        const offset = r < 3 ? positions[r] : 0;
+        i = mod(i + offset, 26);
+        i = rotors[r].indexOf(A[i]);
+        i = mod(i - offset, 26);
+      }
+      return A[mod(i, 26)];
+    }
+    function run(text, key) {
+      const { rotors, reflector } = build(key);
+      const positions = [0, 0, 0];
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        step(positions, i);
+        out += encChar(t[i], rotors, reflector, positions);
+      }
+      return out;
+    }
+    // Typex (with reflector) is reciprocal — same fn for enc/dec
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── Round 3: Kama Sutra paired-substitution (Mlecchita Vikalpa) ─── */
+  const kamaSutra = (() => {
+    function buildPairs(key) {
+      const k = clean(key || 'KAMASUTRA');
+      const seen = new Set();
+      let alpha = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); alpha += c; }
+      for (let i = 0; i < 26; i++) { const c = A[i]; if (!seen.has(c)) alpha += c; }
+      const map = {};
+      for (let i = 0; i < 13; i++) {
+        const a = alpha[i], b = alpha[25 - i];
+        map[a] = b; map[b] = a;
+      }
+      return map;
+    }
+    function run(text, key) {
+      const m = buildPairs(key);
+      return (text || '').split('').map(ch => {
+        const u = ch.toUpperCase();
+        if (m[u]) return ch === u ? m[u] : m[u].toLowerCase();
+        return ch;
+      }).join('');
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── Round 3: Aeneas Tacticus water-clock signaling code ─── */
+  const aeneasTacticus = (() => {
+    // Each letter A-Z maps to its position 1-26 (water-clock release time).
+    return {
+      encode: t => clean(t).split('').map(c => A.indexOf(c) + 1).join(' '),
+      decode: t => (t || '').split(/[^0-9]+/).filter(Boolean)
+        .map(n => A[parseInt(n, 10) - 1] || '').join('')
+    };
+  })();
+
+  /* ─── Round 3: JN-25 (illustrative superenciphered codebook model) ─── */
+  const jn25 = (() => {
+    // Pedagogical model: letters -> 5-digit code groups, then digit-wise additive superencipherment.
+    const LETTER_GROUPS = Object.fromEntries(A.split('').map((ch, i) => [ch, String(10000 + i)]));
+    const REV_GROUPS = Object.fromEntries(Object.entries(LETTER_GROUPS).map(([k, v]) => [v, k]));
+
+    function normalizeKeyDigits(key) {
+      const digits = String(key || '31415').replace(/\D/g, '');
+      return digits || '31415';
+    }
+
+    function addGroup(group, keyDigits, decrypt) {
+      let out = '';
+      for (let i = 0; i < 5; i++) {
+        const g = group.charCodeAt(i) - 48;
+        const k = keyDigits.charCodeAt(i % keyDigits.length) - 48;
+        const d = decrypt ? mod(g - k, 10) : mod(g + k, 10);
+        out += String(d);
+      }
+      return out;
+    }
+
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        const keyDigits = normalizeKeyDigits(key);
+        const groups = t.split('').map(ch => LETTER_GROUPS[ch]);
+        return groups.map(g => addGroup(g, keyDigits, false)).join(' ');
+      },
+      decode: (text, key) => {
+        const keyDigits = normalizeKeyDigits(key);
+        const groups = (String(text || '').match(/\d{5}/g) || []);
+        return groups.map(g => REV_GROUPS[addGroup(g, keyDigits, true)] || '?').join('');
+      }
+    };
+  })();
+
+  /* ─── Round 3: Red (Type A) stepping-switch model ─── */
+  const redTypeA = (() => {
+    const vowels = 'AEIOUY';
+    const consonants = 'BCDFGHJKLMNPQRSTVWXZ';
+
+    function seededRng(seedText) {
+      let s = 0;
+      for (const ch of (seedText || 'REDTYPEA')) s = (s * 131 + ch.charCodeAt(0)) & 0x7fffffff;
+      if (s === 0) s = 1;
+      return () => {
+        s = (s * 1103515245 + 12345) & 0x7fffffff;
+        return s / 0x7fffffff;
+      };
+    }
+
+    function shuffle(alpha, rng) {
+      const arr = alpha.split('');
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr.join('');
+    }
+
+    function buildTables(key) {
+      const rng = seededRng(clean(key || 'TOKYORED'));
+      return {
+        vTables: Array.from({ length: 6 }, () => shuffle(vowels, rng)),
+        cTables: Array.from({ length: 20 }, () => shuffle(consonants, rng))
+      };
+    }
+
+    function run(text, key, decrypt) {
+      const t = clean(text);
+      const { vTables, cTables } = buildTables(key);
+      let vPos = 0;
+      let cPos = 0;
+      let out = '';
+
+      for (const ch of t) {
+        if (vowels.includes(ch)) {
+          const table = vTables[vPos % vTables.length];
+          out += decrypt ? vowels[table.indexOf(ch)] : table[vowels.indexOf(ch)];
+          vPos = (vPos + 1) % vTables.length;
+        } else if (consonants.includes(ch)) {
+          const table = cTables[cPos % cTables.length];
+          out += decrypt ? consonants[table.indexOf(ch)] : table[consonants.indexOf(ch)];
+          cPos = (cPos + 1) % cTables.length;
+        }
+      }
+      return out;
+    }
+
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
+  /* ─── Shared helper for Phase 4 rotor / disk-cylinder models ─── */
+  function _seededRng(seed) {
+    let s = 0;
+    for (const ch of (seed || 'SEED')) s = (s * 131 + ch.charCodeAt(0)) & 0x7fffffff;
+    if (s === 0) s = 1;
+    return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  }
+  function _shuffledAlphabet(rng) {
+    const arr = A.split('');
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join('');
+  }
+
+  /* ─── Round 3 Phase 4: Fialka M-125 (Soviet 10-rotor) ─── */
+  // Pedagogical model. Real Fialka used a 30-character Cyrillic / Latin alphabet
+  // and 10 rotors with mixed-direction stepping. This engine models the essential
+  // idea: ten reciprocal substitution rotors with non-uniform stepping derived
+  // from a keyword. Reflector makes it self-reciprocal like Enigma/Typex.
+  const fialka = (() => {
+    function build(key) {
+      const rng = _seededRng('FIALKA' + clean(key || 'M125'));
+      const rotors = []; for (let r = 0; r < 10; r++) rotors.push(_shuffledAlphabet(rng));
+      const refArr = _shuffledAlphabet(rng).split('');
+      const reflector = {};
+      for (let i = 0; i < 26; i += 2) {
+        reflector[refArr[i]] = refArr[i + 1];
+        reflector[refArr[i + 1]] = refArr[i];
+      }
+      // Per-rotor step direction: +1 (typewriter style) or -1 (reverse).
+      const dirs = []; for (let r = 0; r < 10; r++) dirs.push(rng() > 0.5 ? 1 : -1);
+      return { rotors, reflector, dirs };
+    }
+    function step(positions, dirs, i) {
+      // Fast rotor every char; medium every 7th; slow every 31st (coprime with 26).
+      positions[0] = mod(positions[0] + dirs[0], 26);
+      if (i % 7 === 0)  positions[1] = mod(positions[1] + dirs[1], 26);
+      if (i % 31 === 0) positions[2] = mod(positions[2] + dirs[2], 26);
+      // rotors 3..9 act as stators that drift slightly with the medium ring
+      if (i % 91 === 0) positions[3] = mod(positions[3] + dirs[3], 26);
+    }
+    function encChar(ch, rotors, reflector, positions) {
+      let i = A.indexOf(ch);
+      for (let r = 0; r < 10; r++) {
+        const off = r < 4 ? positions[r] : 0;
+        i = A.indexOf(rotors[r][mod(i + off, 26)]);
+        i = mod(i - off, 26);
+      }
+      let c = reflector[A[i]];
+      i = A.indexOf(c);
+      for (let r = 9; r >= 0; r--) {
+        const off = r < 4 ? positions[r] : 0;
+        i = mod(i + off, 26);
+        i = rotors[r].indexOf(A[i]);
+        i = mod(i - off, 26);
+      }
+      return A[mod(i, 26)];
+    }
+    function run(text, key) {
+      const { rotors, reflector, dirs } = build(key);
+      const positions = [0, 0, 0, 0];
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        step(positions, dirs, i);
+        out += encChar(t[i], rotors, reflector, positions);
+      }
+      return out;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── Round 3 Phase 4: KL-7 (USA, 1952) ─── */
+  // Pedagogical model. Real KL-7 had 8 rotors with a re-entry path and a
+  // notched-ring stepping mechanism. This teaching model uses eight seeded
+  // 26-letter rotor substitutions and synthetic notch tables. Its added
+  // reflector makes the model reciprocal; that is a model convenience,
+  // not a claim about the historical KL-7's signal path or reciprocity.
+  const kl7 = (() => {
+    function build(key) {
+      const rng = _seededRng('KL7' + clean(key || 'TSEC'));
+      const rotors = []; for (let r = 0; r < 8; r++) rotors.push(_shuffledAlphabet(rng));
+      const notches = []; for (let r = 0; r < 8; r++) notches.push(Math.floor(rng() * 26));
+      const refArr = _shuffledAlphabet(rng).split('');
+      const reflector = {};
+      for (let i = 0; i < 26; i += 2) {
+        reflector[refArr[i]] = refArr[i + 1];
+        reflector[refArr[i + 1]] = refArr[i];
+      }
+      return { rotors, notches, reflector };
+    }
+    function step(positions, notches) {
+      // Always step rotor 0; rotors 1..6 step when previous rotor hits notch.
+      positions[0] = mod(positions[0] + 1, 26);
+      for (let r = 1; r < 7; r++) {
+        if (positions[r - 1] === notches[r - 1]) {
+          positions[r] = mod(positions[r] + 1, 26);
+        }
       }
     }
-    onProg({ tested, totalSpace, found: candidates.length, done: true });
-    return { candidates, tested, totalSpace };
-  }
+    function encChar(ch, rotors, reflector, positions) {
+      let i = A.indexOf(ch);
+      for (let r = 0; r < 8; r++) {
+        const off = r < 7 ? positions[r] : 0;
+        i = A.indexOf(rotors[r][mod(i + off, 26)]);
+        i = mod(i - off, 26);
+      }
+      let c = reflector[A[i]];
+      i = A.indexOf(c);
+      for (let r = 7; r >= 0; r--) {
+        const off = r < 7 ? positions[r] : 0;
+        i = mod(i + off, 26);
+        i = rotors[r].indexOf(A[i]);
+        i = mod(i - off, 26);
+      }
+      return A[mod(i, 26)];
+    }
+    function run(text, key) {
+      const { rotors, notches, reflector } = build(key);
+      const positions = [0, 0, 0, 0, 0, 0, 0, 0];
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        step(positions, notches);
+        out += encChar(t[i], rotors, reflector, positions);
+      }
+      return out;
+    }
+    return { encode: run, decode: run };
+  })();
+
+  /* ─── Round 3 Phase 4: Geheimschreiber T52 (Sturgeon) ─── */
+  // Pedagogical model. The real Siemens & Halske T52 was a teleprinter cipher
+  // attachment combining XOR addition with a five-bit permutation derived from
+  // 10 keystream wheels. Bletchley called the family "Fish", with Lorenz/SZ40
+  // labelled "Tunny" and the T52 family "Sturgeon".
+  //
+  // This engine keeps the structural T52 idea — "additive keystream + per-
+  // character permutation, both driven by ten wheels of coprime length" —
+  // but works over the 26-letter alphabet rather than the 5-bit Baudot code,
+  // so encrypt/decrypt round-trip cleanly without falling onto non-letter
+  // Baudot symbols (LTRS shift, FIGS shift, NUL, etc.).
+  const geheimschreiber = (() => {
+    function build(key) {
+      const rng = _seededRng('T52' + clean(key || 'STURGEON'));
+      // 10 wheels with coprime lengths near the historical T52 wheel sizes.
+      const wheelLens = [47, 53, 59, 61, 67, 71, 73, 79, 83, 89];
+      const wheels = wheelLens.map(L => {
+        const bits = [];
+        for (let i = 0; i < L; i++) bits.push(Math.floor(rng() * 26));
+        return bits;
+      });
+      // Six per-character substitution permutations of 0..25; the wheels
+      // pick which one to apply at each position (the "Q-rangler" effect).
+      const perms = [];
+      for (let p = 0; p < 6; p++) perms.push(_shuffledAlphabet(rng));
+      const invPerms = perms.map(p => {
+        const inv = new Array(26);
+        for (let i = 0; i < 26; i++) inv[A.indexOf(p[i])] = A[i];
+        return inv.join('');
+      });
+      return { wheels, wheelLens, perms, invPerms };
+    }
+    function additiveAt(i, wheels, wheelLens) {
+      let s = 0;
+      for (let b = 0; b < 5; b++) s += wheels[b][i % wheelLens[b]];
+      return mod(s, 26);
+    }
+    function permIndexAt(i, wheels, wheelLens) {
+      let s = 0;
+      for (let b = 5; b < 10; b++) s += wheels[b][(i * 7) % wheelLens[b]];
+      return mod(s, 6);
+    }
+    function run(text, key, decrypt) {
+      const { wheels, wheelLens, perms, invPerms } = build(key);
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const x = A.indexOf(t[i]);
+        const k = additiveAt(i, wheels, wheelLens);
+        const p = permIndexAt(i, wheels, wheelLens);
+        if (!decrypt) {
+          out += perms[p][mod(x + k, 26)];
+        } else {
+          const y = invPerms[p].charCodeAt(x) - 65;
+          out += A[mod(y - k, 26)];
+        }
+      }
+      return out;
+    }
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
+  /* ─── Round 3 Phase 4: Kryha cipher machine (1924) ─── */
+  // Alexander von Kryha's pocket cipher device, marketed in the 1920s as
+  // "absolutely unbreakable" and demolished by Friedman, Kullback, Sinkov,
+  // and Rosen in just a few hours of paper analysis. The mechanism is a
+  // single mixed alphabet wheel that advances by an irregular amount on each
+  // keystroke, controlled by a 26-position spring-driven gear ring. With one
+  // rotor and a small number of distinct step values, period and depth-of-
+  // alignment attacks recover the wheel quickly. This is essentially a
+  // keyword-driven Vigenère-on-a-mixed-alphabet with non-uniform step sizes.
+  const kryha = (() => {
+    function build(key) {
+      const rng = _seededRng('KRYHA' + clean(key || 'POCKET'));
+      const wheel = _shuffledAlphabet(rng);
+      // Step pattern: a 26-position table of advance values 1..6.
+      const steps = []; for (let i = 0; i < 26; i++) steps.push(1 + Math.floor(rng() * 6));
+      return { wheel, steps };
+    }
+    function run(text, key, decrypt) {
+      const { wheel, steps } = build(key);
+      const t = clean(text); let out = '';
+      let pos = 0; let stepIdx = 0;
+      for (let i = 0; i < t.length; i++) {
+        const ch = t[i];
+        if (!decrypt) {
+          const x = A.indexOf(ch);
+          out += wheel[mod(x + pos, 26)];
+        } else {
+          const idx = wheel.indexOf(ch);
+          out += A[mod(idx - pos, 26)];
+        }
+        pos = mod(pos + steps[stepIdx], 26);
+        stepIdx = (stepIdx + 1) % 26;
+      }
+      return out;
+    }
+    return {
+      encode: (text, key) => run(text, key, false),
+      decode: (text, key) => run(text, key, true)
+    };
+  })();
+
+  /* ─── Round 3 Phase 4: M-94 / M-138-A strip cipher ─── */
+  // The M-94 (US Army, 1922) and M-138-A (US State Dept., 1934-1959) were
+  // direct mechanical descendants of Jefferson's wheel cipher. The M-94 had
+  // 25 lettered aluminium disks on a spindle; the M-138-A used 30 paper
+  // strips in a frame. Both worked the same way: align the disks/strips so
+  // the plaintext appears in a row, then read off any other row as the
+  // ciphertext. Recipient does the reverse. Engine is the Jefferson wheel
+  // with a configurable disk count and offset row.
+  const m94 = (() => {
+    function build(key, count) {
+      // Key format: optional first integer = offset row (1..25), then a
+      // permutation of 1..N or a keyword used to derive disk order.
+      const parsed = String(key || '').split(/[, ]+/).filter(Boolean);
+      let offset = 5;
+      let order = null;
+      if (parsed.length && /^\d+$/.test(parsed[0])) {
+        offset = parseInt(parsed[0], 10) || 5;
+        if (offset < 1) offset = 1; if (offset > A.length - 1) offset = A.length - 1;
+        parsed.shift();
+      }
+      if (parsed.length === count && parsed.every(p => /^\d+$/.test(p))) {
+        order = parsed.map(p => parseInt(p, 10) - 1);
+      }
+      // Build N pseudo-random mixed alphabets seeded by the key (or default).
+      const rng = _seededRng('M94' + (parsed.join('') || 'STANDARD'));
+      const disks = []; for (let r = 0; r < count; r++) disks.push(_shuffledAlphabet(rng));
+      if (order) {
+        const reordered = order.map(i => disks[i % count]);
+        return { disks: reordered, offset };
+      }
+      return { disks, offset };
+    }
+    function run(text, key, decrypt, count) {
+      const { disks, offset } = build(key, count);
+      const t = clean(text); let out = '';
+      for (let i = 0; i < t.length; i++) {
+        const disk = disks[i % count];
+        const ch = t[i];
+        if (!decrypt) {
+          const idx = disk.indexOf(ch);
+          if (idx < 0) { out += ch; continue; }
+          out += disk[mod(idx + offset, 26)];
+        } else {
+          const idx = disk.indexOf(ch);
+          if (idx < 0) { out += ch; continue; }
+          out += disk[mod(idx - offset, 26)];
+        }
+      }
+      return out;
+    }
+    return {
+      encode: (text, key) => run(text, key, false, 25),
+      decode: (text, key) => run(text, key, true, 25)
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Affine cipher ─── */
+  const affine = (() => {
+    // Affine cipher: E(x) = (a*x + b) mod 26, D(y) = a^-1 * (y - b) mod 26.
+    // 'a' must be coprime with 26 (the 12 valid values are 1,3,5,7,9,11,15,17,19,21,23,25).
+    const VALID_A = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25];
+    function modInverse(a) {
+      const m = mod(a, 26);
+      for (let i = 1; i < 26; i++) if ((m * i) % 26 === 1) return i;
+      return 1;
+    }
+    function parseKey(key) {
+      const raw = key == null || String(key).trim() === '' ? '5,8' : String(key).trim();
+      if (!/^[+-]?\d+\s*,\s*[+-]?\d+$/.test(raw)) {
+        throw new Error('Affine key must contain two integers: a,b.');
+      }
+      const parts = raw.split(',').map(s => Number(s.trim()));
+      if (parts.some(value => !Number.isSafeInteger(value))) {
+        throw new Error('Affine key entries must be safe integers.');
+      }
+      let a = parts[0];
+      let b = parts[1];
+      a = mod(a, 26);
+      b = mod(b, 26);
+      if (!VALID_A.includes(a)) throw new Error('Affine multiplier a must be coprime with 26.');
+      return { a, b };
+    }
+    function transform(text, fn) {
+      return (text || '').split('').map(ch => {
+        const u = ch.toUpperCase();
+        const code = u.charCodeAt(0);
+        if (code < 65 || code > 90) return ch;
+        const x = code - 65;
+        const y = fn(x);
+        const out = String.fromCharCode(y + 65);
+        return ch === u ? out : out.toLowerCase();
+      }).join('');
+    }
+    return {
+      encode: (text, key) => {
+        const { a, b } = parseKey(key);
+        return transform(text, x => mod(a * x + b, 26));
+      },
+      decode: (text, key) => {
+        const { a, b } = parseKey(key);
+        const aInv = modInverse(a);
+        return transform(text, y => mod(aInv * (y - b), 26));
+      }
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Trithemius progressive cipher ─── */
+  // Johannes Trithemius (1462–1516) — first published polyalphabetic.
+  // Each successive plaintext letter is shifted by an additional position
+  // (letter 0 by 0, letter 1 by 1, etc.). Optional starting offset.
+  const trithemius = (() => {
+    function run(text, key, enc) {
+      const t = String(text || ''); let r = '';
+      const start = parseInt(String(key || '0').replace(/\D/g, ''), 10) || 0;
+      let i = 0;
+      for (const ch of t) {
+        const u = ch.toUpperCase();
+        const code = u.charCodeAt(0);
+        if (code < 65 || code > 90) { r += ch; continue; }
+        const shift = mod((start + i), 26);
+        const x = code - 65;
+        const y = enc ? mod(x + shift, 26) : mod(x - shift, 26);
+        const out = String.fromCharCode(y + 65);
+        r += ch === u ? out : out.toLowerCase();
+        i++;
+      }
+      return r;
+    }
+    return {
+      encode: (text, key) => run(text, key, true),
+      decode: (text, key) => run(text, key, false)
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Cardano Autokey ─── */
+  // Girolamo Cardano (1501–1576) — original autokey: prime with a single
+  // letter (the key), then continue the keystream with the plaintext itself.
+  // Distinct from the later Vigenère-style autokey (already in `autokey`)
+  // which primes with a multi-letter keyword. Reference: Frary, De/Cipher.
+  const cardanoAutokey = (() => {
+    function run(text, key, enc) {
+      const t = clean(text);
+      const seed = clean(key || 'A').charAt(0) || 'A';
+      let r = '';
+      // Build keystream from seed + plaintext (Cardano's "self-keying" idea).
+      // Encryption: ki = seed for i=0; ki = plain[i-1] otherwise.
+      // Decryption: recover plain[i] from cipher[i] using ki, then ki+1=plain[i].
+      let prev = seed;
+      for (let i = 0; i < t.length; i++) {
+        const p = t.charCodeAt(i) - 65;
+        const k = prev.charCodeAt(0) - 65;
+        if (enc) {
+          const c = mod(p + k, 26);
+          r += String.fromCharCode(c + 65);
+          prev = t[i];
+        } else {
+          const c = p; // here p is actually ciphertext code
+          const plain = mod(c - k, 26);
+          const ch = String.fromCharCode(plain + 65);
+          r += ch;
+          prev = ch;
+        }
+      }
+      return r;
+    }
+    return {
+      encode: (text, key) => run(text, key, true),
+      decode: (text, key) => run(text, key, false)
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Wheatstone Cryptograph ─── */
+  // Charles Wheatstone's 1867 clock-face cryptograph: two concentric dials,
+  // outer plain alphabet and inner mixed cipher alphabet. The two hands
+  // are geared so that as the long hand sweeps the outer dial the inner
+  // hand walks the mixed alphabet beneath, producing a polyalphabetic
+  // stream. Pedagogical model: derive the inner alphabet from a keyword
+  // (Polybius-style dedupe + remainder), and step both dials per letter.
+  // The historical device's unequal dial sizes matter. This existing
+  // 26:26 teaching model instead collapses to fixed keyword substitution:
+  // both positions advance equally, so innerPos always equals outerPos.
+  // It is not evidence of the historical cryptograph's polyalphabeticity.
+  const wheatstone = (() => {
+    function makeInner(key) {
+      const k = clean(key || 'WHEATSTONE');
+      const seen = new Set();
+      let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of A) if (!seen.has(c)) { seen.add(c); s += c; }
+      return s;
+    }
+    function run(text, key, enc) {
+      const inner = makeInner(key);
+      const src = clean(text);
+      let r = '';
+      let outerPos = 0;
+      let innerPos = 0;
+      for (const ch of src) {
+        if (enc) {
+          const newOuter = ch.charCodeAt(0) - 65;
+          const advance = mod(newOuter - outerPos, 26);
+          outerPos = newOuter;
+          innerPos = mod(innerPos + advance, 26);
+          r += inner[innerPos];
+        } else {
+          const idx = inner.indexOf(ch);
+          const advance = mod(idx - innerPos, 26);
+          innerPos = idx;
+          outerPos = mod(outerPos + advance, 26);
+          r += String.fromCharCode(outerPos + 65);
+        }
+      }
+      return r;
+    }
+    return {
+      encode: (text, key) => run(text, key, true),
+      decode: (text, key) => run(text, key, false)
+    };
+  })();
+
+  /* ─── Round 3 Phase 5: Morse Code ─── */
+  // International Morse, the canonical telegraph encoding. Reference:
+  // Frary's "Morse + cipher combination" framing. Track A treats text→dots
+  // as the encode side and dots→text as the decode side. Audio playback
+  // belongs to the exhibit page, not the engine.
+  const morse = (() => {
+    const TABLE = {
+      A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',
+      I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',
+      Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',
+      Y:'-.--',Z:'--..',
+      '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-',
+      '5':'.....','6':'-....','7':'--...','8':'---..','9':'----.'
+    };
+    const REV = Object.fromEntries(Object.entries(TABLE).map(([k,v])=>[v,k]));
+    return {
+      encode: (text /* key ignored */) => {
+        const words = String(text ?? '').normalize('NFD').replace(/\p{M}/gu, '')
+          .toUpperCase().split(/\s+/).map(word => word.replace(/[^A-Z0-9]/g, ''))
+          .filter(Boolean);
+        return words.map(word => word.split('').map(ch => TABLE[ch]).join(' ')).join(' / ');
+      },
+      decode: (text) => {
+        const tokens = String(text || '').trim().split(/\s+/);
+        let r = '';
+        for (const tok of tokens) {
+          if (tok === '/' || tok === '|') { r += ' '; continue; }
+          if (REV[tok]) r += REV[tok];
+        }
+        return r;
+      }
+    };
+  })();
+
+  /* ─── Round 3 Phase 7: Cardano Grille ─── */
+  // Girolamo Cardano's 1550 grille: a card with cut-out windows. The
+  // cleartext is written through the windows; the rest is filled with
+  // innocuous covertext. Pedagogical model: encode produces a grid of N×N
+  // characters where the message fills positions selected by the grille
+  // pattern (a comma-separated list of 0-based indices) and the remaining
+  // cells are filled with a deterministic filler. Decode pulls the
+  // characters at those indices back out.
+  const cardanoGrille = (() => {
+    const FILLERS = 'THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG';
+    function parsePattern(key) {
+      // Format: "size:idx,idx,idx,..." e.g. "5:0,3,7,12,19".
+      // If no size given, default to 5×5. If pattern empty, place message
+      // at consecutive indices 0..n-1.
+      const raw = String(key || '5:').trim();
+      const colonAt = raw.indexOf(':');
+      let size = 5;
+      let body = raw;
+      if (colonAt >= 0) {
+        const s = parseInt(raw.slice(0, colonAt), 10);
+        if (s >= 2 && s <= 12) size = s;
+        body = raw.slice(colonAt + 1);
+      }
+      const indices = body.split(/[ ,;]+/).map(s => parseInt(s, 10)).filter(n => !isNaN(n) && n >= 0 && n < size * size);
+      return { size, indices };
+    }
+    return {
+      encode: (text, key) => {
+        const { size, indices } = parsePattern(key);
+        const msg = escapeFillers(clean(text));
+        if (!msg) return '';
+        const total = size * size;
+        const slots = indices.length ? indices : Array.from({ length: total }, (_, i) => i);
+        const blocks = [];
+        for (let offset = 0; offset < msg.length; offset += slots.length) {
+          const chunk = msg.slice(offset, offset + slots.length).padEnd(slots.length, 'X');
+          const grid = new Array(total).fill('');
+          for (let i = 0; i < slots.length; i++) grid[slots[i]] = chunk[i];
+          for (let i = 0; i < total; i++) if (!grid[i]) grid[i] = FILLERS[i % FILLERS.length];
+          const rows = [];
+          for (let row = 0; row < size; row++) {
+            rows.push(grid.slice(row * size, (row + 1) * size).join(''));
+          }
+          blocks.push(rows.join('\n'));
+        }
+        return blocks.join('\n\n');
+      },
+      decode: (text, key) => {
+        const { size, indices } = parsePattern(key);
+        const source = String(text || '').trim();
+        if (!source) return '';
+        const total = size * size;
+        const slots = indices.length ? indices : Array.from({ length: total }, (_, i) => i);
+        let out = '';
+        for (const block of source.split(/\n\s*\n/)) {
+          const flat = block.toUpperCase().replace(/[^A-Z]/g, '').slice(0, total);
+          for (const idx of slots) if (idx < flat.length) out += flat[idx];
+        }
+        return unescapeFillers(out.replace(/X+$/, ''));
+      }
+    };
+  })();
+
+  /* ─── Round 3 Phase 10: Null Cipher ─── */
+  // Conceal a hidden message inside an innocuous text by reading every
+  // Nth letter of every Mth word (or first/last of each word). Track A
+  // model: encode wraps the plaintext into a carrier text whose first
+  // letter of each word spells out the message; decode reads the chosen
+  // positions back out. Key format: "first" | "last" | integer N (Nth
+  // letter of each word).
+  const nullCipher = (() => {
+    const CARRIER_WORDS = ['the','and','of','to','in','that','it','for','on','with','at','by','this','from','they','one','have','this','word','your','said','each','which','their','time','will','about','out','many','then','them','these','some','her','would','make','like','him','into','has','look','more','write','number','other','than','first','water','been','call','who','its','now','find','long','down','day','did','get','come','made','may','part','over','new','sound','take','only','little','work','know','place','year','live','back','give','most','very','after','our','just','name','good','sentence','man','think','say','great','help','through','much','before','line','right','too','mean','old','any','same','tell','boy','follow','came','want','show'];
+    function pickPos(key) {
+      const k = String(key || 'first').toLowerCase().trim();
+      if (k === 'first' || k === '1') return 0;
+      if (k === 'last') return -1;
+      const n = parseInt(k, 10);
+      if (Number.isSafeInteger(n) && n >= 1 && n <= 1024) return n - 1;
+      return 0;
+    }
+    function pickCarrier(letter, pos, salt) {
+      const candidates = CARRIER_WORDS.filter(w => {
+        if (pos === -1) return w[w.length - 1] && w[w.length - 1].toUpperCase() === letter;
+        return w.length > pos && w[pos].toUpperCase() === letter;
+      });
+      if (candidates.length) return candidates[salt % candidates.length];
+      // Fabricate a filler word that places `letter` at the requested
+      // position. The word must be long enough to actually HOLD that
+      // position (>= pos + 1 chars) or decode would read past its end and
+      // silently drop the letter. Use a sentinel different from any letter so
+      // the placeholder fill loop never collides with `letter` itself
+      // (e.g. letter === 'X' would have collided with an 'x' sentinel).
+      const fill = 'aeioutnsr';
+      const len = pos === -1 ? 4 : Math.max(4, pos + 1);
+      const arr = new Array(len).fill('_');
+      const target = pos === -1 ? len - 1 : pos;
+      arr[target] = letter.toLowerCase();
+      for (let i = 0; i < arr.length; i++) if (arr[i] === '_') arr[i] = fill[(salt + i) % fill.length];
+      return arr.join('');
+    }
+    return {
+      encode: (text, key) => {
+        const pos = pickPos(key);
+        const msg = clean(text);
+        const words = [];
+        for (let i = 0; i < msg.length; i++) words.push(pickCarrier(msg[i], pos, i));
+        return words.join(' ');
+      },
+      decode: (text, key) => {
+        const pos = pickPos(key);
+        const words = String(text || '').split(/\s+/).filter(Boolean);
+        let r = '';
+        for (const w of words) {
+          if (pos === -1) { if (w.length) r += w[w.length - 1].toUpperCase(); }
+          else if (w.length > pos) r += w[pos].toUpperCase();
+        }
+        return r;
+      }
+    };
+  })();
+
+  // ============================================================
+  // Phase 6: East Asia & Telegraphy
+  // ============================================================
+
+  // Chinese Telegraph Code (Standard Telegraph Codebook, 1881).
+  // Demo: each Latin letter receives a deterministic 4-digit code group,
+  // optionally super-enciphered by adding a numeric additive key (the way
+  // CTC was actually overlaid in WWII Chinese diplomatic traffic).
+  const chineseTelegraph = (() => {
+    function buildTable() {
+      // 26 fixed 4-digit code groups, drawn from real CTC ranges (0001..9999)
+      // but assigned deterministically to A..Z so the demo round-trips cleanly.
+      const base = [
+         12,  74, 156, 219, 285, 347, 408, 472, 538, 601,
+        667, 729, 792, 856, 918,1024,1187,1255,1346,1421,
+       1503,1599,1672,1748,1821,1905
+      ];
+      const map = {}, inv = {};
+      for (let i = 0; i < 26; i++) {
+        const code = String(base[i]).padStart(4, '0');
+        map[A[i]] = code;
+        inv[code] = A[i];
+      }
+      return { map, inv };
+    }
+    function additive(key) {
+      const k = parseInt(String(key || '0').replace(/[^0-9]/g, '') || '0', 10);
+      return (k % 10000 + 10000) % 10000;
+    }
+    return {
+      encode: (text, key) => {
+        const { map } = buildTable();
+        const k = additive(key);
+        const msg = clean(text);
+        const out = [];
+        for (const ch of msg) {
+          const code = parseInt(map[ch], 10);
+          out.push(String((code + k) % 10000).padStart(4, '0'));
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { inv } = buildTable();
+        const k = additive(key);
+        const groups = String(text || '').match(/\d{4}/g) || [];
+        let r = '';
+        for (const g of groups) {
+          const original = String((parseInt(g, 10) - k + 10000) % 10000).padStart(4, '0');
+          r += inv[original] || '?';
+        }
+        return r;
+      }
+    };
+  })();
+
+  // Zimmermann Telegram (German diplomatic code 0075 / 13040).
+  // Demo: each input word is encoded as a 5-digit code group from a fixed
+  // codebook of ~140 common English words. Words not in the codebook fall
+  // through to a per-character literal encoding (codes 90000..90025 for A..Z).
+  // Optional numeric `key` is added mod 100000 (super-encipherment).
+  const zimmermann = (() => {
+    const WORDLIST = (
+      'THE OF AND TO IN A IS THAT FOR IT WITH AS BE ON BY ARE AT THIS NOT BUT FROM OR HAVE AN THEY WHICH ONE YOU WERE HER ALL SHE WHEN HIS THERE WOULD THEIR WHAT SO UP OUT IF ABOUT WHO GET WHICH GO ME WHEN MAKE CAN LIKE TIME NO JUST HIM KNOW TAKE PEOPLE INTO YEAR YOUR GOOD SOME COULD THEM SEE OTHER THAN THEN NOW LOOK ONLY COME ITS OVER THINK ALSO BACK AFTER USE TWO HOW OUR WORK FIRST WELL WAY EVEN NEW WANT ANY THESE GIVE DAY MOST US MEXICO WAR PEACE ALLIANCE SUBMARINE STOP UNRESTRICTED RESTRICTED AMERICA UNITED STATES JAPAN TEXAS ARIZONA NEW BERLIN MOSCOW NEUTRAL OFFER FINANCIAL SUPPORT HOSTILE RELATION RECONQUER LOST TERRITORY SUPREME COMMAND CABLE'
+    ).split(/\s+/);
+    function additive(key) {
+      const k = parseInt(String(key || '0').replace(/[^0-9]/g, '') || '0', 10);
+      return (k % 100000 + 100000) % 100000;
+    }
+    function fmt5(n) { return String(((n % 100000) + 100000) % 100000).padStart(5, '0'); }
+    return {
+      encode: (text, key) => {
+        const k = additive(key);
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          // strip punctuation for lookup but keep within token
+          const word = tok.replace(/[^A-Z]/g, '');
+          if (!word) continue;
+          const idx = WORDLIST.indexOf(word);
+          if (idx >= 0) {
+            out.push(fmt5(idx + k));
+          } else {
+            // literal fallback: 99999 sentinel + per-letter codes 90000..90025
+            out.push(fmt5(99999 + k));
+            for (const ch of word) {
+              out.push(fmt5(90000 + (ch.charCodeAt(0) - 65) + k));
+            }
+            out.push(fmt5(99998 + k));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const k = additive(key);
+        const groups = String(text || '').match(/\d{5}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const v = (parseInt(groups[i], 10) - k + 100000) % 100000;
+          if (v === 99999) {
+            // literal mode until 99998
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              const lv = (parseInt(groups[i], 10) - k + 100000) % 100000;
+              if (lv === 99998) { i++; break; }
+              if (lv >= 90000 && lv <= 90025) w += A[lv - 90000];
+              else w += '?';
+              i++;
+            }
+            words.push(w);
+          } else if (v < WORDLIST.length) {
+            words.push(WORDLIST[v]);
+            i++;
+          } else {
+            words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
+  // Slidex (British / Allied tactical bigram cipher card, WWII).
+  // Demo: a 26\u00d726 bigram card built from a keyed mixed alphabet; each
+  // plaintext bigram is replaced by the bigram at its (row, col) cell, and
+  // decoded by reverse lookup. Final odd letter is padded with X.
+  const slidex = (() => {
+    function buildCard(key) {
+      const seed = (String(key || 'SLIDEX').toUpperCase().replace(/[^A-Z]/g, '') || 'SLIDEX');
+      const rng = _seededRng(seed);
+      const rowAlpha = _shuffledAlphabet(rng);
+      const colAlpha = _shuffledAlphabet(rng);
+      // For each cell (r,c) the card prints a bigram; build a deterministic
+      // assignment so the 676 cells use all 676 bigrams exactly once.
+      const cells = [];
+      for (let i = 0; i < 26; i++) for (let j = 0; j < 26; j++) cells.push(A[i] + A[j]);
+      // shuffle cells with the keyed RNG
+      for (let i = cells.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [cells[i], cells[j]] = [cells[j], cells[i]];
+      }
+      const enc = {}, dec = {};
+      for (let r = 0; r < 26; r++) {
+        for (let c = 0; c < 26; c++) {
+          const plainBigram = rowAlpha[r] + colAlpha[c];
+          const cipherBigram = cells[r * 26 + c];
+          enc[plainBigram] = cipherBigram;
+          dec[cipherBigram] = plainBigram;
+        }
+      }
+      return { enc, dec };
+    }
+    return {
+      encode: (text, key) => {
+        const { enc } = buildCard(key);
+        let msg = escapeFillers(clean(text));
+        if (msg.length % 2 === 1) msg += 'X';
+        let r = '';
+        for (let i = 0; i < msg.length; i += 2) {
+          const bg = msg.substr(i, 2);
+          r += enc[bg] || bg;
+        }
+        return r;
+      },
+      decode: (text, key) => {
+        const { dec } = buildCard(key);
+        const msg = clean(text);
+        let r = '';
+        for (let i = 0; i + 1 < msg.length; i += 2) {
+          const bg = msg.substr(i, 2);
+          r += dec[bg] || bg;
+        }
+        return unescapeFillers(r.replace(/X+$/, ''));
+      }
+    };
+  })();
+
+  // Commercial Telegraph Codebooks (ABC Code, Bentley's, etc., late 19th\u2013early 20th c.)
+  // Demo: each input word is encoded as a 5-letter pronounceable codeword in
+  // CVCVC pattern. Listed words use a fixed codebook; fallback per-letter encoding
+  // for unlisted words mirrors how operators handled proper nouns and numbers.
+  const commercialCode = (() => {
+    const C = 'BCDFGHJKLMNPQRSTVWXZ';
+    const V = 'AEIOU';
+    const CN = C.length, VN = V.length;
+    function encode5(idx) {
+      // 5-letter CVCVC -> 20*5*20*5*20 = 200000 possible codewords
+      idx = ((idx % 200000) + 200000) % 200000;
+      const c1 = idx % CN; idx = Math.floor(idx / CN);
+      const v1 = idx % VN; idx = Math.floor(idx / VN);
+      const c2 = idx % CN; idx = Math.floor(idx / CN);
+      const v2 = idx % VN; idx = Math.floor(idx / VN);
+      const c3 = idx % CN;
+      return C[c1] + V[v1] + C[c2] + V[v2] + C[c3];
+    }
+    function decode5(word) {
+      const w = word.toUpperCase();
+      if (w.length !== 5) return -1;
+      const c1 = C.indexOf(w[0]); if (c1 < 0) return -1;
+      const v1 = V.indexOf(w[1]); if (v1 < 0) return -1;
+      const c2 = C.indexOf(w[2]); if (c2 < 0) return -1;
+      const v2 = V.indexOf(w[3]); if (v2 < 0) return -1;
+      const c3 = C.indexOf(w[4]); if (c3 < 0) return -1;
+      return c1 + CN * (v1 + VN * (c2 + CN * (v2 + VN * c3)));
+    }
+    const WORDLIST = (
+      'THE OF AND TO IN IS THAT FOR IT WITH AS BE ON BY ARE AT THIS NOT BUT FROM OR HAVE AN THEY WHICH WERE HER ALL SHE WHEN HIS THERE WOULD THEIR WHAT SO UP OUT IF ABOUT WHO GET GO ME MAKE CAN LIKE TIME NO JUST HIM KNOW TAKE PEOPLE INTO YEAR YOUR GOOD SOME COULD THEM SEE OTHER THAN THEN NOW LOOK ONLY COME OVER THINK BACK AFTER USE TWO HOW OUR WORK FIRST WELL WAY EVEN NEW WANT ANY THESE GIVE DAY MOST US ARRIVED DEPARTING SHIPMENT URGENT CONFIRMED CANCEL DELIVERY PAYMENT PRICE QUANTITY OFFER ACCEPT REJECT REPLY CABLE WIRE STOP CONTRACT INVOICE BANK CREDIT DEBIT'
+    ).split(/\s+/);
+    const SENTINEL_LITERAL_OPEN = 199999;
+    const SENTINEL_LITERAL_CLOSE = 199998;
+    const LETTER_BASE = 199900;
+    return {
+      encode: (text, key) => {
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          const word = tok.replace(/[^A-Z]/g, '');
+          if (!word) continue;
+          const idx = WORDLIST.indexOf(word);
+          if (idx >= 0) {
+            out.push(encode5(idx));
+          } else {
+            out.push(encode5(SENTINEL_LITERAL_OPEN));
+            for (const ch of word) {
+              out.push(encode5(LETTER_BASE + (ch.charCodeAt(0) - 65)));
+            }
+            out.push(encode5(SENTINEL_LITERAL_CLOSE));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const groups = String(text || '').toUpperCase().match(/[A-Z]{5}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const v = decode5(groups[i]);
+          if (v === SENTINEL_LITERAL_OPEN) {
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              const lv = decode5(groups[i]);
+              if (lv === SENTINEL_LITERAL_CLOSE) { i++; break; }
+              if (lv >= LETTER_BASE && lv <= LETTER_BASE + 25) w += A[lv - LETTER_BASE];
+              else w += '?';
+              i++;
+            }
+            words.push(w);
+          } else if (v >= 0 && v < WORDLIST.length) {
+            words.push(WORDLIST[v]);
+            i++;
+          } else {
+            words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
+  // ============================================================
+  // Phase 7: Americana (Revolutionary War cryptography)
+  // ============================================================
+
+  // Culper Ring / Tallmadge Code (1779).
+  // Major Benjamin Tallmadge\u2019s codebook for Washington\u2019s spy ring on
+  // British-occupied Long Island and Manhattan. ~750 numbered entries
+  // covering people, places, military terms, and common words. Demo: a
+  // 200-entry stable codebook; each input word \u2192 3-digit code, with a
+  // literal per-letter fallback (8xx range) for out-of-codebook words.
+  const culperRing = (() => {
+    const WORDLIST = (
+      'THE OF AND TO IN A IS THAT FOR IT WITH AS BE ON BY ARE AT THIS NOT BUT FROM OR HAVE AN ' +
+      'WERE WHEN HER ALL SHE HIS THERE WHAT SO UP OUT IF ABOUT WHO GET GO ME MAKE CAN LIKE ' +
+      'TIME NO JUST HIM KNOW TAKE PEOPLE INTO YEAR YOUR GOOD SOME COULD THEM SEE OTHER THAN ' +
+      'THEN NOW LOOK ONLY COME OVER THINK BACK AFTER USE TWO HOW OUR WORK FIRST WELL WAY ' +
+      'EVEN NEW WANT ANY THESE GIVE DAY MOST US WASHINGTON CULPER TALLMADGE WOODHULL TOWNSEND ' +
+      'BRITISH AMERICAN ARMY NAVY GENERAL COLONEL CAPTAIN MAJOR LIEUTENANT FORT POST CAMP ' +
+      'SHIP REGIMENT BATTALION COMPANY MUSKET CANNON POWDER LETTER MESSAGE SPY AGENT ENEMY ' +
+      'FRIEND SECRET INFORMATION REPORT ATTACK DEFEND MARCH MOVE ARRIVE DEPART CROSS RIVER ' +
+      'BRIDGE ROAD HORSE RIDE SHIP BOAT HARBOR LONDON NEWYORK BOSTON PHILADELPHIA SETAUKET ' +
+      'OYSTERBAY CONNECTICUT LONGISLAND MANHATTAN HUDSON FLEET TROOPS SUPPLY ORDERS DELIVER ' +
+      'RECEIVE WRITE READ ANSWER MEET TONIGHT TOMORROW MORNING EVENING SUNDAY MONDAY TUESDAY ' +
+      'WEDNESDAY THURSDAY FRIDAY SATURDAY MONEY GUINEA POUND SHILLING TRADE GOODS CARGO ' +
+      'STORE FARM CHURCH TAVERN PRINTING PRESS NEWSPAPER GAZETTE CLINTON ANDRE ARNOLD ROCHAMBEAU ' +
+      'GREENE LAFAYETTE LEE STIRLING MORGAN PUTNAM HEATH PARSONS PASSAGE JERSEY VIRGINIA ' +
+      'CAROLINA GEORGIA RHODEISLAND MASSACHUSETTS DELAWARE PENNSYLVANIA MARYLAND CONFEDERATE ' +
+      'CONGRESS COMMANDER LOYAL REBEL TORY WHIG INDEPENDENCE LIBERTY KING PARLIAMENT TAX'
+    ).split(/\s+/);
+    const SENT_OPEN = 998, SENT_CLOSE = 999, LETTER_BASE = 800;
+    function fmt3(n) { return String(((n % 1000) + 1000) % 1000).padStart(3, '0'); }
+    return {
+      encode: (text, key) => {
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          const w = tok.replace(/[^A-Z]/g, '');
+          if (!w) continue;
+          const idx = WORDLIST.indexOf(w);
+          if (idx >= 0) {
+            out.push(fmt3(idx + 100)); // codebook entries start at 100, like real Culper numbers
+          } else {
+            out.push(fmt3(SENT_OPEN));
+            for (const ch of w) out.push(fmt3(LETTER_BASE + (ch.charCodeAt(0) - 65)));
+            out.push(fmt3(SENT_CLOSE));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const groups = String(text || '').match(/\d{3}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const v = parseInt(groups[i], 10);
+          if (v === SENT_OPEN) {
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              const lv = parseInt(groups[i], 10);
+              if (lv === SENT_CLOSE) { i++; break; }
+              if (lv >= LETTER_BASE && lv <= LETTER_BASE + 25) w += A[lv - LETTER_BASE];
+              else w += '?';
+              i++;
+            }
+            words.push(w);
+          } else if (v >= 100 && v - 100 < WORDLIST.length) {
+            words.push(WORDLIST[v - 100]);
+            i++;
+          } else {
+            words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
+  // Arnold\u2013Andr\u00e9 Book Cipher (1779\u20131780).
+  // The cipher Benedict Arnold and John Andr\u00e9 used to plot the surrender
+  // of West Point. Each word in plaintext was located in a shared book
+  // (Blackstone\u2019s <em>Commentaries on the Laws of England</em>) and
+  // transmitted as the triple page.line.word. Demo: a deterministic
+  // 240-word \u201cbook\u201d (12 pages \u00d7 5 lines \u00d7 4 words) seeded by the
+  // optional key; each input word becomes a triple. Words not in the book
+  // fall through to per-letter triples in a reserved page range.
+  const arnoldAndre = (() => {
+    const SOURCE = (
+      'OF THE COMMENTARIES UPON THE LAWS OF ENGLAND THAT TREAT OF THE RIGHTS ' +
+      'OF PERSONS AND OF THINGS PROPERTY POSSESSION CONTRACT TRESPASS REMEDY ' +
+      'CRIME PUNISHMENT JUSTICE COURT JUDGE JURY SHERIFF STATUTE PARLIAMENT ' +
+      'KING REIGN WAR PEACE TREATY ALLY ENEMY FOE CITIZEN SUBJECT LOYAL ' +
+      'REBEL ARMY SHIP FORT POINT WEST CAMP TROOPS COMMAND ORDER DELIVER ' +
+      'MEET TONIGHT TOMORROW EVENING ARRIVE DEPART CROSS HUDSON RIVER ROAD ' +
+      'BRIDGE HORSE LETTER MESSAGE SECRET INFORMATION REPORT ATTACK DEFEND ' +
+      'MARCH MOVE FRIEND SPY AGENT ENEMY ARNOLD ANDRE WASHINGTON CLINTON ' +
+      'BENEDICT JOHN GENERAL COLONEL CAPTAIN MAJOR LIEUTENANT GUNS POWDER ' +
+      'CANNON MUSKET POST SUPPLY MONEY GUINEA POUND SHILLING TRADE CARGO ' +
+      'GOODS PRINT NEWSPAPER GAZETTE LONDON NEWYORK BOSTON PHILADELPHIA ' +
+      'WESTPOINT KINGS FERRY HAVERSTRAW STONY POINT FORTNIAGARA SARATOGA ' +
+      'SARATOGA TICONDEROGA YORKTOWN PRINCETON TRENTON MORRISTOWN MIDWAY ' +
+      'MIDDLE FIRST SECOND THIRD FOURTH FIFTH SIXTH SEVENTH EIGHTH NINTH ' +
+      'TENTH ELEVENTH TWELFTH SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY ' +
+      'SATURDAY MORNING NOON EVENING NIGHT MIDNIGHT WATCH SENTRY GUARD GATE ' +
+      'WALL TOWER HARBOR FLEET FRIGATE SLOOP SCHOONER PRIZE ANCHOR MOOR ' +
+      'SEAL BREAK SECRET CIPHER KEY DECODE ENCODE WORD LETTER NUMBER PAGE ' +
+      'LINE BOOK COPY READ WRITE PEN INK WAX PARCHMENT HAND SIGNATURE ' +
+      'NAME OATH HONOR DUTY HOMAGE TREASON BETRAY DESERT FLEE ESCAPE ' +
+      'SAFE PASSAGE PASSWORD COUNTERSIGN PATROL ROUND POST GUARD CHANGE ' +
+      'RELIEF DUTY HOUR PIQUET COLOR FLAG WHITE RED BLUE BLACK YELLOW ' +
+      'GREEN PURPLE BROWN GRAY SHIPYARD MILL SHOP TAVERN INN CHURCH FARM ' +
+      'HOUSE STORE STABLE BARN FIELD WOOD HILL VALLEY STREAM CREEK MOUNTAIN ' +
+      'WATER FORD CROSSING NORTH SOUTH EAST WEST RIGHT LEFT FRONT REAR'
+    ).split(/\s+/);
+    // Pad / trim to 12 pages * 5 lines * 4 words = 240 entries.
+    while (SOURCE.length < 240) SOURCE.push('FILLER');
+    SOURCE.length = 240;
+    function tripleOf(idx) {
+      const page = Math.floor(idx / 20) + 1; // 1..12
+      const line = Math.floor((idx % 20) / 4) + 1; // 1..5
+      const word = (idx % 4) + 1; // 1..4
+      return page + '.' + line + '.' + word;
+    }
+    function indexOfTriple(t) {
+      const m = String(t).match(/^(\d+)\.(\d+)\.(\d+)$/);
+      if (!m) return -1;
+      const p = parseInt(m[1], 10), l = parseInt(m[2], 10), w = parseInt(m[3], 10);
+      if (p < 1 || p > 12 || l < 1 || l > 5 || w < 1 || w > 4) return -2;
+      return (p - 1) * 20 + (l - 1) * 4 + (w - 1);
+    }
+    // Reserve pages 13..15 for literal mode: page 13 = sentinel-open,
+    // page 14 = letter codes (line=floor((c)/5)+1, word=(c%5)+1, c in 0..25),
+    // page 15 = sentinel-close.
+    const SENT_OPEN  = '13.1.1';
+    const SENT_CLOSE = '15.1.1';
+    function letterTriple(ch) {
+      const c = ch.charCodeAt(0) - 65;
+      return '14.' + (Math.floor(c / 5) + 1) + '.' + ((c % 5) + 1);
+    }
+    function letterFromTriple(t) {
+      const m = t.match(/^14\.(\d+)\.(\d+)$/);
+      if (!m) return '?';
+      const li = parseInt(m[1], 10) - 1, wi = parseInt(m[2], 10) - 1;
+      const c = li * 5 + wi;
+      return (c >= 0 && c < 26) ? A[c] : '?';
+    }
+    return {
+      encode: (text, key) => {
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const out = [];
+        for (const tok of tokens) {
+          const w = tok.replace(/[^A-Z]/g, '');
+          if (!w) continue;
+          const idx = SOURCE.indexOf(w);
+          if (idx >= 0) {
+            out.push(tripleOf(idx));
+          } else {
+            out.push(SENT_OPEN);
+            for (const ch of w) out.push(letterTriple(ch));
+            out.push(SENT_CLOSE);
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const groups = String(text || '').match(/\d+\.\d+\.\d+/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const t = groups[i];
+          if (t === SENT_OPEN) {
+            i++;
+            let w = '';
+            while (i < groups.length) {
+              if (groups[i] === SENT_CLOSE) { i++; break; }
+              w += letterFromTriple(groups[i]);
+              i++;
+            }
+            words.push(w);
+          } else {
+            const idx = indexOfTriple(t);
+            if (idx >= 0 && idx < SOURCE.length) words.push(SOURCE[idx]);
+            else words.push('???');
+            i++;
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
+  // Argenti Family Cipher (1500s\u20131600s, Vatican).
+  // Matteo and Marcello Argenti served as papal cryptanalysts; their
+  // <em>Trattato in Cifra</em> codified the homophonic-nomenclator pattern
+  // that dominated European diplomacy for two centuries. Demo: each letter
+  // gets two keyed 2-digit homophones (codes 10\u201389) and the encoder
+  // alternates between them on each repeat use, so common letters spread
+  // across multiple cipher numbers \u2014 the central Argenti innovation.
+  const argenti = (() => {
+    function build(seed) {
+      const rng = _seededRng(seed || 'ARGENTI');
+      // Pool of 52 two-digit codes (10..89, skip multiples of 10 reserved for nulls)
+      const pool = [];
+      for (let n = 10; n <= 89; n++) pool.push(n);
+      // Fisher-Yates shuffle
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const homo = {}; // letter -> [code1, code2]
+      for (let i = 0; i < 26; i++) homo[A[i]] = [pool[i * 2], pool[i * 2 + 1]];
+      const reverse = {};
+      for (const [ltr, codes] of Object.entries(homo)) {
+        for (const c of codes) reverse[c] = ltr;
+      }
+      return { homo, reverse };
+    }
+    function fmt2(n) { return String(n).padStart(2, '0'); }
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        const { homo } = build(key);
+        const counters = {};
+        const out = [];
+        for (const ch of t) {
+          const codes = homo[ch];
+          if (!codes) continue;
+          const pick = (counters[ch] = (counters[ch] || 0) + 1) % 2;
+          out.push(fmt2(codes[pick]));
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { reverse } = build(key);
+        const groups = String(text || '').match(/\d{2}/g) || [];
+        return groups.map(g => reverse[parseInt(g, 10)] || '?').join('');
+      }
+    };
+  })();
+
+  // Wallis Ciphers (1640s, English Civil War).
+  // John Wallis of Oxford broke Royalist nomenclators for Parliament and
+  // founded the English state cryptanalysis tradition. The Royalist systems
+  // he attacked were heavily codebook-dominant: long lists of named persons,
+  // places, and political terms with per-letter spelling as a fallback.
+  // Demo: keyed nomenclator with a ~60-word Civil-War-era codebook (3-digit
+  // codes 100\u2013159) plus per-letter 2-digit homophones (10\u201389) for the
+  // residual alphabet \u2014 the dominant design Wallis attacked.
+  const wallisCiphers = (() => {
+    const WORDLIST = (
+      'KING QUEEN PRINCE PARLIAMENT COMMONS LORDS COMMITTEE COUNCIL ARMY ' +
+      'NAVY GENERAL COLONEL CAPTAIN MAJOR LIEUTENANT REGIMENT TROOP HORSE ' +
+      'FOOT MUSKET PIKE POWDER MATCH CANNON FIELD BATTLE SIEGE FORT GARRISON ' +
+      'OXFORD LONDON YORK NEWCASTLE NASEBY EDGEHILL MARSTON BRISTOL ' +
+      'CHARLES STUART CROMWELL FAIRFAX RUPERT ESSEX MANCHESTER WALLER ' +
+      'GORING DIGBY HYDE ROYALIST PARLIAMENTARIAN ROUNDHEAD CAVALIER ' +
+      'CIPHER LETTER MESSAGE SECRET INTELLIGENCE INTERCEPT KEY DECIPHER ' +
+      'ATTACK DEFEND MARCH RETREAT'
+    ).split(/\s+/);
+    const SENT_OPEN = 90, SENT_CLOSE = 91; // reserved 2-digit sentinels
+    function fmt2(n) { return String(n).padStart(2, '0'); }
+    function fmt3(n) { return String(n).padStart(3, '0'); }
+    function build(seed) {
+      const rng = _seededRng(seed || 'WALLIS');
+      const pool = [];
+      for (let n = 10; n <= 89; n++) pool.push(n);
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const homo = {}, reverse = {};
+      for (let i = 0; i < 26; i++) {
+        homo[A[i]] = [pool[i * 2], pool[i * 2 + 1]];
+        reverse[pool[i * 2]] = A[i];
+        reverse[pool[i * 2 + 1]] = A[i];
+      }
+      return { homo, reverse };
+    }
+    return {
+      encode: (text, key) => {
+        const { homo } = build(key);
+        const tokens = String(text || '').toUpperCase().split(/\s+/).filter(Boolean);
+        const counters = {};
+        const out = [];
+        for (const tok of tokens) {
+          const w = tok.replace(/[^A-Z]/g, '');
+          if (!w) continue;
+          const idx = WORDLIST.indexOf(w);
+          if (idx >= 0) {
+            out.push(fmt3(idx + 100));
+          } else {
+            out.push(fmt2(SENT_OPEN));
+            for (const ch of w) {
+              const codes = homo[ch];
+              const pick = (counters[ch] = (counters[ch] || 0) + 1) % 2;
+              out.push(fmt2(codes[pick]));
+            }
+            out.push(fmt2(SENT_CLOSE));
+          }
+        }
+        return out.join(' ');
+      },
+      decode: (text, key) => {
+        const { reverse } = build(key);
+        const groups = String(text || '').match(/\d{2,3}/g) || [];
+        const words = [];
+        let i = 0;
+        while (i < groups.length) {
+          const g = groups[i];
+          if (g.length === 3) {
+            const v = parseInt(g, 10);
+            if (v >= 100 && v - 100 < WORDLIST.length) words.push(WORDLIST[v - 100]);
+            else words.push('???');
+            i++;
+          } else {
+            const v = parseInt(g, 10);
+            if (v === SENT_OPEN) {
+              i++;
+              let w = '';
+              while (i < groups.length) {
+                const lv = parseInt(groups[i], 10);
+                if (groups[i].length === 2 && lv === SENT_CLOSE) { i++; break; }
+                w += reverse[lv] || '?';
+                i++;
+              }
+              words.push(w);
+            } else {
+              // Stray 2-digit code without sentinel \u2014 treat as a single letter
+              words.push(reverse[v] || '?');
+              i++;
+            }
+          }
+        }
+        return words.join(' ');
+      }
+    };
+  })();
+
+  // Robert Patterson's cipher, from his letter to Thomas Jefferson of
+  // 19 December 1801.
+  //
+  // Patterson's own instructions, as quoted by Smithline (2009): the message
+  // is written DOWN the lines -- "the first letter of the message is placed at
+  // the beginning of the first line, the second letter at the beginning of the
+  // second line, and so on, writing column after column, from left to right".
+  // That writing "is then to be distributed into sections of not more than
+  // nine lines in each section". Each section is transcribed with its lines
+  // "in any order at pleasure", prefixing each line with "any number of
+  // arbitrary or insignificant letters, not exceeding nine".
+  //
+  // The key is a column of two-digit numbers: the first digit of each pair is
+  // a line number (their order gives the line permutation), the second is how
+  // many arbitrary letters that line carries. The same permutation and the
+  // same counts are reused in every section.
+  //
+  // Source: Lawren M. Smithline, "A Cipher to Thomas Jefferson", American
+  // Scientist 97(2), 2009, 142-149.
+  const patterson = (() => {
+    // Patterson's "arbitrary or insignificant letters" were his choice at the
+    // time of writing. A deterministic stand-in keeps the demo reproducible.
+    const FILLER = 'QXZJVKWYBGPFMHDCLNTSRAEIOU';
+
+    // Smithline recovered this key for Patterson's challenge cipher.
+    const DEFAULT_KEY = '13,34,57,65,22,78,49';
+
+    function parseKey(key) {
+      const digits = String(key ?? '').replace(/[^0-9]/g, '');
+      const order = [], adds = [];
+      for (let i = 0; i + 1 < digits.length; i += 2) {
+        order.push(+digits[i]);
+        adds.push(+digits[i + 1]);
+      }
+      const K = order.length;
+      // Patterson caps a section at nine lines; the line numbers must be a
+      // permutation of 1..K or the key cannot be inverted.
+      const valid = K >= 1 && K <= 9 &&
+        new Set(order).size === K && order.every(n => n >= 1 && n <= K);
+      return valid ? { K, order, adds } : null;
+    }
+
+    function junk(lineIndex, count) {
+      let s = '';
+      for (let t = 0; t < count; t++) s += FILLER[(lineIndex * 5 + t * 3) % 26];
+      return s;
+    }
+
+    // Writing column-wise into K lines gives line r the characters at
+    // positions r, r+K, r+2K, ... so its length follows from the total.
+    function lineLength(total, K, r) {
+      return Math.floor(total / K) + (r < total % K ? 1 : 0);
+    }
+
+    return {
+      encode: (text, key) => {
+        const k = parseKey(key) || parseKey(DEFAULT_KEY);
+        const src = clean(text);
+        if (!src) return '';
+        const lines = Array.from({ length: k.K }, () => '');
+        for (let i = 0; i < src.length; i++) lines[i % k.K] += src[i];
+        let out = '';
+        for (let j = 0; j < k.K; j++) {
+          out += junk(j, k.adds[j]) + lines[k.order[j] - 1];
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const k = parseKey(key) || parseKey(DEFAULT_KEY);
+        const ct = clean(text);
+        const added = k.adds.reduce((a, b) => a + b, 0);
+        const total = ct.length - added;
+        if (total < 0) return '';
+        const lines = new Array(k.K);
+        let p = 0;
+        for (let j = 0; j < k.K; j++) {
+          p += k.adds[j];
+          const r = k.order[j] - 1;
+          lines[r] = ct.slice(p, p + lineLength(total, k.K, r));
+          p += lines[r].length;
+        }
+        let out = '';
+        const width = Math.ceil(total / k.K);
+        for (let c = 0; c < width; c++) {
+          for (let r = 0; r < k.K; r++) {
+            if (c < lines[r].length) out += lines[r][c];
+          }
+        }
+        return out;
+      }
+    };
+  })();
+
+  // Wadsworth's cipher device (Col. Decius Wadsworth, 1817).
+  // Two concentric geared discs: the OUTER carries 33 positions (the 26
+  // letters plus the digits 2-8), the INNER carries the 26 letters only,
+  // and the two are geared 26:33. Enciphering turns the inner disc until
+  // the wanted plaintext letter reaches the index; the number of steps
+  // that took is read off the outer disc and sent as the ciphertext.
+  //
+  // Because the step count for a repeated plaintext letter is a full 26
+  // and gcd(26, 33) = 1, a given plaintext letter walks through all 33
+  // outer symbols before any ciphertext value recurs -- the progressive,
+  // long-period behaviour that is the device's whole point. The discs
+  // realign only after lcm(26, 33) = 858 steps.
+  //
+  // Sources: Louis Kruh, "The Mystery of Colonel Decius Wadsworth's
+  // Cipher Device", Cryptologia 6(3), 1982, 238-247. The keyed inner
+  // sequence is this museum's modelling choice, not a documented setting.
+  const wadsworth = (() => {
+    const OUTER = A + '2345678';           // 33 positions
+    const cleanOuter = text => String(text ?? '').normalize('NFD')
+      .replace(/\p{M}/gu, '').toUpperCase().replace(/[^A-Z2-8]/g, '');
+
+    function makeInner(key) {
+      const k = clean(key || 'WADSWORTH');
+      const seen = new Set();
+      let s = '';
+      for (const c of k) if (!seen.has(c)) { seen.add(c); s += c; }
+      for (const c of A) if (!seen.has(c)) { seen.add(c); s += c; }
+      return s;
+    }
+
+    return {
+      encode: (text, key) => {
+        const inner = makeInner(key);
+        let innerPos = 0, outerPos = 0, out = '';
+        for (const ch of clean(text)) {
+          const target = inner.indexOf(ch);
+          // "Turn until the letter comes up": never zero steps, so a
+          // repeated letter costs a full revolution of 26.
+          const steps = mod(target - innerPos, 26) || 26;
+          innerPos = target;
+          outerPos = mod(outerPos + steps, 33);
+          out += OUTER[outerPos];
+        }
+        return out;
+      },
+      decode: (text, key) => {
+        const inner = makeInner(key);
+        let innerPos = 0, outerPos = 0, out = '';
+        for (const ch of cleanOuter(text)) {
+          const newOuter = OUTER.indexOf(ch);
+          const steps = mod(newOuter - outerPos, 33);
+          outerPos = newOuter;
+          // steps === 26 lands the inner disc back where it started,
+          // which is exactly how a repeated letter is recovered.
+          innerPos = mod(innerPos + steps, 26);
+          out += inner[innerPos];
+        }
+        return out;
+      }
+    };
+  })();
+
+  // Invented keyword-seeded Latin-letter substitution teaching model.
+  // Legacy engine name retained; no Geʼez monastic-cipher provenance established.
+  const geezMonastic = (() => {
+    function buildMap(key) {
+      const seed = clean(key) || 'GEEZ';
+      const order = _shuffledAlphabet(_seededRng(seed));
+      const m = {}, im = {};
+      for (let i = 0; i < 26; i++) {
+        m[A[i]] = order[i];
+        im[order[i]] = A[i];
+      }
+      return { m, im };
+    }
+    return {
+      encode: (text, key) => {
+        const t = clean(text);
+        const { m } = buildMap(key);
+        let out = '';
+        for (const ch of t) out += m[ch] || ch;
+        return out;
+      },
+      decode: (text, key) => {
+        const t = clean(text);
+        const { im } = buildMap(key);
+        let out = '';
+        for (const ch of t) out += im[ch] || ch;
+        return out;
+      }
+    };
+  })();
+
+  /* ─── Round 3: Diana Cryptosystem (reciprocal US SF field cipher) ─── */
+  const diana = (() => {
+    // DIANA trigraph rule: P + K + C ≡ 25 (mod 26), i.e. c = (25 - p - k) mod 26.
+    // Fully symmetric in all three letters — any two of {plain, key, cipher}
+    // yield the third from the same Tri-Graph table, so one lookup both
+    // encrypts and decrypts (a strict involution). Sources: NSA, Boak Lectures
+    // Vol. I (1973, decl. 2015) pp. 22-25; D. Rijmenants, "DIANA - A Fast
+    // Reciprocal One Time Pad Table" (2017); sfrvn.net Commo Security.
+    function run(text, key) {
+      const t = clean(text);
+      const k = clean(key || 'DIANA');
+      if (!k.length) return t;
+      return t.split('').map((ch, i) => {
+        const p = A.indexOf(ch);
+        const kp = A.indexOf(k[i % k.length]);
+        return A[(77 - p - kp) % 26];
+      }).join('');
+    }
+    return { encode: run, decode: run };
+  })();
+
+  // Historical procedures below are DOM-free. trace() exposes the same operation
+  // used by encode/decode; UI code never reimplements a cipher.
+  const historicalKey = (key, defaults) => {
+    if (key === undefined || key === null || key === '' || key === 'manual') return { ...defaults };
+    if (typeof key === 'string') {
+      try { key = JSON.parse(key); } catch (_) { throw new Error('Use a JSON key object or manual.'); }
+    }
+    if (!key || typeof key !== 'object' || Array.isArray(key)) throw new Error('Use a key object.');
+    return { ...defaults, ...key };
+  };
+  const historicalEngine = trace => ({
+    trace,
+    encode(text, key) { try { return trace(text, key, false, false).output; } catch (e) { return 'Error: ' + e.message; } },
+    decode(text, key) { try { return trace(text, key, true, false).output; } catch (e) { return 'Error: ' + e.message; } }
+  });
+
+  const RS44_GRID = [
+    "##..###..#..#.##.#.##.###",
+    ".##.#.#..#.##.##.###.##.#",
+    "..#.#..##.##.###.#..#####",
+    "####..##...#..###..###.##",
+    ".###.#..#.#.##.###.##..##",
+    "#####..##.#..#.##.#.###..",
+    "###.###.##.#.#.##.#..#..#",
+    "####.##.###..#.###..#.#..",
+    "##.####.###..###.#...#..#",
+    "#####.##.##.#.##..#.#.#..",
+    "#.#...##.#.#.##.#.##.####",
+    "#####.#.#.#...#..#.###.##",
+    "###..#..##...###..###.###",
+    ".#...#.###.#.#.##.#.#####",
+    "####.##.##.#.##.#...#..##",
+    "#..#...##.###..###..#####",
+    ".##.#..#.#####...##..####",
+    "##.###.###.#.#.#.###..#..",
+    "#...#..##.##.#.##.##.####",
+    ".#.#..#.#.###.#.##.#.####",
+    "####.#.##.##.###..#..#..#",
+    "..#..#.####.#..##.##.####",
+    "#.##.##...#.####.#.#.#.##",
+    "#####.#.#..#.###..#.##.#."
+  ];
+  const RS44_ORDER = [3,20,8,13,5,19,1,14,9,21,18,15,24,2,12,7,10,22,4,16,25,11,23,17,6];
+  const rasterschluessel44 = historicalEngine((text, key, decrypt) => {
+    const k = historicalKey(key, { grid: RS44_GRID, order: RS44_ORDER, startRow: 4, startColumn: 13, minute: 3, strict: false });
+    if (!Array.isArray(k.grid) || k.grid.length !== 24 || k.grid.some(row =>
+      typeof row !== 'string' || !/^[.#]{25}$/.test(row) || [...row].filter(x=>x==='.').length !== 10)) {
+      throw new Error('RS44 needs 24 rows of 25 cells, exactly ten permitted (.) cells per row.');
+    }
+    if (!Array.isArray(k.order) || k.order.length !== 25 ||
+        new Set(k.order).size !== 25 || k.order.some(n=>!Number.isInteger(n)||n<1||n>25)) {
+      throw new Error('Column ranks must be a permutation of 1–25.');
+    }
+    if (!Number.isInteger(k.startRow) || k.startRow<0 || k.startRow>23 ||
+        !Number.isInteger(k.startColumn) || k.startColumn<0 || k.startColumn>24 ||
+        !Number.isInteger(k.minute) || k.minute<0 || k.minute>59 || typeof k.strict !== 'boolean') {
+      throw new Error('Choose row 1–24, column 1–25 and minute 00–59.');
+    }
+    const input = clean(text);
+    if (input.length>200 || (k.strict && input.length<60)) throw new Error('March 1944 messages require 60–200 letters; short teaching mode still has a 200-letter maximum.');
+    const permitted = [];
+    k.grid.forEach((row,r)=>[...row].forEach((cell,c)=> { if(cell==='.') permitted.push(r*25+c); }));
+    const beginning = k.startRow*25+k.startColumn;
+    let offset = permitted.findIndex(i=>i>=beginning);
+    if (offset<0) offset=0;
+    const placement = Array.from({length:input.length},(_,i)=>permitted[(offset+i)%240]);
+    const used = new Set(placement);
+    // Count physical columns rightward from the indicated beginning column,
+    // excluding it only at the initial step. Re-entry on wrap counts normally.
+    const sum = [...String(k.minute).padStart(2,'0')+String(input.length)].reduce((s,n)=>s+Number(n),0);
+    const readColumn = (k.startColumn+sum)%25;
+    const firstRank = k.order[readColumn];
+    const columns = Array.from({length:25},(_,i)=>k.order.indexOf((firstRank-1+i)%25+1));
+    const extraction = [];
+    for (const col of columns) for(let row=0;row<24;row++) if(used.has(row*25+col)) extraction.push(row*25+col);
+    const cells = Array(600).fill('');
+    const entry = decrypt ? extraction : placement;
+    entry.forEach((pos,i)=>{cells[pos]=input[i];});
+    const output = (decrypt ? placement : extraction).map(i=>cells[i]).join('');
+    return { input, output, cells, grid: [...k.grid], order: [...k.order], placement, extraction, columns,
+      beginning, actualBeginning:placement[0]??null, sum, readColumn, firstRank, decrypt, padding:0 };
+  });
+
+  const doublePlayfair = historicalEngine((text, key, decrypt, capture = true) => {
+    const k = historicalKey(key, { squareA:'HILQETUARSBKXFGPWCOZDVYMN', squareB:'ZNOCHBXAVIUDTGWMYELSKPQRF', filler:'Z', strict:false });
+    const alphabet = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
+    for (const square of [k.squareA,k.squareB]) if(typeof square !== 'string' || square.length!==25 ||
+      new Set(square).size!==25 || [...square].some(c=>!alphabet.includes(c))) throw new Error('Each square must contain every A–Z letter except J exactly once.');
+    if (typeof k.filler!=='string' || k.filler.length!==1 || !alphabet.includes(k.filler) || k.filler==='X') throw new Error('Choose one filler letter except J or X; the 1941 manual excludes X.');
+    if (typeof k.strict!=='boolean') throw new Error('Strict message limit must be boolean.');
+    let input = clean(text);
+    if (decrypt && input.includes('J')) throw new Error('Ciphertext squares omit J; a ciphertext J is invalid.');
+    if (!decrypt) input = input.replace(/J/g,'II');
+    if (k.strict && input.length>500) throw new Error('The December 1941 transmitted message limit is 500 letters.');
+    if (decrypt && input.length%2) throw new Error('Ciphertext must contain complete two-letter pairs.');
+    const padding = !decrypt && input.length%2 ? 1 : 0;
+    if(padding) input+=k.filler;
+    const aPos = new Map([...k.squareA].map((c,i)=>[c,i]));
+    const bPos = new Map([...k.squareB].map((c,i)=>[c,i]));
+    const substitute = (pair, reverse) => {
+      const left = reverse ? k.squareB : k.squareA, right = reverse ? k.squareA : k.squareB;
+      const li=(reverse?bPos:aPos).get(pair[0]), ri=(reverse?aPos:bPos).get(pair[1]);
+      const lr=Math.floor(li/5), rr=Math.floor(ri/5), lc=li%5, rc=ri%5;
+      const sameRow=lr===rr;
+      const result = sameRow ? right[rr*5+(rc+(reverse?4:1))%5]+left[lr*5+(lc+(reverse?4:1))%5]
+        : right[lr*5+rc]+left[rr*5+lc];
+      // Bulk encode/decode needs the same substitution but not retained visual
+      // objects per pair. Avoid making GC cost part of the large-message path.
+      return capture ? { pair, result, sameRow, positions:[li,ri] } : result;
+    };
+    const pairs=[], blocks=[], output=[];
+    for(let start=0;start<input.length;start+=34) {
+      const block=input.slice(start,start+34), half=block.length/2;
+      if(!decrypt) {
+        const top=block.slice(0,half),bottom=block.slice(half);
+        if (capture) blocks.push({top,bottom});
+        for(let i=0;i<half;i++) {
+          const pair=top[i]+bottom[i], stage1=substitute(pair,false),stage2=substitute(capture ? stage1.result : stage1,false);
+          if (capture) pairs.push({pair,stage1,stage2,block:blocks.length-1,column:i});
+          output.push(capture ? stage2.result : stage2);
+        }
+      } else {
+        const top=[],bottom=[]; const blockIndex=blocks.length;
+        for(let i=0;i<block.length;i+=2) {
+          const pair=block.slice(i,i+2),stage1=substitute(pair,true),stage2=substitute(capture ? stage1.result : stage1,true);
+          if (capture) pairs.push({pair,stage1,stage2,block:blockIndex,column:i/2});
+          const result = capture ? stage2.result : stage2;
+          top.push(result[0]);bottom.push(result[1]);
+        }
+        if (capture) blocks.push({top:top.join(''),bottom:bottom.join('')});
+        output.push(top.join('')+bottom.join(''));
+      }
+    }
+    return { input,output:output.join(''),blocks,pairs,squareA:k.squareA,squareB:k.squareB,padding,decrypt };
+  });
+
+  const amsco = historicalEngine((text, key, decrypt, capture = true) => {
+    let k;
+    if(typeof key==='string' && /^\d+(?:[ ,]+\d+)*$/.test(key.trim())) {
+      const values=/[ ,]/.test(key.trim())?key.trim().split(/[ ,]+/).map(Number):[...key.trim()].map(Number);
+      k={order:values,first:2};
+    } else k=historicalKey(key,{order:[4,1,3,2,5],first:2});
+    if(!Array.isArray(k.order)||k.order.length<2||k.order.length>25||new Set(k.order).size!==k.order.length||
+      k.order.some(n=>!Number.isInteger(n)||n<1||n>k.order.length)) throw new Error('AMSCO key must be a permutation of 1–N, with 2–25 columns. Separate ranks above 9 with spaces.');
+    if(k.first!==1&&k.first!==2) throw new Error('The first cell must hold one or two letters.');
+    const input=clean(text),width=k.order.length;
+    // The bulk encode/decode path avoids allocating a full object for every
+    // one- or two-letter cell. At corpus/benchmark sizes those objects caused
+    // GC pauses large enough to make an otherwise-linear transform appear
+    // super-linear. Typed layout arrays retain the exact row/column pattern.
+    const lengths=new Uint8Array(input.length),offsets=new Uint32Array(input.length);
+    let remaining=input.length,position=0,sourceOffset=0;
+    while(remaining>0) {
+      const row=Math.floor(position/width),col=position%width;
+      const requested=(row+col)%2===0?k.first:3-k.first;
+      const length=Math.min(requested,remaining);
+      lengths[position]=length;offsets[position]=sourceOffset;
+      remaining-=length;sourceOffset+=length;position++;
+    }
+    // Both the first row AND first column alternate, even at even widths.
+    const order=Array.from({length:width},(_,rank)=>k.order.indexOf(rank+1));
+    if(!capture) {
+      const parts=new Array(position);
+      let cursor=0,part=0;
+      if(!decrypt) {
+        for(const col of order) for(let i=col;i<position;i+=width) {
+          parts[part++]=input.slice(offsets[i],offsets[i]+lengths[i]);
+        }
+      } else {
+        for(const col of order) for(let i=col;i<position;i+=width) {
+          parts[i]=input.slice(cursor,cursor+lengths[i]);
+          cursor+=lengths[i];
+        }
+      }
+      return {input,output:parts.join(''),padding:0};
+    }
+    const cells=Array.from({length:position},(_,i)=>({
+      row:Math.floor(i/width),col:i%width,length:lengths[i],value:''
+    }));
+    const byColumn=Array.from({length:width},()=>[]);
+    cells.forEach((cell,i)=>byColumn[cell.col].push(i));
+    const extraction=order.flatMap(col=>byColumn[col]);
+    const placement=cells.map((_,i)=>i);
+    let cursor=0;
+    for(const i of decrypt?extraction:placement){cells[i].value=input.slice(cursor,cursor+cells[i].length);cursor+=cells[i].length;}
+    return {input,output:(decrypt?placement:extraction).map(i=>cells[i].value).join(''),cells,placement,extraction,
+      order:[...k.order],first:k.first,width,decrypt,padding:0};
+  });
 
   return {
-    createEnigma,
-    parsePlugboard,
-    findCribPositions,
-    bruteForceCrib,
-    ROTORS,
-    REFLECTORS
+    caesar, monoalphabetic, polybius, homophonic, playfair, hill,
+    vigenere, beaufort, gronsfeld, porta, runningKey,
+    railFence, columnar, doubleTransposition,
+    bacon, tapCode, pigpen,
+    bifid, trifid, adfgx, adfgvx, nihilist,
+    otp, venonaPadReuse, fractionatedMorse, confederateVigenere,
+    bazeries, alberti, jefferson, enigma, lorenz,
+    dictionaryCode, stager, vic,
+    scytale, vernam, greatCipher, babington, navajo, voynich,
+    atbash, rot13, foursquare, twosquare, straddlingCheckerboard,
+    chaocipher, m209, solitaire, beale, copiale, kryptos, purple,
+    autokey, nomenclator, bookCipher, sigaba, typex,
+    kamaSutra, aeneasTacticus, jn25, redTypeA,
+    affine,
+    trithemius, cardanoAutokey, wheatstone, morse, cardanoGrille, nullCipher,
+    fialka, kl7, geheimschreiber, kryha, m94,
+    chineseTelegraph, zimmermann, slidex, commercialCode,
+    culperRing, arnoldAndre,
+    argenti, wallisCiphers,
+    patterson, wadsworth, geezMonastic,
+    diana, rasterschluessel44, doublePlayfair, amsco
   };
 })();
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = EnigmaEngine;
+// Node.js compatibility export for build/validation scripts. Export only
+// after the registry has been initialized so require() receives the engines.
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = cipherMuseumGlobal.CipherEngines;
 }
-if (typeof window !== 'undefined') {
-  window.EnigmaEngine = EnigmaEngine;
-}
-```
-
-
-## JavaScript — js/ciphers/lorenz-depth.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/ciphers/lorenz-depth.js`
-- Served SHA-256: `f3d440f9f4d0b31474a556267da6da7942ea6c9e7db85afe0cee1dc9c520aba3`
-- Readable-source SHA-256: `f3d440f9f4d0b31474a556267da6da7942ea6c9e7db85afe0cee1dc9c520aba3`
-
-
-```javascript
-/**
- * Lorenz Depth-Attack Engine
- * --------------------------
- * The 1941 Bletchley Park cryptanalytic breakthrough that broke the
- * Lorenz SZ40. The XOR cancellation applies whenever two messages use
- * the same additive keystream. Pure JavaScript, no DOM dependencies.
- *
- * Background
- * ----------
- * Lorenz is a Vernam-style cipher: ciphertext C = plaintext P XOR keystream K.
- * If two different plaintexts P1, P2 are sent under the SAME keystream K,
- * the keystream cancels when the ciphertexts are XORed:
- *     C1 XOR C2 = (P1 XOR K) XOR (P2 XOR K) = P1 XOR P2
- * The attacker now has a "depth" — the XOR of the two plaintexts —
- * which leaks an enormous amount of structural information. A guessed
- * crib word for one message reveals the matching slice of the other.
- *
- * On 30 August 1941 a German operator sent a 4,000-character Lorenz
- * message, was asked to resend, and re-sent with the same machine
- * settings but slightly different abbreviations — handing Bletchley
- * Park its first depth. Bill Tutte unwound the entire wheel structure
- * after John Tiltman recovered the paired plaintexts; Tommy Flowers
- * later built Colossus to assist Lorenz cryptanalysis. Reusing a nonce
- * under the same key can repeat the keystream in modes such as CTR/GCM;
- * consequences depend on the construction and cannot be generalized to
- * every TLS cipher suite or every use of an IV.
- *
- * Public API
- * ----------
- *   xorStrings(a, b)              → byte-XOR of two equal-length strings
- *   makeDepth(plain1, plain2, key) → { c1, c2, depth }   (demo helper)
- *   crackDepth(c1, c2)            → P1 XOR P2 directly
- *   cribDrag(depthXor, crib)      → slide crib across the depth, return
- *                                   { offset, candidate, score, printable }
- *                                   for every position, sorted best-first
- *   isLikelyEnglish(text)         → cheap printability/English score
- */
-(function (root) {
-  'use strict';
-
-  // Letter-frequency lookup for cheap English-likelihood scoring.
-  // Reuses the same numbers as the Caesar auto-break engine.
-  const ENG = {
-    A: 8.2,  B: 1.5,  C: 2.8,  D: 4.3,  E: 12.7, F: 2.2,
-    G: 2.0,  H: 6.1,  I: 7.0,  J: 0.15, K: 0.77, L: 4.0,
-    M: 2.4,  N: 6.7,  O: 7.5,  P: 1.9,  Q: 0.10, R: 6.0,
-    S: 6.3,  T: 9.1,  U: 2.8,  V: 0.98, W: 2.4,  X: 0.15,
-    Y: 2.0,  Z: 0.074,
-  };
-
-  /** Byte-XOR of two strings; truncates to the shorter length. */
-  function xorStrings(a, b) {
-    const n = Math.min(a.length, b.length);
-    let out = '';
-    for (let i = 0; i < n; i++) {
-      out += String.fromCharCode(a.charCodeAt(i) ^ b.charCodeAt(i));
-    }
-    return out;
-  }
-
-  /**
-   * Build a demo two-time-pad depth.
-   * Returns { c1, c2, depth } where depth = c1 XOR c2 = plain1 XOR plain2.
-   * The key is repeated/truncated to match the longer plaintext.
-   */
-  function makeDepth(plain1, plain2, key) {
-    if (!key || !key.length) throw new Error('Key required');
-    const n = Math.max(plain1.length, plain2.length);
-    let stream = '';
-    while (stream.length < n) stream += key;
-    stream = stream.slice(0, n);
-    const c1 = xorStrings(plain1, stream.slice(0, plain1.length));
-    const c2 = xorStrings(plain2, stream.slice(0, plain2.length));
-    return { c1: c1, c2: c2, depth: xorStrings(c1, c2) };
-  }
-
-  /** Direct: cancel the keystream, returning P1 XOR P2. */
-  function crackDepth(c1, c2) {
-    return xorStrings(c1, c2);
-  }
-
-  /**
-   * Score a candidate plaintext fragment by printability + letter freq.
-   * Higher = more English-like. 0 means unprintable.
-   *
-   * - Hard-fails on any non-printable byte (rules out unaligned XOR garbage).
-   * - Rewards letters and spaces; mildly penalises rare-letter pile-ups.
-   */
-  function isLikelyEnglish(text) {
-    if (!text || !text.length) return 0;
-    let letters = 0, spaces = 0, symbols = 0;
-    let freqSum = 0;
-    for (let i = 0; i < text.length; i++) {
-      const c = text.charCodeAt(i);
-      if (c < 32 || c > 126) return 0;          // hard fail on control bytes
-      if (c === 32) {
-        spaces++;
-        // Spaces are the single most common character in real English
-        // text (~17%, more frequent than 'E'). Score them accordingly,
-        // otherwise random letter-pile-ups outrank genuine plaintext.
-        freqSum += 13.0;
-        continue;
-      }
-      const ch = String.fromCharCode(c).toUpperCase();
-      if (ch >= 'A' && ch <= 'Z') {
-        letters++;
-        freqSum += (ENG[ch] || 0);
-      } else {
-        symbols++;                               // punctuation, digits, brackets
-      }
-    }
-    const n = text.length;
-    // Demand a high letter+space ratio; a single stray '[' or '@' is a
-    // strong signal that this offset is XOR noise, not real plaintext.
-    const letterRatio = (letters + spaces) / n;
-    if (letterRatio < 0.9) return 0;
-    // Multiplicative penalty per non-letter symbol: each one halves the score.
-    const penalty = Math.pow(0.5, symbols);
-    return (freqSum / n) * letterRatio * penalty;
-  }
-
-  /**
-   * Crib-drag: slide `crib` across `depthXor` (which equals P1 XOR P2).
-   * At each offset i, compute depthXor[i..] XOR crib. If `crib` matches
-   * P1 at offset i, the result is the corresponding slice of P2 — and
-   * vice versa. Readable output is a hypothesis to investigate, not a
-   * probability or proof that the guessed crib is correct.
-   *
-   * Returns an array of { offset, candidate, score, printable } for
-   * every legal offset, sorted by descending score.
-   */
-  function cribDrag(depthXor, crib) {
-    const results = [];
-    if (!crib || !crib.length) return results;
-    const max = depthXor.length - crib.length;
-    for (let off = 0; off <= max; off++) {
-      const slice = depthXor.substr(off, crib.length);
-      const candidate = xorStrings(slice, crib);
-      const score = isLikelyEnglish(candidate);
-      // printable = no control bytes (used so the UI can grey out junk
-      // even when score is zero for other reasons)
-      let printable = true;
-      for (let i = 0; i < candidate.length; i++) {
-        const c = candidate.charCodeAt(i);
-        if (c < 32 || c > 126) { printable = false; break; }
-      }
-      results.push({
-        offset: off,
-        candidate: candidate,
-        score: score,
-        printable: printable,
-      });
-    }
-    results.sort((a, b) => b.score - a.score);
-    return results;
-  }
-
-  const api = {
-    xorStrings: xorStrings,
-    makeDepth: makeDepth,
-    crackDepth: crackDepth,
-    cribDrag: cribDrag,
-    isLikelyEnglish: isLikelyEnglish,
-  };
-
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = api;
-  } else {
-    root.LorenzDepth = api;
-  }
-})(typeof window !== 'undefined' ? window : globalThis);
-```
-
-
-## JavaScript — js/ciphers/lorenz-page.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/ciphers/lorenz-page.js`
-- Served SHA-256: `62b47fdffea59380b15313a17874ec19f520b96987000b60ae2bf30f2e2dc8c5`
-- Readable-source SHA-256: `62b47fdffea59380b15313a17874ec19f520b96987000b60ae2bf30f2e2dc8c5`
-
-
-```javascript
-/**
- * Lorenz exhibit page glue — wires the depth-attack interactive
- * (defined by js/ciphers/lorenz-depth.js) into the DOM elements on
- * ciphers/lorenz.html. No engine logic lives here; this file is
- * presentation only.
- */
-(function () {
-  'use strict';
-  if (typeof window === 'undefined' || !window.LorenzDepth) return;
-
-  const { xorStrings, makeDepth, cribDrag } = window.LorenzDepth;
-
-  // --- helpers ------------------------------------------------------
-  const $ = (id) => document.getElementById(id);
-
-  function toHex(s) {
-    let out = '';
-    for (let i = 0; i < s.length; i++) {
-      out += s.charCodeAt(i).toString(16).padStart(2, '0');
-    }
-    return out;
-  }
-  function fromHex(h) {
-    const clean = (h || '').replace(/\s+/g, '').toLowerCase();
-    if (!/^[0-9a-f]*$/.test(clean) || (clean.length % 2) !== 0) return null;
-    let out = '';
-    for (let i = 0; i < clean.length; i += 2) {
-      out += String.fromCharCode(parseInt(clean.substr(i, 2), 16));
-    }
-    return out;
-  }
-  function escapeHtml(s) {
-    return s.replace(/[&<>"]/g, (c) => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
-    }[c]));
-  }
-
-  // --- default scenario --------------------------------------------
-  // Invented German/English examples illustrate a repeated-keystream mistake.
-  // These are not the intercepted 1941 messages or a Lorenz wheel simulation.
-  const P_A = 'OBERKOMMANDO DER WEHRMACHT GREIFT IM OSTEN AN BEI MORGENGRAUEN';
-  const P_B = 'ARMY HIGH COMMAND ATTACKS IN THE EAST AT DAWN ON SIX SEPTEMBER';
-  // Pad the shorter to the longer so they share length 1:1.
-  const N = Math.max(P_A.length, P_B.length);
-  const padA = P_A.padEnd(N, ' ');
-  const padB = P_B.padEnd(N, ' ');
-  const KEY = 'SZ40LORENZWHEELSTREAM'; // arbitrary repeating "keystream"
-  const { c1, c2 } = makeDepth(padA, padB, KEY);
-
-  // --- DOM elements -------------------------------------------------
-  const elC1 = $('lz-c1');
-  const elC2 = $('lz-c2');
-  const elDepth = $('lz-depth');
-  const elCrib = $('lz-crib');
-  const elDrag = $('lz-drag');
-  const elOut = $('lz-results');
-  if (!elC1 || !elC2 || !elDepth || !elCrib || !elDrag || !elOut) return;
-
-  // --- depth recompute on input ------------------------------------
-  function recomputeDepth() {
-    const a = fromHex(elC1.value);
-    const b = fromHex(elC2.value);
-    if (a === null || b === null) {
-      elDepth.value = '⚠ ciphertext must be valid hex (0-9, a-f, even length)';
-      return null;
-    }
-    const depth = xorStrings(a, b);
-    elDepth.value = toHex(depth);
-    return depth;
-  }
-
-  function renderResults(ranked) {
-    if (!ranked.length) {
-      elOut.innerHTML = '<span class="output-empty">No legal offsets — crib is longer than the depth.</span>';
-      return;
-    }
-    const top = ranked.slice(0, 8);
-    const maxScore = top[0].score || 1;
-    let html = '<table class="cipher-table" style="margin:0;"><thead><tr>'
-      + '<th style="width:5rem;">Offset</th>'
-      + '<th>Candidate slice (if the crib is correct at this position)</th>'
-      + '<th style="width:6rem;text-align:right;">Score</th>'
-      + '</tr></thead><tbody>';
-    top.forEach((r, i) => {
-      const highScore = r.score > 0 && r.score >= maxScore * 0.5;
-      const colour = highScore ? 'var(--gold)' : 'var(--tx3)';
-      const weight = i === 0 ? '700' : '400';
-      html += '<tr>'
-        + `<td style="color:${colour};font-family:var(--fm,monospace);">${r.offset}</td>`
-        + `<td style="font-family:var(--fm,monospace);color:${colour};font-weight:${weight};">`
-        + escapeHtml(r.candidate.replace(/[\x00-\x1f\x7f-\xff]/g, '·'))
-        + '</td>'
-        + `<td style="text-align:right;color:${colour};font-family:var(--fm,monospace);">${r.score.toFixed(2)}</td>`
-        + '</tr>';
-    });
-    html += '</tbody></table>';
-    if (top[0].score > 0) {
-      html += `<p style="font-size:.9rem;color:var(--gold);margin:.75rem 0 0;">Highest-scoring candidate at offset ${top[0].offset}: <code>${escapeHtml(top[0].candidate)}</code>. The English score does not confirm the crib or recover the other message by itself; check this hypothesis against additional evidence.</p>`;
-    } else {
-      html += '<p style="font-size:.9rem;color:var(--tx3);margin:.75rem 0 0;font-style:italic;">No offset produced English-looking output. Try a different crib (longer cribs are more discriminating).</p>';
-    }
-    elOut.innerHTML = html;
-  }
-
-  function runDrag() {
-    const depth = recomputeDepth();
-    if (depth === null) {
-      elOut.innerHTML = '<span class="output-empty" style="color:var(--rust,#d97757);">Fix the ciphertext hex first.</span>';
-      return;
-    }
-    const crib = (elCrib.value || '').trim();
-    if (!crib) {
-      elOut.innerHTML = '<span class="output-empty">Type a crib (a guessed plaintext fragment) and click again.</span>';
-      return;
-    }
-    renderResults(cribDrag(depth, crib));
-  }
-
-  // --- init --------------------------------------------------------
-  elC1.value = toHex(c1);
-  elC2.value = toHex(c2);
-  recomputeDepth();
-  elC1.addEventListener('input', recomputeDepth);
-  elC2.addEventListener('input', recomputeDepth);
-  elDrag.addEventListener('click', runDrag);
-  elCrib.addEventListener('keydown', (e) => { if (e.key === 'Enter') runDrag(); });
-})();
-```
-
-
-## JavaScript — js/columnar-search-ui.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/columnar-search-ui.js`
-- Served SHA-256: `ea903e79fe135580ff589cc06a6c9e3f47d15e5b66ef30ef47de9b1b2e1d7b3c`
-- Readable-source SHA-256: `ea903e79fe135580ff589cc06a6c9e3f47d15e5b66ef30ef47de9b1b2e1d7b3c`
-
-
-```javascript
-(function(){
-  'use strict';
-  const get=id=>document.getElementById(id),button=get('columnar-search-run');if(!button)return;
-  button.addEventListener('click',()=>{
-    button.disabled=true;get('columnar-search-output').textContent='Searching within the declared evaluation budget…';
-    setTimeout(()=>{try{
-      const options={width:Number(get('columnar-search-width').value),seed:Number(get('columnar-search-seed').value),budget:Number(get('columnar-search-budget').value),staged:get('columnar-search-staged').checked,alignment:get('columnar-search-align').checked,segments:get('columnar-search-segments').checked,restarts:Number(get('columnar-search-restarts').value)};
-      const text=get('columnar-search-text').value;
-      const result=options.width?ColumnarSearch.solve(text,options):ColumnarSearch.unknownWidth(text,options);
-      const chosen=options.width?result:result.best;
-      get('columnar-search-output').textContent='Score evaluations: '+result.evaluations+' / '+options.budget+'. '+(chosen&&chosen.best?'Width '+chosen.width+'; order '+chosen.best.order.map(x=>x+1).join('-')+'; preprocessing '+chosen.preprocessing+'. Best candidate (unverified):\n'+chosen.best.plaintext:chosen?chosen.reason:'No candidate within the per-width budgets.')+'\nEqual evaluation counts are not equal CPU time. Scores do not certify a decryption or uniqueness.';
-    }catch(e){get('columnar-search-output').textContent=e.message;}finally{button.disabled=false;}},0);
-  });
-})();
-```
-
-
-## JavaScript — js/columnar-search.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/columnar-search.js`
-- Served SHA-256: `725bdb4724c8867e35f14235787c9156d13df2965c2afd3054cebccfc7439b1c`
-- Readable-source SHA-256: `725bdb4724c8867e35f14235787c9156d13df2965c2afd3054cebccfc7439b1c`
-
-
-```javascript
-/* Bounded adaptation of George Lasry, A Methodology for the Cryptanalysis of
- * Classical Ciphers with Search Metaheuristics (2018), §§5.3.2–5.3.4. */
-(function(root) {
-  'use strict';
-  function rng(seed) { let x=seed>>>0; return()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296;}; }
-  function permutation(order) { return Array.isArray(order)&&order.length>=2&&order.every(x=>Number.isInteger(x)&&x>=0&&x<order.length)&&new Set(order).size===order.length; }
-  function columns(text,order) {
-    if(!permutation(order)) throw Error('Invalid column permutation.');
-    const k=order.length,r=Math.floor(text.length/k),u=text.length%k, cols=Array(k), starts=[];
-    let at=0;
-    order.forEach((original,rank)=>{starts[rank]=at;const n=r+(original<u?1:0);cols[original]=text.slice(at,at+n);at+=n;});
-    return {cols,starts};
-  }
-  function decrypt(text,order) {
-    const {cols}=columns(text,order);let out='';
-    for(let row=0;row<Math.ceil(text.length/order.length);row++) for(const col of cols) if(row<col.length)out+=col[row];
-    return out;
-  }
-  function encrypt(text,order) {if(!permutation(order))throw Error('Invalid column permutation.');return order.map(c=>{let out='';for(let i=c;i<text.length;i+=order.length)out+=text[i];return out;}).join('');}
-  function shuffle(order,random) {const a=order.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-  function move(order,random,segments=true) {
-    const a=order.slice(),k=a.length,kind=segments?Math.floor(random()*3):0;
-    if(kind===0){const i=Math.floor(random()*k);let j=Math.floor(random()*(k-1));if(j>=i)j++;[a[i],a[j]]=[a[j],a[i]];return a;}
-    const length=1+Math.floor(random()*Math.floor(k/2));
-    if(kind===1){const start=Math.floor(random()*(k-length+1)),part=a.splice(start,length),at=Math.floor(random()*(a.length+1));a.splice(at,0,...part);return a;}
-    const left=Math.floor(random()*(k-2*length+1)),right=left+length+Math.floor(random()*(k-left-2*length+1));
-    for(let i=0;i<length;i++)[a[left+i],a[right+i]]=[a[right+i],a[left+i]];return a;
-  }
-  function solve(text,options={},model=root.DetectiveLangModel) {
-    text=String(text).toUpperCase().replace(/[^A-Z]/g,'');
-    const width=options.width,budget=options.budget??6000,restarts=options.restarts??4,seed=options.seed??2018;
-    if(!Number.isInteger(width)||width<2||width>12||text.length<width*2||text.length>2000)throw Error('Use width 2–12 and 2–2000 letters per columnar task (at least two full rows).');
-    if(!Number.isInteger(budget)||budget<100||budget>20000||!Number.isInteger(restarts)||restarts<1||restarts>8||!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw Error('Use 100–20000 evaluations, 1–8 restarts and an unsigned 32-bit seed.');
-    const random=rng(seed),r=Math.floor(text.length/width),u=text.length%width,staged=options.staged!==false,alignment=options.alignment!==false;
-    let evaluations=0,preprocessing=0,best=null;
-    const matrix=Array.from({length:width},()=>Array(width));
-    if(staged){
-      const positions=Array.from({length:width},(_,i)=>Array.from({length:Math.min(i,u)-Math.max(0,u-(width-i))+1},(_,j)=>i*r+Math.max(0,u-(width-i))+j));
-      for(let i=0;i<width;i++)for(let j=0;j<width;j++)if(i!==j){
-        let score=-Infinity,offset=0;
-        for(const a of positions[i])for(const b of positions[j]){
-          if(evaluations>=budget-2*restarts)return {best:null,evaluations,preprocessing:evaluations,seed,width,reason:'Preprocessing exhausted the declared budget; increase it or disable staged scoring.'};
-          let value=0;for(let row=0;row<r;row++)value+=model.BIGRAM_LOG[text[a+row]+text[b+row]]??model.BIGRAM_FLOOR;
-          evaluations++;
-          if(value>score){score=value;offset=((b-a)%r+r)%r;}
-        }
-        matrix[i][j]={score,offset};
-      }
-      preprocessing=evaluations;
-    }
-    function adjacency(order){
-      const {starts}=columns(text,order),rank=Array(width);order.forEach((col,i)=>rank[col]=i);
-      let score=0,align=0,previous=false;
-      for(let col=0;col<width-1;col++){
-        const i=rank[col],j=rank[col+1],entry=matrix[i][j];score+=entry.score;
-        const matches=((starts[j]-starts[i])%r+r)%r===entry.offset;
-        if(matches)align+=2+(previous?1:0);previous=matches;
-      }
-      return score/(r*(width-1))+(u&&alignment?align/(3*(width-1)):0);
-    }
-    const remaining=budget-evaluations;
-    for(let restart=0;restart<restarts;restart++){
-      const quota=Math.floor(remaining/restarts)+(restart<remaining%restarts?1:0),end=evaluations+quota;
-      let order=shuffle(Array.from({length:width},(_,i)=>i),random),current=-Infinity;
-      const stageEnd=evaluations+(staged?Math.floor(quota/3):0);
-      if(staged){current=adjacency(order);evaluations++;while(evaluations<stageEnd){const candidate=move(order,random,options.segments!==false),score=adjacency(candidate);evaluations++;if(score>current){order=candidate;current=score;}}}
-      let plain=decrypt(text,order);current=model.fitness(plain);evaluations++;
-      if(!best||current>best.score)best={order:order.slice(),plaintext:plain,score:current};
-      while(evaluations<end){const candidate=move(order,random,options.segments!==false),p=decrypt(text,candidate),score=model.fitness(p);evaluations++;if(score>current){order=candidate;plain=p;current=score;if(score>best.score)best={order:order.slice(),plaintext:plain,score};}}
-    }
-    return {best,evaluations,preprocessing,seed,width,restarts,reason:'Best candidate within budget; correctness and uniqueness are unverified.'};
-  }
-  function unknownWidth(text,options={},model=root.DetectiveLangModel){
-    const widths=options.widths??[2,3,4,5,6,7,8,9,10,11,12],budget=options.budget??20000;
-    if(!Array.isArray(widths)||!widths.length||new Set(widths).size!==widths.length||widths.some(k=>!Number.isInteger(k)||k<2||k>12)||!Number.isInteger(budget)||budget>20000||budget<100*widths.length)throw Error('Invalid outer width budget.');
-    const results=widths.map((width,i)=>solve(text,{...options,width,budget:Math.floor(budget/widths.length)+(i<budget%widths.length?1:0)},model));
-    return {results,budget,evaluations:results.reduce((n,r)=>n+r.evaluations,0),best:results.filter(r=>r.best).sort((a,b)=>b.best.score-a.best.score)[0]??null};
-  }
-  const api={rng,columns,decrypt,encrypt,move,solve,unknownWidth};root.ColumnarSearch=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
-})(typeof window!=='undefined'?window:globalThis);
-```
-
-
-## JavaScript — js/demo-loader.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/demo-loader.min.js`
-- Served SHA-256: `5179210f3c44a4747f46ca3cbcbdf04ebf3369e372df0b73fccc917127cbed17`
-- Readable-source SHA-256: `bbbab4d906fa66ca72d3bed302648710c3c06c31ddf31a8a4d4f75dd5e289892`
-
-
-```javascript
-/**
- * THE CIPHER MUSEUM — Demo Loader
- * Auto-generates interactive "Try It Yourself" demos for all cipher exhibit pages.
- * Place <div class="demo-section" data-cipher="cipherName"></div> in the HTML.
- */
-'use strict';
-
-(function () {
-  const CONFIGS = {
-    rasterschluessel44: { label:'RS44 (27 March 1944; max 200 prepared letters)', engine:'rasterschluessel44', defaultMsg:'FEINDGREIFTSEITELFXVIERFUENFUHRBEIAAIGQALFISIGQALFISEEMITAQTPANZNAQSUEDWESTAN', inputs:[{type:'text',id:'keyword',label:'Key: manual, or JSON settings (short teaching mode)',value:'manual'}] },
-    doublePlayfair: { label:'German Double Playfair (December 1941; J→II; odd filler Z)', engine:'doublePlayfair', defaultMsg:'FEINDLIQERANGRIFFAUFSTRASZEADORFSTRIQBEHAUSENABGEWEHRT', inputs:[{type:'text',id:'keyword',label:'Key: manual, or JSON squares/filler/strict',value:'manual'}] },
-    amsco: { label:'AMSCO (ACA digraph-first)', engine:'amsco', defaultMsg:'INCOMPLETECOLUMNARWITHALTERNATINGSINGLELETTERSANDDIGRAPHS', inputs:[{type:'text',id:'keyword',label:'Column ranks (or JSON order/first)',value:'41325'}] },
-    caesar: {
-      label: 'Caesar Cipher', engine: 'caesar', defaultMsg: 'THE QUICK BROWN FOX',
-      inputs: [{ type: 'range', id: 'shift', label: 'Shift', min: 1, max: 25, value: 3 }]
-    },
-    monoalphabetic: {
-      label: 'Monoalphabetic Substitution', engine: 'monoalphabetic', defaultMsg: 'ATTACK AT DAWN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'ZEBRA', placeholder: 'Keyword…' }]
-    },
-    polybius: {
-      label: 'Polybius Square', engine: 'polybius', defaultMsg: 'HELLO WORLD',
-      inputs: []
-    },
-    homophonic: {
-      label: 'Homophonic Substitution', engine: 'homophonic', defaultMsg: 'SECRET MESSAGE',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Seed Keyword', value: 'CIPHER', placeholder: 'Seed…' }]
-    },
-    playfair: {
-      label: 'Playfair Cipher', engine: 'playfair', defaultMsg: 'HIDE THE GOLD',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'MONARCHY', placeholder: 'Keyword…' }]
-    },
-    hill: {
-      label: 'Hill Cipher', engine: 'hill', defaultMsg: 'SHORT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Key Matrix (a,b,c,d)', value: '3,3,2,5', placeholder: '3,3,2,5' }]
-    },
-    vigenere: {
-      label: 'Vigenère Cipher', engine: 'vigenere', defaultMsg: 'ATTACKATDAWN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'LEMON', placeholder: 'Keyword…' }]
-    },
-    beaufort: {
-      label: 'Beaufort Cipher', engine: 'beaufort', defaultMsg: 'THE QUICK BROWN FOX',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'FORTIFICATION', placeholder: 'Keyword…' }]
-    },
-    gronsfeld: {
-      label: 'Gronsfeld Cipher', engine: 'gronsfeld', defaultMsg: 'THE SECRET CODE',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Numeric Key', value: '31415', placeholder: 'Digits…' }]
-    },
-    porta: {
-      label: 'Porta Cipher', engine: 'porta', defaultMsg: 'DEFEND THE EAST WALL',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'FORTIFY', placeholder: 'Keyword…' }]
-    },
-    runningKey: {
-      label: 'Running Key Cipher', engine: 'runningKey', defaultMsg: 'FLEE AT ONCE',
-      inputs: [{ type: 'textarea', id: 'keyword', label: 'Key Text', value: 'WE HOLD THESE TRUTHS TO BE SELF EVIDENT', placeholder: 'Long key text…' }]
-    },
-    railFence: {
-      label: 'Rail Fence Cipher', engine: 'railFence', defaultMsg: 'WE ARE DISCOVERED FLEE AT ONCE',
-      inputs: [{ type: 'range', id: 'shift', label: 'Rails', min: 2, max: 10, value: 3 }]
-    },
-    columnar: {
-      label: 'Columnar Transposition', engine: 'columnar', defaultMsg: 'THE TOMATO IS A PLANT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'ZEBRA', placeholder: 'Keyword…' }]
-    },
-    doubleTransposition: {
-      label: 'Double Transposition', engine: 'doubleTransposition', defaultMsg: 'ATTACK AT DAWN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keywords (key1,key2)', value: 'FIRST,SECOND', placeholder: 'KEY1,KEY2' }]
-    },
-    bacon: {
-      label: "Bacon's Cipher", engine: 'bacon', defaultMsg: 'HELLO',
-      inputs: []
-    },
-    tapCode: {
-      label: 'Tap Code', engine: 'tapCode', defaultMsg: 'HELLO',
-      inputs: []
-    },
-    pigpen: {
-      label: 'Pigpen Cipher', engine: 'pigpen', defaultMsg: 'FREEMASON',
-      inputs: []
-    },
-    bifid: {
-      label: 'Bifid Cipher', engine: 'bifid', defaultMsg: 'FLEEATONCE',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'SECRET', placeholder: 'Keyword…' }]
-    },
-    trifid: {
-      label: 'Trifid Cipher', engine: 'trifid', defaultMsg: 'DEFEND',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'FELIX', placeholder: 'Keyword…' }]
-    },
-    adfgx: {
-      label: 'ADFGX Cipher', engine: 'adfgx', defaultMsg: 'ATTACK',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keys (polybius,columnar)', value: 'PRIVACY,GERMAN', placeholder: 'KEY1,KEY2' }]
-    },
-    adfgvx: {
-      label: 'ADFGVX Cipher', engine: 'adfgvx', defaultMsg: 'ATTACK',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keys (polybius,columnar)', value: 'PRIVACY,GERMAN', placeholder: 'KEY1,KEY2' }]
-    },
-    nihilist: {
-      label: 'Nihilist Cipher', engine: 'nihilist', defaultMsg: 'DYNAMITE WINTER PALACE',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keys (polybius,keyword)', value: 'RUSSIAN,KEY', placeholder: 'GRID,KEY' }]
-    },
-    otp: {
-      label: 'One-Time Pad', engine: 'otp', defaultMsg: 'ATTACK',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Key (leave blank for random)', value: '', placeholder: 'Random key if empty' }]
-    },
-    fractionatedMorse: {
-      label: 'Fractionated Morse', engine: 'fractionatedMorse', defaultMsg: 'HELLO WORLD',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'ROUNDTABLE', placeholder: 'Keyword…' }]
-    },
-    confederateVigenere: {
-      label: 'Confederate Vigenère', engine: 'confederateVigenere', defaultMsg: 'SEND REINFORCEMENTS',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'CONFEDERATE', placeholder: 'Keyword…' }]
-    },
-    bazeries: {
-      label: 'Bazeries-inspired teaching model', engine: 'bazeries', defaultMsg: 'RETREAT TO THE HILLS',
-      inputs: [{ type: 'range', id: 'shift', label: 'Number Key', min: 2, max: 99, value: 42 }]
-    },
-    alberti: {
-      label: 'Alberti Cipher Disk', engine: 'alberti', defaultMsg: 'SECRETS OF THE VATICAN',
-      inputs: [{ type: 'range', id: 'shift', label: 'Initial Disk Setting', min: 0, max: 25, value: 3 }]
-    },
-    jefferson: {
-      label: 'Jefferson Disk', engine: 'jefferson', defaultMsg: 'WE HOLD THESE TRUTHS',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Disk Order (comma-separated)', value: '3,1,5,2,4,6', placeholder: '1,2,3…26' }]
-    },
-    enigma: {
-      label: 'Enigma Machine', engine: 'enigma', defaultMsg: 'HELLO WORLD',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Start (3 letters)', value: 'AAA', placeholder: 'AAA' }]
-    },
-    lorenz: {
-      label: 'Lorenz Cipher', engine: 'lorenz', defaultMsg: 'URGENT MESSAGE',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Seed', value: 'LORENZ', placeholder: 'Seed word…' }]
-    },
-    dictionaryCode: {
-      label: 'Dictionary Code', engine: 'dictionaryCode', defaultMsg: 'WTUSC',
-      inputs: [{ type: 'textarea', id: 'keyword', label: 'Reference Text', value: 'We the People of the United States in Order to form a more perfect Union establish Justice insure domestic Tranquility provide for the common defence', placeholder: 'Reference text…' }]
-    },
-    stager: {
-      label: 'Letter-Route Teaching Model — Compare Stager’s Word Routes', engine: 'stager', defaultMsg: 'WE ARE DISCOVERED FLEE AT ONCE',
-      inputs: [{ type: 'range', id: 'shift', label: 'Columns', min: 2, max: 10, value: 5 }]
-    },
-    vic: {
-      label: 'VIC Cipher', engine: 'vic', defaultMsg: 'AGENT REPORT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Keyword', value: 'SNOWFALL', placeholder: 'Keyword…' }]
-    },
-    scytale: {
-      label: 'Scytale', engine: 'scytale', defaultMsg: 'ATTACK AT DAWN',
-      inputs: [{ type: 'range', id: 'shift', label: 'Rod Rows', min: 2, max: 10, value: 3 }]
-    },
-    vernam: {
-      label: 'Vernam Cipher (XOR)', engine: 'vernam', defaultMsg: 'SECRET',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Key (leave blank for random)', value: '', placeholder: 'Random key if empty' }]
-    },
-    greatCipher: {
-      label: 'Great Cipher (Grand Chiffre)', engine: 'greatCipher',
-      defaultMsg: 'THE KING ORDERS RETREAT TO PARIS AT DAWN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook Seed', value: 'LOUIS', placeholder: 'Seed word…' }]
-    },
-    babington: {
-      label: 'Babington Plot Cipher', engine: 'babington',
-      defaultMsg: 'THE QUEEN MUST DIE FOR LIBERTY',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook Seed', value: 'BABINGTON', placeholder: 'Seed word…' }]
-    },
-    'navajo-code-talkers': {
-      label: 'Navajo Code Talkers', engine: 'navajo',
-      defaultMsg: 'ENEMY TANK BATTLESHIP IWO JIMA',
-      inputs: []
-    },
-    voynich: {
-      label: 'Voynich exhibit — invented letter-substitution model', engine: 'voynich',
-      defaultMsg: 'HE WHO DECIPHERS THIS WILL BE FAMOUS',
-      inputs: []
-    },
-    atbash: {
-      label: 'Atbash', engine: 'atbash', defaultMsg: 'HELLO WORLD',
-      inputs: []
-    },
-    rot13: {
-      label: 'ROT13', engine: 'rot13', defaultMsg: 'TRY ROTATING THIRTEEN',
-      inputs: []
-    },
-    foursquare: {
-      label: 'Four-Square Cipher', engine: 'foursquare', defaultMsg: 'HELP ME OBI WAN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Two Keywords (key1,key2)', value: 'EXAMPLE,KEYWORD', placeholder: 'KEY1,KEY2' }]
-    },
-    twosquare: {
-      label: 'Two-Square Cipher', engine: 'twosquare', defaultMsg: 'COME QUICKLY WE NEED HELP',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Two Keywords (key1,key2)', value: 'EXAMPLE,KEYWORD', placeholder: 'KEY1,KEY2' }]
-    },
-    straddlingCheckerboard: {
-      label: 'Straddling Checkerboard', engine: 'straddlingCheckerboard',
-      defaultMsg: 'ATTACK AT DAWN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Top-Row Letters (8)', value: 'ATONESIRE', placeholder: '8 distinct letters' }]
-    },
-    chaocipher: {
-      label: 'Chaocipher', engine: 'chaocipher', defaultMsg: 'WELLDONE IS BETTER THAN WELLSAID',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Initial Alphabet Key', value: 'CHAOCIPHER', placeholder: 'Seed word…' }]
-    },
-    m209: {
-      label: 'M-209 pin-and-lug teaching model', engine: 'm209', defaultMsg: 'ENEMY ADVANCING ON FLANK',
-      note: 'This deterministic teaching model derives six pin wheels and all 27 lug bars from the seed. It is not an operational M-209 key sheet.',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Deterministic Pin/Lug Seed', value: 'HAGELIN', placeholder: 'Seed word…' }]
-    },
-    solitaire: {
-      label: 'Solitaire / Pontifex', engine: 'solitaire', defaultMsg: 'DO NOT USE PC',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Deck Key', value: 'CRYPTONOMICON', placeholder: 'Key word…' }]
-    },
-    beale: {
-      label: 'Beale Cipher (book cipher)', engine: 'beale', defaultMsg: 'GOLD',
-      inputs: [{ type: 'textarea', id: 'keyword', label: 'Reference Text (Declaration of Independence excerpt)',
-        value: 'When in the course of human events it becomes necessary for one people to dissolve the political bands which have connected them with another and to assume among the powers of the earth the separate and equal station to which the laws of nature and of natures god entitle them a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation',
-        placeholder: 'Long reference text…' }]
-    },
-    copiale: {
-      label: 'Copiale Cipher', engine: 'copiale', defaultMsg: 'OCULIST ORDER SECRETS',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Symbol Seed', value: 'COPIALE', placeholder: 'Seed word…' }]
-    },
-    kryptos: {
-      label: 'Kryptos K1/K2 Tableau', engine: 'kryptos', defaultMsg: 'BETWEEN SUBTLE SHADING AND THE ABSENCE OF LIGHT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Vigenère Key', value: 'PALIMPSEST', placeholder: 'PALIMPSEST or ABSCISSA' }]
-    },
-    purple: {
-      label: 'Purple (simplified)', engine: 'purple', defaultMsg: 'CLIMB MOUNT NIITAKA',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Switch Seed', value: 'PURPLE', placeholder: 'Seed word…' }]
-    },
-    autokey: {
-      label: 'Autokey Cipher (Vigenère self-extending)', engine: 'autokey', defaultMsg: 'ATTACK AT DAWN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Primer Key', value: 'QUEENLY', placeholder: 'Primer word…' }]
-    },
-    nomenclator: {
-      label: 'Nomenclator (codebook + cipher alphabet)', engine: 'nomenclator',
-      defaultMsg: 'THE KING WILL ATTACK PARIS AT DAWN',
-      inputs: []
-    },
-    bookCipher: {
-      label: 'Book Cipher (Declaration of Independence)', engine: 'bookCipher',
-      defaultMsg: 'GOLD',
-      inputs: []
-    },
-    sigaba: {
-      label: 'SIGABA (pseudorandom rotor stepping)', engine: 'sigaba', defaultMsg: 'CLIMB MOUNT NIITAKA',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Seed', value: 'SIGABA', placeholder: 'Seed word…' }]
-    },
-    typex: {
-      label: 'Typex (5-rotor Enigma-style)', engine: 'typex', defaultMsg: 'BRITISH SIGNAL READY',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Start (5 letters)', value: 'AAAAA', placeholder: 'AAAAA' }]
-    },
-    'kama-sutra': {
-      label: 'Kama Sutra Cipher (Mlecchita Vikalpa)', engine: 'kamaSutra',
-      defaultMsg: 'SECRET LOVERS LANGUAGE',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Pairing Seed', value: 'KAMASUTRA', placeholder: 'Seed word…' }]
-    },
-    'aeneas-tacticus': {
-      label: 'Aeneas Tacticus Water-Clock Code', engine: 'aeneasTacticus',
-      defaultMsg: 'SHIPS APPROACH AT NIGHT',
-      inputs: []
-    },
-    'arabic-nomenclators': {
-      label: 'Arabic Nomenclator (al-Kindi era)', engine: 'nomenclator',
-      defaultMsg: 'THE CALIPH RIDES AT DAWN',
-      inputs: []
-    },
-    'jn-25': {
-      label: 'JN-25 (illustrative superenciphered codebook)', engine: 'jn25',
-      defaultMsg: 'AF SHORT OF WATER',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Additive Key Digits', value: '31415', placeholder: 'Digits only…' }]
-    },
-    'red-type-a': {
-      label: 'Red (Type A) stepping-switch model', engine: 'redTypeA',
-      defaultMsg: 'DIPLOMATIC TRAFFIC TOKYO',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Switch Seed', value: 'TOKYORED', placeholder: 'Seed word…' }]
-    },
-    'affine': {
-      label: 'Affine Cipher  (E(x) = a·x + b mod 26)', engine: 'affine',
-      defaultMsg: 'AFFINE CIPHER',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Key (a,b) — a coprime to 26', value: '5,8', placeholder: '5,8' }]
-    },
-    'trithemius': {
-      label: 'Trithemius Progressive Cipher (1518)', engine: 'trithemius',
-      defaultMsg: 'STEGANOGRAPHIA',
-      inputs: [{ type: 'number', id: 'shift', label: 'Starting Shift', value: '0', placeholder: '0' }]
-    },
-    'cardano-autokey': {
-      label: 'Plaintext Autokey — Modern Comparison Model', engine: 'cardanoAutokey',
-      defaultMsg: 'MEET ME AT MIDNIGHT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Single Seed Letter', value: 'Q', placeholder: 'Q' }]
-    },
-    'wheatstone': {
-      label: 'Equal-Dial Substitution Model — Not Historical Wheatstone', engine: 'wheatstone',
-      defaultMsg: 'TELEGRAPH SIGNAL',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Inner-Dial Keyword', value: 'WHEATSTONE', placeholder: 'Keyword…' }]
-    },
-    'morse': {
-      label: 'International Morse Code', engine: 'morse',
-      defaultMsg: 'SOS',
-      inputs: []
-    },
-    'cardano-grille': {
-      label: 'Cardano Grille (1550)', engine: 'cardanoGrille',
-      defaultMsg: 'MEETME',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Pattern (size:idx,idx,…)', value: '5:0,3,7,12,19,21,24', placeholder: 'e.g. 5:0,3,7,12,19' }]
-    },
-    'null-cipher': {
-      label: 'Null Cipher (Hidden-Letter Concealment)', engine: 'nullCipher',
-      defaultMsg: 'HELP',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Position (first | last | N)', value: 'first', placeholder: 'first' }]
-    },
-    'fialka': {
-      label: 'Fialka M-125 (Soviet 10-rotor model)', engine: 'fialka',
-      note: 'Illustrative seeded 26-letter rotor model only. It does not reproduce the M-125 30-contact alphabet, real rotor wiring, stepping, or key-card settings.',
-      defaultMsg: 'WARSAW PACT TRAFFIC',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Seed', value: 'M125', placeholder: 'Seed word…' }]
-    },
-    'kl-7': {
-      label: 'KL-7 (US 1952 8-rotor model)', engine: 'kl7',
-      note: 'Illustrative seeded 26-letter rotor model only. It does not reproduce ADONIS rotor wiring, notch rings, stepping, or re-entry wiring.',
-      defaultMsg: 'NATO READY MESSAGE',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Rotor Seed', value: 'TSEC', placeholder: 'Seed word…' }]
-    },
-    'geheimschreiber': {
-      label: 'Geheimschreiber T52 (Sturgeon family)', engine: 'geheimschreiber',
-      defaultMsg: 'OBERKOMMANDO WEHRMACHT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Seed', value: 'STURGEON', placeholder: 'Seed word…' }]
-    },
-    'kryha': {
-      label: 'Kryha Pocket Cipher (1924)', engine: 'kryha',
-      defaultMsg: 'UNBREAKABLE CIPHER',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Seed', value: 'POCKET', placeholder: 'Seed word…' }]
-    },
-    'm-94': {
-      label: 'M-94 / M-138-A Strip Cipher (1922)', engine: 'm94',
-      defaultMsg: 'ARMY SIGNAL READY',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Offset Row[, disk-order]', value: '5', placeholder: '5 or 5,1,2,3,…' }]
-    },
-    'chinese-telegraph': {
-      label: 'Chinese Telegraph Code (1881, 4-digit codebook)', engine: 'chineseTelegraph',
-      defaultMsg: 'SHANGHAI',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Additive Key (numeric, 0–9999)', value: '0', placeholder: 'e.g. 1234' }]
-    },
-    'zimmermann': {
-      label: 'Codebook and Additive Teaching Model', engine: 'zimmermann',
-      note: 'An invented word table with optional additive arithmetic. This does not reconstruct diplomatic codes 0075 or 13040, which were used on successive transmission legs.',
-      defaultMsg: 'WAR WITH MEXICO STOP',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Teaching-model additive (0–99999)', value: '0', placeholder: 'e.g. 12345' }]
-    },
-    'slidex': {
-      label: 'Slidex (British WWII tactical bigram card)', engine: 'slidex',
-      defaultMsg: 'TANK MOVE NORTH',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Card Seed', value: 'SLIDEX', placeholder: 'Seed word…' }]
-    },
-    'commercial-codebooks': {
-      label: 'Commercial Telegraph Codebooks (ABC / Bentley\'s style)', engine: 'commercialCode',
-      defaultMsg: 'CONFIRMED SHIPMENT URGENT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook (informational only)', value: 'ABC', placeholder: 'ABC, Bentley, Lieber…' }]
-    },
-    'culper-ring': {
-      label: 'Culper Ring / Tallmadge Code (1779)', engine: 'culperRing',
-      defaultMsg: 'WASHINGTON ATTACK MIDNIGHT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook key (informational)', value: 'TALLMADGE', placeholder: 'TALLMADGE' }]
-    },
-    'arnold-andre': {
-      label: 'Arnold–André Book Cipher (Blackstone\'s Commentaries)', engine: 'arnoldAndre',
-      defaultMsg: 'GENERAL ARNOLD MEET ANDRE TONIGHT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Book seed (informational)', value: 'BLACKSTONE', placeholder: 'BLACKSTONE' }]
-    },
-    'argenti': {
-      label: 'Argenti Family Cipher (Vatican, 1500s–1600s)', engine: 'argenti',
-      defaultMsg: 'ATTACK AT DAWN',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Homophone Key', value: 'ARGENTI', placeholder: 'ARGENTI' }]
-    },
-    'wallis-ciphers': {
-      label: 'Wallis Ciphers (English Civil War, 1640s)', engine: 'wallisCiphers',
-      defaultMsg: 'KING CHARLES MARCH OXFORD',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Nomenclator Key', value: 'WALLIS', placeholder: 'WALLIS' }]
-    },
-    'raf-otp': {
-      label: 'Letter-Pad Teaching Model — Not an Authenticated RAF System', engine: 'otp',
-      defaultMsg: 'OPERATION READY', inputs: [
-        { type: 'text', id: 'keyword', label: 'Pad (leave blank for random)', value: '', placeholder: 'OTP key material…' }
-      ]
-    },
-    'che-vic': {
-      label: 'VIC Comparison Model — Not Guevara’s Pad System', engine: 'vic',
-      defaultMsg: 'COMRADES MOVE NORTH',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Personal Key', value: 'GUEVARA', placeholder: 'Personal phrase' }]
-    },
-    'ira-ciphers': {
-      label: 'IRA Cipher Traffic (Twomey papers, 1926\u20131928)', engine: 'columnar',
-      defaultMsg: 'SEND ADDRESS TO SMITH',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Transposition Keyword', value: 'IRELAND', placeholder: 'Keyword\u2026' }]
-    },
-    'latin-american-codebooks': {
-      label: 'Invented Commercial Codebook Illustration', engine: 'commercialCode',
-      defaultMsg: 'CARGO ARRIVED BUENOSAIRES',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Codebook (informational only)', value: 'COMERCIAL', placeholder: 'Invented vocabulary' }]
-    },
-    'diana-cryptosystem': {
-      label: 'Diana Cryptosystem (US Special Forces OTP, 1960s–)', engine: 'diana',
-      defaultMsg: 'EXTRACT NOW',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Pad Trigraphs', value: 'XKCDQNJVMZAPLR', placeholder: 'Random pad text\u2026' }]
-    },
-    'patterson-jefferson-cipher': {
-      label: 'Patterson\u2019s Cipher for Jefferson (1801) \u2014 sections of \u22649 lines',
-      engine: 'patterson',
-      defaultMsg: 'IN CONGRESS JULY FOURTH',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Key \u2014 pairs of (line number, arbitrary letters)', value: '13,34,57,65,22,78,49', placeholder: '13,34,57,65,22,78,49' }]
-    },
-    'wadsworth': {
-      label: 'Wadsworth Cipher Device (1817) \u2014 26:33 geared disks', engine: 'wadsworth',
-      defaultMsg: 'ATTACK',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Inner-Disk Keyword', value: 'WADSWORTH', placeholder: 'Keyword\u2026' }]
-    },
-    'amharic-ge-ez-ciphers': {
-      label: 'Illustrative Latin Substitution — Historical Attribution Unverified', engine: 'geezMonastic',
-      defaultMsg: 'PRESERVE THE TEXT',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Latin Alphabet Seed', value: 'GEEZ', placeholder: 'Key word\u2026' }]
-    },
-    'vietnamese-underground': {
-      label: 'Illustrative Substitution — No Specific Operational Attribution', engine: 'monoalphabetic',
-      defaultMsg: 'ADVANCE TO POSITIONS',
-      inputs: [{ type: 'text', id: 'keyword', label: 'Teaching Keyword', value: 'GIAIPHONG', placeholder: 'Key word\u2026' }]
-    }
-  };
-
-  function buildDemo(container) {
-    const cipherName = container.dataset.cipher;
-    const config = CONFIGS[cipherName];
-    if (!config || !window.CipherEngines) return;
-
-    const engine = window.CipherEngines[config.engine];
-    if (!engine) return;
-
-    let mode = 'enc';
-    const inputId = 'demo-msg-' + cipherName;
-    const keyId = 'demo-key-' + cipherName;
-
-    let inputsHTML = '';
-    for (const inp of config.inputs) {
-      if (inp.type === 'range') {
-        inputsHTML += `
-          <div class="input-group">
-            <label class="input-label" for="${keyId}">${inp.label} — <span id="demo-range-val-${cipherName}">${inp.value}</span></label>
-            <div class="range-row">
-              <input type="range" class="museum-range" id="${keyId}" min="${inp.min}" max="${inp.max}" value="${inp.value}"
-                aria-label="${inp.label}">
-              <span class="range-val" id="demo-range-display-${cipherName}">${inp.value}</span>
-            </div>
-          </div>`;
-      } else if (inp.type === 'textarea') {
-        inputsHTML += `
-          <div class="input-group">
-            <label class="input-label" for="${keyId}">${inp.label}</label>
-            <textarea class="museum-input" id="${keyId}" rows="2" placeholder="${inp.placeholder || ''}"
-              aria-label="${inp.label}">${inp.value}</textarea>
-          </div>`;
-      } else {
-        inputsHTML += `
-          <div class="input-group">
-            <label class="input-label" for="${keyId}">${inp.label}</label>
-            <input class="museum-input" id="${keyId}" type="text" value="${inp.value}" placeholder="${inp.placeholder || ''}"
-              aria-label="${inp.label}">
-          </div>`;
-      }
-    }
-
-    const modeToggle = config.encryptOnly ? `
-      <div class="mode-toggle" role="group" aria-label="Cipher mode">
-        <button class="mode-btn active" data-mode="enc" aria-pressed="true">Encrypt</button>
-      </div>` : `
-      <div class="mode-toggle" role="group" aria-label="Cipher mode">
-        <button class="mode-btn active" data-mode="enc" aria-pressed="true">Encrypt</button>
-        <button class="mode-btn" data-mode="dec" aria-pressed="false">Decrypt</button>
-      </div>`;
-
-    container.innerHTML = `
-      <div class="demo-panel">
-        <div class="demo-head">
-          <span>🔐</span>
-          <span class="demo-title">Try It Yourself</span>
-        </div>
-        <div class="demo-body">
-          ${config.note ? `<p class="demo-model-note" style="grid-column:1/-1;margin:0;padding:.75rem 1rem;border:1px solid var(--gold-b);border-radius:var(--rs);color:var(--tx2);font-size:.9rem;line-height:1.55;"><strong>Model scope:</strong> ${config.note}</p>` : ''}
-          <div class="demo-col">
-            ${modeToggle}
-            <div class="input-group">
-              <label class="input-label" for="${inputId}">Message</label>
-              <textarea class="museum-input" id="${inputId}" rows="3" placeholder="Type a message…"
-                aria-label="Message input">${config.defaultMsg}</textarea>
-            </div>
-            ${inputsHTML}
-          </div>
-          <div class="demo-col">
-            <div class="btn-group">
-              <button class="btn btn-primary" id="demo-run-${cipherName}">Run Cipher</button>
-              <button class="btn btn-secondary" id="demo-clear-${cipherName}">Clear</button>
-            </div>
-            <p class="demo-key-warning" role="status" hidden></p>
-            <div class="input-group">
-              <span class="input-label" id="demo-output-label-${cipherName}">Output</span>
-              <div class="output-box" id="demo-output-${cipherName}" aria-live="polite" aria-labelledby="demo-output-label-${cipherName}" role="status">
-                <span class="output-empty">Result appears here…</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>`;
-
-    // Wire events
-    const modeButtons = container.querySelectorAll('.mode-btn');
-    modeButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        modeButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed', 'true');
-        mode = btn.dataset.mode;
-      });
-    });
-
-    const rangeInput = container.querySelector('.museum-range');
-    if (rangeInput) {
-      const valSpan = document.getElementById('demo-range-val-' + cipherName);
-      const displaySpan = document.getElementById('demo-range-display-' + cipherName);
-      rangeInput.addEventListener('input', () => {
-        if (valSpan) valSpan.textContent = rangeInput.value;
-        if (displaySpan) displaySpan.textContent = rangeInput.value;
-      });
-    }
-
-    function getKey() {
-      const el = document.getElementById(keyId);
-      return el ? el.value : '';
-    }
-
-    const runBtn = document.getElementById('demo-run-' + cipherName);
-    const clearBtn = document.getElementById('demo-clear-' + cipherName);
-    const outputBox = document.getElementById('demo-output-' + cipherName);
-    const msgInput = document.getElementById(inputId);
-    const keyWarning = container.querySelector('.demo-key-warning');
-
-    runBtn.addEventListener('click', () => {
-      const msg = msgInput.value;
-      const key = getKey();
-      keyWarning.hidden = true;
-      keyWarning.textContent = '';
-      if (config.engine === 'runningKey') {
-        const keyLength = String(key).toUpperCase().replace(/[^A-Z]/g, '').length;
-        const messageLength = msg.toUpperCase().replace(/[^A-Z]/g, '').length;
-        if (!keyLength || keyLength < messageLength) {
-          keyWarning.textContent = !keyLength
-            ? 'No alphabetic key supplied: the engine uses its built-in teaching excerpt and repeats it if needed. Supply a book passage at least as long as your message for a non-repeating running key.'
-            : 'This key has ' + keyLength + ' letters for ' + messageLength + ' message letters, so the teaching engine repeats it. This run is periodic, unlike a full-length non-repeating running key.';
-          keyWarning.hidden = false;
-        }
-      }
-      try {
-        const result = mode === 'enc' ? engine.encode(msg, key) : engine.decode(msg, key);
-        outputBox.innerHTML = '';
-        outputBox.textContent = result;
-      } catch (e) {
-        outputBox.textContent = 'Error: ' + e.message;
-      }
-    });
-
-    clearBtn.addEventListener('click', () => {
-      msgInput.value = '';
-      keyWarning.hidden = true;
-      keyWarning.textContent = '';
-      outputBox.innerHTML = '<span class="output-empty">Result appears here…</span>';
-    });
-
-    // Embed affordance — teachers can drop any demo into their own page.
-    // Hidden on the embed page itself and when already inside an iframe.
-    const isEmbedPage = /embed\.html$/.test(location.pathname);
-    let framed = false;
-    try { framed = window.self !== window.top; } catch { framed = true; }
-    if (!isEmbedPage && !framed) {
-      const snippet = '<iframe src="https://ciphermuseum.com/embed.html?cipher=' + cipherName +
-        '" width="100%" height="520" style="border:1px solid #2e2e3a;border-radius:8px" ' +
-        'title="' + config.label + ' interactive demo — The Cipher Museum" loading="lazy"></iframe>';
-      const embed = document.createElement('details');
-      embed.className = 'demo-embed';
-      embed.style.cssText = 'margin-top:.5rem;font-family:var(--fm);font-size:.72rem;color:var(--tx3);';
-      const summary = document.createElement('summary');
-      summary.textContent = '‹/› Embed this demo on your own page';
-      summary.style.cssText = 'cursor:pointer;letter-spacing:.06em;';
-      const row = document.createElement('div');
-      row.style.cssText = 'display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap;';
-      const field = document.createElement('input');
-      field.type = 'text';
-      field.readOnly = true;
-      field.value = snippet;
-      field.setAttribute('aria-label', 'Embed code for this demo');
-      field.className = 'museum-input';
-      field.style.cssText = 'flex:1;min-width:220px;font-size:.7rem;';
-      field.addEventListener('focus', () => field.select());
-      const copy = document.createElement('button');
-      copy.type = 'button';
-      copy.className = 'btn btn-secondary';
-      copy.textContent = 'Copy';
-      copy.addEventListener('click', () => {
-        const done = () => {
-          copy.textContent = 'Copied!';
-          setTimeout(() => { copy.textContent = 'Copy'; }, 2000);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(snippet).then(done, () => field.select());
-        } else { field.select(); try { document.execCommand('copy'); done(); } catch {} }
-      });
-      row.appendChild(field);
-      row.appendChild(copy);
-      embed.appendChild(summary);
-      embed.appendChild(row);
-      container.appendChild(embed);
-    }
-
-    // Auto-run on load for instant feedback
-    runBtn.click();
-  }
-
-  /* ─── Sources & Further Reading ─── */
-  const SOURCES = {
-    caesar: [
-      { text: "Suetonius, <em>The Twelve Caesars</em>, \"Divus Iulius\" §56 — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Caesar_cipher" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 1", url: "https://simonsingh.net/books/the-code-book/" },
-      { text: "Practical Cryptography — Caesar Cipher", url: "https://practicalcryptography.com/ciphers/caesar-cipher/" }
-    ],
-    polybius: [
-      { text: "Polybius, <em>Histories</em>, Book X §45 — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Polybius_square" },
-      { text: "Practical Cryptography — Polybius Square", url: "https://practicalcryptography.com/ciphers/polybius-cipher/" }
-    ],
-    scytale: [
-      { text: "Plutarch, <em>Life of Lysander</em> §19 — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Scytale" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    monoalphabetic: [
-      { text: "Al-Kindi, <em>A Manuscript on Deciphering Cryptographic Messages</em> (~850 AD) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Al-Kindi" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 1", url: "https://simonsingh.net/books/the-code-book/" },
-      { text: "Practical Cryptography — Simple Substitution", url: "https://practicalcryptography.com/ciphers/simple-substitution-cipher/" }
-    ],
-    homophonic: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Practical Cryptography — Homophonic Substitution", url: "https://practicalcryptography.com/ciphers/homophonic-substitution-cipher/" }
-    ],
-    babington: [
-      { text: "Pollen, John Hungerford. <em>Mary Queen of Scots and the Babington Plot</em> (Scottish History Society, 1922)" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 1 — \"The Cipher of Mary Queen of Scots\"", url: "https://simonsingh.net/books/the-code-book/" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "British Library — Digitised manuscripts and archives (collection portal)", url: "https://www.bl.uk/collection/digitised-manuscripts-archives" }
-    ],
-    voynich: [
-      { text: "Mary E. D’Imperio, <em>The Voynich Manuscript: An Elegant Enigma</em> (1978), §§5.1–5.2 and 6.2–6.6." },
-      { text: "Sravana Reddy and Kevin Knight, <em>What We Know About The Voynich Manuscript</em> (2011), §§4.1–4.2 and Table 2.", url: "https://aclanthology.org/W11-1511/" },
-      { text: "René Zandbergen, <em>Transliteration of the Text</em>, including the Landini–Zandbergen EVA design.", url: "https://www.voynich.nu/transcr.html" },
-      { text: "Stephen Bax, <em>A Proposed Partial Decoding of the Voynich Script</em> (2014), abstract and proposed readings.", url: "https://stephenbax.net/?page_id=11" },
-      { text: "University of Bristol, <em>Statement re: Voynich research paper</em> (16 May 2019).", url: "https://www.bristol.ac.uk/news/2019/may/voynich-manuscript.html" }
-    ],
-    playfair: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Practical Cryptography — Playfair Cipher", url: "https://practicalcryptography.com/ciphers/playfair-cipher/" }
-    ],
-    m209: [
-      { text: "War Department, <em>TM 11-380: Converter M-209, M-209-A, M-209-B</em> (17 March 1944)", url: "https://www.nsa.gov/news-features/declassified-documents/friedman-documents/assets/files/publications/FOLDER_075/41709299074861.pdf" }
-    ],
-    hill: [
-      { text: "Hill, Lester S., \"Cryptography in an Algebraic Alphabet,\" <em>American Math Monthly</em> 36 (1929) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Hill_cipher" },
-      { text: "Practical Cryptography — Hill Cipher", url: "https://practicalcryptography.com/ciphers/hill-cipher/" }
-    ],
-    vigenere: [
-      { text: "Vigenère, Blaise de. <em>Traicté des chiffres</em> (1586) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher" },
-      { text: "Kasiski, Friedrich. <em>Die Geheimschriften und die Dechiffrirkunst</em> (1863) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Kasiski_examination" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 2", url: "https://simonsingh.net/books/the-code-book/" }
-    ],
-    beaufort: [
-      { text: "Beaufort, Sir Francis. <em>Cipher system</em> (1857) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Beaufort_cipher" },
-      { text: "Practical Cryptography — Beaufort Cipher", url: "https://practicalcryptography.com/ciphers/beaufort-cipher/" }
-    ],
-    gronsfeld: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    porta: [
-      { text: "Satoshi Tomokiyo, Cryptiana — Porta’s <em>De furtivis literarum notis</em> (1563): illustrated analysis", url: "https://cryptiana.web.fc2.com/code/porta.htm" }
-    ],
-    runningKey: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Practical Cryptography — Running Key Cipher", url: "https://practicalcryptography.com/ciphers/running-key-cipher/" }
-    ],
-    railFence: [
-      { text: "Practical Cryptography — Rail Fence Cipher", url: "https://practicalcryptography.com/ciphers/rail-fence-cipher/" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    columnar: [
-      { text: "Practical Cryptography — Columnar Transposition", url: "https://practicalcryptography.com/ciphers/columnar-transposition-cipher/" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    doubleTransposition: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    bacon: [
-      { text: "Bacon, Francis. <em>De Augmentis Scientiarum</em> (1623) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Bacon%27s_cipher" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 1", url: "https://simonsingh.net/books/the-code-book/" }
-    ],
-    tapCode: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Jim and Sybil Stockdale, <em>In Love and War: The Story of a Family’s Ordeal and Sacrifice During the Vietnam Years</em> (1984) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Tap_code" }
-    ],
-    pigpen: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    bifid: [
-      { text: "Delastelle, Félix. <em>Traité élémentaire de cryptographie</em> (1902) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Bifid_cipher" },
-      { text: "Practical Cryptography — Bifid Cipher", url: "https://practicalcryptography.com/ciphers/bifid-cipher/" }
-    ],
-    trifid: [
-      { text: "Delastelle, Félix. <em>Traité élémentaire de cryptographie</em> (1902) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Trifid_cipher" }
-    ],
-    adfgx: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    adfgvx: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Practical Cryptography — ADFGVX Cipher", url: "https://practicalcryptography.com/ciphers/adfgvx-cipher/" }
-    ],
-    nihilist: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Practical Cryptography — Nihilist Cipher", url: "https://practicalcryptography.com/ciphers/nihilist-cipher/" }
-    ],
-    otp: [
-      { text: "Shannon, Claude. \"Communication Theory of Secrecy Systems\" (1949) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/One-time_pad" },
-      { text: "Vernam, Gilbert. US Patent 1,310,719 (1919) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Gilbert_Vernam" }
-    ],
-    fractionatedMorse: [
-      { text: "Practical Cryptography — Fractionated Morse", url: "https://practicalcryptography.com/ciphers/fractionated-morse-cipher/" }
-    ],
-    confederateVigenere: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    bazeries: [
-      { text: "Bazeries, Étienne. <em>Les Chiffres et les Lettres</em> (1901) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Bazeries_cylinder" }
-    ],
-    alberti: [
-      { text: "Alberti, Leon Battista. <em>De Componendis Cifris</em> (1467) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Alberti_cipher" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    jefferson: [
-      { text: "Jefferson, Thomas. Papers, 1795 — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Jefferson_disk" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    enigma: [
-      { text: "Andrew Hodges, <em>Alan Turing: The Enigma</em> (1983; centenary edition, 2014)", url: "https://www.turing.org.uk/book/" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 4–6", url: "https://simonsingh.net/books/the-code-book/" },
-      { text: "David Kahn, <em>Seizing the Enigma: The Race to Break the German U-Boat Codes, 1939–1945</em> (revised edition, 2012)", url: "https://www.usni.org/press/books/seizing-enigma" }
-    ],
-    lorenz: [
-      { text: "B. Jack Copeland (ed.), <em>Colossus: The Secrets of Bletchley Park’s Codebreaking Computers</em> (2006) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Lorenz_cipher" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 6", url: "https://simonsingh.net/books/the-code-book/" }
-    ],
-    dictionaryCode: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    stager: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    vic: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    vernam: [
-      { text: "Vernam, Gilbert. US Patent 1,310,719 (1919) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Gilbert_Vernam" },
-      { text: "Shannon, Claude. \"Communication Theory of Secrecy Systems\" (1949) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/One-time_pad" }
-    ],
-    "navajo-code-talkers": [
-      { text: "William C. Meadows, <em>The Comanche Code Talkers of World War II</em> (2002) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Code_talker" },
-      { text: "National Museum of the American Indian — <em>Native Words, Native Warriors</em>: Code Talking", url: "https://americanindian.si.edu/nk360/code-talkers/code-talking/" }
-    ],
-    zodiac: [
-      { text: "Oranchak, David et al. \"Cracking the Zodiac 340-Character Cipher\" (2020) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Zodiac_Killer#Communications" },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 8", url: "https://simonsingh.net/books/the-code-book/" }
-    ],
-    autokey: [
-      { text: "Vigenère, Blaise de. <em>Traicté des chiffres</em> (1586) — autokey variant — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Autokey_cipher" },
-      { text: "Practical Cryptography — Autokey Cipher", url: "https://practicalcryptography.com/ciphers/autokey-cipher/" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    nomenclator: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Simon Singh, <em>The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography</em> (1999; Anchor paperback, 2000), ch. 1", url: "https://simonsingh.net/books/the-code-book/" }
-    ],
-    bookCipher: [
-      { text: "Ward, James B. <em>The Beale Papers</em> (1885) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Beale_ciphers" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    sigaba: [
-      { text: "Stamp &amp; Chan, \"SIGABA: Cryptanalysis of the Full Keyspace\" (2007) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/SIGABA" },
-      { text: "NSA Center for Cryptologic History — SIGABA", url: "https://www.nsa.gov/History/Cryptologic-History/" }
-    ],
-    typex: [
-      { text: "Erskine, Ralph. \"The Development of Typex\" (Cryptologia, 1997) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Typex" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." }
-    ],
-    jn25: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Elliot Carlson, <em>Joe Rochefort's War: The Odyssey of the Codebreaker Who Outwitted Yamamoto at Midway</em> (2011)", url: "https://www.usni.org/press/books/joe-rocheforts-war" },
-      { text: "Jonathan Parshall and Anthony Tully, <em>Shattered Sword: The Untold Story of the Battle of Midway</em> (2005) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Battle_of_Midway" }
-    ],
-    redTypeA: [
-      { text: "Rowlett, Frank. <em>The Story of Magic</em> (1998; library catalog record)", url: "https://ci.nii.ac.jp/ncid/BA54201586" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "NSA CCH materials on SIS Japanese machine exploitation", url: "https://www.nsa.gov/History/Cryptologic-History/" }
-    ],
-    affine: [
-      { text: "Lyons, James. \"Affine Cipher\" — Practical Cryptography", url: "https://practicalcryptography.com/ciphers/classical-era/affine/" },
-      { text: "Stinson, Douglas. <em>Cryptography: Theory and Practice</em>, ch. 1 (modular arithmetic primer) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Affine_cipher" },
-      { text: "Wikipedia — Affine cipher (key-space derivation)", url: "https://en.wikipedia.org/wiki/Affine_cipher" }
-    ],
-    trithemius: [
-      { text: "Trithemius, Johannes. <em>Polygraphia</em> (1518) — first printed cryptography book — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Polygraphia_(book)" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Practical Cryptography — Trithemius cipher", url: "https://practicalcryptography.com/ciphers/classical-era/trithemius/" }
-    ],
-    cardanoAutokey: [
-      { text: "Cardano, Girolamo. <em>De Subtilitate</em> (1550) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Gerolamo_Cardano" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Wikipedia — Autokey cipher (history section)", url: "https://en.wikipedia.org/wiki/Autokey_cipher" }
-    ],
-    wheatstone: [
-      { text: "Wheatstone, Charles. <em>Cryptograph</em> — 1867 Paris Universal Exposition (described in Kahn) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Charles_Wheatstone#Cryptography" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Crypto Museum — Cipher disks and dial machines", url: "https://www.cryptomuseum.com/crypto/" }
-    ],
-    morse: [
-      { text: "ITU-R Recommendation M.1677 — International Morse Code", url: "https://www.itu.int/rec/R-REC-M.1677/" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Wikipedia — Morse code", url: "https://en.wikipedia.org/wiki/Morse_code" }
-    ],
-    cardanoGrille: [
-      { text: "Cardano, Girolamo. <em>De Subtilitate</em> (1550) — original grille proposal — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Cardan_grille" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Wikipedia — Grille (cryptography)", url: "https://en.wikipedia.org/wiki/Grille_(cryptography)" }
-    ],
-    nullCipher: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Wikipedia — Null cipher", url: "https://en.wikipedia.org/wiki/Null_cipher" },
-      { text: "Stamatatos, Efstathios. \"A Survey of Modern Authorship Attribution Methods\" (2009) — statistical detection of constrained text — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Stylometry" }
-    ],
-    fialka: [
-      { text: "Crypto Museum — Fialka M-125 deep dive", url: "https://www.cryptomuseum.com/crypto/fialka/" },
-      { text: "Wikipedia — Fialka", url: "https://en.wikipedia.org/wiki/Fialka" },
-      { text: "Reuvers &amp; Simons, \"Fialka History &amp; Operation\" (Crypto Museum, 2009)", url: "https://www.cryptomuseum.com/crypto/fialka/files/" }
-    ],
-    kl7: [
-      { text: "Crypto Museum — KL-7 (TSEC/KL-7 ADONIS)", url: "https://www.cryptomuseum.com/crypto/usa/kl7/" },
-      { text: "NSA Cryptologic History — general history portal", url: "https://www.nsa.gov/History/Cryptologic-History/" },
-      { text: "Wikipedia — KL-7", url: "https://en.wikipedia.org/wiki/KL-7" }
-    ],
-    geheimschreiber: [
-      { text: "Crypto Museum — Siemens &amp; Halske T52 Geheimschreiber", url: "https://www.cryptomuseum.com/crypto/siemens/t52/" },
-      { text: "Bengt Beckman, <em>Codebreakers: Arne Beurling and the Swedish Crypto Program during World War II</em> (English edition, 2002) — related Wikipedia overview", url: "https://en.wikipedia.org/wiki/Arne_Beurling" },
-      { text: "Wikipedia — Siemens and Halske T52 / \"Sturgeon\" / Fish (cryptography)", url: "https://en.wikipedia.org/wiki/Siemens_and_Halske_T52" }
-    ],
-    kryha: [
-      { text: "NSA — William F. Friedman documents (declassified collection portal)", url: "https://www.nsa.gov/Helpful-Links/NSA-FOIA/Declassification-Transparency-Initiatives/Historical-Releases/Friedman-Documents/" },
-      { text: "Crypto Museum — Kryha Standard Cipher Machine", url: "https://www.cryptomuseum.com/crypto/kryha/" },
-      { text: "Wikipedia — Kryha", url: "https://en.wikipedia.org/wiki/Kryha" }
-    ],
-    m94: [
-      { text: "Crypto Museum — M-94 / CSP-488", url: "https://www.cryptomuseum.com/crypto/usa/m94/" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Wikipedia — M-94 and M-138-A", url: "https://en.wikipedia.org/wiki/M-94" }
-    ],
-    chineseTelegraph: [
-      { text: "Wikipedia — Chinese telegraph code", url: "https://en.wikipedia.org/wiki/Chinese_telegraph_code" },
-      { text: "Thomas S. Mullaney, <em>The Chinese Typewriter: A History</em> (2017; paperback, 2018)", url: "https://mitpress.mit.edu/9780262536103/the-chinese-typewriter/" },
-      { text: "Columbia University Libraries — Chinese Telegraphic Codebooks and Cryptography (collection overview, 2019)", url: "https://blogs.library.columbia.edu/rbml/2019/10/09/chinese-telegraphic-codebooks-and-cryptography/" }
-    ],
-    zimmermann: [
-      { text: "NSA Center for Cryptologic History — The Zimmermann Telegram", url: "https://www.nsa.gov/Helpful-Links/NSA-FOIA/Declassification-Transparency-Initiatives/Historical-Releases/" },
-      { text: "Tuchman, Barbara W. <em>The Zimmermann Telegram</em> (1985 edition; first published 1958)", url: "https://www.penguinrandomhouse.com/books/180859/the-zimmermann-telegram-by-barbara-w-tuchman/" },
-      { text: "National Archives — Zimmermann Telegram (decoded text)", url: "https://www.archives.gov/education/lessons/zimmermann" },
-      { text: "Thomas Boghardt, <em>The Zimmermann Telegram: Intelligence, Diplomacy, and America’s Entry into World War I</em> (2012)", url: "https://www.usni.org/press/books/zimmermann-telegram" }
-    ],
-    slidex: [
-      { text: "Crypto Museum — Slidex", url: "https://www.cryptomuseum.com/crypto/uk/slidex/" },
-      { text: "Wikipedia — Slidex", url: "https://en.wikipedia.org/wiki/Slidex" },
-      { text: "GCHQ — History articles and resources", url: "https://www.gchq.gov.uk/section/advice-guidance/all-topics?topics=History" }
-    ],
-    commercialCode: [
-      { text: "Wikipedia — Commercial code (communications), general overview", url: "https://en.wikipedia.org/wiki/Commercial_code_(communications)" },
-      { text: "Bentley's Complete Phrase Code (1906)" },
-      { text: "ABC Telegraphic Code, 5th edition (1901)" },
-      { text: "Tom Standage, <em>The Victorian Internet: The Remarkable Story of the Telegraph and the Nineteenth Century’s On-Line Pioneers</em> (1998), cultural context." }
-    ],
-    culperRing: [
-      { text: "Rose, Alexander. <em>Washington’s Spies: The Story of America’s First Spy Ring</em> (2007 paperback; first published 2006)", url: "https://www.penguinrandomhouse.com/books/157145/washingtons-spies-by-alexander-rose/" },
-      { text: "Library of Congress — Tallmadge's codebook (digitised pages)", url: "https://www.loc.gov/collections/george-washington-papers/" },
-      { text: "Mount Vernon — “Culper Spy Ring Codes”, full transcription of the code book (PDF). This is the source for the numbers quoted on this page: 711 = “Gen Washington”, 727 = “New York”", url: "https://mtv-main-assets.mountvernon.org/files/resources/culpercodebook.pdf" },
-      { text: "Mount Vernon — The Culper Code Book", url: "https://www.mountvernon.org/george-washington/the-revolutionary-war/spying-and-espionage/the-culper-code-book" },
-      { text: "Wikipedia — Culper Ring", url: "https://en.wikipedia.org/wiki/Culper_Ring" }
-    ],
-    arnoldAndre: [
-      { text: "Wikipedia — Benedict Arnold and John André correspondence", url: "https://en.wikipedia.org/wiki/Benedict_Arnold" },
-      { text: "Bakeless, John. <em>Turncoats, Traitors and Heroes</em> (1998 reprint; first published 1959)", url: "https://www.hachettebookgroup.com/titles/john-bakeless/turncoats-traitors-and-heroes/9780306808432/" },
-      { text: "Mount Vernon — André's captured ciphered letter", url: "https://www.mountvernon.org/library/digitalhistory/digital-encyclopedia/article/john-andre/" },
-      { text: "Cipher History — Arnold-André book cipher analysis", url: "https://www.tandfonline.com/journals/ucry20" }
-    ],
-    argenti: [
-      { text: "Meister, Aloys. <em>Die Geheimschrift im Dienste der päpstlichen Kurie</em> (1906)" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Vatican Apostolic Archive — Argenti family papers (Trattato in Cifra)", url: "https://www.archivioapostolicovaticano.va/content/aav/en.html" }
-    ],
-    wallisCiphers: [
-      { text: "Wallis, John. Cipher notes — Bodleian Library MSS", url: "https://www.bodleian.ox.ac.uk/" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Smith, David Eugene. <em>John Wallis as a Cryptographer</em> (Bulletin AMS, 1917)", url: "https://www.ams.org/journals/bull/1917-24-02/S0002-9904-1917-02954-X/" },
-      { text: "Wikipedia — John Wallis", url: "https://en.wikipedia.org/wiki/John_Wallis" }
-    ],
-    "raf-otp": [
-      { text: "Aust, Stefan. <em>The Baader-Meinhof Complex</em> (2008 English ed.)", url: "https://www.bodleyhead.co.uk/" },
-      { text: "Peters, Butz. <em>Tödlicher Irrtum: Die Geschichte der RAF</em> (2007 paperback; first published 2004)", url: "https://www.fischerverlage.de/buch/butz-peters-toedlicher-irrtum-9783596172658" },
-      { text: "Bundeskriminalamt — RAF forensic archive (Stammheim materials)", url: "https://www.bka.de/" },
-      { text: "Wikipedia — Red Army Faction (Communications &amp; Tradecraft)", url: "https://en.wikipedia.org/wiki/Red_Army_Faction" }
-    ],
-    "che-vic": [
-      { text: "Anderson, Jon Lee. <em>Che Guevara: A Revolutionary Life</em> (1997)", url: "https://www.groveatlantic.com/book/che-guevara/" },
-      { text: "CIA FOIA — “Guevara Cryptography” (1967 Bolivian capture, declassified)", url: "https://www.cia.gov/readingroom/" },
-      { text: "National Security Archive — Bolivia &amp; Che Guevara documents (Peter Kornbluh)", url: "https://nsarchive.gwu.edu/" },
-      { text: "Wikipedia — VIC Cipher", url: "https://en.wikipedia.org/wiki/VIC_cipher" }
-    ],
-    "ira-ciphers": [
-          {
-                "text": "Tom Mahon and James J. Gillogly, <em>Decoding the IRA</em> (2008)."
-          },
-          {
-                "text": "Elonka Dunin and Klaus Schmeh, <em>Codebreaking: A Practical Guide</em> (Robinson, 2020), the Gillogly and Bean IRA transposition case studies."
-          },
-          {
-                "text": "University of Queensland, “UQ data scientist cracks near century old crypto-code” (23 August 2019), documenting Richard Bean’s solution.",
-                "url": "https://news.uq.edu.au/2019-08-23-uq-data-scientist-cracks-near-century-old-crypto-code"
-          }
-    ],
-    "latin-american-codebooks": [
-      { text: "<em>Código Comercial Mexicano</em> (Mexican commercial telegraph code)", url: "https://www.bnm.unam.mx/" },
-      { text: "<em>ABC Universal Commercial Telegraphic Code</em>, 6th edition (1920)." },
-      { text: "Bentley, E.L. <em>Bentley’s Complete Phrase Code</em> (1906)" }
-    ],
-    "diana-cryptosystem": [
-      { text: "US Army FM 34-40-2 — Cryptanalysis (declassified editions)", url: "https://armypubs.army.mil/" },
-      { text: "Moore, Tyler. “The Diana Cryptosystem” (IEEE Privacy &amp; Security Magazine, 2002)", url: "https://www.computer.org/csdl/magazine/sp" },
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Wikipedia — Beaufort cipher (mathematical kin)", url: "https://en.wikipedia.org/wiki/Beaufort_cipher" }
-    ],
-    "patterson-jefferson-cipher": [
-      { text: "Smithline, Lawren M. “A Cipher to Thomas Jefferson”, <em>American Scientist</em> 97(2), 2009, 142–149", url: "https://www.americanscientist.org/article/a-cipher-to-thomas-jefferson" },
-      { text: "Robert Patterson to Thomas Jefferson, 19 December 1801 — Founders Online", url: "https://founders.archives.gov/documents/Jefferson/01-36-02-0025" },
-      { text: "Thomas Jefferson to Robert Patterson, 22 March 1802 — Founders Online", url: "https://founders.archives.gov/documents/Jefferson/01-37-02-0083" },
-      { text: "Thomas Jefferson, 12 April 1802, Patterson’s Cipher — Library of Congress", url: "https://www.loc.gov/resource/mtj1.026_0086_0094/?st=gallery" }
-    ],
-    wadsworth: [
-      { text: "Kruh, Louis. “The Mystery of Colonel Decius Wadsworth’s Cipher Device”, <em>Cryptologia</em> 6(3), 1982, 238–247", url: "https://doi.org/10.1080/0161-118291857037" },
-      { text: "“Decius Wadsworth Disc Cipher” — William F. Friedman collection, NSA (declassified)", url: "https://archive.org/stream/41788379082740/41788379082740_djvu.txt" },
-      { text: "National Cryptologic Foundation — Inventors’ Day &amp; the Wadsworth Cipher", url: "https://archive.cryptologicfoundation.org/community/cryptologic-history/cryptologic-history-calendar.html/event/2026/02/11/1770807600/inventors-day-the-wadsworth-cipher/496980" },
-      { text: "Kaeding, Thomas. “Automated ciphertext-only attack on the Wheatstone Cryptograph and related devices”, IACR ePrint 2020/1492", url: "https://eprint.iacr.org/2020/1492" }
-    ],
-    "dagapeyeff": [
-          {
-                "text": "Alexander d’Agapeyeff, <em>Codes and Ciphers</em> (Oxford University Press, 1939). The challenge-page photograph consulted is numbered 158; its edition is not identified by that image."
-          },
-          {
-                "text": "Hyde &amp; Rugg, “The D’Agapeyeff Cipher” — the researchers’ account of their work; a possible error is a hypothesis, not an established defect.",
-                "url": "https://www.hydeandrugg.com/our-research/codes-ciphers/the-dagapeyeff-cipher/"
-          }
-    ],
-    "dorabella": [
-          {
-                "text": "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996), chapter 21."
-          },
-          {
-                "text": "Bradley Hauer, Colin Choi, Abram Hindle, Scott Smallwood and Grzegorz Kondrak, “Dorabella Cipher as Musical Inspiration” (2025), especially §4.1. Creative musical interpretation, not an authenticated solution.",
-                "url": "https://arxiv.org/abs/2509.17950"
-          }
-    ],
-    "phaistos-disc": [
-          {
-                "text": "Michael Everson, “Phaistos Disc: U+101D0–U+101FF” (2011), corpus transcription. The widget counts the 45 sign classes and excludes the marked gap and combining oblique strokes.",
-                "url": "https://www.evertype.com/standards/csur/phaistos-sample.html"
-          },
-          {
-                "text": "Ireland, “Response to L2/11-126 ‘Phaistos Disc Errata’” (2011), pp. 1–3: writing direction and overlapping impressions.",
-                "url": "https://www.unicode.org/L2/L2011/11166-phaistos-response.pdf"
-          },
-          {
-                "text": "Heraklion Archaeological Museum, “The Phaistos Disc”: holding institution and catalogue description.",
-                "url": "https://www.heraklionmuseum.gr/en/exhibit/the-phaistos-disc/"
-          }
-    ],
-    "shugborough": [
-          {
-                "text": "National Trust Heritage Records, “Shepherd’s Monument, Shugborough Estate”, MNA181338: relief, inscription and architectural dating.",
-                "url": "https://heritagerecords.nationaltrust.org.uk/HBSMR/MonRecord.aspx?skin=printerfriendly&uid=MNA181338"
-          }
-    ],
-    "mccormick": [
-          {
-                "text": "Federal Bureau of Investigation, “Cryptanalysts, Part 2: Help Solve an Open Murder Case” (29 March 2011), <em>The FBI Story 2011</em>, p. 25. Evidence of what the agency reported in 2011, not a new case-status announcement.",
-                "url": "https://www.fbi.gov/file-repository/reports-and-publications/stats-services-publications-fbi-story-fbistory2011.pdf"
-          }
-    ],
-    "sator-square": [
-          {
-                "text": "Archaeological Park of Pompeii, “The Sator Square from the Palestra Grande” (2022), inventory 20565: first-century graffito and archaeological location.",
-                "url": "https://pompeiicommitment.org/en/historiae/il-quadrato-del-sator-dalla-palestra-grande/"
-          }
-    ],
-    greatCipher: [
-      { text: "David Kahn, <em>The Codebreakers: The Comprehensive History of Secret Communication from Ancient Times to the Internet</em>, revised edition (1996)." },
-      { text: "Wikipedia — Étienne Bazeries (career and the three-year attack on the Rossignol papers)", url: "https://en.wikipedia.org/wiki/%C3%89tienne_Bazeries" },
-      { text: "Wikipedia — Great Cipher (records the syllabic code and the “ignore the previous codegroup” trap)", url: "https://en.wikipedia.org/wiki/Great_Cipher" }
-    ],
-    "amharic-ge-ez-ciphers": [
-      { text: "Six, Verona, with Ernst Hammerschmidt. <em>Äthiopische Handschriften 1: Die Handschriften der Staatsbibliothek Preußischer Kulturbesitz</em>", url: "https://www.steiner-verlag.de/AEthiopische-Handschriften-1/9783515030366" },
-      { text: "Hill Museum &amp; Manuscript Library — Ethiopia manuscript preservation overview", url: "https://hmml.org/about/global-operations/Ethiopia/" },
-      { text: "Haile, Getatchew, et al. <em>Catalogue of the Ethiopic Manuscript Imaging Project</em>, Vol. 1: Codices 1–105, Magic Scrolls 1–134 (2009)", url: "https://wipfandstock.com/9781606088715/catalogue-of-the-ethiopic-manuscript-imaging-project/" },
-      { text: "Wikipedia — Geʼez script", url: "https://en.wikipedia.org/wiki/Ge%CA%BDez_script" }
-    ]
-  };
-
-  const GENERAL_RESOURCES = [
-    { text: 'Crypto Museum — Encyclopedic hardware-focused archive (Enigma variants, spy gear, thousands of photos)', url: 'https://www.cryptomuseum.com/' },
-    { text: 'CrypTool-Online — Interactive encrypt / decrypt / analysis tools for many classical ciphers', url: 'https://www.cryptool.org/en/cto/' },
-    { text: 'CrypTool Open-Source Project (GitHub)', url: 'https://github.com/cryptool-org' },
-    { text: 'National Cryptologic Museum (NSA) — Virtual exhibits on VENONA, Purple, and 20th-century crypto', url: 'https://www.nsa.gov/Museum/' },
-    { text: 'Cipher Machines &amp; Cryptology — Deep technical simulations of cipher machines', url: 'https://www.ciphermachinesandcryptology.com/' },
-    { text: 'Practical Cryptography — Cipher encyclopaedia with detailed algorithms &amp; analysis', url: 'https://practicalcryptography.com/ciphers/' },
-    { text: 'CyberChef — GCHQ\'s open-source data transformation playground', url: 'https://gchq.github.io/CyberChef/' },
-    { text: 'CryptoHack — Modern cryptography puzzles &amp; challenges', url: 'https://cryptohack.org/' }
-  ];
-
-  /* Twelve SOURCES entries were keyed in camelCase while their pages carry the
-     hyphenated slug in data-cipher, so the curated citations silently rendered
-     as an empty list and the page showed only the generic resources. Map the
-     slug a page actually uses onto the key the citations live under. */
-  const SOURCE_KEY_ALIASES = {
-    'jn-25': 'jn25',
-    'red-type-a': 'redTypeA',
-    'cardano-autokey': 'cardanoAutokey',
-    'cardano-grille': 'cardanoGrille',
-    'null-cipher': 'nullCipher',
-    'kl-7': 'kl7',
-    'm-94': 'm94',
-    'chinese-telegraph': 'chineseTelegraph',
-    'commercial-codebooks': 'commercialCode',
-    'culper-ring': 'culperRing',
-    'arnold-andre': 'arnoldAndre',
-    'wallis-ciphers': 'wallisCiphers'
-  };
-
-  function buildSources(cipherName) {
-    const key = SOURCES[cipherName] ? cipherName : (SOURCE_KEY_ALIASES[cipherName] || cipherName);
-    const sources = SOURCES[key] || [];
-    const target = document.querySelector('.exhibit-side') || document.querySelector('.exhibit-main');
-    if (!target) return;
-
-    function renderList(items) {
-      return '<ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem;margin:0;padding:0;">' +
-        items.map(function (s) {
-          return '<li style="font-size:.92rem;line-height:1.65;color:var(--tx2);">' +
-            (s.url ? '<a href="' + s.url + '" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">' + s.text + ' ↗</a>' : s.text) + '</li>';
-        }).join('') + '</ul>';
-    }
-
-    var body = '';
-    if (sources.length) {
-      body += '<h3 style="color:var(--tx1);margin:0 0 .75rem;font-size:.95rem;">Exhibit Sources</h3>' +
-              renderList(sources);
-      body += '<hr style="border:none;border-top:1px solid var(--gold-b);margin:1.25rem 0;">';
-    }
-    body += '<h3 style="color:var(--tx1);margin:0 0 .75rem;font-size:.95rem;">General Cryptography Resources</h3>' +
-            renderList(GENERAL_RESOURCES);
-
-    const panel = document.createElement('div');
-    panel.className = 'panel';
-    panel.style.borderColor = 'var(--gold-b)';
-    panel.innerHTML = '<div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">' +
-      '<span class="panel-icon">📚</span>' +
-      '<span class="panel-title" style="color:var(--gold);">Further Reading &amp; Sources</span></div>' +
-      '<div class="panel-body">' + body + '</div>';
-    target.appendChild(panel);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.demo-section[data-cipher]').forEach(function(el) {
-      if (!el.children.length) {
-        el.innerHTML = '<p style="color:var(--tx3);font-family:var(--fm);font-size:.85rem;padding:1.5rem;text-align:center;border:1px dashed var(--s5);border-radius:var(--rl);">Loading interactive demo\u2026</p>';
-      }
-      buildDemo(el);
-    });
-    const cipherEl = document.querySelector('.demo-section[data-cipher]') ||
-                     document.querySelector('[data-cipher]');
-    if (cipherEl) buildSources(cipherEl.dataset.cipher);
-  });
-})();
-```
-
-
-## JavaScript — js/detective-integration.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/detective-integration.js`
-- Served SHA-256: `272e6f26901fdc776024f57228cc8e06cbeff372c06323694d01ccce49c14459`
-- Readable-source SHA-256: `272e6f26901fdc776024f57228cc8e06cbeff372c06323694d01ccce49c14459`
-
-
-```javascript
-'use strict';
-// Corpus actions use the museum's tools. Pass the text in the URL fragment,
-// without depending on clipboard permission or sending it in an HTTP query.
-window.openInDetective = function (ciphertext) {
-  const url = new URL('cipher-detective.html', location.href);
-  url.hash = encodeURIComponent(ciphertext);
-  window.open(url.href, '_blank', 'noopener');
-};
-
-window.openInWorkbench = function (ciphertext) {
-  const url = new URL('lab/workbench.html', location.href);
-  url.hash = 'ct=' + encodeURIComponent(ciphertext);
-  window.open(url.href, '_blank', 'noopener');
-};
-// Buttons are owned by cipher-corpus.js when each card is rendered. Do not
-// append another set at DOMContentLoaded: fetch timing and pagination differ.
-```
-
-
-## JavaScript — js/detective/analyses.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/detective/analyses.js`
-- Served SHA-256: `1691d50b0c5a4698139f2fa00f1f62babe7dae907e69293d19ce417662367cda`
-- Readable-source SHA-256: `1691d50b0c5a4698139f2fa00f1f62babe7dae907e69293d19ce417662367cda`
-
-
-```javascript
-/* ================================================================
-   THE CIPHER MUSEUM — Detective Analyses v1.5
-
-   window.DetectiveAnalyses.run(text) → stats object (or null)
-
-   Pure analysis functions — no DOM, no globals required.
-   Every function takes primitives and returns plain objects.
-
-   Analyses performed:
-     - Index of Coincidence (IoC)          — Friedman (1922)
-     - Chi-square against English frequency — Sinkov (1966)
-     - Kasiski examination                 — Kasiski (1863)
-     - Period-sliced IoC validation         — Friedman (1920)
-     - Character set detection
-     - Digraph structural analysis
-
-   References:
-     William Friedman, "The Index of Coincidence and its Applications in
-       Cryptography" (1922).
-     Abraham Sinkov, "Elementary Cryptanalysis" (MAA, 1966).
-     Friedrich Kasiski, "Die Geheimschriften und die Dechiffrirkunst" (1863).
-   ================================================================ */
-'use strict';
-
-(function (global) {
-
-  /* ─── Fixed rounded English frequency heuristic ─── */
-  var ENG_FREQ = {
-    A:0.08167,B:0.01492,C:0.02782,D:0.04253,E:0.12702,F:0.02228,
-    G:0.02015,H:0.06094,I:0.06966,J:0.00153,K:0.00772,L:0.04025,
-    M:0.02406,N:0.06749,O:0.07507,P:0.01929,Q:0.00095,R:0.05987,
-    S:0.06327,T:0.09056,U:0.02758,V:0.00978,W:0.02360,X:0.00150,
-    Y:0.01974,Z:0.00074
-  };
-
-  /* ─── Helpers ────────────────────────────────────────────────── */
-
-  function extractLetters(t) {
-    // Scoped statistical projection, not a replacement for the original
-    // transcription. Uppercasing can expand characters (for example ß → SS).
-    return t.toUpperCase().replace(/[^A-Z]/g, '');
-  }
-
-  /* Return {A:n, B:n, …, Z:n} counts for an uppercase-letters-only string. */
-  function freqCounts(letters) {
-    var c = {}, i;
-    for (i = 0; i < 26; i++) c[String.fromCharCode(65 + i)] = 0;
-    for (i = 0; i < letters.length; i++) {
-      var ch = letters[i];
-      if (Object.prototype.hasOwnProperty.call(c, ch)) c[ch]++;
-    }
-    return c;
-  }
-
-  /* Return {A: pct, …} where pct is 0–100 (percentage of total letters). */
-  function freqPct(letters) {
-    var counts = freqCounts(letters);
-    var n = letters.length || 1;
-    var pct = {};
-    var keys = Object.keys(counts);
-    for (var k = 0; k < keys.length; k++) {
-      pct[keys[k]] = (counts[keys[k]] / n) * 100;
-    }
-    return pct;
-  }
-
-  /* IoC: measures how "English-like" the letter distribution is.
-     English text ≈ 0.067; random (uniform) ≈ 0.038.
-     Low IoC → polyalphabetic or random; high IoC → monoalphabetic or transposition. */
-  function calcIoC(letters) {
-    var n = letters.length;
-    if (n < 2) return 0;
-    var counts = freqCounts(letters);
-    var sum = 0;
-    var keys = Object.keys(counts);
-    for (var k = 0; k < keys.length; k++) {
-      var f = counts[keys[k]];
-      sum += f * (f - 1);
-    }
-    return sum / (n * (n - 1));
-  }
-
-  /* Chi-square: compare the ciphertext distribution (shifted by `shift`)
-     against expected English frequencies.
-     shift=0 → unshifted ciphertext; low chi-square → close to English.
-     Caesar shift=k will produce a very low chi-square at the right k. */
-  function chiSquareAtShift(letters, shift) {
-    var n = letters.length;
-    if (n === 0) return Infinity;
-    var counts = freqCounts(letters);
-    var chi = 0, i;
-    for (i = 0; i < 26; i++) {
-      var cipherCode = (i + shift) % 26;
-      var cipherLetter = String.fromCharCode(65 + cipherCode);
-      var plainLetter  = String.fromCharCode(65 + i);
-      var observed = counts[cipherLetter];
-      var expected = n * ENG_FREQ[plainLetter];
-      if (expected > 0.5) chi += (observed - expected) * (observed - expected) / expected;
-    }
-    return chi;
-  }
-
-  /* Find the Caesar shift that minimises chi-square (most English-like). */
-  function bestShift(letters) {
-    var best = { shift: 0, chi: Infinity }, i;
-    for (i = 0; i < 26; i++) {
-      var c = chiSquareAtShift(letters, i);
-      if (c < best.chi) best = { shift: i, chi: c };
-    }
-    return best;
-  }
-
-  /* Period-IoC: slice `letters` into `period` interleaved streams;
-     return mean IoC of those streams.
-     For a Vigenère cipher with the right key length, each stream is
-     essentially a monoalphabetic cipher and will have IoC ≈ 0.067. */
-  function periodIoC(letters, period) {
-    if (letters.length < period * 3) return 0;
-    var total = 0, start;
-    for (start = 0; start < period; start++) {
-      var slice = [];
-      for (var i = start; i < letters.length; i += period) slice.push(letters[i]);
-      total += calcIoC(slice.join(''));
-    }
-    return total / period;
-  }
-
-  /* Kasiski examination: find repeated trigrams, compute GCDs of their
-     spacings, return [{period, count}] sorted by count descending.
-     A high count for a particular period strongly suggests a Vigenère key
-     of that length (or a divisor of it). */
-  function kasiskiTest(letters) {
-    if (letters.length < 40) return [];
-    var positions = {}, i;
-    for (i = 0; i <= letters.length - 3; i++) {
-      var tri = letters.slice(i, i + 3);
-      if (!positions[tri]) positions[tri] = [];
-      positions[tri].push(i);
-    }
-    var spacings = [];
-    var keys = Object.keys(positions);
-    for (var ki = 0; ki < keys.length; ki++) {
-      var pos = positions[keys[ki]];
-      if (pos.length < 2) continue;
-      for (i = 1; i < pos.length; i++) spacings.push(pos[i] - pos[i - 1]);
-    }
-    if (spacings.length === 0) return [];
-    var gcdCounts = {};
-    for (var si = 0; si < spacings.length; si++) {
-      var s = spacings[si];
-      for (var d = 2; d <= Math.min(s, 20); d++) {
-        if (s % d === 0) gcdCounts[d] = (gcdCounts[d] || 0) + 1;
-      }
-    }
-    var results = [];
-    var gKeys = Object.keys(gcdCounts);
-    for (var gi = 0; gi < gKeys.length; gi++) {
-      results.push({ period: +gKeys[gi], count: gcdCounts[gKeys[gi]] });
-    }
-    return results.sort(function (a, b) { return b.count - a.count; }).slice(0, 6);
-  }
-
-  /* Identify the predominant character type of the raw input. */
-  function detectCharset(text) {
-    var t = text.trim();
-    var upper = t.toUpperCase();
-    if (/^[\.\-\/\s]+$/.test(t) && /[\.\-]/.test(t)) return 'morse';
-    var nonNumSep = t.replace(/[\d\s\/\.\-,\(\)\[\]]/g, '');
-    if (nonNumSep.length === 0 && /\d/.test(t)) return 'numeric';
-    var letters = upper.replace(/[^A-Z]/g, '');
-    if (letters.length === 0) return 'other';
-    var letterSet = {};
-    for (var i = 0; i < letters.length; i++) letterSet[letters[i]] = true;
-    var setKeys = Object.keys(letterSet);
-    var adfgvxOk = setKeys.every(function (c) { return /^[ADFGVX]$/.test(c); });
-    if (adfgvxOk && setKeys.length >= 3) return setKeys.indexOf('V') >= 0 ? 'adfgvx' : 'adfgx';
-    var nonAlpha = t.replace(/[A-Za-z\s]/g, '').length;
-    if (nonAlpha / (t.length || 1) > 0.30) return 'mixed';
-    return 'alpha';
-  }
-
-  /* Digraph structural analysis — used primarily for Playfair detection. */
-  function digraphAnalysis(letters) {
-    var isEvenLen = letters.length % 2 === 0;
-    var adjDupPairs = 0, i;
-    for (i = 0; i < letters.length - 1; i += 2) {
-      if (letters[i] === letters[i + 1]) adjDupPairs++;
-    }
-    var distSet = {};
-    for (i = 0; i < letters.length; i++) distSet[letters[i]] = true;
-    var district = Object.keys(distSet).length;
-    return { isEvenLen: isEvenLen, adjDupPairs: adjDupPairs, district: district };
-  }
-
-  /* Estimate the most likely key period for display purposes. */
-  function estimatePeriod(letters, kasiski) {
-    var periodHint = null;
-    if (kasiski.length > 0) {
-      for (var ki = 0; ki < Math.min(kasiski.length, 4); ki++) {
-        if (periodIoC(letters, kasiski[ki].period) > 0.054) {
-          periodHint = kasiski[ki].period;
-          break;
-        }
-      }
-      if (!periodHint && kasiski[0].count >= 3) periodHint = kasiski[0].period;
-    }
-    if (!periodHint) {
-      var bestP = null, bestPIoC = 0.046;
-      for (var p = 2; p <= 15; p++) {
-        var pioc = periodIoC(letters, p);
-        if (pioc > bestPIoC) { bestPIoC = pioc; bestP = p; }
-      }
-      if (bestP) periodHint = bestP;
-    }
-    return periodHint;
-  }
-
-  /* ─── Main entry point ────────────────────────────────────────── */
-
-  function run(text) {
-    if (!text || text.trim().length === 0) return null;
-
-    var letters    = extractLetters(text);
-    var n          = letters.length;
-    var tooShort   = n < 60; /* threshold for reliable statistical analysis */
-    var ioc        = calcIoC(letters);
-    var chi0       = chiSquareAtShift(letters, 0);
-    var bsr        = bestShift(letters);
-    var kasiski    = kasiskiTest(letters);
-    var charset    = detectCharset(text);
-    var dg         = digraphAnalysis(letters);
-    var counts     = freqCounts(letters);
-    var pct        = freqPct(letters);
-    var periodHint = estimatePeriod(letters, kasiski);
-
-    return {
-      raw:        text,
-      letters:    letters,
-      n:          n,
-      tooShort:   tooShort,
-      ioc:        ioc,
-      chi0:       chi0,
-      bestShiftResult: bsr,
-      kasiski:    kasiski,
-      charset:    charset,
-      dg:         dg,
-      counts:     counts,
-      pct:        pct,
-      periodHint: periodHint
-    };
-  }
-
-  /* ─── Export ─────────────────────────────────────────────────── */
-  global.DetectiveAnalyses = {
-    run: run,
-    ENG_FREQ: ENG_FREQ,
-    /* Expose helpers for testing */
-    _calcIoC:          calcIoC,
-    _chiSquareAtShift: chiSquareAtShift,
-    _kasiskiTest:      kasiskiTest,
-    _detectCharset:    detectCharset,
-    _periodIoC:        periodIoC,
-    _freqCounts:       freqCounts
-  };
-
-})(typeof window !== 'undefined' ? window : global);
-```
-
-
-## JavaScript — js/detective/attacks.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/detective/attacks.js`
-- Served SHA-256: `4275877c52228402697a6205bf8d60dfa8b738c726aa43a1d05ace5c9eaf5e74`
-- Readable-source SHA-256: `4275877c52228402697a6205bf8d60dfa8b738c726aa43a1d05ace5c9eaf5e74`
-
-
-```javascript
-/* ================================================================
-   THE CIPHER MUSEUM — Detective Attacks v2.0
-
-   window.DetectiveAttacks — seven inline attack tools
-
-   All functions are pure (no DOM). Results are plain objects.
-   The browser-side click handlers in detective.js call these and
-   pass the result to renderAttackResult() in render.js.
-
-   Tools:
-     caesarBruteForce(ct)         — top-5 shifts by chi-square
-     rot13(ct)                    — ROT13 decode
-     atbash(ct)                   — Atbash decode
-     decodeMorse(text)            — International Morse decode
-     decodeEncoding(text)         — Base64 / Hex / Binary auto-detect
-     vigKeyLength(ct, maxKey=15)  — Kasiski + period-IoC key-length candidates
-     substFreqSuggestions(ct)     — top-6 cipher→plain frequency guesses
-     isApplicable(toolId, stats)  — {ok, reason} gate for button state
-   ================================================================ */
-'use strict';
-
-(function (global) {
-
-  /* ─── International Morse Code table ────────────────────────── */
-  var MORSE_ENC = {
-    'A':'.-',   'B':'-...', 'C':'-.-.', 'D':'-..', 'E':'.',
-    'F':'..-.', 'G':'--.',  'H':'....', 'I':'..',  'J':'.---',
-    'K':'-.-',  'L':'.-..', 'M':'--',   'N':'-.',  'O':'---',
-    'P':'.--.', 'Q':'--.-', 'R':'.-.',  'S':'...', 'T':'-',
-    'U':'..-',  'V':'...-', 'W':'.--',  'X':'-..-','Y':'-.--',
-    'Z':'--..',
-    '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-',
-    '5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
-    '.':'.-.-.-',',':'--..--','?':'..--..',
-    '!':'-.-.--','/':'-..-.','=':'-...-',
-    '@':'.--.-.','&':'.-...','\"':'.-..-.','\'':'.----.'
-  };
-
-  /* Reverse lookup: morse sequence → character */
-  var MORSE_DEC = (function () {
-    var rev = {};
-    var keys = Object.keys(MORSE_ENC);
-    for (var i = 0; i < keys.length; i++) rev[MORSE_ENC[keys[i]]] = keys[i];
-    return rev;
-  }());
-
-  /* English frequency order for substitution mapping */
-  var ETAOIN = ['E','T','A','O','I','N','S','H','R','D','L','C','U','M','W','F','G','Y','P','B','V','K','J','X','Q','Z'];
-
-  /* ─── Helpers ────────────────────────────────────────────────── */
-  function extractLetters(t) {
-    return t.toUpperCase().replace(/[^A-Z]/g, '');
-  }
-
-  /* Re-inject spaces from original ciphertext into a letter-only decrypted string. */
-  function respacedDecrypt(ct, decLetters) {
-    var out = '', li = 0;
-    var upper = ct.toUpperCase();
-    for (var i = 0; i < upper.length; i++) {
-      var ch = upper[i];
-      if (ch >= 'A' && ch <= 'Z') {
-        out += (li < decLetters.length) ? decLetters[li++] : ch;
-      } else {
-        out += ch;
-      }
-    }
-    return out;
-  }
-
-  /* ─── Caesar Brute-Force ──────────────────────────────────────
-     Returns top-5 shifts sorted by chi-square ascending
-     (lower chi-square = closer to English distribution).
-     Uses DetectiveAnalyses._chiSquareAtShift which is already
-     exposed for testing. */
-  function caesarBruteForce(ct) {
-    var letters = extractLetters(ct);
-    if (letters.length === 0) return [];
-
-    var candidates = [];
-    for (var shift = 1; shift < 26; shift++) {
-      /* _chiSquareAtShift(letters, shift) measures fit of the
-         ciphertext distribution shifted back by `shift` against
-         expected English frequencies. */
-      var chi = global.DetectiveAnalyses._chiSquareAtShift(letters, shift);
-
-      /* Decrypt: shift each letter back */
-      var decLetters = '';
-      for (var i = 0; i < letters.length; i++) {
-        decLetters += String.fromCharCode(((letters.charCodeAt(i) - 65 - shift + 26) % 26) + 65);
-      }
-
-      candidates.push({
-        shift:     shift,
-        decrypted: respacedDecrypt(ct, decLetters),
-        chi:       chi
-      });
-    }
-
-    candidates.sort(function (a, b) { return a.chi - b.chi; });
-    return candidates.slice(0, 5);
-  }
-
-  /* ─── ROT13 ───────────────────────────────────────────────────
-     Caesar shift 13 — self-inverse. */
-  function rot13(ct) {
-    var letters = extractLetters(ct);
-    var decLetters = '';
-    for (var i = 0; i < letters.length; i++) {
-      decLetters += String.fromCharCode(((letters.charCodeAt(i) - 65 + 13) % 26) + 65);
-    }
-    return { decrypted: respacedDecrypt(ct, decLetters) };
-  }
-
-  /* ─── Atbash ──────────────────────────────────────────────────
-     Reverse alphabet: A↔Z, B↔Y … self-inverse. */
-  function atbash(ct) {
-    var letters = extractLetters(ct);
-    var decLetters = '';
-    for (var i = 0; i < letters.length; i++) {
-      decLetters += String.fromCharCode(25 - (letters.charCodeAt(i) - 65) + 65);
-    }
-    return { decrypted: respacedDecrypt(ct, decLetters) };
-  }
-
-  /* ─── Morse Decoder ───────────────────────────────────────────
-     Word boundaries: ' / '   Letter boundaries: ' '
-     Returns { valid, decrypted } or { valid: false, error, decrypted }. */
-  function decodeMorse(text) {
-    var t = text.trim();
-    if (!t) return { valid: false, error: 'Empty input' };
-
-    var words = t.split(/\s*\/\s*/);
-    var result = [];
-    var unknownSeqs = [];
-
-    for (var wi = 0; wi < words.length; wi++) {
-      var word = words[wi].trim();
-      if (!word) continue;
-      var syms = word.split(/\s+/);
-      var decoded = '';
-      for (var si = 0; si < syms.length; si++) {
-        var sym = syms[si];
-        if (!sym) continue;
-        var ch = MORSE_DEC[sym];
-        if (ch === undefined) {
-          unknownSeqs.push(sym);
-          decoded += '?';
-        } else {
-          decoded += ch;
-        }
-      }
-      result.push(decoded);
-    }
-
-    var decrypted = result.join(' ');
-    if (unknownSeqs.length > 0) {
-      return {
-        valid: false,
-        error: 'Unrecognised Morse sequences: ' + unknownSeqs.join(', '),
-        decrypted: decrypted
-      };
-    }
-    return { valid: true, decrypted: decrypted };
-  }
-
-  /* ─── Encoding Detector ───────────────────────────────────────
-     Auto-detects Binary (8-bit), Hexadecimal, or Base64.
-     Returns { valid, type, decrypted } or { valid: false }. */
-  function decodeEncoding(text) {
-    var t = text.trim().replace(/\s+/g, '');
-    if (!t) return { valid: false };
-
-    /* Binary: groups of 8 bits (0 and 1 only) */
-    if (/^[01]+$/.test(t) && t.length % 8 === 0 && t.length >= 8) {
-      try {
-        var binResult = '';
-        for (var bi = 0; bi < t.length; bi += 8) {
-          binResult += String.fromCharCode(parseInt(t.slice(bi, bi + 8), 2));
-        }
-        if (/[\x20-\x7e]/.test(binResult)) {        /* printable ASCII sanity check */
-          return { valid: true, type: 'Binary (8-bit)', decrypted: binResult };
-        }
-      } catch (e) { /* fall through */ }
-    }
-
-    /* Hexadecimal: even-length string of hex digits */
-    if (/^[0-9a-fA-F]+$/.test(t) && t.length % 2 === 0 && t.length >= 4) {
-      try {
-        var hexResult = '';
-        for (var hi = 0; hi < t.length; hi += 2) {
-          hexResult += String.fromCharCode(parseInt(t.slice(hi, hi + 2), 16));
-        }
-        if (/[\x20-\x7e]/.test(hexResult)) {
-          return { valid: true, type: 'Hexadecimal', decrypted: hexResult };
-        }
-      } catch (e) { /* fall through */ }
-    }
-
-    /* Base64: standard alphabet + optional padding */
-    if (/^[A-Za-z0-9+/]+=*$/.test(t) && t.length % 4 === 0 && t.length >= 4) {
-      try {
-        var b64Result;
-        if (typeof atob !== 'undefined') {
-          b64Result = atob(t);
-        } else if (typeof Buffer !== 'undefined') {
-          b64Result = Buffer.from(t, 'base64').toString('utf8');
-        }
-        if (b64Result !== undefined && /[\x20-\x7e]/.test(b64Result)) {
-          return { valid: true, type: 'Base64', decrypted: b64Result };
-        }
-      } catch (e) { /* fall through */ }
-    }
-
-    return { valid: false };
-  }
-
-  /* ─── Vigenère Key-Length Estimator ──────────────────────────
-     Combines Kasiski examination and period-IoC to propose
-     the top-3 most likely key lengths.
-     Returns { candidates: [{length, pIoC, score, methods}] }. */
-  function vigKeyLength(ct, maxKey) {
-    maxKey = (maxKey !== undefined) ? maxKey : 15;
-    var letters = extractLetters(ct);
-    if (letters.length < 30) return { candidates: [] };
-
-    var kasiski = global.DetectiveAnalyses._kasiskiTest(letters);
-
-    /* Build a set of Kasiski-supported periods for fast lookup */
-    var kasiskiSet = {};
-    for (var ki = 0; ki < kasiski.length; ki++) {
-      kasiskiSet[kasiski[ki].period] = kasiski[ki].count;
-    }
-
-    var candidates = [];
-    for (var p = 2; p <= maxKey; p++) {
-      var pIoC   = global.DetectiveAnalyses._periodIoC(letters, p);
-      var methods = [];
-      if (pIoC > 0.053) methods.push('Period-IoC');
-      if (kasiskiSet[p]) methods.push('Kasiski (' + kasiskiSet[p] + ' repeat' + (kasiskiSet[p] > 1 ? 's' : '') + ')');
-      /* Combined score: pIoC plus a Kasiski bonus */
-      var score = pIoC + (kasiskiSet[p] ? 0.005 * kasiskiSet[p] : 0);
-      candidates.push({ length: p, pIoC: pIoC, score: score, methods: methods });
-    }
-
-    candidates.sort(function (a, b) { return b.score - a.score; });
-    return { candidates: candidates.slice(0, 3) };
-  }
-
-  /* ─── Substitution Frequency Suggestions ─────────────────────
-     Maps the top-6 most frequent ciphertext letters to the
-     corresponding positions in ETAOIN order as starting hypotheses.
-     Returns { mapping: [{cipher, plain, count, pct}], note }. */
-  function substFreqSuggestions(ct) {
-    var letters = extractLetters(ct);
-    if (letters.length === 0) return { mapping: [], note: 'No letters found.' };
-
-    var counts = global.DetectiveAnalyses._freqCounts(letters);
-    var n = letters.length;
-
-    var sorted = Object.keys(counts).map(function (k) {
-      return { cipher: k, count: counts[k], pct: (counts[k] / n) * 100 };
-    }).filter(function (x) { return x.count > 0; });
-    sorted.sort(function (a, b) { return b.count - a.count; });
-
-    var top6 = sorted.slice(0, 6);
-    var mapping = top6.map(function (item, idx) {
-      return {
-        cipher: item.cipher,
-        plain:  ETAOIN[idx] || '?',
-        count:  item.count,
-        pct:    item.pct
-      };
-    });
-
-    return {
-      mapping: mapping,
-      note: 'If this is monoalphabetic substitution, the most frequent ciphertext letter ' +
-            'likely encodes ' + (mapping[0] ? mapping[0].plain : 'E') +
-            ', the second likely ' + (mapping[1] ? mapping[1].plain : 'T') +
-            ', and so on. These are starting hypotheses only — verify with context.'
-    };
-  }
-
-  /* ─── isApplicable ────────────────────────────────────────────
-     Returns { ok: true } if the named tool makes sense for the
-     given stats object, or { ok: false, reason: string } if not.
-     Used to disable/grey-out inapplicable attack buttons. */
-  function isApplicable(toolId, stats) {
-    if (!stats) return { ok: false, reason: 'No analysis data yet.' };
-    var cs  = stats.charset;
-    var n   = stats.n;
-    var ioc = stats.ioc;
-
-    switch (toolId) {
-      case 'caesar':
-        if (cs !== 'alpha') return { ok: false, reason: 'Caesar requires alphabetic-only text (detected: ' + cs + ').' };
-        if (n < 8)          return { ok: false, reason: 'Too short for meaningful brute-force (need 8+ letters).' };
-        return { ok: true };
-
-      case 'rot13':
-        if (cs !== 'alpha') return { ok: false, reason: 'ROT13 requires alphabetic-only text.' };
-        return { ok: true };
-
-      case 'atbash':
-        if (cs !== 'alpha') return { ok: false, reason: 'Atbash requires alphabetic-only text.' };
-        return { ok: true };
-
-      case 'morse':
-        if (cs !== 'morse') return { ok: false, reason: 'Input does not look like Morse code. Morse uses only . - / and spaces.' };
-        return { ok: true };
-
-      case 'encoding':
-        /* Always show — auto-detection will report if nothing matches */
-        return { ok: true };
-
-      case 'vigKeyLength':
-        if (cs !== 'alpha') return { ok: false, reason: 'Vigenère key-length analysis requires alphabetic text.' };
-        if (n < 50)         return { ok: false, reason: 'This teaching tool requires at least 50 letters; that threshold does not guarantee reliable estimation.' };
-        return { ok: true };
-
-      case 'substFreq':
-        if (cs !== 'alpha') return { ok: false, reason: 'Substitution frequency analysis requires alphabetic text.' };
-        if (n < 30)         return { ok: false, reason: 'Too short for reliable frequency analysis (need 30+ letters).' };
-        return { ok: true };
-
-      default:
-        return { ok: false, reason: 'Unknown tool: ' + toolId };
-    }
-  }
-
-  /* ─── Export ─────────────────────────────────────────────────── */
-  global.DetectiveAttacks = {
-    caesarBruteForce:     caesarBruteForce,
-    rot13:                rot13,
-    atbash:               atbash,
-    decodeMorse:          decodeMorse,
-    decodeEncoding:       decodeEncoding,
-    vigKeyLength:         vigKeyLength,
-    substFreqSuggestions: substFreqSuggestions,
-    isApplicable:         isApplicable
-  };
-
-})(typeof window !== 'undefined' ? window : global);
 ```
