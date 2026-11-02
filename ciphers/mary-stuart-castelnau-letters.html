@@ -70,6 +70,7 @@
     .sym-code { font-family: var(--fm); font-size: .75rem; color: var(--gold); min-width: 3.5rem; }
     .sym-meaning { font-size: .85rem; color: var(--tx2); }
   </style>
+  <link rel="stylesheet" href="../css/book-invitation-demos.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -128,6 +129,8 @@
 
 <div class="exhibit-layout">
   <div class="exhibit-main">
+<section class="panel" id="plaintext-counterparts" aria-labelledby="plaintext-counterparts-title"><div class="panel-body"><h2 id="plaintext-counterparts-title">Check against another record</h2><p>Lasry, Biermann and Tomokiyo located plaintext counterparts of <strong>seven</strong> newly deciphered letters in British archives: F42, F46, F58, F69, F78, F96 and F221. They distinguish these from three previously known letters whose ciphertext was not among the recovered BnF material. Compare a decipherment with its counterpart: agreement can test the reading, while omissions require separate examination.</p><p>Source: <a href="https://doi.org/10.1080/01611194.2022.2160677">“Deciphering Mary Stuart’s lost letters from 1578–1584” (2023), §5.1 and the corresponding entries in §5.3</a>. <a href="https://friendsofsheffieldcastle.org/wp-content/uploads/Deciphering-Mary-Stuart-s-lost-letters-from-1578-1584.pdf#page=33">Read the article’s seven-letter inventory (PDF)</a>. <a href="../lab/decipherment-cases.html#mary">Continue to the case file</a>.</p></div></section>
+
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
@@ -191,12 +194,14 @@
           <div class="symbol-row"><span class="sym-code">Symbol A</span><span class="sym-meaning">letter <em>e</em></span></div>
           <div class="symbol-row"><span class="sym-code">Symbol B</span><span class="sym-meaning">letter <em>t</em></span></div>
           <div class="symbol-row"><span class="sym-code">Symbol C</span><span class="sym-meaning">syllable <em>-tion</em></span></div>
+          <div class="symbol-row"><span class="sym-code">Modifier ↻</span><span class="sym-meaning">repeat the preceding letter in this model</span></div>
           <div class="symbol-row"><span class="sym-code">Symbol X</span><span class="sym-meaning">null (discard)</span></div>
           <div class="symbol-row"><span class="sym-code">Codeword Φ</span><span class="sym-meaning">Castelnau (person)</span></div>
           <div class="symbol-row"><span class="sym-code">Codeword Ψ</span><span class="sym-meaning">The Queen of England</span></div>
           <div class="symbol-row"><span class="sym-code">Codeword Ω</span><span class="sym-meaning">King of France</span></div>
           <div class="symbol-row"><span class="sym-code">Codeword Δ</span><span class="sym-meaning">Scotland</span></div>
         </div>
+<div class="book-activity"><h3>One sign changes the reading</h3><p>Invented fragment: <strong>B A ↻ X Φ</strong>. B and A stand for letters; Φ stands for a person; X is a null. The invented sign ↻ repeats the preceding letter. This fragment is not a quotation from Mary or a French sentence.</p><label for="mary-repeat"><input id="mary-repeat" type="checkbox" checked disabled>Apply the repeat modifier ↻</label><p class="book-output" id="mary-reading" role="status" aria-live="polite">With the modifier: T E E · [Castelnau]. Without it: T E · [Castelnau].</p><p>The recovered key includes repeat and delete controls: <a href="https://doi.org/10.1080/01611194.2022.2160677">Lasry, Biermann &amp; Tomokiyo (2023), §4 and Figure 7</a>. Our signs and mappings are invented.</p></div>
       </div>
     </div>
 
@@ -290,5 +295,6 @@
 <script src="../js/trust-labels.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/demo-loader.min.js"></script>
+<script src="../js/book-invitation-demos.js" defer></script>
 </body>
 </html>

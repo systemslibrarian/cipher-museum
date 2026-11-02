@@ -22,6 +22,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="../css/book-invitation-demos.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -70,6 +71,7 @@
   </div>
 </div>
 
+<section class="panel book-activity" aria-labelledby="dh-toy-title"><div class="panel-body"><h2 id="dh-toy-title">Exchange a value, then ask who sent it</h2><p><strong>Toy teaching model — no real security.</strong> We fix public parameters p = 23 and g = 5. Choose each participant’s private exponent and watch what they publish and calculate. All values are displayed for learning; these tiny numbers protect nothing.</p><form id="dh-toy" novalidate><div class="book-fields"><label for="dh-a">Alice’s private exponent a<input class="museum-input" id="dh-a" type="number" min="1" max="21" step="1" value="6"></label><label for="dh-b">Bob’s private exponent b<input class="museum-input" id="dh-b" type="number" min="1" max="21" step="1" value="15"></label></div><button class="btn btn-primary" type="submit" disabled>Exchange and compare</button></form><p class="book-output" id="dh-result" role="status" aria-live="polite">Run the example, then change one private exponent.</p><p>Source for the construction: Whitfield Diffie and Martin Hellman, <a href="https://doi.org/10.1109/TIT.1976.1055638">“New Directions in Cryptography” (1976), §III</a>. This invented small-number exercise adds no identity verification or key derivation.</p><noscript><p>JavaScript is needed for the exercise; a worked example follows below.</p></noscript></div></section>
 <div class="exhibit-layout">
   <div class="exhibit-main">
 
@@ -216,5 +218,6 @@
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
+<script src="../js/book-invitation-demos.js" defer></script>
 </body>
 </html>

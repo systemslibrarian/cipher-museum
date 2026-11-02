@@ -30,7 +30,8 @@
 #word-route p{max-width:78ch;margin:.75rem 0}#word-route .cipher-table{margin:1rem 0;min-width:360px}#word-route caption{text-align:left;padding:.5rem 0}
 #letter-model>summary{padding:1.25rem 1.5rem}#letter-model .demo-section{padding:0 1.5rem 1.5rem}
 @media(max-width:600px){#word-route,#letter-model{width:calc(100% - 2rem)}}
-</style></head>
+</style>  <link rel="stylesheet" href="../css/book-invitation-demos.css">
+</head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <nav class="museum-nav" aria-label="Primary">
@@ -84,14 +85,21 @@
   </div>
 </div>
 
-<section class="panel" id="word-route" aria-labelledby="word-route-title"><div class="panel-body">
+<section class="panel book-activity" id="word-route" aria-labelledby="word-route-title"><div class="panel-body">
 <h2 id="word-route-title">Try the route, one whole word at a time</h2>
-<p>A short invented dispatch: <strong>MOVE THE SUPPLIES TO RIVER BRIDGE AT DAWN</strong>. This teaching model combines three ideas used in Union route codes. Its vocabulary, route and null word are invented; it is not a recovered wartime key.</p>
-<details><summary>1. Conceal the two place words</summary><p>Our small vocabulary replaces RIVER with ORCHARD and BRIDGE with LANTERN. The message becomes <strong>MOVE THE SUPPLIES TO ORCHARD LANTERN AT DAWN</strong>.</p></details>
-<details><summary>2. Follow the column route</summary><p>Write four whole words across each row. Read column 3 down, column 1 up, column 4 down, then column 2 up.</p>
-<div style="overflow-x:auto"><table class="cipher-table"><caption>Invented word-route grid</caption><thead><tr><th scope="col">1 ↑</th><th scope="col">2 ↑</th><th scope="col">3 ↓</th><th scope="col">4 ↓</th></tr></thead><tbody><tr><td>MOVE</td><td>THE</td><td>SUPPLIES</td><td>TO</td></tr><tr><td>ORCHARD</td><td>LANTERN</td><td>AT</td><td>DAWN</td></tr></tbody></table></div>
-<p>Readout: <strong>SUPPLIES AT · ORCHARD MOVE · TO DAWN · LANTERN THE</strong>.</p></details>
-<details><summary>3. Add a null, then recover the dispatch</summary><p>Insert SKY after each column pair: <strong>SUPPLIES AT SKY ORCHARD MOVE SKY TO DAWN SKY LANTERN THE SKY</strong>. SKY carries no message in this invented key.</p><p>To recover the message, remove each SKY, place successive pairs into columns 3 down, 1 up, 4 down and 2 up, then read the rows. Finally replace ORCHARD and LANTERN using the vocabulary.</p><p><strong>Try it before opening the answer.</strong> Which two words remain concealed if you know the route but do not possess the vocabulary?</p><details><summary>Check the result</summary><p>The route restores MOVE THE SUPPLIES TO ORCHARD LANTERN AT DAWN. The vocabulary restores RIVER and BRIDGE. Reading the route alone does not establish the intended locations.</p></details></details>
+<p><strong>Invented teaching model.</strong> The vocabulary, keyword rule, directions and nulls below are invented, not a recovered wartime key. Stager's systems combined whole-word routes, codewords and nulls; see the historical sources below.</p>
+<form id="stager-words" novalidate>
+<label for="stager-message">Your short dispatch<textarea class="museum-input" id="stager-message" rows="3" maxlength="2000">MOVE THE SUPPLIES TO RIVER BRIDGE AT DAWN</textarea></label>
+<p>1–120 words, A–Z. The model uses uppercase words and omits punctuation and numbers. ORCHARD, LANTERN, SKY and PAD are reserved.</p>
+<label for="stager-keyword">Route keyword (4–8 letters)<input class="museum-input" id="stager-keyword" type="text" value="BDAC" maxlength="8"></label>
+<label for="stager-codewords"><input id="stager-codewords" type="checkbox" checked>Conceal RIVER as ORCHARD and BRIDGE as LANTERN</label>
+<label for="stager-nulls"><input id="stager-nulls" type="checkbox" checked>Insert the null word SKY after each column</label>
+<button class="btn btn-primary" type="submit" disabled>Send and hide the dispatch</button><p id="stager-status" role="status" aria-live="polite"></p>
+</form>
+<div id="stager-stage" hidden><h3>What can the visible words tell you?</h3><p>Read this intercepted sequence before restoring its order. Which words suggest a subject? Which instruction remains uncertain?</p><div class="book-output" id="stager-transmitted" tabindex="-1"></div>
+<details><summary>Inspect the invented route rule</summary><p>Write words across rows under the keyword. Read columns in alphabetical keyword order; ties go left to right. Alternate down, up, down, up. PAD fills the last row; SKY is a null only when enabled. Neither carries a message.</p><p id="stager-route"></p></details>
+<button class="btn btn-primary" id="stager-restore" type="button">Restore the route and vocabulary</button><button class="btn btn-secondary" id="stager-edit" type="button">Edit the dispatch</button><div id="stager-answer" class="book-output" role="status" aria-live="polite" hidden></div></div>
+<noscript><p>This exercise needs JavaScript. The historical account below distinguishes routes, codewords and nulls.</p></noscript>
 </div></section>
 <details class="panel" id="letter-model"><summary>Explore a separate letter-transposition model</summary><p class="panel-body">This older widget rearranges letters, rather than the whole words used above. Its escape and padding rules are teaching conventions.</p><div class="demo-section" data-cipher="stager"></div></details>
 
@@ -216,5 +224,6 @@ Step 4: Insert null words at column ends
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
+<script src="../js/book-invitation-demos.js" defer></script>
 </body>
 </html>

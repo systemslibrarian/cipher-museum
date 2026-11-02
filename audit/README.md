@@ -22,7 +22,7 @@ The earlier 214-page review was a complete reading/consistency pass with targete
 
 ## Snapshot and regeneration
 
-Source commit: `8563a3faad049d805964238b4ba61f0268da2eb5` (2026-11-02T06:40:20-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
+Source commit: `0440bdf14982197590f424d4e8af720c8fe62234` (2026-11-02T09:36:38-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
 
 With repository access and dependencies installed:
 
@@ -55,6 +55,7 @@ The exporter reads committed files, checks every public HTML page against the co
 - [13-04-javascript.md](parts/13-04-javascript.md): javascript appendix 4
 - [13-05-javascript.md](parts/13-05-javascript.md): javascript appendix 5
 - [13-06-javascript.md](parts/13-06-javascript.md): javascript appendix 6
+- [13-07-javascript.md](parts/13-07-javascript.md): javascript appendix 7
 - [14-01-data.md](parts/14-01-data.md): data appendix 1
 - [14-02-data.md](parts/14-02-data.md): data appendix 2
 - [14-03-data.md](parts/14-03-data.md): data appendix 3

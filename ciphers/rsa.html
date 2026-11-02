@@ -22,6 +22,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="stylesheet" href="../css/museum.css">
+  <link rel="stylesheet" href="../css/book-invitation-demos.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -70,6 +71,19 @@
   </div>
 </div>
 
+<section class="panel book-activity" aria-labelledby="rsa-toy-title"><div class="panel-body">
+<h2 id="rsa-toy-title">Try a pair of keys</h2>
+<p><strong>Toy model — no real security.</strong> Choose two different primes between 2 and 97. This is unpadded textbook arithmetic with deliberately tiny numbers, not secure RSA encryption. It does not authenticate the person offering a public key.</p>
+<form id="rsa-toy" novalidate><div class="book-fields">
+<label for="rsa-p">Prime p<input class="museum-input" id="rsa-p" type="number" min="2" max="97" step="1" value="11" required></label>
+<label for="rsa-q">Prime q<input class="museum-input" id="rsa-q" type="number" min="2" max="97" step="1" value="17" required></label>
+<label for="rsa-e">Public exponent e<input class="museum-input" id="rsa-e" type="number" min="2" step="1" value="7" required></label>
+<label for="rsa-message">Message number<input class="museum-input" id="rsa-message" type="number" min="0" step="1" value="42" required></label>
+</div><p>Use 1 &lt; e &lt; φ(n), coprime to φ(n). The message must be from 0 to n−1. The model computes n = pq, φ(n) = (p−1)(q−1), and the inverse d of e modulo φ(n).</p><button class="btn btn-primary" type="submit" disabled>Encrypt and decrypt</button></form>
+<p id="rsa-status" role="status" aria-live="polite">Start with the example, then change a prime or the message.</p><div id="rsa-result" class="book-output" hidden></div>
+<p>The construction is described in <a href="https://www.rfc-editor.org/rfc/rfc8017#section-3">RFC 8017, §3–5</a>; its complete encryption schemes require additional encoding.</p>
+<noscript><p>Enable JavaScript to run the toy model. The arithmetic and its limits are described below.</p></noscript>
+</div></section>
 <div class="exhibit-layout">
   <div class="exhibit-main">
 
@@ -180,5 +194,6 @@
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
+<script src="../js/book-invitation-demos.js" defer></script>
 </body>
 </html>
