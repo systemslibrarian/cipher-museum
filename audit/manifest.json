@@ -1,7 +1,7 @@
 {
   "format_version": 1,
-  "source_commit": "e913726355aa5b8e4060c0a007ac1f372edba4ce",
-  "source_commit_time": "2026-11-01T21:31:51-05:00",
+  "source_commit": "e4bd1e3b2fa510091bd2e6c397906673eaf0a771",
+  "source_commit_time": "2026-11-02T05:39:08-05:00",
   "page_count": 216,
   "inline_script_count": 80,
   "shared_script_count": 56,
@@ -1036,7 +1036,7 @@
       "id": "P061",
       "path": "ciphers/elizebeth-friedman.html",
       "title": "Elizebeth Smith Friedman — The Cipher Museum",
-      "source_sha256": "1f4dc1d6001a6821df982d2babc71124ca23e6fac51e1220d685ba8452a9ca1d",
+      "source_sha256": "9c86faad05906076ce240ba41e378a961172fe20c6133f8c76fa9afe55a9240e",
       "text_nodes": 114,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1046,7 +1046,7 @@
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 955,
+      "words": 954,
       "part": "04-pages-P061-P080.md"
     },
     {
@@ -4079,7 +4079,7 @@
   "input_files": [
     {
       "path": "docs/page-audit/coverage.json",
-      "sha256": "cbb3e2fcd44f4c4a73a889b025870276e5ade9bd0578a8516ff7eab64168edbd"
+      "sha256": "b7ddb04f1e7d3c4625db4bcd32821c323eec6aa02601d7cb213f14b89df7fee0"
     },
     {
       "path": "docs/page-audit/sources.json",
@@ -4327,7 +4327,7 @@
     },
     {
       "path": "ciphers/elizebeth-friedman.html",
-      "sha256": "1f4dc1d6001a6821df982d2babc71124ca23e6fac51e1220d685ba8452a9ca1d"
+      "sha256": "9c86faad05906076ce240ba41e378a961172fe20c6133f8c76fa9afe55a9240e"
     },
     {
       "path": "ciphers/enigma.html",
@@ -5315,147 +5315,147 @@
     {
       "path": "parts/01-pages-P001-P020.md",
       "bytes": 267393,
-      "sha256": "8be9ef2504b06231e765562a53c0640df05fd1ac92c9f8dc38ea6f8697cdbe31"
+      "sha256": "657bee395fdf6c67e952bf33a8921ef67975e43f8930ba4517719a1d37fb9437"
     },
     {
       "path": "parts/02-pages-P021-P040.md",
       "bytes": 257613,
-      "sha256": "a03fb1b01bd92695149f5f5816d47bec1a9e3340bad70227e1714a4c54867644"
+      "sha256": "627b5adccd2f891433cf623c0f6ec0e0f889e751d16ffecaef3d409349a5f38e"
     },
     {
       "path": "parts/03-pages-P041-P060.md",
       "bytes": 274906,
-      "sha256": "2454a351407bf1e7e8241f2ef75942f0af457a1bdbaa79bf7880baedae8e2fac"
+      "sha256": "4558cb0e2c7b2976d1901ec1f4673cb20a0a08ebfa1078df27c07ebcce3dab7f"
     },
     {
       "path": "parts/04-pages-P061-P080.md",
-      "bytes": 279918,
-      "sha256": "81bdd4fa50a302610cc43a387ac5f9388b5f9c84f7040a2a71ceb2d5a10a8268"
+      "bytes": 280136,
+      "sha256": "033abd0eceed1e5f8ddc528c69aa0485f34e9c26c0b6e45f1bc2e2c7dc8c2bd8"
     },
     {
       "path": "parts/05-pages-P081-P100.md",
       "bytes": 264118,
-      "sha256": "62c4d19f8aef6756cb187c917102c78b5b66284bee4f9b20c6ffcf7aab768fa8"
+      "sha256": "c75b3794a2f0780a659f50a76e55c9d63e9680fd86dbf9861b249caaef928739"
     },
     {
       "path": "parts/06-pages-P101-P120.md",
       "bytes": 285341,
-      "sha256": "1f99d433f075fae60efe07260b1ed941ee756daa67126c5ee4fde1c39a1e44b8"
+      "sha256": "a786b7e731844eaeb7558bdf621d25e3b2b7a40319d5030cbb44b153fad6c97c"
     },
     {
       "path": "parts/07-pages-P121-P140.md",
       "bytes": 262709,
-      "sha256": "b78b928fb97e277cebc3257c914897363ceda02b7b5610f26453efedcc4a1a38"
+      "sha256": "7e4a25a4290eaad3c995f998072ea1e4b97275862c64f7170a5c3e709cb85fd0"
     },
     {
       "path": "parts/08-pages-P141-P160.md",
       "bytes": 307890,
-      "sha256": "9482a0c1719d6ad41baadf925fb2555b1808a8e3a725d83455bee268b1fbabc2"
+      "sha256": "6b78a6dc907a43e35407e61a57e3035e1cba5e62c1d8262d4c741f908b419d09"
     },
     {
       "path": "parts/09-pages-P161-P180.md",
       "bytes": 450765,
-      "sha256": "a320c9fbd847cd2d58f4cd06098d1fd1685d4ee75872a4e3b55e0679dd622446"
+      "sha256": "f3b355b825af6187173aa0404e6c81a1b56816e34d8fd214af75ae2da103263a"
     },
     {
       "path": "parts/10-pages-P181-P200.md",
       "bytes": 287840,
-      "sha256": "e03136c24f38ded130d1da04c25d02d7b401f178efd3ef3480a233786fef6116"
+      "sha256": "d0a7fa067a5eecd15141649f54dbec8e262397eb0796e26f763aa21d77d962e0"
     },
     {
       "path": "parts/11-pages-P201-P216.md",
       "bytes": 285550,
-      "sha256": "b32861384f08b746588aff8b94444a8aeab52590e19517fb9d9a8afc9dfda4d3"
+      "sha256": "9b8315924a34c74654409202c6d40a17f1dbbb745008d78e0979efdb93242548"
     },
     {
       "path": "parts/12-source-register.md",
       "bytes": 126777,
-      "sha256": "85e20f24715311571643413a01accccb302fb8b66673ccf4dca4b8fb8e6d3891"
+      "sha256": "77d76b8ae462f4ac3326130d3d61b04b35b87783b4dbb74f155bc62bc56dd1cb"
     },
     {
       "path": "parts/13-01-javascript.md",
       "bytes": 168592,
-      "sha256": "c5e2503068e72a51fb8bc94e7dff100d8b567fbf65f19d91b261f647227be364"
+      "sha256": "c4b3b440dfa26777dfee0e2f56ac3bac81b3f666bce507dcbb41823c292ad41d"
     },
     {
       "path": "parts/13-02-javascript.md",
       "bytes": 18742,
-      "sha256": "1734d9ad69dded644e187f4b7953aaf71a7aff8a73453300409900ae4def0c90"
+      "sha256": "9eaf540bf74e8d35d3449c70b31b470b8de06001863a371f8a51ca2d3a126ce3"
     },
     {
       "path": "parts/13-03-javascript.md",
       "bytes": 181468,
-      "sha256": "b9957914c433de358d9c4885ef4a094149a2c7ec6ddea2cab3683646b146d264"
+      "sha256": "65baf2e6b962a5bfdabcc2fb71e74d75842361c02409a8370df45b15bf05246d"
     },
     {
       "path": "parts/13-04-javascript.md",
       "bytes": 171609,
-      "sha256": "3cc9667309cbd1547f194454f8a4c46412bbd07555a99480833701dccf5e6344"
+      "sha256": "c21d3987288f9c4c656443b74062394a582d5ed80a4b625ff2abcb1400d409dc"
     },
     {
       "path": "parts/13-05-javascript.md",
       "bytes": 165998,
-      "sha256": "459ed3323c60da3854984f3952e6f55b5f6a4415ead7e182e6a813ab8b6a01bb"
+      "sha256": "4d1942bda553f7451a478a404a68fdff29764912f5677953085e34f681a34762"
     },
     {
       "path": "parts/13-06-javascript.md",
       "bytes": 156505,
-      "sha256": "2a917b0731d7164070f0ccc78168eba8773992033d2945ef6718eae7b1553379"
+      "sha256": "ba9cb26356c4a90cd2c6929fe2c6fdbb43d59bbe87d244346301616f6febdc9d"
     },
     {
       "path": "parts/13-07-javascript.md",
       "bytes": 83244,
-      "sha256": "0d394e2d0c80b78037859271fb54b019599789be1a099c95a1730812525c1baf"
+      "sha256": "3dd3adfef42bfc304c5338972793058ad4a7c96734cdf2bfeebf5943c23e69db"
     },
     {
       "path": "parts/14-01-data.md",
       "bytes": 48229,
-      "sha256": "c2a31e2b0c9a63bf90409a734b06aabe153c00c1c015db446d51eb9659f0dd53"
+      "sha256": "e30a033462ab72ee1bca0a82803222e8f9c345d5416fed6379428118418e565a"
     },
     {
       "path": "parts/14-02-data.md",
       "bytes": 465598,
-      "sha256": "ded95854fbd951a605a15c74305b9620ec874b870e8db1f2c559723cb3d9cecf"
+      "sha256": "4313a031b9015eb89f591650c6a8439355372ebd82d83a440d75d8965d1f2d83"
     },
     {
       "path": "parts/14-03-data.md",
       "bytes": 176025,
-      "sha256": "2bf85348b5081e2eb1fe4156c5517b998ad9fe1bbb31594d3f9a99e5c21d5cc4"
+      "sha256": "717a74e25a94210f17c2797686fbce636ac8772a495d142f8333508fa6b182d8"
     },
     {
       "path": "parts/14-04-data.md",
       "bytes": 107066,
-      "sha256": "bdd141f4f99f124ae7b32a8948b1aa10f195084f2735fcec57d6644ce8513d3e"
+      "sha256": "dd3e524fd7dd5675435f115ddf69d7bd5e1e542156957c2e5313ccfd1dd60723"
     },
     {
       "path": "parts/14-05-data.md",
       "bytes": 170665,
-      "sha256": "d9bebc65ab598fefe5a0da5a4a963f315102d17cd0628b0cb47438468c0a542c"
+      "sha256": "996a98385aab88f159379adea90cf23ce3e722ef8faf1177377010582f3bed65"
     },
     {
       "path": "parts/14-06-data.md",
       "bytes": 118334,
-      "sha256": "a0effcb39095ed7424d0a49b034839914dd3d7fd5a18e8aeac1ec11a54eedd83"
+      "sha256": "a997c5b7a6ecd8af0eddb1a6566505ec7695af7463038e84ccac2d8bec79715f"
     },
     {
       "path": "parts/14-07-data.md",
       "bytes": 69047,
-      "sha256": "da09dced93518799f34ef313fff9d2d6686b7a25e91bf74775f27b2af9b21f20"
+      "sha256": "b0ec2a785b03a0aaeceddef6c5980aea9a0a92bde1a2958c3a82d66565445606"
     },
     {
       "path": "parts/15-classroom-worksheet.md",
       "bytes": 5593,
-      "sha256": "b1b2c2f7fba608cc93eff1c915b199ee94b1e1496eb06b634fcea7bea98497b2"
+      "sha256": "3f1e3130fe0eaa579d5f533d84059f060e8c615a2380784a358b97b9fe89b679"
     },
     {
       "path": "CIPHER_MUSEUM_AUDIT.md",
-      "bytes": 5484974,
-      "sha256": "3b2d3ec6afb88735cba78e49edbafe2e561919a18cf846a0c95c4a99f755adba"
+      "bytes": 5485192,
+      "sha256": "ebbb92ddf97a35743ec0dc8f64a651234965f8bbf044c781d14550e229451c32"
     },
     {
       "path": "README.md",
       "bytes": 6139,
-      "sha256": "b86054154c45686489d93fbf77a87d4fd90baea02e1220517a28963bc2b535dd"
+      "sha256": "be40d1ae57c16de3f284815e5916f5bedeb89d687ce9bab99b03d369bc19b6d4"
     }
   ]
 }
