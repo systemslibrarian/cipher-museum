@@ -625,7 +625,7 @@
       "sha256": "a9171ed10ef15526667df5615d216811025f2e594b8d882d1d1ecb8e3ba5a85b",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",

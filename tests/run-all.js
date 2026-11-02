@@ -88,6 +88,7 @@ const suites = [
   'tests/test-min-fresh.js',
   'tests/test-sw-version.js',
   'tests/test-sw-offline-fallback.js',
+  'tests/test-script-updates.js',
   'tests/test-protocol-math.js',
   'tests/test-protocol-pages.js',
   'tests/test-historical-exhibits.js',

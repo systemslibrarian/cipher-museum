@@ -5,12 +5,14 @@
  * Strategy:
  *   - HTML navigations: network-first, falling back to cache (content stays fresh
  *     online; cached pages may be available offline while their assets remain cached).
- *   - Static assets (css/js/images/json): cache-first with background refresh.
+ *   - JavaScript: network-first with cached fallback, so corrected models arrive
+ *     with the exhibit text on the first online visit.
+ *   - Other static assets (css/images/json): cache-first with background refresh.
  *   - Requests under /public/, including corpus samples and reports, bypass this cache.
  *
  * VERSION is stamped automatically by `npm run build:js` from a hash of every
  * asset served cache-first — the minified bundles, the non-HTML entries of
- * CORE below, and the self-contained offline fallback page (scripts/sw-version.js).
+ * CORE below, the offline fallback page, and this worker's policy (scripts/sw-version.js).
  * tests/test-sw-version.js fails the suite if it drifts. Old caches are purged
  * on activate, so adding an asset to CORE also re-stamps VERSION.
  */
@@ -177,7 +179,32 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache-first with background refresh for static assets.
+  if (url.pathname.endsWith('.js')) {
+    const cachedScript = async () => {
+      const cache = await caches.open(VERSION);
+      // Versioned exhibit URLs use the precached current bundle while offline.
+      return (await cache.match(req)) || cache.match(url.pathname);
+    };
+    event.respondWith(
+      fetch(req, { cache: 'no-cache' })
+        .then(async (res) => {
+          if (!res.ok) return (await cachedScript()) || res;
+          try {
+            const cache = await caches.open(VERSION);
+            await cache.put(req, res.clone());
+          } catch (_) { /* A full cache must not discard a successful network response. */ }
+          return res;
+        })
+        .catch(async (error) => {
+          const hit = await cachedScript();
+          if (hit) return hit;
+          throw error;
+        })
+    );
+    return;
+  }
+
+  // Cache-first with background refresh for the remaining static assets.
   event.respondWith(
     caches.match(req).then((hit) => {
       const refresh = fetch(req)
