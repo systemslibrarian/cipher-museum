@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-b53eaf5b';
+const VERSION = 'cipher-museum-62806136';
 
 const CORE = [
   '/ciphers/gripenstierna.html',
@@ -27,6 +27,7 @@ const CORE = [
   '/js/intercept-exercise.js',
   '/js/structure-exercises.js',
   '/js/egyptian-case.js',
+  '/js/maya-case.js',
   '/lab/reading-the-evidence.html',
   '/js/reading-evidence.js',
   '/lab/traffic-analysis.html',
