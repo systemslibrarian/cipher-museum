@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Diagnosing a Machine from Evidence — The Cipher Museum</title>
+<meta name="description" content="A synthetic worksheet on the reasoning behind the Purple reconstruction: align two messages in depth, build partial permutations, and test the alignment on a message held out.">
+<meta property="og:title" content="Diagnosing a Machine from Evidence — The Cipher Museum">
+<meta property="og:description" content="A synthetic worksheet on the reasoning behind the Purple reconstruction: align two messages in depth, build partial permutations, and test the alignment on a message held out.">
+<link rel="canonical" href="https://ciphermuseum.com/lab/purple-diagnosis.html"><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/museum.css"><link rel="stylesheet" href="../css/research-workbench.css"><link rel="stylesheet" href="../css/evidence-exercises.css">
+</head><body><a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="2" fill="currentColor"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="page-hero"><p class="hero-sub">A diagnosis worksheet</p><h1>Diagnosing a Machine from Evidence</h1><p class="hero-intro">The US Army codebreakers who reconstructed Japan’s Purple machine never saw one. This worksheet practises one step of that kind of reasoning on synthetic messages: align two messages that share a key, build what each key position must do, and test the result on a message you have not used.</p></header>
+<main id="main-content" class="research-main" tabindex="-1">
+<p class="ta-fiction"><strong>Synthetic worksheet.</strong> The messages, the cipher and its permutations are invented for teaching. This is not the Purple machine and not a reconstruction of the historical attack. It isolates one diagnostic step.</p>
+<noscript><p>The method notes, disclosure and sources remain readable without JavaScript. Enable JavaScript to run the worksheet.</p></noscript>
+
+<section class="evidence-exercise" id="method" aria-labelledby="method-title">
+<h2 id="method-title">The idea</h2>
+<p>Messages enciphered with the same key are said to be in depth. If the same plaintext letter stands at the same key position in two such messages, it must become the same ciphertext letter there. Matched plaintext and ciphertext therefore fill in part of each key position’s substitution, and every extra message in depth fills in more. Two messages can also be in depth with an offset: one starts later in the same key (Stamp and Low, <cite>Applied Cryptanalysis</cite>, §2.3.3, printed pp. 45–48).</p>
+<p>Finding the right offset is a hypothesis. It can be wrong in two ways: it can make one key position do two incompatible things, or it can simply predict nothing that anyone has checked. The test is a message that played no part in forming the hypothesis.</p>
+</section>
+
+<section class="evidence-exercise" id="pd-disclosure" aria-labelledby="disclosure-title">
+<h2 id="disclosure-title">What you are given, and what is assumed</h2>
+<ul class="evidence-steps">
+<li><strong>Supplied:</strong> message A’s plaintext and ciphertext, and that A starts at key position 0.</li>
+<li><strong>Assumed:</strong> message B’s plaintext, as if guessed from a routine formula. Its ciphertext is supplied; its starting key position is what you must find.</li>
+<li><strong>Held out:</strong> message C’s plaintext. Its ciphertext and starting position (key position 2) are supplied. The plaintext is shown only after you test an alignment.</li>
+<li><strong>Simplified:</strong> one 26-letter alphabet and a fixed list of random permutations, one per key position. There is no split into sixes and twenties, no stepping switches and no indicator system.</li>
+</ul>
+<table class="cipher-table"><caption>Messages (synthetic)</caption><thead><tr><th scope="col">Message</th><th scope="col">Plaintext</th><th scope="col">Ciphertext</th></tr></thead><tbody>
+<tr><td>A (supplied, starts at 0)</td><td>CONVOYLEAVESATDUSK</td><td>LXPZGNELRSWRPCLPWB</td></tr>
+<tr><td>B (plaintext assumed, start unknown)</td><td>WEATHERCLEARINNORTH</td><td>JKBAKLKZPDPDHOATCLA</td></tr>
+<tr><td>C (starts at 2)</td><td>held out</td><td>IKBYPDRVDJJM</td></tr>
+</tbody></table>
+</section>
+
+<section class="evidence-exercise" id="worksheet" aria-labelledby="worksheet-title">
+<h2 id="worksheet-title">The worksheet</h2>
+<label for="pd-offset">Key position where message B starts</label><select id="pd-offset"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
+<button type="button" id="pd-align">Align A and B</button><button type="button" id="pd-test">Test on message C</button><button type="button" id="pd-reset">Reset</button>
+<p id="pd-align-result" role="status"></p>
+<div class="ebook-table-scroll"><table class="cipher-table" id="pd-table"><caption>Pairs at each key position under your alignment</caption><thead><tr><th scope="col">Key position</th><th scope="col">Plaintext → ciphertext</th><th scope="col">Check</th></tr></thead><tbody></tbody></table></div>
+<p id="pd-reading"></p>
+<div id="pd-heldout" hidden><p><strong>Message C’s held-out plaintext:</strong> <span id="pd-heldout-text"></span></p></div>
+<p id="pd-result" role="status">Choose an offset for message B, align it, then test it on message C.</p>
+<p><strong>Your record</strong></p><p id="pd-record-empty">No alignment tested yet. Each test is kept, including those that fail.</p><ol id="pd-record"></ol>
+<p>A supported alignment still leaves most of message C unread: two messages fill in only a few letters of each key position. That is the point at which real work needed more traffic, more cribs and more checks.</p>
+</section>
+
+<section class="evidence-exercise" id="team" aria-labelledby="team-title">
+<h2 id="team-title">A team, and a pattern followed by checks</h2>
+<p>The Purple reconstruction was the work of the Army’s Signal Intelligence Service as a team, not of one person. Frank Rowlett supervised the effort (Mundy, <cite>Code Girls</cite>, pp. 89–94). His own account describes statistical tests confirming which messages shared a key, and the day Genevieve Grotjan found the first instance of the relationship the team had been searching for. The section gathered at her desk and William Friedman came in to see; Rowlett then worked through the results with Robert Ferner and Albert Small, and Leo Rosen had earlier described how telephone stepping switches worked (Rowlett, <cite>The Story of Magic</cite>, pp. 151–154). Grotjan had joined as a junior cryptanalyst in 1939 (Mundy, pp. 89–94).</p>
+<p>The worksheet mirrors only the shape of that progression: a promising relationship, then corroboration from material that did not suggest it, then a partial result that still leaves work to do. Accounts give different dates for Grotjan’s discovery, so this page does not assert one. See the <a href="../ciphers/purple.html">Purple exhibit</a> for the machine and its history.</p>
+</section>
+
+<section class="evidence-exercise" id="sources" aria-labelledby="sources-title">
+<h2 id="sources-title">Sources</h2>
+<ul class="evidence-steps">
+<li>Mark Stamp and Richard M. Low, <cite>Applied Cryptanalysis: Breaking Ciphers in the Real World</cite> (Wiley, 2007), §2.3.3, printed pp. 45–48, on depth, matched plaintext and partial permutations. Their own example is explicitly simplified.</li>
+<li>Frank B. Rowlett, <cite>The Story of Magic: Memoirs of an American Cryptologic Pioneer</cite> (Aegean Park Press, 1998), pp. 151–154.</li>
+<li>Liza Mundy, <cite>Code Girls: The Untold Story of the American Women Code Breakers of World War II</cite> (Hachette, 2017), pp. 89–94.</li>
+</ul>
+<p>The messages, permutations and worksheet are original to this page. Books are cited by title and page; no copy of any book is linked.</p>
+</section>
+</main><footer></footer><script src="../js/nav.js" defer></script><script src="../js/purple-diagnosis.js" defer></script></body></html>
