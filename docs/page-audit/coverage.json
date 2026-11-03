@@ -6101,8 +6101,8 @@
     {
       "path": "lab/decipherment-cases.html",
       "title": "How a Decipherment Becomes Evidence — The Cipher Museum",
-      "words": 1099,
-      "sha256": "91051bfe9de2a7f7a039b6d151da1e7e9d9550e544352f83a863877c5a2ab044",
+      "words": 1791,
+      "sha256": "880890d136634ca0a0656dabd3de990ebe5c6b6472dc4d2b7ca21b693d3c1c3f",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [],
       "notes": "Root reread complete case narratives and displayed evidence, including the Z340 fragment. Invented teaching examples remain separate from source-backed manuscript evidence.\n3 November 2026: Added an original Latin-label structural analogy connected to Linear B. Kober is credited; sounds and meaning are not inferred from recurrence alone. Competing predictions are checked against withheld labeled fixture records. Robinson (2007), pp. 114–119; PASP research link. DOM and Chromium checks rejected the wrong prediction; existing Copiale/Mary/Z340 content retained.",
@@ -6127,6 +6127,13 @@
         "scope": "Added an original Latin-label structural analogy connected to Linear B. Kober is credited; sounds and meaning are not inferred from recurrence alone. Competing predictions are checked against withheld labeled fixture records. Robinson (2007), pp. 114–119; PASP research link. DOM and Chromium checks rejected the wrong prediction; existing Copiale/Mary/Z340 content retained.",
         "tests": "tests/test-process-exercises.js; full npm test except the ledger freshness gate passed, with ledger corrected afterward",
         "limits": "Existing historical claims outside the described additions were not newly reverified. Prior browser records describe earlier revisions."
+      },
+      "linear_b_case_2026_11_03": {
+        "scope": "Linear B section extended into a staged case: script not cipher; Kober's structure before sound; her first five triplets reread as Cretan town names and adjectives while the sign relationships held; Ventris's Etruscan/Aegean prior giving way; Ta 641 as a test from a tablet not used to build the values; spelling ambiguity (pa-te = patēr or pantes); no confidence score. The exercise now makes the frequency-favoured reading attractive and wrong, keeps every check in a visible record through revision and reset, and leaves Z unassigned.",
+        "sources": "John Chadwick, The Decipherment of Linear B (CUP, 1958; Vintage paperback printing), pp. 35, 50, 54, 62, 75, 77, 81–83, 86, read from the user's PDF with each folio matched; Ventris and Chadwick, Documents in Mycenaean Greek (1956), ch. I and ch. II (spelling rules), checked against a scanned copy; Palaima (2023), public PDF, opening page; Robinson (2007) as previously cited, not rechecked.",
+        "tests": "tests/test-linear-b-case.js; 16 mutation checks, each failing on its own guard; tests/test-process-exercises.js unchanged and passing; full npm test.",
+        "limits": "Transliterations and word identifications (ti-ri-po-de, qe-to-ro-we, a-no-we, pa-te) follow Chadwick 1958 and Ventris and Chadwick 1956 and need specialist review before being presented as authoritative. Documents in Mycenaean Greek is cited by chapter only because the scanned copy's pagination is unreliable.",
+        "record": "docs/LINEAR_B_CASE.md"
       }
     },
     {
