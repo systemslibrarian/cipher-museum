@@ -15,8 +15,11 @@ const root = path.resolve(__dirname, '..');
 const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 const tour = JSON.parse(read('tours/writing-systems.json'));
 const norm = s => s.replace(/\s+/g, ' ').trim();
+// A stop linking to a section is checked against that section alone.
 const pageText = href => {
-  const doc = new JSDOM(read(path.join('tours', href))).window.document;
+  const [file, fragment] = href.split('#');
+  const doc = new JSDOM(read(path.join('tours', file))).window.document;
+  if (fragment) return norm(doc.getElementById(fragment).textContent);
   return norm(doc.body.textContent + ' ' + [...doc.querySelectorAll('meta[name="description"]')].map(m => m.content).join(' '));
 };
 
@@ -28,7 +31,9 @@ assert.match(tour.description, /encrypt|cipher/i, 'The route description must na
 const CLAIMS = {
   '../ciphers/rosetta-stone.html': [/two languages and three scripts/, /not an encryption system/],
   '../ciphers/egyptian-substitution.html': [/uncertain intent/],
-  '../lab/decipherment-cases.html': [/Linear B is a script, not a cipher/i, /did not help form the values/],
+  '../lab/decipherment-cases.html#egyptian': [/Egyptian hieroglyphs are a writing system, not a cipher/, /Ramesses/],
+  '../lab/decipherment-cases.html#linear-b': [/Linear B is a script, not a cipher/i, /did not help form the values/],
+  '../lab/decipherment-cases.html#maya': [/Maya writing is a script for Maya languages, not a code/, /Mayan languages are living languages/],
   '../ciphers/phaistos-disc.html': [/remain disputed/, /not established as a cipher/],
   '../ciphers/voynich.html': [/undeciphered script/],
   '../ciphers/copiale.html': [/2011/],

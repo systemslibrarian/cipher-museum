@@ -34,7 +34,10 @@ function open(file, query = '', storage) {
         for (let i = 0; i < data.stops.length; i++) {
           const stop = data.stops[i];
           assert.equal(d.querySelector('.tour-stop-note').textContent, stop.note);
-          assert.ok(fs.existsSync(path.resolve(root, 'tours', stop.href)), stop.href);
+          // A stop may link to a section: the page must exist and contain that id.
+          const [file, fragment] = stop.href.split('#');
+          assert.ok(fs.existsSync(path.resolve(root, 'tours', file)), stop.href);
+          if (fragment) assert.ok(fs.readFileSync(path.resolve(root, 'tours', file), 'utf8').includes('id="' + fragment + '"'), stop.href + ': no element with that id');
           assert.equal(d.getElementById('tourProg').textContent, `${i + 1} / ${data.stops.length}`);
           if (i < data.stops.length - 1) d.getElementById('nextBtn').click();
         }
