@@ -16,12 +16,13 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-215da2ed';
+const VERSION = 'cipher-museum-b5aa763c';
 
 const CORE = [
   '/lab/intercept-to-intelligence.html',
   '/js/intercept-exercise.js',
   '/js/structure-exercises.js',
+  '/js/egyptian-case.js',
   '/js/maya-case.js',
   '/lab/reading-the-evidence.html',
   '/js/reading-evidence.js',

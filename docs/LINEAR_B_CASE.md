@@ -2,7 +2,7 @@
 
 Added 3 November 2026 to `lab/decipherment-cases.html#linear-b`, as the priority-2 ancient-script pilot from the 2 November ebook review (section 4). It extends the Linear B structural analogy added the same day in PR #36 rather than building a parallel page. It adds case material to the existing Historical Investigations page and its Evidence Workbench hand-off; the hypothesis and revision framework is unchanged. Egyptian and Maya cases are later follow-ups.
 
-**Specialist review needed.** The transliterations and word identifications on the page (*ti-ri-po-de*, *qe-to-ro-we*, *a-no-we*, *pa-te* = *patēr* or *pantes*) follow Ventris and Chadwick's 1956 edition. A Mycenologist should review them before they are presented as authoritative.
+**Specialist review needed.** The review packet is [`LINEAR_B_SPECIALIST_REVIEW.md`](LINEAR_B_SPECIALIST_REVIEW.md). The transliterations and word identifications on the page (*ti-ri-po-de*, *qe-to-ro-we*, *a-no-we*, *pa-te* = *patēr* or *pantes*) follow Ventris and Chadwick's 1956 edition. A Mycenologist should review them before they are presented as authoritative.
 
 ## What the page now teaches
 

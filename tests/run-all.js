@@ -8,6 +8,9 @@ const ROOT = path.resolve(__dirname, '..');
 const suites = [
   'tests/test-process-exercises.js',
   'tests/test-linear-b-case.js',
+  'tests/test-egyptian-case.js',
+  'tests/test-writing-systems-route.js',
+  'tests/test-linear-b-review-packet.js',
   'tests/test-maya-case.js',
   'tests/test-reading-evidence.js',
   'tests/test-traffic-analysis.js',
