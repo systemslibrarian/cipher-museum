@@ -330,6 +330,7 @@ const TOP_LEVEL = [
   'lab/reading-the-evidence.html',
   'lab/traffic-analysis.html',
   'lab/decipherment-cases.html',
+  'lab/intercept-to-intelligence.html',
   'lab/modern-attack-evidence.html',
 ];
 
