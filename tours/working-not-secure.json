@@ -1,0 +1,48 @@
+{
+  "id": "working-not-secure",
+  "title": "Working Is Not Secure",
+  "description": "A cipher that encrypts and decrypts correctly can still fail its security claim. Separate correctness, performance and security, and test each one on its own terms.",
+  "icon": "⚖",
+  "stops": [
+    {
+      "href": "../lab/working-is-not-secure.html",
+      "label": "Working Is Not Secure: four questions",
+      "note": "Start here: correctness, performance and the security claim are three different questions, and a working cipher can still fail the last one."
+    },
+    {
+      "href": "../ciphers/monoalphabetic.html",
+      "label": "Monoalphabetic Substitution",
+      "note": "26! possible keys, yet language patterns survive encryption. The key space bounds only exhaustive search."
+    },
+    {
+      "href": "../ciphers/one-time-pad.html",
+      "label": "One-Time Pad",
+      "note": "Perfect secrecy holds only for a secret, uniform key as long as the message and used once, and secrecy is not authentication."
+    },
+    {
+      "href": "../ciphers/enigma.html",
+      "label": "Enigma",
+      "note": "A working machine with an enormous key space, attacked through changing systems, keys and procedures."
+    },
+    {
+      "href": "../hall-of-foundations/entropy.html",
+      "label": "Entropy",
+      "note": "How distributions, independence and key generation decide whether a key space is as large as it looks."
+    },
+    {
+      "href": "../hall-of-foundations/reduction.html",
+      "label": "Security reductions",
+      "note": "What “provably as hard as factoring” claims, and what it quietly assumes."
+    },
+    {
+      "href": "../lab/modern-attack-evidence.html",
+      "label": "Modern Attack Evidence",
+      "note": "Judge a security test by the access, data, computation and validation behind it."
+    },
+    {
+      "href": "../lab/working-is-not-secure.html#verdict",
+      "label": "Back to the verdict",
+      "note": "Correct, fast enough to do by hand, and still insecure: the security claim failed without any key search."
+    }
+  ]
+}
