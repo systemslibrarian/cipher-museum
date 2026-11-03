@@ -59,7 +59,7 @@
     {"number":55,"path":"ciphers/book-cipher.html","label":"broken","note":"Security depends on the book, edition and indexing rule; identifying the source or exploiting context can expose messages.","collection":"cipher-history","interactive":true},
     {"number":56,"path":"ciphers/dorabella.html","label":"historical","note":"No generally accepted reading","collection":"cipher-history","interactive":true},
     {"number":57,"path":"ciphers/sigaba.html","label":"historical","note":"Never publicly broken by cryptanalysis in wartime service; obsolete today.","collection":"cipher-history","interactive":true},
-    {"number":58,"path":"ciphers/typex.html","label":"historical","note":"Never publicly broken by cryptanalysis in wartime service; obsolete today.","collection":"cipher-history","interactive":true},
+    {"number":58,"path":"ciphers/typex.html","label":"historical","note":"No general wartime cryptanalytic break established here; captured equipment and keys posed a separate risk. Obsolete today.","collection":"cipher-history","interactive":true},
     {"number":59,"path":"ciphers/des.html","label":"broken","note":"Broken (brute force, 1998)","collection":"cipher-history","interactive":false},
     {"number":60,"path":"ciphers/diffie-hellman.html","label":"secure","collection":"cipher-history","interactive":false},
     {"number":61,"path":"ciphers/rsa.html","label":"secure","collection":"cipher-history","interactive":false},

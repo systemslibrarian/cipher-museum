@@ -2236,7 +2236,7 @@
         "text": "Historical Only",
         "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
       },
-      "securityFailure": "Never publicly broken by cryptanalysis in wartime service; obsolete today.",
+      "securityFailure": "No general wartime cryptanalytic break established here; captured equipment and keys posed a separate risk. Obsolete today.",
       "modernLesson": "Model differences and operational practices matter alongside the rotor count"
     },
     "ua-8295": {

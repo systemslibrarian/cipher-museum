@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-22092d23';
+const VERSION = 'cipher-museum-7f226d7c';
 
 const CORE = [
   '/lab/intercept-to-intelligence.html',

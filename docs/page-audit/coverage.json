@@ -4395,11 +4395,12 @@
     {
       "path": "ciphers/typex.html",
       "title": "Typex — The Cipher Museum",
-      "words": 533,
-      "sha256": "19a1441ddc2b6976fd7eadddc8ea14e9b60f79d01583e9bae98a06504ce6372e",
+      "words": 679,
+      "sha256": "f640dc473934bd4d069481c0f1daaf75b2e27ca840aa0cb9bd68c4430e459b21",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "TYPEX-ARTIFACT"
+        "TYPEX-ARTIFACT",
+        "TYPEX-TURING-2019"
       ],
       "notes": "Corrected commercial-machine origin and country-specific service dates. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
@@ -4418,7 +4419,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "dot_context_additions_2026_11_03": {
+        "record": "docs/DOT_CONTEXT_ADDITIONS_2026-11-03.md",
+        "scope": "Probable capture-assisted reading distinguished from a general wartime break; matching fact summaries and generated trust label. Turing printed pp. 37–38. Existing scrollable tables also made keyboard-focusable.",
+        "validation": "Validation for this change is recorded in the implementing PR. Earlier browser, review and deployment entries are historical and do not certify this revision."
+      }
     },
     {
       "path": "ciphers/ua-8295.html",
@@ -6248,17 +6254,24 @@
         "https://aclanthology.org/W19-6126/",
         "https://aclanthology.org/2022.lt4hala-1.1/",
         "https://doi.org/10.63317/2twwf4kj3cgk",
-        "https://aclanthology.org/2023.findings-eacl.160/"
+        "https://aclanthology.org/2023.findings-eacl.160/",
+        "HANDBELL-2023",
+        "ALCHEMICAL-SECRECY-2023"
       ],
       "notes": "One bounded, original exercise per cited paper. No archival authenticity or reproduction of trained models claimed. Browser and full-suite validation recorded separately.",
-      "sha256": "6dfc3817da72ac6b5426aa2e376167af5291c45fd5c9665435d7b2469b6fcadf",
-      "words": 1084,
+      "sha256": "5ff80870e52987837dfb64a9f73597ee64e1dd86bd3af4bf5356b246f81df32f",
+      "words": 1292,
       "browser_smoke": "Local Chromium checked all four exercises using keyboard activation at 390 and 1280 px; no page errors, overflow, or automated WCAG A/AA violations in main content. This is not historical verification.",
       "reading_evidence_2026_11_02": {
         "date": "2026-11-02",
         "record": "docs/READING_THE_EVIDENCE.md",
         "browser": "docs/page-audit/reading-evidence-browser-20261102.json",
         "scope": "Four invented bounded exercises. Public primary paper links, no source material republished. Selected methods and their non-reproduced parts recorded."
+      },
+      "dot_context_additions_2026_11_03": {
+        "record": "docs/DOT_CONTEXT_ADDITIONS_2026-11-03.md",
+        "scope": "Historical handbell case added separately from the four synthetic exercises; source-reported classifier outputs, chronology and unresolved interpretation. No classifier rerun or decipherment.",
+        "validation": "Validation for this change is recorded in the implementing PR. Earlier browser, review and deployment entries are historical and do not certify this revision."
       }
     },
     {
