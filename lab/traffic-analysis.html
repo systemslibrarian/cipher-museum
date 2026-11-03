@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Reading the Radio Log — The Cipher Museum</title>
+<meta name="description" content="A fictional two-day radio log: map a network without decrypting anything, match changing callsigns, and keep a headquarters hypothesis apart from what was observed.">
+<meta property="og:title" content="Reading the Radio Log — The Cipher Museum">
+<meta property="og:description" content="A fictional two-day radio log: map a network without decrypting anything, match changing callsigns, and keep a headquarters hypothesis apart from what was observed.">
+<link rel="canonical" href="https://ciphermuseum.com/lab/traffic-analysis.html"><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/museum.css"><link rel="stylesheet" href="../css/research-workbench.css"><link rel="stylesheet" href="../css/evidence-exercises.css"><link rel="stylesheet" href="../css/traffic-analysis.css">
+</head><body><a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/><circle cx="16" cy="16" r="2" fill="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="26" x2="16" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="16" x2="6" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="26" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="page-hero"><p class="hero-sub">A traffic-analysis exercise</p><h1>Reading the Radio Log</h1><p class="hero-intro">Two days of invented wireless intercepts. You will not decrypt a single message. Who worked whom, which new callsign was which old station, and what can you honestly claim?</p></header>
+<main id="main-content" class="research-main" tabindex="-1">
+<p class="ta-fiction"><strong>This log is fictional.</strong> Every callsign, frequency, time, bearing and fragment on this page is invented for teaching. It reconstructs a method, not any real network, army or day.</p>
+<p>The method is traffic analysis: the study of the externals of communications—callsigns, frequencies, schedules, routing, volume and where a transmitter is—while message content is left to cryptanalysis. The National Security Agency’s history of the subject describes those elements and their wartime use; the page references below are to that history. Predict, then check: each step records what you chose, so that later evidence can show what your own choices imply. Everything runs in your browser.</p>
+<nav aria-label="Exercise steps"><p><a href="#log">1. Read the log</a> · <a href="#connect">2. Who worked whom?</a> · <a href="#match">3. New callsigns</a> · <a href="#notebook">4. Observed or inferred?</a> · <a href="#stage-two">5. Second-stage evidence</a> · <a href="#debrief">6. Debrief</a> · <a href="#sources">Sources</a></p></nav>
+<noscript><p>The method notes, history and sources remain readable without JavaScript. Enable JavaScript to see the log and run the exercise.</p></noscript>
+
+<section class="evidence-exercise" id="log" aria-labelledby="log-title">
+<h2 id="log-title">1. Read the log</h2>
+<p>One invented net, two days. Our receiver listened from 06:00 to 18:00 each day, with the gaps shown. Each station transmits on its own frequency. At midnight every station took a new callsign. Serial numbers restart at 1 each day.</p>
+<p><strong>Groups</strong> is the length of the enciphered text. The text itself is not part of this exercise, so nothing can be decrypted. <strong>R</strong> followed by a number is a receipt for the other station’s message of that number.</p>
+<div class="research-table"><table class="ta-log"><caption>Day 1 intercept log (invented)</caption><thead><tr><th scope="col">Time</th><th scope="col">kHz</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Serial</th><th scope="col">Groups</th><th scope="col">Intercept operator’s note</th></tr></thead><tbody id="ta-log-1"></tbody></table></div>
+<div class="research-table"><table class="ta-log"><caption>Day 2 intercept log (invented; all callsigns changed at midnight)</caption><thead><tr><th scope="col">Time</th><th scope="col">kHz</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Serial</th><th scope="col">Groups</th><th scope="col">Intercept operator’s note</th></tr></thead><tbody id="ta-log-2"></tbody></table></div>
+<h3>What the log does not contain</h3>
+<p>Missing observations are evidence too. This list is computed from the log and stays on the page throughout the exercise.</p>
+<ul id="ta-missing" class="ta-missing"></ul>
+<p id="ta-volume"></p>
+</section>
+
+<section class="evidence-exercise" id="connect" aria-labelledby="connect-title">
+<h2 id="connect-title">2. Who worked whom?</h2>
+<p>Using only the From and To columns for Day 1, tick each pair of callsigns you saw in contact. Then compare your drawing with the log.</p>
+<fieldset class="ta-pairs"><legend>Day 1 pairs heard in contact</legend><div id="ta-pairs"></div></fieldset>
+<div class="research-actions"><button id="ta-pairs-check" type="button">Compare with the log</button><button id="ta-pairs-clear" type="button">Clear links</button></div>
+<figure class="ta-figure"><div id="ta-network"></div><figcaption>Diagram positions are arbitrary; they are not locations. After comparison: solid lines are in the log, red dashed lines have no supporting row, faint dotted lines are links you missed. A partly read callsign gets its own node.</figcaption></figure>
+<div id="ta-pairs-result" class="evidence-output" role="status" aria-live="polite">Choose the pairs you saw working each other, then compare with the log.</div>
+<h3>Net control, and the headquarters question</h3>
+<p>A military net was typically run by a net control station working its outstations, and the structure of a net could mirror the organization it served (NSA history, p. 7). Choose the callsign that looks like net control. It is recorded as hypothesis H1, kept apart from what you observed.</p>
+<label for="ta-netcontrol">Net control candidate on Day 1</label><select id="ta-netcontrol"><option value="">Choose…</option></select>
+<div class="research-actions"><button id="ta-hypothesis-record" type="button">Record as hypothesis H1</button></div>
+<div id="ta-hypothesis" class="evidence-output" role="status" aria-live="polite">No hypothesis recorded yet.</div>
+</section>
+
+<section class="evidence-exercise" id="match" aria-labelledby="match-title">
+<h2 id="match-title">3. Day 2: the callsigns changed</h2>
+<p>Changing callsigns was meant to break exactly the continuity you need. Analysts often bridged a change through whatever did not change at the same time: frequencies, contact schedules, an operator’s sending style, the pattern of who worked whom (NSA history, pp. 4–6). Match each Day 2 callsign to a Day 1 callsign, or leave it unresolved, then read what your matches imply.</p>
+<div id="ta-matches" class="ta-matches"></div>
+<div class="research-actions"><button id="ta-match-record" type="button">Record matches</button><button id="ta-match-reset" type="button">Reset matches</button></div>
+<p id="ta-match-status" class="research-status" role="status" aria-live="polite">Choose a Day 1 callsign, or leave unresolved, for each Day 2 callsign.</p>
+<div id="ta-consequences" aria-live="polite"></div>
+</section>
+
+<section class="evidence-exercise" id="notebook" aria-labelledby="notebook-title">
+<h2 id="notebook-title">4. Observed, inferred or not supported?</h2>
+<p>Sort each statement by what the log can bear. An observation is in the rows. An inference goes beyond them and could be wrong. Some claims the log cannot support at all.</p>
+<ul class="evidence-key" aria-label="Classification key"><li><span class="ev" data-kind="observed">Observed in the log</span></li><li><span class="ev" data-kind="inference">Inference</span></li><li><span class="ev" data-kind="open">Not supported by this log</span></li></ul>
+<div id="ta-statements"></div>
+<div class="research-actions"><button id="ta-statements-check" type="button">Check classifications</button><button id="ta-statements-reset" type="button">Reset statements</button></div>
+<div id="ta-statements-result" class="evidence-output" role="status" aria-live="polite">Classify each statement, then check.</div>
+</section>
+
+<section class="evidence-exercise" id="stage-two" aria-labelledby="stage-two-title">
+<h2 id="stage-two-title">5. Second-stage evidence</h2>
+<p>Two further sources arrive. Direction finding measures the bearing of a transmitter from a receiving post; bearings from two posts can cross to give an approximate fix (NSA history, p. 6). Operators’ chatter was generally sent unenciphered, and careless chatter could leak callsigns, schedules or even unit designators (p. 6). Record your Day 2 matches first, so the new evidence tests your own choices.</p>
+<div class="research-actions"><button id="ta-reveal" type="button">Reveal second-stage evidence</button></div>
+<p id="ta-reveal-status" class="research-status" role="status" aria-live="polite"></p>
+<div id="ta-stage2" hidden>
+<p>On this invented 60 × 48 km grid, our two DF posts are on the west edge. The invented force faces west, so east is its rear. Each bearing is taken as accurate to ±2°, or ±4° for a very brief signal; the circle round each fix is a rough teaching estimate of that error, not a measured confidence region.</p>
+<div class="research-table"><table><caption>Direction-finding results (invented)</caption><thead><tr><th scope="col">Day</th><th scope="col">Callsign</th><th scope="col">Bearings</th><th scope="col">Result</th><th scope="col">Note</th></tr></thead><tbody id="ta-df-table"></tbody></table></div>
+<figure class="ta-figure"><div id="ta-map"></div><figcaption>Dashed circles: Day 1 fixes. Solid circles: Day 2 fixes. A red line joins two fixes when your matches imply a move larger than the combined uncertainty.</figcaption></figure>
+<h3>A plain-language fragment</h3>
+<p><code id="ta-chatter"></code></p>
+<p id="ta-chatter-note"></p>
+<h3>What your matches now imply</h3>
+<div id="ta-stage2-consequences" aria-live="polite"></div>
+</div>
+</section>
+
+<section class="evidence-exercise" id="debrief" aria-labelledby="debrief-title">
+<h2 id="debrief-title">6. Debrief</h2>
+<p>The debrief opens with the second-stage evidence. Until then, keep your own reasoning.</p>
+<div id="ta-debrief" hidden>
+<p>Here is the exercise key: the invented truth behind the log. A real analyst never received one, and the key contains no plans or intentions, because nothing in a log of externals could test them.</p>
+<div class="research-table"><table><caption>Exercise key (fictional)</caption><thead><tr><th scope="col">Station</th><th scope="col">Day 1</th><th scope="col">Day 2</th><th scope="col">Role in the key</th></tr></thead><tbody id="ta-key"></tbody></table></div>
+<div id="ta-key-compare" role="status" aria-live="polite"></div>
+<p>The plausible wrong match built into this log is GA1 = ZB3. GA1 took over ZB3’s old frequency, and matching by frequency is a sound habit that usually works. Here it invents two events at once: a receipt-only station suddenly sending the most traffic on the net, and DH9 vanishing. Direction finding then turns the same mistake into an overnight move of about 20 km that never happened. The schedule (minute 40), the role (long numbered messages, answered by net control at minute 42) and the chatter about a number 5 all point to DH9 instead.</p>
+</div>
+</section>
+
+<section class="evidence-exercise" id="history" aria-labelledby="history-title">
+<h2 id="history-title">After the exercise: the history behind it</h2>
+<p><strong>Callsigns are not units.</strong> The NSA history recounts how, on the day of Jutland in May 1916, an Admiralty operations director asked what a callsign located in harbour meant and was told it was the German fleet commander’s. The commander used a different callsign at sea; that one stayed at fleet headquarters. The British commander-in-chief was signalled that direction finding placed the German flagship in harbour (pp. 14–15).</p>
+<p><strong>Quiet on the air is not quiet on the ground.</strong> In another First World War example, British signals suggested that Australian and Canadian units were still in Flanders while those units moved under signals silence to Amiens (p. 13). An absence of traffic says something about a radio, not necessarily about a unit.</p>
+<p><strong>Volume is not intention.</strong> Volume was one of the externals analysts studied (p. 3), and in general more traffic allowed more to be inferred (p. 6). But a count of groups measures activity on the air. In this log the apparent Day 2 rise is mostly longer listening. A real rise could still be routine reports, repeats of garbled messages, an exercise, or dummy traffic sent to mislead (p. 8).</p>
+<p><strong>Analysts were not working alone.</strong> Traffic analysis informed cryptanalysts about who was talking to whom, and its products were combined with decrypts and other sources (pp. 4, 8). James Thirsk’s chapter in <em>The Bletchley Park Codebreakers</em> is a participant’s account of this work as a wartime “log-reader”.</p>
+</section>
+
+<section class="evidence-exercise" id="limits" aria-labelledby="limits-title">
+<h2 id="limits-title">How this differs from real traffic analysis</h2>
+<ul class="evidence-steps">
+<li><strong>Scale.</strong> Real logs ran to thousands of entries across many nets. This one has 34 rows.</li>
+<li><strong>Callsign systems.</strong> Here callsigns change once. Real systems changed periodically to a prearranged plan, which analysts sometimes recovered and could then predict (p. 4).</li>
+<li><strong>Direction finding.</strong> The ±2° readings and fix circles are a rough model. Real bearings could be much worse, and a fix is an area, not a point.</li>
+<li><strong>Deception.</strong> Real targets changed procedures, reduced time on the air and sent dummy traffic (p. 8). This log contains no deliberate deception.</li>
+<li><strong>No answer key.</strong> Real analysts revised hypotheses as evidence accumulated and seldom learned for certain whether they were right.</li>
+</ul>
+</section>
+
+<section class="evidence-exercise" id="onward" aria-labelledby="onward-title">
+<h2 id="onward-title">Where this leads</h2>
+<p><strong>The history route.</strong> Continue with <a href="../ciphers/station-hypo.html">Station HYPO</a>, where partial JN-25 recovery worked alongside traffic analysis and operational context before Midway, or follow the <a href="../tours/tour.html?tour=wartime">Ciphers at War tour</a>. The <a href="../halls/codebreakers.html">Hall of Codebreakers</a> holds the people behind the methods.</p>
+<p><strong>The modern version.</strong> <a href="https://systemslibrarian.github.io/crypto-lab-blind-relay/#corr-h">Blind Relay</a>, in Crypto Lab, runs the same move on modern logs. Its “Correlation without collusion” exhibit joins an Oblivious HTTP relay’s log to the gateway’s log without touching key material, on ciphertext size and on timing. Padding merges the size join into one anonymity set; when traffic is sparse, the timing join still links requests. Where sizes or arrivals coincide, it reports an anonymity set or an overlap instead of guessing, the same discipline as leaving a callsign unresolved here.</p>
+<div class="research-table"><table><caption>The same join, then and now</caption><thead><tr><th scope="col">In this radio log</th><th scope="col">In Blind Relay’s logs</th></tr></thead><tbody><tr><td>Message length in groups</td><td>Ciphertext size</td></tr><tr><td>Contact schedule: the minute past the hour</td><td>Arrival time at relay and gateway</td></tr><tr><td>Leaving a callsign unresolved</td><td>Reporting an ambiguous join instead of guessing</td></tr></tbody></table></div>
+</section>
+
+<section class="evidence-exercise" id="sources" aria-labelledby="sources-title">
+<h2 id="sources-title">Sources</h2>
+<ul class="evidence-steps">
+<li class="ta-source">Donald A. Borrmann, William T. Kvetkas, Charles V. Brown, Michael J. Flatley and Robert Hunt, <em>The History of Traffic Analysis: World War I – Vietnam</em> (Center for Cryptologic History, National Security Agency, 2013): <a href="https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TRAFFIC_ANALYSIS.PDF">NSA PDF</a>; <a href="https://www.govinfo.gov/app/details/GOVPUB-D-PURL-gpo91580">GovInfo copy</a>. Used for the definition and elements of traffic analysis (pp. 3–6), net structure (p. 7), deception and dummy traffic (pp. 8–9), and the First World War examples (pp. 13–15). Page numbers are the brochure’s printed numbers.</li>
+<li class="ta-source">Whitfield Diffie and Susan Landau, <em>Privacy on the Line: The Politics of Wiretapping and Encryption</em>, updated and expanded edition (MIT Press, 2007), <a href="https://doi.org/10.7551/mitpress/5572.001.0001">open-access edition</a>. They call traffic analysis, not cryptanalysis, “the heart of a communications intelligence organization” (ch. 4, p. 102), and find a narrower form of it in law-enforcement records of the numbers a line calls (ch. 5, p. 133).</li>
+<li class="ta-source">James Thirsk, “Traffic analysis: a log-reader’s tale”, chapter 15 in Ralph Erskine and Michael Smith (eds), <em>The Bletchley Park Codebreakers</em> (Biteback, 2011). It first appeared as chapter 14 of <em>Action This Day</em> (2001): <a href="https://cryptocellar.org/ActionContents.html">contents of the 2001 edition</a>. A participant’s account; this exercise does not reproduce its examples.</li>
+</ul>
+<p>The log, bearings, chatter and key are original to this page. No private copy of any source is linked.</p>
+</section>
+</main><footer></footer><script src="../js/nav.js" defer></script><script src="../js/traffic-analysis.js" defer></script></body></html>

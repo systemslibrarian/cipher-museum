@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-d0ed0475';
+const VERSION = 'cipher-museum-22092d23';
 
 const CORE = [
   '/lab/intercept-to-intelligence.html',
@@ -24,6 +24,9 @@ const CORE = [
   '/js/structure-exercises.js',
   '/lab/reading-the-evidence.html',
   '/js/reading-evidence.js',
+  '/lab/traffic-analysis.html',
+  '/js/traffic-analysis.js',
+  '/css/traffic-analysis.css',
   '/css/evidence-exercises.css',
   '/js/evidence-exercises.js',
   '/first-codebreak.html',

@@ -2414,8 +2414,8 @@
     {
       "path": "ciphers/jn-25.html",
       "title": "JN-25 (Japanese Naval Code) - The Cipher Museum",
-      "words": 696,
-      "sha256": "c73f63ba677fca00b80a382bbb18b12f437b67a2c73af619877e0a274470ad78",
+      "words": 700,
+      "sha256": "7aaefd9dd436ac6fd2c1a04d181cdddd73df1c8d0ea8484f9389aec73184949c",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ROCHEFORT-WATER-2021"
@@ -2442,6 +2442,12 @@
         "scope": "Description, og:description and twitter:description replaced with the Hall VII card wording: partial recoveries by Allied teams, including Station HYPO, rather than a system broken by HYPO or a single breakthrough that exposed AF. Matches the body, which credits OP-20-G and British and Australian partners.",
         "verification": "Compared with the exhibit body and meta description at the baseline; regression guards in tests/test-page-audit-claims.js were run against the old text and failed before the change.",
         "limits": "Summary consistency only. No fresh source reading or browser check; the frozen audit reading pack was not regenerated."
+      },
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Lorenz related-card tag changed from “Strategic-level wartime traffic analysis” to “German strategic teleprinter cipher attacked at Bletchley Park”: Lorenz traffic was attacked by cryptanalysis, not traffic analysis. No other change to prose or metadata.",
+        "verification": "Guarded by block 11 of tests/test-traffic-analysis.js, which failed against the old tag; full npm test run.",
+        "limits": "Card tag only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
       }
     },
     {
@@ -3638,8 +3644,8 @@
     {
       "path": "ciphers/rochefort.html",
       "title": "Joseph Rochefort — The Cipher Museum",
-      "words": 649,
-      "sha256": "938dcb3baca670afb050f03ee86b749b937c36a518488db73fbdd82b759894ce",
+      "words": 653,
+      "sha256": "0489006e21c93730ed2664f4ec433435e8f734972e767b2dba812a8512918fda",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NSA-ROCHEFORT",
@@ -3665,7 +3671,13 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Key Break fact row (summary and Quick Facts) qualified from “JN-25 — Imperial Japanese Navy main operational cipher” to “JN-25, partially recovered — Imperial Japanese Navy main operational code”, matching the page body. No other change to prose or metadata.",
+        "verification": "Guarded by block 11 of tests/test-traffic-analysis.js, which failed against the old wording; full npm test run.",
+        "limits": "Fact row only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
+      }
     },
     {
       "path": "ciphers/rosetta-stone.html",
@@ -4180,8 +4192,8 @@
     {
       "path": "ciphers/station-hypo.html",
       "title": "Station HYPO — Pearl Harbor to Midway — The Cipher Museum",
-      "words": 663,
-      "sha256": "947249a54e58c2ea5f892a073bb589e755789a85dcb92f089ce4a24d6a6dea4b",
+      "words": 690,
+      "sha256": "45d916df8ef89451108b51137f77109b3032fd9ab21fee07b5b6588930a8ce2f",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NSA-ROCHEFORT",
@@ -4204,7 +4216,13 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added one related card linking the invented traffic-analysis exercise (lab/traffic-analysis.html). Corrected two related-card tags: JN-25 from “The cipher HYPO broke” to “The naval code attacked by HYPO and other Allied units”, matching the page body and the Rochefort page; Purple from “US diplomatic code MAGIC parallel operation” to “Japanese diplomatic cipher machine, a source of MAGIC”, matching the Purple page. Key Break fact row (summary and Quick Facts) qualified from “JN-25 — Imperial Japanese Navy main cipher” to “JN-25, partially recovered — Imperial Japanese Navy main operational code”, matching the page body. No other change to exhibit prose or metadata.",
+        "verification": "Link, card text, both corrected tags and the Key Break rows checked by tests/test-traffic-analysis.js; each guard failed against the old wording. Full npm test run.",
+        "limits": "Card and fact-row changes only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
+      }
     },
     {
       "path": "ciphers/straddling-checkerboard.html",
@@ -4867,6 +4885,45 @@
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
     },
     {
+      "path": "classical-guide.html",
+      "sources": [],
+      "title": "Classical Codebreaking Topic Guide — The Cipher Museum",
+      "words": 585,
+      "sha256": "8a042c9bb5b3120fe94fa38002f882da199138a9477b2f2881cf2e92e9deda0b",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "All 27 Black Chamber subject labels mapped to existing museum exhibits or new lessons. Separates Sator anagram from historical intent, digraph category from Playfair, and Babington from the 2023 recovery. All destinations and fragments verified.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
+    },
+    {
+      "path": "codebreak-answers.html",
+      "sources": [],
+      "title": "First Codebreak — Facilitator’s Answers — The Cipher Museum",
+      "words": 586,
+      "sha256": "dc12ccbabda757dbecda91ab2c6dae0c8dfa00dfe0df1438cb21cd8c17e12b45",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "Generated separate facilitator answer sheet; ciphertexts, known answers, actual repetition distances and equivalent key periods checked by executable tests.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
+    },
+    {
+      "path": "codebreak-worksheet.html",
+      "sources": [],
+      "title": "First Codebreak — Student Activities — The Cipher Museum",
+      "words": 508,
+      "sha256": "517924d48d66ffaf9761bd1fd6bccccbf8f56a4d40927366e376dfea4b3ecdaa",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "Generated student worksheet with original ciphertext fixtures, clue ladder, reflection and group activities. Full plaintexts and Vigenère key are absent; facilitator answers are a separate linked document.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
+    },
+    {
       "path": "community/index.html",
       "title": "Community Codebreaks — The Cipher Museum",
       "words": 374,
@@ -4987,6 +5044,19 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+    },
+    {
+      "path": "first-codebreak.html",
+      "sources": [],
+      "title": "Your First Codebreak — The Cipher Museum",
+      "words": 972,
+      "sha256": "9c8d85563b57dd3218ae0a68a628771c46b85f97260d80be0ebd3774c044a214",
+      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "revision_2026_11_02": {
+        "notes": "Original substitution lesson with contextual clues and shared partial-key engine; full Vigenère attack; five explicitly small modern-language samples; whole-token homophone comparison. DOM tests verify wrong-guess rejection, undo/locks, recovery and answer invalidation. Browser review recorded separately.",
+        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
+        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      }
     },
     {
       "path": "further-reading.html",
@@ -5682,8 +5752,8 @@
     {
       "path": "halls/codebreakers.html",
       "title": "Hall X: Hall of Codebreakers — The Cipher Museum",
-      "words": 2889,
-      "sha256": "34a2a805f679525c72e86f22dfe145938e010976e0665855bf7ab7b20f31ec0b",
+      "words": 3024,
+      "sha256": "6b6c05d115d4a08895569fd251c92cdc1a5a740d35c2af8645fba0e7e1951a4a",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
@@ -5703,7 +5773,13 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added a \"Traffic Analysts and Log-Readers\" story panel linking the exercise, and the NSA traffic-analysis history to Sources and Reading. Panel claims (externals studied; locating units, guiding interception, supporting cryptanalysts; the Jutland callsign misreading) are from that history, pp. 3-8 and 14-15. Thirsk is named only as the author of a log-reader account.",
+        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
+        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
+      }
     },
     {
       "path": "halls/culture.html",
@@ -6090,24 +6166,18 @@
       }
     },
     {
-      "path": "lab/reading-the-evidence.html",
-      "title": "Reading the Evidence — The Cipher Museum",
-      "status": "2 November 2026: original synthetic teaching examples and source statements checked against selected sections of linked papers; source limitations recorded in docs/READING_THE_EVIDENCE.md",
-      "sources": [
-        "https://aclanthology.org/W19-6126/",
-        "https://aclanthology.org/2022.lt4hala-1.1/",
-        "https://doi.org/10.63317/2twwf4kj3cgk",
-        "https://aclanthology.org/2023.findings-eacl.160/"
-      ],
-      "notes": "One bounded, original exercise per cited paper. No archival authenticity or reproduction of trained models claimed. Browser and full-suite validation recorded separately.",
-      "sha256": "6dfc3817da72ac6b5426aa2e376167af5291c45fd5c9665435d7b2469b6fcadf",
-      "words": 1084,
-      "browser_smoke": "Local Chromium checked all four exercises using keyboard activation at 390 and 1280 px; no page errors, overflow, or automated WCAG A/AA violations in main content. This is not historical verification.",
-      "reading_evidence_2026_11_02": {
-        "date": "2026-11-02",
-        "record": "docs/READING_THE_EVIDENCE.md",
-        "browser": "docs/page-audit/reading-evidence-browser-20261102.json",
-        "scope": "Four invented bounded exercises. Public primary paper links, no source material republished. Selected methods and their non-reproduced parts recorded."
+      "path": "lab/intercept-to-intelligence.html",
+      "title": "From Intercept to Intelligence — The Cipher Museum",
+      "sources": [],
+      "sha256": "8e95c4fce4a53cdac239392e63c15b4a719f1a5e20d741f2bf60ff8844f4e1c7",
+      "words": 374,
+      "notes": "\n3 November 2026: New original Army/Air Force workflow analogy, with a declared Caesar key rather than an Enigma reconstruction. Read all prose and computed states. I1 gaps stay unchanged; I2 checks a proposed reading, while metadata and the recorded instruction do not establish identities or an event. Welchman (1984), chapters 9–10, pp. 156–161; Budiansky (2002), pp. 211–215. DOM/unit checks and an intentionally false comparison mutation passed; Chromium interaction checked the accepted reading and rejected event inference.",
+      "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
+      "learning_case_review": {
+        "date": "2026-11-03",
+        "scope": "New original Army/Air Force workflow analogy, with a declared Caesar key rather than an Enigma reconstruction. Read all prose and computed states. I1 gaps stay unchanged; I2 checks a proposed reading, while metadata and the recorded instruction do not establish identities or an event. Welchman (1984), chapters 9–10, pp. 156–161; Budiansky (2002), pp. 211–215. DOM/unit checks and an intentionally false comparison mutation passed; Chromium interaction checked the accepted reading and rejected event inference.",
+        "tests": "tests/test-process-exercises.js; full npm test except the ledger freshness gate passed, with ledger corrected afterward",
+        "limits": "Existing historical claims outside the described additions were not newly reverified. Prior browser records describe earlier revisions."
       }
     },
     {
@@ -6171,10 +6241,53 @@
       "research_review_followup_2026_11_01": "revised"
     },
     {
+      "path": "lab/reading-the-evidence.html",
+      "title": "Reading the Evidence — The Cipher Museum",
+      "status": "2 November 2026: original synthetic teaching examples and source statements checked against selected sections of linked papers; source limitations recorded in docs/READING_THE_EVIDENCE.md",
+      "sources": [
+        "https://aclanthology.org/W19-6126/",
+        "https://aclanthology.org/2022.lt4hala-1.1/",
+        "https://doi.org/10.63317/2twwf4kj3cgk",
+        "https://aclanthology.org/2023.findings-eacl.160/"
+      ],
+      "notes": "One bounded, original exercise per cited paper. No archival authenticity or reproduction of trained models claimed. Browser and full-suite validation recorded separately.",
+      "sha256": "6dfc3817da72ac6b5426aa2e376167af5291c45fd5c9665435d7b2469b6fcadf",
+      "words": 1084,
+      "browser_smoke": "Local Chromium checked all four exercises using keyboard activation at 390 and 1280 px; no page errors, overflow, or automated WCAG A/AA violations in main content. This is not historical verification.",
+      "reading_evidence_2026_11_02": {
+        "date": "2026-11-02",
+        "record": "docs/READING_THE_EVIDENCE.md",
+        "browser": "docs/page-audit/reading-evidence-browser-20261102.json",
+        "scope": "Four invented bounded exercises. Public primary paper links, no source material republished. Selected methods and their non-reproduced parts recorded."
+      }
+    },
+    {
+      "path": "lab/traffic-analysis.html",
+      "title": "Reading the Radio Log — The Cipher Museum",
+      "words": 1727,
+      "sha256": "d8d661359535006e99a9e8b4b06a23c2295a86ff120a5e8836530b9f586de090",
+      "status": "2 November 2026: new bounded exercise; invented log, bearings, chatter and key; historical statements checked against the cited NSA history pages; source limits recorded in docs/TRAFFIC_ANALYSIS_EXERCISE.md",
+      "sources": [
+        "https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TRAFFIC_ANALYSIS.PDF",
+        "https://www.govinfo.gov/app/details/GOVPUB-D-PURL-gpo91580",
+        "https://doi.org/10.7551/mitpress/5572.001.0001",
+        "https://cryptocellar.org/ActionContents.html",
+        "https://systemslibrarian.github.io/crypto-lab-blind-relay/"
+      ],
+      "notes": "Fictional teaching reconstruction, not historical data. NSA history read in full (GovInfo copy). Diffie and Landau checked against the open-access text of the MIT Press edition (ISBN 9780262256018, Internet Archive copy): quotation from ch. 4, p. 102; law-enforcement form ch. 5, p. 133. Thirsk chapter cited, not read.",
+      "browser_smoke": "Local Chromium at 390 and 1280 px: no page errors or document overflow; keyboard-driven flow through steps 2-5; phantom-move line present with the wrong match and absent after correction. Not an automated WCAG audit and not historical verification.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "date": "2026-11-02",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md",
+        "browser": "docs/page-audit/traffic-analysis-browser-20261102.json",
+        "scope": "One bounded invented exercise; public source links only; acceptance guards and 18 mutation checks recorded in the record, plus five source and neighbouring-card guards (2026-11-03) that failed before their fixes."
+      }
+    },
+    {
       "path": "lab/workbench.html",
       "title": "Codebreaker's Workbench — The Cipher Museum",
-      "words": 2102,
-      "sha256": "95a950abe3add86b5222e32d1c3c0878861c494a33d7910d1e850dd6998bab54",
+      "words": 2109,
+      "sha256": "6b10916c032c4c66cade91cbbd01da29fe29abca85a49fe7fd6c733286d7c441",
       "status": "ebook follow-up implementation and local validation complete",
       "sources": [
         "GRAY-1990-CORRECTED-2023"
@@ -6210,6 +6323,12 @@
       "reading_evidence_2026_11_02": {
         "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
         "record": "docs/READING_THE_EVIDENCE.md"
+      },
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added a third onward link to the traffic-analysis exercise in the lab introduction panel.",
+        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
+        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
       }
     },
     {
@@ -6497,8 +6616,8 @@
     {
       "path": "teaching.html",
       "title": "Teaching Resources — The Cipher Museum",
-      "words": 707,
-      "sha256": "4ff7e9197edb59fa031fc3341bb79af0ae4fa97945199f9f2096b19c92a5a093",
+      "words": 756,
+      "sha256": "9a71f60f0b69247671db2dfa7880209d3fe26fd3645f9afa6b0973076bf82942",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "LASRY-2018"
@@ -6549,6 +6668,12 @@
       "reading_evidence_2026_11_02": {
         "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
         "record": "docs/READING_THE_EVIDENCE.md"
+      },
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added one educator paragraph describing the invented traffic-analysis exercise.",
+        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
+        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
       }
     },
     {
@@ -6688,73 +6813,6 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
-    },
-    {
-      "path": "classical-guide.html",
-      "sources": [],
-      "title": "Classical Codebreaking Topic Guide — The Cipher Museum",
-      "words": 585,
-      "sha256": "8a042c9bb5b3120fe94fa38002f882da199138a9477b2f2881cf2e92e9deda0b",
-      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
-      "revision_2026_11_02": {
-        "notes": "All 27 Black Chamber subject labels mapped to existing museum exhibits or new lessons. Separates Sator anagram from historical intent, digraph category from Playfair, and Babington from the 2023 recovery. All destinations and fragments verified.",
-        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
-        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
-      }
-    },
-    {
-      "path": "codebreak-answers.html",
-      "sources": [],
-      "title": "First Codebreak — Facilitator’s Answers — The Cipher Museum",
-      "words": 586,
-      "sha256": "dc12ccbabda757dbecda91ab2c6dae0c8dfa00dfe0df1438cb21cd8c17e12b45",
-      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
-      "revision_2026_11_02": {
-        "notes": "Generated separate facilitator answer sheet; ciphertexts, known answers, actual repetition distances and equivalent key periods checked by executable tests.",
-        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
-        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
-      }
-    },
-    {
-      "path": "codebreak-worksheet.html",
-      "sources": [],
-      "title": "First Codebreak — Student Activities — The Cipher Museum",
-      "words": 508,
-      "sha256": "517924d48d66ffaf9761bd1fd6bccccbf8f56a4d40927366e376dfea4b3ecdaa",
-      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
-      "revision_2026_11_02": {
-        "notes": "Generated student worksheet with original ciphertext fixtures, clue ladder, reflection and group activities. Full plaintexts and Vigenère key are absent; facilitator answers are a separate linked document.",
-        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
-        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
-      }
-    },
-    {
-      "path": "first-codebreak.html",
-      "sources": [],
-      "title": "Your First Codebreak — The Cipher Museum",
-      "words": 972,
-      "sha256": "9c8d85563b57dd3218ae0a68a628771c46b85f97260d80be0ebd3774c044a214",
-      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
-      "revision_2026_11_02": {
-        "notes": "Original substitution lesson with contextual clues and shared partial-key engine; full Vigenère attack; five explicitly small modern-language samples; whole-token homophone comparison. DOM tests verify wrong-guess rejection, undo/locks, recovery and answer invalidation. Browser review recorded separately.",
-        "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
-        "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
-      }
-    },
-    {
-      "path": "lab/intercept-to-intelligence.html",
-      "title": "From Intercept to Intelligence — The Cipher Museum",
-      "sources": [],
-      "sha256": "8e95c4fce4a53cdac239392e63c15b4a719f1a5e20d741f2bf60ff8844f4e1c7",
-      "words": 374,
-      "notes": "\n3 November 2026: New original Army/Air Force workflow analogy, with a declared Caesar key rather than an Enigma reconstruction. Read all prose and computed states. I1 gaps stay unchanged; I2 checks a proposed reading, while metadata and the recorded instruction do not establish identities or an event. Welchman (1984), chapters 9–10, pp. 156–161; Budiansky (2002), pp. 211–215. DOM/unit checks and an intentionally false comparison mutation passed; Chromium interaction checked the accepted reading and rejected event inference.",
-      "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
-      "learning_case_review": {
-        "date": "2026-11-03",
-        "scope": "New original Army/Air Force workflow analogy, with a declared Caesar key rather than an Enigma reconstruction. Read all prose and computed states. I1 gaps stay unchanged; I2 checks a proposed reading, while metadata and the recorded instruction do not establish identities or an event. Welchman (1984), chapters 9–10, pp. 156–161; Budiansky (2002), pp. 211–215. DOM/unit checks and an intentionally false comparison mutation passed; Chromium interaction checked the accepted reading and rejected event inference.",
-        "tests": "tests/test-process-exercises.js; full npm test except the ledger freshness gate passed, with ledger corrected afterward",
-        "limits": "Existing historical claims outside the described additions were not newly reverified. Prior browser records describe earlier revisions."
-      }
     }
   ],
   "checkpoint": {

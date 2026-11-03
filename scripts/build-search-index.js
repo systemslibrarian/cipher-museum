@@ -328,6 +328,7 @@ const TOP_LEVEL = [
   'lab/workbench.html',
   'lab/evidence-workbench.html',
   'lab/reading-the-evidence.html',
+  'lab/traffic-analysis.html',
   'lab/decipherment-cases.html',
   'lab/intercept-to-intelligence.html',
   'lab/modern-attack-evidence.html',
