@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-b81ed7aa';
+const VERSION = 'cipher-museum-34487488';
 
 const CORE = [
   '/ciphers/gripenstierna.html',
@@ -97,6 +97,7 @@ const CORE = [
   '/js/artifact-cards-data.min.js',
   '/js/demo-loader.min.js',
   '/js/lightbox.js',
+  '/fonts/noto-sans-egyptian-hieroglyphs-subset.woff2',
   '/fonts/cinzel-400-latin-ext.woff2',
   '/fonts/cinzel-400-latin.woff2',
   '/fonts/cinzel-600-latin-ext.woff2',

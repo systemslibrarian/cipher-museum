@@ -1,5 +1,7 @@
 # Linear B case: specialist review packet
 
+**Status (3 November 2026): no specialist reviewer is available.** This packet is kept as an inventory of every Linear B claim on the site, held in step with the page by a test. The case states its verification status in its source note instead. The cover note below stays usable if a reviewer becomes available.
+
 Prepared 3 November 2026 for a reviewer who works on Linear B or Mycenaean Greek. Everything you need is on this page; you do not need to open the repository.
 
 **What is being reviewed.** The Linear B section of the Cipher Museum's *How a Decipherment Becomes Evidence* page: <https://ciphermuseum.com/lab/decipherment-cases.html#linear-b>. It was added in PR #36 and extended in PR #37, both merged on 3 November 2026. It is a short teaching case, not a scholarly edition.
