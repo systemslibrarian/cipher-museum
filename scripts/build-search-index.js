@@ -179,6 +179,8 @@ function buildTags(...items) {
 // a hyphenated designation does not belong here, because search already matches
 // a separator-insensitive form ("m209" reaches "M-209").
 const CIPHER_KEYWORDS = {
+  'enigma.html': ['rejewski', 'cycle structure', 'conjugation', 'non-crashing wheel order', 'key rules'],
+  'joan-clarke.html': ['banburismus', 'decibans', 'likelihood ratio', 'bayesian evidence'],
   // Named for the modern language that inherited the script; the exhibit and
   // its description speak only of Geʼez, so "amharic" has nowhere else to match.
   'amharic-ge-ez-ciphers.html': ['amharic', 'ethiopic', 'geez'],
@@ -329,6 +331,7 @@ const TOP_LEVEL = [
   'lab/evidence-workbench.html',
   'lab/reading-the-evidence.html',
   'lab/traffic-analysis.html',
+  'lab/kisses.html',
   'lab/decipherment-cases.html',
   'lab/intercept-to-intelligence.html',
   'lab/modern-attack-evidence.html',

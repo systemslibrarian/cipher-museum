@@ -1045,6 +1045,23 @@
       "securityFailure": "Étienne Bazeries (1893): syllabic frequency analysis and contextual cribs.",
       "modernLesson": "Decoy tokens & variable-length codewords"
     },
+    "gripenstierna": {
+      "name": "Gripenstierna’s Cipher Machine",
+      "hall": "VII",
+      "era": "1786 · Sweden",
+      "family": "Mechanical polyalphabetic cipher device",
+      "region": "Sweden",
+      "usedBy": "Documented 1786 construction; operational use not established here",
+      "keyType": "Disk arrangement",
+      "keyIdea": "Gripenstierna’s documented 1786 Swedish cipher device used 57 disks and separated plaintext access from ciphertext copying. The original is lost; later replicas are reconstructions.",
+      "trust": {
+        "key": "historical",
+        "text": "Historical Only",
+        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
+      },
+      "securityFailure": "Historical device; original lost, later reconstructed from documents. No modern security claim.",
+      "modernLesson": "Separate access to plaintext from handling ciphertext"
+    },
     "gronsfeld": {
       "name": "Gronsfeld Cipher",
       "hall": "III",
