@@ -61,12 +61,12 @@
   <h1 class="page-title">Typex</h1>
   <div class="trust-label-wrap"><a class="trust-label trust-label--historical" href="../museum-map.html#trust-labels" title="Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise." aria-label="Trust label: Historical Only. Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h11v12a2 2 0 0 0 2 2H6a3 3 0 0 1-3-3V7z"/><path d="M16 5a2 2 0 0 1 2 2v8h3a0 0 0 0 1 0 0v2a2 2 0 0 1-2 2"/></svg><span class="trust-label__text">Historical Only</span></a></div>
   <p class="page-tagline">Britain’s Enigma-derived cipher machine — five rotor positions, with features that varied between models.</p>
-  <p class="exhibit-status-note">Never publicly broken by cryptanalysis in wartime service; obsolete today.</p>
+  <p class="exhibit-status-note">No general wartime cryptanalytic break established here; captured equipment and keys posed a separate risk. Obsolete today.</p>
   <div class="exhibit-facts">
     <div class="fact"><span class="fact-label">Origin</span><span class="fact-value">Wing Commander O.G.W. Lywood and team, derived from commercial Enigma designs</span></div>
     <div class="fact"><span class="fact-label">Year</span><span class="fact-value">In service from 1937; retirement varied by country</span></div>
     <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">5 rotors (3 stepping + 2 stator) chosen from a set of 10 or 14</span></div>
-    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Never confirmed broken — German cryptanalysts at OKW/Chi reportedly judged it not worth attacking</span></div>
+    <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">No general break established here; some capture-assisted reading was probable (Dermot Turing, 2019)</span></div>
     <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Model differences and operational practices matter alongside the rotor count</span></div>
   </div>
 </div>
@@ -80,12 +80,15 @@
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
       <p>Typex developed from commercial Enigma designs under British military direction. It added features including five rotor positions and printed output. Some models had plugboards, so “no plugboard” is not a description of the whole family. Modified machines also helped Bletchley Park process Enigma traffic once settings had been recovered.</p>
-      <p>In the public record, this system was never publicly broken by cryptanalysis in wartime service. That historical record does not establish security today; this obsolete system is presented for historical study.</p>
+      <p>The sources cited here do not establish a general German wartime cryptanalytic break. That does not exclude reading traffic with captured equipment and key material, and it does not establish security today.</p>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>Typex Mark I appeared in 1937 and Mark II in 1939. Later versions differed in interfaces and electrical arrangements. The public wartime record cited here does not establish a successful German cryptanalytic reading; this is a historical observation, not proof of timeless security.</p></div>
+      <div class="panel-body"><p>Typex Mark I appeared in 1937 and Mark II in 1939. Later versions differed in interfaces and electrical arrangements.</p>
+      <h2 id="typex-scare">Reading traffic is not always a general cryptanalytic break</h2>
+      <p>In his study of the 1943 Typex scare, Dermot Turing concludes that some messages were probably read with help from captured machines, rotors and keys. His reconstruction distinguishes this from a general cryptanalytic solution. The surviving evidence leaves uncertainty about the extent and duration of exploitation.</p>
+      <p>The lesson is operational: an adversary may read messages without defeating the cipher in general. This account does not establish that every Typex variant was compromised. See Turing’s <a href="https://ep.liu.se/ecp/158/004/ecp19158004.pdf">HistoCrypt 2019 paper</a>, printed pp. 37–38; the museum has not independently examined the underlying archival records.</p></div>
     </div>
 
     <div class="panel">
@@ -98,7 +101,7 @@
       <div class="panel-body">
         <div class="attack-panel">
           <div class="attack-name">Why It Held</div>
-          <div class="attack-diff">No successful German wartime cryptanalytic reading established here</div>
+          <div class="attack-diff">No general German wartime cryptanalytic break established here</div>
           <p class="attack-desc">Additional rotor settings and multi-notch movement alter the search problem, but adding two rotors does not mathematically “square the keyspace.” Nor does removing a plugboard automatically improve security: Enigma’s plugboard enlarged its keyspace, even though attacks could exploit constraints in the full machine.</p>
         </div>
       </div>
@@ -106,7 +109,7 @@
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-lens"/></svg></span><span class="panel-title">What It Teaches Modern Cryptography</span></div>
-      <div class="panel-body">
+      <div class="panel-body" tabindex="0" role="region" aria-label="Typex and modern cryptography comparison">
         <table class="cipher-table">
           <thead><tr><th>Concept from Typex</th><th>Modern Evolution</th></tr></thead>
           <tbody>
@@ -137,7 +140,7 @@
       <div class="panel-head" style="background:var(--gold-glow);border-color:var(--gold-b);">
         <span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-swords"/></svg></span><span class="panel-title" style="color:var(--gold);">Quick Facts</span>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" tabindex="0" role="region" aria-label="Typex quick facts">
         <table class="cipher-table">
           <tbody>
             <tr><td>Era</td><td>WWII · 1937</td></tr>
@@ -145,7 +148,7 @@
             <tr><td>Origin</td><td>Wing Commander O.G.W. Lywood and team, derived from commercial Enigma designs</td></tr>
             <tr><td>Year</td><td>In service from 1937; retirement varied by country</td></tr>
             <tr><td>Key Type</td><td>5 rotors (3 stepping + 2 stator) chosen from a set of 10 or 14</td></tr>
-            <tr><td>Broken By</td><td>Never confirmed broken — German cryptanalysts at OKW/Chi reportedly judged it not worth attacking</td></tr>
+            <tr><td>Broken By</td><td>No general break established here; some capture-assisted reading was probable (Dermot Turing, 2019)</td></tr>
             <tr><td>Modern Lesson</td><td>Model differences and operational practices matter alongside the rotor count</td></tr>
           </tbody>
         </table>
@@ -154,7 +157,7 @@
   </div>
 </div>
 
-<section class="panel" aria-labelledby="audit-reading"><div class="panel-body"><h2 id="audit-reading">Sources and Reading</h2><p>Crypto Museum’s <a href="https://www.cryptomuseum.com/crypto/uk/typex/index.htm">Typex collection and model descriptions</a> distinguish the 1937 production machines, later plugboards and differing postwar service dates. The widget uses simplified generated settings.</p></div></section>
+<section class="panel" aria-labelledby="audit-reading"><div class="panel-body"><h2 id="audit-reading">Sources and Reading</h2><p>Crypto Museum’s <a href="https://www.cryptomuseum.com/crypto/uk/typex/index.htm">Typex collection and model descriptions</a> distinguish the 1937 production machines, later plugboards and differing postwar service dates. The widget uses simplified generated settings.</p><p>Dermot Turing, <a href="https://ep.liu.se/en/conference-article.aspx?series=ecp&amp;issue=158&amp;Article_No=4"><em>The Typex Scare of 1943: How Well Did the British React to a Cypher-Security Scare?</em></a>, HistoCrypt 2019, pp. 31–39, especially pp. 37–38: an attributed historical reconstruction of probable capture-assisted reading and the British response to uncertain compromise evidence.</p></div></section>
 
 <section class="related-exhibits">
   <h2 class="related-exhibits__heading">Related Exhibits</h2>
