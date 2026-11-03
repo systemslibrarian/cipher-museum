@@ -2403,7 +2403,7 @@
       "path": "ciphers/jn-25.html",
       "title": "JN-25 (Japanese Naval Code) - The Cipher Museum",
       "words": 700,
-      "sha256": "5a81eb406be50dc76eb979d737f1249ad491d3e25db8c1e4d80bd274114cba61",
+      "sha256": "7aaefd9dd436ac6fd2c1a04d181cdddd73df1c8d0ea8484f9389aec73184949c",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ROCHEFORT-WATER-2021"
@@ -2426,6 +2426,11 @@
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "ebook_summary_drift_2026_11_02": {
+        "scope": "Description, og:description and twitter:description replaced with the Hall VII card wording: partial recoveries by Allied teams, including Station HYPO, rather than a system broken by HYPO or a single breakthrough that exposed AF. Matches the body, which credits OP-20-G and British and Australian partners.",
+        "verification": "Compared with the exhibit body and meta description at the baseline; regression guards in tests/test-page-audit-claims.js were run against the old text and failed before the change.",
+        "limits": "Summary consistency only. No fresh source reading or browser check; the frozen audit reading pack was not regenerated."
+      },
       "traffic_analysis_exercise_2026_11_02": {
         "scope": "Lorenz related-card tag changed from \u201cStrategic-level wartime traffic analysis\u201d to \u201cGerman strategic teleprinter cipher attacked at Bletchley Park\u201d: Lorenz traffic was attacked by cryptanalysis, not traffic analysis. No other change to prose or metadata.",
         "verification": "Guarded by block 11 of tests/test-traffic-analysis.js, which failed against the old tag; full npm test run.",
@@ -5735,8 +5740,8 @@
     {
       "path": "halls/machines.html",
       "title": "Hall VII: Mechanical Cipher Machines \u2014 The Cipher Museum",
-      "words": 863,
-      "sha256": "467fe53f86a13cd7b9ce86c67544cb1db5d721648b7f8e0aa3af330d1bd657f3",
+      "words": 858,
+      "sha256": "68fbf169e9fa15524e15f69f6e003178ad27b607831e9fc24240ccf5de660d90",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
@@ -5756,7 +5761,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "ebook_summary_drift_2026_11_02": {
+        "scope": "Purple card now repeats the exhibit meta description: Grotjan\u2019s 20 September 1940 breakthrough helped the SIS team reconstruct the machine, replacing a single-date \u201cbroken on\u201d claim. Red card already distinguished half-rotor from stepping switches.",
+        "verification": "Compared with the exhibit body and meta description at the baseline; regression guards in tests/test-page-audit-claims.js were run against the old text and failed before the change.",
+        "limits": "Summary consistency only. No fresh source reading or browser check; the frozen audit reading pack was not regenerated."
+      }
     },
     {
       "path": "halls/military.html",
@@ -6621,8 +6631,8 @@
     {
       "path": "timeline.html",
       "title": "Timeline \u2014 The Cipher Museum",
-      "words": 3073,
-      "sha256": "b4efed8bcf6ac75b5c5738d50ddd5cdb8eda52eed3f244f390d4dcdf833b7dc6",
+      "words": 3071,
+      "sha256": "956c5accccc13216c00e90dd0674df215050cb06d8b7efb330a800ce16886553",
       "status": "bounded review and local release validation complete",
       "sources": [
         "CTC-NSA",
@@ -6648,7 +6658,12 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "ebook_summary_drift_2026_11_02": {
+        "scope": "Purple heading changed from \u201cPurple Broken on September 20\u201d to \u201cGrotjan\u2019s Purple Breakthrough\u201d, matching the already-qualified entry text.",
+        "verification": "Compared with the exhibit body and meta description at the baseline; regression guards in tests/test-page-audit-claims.js were run against the old text and failed before the change.",
+        "limits": "Summary consistency only. No fresh source reading or browser check; the frozen audit reading pack was not regenerated."
+      }
     },
     {
       "path": "tours/index.html",
@@ -6882,5 +6897,9 @@
     "baseline": "90010f03f39493c6412f57aab1d815f98266a0a1",
     "record": "docs/FABLE_REVIEW_2026-11-02.md",
     "scope": "Four HTML pages, Babington engine, JN-25 stage API and demo loader; corresponding regression coverage."
+  },
+  "ebook_summary_drift_2026_11_02": {
+    "baseline": "efad843a061d4e381bec6ee9a3b011247a428d9f",
+    "scope": "Brought README rows, the Hall VII Purple card, the timeline Purple heading and JN-25 descriptive metadata into agreement with already-corrected exhibit pages, following the 2 November 2026 ebook review. Exhibit body copy unchanged."
   }
 }

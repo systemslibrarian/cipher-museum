@@ -255,6 +255,29 @@ assert(readmeRow('vic').includes(vicDescription),
 const culperEntries = /Codebook of ~(\d+) numbered entries/.exec(read('ciphers/culper-ring.html'))[1];
 assert(readmeRow('culper-ring').includes(`Roughly ${culperEntries} numbered entries`),
   `README.md: the Culper Ring entry count must match the exhibit (~${culperEntries})`);
+// The 2 November 2026 book review found these rows still repeating claims their
+// exhibits had already qualified. Each row now repeats the exhibit's own meta
+// description, so a later page correction cannot be missed here again.
+const RETIRED_SUMMARY_CLAIMS = [
+  ['egyptian-substitution', /earliest surviving instance of a deliberate substitution cipher/i,
+    'whether the Khnumhotep II writing was meant to conceal is uncertain'],
+  ['red-type-a', /stepping-switch predecessor/i, 'Red used a half-rotor; the stepping switches were Purple’s'],
+  ['purple', /Broken on 20 September 1940 by Frank Rowlett/i,
+    'Grotjan’s breakthrough was one step in a continuing team reconstruction'],
+  ['bletchley-park', /shortening the war by two years/i, 'time saved is a counterfactual estimate, not a result'],
+  ['station-hypo', /broke JN-25 in 1942|turning the tide/i, 'JN-25 recovery was partial and cumulative'],
+  ['rochefort', /broke JN-25 in 1942|won the Battle of Midway|turned the tide/i,
+    'Midway intelligence was partial and the outcome also depended on reconnaissance and command'],
+  ['jn-25', /system broken by Station HYPO/i, 'JN-25 recovery was partial and shared with OP-20-G and allied units']
+];
+for (const slug of new Set(RETIRED_SUMMARY_CLAIMS.map(([target]) => target))) {
+  const row = readmeRow(slug);
+  const description = /<meta name="description" content="([^"]*)"/.exec(read(`ciphers/${slug}.html`))[1];
+  assert(row.includes(description), `README.md: the ${slug} row description must be the exhibit's own meta description`);
+  for (const [target, pattern, reason] of RETIRED_SUMMARY_CLAIMS) {
+    if (target === slug) assert.doesNotMatch(row, pattern, `README.md row for ${slug} contradicts its exhibit: ${reason}`);
+  }
+}
 
 assert.deepEqual(buildTrustLabels({ check: true }), [], 'All rendered badges are current; run npm run build:trust-labels');
 for (const generator of ['build-search-index', 'build-artifact-cards']) {

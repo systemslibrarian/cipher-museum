@@ -113,6 +113,19 @@ const checks = [
     assert.match(s, /selected Rijndael in October 2000/);
     assert.doesNotMatch(s, /earliest surviving instance of a deliberate substitution cipher|Swedish FRA in summer 1940|called le chiffre indéchiffrable for 300 years/);
   }, 'Broken by Arne Beurling and the Swedish FRA in summer 1940.'],
+  ['timeline.html', s => {
+    assert.match(s, /Grotjan’s September 1940 insight contributed/);
+    assert.doesNotMatch(s, /Purple Broken on September 20/);
+  }, 'Purple Broken on September 20'],
+  ['halls/machines.html', s => {
+    assert.match(s, /Grotjan’s 20 September 1940 breakthrough/);
+    assert.match(s, /half-rotor mechanism/);
+    assert.doesNotMatch(s, /Broken on 20 September 1940 by Frank Rowlett|stepping-switch predecessor/);
+  }, 'Broken on 20 September 1940 by Frank Rowlett and the US Army SIS team.'],
+  ['ciphers/jn-25.html', s => {
+    assert.match(s, /Partial recoveries by Allied teams, including Station HYPO/);
+    assert.doesNotMatch(s, /system broken by Station HYPO|Station HYPO breakthrough that exposed AF|decisive Pacific intelligence/);
+  }, 'The Imperial Japanese Navy’s superenciphered codebook system broken by Station HYPO.'],
   ['ciphers/red-army-faction.html', s => {
     assert.match(s, /adds letters modulo 26/);
     assert.match(s, /not a decimal field-pad reconstruction/);
