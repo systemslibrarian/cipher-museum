@@ -2,6 +2,8 @@
 
 ## Independent content review
 
+- [Reading the Radio Log, a bounded traffic-analysis exercise (2 November 2026)](TRAFFIC_ANALYSIS_EXERCISE.md) — fictional log, public sources, acceptance guards, mutation and browser checks.
+
 - [Reading the Evidence, four guided research exercises (2 November 2026)](READING_THE_EVIDENCE.md) — public paper citations, precise teaching scope, and verification.
 
 - [Dot research additions, 2 November 2026](DOT_RESEARCH_ADDITIONS_2026-11-02.md) — three bounded evidence exercises and the Swedish SIGINT history panel.

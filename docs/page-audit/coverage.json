@@ -4157,8 +4157,8 @@
     {
       "path": "ciphers/station-hypo.html",
       "title": "Station HYPO \u2014 Pearl Harbor to Midway \u2014 The Cipher Museum",
-      "words": 663,
-      "sha256": "947249a54e58c2ea5f892a073bb589e755789a85dcb92f089ce4a24d6a6dea4b",
+      "words": 676,
+      "sha256": "8c7d07df338911cc984ae5b6d7ad53f462e4d87a2a169e6ff13ae3259108b4f6",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NSA-ROCHEFORT",
@@ -4181,7 +4181,13 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added one related card linking the invented traffic-analysis exercise (lab/traffic-analysis.html). No change to exhibit prose or metadata.",
+        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
+        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
+      }
     },
     {
       "path": "ciphers/straddling-checkerboard.html",
@@ -5659,8 +5665,8 @@
     {
       "path": "halls/codebreakers.html",
       "title": "Hall X: Hall of Codebreakers \u2014 The Cipher Museum",
-      "words": 2889,
-      "sha256": "34a2a805f679525c72e86f22dfe145938e010976e0665855bf7ab7b20f31ec0b",
+      "words": 3024,
+      "sha256": "6b6c05d115d4a08895569fd251c92cdc1a5a740d35c2af8645fba0e7e1951a4a",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
@@ -5680,7 +5686,13 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added a \"Traffic Analysts and Log-Readers\" story panel linking the exercise, and the NSA traffic-analysis history to Sources and Reading. Panel claims (externals studied; locating units, guiding interception, supporting cryptanalysts; the Jutland callsign misreading) are from that history, pp. 3-8 and 14-15. Thirsk is named only as the author of a log-reader account.",
+        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
+        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
+      }
     },
     {
       "path": "halls/culture.html",
@@ -6077,6 +6089,28 @@
       }
     },
     {
+      "path": "lab/traffic-analysis.html",
+      "title": "Reading the Radio Log \u2014 The Cipher Museum",
+      "words": 1713,
+      "sha256": "3e524ab92643e5eb420a24bec3131281af844004c940933aba06ce77ccaaaf8e",
+      "status": "2 November 2026: new bounded exercise; invented log, bearings, chatter and key; historical statements checked against the cited NSA history pages; source limits recorded in docs/TRAFFIC_ANALYSIS_EXERCISE.md",
+      "sources": [
+        "https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TRAFFIC_ANALYSIS.PDF",
+        "https://www.govinfo.gov/app/details/GOVPUB-D-PURL-gpo91580",
+        "https://doi.org/10.7551/mitpress/5572.001.0001",
+        "https://cryptocellar.org/ActionContents.html",
+        "https://systemslibrarian.github.io/crypto-lab-blind-relay/"
+      ],
+      "notes": "Fictional teaching reconstruction, not historical data. NSA history read in full (GovInfo copy). Diffie and Landau paraphrase rests on a secondary quotation because the open-access text sat behind a verification page. Thirsk chapter cited, not read.",
+      "browser_smoke": "Local Chromium at 390 and 1280 px: no page errors or document overflow; keyboard-driven flow through steps 2-5; phantom-move line present with the wrong match and absent after correction. Not an automated WCAG audit and not historical verification.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "date": "2026-11-02",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md",
+        "browser": "docs/page-audit/traffic-analysis-browser-20261102.json",
+        "scope": "One bounded invented exercise; public source links only; acceptance guards and 18 mutation checks recorded in the record."
+      }
+    },
+    {
       "path": "lab/modern-attack-evidence.html",
       "title": "What an Attack Result Actually Shows \u2014 The Cipher Museum",
       "words": 5165,
@@ -6139,8 +6173,8 @@
     {
       "path": "lab/workbench.html",
       "title": "Codebreaker's Workbench \u2014 The Cipher Museum",
-      "words": 2102,
-      "sha256": "95a950abe3add86b5222e32d1c3c0878861c494a33d7910d1e850dd6998bab54",
+      "words": 2109,
+      "sha256": "6b10916c032c4c66cade91cbbd01da29fe29abca85a49fe7fd6c733286d7c441",
       "status": "ebook follow-up implementation and local validation complete",
       "sources": [
         "GRAY-1990-CORRECTED-2023"
@@ -6176,6 +6210,12 @@
       "reading_evidence_2026_11_02": {
         "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
         "record": "docs/READING_THE_EVIDENCE.md"
+      },
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added a third onward link to the traffic-analysis exercise in the lab introduction panel.",
+        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
+        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
       }
     },
     {
@@ -6463,8 +6503,8 @@
     {
       "path": "teaching.html",
       "title": "Teaching Resources \u2014 The Cipher Museum",
-      "words": 707,
-      "sha256": "4ff7e9197edb59fa031fc3341bb79af0ae4fa97945199f9f2096b19c92a5a093",
+      "words": 756,
+      "sha256": "9a71f60f0b69247671db2dfa7880209d3fe26fd3645f9afa6b0973076bf82942",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "LASRY-2018"
@@ -6515,6 +6555,12 @@
       "reading_evidence_2026_11_02": {
         "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
         "record": "docs/READING_THE_EVIDENCE.md"
+      },
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Added one educator paragraph describing the invented traffic-analysis exercise.",
+        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
+        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
       }
     },
     {
