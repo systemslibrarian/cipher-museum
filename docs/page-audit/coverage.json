@@ -6541,8 +6541,8 @@
     {
       "path": "lab/decipherment-cases.html",
       "title": "How a Decipherment Becomes Evidence — The Cipher Museum",
-      "words": 1791,
-      "sha256": "880890d136634ca0a0656dabd3de990ebe5c6b6472dc4d2b7ca21b693d3c1c3f",
+      "words": 2520,
+      "sha256": "3c7b3f6345d8844e7b063414564dfc750df76c78329af2af40ae4edd62d0b817",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [],
       "notes": "Root reread complete case narratives and displayed evidence, including the Z340 fragment. Invented teaching examples remain separate from source-backed manuscript evidence.\n3 November 2026: Added an original Latin-label structural analogy connected to Linear B. Kober is credited; sounds and meaning are not inferred from recurrence alone. Competing predictions are checked against withheld labeled fixture records. Robinson (2007), pp. 114–119; PASP research link. DOM and Chromium checks rejected the wrong prediction; existing Copiale/Mary/Z340 content retained.",
@@ -6574,6 +6574,13 @@
         "tests": "tests/test-linear-b-case.js; 16 mutation checks, each failing on its own guard; tests/test-process-exercises.js unchanged and passing; full npm test.",
         "limits": "Transliterations and word identifications (ti-ri-po-de, qe-to-ro-we, a-no-we, pa-te) follow Chadwick 1958 and Ventris and Chadwick 1956 and need specialist review before being presented as authoritative. Documents in Mycenaean Greek is cited by chapter only because the scanned copy's pagination is unreliable.",
         "record": "docs/LINEAR_B_CASE.md"
+      },
+      "egyptian_case_2026_11_03": {
+        "scope": "Egyptian case added (#egyptian) along the evidence chain: script not cipher; Rosetta Stone as source (two languages and three scripts retained); Young's Ptolemy cartouche; his foreign-names-only hypothesis and Champollion's 1821 symbolic view; the mixed key (sound signs, sound-and-meaning signs, determinatives, phonetic complements; no vowels); reading into the faces; Champollion's 1,419-to-486 count and the Abu Simbel Ramesses cartouche as independent checks. Exercises: test the three historical hypotheses with a kept record; read pr 'go out' for direction and sign roles.",
+        "sources": "Parkinson, Cracking Codes (University of California Press, 1999), pp. 15, 31, 33-35, 57-59; Collier and Manley, How to Read Egyptian Hieroglyphs (University of California Press, 1998), sections 2, 5-7, 11-13; both read from the user's copies, printed pages matched. Books are cited, not linked.",
+        "tests": "tests/test-egyptian-case.js, written from the sources before the case: 35 named tests, 17 required verdict and mismatch paths; 12 mechanism mutations each failed.",
+        "limits": "The reading exercise uses one word from Collier and Manley set in Unicode, not a specific inscription facsimile. Transliterations and sign identifications need specialist review before being presented as authoritative.",
+        "record": "docs/EGYPTIAN_CASE.md"
       }
     },
     {
