@@ -2,6 +2,7 @@
 
 ## Independent content review
 
+- [Linear B case in Historical Investigations (3 November 2026)](LINEAR_B_CASE.md) — script not cipher, structure before sound, an attractive wrong reading kept on record, an independent tablet check; readings need specialist review.
 - [Reading the Radio Log, a bounded traffic-analysis exercise (2 November 2026)](TRAFFIC_ANALYSIS_EXERCISE.md) — fictional log, public sources, acceptance guards, mutation and browser checks.
 
 - [Reading the Evidence, four guided research exercises (2 November 2026)](READING_THE_EVIDENCE.md) — public paper citations, precise teaching scope, and verification.
