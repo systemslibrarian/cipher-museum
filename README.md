@@ -6,7 +6,7 @@
 
 Exploring 3,900+ years of encryption, cryptanalysis, and hidden history.
 
-The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring **3,900+ years** of encryption, cryptanalysis, and hidden history across **<!-- count:total -->172<!-- /count --> exhibits** — <!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits in **13 exhibit halls**, the <!-- count:foundations -->17<!-- /count -->-exhibit **Hall of Foundations** mathematics annex (§141–157), and <!-- count:protocols -->3<!-- /count --> **protocol and construction exhibits** (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, hashing, signatures, secret sharing, and proofs.
+The Cipher Museum is part digital exhibit, part cipher playground, and part codebreaking classroom exploring **3,900+ years** of encryption, cryptanalysis, and hidden history across **<!-- count:total -->173<!-- /count --> exhibits** — <!-- count:cipherHistory -->153<!-- /count --> cipher and history exhibits in **13 exhibit halls**, the <!-- count:foundations -->17<!-- /count -->-exhibit **Hall of Foundations** mathematics annex (§141–157), and <!-- count:protocols -->3<!-- /count --> **protocol and construction exhibits** (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs). Modern cryptography uses more than ciphers — secure systems combine key exchange, encryption, hashing, signatures, secret sharing, and proofs.
 
 **[Live Museum →](https://ciphermuseum.com)**
 
@@ -44,6 +44,13 @@ The companion mystery can be started directly online or opened with the book's f
 
 ## 📰 Recent Changes
 
+### Bauer historical methods — 3 November 2026
+
+- Added [Gripenstierna’s 1786 machine](https://ciphermuseum.com/ciphers/gripenstierna.html), with documented operating roles and a distinction between the lost original and later reconstruction.
+- Added a [Banburismus evidence exercise](https://ciphermuseum.com/ciphers/joan-clarke.html#banburismus-experiment), a [paired-message investigation](https://ciphermuseum.com/lab/kisses.html), [Rejewski cycle structure](https://ciphermuseum.com/ciphers/enigma.html#cycle-structure), and [rotor-order policy constraints](https://ciphermuseum.com/ciphers/enigma.html#key-rules).
+- All exercise messages and reduced models are original teaching fixtures, with sources and limits beside the controls. See [implementation and evidence notes](docs/BAUER_ADDITIONS.md).
+
+
 - **3 November — An Egyptian case.** [Historical Investigations](https://ciphermuseum.com/lab/decipherment-cases.html#egyptian) now follows the hieroglyphic decipherment along the full evidence chain. The attractive wrong hypothesis is Young’s: that sound signs spelled only foreign names. Two independent checks broke it: Champollion’s count of 1,419 signs against 486 Greek words, and Ramesses read at Abu Simbel. Learners test the historical hypotheses, read the word *pr* “go out” into the faces of its signs, and assign each sign’s role: sound sign, phonetic complement or determinative. Sources: Parkinson (1999) and Collier and Manley (1998), cited by page and section.
 - **3 November — A writing-systems route.** The [Scripts, Not Ciphers](https://ciphermuseum.com/tours/tour.html?tour=writing-systems) guided tour separates unknown scripts from deliberate encryption across eight existing pages: Hall XII, the Rosetta Stone, the Khnumhotep II spellings, the Linear B case, the Phaistos Disc, the Voynich manuscript and the Geʼez substitution model, ending with Copiale as the contrast, a real cipher in unfamiliar symbols. Each stop’s note repeats its page’s own claim, and a test keeps the two in step.
 - **3 November — A Linear B case.** [Historical Investigations](https://ciphermuseum.com/lab/decipherment-cases.html#linear-b) now sets Linear B out as a script, not a cipher, and follows its decipherment in stages: Kober’s structure before sound, her triplets reinterpreted while the structure held, Ventris’s expected language giving way, and tablet Ta 641 as a test from evidence not used to build the values. Readings that stay ambiguous are shown, and no confidence score is given. The invented exercise now offers an attractive frequency-based reading that a held-out record contradicts, and it keeps every check in a visible record.
@@ -68,7 +75,7 @@ April 2026: Cipher Museum listed in Crypto Museum’s (cryptomuseum.com) curated
 
 ## ✨ Features
 
-### 🗺️ Thirteen Exhibit Halls · <!-- count:cipherHistory -->152<!-- /count --> Cipher & History Exhibits · The Foundations Annex
+### 🗺️ Thirteen Exhibit Halls · <!-- count:cipherHistory -->153<!-- /count --> Cipher & History Exhibits · The Foundations Annex
 
 Beyond the 13 cipher halls below, the **[Hall of Foundations](https://ciphermuseum.com/hall-of-foundations/index.html)** annex (§141–157) exhibits the mathematics under the cryptography — from modular arithmetic to lattices and pairings — and three **modern-protocol exhibits** (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs) extend Hall XI beyond ciphers.
 
@@ -95,13 +102,13 @@ Beyond the 13 cipher halls below, the **[Hall of Foundations](https://ciphermuse
 3. **How It Was Broken** — The specific technique, with context
 4. **What It Teaches Modern Crypto** — Relevant concepts, with analogies distinguished from historical descent
 
-### 🎯 <!-- count:engines -->88<!-- /count --> Registered Engines · <!-- count:interactiveExhibits -->147<!-- /count --> Interactive Exhibits
+### 🎯 <!-- count:engines -->88<!-- /count --> Registered Engines · <!-- count:interactiveExhibits -->148<!-- /count --> Interactive Exhibits
 
-The registry contains **<!-- count:engines -->88<!-- /count --> engines**. **<!-- count:interactiveExhibits -->147<!-- /count --> exhibits** have an on-page working demo or controllable visualization, including **<!-- count:interactiveCipherHistory -->127<!-- /count --> cipher and history exhibits**. These counts measure different things: visualizations and mathematical interactives need not be reversible ciphers. See [collection count definitions](docs/COLLECTION_COUNTS.md).
+The registry contains **<!-- count:engines -->88<!-- /count --> engines**. **<!-- count:interactiveExhibits -->148<!-- /count --> exhibits** have an on-page working demo or controllable visualization, including **<!-- count:interactiveCipherHistory -->128<!-- /count --> cipher and history exhibits**. These counts measure different things: visualizations and mathematical interactives need not be reversible ciphers. See [collection count definitions](docs/COLLECTION_COUNTS.md).
 
 Type a message, set a key, and watch the cipher work in real time. Demos are dynamically generated by [js/demo-loader.js](js/demo-loader.js) from the engine implementations in [js/ciphers/all-engines.js](js/ciphers/all-engines.js), and the same engines power the [Codebreaker's Workbench](https://ciphermuseum.com/lab/workbench.html).
 
-For a sortable, filterable selection of exhibits (era, type, security, hall, solved status, key method) see the [Cipher Comparison Table](https://ciphermuseum.com/comparison.html). For the full <!-- count:cipherHistory -->152<!-- /count -->-exhibit roster including biographies and context pages, see the [Museum Map](https://ciphermuseum.com/museum-map.html).
+For a sortable, filterable selection of exhibits (era, type, security, hall, solved status, key method) see the [Cipher Comparison Table](https://ciphermuseum.com/comparison.html). For the full <!-- count:cipherHistory -->153<!-- /count -->-exhibit roster including biographies and context pages, see the [Museum Map](https://ciphermuseum.com/museum-map.html).
 
 ### 📊 Additional Tools
 
@@ -133,7 +140,7 @@ For a sortable, filterable selection of exhibits (era, type, security, hall, sol
 - **[Historical Investigations](https://ciphermuseum.com/lab/decipherment-cases.html)** — Source-backed Copiale and Mary Stuart cases, an Egyptian case on sound signs, determinatives and reading direction, a Linear B case that separates structure, sound values and an independent tablet check, and a replay of the first Z340 section with its route and exceptions disclosed.
 - **[Modern Attack Evidence](https://ciphermuseum.com/lab/modern-attack-evidence.html)** — Compare attack access, measurements, inferences, and open questions across published cases. The case studies describe their conditions and do not simulate an attack on real equipment.
 - **[Teaching Resources](https://ciphermuseum.com/teaching.html)** — [Your First Codebreak](https://ciphermuseum.com/first-codebreak.html) offers a guided substitution notice, contextual hints, a complete Vigenère attack, five small language samples and a same-message homophone comparison. Separate [student worksheets](https://ciphermuseum.com/codebreak-worksheet.html) and [facilitator answers](https://ciphermuseum.com/codebreak-answers.html) support library and classroom sessions. A [classical topic guide](https://ciphermuseum.com/classical-guide.html) maps all 27 Black Chamber subject entries to museum content. Existing book trails, research tools and the reader mystery remain available. See the [review and verification scope](docs/first-codebreak-review.md).
-- **[Site Search](https://ciphermuseum.com/search.html)** — Search across all <!-- count:total -->172<!-- /count --> exhibits (<!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits, the Hall of Foundations annex, and the modern-protocol exhibits), 13 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
+- **[Site Search](https://ciphermuseum.com/search.html)** — Search across all <!-- count:total -->173<!-- /count --> exhibits (<!-- count:cipherHistory -->153<!-- /count --> cipher and history exhibits, the Hall of Foundations annex, and the modern-protocol exhibits), 13 exhibit halls, codebreaker biographies, cryptanalysis techniques, and the timeline. Index-driven, no backend, deep-link via `?q=`.
 - **[Cryptanalysis Techniques](https://ciphermuseum.com/cryptanalysis.html)** — 10 explained approaches, with seven hands-on demonstrations: frequency analysis, Kasiski examination, index of coincidence, crib dragging, known-plaintext attack, hill climbing, simulated annealing, stepping-switch cryptanalysis (Purple), computer-assisted manuscript analysis (Copiale), and Chaocipher reconstruction.
 - **[Cipher Challenges](https://ciphermuseum.com/challenges.html)** — 10 progressive puzzles from Caesar to Enigma with hints and solutions.
 - **[Timeline](https://ciphermuseum.com/timeline.html)** — Interactive 3,900+-year history with era filtering, scroll-spy, and 50+ clickable exhibit events.
@@ -149,7 +156,7 @@ For a sortable, filterable selection of exhibits (era, type, security, hall, sol
 
 ## 📖 Complete Cipher Index
 
-All <!-- count:cipherHistory -->152<!-- /count --> cipher and history exhibits, alphabetically. Biographies and context pages are noted; plain text entries generally describe cipher systems. The 17 Hall of Foundations exhibits (§141–157) and the 3 modern-protocol exhibits (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs) are listed separately above.
+All <!-- count:cipherHistory -->153<!-- /count --> cipher and history exhibits, alphabetically. Biographies and context pages are noted; plain text entries generally describe cipher systems. The 17 Hall of Foundations exhibits (§141–157) and the 3 modern-protocol exhibits (§158–160: ECDSA, Shamir's Secret Sharing, Zero-Knowledge Proofs) are listed separately above.
 
 
 | Cipher | Era | Brief Description | How It Was Broken / Status |
@@ -446,7 +453,7 @@ git lfs pull
 
 ## 🧪 Testing
 
-Trust labels are classified in `data/exhibit-trust.json` for all <!-- count:total -->172<!-- /count --> exhibits;
+Trust labels are classified in `data/exhibit-trust.json` for all <!-- count:total -->173<!-- /count --> exhibits;
 `null` omits all trust classifications for context exhibits. Shared definitions
 live in `data/trust-labels.json`; historical evidence and usage qualifications
 are separate notes. After editing either source, run `npm run build:metadata`

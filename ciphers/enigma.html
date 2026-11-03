@@ -23,6 +23,8 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="stylesheet" href="../css/museum.css">
   <link rel="stylesheet" href="../css/enigma-flagship.css">
+<link rel="stylesheet" href="../css/ebook-experiments.css">
+<link rel="stylesheet" href="../css/codebreaking-evidence.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -61,7 +63,7 @@
     Enigma Machine
   </div>
   <div class="page-meta">
-    <span class="page-num">Exhibit 29 of 172</span>
+    <span class="page-num">Exhibit 29 of 173</span>
     <span class="badge era-wwii">WWII · 1918–1945</span>
   </div>
   <h1 class="page-title">Enigma Machine</h1>
@@ -543,7 +545,7 @@ plaintext letter can still produce the same output at different positions.</pre>
       <div class="panel-body">
         <table class="cipher-table">
           <tbody>
-            <tr><td>Exhibit</td><td>29 of 172</td></tr>
+            <tr><td>Exhibit</td><td>29 of 173</td></tr>
             <tr><td>Era</td><td>WWII · 1918–1945</td></tr>
             <tr><td>Trust</td><td><span class="trust-label trust-label--broken trust-label--sm" title="Cryptographically broken — historically important but unsafe to use today.">Broken</span></td></tr>
             <tr><td>Inventor</td><td>Arthur Scherbius (inventor) · German Armed Forces (operator)</td></tr>
@@ -578,6 +580,31 @@ plaintext letter can still produce the same output at different positions.</pre>
 </div>
 
 <!-- Related Exhibits -->
+<section class="panel ebook-experiment codebreaking-evidence" aria-labelledby="cycle-structure"><div class="panel-body"><h2 id="cycle-structure">Rejewski: What the Plugboard Cannot Hide</h2>
+<p>Under the earlier repeated-indicator procedure described above, positions 1 and 4 concealed the same letter. Across enough indicators, an analyst could connect each first-position ciphertext letter to its fourth-position partner. These links form a permutation.</p>
+<p>A plugboard change relabels the cycles of that permutation without changing their lengths. Rejewski used these characteristics to constrain machine settings. The characteristic was not a unique fingerprint of the entire key, and the procedure changes of 1938 altered the attack conditions.</p>
+<p><strong>Eight-letter teaching model:</strong> six fixed, reciprocal substitutions stand in for six successive machine states. Each invented three-letter key is encrypted twice. This model has no Enigma rotor wiring or stepping. Change the plugboard and predict whether the cycle lengths will change.</p>
+<div class="demo-controls"><label for="cycle-board">Plugboard relabeling</label><select id="cycle-board"><option value="none">No swaps</option><option value="ahbe">A ↔ H, B ↔ E</option><option value="acdf">A ↔ C, D ↔ F</option></select></div>
+<div class="evidence-scroll" tabindex="0" role="region" aria-label="Repeated indicators"><table class="cipher-table"><caption>Invented six-letter indicators, all at one common starting state</caption><thead><tr><th scope="col">Message</th><th scope="col">Indicator</th><th scope="col">Position 1 → 4</th></tr></thead><tbody id="cycle-indicators"></tbody></table></div>
+<p>Without swaps: <span id="cycle-baseline" class="evidence-mono"></span></p><p>Selected plugboard: <span id="cycle-current" class="evidence-mono"></span></p>
+<p id="cycle-result" class="evidence-result" role="status" aria-live="polite">Enable JavaScript to derive the cycles.</p>
+<details><summary>Why the cycle lengths survive</summary><p>If R is the first-to-fourth permutation and S relabels the alphabet, the new permutation is S ∘ R ∘ S<sup>−1</sup>. Following a cycle still takes the same number of steps; only its labels change. This is conjugation. In a reciprocal plugboard S<sup>−1</sup> = S.</p><p>There are analogous relations for positions 2→5 and 3→6. The exercise displays just 1→4. It assumes complete coverage of the toy alphabet; real intercept collections could be incomplete. See <a href="../hall-of-foundations/group-theory.html">Group Theory</a> for the broader mathematical vocabulary.</p></details>
+<p><strong>Sources:</strong> Bauer, <em>Decrypted Secrets</em>, 4th ed. (2007), pp. 431–437, especially §19.6.2.5; Marian Rejewski, <a href="https://doi.org/10.4064/am-16-4-543-559">“An Application of the Theory of Permutations in Breaking the Enigma Cipher”</a>, <em>Applicationes Mathematicae</em> 16(4), 1980, pp. 543–559.</p>
+</div></section>
+
+<section class="panel ebook-experiment codebreaking-evidence" aria-labelledby="key-rules"><div class="panel-body"><h2 id="key-rules">When a Key Rule Narrows the Search</h2>
+<p>“Never use yesterday’s rotor in the same position” sounds like a way to avoid a pattern. Once an attacker knows yesterday’s order and the rule, it removes possibilities. The 1944 US 6812 Division Bombe Report explicitly describes this practice and the resulting 32 orders to test.</p>
+<p>Choose three distinct rotors from five: there are 5 × 4 × 3 = 60 orders before restrictions. Predict the remaining count, then switch on a rule. The exact-order restriction below is included for comparison; it is weaker than prohibiting every repeated position.</p>
+<div class="demo-controls"><label for="rules-previous">Yesterday’s known order (left to right)</label><select id="rules-previous"><option value="123">I – II – III</option><option value="523">V – II – III</option><option value="245">II – IV – V</option></select>
+<label><input id="rules-exact" type="checkbox"> Forbid yesterday’s exact order</label>
+<label><input id="rules-position" type="checkbox"> Forbid any rotor in yesterday’s position</label></div>
+<p id="rules-result" class="evidence-result" role="status" aria-live="polite">Enable JavaScript to enumerate the permitted orders.</p>
+<div id="rules-orders" class="evidence-mono evidence-orders" tabindex="0" role="region" aria-label="All permitted rotor orders"></div>
+<p><strong>State the limit:</strong> this is an exact count of one part of the configuration, not Enigma’s total security or the time required for a break. The bit count assumes uniform selection among permitted orders and conditions on the known previous order. Policies can serve other purposes; a smaller allowed set alone does not decide whether a modern key-management policy is sound.</p>
+<p><strong>Sources:</strong> Bauer, <em>Decrypted Secrets</em>, 4th ed. (2007), pp. 481–482; <a href="https://codesandciphers.org.uk/documents/bmbrpt/bmbpg017.htm">US 6812 Division Bombe Report (Eastcote, 1944), printed p. 12</a>, reproduced as web page 17.</p>
+<p>Compare this deterministic pruning with <a href="joan-clarke.html#banburismus-experiment">Banburismus evidence scores</a> and <a href="../lab/kisses.html">cribs obtained from another cipher system</a>.</p>
+</div></section>
+
 <section class="related-exhibits">
   <h2 class="related-exhibits__heading">Related Exhibits</h2>
   <div class="related-exhibits__grid">
@@ -608,7 +635,11 @@ plaintext letter can still produce the same output at different positions.</pre>
     <span class="hall-nav-dir">Next &rarr;</span>
     <span class="hall-nav-name">Kryha Pocket cipher machine · 1924</span>
   </a>
-</div><section class="related-exhibits"><h2 class="related-exhibits__heading">Codebreaking Machines</h2><div class="related-exhibits__grid"><a class="related-card" href="bombe.html"><span class="related-card__name">Turing–Welchman Bombe</span><span class="related-card__tag">Constraint search against Enigma</span></a><a class="related-card" href="colossus.html"><span class="related-card__name">Colossus</span><span class="related-card__tag">Statistical search against Lorenz</span></a></div></section>
+</div>
+
+
+
+<section class="related-exhibits"><h2 class="related-exhibits__heading">Codebreaking Machines</h2><div class="related-exhibits__grid"><a class="related-card" href="bombe.html"><span class="related-card__name">Turing–Welchman Bombe</span><span class="related-card__tag">Constraint search against Enigma</span></a><a class="related-card" href="colossus.html"><span class="related-card__name">Colossus</span><span class="related-card__tag">Statistical search against Lorenz</span></a></div></section>
 </main>
 
 <footer></footer>
@@ -619,5 +650,6 @@ plaintext letter can still produce the same output at different positions.</pre>
 <script src="../js/ciphers/enigma-flagship.js" defer></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
+<script src="../js/codebreaking-evidence.js" defer></script>
 </body>
 </html>

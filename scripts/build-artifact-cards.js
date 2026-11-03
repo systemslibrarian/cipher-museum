@@ -96,6 +96,7 @@ function main(check = false) {
   // key agreement, a hash, a signature, a sharing scheme and a proof system
   // all protect something without encrypting anything.
   const OVERRIDES = {
+    gripenstierna: { family: 'Mechanical polyalphabetic cipher device', region: 'Sweden', usedBy: 'Documented 1786 construction; operational use not established here' },
     enigma: { family: 'Rotor machine' },
     lorenz: { family: 'Teleprinter stream cipher' },
     solitaire: { family: 'Card-deck stream cipher' },

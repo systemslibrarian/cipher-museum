@@ -59,6 +59,8 @@ const HAND_BUILT = new Set(['caesar', 'playfair', 'vigenere', 'zodiac',
 // Pages that are intentionally static (no engine, no interactive widget) -
 // modern-crypto math walkthroughs, unsolved manuscripts, biography pages.
 const STATIC_PAGES = new Set([
+  'gripenstierna',
+
   'ua-8295', 'sodark', 'nfc-deployment', // Source-backed research cases, no simulated attack.
   'bombe', 'colossus',
   // Historical expansion: bespoke demos, plus a narrative lineage exhibit.

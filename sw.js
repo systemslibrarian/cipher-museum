@@ -16,9 +16,13 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-367191e9';
+const VERSION = 'cipher-museum-b53eaf5b';
 
 const CORE = [
+  '/ciphers/gripenstierna.html',
+  '/lab/kisses.html',
+  '/js/codebreaking-evidence.js',
+  '/css/codebreaking-evidence.css',
   '/lab/intercept-to-intelligence.html',
   '/js/intercept-exercise.js',
   '/js/structure-exercises.js',

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Message, Two Encryptions — The Cipher Museum</title>
+  <meta name="description" content="Investigate Bletchley Park kisses: use a weakly encrypted copy as a crib, derive a toy Vigenère key and test held-out positions against a different-message control.">
+  <meta property="og:title" content="One Message, Two Encryptions — The Cipher Museum">
+  <meta property="og:description" content="Investigate Bletchley Park kisses: use a weakly encrypted copy as a crib, derive a toy Vigenère key and test held-out positions against a different-message control.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciphermuseum.com/lab/kisses.html">
+  <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Cipher Museum — an interactive history of encryption">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="One Message, Two Encryptions — The Cipher Museum">
+  <meta name="twitter:description" content="Investigate Bletchley Park kisses: use a weakly encrypted copy as a crib, derive a toy Vigenère key and test held-out positions against a different-message control.">
+  <meta name="twitter:image" content="https://ciphermuseum.com/images/og/og-default.png">
+  <meta name="theme-color" content="#0a0a0f">
+  <link rel="canonical" href="https://ciphermuseum.com/lab/kisses.html">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/museum.css">
+<link rel="stylesheet" href="../css/ebook-experiments.css">
+<link rel="stylesheet" href="../css/codebreaking-evidence.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<div class="page-hero"><div class="breadcrumb"><a href="../index.html">Entrance</a><span> › </span><a href="workbench.html">Lab</a><span> › </span>Paired Messages</div><div class="page-meta"><span class="page-num">Cryptanalytic method · original exercise</span><span class="badge era-wwii">Bletchley Park context</span></div><h1 class="page-title">One Message, Two Encryptions</h1><p class="page-tagline">A weak copy can supply the plaintext an analyst needs to attack another copy.</p></div>
+<section class="panel ebook-experiment codebreaking-evidence" aria-labelledby="kisses"><div class="panel-body"><h2 id="kisses">Why Codebreakers Welcomed a “Kiss”</h2>
+<p>At Bletchley Park, a message sent under different keys or through different cipher systems could be called a <em>kiss</em>. Reading one version could supply a crib for another. Bauer describes general orders repeated across Enigma networks and messages also carried by simpler systems.</p><p>The shared element is the message. This is different from the <a href="../ciphers/lorenz.html">Lorenz depth</a>, where related messages reused a keystream. Here the copies may use different keys and algorithms.</p><p><strong>Everything below is invented.</strong> Copy A uses Caesar with a shift of 4, assumed already known to the analyst. Copy B uses repeating-key Vigenère with a known period of five. Both are broken historical cipher families; Copy B is only harder within this teaching comparison. This is not an Enigma simulation.</p>
+</div></section>
+<section class="panel ebook-experiment codebreaking-evidence" aria-labelledby="paired-message-experiment"><div class="panel-body"><h2 id="paired-message-experiment">Test Whether the Copies Share a Plaintext</h2>
+<p>Predict: if you recover five letters of Copy A, can they determine five Vigenère key letters? Would fitting those five positions prove that the other copy says the same thing?</p>
+<div class="demo-controls"><label for="kiss-case">Invented dispatch pair</label><select id="kiss-case"><option value="same">Same plaintext in two systems</option><option value="different">Control: different plaintexts, same length</option></select></div>
+<div class="evidence-roles"><div><strong>Copy A · Caesar</strong><p id="kiss-weak" class="evidence-mono"></p></div><div><strong>Copy B · Vigenère</strong><p id="kiss-strong" class="evidence-mono"></p></div></div>
+<p>Spaces are removed and X is padding in these fixtures. No real intercepted message is reproduced.</p>
+<h3>1. Read the weaker copy</h3><p>Apply the already known Caesar shift. In a real case, obtaining that weak-system solution would be a separate task.</p>
+<div class="demo-controls"><button id="kiss-decode" type="button">Decrypt Copy A with shift 4</button></div><p id="kiss-plaintext" class="evidence-result" role="status" aria-live="polite"></p>
+<h3>2. Fit a candidate key</h3><p>Assume the first five letters of A also begin B. With A = 0, B = 1, …, Z = 25, subtract plaintext from ciphertext modulo 26. Only the first five positions are used here.</p>
+<div class="demo-controls"><button id="kiss-derive" type="button" disabled>Derive five candidate key letters</button></div><p id="kiss-key" class="evidence-result" role="status" aria-live="polite"></p>
+<div class="evidence-scroll" tabindex="0" role="region" aria-label="Key derivation"><table class="cipher-table"><caption>Candidate key from the crib</caption><thead><tr><th scope="col">Position</th><th scope="col">B cipher</th><th scope="col">A plain</th><th scope="col">Key calculation</th></tr></thead><tbody id="kiss-equations"></tbody></table></div>
+<h3>3. Test the remaining positions</h3><p>The first five positions fit by construction. Now decrypt B and compare positions 6–20 with the rest of A. Then select the different-message control and repeat the investigation.</p>
+<div class="demo-controls"><button id="kiss-check" type="button" disabled>Check the held-out positions</button><button id="kiss-reset" type="button">Reset this pair</button></div><p id="kiss-result" class="evidence-result" role="status" aria-live="polite"></p>
+<noscript><p>Enable JavaScript for the paired-message experiment. The historical explanation, assumptions and sources remain available without it.</p></noscript>
+</div></section>
+<section class="panel ebook-experiment codebreaking-evidence" aria-labelledby="limits"><div class="panel-body"><h2 id="limits">What the Result Establishes</h2>
+<p>A successful check supports the shared-plaintext hypothesis within this controlled fixture. Equal lengths, a plausible phrase or a fitted key alone would not authenticate a historical message. The negative control gives you a case where a key fits the crib but fails elsewhere.</p><p>Known plaintext is an expected attacker capability for modern encryption. Sending the same plaintext under independent keys does not by itself break a sound modern scheme. The key recovery here works because repeating-key Vigenère exposes the repeated shifts when plaintext is known.</p><p>Continue with <a href="../ciphers/enigma.html">Enigma’s crib checks</a>, <a href="../cryptanalysis.html">known-plaintext cryptanalysis</a> or <a href="evidence-workbench.html">the Evidence Workbench</a>.</p>
+</div></section>
+<section class="panel ebook-experiment codebreaking-evidence" aria-labelledby="sources"><div class="panel-body"><h2 id="sources">Sources and Reading</h2>
+<p>Friedrich L. Bauer, <em>Decrypted Secrets: Methods and Maxims of Cryptology</em>, 4th ed. (Springer, 2007), pp. 288–289 and 419–421, especially §19.5.1. The history is paraphrased; the messages, controls and exercise are original museum material.</p><p>Tony Sale’s <a href="https://www.codesandciphers.org.uk/virtualbp/gwelchman/gwelch.htm">Virtual Bletchley Park account of registration and traffic analysis</a> explains the contemporary use of “kisses.” The exercise uses neither historical intercepts nor historical key material.</p>
+</div></section>
+
+</main>
+<footer></footer>
+<script src="../js/trust-labels.js"></script>
+<script src="../js/demo-loader.min.js"></script>
+<script src="../js/nav.js" defer></script>
+<script src="../js/codebreaking-evidence.js" defer></script>
+</body>
+</html>

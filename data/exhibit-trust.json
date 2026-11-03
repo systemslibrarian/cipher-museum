@@ -137,7 +137,7 @@
     {"number":133,"path":"ciphers/agnes-driscoll.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
     {"number":134,"path":"ciphers/bill-tutte.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
     {"number":135,"path":"ciphers/elizebeth-friedman.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":136,"path":"ciphers/joan-clarke.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
+    {"number":136,"path":"ciphers/joan-clarke.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":true},
     {"number":137,"path":"ciphers/leo-marks.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
     {"number":138,"path":"ciphers/mary-stuart-castelnau-letters.html","label":"broken","note":"57 letters from 1578–1584, approximately 50,000 words; decipherment published 8 February 2023.","collection":"cipher-history","interactive":false},
     {"number":139,"path":"ciphers/patterson-jefferson-cipher.html","label":"broken","note":"Solved 2007 — after 206 years","collection":"cipher-history","interactive":true},
@@ -173,6 +173,7 @@
     {"number":169,"path":"ciphers/colossus.html","label":null,"note":"Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.","collection":"cipher-history","interactive":true},
     {"number":170,"path":"ciphers/ua-8295.html","label":null,"note":"Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.","collection":"cipher-history","interactive":false},
     {"number":171,"path":"ciphers/sodark.html","label":"broken","note":"Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.","collection":"cipher-history","interactive":false},
-    {"number":172,"path":"ciphers/nfc-deployment.html","label":null,"note":"Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.","collection":"cipher-history","interactive":false}
+    {"number":172,"path":"ciphers/nfc-deployment.html","label":null,"note":"Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.","collection":"cipher-history","interactive":false},
+    {"number":173,"path":"ciphers/gripenstierna.html","label":"historical","note":"Historical device; original lost, later reconstructed from documents. No modern security claim.","collection":"cipher-history","interactive":false}
   ]
 }

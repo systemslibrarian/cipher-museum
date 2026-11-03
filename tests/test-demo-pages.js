@@ -111,6 +111,8 @@ const HAND_BUILT = new Set(['caesar.html', 'playfair.html', 'vigenere.html', 'zo
   'bible-code.html', 'enigma.html']);
 // Pure-content modern-crypto, unsolved pages, and biography pages with no interactive demo:
 const STATIC_PAGES = new Set([
+  'gripenstierna.html',
+
   'ua-8295.html', 'sodark.html', 'nfc-deployment.html', // Research case studies.
   'bombe.html', 'colossus.html','aes.html', 'des.html', 'diffie-hellman.html',
   // Bespoke historical demos are exercised in test-historical-exhibits.js.
