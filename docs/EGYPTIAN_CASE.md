@@ -2,7 +2,13 @@
 
 Added 3 November 2026 to `lab/decipherment-cases.html#egyptian`, as the first of the two follow-up cases in section 4 of the 2 November ebook review. It uses the same page, the same evidence-chain layout and the same honesty rules as the Linear B case.
 
-**Specialist review needed.** The sign identifications (O1 house plan, D21 mouth, D54 walking legs), the transliteration *pr*, the translation "go out", and the historical statements should be checked by an Egyptologist before they are presented as authoritative.
+**Verification status.** No Egyptologist is available to review the case, so its readings were checked against a second published source where one could be read:
+- **The mouth sign as *r*:** Parkinson's sign table, p. 49.
+- **The house sign as *pr*, "house":** Parkinson's "House of Life", p. 71.
+- **The sign numbers O1, D21 and D54:** they match their Unicode character names (O001, D021, D054).
+- **On Collier and Manley alone:** the meaning "go out" and the walking-legs determinative. The online Thesaurus Linguae Aegyptiae lists the verb, but its page sat behind a bot check and was not read.
+
+The page states this in its source note. It also links the Abydos king list (British Museum EA 117) on the Museum's collection site as a real inscription to look at, rather than reproducing it.
 
 ## Section 4, and how this meets it
 

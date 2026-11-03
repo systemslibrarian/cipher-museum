@@ -2,7 +2,7 @@
 
 Added 3 November 2026 to `lab/decipherment-cases.html#linear-b`, as the priority-2 ancient-script pilot from the 2 November ebook review (section 4). It extends the Linear B structural analogy added the same day in PR #36 rather than building a parallel page. It adds case material to the existing Historical Investigations page and its Evidence Workbench hand-off; the hypothesis and revision framework is unchanged. Egyptian and Maya cases are later follow-ups.
 
-**Specialist review needed.** The review packet is [`LINEAR_B_SPECIALIST_REVIEW.md`](LINEAR_B_SPECIALIST_REVIEW.md). The transliterations and word identifications on the page (*ti-ri-po-de*, *qe-to-ro-we*, *a-no-we*, *pa-te* = *patēr* or *pantes*) follow Ventris and Chadwick's 1956 edition. A Mycenologist should review them before they are presented as authoritative.
+**Verification status.** No Linear B specialist is available to review the case. In place of that review, every transliteration was checked against two published sources where possible. *ti-ri-po-de*, *qe-to-ro-we*, *a-no-we* and *pa-te* = *patēr* appear in both Chadwick (1958) and *Documents in Mycenaean Greek* (1956). *ma-te* "mother" rests on Chadwick p. 77 alone, and the reading *pantes* rests on *Documents* alone. The page states this in its source note. The inventory of every claim is [`LINEAR_B_SPECIALIST_REVIEW.md`](LINEAR_B_SPECIALIST_REVIEW.md). The transliterations and word identifications on the page (*ti-ri-po-de*, *qe-to-ro-we*, *a-no-we*, *pa-te* = *patēr* or *pantes*) follow Ventris and Chadwick's 1956 edition. A Mycenologist should review them before they are presented as authoritative.
 
 ## What the page now teaches
 
@@ -73,7 +73,7 @@ The review (`New-Ebook-Review-Crypto-Lab-Cipher-Museum-2026-11-02.md`, section 4
 - ambiguous readings shown;
 - no numerical score made from Chadwick's odds;
 - original examples rather than the book's plates;
-- specialist review flagged.
+- verification status stated in place of specialist review, which is not available.
 
 The review cites Chadwick by its own file's PDF page numbers. This page cites printed pages instead. The Egyptian and Maya cases, and a separate writing-system learning route, remain follow-ups.
 - **Full suite:** `npm test`, run before commit.

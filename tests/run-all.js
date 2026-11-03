@@ -12,6 +12,7 @@ const suites = [
   'tests/test-egyptian-case.js',
   'tests/test-writing-systems-route.js',
   'tests/test-decipherment-summary.js',
+  'tests/test-case-verification.js',
   'tests/test-linear-b-review-packet.js',
   'tests/test-maya-case.js',
   'tests/test-reading-evidence.js',

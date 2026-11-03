@@ -2,10 +2,13 @@
 
 Added 3 November 2026 to `lab/decipherment-cases.html#maya`. This is the second follow-up case from section 4 of the 2 November ebook review. It uses the same evidence-chain layout and the same honesty rules as the Linear B and Egyptian cases.
 
-**Specialist review needed.** A Maya epigrapher should check these before they are presented as authoritative:
-- the transliterations *k'u-tz(u)*, *k'utz*, *ba-k(i)* and *baak*;
-- the description of the synharmony and disharmony rules;
-- the historical statements.
+**Verification status.** No Maya epigrapher is available to review the case, so its readings were checked against a second published source: Harri Kettunen and Christophe Helmke, *Introduction to Maya Hieroglyphs*, 20th edition (Wayeb, 2025), freely published by Wayeb. That handbook confirms:
+- Knorozov's turkey reading from Landa's *cu* sign above a turkey;
+- the "so-called Landa alphabet";
+- *ba-ki* for *baak* "captive" among the harmony rules, after Lacadena and Wichmann (2004), in Appendix K;
+- Proskouriakoff's work on royal accession.
+
+Landa's letter-name explanation and the birth glyph rest on Coe alone. The page states this in its source note.
 
 ## Section 4, and how this meets it
 
