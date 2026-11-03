@@ -2,6 +2,7 @@
 
 ## Independent content review
 
+- [Purple diagnosis worksheet (3 November 2026)](PURPLE_DIAGNOSIS.md) — synthetic depth-and-alignment worksheet; tests written first; a date discrepancy flagged.
 - [Working is not secure route (3 November 2026)](WORKING_NOT_SECURE.md) — correctness, performance and security separated; real functional and security tests; guided tour.
 - [Typex and handbell context additions (3 November 2026)](DOT_CONTEXT_ADDITIONS_2026-11-03.md) — capture-assisted compromise and historically constrained classifier suggestions.
 - [Egyptian case in Historical Investigations (3 November 2026)](EGYPTIAN_CASE.md) — sound signs, complements and determinatives; reading into the faces; Young’s hypothesis broken by two independent checks; one deviation from section 4 recorded.

@@ -3822,8 +3822,8 @@
     {
       "path": "ciphers/purple.html",
       "title": "Purple (Type 97) — The Cipher Museum",
-      "words": 857,
-      "sha256": "c209b2bff59d67f7c540508dbdbd90317dba9ef265a944a58e2c08663508f4db",
+      "words": 886,
+      "sha256": "987630592daabb084b090ae4ae4340b539adc7d045f97441098dd63462e9e883",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
@@ -3849,6 +3849,12 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "purple_diagnosis_2026_11_03": {
+        "scope": "Linked the synthetic Purple diagnosis worksheet (lab/purple-diagnosis.html); no other change to prose or metadata.",
+        "verification": "Link checked by tests/test-purple-diagnosis.js.",
+        "limits": "Link addition only; no fresh source review of the rest of the page.",
+        "record": "docs/PURPLE_DIAGNOSIS.md"
       }
     },
     {
@@ -5400,8 +5406,8 @@
     {
       "path": "cryptanalysis.html",
       "title": "Cryptanalysis Techniques — The Cipher Museum",
-      "words": 2247,
-      "sha256": "1cef1e1d17fcd9dcadbb040b901e9c8a117c917c8640050ae032ccadbf00bad9",
+      "words": 2261,
+      "sha256": "481101ea02cd1732a1b95987cb151a4f7d5ca50bcb0712539cf3a372cc5937cd",
       "status": "ebook follow-up implementation and local validation complete",
       "sources": [
         "HOLDEN-2017",
@@ -5445,6 +5451,12 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "purple_diagnosis_2026_11_03": {
+        "scope": "Linked the synthetic Purple diagnosis worksheet (lab/purple-diagnosis.html); no other change to prose or metadata.",
+        "verification": "Link checked by tests/test-purple-diagnosis.js.",
+        "limits": "Link addition only; no fresh source review of the rest of the page.",
+        "record": "docs/PURPLE_DIAGNOSIS.md"
       }
     },
     {
@@ -6758,6 +6770,25 @@
         "record": "docs/DOT_CONTEXT_ADDITIONS_2026-11-03.md",
         "scope": "Historical handbell case added separately from the four synthetic exercises; source-reported classifier outputs, chronology and unresolved interpretation. No classifier rerun or decipherment.",
         "validation": "Validation for this change is recorded in the implementing PR. Earlier browser, review and deployment entries are historical and do not certify this revision."
+      }
+    },
+    {
+      "path": "lab/purple-diagnosis.html",
+      "title": "Diagnosing a Machine from Evidence — The Cipher Museum",
+      "words": 780,
+      "sha256": "4d756fa346339f9c9cdfb6b10abcb18ae671828305e4a7bb254a8935928100d6",
+      "status": "3 November 2026: new bounded synthetic worksheet (review section 5); method checked against Stamp and Low §2.3.3 and team history against Rowlett and Mundy; source limits in docs/PURPLE_DIAGNOSIS.md",
+      "sources": [
+        "Stamp and Low, Applied Cryptanalysis (Wiley, 2007), §2.3.3, printed pp. 45–48",
+        "Rowlett, The Story of Magic (Aegean Park Press, 1998), pp. 151–154",
+        "Mundy, Code Girls (Hachette, 2017), pp. 89–94"
+      ],
+      "notes": "Synthetic messages and permutations, not the Purple machine. Books read from the user's copies and cited by title and page, not linked. No date is asserted for Grotjan's discovery because Rowlett's memoir and the Purple exhibit differ.",
+      "browser_smoke": "See docs/PURPLE_DIAGNOSIS.md.",
+      "purple_diagnosis_2026_11_03": {
+        "date": "2026-11-03",
+        "record": "docs/PURPLE_DIAGNOSIS.md",
+        "scope": "One bounded synthetic worksheet; tests written first; eight mechanism mutations each failed."
       }
     },
     {
