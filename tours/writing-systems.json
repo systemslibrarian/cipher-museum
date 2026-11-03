@@ -15,14 +15,24 @@
       "note": "One decree in two languages and three scripts. It supported the decipherment of Egyptian hieroglyphs; it is not an encryption system."
     },
     {
+      "href": "../lab/decipherment-cases.html#egyptian",
+      "label": "Egyptian hieroglyphs: sound, sense and direction",
+      "note": "Egyptian hieroglyphs are a writing system, not a cipher. Young's idea that sound signs spelled only foreign names failed two later checks: a count of signs against Greek words, and the Ramesses cartouche."
+    },
+    {
       "href": "../ciphers/egyptian-substitution.html",
       "label": "Egyptian Substitution Hieroglyphs",
       "note": "Unusual hieroglyphic spellings from around 1900 BCE: a writing system used inventively, with uncertain intent."
     },
     {
-      "href": "../lab/decipherment-cases.html",
-      "label": "How a Decipherment Becomes Evidence: Linear B",
+      "href": "../lab/decipherment-cases.html#linear-b",
+      "label": "Linear B: structure before sound",
       "note": "Linear B is a script, not a cipher. Its case shows structure before sound values, an attractive wrong reading, and a tablet that did not help form the values testing them."
+    },
+    {
+      "href": "../lab/decipherment-cases.html#maya",
+      "label": "Maya glyphs: letters, syllables and dates",
+      "note": "Maya writing is a script for Maya languages, not a code, and Mayan languages are living languages. Landa's 'alphabet' turned out to record syllables."
     },
     {
       "href": "../ciphers/phaistos-disc.html",

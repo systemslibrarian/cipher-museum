@@ -123,7 +123,7 @@ These restate the case and add no new claims.
 
 - **Where:** `lab/decipherment-cases.html`, meta description and hero line
 - **Live wording:**
-  > Compare Copiale, Mary Stuart and Z340, and test a Linear B structural hypothesis against a held-out record.
+  > Compare Copiale, Mary Stuart and Z340 with the Egyptian, Linear B and Maya decipherments: what structure, keys and independent checks can each establish.
 
 - **Where:** `README.md`, Recent Changes, 3 November
 - **Live wording:**

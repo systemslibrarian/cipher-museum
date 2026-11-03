@@ -6541,8 +6541,8 @@
     {
       "path": "lab/decipherment-cases.html",
       "title": "How a Decipherment Becomes Evidence — The Cipher Museum",
-      "words": 3235,
-      "sha256": "19039a9da95ec77fb55a22914ae2e2951ae08f943423b934681f042ba3ce36d0",
+      "words": 3294,
+      "sha256": "6f857b90cdac66ba5a997a39365c38203976ae7113034f637b08015a1b6fe47c",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [],
       "notes": "Root reread complete case narratives and displayed evidence, including the Z340 fragment. Invented teaching examples remain separate from source-backed manuscript evidence.\n3 November 2026: Added an original Latin-label structural analogy connected to Linear B. Kober is credited; sounds and meaning are not inferred from recurrence alone. Competing predictions are checked against withheld labeled fixture records. Robinson (2007), pp. 114–119; PASP research link. DOM and Chromium checks rejected the wrong prediction; existing Copiale/Mary/Z340 content retained.",
@@ -6588,6 +6588,11 @@
         "tests": "tests/test-maya-case.js, written from the source before the case: 29 named tests, 14 required verdict and mismatch paths; 12 mechanism mutations each failed.",
         "limits": "Transliterations and readings need specialist review before being presented as authoritative. The date table is invented and labelled so; the 80-year lifetime is the museum's assumption. No glyph images are shown.",
         "record": "docs/MAYA_CASE.md"
+      },
+      "summary_update_2026_11_03": {
+        "scope": "Meta description and hero line now name all six cases; the closing comparison adds the Egyptian and Maya cases and states that none of the three scripts was a cipher. No case content changed.",
+        "tests": "tests/test-decipherment-summary.js requires every case section to be named in the meta description, the hero line, the closing comparison and the search index; it failed before the change, and dropping a case name, adding an unnamed section, letting the hero and meta differ, or leaving the index stale each fail it.",
+        "limits": "Summary wording only; no fresh source review."
       }
     },
     {
