@@ -170,6 +170,7 @@ for (const href of ['https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TR
 assert.ok(!links.some(h => /drive\.google|docs\.google/.test(h)), 'Public credits must not expose private Drive copies');
 for (const name of ['Borrmann', 'Diffie', 'Landau', 'Thirsk', 'log-reader']) assert.ok(visible.includes(name), 'Source not credited: ' + name);
 assert.match(visible, /chapter 15 in Ralph Erskine and Michael Smith/);
+assert.match(visible, /“the heart of a communications intelligence organization”[^.]*ch\. 4, p\. 102/, 'Diffie and Landau are cited from the book itself (open-access text), not from a secondary paraphrase');
 assert.doesNotMatch(visible, /metadata leaks/i, 'Link to the specific correlation, not a generic warning');
 
 // 10. The history route and modern bridge point back here.
@@ -181,5 +182,11 @@ assert.ok(read('ciphers/station-hypo.html').includes('href="../lab/traffic-analy
 assert.ok(read('halls/codebreakers.html').includes('href="../lab/traffic-analysis.html"'));
 const indexEntry = JSON.parse(read('js/search-index.json')).entries.find(e => e.u === PAGE);
 assert.ok(indexEntry && /fictional/.test(indexEntry.s), 'Search index must carry the page and its fictional label');
+
+// 11. Neighbouring cards keep codebreaking and traffic analysis apart, and keep HYPO's JN-25 work partial.
+const cardTag = (file, href) => new JSDOM(read(file)).window.document.querySelector('.related-card[href="' + href + '"] .related-card__tag').textContent;
+assert.doesNotMatch(cardTag('ciphers/station-hypo.html', '../ciphers/jn-25.html'), /HYPO broke/i, 'HYPO recovered JN-25 partially, alongside other Allied units, as its own page says');
+assert.doesNotMatch(cardTag('ciphers/station-hypo.html', '../ciphers/purple.html'), /\bUS diplomatic\b/i, 'Purple was a Japanese diplomatic machine; MAGIC was the US name for intelligence from such decrypts');
+assert.doesNotMatch(cardTag('ciphers/jn-25.html', '../ciphers/lorenz.html'), /traffic analysis/i, 'Lorenz traffic was attacked by cryptanalysis; calling it traffic analysis blurs the distinction this exercise teaches');
 
 console.log('Reading the Radio Log: externals-only network, kept-apart partial callsign, visible gaps, coverage-adjusted volume, tempting wrong match and its role/position/chatter consequences, DF self-consistency, hypothesis status, wiring, sources and history-route links passed.');

@@ -2402,8 +2402,8 @@
     {
       "path": "ciphers/jn-25.html",
       "title": "JN-25 (Japanese Naval Code) - The Cipher Museum",
-      "words": 696,
-      "sha256": "2a4810daff0bcc8b24c87df7e1a7bf5442991d772165425489f11f617ecde869",
+      "words": 700,
+      "sha256": "5a81eb406be50dc76eb979d737f1249ad491d3e25db8c1e4d80bd274114cba61",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ROCHEFORT-WATER-2021"
@@ -2425,7 +2425,13 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "traffic_analysis_exercise_2026_11_02": {
+        "scope": "Lorenz related-card tag changed from \u201cStrategic-level wartime traffic analysis\u201d to \u201cGerman strategic teleprinter cipher attacked at Bletchley Park\u201d: Lorenz traffic was attacked by cryptanalysis, not traffic analysis. No other change to prose or metadata.",
+        "verification": "Guarded by block 11 of tests/test-traffic-analysis.js, which failed against the old tag; full npm test run.",
+        "limits": "Card tag only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
+      }
     },
     {
       "path": "ciphers/joan-clarke.html",
@@ -4157,8 +4163,8 @@
     {
       "path": "ciphers/station-hypo.html",
       "title": "Station HYPO \u2014 Pearl Harbor to Midway \u2014 The Cipher Museum",
-      "words": 676,
-      "sha256": "8c7d07df338911cc984ae5b6d7ad53f462e4d87a2a169e6ff13ae3259108b4f6",
+      "words": 684,
+      "sha256": "e4e5c37468ec36fb1b103b0f7a8ebde0ba3c8f1eff82fa700fe19e8156917c4b",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NSA-ROCHEFORT",
@@ -4183,9 +4189,9 @@
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
       "traffic_analysis_exercise_2026_11_02": {
-        "scope": "Added one related card linking the invented traffic-analysis exercise (lab/traffic-analysis.html). No change to exhibit prose or metadata.",
-        "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
-        "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
+        "scope": "Added one related card linking the invented traffic-analysis exercise (lab/traffic-analysis.html). Corrected two related-card tags: JN-25 from \u201cThe cipher HYPO broke\u201d to \u201cThe naval code attacked by HYPO and other Allied units\u201d, matching the page body and the Rochefort page; Purple from \u201cUS diplomatic code MAGIC parallel operation\u201d to \u201cJapanese diplomatic cipher machine, a source of MAGIC\u201d, matching the Purple page. No other change to exhibit prose or metadata.",
+        "verification": "Link, card text and both corrected tags checked by tests/test-traffic-analysis.js; each tag guard failed against the old wording. Full npm test run.",
+        "limits": "Card changes only; no fresh source review of the rest of the page; the Quick Facts \u201cKey Break\u201d label is a shared person-page field and was left as is; the frozen audit reading pack was not regenerated.",
         "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
       }
     },
@@ -6091,8 +6097,8 @@
     {
       "path": "lab/traffic-analysis.html",
       "title": "Reading the Radio Log \u2014 The Cipher Museum",
-      "words": 1713,
-      "sha256": "3e524ab92643e5eb420a24bec3131281af844004c940933aba06ce77ccaaaf8e",
+      "words": 1727,
+      "sha256": "d8d661359535006e99a9e8b4b06a23c2295a86ff120a5e8836530b9f586de090",
       "status": "2 November 2026: new bounded exercise; invented log, bearings, chatter and key; historical statements checked against the cited NSA history pages; source limits recorded in docs/TRAFFIC_ANALYSIS_EXERCISE.md",
       "sources": [
         "https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TRAFFIC_ANALYSIS.PDF",
@@ -6101,13 +6107,13 @@
         "https://cryptocellar.org/ActionContents.html",
         "https://systemslibrarian.github.io/crypto-lab-blind-relay/"
       ],
-      "notes": "Fictional teaching reconstruction, not historical data. NSA history read in full (GovInfo copy). Diffie and Landau paraphrase rests on a secondary quotation because the open-access text sat behind a verification page. Thirsk chapter cited, not read.",
+      "notes": "Fictional teaching reconstruction, not historical data. NSA history read in full (GovInfo copy). Diffie and Landau checked against the open-access text of the MIT Press edition (ISBN 9780262256018, Internet Archive copy): quotation from ch. 4, p. 102; law-enforcement form ch. 5, p. 133. Thirsk chapter cited, not read.",
       "browser_smoke": "Local Chromium at 390 and 1280 px: no page errors or document overflow; keyboard-driven flow through steps 2-5; phantom-move line present with the wrong match and absent after correction. Not an automated WCAG audit and not historical verification.",
       "traffic_analysis_exercise_2026_11_02": {
         "date": "2026-11-02",
         "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md",
         "browser": "docs/page-audit/traffic-analysis-browser-20261102.json",
-        "scope": "One bounded invented exercise; public source links only; acceptance guards and 18 mutation checks recorded in the record."
+        "scope": "One bounded invented exercise; public source links only; acceptance guards and 18 mutation checks recorded in the record, plus four source and neighbouring-card guards (2026-11-03) that failed before their fixes."
       }
     },
     {
