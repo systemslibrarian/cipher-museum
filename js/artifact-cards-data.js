@@ -1172,7 +1172,7 @@
       "region": "Global",
       "usedBy": "See the exhibit for historical participants and source evidence",
       "keyType": "Varies by system",
-      "keyIdea": "JN-25 (1939-1945) - the Imperial Japanese Navy's superenciphered codebook system broken by Station HYPO and central to Midway intelligence.",
+      "keyIdea": "JN-25 combined Japanese naval code groups with additive encipherment. Partial recoveries by Allied teams, including Station HYPO, contributed to Midway intelligence.",
       "trust": {
         "key": "broken",
         "text": "Broken",
