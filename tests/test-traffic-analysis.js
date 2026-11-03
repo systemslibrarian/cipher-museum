@@ -187,6 +187,12 @@ assert.ok(indexEntry && /fictional/.test(indexEntry.s), 'Search index must carry
 const cardTag = (file, href) => new JSDOM(read(file)).window.document.querySelector('.related-card[href="' + href + '"] .related-card__tag').textContent;
 assert.doesNotMatch(cardTag('ciphers/station-hypo.html', '../ciphers/jn-25.html'), /HYPO broke/i, 'HYPO recovered JN-25 partially, alongside other Allied units, as its own page says');
 assert.doesNotMatch(cardTag('ciphers/station-hypo.html', '../ciphers/purple.html'), /\bUS diplomatic\b/i, 'Purple was a Japanese diplomatic machine; MAGIC was the US name for intelligence from such decrypts');
+for (const file of ['ciphers/station-hypo.html', 'ciphers/rochefort.html']) {
+  const facts = new JSDOM(read(file)).window.document;
+  const rows = [...facts.querySelectorAll('.fact, tr')].filter(r => /^\s*Key Break/.test(r.textContent));
+  assert.equal(rows.length, 2, file + ': expected the summary fact and the Quick Facts row');
+  for (const row of rows) assert.match(row.textContent, /partial/i, file + ': the Key Break summary must keep JN-25 recovery partial, as the page body does');
+}
 assert.doesNotMatch(cardTag('ciphers/jn-25.html', '../ciphers/lorenz.html'), /traffic analysis/i, 'Lorenz traffic was attacked by cryptanalysis; calling it traffic analysis blurs the distinction this exercise teaches');
 
 console.log('Reading the Radio Log: externals-only network, kept-apart partial callsign, visible gaps, coverage-adjusted volume, tempting wrong match and its role/position/chatter consequences, DF self-consistency, hypothesis status, wiring, sources and history-route links passed.');
