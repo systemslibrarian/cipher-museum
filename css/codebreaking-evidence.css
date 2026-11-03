@@ -1,0 +1,18 @@
+.codebreaking-evidence { scroll-margin-top:6rem; max-width:1100px; margin:1.5rem auto; }
+.codebreaking-evidence .panel-body > p { max-width:80ch; }
+.codebreaking-evidence .panel-body > * + * { margin-top:1rem; }
+.codebreaking-evidence .evidence-scroll { overflow-x:auto; max-width:100%; border:1px solid var(--gold-b); border-radius:4px; }
+.codebreaking-evidence .evidence-strip { display:flex; width:max-content; font-family:var(--fm); }
+.codebreaking-evidence .evidence-letter { display:inline-block; width:1.5rem; text-align:center; padding:.4rem 0; border-bottom:3px solid transparent; }
+.codebreaking-evidence .is-match { color:#f7dfa0; background:#3b3422; border-bottom-color:#f7dfa0; font-weight:700; }
+.codebreaking-evidence .evidence-result { padding:1rem; background:var(--s2); border-left:3px solid var(--gold); line-height:1.7; overflow-wrap:anywhere; }
+.codebreaking-evidence .evidence-mono { font-family:var(--fm); overflow-wrap:anywhere; line-height:1.8; }
+.codebreaking-evidence .evidence-orders { max-height:12rem; overflow-y:auto; padding:1rem; border:1px solid var(--gold-b); }
+.codebreaking-evidence .evidence-roles { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.codebreaking-evidence .evidence-roles > div { background:var(--s2); border:1px solid var(--gold-b); padding:1rem; border-radius:4px; }
+.codebreaking-evidence .evidence-roles strong { display:block; color:var(--gold); margin-bottom:.5rem; }
+.codebreaking-evidence button:disabled { cursor:not-allowed; }
+.codebreaking-evidence table { width:100%; }
+.codebreaking-evidence caption { text-align:left; padding:.5rem; color:var(--fg); }
+.codebreaking-evidence input[type=range] { padding:0; }
+@media(max-width:600px) { .codebreaking-evidence .evidence-roles { grid-template-columns:1fr; } }

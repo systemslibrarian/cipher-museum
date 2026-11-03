@@ -39,6 +39,8 @@
   .bio-dates    { font-size:.85rem;color:var(--gold-lt);font-family:var(--fm); }
   @media(max-width:600px) { .bio-hero { flex-direction:column; } }
 </style>
+<link rel="stylesheet" href="../css/ebook-experiments.css">
+<link rel="stylesheet" href="../css/codebreaking-evidence.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -122,6 +124,23 @@
 </div>
 <section class="panel" aria-labelledby="audit-reading"><div class="panel-body"><h2 id="audit-reading">Sources and Reading</h2><p>GCHQ, <a href="https://www.gchq.gov.uk/information/joan-clarke">“Joan Clarke”</a>, on Hut 8 and Banburismus; <a href="https://www.thegazette.co.uk/London/issue/37412/supplement/290/data.pdf">The London Gazette, supplement, 9 January 1946, p. 290</a>, for the honours entry; English Heritage, <a href="https://www.english-heritage.org.uk/visit/blue-plaques/joan-clarke/">“Joan Clarke”</a>, for the later career chronology.</p></div></section>
 
+<section class="panel ebook-experiment codebreaking-evidence" aria-labelledby="banburismus-experiment"><div class="panel-body"><h2 id="banburismus-experiment">Try Weighing the Evidence</h2>
+<p>A few matching letters might be chance. A longer run might justify more work. Banburismus compared Naval Enigma messages and accumulated statistical evidence to reduce the rotor possibilities sent on for machine search.</p>
+<p><strong>Original teaching model:</strong> these two invented strips illustrate single-letter coincidence scoring. They are not Enigma intercepts or a full Banburismus reconstruction. Predict which alignment will score highest, then slide the lower strip. Underlining marks a coincidence; the table ranks all thirteen tested offsets.</p>
+<div class="demo-controls"><label for="ban-offset">Lower strip offset: <output id="ban-offset-value" for="ban-offset">0</output></label><input id="ban-offset" type="range" min="-6" max="6" value="0" step="1">
+<label for="ban-sample">Maximum comparisons per offset</label><select id="ban-sample"><option value="16">16</option><option value="32">32</option><option value="48" selected>48</option></select></div>
+<p>A positive offset moves the lower strip to the right. Only overlapping positions count, starting at the left edge of the overlap.</p>
+<div class="evidence-scroll" tabindex="0" role="region" aria-label="Aligned letters; scroll horizontally if needed"><div id="ban-strip-a" class="evidence-strip" aria-label="Upper strip"></div><div id="ban-strip-b" class="evidence-strip" aria-label="Lower strip"></div></div>
+<p id="ban-result" class="evidence-result" role="status" aria-live="polite">Enable JavaScript to compare the strips.</p>
+<div class="evidence-scroll" tabindex="0" role="region" aria-label="Alignment rankings"><table class="cipher-table"><caption>Ranking under the stated toy model</caption><thead><tr><th scope="col">Offset</th><th scope="col">Matches / compared</th><th scope="col">Decibans</th></tr></thead><tbody id="ban-ranking"></tbody></table></div>
+<details><summary>The scoring assumptions and their limits</summary><p>We stipulate a match probability of 0.075 under a related-alignment model and 1/26 under an unrelated, uniform-letter model. Comparisons are treated as independent under both. These are teaching assumptions, not fitted wartime probabilities.</p>
+<p>With m matches in n comparisons, the likelihood ratio is (0.075 ÷ (1/26))<sup>m</sup> × (0.925 ÷ (25/26))<sup>n−m</sup>. The score is 10 log<sub>10</sub>(likelihood ratio), in decibans. Non-matches therefore count too. A score of +10 multiplies prior odds by 10; it is not “90% certain.”</p>
+<p>Real Banburismus used more than isolated letter matches, including repeated groups, indicator information and rotor constraints. Natural-language dependencies, unequal letter frequencies and trying many alignments matter. The ranking does not calculate a posterior probability over offsets and does not recover a plaintext.</p></details>
+<p><strong>Explain the result:</strong> compare the rankings with 16 and 48 comparisons. Why can extra observations strengthen or weaken an alignment? What additional evidence would you need before treating a high score as a correct setting?</p>
+<p><strong>Sources:</strong> Bauer, <em>Decrypted Secrets</em>, 4th ed. (2007), pp. 335–336 and 415–419; I. J. Good, <a href="https://languagelog.ldc.upenn.edu/myl/Good1979.pdf">“A. M. Turing’s Statistical Work in World War II”</a>, <em>Biometrika</em> 66(2), 1979, pp. 393–396, especially §3 on logarithmic evidence; <a href="https://www.gchq.gov.uk/information/joan-clarke">GCHQ’s account of Clarke</a>.</p>
+<p>Continue with <a href="enigma.html#cycle-structure">Rejewski’s cycle structure</a> or <a href="../lab/kisses.html">a reliable crib from a second encryption</a>.</p>
+</div></section>
+
 <section class="related-exhibits">
   <h2 class="related-exhibits__heading">Related Exhibits</h2>
   <div class="related-exhibits__grid">
@@ -146,5 +165,6 @@
 <script src="../js/demo-loader.min.js"></script>
 <script src="../js/nav.js" defer></script>
 <script src="../js/lightbox.js"></script>
+<script src="../js/codebreaking-evidence.js" defer></script>
 </body>
 </html>
