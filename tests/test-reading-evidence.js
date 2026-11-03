@@ -60,7 +60,7 @@ $('pattern-symbols').querySelectorAll('button')[1].click();assert.match($('patte
 $('pattern-input').value='<script> X <script>';$('pattern-rename').click();assert.equal($('pattern-original').textContent,'<script> X <script>');assert.equal($('pattern-original').children.length,0);
 $('pattern-input').value='';$('pattern-rename').click();assert.match($('pattern-result').textContent,/Use 1–64/);assert.equal($('pattern-a').textContent,'');
 $('pattern-reset').click();assert.equal($('pattern-a').textContent,'1 2 2 3 1 2 4 3');
-assert.equal(doc.querySelectorAll('.paper-credit').length,4);
+assert.equal(doc.querySelectorAll('.evidence-exercise .paper-credit').length,4);
 for(const a of doc.querySelectorAll('a[href]')) assert.ok(!/drive\.google|docs\.google/.test(a.href),'Public credits must not expose private Drive copies');
 for(const select of doc.querySelectorAll('select')) assert.ok(doc.querySelector('label[for="'+select.id+'"]'));
 dom.window.close();

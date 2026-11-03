@@ -87,8 +87,16 @@ for (const slug of HISTORICAL_SYSTEMS) {
 for (const slug of WARTIME_UNBROKEN_SYSTEMS) {
   const rel = `ciphers/${slug}.html`;
   const dom = parse(rel);
-  assert.match(dom.window.document.querySelector('.cipher-significance').textContent,
-    /never publicly broken|no publicly documented.*break|not publicly documented.*broken|no public.*cryptanalytic break/i, `${slug}: qualify the historical claim in exhibit prose`);
+  const prose = dom.window.document.querySelector('.cipher-significance').textContent;
+  if (slug === 'typex') {
+    assert.match(prose, /do not establish a general German wartime cryptanalytic break/i,
+      'Typex: absence of an established general break is not absence of all reading');
+    assert.match(prose, /does not exclude reading traffic with captured equipment and key material/i,
+      'Typex: keep capture-assisted reading distinct from a general break');
+  } else {
+    assert.match(prose,
+      /never publicly broken|no publicly documented.*break|not publicly documented.*broken|no public.*cryptanalytic break/i, `${slug}: qualify the historical claim in exhibit prose`);
+  }
   dom.window.close();
 }
 for (const slug of ['scytale', 'caesar', 'polybius', 'pigpen', 'bacon', 'tap-code', 'atbash', 'rot13',
