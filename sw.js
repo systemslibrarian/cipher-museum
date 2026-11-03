@@ -16,11 +16,14 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-4e2c2b15';
+const VERSION = 'cipher-museum-653f92cc';
 
 const CORE = [
   '/lab/reading-the-evidence.html',
   '/js/reading-evidence.js',
+  '/lab/traffic-analysis.html',
+  '/js/traffic-analysis.js',
+  '/css/traffic-analysis.css',
   '/css/evidence-exercises.css',
   '/js/evidence-exercises.js',
   '/first-codebreak.html',

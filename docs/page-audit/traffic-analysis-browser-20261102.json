@@ -1,0 +1,28 @@
+[
+  {
+    "width": 390,
+    "errors": [],
+    "overflow": false,
+    "keyboard_flow": true,
+    "phantom_move_lines_with_wrong_match": 1,
+    "phantom_move_lines_after_correction": 0,
+    "diagrams_fit_viewport": true,
+    "log_tables_scroll_inside_container": [
+      true,
+      true
+    ]
+  },
+  {
+    "width": 1280,
+    "errors": [],
+    "overflow": false,
+    "keyboard_flow": true,
+    "phantom_move_lines_with_wrong_match": 1,
+    "phantom_move_lines_after_correction": 0,
+    "diagrams_fit_viewport": true,
+    "log_tables_scroll_inside_container": [
+      false,
+      false
+    ]
+  }
+]

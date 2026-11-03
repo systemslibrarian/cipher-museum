@@ -40,6 +40,11 @@
       "note": "Tiltman recovered key material in 1941; Tutte and colleagues inferred the machine structure by early 1942; Colossus later accelerated wheel-setting."
     },
     {
+      "href": "../lab/traffic-analysis.html",
+      "label": "Reading the Radio Log",
+      "note": "An invented two-day radio log: map a net and follow changing callsigns without decrypting a message."
+    },
+    {
       "href": "../ciphers/nihilist.html",
       "label": "Nihilist Cipher",
       "note": "A Russian revolutionary cipher combining Polybius coordinates with numerical addition."
