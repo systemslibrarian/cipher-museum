@@ -6792,8 +6792,8 @@
     {
       "path": "tours/index.html",
       "title": "Guided Tours — The Cipher Museum",
-      "words": 38,
-      "sha256": "c4bc888b1829a79297e5c331beed7ffdc9e45a3a1cc60f48c411b743dc2fc3ba",
+      "words": 40,
+      "sha256": "b00b0195c44f2a1e2f3b2a9666a02ac544442f4dea7014818ca5737f6a5605d9",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
@@ -6813,13 +6813,19 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "writing_systems_route_2026_11_03": {
+        "scope": "Registered the new Scripts, Not Ciphers tour (tours/writing-systems.json) in the tour index list.",
+        "verification": "tests/test-writing-systems-route.js and tests/test-navigation-audit.js; removing the registration fails both.",
+        "limits": "Registration only; no other prose changed on this page.",
+        "record": "tours/writing-systems.json"
+      }
     },
     {
       "path": "tours/tour.html",
       "title": "Guided Tour — The Cipher Museum",
       "words": 20,
-      "sha256": "6163461ac9b96fb68ae1aac38e33ae5721023f5259936f891545217d5e2ec5b2",
+      "sha256": "199373e7e3840a44c0dec788d1928243e56ba0f2da51343bf8b4466d07cd89ca",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
@@ -6839,7 +6845,13 @@
         "evidence": "docs/page-audit/browser-final.json",
         "scope": "HTTP200, no uncaught script error or document overflow; external requests blocked; this is not factual certification."
       },
-      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json."
+      "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
+      "writing_systems_route_2026_11_03": {
+        "scope": "Added 'writing-systems' to the VALID_TOURS whitelist.",
+        "verification": "tests/test-writing-systems-route.js and tests/test-navigation-audit.js; removing the registration fails both.",
+        "limits": "Registration only; no other prose changed on this page.",
+        "record": "tours/writing-systems.json"
+      }
     }
   ],
   "checkpoint": {

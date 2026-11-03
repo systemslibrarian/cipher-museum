@@ -1,0 +1,48 @@
+{
+  "id": "writing-systems",
+  "title": "Scripts, Not Ciphers",
+  "description": "Tell an unknown script from deliberate encryption: what a writing system records, how a decipherment is tested, and where the evidence runs out.",
+  "icon": "✍",
+  "stops": [
+    {
+      "href": "../halls/unsolved.html",
+      "label": "Hall XII: Unsolved Ciphers",
+      "note": "Unknown writing systems sit here beside unresolved cryptograms. Start by asking which kind of uncertainty each one is: unknown meaning, uncertain method or missing evidence."
+    },
+    {
+      "href": "../ciphers/rosetta-stone.html",
+      "label": "The Rosetta Stone",
+      "note": "One decree in two languages and three scripts. It supported the decipherment of Egyptian hieroglyphs; it is not an encryption system."
+    },
+    {
+      "href": "../ciphers/egyptian-substitution.html",
+      "label": "Egyptian Substitution Hieroglyphs",
+      "note": "Unusual hieroglyphic spellings from around 1900 BCE: a writing system used inventively, with uncertain intent."
+    },
+    {
+      "href": "../lab/decipherment-cases.html",
+      "label": "How a Decipherment Becomes Evidence: Linear B",
+      "note": "Linear B is a script, not a cipher. Its case shows structure before sound values, an attractive wrong reading, and a tablet that did not help form the values testing them."
+    },
+    {
+      "href": "../ciphers/phaistos-disc.html",
+      "label": "Phaistos Disc",
+      "note": "A Bronze Age stamped inscription whose language and reading remain disputed. Too little text survives to test a proposed reading, and it is not established as a cipher."
+    },
+    {
+      "href": "../ciphers/voynich.html",
+      "label": "The Voynich Manuscript",
+      "note": "An undeciphered script. Dating and text statistics constrain the hypotheses but have not identified its language or method, so language and cipher readings both remain open."
+    },
+    {
+      "href": "../ciphers/amharic-ge-ez-ciphers.html",
+      "label": "Geʼez Script and a Substitution Model",
+      "note": "A living script beside a modern Latin-letter substitution exercise, with no historical cipher attribution claimed for the model."
+    },
+    {
+      "href": "../ciphers/copiale.html",
+      "label": "Copiale Cipher",
+      "note": "The contrast case: a real cipher written in unfamiliar symbols, deciphered in 2011 through transcription, statistics and manual analysis."
+    }
+  ]
+}
