@@ -1,8 +1,8 @@
 # Source register and recorded access limits
 
-Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `3e47b5e05bd350c91f0e50501ad1f8ffc6b33e20`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
-These 188 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
+These 194 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
 ## HAC-1997 — Handbook of Applied Cryptography
 
@@ -3096,5 +3096,124 @@ These 188 identities and reading scopes come from the prior review ledger. They 
     "Publisher abstract and contextual framework"
   ],
   "scope": "Secrecy as practice as well as content; used for a short contextual distinction, not a full-paper reading claim."
+}
+```
+
+## JANSSEN-RANLP-2025 — Alignment of Historical Manuscript Transcriptions and Translations
+
+```json
+{
+  "title": "Alignment of Historical Manuscript Transcriptions and Translations",
+  "authors": [
+    "Maarten Janssen",
+    "Piroska Lendvai",
+    "Anna Jouravel"
+  ],
+  "year": 2025,
+  "url": "https://aclanthology.org/2025.ranlp-1.55/",
+  "passages_read": [
+    "Selected alignment discussion, PDF pp. 3–5: diplomatic transcripts, editions and translations; split, merged and unmatched passages."
+  ],
+  "scope": "Selected passages reread for manual comparison design. Original manual links, not the paper’s automatic methods or evaluation. No full-paper reading credit added.",
+  "evidence": "docs/READING_ALIGNMENT.md"
+}
+```
+
+## FANG-EMNLP-2025 — ICL CIPHERS: Quantifying “Learning” in In-Context Learning via Substitution Ciphers
+
+```json
+{
+  "title": "ICL CIPHERS: Quantifying “Learning” in In-Context Learning via Substitution Ciphers",
+  "authors": [
+    "Zhouxiang Fang",
+    "Aayush Mishra",
+    "Muhan Gao",
+    "Anqi Liu",
+    "Daniel Khashabi"
+  ],
+  "year": 2025,
+  "url": "https://aclanthology.org/2025.emnlp-main.1316/",
+  "passages_read": [
+    "§§2.2–2.5, printed pp. 25913–25914 / PDF pp. 2–3: fixed bijections, independent replacements and task-relevant information."
+  ],
+  "scope": "Original four-word, three-position teaching task. The unchanged and fixed many-to-one controls and exact enumeration are museum additions; no LLM benchmark is run. Selected passages only; no new full-paper reading credit.",
+  "evidence": "docs/DOT_STRUCTURE_ADDITIONS_2026-11-04.md"
+}
+```
+
+## SZARKA-HISTOCRYPT-2023 — On the Combination of Cryptography and Steganography in 17th Century Germany
+
+```json
+{
+  "title": "On the Combination of Cryptography and Steganography in 17th Century Germany",
+  "authors": [
+    "Eveline Szarka"
+  ],
+  "year": 2023,
+  "url": "https://ecp.ep.liu.se/index.php/histocrypt/article/view/705",
+  "passages_read": [
+    "§§4–6, printed pp. 163–166 / PDF pp. 4–7; conclusion printed p. 167 / PDF p. 8. Invoice ambiguity, musical constraints and reserved-word collisions."
+  ],
+  "scope": "Handbook proposals motivate wholly original invoices, word codes and duration examples. No historical score or source illustration reproduced; no claim of operational use, measured detection rates or secure concealment. Selected passages only.",
+  "evidence": "docs/DOT_STRUCTURE_ADDITIONS_2026-11-04.md"
+}
+```
+
+## DINNISSEN-ARAUJO-2022 — Prey to a Privateer. Two Portuguese Ciphertexts from 1649
+
+```json
+{
+  "title": "Prey to a Privateer. Two Portuguese Ciphertexts from 1649",
+  "authors": [
+    "Jörgen Dinnissen",
+    "Hugo Araújo"
+  ],
+  "year": 2022,
+  "url": "https://ecp.ep.liu.se/index.php/histocrypt/article/view/392",
+  "passages_read": [
+    "PDF p. 1 catalogue-date corrections; §2 PDF pp. 3–4 context; §3.1–3.2 PDF pp. 5–6 chronology and missing secret minutes; references PDF p. 10; Appendix 2 note 41 PDF p. 17 translation difference."
+  ],
+  "scope": "Documentary reconstruction attributed to the study; archival originals and the current archive catalogue not independently inspected. Surviving plaintexts predate the modern reconstruction. Missing minutes do not establish that the intelligence had no use.",
+  "evidence": "docs/DOT_HISTORICAL_ADDITIONS_2026-11-04.md"
+}
+```
+
+## PIERROT-HISTOCRYPT-2023 — Deciphering Charles Quint (A diplomatic letter from 1547)
+
+```json
+{
+  "title": "Deciphering Charles Quint (A diplomatic letter from 1547)",
+  "authors": [
+    "Cécile Pierrot",
+    "Camille Desenclos",
+    "Pierrick Gaudry",
+    "Paul Zimmermann"
+  ],
+  "year": 2023,
+  "url": "https://ecp.ep.liu.se/index.php/histocrypt/article/view/704",
+  "passages_read": [
+    "§2.2 and note 2, PDF p. 2: written 1546 versus interpreted 1547; §3, PDF pp. 4–8: unsuccessful hypotheses, related marginal readings and mixed key; reconstructed-key discussion; §4, PDF p. 9: reported assassination rumour."
+  ],
+  "scope": "Historical account explicitly follows the 2023 study. Original staged fixture demonstrates a partial mixed key and failed check without copying historical symbols or plaintext. A reported allegation is not proof of an event. The later 2025 edition is linked, but its full text was access-blocked and is not treated as read.",
+  "later_edition": "https://hal.science/hal-05269981v2",
+  "evidence": "docs/DOT_HISTORICAL_ADDITIONS_2026-11-04.md"
+}
+```
+
+## CHRISTENSEN-IKA-2021 — The Imperial Japanese Navy IKA Cipher Machine
+
+```json
+{
+  "title": "The Imperial Japanese Navy IKA Cipher Machine",
+  "authors": [
+    "Chris Christensen"
+  ],
+  "year": 2021,
+  "url": "https://ecp.ep.liu.se/index.php/histocrypt/article/view/155",
+  "passages_read": [
+    "§§2–4, PDF pp. 2–6: 49-symbol system, 42/7 split and reconstructed behavior; §§5–7, PDF pp. 6–9: hypothetical mechanisms, captured M-1 Figure 2 and American M-1 analogue Figure 3; Appendix A PDF p. 10: US intercept dates; §4 and conclusion: unavailable historical attack records."
+  ],
+  "scope": "Evidence limits dated to the cited 2021 study. Underlying RIP 28A and SRH 355 reports not independently inspected. No authenticated IKA mechanism, faithful simulator, original attack reproduction, or claim to have checked all later discoveries. No photographs reproduced.",
+  "evidence": "docs/DOT_HISTORICAL_ADDITIONS_2026-11-04.md"
 }
 ```

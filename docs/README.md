@@ -22,7 +22,7 @@
 
 - [Ebook implementation progress](../audit/EBOOK_IMPLEMENTATION_PROGRESS.md) — implementation and verification of all 21 follow-up recommendations.
 - [Ebook review recommendations](../audit/EBOOK_REVIEW_RECOMMENDATIONS.md) — 21 implemented Cipher Museum work packages from selected passages in 13 works: five corrections and 16 teaching additions, with existing Crypto Lab reuse identified.
-- [Complete 227-page audit export](../audit/README.md) — one self-contained Markdown document, smaller upload parts, a source register, and independent-review instructions.
+- [Complete 228-page audit export](../audit/README.md) — one self-contained Markdown document, smaller upload parts, a source register, and independent-review instructions.
 - [Page-by-page accuracy audit](PAGE_BY_PAGE_ACCURACY_AUDIT.md) — prior review scope, corrections, and evidence limits.
 - [67-item progress tracker](ACCURACY_REVIEW_PROGRESS.md) — completed bounded work packages from the prior audit.
 

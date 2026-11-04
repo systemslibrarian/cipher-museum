@@ -10,7 +10,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 **[Live Museum →](https://ciphermuseum.com)**
 
-**[Independent audit reading pack — 227-page snapshot](audit/README.md)** — the frozen 4 November 2026 export includes page text, examples, source notes, supporting scripts/data, and an AI review prompt. Available as one document or smaller parts. Its source commit and limits are recorded in the pack; it does not update automatically with the live museum.
+**[Independent audit reading pack — 228-page snapshot](audit/README.md)** — the frozen 4 November 2026 export includes page text, examples, source notes, supporting scripts/data, and an AI review prompt. Available as one document or smaller parts. Its source commit and limits are recorded in the pack; it does not update automatically with the live museum.
 
 [![DOI](https://zenodo.org/badge/1182903273.svg)](https://doi.org/10.5281/zenodo.23298940)
 [![Cipher Corpus dataset v0.6 DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23297920.svg)](https://doi.org/10.5281/zenodo.23297920)
