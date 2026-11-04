@@ -1,6 +1,364 @@
 # javascript appendix 5
 
-Snapshot: `f5a994abd27f5d28531efa53a23d5b8661e41b61`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `19f2c1a4a89f0b0e8661c209e95ed66d51fc5374`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+
+## JavaScript — js/detective/attacks.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/detective/attacks.js`
+- Served SHA-256: `4275877c52228402697a6205bf8d60dfa8b738c726aa43a1d05ace5c9eaf5e74`
+- Readable-source SHA-256: `4275877c52228402697a6205bf8d60dfa8b738c726aa43a1d05ace5c9eaf5e74`
+
+
+```javascript
+/* ================================================================
+   THE CIPHER MUSEUM — Detective Attacks v2.0
+
+   window.DetectiveAttacks — seven inline attack tools
+
+   All functions are pure (no DOM). Results are plain objects.
+   The browser-side click handlers in detective.js call these and
+   pass the result to renderAttackResult() in render.js.
+
+   Tools:
+     caesarBruteForce(ct)         — top-5 shifts by chi-square
+     rot13(ct)                    — ROT13 decode
+     atbash(ct)                   — Atbash decode
+     decodeMorse(text)            — International Morse decode
+     decodeEncoding(text)         — Base64 / Hex / Binary auto-detect
+     vigKeyLength(ct, maxKey=15)  — Kasiski + period-IoC key-length candidates
+     substFreqSuggestions(ct)     — top-6 cipher→plain frequency guesses
+     isApplicable(toolId, stats)  — {ok, reason} gate for button state
+   ================================================================ */
+'use strict';
+
+(function (global) {
+
+  /* ─── International Morse Code table ────────────────────────── */
+  var MORSE_ENC = {
+    'A':'.-',   'B':'-...', 'C':'-.-.', 'D':'-..', 'E':'.',
+    'F':'..-.', 'G':'--.',  'H':'....', 'I':'..',  'J':'.---',
+    'K':'-.-',  'L':'.-..', 'M':'--',   'N':'-.',  'O':'---',
+    'P':'.--.', 'Q':'--.-', 'R':'.-.',  'S':'...', 'T':'-',
+    'U':'..-',  'V':'...-', 'W':'.--',  'X':'-..-','Y':'-.--',
+    'Z':'--..',
+    '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-',
+    '5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
+    '.':'.-.-.-',',':'--..--','?':'..--..',
+    '!':'-.-.--','/':'-..-.','=':'-...-',
+    '@':'.--.-.','&':'.-...','\"':'.-..-.','\'':'.----.'
+  };
+
+  /* Reverse lookup: morse sequence → character */
+  var MORSE_DEC = (function () {
+    var rev = {};
+    var keys = Object.keys(MORSE_ENC);
+    for (var i = 0; i < keys.length; i++) rev[MORSE_ENC[keys[i]]] = keys[i];
+    return rev;
+  }());
+
+  /* English frequency order for substitution mapping */
+  var ETAOIN = ['E','T','A','O','I','N','S','H','R','D','L','C','U','M','W','F','G','Y','P','B','V','K','J','X','Q','Z'];
+
+  /* ─── Helpers ────────────────────────────────────────────────── */
+  function extractLetters(t) {
+    return t.toUpperCase().replace(/[^A-Z]/g, '');
+  }
+
+  /* Re-inject spaces from original ciphertext into a letter-only decrypted string. */
+  function respacedDecrypt(ct, decLetters) {
+    var out = '', li = 0;
+    var upper = ct.toUpperCase();
+    for (var i = 0; i < upper.length; i++) {
+      var ch = upper[i];
+      if (ch >= 'A' && ch <= 'Z') {
+        out += (li < decLetters.length) ? decLetters[li++] : ch;
+      } else {
+        out += ch;
+      }
+    }
+    return out;
+  }
+
+  /* ─── Caesar Brute-Force ──────────────────────────────────────
+     Returns top-5 shifts sorted by chi-square ascending
+     (lower chi-square = closer to English distribution).
+     Uses DetectiveAnalyses._chiSquareAtShift which is already
+     exposed for testing. */
+  function caesarBruteForce(ct) {
+    var letters = extractLetters(ct);
+    if (letters.length === 0) return [];
+
+    var candidates = [];
+    for (var shift = 1; shift < 26; shift++) {
+      /* _chiSquareAtShift(letters, shift) measures fit of the
+         ciphertext distribution shifted back by `shift` against
+         expected English frequencies. */
+      var chi = global.DetectiveAnalyses._chiSquareAtShift(letters, shift);
+
+      /* Decrypt: shift each letter back */
+      var decLetters = '';
+      for (var i = 0; i < letters.length; i++) {
+        decLetters += String.fromCharCode(((letters.charCodeAt(i) - 65 - shift + 26) % 26) + 65);
+      }
+
+      candidates.push({
+        shift:     shift,
+        decrypted: respacedDecrypt(ct, decLetters),
+        chi:       chi
+      });
+    }
+
+    candidates.sort(function (a, b) { return a.chi - b.chi; });
+    return candidates.slice(0, 5);
+  }
+
+  /* ─── ROT13 ───────────────────────────────────────────────────
+     Caesar shift 13 — self-inverse. */
+  function rot13(ct) {
+    var letters = extractLetters(ct);
+    var decLetters = '';
+    for (var i = 0; i < letters.length; i++) {
+      decLetters += String.fromCharCode(((letters.charCodeAt(i) - 65 + 13) % 26) + 65);
+    }
+    return { decrypted: respacedDecrypt(ct, decLetters) };
+  }
+
+  /* ─── Atbash ──────────────────────────────────────────────────
+     Reverse alphabet: A↔Z, B↔Y … self-inverse. */
+  function atbash(ct) {
+    var letters = extractLetters(ct);
+    var decLetters = '';
+    for (var i = 0; i < letters.length; i++) {
+      decLetters += String.fromCharCode(25 - (letters.charCodeAt(i) - 65) + 65);
+    }
+    return { decrypted: respacedDecrypt(ct, decLetters) };
+  }
+
+  /* ─── Morse Decoder ───────────────────────────────────────────
+     Word boundaries: ' / '   Letter boundaries: ' '
+     Returns { valid, decrypted } or { valid: false, error, decrypted }. */
+  function decodeMorse(text) {
+    var t = text.trim();
+    if (!t) return { valid: false, error: 'Empty input' };
+
+    var words = t.split(/\s*\/\s*/);
+    var result = [];
+    var unknownSeqs = [];
+
+    for (var wi = 0; wi < words.length; wi++) {
+      var word = words[wi].trim();
+      if (!word) continue;
+      var syms = word.split(/\s+/);
+      var decoded = '';
+      for (var si = 0; si < syms.length; si++) {
+        var sym = syms[si];
+        if (!sym) continue;
+        var ch = MORSE_DEC[sym];
+        if (ch === undefined) {
+          unknownSeqs.push(sym);
+          decoded += '?';
+        } else {
+          decoded += ch;
+        }
+      }
+      result.push(decoded);
+    }
+
+    var decrypted = result.join(' ');
+    if (unknownSeqs.length > 0) {
+      return {
+        valid: false,
+        error: 'Unrecognised Morse sequences: ' + unknownSeqs.join(', '),
+        decrypted: decrypted
+      };
+    }
+    return { valid: true, decrypted: decrypted };
+  }
+
+  /* ─── Encoding Detector ───────────────────────────────────────
+     Auto-detects Binary (8-bit), Hexadecimal, or Base64.
+     Returns { valid, type, decrypted } or { valid: false }. */
+  function decodeEncoding(text) {
+    var t = text.trim().replace(/\s+/g, '');
+    if (!t) return { valid: false };
+
+    /* Binary: groups of 8 bits (0 and 1 only) */
+    if (/^[01]+$/.test(t) && t.length % 8 === 0 && t.length >= 8) {
+      try {
+        var binResult = '';
+        for (var bi = 0; bi < t.length; bi += 8) {
+          binResult += String.fromCharCode(parseInt(t.slice(bi, bi + 8), 2));
+        }
+        if (/[\x20-\x7e]/.test(binResult)) {        /* printable ASCII sanity check */
+          return { valid: true, type: 'Binary (8-bit)', decrypted: binResult };
+        }
+      } catch (e) { /* fall through */ }
+    }
+
+    /* Hexadecimal: even-length string of hex digits */
+    if (/^[0-9a-fA-F]+$/.test(t) && t.length % 2 === 0 && t.length >= 4) {
+      try {
+        var hexResult = '';
+        for (var hi = 0; hi < t.length; hi += 2) {
+          hexResult += String.fromCharCode(parseInt(t.slice(hi, hi + 2), 16));
+        }
+        if (/[\x20-\x7e]/.test(hexResult)) {
+          return { valid: true, type: 'Hexadecimal', decrypted: hexResult };
+        }
+      } catch (e) { /* fall through */ }
+    }
+
+    /* Base64: standard alphabet + optional padding */
+    if (/^[A-Za-z0-9+/]+=*$/.test(t) && t.length % 4 === 0 && t.length >= 4) {
+      try {
+        var b64Result;
+        if (typeof atob !== 'undefined') {
+          b64Result = atob(t);
+        } else if (typeof Buffer !== 'undefined') {
+          b64Result = Buffer.from(t, 'base64').toString('utf8');
+        }
+        if (b64Result !== undefined && /[\x20-\x7e]/.test(b64Result)) {
+          return { valid: true, type: 'Base64', decrypted: b64Result };
+        }
+      } catch (e) { /* fall through */ }
+    }
+
+    return { valid: false };
+  }
+
+  /* ─── Vigenère Key-Length Estimator ──────────────────────────
+     Combines Kasiski examination and period-IoC to propose
+     the top-3 most likely key lengths.
+     Returns { candidates: [{length, pIoC, score, methods}] }. */
+  function vigKeyLength(ct, maxKey) {
+    maxKey = (maxKey !== undefined) ? maxKey : 15;
+    var letters = extractLetters(ct);
+    if (letters.length < 30) return { candidates: [] };
+
+    var kasiski = global.DetectiveAnalyses._kasiskiTest(letters);
+
+    /* Build a set of Kasiski-supported periods for fast lookup */
+    var kasiskiSet = {};
+    for (var ki = 0; ki < kasiski.length; ki++) {
+      kasiskiSet[kasiski[ki].period] = kasiski[ki].count;
+    }
+
+    var candidates = [];
+    for (var p = 2; p <= maxKey; p++) {
+      var pIoC   = global.DetectiveAnalyses._periodIoC(letters, p);
+      var methods = [];
+      if (pIoC > 0.053) methods.push('Period-IoC');
+      if (kasiskiSet[p]) methods.push('Kasiski (' + kasiskiSet[p] + ' repeat' + (kasiskiSet[p] > 1 ? 's' : '') + ')');
+      /* Combined score: pIoC plus a Kasiski bonus */
+      var score = pIoC + (kasiskiSet[p] ? 0.005 * kasiskiSet[p] : 0);
+      candidates.push({ length: p, pIoC: pIoC, score: score, methods: methods });
+    }
+
+    candidates.sort(function (a, b) { return b.score - a.score; });
+    return { candidates: candidates.slice(0, 3) };
+  }
+
+  /* ─── Substitution Frequency Suggestions ─────────────────────
+     Maps the top-6 most frequent ciphertext letters to the
+     corresponding positions in ETAOIN order as starting hypotheses.
+     Returns { mapping: [{cipher, plain, count, pct}], note }. */
+  function substFreqSuggestions(ct) {
+    var letters = extractLetters(ct);
+    if (letters.length === 0) return { mapping: [], note: 'No letters found.' };
+
+    var counts = global.DetectiveAnalyses._freqCounts(letters);
+    var n = letters.length;
+
+    var sorted = Object.keys(counts).map(function (k) {
+      return { cipher: k, count: counts[k], pct: (counts[k] / n) * 100 };
+    }).filter(function (x) { return x.count > 0; });
+    sorted.sort(function (a, b) { return b.count - a.count; });
+
+    var top6 = sorted.slice(0, 6);
+    var mapping = top6.map(function (item, idx) {
+      return {
+        cipher: item.cipher,
+        plain:  ETAOIN[idx] || '?',
+        count:  item.count,
+        pct:    item.pct
+      };
+    });
+
+    return {
+      mapping: mapping,
+      note: 'If this is monoalphabetic substitution, the most frequent ciphertext letter ' +
+            'likely encodes ' + (mapping[0] ? mapping[0].plain : 'E') +
+            ', the second likely ' + (mapping[1] ? mapping[1].plain : 'T') +
+            ', and so on. These are starting hypotheses only — verify with context.'
+    };
+  }
+
+  /* ─── isApplicable ────────────────────────────────────────────
+     Returns { ok: true } if the named tool makes sense for the
+     given stats object, or { ok: false, reason: string } if not.
+     Used to disable/grey-out inapplicable attack buttons. */
+  function isApplicable(toolId, stats) {
+    if (!stats) return { ok: false, reason: 'No analysis data yet.' };
+    var cs  = stats.charset;
+    var n   = stats.n;
+    var ioc = stats.ioc;
+
+    switch (toolId) {
+      case 'caesar':
+        if (cs !== 'alpha') return { ok: false, reason: 'Caesar requires alphabetic-only text (detected: ' + cs + ').' };
+        if (n < 8)          return { ok: false, reason: 'Too short for meaningful brute-force (need 8+ letters).' };
+        return { ok: true };
+
+      case 'rot13':
+        if (cs !== 'alpha') return { ok: false, reason: 'ROT13 requires alphabetic-only text.' };
+        return { ok: true };
+
+      case 'atbash':
+        if (cs !== 'alpha') return { ok: false, reason: 'Atbash requires alphabetic-only text.' };
+        return { ok: true };
+
+      case 'morse':
+        if (cs !== 'morse') return { ok: false, reason: 'Input does not look like Morse code. Morse uses only . - / and spaces.' };
+        return { ok: true };
+
+      case 'encoding':
+        /* Always show — auto-detection will report if nothing matches */
+        return { ok: true };
+
+      case 'vigKeyLength':
+        if (cs !== 'alpha') return { ok: false, reason: 'Vigenère key-length analysis requires alphabetic text.' };
+        if (n < 50)         return { ok: false, reason: 'This teaching tool requires at least 50 letters; that threshold does not guarantee reliable estimation.' };
+        return { ok: true };
+
+      case 'substFreq':
+        if (cs !== 'alpha') return { ok: false, reason: 'Substitution frequency analysis requires alphabetic text.' };
+        if (n < 30)         return { ok: false, reason: 'Too short for reliable frequency analysis (need 30+ letters).' };
+        return { ok: true };
+
+      default:
+        return { ok: false, reason: 'Unknown tool: ' + toolId };
+    }
+  }
+
+  /* ─── Export ─────────────────────────────────────────────────── */
+  global.DetectiveAttacks = {
+    caesarBruteForce:     caesarBruteForce,
+    rot13:                rot13,
+    atbash:               atbash,
+    decodeMorse:          decodeMorse,
+    decodeEncoding:       decodeEncoding,
+    vigKeyLength:         vigKeyLength,
+    substFreqSuggestions: substFreqSuggestions,
+    isApplicable:         isApplicable
+  };
+
+})(typeof window !== 'undefined' ? window : global);
+```
+
 
 ## JavaScript — js/detective/challenges.js
 
@@ -2939,6 +3297,146 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 ```
 
 
+## JavaScript — js/egyptian-case.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/egyptian-case.js`
+- Served SHA-256: `9c7ae946039853267a0bbbb127b02f48c7c2da838e96edb6963774775e5a7da2`
+- Readable-source SHA-256: `9c7ae946039853267a0bbbb127b02f48c7c2da838e96edb6963774775e5a7da2`
+
+
+```javascript
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else { root.EgyptianCase = api; api.mount(document); }
+})(typeof window === 'object' ? window : globalThis, function () {
+  'use strict';
+  // Historical evidence, as reported in Parkinson, Cracking Codes (1999).
+  const EVIDENCE = {
+    count: { signs: 1419, greekWords: 486 },
+    ramesses: { origin: 'egyptian', soundSigns: true }
+  };
+  const HYPOTHESES = {
+    symbolic: { label: 'Each sign stands for one word or idea', maxSignsPerWord: 1.5, minSignsPerWord: 0, soundSignsFor: [] },
+    young: { label: 'Sound signs spell only foreign names; the rest is symbolic', maxSignsPerWord: 1.5, minSignsPerWord: 0, soundSignsFor: ['foreign'] },
+    mixed: { label: 'Sound signs, sound-and-meaning signs and classifiers work together', maxSignsPerWord: Infinity, minSignsPerWord: 1.5, soundSignsFor: ['foreign', 'egyptian'] }
+  };
+  function check(hypothesis, evidenceId, data) {
+    const h = HYPOTHESES[hypothesis];
+    if (!h) throw new Error('Unknown hypothesis: ' + hypothesis);
+    if (evidenceId === 'count') {
+      const e = data || EVIDENCE.count, ratio = e.signs / e.greekWords;
+      const fits = ratio >= h.minSignsPerWord && ratio <= h.maxSignsPerWord;
+      return { verdict: fits ? 'consistent' : 'contradicted', ratio };
+    }
+    if (evidenceId === 'ramesses') {
+      const e = data || EVIDENCE.ramesses;
+      const fits = !e.soundSigns || h.soundSignsFor.includes(e.origin);
+      return { verdict: fits ? 'consistent' : 'contradicted' };
+    }
+    throw new Error('Unknown evidence: ' + evidenceId);
+  }
+  // A hypothesis survives only if it is consistent with every check.
+  function assess(hypothesis, data) {
+    const d = data || {};
+    const count = check(hypothesis, 'count', d.count), ramesses = check(hypothesis, 'ramesses', d.ramesses);
+    return { count, ramesses, consistent: count.verdict === 'consistent' && ramesses.verdict === 'consistent' };
+  }
+
+  // The word pr "go out" as taught in Collier and Manley, section 2: a two-consonant house
+  // sign, a mouth sign that repeats its r, and a walking-legs determinative with no sound.
+  const WORD = {
+    transliteration: 'pr', translation: 'go out',
+    signs: [
+      { id: 'house', char: '\u{13250}', gardiner: 'O1', name: 'house plan', value: 'pr' },
+      { id: 'mouth', char: '\u{1308B}', gardiner: 'D21', name: 'mouth', value: 'r' },
+      { id: 'legs', char: '\u{130BB}', gardiner: 'D54', name: 'walking legs', value: null }
+    ]
+  };
+  const ROLES = ['sound', 'complement', 'determinative'];
+  function readRoles(roles) {
+    let transliteration = '';
+    const errors = [];
+    for (const sign of WORD.signs) {
+      const role = roles[sign.id];
+      if (!ROLES.includes(role)) throw new Error('Choose a role for the ' + sign.name + ' sign.');
+      if (role === 'sound') {
+        if (sign.value === null) errors.push('The ' + sign.name + ' sign has no sound value in this word.');
+        else transliteration += sign.value;
+      } else if (role === 'complement') {
+        // A complement repeats a consonant already written by a larger sound sign.
+        if (!sign.value || !transliteration.endsWith(sign.value)) errors.push('The ' + sign.name + ' sign has no preceding sound sign to complement.');
+      }
+    }
+    return { transliteration, errors, matches: errors.length === 0 && transliteration === WORD.transliteration };
+  }
+  // Signs face the beginning of the line: read into their faces (Collier and Manley, section 7).
+  function readingDirection(facing) {
+    if (facing === 'right') return 'rtl';
+    if (facing === 'left') return 'ltr';
+    throw new Error('Unknown facing: ' + facing);
+  }
+  function checkDirection(answer, facing) { return { correct: answer === readingDirection(facing) }; }
+
+  function mount(doc) {
+    const $ = id => doc.getElementById(id);
+    if (!$('egypt-hypothesis')) return;
+    const checked = [];
+    const renderRecord = () => {
+      $('egypt-record').replaceChildren(...checked.map(entry => { const li = doc.createElement('li'); li.textContent = entry; return li; }));
+      $('egypt-record-empty').hidden = checked.length > 0;
+    };
+    $('egypt-check').addEventListener('click', () => {
+      const value = $('egypt-hypothesis').value, label = HYPOTHESES[value].label;
+      const a = assess(value), count = a.count, ram = a.ramesses;
+      $('egypt-evidence').hidden = false;
+      $('egypt-result').textContent = a.consistent
+        ? 'This hypothesis is consistent with both checks: the sign count and the Ramesses cartouche.'
+        : 'This hypothesis is contradicted: ' + [count.verdict === 'contradicted' ? 'the Rosetta Stone has about ' + count.ratio.toFixed(1) + ' hieroglyphic signs per Greek word' : '', ram.verdict === 'contradicted' ? 'an Egyptian royal name is written with sound signs' : ''].filter(Boolean).join(', and ') + '. Revise it; the failed check stays in your record.';
+      const entry = label + ': sign count ' + count.verdict + '; Ramesses cartouche ' + ram.verdict + '.';
+      if (checked[checked.length - 1] !== entry) checked.push(entry);
+      renderRecord();
+    });
+    $('egypt-reset').addEventListener('click', () => {
+      $('egypt-hypothesis').selectedIndex = 0; $('egypt-evidence').hidden = true;
+      $('egypt-result').textContent = 'Choose a hypothesis about how the script works, then check it.';
+    });
+
+    const word = $('egypt-word');
+    const renderWord = () => {
+      const facing = word.dataset.facing;
+      word.classList.toggle('egypt-facing-left', facing === 'left');
+      $('egypt-facing-note').textContent = 'The walking legs face ' + facing + '.';
+    };
+    $('egypt-flip').addEventListener('click', () => {
+      word.dataset.facing = word.dataset.facing === 'right' ? 'left' : 'right';
+      renderWord(); $('egypt-direction-result').textContent = 'The signs now face the other way. Check your answer again.';
+    });
+    $('egypt-direction-check').addEventListener('click', () => {
+      const r = checkDirection($('egypt-direction').value, word.dataset.facing);
+      $('egypt-direction-result').textContent = r.correct
+        ? 'Yes. The signs face the start of the line, so you read into their faces.'
+        : 'Not quite. Read into the faces of the signs: they look toward the start of the line, whatever direction English uses.';
+    });
+    $('egypt-roles-check').addEventListener('click', () => {
+      let r;
+      try { r = readRoles({ house: $('egypt-role-house').value, mouth: $('egypt-role-mouth').value, legs: $('egypt-role-legs').value }); }
+      catch (e) { $('egypt-roles-result').textContent = e.message; return; }
+      $('egypt-roles-result').textContent = r.matches
+        ? 'Transliteration: pr. Translation: “go out”. The house sign writes pr, the mouth repeats its r as a phonetic complement, and the walking legs classify the word as one of motion without adding a sound.'
+        : 'Your roles spell “' + (r.transliteration || '(nothing)') + '”, not the word’s consonants pr.' + (r.errors.length ? ' ' + r.errors.join(' ') : '');
+    });
+    renderWord(); renderRecord();
+  }
+  return { EVIDENCE, HYPOTHESES, WORD, check, assess, readRoles, readingDirection, checkDirection, mount };
+});
+```
+
+
 ## JavaScript — js/evidence-exercises.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
@@ -3045,294 +3543,4 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     else mount(root.document);
   }
 })(typeof window !== 'undefined' ? window : globalThis);
-```
-
-
-## JavaScript — js/first-codebreak.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/first-codebreak.js`
-- Served SHA-256: `21f880e70e483a19aced53396b04699ac65b897b62992983ee58fb4eb0bd33d9`
-- Readable-source SHA-256: `21f880e70e483a19aced53396b04699ac65b897b62992983ee58fb4eb0bd33d9`
-
-
-```javascript
-/* Original classroom fixtures. Reuses DetectiveWorkspaces.Desk for partial keys.
- * Vigenère: A=0, repeating key, ASCII letters only; spacing is not encrypted.
- * Language panels describe the displayed samples, not population frequencies.
- */
-'use strict';
-(function (global) {
-  const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const SUB_KEY = 'QWERTYUIOPASDFGHJKLZXCVBNM';
-  const NOTICE = 'LOOK FOR THE BOOK OF MAPS IN THE SCHOOL ROOM. DO NOT GO TO THE OLD DOOR. BRING THE BOOK TO THE READING ROOM AT NOON.';
-  const VIG_KEY = 'LAMP';
-  const DISPATCH = 'THE READING ROOM WILL OPEN AT NINE. BRING THE MAP AND THE LETTER TO THE LIBRARY. THE READING ROOM WILL CLOSE AT FIVE. CHECK THE NAME ON THE LETTER BEFORE YOU GIVE IT TO THE READER. KEEP A COPY OF THE MESSAGE AND NOTE THE TIME IT ARRIVED. THE MAP SHOWS THE ROAD TO THE OLD SCHOOL AND THE BRIDGE OVER THE RIVER. THE READER WILL WAIT IN THE LIBRARY UNTIL THE OTHER COPY ARRIVES. COMPARE THE TWO COPIES AND RECORD EVERY CHANGE. A CLEAR MESSAGE IS ONLY PART OF THE EVIDENCE.';
-  const SAMPLES = [
-    {id:'en', name:'English', text:'THE LIBRARY KEEPS LETTERS AND MAPS. READ THE LETTER BEFORE YOU LEAVE. THERE IS A NAME ON THE PAGE AND A NOTE IN THE MARGIN.'},
-    {id:'fr', name:'French', text:'LA BIBLIOTHEQUE GARDE LES LETTRES ET LES CARTES. LISEZ LA LETTRE AVANT DE PARTIR. IL Y A UN NOM SUR LA PAGE ET UNE NOTE DANS LA MARGE.'},
-    {id:'de', name:'German', text:'DIE BIBLIOTHEK BEWAHRT BRIEFE UND KARTEN AUF. LESEN SIE DEN BRIEF VOR DER ABREISE. AUF DER SEITE STEHT EIN NAME UND AM RAND EINE NOTIZ.'},
-    {id:'it', name:'Italian', text:'LA BIBLIOTECA CONSERVA LETTERE E MAPPE. LEGGETE LA LETTERA PRIMA DI PARTIRE. SULLA PAGINA SI TROVA UN NOME E NEL MARGINE UNA NOTA.'},
-    {id:'es', name:'Spanish', text:'LA BIBLIOTECA GUARDA CARTAS Y MAPAS. LEAN LA CARTA ANTES DE SALIR. HAY UN NOMBRE EN LA PAGINA Y UNA NOTA EN EL MARGEN.'}
-  ];
-  const ENGLISH = [8.2,1.5,2.8,4.3,12.7,2.2,2,6.1,7,.15,.77,4,2.4,6.7,7.5,1.9,.095,6,6.3,9.1,2.8,.98,2.4,.15,2,.074];
-  const letters = text => text.toUpperCase().replace(/[^A-Z]/g, '');
-  function substitution(text) { return text.replace(/[A-Z]/g, c => SUB_KEY[ABC.indexOf(c)]); }
-  function counts(text) {
-    const out = {};
-    letters(text).split('').forEach(c => { out[c] = (out[c] || 0) + 1; });
-    return Object.entries(out).sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0]));
-  }
-  function vigenere(text, key, decrypt = false) {
-    if (!/^[A-Z]+$/.test(key)) throw new Error('Use one or more A–Z key letters.');
-    let pos = 0;
-    return text.replace(/[A-Z]/g, c => ABC[(ABC.indexOf(c) + (decrypt ? -1 : 1)*ABC.indexOf(key[pos++ % key.length]) + 26)%26]);
-  }
-  function repeats(text) {
-    const t = letters(text), seen = {}, found = [];
-    for (let i=0;i<t.length-2;i++) {
-      const s = t.slice(i,i+3);
-      if (seen[s] !== undefined) found.push({sequence:s, first:seen[s], second:i, distance:i-seen[s]});
-      else seen[s]=i;
-    }
-    return found;
-  }
-  function columns(text, period) {
-    if (!Number.isInteger(period) || period<1 || period>10) throw new Error('Choose a period from 1 to 10.');
-    const groups = Array.from({length:period},()=> '');
-    letters(text).split('').forEach((c,i)=>{ groups[i%period]+=c; }); return groups;
-  }
-  function rankShifts(text) {
-    const t = letters(text);
-    if (!t.length) return [];
-    return Array.from({length:26},(_,shift)=> {
-      const decoded = vigenere(t,ABC[shift],true), freq=Object.fromEntries(counts(decoded));
-      const score = ENGLISH.reduce((sum,f,i)=> { const expected=t.length*f/100; return sum+Math.pow((freq[ABC[i]]||0)-expected,2)/expected; },0);
-      return {shift, key:ABC[shift], text:decoded, score};
-    }).sort((a,b)=>a.score-b.score);
-  }
-  function bigrams(text) {
-    const out = {};
-    (text.match(/[A-Z]+/g)||[]).forEach(word=> {for(let i=0;i<word.length-1;i++) {const pair=word.slice(i,i+2); out[pair]=(out[pair]||0)+1;} });
-    return Object.entries(out).sort((a,b)=>b[1]-a[1] || a[0].localeCompare(b[0])).slice(0,6);
-  }
-  function homophones(text, alternatives, rng = Math.random) {
-    if (!Number.isInteger(alternatives) || alternatives<1 || alternatives>8) throw new Error('Choose 1–8 alternatives.');
-    const tokens=[], key={};
-    letters(text).split('').forEach(c=> {
-      const n = c==='O' ? alternatives : 1;
-      const token=String(ABC.indexOf(c)*8+Math.floor(rng()*n)).padStart(3,'0');
-      tokens.push(token);key[token]=c;
-    });
-    const freq={}; tokens.forEach(t=>{freq[t]=(freq[t]||0)+1;});
-    return {tokens,key,frequencies:Object.entries(freq).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))};
-  }
-  const api={ABC,SUB_KEY,NOTICE,VIG_KEY,DISPATCH,SAMPLES,letters,substitution,counts,vigenere,repeats,columns,rankShifts,bigrams,homophones};
-  if(typeof module!=='undefined' && module.exports) module.exports=api;
-  global.FirstCodebreak=api;
-  function boot() {
-    const d=global.document, $=id=>d.getElementById(id);
-    if (!$('first-desk')) return;
-    const W=global.DetectiveWorkspaces, cipher=substitution(NOTICE), desk=new W.Desk(cipher);
-    let hint=0;
-    const hints=[
-      'G occurs 24 times. A frequency guess of G → E is tempting. Try it, but treat it as a guess.',
-      'FGGF has the pattern 0.1.1.0. The meeting time is a four-letter word with this pattern: NOON. Test F → N and G → O. Undo a conflicting guess first.',
-      'The repeated word ZIT can be tested as THE: Z → T, I → H, T → E. Does that fit every occurrence?',
-      'This is a library notice. Try WGGA → BOOK and KGGD → ROOM. Each letter must keep the same meaning throughout.',
-      'QZ is AT; GY is OF; OF is IN. Use the surrounding words to finish. If stuck, reveal one missing letter at a time.'
-    ];
-    const say=text=>{$('desk-status').textContent=text;};
-    const grid=$('lesson-key');
-    counts(cipher).map(r=>r[0]).sort().forEach(c=>{
-      const cell=d.createElement('div');cell.className='det-key-cell';
-      const label=d.createElement('label');label.htmlFor='lesson-map-'+c;label.textContent=c+' →';
-      const input=d.createElement('input');input.id=label.htmlFor;input.maxLength=1;input.autocomplete='off';input.type='text';input.setAttribute('aria-label','Plaintext for cipher '+c);
-      const assign=()=>{try{const value=input.value.trim().toUpperCase();if(value!==(desk.state.map[c]||'')){desk.assign(c,value);say('Mapping updated. Check it against every word.');}}catch(e){say(e.message);}render();};
-      input.addEventListener('input',assign);input.addEventListener('change',assign);
-      const lock=d.createElement('label');lock.className='det-lock';const box=d.createElement('input');box.type='checkbox';box.id='lesson-lock-'+c;box.setAttribute('aria-label','Lock cipher '+c);
-      box.addEventListener('change',()=>{try{desk.lock(c,box.checked);say('Lock updated.');}catch(e){say(e.message);}render();});
-      lock.append(box,d.createTextNode('Lock'));cell.append(label,input,lock);grid.append(cell);
-    });
-    function render() {
-      $('lesson-cipher').textContent=cipher;
-      $('lesson-plain').textContent=W.decode(cipher,desk.state.map);
-      counts(cipher).forEach(([c])=> {const input=$('lesson-map-'+c);input.value=desk.state.map[c]||'';input.readOnly=!!desk.state.locks[c];$('lesson-lock-'+c).checked=!!desk.state.locks[c];});
-      $('lesson-undo').disabled=!desk.history.length;
-      const used=counts(cipher).length, correct=counts(cipher).filter(([c])=>desk.state.map[c]===ABC[SUB_KEY.indexOf(c)]).length;
-      $('lesson-progress').textContent=Object.keys(desk.state.map).length+' of '+used+' used symbols assigned. Check the message when you are ready.';
-      $('lesson-check').onclick=()=>say(correct===used?'The plaintext matches the supplied exercise. Now explain which clues supported it. This verifies an invented fixture; it does not authenticate a historical document.':'The supplied message does not match yet. Check repeated words and test your guesses across the whole notice.');
-    }
-    function highlight(kind) {
-      const words=cipher.match(/[A-Z]+/g)||[], frequencies={};words.forEach(w=>{frequencies[w]=(frequencies[w]||0)+1;});
-      const parts=cipher.split(/([A-Z]+)/);$('clue-output').textContent='';
-      parts.forEach(word=>{
-        const match=kind==='double'?/([A-Z])\1/.test(word):kind==='short'?/^[A-Z]{1,3}$/.test(word):frequencies[word]>1;
-        const node=d.createElement(match?'mark':'span');node.textContent=word;$('clue-output').append(node);
-      });
-      $('clue-caption').textContent={double:'Highlighted words contain doubled letters. A one-to-one substitution preserves this pattern.',short:'Highlighted words have one to three letters. These boundaries were intentionally retained in this exercise.',repeat:'Highlighted words recur. One shared mapping must explain all occurrences.'}[kind];
-    }
-    ['double','short','repeat'].forEach(kind=>$('clue-'+kind).addEventListener('click',()=>highlight(kind)));
-    $('lesson-frequencies').textContent=counts(cipher).map(([c,n])=>c+': '+n).join(' · ');
-    $('lesson-wrong').addEventListener('click',()=>{try{desk.assign('G','E');say('G → E is an unverified frequency guess. Compare FGGF with the NOON clue; Undo restores your previous key.');}catch(e){say(e.message);}render();});
-    $('lesson-undo').addEventListener('click',()=>{desk.undo();render();say('Restored the previous key and locks.');});
-    $('lesson-reset').addEventListener('click',()=>{desk.clear();render();say('Cleared unlocked guesses. Locked letters are retained.');});
-    $('lesson-hint').addEventListener('click',()=>{const p=d.createElement('p');p.textContent=(hint+1)+'. '+hints[hint++];$('lesson-hints').append(p);$('lesson-hint').disabled=hint===hints.length;});
-    $('lesson-reveal').addEventListener('click',()=>{
-      const next=counts(cipher).map(r=>r[0]).find(c=>desk.state.map[c]!==ABC[SUB_KEY.indexOf(c)]);
-      if(!next){say('All used letters match. Check the message, then record your reasoning.');return;}
-      try {desk.assign(next,ABC[SUB_KEY.indexOf(next)]);say('Answer help: revealed '+next+' → '+desk.state.map[next]+'.');}catch(e){say('Reveal stopped: '+e.message+' Undo or clear conflicting guesses before revealing.');}render();
-    });
-    render();highlight('double');
-
-    // A complete, inspectable repeating-key attack on one supplied fixture.
-    const vigCipher=vigenere(letters(DISPATCH),VIG_KEY);let selectedRepeat=null;
-    $('vig-cipher').textContent=vigCipher;
-    $('vig-find').addEventListener('click',()=>{
-      const rows=repeats(vigCipher);$('vig-repeats').textContent='';
-      rows.slice(0,20).forEach(row=>{
-        const button=d.createElement('button');button.type='button';button.textContent=row.sequence+': positions '+(row.first+1)+' and '+(row.second+1)+'; distance '+row.distance;
-        button.addEventListener('click',()=>{selectedRepeat=row;drawVig();});$('vig-repeats').append(button);
-      });
-      $('vig-repeat-note').textContent='Showing the first '+Math.min(20,rows.length)+' of '+rows.length+' repeated-trigram pairs (each later occurrence compared with its first). Positions count A–Z letters from 1. Select a pair to highlight it; repeats can be accidental.';
-    });
-    function drawVig() {
-      const period=Number($('vig-period').value), groups=columns(vigCipher,period);
-      $('vig-cipher').textContent='';
-      vigCipher.split('').forEach((c,i)=> {const node=d.createElement(selectedRepeat && ((i>=selectedRepeat.first&&i<selectedRepeat.first+3)||(i>=selectedRepeat.second&&i<selectedRepeat.second+3))?'mark':'span');node.textContent=c;$('vig-cipher').append(node);});
-      $('vig-distance-note').textContent=selectedRepeat?'Distance '+selectedRepeat.distance+(selectedRepeat.distance%period===0?' is divisible by ':' is not divisible by ')+period+'. A compatible spacing suggests a period; it does not prove one.':'Choose a repeated fragment, then compare candidate periods.';
-      $('vig-columns').textContent='';
-      groups.forEach((group,i)=>{
-        const card=d.createElement('div');card.className='column-card';const label=d.createElement('label');label.htmlFor='vig-key-'+i;label.textContent='Column '+(i+1)+' key letter';
-        const select=d.createElement('select');select.id=label.htmlFor;
-        ABC.split('').forEach(c=>{const o=d.createElement('option');o.value=c;o.textContent=c;select.append(o);});
-        const preview=d.createElement('output');preview.className='cipher-strip';preview.id='vig-preview-'+i;
-        const rank=rankShifts(group);const suggest=d.createElement('button');suggest.type='button';suggest.textContent='Try best English fit ('+rank[0].key+')';
-        const evidence=d.createElement('details');const summary=d.createElement('summary');summary.textContent='Inspect all 26 shifts';const list=d.createElement('ol');
-        rank.forEach(r=>{const li=d.createElement('li');li.textContent=r.key+' — χ² '+r.score.toFixed(1)+' — '+r.text.slice(0,24);list.append(li);});evidence.append(summary,list);
-        select.addEventListener('change',updateKey);suggest.addEventListener('click',()=>{select.value=rank[0].key;updateKey();});
-        card.append(label,select,preview,suggest,evidence);$('vig-columns').append(card);
-      });updateKey();
-    }
-    function updateKey() {
-      const period=Number($('vig-period').value), groups=columns(vigCipher,period);let key='';
-      groups.forEach((group,i)=>{const c=$('vig-key-'+i).value;key+=c;$('vig-preview-'+i).textContent=vigenere(group,c,true);});
-      $('vig-key-display').textContent=key;$('vig-result').textContent=vigenere(vigCipher,key,true);$('vig-status').textContent='Candidate key only. Read the full result and check it against the supplied exercise.';
-    }
-    $('vig-period').addEventListener('change',drawVig);
-    $('vig-check').addEventListener('click',()=>{$('vig-status').textContent=$('vig-result').textContent===letters(DISPATCH)?'Matches the supplied plaintext. LAMP is the generating key; repeating it (for example LAMPLAMP) describes the same stream. A matching toy answer is not evidence of a historical message.':'This candidate does not recover the supplied message. Try another period and inspect the column shifts.';});
-    $('vig-reveal').addEventListener('click',()=>{$('vig-period').value='4';drawVig();VIG_KEY.split('').forEach((c,i)=>{$('vig-key-'+i).value=c;});updateKey();$('vig-status').textContent='Answer revealed: LAMP. Revisit the highlighted repeats and four column distributions to explain why it works.';});
-    drawVig();
-
-    // Explicitly small, original modern-language samples with disclosed normalization.
-    SAMPLES.forEach(sample=>{const option=d.createElement('option');option.value=sample.id;option.textContent=sample.name;$('language-sample').append(option);});
-    function drawLanguage() {
-      const sample=SAMPLES.find(s=>s.id===$('language-sample').value), freq=counts(sample.text), n=letters(sample.text).length;
-      $('language-text').textContent=sample.text;
-      $('language-counts').textContent=freq.map(([c,count])=>c+': '+count+' ('+(100*count/n).toFixed(1)+'%)').join(' · ');
-      $('language-pairs').textContent=bigrams(sample.text).map(([pair,count])=>pair+': '+count).join(' · ');
-      $('language-words').textContent=Array.from(new Set(sample.text.match(/\b[A-Z]{1,3}\b/g)||[])).join(', ');
-      $('language-comparison').textContent='This '+n+'-letter '+sample.name+' sample peaks at '+freq.filter(row=>row[1]===freq[0][1]).map(row=>row[0]).join('/')+'. The notice in lesson 1 peaks at O (24 occurrences). Even two texts in the same language can have different distributions. These samples cannot identify a language or supply a historical frequency model.';
-    }
-    $('language-sample').addEventListener('change',drawLanguage);drawLanguage();
-    function bars(id,rows,total) {
-      $(id).textContent='';rows.forEach(([symbol,n])=>{const row=d.createElement('div');row.className='frequency-row';const label=d.createElement('span');label.textContent=symbol;const meter=d.createElement('meter');meter.min=0;meter.max=total;meter.value=n;meter.setAttribute('aria-label',symbol+': '+n+' of '+total);const count=d.createElement('span');count.textContent=n;row.append(label,meter,count);$(id).append(row);});
-    }
-    function drawHomophones() {
-      const n=Number($('homophone-count').value), original=homophones(NOTICE,1), changed=homophones(NOTICE,n);
-      bars('homophone-before',original.frequencies,original.tokens.length);bars('homophone-after',changed.frequencies,changed.tokens.length);
-      $('homophone-output').textContent=changed.tokens.join(' ');
-      $('homophone-status').textContent='O has '+n+' possible token(s), selected independently with equal probability in this toy. Its 24 occurrences are distributed among '+new Set(changed.tokens.filter(t=>changed.key[t]==='O')).size+' observed token(s). The expected count per O-token is '+(24/n).toFixed(1)+', but a sample can vary. The other letters still have one token each.';
-    }
-    $('homophone-count').addEventListener('change',drawHomophones);$('homophone-rerun').addEventListener('click',drawHomophones);drawHomophones();
-  }
-  if(typeof document!=='undefined') {if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);else boot();}
-})(typeof window!=='undefined'?window:globalThis);
-```
-
-
-## JavaScript — js/footer.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/footer.js`
-- Served SHA-256: `1d5cc4bd041628cc32d535b7aa5e3bbea67b6bce16d250273e0960be6d690d1d`
-- Readable-source SHA-256: `1d5cc4bd041628cc32d535b7aa5e3bbea67b6bce16d250273e0960be6d690d1d`
-
-
-```javascript
-/**
- * THE CIPHER MUSEUM — Footer System
- * Renders the canonical site footer into any <footer> element on the page.
- * Auto-loaded by js/nav.js. Handles subdirectory path prefixing.
- *
- * Detection (in order):
- *   1. <footer class="museum-footer">
- *   2. <footer data-footer>
- *   3. The first bare <footer> element
- */
-'use strict';
-(function () {
-  var foot = document.querySelector('footer.museum-footer')
-          || document.querySelector('footer[data-footer]')
-          || document.querySelector('footer');
-  if (!foot) return;
-
-  var path = location.pathname;
-  var inSub = /\/(ciphers|halls|tours|lab|community|hall-of-foundations)\//.test(path);
-  var pre = inSub ? '../' : '';
-
-  var EXPLORE = [
-    ['museum-map.html',          'Museum Map'],
-    ['timeline.html',            'Timeline'],
-    ['halls/ancient.html',       'Hall I · Ancient'],
-    ['halls/machines.html',      'Hall VII · Machines'],
-    ['halls/unbreakable.html',   'Hall IX · Unbreakable'],
-    ['halls/codebreakers.html',  'Hall X · Codebreakers']
-  ];
-  var LEARN = [
-    ['learn.html',               'How Ciphers Work'],
-    ['modern.html',              'Modern Cryptography'],
-    ['cipher-corpus.html',       'Cipher Corpus'],
-    ['challenges.html',          'Challenges'],
-    ['lab/workbench.html',       "Codebreaker's Workbench"],
-    ['cryptanalysis.html',       'Cryptanalysis Techniques'],
-    ['glossary.html',            'Glossary'],
-    ['teaching.html#accuracy',   'Engine Accuracy']
-  ];
-
-  function listHtml(items) {
-    return items.map(function (n) {
-      return '<li><a href="' + pre + n[0] + '">' + n[1] + '</a></li>';
-    }).join('');
-  }
-
-  foot.className = 'museum-footer';
-  foot.innerHTML =
-    '<div class="footer-grid">' +
-      '<div class="footer-brand">' +
-        '<span class="footer-logo-text">The Cipher Museum</span>' +
-        '<p class="footer-brand-desc">Built for GitHub Pages. MIT License. Open source.</p>' +
-      '</div>' +
-      '<div>' +
-        '<div class="footer-col-title">Explore</div>' +
-        '<ul class="footer-links">' + listHtml(EXPLORE) + '</ul>' +
-      '</div>' +
-      '<div>' +
-        '<div class="footer-col-title">Learn &amp; Build</div>' +
-        '<ul class="footer-links">' + listHtml(LEARN) +
-          '<li><a href="https://github.com/systemslibrarian/cipher-museum" rel="noopener">GitHub Repository</a></li>' +
-        '</ul>' +
-      '</div>' +
-    '</div>' +
-    '<div class="footer-bottom">' +
-      '<span class="footer-copy">© The Cipher Museum · MIT License · Open Source</span>' +
-      '<span class="footer-copy">172 exhibits · 13 halls · 3,900+ years</span>' +
-    '</div>';
-})();
 ```

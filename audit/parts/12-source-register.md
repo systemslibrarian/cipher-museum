@@ -1,8 +1,8 @@
 # Source register and recorded access limits
 
-Snapshot: `f5a994abd27f5d28531efa53a23d5b8661e41b61`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `19f2c1a4a89f0b0e8661c209e95ed66d51fc5374`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
-These 185 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
+These 188 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
 ## HAC-1997 — Handbook of Applied Cryptography
 
@@ -3047,5 +3047,54 @@ These 185 identities and reading scopes come from the prior review ledger. They 
   "scope": "Full-text review for the30October2026 audit; not independent proof verification, paper-experiment reproduction or production assurance. Specialist CL686/687/688 are not adopted into Museum engines.",
   "saved_pdf_sha256": "90db78391ccef289aebab2cb9db96dd52a6caf08e5664ab4f49de2343516eb84",
   "review_record": "docs/RESEARCH_REVIEW_2026-10-30.md"
+}
+```
+
+## TYPEX-TURING-2019 — The Typex Scare of 1943: How Well Did the British React to a Cypher-Security Scare?
+
+```json
+{
+  "title": "The Typex Scare of 1943: How Well Did the British React to a Cypher-Security Scare?",
+  "author": "Dermot Turing",
+  "year": 2019,
+  "url": "https://ep.liu.se/ecp/158/004/ecp19158004.pdf",
+  "passages_read": [
+    "Printed pp. 37–38"
+  ],
+  "scope": "Probable capture-assisted reading distinguished from general cryptanalysis; extent and duration uncertain. The author’s archival reconstruction, not independent inspection of those archives."
+}
+```
+
+## HANDBELL-2023 — The cipher of Emperor Rudolf II’s “Alchemical Hand Bell”
+
+```json
+{
+  "title": "The cipher of Emperor Rudolf II’s “Alchemical Hand Bell”",
+  "authors": [
+    "Richard Bean",
+    "Corinna Gannon",
+    "Sarah Lang"
+  ],
+  "year": 2023,
+  "url": "https://ecp.ep.liu.se/index.php/histocrypt/article/view/690",
+  "passages_read": [
+    "Sections 2–3 and 5 (pp. 14–16), with artifact context from p. 13"
+  ],
+  "scope": "Reported classifier suggestions under digit and letter representations; chronology and unresolved interpretation. No rerun, calibrated probabilities, artifact inspection or reproduced IC calculation."
+}
+```
+
+## ALCHEMICAL-SECRECY-2023 — Situating ciphers among alchemical techniques of secrecy
+
+```json
+{
+  "title": "Situating ciphers among alchemical techniques of secrecy",
+  "author": "Sarah Lang",
+  "year": 2023,
+  "url": "https://ecp.ep.liu.se/index.php/histocrypt/article/view/698",
+  "passages_read": [
+    "Publisher abstract and contextual framework"
+  ],
+  "scope": "Secrecy as practice as well as content; used for a short contextual distinction, not a full-paper reading claim."
 }
 ```

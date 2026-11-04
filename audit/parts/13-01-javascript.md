@@ -1,6 +1,6 @@
 # javascript appendix 1
 
-Snapshot: `f5a994abd27f5d28531efa53a23d5b8661e41b61`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `19f2c1a4a89f0b0e8661c209e95ed66d51fc5374`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -526,8 +526,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/artifact-cards-data.min.js`
-- Served SHA-256: `7c06bbd8f43c5e15c87216234017f1c00af20b41f55355ccc7c722e8b12b9687`
-- Readable-source SHA-256: `7932b5417c0acaf74a03a35cbd20c3bd489adac964942634e6bd82536cb14f30`
+- Served SHA-256: `4a07c7c77963fde13fc749ee2a248dcc47163c1041694a0a5a7abd8529785d5a`
+- Readable-source SHA-256: `0ce4aac0c57e05b5a5ec1ea9aa548bc1f911f14c50ad1b4b2dfbc06bb37662bc`
 
 
 ```javascript
@@ -1578,6 +1578,23 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       "securityFailure": "Étienne Bazeries (1893): syllabic frequency analysis and contextual cribs.",
       "modernLesson": "Decoy tokens & variable-length codewords"
     },
+    "gripenstierna": {
+      "name": "Gripenstierna’s Cipher Machine",
+      "hall": "VII",
+      "era": "1786 · Sweden",
+      "family": "Mechanical polyalphabetic cipher device",
+      "region": "Sweden",
+      "usedBy": "Documented 1786 construction; operational use not established here",
+      "keyType": "Disk arrangement",
+      "keyIdea": "Gripenstierna’s documented 1786 Swedish cipher device used 57 disks and separated plaintext access from ciphertext copying. The original is lost; later replicas are reconstructions.",
+      "trust": {
+        "key": "historical",
+        "text": "Historical Only",
+        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
+      },
+      "securityFailure": "Historical device; original lost, later reconstructed from documents. No modern security claim.",
+      "modernLesson": "Separate access to plaintext from handling ciphertext"
+    },
     "gronsfeld": {
       "name": "Gronsfeld Cipher",
       "hall": "III",
@@ -1705,7 +1722,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       "region": "Global",
       "usedBy": "See the exhibit for historical participants and source evidence",
       "keyType": "Varies by system",
-      "keyIdea": "JN-25 (1939-1945) - the Imperial Japanese Navy's superenciphered codebook system broken by Station HYPO and central to Midway intelligence.",
+      "keyIdea": "JN-25 combined Japanese naval code groups with additive encipherment. Partial recoveries by Allied teams, including Station HYPO, contributed to Midway intelligence.",
       "trust": {
         "key": "broken",
         "text": "Broken",
@@ -2769,7 +2786,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
         "text": "Historical Only",
         "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
       },
-      "securityFailure": "Never publicly broken by cryptanalysis in wartime service; obsolete today.",
+      "securityFailure": "No general wartime cryptanalytic break established here; captured equipment and keys posed a separate risk. Obsolete today.",
       "modernLesson": "Model differences and operational practices matter alongside the rotor count"
     },
     "ua-8295": {
