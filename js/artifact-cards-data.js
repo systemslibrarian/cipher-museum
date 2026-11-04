@@ -1147,6 +1147,23 @@
       "securityFailure": "Statistical analysis · Structural pattern detection",
       "modernLesson": "Non-uniform output distributions"
     },
+    "ika": {
+      "name": "IKA Cipher Machine",
+      "hall": "VII",
+      "era": "Early 1930s · Japan",
+      "family": "Mechanical and Rotor Machines",
+      "region": "Global",
+      "usedBy": "See the exhibit for historical participants and source evidence",
+      "keyType": "Varies by system",
+      "keyIdea": "Explore the Imperial Japanese Navy’s IKA cipher: what intercepted traffic establishes, what M-1 artifacts show, and why the physical IKA mechanism remains uncertain in the cited study.",
+      "trust": {
+        "key": "historical",
+        "text": "Historical Only",
+        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
+      },
+      "securityFailure": "Historical naval cipher reconstructed from intercepted traffic; the physical IKA mechanism is not established by the cited 2021 study.",
+      "modernLesson": "Match each claim to its kind of evidence"
+    },
     "ira-ciphers": {
       "name": "IRA Cipher Traffic",
       "hall": "V",

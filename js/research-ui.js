@@ -6,6 +6,7 @@
   let imageURL = null, pendingImage = null, activeImage = null, languageSet = null, languageError = '';
   let activeRegionSpan = '';
   let selectedClass = '', selectedOccurrences = new Set(), lastCandidate = '', retainedBundle = null;
+  let renderedSourceFields = Object.create(null), alignmentContext = '', alignmentDraftNotice = '';
   const sourceFields = R.SOURCE_FIELDS;
   const BASELINE = { id: 'museum-prose-quadgram-v1', label: 'Museum modern-English baseline (disclosed: modern, museum prose)' };
   function status(message, error = false) { $('record-status').textContent = message; $('record-status').dataset.error = String(error); }
@@ -21,10 +22,36 @@
     if (parts.length !== count || parts.some(n => !Number.isFinite(n))) throw new Error('Enter ' + count + ' numbers for ' + label + '.');
     return parts;
   }
-  function pending() { return $('source-raw').value !== doc.raw; }
+  // Textareas display CR and CRLF as LF. Keep the recorded bytes unchanged when
+  // that display has not been edited, and translate selections back to recorded
+  // code points rather than shifting every span after a CRLF line break.
+  function displayedText(text) { return text.replace(/\r\n?/g, '\n'); }
+  function displayGroups(text) {
+    const chars = Array.from(text), groups = []; let point = 0, offset = 0;
+    while (point < chars.length) {
+      const end = point + (chars[point] === '\r' && chars[point + 1] === '\n' ? 2 : 1);
+      const width = chars[point] === '\r' ? 1 : chars[point].length;
+      groups.push({ start: point, end, displayStart: offset, displayEnd: offset + width });
+      point = end; offset += width;
+    }
+    return groups;
+  }
+  function recordedSelection(text, control) {
+    if (control.value !== displayedText(text)) throw new Error('The displayed reading changed. Select its recorded text again.');
+    const positions = new Map([[0, 0]]);
+    displayGroups(text).forEach(group => positions.set(group.displayEnd, group.end));
+    if (!positions.has(control.selectionStart) || !positions.has(control.selectionEnd)) throw new Error('Select whole Unicode characters, not half of a surrogate pair.');
+    return { start: positions.get(control.selectionStart), end: positions.get(control.selectionEnd) };
+  }
+  function pending() { return $('source-raw').value !== displayedText(doc.raw); }
+  function pendingSourceMetadata() {
+    return sourceFields.some(field => $('source-' + field).value !== renderedSourceFields[field]);
+  }
   function commit() {
-    let next = R.revise(doc, $('source-raw').value, $('revision-reason').value);
-    for (const f of sourceFields) next.source[f] = $('source-' + f).value;
+    let next = R.revise(doc, pending() ? $('source-raw').value : doc.raw, $('revision-reason').value);
+    // Inputs sanitize line breaks (and URL whitespace) when displayed. Preserve
+    // the stored value unless the visitor actually changed that control.
+    for (const f of sourceFields) if ($('source-' + f).value !== renderedSourceFields[f]) next.source[f] = $('source-' + f).value;
     next = R.validate(next); previous = doc; doc = next; $('restore-record').disabled = false;
     $('revision-reason').value = ''; render();
   }
@@ -247,10 +274,137 @@
     renderHypotheses();
   });
 
+  // ── Manual passage comparison ─────────────────────────────────────────────
+  function alignmentGuard(fn) {
+    return () => { try { fn(); } catch (e) { note('alignment-status', e.message, true); } };
+  }
+  function passageRanges(value) {
+    if (!value.trim()) throw new Error('Enter at least one passage range on each side.');
+    return value.split(/[,\n]/).map(part => {
+      const match = /^(\d+)(?:\s*[-–]\s*(\d+))?$/.exec(part.trim());
+      if (!match) throw new Error('Use character ranges such as 1–4, 10–12, or a single position.');
+      return { start: Number(match[1]) - 1, end: Number(match[2] || match[1]) };
+    });
+  }
+  function inspectPassage(side, range) {
+    const text = $('alignment-' + side + '-text');
+    const recorded = R.alignmentTexts(doc).find(reading => reading.id === $('alignment-' + side).value);
+    const groups = displayGroups(recorded.text).filter(group => group.start < range.end && group.end > range.start);
+    text.focus();
+    text.setSelectionRange(groups[0].displayStart, groups.at(-1).displayEnd);
+  }
+  function drawPassage(parent, side, range) {
+    const item = el('div', '', parent); item.className = 'alignment-range';
+    const button = el('button', 'Inspect characters ' + (range.start + 1) + '–' + range.end, item);
+    button.type = 'button'; button.onclick = () => inspectPassage(side, range);
+    el('pre', /^\s+$/u.test(range.literal) ? 'Whitespace: ' + JSON.stringify(range.literal) : range.literal, item);
+  }
+  function drawLink(parent, link, historical = false) {
+    const card = el('div', '', parent); card.className = 'research-card alignment-link'; card.dataset.alignmentId = link.id;
+    el('h4', link.id + (historical ? ' · withdrawn' : ''), card);
+    const count = (n, label) => n + ' ' + label + ' passage' + (n === 1 ? '' : 's');
+    el('p', count(link.sourceRanges.length, 'source') + ' ↔ ' + count(link.targetRanges.length, 'reading') +
+      ' · source revision ' + link.revision + (link.reversed ? ' · shown in the reverse comparison direction' : ''), card);
+    const description = el('p', link.note, card); description.className = 'alignment-link-note';
+    if (historical) el('p', 'Withdrawal reason: ' + link.withdrawal.reason, card);
+    const grid = el('div', '', card); grid.className = 'research-grid';
+    ['source', 'target'].forEach(side => {
+      const column = el('div', '', grid);
+      el('p', side === 'source' ? 'Source passages' : 'Compared-reading passages', column);
+      link[side + 'Ranges'].forEach(range => drawPassage(column, side, range));
+    });
+  }
+  function renderAlignment() {
+    const texts = R.alignmentTexts(doc), sourceSelect = $('alignment-source'), targetSelect = $('alignment-target');
+    const keptSource = sourceSelect.value, keptTarget = targetSelect.value, keptWithdraw = $('alignment-withdraw-id').value;
+    sourceSelect.replaceChildren(); targetSelect.replaceChildren();
+    texts.slice().sort((a, b) => b.revision - a.revision).forEach(text => {
+      el('option', text.label, sourceSelect).value = text.id;
+    });
+    sourceSelect.value = texts.some(text => text.id === keptSource) ? keptSource : 'revision-' + doc.revision;
+    const source = texts.find(text => text.id === sourceSelect.value);
+    const targets = texts.filter(text => text.revision === source.revision && text.id !== source.id);
+    targets.forEach(text => { el('option', text.label, targetSelect).value = text.id; });
+    if (targets.some(text => text.id === keptTarget)) targetSelect.value = keptTarget;
+    if (!targets.length) el('option', 'Append a derived reading for this revision first', targetSelect).value = '';
+    targetSelect.disabled = targets.length === 0;
+    const target = targets.find(text => text.id === targetSelect.value);
+    const context = JSON.stringify({ revision: doc.revision, source: doc.source,
+      left: [source.id, source.text], right: target ? [target.id, target.text] : null });
+    if (alignmentContext && context !== alignmentContext) clearAlignmentDraft('Unrecorded passage ranges and notes were cleared because the source or compared readings changed.');
+    alignmentContext = context;
+    const draftNotice = alignmentDraftNotice; alignmentDraftNotice = '';
+    $('alignment-source-text').value = source.text; $('alignment-target-text').value = target ? target.text : '';
+    const describe = text => text.label + ' · ' + text.length + ' Unicode code points.' + (/\r/.test(text.text)
+      ? ' This reading contains CR or CRLF line breaks. Selecting a displayed line break includes all its recorded characters.' : '');
+    $('alignment-source-description').textContent = describe(source);
+    $('alignment-target-description').textContent = target ? describe(target) : 'No compared reading selected.';
+    ['alignment-list', 'alignment-history', 'alignment-source-unmatched', 'alignment-target-unmatched', 'alignment-withdraw-id'].forEach(id => $(id).replaceChildren());
+    $('alignment-add').disabled = !target || !source.current;
+    $('alignment-source-select').disabled = !target || !source.current || !source.text;
+    $('alignment-target-select').disabled = !target || !source.current || !target.text;
+    $('alignment-withdraw').disabled = true; $('alignment-withdraw-id').disabled = true;
+    if (!target) {
+      note('alignment-status', 'Append a reading layer for source revision ' + source.revision + ', or load the original example. Earlier links remain available under their recorded revision.' + (draftNotice ? ' ' + draftNotice : ''));
+      return;
+    }
+    const view = R.alignmentView(doc, source.id, target.id);
+    note('alignment-status', (view.current ? 'Current source revision ' + view.revision + '. ' :
+      'Showing earlier source revision ' + view.revision + '; source revision ' + doc.revision + ' is current. New links are disabled for this earlier revision. ') +
+      view.links.length + ' active link(s), ' + view.sourceUnmatched.length + ' unlinked source passage(s), ' +
+      view.targetUnmatched.length + ' unlinked compared-reading passage(s). Unlinked means no link has been recorded.' + (draftNotice ? ' ' + draftNotice : ''));
+    if (!view.links.length) el('p', 'No active passage links for these readings.', $('alignment-list'));
+    view.links.forEach(link => {
+      drawLink($('alignment-list'), link);
+      el('option', link.id + ' · ' + link.note.slice(0, 70), $('alignment-withdraw-id')).value = link.id;
+    });
+    if (view.links.some(link => link.id === keptWithdraw)) $('alignment-withdraw-id').value = keptWithdraw;
+    $('alignment-withdraw').disabled = view.links.length === 0; $('alignment-withdraw-id').disabled = view.links.length === 0;
+    if (!view.withdrawn.length) el('p', 'No withdrawn links for these readings.', $('alignment-history'));
+    view.withdrawn.forEach(link => drawLink($('alignment-history'), link, true));
+    ['source', 'target'].forEach(side => {
+      const box = $('alignment-' + side + '-unmatched'), missing = view[side + 'Unmatched'];
+      if (!missing.length) el('p', view[side].length ? 'Every character has at least one recorded link.' : 'This reading is empty.', box);
+      missing.forEach(range => drawPassage(box, side, range));
+    });
+  }
+  function clearAlignmentDraft(reason = '') {
+    const fields = ['alignment-source-ranges', 'alignment-target-ranges', 'alignment-note', 'alignment-withdraw-reason'];
+    const hadDraft = fields.some(id => $(id).value !== '');
+    fields.forEach(id => { $(id).value = ''; });
+    if (hadDraft && reason) alignmentDraftNotice = reason;
+  }
+  ['source', 'target'].forEach(side => {
+    $('alignment-' + side).onchange = () => { clearAlignmentDraft('Unrecorded passage ranges and notes were cleared because the compared readings changed.'); renderAlignment(); };
+    $('alignment-' + side + '-select').onclick = alignmentGuard(() => {
+      const text = $('alignment-' + side + '-text');
+      if (text.selectionStart === text.selectionEnd) throw new Error('Select a passage in the complete reading first.');
+      const reading = R.alignmentTexts(doc).find(item => item.id === $('alignment-' + side).value);
+      const range = recordedSelection(reading.text, text), start = range.start + 1, end = range.end;
+      const input = $('alignment-' + side + '-ranges');
+      input.value = (input.value.trim() ? input.value.trim() + ', ' : '') + start + '–' + end;
+      note('alignment-status', 'Added characters ' + start + '–' + end + ' to the ' + (side === 'source' ? 'source' : 'compared-reading') + ' ranges. Record the link when both sides and its explanation are ready.');
+    });
+  });
+  $('alignment-add').onclick = alignmentGuard(() => {
+    if (pending() || pendingSourceMetadata()) throw new Error('Save the source and metadata before recording passage links.');
+    const next = R.addAlignment(doc, { source: $('alignment-source').value, target: $('alignment-target').value,
+      sourceRanges: passageRanges($('alignment-source-ranges').value), targetRanges: passageRanges($('alignment-target-ranges').value),
+      note: $('alignment-note').value });
+    clearAlignmentDraft(); adopt(next, 'Passage link recorded. Full readings and their original order are unchanged.');
+  });
+  $('alignment-withdraw').onclick = alignmentGuard(() => {
+    if (pending() || pendingSourceMetadata()) throw new Error('Save the source and metadata before withdrawing passage links.');
+    const next = R.withdrawAlignment(doc, $('alignment-withdraw-id').value, $('alignment-withdraw-reason').value);
+    clearAlignmentDraft(); adopt(next, 'Passage link withdrawn with its reason. Its earlier evidence remains in the history.');
+  });
+  $('alignment-example').onclick = alignmentGuard(() => loadExample('alignment'));
+
   // ── Rendering ─────────────────────────────────────────────────────────────
   function render() {
     $('source-raw').value = doc.raw;
-    sourceFields.forEach(f => { $('source-' + f).value = doc.source[f]; });
+    renderedSourceFields = Object.create(null);
+    sourceFields.forEach(f => { $('source-' + f).value = doc.source[f]; renderedSourceFields[f] = $('source-' + f).value; });
     $('revision-label').textContent = 'Current revision ' + doc.revision + ' · ' + Array.from(doc.raw).length + ' Unicode characters. Original transcription retained.';
     const revisions = $('revision-list'); revisions.replaceChildren();
     doc.revisions.forEach(r => { const d = el('details','',revisions); el('summary','Revision ' + r.id + ' — ' + r.reason,d); el('pre',r.raw,d); });
@@ -308,26 +462,28 @@
     });
     if (Array.from(parent.options).some(o => o.value === keptParent && !o.disabled)) parent.value = keptParent;
     $('relations-list').textContent = JSON.stringify({keys:doc.keys,relations:doc.relations},null,2);
-    renderInventory(); renderHypotheses();
+    renderInventory(); renderHypotheses(); renderAlignment();
   }
 
   $('save-revision').onclick = guard(() => { commit(); status('Source and revision saved in this tab. Export the record to keep it after closing.'); });
-  $('restore-record').onclick = guard(() => { if (previous) { const current = doc; doc = previous; previous = current; clearImage(); render(); status('Previous record restored. Press again to return to the other record.'); } });
+  $('restore-record').onclick = guard(() => { if (previous) { clearAlignmentDraft('Unrecorded passage ranges and notes were cleared when the previous record was restored.'); const current = doc; doc = previous; previous = current; clearImage(); render(); status('Previous record restored. Press again to return to the other record.'); } });
   $('export-record').onclick = guard(() => { commit(); download('cipher-museum-evidence-v2.json', doc); status('Evidence record exported. Local image bytes are separate.'); });
   $('import-file').onchange = async function () {
     const file = this.files[0]; if (!file) return;
     try {
       if (file.size > 750000) throw new Error('Import is limited to 750,000 bytes.');
-      const next = R.migrate(JSON.parse(await file.text())); previous = doc; doc = next; clearImage(); selectedClass = ''; selectedOccurrences.clear(); render(); $('restore-record').disabled = false;
+      const next = R.migrate(JSON.parse(await file.text()));
+      clearAlignmentDraft('Unrecorded passage ranges and notes were cleared for the imported evidence record.');
+      previous = doc; doc = next; clearImage(); selectedClass = ''; selectedOccurrences.clear(); render(); $('restore-record').disabled = false;
       status('Imported version ' + doc.version + ' evidence record. Previous saved record is available with Restore.');
     } catch (e) { status('Import rejected; saved record retained. ' + e.message, true); }
     this.value = '';
   };
-  $('select-span').onclick = () => {
-    const t = $('source-raw'); $('span-start').value = Array.from(t.value.slice(0,t.selectionStart)).length + 1;
-    $('span-end').value = Array.from(t.value.slice(0,t.selectionEnd)).length;
+  $('select-span').onclick = guard(() => {
+    const t = $('source-raw'), range = recordedSelection(pending() ? t.value : doc.raw, t);
+    $('span-start').value = range.start + 1; $('span-end').value = range.end;
     status('Selected text copied to character positions. Save any source change before adding a span.');
-  };
+  });
   $('add-span').onclick = guard(() => {
     if (pending()) throw new Error('Save the revised source before annotating it.');
     const imageId = $('span-image').value;
@@ -500,6 +656,7 @@
   }
   function restoreBundle(b) {
     stopSearch('Imported investigation: recorded candidates are retained; rerun to reproduce them.');
+    clearAlignmentDraft('Unrecorded passage ranges and notes were cleared for the replacement investigation.');
     invalidateSegments(); previous = doc; doc = b.evidence; retainedBundle = b;
     $('restore-record').disabled = false; $('bundle-title').value = b.title;
     clearImage(); selectedClass = ''; selectedOccurrences.clear();
@@ -580,6 +737,22 @@
       return { doc: d, state: { title: 'Unidentified document, incomplete outcome' },
         message: 'Loaded the unidentified-document case. Its outcome is deliberately incomplete: a misleading catalogue description and an unresolved name both stay visible, and no key application would resolve either.' };
     },
+    alignment: () => {
+      let d = R.create('Sende bread and wine.\nWait here. Keep watch.\n[margin: torn seal]');
+      d.source = Object.assign(d.source, { artifactId: 'example:passage-comparison:1', transcriber: 'Museum teaching example',
+        method: 'Original invented wording with illustrative spelling; no historical date, dialect or facsimile is claimed.' });
+      d = R.addLayer(d, 'normalized', 'revision-1',
+        'Send bread.\nSend wine.\nWait here and keep watch.\n[editor: place uncertain]',
+        'Original teaching rewrite: split the first instruction, join the next two, and add an editorial note.');
+      d = R.addAlignment(d, { source: 'revision-1', target: 'layer-1',
+        sourceRanges: [{ start: 0, end: 21 }], targetRanges: [{ start: 0, end: 11 }, { start: 12, end: 22 }],
+        note: 'One instruction becomes two sentences; Sende is modernized to Send. The source wording remains unchanged.' });
+      d = R.addAlignment(d, { source: 'revision-1', target: 'layer-1',
+        sourceRanges: [{ start: 22, end: 32 }, { start: 33, end: 44 }], targetRanges: [{ start: 23, end: 48 }],
+        note: 'Two instructions become one sentence. The connecting and and lower-case keep belong to the editorial reading.' });
+      return { doc: d, state: { title: 'Passages split, combined and left unlinked', selectedLayer: 'layer-1' },
+        message: 'Loaded the original passage-comparison example. The margin note and editorial addition have no recorded counterparts; both remain visible.' };
+    },
     segmentation: () => {
       let d = R.create('2228');
       d.revisions[0].raw = d.raw;
@@ -595,14 +768,17 @@
         message: 'Loaded the segmentation example. Press “Compare segmentations” to see all three readings and which boundary positions are genuinely ambiguous.' };
     }
   };
-  $('bundle-load-example').onclick = guard(() => {
-    const key = $('bundle-example').value;
-    if (!key) throw new Error('Choose an example first.');
+  function loadExample(key) {
+    if (!Object.hasOwn(EXAMPLES, key)) throw new Error('Choose an example first.');
     const made = EXAMPLES[key]();
     const b = R.bundle(made.doc, made.state);
     restoreBundle(b); describeBundle(b);
+    $('bundle-example').value = key;
+    clearAlignmentDraft();
+    if (key === 'alignment') { $('alignment-source').value = 'revision-1'; $('alignment-target').value = 'layer-1'; renderAlignment(); }
     note('bundle-status', made.message);
-  });
+  }
+  $('bundle-load-example').onclick = guard(() => loadExample($('bundle-example').value));
 
   window.addEventListener('pagehide',()=>{if(worker)worker.terminate();if(imageURL)URL.revokeObjectURL(imageURL);});
   // Explicit handoff from Detective; never fetch source images or papers automatically.

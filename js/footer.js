@@ -64,6 +64,6 @@
     '</div>' +
     '<div class="footer-bottom">' +
       '<span class="footer-copy">© The Cipher Museum · MIT License · Open Source</span>' +
-      '<span class="footer-copy">173 exhibits · 13 halls · 3,900+ years</span>' +
+      '<span class="footer-copy">174 exhibits · 13 halls · 3,900+ years</span>' +
     '</div>';
 })();

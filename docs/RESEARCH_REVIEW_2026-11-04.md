@@ -84,7 +84,26 @@ public summary against the recorded result matrix. The regenerated audit pack
 includes the runner, protocol, complete results, historical profiles, source excerpts
 and interpretation, with their exact hashes.
 
-Fresh browser visual review was unavailable because the Chromium download failed.
-Existing browser records in the coverage ledger describe earlier revisions, not this
-pass. Local test and GitHub CI/deployment outcomes are recorded with the implementation
-pull request.
+## Completion and integration with PR #51
+
+The completion pass merges the published PR #51 additions without removing its
+passage-alignment controls, historical exhibits, catalogue checks or source records.
+Both dated review records remain in the coverage ledger. Search metadata and the
+offline-cache version are regenerated from the combined files. The frozen audit
+export covers all 228 public pages and includes the complete recovery inputs,
+results, original pre-integration report and interpretation.
+
+PR #51 extends the shared research-model file, changing its recorded input hash.
+The original result JSON is preserved as `evaluation-pre-integration.json`, tied to
+commit `6745c789cc40a4885b8ca17fc3e7b952db30784b`. All 240 searches are executed
+again against the integrated file and compared exactly, excluding elapsed times
+and that shared-file hash. No protocol, source, scorer, seed or budget is changed.
+
+The local Chromium download failed. Required hosted Chromium checks therefore
+exercise the book FAQ by keyboard, compare each recovery-table cell with the saved
+report, check the corrected prose, and retain desktop/narrow screenshots and
+automated accessibility results. The PR #51 controls remain in the same browser
+suite. These are bounded Chromium checks, not new historical verification or a
+cross-engine certification. Earlier browser records describe their original
+revisions. Hosted checks, screenshot review and deployment outcomes are recorded
+with [PR #52](https://github.com/systemslibrarian/cipher-museum/pull/52).

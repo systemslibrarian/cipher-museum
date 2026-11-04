@@ -98,7 +98,7 @@
     "data/research/profile-recovery-v1/protocol.json": "2d1f07ba6eb1d257e108ad75dc6e5d77436a9877192fbbf0718b633dcd5ab34d",
     "scripts/evaluate-profile-recovery.js": "fe4e8f50a4cc8d998856f94547be85919c3f7068716ae2fcb8ddaa87f8868128",
     "scripts/research-splits.js": "fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010",
-    "js/research-model.js": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
+    "js/research-model.js": "c97d533d67d6cccd6c22e6fc3cf919a0f346040c343c2dc675565a44f92241f9",
     "js/research-language-model.js": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
     "data/research/v1/language-model.json": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
     "data/research/v2/language-profiles.json": "9273ab82bc558e070a1cd810b84e6830f62b9d3bb31865271416f48cb9e6bb3a",
@@ -11404,7 +11404,7 @@
         "g33": "E"
       },
       "score": -3282.9080650372503,
-      "ms": 85.105415,
+      "ms": 82.316462,
       "exact": false,
       "editDistance": 202,
       "plaintextError": 0.64126984,
@@ -11470,7 +11470,7 @@
         "g33": "L"
       },
       "score": -2961.7319898707137,
-      "ms": 101.796016,
+      "ms": 86.525872,
       "exact": false,
       "editDistance": 172,
       "plaintextError": 0.54603175,
@@ -11536,7 +11536,7 @@
         "g33": "S"
       },
       "score": -3233.996518971241,
-      "ms": 69.928945,
+      "ms": 62.026002,
       "exact": false,
       "editDistance": 258,
       "plaintextError": 0.81904762,
@@ -11602,7 +11602,7 @@
         "g33": "M"
       },
       "score": -3353.3675428341685,
-      "ms": 80.79392,
+      "ms": 72.726325,
       "exact": false,
       "editDistance": 252,
       "plaintextError": 0.8,
@@ -11668,7 +11668,7 @@
         "g33": "W"
       },
       "score": -3572.0882482518878,
-      "ms": 1346.381584,
+      "ms": 992.591642,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.77777778,
@@ -11734,7 +11734,7 @@
         "g33": "T"
       },
       "score": -3332.897021658325,
-      "ms": 1164.726817,
+      "ms": 1143.898847,
       "exact": false,
       "editDistance": 206,
       "plaintextError": 0.65396825,
@@ -11800,7 +11800,7 @@
         "g33": "E"
       },
       "score": -3511.7625414041095,
-      "ms": 1325.041043,
+      "ms": 971.561519,
       "exact": false,
       "editDistance": 257,
       "plaintextError": 0.81587302,
@@ -11866,7 +11866,7 @@
         "g33": "I"
       },
       "score": -3390.9017060249157,
-      "ms": 1231.853133,
+      "ms": 1003.366431,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.77777778,
@@ -11933,7 +11933,7 @@
         "g10": "H"
       },
       "score": -3434.159053845097,
-      "ms": 93.433893,
+      "ms": 53.058415,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.78730159,
@@ -12000,7 +12000,7 @@
         "g10": "P"
       },
       "score": -2894.756998669704,
-      "ms": 89.954181,
+      "ms": 67.465966,
       "exact": false,
       "editDistance": 108,
       "plaintextError": 0.34285714,
@@ -12067,7 +12067,7 @@
         "g10": "M"
       },
       "score": -3307.194919303189,
-      "ms": 83.034975,
+      "ms": 71.508307,
       "exact": false,
       "editDistance": 235,
       "plaintextError": 0.74603175,
@@ -12134,7 +12134,7 @@
         "g10": "C"
       },
       "score": -3130.506930021867,
-      "ms": 64.475696,
+      "ms": 64.151292,
       "exact": false,
       "editDistance": 233,
       "plaintextError": 0.73968254,
@@ -12201,7 +12201,7 @@
         "g10": "N"
       },
       "score": -3618.991935149617,
-      "ms": 1068.355355,
+      "ms": 966.472959,
       "exact": false,
       "editDistance": 252,
       "plaintextError": 0.8,
@@ -12268,7 +12268,7 @@
         "g10": "M"
       },
       "score": -3351.4923569460766,
-      "ms": 1153.335218,
+      "ms": 1043.877014,
       "exact": false,
       "editDistance": 237,
       "plaintextError": 0.75238095,
@@ -12335,7 +12335,7 @@
         "g10": "A"
       },
       "score": -3649.7413456934687,
-      "ms": 1034.707124,
+      "ms": 1024.395793,
       "exact": false,
       "editDistance": 262,
       "plaintextError": 0.83174603,
@@ -12402,7 +12402,7 @@
         "g10": "U"
       },
       "score": -3482.4179026540714,
-      "ms": 1070.436286,
+      "ms": 1111.836852,
       "exact": false,
       "editDistance": 259,
       "plaintextError": 0.82222222,
@@ -12467,7 +12467,7 @@
         "g42": "E"
       },
       "score": -3413.204469148081,
-      "ms": 71.927481,
+      "ms": 64.069519,
       "exact": false,
       "editDistance": 246,
       "plaintextError": 0.78095238,
@@ -12532,7 +12532,7 @@
         "g42": "L"
       },
       "score": -2884.609511776941,
-      "ms": 65.89205,
+      "ms": 63.110413,
       "exact": false,
       "editDistance": 140,
       "plaintextError": 0.44444444,
@@ -12597,7 +12597,7 @@
         "g42": "E"
       },
       "score": -3306.290732630044,
-      "ms": 65.535261,
+      "ms": 65.554521,
       "exact": false,
       "editDistance": 251,
       "plaintextError": 0.7968254,
@@ -12662,7 +12662,7 @@
         "g42": "A"
       },
       "score": -3351.7297054691626,
-      "ms": 64.162414,
+      "ms": 61.621785,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.78730159,
@@ -12727,7 +12727,7 @@
         "g42": "L"
       },
       "score": -3709.353611831736,
-      "ms": 808.266346,
+      "ms": 822.294761,
       "exact": false,
       "editDistance": 254,
       "plaintextError": 0.80634921,
@@ -12792,7 +12792,7 @@
         "g42": "S"
       },
       "score": -3396.280225624413,
-      "ms": 838.884032,
+      "ms": 857.514143,
       "exact": false,
       "editDistance": 213,
       "plaintextError": 0.67619048,
@@ -12857,7 +12857,7 @@
         "g42": "C"
       },
       "score": -3627.845201275213,
-      "ms": 932.736767,
+      "ms": 849.603828,
       "exact": false,
       "editDistance": 255,
       "plaintextError": 0.80952381,
@@ -12922,7 +12922,7 @@
         "g42": "L"
       },
       "score": -3505.1716032752524,
-      "ms": 990.841823,
+      "ms": 848.556126,
       "exact": false,
       "editDistance": 246,
       "plaintextError": 0.78095238,
@@ -12990,7 +12990,7 @@
         "g33": "L"
       },
       "score": -3349.8059609309457,
-      "ms": 59.065023,
+      "ms": 54.256758,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.78730159,
@@ -13058,7 +13058,7 @@
         "g33": "E"
       },
       "score": -2918.41502915805,
-      "ms": 69.041754,
+      "ms": 58.117666,
       "exact": false,
       "editDistance": 202,
       "plaintextError": 0.64126984,
@@ -13126,7 +13126,7 @@
         "g33": "O"
       },
       "score": -3403.808734975982,
-      "ms": 67.022953,
+      "ms": 58.295364,
       "exact": false,
       "editDistance": 251,
       "plaintextError": 0.7968254,
@@ -13194,7 +13194,7 @@
         "g33": "D"
       },
       "score": -3215.9952786156873,
-      "ms": 69.140203,
+      "ms": 58.354463,
       "exact": false,
       "editDistance": 258,
       "plaintextError": 0.81904762,
@@ -13262,7 +13262,7 @@
         "g33": "A"
       },
       "score": -3621.2848707832336,
-      "ms": 1064.223149,
+      "ms": 951.346418,
       "exact": false,
       "editDistance": 250,
       "plaintextError": 0.79365079,
@@ -13330,7 +13330,7 @@
         "g33": "E"
       },
       "score": -3372.142572933783,
-      "ms": 1095.504002,
+      "ms": 985.217997,
       "exact": false,
       "editDistance": 220,
       "plaintextError": 0.6984127,
@@ -13398,7 +13398,7 @@
         "g33": "N"
       },
       "score": -3692.3373456139393,
-      "ms": 1089.974971,
+      "ms": 1055.811557,
       "exact": false,
       "editDistance": 257,
       "plaintextError": 0.81587302,
@@ -13466,7 +13466,7 @@
         "g33": "N"
       },
       "score": -3727.1849381713,
-      "ms": 1082.346593,
+      "ms": 1214.819552,
       "exact": false,
       "editDistance": 260,
       "plaintextError": 0.82539683,
@@ -13533,7 +13533,7 @@
         "g34": "E"
       },
       "score": -3418.9378547618535,
-      "ms": 51.335666,
+      "ms": 58.07203,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.79047619,
@@ -13600,7 +13600,7 @@
         "g34": "S"
       },
       "score": -3178.907014323858,
-      "ms": 59.648931,
+      "ms": 63.949301,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.75873016,
@@ -13667,7 +13667,7 @@
         "g34": "V"
       },
       "score": -3221.418025002155,
-      "ms": 57.552132,
+      "ms": 100.878407,
       "exact": false,
       "editDistance": 217,
       "plaintextError": 0.68888889,
@@ -13734,7 +13734,7 @@
         "g34": "N"
       },
       "score": -3369.0415617379963,
-      "ms": 56.964927,
+      "ms": 67.91994,
       "exact": false,
       "editDistance": 254,
       "plaintextError": 0.80634921,
@@ -13801,7 +13801,7 @@
         "g34": "N"
       },
       "score": -3680.4677210646464,
-      "ms": 939.087804,
+      "ms": 1180.932092,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.79047619,
@@ -13868,7 +13868,7 @@
         "g34": "E"
       },
       "score": -3374.8011150420853,
-      "ms": 1061.833445,
+      "ms": 1034.699013,
       "exact": false,
       "editDistance": 181,
       "plaintextError": 0.57460317,
@@ -13935,7 +13935,7 @@
         "g34": "I"
       },
       "score": -3608.131874105983,
-      "ms": 1014.166313,
+      "ms": 1088.185178,
       "exact": false,
       "editDistance": 255,
       "plaintextError": 0.80952381,
@@ -14002,7 +14002,7 @@
         "g34": "T"
       },
       "score": -3531.2391648904154,
-      "ms": 1050.912232,
+      "ms": 1215.382167,
       "exact": false,
       "editDistance": 234,
       "plaintextError": 0.74285714,
@@ -14070,7 +14070,7 @@
         "g9": "P"
       },
       "score": -3222.0920063509625,
-      "ms": 57.089124,
+      "ms": 60.560253,
       "exact": false,
       "editDistance": 253,
       "plaintextError": 0.81089744,
@@ -14138,7 +14138,7 @@
         "g9": "C"
       },
       "score": -2862.744733498727,
-      "ms": 59.76149,
+      "ms": 58.985766,
       "exact": false,
       "editDistance": 185,
       "plaintextError": 0.59294872,
@@ -14206,7 +14206,7 @@
         "g9": "U"
       },
       "score": -3281.4697563457103,
-      "ms": 67.585829,
+      "ms": 61.451148,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.78525641,
@@ -14274,7 +14274,7 @@
         "g9": "M"
       },
       "score": -3247.2055680577328,
-      "ms": 68.650473,
+      "ms": 61.096681,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.78525641,
@@ -14342,7 +14342,7 @@
         "g9": "A"
       },
       "score": -3657.156660481174,
-      "ms": 1019.300711,
+      "ms": 1017.613028,
       "exact": false,
       "editDistance": 255,
       "plaintextError": 0.81730769,
@@ -14410,7 +14410,7 @@
         "g9": "D"
       },
       "score": -3484.4829648625405,
-      "ms": 1100.176725,
+      "ms": 1021.594852,
       "exact": false,
       "editDistance": 238,
       "plaintextError": 0.76282051,
@@ -14478,7 +14478,7 @@
         "g9": "C"
       },
       "score": -3508.552859149969,
-      "ms": 1109.345475,
+      "ms": 1169.352906,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.79807692,
@@ -14546,7 +14546,7 @@
         "g9": "I"
       },
       "score": -3561.891999570418,
-      "ms": 1115.895756,
+      "ms": 1209.23893,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.79487179,
@@ -14614,7 +14614,7 @@
         "g36": "N"
       },
       "score": -3337.7041024833716,
-      "ms": 53.688954,
+      "ms": 65.029548,
       "exact": false,
       "editDistance": 244,
       "plaintextError": 0.78205128,
@@ -14682,7 +14682,7 @@
         "g36": "D"
       },
       "score": -2933.9123844987425,
-      "ms": 60.377584,
+      "ms": 84.405763,
       "exact": false,
       "editDistance": 228,
       "plaintextError": 0.73076923,
@@ -14750,7 +14750,7 @@
         "g36": "I"
       },
       "score": -3307.1311926224384,
-      "ms": 67.746255,
+      "ms": 66.403587,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.79487179,
@@ -14818,7 +14818,7 @@
         "g36": "N"
       },
       "score": -3229.8159454626452,
-      "ms": 64.13198,
+      "ms": 88.1445,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.79807692,
@@ -14886,7 +14886,7 @@
         "g36": "D"
       },
       "score": -3827.6762132059653,
-      "ms": 1051.681145,
+      "ms": 1198.3029,
       "exact": false,
       "editDistance": 250,
       "plaintextError": 0.80128205,
@@ -14954,7 +14954,7 @@
         "g36": "D"
       },
       "score": -3364.001327729695,
-      "ms": 1010.271954,
+      "ms": 982.08819,
       "exact": false,
       "editDistance": 233,
       "plaintextError": 0.74679487,
@@ -15022,7 +15022,7 @@
         "g36": "O"
       },
       "score": -3870.7636974406587,
-      "ms": 1102.971079,
+      "ms": 1012.198488,
       "exact": false,
       "editDistance": 257,
       "plaintextError": 0.82371795,
@@ -15090,7 +15090,7 @@
         "g36": "U"
       },
       "score": -3531.3861776882886,
-      "ms": 1079.653291,
+      "ms": 1012.706853,
       "exact": false,
       "editDistance": 255,
       "plaintextError": 0.81730769,
@@ -15157,7 +15157,7 @@
         "g8": "I"
       },
       "score": -3256.939423985711,
-      "ms": 69.313879,
+      "ms": 78.688149,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.78525641,
@@ -15224,7 +15224,7 @@
         "g8": "E"
       },
       "score": -3074.8093420529417,
-      "ms": 68.824897,
+      "ms": 61.285953,
       "exact": false,
       "editDistance": 217,
       "plaintextError": 0.69551282,
@@ -15291,7 +15291,7 @@
         "g8": "I"
       },
       "score": -3219.3273389712112,
-      "ms": 76.606015,
+      "ms": 56.877871,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.77884615,
@@ -15358,7 +15358,7 @@
         "g8": "C"
       },
       "score": -3074.3713238447817,
-      "ms": 85.833634,
+      "ms": 60.564795,
       "exact": false,
       "editDistance": 234,
       "plaintextError": 0.75,
@@ -15425,7 +15425,7 @@
         "g8": "A"
       },
       "score": -3660.110403511639,
-      "ms": 955.39265,
+      "ms": 936.844984,
       "exact": false,
       "editDistance": 252,
       "plaintextError": 0.80769231,
@@ -15492,7 +15492,7 @@
         "g8": "N"
       },
       "score": -3274.195214858135,
-      "ms": 1079.411419,
+      "ms": 979.489677,
       "exact": false,
       "editDistance": 225,
       "plaintextError": 0.72115385,
@@ -15559,7 +15559,7 @@
         "g8": "U"
       },
       "score": -3493.3298732790886,
-      "ms": 1075.314563,
+      "ms": 991.135991,
       "exact": false,
       "editDistance": 238,
       "plaintextError": 0.76282051,
@@ -15626,7 +15626,7 @@
         "g8": "R"
       },
       "score": -3484.766879696486,
-      "ms": 1075.753711,
+      "ms": 954.779188,
       "exact": false,
       "editDistance": 252,
       "plaintextError": 0.80769231,
@@ -15694,7 +15694,7 @@
         "g30": "T"
       },
       "score": -3182.7373352309687,
-      "ms": 72.812423,
+      "ms": 54.072758,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.79487179,
@@ -15762,7 +15762,7 @@
         "g30": "M"
       },
       "score": -2879.027899933925,
-      "ms": 74.453446,
+      "ms": 63.519443,
       "exact": false,
       "editDistance": 224,
       "plaintextError": 0.71794872,
@@ -15830,7 +15830,7 @@
         "g30": "R"
       },
       "score": -3185.8523821451818,
-      "ms": 78.671805,
+      "ms": 64.818444,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.79487179,
@@ -15898,7 +15898,7 @@
         "g30": "E"
       },
       "score": -3115.499126328666,
-      "ms": 81.555224,
+      "ms": 59.451605,
       "exact": false,
       "editDistance": 199,
       "plaintextError": 0.63782051,
@@ -15966,7 +15966,7 @@
         "g30": "U"
       },
       "score": -3642.073917388192,
-      "ms": 1239.810793,
+      "ms": 1058.221833,
       "exact": false,
       "editDistance": 258,
       "plaintextError": 0.82692308,
@@ -16034,7 +16034,7 @@
         "g30": "E"
       },
       "score": -3531.3368167904814,
-      "ms": 1278.541172,
+      "ms": 979.954911,
       "exact": false,
       "editDistance": 242,
       "plaintextError": 0.77564103,
@@ -16102,7 +16102,7 @@
         "g30": "O"
       },
       "score": -3695.257106021679,
-      "ms": 1104.907155,
+      "ms": 1131.153121,
       "exact": false,
       "editDistance": 252,
       "plaintextError": 0.80769231,
@@ -16170,7 +16170,7 @@
         "g30": "E"
       },
       "score": -3468.6042598139793,
-      "ms": 1104.725931,
+      "ms": 1147.034925,
       "exact": false,
       "editDistance": 253,
       "plaintextError": 0.81089744,
@@ -16237,7 +16237,7 @@
         "g0": "I"
       },
       "score": -3372.7387354995035,
-      "ms": 51.261595,
+      "ms": 62.592523,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.77884615,
@@ -16304,7 +16304,7 @@
         "g0": "M"
       },
       "score": -3128.676440239846,
-      "ms": 57.659671,
+      "ms": 62.375853,
       "exact": false,
       "editDistance": 238,
       "plaintextError": 0.76282051,
@@ -16371,7 +16371,7 @@
         "g0": "E"
       },
       "score": -3234.9543265436882,
-      "ms": 64.450481,
+      "ms": 63.096704,
       "exact": false,
       "editDistance": 242,
       "plaintextError": 0.77564103,
@@ -16438,7 +16438,7 @@
         "g0": "P"
       },
       "score": -3137.1624955365087,
-      "ms": 56.302451,
+      "ms": 64.800556,
       "exact": false,
       "editDistance": 225,
       "plaintextError": 0.72115385,
@@ -16505,7 +16505,7 @@
         "g0": "T"
       },
       "score": -3691.285056341732,
-      "ms": 890.58377,
+      "ms": 1006.029781,
       "exact": false,
       "editDistance": 227,
       "plaintextError": 0.7275641,
@@ -16572,7 +16572,7 @@
         "g0": "M"
       },
       "score": -3513.3442962076897,
-      "ms": 927.837528,
+      "ms": 1103.509781,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.78525641,
@@ -16639,7 +16639,7 @@
         "g0": "S"
       },
       "score": -3512.9922346873504,
-      "ms": 953.907642,
+      "ms": 1062.190819,
       "exact": false,
       "editDistance": 254,
       "plaintextError": 0.81410256,
@@ -16706,7 +16706,7 @@
         "g0": "R"
       },
       "score": -3543.8912773801812,
-      "ms": 990.222063,
+      "ms": 1037.191696,
       "exact": false,
       "editDistance": 255,
       "plaintextError": 0.81730769,
@@ -16770,7 +16770,7 @@
         "g25": "R"
       },
       "score": -3016.5916731297198,
-      "ms": 46.782536,
+      "ms": 51.839295,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.82130584,
@@ -16834,7 +16834,7 @@
         "g25": "I"
       },
       "score": -2771.465460185364,
-      "ms": 50.301159,
+      "ms": 57.503714,
       "exact": false,
       "editDistance": 231,
       "plaintextError": 0.79381443,
@@ -16898,7 +16898,7 @@
         "g25": "A"
       },
       "score": -3088.9572774881603,
-      "ms": 57.708592,
+      "ms": 61.681884,
       "exact": false,
       "editDistance": 221,
       "plaintextError": 0.75945017,
@@ -16962,7 +16962,7 @@
         "g25": "I"
       },
       "score": -3024.0139422671164,
-      "ms": 53.00205,
+      "ms": 68.313618,
       "exact": false,
       "editDistance": 240,
       "plaintextError": 0.82474227,
@@ -17026,7 +17026,7 @@
         "g25": "I"
       },
       "score": -3478.748840493246,
-      "ms": 846.276773,
+      "ms": 859.330219,
       "exact": false,
       "editDistance": 242,
       "plaintextError": 0.83161512,
@@ -17090,7 +17090,7 @@
         "g25": "A"
       },
       "score": -3103.114997767745,
-      "ms": 872.686758,
+      "ms": 912.915814,
       "exact": false,
       "editDistance": 237,
       "plaintextError": 0.81443299,
@@ -17154,7 +17154,7 @@
         "g25": "A"
       },
       "score": -3473.4406153561545,
-      "ms": 840.955867,
+      "ms": 927.077774,
       "exact": false,
       "editDistance": 229,
       "plaintextError": 0.78694158,
@@ -17218,7 +17218,7 @@
         "g25": "A"
       },
       "score": -3354.673138425696,
-      "ms": 848.410037,
+      "ms": 945.224884,
       "exact": false,
       "editDistance": 235,
       "plaintextError": 0.80756014,
@@ -17283,7 +17283,7 @@
         "g39": "F"
       },
       "score": -2982.111928985326,
-      "ms": 48.678616,
+      "ms": 58.051014,
       "exact": false,
       "editDistance": 233,
       "plaintextError": 0.80068729,
@@ -17348,7 +17348,7 @@
         "g39": "T"
       },
       "score": -2769.580349929399,
-      "ms": 53.70636,
+      "ms": 62.755103,
       "exact": false,
       "editDistance": 220,
       "plaintextError": 0.75601375,
@@ -17413,7 +17413,7 @@
         "g39": "M"
       },
       "score": -2895.2343623234387,
-      "ms": 57.292883,
+      "ms": 59.993144,
       "exact": false,
       "editDistance": 133,
       "plaintextError": 0.45704467,
@@ -17478,7 +17478,7 @@
         "g39": "G"
       },
       "score": -2974.492593454673,
-      "ms": 49.747346,
+      "ms": 59.067387,
       "exact": false,
       "editDistance": 233,
       "plaintextError": 0.80068729,
@@ -17543,7 +17543,7 @@
         "g39": "H"
       },
       "score": -3364.8097354876304,
-      "ms": 828.361148,
+      "ms": 944.832737,
       "exact": false,
       "editDistance": 240,
       "plaintextError": 0.82474227,
@@ -17608,7 +17608,7 @@
         "g39": "N"
       },
       "score": -3115.2306897377307,
-      "ms": 878.569513,
+      "ms": 1072.083144,
       "exact": false,
       "editDistance": 244,
       "plaintextError": 0.83848797,
@@ -17673,7 +17673,7 @@
         "g39": "A"
       },
       "score": -3526.6588765744214,
-      "ms": 915.476103,
+      "ms": 974.632514,
       "exact": false,
       "editDistance": 235,
       "plaintextError": 0.80756014,
@@ -17738,7 +17738,7 @@
         "g39": "I"
       },
       "score": -3306.1433446873484,
-      "ms": 946.667448,
+      "ms": 994.402757,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.82130584,
@@ -17804,7 +17804,7 @@
         "g22": "C"
       },
       "score": -3188.9659439872175,
-      "ms": 47.857278,
+      "ms": 52.278232,
       "exact": false,
       "editDistance": 231,
       "plaintextError": 0.79381443,
@@ -17870,7 +17870,7 @@
         "g22": "R"
       },
       "score": -2796.188160632749,
-      "ms": 54.992026,
+      "ms": 57.012186,
       "exact": false,
       "editDistance": 212,
       "plaintextError": 0.72852234,
@@ -17936,7 +17936,7 @@
         "g22": "E"
       },
       "score": -3055.611994654954,
-      "ms": 59.958675,
+      "ms": 64.214124,
       "exact": false,
       "editDistance": 230,
       "plaintextError": 0.79037801,
@@ -18002,7 +18002,7 @@
         "g22": "O"
       },
       "score": -3033.003914332272,
-      "ms": 54.736812,
+      "ms": 58.912183,
       "exact": false,
       "editDistance": 242,
       "plaintextError": 0.83161512,
@@ -18068,7 +18068,7 @@
         "g22": "E"
       },
       "score": -3377.3720810145505,
-      "ms": 973.048118,
+      "ms": 967.869439,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.82130584,
@@ -18134,7 +18134,7 @@
         "g22": "O"
       },
       "score": -3323.0783796958262,
-      "ms": 964.155608,
+      "ms": 1042.422978,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.83505155,
@@ -18200,7 +18200,7 @@
         "g22": "T"
       },
       "score": -3514.230604129674,
-      "ms": 1006.241148,
+      "ms": 1017.979166,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.82130584,
@@ -18266,7 +18266,7 @@
         "g22": "E"
       },
       "score": -3358.82837450078,
-      "ms": 1014.13462,
+      "ms": 1056.411803,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.83505155,
@@ -18332,7 +18332,7 @@
         "g26": "D"
       },
       "score": -3069.311480914024,
-      "ms": 52.542442,
+      "ms": 56.82648,
       "exact": false,
       "editDistance": 237,
       "plaintextError": 0.81443299,
@@ -18398,7 +18398,7 @@
         "g26": "L"
       },
       "score": -2681.8176199117497,
-      "ms": 55.34059,
+      "ms": 58.777764,
       "exact": false,
       "editDistance": 201,
       "plaintextError": 0.69072165,
@@ -18464,7 +18464,7 @@
         "g26": "S"
       },
       "score": -2936.1022131977443,
-      "ms": 60.225858,
+      "ms": 56.750484,
       "exact": false,
       "editDistance": 221,
       "plaintextError": 0.75945017,
@@ -18530,7 +18530,7 @@
         "g26": "L"
       },
       "score": -2884.7995594588247,
-      "ms": 54.662708,
+      "ms": 60.808026,
       "exact": false,
       "editDistance": 235,
       "plaintextError": 0.80756014,
@@ -18596,7 +18596,7 @@
         "g26": "G"
       },
       "score": -3395.1776641179904,
-      "ms": 933.760329,
+      "ms": 976.120753,
       "exact": false,
       "editDistance": 241,
       "plaintextError": 0.82817869,
@@ -18662,7 +18662,7 @@
         "g26": "E"
       },
       "score": -3103.0615935711594,
-      "ms": 969.134194,
+      "ms": 1012.712574,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.82130584,
@@ -18728,7 +18728,7 @@
         "g26": "I"
       },
       "score": -3199.8600093164896,
-      "ms": 918.088829,
+      "ms": 1100.406356,
       "exact": false,
       "editDistance": 237,
       "plaintextError": 0.81443299,
@@ -18794,7 +18794,7 @@
         "g26": "M"
       },
       "score": -3278.1033172090083,
-      "ms": 1045.282015,
+      "ms": 1194.806709,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.83505155,
@@ -18858,7 +18858,7 @@
         "g36": "N"
       },
       "score": -3066.8521065839745,
-      "ms": 49.229149,
+      "ms": 51.520642,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.82130584,
@@ -18922,7 +18922,7 @@
         "g36": "C"
       },
       "score": -2657.2596731320614,
-      "ms": 65.880295,
+      "ms": 56.956765,
       "exact": false,
       "editDistance": 200,
       "plaintextError": 0.68728522,
@@ -18986,7 +18986,7 @@
         "g36": "R"
       },
       "score": -2877.169565045624,
-      "ms": 61.766745,
+      "ms": 65.095999,
       "exact": false,
       "editDistance": 177,
       "plaintextError": 0.60824742,
@@ -19050,7 +19050,7 @@
         "g36": "V"
       },
       "score": -3086.4755233491965,
-      "ms": 49.914231,
+      "ms": 63.469291,
       "exact": false,
       "editDistance": 236,
       "plaintextError": 0.81099656,
@@ -19114,7 +19114,7 @@
         "g36": "T"
       },
       "score": -3484.939130272827,
-      "ms": 834.605383,
+      "ms": 943.706101,
       "exact": false,
       "editDistance": 241,
       "plaintextError": 0.82817869,
@@ -19178,7 +19178,7 @@
         "g36": "S"
       },
       "score": -3462.6002903488356,
-      "ms": 832.96501,
+      "ms": 1000.964424,
       "exact": false,
       "editDistance": 241,
       "plaintextError": 0.82817869,
@@ -19242,7 +19242,7 @@
         "g36": "I"
       },
       "score": -3520.0402132803174,
-      "ms": 864.856989,
+      "ms": 899.846099,
       "exact": false,
       "editDistance": 241,
       "plaintextError": 0.82817869,
@@ -19306,7 +19306,7 @@
         "g36": "I"
       },
       "score": -3118.378457837479,
-      "ms": 878.638767,
+      "ms": 926.208502,
       "exact": false,
       "editDistance": 233,
       "plaintextError": 0.80068729,
@@ -19370,7 +19370,7 @@
         "g30": "T"
       },
       "score": -3215.54868081708,
-      "ms": 52.866933,
+      "ms": 57.041469,
       "exact": false,
       "editDistance": 217,
       "plaintextError": 0.71617162,
@@ -19434,7 +19434,7 @@
         "g30": "L"
       },
       "score": -2960.815698969007,
-      "ms": 57.762022,
+      "ms": 58.38077,
       "exact": false,
       "editDistance": 246,
       "plaintextError": 0.81188119,
@@ -19498,7 +19498,7 @@
         "g30": "D"
       },
       "score": -3065.840162223904,
-      "ms": 59.085166,
+      "ms": 58.241881,
       "exact": false,
       "editDistance": 233,
       "plaintextError": 0.7689769,
@@ -19562,7 +19562,7 @@
         "g30": "P"
       },
       "score": -3005.9215534899367,
-      "ms": 57.646837,
+      "ms": 61.120394,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.80858086,
@@ -19626,7 +19626,7 @@
         "g30": "I"
       },
       "score": -3537.81863289408,
-      "ms": 840.89522,
+      "ms": 903.786311,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.8019802,
@@ -19690,7 +19690,7 @@
         "g30": "E"
       },
       "score": -3320.135654717017,
-      "ms": 878.212394,
+      "ms": 961.553258,
       "exact": false,
       "editDistance": 252,
       "plaintextError": 0.83168317,
@@ -19754,7 +19754,7 @@
         "g30": "T"
       },
       "score": -3159.4756644492195,
-      "ms": 896.754237,
+      "ms": 944.195088,
       "exact": false,
       "editDistance": 205,
       "plaintextError": 0.67656766,
@@ -19818,7 +19818,7 @@
         "g30": "E"
       },
       "score": -3453.231146429178,
-      "ms": 887.708418,
+      "ms": 959.291774,
       "exact": false,
       "editDistance": 242,
       "plaintextError": 0.79867987,
@@ -19883,7 +19883,7 @@
         "g21": "D"
       },
       "score": -3179.230525359805,
-      "ms": 61.971906,
+      "ms": 65.029628,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.78877888,
@@ -19948,7 +19948,7 @@
         "g21": "V"
       },
       "score": -2976.3065637439627,
-      "ms": 72.678685,
+      "ms": 66.530352,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.78877888,
@@ -20013,7 +20013,7 @@
         "g21": "M"
       },
       "score": -3232.6416773070678,
-      "ms": 59.532249,
+      "ms": 65.092631,
       "exact": false,
       "editDistance": 242,
       "plaintextError": 0.79867987,
@@ -20078,7 +20078,7 @@
         "g21": "D"
       },
       "score": -3099.2816574452463,
-      "ms": 61.595338,
+      "ms": 75.310349,
       "exact": false,
       "editDistance": 245,
       "plaintextError": 0.80858086,
@@ -20143,7 +20143,7 @@
         "g21": "A"
       },
       "score": -3456.7305138637284,
-      "ms": 896.064528,
+      "ms": 910.519056,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.81848185,
@@ -20208,7 +20208,7 @@
         "g21": "N"
       },
       "score": -3546.649762129336,
-      "ms": 897.319794,
+      "ms": 927.183355,
       "exact": false,
       "editDistance": 247,
       "plaintextError": 0.81518152,
@@ -20273,7 +20273,7 @@
         "g21": "M"
       },
       "score": -3611.0597949178677,
-      "ms": 841.226158,
+      "ms": 926.672098,
       "exact": false,
       "editDistance": 238,
       "plaintextError": 0.78547855,
@@ -20338,7 +20338,7 @@
         "g21": "E"
       },
       "score": -3536.3318118497796,
-      "ms": 848.501054,
+      "ms": 1016.859719,
       "exact": false,
       "editDistance": 247,
       "plaintextError": 0.81518152,
@@ -20401,7 +20401,7 @@
         "g32": "C"
       },
       "score": -3204.18172512371,
-      "ms": 70.232187,
+      "ms": 60.756086,
       "exact": false,
       "editDistance": 208,
       "plaintextError": 0.68646865,
@@ -20464,7 +20464,7 @@
         "g32": "T"
       },
       "score": -3018.3947964913086,
-      "ms": 87.336347,
+      "ms": 66.02017,
       "exact": false,
       "editDistance": 244,
       "plaintextError": 0.80528053,
@@ -20527,7 +20527,7 @@
         "g32": "E"
       },
       "score": -3205.9285219837825,
-      "ms": 60.848072,
+      "ms": 70.812291,
       "exact": false,
       "editDistance": 237,
       "plaintextError": 0.78217822,
@@ -20590,7 +20590,7 @@
         "g32": "O"
       },
       "score": -3084.592670116765,
-      "ms": 58.407504,
+      "ms": 72.406436,
       "exact": false,
       "editDistance": 199,
       "plaintextError": 0.65676568,
@@ -20653,7 +20653,7 @@
         "g32": "H"
       },
       "score": -3609.5418138185255,
-      "ms": 753.283678,
+      "ms": 854.179736,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.78877888,
@@ -20716,7 +20716,7 @@
         "g32": "R"
       },
       "score": -3353.184162146051,
-      "ms": 830.634695,
+      "ms": 858.332078,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.82178218,
@@ -20779,7 +20779,7 @@
         "g32": "T"
       },
       "score": -3233.5864940820034,
-      "ms": 775.7495,
+      "ms": 969.365561,
       "exact": false,
       "editDistance": 202,
       "plaintextError": 0.66666667,
@@ -20842,7 +20842,7 @@
         "g32": "L"
       },
       "score": -3424.113665548213,
-      "ms": 1029.045413,
+      "ms": 863.268084,
       "exact": false,
       "editDistance": 247,
       "plaintextError": 0.81518152,
@@ -20907,7 +20907,7 @@
         "g14": "S"
       },
       "score": -3299.731601754847,
-      "ms": 53.379706,
+      "ms": 70.882269,
       "exact": false,
       "editDistance": 223,
       "plaintextError": 0.7359736,
@@ -20972,7 +20972,7 @@
         "g14": "L"
       },
       "score": -2935.8402752973107,
-      "ms": 68.398447,
+      "ms": 68.043425,
       "exact": false,
       "editDistance": 195,
       "plaintextError": 0.64356436,
@@ -21037,7 +21037,7 @@
         "g14": "C"
       },
       "score": -3104.5721599970548,
-      "ms": 60.496133,
+      "ms": 67.42414,
       "exact": false,
       "editDistance": 187,
       "plaintextError": 0.61716172,
@@ -21102,7 +21102,7 @@
         "g14": "D"
       },
       "score": -3101.2230144519117,
-      "ms": 59.684308,
+      "ms": 78.686381,
       "exact": false,
       "editDistance": 244,
       "plaintextError": 0.80528053,
@@ -21167,7 +21167,7 @@
         "g14": "D"
       },
       "score": -3592.570161331447,
-      "ms": 873.0999,
+      "ms": 920.589256,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.82178218,
@@ -21232,7 +21232,7 @@
         "g14": "E"
       },
       "score": -3554.3760401079553,
-      "ms": 956.025806,
+      "ms": 1054.108337,
       "exact": false,
       "editDistance": 247,
       "plaintextError": 0.81518152,
@@ -21297,7 +21297,7 @@
         "g14": "I"
       },
       "score": -3617.544665420622,
-      "ms": 910.963439,
+      "ms": 1154.176917,
       "exact": false,
       "editDistance": 241,
       "plaintextError": 0.79537954,
@@ -21362,7 +21362,7 @@
         "g14": "O"
       },
       "score": -3451.342785790293,
-      "ms": 963.565535,
+      "ms": 963.301438,
       "exact": false,
       "editDistance": 239,
       "plaintextError": 0.78877888,
@@ -21427,7 +21427,7 @@
         "g22": "E"
       },
       "score": -3199.738164426808,
-      "ms": 62.479509,
+      "ms": 58.703812,
       "exact": false,
       "editDistance": 235,
       "plaintextError": 0.77557756,
@@ -21492,7 +21492,7 @@
         "g22": "P"
       },
       "score": -2859.863836327946,
-      "ms": 63.238764,
+      "ms": 56.666937,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.82178218,
@@ -21557,7 +21557,7 @@
         "g22": "S"
       },
       "score": -3198.118686718424,
-      "ms": 75.388979,
+      "ms": 68.23189,
       "exact": false,
       "editDistance": 219,
       "plaintextError": 0.72277228,
@@ -21622,7 +21622,7 @@
         "g22": "I"
       },
       "score": -3147.3701003260717,
-      "ms": 62.927445,
+      "ms": 66.437963,
       "exact": false,
       "editDistance": 246,
       "plaintextError": 0.81188119,
@@ -21687,7 +21687,7 @@
         "g22": "Y"
       },
       "score": -3658.9869364531287,
-      "ms": 883.054244,
+      "ms": 955.263018,
       "exact": false,
       "editDistance": 237,
       "plaintextError": 0.78217822,
@@ -21752,7 +21752,7 @@
         "g22": "I"
       },
       "score": -3453.1936639523597,
-      "ms": 904.56899,
+      "ms": 934.368556,
       "exact": false,
       "editDistance": 247,
       "plaintextError": 0.81518152,
@@ -21817,7 +21817,7 @@
         "g22": "T"
       },
       "score": -3572.636617071431,
-      "ms": 901.196165,
+      "ms": 1044.277837,
       "exact": false,
       "editDistance": 206,
       "plaintextError": 0.67986799,
@@ -21882,7 +21882,7 @@
         "g22": "R"
       },
       "score": -3511.672364857699,
-      "ms": 986.523225,
+      "ms": 1049.356875,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.8019802,
@@ -21947,7 +21947,7 @@
         "g30": "I"
       },
       "score": -3523.014373669121,
-      "ms": 68.347364,
+      "ms": 67.621165,
       "exact": false,
       "editDistance": 267,
       "plaintextError": 0.81155015,
@@ -22012,7 +22012,7 @@
         "g30": "L"
       },
       "score": -3222.829223613889,
-      "ms": 68.18513,
+      "ms": 77.898248,
       "exact": false,
       "editDistance": 264,
       "plaintextError": 0.80243161,
@@ -22077,7 +22077,7 @@
         "g30": "I"
       },
       "score": -3503.251302183217,
-      "ms": 62.558589,
+      "ms": 65.604574,
       "exact": false,
       "editDistance": 252,
       "plaintextError": 0.76595745,
@@ -22142,7 +22142,7 @@
         "g30": "A"
       },
       "score": -3474.428178212808,
-      "ms": 75.321578,
+      "ms": 67.237089,
       "exact": false,
       "editDistance": 258,
       "plaintextError": 0.78419453,
@@ -22207,7 +22207,7 @@
         "g30": "S"
       },
       "score": -3846.3498058289015,
-      "ms": 895.301875,
+      "ms": 956.03655,
       "exact": false,
       "editDistance": 274,
       "plaintextError": 0.83282675,
@@ -22272,7 +22272,7 @@
         "g30": "P"
       },
       "score": -3603.6430923658677,
-      "ms": 880.57673,
+      "ms": 1011.322268,
       "exact": false,
       "editDistance": 267,
       "plaintextError": 0.81155015,
@@ -22337,7 +22337,7 @@
         "g30": "R"
       },
       "score": -3943.7022883333157,
-      "ms": 948.285416,
+      "ms": 1002.823758,
       "exact": false,
       "editDistance": 242,
       "plaintextError": 0.73556231,
@@ -22402,7 +22402,7 @@
         "g30": "Q"
       },
       "score": -3647.953491348934,
-      "ms": 1046.08763,
+      "ms": 1019.986979,
       "exact": false,
       "editDistance": 188,
       "plaintextError": 0.57142857,
@@ -22466,7 +22466,7 @@
         "g28": "D"
       },
       "score": -3394.922016168551,
-      "ms": 54.244259,
+      "ms": 59.685272,
       "exact": false,
       "editDistance": 161,
       "plaintextError": 0.4893617,
@@ -22530,7 +22530,7 @@
         "g28": "L"
       },
       "score": -3112.7710417289095,
-      "ms": 73.651402,
+      "ms": 74.926138,
       "exact": false,
       "editDistance": 251,
       "plaintextError": 0.76291793,
@@ -22594,7 +22594,7 @@
         "g28": "L"
       },
       "score": -3528.145496826726,
-      "ms": 77.325436,
+      "ms": 74.032024,
       "exact": false,
       "editDistance": 262,
       "plaintextError": 0.79635258,
@@ -22658,7 +22658,7 @@
         "g28": "E"
       },
       "score": -3329.607029630613,
-      "ms": 77.292796,
+      "ms": 74.752957,
       "exact": false,
       "editDistance": 261,
       "plaintextError": 0.79331307,
@@ -22722,7 +22722,7 @@
         "g28": "C"
       },
       "score": -3954.371976288117,
-      "ms": 854.828039,
+      "ms": 856.199719,
       "exact": false,
       "editDistance": 270,
       "plaintextError": 0.82066869,
@@ -22786,7 +22786,7 @@
         "g28": "I"
       },
       "score": -3630.9662410821247,
-      "ms": 893.728631,
+      "ms": 891.167325,
       "exact": false,
       "editDistance": 270,
       "plaintextError": 0.82066869,
@@ -22850,7 +22850,7 @@
         "g28": "A"
       },
       "score": -3938.6560085676147,
-      "ms": 989.486214,
+      "ms": 933.375837,
       "exact": false,
       "editDistance": 265,
       "plaintextError": 0.80547112,
@@ -22914,7 +22914,7 @@
         "g28": "M"
       },
       "score": -3741.9901319186943,
-      "ms": 1073.659855,
+      "ms": 993.18469,
       "exact": false,
       "editDistance": 221,
       "plaintextError": 0.67173252,
@@ -22979,7 +22979,7 @@
         "g32": "K"
       },
       "score": -3429.54471380346,
-      "ms": 60.622294,
+      "ms": 57.685035,
       "exact": false,
       "editDistance": 200,
       "plaintextError": 0.60790274,
@@ -23044,7 +23044,7 @@
         "g32": "U"
       },
       "score": -3119.1327619609206,
-      "ms": 72.200529,
+      "ms": 71.567576,
       "exact": false,
       "editDistance": 232,
       "plaintextError": 0.70516717,
@@ -23109,7 +23109,7 @@
         "g32": "T"
       },
       "score": -3413.820759553765,
-      "ms": 73.802664,
+      "ms": 66.519687,
       "exact": false,
       "editDistance": 259,
       "plaintextError": 0.78723404,
@@ -23174,7 +23174,7 @@
         "g32": "N"
       },
       "score": -3386.5662927200246,
-      "ms": 66.885797,
+      "ms": 75.628755,
       "exact": false,
       "editDistance": 268,
       "plaintextError": 0.81458967,
@@ -23239,7 +23239,7 @@
         "g32": "I"
       },
       "score": -3932.8791789204283,
-      "ms": 983.502118,
+      "ms": 957.402688,
       "exact": false,
       "editDistance": 275,
       "plaintextError": 0.83586626,
@@ -23304,7 +23304,7 @@
         "g32": "E"
       },
       "score": -3873.9262679851277,
-      "ms": 1007.542341,
+      "ms": 1087.903739,
       "exact": false,
       "editDistance": 270,
       "plaintextError": 0.82066869,
@@ -23369,7 +23369,7 @@
         "g32": "E"
       },
       "score": -3827.1821683577164,
-      "ms": 1091.891691,
+      "ms": 1127.507967,
       "exact": false,
       "editDistance": 241,
       "plaintextError": 0.7325228,
@@ -23434,7 +23434,7 @@
         "g32": "D"
       },
       "score": -3744.5887641849768,
-      "ms": 997.722337,
+      "ms": 1008.197751,
       "exact": false,
       "editDistance": 267,
       "plaintextError": 0.81155015,
@@ -23499,7 +23499,7 @@
         "g22": "R"
       },
       "score": -3445.8918525495887,
-      "ms": 93.084293,
+      "ms": 111.311255,
       "exact": false,
       "editDistance": 264,
       "plaintextError": 0.80243161,
@@ -23564,7 +23564,7 @@
         "g22": "S"
       },
       "score": -3091.970342587824,
-      "ms": 73.571948,
+      "ms": 71.823152,
       "exact": false,
       "editDistance": 196,
       "plaintextError": 0.59574468,
@@ -23629,7 +23629,7 @@
         "g22": "M"
       },
       "score": -3386.510422251153,
-      "ms": 66.425965,
+      "ms": 61.817371,
       "exact": false,
       "editDistance": 248,
       "plaintextError": 0.75379939,
@@ -23694,7 +23694,7 @@
         "g22": "N"
       },
       "score": -3331.403797419357,
-      "ms": 71.749461,
+      "ms": 72.086869,
       "exact": false,
       "editDistance": 243,
       "plaintextError": 0.73860182,
@@ -23759,7 +23759,7 @@
         "g22": "S"
       },
       "score": -3937.310887096839,
-      "ms": 973.412666,
+      "ms": 841.117597,
       "exact": false,
       "editDistance": 275,
       "plaintextError": 0.83586626,
@@ -23824,7 +23824,7 @@
         "g22": "S"
       },
       "score": -3468.891312845815,
-      "ms": 1021.284888,
+      "ms": 961.676155,
       "exact": false,
       "editDistance": 254,
       "plaintextError": 0.77203647,
@@ -23889,7 +23889,7 @@
         "g22": "D"
       },
       "score": -3839.25282853853,
-      "ms": 923.931313,
+      "ms": 942.844292,
       "exact": false,
       "editDistance": 256,
       "plaintextError": 0.7781155,
@@ -23954,7 +23954,7 @@
         "g22": "O"
       },
       "score": -3722.5280358643704,
-      "ms": 970.64906,
+      "ms": 881.925282,
       "exact": false,
       "editDistance": 265,
       "plaintextError": 0.80547112,
@@ -24018,7 +24018,7 @@
         "g29": "T"
       },
       "score": -3592.342341449088,
-      "ms": 61.868085,
+      "ms": 71.134851,
       "exact": false,
       "editDistance": 261,
       "plaintextError": 0.79331307,
@@ -24082,7 +24082,7 @@
         "g29": "C"
       },
       "score": -3185.826617002269,
-      "ms": 63.202997,
+      "ms": 58.288464,
       "exact": false,
       "editDistance": 267,
       "plaintextError": 0.81155015,
@@ -24146,7 +24146,7 @@
         "g29": "V"
       },
       "score": -3331.4678541150092,
-      "ms": 74.524474,
+      "ms": 59.693244,
       "exact": false,
       "editDistance": 213,
       "plaintextError": 0.64741641,
@@ -24210,7 +24210,7 @@
         "g29": "C"
       },
       "score": -3324.2681654630196,
-      "ms": 71.017687,
+      "ms": 61.602366,
       "exact": false,
       "editDistance": 261,
       "plaintextError": 0.79331307,
@@ -24274,7 +24274,7 @@
         "g29": "E"
       },
       "score": -3961.623614778798,
-      "ms": 838.263641,
+      "ms": 798.740366,
       "exact": false,
       "editDistance": 270,
       "plaintextError": 0.82066869,
@@ -24338,7 +24338,7 @@
         "g29": "I"
       },
       "score": -3624.022658887969,
-      "ms": 882.76705,
+      "ms": 826.171203,
       "exact": false,
       "editDistance": 273,
       "plaintextError": 0.82978723,
@@ -24402,7 +24402,7 @@
         "g29": "L"
       },
       "score": -4043.552431078822,
-      "ms": 874.436213,
+      "ms": 860.137493,
       "exact": false,
       "editDistance": 254,
       "plaintextError": 0.77203647,
@@ -24466,7 +24466,7 @@
         "g29": "P"
       },
       "score": -3631.733255602752,
-      "ms": 982.206417,
+      "ms": 896.922115,
       "exact": false,
       "editDistance": 190,
       "plaintextError": 0.5775076,
@@ -24529,7 +24529,7 @@
         "g15": "P"
       },
       "score": -3511.81687981825,
-      "ms": 58.476977,
+      "ms": 58.605383,
       "exact": false,
       "editDistance": 269,
       "plaintextError": 0.82515337,
@@ -24592,7 +24592,7 @@
         "g15": "E"
       },
       "score": -2998.058535594517,
-      "ms": 68.942708,
+      "ms": 65.681261,
       "exact": false,
       "editDistance": 238,
       "plaintextError": 0.73006135,
@@ -24655,7 +24655,7 @@
         "g15": "I"
       },
       "score": -3288.159734473526,
-      "ms": 65.986218,
+      "ms": 60.428995,
       "exact": false,
       "editDistance": 260,
       "plaintextError": 0.79754601,
@@ -24718,7 +24718,7 @@
         "g15": "Q"
       },
       "score": -3372.5753565702435,
-      "ms": 106.065564,
+      "ms": 66.376971,
       "exact": false,
       "editDistance": 259,
       "plaintextError": 0.79447853,
@@ -24781,7 +24781,7 @@
         "g15": "A"
       },
       "score": -3997.403634545622,
-      "ms": 758.44472,
+      "ms": 801.105916,
       "exact": false,
       "editDistance": 272,
       "plaintextError": 0.83435583,
@@ -24844,7 +24844,7 @@
         "g15": "C"
       },
       "score": -3800.17766487842,
-      "ms": 842.009229,
+      "ms": 802.73488,
       "exact": false,
       "editDistance": 269,
       "plaintextError": 0.82515337,
@@ -24907,7 +24907,7 @@
         "g15": "P"
       },
       "score": -3723.7457452742556,
-      "ms": 888.054326,
+      "ms": 841.253739,
       "exact": false,
       "editDistance": 262,
       "plaintextError": 0.80368098,
@@ -24970,7 +24970,7 @@
         "g15": "B"
       },
       "score": -3875.955688452301,
-      "ms": 973.450857,
+      "ms": 820.140712,
       "exact": false,
       "editDistance": 254,
       "plaintextError": 0.7791411,
@@ -25034,7 +25034,7 @@
         "g20": "H"
       },
       "score": -3352.304678125861,
-      "ms": 62.111891,
+      "ms": 62.740032,
       "exact": false,
       "editDistance": 211,
       "plaintextError": 0.64723926,
@@ -25098,7 +25098,7 @@
         "g20": "N"
       },
       "score": -3258.3782707477235,
-      "ms": 67.098026,
+      "ms": 69.92185,
       "exact": false,
       "editDistance": 274,
       "plaintextError": 0.8404908,
@@ -25162,7 +25162,7 @@
         "g20": "N"
       },
       "score": -3313.7703373504955,
-      "ms": 69.888214,
+      "ms": 76.68697,
       "exact": false,
       "editDistance": 241,
       "plaintextError": 0.7392638,
@@ -25226,7 +25226,7 @@
         "g20": "M"
       },
       "score": -3288.107127043039,
-      "ms": 68.183534,
+      "ms": 72.005794,
       "exact": false,
       "editDistance": 230,
       "plaintextError": 0.70552147,
@@ -25290,7 +25290,7 @@
         "g20": "A"
       },
       "score": -3928.6527380978837,
-      "ms": 812.71473,
+      "ms": 913.70391,
       "exact": false,
       "editDistance": 269,
       "plaintextError": 0.82515337,
@@ -25354,7 +25354,7 @@
         "g20": "C"
       },
       "score": -3562.0260661155758,
-      "ms": 846.919296,
+      "ms": 850.084676,
       "exact": false,
       "editDistance": 261,
       "plaintextError": 0.8006135,
@@ -25418,7 +25418,7 @@
         "g20": "E"
       },
       "score": -3859.806015743654,
-      "ms": 819.933552,
+      "ms": 845.699529,
       "exact": false,
       "editDistance": 269,
       "plaintextError": 0.82515337,
@@ -25482,7 +25482,7 @@
         "g20": "O"
       },
       "score": -3754.5375409096273,
-      "ms": 845.389916,
+      "ms": 871.617378,
       "exact": false,
       "editDistance": 261,
       "plaintextError": 0.8006135,
@@ -25545,7 +25545,7 @@
         "g25": "S"
       },
       "score": -3397.523513495129,
-      "ms": 53.768725,
+      "ms": 55.765977,
       "exact": false,
       "editDistance": 221,
       "plaintextError": 0.67791411,
@@ -25608,7 +25608,7 @@
         "g25": "N"
       },
       "score": -3029.4259294135563,
-      "ms": 63.899016,
+      "ms": 64.890368,
       "exact": false,
       "editDistance": 259,
       "plaintextError": 0.79447853,
@@ -25671,7 +25671,7 @@
         "g25": "T"
       },
       "score": -3530.4136513065278,
-      "ms": 61.224415,
+      "ms": 62.074447,
       "exact": false,
       "editDistance": 260,
       "plaintextError": 0.79754601,
@@ -25734,7 +25734,7 @@
         "g25": "C"
       },
       "score": -3367.207241077319,
-      "ms": 65.694001,
+      "ms": 68.643101,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.76380368,
@@ -25797,7 +25797,7 @@
         "g25": "L"
       },
       "score": -3819.0343426898917,
-      "ms": 734.103572,
+      "ms": 766.977923,
       "exact": false,
       "editDistance": 268,
       "plaintextError": 0.82208589,
@@ -25860,7 +25860,7 @@
         "g25": "E"
       },
       "score": -3555.104976617905,
-      "ms": 753.969479,
+      "ms": 843.264114,
       "exact": false,
       "editDistance": 264,
       "plaintextError": 0.80981595,
@@ -25923,7 +25923,7 @@
         "g25": "O"
       },
       "score": -3917.700573625497,
-      "ms": 772.760357,
+      "ms": 879.418419,
       "exact": false,
       "editDistance": 225,
       "plaintextError": 0.69018405,
@@ -25986,7 +25986,7 @@
         "g25": "D"
       },
       "score": -3757.136543701667,
-      "ms": 796.278018,
+      "ms": 870.05915,
       "exact": false,
       "editDistance": 225,
       "plaintextError": 0.69018405,
@@ -26050,7 +26050,7 @@
         "g1": "N"
       },
       "score": -3491.0230158210466,
-      "ms": 55.254174,
+      "ms": 58.295664,
       "exact": false,
       "editDistance": 259,
       "plaintextError": 0.79447853,
@@ -26114,7 +26114,7 @@
         "g1": "N"
       },
       "score": -2999.284380285576,
-      "ms": 57.733782,
+      "ms": 66.239564,
       "exact": false,
       "editDistance": 221,
       "plaintextError": 0.67791411,
@@ -26178,7 +26178,7 @@
         "g1": "N"
       },
       "score": -3299.9412360667343,
-      "ms": 64.81717,
+      "ms": 71.265808,
       "exact": false,
       "editDistance": 249,
       "plaintextError": 0.76380368,
@@ -26242,7 +26242,7 @@
         "g1": "S"
       },
       "score": -3513.6132348858646,
-      "ms": 67.657212,
+      "ms": 69.230326,
       "exact": false,
       "editDistance": 259,
       "plaintextError": 0.79447853,
@@ -26306,7 +26306,7 @@
         "g1": "O"
       },
       "score": -3894.4503698052563,
-      "ms": 785.401802,
+      "ms": 828.927488,
       "exact": false,
       "editDistance": 272,
       "plaintextError": 0.83435583,
@@ -26370,7 +26370,7 @@
         "g1": "A"
       },
       "score": -3764.5463614902487,
-      "ms": 812.440022,
+      "ms": 906.04119,
       "exact": false,
       "editDistance": 266,
       "plaintextError": 0.81595092,
@@ -26434,7 +26434,7 @@
         "g1": "G"
       },
       "score": -3948.9106317960463,
-      "ms": 807.045251,
+      "ms": 938.601357,
       "exact": false,
       "editDistance": 274,
       "plaintextError": 0.8404908,
@@ -26498,7 +26498,7 @@
         "g1": "A"
       },
       "score": -3728.36440936334,
-      "ms": 797.855736,
+      "ms": 892.187308,
       "exact": false,
       "editDistance": 260,
       "plaintextError": 0.79754601,
@@ -26562,7 +26562,7 @@
         "g14": "C"
       },
       "score": -3549.8396302418673,
-      "ms": 51.877334,
+      "ms": 58.06765,
       "exact": false,
       "editDistance": 263,
       "plaintextError": 0.80674847,
@@ -26626,7 +26626,7 @@
         "g14": "P"
       },
       "score": -3286.791134117988,
-      "ms": 54.613769,
+      "ms": 58.937924,
       "exact": false,
       "editDistance": 267,
       "plaintextError": 0.8190184,
@@ -26690,7 +26690,7 @@
         "g14": "O"
       },
       "score": -3482.736109258596,
-      "ms": 61.040498,
+      "ms": 67.118588,
       "exact": false,
       "editDistance": 259,
       "plaintextError": 0.79447853,
@@ -26754,7 +26754,7 @@
         "g14": "E"
       },
       "score": -3413.4801146324558,
-      "ms": 58.750855,
+      "ms": 63.540449,
       "exact": false,
       "editDistance": 262,
       "plaintextError": 0.80368098,
@@ -26818,7 +26818,7 @@
         "g14": "S"
       },
       "score": -3859.9062968327657,
-      "ms": 751.326207,
+      "ms": 826.367369,
       "exact": false,
       "editDistance": 268,
       "plaintextError": 0.82208589,
@@ -26882,7 +26882,7 @@
         "g14": "R"
       },
       "score": -3593.664666859301,
-      "ms": 774.395377,
+      "ms": 1009.743177,
       "exact": false,
       "editDistance": 267,
       "plaintextError": 0.8190184,
@@ -26946,7 +26946,7 @@
         "g14": "O"
       },
       "score": -3800.8181936620363,
-      "ms": 858.904594,
+      "ms": 997.081059,
       "exact": false,
       "editDistance": 240,
       "plaintextError": 0.73619632,
@@ -27010,7 +27010,7 @@
         "g14": "E"
       },
       "score": -3874.4844439380654,
-      "ms": 862.213011,
+      "ms": 1053.935057,
       "exact": false,
       "editDistance": 268,
       "plaintextError": 0.82208589,

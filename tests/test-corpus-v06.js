@@ -104,8 +104,13 @@ const corpusJob = ciWorkflow.slice(
 assert.ok(corpusJob.length > 0, 'dedicated corpus-validation job exists');
 assert.doesNotMatch(corpusJob, /^\s+if:/m,
   'dedicated corpus validation runs on pull requests as well as main');
-assert.match(ciWorkflow,/deploy-pages:[\s\S]*needs: \[test, validate-corpus\]/,
-  'Pages deployment waits for tests and corpus validation on the same commit');
+const deploymentNeeds = /deploy-pages:\s*\n\s+needs:\s*\[([^\]]+)\]/.exec(ciWorkflow);
+assert.ok(deploymentNeeds, 'Pages deployment declares its validation dependencies');
+const dependencyNames = deploymentNeeds[1].split(',').map(name => name.trim());
+for (const required of ['test', 'browser-tests', 'validate-corpus']) {
+  assert.ok(dependencyNames.includes(required),
+    'Pages deployment waits for ' + required + ' on the same commit');
+}
 assert.match(ciWorkflow,/deploy-pages:[\s\S]*ref: \$\{\{ github\.sha \}\}[\s\S]*lfs: true/,
   'Pages deploys exact validated Git/LFS bytes');
 assert.match(ciWorkflow,/sha256sum -c SHA256SUMS.txt/);

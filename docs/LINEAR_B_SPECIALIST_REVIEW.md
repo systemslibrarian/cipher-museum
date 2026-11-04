@@ -121,11 +121,11 @@ Each entry gives:
 
 ### LB-09 · Summaries on other surfaces
 
-These restate the case and add no new claims.
+These restate the case and add no new claims. The page-level summary was synchronized on 4 November 2026 to include the new Charles V case; the Linear B claims and transliterations in this packet are unchanged.
 
 - **Where:** `lab/decipherment-cases.html`, meta description and hero line
 - **Live wording:**
-  > Compare Copiale, Mary Stuart and Z340 with the Egyptian, Linear B and Maya decipherments: what structure, keys and independent checks can each establish.
+  > Compare Copiale, Mary Stuart, Charles V and Z340 with the Egyptian, Linear B and Maya decipherments: what structure, keys and independent checks can each establish.
 
 - **Where:** `README.md`, Recent Changes, 3 November
 - **Live wording:**

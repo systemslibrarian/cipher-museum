@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Reading the Evidence — The Cipher Museum</title>
-<meta name="description" content="Four hands-on investigations: match a key, identify cleartext, test transcription errors, and uncover repeated-symbol patterns.">
+<meta name="description" content="Six hands-on investigations: compare keys, cleartext, transcription errors, repeated symbols, replacement rules, and the reliability of concealed messages.">
 <link rel="canonical" href="https://ciphermuseum.com/lab/reading-the-evidence.html"><link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../css/museum.css"><link rel="stylesheet" href="../css/research-workbench.css"><link rel="stylesheet" href="../css/evidence-exercises.css">
 </head><body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -23,12 +23,12 @@
     </ul>
   </div>
 </nav>
-<header class="page-hero"><p class="hero-sub">Four small investigations</p><h1>Reading the Evidence</h1><p class="hero-intro">A promising key. An ordinary-looking word. A single misread letter. Test what each clue can tell you.</p></header>
+<header class="page-hero"><p class="hero-sub">Six small investigations</p><h1>Reading the Evidence</h1><p class="hero-intro">A promising key. An ordinary-looking word. A single misread letter. Test what each clue can tell you.</p></header>
 <main id="main-content" class="research-main" tabindex="-1">
-<p>Predict what will happen, try it, then explain the result. The messages, keys and case notes in the four numbered activities are <strong>invented teaching examples</strong>. The linked papers supply the research ideas; these activities do not reproduce their datasets or trained models. A separate <a href="#handbell-context">historical handbell case</a> follows the exercises. Everything runs in your browser, with no upload or account.</p>
-<nav aria-label="Activities"><p><a href="#key-match">1. Match a key</a> · <a href="#cleartext">2. Find the cleartext</a> · <a href="#transcription">3. Test a transcription</a> · <a href="#recurrence">4. Compare patterns</a></p></nav>
+<p>Predict what will happen, try it, then explain the result. The messages, keys and case notes in the six numbered activities are <strong>invented teaching examples</strong>. The linked papers supply the research ideas; these activities do not reproduce their datasets or trained models. A separate <a href="#handbell-context">historical handbell case</a> follows the exercises. Everything runs in your browser, with no upload or account.</p>
+<nav aria-label="Activities"><p><a href="#key-match">1. Match a key</a> · <a href="#cleartext">2. Find the cleartext</a> · <a href="#transcription">3. Test a transcription</a> · <a href="#recurrence">4. Compare patterns</a> · <a href="#structure-controls">5. What survives replacement?</a> · <a href="#concealment">6. Can the recipient read it?</a></p></nav>
 <p>For your own documents, use the <a href="evidence-workbench.html">Evidence Workbench</a>. For sourced historical cases, visit <a href="decipherment-cases.html">Decipherment Investigations</a>.</p>
-<noscript><p>The explanations and paper links remain readable without JavaScript. Enable JavaScript to run the four exercises.</p></noscript>
+<noscript><p>The explanations and paper links remain readable without JavaScript. Enable JavaScript to run the six exercises.</p></noscript>
 <section class="evidence-exercise" id="key-match" aria-labelledby="key-match-title">
 <h2 id="key-match-title">1. Which key belongs to this message?</h2>
 <p>A loose sheet and three key cards have been filed together. The folder label suggests one connection—but a folder can contain material from several dates. Which card deserves a closer look?</p>
@@ -74,6 +74,58 @@
 <div id="pattern-symbols" role="group" aria-label="Locate a symbol in the original sequence"></div><p id="pattern-positions" role="status" aria-live="polite"></p>
 <details><summary>What does this reveal?</summary><p>It records equal-symbol positions, not plaintext. Renaming is one-to-one: different symbols keep different names. In a homophonic cipher, different ciphertext symbols can still stand for the same plaintext letter, so this pattern is not necessarily the plaintext’s pattern. This does not apply as a decipherment method to modern encryption or a properly used one-time pad.</p><p>The single-occurrence action replaces the first repeated occurrence with a new symbol. If all symbols are distinct, it replaces the last with the first. With only one symbol, no equality relationship can change. Separating spaces here are token boundaries, not symbols being encoded.</p></details>
 <p class="paper-credit"><strong>Research credit:</strong> Nishant Kambhatla, Logan Born and Anoop Sarkar, <a href="https://aclanthology.org/2023.findings-eacl.160/"><em>Decipherment as Regression: Solving Historical Substitution Ciphers by Learning Symbol Recurrence Relations</em> (2023)</a>, §3.1. This activity implements their first-occurrence numbering definition on an original example. It does not run their Transformer model or claim their decipherment performance.</p>
+</section>
+<section class="evidence-exercise" id="structure-controls" aria-labelledby="structure-controls-title">
+<h2 id="structure-controls-title">5. What survives when words are replaced?</h2>
+<p>A repeated label can reveal a useful relationship without revealing an entire message. In this original task, every source has three words drawn from <strong>PINE, OAK, ELM and ASH</strong>. The question is always: <strong>were the first and last original words the same?</strong></p>
+<p>Read the four labeled examples, then try a new one under the same replacement rule. Here a token is a whole word; the spaces and three positions stay visible.</p>
+<div class="research-grid">
+<div><label for="structure-mode">Replacement rule</label><select id="structure-mode"><option value="unchanged">Unchanged words — baseline</option><option value="bijective" selected>Fixed one-to-one substitution</option><option value="merged">Fixed many-to-one substitution</option><option value="fresh">Fresh replacement at each occurrence</option></select></div>
+<div><label for="structure-query">New example</label><select id="structure-query"><option value="a">Example A</option><option value="b">Example B</option><option value="c">Example C</option></select></div>
+</div>
+<p id="structure-rule"></p>
+<div class="evidence-table-scroll" role="region" aria-label="Transformed examples and original-word labels" tabindex="0"><table class="cipher-table"><caption>Four demonstrations: the label describes the original first and last words</caption><thead><tr><th scope="col">Example</th><th scope="col">What you receive</th><th scope="col">Original ends</th></tr></thead><tbody id="structure-examples"></tbody></table></div>
+<p><strong>New transformed message:</strong> <code id="structure-message"></code></p>
+<p><strong>Its visible recurrence pattern:</strong> <code id="structure-pattern"></code>. These numbers describe the transformed words, not an inferred plaintext.</p>
+<label for="structure-guess">What does this establish about the original ends?</label><select id="structure-guess"><option value="">Choose a conclusion…</option><option value="same">They were the same</option><option value="different">They were different</option><option value="uncertain">The transformed message does not determine it</option></select>
+<div class="research-actions"><button id="structure-check" type="button">Check the reasoning</button><button id="structure-reset" type="button">Reset replacement experiment</button></div>
+<p id="structure-result" class="evidence-output" role="status" aria-live="polite"></p>
+<details id="structure-workings"><summary>Inspect the source, rule and all compatible readings</summary>
+<p><strong>Supplied original:</strong> <code id="structure-source"></code>. It is shown for checking the exercise, not supplied with the question.</p>
+<p><strong>Complete toy rule:</strong> <span id="structure-map"></span></p>
+<p>The check enumerates all 4 × 4 × 4 = 64 possible source triples. For a fixed substitution, the count below assumes the <em>whole</em> mapping is known; the labeled examples alone do not establish that a learner has discovered it. For fresh replacement, every output is possible from every source under the stated independent, uniform model.</p>
+<p id="structure-counts"></p><ul id="structure-alternatives" class="structure-alternatives"></ul>
+</details>
+<p><strong>Try the counterexample:</strong> choose the many-to-one rule and compare A with B. Then choose C: can you answer the equality question even though several original messages remain possible?</p>
+<p><strong>Scope:</strong> this is a deterministic teaching display, with frozen possible draws for the fresh-replacement condition. It runs no language model and reports no AI accuracy. It distinguishes a task clue from full message or key recovery. Whole-word replacement, a historical letter cipher, and modern encryption are different systems; random replacement here is not an encryption scheme with a decoding key.</p>
+<p class="paper-credit"><strong>Research credit:</strong> Zhouxiang Fang, Aayush Mishra, Muhan Gao, Anqi Liu and Daniel Khashabi, <a href="https://aclanthology.org/2025.emnlp-main.1316/"><em>ICL CIPHERS: Quantifying “Learning” in In-Context Learning via Substitution Ciphers</em> (2025)</a>, §§2.2–2.5, pp. 25913–25914. Their comparison uses stable token permutations and fresh per-occurrence replacements; task success need not recover the whole mapping. This four-way comparison, word task, fixtures and exact enumeration are our teaching model, not a replication of their experiment or results.</p>
+</section>
+<section class="evidence-exercise" id="concealment" aria-labelledby="concealment-title">
+<h2 id="concealment-title">6. A hidden message still has to reach its reader</h2>
+<p>Would the recipient recover the intended message? Would the carrier attract attention? Would a discovered message remain secret? These are separate questions. The three original examples below expose the extraction rules and keys so that you can test them.</p>
+<p>In her study of seventeenth-century German handbooks, Eveline Szarka discusses Harsdörffer’s ambiguous invoice numbers, musical ciphers whose rhythm or melody might look unusual, and Friderici’s need to keep reserved words out of surrounding text. Those are accounts of proposed methods, not evidence that every proposal was used successfully.</p>
+<h3>6a. An invoice with two legal readings</h3>
+<p>Our invented word code is <strong>1 → MEET; 2 → DAWN; 3 → DUSK; 12 → WAIT; 13 → CANCEL</strong>. Concatenate codes to form an amount. The recipient knows this code but must also know where its boundaries are. This is not Harsdörffer’s historical letter key.</p>
+<div class="research-grid"><div><label for="invoice-example">Invented invoice</label><select id="invoice-example"><option value="dawn">Amount 12</option><option value="dusk">Amount 13</option><option value="single">Amount 2 — single-code control</option></select></div><div><label for="invoice-format">Boundary rule sent with the record</label><select id="invoice-format"><option value="plain">Concatenated digits — boundaries absent</option><option value="framed">Explicit | between complete codes</option></select></div></div>
+<div class="evidence-table-scroll" role="region" aria-label="Original teaching invoice" tabindex="0"><table class="cipher-table"><caption>Paper bundles — fictional quantities and currency units</caption><thead><tr><th scope="col">Quantity</th><th scope="col">Unit price</th><th scope="col">Amount field received</th></tr></thead><tbody><tr><td id="invoice-units"></td><td id="invoice-price"></td><td><code id="invoice-record"></code></td></tr></tbody></table></div>
+<p id="invoice-arithmetic"></p><p><strong>Every legal decoding under the selected boundary rule:</strong></p><ul id="invoice-readings"></ul>
+<p id="invoice-result" class="evidence-output" role="status" aria-live="polite"></p><p id="invoice-cover"></p>
+<details><summary>Check the sender’s record</summary><p>The invented sender intended <strong id="invoice-intended"></strong>. This record lets you check the exercise; a real recipient cannot resolve ambiguity by consulting an unavailable original.</p></details>
+<h3>6b. An ordinary word can become an accidental marker</h3>
+<p>This separate toy rule extracts every whole word <strong>amber → MEET, silver → AT, copper → DAWN</strong>, ignoring case and punctuation. The surrounding words are ignored. Predict what happens when an ordinary sentence uses a reserved word.</p>
+<label for="marker-extra"><input id="marker-extra" type="checkbox">Add the ordinary sentence “Copper tools arrived yesterday.”</label>
+<p id="marker-text" class="carrier-text"></p><p><strong>Words extracted:</strong> <span id="marker-words"></span></p><p><strong>Recipient’s reading:</strong> <code id="marker-reading"></code></p>
+<p id="marker-result" class="evidence-output" role="status" aria-live="polite"></p>
+<h3>6c. Decodable rhythm, conspicuous carrier</h3>
+<p>Our tiny duration code is <strong>WAIT → 1, 1, 1, 1 beats</strong> and <strong>MEET → 1, 1, 1, 2 beats</strong>. Each sequence is presented as one complete, single-voice bar labeled <strong>4/4</strong>: it must contain four quarter-note beats. Only duration is modeled; this is not a historical score or a melody.</p>
+<label for="music-message">Word to encode in the rhythm</label><select id="music-message"><option value="MEET">MEET</option><option value="WAIT">WAIT — four-beat control</option></select>
+<ol id="music-notes" class="rhythm-notes" aria-label="Note durations in the original rhythm example"></ol>
+<p id="music-count"></p><p><strong>Decoded with the shown duration key:</strong> <code id="music-reading"></code></p>
+<p id="music-result" class="evidence-output" role="status" aria-live="polite"></p>
+<button id="concealment-reset" type="button">Reset all three carrier examples</button>
+<p><strong>Explain:</strong> Which change helps the recipient but changes the cover? Which ordinary word damages the message? Which code still decodes despite a visible inconsistency? None of these checks measures an interceptor’s detection rate or establishes a secure covert channel.</p>
+<p>Continue with the <a href="../ciphers/cardano-grille.html">Cardano grille’s selected positions</a>, <a href="../ciphers/null-cipher.html">null-cipher extraction rules</a>, or <a href="../ciphers/bacon.html">Bacon’s two-symbol representation</a>.</p>
+<p class="paper-credit"><strong>Research credit:</strong> Eveline Szarka, <a href="https://ecp.ep.liu.se/index.php/histocrypt/article/view/705"><em>On the Combination of Cryptography and Steganography in 17th Century Germany</em> (2023)</a>, §§4–6, pp. 163–166, and conclusion p. 167; <a href="https://ecp.ep.liu.se/index.php/histocrypt/article/download/705/611/722">publisher PDF</a>. All invoices, word codes, sentences and rhythms in this activity are new teaching fixtures. No source illustration, historical key or musical composition is reproduced.</p>
 </section>
 <section class="panel" id="handbell-context" aria-labelledby="handbell-title"><div class="panel-body">
 <h2 id="handbell-title">The handbell: when a date rules out a cipher</h2>

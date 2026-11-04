@@ -240,3 +240,17 @@ node scripts/evaluate-profile-recovery.js
 
 Changes to the protocol, source set, scoring model or solver behavior should receive
 a separate experiment version. Keep these results and failures available.
+
+## Integration with the published Museum additions
+
+PR #51 adds manual passage-alignment functions to the shared `research-model.js`.
+It does not change the recovery solvers. The original report from commit
+`6745c789cc40a4885b8ca17fc3e7b952db30784b` is retained as
+[`evaluation-pre-integration.json`](evaluation-pre-integration.json), including its
+original shared-file hash and timings. The current report records a complete new
+execution against the combined file. All 240 predictions, keys, scores, evaluation
+counts, errors and paired summaries agree exactly with the original; only elapsed
+times and the shared-file hash differ. Protocol, passages, scoring profiles, seeds
+and budgets are unchanged. The [comparison receipt](integration-replay.json) records
+both report checksums and the precise comparison exclusions. This integration replay is not an additional independent
+experiment or evidence of improved recovery.

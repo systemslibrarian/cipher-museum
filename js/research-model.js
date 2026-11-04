@@ -38,7 +38,7 @@
     string(raw, 10000, 'Transcription');
     return { version: 2, kind: KIND, raw, mode: 'symbols', width: 1, annotations: {}, revision: 1,
       source: source({}), revisions: [{ id: 1, raw, reason: 'Initial transcription' }], spans: [], layers: [], keys: [], relations: [],
-      images: [], inventory: null, inventoryArchive: [], hypotheses: [] };
+      images: [], inventory: null, inventoryArchive: [], hypotheses: [], alignments: [] };
   }
   // Legacy positions count Unicode code points, not UTF-16 code units.
   function legacyTokens(raw, mode, width) {
@@ -87,6 +87,7 @@
     if (!Array.isArray(d.hypotheses)) d.hypotheses = [];
     if (d.inventory === undefined) d.inventory = null;
     if (d.inventoryArchive === undefined) d.inventoryArchive = [];
+    if (d.alignments === undefined) d.alignments = [];
     const imageIds = new Set();
     list(d.images, 50, 'images').forEach(i => {
       const rec = imageRecord(i);
@@ -123,6 +124,31 @@
       const parentRevision = parentLayer ? parentLayer.revision : Number(l.parent.replace('revision-', ''));
       check(parentRevision === l.revision, 'Reading layer belongs to a different source revision.');
       string(l.text, 20000, 'Layer text'); string(l.note, 1000, 'Transformation note'); check(l.note.trim(), 'Describe the transformation.'); parents.add(l.id);
+    });
+    const readingTexts = readingTextIndex(d);
+    list(d.alignments, 200, 'passage alignments').forEach(a => {
+      check(a && typeof a === 'object' && !Array.isArray(a), 'Invalid passage alignment.');
+      unique(a.id); check(/^alignment-[1-9][0-9]*$/.test(a.id), 'Invalid alignment ID.');
+      const pair = alignmentPair(readingTexts, a.source, a.target);
+      check(a.revision === pair.source.revision, 'An alignment must retain its recorded source revision.');
+      ['source', 'target'].forEach(side => {
+        const chars = Array.from(pair[side].text), ranges = a[side + 'Ranges'];
+        list(ranges, 20, side + ' passage ranges'); check(ranges.length > 0, 'Each side needs at least one passage range.');
+        let end = 0;
+        ranges.forEach((range, index) => {
+          check(range && typeof range === 'object' && !Array.isArray(range), 'Invalid passage range.');
+          unique(range.id);
+          check(range.id === a.id + '-' + side + '-' + (index + 1), 'A passage ID must retain its alignment and position.');
+          integer(range.start, 0, chars.length - 1, 'passage start'); integer(range.end, range.start + 1, chars.length, 'passage end');
+          check(range.start >= end, 'Passage ranges must be in text order without overlap within one link.'); end = range.end;
+          check(range.literal === chars.slice(range.start, range.end).join(''), 'A passage literal must match its recorded reading.');
+        });
+      });
+      string(a.note, 2000, 'Alignment note'); check(a.note.trim(), 'A passage link needs a note describing the evidence or interpretation.');
+      check(a.withdrawal === null || (a.withdrawal && typeof a.withdrawal === 'object' && !Array.isArray(a.withdrawal)), 'Invalid alignment withdrawal.');
+      if (a.withdrawal) {
+        string(a.withdrawal.reason, 2000, 'Withdrawal reason'); check(a.withdrawal.reason.trim(), 'Withdrawing a link needs a reason.');
+      }
     });
     list(d.keys, 30, 'keys').forEach(k => { unique(k.id); string(k.title, 200, 'Key title'); url(k.sourceUrl); validateKey(k.entries); });
     list(d.relations, 100, 'relationships').forEach(r => {
@@ -200,6 +226,82 @@
   }
   function addLayer(d, kind, parent, text, note) {
     d = validate(d); d.layers.push({ id: 'layer-' + (d.layers.length + 1), revision: d.revision, kind, parent, text, note }); return validate(d);
+  }
+
+  // ── Manual passage alignment ─────────────────────────────────────────────
+  // Links describe a reader's comparison, never a certified translation. Text
+  // stays in its original document order; ranges use Unicode code points and
+  // retain literal snapshots so a changed reading cannot silently move a link.
+  function readingTextIndex(d) {
+    const entries = d.revisions.map(r => ({ id: 'revision-' + r.id, revision: r.id, kind: 'source',
+      label: 'Original transcription · revision ' + r.id, text: r.raw }));
+    d.layers.forEach(l => entries.push({ id: l.id, revision: l.revision, kind: l.kind,
+      label: l.id + ' · ' + l.kind + ' · source revision ' + l.revision, text: l.text }));
+    return new Map(entries.map(t => [t.id, { ...t, length: Array.from(t.text).length, current: t.revision === d.revision }]));
+  }
+  function alignmentPair(texts, source, target) {
+    check(typeof source === 'string' && typeof target === 'string' && texts.has(source) && texts.has(target),
+      'Choose two existing reading references.');
+    check(source !== target, 'Choose two different readings.');
+    const pair = { source: texts.get(source), target: texts.get(target) };
+    check(pair.source.revision === pair.target.revision, 'Compared readings must belong to the same source revision.');
+    return pair;
+  }
+  function alignmentTexts(d) { return Array.from(readingTextIndex(validate(d)).values()); }
+  function addAlignment(d, input) {
+    d = validate(d);
+    check(input && typeof input === 'object' && !Array.isArray(input), 'Supply a passage alignment.');
+    const pair = alignmentPair(readingTextIndex(d), input.source, input.target);
+    check(pair.source.revision === d.revision, 'New passage links must use the current source revision.');
+    const used = new Set([...d.spans, ...d.layers, ...d.keys, ...d.hypotheses, ...d.alignments,
+      ...d.alignments.flatMap(a => a.sourceRanges.concat(a.targetRanges))].map(item => item.id));
+    let number = 1;
+    while (Array.from(used).some(id => id === 'alignment-' + number || id.startsWith('alignment-' + number + '-'))) number++;
+    const id = 'alignment-' + number;
+    function recordedRanges(side) {
+      const chars = Array.from(pair[side].text);
+      const ranges = list(input[side + 'Ranges'], 20, side + ' passage ranges').map(range => {
+        check(range && typeof range === 'object' && !Array.isArray(range), 'Invalid passage range.');
+        integer(range.start, 0, chars.length - 1, 'passage start'); integer(range.end, range.start + 1, chars.length, 'passage end');
+        return { start: range.start, end: range.end };
+      }).sort((a, b) => a.start - b.start || a.end - b.end);
+      return ranges.map((range, index) => ({ id: id + '-' + side + '-' + (index + 1), ...range,
+        literal: chars.slice(range.start, range.end).join('') }));
+    }
+    d.alignments.push({ id, revision: d.revision, source: input.source, target: input.target,
+      sourceRanges: recordedRanges('source'), targetRanges: recordedRanges('target'), note: input.note, withdrawal: null });
+    return validate(d);
+  }
+  function withdrawAlignment(d, id, reason) {
+    d = validate(d);
+    const link = d.alignments.find(a => a.id === id);
+    check(link, 'Choose an existing passage link.'); check(!link.withdrawal, 'This passage link was already withdrawn.');
+    string(reason, 2000, 'Withdrawal reason'); check(reason.trim(), 'Withdrawing a link needs a reason.');
+    link.withdrawal = { reason }; return validate(d);
+  }
+  function alignmentView(d, source, target) {
+    d = validate(d);
+    const pair = alignmentPair(readingTextIndex(d), source, target), links = [], withdrawn = [];
+    d.alignments.forEach(a => {
+      const forward = a.source === source && a.target === target, reverse = a.source === target && a.target === source;
+      if (!forward && !reverse) return;
+      const link = { ...copy(a), source, target, recordedSource: a.source, recordedTarget: a.target, reversed: reverse,
+        sourceRanges: copy(forward ? a.sourceRanges : a.targetRanges), targetRanges: copy(forward ? a.targetRanges : a.sourceRanges) };
+      (a.withdrawal ? withdrawn : links).push(link);
+    });
+    function unmatched(side) {
+      const chars = Array.from(pair[side].text), result = [];
+      const covered = links.flatMap(a => a[side + 'Ranges']).sort((a, b) => a.start - b.start || a.end - b.end);
+      let end = 0;
+      covered.forEach(range => {
+        if (range.start > end) result.push({ start: end, end: range.start, literal: chars.slice(end, range.start).join('') });
+        end = Math.max(end, range.end);
+      });
+      if (end < chars.length) result.push({ start: end, end: chars.length, literal: chars.slice(end).join('') });
+      return result;
+    }
+    return { ...pair, revision: pair.source.revision, current: pair.source.revision === d.revision,
+      links, withdrawn, sourceUnmatched: unmatched('source'), targetUnmatched: unmatched('target') };
   }
   function validateKey(entries) {
     list(entries, 150, 'key entries'); const seen = new Set();
@@ -669,6 +771,7 @@
   // appear edited. Meaningful new metadata still participates in every binding.
   function bindingEvidence(d) {
     const result = copy(d);
+    if (Array.isArray(result.alignments) && result.alignments.length === 0) delete result.alignments;
     for (const f of SOURCE_FIELDS.slice(9)) {
       if (result.source[f] === '' || (f.endsWith('Status') && result.source[f] === 'unknown')) delete result.source[f];
     }
@@ -909,7 +1012,7 @@
     return Array.from({length:153}, (_, i) => kind === 'diagonal' ? (i % 9) * 17 + (2 * i % 17) : i);
   }
   const api = { TYPES, KEY_TYPES, SEG_TYPES, SOURCE_FIELDS, SOURCE_STATUSES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
-    create, migrate, validate, revise, annotate, addLayer, validateKey, applyKey,
+    create, migrate, validate, revise, annotate, addLayer, alignmentTexts, addAlignment, withdrawAlignment, alignmentView, validateKey, applyKey,
     segment, segmentMetrics, normalizeCodes, rng, parseSymbols, search, beamSearch, metrics, url, z340Route,
     imageRecord, addImage, regionToDisplay, displayToRegion, displayAspect,
     inventoryTokens, buildInventory, splitClass, mergeClasses, relabelClass, classOccurrences, regionOccurrences,

@@ -92,9 +92,9 @@
     {
       "path": "cipher-detective.html",
       "title": "Cipher Detective — The Cipher Museum",
-      "words": 914,
-      "sha256": "9db21eadff4d10cedfe63c4a6e2ae085a8a999f005d3b919ff9211022104e035",
-      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "words": 911,
+      "sha256": "4f1cd8784cfc9cdeb36ac69b1d4462f56b47b2c0f07e3da6cc1a4e5507ad74fd",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "LASRY-2018",
         "SWEIGART-2018"
@@ -131,6 +131,13 @@
         "notes": "Added beginner-lesson link beside the existing manual substitution desk; existing solver behavior unchanged.",
         "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
         "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+        "scope": "Broadened the historical-investigations link label; no activity behavior or historical claim changed.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -162,8 +169,8 @@
     {
       "path": "ciphers/adfgvx.html",
       "title": "ADFGVX Cipher — The Cipher Museum",
-      "words": 709,
-      "sha256": "a09599065a2543b3e14f330fd57137ee1ff090eb1a4214f83ce13ad7d1f203ec",
+      "words": 721,
+      "sha256": "051669c2eee74ec509d802225edadf50fedc64486f698cc8958b0e9c19f3de5a",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -191,13 +198,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/adfgx.html",
       "title": "ADFGX Cipher — The Cipher Museum",
-      "words": 560,
-      "sha256": "7204097f36606231b35b58de2a8737387e8787161a71451098b759949c51ba7b",
+      "words": 572,
+      "sha256": "6ebb595ca7eec942fa0a9e7965d8923086dc08d60d2e784201dbf38c206ce05b",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -225,6 +239,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -376,8 +397,8 @@
     {
       "path": "ciphers/alberti-disk.html",
       "title": "Alberti Cipher Disk — The Cipher Museum",
-      "words": 559,
-      "sha256": "c645da267290bfd9d6d29ad30a7d57f6a5cbc0bc2e66923dc46fb66361ca1cb1",
+      "words": 571,
+      "sha256": "84feb1666bd8f553314192fe119981f96d7b0e5dd9d14a56c0f187e0b1360d9b",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -405,6 +426,13 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -440,8 +468,8 @@
     {
       "path": "ciphers/amsco.html",
       "title": "AMSCO Transposition — The Cipher Museum",
-      "words": 803,
-      "sha256": "5fb7d42b57bd0354d0524db95223d34216bfba3554c7693d8b403ca0a525c6f0",
+      "words": 815,
+      "sha256": "bb0be3d24b1e27e7f24dfc57fd9a4510dfe2d0f34345f0df7635ec066414517c",
       "status": "bounded review and local release validation complete",
       "sources": [
         "AMSCO-ACA"
@@ -469,6 +497,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -559,8 +594,8 @@
     {
       "path": "ciphers/atbash.html",
       "title": "Atbash — The Cipher Museum",
-      "words": 477,
-      "sha256": "ee7a40b94b1425360a7bfc34c02e653072cce5325e8e2e6bd5d85d57c11df124",
+      "words": 489,
+      "sha256": "75767d93ce086726bb7e0ead632131d7488add0e6c80df7bd9b5852e6dd3c950",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -588,6 +623,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -621,8 +663,8 @@
     {
       "path": "ciphers/babington.html",
       "title": "The Babington Plot Cipher (1586) — The Cipher Museum",
-      "words": 1358,
-      "sha256": "f23d1d4b992d4a8ea9cbc3ab604187175ed8ad65d8bc8deedada42f823878b51",
+      "words": 1299,
+      "sha256": "bdcf0d81ad10f286706b7b782cf5afa1720169670f2087ef12a06992c61c5cdf",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed. 2 Nov 2026 (PR #31): the two Babington script tags now carry content-hash query strings (?v=...), stamped by scripts/build-min.js from the bundle bytes. A returning reader holding the previous cache-first service worker fetches the corrected teaching model on the first online visit instead of replaying a stale engine. Delivery mechanism only; no historical, cryptographic or evidentiary claim changed.",
@@ -654,7 +696,14 @@
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
       },
-      "cache_delivery_fix_2026_11_02": "revised"
+      "cache_delivery_fix_2026_11_02": "revised",
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
+      }
     },
     {
       "path": "ciphers/bach-motif.html",
@@ -685,8 +734,8 @@
     {
       "path": "ciphers/bacon.html",
       "title": "Bacon's Cipher — The Cipher Museum",
-      "words": 562,
-      "sha256": "2fda21ffa719c537a3e42f87cc14b20a64542a0b43dcb4c5f09f640ebe214528",
+      "words": 574,
+      "sha256": "7de9a7761aeeca4375696828d678c9c7733b119a1cfdcb0e3797ed760c8fdc0c",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -714,13 +763,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/bazeries.html",
       "title": "Bazeries Cipher — The Cipher Museum",
-      "words": 493,
-      "sha256": "71f0c2a7b1716a51b2e8281ddb6958e9682993294bcbaac0c13ff88ab2f1aefe",
+      "words": 505,
+      "sha256": "b715edaf0164a19506ef608f985b7b7869578db9add0731400a3154cc9cf68d6",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ACA-BAZERIES",
@@ -749,13 +805,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/beale.html",
       "title": "Beale Ciphers — The Cipher Museum",
-      "words": 915,
-      "sha256": "b1ac852da82b7869454746bc42163786f35eab1d7fe5b056f5b27e500efc81b8",
+      "words": 927,
+      "sha256": "3d8dd0c2c0e9562ae23ccb92c9b35b22dd71644a91355c73a2352b3ccdc0400b",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -783,13 +846,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/beaufort.html",
       "title": "Beaufort Cipher — The Cipher Museum",
-      "words": 567,
-      "sha256": "4fcdd8137f93546a8ea0c526795dcbff973ef3a2fd33131b361901144212887d",
+      "words": 579,
+      "sha256": "faa8986656b16cd988acd32d2b35f62425f697ed3c7ed852870ab2718a9c7974",
       "status": "bounded review and local release validation complete",
       "sources": [
         "HAC-1997",
@@ -818,6 +888,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -852,8 +929,8 @@
     {
       "path": "ciphers/bible-code.html",
       "title": "Bible Code (ELS) — The Cipher Museum",
-      "words": 1333,
-      "sha256": "bd6a89c142ebfeaae58c38a6720337fafe8a5bf6cdc59663f9b1345e0ccfd174",
+      "words": 1345,
+      "sha256": "df700bfd1fc08487a57d2ff6d2a7f2627f54576cbd519d737723da468a174d67",
       "status": "bounded review and local release validation complete",
       "sources": [
         "MCKAY-1999",
@@ -882,13 +959,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/bifid.html",
       "title": "Bifid Cipher — The Cipher Museum",
-      "words": 482,
-      "sha256": "7d9a4ba187938fe581d86e283dd15a84eeca85138065c8137790a813c5c11f3a",
+      "words": 494,
+      "sha256": "ecf69f83802d8b0d30d5d5ab250a073fbdda3cecbb740ec402863de60bd1f693",
       "status": "bounded review and local release validation complete",
       "sources": [
         "GAINES-1956",
@@ -917,6 +1001,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -1003,8 +1094,8 @@
     {
       "path": "ciphers/bombe.html",
       "title": "Turing–Welchman Bombe — The Cipher Museum",
-      "words": 297,
-      "sha256": "0cd75ae410e9a9ba0a0441b3e326507be9f0e81f71d7a41464f8d4741d3295c5",
+      "words": 309,
+      "sha256": "f06ad4da93ace0f54998a1eae4556f94dfdf995a1baee87220991ab354459fbd",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [
         "TNMOC-BOMBE"
@@ -1038,6 +1129,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -1097,8 +1195,8 @@
     {
       "path": "ciphers/caesar.html",
       "title": "Caesar Cipher — The Cipher Museum",
-      "words": 949,
-      "sha256": "93b84c2ef338843b3e628a3432a0aade9a5c694b6115f28c72a3f48f4021d28f",
+      "words": 961,
+      "sha256": "a0e70e1636b4d20080d6278032307b10676b5a0c166fdb628c90842cfccddb63",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -1126,6 +1224,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -1187,8 +1292,8 @@
     {
       "path": "ciphers/chaocipher.html",
       "title": "Chaocipher — The Cipher Museum",
-      "words": 663,
-      "sha256": "f492dc31300917fd57b6c60d9a6bfe822dd59f69b9fd273df30ec07236e2a297",
+      "words": 675,
+      "sha256": "a3ed56336270027b4e7933ed7a2adaf2ba06d483e6d95199b650c5cab3d5a875",
       "status": "bounded review and local release validation complete",
       "sources": [
         "RUBIN-CHAOCIPHER-2010"
@@ -1216,6 +1321,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -1306,8 +1418,8 @@
     {
       "path": "ciphers/colossus.html",
       "title": "Colossus — The Cipher Museum",
-      "words": 879,
-      "sha256": "effeeeecf9825428522fd1c8d7af5e2ec489a6161337cd669cce124f8d70cc4c",
+      "words": 891,
+      "sha256": "051ed150e063c955561c7d1d05a41eb8b1fff1906ffab50cd7c6166666b89f3b",
       "status": "ebook follow-up implementation and local validation complete",
       "sources": [
         "TNMOC-TUNNY",
@@ -1348,13 +1460,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "ebook follow-up implementation and local validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/columnar.html",
       "title": "Columnar Transposition — The Cipher Museum",
-      "words": 1162,
-      "sha256": "99de111d816e235f0d6cc13fa6c2283e200b6db9d649649603d2993acc68f8fd",
+      "words": 1174,
+      "sha256": "aaeec4cfbc61585930358d6562f14b0482cf4c1cf9b1fa85c541ee1a3dd68873",
       "status": "ebook follow-up implementation and local validation complete",
       "sources": [
         "GAINES-1956",
@@ -1395,6 +1514,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "ebook follow-up implementation and local validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -1429,8 +1555,8 @@
     {
       "path": "ciphers/confederate-vigenere.html",
       "title": "Confederate Vigenère — The Cipher Museum",
-      "words": 540,
-      "sha256": "28d75f3df722409b49711491d5a5129161fd6e676028c37bbf4baa379d4dcbb0",
+      "words": 552,
+      "sha256": "a3b9ae37f820dd86adc2918701f3314a8290fbf17eba351eaa0ec14265ebe1a4",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -1458,13 +1584,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/copiale.html",
       "title": "Copiale Cipher — The Cipher Museum",
-      "words": 504,
-      "sha256": "3cc70266734b5e65ce455fff10bb847a1695a3755886547e8f013d7db6a99f9a",
+      "words": 516,
+      "sha256": "d7f991abe78e6f3dd7d35d0ee0e92cae4bfded28258e676af37c1a832e204069",
       "status": "bounded review and local release validation complete",
       "sources": [
         "COPIALE-2011",
@@ -1493,6 +1626,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -1683,8 +1823,8 @@
     {
       "path": "ciphers/dictionary-code.html",
       "title": "Confederate Dictionary Code — The Cipher Museum",
-      "words": 548,
-      "sha256": "b1d20f44e665210a73cde6822b13039566024d0b88b6e36ab6bdefe2db2d1117",
+      "words": 560,
+      "sha256": "200640fc87a23624b18f08c3ee6a3556de1106b49362fa0e76b88f7e376bcc60",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -1712,6 +1852,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -1817,8 +1964,8 @@
     {
       "path": "ciphers/double-playfair.html",
       "title": "Doppelkastenschlüssel — German Double Playfair — The Cipher Museum",
-      "words": 891,
-      "sha256": "6d293481cdf9d715c51b88bae6a1fbc8b4dec0c5780317f53ec25304b28c6371",
+      "words": 903,
+      "sha256": "73553c5bb74b073783d698e37665c0f9cb80186a630deb017b994e3c1e54b8cc",
       "status": "bounded review and local release validation complete",
       "sources": [
         "DP-MANUAL-1941"
@@ -1846,13 +1993,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/double-transposition.html",
       "title": "Double Transposition — The Cipher Museum",
-      "words": 540,
-      "sha256": "89d8cfc88eda07e9e28aea0c9f475d612b4da410af4006449597bd77f5324fcf",
+      "words": 552,
+      "sha256": "b8645bf61640ff0ff71891815c9bcf3666d3b53fbb4af0a28fe1438b6cd3b438",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Separated historicaluse frominvention; key-paircount versus distinctpermutations, instance-dependent searchlimits. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
@@ -1878,6 +2032,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -2004,8 +2165,8 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "words": 2971,
-      "sha256": "847c5e6b2c97a610769bb2301e475b3cb78d40195de181eefcaa7a201dc3109c",
+      "words": 2983,
+      "sha256": "87a5a84ad469252cfb305c0e448a6a0cf07803a915b3ff521d12ddd13a4041ec",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
@@ -2039,6 +2200,13 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -2102,8 +2270,8 @@
     {
       "path": "ciphers/four-square.html",
       "title": "Four-Square Cipher — The Cipher Museum",
-      "words": 533,
-      "sha256": "224777d269bfbab64e85b98777af54ceebfe716e5c1b0a73e9b49cdb7f677e86",
+      "words": 545,
+      "sha256": "32ff4a9e1fb402dd78ef35f46fa08d10bd13f058c836658363063032a753e30f",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -2131,13 +2299,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/fractionated-morse.html",
       "title": "Fractionated Morse Cipher — The Cipher Museum",
-      "words": 470,
-      "sha256": "9c3e2ab84ab7508f8f5f02a1340d86562f399ff7a9a1306392ded3c7be7c4f9a",
+      "words": 482,
+      "sha256": "6b7ff2492fb093365fa157910ab0f33f1b14a25b6d9ef5978d64eb250bde9220",
       "status": "bounded review and local release validation complete",
       "sources": [
         "ACA-FRACTIONATED-MORSE"
@@ -2165,6 +2340,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -2325,8 +2507,8 @@
     {
       "path": "ciphers/great-cipher.html",
       "title": "The Great Cipher (Grand Chiffre des Rossignols) — The Cipher Museum",
-      "words": 1080,
-      "sha256": "b269d5458fa51d352c618e00486917ca8991972012894043cc5cec7cbc088771",
+      "words": 1092,
+      "sha256": "535962b33a3d1950ac3a3391568f664fa4650e97959e534834b6c6e79f246799",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -2354,6 +2536,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -2361,20 +2550,26 @@
       "title": "Gripenstierna’s Cipher Machine — The Cipher Museum",
       "sources": [],
       "notes": "New Bauer-derived teaching addition; source and model boundaries in docs/BAUER_ADDITIONS.md.",
-      "sha256": "1efc7ad8e6a21bc03026ad2bb90213684be63305dcb6288e9b84d154c3196f87",
-      "words": 476,
+      "sha256": "a7f76f82f8ec169e70e8375b76e5c310022e350c08aab4684f00c092b94b6f96",
+      "words": 488,
       "bauer_additions": {
         "date": "2026-11-03",
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/gronsfeld.html",
       "title": "Gronsfeld Cipher — The Cipher Museum",
-      "words": 530,
-      "sha256": "97ea91fca5dc1f9a70b9c665a0237d23612fa84d96d978a4dfe306f87a07cab2",
+      "words": 542,
+      "sha256": "ddb4249a5f0d8b77acb14f204a4e190da43bedb5ba623f0625a85e6d35a53576",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -2402,13 +2597,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/hagelin-c36.html",
       "title": "Hagelin C-36 / C-52 Lineage — The Cipher Museum",
-      "words": 765,
-      "sha256": "ca0b0cff755d67508f874d4de410d30e29b89c3f6cd7bb8d3d7a322c54a090d0",
+      "words": 777,
+      "sha256": "0d85d2ddc133dc366037c1ba1cea67e376420e088d2468f29193dc65c5fac97f",
       "status": "bounded review and local release validation complete",
       "sources": [
         "C36-CRYPTOMUSEUM",
@@ -2441,13 +2643,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/hill.html",
       "title": "Hill Cipher — The Cipher Museum",
-      "words": 753,
-      "sha256": "03102562deaae9d8d411e903fa456409b23bb4db1f8ffa58c3ad76697517735a",
+      "words": 765,
+      "sha256": "870117a77cf51341a16ff225ab8e87bad67028840de965ac24961f2f80b527f1",
       "status": "bounded review and local release validation complete",
       "sources": [
         "HAC-1997",
@@ -2477,6 +2686,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -2510,8 +2726,8 @@
     {
       "path": "ciphers/homophonic.html",
       "title": "Homophonic Substitution — The Cipher Museum",
-      "words": 877,
-      "sha256": "76de5fbf735fd384b895178156811c9ff08c7830ce1dc56b07dab67db36dc4a2",
+      "words": 889,
+      "sha256": "a4dab0fdb5c06804832deaa1c5418320ddbdcab2ed7b9adcb177654c035b28af",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "HAC-1997",
@@ -2546,6 +2762,31 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
+      }
+    },
+    {
+      "path": "ciphers/ika.html",
+      "title": "IKA Cipher Machine — The Cipher Museum",
+      "words": 617,
+      "sha256": "9fdc9955f3c2f5037321ddb1de960029b44faf97f092f61af56ccb86e596521d",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
+      "sources": [
+        "CHRISTENSEN-IKA-2021"
+      ],
+      "notes": "New static exhibit 174 in Hall VII. Intercepted IKA behavior, captured M-1, American M-1 analogue and physical-mechanism hypotheses distinguished; no machine simulator or copied source images.",
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "4 November 2026 bounded source review and implementation",
+        "scope": "New static exhibit 174 in Hall VII. Intercepted IKA behavior, captured M-1, American M-1 analogue and physical-mechanism hypotheses distinguished; no machine simulator or copied source images.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -2581,8 +2822,8 @@
     {
       "path": "ciphers/jefferson-disk.html",
       "title": "Jefferson Disk — The Cipher Museum",
-      "words": 583,
-      "sha256": "4cdbc79ac75d2a8390c7202e0cccd02f862c6d9173c2c5838ca23f9ce72a49e9",
+      "words": 595,
+      "sha256": "bc19b8f340e6fd35b684992244602ad9d9d613c83927852ad36381163b761ea7",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -2610,6 +2851,13 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -2983,8 +3231,8 @@
     {
       "path": "ciphers/lorenz.html",
       "title": "Lorenz Cipher — The Cipher Museum",
-      "words": 1790,
-      "sha256": "e5e595e136e4114b6720948b9d79ee646b59098c6648f6b4aed86d5fbe65ed1b",
+      "words": 1802,
+      "sha256": "bd6ff21709159642f9f692c228f1bb677b4c84c48c98060678dc95824c20af5b",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "TNMOC-TUNNY",
@@ -3031,6 +3279,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -3062,8 +3317,8 @@
     {
       "path": "ciphers/m209.html",
       "title": "M-209 (Hagelin C-38) — The Cipher Museum",
-      "words": 797,
-      "sha256": "b2009dcb714ca8f46e276cd413252926f9adcd93a1c58325eceb89b70651b63d",
+      "words": 809,
+      "sha256": "8e41bf3ccdc931ea9f6336dc10447af300e5a3b04280c6b4e53caf3114c2475e",
       "status": "bounded review and local release validation complete",
       "sources": [
         "LASRY-2018",
@@ -3094,6 +3349,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -3248,8 +3510,8 @@
     {
       "path": "ciphers/monoalphabetic.html",
       "title": "Monoalphabetic Substitution — The Cipher Museum",
-      "words": 550,
-      "sha256": "5bfa0f55a96bef7581f4304ee4204a4d10126d588180aac067ff98aad4d54d8c",
+      "words": 562,
+      "sha256": "aeb42ac3b0720be979b7a6d5a128dab3c6264106ca2caed4b207df0778af61c6",
       "status": "bounded review and local release validation complete",
       "sources": [
         "HAC-1997"
@@ -3277,6 +3539,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -3310,8 +3579,8 @@
     {
       "path": "ciphers/myszkowski.html",
       "title": "Myszkowski Transposition — The Cipher Museum",
-      "words": 703,
-      "sha256": "5be65ad7f1495164b9a1a444365a8189247f310e9269c0c8b81627070f43c0f0",
+      "words": 715,
+      "sha256": "4458dfce834361339a71aa4137e13cbef2b46a8e638ca445cfa75c20df0933ac",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "TOMATO ranks, occupied grid and displayed output checked for consistency; no-padding and normalized-input rules explicit. ACA rule and1902bibliographic links retained as references; this final pass did not retrieve a new full historical source.",
@@ -3337,6 +3606,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -3370,8 +3646,8 @@
     {
       "path": "ciphers/navajo-code-talkers.html",
       "title": "Navajo Code Talkers — The Cipher Museum",
-      "words": 1081,
-      "sha256": "6e03749e90f6ca9a60ca69c17ad65e9e51ec614e0c033647d78b0770db7bd0ff",
+      "words": 1093,
+      "sha256": "926eb3054bdf0879a0e3224ea1c4b8ae12d78549e1c4392b1c6e7aa10c607d50",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [
         "NAVAJO-NARA-2001",
@@ -3410,13 +3686,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/nema.html",
       "title": "NEMA — Swiss Rotor Machine — The Cipher Museum",
-      "words": 651,
-      "sha256": "b7bd925c465457e987e2a8cdb373afe9bbb8d2207c9ac6b64dd45c7adc0cd794",
+      "words": 663,
+      "sha256": "1140fd0d9ce0277b910cf6fcc22046b095377c2d0fa7df1f5ccdc3e4563307ea",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NEMA-CRYPTOMUSEUM"
@@ -3444,13 +3727,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/nfc-deployment.html",
       "title": "NFC Authentication: When the Tag Stays Unlocked — The Cipher Museum",
-      "words": 715,
-      "sha256": "3a1bc1db9593157b27469b1690d9a19c4f510b02022a5a0ee3c37ac89e9752fb",
+      "words": 727,
+      "sha256": "c2413d0cfcaa49bd878dd813506707dbbfbd4fc26aa5b888e881bcaed091ec66",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NFC-2026-REV1.1"
@@ -3478,13 +3768,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/nihilist.html",
       "title": "Nihilist Cipher — The Cipher Museum",
-      "words": 589,
-      "sha256": "dc847e6b4838557ccb5ec8b2319ef3c62ce8e9dfcc6c0ac7727c0301e6428518",
+      "words": 601,
+      "sha256": "20c86ad9cc1b02c921287adc0525a495217c0482590bd9478a24ba0972ff6556",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -3512,6 +3809,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -3577,8 +3881,8 @@
     {
       "path": "ciphers/one-time-pad.html",
       "title": "One-Time Pad — The Cipher Museum",
-      "words": 2048,
-      "sha256": "5f92b3a921e1bafab2d404ecd37ad79591aba2b5b63bebdca44dc631e062847e",
+      "words": 2060,
+      "sha256": "6316c294184ca20fb48d495b89451f0d33d3bb9ceb785eed40c10e6da27ffd78",
       "status": "bounded review and local release validation complete",
       "sources": [
         "SHANNON-1949",
@@ -3616,6 +3920,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -3686,8 +3997,8 @@
     {
       "path": "ciphers/pigpen.html",
       "title": "Pigpen Cipher — The Cipher Museum",
-      "words": 708,
-      "sha256": "5f0df34bda75dda5a0339a40a27f87a3d8912348b8f89618642217932f5b0c9f",
+      "words": 720,
+      "sha256": "10e6a029ae075180e8e684875c04443856e52ae65d16323a5ead0707ce46141d",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -3715,13 +4026,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/playfair.html",
       "title": "Playfair Cipher — The Cipher Museum",
-      "words": 837,
-      "sha256": "b114655a00bce66e21de7e1d30c7e1153513fc45bb0d3ce4b6e15ae72ca4e1f2",
+      "words": 849,
+      "sha256": "2b3f5c5d00645578f68cd399730f818b95ee4a419f9f01f136e1ffb7a7f2c469",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -3749,13 +4067,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/polybius.html",
       "title": "Polybius Square — The Cipher Museum",
-      "words": 510,
-      "sha256": "7b9cb34e53ec45ab83c2303ab48bd7a62bfad2ec0cfab6fcf182a622c6f6df8b",
+      "words": 522,
+      "sha256": "6488248cdf192e0d40e49c021cf625b93ba8ad0a26638440acc1a88a2f6bfb89",
       "status": "bounded review and local release validation complete",
       "sources": [
         "POLYBIUS-10"
@@ -3783,13 +4108,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/porta.html",
       "title": "Porta Cipher — The Cipher Museum",
-      "words": 471,
-      "sha256": "175129c4f4efe926f714c160583ea08f386864c25d74ca30300d8c213a8f2d48",
+      "words": 483,
+      "sha256": "3070cec572b055942147968de3f8dd6fb7fed1737aa9cf321d9f789826fb8b02",
       "status": "bounded review and local release validation complete",
       "sources": [
         "HAC-1997",
@@ -3818,13 +4150,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/purple.html",
       "title": "Purple (Type 97) — The Cipher Museum",
-      "words": 978,
-      "sha256": "ba60ff4cca43d25b7ed6943832f8821e39a49d668198e3104d3b451f8adaa79c",
+      "words": 986,
+      "sha256": "5ba9f7e2c3c1fe3922506b2514163d6e493df71b8def35df0328b4ff582e534c",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.\n3 November 2026: Grotjan's date. The page keeps 20 September 1940 (Mundy, Code Girls; Bauer, Decrypted Secrets; Bigelow, INSCOM Command Historian, 2023) and now says that Rowlett's memoir, already in its References, recalls the day as shortly before Labor Day. Checked against the text of Rowlett, Mundy and Bauer and the public DVIDS article. Three references added, by title. Guarded in tests/test-page-audit-claims.js.",
@@ -3856,13 +4195,20 @@
         "verification": "Link checked by tests/test-purple-diagnosis.js.",
         "limits": "Link addition only; no fresh source review of the rest of the page.",
         "record": "docs/PURPLE_DIAGNOSIS.md"
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/rail-fence.html",
       "title": "Rail Fence Cipher — The Cipher Museum",
-      "words": 402,
-      "sha256": "1b94d507087619312e2055c29a1069a7aa24eeee498550dfb2ed5b76514d39e6",
+      "words": 414,
+      "sha256": "6cbc4b93a87e72067905dc885e3cb29ba80ce039bebf01c3f4a4faf340f44012",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Unsupported1800sdate andguaranteedsecondsrecovery removed; modelboundedrailcount explained. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
@@ -3888,6 +4234,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4011,8 +4364,8 @@
     {
       "path": "ciphers/rot13.html",
       "title": "ROT13 — The Cipher Museum",
-      "words": 384,
-      "sha256": "c6b647ee47bd15956e632c390515f8bf316dad44ff0d9eb8add5400558904d09",
+      "words": 396,
+      "sha256": "860c23c5dc33f86318ba5f64dc5787cfa7fb36d434f42f5ccbeb3a6dae82ab6c",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -4040,13 +4393,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/rs44.html",
       "title": "Rasterschlüssel 44 (RS44) — The Cipher Museum",
-      "words": 934,
-      "sha256": "b3f7eba9a2fc1312077f345f448c546046f5f0f0523cc0d48448df51d5aaa24c",
+      "words": 946,
+      "sha256": "5ae4b0dbc94eacef2ad149957fccc550f5947f0e6ecaeba256b39e7b9c445361",
       "status": "bounded review and local release validation complete",
       "sources": [
         "RS44-MANUAL-1944"
@@ -4074,6 +4434,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4114,8 +4481,8 @@
     {
       "path": "ciphers/running-key.html",
       "title": "Running Key Cipher — The Cipher Museum",
-      "words": 621,
-      "sha256": "ee6b82780d662f9cfd20a11a842ec0cef0f5e05e49c5da781ca3993cab8d8606",
+      "words": 633,
+      "sha256": "85ff4f3621121cf272bdf7ea32ae725332480d786dd1653387e98acf58c82203",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Unsupported1850sdate removed; modernkeystreamreuseisusagecondition notgeneratedguarantee. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
@@ -4141,6 +4508,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4174,8 +4548,8 @@
     {
       "path": "ciphers/scytale.html",
       "title": "Scytale — The Cipher Museum",
-      "words": 804,
-      "sha256": "f0fd522bf905933c251887e36a10602032c607a5c7f1e0a699aab42758282909",
+      "words": 816,
+      "sha256": "387cd52cb02e360877789233e00667d0e6ba6f2a471b0fbc0099b319335c1119",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -4203,6 +4577,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4400,8 +4781,8 @@
     {
       "path": "ciphers/sodark.html",
       "title": "SoDark and Radio Linking — The Cipher Museum",
-      "words": 481,
-      "sha256": "bec0c0c627c6296495ebabae35e2e7df386d5d198088f9cc1cae5ad1a59ff799",
+      "words": 493,
+      "sha256": "68b415022088f4c3caadcfc1abad68e4b509a97519b5ab1db3645fe51836c344",
       "status": "bounded review and local release validation complete",
       "sources": [
         "SODARK-2021"
@@ -4429,13 +4810,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/solitaire.html",
       "title": "Solitaire / Pontifex — The Cipher Museum",
-      "words": 1069,
-      "sha256": "a32d0539c1588b8607217956a0748e5332d7c382818a949e77e71f2326e2765e",
+      "words": 1081,
+      "sha256": "401a0dd76ede5e94af497c30b44732a6464d2fd81918e726c662c219308877f9",
       "status": "bounded review and local release validation complete",
       "sources": [
         "CROWLEY-SOLITAIRE",
@@ -4470,6 +4858,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4503,8 +4898,8 @@
     {
       "path": "ciphers/stager.html",
       "title": "Stager Cipher — The Cipher Museum",
-      "words": 832,
-      "sha256": "07c33dfd25a8f1407888fc1c0a904579f56418f3e3331aa1449d0a8fdf064052",
+      "words": 844,
+      "sha256": "8b0a85f7ffe14e12f5722000caad6c6f0971d270d387a2835ff04519d3a62a74",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -4532,6 +4927,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4572,8 +4974,8 @@
     {
       "path": "ciphers/straddling-checkerboard.html",
       "title": "Straddling Checkerboard — The Cipher Museum",
-      "words": 510,
-      "sha256": "1c1f2314f57f74f4454cc26a54ab60240846177480b56da9870f0169b9db1f5c",
+      "words": 522,
+      "sha256": "eae998e240d253d180f7b2895830bc67614802063db3071898c6d03bc7e21533",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Firstlate1800sclaim anddirectlineagediagram corrected; variableprefixanalogy notidenticalUTF8. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
@@ -4599,13 +5001,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/tap-code.html",
       "title": "Tap Code — The Cipher Museum",
-      "words": 574,
-      "sha256": "bee17a7c79ae5c3a5668791db1f4eedd6dacab1c764da3fed8fe69f41f47b2e3",
+      "words": 586,
+      "sha256": "7112990894c29cd83be848440b723c92366ebc4b7011d438f0eaaf6ffe7f4822",
       "status": "bounded review and local release validation complete",
       "sources": [
         "HARRIS-2020"
@@ -4636,13 +5045,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/trifid.html",
       "title": "Trifid Cipher — The Cipher Museum",
-      "words": 456,
-      "sha256": "1bfcb74138c24cc0bfc39fdc985a839e86ee1d04e1ecd688bc132ba45681eff5",
+      "words": 468,
+      "sha256": "deeb21d4451856de44055a693fdba6714fb674a5e8f9f15a6a45289477b00ee8",
       "status": "bounded review and local release validation complete",
       "sources": [
         "GAINES-1956",
@@ -4671,6 +5087,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4704,8 +5127,8 @@
     {
       "path": "ciphers/turning-grille.html",
       "title": "Fleissner Turning Grille — The Cipher Museum",
-      "words": 761,
-      "sha256": "c8174bdaba5e74f11e8e812e44a1fa00b5a6838e126ee83f89843585f4e63e56",
+      "words": 773,
+      "sha256": "4e8d8e5577b1792f8c7e48464c35c810bee1226aefe9d48adac202ede508e2d3",
       "status": "bounded review and local release validation complete",
       "sources": [
         "DELEEUW-2018"
@@ -4733,13 +5156,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/two-square.html",
       "title": "Two-Square Cipher — The Cipher Museum",
-      "words": 551,
-      "sha256": "5b4bd9bab9e3d5379d8df86bb70e7579242e759e0dbc78cdcdd7a83038ee9d22",
+      "words": 563,
+      "sha256": "0b96481d47b8cda3e7873584580056d44ae6801e9a0a33f524dde5c884e37ad9",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "ACAprocedure retained; Delastelle1902attribution not established by citedspecification, nowexplicitlyunknown. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
@@ -4765,6 +5195,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4804,8 +5241,8 @@
     {
       "path": "ciphers/ua-8295.html",
       "title": "UA-8295: Forensic Cryptanalysis of a Message Terminal — The Cipher Museum",
-      "words": 2014,
-      "sha256": "9c7dfd286ac151b17619a18d4f2aeb907421bab1883bd8081d40a580c009c51c",
+      "words": 2026,
+      "sha256": "139c13691f62cf7acd62ff509ef96c20be3a19abeefeab6c1ebe4f20623a632d",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "UA8295-2026"
@@ -4848,6 +5285,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4887,8 +5331,8 @@
     {
       "path": "ciphers/vernam.html",
       "title": "Vernam Cipher — The Cipher Museum",
-      "words": 765,
-      "sha256": "2d82900165bf224fa1956de17a8e88a7b130f42aa77bbf681c082539a3755118",
+      "words": 777,
+      "sha256": "428368eb2963e33a1199d6e43d1537fba7b48889e926cf3a85182061b7ab2c54",
       "status": "bounded review and local release validation complete",
       "sources": [
         "SHANNON-1949",
@@ -4931,13 +5375,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/vic.html",
       "title": "VIC Cipher — The Cipher Museum",
-      "words": 649,
-      "sha256": "15fa8e48c1c05f73fc23831b5f315bbb38a070cfa76e32ff5acf30ccd6147788",
+      "words": 661,
+      "sha256": "a13bcf9632e293eb828fe55b7dd39b444686884a97410f6da94855fa5d0437bf",
       "status": "bounded review and local release validation complete",
       "sources": [
         "FBI-HOLLOW-NICKEL"
@@ -4965,6 +5416,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -4999,8 +5457,8 @@
     {
       "path": "ciphers/vigenere.html",
       "title": "Vigenère Cipher — The Cipher Museum",
-      "words": 874,
-      "sha256": "dc1749eb11d697304b19bbf66efecfa6b519ed444d3898967b67405f900b283a",
+      "words": 886,
+      "sha256": "b46db8501f7bcb1303e96df9e2c7a496901df10cd88276e355008e24ec8a5b81",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "HAC-1997",
@@ -5034,13 +5492,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/voynich.html",
       "title": "The Voynich Manuscript (c. 1404–1438) — The Cipher Museum",
-      "words": 1516,
-      "sha256": "f2e72a028d2ecfc06234e72ce16e2806437c7a79c56b487d98b65070f38a7a18",
+      "words": 1528,
+      "sha256": "5fbf869c8af19071306800ed24f2c3594fb65724c28f18f2fcf4880e50bbaf73",
       "status": "bounded review and local release validation complete",
       "sources": [
         "REDDY-KNIGHT-2011",
@@ -5080,13 +5545,20 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "ciphers/wadsworth-cipher.html",
       "title": "Wadsworth Cipher — The Cipher Museum",
-      "words": 1575,
-      "sha256": "9639e91b0eb50dd8db9c65bca8be41ed8cfd096f92d6b613f3ceb1bea303b380",
+      "words": 1587,
+      "sha256": "7835593b09bb0e4c24eb6a0a75cb5b5b90d4fe781bef3e06c17e0570695eb1d4",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAEDING-2020",
@@ -5119,6 +5591,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -5276,8 +5755,8 @@
     {
       "path": "ciphers/zodiac.html",
       "title": "Zodiac Cipher — The Cipher Museum",
-      "words": 931,
-      "sha256": "ddd4b300cf7223f8c61ff005270e67fc0e532d7aa335fdf4960ff16228ad43e4",
+      "words": 943,
+      "sha256": "9bba49815ceb3cb7d87d83ba40aa5b036ee45b609050cae6ac27df9af63b1f07",
       "status": "bounded review and local release validation complete",
       "sources": [
         "Z340-2024"
@@ -5305,6 +5784,13 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -5376,8 +5862,8 @@
     {
       "path": "comparison.html",
       "title": "Cipher Comparison — The Cipher Museum",
-      "words": 149,
-      "sha256": "b4bea1b978b2954a9b2c1cd4c7716c0227123849de228d454e612a5113ff5261",
+      "words": 161,
+      "sha256": "b8bb3a14b087ff827297b3d117009c049d724524928ca80c7f5c462d50d23625",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
@@ -5404,14 +5890,21 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "cryptanalysis.html",
       "title": "Cryptanalysis Techniques — The Cipher Museum",
-      "words": 2261,
-      "sha256": "481101ea02cd1732a1b95987cb151a4f7d5ca50bcb0712539cf3a372cc5937cd",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 2269,
+      "sha256": "698269f1ca749fa9a8fa155dcbc24be1c9fa0643b731e759c373e6e7692ac5bf",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "HOLDEN-2017",
         "HAC-1997",
@@ -5460,6 +5953,13 @@
         "verification": "Link checked by tests/test-purple-diagnosis.js.",
         "limits": "Link addition only; no fresh source review of the rest of the page.",
         "record": "docs/PURPLE_DIAGNOSIS.md"
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "ebook follow-up implementation and local validation complete",
+        "scope": "Broadened the historical-investigations link label so it does not imply the destination still contains only the original three cases.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -5699,7 +6199,7 @@
       "review_2026_11_04": {
         "scope": "Corrected the pooled-symbol example: four equally likely keys are distinguished by log₂4 = 2 bits; two is not the number of keys. Surrounding calculations unchanged.",
         "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
-        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
+        "limits": "Targeted content/code consistency review. Earlier full-page source/browser records remain historical. Completion Chromium checks cover desktop/narrow layouts and the changed controls/prose; hosted report and screenshot review are recorded with PR #52, not a new historical certification."
       }
     },
     {
@@ -6269,9 +6769,9 @@
     {
       "path": "halls/machines.html",
       "title": "Hall VII: Mechanical Cipher Machines — The Cipher Museum",
-      "words": 794,
-      "sha256": "c0f9fb167596b434aed00463d0bdc7df15972fe8208c29b64ae902e955c52af9",
-      "status": "bounded review and local release validation complete",
+      "words": 841,
+      "sha256": "ea791b8c18440a4ee02d97a56e380c499e1beabd1774fa5b51b890a966c07d6a",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [],
       "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
@@ -6301,6 +6801,13 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Added IKA historical-exhibit card; inherited historical accounts unchanged.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -6520,7 +7027,7 @@
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
       "words": 590,
-      "sha256": "eb06f9e4b80521e3199ab0d0040fbe36883b653fd48060722a28336126e360dd",
+      "sha256": "d6c7b2206f759a85e1179f0eb36aa8577c71e36c984637e4232fa19eab25661a",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996"
@@ -6562,19 +7069,28 @@
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
       },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
+      },
       "review_2026_11_04": {
         "scope": "Updated the short book-description paragraph to name evidence judgments and optional museum activities; approved reader promise and book presentation preserved.",
         "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
-        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
+        "limits": "Targeted content/code consistency review. Earlier full-page source/browser records remain historical. Completion Chromium checks cover desktop/narrow layouts and the changed controls/prose; hosted report and screenshot review are recorded with PR #52, not a new historical certification."
       }
     },
     {
       "path": "lab/decipherment-cases.html",
       "title": "How a Decipherment Becomes Evidence — The Cipher Museum",
-      "words": 3347,
-      "sha256": "a691e01145d4a99d7da2e1ecd8b1ad65420c3952d5f5e0f23c8e18e295d96fec",
-      "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
-      "sources": [],
+      "words": 3788,
+      "sha256": "75f26af9b8f5ac7d2dbc623215fbbcff2ca6eb1c5a5ca67561cc545aca461a36",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
+      "sources": [
+        "PIERROT-HISTOCRYPT-2023"
+      ],
       "notes": "Root reread complete case narratives and displayed evidence, including the Z340 fragment. Invented teaching examples remain separate from source-backed manuscript evidence.\n3 November 2026: Added an original Latin-label structural analogy connected to Linear B. Kober is credited; sounds and meaning are not inferred from recurrence alone. Competing predictions are checked against withheld labeled fixture records. Robinson (2007), pp. 114–119; PASP research link. DOM and Chromium checks rejected the wrong prediction; existing Copiale/Mary/Z340 content retained.\n3 November 2026: at the owner's request, the books behind this work are cited by title, author, publisher and year only; chapter, section and page references were removed from the page, its script comments, records and README entry. Guarded by tests/test-title-citations.js. Research-paper citations are unchanged.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
@@ -6629,15 +7145,23 @@
         "sources": "Second sources: Parkinson's sign table and House of Life discussion and Unicode character names (Egyptian); Kettunen and Helmke, Introduction to Maya Hieroglyphs, 20th edition (Wayeb, 2025), publisher-hosted PDF (Maya); Chadwick 1958 and Documents 1956 cross-checked (Linear B). The Thesaurus Linguae Aegyptiae page was behind a bot check and was not used.",
         "tests": "tests/test-case-verification.js failed before the change; eight planted defects (status wording, a claimed review, an unlinked second source, the British Museum link, a sign the font lacks, the sign row skipping the subset, the font missing from the offline cache, a case record still promising review) each failed it.",
         "limits": "No specialist review is available for any of the three cases."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
+        "scope": "Charles V 1547 case and original staged mixed-key exercise with partial readings, failed-attempt history and separate check copy. Hero/meta/search summary and the corresponding Linear B review-packet quote synchronized to include Charles V; the Linear B case is unchanged.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "words": 2961,
-      "sha256": "7049aec86b6771fb1b262eb41031fe8dfab0e53466fbca5a29e178e55d21f301",
-      "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
+      "words": 3392,
+      "sha256": "dd9a7730d3225e8c42423dfc0c1f939cf42a6eb99dcef956eb620432be3ab1e4",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
+        "JANSSEN-RANLP-2025",
         "MUSEUM-PROFILE-RECOVERY-2026"
       ],
       "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too. Developmental book revision, November 2026: added a beginner evidence exercise with an optional answer reveal.",
@@ -6674,25 +7198,41 @@
         "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
         "record": "docs/READING_THE_EVIDENCE.md"
       },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
+        "scope": "Manual grouped passage links across readings; complete original text and unmatched ranges; stable Unicode positions, revision isolation, reasoned withdrawals, import/export and legacy receipt compatibility. Original illustrative example.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
+      },
       "review_2026_11_04": {
         "scope": "Added bounded 240-condition historical-profile recovery results with complete-failure count and Latin-annealing exception. Scoped prior solver comparison to its original modern-English baseline sweep; new experiment is separate from readable-text language recognition.",
         "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
-        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
+        "limits": "Targeted content/code consistency review. Earlier full-page source/browser records remain historical. Completion Chromium checks cover desktop/narrow layouts and the changed controls/prose; hosted report and screenshot review are recorded with PR #52, not a new historical certification."
       }
     },
     {
       "path": "lab/intercept-to-intelligence.html",
       "title": "From Intercept to Intelligence — The Cipher Museum",
-      "sources": [],
-      "sha256": "8e95c4fce4a53cdac239392e63c15b4a719f1a5e20d741f2bf60ff8844f4e1c7",
-      "words": 374,
+      "sources": [
+        "DINNISSEN-ARAUJO-2022"
+      ],
+      "sha256": "c821bf4d176a5cc1b83ac1ffbd17ee0156523529c7a5a2fb3713e47461b611a3",
+      "words": 769,
       "notes": "\n3 November 2026: New original Army/Air Force workflow analogy, with a declared Caesar key rather than an Enigma reconstruction. Read all prose and computed states. I1 gaps stay unchanged; I2 checks a proposed reading, while metadata and the recorded instruction do not establish identities or an event. Welchman (1984), chapters 9–10, pp. 156–161; Budiansky (2002), pp. 211–215. DOM/unit checks and an intentionally false comparison mutation passed; Chromium interaction checked the accepted reading and rejected event inference.",
-      "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "learning_case_review": {
         "date": "2026-11-03",
         "scope": "New original Army/Air Force workflow analogy, with a declared Caesar key rather than an Enigma reconstruction. Read all prose and computed states. I1 gaps stay unchanged; I2 checks a proposed reading, while metadata and the recorded instruction do not establish identities or an event. Welchman (1984), chapters 9–10, pp. 156–161; Budiansky (2002), pp. 211–215. DOM/unit checks and an intentionally false comparison mutation passed; Chromium interaction checked the accepted reading and rejected event inference.",
         "tests": "tests/test-process-exercises.js; full npm test except the ledger freshness gate passed, with ledger corrected afterward",
         "limits": "Existing historical claims outside the described additions were not newly reverified. Prior browser records describe earlier revisions."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
+        "scope": "Portuguese 1649 documentary timeline, separately identified versions, dates and translation discrepancy, and bounded archival-silence inference. Earlier fictional exercise retained.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -6771,35 +7311,7 @@
       "review_2026_11_04": {
         "scope": "Corrected the comparative-attack heading from four to five cards. Underlying evidence and unexecuted live-AI recipe status unchanged.",
         "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
-        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
-      }
-    },
-    {
-      "path": "lab/reading-the-evidence.html",
-      "title": "Reading the Evidence — The Cipher Museum",
-      "status": "2 November 2026: original synthetic teaching examples and source statements checked against selected sections of linked papers; source limitations recorded in docs/READING_THE_EVIDENCE.md",
-      "sources": [
-        "https://aclanthology.org/W19-6126/",
-        "https://aclanthology.org/2022.lt4hala-1.1/",
-        "https://doi.org/10.63317/2twwf4kj3cgk",
-        "https://aclanthology.org/2023.findings-eacl.160/",
-        "HANDBELL-2023",
-        "ALCHEMICAL-SECRECY-2023"
-      ],
-      "notes": "One bounded, original exercise per cited paper. No archival authenticity or reproduction of trained models claimed. Browser and full-suite validation recorded separately.",
-      "sha256": "5ff80870e52987837dfb64a9f73597ee64e1dd86bd3af4bf5356b246f81df32f",
-      "words": 1292,
-      "browser_smoke": "Local Chromium checked all four exercises using keyboard activation at 390 and 1280 px; no page errors, overflow, or automated WCAG A/AA violations in main content. This is not historical verification.",
-      "reading_evidence_2026_11_02": {
-        "date": "2026-11-02",
-        "record": "docs/READING_THE_EVIDENCE.md",
-        "browser": "docs/page-audit/reading-evidence-browser-20261102.json",
-        "scope": "Four invented bounded exercises. Public primary paper links, no source material republished. Selected methods and their non-reproduced parts recorded."
-      },
-      "dot_context_additions_2026_11_03": {
-        "record": "docs/DOT_CONTEXT_ADDITIONS_2026-11-03.md",
-        "scope": "Historical handbell case added separately from the four synthetic exercises; source-reported classifier outputs, chronology and unresolved interpretation. No classifier rerun or decipherment.",
-        "validation": "Validation for this change is recorded in the implementing PR. Earlier browser, review and deployment entries are historical and do not certify this revision."
+        "limits": "Targeted content/code consistency review. Earlier full-page source/browser records remain historical. Completion Chromium checks cover desktop/narrow layouts and the changed controls/prose; hosted report and screenshot review are recorded with PR #52, not a new historical certification."
       }
     },
     {
@@ -6819,6 +7331,43 @@
         "date": "2026-11-03",
         "record": "docs/PURPLE_DIAGNOSIS.md",
         "scope": "One bounded synthetic worksheet; tests written first; eight mechanism mutations each failed."
+      }
+    },
+    {
+      "path": "lab/reading-the-evidence.html",
+      "title": "Reading the Evidence — The Cipher Museum",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
+      "sources": [
+        "https://aclanthology.org/W19-6126/",
+        "https://aclanthology.org/2022.lt4hala-1.1/",
+        "https://doi.org/10.63317/2twwf4kj3cgk",
+        "https://aclanthology.org/2023.findings-eacl.160/",
+        "HANDBELL-2023",
+        "ALCHEMICAL-SECRECY-2023",
+        "FANG-EMNLP-2025",
+        "SZARKA-HISTOCRYPT-2023"
+      ],
+      "notes": "One bounded, original exercise per cited paper. No archival authenticity or reproduction of trained models claimed. Browser and full-suite validation recorded separately.",
+      "sha256": "da866d13389dd0346d5d5e095658305fda82ecfa70e812d2f2011f38c16604f0",
+      "words": 2145,
+      "browser_smoke": "Local Chromium checked all four exercises using keyboard activation at 390 and 1280 px; no page errors, overflow, or automated WCAG A/AA violations in main content. This is not historical verification.",
+      "reading_evidence_2026_11_02": {
+        "date": "2026-11-02",
+        "record": "docs/READING_THE_EVIDENCE.md",
+        "browser": "docs/page-audit/reading-evidence-browser-20261102.json",
+        "scope": "Four invented bounded exercises. Public primary paper links, no source material republished. Selected methods and their non-reproduced parts recorded."
+      },
+      "dot_context_additions_2026_11_03": {
+        "record": "docs/DOT_CONTEXT_ADDITIONS_2026-11-03.md",
+        "scope": "Historical handbell case added separately from the four synthetic exercises; source-reported classifier outputs, chronology and unresolved interpretation. No classifier rerun or decipherment.",
+        "validation": "Validation for this change is recorded in the implementing PR. Earlier browser, review and deployment entries are historical and do not certify this revision."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "2 November 2026: original synthetic teaching examples and source statements checked against selected sections of linked papers; source limitations recorded in docs/READING_THE_EVIDENCE.md",
+        "scope": "Two new original exercises: four word-replacement conditions over all 64 source triples; invoice ambiguity, accidental markers and a declared 4/4 rhythm constraint. Six numbered investigations; earlier handbell context retained.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -6844,29 +7393,11 @@
       }
     },
     {
-      "path": "lab/working-is-not-secure.html",
-      "title": "Working Is Not Secure — The Cipher Museum",
-      "words": 685,
-      "sha256": "8ec0eb41298a41220ca4773770a6746258a113341f174b346f2840430d149e77",
-      "status": "3 November 2026: new guided route (review section 6); claims checked against Flannery, Bauer and Piper and Murphy; record in docs/WORKING_NOT_SECURE.md",
-      "sources": [
-        "Flannery, In Code (Profile Books, 2000)",
-        "Bauer, Decrypted Secrets, 4th edition (Springer, 2007)",
-        "Piper and Murphy, Cryptography: A Very Short Introduction (Oxford University Press, 2002)"
-      ],
-      "notes": "Original message, key and tests. The page does not reproduce the Cayley-Purser attack and uses no old key-size guidance. Books read from the user's copies and cited by title and chapter or page, not linked.\n3 November 2026: at the owner's request, the books behind this work are cited by title, author, publisher and year only; chapter, section and page references were removed from the page, its script comments, records and README entry. Guarded by tests/test-title-citations.js. Research-paper citations are unchanged.",
-      "working_not_secure_route_2026_11_03": {
-        "date": "2026-11-03",
-        "record": "docs/WORKING_NOT_SECURE.md",
-        "scope": "Guided route page and tour; tests written first; eight mechanism mutations each failed."
-      }
-    },
-    {
       "path": "lab/workbench.html",
       "title": "Codebreaker's Workbench — The Cipher Museum",
-      "words": 143,
-      "sha256": "149988dbaa3216bed7e4051c98180e50806858cd063576e1f7b315df7a6d212b",
-      "status": "ebook follow-up implementation and local validation complete",
+      "words": 155,
+      "sha256": "685fe211f219c6e6c82905182afe9c04ac03634b878f8af2f7080966afdd94a3",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "GRAY-1990-CORRECTED-2023"
       ],
@@ -6913,6 +7444,31 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "ebook follow-up implementation and local validation complete",
+        "scope": "Updated current Reading the Evidence invitation from four to six activities.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
+      }
+    },
+    {
+      "path": "lab/working-is-not-secure.html",
+      "title": "Working Is Not Secure — The Cipher Museum",
+      "words": 685,
+      "sha256": "8ec0eb41298a41220ca4773770a6746258a113341f174b346f2840430d149e77",
+      "status": "3 November 2026: new guided route (review section 6); claims checked against Flannery, Bauer and Piper and Murphy; record in docs/WORKING_NOT_SECURE.md",
+      "sources": [
+        "Flannery, In Code (Profile Books, 2000)",
+        "Bauer, Decrypted Secrets, 4th edition (Springer, 2007)",
+        "Piper and Murphy, Cryptography: A Very Short Introduction (Oxford University Press, 2002)"
+      ],
+      "notes": "Original message, key and tests. The page does not reproduce the Cayley-Purser attack and uses no old key-size guidance. Books read from the user's copies and cited by title and chapter or page, not linked.\n3 November 2026: at the owner's request, the books behind this work are cited by title, author, publisher and year only; chapter, section and page references were removed from the page, its script comments, records and README entry. Guarded by tests/test-title-citations.js. Research-paper citations are unchanged.",
+      "working_not_secure_route_2026_11_03": {
+        "date": "2026-11-03",
+        "record": "docs/WORKING_NOT_SECURE.md",
+        "scope": "Guided route page and tour; tests written first; eight mechanism mutations each failed."
       }
     },
     {
@@ -7021,9 +7577,9 @@
     {
       "path": "museum-map.html",
       "title": "Museum Map — The Cipher Museum",
-      "words": 1137,
-      "sha256": "4268385828389c35554bb4a569cbadbf9cacfd84a33bc245bd860ba04af046f7",
-      "status": "bounded review and local release validation complete",
+      "words": 1154,
+      "sha256": "85ec661dce7e7c4ea93a586537f7229404ed608fcf9bb526278c1af5e627247b",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [],
       "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
@@ -7048,6 +7604,13 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Added IKA row 174 and regenerated current collection totals.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -7180,8 +7743,8 @@
     {
       "path": "search.html",
       "title": "Search — The Cipher Museum",
-      "words": 60,
-      "sha256": "d2c89b4d38055d6f8f44ec23f55d9ff4b504ce8118d366496c5c2fe2c30e0aed",
+      "words": 72,
+      "sha256": "32b1efd53dec37de842246c2b7a8dc69a9f6dbca957a39f2e2e6052bec6a6dbb",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Normalization, partial matches, era-token boundaries and URL state tested; count uses canonical integer exhibit identities. Final generated-index synchronization belongs to release validation.",
@@ -7207,14 +7770,21 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
       "path": "teaching.html",
       "title": "Teaching Resources — The Cipher Museum",
-      "words": 756,
-      "sha256": "9a71f60f0b69247671db2dfa7880209d3fe26fd3645f9afa6b0973076bf82942",
-      "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+      "words": 729,
+      "sha256": "f3ba7309b58d8cbc461548c0feeefaa852f769e20f4f52f2bf1d508a3943cca8",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "LASRY-2018"
       ],
@@ -7270,6 +7840,13 @@
         "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
         "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
         "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
+        "scope": "Updated current Reading the Evidence invitation from four to six activities and described the new comparisons.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -7328,22 +7905,23 @@
       "review_2026_11_04": {
         "scope": "Updated public description and metadata to focus on evidence, corroboration, uncertainty and decisions. Comparison FAQ fairly acknowledges Kahn/Singh historical consequences and Singh’s interactive resources; approved promise, cover, prologue and chapter invitations preserved.",
         "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
-        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
+        "limits": "Targeted content/code consistency review. Earlier full-page source/browser records remain historical. Completion Chromium checks cover desktop/narrow layouts and the changed controls/prose; hosted report and screenshot review are recorded with PR #52, not a new historical certification."
       }
     },
     {
       "path": "timeline.html",
       "title": "Timeline — The Cipher Museum",
-      "words": 2889,
-      "sha256": "b7ddce84f63aca11dd4f02d2abeced8db398df8e10a4f69dff9294cc2dd9650b",
-      "status": "bounded review and local release validation complete",
+      "words": 2929,
+      "sha256": "561a1994f7257924cac6b1c974e861629b4728835e5d7a1488ebef0cfae6b6e8",
+      "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "CTC-NSA",
         "FBI-HOLLOW-NICKEL",
         "KAHN-1996",
         "MORSE-HOUSE",
         "NIST-AES-DEVELOPMENT",
-        "POLYBIUS-10"
+        "POLYBIUS-10",
+        "CHRISTENSEN-IKA-2021"
       ],
       "notes": "Root reread chronological entries and summaries; source dates, publication versus deployment and historical causal claims reconciled with bounded exhibit accounts. Root further reconciled DIANA timeline to an undated technical-table entry, without unsupported service dates.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
@@ -7372,6 +7950,13 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "dot_followups_2026_11_04": {
+        "date": "2026-11-04",
+        "previous_status": "bounded review and local release validation complete",
+        "scope": "Added early-1930s IKA event, treating this as an intercept period and distinguishing cipher behavior from physical mechanism.",
+        "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+        "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
       }
     },
     {
@@ -7604,5 +8189,28 @@
     ],
     "scope": "Indexing policy only: the facilitator answer key now declares noindex, follow. No content, claim or example changed.",
     "sitemap": "Also kept out of sitemap.xml, together with public/reports/benchmark-baselines.html. tests/test-sitemap-coverage.js reads the noindex tag from the page rather than holding a second list that could disagree with it."
+  },
+  "dot_followups_2026_11_04": {
+    "date": "2026-11-04",
+    "baseline": "c7b77a493be9519881bf48e7e3b6d8e1fa27d886",
+    "scope": "Seven approved packages: catalogue and frozen-audit consistency, CM094, CM108, CL1441, CL1491, CL1339 and CL1341.",
+    "public_pages": 228,
+    "substantive_pages": [
+      "cryptanalysis.html",
+      "cipher-detective.html",
+      "lab/evidence-workbench.html",
+      "lab/reading-the-evidence.html",
+      "lab/intercept-to-intelligence.html",
+      "lab/decipherment-cases.html",
+      "ciphers/ika.html",
+      "halls/machines.html",
+      "museum-map.html",
+      "timeline.html",
+      "teaching.html",
+      "lab/workbench.html"
+    ],
+    "new_exhibit": "ciphers/ika.html",
+    "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
+    "limits": "Immutable corpus and historical review checkpoints preserved. New source records describe selected passages; automated exercises use declared original fixtures."
   }
 }
