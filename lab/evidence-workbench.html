@@ -26,7 +26,7 @@
 <main id="main-content" class="research-main" tabindex="-1">
 <p>Read a manuscript, preserve competing interpretations, and test a cipher hypothesis. Everything runs in this browser. Export your record before closing; source images stay on your device. <a href="decipherment-cases.html">Start with the historical investigations</a> or <a href="../cipher-detective.html">return to Cipher Detective</a>.</p>
 <p><a href="reading-the-evidence.html">Try four guided evidence exercises</a>: match a key, separate cleartext from ciphertext, test transcription mistakes, and compare recurring symbols.</p>
-<nav aria-label="Workbench sections"><p><a href="#source">Source</a> · <a href="#images">Images</a> · <a href="#annotations">Readings</a> · <a href="#inventory">Symbol inventory</a> · <a href="#keys">Known keys</a> · <a href="#segmentation">Number grouping</a> · <a href="#homophonic">Homophonic search</a> · <a href="#hypotheses">Hypotheses</a> · <a href="#bundle">Save and resume</a></p></nav>
+<nav aria-label="Workbench sections"><p><a href="#source">Source</a> · <a href="#images">Images</a> · <a href="#annotations">Readings</a> · <a href="#reading-alignment">Compare passages</a> · <a href="#inventory">Symbol inventory</a> · <a href="#keys">Known keys</a> · <a href="#segmentation">Number grouping</a> · <a href="#homophonic">Homophonic search</a> · <a href="#hypotheses">Hypotheses</a> · <a href="#bundle">Save and resume</a></p></nav>
 <p id="record-status" class="research-status" role="status">Start with a transcription or import a Cipher Detective JSON export.</p>
 <div class="research-actions"><button id="export-record" type="button">Export evidence JSON</button><button id="restore-record" type="button" disabled>Restore previous saved record</button></div>
 <label for="import-file">Import version 1 or 2 transcription JSON (up to 750 KB)</label><input id="import-file" type="file" accept="application/json,.json">
@@ -112,7 +112,42 @@
 <button id="add-span" type="button">Append evidence span</button><div id="span-list"></div>
 <h3>Derived readings</h3><p>Keep the symbol sequence, diplomatic reading (original spelling), normalized reading and translation separate. Record which earlier layer you transformed.</p>
 <div class="research-grid"><div><label for="layer-kind">New layer</label><select id="layer-kind"><option value="symbols">Segmented symbol IDs</option><option value="diplomatic">Diplomatic plaintext</option><option value="normalized">Normalized plaintext</option><option value="translation">Translation</option></select><label for="layer-parent">Derived from</label><select id="layer-parent"></select><label for="layer-note">Transformation and evidence</label><textarea id="layer-note" maxlength="1000"></textarea></div><div><label for="layer-text">Reading</label><textarea id="layer-text" maxlength="20000" rows="7"></textarea></div></div>
-<button id="add-layer" type="button">Append reading layer</button><div id="layer-list"></div></section>
+<button id="add-layer" type="button">Append reading layer</button><div id="layer-list"></div>
+<div id="reading-alignment" class="reading-alignment" role="region" aria-labelledby="reading-alignment-title">
+<h3 id="reading-alignment-title">Compare passages across readings</h3>
+<p>An edition can split one sentence, join several passages, or add an explanation. Link the passages you believe correspond, and record why. Each side can contain several ranges. These are manual interpretations; a recorded link does not establish that a reading or translation is correct.</p>
+<p>The complete texts below keep their original wording and order. Text without a recorded link remains visible in both the full reading and the unlinked-passage list. A gap in the links does not itself show that text was lost or omitted.</p>
+<p>Save changes to the source or its catalogue fields before recording or withdrawing links. Unrecorded passage ranges and notes are cleared when you replace or restore a record, or change its source or the compared readings.</p>
+<button id="alignment-example" type="button">Load the passage-comparison example</button>
+<p class="research-note">This original teaching example splits one instruction, combines two others, and leaves a margin note and an editorial addition unlinked. Its illustrative spelling is not assigned to a historical date or dialect. Loading it replaces the record in this tab; export your record first to keep it.</p>
+<div class="research-grid alignment-comparison"><div>
+<label for="alignment-source">Source reading</label><select id="alignment-source"></select>
+<label for="alignment-source-text">Complete source reading, in its recorded order</label><textarea id="alignment-source-text" readonly rows="6" spellcheck="false" aria-describedby="alignment-source-description alignment-position-help"></textarea>
+<p id="alignment-source-description" class="research-note"></p>
+<button id="alignment-source-select" type="button">Add selected source passage</button>
+<label for="alignment-source-ranges">Source character ranges</label><input id="alignment-source-ranges" maxlength="500" placeholder="1–4, 10–12" aria-describedby="alignment-position-help">
+</div><div>
+<label for="alignment-target">Reading to compare</label><select id="alignment-target"></select>
+<label for="alignment-target-text">Complete compared reading, in its recorded order</label><textarea id="alignment-target-text" readonly rows="6" spellcheck="false" aria-describedby="alignment-target-description alignment-position-help"></textarea>
+<p id="alignment-target-description" class="research-note"></p>
+<button id="alignment-target-select" type="button">Add selected reading passage</button>
+<label for="alignment-target-ranges">Compared-reading character ranges</label><input id="alignment-target-ranges" maxlength="500" placeholder="1–4, 10–12" aria-describedby="alignment-position-help">
+</div></div>
+<p id="alignment-position-help" class="research-note">Select text in a complete reading and add it, or enter ranges separated by commas. Positions start at 1 and include both endpoints; a single position is allowed. They count Unicode code points, including spaces and line breaks. A combining mark counts separately. Up to 20 non-overlapping ranges can be recorded on each side of one link.</p>
+<label for="alignment-note">Why do these passages correspond?</label><textarea id="alignment-note" maxlength="2000" rows="2" placeholder="Record the evidence, editorial change or unresolved interpretation."></textarea>
+<button id="alignment-add" type="button">Record passage link</button>
+<p id="alignment-status" class="research-status" role="status">Append a reading layer above, or load the original example.</p>
+<div id="alignment-list"></div>
+<div class="research-grid alignment-unmatched"><div><h4>Unlinked source passages</h4><div id="alignment-source-unmatched"></div></div><div><h4>Unlinked compared-reading passages</h4><div id="alignment-target-unmatched"></div></div></div>
+<details><summary>Correct a recorded link</summary>
+<p>Withdraw a mistaken link with a reason, then record a replacement if needed. Its earlier passages, note and withdrawal reason remain in the history and export.</p>
+<label for="alignment-withdraw-id">Active link to withdraw</label><select id="alignment-withdraw-id"></select>
+<label for="alignment-withdraw-reason">Reason for withdrawing this link</label><input id="alignment-withdraw-reason" maxlength="2000">
+<button id="alignment-withdraw" type="button">Withdraw link and retain its history</button></details>
+<details><summary>Withdrawn link history for these readings</summary><div id="alignment-history"></div></details>
+<p class="research-note">Links stay attached to their recorded source revision. Earlier-revision links can be inspected or withdrawn, but are never transferred to revised text. To add links for a revised source, append a reading derived from that revision and select the new pair.</p>
+<p class="research-note">Research credit: Janssen, Lendvai and Jouravel, <a href="https://aclanthology.org/2025.ranlp-1.55/"><em>Alignment of Historical Manuscript Transcriptions and Translations</em> (2025)</a>, §§3–3.1. This is a manual adaptation of explicit passage links and full-text preservation. It runs no automatic aligner, OCR or translation model and reports no alignment-accuracy score.</p>
+</div></section>
 
 <section id="inventory"><h2>4. Build a revisable symbol inventory</h2><p>Deciding which marks are the same symbol <em>is</em> research, not a step before it. Two strokes that were transcribed alike may be a letter and the same letter with a diacritic; two that look different may be one hand varying. Build the inventory, look at every occurrence of a class, and split or merge with a recorded reason before you apply any key.</p>
 <p>Splitting moves <strong>only the occurrences you select</strong> and leaves the rest where they were. Merging keeps every earlier label and reason in the decision history. The whole history travels with the exported record.</p>
@@ -180,7 +215,7 @@
 <p>Replay also needs the same solver and scoring-model build, not only the same seed. The bundle records the build it was made with and tells you when they differ.</p>
 <div class="research-grid"><div><label for="bundle-title">Investigation title</label><input id="bundle-title" maxlength="200" placeholder="Unidentified letter, shelfmark unknown">
 <label for="bundle-import">Import an investigation bundle (up to 1.5 MB)</label><input id="bundle-import" type="file" accept="application/json,.json"></div>
-<div><label for="bundle-example">Guided saved examples</label><select id="bundle-example"><option value="">Choose an example…</option><option value="unidentified">Unidentified document, incomplete outcome</option><option value="segmentation">Numerical segmentation with an ambiguous boundary</option></select><p class="research-note">A guided example loads a complete worked state, including the parts that stay unresolved. Loading one replaces the record in this tab; export first if you want to keep it.</p></div></div>
+<div><label for="bundle-example">Guided saved examples</label><select id="bundle-example"><option value="">Choose an example…</option><option value="unidentified">Unidentified document, incomplete outcome</option><option value="segmentation">Numerical segmentation with an ambiguous boundary</option><option value="alignment">Passages split, combined and left unlinked</option></select><p class="research-note">A guided example loads a complete worked state, including the parts that stay unresolved. Loading one replaces the record in this tab; export first if you want to keep it.</p></div></div>
 <div class="research-actions"><button id="bundle-export" type="button">Export investigation bundle</button><button id="bundle-load-example" type="button">Load the selected example</button></div>
 <p id="bundle-status" class="research-status" role="status">No bundle imported in this tab.</p><pre id="bundle-state"></pre></section>
 <section><h2>Research behind the workbench</h2><ul class="source-list"><li><a href="https://ep.liu.se/en/conference-article.aspx?Article_No=14&amp;issue=171&amp;series=ecp">Historical-cipher transcription conventions (2020)</a>: preserve the source and uncertainty.</li><li><a href="https://aclanthology.org/2022.emnlp-main.44/">Numerical cipher segmentation (2022)</a>: known keys can still leave multiple paths.</li><li><a href="https://doi.org/10.1080/01611194.2022.2160677">Lasry, Biermann and Tomokiyo (2023), Appendix A</a>: annealing helps with letter homophones; nomenclature and archival corroboration still require human work.</li></ul></section>

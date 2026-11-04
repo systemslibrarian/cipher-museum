@@ -52,6 +52,13 @@
 .research-table th,.research-table td{padding:.65rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--gold-b)}
 .research-table caption{text-align:left;color:var(--tx2);padding:.4rem 0}
 .research-image img{transform-origin:center center}
+.reading-alignment{scroll-margin-top:6rem;margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--gold-b)}
+.reading-alignment h4{margin:1rem 0 .5rem;color:var(--gold-lt)}
+.alignment-comparison textarea[readonly]{line-height:1.6;min-height:12rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.alignment-range{margin:.65rem 0}
+.alignment-range pre{margin:.4rem 0}
+.alignment-unmatched{margin:1.25rem 0;border-top:1px solid var(--gold-b)}
+.alignment-link-note{white-space:pre-wrap}
 /* Three-glyph subset of Noto Sans Egyptian Hieroglyphs (SIL OFL 1.1; licence in fonts/OFL-noto-sans-egyptian-hieroglyphs.txt): O1, D21, D54 for the Egyptian case. */
 @font-face{font-family:'Cipher Museum Hieroglyphs';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/noto-sans-egyptian-hieroglyphs-subset.woff2) format('woff2');unicode-range:U+1308B,U+130BB,U+13250}
 .egypt-word{display:inline-flex;gap:.4rem;font-size:3rem;line-height:1.2;padding:.5rem 1rem;border:1px solid var(--gold-b);border-radius:var(--r,4px);transform:scaleX(-1);font-family:"Cipher Museum Hieroglyphs","Noto Sans Egyptian Hieroglyphs","Segoe UI Historic",serif}

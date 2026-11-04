@@ -1,6 +1,6 @@
 # javascript appendix 1
 
-Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `3e47b5e05bd350c91f0e50501ad1f8ffc6b33e20`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -526,8 +526,8 @@ Supporting source for public page behavior; presence of code does not prove that
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
 - Served/distributed path: `js/artifact-cards-data.min.js`
-- Served SHA-256: `4a07c7c77963fde13fc749ee2a248dcc47163c1041694a0a5a7abd8529785d5a`
-- Readable-source SHA-256: `0ce4aac0c57e05b5a5ec1ea9aa548bc1f911f14c50ad1b4b2dfbc06bb37662bc`
+- Served SHA-256: `f3a1f97147c3312d3c8bd0fa408aa07831049ae9cddca06222861e8849aa5f9d`
+- Readable-source SHA-256: `4fc3bc4767fed7a59ae9d3953f91ae8ccdc2b89ebd84c6e699a8faf10342e749`
 
 
 ```javascript
@@ -1679,6 +1679,23 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
       },
       "securityFailure": "Statistical analysis · Structural pattern detection",
       "modernLesson": "Non-uniform output distributions"
+    },
+    "ika": {
+      "name": "IKA Cipher Machine",
+      "hall": "VII",
+      "era": "Early 1930s · Japan",
+      "family": "Mechanical and Rotor Machines",
+      "region": "Global",
+      "usedBy": "See the exhibit for historical participants and source evidence",
+      "keyType": "Varies by system",
+      "keyIdea": "Explore the Imperial Japanese Navy’s IKA cipher: what intercepted traffic establishes, what M-1 artifacts show, and why the physical IKA mechanism remains uncertain in the cited study.",
+      "trust": {
+        "key": "historical",
+        "text": "Historical Only",
+        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
+      },
+      "securityFailure": "Historical naval cipher reconstructed from intercepted traffic; the physical IKA mechanism is not established by the cited 2021 study.",
+      "modernLesson": "Match each claim to its kind of evidence"
     },
     "ira-ciphers": {
       "name": "IRA Cipher Traffic",
@@ -3456,82 +3473,153 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 ```
 
 
-## JavaScript — js/chi-setting.js
+## JavaScript — js/charles-v-case.js
 
 Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
 
 Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
 
-- Served/distributed path: `js/chi-setting.js`
-- Served SHA-256: `2a1cb8852b434c1edb00c69d0985e66a4ffd8dc25722fe8267f7729b7bf51f2d`
-- Readable-source SHA-256: `2a1cb8852b434c1edb00c69d0985e66a4ffd8dc25722fe8267f7729b7bf51f2d`
+- Served/distributed path: `js/charles-v-case.js`
+- Served SHA-256: `f2c79070752b63d3ea8b59cedfe20237275cc303a5ab7478918d149bebd4ea1b`
+- Readable-source SHA-256: `f2c79070752b63d3ea8b59cedfe20237275cc303a5ab7478918d149bebd4ea1b`
 
 
 ```javascript
-/* General Report on Tunny (Good, Michie, Timms, 1945), §§23A–C.
- * Bounded two-wheel statistical experiment, not a full Colossus emulator. */
-(function (root) {
+(function (root, factory) {
   'use strict';
-  function rng(seed) { let x=seed>>>0; return () => { x=(Math.imul(x,1664525)+1013904223)>>>0; return x/4294967296; }; }
-  function delta(bits) { return bits.slice(1).map((x,i)=>x^bits[i]); }
-  function validate(z, patterns) {
-    if (!Array.isArray(z) || z.length<2 || z.length>4096 || z.some(x=>!Number.isInteger(x)||x<0||x>31)) throw Error('Use 2–4096 five-bit symbols.');
-    if (patterns.length!==2 || patterns.some((p,i)=>p.length!==[41,31][i] || p.some(b=>b!==0&&b!==1))) throw Error('Known binary chi patterns must have lengths 41 and 31.');
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else { root.CharlesVCase = api; api.mount(document); }
+})(typeof window === 'object' ? window : globalThis, function () {
+  'use strict';
+
+  // Original museum fixture. These labels and readings are not from Charles V's letter.
+  const MESSAGE = Object.freeze(['g1', 'g2', 'g3', 'g4', 'g5']);
+  const FRAGMENT = Object.freeze({ tokens: Object.freeze(['g1', 'g2']), reading: 'GOTO' });
+  const CHECK_COPY = Object.freeze({ tokens: Object.freeze(['g2', 'g4', 'g1']), reading: 'TOGO' });
+  const PARTIAL_KEY = Object.freeze({
+    g1: Object.freeze({ kind: 'letters', value: 'GO' }),
+    g2: Object.freeze({ kind: 'letters', value: 'TO' }),
+    g3: Object.freeze({ kind: 'word', value: 'GATE' }),
+    g4: Object.freeze({ kind: 'null', value: '' })
+  });
+
+  function assessUnits(model, tokens, reading) {
+    if (!['letters', 'mixed'].includes(model)) throw new Error('Unknown token model');
+    if (!Array.isArray(tokens) || typeof reading !== 'string') throw new Error('Invalid aligned fragment');
+    const tokenCount = tokens.length;
+    const characterCount = Array.from(reading).length;
+    const compatible = model === 'letters' ? tokenCount === characterCount : tokenCount > 0 || characterCount === 0;
+    return { tokenCount, characterCount, compatible };
   }
-  function rank(z, patterns) {
-    validate(z,patterns);
-    const dz=delta(z).map(x=>(x&1)^((x>>>1)&1));
-    const wheels=patterns.map(p=>p.map((x,i)=>x^p[(i+1)%p.length]));
-    const scores=[];
-    for(let a=0;a<41;a++) for(let b=0;b<31;b++) {
-      let dots=0;
-      for(let t=0;t<dz.length;t++) if ((dz[t]^wheels[0][(a+t)%41]^wheels[1][(b+t)%31])===0) dots++;
-      scores.push({a,b,dots,sigma:(dots-dz.length/2)/Math.sqrt(dz.length/4)});
+
+  function decode(tokens, key) {
+    if (!Array.isArray(tokens) || !key || typeof key !== 'object') throw new Error('Invalid tokens or key');
+    const unknown = [];
+    const pieces = tokens.map(token => {
+      if (!Object.prototype.hasOwnProperty.call(key, token)) {
+        unknown.push(token);
+        return '[' + token + ']';
+      }
+      const entry = key[token];
+      if (!entry || !['letters', 'word', 'null'].includes(entry.kind) || typeof entry.value !== 'string' ||
+          (entry.kind === 'null' ? entry.value !== '' : entry.value === '')) throw new Error('Invalid key entry for ' + token);
+      return entry.value;
+    });
+    return { text: pieces.join(''), unknown };
+  }
+
+  function checkCopy(tokens, reading, key) {
+    const result = decode(tokens, key);
+    return { ...result, matches: result.unknown.length === 0 && result.text === reading };
+  }
+
+  function candidateKey(nullChoice) {
+    if (!['null', 'letter'].includes(nullChoice)) throw new Error('Unknown null hypothesis');
+    return { ...PARTIAL_KEY, g4: nullChoice === 'null' ? PARTIAL_KEY.g4 : { kind: 'letters', value: 'E' } };
+  }
+
+  function mount(doc) {
+    const section = doc.getElementById('charles-v');
+    if (!section || section.dataset.mounted === 'true') return;
+    section.dataset.mounted = 'true';
+    const $ = id => doc.getElementById(id);
+    let fragmentOpen = false;
+    let keyOpen = false;
+
+    function record(text) {
+      const item = doc.createElement('li');
+      item.textContent = text;
+      $('charles-record').appendChild(item);
+      $('charles-record-empty').hidden = true;
     }
-    return scores.sort((a,b)=>b.dots-a.dots||a.a-b.a||a.b-b.b);
-  }
-  function fixture(length=1024, noise=0, seed=1945) {
-    if (![64,256,1024,4096].includes(length) || !Number.isFinite(noise) || noise<0 || noise>0.5) throw Error('Invalid fixture settings.');
-    const random=rng(seed), patterns=[41,31].map(n=>Array.from({length:n},()=>random()<0.5?0:1));
-    const truth={a:Math.floor(random()*41),b:Math.floor(random()*31)};
-    // D is a synthetic residual stream, not German plaintext or a psi-wheel emulator.
-    // Its impulse-1 XOR impulse-2 parity changes with probability .30 (plus noise).
-    let parity=0;
-    const residual=[], ciphertext=[];
-    for(let t=0;t<length;t++) {
-      if(t && ((random()<0.30 ? 1:0) ^ (random()<noise ? 1:0))) parity^=1;
-      const first=random()<0.5?0:1;
-      const d=first|((first^parity)<<1)|(Math.floor(random()*8)<<2);
-      residual.push(d);
-      ciphertext.push(d^patterns[0][(truth.a+t)%41]^(patterns[1][(truth.b+t)%31]<<1));
+
+    function renderReading() {
+      const result = decode(MESSAGE, candidateKey($('charles-null').value));
+      $('charles-reading').textContent = result.text;
+      $('charles-reading-note').textContent = 'The literal reading retains ' + result.unknown.map(t => '[' + t + ']').join(', ') +
+        ' as unknown. No spaces or missing words have been supplied.';
     }
-    return {patterns,truth,residual,ciphertext};
-  }
-  function experiment(length,noise,seed=1945) {
-    const data=fixture(length,noise,seed), ranked=rank(data.ciphertext,data.patterns), random=rng(seed^0x7194);
-    // Compare the selected maximum with selected maxima under an explicit iid null.
-    const nullMaxima=Array.from({length:39},()=>rank(Array.from({length},()=>Math.floor(random()*32)),data.patterns)[0].dots);
-    const exceed=nullMaxima.filter(n=>n>=ranked[0].dots).length;
-    const familywiseEstimate=(exceed+1)/(nullMaxima.length+1);
-    const truthRank=ranked.findIndex(s=>s.a===data.truth.a&&s.b===data.truth.b)+1;
-    return { ...data, ranked, nullMaxima, familywiseEstimate, truthRank,
-      conclusion: familywiseEstimate<=0.05 && ranked[0].dots>ranked[1].dots ? 'Evidence for further investigation under the synthetic model; not a decryption.' : 'Inconclusive after searching 1,271 settings.' };
-  }
-  const api={delta,rank,fixture,experiment};
-  if(typeof module!=='undefined'&&module.exports) module.exports=api;
-  root.ChiSetting=api;
-  if(typeof document!=='undefined') {
-    const button=document.getElementById('chi-run');
-    if(button) button.addEventListener('click',()=>{
-      const output=document.getElementById('chi-results');
-      const length=Number(document.getElementById('chi-length').value),noise=Number(document.getElementById('chi-noise').value);
-      button.disabled=true; output.textContent='Counting all settings and 39 null searches…';
-      setTimeout(()=>{try {
-        const r=experiment(length,noise);
-        const preselected=r.ranked.find(s=>s.a===0&&s.b===0);
-        output.innerHTML='<p>Preselected offsets (0, 0), fixed before inspecting the tape: '+preselected.dots+' dots; pointwise sigma '+preselected.sigma.toFixed(2)+'. Compare this one setting with the selected maximum below.</p><p>'+r.conclusion+'</p><p>'+length+' five-bit symbols; '+(length-1)+' adjacent differences. Selected maximum: '+r.ranked[0].dots+' dots. Pointwise sigma: '+r.ranked[0].sigma.toFixed(2)+'. This pointwise score ignores selection among 1,271 settings.</p><p>Whole-search Monte Carlo estimate: '+r.familywiseEstimate.toFixed(3)+' (39 independent null searches; minimum reportable estimate 0.025). This coarse model-dependent estimate is not historical confidence or a proof.</p><table class="cipher-table"><thead><tr><th>chi 1 offset</th><th>chi 2 offset</th><th>Dots</th></tr></thead><tbody>'+r.ranked.slice(0,5).map(s=>'<tr><td>'+s.a+'</td><td>'+s.b+'</td><td>'+s.dots+'</td></tr>').join('')+'</tbody></table><details><summary>Inspect fixture truth and known wheel patterns</summary><p>True offsets '+r.truth.a+', '+r.truth.b+'; rank '+r.truthRank+'. Truth is checked only after ranking.</p><p>chi 1: '+r.patterns[0].join('')+'</p><p>chi 2: '+r.patterns[1].join('')+'</p><p>First 12 ciphertext symbols: '+r.ciphertext.slice(0,12).map(n=>n.toString(2).padStart(5,'0')).join(' ')+'</p></details>';
-      }catch(e){output.textContent=e.message;}finally{button.disabled=false;}},0);
+
+    $('charles-check-model').addEventListener('click', () => {
+      fragmentOpen = true;
+      $('charles-fragment').hidden = false;
+      $('charles-reveal-key').disabled = false;
+      const model = $('charles-model').value;
+      const result = assessUnits(model, FRAGMENT.tokens, FRAGMENT.reading);
+      const text = result.tokenCount + ' tokens correspond to ' + result.characterCount + ' characters. ' +
+        (model === 'letters' ?
+          (result.compatible ? 'One letter per token is compatible with this length; the values still need evidence.' :
+            'One letter per token is contradicted by this fragment, whatever letters you choose.') :
+          (result.compatible ? 'Mixed units are compatible with this length. It does not determine the token boundaries or a unique key.' :
+            'This fragment has no tokens from which the proposed units could produce its reading.'));
+      $('charles-model-result').textContent = text;
+      record((model === 'letters' ? 'One-letter hypothesis. ' : 'Mixed-unit hypothesis. ') + text);
+    });
+
+    $('charles-model').addEventListener('change', () => {
+      $('charles-model-result').textContent = 'Hypothesis changed. Open the fragment again to record this check; earlier checks remain below.';
+    });
+
+    $('charles-reveal-key').addEventListener('click', () => {
+      if (!fragmentOpen) return;
+      keyOpen = true;
+      $('charles-key').hidden = false;
+      $('charles-check-copy').disabled = false;
+      renderReading();
+    });
+
+    $('charles-null').addEventListener('change', () => {
+      if (!keyOpen) return;
+      renderReading();
+      $('charles-copy-result').textContent = 'Candidate changed. Check it against the copy; earlier results remain in your record.';
+    });
+
+    $('charles-check-copy').addEventListener('click', () => {
+      if (!keyOpen) return;
+      $('charles-copy').hidden = false;
+      const result = checkCopy(CHECK_COPY.tokens, CHECK_COPY.reading, candidateKey($('charles-null').value));
+      const text = 'Candidate reads ' + result.text + '; the separate copy reads ' + CHECK_COPY.reading + '. ' +
+        (result.matches ? 'Exact agreement for this copy. The main message still contains unknown g5; this is not a complete key.' :
+          'Mismatch: this candidate fails the check copy. Preserve the failed reading before changing the key.');
+      $('charles-copy-result').textContent = text;
+      record(($('charles-null').value === 'null' ? 'g4 retained as a null. ' : 'g4 changed to E. ') + text);
+    });
+
+    $('charles-reset').addEventListener('click', () => {
+      fragmentOpen = false;
+      keyOpen = false;
+      $('charles-model').value = 'letters';
+      $('charles-null').value = 'null';
+      for (const id of ['charles-fragment', 'charles-key', 'charles-copy']) $(id).hidden = true;
+      for (const id of ['charles-reveal-key', 'charles-check-copy']) $(id).disabled = true;
+      $('charles-model-result').textContent = 'Stages restarted. Your earlier checks remain in the record.';
+      $('charles-copy-result').textContent = '';
+      $('charles-reading').textContent = '';
+      $('charles-reading-note').textContent = '';
     });
   }
-})(typeof window!=='undefined'?window:globalThis);
+
+  return { MESSAGE, FRAGMENT, CHECK_COPY, PARTIAL_KEY, assessUnits, decode, checkCopy, candidateKey, mount };
+});
 ```

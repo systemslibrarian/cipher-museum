@@ -1,13 +1,13 @@
 {
   "format_version": 1,
-  "source_commit": "0643be340ca2c7948a4f09e495afc951f45e1564",
-  "source_commit_time": "2026-11-04T06:58:59-05:00",
-  "page_count": 227,
+  "source_commit": "3e47b5e05bd350c91f0e50501ad1f8ffc6b33e20",
+  "source_commit_time": "2026-11-04T11:01:10-05:00",
+  "page_count": 228,
   "inline_script_count": 80,
-  "shared_script_count": 68,
+  "shared_script_count": 69,
   "data_file_count": 29,
-  "source_register_count": 188,
-  "preserved_body_text_nodes": 27983,
+  "source_register_count": 194,
+  "preserved_body_text_nodes": 28371,
   "ebook_url_occurrences_suppressed": 8,
   "limits": "Snapshot content export, not new factual verification. Full external books/papers, binary images, CSS, dependencies and full downloadable corpus are excluded. See README.md.",
   "pages": [
@@ -59,7 +59,7 @@
       "id": "P004",
       "path": "cipher-detective.html",
       "title": "Cipher Detective — The Cipher Museum",
-      "source_sha256": "9db21eadff4d10cedfe63c4a6e2ae085a8a999f005d3b919ff9211022104e035",
+      "source_sha256": "4f1cd8784cfc9cdeb36ac69b1d4462f56b47b2c0f07e3da6cc1a4e5507ad74fd",
       "text_nodes": 129,
       "inline_scripts": 0,
       "script_srcs": [
@@ -76,7 +76,7 @@
         "https://ciphermuseum.com/js/detective/detective.js",
         "https://ciphermuseum.com/js/detective/workspaces.js"
       ],
-      "words": 1021,
+      "words": 1018,
       "part": "01-pages-P001-P020.md"
     },
     {
@@ -97,7 +97,7 @@
       "id": "P006",
       "path": "ciphers/adfgvx.html",
       "title": "ADFGVX Cipher — The Cipher Museum",
-      "source_sha256": "a09599065a2543b3e14f330fd57137ee1ff090eb1a4214f83ce13ad7d1f203ec",
+      "source_sha256": "051669c2eee74ec509d802225edadf50fedc64486f698cc8958b0e9c19f3de5a",
       "text_nodes": 151,
       "inline_scripts": 0,
       "script_srcs": [
@@ -114,7 +114,7 @@
       "id": "P007",
       "path": "ciphers/adfgx.html",
       "title": "ADFGX Cipher — The Cipher Museum",
-      "source_sha256": "7204097f36606231b35b58de2a8737387e8787161a71451098b759949c51ba7b",
+      "source_sha256": "6ebb595ca7eec942fa0a9e7965d8923086dc08d60d2e784201dbf38c206ce05b",
       "text_nodes": 91,
       "inline_scripts": 0,
       "script_srcs": [
@@ -198,7 +198,7 @@
       "id": "P012",
       "path": "ciphers/alberti-disk.html",
       "title": "Alberti Cipher Disk — The Cipher Museum",
-      "source_sha256": "c645da267290bfd9d6d29ad30a7d57f6a5cbc0bc2e66923dc46fb66361ca1cb1",
+      "source_sha256": "84feb1666bd8f553314192fe119981f96d7b0e5dd9d14a56c0f187e0b1360d9b",
       "text_nodes": 137,
       "inline_scripts": 0,
       "script_srcs": [
@@ -232,7 +232,7 @@
       "id": "P014",
       "path": "ciphers/amsco.html",
       "title": "AMSCO Transposition — The Cipher Museum",
-      "source_sha256": "5fb7d42b57bd0354d0524db95223d34216bfba3554c7693d8b403ca0a525c6f0",
+      "source_sha256": "bb0be3d24b1e27e7f24dfc57fd9a4510dfe2d0f34345f0df7635ec066414517c",
       "text_nodes": 121,
       "inline_scripts": 0,
       "script_srcs": [
@@ -301,7 +301,7 @@
       "id": "P018",
       "path": "ciphers/atbash.html",
       "title": "Atbash — The Cipher Museum",
-      "source_sha256": "ee7a40b94b1425360a7bfc34c02e653072cce5325e8e2e6bd5d85d57c11df124",
+      "source_sha256": "75767d93ce086726bb7e0ead632131d7488add0e6c80df7bd9b5852e6dd3c950",
       "text_nodes": 90,
       "inline_scripts": 0,
       "script_srcs": [
@@ -335,7 +335,7 @@
       "id": "P020",
       "path": "ciphers/babington.html",
       "title": "The Babington Plot Cipher (1586) — The Cipher Museum",
-      "source_sha256": "f23d1d4b992d4a8ea9cbc3ab604187175ed8ad65d8bc8deedada42f823878b51",
+      "source_sha256": "bdcf0d81ad10f286706b7b782cf5afa1720169670f2087ef12a06992c61c5cdf",
       "text_nodes": 179,
       "inline_scripts": 0,
       "script_srcs": [
@@ -369,7 +369,7 @@
       "id": "P022",
       "path": "ciphers/bacon.html",
       "title": "Bacon's Cipher — The Cipher Museum",
-      "source_sha256": "2fda21ffa719c537a3e42f87cc14b20a64542a0b43dcb4c5f09f640ebe214528",
+      "source_sha256": "7de9a7761aeeca4375696828d678c9c7733b119a1cfdcb0e3797ed760c8fdc0c",
       "text_nodes": 104,
       "inline_scripts": 0,
       "script_srcs": [
@@ -386,7 +386,7 @@
       "id": "P023",
       "path": "ciphers/bazeries.html",
       "title": "Bazeries Cipher — The Cipher Museum",
-      "source_sha256": "71f0c2a7b1716a51b2e8281ddb6958e9682993294bcbaac0c13ff88ab2f1aefe",
+      "source_sha256": "b715edaf0164a19506ef608f985b7b7869578db9add0731400a3154cc9cf68d6",
       "text_nodes": 90,
       "inline_scripts": 0,
       "script_srcs": [
@@ -403,7 +403,7 @@
       "id": "P024",
       "path": "ciphers/beale.html",
       "title": "Beale Ciphers — The Cipher Museum",
-      "source_sha256": "b1ac852da82b7869454746bc42163786f35eab1d7fe5b056f5b27e500efc81b8",
+      "source_sha256": "3d8dd0c2c0e9562ae23ccb92c9b35b22dd71644a91355c73a2352b3ccdc0400b",
       "text_nodes": 123,
       "inline_scripts": 0,
       "script_srcs": [
@@ -420,7 +420,7 @@
       "id": "P025",
       "path": "ciphers/beaufort.html",
       "title": "Beaufort Cipher — The Cipher Museum",
-      "source_sha256": "4fcdd8137f93546a8ea0c526795dcbff973ef3a2fd33131b361901144212887d",
+      "source_sha256": "faa8986656b16cd988acd32d2b35f62425f697ed3c7ed852870ab2718a9c7974",
       "text_nodes": 94,
       "inline_scripts": 0,
       "script_srcs": [
@@ -454,7 +454,7 @@
       "id": "P027",
       "path": "ciphers/bible-code.html",
       "title": "Bible Code (ELS) — The Cipher Museum",
-      "source_sha256": "bd6a89c142ebfeaae58c38a6720337fafe8a5bf6cdc59663f9b1345e0ccfd174",
+      "source_sha256": "df700bfd1fc08487a57d2ff6d2a7f2627f54576cbd519d737723da468a174d67",
       "text_nodes": 199,
       "inline_scripts": 1,
       "script_srcs": [
@@ -471,7 +471,7 @@
       "id": "P028",
       "path": "ciphers/bifid.html",
       "title": "Bifid Cipher — The Cipher Museum",
-      "source_sha256": "7d9a4ba187938fe581d86e283dd15a84eeca85138065c8137790a813c5c11f3a",
+      "source_sha256": "ecf69f83802d8b0d30d5d5ab250a073fbdda3cecbb740ec402863de60bd1f693",
       "text_nodes": 125,
       "inline_scripts": 0,
       "script_srcs": [
@@ -522,7 +522,7 @@
       "id": "P031",
       "path": "ciphers/bombe.html",
       "title": "Turing–Welchman Bombe — The Cipher Museum",
-      "source_sha256": "0cd75ae410e9a9ba0a0441b3e326507be9f0e81f71d7a41464f8d4741d3295c5",
+      "source_sha256": "f06ad4da93ace0f54998a1eae4556f94dfdf995a1baee87220991ab354459fbd",
       "text_nodes": 48,
       "inline_scripts": 0,
       "script_srcs": [
@@ -572,7 +572,7 @@
       "id": "P034",
       "path": "ciphers/caesar.html",
       "title": "Caesar Cipher — The Cipher Museum",
-      "source_sha256": "93b84c2ef338843b3e628a3432a0aade9a5c694b6115f28c72a3f48f4021d28f",
+      "source_sha256": "a0e70e1636b4d20080d6278032307b10676b5a0c166fdb628c90842cfccddb63",
       "text_nodes": 135,
       "inline_scripts": 1,
       "script_srcs": [
@@ -624,7 +624,7 @@
       "id": "P037",
       "path": "ciphers/chaocipher.html",
       "title": "Chaocipher — The Cipher Museum",
-      "source_sha256": "f492dc31300917fd57b6c60d9a6bfe822dd59f69b9fd273df30ec07236e2a297",
+      "source_sha256": "a3ed56336270027b4e7933ed7a2adaf2ba06d483e6d95199b650c5cab3d5a875",
       "text_nodes": 94,
       "inline_scripts": 0,
       "script_srcs": [
@@ -692,7 +692,7 @@
       "id": "P041",
       "path": "ciphers/colossus.html",
       "title": "Colossus — The Cipher Museum",
-      "source_sha256": "effeeeecf9825428522fd1c8d7af5e2ec489a6161337cd669cce124f8d70cc4c",
+      "source_sha256": "051ed150e063c955561c7d1d05a41eb8b1fff1906ffab50cd7c6166666b89f3b",
       "text_nodes": 124,
       "inline_scripts": 0,
       "script_srcs": [
@@ -709,7 +709,7 @@
       "id": "P042",
       "path": "ciphers/columnar.html",
       "title": "Columnar Transposition — The Cipher Museum",
-      "source_sha256": "99de111d816e235f0d6cc13fa6c2283e200b6db9d649649603d2993acc68f8fd",
+      "source_sha256": "aaeec4cfbc61585930358d6562f14b0482cf4c1cf9b1fa85c541ee1a3dd68873",
       "text_nodes": 183,
       "inline_scripts": 0,
       "script_srcs": [
@@ -747,7 +747,7 @@
       "id": "P044",
       "path": "ciphers/confederate-vigenere.html",
       "title": "Confederate Vigenère — The Cipher Museum",
-      "source_sha256": "28d75f3df722409b49711491d5a5129161fd6e676028c37bbf4baa379d4dcbb0",
+      "source_sha256": "a3b9ae37f820dd86adc2918701f3314a8290fbf17eba351eaa0ec14265ebe1a4",
       "text_nodes": 108,
       "inline_scripts": 0,
       "script_srcs": [
@@ -764,7 +764,7 @@
       "id": "P045",
       "path": "ciphers/copiale.html",
       "title": "Copiale Cipher — The Cipher Museum",
-      "source_sha256": "3cc70266734b5e65ce455fff10bb847a1695a3755886547e8f013d7db6a99f9a",
+      "source_sha256": "d7f991abe78e6f3dd7d35d0ee0e92cae4bfded28258e676af37c1a832e204069",
       "text_nodes": 109,
       "inline_scripts": 0,
       "script_srcs": [
@@ -882,7 +882,7 @@
       "id": "P052",
       "path": "ciphers/dictionary-code.html",
       "title": "Confederate Dictionary Code — The Cipher Museum",
-      "source_sha256": "b1d20f44e665210a73cde6822b13039566024d0b88b6e36ab6bdefe2db2d1117",
+      "source_sha256": "200640fc87a23624b18f08c3ee6a3556de1106b49362fa0e76b88f7e376bcc60",
       "text_nodes": 102,
       "inline_scripts": 0,
       "script_srcs": [
@@ -950,7 +950,7 @@
       "id": "P056",
       "path": "ciphers/double-playfair.html",
       "title": "Doppelkastenschlüssel — German Double Playfair — The Cipher Museum",
-      "source_sha256": "6d293481cdf9d715c51b88bae6a1fbc8b4dec0c5780317f53ec25304b28c6371",
+      "source_sha256": "73553c5bb74b073783d698e37665c0f9cb80186a630deb017b994e3c1e54b8cc",
       "text_nodes": 142,
       "inline_scripts": 0,
       "script_srcs": [
@@ -968,7 +968,7 @@
       "id": "P057",
       "path": "ciphers/double-transposition.html",
       "title": "Double Transposition — The Cipher Museum",
-      "source_sha256": "89d8cfc88eda07e9e28aea0c9f475d612b4da410af4006449597bd77f5324fcf",
+      "source_sha256": "b8645bf61640ff0ff71891815c9bcf3666d3b53fbb4af0a28fe1438b6cd3b438",
       "text_nodes": 136,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1053,7 +1053,7 @@
       "id": "P062",
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "source_sha256": "847c5e6b2c97a610769bb2301e475b3cb78d40195de181eefcaa7a201dc3109c",
+      "source_sha256": "87a5a84ad469252cfb305c0e448a6a0cf07803a915b3ff521d12ddd13a4041ec",
       "text_nodes": 361,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1107,7 +1107,7 @@
       "id": "P065",
       "path": "ciphers/four-square.html",
       "title": "Four-Square Cipher — The Cipher Museum",
-      "source_sha256": "224777d269bfbab64e85b98777af54ceebfe716e5c1b0a73e9b49cdb7f677e86",
+      "source_sha256": "32ff4a9e1fb402dd78ef35f46fa08d10bd13f058c836658363063032a753e30f",
       "text_nodes": 89,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1124,7 +1124,7 @@
       "id": "P066",
       "path": "ciphers/fractionated-morse.html",
       "title": "Fractionated Morse Cipher — The Cipher Museum",
-      "source_sha256": "9c3e2ab84ab7508f8f5f02a1340d86562f399ff7a9a1306392ded3c7be7c4f9a",
+      "source_sha256": "6b7ff2492fb093365fa157910ab0f33f1b14a25b6d9ef5978d64eb250bde9220",
       "text_nodes": 98,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1226,7 +1226,7 @@
       "id": "P072",
       "path": "ciphers/great-cipher.html",
       "title": "The Great Cipher (Grand Chiffre des Rossignols) — The Cipher Museum",
-      "source_sha256": "b269d5458fa51d352c618e00486917ca8991972012894043cc5cec7cbc088771",
+      "source_sha256": "535962b33a3d1950ac3a3391568f664fa4650e97959e534834b6c6e79f246799",
       "text_nodes": 142,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1243,7 +1243,7 @@
       "id": "P073",
       "path": "ciphers/gripenstierna.html",
       "title": "Gripenstierna’s Cipher Machine — The Cipher Museum",
-      "source_sha256": "1efc7ad8e6a21bc03026ad2bb90213684be63305dcb6288e9b84d154c3196f87",
+      "source_sha256": "a7f76f82f8ec169e70e8375b76e5c310022e350c08aab4684f00c092b94b6f96",
       "text_nodes": 70,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1259,7 +1259,7 @@
       "id": "P074",
       "path": "ciphers/gronsfeld.html",
       "title": "Gronsfeld Cipher — The Cipher Museum",
-      "source_sha256": "97ea91fca5dc1f9a70b9c665a0237d23612fa84d96d978a4dfe306f87a07cab2",
+      "source_sha256": "ddb4249a5f0d8b77acb14f204a4e190da43bedb5ba623f0625a85e6d35a53576",
       "text_nodes": 97,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1276,7 +1276,7 @@
       "id": "P075",
       "path": "ciphers/hagelin-c36.html",
       "title": "Hagelin C-36 / C-52 Lineage — The Cipher Museum",
-      "source_sha256": "ca0b0cff755d67508f874d4de410d30e29b89c3f6cd7bb8d3d7a322c54a090d0",
+      "source_sha256": "0d85d2ddc133dc366037c1ba1cea67e376420e088d2468f29193dc65c5fac97f",
       "text_nodes": 107,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1292,7 +1292,7 @@
       "id": "P076",
       "path": "ciphers/hill.html",
       "title": "Hill Cipher — The Cipher Museum",
-      "source_sha256": "03102562deaae9d8d411e903fa456409b23bb4db1f8ffa58c3ad76697517735a",
+      "source_sha256": "870117a77cf51341a16ff225ab8e87bad67028840de965ac24961f2f80b527f1",
       "text_nodes": 121,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1326,7 +1326,7 @@
       "id": "P078",
       "path": "ciphers/homophonic.html",
       "title": "Homophonic Substitution — The Cipher Museum",
-      "source_sha256": "76de5fbf735fd384b895178156811c9ff08c7830ce1dc56b07dab67db36dc4a2",
+      "source_sha256": "a4dab0fdb5c06804832deaa1c5418320ddbdcab2ed7b9adcb177654c035b28af",
       "text_nodes": 127,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1341,6 +1341,21 @@
     },
     {
       "id": "P079",
+      "path": "ciphers/ika.html",
+      "title": "IKA Cipher Machine — The Cipher Museum",
+      "source_sha256": "9fdc9955f3c2f5037321ddb1de960029b44faf97f092f61af56ccb86e596521d",
+      "text_nodes": 87,
+      "inline_scripts": 0,
+      "script_srcs": [
+        "https://ciphermuseum.com/js/trust-labels.js",
+        "https://ciphermuseum.com/js/demo-loader.min.js",
+        "https://ciphermuseum.com/js/nav.js"
+      ],
+      "words": 756,
+      "part": "04-pages-P061-P080.md"
+    },
+    {
+      "id": "P080",
       "path": "ciphers/ira-ciphers.html",
       "title": "IRA Cipher Traffic (Twomey Papers) — The Cipher Museum",
       "source_sha256": "b45e1a5e50fa475ecbf30ad9612f912b7d35cee73264fac357301370a333a178",
@@ -1357,10 +1372,10 @@
       "part": "04-pages-P061-P080.md"
     },
     {
-      "id": "P080",
+      "id": "P081",
       "path": "ciphers/jefferson-disk.html",
       "title": "Jefferson Disk — The Cipher Museum",
-      "source_sha256": "4cdbc79ac75d2a8390c7202e0cccd02f862c6d9173c2c5838ca23f9ce72a49e9",
+      "source_sha256": "bc19b8f340e6fd35b684992244602ad9d9d613c83927852ad36381163b761ea7",
       "text_nodes": 134,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1371,10 +1386,10 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 1089,
-      "part": "04-pages-P061-P080.md"
+      "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P081",
+      "id": "P082",
       "path": "ciphers/jn-25.html",
       "title": "JN-25 (Japanese Naval Code) - The Cipher Museum",
       "source_sha256": "7aaefd9dd436ac6fd2c1a04d181cdddd73df1c8d0ea8484f9389aec73184949c",
@@ -1391,7 +1406,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P082",
+      "id": "P083",
       "path": "ciphers/joan-clarke.html",
       "title": "Joan Clarke — The Cipher Museum",
       "source_sha256": "bf340f414ad92edd7174430d7fb0a43499329f3d95cbd832edc6366b8c591e64",
@@ -1409,7 +1424,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P083",
+      "id": "P084",
       "path": "ciphers/kahn.html",
       "title": "David Kahn — The Cipher Museum",
       "source_sha256": "1841ba5a4c8d29b6a52f7881e5feeff2ac72c9f9b4c96070017afdb5c0ece6a9",
@@ -1426,7 +1441,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P084",
+      "id": "P085",
       "path": "ciphers/kama-sutra.html",
       "title": "Kama Sutra Cipher (Mlecchita Vikalpa) — The Cipher Museum",
       "source_sha256": "916a3600dd54eaa086d4e4542bdd1a26ba179e7f421be0607b3db85526bf8253",
@@ -1443,7 +1458,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P085",
+      "id": "P086",
       "path": "ciphers/kerckhoffs.html",
       "title": "Kerckhoffs's Principle — The Cipher Museum",
       "source_sha256": "963f036f4fd9bbbce8530c7ea9275cc49f751b131a63e7d03a2ddf1b3337260b",
@@ -1460,7 +1475,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P086",
+      "id": "P087",
       "path": "ciphers/kl-7.html",
       "title": "KL-7 ADONIS (NATO eight-rotor machine · 1952) — The Cipher Museum",
       "source_sha256": "4bac32e5cd72995daa8438b5003556a54db425e4f5a3c8c956c7ef999bfccab4",
@@ -1477,7 +1492,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P087",
+      "id": "P088",
       "path": "ciphers/kryha.html",
       "title": "Kryha (Pocket cipher machine · 1924) — The Cipher Museum",
       "source_sha256": "1e22494c7af71e55f7140487b058a6204c62ae8edcbba47abc824ab864f23b7c",
@@ -1494,7 +1509,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P088",
+      "id": "P089",
       "path": "ciphers/krypto-arg.html",
       "title": "ARG Ciphers — The Cipher Museum",
       "source_sha256": "ed451e4ffd3014ea76c5f94ee7d0ea91ef5882cb19001770ef89c346f8d9651b",
@@ -1511,7 +1526,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P089",
+      "id": "P090",
       "path": "ciphers/kryptos.html",
       "title": "Kryptos — The Cipher Museum",
       "source_sha256": "3779c75e3c9a3374b9b806fb34c1fdf9abff6679147b86ab72305eda9586e790",
@@ -1528,7 +1543,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P090",
+      "id": "P091",
       "path": "ciphers/lasry.html",
       "title": "George Lasry — The Cipher Museum",
       "source_sha256": "49653c8f876595856e03f4f6b1c468fc65dfd53f078d72a040106dc79f026d8c",
@@ -1545,7 +1560,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P091",
+      "id": "P092",
       "path": "ciphers/latin-american-codebooks.html",
       "title": "Latin American Telegraphic Codebooks — The Cipher Museum",
       "source_sha256": "9e7d2f164b8137886843eb462fa7b5134b752ace95daa068a3051520b369cbde",
@@ -1562,7 +1577,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P092",
+      "id": "P093",
       "path": "ciphers/leo-marks.html",
       "title": "Leo Marks — The Cipher Museum",
       "source_sha256": "b8805bba5a6cadd6d2d1c7f4d4b9694d98cc25a9485f5ab706ac61cb101b61f3",
@@ -1579,10 +1594,10 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P093",
+      "id": "P094",
       "path": "ciphers/lorenz.html",
       "title": "Lorenz Cipher — The Cipher Museum",
-      "source_sha256": "e5e595e136e4114b6720948b9d79ee646b59098c6648f6b4aed86d5fbe65ed1b",
+      "source_sha256": "bd6ff21709159642f9f692c228f1bb677b4c84c48c98060678dc95824c20af5b",
       "text_nodes": 237,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1598,7 +1613,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P094",
+      "id": "P095",
       "path": "ciphers/m-94.html",
       "title": "M-94 / CSP-488 (US Army strip / disk cipher · 1922) — The Cipher Museum",
       "source_sha256": "3d1d96dad4a19597c25a5625a25c1914b2077cefcc5777fe8f147d573ca22bc3",
@@ -1615,10 +1630,10 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P095",
+      "id": "P096",
       "path": "ciphers/m209.html",
       "title": "M-209 (Hagelin C-38) — The Cipher Museum",
-      "source_sha256": "b2009dcb714ca8f46e276cd413252926f9adcd93a1c58325eceb89b70651b63d",
+      "source_sha256": "8e41bf3ccdc931ea9f6336dc10447af300e5a3b04280c6b4e53caf3114c2475e",
       "text_nodes": 104,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1632,7 +1647,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P096",
+      "id": "P097",
       "path": "ciphers/mary-stuart-castelnau-letters.html",
       "title": "Mary Queen of Scots — Castelnau Letters — The Cipher Museum",
       "source_sha256": "b28fb5ae456b6d75588f445535b94e8b66f5bc13af14399085533f152ced074c",
@@ -1649,7 +1664,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P097",
+      "id": "P098",
       "path": "ciphers/mavis-batey.html",
       "title": "Mavis Batey — The Cipher Museum",
       "source_sha256": "7b923cf4abb15bb8c06fe685c1f3b9ff21e1b01aa045583ea8f72b9c295cd03e",
@@ -1666,7 +1681,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P098",
+      "id": "P099",
       "path": "ciphers/mccormick.html",
       "title": "McCormick Notes — The Cipher Museum",
       "source_sha256": "daae3fede3d9e8eab834ad86cfa5365105fcb7a452aa4729004c92fe016218bb",
@@ -1683,7 +1698,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P099",
+      "id": "P100",
       "path": "ciphers/microdot.html",
       "title": "Microdot Steganography — The Cipher Museum",
       "source_sha256": "d977958fc224a2bd4403d82a62579d0352e549dff61806ca4dbf3e4673960ac9",
@@ -1700,7 +1715,7 @@
       "part": "05-pages-P081-P100.md"
     },
     {
-      "id": "P100",
+      "id": "P101",
       "path": "ciphers/mit-mystery-hunt.html",
       "title": "MIT Mystery Hunt — The Cipher Museum",
       "source_sha256": "6f9c8cc324aa56632599e8ae2231ff7be9d3f2113e7c740e3b26376c13813531",
@@ -1714,13 +1729,13 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 543,
-      "part": "05-pages-P081-P100.md"
+      "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P101",
+      "id": "P102",
       "path": "ciphers/monoalphabetic.html",
       "title": "Monoalphabetic Substitution — The Cipher Museum",
-      "source_sha256": "5bfa0f55a96bef7581f4304ee4204a4d10126d588180aac067ff98aad4d54d8c",
+      "source_sha256": "aeb42ac3b0720be979b7a6d5a128dab3c6264106ca2caed4b207df0778af61c6",
       "text_nodes": 136,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1734,7 +1749,7 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P102",
+      "id": "P103",
       "path": "ciphers/morse.html",
       "title": "Morse Code (Telegraphy's universal alphabet · 1840s) — The Cipher Museum",
       "source_sha256": "29a96d9c17cc0a830b3647838f5655bd8b6520fe7deb78ed96538e49a7a0d8e8",
@@ -1751,10 +1766,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P103",
+      "id": "P104",
       "path": "ciphers/myszkowski.html",
       "title": "Myszkowski Transposition — The Cipher Museum",
-      "source_sha256": "5be65ad7f1495164b9a1a444365a8189247f310e9269c0c8b81627070f43c0f0",
+      "source_sha256": "4458dfce834361339a71aa4137e13cbef2b46a8e638ca445cfa75c20df0933ac",
       "text_nodes": 111,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1769,7 +1784,7 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P104",
+      "id": "P105",
       "path": "ciphers/national-treasure.html",
       "title": "National Treasure — The Cipher Museum",
       "source_sha256": "ade39255785b99f2a65428f3f14511439d1c4629c09c12bcd13c8a0828bec11b",
@@ -1786,10 +1801,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P105",
+      "id": "P106",
       "path": "ciphers/navajo-code-talkers.html",
       "title": "Navajo Code Talkers — The Cipher Museum",
-      "source_sha256": "6e03749e90f6ca9a60ca69c17ad65e9e51ec614e0c033647d78b0770db7bd0ff",
+      "source_sha256": "926eb3054bdf0879a0e3224ea1c4b8ae12d78549e1c4392b1c6e7aa10c607d50",
       "text_nodes": 135,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1804,10 +1819,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P106",
+      "id": "P107",
       "path": "ciphers/nema.html",
       "title": "NEMA — Swiss Rotor Machine — The Cipher Museum",
-      "source_sha256": "b7bd925c465457e987e2a8cdb373afe9bbb8d2207c9ac6b64dd45c7adc0cd794",
+      "source_sha256": "1140fd0d9ce0277b910cf6fcc22046b095377c2d0fa7df1f5ccdc3e4563307ea",
       "text_nodes": 101,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1822,10 +1837,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P107",
+      "id": "P108",
       "path": "ciphers/nfc-deployment.html",
       "title": "NFC Authentication: When the Tag Stays Unlocked — The Cipher Museum",
-      "source_sha256": "3a1bc1db9593157b27469b1690d9a19c4f510b02022a5a0ee3c37ac89e9752fb",
+      "source_sha256": "c2413d0cfcaa49bd878dd813506707dbbfbd4fc26aa5b888e881bcaed091ec66",
       "text_nodes": 68,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1837,10 +1852,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P108",
+      "id": "P109",
       "path": "ciphers/nihilist.html",
       "title": "Nihilist Cipher — The Cipher Museum",
-      "source_sha256": "dc847e6b4838557ccb5ec8b2319ef3c62ce8e9dfcc6c0ac7727c0301e6428518",
+      "source_sha256": "20c86ad9cc1b02c921287adc0525a495217c0482590bd9478a24ba0972ff6556",
       "text_nodes": 118,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1854,7 +1869,7 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P109",
+      "id": "P110",
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator — The Cipher Museum",
       "source_sha256": "a33b8807e9bc487f253097c1a0145bec55ed3c8c5070afaf55dbb3a0cd207e59",
@@ -1872,7 +1887,7 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P110",
+      "id": "P111",
       "path": "ciphers/null-cipher.html",
       "title": "Null Cipher (Concealment by selective reading · ancient → modern) — The Cipher Museum",
       "source_sha256": "3c4f2b264ce6092141b171e1a426ade3ed2595f967538c587ff34d66ec69c255",
@@ -1889,10 +1904,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P111",
+      "id": "P112",
       "path": "ciphers/one-time-pad.html",
       "title": "One-Time Pad — The Cipher Museum",
-      "source_sha256": "5f92b3a921e1bafab2d404ecd37ad79591aba2b5b63bebdca44dc631e062847e",
+      "source_sha256": "6316c294184ca20fb48d495b89451f0d33d3bb9ceb785eed40c10e6da27ffd78",
       "text_nodes": 242,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1908,7 +1923,7 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P112",
+      "id": "P113",
       "path": "ciphers/patterson-jefferson-cipher.html",
       "title": "Patterson's Cipher for Jefferson (1801, solved 2007) — The Cipher Museum",
       "source_sha256": "fa120aa6428f7e08d1d4e7dbcb963923ac26acd4f20c7faafe353ed2a835d8ea",
@@ -1925,7 +1940,7 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P113",
+      "id": "P114",
       "path": "ciphers/phaistos-disc.html",
       "title": "Phaistos Disc — The Cipher Museum",
       "source_sha256": "8902bbf3270b0f9686678ae8490c1cbce0fbf81d7cc70b63b63ddc6d8dad4b15",
@@ -1942,10 +1957,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P114",
+      "id": "P115",
       "path": "ciphers/pigpen.html",
       "title": "Pigpen Cipher — The Cipher Museum",
-      "source_sha256": "5f0df34bda75dda5a0339a40a27f87a3d8912348b8f89618642217932f5b0c9f",
+      "source_sha256": "10e6a029ae075180e8e684875c04443856e52ae65d16323a5ead0707ce46141d",
       "text_nodes": 130,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1959,10 +1974,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P115",
+      "id": "P116",
       "path": "ciphers/playfair.html",
       "title": "Playfair Cipher — The Cipher Museum",
-      "source_sha256": "b114655a00bce66e21de7e1d30c7e1153513fc45bb0d3ce4b6e15ae72ca4e1f2",
+      "source_sha256": "2b3f5c5d00645578f68cd399730f818b95ee4a419f9f01f136e1ffb7a7f2c469",
       "text_nodes": 159,
       "inline_scripts": 1,
       "script_srcs": [
@@ -1975,10 +1990,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P116",
+      "id": "P117",
       "path": "ciphers/polybius.html",
       "title": "Polybius Square — The Cipher Museum",
-      "source_sha256": "7b9cb34e53ec45ab83c2303ab48bd7a62bfad2ec0cfab6fcf182a622c6f6df8b",
+      "source_sha256": "6488248cdf192e0d40e49c021cf625b93ba8ad0a26638440acc1a88a2f6bfb89",
       "text_nodes": 120,
       "inline_scripts": 0,
       "script_srcs": [
@@ -1992,10 +2007,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P117",
+      "id": "P118",
       "path": "ciphers/porta.html",
       "title": "Porta Cipher — The Cipher Museum",
-      "source_sha256": "175129c4f4efe926f714c160583ea08f386864c25d74ca30300d8c213a8f2d48",
+      "source_sha256": "3070cec572b055942147968de3f8dd6fb7fed1737aa9cf321d9f789826fb8b02",
       "text_nodes": 102,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2009,10 +2024,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P118",
+      "id": "P119",
       "path": "ciphers/purple.html",
       "title": "Purple (Type 97) — The Cipher Museum",
-      "source_sha256": "ba60ff4cca43d25b7ed6943832f8821e39a49d668198e3104d3b451f8adaa79c",
+      "source_sha256": "5ba9f7e2c3c1fe3922506b2514163d6e493df71b8def35df0328b4ff582e534c",
       "text_nodes": 130,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2026,10 +2041,10 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P119",
+      "id": "P120",
       "path": "ciphers/rail-fence.html",
       "title": "Rail Fence Cipher — The Cipher Museum",
-      "source_sha256": "1b94d507087619312e2055c29a1069a7aa24eeee498550dfb2ed5b76514d39e6",
+      "source_sha256": "6cbc4b93a87e72067905dc885e3cb29ba80ce039bebf01c3f4a4faf340f44012",
       "text_nodes": 94,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2043,7 +2058,7 @@
       "part": "06-pages-P101-P120.md"
     },
     {
-      "id": "P120",
+      "id": "P121",
       "path": "ciphers/red-army-faction.html",
       "title": "RAF–Stasi Records and an OTP Teaching Model — The Cipher Museum",
       "source_sha256": "29b222f886a4f95093a194227a55d8e3f5948e6621b5f44c1e76351c40060610",
@@ -2057,10 +2072,10 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 575,
-      "part": "06-pages-P101-P120.md"
+      "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P121",
+      "id": "P122",
       "path": "ciphers/red-type-a.html",
       "title": "Red (Type A) - The Cipher Museum",
       "source_sha256": "e4437ce99c12abe2ce18d7c3cc164cb58ce8c8538237126ea1964c7e61269ccd",
@@ -2077,7 +2092,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P122",
+      "id": "P123",
       "path": "ciphers/rochefort.html",
       "title": "Joseph Rochefort — The Cipher Museum",
       "source_sha256": "0489006e21c93730ed2664f4ec433435e8f734972e767b2dba812a8512918fda",
@@ -2094,7 +2109,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P123",
+      "id": "P124",
       "path": "ciphers/rosetta-stone.html",
       "title": "The Rosetta Stone — The Cipher Museum",
       "source_sha256": "ac40984da9269a5cc37d86478c3b868cc48f7ced4b6dcc28354fe2476e426924",
@@ -2111,10 +2126,10 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P124",
+      "id": "P125",
       "path": "ciphers/rot13.html",
       "title": "ROT13 — The Cipher Museum",
-      "source_sha256": "c6b647ee47bd15956e632c390515f8bf316dad44ff0d9eb8add5400558904d09",
+      "source_sha256": "860c23c5dc33f86318ba5f64dc5787cfa7fb36d434f42f5ccbeb3a6dae82ab6c",
       "text_nodes": 81,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2128,10 +2143,10 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P125",
+      "id": "P126",
       "path": "ciphers/rs44.html",
       "title": "Rasterschlüssel 44 (RS44) — The Cipher Museum",
-      "source_sha256": "b3f7eba9a2fc1312077f345f448c546046f5f0f0523cc0d48448df51d5aaa24c",
+      "source_sha256": "5ae4b0dbc94eacef2ad149957fccc550f5947f0e6ecaeba256b39e7b9c445361",
       "text_nodes": 118,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2146,7 +2161,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P126",
+      "id": "P127",
       "path": "ciphers/rsa.html",
       "title": "RSA — The Cipher Museum",
       "source_sha256": "d07d007dfd44d779e061ed591a2d7d7ed55b6d113691552d83ff28a81e1fb482",
@@ -2163,10 +2178,10 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P127",
+      "id": "P128",
       "path": "ciphers/running-key.html",
       "title": "Running Key Cipher — The Cipher Museum",
-      "source_sha256": "ee6b82780d662f9cfd20a11a842ec0cef0f5e05e49c5da781ca3993cab8d8606",
+      "source_sha256": "85ff4f3621121cf272bdf7ea32ae725332480d786dd1653387e98acf58c82203",
       "text_nodes": 103,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2180,7 +2195,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P128",
+      "id": "P129",
       "path": "ciphers/sator-square.html",
       "title": "Sator Square — The Cipher Museum",
       "source_sha256": "d5a2a2e6f5ea82dbc7fad043b6c39261a6926d1f0c9cac004167b56d36903a5e",
@@ -2197,10 +2212,10 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P129",
+      "id": "P130",
       "path": "ciphers/scytale.html",
       "title": "Scytale — The Cipher Museum",
-      "source_sha256": "f0fd522bf905933c251887e36a10602032c607a5c7f1e0a699aab42758282909",
+      "source_sha256": "387cd52cb02e360877789233e00667d0e6ba6f2a471b0fbc0099b319335c1119",
       "text_nodes": 112,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2214,7 +2229,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P130",
+      "id": "P131",
       "path": "ciphers/sha256.html",
       "title": "SHA-256 — The Cipher Museum",
       "source_sha256": "cb1eeac3e05f9b6c89c8a9f845b83732c422579a70e2a1079914293be70f05c4",
@@ -2230,7 +2245,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P131",
+      "id": "P132",
       "path": "ciphers/shamir-secret-sharing.html",
       "title": "Shamir's Secret Sharing — The Cipher Museum",
       "source_sha256": "3520e08d6d925ee896667f00f47743d8488783e19097c0b64f0bd52328b4246b",
@@ -2247,7 +2262,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P132",
+      "id": "P133",
       "path": "ciphers/shugborough.html",
       "title": "Shugborough Inscription — The Cipher Museum",
       "source_sha256": "84817fe63ef9b9c8f1ebcd999ad7112d23b55892c1efbd07c02dc0866f15f55a",
@@ -2264,7 +2279,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P133",
+      "id": "P134",
       "path": "ciphers/sigaba.html",
       "title": "SIGABA (ECM Mark II) — The Cipher Museum",
       "source_sha256": "940ff57361e2b83c2742d4cbf8dd830fae01fd805f5cf31a9bd5b03e3d31518d",
@@ -2281,7 +2296,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P134",
+      "id": "P135",
       "path": "ciphers/sigsaly.html",
       "title": "SIGSALY — The Encrypted Speech System — The Cipher Museum",
       "source_sha256": "12e0c22d7220323bd2f88a4b49d0de19b9396bbf974bb5a9c9e6d3677a7ec5ab",
@@ -2298,7 +2313,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P135",
+      "id": "P136",
       "path": "ciphers/slidex.html",
       "title": "Slidex (British WWII tactical code card) — The Cipher Museum",
       "source_sha256": "7de29813267d15a3ebbb13ee5028c3b84b6d2fbb16d6933a7a25a3b9fab0e5ce",
@@ -2315,10 +2330,10 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P136",
+      "id": "P137",
       "path": "ciphers/sodark.html",
       "title": "SoDark and Radio Linking — The Cipher Museum",
-      "source_sha256": "bec0c0c627c6296495ebabae35e2e7df386d5d198088f9cc1cae5ad1a59ff799",
+      "source_sha256": "68b415022088f4c3caadcfc1abad68e4b509a97519b5ab1db3645fe51836c344",
       "text_nodes": 73,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2330,10 +2345,10 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P137",
+      "id": "P138",
       "path": "ciphers/solitaire.html",
       "title": "Solitaire / Pontifex — The Cipher Museum",
-      "source_sha256": "a32d0539c1588b8607217956a0748e5332d7c382818a949e77e71f2326e2765e",
+      "source_sha256": "401a0dd76ede5e94af497c30b44732a6464d2fd81918e726c662c219308877f9",
       "text_nodes": 156,
       "inline_scripts": 1,
       "script_srcs": [
@@ -2347,7 +2362,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P138",
+      "id": "P139",
       "path": "ciphers/somerton-man.html",
       "title": "Somerton Man Code — The Cipher Museum",
       "source_sha256": "59ea21aea419d1183f160d2ab904976d0460e741db336887e59bbebd32b23b47",
@@ -2364,10 +2379,10 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P139",
+      "id": "P140",
       "path": "ciphers/stager.html",
       "title": "Stager Cipher — The Cipher Museum",
-      "source_sha256": "07c33dfd25a8f1407888fc1c0a904579f56418f3e3331aa1449d0a8fdf064052",
+      "source_sha256": "8b0a85f7ffe14e12f5722000caad6c6f0971d270d387a2835ff04519d3a62a74",
       "text_nodes": 112,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2382,7 +2397,7 @@
       "part": "07-pages-P121-P140.md"
     },
     {
-      "id": "P140",
+      "id": "P141",
       "path": "ciphers/station-hypo.html",
       "title": "Station HYPO — Pearl Harbor to Midway — The Cipher Museum",
       "source_sha256": "45d916df8ef89451108b51137f77109b3032fd9ab21fee07b5b6588930a8ce2f",
@@ -2396,13 +2411,13 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 699,
-      "part": "07-pages-P121-P140.md"
+      "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P141",
+      "id": "P142",
       "path": "ciphers/straddling-checkerboard.html",
       "title": "Straddling Checkerboard — The Cipher Museum",
-      "source_sha256": "1c1f2314f57f74f4454cc26a54ab60240846177480b56da9870f0169b9db1f5c",
+      "source_sha256": "eae998e240d253d180f7b2895830bc67614802063db3071898c6d03bc7e21533",
       "text_nodes": 86,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2416,10 +2431,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P142",
+      "id": "P143",
       "path": "ciphers/tap-code.html",
       "title": "Tap Code — The Cipher Museum",
-      "source_sha256": "bee17a7c79ae5c3a5668791db1f4eedd6dacab1c764da3fed8fe69f41f47b2e3",
+      "source_sha256": "7112990894c29cd83be848440b723c92366ebc4b7011d438f0eaaf6ffe7f4822",
       "text_nodes": 110,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2433,10 +2448,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P143",
+      "id": "P144",
       "path": "ciphers/trifid.html",
       "title": "Trifid Cipher — The Cipher Museum",
-      "source_sha256": "1bfcb74138c24cc0bfc39fdc985a839e86ee1d04e1ecd688bc132ba45681eff5",
+      "source_sha256": "deeb21d4451856de44055a693fdba6714fb674a5e8f9f15a6a45289477b00ee8",
       "text_nodes": 117,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2450,7 +2465,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P144",
+      "id": "P145",
       "path": "ciphers/trithemius.html",
       "title": "Trithemius Progressive Cipher (Polygraphia · 1518) — The Cipher Museum",
       "source_sha256": "2a935aa568a55224c1aaa52322e9c8e386445088f0ae49b3b9064cac2805c7fa",
@@ -2467,10 +2482,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P145",
+      "id": "P146",
       "path": "ciphers/turning-grille.html",
       "title": "Fleissner Turning Grille — The Cipher Museum",
-      "source_sha256": "c8174bdaba5e74f11e8e812e44a1fa00b5a6838e126ee83f89843585f4e63e56",
+      "source_sha256": "4e8d8e5577b1792f8c7e48464c35c810bee1226aefe9d48adac202ede508e2d3",
       "text_nodes": 119,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2485,10 +2500,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P146",
+      "id": "P147",
       "path": "ciphers/two-square.html",
       "title": "Two-Square Cipher — The Cipher Museum",
-      "source_sha256": "5b4bd9bab9e3d5379d8df86bb70e7579242e759e0dbc78cdcdd7a83038ee9d22",
+      "source_sha256": "0b96481d47b8cda3e7873584580056d44ae6801e9a0a33f524dde5c884e37ad9",
       "text_nodes": 92,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2502,7 +2517,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P147",
+      "id": "P148",
       "path": "ciphers/typex.html",
       "title": "Typex — The Cipher Museum",
       "source_sha256": "f640dc473934bd4d069481c0f1daaf75b2e27ca840aa0cb9bd68c4430e459b21",
@@ -2519,10 +2534,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P148",
+      "id": "P149",
       "path": "ciphers/ua-8295.html",
       "title": "UA-8295: Forensic Cryptanalysis of a Message Terminal — The Cipher Museum",
-      "source_sha256": "9c7dfd286ac151b17619a18d4f2aeb907421bab1883bd8081d40a580c009c51c",
+      "source_sha256": "139c13691f62cf7acd62ff509ef96c20be3a19abeefeab6c1ebe4f20623a632d",
       "text_nodes": 163,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2534,7 +2549,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P149",
+      "id": "P150",
       "path": "ciphers/venona.html",
       "title": "VENONA Project — The Cipher Museum",
       "source_sha256": "884780404d9dcbb11ae5ecf7976ac86e8eb5b2a3bd95b26b0c4ce567505b9ef5",
@@ -2552,10 +2567,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P150",
+      "id": "P151",
       "path": "ciphers/vernam.html",
       "title": "Vernam Cipher — The Cipher Museum",
-      "source_sha256": "2d82900165bf224fa1956de17a8e88a7b130f42aa77bbf681c082539a3755118",
+      "source_sha256": "428368eb2963e33a1199d6e43d1537fba7b48889e926cf3a85182061b7ab2c54",
       "text_nodes": 111,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2569,10 +2584,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P151",
+      "id": "P152",
       "path": "ciphers/vic.html",
       "title": "VIC Cipher — The Cipher Museum",
-      "source_sha256": "15fa8e48c1c05f73fc23831b5f315bbb38a070cfa76e32ff5acf30ccd6147788",
+      "source_sha256": "a13bcf9632e293eb828fe55b7dd39b444686884a97410f6da94855fa5d0437bf",
       "text_nodes": 100,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2586,7 +2601,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P152",
+      "id": "P153",
       "path": "ciphers/vietnamese-underground.html",
       "title": "Vietnamese Underground Codes — The Cipher Museum",
       "source_sha256": "adffe60734ed80617b20cfa29cf465e9927dfe4e39601b6626a4001aaea346cf",
@@ -2603,10 +2618,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P153",
+      "id": "P154",
       "path": "ciphers/vigenere.html",
       "title": "Vigenère Cipher — The Cipher Museum",
-      "source_sha256": "dc1749eb11d697304b19bbf66efecfa6b519ed444d3898967b67405f900b283a",
+      "source_sha256": "b46db8501f7bcb1303e96df9e2c7a496901df10cd88276e355008e24ec8a5b81",
       "text_nodes": 139,
       "inline_scripts": 1,
       "script_srcs": [
@@ -2619,10 +2634,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P154",
+      "id": "P155",
       "path": "ciphers/voynich.html",
       "title": "The Voynich Manuscript (c. 1404–1438) — The Cipher Museum",
-      "source_sha256": "f2e72a028d2ecfc06234e72ce16e2806437c7a79c56b487d98b65070f38a7a18",
+      "source_sha256": "5fbf869c8af19071306800ed24f2c3594fb65724c28f18f2fcf4880e50bbaf73",
       "text_nodes": 191,
       "inline_scripts": 0,
       "script_srcs": [
@@ -2636,10 +2651,10 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P155",
+      "id": "P156",
       "path": "ciphers/wadsworth-cipher.html",
       "title": "Wadsworth Cipher — The Cipher Museum",
-      "source_sha256": "9639e91b0eb50dd8db9c65bca8be41ed8cfd096f92d6b613f3ceb1bea303b380",
+      "source_sha256": "7835593b09bb0e4c24eb6a0a75cb5b5b90d4fe781bef3e06c17e0570695eb1d4",
       "text_nodes": 212,
       "inline_scripts": 1,
       "script_srcs": [
@@ -2653,7 +2668,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P156",
+      "id": "P157",
       "path": "ciphers/wallis-ciphers.html",
       "title": "Wallis Ciphers (John Wallis & the English Civil War · 1640s) — The Cipher Museum",
       "source_sha256": "5fa1ed3b24943d3e6a96b353304553735f08642eae5f67baf3ff94d07d17aa5c",
@@ -2670,7 +2685,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P157",
+      "id": "P158",
       "path": "ciphers/wheatstone.html",
       "title": "Wheatstone Cryptograph (A clock-face polyalphabetic · 1867) — The Cipher Museum",
       "source_sha256": "74d55b239d24525a271ffb79e295b925f57f537db0fc4d97f192f3813dedd9ae",
@@ -2687,7 +2702,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P158",
+      "id": "P159",
       "path": "ciphers/yardley.html",
       "title": "Herbert Yardley — The Cipher Museum",
       "source_sha256": "beb0a5e8f9213786be8147eb55559e3157bd3286514868a3f435733610e80fd5",
@@ -2704,7 +2719,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P159",
+      "id": "P160",
       "path": "ciphers/zero-knowledge-proofs.html",
       "title": "Zero-Knowledge Proofs — The Cipher Museum",
       "source_sha256": "4eb70643acf9b20df9c9287b53688e67787e42481b367d3c685778ff33f1aa6f",
@@ -2721,7 +2736,7 @@
       "part": "08-pages-P141-P160.md"
     },
     {
-      "id": "P160",
+      "id": "P161",
       "path": "ciphers/zimmermann.html",
       "title": "Zimmermann Telegram (German codes 0075 / 13040 · 1917) — The Cipher Museum",
       "source_sha256": "2af74f42b8be1a252380364bda67dc1ffd52103ffcceea2cd53cd8132491f238",
@@ -2735,13 +2750,13 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 1085,
-      "part": "08-pages-P141-P160.md"
+      "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P161",
+      "id": "P162",
       "path": "ciphers/zodiac.html",
       "title": "Zodiac Cipher — The Cipher Museum",
-      "source_sha256": "ddd4b300cf7223f8c61ff005270e67fc0e532d7aa335fdf4960ff16228ad43e4",
+      "source_sha256": "9bba49815ceb3cb7d87d83ba40aa5b036ee45b609050cae6ac27df9af63b1f07",
       "text_nodes": 130,
       "inline_scripts": 1,
       "script_srcs": [
@@ -2755,7 +2770,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P162",
+      "id": "P163",
       "path": "classical-guide.html",
       "title": "Classical Codebreaking Topic Guide — The Cipher Museum",
       "source_sha256": "8a042c9bb5b3120fe94fa38002f882da199138a9477b2f2881cf2e92e9deda0b",
@@ -2768,7 +2783,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P163",
+      "id": "P164",
       "path": "codebreak-answers.html",
       "title": "First Codebreak — Facilitator’s Answers — The Cipher Museum",
       "source_sha256": "59161e09faacdc9dd914db0d897e116ef51645d07341b2296ca403253cdf0bc6",
@@ -2781,7 +2796,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P164",
+      "id": "P165",
       "path": "codebreak-worksheet.html",
       "title": "First Codebreak — Student Activities — The Cipher Museum",
       "source_sha256": "517924d48d66ffaf9761bd1fd6bccccbf8f56a4d40927366e376dfea4b3ecdaa",
@@ -2794,7 +2809,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P165",
+      "id": "P166",
       "path": "community/index.html",
       "title": "Community Codebreaks — The Cipher Museum",
       "source_sha256": "52ce80c383101faa98c37b1785617c859f69f92e4b15384d2ec22043426aaa83",
@@ -2808,10 +2823,10 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P166",
+      "id": "P167",
       "path": "comparison.html",
       "title": "Cipher Comparison — The Cipher Museum",
-      "source_sha256": "b4bea1b978b2954a9b2c1cd4c7716c0227123849de228d454e612a5113ff5261",
+      "source_sha256": "b8bb3a14b087ff827297b3d117009c049d724524928ca80c7f5c462d50d23625",
       "text_nodes": 79,
       "inline_scripts": 1,
       "script_srcs": [
@@ -2823,10 +2838,10 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P167",
+      "id": "P168",
       "path": "cryptanalysis.html",
       "title": "Cryptanalysis Techniques — The Cipher Museum",
-      "source_sha256": "481101ea02cd1732a1b95987cb151a4f7d5ca50bcb0712539cf3a372cc5937cd",
+      "source_sha256": "698269f1ca749fa9a8fa155dcbc24be1c9fa0643b731e759c373e6e7692ac5bf",
       "text_nodes": 424,
       "inline_scripts": 1,
       "script_srcs": [
@@ -2834,11 +2849,11 @@
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 3686,
+      "words": 3683,
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P168",
+      "id": "P169",
       "path": "embed.html",
       "title": "Cipher Demo — The Cipher Museum",
       "source_sha256": "9ecc87b93b5801a1b08f6e3b8997248e1780103ec1da37d96984d5dfd43bfa26",
@@ -2852,7 +2867,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P169",
+      "id": "P170",
       "path": "first-codebreak.html",
       "title": "Your First Codebreak — The Cipher Museum",
       "source_sha256": "9c8d85563b57dd3218ae0a68a628771c46b85f97260d80be0ebd3774c044a214",
@@ -2867,7 +2882,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P170",
+      "id": "P171",
       "path": "further-reading.html",
       "title": "Further Reading — The Cipher Museum",
       "source_sha256": "372a515027b180d6e803806d8fb613d8ae075d65a7fef0c9f0361d95ece48ebd",
@@ -2880,7 +2895,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P171",
+      "id": "P172",
       "path": "glossary.html",
       "title": "Glossary — The Cipher Museum",
       "source_sha256": "4cce04e36500c992e90bd84054d4e1c21b7711c28d5d47a24c4dbd2d507f1638",
@@ -2894,7 +2909,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P172",
+      "id": "P173",
       "path": "hall-of-foundations/closest-vector.html",
       "title": "The Closest Vector Problem · Hall of Foundations",
       "source_sha256": "a64e353495a3f32410d0b776f688dd2f9294661f2d9d525fe4ce370f30837645",
@@ -2908,7 +2923,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P173",
+      "id": "P174",
       "path": "hall-of-foundations/elliptic-curves-real.html",
       "title": "Elliptic Curves over ℝ · Hall of Foundations",
       "source_sha256": "0fb24ee190b7bb366c8f3d64927711eee62955860151d7b707194abe4180b3be",
@@ -2922,7 +2937,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P174",
+      "id": "P175",
       "path": "hall-of-foundations/entropy.html",
       "title": "Information & Entropy · Hall of Foundations",
       "source_sha256": "5766e7d2c51b2d7aa1865bf55e09a5408762c851dffe767adf6b3cd4d72757aa",
@@ -2935,7 +2950,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P175",
+      "id": "P176",
       "path": "hall-of-foundations/euler-fermat.html",
       "title": "Euler & Fermat · Hall of Foundations",
       "source_sha256": "b50988adbf0498eb9025d7f5cb0c20c5db0e375f305d6ee228f5494cbe7465d3",
@@ -2949,7 +2964,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P176",
+      "id": "P177",
       "path": "hall-of-foundations/finite-fields.html",
       "title": "Finite Fields · Hall of Foundations",
       "source_sha256": "aa8bd8de6493a82fe83c3ebd6efc926465c0848bed05a85814f1eefbdf1c8564",
@@ -2963,7 +2978,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P177",
+      "id": "P178",
       "path": "hall-of-foundations/group-theory.html",
       "title": "Group Theory · Hall of Foundations",
       "source_sha256": "81490ef6065886788d8669944318eab4e156c37121782a56795a64dac28ebca8",
@@ -2976,7 +2991,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P178",
+      "id": "P179",
       "path": "hall-of-foundations/index.html",
       "title": "Hall of Foundations · Cipher Museum",
       "source_sha256": "e19f97cb43c9bf1fda10b90e12faf31a2ade71ebbfb250d47a3f894c48a5ee3f",
@@ -2989,7 +3004,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P179",
+      "id": "P180",
       "path": "hall-of-foundations/interpolation.html",
       "title": "Polynomial Interpolation · Hall of Foundations",
       "source_sha256": "b612f6f8cd11e25987725e6406a01ebeb469b6906e7608a9d0bbe6cb90507048",
@@ -3003,7 +3018,7 @@
       "part": "09-pages-P161-P180.md"
     },
     {
-      "id": "P180",
+      "id": "P181",
       "path": "hall-of-foundations/lattices-svp.html",
       "title": "Lattices & the SVP · Hall of Foundations",
       "source_sha256": "968512cc7e7768c000db576a50857734350bc2587e5b89ce228a086835d65c32",
@@ -3014,10 +3029,10 @@
         "https://ciphermuseum.com/js/nav.js"
       ],
       "words": 521,
-      "part": "09-pages-P161-P180.md"
+      "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P181",
+      "id": "P182",
       "path": "hall-of-foundations/learning-with-errors.html",
       "title": "Learning With Errors · Hall of Foundations",
       "source_sha256": "ce67bdc0d5d3c4fcd25fc1ae7f4a4025577996efc7ab48020d049a9e2cb0cb74",
@@ -3031,7 +3046,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P182",
+      "id": "P183",
       "path": "hall-of-foundations/modular-arithmetic.html",
       "title": "Modular Arithmetic · Hall of Foundations",
       "source_sha256": "fa4e4fd6b22bc2a4a7df572e467597a2a7446726d0dceffb307e4d50c43913b9",
@@ -3045,7 +3060,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P183",
+      "id": "P184",
       "path": "hall-of-foundations/modularity-exhibit.html",
       "title": "The Ground Beneath the Curve · Cipher Museum",
       "source_sha256": "a5f7781d0bb337d794e5f54de6580cf98e568ebb9ebd9b9e04764c0e83874ce2",
@@ -3058,7 +3073,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P184",
+      "id": "P185",
       "path": "hall-of-foundations/one-way-function.html",
       "title": "The One-Way Function · Hall of Foundations",
       "source_sha256": "c390985186a041d8bcf2e71b62e3c5b20573acc6ebb90a929d7346668dd77616",
@@ -3071,7 +3086,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P185",
+      "id": "P186",
       "path": "hall-of-foundations/pairings.html",
       "title": "Bilinear Pairings · Hall of Foundations",
       "source_sha256": "ff011c6dafacd0aae447efb28d00dc53da17b7b2c14731854f70fe5cacd1522f",
@@ -3085,7 +3100,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P186",
+      "id": "P187",
       "path": "hall-of-foundations/polynomial-rings.html",
       "title": "Polynomial Rings · Hall of Foundations",
       "source_sha256": "bd7f9996c029399923d90a98dae4bde85f3c75ed5510b69cd554c44720df0a54",
@@ -3099,7 +3114,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P187",
+      "id": "P188",
       "path": "hall-of-foundations/prime-number-theorem.html",
       "title": "The Prime Number Theorem · Hall of Foundations",
       "source_sha256": "2797488fbb58c6f9a202ea6fc42e78c796107c8a73c43aa5460812834e6edbf0",
@@ -3112,7 +3127,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P188",
+      "id": "P189",
       "path": "hall-of-foundations/random-oracle.html",
       "title": "The Random Oracle · Hall of Foundations",
       "source_sha256": "ef9ac80c64a6ff45b28a1e41383d4cac8091b543d0fab5fb85851626159d2511",
@@ -3125,7 +3140,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P189",
+      "id": "P190",
       "path": "hall-of-foundations/reduction.html",
       "title": "Reduction & Proof · Hall of Foundations",
       "source_sha256": "0edee00543d7cb4844b5f80575811cadcaead5b5b2f705a96adc6943a1b21d1d",
@@ -3138,7 +3153,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P190",
+      "id": "P191",
       "path": "halls/ancient.html",
       "title": "Hall I: World Origins of Cryptography — The Cipher Museum",
       "source_sha256": "14590f0b5c25b5291e16b3fbea78b72db75379b77e035b137c0b35af1e927854",
@@ -3152,7 +3167,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P191",
+      "id": "P192",
       "path": "halls/civil-war.html",
       "title": "Hall VI: Civil War Gallery — The Cipher Museum",
       "source_sha256": "5f238daf7b66dc8a67da4bb0fea67130c7ec7fe123a870a979b8ed807a262e50",
@@ -3166,7 +3181,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P192",
+      "id": "P193",
       "path": "halls/codebreakers.html",
       "title": "Hall X: Hall of Codebreakers — The Cipher Museum",
       "source_sha256": "f159a8f4d90eb37b63a5cc1cda6477ce9ce4e8b3e90637b2df14cf6a413ccdf5",
@@ -3180,7 +3195,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P193",
+      "id": "P194",
       "path": "halls/culture.html",
       "title": "Hall XIII: Cipher Culture — The Cipher Museum",
       "source_sha256": "9d334b0f6b6d4a090eb22acee0a5a9f1c90ffa6a2aaa45a0bb651561fc5884bc",
@@ -3194,21 +3209,21 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P194",
+      "id": "P195",
       "path": "halls/machines.html",
       "title": "Hall VII: Mechanical Cipher Machines — The Cipher Museum",
-      "source_sha256": "c0f9fb167596b434aed00463d0bdc7df15972fe8208c29b64ae902e955c52af9",
-      "text_nodes": 160,
+      "source_sha256": "ea791b8c18440a4ee02d97a56e380c499e1beabd1774fa5b51b890a966c07d6a",
+      "text_nodes": 166,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 935,
+      "words": 971,
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P195",
+      "id": "P196",
       "path": "halls/military.html",
       "title": "Hall V: Military & Spy Ciphers — The Cipher Museum",
       "source_sha256": "39a01f699be6c616f622efbd40e797363cd5285601a29da5beaf5c44fc657d55",
@@ -3222,7 +3237,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P196",
+      "id": "P197",
       "path": "halls/modern-crypto.html",
       "title": "Hall XI: Modern Cryptography — The Cipher Museum",
       "source_sha256": "b87a43ad8b029aba713cf6064427fae0060f0359460ab8ff3e1a69234f518a58",
@@ -3236,7 +3251,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P197",
+      "id": "P198",
       "path": "halls/polyalphabetic.html",
       "title": "Hall III: The Polyalphabetic Revolution — The Cipher Museum",
       "source_sha256": "ff017309a28766db3496dc3cfc9772dddd683a72f8388919394b66bb0b80de84",
@@ -3250,7 +3265,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P198",
+      "id": "P199",
       "path": "halls/puzzle.html",
       "title": "Hall VIII: Puzzle & Novelty Ciphers — The Cipher Museum",
       "source_sha256": "9151abb5076732fe5f3fbc9a2d5ea1bbef128a5c41ab7785a10be6ae9c20de36",
@@ -3264,7 +3279,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P199",
+      "id": "P200",
       "path": "halls/substitution.html",
       "title": "Hall II: Classical Substitution — The Cipher Museum",
       "source_sha256": "9dc28e24aeb2e9aea0601ca1e44c2551ab359643bb55f46f7abccc38f078c8cb",
@@ -3278,7 +3293,7 @@
       "part": "10-pages-P181-P200.md"
     },
     {
-      "id": "P200",
+      "id": "P201",
       "path": "halls/transposition.html",
       "title": "Hall IV: Transposition & Fractionation — The Cipher Museum",
       "source_sha256": "7a1b80ee7051fec41ee2c21d2ada8d3b25e57a52bcbc6f1453b8b61a8d24a14f",
@@ -3289,10 +3304,10 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 733,
-      "part": "10-pages-P181-P200.md"
+      "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P201",
+      "id": "P202",
       "path": "halls/unbreakable.html",
       "title": "Hall IX: The Unbreakable — The Cipher Museum",
       "source_sha256": "86aa61795cc08776adad07e4ae8cc785b0ab04f54eb64bc761955715267d4edd",
@@ -3306,7 +3321,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P202",
+      "id": "P203",
       "path": "halls/unsolved.html",
       "title": "Hall XII: Unsolved Ciphers — The Cipher Museum",
       "source_sha256": "d0ac2958d0e2bbaae9efd9670f5ae356638576993c9b5c9c01dd7c963aa27ea2",
@@ -3320,10 +3335,10 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P203",
+      "id": "P204",
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
-      "source_sha256": "5558123e760ec9dd4901f821166b3f404c579333f22fd159eae33ed037c03dc1",
+      "source_sha256": "d20ec8ae744d5499d632cf3d82de2832b933d1856dd75aa5699f21ef5a10b8dd",
       "text_nodes": 162,
       "inline_scripts": 4,
       "script_srcs": [
@@ -3334,11 +3349,11 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P204",
+      "id": "P205",
       "path": "lab/decipherment-cases.html",
       "title": "How a Decipherment Becomes Evidence — The Cipher Museum",
-      "source_sha256": "a691e01145d4a99d7da2e1ecd8b1ad65420c3952d5f5e0f23c8e18e295d96fec",
-      "text_nodes": 334,
+      "source_sha256": "75f26af9b8f5ac7d2dbc623215fbbcff2ca6eb1c5a5ca67561cc545aca461a36",
+      "text_nodes": 415,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
@@ -3346,17 +3361,18 @@
         "https://ciphermuseum.com/js/research-cases.js",
         "https://ciphermuseum.com/js/structure-exercises.js",
         "https://ciphermuseum.com/js/egyptian-case.js",
-        "https://ciphermuseum.com/js/maya-case.js"
+        "https://ciphermuseum.com/js/maya-case.js",
+        "https://ciphermuseum.com/js/charles-v-case.js"
       ],
-      "words": 3553,
+      "words": 4154,
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P205",
+      "id": "P206",
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "source_sha256": "9a4b67cf116ad31d3545be18e07986309cd3d1fb94fa63760d049a63d320716f",
-      "text_nodes": 392,
+      "source_sha256": "7f24651223fb7904221b71ef1831e29e76621ad4ac72e4fbd00603b1649493d8",
+      "text_nodes": 426,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
@@ -3366,25 +3382,25 @@
         "https://ciphermuseum.com/js/research-ui.js",
         "https://ciphermuseum.com/js/evidence-exercises.js"
       ],
-      "words": 3226,
+      "words": 3678,
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P206",
+      "id": "P207",
       "path": "lab/intercept-to-intelligence.html",
       "title": "From Intercept to Intelligence — The Cipher Museum",
-      "source_sha256": "8e95c4fce4a53cdac239392e63c15b4a719f1a5e20d741f2bf60ff8844f4e1c7",
-      "text_nodes": 70,
+      "source_sha256": "c821bf4d176a5cc1b83ac1ffbd17ee0156523529c7a5a2fb3713e47461b611a3",
+      "text_nodes": 134,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/intercept-exercise.js"
       ],
-      "words": 506,
+      "words": 990,
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P207",
+      "id": "P208",
       "path": "lab/kisses.html",
       "title": "One Message, Two Encryptions — The Cipher Museum",
       "source_sha256": "04681b78ac983ab868763d6038b57ad31dbff07ca2eb14e4c88f4ef379e5228b",
@@ -3400,7 +3416,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P208",
+      "id": "P209",
       "path": "lab/modern-attack-evidence.html",
       "title": "What an Attack Result Actually Shows — The Cipher Museum",
       "source_sha256": "adb7bac36e4d1df6ca2755e9f87d77a12c170fb409728ee210e5e3998df107cd",
@@ -3413,7 +3429,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P209",
+      "id": "P210",
       "path": "lab/purple-diagnosis.html",
       "title": "Diagnosing a Machine from Evidence — The Cipher Museum",
       "source_sha256": "a775a5e88931747c444cb9f449012ba00aab9c5bd146f93952a6e5a30abc7739",
@@ -3427,21 +3443,21 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P210",
+      "id": "P211",
       "path": "lab/reading-the-evidence.html",
       "title": "Reading the Evidence — The Cipher Museum",
-      "source_sha256": "5ff80870e52987837dfb64a9f73597ee64e1dd86bd3af4bf5356b246f81df32f",
-      "text_nodes": 158,
+      "source_sha256": "da866d13389dd0346d5d5e095658305fda82ecfa70e812d2f2011f38c16604f0",
+      "text_nodes": 265,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/reading-evidence.js"
       ],
-      "words": 1427,
+      "words": 2365,
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P211",
+      "id": "P212",
       "path": "lab/traffic-analysis.html",
       "title": "Reading the Radio Log — The Cipher Museum",
       "source_sha256": "dee626ddfadbe44c587f14b28ef83dabd685beec251c8193c389d7a27800206b",
@@ -3455,10 +3471,10 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P212",
+      "id": "P213",
       "path": "lab/workbench.html",
       "title": "Codebreaker's Workbench — The Cipher Museum",
-      "source_sha256": "149988dbaa3216bed7e4051c98180e50806858cd063576e1f7b315df7a6d212b",
+      "source_sha256": "685fe211f219c6e6c82905182afe9c04ac03634b878f8af2f7080966afdd94a3",
       "text_nodes": 47,
       "inline_scripts": 1,
       "script_srcs": [
@@ -3470,7 +3486,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P213",
+      "id": "P214",
       "path": "lab/working-is-not-secure.html",
       "title": "Working Is Not Secure — The Cipher Museum",
       "source_sha256": "8ec0eb41298a41220ca4773770a6746258a113341f174b346f2840430d149e77",
@@ -3484,7 +3500,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P214",
+      "id": "P215",
       "path": "learn.html",
       "title": "Learn — The Cipher Museum",
       "source_sha256": "a61c33d6dc6eae71410f2728142760aa7febed657745f7d3a28953c1c97c0260",
@@ -3498,7 +3514,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P215",
+      "id": "P216",
       "path": "modern.html",
       "title": "Modern Cryptography — The Cipher Museum",
       "source_sha256": "315c0d1f2912a7c9d7a662418778a07960c56931d5e8608a45b456b6377e1a4c",
@@ -3512,21 +3528,21 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P216",
+      "id": "P217",
       "path": "museum-map.html",
       "title": "Museum Map — The Cipher Museum",
-      "source_sha256": "4268385828389c35554bb4a569cbadbf9cacfd84a33bc245bd860ba04af046f7",
-      "text_nodes": 861,
+      "source_sha256": "85ec661dce7e7c4ea93a586537f7229404ed608fcf9bb526278c1af5e627247b",
+      "text_nodes": 865,
       "inline_scripts": 1,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 2400,
+      "words": 2411,
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P217",
+      "id": "P218",
       "path": "my-path.html",
       "title": "My Cryptographer's Path — The Cipher Museum",
       "source_sha256": "93440318da033b141a576fd121ec3ec681717db26c3db1b6650da0dd0f3a02b0",
@@ -3540,7 +3556,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P218",
+      "id": "P219",
       "path": "offline.html",
       "title": "Exhibit unavailable offline — The Cipher Museum",
       "source_sha256": "55e94f9358935a1ea2b7d5f655e226e5f5bfb94b512bbba63a8df21d6ff14331",
@@ -3551,7 +3567,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P219",
+      "id": "P220",
       "path": "popular-culture-survey.html",
       "title": "Popular Culture Survey — The Cipher Museum",
       "source_sha256": "42c53fa9e4bfb6105c0b03ad6e1d4629b74cacb157bbb41abe595264d9d7b5c3",
@@ -3565,7 +3581,7 @@
       "part": "11-pages-P201-P220.md"
     },
     {
-      "id": "P220",
+      "id": "P221",
       "path": "public/reports/benchmark-baselines.html",
       "title": "Cipher Corpus Statistics and Evaluation Status",
       "source_sha256": "10b14ab6de81ea6775dcde0bc77fbe34b44a0290f1338b082257df567844bd96",
@@ -3573,10 +3589,10 @@
       "inline_scripts": 0,
       "script_srcs": [],
       "words": 925,
-      "part": "11-pages-P201-P220.md"
+      "part": "12-pages-P221-P228.md"
     },
     {
-      "id": "P221",
+      "id": "P222",
       "path": "sealed-letter.html",
       "title": "The Curator’s Sealed Letter — The Cipher Museum",
       "source_sha256": "f37a75e60ec429b15412217474a115fca96531d09ba06c5f0e0eca8c0df7b3ca",
@@ -3588,13 +3604,13 @@
         "https://ciphermuseum.com/js/book-trail.js"
       ],
       "words": 2488,
-      "part": "12-pages-P221-P227.md"
+      "part": "12-pages-P221-P228.md"
     },
     {
-      "id": "P222",
+      "id": "P223",
       "path": "search.html",
       "title": "Search — The Cipher Museum",
-      "source_sha256": "d2c89b4d38055d6f8f44ec23f55d9ff4b504ce8118d366496c5c2fe2c30e0aed",
+      "source_sha256": "32b1efd53dec37de842246c2b7a8dc69a9f6dbca957a39f2e2e6052bec6a6dbb",
       "text_nodes": 37,
       "inline_scripts": 1,
       "script_srcs": [
@@ -3603,23 +3619,23 @@
         "https://ciphermuseum.com/js/search.js"
       ],
       "words": 122,
-      "part": "12-pages-P221-P227.md"
+      "part": "12-pages-P221-P228.md"
     },
     {
-      "id": "P223",
+      "id": "P224",
       "path": "teaching.html",
       "title": "Teaching Resources — The Cipher Museum",
-      "source_sha256": "9a71f60f0b69247671db2dfa7880209d3fe26fd3645f9afa6b0973076bf82942",
+      "source_sha256": "f3ba7309b58d8cbc461548c0feeefaa852f769e20f4f52f2bf1d508a3943cca8",
       "text_nodes": 75,
       "inline_scripts": 0,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js"
       ],
-      "words": 765,
-      "part": "12-pages-P221-P227.md"
+      "words": 770,
+      "part": "12-pages-P221-P228.md"
     },
     {
-      "id": "P224",
+      "id": "P225",
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum — Paul “The Cipher Librarian” Clark — The Cipher Museum",
       "source_sha256": "33c7ce7a43931c5015c82f7a24e930079c8d4a5f8e2619926bd2ccfcae80795e",
@@ -3629,24 +3645,24 @@
         "https://ciphermuseum.com/js/nav.js"
       ],
       "words": 1887,
-      "part": "12-pages-P221-P227.md"
+      "part": "12-pages-P221-P228.md"
     },
     {
-      "id": "P225",
+      "id": "P226",
       "path": "timeline.html",
       "title": "Timeline — The Cipher Museum",
-      "source_sha256": "b7ddce84f63aca11dd4f02d2abeced8db398df8e10a4f69dff9294cc2dd9650b",
-      "text_nodes": 470,
+      "source_sha256": "561a1994f7257924cac6b1c974e861629b4728835e5d7a1488ebef0cfae6b6e8",
+      "text_nodes": 475,
       "inline_scripts": 1,
       "script_srcs": [
         "https://ciphermuseum.com/js/nav.js",
         "https://ciphermuseum.com/js/lightbox.js"
       ],
-      "words": 3444,
-      "part": "12-pages-P221-P227.md"
+      "words": 3477,
+      "part": "12-pages-P221-P228.md"
     },
     {
-      "id": "P226",
+      "id": "P227",
       "path": "tours/index.html",
       "title": "Guided Tours — The Cipher Museum",
       "source_sha256": "1921e6b26fca5b6732475f725a28c84f2b072addd7ba18c3d1b421e8fa884856",
@@ -3657,10 +3673,10 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 105,
-      "part": "12-pages-P221-P227.md"
+      "part": "12-pages-P221-P228.md"
     },
     {
-      "id": "P227",
+      "id": "P228",
       "path": "tours/tour.html",
       "title": "Guided Tour — The Cipher Museum",
       "source_sha256": "62abfac914971814695a0641e193c60d7aeec60d03ef86d452ea5da35387bf68",
@@ -3671,7 +3687,7 @@
         "https://ciphermuseum.com/js/lightbox.js"
       ],
       "words": 88,
-      "part": "12-pages-P221-P227.md"
+      "part": "12-pages-P221-P228.md"
     }
   ],
   "scripts": [
@@ -3710,8 +3726,8 @@
     {
       "served": "js/artifact-cards-data.min.js",
       "readable": "js/artifact-cards-data.js",
-      "served_sha256": "4a07c7c77963fde13fc749ee2a248dcc47163c1041694a0a5a7abd8529785d5a",
-      "readable_sha256": "0ce4aac0c57e05b5a5ec1ea9aa548bc1f911f14c50ad1b4b2dfbc06bb37662bc",
+      "served_sha256": "f3a1f97147c3312d3c8bd0fa408aa07831049ae9cddca06222861e8849aa5f9d",
+      "readable_sha256": "4fc3bc4767fed7a59ae9d3953f91ae8ccdc2b89ebd84c6e699a8faf10342e749",
       "dormant": false,
       "classroom_cli": false
     },
@@ -3744,6 +3760,14 @@
       "readable": "js/breadcrumbs.js",
       "served_sha256": "7e96cb5dbe3e892d9f8631e46ef078d61fcb708987d37c46e480c2f0a1c5ebc1",
       "readable_sha256": "7e96cb5dbe3e892d9f8631e46ef078d61fcb708987d37c46e480c2f0a1c5ebc1",
+      "dormant": false,
+      "classroom_cli": false
+    },
+    {
+      "served": "js/charles-v-case.js",
+      "readable": "js/charles-v-case.js",
+      "served_sha256": "f2c79070752b63d3ea8b59cedfe20237275cc303a5ab7478918d149bebd4ea1b",
+      "readable_sha256": "f2c79070752b63d3ea8b59cedfe20237275cc303a5ab7478918d149bebd4ea1b",
       "dormant": false,
       "classroom_cli": false
     },
@@ -3982,8 +4006,8 @@
     {
       "served": "js/footer.js",
       "readable": "js/footer.js",
-      "served_sha256": "b95db3598478b7d8c8c1a11e164ca00e638f122358e31b862a97d50033be90ad",
-      "readable_sha256": "b95db3598478b7d8c8c1a11e164ca00e638f122358e31b862a97d50033be90ad",
+      "served_sha256": "230ab84680735fbae066d373cae9bf7888f50d9b8c08dcabc68b3d8be88a9cd0",
+      "readable_sha256": "230ab84680735fbae066d373cae9bf7888f50d9b8c08dcabc68b3d8be88a9cd0",
       "dormant": false,
       "classroom_cli": false
     },
@@ -4094,8 +4118,8 @@
     {
       "served": "js/reading-evidence.js",
       "readable": "js/reading-evidence.js",
-      "served_sha256": "f57389c6a5775cc985d8f1e2882fcc0e51129471e43517a8bc72922b424e3293",
-      "readable_sha256": "f57389c6a5775cc985d8f1e2882fcc0e51129471e43517a8bc72922b424e3293",
+      "served_sha256": "663b52e6a9216018ee024b7a04df9f18ff5e00d3193e04cf085278b5ab80962b",
+      "readable_sha256": "663b52e6a9216018ee024b7a04df9f18ff5e00d3193e04cf085278b5ab80962b",
       "dormant": false,
       "classroom_cli": false
     },
@@ -4118,16 +4142,16 @@
     {
       "served": "js/research-model.js",
       "readable": "js/research-model.js",
-      "served_sha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
-      "readable_sha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56",
+      "served_sha256": "c97d533d67d6cccd6c22e6fc3cf919a0f346040c343c2dc675565a44f92241f9",
+      "readable_sha256": "c97d533d67d6cccd6c22e6fc3cf919a0f346040c343c2dc675565a44f92241f9",
       "dormant": false,
       "classroom_cli": false
     },
     {
       "served": "js/research-ui.js",
       "readable": "js/research-ui.js",
-      "served_sha256": "efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9",
-      "readable_sha256": "efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9",
+      "served_sha256": "23db4eccd3abd554f5f92f9bb94b48940a13e1fcc5a188be445a478c9b2cdf5e",
+      "readable_sha256": "23db4eccd3abd554f5f92f9bb94b48940a13e1fcc5a188be445a478c9b2cdf5e",
       "dormant": false,
       "classroom_cli": false
     },
@@ -4214,8 +4238,8 @@
     {
       "served": "sw.js",
       "readable": "sw.js",
-      "served_sha256": "b2ba995963c5f085569d04e11ceaedbfcea64f1a9e0c207e440ba100451e0606",
-      "readable_sha256": "b2ba995963c5f085569d04e11ceaedbfcea64f1a9e0c207e440ba100451e0606",
+      "served_sha256": "5c906538589f9af8c58c8d98e3ec2b863029282ecfb827fc2cc2b13d3f0d062d",
+      "readable_sha256": "5c906538589f9af8c58c8d98e3ec2b863029282ecfb827fc2cc2b13d3f0d062d",
       "dormant": false,
       "classroom_cli": false
     }
@@ -4259,19 +4283,19 @@
     },
     {
       "path": "js/search-index.json",
-      "sha256": "ec44ab28f4b76eb53b95b8be638a8b3b5a234196a64c04505931446158cd296c"
+      "sha256": "779a79b74478fced2d214aef04e484747b00ca518b3b75b8b5c1c556f2aba505"
     },
     {
       "path": "data/artifact-cards.json",
-      "sha256": "2061c20b1a06cc84ca5ee7c35f92bcf05ccd129d29743e53ec3b62021e4a4eba"
+      "sha256": "b3cb27d55c6fb26e973713f907d96fd2b3c9e68f12d010034dc33143a98db6c8"
     },
     {
       "path": "data/exhibit-counts.json",
-      "sha256": "45dbc33a28d11a380dc2beb925e75aac522c43e064ef7c5180256e423e8e1685"
+      "sha256": "338903867b68687a2ae4496fb5bf0a13eb4b6449bb6f9494e36426bab84e30eb"
     },
     {
       "path": "data/exhibit-trust.json",
-      "sha256": "50c55a47a1ab9db7db7910c80840627332182cc6b3045b9363a5dfafba87b852"
+      "sha256": "94026500ffc67a7c36535e5b6758474d2ef881ea5fba1924e90d7c40f881de7b"
     },
     {
       "path": "data/trust-labels.json",
@@ -4315,7 +4339,7 @@
     },
     {
       "path": "data/research/v1/evaluation.json",
-      "sha256": "2e06136874d51905263143b322696477f415cee182e420800a9c37d921b840d5"
+      "sha256": "a3d545aa2e932bc6dc7ab8fc172341b6e8f0764d32d383d30477a5c4727e8439"
     },
     {
       "path": "manifest.webmanifest",
@@ -4335,17 +4359,17 @@
     },
     {
       "path": "data/research/v2/evaluation.json",
-      "sha256": "ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e9"
+      "sha256": "830fde17dbbcdf7ee4a6a16140729ae1c09d3fa18a79f7bf764c8fb18d037c95"
     }
   ],
   "input_files": [
     {
       "path": "docs/page-audit/coverage.json",
-      "sha256": "251def72b3ce23d57d58e6d3b39a776ea8b4122dd1fbbe5d370c186af0a4ca57"
+      "sha256": "8e62342717ac531e2e0c8f95c8d44e337d503a815870055b3e0723bd0b289d40"
     },
     {
       "path": "docs/page-audit/sources.json",
-      "sha256": "1a55fd948933f177640e2935132d613588ce16d94e3a10c194859d56578b8151"
+      "sha256": "5fee5872c6c1b02d05aeb5ae1ad2cb3e24d20d7a5401bcd82dd57572f68b3929"
     },
     {
       "path": "404.html",
@@ -4361,7 +4385,7 @@
     },
     {
       "path": "cipher-detective.html",
-      "sha256": "9db21eadff4d10cedfe63c4a6e2ae085a8a999f005d3b919ff9211022104e035"
+      "sha256": "4f1cd8784cfc9cdeb36ac69b1d4462f56b47b2c0f07e3da6cc1a4e5507ad74fd"
     },
     {
       "path": "cipher-flow.html",
@@ -4369,11 +4393,11 @@
     },
     {
       "path": "ciphers/adfgvx.html",
-      "sha256": "a09599065a2543b3e14f330fd57137ee1ff090eb1a4214f83ce13ad7d1f203ec"
+      "sha256": "051669c2eee74ec509d802225edadf50fedc64486f698cc8958b0e9c19f3de5a"
     },
     {
       "path": "ciphers/adfgx.html",
-      "sha256": "7204097f36606231b35b58de2a8737387e8787161a71451098b759949c51ba7b"
+      "sha256": "6ebb595ca7eec942fa0a9e7965d8923086dc08d60d2e784201dbf38c206ce05b"
     },
     {
       "path": "ciphers/aeneas-tacticus.html",
@@ -4393,7 +4417,7 @@
     },
     {
       "path": "ciphers/alberti-disk.html",
-      "sha256": "c645da267290bfd9d6d29ad30a7d57f6a5cbc0bc2e66923dc46fb66361ca1cb1"
+      "sha256": "84feb1666bd8f553314192fe119981f96d7b0e5dd9d14a56c0f187e0b1360d9b"
     },
     {
       "path": "ciphers/amharic-ge-ez-ciphers.html",
@@ -4401,7 +4425,7 @@
     },
     {
       "path": "ciphers/amsco.html",
-      "sha256": "5fb7d42b57bd0354d0524db95223d34216bfba3554c7693d8b403ca0a525c6f0"
+      "sha256": "bb0be3d24b1e27e7f24dfc57fd9a4510dfe2d0f34345f0df7635ec066414517c"
     },
     {
       "path": "ciphers/arabic-nomenclators.html",
@@ -4417,7 +4441,7 @@
     },
     {
       "path": "ciphers/atbash.html",
-      "sha256": "ee7a40b94b1425360a7bfc34c02e653072cce5325e8e2e6bd5d85d57c11df124"
+      "sha256": "75767d93ce086726bb7e0ead632131d7488add0e6c80df7bd9b5852e6dd3c950"
     },
     {
       "path": "ciphers/autokey.html",
@@ -4425,7 +4449,7 @@
     },
     {
       "path": "ciphers/babington.html",
-      "sha256": "f23d1d4b992d4a8ea9cbc3ab604187175ed8ad65d8bc8deedada42f823878b51"
+      "sha256": "bdcf0d81ad10f286706b7b782cf5afa1720169670f2087ef12a06992c61c5cdf"
     },
     {
       "path": "ciphers/bach-motif.html",
@@ -4433,19 +4457,19 @@
     },
     {
       "path": "ciphers/bacon.html",
-      "sha256": "2fda21ffa719c537a3e42f87cc14b20a64542a0b43dcb4c5f09f640ebe214528"
+      "sha256": "7de9a7761aeeca4375696828d678c9c7733b119a1cfdcb0e3797ed760c8fdc0c"
     },
     {
       "path": "ciphers/bazeries.html",
-      "sha256": "71f0c2a7b1716a51b2e8281ddb6958e9682993294bcbaac0c13ff88ab2f1aefe"
+      "sha256": "b715edaf0164a19506ef608f985b7b7869578db9add0731400a3154cc9cf68d6"
     },
     {
       "path": "ciphers/beale.html",
-      "sha256": "b1ac852da82b7869454746bc42163786f35eab1d7fe5b056f5b27e500efc81b8"
+      "sha256": "3d8dd0c2c0e9562ae23ccb92c9b35b22dd71644a91355c73a2352b3ccdc0400b"
     },
     {
       "path": "ciphers/beaufort.html",
-      "sha256": "4fcdd8137f93546a8ea0c526795dcbff973ef3a2fd33131b361901144212887d"
+      "sha256": "faa8986656b16cd988acd32d2b35f62425f697ed3c7ed852870ab2718a9c7974"
     },
     {
       "path": "ciphers/beurling.html",
@@ -4453,11 +4477,11 @@
     },
     {
       "path": "ciphers/bible-code.html",
-      "sha256": "bd6a89c142ebfeaae58c38a6720337fafe8a5bf6cdc59663f9b1345e0ccfd174"
+      "sha256": "df700bfd1fc08487a57d2ff6d2a7f2627f54576cbd519d737723da468a174d67"
     },
     {
       "path": "ciphers/bifid.html",
-      "sha256": "7d9a4ba187938fe581d86e283dd15a84eeca85138065c8137790a813c5c11f3a"
+      "sha256": "ecf69f83802d8b0d30d5d5ab250a073fbdda3cecbb740ec402863de60bd1f693"
     },
     {
       "path": "ciphers/bill-tutte.html",
@@ -4469,7 +4493,7 @@
     },
     {
       "path": "ciphers/bombe.html",
-      "sha256": "0cd75ae410e9a9ba0a0441b3e326507be9f0e81f71d7a41464f8d4741d3295c5"
+      "sha256": "f06ad4da93ace0f54998a1eae4556f94dfdf995a1baee87220991ab354459fbd"
     },
     {
       "path": "ciphers/book-cipher.html",
@@ -4481,7 +4505,7 @@
     },
     {
       "path": "ciphers/caesar.html",
-      "sha256": "93b84c2ef338843b3e628a3432a0aade9a5c694b6115f28c72a3f48f4021d28f"
+      "sha256": "a0e70e1636b4d20080d6278032307b10676b5a0c166fdb628c90842cfccddb63"
     },
     {
       "path": "ciphers/cardano-autokey.html",
@@ -4493,7 +4517,7 @@
     },
     {
       "path": "ciphers/chaocipher.html",
-      "sha256": "f492dc31300917fd57b6c60d9a6bfe822dd59f69b9fd273df30ec07236e2a297"
+      "sha256": "a3ed56336270027b4e7933ed7a2adaf2ba06d483e6d95199b650c5cab3d5a875"
     },
     {
       "path": "ciphers/che-guevara.html",
@@ -4509,11 +4533,11 @@
     },
     {
       "path": "ciphers/colossus.html",
-      "sha256": "effeeeecf9825428522fd1c8d7af5e2ec489a6161337cd669cce124f8d70cc4c"
+      "sha256": "051ed150e063c955561c7d1d05a41eb8b1fff1906ffab50cd7c6166666b89f3b"
     },
     {
       "path": "ciphers/columnar.html",
-      "sha256": "99de111d816e235f0d6cc13fa6c2283e200b6db9d649649603d2993acc68f8fd"
+      "sha256": "aaeec4cfbc61585930358d6562f14b0482cf4c1cf9b1fa85c541ee1a3dd68873"
     },
     {
       "path": "ciphers/commercial-codebooks.html",
@@ -4521,11 +4545,11 @@
     },
     {
       "path": "ciphers/confederate-vigenere.html",
-      "sha256": "28d75f3df722409b49711491d5a5129161fd6e676028c37bbf4baa379d4dcbb0"
+      "sha256": "a3b9ae37f820dd86adc2918701f3314a8290fbf17eba351eaa0ec14265ebe1a4"
     },
     {
       "path": "ciphers/copiale.html",
-      "sha256": "3cc70266734b5e65ce455fff10bb847a1695a3755886547e8f013d7db6a99f9a"
+      "sha256": "d7f991abe78e6f3dd7d35d0ee0e92cae4bfded28258e676af37c1a832e204069"
     },
     {
       "path": "ciphers/culper-ring.html",
@@ -4553,7 +4577,7 @@
     },
     {
       "path": "ciphers/dictionary-code.html",
-      "sha256": "b1d20f44e665210a73cde6822b13039566024d0b88b6e36ab6bdefe2db2d1117"
+      "sha256": "200640fc87a23624b18f08c3ee6a3556de1106b49362fa0e76b88f7e376bcc60"
     },
     {
       "path": "ciphers/diffie-hellman.html",
@@ -4569,11 +4593,11 @@
     },
     {
       "path": "ciphers/double-playfair.html",
-      "sha256": "6d293481cdf9d715c51b88bae6a1fbc8b4dec0c5780317f53ec25304b28c6371"
+      "sha256": "73553c5bb74b073783d698e37665c0f9cb80186a630deb017b994e3c1e54b8cc"
     },
     {
       "path": "ciphers/double-transposition.html",
-      "sha256": "89d8cfc88eda07e9e28aea0c9f475d612b4da410af4006449597bd77f5324fcf"
+      "sha256": "b8645bf61640ff0ff71891815c9bcf3666d3b53fbb4af0a28fe1438b6cd3b438"
     },
     {
       "path": "ciphers/dunin.html",
@@ -4593,7 +4617,7 @@
     },
     {
       "path": "ciphers/enigma.html",
-      "sha256": "847c5e6b2c97a610769bb2301e475b3cb78d40195de181eefcaa7a201dc3109c"
+      "sha256": "87a5a84ad469252cfb305c0e448a6a0cf07803a915b3ff521d12ddd13a4041ec"
     },
     {
       "path": "ciphers/fialka.html",
@@ -4605,11 +4629,11 @@
     },
     {
       "path": "ciphers/four-square.html",
-      "sha256": "224777d269bfbab64e85b98777af54ceebfe716e5c1b0a73e9b49cdb7f677e86"
+      "sha256": "32ff4a9e1fb402dd78ef35f46fa08d10bd13f058c836658363063032a753e30f"
     },
     {
       "path": "ciphers/fractionated-morse.html",
-      "sha256": "9c3e2ab84ab7508f8f5f02a1340d86562f399ff7a9a1306392ded3c7be7c4f9a"
+      "sha256": "6b7ff2492fb093365fa157910ab0f33f1b14a25b6d9ef5978d64eb250bde9220"
     },
     {
       "path": "ciphers/freemason-pigpen.html",
@@ -4633,23 +4657,23 @@
     },
     {
       "path": "ciphers/great-cipher.html",
-      "sha256": "b269d5458fa51d352c618e00486917ca8991972012894043cc5cec7cbc088771"
+      "sha256": "535962b33a3d1950ac3a3391568f664fa4650e97959e534834b6c6e79f246799"
     },
     {
       "path": "ciphers/gripenstierna.html",
-      "sha256": "1efc7ad8e6a21bc03026ad2bb90213684be63305dcb6288e9b84d154c3196f87"
+      "sha256": "a7f76f82f8ec169e70e8375b76e5c310022e350c08aab4684f00c092b94b6f96"
     },
     {
       "path": "ciphers/gronsfeld.html",
-      "sha256": "97ea91fca5dc1f9a70b9c665a0237d23612fa84d96d978a4dfe306f87a07cab2"
+      "sha256": "ddb4249a5f0d8b77acb14f204a4e190da43bedb5ba623f0625a85e6d35a53576"
     },
     {
       "path": "ciphers/hagelin-c36.html",
-      "sha256": "ca0b0cff755d67508f874d4de410d30e29b89c3f6cd7bb8d3d7a322c54a090d0"
+      "sha256": "0d85d2ddc133dc366037c1ba1cea67e376420e088d2468f29193dc65c5fac97f"
     },
     {
       "path": "ciphers/hill.html",
-      "sha256": "03102562deaae9d8d411e903fa456409b23bb4db1f8ffa58c3ad76697517735a"
+      "sha256": "870117a77cf51341a16ff225ab8e87bad67028840de965ac24961f2f80b527f1"
     },
     {
       "path": "ciphers/histiaeus-tattoo.html",
@@ -4657,7 +4681,11 @@
     },
     {
       "path": "ciphers/homophonic.html",
-      "sha256": "76de5fbf735fd384b895178156811c9ff08c7830ce1dc56b07dab67db36dc4a2"
+      "sha256": "a4dab0fdb5c06804832deaa1c5418320ddbdcab2ed7b9adcb177654c035b28af"
+    },
+    {
+      "path": "ciphers/ika.html",
+      "sha256": "9fdc9955f3c2f5037321ddb1de960029b44faf97f092f61af56ccb86e596521d"
     },
     {
       "path": "ciphers/ira-ciphers.html",
@@ -4665,7 +4693,7 @@
     },
     {
       "path": "ciphers/jefferson-disk.html",
-      "sha256": "4cdbc79ac75d2a8390c7202e0cccd02f862c6d9173c2c5838ca23f9ce72a49e9"
+      "sha256": "bc19b8f340e6fd35b684992244602ad9d9d613c83927852ad36381163b761ea7"
     },
     {
       "path": "ciphers/jn-25.html",
@@ -4717,7 +4745,7 @@
     },
     {
       "path": "ciphers/lorenz.html",
-      "sha256": "e5e595e136e4114b6720948b9d79ee646b59098c6648f6b4aed86d5fbe65ed1b"
+      "sha256": "bd6ff21709159642f9f692c228f1bb677b4c84c48c98060678dc95824c20af5b"
     },
     {
       "path": "ciphers/m-94.html",
@@ -4725,7 +4753,7 @@
     },
     {
       "path": "ciphers/m209.html",
-      "sha256": "b2009dcb714ca8f46e276cd413252926f9adcd93a1c58325eceb89b70651b63d"
+      "sha256": "8e41bf3ccdc931ea9f6336dc10447af300e5a3b04280c6b4e53caf3114c2475e"
     },
     {
       "path": "ciphers/mary-stuart-castelnau-letters.html",
@@ -4749,7 +4777,7 @@
     },
     {
       "path": "ciphers/monoalphabetic.html",
-      "sha256": "5bfa0f55a96bef7581f4304ee4204a4d10126d588180aac067ff98aad4d54d8c"
+      "sha256": "aeb42ac3b0720be979b7a6d5a128dab3c6264106ca2caed4b207df0778af61c6"
     },
     {
       "path": "ciphers/morse.html",
@@ -4757,7 +4785,7 @@
     },
     {
       "path": "ciphers/myszkowski.html",
-      "sha256": "5be65ad7f1495164b9a1a444365a8189247f310e9269c0c8b81627070f43c0f0"
+      "sha256": "4458dfce834361339a71aa4137e13cbef2b46a8e638ca445cfa75c20df0933ac"
     },
     {
       "path": "ciphers/national-treasure.html",
@@ -4765,19 +4793,19 @@
     },
     {
       "path": "ciphers/navajo-code-talkers.html",
-      "sha256": "6e03749e90f6ca9a60ca69c17ad65e9e51ec614e0c033647d78b0770db7bd0ff"
+      "sha256": "926eb3054bdf0879a0e3224ea1c4b8ae12d78549e1c4392b1c6e7aa10c607d50"
     },
     {
       "path": "ciphers/nema.html",
-      "sha256": "b7bd925c465457e987e2a8cdb373afe9bbb8d2207c9ac6b64dd45c7adc0cd794"
+      "sha256": "1140fd0d9ce0277b910cf6fcc22046b095377c2d0fa7df1f5ccdc3e4563307ea"
     },
     {
       "path": "ciphers/nfc-deployment.html",
-      "sha256": "3a1bc1db9593157b27469b1690d9a19c4f510b02022a5a0ee3c37ac89e9752fb"
+      "sha256": "c2413d0cfcaa49bd878dd813506707dbbfbd4fc26aa5b888e881bcaed091ec66"
     },
     {
       "path": "ciphers/nihilist.html",
-      "sha256": "dc847e6b4838557ccb5ec8b2319ef3c62ce8e9dfcc6c0ac7727c0301e6428518"
+      "sha256": "20c86ad9cc1b02c921287adc0525a495217c0482590bd9478a24ba0972ff6556"
     },
     {
       "path": "ciphers/nomenclator.html",
@@ -4789,7 +4817,7 @@
     },
     {
       "path": "ciphers/one-time-pad.html",
-      "sha256": "5f92b3a921e1bafab2d404ecd37ad79591aba2b5b63bebdca44dc631e062847e"
+      "sha256": "6316c294184ca20fb48d495b89451f0d33d3bb9ceb785eed40c10e6da27ffd78"
     },
     {
       "path": "ciphers/patterson-jefferson-cipher.html",
@@ -4801,27 +4829,27 @@
     },
     {
       "path": "ciphers/pigpen.html",
-      "sha256": "5f0df34bda75dda5a0339a40a27f87a3d8912348b8f89618642217932f5b0c9f"
+      "sha256": "10e6a029ae075180e8e684875c04443856e52ae65d16323a5ead0707ce46141d"
     },
     {
       "path": "ciphers/playfair.html",
-      "sha256": "b114655a00bce66e21de7e1d30c7e1153513fc45bb0d3ce4b6e15ae72ca4e1f2"
+      "sha256": "2b3f5c5d00645578f68cd399730f818b95ee4a419f9f01f136e1ffb7a7f2c469"
     },
     {
       "path": "ciphers/polybius.html",
-      "sha256": "7b9cb34e53ec45ab83c2303ab48bd7a62bfad2ec0cfab6fcf182a622c6f6df8b"
+      "sha256": "6488248cdf192e0d40e49c021cf625b93ba8ad0a26638440acc1a88a2f6bfb89"
     },
     {
       "path": "ciphers/porta.html",
-      "sha256": "175129c4f4efe926f714c160583ea08f386864c25d74ca30300d8c213a8f2d48"
+      "sha256": "3070cec572b055942147968de3f8dd6fb7fed1737aa9cf321d9f789826fb8b02"
     },
     {
       "path": "ciphers/purple.html",
-      "sha256": "ba60ff4cca43d25b7ed6943832f8821e39a49d668198e3104d3b451f8adaa79c"
+      "sha256": "5ba9f7e2c3c1fe3922506b2514163d6e493df71b8def35df0328b4ff582e534c"
     },
     {
       "path": "ciphers/rail-fence.html",
-      "sha256": "1b94d507087619312e2055c29a1069a7aa24eeee498550dfb2ed5b76514d39e6"
+      "sha256": "6cbc4b93a87e72067905dc885e3cb29ba80ce039bebf01c3f4a4faf340f44012"
     },
     {
       "path": "ciphers/red-army-faction.html",
@@ -4841,11 +4869,11 @@
     },
     {
       "path": "ciphers/rot13.html",
-      "sha256": "c6b647ee47bd15956e632c390515f8bf316dad44ff0d9eb8add5400558904d09"
+      "sha256": "860c23c5dc33f86318ba5f64dc5787cfa7fb36d434f42f5ccbeb3a6dae82ab6c"
     },
     {
       "path": "ciphers/rs44.html",
-      "sha256": "b3f7eba9a2fc1312077f345f448c546046f5f0f0523cc0d48448df51d5aaa24c"
+      "sha256": "5ae4b0dbc94eacef2ad149957fccc550f5947f0e6ecaeba256b39e7b9c445361"
     },
     {
       "path": "ciphers/rsa.html",
@@ -4853,7 +4881,7 @@
     },
     {
       "path": "ciphers/running-key.html",
-      "sha256": "ee6b82780d662f9cfd20a11a842ec0cef0f5e05e49c5da781ca3993cab8d8606"
+      "sha256": "85ff4f3621121cf272bdf7ea32ae725332480d786dd1653387e98acf58c82203"
     },
     {
       "path": "ciphers/sator-square.html",
@@ -4861,7 +4889,7 @@
     },
     {
       "path": "ciphers/scytale.html",
-      "sha256": "f0fd522bf905933c251887e36a10602032c607a5c7f1e0a699aab42758282909"
+      "sha256": "387cd52cb02e360877789233e00667d0e6ba6f2a471b0fbc0099b319335c1119"
     },
     {
       "path": "ciphers/sha256.html",
@@ -4889,11 +4917,11 @@
     },
     {
       "path": "ciphers/sodark.html",
-      "sha256": "bec0c0c627c6296495ebabae35e2e7df386d5d198088f9cc1cae5ad1a59ff799"
+      "sha256": "68b415022088f4c3caadcfc1abad68e4b509a97519b5ab1db3645fe51836c344"
     },
     {
       "path": "ciphers/solitaire.html",
-      "sha256": "a32d0539c1588b8607217956a0748e5332d7c382818a949e77e71f2326e2765e"
+      "sha256": "401a0dd76ede5e94af497c30b44732a6464d2fd81918e726c662c219308877f9"
     },
     {
       "path": "ciphers/somerton-man.html",
@@ -4901,7 +4929,7 @@
     },
     {
       "path": "ciphers/stager.html",
-      "sha256": "07c33dfd25a8f1407888fc1c0a904579f56418f3e3331aa1449d0a8fdf064052"
+      "sha256": "8b0a85f7ffe14e12f5722000caad6c6f0971d270d387a2835ff04519d3a62a74"
     },
     {
       "path": "ciphers/station-hypo.html",
@@ -4909,15 +4937,15 @@
     },
     {
       "path": "ciphers/straddling-checkerboard.html",
-      "sha256": "1c1f2314f57f74f4454cc26a54ab60240846177480b56da9870f0169b9db1f5c"
+      "sha256": "eae998e240d253d180f7b2895830bc67614802063db3071898c6d03bc7e21533"
     },
     {
       "path": "ciphers/tap-code.html",
-      "sha256": "bee17a7c79ae5c3a5668791db1f4eedd6dacab1c764da3fed8fe69f41f47b2e3"
+      "sha256": "7112990894c29cd83be848440b723c92366ebc4b7011d438f0eaaf6ffe7f4822"
     },
     {
       "path": "ciphers/trifid.html",
-      "sha256": "1bfcb74138c24cc0bfc39fdc985a839e86ee1d04e1ecd688bc132ba45681eff5"
+      "sha256": "deeb21d4451856de44055a693fdba6714fb674a5e8f9f15a6a45289477b00ee8"
     },
     {
       "path": "ciphers/trithemius.html",
@@ -4925,11 +4953,11 @@
     },
     {
       "path": "ciphers/turning-grille.html",
-      "sha256": "c8174bdaba5e74f11e8e812e44a1fa00b5a6838e126ee83f89843585f4e63e56"
+      "sha256": "4e8d8e5577b1792f8c7e48464c35c810bee1226aefe9d48adac202ede508e2d3"
     },
     {
       "path": "ciphers/two-square.html",
-      "sha256": "5b4bd9bab9e3d5379d8df86bb70e7579242e759e0dbc78cdcdd7a83038ee9d22"
+      "sha256": "0b96481d47b8cda3e7873584580056d44ae6801e9a0a33f524dde5c884e37ad9"
     },
     {
       "path": "ciphers/typex.html",
@@ -4937,7 +4965,7 @@
     },
     {
       "path": "ciphers/ua-8295.html",
-      "sha256": "9c7dfd286ac151b17619a18d4f2aeb907421bab1883bd8081d40a580c009c51c"
+      "sha256": "139c13691f62cf7acd62ff509ef96c20be3a19abeefeab6c1ebe4f20623a632d"
     },
     {
       "path": "ciphers/venona.html",
@@ -4945,11 +4973,11 @@
     },
     {
       "path": "ciphers/vernam.html",
-      "sha256": "2d82900165bf224fa1956de17a8e88a7b130f42aa77bbf681c082539a3755118"
+      "sha256": "428368eb2963e33a1199d6e43d1537fba7b48889e926cf3a85182061b7ab2c54"
     },
     {
       "path": "ciphers/vic.html",
-      "sha256": "15fa8e48c1c05f73fc23831b5f315bbb38a070cfa76e32ff5acf30ccd6147788"
+      "sha256": "a13bcf9632e293eb828fe55b7dd39b444686884a97410f6da94855fa5d0437bf"
     },
     {
       "path": "ciphers/vietnamese-underground.html",
@@ -4957,15 +4985,15 @@
     },
     {
       "path": "ciphers/vigenere.html",
-      "sha256": "dc1749eb11d697304b19bbf66efecfa6b519ed444d3898967b67405f900b283a"
+      "sha256": "b46db8501f7bcb1303e96df9e2c7a496901df10cd88276e355008e24ec8a5b81"
     },
     {
       "path": "ciphers/voynich.html",
-      "sha256": "f2e72a028d2ecfc06234e72ce16e2806437c7a79c56b487d98b65070f38a7a18"
+      "sha256": "5fbf869c8af19071306800ed24f2c3594fb65724c28f18f2fcf4880e50bbaf73"
     },
     {
       "path": "ciphers/wadsworth-cipher.html",
-      "sha256": "9639e91b0eb50dd8db9c65bca8be41ed8cfd096f92d6b613f3ceb1bea303b380"
+      "sha256": "7835593b09bb0e4c24eb6a0a75cb5b5b90d4fe781bef3e06c17e0570695eb1d4"
     },
     {
       "path": "ciphers/wallis-ciphers.html",
@@ -4989,7 +5017,7 @@
     },
     {
       "path": "ciphers/zodiac.html",
-      "sha256": "ddd4b300cf7223f8c61ff005270e67fc0e532d7aa335fdf4960ff16228ad43e4"
+      "sha256": "9bba49815ceb3cb7d87d83ba40aa5b036ee45b609050cae6ac27df9af63b1f07"
     },
     {
       "path": "classical-guide.html",
@@ -5009,11 +5037,11 @@
     },
     {
       "path": "comparison.html",
-      "sha256": "b4bea1b978b2954a9b2c1cd4c7716c0227123849de228d454e612a5113ff5261"
+      "sha256": "b8bb3a14b087ff827297b3d117009c049d724524928ca80c7f5c462d50d23625"
     },
     {
       "path": "cryptanalysis.html",
-      "sha256": "481101ea02cd1732a1b95987cb151a4f7d5ca50bcb0712539cf3a372cc5937cd"
+      "sha256": "698269f1ca749fa9a8fa155dcbc24be1c9fa0643b731e759c373e6e7692ac5bf"
     },
     {
       "path": "embed.html",
@@ -5121,7 +5149,7 @@
     },
     {
       "path": "halls/machines.html",
-      "sha256": "c0f9fb167596b434aed00463d0bdc7df15972fe8208c29b64ae902e955c52af9"
+      "sha256": "ea791b8c18440a4ee02d97a56e380c499e1beabd1774fa5b51b890a966c07d6a"
     },
     {
       "path": "halls/military.html",
@@ -5157,19 +5185,19 @@
     },
     {
       "path": "index.html",
-      "sha256": "5558123e760ec9dd4901f821166b3f404c579333f22fd159eae33ed037c03dc1"
+      "sha256": "d20ec8ae744d5499d632cf3d82de2832b933d1856dd75aa5699f21ef5a10b8dd"
     },
     {
       "path": "lab/decipherment-cases.html",
-      "sha256": "a691e01145d4a99d7da2e1ecd8b1ad65420c3952d5f5e0f23c8e18e295d96fec"
+      "sha256": "75f26af9b8f5ac7d2dbc623215fbbcff2ca6eb1c5a5ca67561cc545aca461a36"
     },
     {
       "path": "lab/evidence-workbench.html",
-      "sha256": "9a4b67cf116ad31d3545be18e07986309cd3d1fb94fa63760d049a63d320716f"
+      "sha256": "7f24651223fb7904221b71ef1831e29e76621ad4ac72e4fbd00603b1649493d8"
     },
     {
       "path": "lab/intercept-to-intelligence.html",
-      "sha256": "8e95c4fce4a53cdac239392e63c15b4a719f1a5e20d741f2bf60ff8844f4e1c7"
+      "sha256": "c821bf4d176a5cc1b83ac1ffbd17ee0156523529c7a5a2fb3713e47461b611a3"
     },
     {
       "path": "lab/kisses.html",
@@ -5185,7 +5213,7 @@
     },
     {
       "path": "lab/reading-the-evidence.html",
-      "sha256": "5ff80870e52987837dfb64a9f73597ee64e1dd86bd3af4bf5356b246f81df32f"
+      "sha256": "da866d13389dd0346d5d5e095658305fda82ecfa70e812d2f2011f38c16604f0"
     },
     {
       "path": "lab/traffic-analysis.html",
@@ -5193,7 +5221,7 @@
     },
     {
       "path": "lab/workbench.html",
-      "sha256": "149988dbaa3216bed7e4051c98180e50806858cd063576e1f7b315df7a6d212b"
+      "sha256": "685fe211f219c6e6c82905182afe9c04ac03634b878f8af2f7080966afdd94a3"
     },
     {
       "path": "lab/working-is-not-secure.html",
@@ -5209,7 +5237,7 @@
     },
     {
       "path": "museum-map.html",
-      "sha256": "4268385828389c35554bb4a569cbadbf9cacfd84a33bc245bd860ba04af046f7"
+      "sha256": "85ec661dce7e7c4ea93a586537f7229404ed608fcf9bb526278c1af5e627247b"
     },
     {
       "path": "my-path.html",
@@ -5233,11 +5261,11 @@
     },
     {
       "path": "search.html",
-      "sha256": "d2c89b4d38055d6f8f44ec23f55d9ff4b504ce8118d366496c5c2fe2c30e0aed"
+      "sha256": "32b1efd53dec37de842246c2b7a8dc69a9f6dbca957a39f2e2e6052bec6a6dbb"
     },
     {
       "path": "teaching.html",
-      "sha256": "9a71f60f0b69247671db2dfa7880209d3fe26fd3645f9afa6b0973076bf82942"
+      "sha256": "f3ba7309b58d8cbc461548c0feeefaa852f769e20f4f52f2bf1d508a3943cca8"
     },
     {
       "path": "the-book.html",
@@ -5245,7 +5273,7 @@
     },
     {
       "path": "timeline.html",
-      "sha256": "b7ddce84f63aca11dd4f02d2abeced8db398df8e10a4f69dff9294cc2dd9650b"
+      "sha256": "561a1994f7257924cac6b1c974e861629b4728835e5d7a1488ebef0cfae6b6e8"
     },
     {
       "path": "tours/index.html",
@@ -5273,11 +5301,11 @@
     },
     {
       "path": "js/artifact-cards-data.min.js",
-      "sha256": "4a07c7c77963fde13fc749ee2a248dcc47163c1041694a0a5a7abd8529785d5a"
+      "sha256": "f3a1f97147c3312d3c8bd0fa408aa07831049ae9cddca06222861e8849aa5f9d"
     },
     {
       "path": "js/artifact-cards-data.js",
-      "sha256": "0ce4aac0c57e05b5a5ec1ea9aa548bc1f911f14c50ad1b4b2dfbc06bb37662bc"
+      "sha256": "4fc3bc4767fed7a59ae9d3953f91ae8ccdc2b89ebd84c6e699a8faf10342e749"
     },
     {
       "path": "js/artifact-cards.js",
@@ -5294,6 +5322,10 @@
     {
       "path": "js/breadcrumbs.js",
       "sha256": "7e96cb5dbe3e892d9f8631e46ef078d61fcb708987d37c46e480c2f0a1c5ebc1"
+    },
+    {
+      "path": "js/charles-v-case.js",
+      "sha256": "f2c79070752b63d3ea8b59cedfe20237275cc303a5ab7478918d149bebd4ea1b"
     },
     {
       "path": "js/chi-setting.js",
@@ -5421,7 +5453,7 @@
     },
     {
       "path": "js/footer.js",
-      "sha256": "b95db3598478b7d8c8c1a11e164ca00e638f122358e31b862a97d50033be90ad"
+      "sha256": "230ab84680735fbae066d373cae9bf7888f50d9b8c08dcabc68b3d8be88a9cd0"
     },
     {
       "path": "js/historical-ciphers.js",
@@ -5477,7 +5509,7 @@
     },
     {
       "path": "js/reading-evidence.js",
-      "sha256": "f57389c6a5775cc985d8f1e2882fcc0e51129471e43517a8bc72922b424e3293"
+      "sha256": "663b52e6a9216018ee024b7a04df9f18ff5e00d3193e04cf085278b5ab80962b"
     },
     {
       "path": "js/research-cases.js",
@@ -5489,11 +5521,11 @@
     },
     {
       "path": "js/research-model.js",
-      "sha256": "7c0fbb1304ab4e5484e403e9a68ad405b09a901d8e62dc49accaaec808b3fd56"
+      "sha256": "c97d533d67d6cccd6c22e6fc3cf919a0f346040c343c2dc675565a44f92241f9"
     },
     {
       "path": "js/research-ui.js",
-      "sha256": "efca20fdbbb15f84fd17b565409bc3a781b6892b635e933fc485f29fab30abc9"
+      "sha256": "23db4eccd3abd554f5f92f9bb94b48940a13e1fcc5a188be445a478c9b2cdf5e"
     },
     {
       "path": "js/research-worker.js",
@@ -5537,7 +5569,7 @@
     },
     {
       "path": "sw.js",
-      "sha256": "b2ba995963c5f085569d04e11ceaedbfcea64f1a9e0c207e440ba100451e0606"
+      "sha256": "5c906538589f9af8c58c8d98e3ec2b863029282ecfb827fc2cc2b13d3f0d062d"
     },
     {
       "path": "tours/foundations.json",
@@ -5577,19 +5609,19 @@
     },
     {
       "path": "js/search-index.json",
-      "sha256": "ec44ab28f4b76eb53b95b8be638a8b3b5a234196a64c04505931446158cd296c"
+      "sha256": "779a79b74478fced2d214aef04e484747b00ca518b3b75b8b5c1c556f2aba505"
     },
     {
       "path": "data/artifact-cards.json",
-      "sha256": "2061c20b1a06cc84ca5ee7c35f92bcf05ccd129d29743e53ec3b62021e4a4eba"
+      "sha256": "b3cb27d55c6fb26e973713f907d96fd2b3c9e68f12d010034dc33143a98db6c8"
     },
     {
       "path": "data/exhibit-counts.json",
-      "sha256": "45dbc33a28d11a380dc2beb925e75aac522c43e064ef7c5180256e423e8e1685"
+      "sha256": "338903867b68687a2ae4496fb5bf0a13eb4b6449bb6f9494e36426bab84e30eb"
     },
     {
       "path": "data/exhibit-trust.json",
-      "sha256": "50c55a47a1ab9db7db7910c80840627332182cc6b3045b9363a5dfafba87b852"
+      "sha256": "94026500ffc67a7c36535e5b6758474d2ef881ea5fba1924e90d7c40f881de7b"
     },
     {
       "path": "data/trust-labels.json",
@@ -5633,7 +5665,7 @@
     },
     {
       "path": "data/research/v1/evaluation.json",
-      "sha256": "2e06136874d51905263143b322696477f415cee182e420800a9c37d921b840d5"
+      "sha256": "a3d545aa2e932bc6dc7ab8fc172341b6e8f0764d32d383d30477a5c4727e8439"
     },
     {
       "path": "manifest.webmanifest",
@@ -5653,7 +5685,7 @@
     },
     {
       "path": "data/research/v2/evaluation.json",
-      "sha256": "ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e9"
+      "sha256": "830fde17dbbcdf7ee4a6a16140729ae1c09d3fa18a79f7bf764c8fb18d037c95"
     },
     {
       "path": "public/teaching/columnar-classroom.md",
@@ -5664,162 +5696,162 @@
     {
       "path": "REVIEW_PROMPT.md",
       "bytes": 2586,
-      "sha256": "1dd243c6c9cdf92f70bda43770f9af1187399582a77f14c7413437bfa094d0a6"
+      "sha256": "6c6a66551995f5fece7c37c105bf3c7f0c334d61307fcec98e8044f87398fa77"
     },
     {
       "path": "parts/01-pages-P001-P020.md",
-      "bytes": 272134,
-      "sha256": "b4ba6c7bfbc93ee67fba46737f268624e3024cff857b4bfd74fd0f7ca3ccfd6a"
+      "bytes": 276122,
+      "sha256": "be02fc2b185d8f85757f018d81a4cf76043091feeffa7e885db5ebdfdefa94a1"
     },
     {
       "path": "parts/02-pages-P021-P040.md",
-      "bytes": 263057,
-      "sha256": "af53d897f806cbdbf9cf085593105e744b4a8a89580bf41bf9af3cec8ddf3ceb"
+      "bytes": 268272,
+      "sha256": "e75509f45fd4cc0798194d87c49d6a5b84f9f23c7935c0682d7fd396dfc31997"
     },
     {
       "path": "parts/03-pages-P041-P060.md",
-      "bytes": 277776,
-      "sha256": "751b7839473c340c059b76a6c0666816f5d515d97e066c632811086f3e8e3edc"
+      "bytes": 281810,
+      "sha256": "9c9e4dfb750dcd31998359cd80bc2cf55b1cdae7090511d2931b07f1dddbeb62"
     },
     {
       "path": "parts/04-pages-P061-P080.md",
-      "bytes": 287742,
-      "sha256": "c282e87f9f786d10df1c8b189491056e26473f654aa9eb5bbb69fd03ac448a9f"
+      "bytes": 287278,
+      "sha256": "eef0c2d0adc95748aeae2f4c2d1d41e0bd56636f679e154b908d2175de333dfc"
     },
     {
       "path": "parts/05-pages-P081-P100.md",
-      "bytes": 268245,
-      "sha256": "1702d7eff5c43ae9b80e4be6f8b8f82f7cb463796af5eb4cfe9ed885c99f4fa3"
+      "bytes": 275599,
+      "sha256": "08609dbf9a9345bc5185004f5054f42ff428e7b776c8f9890b26fe19d3beab92"
     },
     {
       "path": "parts/06-pages-P101-P120.md",
-      "bytes": 303237,
-      "sha256": "207e5b28b13e7f8e5eaa5e627b4148578d2da0620f4a2e397ec35ec47db164eb"
+      "bytes": 311163,
+      "sha256": "25f7186cdb14ef49f386894002bfc00accc2415d8c65209171b3a37eb26772f7"
     },
     {
       "path": "parts/07-pages-P121-P140.md",
-      "bytes": 267313,
-      "sha256": "f9b4c01c7bd290298b8a375ffd79e9398b5e932cf8d180fdbe9bfb174294f188"
+      "bytes": 269452,
+      "sha256": "ebe571fc480ab525c29aab4e0a50fbc24e56a8098ae52a0ac265e2798b70d353"
     },
     {
       "path": "parts/08-pages-P141-P160.md",
-      "bytes": 308878,
-      "sha256": "600784386b5ad1c4c4b7f85cf9b2c5a3656d21ffa71c2d092416abcbd9ba6832"
+      "bytes": 313178,
+      "sha256": "0957e9a45b2afc1af96343d5be6f21205089924fb86766b5ac265544771b2df1"
     },
     {
       "path": "parts/09-pages-P161-P180.md",
-      "bytes": 434923,
-      "sha256": "e836953984f178df04add6478254cb6b4e2c5243cf91a17718f31de57630bbb4"
+      "bytes": 436124,
+      "sha256": "621fc765eb3d1cd6aa518d17c6f82c5eaf1e74f1982a7a78c6c14d2e793a2baf"
     },
     {
       "path": "parts/10-pages-P181-P200.md",
-      "bytes": 278378,
-      "sha256": "dae666f4027437cbf793d3282ffc9c81349b8c183ec69728d6ed6c2c838cfeb7"
+      "bytes": 282023,
+      "sha256": "ba9f3420a7af10e3db9e8b793d6f141ecf365b01a0fa81529bd0d2c11e7f0939"
     },
     {
       "path": "parts/11-pages-P201-P220.md",
-      "bytes": 377799,
-      "sha256": "591cb7893d45c7a429417d8ba2e6efc4f3bdfd3f78c4f04a67f92e33cd718ab4"
+      "bytes": 404998,
+      "sha256": "503876561a459463c35568a4a7c19b2c9ed914102d189abb7024af51186f078d"
     },
     {
-      "path": "parts/12-pages-P221-P227.md",
-      "bytes": 125276,
-      "sha256": "f5d45d9ff00dd3021cca13e4428b7a983fcc423364062156697d2223855b8d38"
+      "path": "parts/12-pages-P221-P228.md",
+      "bytes": 136090,
+      "sha256": "aeb5e886096f3e2f8743c9e5f104f2e4bde67657178bfb0be73182c2d5116bbf"
     },
     {
       "path": "parts/12-source-register.md",
-      "bytes": 128516,
-      "sha256": "00f4ab17dac37153fb3d86d90a977d5e23f70c055e068e0f7a0cbc7ecf86c4c3"
+      "bytes": 133932,
+      "sha256": "11f217d3a8f01890b9b489846a1c9d25c37251368c612ada9691442d06ce941a"
     },
     {
       "path": "parts/13-01-javascript.md",
-      "bytes": 174444,
-      "sha256": "920b4427e31e90fc87229b34cc9bbd4db523b64c7f6d18582ebeb8edd1e07bee"
+      "bytes": 176830,
+      "sha256": "fad31346b12ba5a0c05b0a0a3f78f25a309508d1f62be64089160265ca4c4dd4"
     },
     {
       "path": "parts/13-02-javascript.md",
-      "bytes": 18742,
-      "sha256": "b463f975ae38fd5cbd94c91f110331216818080f45c462f2d9f32ffa4568a81d"
+      "bytes": 24558,
+      "sha256": "e8adc677b2224aace12d20a7a9a4f06dd285fe01c4a52ee6de841b7a16c68e4e"
     },
     {
       "path": "parts/13-03-javascript.md",
       "bytes": 181791,
-      "sha256": "1b883fccba08b06403fb28868539c70e779a9812a9644c5f93e275e4deb49d6f"
+      "sha256": "0a3d45421efd471556d4640b063bb0b51a6c64ae852e13737fe07106de834793"
     },
     {
       "path": "parts/13-04-javascript.md",
       "bytes": 170378,
-      "sha256": "58accfaa6eba1de92a1636ff9508c8dd35a42c72d32a1faabd6993efd62105b3"
+      "sha256": "386d003dc86e3d401be116bfee6ed12c4dc8101db344daa1b7bf838ad586e771"
     },
     {
       "path": "parts/13-05-javascript.md",
       "bytes": 177764,
-      "sha256": "252bbb371434971146faf6adb9cac1e221d9f679b28ab63ae668043a15cd94bb"
+      "sha256": "e74c2390e29e872bc7fb80e1e9f6918f7c5d24a888c059c2e7453e2fb02b8ffc"
     },
     {
       "path": "parts/13-06-javascript.md",
-      "bytes": 162326,
-      "sha256": "c770fba747c550de6616084a05e43174794d27ecc2c18eb2f23847e81d7b469a"
+      "bytes": 176484,
+      "sha256": "f9b6d35d58ff55f6ca09c8bbc071f2effed6ec3c10c6e14b627d7870901d9a74"
     },
     {
       "path": "parts/13-07-javascript.md",
-      "bytes": 179137,
-      "sha256": "e37e22284d7d588670b1588d696c6767ad687f7f6e24b179567fba72b018c8ec"
+      "bytes": 152591,
+      "sha256": "af1a15aa9b28d8d42f79b2f19747cbdd2d5bd112a817ff4fdcc1708eaf692566"
     },
     {
       "path": "parts/13-08-javascript.md",
-      "bytes": 23566,
-      "sha256": "4e9522c48568a846cf5e2545d8eb6e4edbae3ae4cd1e49be81dfda1d3174a1c4"
+      "bytes": 71255,
+      "sha256": "1f4920cfa297ecb8bac66854e3fe4e5a118d709e850138c1720a3822dc43ab5c"
     },
     {
       "path": "parts/14-01-data.md",
       "bytes": 48445,
-      "sha256": "041b2a89b00c5aade8821b51b16479b693b0685ae17428bbab1f77b963058c84"
+      "sha256": "0ca71f54b57ba20a1cfa720a35ece040c00f8f451ac8373067119f9a81f5b5d2"
     },
     {
       "path": "parts/14-02-data.md",
       "bytes": 465598,
-      "sha256": "fedc85084a3e83bccc701250dc3481532e39bb1eac8ef62c93885b4cc8d69330"
+      "sha256": "2a704148cf395128a43182ab0d333d5e6966f81ffe095894554b52c1ac369523"
     },
     {
       "path": "parts/14-03-data.md",
       "bytes": 176025,
-      "sha256": "bddf9b154e77e52027f5dee1e8c5aa4ef4553e29125ced464cb26b365e520fdc"
+      "sha256": "ad678448701430a654cf71540b3b470457d68c531bbdedd389e38f6fc388f8d4"
     },
     {
       "path": "parts/14-04-data.md",
-      "bytes": 110988,
-      "sha256": "7d7b46a1a4bcfe6700013999607bfa8da430ad26c067a89dcd889ae4800a21b2"
+      "bytes": 111794,
+      "sha256": "fc04e08fad46815ef15b3afd273d3582a06e146c4526bed767bfb3b97a14e7d4"
     },
     {
       "path": "parts/14-05-data.md",
-      "bytes": 171990,
-      "sha256": "4130229323566aa681ac67b62a8ab2f0e42fc3d0c2310ed821496bc83dfd485f"
+      "bytes": 175424,
+      "sha256": "52a7b09a0a5ce9b7208e3983080cec41cdeffdeffcae8953efacb71643eb77e1"
     },
     {
       "path": "parts/14-06-data.md",
-      "bytes": 118334,
-      "sha256": "3a514ebdf9ebf73c5703362c09247d5ba2dce217f1d82f9cf11f6d7b7617aee8"
+      "bytes": 125087,
+      "sha256": "01a9c2b5e903d1940374e5ca6e12f438a0278eb56cebf8d28284151f8a772435"
     },
     {
       "path": "parts/14-07-data.md",
-      "bytes": 69047,
-      "sha256": "a06a4232c6d60b3d008a7dbe1b1c3062cb99ddee5689be62b29e8d9874dbf579"
+      "bytes": 69061,
+      "sha256": "e5a9872a1456f46be2d10aa23befab4e57df0b81a32e9239a5471490ab48662a"
     },
     {
       "path": "parts/15-classroom-worksheet.md",
       "bytes": 5593,
-      "sha256": "ac052d44d631d96fe92dbf9a9e0ab15f6eff5ae6778c74d7358f1666c210b8ba"
+      "sha256": "5f404c000ccaca2f558e51e2e43ad9ceb7acf6a3ceeffc2c0279671a94ca3677"
     },
     {
       "path": "CIPHER_MUSEUM_AUDIT.md",
-      "bytes": 5876043,
-      "sha256": "fde7d164ea26eacdb4d6d7b2afc51a03a5c9fead087f9795dbceb45054774a25"
+      "bytes": 6013405,
+      "sha256": "aaa0a473074e0bac2d0496179707185f92cc8ae3f1ab24c404f624d344effd6f"
     },
     {
       "path": "README.md",
-      "bytes": 6287,
-      "sha256": "a0b50f45f4c25c596e52a41f7d9c4a9219d99759e4926f699735a01d383acd10"
+      "bytes": 6322,
+      "sha256": "55ea701efa12d3f6c05168d5ba128073498f5005b12f0a8842fb613301bb715b"
     }
   ]
 }
