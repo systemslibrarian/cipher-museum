@@ -35,6 +35,7 @@
     "build:language-profiles": "node scripts/build-research-language-profiles.js",
     "eval:research:v2": "node scripts/evaluate-research-v2.js",
     "eval:profile-recovery": "node scripts/evaluate-profile-recovery.js",
+    "check:profile-recovery:v2": "node scripts/check-profile-recovery-v2.js",
     "check:profile-recovery": "node scripts/evaluate-profile-recovery.js --check",
     "replay:profile-recovery": "node scripts/evaluate-profile-recovery.js --replay",
     "sweep:solvers": "node scripts/sweep-solvers.js",

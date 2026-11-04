@@ -81,6 +81,34 @@ function validate(html) {
     }
   }
 
+  // Additional routes are title-level companions, not fabricated chapter maps.
+  const additions = {
+    tuchman: ['Barbara W. Tuchman', '1985'],
+    sinkov: ['Abraham Sinkov', 'Todd Feil', '2009'],
+    'singh-young-readers': ['Simon Singh', 'young-adult', '2003'],
+    beutelspacher: ['Albrecht Beutelspacher', '1994'],
+    wrixon: ['Fred B. Wrixon', '1998'],
+    goldreich: ['Oded Goldreich', '2001', '2004'],
+    stephenson: ['Neal Stephenson', 'novel', '1999']
+  };
+  assert.match(trails.textContent, /first four routes are chapter-pinned/);
+  assert.match(trails.textContent, /title-only concept trails/);
+  for (const [id, labels] of Object.entries(additions)) {
+    const route = trails.querySelector('#' + id);
+    assert.ok(route && route.tagName === 'DETAILS' && route.dataset.titleOnly === 'true', id + ' needs a title-only disclosure.');
+    assert.ok(trails.querySelector('.fr-trail-nav a[href="#' + id + '"]'), id + ' must be reachable from the trail picker.');
+    for (const label of labels) assert.ok(route.querySelector('summary').textContent.includes(label), id + ' edition missing: ' + label);
+    assert.doesNotMatch(route.textContent, /\bpp?\. ?\d|\bpages? \d|\bchapters? (\d|[IVX]+\b|“)|\bch\. ?\d|§/i, id + ' must remain title-only.');
+    assert.equal(route.querySelectorAll('a[href^="http"]').length, 0, id + ' must not link a book copy.');
+    assert.equal(route.querySelectorAll('.fr-trail-stops > li').length, 3, id + ' needs three concept stops.');
+    for (const stop of route.querySelectorAll('.fr-trail-stops > li')) assert.ok(stop.querySelector('strong') && stop.querySelector('a[href]'), id + ' needs a named activity and an exhibit.');
+  }
+  assert.match(trails.querySelector('#tuchman').textContent, /do not reconstruct the telegram/);
+  assert.match(trails.querySelector('#singh-young-readers').textContent, /distinct from the adult/);
+  assert.match(trails.querySelector('#goldreich').textContent, /does not implement the books’ constructions/);
+  assert.match(trails.querySelector('#stephenson').textContent, /fiction, not a historical source/);
+  assert.match(trails.querySelector('#stephenson').textContent, /not recommended protection for real secrets/);
+
   const legalSourceHosts = new Set([
     'inventwithpython.com',
     'store.doverpublications.com',
@@ -145,6 +173,12 @@ assert.throws(() => validate(html.replace('<a href="#purple-books">', '<a href="
 assert.throws(() => validate(html.replace('lab/decipherment-cases.html#maya">Maya case', 'lab/decipherment-cases.html#mayan">Maya case')), /Missing reading trail anchor/);
 assert.throws(() => validate(html.replace('tour=writing-systems', 'tour=writing-system')), /Missing guided tour/);
 
+// Prove that new title-only and scope safeguards reject regressions.
+assert.throws(() => validate(html.replace('Fred B. Wrixon · 1998', 'Fred B. Wrixon · 1998, chapter 3')), /must remain title-only/);
+assert.throws(() => validate(html.replace('<a href="#tuchman">', '<a href="#unknown-tuchman">')), /reachable from the trail picker/);
+assert.throws(() => validate(html.replace('fiction, not a historical source', 'a historical source')), /fiction, not a historical source/);
+assert.throws(() => validate(html.replace('not recommended protection for real secrets', 'recommended protection for real secrets')), /not recommended protection/);
+
 // Source links from other exhibits must reveal the referenced book, not leave
 // its source and chapters hidden inside a closed disclosure.
 const navSource = new JSDOM(html).window.document.getElementById('reading-trail-navigation').textContent;
@@ -164,4 +198,4 @@ caseLink.window.eval(navSource);
 assert.equal(caseLink.window.document.getElementById('purple-books').open, true, 'A deep link should reveal a case-study trail.');
 caseLink.window.close();
 
-console.log('Reading trails: four edition-pinned books, seven Sweigart stops, four case-study trails, ' + checked + ' internal routes, official sources, deep links and thirteen mutation checks passed.');
+console.log('Reading trails: four edition-pinned books, seven Sweigart stops, four case-study trails, seven title-only additions, ' + checked + ' internal routes, official sources, deep links and seventeen mutation checks passed.');

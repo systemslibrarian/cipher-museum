@@ -1,0 +1,21 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {verify}=require('../scripts/check-profile-recovery-v2');
+const dir=path.join(__dirname,'../data/research/profile-recovery-v2');
+const rows=require('zlib').gunzipSync(fs.readFileSync(path.join(dir,'runs.jsonl.gz'))).toString('utf8').trim().split('\n').map(JSON.parse);
+const summary=JSON.parse(fs.readFileSync(path.join(dir,'summary.json')));
+assert.equal(verify(rows,summary).checkedMetrics,720);
+function reject(label,mutate){const altered=structuredClone(rows);mutate(altered);assert.throws(()=>verify(altered,summary),label);}
+reject('Incomplete grid must fail',a=>a.pop());
+reject('Duplicate seed condition must fail',a=>a[1]=structuredClone(a[0]));
+reject('Invented recovery metric must fail',a=>a[0].plaintextError=0);
+reject('Incorrect scorer identity must fail',a=>a[0].scoringModelReported='pretend-model');
+reject('Unequal paired budgets must fail',a=>a[0].options.steps=6001);
+reject('Wrong source grouping must fail',a=>a[0].sourceDocument='another-work');
+const alteredSummary=structuredClone(summary);alteredSummary.groups[0].matched.plaintextError=0;
+assert.throws(()=>verify(rows,alteredSummary),'Invented summary must fail');
+const html=fs.readFileSync(path.join(__dirname,'../lab/evidence-workbench.html'),'utf8');
+assert.ok(html.includes('id="profile-recovery"')&&html.includes('id="profile-recovery-v2"'));
+assert.ok(html.includes('0 of 240')&&html.includes('All 720 conditions completed'));
+assert.ok(html.includes('No live language model was called.'));
+console.log('Profile recovery v2: complete-grid verification and seven corruption guards passed; original report retained.');

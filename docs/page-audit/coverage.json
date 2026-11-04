@@ -4162,11 +4162,11 @@
     {
       "path": "ciphers/purple.html",
       "title": "Purple (Type 97) — The Cipher Museum",
-      "words": 986,
-      "sha256": "5ba9f7e2c3c1fe3922506b2514163d6e493df71b8def35df0328b4ff582e534c",
+      "words": 1001,
+      "sha256": "6b0bad29ed3e85336ba6d1c938ac99e7c8824118b802c72612db0581bbe6a01d",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.\n3 November 2026: Grotjan's date. The page keeps 20 September 1940 (Mundy, Code Girls; Bauer, Decrypted Secrets; Bigelow, INSCOM Command Historian, 2023) and now says that Rowlett's memoir, already in its References, recalls the day as shortly before Labor Day. Checked against the text of Rowlett, Mundy and Bauer and the public DVIDS article. Three references added, by title. Guarded in tests/test-page-audit-claims.js.",
+      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.\n3 November 2026: Grotjan's date. The page keeps 20 September 1940 (Mundy, Code Girls; Bauer, Decrypted Secrets; Bigelow, INSCOM Command Historian, 2023) and now says that Rowlett's memoir, already in its References, recalls the day as shortly before Labor Day. Checked against the text of Rowlett, Mundy and Bauer and the public DVIDS article. Three references added, by title. Guarded in tests/test-page-audit-claims.js.\n4 November 2026 follow-up: corrected the unverified Rowlett quotation on both public pages, retained the memoir date discrepancy, and added seven title-only reading routes. See docs/SOURCE_READING_FOLLOWUPS_2026-11-04.md for bounded source verification and regression coverage.\n4 November 2026 hosted narrow-view audit: made both horizontally scrolling table panels labeled keyboard-focusable regions; no accessibility rule was suppressed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -6004,8 +6004,8 @@
     {
       "path": "further-reading.html",
       "title": "Further Reading — The Cipher Museum",
-      "words": 5066,
-      "sha256": "372a515027b180d6e803806d8fb613d8ae075d65a7fef0c9f0361d95ece48ebd",
+      "words": 5836,
+      "sha256": "324939c44af80d6961a59295b7e17c2b01d7e4ffa0cbcdd485c9e6d6248e13f0",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996",
@@ -6016,7 +6016,7 @@
         "LASRY-2018",
         "CODEBREAKING-2020"
       ],
-      "notes": "All book cards and reading trails reread. Full authors/titles/edition years and selected ISBNs reconciled against bibliographic records. Public ebook destinations removed while primary papers/manuals and catalogue links remain; ten prohibited and four allowed destination cases tested.\n3 November 2026: Added four case-study reading trails (traffic analysis, ancient scripts, Purple, working is not secure) for the fifteen books cited by the newer lab pages. Each stop names the edition, gives a chapter, section or printed page range, and links the exhibit that cites it; citations copied from those pages, which were checked against the user's copies. Books are cited, not linked.\n3 November 2026, later: at the owner's request the four case-study trails cite their books by title and edition only; chapter, section and page references were removed, and tests/test-reading-trails.js now rejects them there.",
+      "notes": "All book cards and reading trails reread. Full authors/titles/edition years and selected ISBNs reconciled against bibliographic records. Public ebook destinations removed while primary papers/manuals and catalogue links remain; ten prohibited and four allowed destination cases tested.\n3 November 2026: Added four case-study reading trails (traffic analysis, ancient scripts, Purple, working is not secure) for the fifteen books cited by the newer lab pages. Each stop names the edition, gives a chapter, section or printed page range, and links the exhibit that cites it; citations copied from those pages, which were checked against the user's copies. Books are cited, not linked.\n3 November 2026, later: at the owner's request the four case-study trails cite their books by title and edition only; chapter, section and page references were removed, and tests/test-reading-trails.js now rejects them there.\n4 November 2026 follow-up: corrected the unverified Rowlett quotation on both public pages, retained the memoir date discrepancy, and added seven title-only reading routes. See docs/SOURCE_READING_FOLLOWUPS_2026-11-04.md for bounded source verification and regression coverage.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "bibliography_links",
@@ -6711,11 +6711,11 @@
     {
       "path": "halls/codebreakers.html",
       "title": "Hall X: Hall of Codebreakers — The Cipher Museum",
-      "words": 3052,
-      "sha256": "f159a8f4d90eb37b63a5cc1cda6477ce9ce4e8b3e90637b2df14cf6a413ccdf5",
+      "words": 2866,
+      "sha256": "33721699259958f1d9bea4eec9186168f281093362264e16fe9d798c51f114e0",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.\n3 November 2026: the Grotjan card keeps 20 September 1940 and now notes that Rowlett's memoir recalls the day as shortly before Labor Day. Guarded in tests/test-page-audit-claims.js. The card's quotation \"one of the great breaks of the war\" was not found in Rowlett's memoir, Code Girls or Decrypted Secrets; left unchanged and flagged.",
+      "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.\n3 November 2026: the Grotjan card keeps 20 September 1940 and now notes that Rowlett's memoir recalls the day as shortly before Labor Day. Guarded in tests/test-page-audit-claims.js. The card's quotation \"one of the great breaks of the war\" was not found in Rowlett's memoir, Code Girls or Decrypted Secrets; left unchanged and flagged.\n4 November 2026 follow-up: corrected the unverified Rowlett quotation on both public pages, retained the memoir date discrepancy, and added seven title-only reading routes. See docs/SOURCE_READING_FOLLOWUPS_2026-11-04.md for bounded source verification and regression coverage.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "navigation_tours",
@@ -7157,14 +7157,14 @@
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "words": 3392,
-      "sha256": "dd9a7730d3225e8c42423dfc0c1f939cf42a6eb99dcef956eb620432be3ab1e4",
+      "words": 3581,
+      "sha256": "5537ec6d724690359314f5ae9fcb3485d7f561aad5d8f4b996d8ea5b93839e56",
       "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "JANSSEN-RANLP-2025",
         "MUSEUM-PROFILE-RECOVERY-2026"
       ],
-      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too. Developmental book revision, November 2026: added a beginner evidence exercise with an optional answer reveal.",
+      "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too. Developmental book revision, November 2026: added a beginner evidence exercise with an optional answer reveal.\n4 November 2026: added a separately labeled crossed-key/search-seed follow-up, 720 saved conditions and zero exact recoveries, without replacing v1. Arithmetic, input identity, complete grid and 240 overlap checks in scripts/check-profile-recovery-v2.js; original source/sample limitations retained.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "root",

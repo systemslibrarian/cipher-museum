@@ -82,6 +82,7 @@ const suites = [
   'tests/test-research-audit-dom.js',
   'tests/test-research-evaluation-v2.js',
   'tests/test-profile-recovery.js',
+  'tests/test-profile-recovery-v2.js',
   'tests/test-multiple-anagramming.js',
   'tests/test-pad-experiments.js',
   'tests/test-secrecy-experiments.js',

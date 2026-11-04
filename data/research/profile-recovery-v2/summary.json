@@ -1,0 +1,2945 @@
+{
+  "checkedMetrics": 720,
+  "expectedRuns": 720,
+  "failed": [],
+  "v1OverlappingConditionsIdentical": 240,
+  "runtime": {
+    "node": "v24.22.1",
+    "v8": "13.6.233.17-node.58",
+    "platform": "linux",
+    "arch": "x64",
+    "locale": "en-US"
+  },
+  "totalConditionSeconds": 157.41910347799998,
+  "groups": [
+    {
+      "solver": "annealing",
+      "group": "overall",
+      "id": "all",
+      "baseline": {
+        "runs": 150,
+        "completed": 150,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7665868198000005,
+        "positionalError": 0.8498452621999999,
+        "keyError": 0.8977478758666666
+      },
+      "matched": {
+        "runs": 150,
+        "completed": 150,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6975062824666665,
+        "positionalError": 0.7640054795333335,
+        "keyError": 0.8524323184666662
+      },
+      "mismatched": {
+        "runs": 300,
+        "completed": 300,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7781481133333337,
+        "positionalError": 0.8538513037333337,
+        "keyError": 0.8993740478333334
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 150,
+          "mean": -0.06908053733333329,
+          "min": -0.62006079,
+          "max": 0.30395136999999994,
+          "wins": 109,
+          "ties": 5,
+          "losses": 36
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 150,
+          "mean": -0.08064183086666672,
+          "min": -0.5319148899999999,
+          "max": 0.10790274,
+          "wins": 113,
+          "ties": 3,
+          "losses": 34
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "sourceDocument",
+      "id": "brantome-dames-galantes",
+      "baseline": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7533058612000001,
+        "positionalError": 0.8629310135999998,
+        "keyError": 0.9233424898
+      },
+      "matched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6616575088000001,
+        "positionalError": 0.7250598286000003,
+        "keyError": 0.8544411584000001
+      },
+      "mismatched": {
+        "runs": 100,
+        "completed": 100,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7774508546000001,
+        "positionalError": 0.8787655674999999,
+        "keyError": 0.9238131029000003
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 50,
+          "mean": -0.09164835240000002,
+          "min": -0.44444445,
+          "max": 0.17142857,
+          "wins": 43,
+          "ties": 1,
+          "losses": 6
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 50,
+          "mean": -0.11579334580000002,
+          "min": -0.400000005,
+          "max": 0.02222222000000007,
+          "wins": 44,
+          "ties": 0,
+          "losses": 6
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "sourceDocument",
+      "id": "machiavelli-commedie",
+      "baseline": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7830512749999999,
+        "positionalError": 0.8624531325999999,
+        "keyError": 0.8994099104
+      },
+      "matched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7161627723999999,
+        "positionalError": 0.7686339365999997,
+        "keyError": 0.8410589016000003
+      },
+      "mismatched": {
+        "runs": 100,
+        "completed": 100,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7841795115000003,
+        "positionalError": 0.8583801171000003,
+        "keyError": 0.9026558699000004
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 50,
+          "mean": -0.0668885026,
+          "min": -0.34364262000000007,
+          "max": 0.14191419000000005,
+          "wins": 33,
+          "ties": 1,
+          "losses": 16
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 50,
+          "mean": -0.06801673909999997,
+          "min": -0.32130585000000006,
+          "max": 0.10561056000000002,
+          "wins": 38,
+          "ties": 1,
+          "losses": 11
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "sourceDocument",
+      "id": "cicero-orationes",
+      "baseline": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7634033231999997,
+        "positionalError": 0.8241516404000002,
+        "keyError": 0.8704912273999998
+      },
+      "matched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7146985662,
+        "positionalError": 0.7983226733999998,
+        "keyError": 0.8617968953999998
+      },
+      "mismatched": {
+        "runs": 100,
+        "completed": 100,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7728139739,
+        "positionalError": 0.8244082265999999,
+        "keyError": 0.8716531706999998
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 50,
+          "mean": -0.048704757000000015,
+          "min": -0.62006079,
+          "max": 0.30395136999999994,
+          "wins": 33,
+          "ties": 3,
+          "losses": 14
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 50,
+          "mean": -0.0581154077,
+          "min": -0.5319148899999999,
+          "max": 0.10790274,
+          "wins": 31,
+          "ties": 2,
+          "losses": 17
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "passage",
+      "id": "brantome-dames-galantes-disjoint-2",
+      "baseline": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7390476196,
+        "positionalError": 0.8303492063999998,
+        "keyError": 0.9078588444000001
+      },
+      "matched": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6285714276000001,
+        "positionalError": 0.6942222216,
+        "keyError": 0.8328911764
+      },
+      "mismatched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7768888892,
+        "positionalError": 0.8634285708,
+        "keyError": 0.9110702804
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 25,
+          "mean": -0.110476192,
+          "min": -0.44444445,
+          "max": 0.17142857,
+          "wins": 22,
+          "ties": 0,
+          "losses": 3
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 25,
+          "mean": -0.1483174616,
+          "min": -0.400000005,
+          "max": 0.02222222000000007,
+          "wins": 23,
+          "ties": 0,
+          "losses": 2
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "passage",
+      "id": "brantome-dames-galantes-disjoint-3",
+      "baseline": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7675641028000001,
+        "positionalError": 0.8955128208,
+        "keyError": 0.9388261351999998
+      },
+      "matched": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6947435900000001,
+        "positionalError": 0.7558974355999999,
+        "keyError": 0.8759911404
+      },
+      "mismatched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.77801282,
+        "positionalError": 0.8941025641999997,
+        "keyError": 0.9365559253999995
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 25,
+          "mean": -0.07282051279999999,
+          "min": -0.27564102,
+          "max": 0.04807691999999997,
+          "wins": 21,
+          "ties": 1,
+          "losses": 3
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 25,
+          "mean": -0.08326922999999997,
+          "min": -0.28205128,
+          "max": 0.014423074999999952,
+          "wins": 21,
+          "ties": 0,
+          "losses": 4
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "passage",
+      "id": "machiavelli-commedie-disjoint-2",
+      "baseline": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8074226796,
+        "positionalError": 0.8938831612,
+        "keyError": 0.9180087552
+      },
+      "matched": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6962199316000001,
+        "positionalError": 0.7426804123999997,
+        "keyError": 0.8209693556000002
+      },
+      "mismatched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7910652914000003,
+        "positionalError": 0.8531958764000003,
+        "keyError": 0.8899358970000003
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 25,
+          "mean": -0.11120274799999999,
+          "min": -0.34364262000000007,
+          "max": 0.08591066000000003,
+          "wins": 21,
+          "ties": 0,
+          "losses": 4
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 25,
+          "mean": -0.0948453598,
+          "min": -0.32130585000000006,
+          "max": 0.04295532999999996,
+          "wins": 21,
+          "ties": 0,
+          "losses": 4
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "passage",
+      "id": "machiavelli-commedie-disjoint-3",
+      "baseline": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7586798703999998,
+        "positionalError": 0.8310231040000001,
+        "keyError": 0.8808110656000002
+      },
+      "matched": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7361056131999998,
+        "positionalError": 0.7945874608000003,
+        "keyError": 0.8611484475999999
+      },
+      "mismatched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7772937316000003,
+        "positionalError": 0.8635643577999998,
+        "keyError": 0.9153758428000001
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 25,
+          "mean": -0.022574257199999993,
+          "min": -0.22772277000000007,
+          "max": 0.14191419000000005,
+          "wins": 12,
+          "ties": 1,
+          "losses": 12
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 25,
+          "mean": -0.04118811839999999,
+          "min": -0.22277227500000008,
+          "max": 0.10561056000000002,
+          "wins": 17,
+          "ties": 1,
+          "losses": 7
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "passage",
+      "id": "cicero-orationes-disjoint-2",
+      "baseline": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7536778115999999,
+        "positionalError": 0.8043768996000001,
+        "keyError": 0.8644102563999999
+      },
+      "matched": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6988449852,
+        "positionalError": 0.7778723408000002,
+        "keyError": 0.8440256408000001
+      },
+      "mismatched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7617629173999998,
+        "positionalError": 0.8019452883999999,
+        "keyError": 0.8569230768000001
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 25,
+          "mean": -0.05483282640000001,
+          "min": -0.62006079,
+          "max": 0.30395136999999994,
+          "wins": 16,
+          "ties": 1,
+          "losses": 8
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 25,
+          "mean": -0.06291793220000001,
+          "min": -0.5319148899999999,
+          "max": 0.10790274,
+          "wins": 12,
+          "ties": 2,
+          "losses": 11
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "passage",
+      "id": "cicero-orationes-disjoint-3",
+      "baseline": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7731288348,
+        "positionalError": 0.8439263812,
+        "keyError": 0.8765721984000001
+      },
+      "matched": {
+        "runs": 25,
+        "completed": 25,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7305521472,
+        "positionalError": 0.818773006,
+        "keyError": 0.8795681500000001
+      },
+      "mismatched": {
+        "runs": 50,
+        "completed": 50,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7838650304000001,
+        "positionalError": 0.8468711648,
+        "keyError": 0.8863832646000002
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 25,
+          "mean": -0.042576687600000024,
+          "min": -0.29447853000000007,
+          "max": 0.09202454000000004,
+          "wins": 17,
+          "ties": 2,
+          "losses": 6
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 25,
+          "mean": -0.053312883200000015,
+          "min": -0.348159505,
+          "max": 0.08588956999999997,
+          "wins": 19,
+          "ties": 0,
+          "losses": 6
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "keyIndex",
+      "id": 1,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7603245436666666,
+        "positionalError": 0.82771838,
+        "keyError": 0.887553412
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6954079836666668,
+        "positionalError": 0.7526985516666669,
+        "keyError": 0.8470226280000002
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7825662828333336,
+        "positionalError": 0.8606509776666667,
+        "keyError": 0.9053403703333331
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.06491655999999996,
+          "min": -0.32826748000000006,
+          "max": 0.17142857,
+          "wins": 22,
+          "ties": 1,
+          "losses": 7
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.08715829916666665,
+          "min": -0.35562309999999997,
+          "max": 0.10790274,
+          "wins": 23,
+          "ties": 1,
+          "losses": 6
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "keyIndex",
+      "id": 2,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7588180733333335,
+        "positionalError": 0.8477475543333334,
+        "keyError": 0.8988196746666665
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6519833606666666,
+        "positionalError": 0.7112941709999999,
+        "keyError": 0.8069785190000001
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7792239244999999,
+        "positionalError": 0.8472118615,
+        "keyError": 0.8977049793333334
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.10683471266666668,
+          "min": -0.62006079,
+          "max": 0.30395136999999994,
+          "wins": 22,
+          "ties": 1,
+          "losses": 7
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.12724056383333335,
+          "min": -0.5319148899999999,
+          "max": 0.04255319000000002,
+          "wins": 25,
+          "ties": 1,
+          "losses": 4
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "keyIndex",
+      "id": 3,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7730839376666663,
+        "positionalError": 0.8660660266666667,
+        "keyError": 0.9060516120000001
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.728421784,
+        "positionalError": 0.8141247473333333,
+        "keyError": 0.8820841733333334
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.777059866,
+        "positionalError": 0.8524656503333335,
+        "keyError": 0.8973263181666662
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.04466215366666669,
+          "min": -0.33650794,
+          "max": 0.20668693000000005,
+          "wins": 22,
+          "ties": 1,
+          "losses": 7
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.04863808199999998,
+          "min": -0.34761905500000007,
+          "max": 0.10561056000000002,
+          "wins": 19,
+          "ties": 0,
+          "losses": 11
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "keyIndex",
+      "id": 4,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7664306693333333,
+        "positionalError": 0.8449828006666668,
+        "keyError": 0.890658393
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.724626059,
+        "positionalError": 0.7923955863333332,
+        "keyError": 0.8799346366666668
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7752953995000003,
+        "positionalError": 0.851566356166667,
+        "keyError": 0.8938551043333335
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.04180461033333332,
+          "min": -0.22857143000000002,
+          "max": 0.09202454000000004,
+          "wins": 19,
+          "ties": 1,
+          "losses": 10
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.0506693405,
+          "min": -0.22857143000000013,
+          "max": 0.08588956999999997,
+          "wins": 22,
+          "ties": 0,
+          "losses": 8
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "keyIndex",
+      "id": 5,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7742768750000001,
+        "positionalError": 0.8627115493333336,
+        "keyError": 0.9056562876666668
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6870922249999999,
+        "positionalError": 0.7495143413333334,
+        "keyError": 0.8461416353333334
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7765950938333332,
+        "positionalError": 0.857361673,
+        "keyError": 0.9026434670000002
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.08718464999999999,
+          "min": -0.38095238,
+          "max": 0.10030394999999992,
+          "wins": 24,
+          "ties": 1,
+          "losses": 5
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.0895028688333333,
+          "min": -0.3698412750000001,
+          "max": 0.10638298000000002,
+          "wins": 24,
+          "ties": 1,
+          "losses": 5
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "searchSeed",
+      "id": 41,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7755219616666665,
+        "positionalError": 0.8518460566666668,
+        "keyError": 0.9025972213333333
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7068605896666664,
+        "positionalError": 0.7814931620000001,
+        "keyError": 0.8654185986666667
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7822020719999999,
+        "positionalError": 0.8617345249999997,
+        "keyError": 0.9021309338333335
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.06866137200000001,
+          "min": -0.3768997,
+          "max": 0.10030394999999992,
+          "wins": 25,
+          "ties": 0,
+          "losses": 5
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.07534148233333333,
+          "min": -0.48176291499999996,
+          "max": 0.10638298000000002,
+          "wins": 23,
+          "ties": 1,
+          "losses": 6
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "searchSeed",
+      "id": 1729,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7679553876666667,
+        "positionalError": 0.8592783436666667,
+        "keyError": 0.8987859520000001
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6814498740000001,
+        "positionalError": 0.7458719303333333,
+        "keyError": 0.8424418923333336
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7874646756666668,
+        "positionalError": 0.8706256378333332,
+        "keyError": 0.9096972165000001
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.08650551366666669,
+          "min": -0.44444445,
+          "max": 0.30395136999999994,
+          "wins": 22,
+          "ties": 0,
+          "losses": 8
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.10601480166666663,
+          "min": -0.400000005,
+          "max": 0.06288343500000004,
+          "wins": 23,
+          "ties": 2,
+          "losses": 5
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "searchSeed",
+      "id": 2027,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.750967062666667,
+        "positionalError": 0.8259240480000003,
+        "keyError": 0.8851496969999999
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6856185403333332,
+        "positionalError": 0.7337949896666667,
+        "keyError": 0.8347472703333333
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7780450721666667,
+        "positionalError": 0.8513001693333335,
+        "keyError": 0.898061581333333
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.06534852233333331,
+          "min": -0.33650794,
+          "max": 0.20668693000000005,
+          "wins": 22,
+          "ties": 0,
+          "losses": 8
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.09242653183333334,
+          "min": -0.348159505,
+          "max": 0.10790274,
+          "wins": 23,
+          "ties": 0,
+          "losses": 7
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "searchSeed",
+      "id": 65537,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7738168573333332,
+        "positionalError": 0.8605355569999998,
+        "keyError": 0.9053457106666668
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.6787997076666666,
+        "positionalError": 0.7392667349999998,
+        "keyError": 0.831505905
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7604754718333333,
+        "positionalError": 0.8191130056666668,
+        "keyError": 0.8793899690000001
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.09501714966666668,
+          "min": -0.62006079,
+          "max": 0.06600660000000003,
+          "wins": 21,
+          "ties": 4,
+          "losses": 5
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.08167576416666664,
+          "min": -0.5319148899999999,
+          "max": 0.07361963500000002,
+          "wins": 21,
+          "ties": 0,
+          "losses": 9
+        }
+      }
+    },
+    {
+      "solver": "annealing",
+      "group": "searchSeed",
+      "id": 104729,
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7646728296666665,
+        "positionalError": 0.8516423056666665,
+        "keyError": 0.8968607983333333
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7348027006666666,
+        "positionalError": 0.8196005806666666,
+        "keyError": 0.8880479260000003
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7825532750000002,
+        "positionalError": 0.8664831808333332,
+        "keyError": 0.9075905384999997
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.029870129000000006,
+          "min": -0.28527607,
+          "max": 0.17142857,
+          "wins": 19,
+          "ties": 1,
+          "losses": 10
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.04775057433333333,
+          "min": -0.28205128,
+          "max": 0.10334346500000002,
+          "wins": 23,
+          "ties": 0,
+          "losses": 7
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "overall",
+      "id": "all",
+      "baseline": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.81267262,
+        "positionalError": 0.9205699793333334,
+        "keyError": 0.9420206446666666
+      },
+      "matched": {
+        "runs": 30,
+        "completed": 30,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7378954126666668,
+        "positionalError": 0.8214419293333334,
+        "keyError": 0.8928483069999998
+      },
+      "mismatched": {
+        "runs": 60,
+        "completed": 60,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8047805935,
+        "positionalError": 0.9004604543333332,
+        "keyError": 0.9305996265
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 30,
+          "mean": -0.07477720733333332,
+          "min": -0.2613981799999999,
+          "max": 0.05769230999999997,
+          "wins": 26,
+          "ties": 3,
+          "losses": 1
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 30,
+          "mean": -0.06688518083333332,
+          "min": -0.22340424999999997,
+          "max": 0.044478530000000016,
+          "wins": 26,
+          "ties": 0,
+          "losses": 4
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "sourceDocument",
+      "id": "brantome-dames-galantes",
+      "baseline": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.79490232,
+        "positionalError": 0.9164560450000001,
+        "keyError": 0.940457282
+      },
+      "matched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.714722222,
+        "positionalError": 0.771837608,
+        "keyError": 0.8904101500000001
+      },
+      "mismatched": {
+        "runs": 20,
+        "completed": 20,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8043116605,
+        "positionalError": 0.9042902939999999,
+        "keyError": 0.9329252415000001
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 10,
+          "mean": -0.080180098,
+          "min": -0.21587301999999997,
+          "max": 0.05769230999999997,
+          "wins": 9,
+          "ties": 0,
+          "losses": 1
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 10,
+          "mean": -0.08958943849999998,
+          "min": -0.20158730499999988,
+          "max": -0.030448715000000015,
+          "wins": 10,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "sourceDocument",
+      "id": "machiavelli-commedie",
+      "baseline": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8147221940000001,
+        "positionalError": 0.9239222889999998,
+        "keyError": 0.9443360970000001
+      },
+      "matched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.766237965,
+        "positionalError": 0.8729168810000001,
+        "keyError": 0.913553125
+      },
+      "mismatched": {
+        "runs": 20,
+        "completed": 20,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8177962655,
+        "positionalError": 0.9264349630000002,
+        "keyError": 0.953352383
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 10,
+          "mean": -0.048484229000000004,
+          "min": -0.12541254000000002,
+          "max": 0,
+          "wins": 8,
+          "ties": 2,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 10,
+          "mean": -0.05155830049999999,
+          "min": -0.15181517999999994,
+          "max": 0.013745699999999972,
+          "wins": 9,
+          "ties": 0,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "sourceDocument",
+      "id": "cicero-orationes",
+      "baseline": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.828393346,
+        "positionalError": 0.9213316039999999,
+        "keyError": 0.9412685550000001
+      },
+      "matched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.732726051,
+        "positionalError": 0.819571299,
+        "keyError": 0.874581646
+      },
+      "mismatched": {
+        "runs": 20,
+        "completed": 20,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7922338545,
+        "positionalError": 0.870656106,
+        "keyError": 0.9055212550000002
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 10,
+          "mean": -0.09566729499999997,
+          "min": -0.2613981799999999,
+          "max": 0,
+          "wins": 9,
+          "ties": 1,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 10,
+          "mean": -0.0595078035,
+          "min": -0.22340424999999997,
+          "max": 0.044478530000000016,
+          "wins": 7,
+          "ties": 0,
+          "losses": 3
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "passage",
+      "id": "brantome-dames-galantes-disjoint-2",
+      "baseline": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.793650794,
+        "positionalError": 0.91047619,
+        "keyError": 0.9282013859999999
+      },
+      "matched": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.67111111,
+        "positionalError": 0.7244444440000001,
+        "keyError": 0.869856846
+      },
+      "mismatched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.803174604,
+        "positionalError": 0.8742857159999999,
+        "keyError": 0.924765212
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 5,
+          "mean": -0.122539684,
+          "min": -0.21587301999999997,
+          "max": -0.047619049999999996,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 5,
+          "mean": -0.13206349399999995,
+          "min": -0.20158730499999988,
+          "max": -0.07460317500000002,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "passage",
+      "id": "brantome-dames-galantes-disjoint-3",
+      "baseline": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.796153846,
+        "positionalError": 0.9224359,
+        "keyError": 0.952713178
+      },
+      "matched": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.758333334,
+        "positionalError": 0.819230772,
+        "keyError": 0.910963454
+      },
+      "mismatched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.805448717,
+        "positionalError": 0.9342948719999999,
+        "keyError": 0.9410852709999998
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 5,
+          "mean": -0.03782051200000003,
+          "min": -0.08653845999999998,
+          "max": 0.05769230999999997,
+          "wins": 4,
+          "ties": 0,
+          "losses": 1
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 5,
+          "mean": -0.047115383,
+          "min": -0.07371795000000003,
+          "max": -0.030448715000000015,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "passage",
+      "id": "machiavelli-commedie-disjoint-2",
+      "baseline": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8268041220000001,
+        "positionalError": 0.9580756000000001,
+        "keyError": 0.970109442
+      },
+      "matched": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.811683848,
+        "positionalError": 0.9656357400000001,
+        "keyError": 0.9752439020000001
+      },
+      "mismatched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8237113410000001,
+        "positionalError": 0.943298968,
+        "keyError": 0.9649233900000003
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 5,
+          "mean": -0.015120274,
+          "min": -0.04467354000000001,
+          "max": 0,
+          "wins": 3,
+          "ties": 2,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 5,
+          "mean": -0.01202749299999999,
+          "min": -0.024054984999999918,
+          "max": 0.013745699999999972,
+          "wins": 4,
+          "ties": 0,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "passage",
+      "id": "machiavelli-commedie-disjoint-3",
+      "baseline": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.802640266,
+        "positionalError": 0.889768978,
+        "keyError": 0.9185627519999999
+      },
+      "matched": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.720792082,
+        "positionalError": 0.7801980220000001,
+        "keyError": 0.851862348
+      },
+      "mismatched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.81188119,
+        "positionalError": 0.9095709580000001,
+        "keyError": 0.9417813760000001
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 5,
+          "mean": -0.081848184,
+          "min": -0.12541254000000002,
+          "max": -0.026402640000000033,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 5,
+          "mean": -0.09108910799999999,
+          "min": -0.15181517999999994,
+          "max": -0.006600660000000036,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "passage",
+      "id": "cicero-orationes-disjoint-2",
+      "baseline": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.82917933,
+        "positionalError": 0.897264436,
+        "keyError": 0.924102564
+      },
+      "matched": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.687537992,
+        "positionalError": 0.7465045600000001,
+        "keyError": 0.8274358979999998
+      },
+      "mismatched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7878419429999999,
+        "positionalError": 0.844072948,
+        "keyError": 0.8940384610000001
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 5,
+          "mean": -0.14164133799999995,
+          "min": -0.2613981799999999,
+          "max": -0.024316110000000002,
+          "wins": 5,
+          "ties": 0,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 5,
+          "mean": -0.100303951,
+          "min": -0.22340424999999997,
+          "max": 0.03495440499999991,
+          "wins": 3,
+          "ties": 0,
+          "losses": 2
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "passage",
+      "id": "cicero-orationes-disjoint-3",
+      "baseline": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.827607362,
+        "positionalError": 0.9453987720000001,
+        "keyError": 0.958434546
+      },
+      "matched": {
+        "runs": 5,
+        "completed": 5,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.77791411,
+        "positionalError": 0.8926380380000001,
+        "keyError": 0.921727394
+      },
+      "mismatched": {
+        "runs": 10,
+        "completed": 10,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.796625766,
+        "positionalError": 0.8972392639999999,
+        "keyError": 0.917004049
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 5,
+          "mean": -0.049693251999999986,
+          "min": -0.13190183999999994,
+          "max": 0,
+          "wins": 4,
+          "ties": 1,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 5,
+          "mean": -0.018711656,
+          "min": -0.05981594999999995,
+          "max": 0.044478530000000016,
+          "wins": 4,
+          "ties": 0,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "keyIndex",
+      "id": 1,
+      "baseline": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8159772283333333,
+        "positionalError": 0.9217909083333332,
+        "keyError": 0.9249168333333334
+      },
+      "matched": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7051446116666668,
+        "positionalError": 0.7764587166666667,
+        "keyError": 0.8754736266666666
+      },
+      "mismatched": {
+        "runs": 12,
+        "completed": 12,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8012418741666666,
+        "positionalError": 0.90775628,
+        "keyError": 0.9362651008333333
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 6,
+          "mean": -0.11083261666666666,
+          "min": -0.2613981799999999,
+          "max": -0.04467354000000001,
+          "wins": 6,
+          "ties": 0,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 6,
+          "mean": -0.09609726249999996,
+          "min": -0.20212766000000004,
+          "max": -0.024054984999999918,
+          "wins": 6,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "keyIndex",
+      "id": 2,
+      "baseline": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.815054705,
+        "positionalError": 0.9704518966666665,
+        "keyError": 0.9702991449999999
+      },
+      "matched": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7607600883333334,
+        "positionalError": 0.863122035,
+        "keyError": 0.9124875766666666
+      },
+      "mismatched": {
+        "runs": 12,
+        "completed": 12,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8197547850000002,
+        "positionalError": 0.9195490591666666,
+        "keyError": 0.9455818566666668
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 6,
+          "mean": -0.05429461666666665,
+          "min": -0.14893616999999992,
+          "max": -0.017182130000000018,
+          "wins": 6,
+          "ties": 0,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 6,
+          "mean": -0.05899469666666668,
+          "min": -0.14133738499999993,
+          "max": -0.012269935000000065,
+          "wins": 6,
+          "ties": 0,
+          "losses": 0
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "keyIndex",
+      "id": 3,
+      "baseline": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8136797316666667,
+        "positionalError": 0.9194159316666667,
+        "keyError": 0.945438545
+      },
+      "matched": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7311751733333334,
+        "positionalError": 0.7719079283333334,
+        "keyError": 0.8726865416666668
+      },
+      "mismatched": {
+        "runs": 12,
+        "completed": 12,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7934372749999999,
+        "positionalError": 0.87612098,
+        "keyError": 0.9053804483333333
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 6,
+          "mean": -0.08250455833333331,
+          "min": -0.13190183999999994,
+          "max": 0,
+          "wins": 5,
+          "ties": 1,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 6,
+          "mean": -0.062262101666666646,
+          "min": -0.15181517999999994,
+          "max": 0.03495440499999991,
+          "wins": 5,
+          "ties": 0,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "keyIndex",
+      "id": 4,
+      "baseline": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8234594716666667,
+        "positionalError": 0.9356124033333334,
+        "keyError": 0.9474706799999999
+      },
+      "matched": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7811472316666667,
+        "positionalError": 0.8941261916666665,
+        "keyError": 0.9403001383333334
+      },
+      "mismatched": {
+        "runs": 12,
+        "completed": 12,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.8105642566666665,
+        "positionalError": 0.9336352508333331,
+        "keyError": 0.9529502141666667
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 6,
+          "mean": -0.04231224000000002,
+          "min": -0.09523809000000005,
+          "max": -0.013745699999999972,
+          "wins": 6,
+          "ties": 0,
+          "losses": 0
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 6,
+          "mean": -0.029417025000000003,
+          "min": -0.12222222500000002,
+          "max": 0.030395135000000018,
+          "wins": 5,
+          "ties": 0,
+          "losses": 1
+        }
+      }
+    },
+    {
+      "solver": "beam-search",
+      "group": "keyIndex",
+      "id": 5,
+      "baseline": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7951919633333334,
+        "positionalError": 0.8555787566666666,
+        "keyError": 0.92197802
+      },
+      "matched": {
+        "runs": 6,
+        "completed": 6,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7112499583333335,
+        "positionalError": 0.8015947750000002,
+        "keyError": 0.8632936516666666
+      },
+      "mismatched": {
+        "runs": 12,
+        "completed": 12,
+        "failed": 0,
+        "exact": 0,
+        "plaintextError": 0.7989047766666665,
+        "positionalError": 0.8652407016666666,
+        "keyError": 0.9128205125000002
+      },
+      "paired": {
+        "matchedMinusBaseline": {
+          "pairs": 6,
+          "mean": -0.083942005,
+          "min": -0.24316108999999997,
+          "max": 0.05769230999999997,
+          "wins": 3,
+          "ties": 2,
+          "losses": 1
+        },
+        "matchedMinusMeanMismatched": {
+          "pairs": 6,
+          "mean": -0.08765481833333331,
+          "min": -0.22340424999999997,
+          "max": 0.044478530000000016,
+          "wins": 4,
+          "ties": 0,
+          "losses": 2
+        }
+      }
+    }
+  ],
+  "seedVariation": [
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-1",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7066666679999999,
+      "seedPopulationVariance": 0.005718720168264061,
+      "min": 0.5968254,
+      "max": 0.7968254
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-1",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.648888888,
+      "seedPopulationVariance": 0.009903149390818853,
+      "min": 0.52380952,
+      "max": 0.76825397
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-1",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.762539682,
+      "seedPopulationVariance": 0.0032145126686621344,
+      "min": 0.65396825,
+      "max": 0.81904762
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-1",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.765714286,
+      "seedPopulationVariance": 0.0014770472137465441,
+      "min": 0.7047619,
+      "max": 0.8
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.75936508,
+      "seedPopulationVariance": 0.0019809525460317617,
+      "min": 0.67301587,
+      "max": 0.7968254
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-2",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.603174604,
+      "seedPopulationVariance": 0.02706172926843034,
+      "min": 0.34285714,
+      "max": 0.76825397
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-2",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7784127000000001,
+      "seedPopulationVariance": 0.0005458301081380808,
+      "min": 0.74603175,
+      "max": 0.80634921
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-2",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.7453968260000001,
+      "seedPopulationVariance": 0.004411791354557824,
+      "min": 0.61904762,
+      "max": 0.8
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.773333332,
+      "seedPopulationVariance": 0.002171227052899977,
+      "min": 0.68253968,
+      "max": 0.81269841
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-3",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.647619046,
+      "seedPopulationVariance": 0.013915848153993465,
+      "min": 0.44444444,
+      "max": 0.77460317
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-3",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7955555540000001,
+      "seedPopulationVariance": 0.00013948101353490353,
+      "min": 0.77460317,
+      "max": 0.80952381
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-3",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.7911111120000001,
+      "seedPopulationVariance": 0.0002555807450541764,
+      "min": 0.77142857,
+      "max": 0.81269841
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-4",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7307936520000001,
+      "seedPopulationVariance": 0.006342756549942057,
+      "min": 0.61269841,
+      "max": 0.8
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-4",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.643809522,
+      "seedPopulationVariance": 0.006544318499491056,
+      "min": 0.54285714,
+      "max": 0.76190476
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-4",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7822222219999999,
+      "seedPopulationVariance": 0.0003934492903602951,
+      "min": 0.75238095,
+      "max": 0.80952381
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-4",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.801904762,
+      "seedPopulationVariance": 0.0005587302146031763,
+      "min": 0.76190476,
+      "max": 0.82857143
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-5",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.725079366,
+      "seedPopulationVariance": 0.007182060688415226,
+      "min": 0.60634921,
+      "max": 0.8031746
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-5",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.5993650779999999,
+      "seedPopulationVariance": 0.019863542279949624,
+      "min": 0.42222222,
+      "max": 0.75873016
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-5",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7638095239999999,
+      "seedPopulationVariance": 0.0023002266750113435,
+      "min": 0.68888889,
+      "max": 0.81904762
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-2:replicate-5",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.782222224,
+      "seedPopulationVariance": 0.0008328547252406248,
+      "min": 0.73333333,
+      "max": 0.80634921
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-1",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.783333334,
+      "seedPopulationVariance": 0.00020381331157134406,
+      "min": 0.7724359,
+      "max": 0.81089744
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-1",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.6717948739999999,
+      "seedPopulationVariance": 0.005290926809072982,
+      "min": 0.58012821,
+      "max": 0.76602564
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-1",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7794871800000001,
+      "seedPopulationVariance": 0.0006426693316896789,
+      "min": 0.73076923,
+      "max": 0.80448718
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-1",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.778205128,
+      "seedPopulationVariance": 0.0010248190944115768,
+      "min": 0.71794872,
+      "max": 0.81410256
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7705128200000001,
+      "seedPopulationVariance": 0.00075032864069692,
+      "min": 0.71794872,
+      "max": 0.79807692
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-2",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.6884615380000001,
+      "seedPopulationVariance": 0.00909927642380014,
+      "min": 0.5224359,
+      "max": 0.77884615
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-2",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.791025638,
+      "seedPopulationVariance": 0.00012491778277449612,
+      "min": 0.76923077,
+      "max": 0.80128205
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-2",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.76602564,
+      "seedPopulationVariance": 0.0017710387225509591,
+      "min": 0.71474359,
+      "max": 0.80769231
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.760897436,
+      "seedPopulationVariance": 0.0019584156479947453,
+      "min": 0.67307692,
+      "max": 0.78846154
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-3",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.716666668,
+      "seedPopulationVariance": 0.002870644502432615,
+      "min": 0.62179487,
+      "max": 0.76923077
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-3",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.789102564,
+      "seedPopulationVariance": 0.00011669951919790388,
+      "min": 0.77564103,
+      "max": 0.80128205
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-3",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.778205128,
+      "seedPopulationVariance": 0.00027695593201841606,
+      "min": 0.75,
+      "max": 0.79487179
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-4",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.76346154,
+      "seedPopulationVariance": 0.0005769229487179588,
+      "min": 0.73717949,
+      "max": 0.79487179
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-4",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.723076924,
+      "seedPopulationVariance": 0.00425131527817226,
+      "min": 0.59935897,
+      "max": 0.77564103
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-4",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.798717948,
+      "seedPopulationVariance": 0.00008793561334649575,
+      "min": 0.78525641,
+      "max": 0.81089744
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-4",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.7634615360000001,
+      "seedPopulationVariance": 0.004024490512689025,
+      "min": 0.63782051,
+      "max": 0.80448718
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-5",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7596153840000001,
+      "seedPopulationVariance": 0.001590236544378704,
+      "min": 0.68269231,
+      "max": 0.79807692
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-5",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.673717946,
+      "seedPopulationVariance": 0.0039217621346482635,
+      "min": 0.58333333,
+      "max": 0.76282051
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-5",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7820512820000001,
+      "seedPopulationVariance": 0.00027942143852729626,
+      "min": 0.75961538,
+      "max": 0.80448718
+    },
+    {
+      "caseId": "brantome-dames-galantes-disjoint-3:replicate-5",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.753846156,
+      "seedPopulationVariance": 0.0027301116596318235,
+      "min": 0.66666667,
+      "max": 0.80448718
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-1",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7903780060000001,
+      "seedPopulationVariance": 0.0015257260402215423,
+      "min": 0.71477663,
+      "max": 0.82130584
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-1",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.7835051519999999,
+      "seedPopulationVariance": 0.0018705495226556145,
+      "min": 0.70446735,
+      "max": 0.82817869
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-1",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.6707903799999999,
+      "seedPopulationVariance": 0.009930917226060165,
+      "min": 0.53264605,
+      "max": 0.80068729
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-1",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.806872852,
+      "seedPopulationVariance": 0.0006962601544714969,
+      "min": 0.76632302,
+      "max": 0.8419244
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.8061855680000001,
+      "seedPopulationVariance": 0.0009664505601303768,
+      "min": 0.75257732,
+      "max": 0.8419244
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-2",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.757388316,
+      "seedPopulationVariance": 0.004301319101040384,
+      "min": 0.65292096,
+      "max": 0.82817869
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-2",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.63161512,
+      "seedPopulationVariance": 0.00961443554884804,
+      "min": 0.45704467,
+      "max": 0.72164948
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-2",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.808247422,
+      "seedPopulationVariance": 0.0003750546038804554,
+      "min": 0.78350515,
+      "max": 0.83848797
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.8103092759999999,
+      "seedPopulationVariance": 0.00012942690089158413,
+      "min": 0.79381443,
+      "max": 0.82817869
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-3",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.7938144319999999,
+      "seedPopulationVariance": 0.0030136628281196556,
+      "min": 0.72508591,
+      "max": 0.84536082
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-3",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.773195878,
+      "seedPopulationVariance": 0.003509642096479733,
+      "min": 0.65635739,
+      "max": 0.81786942
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-3",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.8261168400000001,
+      "seedPopulationVariance": 0.000026452197588600318,
+      "min": 0.81786942,
+      "max": 0.83161512
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-4",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.8027491400000001,
+      "seedPopulationVariance": 0.0003145924407128002,
+      "min": 0.78006873,
+      "max": 0.82474227
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-4",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.766323022,
+      "seedPopulationVariance": 0.0035757725629598142,
+      "min": 0.69072165,
+      "max": 0.83848797
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-4",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.751890034,
+      "seedPopulationVariance": 0.004914443975314422,
+      "min": 0.61512027,
+      "max": 0.80756014
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-4",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.789003438,
+      "seedPopulationVariance": 0.002331573601001416,
+      "min": 0.69415808,
+      "max": 0.82817869
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-5",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.827491408,
+      "seedPopulationVariance": 0.00006802000263577651,
+      "min": 0.82130584,
+      "max": 0.8419244
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-5",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.76219931,
+      "seedPopulationVariance": 0.003440677410989477,
+      "min": 0.68728522,
+      "max": 0.83848797
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-5",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.653608246,
+      "seedPopulationVariance": 0.001376459894918585,
+      "min": 0.60824742,
+      "max": 0.71477663
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-2:replicate-5",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.8171821300000002,
+      "seedPopulationVariance": 0.0004459088310246796,
+      "min": 0.78350515,
+      "max": 0.84879725
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-1",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.721452148,
+      "seedPopulationVariance": 0.0039237982419501344,
+      "min": 0.65016502,
+      "max": 0.80528053
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-1",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.8039603980000001,
+      "seedPopulationVariance": 0.00004618283518173583,
+      "min": 0.79207921,
+      "max": 0.81188119
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-1",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7551155140000001,
+      "seedPopulationVariance": 0.0021801783702774225,
+      "min": 0.66336634,
+      "max": 0.79207921
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-1",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.78547855,
+      "seedPopulationVariance": 0.0003790477981897197,
+      "min": 0.75907591,
+      "max": 0.80858086
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7636963720000001,
+      "seedPopulationVariance": 0.0013445304657626145,
+      "min": 0.71287129,
+      "max": 0.8019802
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-2",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.7953795399999999,
+      "seedPopulationVariance": 0.00020912981969087993,
+      "min": 0.77557756,
+      "max": 0.81518152
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-2",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.731353138,
+      "seedPopulationVariance": 0.006921325657519413,
+      "min": 0.57755776,
+      "max": 0.79867987
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-2",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.7729372959999999,
+      "seedPopulationVariance": 0.0018098443145748238,
+      "min": 0.71617162,
+      "max": 0.81188119
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7537953820000001,
+      "seedPopulationVariance": 0.0045947564134583745,
+      "min": 0.65676568,
+      "max": 0.81188119
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-3",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.746534656,
+      "seedPopulationVariance": 0.0033739610910128643,
+      "min": 0.66336634,
+      "max": 0.81188119
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-3",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7438943920000001,
+      "seedPopulationVariance": 0.00690389817254518,
+      "min": 0.58415842,
+      "max": 0.80528053
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-3",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.7445544579999999,
+      "seedPopulationVariance": 0.0025993093839078952,
+      "min": 0.65676568,
+      "max": 0.79867987
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-4",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.771617164,
+      "seedPopulationVariance": 0.0011258155293359033,
+      "min": 0.72607261,
+      "max": 0.80528053
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-4",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.750495052,
+      "seedPopulationVariance": 0.006524850374355457,
+      "min": 0.64356436,
+      "max": 0.81848185
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-4",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.724092412,
+      "seedPopulationVariance": 0.005509699374605975,
+      "min": 0.61716172,
+      "max": 0.80528053
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-4",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.767656768,
+      "seedPopulationVariance": 0.0016930801652474147,
+      "min": 0.69636964,
+      "max": 0.80858086
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-5",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.782838286,
+      "seedPopulationVariance": 0.000393861160417824,
+      "min": 0.74917492,
+      "max": 0.80858086
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-5",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.80858086,
+      "seedPopulationVariance": 0.00016556110725528007,
+      "min": 0.79207921,
+      "max": 0.82508251
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-5",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.72607261,
+      "seedPopulationVariance": 0.007101700127002804,
+      "min": 0.56435644,
+      "max": 0.79207921
+    },
+    {
+      "caseId": "machiavelli-commedie-disjoint-3:replicate-5",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.7973597379999999,
+      "seedPopulationVariance": 0.00008975154761733592,
+      "min": 0.78217822,
+      "max": 0.81188119
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-1",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.8006079039999999,
+      "seedPopulationVariance": 0.0011847635463752225,
+      "min": 0.7325228,
+      "max": 0.82674772
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-1",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.76048632,
+      "seedPopulationVariance": 0.005977032617030515,
+      "min": 0.64741641,
+      "max": 0.85410334
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-1",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7860182379999999,
+      "seedPopulationVariance": 0.001269758974229734,
+      "min": 0.74164134,
+      "max": 0.82978723
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-1",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.723404258,
+      "seedPopulationVariance": 0.025591042530279662,
+      "min": 0.40425532,
+      "max": 0.81458967
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.6911854099999999,
+      "seedPopulationVariance": 0.014407110487153683,
+      "min": 0.4893617,
+      "max": 0.82370821
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-2",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.79331307,
+      "seedPopulationVariance": 0.0010236416671686387,
+      "min": 0.75987842,
+      "max": 0.83586626
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-2",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7750759859999999,
+      "seedPopulationVariance": 0.002002937989819025,
+      "min": 0.6899696,
+      "max": 0.82066869
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-2",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.573860182,
+      "seedPopulationVariance": 0.06262469757122717,
+      "min": 0.20364742,
+      "max": 0.81155015
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.768389058,
+      "seedPopulationVariance": 0.0068380740165076125,
+      "min": 0.60790274,
+      "max": 0.83282675
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-3",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.748936168,
+      "seedPopulationVariance": 0.005519534996742455,
+      "min": 0.6443769,
+      "max": 0.8449848
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-3",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7610942260000001,
+      "seedPopulationVariance": 0.0017538638255448634,
+      "min": 0.69908815,
+      "max": 0.80547112
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-3",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.711854106,
+      "seedPopulationVariance": 0.018781792119015907,
+      "min": 0.49240122,
+      "max": 0.82674772
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-4",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7440729480000001,
+      "seedPopulationVariance": 0.004310381269544814,
+      "min": 0.65045593,
+      "max": 0.82066869
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-4",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.77325228,
+      "seedPopulationVariance": 0.008069400794079877,
+      "min": 0.59574468,
+      "max": 0.83586626
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-4",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.7914893620000001,
+      "seedPopulationVariance": 0.000597185952177097,
+      "min": 0.75379939,
+      "max": 0.82066869
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-4",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.735562308,
+      "seedPopulationVariance": 0.0036400255651740125,
+      "min": 0.6231003,
+      "max": 0.79635258
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-5",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7641337380000001,
+      "seedPopulationVariance": 0.004625234340244452,
+      "min": 0.6443769,
+      "max": 0.82674772
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-5",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.793920972,
+      "seedPopulationVariance": 0.00021581467381861572,
+      "min": 0.77507599,
+      "max": 0.81155015
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-5",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.634042552,
+      "seedPopulationVariance": 0.016151366010646612,
+      "min": 0.47112462,
+      "max": 0.80851064
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-2:replicate-5",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.749544072,
+      "seedPopulationVariance": 0.0052386802119566535,
+      "min": 0.61094225,
+      "max": 0.80547112
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-1",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.759509202,
+      "seedPopulationVariance": 0.006306597709676692,
+      "min": 0.61042945,
+      "max": 0.82822086
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-1",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.780981594,
+      "seedPopulationVariance": 0.002008355511716661,
+      "min": 0.72392638,
+      "max": 0.83128834
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-1",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.797546014,
+      "seedPopulationVariance": 0.000523166075953184,
+      "min": 0.75460123,
+      "max": 0.82208589
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-1",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.702453988,
+      "seedPopulationVariance": 0.006131205490383538,
+      "min": 0.56441718,
+      "max": 0.79447853
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.76196319,
+      "seedPopulationVariance": 0.005437163958824201,
+      "min": 0.64723926,
+      "max": 0.8404908
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-2",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.767484662,
+      "seedPopulationVariance": 0.009768527392329413,
+      "min": 0.57361963,
+      "max": 0.8404908
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-2",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.799999998,
+      "seedPopulationVariance": 0.0010139636931310954,
+      "min": 0.7392638,
+      "max": 0.82515337
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-2",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.6834355819999999,
+      "seedPopulationVariance": 0.009602920421965455,
+      "min": 0.53680982,
+      "max": 0.79141104
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.771779142,
+      "seedPopulationVariance": 0.0026594904066543764,
+      "min": 0.67791411,
+      "max": 0.81595092
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-3",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.806134972,
+      "seedPopulationVariance": 0.0005999472721291751,
+      "min": 0.76687117,
+      "max": 0.8404908
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-3",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.743558282,
+      "seedPopulationVariance": 0.004078437442493135,
+      "min": 0.6595092,
+      "max": 0.8006135
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-3",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.777300614,
+      "seedPopulationVariance": 0.0004275660543942248,
+      "min": 0.75153374,
+      "max": 0.81288344
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-4",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7858895720000001,
+      "seedPopulationVariance": 0.0018419962872821768,
+      "min": 0.70245399,
+      "max": 0.82208589
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-4",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.7251533739999999,
+      "seedPopulationVariance": 0.004819902813624906,
+      "min": 0.66257669,
+      "max": 0.81595092
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-4",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.79386503,
+      "seedPopulationVariance": 0.0007806090196093185,
+      "min": 0.75766871,
+      "max": 0.82822086
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-4",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.769325154,
+      "seedPopulationVariance": 0.001992547538198666,
+      "min": 0.6809816,
+      "max": 0.79754601
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-5",
+      "scorer": "museum-prose-quadgram-v1",
+      "errorMean": 0.7865030679999999,
+      "seedPopulationVariance": 0.0021400881163912977,
+      "min": 0.70552147,
+      "max": 0.83435583
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-5",
+      "scorer": "historical-french-1580",
+      "errorMean": 0.8153374200000002,
+      "seedPopulationVariance": 0.00025367909661635986,
+      "min": 0.78527607,
+      "max": 0.83128834
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-5",
+      "scorer": "historical-italian-1320",
+      "errorMean": 0.808588958,
+      "seedPopulationVariance": 0.00009258909607437588,
+      "min": 0.79447853,
+      "max": 0.82208589
+    },
+    {
+      "caseId": "cicero-orationes-disjoint-3:replicate-5",
+      "scorer": "historical-latin-classical",
+      "errorMean": 0.720245398,
+      "seedPopulationVariance": 0.015542172886326177,
+      "min": 0.47239264,
+      "max": 0.80368098
+    }
+  ],
+  "keyVariation": [
+    {
+      "passage": "brantome-dames-galantes-disjoint-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "keyMeanPopulationVariance": 0.0005800150776356784,
+      "meanWithinKeySeedVariance": 0.004679143401110616
+    },
+    {
+      "passage": "brantome-dames-galantes-disjoint-2",
+      "scorer": "historical-french-1580",
+      "keyMeanPopulationVariance": 0.0005011639981375674,
+      "meanWithinKeySeedVariance": 0.015457717518536668
+    },
+    {
+      "passage": "brantome-dames-galantes-disjoint-2",
+      "scorer": "historical-italian-1320",
+      "keyMeanPopulationVariance": 0.00015109094579793622,
+      "meanWithinKeySeedVariance": 0.0013186999511413514
+    },
+    {
+      "passage": "brantome-dames-galantes-disjoint-2",
+      "scorer": "historical-latin-classical",
+      "keyMeanPopulationVariance": 0.00039448122989972227,
+      "meanWithinKeySeedVariance": 0.0015072008506404693
+    },
+    {
+      "passage": "brantome-dames-galantes-disjoint-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "keyMeanPopulationVariance": 0.00007636423681525389,
+      "meanWithinKeySeedVariance": 0.0010159434186719344
+    },
+    {
+      "passage": "brantome-dames-galantes-disjoint-3",
+      "scorer": "historical-french-1580",
+      "keyMeanPopulationVariance": 0.0004583169227087477,
+      "meanWithinKeySeedVariance": 0.005086785029625252
+    },
+    {
+      "passage": "brantome-dames-galantes-disjoint-3",
+      "scorer": "historical-italian-1320",
+      "keyMeanPopulationVariance": 0.000046614061385931316,
+      "meanWithinKeySeedVariance": 0.0002503287371071742
+    },
+    {
+      "passage": "brantome-dames-galantes-disjoint-3",
+      "scorer": "historical-latin-classical",
+      "keyMeanPopulationVariance": 0.00008662063568704956,
+      "meanWithinKeySeedVariance": 0.00196548318426036
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "keyMeanPopulationVariance": 0.0001449959228007229,
+      "meanWithinKeySeedVariance": 0.000600843188918416
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-2",
+      "scorer": "historical-french-1580",
+      "keyMeanPopulationVariance": 0.00018958679985507957,
+      "meanWithinKeySeedVariance": 0.003240396285152989
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-2",
+      "scorer": "historical-italian-1320",
+      "keyMeanPopulationVariance": 0.0031321312303047937,
+      "meanWithinKeySeedVariance": 0.005869179748324189
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-2",
+      "scorer": "historical-latin-classical",
+      "keyMeanPopulationVariance": 0.0001527426418775429,
+      "meanWithinKeySeedVariance": 0.0007750498775933297
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "keyMeanPopulationVariance": 0.00043718588806378504,
+      "meanWithinKeySeedVariance": 0.0022765523621849698
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-3",
+      "scorer": "historical-french-1580",
+      "keyMeanPopulationVariance": 0.0007226132369718868,
+      "meanWithinKeySeedVariance": 0.0020639370454992438
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-3",
+      "scorer": "historical-italian-1320",
+      "keyMeanPopulationVariance": 0.00013792111608613647,
+      "meanWithinKeySeedVariance": 0.005723360340390159
+    },
+    {
+      "passage": "machiavelli-commedie-disjoint-3",
+      "scorer": "historical-latin-classical",
+      "keyMeanPopulationVariance": 0.00031700595168142635,
+      "meanWithinKeySeedVariance": 0.0013142066419074376
+    },
+    {
+      "passage": "cicero-orationes-disjoint-2",
+      "scorer": "museum-prose-quadgram-v1",
+      "keyMeanPopulationVariance": 0.0013051468805413123,
+      "meanWithinKeySeedVariance": 0.006273112731965157
+    },
+    {
+      "passage": "cicero-orationes-disjoint-2",
+      "scorer": "historical-french-1580",
+      "keyMeanPopulationVariance": 0.0003162424883982974,
+      "meanWithinKeySeedVariance": 0.00416108494976802
+    },
+    {
+      "passage": "cicero-orationes-disjoint-2",
+      "scorer": "historical-italian-1320",
+      "keyMeanPopulationVariance": 0.0034431315901634315,
+      "meanWithinKeySeedVariance": 0.004355022550483466
+    },
+    {
+      "passage": "cicero-orationes-disjoint-2",
+      "scorer": "historical-latin-classical",
+      "keyMeanPopulationVariance": 0.004062431066269975,
+      "meanWithinKeySeedVariance": 0.02317524759953068
+    },
+    {
+      "passage": "cicero-orationes-disjoint-3",
+      "scorer": "museum-prose-quadgram-v1",
+      "keyMeanPopulationVariance": 0.00013073884392728386,
+      "meanWithinKeySeedVariance": 0.0036770672957657487
+    },
+    {
+      "passage": "cicero-orationes-disjoint-3",
+      "scorer": "historical-french-1580",
+      "keyMeanPopulationVariance": 0.001018540391941293,
+      "meanWithinKeySeedVariance": 0.003490082417283303
+    },
+    {
+      "passage": "cicero-orationes-disjoint-3",
+      "scorer": "historical-italian-1320",
+      "keyMeanPopulationVariance": 0.0005331928256696171,
+      "meanWithinKeySeedVariance": 0.0012977530654522216
+    },
+    {
+      "passage": "cicero-orationes-disjoint-3",
+      "scorer": "historical-latin-classical",
+      "keyMeanPopulationVariance": 0.0013608943100419304,
+      "meanWithinKeySeedVariance": 0.006739282478253612
+    }
+  ],
+  "interpretation": "Variances are descriptive population variances across this fixed factorial grid, not inferential estimates across historical sources."
+}

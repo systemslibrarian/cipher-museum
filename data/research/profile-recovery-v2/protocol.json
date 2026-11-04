@@ -1,0 +1,53 @@
+{
+  "id": "museum-historical-profile-recovery-v2-local-factorial",
+  "fixedBeforeExecution": "2026-11-04T18:58:36.363112+00:00",
+  "registration": "Local frozen exploratory follow-up, not external preregistration. V1 outcomes already known.",
+  "question": "Does language-matched scoring benefit survive fully crossing independent key and search-seed variation?",
+  "sources": "Same six reviewed public passages from three works as v1; first excerpts excluded unchanged.",
+  "keyDesign": "Reuse all 30 independent v1 ciphertext/key fixtures unchanged to isolate crossing search seeds, not introduce a new key population. Five keys per passage.",
+  "searchSeeds": [
+    41,
+    1729,
+    2027,
+    65537,
+    104729
+  ],
+  "annealingSteps": 6000,
+  "beam": 150,
+  "branch": 26,
+  "matrix": {
+    "annealing": 600,
+    "beam-search": 120,
+    "total": 720
+  },
+  "scorers": [
+    "museum-prose-quadgram-v1",
+    "historical-french-1580",
+    "historical-italian-1320",
+    "historical-latin-classical"
+  ],
+  "primaryOutcome": "Top-candidate normalized Levenshtein edit error; positional/key error and exact recovery secondary.",
+  "comparison": "Matched minus baseline and matched minus mean of BOTH mismatched models, within identical ciphertext/seed/solver.",
+  "reporting": "All runs and failures. Overall, work, passage, key index and search seed. Also per-ciphertext seed variance and within-passage variance of key means. No significance or best-seed selection.",
+  "limits": [
+    "Public previously evaluated sample; not blind or fresh holdout.",
+    "Six passages in only three works; seeds/keys are not independent documents.",
+    "No modern same-language baseline: cannot isolate historical orthography benefits.",
+    "No tuning, changed scoring, changed initialization or higher budget.",
+    "Latin annealing exception known before this follow-up.",
+    "Beam deterministic: run once per key/scorer, not five duplicate seed conditions."
+  ],
+  "inputHashes": {
+    "scripts/evaluate-profile-recovery.js": "fe4e8f50a4cc8d998856f94547be85919c3f7068716ae2fcb8ddaa87f8868128",
+    "scripts/research-splits.js": "fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010",
+    "js/research-model.js": "c97d533d67d6cccd6c22e6fc3cf919a0f346040c343c2dc675565a44f92241f9",
+    "js/research-language-model.js": "e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb",
+    "data/research/v1/language-model.json": "5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2e",
+    "data/research/v2/language-profiles.json": "9273ab82bc558e070a1cd810b84e6830f62b9d3bb31865271416f48cb9e6bb3a",
+    "data/research/v2/holdout-author-disjoint.json": "9f2e665813cf7b74be26a0f52c2fa5927e13ddad1a5dad45d89c55768b0fd9fa",
+    "data/research/profile-recovery-v1/protocol.json": "2d1f07ba6eb1d257e108ad75dc6e5d77436a9877192fbbf0718b633dcd5ab34d",
+    "data/research/profile-recovery-v1/evaluation.json": "306914d1daab1756fe7ff72baf345200774d6b44219df4f4e7545f4de15b7d68"
+  },
+  "repositoryHead": "e3134b1e1e221a6e541948ffb62844c4f25609dc",
+  "repositoryStatus": "Existing working tree changes were present; copied input hashes, not HEAD alone, identify experiment bytes."
+}

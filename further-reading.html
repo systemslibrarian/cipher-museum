@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Further Reading — The Cipher Museum</title>
-  <meta name="description" content="Chapter-based reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.">
+  <meta name="description" content="Chapter-pinned and title-only reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.">
   <meta property="og:title" content="Further Reading — The Cipher Museum">
-  <meta property="og:description" content="Chapter-based reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.">
+  <meta property="og:description" content="Chapter-pinned and title-only reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ciphermuseum.com/further-reading.html">
   <meta property="og:image" content="https://ciphermuseum.com/images/og/og-default.png">
@@ -15,7 +15,7 @@
   <meta property="og:image:alt" content="The Cipher Museum — an interactive history of encryption">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Further Reading — The Cipher Museum">
-  <meta name="twitter:description" content="Chapter-based reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.">
+  <meta name="twitter:description" content="Chapter-pinned and title-only reading trails connecting cryptography books to hands-on exhibits, plus a curated bibliography, journals, scholars, and primary-source archives.">
   <meta name="twitter:image" content="https://ciphermuseum.com/images/og/og-default.png">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://ciphermuseum.com/further-reading.html">
@@ -152,8 +152,8 @@
 
   <!-- ── CHAPTER COMPANIONS ── -->
   <section class="fr-section" id="reading-trails" aria-labelledby="reading-trails-heading">
-    <h2 class="fr-section-title" id="reading-trails-heading">Chapter-to-Exhibit Reading Trails</h2>
-    <p class="page-meta">Choose a book or a case-study topic below. Each stop pairs a specific chapter or section with a museum activity and a question to investigate. These are concept companions, not reproductions of the books or complete implementations of their programming chapters. Use the stated edition: numbering can change between editions.</p>
+    <h2 class="fr-section-title" id="reading-trails-heading">Book-to-Exhibit Reading Trails</h2>
+    <p class="page-meta">Choose a book or a case-study topic below. The first four routes are chapter-pinned to their stated editions; the case-study and additional-book routes are title-only concept trails, without chapter or page mappings. These are concept companions, not reproductions of the books or complete implementations of their programming chapters. The museum questions are original learning prompts, not exercises quoted from the books.</p>
     <nav class="fr-trail-nav" aria-label="Reading trail books">
       <a href="#sweigart">Sweigart · learn by doing</a>
       <a href="#gaines">Gaines · classical codebreaking</a>
@@ -163,6 +163,13 @@
       <a href="#ancient-scripts-books">Ancient scripts · six books</a>
       <a href="#purple-books">Purple · three books</a>
       <a href="#security-claims-books">Working is not secure · three books</a>
+      <a href="#tuchman">Tuchman · intelligence and evidence</a>
+      <a href="#sinkov">Sinkov · mathematical codebreaking</a>
+      <a href="#singh-young-readers">Singh · young readers</a>
+      <a href="#beutelspacher">Beutelspacher · from puzzles to proofs</a>
+      <a href="#wrixon">Wrixon · codes, ciphers and concealment</a>
+      <a href="#goldreich">Goldreich · formal security</a>
+      <a href="#stephenson">Stephenson · fiction and Solitaire</a>
     </nav>
     <p class="page-meta">For a route without a book, use the museum's <a href="tours/index.html">guided tours</a>.</p>
 
@@ -269,6 +276,93 @@
           <li><strong>Flannery · A working scheme, an attack and a negative result</strong><p>Sarah Flannery with David Flannery, <em>In Code: A Mathematical Journey</em> (Profile Books, 2000). Read the page’s <a href="lab/working-is-not-secure.html#negative">negative result</a>. Why was a report on the attack worth including in her next project?</p></li>
           <li><strong>Bauer · The maxims of cryptology</strong><p>Friedrich L. Bauer, <em>Decrypted Secrets: Methods and Maxims of Cryptology</em>, 4th edition (Springer, 2007). After the <a href="lab/working-is-not-secure.html#example">worked example</a>, ask which of the maxims its key-space claim ignores.</p></li>
           <li><strong>Piper and Murphy · Practical security</strong><p>Fred Piper and Sean Murphy, <em>Cryptography: A Very Short Introduction</em> (Oxford University Press, 2002). The example has 26! (about 4 × 10<sup>26</sup>) keys, yet its security claim fails in the <a href="lab/working-is-not-secure.html#verdict">verdict</a>. Why does a large key space bound only exhaustive key search?</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <h3 class="fr-trail-group" id="additional-book-trails">More books, more questions</h3>
+    <p class="page-meta">These seven title-only concept trails add routes through existing exhibits. Bibliographic editions identify the books, not verified chapter mappings. Find the books through your library or bookseller; no copies are linked here.</p>
+
+    <details class="fr-trail" id="tuchman" data-title-only="true">
+      <summary><em>The Zimmermann Telegram</em><small>Barbara W. Tuchman · Random House paperback, 1985</small></summary>
+      <div class="fr-trail-body">
+        <p>A title-only companion to Tuchman’s history of the 1917 telegram. Read the historical exhibit first, then use the museum’s separate teaching tools to inspect an argument.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>History and disclosure</strong><p>Read the <a href="ciphers/zimmermann.html">Zimmermann Telegram</a> exhibit. Why are reading a message and persuading another government to trust it different problems?</p></li>
+          <li><strong>Codes and their context</strong><p>Compare <a href="ciphers/commercial-codebooks.html">commercial codebooks</a>. Which parts of a code depend on possessing the vocabulary, and which depend on how it is used? These examples are not the telegram’s German codebook.</p></li>
+          <li><strong>Keep the evidence visible</strong><p>Try the <a href="lab/evidence-workbench.html">Evidence Workbench</a>. Separate the source text, a proposed reading and the evidence for accepting it. Its teaching examples do not reconstruct the telegram; neither do the museum’s separate Second World War laboratories.</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="sinkov" data-title-only="true">
+      <summary><em>Elementary Cryptanalysis: A Mathematical Approach</em><small>Abraham Sinkov · second edition, revised by Todd Feil, MAA, 2009</small></summary>
+      <div class="fr-trail-body">
+        <p>A title-only route through classical analysis and introductory public-key ideas. The activities illustrate selected concepts; they do not reproduce the book’s problems.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Test a substitution hypothesis</strong><p>Compare <a href="ciphers/monoalphabetic.html">substitution</a> and <a href="ciphers/vigenere.html">Vigenère</a>. Which observations would distinguish a fixed alphabet from a repeating sequence of alphabets?</p></li>
+          <li><strong>Recover structure</strong><p>Try <a href="ciphers/hill.html">Hill matrices</a> and <a href="ciphers/columnar.html">columnar transposition</a>. What additional evidence do you need when more than one key fits a short message?</p></li>
+          <li><strong>Different kinds of security</strong><p>Compare <a href="ciphers/rsa.html">toy RSA arithmetic</a> with the <a href="ciphers/one-time-pad.html">one-time pad</a>. Which depends on computational assumptions, and which requires independent random key material used once?</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="singh-young-readers" data-title-only="true">
+      <summary><em>The Code Book: The Secrets Behind Codebreaking</em><small>Simon Singh · young-adult adaptation, Ember paperback, 2003</small></summary>
+      <div class="fr-trail-body">
+        <p>This is the young-adult adaptation, distinct from the adult Code Book listed below. The title-only route has its own introductory prompts; it does not reuse an adult-edition chapter map.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Start with a small search</strong><p>Try <a href="ciphers/caesar.html">Caesar</a>. How many shifts do you need to check, and how do you decide whether one gives a plausible reading?</p></li>
+          <li><strong>Build evidence for a key</strong><p>Use the <a href="first-codebreak.html">beginner activities</a>. Which letter guesses support each other, and which force a contradiction?</p></li>
+          <li><strong>Add a machine</strong><p>Explore <a href="ciphers/enigma.html">Enigma</a>. What changes after a key press, and why does a changing alphabet make the earlier method harder?</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="beutelspacher" data-title-only="true">
+      <summary><em>Cryptology</em><small>Albrecht Beutelspacher · Mathematical Association of America, 1994</small></summary>
+      <div class="fr-trail-body">
+        <p>A title-only conceptual route from classical ciphers to public-key and proof ideas. Small museum examples are teaching models, not deployment instructions.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>A substitution is a rule</strong><p>Compare <a href="ciphers/caesar.html">Caesar</a> and <a href="ciphers/monoalphabetic.html">general substitution</a>. Which structure makes the first easier to search?</p></li>
+          <li><strong>Keep assumptions separate</strong><p>Contrast the <a href="ciphers/one-time-pad.html">one-time pad</a> and <a href="ciphers/rsa.html">RSA</a>. Explain each security claim without treating successful decryption as evidence of security.</p></li>
+          <li><strong>Show knowledge without the secret</strong><p>Visit <a href="ciphers/zero-knowledge-proofs.html">zero-knowledge proofs</a>. What should a verifier learn, and what should remain hidden? A demonstration is not a general security proof.</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="wrixon" data-title-only="true">
+      <summary><em>Codes, Ciphers &amp; Other Cryptic &amp; Clandestine Communication</em><small>Fred B. Wrixon · 1998</small></summary>
+      <div class="fr-trail-body">
+        <p>A title-only route through categories of secret communication. Keep an encoding, a secret-key cipher, a codebook and a concealed message distinct.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Readable is not necessarily secret</strong><p>Compare <a href="ciphers/morse.html">Morse</a> with <a href="ciphers/caesar.html">Caesar</a>. Which requires a secret key, and which is a public representation?</p></li>
+          <li><strong>Words and code groups</strong><p>Explore <a href="ciphers/commercial-codebooks.html">commercial codebooks</a>. Can an economical way of representing a phrase also conceal its meaning? What changes when the codebook becomes public?</p></li>
+          <li><strong>Hide the message’s presence</strong><p>Try the <a href="ciphers/null-cipher.html">null cipher</a> and <a href="ciphers/bacon.html">Bacon’s biliteral system</a>. Separate the extraction rule from the information it encodes.</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="goldreich" data-title-only="true">
+      <summary><em>Foundations of Cryptography</em><small>Oded Goldreich · Basic Tools, 2001; Basic Applications, 2004</small></summary>
+      <div class="fr-trail-body">
+        <p>A title-only conceptual companion to the two published volumes. The museum does not implement the books’ constructions or replace their definitions, reductions and proofs.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>State the computational assumption</strong><p>Visit <a href="hall-of-foundations/one-way-function.html">one-way functions</a>. Why does finding an inverse in one small example neither prove nor refute asymptotic one-wayness?</p></li>
+          <li><strong>Follow the reduction</strong><p>Explore <a href="hall-of-foundations/reduction.html">security reductions</a>. What capability does the hypothetical adversary supply, and which assumption would its success contradict?</p></li>
+          <li><strong>Specify the property</strong><p>Compare <a href="ciphers/zero-knowledge-proofs.html">zero-knowledge proofs</a> with <a href="lab/working-is-not-secure.html">Working Is Not Secure</a>. Why must a security claim specify both the adversary and the property being protected?</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="stephenson" data-title-only="true">
+      <summary><em>Cryptonomicon</em><small>Neal Stephenson · novel, 1999</small></summary>
+      <div class="fr-trail-body">
+        <p>A title-only companion to a work of fiction, not a historical source. Bruce Schneier designed Solitaire for the novel; the museum treats it as a historical educational algorithm, not recommended protection for real secrets.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Follow the deck state</strong><p>Try <a href="ciphers/solitaire.html">Solitaire</a>. How does the deck generate a keystream, and what happens if sender and receiver lose synchronization?</p></li>
+          <li><strong>Do not confuse a stream with a pad</strong><p>Compare <a href="ciphers/one-time-pad.html">one-time-pad conditions</a>. Why is a deterministic deck-generated stream different from independent random key material?</p></li>
+          <li><strong>Separate story from evidence</strong><p>Use the questions in <a href="lab/evidence-workbench.html">Evidence Workbench</a>. Which statements would need independent historical sources before you used the novel to explain an actual event?</p></li>
         </ol>
       </div>
     </details>
