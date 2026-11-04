@@ -36,7 +36,7 @@ Books were read from the user's copies and are cited by title, publisher and pri
 | Frank B. Rowlett, *The Story of Magic* (Aegean Park Press, 1998), pp. 151–154 | Statistical tests confirming which messages shared a key; Grotjan's first instance of the relationship; Friedman coming in; Rosen's earlier stepping-switch work; Ferner and Small with Rowlett |
 | Liza Mundy, *Code Girls* (Hachette, 2017), pp. 89–94 | Grotjan joining as a junior cryptanalyst in 1939; Rowlett supervising the Purple effort |
 
-**A discrepancy, flagged rather than fixed.** Rowlett's memoir places Grotjan's discovery shortly before Labor Day 1940. The Purple exhibit and Cryptanalysis Techniques give 20 September 1940. The worksheet asserts no date. Reconciling the exhibit is left as a follow-up.
+**A discrepancy, now noted on the exhibit.** Rowlett's memoir places Grotjan's discovery shortly before Labor Day 1940. Mundy's *Code Girls*, Bauer's *Decrypted Secrets* and the INSCOM Command Historian (Michael E. Bigelow, 2023) give 20 September 1940. The Purple exhibit and the Hall of Codebreakers keep 20 September 1940 and now say that Rowlett's memoir, which the exhibit cites, recalls the day differently; `tests/test-page-audit-claims.js` guards both notes. The worksheet still asserts no date.
 
 ## The fixture
 

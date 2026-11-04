@@ -117,6 +117,20 @@ const checks = [
     assert.match(s, /Grotjan’s September 1940 insight contributed/);
     assert.doesNotMatch(s, /Purple Broken on September 20/);
   }, 'Purple Broken on September 20'],
+  // Sources differ on the day of Grotjan's discovery. The pages keep the date
+  // most sources give and say that Rowlett's memoir, which they cite,
+  // recalls it as shortly before Labor Day.
+  ['ciphers/purple.html', s => {
+    assert.match(s, /September 20, 1940/);
+    assert.match(s, /Rowlett’s own memoir, The Story of Magic, recalls the day as shortly before Labor Day/);
+    assert.match(s, /Code Girls/);
+    assert.doesNotMatch(s, /Rowlett’s (?:own )?(?:memoir|account) (?:gives|dates|records|confirms)[^.]*20 September/);
+  }, 'Rowlett’s memoir records the breakthrough on 20 September 1940.'],
+  ['halls/codebreakers.html', s => {
+    assert.match(s, /September 20, 1940/);
+    assert.match(s, /Rowlett’s memoir, The Story of Magic, recalls the day as shortly before Labor Day/);
+    assert.doesNotMatch(s, /Rowlett’s (?:own )?(?:memoir|account) (?:gives|dates|records|confirms)[^.]*20 September/);
+  }, 'Rowlett’s own account dates the discovery to 20 September 1940.'],
   ['halls/machines.html', s => {
     assert.match(s, /Grotjan’s 20 September 1940 breakthrough/);
     assert.match(s, /half-rotor mechanism/);

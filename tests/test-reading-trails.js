@@ -52,8 +52,9 @@ function validate(html) {
   }
 
   // Books behind the newer case studies. Each source's first stop names its
-  // edition; every stop cites a chapter, section or printed page range and
-  // links the exhibit that relies on it. Books are cited, never linked.
+  // edition, and every stop links the exhibit that relies on it. By the
+  // owner's preference these books are cited by title only: no chapter,
+  // section or page references, and never a link to a copy.
   const caseTrails = {
     'traffic-analysis-books': ['lab/traffic-analysis.html', ['Borrmann et al.', 'Diffie and Landau', 'Thirsk']],
     'ancient-scripts-books': ['lab/decipherment-cases.html', ['Chadwick', 'Ventris and Chadwick', 'Parkinson', 'Collier and Manley', 'Coe', 'Kettunen and Helmke']],
@@ -65,16 +66,16 @@ function validate(html) {
     assert.ok(trail && trail.tagName === 'DETAILS', id + ' must be an accessible native disclosure.');
     assert.ok(trails.querySelector('.fr-trail-nav a[href="#' + id + '"]'), id + ' must be reachable from the trail picker.');
     const stops = [...trail.querySelectorAll('.fr-trail-stops > li')];
-    assert.ok(stops.length >= 3, id + ' needs usable chapter stops.');
+    assert.ok(stops.length >= 3, id + ' needs usable stops.');
+    assert.doesNotMatch(trail.textContent, /\bpp?\. ?\d|\bpages? \d|\bchapters? (\d|[IVX]+\b|“)|\bch\. ?\d|§|\bAppendix [A-Z]\b/i, id + ' must cite books by title only, without chapter, section or page references.');
     for (const stop of stops) {
       const label = stop.querySelector('strong').textContent;
-      assert.match(label, /\bpp?\. \d|\bchapters? (\d|[IVX]+\b|“)|§|\bAppendix [A-Z]\b/, id + ' stop must cite a chapter, section or page: ' + label);
       assert.ok(stop.querySelector('a[href^="' + exhibit + '"]'), id + ' stop must link the exhibit it supports: ' + label);
-      assert.equal(stop.querySelectorAll('a[href^="http"]').length, 0, 'Cite books by title and chapter; never link a copy: ' + label);
+      assert.equal(stop.querySelectorAll('a[href^="http"]').length, 0, 'Cite books by title; never link a copy: ' + label);
     }
     for (const source of sources) {
       assert.ok(trail.querySelector('summary').textContent.includes(source), id + ' must name its sources: ' + source);
-      const first = stops.find(stop => stop.querySelector('strong').textContent.startsWith(source + ','));
+      const first = stops.find(stop => stop.querySelector('strong').textContent.startsWith(source + ' ·'));
       assert.ok(first, id + ' needs a stop for ' + source);
       assert.match(first.textContent, /\([^()]*\b(19|20)\d\d[;)]/, id + ' must name the edition of ' + source);
     }
@@ -132,10 +133,11 @@ assert.throws(() => validate(html.replace('https://store.doverpublications.com/p
 // User preference: a correct chapter citation must not become a full-ebook link.
 assert.throws(() => validate(html.replace('<p>Chapter 5 · Chapter 6</p>', '<p><a href="https://inventwithpython.com/cracking/chapter5.html">Chapter 5</a> · Chapter 6</p>')), /without linking to ebook copies/);
 
-// The case-study trails: a missing page reference, a missing edition, a
+// The case-study trails: a page or chapter reference, a missing edition, a
 // private copy, a stop that no longer reaches its exhibit, a trail dropped
 // from the picker, a stale case anchor and a misspelled tour all fail.
-assert.throws(() => validate(html.replace('Rowlett, pp. 151–154', 'Rowlett, memoir')), /must cite a chapter, section or page/);
+assert.throws(() => validate(html.replace('<strong>Rowlett · From', '<strong>Rowlett, pp. 151–154 · From')), /must cite books by title only/);
+assert.throws(() => validate(html.replace('(Wiley, 2007).', '(Wiley, 2007), chapter 2.')), /must cite books by title only/);
 assert.throws(() => validate(html.replace('(Profile Books, 2000)', '')), /must name the edition of Flannery/);
 assert.throws(() => validate(html.replace('(Hachette, 2017)', '(Hachette, 2017; <a href="https://drive.google.com/file/d/private-copy">copy</a>)')), /never link a copy/);
 assert.throws(() => validate(html.replace('<a href="lab/working-is-not-secure.html#verdict">', '<a href="ciphers/monoalphabetic.html">')), /must link the exhibit it supports/);
@@ -162,4 +164,4 @@ caseLink.window.eval(navSource);
 assert.equal(caseLink.window.document.getElementById('purple-books').open, true, 'A deep link should reveal a case-study trail.');
 caseLink.window.close();
 
-console.log('Reading trails: four edition-pinned books, seven Sweigart stops, four case-study trails, ' + checked + ' internal routes, official sources, deep links and twelve mutation checks passed.');
+console.log('Reading trails: four edition-pinned books, seven Sweigart stops, four case-study trails, ' + checked + ' internal routes, official sources, deep links and thirteen mutation checks passed.');

@@ -3822,11 +3822,11 @@
     {
       "path": "ciphers/purple.html",
       "title": "Purple (Type 97) — The Cipher Museum",
-      "words": 886,
-      "sha256": "987630592daabb084b090ae4ae4340b539adc7d045f97441098dd63462e9e883",
+      "words": 978,
+      "sha256": "ba60ff4cca43d25b7ed6943832f8821e39a49d668198e3104d3b451f8adaa79c",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.\n3 November 2026: Grotjan's date. The page keeps 20 September 1940 (Mundy, Code Girls; Bauer, Decrypted Secrets; Bigelow, INSCOM Command Historian, 2023) and now says that Rowlett's memoir, already in its References, recalls the day as shortly before Labor Day. Checked against the text of Rowlett, Mundy and Bauer and the public DVIDS article. Three references added, by title. Guarded in tests/test-page-audit-claims.js.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -5501,8 +5501,8 @@
     {
       "path": "further-reading.html",
       "title": "Further Reading — The Cipher Museum",
-      "words": 5129,
-      "sha256": "f4756bc0b19ac9496199e9784bafc2e688523886a689a366f31d8553883c4671",
+      "words": 5066,
+      "sha256": "372a515027b180d6e803806d8fb613d8ae075d65a7fef0c9f0361d95ece48ebd",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996",
@@ -5513,7 +5513,7 @@
         "LASRY-2018",
         "CODEBREAKING-2020"
       ],
-      "notes": "All book cards and reading trails reread. Full authors/titles/edition years and selected ISBNs reconciled against bibliographic records. Public ebook destinations removed while primary papers/manuals and catalogue links remain; ten prohibited and four allowed destination cases tested.\n3 November 2026: Added four case-study reading trails (traffic analysis, ancient scripts, Purple, working is not secure) for the fifteen books cited by the newer lab pages. Each stop names the edition, gives a chapter, section or printed page range, and links the exhibit that cites it; citations copied from those pages, which were checked against the user's copies. Books are cited, not linked.",
+      "notes": "All book cards and reading trails reread. Full authors/titles/edition years and selected ISBNs reconciled against bibliographic records. Public ebook destinations removed while primary papers/manuals and catalogue links remain; ten prohibited and four allowed destination cases tested.\n3 November 2026: Added four case-study reading trails (traffic analysis, ancient scripts, Purple, working is not secure) for the fifteen books cited by the newer lab pages. Each stop names the edition, gives a chapter, section or printed page range, and links the exhibit that cites it; citations copied from those pages, which were checked against the user's copies. Books are cited, not linked.\n3 November 2026, later: at the owner's request the four case-study trails cite their books by title and edition only; chapter, section and page references were removed, and tests/test-reading-trails.js now rejects them there.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "bibliography_links",
@@ -6203,11 +6203,11 @@
     {
       "path": "halls/codebreakers.html",
       "title": "Hall X: Hall of Codebreakers — The Cipher Museum",
-      "words": 3024,
-      "sha256": "6b6c05d115d4a08895569fd251c92cdc1a5a740d35c2af8645fba0e7e1951a4a",
+      "words": 3052,
+      "sha256": "f159a8f4d90eb37b63a5cc1cda6477ce9ce4e8b3e90637b2df14cf6a413ccdf5",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
+      "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.\n3 November 2026: the Grotjan card keeps 20 September 1940 and now notes that Rowlett's memoir recalls the day as shortly before Labor Day. Guarded in tests/test-page-audit-claims.js. The card's quotation \"one of the great breaks of the war\" was not found in Rowlett's memoir, Code Girls or Decrypted Secrets; left unchanged and flagged.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "navigation_tours",
