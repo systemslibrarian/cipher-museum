@@ -313,7 +313,39 @@ async function recovery(page, viewport) {
       const errors = [];
       page.on('pageerror', err => errors.push(err.message));
       for (const [name, url, scope, exercise] of [
+        ['reading-trails', '/further-reading.html#tuchman', '#reading-trails', async (p, v) => {
+          for (const id of ['tuchman', 'sinkov', 'singh-young-readers', 'beutelspacher', 'wrixon', 'goldreich', 'stephenson']) {
+            await p.goto(base + '/further-reading.html#' + id, { waitUntil: 'load' });
+            const disclosure = p.locator('#' + id);
+            assert.equal(await disclosure.evaluate(el => el.open), true, id + ': deep link opens disclosure');
+            await press(p, '#' + id + ' summary');
+            assert.equal(await disclosure.evaluate(el => el.open), false, id + ': keyboard closes disclosure');
+            await p.locator('.fr-trail-nav a[href="#' + id + '"]').click();
+            assert.equal(await disclosure.evaluate(el => el.open), true, id + ': repeated selection reopens disclosure');
+            assert.equal(await disclosure.locator('.fr-trail-stops > li').count(), 3);
+          }
+          await snapshot(p, v, '#stephenson', 'reading-trail-fiction');
+          await snapshot(p, v, '#tuchman', 'reading-trail-history');
+        }],
+        ['purple-sources', '/ciphers/purple.html', '#main-content', async p => {
+          const text = await p.locator('main').innerText();
+          assert.doesNotMatch(text, /one of the great breaks of the war/);
+          assert.match(text, /further reconstruction/);
+          assert.ok(await p.locator('a[href*="frank_rowlett.pdf"]').count());
+        }],
+        ['codebreakers-sources', '/halls/codebreakers.html', '#main-content', async p => {
+          const text = await p.locator('main').innerText();
+          assert.doesNotMatch(text, /one of the great breaks of the war|consonant cipher alphabet/);
+          assert.match(text, /shortly before Labor Day/);
+          assert.ok(await p.locator('a[href*="frank_rowlett.pdf"]').count());
+        }],
         ['book', '/the-book.html', '#main-content', book],
+        ['profile-recovery-v2', '/lab/evidence-workbench.html', '#profile-recovery-v2', async (p, v) => {
+          await contains(p, '#profile-recovery-v2', /All 720 conditions completed/);
+          await contains(p, '#profile-recovery-v2', /none recovered an exact plaintext/);
+          await contains(p, '#profile-recovery-v2', /No live language model was called/);
+          await snapshot(p, v, '#profile-recovery-v2', 'profile-recovery-v2');
+        }],
         ['profile-recovery', '/lab/evidence-workbench.html', '#profile-recovery', recovery],
         ['entropy', '/hall-of-foundations/entropy.html', '#pooled-entropy', async (p, v) => {
           await contains(p, '#pooled-entropy', /distinguish four equally likely keys/);

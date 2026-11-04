@@ -24,3 +24,17 @@ assert.doesNotMatch(plain('timeline.html'), /every monoalphabetic cipher falls t
 assert.match(plain('halls/substitution.html'), /With enough suitable ciphertext/);
 assert.doesNotMatch(plain('halls/substitution.html'), /Every monoalphabetic cipher is broken/);
 console.log('Focused editorial claim regressions passed.');
+
+function checkGrotjan(html) {
+ assert.doesNotMatch(html, /one of the great breaks of the war|consonant cipher alphabet|revealed how Purple.s stepping switches were wired/i);
+ assert.match(html, /https:\/\/www\.dvidshub\.net\/news\/printable\/454045/);
+ assert.match(html, /frank_rowlett\.pdf#page=2/);
+ assert.match(html, /further reconstruction/);
+}
+for (const p of ['halls/codebreakers.html', 'ciphers/purple.html']) {
+ const html = fs.readFileSync(p, 'utf8');
+ checkGrotjan(html);
+ assert.throws(() => checkGrotjan(html + 'one of the great breaks of the war'));
+ assert.throws(() => checkGrotjan(html.replace('further reconstruction', 'complete wiring revealed')));
+}
+console.log('Grotjan source attribution and bounded reconstruction claims passed, including four mutation checks.');

@@ -210,15 +210,17 @@ ${fence(JSON.stringify(notes, null, 2), 'json')}
 const extras = ['js/artifact-cards-data.min.js', 'js/artifact-cards.js', 'js/breadcrumbs.js', 'js/footer.js', 'js/ui-delegates.js', 'js/research-worker.js', 'js/research-language-model.js', 'scripts/research-splits.js', 'sw.js', 'js/learning-path.js', 'scripts/columnar-classroom.js'];
 extras.forEach(f => scriptFiles.add(f));
 scriptFiles.add('scripts/evaluate-profile-recovery.js');
+scriptFiles.add('scripts/check-profile-recovery-v2.js');
+tree.filter(f => f.startsWith('data/research/profile-recovery-v2/') && f.endsWith('.js')).forEach(f => scriptFiles.add(f));
 const scriptRecords = [...scriptFiles].sort().map(served => {
   read(served);
   const readable = served.replace('.min.js', '.js');
   const code = read(readable);
   const dormant = readable === 'js/learning-path.js';
   const classroomCli = readable === 'scripts/columnar-classroom.js';
-  const recoveryCli = readable === 'scripts/evaluate-profile-recovery.js';
+  const recoveryCli = readable === 'scripts/evaluate-profile-recovery.js' || readable === 'scripts/check-profile-recovery-v2.js' || readable.startsWith('data/research/profile-recovery-v2/');
   return { served, readable, served_sha256: inputs.get(served).sha256, readable_sha256: hash(code), dormant, classroom_cli: classroomCli,
-    block: sanitize(`## JavaScript — ${readable}\n\n${classroomCli ? '**Classroom command-line tool:** runs with Node.js in a repository checkout; it is not a browser demo. The linked worksheet and fixed fixtures are included separately.' : recoveryCli ? '**Recovery experiment command-line tool:** runs with Node.js in a repository checkout; it is not a browser control. The protocol, every recorded condition, scorer inputs and interpretation are included separately. Its --check mode audits the saved report; --replay reruns search in the recorded runtime.' : dormant ? '**Dormant repository content:** no live HTML reference was found in this snapshot. Do not attribute these quizzes to a currently displayed page.' : 'Supporting source for public page behavior; presence of code does not prove that every branch was exercised.'}\n\nAny ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.\n\n- Served/distributed path: \`${served}\`\n- Served SHA-256: \`${inputs.get(served).sha256}\`\n- Readable-source SHA-256: \`${hash(code)}\`\n\n${fence(code, 'javascript')}`) };
+    block: sanitize(`## JavaScript — ${readable}\n\n${classroomCli ? '**Classroom command-line tool:** runs with Node.js in a repository checkout; it is not a browser demo. The linked worksheet and fixed fixtures are included separately.' : recoveryCli ? '**Recovery experiment command-line tool:** runs with Node.js in a repository checkout; it is not a browser control. The protocol, every recorded condition, scorer inputs and interpretation are included separately. For v1, --check audits the saved report and --replay reruns search. For the crossed v2 follow-up, scripts/check-profile-recovery-v2.js verifies saved arithmetic and identities; the frozen run.js needs a fresh output directory. Consult each version’s README before execution.' : dormant ? '**Dormant repository content:** no live HTML reference was found in this snapshot. Do not attribute these quizzes to a currently displayed page.' : 'Supporting source for public page behavior; presence of code does not prove that every branch was exercised.'}\n\nAny ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.\n\n- Served/distributed path: \`${served}\`\n- Served SHA-256: \`${inputs.get(served).sha256}\`\n- Readable-source SHA-256: \`${hash(code)}\`\n\n${fence(code, 'javascript')}`) };
 });
 
 const jsonFiles = [
@@ -235,9 +237,18 @@ const jsonFiles = [
   'data/research/profile-recovery-v1/evaluation-pre-integration.json',
   'data/research/profile-recovery-v1/integration-replay.json'
 ];
+jsonFiles.push(...tree.filter(f => f.startsWith('data/research/profile-recovery-v2/') && /\.(json|jsonl)$/.test(f)));
+jsonFiles.push('data/research/profile-recovery-v2/runs.jsonl.gz');
 const dataRecords = jsonFiles.map(file => {
-  const content = read(file); JSON.parse(content);
-  return { path: file, sha256: hash(content), block: sanitize(`## Data — ${file}\n\nSource SHA-256: \`${hash(content)}\`. Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.\n${fence(content, 'json')}`) };
+  let content;
+  if (file.endsWith('.gz')) {
+    const bytes = cp.execFileSync('git', ['show', `${commit}:${file}`], { cwd: root, maxBuffer: 32 * 1024 * 1024 });
+    inputs.set(file, { content: bytes, sha256: hash(bytes) });
+    content = require('node:zlib').gunzipSync(bytes).toString('utf8');
+  } else content = read(file);
+  if (/\.jsonl(?:\.gz)?$/.test(file)) content.trim().split('\n').forEach(line => JSON.parse(line));
+  else JSON.parse(content);
+  return { path: file, sha256: hash(content), block: sanitize(`## Data — ${file}\n\nSource SHA-256: \`${inputs.get(file).sha256}\`. ${file.endsWith('.gz') ? 'Lossless gzip source; decompressed complete JSONL follows. ' : ''}Original data, including provenance limitations; ebook URLs are suppressed in this export. Statistics/manifests describe omitted full datasets but do not let a reader independently recount them.\n${fence(content, /\.jsonl(?:\.gz)?$/.test(file) ? 'jsonl' : 'json')}`) };
 });
 
 const prompt = `# Independent Cipher Museum audit instructions
@@ -256,7 +267,7 @@ Suggested finding fields: \`id, page_id, path, quotation_or_location, category, 
 put('REVIEW_PROMPT.md', prompt);
 const scope = `# Cipher Museum — complete independent audit document
 
-This snapshot brings together **${records.length} public HTML pages**, **${scriptCount} nonempty inline scripts**, **${scriptRecords.length} shared/supporting JavaScript files**, **${dataRecords.length} JSON/manifest data files**, and **${Object.keys(sources).length} source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
+This snapshot brings together **${records.length} public HTML pages**, **${scriptCount} nonempty inline scripts**, **${scriptRecords.length} shared/supporting JavaScript files**, **${dataRecords.length} JSON/JSONL/manifest data files**, and **${Object.keys(sources).length} source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
 
 - Source repository: systemslibrarian/cipher-museum
 - Exact source commit: \`${commit}\`
@@ -308,6 +319,14 @@ part('15-classroom-worksheet.md', 'Columnar classroom worksheet', sanitize(`Sour
 const recoveryReadmeFile = 'data/research/profile-recovery-v1/README.md';
 const recoveryReadme = read(recoveryReadmeFile);
 part('16-profile-recovery.md', 'Historical-profile recovery experiment', sanitize(`Source: \`${recoveryReadmeFile}\`. SHA-256: \`${hash(recoveryReadme)}\`. The protocol, full result matrix, model inputs and Node.js runner are in the preceding appendices.\n\n${recoveryReadme}`));
+for (const [file, name, title] of [
+  ['data/research/profile-recovery-v2/README.md', '17-profile-recovery-v2.md', 'Crossed key and search-seed follow-up'],
+  ['docs/SOURCE_READING_FOLLOWUPS_2026-11-04.md', '18-source-reading-followups.md', 'Source and reading follow-up evidence limits']
+]) {
+  const content = read(file);
+  part(name, title, sanitize(`Source: \`${file}\`. SHA-256: \`${hash(content)}\`.\n\n${content}`));
+}
+
 put('CIPHER_MUSEUM_AUDIT.md', scope + '\n\n' + pieces.map(p => p.text).join('\n\n---\n\n'));
 put('README.md', `# Cipher Museum audit export\n\nA self-contained reading pack for an AI or human reviewer without repository access.\n\n- **Start with [CIPHER_MUSEUM_AUDIT.md](CIPHER_MUSEUM_AUDIT.md)**: all ${records.length} pages, inline scripts, source register and supporting JavaScript/data in one file.\n- [CIPHER_MUSEUM_AUDIT_PACK.zip](CIPHER_MUSEUM_AUDIT_PACK.zip): download the master document, all smaller parts, prompt and manifest together.\n- [REVIEW_PROMPT.md](REVIEW_PROMPT.md): ready-to-use independent review instructions.\n- [parts/](parts/): the same page and appendix content in smaller files for context/upload limits. Upload the prompt and README first, then page parts in order; supply the source register and relevant code/data parts with each batch.\n- [manifest.json](manifest.json): all page IDs, original source hashes, supporting-file inventory and export checksums.\n\n${scope.slice(scope.indexOf('## What is included'), scope.indexOf('# Independent Cipher Museum audit instructions'))}\n\n## Snapshot and regeneration\n\nSource commit: \`${commit}\` (${stamp}). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.\n\nWith repository access and dependencies installed:\n\n\`\`\`sh\nnode scripts/export-audit-document.js --ref HEAD\nnode scripts/export-audit-document.js --check\npython3 scripts/package-audit-document.py\npython3 scripts/package-audit-document.py --check\nnode scripts/sync-audit-summary.js\n\`\`\`\n\nThe exporter reads committed files, checks every public HTML page against the coverage inventory, rejects stale page hashes, preserves every nonempty body text node outside scripts/styles, includes script bodies separately, and checks output checksums. These checks prove export coverage, not factual truth. Update the source review ledger honestly before exporting a later content revision. The --check command uses the recorded source commit and also reports source drift in the current checkout.\n\n## Parts\n\n${pieces.map(p => `- [${p.name}](parts/${p.name}): ${p.title}`).join('\n')}\n`);
 

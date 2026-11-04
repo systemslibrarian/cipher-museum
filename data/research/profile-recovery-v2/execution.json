@@ -1,0 +1,12 @@
+{
+  "startedAt": "2026-11-04T18:58:52.489Z",
+  "runtime": {
+    "node": "v24.22.1",
+    "v8": "13.6.233.17-node.58",
+    "platform": "linux",
+    "arch": "x64",
+    "locale": "en-US"
+  },
+  "protocolSha256": "9f846492036bfac99827814626a3b0b8ea44b6cc6ebc07a494a70a30415dd6c9",
+  "runnerSha256": "bf879c7ecba04f54b11204a3b83425961692c310e5069c06a1fadee4ec23f7bf"
+}
