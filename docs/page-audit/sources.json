@@ -2153,5 +2153,55 @@
       "Publisher abstract and contextual framework"
     ],
     "scope": "Secrecy as practice as well as content; used for a short contextual distinction, not a full-paper reading claim."
+  },
+  "KAHN-PUBLISHER-POSITIONING": {
+    "title": "The Codebreakers — official publisher description",
+    "author": "David Kahn",
+    "url": "https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9781439103555",
+    "passages_read": [
+      "About the Book"
+    ],
+    "scope": "Publisher description supports historical breadth and consequences for war, diplomacy, business and espionage. Used to avoid falsely contrasting the book as technique-only; not a new reading of the complete book.",
+    "checked": "2026-11-04"
+  },
+  "SINGH-BOOK-POSITIONING": {
+    "title": "The Code Book — author’s description",
+    "author": "Simon Singh",
+    "url": "https://simonsingh.net/books/the-code-book/the-book/",
+    "passages_read": [
+      "The Book description and Cipher Challenge introduction"
+    ],
+    "scope": "Author describes mathematical/linguistic/technological explanations, personalities, historical consequences and ten reader challenges. No originality or superiority claim follows.",
+    "checked": "2026-11-04"
+  },
+  "SINGH-CIPHER-CHALLENGE": {
+    "title": "Cipher Challenge",
+    "author": "Simon Singh",
+    "url": "https://simonsingh.net/cryptography/cipher-challenge/",
+    "passages_read": [
+      "Introduction and principles"
+    ],
+    "scope": "Ten encrypted messages included in The Code Book; evidence that reader participation predates this museum book.",
+    "checked": "2026-11-04"
+  },
+  "SINGH-CRYPTO-CDROM": {
+    "title": "Crypto CD-ROM",
+    "author": "Simon Singh",
+    "url": "https://simonsingh.net/cryptography/crypto-cd-rom/",
+    "passages_read": [
+      "Description and list of interactive resources"
+    ],
+    "scope": "Interactive companion includes encryption and codebreaking tools, worksheets and a virtual Enigma. Historical availability only; no claim of current platform compatibility. Direct open was rate-limited during root verification; indexed author-page text was retrieved.",
+    "checked": "2026-11-04"
+  },
+  "MUSEUM-PROFILE-RECOVERY-2026": {
+    "title": "Historical-profile recovery comparison v1",
+    "year": 2026,
+    "url": "https://ciphermuseum.com/data/research/profile-recovery-v1/README.md",
+    "protocol": "data/research/profile-recovery-v1/protocol.json",
+    "results": "data/research/profile-recovery-v1/evaluation.json",
+    "script": "scripts/evaluate-profile-recovery.js",
+    "scope": "Original bounded experiment: six public passages from three author-disjoint works, five fixed key/search pairs, four scoring models and two solvers. All 240 conditions retained, with no exact recoveries. Matching means language, not necessarily historical period. Three editorial/introductory excerpts excluded before outcomes; Italian edition normalization remains. No general accuracy, significance or isolated historical-spelling benefit is claimed.",
+    "verification": "Real scorer substitutions, paired settings, full-result arithmetic and unchanged-matrix repeat; precise runtime and input hashes recorded with the results."
   }
 }

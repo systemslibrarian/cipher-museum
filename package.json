@@ -8,7 +8,7 @@
     "validate:release": "node scripts/validate-release-metadata.js",
     "test:engines": "node tests/engines/run.js",
     "test:deep": "node tests/test-deep-ciphers.js",
-    "test:research": "node tests/test-research-workbench.js && node tests/test-research-workbench-v2.js && node scripts/evaluate-research.js --check && node tests/test-research-evaluation-v2.js",
+    "test:research": "node tests/test-research-workbench.js && node tests/test-research-workbench-v2.js && node scripts/evaluate-research.js --check && node tests/test-research-evaluation-v2.js && node tests/test-profile-recovery.js",
     "test:comprehensive": "node tests/test-comprehensive.js",
     "test:demos": "node tests/test-demo-pages.js",
     "test:playground": "node tests/test-playground.js",
@@ -34,6 +34,9 @@
     "record:dataset-doi": "node scripts/record-dataset-doi.js",
     "build:language-profiles": "node scripts/build-research-language-profiles.js",
     "eval:research:v2": "node scripts/evaluate-research-v2.js",
+    "eval:profile-recovery": "node scripts/evaluate-profile-recovery.js",
+    "check:profile-recovery": "node scripts/evaluate-profile-recovery.js --check",
+    "replay:profile-recovery": "node scripts/evaluate-profile-recovery.js --replay",
     "sweep:solvers": "node scripts/sweep-solvers.js",
     "check:browsers": "node scripts/check-browsers.js"
   },

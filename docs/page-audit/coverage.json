@@ -5649,8 +5649,8 @@
     {
       "path": "hall-of-foundations/entropy.html",
       "title": "Information & Entropy · Hall of Foundations",
-      "words": 2222,
-      "sha256": "5766e7d2c51b2d7aa1865bf55e09a5408762c851dffe767adf6b3cd4d72757aa",
+      "words": 1984,
+      "sha256": "94d4cb15ad60c49bb4088a6ac7a119c0bde5a6303d32d792cddd98005ac4589b",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "BONEH-SHOUP-2023",
@@ -5695,6 +5695,11 @@
         "record": "docs/RESEARCH_REVIEW_2026-10-30.md",
         "validation": "docs/page-audit/research-2026-10-30-validation.json",
         "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
+      },
+      "review_2026_11_04": {
+        "scope": "Corrected the pooled-symbol example: four equally likely keys are distinguished by log₂4 = 2 bits; two is not the number of keys. Surrounding calculations unchanged.",
+        "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
+        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
       }
     },
     {
@@ -6514,8 +6519,8 @@
     {
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
-      "words": 572,
-      "sha256": "5558123e760ec9dd4901f821166b3f404c579333f22fd159eae33ed037c03dc1",
+      "words": 590,
+      "sha256": "eb06f9e4b80521e3199ab0d0040fbe36883b653fd48060722a28336126e360dd",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996"
@@ -6556,6 +6561,11 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
+      },
+      "review_2026_11_04": {
+        "scope": "Updated the short book-description paragraph to name evidence judgments and optional museum activities; approved reader promise and book presentation preserved.",
+        "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
+        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
       }
     },
     {
@@ -6624,10 +6634,12 @@
     {
       "path": "lab/evidence-workbench.html",
       "title": "Evidence Workbench — The Cipher Museum",
-      "words": 2868,
-      "sha256": "9a4b67cf116ad31d3545be18e07986309cd3d1fb94fa63760d049a63d320716f",
+      "words": 2961,
+      "sha256": "7049aec86b6771fb1b262eb41031fe8dfab0e53466fbca5a29e178e55d21f301",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
-      "sources": [],
+      "sources": [
+        "MUSEUM-PROFILE-RECOVERY-2026"
+      ],
       "notes": "Root reread public prose and evidence/model controls. Seeds, provenance, illustrative examples and recovery limits remain explicit; runtime checks do not authenticate historical source records. 29 Oct 2026 research review R03/R04/R05/R06/R07/R08/R11: added image registration with coordinate transforms, a keyboard-accessible symbol inventory with split and merge, a hypothesis register, an investigation bundle with resume and guided examples, a second solver, historical-language profile selection and comparison, and a segmentation ambiguity view. All computation stays local; image bytes are never exported. 1 Nov 2026 follow-up: the solver section now states that annealing is the stronger of the two and beam search is offered as a contrast only, citing the pre-registered sweep in which every annealing setting beat every beam setting. The solver menu label says so too. Developmental book revision, November 2026: added a beginner evidence exercise with an optional answer reveal.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
@@ -6661,6 +6673,11 @@
       "reading_evidence_2026_11_02": {
         "scope": "Link invitation to four guided, invented research exercises; older review and browser checks remain historical evidence.",
         "record": "docs/READING_THE_EVIDENCE.md"
+      },
+      "review_2026_11_04": {
+        "scope": "Added bounded 240-condition historical-profile recovery results with complete-failure count and Latin-annealing exception. Scoped prior solver comparison to its original modern-English baseline sweep; new experiment is separate from readable-text language recognition.",
+        "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
+        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
       }
     },
     {
@@ -6695,8 +6712,8 @@
     {
       "path": "lab/modern-attack-evidence.html",
       "title": "What an Attack Result Actually Shows — The Cipher Museum",
-      "words": 5165,
-      "sha256": "adb7bac36e4d1df6ca2755e9f87d77a12c170fb409728ee210e5e3998df107cd",
+      "words": 4976,
+      "sha256": "ce67125dad474fd3d64ff3be3fff9fd12b3c38fe341d5ffee8b1ac716b5d0220",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "GPU-SEARCH-2025",
@@ -6750,7 +6767,12 @@
         "validation": "docs/page-audit/research-2026-10-30-validation.json",
         "scope": "Targeted new research and workflow corrections. Earlier reviews and deployed checks below are historical; this field does not claim new verification of every unchanged primary fact."
       },
-      "research_review_followup_2026_11_01": "revised"
+      "research_review_followup_2026_11_01": "revised",
+      "review_2026_11_04": {
+        "scope": "Corrected the comparative-attack heading from four to five cards. Underlying evidence and unexecuted live-AI recipe status unchanged.",
+        "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
+        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
+      }
     },
     {
       "path": "lab/reading-the-evidence.html",
@@ -7253,10 +7275,15 @@
     {
       "path": "the-book.html",
       "title": "Secrets of the Cipher Museum — Paul “The Cipher Librarian” Clark — The Cipher Museum",
-      "words": 1696,
-      "sha256": "33c7ce7a43931c5015c82f7a24e930079c8d4a5f8e2619926bd2ccfcae80795e",
+      "words": 1764,
+      "sha256": "1a65c331710f2771a16b6ec23e65c3311e3f129991fd720e9550a2cc377499b3",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
-      "sources": [],
+      "sources": [
+        "KAHN-PUBLISHER-POSITIONING",
+        "SINGH-BOOK-POSITIONING",
+        "SINGH-CIPHER-CHALLENGE",
+        "SINGH-CRYPTO-CDROM"
+      ],
       "notes": "Read the complete preview page, metadata, opening excerpt, image description, fictional reader-mystery invitation and reading-group questions. Confirmed its preview/publication-status wording and internal connections to the companion and Babington exhibit. The named chapter sources and the manuscript-dependent claims about chapter/diagram counts remain attributed to the book change; the manuscript and external historical sources were not reread for this integration. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. Developmental book revision, November 2026: synchronised the revised prologue and twelve-image description. Reader-experience revision 2026-11-02: added a 20-chapter directory with exact exhibit destinations, four optional slip stops and prompts matched to the current manuscript invitations. Updated documentary image count from four to six against the book figure manifest. The approved promise, cover, historical excerpt and forthcoming status are preserved. No new historical claim introduced; existing sources were not independently reverified.\n3 November 2026: Added optional chapter-to-experiment guide for chapters 10, 12, 13, 16 and 17–20, aligned with the current manuscript. Preserve narrative, cover, excerpt and publication status. No new quotation introduced.",
       "integration_review": {
         "date": "2026-10-30",
@@ -7297,6 +7324,11 @@
         "scope": "Added optional chapter-to-experiment guide for chapters 10, 12, 13, 16 and 17–20, aligned with the current manuscript. Preserve narrative, cover, excerpt and publication status. No new quotation introduced.",
         "tests": "tests/test-process-exercises.js; full npm test except the ledger freshness gate passed, with ledger corrected afterward",
         "limits": "Existing historical claims outside the described additions were not newly reverified. Prior browser records describe earlier revisions."
+      },
+      "review_2026_11_04": {
+        "scope": "Updated public description and metadata to focus on evidence, corroboration, uncertainty and decisions. Comparison FAQ fairly acknowledges Kahn/Singh historical consequences and Singh’s interactive resources; approved promise, cover, prologue and chapter invitations preserved.",
+        "record": "docs/RESEARCH_REVIEW_2026-11-04.md",
+        "limits": "Targeted content/code consistency review; previous full-page source and browser records remain historical. No fresh browser visual check in this pass."
       }
     },
     {
