@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Working Is Not Secure — The Cipher Museum</title>
+<meta name="description" content="A short guided route: a cipher that encrypts and decrypts correctly can still fail its security claim. Separate correctness, performance and security, and test each on its own terms.">
+<meta property="og:title" content="Working Is Not Secure — The Cipher Museum">
+<meta property="og:description" content="A short guided route: a cipher that encrypts and decrypts correctly can still fail its security claim. Separate correctness, performance and security, and test each on its own terms.">
+<link rel="canonical" href="https://ciphermuseum.com/lab/working-is-not-secure.html"><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/museum.css"><link rel="stylesheet" href="../css/research-workbench.css"><link rel="stylesheet" href="../css/evidence-exercises.css">
+</head><body><a class="skip-link" href="#main-content">Skip to main content</a>
+<nav class="museum-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="2" fill="currentColor"/></svg>
+      <span class="nav-logo-text">The Cipher Museum</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../museum-map.html">Explore</a></li>
+      <li><a href="../timeline.html">Timeline</a></li>
+      <li><a href="../learn.html">Learn</a></li>
+      <li><a href="../cipher-corpus.html">Cipher Corpus</a></li>
+      <li><a href="../cryptanalysis.html">Cryptanalysis</a></li>
+      <li><a href="../challenges.html">Challenges</a></li>
+      <li><a href="../lab/workbench.html">Lab</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="page-hero"><p class="hero-sub">A guided route</p><h1>Working Is Not Secure</h1><p class="hero-intro">A cipher that encrypts and decrypts perfectly can still fail the one claim that matters. This route separates three questions that are easy to blur: is it correct, is it fast, and is it secure?</p></header>
+<main id="main-content" class="research-main" tabindex="-1">
+<noscript><p>The explanation and the route remain readable without JavaScript. Enable JavaScript to run the two tests.</p></noscript>
+
+<section class="evidence-exercise" id="three" aria-labelledby="three-title">
+<h2 id="three-title">Three different questions</h2>
+<ul class="evidence-steps">
+<li><strong>Correctness:</strong> does decryption give back exactly what was encrypted? A failure here is a bug.</li>
+<li><strong>Performance:</strong> is it fast and cheap enough to use? Speed is a reason to choose a scheme, never evidence that it is secure.</li>
+<li><strong>The security claim:</strong> what does it promise against an adversary, and has anyone tried to break that promise? Neither of the first two answers this.</li>
+</ul>
+<p>Practical ciphers can be broken in principle, so what matters is how much work an attack really needs. Trying every key is the attack of last resort, which means a large key space bounds only exhaustive key search. Any shortcut that avoids searching keys makes the number of keys irrelevant (Fred Piper and Sean Murphy, <cite>Cryptography: A Very Short Introduction</cite>, chapter 6).</p>
+</section>
+
+<section class="evidence-exercise" id="example" aria-labelledby="example-title">
+<h2 id="example-title">A worked example: four questions, two tests</h2>
+<p>The scheme is a simple substitution cipher: each letter is always replaced by the same other letter. The message and key below are invented for this page.</p>
+<dl class="evidence-steps">
+<dt>1. What does the adversary have?</dt><dd id="wn-q-adversary">The ciphertext only, plus ordinary knowledge of English. No key and no plaintext.</dd>
+<dt>2. What property is claimed?</dt><dd id="wn-q-claim">That the ciphertext gives nothing away, because there are 26! (about 4 × 10<sup>26</sup>) possible keys: far too many to try.</dd>
+<dt>3. What would a functional test show?</dt><dd id="wn-q-functional">Whether decrypting with the key returns the message exactly. It tests correctness only.</dd>
+<dt>4. What is a separate security test?</dt><dd id="wn-q-security">An attack that uses only what the adversary has. Here: rank the ciphertext letters by how often they occur, and pair them with English letters ranked the same way. No key is searched.</dd>
+</dl>
+<p><strong>Ciphertext:</strong> <code id="wn-cipher" class="ta-source"></code></p>
+<button type="button" id="wn-functional">Run the functional test</button><button type="button" id="wn-security">Run the security test</button>
+<p id="wn-functional-result" role="status"></p>
+<p><strong>Attacker’s first reading:</strong> <code id="wn-guess" class="ta-source"></code></p>
+<p id="wn-security-result" role="status"></p>
+<div id="verdict"><h3>The verdict</h3><p>The cipher works: it is correct, and fast enough to do by hand. Its security claim still fails, because the attack never needed to search the key space. The museum’s <a href="../ciphers/monoalphabetic.html">substitution exhibit</a> goes from this first reading to the full key. To play a security game in which the attacker’s advantage is measured over many rounds, try <a href="https://systemslibrarian.github.io/crypto-lab-hidden-bit/">Hidden Bit</a> in Crypto Lab.</p></div>
+</section>
+
+<section class="evidence-exercise" id="negative" aria-labelledby="negative-title">
+<h2 id="negative-title">When the claim fails</h2>
+<p>Sarah Flannery’s Cayley–Purser algorithm was a working public-key scheme, and it won her the Young Scientist competition. An attack then exposed a security problem in it. In the chapter “After-math” of <cite>In Code</cite> (2000) she describes including a detailed report on that attack in her later project, and treating the negative result as part of how science moves forward rather than as a failure. The book does not give the technical attack, and this page does not reproduce the attack either.</p>
+<p>Friedrich L. Bauer’s maxims of cryptology make the same warning from the other side: do not underrate the adversary, distrust an inventor’s confidence in their own method, and remember that people make mistakes (Bauer, <cite>Decrypted Secrets</cite>, 4th edition, §11.2, printed pp. 220–224).</p>
+</section>
+
+<section class="evidence-exercise" id="route" aria-labelledby="route-title">
+<h2 id="route-title">Follow the route</h2>
+<p>The <a href="../tours/tour.html?tour=working-not-secure">Working Is Not Secure tour</a> visits exhibits where each of the four questions decides the outcome: a huge key space undone by language patterns, a perfect-secrecy guarantee that holds only under strict conditions, a machine attacked through its procedures, what a security proof really assumes, and how modern attacks are judged. It returns to the verdict above.</p>
+</section>
+
+<section class="evidence-exercise" id="sources" aria-labelledby="sources-title">
+<h2 id="sources-title">Sources</h2>
+<ul class="evidence-steps">
+<li>Sarah Flannery with David Flannery, <cite>In Code: A Mathematical Journey</cite> (2000), chapter “After-math”.</li>
+<li>Friedrich L. Bauer, <cite>Decrypted Secrets: Methods and Maxims of Cryptology</cite>, 4th edition (Springer, 2007), §11.2 “Maxims of Cryptology”, printed pp. 220–224.</li>
+<li>Fred Piper and Sean Murphy, <cite>Cryptography: A Very Short Introduction</cite> (Oxford University Press, 2002), chapter 6.</li>
+</ul>
+<p>The message, key and tests are original to this page. Books are cited by title and chapter or page; no copy of any book is linked. Key-size figures from older books are not used as present-day guidance.</p>
+</section>
+</main><footer></footer><script src="../js/nav.js" defer></script><script src="../js/working-not-secure.js" defer></script></body></html>
