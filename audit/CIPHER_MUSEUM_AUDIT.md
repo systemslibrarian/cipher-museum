@@ -3,8 +3,8 @@
 This snapshot brings together **227 public HTML pages**, **80 nonempty inline scripts**, **68 shared/supporting JavaScript files**, **29 JSON/manifest data files**, and **188 source-register entries**. It is an export for independent review, not a new claim-by-claim verification.
 
 - Source repository: systemslibrarian/cipher-museum
-- Exact source commit: `1ff94108c646ead3f612595108ab2e97e1a6151c`
-- Source commit time: 2026-11-03T22:56:36-05:00
+- Exact source commit: `0643be340ca2c7948a4f09e495afc951f45e1564`
+- Source commit time: 2026-11-04T06:58:59-05:00
 - Public website: https://ciphermuseum.com/
 - Inventory authority: docs/page-audit/coverage.json, checked against every tracked public HTML page.
 - Snapshot hashes identify the original files. Exported text is reformatted; direct ebook URLs are replaced with a visible omission marker. Book titles, authors and publication details remain.
@@ -268,7 +268,7 @@ Suggested finding fields: `id, page_id, path, quotation_or_location, category, s
 
 # Pages P001–P020
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P001: 404.html -->
 <a id="p001"></a>
@@ -5611,7 +5611,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P021–P040
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P021: ciphers/bach-motif.html -->
 <a id="p021"></a>
@@ -10985,7 +10985,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P041–P060
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P041: ciphers/colossus.html -->
 <a id="p041"></a>
@@ -16509,7 +16509,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P061–P080
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P061: ciphers/elizebeth-friedman.html -->
 <a id="p061"></a>
@@ -22179,7 +22179,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P081–P100
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P081: ciphers/jn-25.html -->
 <a id="p081"></a>
@@ -27606,7 +27606,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P101–P120
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P101: ciphers/monoalphabetic.html -->
 <a id="p101"></a>
@@ -33651,7 +33651,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P121–P140
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P121: ciphers/red-type-a.html -->
 <a id="p121"></a>
@@ -39034,7 +39034,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P141–P160
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P141: ciphers/straddling-checkerboard.html -->
 <a id="p141"></a>
@@ -45019,7 +45019,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P161–P180
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P161: ciphers/zodiac.html -->
 <a id="p161"></a>
@@ -45571,12 +45571,13 @@ This describes work recorded before this export. Treat these notes as assertions
 
 - Site path: `codebreak-answers.html`
 - Public page: https://ciphermuseum.com/codebreak-answers.html
-- Snapshot source SHA-256: `dc12ccbabda757dbecda91ab2c6dae0c8dfa00dfe0df1438cb21cd8c17e12b45`
+- Snapshot source SHA-256: `59161e09faacdc9dd914db0d897e116ef51645d07341b2296ca403253cdf0bc6`
 - Source identities in the prior evidence ledger: None assigned; this is not evidence that the page needs no sources.
 
 ### Metadata and search/social descriptions
 
 - description: First Codebreak — Facilitator’s Answers: original printable library-themed substitution and Vigenère exercises.
+- robots: noindex, follow
 
 ### Complete static body text and inline diagrams
 
@@ -45660,7 +45661,9 @@ This describes work recorded before this export. Treat these notes as assertions
     "notes": "Generated separate facilitator answer sheet; ciphertexts, known answers, actual repetition distances and equivalent key periods checked by executable tests.",
     "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
     "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
-  }
+  },
+  "notes": "4 Nov 2026: added <meta name=\"robots\" content=\"noindex, follow\">. The page is the facilitator answer key and is linked from first-codebreak.html and codebreak-worksheet.html, so leaving it out of sitemap.xml alone would not have kept it out of a search index. The tag is the mechanism that governs indexing; links are still followed. No content changed.",
+  "indexing_policy_2026_11_04": "noindex added"
 }
 ```
 
@@ -52174,7 +52177,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P181–P200
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P181: hall-of-foundations/learning-with-errors.html -->
 <a id="p181"></a>
@@ -57988,7 +57991,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P201–P220
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P201: halls/unbreakable.html -->
 <a id="p201"></a>
@@ -64479,7 +64482,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Pages P221–P227
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 <!-- BEGIN PAGE P221: sealed-letter.html -->
 <a id="p221"></a>
@@ -67402,7 +67405,7 @@ This describes work recorded before this export. Treat these notes as assertions
 
 # Source register and recorded access limits
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 These 188 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
@@ -70506,7 +70509,7 @@ These 188 identities and reading scopes come from the prior review ledger. They 
 
 # javascript appendix 1
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -74047,7 +74050,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 2
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/cipher-corpus.js
 
@@ -74456,7 +74459,7 @@ if (typeof require !== 'undefined') {
 
 # javascript appendix 3
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/all-engines.js
 
@@ -78739,7 +78742,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 # javascript appendix 4
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/caesar-break.js
 
@@ -82025,7 +82028,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 5
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/detective/attacks.js
 
@@ -85575,7 +85578,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 6
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/first-codebreak.js
 
@@ -88495,7 +88498,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 7
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/research-model.js
 
@@ -91150,7 +91153,7 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
 
 # javascript appendix 8
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/working-not-secure.js
 
@@ -91657,7 +91660,7 @@ self.addEventListener('fetch', (event) => {
 
 # data appendix 1
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — tours/foundations.json
 
@@ -92594,7 +92597,7 @@ Source SHA-256: `72c9a03dfa48a2e2a1ae78e44e880042471e53fb871ca22dffdc8bd38a9f64e
 
 # data appendix 2
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v1/language-model.json
 
@@ -92609,7 +92612,7 @@ Source SHA-256: `5d7b3680d6671e49fa407d2db8020147a457c432e6730ab610902f87c7935f2
 
 # data appendix 3
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — public/corpus/v0.8/browser-sample.json
 
@@ -98388,7 +98391,7 @@ Source SHA-256: `788eb1bc8977cb9fd38d8584521bd150ebaf0a660f24f732b8ccead684291b7
 
 # data appendix 4
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — js/search-index.json
 
@@ -98403,7 +98406,7 @@ Source SHA-256: `ec44ab28f4b76eb53b95b8be638a8b3b5a234196a64c04505931446158cd296
 
 # data appendix 5
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/artifact-cards.json
 
@@ -101508,7 +101511,7 @@ Source SHA-256: `3bd4770c7e3bdafad529f347a3e63703a5db49633054c20396147e9ac719f89
 
 # data appendix 6
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — corpus/engine-manifest.json
 
@@ -105954,7 +105957,7 @@ Source SHA-256: `ef43da724bfeac2d1e00f9df68ad8d6b5fe415430ba05d5f7c5f3852bc70724
 
 # data appendix 7
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## Data — data/research/v2/evaluation.json
 
@@ -108081,7 +108084,7 @@ Source SHA-256: `ed3eb642c4d28142be7c99e85e02d907f3390be4eba84dbb19165611be0118e
 
 # Columnar classroom worksheet
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `public/teaching/columnar-classroom.md`. SHA-256: `195e139c2732cb0d3d6c2ab5dd6fe5addf6100e130bd875a52b0d2d945d68091`. Its Node.js runner and fixed JSON fixtures are in the preceding appendices.
 

@@ -1,6 +1,6 @@
 # Columnar classroom worksheet
 
-Snapshot: `1ff94108c646ead3f612595108ab2e97e1a6151c`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `0643be340ca2c7948a4f09e495afc951f45e1564`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `public/teaching/columnar-classroom.md`. SHA-256: `195e139c2732cb0d3d6c2ab5dd6fe5addf6100e130bd875a52b0d2d945d68091`. Its Node.js runner and fixed JSON fixtures are in the preceding appendices.
 
