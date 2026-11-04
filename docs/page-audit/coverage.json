@@ -621,11 +621,11 @@
     {
       "path": "ciphers/babington.html",
       "title": "The Babington Plot Cipher (1586) — The Cipher Museum",
-      "words": 1287,
-      "sha256": "a9171ed10ef15526667df5615d216811025f2e594b8d882d1d1ecb8e3ba5a85b",
+      "words": 1358,
+      "sha256": "f23d1d4b992d4a8ea9cbc3ab604187175ed8ad65d8bc8deedada42f823878b51",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed. 2 Nov 2026 (PR #31): the two Babington script tags now carry content-hash query strings (?v=...), stamped by scripts/build-min.js from the bundle bytes. A returning reader holding the previous cache-first service worker fetches the corrected teaching model on the first online visit instead of replaying a stale engine. Delivery mechanism only; no historical, cryptographic or evidentiary claim changed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -653,7 +653,8 @@
         "scope": "Generated collection total changed from 172 to 173; historical prose unchanged.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
-      }
+      },
+      "cache_delivery_fix_2026_11_02": "revised"
     },
     {
       "path": "ciphers/bach-motif.html",
@@ -7552,5 +7553,14 @@
     "scope": "Original intercept workflow, structural holdout, Navajo vocabulary comparison and chapter-to-experiment connections",
     "sources": "Book title, edition and printed-page credits; primary dictionary and research links. No source-book copies are distributed.",
     "audit_export": "Existing downloadable audit pack is a frozen earlier snapshot; this ledger records the changed source revision."
+  },
+  "cache_delivery_fix_2026_11_02": {
+    "date": "2026-11-02",
+    "source": "PR #31, rebased onto main on 3 November 2026",
+    "pages_revised": [
+      "ciphers/babington.html"
+    ],
+    "scope": "Asset delivery only: content-hash script URLs on the Babington exhibit, JavaScript served network-first with a cached fallback, and the worker's own cache policy folded into the version stamp so a policy change invalidates old caches. No claim changed.",
+    "note": "Rebased over 43 commits of later work. The branch's stale base would have reverted newer exhibits, tests and tour data; only its delivery changes were carried across."
   }
 }
