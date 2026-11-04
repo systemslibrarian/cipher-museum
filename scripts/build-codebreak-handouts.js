@@ -4,11 +4,15 @@ const fs=require('node:fs'), path=require('node:path');
 const f=require('../js/first-codebreak');
 const root=path.join(__dirname,'..');
 const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// The answer key is linked from the lesson and the worksheet, so keeping it out
+// of sitemap.xml would not keep it out of a search index. noindex is the tag that
+// actually governs that; follow keeps its outgoing links working. The student
+// worksheet is unaffected.
 function page(name,title,body) {
   return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title} — The Cipher Museum</title><meta name="description" content="${title}: original printable library-themed substitution and Vigenère exercises.">
-<link rel="canonical" href="https://ciphermuseum.com/${name}"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="css/museum.css"><link rel="stylesheet" href="css/first-codebreak.css"></head>
+${name==='codebreak-answers.html'?'<meta name="robots" content="noindex, follow">':''}<link rel="canonical" href="https://ciphermuseum.com/${name}"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="css/museum.css"><link rel="stylesheet" href="css/first-codebreak.css"></head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a><nav class="museum-nav" aria-label="Primary"><div class="nav-inner"><a class="nav-logo" href="index.html">The Cipher Museum</a><ul class="nav-links"><li><a href="first-codebreak.html">First codebreak</a></li><li><a href="teaching.html">Teaching</a></li></ul></div></nav>
 <main id="main-content" tabindex="-1" class="codebreak-main"><h1 class="page-title">${title}</h1><p class="no-print">Use your browser’s Print command to print or save as PDF. <a href="first-codebreak.html">Open the interactive lessons</a> · <a href="${name==='codebreak-worksheet.html'?'codebreak-answers.html':'codebreak-worksheet.html'}">${name==='codebreak-worksheet.html'?'Facilitator’s answers (spoilers)':'Student worksheet'}</a></p>${body}<p class="quiet">Cipher Museum · ciphermuseum.com/first-codebreak.html · Original teaching exercises, not historical documents.</p></main><footer></footer><script src="js/nav.js" defer></script></body></html>
 `;

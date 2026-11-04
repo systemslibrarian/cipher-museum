@@ -5324,14 +5324,16 @@
       "path": "codebreak-answers.html",
       "sources": [],
       "title": "First Codebreak — Facilitator’s Answers — The Cipher Museum",
-      "words": 586,
-      "sha256": "dc12ccbabda757dbecda91ab2c6dae0c8dfa00dfe0df1438cb21cd8c17e12b45",
+      "words": 617,
+      "sha256": "59161e09faacdc9dd914db0d897e116ef51645d07341b2296ca403253cdf0bc6",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "revision_2026_11_02": {
         "notes": "Generated separate facilitator answer sheet; ciphertexts, known answers, actual repetition distances and equivalent key periods checked by executable tests.",
         "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
         "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
-      }
+      },
+      "notes": "4 Nov 2026: added <meta name=\"robots\" content=\"noindex, follow\">. The page is the facilitator answer key and is linked from first-codebreak.html and codebreak-worksheet.html, so leaving it out of sitemap.xml alone would not have kept it out of a search index. The tag is the mechanism that governs indexing; links are still followed. No content changed.",
+      "indexing_policy_2026_11_04": "noindex added"
     },
     {
       "path": "codebreak-worksheet.html",
@@ -7562,5 +7564,13 @@
     ],
     "scope": "Asset delivery only: content-hash script URLs on the Babington exhibit, JavaScript served network-first with a cached fallback, and the worker's own cache policy folded into the version stamp so a policy change invalidates old caches. No claim changed.",
     "note": "Rebased over 43 commits of later work. The branch's stale base would have reverted newer exhibits, tests and tour data; only its delivery changes were carried across."
+  },
+  "indexing_policy_2026_11_04": {
+    "date": "2026-11-04",
+    "pages_revised": [
+      "codebreak-answers.html"
+    ],
+    "scope": "Indexing policy only: the facilitator answer key now declares noindex, follow. No content, claim or example changed.",
+    "sitemap": "Also kept out of sitemap.xml, together with public/reports/benchmark-baselines.html. tests/test-sitemap-coverage.js reads the noindex tag from the page rather than holding a second list that could disagree with it."
   }
 }

@@ -23,10 +23,12 @@ const root = path.resolve(__dirname, '..');
 const ORIGIN = 'https://ciphermuseum.com/';
 
 // Pages that are indexable but intentionally kept out of the sitemap.
+// The codebreak answer key is NOT listed here: it carries its own noindex meta
+// tag, so the page excludes itself and the test reads that from the page. One
+// mechanism, not two agreeing by luck.
 const EXCLUDED = new Map([
   ['404.html', 'error page; should not be indexed or advertised'],
   ['offline.html', 'service-worker offline fallback, not a destination'],
-  ['codebreak-answers.html', 'answer key for the worksheet; owner chose not to advertise it'],
   ['public/reports/benchmark-baselines.html', 'generated report, linked from the corpus page rather than crawled']
 ]);
 
