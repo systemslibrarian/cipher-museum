@@ -216,4 +216,17 @@
   <url><loc>https://ciphermuseum.com/lab/intercept-to-intelligence.html</loc></url>
   <url><loc>https://ciphermuseum.com/ciphers/gripenstierna.html</loc></url>
   <url><loc>https://ciphermuseum.com/lab/kisses.html</loc></url>
+  <url><loc>https://ciphermuseum.com/ciphers/nfc-deployment.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/sodark.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/ciphers/ua-8295.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/decipherment-cases.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/evidence-workbench.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/modern-attack-evidence.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/purple-diagnosis.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/reading-the-evidence.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/traffic-analysis.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/lab/working-is-not-secure.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ciphermuseum.com/classical-guide.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/codebreak-worksheet.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ciphermuseum.com/first-codebreak.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
