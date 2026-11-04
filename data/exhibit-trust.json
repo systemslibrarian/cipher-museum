@@ -2,178 +2,1364 @@
   "_comment": "Canonical exhibit trust classifications. null omits all trust badges. Notes describe historical evidence or correct use separately. Definitions live in data/trust-labels.json; regenerate with npm run build:metadata.",
   "_collectionComment": "Collection and interactive fields also own exhibit counts. cipher-history includes ciphers, machines, people, places, history and culture; foundations covers mathematical exhibits; protocols covers protocols and cryptographic constructions. interactive means an on-page working demo or controllable visualization, not necessarily reversible encryption.",
   "exhibits": [
-    {"number":1,"path":"ciphers/scytale.html","label":"broken","note":"Simple transposition model; historical origin and military use are debated.","collection":"cipher-history","interactive":true},
-    {"number":2,"path":"ciphers/caesar.html","label":"broken","note":"Exhaustive shift search; frequency evidence helps rank candidates.","collection":"cipher-history","interactive":true},
-    {"number":3,"path":"ciphers/polybius.html","label":"broken","note":"Frequency analysis","collection":"cipher-history","interactive":true},
-    {"number":4,"path":"ciphers/monoalphabetic.html","label":"broken","note":"Language statistics and word patterns can expose a fixed substitution.","collection":"cipher-history","interactive":true},
-    {"number":5,"path":"ciphers/homophonic.html","label":"broken","note":"Statistical analysis · Structural pattern detection","collection":"cipher-history","interactive":true},
-    {"number":6,"path":"ciphers/playfair.html","label":"broken","note":"Digraph statistics · hill climbing","collection":"cipher-history","interactive":true},
-    {"number":7,"path":"ciphers/hill.html","label":"broken","note":"Known plaintext attack (matrix algebra)","collection":"cipher-history","interactive":true},
-    {"number":8,"path":"ciphers/vigenere.html","label":"broken","note":"Babbage ~1854 · Kasiski 1863","collection":"cipher-history","interactive":true},
-    {"number":9,"path":"ciphers/beaufort.html","label":"broken","note":"Kasiski Examination · Index of Coincidence","collection":"cipher-history","interactive":true},
-    {"number":10,"path":"ciphers/porta.html","label":"broken","note":"Index of Coincidence · Statistical analysis","collection":"cipher-history","interactive":true},
-    {"number":11,"path":"ciphers/gronsfeld.html","label":"broken","note":"Kasiski · Only 10 possible shifts per position","collection":"cipher-history","interactive":true},
-    {"number":12,"path":"ciphers/running-key.html","label":"broken","note":"Source text identification · Statistical analysis","collection":"cipher-history","interactive":true},
-    {"number":13,"path":"ciphers/rail-fence.html","label":"broken","note":"Brute force · Trivial keyspace","collection":"cipher-history","interactive":true},
-    {"number":14,"path":"ciphers/columnar.html","label":"broken","note":"Frequency analysis · Anagramming","collection":"cipher-history","interactive":true},
-    {"number":15,"path":"ciphers/double-transposition.html","label":"broken","note":"Anagramming · Hill climbing (difficult)","collection":"cipher-history","interactive":true},
-    {"number":16,"path":"ciphers/bifid.html","label":"broken","note":"Statistical analysis · Hill climbing","collection":"cipher-history","interactive":true},
-    {"number":17,"path":"ciphers/trifid.html","label":"broken","note":"Statistical analysis","collection":"cipher-history","interactive":true},
-    {"number":18,"path":"ciphers/fractionated-morse.html","label":"broken","note":"Structural analysis of Morse patterns","collection":"cipher-history","interactive":true},
-    {"number":19,"path":"ciphers/nihilist.html","label":"broken","note":"Frequency analysis of digit pairs · Kasiski-equivalent","collection":"cipher-history","interactive":true},
-    {"number":20,"path":"ciphers/adfgx.html","label":"broken","note":"Painvin and other Allied analysts used repeated traffic, statistics and transposition analysis in 1918.","collection":"cipher-history","interactive":true},
-    {"number":21,"path":"ciphers/adfgvx.html","label":"broken","note":"Painvin recovered keys from German traffic in June 1918.","collection":"cipher-history","interactive":true},
-    {"number":22,"path":"ciphers/bazeries.html","label":"broken","note":"Layered frequency analysis","collection":"cipher-history","interactive":true},
-    {"number":23,"path":"ciphers/vic.html","label":"historical","note":"Historical Soviet hand system; the key procedure became known through Häyhänen’s 1957 defection. No proof of unbreakability.","collection":"cipher-history","interactive":true},
-    {"number":24,"path":"ciphers/stager.html","label":"historical","note":"Historical Union route-code system; wartime operational success is not a mathematical security guarantee.","collection":"cipher-history","interactive":true},
-    {"number":25,"path":"ciphers/confederate-vigenere.html","label":"broken","note":"Union analysts exploited repeated keywords and language patterns.","collection":"cipher-history","interactive":true},
-    {"number":26,"path":"ciphers/dictionary-code.html","label":"broken","note":"Known dictionary + position lookup","collection":"cipher-history","interactive":true},
-    {"number":27,"path":"ciphers/alberti-disk.html","label":"broken","note":"Index of Coincidence · Frequency analysis","collection":"cipher-history","interactive":true},
-    {"number":28,"path":"ciphers/jefferson-disk.html","label":"broken","note":"Brute force · Probable word attack","collection":"cipher-history","interactive":true},
-    {"number":29,"path":"ciphers/enigma.html","label":"broken","note":"Polish prewar reconstruction; later Allied crib searches and bombe machinery.","collection":"cipher-history","interactive":true},
-    {"number":30,"path":"ciphers/lorenz.html","label":"broken","note":"Tiltman: depth (1941) · Tutte: structure (1942) · Colossus: wheel settings (1944)","collection":"cipher-history","interactive":true},
-    {"number":31,"path":"ciphers/navajo-code-talkers.html","label":"historical","note":"Never publicly broken in wartime service; a historical military code.","collection":"cipher-history","interactive":true},
-    {"number":32,"path":"ciphers/pigpen.html","label":"broken","note":"Symbol frequency analysis · Pattern recognition","collection":"cipher-history","interactive":true},
-    {"number":33,"path":"ciphers/bacon.html","label":"broken","note":"Pattern recognition · Statistical analysis of A/B distribution","collection":"cipher-history","interactive":true},
-    {"number":34,"path":"ciphers/tap-code.html","label":"broken","note":"Frequency analysis · Grid deduction","collection":"cipher-history","interactive":true},
-    {"number":35,"path":"ciphers/zodiac.html","label":"broken","note":"Oranchak, Blake & Van Eycke (2020)","collection":"cipher-history","interactive":true},
-    {"number":36,"path":"ciphers/one-time-pad.html","label":"secure","note":"Perfect secrecy requires an independent, uniformly random secret pad at least as long as the message, used once. No authentication.","collection":"cipher-history","interactive":true},
-    {"number":37,"path":"ciphers/vernam.html","label":"secure","note":"XOR gives perfect secrecy only with an independent, uniformly random secret pad at least as long as the message, used once. No authentication.","collection":"cipher-history","interactive":true},
-    {"number":38,"path":"ciphers/great-cipher.html","label":"broken","note":"Étienne Bazeries (1893): syllabic frequency analysis and contextual cribs.","collection":"cipher-history","interactive":true},
-    {"number":39,"path":"ciphers/babington.html","label":"broken","note":"Thomas Phelippes, working for Sir Francis Walsingham · within days of interception","collection":"cipher-history","interactive":true},
-    {"number":40,"path":"ciphers/voynich.html","label":"historical","note":"No generally accepted decipherment; whether the text encodes language or a cipher remains unresolved.","collection":"cipher-history","interactive":true},
-    {"number":41,"path":"ciphers/atbash.html","label":"broken","note":"Inspection (it is its own inverse)","collection":"cipher-history","interactive":true},
-    {"number":42,"path":"ciphers/rot13.html","label":"broken","note":"Knowing the system","collection":"cipher-history","interactive":true},
-    {"number":43,"path":"ciphers/four-square.html","label":"broken","note":"Digram frequency analysis · simulated annealing","collection":"cipher-history","interactive":true},
-    {"number":44,"path":"ciphers/two-square.html","label":"broken","note":"Digram frequency · same-row leak","collection":"cipher-history","interactive":true},
-    {"number":45,"path":"ciphers/straddling-checkerboard.html","label":"broken","note":"Weak (alone) · Strong (in VIC)","collection":"cipher-history","interactive":true},
-    {"number":46,"path":"ciphers/chaocipher.html","label":"broken","note":"Published key-recovery attacks by Lasry, Rubin, Kopal and Wacker (2016).","collection":"cipher-history","interactive":true},
-    {"number":47,"path":"ciphers/m209.html","label":"broken","note":"Strong (tactical)","collection":"cipher-history","interactive":true},
-    {"number":48,"path":"ciphers/copiale.html","label":"broken","note":"Knight, Megyesi, Schaefer (USC/Uppsala, 2011)","collection":"cipher-history","interactive":true},
-    {"number":49,"path":"ciphers/beale.html","label":"historical","note":"Unsolved (Beale 1 & 3)","collection":"cipher-history","interactive":true},
-    {"number":50,"path":"ciphers/kryptos.html","label":"historical","note":"K1–K3 publicly solved. K4 plaintext was recovered from archival papers in 2025; that is distinct from a public cryptanalytic solution.","collection":"cipher-history","interactive":true},
-    {"number":51,"path":"ciphers/solitaire.html","label":"historical","collection":"cipher-history","interactive":true},
-    {"number":52,"path":"ciphers/purple.html","label":"broken","note":"Frank Rowlett, Genevieve Grotjan & the US SIS · 20 September 1940","collection":"cipher-history","interactive":true},
-    {"number":53,"path":"ciphers/autokey.html","label":"broken","note":"Crib propagation and language-scored searches; ordinary repeating-key Kasiski analysis does not apply directly.","collection":"cipher-history","interactive":true},
-    {"number":54,"path":"ciphers/nomenclator.html","label":"broken","note":"Historical systems combine code groups, letter substitutions, homophones and nulls; evidence varies by key and traffic.","collection":"cipher-history","interactive":true},
-    {"number":55,"path":"ciphers/book-cipher.html","label":"broken","note":"Security depends on the book, edition and indexing rule; identifying the source or exploiting context can expose messages.","collection":"cipher-history","interactive":true},
-    {"number":56,"path":"ciphers/dorabella.html","label":"historical","note":"No generally accepted reading","collection":"cipher-history","interactive":true},
-    {"number":57,"path":"ciphers/sigaba.html","label":"historical","note":"Never publicly broken by cryptanalysis in wartime service; obsolete today.","collection":"cipher-history","interactive":true},
-    {"number":58,"path":"ciphers/typex.html","label":"historical","note":"No general wartime cryptanalytic break established here; captured equipment and keys posed a separate risk. Obsolete today.","collection":"cipher-history","interactive":true},
-    {"number":59,"path":"ciphers/des.html","label":"broken","note":"Broken (brute force, 1998)","collection":"cipher-history","interactive":false},
-    {"number":60,"path":"ciphers/diffie-hellman.html","label":"secure","collection":"cipher-history","interactive":false},
-    {"number":61,"path":"ciphers/rsa.html","label":"secure","collection":"cipher-history","interactive":false},
-    {"number":62,"path":"ciphers/aes.html","label":"secure","collection":"cipher-history","interactive":false},
-    {"number":63,"path":"ciphers/sha256.html","label":"secure","collection":"cipher-history","interactive":false},
-    {"number":64,"path":"ciphers/egyptian-substitution.html","label":null,"note":"Decorative concealment","collection":"cipher-history","interactive":true},
-    {"number":65,"path":"ciphers/histiaeus-tattoo.html","label":"historical","note":"Steganography (concealment)","collection":"cipher-history","interactive":true},
-    {"number":66,"path":"ciphers/aeneas-tacticus.html","label":null,"collection":"cipher-history","interactive":true},
-    {"number":67,"path":"ciphers/kama-sutra.html","label":"broken","collection":"cipher-history","interactive":true},
-    {"number":68,"path":"ciphers/arabic-nomenclators.html","label":"broken","note":"Broken (by its own inventors)","collection":"cipher-history","interactive":true},
-    {"number":69,"path":"ciphers/wadsworth-cipher.html","label":"broken","note":"Ciphertext-only stochastic hill climbing (2020)","collection":"cipher-history","interactive":true},
-    {"number":70,"path":"ciphers/amharic-ge-ez-ciphers.html","label":"educational","note":"Illustrative Latin-letter substitution model; no identified manuscript authenticates this as a particular Geʽez monastic cipher.","collection":"cipher-history","interactive":true},
-    {"number":71,"path":"ciphers/rosetta-stone.html","label":null,"note":"Two languages, three scripts; Champollion’s 1822 breakthrough was part of a longer decipherment.","collection":"cipher-history","interactive":true},
-    {"number":72,"path":"ciphers/trithemius.html","label":"broken","note":"Easy","collection":"cipher-history","interactive":true},
-    {"number":73,"path":"ciphers/affine.html","label":"broken","collection":"cipher-history","interactive":true},
-    {"number":74,"path":"ciphers/wheatstone.html","label":"historical","note":"Historical unequal-dial device. The current equal-dial widget is a fixed-substitution teaching model, not its mechanism.","collection":"cipher-history","interactive":true},
-    {"number":75,"path":"ciphers/wallis-ciphers.html","label":"broken","note":"Royalist nomenclators — broken by Wallis","collection":"cipher-history","interactive":true},
-    {"number":76,"path":"ciphers/cardano-autokey.html","label":"broken","note":"The one-letter-primer widget is a modern comparison with Vigenère-style plaintext autokey, not Cardano’s exact procedure.","collection":"cipher-history","interactive":true},
-    {"number":77,"path":"ciphers/argenti.html","label":"broken","collection":"cipher-history","interactive":true},
-    {"number":78,"path":"ciphers/cardano-grille.html","label":"historical","note":"Weak (steganography, not encryption)","collection":"cipher-history","interactive":true},
-    {"number":79,"path":"ciphers/culper-ring.html","label":"historical","note":"Historical numerical codebook; captured documents and contextual evidence are distinct from cryptanalytic breaks.","collection":"cipher-history","interactive":true},
-    {"number":80,"path":"ciphers/arnold-andre.html","label":"historical","note":"Compromised by capture (1780)","collection":"cipher-history","interactive":true},
-    {"number":81,"path":"ciphers/ira-ciphers.html","label":"broken","note":"Jim Gillogly; Richard Bean solved the final published challenge in 2019","collection":"cipher-history","interactive":true},
-    {"number":82,"path":"ciphers/che-guevara.html","label":"historical","note":"Historical checkerboard-plus-pad system; the widget compares a condensed VIC model, not Guevara’s historical pad system.","collection":"cipher-history","interactive":true},
-    {"number":83,"path":"ciphers/diana-cryptosystem.html","label":"historical","collection":"cipher-history","interactive":true},
-    {"number":84,"path":"ciphers/vietnamese-underground.html","label":"educational","note":"Illustrative concealment and cipher models; specific operational attribution is not established here.","collection":"cipher-history","interactive":true},
-    {"number":85,"path":"ciphers/red-army-faction.html","label":"educational","collection":"cipher-history","interactive":true,"note":"Illustrative letter-pad arithmetic; not a reconstruction of an authenticated RAF key or message."},
-    {"number":86,"path":"ciphers/null-cipher.html","label":"historical","note":"Weak (concealment, not encryption)","collection":"cipher-history","interactive":true},
-    {"number":87,"path":"ciphers/chinese-telegraph.html","label":null,"note":"Public codebook (super-enciphered when secret)","collection":"cipher-history","interactive":true},
-    {"number":88,"path":"ciphers/morse.html","label":null,"note":"Encoding, not encryption","collection":"cipher-history","interactive":true},
-    {"number":89,"path":"ciphers/zimmermann.html","label":"broken","note":"Broken (Room 40)","collection":"cipher-history","interactive":true},
-    {"number":90,"path":"ciphers/commercial-codebooks.html","label":null,"note":"Public commercial codebooks reduce telegraph length and ambiguity; they do not inherently provide confidentiality.","collection":"cipher-history","interactive":true},
-    {"number":91,"path":"ciphers/latin-american-codebooks.html","label":"educational","note":"Commercial codebook illustration; specific regional military use requires archival evidence.","collection":"cipher-history","interactive":true},
-    {"number":92,"path":"ciphers/slidex.html","label":"broken","note":"Short-lived tactical vocabulary cards and changing cursor settings; the widget is a simplified bigram model.","collection":"cipher-history","interactive":true},
-    {"number":93,"path":"ciphers/fialka.html","label":"historical","note":"Never publicly broken by cryptanalysis in operational service; obsolete today.","collection":"cipher-history","interactive":true},
-    {"number":94,"path":"ciphers/kl-7.html","label":"historical","note":"Never publicly broken by cryptanalysis in operational service; stolen keys exposed traffic.","collection":"cipher-history","interactive":true},
-    {"number":95,"path":"ciphers/geheimschreiber.html","label":"broken","note":"Broken (Beurling, 1940)","collection":"cipher-history","interactive":true},
-    {"number":96,"path":"ciphers/kryha.html","label":"broken","note":"Broken (Friedman, 1933)","collection":"cipher-history","interactive":true},
-    {"number":97,"path":"ciphers/m-94.html","label":"broken","note":"Tactical only","collection":"cipher-history","interactive":true},
-    {"number":98,"path":"ciphers/red-type-a.html","label":"broken","note":"Broken by SIS","collection":"cipher-history","interactive":true},
-    {"number":99,"path":"ciphers/jn-25.html","label":"broken","note":"Station HYPO and allied Pacific units","collection":"cipher-history","interactive":true},
-    {"number":100,"path":"ciphers/freemason-pigpen.html","label":null,"note":"Fraternal symbol-substitution alphabet","collection":"cipher-history","interactive":true},
-    {"number":101,"path":"ciphers/bach-motif.html","label":null,"note":"Musical cryptogram","collection":"cipher-history","interactive":true},
-    {"number":102,"path":"ciphers/sator-square.html","label":null,"note":"Palindromic word square; proposed Christian interpretations remain hypotheses.","collection":"cipher-history","interactive":true},
-    {"number":103,"path":"ciphers/shugborough.html","label":"historical","note":"Unresolved inscription; an encoding method is not established","collection":"cipher-history","interactive":true},
-    {"number":104,"path":"ciphers/dagapeyeff.html","label":"historical","note":"Unsolved challenge cipher","collection":"cipher-history","interactive":true},
-    {"number":105,"path":"ciphers/somerton-man.html","label":"historical","note":"Unresolved inscription; a 2022 genealogical identification proposal is separate from deciphering these letters.","collection":"cipher-history","interactive":true},
-    {"number":106,"path":"ciphers/mccormick.html","label":"historical","note":"The FBI’s 2011 appeal reported the notes unresolved.","collection":"cipher-history","interactive":true},
-    {"number":107,"path":"ciphers/phaistos-disc.html","label":null,"note":"Undeciphered script","collection":"cipher-history","interactive":true},
-    {"number":108,"path":"ciphers/venona.html","label":"broken","note":"Partial break (key reuse exploit)","collection":"cipher-history","interactive":true},
-    {"number":109,"path":"ciphers/sigsaly.html","label":"historical","collection":"cipher-history","interactive":true},
-    {"number":110,"path":"ciphers/microdot.html","label":"historical","note":"Physical concealment can be discovered by inspection and magnification","collection":"cipher-history","interactive":true},
-    {"number":111,"path":"ciphers/bletchley-park.html","label":null,"collection":"cipher-history","interactive":true},
-    {"number":112,"path":"ciphers/cabinet-noir.html","label":null,"collection":"cipher-history","interactive":true},
-    {"number":113,"path":"ciphers/kerckhoffs.html","label":null,"note":"Principle (not a cipher)","collection":"cipher-history","interactive":true},
-    {"number":114,"path":"ciphers/station-hypo.html","label":null,"note":"Broken (JN-25)","collection":"cipher-history","interactive":true},
-    {"number":115,"path":"ciphers/rochefort.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":116,"path":"ciphers/beurling.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":117,"path":"ciphers/dilly-knox.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":118,"path":"ciphers/yardley.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":119,"path":"ciphers/mavis-batey.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":120,"path":"ciphers/gchq-trio.html","label":null,"note":"Invention Biography","collection":"cipher-history","interactive":false},
-    {"number":121,"path":"ciphers/kahn.html","label":null,"note":"Cryptohistory Biography","collection":"cipher-history","interactive":false},
-    {"number":122,"path":"ciphers/dunin.html","label":null,"note":"Cryptography researcher and puzzle author.","collection":"cipher-history","interactive":false},
-    {"number":123,"path":"ciphers/lasry.html","label":null,"note":"Cryptanalysis researcher.","collection":"cipher-history","interactive":false},
-    {"number":124,"path":"ciphers/field-hollers.html","label":null,"note":"Oral expression and context can conceal meaning; this widget is not an authenticated historical code.","collection":"cipher-history","interactive":true},
-    {"number":125,"path":"ciphers/gold-bug.html","label":null,"note":"Fictional substitution cipher","collection":"cipher-history","interactive":true},
-    {"number":126,"path":"ciphers/dancing-men.html","label":null,"note":"Fictional substitution cipher","collection":"cipher-history","interactive":true},
-    {"number":127,"path":"ciphers/da-vinci-code.html","label":null,"note":"Pop Culture","collection":"cipher-history","interactive":true},
-    {"number":128,"path":"ciphers/national-treasure.html","label":null,"note":"Pop Culture","collection":"cipher-history","interactive":true},
-    {"number":129,"path":"ciphers/gravity-falls.html","label":null,"note":"Pop Culture","collection":"cipher-history","interactive":true},
-    {"number":130,"path":"ciphers/cicada-3301.html","label":null,"note":"Multi-stage ARG / recruitment puzzle","collection":"cipher-history","interactive":true},
-    {"number":131,"path":"ciphers/mit-mystery-hunt.html","label":null,"note":"Annual collaborative puzzle hunt","collection":"cipher-history","interactive":true},
-    {"number":132,"path":"ciphers/krypto-arg.html","label":null,"note":"Promotional / collaborative cipher hunts","collection":"cipher-history","interactive":true},
-    {"number":133,"path":"ciphers/agnes-driscoll.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":134,"path":"ciphers/bill-tutte.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":135,"path":"ciphers/elizebeth-friedman.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":136,"path":"ciphers/joan-clarke.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":true},
-    {"number":137,"path":"ciphers/leo-marks.html","label":null,"note":"Codebreaker Biography","collection":"cipher-history","interactive":false},
-    {"number":138,"path":"ciphers/mary-stuart-castelnau-letters.html","label":"broken","note":"57 letters from 1578–1584, approximately 50,000 words; decipherment published 8 February 2023.","collection":"cipher-history","interactive":false},
-    {"number":139,"path":"ciphers/patterson-jefferson-cipher.html","label":"broken","note":"Solved 2007 — after 206 years","collection":"cipher-history","interactive":true},
-    {"number":140,"path":"ciphers/bible-code.html","label":null,"note":"Statistical claims challenged by controlled counterexamples and analysis of selection flexibility.","collection":"cipher-history","interactive":true},
-    {"number":141,"path":"hall-of-foundations/modularity-exhibit.html","label":null,"collection":"foundations","interactive":true},
-    {"number":142,"path":"hall-of-foundations/finite-fields.html","label":null,"collection":"foundations","interactive":true},
-    {"number":143,"path":"hall-of-foundations/modular-arithmetic.html","label":null,"collection":"foundations","interactive":true},
-    {"number":144,"path":"hall-of-foundations/prime-number-theorem.html","label":null,"collection":"foundations","interactive":true},
-    {"number":145,"path":"hall-of-foundations/euler-fermat.html","label":null,"collection":"foundations","interactive":true},
-    {"number":146,"path":"hall-of-foundations/one-way-function.html","label":null,"collection":"foundations","interactive":true},
-    {"number":147,"path":"hall-of-foundations/lattices-svp.html","label":null,"collection":"foundations","interactive":true},
-    {"number":148,"path":"hall-of-foundations/reduction.html","label":null,"collection":"foundations","interactive":true},
-    {"number":149,"path":"hall-of-foundations/group-theory.html","label":null,"collection":"foundations","interactive":true},
-    {"number":150,"path":"hall-of-foundations/elliptic-curves-real.html","label":null,"collection":"foundations","interactive":true},
-    {"number":151,"path":"hall-of-foundations/entropy.html","label":null,"collection":"foundations","interactive":true},
-    {"number":152,"path":"hall-of-foundations/closest-vector.html","label":null,"collection":"foundations","interactive":true},
-    {"number":153,"path":"hall-of-foundations/polynomial-rings.html","label":null,"collection":"foundations","interactive":true},
-    {"number":154,"path":"hall-of-foundations/random-oracle.html","label":null,"collection":"foundations","interactive":true},
-    {"number":155,"path":"hall-of-foundations/interpolation.html","label":null,"collection":"foundations","interactive":true},
-    {"number":156,"path":"hall-of-foundations/pairings.html","label":null,"collection":"foundations","interactive":true},
-    {"number":157,"path":"hall-of-foundations/learning-with-errors.html","label":null,"collection":"foundations","interactive":true},
-    {"number":158,"path":"ciphers/ecdsa.html","label":"secure","collection":"protocols","interactive":true},
-    {"number":159,"path":"ciphers/shamir-secret-sharing.html","label":"secure","collection":"protocols","interactive":true},
-    {"number":160,"path":"ciphers/zero-knowledge-proofs.html","label":"secure","collection":"protocols","interactive":true},
-    {"number":161,"path":"ciphers/nema.html","label":"historical","note":"Obsolete Swiss military rotor machine. The demo fixes one historical wheel configuration; the 17,576-keypress state period is not its key space.","collection":"cipher-history","interactive":true},
-    {"number":162,"path":"ciphers/hagelin-c36.html","label":"broken","note":"The pin-and-lug family has published cryptanalytic attacks; Greenough’s 1999 C-52 attack uses known plaintext.","collection":"cipher-history","interactive":false},
-    {"number":163,"path":"ciphers/turning-grille.html","label":"broken","note":"A transposition cipher: quarter-turn holes permute a complete block, preserving letter frequencies.","collection":"cipher-history","interactive":true},
-    {"number":164,"path":"ciphers/myszkowski.html","label":"broken","note":"Repeated-keyword transposition preserves letter frequencies and is vulnerable to statistical and keyword-search attacks.","collection":"cipher-history","interactive":true},
-    {"number":165,"path":"ciphers/rs44.html","label":"broken","note":"Published Allied attacks used captured stencils, retransmissions and probable plaintext; isolated traffic could remain difficult.","collection":"cipher-history","interactive":true},
-    {"number":166,"path":"ciphers/double-playfair.html","label":"broken","note":"Allied crib and digraph-statistical attacks are documented for German double-box field ciphers; variants must be distinguished.","collection":"cipher-history","interactive":true},
-    {"number":167,"path":"ciphers/amsco.html","label":"broken","note":"Variable-cell transposition preserves frequencies and is susceptible to probable-word and scored permutation search.","collection":"cipher-history","interactive":true},
-    {"number":168,"path":"ciphers/bombe.html","label":null,"note":"Codebreaking machine; not an encryption system.","collection":"cipher-history","interactive":false},
-    {"number":169,"path":"ciphers/colossus.html","label":null,"note":"Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.","collection":"cipher-history","interactive":true},
-    {"number":170,"path":"ciphers/ua-8295.html","label":null,"note":"Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.","collection":"cipher-history","interactive":false},
-    {"number":171,"path":"ciphers/sodark.html","label":"broken","note":"Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.","collection":"cipher-history","interactive":false},
-    {"number":172,"path":"ciphers/nfc-deployment.html","label":null,"note":"Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.","collection":"cipher-history","interactive":false},
-    {"number":173,"path":"ciphers/gripenstierna.html","label":"historical","note":"Historical device; original lost, later reconstructed from documents. No modern security claim.","collection":"cipher-history","interactive":false}
+    {
+      "number": 1,
+      "path": "ciphers/scytale.html",
+      "label": "broken",
+      "note": "Simple transposition model; historical origin and military use are debated.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 2,
+      "path": "ciphers/caesar.html",
+      "label": "broken",
+      "note": "Exhaustive shift search; frequency evidence helps rank candidates.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 3,
+      "path": "ciphers/polybius.html",
+      "label": "broken",
+      "note": "Frequency analysis",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 4,
+      "path": "ciphers/monoalphabetic.html",
+      "label": "broken",
+      "note": "Language statistics and word patterns can expose a fixed substitution.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 5,
+      "path": "ciphers/homophonic.html",
+      "label": "broken",
+      "note": "Statistical analysis · Structural pattern detection",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 6,
+      "path": "ciphers/playfair.html",
+      "label": "broken",
+      "note": "Digraph statistics · hill climbing",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 7,
+      "path": "ciphers/hill.html",
+      "label": "broken",
+      "note": "Known plaintext attack (matrix algebra)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 8,
+      "path": "ciphers/vigenere.html",
+      "label": "broken",
+      "note": "Babbage ~1854 · Kasiski 1863",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 9,
+      "path": "ciphers/beaufort.html",
+      "label": "broken",
+      "note": "Kasiski Examination · Index of Coincidence",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 10,
+      "path": "ciphers/porta.html",
+      "label": "broken",
+      "note": "Index of Coincidence · Statistical analysis",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 11,
+      "path": "ciphers/gronsfeld.html",
+      "label": "broken",
+      "note": "Kasiski · Only 10 possible shifts per position",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 12,
+      "path": "ciphers/running-key.html",
+      "label": "broken",
+      "note": "Source text identification · Statistical analysis",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 13,
+      "path": "ciphers/rail-fence.html",
+      "label": "broken",
+      "note": "Brute force · Trivial keyspace",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 14,
+      "path": "ciphers/columnar.html",
+      "label": "broken",
+      "note": "Frequency analysis · Anagramming",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 15,
+      "path": "ciphers/double-transposition.html",
+      "label": "broken",
+      "note": "Anagramming · Hill climbing (difficult)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 16,
+      "path": "ciphers/bifid.html",
+      "label": "broken",
+      "note": "Statistical analysis · Hill climbing",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 17,
+      "path": "ciphers/trifid.html",
+      "label": "broken",
+      "note": "Statistical analysis",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 18,
+      "path": "ciphers/fractionated-morse.html",
+      "label": "broken",
+      "note": "Structural analysis of Morse patterns",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 19,
+      "path": "ciphers/nihilist.html",
+      "label": "broken",
+      "note": "Frequency analysis of digit pairs · Kasiski-equivalent",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 20,
+      "path": "ciphers/adfgx.html",
+      "label": "broken",
+      "note": "Painvin and other Allied analysts used repeated traffic, statistics and transposition analysis in 1918.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 21,
+      "path": "ciphers/adfgvx.html",
+      "label": "broken",
+      "note": "Painvin recovered keys from German traffic in June 1918.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 22,
+      "path": "ciphers/bazeries.html",
+      "label": "broken",
+      "note": "Layered frequency analysis",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 23,
+      "path": "ciphers/vic.html",
+      "label": "historical",
+      "note": "Historical Soviet hand system; the key procedure became known through Häyhänen’s 1957 defection. No proof of unbreakability.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 24,
+      "path": "ciphers/stager.html",
+      "label": "historical",
+      "note": "Historical Union route-code system; wartime operational success is not a mathematical security guarantee.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 25,
+      "path": "ciphers/confederate-vigenere.html",
+      "label": "broken",
+      "note": "Union analysts exploited repeated keywords and language patterns.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 26,
+      "path": "ciphers/dictionary-code.html",
+      "label": "broken",
+      "note": "Known dictionary + position lookup",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 27,
+      "path": "ciphers/alberti-disk.html",
+      "label": "broken",
+      "note": "Index of Coincidence · Frequency analysis",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 28,
+      "path": "ciphers/jefferson-disk.html",
+      "label": "broken",
+      "note": "Brute force · Probable word attack",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 29,
+      "path": "ciphers/enigma.html",
+      "label": "broken",
+      "note": "Polish prewar reconstruction; later Allied crib searches and bombe machinery.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 30,
+      "path": "ciphers/lorenz.html",
+      "label": "broken",
+      "note": "Tiltman: depth (1941) · Tutte: structure (1942) · Colossus: wheel settings (1944)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 31,
+      "path": "ciphers/navajo-code-talkers.html",
+      "label": "historical",
+      "note": "Never publicly broken in wartime service; a historical military code.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 32,
+      "path": "ciphers/pigpen.html",
+      "label": "broken",
+      "note": "Symbol frequency analysis · Pattern recognition",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 33,
+      "path": "ciphers/bacon.html",
+      "label": "broken",
+      "note": "Pattern recognition · Statistical analysis of A/B distribution",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 34,
+      "path": "ciphers/tap-code.html",
+      "label": "broken",
+      "note": "Frequency analysis · Grid deduction",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 35,
+      "path": "ciphers/zodiac.html",
+      "label": "broken",
+      "note": "Oranchak, Blake & Van Eycke (2020)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 36,
+      "path": "ciphers/one-time-pad.html",
+      "label": "secure",
+      "note": "Perfect secrecy requires an independent, uniformly random secret pad at least as long as the message, used once. No authentication.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 37,
+      "path": "ciphers/vernam.html",
+      "label": "secure",
+      "note": "XOR gives perfect secrecy only with an independent, uniformly random secret pad at least as long as the message, used once. No authentication.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 38,
+      "path": "ciphers/great-cipher.html",
+      "label": "broken",
+      "note": "Étienne Bazeries (1893): syllabic frequency analysis and contextual cribs.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 39,
+      "path": "ciphers/babington.html",
+      "label": "broken",
+      "note": "Thomas Phelippes, working for Sir Francis Walsingham · within days of interception",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 40,
+      "path": "ciphers/voynich.html",
+      "label": "historical",
+      "note": "No generally accepted decipherment; whether the text encodes language or a cipher remains unresolved.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 41,
+      "path": "ciphers/atbash.html",
+      "label": "broken",
+      "note": "Inspection (it is its own inverse)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 42,
+      "path": "ciphers/rot13.html",
+      "label": "broken",
+      "note": "Knowing the system",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 43,
+      "path": "ciphers/four-square.html",
+      "label": "broken",
+      "note": "Digram frequency analysis · simulated annealing",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 44,
+      "path": "ciphers/two-square.html",
+      "label": "broken",
+      "note": "Digram frequency · same-row leak",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 45,
+      "path": "ciphers/straddling-checkerboard.html",
+      "label": "broken",
+      "note": "Weak (alone) · Strong (in VIC)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 46,
+      "path": "ciphers/chaocipher.html",
+      "label": "broken",
+      "note": "Published key-recovery attacks by Lasry, Rubin, Kopal and Wacker (2016).",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 47,
+      "path": "ciphers/m209.html",
+      "label": "broken",
+      "note": "Strong (tactical)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 48,
+      "path": "ciphers/copiale.html",
+      "label": "broken",
+      "note": "Knight, Megyesi, Schaefer (USC/Uppsala, 2011)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 49,
+      "path": "ciphers/beale.html",
+      "label": "historical",
+      "note": "Unsolved (Beale 1 & 3)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 50,
+      "path": "ciphers/kryptos.html",
+      "label": "historical",
+      "note": "K1–K3 publicly solved. K4 plaintext was recovered from archival papers in 2025; that is distinct from a public cryptanalytic solution.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 51,
+      "path": "ciphers/solitaire.html",
+      "label": "historical",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 52,
+      "path": "ciphers/purple.html",
+      "label": "broken",
+      "note": "Frank Rowlett, Genevieve Grotjan & the US SIS · 20 September 1940",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 53,
+      "path": "ciphers/autokey.html",
+      "label": "broken",
+      "note": "Crib propagation and language-scored searches; ordinary repeating-key Kasiski analysis does not apply directly.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 54,
+      "path": "ciphers/nomenclator.html",
+      "label": "broken",
+      "note": "Historical systems combine code groups, letter substitutions, homophones and nulls; evidence varies by key and traffic.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 55,
+      "path": "ciphers/book-cipher.html",
+      "label": "broken",
+      "note": "Security depends on the book, edition and indexing rule; identifying the source or exploiting context can expose messages.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 56,
+      "path": "ciphers/dorabella.html",
+      "label": "historical",
+      "note": "No generally accepted reading",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 57,
+      "path": "ciphers/sigaba.html",
+      "label": "historical",
+      "note": "Never publicly broken by cryptanalysis in wartime service; obsolete today.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 58,
+      "path": "ciphers/typex.html",
+      "label": "historical",
+      "note": "No general wartime cryptanalytic break established here; captured equipment and keys posed a separate risk. Obsolete today.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 59,
+      "path": "ciphers/des.html",
+      "label": "broken",
+      "note": "Broken (brute force, 1998)",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 60,
+      "path": "ciphers/diffie-hellman.html",
+      "label": "secure",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 61,
+      "path": "ciphers/rsa.html",
+      "label": "secure",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 62,
+      "path": "ciphers/aes.html",
+      "label": "secure",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 63,
+      "path": "ciphers/sha256.html",
+      "label": "secure",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 64,
+      "path": "ciphers/egyptian-substitution.html",
+      "label": null,
+      "note": "Decorative concealment",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 65,
+      "path": "ciphers/histiaeus-tattoo.html",
+      "label": "historical",
+      "note": "Steganography (concealment)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 66,
+      "path": "ciphers/aeneas-tacticus.html",
+      "label": null,
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 67,
+      "path": "ciphers/kama-sutra.html",
+      "label": "broken",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 68,
+      "path": "ciphers/arabic-nomenclators.html",
+      "label": "broken",
+      "note": "Broken (by its own inventors)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 69,
+      "path": "ciphers/wadsworth-cipher.html",
+      "label": "broken",
+      "note": "Ciphertext-only stochastic hill climbing (2020)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 70,
+      "path": "ciphers/amharic-ge-ez-ciphers.html",
+      "label": "educational",
+      "note": "Illustrative Latin-letter substitution model; no identified manuscript authenticates this as a particular Geʽez monastic cipher.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 71,
+      "path": "ciphers/rosetta-stone.html",
+      "label": null,
+      "note": "Two languages, three scripts; Champollion’s 1822 breakthrough was part of a longer decipherment.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 72,
+      "path": "ciphers/trithemius.html",
+      "label": "broken",
+      "note": "Easy",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 73,
+      "path": "ciphers/affine.html",
+      "label": "broken",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 74,
+      "path": "ciphers/wheatstone.html",
+      "label": "historical",
+      "note": "Historical unequal-dial device. The current equal-dial widget is a fixed-substitution teaching model, not its mechanism.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 75,
+      "path": "ciphers/wallis-ciphers.html",
+      "label": "broken",
+      "note": "Royalist nomenclators — broken by Wallis",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 76,
+      "path": "ciphers/cardano-autokey.html",
+      "label": "broken",
+      "note": "The one-letter-primer widget is a modern comparison with Vigenère-style plaintext autokey, not Cardano’s exact procedure.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 77,
+      "path": "ciphers/argenti.html",
+      "label": "broken",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 78,
+      "path": "ciphers/cardano-grille.html",
+      "label": "historical",
+      "note": "Weak (steganography, not encryption)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 79,
+      "path": "ciphers/culper-ring.html",
+      "label": "historical",
+      "note": "Historical numerical codebook; captured documents and contextual evidence are distinct from cryptanalytic breaks.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 80,
+      "path": "ciphers/arnold-andre.html",
+      "label": "historical",
+      "note": "Compromised by capture (1780)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 81,
+      "path": "ciphers/ira-ciphers.html",
+      "label": "broken",
+      "note": "Jim Gillogly; Richard Bean solved the final published challenge in 2019",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 82,
+      "path": "ciphers/che-guevara.html",
+      "label": "historical",
+      "note": "Historical checkerboard-plus-pad system; the widget compares a condensed VIC model, not Guevara’s historical pad system.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 83,
+      "path": "ciphers/diana-cryptosystem.html",
+      "label": "historical",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 84,
+      "path": "ciphers/vietnamese-underground.html",
+      "label": "educational",
+      "note": "Illustrative concealment and cipher models; specific operational attribution is not established here.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 85,
+      "path": "ciphers/red-army-faction.html",
+      "label": "educational",
+      "collection": "cipher-history",
+      "interactive": true,
+      "note": "Illustrative letter-pad arithmetic; not a reconstruction of an authenticated RAF key or message."
+    },
+    {
+      "number": 86,
+      "path": "ciphers/null-cipher.html",
+      "label": "historical",
+      "note": "Weak (concealment, not encryption)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 87,
+      "path": "ciphers/chinese-telegraph.html",
+      "label": null,
+      "note": "Public codebook (super-enciphered when secret)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 88,
+      "path": "ciphers/morse.html",
+      "label": null,
+      "note": "Encoding, not encryption",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 89,
+      "path": "ciphers/zimmermann.html",
+      "label": "broken",
+      "note": "Broken (Room 40)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 90,
+      "path": "ciphers/commercial-codebooks.html",
+      "label": null,
+      "note": "Public commercial codebooks reduce telegraph length and ambiguity; they do not inherently provide confidentiality.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 91,
+      "path": "ciphers/latin-american-codebooks.html",
+      "label": "educational",
+      "note": "Commercial codebook illustration; specific regional military use requires archival evidence.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 92,
+      "path": "ciphers/slidex.html",
+      "label": "broken",
+      "note": "Short-lived tactical vocabulary cards and changing cursor settings; the widget is a simplified bigram model.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 93,
+      "path": "ciphers/fialka.html",
+      "label": "historical",
+      "note": "Never publicly broken by cryptanalysis in operational service; obsolete today.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 94,
+      "path": "ciphers/kl-7.html",
+      "label": "historical",
+      "note": "Never publicly broken by cryptanalysis in operational service; stolen keys exposed traffic.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 95,
+      "path": "ciphers/geheimschreiber.html",
+      "label": "broken",
+      "note": "Broken (Beurling, 1940)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 96,
+      "path": "ciphers/kryha.html",
+      "label": "broken",
+      "note": "Broken (Friedman, 1933)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 97,
+      "path": "ciphers/m-94.html",
+      "label": "broken",
+      "note": "Tactical only",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 98,
+      "path": "ciphers/red-type-a.html",
+      "label": "broken",
+      "note": "Broken by SIS",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 99,
+      "path": "ciphers/jn-25.html",
+      "label": "broken",
+      "note": "Station HYPO and allied Pacific units",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 100,
+      "path": "ciphers/freemason-pigpen.html",
+      "label": null,
+      "note": "Fraternal symbol-substitution alphabet",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 101,
+      "path": "ciphers/bach-motif.html",
+      "label": null,
+      "note": "Musical cryptogram",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 102,
+      "path": "ciphers/sator-square.html",
+      "label": null,
+      "note": "Palindromic word square; proposed Christian interpretations remain hypotheses.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 103,
+      "path": "ciphers/shugborough.html",
+      "label": "historical",
+      "note": "Unresolved inscription; an encoding method is not established",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 104,
+      "path": "ciphers/dagapeyeff.html",
+      "label": "historical",
+      "note": "Unsolved challenge cipher",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 105,
+      "path": "ciphers/somerton-man.html",
+      "label": "historical",
+      "note": "Unresolved inscription; a 2022 genealogical identification proposal is separate from deciphering these letters.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 106,
+      "path": "ciphers/mccormick.html",
+      "label": "historical",
+      "note": "The FBI’s 2011 appeal reported the notes unresolved.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 107,
+      "path": "ciphers/phaistos-disc.html",
+      "label": null,
+      "note": "Undeciphered script",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 108,
+      "path": "ciphers/venona.html",
+      "label": "broken",
+      "note": "Partial break (key reuse exploit)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 109,
+      "path": "ciphers/sigsaly.html",
+      "label": "historical",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 110,
+      "path": "ciphers/microdot.html",
+      "label": "historical",
+      "note": "Physical concealment can be discovered by inspection and magnification",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 111,
+      "path": "ciphers/bletchley-park.html",
+      "label": null,
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 112,
+      "path": "ciphers/cabinet-noir.html",
+      "label": null,
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 113,
+      "path": "ciphers/kerckhoffs.html",
+      "label": null,
+      "note": "Principle (not a cipher)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 114,
+      "path": "ciphers/station-hypo.html",
+      "label": null,
+      "note": "Broken (JN-25)",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 115,
+      "path": "ciphers/rochefort.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 116,
+      "path": "ciphers/beurling.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 117,
+      "path": "ciphers/dilly-knox.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 118,
+      "path": "ciphers/yardley.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 119,
+      "path": "ciphers/mavis-batey.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 120,
+      "path": "ciphers/gchq-trio.html",
+      "label": null,
+      "note": "Invention Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 121,
+      "path": "ciphers/kahn.html",
+      "label": null,
+      "note": "Cryptohistory Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 122,
+      "path": "ciphers/dunin.html",
+      "label": null,
+      "note": "Cryptography researcher and puzzle author.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 123,
+      "path": "ciphers/lasry.html",
+      "label": null,
+      "note": "Cryptanalysis researcher.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 124,
+      "path": "ciphers/field-hollers.html",
+      "label": null,
+      "note": "Oral expression and context can conceal meaning; this widget is not an authenticated historical code.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 125,
+      "path": "ciphers/gold-bug.html",
+      "label": null,
+      "note": "Fictional substitution cipher",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 126,
+      "path": "ciphers/dancing-men.html",
+      "label": null,
+      "note": "Fictional substitution cipher",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 127,
+      "path": "ciphers/da-vinci-code.html",
+      "label": null,
+      "note": "Pop Culture",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 128,
+      "path": "ciphers/national-treasure.html",
+      "label": null,
+      "note": "Pop Culture",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 129,
+      "path": "ciphers/gravity-falls.html",
+      "label": null,
+      "note": "Pop Culture",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 130,
+      "path": "ciphers/cicada-3301.html",
+      "label": null,
+      "note": "Multi-stage ARG / recruitment puzzle",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 131,
+      "path": "ciphers/mit-mystery-hunt.html",
+      "label": null,
+      "note": "Annual collaborative puzzle hunt",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 132,
+      "path": "ciphers/krypto-arg.html",
+      "label": null,
+      "note": "Promotional / collaborative cipher hunts",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 133,
+      "path": "ciphers/agnes-driscoll.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 134,
+      "path": "ciphers/bill-tutte.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 135,
+      "path": "ciphers/elizebeth-friedman.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 136,
+      "path": "ciphers/joan-clarke.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 137,
+      "path": "ciphers/leo-marks.html",
+      "label": null,
+      "note": "Codebreaker Biography",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 138,
+      "path": "ciphers/mary-stuart-castelnau-letters.html",
+      "label": "broken",
+      "note": "57 letters from 1578–1584, approximately 50,000 words; decipherment published 8 February 2023.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 139,
+      "path": "ciphers/patterson-jefferson-cipher.html",
+      "label": "broken",
+      "note": "Solved 2007 — after 206 years",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 140,
+      "path": "ciphers/bible-code.html",
+      "label": null,
+      "note": "Statistical claims challenged by controlled counterexamples and analysis of selection flexibility.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 141,
+      "path": "hall-of-foundations/modularity-exhibit.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 142,
+      "path": "hall-of-foundations/finite-fields.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 143,
+      "path": "hall-of-foundations/modular-arithmetic.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 144,
+      "path": "hall-of-foundations/prime-number-theorem.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 145,
+      "path": "hall-of-foundations/euler-fermat.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 146,
+      "path": "hall-of-foundations/one-way-function.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 147,
+      "path": "hall-of-foundations/lattices-svp.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 148,
+      "path": "hall-of-foundations/reduction.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 149,
+      "path": "hall-of-foundations/group-theory.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 150,
+      "path": "hall-of-foundations/elliptic-curves-real.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 151,
+      "path": "hall-of-foundations/entropy.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 152,
+      "path": "hall-of-foundations/closest-vector.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 153,
+      "path": "hall-of-foundations/polynomial-rings.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 154,
+      "path": "hall-of-foundations/random-oracle.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 155,
+      "path": "hall-of-foundations/interpolation.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 156,
+      "path": "hall-of-foundations/pairings.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 157,
+      "path": "hall-of-foundations/learning-with-errors.html",
+      "label": null,
+      "collection": "foundations",
+      "interactive": true
+    },
+    {
+      "number": 158,
+      "path": "ciphers/ecdsa.html",
+      "label": "secure",
+      "collection": "protocols",
+      "interactive": true
+    },
+    {
+      "number": 159,
+      "path": "ciphers/shamir-secret-sharing.html",
+      "label": "secure",
+      "collection": "protocols",
+      "interactive": true
+    },
+    {
+      "number": 160,
+      "path": "ciphers/zero-knowledge-proofs.html",
+      "label": "secure",
+      "collection": "protocols",
+      "interactive": true
+    },
+    {
+      "number": 161,
+      "path": "ciphers/nema.html",
+      "label": "historical",
+      "note": "Obsolete Swiss military rotor machine. The demo fixes one historical wheel configuration; the 17,576-keypress state period is not its key space.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 162,
+      "path": "ciphers/hagelin-c36.html",
+      "label": "broken",
+      "note": "The pin-and-lug family has published cryptanalytic attacks; Greenough’s 1999 C-52 attack uses known plaintext.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 163,
+      "path": "ciphers/turning-grille.html",
+      "label": "broken",
+      "note": "A transposition cipher: quarter-turn holes permute a complete block, preserving letter frequencies.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 164,
+      "path": "ciphers/myszkowski.html",
+      "label": "broken",
+      "note": "Repeated-keyword transposition preserves letter frequencies and is vulnerable to statistical and keyword-search attacks.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 165,
+      "path": "ciphers/rs44.html",
+      "label": "broken",
+      "note": "Published Allied attacks used captured stencils, retransmissions and probable plaintext; isolated traffic could remain difficult.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 166,
+      "path": "ciphers/double-playfair.html",
+      "label": "broken",
+      "note": "Allied crib and digraph-statistical attacks are documented for German double-box field ciphers; variants must be distinguished.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 167,
+      "path": "ciphers/amsco.html",
+      "label": "broken",
+      "note": "Variable-cell transposition preserves frequencies and is susceptible to probable-word and scored permutation search.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 168,
+      "path": "ciphers/bombe.html",
+      "label": null,
+      "note": "Codebreaking machine; not an encryption system.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 169,
+      "path": "ciphers/colossus.html",
+      "label": null,
+      "note": "Codebreaking machine; synthetic two-wheel setting experiment, not full decryption.",
+      "collection": "cipher-history",
+      "interactive": true
+    },
+    {
+      "number": 170,
+      "path": "ciphers/ua-8295.html",
+      "label": null,
+      "note": "Forensic cryptanalysis case study read from the full preprint. Every claim is labelled observed, implemented, conditional inference or open question; the source remains a preprint and no attack is reproduced here.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 171,
+      "path": "ciphers/sodark.html",
+      "label": "broken",
+      "note": "Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 172,
+      "path": "ciphers/nfc-deployment.html",
+      "label": null,
+      "note": "Protocol and deployment case: results depend on tag model, configuration and attacker access; not a break of AES.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 173,
+      "path": "ciphers/gripenstierna.html",
+      "label": "historical",
+      "note": "Historical device; original lost, later reconstructed from documents. No modern security claim.",
+      "collection": "cipher-history",
+      "interactive": false
+    },
+    {
+      "number": 174,
+      "path": "ciphers/ika.html",
+      "label": "historical",
+      "note": "Historical naval cipher reconstructed from intercepted traffic; the physical IKA mechanism is not established by the cited 2021 study.",
+      "collection": "cipher-history",
+      "interactive": false
+    }
   ]
 }

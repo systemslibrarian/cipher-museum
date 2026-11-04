@@ -18,9 +18,10 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-bef91e41';
+const VERSION = 'cipher-museum-cb136b8e';
 
 const CORE = [
+  '/ciphers/ika.html',
   '/ciphers/gripenstierna.html',
   '/lab/kisses.html',
   '/js/codebreaking-evidence.js',
@@ -32,6 +33,7 @@ const CORE = [
   '/js/maya-case.js',
   '/lab/reading-the-evidence.html',
   '/js/reading-evidence.js',
+  '/js/charles-v-case.js',
   '/lab/traffic-analysis.html',
   '/lab/purple-diagnosis.html',
   '/js/purple-diagnosis.js',

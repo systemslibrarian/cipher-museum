@@ -84,6 +84,108 @@
     } else if (sequence.length > 1) changed[sequence.length - 1] = sequence[0];
     return changed;
   }
+  // An original, fully enumerable word task. This is not an LLM experiment.
+  // Every possible source has three words from the same four-word alphabet.
+  const wordAlphabet = ['PINE', 'OAK', 'ELM', 'ASH'];
+  const wordMaps = {
+    unchanged: { PINE: 'PINE', OAK: 'OAK', ELM: 'ELM', ASH: 'ASH' },
+    bijective: { PINE: 'OAK', OAK: 'ELM', ELM: 'ASH', ASH: 'PINE' },
+    merged: { PINE: 'OAK', OAK: 'ASH', ELM: 'OAK', ASH: 'ASH' }
+  };
+  const wordDemonstrations = [
+    ['PINE', 'OAK', 'PINE'], ['PINE', 'OAK', 'ELM'],
+    ['ASH', 'ELM', 'ASH'], ['ASH', 'ELM', 'OAK']
+  ];
+  const wordQueries = {
+    a: ['ELM', 'ASH', 'ELM'], b: ['ELM', 'ASH', 'PINE'], c: ['ELM', 'ASH', 'OAK']
+  };
+  // Frozen possible draws from independent uniform replacement, one per
+  // occurrence. Draws may coincide; neither a seed nor a repeatable word key is
+  // inferred. Fixing the display makes the lesson replayable, not cryptographic.
+  const wordDraws = [
+    ['ELM', 'OAK', 'ASH'], ['PINE', 'ELM', 'PINE'],
+    ['OAK', 'OAK', 'ASH'], ['ELM', 'ASH', 'PINE'],
+    ['ASH', 'ELM', 'PINE'], ['OAK', 'ASH', 'OAK'], ['ELM', 'PINE', 'ASH']
+  ];
+  const wordTriples = wordAlphabet.flatMap(a => wordAlphabet.flatMap(b => wordAlphabet.map(c => [a, b, c])));
+  function matchingEnds(sequence) { return sequence[0] === sequence[2]; }
+  function wordTransform(mode, sequence, sample = 0) {
+    if (!(Object.hasOwn(wordMaps, mode) || mode === 'fresh')) throw new Error('Choose one of the four replacement rules.');
+    if (!Array.isArray(sequence) || sequence.length !== 3 || sequence.some(w => !wordAlphabet.includes(w))) throw new Error('Use three words from PINE, OAK, ELM and ASH.');
+    if (!Number.isInteger(sample) || sample < 0 || sample >= wordDraws.length) throw new Error('Unknown frozen sample.');
+    return mode === 'fresh' ? wordDraws[sample].slice() : sequence.map(w => wordMaps[mode][w]);
+  }
+  function structureExperiment(mode, queryId) {
+    if (!Object.hasOwn(wordQueries, queryId)) throw new Error('Choose example A, B or C.');
+    const source = wordQueries[queryId].slice();
+    const encoded = wordTransform(mode, source, 4 + Object.keys(wordQueries).indexOf(queryId));
+    // For independent full-vocabulary replacement, every source triple has
+    // positive probability of every output triple. No language prior is used.
+    const alternatives = wordTriples.filter(candidate => mode === 'fresh' ||
+      wordTransform(mode, candidate).every((w, i) => w === encoded[i])).map(candidate => candidate.slice());
+    const same = alternatives.filter(matchingEnds).length, different = alternatives.length - same;
+    return {
+      mode, source, encoded, pattern: recurrence(encoded),
+      demonstrations: wordDemonstrations.map((words, i) => ({
+        encoded: wordTransform(mode, words, i), same: matchingEnds(words)
+      })),
+      mapping: mode === 'fresh' ? null : wordAlphabet.map(word => [word, wordMaps[mode][word]]),
+      alternatives, same, different,
+      conclusion: same && different ? 'uncertain' : same ? 'same' : 'different'
+    };
+  }
+
+  // Original tiny word code, deliberately not uniquely decodable without
+  // boundaries: 12 can mean MEET DAWN or WAIT. Never rank away a legal parse.
+  const invoiceKey = { 1: 'MEET', 2: 'DAWN', 3: 'DUSK', 12: 'WAIT', 13: 'CANCEL' };
+  const invoiceCases = {
+    dawn: { codes: ['1', '2'], units: 6, price: 2 },
+    dusk: { codes: ['1', '3'], units: 1, price: 13 },
+    single: { codes: ['2'], units: 1, price: 2 }
+  };
+  function decodeInvoice(record, framed) {
+    if (typeof framed !== 'boolean' || typeof record !== 'string' || record.length > 24 ||
+        !(framed ? /^\d+(?:\|\d+)*$/ : /^\d+$/).test(record) || record.replace(/\|/g, '').length > 12) {
+      throw new Error('Use at most 12 digits, with | only between complete codes.');
+    }
+    let paths = [];
+    if (framed) {
+      const codes = record.split('|');
+      if (codes.every(code => Object.hasOwn(invoiceKey, code))) paths = [codes];
+    } else {
+      function visit(position, codes) {
+        if (position === record.length) { paths.push(codes); return; }
+        for (const code of Object.keys(invoiceKey)) if (record.startsWith(code, position)) visit(position + code.length, codes.concat(code));
+      }
+      visit(0, []);
+    }
+    return paths.map(codes => ({ codes, reading: codes.map(code => invoiceKey[code]).join(' ') }));
+  }
+  function invoiceExperiment(example, format) {
+    if (!Object.hasOwn(invoiceCases, example) || !['plain', 'framed'].includes(format)) throw new Error('Choose an invoice example and a boundary rule.');
+    const item = invoiceCases[example], record = item.codes.join(format === 'framed' ? '|' : '');
+    return { record, units: item.units, price: item.price, amount: item.units * item.price,
+      intended: item.codes.map(code => invoiceKey[code]).join(' '),
+      ordinaryNumber: /^\d+$/.test(record), candidates: decodeInvoice(record, format === 'framed') };
+  }
+  const markerKey = { amber: 'MEET', silver: 'AT', copper: 'DAWN' };
+  function markerExperiment(extra) {
+    if (typeof extra !== 'boolean') throw new Error('Choose whether to add the ordinary sentence.');
+    const text = (extra ? 'Copper tools arrived yesterday. ' : '') + 'Send amber beads with the silver wire and copper sheet.';
+    const matches = Array.from(text.matchAll(/[a-z]+/gi)).filter(match => Object.hasOwn(markerKey, match[0].toLowerCase()));
+    const reading = matches.map(match => markerKey[match[0].toLowerCase()]).join(' ');
+    return { text, words: matches.map(match => match[0]), reading, intact: reading === 'MEET AT DAWN' };
+  }
+  const rhythmKey = { WAIT: [1, 1, 1, 1], MEET: [1, 1, 1, 2] };
+  function decodeRhythm(durations) {
+    if (!Array.isArray(durations) || durations.some(n => !Number.isInteger(n) || n <= 0)) throw new Error('Note lengths must be positive whole beats in this toy.');
+    return Object.keys(rhythmKey).find(word => rhythmKey[word].length === durations.length && rhythmKey[word].every((n, i) => n === durations[i])) || null;
+  }
+  function musicExperiment(word) {
+    if (!Object.hasOwn(rhythmKey, word)) throw new Error('Choose WAIT or MEET.');
+    const durations = rhythmKey[word].slice(), beats = durations.reduce((sum, n) => sum + n, 0);
+    return { durations, beats, required: 4, fits: beats === 4, reading: decodeRhythm(durations) };
+  }
   function mount(doc) {
     const $ = id => doc.getElementById(id);
     if (!$('key-choice')) return;
@@ -172,8 +274,87 @@
     $('pattern-alter').addEventListener('click', () => patternView('alter'));
     $('pattern-input').addEventListener('input', () => { $('pattern-result').textContent = 'Input changed. Choose an action to recalculate the displayed sequences.'; });
     $('pattern-reset').addEventListener('click', () => { $('pattern-input').value = 'Q Z Z R Q Z S R'; patternView('rename'); }); patternView('rename');
+
+    let structureState;
+    function structureView() {
+      structureState = structureExperiment($('structure-mode').value, $('structure-query').value);
+      const r = structureState, rows = $('structure-examples'); rows.replaceChildren();
+      r.demonstrations.forEach((example, i) => {
+        const row = el('tr', '', rows); const heading = el('th', 'Example ' + (i + 1), row); heading.scope = 'row';
+        el('td', example.encoded.join(' '), row); el('td', example.same ? 'Same' : 'Different', row);
+      });
+      $('structure-message').textContent = r.encoded.join(' ');
+      $('structure-pattern').textContent = r.pattern.join(' ');
+      $('structure-rule').textContent = r.mode === 'fresh'
+        ? 'A fresh uniform word is drawn at every occurrence, independently of the source word. The displayed possible outcomes are frozen for replay; repeats can happen by chance.'
+        : r.mode === 'merged' ? 'One fixed rule merges PINE with ELM and OAK with ASH. A repeated output need not mean a repeated source word.'
+          : r.mode === 'bijective' ? 'One fixed permutation is used for every occurrence in the examples and the question.' : 'The words are unchanged. This is the baseline.';
+      $('structure-source').textContent = r.source.join(' ');
+      $('structure-map').textContent = r.mapping ? r.mapping.map(([from, to]) => from + ' → ' + to).join('; ')
+        : 'There is no fixed word-to-word mapping. Every three-word source can produce the displayed output under the stated replacement model.';
+      $('structure-counts').textContent = r.alternatives.length + ' compatible source triples: ' + r.same + ' with matching ends; ' + r.different + ' with different ends. These are counts, not probabilities.';
+      const list = $('structure-alternatives'); list.replaceChildren();
+      if (r.mode === 'fresh') el('li', 'All 64 triples: four choices at each of three positions, including all-same, repeated and all-different sources.', list);
+      else r.alternatives.forEach(words => el('li', words.join(' ') + (matchingEnds(words) ? ' — same ends' : ' — different ends'), list));
+      $('structure-workings').open = false;
+      $('structure-guess').value = '';
+      $('structure-result').textContent = 'Decide what the transformed message establishes about its original first and last words, then check your reasoning.';
+    }
+    ['structure-mode', 'structure-query'].forEach(id => $(id).addEventListener('change', structureView));
+    $('structure-check').addEventListener('click', () => {
+      const answer = $('structure-guess').value, r = structureState;
+      if (!['same', 'different', 'uncertain'].includes(answer)) { $('structure-result').textContent = 'Choose a conclusion first.'; return; }
+      const label = r.conclusion === 'uncertain' ? 'The transformed message does not determine the answer.'
+        : 'The original first and last words are ' + (r.conclusion === 'same' ? 'the same' : 'different') + '.';
+      const scope = r.mode === 'fresh' ? 'All 64 source triples can produce this output under independent uniform replacement. A lucky guess about the supplied source is not recovery.'
+        : r.mode === 'merged' ? r.conclusion === 'uncertain'
+          ? 'Both labels occur among the ' + r.alternatives.length + ' legal sources, even with the entire toy mapping supplied.'
+          : 'Different output words imply different source words for this fixed rule. Yet ' + r.alternatives.length + ' source triples remain: this task can be answered without recovering the exact message.'
+          : 'One-to-one replacement preserves this equality test. Answering it does not demonstrate that a learner has recovered every word or the whole mapping.';
+      $('structure-result').textContent = (answer === r.conclusion ? 'Supported conclusion. ' : 'Reconsider that conclusion. ') + label + ' ' + scope;
+    });
+    $('structure-guess').addEventListener('change', () => { $('structure-result').textContent = 'Your conclusion changed. Check it against the selected replacement rule.'; });
+    $('structure-reset').addEventListener('click', () => { $('structure-mode').value = 'bijective'; $('structure-query').value = 'a'; structureView(); });
+    structureView();
+
+    function invoiceView() {
+      const r = invoiceExperiment($('invoice-example').value, $('invoice-format').value);
+      $('invoice-units').textContent = r.units; $('invoice-price').textContent = r.price; $('invoice-record').textContent = r.record;
+      $('invoice-arithmetic').textContent = r.units + ' × ' + r.price + ' = ' + r.amount + ' invented units.';
+      $('invoice-intended').textContent = r.intended;
+      const list = $('invoice-readings'); list.replaceChildren();
+      r.candidates.forEach(candidate => el('li', candidate.codes.join(' | ') + ' → ' + candidate.reading, list));
+      $('invoice-result').textContent = r.candidates.length + (r.candidates.length === 1
+        ? ' legal reading under the chosen boundary rule. This resolves this example; it does not authenticate a source or make the code secure.'
+        : ' legal readings with this key. Knowing the key does not tell the recipient where the sender put the boundaries. No reading is discarded for sounding less natural.');
+      $('invoice-cover').textContent = r.ordinaryNumber
+        ? 'The displayed amount fits the arithmetic of this invented invoice. That is one consistency check, not a measured chance of escaping notice.'
+        : 'The | marks make the boundaries explicit, but the amount field is no longer an ordinary number in this invoice format. Reliable decoding and an inconspicuous cover are separate requirements.';
+    }
+    ['invoice-example', 'invoice-format'].forEach(id => $(id).addEventListener('change', invoiceView));
+    function markerView() {
+      const r = markerExperiment($('marker-extra').checked);
+      $('marker-text').textContent = r.text; $('marker-words').textContent = r.words.join(' → '); $('marker-reading').textContent = r.reading;
+      $('marker-result').textContent = r.intact
+        ? 'The extraction matches the intended MEET AT DAWN in this fixture. All reserved words were used deliberately.'
+        : 'The ordinary mention of copper is also extracted. The receiver gets an extra DAWN: the rule cannot infer which occurrence the writer intended as a marker.';
+    }
+    $('marker-extra').addEventListener('change', markerView);
+    function musicView() {
+      const r = musicExperiment($('music-message').value), list = $('music-notes'); list.replaceChildren();
+      r.durations.forEach((beats, i) => { const note = el('li', 'Note ' + (i + 1) + ': ' + (beats === 1 ? 'quarter note — 1 beat' : 'half note — 2 beats'), list); note.className = 'rhythm-note'; });
+      $('music-reading').textContent = r.reading;
+      $('music-count').textContent = r.durations.join(' + ') + ' = ' + r.beats + ' quarter-note beats.';
+      $('music-result').textContent = r.fits
+        ? 'The code decodes and this complete bar has the required four beats. Passing this one meter check does not establish musical naturalness or successful concealment.'
+        : 'The code still decodes, but this complete bar has ' + r.beats + ' beats where its 4/4 label requires four. That visible inconsistency can attract scrutiny; it does not prove that a real score contains a secret.';
+    }
+    $('music-message').addEventListener('change', musicView);
+    $('concealment-reset').addEventListener('click', () => { $('invoice-example').value = 'dawn'; $('invoice-format').value = 'plain'; $('marker-extra').checked = false; $('music-message').value = 'MEET'; invoiceView(); markerView(); musicView(); });
+    invoiceView(); markerView(); musicView();
   }
-  const api = { applyKey, spans, checkSpans, shift, distance, rankCaesar, noiseExperiment, tokens, recurrence, rename, alter, mount };
+  const api = { applyKey, spans, checkSpans, shift, distance, rankCaesar, noiseExperiment, tokens, recurrence, rename, alter,
+    wordTransform, structureExperiment, decodeInvoice, invoiceExperiment, markerExperiment, decodeRhythm, musicExperiment, mount };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (root.document) {
     if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', () => mount(root.document), { once: true });

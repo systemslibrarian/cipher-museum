@@ -18,3 +18,12 @@
 .evidence-exercise .paper-credit{border-top:1px solid var(--gold-b);padding-top:1rem;font-size:.9rem}
 .evidence-exercise .research-card h3{font-size:1.15rem}
 .evidence-exercise #pattern-symbols{display:flex;flex-wrap:wrap;gap:.4rem}
+
+#structure-controls .evidence-table-scroll,#concealment .evidence-table-scroll{max-width:100%;overflow-x:auto;margin:1rem 0}
+#structure-controls .cipher-table,#concealment .cipher-table{width:100%;min-width:24rem}
+#structure-controls .cipher-table caption,#concealment .cipher-table caption{text-align:left;margin-bottom:.6rem;line-height:1.5;color:var(--tx2,#c7c1b7)}
+#structure-controls .structure-alternatives{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:.4rem 1.5rem;padding-left:1.4rem}
+#concealment h3{margin-top:1.6rem}
+#concealment .carrier-text{border:1px solid var(--gold-b);border-radius:4px;padding:.85rem;background:var(--s3,#22262d)}
+#concealment .rhythm-notes{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr));gap:.6rem}
+#concealment .rhythm-note{padding:.75rem;border:1px solid var(--gold-b);border-radius:4px;line-height:1.6;background:var(--s3,#22262d)}

@@ -2,6 +2,11 @@
 
 ## Independent content review
 
+- [Dot follow-ups (4 November 2026)](DOT_FOLLOWUPS_2026-11-04.md) — seven approved packages, catalogue consistency, sources and release checks.
+- [Passage comparison in the Evidence Workbench](READING_ALIGNMENT.md) — manual grouped links, unmatched text, revision history and compatible exports.
+- [Controlled replacement and concealment exercises](DOT_STRUCTURE_ADDITIONS_2026-11-04.md) — complete small examples, ambiguity counts and negative controls.
+- [Portuguese 1649, Charles V and IKA additions](DOT_HISTORICAL_ADDITIONS_2026-11-04.md) — historical sources, original exercise and evidence boundaries.
+
 - [Purple diagnosis worksheet (3 November 2026)](PURPLE_DIAGNOSIS.md) — synthetic depth-and-alignment worksheet; tests written first; a date discrepancy flagged.
 - [Working is not secure route (3 November 2026)](WORKING_NOT_SECURE.md) — correctness, performance and security separated; real functional and security tests; guided tour.
 - [Typex and handbell context additions (3 November 2026)](DOT_CONTEXT_ADDITIONS_2026-11-03.md) — capture-assisted compromise and historically constrained classifier suggestions. Updated 4 November with PR31’s completed Babington cache work: the returning-visitor upgrade verified against a reproduced stale-cache failure, offline behaviour compared page by page with no regression, and the sitemap and indexing tidy-up.
@@ -17,7 +22,7 @@
 
 - [Ebook implementation progress](../audit/EBOOK_IMPLEMENTATION_PROGRESS.md) — implementation and verification of all 21 follow-up recommendations.
 - [Ebook review recommendations](../audit/EBOOK_REVIEW_RECOMMENDATIONS.md) — 21 implemented Cipher Museum work packages from selected passages in 13 works: five corrections and 16 teaching additions, with existing Crypto Lab reuse identified.
-- [Complete 214-page audit export](../audit/README.md) — one self-contained Markdown document, smaller upload parts, a source register, and independent-review instructions.
+- [Complete 227-page audit export](../audit/README.md) — one self-contained Markdown document, smaller upload parts, a source register, and independent-review instructions.
 - [Page-by-page accuracy audit](PAGE_BY_PAGE_ACCURACY_AUDIT.md) — prior review scope, corrections, and evidence limits.
 - [67-item progress tracker](ACCURACY_REVIEW_PROGRESS.md) — completed bounded work packages from the prior audit.
 

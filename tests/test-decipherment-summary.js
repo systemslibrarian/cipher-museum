@@ -8,7 +8,7 @@ const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 
 const doc = new JSDOM(fs.readFileSync('lab/decipherment-cases.html', 'utf8')).window.document;
-const NAMES = { copiale: 'Copiale', mary: 'Mary Stuart', egyptian: 'Egyptian', 'linear-b': 'Linear B', maya: 'Maya', z340: 'Z340' };
+const NAMES = { copiale: 'Copiale', mary: 'Mary Stuart', 'charles-v': 'Charles V', egyptian: 'Egyptian', 'linear-b': 'Linear B', maya: 'Maya', z340: 'Z340' };
 const cases = [...doc.querySelectorAll('main section[id]')].map(s => s.id);
 for (const id of cases) assert.ok(NAMES[id], 'New case section #' + id + ' has no summary name; add it here and to the summaries');
 
