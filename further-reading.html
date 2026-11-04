@@ -95,6 +95,7 @@
     .fr-trail-stops p { margin: .25rem 0 0; }
     .fr-trail-nav { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 1rem 0; }
     .fr-trail-nav a { color: var(--gold-lt); text-decoration: underline; }
+    .fr-trail-group { font-family: var(--fd); font-size: 1.1rem; color: var(--tx); letter-spacing: .04em; margin: 2.5rem 0 .5rem; scroll-margin-top: 6rem; }
     @media (max-width: 480px) {
       .fr-grid { grid-template-columns: minmax(0, 1fr); }
       .fr-trail summary { padding: 1rem; }
@@ -152,12 +153,16 @@
   <!-- ── CHAPTER COMPANIONS ── -->
   <section class="fr-section" id="reading-trails" aria-labelledby="reading-trails-heading">
     <h2 class="fr-section-title" id="reading-trails-heading">Chapter-to-Exhibit Reading Trails</h2>
-    <p class="page-meta">Choose a book below. Each stop pairs a specific chapter or section with a museum activity and a question to investigate. These are concept companions, not reproductions of the books or complete implementations of their programming chapters. Use the stated edition: numbering can change between editions.</p>
+    <p class="page-meta">Choose a book or a case-study topic below. Each stop pairs a specific chapter or section with a museum activity and a question to investigate. These are concept companions, not reproductions of the books or complete implementations of their programming chapters. Use the stated edition: numbering can change between editions.</p>
     <nav class="fr-trail-nav" aria-label="Reading trail books">
       <a href="#sweigart">Sweigart · learn by doing</a>
       <a href="#gaines">Gaines · classical codebreaking</a>
       <a href="#holden">Holden · the mathematics</a>
       <a href="#esslinger">Esslinger · historical evidence</a>
+      <a href="#traffic-analysis-books">Traffic analysis · three sources</a>
+      <a href="#ancient-scripts-books">Ancient scripts · six books</a>
+      <a href="#purple-books">Purple · three books</a>
+      <a href="#security-claims-books">Working is not secure · three books</a>
     </nav>
     <p class="page-meta">For a route without a book, use the museum's <a href="tours/index.html">guided tours</a>.</p>
 
@@ -209,6 +214,61 @@
           <li><strong>Chapter 2, sections 2.1–2.2 · Transposition and substitution</strong><p>Compare <a href="ciphers/columnar.html">Columnar Transposition</a> with <a href="ciphers/monoalphabetic.html">Monoalphabetic Substitution</a>. Which changes symbol positions, and which changes the symbols themselves?</p></li>
           <li><strong>Chapter 3, sections 3.4.1–3.4.2 and 3.5.1 · Transcription and tokenization</strong><p>Prepare a source in <a href="cipher-detective.html#transcription-workspace">Cipher Detective</a> before analyzing it. Preserve uncertain symbols and original lineation, then inspect what an A–Z projection leaves out. For manuscript transcription at larger scale, explore <a href="https://www.cryptool.org/en/ctts/" target="_blank" rel="noopener">CrypTool's CTTS project</a>.</p></li>
           <li><strong>Chapter 3, sections 3.5.2–3.5.3 · Heuristic search and scoring</strong><p>Compare hill climbing and simulated annealing in the <a href="cryptanalysis.html#hill-climbing">Cryptanalysis Lab</a>. A search score reflects a language model; it does not certify a historically correct reading.</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <h3 class="fr-trail-group" id="case-study-trails">Trails behind the case studies</h3>
+    <p class="page-meta">These trails group the books cited by the museum’s newer case studies. Each stop names the edition, gives a chapter, section or printed page range, and links the exhibit it supports. The books are cited, not linked: find them through a library or bookseller.</p>
+
+    <details class="fr-trail" id="traffic-analysis-books">
+      <summary><em>Traffic analysis: what a network reveals before its messages are read</em><small>Borrmann et al. · Diffie and Landau · Thirsk</small></summary>
+      <div class="fr-trail-body">
+        <p>Three sources behind <a href="lab/traffic-analysis.html">Reading the Radio Log</a>. The exercise’s radio log is invented; these books supply the method and the history.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Borrmann et al., pp. 3–9 · Externals, net structure and deception</strong><p>Donald A. Borrmann and colleagues, <em>The History of Traffic Analysis: World War I – Vietnam</em> (Center for Cryptologic History, National Security Agency, 2013). Work the <a href="lab/traffic-analysis.html#connect">network and callsign stages</a> of the radio log. Which of your conclusions rests on an observation, and which on a callsign match you chose?</p></li>
+          <li><strong>Borrmann et al., pp. 13–15 · First World War examples</strong><p>Compare the book’s cases with the exercise’s <a href="lab/traffic-analysis.html#history">history notes</a>. What does a silent radio tell you, and what does it leave unknown about the unit that carried it?</p></li>
+          <li><strong>Diffie and Landau, chapter 4, p. 102, and chapter 5, p. 133 · Communications intelligence and call records</strong><p>Whitfield Diffie and Susan Landau, <em>Privacy on the Line: The Politics of Wiretapping and Encryption</em>, updated and expanded edition (MIT Press, 2007). After the radio log’s <a href="lab/traffic-analysis.html#debrief">debrief</a>, ask which of its externals still has a counterpart in a record of the numbers a telephone line calls.</p></li>
+          <li><strong>Thirsk, chapter 15 · A log-reader’s account</strong><p>James Thirsk, “Traffic analysis: a log-reader’s tale”, in Ralph Erskine and Michael Smith (eds), <em>The Bletchley Park Codebreakers</em> (Biteback, 2011). Read it after the exercise’s <a href="lab/traffic-analysis.html#limits">section on limits</a>. What did wartime log-readers record that a two-day teaching log leaves out?</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="ancient-scripts-books">
+      <summary><em>Ancient scripts: decipherment as hypothesis and test</em><small>Chadwick · Ventris and Chadwick · Parkinson · Collier and Manley · Coe · Kettunen and Helmke</small></summary>
+      <div class="fr-trail-body">
+        <p>Six books behind the Linear B, Egyptian and Maya cases in <a href="lab/decipherment-cases.html">Historical Investigations</a>. These are writing systems, not ciphers: each was recovered by testing hypotheses about how the script works. The <a href="tours/tour.html?tour=writing-systems">writing-systems tour</a> visits the same cases in order.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Chadwick, pp. 35–86 · From Kober’s structural work to tablet Ta 641</strong><p>John Chadwick, <em>The Decipherment of Linear B</em> (Cambridge University Press, 1958; pages from the Vintage paperback printing). Work the <a href="lab/decipherment-cases.html#linear-b">Linear B case</a>. Which evidence built the grid, and which tablet tested it afterwards?</p></li>
+          <li><strong>Ventris and Chadwick, chapters I–II · The decipherment and the spelling rules</strong><p>Michael Ventris and John Chadwick, <em>Documents in Mycenaean Greek</em> (Cambridge University Press, 1956). Return to the <a href="lab/decipherment-cases.html#linear-b">Linear B case</a>. Once the spelling rules are known, which readings still stay ambiguous?</p></li>
+          <li><strong>Parkinson, pp. 15, 31–35 and 57–59 · Young, Champollion and how the signs work</strong><p>Richard Parkinson, <em>Cracking Codes: The Rosetta Stone and Decipherment</em> (University of California Press, 1999). Work the <a href="lab/decipherment-cases.html#egyptian">Egyptian case</a>. Which two observations broke the idea of one picture to a word?</p></li>
+          <li><strong>Collier and Manley, §§2, 5–7 and 11–13 · Sound signs, determinatives and reading direction</strong><p>Mark Collier and Bill Manley, <em>How to Read Egyptian Hieroglyphs</em> (University of California Press, 1998). In the <a href="lab/decipherment-cases.html#egyptian">Egyptian case</a>, sort the signs by role. Which add sound, and which only place a word in a class of meaning?</p></li>
+          <li><strong>Coe, chapters 4, 6, 7 and 10 · Landa, Knorozov and Proskouriakoff</strong><p>Michael D. Coe, <em>Breaking the Maya Code</em>, 3rd edition (Thames &amp; Hudson, 2012). Work the <a href="lab/decipherment-cases.html#maya">Maya case</a>. Why did Landa’s “alphabet” give nonsense when it was applied letter by letter, and what changed when Knorozov read its signs as syllables?</p></li>
+          <li><strong>Kettunen and Helmke, Appendix K · Spelling harmony</strong><p>Harri Kettunen and Christophe Helmke, <em>Introduction to Maya Hieroglyphs</em>, 20th edition (Wayeb, 2025). Back in the <a href="lab/decipherment-cases.html#maya">Maya case</a>, take a spelling such as ba-ki for baak. Which vowel is spoken, and what does the silent one signal?</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="purple-books">
+      <summary><em>Purple: diagnosing a machine from evidence</em><small>Stamp and Low · Rowlett · Mundy</small></summary>
+      <div class="fr-trail-body">
+        <p>Three books behind <a href="lab/purple-diagnosis.html">Diagnosing a Machine from Evidence</a>. The worksheet’s messages and wiring are invented and simplified; it does not reproduce the historical attack or the Purple machine.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Stamp and Low, §2.3.3, pp. 45–48 · Depth, matched plaintext and partial permutations</strong><p>Mark Stamp and Richard M. Low, <em>Applied Cryptanalysis: Breaking Ciphers in the Real World</em> (Wiley, 2007). Do the <a href="lab/purple-diagnosis.html#worksheet">worksheet</a>. Which entries in your partial permutation were supplied as plaintext, and which did you infer?</p></li>
+          <li><strong>Rowlett, pp. 151–154 · From a first pattern to corroboration</strong><p>Frank B. Rowlett, <em>The Story of Magic: Memoirs of an American Cryptologic Pioneer</em> (Aegean Park Press, 1998). After testing an alignment on the <a href="lab/purple-diagnosis.html#worksheet">held-out message</a>, ask what the team looked for once the first instance of the relationship had been found.</p></li>
+          <li><strong>Mundy, pp. 89–94 · The team behind the work</strong><p>Liza Mundy, <em>Code Girls: The Untold Story of the American Women Code Breakers of World War II</em> (Hachette, 2017). Read the worksheet’s <a href="lab/purple-diagnosis.html#team">team note</a> and the <a href="ciphers/purple.html">Purple</a> exhibit. Who else worked on Purple, and what did each contribute?</p></li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="fr-trail" id="security-claims-books">
+      <summary><em>Working is not secure: a functional test is not a security test</em><small>Flannery · Bauer · Piper and Murphy</small></summary>
+      <div class="fr-trail-body">
+        <p>Three books behind <a href="lab/working-is-not-secure.html">Working Is Not Secure</a> and its <a href="tours/tour.html?tour=working-not-secure">guided route</a>. The page’s message, key and tests are original, and no attack from these books is reproduced.</p>
+        <ol class="fr-trail-stops">
+          <li><strong>Flannery, chapter “After-math” · A working scheme, an attack and a negative result</strong><p>Sarah Flannery with David Flannery, <em>In Code: A Mathematical Journey</em> (Profile Books, 2000). Read the page’s <a href="lab/working-is-not-secure.html#negative">negative result</a>. Why was a report on the attack worth including in her next project?</p></li>
+          <li><strong>Bauer, §11.2, pp. 220–224 · The maxims of cryptology</strong><p>Friedrich L. Bauer, <em>Decrypted Secrets: Methods and Maxims of Cryptology</em>, 4th edition (Springer, 2007). After the <a href="lab/working-is-not-secure.html#example">worked example</a>, ask which of the maxims its key-space claim ignores.</p></li>
+          <li><strong>Piper and Murphy, chapter 6 · Practical security</strong><p>Fred Piper and Sean Murphy, <em>Cryptography: A Very Short Introduction</em> (Oxford University Press, 2002). The example has 26! (about 4 × 10<sup>26</sup>) keys, yet its security claim fails in the <a href="lab/working-is-not-secure.html#verdict">verdict</a>. Why does a large key space bound only exhaustive key search?</p></li>
         </ol>
       </div>
     </details>

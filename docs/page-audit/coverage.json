@@ -5501,8 +5501,8 @@
     {
       "path": "further-reading.html",
       "title": "Further Reading — The Cipher Museum",
-      "words": 4076,
-      "sha256": "b26d609cd3ea3a782ff6367240273a04b9adde1a605e585317038434995969f2",
+      "words": 5129,
+      "sha256": "f4756bc0b19ac9496199e9784bafc2e688523886a689a366f31d8553883c4671",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996",
@@ -5513,7 +5513,7 @@
         "LASRY-2018",
         "CODEBREAKING-2020"
       ],
-      "notes": "All book cards and reading trails reread. Full authors/titles/edition years and selected ISBNs reconciled against bibliographic records. Public ebook destinations removed while primary papers/manuals and catalogue links remain; ten prohibited and four allowed destination cases tested.",
+      "notes": "All book cards and reading trails reread. Full authors/titles/edition years and selected ISBNs reconciled against bibliographic records. Public ebook destinations removed while primary papers/manuals and catalogue links remain; ten prohibited and four allowed destination cases tested.\n3 November 2026: Added four case-study reading trails (traffic analysis, ancient scripts, Purple, working is not secure) for the fifteen books cited by the newer lab pages. Each stop names the edition, gives a chapter, section or printed page range, and links the exhibit that cites it; citations copied from those pages, which were checked against the user's copies. Books are cited, not linked.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "bibliography_links",
@@ -5535,6 +5535,11 @@
         "notes": "Added direct Black Chamber reference and links to original museum lesson and subject crosswalk.",
         "scope": "Original pedagogical examples and existing exhibit links; not new historical authentication or language-model calibration.",
         "verification": "Full npm test passed; 220-page HTML lint and release validation passed. Focused arithmetic/DOM/print-separation checks and desktop/narrow browser checks are scoped in docs/first-codebreak-review.md."
+      },
+      "reading_map_2026_11_03": {
+        "date": "2026-11-03",
+        "scope": "Bibliographic routing only: titles, editions and locations as cited on lab/traffic-analysis.html, lab/decipherment-cases.html, lab/purple-diagnosis.html and lab/working-is-not-secure.html. Reading questions are original. No new historical claim.",
+        "verification": "tests/test-reading-trails.js guards every case-study stop for a location, an edition, its exhibit link and no external copy; seven new mutation checks each fail with their own message."
       }
     },
     {
