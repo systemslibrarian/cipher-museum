@@ -38,3 +38,9 @@ for (const p of ['halls/codebreakers.html', 'ciphers/purple.html']) {
  assert.throws(() => checkGrotjan(html.replace('further reconstruction', 'complete wiring revealed')));
 }
 console.log('Grotjan source attribution and bounded reconstruction claims passed, including four mutation checks.');
+
+// Narrow-view table panels must support keyboard scrolling.
+const purpleHtml = fs.readFileSync('ciphers/purple.html', 'utf8');
+for (const label of ['Purple concepts and modern comparisons', 'Purple quick facts']) {
+ assert.ok(purpleHtml.includes('role="region" aria-label="' + label + '" tabindex="0"'));
+}
