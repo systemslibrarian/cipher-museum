@@ -1,6 +1,6 @@
 # javascript appendix 4
 
-Snapshot: `f5a994abd27f5d28531efa53a23d5b8661e41b61`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `19f2c1a4a89f0b0e8661c209e95ed66d51fc5374`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 ## JavaScript — js/ciphers/caesar-break.js
 
@@ -1496,6 +1496,195 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   elDrag.addEventListener('click', runDrag);
   elCrib.addEventListener('keydown', (e) => { if (e.key === 'Enter') runDrag(); });
 })();
+```
+
+
+## JavaScript — js/codebreaking-evidence.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/codebreaking-evidence.js`
+- Served SHA-256: `d6128616456380f5b3a461f28361ff13e8c8e352ffc9c31fd04bc784d123def4`
+- Readable-source SHA-256: `d6128616456380f5b3a461f28361ff13e8c8e352ffc9c31fd04bc784d123def4`
+
+
+```javascript
+/* Original finite teaching models. No historical intercepts or machine reconstruction. */
+(function (root, factory) {
+  'use strict';
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else { root.CodebreakingEvidence = api; api.mount(document); }
+})(typeof window === 'object' ? window : globalThis, function () {
+  'use strict';
+  const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const SMALL = 'ABCDEFGH';
+  const mod = n => (n % 26 + 26) % 26;
+  function evidence(matches, total, related = 0.075, chance = 1 / 26) {
+    if (!Number.isInteger(matches) || !Number.isInteger(total) || matches < 0 || total < matches ||
+        !(related > 0 && related < 1 && chance > 0 && chance < 1)) throw new Error('Invalid evidence model.');
+    const hit = 10 * Math.log10(related / chance);
+    const miss = 10 * Math.log10((1 - related) / (1 - chance));
+    const score = matches * hit + (total - matches) * miss;
+    return { matches, total, hit, miss, score, factor: 10 ** (score / 10) };
+  }
+  // Deterministic invented strips; eight coincidences deliberately planted at +3.
+  const STRIP_A = 'QNZVJHATMCWESRUXKDFBIPYOLGHEVSNRCATWXQMJDKUBZFPI';
+  const baseB = [...'MRZKPOWUNQXEDTIGLBJHCSYVAFRKMQPZUNWXEITDHLBOVASC'];
+  for (const i of [2, 8, 14, 20, 26, 32, 38, 44]) baseB[i] = STRIP_A[i + 3];
+  const STRIP_B = baseB.join('');
+  function alignment(offset, limit = 48) {
+    if (!Number.isInteger(offset) || Math.abs(offset) > 6 || ![16, 32, 48].includes(limit)) throw new Error('Invalid alignment.');
+    const pairs = [];
+    for (let a = 0; a < STRIP_A.length; a++) {
+      const b = a - offset;
+      if (b >= 0 && b < STRIP_B.length && pairs.length < limit) pairs.push({ a: STRIP_A[a], b: STRIP_B[b], indexA: a, indexB: b, match: STRIP_A[a] === STRIP_B[b] });
+    }
+    return { offset, pairs, ...evidence(pairs.filter(p => p.match).length, pairs.length) };
+  }
+  function rankAlignments(limit) {
+    return Array.from({ length: 13 }, (_, i) => alignment(i - 6, limit)).sort((a, b) => b.score - a.score || a.offset - b.offset);
+  }
+  function permutation(p) {
+    if (!Array.isArray(p) || p.length === 0 || new Set(p).size !== p.length || p.some(n => !Number.isInteger(n) || n < 0 || n >= p.length)) throw new Error('Invalid permutation.');
+    return p;
+  }
+  function inverse(p) { permutation(p); const inv = []; p.forEach((v, i) => { inv[v] = i; }); return inv; }
+  function cycles(p) {
+    permutation(p); const seen = new Set(), out = [];
+    for (let i = 0; i < p.length; i++) {
+      if (seen.has(i)) continue;
+      const cycle = []; let j = i;
+      while (!seen.has(j)) { seen.add(j); cycle.push(j); j = p[j]; }
+      out.push(cycle);
+    }
+    return out;
+  }
+  function conjugate(p, s) {
+    permutation(p); permutation(s);
+    if (p.length !== s.length) throw new Error('Permutation sizes differ.');
+    const inv = inverse(s);
+    return p.map((_, i) => s[p[inv[i]]]);
+  }
+  const MAPS = [
+    [1, 0, 3, 2, 5, 4, 7, 6], [2, 3, 0, 1, 6, 7, 4, 5], [3, 2, 1, 0, 7, 6, 5, 4],
+    [7, 2, 1, 4, 3, 6, 5, 0], [4, 5, 6, 7, 0, 1, 2, 3], [5, 4, 7, 6, 1, 0, 3, 2]
+  ];
+  const BOARDS = { none: [0,1,2,3,4,5,6,7], ahbe: [7,4,2,3,1,5,6,0], acdf: [2,1,0,5,4,3,6,7] };
+  function indicators(board = 'none') {
+    if (!Object.hasOwn(BOARDS, board)) throw new Error('Unknown plugboard.');
+    const maps = MAPS.map(p => conjugate(p, BOARDS[board]));
+    const rows = Array.from({ length: 8 }, (_, i) => {
+      const key = [i, (i + 2) % 8, (i + 5) % 8];
+      return maps.map((p, k) => p[key[k % 3]]);
+    });
+    // Reconstruct from observed indicator pairs, not a stored cycle answer.
+    const observed = [];
+    rows.forEach(row => { observed[row[0]] = row[3]; });
+    const result = cycles(observed);
+    return { rows, observed, cycles: result, lengths: result.map(c => c.length).sort((a,b) => a-b) };
+  }
+  const ALL_ORDERS = [];
+  for (let a = 1; a <= 5; a++) for (let b = 1; b <= 5; b++) for (let c = 1; c <= 5; c++) {
+    if (a !== b && b !== c && a !== c) ALL_ORDERS.push([a,b,c]);
+  }
+  function wheelOrders(previous, noPositions, noExact) {
+    if (!Array.isArray(previous) || previous.length !== 3 || new Set(previous).size !== 3 || previous.some(x => !Number.isInteger(x) || x < 1 || x > 5)) throw new Error('Invalid previous wheel order.');
+    const orders = ALL_ORDERS.filter(order => (!noPositions || order.every((x,i) => x !== previous[i])) && (!noExact || order.some((x,i) => x !== previous[i])));
+    return { orders, count: orders.length, bits: Math.log2(orders.length), excluded: 60 - orders.length };
+  }
+  function caesar(text, shift) { return [...text].map(c => ALPHABET[mod(ALPHABET.indexOf(c) + shift)]).join(''); }
+  function vigenere(text, key, decrypt = false) {
+    if (!/^[A-Z]+$/.test(text) || !/^[A-Z]+$/.test(key)) throw new Error('Use uppercase A–Z.');
+    return [...text].map((c,i) => ALPHABET[mod(ALPHABET.indexOf(c) + (decrypt ? -1 : 1) * ALPHABET.indexOf(key[i % key.length]))]).join('');
+  }
+  const DISPATCH = 'SENDSUPPLIESTOHARBOR';
+  const DECOY = 'SENDPATROLSTOHARBORX';
+  const STRONG = vigenere(DISPATCH, 'TIDES');
+  function dispatchCase(kind) {
+    if (!['same', 'different'].includes(kind)) throw new Error('Unknown dispatch case.');
+    return { weak: caesar(kind === 'same' ? DISPATCH : DECOY, 4), strong: STRONG };
+  }
+  function deriveKey(ciphertext, plaintext, period = 5) {
+    if (!/^[A-Z]+$/.test(ciphertext) || !/^[A-Z]+$/.test(plaintext) || !Number.isInteger(period) || period < 1 || Math.min(ciphertext.length, plaintext.length) < period) throw new Error('Invalid crib.');
+    return [...plaintext.slice(0,period)].map((p,i) => ALPHABET[mod(ALPHABET.indexOf(ciphertext[i]) - ALPHABET.indexOf(p))]).join('');
+  }
+  function checkDispatch(plaintext, key) {
+    const decoded = vigenere(STRONG, key, true);
+    const checks = [...decoded.slice(5)].map((c,i) => c === plaintext[i+5]);
+    return { decoded, matches: checks.filter(Boolean).length, total: checks.length, consistent: decoded.length === plaintext.length && checks.every(Boolean) };
+  }
+  function mount(doc) {
+    const $ = id => doc.getElementById(id);
+    const tableRows = (id, rows) => $(id).replaceChildren(...rows.map(values => {
+      const tr = doc.createElement('tr'); values.forEach(value => { const td = doc.createElement('td'); td.textContent = String(value); tr.append(td); }); return tr;
+    }));
+    if ($('ban-offset')) {
+      const render = () => {
+        const limit = Number($('ban-sample').value), r = alignment(Number($('ban-offset').value), limit);
+        $('ban-offset-value').textContent = (r.offset >= 0 ? '+' : '') + r.offset;
+        for (const [id, key] of [['ban-strip-a','a'],['ban-strip-b','b']]) $(id).replaceChildren(...r.pairs.map(p => {
+          const cell = doc.createElement('span'); cell.textContent = p[key]; cell.className = p.match ? 'evidence-letter is-match' : 'evidence-letter';
+          cell.title = (key === 'a' ? p.indexA : p.indexB) + 1 + ': ' + (p.match ? 'coincidence' : 'different letters'); return cell;
+        }));
+        $('ban-result').textContent = `${r.matches} coincidences in ${r.total} comparisons. Score ${r.score.toFixed(2)} decibans; likelihood ratio ${r.factor.toFixed(2)}. Each coincidence adds ${r.hit.toFixed(2)}; each non-match adds ${r.miss.toFixed(2)}. A positive score favors the related model; it is not a probability of correctness.`;
+        tableRows('ban-ranking', rankAlignments(limit).map(x => [(x.offset >= 0 ? '+' : '') + x.offset, x.matches + ' / ' + x.total, x.score.toFixed(2)]));
+      };
+      $('ban-offset').addEventListener('input', render); $('ban-sample').addEventListener('change', render); render();
+    }
+    if ($('cycle-board')) {
+      const render = () => {
+        const r = indicators($('cycle-board').value), baseline = indicators();
+        tableRows('cycle-indicators', r.rows.map((row,i) => [i + 1, row.map(x => SMALL[x]).join(''), SMALL[row[0]] + ' → ' + SMALL[row[3]]]));
+        const notation = cs => cs.map(c => '(' + c.map(x => SMALL[x]).join(' → ') + ' → ' + SMALL[c[0]] + ')').join(' ');
+        $('cycle-baseline').textContent = notation(baseline.cycles);
+        $('cycle-current').textContent = notation(r.cycles);
+        $('cycle-result').textContent = 'Cycle lengths: ' + r.lengths.join(' + ') + '. The labels may change; the cycle lengths survive conjugation. This characteristic constrains candidates but does not uniquely identify a key.';
+      };
+      $('cycle-board').addEventListener('change', render); render();
+    }
+    if ($('rules-previous')) {
+      const render = () => {
+        const r = wheelOrders($('rules-previous').value.split('').map(Number), $('rules-position').checked, $('rules-exact').checked);
+        $('rules-result').textContent = `${r.count} of 60 rotor orders remain; ${r.excluded} excluded. With uniform choice among these allowed orders, conditional entropy is ${r.bits.toFixed(3)} bits (unrestricted: ${Math.log2(60).toFixed(3)}). This counts rotor order only, assuming the attacker knows yesterday’s order and the policy.`;
+        $('rules-orders').textContent = r.orders.map(order => order.join('–')).join('  ·  ');
+      };
+      ['rules-previous','rules-position','rules-exact'].forEach(id => $(id).addEventListener('change',render)); render();
+    }
+    if ($('kiss-case')) {
+      let plaintext = '', key = '';
+      const reset = () => {
+        const f = dispatchCase($('kiss-case').value);
+        $('kiss-weak').textContent = f.weak; $('kiss-strong').textContent = f.strong;
+        plaintext = ''; key = ''; $('kiss-plaintext').textContent = 'The weak copy is still unread.';
+        $('kiss-key').textContent = 'Recover the weak copy first.'; $('kiss-equations').replaceChildren();
+        $('kiss-derive').disabled = true; $('kiss-check').disabled = true;
+        $('kiss-result').textContent = 'No test yet. Matching lengths alone do not establish a shared message.';
+      };
+      $('kiss-case').addEventListener('change',reset);
+      $('kiss-reset').addEventListener('click',reset);
+      $('kiss-decode').addEventListener('click', () => {
+        plaintext = caesar(dispatchCase($('kiss-case').value).weak, -4);
+        $('kiss-plaintext').textContent = plaintext; $('kiss-derive').disabled = false;
+      });
+      $('kiss-derive').addEventListener('click', () => {
+        if (!plaintext) return;
+        key = deriveKey(STRONG, plaintext);
+        $('kiss-key').textContent = key + ' — candidate key from the first five positions only.';
+        tableRows('kiss-equations', [...key].map((k,i) => [i+1,STRONG[i],plaintext[i],`${ALPHABET.indexOf(STRONG[i])} − ${ALPHABET.indexOf(plaintext[i])} mod 26 = ${ALPHABET.indexOf(k)} (${k})`]));
+        $('kiss-check').disabled = false;
+      });
+      $('kiss-check').addEventListener('click', () => {
+        if (!key) return;
+        const r = checkDispatch(plaintext,key);
+        $('kiss-result').textContent = `${r.decoded}. Held-out positions 6–20: ${r.matches} / ${r.total} match the weak copy. ` + (r.consistent ? 'Consistent with the shared-plaintext hypothesis in this invented fixture. The first five positions fitted by construction; the remaining positions supplied the test.' : 'The shared-plaintext hypothesis fails this check. Do not promote the fitted key to a confirmed recovery.');
+      }); reset();
+    }
+  }
+  return { evidence, alignment, rankAlignments, STRIP_A, STRIP_B, inverse, cycles, conjugate, indicators, MAPS, BOARDS, wheelOrders, ALL_ORDERS, caesar, vigenere, dispatchCase, deriveKey, checkDispatch, mount };
+});
 ```
 
 
@@ -3087,364 +3276,6 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
     _detectCharset:    detectCharset,
     _periodIoC:        periodIoC,
     _freqCounts:       freqCounts
-  };
-
-})(typeof window !== 'undefined' ? window : global);
-```
-
-
-## JavaScript — js/detective/attacks.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/detective/attacks.js`
-- Served SHA-256: `4275877c52228402697a6205bf8d60dfa8b738c726aa43a1d05ace5c9eaf5e74`
-- Readable-source SHA-256: `4275877c52228402697a6205bf8d60dfa8b738c726aa43a1d05ace5c9eaf5e74`
-
-
-```javascript
-/* ================================================================
-   THE CIPHER MUSEUM — Detective Attacks v2.0
-
-   window.DetectiveAttacks — seven inline attack tools
-
-   All functions are pure (no DOM). Results are plain objects.
-   The browser-side click handlers in detective.js call these and
-   pass the result to renderAttackResult() in render.js.
-
-   Tools:
-     caesarBruteForce(ct)         — top-5 shifts by chi-square
-     rot13(ct)                    — ROT13 decode
-     atbash(ct)                   — Atbash decode
-     decodeMorse(text)            — International Morse decode
-     decodeEncoding(text)         — Base64 / Hex / Binary auto-detect
-     vigKeyLength(ct, maxKey=15)  — Kasiski + period-IoC key-length candidates
-     substFreqSuggestions(ct)     — top-6 cipher→plain frequency guesses
-     isApplicable(toolId, stats)  — {ok, reason} gate for button state
-   ================================================================ */
-'use strict';
-
-(function (global) {
-
-  /* ─── International Morse Code table ────────────────────────── */
-  var MORSE_ENC = {
-    'A':'.-',   'B':'-...', 'C':'-.-.', 'D':'-..', 'E':'.',
-    'F':'..-.', 'G':'--.',  'H':'....', 'I':'..',  'J':'.---',
-    'K':'-.-',  'L':'.-..', 'M':'--',   'N':'-.',  'O':'---',
-    'P':'.--.', 'Q':'--.-', 'R':'.-.',  'S':'...', 'T':'-',
-    'U':'..-',  'V':'...-', 'W':'.--',  'X':'-..-','Y':'-.--',
-    'Z':'--..',
-    '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-',
-    '5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
-    '.':'.-.-.-',',':'--..--','?':'..--..',
-    '!':'-.-.--','/':'-..-.','=':'-...-',
-    '@':'.--.-.','&':'.-...','\"':'.-..-.','\'':'.----.'
-  };
-
-  /* Reverse lookup: morse sequence → character */
-  var MORSE_DEC = (function () {
-    var rev = {};
-    var keys = Object.keys(MORSE_ENC);
-    for (var i = 0; i < keys.length; i++) rev[MORSE_ENC[keys[i]]] = keys[i];
-    return rev;
-  }());
-
-  /* English frequency order for substitution mapping */
-  var ETAOIN = ['E','T','A','O','I','N','S','H','R','D','L','C','U','M','W','F','G','Y','P','B','V','K','J','X','Q','Z'];
-
-  /* ─── Helpers ────────────────────────────────────────────────── */
-  function extractLetters(t) {
-    return t.toUpperCase().replace(/[^A-Z]/g, '');
-  }
-
-  /* Re-inject spaces from original ciphertext into a letter-only decrypted string. */
-  function respacedDecrypt(ct, decLetters) {
-    var out = '', li = 0;
-    var upper = ct.toUpperCase();
-    for (var i = 0; i < upper.length; i++) {
-      var ch = upper[i];
-      if (ch >= 'A' && ch <= 'Z') {
-        out += (li < decLetters.length) ? decLetters[li++] : ch;
-      } else {
-        out += ch;
-      }
-    }
-    return out;
-  }
-
-  /* ─── Caesar Brute-Force ──────────────────────────────────────
-     Returns top-5 shifts sorted by chi-square ascending
-     (lower chi-square = closer to English distribution).
-     Uses DetectiveAnalyses._chiSquareAtShift which is already
-     exposed for testing. */
-  function caesarBruteForce(ct) {
-    var letters = extractLetters(ct);
-    if (letters.length === 0) return [];
-
-    var candidates = [];
-    for (var shift = 1; shift < 26; shift++) {
-      /* _chiSquareAtShift(letters, shift) measures fit of the
-         ciphertext distribution shifted back by `shift` against
-         expected English frequencies. */
-      var chi = global.DetectiveAnalyses._chiSquareAtShift(letters, shift);
-
-      /* Decrypt: shift each letter back */
-      var decLetters = '';
-      for (var i = 0; i < letters.length; i++) {
-        decLetters += String.fromCharCode(((letters.charCodeAt(i) - 65 - shift + 26) % 26) + 65);
-      }
-
-      candidates.push({
-        shift:     shift,
-        decrypted: respacedDecrypt(ct, decLetters),
-        chi:       chi
-      });
-    }
-
-    candidates.sort(function (a, b) { return a.chi - b.chi; });
-    return candidates.slice(0, 5);
-  }
-
-  /* ─── ROT13 ───────────────────────────────────────────────────
-     Caesar shift 13 — self-inverse. */
-  function rot13(ct) {
-    var letters = extractLetters(ct);
-    var decLetters = '';
-    for (var i = 0; i < letters.length; i++) {
-      decLetters += String.fromCharCode(((letters.charCodeAt(i) - 65 + 13) % 26) + 65);
-    }
-    return { decrypted: respacedDecrypt(ct, decLetters) };
-  }
-
-  /* ─── Atbash ──────────────────────────────────────────────────
-     Reverse alphabet: A↔Z, B↔Y … self-inverse. */
-  function atbash(ct) {
-    var letters = extractLetters(ct);
-    var decLetters = '';
-    for (var i = 0; i < letters.length; i++) {
-      decLetters += String.fromCharCode(25 - (letters.charCodeAt(i) - 65) + 65);
-    }
-    return { decrypted: respacedDecrypt(ct, decLetters) };
-  }
-
-  /* ─── Morse Decoder ───────────────────────────────────────────
-     Word boundaries: ' / '   Letter boundaries: ' '
-     Returns { valid, decrypted } or { valid: false, error, decrypted }. */
-  function decodeMorse(text) {
-    var t = text.trim();
-    if (!t) return { valid: false, error: 'Empty input' };
-
-    var words = t.split(/\s*\/\s*/);
-    var result = [];
-    var unknownSeqs = [];
-
-    for (var wi = 0; wi < words.length; wi++) {
-      var word = words[wi].trim();
-      if (!word) continue;
-      var syms = word.split(/\s+/);
-      var decoded = '';
-      for (var si = 0; si < syms.length; si++) {
-        var sym = syms[si];
-        if (!sym) continue;
-        var ch = MORSE_DEC[sym];
-        if (ch === undefined) {
-          unknownSeqs.push(sym);
-          decoded += '?';
-        } else {
-          decoded += ch;
-        }
-      }
-      result.push(decoded);
-    }
-
-    var decrypted = result.join(' ');
-    if (unknownSeqs.length > 0) {
-      return {
-        valid: false,
-        error: 'Unrecognised Morse sequences: ' + unknownSeqs.join(', '),
-        decrypted: decrypted
-      };
-    }
-    return { valid: true, decrypted: decrypted };
-  }
-
-  /* ─── Encoding Detector ───────────────────────────────────────
-     Auto-detects Binary (8-bit), Hexadecimal, or Base64.
-     Returns { valid, type, decrypted } or { valid: false }. */
-  function decodeEncoding(text) {
-    var t = text.trim().replace(/\s+/g, '');
-    if (!t) return { valid: false };
-
-    /* Binary: groups of 8 bits (0 and 1 only) */
-    if (/^[01]+$/.test(t) && t.length % 8 === 0 && t.length >= 8) {
-      try {
-        var binResult = '';
-        for (var bi = 0; bi < t.length; bi += 8) {
-          binResult += String.fromCharCode(parseInt(t.slice(bi, bi + 8), 2));
-        }
-        if (/[\x20-\x7e]/.test(binResult)) {        /* printable ASCII sanity check */
-          return { valid: true, type: 'Binary (8-bit)', decrypted: binResult };
-        }
-      } catch (e) { /* fall through */ }
-    }
-
-    /* Hexadecimal: even-length string of hex digits */
-    if (/^[0-9a-fA-F]+$/.test(t) && t.length % 2 === 0 && t.length >= 4) {
-      try {
-        var hexResult = '';
-        for (var hi = 0; hi < t.length; hi += 2) {
-          hexResult += String.fromCharCode(parseInt(t.slice(hi, hi + 2), 16));
-        }
-        if (/[\x20-\x7e]/.test(hexResult)) {
-          return { valid: true, type: 'Hexadecimal', decrypted: hexResult };
-        }
-      } catch (e) { /* fall through */ }
-    }
-
-    /* Base64: standard alphabet + optional padding */
-    if (/^[A-Za-z0-9+/]+=*$/.test(t) && t.length % 4 === 0 && t.length >= 4) {
-      try {
-        var b64Result;
-        if (typeof atob !== 'undefined') {
-          b64Result = atob(t);
-        } else if (typeof Buffer !== 'undefined') {
-          b64Result = Buffer.from(t, 'base64').toString('utf8');
-        }
-        if (b64Result !== undefined && /[\x20-\x7e]/.test(b64Result)) {
-          return { valid: true, type: 'Base64', decrypted: b64Result };
-        }
-      } catch (e) { /* fall through */ }
-    }
-
-    return { valid: false };
-  }
-
-  /* ─── Vigenère Key-Length Estimator ──────────────────────────
-     Combines Kasiski examination and period-IoC to propose
-     the top-3 most likely key lengths.
-     Returns { candidates: [{length, pIoC, score, methods}] }. */
-  function vigKeyLength(ct, maxKey) {
-    maxKey = (maxKey !== undefined) ? maxKey : 15;
-    var letters = extractLetters(ct);
-    if (letters.length < 30) return { candidates: [] };
-
-    var kasiski = global.DetectiveAnalyses._kasiskiTest(letters);
-
-    /* Build a set of Kasiski-supported periods for fast lookup */
-    var kasiskiSet = {};
-    for (var ki = 0; ki < kasiski.length; ki++) {
-      kasiskiSet[kasiski[ki].period] = kasiski[ki].count;
-    }
-
-    var candidates = [];
-    for (var p = 2; p <= maxKey; p++) {
-      var pIoC   = global.DetectiveAnalyses._periodIoC(letters, p);
-      var methods = [];
-      if (pIoC > 0.053) methods.push('Period-IoC');
-      if (kasiskiSet[p]) methods.push('Kasiski (' + kasiskiSet[p] + ' repeat' + (kasiskiSet[p] > 1 ? 's' : '') + ')');
-      /* Combined score: pIoC plus a Kasiski bonus */
-      var score = pIoC + (kasiskiSet[p] ? 0.005 * kasiskiSet[p] : 0);
-      candidates.push({ length: p, pIoC: pIoC, score: score, methods: methods });
-    }
-
-    candidates.sort(function (a, b) { return b.score - a.score; });
-    return { candidates: candidates.slice(0, 3) };
-  }
-
-  /* ─── Substitution Frequency Suggestions ─────────────────────
-     Maps the top-6 most frequent ciphertext letters to the
-     corresponding positions in ETAOIN order as starting hypotheses.
-     Returns { mapping: [{cipher, plain, count, pct}], note }. */
-  function substFreqSuggestions(ct) {
-    var letters = extractLetters(ct);
-    if (letters.length === 0) return { mapping: [], note: 'No letters found.' };
-
-    var counts = global.DetectiveAnalyses._freqCounts(letters);
-    var n = letters.length;
-
-    var sorted = Object.keys(counts).map(function (k) {
-      return { cipher: k, count: counts[k], pct: (counts[k] / n) * 100 };
-    }).filter(function (x) { return x.count > 0; });
-    sorted.sort(function (a, b) { return b.count - a.count; });
-
-    var top6 = sorted.slice(0, 6);
-    var mapping = top6.map(function (item, idx) {
-      return {
-        cipher: item.cipher,
-        plain:  ETAOIN[idx] || '?',
-        count:  item.count,
-        pct:    item.pct
-      };
-    });
-
-    return {
-      mapping: mapping,
-      note: 'If this is monoalphabetic substitution, the most frequent ciphertext letter ' +
-            'likely encodes ' + (mapping[0] ? mapping[0].plain : 'E') +
-            ', the second likely ' + (mapping[1] ? mapping[1].plain : 'T') +
-            ', and so on. These are starting hypotheses only — verify with context.'
-    };
-  }
-
-  /* ─── isApplicable ────────────────────────────────────────────
-     Returns { ok: true } if the named tool makes sense for the
-     given stats object, or { ok: false, reason: string } if not.
-     Used to disable/grey-out inapplicable attack buttons. */
-  function isApplicable(toolId, stats) {
-    if (!stats) return { ok: false, reason: 'No analysis data yet.' };
-    var cs  = stats.charset;
-    var n   = stats.n;
-    var ioc = stats.ioc;
-
-    switch (toolId) {
-      case 'caesar':
-        if (cs !== 'alpha') return { ok: false, reason: 'Caesar requires alphabetic-only text (detected: ' + cs + ').' };
-        if (n < 8)          return { ok: false, reason: 'Too short for meaningful brute-force (need 8+ letters).' };
-        return { ok: true };
-
-      case 'rot13':
-        if (cs !== 'alpha') return { ok: false, reason: 'ROT13 requires alphabetic-only text.' };
-        return { ok: true };
-
-      case 'atbash':
-        if (cs !== 'alpha') return { ok: false, reason: 'Atbash requires alphabetic-only text.' };
-        return { ok: true };
-
-      case 'morse':
-        if (cs !== 'morse') return { ok: false, reason: 'Input does not look like Morse code. Morse uses only . - / and spaces.' };
-        return { ok: true };
-
-      case 'encoding':
-        /* Always show — auto-detection will report if nothing matches */
-        return { ok: true };
-
-      case 'vigKeyLength':
-        if (cs !== 'alpha') return { ok: false, reason: 'Vigenère key-length analysis requires alphabetic text.' };
-        if (n < 50)         return { ok: false, reason: 'This teaching tool requires at least 50 letters; that threshold does not guarantee reliable estimation.' };
-        return { ok: true };
-
-      case 'substFreq':
-        if (cs !== 'alpha') return { ok: false, reason: 'Substitution frequency analysis requires alphabetic text.' };
-        if (n < 30)         return { ok: false, reason: 'Too short for reliable frequency analysis (need 30+ letters).' };
-        return { ok: true };
-
-      default:
-        return { ok: false, reason: 'Unknown tool: ' + toolId };
-    }
-  }
-
-  /* ─── Export ─────────────────────────────────────────────────── */
-  global.DetectiveAttacks = {
-    caesarBruteForce:     caesarBruteForce,
-    rot13:                rot13,
-    atbash:               atbash,
-    decodeMorse:          decodeMorse,
-    decodeEncoding:       decodeEncoding,
-    vigKeyLength:         vigKeyLength,
-    substFreqSuggestions: substFreqSuggestions,
-    isApplicable:         isApplicable
   };
 
 })(typeof window !== 'undefined' ? window : global);

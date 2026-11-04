@@ -1,6 +1,296 @@
 # javascript appendix 6
 
-Snapshot: `f5a994abd27f5d28531efa53a23d5b8661e41b61`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `19f2c1a4a89f0b0e8661c209e95ed66d51fc5374`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+
+## JavaScript — js/first-codebreak.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/first-codebreak.js`
+- Served SHA-256: `21f880e70e483a19aced53396b04699ac65b897b62992983ee58fb4eb0bd33d9`
+- Readable-source SHA-256: `21f880e70e483a19aced53396b04699ac65b897b62992983ee58fb4eb0bd33d9`
+
+
+```javascript
+/* Original classroom fixtures. Reuses DetectiveWorkspaces.Desk for partial keys.
+ * Vigenère: A=0, repeating key, ASCII letters only; spacing is not encrypted.
+ * Language panels describe the displayed samples, not population frequencies.
+ */
+'use strict';
+(function (global) {
+  const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const SUB_KEY = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+  const NOTICE = 'LOOK FOR THE BOOK OF MAPS IN THE SCHOOL ROOM. DO NOT GO TO THE OLD DOOR. BRING THE BOOK TO THE READING ROOM AT NOON.';
+  const VIG_KEY = 'LAMP';
+  const DISPATCH = 'THE READING ROOM WILL OPEN AT NINE. BRING THE MAP AND THE LETTER TO THE LIBRARY. THE READING ROOM WILL CLOSE AT FIVE. CHECK THE NAME ON THE LETTER BEFORE YOU GIVE IT TO THE READER. KEEP A COPY OF THE MESSAGE AND NOTE THE TIME IT ARRIVED. THE MAP SHOWS THE ROAD TO THE OLD SCHOOL AND THE BRIDGE OVER THE RIVER. THE READER WILL WAIT IN THE LIBRARY UNTIL THE OTHER COPY ARRIVES. COMPARE THE TWO COPIES AND RECORD EVERY CHANGE. A CLEAR MESSAGE IS ONLY PART OF THE EVIDENCE.';
+  const SAMPLES = [
+    {id:'en', name:'English', text:'THE LIBRARY KEEPS LETTERS AND MAPS. READ THE LETTER BEFORE YOU LEAVE. THERE IS A NAME ON THE PAGE AND A NOTE IN THE MARGIN.'},
+    {id:'fr', name:'French', text:'LA BIBLIOTHEQUE GARDE LES LETTRES ET LES CARTES. LISEZ LA LETTRE AVANT DE PARTIR. IL Y A UN NOM SUR LA PAGE ET UNE NOTE DANS LA MARGE.'},
+    {id:'de', name:'German', text:'DIE BIBLIOTHEK BEWAHRT BRIEFE UND KARTEN AUF. LESEN SIE DEN BRIEF VOR DER ABREISE. AUF DER SEITE STEHT EIN NAME UND AM RAND EINE NOTIZ.'},
+    {id:'it', name:'Italian', text:'LA BIBLIOTECA CONSERVA LETTERE E MAPPE. LEGGETE LA LETTERA PRIMA DI PARTIRE. SULLA PAGINA SI TROVA UN NOME E NEL MARGINE UNA NOTA.'},
+    {id:'es', name:'Spanish', text:'LA BIBLIOTECA GUARDA CARTAS Y MAPAS. LEAN LA CARTA ANTES DE SALIR. HAY UN NOMBRE EN LA PAGINA Y UNA NOTA EN EL MARGEN.'}
+  ];
+  const ENGLISH = [8.2,1.5,2.8,4.3,12.7,2.2,2,6.1,7,.15,.77,4,2.4,6.7,7.5,1.9,.095,6,6.3,9.1,2.8,.98,2.4,.15,2,.074];
+  const letters = text => text.toUpperCase().replace(/[^A-Z]/g, '');
+  function substitution(text) { return text.replace(/[A-Z]/g, c => SUB_KEY[ABC.indexOf(c)]); }
+  function counts(text) {
+    const out = {};
+    letters(text).split('').forEach(c => { out[c] = (out[c] || 0) + 1; });
+    return Object.entries(out).sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0]));
+  }
+  function vigenere(text, key, decrypt = false) {
+    if (!/^[A-Z]+$/.test(key)) throw new Error('Use one or more A–Z key letters.');
+    let pos = 0;
+    return text.replace(/[A-Z]/g, c => ABC[(ABC.indexOf(c) + (decrypt ? -1 : 1)*ABC.indexOf(key[pos++ % key.length]) + 26)%26]);
+  }
+  function repeats(text) {
+    const t = letters(text), seen = {}, found = [];
+    for (let i=0;i<t.length-2;i++) {
+      const s = t.slice(i,i+3);
+      if (seen[s] !== undefined) found.push({sequence:s, first:seen[s], second:i, distance:i-seen[s]});
+      else seen[s]=i;
+    }
+    return found;
+  }
+  function columns(text, period) {
+    if (!Number.isInteger(period) || period<1 || period>10) throw new Error('Choose a period from 1 to 10.');
+    const groups = Array.from({length:period},()=> '');
+    letters(text).split('').forEach((c,i)=>{ groups[i%period]+=c; }); return groups;
+  }
+  function rankShifts(text) {
+    const t = letters(text);
+    if (!t.length) return [];
+    return Array.from({length:26},(_,shift)=> {
+      const decoded = vigenere(t,ABC[shift],true), freq=Object.fromEntries(counts(decoded));
+      const score = ENGLISH.reduce((sum,f,i)=> { const expected=t.length*f/100; return sum+Math.pow((freq[ABC[i]]||0)-expected,2)/expected; },0);
+      return {shift, key:ABC[shift], text:decoded, score};
+    }).sort((a,b)=>a.score-b.score);
+  }
+  function bigrams(text) {
+    const out = {};
+    (text.match(/[A-Z]+/g)||[]).forEach(word=> {for(let i=0;i<word.length-1;i++) {const pair=word.slice(i,i+2); out[pair]=(out[pair]||0)+1;} });
+    return Object.entries(out).sort((a,b)=>b[1]-a[1] || a[0].localeCompare(b[0])).slice(0,6);
+  }
+  function homophones(text, alternatives, rng = Math.random) {
+    if (!Number.isInteger(alternatives) || alternatives<1 || alternatives>8) throw new Error('Choose 1–8 alternatives.');
+    const tokens=[], key={};
+    letters(text).split('').forEach(c=> {
+      const n = c==='O' ? alternatives : 1;
+      const token=String(ABC.indexOf(c)*8+Math.floor(rng()*n)).padStart(3,'0');
+      tokens.push(token);key[token]=c;
+    });
+    const freq={}; tokens.forEach(t=>{freq[t]=(freq[t]||0)+1;});
+    return {tokens,key,frequencies:Object.entries(freq).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))};
+  }
+  const api={ABC,SUB_KEY,NOTICE,VIG_KEY,DISPATCH,SAMPLES,letters,substitution,counts,vigenere,repeats,columns,rankShifts,bigrams,homophones};
+  if(typeof module!=='undefined' && module.exports) module.exports=api;
+  global.FirstCodebreak=api;
+  function boot() {
+    const d=global.document, $=id=>d.getElementById(id);
+    if (!$('first-desk')) return;
+    const W=global.DetectiveWorkspaces, cipher=substitution(NOTICE), desk=new W.Desk(cipher);
+    let hint=0;
+    const hints=[
+      'G occurs 24 times. A frequency guess of G → E is tempting. Try it, but treat it as a guess.',
+      'FGGF has the pattern 0.1.1.0. The meeting time is a four-letter word with this pattern: NOON. Test F → N and G → O. Undo a conflicting guess first.',
+      'The repeated word ZIT can be tested as THE: Z → T, I → H, T → E. Does that fit every occurrence?',
+      'This is a library notice. Try WGGA → BOOK and KGGD → ROOM. Each letter must keep the same meaning throughout.',
+      'QZ is AT; GY is OF; OF is IN. Use the surrounding words to finish. If stuck, reveal one missing letter at a time.'
+    ];
+    const say=text=>{$('desk-status').textContent=text;};
+    const grid=$('lesson-key');
+    counts(cipher).map(r=>r[0]).sort().forEach(c=>{
+      const cell=d.createElement('div');cell.className='det-key-cell';
+      const label=d.createElement('label');label.htmlFor='lesson-map-'+c;label.textContent=c+' →';
+      const input=d.createElement('input');input.id=label.htmlFor;input.maxLength=1;input.autocomplete='off';input.type='text';input.setAttribute('aria-label','Plaintext for cipher '+c);
+      const assign=()=>{try{const value=input.value.trim().toUpperCase();if(value!==(desk.state.map[c]||'')){desk.assign(c,value);say('Mapping updated. Check it against every word.');}}catch(e){say(e.message);}render();};
+      input.addEventListener('input',assign);input.addEventListener('change',assign);
+      const lock=d.createElement('label');lock.className='det-lock';const box=d.createElement('input');box.type='checkbox';box.id='lesson-lock-'+c;box.setAttribute('aria-label','Lock cipher '+c);
+      box.addEventListener('change',()=>{try{desk.lock(c,box.checked);say('Lock updated.');}catch(e){say(e.message);}render();});
+      lock.append(box,d.createTextNode('Lock'));cell.append(label,input,lock);grid.append(cell);
+    });
+    function render() {
+      $('lesson-cipher').textContent=cipher;
+      $('lesson-plain').textContent=W.decode(cipher,desk.state.map);
+      counts(cipher).forEach(([c])=> {const input=$('lesson-map-'+c);input.value=desk.state.map[c]||'';input.readOnly=!!desk.state.locks[c];$('lesson-lock-'+c).checked=!!desk.state.locks[c];});
+      $('lesson-undo').disabled=!desk.history.length;
+      const used=counts(cipher).length, correct=counts(cipher).filter(([c])=>desk.state.map[c]===ABC[SUB_KEY.indexOf(c)]).length;
+      $('lesson-progress').textContent=Object.keys(desk.state.map).length+' of '+used+' used symbols assigned. Check the message when you are ready.';
+      $('lesson-check').onclick=()=>say(correct===used?'The plaintext matches the supplied exercise. Now explain which clues supported it. This verifies an invented fixture; it does not authenticate a historical document.':'The supplied message does not match yet. Check repeated words and test your guesses across the whole notice.');
+    }
+    function highlight(kind) {
+      const words=cipher.match(/[A-Z]+/g)||[], frequencies={};words.forEach(w=>{frequencies[w]=(frequencies[w]||0)+1;});
+      const parts=cipher.split(/([A-Z]+)/);$('clue-output').textContent='';
+      parts.forEach(word=>{
+        const match=kind==='double'?/([A-Z])\1/.test(word):kind==='short'?/^[A-Z]{1,3}$/.test(word):frequencies[word]>1;
+        const node=d.createElement(match?'mark':'span');node.textContent=word;$('clue-output').append(node);
+      });
+      $('clue-caption').textContent={double:'Highlighted words contain doubled letters. A one-to-one substitution preserves this pattern.',short:'Highlighted words have one to three letters. These boundaries were intentionally retained in this exercise.',repeat:'Highlighted words recur. One shared mapping must explain all occurrences.'}[kind];
+    }
+    ['double','short','repeat'].forEach(kind=>$('clue-'+kind).addEventListener('click',()=>highlight(kind)));
+    $('lesson-frequencies').textContent=counts(cipher).map(([c,n])=>c+': '+n).join(' · ');
+    $('lesson-wrong').addEventListener('click',()=>{try{desk.assign('G','E');say('G → E is an unverified frequency guess. Compare FGGF with the NOON clue; Undo restores your previous key.');}catch(e){say(e.message);}render();});
+    $('lesson-undo').addEventListener('click',()=>{desk.undo();render();say('Restored the previous key and locks.');});
+    $('lesson-reset').addEventListener('click',()=>{desk.clear();render();say('Cleared unlocked guesses. Locked letters are retained.');});
+    $('lesson-hint').addEventListener('click',()=>{const p=d.createElement('p');p.textContent=(hint+1)+'. '+hints[hint++];$('lesson-hints').append(p);$('lesson-hint').disabled=hint===hints.length;});
+    $('lesson-reveal').addEventListener('click',()=>{
+      const next=counts(cipher).map(r=>r[0]).find(c=>desk.state.map[c]!==ABC[SUB_KEY.indexOf(c)]);
+      if(!next){say('All used letters match. Check the message, then record your reasoning.');return;}
+      try {desk.assign(next,ABC[SUB_KEY.indexOf(next)]);say('Answer help: revealed '+next+' → '+desk.state.map[next]+'.');}catch(e){say('Reveal stopped: '+e.message+' Undo or clear conflicting guesses before revealing.');}render();
+    });
+    render();highlight('double');
+
+    // A complete, inspectable repeating-key attack on one supplied fixture.
+    const vigCipher=vigenere(letters(DISPATCH),VIG_KEY);let selectedRepeat=null;
+    $('vig-cipher').textContent=vigCipher;
+    $('vig-find').addEventListener('click',()=>{
+      const rows=repeats(vigCipher);$('vig-repeats').textContent='';
+      rows.slice(0,20).forEach(row=>{
+        const button=d.createElement('button');button.type='button';button.textContent=row.sequence+': positions '+(row.first+1)+' and '+(row.second+1)+'; distance '+row.distance;
+        button.addEventListener('click',()=>{selectedRepeat=row;drawVig();});$('vig-repeats').append(button);
+      });
+      $('vig-repeat-note').textContent='Showing the first '+Math.min(20,rows.length)+' of '+rows.length+' repeated-trigram pairs (each later occurrence compared with its first). Positions count A–Z letters from 1. Select a pair to highlight it; repeats can be accidental.';
+    });
+    function drawVig() {
+      const period=Number($('vig-period').value), groups=columns(vigCipher,period);
+      $('vig-cipher').textContent='';
+      vigCipher.split('').forEach((c,i)=> {const node=d.createElement(selectedRepeat && ((i>=selectedRepeat.first&&i<selectedRepeat.first+3)||(i>=selectedRepeat.second&&i<selectedRepeat.second+3))?'mark':'span');node.textContent=c;$('vig-cipher').append(node);});
+      $('vig-distance-note').textContent=selectedRepeat?'Distance '+selectedRepeat.distance+(selectedRepeat.distance%period===0?' is divisible by ':' is not divisible by ')+period+'. A compatible spacing suggests a period; it does not prove one.':'Choose a repeated fragment, then compare candidate periods.';
+      $('vig-columns').textContent='';
+      groups.forEach((group,i)=>{
+        const card=d.createElement('div');card.className='column-card';const label=d.createElement('label');label.htmlFor='vig-key-'+i;label.textContent='Column '+(i+1)+' key letter';
+        const select=d.createElement('select');select.id=label.htmlFor;
+        ABC.split('').forEach(c=>{const o=d.createElement('option');o.value=c;o.textContent=c;select.append(o);});
+        const preview=d.createElement('output');preview.className='cipher-strip';preview.id='vig-preview-'+i;
+        const rank=rankShifts(group);const suggest=d.createElement('button');suggest.type='button';suggest.textContent='Try best English fit ('+rank[0].key+')';
+        const evidence=d.createElement('details');const summary=d.createElement('summary');summary.textContent='Inspect all 26 shifts';const list=d.createElement('ol');
+        rank.forEach(r=>{const li=d.createElement('li');li.textContent=r.key+' — χ² '+r.score.toFixed(1)+' — '+r.text.slice(0,24);list.append(li);});evidence.append(summary,list);
+        select.addEventListener('change',updateKey);suggest.addEventListener('click',()=>{select.value=rank[0].key;updateKey();});
+        card.append(label,select,preview,suggest,evidence);$('vig-columns').append(card);
+      });updateKey();
+    }
+    function updateKey() {
+      const period=Number($('vig-period').value), groups=columns(vigCipher,period);let key='';
+      groups.forEach((group,i)=>{const c=$('vig-key-'+i).value;key+=c;$('vig-preview-'+i).textContent=vigenere(group,c,true);});
+      $('vig-key-display').textContent=key;$('vig-result').textContent=vigenere(vigCipher,key,true);$('vig-status').textContent='Candidate key only. Read the full result and check it against the supplied exercise.';
+    }
+    $('vig-period').addEventListener('change',drawVig);
+    $('vig-check').addEventListener('click',()=>{$('vig-status').textContent=$('vig-result').textContent===letters(DISPATCH)?'Matches the supplied plaintext. LAMP is the generating key; repeating it (for example LAMPLAMP) describes the same stream. A matching toy answer is not evidence of a historical message.':'This candidate does not recover the supplied message. Try another period and inspect the column shifts.';});
+    $('vig-reveal').addEventListener('click',()=>{$('vig-period').value='4';drawVig();VIG_KEY.split('').forEach((c,i)=>{$('vig-key-'+i).value=c;});updateKey();$('vig-status').textContent='Answer revealed: LAMP. Revisit the highlighted repeats and four column distributions to explain why it works.';});
+    drawVig();
+
+    // Explicitly small, original modern-language samples with disclosed normalization.
+    SAMPLES.forEach(sample=>{const option=d.createElement('option');option.value=sample.id;option.textContent=sample.name;$('language-sample').append(option);});
+    function drawLanguage() {
+      const sample=SAMPLES.find(s=>s.id===$('language-sample').value), freq=counts(sample.text), n=letters(sample.text).length;
+      $('language-text').textContent=sample.text;
+      $('language-counts').textContent=freq.map(([c,count])=>c+': '+count+' ('+(100*count/n).toFixed(1)+'%)').join(' · ');
+      $('language-pairs').textContent=bigrams(sample.text).map(([pair,count])=>pair+': '+count).join(' · ');
+      $('language-words').textContent=Array.from(new Set(sample.text.match(/\b[A-Z]{1,3}\b/g)||[])).join(', ');
+      $('language-comparison').textContent='This '+n+'-letter '+sample.name+' sample peaks at '+freq.filter(row=>row[1]===freq[0][1]).map(row=>row[0]).join('/')+'. The notice in lesson 1 peaks at O (24 occurrences). Even two texts in the same language can have different distributions. These samples cannot identify a language or supply a historical frequency model.';
+    }
+    $('language-sample').addEventListener('change',drawLanguage);drawLanguage();
+    function bars(id,rows,total) {
+      $(id).textContent='';rows.forEach(([symbol,n])=>{const row=d.createElement('div');row.className='frequency-row';const label=d.createElement('span');label.textContent=symbol;const meter=d.createElement('meter');meter.min=0;meter.max=total;meter.value=n;meter.setAttribute('aria-label',symbol+': '+n+' of '+total);const count=d.createElement('span');count.textContent=n;row.append(label,meter,count);$(id).append(row);});
+    }
+    function drawHomophones() {
+      const n=Number($('homophone-count').value), original=homophones(NOTICE,1), changed=homophones(NOTICE,n);
+      bars('homophone-before',original.frequencies,original.tokens.length);bars('homophone-after',changed.frequencies,changed.tokens.length);
+      $('homophone-output').textContent=changed.tokens.join(' ');
+      $('homophone-status').textContent='O has '+n+' possible token(s), selected independently with equal probability in this toy. Its 24 occurrences are distributed among '+new Set(changed.tokens.filter(t=>changed.key[t]==='O')).size+' observed token(s). The expected count per O-token is '+(24/n).toFixed(1)+', but a sample can vary. The other letters still have one token each.';
+    }
+    $('homophone-count').addEventListener('change',drawHomophones);$('homophone-rerun').addEventListener('click',drawHomophones);drawHomophones();
+  }
+  if(typeof document!=='undefined') {if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);else boot();}
+})(typeof window!=='undefined'?window:globalThis);
+```
+
+
+## JavaScript — js/footer.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/footer.js`
+- Served SHA-256: `b95db3598478b7d8c8c1a11e164ca00e638f122358e31b862a97d50033be90ad`
+- Readable-source SHA-256: `b95db3598478b7d8c8c1a11e164ca00e638f122358e31b862a97d50033be90ad`
+
+
+```javascript
+/**
+ * THE CIPHER MUSEUM — Footer System
+ * Renders the canonical site footer into any <footer> element on the page.
+ * Auto-loaded by js/nav.js. Handles subdirectory path prefixing.
+ *
+ * Detection (in order):
+ *   1. <footer class="museum-footer">
+ *   2. <footer data-footer>
+ *   3. The first bare <footer> element
+ */
+'use strict';
+(function () {
+  var foot = document.querySelector('footer.museum-footer')
+          || document.querySelector('footer[data-footer]')
+          || document.querySelector('footer');
+  if (!foot) return;
+
+  var path = location.pathname;
+  var inSub = /\/(ciphers|halls|tours|lab|community|hall-of-foundations)\//.test(path);
+  var pre = inSub ? '../' : '';
+
+  var EXPLORE = [
+    ['museum-map.html',          'Museum Map'],
+    ['timeline.html',            'Timeline'],
+    ['halls/ancient.html',       'Hall I · Ancient'],
+    ['halls/machines.html',      'Hall VII · Machines'],
+    ['halls/unbreakable.html',   'Hall IX · Unbreakable'],
+    ['halls/codebreakers.html',  'Hall X · Codebreakers']
+  ];
+  var LEARN = [
+    ['learn.html',               'How Ciphers Work'],
+    ['modern.html',              'Modern Cryptography'],
+    ['cipher-corpus.html',       'Cipher Corpus'],
+    ['challenges.html',          'Challenges'],
+    ['lab/workbench.html',       "Codebreaker's Workbench"],
+    ['cryptanalysis.html',       'Cryptanalysis Techniques'],
+    ['glossary.html',            'Glossary'],
+    ['teaching.html#accuracy',   'Engine Accuracy']
+  ];
+
+  function listHtml(items) {
+    return items.map(function (n) {
+      return '<li><a href="' + pre + n[0] + '">' + n[1] + '</a></li>';
+    }).join('');
+  }
+
+  foot.className = 'museum-footer';
+  foot.innerHTML =
+    '<div class="footer-grid">' +
+      '<div class="footer-brand">' +
+        '<span class="footer-logo-text">The Cipher Museum</span>' +
+        '<p class="footer-brand-desc">Built for GitHub Pages. MIT License. Open source.</p>' +
+      '</div>' +
+      '<div>' +
+        '<div class="footer-col-title">Explore</div>' +
+        '<ul class="footer-links">' + listHtml(EXPLORE) + '</ul>' +
+      '</div>' +
+      '<div>' +
+        '<div class="footer-col-title">Learn &amp; Build</div>' +
+        '<ul class="footer-links">' + listHtml(LEARN) +
+          '<li><a href="https://github.com/systemslibrarian/cipher-museum" rel="noopener">GitHub Repository</a></li>' +
+        '</ul>' +
+      '</div>' +
+    '</div>' +
+    '<div class="footer-bottom">' +
+      '<span class="footer-copy">© The Cipher Museum · MIT License · Open Source</span>' +
+      '<span class="footer-copy">173 exhibits · 13 halls · 3,900+ years</span>' +
+    '</div>';
+})();
+```
+
 
 ## JavaScript — js/historical-ciphers.js
 
@@ -301,6 +591,66 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   }
   run();
 })();
+```
+
+
+## JavaScript — js/intercept-exercise.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/intercept-exercise.js`
+- Served SHA-256: `f5acea33c67c59a59a0063b591159fa0c456da3f1d054131667f887029024285`
+- Readable-source SHA-256: `f5acea33c67c59a59a0063b591159fa0c456da3f1d054131667f887029024285`
+
+
+```javascript
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else { root.InterceptExercise = api; api.mount(document); }
+})(typeof window === 'object' ? window : globalThis, function () {
+  'use strict';
+  const raw = 'PHHW DW ??VW JDWH';
+  const secondCopy = 'PHHW DW HDVW JDWH';
+  function decode(text) { return text.replace(/[A-Z]/g, c => String.fromCharCode(65 + (c.charCodeAt(0) - 65 + 23) % 26)); }
+  function compare(candidate, revealed) {
+    if (!['EAST', 'WEST'].includes(candidate)) throw new Error('Choose EAST or WEST.');
+    const proposed = 'MEET AT ' + candidate + ' GATE';
+    const literal = decode(raw);
+    const fits = [...literal].every((c, i) => c === '?' || c === proposed[i]);
+    return { literal, proposed, fits, checked: revealed ? proposed === decode(secondCopy) : null };
+  }
+  function mount(doc) {
+    const $ = id => doc.getElementById(id);
+    if (!$('intercept-choice')) return;
+    let revealed = false;
+    function render() {
+      $('intercept-assessment').textContent = '';
+      const r = compare($('intercept-choice').value, revealed);
+      $('intercept-literal').textContent = r.literal;
+      $('intercept-proposed').textContent = r.proposed;
+      $('intercept-copy').hidden = !revealed;
+      $('intercept-result').textContent = r.checked === null
+        ? 'Both candidates fit the readable symbols. The index card supplies context, not missing characters. Candidate only: keep both alternatives.'
+        : r.checked ? 'EAST agrees with the separately logged complete copy. Reading checked against I2; the original I1 gaps remain. This does not prove the meeting took place.'
+        : 'WEST conflicts with I2. Reject this candidate while retaining the original I1 transcription and the reason for revision.';
+    }
+    $('intercept-choice').addEventListener('change', render);
+    $('intercept-reveal').addEventListener('click', () => { revealed = true; render(); });
+    $('intercept-reset').addEventListener('click', () => { revealed = false; $('intercept-choice').value = 'WEST'; render(); });
+    $('intercept-assess').addEventListener('click', () => {
+      const choice = $('intercept-claim').value;
+      $('intercept-assessment').textContent = choice === 'exchange'
+        ? 'Supported by log L1: traffic was recorded between callsigns R4 and Q2 at the stated times. Callsigns alone do not establish the people or their intention.'
+        : choice === 'reading' ? (revealed ? 'Supported by I2 plus the declared shift key: the complete copy reads MEET AT EAST GATE. Preserve its source ID; it establishes a recorded instruction, not compliance.' : 'Not checked yet: I1 has two unreadable symbols. Inspect I2 before reporting a complete reading.')
+        : 'Not established: neither the traffic log nor a readable instruction proves that a meeting happened or identifies the participants.';
+    });
+    render();
+  }
+  return { raw, secondCopy, decode, compare, mount };
+});
 ```
 
 
@@ -1012,6 +1362,144 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   window.addEventListener('pagehide', stop);
   run();
 }());
+```
+
+
+## JavaScript — js/maya-case.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/maya-case.js`
+- Served SHA-256: `6b9ca2a8fa58c52fff4a78b3c3d07d486a0eb93ccfd1e2f900df001ed2509068`
+- Readable-source SHA-256: `6b9ca2a8fa58c52fff4a78b3c3d07d486a0eb93ccfd1e2f900df001ed2509068`
+
+
+```javascript
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else { root.MayaCase = api; api.mount(document); }
+})(typeof window === 'object' ? window : globalThis, function () {
+  'use strict';
+  // Evidence as Coe reports it (Breaking the Maya Code, 3rd edition): Landa said b
+  // aloud as "be"; over a turkey picture two signs spell k'utz, a word of three sounds.
+  const EVIDENCE = {
+    letterNames: { heard: ['b', 'e'] },
+    turkey: { signs: ['k’u', 'tzu'], word: ['k’', 'u', 'tz'] }
+  };
+  const HYPOTHESES = {
+    alphabet: { label: 'Landa’s list is an alphabet: one sign for one letter', soundsPerSign: 1, finalVowelSilent: false },
+    syllabic: { label: 'Most signs are syllables, a consonant plus a vowel, used alongside word signs', soundsPerSign: 2, finalVowelSilent: true }
+  };
+  function check(hypothesis, evidenceId, data) {
+    const h = HYPOTHESES[hypothesis];
+    if (!h) throw new Error('Unknown hypothesis: ' + hypothesis);
+    if (evidenceId === 'letterNames') {
+      // A sign written in answer to a spoken letter name records what was heard.
+      const e = data || EVIDENCE.letterNames;
+      return { verdict: e.heard.length === h.soundsPerSign ? 'consistent' : 'contradicted' };
+    }
+    if (evidenceId === 'turkey') {
+      const e = data || EVIDENCE.turkey;
+      const spelledSounds = e.signs.length * h.soundsPerSign - (h.finalVowelSilent ? 1 : 0);
+      return { verdict: spelledSounds === e.word.length ? 'consistent' : 'contradicted', spelledSounds, wordSounds: e.word.length };
+    }
+    throw new Error('Unknown evidence: ' + evidenceId);
+  }
+  // A hypothesis survives only if it is consistent with every check.
+  function assess(hypothesis, data) {
+    const d = data || {};
+    const letterNames = check(hypothesis, 'letterNames', d.letterNames), turkey = check(hypothesis, 'turkey', d.turkey);
+    return { letterNames, turkey, consistent: letterNames.verdict === 'consistent' && turkey.verdict === 'consistent' };
+  }
+
+  // Two CV signs spelling a CVC word. Knorozov (1952): the silent vowel echoes the first
+  // (synharmony). Later epigraphers, as Coe reports: an echo marks a short vowel,
+  // a different vowel (disharmony) marks a long one, as in ba-k(i) for baak.
+  function splitSyllable(sign) {
+    const m = /^(.*?)([aeiou])$/.exec(sign);
+    if (!m || !m[1]) throw new Error('Not a consonant-vowel sign: ' + sign);
+    return { consonant: m[1], vowel: m[2] };
+  }
+  function readSpelling(signs) {
+    if (!Array.isArray(signs) || signs.length !== 2) throw new Error('Give two consonant-vowel signs.');
+    const a = splitSyllable(signs[0]), b = splitSyllable(signs[1]);
+    const harmonic = a.vowel === b.vowel;
+    return {
+      knorozov1952: harmonic ? 'synharmonic' : 'not covered',
+      laterRule: harmonic ? 'short vowel' : 'long vowel',
+      word: a.consonant + a.vowel + (harmonic ? '' : a.vowel) + b.consonant
+    };
+  }
+
+  // Invented figures, modelled on the pattern Coe describes: in each set the
+  // earliest date falls 12 to 31 years before an accession date. Not Piedras Negras data.
+  const LIFETIME = 80;
+  const DATE_SETS = {
+    invented: true,
+    sets: [
+      { name: 'Set A', initial: 0, accession: 12, last: 47 },
+      { name: 'Set B', initial: 60, accession: 91, last: 115 },
+      { name: 'Set C', initial: 130, accession: 152, last: 183 }
+    ]
+  };
+  function checkDates(hypothesis, sets) {
+    const s = sets || DATE_SETS.sets, gaps = s.map(x => x.accession - x.initial);
+    if (hypothesis === 'cycle') {
+      const fixed = gaps.every(g => g === gaps[0]);
+      return { verdict: fixed ? 'consistent' : 'contradicted', gaps };
+    }
+    if (hypothesis === 'lives') {
+      const fits = s.every(x => x.initial < x.accession && x.last - x.initial <= LIFETIME);
+      return { verdict: fits ? 'consistent' : 'contradicted', gaps };
+    }
+    throw new Error('Unknown date hypothesis: ' + hypothesis);
+  }
+
+  function mount(doc) {
+    const $ = id => doc.getElementById(id);
+    if (!$('maya-hypothesis')) return;
+    const checked = [];
+    const renderRecord = () => {
+      $('maya-record').replaceChildren(...checked.map(entry => { const li = doc.createElement('li'); li.textContent = entry; return li; }));
+      $('maya-record-empty').hidden = checked.length > 0;
+    };
+    $('maya-check').addEventListener('click', () => {
+      const value = $('maya-hypothesis').value, a = assess(value);
+      $('maya-evidence').hidden = false;
+      $('maya-result').textContent = a.consistent
+        ? 'This hypothesis is consistent with both checks: the letter names and the turkey spelling.'
+        : 'This hypothesis is contradicted: ' + [a.letterNames.verdict === 'contradicted' ? 'a sign written for the spoken name “be” records two sounds, not one letter' : '', a.turkey.verdict === 'contradicted' ? 'two signs read this way spell ' + a.turkey.spelledSounds + ' sounds, but k’utz has ' + a.turkey.wordSounds : ''].filter(Boolean).join(', and ') + '. Revise it; the failed check stays in your record.';
+      const entry = HYPOTHESES[value].label + ': letter names ' + a.letterNames.verdict + '; turkey spelling ' + a.turkey.verdict + '.';
+      if (checked[checked.length - 1] !== entry) checked.push(entry);
+      renderRecord();
+    });
+    $('maya-reset').addEventListener('click', () => {
+      $('maya-hypothesis').selectedIndex = 0; $('maya-evidence').hidden = true;
+      $('maya-result').textContent = 'Choose a hypothesis about the signs, then check it.';
+    });
+    $('maya-spelling-check').addEventListener('click', () => {
+      const r = readSpelling($('maya-spelling').value.split(' '));
+      $('maya-spelling-result').textContent = 'Knorozov’s 1952 rule: ' + r.knorozov1952 + '. Later rule: ' + r.laterRule + '. Reading: ' + r.word + '.';
+    });
+    const tbody = $('maya-date-table').querySelector('tbody');
+    tbody.replaceChildren(...DATE_SETS.sets.map(s => {
+      const tr = doc.createElement('tr');
+      for (const v of [s.name, s.initial, s.accession, s.accession - s.initial, s.last, s.last - s.initial]) { const td = doc.createElement('td'); td.textContent = String(v); tr.appendChild(td); }
+      return tr;
+    }));
+    $('maya-dates-check').addEventListener('click', () => {
+      const h = $('maya-dates-hypothesis').value, r = checkDates(h);
+      $('maya-dates-result').textContent = h === 'cycle'
+        ? (r.verdict === 'consistent' ? 'This hypothesis is consistent: every gap is the same.' : 'This hypothesis is contradicted: the gaps are ' + r.gaps.join(', ') + ' years. A fixed cycle would repeat one interval.')
+        : (r.verdict === 'consistent' ? 'This hypothesis is consistent: each set starts before its accession and fits within one lifetime, taken here as ' + LIFETIME + ' years.' : 'This hypothesis is contradicted: a set runs longer than one lifetime.');
+    });
+    renderRecord();
+  }
+  return { EVIDENCE, HYPOTHESES, DATE_SETS, LIFETIME, check, assess, readSpelling, checkDates, mount };
+});
 ```
 
 
@@ -1751,6 +2239,138 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   else root.ProtocolMath = api;
 
 })(typeof self !== "undefined" ? self : this);
+```
+
+
+## JavaScript — js/purple-diagnosis.js
+
+Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `js/purple-diagnosis.js`
+- Served SHA-256: `334b48e357c5146f07e8d61e95e84f8b823a74a840bc086fdf163f71996dbeff`
+- Readable-source SHA-256: `334b48e357c5146f07e8d61e95e84f8b823a74a840bc086fdf163f71996dbeff`
+
+
+```javascript
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else { root.PurpleDiagnosis = api; api.mount(document); }
+})(typeof window === 'object' ? window : globalThis, function () {
+  'use strict';
+  // Synthetic worksheet data: one 26-letter alphabet and a fixed sequence of random
+  // permutations, one per key position. Not Purple's 6-20 split or its stepping switches.
+  // A starts at key position 0 and is a supplied crib. B's plaintext is an assumed crib whose
+  // starting key position is unknown. C is enciphered from key position 2; its plaintext is
+  // held out to test an alignment.
+  const FIXTURE = {
+    synthetic: true,
+    A: { plain: 'CONVOYLEAVESATDUSK', cipher: 'LXPZGNELRSWRPCLPWB', start: 0 },
+    B: { plain: 'WEATHERCLEARINNORTH', cipher: 'JKBAKLKZPDPDHOATCLA' },
+    C: { cipher: 'IKBYPDRVDJJM', heldOutPlain: 'LEAVESATNOON', start: 2 }
+  };
+  const OFFSETS = Array.from({ length: 11 }, (_, i) => i);
+  const MIN_ALIGNMENT_LETTERS = 2;
+
+  // Pairs at each key position: A where it was supplied, B where the chosen offset puts it.
+  function assemble(k, fx) {
+    const f = fx || FIXTURE, positions = {};
+    const add = (p, plain, cipher, source) => (positions[p] = positions[p] || []).push({ plain, cipher, source });
+    [...f.A.plain].forEach((x, i) => add(f.A.start + i, x, f.A.cipher[i], 'A'));
+    [...f.B.plain].forEach((x, j) => add(k + j, x, f.B.cipher[j], 'B'));
+    const contradictions = [], agreements = [];
+    for (const [p, list] of Object.entries(positions)) {
+      const fwd = {}, back = {};
+      for (const e of list) {
+        if (fwd[e.plain] && fwd[e.plain] !== e.cipher) contradictions.push({ position: Number(p), plain: e.plain, ciphers: [fwd[e.plain], e.cipher] });
+        if (back[e.cipher] && back[e.cipher] !== e.plain) contradictions.push({ position: Number(p), cipher: e.cipher, plains: [back[e.cipher], e.plain] });
+        fwd[e.plain] = e.cipher; back[e.cipher] = e.plain;
+      }
+      const a = list.filter(e => e.source === 'A'), b = list.filter(e => e.source === 'B');
+      for (const e of b) if (a.some(x => x.plain === e.plain && x.cipher === e.cipher)) agreements.push({ position: Number(p), plain: e.plain, cipher: e.cipher });
+    }
+    return { positions, contradictions, agreements };
+  }
+
+  // Read C through the inverse of each partial permutation. A letter read from a pair that A
+  // supplied does not test the alignment; only pairs placed by the alignment do.
+  function testC(k, fx) {
+    const f = fx || FIXTURE, { positions } = assemble(k, f);
+    const confirmed = [], mismatches = [];
+    let reading = '';
+    [...f.C.cipher].forEach((c, i) => {
+      const list = positions[f.C.start + i] || [];
+      const hit = list.find(e => e.cipher === c && e.source === 'A') || list.find(e => e.cipher === c);
+      if (!hit) { reading += '?'; return; }
+      reading += hit.plain;
+      if (hit.plain === f.C.heldOutPlain[i]) confirmed.push({ index: i, letter: hit.plain, source: hit.source });
+      else mismatches.push({ index: i, read: hit.plain, actual: f.C.heldOutPlain[i] });
+    });
+    return { reading, confirmed, mismatches };
+  }
+
+  function verdict(k, fx) {
+    if (!fx && !OFFSETS.includes(k)) throw new Error('Offset must be between 0 and ' + OFFSETS[OFFSETS.length - 1] + '.');
+    const a = assemble(k, fx), t = testC(k, fx);
+    const fromAlignment = t.confirmed.filter(c => c.source === 'B').length;
+    let status;
+    if (a.contradictions.length) status = 'contradiction';
+    else if (t.mismatches.length) status = 'wrong reading';
+    else if (fromAlignment < MIN_ALIGNMENT_LETTERS) status = 'not confirmed';
+    else status = 'supported';
+    return { status, fromAlignment, unknown: (t.reading.match(/\?/g) || []).length, assembly: a, test: t };
+  }
+
+  function mount(doc) {
+    const $ = id => doc.getElementById(id);
+    if (!$('pd-offset')) return;
+    const record = [];
+    const renderRecord = () => {
+      $('pd-record').replaceChildren(...record.map(r => { const li = doc.createElement('li'); li.textContent = r; return li; }));
+      $('pd-record-empty').hidden = record.length > 0;
+    };
+    const renderTable = k => {
+      const a = assemble(k), rows = Object.keys(a.positions).map(Number).sort((x, y) => x - y);
+      $('pd-table').querySelector('tbody').replaceChildren(...rows.map(p => {
+        const tr = doc.createElement('tr');
+        const pairs = a.positions[p].map(e => e.plain + '→' + e.cipher + (e.source === 'A' ? ' (A, supplied)' : ' (B, your alignment)')).join('; ');
+        const bad = a.contradictions.some(c => c.position === p), agree = a.agreements.some(g => g.position === p);
+        for (const v of [String(p), pairs, bad ? 'contradiction' : agree ? 'A and B agree' : '']) { const td = doc.createElement('td'); td.textContent = v; tr.appendChild(td); }
+        return tr;
+      }));
+      $('pd-align-result').textContent = a.contradictions.length
+        ? 'This alignment contradicts the supplied pairs at key position ' + a.contradictions[0].position + '.'
+        : 'No contradiction. A and B share ' + a.agreements.length + ' identical pair' + (a.agreements.length === 1 ? '' : 's') + ' at the same key positions.';
+    };
+    $('pd-align').addEventListener('click', () => renderTable(Number($('pd-offset').value)));
+    $('pd-test').addEventListener('click', () => {
+      const k = Number($('pd-offset').value), v = verdict(k), t = v.test;
+      renderTable(k);
+      $('pd-reading').textContent = 'Message C read with your partial permutations: ' + t.reading;
+      $('pd-heldout-text').textContent = FIXTURE.C.heldOutPlain + '.';
+      $('pd-heldout').hidden = false;
+      const messages = {
+        supported: 'Supported: no contradiction, and message C confirms ' + v.fromAlignment + ' letters that depend on your alignment. ' + v.unknown + ' letters stay unknown.',
+        'not confirmed': 'Not confirmed: this alignment contradicts nothing, but message C confirms fewer than ' + MIN_ALIGNMENT_LETTERS + ' letters that depend on it.',
+        contradiction: 'Contradiction: at key position ' + v.assembly.contradictions[0]?.position + ' this alignment would give one permutation two different values for the same letter.',
+        'wrong reading': 'Wrong reading: message C reads ' + (t.mismatches[0] ? t.mismatches[0].read + ' where its held-out plaintext has ' + t.mismatches[0].actual : '') + '.'
+      };
+      $('pd-result').textContent = messages[v.status];
+      const entry = 'Offset ' + k + ': ' + v.status + (v.status === 'supported' ? ' (' + v.fromAlignment + ' letters confirmed by C, ' + v.unknown + ' unknown)' : '') + '.';
+      if (record[record.length - 1] !== entry) record.push(entry);
+      renderRecord();
+    });
+    $('pd-reset').addEventListener('click', () => {
+      $('pd-offset').value = '0'; $('pd-table').querySelector('tbody').replaceChildren();
+      $('pd-align-result').textContent = ''; $('pd-reading').textContent = ''; $('pd-heldout').hidden = true;
+      $('pd-result').textContent = 'Choose an offset for message B, align it, then test it on message C.';
+    });
+    renderRecord();
+  }
+  return { FIXTURE, OFFSETS, assemble, testC, verdict, mount };
+});
 ```
 
 

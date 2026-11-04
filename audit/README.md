@@ -2,7 +2,7 @@
 
 A self-contained reading pack for an AI or human reviewer without repository access.
 
-- **Start with [CIPHER_MUSEUM_AUDIT.md](CIPHER_MUSEUM_AUDIT.md)**: all 221 pages, inline scripts, source register and supporting JavaScript/data in one file.
+- **Start with [CIPHER_MUSEUM_AUDIT.md](CIPHER_MUSEUM_AUDIT.md)**: all 227 pages, inline scripts, source register and supporting JavaScript/data in one file.
 - [CIPHER_MUSEUM_AUDIT_PACK.zip](CIPHER_MUSEUM_AUDIT_PACK.zip): download the master document, all smaller parts, prompt and manifest together.
 - [REVIEW_PROMPT.md](REVIEW_PROMPT.md): ready-to-use independent review instructions.
 - [parts/](parts/): the same page and appendix content in smaller files for context/upload limits. Upload the prompt and README first, then page parts in order; supply the source register and relevant code/data parts with each batch.
@@ -22,7 +22,7 @@ The earlier 214-page review was a complete reading/consistency pass with targete
 
 ## Snapshot and regeneration
 
-Source commit: `f5a994abd27f5d28531efa53a23d5b8661e41b61` (2026-11-02T14:44:31-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
+Source commit: `19f2c1a4a89f0b0e8661c209e95ed66d51fc5374` (2026-11-03T22:40:12-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
 
 With repository access and dependencies installed:
 
@@ -48,7 +48,7 @@ The exporter reads committed files, checks every public HTML page against the co
 - [09-pages-P161-P180.md](parts/09-pages-P161-P180.md): Pages P161–P180
 - [10-pages-P181-P200.md](parts/10-pages-P181-P200.md): Pages P181–P200
 - [11-pages-P201-P220.md](parts/11-pages-P201-P220.md): Pages P201–P220
-- [12-pages-P221-P221.md](parts/12-pages-P221-P221.md): Pages P221–P221
+- [12-pages-P221-P227.md](parts/12-pages-P221-P227.md): Pages P221–P227
 - [12-source-register.md](parts/12-source-register.md): Source register and recorded access limits
 - [13-01-javascript.md](parts/13-01-javascript.md): javascript appendix 1
 - [13-02-javascript.md](parts/13-02-javascript.md): javascript appendix 2
@@ -57,6 +57,7 @@ The exporter reads committed files, checks every public HTML page against the co
 - [13-05-javascript.md](parts/13-05-javascript.md): javascript appendix 5
 - [13-06-javascript.md](parts/13-06-javascript.md): javascript appendix 6
 - [13-07-javascript.md](parts/13-07-javascript.md): javascript appendix 7
+- [13-08-javascript.md](parts/13-08-javascript.md): javascript appendix 8
 - [14-01-data.md](parts/14-01-data.md): data appendix 1
 - [14-02-data.md](parts/14-02-data.md): data appendix 2
 - [14-03-data.md](parts/14-03-data.md): data appendix 3
