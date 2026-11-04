@@ -10,11 +10,11 @@ A self-contained reading pack for an AI or human reviewer without repository acc
 
 ## What is included
 
-Complete static body text, including hidden panels, captions, tables, examples, controls and inline SVG geometry; descriptive metadata; image/tooltip/accessibility text; each page's inline scripts; readable shared JavaScript (with hashes of served minified versions); tour and challenge data; all 104 corpus-browser sample records; search/artifact-card text; research scoring model; benchmark/count/schema evidence; page review notes and the complete prior source register; the columnar classroom worksheet, its fixed fixtures and its Node.js runner. This includes duplicates deliberately: the same claim may differ between a page, a card and a search description.
+Complete static body text, including hidden panels, captions, tables, examples, controls and inline SVG geometry; descriptive metadata; image/tooltip/accessibility text; each page's inline scripts; readable shared JavaScript (with hashes of served minified versions); tour and challenge data; all 104 corpus-browser sample records; search/artifact-card text; research scoring models; benchmark/count/schema evidence; page review notes and the complete prior source register; the columnar classroom worksheet, its fixed fixtures and its Node.js runner; the historical-profile recovery protocol, every recorded condition, source excerpts, scoring tables, runner and interpretation. This includes duplicates deliberately: the same claim may differ between a page, a card and a search description.
 
 ## Limits the reviewer must preserve
 
-No external ebook/paper text, binary images, audio, videos, fonts, standalone CSS, installed dependencies, test execution environment, or complete 100,000-plus-record downloadable corpus is embedded. Image descriptions and inline SVG are available; independently checking other visual details requires the original image. Links identify sources but do not prove they were consulted. Program source allows reasoning about dynamic text; this export does not execute every interaction, random state, worker, browser crypto operation or user-supplied input. Shared scripts are included once; the learning-path script is explicitly labelled dormant. Corpus statistics and prior test results cannot substitute for independently checking omitted records. Readable-source versions of minified scripts are accompanied by their separate hashes, not a claim of byte identity. The historical-language profile tables in `data/research/v2/language-profiles.json` are excluded by size: roughly 0.74 MB of n-gram counts, not reviewable prose. Their provenance, rights, normalization, pruning and coverage are published inside that file and summarized in `data/research/v2/README.md`, and the research-evaluation v2 export records the file's SHA-256 so a reviewer can identify the exact build without the bulk.
+No complete external ebooks or papers, binary images, audio, videos, fonts, standalone CSS, installed dependencies, test execution environment, or complete 100,000-plus-record downloadable corpus is embedded. The small public-domain excerpts stored as evaluation fixtures are included with their provenance and editorial limits. Image descriptions and inline SVG are available; independently checking other visual details requires the original image. Links identify sources but do not prove they were consulted. Program source allows reasoning about dynamic text; this export does not execute every interaction, random state, worker, browser crypto operation or user-supplied input. Shared scripts are included once; the learning-path script is explicitly labelled dormant. Corpus statistics and prior test results cannot substitute for independently checking omitted records. Readable-source versions of minified scripts are accompanied by their separate hashes, not a claim of byte identity. The historical-language profile tables in `data/research/v2/language-profiles.json` are included so the recovery comparison's scoring inputs can be inspected. They contain roughly 0.74 MB of n-gram counts, plus provenance, rights, normalization, pruning and coverage; their presence does not independently verify the historical sources or establish decipherment accuracy. The new recovery report preserves all 240 conditions and the distinction between checking saved-result arithmetic and rerunning the searches.
 
 The earlier 214-page review was a complete reading/consistency pass with targeted source checks. It was **not independent source verification of every factual claim**. The 67-item tracker records completed bounded work packages, not proof that every statement is correct. Preserve all recorded evidence limits when deciding what to verify next.
 
@@ -22,7 +22,7 @@ The earlier 214-page review was a complete reading/consistency pass with targete
 
 ## Snapshot and regeneration
 
-Source commit: `3e47b5e05bd350c91f0e50501ad1f8ffc6b33e20` (2026-11-04T11:01:10-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
+Source commit: `3720ede99d7ab0feedc8f7dd259d4bce5fea50c6` (2026-11-04T13:24:05-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
 
 With repository access and dependencies installed:
 
@@ -66,4 +66,10 @@ The exporter reads committed files, checks every public HTML page against the co
 - [14-05-data.md](parts/14-05-data.md): data appendix 5
 - [14-06-data.md](parts/14-06-data.md): data appendix 6
 - [14-07-data.md](parts/14-07-data.md): data appendix 7
+- [14-08-data.md](parts/14-08-data.md): data appendix 8
+- [14-09-data.md](parts/14-09-data.md): data appendix 9
+- [14-10-data.md](parts/14-10-data.md): data appendix 10
+- [14-11-data.md](parts/14-11-data.md): data appendix 11
+- [14-12-data.md](parts/14-12-data.md): data appendix 12
 - [15-classroom-worksheet.md](parts/15-classroom-worksheet.md): Columnar classroom worksheet
+- [16-profile-recovery.md](parts/16-profile-recovery.md): Historical-profile recovery experiment

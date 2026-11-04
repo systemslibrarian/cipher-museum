@@ -1,8 +1,8 @@
 # Source register and recorded access limits
 
-Snapshot: `3e47b5e05bd350c91f0e50501ad1f8ffc6b33e20`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `3720ede99d7ab0feedc8f7dd259d4bce5fea50c6`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
-These 194 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
+These 199 identities and reading scopes come from the prior review ledger. They are not the underlying books/papers and are not proof that a particular claim is established.
 
 ## HAC-1997 — Handbook of Applied Cryptography
 
@@ -3215,5 +3215,80 @@ These 194 identities and reading scopes come from the prior review ledger. They 
   ],
   "scope": "Evidence limits dated to the cited 2021 study. Underlying RIP 28A and SRH 355 reports not independently inspected. No authenticated IKA mechanism, faithful simulator, original attack reproduction, or claim to have checked all later discoveries. No photographs reproduced.",
   "evidence": "docs/DOT_HISTORICAL_ADDITIONS_2026-11-04.md"
+}
+```
+
+## KAHN-PUBLISHER-POSITIONING — The Codebreakers — official publisher description
+
+```json
+{
+  "title": "The Codebreakers — official publisher description",
+  "author": "David Kahn",
+  "url": "https://www.simonandschuster.com/books/The-Codebreakers/David-Kahn/9781439103555",
+  "passages_read": [
+    "About the Book"
+  ],
+  "scope": "Publisher description supports historical breadth and consequences for war, diplomacy, business and espionage. Used to avoid falsely contrasting the book as technique-only; not a new reading of the complete book.",
+  "checked": "2026-11-04"
+}
+```
+
+## SINGH-BOOK-POSITIONING — The Code Book — author’s description
+
+```json
+{
+  "title": "The Code Book — author’s description",
+  "author": "Simon Singh",
+  "url": "https://simonsingh.net/books/the-code-book/the-book/",
+  "passages_read": [
+    "The Book description and Cipher Challenge introduction"
+  ],
+  "scope": "Author describes mathematical/linguistic/technological explanations, personalities, historical consequences and ten reader challenges. No originality or superiority claim follows.",
+  "checked": "2026-11-04"
+}
+```
+
+## SINGH-CIPHER-CHALLENGE — Cipher Challenge
+
+```json
+{
+  "title": "Cipher Challenge",
+  "author": "Simon Singh",
+  "url": "https://simonsingh.net/cryptography/cipher-challenge/",
+  "passages_read": [
+    "Introduction and principles"
+  ],
+  "scope": "Ten encrypted messages included in The Code Book; evidence that reader participation predates this museum book.",
+  "checked": "2026-11-04"
+}
+```
+
+## SINGH-CRYPTO-CDROM — Crypto CD-ROM
+
+```json
+{
+  "title": "Crypto CD-ROM",
+  "author": "Simon Singh",
+  "url": "https://simonsingh.net/cryptography/crypto-cd-rom/",
+  "passages_read": [
+    "Description and list of interactive resources"
+  ],
+  "scope": "Interactive companion includes encryption and codebreaking tools, worksheets and a virtual Enigma. Historical availability only; no claim of current platform compatibility. Direct open was rate-limited during root verification; indexed author-page text was retrieved.",
+  "checked": "2026-11-04"
+}
+```
+
+## MUSEUM-PROFILE-RECOVERY-2026 — Historical-profile recovery comparison v1
+
+```json
+{
+  "title": "Historical-profile recovery comparison v1",
+  "year": 2026,
+  "url": "https://ciphermuseum.com/data/research/profile-recovery-v1/README.md",
+  "protocol": "data/research/profile-recovery-v1/protocol.json",
+  "results": "data/research/profile-recovery-v1/evaluation.json",
+  "script": "scripts/evaluate-profile-recovery.js",
+  "scope": "Original bounded experiment: six public passages from three author-disjoint works, five fixed key/search pairs, four scoring models and two solvers. All 240 conditions retained, with no exact recoveries. Matching means language, not necessarily historical period. Three editorial/introductory excerpts excluded before outcomes; Italian edition normalization remains. No general accuracy, significance or isolated historical-spelling benefit is claimed.",
+  "verification": "Real scorer substitutions, paired settings, full-result arithmetic and unchanged-matrix repeat; precise runtime and input hashes recorded with the results."
 }
 ```
