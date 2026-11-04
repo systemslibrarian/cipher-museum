@@ -4,7 +4,7 @@
   else { root.EgyptianCase = api; api.mount(document); }
 })(typeof window === 'object' ? window : globalThis, function () {
   'use strict';
-  // Historical evidence, as reported in Parkinson, Cracking Codes (1999), pp. 34-35.
+  // Historical evidence, as reported in Parkinson, Cracking Codes (1999).
   const EVIDENCE = {
     count: { signs: 1419, greekWords: 486 },
     ramesses: { origin: 'egyptian', soundSigns: true }

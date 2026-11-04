@@ -2,7 +2,7 @@
 
 Added 3 November 2026 to `lab/decipherment-cases.html#linear-b`, as the priority-2 ancient-script pilot from the 2 November ebook review (section 4). It extends the Linear B structural analogy added the same day in PR #36 rather than building a parallel page. It adds case material to the existing Historical Investigations page and its Evidence Workbench hand-off; the hypothesis and revision framework is unchanged. Egyptian and Maya cases are later follow-ups.
 
-**Verification status.** No Linear B specialist is available to review the case. In place of that review, every transliteration was checked against two published sources where possible. *ti-ri-po-de*, *qe-to-ro-we*, *a-no-we* and *pa-te* = *patēr* appear in both Chadwick (1958) and *Documents in Mycenaean Greek* (1956). *ma-te* "mother" rests on Chadwick p. 77 alone, and the reading *pantes* rests on *Documents* alone. The page states this in its source note. The inventory of every claim is [`LINEAR_B_SPECIALIST_REVIEW.md`](LINEAR_B_SPECIALIST_REVIEW.md). The transliterations and word identifications on the page (*ti-ri-po-de*, *qe-to-ro-we*, *a-no-we*, *pa-te* = *patēr* or *pantes*) follow Ventris and Chadwick's 1956 edition. A Mycenologist should review them before they are presented as authoritative.
+**Verification status.** No Linear B specialist is available to review the case. In place of that review, every transliteration was checked against two published sources where possible. *ti-ri-po-de*, *qe-to-ro-we*, *a-no-we* and *pa-te* = *patēr* appear in both Chadwick (1958) and *Documents in Mycenaean Greek* (1956). *ma-te* "mother" rests on Chadwick alone, and the reading *pantes* rests on *Documents* alone. The page states this in its source note. The inventory of every claim is [`LINEAR_B_SPECIALIST_REVIEW.md`](LINEAR_B_SPECIALIST_REVIEW.md). The transliterations and word identifications on the page (*ti-ri-po-de*, *qe-to-ro-we*, *a-no-we*, *pa-te* = *patēr* or *pantes*) follow Ventris and Chadwick's 1956 edition. A Mycenologist should review them before they are presented as authoritative.
 
 ## What the page now teaches
 
@@ -21,10 +21,10 @@ Added 3 November 2026 to `lab/decipherment-cases.html#linear-b`, as the priority
 
 | Source | Used for | Verification |
 | --- | --- | --- |
-| John Chadwick, *The Decipherment of Linear B* (Cambridge University Press, 1958), cited by the printed pages of the Vintage paperback printing | Kober's questions and method (pp. 35, 54); Ventris favouring Etruscan until mid-1952 (p. 50); Work Note 20 of 1 June 1952, introduced as a digression, and the triplets read as place names, "a step Miss Kober had not taken" (p. 62); spelling rule 7 and *pa-te* (p. 75); a tablet pairing *pa-te* with *ma-te* (p. 77); Blegen's letter and Ta 641 (pp. 81–83), including the still-disputed tripod descriptions (p. 83); the odds called "astronomical" (p. 82) and, of a later check, "beyond mathematical analysis" (p. 86) | Read from the user's PDF of the Vintage printing, added 3 November 2026. Every cited page was matched to its printed folio. The page paraphrases throughout and quotes three words ("beyond mathematical analysis"). The file is not linked or committed. |
-| Michael Ventris and John Chadwick, *Documents in Mycenaean Greek* (Cambridge University Press, 1956), ch. I "Discovery and decipherment" and ch. II §5 "The spelling rules" | Kober's programme stopping short of sounds; her "beginning of a tentative phonetic pattern" (the grid); the reinterpretation of her first five triplets as Cretan town names; Ventris's Work Notes (January 1951 to June 1952) testing Aegean and Etruscan parallels while Greek readings were "regarded as out of the question"; Blegen's letter of 16 May 1953 on Ta 641; the spelling rules and *pa-te*; the argument from odds against chance | Read in an OCR scan of the 1959 printing. The scan's page numbers are unreliable, so the page cites chapters only. The scan is not linked: its licence is unclear. |
+| John Chadwick, *The Decipherment of Linear B* (Cambridge University Press, 1958) | Kober's questions and method; Ventris favouring Etruscan until mid-1952; Work Note 20 of 1 June 1952, introduced as a digression, and the triplets read as place names, "a step Miss Kober had not taken"; spelling rule 7 and *pa-te*; a tablet pairing *pa-te* with *ma-te*; Blegen's letter and Ta 641, including the still-disputed tripod descriptions; the odds called "astronomical" and, of a later check, "beyond mathematical analysis" | Read from the user's copy, added 3 November 2026. By the owner's preference the page cites the book by title, not by page. The page paraphrases throughout and quotes three words ("beyond mathematical analysis"). The file is not linked or committed. |
+| Michael Ventris and John Chadwick, *Documents in Mycenaean Greek* (Cambridge University Press, 1956) | Kober's programme stopping short of sounds; her "beginning of a tentative phonetic pattern" (the grid); the reinterpretation of her first five triplets as Cretan town names; Ventris's Work Notes (January 1951 to June 1952) testing Aegean and Etruscan parallels while Greek readings were "regarded as out of the question"; Blegen's letter of 16 May 1953 on Ta 641; the spelling rules and *pa-te*; the argument from odds against chance | Read in an OCR scan of the 1959 printing. The page cites the book by title. The scan is not linked: its licence is unclear. |
 | Thomas G. Palaima, "The Pylos Ta Series and the Process of Inventorying Ritual Objects for a Funerary Banquet" (2023), [public PDF](https://sites.utexas.edu/scripts/files/2023/10/2023-TGP-The-Pylos-Ta-Series-and-the-Process-of-Inventorying-Ritual-Objects-for-a-Funerary-Banquet.pdf) | The decipherment's announcement on 1 July 1952; Ta 641 discovered in the 1952 Pylos season and "immediately used" by Ventris to demonstrate his values | Read in full from the PDF (opening page). |
-| Andrew Robinson, *The Story of Writing*, revised edition (2007), pp. 114–119 | Retained from PR #36 | Not rechecked in this change. |
+| Andrew Robinson, *The Story of Writing*, revised edition (2007) | Retained from PR #36 | Not rechecked in this change. |
 
 Not on the page: the book's plates, Linear B Unicode signs, and links to uploaded copies of copyrighted books.
 
@@ -62,7 +62,7 @@ Not on the page: the book's plates, Linear B Unicode signs, and links to uploade
 - **Guards added for the Chadwick revision:** three more, each seen failing on its own defect:
   - **M14:** the context example (*pa-te* with *ma-te*) removed.
   - **M15:** Chadwick's "beyond mathematical analysis" caveat removed.
-  - **M16:** the printing that supplies the page numbers left unnamed.
+  - **M16:** the printing that supplies the page numbers left unnamed. Retired on 3 November 2026, when page numbers were removed at the owner's request; the test now checks that Chadwick is cited by title without pages.
 
 ## Against the review
 
@@ -75,5 +75,5 @@ The review (`New-Ebook-Review-Crypto-Lab-Cipher-Museum-2026-11-02.md`, section 4
 - original examples rather than the book's plates;
 - verification status stated in place of specialist review, which is not available.
 
-The review cites Chadwick by its own file's PDF page numbers. This page cites printed pages instead. The Egyptian and Maya cases, and a separate writing-system learning route, remain follow-ups.
+The review cites Chadwick by page; by the owner's preference this page cites its books by title only. The Egyptian and Maya cases and the writing-systems route followed in later pull requests.
 - **Full suite:** `npm test`, run before commit.

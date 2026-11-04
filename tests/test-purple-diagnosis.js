@@ -2,15 +2,15 @@
 /* Purple diagnosis worksheet (lab/purple-diagnosis.html).
  *
  * Written from the sources before the worksheet was built:
- *   Stamp and Low, Applied Cryptanalysis (2007), section 2.3.3, printed pp. 45-48: messages
+ *   Stamp and Low, Applied Cryptanalysis (2007): messages
  *   enciphered with the same key are in depth; matched plaintext and ciphertext at the same key
  *   position constrain that position's permutation; more legs give more of it; an offset depth
  *   goes into step only from some point; the textbook example is explicitly simplified.
- *   Rowlett, The Story of Magic (1998), printed pp. 151-154: statistical tests confirming
+ *   Rowlett, The Story of Magic (1998): statistical tests confirming
  *   same-key messages; Genevieve Grotjan finding the first case of the relationship; the
  *   section gathering, Friedman coming in, Rosen's earlier stepping-switch work, Rowlett with
  *   Ferner and Small checking the results: a team, and a pattern followed by corroboration.
- *   Mundy, Code Girls (2017), pp. 89-94: Grotjan hired as a junior cryptanalyst in 1939;
+ *   Mundy, Code Girls (2017): Grotjan hired as a junior cryptanalyst in 1939;
  *   Rowlett supervising the Purple effort.
  * Every verdict the page renders, and every fail or mismatch path, is a named test.
  */
@@ -122,10 +122,12 @@ test('a team, not a lone genius', () => {
   assert.doesNotMatch(text, /single-handed|lone genius(?! story)|alone (?:broke|cracked|solved)/i);
 });
 test('no date asserted for the insight', () => assert.doesNotMatch(text, /20 September 1940|September 20, 1940/, 'Sources differ on the date; the worksheet does not assert one'));
-test('sources cited by page', () => {
-  assert.match(text, /Stamp and Low[^.]*§2\.3\.3[^.]*pp\. 45–48/);
-  assert.match(text, /Rowlett[^.]*pp\. 151–154/);
-  assert.match(text, /Mundy[^.]*pp\. 89–94/);
+// Books are cited by title only, by the owner's preference.
+test('sources cited by title, not page', () => {
+  assert.match(text, /Mark Stamp and Richard M\. Low, Applied Cryptanalysis[^.]*\(Wiley, 2007\)/);
+  assert.match(text, /Frank B\. Rowlett, The Story of Magic[^.]*\(Aegean Park Press, 1998\)/);
+  assert.match(text, /Liza Mundy, Code Girls[^.]*\(Hachette, 2017\)/);
+  assert.doesNotMatch(text, /\bpp?\. \d|§|\bchapter \d/);
 });
 test('linked from Purple and Cryptanalysis Techniques', () => {
   assert.ok(fs.readFileSync('ciphers/purple.html', 'utf8').includes('href="../lab/purple-diagnosis.html"'));

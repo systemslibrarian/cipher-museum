@@ -3,8 +3,8 @@
 Added 3 November 2026 to `lab/decipherment-cases.html#egyptian`, as the first of the two follow-up cases in section 4 of the 2 November ebook review. It uses the same page, the same evidence-chain layout and the same honesty rules as the Linear B case.
 
 **Verification status.** No Egyptologist is available to review the case, so its readings were checked against a second published source where one could be read:
-- **The mouth sign as *r*:** Parkinson's sign table, p. 49.
-- **The house sign as *pr*, "house":** Parkinson's "House of Life", p. 71.
+- **The mouth sign as *r*:** Parkinson's sign table.
+- **The house sign as *pr*, "house":** Parkinson's discussion of the "House of Life".
 - **The sign numbers O1, D21 and D54:** they match their Unicode character names (O001, D021, D054).
 - **On Collier and Manley alone:** the meaning "go out" and the walking-legs determinative. The online Thesaurus Linguae Aegyptiae lists the verb, but its page sat behind a bot check and was not read.
 
@@ -14,8 +14,8 @@ The page states this in its source note. It also links the Abydos king list (Bri
 
 | Section 4 asks | Implementation | Named tests in `tests/test-egyptian-case.js` |
 | --- | --- | --- |
-| A small, properly sourced example that distinguishes phonograms, phonetic complements and determinatives | The word *pr* "go out" from Collier and Manley §2: a two-consonant house sign, a mouth sign used as a phonetic complement, and a walking-legs determinative. The learner assigns each sign a role, and the page shows the transliteration those roles would spell. | correct roles give pr; mouth read as an extra sound gives prr mismatch; legs read as a sound sign is flagged: no sound value; house read as a determinative loses pr; a complement with nothing to complement is flagged |
-| Let learners determine reading direction | The signs are shown facing right, so the text reads right to left: you read into their faces (§7). A control turns the signs round, and the right answer flips with them. | English habit wrong when signs face right; reading into the faces correct both ways; rendered direction verdict follows the rendered facing |
+| A small, properly sourced example that distinguishes phonograms, phonetic complements and determinatives | The word *pr* "go out" from Collier and Manley: a two-consonant house sign, a mouth sign used as a phonetic complement, and a walking-legs determinative. The learner assigns each sign a role, and the page shows the transliteration those roles would spell. | correct roles give pr; mouth read as an extra sound gives prr mismatch; legs read as a sound sign is flagged: no sound value; house read as a determinative loses pr; a complement with nothing to complement is flagged |
+| Let learners determine reading direction | The signs are shown facing right, so the text reads right to left: you read into their faces (Collier and Manley). A control turns the signs round, and the right answer flips with them. | English habit wrong when signs face right; reading into the faces correct both ways; rendered direction verdict follows the rendered facing |
 | Compare transliteration with translation | The Reading stage, and the result once the roles are right, give "Transliteration: pr" and "Translation: 'go out'". | rendered role verdict shows the computed transliteration |
 | Retain the Rosetta correction | The Source stage says "two languages and three scripts", matching the Rosetta page. | Rosetta correction retained |
 | The A–Z activity stays labelled as a modern invention | The Khnumhotep II widget's "invented for display" label is guarded. | A–Z widget on the Khnumhotep page stays labelled invented |
@@ -37,10 +37,10 @@ The books' drawings of them cannot be reproduced. Choosing one, and how to show 
 
 | Source | Used for | Checked |
 | --- | --- | --- |
-| Richard Parkinson, *Cracking Codes: The Rosetta Stone and Decipherment* (University of California Press, 1999; © Trustees of the British Museum) | p. 15, the classical emphasis on symbols; p. 31, Young's Ptolemy cartouche (five correct values, eight wrong) and his foreign-names proposal; pp. 33–35, the Philae obelisk and the Abu Simbel copies received on 14 September 1822; p. 34, Champollion's 1821 symbolic view and the 1,419-to-486 count; p. 35, Ramesses read from a sun sign and *s* signs; pp. 57–59, sign functions | Read in the user's copy. Printed page = PDF page − 2. |
-| Mark Collier and Bill Manley, *How to Read Egyptian Hieroglyphs* (University of California Press, 1998) | §2, consonants only, and *pr* with complement and determinative; pp. 4–5, conventional pronunciation; §5, grouping of signs; §6, determinatives; §7, reading into the faces; §§11–13, two- and three-consonant signs, complements and ideograms | Read in the user's copy, a scan of two-page spreads. Sections and printed pages were matched. |
+| Richard Parkinson, *Cracking Codes: The Rosetta Stone and Decipherment* (University of California Press, 1999; © Trustees of the British Museum) | The classical emphasis on symbols; Young's Ptolemy cartouche (five correct values, eight wrong) and his foreign-names proposal; the Philae obelisk and the Abu Simbel copies received on 14 September 1822; Champollion's 1821 symbolic view and the 1,419-to-486 count; Ramesses read from a sun sign and *s* signs; sign functions | Read in the user's copy. |
+| Mark Collier and Bill Manley, *How to Read Egyptian Hieroglyphs* (University of California Press, 1998) | Consonants only, and *pr* with complement and determinative; conventional pronunciation; grouping of signs; determinatives; reading into the faces; two- and three-consonant signs, complements and ideograms | Read in the user's copy, a scan of two-page spreads. |
 
-At the user's instruction, the books are cited by title, publisher, year and page, and the PDFs are not linked or committed. The page paraphrases throughout; its only figures quoted from a source are the two counts.
+At the user's instruction, the books are cited by title, publisher and year only, without chapter, section or page, and the PDFs are not linked or committed. The page paraphrases throughout; its only figures quoted from a source are the two counts.
 
 ## Verification
 

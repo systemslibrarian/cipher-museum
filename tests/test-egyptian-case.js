@@ -2,14 +2,14 @@
 /* Egyptian case in lab/decipherment-cases.html#egyptian.
  *
  * Written from the sources before the case was built:
- *   Parkinson, Cracking Codes (1999): p. 15 the classical emphasis on symbolism; p. 31 Young's
- *   Ptolemy cartouche and his "foreign names only" proposal; p. 34 Champollion's count of
- *   1,419 signs against 486 Greek words; p. 35 Ramesses read at Abu Simbel; pp. 57-59 sign
- *   functions.
- *   Collier and Manley, How to Read Egyptian Hieroglyphs (1998): section 2 (consonants, no
- *   vowels; the word pr "go out" with a mouth-sign complement and walking-legs determinative),
- *   section 6 (determinatives add no sound), section 7 (read into the faces of the signs),
- *   sections 11-13 (two- and three-consonant signs, complements, ideograms).
+ *   Parkinson, Cracking Codes (1999): the classical emphasis on symbolism; Young's Ptolemy
+ *   cartouche and his "foreign names only" proposal; Champollion's count of 1,419 signs
+ *   against 486 Greek words; Ramesses read at Abu Simbel; sign functions.
+ *   Collier and Manley, How to Read Egyptian Hieroglyphs (1998): consonants, no vowels; the
+ *   word pr "go out" with a mouth-sign complement and walking-legs determinative;
+ *   determinatives add no sound; read into the faces of the signs; two- and three-consonant
+ *   signs, complements, ideograms.
+ * By the owner's preference the page cites these books by title, not by chapter or page.
  * Every verdict the page renders, and every fail or mismatch path, is a named test below.
  */
 const assert = require('node:assert/strict');
@@ -21,8 +21,8 @@ const ran = new Set();
 const test = (name, fn) => { fn(); ran.add(name); };
 const html = fs.readFileSync('lab/decipherment-cases.html', 'utf8');
 
-// --- Hypothesis checks against the historical evidence (Parkinson pp. 34-35) ---
-test('evidence counts are Parkinson p. 34', () => {
+// --- Hypothesis checks against the historical evidence (Parkinson) ---
+test('evidence counts are Parkinson\'s', () => {
   assert.equal(E.EVIDENCE.count.signs, 1419);
   assert.equal(E.EVIDENCE.count.greekWords, 486);
 });
@@ -141,12 +141,15 @@ test('chain stages labelled in order', () => {
   const labels = [...section.querySelectorAll('ol.evidence-chain > li > strong')].map(s => s.textContent.replace(/\.$/, ''));
   assert.deepEqual(labels, ['Source', 'Transcription', 'Structural hypothesis', 'Key', 'Reading', 'Independent checks']);
 });
-test('source-derived stages cite page or section', () => {
-  for (const li of section.querySelectorAll('ol.evidence-chain > li')) assert.match(li.textContent, /\((?:Parkinson|Collier and Manley)[^)]*(?:p\.|pp\.|§)/, 'Uncited stage: ' + li.textContent.slice(0, 40));
+test('source-derived stages cite their book, by title only', () => {
+  for (const li of section.querySelectorAll('ol.evidence-chain > li')) {
+    assert.match(li.textContent, /\((?:Parkinson|Collier and Manley)[^)]*\)/, 'Uncited stage: ' + li.textContent.slice(0, 40));
+    assert.doesNotMatch(li.textContent, /\bpp?\. \d|§/, 'Cite by title, not page or section: ' + li.textContent.slice(0, 40));
+  }
 });
 test('exercise labelled: signs are Unicode characters, not a facsimile', () => assert.match(text, /Unicode characters, not a facsimile/));
 test('word attributed, not presented as a transcription of one inscription', () => {
-  assert.match(text, /from Collier and Manley’s opening chapter/);
+  assert.match(text, /taken from Collier and Manley’s How to Read Egyptian Hieroglyphs/);
   assert.doesNotMatch(text, /transcription of (?:a|the) (?:stela|inscription|tomb)/i);
 });
 test('A–Z widget on the Khnumhotep page stays labelled invented', () => assert.match(fs.readFileSync('ciphers/egyptian-substitution.html', 'utf8'), /The assignments are invented for display/));

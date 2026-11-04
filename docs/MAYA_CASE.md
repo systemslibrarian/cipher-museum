@@ -5,7 +5,7 @@ Added 3 November 2026 to `lab/decipherment-cases.html#maya`. This is the second 
 **Verification status.** No Maya epigrapher is available to review the case, so its readings were checked against a second published source: Harri Kettunen and Christophe Helmke, *Introduction to Maya Hieroglyphs*, 20th edition (Wayeb, 2025), freely published by Wayeb. That handbook confirms:
 - Knorozov's turkey reading from Landa's *cu* sign above a turkey;
 - the "so-called Landa alphabet";
-- *ba-ki* for *baak* "captive" among the harmony rules, after Lacadena and Wichmann (2004), in Appendix K;
+- *ba-ki* for *baak* "captive" among the harmony rules, after Lacadena and Wichmann (2004);
 - Proskouriakoff's work on royal accession.
 
 Landa's letter-name explanation and the birth glyph rest on Coe alone. The page states this in its source note.
@@ -14,9 +14,9 @@ Landa's letter-name explanation and the birth glyph rest on Coe alone. The page 
 
 | Section 4 asks | Implementation | Named tests in `tests/test-maya-case.js` |
 | --- | --- | --- |
-| Compare an alphabetic assumption with the syllabic and logographic interpretation (Coe ch. 6) | "Alphabet or syllables?" checks two hypotheses against two observations from Coe ch. 6. First, Landa said b aloud as "be", and the sign written in answer recorded that syllable. Second, two signs over a turkey picture spell *k'utz*, a word of three sounds. The alphabet hypothesis is offered first. One failed check rejects a hypothesis, and every check stays on record. | letter names contradict an alphabet; turkey contradicts an alphabet: two signs cannot spell three sounds; turkey consistent with syllables; one failed check is enough to reject a hypothesis; the verdicts follow the data, not the label; record keeps contradicted checks after revision and reset |
-| A second evidence step using the date-pattern reasoning of ch. 7 | "Test a date pattern" uses **invented figures**, labelled as such in the interface, modelled on Proskouriakoff's finding as Coe reports it. In each set the earliest date, a birth, falls 12 to 31 years before an accession, and each set spans a lifetime. A fixed-cycle hypothesis is contradicted by the varying gaps. | varying gaps contradict a fixed cycle; equal gaps would fit a cycle; a set longer than a lifetime contradicts events in one life; rendered date verdict comes from the fixture |
-| Keep current readings and historical hypotheses distinct | The Key stage says "Knorozov proposed in 1952". The Reading stage separates his synharmony rule from the later refinement Coe reports in ch. 10: an echoing vowel marks a short vowel, a different one a long vowel. "Read a two-syllable spelling" shows both rules side by side; *ba + ki* is "not covered" by the 1952 rule. | synharmonic spelling reads a short vowel; disharmonic spelling: Knorozov's rule has no reading, the later rule marks a long vowel; rendered spelling verdict shows both rules |
+| Compare an alphabetic assumption with the syllabic and logographic interpretation | "Alphabet or syllables?" checks two hypotheses against two observations Coe reports. First, Landa said b aloud as "be", and the sign written in answer recorded that syllable. Second, two signs over a turkey picture spell *k'utz*, a word of three sounds. The alphabet hypothesis is offered first. One failed check rejects a hypothesis, and every check stays on record. | letter names contradict an alphabet; turkey contradicts an alphabet: two signs cannot spell three sounds; turkey consistent with syllables; one failed check is enough to reject a hypothesis; the verdicts follow the data, not the label; record keeps contradicted checks after revision and reset |
+| A second evidence step using the historical date-pattern reasoning | "Test a date pattern" uses **invented figures**, labelled as such in the interface, modelled on Proskouriakoff's finding as Coe reports it. In each set the earliest date, a birth, falls 12 to 31 years before an accession, and each set spans a lifetime. A fixed-cycle hypothesis is contradicted by the varying gaps. | varying gaps contradict a fixed cycle; equal gaps would fit a cycle; a set longer than a lifetime contradicts events in one life; rendered date verdict comes from the fixture |
+| Keep current readings and historical hypotheses distinct | The Key stage says "Knorozov proposed in 1952". The Reading stage separates his synharmony rule from the later refinement Coe reports: an echoing vowel marks a short vowel, a different one a long vowel. "Read a two-syllable spelling" shows both rules side by side; *ba + ki* is "not covered" by the 1952 rule. | synharmonic spelling reads a short vowel; disharmonic spelling: Knorozov's rule has no reading, the later rule marks a long vowel; rendered spelling verdict shows both rules |
 | Avoid implying living Maya languages are secret codes | The case opens "Maya writing is a script for Maya languages, not a code" and "Mayan languages are living languages". A test forbids "secret code" and "encryption" anywhere else in the section. | script, not a code; living languages |
 | Original or licensed material, not the book's plates | No glyph images are shown; signs are given in transliteration. The date table is invented. The book is cited, not linked. | no Maya glyph images or uploaded copies; date fixture labelled invented in the UI |
 | An attractive wrong hypothesis, contradiction, revision and kept record | As above, plus Brasseur's misuse of the "alphabet" and Thompson's attacks, both in the Structural hypothesis stage. | as above |
@@ -25,15 +25,13 @@ Landa's letter-name explanation and the birth glyph rest on Coe alone. The page 
 
 Michael D. Coe, *Breaking the Maya Code*, 3rd edition (Thames & Hudson, 2012), read from the user's copy:
 
-| Chapter | Used for |
-| --- | --- |
-| ch. 4 | Landa's account written in Spain around 1566, surviving in a later copy that Brasseur found; Brasseur's careless use of the list and its effect on phonetic approaches |
-| ch. 6 | Knorozov in 1952; the letter-name explanation of Landa's signs; logograms alongside phonetic signs; *k'u-tz(u)* "turkey" over a turkey picture, a word still used in modern Maya; synharmony; Thompson's attacks |
-| ch. 7 | Proskouriakoff at Piedras Negras: birth and accession glyphs, the 12-to-31-year interval, sets spanning a lifetime, the inscriptions as history |
-| ch. 10 | Later work on synharmony and disharmony, with the *ba-k(i)* for *baak* example |
-| Appendix B | The syllabic chart, mentioned as the record of current values |
+- Landa's account written in Spain around 1566, surviving in a later copy that Brasseur found; Brasseur's careless use of the list and its effect on phonetic approaches.
+- Knorozov in 1952; the letter-name explanation of Landa's signs; logograms alongside phonetic signs; *k'u-tz(u)* "turkey" over a turkey picture, a word still used in modern Maya; synharmony; Thompson's attacks.
+- Proskouriakoff at Piedras Negras: birth and accession glyphs, the 12-to-31-year interval, sets spanning a lifetime, the inscriptions as history.
+- Later work on synharmony and disharmony, with the *ba-k(i)* for *baak* example.
+- The syllabic chart, mentioned as the record of current values.
 
-Coe is cited by chapter because the copy is an ebook conversion that does not keep the print pagination. The review itself advises chapter citations for reflowed copies. The page paraphrases throughout and quotes nothing beyond the glyph nicknames Coe reports.
+By the owner's preference, Coe is cited by title, without chapter or page. The page paraphrases throughout and quotes nothing beyond the glyph nicknames Coe reports.
 
 ## Deviations from section 4
 

@@ -2,11 +2,11 @@
 /* "Working is not secure" route: lab/working-is-not-secure.html and tours/working-not-secure.json.
  *
  * Written from the sources before the route was built:
- *   Flannery, In Code (2000), chapter "After-math": a scheme that works can still be found
+ *   Flannery, In Code (2000): a scheme that works can still be found
  *   insecure; a negative result is a contribution; the book does not give the technical attack.
- *   Bauer, Decrypted Secrets (4th ed.), section 11.2 "Maxims of Cryptology", printed pp. 220-224:
+ *   Bauer, Decrypted Secrets (4th ed.), the maxims of cryptology:
  *   do not underrate the adversary; inventors overrate their own methods; human error.
- *   Piper and Murphy, Cryptography: A Very Short Introduction, chapter 6: practical systems are
+ *   Piper and Murphy, Cryptography: A Very Short Introduction: practical systems are
  *   breakable in principle; exhaustive key search is the attack of last resort, so a large key
  *   space bounds only that attack.
  * The route must separate correctness, performance and the security claim; state the adversary's
@@ -88,10 +88,12 @@ test('no old key-size guidance or unbreakable claims', () => {
   assert.doesNotMatch(text, /unbreakable(?! claims)/i);
 });
 test('key space described as bounding only exhaustive search', () => assert.match(text, /only exhaustive (?:key )?search/i));
+// Books are cited by title only, by the owner's preference.
 test('sources cited', () => {
-  assert.match(text, /Sarah Flannery[^.]*In Code[^.]*“After-math”/);
-  assert.match(text, /Bauer[^.]*§11\.2[^.]*pp\. 220–224/);
-  assert.match(text, /Piper and Sean Murphy[^.]*chapter 6/);
+  assert.match(text, /Sarah Flannery[^.]*In Code: A Mathematical Journey \(Profile Books, 2000\)/);
+  assert.match(text, /Bauer, Decrypted Secrets[^.]*4th edition \(Springer, 2007\)/);
+  assert.match(text, /Piper and Sean Murphy, Cryptography: A Very Short Introduction \(Oxford University Press, 2002\)/);
+  assert.doesNotMatch(text, /\bpp?\. \d|§|\bchapter (?:\d|“)/);
 });
 test('executable security game linked, not reimplemented', () => {
   assert.ok(page.querySelector('a[href="https://systemslibrarian.github.io/crypto-lab-hidden-bit/"]'));

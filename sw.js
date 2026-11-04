@@ -16,7 +16,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-d77a716c';
+const VERSION = 'cipher-museum-018167c3';
 
 const CORE = [
   '/ciphers/gripenstierna.html',

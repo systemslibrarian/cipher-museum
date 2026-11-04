@@ -2,16 +2,16 @@
 /* Maya case in lab/decipherment-cases.html#maya.
  *
  * Written from Michael D. Coe, Breaking the Maya Code, 3rd edition (2012), before the case
- * was built. Chapters are cited because the reading copy's pagination is not the print's:
- *   ch. 4  Landa's account written in Spain around 1566, known from a later copy Brasseur found;
- *   ch. 6  Knorozov (1952): Landa's informants wrote signs answering Spanish letter names as
+ * was built. By the owner's preference the page cites it by title, not by chapter or page:
+ *   -  Landa's account written in Spain around 1566, known from a later copy Brasseur found;
+ *   -  Knorozov (1952): Landa's informants wrote signs answering Spanish letter names as
  *          Landa said them (b as "be"), so the signs are syllables; a mixed system of
  *          logograms and phonetic signs; k'u-tz(u) "turkey" over a turkey picture, the word
  *          used in Colonial and modern Maya; synharmony; Thompson attacked the readings;
- *   ch. 7  Proskouriakoff at Piedras Negras: in each set the earliest date, with the
+ *   -  Proskouriakoff at Piedras Negras: in each set the earliest date, with the
  *          "upended frog" glyph, falls 12 to 31 years before a "toothache" accession date,
  *          and the set covers a ruler's lifetime;
- *   ch. 10 later work: synharmony for short vowels, disharmony for long, e.g. ba-k(i) baak.
+ *   -  later work: synharmony for short vowels, disharmony for long, e.g. ba-k(i) baak.
  * Every verdict the page renders, and every fail or mismatch path, is a named test below.
  */
 const assert = require('node:assert/strict');
@@ -23,7 +23,7 @@ const ran = new Set();
 const test = (name, fn) => { fn(); ran.add(name); };
 const html = fs.readFileSync('lab/decipherment-cases.html', 'utf8');
 
-// --- Alphabet or syllables? (Coe ch. 6) ---
+// --- Alphabet or syllables? (Coe) ---
 test('letter names contradict an alphabet', () => assert.equal(M.check('alphabet', 'letterNames').verdict, 'contradicted'));
 test('letter names consistent with syllables', () => assert.equal(M.check('syllabic', 'letterNames').verdict, 'consistent'));
 test('turkey contradicts an alphabet: two signs cannot spell three sounds', () => {
@@ -53,7 +53,7 @@ test('unknown hypothesis or evidence rejected', () => {
   assert.throws(() => M.check('syllabic', 'codex'));
 });
 
-// --- 1952 rule versus the later refinement (Coe ch. 6 and ch. 10) ---
+// --- 1952 rule versus the later refinement (Coe) ---
 test('synharmonic spelling reads a short vowel: k’u-tz(u) is k’utz', () => {
   const r = M.readSpelling(['k’u', 'tzu']);
   assert.equal(r.word, 'k’utz'); assert.equal(r.knorozov1952, 'synharmonic'); assert.equal(r.laterRule, 'short vowel');
@@ -64,7 +64,7 @@ test('disharmonic spelling: Knorozov’s rule has no reading, the later rule mar
 });
 test('malformed spelling rejected', () => assert.throws(() => M.readSpelling(['k’u'])));
 
-// --- Date pattern (Coe ch. 7), on an invented fixture ---
+// --- Date pattern (Coe), on an invented fixture ---
 test('fixture is labelled invented and stays inside the reported 12 to 31 years', () => {
   assert.equal(M.DATE_SETS.invented, true);
   for (const s of M.DATE_SETS.sets) { const gap = s.accession - s.initial; assert.ok(gap >= 12 && gap <= 31, s.name); }
@@ -131,8 +131,9 @@ test('chain stages labelled in order', () => {
   const labels = [...section.querySelectorAll('ol.evidence-chain > li > strong')].map(s => s.textContent.replace(/\.$/, ''));
   assert.deepEqual(labels, ['Source', 'Transcription', 'Structural hypothesis', 'Key', 'Reading', 'Independent checks']);
 });
-test('every stage cites a Coe chapter', () => {
-  for (const li of section.querySelectorAll('ol.evidence-chain > li')) assert.match(li.textContent, /\(Coe ch(?:s)?\. \d/, 'Uncited stage: ' + li.textContent.slice(0, 40));
+test('every stage cites Coe, by title only', () => {
+  for (const li of section.querySelectorAll('ol.evidence-chain > li')) assert.doesNotMatch(li.textContent, /\bch(?:s)?\. \d|Appendix [A-Z]/, 'Cite by title, not chapter: ' + li.textContent.slice(0, 40));
+  for (const li of section.querySelectorAll('ol.evidence-chain > li')) assert.match(li.textContent, /\(Coe\)/, 'Uncited stage: ' + li.textContent.slice(0, 40));
 });
 test('historical hypothesis and current reading kept distinct', () => {
   assert.match(text, /Knorozov proposed in 1952/);

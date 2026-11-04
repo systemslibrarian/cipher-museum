@@ -33,13 +33,13 @@ Each stop's note repeats a claim its page makes. Test "each stop note carries a 
 
 ## Sources and what was checked
 
-Books were read from the user's copies and are cited by title and chapter or page; none is linked. The page paraphrases throughout.
+Books were read from the user's copies and, by the owner's preference, are cited by title, publisher and year only; none is linked. The page paraphrases throughout.
 
 | Source | Used for | Checked |
 | --- | --- | --- |
-| Sarah Flannery with David Flannery, *In Code* (2000), chapter "After-math" | The Young Scientist win; the attack and the security problem it exposed; the detailed report on the attack in her later project; negative results as part of progress; the book does not give the technical attack | The text was read directly. Cited by chapter because the printed page numbers extract inconsistently from this copy. The review's suggestion that the algorithm was faster than RSA was **not** found in this text, so the page makes no speed claim. |
-| Friedrich L. Bauer, *Decrypted Secrets*, 4th edition (Springer, 2007), §11.2 "Maxims of Cryptology", printed pp. 220–224 | Do not underrate the adversary; inventors' overconfidence; human error | Page numbers matched (printed page = PDF page − 14). Bauer is **not** cited for the key-space argument: §11.2 does not make it in those terms. |
-| Fred Piper and Sean Murphy, *Cryptography: A Very Short Introduction* (Oxford University Press, 2002), chapter 6 | Practical systems are breakable in principle; exhaustive key search as the worst case | Read directly. Cited by chapter because the copy is an ebook conversion. |
+| Sarah Flannery with David Flannery, *In Code* (Profile Books, 2000) | The Young Scientist win; the attack and the security problem it exposed; the detailed report on the attack in her later project; negative results as part of progress; the book does not give the technical attack | The text was read directly. The review's suggestion that the algorithm was faster than RSA was **not** found in this text, so the page makes no speed claim. |
+| Friedrich L. Bauer, *Decrypted Secrets*, 4th edition (Springer, 2007) | Do not underrate the adversary; inventors' overconfidence; human error | Read directly. Bauer is **not** cited for the key-space argument: his maxims do not make it in those terms. |
+| Fred Piper and Sean Murphy, *Cryptography: A Very Short Introduction* (Oxford University Press, 2002) | Practical systems are breakable in principle; exhaustive key search as the worst case | Read directly. |
 
 ## Verification
 
