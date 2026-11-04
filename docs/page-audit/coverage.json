@@ -6226,7 +6226,7 @@
       },
       "release_validation": "Local checks and GitHub CI passed; complete artifact deployed.26representative live files checked separately in live-verification.json.",
       "traffic_analysis_exercise_2026_11_02": {
-        "scope": "Added a \"Traffic Analysts and Log-Readers\" story panel linking the exercise, and the NSA traffic-analysis history to Sources and Reading. Panel claims (externals studied; locating units, guiding interception, supporting cryptanalysts; the Jutland callsign misreading) are from that history, pp. 3-8 and 14-15. Thirsk is named only as the author of a log-reader account.",
+        "scope": "Added a \"Traffic Analysts and Log-Readers\" story panel linking the exercise, and the NSA traffic-analysis history to Sources and Reading. Panel claims (externals studied; locating units, guiding interception, supporting cryptanalysts; the Jutland callsign misreading) are from that history. Thirsk is named only as the author of a log-reader account.",
         "verification": "Link and text checked by tests/test-traffic-analysis.js; full npm test run.",
         "limits": "Link and summary addition only; no fresh source review of the rest of the page; the frozen audit reading pack was not regenerated.",
         "record": "docs/TRAFFIC_ANALYSIS_EXERCISE.md"
@@ -6558,11 +6558,11 @@
     {
       "path": "lab/decipherment-cases.html",
       "title": "How a Decipherment Becomes Evidence — The Cipher Museum",
-      "words": 3478,
-      "sha256": "46de55b85fa68925de0ffef387224b3902dbc13483a9254508b3b4aa622fc357",
+      "words": 3347,
+      "sha256": "a691e01145d4a99d7da2e1ecd8b1ad65420c3952d5f5e0f23c8e18e295d96fec",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [],
-      "notes": "Root reread complete case narratives and displayed evidence, including the Z340 fragment. Invented teaching examples remain separate from source-backed manuscript evidence.\n3 November 2026: Added an original Latin-label structural analogy connected to Linear B. Kober is credited; sounds and meaning are not inferred from recurrence alone. Competing predictions are checked against withheld labeled fixture records. Robinson (2007), pp. 114–119; PASP research link. DOM and Chromium checks rejected the wrong prediction; existing Copiale/Mary/Z340 content retained.",
+      "notes": "Root reread complete case narratives and displayed evidence, including the Z340 fragment. Invented teaching examples remain separate from source-backed manuscript evidence.\n3 November 2026: Added an original Latin-label structural analogy connected to Linear B. Kober is credited; sounds and meaning are not inferred from recurrence alone. Competing predictions are checked against withheld labeled fixture records. Robinson (2007), pp. 114–119; PASP research link. DOM and Chromium checks rejected the wrong prediction; existing Copiale/Mary/Z340 content retained.\n3 November 2026: at the owner's request, the books behind this work are cited by title, author, publisher and year only; chapter, section and page references were removed from the page, its script comments, records and README entry. Guarded by tests/test-title-citations.js. Research-paper citations are unchanged.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "root",
@@ -6587,21 +6587,21 @@
       },
       "linear_b_case_2026_11_03": {
         "scope": "Linear B section extended into a staged case: script not cipher; Kober's structure before sound; her first five triplets reread as Cretan town names and adjectives while the sign relationships held; Ventris's Etruscan/Aegean prior giving way; Ta 641 as a test from a tablet not used to build the values; spelling ambiguity (pa-te = patēr or pantes); no confidence score. The exercise now makes the frequency-favoured reading attractive and wrong, keeps every check in a visible record through revision and reset, and leaves Z unassigned.",
-        "sources": "John Chadwick, The Decipherment of Linear B (CUP, 1958; Vintage paperback printing), pp. 35, 50, 54, 62, 75, 77, 81–83, 86, read from the user's PDF with each folio matched; Ventris and Chadwick, Documents in Mycenaean Greek (1956), ch. I and ch. II (spelling rules), checked against a scanned copy; Palaima (2023), public PDF, opening page; Robinson (2007) as previously cited, not rechecked.",
+        "sources": "John Chadwick, The Decipherment of Linear B (CUP, 1958), read from the user's copy; Ventris and Chadwick, Documents in Mycenaean Greek (1956), checked against a scanned copy; Palaima (2023), public PDF, opening page; Robinson (2007) as previously cited, not rechecked.",
         "tests": "tests/test-linear-b-case.js; 16 mutation checks, each failing on its own guard; tests/test-process-exercises.js unchanged and passing; full npm test.",
         "limits": "No Linear B specialist is available. Transliterations were checked against Chadwick 1958 and Documents 1956; ma-te 'mother' and the pantes reading each rest on one of them. Documents in Mycenaean Greek is cited by chapter only because the scanned copy's pagination is unreliable.",
         "record": "docs/LINEAR_B_CASE.md"
       },
       "egyptian_case_2026_11_03": {
         "scope": "Egyptian case added (#egyptian) along the evidence chain: script not cipher; Rosetta Stone as source (two languages and three scripts retained); Young's Ptolemy cartouche; his foreign-names-only hypothesis and Champollion's 1821 symbolic view; the mixed key (sound signs, sound-and-meaning signs, determinatives, phonetic complements; no vowels); reading into the faces; Champollion's 1,419-to-486 count and the Abu Simbel Ramesses cartouche as independent checks. Exercises: test the three historical hypotheses with a kept record; read pr 'go out' for direction and sign roles.",
-        "sources": "Parkinson, Cracking Codes (University of California Press, 1999), pp. 15, 31, 33-35, 57-59; Collier and Manley, How to Read Egyptian Hieroglyphs (University of California Press, 1998), sections 2, 5-7, 11-13; both read from the user's copies, printed pages matched. Books are cited, not linked.",
+        "sources": "Parkinson, Cracking Codes (University of California Press, 1999); Collier and Manley, How to Read Egyptian Hieroglyphs (University of California Press, 1998); both read from the user's copies. Books are cited, not linked.",
         "tests": "tests/test-egyptian-case.js, written from the sources before the case: 35 named tests, 17 required verdict and mismatch paths; 12 mechanism mutations each failed.",
-        "limits": "The reading exercise uses one word from Collier and Manley set in Unicode, not a facsimile; the Abydos king list (British Museum EA 117) is linked, not reproduced. No Egyptologist is available: sign values were checked in Parkinson (pp. 49, 71) and sign numbers against Unicode names; 'go out' and the legs determinative rest on Collier and Manley alone.",
+        "limits": "The reading exercise uses one word from Collier and Manley set in Unicode, not a facsimile; the Abydos king list (British Museum EA 117) is linked, not reproduced. No Egyptologist is available: sign values were checked in Parkinson and sign numbers against Unicode names; 'go out' and the legs determinative rest on Collier and Manley alone.",
         "record": "docs/EGYPTIAN_CASE.md"
       },
       "maya_case_2026_11_03": {
         "scope": "Maya case added (#maya) along the evidence chain: script for living Maya languages, not a code; Landa's account (c. 1566, later copy found by Brasseur); his informants' signs answering spoken letter names; the alphabet hypothesis and Thompson's attacks; Knorozov's 1952 syllabic key and synharmony; k'u-tz(u) 'turkey' checked by picture and living word; the later short/long-vowel refinement kept distinct; Proskouriakoff's birth-to-accession date sets as a check needing no phonetic reading. Exercises: alphabet versus syllables with a kept record; two spellings read under the 1952 and later rules; a date pattern on invented figures.",
-        "sources": "Michael D. Coe, Breaking the Maya Code, 3rd edition (Thames & Hudson, 2012), chs. 4, 6, 7, 10 and Appendix B, read from the user's copy and cited by chapter because the copy does not reproduce printed pagination; the book is cited, not linked.",
+        "sources": "Michael D. Coe, Breaking the Maya Code, 3rd edition (Thames & Hudson, 2012), read from the user's copy; the book is cited, not linked.",
         "tests": "tests/test-maya-case.js, written from the source before the case: 29 named tests, 14 required verdict and mismatch paths; 12 mechanism mutations each failed.",
         "limits": "No Maya epigrapher is available: readings were checked against Kettunen and Helmke, Introduction to Maya Hieroglyphs (Wayeb, 2025); Landa's letter-name explanation and the birth glyph rest on Coe alone. The date table is invented and labelled so; the 80-year lifetime is the museum's assumption. No glyph images are shown.",
         "record": "docs/MAYA_CASE.md"
@@ -6613,7 +6613,7 @@
       },
       "verification_status_2026_11_03": {
         "scope": "Each script case's source note now states its verification status: what a second published source confirms, what rests on one source, and that no specialist has reviewed it. The Egyptian case links the Abydos king list (British Museum EA 117) on the Museum's collection site. The sign row uses a self-hosted three-glyph subset of Noto Sans Egyptian Hieroglyphs (SIL OFL 1.1).",
-        "sources": "Second sources: Parkinson pp. 49 and 71 and Unicode character names (Egyptian); Kettunen and Helmke, Introduction to Maya Hieroglyphs, 20th edition (Wayeb, 2025), publisher-hosted PDF (Maya); Chadwick 1958 and Documents 1956 cross-checked (Linear B). The Thesaurus Linguae Aegyptiae page was behind a bot check and was not used.",
+        "sources": "Second sources: Parkinson's sign table and House of Life discussion and Unicode character names (Egyptian); Kettunen and Helmke, Introduction to Maya Hieroglyphs, 20th edition (Wayeb, 2025), publisher-hosted PDF (Maya); Chadwick 1958 and Documents 1956 cross-checked (Linear B). The Thesaurus Linguae Aegyptiae page was behind a bot check and was not used.",
         "tests": "tests/test-case-verification.js failed before the change; eight planted defects (status wording, a claimed review, an unlinked second source, the British Museum link, a sign the font lacks, the sign row skipping the subset, the font missing from the offline cache, a case record still promising review) each failed it.",
         "limits": "No specialist review is available for any of the three cases."
       }
@@ -6780,15 +6780,15 @@
     {
       "path": "lab/purple-diagnosis.html",
       "title": "Diagnosing a Machine from Evidence — The Cipher Museum",
-      "words": 780,
-      "sha256": "4d756fa346339f9c9cdfb6b10abcb18ae671828305e4a7bb254a8935928100d6",
-      "status": "3 November 2026: new bounded synthetic worksheet (review section 5); method checked against Stamp and Low §2.3.3 and team history against Rowlett and Mundy; source limits in docs/PURPLE_DIAGNOSIS.md",
+      "words": 760,
+      "sha256": "a775a5e88931747c444cb9f449012ba00aab9c5bd146f93952a6e5a30abc7739",
+      "status": "3 November 2026: new bounded synthetic worksheet (review section 5); method checked against Stamp and Low and team history against Rowlett and Mundy; source limits in docs/PURPLE_DIAGNOSIS.md",
       "sources": [
-        "Stamp and Low, Applied Cryptanalysis (Wiley, 2007), §2.3.3, printed pp. 45–48",
-        "Rowlett, The Story of Magic (Aegean Park Press, 1998), pp. 151–154",
-        "Mundy, Code Girls (Hachette, 2017), pp. 89–94"
+        "Stamp and Low, Applied Cryptanalysis (Wiley, 2007)",
+        "Rowlett, The Story of Magic (Aegean Park Press, 1998)",
+        "Mundy, Code Girls (Hachette, 2017)"
       ],
-      "notes": "Synthetic messages and permutations, not the Purple machine. Books read from the user's copies and cited by title and page, not linked. No date is asserted for Grotjan's discovery because Rowlett's memoir and the Purple exhibit differ.",
+      "notes": "Synthetic messages and permutations, not the Purple machine. Books read from the user's copies and cited by title and page, not linked. No date is asserted for Grotjan's discovery because Rowlett's memoir and the Purple exhibit differ.\n3 November 2026: at the owner's request, the books behind this work are cited by title, author, publisher and year only; chapter, section and page references were removed from the page, its script comments, records and README entry. Guarded by tests/test-title-citations.js. Research-paper citations are unchanged.",
       "browser_smoke": "See docs/PURPLE_DIAGNOSIS.md.",
       "purple_diagnosis_2026_11_03": {
         "date": "2026-11-03",
@@ -6799,8 +6799,8 @@
     {
       "path": "lab/traffic-analysis.html",
       "title": "Reading the Radio Log — The Cipher Museum",
-      "words": 1727,
-      "sha256": "d8d661359535006e99a9e8b4b06a23c2295a86ff120a5e8836530b9f586de090",
+      "words": 1684,
+      "sha256": "dee626ddfadbe44c587f14b28ef83dabd685beec251c8193c389d7a27800206b",
       "status": "2 November 2026: new bounded exercise; invented log, bearings, chatter and key; historical statements checked against the cited NSA history pages; source limits recorded in docs/TRAFFIC_ANALYSIS_EXERCISE.md",
       "sources": [
         "https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TRAFFIC_ANALYSIS.PDF",
@@ -6809,7 +6809,7 @@
         "https://cryptocellar.org/ActionContents.html",
         "https://systemslibrarian.github.io/crypto-lab-blind-relay/"
       ],
-      "notes": "Fictional teaching reconstruction, not historical data. NSA history read in full (GovInfo copy). Diffie and Landau checked against the open-access text of the MIT Press edition (ISBN 9780262256018, Internet Archive copy): quotation from ch. 4, p. 102; law-enforcement form ch. 5, p. 133. Thirsk chapter cited, not read.",
+      "notes": "Fictional teaching reconstruction, not historical data. NSA history read in full (GovInfo copy). Diffie and Landau checked against the open-access text of the MIT Press edition (ISBN 9780262256018, Internet Archive copy), for the quotation and the law-enforcement form. Thirsk's essay cited, not read.\n3 November 2026: at the owner's request, the books behind this work are cited by title, author, publisher and year only; chapter, section and page references were removed from the page, its script comments, records and README entry. Guarded by tests/test-title-citations.js. Research-paper citations are unchanged.",
       "browser_smoke": "Local Chromium at 390 and 1280 px: no page errors or document overflow; keyboard-driven flow through steps 2-5; phantom-move line present with the wrong match and absent after correction. Not an automated WCAG audit and not historical verification.",
       "traffic_analysis_exercise_2026_11_02": {
         "date": "2026-11-02",
@@ -6821,15 +6821,15 @@
     {
       "path": "lab/working-is-not-secure.html",
       "title": "Working Is Not Secure — The Cipher Museum",
-      "words": 706,
-      "sha256": "5920f1c42f28f4d70f68ae1de1deb12d58fdffb9253ab46c2cc25ed8990aa0d6",
+      "words": 685,
+      "sha256": "8ec0eb41298a41220ca4773770a6746258a113341f174b346f2840430d149e77",
       "status": "3 November 2026: new guided route (review section 6); claims checked against Flannery, Bauer and Piper and Murphy; record in docs/WORKING_NOT_SECURE.md",
       "sources": [
-        "Flannery, In Code (2000), chapter 'After-math'",
-        "Bauer, Decrypted Secrets, 4th edition (Springer, 2007), section 11.2, printed pp. 220-224",
-        "Piper and Murphy, Cryptography: A Very Short Introduction (Oxford University Press, 2002), chapter 6"
+        "Flannery, In Code (Profile Books, 2000)",
+        "Bauer, Decrypted Secrets, 4th edition (Springer, 2007)",
+        "Piper and Murphy, Cryptography: A Very Short Introduction (Oxford University Press, 2002)"
       ],
-      "notes": "Original message, key and tests. The page does not reproduce the Cayley-Purser attack and uses no old key-size guidance. Books read from the user's copies and cited by title and chapter or page, not linked.",
+      "notes": "Original message, key and tests. The page does not reproduce the Cayley-Purser attack and uses no old key-size guidance. Books read from the user's copies and cited by title and chapter or page, not linked.\n3 November 2026: at the owner's request, the books behind this work are cited by title, author, publisher and year only; chapter, section and page references were removed from the page, its script comments, records and README entry. Guarded by tests/test-title-citations.js. Research-paper citations are unchanged.",
       "working_not_secure_route_2026_11_03": {
         "date": "2026-11-03",
         "record": "docs/WORKING_NOT_SECURE.md",

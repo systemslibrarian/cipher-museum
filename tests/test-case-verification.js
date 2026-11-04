@@ -18,7 +18,7 @@ const note = id => doc.querySelector('#' + id + ' .research-note').textContent.r
 // Each case says what was checked, against what, and that no specialist reviewed it.
 const STATUS = {
   'linear-b': [/Chadwick and in Documents in Mycenaean Greek/, /rest on one/, /Not reviewed by a Linear B specialist/],
-  egyptian: [/Parkinson p\. 49/, /Parkinson p\. 71/, /Unicode/, /rest on Collier and Manley alone/, /Not reviewed by an Egyptologist/],
+  egyptian: [/Parkinson’s sign table/, /House of Life/, /Unicode/, /rest on Collier and Manley alone/, /Not reviewed by an Egyptologist/],
   maya: [/Harri Kettunen and Christophe Helmke, Introduction to Maya Hieroglyphs/, /rest on Coe alone/, /Not reviewed by a Maya epigrapher/]
 };
 for (const [id, patterns] of Object.entries(STATUS))

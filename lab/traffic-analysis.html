@@ -28,7 +28,7 @@
 <header class="page-hero"><p class="hero-sub">A traffic-analysis exercise</p><h1>Reading the Radio Log</h1><p class="hero-intro">Two days of invented wireless intercepts. You will not decrypt a single message. Who worked whom, which new callsign was which old station, and what can you honestly claim?</p></header>
 <main id="main-content" class="research-main" tabindex="-1">
 <p class="ta-fiction"><strong>This log is fictional.</strong> Every callsign, frequency, time, bearing and fragment on this page is invented for teaching. It reconstructs a method, not any real network, army or day.</p>
-<p>The method is traffic analysis: the study of the externals of communications—callsigns, frequencies, schedules, routing, volume and where a transmitter is—while message content is left to cryptanalysis. The National Security Agency’s history of the subject describes those elements and their wartime use; the page references below are to that history. Predict, then check: each step records what you chose, so that later evidence can show what your own choices imply. Everything runs in your browser.</p>
+<p>The method is traffic analysis: the study of the externals of communications—callsigns, frequencies, schedules, routing, volume and where a transmitter is—while message content is left to cryptanalysis. The National Security Agency’s history of the subject describes those elements and their wartime use, and the notes below cite it as the NSA history. Predict, then check: each step records what you chose, so that later evidence can show what your own choices imply. Everything runs in your browser.</p>
 <nav aria-label="Exercise steps"><p><a href="#log">1. Read the log</a> · <a href="#connect">2. Who worked whom?</a> · <a href="#match">3. New callsigns</a> · <a href="#notebook">4. Observed or inferred?</a> · <a href="#stage-two">5. Second-stage evidence</a> · <a href="#debrief">6. Debrief</a> · <a href="#sources">Sources</a></p></nav>
 <noscript><p>The method notes, history and sources remain readable without JavaScript. Enable JavaScript to see the log and run the exercise.</p></noscript>
 
@@ -52,7 +52,7 @@
 <figure class="ta-figure"><div id="ta-network"></div><figcaption>Diagram positions are arbitrary; they are not locations. After comparison: solid lines are in the log, red dashed lines have no supporting row, faint dotted lines are links you missed. A partly read callsign gets its own node.</figcaption></figure>
 <div id="ta-pairs-result" class="evidence-output" role="status" aria-live="polite">Choose the pairs you saw working each other, then compare with the log.</div>
 <h3>Net control, and the headquarters question</h3>
-<p>A military net was typically run by a net control station working its outstations, and the structure of a net could mirror the organization it served (NSA history, p. 7). Choose the callsign that looks like net control. It is recorded as hypothesis H1, kept apart from what you observed.</p>
+<p>A military net was typically run by a net control station working its outstations, and the structure of a net could mirror the organization it served (NSA history). Choose the callsign that looks like net control. It is recorded as hypothesis H1, kept apart from what you observed.</p>
 <label for="ta-netcontrol">Net control candidate on Day 1</label><select id="ta-netcontrol"><option value="">Choose…</option></select>
 <div class="research-actions"><button id="ta-hypothesis-record" type="button">Record as hypothesis H1</button></div>
 <div id="ta-hypothesis" class="evidence-output" role="status" aria-live="polite">No hypothesis recorded yet.</div>
@@ -60,7 +60,7 @@
 
 <section class="evidence-exercise" id="match" aria-labelledby="match-title">
 <h2 id="match-title">3. Day 2: the callsigns changed</h2>
-<p>Changing callsigns was meant to break exactly the continuity you need. Analysts often bridged a change through whatever did not change at the same time: frequencies, contact schedules, an operator’s sending style, the pattern of who worked whom (NSA history, pp. 4–6). Match each Day 2 callsign to a Day 1 callsign, or leave it unresolved, then read what your matches imply.</p>
+<p>Changing callsigns was meant to break exactly the continuity you need. Analysts often bridged a change through whatever did not change at the same time: frequencies, contact schedules, an operator’s sending style, the pattern of who worked whom (NSA history). Match each Day 2 callsign to a Day 1 callsign, or leave it unresolved, then read what your matches imply.</p>
 <div id="ta-matches" class="ta-matches"></div>
 <div class="research-actions"><button id="ta-match-record" type="button">Record matches</button><button id="ta-match-reset" type="button">Reset matches</button></div>
 <p id="ta-match-status" class="research-status" role="status" aria-live="polite">Choose a Day 1 callsign, or leave unresolved, for each Day 2 callsign.</p>
@@ -78,7 +78,7 @@
 
 <section class="evidence-exercise" id="stage-two" aria-labelledby="stage-two-title">
 <h2 id="stage-two-title">5. Second-stage evidence</h2>
-<p>Two further sources arrive. Direction finding measures the bearing of a transmitter from a receiving post; bearings from two posts can cross to give an approximate fix (NSA history, p. 6). Operators’ chatter was generally sent unenciphered, and careless chatter could leak callsigns, schedules or even unit designators (p. 6). Record your Day 2 matches first, so the new evidence tests your own choices.</p>
+<p>Two further sources arrive. Direction finding measures the bearing of a transmitter from a receiving post; bearings from two posts can cross to give an approximate fix (NSA history). Operators’ chatter was generally sent unenciphered, and careless chatter could leak callsigns, schedules or even unit designators. Record your Day 2 matches first, so the new evidence tests your own choices.</p>
 <div class="research-actions"><button id="ta-reveal" type="button">Reveal second-stage evidence</button></div>
 <p id="ta-reveal-status" class="research-status" role="status" aria-live="polite"></p>
 <div id="ta-stage2" hidden>
@@ -106,19 +106,19 @@
 
 <section class="evidence-exercise" id="history" aria-labelledby="history-title">
 <h2 id="history-title">After the exercise: the history behind it</h2>
-<p><strong>Callsigns are not units.</strong> The NSA history recounts how, on the day of Jutland in May 1916, an Admiralty operations director asked what a callsign located in harbour meant and was told it was the German fleet commander’s. The commander used a different callsign at sea; that one stayed at fleet headquarters. The British commander-in-chief was signalled that direction finding placed the German flagship in harbour (pp. 14–15).</p>
-<p><strong>Quiet on the air is not quiet on the ground.</strong> In another First World War example, British signals suggested that Australian and Canadian units were still in Flanders while those units moved under signals silence to Amiens (p. 13). An absence of traffic says something about a radio, not necessarily about a unit.</p>
-<p><strong>Volume is not intention.</strong> Volume was one of the externals analysts studied (p. 3), and in general more traffic allowed more to be inferred (p. 6). But a count of groups measures activity on the air. In this log the apparent Day 2 rise is mostly longer listening. A real rise could still be routine reports, repeats of garbled messages, an exercise, or dummy traffic sent to mislead (p. 8).</p>
-<p><strong>Analysts were not working alone.</strong> Traffic analysis informed cryptanalysts about who was talking to whom, and its products were combined with decrypts and other sources (pp. 4, 8). James Thirsk’s chapter in <em>The Bletchley Park Codebreakers</em> is a participant’s account of this work as a wartime “log-reader”.</p>
+<p><strong>Callsigns are not units.</strong> The NSA history recounts how, on the day of Jutland in May 1916, an Admiralty operations director asked what a callsign located in harbour meant and was told it was the German fleet commander’s. The commander used a different callsign at sea; that one stayed at fleet headquarters. The British commander-in-chief was signalled that direction finding placed the German flagship in harbour.</p>
+<p><strong>Quiet on the air is not quiet on the ground.</strong> In another First World War example, British signals suggested that Australian and Canadian units were still in Flanders while those units moved under signals silence to Amiens. An absence of traffic says something about a radio, not necessarily about a unit.</p>
+<p><strong>Volume is not intention.</strong> Volume was one of the externals analysts studied, and in general more traffic allowed more to be inferred (NSA history). But a count of groups measures activity on the air. In this log the apparent Day 2 rise is mostly longer listening. A real rise could still be routine reports, repeats of garbled messages, an exercise, or dummy traffic sent to mislead.</p>
+<p><strong>Analysts were not working alone.</strong> Traffic analysis informed cryptanalysts about who was talking to whom, and its products were combined with decrypts and other sources (NSA history). James Thirsk’s chapter in <em>The Bletchley Park Codebreakers</em> is a participant’s account of this work as a wartime “log-reader”.</p>
 </section>
 
 <section class="evidence-exercise" id="limits" aria-labelledby="limits-title">
 <h2 id="limits-title">How this differs from real traffic analysis</h2>
 <ul class="evidence-steps">
 <li><strong>Scale.</strong> Real logs ran to thousands of entries across many nets. This one has 34 rows.</li>
-<li><strong>Callsign systems.</strong> Here callsigns change once. Real systems changed periodically to a prearranged plan, which analysts sometimes recovered and could then predict (p. 4).</li>
+<li><strong>Callsign systems.</strong> Here callsigns change once. Real systems changed periodically to a prearranged plan, which analysts sometimes recovered and could then predict (NSA history).</li>
 <li><strong>Direction finding.</strong> The ±2° readings and fix circles are a rough model. Real bearings could be much worse, and a fix is an area, not a point.</li>
-<li><strong>Deception.</strong> Real targets changed procedures, reduced time on the air and sent dummy traffic (p. 8). This log contains no deliberate deception.</li>
+<li><strong>Deception.</strong> Real targets changed procedures, reduced time on the air and sent dummy traffic (NSA history). This log contains no deliberate deception.</li>
 <li><strong>No answer key.</strong> Real analysts revised hypotheses as evidence accumulated and seldom learned for certain whether they were right.</li>
 </ul>
 </section>
@@ -133,9 +133,9 @@
 <section class="evidence-exercise" id="sources" aria-labelledby="sources-title">
 <h2 id="sources-title">Sources</h2>
 <ul class="evidence-steps">
-<li class="ta-source">Donald A. Borrmann, William T. Kvetkas, Charles V. Brown, Michael J. Flatley and Robert Hunt, <em>The History of Traffic Analysis: World War I – Vietnam</em> (Center for Cryptologic History, National Security Agency, 2013): <a href="https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TRAFFIC_ANALYSIS.PDF">NSA PDF</a>; <a href="https://www.govinfo.gov/app/details/GOVPUB-D-PURL-gpo91580">GovInfo copy</a>. Used for the definition and elements of traffic analysis (pp. 3–6), net structure (p. 7), deception and dummy traffic (pp. 8–9), and the First World War examples (pp. 13–15). Page numbers are the brochure’s printed numbers.</li>
-<li class="ta-source">Whitfield Diffie and Susan Landau, <em>Privacy on the Line: The Politics of Wiretapping and Encryption</em>, updated and expanded edition (MIT Press, 2007), <a href="https://doi.org/10.7551/mitpress/5572.001.0001">open-access edition</a>. They call traffic analysis, not cryptanalysis, “the heart of a communications intelligence organization” (ch. 4, p. 102), and find a narrower form of it in law-enforcement records of the numbers a line calls (ch. 5, p. 133).</li>
-<li class="ta-source">James Thirsk, “Traffic analysis: a log-reader’s tale”, chapter 15 in Ralph Erskine and Michael Smith (eds), <em>The Bletchley Park Codebreakers</em> (Biteback, 2011). It first appeared as chapter 14 of <em>Action This Day</em> (2001): <a href="https://cryptocellar.org/ActionContents.html">contents of the 2001 edition</a>. A participant’s account; this exercise does not reproduce its examples.</li>
+<li class="ta-source">Donald A. Borrmann, William T. Kvetkas, Charles V. Brown, Michael J. Flatley and Robert Hunt, <em>The History of Traffic Analysis: World War I – Vietnam</em> (Center for Cryptologic History, National Security Agency, 2013): <a href="https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TRAFFIC_ANALYSIS.PDF">NSA PDF</a>; <a href="https://www.govinfo.gov/app/details/GOVPUB-D-PURL-gpo91580">GovInfo copy</a>. Used for the definition and elements of traffic analysis, net structure, deception and dummy traffic, and the First World War examples.</li>
+<li class="ta-source">Whitfield Diffie and Susan Landau, <em>Privacy on the Line: The Politics of Wiretapping and Encryption</em>, updated and expanded edition (MIT Press, 2007), <a href="https://doi.org/10.7551/mitpress/5572.001.0001">open-access edition</a>. They call traffic analysis, not cryptanalysis, “the heart of a communications intelligence organization”, and find a narrower form of it in law-enforcement records of the numbers a line calls.</li>
+<li class="ta-source">James Thirsk, “Traffic analysis: a log-reader’s tale”, in Ralph Erskine and Michael Smith (eds), <em>The Bletchley Park Codebreakers</em> (Biteback, 2011). It first appeared in <em>Action This Day</em> (2001): <a href="https://cryptocellar.org/ActionContents.html">contents of the 2001 edition</a>. A participant’s account; this exercise does not reproduce its examples.</li>
 </ul>
 <p>The log, bearings, chatter and key are original to this page. No private copy of any source is linked.</p>
 </section>

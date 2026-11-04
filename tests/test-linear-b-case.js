@@ -62,7 +62,8 @@ assert.match(text, /pa-te can be patēr/, 'At least one reading that stays ambig
 assert.match(text, /triplets/);
 assert.match(text, /pairs pa-te with ma-te/, 'Show context settling one ambiguous reading, beside readings that stay open');
 assert.match(text, /beyond mathematical analysis/, "Chadwick's own limit on the odds argument must stay beside it");
-assert.match(text, /The Decipherment of Linear B \(Cambridge University Press, 1958; pages from the Vintage paperback printing\), pp\. 35/, 'Cite Chadwick by printed page, naming the printing those pages come from');
+assert.match(text, /John Chadwick, The Decipherment of Linear B \(Cambridge University Press, 1958\)/, 'Cite Chadwick by title, publisher and year');
+assert.doesNotMatch(text, /\bpp?\. \d|\bch\. [IVX\d]|printed pages|Vintage paperback/, "By the owner's preference, books are cited by title, not by chapter or page");
 assert.doesNotMatch(text, /\d+(?:\.\d+)?\s*%|\b1 in [\d,]+|odds of [\d,]+|probability of \d/i, 'No numerical confidence score for the decipherment');
 assert.doesNotMatch(section.innerHTML, /[\u{10000}-\u{100FF}]/u, 'The exercise uses invented labels, not Linear B signs');
 const links = [...section.querySelectorAll('a[href]')].map(a => a.getAttribute('href'));

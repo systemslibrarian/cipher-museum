@@ -169,8 +169,10 @@ for (const href of ['https://media.defense.gov/2021/Jul/13/2002761879/-1/-1/0/TR
   assert.ok(links.includes(href), 'Missing link ' + href);
 assert.ok(!links.some(h => /drive\.google|docs\.google/.test(h)), 'Public credits must not expose private Drive copies');
 for (const name of ['Borrmann', 'Diffie', 'Landau', 'Thirsk', 'log-reader']) assert.ok(visible.includes(name), 'Source not credited: ' + name);
-assert.match(visible, /chapter 15 in Ralph Erskine and Michael Smith/);
-assert.match(visible, /“the heart of a communications intelligence organization”[^.]*ch\. 4, p\. 102/, 'Diffie and Landau are cited from the book itself (open-access text), not from a secondary paraphrase');
+assert.match(visible, /“Traffic analysis: a log-reader’s tale”, in Ralph Erskine and Michael Smith/);
+assert.match(visible, /Whitfield Diffie and Susan Landau, Privacy on the Line[^“]*“the heart of a communications intelligence organization”/, 'Diffie and Landau are cited from the book itself (open-access text), not from a secondary paraphrase');
+// Books are cited by title only, by the owner's preference.
+assert.doesNotMatch(visible, /\bpp?\. \d|\bch\. \d|chapter \d/, 'Cite the books by title, not by chapter or page');
 assert.doesNotMatch(visible, /metadata leaks/i, 'Link to the specific correlation, not a generic warning');
 
 // 10. The history route and modern bridge point back here.

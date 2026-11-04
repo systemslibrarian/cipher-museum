@@ -4,7 +4,7 @@
   else { root.MayaCase = api; api.mount(document); }
 })(typeof window === 'object' ? window : globalThis, function () {
   'use strict';
-  // Evidence as Coe reports it (Breaking the Maya Code, 3rd edition, ch. 6): Landa said b
+  // Evidence as Coe reports it (Breaking the Maya Code, 3rd edition): Landa said b
   // aloud as "be"; over a turkey picture two signs spell k'utz, a word of three sounds.
   const EVIDENCE = {
     letterNames: { heard: ['b', 'e'] },
@@ -37,7 +37,7 @@
   }
 
   // Two CV signs spelling a CVC word. Knorozov (1952): the silent vowel echoes the first
-  // (synharmony). Later epigraphers, as Coe reports in ch. 10: an echo marks a short vowel,
+  // (synharmony). Later epigraphers, as Coe reports: an echo marks a short vowel,
   // a different vowel (disharmony) marks a long one, as in ba-k(i) for baak.
   function splitSyllable(sign) {
     const m = /^(.*?)([aeiou])$/.exec(sign);
@@ -55,7 +55,7 @@
     };
   }
 
-  // Invented figures, modelled on the pattern Coe describes in ch. 7: in each set the
+  // Invented figures, modelled on the pattern Coe describes: in each set the
   // earliest date falls 12 to 31 years before an accession date. Not Piedras Negras data.
   const LIFETIME = 80;
   const DATE_SETS = {

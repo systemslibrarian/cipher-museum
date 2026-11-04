@@ -28,13 +28,13 @@ Added 3 November 2026 at `lab/purple-diagnosis.html` ("Diagnosing a Machine from
 
 ## Sources and what was checked
 
-Books were read from the user's copies and are cited by title, publisher and printed page; none is linked. The page paraphrases throughout.
+Books were read from the user's copies and, by the owner's preference, are cited by title, publisher and year only; none is linked. The page paraphrases throughout.
 
 | Source | Used for |
 | --- | --- |
-| Mark Stamp and Richard M. Low, *Applied Cryptanalysis* (Wiley, 2007), §2.3.3, printed pp. 45–48 | Depth, offset depth, and matched plaintext and ciphertext constraining each position's permutation. The section notes that its own example is simplified. Its table and example messages were **not** reused: the worksheet's messages are original. |
-| Frank B. Rowlett, *The Story of Magic* (Aegean Park Press, 1998), pp. 151–154 | Statistical tests confirming which messages shared a key; Grotjan's first instance of the relationship; Friedman coming in; Rosen's earlier stepping-switch work; Ferner and Small with Rowlett |
-| Liza Mundy, *Code Girls* (Hachette, 2017), pp. 89–94 | Grotjan joining as a junior cryptanalyst in 1939; Rowlett supervising the Purple effort |
+| Mark Stamp and Richard M. Low, *Applied Cryptanalysis* (Wiley, 2007) | Depth, offset depth, and matched plaintext and ciphertext constraining each position's permutation. The book notes that its own example is simplified. Its table and example messages were **not** reused: the worksheet's messages are original. |
+| Frank B. Rowlett, *The Story of Magic* (Aegean Park Press, 1998) | Statistical tests confirming which messages shared a key; Grotjan's first instance of the relationship; Friedman coming in; Rosen's earlier stepping-switch work; Ferner and Small with Rowlett |
+| Liza Mundy, *Code Girls* (Hachette, 2017) | Grotjan joining as a junior cryptanalyst in 1939; Rowlett supervising the Purple effort |
 
 **A discrepancy, now noted on the exhibit.** Rowlett's memoir places Grotjan's discovery shortly before Labor Day 1940. Mundy's *Code Girls*, Bauer's *Decrypted Secrets* and the INSCOM Command Historian (Michael E. Bigelow, 2023) give 20 September 1940. The Purple exhibit and the Hall of Codebreakers keep 20 September 1940 and now say that Rowlett's memoir, which the exhibit cites, recalls the day differently; `tests/test-page-audit-claims.js` guards both notes. The worksheet still asserts no date.
 
