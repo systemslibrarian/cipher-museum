@@ -220,6 +220,18 @@ Montaigne, Cicero the same century and language as Caesar, while Machiavelli is 
 centuries later than Dante and prose rather than verse — the Italian row is doing the most
 work, and it is the one with the narrowest margins.
 
+**Source review, 4 November 2026:** the first excerpt in each author-disjoint file
+contains edition front matter or introductory prose. The French excerpt includes
+publisher material; the Italian excerpt is an editor discussing a 1912 edition and
+modernized spellings; the first Latin excerpt is third-person introductory prose
+whose authorship and period the fixture does not establish. The published **9/9**
+still describes language ranking of those nine committed strings, but it must not be
+read as nine verified passages of historical author prose. The separate
+[historical-profile recovery experiment](../profile-recovery-v1/README.md) excludes
+all three first excerpts before search, records that selection, and uses passages
+2–3 from each source. Excluding the Italian preface does not undo the edition's
+orthographic changes. The earlier fixtures and recorded outcomes remain available.
+
 **Unresolved coverage:** German, Spanish, English and every other language in the historical
 record have no profile. A text in one of them can only be abstained on or mis-assigned. This
 is a gap in the *profile set*, not in the holdout: every language that does have a profile

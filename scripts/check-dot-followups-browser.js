@@ -232,6 +232,74 @@ async function charles(page, viewport) {
   await contains(page, '#charles-record', /contradicted/i);
 }
 
+async function book(page, viewport) {
+  const questions = page.locator('#book-questions details');
+  assert.equal(await questions.count(), 3);
+  for (const question of await questions.all()) {
+    const summary = question.locator('summary');
+    await summary.focus();
+    await page.keyboard.press('Enter');
+    assert.equal(await question.evaluate(el => el.open), true);
+  }
+  await contains(page, '#book-questions', /justified conclusion/);
+  await contains(page, '#book-questions', /Cipher Challenge and an interactive CD-ROM/);
+  await contains(page, '#book-questions', /nonfiction/);
+  await contains(page, '#book-questions', /separate fictional case/);
+  await snapshot(page, viewport, '#book-questions', 'book-questions');
+  await snapshot(page, viewport, '#main-content > .book-pitch', 'book-introduction');
+  await accessibility(page, viewport, 'book-questions-expanded', '#book-questions');
+}
+
+async function recovery(page, viewport) {
+  const report = JSON.parse(fs.readFileSync(path.join(ROOT,
+    'data/research/profile-recovery-v1/evaluation.json'), 'utf8'));
+  assert.equal(report.runs.length, 240);
+  assert.equal(report.runs.filter(run => run.exact).length, 0);
+  for (const group of report.summary.groups.filter(g => g.group === 'overall')) {
+    const cells = await page.locator(`[data-profile-solver="${group.solver}"] td`).allInnerTexts();
+    assert.deepEqual(cells, ['baseline', 'matched', 'mismatched']
+      .map(condition => (100 * group[condition].plaintextError).toFixed(2) + '%'));
+  }
+  await contains(page, '#profile-recovery', /0 of 240/);
+  await contains(page, '#profile-recovery', /matched annealing was worse/);
+  await contains(page, '#profile-recovery', /cannot isolate an advantage from historical spelling/);
+  for (const href of await page.locator('#profile-recovery a').evaluateAll(links => links.map(a => a.href))) {
+    assert.equal((await page.request.get(href)).status(), 200);
+  }
+  if (viewport === 'narrow') {
+    const tableRegion = page.getByRole('region', { name: 'Historical-profile recovery results' });
+    const scroll = await tableRegion.evaluate(region => {
+      const lastHeader = region.querySelector('thead th:last-child');
+      const style = getComputedStyle(region);
+      region.scrollLeft = region.scrollWidth;
+      const bounds = region.getBoundingClientRect();
+      const headerBounds = lastHeader.getBoundingClientRect();
+      return {
+        overflowX: style.overflowX,
+        tabIndex: region.tabIndex,
+        overflow: region.scrollWidth - region.clientWidth,
+        scrollLeft: region.scrollLeft,
+        header: lastHeader.textContent.trim(),
+        headerLeft: headerBounds.left,
+        headerRight: headerBounds.right,
+        visibleLeft: bounds.left + region.clientLeft,
+        visibleRight: bounds.left + region.clientLeft + region.clientWidth
+      };
+    });
+    assert.match(scroll.overflowX, /^(auto|scroll)$/);
+    assert.ok(scroll.tabIndex >= 0, 'results scroll region must be keyboard focusable');
+    assert.equal(scroll.header, 'Other two languages');
+    if (scroll.overflow > 1) {
+      assert.ok(scroll.scrollLeft > 0, 'overflowing results table must scroll horizontally');
+      assert.ok(Math.abs(scroll.scrollLeft - scroll.overflow) <= 1, 'results table must reach its right edge');
+    }
+    assert.ok(scroll.headerLeft >= scroll.visibleLeft - 1
+      && scroll.headerRight <= scroll.visibleRight + 1, 'final column header must be fully visible after scrolling');
+    await tableRegion.evaluate(region => { region.scrollLeft = 0; });
+  }
+  await snapshot(page, viewport, '#profile-recovery', 'profile-recovery');
+}
+
 (async () => {
   let browser;
   try {
@@ -245,6 +313,21 @@ async function charles(page, viewport) {
       const errors = [];
       page.on('pageerror', err => errors.push(err.message));
       for (const [name, url, scope, exercise] of [
+        ['book', '/the-book.html', '#main-content', book],
+        ['profile-recovery', '/lab/evidence-workbench.html', '#profile-recovery', recovery],
+        ['entropy', '/hall-of-foundations/entropy.html', '#pooled-entropy', async (p, v) => {
+          await contains(p, '#pooled-entropy', /distinguish four equally likely keys/);
+          await contains(p, '#pooled-entropy', /exactly 2 bits higher/);
+          await snapshot(p, v, '#pooled-entropy', 'entropy');
+        }],
+        ['attack-evidence', '/lab/modern-attack-evidence.html', '#main-content', async (p, v) => {
+          assert.ok(await p.getByRole('heading', { name: /Five/ }).count());
+          await snapshot(p, v, 'main', 'attack-evidence');
+        }],
+        ['homepage', '/index.html', '#main-content', async (p, v) => {
+          await contains(p, 'main', /evidence/i);
+          await snapshot(p, v, 'main', 'homepage');
+        }],
         ['alignment', '/lab/evidence-workbench.html', '#reading-alignment', alignment],
         ['reading-evidence', '/lab/reading-the-evidence.html', '#main-content', async (p, v) => { await structure(p, v); await concealment(p, v); }],
         ['charles-v', '/lab/decipherment-cases.html', '#charles-v', charles],

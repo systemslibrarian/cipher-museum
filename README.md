@@ -34,7 +34,7 @@ citation and rights information remains in [`public/corpus/README.md`](public/co
 
 *Stories of Hidden Messages and the People Behind Them* · Paul “The Cipher Librarian” Clark
 
-Twenty true investigations into hidden messages, contested evidence, and the consequences of knowing—with an interactive museum where you can follow the clues yourself. The opening follows the identification and verification of Mary Stuart’s recovered letters, published in 2023. Chapter links and QR codes offer specific evidence questions to explore in the free museum; the historical narrative stands on its own. Read the new prologue excerpt and reading-group questions on the companion page. Publication details are forthcoming.
+Twenty true investigations into hidden messages and what recovered words establish. Mary, Queen of Scots’ correspondence frames stories of intercepted dispatches, wartime intelligence and modern decipherments. The book follows the evidence, the need for corroboration and the decisions a readable message can make possible. The opening follows the identification and verification of Mary’s recovered letters, published in 2023. Chapter links and QR codes lead to optional activities in the free museum: compare readings, test an assumption or inspect a published solution. The historical narrative stands on its own. Read the prologue excerpt and reading-group questions on the companion page. Publication details are forthcoming.
 
 **[Read the opening →](https://ciphermuseum.com/the-book.html#sample)** · **[Try The Curator’s Sealed Letter →](https://ciphermuseum.com/sealed-letter.html)**
 
@@ -43,6 +43,12 @@ The companion mystery can be started directly online or opened with the book's f
 ---
 
 ## 📰 Recent Changes
+
+### Book positioning and historical-profile recovery — 4 November 2026
+
+- Updated the [book preview](https://ciphermuseum.com/the-book.html) and homepage description to explain the sustained focus on evidence, uncertainty and decisions, while fairly acknowledging Kahn and Singh.
+- Corrected the entropy example’s distinction between four keys and two bits, and the attack-evidence heading’s count of five cards.
+- Ran a separate [240-condition historical-profile recovery comparison](data/research/profile-recovery-v1/README.md). Language-matched scoring reduced average edit error against the modern-English baseline, but every condition failed to recover the complete message; Latin annealing became worse. Six passages from three works and fixed budgets limit the conclusion. The [Evidence Workbench](https://ciphermuseum.com/lab/evidence-workbench.html#profile-recovery) gives the measured results, and the earlier v1/v2 evaluations remain available.
 
 - **4 November — Dot research follow-ups.** Added manual passage comparison, controlled word-replacement and concealed-message exercises, the Portuguese 1649 documentary chain, a staged Charles V case, and an IKA historical exhibit. Catalogue and frozen-audit summary checks prevent the documented omissions and stale descriptions from returning. See [scope, sources and verification](docs/DOT_FOLLOWUPS_2026-11-04.md).
 
