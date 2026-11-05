@@ -9,11 +9,20 @@ const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const { JSDOM } = require('jsdom');
 const root = path.resolve(__dirname, '..');
-const out = path.join(root, 'audit');
+// The pack is generated output and is not committed: audit/pack/ is gitignored
+// and the published artifact is built by .github/workflows/audit-pack.yml.
+// audit/ itself keeps only hand-written material and a pointer README.
+const out = path.join(root, 'audit', 'pack');
 const argv = process.argv.slice(2);
 const check = argv.includes('--check');
 const refArg = argv.indexOf('--ref');
-const oldManifest = check ? JSON.parse(fs.readFileSync(path.join(out, 'manifest.json'), 'utf8')) : null;
+const manifestFile = path.join(out, 'manifest.json');
+if (check && !fs.existsSync(manifestFile)) {
+  console.error('No generated pack at ' + path.relative(root, out) + '. It is not committed; build it first:\n' +
+    '  node scripts/export-audit-document.js --ref HEAD');
+  process.exit(1);
+}
+const oldManifest = check ? JSON.parse(fs.readFileSync(manifestFile, 'utf8')) : null;
 const git = (...args) => cp.execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
 const commit = git('rev-parse', refArg >= 0 ? argv[refArg + 1] : (oldManifest?.source_commit || 'HEAD')).trim();
 const stamp = git('show', '-s', '--format=%cI', commit).trim();
@@ -335,18 +344,6 @@ const manifest = {
   page_count: records.length, inline_script_count: scriptCount, shared_script_count: scriptRecords.length,
   data_file_count: dataRecords.length, source_register_count: Object.keys(sources).length,
   preserved_body_text_nodes: textNodeCount, ebook_url_occurrences_suppressed: redactions,
-  // The programs that decide what the pack contains. Recorded so a change to
-  // either one is detectable without git history: a shallow CI checkout cannot
-  // compare against source_commit, but it can compare these hashes to the files
-  // on disk. Adding an input to the exporter without regenerating the pack left
-  // the manifest pointing at a commit where that input did not exist, and the
-  // exporter then refused to run at all.
-  generator: {
-    exporter: 'scripts/export-audit-document.js',
-    exporter_sha256: hash(fs.readFileSync(path.join(root, 'scripts/export-audit-document.js'), 'utf8')),
-    packager: 'scripts/package-audit-document.py',
-    packager_sha256: hash(fs.readFileSync(path.join(root, 'scripts/package-audit-document.py'), 'utf8'))
-  },
   limits: 'Snapshot content export, not new factual verification. Full external books/papers, binary images, CSS, dependencies and full downloadable corpus are excluded. See README.md.',
   pages: records.map(({ block, ...r }, i) => ({ ...r, part: pieces[Math.floor(i / 20)].name })),
   scripts: scriptRecords.map(({ block, ...r }) => r), data_files: dataRecords.map(({ block, ...r }) => r),

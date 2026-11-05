@@ -1,27 +1,31 @@
 #!/usr/bin/env node
 'use strict';
 
-// The frozen audit manifest owns the snapshot date and page count. Current-site
-// totals come from build-counts.js and must not silently relabel this snapshot.
+// The READMEs advertise the audit reading pack. The pack itself is generated
+// output published by .github/workflows/audit-pack.yml, so there is no
+// committed manifest to read here any more, and no frozen snapshot date to
+// quote: the release is rebuilt from main whenever an exporter input changes.
+//
+// What still needs keeping honest is the page count. It comes from the
+// committed review ledger, which is also what the exporter counts, so the
+// advertised number cannot drift from the pack that gets built.
 const fs = require('node:fs');
 const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
+const RELEASE = 'https://github.com/systemslibrarian/cipher-museum/releases/tag/audit-pack-latest';
 
 function renderAuditSummaries(root = ROOT) {
   const read = file => fs.readFileSync(path.join(root, file), 'utf8');
-  const manifest = JSON.parse(read('audit/manifest.json'));
-  if (!Number.isSafeInteger(manifest.page_count) || manifest.page_count < 1 ||
-      !Number.isFinite(Date.parse(manifest.source_commit_time))) {
-    throw new Error('The audit manifest must identify its page count and source date.');
+  const coverage = JSON.parse(read('docs/page-audit/coverage.json'));
+  const pageCount = Array.isArray(coverage.pages) ? coverage.pages.length : 0;
+  if (!Number.isSafeInteger(pageCount) || pageCount < 1) {
+    throw new Error('The review ledger must inventory at least one page.');
   }
-  const date = new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/New_York'
-  }).format(new Date(manifest.source_commit_time));
   const patterns = [
-    ['README.md', /\*\*\[Independent audit reading pack — \d+-page snapshot\]\(audit\/README\.md\)\*\* — the frozen \d{1,2} [A-Za-z]+ \d{4} export/,
-      `**[Independent audit reading pack — ${manifest.page_count}-page snapshot](audit/README.md)** — the frozen ${date} export`],
-    ['docs/README.md', /\[Complete \d+-page audit export\]\(\.\.\/audit\/README\.md\)/,
-      `[Complete ${manifest.page_count}-page audit export](../audit/README.md)`]
+    ['README.md', /\*\*\[Independent audit reading pack — \d+-page export\]\([^)]+\)\*\*/,
+      `**[Independent audit reading pack — ${pageCount}-page export](${RELEASE})**`],
+    ['docs/README.md', /\[Complete \d+-page audit export\]\([^)]+\)/,
+      `[Complete ${pageCount}-page audit export](${RELEASE})`]
   ];
   return new Map(patterns.map(([file, pattern, replacement]) => {
     const before = read(file);
@@ -39,10 +43,10 @@ if (require.main === module) {
     if (!check) fs.writeFileSync(path.join(ROOT, file), expected);
   }
   if (check && changed.length) {
-    console.error('Stale audit snapshot summaries: ' + changed.join(', ') +
-      '. Run node scripts/sync-audit-summary.js after regenerating the audit pack.');
+    console.error('Stale audit export summaries: ' + changed.join(', ') +
+      '. Run node scripts/sync-audit-summary.js after changing the review ledger.');
     process.exitCode = 1;
-  } else console.log('Audit snapshot summaries ' + (check ? 'current' : 'synchronized') + '.');
+  } else console.log('Audit export summaries ' + (check ? 'current' : 'synchronized') + '.');
 }
 
 module.exports = { renderAuditSummaries };

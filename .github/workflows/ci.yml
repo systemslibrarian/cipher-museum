@@ -58,6 +58,14 @@ jobs:
       - name: Exercise the research additions in Chromium
         run: node scripts/check-dot-followups-browser.js
 
+      # The returning-visitor cache fix, in the engine this job already has.
+      # Firefox and WebKit run the same script nightly instead
+      # (nightly-cross-engine.yml): measured on 4 November 2026, installing them
+      # added 38 s to a job already at 1 m 54 s, past the two-minute budget for
+      # every push. This Chromium run keeps the fix guarded per pull request.
+      - name: Verify the service-worker cache upgrade in Chromium
+        run: node scripts/check-cache-upgrade.js --engines=chromium
+
       - name: Keep browser report and screenshots
         if: always()
         uses: actions/upload-artifact@v7.0.2

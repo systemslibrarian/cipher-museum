@@ -10,7 +10,7 @@ The Cipher Museum is part digital exhibit, part cipher playground, and part code
 
 **[Live Museum →](https://ciphermuseum.com)**
 
-**[Independent audit reading pack — 228-page snapshot](audit/README.md)** — the frozen 4 November 2026 export includes page text, examples, source notes, supporting scripts/data, and an AI review prompt. Available as one document or smaller parts. Its source commit and limits are recorded in the pack; it does not update automatically with the live museum.
+**[Independent audit reading pack — 228-page export](https://github.com/systemslibrarian/cipher-museum/releases/tag/audit-pack-latest)** — page text, examples, source notes, supporting scripts/data and an AI review prompt, as one document or smaller parts. It is generated output, not committed to the repository: the release is rebuilt from `main` whenever an exporter input changes, and each asset carries a SHA-256 sum. The source commit and the limits of the export are recorded in its own manifest. [How it is built](audit/README.md).
 
 [![DOI](https://zenodo.org/badge/1182903273.svg)](https://doi.org/10.5281/zenodo.23298940)
 [![Cipher Corpus dataset v0.6 DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23297920.svg)](https://doi.org/10.5281/zenodo.23297920)
@@ -430,7 +430,7 @@ git lfs pull
 | `tours/`, `teaching.html`, `further-reading.html` | Guided paths, classroom activities, and reading trails |
 | `community/` | Curated examples and local contribution-draft tool |
 | `docs/` | Accuracy/research reviews, source mappings, release notes, and evaluation limits |
-| `audit/` | Frozen independent-review reading pack, parts, prompt, and manifest |
+| `audit/` | Hand-written review records, and a pointer to the generated reading-pack release |
 | `tests/`, `tests/engines/` | Site, research, content, and engine verification suites |
 | `.github/workflows/ci.yml` | Node 22 checks, corpus validation, and deployment of the validated commit |
 
@@ -511,7 +511,7 @@ node scripts/build-counts.js --check
 
 Corpus checks need the full v0.6 LFS data described above. CI also rebuilds v0.7 and v0.8 from the frozen archive, validates their contracts, and checks the published download checksums. See the [CI workflow](.github/workflows/ci.yml) for the exact sequence.
 
-After changing collection registrations, trust labels, or searchable content, run `npm run build:metadata` followed by `npm run build:js`, and inspect the generated diffs. Research changes should also preserve the [v1](data/research/v1/README.md) and [v2](data/research/v2/README.md) evaluation contracts, including their failures and replay limits. The audit reading pack is regenerated deliberately using the [export instructions](audit/README.md#snapshot-and-regeneration).
+After changing collection registrations, trust labels, or searchable content, run `npm run build:metadata` followed by `npm run build:js`, and inspect the generated diffs. Research changes should also preserve the [v1](data/research/v1/README.md) and [v2](data/research/v2/README.md) evaluation contracts, including their failures and replay limits. The audit reading pack rebuilds itself: pushing a change to an exporter input updates the [reading-pack release](https://github.com/systemslibrarian/cipher-museum/releases/tag/audit-pack-latest). To build it locally, see [the pointer README](audit/README.md).
 
 `test-demo-pages.js` is an interaction check, not a correctness proof: it loads every `ciphers/*.html` page in JSDOM with the real scripts inlined, lets `js/demo-loader.js` build the demo UI, then **clicks the actual on-page Encrypt and Decrypt buttons** and verifies the ciphertext roundtrips back to the original plaintext in the simulated DOM. This does not test pixels or real assistive technology. Hand-built pages (Caesar, Playfair, Vigenère, Zodiac) get dedicated assertions against canonical KATs (Caesar shift-3 → `WKHTXLFNEURZQIRA`, Vigenère `LEMON` → `LXFOPVEFRNHR`, Playfair `MONARCHY` decode, Zodiac Z408 reveal).
 

@@ -1,0 +1,138 @@
+name: Audit pack
+
+# The pack is generated output and is not committed. This builds it and
+# publishes it as a Release asset, so a reviewer without repository access can
+# download a complete, checksummed snapshot of the site.
+#
+# Path filters cover what the exporter actually reads: every public page, the
+# shared scripts and data it inlines, the review ledger and source register,
+# and the generators themselves. The filter list was derived from the 359
+# tracked inputs the manifest records, not guessed.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'js/**'
+      - 'data/**'
+      - 'tours/**'
+      - 'public/**'
+      - 'corpus/**'
+      - 'community/**'
+      - 'sw.js'
+      - 'manifest.webmanifest'
+      - 'docs/page-audit/**'
+      - 'scripts/export-audit-document.js'
+      - 'scripts/package-audit-document.py'
+      - 'scripts/sync-audit-summary.js'
+      - 'scripts/columnar-classroom.js'
+      - '.github/workflows/audit-pack.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: audit-pack
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-audit-pack:
+    runs-on: ubuntu-latest
+    steps:
+      # The exporter reads file contents out of a commit, so it needs history.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build the pack
+        run: |
+          node scripts/export-audit-document.js --ref HEAD
+          node scripts/export-audit-document.js --check
+          python3 scripts/package-audit-document.py
+          python3 scripts/package-audit-document.py --check
+
+      - name: Checksum every asset
+        working-directory: audit/pack
+        run: sha256sum CIPHER_MUSEUM_AUDIT_PACK.zip CIPHER_MUSEUM_AUDIT.md manifest.json > SHA256SUMS.txt
+
+      - name: Summarise
+        run: |
+          {
+            echo "### Audit pack"
+            echo
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            node -e "const m=require('./audit/pack/manifest.json');
+              console.log('| Pages | '+m.page_count+' |');
+              console.log('| Source commit | \`'+m.source_commit+'\` |');
+              console.log('| Source commit time | '+m.source_commit_time+' |');
+              console.log('| Tracked inputs | '+m.input_files.length+' |');
+              console.log('| Source register entries | '+m.source_register_count+' |');"
+            echo
+            echo '```'
+            cat audit/pack/SHA256SUMS.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Always available, including for pushes that predate any release.
+      - name: Upload as a workflow artifact
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: cipher-museum-audit-pack
+          path: |
+            audit/pack/CIPHER_MUSEUM_AUDIT_PACK.zip
+            audit/pack/CIPHER_MUSEUM_AUDIT.md
+            audit/pack/manifest.json
+            audit/pack/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 90
+
+      # A single moving tag, so the download link in audit/README.md stays stable.
+      - name: Publish to the rolling release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          PAGES=$(node -e "process.stdout.write(String(require('./audit/pack/manifest.json').page_count))")
+          COMMIT=$(node -e "process.stdout.write(require('./audit/pack/manifest.json').source_commit)")
+          STAMP=$(node -e "process.stdout.write(require('./audit/pack/manifest.json').source_commit_time)")
+          NOTES=$(mktemp)
+          {
+            echo "Generated export of the Cipher Museum, ${PAGES} pages."
+            echo
+            echo "- Source commit: \`${COMMIT}\`"
+            echo "- Source commit time: ${STAMP}"
+            echo "- Built by run [${GITHUB_RUN_ID}](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})"
+            echo
+            echo "The pack describes the source commit above, not the date of this release."
+            echo "It is a snapshot, not a live view of the website."
+            echo
+            echo '```'
+            cat audit/pack/SHA256SUMS.txt
+            echo '```'
+          } > "$NOTES"
+          if gh release view audit-pack-latest >/dev/null 2>&1; then
+            gh release edit audit-pack-latest --title "Audit pack — ${PAGES} pages" --notes-file "$NOTES"
+            gh release upload audit-pack-latest --clobber \
+              audit/pack/CIPHER_MUSEUM_AUDIT_PACK.zip \
+              audit/pack/CIPHER_MUSEUM_AUDIT.md \
+              audit/pack/manifest.json \
+              audit/pack/SHA256SUMS.txt
+          else
+            gh release create audit-pack-latest \
+              --title "Audit pack — ${PAGES} pages" --notes-file "$NOTES" \
+              audit/pack/CIPHER_MUSEUM_AUDIT_PACK.zip \
+              audit/pack/CIPHER_MUSEUM_AUDIT.md \
+              audit/pack/manifest.json \
+              audit/pack/SHA256SUMS.txt
+          fi

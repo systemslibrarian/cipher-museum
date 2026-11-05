@@ -25,3 +25,8 @@ dist/
 # Public-domain corpora fetched on demand by scripts/build-research-language-profiles.js.
 # Only the derived n-gram counts are committed; the source transcriptions are not.
 tmp/
+
+# The audit reading pack is generated output, not committed. It is built by
+# .github/workflows/audit-pack.yml and published as a GitHub Release asset.
+# Build locally with: node scripts/export-audit-document.js --ref HEAD
+audit/pack/

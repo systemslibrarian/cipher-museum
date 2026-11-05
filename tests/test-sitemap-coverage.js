@@ -23,14 +23,18 @@ const root = path.resolve(__dirname, '..');
 const ORIGIN = 'https://ciphermuseum.com/';
 
 // Pages that are indexable but intentionally kept out of the sitemap.
-// The codebreak answer key is NOT listed here: it carries its own noindex meta
-// tag, so the page excludes itself and the test reads that from the page. One
-// mechanism, not two agreeing by luck.
 const EXCLUDED = new Map([
   ['404.html', 'error page; should not be indexed or advertised'],
-  ['offline.html', 'service-worker offline fallback, not a destination'],
-  ['public/reports/benchmark-baselines.html', 'generated report, linked from the corpus page rather than crawled']
+  ['offline.html', 'service-worker offline fallback, not a destination']
 ]);
+// The codebreak answer key and the benchmark report are deliberately NOT in
+// that map. They carry <meta name="robots" content="noindex"> instead, which is
+// the tag that actually governs indexing; absence from sitemap.xml does not.
+// Listing them here as well would be two mechanisms enforcing one rule, and
+// this repository has already lost a policy exactly that way - each mechanism
+// masked the other's failure, so neither was ever tested. Deleting the noindex
+// tag from either page now fails this suite, which is the point: it puts the
+// decision back in the open instead of silently publishing the answers.
 
 const SKIP_DIR = new Set(['node_modules', 'docs', 'tests', 'scripts', 'audit', 'tmp']);
 function publicPages(dir = root, prefix = '') {

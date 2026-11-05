@@ -7697,10 +7697,10 @@
       "path": "public/reports/benchmark-baselines.html",
       "title": "Cipher Corpus Statistics and Evaluation Status",
       "words": 487,
-      "sha256": "10b14ab6de81ea6775dcde0bc77fbe34b44a0290f1338b082257df567844bd96",
+      "sha256": "6a4e131ce3e47eadb9db594297a37fa962c67cf32a8b627c939fb6c51f013104",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "All 85 generated per-cipher rows checked against v0.6 archive data, including splits and mixed difficulty distributions. Unsupported CipherBank comparisons removed; only owned generator regenerated this report. Report is not a measured solver-accuracy claim.",
+      "notes": "All 85 generated per-cipher rows checked against v0.6 archive data, including splits and mixed difficulty distributions. Unsupported CipherBank comparisons removed; only owned generator regenerated this report. Report is not a measured solver-accuracy claim. Added <meta name=\"robots\" content=\"noindex, follow\"> in scripts/generate-benchmark-report.js on 4 November 2026: this generated status report is linked from the corpus page and is not an exhibit, so it is kept out of search results rather than out of sitemap.xml alone. Head-only change; no prose, data or stated figure was altered.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
