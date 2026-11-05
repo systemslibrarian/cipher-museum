@@ -667,7 +667,7 @@
       "sha256": "bdcf0d81ad10f286706b7b782cf5afa1720169670f2087ef12a06992c61c5cdf",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed. 2 Nov 2026 (PR #31): the two Babington script tags now carry content-hash query strings (?v=...), stamped by scripts/build-min.js from the bundle bytes. A returning reader holding the previous cache-first service worker fetches the corrected teaching model on the first online visit instead of replaying a stale engine. Delivery mechanism only; no historical, cryptographic or evidentiary claim changed.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed. 2 Nov 2026 (PR #31): the two Babington script tags now carry content-hash query strings (?v=...), stamped by scripts/build-min.js from the bundle bytes. A returning reader holding the previous cache-first service worker fetches the corrected teaching model on the first online visit instead of replaying a stale engine. Delivery mechanism only; no historical, cryptographic or evidentiary claim changed. Source register: pending. The page cites Simon Singh, The Code Book, chapter 1, and Alan Bryson, “The Gallows Letter” (British Library). The only Singh Code Book entry in the register (SINGH-BOOK-POSITIONING) is the author’s description of the book, not the book, so no identity is assigned.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2008,8 +2008,10 @@
       "words": 552,
       "sha256": "b8645bf61640ff0ff71891815c9bcf3666d3b53fbb4af0a28fe1438b6cd3b438",
       "status": "bounded review and local release validation complete",
-      "sources": [],
-      "notes": "Separated historicaluse frominvention; key-paircount versus distinctpermutations, instance-dependent searchlimits. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "sources": [
+        "KAHN-1996"
+      ],
+      "notes": "Separated historicaluse frominvention; key-paircount versus distinctpermutations, instance-dependent searchlimits. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate. 5 November 2026: source register reconciled; the page’s Kahn citation is the register’s KAHN-1996.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2549,7 +2551,7 @@
       "path": "ciphers/gripenstierna.html",
       "title": "Gripenstierna’s Cipher Machine — The Cipher Museum",
       "sources": [],
-      "notes": "New Bauer-derived teaching addition; source and model boundaries in docs/BAUER_ADDITIONS.md.",
+      "notes": "New Bauer-derived teaching addition; source and model boundaries in docs/BAUER_ADDITIONS.md. Source register: pending. The page cites Bauer, Decrypted Secrets, 4th ed. (2007), §7.5.2, pp. 131–132 and p. 51, and Hagelin, The Story of Hagelin Cryptos; neither has a register identity yet, and none is created here.",
       "sha256": "a7f76f82f8ec169e70e8375b76e5c310022e350c08aab4684f00c092b94b6f96",
       "words": 488,
       "bauer_additions": {
@@ -2563,7 +2565,8 @@
         "scope": "Generated current collection total changed from 173 to 174. No substantive historical prose or example changed; previous reviews describe their recorded snapshots.",
         "evidence": "docs/DOT_FOLLOWUPS_2026-11-04.md",
         "limits": "Selected passages and bounded implementation checks. Earlier prose/browser/release records describe earlier snapshots; no new full-paper reading or full-site historical certification."
-      }
+      },
+      "status": "bounded content and interaction review; current deployment tracked by the implementation pull request"
     },
     {
       "path": "ciphers/gronsfeld.html",
@@ -4166,7 +4169,7 @@
       "sha256": "2ba7407473e1f760f891bad5f70405cee86daa7c8e94303398849135231885d8",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.\n3 November 2026: Grotjan's date. The page keeps 20 September 1940 (Mundy, Code Girls; Bauer, Decrypted Secrets; Bigelow, INSCOM Command Historian, 2023) and now says that Rowlett's memoir, already in its References, recalls the day as shortly before Labor Day. Checked against the text of Rowlett, Mundy and Bauer and the public DVIDS article. Three references added, by title. Guarded in tests/test-page-audit-claims.js.\n4 November 2026 follow-up: corrected the unverified Rowlett quotation on both public pages, retained the memoir date discrepancy, and added seven title-only reading routes. See docs/SOURCE_READING_FOLLOWUPS_2026-11-04.md for bounded source verification and regression coverage.\n4 November 2026 hosted narrow-view audit: made both horizontally scrolling table panels labeled keyboard-focusable regions; no accessibility rule was suppressed. 5 November 2026: the Keyspace fact now reads \"Nominal, under a simple model: …. Not an attack cost — see How It Was Broken.\"; the number and the plugboard model are unchanged. The fact had stated the count with no qualifier while the body says the effective keyspace was not simply halved; whether the plugboard-as-any-permutation model matches Rowlett/Budiansky is an open question, not asserted.",
+      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.\n3 November 2026: Grotjan's date. The page keeps 20 September 1940 (Mundy, Code Girls; Bauer, Decrypted Secrets; Bigelow, INSCOM Command Historian, 2023) and now says that Rowlett's memoir, already in its References, recalls the day as shortly before Labor Day. Checked against the text of Rowlett, Mundy and Bauer and the public DVIDS article. Three references added, by title. Guarded in tests/test-page-audit-claims.js.\n4 November 2026 follow-up: corrected the unverified Rowlett quotation on both public pages, retained the memoir date discrepancy, and added seven title-only reading routes. See docs/SOURCE_READING_FOLLOWUPS_2026-11-04.md for bounded source verification and regression coverage.\n4 November 2026 hosted narrow-view audit: made both horizontally scrolling table panels labeled keyboard-focusable regions; no accessibility rule was suppressed. 5 November 2026: the Keyspace fact now reads \"Nominal, under a simple model: …. Not an attack cost — see How It Was Broken.\"; the number and the plugboard model are unchanged. The fact had stated the count with no qualifier while the body says the effective keyspace was not simply halved; whether the plugboard-as-any-permutation model matches Rowlett/Budiansky is an open question, not asserted. Source register: pending. The page’s References list Rowlett, The Story of Magic (1998); NSA, The Friedman Legacy (2006); Budiansky, Battle of Wits (2000), ch. 5–6; Mundy, Code Girls (2017); Bauer, Decrypted Secrets (2007); Bigelow, INSCOM (2023). None has a register identity yet (BAUER-LINK-MOLLE-2016 is a different Bauer work), and none is created here.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -4698,7 +4701,7 @@
       "sha256": "940ff57361e2b83c2742d4cbf8dd830fae01fd805f5cf31a9bd5b03e3d31518d",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Source register: pending; the page cites no sources. Its “no publicly documented wartime break” wording is pinned by tests/test-trust-labels.js, not by a register entry.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
