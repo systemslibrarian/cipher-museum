@@ -5,8 +5,17 @@
  * Derive the downloadable v0.8 corpus from the frozen, reproducible v0.7 set.
  * v0.6 and the tagged v0.7 tree are never changed. Run v0.7's builder first.
  *
- * The raw JSONL is a local, ignored build product. A deterministic gzip of the
- * complete JSONL is committed and served from the museum download page.
+ * The raw JSONL is a local, ignored build product. A gzip of the complete JSONL
+ * is committed and served from the museum download page.
+ *
+ * What is deterministic is the CONTENT of that gzip, not its bytes: Node's
+ * bundled zlib changes between majors (CI builds with Node 22, a developer
+ * machine may run 26) and the two encoders emit different deflate streams for
+ * identical input. So the committed download is judged by what it decompresses
+ * to, it is never rewritten while its content is already exact, and the
+ * checksum manifest is derived from the committed bytes. The published file
+ * therefore stays byte-stable across machines, which is what its recorded
+ * SHA-256 and DOI require.
  */
 
 const fs = require('node:fs');
@@ -237,16 +246,54 @@ async function main() {
   try {
     const { summary, plainPath, files } = await produce(tempDir);
     fs.mkdirSync(OUT, { recursive: true });
-    const stale = files.filter(name => !fs.existsSync(path.join(OUT, name))
-      || shaFile(path.join(OUT, name)) !== shaFile(path.join(tempDir, name)));
-    const plainStale = !fs.existsSync(path.join(OUT, 'all.jsonl'))
-      || shaFile(path.join(OUT, 'all.jsonl')) !== shaFile(plainPath);
-    if (check && (stale.length || plainStale)) {
-      throw new Error(`v0.8 outputs differ: ${[...stale, ...(plainStale ? ['all.jsonl'] : [])].join(', ')}`);
+    const committed = name => path.join(OUT, name);
+    const rebuilt = name => path.join(tempDir, name);
+
+    // The gzip is compared by content. Its bytes legitimately differ between
+    // zlib builds, and the committed bytes are the published, checksummed
+    // download, so they are kept whenever they already decompress to exactly
+    // the rebuilt JSONL.
+    const gz = 'all.jsonl.gz';
+    const rebuiltPlainSha = shaFile(plainPath);
+    let committedGzContentSha = null;
+    if (fs.existsSync(committed(gz))) {
+      try { committedGzContentSha = sha256(zlib.gunzipSync(fs.readFileSync(committed(gz)))); }
+      catch (error) { committedGzContentSha = `unreadable gzip: ${error.message}`; }
+    }
+    const gzContentCurrent = committedGzContentSha === rebuiltPlainSha;
+    const gzBytesDiffer = gzContentCurrent && shaFile(committed(gz)) !== shaFile(rebuilt(gz));
+
+    const stale = files.filter(name => {
+      if (name === gz) return !gzContentCurrent;
+      if (name === 'SHA256SUMS.txt') return false; // derived; judged below
+      return !fs.existsSync(committed(name)) || shaFile(committed(name)) !== shaFile(rebuilt(name));
+    });
+    const plainStale = !fs.existsSync(committed('all.jsonl'))
+      || shaFile(committed('all.jsonl')) !== rebuiltPlainSha;
+
+    // The manifest must list the bytes that will actually be published: the
+    // committed gzip when its content is current, the rebuilt one otherwise,
+    // and the rebuilt JSON artifacts (identical to the committed ones when
+    // nothing is stale).
+    const manifestSource = name => (name === gz && gzContentCurrent) ? committed(name) : rebuilt(name);
+    const expectedSums = files.filter(name => name !== 'SHA256SUMS.txt')
+      .map(name => `${shaFile(manifestSource(name))}  ${name}`).join('\n') + '\n';
+    const sumsStale = !fs.existsSync(committed('SHA256SUMS.txt'))
+      || fs.readFileSync(committed('SHA256SUMS.txt'), 'utf8') !== expectedSums;
+
+    if (check && (stale.length || plainStale || sumsStale)) {
+      const what = [...stale.map(name => name === gz ? `${gz} (decompressed content)` : name),
+        ...(plainStale ? ['all.jsonl'] : []), ...(sumsStale ? ['SHA256SUMS.txt'] : [])];
+      throw new Error(`v0.8 outputs differ: ${what.join(', ')}`);
     }
     if (!check) {
-      for (const name of stale) fs.copyFileSync(path.join(tempDir, name), path.join(OUT, name));
-      if (plainStale) fs.copyFileSync(plainPath, path.join(OUT, 'all.jsonl'));
+      for (const name of stale) fs.copyFileSync(rebuilt(name), committed(name));
+      if (plainStale) fs.copyFileSync(plainPath, committed('all.jsonl'));
+      if (sumsStale) fs.writeFileSync(committed('SHA256SUMS.txt'), expectedSums);
+    }
+    if (gzBytesDiffer) {
+      console.log(`Note: this machine's zlib (${process.versions.zlib}, Node ${process.version}) encodes ${gz} `
+        + 'to different bytes; the decompressed content is identical, so the committed download is kept.');
     }
     console.log(`Cipher Corpus v0.8 ${check ? 'verified' : 'built'}: ${summary.records_out} complete records; `
       + `${summary.two_square_ciphertexts_changed} Two-square ciphertext changes; `
