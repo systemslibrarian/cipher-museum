@@ -46,6 +46,7 @@ const suites = [
   'tests/test-book-source-links.js',
   'tests/test-release-identifiers.js',
   'tests/test-search.js',
+  'tests/test-search-hall-label.js',
   'tests/test-interaction-audit.js',
   'tests/test-navigation-audit.js',
   'tests/test-final-audit.js',

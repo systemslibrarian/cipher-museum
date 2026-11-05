@@ -159,6 +159,27 @@ function shortHall(name) {
   return name.replace(/^Hall\s+[IVXLCDM\d]+[a-z]?:\s*/i, '').trim() || name;
 }
 
+// Halls whose name reads as an absolute claim when it sits on a result card
+// next to a "Broken" badge ("Enigma Machine · Hall: The Unbreakable · Broken").
+// For these, the card's hall label is the hall page's own tagline - the
+// qualifying subtitle the hall already carries - read from the page at build
+// time so the two cannot drift. The hall name itself stays in the entry's
+// tags, so searching for it still finds the hall's exhibits. The hall page's
+// title and heading are untouched (5 November 2026 claim-strength review).
+const HALL_CARD_LABEL_FROM_TAGLINE = new Set(['halls/unbreakable.html']);
+const taglineCache = new Map();
+function hallCardLabel(hall, hallDisp) {
+  const rel = (hall.href || '').replace(/^(\.\.\/)+/, '').replace(/^\//, '');
+  if (!HALL_CARD_LABEL_FROM_TAGLINE.has(rel)) return hallDisp;
+  if (!taglineCache.has(rel)) {
+    const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    const tagline = extractTag(html, 'page-tagline');
+    if (!tagline) throw new Error(rel + ' has no .page-tagline to label its exhibits with; add one or drop it from HALL_CARD_LABEL_FROM_TAGLINE');
+    taglineCache.set(rel, tagline);
+  }
+  return taglineCache.get(rel);
+}
+
 // ── tag deduplication ─────────────────────────────────────────────────────────
 
 function buildTags(...items) {
@@ -216,7 +237,7 @@ function processCipherPage(file) {
     t: title,
     u: 'ciphers/' + slug,
     k: kind,
-    h: hallDisp || '—',
+    h: hallCardLabel(hall, hallDisp) || '—',
     c: eraText  || '—',
     b: badgeText || '—',
     trust,
