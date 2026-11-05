@@ -7242,7 +7242,7 @@
       "path": "lab/kisses.html",
       "title": "One Message, Two Encryptions — The Cipher Museum",
       "sources": [],
-      "notes": "New Bauer-derived teaching addition; source and model boundaries in docs/BAUER_ADDITIONS.md.",
+      "notes": "New Bauer-derived teaching addition; source and model boundaries in docs/BAUER_ADDITIONS.md. Source register: pending. The page cites Bauer, Decrypted Secrets, 4th ed. (2007), pp. 288–289 and 419–421, especially §19.5.1, and Tony Sale’s Virtual Bletchley Park account of registration and traffic analysis; neither has a register identity yet (BAUER-LINK-MOLLE-2016 is a different Bauer work), and none is created here.",
       "sha256": "04681b78ac983ab868763d6038b57ad31dbff07ca2eb14e4c88f4ef379e5228b",
       "words": 523,
       "bauer_additions": {
@@ -7250,7 +7250,8 @@
         "scope": "Added approved historical-method content or its navigation; see docs/BAUER_ADDITIONS.md for sources and model boundaries.",
         "validation": "Focused arithmetic, invariant and DOM control checks passed. Full-suite and browser validation tracked separately.",
         "limits": "Earlier review and release fields refer to their earlier snapshots; this update does not assert deployment."
-      }
+      },
+      "status": "bounded content and interaction review; current deployment tracked by the implementation pull request"
     },
     {
       "path": "lab/modern-attack-evidence.html",
