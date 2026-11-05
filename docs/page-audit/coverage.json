@@ -2110,12 +2110,12 @@
       "path": "ciphers/egyptian-substitution.html",
       "title": "Egyptian Substitution Hieroglyphs — The Cipher Museum",
       "words": 410,
-      "sha256": "a7ca9023fb6f43acd9a3dc565526cd69477fe453ae5f62340187b82d5d1f9da2",
+      "sha256": "c18cc4522f0b1de6d82a6c16e578ec77f4e3fe4afbe6725c825ae4f2a04151c9",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Kahn Ch2 opening checked: unusual spelling is not evidence of a modern secret-key cipher; revised headlines/metadata and direct-lineage claim. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Kahn Ch2 opening checked: unusual spelling is not evidence of a modern secret-key cipher; revised headlines/metadata and direct-lineage claim. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate. 5 November 2026: status line changed from \"Decorative concealment\" to \"Unusual signs, uncertain intent\". The page's own Purpose row says \"Disputed\", its prose says Egyptologists debate secrecy, sanctity and display, and the meta description, README summary and tour note already said \"uncertain intent\"; the old status line resolved what the exhibit leaves open. No other text changed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",

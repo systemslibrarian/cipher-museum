@@ -287,6 +287,27 @@ for (const slug of new Set(RETIRED_SUMMARY_CLAIMS.map(([target]) => target))) {
   }
 }
 
+// The Egyptian status note must not resolve what the exhibit itself calls
+// disputed. Its Purpose row reads "Disputed", its prose says Egyptologists
+// debate secrecy, sanctity and display, and the meta description, README
+// summary and tour note all say "uncertain intent". "Decorative concealment"
+// asserted an intent the page's own evidence leaves open (flagged in PR #34,
+// corrected 5 November 2026). Pinned on all three surfaces that carry it.
+{
+  const expected = 'Unusual signs, uncertain intent';
+  const trust = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/exhibit-trust.json'), 'utf8'));
+  const egypt = trust.exhibits.find(e => e.path === 'ciphers/egyptian-substitution.html');
+  assert.equal(egypt.note, expected,
+    'Egyptian registry note must leave intent open: "Decorative concealment" resolved what the exhibit calls disputed');
+  const page = fs.readFileSync(path.join(ROOT, 'ciphers/egyptian-substitution.html'), 'utf8');
+  assert(page.includes(`<p class="exhibit-status-note">${expected}</p>`),
+    'Egyptian exhibit status line must match the registry note');
+  assert(!/Decorative concealment/.test(page), 'retired "Decorative concealment" wording must not return to the Egyptian exhibit');
+  const row = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8').split('\n')
+    .find(l => l.startsWith('| [Egyptian Substitution Hieroglyphs](')); // the catalogue row, not the hall index row
+  assert(row && row.includes(`| ${expected} |`), 'README catalogue row for the Egyptian exhibit must carry the open-intent note');
+}
+
 assert.deepEqual(buildTrustLabels({ check: true }), [], 'All rendered badges are current; run npm run build:trust-labels');
 for (const generator of ['build-search-index', 'build-artifact-cards']) {
   const result = spawnSync(process.execPath, [`scripts/${generator}.js`, '--check'], { cwd: ROOT, encoding: 'utf8' });
