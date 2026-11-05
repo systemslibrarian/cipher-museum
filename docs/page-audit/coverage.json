@@ -7027,12 +7027,12 @@
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
       "words": 590,
-      "sha256": "d6c7b2206f759a85e1179f0eb36aa8577c71e36c984637e4232fa19eab25661a",
+      "sha256": "f115015453dea060909614e1bcbab9fe12ad8093fd30a45c29220e588a316260",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed.",
+      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. 5 November 2026: the book-cover <img> is wrapped in a <picture> with a 600 px WebP source (images/cipher-museum-book-cover-600.webp, 113 KB) so the homepage no longer downloads the 2.5 MB PNG; the PNG remains the fallback and the og:image. Markup-only change; no text, link or claim altered.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",

@@ -129,7 +129,11 @@
 <section class="home-book" id="forthcoming-ebook" aria-labelledby="home-book-title">
   <div class="home-book-inner">
     <a class="home-book-cover" href="the-book.html" aria-label="Preview Secrets of the Cipher Museum">
-      <img src="images/cipher-museum-book-cover.png" alt="Secrets of the Cipher Museum by Paul “The Cipher Librarian” Clark: gold lettering, a brass cipher wheel and a red wax seal." width="1049" height="1500" loading="lazy" decoding="async">
+      <picture>
+        <!-- 600px WebP for the page; the full PNG stays as the fallback and as og:image. -->
+        <source srcset="images/cipher-museum-book-cover-600.webp" type="image/webp">
+        <img src="images/cipher-museum-book-cover.png" alt="Secrets of the Cipher Museum by Paul “The Cipher Librarian” Clark: gold lettering, a brass cipher wheel and a red wax seal." width="1049" height="1500" loading="lazy" decoding="async">
+      </picture>
     </a>
     <div class="home-book-copy">
       <p class="home-book-eyebrow">Forthcoming ebook</p>
