@@ -1,0 +1,84 @@
+name: Nightly cross-engine
+
+# The returning-visitor cache fix and the offline contract, in Firefox and
+# WebKit as well as Chromium. This runs nightly rather than on every push
+# because of a measured number, not a guess: on 4 November 2026 installing the
+# two extra engines added 38 s to a browser-tests job that was already at
+# 1 m 54 s, taking it past the two-minute budget for every run. Chromium runs
+# the identical check on every push in ci.yml, so the fix itself is still
+# guarded per pull request; this adds the other two engines once a day.
+#
+# A nightly that fails quietly is worse than none. A failure opens an issue,
+# or comments on the one already open, instead of relying on someone reading
+# the Actions tab.
+
+on:
+  schedule:
+    - cron: '17 6 * * *'   # 06:17 UTC daily; off the hour to avoid the queue
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  cross-engine-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install Playwright and all three engines
+        run: |
+          npm ci
+          npm install --no-save --package-lock=false playwright@1.64.1
+          npx playwright install --with-deps chromium firefox webkit
+
+      - name: Verify the service-worker cache upgrade across engines
+        shell: bash   # explicit bash sets pipefail, so tee cannot mask the exit status
+        run: node scripts/check-cache-upgrade.js 2>&1 | tee cache-upgrade.log
+
+      - name: Keep the log
+        if: always()
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: nightly-cross-engine-log
+          path: cache-upgrade.log
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Open or update an issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh label create nightly-cross-engine --color B60205 \
+            --description "Opened automatically by the nightly cross-engine workflow" 2>/dev/null || true
+          BODY=$(mktemp)
+          {
+            echo "The nightly Chromium/Firefox/WebKit cache-upgrade check failed."
+            echo
+            echo "- Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            echo "- Commit: \`${GITHUB_SHA}\`"
+            echo
+            echo '```'
+            if [ -s cache-upgrade.log ]; then
+              grep -E "FAIL|SKIP|cache-upgrade:|Failures|not performed|^  (chromium|firefox|webkit) " cache-upgrade.log \
+                || tail -40 cache-upgrade.log
+            else
+              echo "(the check produced no log; the failure was before it ran - see the run)"
+            fi
+            echo '```'
+          } > "$BODY"
+          EXISTING=$(gh issue list --state open --label nightly-cross-engine --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file "$BODY"
+          else
+            gh issue create --title "Nightly cross-engine cache check failed" \
+              --label nightly-cross-engine --body-file "$BODY"
+          fi

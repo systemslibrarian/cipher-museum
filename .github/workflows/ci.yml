@@ -53,36 +53,18 @@ jobs:
         run: |
           npm ci
           npm install --no-save --package-lock=false playwright@1.64.1 @axe-core/playwright@4.14.0
-          start=$(date +%s)
-          npx playwright install --with-deps chromium firefox webkit
-          echo "engine-install-seconds=$(( $(date +%s) - start ))" >> "$GITHUB_OUTPUT"
-        id: browsers
+          npx playwright install --with-deps chromium
 
       - name: Exercise the research additions in Chromium
         run: node scripts/check-dot-followups-browser.js
 
-      # The returning-visitor cache fix, in every engine the museum claims to
-      # support. Timed because it is only allowed to live here while the whole
-      # cross-engine addition stays inside roughly two minutes; past that it
-      # belongs in a nightly job.
-      - name: Verify the service-worker cache upgrade across engines
-        id: cache-upgrade
-        run: |
-          start=$(date +%s)
-          node scripts/check-cache-upgrade.js
-          echo "seconds=$(( $(date +%s) - start ))" >> "$GITHUB_OUTPUT"
-
-      - name: Report the cross-engine cost
-        if: always()
-        run: |
-          {
-            echo "### Cross-engine cache verification cost"
-            echo ""
-            echo "| Step | Seconds |"
-            echo "| --- | --- |"
-            echo "| Playwright engine install (all three) | ${{ steps.browsers.outputs.engine-install-seconds }} |"
-            echo "| check-cache-upgrade.js | ${{ steps.cache-upgrade.outputs.seconds }} |"
-          } >> "$GITHUB_STEP_SUMMARY"
+      # The returning-visitor cache fix, in the engine this job already has.
+      # Firefox and WebKit run the same script nightly instead
+      # (nightly-cross-engine.yml): measured on 4 November 2026, installing them
+      # added 38 s to a job already at 1 m 54 s, past the two-minute budget for
+      # every push. This Chromium run keeps the fix guarded per pull request.
+      - name: Verify the service-worker cache upgrade in Chromium
+        run: node scripts/check-cache-upgrade.js --engines=chromium
 
       - name: Keep browser report and screenshots
         if: always()
