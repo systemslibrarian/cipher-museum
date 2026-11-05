@@ -7,13 +7,38 @@ name: Audit pack
 # Path filters cover what the exporter actually reads: every public page, the
 # shared scripts and data it inlines, the review ledger and source register,
 # and the generators themselves. The filter list was derived from the 359
-# tracked inputs the manifest records, not guessed.
+# tracked inputs the manifest records, not guessed. '**.html' is GitHub's
+# documented form for "every .html file at any depth, root included".
+#
+# The same filters also run the build on pull requests, as a dry run: the
+# pack is built and kept as a workflow artifact, but nothing is published.
+# That proves on the PR that the exporter still builds - the failure class
+# of commit bcdeac4, where a registered input was invisible to the exporter -
+# instead of finding out on main. Publishing happens only on push to main.
 
 on:
   push:
     branches: [main]
     paths:
-      - '**/*.html'
+      - '**.html'
+      - 'js/**'
+      - 'data/**'
+      - 'tours/**'
+      - 'public/**'
+      - 'corpus/**'
+      - 'community/**'
+      - 'sw.js'
+      - 'manifest.webmanifest'
+      - 'docs/page-audit/**'
+      - 'scripts/export-audit-document.js'
+      - 'scripts/package-audit-document.py'
+      - 'scripts/sync-audit-summary.js'
+      - 'scripts/columnar-classroom.js'
+      - '.github/workflows/audit-pack.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.html'
       - 'js/**'
       - 'data/**'
       - 'tours/**'
@@ -30,8 +55,10 @@ on:
       - '.github/workflows/audit-pack.yml'
   workflow_dispatch:
 
+# Scoped by event and ref: a pull-request dry run must never cancel a publish
+# that is in flight on main, and two pushes to main still supersede each other.
 concurrency:
-  group: audit-pack
+  group: audit-pack-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -98,7 +125,10 @@ jobs:
           retention-days: 90
 
       # A single moving tag, so the download link in audit/README.md stays stable.
+      # Never from a pull request: a PR run is a dry run and must not move the
+      # published pack to unreviewed content.
       - name: Publish to the rolling release
+        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
