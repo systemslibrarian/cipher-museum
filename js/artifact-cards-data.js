@@ -722,7 +722,7 @@
         "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
       },
       "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Correct OTP use is unbreakable; logistics often fail before the math"
+      "modernLesson": "A one-time pad gives perfect secrecy only with a secret, truly random key as long as the message and never reused. Logistics often fail before the math."
     },
     "dictionary-code": {
       "name": "Confederate Dictionary Code",

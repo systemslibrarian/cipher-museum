@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T15:50:18.257Z",
+  "generatedAt": "2026-11-05T11:48:40.664Z",
   "totalExhibits": 157,
   "cards": {
     "adfgvx": {
@@ -723,7 +723,7 @@
         "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
       },
       "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Correct OTP use is unbreakable; logistics often fail before the math"
+      "modernLesson": "A one-time pad gives perfect secrecy only with a secret, truly random key as long as the message and never reused. Logistics often fail before the math."
     },
     "dictionary-code": {
       "name": "Confederate Dictionary Code",
