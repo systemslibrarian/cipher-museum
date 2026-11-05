@@ -30,3 +30,10 @@ tmp/
 # .github/workflows/audit-pack.yml and published as a GitHub Release asset.
 # Build locally with: node scripts/export-audit-document.js --ref HEAD
 audit/pack/
+
+# Progress log captured while data/research/profile-recovery-v2/run.js executes
+# the 720-condition experiment (run.js itself does not name the file; the log is
+# console output kept alongside the results). Its README lists it among the
+# generated outputs to exclude from a rerun; nothing reads it and it is not
+# published.
+data/research/profile-recovery-v2/progress.log
