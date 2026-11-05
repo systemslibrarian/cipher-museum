@@ -18,7 +18,7 @@
  */
 'use strict';
 
-const VERSION = 'cipher-museum-4671947e';
+const VERSION = 'cipher-museum-190529d7';
 
 const CORE = [
   '/ciphers/ika.html',

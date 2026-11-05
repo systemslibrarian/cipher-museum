@@ -308,6 +308,44 @@ for (const slug of new Set(RETIRED_SUMMARY_CLAIMS.map(([target]) => target))) {
   assert(row && row.includes(`| ${expected} |`), 'README catalogue row for the Egyptian exhibit must carry the open-intent note');
 }
 
+// Absolute language. The DIANA exhibit's Modern Lesson once read "Correct OTP
+// use is unbreakable; logistics often fail before the math" - true only under
+// Shannon's conditions, which the line did not state. It now names them. The
+// retired line must not return on the page, in the generated artifact card,
+// or in the bundle the cards load from (5 November 2026 claim-strength review).
+{
+  const retired = /Correct OTP use is unbreakable/;
+  const surfaces = {
+    'ciphers/diana-cryptosystem.html': read('ciphers/diana-cryptosystem.html'),
+    'data/artifact-cards.json': read('data/artifact-cards.json'),
+    'js/artifact-cards-data.js': read('js/artifact-cards-data.js')
+  };
+  for (const [file, text] of Object.entries(surfaces)) {
+    assert.doesNotMatch(text, retired,
+      `${file}: the retired DIANA lesson "Correct OTP use is unbreakable" is back; perfect secrecy holds only with a secret, truly random, message-length, never-reused key, and the line must say so`);
+  }
+  assert.match(surfaces['ciphers/diana-cryptosystem.html'], /perfect secrecy only with a secret, truly random key as long as the message and never reused/,
+    'DIANA Modern Lesson must state the conditions under which a one-time pad is perfectly secret');
+}
+
+// Attack-cost framing. The Purple Keyspace fact is a nominal count under a
+// simple model (26! plugboard permutations x 6 switch orders x 25^4 starting
+// positions); the body says the effective keyspace was not simply halved by
+// the sixes/twenties split, and a bare number in a fact box reads as an
+// attack cost. The fact must say so itself (5 November 2026 claim-strength
+// review). The number and the model are deliberately not pinned here.
+{
+  const purple = read('ciphers/purple.html');
+  const keyspace = /<span class="fact-label">Keyspace<\/span><span class="fact-value">([^<]*)<\/span>/.exec(purple);
+  assert(keyspace, 'Purple exhibit keeps a Keyspace fact');
+  assert.match(keyspace[1], /^Nominal\b/,
+    'Purple Keyspace fact must open with "Nominal": a bare count reads as an attack cost, which the body denies');
+  assert.match(keyspace[1], /see How It Was Broken/,
+    'Purple Keyspace fact must point at the panel holding the "not simply halved" explanation');
+  assert(purple.indexOf('<span class="panel-title">How It Was Broken</span>') < purple.indexOf('not follow that the effective keyspace'),
+    'the "not simply halved" sentence must stay inside the How It Was Broken panel the fact points at');
+}
+
 assert.deepEqual(buildTrustLabels({ check: true }), [], 'All rendered badges are current; run npm run build:trust-labels');
 for (const generator of ['build-search-index', 'build-artifact-cards']) {
   const result = spawnSync(process.execPath, [`scripts/${generator}.js`, '--check'], { cwd: ROOT, encoding: 'utf8' });

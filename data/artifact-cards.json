@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T15:50:18.257Z",
+  "generatedAt": "2026-11-05T11:51:24.244Z",
   "totalExhibits": 157,
   "cards": {
     "adfgvx": {
@@ -17,7 +17,7 @@
         "text": "Broken",
         "description": "Cryptographically broken — historically important but unsafe to use today."
       },
-      "securityFailure": "Painvin recovered keys from German traffic in June 1918.",
+      "securityFailure": "Painvin recovered particular days’ keys from June 1918 traffic; the decipherment is commemorated on 2 June, and Kahn dates the quoted ammunition message to 3 June.",
       "modernLesson": "Layered cipher rounds"
     },
     "adfgx": {
@@ -111,7 +111,7 @@
         "text": "Broken",
         "description": "Cryptographically broken — historically important but unsafe to use today."
       },
-      "securityFailure": "Index of Coincidence · Frequency analysis",
+      "securityFailure": "Teaching model: the widget uses a 26-letter alphabet. Alberti’s disk used 20 letters and the digits 1–4.",
       "modernLesson": "Physical key material → rotor machines"
     },
     "amharic-ge-ez-ciphers": {
@@ -723,7 +723,7 @@
         "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
       },
       "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Correct OTP use is unbreakable; logistics often fail before the math"
+      "modernLesson": "A one-time pad gives perfect secrecy only with a secret, truly random key as long as the message and never reused. Logistics often fail before the math."
     },
     "dictionary-code": {
       "name": "Confederate Dictionary Code",
