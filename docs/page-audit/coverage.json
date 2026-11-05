@@ -709,10 +709,10 @@
       "path": "ciphers/bach-motif.html",
       "title": "Bach's B-A-C-H Motif — The Cipher Museum",
       "words": 524,
-      "sha256": "77ab21b6ee6a21eef3055abe20fdfbf17f0e8d1e83d91db08076f1e3cc85c768",
+      "sha256": "acef01e5b809640883e798e2228b887bdf8c815a61c2f4b92843a7b41b366622",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 5 November 2026: the Year fact \"Composed ~1742–1750\" is removed (now \"No composition date is cited on this page\"). No register source is assigned to this page and none mentions the dates; the only other year on the page is the era badge \"Baroque Germany · 1750\", left as is and recorded as unsourced.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -4874,12 +4874,12 @@
       "path": "ciphers/somerton-man.html",
       "title": "Somerton Man Code — The Cipher Museum",
       "words": 426,
-      "sha256": "59ea21aea419d1183f160d2ab904976d0460e741db336887e59bbebd32b23b47",
+      "sha256": "55a9976a0d30f2aef4f58c6f8573b6d07adc93ae6265ff59d638fad784c407ac",
       "status": "bounded review and local release validation complete",
       "sources": [
         "SOMERTON-ABC-2026"
       ],
-      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 5 November 2026: \"code revealed 1949\" is removed from the Year fact. The page's register source (SOMERTON-ABC-2026, a 2026 news report) records no passage supporting it and the prose does not state it. \"1 December 1948 (body found)\" is kept: the prose says 1948, though the register records no passage for that date either.",
       "browser_smoke": "Seventh batch:1280/390page loads without script errors or document overflow; four classical vectors and puzzle controls exercised. See browser-puzzles-seventh.json.",
       "final_prose_review": {
         "reader": "corpus_utilities",
@@ -5700,13 +5700,13 @@
       "path": "ciphers/zero-knowledge-proofs.html",
       "title": "Zero-Knowledge Proofs — The Cipher Museum",
       "words": 1186,
-      "sha256": "4eb70643acf9b20df9c9287b53688e67787e42481b367d3c685778ff33f1aa6f",
+      "sha256": "627856d47abbcc1e27a15db7243ba9d8490a444f38008ab025b516d016191313",
       "status": "bounded review and local release validation complete",
       "sources": [
         "RFC8235",
         "BONEH-SHOUP-2023"
       ],
-      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 5 November 2026: \"zk-SNARKs from 2012\" is removed from the Year fact. Neither register source (RFC8235, BONEH-SHOUP-2023) records a passage about SNARKs or 2012 and the prose does not mention them. \"1985; Schnorr's protocol 1989\" is kept: the Historical Context names both; the register passages support the Schnorr construction, not the years.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "corpus_utilities",
