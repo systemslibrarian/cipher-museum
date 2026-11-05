@@ -9,11 +9,20 @@ const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const { JSDOM } = require('jsdom');
 const root = path.resolve(__dirname, '..');
-const out = path.join(root, 'audit');
+// The pack is generated output and is not committed: audit/pack/ is gitignored
+// and the published artifact is built by .github/workflows/audit-pack.yml.
+// audit/ itself keeps only hand-written material and a pointer README.
+const out = path.join(root, 'audit', 'pack');
 const argv = process.argv.slice(2);
 const check = argv.includes('--check');
 const refArg = argv.indexOf('--ref');
-const oldManifest = check ? JSON.parse(fs.readFileSync(path.join(out, 'manifest.json'), 'utf8')) : null;
+const manifestFile = path.join(out, 'manifest.json');
+if (check && !fs.existsSync(manifestFile)) {
+  console.error('No generated pack at ' + path.relative(root, out) + '. It is not committed; build it first:\n' +
+    '  node scripts/export-audit-document.js --ref HEAD');
+  process.exit(1);
+}
+const oldManifest = check ? JSON.parse(fs.readFileSync(manifestFile, 'utf8')) : null;
 const git = (...args) => cp.execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
 const commit = git('rev-parse', refArg >= 0 ? argv[refArg + 1] : (oldManifest?.source_commit || 'HEAD')).trim();
 const stamp = git('show', '-s', '--format=%cI', commit).trim();

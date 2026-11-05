@@ -10,7 +10,7 @@ import zipfile
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--check', action='store_true')
 args = parser.parse_args()
-root = Path(__file__).resolve().parents[1] / 'audit'
+root = Path(__file__).resolve().parents[1] / 'audit' / 'pack'
 manifest = json.loads((root / 'manifest.json').read_text())
 files = sorted([entry['path'] for entry in manifest['outputs']] + ['manifest.json'])
 for entry in manifest['outputs']:
