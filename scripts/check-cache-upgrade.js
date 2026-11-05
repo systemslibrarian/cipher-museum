@@ -21,20 +21,20 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
-const cp = require('node:child_process');
 
 const root = path.resolve(__dirname, '..');
 const PORT = Number(process.env.CACHE_CHECK_PORT || 8744);
 const BASE = `http://127.0.0.1:${PORT}`;
-const PRE_FIX_REF = 'a8ef1e3^';          // the commit that delivered the fix
+// The pre-fix worker is a committed fixture, not a git-history read: CI checks
+// out with depth 1, so the parent of the fix commit is not present there.
+const PRE_FIX_FIXTURE = path.join(root, 'tests', 'fixtures', 'sw-pre-fix.js');
 const PROBE = '/js/__cache-probe.js';     // not a repository file; served from memory
 const CORE_PAGE = '/first-codebreak.html';
 const TEST_PAGE = '/__cache-test.html';   // served from memory, not a repository file
 const NON_CORE_PAGE = '/ciphers/babington.html';  // exists, deliberately not precached
 
 const swNew = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-const swOld = cp.execFileSync('git', ['show', `${PRE_FIX_REF}:sw.js`],
-  { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+const swOld = fs.readFileSync(PRE_FIX_FIXTURE, 'utf8');
 const version = src => (src.match(/const VERSION = '([^']+)'/) || [])[1];
 const OLD_VERSION = version(swOld);
 const NEW_VERSION = version(swNew);
@@ -43,8 +43,8 @@ if (!OLD_VERSION || !NEW_VERSION || OLD_VERSION === NEW_VERSION) {
   process.exit(1);
 }
 if (/pathname\.endsWith\('\.js'\)/.test(swOld)) {
-  console.error(`${PRE_FIX_REF}:sw.js already special-cases .js, so it is not the pre-fix worker. ` +
-    'Update PRE_FIX_REF to the commit before the network-first JS change.');
+  console.error(`${path.relative(root, PRE_FIX_FIXTURE)} already special-cases .js, so it is not the pre-fix worker. ` +
+    'Restore it from a8ef1e3^:sw.js.');
   process.exit(1);
 }
 
