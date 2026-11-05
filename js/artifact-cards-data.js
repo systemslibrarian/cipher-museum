@@ -110,7 +110,7 @@
         "text": "Broken",
         "description": "Cryptographically broken — historically important but unsafe to use today."
       },
-      "securityFailure": "Index of Coincidence · Frequency analysis",
+      "securityFailure": "Teaching model: the widget uses a 26-letter alphabet. Alberti’s disk used 20 letters and the digits 1–4.",
       "modernLesson": "Physical key material → rotor machines"
     },
     "amharic-ge-ez-ciphers": {

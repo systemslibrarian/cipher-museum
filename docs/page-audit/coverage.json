@@ -398,12 +398,12 @@
       "path": "ciphers/alberti-disk.html",
       "title": "Alberti Cipher Disk — The Cipher Museum",
       "words": 571,
-      "sha256": "84feb1666bd8f553314192fe119981f96d7b0e5dd9d14a56c0f187e0b1360d9b",
+      "sha256": "25d41b85fb1b2139ca3c8d8562b88b23e342e06d4360a815a37e4dba06150c06",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 5 November 2026: the status line was a duplicate of the Broken By fact (\"Index of Coincidence · Frequency analysis\") and qualified nothing; it now reads \"Teaching model: the widget uses a 26-letter alphabet. Alberti’s disk used 20 letters and the digits 1–4.\" (the widget runs the 26-letter alberti engine in js/ciphers/all-engines.js; the body already says the historical outer ring had 20 letters and the digits 1–4). The Broken By fact and its print-table copy gain \" — general methods for polyalphabetic substitution\". The registry note, README catalogue row, search index and artifact card carry the same text; no other prose changed.",
       "browser_smoke": "Seventh batch:1280/390page loads without script errors or document overflow; four classical vectors and puzzle controls exercised. See browser-puzzles-seventh.json.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
