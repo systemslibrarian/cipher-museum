@@ -2110,12 +2110,12 @@
       "path": "ciphers/egyptian-substitution.html",
       "title": "Egyptian Substitution Hieroglyphs — The Cipher Museum",
       "words": 410,
-      "sha256": "a7ca9023fb6f43acd9a3dc565526cd69477fe453ae5f62340187b82d5d1f9da2",
+      "sha256": "c18cc4522f0b1de6d82a6c16e578ec77f4e3fe4afbe6725c825ae4f2a04151c9",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Kahn Ch2 opening checked: unusual spelling is not evidence of a modern secret-key cipher; revised headlines/metadata and direct-lineage claim. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Kahn Ch2 opening checked: unusual spelling is not evidence of a modern secret-key cipher; revised headlines/metadata and direct-lineage claim. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate. 5 November 2026: status line changed from \"Decorative concealment\" to \"Unusual signs, uncertain intent\". The page's own Purpose row says \"Disputed\", its prose says Egyptologists debate secrecy, sanctity and display, and the meta description, README summary and tour note already said \"uncertain intent\"; the old status line resolved what the exhibit leaves open. No other text changed.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -7027,12 +7027,12 @@
       "path": "index.html",
       "title": "The Cipher Museum — Interactive History of Encryption",
       "words": 590,
-      "sha256": "d6c7b2206f759a85e1179f0eb36aa8577c71e36c984637e4232fa19eab25661a",
+      "sha256": "f115015453dea060909614e1bcbab9fe12ad8093fd30a45c29220e588a316260",
       "status": "2026-11-02 beginner lesson integration: bounded source and DOM review",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed.",
+      "notes": "Complete homepage/ticker/playground review. Egyptian unusual writing no longer proves secrecy; modern comparisons avoid direct lineage; counts reconciled as 152 cipher/cultural + 3 research + 17 foundation exhibits. Existing 25-letter Bacon variant labelled; playground 137/137 checks passed. 1 Nov 2026 (PR #24, \"Use the approved book cover and author identity\"): author credit changed to Paul “The Cipher Librarian” Clark across the title, Open Graph metadata, byline and cover alt text, and the cover image was replaced with the approved file. Identity and artwork only; no historical, cryptographic or evidentiary claim changed. 5 November 2026: the book-cover <img> is wrapped in a <picture> with a 600 px WebP source (images/cipher-museum-book-cover-600.webp, 113 KB) so the homepage no longer downloads the 2.5 MB PNG; the PNG remains the fallback and the og:image. Markup-only change; no text, link or claim altered.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",

@@ -24,7 +24,12 @@ async function exercise({ online = true, query = '', cached = true, status = 200
   };
   vm.runInNewContext(worker, {
     self: { location: { origin }, addEventListener: (type, fn) => { listeners[type] = fn; } },
-    URL, caches: { open: async () => cache },
+    // caches.match is the global the PRE-fix worker used for every static
+    // asset. Without it, a reverted worker died on a TypeError before any
+    // assertion ran: the suite went red, but for the wrong reason, and the
+    // named message never appeared. With it, a revert serves the stale entry
+    // and fails on "Online visit must use the corrected engine immediately".
+    URL, caches: { open: async () => cache, match: async request => cache.match(request) },
     fetch: async (request, options) => {
       requests.push({ request, options });
       if (!online) throw new Error('Offline');
