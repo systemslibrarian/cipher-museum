@@ -170,12 +170,12 @@
       "path": "ciphers/adfgvx.html",
       "title": "ADFGVX Cipher — The Cipher Museum",
       "words": 721,
-      "sha256": "051669c2eee74ec509d802225edadf50fedc64486f698cc8958b0e9c19f3de5a",
+      "sha256": "c6ab98db18c931fb84086ee34e2fc74d33ac92ee1a1a52da19a05c6344ca39ed",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 5 November 2026: the status line changed from \"Painvin recovered keys from German traffic in June 1918.\" to \"Painvin recovered particular days’ keys from June 1918 traffic; the decipherment is commemorated on 2 June, and Kahn dates the quoted ammunition message to 3 June.\" so a skimming reader does not take a specific June 1918 key recovery for a general break, and the two dated events match the body (French MoD commemoration of the decipherment; Kahn ch. 11 on the quoted message). Registry note, README row, search index and artifact card carry the same text; the Broken By fact and body are unchanged.",
       "browser_smoke": "Seventh batch:1280/390page loads without script errors or document overflow; four classical vectors and puzzle controls exercised. See browser-puzzles-seventh.json.",
       "final_prose_review": {
         "reader": "exhibit_final_read",

@@ -16,7 +16,7 @@
         "text": "Broken",
         "description": "Cryptographically broken — historically important but unsafe to use today."
       },
-      "securityFailure": "Painvin recovered keys from German traffic in June 1918.",
+      "securityFailure": "Painvin recovered particular days’ keys from June 1918 traffic; the decipherment is commemorated on 2 June, and Kahn dates the quoted ammunition message to 3 June.",
       "modernLesson": "Layered cipher rounds"
     },
     "adfgx": {

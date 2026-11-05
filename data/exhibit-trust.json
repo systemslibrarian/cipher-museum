@@ -166,7 +166,7 @@
       "number": 21,
       "path": "ciphers/adfgvx.html",
       "label": "broken",
-      "note": "Painvin recovered keys from German traffic in June 1918.",
+      "note": "Painvin recovered particular days’ keys from June 1918 traffic; the decipherment is commemorated on 2 June, and Kahn dates the quoted ammunition message to 3 June.",
       "collection": "cipher-history",
       "interactive": true
     },
