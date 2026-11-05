@@ -1,6 +1,6 @@
 # Historical-profile recovery experiment
 
-Snapshot: `3720ede99d7ab0feedc8f7dd259d4bce5fea50c6`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `ccc02443d89ec2c2d9c8d6ef538bbbaf40225aa4`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
 
 Source: `data/research/profile-recovery-v1/README.md`. SHA-256: `8823d67afbad9e6fe9a87a3db2a617f361a1ea8afc938995f7d409a506c19e57`. The protocol, full result matrix, model inputs and Node.js runner are in the preceding appendices.
 

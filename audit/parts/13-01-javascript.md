@@ -1,6 +1,1618 @@
 # javascript appendix 1
 
-Snapshot: `3720ede99d7ab0feedc8f7dd259d4bce5fea50c6`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+Snapshot: `ccc02443d89ec2c2d9c8d6ef538bbbaf40225aa4`. Part of the Cipher Museum independent audit export. Read REVIEW_PROMPT.md and README.md first. Prior review notes are not independent proof.
+
+## JavaScript — data/research/profile-recovery-v2/inputs/js/research-language-model.js
+
+**Recovery experiment command-line tool:** runs with Node.js in a repository checkout; it is not a browser control. The protocol, every recorded condition, scorer inputs and interpretation are included separately. For v1, --check audits the saved report and --replay reruns search. For the crossed v2 follow-up, scripts/check-profile-recovery-v2.js verifies saved arithmetic and identities; the frozen run.js needs a fresh output directory. Consult each version’s README before execution.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `data/research/profile-recovery-v2/inputs/js/research-language-model.js`
+- Served SHA-256: `e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb`
+- Readable-source SHA-256: `e494add4faf9ead874c1e00488b78c3043263039861d25725dcc8c1e6ffe9bcb`
+
+
+```javascript
+'use strict';
+(function(global){
+  function build(data){
+    if(!data||data.id!=='museum-prose-quadgram-v1'||data.version!==1)throw new Error('Unsupported homophonic language model.');
+    const qfloor=Math.log(data.floorCount/data.quadTotal),tfloor=Math.log(data.floorCount/data.triTotal);
+    const quad=new Float64Array(26**4).fill(qfloor),tri=new Float64Array(26**3).fill(tfloor);
+    data.quad.forEach(([i,n])=>{quad[i]=Math.log(n/data.quadTotal);});data.tri.forEach(([i,n])=>{tri[i]=Math.log(n/data.triTotal);});
+    const letterLogs=data.letters.map(n=>Math.log(n/data.letterTotal));
+    function fitness(text){
+      const n=text.length,counts=new Uint16Array(26);let score=0,last=0;
+      for(let i=0;i<n;i++){
+        const c=text.charCodeAt(i)-65;if(c<0||c>25)throw new Error('Language model accepts uppercase A–Z only.');counts[c]++;
+        last=(last%17576)*26+c;
+        if(i>=3)score+=quad[last];else if(i===2&&n===3)score+=tri[last];
+      }
+      // A declared unigram-distribution penalty discourages collapsed letter keys.
+      for(let c=0;c<26;c++)if(counts[c])score-=data.frequencyPenalty*counts[c]*(Math.log(counts[c]/n)-letterLogs[c]);
+      return score;
+    }
+    fitness.modelId=data.id;return{fitness,id:data.id};
+  }
+  // ── Versioned historical-language profiles ──────────────────────────────
+  // Each profile scores letters A–Z under its own corpus. Scores from different
+  // profiles are NOT comparable as raw likelihoods, so comparison uses the mean
+  // log-probability per letter and reports a margin, never a probability.
+  function profileScorer(p){
+    const qfloor=Math.log(p.floorCount/p.quadTotal),tfloor=Math.log(p.floorCount/p.triTotal);
+    const quad=new Float64Array(26**4).fill(qfloor),tri=new Float64Array(26**3).fill(tfloor);
+    const seenQuad=new Uint8Array(26**4);
+    p.quad.forEach(([i,n])=>{quad[i]=Math.log(n/p.quadTotal);seenQuad[i]=1;});
+    p.tri.forEach(([i,n])=>{tri[i]=Math.log(n/p.triTotal);});
+    const letterLogs=p.letters.map(n=>Math.log((n||p.floorCount)/p.letterTotal));
+    function read(text){
+      const n=text.length,counts=new Uint16Array(26);let score=0,last=0,grams=0,seen=0;
+      for(let i=0;i<n;i++){
+        const c=text.charCodeAt(i)-65;
+        if(c<0||c>25)throw new Error('Language profiles accept uppercase A–Z only.');
+        counts[c]++;last=(last%17576)*26+c;
+        if(i>=3){score+=quad[last];grams++;if(seenQuad[last])seen++;}
+        else if(i===2&&n===3)score+=tri[last];
+      }
+      for(let c=0;c<26;c++)if(counts[c])score-=p.frequencyPenalty*counts[c]*(Math.log(counts[c]/n)-letterLogs[c]);
+      return{score,letters:n,grams,coverage:grams?seen/grams:0,meanLogProbability:n?score/n:0};
+    }
+    function fitness(text){return read(text).score;}
+    fitness.modelId=p.id;
+    // Decomposable view for the segmentation lattice: the increment a reading adds,
+    // given the text before it. Exact for this quadgram sum apart from the declared
+    // unigram-distribution penalty, which depends on the whole string.
+    fitness.step=function(prefix,reading){
+      if(!reading)return 0;
+      const a=prefix?read(prefix).score:0,b=read(prefix+reading).score;
+      return b-a;
+    };
+    return{id:p.id,language:p.language,period:p.period,fitness,read,meta:p};
+  }
+  function buildProfiles(data){
+    if(!data||data.id!=='museum-language-profiles-v1'||data.version!==1)throw new Error('Unsupported historical-language profile set.');
+    const profiles=data.profiles.map(profileScorer),byId={};
+    profiles.forEach(p=>{byId[p.id]=p;});
+    const rule=data.abstention;
+    // Compare language hypotheses, and decline when the evidence does not separate them.
+    function compare(text,ids){
+      const chosen=(ids&&ids.length?ids:profiles.map(p=>p.id)).map(id=>{
+        const p=byId[id];if(!p)throw new Error('Unknown language profile: '+id);return p;});
+      if(chosen.length<2)throw new Error('Comparing language hypotheses needs at least two profiles.');
+      const rows=chosen.map(p=>{const r=p.read(text);
+        return{id:p.id,language:p.language,period:p.period,meanLogProbability:r.meanLogProbability,
+          coverage:r.coverage,letters:r.letters};});
+      rows.sort((a,b)=>b.meanLogProbability-a.meanLogProbability);
+      const margin=rows.length>1?rows[0].meanLogProbability-rows[1].meanLogProbability:0;
+      const reasons=[];
+      if(rows[0].letters<rule.minimumLetters)reasons.push('Input is '+rows[0].letters+' letters; at least '+rule.minimumLetters+' are required.');
+      if(margin<rule.minimumMargin)reasons.push('Margin '+margin.toFixed(3)+' is below the declared '+rule.minimumMargin+'.');
+      if(rows[0].coverage<rule.minimumCoverage)reasons.push('Best profile covers only '+(100*rows[0].coverage).toFixed(1)+'% of this text\u2019s quadgrams; at least '+(100*rule.minimumCoverage).toFixed(0)+'% are required.');
+      return{ranking:rows,margin,decided:reasons.length===0,
+        choice:reasons.length?null:rows[0].id,abstentionReasons:reasons,
+        rule:rule,
+        meaning:'Ranking by mean log-probability per letter under each profile. This is not a probability that the text is in that language, and a language absent from the profile set can never be chosen.'};
+    }
+    return{id:data.id,version:data.version,profiles,byId,compare,abstention:rule,baseline:data.baseline};
+  }
+  if(typeof module!=='undefined'&&module.exports)module.exports={build,buildProfiles};
+  global.MuseumResearchLanguage={build,buildProfiles};
+})(typeof window!=='undefined'?window:globalThis);
+```
+
+
+## JavaScript — data/research/profile-recovery-v2/inputs/js/research-model.js
+
+**Recovery experiment command-line tool:** runs with Node.js in a repository checkout; it is not a browser control. The protocol, every recorded condition, scorer inputs and interpretation are included separately. For v1, --check audits the saved report and --replay reruns search. For the crossed v2 follow-up, scripts/check-profile-recovery-v2.js verifies saved arithmetic and identities; the frozen run.js needs a fresh output directory. Consult each version’s README before execution.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `data/research/profile-recovery-v2/inputs/js/research-model.js`
+- Served SHA-256: `c97d533d67d6cccd6c22e6fc3cf919a0f346040c343c2dc675565a44f92241f9`
+- Readable-source SHA-256: `c97d533d67d6cccd6c22e6fc3cf919a0f346040c343c2dc675565a44f92241f9`
+
+
+```javascript
+/* Source-preserving research tools. All examples and searches run locally.
+ * Papers and model boundaries: docs/PAPER_REVIEW_IMPLEMENTATION.md.
+ */
+'use strict';
+(function (global) {
+  const KIND = 'cipher-museum-transcription';
+  const TYPES = ['ciphertext', 'cleartext', 'marginal', 'missing', 'editorial'];
+  const KEY_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null', 'space', 'repeat', 'erase', 'unknown'];
+  const SOURCE_FIELDS = ['artifactId','archive','shelfmark','folio','transcriber','date','method','url','imageName',
+    'custodianCountry','repositoryRecordUrl','originPlace','originStatus','productionDateStart','productionDateEnd','productionDateStatus','provenance',
+    'scriptIdentification','scriptStatus','languageHypothesis','languageStatus',
+    'objectRights','objectAccess','objectAttribution','imageRights','imageAccess','imageAttribution','transcriptionRights','transcriptionAccess','transcriptionAttribution'];
+  const SOURCE_STATUSES = ['unknown', 'provisional', 'established'];
+  const copy = x => JSON.parse(JSON.stringify(x));
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  function check(ok, message) { if (!ok) throw new Error(message); }
+  function string(x, max, label) { check(typeof x === 'string' && x.length <= max, label + ' is missing or too long.'); return x; }
+  function integer(x, min, max, label) { check(Number.isInteger(x) && x >= min && x <= max, 'Invalid ' + label + '.'); return x; }
+  function list(x, max, label) { check(Array.isArray(x) && x.length <= max, 'Invalid ' + label + '.'); return x; }
+  function url(x) {
+    string(x, 2000, 'Source URL');
+    if (x) { let parsed; try { parsed = new URL(x); } catch (_) { throw new Error('Use a complete http or https source URL.'); }
+      check(['https:', 'http:'].includes(parsed.protocol) && !parsed.username && !parsed.password, 'Use a source URL without credentials and with http or https.'); }
+    return x;
+  }
+  function source(x) {
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid source record.');
+    const result = {};
+    for (const field of SOURCE_FIELDS) {
+      const value = x[field] === undefined ? '' : x[field];
+      if (field === 'url' || field === 'repositoryRecordUrl') result[field] = url(value);
+      else if (field.endsWith('Status')) { result[field] = value || 'unknown'; check(SOURCE_STATUSES.includes(result[field]), 'Invalid source uncertainty status.'); }
+      else result[field] = string(value, 500, field);
+    }
+    return result;
+  }
+  function create(raw = '') {
+    string(raw, 10000, 'Transcription');
+    return { version: 2, kind: KIND, raw, mode: 'symbols', width: 1, annotations: {}, revision: 1,
+      source: source({}), revisions: [{ id: 1, raw, reason: 'Initial transcription' }], spans: [], layers: [], keys: [], relations: [],
+      images: [], inventory: null, inventoryArchive: [], hypotheses: [], alignments: [] };
+  }
+  // Legacy positions count Unicode code points, not UTF-16 code units.
+  function legacyTokens(raw, mode, width) {
+    const tokens = []; let start = -1, text = '';
+    function flush(end) { if (text) tokens.push({ start, end, text }); text = ''; start = -1; }
+    const chars = Array.from(raw);
+    chars.forEach((ch, i) => {
+      const keep = !/\s/u.test(ch) && (mode === 'symbols' || ch === '?' || (mode === 'digits' ? /[0-9]/.test(ch) : /[A-Za-z]/.test(ch)));
+      if (!keep) { flush(i); return; }
+      if (start < 0) start = i;
+      text += ch; if (Array.from(text).length === width) flush(i + 1);
+    }); flush(chars.length); return tokens;
+  }
+  function migrate(v) {
+    check(v && v.kind === KIND && (v.version === 1 || v.version === 2), 'Unsupported transcription export.');
+    if (v.version === 2) return validate(v);
+    string(v.raw, 10000, 'Transcription');
+    check(['symbols', 'digits', 'letters'].includes(v.mode) && [1, 2, 5].includes(v.width), 'Unsupported legacy alphabet or width.');
+    check(v.annotations && typeof v.annotations === 'object' && !Array.isArray(v.annotations), 'Invalid legacy annotations.');
+    const d = create(v.raw); d.mode = v.mode; d.width = v.width;
+    const tokens = legacyTokens(v.raw, v.mode, v.width);
+    Object.entries(v.annotations).forEach(([index, status]) => {
+      check(/^(0|[1-9]\d*)$/.test(index) && Number(index) < tokens.length && ['uncertain', 'missing'].includes(status), 'Invalid legacy annotation.');
+      const t = tokens[Number(index)];
+      d.spans.push({ id: 'span-' + (d.spans.length + 1), revision: 1, start: t.start, end: t.end, literal: t.text,
+        type: status === 'missing' ? 'missing' : 'ciphertext', uncertain: true, alternatives: [], reading: '', reason: 'Imported legacy ' + status + ' annotation', region: null });
+    }); return validate(d);
+  }
+  function validate(value) {
+    check(value && value.version === 2 && value.kind === KIND, 'Unsupported evidence document.');
+    check(JSON.stringify(value).length <= 750000, 'Evidence document exceeds 750,000 characters.');
+    const d = copy(value); string(d.raw, 10000, 'Transcription'); d.source = source(d.source);
+    check(['symbols', 'digits', 'letters'].includes(d.mode) && [1, 2, 5].includes(d.width), 'Invalid token settings.');
+    integer(d.revision, 1, 50, 'revision'); const revisions = new Map();
+    list(d.revisions, 50, 'revisions').forEach(r => {
+      integer(r.id, 1, 50, 'revision ID'); check(!revisions.has(r.id), 'Duplicate revision.');
+      string(r.raw, 10000, 'Revision text'); string(r.reason, 1000, 'Revision reason');
+      check(r.id === 1 || r.reason.trim(), 'Each changed transcription needs a revision reason.'); revisions.set(r.id, r);
+    });
+    check(revisions.has(d.revision) && revisions.get(d.revision).raw === d.raw, 'Current transcription must match its recorded revision.');
+    check(revisions.has(1), 'The original transcription must be retained.');
+    check(d.revisions.every((r,i) => r.id === i+1) && d.revision === d.revisions.length, 'Revisions must be consecutive, with the latest revision current.');
+    d.annotations = {}; // v2 annotations use source spans, never mutable token indices.
+    // Version 2 records written before these existed simply have none of them.
+    if (!Array.isArray(d.images)) d.images = [];
+    if (!Array.isArray(d.hypotheses)) d.hypotheses = [];
+    if (d.inventory === undefined) d.inventory = null;
+    if (d.inventoryArchive === undefined) d.inventoryArchive = [];
+    if (d.alignments === undefined) d.alignments = [];
+    const imageIds = new Set();
+    list(d.images, 50, 'images').forEach(i => {
+      const rec = imageRecord(i);
+      check(!imageIds.has(rec.id), 'Duplicate image ID.'); imageIds.add(rec.id);
+      Object.assign(i, rec);
+    });
+    const ids = new Set();
+    function unique(id) { string(id, 100, 'Record ID'); check(/^[A-Za-z][A-Za-z0-9_-]*$/.test(id) && !/^revision-/.test(id) && !ids.has(id), 'Invalid, reserved or duplicate record ID.'); ids.add(id); }
+    list(d.spans, 500, 'spans').forEach(s => {
+      unique(s.id); check(revisions.has(s.revision), 'Span has no source revision.');
+      const chars = Array.from(revisions.get(s.revision).raw);
+      integer(s.start, 0, chars.length - 1, 'span start'); integer(s.end, s.start + 1, chars.length, 'span end');
+      check(s.literal === chars.slice(s.start, s.end).join(''), 'Span does not match its source.');
+      check(TYPES.includes(s.type) && typeof s.uncertain === 'boolean', 'Invalid span type or uncertainty.');
+      list(s.alternatives, 20, 'alternative readings').forEach(a => string(a, 200, 'Alternative'));
+      string(s.reading, 200, 'Accepted reading'); string(s.reason, 1000, 'Reading reason');
+      check(!s.reading || !s.alternatives.length || s.alternatives.includes(s.reading), 'Accepted reading must be one of the alternatives.');
+      check(s.uncertain || (!s.alternatives.length || (s.reading && s.reason.trim())), 'Resolving alternative readings requires a choice and reason.');
+      if (s.region !== null) {
+        string(s.imageName, 500, 'Region image filename'); check(s.imageName.trim(), 'An image region needs its recorded source filename.');
+        s.imageId = string(s.imageId || '', 100, 'Region image ID');
+        check(!s.imageId || imageIds.has(s.imageId), 'An image region must reference a recorded image.');
+        check(!s.imageId || d.images.find(i => i.id === s.imageId).name === s.imageName, 'The region filename must match its image record.');
+        list(s.region, 4, 'image region'); check(s.region.length === 4 && s.region.every(n => Number.isFinite(n) && n >= 0 && n <= 1), 'Image region uses four fractions between 0 and 1.');
+        check(s.region[2] > 0 && s.region[3] > 0 && s.region[0] + s.region[2] <= 1.00000001 && s.region[1] + s.region[3] <= 1.00000001, 'Image region must fit inside the image.');
+      }
+    });
+    const parents = new Set(d.revisions.map(r => 'revision-' + r.id));
+    list(d.layers, 100, 'reading layers').forEach(l => {
+      unique(l.id); check(['symbols', 'diplomatic', 'normalized', 'translation'].includes(l.kind), 'Unknown reading layer.');
+      check(parents.has(l.parent), 'A reading layer must reference an earlier source or layer.');
+      check(revisions.has(l.revision), 'Reading layer has no source revision.');
+      const parentLayer = d.layers.find(p => p.id === l.parent);
+      const parentRevision = parentLayer ? parentLayer.revision : Number(l.parent.replace('revision-', ''));
+      check(parentRevision === l.revision, 'Reading layer belongs to a different source revision.');
+      string(l.text, 20000, 'Layer text'); string(l.note, 1000, 'Transformation note'); check(l.note.trim(), 'Describe the transformation.'); parents.add(l.id);
+    });
+    const readingTexts = readingTextIndex(d);
+    list(d.alignments, 200, 'passage alignments').forEach(a => {
+      check(a && typeof a === 'object' && !Array.isArray(a), 'Invalid passage alignment.');
+      unique(a.id); check(/^alignment-[1-9][0-9]*$/.test(a.id), 'Invalid alignment ID.');
+      const pair = alignmentPair(readingTexts, a.source, a.target);
+      check(a.revision === pair.source.revision, 'An alignment must retain its recorded source revision.');
+      ['source', 'target'].forEach(side => {
+        const chars = Array.from(pair[side].text), ranges = a[side + 'Ranges'];
+        list(ranges, 20, side + ' passage ranges'); check(ranges.length > 0, 'Each side needs at least one passage range.');
+        let end = 0;
+        ranges.forEach((range, index) => {
+          check(range && typeof range === 'object' && !Array.isArray(range), 'Invalid passage range.');
+          unique(range.id);
+          check(range.id === a.id + '-' + side + '-' + (index + 1), 'A passage ID must retain its alignment and position.');
+          integer(range.start, 0, chars.length - 1, 'passage start'); integer(range.end, range.start + 1, chars.length, 'passage end');
+          check(range.start >= end, 'Passage ranges must be in text order without overlap within one link.'); end = range.end;
+          check(range.literal === chars.slice(range.start, range.end).join(''), 'A passage literal must match its recorded reading.');
+        });
+      });
+      string(a.note, 2000, 'Alignment note'); check(a.note.trim(), 'A passage link needs a note describing the evidence or interpretation.');
+      check(a.withdrawal === null || (a.withdrawal && typeof a.withdrawal === 'object' && !Array.isArray(a.withdrawal)), 'Invalid alignment withdrawal.');
+      if (a.withdrawal) {
+        string(a.withdrawal.reason, 2000, 'Withdrawal reason'); check(a.withdrawal.reason.trim(), 'Withdrawing a link needs a reason.');
+      }
+    });
+    list(d.keys, 30, 'keys').forEach(k => { unique(k.id); string(k.title, 200, 'Key title'); url(k.sourceUrl); validateKey(k.entries); });
+    list(d.relations, 100, 'relationships').forEach(r => {
+      ['from', 'to', 'evidence'].forEach(f => string(r[f], 2000, 'Relationship ' + f));
+      check(r.from.trim() && r.to.trim() && r.evidence.trim(), 'Relationships need two identifiers and supporting evidence.');
+      check(['transcribes', 'applies-key', 'supports', 'alternative-to'].includes(r.type), 'Unsupported relationship type.');
+    });
+    function validateInventory(inv) {
+      check(inv && typeof inv === 'object' && !Array.isArray(inv), 'Invalid symbol inventory.');
+      check(revisions.has(inv.revision), 'The symbol inventory has no source revision.');
+      check(INVENTORY_TOKENS.includes(inv.tokens), 'Unknown inventory tokenization.');
+      integer(inv.width, 1, 8, 'inventory token width'); integer(inv.nextId, 1, 5000, 'inventory counter');
+      const src = inventoryTokens(revisions.get(inv.revision).raw, inv.tokens, inv.width);
+      list(inv.occurrences, 2000, 'inventory occurrences');
+      check(inv.occurrences.length === src.length, 'The symbol inventory does not match its source revision.');
+      inv.occurrences.forEach((o, i) => check(o.index === i && o.start === src[i].start && o.end === src[i].end && o.literal === src[i].literal,
+        'Inventory occurrence ' + i + ' no longer matches the recorded source.'));
+      const assigned = new Set(), classIds = new Set();
+      list(inv.classes, 500, 'symbol classes').forEach(c => {
+        check(/^class-[1-9][0-9]*$/.test(c.id) && !classIds.has(c.id), 'Invalid or duplicate symbol-class ID.'); classIds.add(c.id);
+        string(c.label, 200, 'Class label'); check(c.label.trim(), 'Every symbol class needs a label.');
+        string(c.note, 4000, 'Class note'); check(c.note.trim(), 'Every symbol class records why it exists.');
+        list(c.occurrences, 2000, 'class occurrences').forEach(i => {
+          integer(i, 0, inv.occurrences.length - 1, 'occurrence index');
+          check(!assigned.has(i), 'An occurrence belongs to exactly one symbol class.'); assigned.add(i); });
+        check(c.occurrences.length > 0, 'A symbol class cannot be empty.');
+      });
+      check(assigned.size === inv.occurrences.length, 'Every occurrence must belong to a symbol class.');
+      list(inv.history, 2000, 'inventory history').forEach((h, i) => {
+        check(h.step === i + 1, 'Inventory decision history must stay in order.');
+        check(INVENTORY_OPS.includes(h.op), 'Unknown inventory operation.');
+        string(h.detail, 4000, 'History detail'); check(h.detail.trim(), 'Every inventory decision records what changed.'); });
+      check(inv.history.length > 0, 'The inventory must retain its decision history.');
+    }
+    if (d.inventory !== null) validateInventory(d.inventory);
+    list(d.inventoryArchive, 50, 'earlier symbol inventories').forEach(validateInventory);
+    list(d.hypotheses, 100, 'hypotheses').forEach(h => {
+      unique(h.id); check(/^hypothesis-[1-9][0-9]*$/.test(h.id), 'Invalid hypothesis ID.');
+      string(h.claim, 2000, 'Hypothesis claim'); check(h.claim.trim(), 'A hypothesis needs a claim.');
+      check(CONFIDENCE.includes(h.confidence), 'Use one of the declared confidence words: ' + CONFIDENCE.join(', ') + '.');
+      ['supports', 'contradicts'].forEach(field => list(h[field], 50, field + ' evidence').forEach(e => {
+        check(e && typeof e === 'object' && !Array.isArray(e), 'Evidence entries are objects.');
+        string(e.ref, 2000, 'Evidence reference'); string(e.note, 2000, 'Evidence note');
+        check(e.ref.trim() && e.note.trim(), 'Each piece of evidence needs an identifier and a note.'); }));
+      list(h.alternatives, 20, 'unresolved alternatives').forEach(a => string(a, 500, 'Unresolved alternative'));
+      string(h.note, 2000, 'Hypothesis note');
+      // Applying a key cleanly is not evidence of authorship, attribution or date.
+      const evidenceIds = new Set(h.supports.map(e => e.ref.normalize('NFKC').trim().replace(/\s+/g, ' ')));
+      check(h.confidence !== 'well-supported' || evidenceIds.size >= 2,
+        'Calling a claim well-supported needs at least two separately recorded pieces of supporting evidence.');
+      check(h.confidence !== 'well-supported' || h.contradicts.length === 0,
+        'Recorded counterevidence must be answered before a claim is called well-supported.');
+      check(h.confidence !== 'contradicted' || h.contradicts.length > 0,
+        'A contradicted claim must record the evidence against it.');
+    });
+    return d;
+  }
+  function revise(d, raw, reason) {
+    d = validate(d); string(raw, 10000, 'Transcription'); if (raw === d.raw) return d;
+    check(d.revisions.length < 50, 'Export this record before starting a new document: 50 revisions reached.');
+    check(typeof reason === 'string' && reason.trim(), 'Describe why the transcription changed.');
+    d.revision = Math.max(...d.revisions.map(r => r.id)) + 1; d.raw = raw;
+    d.revisions.push({ id: d.revision, raw, reason }); return validate(d);
+  }
+  function annotate(d, input) {
+    d = validate(d); const s = copy(input);
+    s.id = 'span-' + (1 + Math.max(0, ...d.spans.map(x => Number(x.id.split('-').pop()) || 0)));
+    s.revision = d.revision; s.literal = Array.from(d.raw).slice(s.start, s.end).join('');
+    // A region names the image record it belongs to; the filename follows from it.
+    if (s.region !== null) {
+      if (s.imageId) { const image = d.images.find(i => i.id === s.imageId); check(image, 'An image region must reference a recorded image.'); s.imageName = image.name; }
+      else s.imageName = d.source.imageName;
+    }
+    d.spans.push(s); return validate(d);
+  }
+  function addLayer(d, kind, parent, text, note) {
+    d = validate(d); d.layers.push({ id: 'layer-' + (d.layers.length + 1), revision: d.revision, kind, parent, text, note }); return validate(d);
+  }
+
+  // ── Manual passage alignment ─────────────────────────────────────────────
+  // Links describe a reader's comparison, never a certified translation. Text
+  // stays in its original document order; ranges use Unicode code points and
+  // retain literal snapshots so a changed reading cannot silently move a link.
+  function readingTextIndex(d) {
+    const entries = d.revisions.map(r => ({ id: 'revision-' + r.id, revision: r.id, kind: 'source',
+      label: 'Original transcription · revision ' + r.id, text: r.raw }));
+    d.layers.forEach(l => entries.push({ id: l.id, revision: l.revision, kind: l.kind,
+      label: l.id + ' · ' + l.kind + ' · source revision ' + l.revision, text: l.text }));
+    return new Map(entries.map(t => [t.id, { ...t, length: Array.from(t.text).length, current: t.revision === d.revision }]));
+  }
+  function alignmentPair(texts, source, target) {
+    check(typeof source === 'string' && typeof target === 'string' && texts.has(source) && texts.has(target),
+      'Choose two existing reading references.');
+    check(source !== target, 'Choose two different readings.');
+    const pair = { source: texts.get(source), target: texts.get(target) };
+    check(pair.source.revision === pair.target.revision, 'Compared readings must belong to the same source revision.');
+    return pair;
+  }
+  function alignmentTexts(d) { return Array.from(readingTextIndex(validate(d)).values()); }
+  function addAlignment(d, input) {
+    d = validate(d);
+    check(input && typeof input === 'object' && !Array.isArray(input), 'Supply a passage alignment.');
+    const pair = alignmentPair(readingTextIndex(d), input.source, input.target);
+    check(pair.source.revision === d.revision, 'New passage links must use the current source revision.');
+    const used = new Set([...d.spans, ...d.layers, ...d.keys, ...d.hypotheses, ...d.alignments,
+      ...d.alignments.flatMap(a => a.sourceRanges.concat(a.targetRanges))].map(item => item.id));
+    let number = 1;
+    while (Array.from(used).some(id => id === 'alignment-' + number || id.startsWith('alignment-' + number + '-'))) number++;
+    const id = 'alignment-' + number;
+    function recordedRanges(side) {
+      const chars = Array.from(pair[side].text);
+      const ranges = list(input[side + 'Ranges'], 20, side + ' passage ranges').map(range => {
+        check(range && typeof range === 'object' && !Array.isArray(range), 'Invalid passage range.');
+        integer(range.start, 0, chars.length - 1, 'passage start'); integer(range.end, range.start + 1, chars.length, 'passage end');
+        return { start: range.start, end: range.end };
+      }).sort((a, b) => a.start - b.start || a.end - b.end);
+      return ranges.map((range, index) => ({ id: id + '-' + side + '-' + (index + 1), ...range,
+        literal: chars.slice(range.start, range.end).join('') }));
+    }
+    d.alignments.push({ id, revision: d.revision, source: input.source, target: input.target,
+      sourceRanges: recordedRanges('source'), targetRanges: recordedRanges('target'), note: input.note, withdrawal: null });
+    return validate(d);
+  }
+  function withdrawAlignment(d, id, reason) {
+    d = validate(d);
+    const link = d.alignments.find(a => a.id === id);
+    check(link, 'Choose an existing passage link.'); check(!link.withdrawal, 'This passage link was already withdrawn.');
+    string(reason, 2000, 'Withdrawal reason'); check(reason.trim(), 'Withdrawing a link needs a reason.');
+    link.withdrawal = { reason }; return validate(d);
+  }
+  function alignmentView(d, source, target) {
+    d = validate(d);
+    const pair = alignmentPair(readingTextIndex(d), source, target), links = [], withdrawn = [];
+    d.alignments.forEach(a => {
+      const forward = a.source === source && a.target === target, reverse = a.source === target && a.target === source;
+      if (!forward && !reverse) return;
+      const link = { ...copy(a), source, target, recordedSource: a.source, recordedTarget: a.target, reversed: reverse,
+        sourceRanges: copy(forward ? a.sourceRanges : a.targetRanges), targetRanges: copy(forward ? a.targetRanges : a.sourceRanges) };
+      (a.withdrawal ? withdrawn : links).push(link);
+    });
+    function unmatched(side) {
+      const chars = Array.from(pair[side].text), result = [];
+      const covered = links.flatMap(a => a[side + 'Ranges']).sort((a, b) => a.start - b.start || a.end - b.end);
+      let end = 0;
+      covered.forEach(range => {
+        if (range.start > end) result.push({ start: end, end: range.start, literal: chars.slice(end, range.start).join('') });
+        end = Math.max(end, range.end);
+      });
+      if (end < chars.length) result.push({ start: end, end: chars.length, literal: chars.slice(end).join('') });
+      return result;
+    }
+    return { ...pair, revision: pair.source.revision, current: pair.source.revision === d.revision,
+      links, withdrawn, sourceUnmatched: unmatched('source'), targetUnmatched: unmatched('target') };
+  }
+  function validateKey(entries) {
+    list(entries, 150, 'key entries'); const seen = new Set();
+    entries.forEach(e => {
+      string(e.symbol, 100, 'Key symbol'); check(e.symbol.trim() && !seen.has(e.symbol), 'Each key symbol must be nonempty and unique.'); seen.add(e.symbol);
+      check(KEY_TYPES.includes(e.type), 'Unknown key-entry type.'); list(e.values, 20, 'key readings').forEach(v => string(v, 200, 'Key reading'));
+      if (['null', 'space', 'repeat', 'erase', 'unknown'].includes(e.type)) check(e.values.length === 0, 'Control entries have no literal readings.');
+      else { check(e.values.length > 0 && e.values.every(v => v.length > 0), 'Supply at least one reading.'); if (e.type === 'letter') check(e.values.every(v => Array.from(v).length === 1), 'A letter entry contains single characters.'); }
+    }); return entries;
+  }
+  function applyKey(tokens, entries) {
+    validateKey(entries); const key = new Map(entries.map(e => [e.symbol, e])); let text = '', unresolved = 0;
+    tokens.forEach(t => {
+      const e = key.get(t);
+      if (!e || e.type === 'unknown') { text += '⟦' + t + '?⟧'; unresolved++; }
+      else if (e.type === 'null') return;
+      else if (e.type === 'space') text += ' ';
+      else if (e.type === 'repeat' || e.type === 'erase') {
+        // This explicit teaching convention acts on one resolved Unicode character.
+        if (!text || text.endsWith('⟧')) { text += '⟦' + e.type + '?⟧'; unresolved++; }
+        else { const chars = Array.from(text); if (e.type === 'repeat') text += chars.at(-1); else text = chars.slice(0, -1).join(''); }
+      } else if (e.values.length > 1) { text += '⟦' + e.values.join('/') + '⟧'; unresolved++; }
+      else text += e.values[0];
+    }); return { text, unresolved, tokens: tokens.length };
+  }
+  // ── Numerical segmentation ────────────────────────────────────────────────
+  // A typed entry distinguishes a letter, a syllable, a whole word, a name and a
+  // null that deliberately contributes nothing. A bare string stays one reading.
+  const SEG_TYPES = ['letter', 'syllable', 'word', 'name', 'number', 'content-word', 'function-word', 'ending', 'phrase', 'sentence', 'punctuation', 'null'];
+  const SEG_LINES = ['boundary', 'span'];
+  const COUNT_CAP = 1e15;
+  function normalizeCodes(key) {
+    const raw = Object.entries(key);
+    check(raw.length > 0 && raw.length <= 64, 'Use 1–64 numerical key entries.');
+    return raw.map(([code, value]) => {
+      check(/^[0-9]{1,6}$/.test(code), 'Codes must contain 1–6 digits.');
+      if (typeof value === 'string') {
+        string(value, 50, 'Code reading'); check(value.length > 0, 'Code readings cannot be empty.');
+        return { code, type: Array.from(value).length === 1 ? 'letter' : 'word', values: [value], note: '' };
+      }
+      check(value && typeof value === 'object' && !Array.isArray(value), 'A code entry is a string or a typed object.');
+      check(SEG_TYPES.includes(value.type), 'Unknown numerical code type.');
+      const values = list(value.values || [], 8, 'code readings').map(v => string(v, 50, 'Code reading'));
+      if (value.type === 'null') check(values.length === 0, 'A null code contributes no reading.');
+      else check(values.length > 0 && values.every(v => v.length > 0), 'Supply at least one reading.');
+      return { code, type: value.type, values, note: string(value.note || '', 200, 'Code note') };
+    });
+  }
+  const codeReading = e => (e.type === 'null' ? '' : e.values[0]);
+  // Lattice segmentation. Backward reachability prunes dead ends before any path is
+  // built. When every complete path fits the node budget the enumeration is exhaustive
+  // and the retained set is globally best; otherwise a per-state beam bounds the work
+  // and the global optimum is no longer guaranteed. The result says which happened.
+  function segment(digits, key, boundaries = [], limit = 10000, score = () => 0, options = {}) {
+    check(typeof digits === 'string' && /^[0-9](?:[0-9\n]*[0-9])?$/.test(digits) && digits.replace(/\n/g, '').length <= 80,
+      'Use 1–80 digits without spaces; line breaks are allowed and kept as source structure. The source will not be normalized.');
+    check(key && typeof key === 'object' && !Array.isArray(key), 'Supply a code-to-reading object.');
+    const entries = normalizeCodes(key);
+    integer(limit, 1, 20000, 'path budget');
+    const opts = options && typeof options === 'object' ? options : {};
+    const policy = opts.lineBreaks || 'boundary';
+    check(SEG_LINES.includes(policy), 'Unknown line-break policy.');
+    const beam = integer(opts.beam === undefined ? 32 : opts.beam, 1, 64, 'retained-path limit');
+    const n = digits.length;
+    list(boundaries, 159, 'locked boundaries').forEach(b => integer(b, 1, n - 1, 'locked boundary'));
+    const cuts = new Set(boundaries);
+    // Line breaks are source structure, not data. Under the default policy they are
+    // mandatory cuts that no code may cross; under 'span' a code may continue across
+    // one. Either way the break itself is never consumed, so the original digits and
+    // their line layout survive in every path.
+    // Line positions are tracked only for the ambiguity report. Whether a code may
+    // cross one is decided in exactly one place, matchAt below, so a change there
+    // cannot be masked by a second mechanism quietly enforcing the same rule.
+    const lineCuts = new Set();
+    if (policy === 'boundary') for (let i = 0; i < n; i++) if (digits[i] === '\n') { lineCuts.add(i); lineCuts.add(i + 1); }
+    // Returns the end position of a code matched from pos, or -1.
+    function matchAt(pos, code) {
+      let i = pos, k = 0;
+      while (k < code.length) {
+        if (i >= n) return -1;
+        if (digits[i] === '\n') { if (policy !== 'span') return -1; i++; continue; }
+        if (digits[i] !== code[k]) return -1;
+        i++; k++;
+      }
+      return i;
+    }
+    const edges = [];
+    for (let pos = 0; pos < n; pos++) {
+      edges[pos] = [];
+      if (digits[pos] === '\n') { edges[pos].push({ entry: null, end: pos + 1 }); continue; }
+      for (const e of entries) {
+        const end = matchAt(pos, e.code);
+        if (end < 0) continue;
+        let blocked = false;
+        for (let b = pos + 1; b < end; b++) if (cuts.has(b)) { blocked = true; break; }
+        if (!blocked) edges[pos].push({ entry: e, end });
+      }
+    }
+    const reach = new Array(n + 1).fill(false), bwd = new Array(n + 1).fill(0);
+    reach[n] = true; bwd[n] = 1;
+    for (let pos = n - 1; pos >= 0; pos--) {
+      let sum = 0;
+      for (const edge of edges[pos]) if (reach[edge.end]) sum += bwd[edge.end];
+      bwd[pos] = Math.min(sum, COUNT_CAP); reach[pos] = sum > 0;
+    }
+    const fwd = new Array(n + 1).fill(0); fwd[0] = 1;
+    for (let pos = 0; pos < n; pos++) {
+      if (!fwd[pos] || !reach[pos]) continue;
+      for (const edge of edges[pos]) if (reach[edge.end]) fwd[edge.end] = Math.min(fwd[edge.end] + fwd[pos], COUNT_CAP);
+    }
+    const total = bwd[0], exhaustive = total <= limit;
+    const paths = []; let visited = 0, truncated = false, beamPruned = false;
+    const order = (a, b) => b.score - a.score || a.codes.join('|').localeCompare(b.codes.join('|'));
+    function keep(codes, items, text) {
+      const value = score(text);
+      check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
+      paths.push({ codes, entries: items, text, score: value,
+        alternatives: items.filter(i => i.values.length > 1).map(i => ({ code: i.code, start: i.start, values: i.values.slice() })) });
+      paths.sort(order); if (paths.length > beam) paths.pop();
+    }
+    function step(pos, edge, codes, items, text) {
+      if (!edge.entry) return { codes: codes.concat('\n'), items, text };
+      const reading = codeReading(edge.entry);
+      // The recorded chunk is the SOURCE slice, so joining a path's chunks always
+      // reproduces the original digits, line breaks included.
+      const source = digits.slice(pos, edge.end);
+      return { codes: codes.concat(source), text: text + reading,
+        items: items.concat([{ code: edge.entry.code, source, type: edge.entry.type, reading,
+          values: edge.entry.values.slice(), start: pos, end: edge.end }]) };
+    }
+    if (exhaustive) {
+      (function walk(pos, codes, items, text) {
+        if (visited >= limit) { truncated = true; return; }
+        visited++;
+        if (pos === n) { keep(codes, items, text); return; }
+        for (const edge of edges[pos]) {
+          if (!reach[edge.end]) continue;
+          const nx = step(pos, edge, codes, items, text);
+          walk(edge.end, nx.codes, nx.items, nx.text);
+          if (truncated) return;
+        }
+      })(0, [], [], '');
+    } else {
+      const decomposable = typeof score.step === 'function';
+      const states = new Array(n + 1);
+      states[0] = [{ codes: [], items: [], text: '', score: 0 }];
+      for (let pos = 0; pos < n && !truncated; pos++) {
+        const here = states[pos];
+        if (!here || !here.length || !reach[pos]) continue;
+        if (here.length > beam) { here.sort(order); here.length = beam; beamPruned = true; }
+        for (const edge of edges[pos]) {
+          if (!reach[edge.end]) continue;
+          const bucket = states[edge.end] || (states[edge.end] = []);
+          for (const partial of here) {
+            if (visited >= limit) { truncated = true; break; }
+            visited++;
+            const nx = step(pos, edge, partial.codes, partial.items, partial.text);
+            const value = decomposable ? partial.score + score.step(partial.text, nx.text.slice(partial.text.length)) : 0;
+            check(Number.isFinite(value), 'The selected scoring model cannot score this reading.');
+            bucket.push({ codes: nx.codes, items: nx.items, text: nx.text, score: value });
+          }
+          if (truncated) break;
+        }
+      }
+      const finals = (states[n] || []).slice();
+      finals.sort(order);
+      if (finals.length > beam) beamPruned = true;
+      finals.slice(0, beam).forEach(f => keep(f.codes, f.items, f.text));
+    }
+    // Count saturation cannot establish that every path visits a boundary.
+    // A boundary is bypassable iff some edge on a complete path crosses it.
+    const bypassable = new Array(n + 1).fill(false);
+    for (let pos = 0; pos < n; pos++) if (fwd[pos] > 0) {
+      for (const edge of edges[pos]) if (reach[edge.end]) {
+        for (let p = pos + 1; p < edge.end; p++) bypassable[p] = true;
+      }
+    }
+    const ambiguity = [];
+    if (total > 0) for (let p = 1; p < n; p++) {
+      const through = Math.min(fwd[p] * bwd[p], COUNT_CAP);
+      ambiguity.push({ position: p, pathsCutting: through, locked: cuts.has(p) || lineCuts.has(p),
+        pathsCuttingCapped: through >= COUNT_CAP,
+        forced: !bypassable[p], impossible: fwd[p] === 0 || bwd[p] === 0,
+        startingCodes: (edges[p] || []).filter(e => e.entry && reach[e.end]).map(e => e.entry.code) });
+    }
+    const complete = exhaustive && !truncated;
+    return { paths, visited, complete, total, totalCapped: total >= COUNT_CAP, retained: paths.length, limit,
+      boundaries: boundaries.slice(), lineBreaks: policy, beam, beamPruned, ambiguity,
+      mode: exhaustive ? 'exhaustive-lattice' : 'bounded-k-best',
+      globalBestGuaranteed: complete,
+      pruning: complete
+        ? 'Backward reachability only. Every complete path was enumerated and scored, so the retained ranking is globally best.'
+        : 'Backward reachability plus a per-state beam of ' + beam + ' within a ' + limit + '-node budget. Pruning can discard the globally best path.' };
+  }
+  // Segmentation error is reported apart from plaintext error: a boundary can move
+  // without changing a letter, and a reading can change without moving a boundary.
+  function segmentMetrics(expected, actual) {
+    const bounds = codes => { const s = new Set(); let p = 0;
+      list(codes, 200, 'code sequence').forEach(c => { p += String(c).length; s.add(p); }); s.delete(p); return s; };
+    const a = bounds(expected), b = bounds(actual);
+    let shared = 0; a.forEach(x => { if (b.has(x)) shared++; });
+    const union = new Set(); a.forEach(x => union.add(x)); b.forEach(x => union.add(x));
+    return { boundaryMatches: shared, boundariesExpected: a.size, boundariesActual: b.size,
+      boundarySymmetricDifference: union.size - shared,
+      boundaryError: a.size ? (a.size - shared) / a.size : (b.size ? 1 : 0),
+      exactCodes: expected.length === actual.length && expected.every((c, i) => String(c) === String(actual[i])) };
+  }
+  function rng(seed) {
+    let x = seed >>> 0;
+    return function () { x += 0x6D2B79F5; let t = x; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  function parseSymbols(raw) {
+    string(raw, 12000, 'Symbol sequence'); const tokens = raw.trim().split(/\s+/u).filter(Boolean);
+    check(tokens.length >= 3 && tokens.length <= 600, 'Use 3–600 whitespace-separated symbol IDs.');
+    check(tokens.every(t => t.length <= 40 && !t.includes('?')), 'Resolve unknown symbols first; IDs may be at most 40 characters.');
+    check(new Set(tokens).size <= 100, 'Use at most 100 distinct symbol IDs.'); return tokens;
+  }
+  // Deterministic simulated annealing; independent assignments permit many-to-one keys.
+  function search(tokens, options, score, progress = () => {}) {
+    parseSymbols(tokens.join(' ')); const symbols = Array.from(new Set(tokens));
+    const seed = integer(options.seed, 0, 4294967295, 'seed');
+    const steps = integer(options.steps, 1, 100000, 'search budget');
+    check(steps * tokens.length <= 20000000, 'Reduce the step budget: maximum 20 million symbol evaluations.');
+    const locks = options.locks || {}; check(typeof locks === 'object' && !Array.isArray(locks), 'Invalid locked key.');
+    Object.entries(locks).forEach(([s,v]) => check(symbols.includes(s) && /^[A-Z]$/.test(v), 'A lock must name a present symbol and one A–Z letter.'));
+    const random = rng(seed), alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', weighted = 'EEEEEEEEEEEETTTTTTTTTAAAAAAAAOOOOOOOIIIIIIINNNNNNNSSSSSSHHHHHHRRRRRRDDDDLLLLCCCUUUMMWWFFGGYYPPBBVKJXQZ';
+    const ids = tokens.map(t => symbols.indexOf(t)), free = symbols.map((_,i) => i).filter(i => !own(locks, symbols[i]));
+    let key = [], current = -Infinity, best = -Infinity; const candidates = [], trace = [];
+    function decode(k) { return ids.map(i => k[i]).join(''); }
+    function retain(k, fit, step) {
+      const plaintext = decode(k); if (candidates.some(c => c.plaintext === plaintext)) return;
+      candidates.push({ plaintext, score: fit, step, key: Object.fromEntries(symbols.map((s,i) => [s,k[i]])) });
+      candidates.sort((a,b) => b.score - a.score || a.plaintext.localeCompare(b.plaintext)); if (candidates.length > 5) candidates.pop();
+    }
+    const restartLength = Math.min(5000, steps);
+    for (let i = 0; i < steps; i++) {
+      if (i % restartLength === 0) {
+        key = symbols.map(s => own(locks,s) ? locks[s] : weighted[Math.floor(random() * weighted.length)]);
+        current = score(decode(key)); check(Number.isFinite(current), 'Scoring model returned an invalid value.'); retain(key, current, i);
+      }
+      if (!free.length) { retain(key, current, i); best = current; trace.push({ step: 0, score: current }); break; }
+      const a = free[Math.floor(random() * free.length)], oldA = key[a];
+      let b = -1, oldB;
+      if (free.length > 1 && random() < 0.2) { b = free[Math.floor(random() * free.length)]; oldB = key[b]; key[a] = oldB; key[b] = oldA; }
+      else key[a] = alphabet[Math.floor(random() * 26)];
+      const next = score(decode(key)), temp = 0.2 + 8 * (1 - (i % restartLength) / restartLength);
+      check(Number.isFinite(next), 'Scoring model returned an invalid value.');
+      if (next >= current || random() < Math.exp((next - current) / temp)) current = next;
+      else { key[a] = oldA; if (b >= 0) key[b] = oldB; }
+      if (current >= best || i % 1000 === 0) { retain(key, current, i + 1); best = Math.max(best, current); }
+      if (i % 1000 === 0 || i === steps - 1) { trace.push({ step: i + 1, score: candidates[0].score }); progress({ step: i + 1, steps, score: candidates[0].score }); }
+    }
+    return { candidates, trace, seed, requestedSteps: steps, completedSteps: free.length ? steps : 0,
+      task: free.length ? 'key-recovery-candidates' : 'known-key-application', locks: copy(locks),
+      model: score.modelId || 'custom-scoring-function', verified: false, scope: 'Letter homophones only; no word codes, nulls, control signs or historical-language model.' };
+  }
+  // ── Images, coordinate transforms and occurrence linking ──────────────────
+  // A region is always stored in the ORIGINAL image's normalized coordinates.
+  // Crop and rotation describe only how the image is presented, so changing the
+  // presentation never rewrites a recorded region.
+  const ROTATIONS = [0, 90, 180, 270];
+  function imageRecord(x) {
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid image record.');
+    const r = {};
+    r.id = string(x.id, 100, 'Image ID');
+    check(/^[A-Za-z][A-Za-z0-9_-]*$/.test(r.id), 'Invalid image ID.');
+    r.name = string(x.name || '', 500, 'Image filename');
+    check(r.name.trim(), 'An image record needs its recorded filename.');
+    r.sha256 = string(x.sha256 || '', 64, 'Image content hash');
+    check(r.sha256 === '' || /^[0-9a-f]{64}$/.test(r.sha256), 'An image hash is 64 lowercase hexadecimal characters.');
+    r.width = integer(x.width, 1, 100000, 'image width');
+    r.height = integer(x.height, 1, 100000, 'image height');
+    r.rotation = integer(x.rotation === undefined ? 0 : x.rotation, 0, 270, 'image rotation');
+    check(ROTATIONS.includes(r.rotation), 'Rotation must be 0, 90, 180 or 270 degrees clockwise.');
+    const crop = x.crop === undefined || x.crop === null ? [0, 0, 1, 1] : x.crop;
+    list(crop, 4, 'image crop');
+    check(crop.length === 4 && crop.every(v => Number.isFinite(v) && v >= 0 && v <= 1), 'A crop uses four fractions between 0 and 1.');
+    check(crop[2] > 0 && crop[3] > 0 && crop[0] + crop[2] <= 1.00000001 && crop[1] + crop[3] <= 1.00000001, 'A crop must fit inside the image.');
+    r.crop = crop.map(Number);
+    r.note = string(x.note || '', 1000, 'Image note');
+    return r;
+  }
+  function regionToDisplay(image, region) {
+    const img = imageRecord(image);
+    list(region, 4, 'image region');
+    check(region.length === 4 && region.every(v => Number.isFinite(v)), 'A region is four finite numbers.');
+    const c = img.crop;
+    let x = (region[0] - c[0]) / c[2], y = (region[1] - c[1]) / c[3], w = region[2] / c[2], h = region[3] / c[3];
+    const visible = x + w > 1e-9 && y + h > 1e-9 && x < 1 - 1e-9 && y < 1 - 1e-9;
+    if (img.rotation === 90) { const nx = 1 - (y + h); y = x; x = nx; const t = w; w = h; h = t; }
+    else if (img.rotation === 180) { x = 1 - (x + w); y = 1 - (y + h); }
+    else if (img.rotation === 270) { const nx = y; y = 1 - (x + w); x = nx; const t = w; w = h; h = t; }
+    const clipped = x < -1e-9 || y < -1e-9 || x + w > 1 + 1e-9 || y + h > 1 + 1e-9;
+    return { visible, clipped, box: [x, y, w, h] };
+  }
+  function displayToRegion(image, box) {
+    const img = imageRecord(image);
+    list(box, 4, 'display box');
+    check(box.length === 4 && box.every(v => Number.isFinite(v)), 'A display box is four finite numbers.');
+    let x = box[0], y = box[1], w = box[2], h = box[3];
+    if (img.rotation === 90) { const nx = y; y = 1 - (x + w); x = nx; const t = w; w = h; h = t; }
+    else if (img.rotation === 180) { x = 1 - (x + w); y = 1 - (y + h); }
+    else if (img.rotation === 270) { const nx = 1 - (y + h); y = x; x = nx; const t = w; w = h; h = t; }
+    const c = img.crop;
+    return [c[0] + x * c[2], c[1] + y * c[3], w * c[2], h * c[3]];
+  }
+  // Pixel size of what the viewer sees, after cropping and rotation.
+  function displayAspect(image) {
+    const img = imageRecord(image);
+    const w = img.width * img.crop[2], h = img.height * img.crop[3];
+    return img.rotation % 180 === 0 ? { width: w, height: h } : { width: h, height: w };
+  }
+  function addImage(d, input) {
+    d = validate(d);
+    const next = copy(input || {});
+    if (!next.id) next.id = 'image-' + (d.images.length + 1);
+    check(!d.images.some(i => i.id === next.id), 'Duplicate image ID.');
+    d.images.push(imageRecord(next));
+    return validate(d);
+  }
+  // ── Symbol inventory ──────────────────────────────────────────────────────
+  const INVENTORY_TOKENS = ['whitespace', 'fixed'];
+  const INVENTORY_OPS = ['build', 'split', 'merge', 'relabel'];
+  function inventoryTokens(raw, mode, width) {
+    check(INVENTORY_TOKENS.includes(mode), 'Unknown inventory tokenization.');
+    const chars = Array.from(raw), out = [];
+    let start = -1, text = '';
+    const flush = end => { if (text) out.push({ start, end, literal: text }); text = ''; start = -1; };
+    chars.forEach((ch, i) => {
+      if (/\s/u.test(ch)) { flush(i); return; }
+      if (start < 0) start = i;
+      text += ch;
+      if (mode === 'fixed' && Array.from(text).length === width) flush(i + 1);
+    });
+    flush(chars.length);
+    return out.map((t, i) => ({ index: i, start: t.start, end: t.end, literal: t.literal }));
+  }
+  function buildInventory(d, options = {}) {
+    d = validate(d);
+    if (d.inventory) {
+      check(d.inventoryArchive.length < 50, 'Export this record before rebuilding: 50 earlier inventories retained.');
+      d.inventoryArchive.push(copy(d.inventory));
+    }
+    const mode = options.tokens || 'whitespace';
+    const width = mode === 'fixed' ? integer(options.width || 1, 1, 8, 'token width') : 1;
+    const tokens = inventoryTokens(d.raw, mode, width);
+    check(tokens.length > 0 && tokens.length <= 2000, 'A symbol inventory needs 1–2,000 occurrences.');
+    const byLiteral = new Map();
+    tokens.forEach(t => { if (!byLiteral.has(t.literal)) byLiteral.set(t.literal, []); byLiteral.get(t.literal).push(t.index); });
+    check(byLiteral.size <= 400, 'Use at most 400 distinct symbols in one inventory.');
+    let seq = 0;
+    const classes = Array.from(byLiteral.entries()).map(([literal, occ]) => ({
+      id: 'class-' + (++seq), label: literal,
+      note: 'Initial class: every occurrence transcribed as ' + literal + '. Not yet inspected.',
+      occurrences: occ.slice() }));
+    d.inventory = { revision: d.revision, tokens: mode, width, nextId: seq + 1, occurrences: tokens, classes,
+      history: [{ step: 1, op: 'build',
+        detail: 'Built ' + classes.length + ' classes from ' + tokens.length + ' occurrences at revision ' + d.revision +
+          '. Identical transcriptions start together; splitting them is a research decision.' }] };
+    return validate(d);
+  }
+  function requireInventory(d) { check(d.inventory, 'Build the symbol inventory before changing it.'); return d.inventory; }
+  function splitClass(d, classId, indices, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const source = inv.classes.find(c => c.id === classId);
+    check(source, 'Unknown symbol class.');
+    const chosen = Array.from(new Set(list(indices, 2000, 'selected occurrences')
+      .map(i => integer(i, 0, inv.occurrences.length - 1, 'occurrence index')))).sort((a, b) => a - b);
+    check(chosen.length > 0, 'Select at least one occurrence to split out.');
+    check(chosen.every(i => source.occurrences.includes(i)), 'Every selected occurrence must belong to the class being split.');
+    check(chosen.length < source.occurrences.length, 'Splitting every occurrence would empty the class; relabel it instead.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why these occurrences are a different symbol.');
+    const id = 'class-' + inv.nextId++;
+    const before = source.label;
+    source.occurrences = source.occurrences.filter(i => chosen.indexOf(i) < 0);
+    inv.classes.push({ id, label: string(label, 200, 'Class label'), note: reason, occurrences: chosen });
+    check(label.trim(), 'The new class needs a label.');
+    inv.history.push({ step: inv.history.length + 1, op: 'split',
+      detail: 'Split occurrences ' + chosen.join(', ') + ' out of ' + source.id + ' (' + before + ') into ' + id +
+        ' (' + label + '). Remaining occurrences keep their earlier assignment. Reason: ' + reason });
+    return validate(d);
+  }
+  function mergeClasses(d, ids, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const chosen = list(ids, 50, 'merged classes').map(id => {
+      const c = inv.classes.find(x => x.id === id); check(c, 'Unknown symbol class.'); return c; });
+    check(new Set(ids).size === chosen.length, 'List each merged class once.');
+    check(chosen.length >= 2, 'Select at least two classes to merge.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why these are one symbol.');
+    check(typeof label === 'string' && label.trim(), 'The merged class needs a label.');
+    const kept = chosen[0];
+    const prior = chosen.map(c => c.id + ' labelled ' + c.label + ' (' + c.note + ')').join(' | ');
+    const occ = []; chosen.forEach(c => c.occurrences.forEach(i => occ.push(i)));
+    kept.occurrences = Array.from(new Set(occ)).sort((a, b) => a - b);
+    kept.label = string(label, 200, 'Class label'); kept.note = reason;
+    inv.classes = inv.classes.filter(c => c === kept || chosen.indexOf(c) < 0);
+    inv.history.push({ step: inv.history.length + 1, op: 'merge',
+      detail: 'Merged into ' + kept.id + ' as ' + label + '. Earlier assignments were: ' + prior + '. Reason: ' + reason });
+    return validate(d);
+  }
+  function relabelClass(d, classId, label, reason) {
+    d = validate(d); const inv = requireInventory(d);
+    const c = inv.classes.find(x => x.id === classId); check(c, 'Unknown symbol class.');
+    check(typeof label === 'string' && label.trim(), 'A class needs a label.');
+    check(typeof reason === 'string' && reason.trim(), 'Record why the label changed.');
+    const before = c.label;
+    c.label = string(label, 200, 'Class label'); c.note = reason;
+    inv.history.push({ step: inv.history.length + 1, op: 'relabel',
+      detail: 'Relabelled ' + classId + ' from ' + before + ' to ' + label + '. Reason: ' + reason });
+    return validate(d);
+  }
+  // Every occurrence of a class, with the spans and image regions recorded over it.
+  function classOccurrences(d, classId) {
+    d = validate(d); const inv = requireInventory(d);
+    const c = inv.classes.find(x => x.id === classId); check(c, 'Unknown symbol class.');
+    return c.occurrences.map(i => {
+      const o = inv.occurrences[i];
+      const spans = d.spans.filter(s => s.revision === inv.revision && s.start < o.end && s.end > o.start);
+      return { index: i, start: o.start, end: o.end, literal: o.literal,
+        spans: spans.map(s => s.id),
+        regions: spans.filter(s => s.region).map(s => ({ span: s.id, imageId: s.imageId || '', imageName: s.imageName || '', region: s.region.slice() })) };
+    });
+  }
+  // The reverse direction: which transcription characters a recorded region covers.
+  function regionOccurrences(d, spanId) {
+    d = validate(d);
+    const s = d.spans.find(x => x.id === spanId); check(s, 'Unknown evidence span.');
+    const inv = d.inventory;
+    const classes = [];
+    if (inv && inv.revision === s.revision) inv.classes.forEach(c => {
+      const hit = c.occurrences.filter(i => { const o = inv.occurrences[i]; return o.start < s.end && o.end > s.start; });
+      if (hit.length) classes.push({ id: c.id, label: c.label, occurrences: hit });
+    });
+    return { span: s.id, revision: s.revision, start: s.start, end: s.end, literal: s.literal,
+      imageId: s.imageId || '', imageName: s.imageName || '', region: s.region ? s.region.slice() : null, classes };
+  }
+  // ── Hypothesis register ───────────────────────────────────────────────────
+  const CONFIDENCE = ['unsupported', 'possible', 'probable', 'well-supported', 'contradicted'];
+  function addHypothesis(d, input) {
+    d = validate(d);
+    const h = copy(input || {});
+    h.id = 'hypothesis-' + (d.hypotheses.length + 1);
+    h.supports = h.supports || []; h.contradicts = h.contradicts || [];
+    h.alternatives = h.alternatives || []; h.note = h.note || '';
+    d.hypotheses.push(h);
+    return validate(d);
+  }
+  // ── Investigation bundle ──────────────────────────────────────────────────
+  const BUNDLE_KIND = 'cipher-museum-investigation';
+  const BUNDLE_VERSION = 2;
+  const MODEL_BUILD = 'research-model-2026-10-30';
+  // Stable key ordering makes bindings independent of JSON object insertion order.
+  function canonical(value) {
+    if (Array.isArray(value)) return '[' + value.map(canonical).join(',') + ']';
+    if (value && typeof value === 'object') return '{' + Object.keys(value).sort().map(k => JSON.stringify(k) + ':' + canonical(value[k])).join(',') + '}';
+    return JSON.stringify(value);
+  }
+  function resultBinding(b, type) {
+    const state = copy(b[type]);
+    delete state.inputFingerprint; delete state.configurationFingerprint;
+    delete state.elapsedMs; // A measurement is not a solver input.
+    return fingerprint(canonical({ state, source: bindingEvidence(b.evidence), selectedLayer: b.selectedLayer,
+      modelBuild: b.tool.modelBuild, scoringModel: type === 'search' ? b.tool.scoringModel : state.scoring,
+      solver: type === 'search' ? b.tool.solver : 'numerical-lattice' }));
+  }
+  // Empty optional metadata must not make an unchanged pre-extension bundle
+  // appear edited. Meaningful new metadata still participates in every binding.
+  function bindingEvidence(d) {
+    const result = copy(d);
+    if (Array.isArray(result.alignments) && result.alignments.length === 0) delete result.alignments;
+    for (const f of SOURCE_FIELDS.slice(9)) {
+      if (result.source[f] === '' || (f.endsWith('Status') && result.source[f] === 'unknown')) delete result.source[f];
+    }
+    return result;
+  }
+  // A declared NON-cryptographic 64-bit fingerprint. It detects a changed input so
+  // stale results can be invalidated; it is not an integrity or authenticity check.
+  function fingerprint(text) {
+    string(text, 4000000, 'Fingerprint input');
+    let a = 0x811c9dc5, b = 0x01000193;
+    for (let i = 0; i < text.length; i++) {
+      const c = text.charCodeAt(i);
+      a = Math.imul(a ^ c, 16777619) >>> 0;
+      b = Math.imul(b + c + i, 2246822519) >>> 0; b = (b ^ b >>> 13) >>> 0;
+    }
+    return (a >>> 0).toString(16).padStart(8, '0') + (b >>> 0).toString(16).padStart(8, '0');
+  }
+  function lockMap(x, label) {
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid ' + label + '.');
+    const out = {};
+    Object.entries(x).forEach(([k, v]) => { string(k, 40, label + ' symbol'); check(/^[A-Z]$/.test(v), 'A lock names one A–Z letter.'); out[k] = v; });
+    check(Object.keys(out).length <= 100, 'Too many locked mappings.');
+    return out;
+  }
+  function productionInfo(x) {
+    if (x === undefined || x === null) return null;
+    check(x && typeof x === 'object' && !Array.isArray(x), 'Invalid recorded tool identity.');
+    return { modelBuild: string(x.modelBuild || '', 100, 'Recorded model build'),
+      scoringModel: string(x.scoringModel || '', 200, 'Recorded scoring model'),
+      solver: string(x.solver || '', 200, 'Recorded solver') };
+  }
+  function searchState(s) {
+    check(s && typeof s === 'object' && !Array.isArray(s), 'Invalid solver state.');
+    return { algorithm: string(s.algorithm || 'annealing', 40, 'Solver algorithm'),
+      raw: string(s.raw || '', 12000, 'Solver input'),
+      seed: integer(s.seed === undefined ? 0 : s.seed, 0, 4294967295, 'seed'),
+      steps: integer(s.steps === undefined ? 1 : s.steps, 1, 100000, 'search budget'),
+      beam: integer(s.beam === undefined ? 0 : s.beam, 0, 2000, 'beam width'),
+      locks: lockMap(s.locks || {}, 'locked key'),
+      elapsedMs: integer(s.elapsedMs === undefined ? 0 : s.elapsedMs, 0, 86400000, 'elapsed time'),
+      producedWith: productionInfo(s.producedWith),
+      configurationFingerprint: string(s.configurationFingerprint || '', 32, 'Solver configuration fingerprint'),
+      // Recorded at the time the result was produced, so a later edit shows up as stale.
+      inputFingerprint: s.inputFingerprint === undefined
+        ? fingerprint(string(s.raw || '', 12000, 'Solver input'))
+        : string(s.inputFingerprint, 32, 'Solver input fingerprint') };
+  }
+  function segmentationState(s) {
+    check(s && typeof s === 'object' && !Array.isArray(s), 'Invalid segmentation state.');
+    return { digits: string(s.digits || '', 200, 'Digit stream'),
+      key: (() => { const k = s.key || {}; normalizeCodes(Object.keys(k).length ? k : { 0: 'A' }); return copy(k); })(),
+      boundaries: list(s.boundaries || [], 159, 'locked boundaries').map(b => integer(b, 1, 200, 'locked boundary')),
+      budget: integer(s.budget === undefined ? 10000 : s.budget, 1, 20000, 'path budget'),
+      scoring: string(s.scoring || 'neutral', 60, 'Segmentation scoring'),
+      lineBreaks: string(s.lineBreaks || 'boundary', 20, 'Line-break policy'),
+      producedWith: productionInfo(s.producedWith),
+      configurationFingerprint: string(s.configurationFingerprint || '', 32, 'Segmentation configuration fingerprint'),
+      inputFingerprint: s.inputFingerprint === undefined
+        ? fingerprint(string(s.digits || '', 200, 'Digit stream') + '|' + JSON.stringify(s.key || {}))
+        : string(s.inputFingerprint, 32, 'Segmentation input fingerprint') };
+  }
+  function candidateRecord(c) {
+    check(c && typeof c === 'object' && !Array.isArray(c), 'Invalid candidate record.');
+    return { plaintext: string(c.plaintext || '', 20000, 'Candidate plaintext'),
+      score: (check(Number.isFinite(c.score), 'A candidate needs a finite score.'), c.score),
+      key: lockMap(c.key || {}, 'candidate key'),
+      chosen: c.chosen === true,
+      provenance: string(c.provenance || '', 1000, 'Candidate provenance'),
+      verified: false };
+  }
+  function bundle(d, state = {}) {
+    d = validate(d);
+    const s = state && typeof state === 'object' ? state : {};
+    const value = {
+      version: BUNDLE_VERSION, kind: BUNDLE_KIND,
+      legacyUnbound: s.legacyUnbound === true,
+      title: string(s.title || '', 200, 'Investigation title'),
+      created: string(s.created || '', 40, 'Bundle timestamp'),
+      tool: { modelBuild: MODEL_BUILD, evidenceVersion: d.version,
+        scoringModel: string(s.scoringModel || '', 200, 'Scoring-model identity'),
+        solver: string(s.solver || '', 200, 'Solver identity') },
+      evidence: d,
+      selectedLayer: string(s.selectedLayer || '', 100, 'Selected derived layer'),
+      keyRevisions: list(s.keyRevisions || [], 50, 'key revisions').map(k => ({
+        at: string(k.at || '', 40, 'Key revision time'),
+        reason: string(k.reason || '', 1000, 'Key revision reason'),
+        locks: lockMap(k.locks || {}, 'locked key') })),
+      search: s.search ? searchState(s.search) : null,
+      segmentation: s.segmentation ? segmentationState(s.segmentation) : null,
+      candidates: list(s.candidates || [], 20, 'retained candidates').map(candidateRecord),
+      images: d.images.map(i => ({ id: i.id, name: i.name, sha256: i.sha256, width: i.width, height: i.height,
+        rotation: i.rotation, crop: i.crop.slice() })),
+      imageBytes: 'Image bytes are deliberately not included. Reopen each file locally; the recorded hash tells you whether the bytes match.',
+      sourceFingerprint: s.sourceFingerprint === undefined ? fingerprint(canonical(bindingEvidence(d))) : s.sourceFingerprint,
+      limits: 'Replay needs the same solver and scoring-model build, not only the same seed. A recorded filename or hash identifies bytes; it does not establish that an image is the archival object it claims to be.'
+    };
+    for (const type of ['search', 'segmentation']) if (value[type]) {
+      if (s[type].producedWith === undefined) value[type].producedWith = productionInfo(value.tool);
+      if (s[type].configurationFingerprint === undefined) value[type].configurationFingerprint = resultBinding(value, type);
+    }
+    return openBundle(copy(value));
+  }
+  function openBundle(value) {
+    check(value && typeof value === 'object' && !Array.isArray(value), 'This file is not an investigation bundle.');
+    check(value.kind === BUNDLE_KIND, 'This file is not a Cipher Museum investigation bundle.');
+    check(value.version === 1 || value.version === BUNDLE_VERSION,
+      'Unsupported investigation-bundle version ' + value.version + '; this workbench reads version ' + BUNDLE_VERSION + '.');
+    check(JSON.stringify(value).length <= 1500000, 'Investigation bundle exceeds 1,500,000 characters.');
+    const b = copy(value);
+    b.legacyUnbound = b.version === 1 || b.legacyUnbound === true;
+    b.version = BUNDLE_VERSION;
+    b.title = string(b.title || '', 200, 'Investigation title');
+    b.created = string(b.created || '', 40, 'Bundle timestamp');
+    check(b.tool && typeof b.tool === 'object', 'A bundle must record the tools that produced it.');
+    b.tool.modelBuild = string(b.tool.modelBuild || '', 100, 'Model build');
+    b.tool.scoringModel = string(b.tool.scoringModel || '', 200, 'Scoring-model identity');
+    b.tool.solver = string(b.tool.solver || '', 200, 'Solver identity');
+    b.evidence = validate(b.evidence);
+    b.selectedLayer = string(b.selectedLayer || '', 100, 'Selected derived layer');
+    check(!b.selectedLayer || b.evidence.revisions.some(r => 'revision-' + r.id === b.selectedLayer) || b.evidence.layers.some(l => l.id === b.selectedLayer),
+      'The bundle names a derived layer that its evidence record does not contain.');
+    b.keyRevisions = list(b.keyRevisions || [], 50, 'key revisions').map(k => ({
+      at: string(k.at || '', 40, 'Key revision time'), reason: string(k.reason || '', 1000, 'Key revision reason'),
+      locks: lockMap(k.locks || {}, 'locked key') }));
+    b.search = b.search ? searchState(b.search) : null;
+    b.segmentation = b.segmentation ? segmentationState(b.segmentation) : null;
+    b.candidates = list(b.candidates || [], 20, 'retained candidates').map(candidateRecord);
+    b.images = list(b.images || [], 50, 'image manifest').map(i => ({
+      id: string(i.id, 100, 'Image ID'), name: string(i.name, 500, 'Image filename'),
+      sha256: string(i.sha256 || '', 64, 'Image hash'),
+      width: integer(i.width, 1, 100000, 'image width'), height: integer(i.height, 1, 100000, 'image height'),
+      rotation: integer(i.rotation, 0, 270, 'image rotation'), crop: i.crop }));
+    b.sourceFingerprint = string(b.sourceFingerprint || '', 32, 'Source fingerprint');
+    // Stale results are reported, never silently reused.
+    const sourceMoved = b.legacyUnbound || b.sourceFingerprint !== fingerprint(canonical(bindingEvidence(b.evidence)));
+    const modelMoved = b.tool.modelBuild !== MODEL_BUILD;
+    const searchMoved = !!(b.search && (b.legacyUnbound || modelMoved ||
+      b.search.inputFingerprint !== fingerprint(b.search.raw) || b.search.configurationFingerprint !== resultBinding(b, 'search')));
+    const segmentationMoved = !!(b.segmentation &&
+      (b.legacyUnbound || modelMoved || b.segmentation.configurationFingerprint !== resultBinding(b, 'segmentation')));
+    b.stale = { source: sourceMoved, search: searchMoved, segmentation: segmentationMoved,
+      modelBuild: modelMoved,
+      candidates: b.candidates.length > 0 && (!b.search || sourceMoved || searchMoved || modelMoved) };
+    return b;
+  }
+  // ── Beam-search solver baseline ───────────────────────────────────────────
+  // A second, bounded homophonic baseline alongside the annealing search.
+  // Extension order is DISCLOSED: symbols are fixed in order of first appearance,
+  // so every extension lengthens the decoded prefix. Partial hypotheses are scored
+  // on that decoded prefix. The heuristic is informative but NOT admissible:
+  // beam pruning can discard the branch that contains the correct key.
+  function beamSearch(tokens, options, score, progress = () => {}) {
+    parseSymbols(tokens.join(' '));
+    const opts = options && typeof options === 'object' ? options : {};
+    const symbols = Array.from(new Set(tokens));
+    const beam = integer(opts.beam === undefined ? 50 : opts.beam, 1, 2000, 'beam width');
+    const branch = integer(opts.branch === undefined ? 26 : opts.branch, 1, 26, 'extensions per hypothesis');
+    const seed = integer(opts.seed === undefined ? 0 : opts.seed, 0, 4294967295, 'seed');
+    const locks = opts.locks || {};
+    check(locks && typeof locks === 'object' && !Array.isArray(locks), 'Invalid locked key.');
+    Object.entries(locks).forEach(([s, v]) => check(symbols.indexOf(s) >= 0 && /^[A-Z]$/.test(v),
+      'A lock must name a present symbol and one A–Z letter.'));
+    const alphabet = 'ETAOINSHRDLCUMWFGYPBVKJXQZ'.slice(0, branch);
+    const order = symbols.filter(s => !own(locks, s));
+    // Longest token prefix decodable once the first k free symbols are assigned.
+    const known = new Set(Object.keys(locks));
+    const coverage = [];
+    for (let k = 0; k <= order.length; k++) {
+      if (k > 0) known.add(order[k - 1]);
+      let len = 0; while (len < tokens.length && known.has(tokens[len])) len++;
+      coverage.push(len);
+    }
+    check(beam * branch * tokens.length * Math.max(1, order.length) <= 400000000,
+      'Reduce the beam width, branching factor or input length: the comparison budget is 400 million symbol evaluations.');
+    const decodeWith = (assign, len) => { let t = ''; for (let i = 0; i < len; i++) t += assign[tokens[i]]; return t; };
+    const base = Object.assign(Object.create(null), locks);
+    let frontier = [{ assign: base, score: 0, covered: coverage[0] }];
+    if (coverage[0] > 0) {
+      const v = score(decodeWith(base, coverage[0]));
+      check(Number.isFinite(v), 'Scoring model returned an invalid value.');
+      frontier[0].score = v;
+    }
+    const trace = []; let evaluations = 0;
+    const rank = (a, b) => b.score - a.score || keyString(a.assign).localeCompare(keyString(b.assign));
+    function keyString(assign) { return symbols.map(s => assign[s] || '.').join(''); }
+    for (let k = 0; k < order.length; k++) {
+      const symbol = order[k], len = coverage[k + 1], next = [];
+      for (const hyp of frontier) for (const letter of alphabet) {
+        const assign = Object.assign(Object.create(null), hyp.assign); assign[symbol] = letter;
+        let value = hyp.score;
+        if (len > hyp.covered) {
+          value = score(decodeWith(assign, len)); evaluations++;
+          check(Number.isFinite(value), 'Scoring model returned an invalid value.');
+        }
+        next.push({ assign, score: value, covered: len });
+      }
+      next.sort(rank);
+      frontier = next.slice(0, beam);
+      trace.push({ step: k + 1, score: frontier[0].score, hypotheses: next.length, retained: frontier.length });
+      progress({ step: k + 1, steps: order.length, score: frontier[0].score });
+    }
+    const candidates = [];
+    const seen = new Set();
+    for (const hyp of frontier) {
+      const plaintext = tokens.map(t => hyp.assign[t]).join('');
+      if (seen.has(plaintext)) continue; seen.add(plaintext);
+      const value = score(plaintext); evaluations++;
+      check(Number.isFinite(value), 'Scoring model returned an invalid value.');
+      const key = {}; symbols.forEach(s => { key[s] = hyp.assign[s]; });
+      candidates.push({ plaintext, score: value, step: order.length, key });
+    }
+    candidates.sort((a, b) => b.score - a.score || a.plaintext.localeCompare(b.plaintext));
+    candidates.length = Math.min(candidates.length, 5);
+    if (!candidates.length) {
+      const key = {}; symbols.forEach(s => { key[s] = locks[s]; });
+      const plaintext = tokens.map(t => locks[t]).join('');
+      candidates.push({ plaintext, score: score(plaintext), step: 0, key });
+    }
+    return { candidates, trace, seed, requestedSteps: order.length, completedSteps: order.length,
+      task: order.length ? 'key-recovery-candidates' : 'known-key-application',
+      locks: copy(locks), model: score.modelId || 'custom-scoring-function', verified: false,
+      algorithm: 'beam-search', beam, branch, evaluations, admissible: false,
+      extensionOrder: order.slice(),
+      extensionOrderNote: 'Free symbols are fixed in order of first appearance, so every extension lengthens the decoded prefix that is scored.',
+      scope: 'Letter homophones only; no word codes, nulls, control signs or historical-language model. ' +
+        'Partial scores are non-admissible: beam pruning can discard the branch holding the correct key.' };
+  }
+  function metrics(expected, actual, expectedKey, actualKey) {
+    // Levenshtein distance keeps insertions/deletions distinct from key errors.
+    const a = Array.from(expected), b = Array.from(actual); let row = b.map((_,i) => i + 1); row.unshift(0);
+    for (let i=1;i<=a.length;i++) { const next=[i]; for (let j=1;j<=b.length;j++) next[j]=Math.min(next[j-1]+1,row[j]+1,row[j-1]+(a[i-1]===b[j-1]?0:1)); row=next; }
+    const keys = Object.keys(expectedKey || {});
+    return { exact: expected === actual, editDistance: row[b.length], plaintextError: row[b.length] / Math.max(1,a.length),
+      keyError: keys.length ? keys.filter(k => !actualKey || actualKey[k] !== expectedKey[k]).length / keys.length : null };
+  }
+  function z340Route(kind = 'diagonal') {
+    check(['diagonal', 'row-major'].includes(kind), 'Unknown route.');
+    return Array.from({length:153}, (_, i) => kind === 'diagonal' ? (i % 9) * 17 + (2 * i % 17) : i);
+  }
+  const api = { TYPES, KEY_TYPES, SEG_TYPES, SOURCE_FIELDS, SOURCE_STATUSES, CONFIDENCE, ROTATIONS, MODEL_BUILD, BUNDLE_VERSION, BUNDLE_KIND,
+    create, migrate, validate, revise, annotate, addLayer, alignmentTexts, addAlignment, withdrawAlignment, alignmentView, validateKey, applyKey,
+    segment, segmentMetrics, normalizeCodes, rng, parseSymbols, search, beamSearch, metrics, url, z340Route,
+    imageRecord, addImage, regionToDisplay, displayToRegion, displayAspect,
+    inventoryTokens, buildInventory, splitClass, mergeClasses, relabelClass, classOccurrences, regionOccurrences,
+    addHypothesis, bundle, openBundle, fingerprint };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  global.MuseumResearch = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+```
+
+
+## JavaScript — data/research/profile-recovery-v2/inputs/scripts/evaluate-profile-recovery.js
+
+**Recovery experiment command-line tool:** runs with Node.js in a repository checkout; it is not a browser control. The protocol, every recorded condition, scorer inputs and interpretation are included separately. For v1, --check audits the saved report and --replay reruns search. For the crossed v2 follow-up, scripts/check-profile-recovery-v2.js verifies saved arithmetic and identities; the frozen run.js needs a fresh output directory. Consult each version’s README before execution.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `data/research/profile-recovery-v2/inputs/scripts/evaluate-profile-recovery.js`
+- Served SHA-256: `fe4e8f50a4cc8d998856f94547be85919c3f7068716ae2fcb8ddaa87f8868128`
+- Readable-source SHA-256: `fe4e8f50a4cc8d998856f94547be85919c3f7068716ae2fcb8ddaa87f8868128`
+
+
+```javascript
+#!/usr/bin/env node
+'use strict';
+// A separate, versioned experiment: do not overwrite the v1/v2 evaluations.
+// Fix protocol.json before running; all conditions and failures are published.
+const assert = require('node:assert/strict');
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
+const R = require('../js/research-model');
+const Lang = require('../js/research-language-model');
+const splits = require('./research-splits');
+const ROOT = path.join(__dirname, '..');
+const DIR = 'data/research/profile-recovery-v1';
+const PROTOCOL_FILE = DIR + '/protocol.json';
+const REPORT_FILE = DIR + '/evaluation.json';
+const BASELINE_FILE = 'data/research/v1/language-model.json';
+const PROFILES_FILE = 'data/research/v2/language-profiles.json';
+const INPUTS = [PROTOCOL_FILE, 'scripts/evaluate-profile-recovery.js', 'scripts/research-splits.js',
+  'js/research-model.js', 'js/research-language-model.js', BASELINE_FILE, PROFILES_FILE,
+  'data/research/v2/holdout-author-disjoint.json'];
+const read = file => JSON.parse(fs.readFileSync(path.join(ROOT, file), 'utf8'));
+const sha = value => crypto.createHash('sha256').update(value).digest('hex');
+const round = value => Number(value.toFixed(8));
+const mean = values => values.reduce((a, b) => a + b, 0) / values.length;
+const FOLD = { 'À':'A','Á':'A','Â':'A','Ã':'A','Ä':'A','Å':'A','Æ':'AE','Ç':'C','È':'E','É':'E','Ê':'E','Ë':'E',
+  'Ì':'I','Í':'I','Î':'I','Ï':'I','Ñ':'N','Ò':'O','Ó':'O','Ô':'O','Õ':'O','Ö':'O','Ø':'O','Œ':'OE',
+  'Ù':'U','Ú':'U','Û':'U','Ü':'U','Ý':'Y','ß':'SS' };
+function normalize(text) {
+  return Array.from(text.toUpperCase()).map(c => FOLD[c] === undefined ? c : FOLD[c]).join('').replace(/[^A-Z]/g, '');
+}
+function reviewedEdition(passage) {
+  const editions = {
+    'brantome-dames-galantes': 'Project Gutenberg eBook 39220. Selected body passages; the first excerpt containing publisher and edition front matter is excluded.',
+    'machiavelli-commedie': 'Project Gutenberg eBook 56498. Edited text whose preface describes spelling modernization. Excluding that preface does not undo changes in the body.',
+    'cicero-orationes': 'Project Gutenberg eBook 226. Selected Latin oration excerpts; the introductory excerpt is excluded. No blanket claim that this edition lacks editorial material is made.'
+  };
+  assert.ok(editions[passage.source], 'Every selected edition needs its reviewed scope.');
+  return editions[passage.source];
+}
+function inputHashes() {
+  return Object.fromEntries(INPUTS.map(file => [file, sha(fs.readFileSync(path.join(ROOT, file)))]));
+}
+function loadInputs() {
+  const protocol = read(PROTOCOL_FILE);
+  return { protocol, holdout: read(protocol.holdout), profileData: read(PROFILES_FILE), baselineData: read(BASELINE_FILE) };
+}
+function encrypt(plaintext, seed, homophones) {
+  const random = R.rng(seed), present = [...new Set(plaintext)];
+  const pool = Array.from({ length: present.length * homophones }, (_, i) => 'g' + i);
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const key = {}, byLetter = {};
+  present.forEach((letter, i) => {
+    byLetter[letter] = pool.slice(homophones * i, homophones * (i + 1));
+    byLetter[letter].forEach(symbol => { key[symbol] = letter; });
+  });
+  const tokens = Array.from(plaintext, letter => byLetter[letter][Math.floor(random() * homophones)]);
+  const observed = new Set(tokens);
+  return { tokens, key: Object.fromEntries(Object.entries(key).filter(([symbol]) => observed.has(symbol))) };
+}
+function buildCases(inputs) {
+  const { protocol, holdout, profileData } = inputs;
+  assert.equal(protocol.id, 'museum-historical-profile-recovery-v1', 'Unsupported experiment protocol.');
+  assert.equal(protocol.split, splits.splitOf(protocol.collection), 'Collection must stay in its declared split.');
+  const training = profileData.profiles.flatMap(p => p.sources);
+  const trainingAuthors = new Set(training.map(s => {
+    assert.ok(protocol.sourceAuthors[s.id], 'Every training source needs an explicit author.');
+    return protocol.sourceAuthors[s.id];
+  }));
+  const included = new Set(protocol.selection.included);
+  const excluded = new Set(protocol.selection.excluded.map(p => p.id));
+  assert.equal(included.size, 6, 'The protocol fixes six passages before outcomes.');
+  assert.equal(excluded.size, 3, 'The three edition/introductory passages stay excluded.');
+  assert.equal(included.size + excluded.size, holdout.passages.length, 'Account for every held-out passage.');
+  for (const p of holdout.passages) {
+    assert.notEqual(included.has(p.id), excluded.has(p.id), 'Each passage must be included or excluded, never both.');
+  }
+  const sources = protocol.selection.included.map(id => {
+    const p = holdout.passages.find(p => p.id === id);
+    assert.ok(p, 'Missing selected passage ' + id);
+    assert.ok(!/-disjoint-1$/.test(p.id), 'Edition front matter must not enter the historical recovery sample.');
+    assert.equal(sha(p.text), p.sha256, 'Held-out text checksum changed: ' + id);
+    assert.ok(profileData.profiles.some(profile => profile.id === p.profile), 'Unknown expected language profile.');
+    assert.ok(protocol.sourceAuthors[p.source], 'Every held-out source needs an explicit author.');
+    assert.ok(!trainingAuthors.has(protocol.sourceAuthors[p.source]), 'Training author leaked into recovery holdout.');
+    assert.ok(!training.some(s => s.id === p.source || s.work === p.work || s.url === p.url),
+      'Training work leaked into recovery holdout.');
+    const plaintext = normalize(p.text);
+    assert.ok(plaintext.length >= 60 && plaintext.length <= 600, 'Selected passage exceeds the solver input scope.');
+    return { id: p.id, source: p.source, author: protocol.sourceAuthors[p.source], work: p.work,
+      edition: reviewedEdition(p), editionAsRecordedInV2: p.edition, url: p.url, shift: p.shift, profile: p.profile,
+      language: profileData.profiles.find(profile => profile.id === p.profile).language,
+      originalSha256: p.sha256, normalizedSha256: sha(plaintext), plaintext };
+  });
+  for (const p of profileData.profiles) {
+    assert.equal(sources.filter(s => s.profile === p.id).length, 2, 'Every language needs exactly two selected passages.');
+  }
+  const cases = [];
+  for (const source of sources) for (const replicate of protocol.replicates) {
+    const id = source.id + ':replicate-' + replicate.id;
+    const keySeed = splits.seedFor(protocol.split, protocol.id + ':' + id, 'key');
+    const encrypted = encrypt(source.plaintext, keySeed, protocol.cipher.homophonesPerPresentLetter);
+    assert.equal(encrypted.tokens.map(symbol => encrypted.key[symbol]).join(''), source.plaintext,
+      'Known-key application must recover the fixture before unknown-key search.');
+    cases.push({ id, passage: source.id, sourceDocument: source.source, collection: protocol.collection,
+      split: protocol.split, profile: source.profile, language: source.language, replicate: replicate.id,
+      searchSeed: replicate.searchSeed, keySeed, tokens: encrypted.tokens, expectedKey: encrypted.key,
+      ciphertextSha256: sha(JSON.stringify(encrypted.tokens)), knownKeyApplicationExact: true });
+  }
+  assert.equal(cases.length, 30, 'Six passages times five independent key/search-seed pairs.');
+  assert.equal(new Set(cases.map(c => c.keySeed)).size, cases.length, 'Independent key seeds collided.');
+  assert.equal(new Set(cases.map(c => c.ciphertextSha256)).size, cases.length, 'Independent ciphertexts collided.');
+  const grouping = splits.audit(cases);
+  assert.ok(grouping.ok, grouping.problems.join('\n'));
+  return { sources, cases, grouping };
+}
+function createScorers(inputs) {
+  const baseline = Lang.build(inputs.baselineData);
+  const profiles = Lang.buildProfiles(inputs.profileData);
+  const scorers = new Map([[baseline.id, baseline.fitness],
+    ...profiles.profiles.map(p => [p.id, p.fitness])]);
+  assert.deepEqual([...scorers.keys()], inputs.protocol.scorers, 'The full declared scoring-model matrix is required.');
+  for (const [id, fitness] of scorers) assert.equal(fitness.modelId, id, 'Scoring function does not match its condition.');
+  return scorers;
+}
+function optionsFor(protocol, c, solver) {
+  if (solver === 'annealing') return { seed: c.searchSeed, steps: protocol.solvers.annealing.steps, locks: {} };
+  assert.equal(solver, 'beam-search', 'Unknown solver.');
+  return { beam: protocol.solvers['beam-search'].beam, branch: protocol.solvers['beam-search'].branch, locks: {} };
+}
+function roleFor(c, scorer) {
+  return scorer === 'museum-prose-quadgram-v1' ? 'baseline' : (scorer === c.profile ? 'matched' : 'mismatched');
+}
+function measures(expected, candidate, expectedKey, candidateKey) {
+  const metric = R.metrics(expected, candidate, expectedKey, candidateKey);
+  assert.equal(candidate.length, expected.length, 'Letter-homophone recovery must preserve character positions.');
+  return { exact: metric.exact, editDistance: metric.editDistance,
+    plaintextError: round(metric.plaintextError),
+    positionalError: round(Array.from(expected).filter((letter, i) => letter !== candidate[i]).length / expected.length),
+    keyError: round(metric.keyError) };
+}
+function runCondition(protocol, c, source, solver, scorer, fitness) {
+  // This identity check is intentional: a baseline-only runner mislabeled as a
+  // historical-model comparison must fail, even if all reported errors look plausible.
+  assert.equal(fitness.modelId, scorer, 'Scoring function does not match its condition.');
+  let fitnessEvaluations = 0;
+  const score = text => { fitnessEvaluations++; return fitness(text); };
+  score.modelId = fitness.modelId;
+  const options = optionsFor(protocol, c, solver), start = process.hrtime.bigint();
+  const result = solver === 'annealing' ? R.search(c.tokens, options, score) : R.beamSearch(c.tokens, options, score);
+  const ms = Number(process.hrtime.bigint() - start) / 1e6;
+  assert.equal(result.model, scorer, 'Solver returned a different scoring-model identity.');
+  assert.equal(result.task, 'key-recovery-candidates', 'Known-key application is not recovery.');
+  const candidate = result.candidates[0];
+  return Object.assign({ caseId: c.id, solver, scorer, role: roleFor(c, scorer), options,
+    ciphertextSha256: c.ciphertextSha256, scoringModelReported: result.model,
+    completedSteps: result.completedSteps, fitnessEvaluations,
+    plaintext: candidate.plaintext, key: candidate.key, score: candidate.score, ms: round(ms) },
+  measures(source.plaintext, candidate.plaintext, c.expectedKey, candidate.key));
+}
+function stat(rows) {
+  return { runs: rows.length, exact: rows.filter(r => r.exact).length,
+    plaintextError: round(mean(rows.map(r => r.plaintextError))),
+    positionalError: round(mean(rows.map(r => r.positionalError))),
+    keyError: round(mean(rows.map(r => r.keyError))) };
+}
+function delta(values) {
+  return { pairs: values.length, mean: round(mean(values)), min: round(Math.min(...values)),
+    max: round(Math.max(...values)), matchedWins: values.filter(v => v < -1e-8).length,
+    ties: values.filter(v => Math.abs(v) <= 1e-8).length, matchedLosses: values.filter(v => v > 1e-8).length };
+}
+function summarize(cases, runs) {
+  const groupDefs = [{ kind: 'overall', id: 'all', cases },
+    ...[...new Set(cases.map(c => c.language))].map(id => ({ kind: 'language', id, cases: cases.filter(c => c.language === id) })),
+    ...[...new Set(cases.map(c => c.passage))].map(id => ({ kind: 'passage', id, cases: cases.filter(c => c.passage === id) })),
+    ...[...new Set(cases.map(c => c.replicate))].map(id => ({ kind: 'replicate', id, cases: cases.filter(c => c.replicate === id) }))];
+  const groups = [];
+  for (const solver of ['annealing', 'beam-search']) for (const g of groupDefs) {
+    const paired = g.cases.map(c => {
+      const mine = runs.filter(r => r.caseId === c.id && r.solver === solver);
+      const baseline = mine.find(r => r.role === 'baseline'), matched = mine.find(r => r.role === 'matched');
+      const mismatched = mine.filter(r => r.role === 'mismatched');
+      assert.ok(baseline && matched && mismatched.length === 2, 'Incomplete paired scoring-model matrix.');
+      return { baseline, matched, mismatched };
+    });
+    groups.push({ solver, group: g.kind, id: g.id, cases: g.cases.length,
+      baseline: stat(paired.map(p => p.baseline)), matched: stat(paired.map(p => p.matched)),
+      mismatched: stat(paired.flatMap(p => p.mismatched)),
+      matchedMinusBaseline: delta(paired.map(p => p.matched.plaintextError - p.baseline.plaintextError)),
+      matchedMinusMeanMismatched: delta(paired.map(p => p.matched.plaintextError - mean(p.mismatched.map(r => r.plaintextError)))) });
+  }
+  // The two mismatch results stay inspectable separately; their pooled mean has
+  // the same case weights, but 60 runs are not 60 independent source texts.
+  const mismatchedControls = [];
+  for (const solver of ['annealing', 'beam-search']) {
+    for (const scorer of [...new Set(runs.filter(r => r.role === 'mismatched').map(r => r.scorer))]) {
+      const controls = runs.filter(r => r.solver === solver && r.scorer === scorer && r.role === 'mismatched');
+      const matched = controls.map(control => runs.find(r => r.caseId === control.caseId && r.solver === solver && r.role === 'matched'));
+      mismatchedControls.push({ solver, scorer, control: stat(controls), matchedOnSameCases: stat(matched),
+        matchedMinusControl: delta(matched.map((r, i) => r.plaintextError - controls[i].plaintextError)) });
+    }
+  }
+  return { groups, mismatchedControls };
+}
+function runtime() {
+  return { node: process.version, v8: process.versions.v8, platform: process.platform, arch: process.arch,
+    locale: Intl.DateTimeFormat().resolvedOptions().locale };
+}
+function validateReport(report, inputs = loadInputs()) {
+  const fixtures = buildCases(inputs), scorers = createScorers(inputs);
+  assert.equal(report.id, inputs.protocol.id);
+  assert.deepEqual(report.protocol, inputs.protocol, 'Recorded protocol changed.');
+  assert.deepEqual(report.hashes, inputHashes(), 'Experiment inputs changed; keep old versions and record a new run.');
+  assert.deepEqual(report.sources, fixtures.sources, 'Source provenance or normalized text changed.');
+  assert.deepEqual(report.cases, fixtures.cases, 'The independently keyed fixtures changed.');
+  assert.deepEqual(report.grouping, fixtures.grouping, 'Source/split grouping changed.');
+  assert.equal(report.runs.length, inputs.protocol.runs, 'The full experiment matrix is required.');
+  const seen = new Set();
+  for (const run of report.runs) {
+    const c = fixtures.cases.find(c => c.id === run.caseId);
+    assert.ok(c, 'Unknown ciphertext case.');
+    assert.ok(Object.hasOwn(inputs.protocol.solvers, run.solver) && scorers.has(run.scorer), 'Unknown solver or scorer.');
+    const id = [run.caseId, run.solver, run.scorer].join('/');
+    assert.ok(!seen.has(id), 'Duplicate experiment condition.'); seen.add(id);
+    assert.equal(run.role, roleFor(c, run.scorer), 'Matched/mismatched labels do not match the source language.');
+    assert.deepEqual(run.options, optionsFor(inputs.protocol, c, run.solver), 'Seeds, budgets or locks differ across paired conditions.');
+    assert.equal(run.ciphertextSha256, c.ciphertextSha256, 'A condition received a different ciphertext.');
+    assert.equal(run.scoringModelReported, run.scorer, 'A condition used the wrong scoring model.');
+    const source = fixtures.sources.find(s => s.id === c.passage);
+    assert.deepEqual(Object.keys(run.key).sort(), Object.keys(c.expectedKey).sort(), 'Prediction must cover exactly the observed symbols.');
+    assert.ok(Object.values(run.key).every(letter => /^[A-Z]$/.test(letter)), 'Prediction contains a non-letter key value.');
+    assert.equal(c.tokens.map(symbol => run.key[symbol]).join(''), run.plaintext, 'Predicted plaintext does not apply the reported key.');
+    const actual = measures(source.plaintext, run.plaintext, c.expectedKey, run.key);
+    for (const [name, value] of Object.entries(actual)) assert.equal(run[name], value, 'Reported ' + name + ' does not match the prediction.');
+    const score = scorers.get(run.scorer)(run.plaintext);
+    assert.ok(Number.isFinite(run.score) && Math.abs(run.score - score) <= 1e-9 * Math.max(1, Math.abs(score)),
+      'Candidate score does not match its declared scoring model.');
+    assert.ok(Number.isInteger(run.fitnessEvaluations) && run.fitnessEvaluations > 0, 'Missing score evaluation count.');
+    assert.equal(run.completedSteps, run.solver === 'annealing' ? run.options.steps : Object.keys(c.expectedKey).length,
+      'A search stopped before its declared budget.');
+    assert.ok(Number.isFinite(run.ms) && run.ms >= 0, 'Invalid elapsed runtime.');
+  }
+  assert.equal(seen.size, fixtures.cases.length * Object.keys(inputs.protocol.solvers).length * scorers.size);
+  assert.deepEqual(report.summary, summarize(fixtures.cases, report.runs), 'Reported aggregate or paired differences are inconsistent.');
+  return true;
+}
+function execute(inputs = loadInputs(), progress = () => {}) {
+  const fixtures = buildCases(inputs), scorers = createScorers(inputs), runs = [];
+  for (const c of fixtures.cases) {
+    const source = fixtures.sources.find(s => s.id === c.passage);
+    for (const solver of Object.keys(inputs.protocol.solvers)) for (const [scorer, fitness] of scorers) {
+      runs.push(runCondition(inputs.protocol, c, source, solver, scorer, fitness));
+    }
+    progress(c.id, runs.length, inputs.protocol.runs);
+  }
+  const report = { version: 1, id: inputs.protocol.id, generatedBy: 'scripts/evaluate-profile-recovery.js',
+    protocol: inputs.protocol, hashes: inputHashes(), runtime: runtime(),
+    sources: fixtures.sources, cases: fixtures.cases, grouping: fixtures.grouping,
+    runs, summary: summarize(fixtures.cases, runs),
+    limits: [
+      'Six public passages, two from each of three works/authors. Thirty independently keyed cases are not thirty independent documents; variants remain grouped by source.',
+      'The first passage of every existing author-disjoint source is excluded for front-matter/introductory contamination before outcomes. Existing v2 files and their earlier results are preserved.',
+      'Author and work disjointness is checked against explicit source identities and author metadata, not claimed for every possible unrecorded textual borrowing or edition editor.',
+      'Matched means language-matched, not necessarily period-, genre- or orthography-matched. The Italian edition states that some spellings were modernized; removing its preface does not undo those editorial decisions.',
+      'Both mismatched historical models are run separately on each case. Their pooled mean uses two runs per case; paired comparisons first average those two controls within each case.',
+      'Five fixed paired key/search seeds are all published. They vary keys as well as annealing randomness, and are not an isolated estimate of search-seed variance.',
+      'Scores, corpus sizes, pruning and unseen-gram floors differ among models. No cross-model likelihood comparison or temperature rescaling is performed; the outcome is externally measured recovery error.',
+      'The shipped annealer still uses an English-weighted initial proposal distribution and the beam uses its shipped extension order. Both are held fixed across scorers. These are implementation-specific model substitutions, not a general comparison of language models.',
+      'No matched modern French, Italian or Latin baseline is available, so this experiment cannot identify a benefit of historical spelling separately from language matching.',
+      'Only clean A-Z letter-homophone ciphertexts are tested. No numerical segmentation, nulls, word codes, transcription ambiguity or authentic unknown historical cipher is recovered here.',
+      'Replay needs identical inputs, scorer/solver builds and JavaScript execution behavior. Node/V8/platform/architecture/locale and input hashes are recorded. Cross-engine search paths are not promised to match.',
+      'The check command audits provenance, pairing, model identity, complete matrix and arithmetic without rerunning search. Replay reruns every search and demands exact results except runtime; it does not accept a broad per-item error tolerance.',
+      'No score-based cherry-picking, best-of-seed reporting, inferential significance or general decipherment-accuracy claim is supported by this bounded experiment.'
+    ] };
+  validateReport(report, inputs);
+  return report;
+}
+function replayProjection(report) {
+  const copy = JSON.parse(JSON.stringify(report));
+  delete copy.runtime;
+  copy.runs.forEach(run => { delete run.ms; });
+  return copy;
+}
+function printSummary(report) {
+  console.log('solver\tcondition\truns\tplaintext error\tpositional error\tkey error\texact');
+  for (const group of report.summary.groups.filter(g => g.group === 'overall')) {
+    for (const condition of ['baseline', 'matched', 'mismatched']) {
+      const s = group[condition];
+      console.log([group.solver, condition, s.runs, (100 * s.plaintextError).toFixed(2) + '%',
+        (100 * s.positionalError).toFixed(2) + '%', (100 * s.keyError).toFixed(2) + '%', s.exact + '/' + s.runs].join('\t'));
+    }
+    console.log(group.solver + ' paired matched-minus-baseline: ' + (100 * group.matchedMinusBaseline.mean).toFixed(2) +
+      ' percentage points; matched-minus-mean-mismatch: ' + (100 * group.matchedMinusMeanMismatched.mean).toFixed(2) + '.');
+  }
+}
+function main() {
+  const args = process.argv.slice(2);
+  assert.ok(args.length <= 1 && (!args.length || ['--check', '--replay'].includes(args[0])),
+    'Usage: node scripts/evaluate-profile-recovery.js [--check|--replay]');
+  if (args[0] === '--check') {
+    const report = read(REPORT_FILE); validateReport(report);
+    console.log('Historical profile recovery: provenance, all 240 paired conditions, model identities and result arithmetic checked (no search rerun).');
+    printSummary(report); return;
+  }
+  let previous;
+  if (args[0] === '--replay') {
+    previous = read(REPORT_FILE); validateReport(previous);
+    assert.deepEqual(previous.runtime, runtime(), 'Exact replay requires the recorded runtime; use a separately versioned experiment for a different environment.');
+  }
+  const report = execute(loadInputs(), (id, done, total) => console.log(done + '/' + total + ' conditions completed: ' + id));
+  if (previous) {
+    assert.deepEqual(replayProjection(report), replayProjection(previous), 'Search replay diverged; no per-item error tolerance is applied.');
+    console.log('Historical profile recovery replayed exactly in the recorded runtime; elapsed times excluded.');
+  } else {
+    fs.writeFileSync(path.join(ROOT, REPORT_FILE), JSON.stringify(report, null, 2) + '\n');
+    console.log('Wrote ' + REPORT_FILE);
+  }
+  printSummary(report);
+}
+if (require.main === module) {
+  try { main(); } catch (error) { console.error(error.message); process.exitCode = 1; }
+}
+module.exports = { loadInputs, normalize, encrypt, buildCases, createScorers, optionsFor, roleFor,
+  measures, runCondition, summarize, validateReport, execute, replayProjection };
+```
+
+
+## JavaScript — data/research/profile-recovery-v2/inputs/scripts/research-splits.js
+
+**Recovery experiment command-line tool:** runs with Node.js in a repository checkout; it is not a browser control. The protocol, every recorded condition, scorer inputs and interpretation are included separately. For v1, --check audits the saved report and --replay reruns search. For the crossed v2 follow-up, scripts/check-profile-recovery-v2.js verifies saved arithmetic and identities; the frozen run.js needs a fresh output directory. Consult each version’s README before execution.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `data/research/profile-recovery-v2/inputs/scripts/research-splits.js`
+- Served SHA-256: `fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010`
+- Readable-source SHA-256: `fe57341e14a3e4b39aa8d3d15f1238d81e49baf8752ba30b383b726865de4010`
+
+
+```javascript
+'use strict';
+// Declared split and grouping rules for research-evaluation v2.
+//
+// Two leakage routes are closed explicitly.
+//   1. SOURCE GROUPING. Every ciphertext variant derived from one source document
+//      belongs to the same split. Variants of one plaintext are not independent items,
+//      and scattering them across splits would let a tuning split reveal a test answer.
+//   2. KEY AND CODE-POOL DISJOINTNESS. A key seed used in one split is never reused in
+//      another, and the fixed code pools of the pool-recognition task are disjoint
+//      between splits. A pool shared across splits turns recognition into memorization.
+//
+// Splits are assigned from the COLLECTION, not the document, so a whole collection can
+// be held out when a question is about generalizing beyond a body of material.
+const SPLITS = ['development', 'test'];
+// Collections marked development are the only material thresholds or budgets may be
+// tuned on. Everything else is reported as a held-out measurement.
+const COLLECTION_SPLIT = {
+  // The only tuning material: the probes the language-profile abstention thresholds
+  // were calibrated on. Nothing else may be tuned against.
+  'language-development-probes': 'development',
+  'museum-prose-en': 'test',
+  'museum-prose-fr': 'test',
+  'gutenberg-pre1800': 'test',
+  'authentic-z340': 'test'
+};
+// Key seeds are allocated from per-split disjoint ranges.
+const SEED_RANGES = { development: [10000, 19999], test: [20000, 29999] };
+const POOL_RANGES = { development: [30000, 30999], test: [31000, 31999] };
+
+function splitOf(collection) {
+  const split = COLLECTION_SPLIT[collection];
+  if (!split) throw new Error('Unknown collection: ' + collection);
+  return split;
+}
+// Deterministic, order-independent seed allocation inside a split's own range.
+function seedFor(split, label, kind) {
+  const range = (kind === 'pool' ? POOL_RANGES : SEED_RANGES)[split];
+  if (!range) throw new Error('Unknown split: ' + split);
+  let h = 2166136261;
+  for (let i = 0; i < label.length; i++) { h ^= label.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  return range[0] + (h % (range[1] - range[0] + 1));
+}
+// Check the rules rather than trusting them: used by the evaluation and by its test.
+function audit(items) {
+  const problems = [];
+  const splitByDocument = new Map();
+  const seedsBySplit = new Map();
+  const poolsBySplit = new Map();
+  for (const item of items) {
+    const prior = splitByDocument.get(item.sourceDocument);
+    if (prior && prior !== item.split) {
+      problems.push('Source document ' + item.sourceDocument + ' appears in both ' + prior + ' and ' + item.split + '.');
+    }
+    splitByDocument.set(item.sourceDocument, item.split);
+    if (item.keySeed !== undefined && item.keySeed !== null) {
+      if (!seedsBySplit.has(item.split)) seedsBySplit.set(item.split, new Set());
+      seedsBySplit.get(item.split).add(item.keySeed);
+      const range = SEED_RANGES[item.split];
+      if (item.keySeed < range[0] || item.keySeed > range[1]) {
+        problems.push('Key seed ' + item.keySeed + ' is outside the ' + item.split + ' range.');
+      }
+    }
+    if (item.poolId !== undefined && item.poolId !== null) {
+      if (!poolsBySplit.has(item.split)) poolsBySplit.set(item.split, new Set());
+      poolsBySplit.get(item.split).add(item.poolId);
+    }
+  }
+  const splits = Array.from(seedsBySplit.keys());
+  for (let i = 0; i < splits.length; i++) for (let j = i + 1; j < splits.length; j++) {
+    for (const seed of seedsBySplit.get(splits[i])) {
+      if (seedsBySplit.get(splits[j]).has(seed)) problems.push('Key seed ' + seed + ' is shared by ' + splits[i] + ' and ' + splits[j] + '.');
+    }
+  }
+  const poolSplits = Array.from(poolsBySplit.keys());
+  for (let i = 0; i < poolSplits.length; i++) for (let j = i + 1; j < poolSplits.length; j++) {
+    for (const pool of poolsBySplit.get(poolSplits[i])) {
+      if (poolsBySplit.get(poolSplits[j]).has(pool)) problems.push('Code pool ' + pool + ' is shared by ' + poolSplits[i] + ' and ' + poolSplits[j] + '.');
+    }
+  }
+  return { ok: problems.length === 0, problems,
+    documents: splitByDocument.size, items: items.length,
+    perSplit: Object.fromEntries(SPLITS.map(s => [s, items.filter(i => i.split === s).length])) };
+}
+module.exports = { SPLITS, COLLECTION_SPLIT, SEED_RANGES, POOL_RANGES, splitOf, seedFor, audit };
+```
+
+
+## JavaScript — data/research/profile-recovery-v2/run.js
+
+**Recovery experiment command-line tool:** runs with Node.js in a repository checkout; it is not a browser control. The protocol, every recorded condition, scorer inputs and interpretation are included separately. For v1, --check audits the saved report and --replay reruns search. For the crossed v2 follow-up, scripts/check-profile-recovery-v2.js verifies saved arithmetic and identities; the frozen run.js needs a fresh output directory. Consult each version’s README before execution.
+
+Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
+
+- Served/distributed path: `data/research/profile-recovery-v2/run.js`
+- Served SHA-256: `bf879c7ecba04f54b11204a3b83425961692c310e5069c06a1fadee4ec23f7bf`
+- Readable-source SHA-256: `bf879c7ecba04f54b11204a3b83425961692c310e5069c06a1fadee4ec23f7bf`
+
+
+```javascript
+'use strict';
+const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict'),path=require('path');
+const D=__dirname, E=require('./inputs/scripts/evaluate-profile-recovery');
+const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
+const P=JSON.parse(fs.readFileSync(path.join(D,'protocol.json')));
+for(const [f,h] of Object.entries(P.inputHashes))assert.equal(sha(fs.readFileSync(path.join(D,'inputs',f))),h);
+const inputs=E.loadInputs(),fixtures=E.buildCases(inputs),scorers=E.createScorers(inputs);
+const runtime={node:process.version,v8:process.versions.v8,platform:process.platform,arch:process.arch,locale:Intl.DateTimeFormat().resolvedOptions().locale};
+const log=path.join(D,'runs.jsonl');assert.ok(!fs.existsSync(log),'Do not overwrite a completed or partial experiment.');
+fs.writeFileSync(path.join(D,'execution.json'),JSON.stringify({startedAt:new Date().toISOString(),runtime,protocolSha256:sha(fs.readFileSync(path.join(D,'protocol.json'))),runnerSha256:sha(fs.readFileSync(__filename))},null,2));
+fs.writeFileSync(path.join(D,'fixtures.json'),JSON.stringify(fixtures,null,2));
+let done=0;
+for(const c of fixtures.cases){
+ const source=fixtures.sources.find(s=>s.id===c.passage);
+ for(const solver of ['annealing','beam-search'])for(const seed of solver==='annealing'?P.searchSeeds:[null])for(const [scorer,fitness] of scorers){
+  let r;try{r=E.runCondition(inputs.protocol,{...c,searchSeed:seed},source,solver,scorer,fitness);r.status='completed';}
+  catch(e){r={caseId:c.id,solver,scorer,status:'failed',error:e.stack};}
+  Object.assign(r,{searchSeed:seed,passage:c.passage,sourceDocument:c.sourceDocument,language:c.language,keyIndex:c.replicate});
+  fs.appendFileSync(log,JSON.stringify(r)+'\n');done++;
+ }
+ console.log(done+'/720 '+c.id);
+}
+assert.equal(done,720);fs.writeFileSync(path.join(D,'finished.json'),JSON.stringify({completedAt:new Date().toISOString(),runs:done,runsSha256:sha(fs.readFileSync(log))},null,2));
+```
+
 
 ## JavaScript — hall-of-foundations/crypto-algebra.js
 
@@ -516,3110 +2128,4 @@ Any ebook URL is replaced by a stable omission ID. Redacted code is for inspecti
   else root.LWEMath = api;
 
 })(typeof self !== "undefined" ? self : this);
-```
-
-
-## JavaScript — js/artifact-cards-data.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/artifact-cards-data.min.js`
-- Served SHA-256: `f3a1f97147c3312d3c8bd0fa408aa07831049ae9cddca06222861e8849aa5f9d`
-- Readable-source SHA-256: `4fc3bc4767fed7a59ae9d3953f91ae8ccdc2b89ebd84c6e699a8faf10342e749`
-
-
-```javascript
-'use strict';
-(function(global){
-  global.__ARTIFACT_CARDS__ = {
-  "cards": {
-    "adfgvx": {
-      "name": "ADFGVX Cipher",
-      "hall": "V",
-      "era": "WWI · June 1918",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "6×6 Polybius square + columnar key",
-      "keyIdea": "ADFGVX combined a 6×6 substitution square with columnar transposition. Painvin’s June 1918 solutions exploited particular traffic and keys, not every later message automatically.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Painvin recovered keys from German traffic in June 1918.",
-      "modernLesson": "Layered cipher rounds"
-    },
-    "adfgx": {
-      "name": "ADFGX Cipher",
-      "hall": "V",
-      "era": "WWI · March 1918",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Polybius key square + columnar key",
-      "keyIdea": "Germany’s ADFGX field cipher appeared in March 1918; Painvin obtained solutions in April. Its square-plus-transposition construction required continuing key recovery.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Painvin and other Allied analysts used repeated traffic, statistics and transposition analysis in 1918.",
-      "modernLesson": "Compare fractionation and transposition with modern round structures"
-    },
-    "aeneas-tacticus": {
-      "name": "Aeneas Tacticus Water-Clock Signal Code",
-      "hall": "I",
-      "era": "Classical Greece · ~350 BCE",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Aeneas’s water-clock signaling, preserved in Polybius: synchronized vessels selected preset military messages, not letters of an alphabet.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Synchronization enables signaling; it does not itself provide secrecy"
-    },
-    "aes": {
-      "name": "AES (Advanced Encryption Standard)",
-      "hall": "XI",
-      "era": "Modern &middot; 2001",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "AES, standardized in 2001, is a widely deployed block cipher. No practical key-recovery attack is known against correctly used full-round AES.",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "affine": {
-      "name": "Affine Cipher E(x) = a·x + b mod 26",
-      "hall": "II",
-      "era": "Antiquity → 1800s · math-age",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Pair (a,b) — a coprime to 26 → 12·26 = 312 keys",
-      "keyIdea": "The affine cipher — a single linear formula E(x)=a·x+b mod 26 that generalises Caesar (a=1) and Atbash (a=25, b=25). Just 312 keys; trivially broken.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "This small affine keyspace and visible language patterns are insecure"
-    },
-    "agnes-driscoll": {
-      "name": "Agnes Meyer Driscoll",
-      "hall": "X",
-      "era": "Interwar & WWII · USA",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Agnes Meyer Driscoll helped develop U.S. naval cryptanalysis and trained later analysts. Her work included Japanese naval codes, early JN-25 and cipher-machine analysis.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "alberti-disk": {
-      "name": "Alberti Cipher Disk",
-      "hall": "VII",
-      "era": "Renaissance · 1467",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Physical rotating disk (two alphabets)",
-      "keyIdea": "Alberti’s fifteenth-century cipher disk illustrates changing substitutions using two alphabets. The exhibit distinguishes historical instructions from a regular-step teaching model.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Index of Coincidence · Frequency analysis",
-      "modernLesson": "Physical key material → rotor machines"
-    },
-    "amharic-ge-ez-ciphers": {
-      "name": "Geʼez Script and a Substitution Model",
-      "hall": "I",
-      "era": "East Africa · teaching model",
-      "family": "Modern substitution teaching model",
-      "region": "Ethiopian and Eritrean manuscript context",
-      "usedBy": "Museum learners; no historical cipher deployment established",
-      "keyType": "Keyword-seeded permutation of Latin A–Z",
-      "keyIdea": "Explore Geʼez manuscript heritage alongside a modern Latin-letter substitution exercise, with no historical cipher attribution claimed for the model.",
-      "trust": {
-        "key": "educational",
-        "text": "Educational",
-        "description": "A didactic construction for learning cryptographic concepts, not for security."
-      },
-      "securityFailure": "Illustrative Latin-letter substitution model; no identified manuscript authenticates this as a particular Geʽez monastic cipher.",
-      "modernLesson": "An unfamiliar writing system is not itself a cipher"
-    },
-    "amsco": {
-      "name": "AMSCO Transposition",
-      "hall": "IV",
-      "era": "American Cryptogram Association specification",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Permutation of column ranks; first cell length",
-      "keyIdea": "AMSCO from the American Cryptogram Association specification: alternate one-letter and two-letter cells, read keyed columns, and reconstruct an incomplete final row.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Variable-cell transposition preserves frequencies and is susceptible to probable-word and scored permutation search.",
-      "modernLesson": "Decryption must reconstruct cell lengths before filling columns"
-    },
-    "arabic-nomenclators": {
-      "name": "Arabic Nomenclators",
-      "hall": "I",
-      "era": "Abbasid Caliphate · ~850 CE",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Arabic cryptanalytic scholarship and a teaching model of nomenclators: frequency analysis, codewords, and the need to identify a particular historical key.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Broken (by its own inventors)",
-      "modernLesson": "Cryptanalysis is the indispensable counterweight to cryptography"
-    },
-    "argenti": {
-      "name": "Argenti Family Cipher Vatican papal nomenclators · 1500s–1600s",
-      "hall": "II",
-      "era": "Renaissance Italy · 1500s–1600s",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Giovanni Battista Argenti and his nephew Matteo documented papal nomenclators, homophones, nulls and cryptanalytic methods in Renaissance Italy.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "arnold-andre": {
-      "name": "Arnold–André Book Cipher Book codes · 1779–1780",
-      "hall": "V",
-      "era": "American Revolution · 1779–1780",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Arnold and André used changing book codes in their 1779–1780 correspondence, including Blackstone’s Commentaries and dictionary schemes. Captured West Point documents exposed the plot.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Compromised by capture (1780)",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "atbash": {
-      "name": "Atbash",
-      "hall": "I",
-      "era": "Ancient · ~500 BC",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "None (fixed reflection)",
-      "keyIdea": "Atbash reverses the Hebrew alphabet and appears in Jeremiah’s Sheshach references. This exhibit demonstrates a modern, self-inverse A–Z adaptation.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Inspection (it is its own inverse)",
-      "modernLesson": "Ciphers without keys offer no security"
-    },
-    "autokey": {
-      "name": "Autokey",
-      "hall": "III",
-      "era": "Renaissance · 1586",
-      "family": "Polyalphabetic",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Short keyword, then plaintext itself extends the key",
-      "keyIdea": "Plaintext autokey extends a primer with message letters. It removes a fixed repeating keyword but retains exploitable language structure and error propagation.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Crib propagation and language-scored searches; ordinary repeating-key Kasiski analysis does not apply directly.",
-      "modernLesson": "Self-keyed schemes still leak: the key is no longer random once it carries plaintext statistics"
-    },
-    "babington": {
-      "name": "The Babington Plot Cipher",
-      "hall": "II",
-      "era": "Elizabethan · 1586",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Teaching model: 23 letter symbols + 36 codewords + 4 nulls + 1 \"doubleth\"",
-      "keyIdea": "The 1586 Babington Plot: intercepted nomenclator letters, a forged postscript, and the difference between compromised keys and an insecure transport channel.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Thomas Phelippes, working for Sir Francis Walsingham · within days of interception",
-      "modernLesson": "Cryptography is an operational system, not just an algorithm — channel security and forgery resistance matter"
-    },
-    "bach-motif": {
-      "name": "Bach's B-A-C-H Motif",
-      "hall": "XIII",
-      "era": "Baroque Germany · 1750",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The four notes B♭ – A – C – B♮ spell 'BACH' in German musical notation — a self-signature Bach embedded in his final unfinished fugue.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "bacon": {
-      "name": "Bacon's Cipher",
-      "hall": "VIII",
-      "era": "1605",
-      "family": "Puzzle and Cultural Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "5-bit binary (A/B patterns)",
-      "keyIdea": "Bacon’s biliteral alphabet represents letters with patterns of two forms and can hide them in a carrier. Binary representation is distinct from a direct historical origin for ASCII.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Pattern recognition · Statistical analysis of A/B distribution",
-      "modernLesson": "Two-symbol representation and steganography"
-    },
-    "bazeries": {
-      "name": "Bazeries Cipher",
-      "hall": "V",
-      "era": "1890s · France",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Numeric key; substitution plus group reversal",
-      "keyIdea": "Explore the Bazeries hand-cipher procedure and a simplified browser model, distinguished from his separate mechanical cipher cylinder.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Layered frequency analysis",
-      "modernLesson": "Key-controlled multi-layer operations"
-    },
-    "beale": {
-      "name": "Beale Ciphers",
-      "hall": "XII",
-      "era": "19th Century · published 1885",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Beale ciphers — three numerical ciphers published in an 1885 Lynchburg pamphlet, said to have been written in the 1820s and to point to a Virginia treasure. Only #2 was solved (Declaration of Independence key); #1 and #3 unsolved.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Unsolved (Beale 1 & 3)",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "beaufort": {
-      "name": "Beaufort Cipher",
-      "hall": "III",
-      "era": "Victorian · 1857",
-      "family": "Polyalphabetic",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Repeating keyword",
-      "keyIdea": "Beaufort cipher (1857) — Sir Francis Beaufort's reciprocal Vigenère variant where encrypt and decrypt are the same operation. Broken by Kasiski examination.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Kasiski Examination · Index of Coincidence",
-      "modernLesson": "Symmetric operations in stream ciphers"
-    },
-    "beurling": {
-      "name": "Arne Beurling",
-      "hall": "X",
-      "era": "WWII · Sweden",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Arne Beurling’s 1940 reconstruction of the Siemens T52, with assistance and subsequent daily-key recovery distinguished from the initial breakthrough.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "bible-code": {
-      "name": "Bible Code — Equidistant Letter Sequences",
-      "hall": "VIII",
-      "era": "1994 · Refuted 1999",
-      "family": "Puzzle and Cultural Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The Bible Code — equidistant letter sequences (ELS) claimed to hide prophecies in the Hebrew scriptures. McKay et al. (1999) examined experimental flexibility; separate Moby-Dick counterexamples addressed popular prophecy claims.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Searching many alternatives creates opportunities for chance matches; significance depends on the test and selection process"
-    },
-    "bifid": {
-      "name": "Bifid Cipher",
-      "hall": "IV",
-      "era": "1902",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "5×5 keyword square",
-      "keyIdea": "Bifid cipher (1902) — Felix Delastelle's fractionation cipher that splits Polybius coordinates, transposes them across a period, and recombines.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Statistical analysis · Hill climbing",
-      "modernLesson": "Confusion + diffusion combined"
-    },
-    "bill-tutte": {
-      "name": "Bill Tutte",
-      "hall": "X",
-      "era": "WWII · Britain",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Bill Tutte and the Research Section inferred the Lorenz structure by early 1942, analysing key material recovered by John Tiltman from a 1941 repeated-key transmission.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "bletchley-park": {
-      "name": "Bletchley Park",
-      "hall": "X",
-      "era": "WWII · 1939–1945",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Bletchley Park was a British wartime codebreaking centre. About 10,000 people worked at the site and associated outstations at peak, contributing to Allied intelligence.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "bombe": {
-      "name": "Turing–Welchman Bombe",
-      "hall": "VII",
-      "era": "1940 · Britain",
-      "family": "Cryptanalysis machinery",
-      "region": "Britain",
-      "usedBy": "Bletchley Park codebreakers and operators",
-      "keyType": "Not an encryption system",
-      "keyIdea": "Search Enigma settings using crib constraints",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Automation supports analysis; candidate settings still require verification."
-    },
-    "book-cipher": {
-      "name": "Book Cipher",
-      "hall": "V",
-      "era": "18th–20th c.",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "An agreed-upon book; ciphertext is a list of (page, line, word) or (page, word) coordinates",
-      "keyIdea": "Book ciphers use an agreed reference text and indexing rule. Explore historical book codes and distinguish them from the disputed Beale treasure narrative.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Security depends on the book, edition and indexing rule; identifying the source or exploiting context can expose messages.",
-      "modernLesson": "Key distribution is the hard part; the underlying primitive can be trivial"
-    },
-    "cabinet-noir": {
-      "name": "Cabinet Noir — Black Chambers of Europe",
-      "hall": "X",
-      "era": "Europe · 1550–1850",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The European Black Chambers (cabinets noirs) were government departments that intercepted, deciphered, and resealed diplomatic mail from the 16th through 19th centuries — proto-signals-intelligence agencies.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Postal interception provides an earlier comparison for communications intelligence"
-    },
-    "caesar": {
-      "name": "Caesar Cipher",
-      "hall": "I",
-      "era": "Ancient Rome",
-      "family": "Historical Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Shift (1–25)",
-      "keyIdea": "Caesar’s recorded shift of three, demonstrated on a modern alphabet. Exhaustive shift search is small; frequency analysis helps rank candidate plaintexts.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Exhaustive shift search; frequency evidence helps rank candidates.",
-      "modernLesson": "Substitution and exhaustive key search"
-    },
-    "cardano-autokey": {
-      "name": "Cardano Autokey 1550 historical idea · modern comparison model",
-      "hall": "III",
-      "era": "Italian Renaissance · 1550",
-      "family": "Polyalphabetic",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Single priming letter",
-      "keyIdea": "Cardano’s self-keying idea and a modern one-letter-primer comparison model. The demo is not an exact reconstruction of Cardano’s historical procedure.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "The one-letter-primer widget is a modern comparison with Vigenère-style plaintext autokey, not Cardano’s exact procedure.",
-      "modernLesson": "Key reuse from the plaintext is not the same as key freshness"
-    },
-    "cardano-grille": {
-      "name": "Cardano Grille 1550 · steganography by template",
-      "hall": "IV",
-      "era": "Italian Renaissance · 1550",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "The grille pattern (positions of the holes)",
-      "keyIdea": "Girolamo Cardano's 1550 grille — a card with cut-out windows. Write the secret through the windows; fill the rest with innocuous text; the recipient overlays an identical grille to read.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Weak (steganography, not encryption)",
-      "modernLesson": "Hiding a message ≠ encrypting a message"
-    },
-    "chaocipher": {
-      "name": "Chaocipher",
-      "hall": "VII",
-      "era": "Modern · 1918",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Two scrambled 26-letter alphabets",
-      "keyIdea": "Chaocipher (1918) — John F. Byrne's two-disk dynamic cipher. Disclosed in 2010; published known-plaintext and in-depth ciphertext-only attacks recover its keys.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Published key-recovery attacks by Lasry, Rubin, Kopal and Wacker (2016).",
-      "modernLesson": "State evolution needs analysis under explicit attack conditions"
-    },
-    "che-guevara": {
-      "name": "Che Guevara’s Checkerboard and Pad",
-      "hall": "V",
-      "era": "Cold War · 1956–1967",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Checkerboard and secret pad digits",
-      "keyIdea": "Che Guevara’s checkerboard and digit-pad communications, distinguished from the VIC cipher and from the museum’s simplified comparison demo.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Historical checkerboard-plus-pad system; the widget compares a condensed VIC model, not Guevara’s historical pad system.",
-      "modernLesson": "Key handling is part of communications security"
-    },
-    "chinese-telegraph": {
-      "name": "Chinese Telegraph Code Standard Telegraph Codebook · 1881",
-      "hall": "VI",
-      "era": "Late Qing → PRC · 1881–1980s",
-      "family": "American and Civil War Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Chinese telegraph codebooks map characters to four-digit groups. Public character encoding differs from additional encipherment used to protect some diplomatic and military messages.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "cicada-3301": {
-      "name": "Cicada 3301",
-      "hall": "XIII",
-      "era": "Internet era · 2012–2014",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "An anonymous 2012–2014 internet recruitment puzzle that combined steganography, classical ciphers, GPS coordinates on physical posters, and a copy of the Liber Primus hand-illustrated in glyphic runes.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "colossus": {
-      "name": "Colossus",
-      "hall": "VII",
-      "era": "1944 · Britain",
-      "family": "Cryptanalysis machinery",
-      "region": "Britain",
-      "usedBy": "Bletchley Park codebreakers and operators",
-      "keyType": "Not an encryption system",
-      "keyIdea": "Score Lorenz wheel hypotheses using electronic logic and counters",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Automation supports analysis; candidate settings still require verification."
-    },
-    "columnar": {
-      "name": "Columnar Transposition",
-      "hall": "IV",
-      "era": "19th Century",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Column-ordering keyword",
-      "keyIdea": "Explore columnar transposition and multiple anagramming: rearrange column strips across three synthetic same-key intercepts and compare a different-key control.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Frequency analysis · Anagramming",
-      "modernLesson": "Compare positional permutation with AES ShiftRows"
-    },
-    "commercial-codebooks": {
-      "name": "Commercial Telegraph Codebooks ABC, Bentley’s, Lieber’s · 1870s–1930s",
-      "hall": "VI",
-      "era": "Victorian → inter-war · 1870s–1930s",
-      "family": "American and Civil War Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Commercial telegraph codebooks replaced business phrases with compact code groups. Formats and tariffs varied, and a public codebook did not itself provide secrecy.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "confederate-vigenere": {
-      "name": "Confederate Vigenère",
-      "hall": "Museum exhibit",
-      "era": "Confederate · 1862",
-      "family": "Historical Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Vigenère keyword (15 letters typical)",
-      "keyIdea": "Confederate forces used repeating-key Vigenère ciphers during the Civil War. Union analysts read particular dispatches using language clues and recovered keys.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Union analysts exploited repeated keywords and language patterns.",
-      "modernLesson": "Operational security failures"
-    },
-    "copiale": {
-      "name": "Copiale Cipher",
-      "hall": "VIII",
-      "era": "18th Century · ~1760–1780",
-      "family": "Puzzle and Cultural Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Knight, Megyesi and Schaefer deciphered the Copiale manuscript in 2011 using transcription, statistics and manual analysis. The exhibit separates that result from its invented demonstration alphabet.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Knight, Megyesi, Schaefer (USC/Uppsala, 2011)",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "culper-ring": {
-      "name": "Culper Ring / Tallmadge Code Washington’s spy ring codebook · 1779",
-      "hall": "V",
-      "era": "American Revolution · 1778–1783",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Major Benjamin Tallmadge’s 1779 codebook for George Washington’s Culper Spy Ring. Roughly 760 numbered entries covering people, places, military terms, and common words — used by Abraham Woodhull and Robert Townsend on British-occupied Long Island and Manhattan.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Historical numerical codebook; captured documents and contextual evidence are distinct from cryptanalytic breaks.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "da-vinci-code": {
-      "name": "The Da Vinci Code",
-      "hall": "XIII",
-      "era": "Fiction · 2003",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Dan Brown’s 2003 thriller uses Atbash, the Fibonacci sequence and anagrams as fictional clues. Explore those devices and the limits of treating fiction as cryptographic history.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "dagapeyeff": {
-      "name": "D'Agapeyeff Cipher",
-      "hall": "XII",
-      "era": "Pre-WWII Britain · 1939",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Alexander d’Agapeyeff’s 1939 numeric challenge: a verified ciphertext excerpt, overlapping-pair analysis and explicit limits on proposed reconstructions.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Unsolved challenge cipher",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "dancing-men": {
-      "name": "Conan Doyle's Dancing Men",
-      "hall": "XIII",
-      "era": "Edwardian Britain · 1903",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The fictional stick-figure cipher Sherlock Holmes solves in The Adventure of the Dancing Men (1903) — a frequency-analysis primer disguised as a Strand magazine story.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "des": {
-      "name": "DES (Data Encryption Standard)",
-      "hall": "XI",
-      "era": "Modern &middot; 1977",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "DES was standardized in 1977. Its 56-bit key became vulnerable to practical exhaustive search, demonstrated by EFF’s Deep Crack in 1998.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Broken (brute force, 1998)",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "diana-cryptosystem": {
-      "name": "Diana Cryptosystem",
-      "hall": "V",
-      "era": "Historical letter-pad system",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "DIANA uses a reciprocal trigraph table to combine message and pad letters. This exhibit verifies the conversion method while leaving exact service dates and deployments unestablished.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Correct OTP use is unbreakable; logistics often fail before the math"
-    },
-    "dictionary-code": {
-      "name": "Confederate Dictionary Code",
-      "hall": "Museum exhibit",
-      "era": "Confederate · 1862",
-      "family": "Historical Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Page and word number from shared dictionary",
-      "keyIdea": "Dictionary codes replace words with references in an agreed book. Repeated references and language patterns can still leak information; this widget is a simplified model.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Known dictionary + position lookup",
-      "modernLesson": "Shared key material management"
-    },
-    "diffie-hellman": {
-      "name": "Diffie-Hellman Key Exchange",
-      "hall": "XI",
-      "era": "Modern &middot; 1976",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "Many authenticated key-agreement protocols, including ephemeral-DH modes of TLS",
-      "keyType": "No key input — the protocol produces one",
-      "keyIdea": "Two parties derive a shared secret over a public channel; nothing is encrypted",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "dilly-knox": {
-      "name": "Dilly Knox",
-      "hall": "X",
-      "era": "WWI/WWII · Britain",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Dilly Knox worked on commercial and military Enigma variants, including Italian naval and Abwehr traffic, with colleagues whose contributions the exhibit identifies.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "dorabella": {
-      "name": "Dorabella Cipher",
-      "hall": "XII",
-      "era": "19th c. · 1897",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Three arc counts × eight possible orientations",
-      "keyIdea": "Edward Elgar’s 1897 Dorabella cryptogram contains 87 symbols. No proposed reading has achieved general acceptance.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "No generally accepted reading",
-      "modernLesson": "Short texts and uncertain transcription make proposed readings harder to verify"
-    },
-    "double-playfair": {
-      "name": "Doppelkastenschlüssel — German Double Playfair",
-      "hall": "II",
-      "era": "German armed forces · December 1941 edition",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Two ordered 5 × 5 squares; 17-column pairing",
-      "keyIdea": "German Double Playfair: reconstruct the December 1941 Doppelkastenschlüssel manual, including 17-column pairing, two substitution stages and its published example.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Allied crib and digraph-statistical attacks are documented for German double-box field ciphers; variants must be distinguished.",
-      "modernLesson": "Pair formation is part of the cipher, not mere presentation"
-    },
-    "double-transposition": {
-      "name": "Double Transposition",
-      "hall": "IV",
-      "era": "WWI · Germany",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Two columnar keywords",
-      "keyIdea": "Two successive columnar transpositions: historical military use, attack conditions, and modern computerized cryptanalysis; not an unbroken cipher until 2013.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Anagramming · Hill climbing (difficult)",
-      "modernLesson": "Multiple cipher rounds"
-    },
-    "dunin": {
-      "name": "Elonka Dunin",
-      "hall": "X",
-      "era": "Modern · Cryptographer",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Elonka Dunin documents Kryptos and unresolved cryptograms and writes about classical cryptanalysis, including Codebreaking: A Practical Guide with Klaus Schmeh.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "ecdsa": {
-      "name": "ECDSA",
-      "hall": "XI",
-      "era": "Modern &middot; 1992",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "TLS certificates, Bitcoin and Ethereum transactions, secure-boot chains",
-      "keyType": "Private scalar d with public point Q = dG",
-      "keyIdea": "Verifies a signature under an elliptic-curve public key; identity requires authenticating that key",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "egyptian-substitution": {
-      "name": "Egyptian Substitution Hieroglyphs",
-      "hall": "I",
-      "era": "Middle Kingdom Egypt · ~1900 BCE",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Unusual hieroglyphic spellings in the tomb of Khnumhotep II, around 1900 BCE: an early example discussed in histories of cryptography, with uncertain intent.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Unusual writing does not by itself establish secret-key encryption"
-    },
-    "elizebeth-friedman": {
-      "name": "Elizebeth Smith Friedman",
-      "hall": "X",
-      "era": "Interwar & WWII · USA",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Elizebeth Smith Friedman led important American cryptanalytic work against smuggling and wartime clandestine communications, with a team whose work remained little known for years.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "enigma": {
-      "name": "Enigma Machine",
-      "hall": "IX",
-      "era": "WWII · 1918–1945",
-      "family": "Rotor machine",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Rotor selection, rings, positions and plugboard settings",
-      "keyIdea": "Enigma was a family of rotor machines. Rejewski reconstructed German Army Enigma in 1932; later Allied teams attacked changing systems, keys and procedures.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Polish prewar reconstruction; later Allied crib searches and bombe machinery.",
-      "modernLesson": "Complexity ≠ security without proper operational discipline"
-    },
-    "fialka": {
-      "name": "Fialka M-125 Soviet 10-rotor machine · 1956",
-      "hall": "VII",
-      "era": "Cold War · 1956",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Fialka was a Soviet ten-rotor machine with variant-specific alphabets, stepping and a punched-card permutation. The browser uses a simplified Latin-alphabet model.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Never publicly broken by cryptanalysis in operational service; obsolete today.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "field-hollers": {
-      "name": "Field Hollers and Coding Songs",
-      "hall": "XIII",
-      "era": "African American oral traditions",
-      "family": "Oral traditions and contextual communication",
-      "region": "United States",
-      "usedBy": "Historical African American communities; widget is modern",
-      "keyType": "No authenticated fixed cipher reconstructed",
-      "keyIdea": "Song, shared meaning, and covert communication: documented traditions, disputed Drinking Gourd claims, and a clearly labeled modern annotation exercise.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Concealing a message and encrypting its content are different aims"
-    },
-    "four-square": {
-      "name": "Four-Square Cipher",
-      "hall": "II",
-      "era": "Early 20th Century · 1902 publication",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Two keywords (two keyed squares)",
-      "keyIdea": "Four-Square cipher (1902) — Delastelle's digram cipher using two keyed and two standard 5x5 squares. Disrupts Playfair frequencies but breaks to digrams.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Digram frequency analysis · simulated annealing",
-      "modernLesson": "Fixed mappings preserve digram statistics"
-    },
-    "fractionated-morse": {
-      "name": "Fractionated Morse Cipher",
-      "hall": "IV",
-      "era": "Classical Puzzle Cipher",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Substitution alphabet for Morse triples",
-      "keyIdea": "Fractionated Morse — converts text to Morse, regroups dots, dashes, and separators in trigrams, then substitutes via a keyed alphabet. Broken by trigram stats.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Structural analysis of Morse patterns",
-      "modernLesson": "Encoding structure remains relevant to cryptanalysis"
-    },
-    "freemason-pigpen": {
-      "name": "Freemason Pigpen Tradition",
-      "hall": "XIII",
-      "era": "Masonic inscriptions and later puzzle traditions",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Pigpen uses geometric symbols for letters and appears in fraternal cipher traditions. The fixed substitution is readily reversible once the alphabet is known.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "gchq-trio": {
-      "name": "The GCHQ Trio — Ellis, Cocks, and Williamson",
-      "hall": "X",
-      "era": "Cold War · GCHQ",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Ellis’s January 1970 non-secret encryption report, Cocks’s 1973 construction, and Williamson’s 1974 key-agreement work, disclosed publicly in 1997.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "geheimschreiber": {
-      "name": "Geheimschreiber T52 (Sturgeon) Siemens & Halske teleprinter cipher",
-      "hall": "VII",
-      "era": "WWII · 1932–1945",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The Siemens T52 “Sturgeon” — a German WWII teleprinter cipher with ten wheels, with stepping that varied by model feeding an additive keystream and a per-character permutation. Broken by Arne Beurling and the Swedish Defence Staff’s cryptographic service in 1940.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Broken (Beurling, 1940)",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "gold-bug": {
-      "name": "Poe's Gold-Bug Cipher",
-      "hall": "XIII",
-      "era": "Antebellum America · 1843",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Poe’s The Gold-Bug (1843) makes a substitution decipherment central to a fictional treasure hunt and explains the reasoning to readers.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "gravity-falls": {
-      "name": "Gravity Falls Cipher System",
-      "hall": "XIII",
-      "era": "Animation · 2012–2016",
-      "family": "Fictional puzzles using classical ciphers",
-      "region": "Global",
-      "usedBy": "Series creators and puzzle-solving viewers",
-      "keyType": "Varies by puzzle; this widget uses Caesar +3",
-      "keyIdea": "Gravity Falls used classical ciphers and visual clues across its episodes and associated puzzles, inviting viewers to decode messages.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Record the text, clues and method; a plausible reading must fit the puzzle."
-    },
-    "great-cipher": {
-      "name": "The Great Cipher",
-      "hall": "II",
-      "era": "Baroque · 17th century",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Codebook of ~587 numbered syllables",
-      "keyIdea": "The Rossignols’ syllabic nomenclator was deciphered by Bazeries in the 1890s. His proposed Man in the Iron Mask identification remains disputed.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Étienne Bazeries (1893): syllabic frequency analysis and contextual cribs.",
-      "modernLesson": "Decoy tokens & variable-length codewords"
-    },
-    "gripenstierna": {
-      "name": "Gripenstierna’s Cipher Machine",
-      "hall": "VII",
-      "era": "1786 · Sweden",
-      "family": "Mechanical polyalphabetic cipher device",
-      "region": "Sweden",
-      "usedBy": "Documented 1786 construction; operational use not established here",
-      "keyType": "Disk arrangement",
-      "keyIdea": "Gripenstierna’s documented 1786 Swedish cipher device used 57 disks and separated plaintext access from ciphertext copying. The original is lost; later replicas are reconstructions.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Historical device; original lost, later reconstructed from documents. No modern security claim.",
-      "modernLesson": "Separate access to plaintext from handling ciphertext"
-    },
-    "gronsfeld": {
-      "name": "Gronsfeld Cipher",
-      "hall": "III",
-      "era": "17th Century",
-      "family": "Polyalphabetic",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Numeric keyword (digits 0-9)",
-      "keyIdea": "Gronsfeld restricts repeating-key shifts to digits 0–9. Its traditional attribution does not establish an exact invention date, and attack success depends on the available text.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Kasiski · Only 10 possible shifts per position",
-      "modernLesson": "Key alphabet size matters"
-    },
-    "hagelin-c36": {
-      "name": "Hagelin C-36 / C-52 Lineage",
-      "hall": "VII",
-      "era": "1930s–1950s · Sweden / Switzerland",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Sweden and Switzerland",
-      "usedBy": "Military and diplomatic operators of Hagelin pin-and-lug machines",
-      "keyType": "Pin patterns, lug settings, wheel selection and starting positions",
-      "keyIdea": "Pin-and-lug mechanisms produce a changing numerical shift; configurations vary by model",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "The pin-and-lug family has published cryptanalytic attacks; Greenough’s 1999 C-52 attack uses known plaintext.",
-      "modernLesson": "Public cryptanalysis and independent supplier review are separate requirements"
-    },
-    "hill": {
-      "name": "Hill Cipher",
-      "hall": "II",
-      "era": "1929",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Invertible key matrix (n×n)",
-      "keyIdea": "Hill’s 1929 cipher mixes groups of letters using an invertible matrix modulo 26. Suitable matched plaintext blocks can expose the key by linear algebra.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Known plaintext attack (matrix algebra)",
-      "modernLesson": "Matrix operations in AES MixColumns"
-    },
-    "histiaeus-tattoo": {
-      "name": "Histiaeus's Tattooed Messenger",
-      "hall": "I",
-      "era": "Classical Greece · ~499 BCE",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Histiaeus of Miletus (~499 BCE) — the Greek tyrant who tattooed a secret revolt order on a slave's shaved scalp, then waited for the hair to regrow before sending him.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Steganography (concealment)",
-      "modernLesson": "Concealment and encryption protect different properties"
-    },
-    "homophonic": {
-      "name": "Homophonic Substitution",
-      "hall": "II",
-      "era": "Renaissance · ~1400",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Symbol-to-letter mapping table",
-      "keyIdea": "Homophonic substitution assigns several symbols to common letters to reduce frequency peaks. Statistical attacks still depend on the message, mapping and available evidence.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Statistical analysis · Structural pattern detection",
-      "modernLesson": "Non-uniform output distributions"
-    },
-    "ika": {
-      "name": "IKA Cipher Machine",
-      "hall": "VII",
-      "era": "Early 1930s · Japan",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Explore the Imperial Japanese Navy’s IKA cipher: what intercepted traffic establishes, what M-1 artifacts show, and why the physical IKA mechanism remains uncertain in the cited study.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Historical naval cipher reconstructed from intercepted traffic; the physical IKA mechanism is not established by the cited 2021 study.",
-      "modernLesson": "Match each claim to its kind of evidence"
-    },
-    "ira-ciphers": {
-      "name": "IRA Cipher Traffic",
-      "hall": "V",
-      "era": "Ireland · 1920s",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Interwar IRA columnar-transposition traffic studied by Jim Gillogly and Tom Mahon. Richard Bean solved the remaining 51-letter published challenge in 2019.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Jim Gillogly; Richard Bean solved the final published challenge in 2019",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "jefferson-disk": {
-      "name": "Jefferson Disk",
-      "hall": "VII",
-      "era": "1795 (Jefferson) · 1922 (M-94)",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Physical disk arrangement (36 disks)",
-      "keyIdea": "Jefferson proposed a 36-disk wheel cipher in the 1790s. The later, independently developed US Army M-94 used 25 disks and was adopted in 1922.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Brute force · Probable word attack",
-      "modernLesson": "Compare mechanical implementations of substitution"
-    },
-    "jn-25": {
-      "name": "JN-25 (Japanese Naval Code)",
-      "hall": "VII",
-      "era": "World War II - 1939-1945",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "JN-25 combined Japanese naval code groups with additive encipherment. Partial recoveries by Allied teams, including Station HYPO, contributed to Midway intelligence.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Station HYPO and allied Pacific units",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "joan-clarke": {
-      "name": "Joan Clarke",
-      "hall": "X",
-      "era": "WWII · Britain",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Joan Clarke, Hut 8 cryptanalyst and expert practitioner of Banburismus, helped reduce the search for Naval Enigma settings.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "kahn": {
-      "name": "David Kahn",
-      "hall": "X",
-      "era": "Modern · Journalist/Historian",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "David Kahn (1930–2024), author of The Codebreakers, helped bring cryptologic history to a wide readership. He entered the NSA Cryptologic Hall of Honor in 2020.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "kama-sutra": {
-      "name": "Kama Sutra Cipher (Mlecchita Vikalpa)",
-      "hall": "I",
-      "era": "Classical India · ~400 CE",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Pairing seed (rearranges 13 letter pairs)",
-      "keyIdea": "Mlecchita-vikalpa, secret writing among the Kama Sutra’s arts. The interactive illustrates a modern paired-letter substitution, not a recovered ancient alphabet.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Secret writing appears in different cultural traditions"
-    },
-    "kerckhoffs": {
-      "name": "Kerckhoffs's Principle",
-      "hall": "XI",
-      "era": "Foundational · 1883",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Auguste Kerckhoffs's 1883 principle — 'A cipher should be secure even if everything about the system, except the key, is public knowledge' — is the bedrock of modern cryptographic design.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Open design enables scrutiny; it does not guarantee freedom from flaws"
-    },
-    "kl-7": {
-      "name": "KL-7 ADONIS NATO eight-rotor machine · 1952",
-      "hall": "VII",
-      "era": "Cold War · 1952",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "KL-7: an American eight-rotor cipher machine with irregular stepping and re-entry. Stolen key material compromised traffic during the Walker espionage case.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Never publicly broken by cryptanalysis in operational service; stolen keys exposed traffic.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "kryha": {
-      "name": "Kryha Pocket cipher machine · 1924",
-      "hall": "VII",
-      "era": "Inter-war commercial · 1924",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Kryha’s clockwork cipher devices used irregularly moving alphabets. Friedman and colleagues attacked a published challenge in 1933; this widget uses generated settings.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Broken (Friedman, 1933)",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "krypto-arg": {
-      "name": "ARG Ciphers",
-      "hall": "XIII",
-      "era": "Web 2.0 · 2001–present",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Alternate-reality games — from The Beast (2001) to Year Zero (2007) and beyond — built on the assumption that players will recognise, transcribe, and crack classical ciphers across forums, phone calls, and physical artifacts.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "kryptos": {
-      "name": "Kryptos",
-      "hall": "XII",
-      "era": "Modern · 1990",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Kryptos: K1–K3 publicly solved; K4 plaintext recovered from an archive in 2025, without a publicly demonstrated cryptanalytic solution.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "K1–K3 publicly solved. K4 plaintext was recovered from archival papers in 2025; that is distinct from a public cryptanalytic solution.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "lasry": {
-      "name": "George Lasry",
-      "hall": "X",
-      "era": "Modern · Computational",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "George Lasry applies computational search to classical ciphers. His work includes a 2017 Kassel dissertation and collaborative decipherment of Mary Stuart’s letters.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "latin-american-codebooks": {
-      "name": "Latin American Telegraphic Codebooks",
-      "hall": "VII",
-      "era": "Americas · 1870s–1940s",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Commercial telegraph codebooks compressed business messages. Their regional use and editions need documentary evidence; the demo uses an invented vocabulary.",
-      "trust": {
-        "key": "educational",
-        "text": "Educational",
-        "description": "A didactic construction for learning cryptographic concepts, not for security."
-      },
-      "securityFailure": "Commercial codebook illustration; specific regional military use requires archival evidence.",
-      "modernLesson": "Economics can influence communications design"
-    },
-    "leo-marks": {
-      "name": "Leo Marks",
-      "hall": "X",
-      "era": "WWII · Britain",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Leo Marks worked on SOE communications security, prepared keying material and letter one-time pads. His memoir recounts the practical problems of agent communications.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "lorenz": {
-      "name": "Lorenz Cipher",
-      "hall": "IX",
-      "era": "WWII · Germany · 1940",
-      "family": "Teleprinter stream cipher",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "12-wheel teleprinter cipher (Vernam-based)",
-      "keyIdea": "Lorenz SZ40/42: Tiltman recovered messages and key from a 1941 depth; Tutte and the Research Section inferred the structure by early 1942; Colossus accelerated wheel-setting from February 1944.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Tiltman: depth (1941) · Tutte: structure (1942) · Colossus: wheel settings (1944)",
-      "modernLesson": "Cryptanalysis and early programmable electronic computing"
-    },
-    "m-94": {
-      "name": "M-94 / CSP-488 US Army strip / disk cipher · 1922",
-      "hall": "VII",
-      "era": "WWI → WWII tactical · 1922–1943",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The M-94, adopted by the US Army in 1922, used 25 alphabet disks. It resembles Jefferson’s earlier unpublished wheel but was independently developed.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Tactical only",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "m209": {
-      "name": "M-209 (Hagelin C-38)",
-      "hall": "VII",
-      "era": "World War II · 1942 production",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "6 pinwheels (lengths 26, 25, 23, 21, 19, 17) + 27 lug bars",
-      "keyIdea": "M-209 cipher machine (US production from 1942) — the US Army's portable Hagelin C-38 with six co-prime pin-wheels and a 27-bar lug cage. Broken in the field in WWII.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Strong (tactical)",
-      "modernLesson": "Long periods alone do not ensure security"
-    },
-    "mary-stuart-castelnau-letters": {
-      "name": "Mary Queen of Scots — The Castelnau Letters",
-      "hall": "X",
-      "era": "1578–1584",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Mary Stuart’s letters from 1578–1584: 57 deciphered letters, about 50,000 words, published by Lasry, Biermann and Tomokiyo in 2023.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "57 letters from 1578–1584, approximately 50,000 words; decipherment published 8 February 2023.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "mavis-batey": {
-      "name": "Mavis Batey",
-      "hall": "X",
-      "era": "WWII · Britain",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Mavis Batey worked with Dilly Knox’s team on Italian naval Enigma. Their decrypts contributed intelligence before the Battle of Cape Matapan in March 1941.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "mccormick": {
-      "name": "McCormick Notes",
-      "hall": "XII",
-      "era": "Late 20th-c. United States · 1999",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Two handwritten notes found with Ricky McCormick in 1999. The FBI’s 2011 appeal sought contextual evidence and help interpreting their notation.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "The FBI’s 2011 appeal reported the notes unresolved.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "microdot": {
-      "name": "Microdot Steganography",
-      "hall": "V",
-      "era": "Twentieth-century espionage",
-      "family": "Photographic steganography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Physical concealment; any content encryption is separate",
-      "keyIdea": "Microdots conceal miniature photographic images in ordinary carriers. The browser demonstration is a visual metaphor, not optical microphotography or encryption.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Physical concealment can be discovered by inspection and magnification",
-      "modernLesson": "Steganography hides the message; cryptography hides the content"
-    },
-    "mit-mystery-hunt": {
-      "name": "MIT Mystery Hunt",
-      "hall": "XIII",
-      "era": "MIT · 1981–present",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "An annual puzzle hunt at MIT (since 1981) where teams solve dozens of layered cryptographic, linguistic, and lateral-thinking puzzles to find a hidden coin somewhere on campus.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "monoalphabetic": {
-      "name": "Monoalphabetic Substitution",
-      "hall": "II",
-      "era": "Ancient roots · medieval cryptanalysis",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Full alphabet permutation (26! keys)",
-      "keyIdea": "Monoalphabetic substitution — replace each letter with a fixed substitute. A large keyspace can still leak language patterns; al-Kindi described frequency analysis in the ninth century.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Language statistics and word patterns can expose a fixed substitution.",
-      "modernLesson": "S-boxes in AES"
-    },
-    "morse": {
-      "name": "Morse Code Telegraphy's universal alphabet · 1840s",
-      "hall": "I",
-      "era": "Telegraph age · 1840s →",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "International Morse code — the dot-dash telegraph alphabet that made the wired world possible and provided the carrier signal for a century of military and amateur ciphers.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "myszkowski": {
-      "name": "Myszkowski Transposition",
-      "hall": "IV",
-      "era": "1902 · France",
-      "family": "Transposition",
-      "region": "France",
-      "usedBy": "Classical cipher practitioners and puzzle solvers",
-      "keyType": "Keyword with repeated letters assigned identical ranks",
-      "keyIdea": "Read single columns downwards and tied columns together across rows",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Repeated-keyword transposition preserves letter frequencies and is vulnerable to statistical and keyword-search attacks.",
-      "modernLesson": "Specify tie handling and incomplete rows to make a permutation reversible"
-    },
-    "national-treasure": {
-      "name": "National Treasure",
-      "hall": "XIII",
-      "era": "Fiction · 2004",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The 2004 film National Treasure turns historical documents and landmarks into a fictional cipher hunt; its book clue uses the Silence Dogood letters.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "navajo-code-talkers": {
-      "name": "Navajo Code Talkers",
-      "hall": "VII",
-      "era": "WWII · 1942–1945",
-      "family": "Military vocabulary and spelling code",
-      "region": "Pacific theatre, World War II",
-      "usedBy": "Navajo Marines trained as Code Talkers",
-      "keyType": "Military vocabulary and spelling code built from Navajo",
-      "keyIdea": "Navajo code talkers used a specialized military vocabulary and spelling alphabet during World War II. Their language and the constructed code were distinct layers.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Never publicly broken in wartime service; a historical military code.",
-      "modernLesson": "Specialised shared code, training and operational context"
-    },
-    "nema": {
-      "name": "NEMA — Swiss Rotor Machine",
-      "hall": "VII",
-      "era": "Postwar Switzerland · 1947",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Switzerland",
-      "usedBy": "Swiss Army; training and war-reserve configurations",
-      "keyType": "Wheel selection and pairing; ten starting window letters",
-      "keyIdea": "Four wired rotors and a moving reflector controlled by separate stepping wheels",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Obsolete Swiss military rotor machine. The demo fixes one historical wheel configuration; the 17,576-keypress state period is not its key space.",
-      "modernLesson": "Count the state period separately from the initial key space"
-    },
-    "nfc-deployment": {
-      "name": "NFC Authentication: When the Tag Stays Unlocked",
-      "hall": "XI",
-      "era": "Modern cryptography · research case study",
-      "family": "Protocol and deployment case study",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Device-specific 3DES/AES keys, storage and diversification",
-      "keyIdea": "A case study of protocol state, key storage, integrity checks and counterfeit hardware.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Primitive strength does not establish command integrity or secure authentication state."
-    },
-    "nihilist": {
-      "name": "Nihilist Cipher",
-      "hall": "V",
-      "era": "1880s · Russia",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Polybius square + numeric keyword",
-      "keyIdea": "The additive Nihilist cipher sums plaintext and repeating-key Polybius coordinates. Its traditional Russian revolutionary attribution is qualified, and it differs from Nihilist transposition.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Frequency analysis of digit pairs · Kasiski-equivalent",
-      "modernLesson": "Layered cipher operations"
-    },
-    "nomenclator": {
-      "name": "Nomenclator",
-      "hall": "II",
-      "era": "Renaissance · 1400s–1800s",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Substitution alphabet plus a code list; sizes varied",
-      "keyIdea": "Nomenclator (1400s) — The 400-year diplomatic compromise: a small substitution alphabet plus a large code dictionary. Hall II of The Cipher Museum.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Historical systems combine code groups, letter substitutions, homophones and nulls; evidence varies by key and traffic.",
-      "modernLesson": "Combining methods does not by itself establish security"
-    },
-    "null-cipher": {
-      "name": "Null Cipher Concealment by selective reading · ancient → modern",
-      "hall": "IV",
-      "era": "Antiquity → present",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Position rule — first/last letter, Nth letter, Nth word, …",
-      "keyIdea": "A null cipher selects a message from a cover text using a positional rule. It conceals information in ordinary-looking writing; discovery of the rule defeats that concealment.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Weak (concealment, not encryption)",
-      "modernLesson": "Concealment does not provide encryption or authentication"
-    },
-    "one-time-pad": {
-      "name": "One-Time Pad",
-      "hall": "IX",
-      "era": "1882 · Theoretical",
-      "family": "One-Time Pad and Theoretical Security",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Random key same length as message (used once)",
-      "keyIdea": "A one-time pad offers perfect secrecy with a secret, uniform, independent message-length key used once. Try ciphertext tampering to see why secrecy is not authentication.",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "Perfect secrecy requires an independent, uniformly random secret pad at least as long as the message, used once. No authentication.",
-      "modernLesson": "Information-theoretic security (Shannon, 1949)"
-    },
-    "patterson-jefferson-cipher": {
-      "name": "Patterson's Cipher for Jefferson",
-      "hall": "II",
-      "era": "1801",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Robert Patterson's 1801 cipher for Thomas Jefferson — text written down the lines, cut into sections of at most nine, the lines shuffled and padded with arbitrary letters. No earlier decipherment is documented before Lawren Smithline solved it in 2007 by dynamic programming over digraph frequencies.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Solved 2007 — after 206 years",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "phaistos-disc": {
-      "name": "Phaistos Disc",
-      "hall": "XII",
-      "era": "Bronze Age Crete · ~1700 BCE",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The Phaistos Disc is a Bronze Age stamped inscription from Crete. Its language and reading remain disputed; it is not established as a cipher.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "pigpen": {
-      "name": "Pigpen Cipher",
-      "hall": "VIII",
-      "era": "18th Century",
-      "family": "Puzzle and Cultural Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Fixed symbol-to-letter grid",
-      "keyIdea": "Pigpen cipher (~1700) — Freemason geometric substitution where each letter becomes the lines and dots of its grid cell. Trivial once the glyph table is seen.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Symbol frequency analysis · Pattern recognition",
-      "modernLesson": "Symbols alone do not strengthen a substitution"
-    },
-    "playfair": {
-      "name": "Playfair Cipher",
-      "hall": "II",
-      "era": "Victorian · 1854",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "5×5 keyword square",
-      "keyIdea": "Playfair cipher (1854) — Charles Wheatstone's keyed 5x5 digram cipher promoted by Lord Playfair. Used by the British in WWI; broken by digram analysis.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Digraph statistics · hill climbing",
-      "modernLesson": "Block encryption and diffusion"
-    },
-    "polybius": {
-      "name": "Polybius Square",
-      "hall": "I",
-      "era": "Ancient Greece · ~150 BC",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "None (fixed grid)",
-      "keyIdea": "Polybius described a Greek torch-signalling system. The modern Latin 5×5 grid adapts its coordinate idea and supports later substitution and fractionation ciphers.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Frequency analysis",
-      "modernLesson": "Coordinate encoding and later fractionation"
-    },
-    "porta": {
-      "name": "Porta Cipher",
-      "hall": "III",
-      "era": "Renaissance · 1563",
-      "family": "Polyalphabetic",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Repeating keyword (pair-based)",
-      "keyIdea": "The Porta cipher uses reciprocal substitutions selected by a repeating key. This exhibit’s 26-letter, 13-row table is a modern adaptation of the historical construction.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Index of Coincidence · Statistical analysis",
-      "modernLesson": "Lookup-table cipher design"
-    },
-    "purple": {
-      "name": "Purple (97-shiki ōbun injiki)",
-      "hall": "VII",
-      "era": "World War II · 1939–1945",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Stepping-switch banks (sixes/twenties split) plus daily key sheet",
-      "keyIdea": "Purple was Japan’s Type 97 diplomatic stepping-switch cipher. Grotjan’s 20 September 1940 breakthrough helped the US Army SIS team reconstruct it.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Frank Rowlett, Genevieve Grotjan & the US SIS · 20 September 1940",
-      "modernLesson": "Distinct sub-ciphers per character class create exploitable structure"
-    },
-    "rail-fence": {
-      "name": "Rail Fence Cipher",
-      "hall": "IV",
-      "era": "Classical Transposition",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Rail count (widget: 2–10)",
-      "keyIdea": "Rail Fence transposes a message along a zigzag route. Rail count, offset conventions and message length define the search; there is no universal ten-rail maximum.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Brute force · Trivial keyspace",
-      "modernLesson": "Permutation layers in block ciphers"
-    },
-    "red-army-faction": {
-      "name": "RAF–Stasi Records and an OTP Teaching Model",
-      "hall": "V",
-      "era": "Cold War · 1970–1998",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "RAF–Stasi contacts are documented, but this exhibit does not establish a specific RAF one-time-pad system. The interactive is a generic arithmetic illustration.",
-      "trust": {
-        "key": "educational",
-        "text": "Educational",
-        "description": "A didactic construction for learning cryptographic concepts, not for security."
-      },
-      "securityFailure": "Illustrative letter-pad arithmetic; not a reconstruction of an authenticated RAF key or message.",
-      "modernLesson": "Separate organisational evidence from cryptographic evidence"
-    },
-    "red-type-a": {
-      "name": "Red (Type A)",
-      "hall": "VII",
-      "era": "Interwar to WWII - 1930s",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Red (Type A) (1930s) - the Japanese diplomatic half-rotor predecessor to Purple and the cryptanalytic bridge to MAGIC.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Broken by SIS",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "rochefort": {
-      "name": "Joseph Rochefort",
-      "hall": "X",
-      "era": "WWII · Pacific",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Joseph Rochefort led Station HYPO’s team. Its signals intelligence helped US commanders prepare for Midway alongside other Allied analysis, reconnaissance and operational decisions.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "rosetta-stone": {
-      "name": "The Rosetta Stone",
-      "hall": "I",
-      "era": "Ptolemaic Egypt · 196 BCE",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The Rosetta Stone (196 BCE) records a decree in two languages and three scripts. It supported the decipherment of Egyptian hieroglyphs; it is not an encryption system.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Parallel texts can constrain a proposed decipherment"
-    },
-    "rot13": {
-      "name": "ROT13",
-      "hall": "I",
-      "era": "Modern · 1980s",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "None (fixed shift of 13)",
-      "keyIdea": "ROT13 is a fixed Caesar shift of 13, popularized as an early Usenet viewing convention. Applying it twice restores the text; it provides no confidentiality.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Knowing the system",
-      "modernLesson": "Obfuscation ≠ encryption"
-    },
-    "rs44": {
-      "name": "Rasterschlüssel 44 (RS44)",
-      "hall": "IV",
-      "era": "German field cipher · 1944",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Daily stencil, column ranks, starting cell and minute",
-      "keyIdea": "Reconstruct the 27 March 1944 RS44 operating procedure with its original example stencil. Animate permitted-cell entry and keyed extraction.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Published Allied attacks used captured stencils, retransmissions and probable plaintext; isolated traffic could remain difficult.",
-      "modernLesson": "A large settings count is not evidence of security"
-    },
-    "rsa": {
-      "name": "RSA",
-      "hall": "XI",
-      "era": "Modern &middot; 1977",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "RSA uses a public modulus and exponents to support public-key constructions. Secure encryption and signatures need specified padding, adequate parameters and correct implementation.",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "running-key": {
-      "name": "Running Key Cipher",
-      "hall": "III",
-      "era": "19th Century",
-      "family": "Polyalphabetic",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Full-length key text (book or speech)",
-      "keyIdea": "Running Key uses a message-length text passage as its Vigenère key. Language patterns in both message and key prevent the perfect secrecy of an ideal one-time pad.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Source text identification · Statistical analysis",
-      "modernLesson": "A long key is not necessarily a random key"
-    },
-    "sator-square": {
-      "name": "Sator Square",
-      "hall": "XIII",
-      "era": "Roman Empire · 1st–4th c. CE",
-      "family": "Ciphers in Culture",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The SATOR square has five palindromically arranged words. Its letters form a PATER NOSTER cross with two A’s and two O’s left over; the intended meaning remains debated.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "scytale": {
-      "name": "Scytale",
-      "hall": "I",
-      "era": "Ancient Sparta · interpretation debated",
-      "family": "Ancient and Foundational Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Rod diameter (physical key)",
-      "keyIdea": "The traditional scytale reconstruction illustrates transposition, but the dates and cryptographic interpretation of ancient evidence are disputed.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Simple transposition model; historical origin and military use are debated.",
-      "modernLesson": "Transposition & key space"
-    },
-    "sha256": {
-      "name": "SHA-256",
-      "hall": "XI",
-      "era": "Modern &middot; 2002",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "Certificate chains, Bitcoin mining, file integrity, password storage (via KDFs)",
-      "keyType": "Unkeyed",
-      "keyIdea": "Maps a message shorter than 2^64 bits to a 256-bit digest; hashing does not encrypt the message",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "shamir-secret-sharing": {
-      "name": "Shamir's Secret Sharing",
-      "hall": "XI",
-      "era": "Modern &middot; 1979",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "Threshold backup and custody designs; deployment details vary",
-      "keyType": "No key — the secret is the object being split",
-      "keyIdea": "Any k distinct valid shares recover the field-element secret; fewer reveal nothing when the polynomial coefficients are uniform and independent",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "shugborough": {
-      "name": "Shugborough Inscription",
-      "hall": "XII",
-      "era": "Georgian England · mid-18th century",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "An eighteenth-century garden monument with eight unexplained letters, O · U · O · S · V · A · V · V, and D · M below.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Unresolved inscription; an encoding method is not established",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "sigaba": {
-      "name": "SIGABA (ECM Mark II)",
-      "hall": "VII",
-      "era": "WWII · 1940",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "15 rotors arranged as 3 banks of 5 (cipher × 5, control × 5, index × 5)",
-      "keyIdea": "SIGABA used fifteen rotors in cipher, control and index banks. No successful enemy wartime cryptanalytic break is publicly documented; the widget is a simplified model.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Never publicly broken by cryptanalysis in wartime service; obsolete today.",
-      "modernLesson": "Rotor-control design changes the structure available to an analyst"
-    },
-    "sigsaly": {
-      "name": "SIGSALY — The Encrypted Speech System",
-      "hall": "VII",
-      "era": "WWII · 1943–1946",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "SIGSALY protected high-level Allied voice communications using quantised vocoder parameters and matched one-time key records. The demo illustrates modular addition only.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "An early operational use of digital speech parameters and one-time keys"
-    },
-    "slidex": {
-      "name": "Slidex British WWII tactical code card",
-      "hall": "VI",
-      "era": "WWII & Cold War · 1943–1980s",
-      "family": "American and Civil War Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Slidex used a 204-cell tactical vocabulary card and sliding coordinate strips. Reported German recovery times concerned particular wartime traffic, not every message.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Short-lived tactical vocabulary cards and changing cursor settings; the widget is a simplified bigram model.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "sodark": {
-      "name": "SoDark and Radio Linking",
-      "hall": "XI",
-      "era": "Modern cryptography · research case study",
-      "family": "Tweakable block cipher and radio protocol",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "56-bit key; 64-bit tweak; attacked eight-round 2G configuration",
-      "keyIdea": "An eight-round attack on HF link establishment, with its data and access conditions visible.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Practical attacks target eight-round 2G ALE with suitable data; the paper does not establish the same break of sixteen-round 3G variants.",
-      "modernLesson": "State the protected traffic, round count, data requirement and attacker access."
-    },
-    "solitaire": {
-      "name": "Solitaire / Pontifex",
-      "hall": "IX",
-      "era": "Modern · 1999",
-      "family": "Card-deck stream cipher",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Initial ordering of a 54-card deck (52 + 2 jokers)",
-      "keyIdea": "Solitaire / Pontifex (1999) — Bruce Schneier's hand cipher driven by a 54-card deck (written for Cryptonomicon). Crowley showed a ~1/22.5 keystream bias.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Manual stream-cipher design and its limitations"
-    },
-    "somerton-man": {
-      "name": "Somerton Man Code",
-      "hall": "XII",
-      "era": "Post-WWII Australia · 1948",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The Somerton Man inscription and a simplified transcription experiment. A 2022 genealogical identification proposal is separate from interpreting the letters.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Unresolved inscription; a 2022 genealogical identification proposal is separate from deciphering these letters.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "stager": {
-      "name": "Stager Cipher",
-      "hall": "Museum exhibit",
-      "era": "Union · 1861",
-      "family": "Historical Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Route transposition + code words",
-      "keyIdea": "The Union’s Stager system combined word transposition, code words and operational procedures. Wartime success is a historical claim, not a proof of mathematical security.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Historical Union route-code system; wartime operational success is not a mathematical security guarantee.",
-      "modernLesson": "Route transposition as message obfuscation"
-    },
-    "station-hypo": {
-      "name": "Station HYPO — Pearl Harbor to Midway",
-      "hall": "X",
-      "era": "WWII · 1940–1942",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Station HYPO combined partial JN-25 recovery, traffic analysis and operational context to help anticipate the Japanese operation against Midway in 1942.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "straddling-checkerboard": {
-      "name": "Straddling Checkerboard",
-      "hall": "V",
-      "era": "Late 19th – 20th Century",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "8 high-frequency letters in row 0",
-      "keyIdea": "The straddling checkerboard uses one- and two-digit letter codes. It is a substitution component of VIC; this exhibit does not establish an exact first-use date.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Weak (alone) · Strong (in VIC)",
-      "modernLesson": "Variable-length codes resist character-aligned attacks"
-    },
-    "tap-code": {
-      "name": "Tap Code",
-      "hall": "VIII",
-      "era": "Vietnam War · earlier precedents",
-      "family": "Puzzle and Cultural Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "5×5 Polybius grid (no key)",
-      "keyIdea": "Tap Code (1965) — the 5x5 Polybius square tapped through walls as row-then-column knocks. Used by US POWs in the Hanoi Hilton during the Vietnam War.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Frequency analysis · Grid deduction",
-      "modernLesson": "Non-electronic covert communication"
-    },
-    "trifid": {
-      "name": "Trifid Cipher",
-      "hall": "IV",
-      "era": "1902",
-      "family": "Transposition",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "3×3×3 keyword cube",
-      "keyIdea": "Trifid cipher (1902) — Felix Delastelle's three-dimensional 3x3x3 extension of the Bifid that fractionates letters into trits and shuffles them across a period.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Statistical analysis",
-      "modernLesson": "3D lookup tables in modern cipher design"
-    },
-    "trithemius": {
-      "name": "Trithemius Progressive Cipher Polygraphia · 1518",
-      "hall": "III",
-      "era": "German Renaissance · 1518",
-      "family": "Polyalphabetic",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Optional starting offset only",
-      "keyIdea": "Johannes Trithemius's progressive shift cipher (Polygraphia, 1518) — the first published polyalphabetic, where every successive letter is shifted one further than the last.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Easy",
-      "modernLesson": "A predictable keystream is barely a keystream"
-    },
-    "turning-grille": {
-      "name": "Fleissner Turning Grille",
-      "hall": "IV",
-      "era": "1881 · German WWI use",
-      "family": "Transposition",
-      "region": "Austria and wartime Europe",
-      "usedBy": "German Army in WWI; other military grille users",
-      "keyType": "Hole pattern, starting orientation and rotation direction",
-      "keyIdea": "Four quarter-turns visit each cell once, permuting a complete message block",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "A transposition cipher: quarter-turn holes permute a complete block, preserving letter frequencies.",
-      "modernLesson": "A stencil can rearrange a message without concealing its existence"
-    },
-    "two-square": {
-      "name": "Two-Square Cipher",
-      "hall": "II",
-      "era": "Classical Digraph Cipher",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Two keywords (two keyed squares)",
-      "keyIdea": "Two-square uses two keyed 5×5 squares to encipher letter pairs. This demo follows the ACA horizontal rectangle rule and discloses its extra filler-escape convention.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Digram frequency · same-row leak",
-      "modernLesson": "Beware of identity transformations as edge cases"
-    },
-    "typex": {
-      "name": "Typex",
-      "hall": "VII",
-      "era": "WWII · 1937",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "5 rotors (3 stepping + 2 stator) chosen from a set of 10 or 14",
-      "keyIdea": "Typex was a British Enigma-derived family with five rotor positions. Later models included plugboards; the browser widget is a simplified rotor model.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "No general wartime cryptanalytic break established here; captured equipment and keys posed a separate risk. Obsolete today.",
-      "modernLesson": "Model differences and operational practices matter alongside the rotor count"
-    },
-    "ua-8295": {
-      "name": "UA-8295: Forensic Cryptanalysis of a Message Terminal",
-      "hall": "XI",
-      "era": "Modern cryptography · research case study",
-      "family": "Firmware forensics",
-      "region": "Finland / Netherlands",
-      "usedBy": "Nokia DA-8520 / USFA UA-8295 terminal users",
-      "keyType": "15-character user key plus a 5-character nonce derive a 56-bit key",
-      "keyIdea": "A sourced forensic case: the Nokia original versus the NSA ROM, the attacks actually implemented, and what stays conditional or unresolved.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Separate what was observed in firmware, what was implemented as an attack, what is conditional inference, and what is still open."
-    },
-    "venona": {
-      "name": "VENONA Project",
-      "hall": "IX",
-      "era": "Cold War · 1943–1980",
-      "family": "One-Time Pad and Theoretical Security",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "VENONA analysed intercepted Soviet messages, chiefly from the 1940s, by exploiting duplicated pad material. The project ran from 1943 to 1980.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Partial break (key reuse exploit)",
-      "modernLesson": "Even perfect ciphers fail when key generation is flawed"
-    },
-    "vernam": {
-      "name": "Vernam Cipher",
-      "hall": "IX",
-      "era": "1917",
-      "family": "Additive teleprinter cipher",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Key tape (bitwise XOR)",
-      "keyIdea": "Vernam’s teleprinter system combines text with a key stream. XOR supplies perfect secrecy only when the pad is uniformly random, independent, secret, long enough and never reused.",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "XOR gives perfect secrecy only with an independent, uniformly random secret pad at least as long as the message, used once. No authentication.",
-      "modernLesson": "XOR as cipher operation · nonce uniqueness"
-    },
-    "vic": {
-      "name": "VIC Cipher",
-      "hall": "V",
-      "era": "Cold War · 1950s",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Straddling checkerboard + double transposition",
-      "keyIdea": "VIC cipher (1953) — Reino Häyhänen's KGB hand cipher: straddling checkerboard, double transposition, date-driven keystream. Exposed in 1957 after his defection, not broken cryptanalytically.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Historical Soviet hand system; the key procedure became known through Häyhänen’s 1957 defection. No proof of unbreakability.",
-      "modernLesson": "Peak hand-cipher design principles"
-    },
-    "vietnamese-underground": {
-      "name": "Vietnamese Underground Codes",
-      "hall": "V",
-      "era": "Modern · 1940s–1975",
-      "family": "Military and Field Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Vietnamese wartime communications used changing codes and ciphers. This keyword-substitution widget is a teaching model, not a verified universal underground system.",
-      "trust": {
-        "key": "educational",
-        "text": "Educational",
-        "description": "A didactic construction for learning cryptographic concepts, not for security."
-      },
-      "securityFailure": "Illustrative concealment and cipher models; specific operational attribution is not established here.",
-      "modernLesson": "Compartmentalization limits damage from key compromise"
-    },
-    "vigenere": {
-      "name": "Vigenère Cipher",
-      "hall": "III",
-      "era": "Renaissance · 1553",
-      "family": "Historical Cryptography",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Repeating keyword",
-      "keyIdea": "The repeating-key Vigenère cipher exposes periodic structure. Bellaso described a related system in 1553; Babbage and Kasiski developed attacks in the nineteenth century.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Babbage ~1854 · Kasiski 1863",
-      "modernLesson": "Stream ciphers (ChaCha20)"
-    },
-    "voynich": {
-      "name": "The Voynich Manuscript",
-      "hall": "XII",
-      "era": "Early 15th c. · Carbon-dated 1404–1438",
-      "family": "Unsolved Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The Voynich manuscript has an undeciphered script. Parchment dating and sample-dependent text statistics constrain hypotheses without identifying its language or method.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "No generally accepted decipherment; whether the text encodes language or a cipher remains unresolved.",
-      "modernLesson": "Statistical signatures alone cannot tell cipher from constructed language from hoax"
-    },
-    "wadsworth-cipher": {
-      "name": "Wadsworth Cipher",
-      "hall": "VII",
-      "era": "1817 · USA",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Wadsworth’s 1817 device uses geared disks with 33 and 26 positions. A published 2020 ciphertext-only search studied key recovery for this historical design.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Ciphertext-only stochastic hill climbing (2020)",
-      "modernLesson": "Coprime periods buy length; they do not buy security"
-    },
-    "wallis-ciphers": {
-      "name": "Wallis Ciphers John Wallis & the English Civil War · 1640s",
-      "hall": "II",
-      "era": "English Civil War · 1642–1651",
-      "family": "Substitution",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "John Wallis’s seventeenth-century cryptanalysis, with a clearly identified museum nomenclator model. Historical recovery times varied from hours to months.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Royalist nomenclators — broken by Wallis",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "wheatstone": {
-      "name": "Wheatstone Cryptograph A clock-face polyalphabetic · 1867",
-      "hall": "VII",
-      "era": "Victorian London · 1867",
-      "family": "Mechanical and Rotor Machines",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Mixed-alphabet keyword (inner dial)",
-      "keyIdea": "Charles Wheatstone's 1867 cryptograph — two geared clock dials whose hands sweep an outer plain alphabet and an inner mixed alphabet, generating a polyalphabetic ciphertext one click at a time.",
-      "trust": {
-        "key": "historical",
-        "text": "Historical Only",
-        "description": "Obsolete or historical system; notes distinguish cryptanalysis from capture or other operational compromise."
-      },
-      "securityFailure": "Historical unequal-dial device. The current equal-dial widget is a fixed-substitution teaching model, not its mechanism.",
-      "modernLesson": "Mechanisation does not, by itself, add security"
-    },
-    "yardley": {
-      "name": "Herbert Yardley",
-      "hall": "X",
-      "era": "Interwar · USA",
-      "family": "Codebreakers and Cryptanalysis",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "Herbert Osborne Yardley founded America's Black Chamber in 1919, broke Japanese diplomatic codes at the 1921 Washington Naval Conference, and then infamously published the secrets in his 1931 bestseller.",
-      "trust": null,
-      "securityFailure": null,
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "zero-knowledge-proofs": {
-      "name": "Zero-Knowledge Proofs",
-      "hall": "XI",
-      "era": "Modern &middot; 1985",
-      "family": "Modern Cryptography",
-      "region": "Global",
-      "usedBy": "Zcash shielded transactions, Ethereum rollups, anonymous credential systems",
-      "keyType": "Witness known only to the prover",
-      "keyIdea": "Proves a statement without revealing the witness beyond what the statement and model permit",
-      "trust": {
-        "key": "secure",
-        "text": "Secure (Modern)",
-        "description": "Still considered secure when used correctly with modern key handling."
-      },
-      "securityFailure": "See the exhibit’s documented attacks and limitations.",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "zimmermann": {
-      "name": "Zimmermann Telegram German codes 0075 / 13040 · 1917",
-      "hall": "VI",
-      "era": "WWI · January 1917",
-      "family": "American and Civil War Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Varies by system",
-      "keyIdea": "The January 1917 Zimmermann Telegram: code 0075 to Washington, then re-encoded in 13040 for Mexico. Room 40’s reading helped draw the United States into WWI.",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Broken (Room 40)",
-      "modernLesson": "Security depends on design quality, key management, and implementation."
-    },
-    "zodiac": {
-      "name": "Zodiac Cipher",
-      "hall": "VIII",
-      "era": "1969 · Solved 2020",
-      "family": "Puzzle and Cultural Ciphers",
-      "region": "Global",
-      "usedBy": "See the exhibit for historical participants and source evidence",
-      "keyType": "Homophonic substitution + diagonal transposition",
-      "keyIdea": "Zodiac killer ciphers (1969) — homophonic substitution as in Z-408 (broken in 1969 by the Hardens) and Z-340 (broken in 2020 by Oranchak, Blake, and Van Eycke).",
-      "trust": {
-        "key": "broken",
-        "text": "Broken",
-        "description": "Cryptographically broken — historically important but unsafe to use today."
-      },
-      "securityFailure": "Oranchak, Blake & Van Eycke (2020)",
-      "modernLesson": "Layered ciphers · n-gram scoring"
-    }
-  }
-};
-  if (typeof global.dispatchEvent === 'function') global.dispatchEvent(new global.Event('artifact-cards-ready'));
-})(typeof window !== "undefined" ? window : globalThis);
-```
-
-
-## JavaScript — js/artifact-cards.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/artifact-cards.js`
-- Served SHA-256: `5ffdc2e0aeae9d3c95e393b7bc9f277eaddb7f5e87117cde3f21f6e51cc83a92`
-- Readable-source SHA-256: `5ffdc2e0aeae9d3c95e393b7bc9f277eaddb7f5e87117cde3f21f6e51cc83a92`
-
-
-```javascript
-/* THE CIPHER MUSEUM — Artifact Card Renderer */
-'use strict';
-
-(function () {
-  var path = (location.pathname || '').toLowerCase();
-  if (path.indexOf('/ciphers/') === -1) return;
-
-  var file = path.split('/').pop() || '';
-  var slug = file.replace(/\.html$/, '');
-  if (!slug) return;
-
-  function render() {
-    var data = (window.__ARTIFACT_CARDS__ && window.__ARTIFACT_CARDS__.cards) || {};
-    var card = data[slug];
-    if (!card) return;
-
-    var main = document.getElementById('main-content') || document.querySelector('main');
-    if (!main) return;
-    if (main.querySelector('.artifact-card')) return;
-
-    var anchor = main.querySelector('.page-hero') || main.firstElementChild;
-    if (!anchor) return;
-
-    var section = document.createElement('section');
-    section.className = 'artifact-card';
-    section.setAttribute('aria-label', 'Artifact card metadata');
-    section.setAttribute('data-artifact-slug', slug);
-
-    var title = document.createElement('h2');
-    title.className = 'artifact-card-title';
-    title.textContent = 'Artifact Card';
-
-    var grid = document.createElement('dl');
-    grid.className = 'artifact-card-grid';
-
-    function addField(label, value, trust) {
-      var dt = document.createElement('dt');
-      dt.className = 'artifact-card-label';
-      dt.textContent = label;
-
-      var dd = document.createElement('dd');
-      dd.className = 'artifact-card-value';
-      if (trust) dd.innerHTML = window.TrustLabels.badge(trust);
-      else dd.textContent = value || 'Not specified';
-
-      grid.appendChild(dt);
-      grid.appendChild(dd);
-    }
-
-    if (card.hall) addField('Hall', card.hall);
-    addField('Era', card.era);
-    addField('Family', card.family);
-    addField('Region', card.region);
-    addField('Used By', card.usedBy);
-    addField('Key Type', card.keyType);
-    addField('Key Idea', card.keyIdea);
-    if (card.trust) {
-      addField('Trust', card.trust.text, card.trust);
-      addField('Security History / Limits', card.securityFailure);
-    }
-    addField('Modern Lesson', card.modernLesson);
-
-    section.appendChild(title);
-    section.appendChild(grid);
-
-    if (anchor.nextSibling) {
-      main.insertBefore(section, anchor.nextSibling);
-    } else {
-      main.appendChild(section);
-    }
-  }
-
-  // Companion scripts can execute in either order. The generated data bundle
-  // announces readiness; a delayed document can also retry the same renderer.
-  window.addEventListener('artifact-cards-ready', render);
-  document.addEventListener('DOMContentLoaded', render, { once: true });
-  render();
-})();
-```
-
-
-## JavaScript — js/book-invitation-demos.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/book-invitation-demos.js`
-- Served SHA-256: `40359f1bf2372b24bcc85fa59f50249f71c4da5a8e44e19e49bcc3493a4f1bfa`
-- Readable-source SHA-256: `40359f1bf2372b24bcc85fa59f50249f71c4da5a8e44e19e49bcc3493a4f1bfa`
-
-
-```javascript
-/* Small, invented teaching models for the book's exhibit invitations. */
-(function (root) {
-  'use strict';
-  const gcd = (a, b) => b ? gcd(b, a % b) : a;
-  const prime = n => Number.isInteger(n) && n >= 2 && n <= 97 && !Array.from({length: Math.max(0, Math.floor(Math.sqrt(n)) - 1)}, (_, i) => i + 2).some(d => n % d === 0);
-  function pow(base, exponent, modulus) {
-    let result = 1;
-    while (exponent > 0) {
-      if (exponent % 2) result = result * base % modulus;
-      base = base * base % modulus;
-      exponent = Math.floor(exponent / 2);
-    }
-    return result;
-  }
-  function rsa(p, q, e, message) {
-    if (!prime(p) || !prime(q) || p === q) throw new Error('Choose two different primes from 2 to 97.');
-    const n = p * q, phi = (p - 1) * (q - 1);
-    if (!Number.isInteger(e) || e <= 1 || e >= phi || gcd(e, phi) !== 1) throw new Error('Choose a whole-number e greater than 1 and less than φ(n), with gcd(e, φ(n)) = 1.');
-    if (!Number.isInteger(message) || message < 0 || message >= n) throw new Error('The message must be a whole number from 0 to ' + (n - 1) + '.');
-    let d = 1;
-    while (e * d % phi !== 1) d++;
-    const ciphertext = pow(message, e, n);
-    return { n, phi, e, d, ciphertext, recovered: pow(ciphertext, d, n) };
-  }
-  function dh(a, b) {
-    if (![a, b].every(n => Number.isInteger(n) && n >= 1 && n <= 21)) throw new Error('Choose whole-number private exponents from 1 to 21.');
-    const A = pow(5, a, 23), B = pow(5, b, 23);
-    return {A, B, alice: pow(B, a, 23), bob: pow(A, b, 23)};
-  }
-  const vocabulary = { RIVER: 'ORCHARD', BRIDGE: 'LANTERN' };
-  function route(keyword) {
-    const key = keyword.trim().toUpperCase();
-    if (!/^[A-Z]{4,8}$/.test(key)) throw new Error('Use a route keyword of 4–8 letters, A–Z.');
-    return [...key].map((letter, col) => ({letter, col})).sort((a, b) => a.letter.localeCompare(b.letter) || a.col - b.col).map((entry, i) => ({col: entry.col, up: i % 2 === 1}));
-  }
-  function stagerEncode(message, keyword, codes, nulls) {
-    const words = message.toUpperCase().match(/[A-Z]+/g) || [];
-    if (!words.length || words.length > 120) throw new Error('Enter 1–120 words using letters A–Z. Punctuation and numbers are omitted.');
-    if (words.some(w => ['ORCHARD', 'LANTERN', 'SKY', 'PAD'].includes(w))) throw new Error('ORCHARD, LANTERN, SKY and PAD are reserved by this invented key. Choose other message words.');
-    const order = route(keyword), columns = order.length, rows = Math.ceil(words.length / columns);
-    const encoded = words.map(w => codes ? (vocabulary[w] || w) : w);
-    while (encoded.length < rows * columns) encoded.push('PAD');
-    const transmitted = [];
-    for (const {col, up} of order) {
-      for (let r = 0; r < rows; r++) transmitted.push(encoded[(up ? rows - r - 1 : r) * columns + col]);
-      if (nulls) transmitted.push('SKY');
-    }
-    return {ciphertext: transmitted.join(' '), keyword: keyword.trim().toUpperCase(), codes, nulls, rows};
-  }
-  function stagerDecode(packet) {
-    const order = route(packet.keyword), columns = order.length;
-    const words = packet.ciphertext.split(' ').filter(w => !packet.nulls || w !== 'SKY');
-    if (words.length !== packet.rows * columns) throw new Error('The transmitted grid has an unexpected word count.');
-    const grid = Array(words.length); let at = 0;
-    for (const {col, up} of order) for (let r = 0; r < packet.rows; r++) grid[(up ? packet.rows - r - 1 : r) * columns + col] = words[at++];
-    const routed = grid.filter(w => w !== 'PAD');
-    return {routed: routed.join(' '), plaintext: routed.map(w => packet.codes ? ({ORCHARD: 'RIVER', LANTERN: 'BRIDGE'}[w] || w) : w).join(' ')};
-  }
-  function mount(document) {
-    const byId = id => document.getElementById(id);
-    const dhForm = byId('dh-toy');
-    if (dhForm) {
-      dhForm.querySelector('button').disabled = false;
-      dhForm.addEventListener('input', () => { byId('dh-result').textContent = 'Inputs changed. Exchange the public values again.'; });
-      dhForm.addEventListener('submit', event => {
-        event.preventDefault();
-        try {
-          const a = Number(byId('dh-a').value), b = Number(byId('dh-b').value), r = dh(a, b);
-          byId('dh-result').textContent = `Public parameters: p = 23, g = 5\nAlice publishes A = 5^${a} mod 23 = ${r.A}\nBob publishes B = 5^${b} mod 23 = ${r.B}\nAlice computes B^a mod 23 = ${r.alice}\nBob computes A^b mod 23 = ${r.bob}\nThe shared values agree. The arithmetic does not authenticate either person.`;
-        } catch (error) { byId('dh-result').textContent = error.message; }
-      });
-    }
-    const rsaForm = byId('rsa-toy');
-    if (rsaForm) {
-      rsaForm.querySelector('button[type="submit"]').disabled = false;
-      const result = byId('rsa-result'), status = byId('rsa-status');
-      rsaForm.addEventListener('input', () => { result.hidden = true; result.textContent = ''; status.textContent = 'Inputs changed. Run the round trip again.'; });
-      rsaForm.addEventListener('submit', event => {
-        event.preventDefault(); result.hidden = true; result.textContent = '';
-        try {
-          const values = ['p', 'q', 'e', 'message'].map(id => byId('rsa-' + id).value.trim());
-          if (values.some(value => !/^\d+$/.test(value))) throw new Error('Enter whole numbers in all four fields.');
-          const [p, q, e, message] = values.map(Number), r = rsa(p, q, e, message);
-          result.textContent = `n = ${r.n}; φ(n) = ${r.phi}; d = ${r.d}\nPublic key (n, e) = (${r.n}, ${e})\nPrivate key (n, d) = (${r.n}, ${r.d})\nEncrypt: ${message}^${e} mod ${r.n} = ${r.ciphertext}\nDecrypt: ${r.ciphertext}^${r.d} mod ${r.n} = ${r.recovered}`;
-          result.hidden = false; status.textContent = 'Round trip succeeded. This verifies the arithmetic, not the identity of the key holder.';
-        } catch (error) { status.textContent = error.message; }
-      });
-    }
-    const stagerForm = byId('stager-words');
-    if (stagerForm) {
-      stagerForm.querySelector('button[type="submit"]').disabled = false;
-      let packet;
-      stagerForm.addEventListener('submit', event => {
-        event.preventDefault(); byId('stager-answer').hidden = true; byId('stager-answer').textContent = '';
-        try {
-          packet = stagerEncode(byId('stager-message').value, byId('stager-keyword').value, byId('stager-codewords').checked, byId('stager-nulls').checked);
-          byId('stager-transmitted').textContent = packet.ciphertext;
-          byId('stager-route').textContent = 'Read columns: ' + route(packet.keyword).map(({col, up}) => (col + 1) + (up ? ' up' : ' down')).join(', ') + `. Grid: ${packet.rows} rows × ${packet.keyword.length} columns.`;
-          byId('stager-stage').hidden = false; stagerForm.hidden = true; byId('stager-status').textContent = '';
-          byId('stager-transmitted').focus();
-        } catch (error) { byId('stager-status').textContent = error.message; }
-      });
-      byId('stager-restore').addEventListener('click', () => {
-        if (!packet) return;
-        const r = stagerDecode(packet);
-        byId('stager-answer').textContent = 'Route restored, nulls and padding removed: ' + r.routed + '\nVocabulary restored: ' + r.plaintext;
-        byId('stager-answer').hidden = false;
-      });
-      byId('stager-edit').addEventListener('click', () => { packet = null; stagerForm.hidden = false; byId('stager-stage').hidden = true; byId('stager-answer').textContent = ''; byId('stager-message').focus(); });
-    }
-    const modifier = byId('mary-repeat');
-    if (modifier) {
-      modifier.disabled = false;
-      const update = () => { byId('mary-reading').textContent = modifier.checked ? 'T E E · [Castelnau] — ↻ repeats E; X contributes nothing.' : 'T E · [Castelnau] — ↻ is omitted for comparison; X contributes nothing.'; };
-      modifier.addEventListener('change', update); update();
-    }
-  }
-  const api = {rsa, dh, route, stagerEncode, stagerDecode, mount};
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  if (root.document) root.document.addEventListener('DOMContentLoaded', () => mount(root.document));
-})(typeof window === 'undefined' ? globalThis : window);
-```
-
-
-## JavaScript — js/book-trail.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/book-trail.js`
-- Served SHA-256: `fb2652ed090ddd95e5df66b3db40663c6604025a26360a26ef35236fa1339200`
-- Readable-source SHA-256: `fb2652ed090ddd95e5df66b3db40663c6604025a26360a26ef35236fa1339200`
-
-
-```javascript
-/* Optional notebook for the four invented book slips. No network requests. */
-(function () {
-  'use strict';
-  var panel = document.getElementById('notebook');
-  if (!panel) return;
-  var key = 'cipher-museum-book-slips-v1';
-  var fields = [1, 2, 3, 4].map(function (n) { return document.getElementById('slip-answer-' + n); });
-  var feedback = document.getElementById('notebook-feedback');
-  var saved = null;
-  function answers() { return fields.map(function (field) { return field.value.trim(); }); }
-  function count() {
-    document.getElementById('notebook-count').textContent = answers().filter(Boolean).length + ' of 4 answer spaces filled.';
-  }
-  function openSlip() {
-    if (!/^(#slip-[1-4]|#notebook)$/.test(window.location.hash)) return;
-    var slip = document.getElementById(window.location.hash.slice(1));
-    if (slip.tagName === 'DETAILS') slip.open = true;
-    if (typeof slip.scrollIntoView === 'function') slip.scrollIntoView({ block: 'start' });
-  }
-  panel.hidden = false;
-  try {
-    var raw = window.localStorage.getItem(key);
-    if (raw) {
-      var record = JSON.parse(raw);
-      if (!record || record.version !== 1 || !Array.isArray(record.answers) || record.answers.length !== 4 ||
-          !record.answers.every(function (a) { return typeof a === 'string' && a.length <= 60; })) {
-        throw new Error('Invalid notebook');
-      }
-      fields.forEach(function (field, i) { field.value = record.answers[i]; });
-      saved = JSON.stringify(answers());
-      feedback.textContent = 'Your saved answers are back. You can edit them and save again.';
-    }
-  } catch (_) {
-    feedback.textContent = 'Saved answers are unavailable in this browser. You can still fill in the notebook and join the answers.';
-  }
-  count();
-  fields.forEach(function (field) {
-    field.addEventListener('input', function () {
-      count();
-      feedback.textContent = saved === JSON.stringify(answers()) ? 'These answers match your saved notebook.' : 'These edits are not saved. Choose “Save on this device” if you want to return to them later.';
-    });
-  });
-  document.getElementById('save-notebook').addEventListener('click', function () {
-    try {
-      window.localStorage.setItem(key, JSON.stringify({ version: 1, answers: answers() }));
-      saved = JSON.stringify(answers());
-      feedback.textContent = 'Saved in this browser on this device. Save again after making changes.';
-    } catch (_) {
-      feedback.textContent = 'This browser could not save the notebook. Keep a paper copy; joining the answers still works.';
-    }
-  });
-  document.getElementById('clear-notebook').addEventListener('click', function () {
-    fields.forEach(function (field) { field.value = ''; });
-    document.getElementById('instruction').value = '';
-    saved = null;
-    count();
-    try {
-      window.localStorage.removeItem(key);
-      feedback.textContent = 'The notebook and its saved answers have been cleared.';
-    } catch (_) {
-      feedback.textContent = 'The visible notebook is clear. This browser did not allow access to any saved copy; clear site data in your browser if you need to remove it.';
-    }
-    fields[0].focus();
-  });
-  document.getElementById('notebook-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    var missing = fields.find(function (field) { return !field.value.trim(); });
-    if (missing) {
-      feedback.textContent = 'Fill all four spaces before joining them. Each slip has hints and an answer reveal.';
-      missing.focus();
-      return;
-    }
-    var instruction = document.getElementById('instruction');
-    instruction.value = answers().join(' ');
-    document.getElementById('unlock-feedback').textContent = 'Your four answers are joined. Choose “Open the sealed letter” to check the instruction.';
-    feedback.textContent = 'Your answers are ready at the envelope below.';
-    instruction.focus();
-  });
-  document.querySelectorAll('[data-notebook-slip]').forEach(function (link) {
-    link.addEventListener('click', function (event) {
-      event.preventDefault();
-      window.location.hash = 'notebook';
-      fields[Number(link.dataset.notebookSlip) - 1].focus();
-    });
-  });
-  window.addEventListener('hashchange', openSlip);
-  openSlip();
-})();
-```
-
-
-## JavaScript — js/breadcrumbs.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/breadcrumbs.js`
-- Served SHA-256: `7e96cb5dbe3e892d9f8631e46ef078d61fcb708987d37c46e480c2f0a1c5ebc1`
-- Readable-source SHA-256: `7e96cb5dbe3e892d9f8631e46ef078d61fcb708987d37c46e480c2f0a1c5ebc1`
-
-
-```javascript
-'use strict';
-/**
- * THE CIPHER MUSEUM — Breadcrumb Enhancer
- * Upgrades existing .breadcrumb divs to <nav aria-label="breadcrumb"> for a11y.
- * Auto-fills empty breadcrumb containers on new pages (tours, lab, community).
- * Include on every page: <script src="js/breadcrumbs.js" defer></script>
- */
-(function(){
-  var path = location.pathname;
-  var parts = path.split('/').filter(Boolean);
-  var pageName = parts[parts.length - 1] || 'index.html';
-  var parentDir = parts.length > 1 ? parts[parts.length - 2] : '';
-  var inSub = ['ciphers','halls','tours','lab','community','hall-of-foundations'].indexOf(parentDir) !== -1;
-  var pre = inSub ? '../' : '';
-
-  /* Map of directory → breadcrumb segment */
-  var DIR_LABELS = {
-    tours:     {label:'Guided Tours',  href:'tours/index.html'},
-    lab:       {label:'Cryptanalysis Lab', href:'cryptanalysis.html'},
-    community: {label:'Community',     href:'community/index.html'}
-  };
-
-  /* Top-level pages */
-  var TOP_NAMES = {
-    'cipher-flow.html': 'Cipher Flow Explorer',
-    'my-path.html':     'My Cryptographer\'s Path',
-    'challenges.html':  'Challenges',
-    'timeline.html':    'Timeline',
-    'glossary.html':    'Glossary',
-    'modern.html':      'Modern Cryptography',
-    'museum-map.html':  'Museum Map',
-    'cryptanalysis.html':'Cryptanalysis Lab'
-  };
-
-  /* ─── Upgrade existing .breadcrumb divs to <nav> ─── */
-  var existing = document.querySelectorAll('.breadcrumb');
-  existing.forEach(function(el){
-    if(el.tagName === 'DIV'){
-      var nav = document.createElement('nav');
-      nav.setAttribute('aria-label','breadcrumb');
-      nav.className = el.className;
-      nav.innerHTML = el.innerHTML;
-      /* Copy any inline style */
-      if(el.style.cssText) nav.style.cssText = el.style.cssText;
-      el.parentNode.replaceChild(nav, el);
-    }
-  });
-
-  /* ─── Auto-fill empty breadcrumbs on new pages ─── */
-  var bc = document.querySelector('nav.breadcrumb, .breadcrumb');
-  if(bc && bc.innerHTML.trim() === ''){
-    var html = '<a href="' + pre + 'index.html">Entrance</a><span>›</span>';
-    /* Subdirectory pages */
-    if(inSub && DIR_LABELS[parentDir]){
-      var dir = DIR_LABELS[parentDir];
-      html += '<a href="' + pre + dir.href + '">' + dir.label + '</a><span>›</span>';
-    }
-    /* Try to get page title from <h1> */
-    var h1 = document.querySelector('h1');
-    var title = h1 ? h1.textContent.trim() : pageName.replace('.html','');
-    html += title;
-    bc.innerHTML = html;
-  }
-
-  /* ─── Inject breadcrumb on pages that have none ─── */
-  if(!document.querySelector('nav.breadcrumb, .breadcrumb')){
-    var hero = document.querySelector('.page-hero');
-    if(hero){
-      var nav = document.createElement('nav');
-      nav.setAttribute('aria-label','breadcrumb');
-      nav.className = 'breadcrumb';
-      var html2 = '<a href="' + pre + 'index.html">Entrance</a><span>›</span>';
-      if(inSub && DIR_LABELS[parentDir]){
-        var d = DIR_LABELS[parentDir];
-        html2 += '<a href="' + pre + d.href + '">' + d.label + '</a><span>›</span>';
-      }
-      var h1b = document.querySelector('h1');
-      html2 += h1b ? h1b.textContent.trim() : pageName.replace('.html','');
-      nav.innerHTML = html2;
-      hero.insertBefore(nav, hero.firstChild);
-    }
-  }
-})();
-```
-
-
-## JavaScript — js/charles-v-case.js
-
-Supporting source for public page behavior; presence of code does not prove that every branch was exercised.
-
-Any ebook URL is replaced by a stable omission ID. Redacted code is for inspection, not execution; the hashes below identify the unmodified source files.
-
-- Served/distributed path: `js/charles-v-case.js`
-- Served SHA-256: `f2c79070752b63d3ea8b59cedfe20237275cc303a5ab7478918d149bebd4ea1b`
-- Readable-source SHA-256: `f2c79070752b63d3ea8b59cedfe20237275cc303a5ab7478918d149bebd4ea1b`
-
-
-```javascript
-(function (root, factory) {
-  'use strict';
-  const api = factory();
-  if (typeof module === 'object' && module.exports) module.exports = api;
-  else { root.CharlesVCase = api; api.mount(document); }
-})(typeof window === 'object' ? window : globalThis, function () {
-  'use strict';
-
-  // Original museum fixture. These labels and readings are not from Charles V's letter.
-  const MESSAGE = Object.freeze(['g1', 'g2', 'g3', 'g4', 'g5']);
-  const FRAGMENT = Object.freeze({ tokens: Object.freeze(['g1', 'g2']), reading: 'GOTO' });
-  const CHECK_COPY = Object.freeze({ tokens: Object.freeze(['g2', 'g4', 'g1']), reading: 'TOGO' });
-  const PARTIAL_KEY = Object.freeze({
-    g1: Object.freeze({ kind: 'letters', value: 'GO' }),
-    g2: Object.freeze({ kind: 'letters', value: 'TO' }),
-    g3: Object.freeze({ kind: 'word', value: 'GATE' }),
-    g4: Object.freeze({ kind: 'null', value: '' })
-  });
-
-  function assessUnits(model, tokens, reading) {
-    if (!['letters', 'mixed'].includes(model)) throw new Error('Unknown token model');
-    if (!Array.isArray(tokens) || typeof reading !== 'string') throw new Error('Invalid aligned fragment');
-    const tokenCount = tokens.length;
-    const characterCount = Array.from(reading).length;
-    const compatible = model === 'letters' ? tokenCount === characterCount : tokenCount > 0 || characterCount === 0;
-    return { tokenCount, characterCount, compatible };
-  }
-
-  function decode(tokens, key) {
-    if (!Array.isArray(tokens) || !key || typeof key !== 'object') throw new Error('Invalid tokens or key');
-    const unknown = [];
-    const pieces = tokens.map(token => {
-      if (!Object.prototype.hasOwnProperty.call(key, token)) {
-        unknown.push(token);
-        return '[' + token + ']';
-      }
-      const entry = key[token];
-      if (!entry || !['letters', 'word', 'null'].includes(entry.kind) || typeof entry.value !== 'string' ||
-          (entry.kind === 'null' ? entry.value !== '' : entry.value === '')) throw new Error('Invalid key entry for ' + token);
-      return entry.value;
-    });
-    return { text: pieces.join(''), unknown };
-  }
-
-  function checkCopy(tokens, reading, key) {
-    const result = decode(tokens, key);
-    return { ...result, matches: result.unknown.length === 0 && result.text === reading };
-  }
-
-  function candidateKey(nullChoice) {
-    if (!['null', 'letter'].includes(nullChoice)) throw new Error('Unknown null hypothesis');
-    return { ...PARTIAL_KEY, g4: nullChoice === 'null' ? PARTIAL_KEY.g4 : { kind: 'letters', value: 'E' } };
-  }
-
-  function mount(doc) {
-    const section = doc.getElementById('charles-v');
-    if (!section || section.dataset.mounted === 'true') return;
-    section.dataset.mounted = 'true';
-    const $ = id => doc.getElementById(id);
-    let fragmentOpen = false;
-    let keyOpen = false;
-
-    function record(text) {
-      const item = doc.createElement('li');
-      item.textContent = text;
-      $('charles-record').appendChild(item);
-      $('charles-record-empty').hidden = true;
-    }
-
-    function renderReading() {
-      const result = decode(MESSAGE, candidateKey($('charles-null').value));
-      $('charles-reading').textContent = result.text;
-      $('charles-reading-note').textContent = 'The literal reading retains ' + result.unknown.map(t => '[' + t + ']').join(', ') +
-        ' as unknown. No spaces or missing words have been supplied.';
-    }
-
-    $('charles-check-model').addEventListener('click', () => {
-      fragmentOpen = true;
-      $('charles-fragment').hidden = false;
-      $('charles-reveal-key').disabled = false;
-      const model = $('charles-model').value;
-      const result = assessUnits(model, FRAGMENT.tokens, FRAGMENT.reading);
-      const text = result.tokenCount + ' tokens correspond to ' + result.characterCount + ' characters. ' +
-        (model === 'letters' ?
-          (result.compatible ? 'One letter per token is compatible with this length; the values still need evidence.' :
-            'One letter per token is contradicted by this fragment, whatever letters you choose.') :
-          (result.compatible ? 'Mixed units are compatible with this length. It does not determine the token boundaries or a unique key.' :
-            'This fragment has no tokens from which the proposed units could produce its reading.'));
-      $('charles-model-result').textContent = text;
-      record((model === 'letters' ? 'One-letter hypothesis. ' : 'Mixed-unit hypothesis. ') + text);
-    });
-
-    $('charles-model').addEventListener('change', () => {
-      $('charles-model-result').textContent = 'Hypothesis changed. Open the fragment again to record this check; earlier checks remain below.';
-    });
-
-    $('charles-reveal-key').addEventListener('click', () => {
-      if (!fragmentOpen) return;
-      keyOpen = true;
-      $('charles-key').hidden = false;
-      $('charles-check-copy').disabled = false;
-      renderReading();
-    });
-
-    $('charles-null').addEventListener('change', () => {
-      if (!keyOpen) return;
-      renderReading();
-      $('charles-copy-result').textContent = 'Candidate changed. Check it against the copy; earlier results remain in your record.';
-    });
-
-    $('charles-check-copy').addEventListener('click', () => {
-      if (!keyOpen) return;
-      $('charles-copy').hidden = false;
-      const result = checkCopy(CHECK_COPY.tokens, CHECK_COPY.reading, candidateKey($('charles-null').value));
-      const text = 'Candidate reads ' + result.text + '; the separate copy reads ' + CHECK_COPY.reading + '. ' +
-        (result.matches ? 'Exact agreement for this copy. The main message still contains unknown g5; this is not a complete key.' :
-          'Mismatch: this candidate fails the check copy. Preserve the failed reading before changing the key.');
-      $('charles-copy-result').textContent = text;
-      record(($('charles-null').value === 'null' ? 'g4 retained as a null. ' : 'g4 changed to E. ') + text);
-    });
-
-    $('charles-reset').addEventListener('click', () => {
-      fragmentOpen = false;
-      keyOpen = false;
-      $('charles-model').value = 'letters';
-      $('charles-null').value = 'null';
-      for (const id of ['charles-fragment', 'charles-key', 'charles-copy']) $(id).hidden = true;
-      for (const id of ['charles-reveal-key', 'charles-check-copy']) $(id).disabled = true;
-      $('charles-model-result').textContent = 'Stages restarted. Your earlier checks remain in the record.';
-      $('charles-copy-result').textContent = '';
-      $('charles-reading').textContent = '';
-      $('charles-reading-note').textContent = '';
-    });
-  }
-
-  return { MESSAGE, FRAGMENT, CHECK_COPY, PARTIAL_KEY, assessUnits, decode, checkCopy, candidateKey, mount };
-});
 ```

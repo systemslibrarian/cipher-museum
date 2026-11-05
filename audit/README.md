@@ -22,7 +22,7 @@ The earlier 214-page review was a complete reading/consistency pass with targete
 
 ## Snapshot and regeneration
 
-Source commit: `3720ede99d7ab0feedc8f7dd259d4bce5fea50c6` (2026-11-04T13:24:05-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
+Source commit: `ccc02443d89ec2c2d9c8d6ef538bbbaf40225aa4` (2026-11-04T15:36:28-05:00). This is a frozen snapshot, not an automatically current view of the website. If pages change, regenerate deliberately.
 
 With repository access and dependencies installed:
 
@@ -59,6 +59,7 @@ The exporter reads committed files, checks every public HTML page against the co
 - [13-06-javascript.md](parts/13-06-javascript.md): javascript appendix 6
 - [13-07-javascript.md](parts/13-07-javascript.md): javascript appendix 7
 - [13-08-javascript.md](parts/13-08-javascript.md): javascript appendix 8
+- [13-09-javascript.md](parts/13-09-javascript.md): javascript appendix 9
 - [14-01-data.md](parts/14-01-data.md): data appendix 1
 - [14-02-data.md](parts/14-02-data.md): data appendix 2
 - [14-03-data.md](parts/14-03-data.md): data appendix 3
@@ -71,5 +72,15 @@ The exporter reads committed files, checks every public HTML page against the co
 - [14-10-data.md](parts/14-10-data.md): data appendix 10
 - [14-11-data.md](parts/14-11-data.md): data appendix 11
 - [14-12-data.md](parts/14-12-data.md): data appendix 12
+- [14-13-data.md](parts/14-13-data.md): data appendix 13
+- [14-14-data.md](parts/14-14-data.md): data appendix 14
+- [14-15-data.md](parts/14-15-data.md): data appendix 15
+- [14-16-data.md](parts/14-16-data.md): data appendix 16
+- [14-17-data.md](parts/14-17-data.md): data appendix 17
+- [14-18-data.md](parts/14-18-data.md): data appendix 18
+- [14-19-data.md](parts/14-19-data.md): data appendix 19
+- [14-20-data.md](parts/14-20-data.md): data appendix 20
 - [15-classroom-worksheet.md](parts/15-classroom-worksheet.md): Columnar classroom worksheet
 - [16-profile-recovery.md](parts/16-profile-recovery.md): Historical-profile recovery experiment
+- [17-profile-recovery-v2.md](parts/17-profile-recovery-v2.md): Crossed key and search-seed follow-up
+- [18-source-reading-followups.md](parts/18-source-reading-followups.md): Source and reading follow-up evidence limits

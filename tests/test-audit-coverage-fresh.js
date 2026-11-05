@@ -77,6 +77,41 @@ check(stale.length === 0,
   '\n      python3 scripts/package-audit-document.py' +
   '\n  Refreshing a hash without saying what changed defeats the point of the ledger.');
 
+// ---------------------------------------------------------------------------
+// The pack's own programs. Page hashes cannot see a change here, and one slipped
+// through: a commit registered a new input in the exporter without regenerating,
+// so the manifest kept pointing at a commit where that input did not exist and
+// the exporter refused to run at all. The manifest records these hashes at
+// generation time precisely so a shallow CI checkout, which has no history to
+// compare against source_commit, can still detect it.
+const manifestPath = path.join(root, 'audit/manifest.json');
+if (fs.existsSync(manifestPath)) {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const gen = manifest.generator;
+  check(!!gen, 'audit/manifest.json records no generator hashes; regenerate the pack so a change ' +
+    'to the exporter or packager becomes detectable');
+  if (gen) {
+    for (const [file, recorded] of [[gen.exporter, gen.exporter_sha256], [gen.packager, gen.packager_sha256]]) {
+      const onDisk = fs.existsSync(path.join(root, file)) ? sha(path.join(root, file)) : null;
+      check(onDisk === recorded,
+        file + ' has changed since the audit pack was generated' +
+        '\n      recorded ' + String(recorded).slice(0, 16) + '…, on disk ' + String(onDisk).slice(0, 16) + '…' +
+        '\n      What the pack contains is decided by these programs, so the pack is stale.' +
+        '\n      Regenerate it:' +
+        '\n          node scripts/export-audit-document.js --ref HEAD' +
+        '\n          node scripts/export-audit-document.js --check' +
+        '\n          python3 scripts/package-audit-document.py');
+    }
+  }
+  // An input the exporter will read must still exist, or regeneration cannot run.
+  const gone = (manifest.input_files || []).map(f => f.path)
+    .filter(p => !fs.existsSync(path.join(root, p)));
+  check(gone.length === 0,
+    'the audit pack records inputs that no longer exist: ' + gone.slice(0, 5).join(', ') +
+    (gone.length > 5 ? ' (+' + (gone.length - 5) + ' more)' : '') +
+    '\n      Regenerate the pack so its input list matches the repository.');
+}
+
 if (problems.length) {
   console.error('\naudit-coverage-fresh: ' + problems.length + ' problem(s)\n');
   problems.forEach(p => console.error('  ✗ ' + p));
@@ -84,4 +119,4 @@ if (problems.length) {
   process.exit(1);
 }
 console.log('audit-coverage-fresh: ' + onDisk.length + ' public pages inventoried, ' +
-  coverage.pages.length + ' recorded hashes current.');
+  coverage.pages.length + ' recorded hashes current, exporter and packager unchanged since the pack was built.');

@@ -335,6 +335,18 @@ const manifest = {
   page_count: records.length, inline_script_count: scriptCount, shared_script_count: scriptRecords.length,
   data_file_count: dataRecords.length, source_register_count: Object.keys(sources).length,
   preserved_body_text_nodes: textNodeCount, ebook_url_occurrences_suppressed: redactions,
+  // The programs that decide what the pack contains. Recorded so a change to
+  // either one is detectable without git history: a shallow CI checkout cannot
+  // compare against source_commit, but it can compare these hashes to the files
+  // on disk. Adding an input to the exporter without regenerating the pack left
+  // the manifest pointing at a commit where that input did not exist, and the
+  // exporter then refused to run at all.
+  generator: {
+    exporter: 'scripts/export-audit-document.js',
+    exporter_sha256: hash(fs.readFileSync(path.join(root, 'scripts/export-audit-document.js'), 'utf8')),
+    packager: 'scripts/package-audit-document.py',
+    packager_sha256: hash(fs.readFileSync(path.join(root, 'scripts/package-audit-document.py'), 'utf8'))
+  },
   limits: 'Snapshot content export, not new factual verification. Full external books/papers, binary images, CSS, dependencies and full downloadable corpus are excluded. See README.md.',
   pages: records.map(({ block, ...r }, i) => ({ ...r, part: pieces[Math.floor(i / 20)].name })),
   scripts: scriptRecords.map(({ block, ...r }) => r), data_files: dataRecords.map(({ block, ...r }) => r),
