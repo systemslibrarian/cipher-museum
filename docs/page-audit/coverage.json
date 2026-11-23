@@ -817,13 +817,17 @@
     {
       "path": "ciphers/beale.html",
       "title": "Beale Ciphers — The Cipher Museum",
-      "words": 927,
-      "sha256": "3d8dd0c2c0e9562ae23ccb92c9b35b22dd71644a91355c73a2352b3ccdc0400b",
+      "words": 1192,
+      "sha256": "d78c2b85e9fd4be98e96a0757cc1dc7fa03502a69e2e689e24f31bf31de7dc74",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
       "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "wording_updates_2026_11_23": {
+        "scope": "Limited the first-letter book-cipher description to Paper 2, citing the 1885 pamphlet, p. 20. The methods used for Papers 1 and 3 remain unknown.",
+        "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
+      },
       "browser_smoke": "Seventh batch:1280/390page loads without script errors or document overflow; four classical vectors and puzzle controls exercised. See browser-puzzles-seventh.json.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2176,14 +2180,18 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "words": 2983,
-      "sha256": "87a5a84ad469252cfb305c0e448a6a0cf07803a915b3ff521d12ddd13a4041ec",
+      "words": 3953,
+      "sha256": "378934810e4c43959a5bffe6f184aacac00d696e5e1d5e9877c7e8d87407e742",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
         "TNMOC-BOMBE"
       ],
       "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+      "wording_updates_2026_11_23": {
+        "scope": "Distinguished the 1918 patent application, 1923 commercial description and 1926 German naval introduction; late-July 1939 disclosure at Pyry is separate from later British replica delivery.",
+        "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
+      },
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -3404,8 +3412,8 @@
     {
       "path": "ciphers/mavis-batey.html",
       "title": "Mavis Batey — The Cipher Museum",
-      "words": 589,
-      "sha256": "7b923cf4abb15bb8c06fe685c1f3b9ff21e1b01aa045583ea8f72b9c295cd03e",
+      "words": 716,
+      "sha256": "950658f58da3a6e1b5ca52c6c5fd87ccc8bd13b3e17db318f95130f4a0f7ca69",
       "status": "bounded review and local release validation complete",
       "sources": [
         "BATEY-CHURCHILL",
@@ -3413,6 +3421,10 @@
         "BATEY-GAZETTE"
       ],
       "notes": "Metadata and summaries reconciled with Knox-team cryptanalysis and the separate contribution of reconnaissance, command decisions and battle; garden-conservation MBE dates retain Gazette evidence.",
+      "wording_updates_2026_11_23": {
+        "scope": "Separated Batey’s September 1940 breakthrough in her firsthand account, pp. 111–112, from the March 1941 Cape Matapan decrypts, pp. 112–114. Cunningham’s dispatch separately supports the existing operational context.",
+        "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
+      },
       "browser_smoke": "Sixth batch: desktop1280/mobile390 loaded without script errors or overflow. Colossus and three manual-cipher controls exercised; source vectors checked independently in Node. External resources blocked.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -3833,13 +3845,17 @@
     {
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator — The Cipher Museum",
-      "words": 976,
-      "sha256": "a33b8807e9bc487f253097c1a0145bec55ed3c8c5070afaf55dbb3a0cd207e59",
+      "words": 1301,
+      "sha256": "5073f7693d7c0ae851043f19b295ec62bc532a3704e8a683cd4b39a0fd665d26",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
       "notes": "1379Lavinde versus1401Mantua distinction; invented entries labelled; no automatic complete-codebook recovery or direct compression-security equivalence. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
+      "wording_updates_2026_11_23": {
+        "scope": "Recorded the already-merged Jacobite key-sharing callout and source availability note from PR #60. Rocher §4.3 documents reuse and distribution, not demonstrated compromise; no new exhibit changes here.",
+        "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
+      },
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -4350,11 +4366,15 @@
     {
       "path": "ciphers/rosetta-stone.html",
       "title": "The Rosetta Stone — The Cipher Museum",
-      "words": 425,
-      "sha256": "ac40984da9269a5cc37d86478c3b868cc48f7ced4b6dcc28354fe2476e426924",
+      "words": 603,
+      "sha256": "7c1550858afeb61c3f5c8ba7291e4265342c3db3450a412b211e324850c101bb",
       "status": "bounded review and local release validation complete",
       "sources": [],
       "notes": "Complete n–r public prose and inline-output reread. Two-language/three-script framing, gradual decipherment and teaching analogies corrected; falsely labelled Coptic display removed. All three widget modes directly exercised; final pass did not independently re-source every chronology detail.",
+      "wording_updates_2026_11_23": {
+        "scope": "Added the Rosetta–Philae comparison in Champollion’s 1822 letter, pp. 6–10 and Plate I, and distinguished its evidence from what the letter (p. 41) reserved for later work.",
+        "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
+      },
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -5219,14 +5239,18 @@
     {
       "path": "ciphers/typex.html",
       "title": "Typex — The Cipher Museum",
-      "words": 679,
-      "sha256": "f640dc473934bd4d069481c0f1daaf75b2e27ca840aa0cb9bd68c4430e459b21",
+      "words": 931,
+      "sha256": "4e7e5f7ef025d36b876e87cbe2707ad8a2aa946d91b170259285573028363d93",
       "status": "bounded review and local release validation complete",
       "sources": [
         "TYPEX-ARTIFACT",
         "TYPEX-TURING-2019"
       ],
       "notes": "Corrected commercial-machine origin and country-specific service dates. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
+      "wording_updates_2026_11_23": {
+        "scope": "Dated first working Mark II delivery to 28 May 1938 (Erskine, p. 72), not broad rollout.",
+        "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
+      },
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
