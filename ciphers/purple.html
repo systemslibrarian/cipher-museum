@@ -62,7 +62,7 @@
   </div>
   <h1 class="page-title">Purple (97-shiki ōbun injiki)</h1>
   <div class="trust-label-wrap"><a class="trust-label trust-label--broken" href="../museum-map.html#trust-labels" title="Cryptographically broken — historically important but unsafe to use today." aria-label="Trust label: Broken. Cryptographically broken — historically important but unsafe to use today."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg><span class="trust-label__text">Broken</span></a></div>
-  <p class="page-tagline"><em>Stepping switches instead of rotors — and an analog replica built from inference alone.</em></p>
+  <p class="page-tagline"><em>Stepping switches instead of rotors, and an analog replica built without access to the original machine.</em></p>
   <p class="exhibit-status-note">Frank Rowlett, Genevieve Grotjan &amp; the US SIS · 20 September 1940</p>
   <div class="exhibit-facts">
     <div class="fact"><span class="fact-label">Invented</span><span class="fact-value">1937 (Japanese Foreign Ministry)</span></div>
@@ -81,14 +81,14 @@
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
-      <p>Purple was Japan's highest-grade diplomatic cipher from 1939 through the end of World War II. The US Signals Intelligence Service broke it without ever seeing the machine, building an analog replica from intercept traffic alone — one of the most impressive feats in the history of cryptanalysis. The intelligence stream that resulted, codenamed MAGIC, shaped American strategy in the Pacific and exposed the diplomatic moves of Tokyo, Berlin, and Rome to Washington in near real time.</p>
+      <p>Purple was Japan's highest-grade diplomatic cipher from 1939 through the end of World War II. The US Signals Intelligence Service broke it and built a working analog without access to the original machine. The intelligence stream that resulted, codenamed MAGIC, shaped American strategy in the Pacific and exposed the diplomatic moves of Tokyo, Berlin, and Rome to Washington in near real time.</p>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
       <div class="panel-body">
         <p>Purple replaced Red for important Japanese diplomatic traffic in 1939. It used telephone-type stepping switches rather than Enigma-style rotors. Its wiring separated six electrical paths from twenty others. With the external alphabet connections, these groups need not correspond to vowels and consonants; “sixes” and “twenties” are the more precise names.</p>
-        <p>William Friedman recruited Frank Rowlett to lead the cryptanalytic attack. The team reconstructed the machine without possessing its hardware. Intercepts, repeated messages and known or inferred plaintext all helped the analysis. For 18 months they hunted patterns in stepping cycles. On the afternoon of September 20, 1940, junior cryptanalyst Genevieve Grotjan brought Rowlett a worksheet with a recurring alignment in the twenties. That date is the one given by Liza Mundy’s <em>Code Girls</em>, Friedrich Bauer’s <em>Decrypted Secrets</em> and the Army Intelligence and Security Command’s historian; Rowlett’s own memoir, <em>The Story of Magic</em>, recalls the day as shortly before Labor Day. Within weeks, the SIS had constructed a working analog of Purple from inference alone.</p>
+        <p>William Friedman recruited Frank Rowlett to lead the cryptanalytic attack. The team reconstructed the machine without possessing its hardware. Intercepts, repeated messages and known or inferred plaintext all helped the analysis. <a href="https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/friedman-documents/reports-research/FOLDER_211/41760789079992.pdf#page=5">William Friedman’s 1940 report (§6)</a> notes that the team located documents quoted in some intercepts, which helped reconstruct portions of those messages. For 18 months they hunted patterns in stepping cycles. On the afternoon of September 20, 1940, junior cryptanalyst Genevieve Grotjan brought Rowlett a worksheet with a recurring alignment in the twenties. That date is the one given by Liza Mundy’s <em>Code Girls</em>, Friedrich Bauer’s <em>Decrypted Secrets</em> and the Army Intelligence and Security Command’s historian; Rowlett’s own memoir, <em>The Story of Magic</em>, recalls the day as shortly before Labor Day. Within weeks, the SIS had constructed a working analog of Purple.</p>
         <div class="callout callout-info">
           <span class="callout-icon">💡</span>
           <div class="callout-body">
@@ -144,7 +144,7 @@
             <tr><td>Stepping-switch keystream</td><td>Linear feedback shift register (LFSR) stream ciphers</td></tr>
             <tr><td>Per-character-class subcipher</td><td>Cautionary anti-pattern — analyse the complete construction for exploitable partitions</td></tr>
             <tr><td>Daily key-sheet rotation</td><td>Modern key rotation policies (TLS session keys, signal protocol ratchets)</td></tr>
-            <tr><td>Reconstruction from traffic alone</td><td>Reconstructing a design from traffic is distinct from measuring physical side-channel leakage</td></tr>
+            <tr><td>Reconstruction without access to the original machine</td><td>Inferring a design from messages and other evidence is distinct from measuring physical side-channel leakage</td></tr>
           </tbody>
         </table>
         <div class="callout callout-info" style="margin-top:1rem;">
