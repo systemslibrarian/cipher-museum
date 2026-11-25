@@ -1,0 +1,41 @@
+name: Publish Cipher Museum Corpus v0.8 to Hugging Face
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-corpus-v08.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-hugging-face-corpus-v08
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'systemslibrarian/cipher-museum' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /public/corpus/v0.8/
+            /public/corpus/LICENSE
+            /scripts/huggingface/
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install release dependencies
+        run: python -m pip install pyarrow==26.0.1 huggingface_hub==2.4.0
+      - name: Build both splits and check every record against the canonical release
+        run: python scripts/huggingface/build_release.py "$RUNNER_TEMP/corpus-v08"
+      - name: Publish the dataset and verify its public file hashes
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python scripts/huggingface/publish_release.py "$RUNNER_TEMP/corpus-v08"
