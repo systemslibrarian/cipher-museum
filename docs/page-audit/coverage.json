@@ -64,11 +64,11 @@
     {
       "path": "cipher-corpus.html",
       "title": "Cipher Corpus — Known-Ciphertext Benchmark Library | Cipher Museum",
-      "words": 1542,
-      "sha256": "020b63db620811d763b294799aa989898efcb8601c14e73af0515c84124271d8",
+      "words": 1547,
+      "sha256": "a72a676bdd5e2743eea1b67ad4c4b563714501ec2a6285c174a8dd189e1a3661",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [],
-      "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged. 1 Nov 2026 follow-up: the matched-input recipe pointer now says the recipe is a specification nobody has run, so no results from it exist.",
+      "notes": "Complete shipped datasets and manifests checked: v0.6 100326 records/85 types/9 languages/54 historical-labelled; v0.8 100313/85/7/41; 88 engines; 104 browser records match v0.8. Counts do not authenticate historical provenance or measure solver accuracy. 29 Oct 2026 research review R10/R14: added pooled-versus-within-key entropy note (log2(130) bound stated as mathematical inference) and a pointer to the four-task benchmark separation and matched-input recipe. Corpus records, counts and citation unchanged. 1 Nov 2026 follow-up: the matched-input recipe pointer now says the recipe is a specification nobody has run, so no results from it exist. 25 Nov 2026: added the Hugging Face dataset link beside the corrected v0.8 JSONL download so visitors can browse the same release online. Checked the public dataset destination.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
