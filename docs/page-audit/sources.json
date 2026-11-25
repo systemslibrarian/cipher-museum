@@ -2304,6 +2304,17 @@
     "script": "scripts/evaluate-profile-recovery.js",
     "scope": "Original bounded experiment: six public passages from three author-disjoint works, five fixed key/search pairs, four scoring models and two solvers. All 240 conditions retained, with no exact recoveries. Matching means language, not necessarily historical period. Three editorial/introductory excerpts excluded before outcomes; Italian edition normalization remains. No general accuracy, significance or isolated historical-spelling benefit is claimed.",
     "verification": "Real scorer substitutions, paired settings, full-result arithmetic and unchanged-matrix repeat; precise runtime and input hashes recorded with the results."
+  },
+  "BOKLAN-2016-LEE": {
+    "title": "How I deciphered a Robert E. Lee letter—and a note on the power of context in short polyalphabetic ciphers",
+    "authors": [
+      "Kent D. Boklan"
+    ],
+    "year": 2016,
+    "url": "https://doi.org/10.1080/01611194.2016.1170424",
+    "passages_read": [
+      "Printed p. 406 and note 1, p. 408, and p. 409"
+    ],
+    "scope": "The collector’s letter, Boklan’s inability to assess its authenticity, the small sample at each key position, and the contextual reading of TOMORROW checked against a repeated pair."
   }
 }
-
