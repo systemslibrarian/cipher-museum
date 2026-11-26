@@ -1838,13 +1838,13 @@
     {
       "path": "ciphers/dictionary-code.html",
       "title": "Confederate Dictionary Code — The Cipher Museum",
-      "words": 560,
-      "sha256": "200640fc87a23624b18f08c3ee6a3556de1106b49362fa0e76b88f7e376bcc60",
+      "words": 671,
+      "sha256": "cf723833c1df47fb6d3eb8f6a8da0a4e4b96c3a68b42a2e8c7239969985969a6",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Kahn’s Davis146.L.20 example retained. Invented diagram no longer attributed to a1857 Primary-School dictionary; unsupported edition-mismatch anecdote removed. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Kahn’s Davis146.L.20 example retained. Invented diagram no longer attributed to a1857 Primary-School dictionary; unsupported edition-mismatch anecdote removed. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.\n26 November 2026: Compared Davis’s 146.L.20 address with the Mexican legation’s documented he/gusaniento substitution. Source: Roberto Narváez, pp. 66–71, DOI 10.1080/01611194.2014.915267, and the 1817 dictionary, p. 457.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -3255,14 +3255,14 @@
     {
       "path": "ciphers/lorenz.html",
       "title": "Lorenz Cipher — The Cipher Museum",
-      "words": 1802,
-      "sha256": "bd6ff21709159642f9f692c228f1bb677b4c84c48c98060678dc95824c20af5b",
+      "words": 1913,
+      "sha256": "c607ee16e438b0f6fef7007a518947e784ea2d58c4b6f35ec9eb4ca05c9f85ae",
       "status": "bounded review and local release validation complete; revised in the 29 October 2026 research review",
       "sources": [
         "TNMOC-TUNNY",
         "TUNNY-1945"
       ],
-      "notes": "Final body/table/SVG/sidebar read reconciled Tiltman recovery, Tutte/team inference and later Colossus; wheel-state product is not an unconditional output period. Removed universal computing/LFSR lineage and unchanged WEP/GCM attack claims. 29 Oct 2026 research review R12: added a paragraph linking the 1941 depth to the 2005 Office RC4 keystream-reuse finding and the comparison cards. Historical account unchanged.",
+      "notes": "Final body/table/SVG/sidebar read reconciled Tiltman recovery, Tutte/team inference and later Colossus; wheel-state product is not an unconditional output period. Removed universal computing/LFSR lineage and unchanged WEP/GCM attack claims. 29 Oct 2026 research review R12: added a paragraph linking the 1941 depth to the 2005 Office RC4 keystream-reuse finding and the comparison cards. Historical account unchanged.\n26 November 2026: Added the 24 September 1942 Tunny report and the Admiralty and HMCS Pictou messages identified in the naval investigation. Source: Ralph Erskine, pp. 872–874, DOI 10.1080/02684527.2012.746414.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -5710,13 +5710,13 @@
     {
       "path": "ciphers/yardley.html",
       "title": "Herbert Yardley — The Cipher Museum",
-      "words": 645,
-      "sha256": "beb0a5e8f9213786be8147eb55559e3157bd3286514868a3f435733610e80fd5",
+      "words": 738,
+      "sha256": "e46fa2d05d40f34637459c604907fa8d662777aeeaad164de20e09967d826e36",
       "status": "bounded review and local release validation complete",
       "sources": [
         "NSA-YARDLEY"
       ],
-      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final corpus_utilities consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-s-z-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.\n26 November 2026: Corrected the 1929 funding and Army transfer chronology and documented Friedman’s training use of the bureau files. Sources: Friedman, A Brief History of U.S. COMINT Activities, §§7–9, and NSA, Signal Intelligence Service.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "corpus_utilities",
