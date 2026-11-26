@@ -817,13 +817,14 @@
     {
       "path": "ciphers/beale.html",
       "title": "Beale Ciphers — The Cipher Museum",
-      "words": 1192,
-      "sha256": "d78c2b85e9fd4be98e96a0757cc1dc7fa03502a69e2e689e24f31bf31de7dc74",
+      "words": 1202,
+      "sha256": "d36e3d9fa6e4bc5397e590a675950ff21a2a696da9dee42fa9d07479d5400a9a",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "KAHN-1996"
+        "KAHN-1996",
+        "BEALE-PAPERS-1885"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 25 Nov 2026: Matched the name in the exhibit to the spelling on page 8 of the pamphlet.",
       "wording_updates_2026_11_23": {
         "scope": "Limited the first-letter book-cipher description to Paper 2, citing the 1885 pamphlet, p. 20. The methods used for Papers 1 and 3 remain unknown.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -2181,14 +2182,16 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "words": 3953,
-      "sha256": "378934810e4c43959a5bffe6f184aacac00d696e5e1d5e9877c7e8d87407e742",
+      "words": 3993,
+      "sha256": "09f772b75a19fa5b0e4fadb87f3f1efae236c12a8c9f1d0b772c42c55b7edbd6",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
-        "TNMOC-BOMBE"
+        "TNMOC-BOMBE",
+        "STENGERS-2004",
+        "REJEWSKI-1980"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 25 Nov 2026: Attributed the January 1938 two-week result to Mayer and dated the procedure change that prompted the later Polish tools.",
       "wording_updates_2026_11_23": {
         "scope": "Distinguished the 1918 patent application, 1923 commercial description and 1926 German naval introduction; late-July 1939 disclosure at Pyry is separate from later British replica delivery.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -3846,13 +3849,14 @@
     {
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator — The Cipher Museum",
-      "words": 1301,
-      "sha256": "5073f7693d7c0ae851043f19b295ec62bc532a3704e8a683cd4b39a0fd665d26",
+      "words": 1398,
+      "sha256": "8658980e46cc93102c8dce82611337ca20d0da19af7ce39fc0e296a0b08f93af",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "KAHN-1996"
+        "KAHN-1996",
+        "LEIGHTON-1977"
       ],
-      "notes": "1379Lavinde versus1401Mantua distinction; invented entries labelled; no automatic complete-codebook recovery or direct compression-security equivalence. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
+      "notes": "1379Lavinde versus1401Mantua distinction; invented entries labelled; no automatic complete-codebook recovery or direct compression-security equivalence. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. 25 Nov 2026: Added a schematic of letter and word positions in the 1583 Bavarian dot cipher, with the word Kayser as Leighton’s example.",
       "wording_updates_2026_11_23": {
         "scope": "Recorded the already-merged Jacobite key-sharing callout and source availability note from PR #60. Rocher §4.3 documents reuse and distribution, not demonstrated compromise; no new exhibit changes here.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -5673,13 +5677,14 @@
     {
       "path": "ciphers/wheatstone.html",
       "title": "Wheatstone Cryptograph (A clock-face polyalphabetic · 1867) — The Cipher Museum",
-      "words": 558,
-      "sha256": "74d55b239d24525a271ffb79e295b925f57f537db0fc4d97f192f3813dedd9ae",
+      "words": 607,
+      "sha256": "e37162bed74ab7b59273638bc8276b31d27296ecfc77ca69dd37b2c489245dc2",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "KAEDING-2020"
+        "KAEDING-2020",
+        "WHEATSTONE-KEY-INSTRUCTIONS"
       ],
-      "notes": "Full prose reread; equal-dial model explicit; abstract-only attack boundary visible. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
+      "notes": "Full prose reread; equal-dial model explicit; abstract-only attack boundary visible. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate. 25 Nov 2026: Checked the row filling and column reading for the historical inner dial against the reproduced instructions.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "browser_followup": "Desktop1280/mobile390 loaded without errors or horizontal overflow; see browser-culture-fifth.json for interaction scope.",
       "final_prose_review": {
@@ -5879,11 +5884,13 @@
     {
       "path": "community/index.html",
       "title": "Community Codebreaks — The Cipher Museum",
-      "words": 374,
-      "sha256": "52ce80c383101faa98c37b1785617c859f69f92e4b15384d2ec22043426aaa83",
+      "words": 387,
+      "sha256": "fa7b22534b3c9f684434c12b09fbda1fcb3db463d0cce434ed65e179b0762a63",
       "status": "bounded review and local release validation complete",
-      "sources": [],
-      "notes": "Root reread public prose and contribution flow. Draft download is distinguished from publication; unknown-script/transcription cautions remain.",
+      "sources": [
+        "HAUER-HISTOCRYPT-2021"
+      ],
+      "notes": "Root reread public prose and contribution flow. Draft download is distinguished from publication; unknown-script/transcription cautions remain. 25 Nov 2026: Distinguished marks, possible classes and the classes observed in one transcription on the Dorabella card.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "root",
@@ -8257,4 +8264,3 @@
     "limits": "Immutable corpus and historical review checkpoints preserved. New source records describe selected passages; automated exercises use declared original fixtures."
   }
 }
-

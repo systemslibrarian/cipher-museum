@@ -2316,5 +2316,75 @@
       "Printed p. 406 and note 1, p. 408, and p. 409"
     ],
     "scope": "The collector’s letter, Boklan’s inability to assess its authenticity, the small sample at each key position, and the contextual reading of TOMORROW checked against a repeated pair."
+  },
+  "STENGERS-2004": {
+    "title": "Enigma, the French, the Poles and the British 1931–1940",
+    "authors": [
+      "Jean Stengers"
+    ],
+    "year": 2004,
+    "url": "https://doi.org/10.3406/rbph.2004.4836",
+    "passages_read": [
+      "Note quoting Stefan Mayer’s 1974 memorandum via Richard A. Woytak, p. 9"
+    ],
+    "scope": "Retrospective account of a two-week test of intercepted Enigma material in January 1938."
+  },
+  "REJEWSKI-1980": {
+    "title": "An Application of the Theory of Permutations in Breaking the Enigma Cipher",
+    "authors": [
+      "Marian Rejewski"
+    ],
+    "year": 1980,
+    "url": "https://cryptocellar.org/enigma/files/rew80.pdf#page=15",
+    "passages_read": [
+      "PDF pp. 15–17, sections on perforated charts and concluding remarks"
+    ],
+    "scope": "The September 1938 change to the indicator procedure, Zygalski’s sheets, and the cryptologic bomb."
+  },
+  "WHEATSTONE-KEY-INSTRUCTIONS": {
+    "title": "Reproduced instructions for the Wheatstone cryptograph",
+    "url": "https://www.cipherchallenge.org/wp-content/uploads/2020/12/memo-RD-to-Cryptanalysis-team-wheatstone.pdf#page=2",
+    "passages_read": [
+      "PDF p. 2, mixed-alphabet instructions and worked key"
+    ],
+    "scope": "Preparation of the mixed alphabet for the inner dial of the historical device."
+  },
+  "BEALE-PAPERS-1885": {
+    "title": "The Beale Papers",
+    "year": 1885,
+    "url": "https://en.wikisource.org/wiki/Page:Beale_Papers.djvu/8",
+    "passages_read": [
+      "Printed p. 8"
+    ],
+    "scope": "The pamphlet identifies the man in its narrative as Thomas J. Beale."
+  },
+  "HAUER-HISTOCRYPT-2021": {
+    "title": "Experimental Analysis of the Dorabella Cipher with Statistical Language Models",
+    "authors": [
+      "Bradley Hauer",
+      "Colin Choi",
+      "Anirudh S Sundar",
+      "Abram Hindle",
+      "Scott Smallwood",
+      "Grzegorz Kondrak"
+    ],
+    "year": 2021,
+    "url": "https://ecp.ep.liu.se/index.php/histocrypt/article/download/159/115/58#page=2",
+    "passages_read": [
+      "Section 2, Dorabella Symbols"
+    ],
+    "scope": "87 marks, 24 possible classes, 20 in the authors’ transcription, and ambiguity in orientation."
+  },
+  "LEIGHTON-1977": {
+    "title": "Some Examples of Historical Cryptanalysis",
+    "authors": [
+      "Albert C. Leighton"
+    ],
+    "year": 1977,
+    "url": "https://doi.org/10.1016/0315-0860(77)90059-3",
+    "passages_read": [
+      "Printed p. 328 and fig. 10 on p. 329"
+    ],
+    "scope": "In the 1583 dispatch, a half-column displacement selected a German word from the list. Leighton gives Kayser as an example."
   }
 }

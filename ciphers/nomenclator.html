@@ -109,6 +109,28 @@
       <div class="panel-body"><p>A teaching example can combine three parts: <strong>(1)</strong> a substitution alphabet mapping each letter to one or more cipher symbols (often digits 01–99), <strong>(2)</strong> a vocabulary list of perhaps 1,500 common words and names mapped to higher numbers, and <strong>(3)</strong> a list of <em>nulls</em> — symbols that mean &lsquo;ignore me&rsquo; — sprinkled in to break frequency. The following invented entries illustrate changing granularity: <em>The</em> ENVOY <em>arrived in</em> VIENNA might come out as <code>23 1402 41 17 1899</code>.</p></div>
     </div>
 
+    <section class="panel" aria-labelledby="bavarian-dot-cipher">
+      <div class="panel-body">
+        <h2 id="bavarian-dot-cipher">When a dot meant a whole word</h2>
+        <p>In 1583, Duke Ernst of Bavaria sent his brother a dispatch written in dots on ruled paper. A reader laid a key strip against the dots. The strip carried letters and, halfway between letter positions, a list of German words.</p>
+        <figure style="margin:1rem 0;">
+          <svg viewBox="0 0 320 108" width="320" height="108" style="display:block;max-width:100%;height:auto;" aria-hidden="true" focusable="false">
+            <g stroke="currentColor" fill="none">
+              <path d="M62 12V67 M258 12V67" stroke-dasharray="3 4"/>
+              <path d="M160 41V67" stroke-dasharray="3 4"/>
+              <path d="M32 67H288 M62 67v7 M160 67v7 M258 67v7"/>
+            </g>
+            <g fill="var(--gold)"><circle cx="62" cy="20" r="5"/><circle cx="160" cy="48" r="5"/></g>
+            <g fill="currentColor" text-anchor="middle" font-size="16">
+              <text x="62" y="94">Letter</text><text x="160" y="94">Kayser</text><text x="258" y="94">Letter</text>
+            </g>
+          </svg>
+          <figcaption>Two placements on a simplified key strip. The first dot lines up with a single letter. The second sits half a column to the right and gives the whole word <em lang="de">Kayser</em> (“emperor”).</figcaption>
+        </figure>
+        <p><a href="https://doi.org/10.1016/0315-0860(77)90059-3">Albert C. Leighton, <em>Some Examples of Historical Cryptanalysis</em> (1977), p. 328 and fig. 10</a>.</p>
+      </div>
+    </section>
+
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
       <div class="panel-body">
