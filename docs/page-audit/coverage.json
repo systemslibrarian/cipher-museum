@@ -1954,8 +1954,8 @@
     {
       "path": "ciphers/dorabella.html",
       "title": "Dorabella Cipher — The Cipher Museum",
-      "words": 575,
-      "sha256": "14e9744c26557e2174867df420636854248d43acb178062b0dd98194697b137b",
+      "words": 592,
+      "sha256": "208df573735ec7c22358a3faf995f415b4aabb1153546c425436d9c8d703478c",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996",
