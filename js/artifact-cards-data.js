@@ -1289,14 +1289,14 @@
       "modernLesson": "Security depends on design quality, key management, and implementation."
     },
     "kryha": {
-      "name": "Kryha Pocket cipher machine · 1924",
+      "name": "Kryha Standard and Liliput",
       "hall": "VII",
       "era": "Inter-war commercial · 1924",
       "family": "Mechanical and Rotor Machines",
       "region": "Global",
       "usedBy": "See the exhibit for historical participants and source evidence",
       "keyType": "Varies by system",
-      "keyIdea": "Kryha’s clockwork cipher devices used irregularly moving alphabets. Friedman and colleagues attacked a published challenge in 1933; this widget uses generated settings.",
+      "keyIdea": "Kryha’s spring-driven Standard appeared around 1924. Its 17-step selector shifted the cipher alphabet. The later Liliput fitted in a pocket.",
       "trust": {
         "key": "broken",
         "text": "Broken",

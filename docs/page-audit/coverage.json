@@ -663,11 +663,11 @@
     {
       "path": "ciphers/babington.html",
       "title": "The Babington Plot Cipher (1586) — The Cipher Museum",
-      "words": 1299,
-      "sha256": "bdcf0d81ad10f286706b7b782cf5afa1720169670f2087ef12a06992c61c5cdf",
+      "words": 1338,
+      "sha256": "8f4a4b9d8dfaf14e950fb829c7f93642da503143099490a1fe49c12769316e46",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed. 2 Nov 2026 (PR #31): the two Babington script tags now carry content-hash query strings (?v=...), stamped by scripts/build-min.js from the bundle bytes. A returning reader holding the previous cache-first service worker fetches the corrected teaching model on the first online visit instead of replaying a stale engine. Delivery mechanism only; no historical, cryptographic or evidentiary claim changed. Source register: pending. The page cites Simon Singh, The Code Book, chapter 1, and Alan Bryson, “The Gallows Letter” (British Library). The only Singh Code Book entry in the register (SINGH-BOOK-POSITIONING) is the author’s description of the book, not the book, so no identity is assigned.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Follow-up to the November review: content-hash bundle URLs bypass an older cache-first service worker on the first online visit; the current worker revalidates JavaScript and retains an offline fallback. No historical prose changed. 2 Nov 2026 (PR #31): the two Babington script tags now carry content-hash query strings (?v=...), stamped by scripts/build-min.js from the bundle bytes. A returning reader holding the previous cache-first service worker fetches the corrected teaching model on the first online visit instead of replaying a stale engine. Delivery mechanism only; no historical, cryptographic or evidentiary claim changed. Source register: pending. The page cites Simon Singh, The Code Book, chapter 1, and Alan Bryson, “The Gallows Letter” (British Library). The only Singh Code Book entry in the register (SINGH-BOOK-POSITIONING) is the author’s description of the book, not the book, so no identity is assigned. 28 November 2026: Refreshed the shared demo bundle reference after correcting the Kryha demo label.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2190,8 +2190,8 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "words": 3300,
-      "sha256": "b19e6a7f55d62ef07b2b2160943388d0a77631741da9de94d68f8e40eef0e1f3",
+      "words": 3298,
+      "sha256": "78121cedf6f458557b5675c2fa66be4b5581f3f36596ced6e1337d2524cce7e0",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
@@ -2202,7 +2202,7 @@
         "ERSKINE-NAVAL-2008",
         "BOERSMA-ENIGMA-D-2024"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 25 Nov 2026: Attributed the January 1938 two-week result to Mayer and dated the procedure change that prompted the later Polish tools.\n28 November 2026: Clarified Enigma I stepping and the browser rotor search. Added the use of G 292’s crank and a reconstruction using four dated Uhr intercepts. Sources: Kenyon and Weierud, pp. 391–392, 408 (CL22206); Heath, pp. 63–64, 68–79 (CL21914); Wilcox, pp. 27–28 (CM387). 28 November 2026: Linked the naval decrypt and Swiss Army examples to their separate sources, machines and teams.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 25 Nov 2026: Attributed the January 1938 two-week result to Mayer and dated the procedure change that prompted the later Polish tools.\n28 November 2026: Clarified Enigma I stepping and the browser rotor search. Added the use of G 292’s crank and a reconstruction using four dated Uhr intercepts. Sources: Kenyon and Weierud, pp. 391–392, 408 (CL22206); Heath, pp. 63–64, 68–79 (CL21914); Wilcox, pp. 27–28 (CM387). 28 November 2026: Linked the naval decrypt and Swiss Army examples to their separate sources, machines and teams. 28 November 2026: Updated the visitor-facing Kryha label to distinguish the Standard from the later pocket model.",
       "wording_updates_2026_11_23": {
         "scope": "Distinguished the 1918 patent application, 1923 commercial description and 1926 German naval introduction; late-July 1939 disclosure at Pyry is separate from later British replica delivery.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -2443,14 +2443,15 @@
     {
       "path": "ciphers/geheimschreiber.html",
       "title": "Geheimschreiber T52 (Sturgeon) (Siemens & Halske teleprinter cipher) — The Cipher Museum",
-      "words": 852,
-      "sha256": "7b63e27916fb5326d07d59a8cd3e949ff6dffbd1fb7f27d70e55b969845e6f15",
+      "words": 963,
+      "sha256": "a4e76143726bd846244af83b080fb9aa9dfeeb7d4b860cabac8707f602f3e866",
       "status": "bounded review and local release validation complete",
       "sources": [
         "T52-ARTIFACT",
-        "BEURLING-FRA-METHOD"
+        "BEURLING-FRA-METHOD",
+        "BLACKMAN-T52-2006"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 28 November 2026: Described the cam wheels and the bounds of Blackman’s comparison of models D and E.",
       "browser_smoke": "Sixth batch: desktop1280/mobile390 loaded without script errors or overflow. Colossus and three manual-cipher controls exercised; source vectors checked independently in Node. External resources blocked.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -3088,14 +3089,15 @@
     },
     {
       "path": "ciphers/kryha.html",
-      "title": "Kryha (Pocket cipher machine · 1924) — The Cipher Museum",
-      "words": 573,
-      "sha256": "1e22494c7af71e55f7140487b058a6204c62ae8edcbba47abc824ab864f23b7c",
+      "title": "Kryha (Standard and Liliput) — The Cipher Museum",
+      "words": 580,
+      "sha256": "951b1bacbe595726d616745b5966c19b276b9c659c97f0e6e3ca3996762d6173",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "KRYHA-CALLIMAHOS"
+        "KRYHA-CALLIMAHOS",
+        "SCHMEH-KRYHA-2010"
       ],
-      "notes": "Four analysts, source-specific attack duration, no universal easy recovery guarantee. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate.",
+      "notes": "Four analysts, source-specific attack duration, no universal easy recovery guarantee. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate. 28 November 2026: Distinguished the Standard from the Liliput, qualified the sales claim, and checked the 17-sector selector, 442-letter period and challenge timing against the printed sources.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
@@ -4323,11 +4325,11 @@
     {
       "path": "ciphers/red-type-a.html",
       "title": "Red (Type A) - The Cipher Museum",
-      "words": 491,
-      "sha256": "e4437ce99c12abe2ce18d7c3cc164cb58ce8c8538237126ea1964c7e61269ccd",
+      "words": 499,
+      "sha256": "b57368dca6a29a50e5274d47d7200b6b316db72b5cf806546f5f44795d4b8b25",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final research_cases consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/final-read-n-r-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 28 November 2026: Updated the visitor-facing Kryha label to distinguish the Standard from the later pocket model.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -7457,13 +7459,13 @@
     {
       "path": "lab/workbench.html",
       "title": "Codebreaker's Workbench — The Cipher Museum",
-      "words": 155,
-      "sha256": "685fe211f219c6e6c82905182afe9c04ac03634b878f8af2f7080966afdd94a3",
+      "words": 158,
+      "sha256": "87b193d2be1ed94a6fad8ea0980d8909fbad3f6ca81c48343ec5300059d008f8",
       "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "GRAY-1990-CORRECTED-2023"
       ],
-      "notes": "Root reread workbench prose and controls. IC values are approximate references; engine correctness and historical procedure/provenance are separate questions.",
+      "notes": "Root reread workbench prose and controls. IC values are approximate references; engine correctness and historical procedure/provenance are separate questions. 28 November 2026: Updated the visitor-facing Kryha label to distinguish the Standard from the later pocket model.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "root",
@@ -7973,8 +7975,8 @@
     {
       "path": "timeline.html",
       "title": "Timeline — The Cipher Museum",
-      "words": 2929,
-      "sha256": "561a1994f7257924cac6b1c974e861629b4728835e5d7a1488ebef0cfae6b6e8",
+      "words": 3151,
+      "sha256": "0d6c4be24374a79285da7a837cfe8d1c9f7949758467ae0950f10b083258777b",
       "status": "4 November 2026 research-follow-up implementation; validation scoped in the linked receipt",
       "sources": [
         "CTC-NSA",
@@ -7983,9 +7985,10 @@
         "MORSE-HOUSE",
         "NIST-AES-DEVELOPMENT",
         "POLYBIUS-10",
-        "CHRISTENSEN-IKA-2021"
+        "CHRISTENSEN-IKA-2021",
+        "SCHMEH-KRYHA-2010"
       ],
-      "notes": "Root reread chronological entries and summaries; source dates, publication versus deployment and historical causal claims reconciled with bounded exhibit accounts. Root further reconciled DIANA timeline to an undated technical-table entry, without unsupported service dates.",
+      "notes": "Root reread chronological entries and summaries; source dates, publication versus deployment and historical causal claims reconciled with bounded exhibit accounts. Root further reconciled DIANA timeline to an undated technical-table entry, without unsupported service dates. 28 November 2026: Dated the Kryha Standard entry to its probable introduction around 1924.",
       "browser_smoke": "Eighth batch:68 desktop/mobile page checks across34pages without page errors or document overflow; LWE and ECDSA controls exercised. See browser-foundations-eighth.json.",
       "final_prose_review": {
         "reader": "root",

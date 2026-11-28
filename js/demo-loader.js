@@ -322,7 +322,7 @@
       inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Seed', value: 'STURGEON', placeholder: 'Seed word…' }]
     },
     'kryha': {
-      label: 'Kryha Pocket Cipher (1924)', engine: 'kryha',
+      label: 'Kryha clockwork cipher (teaching model)', engine: 'kryha',
       defaultMsg: 'UNBREAKABLE CIPHER',
       inputs: [{ type: 'text', id: 'keyword', label: 'Wheel Seed', value: 'POCKET', placeholder: 'Seed word…' }]
     },

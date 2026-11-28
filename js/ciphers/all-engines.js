@@ -2817,14 +2817,8 @@ cipherMuseumGlobal.CipherEngines = (() => {
   })();
 
   /* ─── Round 3 Phase 4: Kryha cipher machine (1924) ─── */
-  // Alexander von Kryha's pocket cipher device, marketed in the 1920s as
-  // "absolutely unbreakable" and demolished by Friedman, Kullback, Sinkov,
-  // and Rosen in just a few hours of paper analysis. The mechanism is a
-  // single mixed alphabet wheel that advances by an irregular amount on each
-  // keystroke, controlled by a 26-position spring-driven gear ring. With one
-  // rotor and a small number of distinct step values, period and depth-of-
-  // alignment attacks recover the wheel quickly. This is essentially a
-  // keyword-driven Vigenère-on-a-mixed-alphabet with non-uniform step sizes.
+  // The widget derives one mixed alphabet and a 26-step cycle from a seed.
+  // The early Kryha Standard used two rearrangeable alphabets and a 17-step selector.
   const kryha = (() => {
     function build(key) {
       const rng = _seededRng('KRYHA' + clean(key || 'POCKET'));

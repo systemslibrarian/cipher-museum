@@ -310,9 +310,9 @@
     "author": "Lambros D. Callimahos",
     "url": "https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/tech-journals/qed.pdf",
     "passages_read": [
-      "PDF p.13 introduction and p.18 historical attack account"
+      "Printed pp. 13, 16, 18 and appendix pp. 20–21"
     ],
-    "scope": "Four analysts and particular 2h41 test; no universal attack-time guarantee."
+    "scope": "Time stamps and analysts for the 1933 challenge, letter tabs, the early 17-sector selector and its 442-letter period."
   },
   "CLARKE-GCHQ": {
     "title": "Joan Clarke",
@@ -2487,5 +2487,29 @@
       "Printed pp. 201, 211"
     ],
     "scope": "Captured documents from Schiff 26, plaintext and daily settings. Wright revisited which dates belonged to each document."
+  },
+  "SCHMEH-KRYHA-2010": {
+    "title": "Alexander von Kryha and His Encryption Machines",
+    "authors": [
+      "Klaus Schmeh"
+    ],
+    "year": 2010,
+    "url": "https://doi.org/10.1080/01611194.2010.485440",
+    "passages_read": [
+      "Printed pp. 292–294"
+    ],
+    "scope": "Probable release of the Standard, later pocket-sized Liliput, commercial promotion and limits of the prewar sales evidence."
+  },
+  "BLACKMAN-T52-2006": {
+    "title": "Note on Geheimschreiber Cam Wheels",
+    "authors": [
+      "Deane R. Blackman"
+    ],
+    "year": 2006,
+    "url": "https://doi.org/10.1080/01611190500371818",
+    "passages_read": [
+      "Printed pp. 53–54"
+    ],
+    "scope": "Comparison of T52d simulator profiles with published T52e diagrams, with offsets and reversed cam orientations."
   }
 }
