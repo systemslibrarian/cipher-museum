@@ -1099,13 +1099,13 @@
     {
       "path": "ciphers/bombe.html",
       "title": "Turing–Welchman Bombe — The Cipher Museum",
-      "words": 309,
-      "sha256": "f06ad4da93ace0f54998a1eae4556f94dfdf995a1baee87220991ab354459fbd",
+      "words": 413,
+      "sha256": "e633c6400e0fe73247e6972d90050756c10010b00f3f09d2914a44fd447bb6ef",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [
         "TNMOC-BOMBE"
       ],
-      "notes": "TNMOC confirms March 1940 Victory and August 1940 Agnes. Existing distinction retained; machine is candidate filter, not an automatic complete decipherment. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.\n3 November 2026: Added the link to the explicitly fictional intercept-to-intelligence exercise. Existing machine constraints and historical wording retained.",
+      "notes": "TNMOC confirms March 1940 Victory and August 1940 Agnes. Existing distinction retained; machine is candidate filter, not an automatic complete decipherment. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.\n3 November 2026: Added the link to the explicitly fictional intercept-to-intelligence exercise. Existing machine constraints and historical wording retained.\n28 November 2026: Added Murray’s firsthand description of reading a possible plugboard connection by touch, with the uncertainty about Ming’s identification. Sources: Murray, p. 45, and Marks, note 39 (10.1080/01611194.2016.1257525).",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -3849,14 +3849,14 @@
     {
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator — The Cipher Museum",
-      "words": 1398,
-      "sha256": "8658980e46cc93102c8dce82611337ca20d0da19af7ce39fc0e296a0b08f93af",
+      "words": 1322,
+      "sha256": "00ee942a69161810991188e6cbbb537613c9f635da642c08c0e307fafc6c3902",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996",
         "LEIGHTON-1977"
       ],
-      "notes": "1379Lavinde versus1401Mantua distinction; invented entries labelled; no automatic complete-codebook recovery or direct compression-security equivalence. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. 25 Nov 2026: Added a schematic of letter and word positions in the 1583 Bavarian dot cipher, with the word Kayser as Leighton’s example.",
+      "notes": "1379Lavinde versus1401Mantua distinction; invented entries labelled; no automatic complete-codebook recovery or direct compression-security equivalence. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. 25 Nov 2026: Added a schematic of letter and word positions in the 1583 Bavarian dot cipher, with the word Kayser as Leighton’s example.\n28 November 2026: Added an invented group-spacing exercise for Medici’s 1624 cipher and distinguished the French and Madrid dispatches. Source: Bonavoglia, pp. 340–341, figs. 8–9 (10.1080/01611194.2021.1901797), and the Madrid facsimile.",
       "wording_updates_2026_11_23": {
         "scope": "Recorded the already-merged Jacobite key-sharing callout and source availability note from PR #60. Rocher §4.3 documents reuse and distribution, not demonstrated compromise; no new exhibit changes here.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -4071,13 +4071,13 @@
     {
       "path": "ciphers/playfair.html",
       "title": "Playfair Cipher — The Cipher Museum",
-      "words": 849,
-      "sha256": "2b3f5c5d00645578f68cd399730f818b95ee4a419f9f01f136e1ffb7a7f2c469",
+      "words": 936,
+      "sha256": "97d14e61d548c9af3e12fdd6fa0c2561d1031b27e9549ae5c905cfbc48fb1582",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Single-letterstatistics not universallyerased; knownpaircaninvolveuptofourdistinctletters, cribsremainhypotheses. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.",
+      "notes": "Single-letterstatistics not universallyerased; knownpaircaninvolveuptofourdistinctletters, cribsremainhypotheses. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate.\n28 November 2026: Added the Republican guerrilla instructions for same-row and same-column pairs and illustrated the difference with the museum’s MONARCHY square. Source: Soler Fuensanta and Guasch Portas, pp. 206–207 (10.1080/01611194.2015.1028687).",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
