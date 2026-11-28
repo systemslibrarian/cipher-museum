@@ -66,11 +66,11 @@
   </div>
   <h1 class="page-title">Porta Cipher</h1>
   <div class="trust-label-wrap"><a class="trust-label trust-label--broken" href="../museum-map.html#trust-labels" title="Cryptographically broken — historically important but unsafe to use today." aria-label="Trust label: Broken. Cryptographically broken — historically important but unsafe to use today."><svg class="trust-label__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg><span class="trust-label__text">Broken</span></a></div>
-  <p class="page-tagline">A 13-row polyalphabetic cipher from the Renaissance master of secrets</p>
+  <p class="page-tagline">From Bellaso’s keyword table to della Porta’s 1563 version</p>
   <p class="exhibit-status-note">Index of Coincidence · Statistical analysis</p>
   <div class="exhibit-facts">
-    <div class="fact"><span class="fact-label">Inventor</span><span class="fact-value">Giambattista della Porta</span></div>
-    <div class="fact"><span class="fact-label">Year</span><span class="fact-value">1563</span></div>
+    <div class="fact"><span class="fact-label">Reciprocal tables</span><span class="fact-value">Giovan Battista Bellaso (1553) · Giambattista della Porta (1563)</span></div>
+    <div class="fact"><span class="fact-label">Della Porta’s publication</span><span class="fact-value">1563</span></div>
     <div class="fact"><span class="fact-label">Key Type</span><span class="fact-value">Repeating keyword (pair-based)</span></div>
     <div class="fact"><span class="fact-label">Broken By</span><span class="fact-value">Index of Coincidence · Statistical analysis</span></div>
     <div class="fact"><span class="fact-label">Modern Lesson</span><span class="fact-value">Lookup-table cipher design</span></div>
@@ -84,17 +84,20 @@
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
-      <p>Porta’s 1563 book describes reciprocal polyalphabetic substitution. This demo uses the modern 26-letter, 13-row adaptation; the historical alphabet and table were smaller. It should not be mistaken for an exact facsimile of the original table.</p>
+      <p>A keyword tells the correspondents which row to use for each letter. Each row pairs the letters. The same row takes an encrypted letter back to its partner. Bellaso explained this method in 1553. Della Porta published a related table ten years later.</p>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>Giambattista della Porta discussed secret writing in <em>De Furtivis Literarum Notis</em> (1563). The reciprocal tables associated with his name can use the same operation for encryption and decryption.</p><p style="margin-top:1rem;">In the modern table shown here, two key letters select each of 13 reciprocal substitutions. The number of rows alone does not determine overall security: period, message length and language statistics also matter.</p></div>
+      <div class="panel-body" id="bellaso-and-porta">
+        <p>A copy of Bellaso’s 1552 leaflet survives in Venice. It prints the table without instructions. His 1553 booklet explains how successive letters of a key select the reciprocal alphabets. <a href="https://doi.org/10.1080/01611194.2019.1596181">Paolo Bonavoglia, pp. 459–463, figs. 1–3</a>.</p>
+        <p>Della Porta’s <em>De furtivis literarum notis</em> (1563) gives a regular arrangement of 11 alphabets of 22 letters. The modern version used in this exhibit has 13 rows for 26 letters. <a href="https://doi.org/10.1080/01611190500383581">Augusto Buonafalce, pp. 39–42, fig. 1</a>.</p>
+      </div>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="panel-title">How It Works</span></div>
-      <div class="panel-body"><p>The Porta cipher uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class="steps" style="margin:1rem 0;"><li class="step"><div class="step-text">Find the row whose label contains the current key letter</div></li><li class="step"><div class="step-text">Look up the plaintext letter in that row</div></li><li class="step"><div class="step-text">The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p>
+      <div class="panel-body"><p>The museum’s modern version uses a 13-row tableau where each row is labeled with a pair of key letters (AB, CD, EF…). To encrypt:</p><ol class="steps" style="margin:1rem 0;"><li class="step"><div class="step-text">Find the row whose label contains the current key letter</div></li><li class="step"><div class="step-text">Look up the plaintext letter in that row</div></li><li class="step"><div class="step-text">The paired letter in the row is the ciphertext</div></li></ol><p>Because rows are symmetric, the same operation decrypts — making it reciprocal like Beaufort.</p>
 <figure class="figure">
 <svg viewBox="0 0 380 190" style="width:100%;max-width:380px;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Porta cipher 13-row reciprocal tableau">
   <style>text{font-family:'JetBrains Mono',monospace;fill:#EDE5D4}rect{rx:2}</style>
@@ -155,8 +158,8 @@
             <tr><td>Exhibit</td><td>10 of 174</td></tr>
             <tr><td>Era</td><td>Renaissance · 1563</td></tr>
             <tr><td>Trust</td><td><span class="trust-label trust-label--broken trust-label--sm" title="Cryptographically broken — historically important but unsafe to use today.">Broken</span></td></tr>
-            <tr><td>Inventor</td><td>Giambattista della Porta</td></tr>
-            <tr><td>Year</td><td>1563</td></tr>
+            <tr><td>Reciprocal tables</td><td>Giovan Battista Bellaso (1553) · Giambattista della Porta (1563)</td></tr>
+            <tr><td>Della Porta’s publication</td><td>1563</td></tr>
             <tr><td>Key Type</td><td>Repeating keyword (pair-based)</td></tr>
             <tr><td>Broken By</td><td>Index of Coincidence · Statistical analysis</td></tr>
           </tbody>

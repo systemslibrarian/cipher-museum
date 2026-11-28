@@ -88,8 +88,7 @@
     <div class="demo-body">
       <p style="font-size:1rem;color:var(--tx2);margin:0;">
         A faithful Wehrmacht Enigma I, in the browser. Choose three rotors, set the rings,
-        position the wheels, wire the plugboard, and type. The rotors step on every keypress
-        — including the famous middle-rotor double-step. Verified against the canonical test
+        position the wheels, wire the plugboard, and type. The rightmost rotor steps before every letter. At turnover the middle rotor can step on two successive keypresses. Verified against the canonical test
         vector <code>AAAAA → BDZGO</code>.
       </p>
 
@@ -274,6 +273,10 @@
 
         <p style="margin-top:1rem;"><strong>Turing's bombe and Welchman's diagonal board.</strong> Turing's bombe mechanised crib-based attacks: given a guessed plaintext fragment, it tested rotor settings electrically at the rate of thousands per minute, exploiting the loops in the implied permutation graph. Welchman’s diagonal board strengthened the constraint checking by exploiting reciprocal plugboard connections. Over 200 bombes were built, operated by Wrens working in shifts day and night.</p>
 
+        <h3 id="enigma-g-and-uhr">Enigma G and the Uhr attachment</h3>
+        <p><strong>Reading backward on Enigma G.</strong> A crank and counter let an operator wind the geared rotors back in step to correct a typing error. In 1943 Peter Twinn explained why he wanted to keep the captured machine G 292: a likely signature at the end of a long message gave his team a starting point, and the crank let them retrace the rotor steps to the beginning. <a href="https://doi.org/10.1080/01611194.2019.1661134">Kenyon and Weierud, pp. 391–392, 408</a>.</p>
+        <p><strong>The Luftwaffe’s Uhr attachment.</strong> Four Jaguar intercepts dated 14 December 1944 survive with their wartime decrypts. The Uhr changed how the plugboard leads connected. Craig Heath used those decrypts and other traffic from the same day to reconstruct the plug order. The decrypts establish what the wartime readers recovered. Their exact method remains unknown. <a href="https://doi.org/10.1080/01611194.2025.2507024">Heath, pp. 63–64, 68–79</a>.</p>
+
         <p style="margin-top:1rem;"><strong>Strategic impact.</strong> Sir Harry Hinsley, the official historian of British intelligence in WWII, estimated that ULTRA — the codename covering decrypts from Enigma and other systems — shortened the war in Europe by <em>at least</em> two years and "possibly four." This is a historical estimate rather than a measurable counterfactual. The value of particular decrypts varied by campaign and period.</p>
 
         <p style="margin-top:1rem;"><em>Sources: Hinsley, &ldquo;British Intelligence in the Second World War,&rdquo; HMSO 1979–1990; Kozaczuk, &ldquo;Enigma,&rdquo; 1984; Welchman, &ldquo;The Hut Six Story,&rdquo; 1982; Hodges, &ldquo;Alan Turing: The Enigma,&rdquo; 1983.</em></p>
@@ -390,7 +393,7 @@ But: same letter never encrypts to itself → cribs work</pre>
       </div>
 
       <h3 style="font-family:var(--fd);font-size:1.1rem;color:var(--gold);letter-spacing:.06em;margin:2rem 0 .75rem;">2 · Brute-force rotor &amp; position search</h3>
-      <p>With the plugboard and ring settings fixed, the rotor order and starting positions form a search space of <strong>60 × 17 576 ≈ 1 054 560</strong> configurations. The bombe was needed because the plugboard explodes this by a further factor of ~1.5 × 10<sup>14</sup>. Without the plugboard, the search is small enough to run in your browser. Below: enter a ciphertext encrypted with rings AAA and no plugboard, give it a known crib, and watch the search recover the rotor settings.</p>
+      <p>With the plugboard and ring settings fixed, the rotor order and starting positions form a search space of <strong>60 × 17 576 = 1 054 560</strong> configurations. The wartime Bombe used letter relationships in a suspected plaintext to test rotor settings and narrow possible plugboard connections. This browser search fixes the plugboard in advance. Below: enter a ciphertext encrypted with rings AAA and no plugboard, give it a known crib, and watch the search recover the rotor settings.</p>
 
       <div class="demo-panel" style="margin-top:1rem;border-color:var(--gold-b);">
         <div class="demo-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-gear"/></svg></span><span class="demo-title">Rotor-Order Search</span></div>

@@ -817,14 +817,14 @@
     {
       "path": "ciphers/beale.html",
       "title": "Beale Ciphers — The Cipher Museum",
-      "words": 1202,
-      "sha256": "d36e3d9fa6e4bc5397e590a675950ff21a2a696da9dee42fa9d07479d5400a9a",
+      "words": 1051,
+      "sha256": "7840439e9ce7fb4d6fda32fb2a71628d6e16773f2178418fe73ef317467c944e",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996",
         "BEALE-PAPERS-1885"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 25 Nov 2026: Matched the name in the exhibit to the spelling on page 8 of the pamphlet.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 25 Nov 2026: Matched the name in the exhibit to the spelling on page 8 of the pamphlet.\n28 November 2026: Added the leading-digit and whole-number comparisons and their limits. Source: Wase, pp. 284–286, tables 1–3 (CL21402).",
       "wording_updates_2026_11_23": {
         "scope": "Limited the first-letter book-cipher description to Paper 2, citing the 1885 pamphlet, p. 20. The methods used for Papers 1 and 3 remain unknown.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -1172,13 +1172,13 @@
     {
       "path": "ciphers/cabinet-noir.html",
       "title": "Cabinet Noir — Black Chambers of Europe — The Cipher Museum",
-      "words": 673,
-      "sha256": "a089b7eb8e611f7e109372c2f11d75e5ea917dfa1144febf1bb2f96fadbbce70",
+      "words": 586,
+      "sha256": "dec5f0cd3761509ee2b8348e6caca5f8f02c1b1a0fe72e7c064f1f1650e2ceab",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996"
       ],
-      "notes": "Removedsingleinstitutionallineage,firstEuropeanprofessionalsandallmailclaims; Réalmont1628 and1844institutions distinguished. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Removedsingleinstitutionallineage,firstEuropeanprofessionalsandallmailclaims; Réalmont1628 and1844institutions distinguished. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.\n28 November 2026: Replaced the encoding prompt and unverified seal claim with a literal dispatch-copy exercise. Added Zimmermann’s check for signs of opening in folded paper. Source: Strasser, p. 254, citing Zimmermann, pp. 144–145 (CL22167).",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2182,8 +2182,8 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "words": 3993,
-      "sha256": "09f772b75a19fa5b0e4fadb87f3f1efae236c12a8c9f1d0b772c42c55b7edbd6",
+      "words": 3257,
+      "sha256": "4fa2fd26eb34fda4446576066ddcb7f386fc1280042f3e248bc62cbfca84aca0",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
@@ -2191,7 +2191,7 @@
         "STENGERS-2004",
         "REJEWSKI-1980"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 25 Nov 2026: Attributed the January 1938 two-week result to Mayer and dated the procedure change that prompted the later Polish tools.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 25 Nov 2026: Attributed the January 1938 two-week result to Mayer and dated the procedure change that prompted the later Polish tools.\n28 November 2026: Clarified Enigma I stepping and the browser rotor search. Added the use of G 292’s crank and a reconstruction using four dated Uhr intercepts. Sources: Kenyon and Weierud, pp. 391–392, 408 (CL22206); Heath, pp. 63–64, 68–79 (CL21914); Wilcox, pp. 27–28 (CM387).",
       "wording_updates_2026_11_23": {
         "scope": "Distinguished the 1918 patent application, 1923 commercial description and 1926 German naval introduction; late-July 1939 disclosure at Pyry is separate from later British replica delivery.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -3849,14 +3849,14 @@
     {
       "path": "ciphers/nomenclator.html",
       "title": "Nomenclator — The Cipher Museum",
-      "words": 1322,
-      "sha256": "00ee942a69161810991188e6cbbb537613c9f635da642c08c0e307fafc6c3902",
+      "words": 1417,
+      "sha256": "0d1ee33f350cef37b60fc2aa2bf06d5dadd901d59c16ed51f8569501ebbd237f",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996",
         "LEIGHTON-1977"
       ],
-      "notes": "1379Lavinde versus1401Mantua distinction; invented entries labelled; no automatic complete-codebook recovery or direct compression-security equivalence. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. 25 Nov 2026: Added a schematic of letter and word positions in the 1583 Bavarian dot cipher, with the word Kayser as Leighton’s example.\n28 November 2026: Added an invented group-spacing exercise for Medici’s 1624 cipher and distinguished the French and Madrid dispatches. Source: Bonavoglia, pp. 340–341, figs. 8–9 (10.1080/01611194.2021.1901797), and the Madrid facsimile.",
+      "notes": "1379Lavinde versus1401Mantua distinction; invented entries labelled; no automatic complete-codebook recovery or direct compression-security equivalence. Final public-prose consistency reread completed by research_cases; source and runtime limits remain separate. 25 Nov 2026: Added a schematic of letter and word positions in the 1583 Bavarian dot cipher, with the word Kayser as Leighton’s example.\n28 November 2026: Added an invented group-spacing exercise for Medici’s 1624 cipher and distinguished the French and Madrid dispatches. Source: Bonavoglia, pp. 340–341, figs. 8–9 (10.1080/01611194.2021.1901797), and the Madrid facsimile.\n28 November 2026: Added the Prague dispatch of 5 December 1580 and distinguished its surviving deciphering grid from Bonavoglia’s reconstructed reading. Source: Bonavoglia, pp. 41–46, figs. 1–4 (CL22204).",
       "wording_updates_2026_11_23": {
         "scope": "Recorded the already-merged Jacobite key-sharing callout and source availability note from PR #60. Rocher §4.3 documents reuse and distribution, not demonstrated compromise; no new exhibit changes here.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -4153,14 +4153,14 @@
     {
       "path": "ciphers/porta.html",
       "title": "Porta Cipher — The Cipher Museum",
-      "words": 483,
-      "sha256": "3070cec572b055942147968de3f8dd6fb7fed1737aa9cf321d9f789826fb8b02",
+      "words": 550,
+      "sha256": "3c8200024d0e2976144d55293075bab8c09d87a3bf757c65a787c4c96564e433",
       "status": "bounded review and local release validation complete",
       "sources": [
         "HAC-1997",
         "KAHN-1996"
       ],
-      "notes": "Final n–r reread reconciled historical attribution and metadata with Kahn’s1563context and page-defined reciprocal mapping. A↔N applies to the AB row, not all rows; involution and general symmetric encryption are distinguished.",
+      "notes": "Final n–r reread reconciled historical attribution and metadata with Kahn’s1563context and page-defined reciprocal mapping. A↔N applies to the AB row, not all rows; involution and general symmetric encryption are distinguished.\n28 November 2026: Distinguished Bellaso’s 1552 leaflet and his 1553 instructions from della Porta’s 1563 table and the 13-row modern adaptation. Corrected both fact tables. Sources: Buonafalce, pp. 39–42 (CL22170), and Bonavoglia, pp. 459–463 (CL22205).",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "research_cases",
@@ -6914,11 +6914,11 @@
     {
       "path": "halls/polyalphabetic.html",
       "title": "Hall III: The Polyalphabetic Revolution — The Cipher Museum",
-      "words": 663,
-      "sha256": "ff017309a28766db3496dc3cfc9772dddd683a72f8388919394b66bb0b80de84",
+      "words": 697,
+      "sha256": "41bc82f91d586de06379a5842d1060cc7824506887625e80d947209fe7922238",
       "status": "bounded review and local release validation complete",
       "sources": [],
-      "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.",
+      "notes": "Navigation/tour final reread reconciled dates, card summaries, count categories, teaching-model limits and mathematical assumptions with corrected exhibits. Five tours/51stops,12flow routes, quizzes and normal/blocked/malformed storage checked in targeted tests.\n28 November 2026: Aligned the Porta card with the dated tables in Buonafalce, pp. 39–42 (CL22170), and Bonavoglia, pp. 459–463 (CL22205).",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "navigation_tours",

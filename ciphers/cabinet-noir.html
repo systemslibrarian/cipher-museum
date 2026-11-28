@@ -39,7 +39,7 @@
   }
   .track-b-output {
     font-family:var(--fm);font-size:1rem;color:var(--gold-lt);
-    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;
+    letter-spacing:.05em;min-height:2rem;margin-top:.75rem;white-space:pre-wrap;overflow-wrap:anywhere;
   }
 </style>
 </head>
@@ -90,32 +90,30 @@
   </div>
 </div>
 <div class="track-b-widget">
-  <h2>&#128275; Interactive Explorer</h2>
-  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Try encoding a message as this cipher does.</p>
-  <label for="input">Simulate a Cabinet Noir intercept</label>
+  <h2>Copy an intercepted dispatch</h2>
+  <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem;">Act as a clerk in a postal interception office. Make a copy of the dispatch before the original goes back into the mail.</p>
+  <label for="input">Dispatch to copy</label>
   <input id="input" type="text" value="THE AMBASSADOR REQUESTS SAFE PASSAGE" placeholder="Diplomatic message…">
-  <button data-fn="encode">Encode</button>
-  <div id="output" class="track-b-output"></div>
+  <button type="button" data-fn="encode">Copy dispatch</button>
+  <div id="output" class="track-b-output" role="status"></div>
   <script>
     function encode() {
-      const t = document.getElementById('input').value;
-      const o = cnEncode(t);
-      document.getElementById('output').textContent = o;
+      const dispatch = document.getElementById('input').value;
+      document.getElementById('output').textContent = dispatch
+        ? 'Intercept copy: ' + dispatch
+        : 'Enter a dispatch to copy.';
     }
   </script>
 </div>
-  <script>
-    // Simulate wax-seal removal and resealing (humorous demo — just shows the "intercepted" message)
-    function cnEncode(t) {
-      const ts = new Date().toISOString().replace('T',' ').slice(0,16);
-      return '[INTERCEPTED ' + ts + ' | Cabinet Noir Vienna] ' +
-             t.toUpperCase().replace(/[^A-Z ]/g,'') +
-             ' | [RESEALED — ORIGINAL WAX IMPRESSION PRESERVED]';
-    }
-  </script>
 <div class="exhibit-layout">
   <div class="exhibit-main">
     <div class="cipher-significance"><h3>Why This Matters</h3><p>European governments developed postal interception and cryptanalytic offices whose practices offer comparisons with later communications intelligence. Staff could open, copy, analyse and reseal selected letters. Practices and institutions differed by country and period; this was not one continuous organisation ancestral to every modern agency.</p></div>
+    <section class="panel" aria-labelledby="detecting-an-opening">
+      <div class="panel-body">
+        <h2 id="detecting-an-opening">Could the recipient tell?</h2>
+        <p>In 1579 Samuel Zimmermann described piercing several layers of a folded letter with a pin. If someone opened and refolded the sheet differently, the holes could fall out of alignment. The recipient could check the paper itself. Zimmermann discussed how to examine a wax seal separately. <a href="https://doi.org/10.1080/01611194.2015.1093898">Gerhard Strasser, p. 254, discussing Zimmermann, pp. 144–145</a>.</p>
+      </div>
+    </section>
     <div class="panel"><div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-columns"/></svg></span><span class="panel-title">The French Cabinet Noir</span></div><div class="panel-body"><p>Antoine Rossignol and his son Bonaventure served the French monarchy in cryptographic and cryptanalytic roles. Kahn dates Antoine’s celebrated Réalmont decipherment to 1628. Earlier European state cryptologists already existed, so the Rossignols should not be called the first professional cryptanalysts in Europe. Royal nomenclators also changed over time.</p></div></div>
     <div class="panel"><div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-columns"/></svg></span><span class="panel-title">The Austrian Geheime Kabinettskanzlei</span></div><div class="panel-body"><p>Vienna’s Geheime Kabinettskanzlei exploited access to postal routes and diplomatic correspondence. Its work combined physical interception, copying and decipherment. Reading selected dispatches could reveal negotiating positions, but does not establish access to every communication of every other power. Kahn describes the office’s closure in 1848.</p></div></div>
     <div class="panel"><div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-columns"/></svg></span><span class="panel-title">Britain's Secret Office</span></div><div class="panel-body"><p>British postal interception and the Decyphering Branch became subjects of controversy in 1844, notably after the opening of Giuseppe Mazzini’s letters. Kahn distinguishes the end of diplomatic interception in June from dissolution of the Decyphering Branch in October. That episode should not be described as the permanent end of all British state mail interception.</p></div></div>
