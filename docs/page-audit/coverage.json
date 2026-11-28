@@ -2899,13 +2899,14 @@
     {
       "path": "ciphers/jn-25.html",
       "title": "JN-25 (Japanese Naval Code) - The Cipher Museum",
-      "words": 700,
-      "sha256": "7aaefd9dd436ac6fd2c1a04d181cdddd73df1c8d0ea8484f9389aec73184949c",
+      "words": 784,
+      "sha256": "851ce9ff55a7657fc8c33c6c1902412c1857405707720255ddc97cc85472b980",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "ROCHEFORT-WATER-2021"
+        "ROCHEFORT-WATER-2021",
+        "ROBB-WEBB-PACIFIC-2007"
       ],
-      "notes": "Removed claim additives must be fully stripped before any usefulstatistics; AF report contributedtoassessment, notsoledeploymentcause; codebookeditionsvaried. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate. Developmental book revision, November 2026: added Driscoll and Rochefort context with bibliographic sources. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation.",
+      "notes": "Removed claim additives must be fully stripped before any usefulstatistics; AF report contributedtoassessment, notsoledeploymentcause; codebookeditionsvaried. Final public-prose consistency reread completed by teaching_pages; source and runtime limits remain separate. Developmental book revision, November 2026: added Driscoll and Rochefort context with bibliographic sources. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 28 November 2026: Added the December 1944 decision on sharing intelligence with the British Pacific Fleet, checked against Robb-Webb, pp. 776–777.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "teaching_pages",
