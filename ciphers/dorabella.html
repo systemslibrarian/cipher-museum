@@ -120,7 +120,7 @@
           '- Arc count: ' + arcs + '\n' +
           '- Orientation: ' + angle + '°\n\n' +
           'There are 3 arc classes × 8 orientations = 24 possible symbols.\n' +
-          'With only 87 characters of ciphertext, many substitution mappings can score as plausible language by chance.';
+          'Several handwritten marks have ambiguous orientations. A different reading of one mark can change the transcription.';
       }
       document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('dora-render').addEventListener('click', draw);
@@ -136,7 +136,7 @@
 
     <div class="cipher-significance">
       <h3>Why This Matters</h3>
-      <p>Elgar sent the cryptogram to Dora Penny on 14 July 1897. Its three lines are commonly transcribed as 87 symbols. The arc counts and orientations permit 24 symbol classes, but handwritten marks can be ambiguous. A proposed reading must explain the transcription and the decoding rules, not merely produce a plausible sentence.</p>
+      <p>Elgar sent the cryptogram to Dora Penny on 14 July 1897. Its three lines are commonly transcribed as 87 symbols. Arc count and orientation allow 24 possible shapes. Hauer and colleagues distinguished 20 of them in their transcription. Several handwritten marks could be read at more than one angle. <a href="https://ecp.ep.liu.se/index.php/histocrypt/article/download/159/115/58#page=2">Hauer and colleagues, §2</a>. A proposed reading must explain the transcription and the decoding rules, not merely produce a plausible sentence.</p>
     </div>
 
     <div class="panel">
@@ -153,9 +153,9 @@
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">Why It Has Resisted</span></div>
       <div class="panel-body">
         <div class="attack-panel">
-          <div class="attack-name">Why It Resists</div>
-          <div class="attack-diff">Evidence: 87 commonly transcribed symbols</div>
-          <p class="attack-desc">Frequency statistics depend on how the handwritten symbols are transcribed. An 87-symbol sample gives limited evidence, but its length alone neither rules out monoalphabetic substitution nor proves that a unique reading is impossible. A language-model score ranks candidates under a chosen model; it does not authenticate Elgar’s intended message.</p>
+          <h3 class="attack-name" id="substitution-test">Could a simple substitution explain the note?</h3>
+          <p class="attack-desc">Viktor Wase tested a program on 87-letter passages enciphered by replacing each letter consistently with one symbol. On the easier test passages it recovered, on average, 98.7% of the English letters and 98.6% of the Latin letters.</p>
+          <p class="attack-desc">With Elgar’s note, eight plausible transcriptions and 240 ways of reordering the symbols yielded no convincing English or Latin reading. That weighs against a simple substitution in either language. Other explanations, including unconventional spelling, remain open. <a href="https://doi.org/10.1080/01611194.2023.2271466">Wase, pp. 20–23</a>.</p>
         </div>
       </div>
     </div>

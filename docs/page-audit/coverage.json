@@ -1099,13 +1099,15 @@
     {
       "path": "ciphers/bombe.html",
       "title": "Turing–Welchman Bombe — The Cipher Museum",
-      "words": 413,
-      "sha256": "e633c6400e0fe73247e6972d90050756c10010b00f3f09d2914a44fd447bb6ef",
+      "words": 502,
+      "sha256": "0e66ef8b94970edd843daaf00a178d3168bb3db626e88135f61e1b1ad3367797",
       "status": "bounded content and interaction review; current deployment tracked by the implementation pull request",
       "sources": [
-        "TNMOC-BOMBE"
+        "TNMOC-BOMBE",
+        "WRIGHT-VICTORY-2017",
+        "ERSKINE-NAVAL-2008"
       ],
-      "notes": "TNMOC confirms March 1940 Victory and August 1940 Agnes. Existing distinction retained; machine is candidate filter, not an automatic complete decipherment. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.\n3 November 2026: Added the link to the explicitly fictional intercept-to-intelligence exercise. Existing machine constraints and historical wording retained.\n28 November 2026: Added Murray’s firsthand description of reading a possible plugboard connection by touch, with the uncertainty about Ming’s identification. Sources: Murray, p. 45, and Marks, note 39 (10.1080/01611194.2016.1257525).",
+      "notes": "TNMOC confirms March 1940 Victory and August 1940 Agnes. Existing distinction retained; machine is candidate filter, not an automatic complete decipherment. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.\n3 November 2026: Added the link to the explicitly fictional intercept-to-intelligence exercise. Existing machine constraints and historical wording retained.\n28 November 2026: Added Murray’s firsthand description of reading a possible plugboard connection by touch, with the uncertainty about Ming’s identification. Sources: Murray, p. 45, and Marks, note 39 (10.1080/01611194.2016.1257525). 28 November 2026: Separated installation from operational availability and identified the capture, initial release and time to complete six days of decrypts.",
       "browser_smoke": "Local Chromium loaded without script errors or horizontal overflow; external resources blocked. Not a historical verification.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1297,13 +1299,15 @@
     {
       "path": "ciphers/chaocipher.html",
       "title": "Chaocipher — The Cipher Museum",
-      "words": 675,
-      "sha256": "a3ed56336270027b4e7933ed7a2adaf2ba06d483e6d95199b650c5cab3d5a875",
+      "words": 756,
+      "sha256": "95cd63e6f277f99afa4de6e71b64f20e54d395e72297438be4f085af27d7641e",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "RUBIN-CHAOCIPHER-2010"
+        "RUBIN-CHAOCIPHER-2010",
+        "CALOF-CHAOCIPHER-2014",
+        "LASRY-CHAOCIPHER-2016"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. 28 November 2026: Distinguished the archived Exhibit 5 solution from the discovery of a poem and recovery of the settings in Exhibit 6.",
       "browser_smoke": "Seventh batch:1280/390page loads without script errors or document overflow; four classical vectors and puzzle controls exercised. See browser-puzzles-seventh.json.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -1950,14 +1954,16 @@
     {
       "path": "ciphers/dorabella.html",
       "title": "Dorabella Cipher — The Cipher Museum",
-      "words": 689,
-      "sha256": "3b9998cdea2c89bb3dfe86ebfacd13498d82d2325363b1bd9259fafd8bfd5013",
+      "words": 575,
+      "sha256": "14e9744c26557e2174867df420636854248d43acb178062b0dd98194697b137b",
       "status": "bounded review and local release validation complete",
       "sources": [
         "KAHN-1996",
-        "DORABELLA-MUSIC-2025"
+        "DORABELLA-MUSIC-2025",
+        "HAUER-HISTOCRYPT-2021",
+        "WASE-DORABELLA-2025"
       ],
-      "notes": "Qualified short-sample inference, possible versus observed symbol inventory and creative musical research. Changed complexity claim to evidence length. Browser screenshot exposed cramped 390px inspector; corrected with wrapping layout; 390px screenshot rechecked: readable stacked inspector. Paper publication 2021 distinguished from arXiv deposit 2025. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate.",
+      "notes": "Qualified short-sample inference, possible versus observed symbol inventory and creative musical research. Changed complexity claim to evidence length. Browser screenshot exposed cramped 390px inspector; corrected with wrapping layout; 390px screenshot rechecked: readable stacked inspector. Paper publication 2021 distinguished from arXiv deposit 2025. Final public-prose consistency reread completed by exhibit_final_read; source and runtime limits remain separate. 28 November 2026: Identified the 20 observed symbol types and explained the unit of measurement and limits of Wase’s short-text tests.",
       "browser_smoke": "Fourth-checkpoint local Chromium follow-up passed; external resources blocked. This does not certify historical claims.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2154,13 +2160,15 @@
     {
       "path": "ciphers/elizebeth-friedman.html",
       "title": "Elizebeth Smith Friedman — The Cipher Museum",
-      "words": 803,
-      "sha256": "9c86faad05906076ce240ba41e378a961172fe20c6133f8c76fa9afe55a9240e",
+      "words": 1013,
+      "sha256": "347703d90d11ce1603dca3c4b948a31dd0f19364c4845ed8540ec12a098c8144",
       "status": "bounded review and local release validation complete",
       "sources": [
-        "ELIZEBETH-NSA-2020"
+        "ELIZEBETH-NSA-2020",
+        "BOERSMA-SMUGGLING-2023",
+        "BOERSMA-ENIGMA-D-2024"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Citation-label follow-up (2026-11-02): corrected the title and page locator for Weadon’s linked NSA PDF against the document; no historical claim or interaction changed. No new browser review for this text-only correction.",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. Citation-label follow-up (2026-11-02): corrected the title and page locator for Weadon’s linked NSA PDF against the document; no historical claim or interaction changed. No new browser review for this text-only correction. 28 November 2026: Documented the codebook check on the rumrunners’ fuel request and the commercial Enigma D rotor recovery from Swiss Army traffic.",
       "browser_smoke": "Sixth batch: desktop1280/mobile390 loaded without script errors or overflow. Colossus and three manual-cipher controls exercised; source vectors checked independently in Node. External resources blocked.",
       "final_prose_review": {
         "reader": "exhibit_final_read",
@@ -2182,16 +2190,19 @@
     {
       "path": "ciphers/enigma.html",
       "title": "Enigma Machine — The Cipher Museum",
-      "words": 3257,
-      "sha256": "4fa2fd26eb34fda4446576066ddcb7f386fc1280042f3e248bc62cbfca84aca0",
+      "words": 3300,
+      "sha256": "b19e6a7f55d62ef07b2b2160943388d0a77631741da9de94d68f8e40eef0e1f3",
       "status": "bounded review and local release validation complete",
       "sources": [
         "PYRY-GCHQ",
         "TNMOC-BOMBE",
         "STENGERS-2004",
-        "REJEWSKI-1980"
+        "REJEWSKI-1980",
+        "WRIGHT-VICTORY-2017",
+        "ERSKINE-NAVAL-2008",
+        "BOERSMA-ENIGMA-D-2024"
       ],
-      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 25 Nov 2026: Attributed the January 1938 two-week result to Mayer and dated the procedure change that prompted the later Polish tools.\n28 November 2026: Clarified Enigma I stepping and the browser rotor search. Added the use of G 292’s crank and a reconstruction using four dated Uhr intercepts. Sources: Kenyon and Weierud, pp. 391–392, 408 (CL22206); Heath, pp. 63–64, 68–79 (CL21914); Wilcox, pp. 27–28 (CM387).",
+      "notes": "Final exhibit_final_read consistency reread covered the complete public prose, metadata, displayed examples, sidebars and related cards. Corrections and exact review limits are recorded in tmp/exhibit-final-handoff.md. Existing source checks apply only to their recorded passages; no every-fact certification. Developmental book revision, November 2026: corrected the photograph caption and alt text: the shipped asset is a teaching diagram. Book invitation follow-up (2026-11-02): sourced routes/context and working reader exercises; see docs/book-companion-invitations.md for scope and validation. 25 Nov 2026: Attributed the January 1938 two-week result to Mayer and dated the procedure change that prompted the later Polish tools.\n28 November 2026: Clarified Enigma I stepping and the browser rotor search. Added the use of G 292’s crank and a reconstruction using four dated Uhr intercepts. Sources: Kenyon and Weierud, pp. 391–392, 408 (CL22206); Heath, pp. 63–64, 68–79 (CL21914); Wilcox, pp. 27–28 (CM387). 28 November 2026: Linked the naval decrypt and Swiss Army examples to their separate sources, machines and teams.",
       "wording_updates_2026_11_23": {
         "scope": "Distinguished the 1918 patent application, 1923 commercial description and 1926 German naval introduction; late-July 1939 disclosure at Pyry is separate from later British replica delivery.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."
@@ -5249,14 +5260,15 @@
     {
       "path": "ciphers/typex.html",
       "title": "Typex — The Cipher Museum",
-      "words": 931,
-      "sha256": "4e7e5f7ef025d36b876e87cbe2707ad8a2aa946d91b170259285573028363d93",
+      "words": 798,
+      "sha256": "29c59dbac51b4994f51f6cc91922318ce7114c48fe21a675d007873cc1b7b56a",
       "status": "bounded review and local release validation complete",
       "sources": [
         "TYPEX-ARTIFACT",
-        "TYPEX-TURING-2019"
+        "TYPEX-TURING-2019",
+        "CHANG-TYPEX-2012"
       ],
-      "notes": "Corrected commercial-machine origin and country-specific service dates. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate.",
+      "notes": "Corrected commercial-machine origin and country-specific service dates. Final public-prose consistency reread completed by corpus_utilities; source and runtime limits remain separate. 28 November 2026: Identified the simulator settings, denominator and partial-recovery criterion in Chang’s one-rotor experiment.",
       "wording_updates_2026_11_23": {
         "scope": "Dated first working Mark II delivery to 28 May 1938 (Erskine, p. 72), not broad rollout.",
         "limits": "Bounded wording and source update only; prior audit records describe earlier snapshots."

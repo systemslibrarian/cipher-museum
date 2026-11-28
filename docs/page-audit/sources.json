@@ -2386,5 +2386,106 @@
       "Printed p. 328 and fig. 10 on p. 329"
     ],
     "scope": "In the 1583 dispatch, a half-column displacement selected a German word from the list. Leighton gives Kayser as an example."
+  },
+  "CALOF-CHAOCIPHER-2014": {
+    "title": "Chaocipher Exhibit 5: History, Analysis, and Solution of Cryptologia’s 1990 Challenge",
+    "authors": [
+      "Jeff Calof",
+      "Jeff Hill",
+      "Moshe Rubin"
+    ],
+    "year": 2014,
+    "url": "https://doi.org/10.1080/01611194.2014.856653",
+    "passages_read": [
+      "Printed p. 1"
+    ],
+    "scope": "Calof found both the solution to the published challenge and an earlier draft with different ciphertexts."
+  },
+  "LASRY-CHAOCIPHER-2016": {
+    "title": "Cryptanalysis of Chaocipher and solution of Exhibit 6",
+    "authors": [
+      "George Lasry",
+      "Moshe Rubin",
+      "Nils Kopal",
+      "Arno Wacker"
+    ],
+    "year": 2016,
+    "url": "https://doi.org/10.1080/01611194.2015.1091797",
+    "passages_read": [
+      "§§3, 4.2 and 5, especially printed pp. 505–506"
+    ],
+    "scope": "Classic shared-setting tests and the extended Exhibit 6 challenge. The authors identified Marvell’s poem and used 34 lines to recover the settings."
+  },
+  "WASE-DORABELLA-2025": {
+    "title": "Dorabella unMASCed – the Dorabella Cipher is not an English or Latin Mono-Alphabetical Substitution Cipher",
+    "authors": [
+      "Viktor Wase"
+    ],
+    "year": 2025,
+    "url": "https://doi.org/10.1080/01611194.2023.2271466",
+    "passages_read": [
+      "Printed pp. 20–23"
+    ],
+    "scope": "Average letter recovery in 87-letter controls, negative results for the tested transcriptions and permutations, and the limitations of the spelling assumptions."
+  },
+  "BOERSMA-SMUGGLING-2023": {
+    "title": "Elizebeth Smith Friedman and one example of a prohibition era encryption system",
+    "authors": [
+      "Stuart Boersma"
+    ],
+    "year": 2023,
+    "url": "https://doi.org/10.1080/01611194.2021.2003913",
+    "passages_read": [
+      "Printed pp. 230–233, figs. 1–2"
+    ],
+    "scope": "Friedman reports compared with the ABC and ACME codebooks for the fuel request. The codebook correction is distinguishable from other conjectural corrections."
+  },
+  "BOERSMA-ENIGMA-D-2024": {
+    "title": "Elizebeth Smith Friedman’s recovery of the wiring of two rotors from an enigma D machine",
+    "authors": [
+      "Stuart Boersma"
+    ],
+    "year": 2024,
+    "url": "https://doi.org/10.1080/01611194.2022.2109944",
+    "passages_read": [
+      "Printed pp. 1–2, 20–21"
+    ],
+    "scope": "January 1940 Swiss Army traffic, reused starting settings and the Coast Guard unit’s independent recovery of two commercial rotor wirings."
+  },
+  "CHANG-TYPEX-2012": {
+    "title": "Cryptanalysis of Typex",
+    "authors": [
+      "Kelly Chang"
+    ],
+    "year": 2012,
+    "url": "https://scholarworks.sjsu.edu/etd_projects/235/",
+    "passages_read": [
+      "Printed pp. 29, 39–41"
+    ],
+    "scope": "Master’s project. Known rotor configuration, right-rotor recovery criterion and untested three-unknown-rotor case."
+  },
+  "WRIGHT-VICTORY-2017": {
+    "title": "The Turing Bombe Victory and the first naval Enigma decrypts",
+    "authors": [
+      "John Wright"
+    ],
+    "year": 2017,
+    "url": "https://doi.org/10.1080/01611194.2016.1219786",
+    "passages_read": [
+      "Printed pp. 295–301, 319 and table A1"
+    ],
+    "scope": "Installation and probable availability of Victory, the Polares capture, and dated decrypts sent to the Admiralty."
+  },
+  "ERSKINE-NAVAL-2008": {
+    "title": "Captured Kriegsmarine Enigma Documents at Bletchley Park",
+    "authors": [
+      "Ralph Erskine"
+    ],
+    "year": 2008,
+    "url": "https://doi.org/10.1080/01611190802088318",
+    "passages_read": [
+      "Printed pp. 201, 211"
+    ],
+    "scope": "Captured documents from Schiff 26, plaintext and daily settings. Wright revisited which dates belonged to each document."
   }
 }

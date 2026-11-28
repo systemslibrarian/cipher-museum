@@ -79,12 +79,12 @@
 
     <div class="cipher-significance">
       <h2>Why This Matters</h2>
-      <p>John Byrne — Irish-American writer and friend of James Joyce — invented the Chaocipher in 1918 and spent four decades trying to convince the US government and AT&T to adopt it. Its design was not publicly available during those proposals. His 1953 autobiography <em>Silent Years</em> included challenge ciphertexts; the algorithm became public 57 years later. In 2010, his family donated his papers to the National Cryptologic Museum and the algorithm was finally published. It turned out to be elegantly simple: two rotating disks that permute themselves after each letter.</p>
+      <p>John Byrne — Irish-American writer and friend of James Joyce — invented the Chaocipher in 1918 and spent four decades trying to convince the US government and AT&T to adopt it. Its design was not publicly available during those proposals. His 1953 autobiography <em>Silent Years</em> included challenge ciphertexts; in 2010, his family donated his papers to the National Cryptologic Museum. Readers could finally see how the two disks rearranged their alphabets after each letter.</p>
     </div>
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-scroll"/></svg></span><span class="panel-title">Historical Context</span></div>
-      <div class="panel-body"><p>Byrne promoted Chaocipher for decades after devising it in 1918. His death in 1960 preceded the family’s 2010 donation of the papers to the National Cryptologic Museum. Public disclosure enabled researchers to distinguish the algorithm from its secret initial alphabets and to study specific key-recovery attacks. Earlier secrecy and unaccepted proposals are not evidence of a general security proof.</p></div>
+      <div class="panel-body"><p>Byrne promoted Chaocipher for decades after devising it in 1918. His death in 1960 preceded the family’s 2010 donation of the papers to the National Cryptologic Museum. Later in 2010, researchers showed how to recover the two secret starting alphabets when enough plaintext and its matching ciphertext were known. That raised a different question for challenges whose plaintext was missing.</p></div>
     </div>
 
     <div class="panel">
@@ -104,7 +104,17 @@ Ciphertext: DSZYOZXXGRZVVUSRQUBYXYJBMZIE</pre><p>The wheel operations follow Mos
 
     <div class="panel">
       <div class="panel-head"><span class="panel-icon" aria-hidden="true"><svg class="icon" width="17" height="17"><use href="../images/icons.svg#i-skull"/></svg></span><span class="panel-title">How It Was Broken</span></div>
-      <div class="panel-body"><div class="attack-panel"><div class="attack-name">Disclosure (2010)</div><div class="attack-diff">Algorithm disclosure enabled public analysis</div><p class="attack-desc">The Byrne family donated the Chaocipher papers to the National Cryptologic Museum in 2010, making the algorithm public after 92 years. Disclosure itself was not a cryptanalytic break; it allowed researchers to study the keyed construction.</p></div><div class="attack-panel"><div class="attack-name">Known-Plaintext and In-Depth Attacks</div><div class="attack-diff">Published key-recovery attacks</div><p class="attack-desc">A known-plaintext key-recovery method was published in 2010. In 2016, George Lasry, Moshe Rubin, Nils Kopal, and Arno Wacker published a hill-climbing attack against multiple messages encrypted with the same initial settings, plus a known-plaintext attack on short in-depth messages. Their <a href="https://doi.org/10.1080/01611194.2015.1091797" target="_blank" rel="noopener">Cryptologia paper</a> establishes weaknesses in the classic cipher; it does not claim a general ciphertext-only break of every isolated message.</p></div></div>
+      <div class="panel-body">
+        <div class="attack-panel">
+          <h3 class="attack-name" id="exhibit-5">Exhibit 5 and the answer in the archive</h3>
+          <p class="attack-desc">Louis Kruh and Cipher Deavours published Exhibit 5 in 1990. In 2013, Jeff Calof found their enciphering instructions and solution among the Byrne family papers at the National Cryptologic Museum. He also found an earlier draft with different ciphertexts. <a href="https://doi.org/10.1080/01611194.2014.856653">Calof, Hill and Rubin, p. 1</a>. Calof and Rubin published the draft as <a href="https://chaocipher.com/chaocipher-024.htm">Exhibit 6</a>.</p>
+        </div>
+        <div class="attack-panel">
+          <h3 class="attack-name" id="exhibit-6">Exhibit 6 and the poem behind it</h3>
+          <p class="attack-desc">The draft contained 50 short messages made with an extended version of Chaocipher, all starting from the same settings. Their lengths suggested lines of verse. Repeated opening letters helped George Lasry and colleagues identify Andrew Marvell’s “To His Coy Mistress” in Project Gutenberg. Using 34 lines whose lengths matched exactly, they recovered the two starting alphabets and the pattern that chose the plaintext disk for each letter.</p>
+          <p class="attack-desc">The same study demonstrated a ciphertext-only attack on the classic cipher when several messages shared starting settings. For Exhibit 6, finding the poem supplied the known plaintext the team needed. <a href="https://doi.org/10.1080/01611194.2015.1091797">Lasry and colleagues, §§4.2 and 5, especially pp. 505–506</a>.</p>
+        </div>
+      </div>
     </div>
 
     <div class="panel">
